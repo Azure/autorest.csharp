@@ -29,7 +29,14 @@ namespace OpenAI.Models
             writer.WriteStartArray();
             foreach (var item in Data)
             {
-                ((IJsonModel<Image>)item).Write(writer, options);
+                if (item != null)
+                {
+                    ((IJsonModel<Image>)item).Write(writer, options);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             writer.WriteEndArray();
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -86,7 +93,14 @@ namespace OpenAI.Models
                     List<Image> array = new List<Image>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Image.DeserializeImage(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(Image.DeserializeImage(item));
+                        }
                     }
                     data = array;
                     continue;

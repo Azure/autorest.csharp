@@ -62,35 +62,39 @@ namespace CustomizationsInTsp.Models
             writer.WriteStartArray();
             foreach (var item in GoodListOfListName)
             {
-                if (item == null)
+                if (item != null)
+                {
+                    writer.WriteStartArray();
+                    foreach (var item0 in item)
+                    {
+                        writer.WriteStringValue(item0);
+                    }
+                    writer.WriteEndArray();
+                }
+                else
                 {
                     writer.WriteNullValue();
-                    continue;
                 }
-                writer.WriteStartArray();
-                foreach (var item0 in item)
-                {
-                    writer.WriteStringValue(item0);
-                }
-                writer.WriteEndArray();
             }
             writer.WriteEndArray();
             writer.WritePropertyName("badListOfDictionaryName"u8);
             writer.WriteStartArray();
             foreach (var item in GoodListOfDictionaryName)
             {
-                if (item == null)
+                if (item != null)
+                {
+                    writer.WriteStartObject();
+                    foreach (var item0 in item)
+                    {
+                        writer.WritePropertyName(item0.Key);
+                        writer.WriteStringValue(item0.Value);
+                    }
+                    writer.WriteEndObject();
+                }
+                else
                 {
                     writer.WriteNullValue();
-                    continue;
                 }
-                writer.WriteStartObject();
-                foreach (var item0 in item)
-                {
-                    writer.WritePropertyName(item0.Key);
-                    writer.WriteStringValue(item0.Value);
-                }
-                writer.WriteEndObject();
             }
             writer.WriteEndArray();
             writer.WritePropertyName("vector"u8);

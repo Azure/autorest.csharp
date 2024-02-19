@@ -51,14 +51,7 @@ namespace AnomalyDetector.Models
             if (Optional.IsDefined(AlignPolicy))
             {
                 writer.WritePropertyName("alignPolicy"u8);
-                if (AlignPolicy != null)
-                {
-                    ((IJsonModel<AlignPolicy>)AlignPolicy).Write(writer, options);
-                }
-                else
-                {
-                    writer.WriteNullValue();
-                }
+                ((IJsonModel<AlignPolicy>)AlignPolicy).Write(writer, options);
             }
             if (Optional.IsDefined(Status))
             {
@@ -85,14 +78,7 @@ namespace AnomalyDetector.Models
             if (Optional.IsDefined(DiagnosticsInfo))
             {
                 writer.WritePropertyName("diagnosticsInfo"u8);
-                if (DiagnosticsInfo != null)
-                {
-                    ((IJsonModel<DiagnosticsInfo>)DiagnosticsInfo).Write(writer, options);
-                }
-                else
-                {
-                    writer.WriteNullValue();
-                }
+                ((IJsonModel<DiagnosticsInfo>)DiagnosticsInfo).Write(writer, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -211,7 +197,14 @@ namespace AnomalyDetector.Models
                     List<ErrorResponse> array = new List<ErrorResponse>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ErrorResponse.DeserializeErrorResponse(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(ErrorResponse.DeserializeErrorResponse(item));
+                        }
                     }
                     errors = array;
                     continue;

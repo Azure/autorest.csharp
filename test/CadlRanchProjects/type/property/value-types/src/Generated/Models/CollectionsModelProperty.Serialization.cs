@@ -31,7 +31,14 @@ namespace _Type.Property.ValueTypes.Models
             writer.WriteStartArray();
             foreach (var item in Property)
             {
-                ((IJsonModel<InnerModel>)item).Write(writer, options);
+                if (item != null)
+                {
+                    ((IJsonModel<InnerModel>)item).Write(writer, options);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             writer.WriteEndArray();
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -82,7 +89,14 @@ namespace _Type.Property.ValueTypes.Models
                     List<InnerModel> array = new List<InnerModel>();
                     foreach (var item in property0.Value.EnumerateArray())
                     {
-                        array.Add(InnerModel.DeserializeInnerModel(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(InnerModel.DeserializeInnerModel(item));
+                        }
                     }
                     property = array;
                     continue;

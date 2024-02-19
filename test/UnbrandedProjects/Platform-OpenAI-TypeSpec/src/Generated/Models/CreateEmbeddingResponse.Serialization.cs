@@ -31,7 +31,14 @@ namespace OpenAI.Models
             writer.WriteStartArray();
             foreach (var item in Data)
             {
-                ((IJsonModel<Embedding>)item).Write(writer, options);
+                if (item != null)
+                {
+                    ((IJsonModel<Embedding>)item).Write(writer, options);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             writer.WriteEndArray();
             writer.WritePropertyName("usage"u8);
@@ -97,7 +104,14 @@ namespace OpenAI.Models
                     List<Embedding> array = new List<Embedding>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Embedding.DeserializeEmbedding(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(Embedding.DeserializeEmbedding(item));
+                        }
                     }
                     data = array;
                     continue;

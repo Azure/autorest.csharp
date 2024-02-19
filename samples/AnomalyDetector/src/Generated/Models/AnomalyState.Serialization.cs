@@ -32,14 +32,7 @@ namespace AnomalyDetector.Models
             if (Optional.IsDefined(Value))
             {
                 writer.WritePropertyName("value"u8);
-                if (Value != null)
-                {
-                    ((IJsonModel<AnomalyValue>)Value).Write(writer, options);
-                }
-                else
-                {
-                    writer.WriteNullValue();
-                }
+                ((IJsonModel<AnomalyValue>)Value).Write(writer, options);
             }
             if (Optional.IsCollectionDefined(Errors))
             {
@@ -126,7 +119,14 @@ namespace AnomalyDetector.Models
                     List<ErrorResponse> array = new List<ErrorResponse>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ErrorResponse.DeserializeErrorResponse(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(ErrorResponse.DeserializeErrorResponse(item));
+                        }
                     }
                     errors = array;
                     continue;

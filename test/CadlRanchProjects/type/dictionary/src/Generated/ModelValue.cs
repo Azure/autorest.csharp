@@ -57,7 +57,14 @@ namespace _Type._Dictionary
             Dictionary<string, InnerModel> dictionary = new Dictionary<string, InnerModel>();
             foreach (var property in document.RootElement.EnumerateObject())
             {
-                dictionary.Add(property.Name, InnerModel.DeserializeInnerModel(property.Value));
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    dictionary.Add(property.Name, null);
+                }
+                else
+                {
+                    dictionary.Add(property.Name, InnerModel.DeserializeInnerModel(property.Value));
+                }
             }
             value = dictionary;
             return Response.FromValue(value, response);
@@ -74,7 +81,14 @@ namespace _Type._Dictionary
             Dictionary<string, InnerModel> dictionary = new Dictionary<string, InnerModel>();
             foreach (var property in document.RootElement.EnumerateObject())
             {
-                dictionary.Add(property.Name, InnerModel.DeserializeInnerModel(property.Value));
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    dictionary.Add(property.Name, null);
+                }
+                else
+                {
+                    dictionary.Add(property.Name, InnerModel.DeserializeInnerModel(property.Value));
+                }
             }
             value = dictionary;
             return Response.FromValue(value, response);

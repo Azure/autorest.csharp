@@ -31,7 +31,14 @@ namespace OpenAI.Models
             writer.WriteStartArray();
             foreach (var item in Results)
             {
-                ((IJsonModel<CreateModerationResponseResult>)item).Write(writer, options);
+                if (item != null)
+                {
+                    ((IJsonModel<CreateModerationResponseResult>)item).Write(writer, options);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             writer.WriteEndArray();
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -94,7 +101,14 @@ namespace OpenAI.Models
                     List<CreateModerationResponseResult> array = new List<CreateModerationResponseResult>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CreateModerationResponseResult.DeserializeCreateModerationResponseResult(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(CreateModerationResponseResult.DeserializeCreateModerationResponseResult(item));
+                        }
                     }
                     results = array;
                     continue;

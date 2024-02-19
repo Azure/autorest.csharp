@@ -33,7 +33,14 @@ namespace _Type.Property.Optionality.Models
                 writer.WriteStartArray();
                 foreach (var item in Property)
                 {
-                    ((IJsonModel<StringProperty>)item).Write(writer, options);
+                    if (item != null)
+                    {
+                        ((IJsonModel<StringProperty>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -89,7 +96,14 @@ namespace _Type.Property.Optionality.Models
                     List<StringProperty> array = new List<StringProperty>();
                     foreach (var item in property0.Value.EnumerateArray())
                     {
-                        array.Add(StringProperty.DeserializeStringProperty(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(StringProperty.DeserializeStringProperty(item));
+                        }
                     }
                     property = array;
                     continue;

@@ -50,7 +50,14 @@ namespace AuthoringTypeSpec.Models
             writer.WriteStartArray();
             foreach (var item in Warnings)
             {
-                ((IJsonModel<JobWarning>)item).Write(writer, options);
+                if (item != null)
+                {
+                    ((IJsonModel<JobWarning>)item).Write(writer, options);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             writer.WriteEndArray();
             writer.WritePropertyName("errors"u8);
@@ -140,7 +147,14 @@ namespace AuthoringTypeSpec.Models
                     List<JobWarning> array = new List<JobWarning>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(JobWarning.DeserializeJobWarning(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(JobWarning.DeserializeJobWarning(item));
+                        }
                     }
                     warnings = array;
                     continue;

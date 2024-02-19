@@ -31,12 +31,14 @@ namespace Encode.Bytes.Models
             writer.WriteStartArray();
             foreach (var item in Value)
             {
-                if (item == null)
+                if (item != null)
+                {
+                    writer.WriteBase64StringValue(item.ToArray(), "U");
+                }
+                else
                 {
                     writer.WriteNullValue();
-                    continue;
                 }
-                writer.WriteBase64StringValue(item.ToArray(), "U");
             }
             writer.WriteEndArray();
             if (options.Format != "W" && _serializedAdditionalRawData != null)

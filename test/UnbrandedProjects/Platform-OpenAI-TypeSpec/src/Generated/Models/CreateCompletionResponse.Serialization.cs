@@ -35,7 +35,14 @@ namespace OpenAI.Models
             writer.WriteStartArray();
             foreach (var item in Choices)
             {
-                ((IJsonModel<CreateCompletionResponseChoice>)item).Write(writer, options);
+                if (item != null)
+                {
+                    ((IJsonModel<CreateCompletionResponseChoice>)item).Write(writer, options);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             writer.WriteEndArray();
             if (OptionalProperty.IsDefined(Usage))
@@ -116,7 +123,14 @@ namespace OpenAI.Models
                     List<CreateCompletionResponseChoice> array = new List<CreateCompletionResponseChoice>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CreateCompletionResponseChoice.DeserializeCreateCompletionResponseChoice(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(CreateCompletionResponseChoice.DeserializeCreateCompletionResponseChoice(item));
+                        }
                     }
                     choices = array;
                     continue;

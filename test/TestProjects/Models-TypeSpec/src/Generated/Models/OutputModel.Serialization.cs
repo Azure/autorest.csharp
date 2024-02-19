@@ -37,12 +37,14 @@ namespace ModelsTypeSpec.Models
             writer.WriteStartArray();
             foreach (var item in RequiredList)
             {
-                if (item == null)
+                if (item != null)
+                {
+                    ((IJsonModel<CollectionItem>)item).Write(writer, options);
+                }
+                else
                 {
                     writer.WriteNullValue();
-                    continue;
                 }
-            ((IJsonModel<CollectionItem>)item).Write(writer, options);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("requiredModelRecord"u8);
@@ -50,12 +52,14 @@ namespace ModelsTypeSpec.Models
             foreach (var item in RequiredModelRecord)
             {
                 writer.WritePropertyName(item.Key);
-                if (item.Value == null)
+                if (item.Value != null)
+                {
+                    ((IJsonModel<RecordItem>)item.Value).Write(writer, options);
+                }
+                else
                 {
                     writer.WriteNullValue();
-                    continue;
                 }
-            ((IJsonModel<RecordItem>)item.Value).Write(writer, options);
             }
             writer.WriteEndObject();
             if (Optional.IsCollectionDefined(OptionalList))
@@ -64,12 +68,14 @@ namespace ModelsTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in OptionalList)
                 {
-                    if (item == null)
+                    if (item != null)
+                    {
+                        ((IJsonModel<CollectionItem>)item).Write(writer, options);
+                    }
+                    else
                     {
                         writer.WriteNullValue();
-                        continue;
                     }
-                ((IJsonModel<CollectionItem>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -81,12 +87,14 @@ namespace ModelsTypeSpec.Models
                     writer.WriteStartArray();
                     foreach (var item in OptionalNullableList)
                     {
-                        if (item == null)
+                        if (item != null)
+                        {
+                            ((IJsonModel<CollectionItem>)item).Write(writer, options);
+                        }
+                        else
                         {
                             writer.WriteNullValue();
-                            continue;
                         }
-                    ((IJsonModel<CollectionItem>)item).Write(writer, options);
                     }
                     writer.WriteEndArray();
                 }
@@ -102,12 +110,14 @@ namespace ModelsTypeSpec.Models
                 foreach (var item in OptionalRecord)
                 {
                     writer.WritePropertyName(item.Key);
-                    if (item.Value == null)
+                    if (item.Value != null)
+                    {
+                        ((IJsonModel<RecordItem>)item.Value).Write(writer, options);
+                    }
+                    else
                     {
                         writer.WriteNullValue();
-                        continue;
                     }
-                ((IJsonModel<RecordItem>)item.Value).Write(writer, options);
                 }
                 writer.WriteEndObject();
             }
@@ -120,12 +130,14 @@ namespace ModelsTypeSpec.Models
                     foreach (var item in OptionalNullableRecord)
                     {
                         writer.WritePropertyName(item.Key);
-                        if (item.Value == null)
+                        if (item.Value != null)
+                        {
+                            ((IJsonModel<RecordItem>)item.Value).Write(writer, options);
+                        }
+                        else
                         {
                             writer.WriteNullValue();
-                            continue;
                         }
-                    ((IJsonModel<RecordItem>)item.Value).Write(writer, options);
                     }
                     writer.WriteEndObject();
                 }

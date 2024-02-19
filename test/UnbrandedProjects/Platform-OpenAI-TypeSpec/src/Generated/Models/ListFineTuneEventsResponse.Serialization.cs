@@ -29,7 +29,14 @@ namespace OpenAI.Models
             writer.WriteStartArray();
             foreach (var item in Data)
             {
-                ((IJsonModel<FineTuneEvent>)item).Write(writer, options);
+                if (item != null)
+                {
+                    ((IJsonModel<FineTuneEvent>)item).Write(writer, options);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             writer.WriteEndArray();
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -86,7 +93,14 @@ namespace OpenAI.Models
                     List<FineTuneEvent> array = new List<FineTuneEvent>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(FineTuneEvent.DeserializeFineTuneEvent(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(FineTuneEvent.DeserializeFineTuneEvent(item));
+                        }
                     }
                     data = array;
                     continue;

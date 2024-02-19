@@ -38,7 +38,14 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in Paths)
                 {
-                    ((IJsonModel<ResourceTypeAliasPath>)item).Write(writer, options);
+                    if (item != null)
+                    {
+                        ((IJsonModel<ResourceTypeAliasPath>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -124,7 +131,14 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                     List<ResourceTypeAliasPath> array = new List<ResourceTypeAliasPath>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ResourceTypeAliasPath.DeserializeResourceTypeAliasPath(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(ResourceTypeAliasPath.DeserializeResourceTypeAliasPath(item));
+                        }
                     }
                     paths = array;
                     continue;

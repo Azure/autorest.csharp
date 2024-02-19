@@ -444,11 +444,26 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 utf8JsonWriter.WriteStartArray(),
                 new ForeachStatement("item", array, out var item)
                 {
-                    CheckCollectionItemForNull(utf8JsonWriter, arraySerialization.ValueSerialization, item),
-                    SerializeExpression(utf8JsonWriter, arraySerialization.ValueSerialization, item, options)
+                    SerializeArrayItem(utf8JsonWriter, arraySerialization.ValueSerialization, item, options)
                 },
                 utf8JsonWriter.WriteEndArray()
             };
+        }
+
+        private static MethodBodyStatement SerializeArrayItem(Utf8JsonWriterExpression utf8JsonWriter, JsonSerialization valueSerialization, ValueExpression item, ModelReaderWriterOptionsExpression? options)
+        {
+            var serializeStatement = SerializeExpression(utf8JsonWriter, valueSerialization, item, options);
+
+            if (CollectionItemRequiresNullCheckInSerialization(valueSerialization))
+            {
+                return new IfElseStatement(NotEqual(item, Null),
+                    serializeStatement,
+                    utf8JsonWriter.WriteNullValue());
+            }
+            else
+            {
+                return serializeStatement;
+            }
         }
 
         private static MethodBodyStatement SerializeDictionary(Utf8JsonWriterExpression utf8JsonWriter, JsonDictionarySerialization dictionarySerialization, DictionaryExpression dictionary, ModelReaderWriterOptionsExpression? options)
@@ -459,11 +474,26 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 new ForeachStatement("item", dictionary, out KeyValuePairExpression keyValuePair)
                 {
                     utf8JsonWriter.WritePropertyName(keyValuePair.Key),
-                    CheckCollectionItemForNull(utf8JsonWriter, dictionarySerialization.ValueSerialization, keyValuePair.Value),
-                    SerializeExpression(utf8JsonWriter, dictionarySerialization.ValueSerialization, keyValuePair.Value, options)
+                    SerializeDictionaryItem(utf8JsonWriter, dictionarySerialization.ValueSerialization, keyValuePair.Value, options)
                 },
                 utf8JsonWriter.WriteEndObject()
             };
+        }
+
+        private static MethodBodyStatement SerializeDictionaryItem(Utf8JsonWriterExpression utf8JsonWriter, JsonSerialization valueSerialization, ValueExpression value, ModelReaderWriterOptionsExpression? options)
+        {
+            var serializeStatement = SerializeExpression(utf8JsonWriter, valueSerialization, value, options);
+
+            if (CollectionItemRequiresNullCheckInSerialization(valueSerialization))
+            {
+                return new IfElseStatement(NotEqual(value, Null),
+                    serializeStatement,
+                    utf8JsonWriter.WriteNullValue());
+            }
+            else
+            {
+                return serializeStatement;
+            }
         }
 
         private static MethodBodyStatement SerializeValue(Utf8JsonWriterExpression utf8JsonWriter, JsonValueSerialization valueSerialization, ValueExpression value, ModelReaderWriterOptionsExpression? options)
@@ -604,11 +634,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             throw new NotSupportedException($"Framework type {valueType} serialization not supported, please add `CodeGenMemberSerializationHooks` to specify the serialization of this type with the customized property");
         }
-
-        private static MethodBodyStatement CheckCollectionItemForNull(Utf8JsonWriterExpression utf8JsonWriter, JsonSerialization valueSerialization, ValueExpression value)
-            => CollectionItemRequiresNullCheckInSerialization(valueSerialization)
-                ? new IfStatement(Equal(value, Null)) { utf8JsonWriter.WriteNullValue(), Continue }
-                : EmptyStatement;
 
         public static Method? BuildDeserialize(TypeDeclarationOptions declaration, JsonObjectSerialization serialization, INamedTypeSymbol? existingType)
         {
@@ -956,7 +981,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         Declare(readOnlyMemory, New.Array(TypeFactory.GetElementType(jsonReadOnlyMemory.ImplementationType), element.GetArrayLength())),
                         new ForeachStatement("item", element.EnumerateArray(), out var readOnlyMemoryItem)
                         {
-                            DeserializeArrayItem(jsonReadOnlyMemory, value, new JsonElementExpression(readOnlyMemoryItem), index),
+                            DeserializeArrayItem(jsonReadOnlyMemory.ValueSerialization, value, new JsonElementExpression(readOnlyMemoryItem), index),
                             Increment(index)
                         }
                     };
@@ -970,7 +995,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         Declare(array, New.Instance(jsonArray.ImplementationType)),
                         new ForeachStatement("item", element.EnumerateArray(), out var arrayItem)
                         {
-                            DeserializeArrayItem(jsonArray, value, new JsonElementExpression(arrayItem)),
+                            DeserializeArrayItem(jsonArray.ValueSerialization, value, new JsonElementExpression(arrayItem)),
                         }
                     };
 
@@ -1000,7 +1025,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
         }
 
-        private static MethodBodyStatement DeserializeArrayItem(JsonArraySerialization serialization, ValueExpression arrayVariable, JsonElementExpression arrayItemVariable, ValueExpression? index = null)
+        private static MethodBodyStatement DeserializeArrayItem(JsonSerialization serialization, ValueExpression arrayVariable, JsonElementExpression arrayItemVariable, ValueExpression? index = null)
         {
             bool isArray = index is not null;
 
@@ -1008,11 +1033,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             MethodBodyStatement deserializeAndAssign = new[]
             {
-                DeserializeValue(serialization.ValueSerialization, arrayItemVariable, out var value),
+                DeserializeValue(serialization, arrayItemVariable, out var value),
                 isArray ? InvokeArrayElementAssignment(arrayVariable, index!, value) : InvokeListAdd(arrayVariable, value)
             };
 
-            if (CollectionItemRequiresNullCheckInSerialization(serialization.ValueSerialization))
+            if (CollectionItemRequiresNullCheckInSerialization(serialization))
             {
                 statements.Add(new IfElseStatement(
                     arrayItemVariable.ValueKindEqualsNull(),
@@ -1221,10 +1246,10 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private static bool IsCustomJsonConverterAdded(Type type)
             => type.GetCustomAttributes().Any(a => a.GetType() == typeof(JsonConverterAttribute));
 
-        public static bool CollectionItemRequiresNullCheckInSerialization(JsonSerialization serialization) =>
+        private static bool CollectionItemRequiresNullCheckInSerialization(JsonSerialization serialization) =>
             serialization is { IsNullable: true } and JsonValueSerialization { Type.IsValueType: true } || // nullable value type, like int?
             serialization is JsonArraySerialization or JsonDictionarySerialization || // list or dictionary
-            serialization is JsonValueSerialization { Type.IsValueType: false } || // reference types
+            serialization is JsonValueSerialization { Type: { IsValueType: false, IsFrameworkType: false } } || // type provider reference types (our generated models)
             serialization is JsonValueSerialization jsonValueSerialization &&
             jsonValueSerialization is { Type: { IsValueType: false, IsFrameworkType: true } } && // framework reference type, e.g. byte[]
             jsonValueSerialization.Type.FrameworkType != typeof(string) && // excluding string, because JsonElement.GetString() can handle null

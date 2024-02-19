@@ -131,7 +131,14 @@ namespace AnomalyDetector.Models
                     List<TimeSeriesPoint> array = new List<TimeSeriesPoint>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(TimeSeriesPoint.DeserializeTimeSeriesPoint(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(TimeSeriesPoint.DeserializeTimeSeriesPoint(item));
+                        }
                     }
                     series = array;
                     continue;

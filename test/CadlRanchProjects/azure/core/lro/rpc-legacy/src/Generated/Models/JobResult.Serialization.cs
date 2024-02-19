@@ -48,7 +48,14 @@ namespace _Azure.Lro.RpcLegacy.Models
                 writer.WriteStartArray();
                 foreach (var item in Errors)
                 {
-                    ((IJsonModel<ErrorResponse>)item).Write(writer, options);
+                    if (item != null)
+                    {
+                        ((IJsonModel<ErrorResponse>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -133,7 +140,14 @@ namespace _Azure.Lro.RpcLegacy.Models
                     List<ErrorResponse> array = new List<ErrorResponse>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ErrorResponse.DeserializeErrorResponse(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(ErrorResponse.DeserializeErrorResponse(item));
+                        }
                     }
                     errors = array;
                     continue;

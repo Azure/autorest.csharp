@@ -35,7 +35,14 @@ namespace _Type.Property.Nullable.Models
                 writer.WriteStartArray();
                 foreach (var item in NullableProperty)
                 {
-                    ((IJsonModel<InnerModel>)item).Write(writer, options);
+                    if (item != null)
+                    {
+                        ((IJsonModel<InnerModel>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -102,7 +109,14 @@ namespace _Type.Property.Nullable.Models
                     List<InnerModel> array = new List<InnerModel>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(InnerModel.DeserializeInnerModel(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(InnerModel.DeserializeInnerModel(item));
+                        }
                     }
                     nullableProperty = array;
                     continue;

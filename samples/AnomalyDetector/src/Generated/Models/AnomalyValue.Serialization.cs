@@ -120,7 +120,14 @@ namespace AnomalyDetector.Models
                     List<AnomalyInterpretation> array = new List<AnomalyInterpretation>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(AnomalyInterpretation.DeserializeAnomalyInterpretation(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(AnomalyInterpretation.DeserializeAnomalyInterpretation(item));
+                        }
                     }
                     interpretation = array;
                     continue;

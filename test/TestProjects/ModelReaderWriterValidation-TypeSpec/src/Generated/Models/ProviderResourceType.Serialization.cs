@@ -48,7 +48,14 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in LocationMappings)
                 {
-                    ((IJsonModel<ProviderExtendedLocation>)item).Write(writer, options);
+                    if (item != null)
+                    {
+                        ((IJsonModel<ProviderExtendedLocation>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -58,7 +65,14 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in Aliases)
                 {
-                    ((IJsonModel<ResourceTypeAlias>)item).Write(writer, options);
+                    if (item != null)
+                    {
+                        ((IJsonModel<ResourceTypeAlias>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -83,7 +97,14 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in ZoneMappings)
                 {
-                    ((IJsonModel<ZoneMapping>)item).Write(writer, options);
+                    if (item != null)
+                    {
+                        ((IJsonModel<ZoneMapping>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -93,7 +114,14 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in ApiProfiles)
                 {
-                    ((IJsonModel<ApiProfile>)item).Write(writer, options);
+                    if (item != null)
+                    {
+                        ((IJsonModel<ApiProfile>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -193,7 +221,14 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                     List<ProviderExtendedLocation> array = new List<ProviderExtendedLocation>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ProviderExtendedLocation.DeserializeProviderExtendedLocation(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(ProviderExtendedLocation.DeserializeProviderExtendedLocation(item));
+                        }
                     }
                     locationMappings = array;
                     continue;
@@ -207,7 +242,14 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                     List<ResourceTypeAlias> array = new List<ResourceTypeAlias>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ResourceTypeAlias.DeserializeResourceTypeAlias(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(ResourceTypeAlias.DeserializeResourceTypeAlias(item));
+                        }
                     }
                     aliases = array;
                     continue;
@@ -240,7 +282,14 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                     List<ZoneMapping> array = new List<ZoneMapping>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ZoneMapping.DeserializeZoneMapping(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(ZoneMapping.DeserializeZoneMapping(item));
+                        }
                     }
                     zoneMappings = array;
                     continue;
@@ -254,7 +303,14 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                     List<ApiProfile> array = new List<ApiProfile>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ApiProfile.DeserializeApiProfile(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(ApiProfile.DeserializeApiProfile(item));
+                        }
                     }
                     apiProfiles = array;
                     continue;

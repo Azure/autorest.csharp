@@ -40,7 +40,14 @@ namespace _Specs_.Azure.Core.Basic.Models
                 writer.WriteStartArray();
                 foreach (var item in Orders)
                 {
-                    ((IJsonModel<UserOrder>)item).Write(writer, options);
+                    if (item != null)
+                    {
+                        ((IJsonModel<UserOrder>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -114,7 +121,14 @@ namespace _Specs_.Azure.Core.Basic.Models
                     List<UserOrder> array = new List<UserOrder>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(UserOrder.DeserializeUserOrder(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(UserOrder.DeserializeUserOrder(item));
+                        }
                     }
                     orders = array;
                     continue;

@@ -33,7 +33,14 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
                 writer.WriteStartArray();
                 foreach (var item in Friends)
                 {
-                    ((IJsonModel<Bird>)item).Write(writer, options);
+                    if (item != null)
+                    {
+                        ((IJsonModel<Bird>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -44,7 +51,14 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
                 foreach (var item in Hate)
                 {
                     writer.WritePropertyName(item.Key);
-                    ((IJsonModel<Bird>)item.Value).Write(writer, options);
+                    if (item.Value != null)
+                    {
+                        ((IJsonModel<Bird>)item.Value).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndObject();
             }
@@ -113,7 +127,14 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
                     List<Bird> array = new List<Bird>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DeserializeBird(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(DeserializeBird(item));
+                        }
                     }
                     friends = array;
                     continue;
@@ -127,7 +148,14 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
                     Dictionary<string, Bird> dictionary = new Dictionary<string, Bird>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        dictionary.Add(property0.Name, DeserializeBird(property0.Value));
+                        if (property0.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            dictionary.Add(property0.Name, null);
+                        }
+                        else
+                        {
+                            dictionary.Add(property0.Name, DeserializeBird(property0.Value));
+                        }
                     }
                     hate = dictionary;
                     continue;

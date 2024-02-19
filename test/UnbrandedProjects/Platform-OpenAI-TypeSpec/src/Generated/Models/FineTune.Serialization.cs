@@ -52,21 +52,42 @@ namespace OpenAI.Models
             writer.WriteStartArray();
             foreach (var item in TrainingFiles)
             {
-                ((IJsonModel<OpenAIFile>)item).Write(writer, options);
+                if (item != null)
+                {
+                    ((IJsonModel<OpenAIFile>)item).Write(writer, options);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             writer.WriteEndArray();
             writer.WritePropertyName("validation_files"u8);
             writer.WriteStartArray();
             foreach (var item in ValidationFiles)
             {
-                ((IJsonModel<OpenAIFile>)item).Write(writer, options);
+                if (item != null)
+                {
+                    ((IJsonModel<OpenAIFile>)item).Write(writer, options);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             writer.WriteEndArray();
             writer.WritePropertyName("result_files"u8);
             writer.WriteStartArray();
             foreach (var item in ResultFiles)
             {
-                ((IJsonModel<OpenAIFile>)item).Write(writer, options);
+                if (item != null)
+                {
+                    ((IJsonModel<OpenAIFile>)item).Write(writer, options);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             writer.WriteEndArray();
             if (OptionalProperty.IsCollectionDefined(Events))
@@ -75,7 +96,14 @@ namespace OpenAI.Models
                 writer.WriteStartArray();
                 foreach (var item in Events)
                 {
-                    ((IJsonModel<FineTuneEvent>)item).Write(writer, options);
+                    if (item != null)
+                    {
+                        ((IJsonModel<FineTuneEvent>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -189,7 +217,14 @@ namespace OpenAI.Models
                     List<OpenAIFile> array = new List<OpenAIFile>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(OpenAIFile.DeserializeOpenAIFile(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(OpenAIFile.DeserializeOpenAIFile(item));
+                        }
                     }
                     trainingFiles = array;
                     continue;
@@ -199,7 +234,14 @@ namespace OpenAI.Models
                     List<OpenAIFile> array = new List<OpenAIFile>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(OpenAIFile.DeserializeOpenAIFile(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(OpenAIFile.DeserializeOpenAIFile(item));
+                        }
                     }
                     validationFiles = array;
                     continue;
@@ -209,7 +251,14 @@ namespace OpenAI.Models
                     List<OpenAIFile> array = new List<OpenAIFile>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(OpenAIFile.DeserializeOpenAIFile(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(OpenAIFile.DeserializeOpenAIFile(item));
+                        }
                     }
                     resultFiles = array;
                     continue;
@@ -223,7 +272,14 @@ namespace OpenAI.Models
                     List<FineTuneEvent> array = new List<FineTuneEvent>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(FineTuneEvent.DeserializeFineTuneEvent(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(FineTuneEvent.DeserializeFineTuneEvent(item));
+                        }
                     }
                     events = array;
                     continue;

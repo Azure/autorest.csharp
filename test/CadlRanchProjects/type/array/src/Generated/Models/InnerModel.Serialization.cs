@@ -35,7 +35,14 @@ namespace _Type._Array.Models
                 writer.WriteStartArray();
                 foreach (var item in Children)
                 {
-                    ((IJsonModel<InnerModel>)item).Write(writer, options);
+                    if (item != null)
+                    {
+                        ((IJsonModel<InnerModel>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -97,7 +104,14 @@ namespace _Type._Array.Models
                     List<InnerModel> array = new List<InnerModel>();
                     foreach (var item in property0.Value.EnumerateArray())
                     {
-                        array.Add(DeserializeInnerModel(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(DeserializeInnerModel(item));
+                        }
                     }
                     children = array;
                     continue;

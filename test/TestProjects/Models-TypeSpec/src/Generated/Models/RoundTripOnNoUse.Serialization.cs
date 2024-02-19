@@ -31,12 +31,14 @@ namespace ModelsTypeSpec.Models
             writer.WriteStartArray();
             foreach (var item in RequiredList)
             {
-                if (item == null)
+                if (item != null)
+                {
+                    ((IJsonModel<CollectionItem>)item).Write(writer, options);
+                }
+                else
                 {
                     writer.WriteNullValue();
-                    continue;
                 }
-            ((IJsonModel<CollectionItem>)item).Write(writer, options);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("baseModelProp"u8);

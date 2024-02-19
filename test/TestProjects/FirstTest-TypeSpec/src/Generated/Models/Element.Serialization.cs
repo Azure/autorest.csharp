@@ -33,7 +33,14 @@ namespace FirstTestTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in Extension)
                 {
-                    ((IJsonModel<Extension>)item).Write(writer, options);
+                    if (item != null)
+                    {
+                        ((IJsonModel<Extension>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -89,7 +96,14 @@ namespace FirstTestTypeSpec.Models
                     List<Extension> array = new List<Extension>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Models.Extension.DeserializeExtension(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(Models.Extension.DeserializeExtension(item));
+                        }
                     }
                     extension = array;
                     continue;

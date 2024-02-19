@@ -64,14 +64,7 @@ namespace AnomalyDetector.Models
                 writer.WriteEndArray();
             }
             writer.WritePropertyName("setupInfo"u8);
-            if (SetupInfo != null)
-            {
-                ((IJsonModel<MultivariateBatchDetectionOptions>)SetupInfo).Write(writer, options);
-            }
-            else
-            {
-                writer.WriteNullValue();
-            }
+            ((IJsonModel<MultivariateBatchDetectionOptions>)SetupInfo).Write(writer, options);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -132,7 +125,14 @@ namespace AnomalyDetector.Models
                     List<ErrorResponse> array = new List<ErrorResponse>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ErrorResponse.DeserializeErrorResponse(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(ErrorResponse.DeserializeErrorResponse(item));
+                        }
                     }
                     errors = array;
                     continue;
@@ -146,7 +146,14 @@ namespace AnomalyDetector.Models
                     List<VariableState> array = new List<VariableState>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(VariableState.DeserializeVariableState(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(VariableState.DeserializeVariableState(item));
+                        }
                     }
                     variableStates = array;
                     continue;

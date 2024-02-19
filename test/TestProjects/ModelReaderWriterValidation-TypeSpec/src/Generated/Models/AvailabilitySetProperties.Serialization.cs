@@ -33,7 +33,14 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in VirtualMachines)
                 {
-                    ((IJsonModel<WritableSubResource>)item).Write(writer, options);
+                    if (item != null)
+                    {
+                        ((IJsonModel<WritableSubResource>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -101,7 +108,14 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                     List<WritableSubResource> array = new List<WritableSubResource>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(WritableSubResource.DeserializeWritableSubResource(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(WritableSubResource.DeserializeWritableSubResource(item));
+                        }
                     }
                     virtualMachines = array;
                     continue;

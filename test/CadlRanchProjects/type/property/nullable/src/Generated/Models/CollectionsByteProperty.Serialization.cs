@@ -35,12 +35,14 @@ namespace _Type.Property.Nullable.Models
                 writer.WriteStartArray();
                 foreach (var item in NullableProperty)
                 {
-                    if (item == null)
+                    if (item != null)
+                    {
+                        writer.WriteBase64StringValue(item.ToArray(), "D");
+                    }
+                    else
                     {
                         writer.WriteNullValue();
-                        continue;
                     }
-                    writer.WriteBase64StringValue(item.ToArray(), "D");
                 }
                 writer.WriteEndArray();
             }

@@ -49,12 +49,14 @@ namespace ModelsTypeSpec.Models
             writer.WriteStartArray();
             foreach (var item in RequiredCollectionWithNullableFloatElement)
             {
-                if (item == null)
+                if (item != null)
+                {
+                    writer.WriteNumberValue(item.Value);
+                }
+                else
                 {
                     writer.WriteNullValue();
-                    continue;
                 }
-                writer.WriteNumberValue(item.Value);
             }
             writer.WriteEndArray();
             if (options.Format != "W" && _serializedAdditionalRawData != null)

@@ -33,14 +33,7 @@ namespace AnomalyDetector.Models
                 writer.WriteStringValue(ResultId);
             }
             writer.WritePropertyName("summary"u8);
-            if (Summary != null)
-            {
-                ((IJsonModel<MultivariateBatchDetectionResultSummary>)Summary).Write(writer, options);
-            }
-            else
-            {
-                writer.WriteNullValue();
-            }
+            ((IJsonModel<MultivariateBatchDetectionResultSummary>)Summary).Write(writer, options);
             writer.WritePropertyName("results"u8);
             writer.WriteStartArray();
             foreach (var item in Results)
@@ -115,7 +108,14 @@ namespace AnomalyDetector.Models
                     List<AnomalyState> array = new List<AnomalyState>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(AnomalyState.DeserializeAnomalyState(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(AnomalyState.DeserializeAnomalyState(item));
+                        }
                     }
                     results = array;
                     continue;

@@ -88,11 +88,6 @@ namespace ModelsTypeSpec.Models
             writer.WriteStartArray();
             foreach (var item in RequiredStringList)
             {
-                if (item == null)
-                {
-                    writer.WriteNullValue();
-                    continue;
-                }
                 writer.WriteStringValue(item);
             }
             writer.WriteEndArray();
@@ -100,12 +95,14 @@ namespace ModelsTypeSpec.Models
             writer.WriteStartArray();
             foreach (var item in RequiredModelList)
             {
-                if (item == null)
+                if (item != null)
+                {
+                    ((IJsonModel<CollectionItem>)item).Write(writer, options);
+                }
+                else
                 {
                     writer.WriteNullValue();
-                    continue;
                 }
-            ((IJsonModel<CollectionItem>)item).Write(writer, options);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("requiredModelRecord"u8);
@@ -113,36 +110,42 @@ namespace ModelsTypeSpec.Models
             foreach (var item in RequiredModelRecord)
             {
                 writer.WritePropertyName(item.Key);
-                if (item.Value == null)
+                if (item.Value != null)
+                {
+                    ((IJsonModel<RecordItem>)item.Value).Write(writer, options);
+                }
+                else
                 {
                     writer.WriteNullValue();
-                    continue;
                 }
-            ((IJsonModel<RecordItem>)item.Value).Write(writer, options);
             }
             writer.WriteEndObject();
             writer.WritePropertyName("requiredCollectionWithNullableFloatElement"u8);
             writer.WriteStartArray();
             foreach (var item in RequiredCollectionWithNullableFloatElement)
             {
-                if (item == null)
+                if (item != null)
+                {
+                    writer.WriteNumberValue(item.Value);
+                }
+                else
                 {
                     writer.WriteNullValue();
-                    continue;
                 }
-                writer.WriteNumberValue(item.Value);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("requiredCollectionWithNullableBooleanElement"u8);
             writer.WriteStartArray();
             foreach (var item in RequiredCollectionWithNullableBooleanElement)
             {
-                if (item == null)
+                if (item != null)
+                {
+                    writer.WriteBooleanValue(item.Value);
+                }
+                else
                 {
                     writer.WriteNullValue();
-                    continue;
                 }
-                writer.WriteBooleanValue(item.Value);
             }
             writer.WriteEndArray();
             if (RequiredNullableModelList != null && Optional.IsCollectionDefined(RequiredNullableModelList))
@@ -151,12 +154,14 @@ namespace ModelsTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in RequiredNullableModelList)
                 {
-                    if (item == null)
+                    if (item != null)
+                    {
+                        ((IJsonModel<CollectionItem>)item).Write(writer, options);
+                    }
+                    else
                     {
                         writer.WriteNullValue();
-                        continue;
                     }
-                ((IJsonModel<CollectionItem>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -170,11 +175,6 @@ namespace ModelsTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in RequiredNullableStringList)
                 {
-                    if (item == null)
-                    {
-                        writer.WriteNullValue();
-                        continue;
-                    }
                     writer.WriteStringValue(item);
                 }
                 writer.WriteEndArray();
@@ -203,12 +203,14 @@ namespace ModelsTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in NonRequiredModelList)
                 {
-                    if (item == null)
+                    if (item != null)
+                    {
+                        ((IJsonModel<CollectionItem>)item).Write(writer, options);
+                    }
+                    else
                     {
                         writer.WriteNullValue();
-                        continue;
                     }
-                ((IJsonModel<CollectionItem>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -218,11 +220,6 @@ namespace ModelsTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in NonRequiredStringList)
                 {
-                    if (item == null)
-                    {
-                        writer.WriteNullValue();
-                        continue;
-                    }
                     writer.WriteStringValue(item);
                 }
                 writer.WriteEndArray();
@@ -245,12 +242,14 @@ namespace ModelsTypeSpec.Models
                     writer.WriteStartArray();
                     foreach (var item in NonRequiredNullableModelList)
                     {
-                        if (item == null)
+                        if (item != null)
+                        {
+                            ((IJsonModel<CollectionItem>)item).Write(writer, options);
+                        }
+                        else
                         {
                             writer.WriteNullValue();
-                            continue;
                         }
-                    ((IJsonModel<CollectionItem>)item).Write(writer, options);
                     }
                     writer.WriteEndArray();
                 }
@@ -267,11 +266,6 @@ namespace ModelsTypeSpec.Models
                     writer.WriteStartArray();
                     foreach (var item in NonRequiredNullableStringList)
                     {
-                        if (item == null)
-                        {
-                            writer.WriteNullValue();
-                            continue;
-                        }
                         writer.WriteStringValue(item);
                     }
                     writer.WriteEndArray();
@@ -438,14 +432,7 @@ namespace ModelsTypeSpec.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString());
-                        }
+                        array.Add(item.GetString());
                     }
                     requiredStringList = array;
                     continue;
@@ -550,14 +537,7 @@ namespace ModelsTypeSpec.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString());
-                        }
+                        array.Add(item.GetString());
                     }
                     requiredNullableStringList = array;
                     continue;
@@ -607,14 +587,7 @@ namespace ModelsTypeSpec.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString());
-                        }
+                        array.Add(item.GetString());
                     }
                     nonRequiredStringList = array;
                     continue;
@@ -663,14 +636,7 @@ namespace ModelsTypeSpec.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString());
-                        }
+                        array.Add(item.GetString());
                     }
                     nonRequiredNullableStringList = array;
                     continue;

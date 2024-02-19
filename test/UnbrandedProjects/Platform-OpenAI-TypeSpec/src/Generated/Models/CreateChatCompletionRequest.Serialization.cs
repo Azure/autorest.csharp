@@ -29,7 +29,14 @@ namespace OpenAI.Models
             writer.WriteStartArray();
             foreach (var item in Messages)
             {
-                ((IJsonModel<ChatCompletionRequestMessage>)item).Write(writer, options);
+                if (item != null)
+                {
+                    ((IJsonModel<ChatCompletionRequestMessage>)item).Write(writer, options);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             writer.WriteEndArray();
             if (OptionalProperty.IsCollectionDefined(Functions))
@@ -38,7 +45,14 @@ namespace OpenAI.Models
                 writer.WriteStartArray();
                 foreach (var item in Functions)
                 {
-                    ((IJsonModel<ChatCompletionFunctions>)item).Write(writer, options);
+                    if (item != null)
+                    {
+                        ((IJsonModel<ChatCompletionFunctions>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -239,7 +253,14 @@ namespace OpenAI.Models
                     List<ChatCompletionRequestMessage> array = new List<ChatCompletionRequestMessage>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ChatCompletionRequestMessage.DeserializeChatCompletionRequestMessage(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(ChatCompletionRequestMessage.DeserializeChatCompletionRequestMessage(item));
+                        }
                     }
                     messages = array;
                     continue;
@@ -253,7 +274,14 @@ namespace OpenAI.Models
                     List<ChatCompletionFunctions> array = new List<ChatCompletionFunctions>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ChatCompletionFunctions.DeserializeChatCompletionFunctions(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(ChatCompletionFunctions.DeserializeChatCompletionFunctions(item));
+                        }
                     }
                     functions = array;
                     continue;

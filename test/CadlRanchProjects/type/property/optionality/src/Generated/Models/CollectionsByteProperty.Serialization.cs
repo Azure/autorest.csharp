@@ -33,12 +33,14 @@ namespace _Type.Property.Optionality.Models
                 writer.WriteStartArray();
                 foreach (var item in Property)
                 {
-                    if (item == null)
+                    if (item != null)
+                    {
+                        writer.WriteBase64StringValue(item.ToArray(), "D");
+                    }
+                    else
                     {
                         writer.WriteNullValue();
-                        continue;
                     }
-                    writer.WriteBase64StringValue(item.ToArray(), "D");
                 }
                 writer.WriteEndArray();
             }

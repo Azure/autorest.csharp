@@ -29,7 +29,14 @@ namespace OpenAI.Models
             writer.WriteStartArray();
             foreach (var item in Data)
             {
-                ((IJsonModel<FineTuningJob>)item).Write(writer, options);
+                if (item != null)
+                {
+                    ((IJsonModel<FineTuningJob>)item).Write(writer, options);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             writer.WriteEndArray();
             writer.WritePropertyName("has_more"u8);
@@ -89,7 +96,14 @@ namespace OpenAI.Models
                     List<FineTuningJob> array = new List<FineTuningJob>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(FineTuningJob.DeserializeFineTuningJob(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(FineTuningJob.DeserializeFineTuningJob(item));
+                        }
                     }
                     data = array;
                     continue;

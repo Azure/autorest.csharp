@@ -33,7 +33,14 @@ namespace _Type.Property.AdditionalProperties.Models
                 writer.WriteStartArray();
                 foreach (var item0 in item.Value)
                 {
-                    ((IJsonModel<ModelForRecord>)item0).Write(writer, options);
+                    if (item0 != null)
+                    {
+                        ((IJsonModel<ModelForRecord>)item0).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -67,7 +74,14 @@ namespace _Type.Property.AdditionalProperties.Models
                 List<ModelForRecord> array = new List<ModelForRecord>();
                 foreach (var item in property.Value.EnumerateArray())
                 {
-                    array.Add(ModelForRecord.DeserializeModelForRecord(item));
+                    if (item.ValueKind == JsonValueKind.Null)
+                    {
+                        array.Add(null);
+                    }
+                    else
+                    {
+                        array.Add(ModelForRecord.DeserializeModelForRecord(item));
+                    }
                 }
                 additionalPropertiesDictionary.Add(property.Name, array);
             }

@@ -92,7 +92,14 @@ namespace AnomalyDetector.Models
                     List<VariableValues> array = new List<VariableValues>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(VariableValues.DeserializeVariableValues(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(VariableValues.DeserializeVariableValues(item));
+                        }
                     }
                     variables = array;
                     continue;

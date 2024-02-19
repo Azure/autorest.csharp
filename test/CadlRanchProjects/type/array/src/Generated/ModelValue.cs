@@ -57,7 +57,14 @@ namespace _Type._Array
             List<InnerModel> array = new List<InnerModel>();
             foreach (var item in document.RootElement.EnumerateArray())
             {
-                array.Add(InnerModel.DeserializeInnerModel(item));
+                if (item.ValueKind == JsonValueKind.Null)
+                {
+                    array.Add(null);
+                }
+                else
+                {
+                    array.Add(InnerModel.DeserializeInnerModel(item));
+                }
             }
             value = array;
             return Response.FromValue(value, response);
@@ -74,7 +81,14 @@ namespace _Type._Array
             List<InnerModel> array = new List<InnerModel>();
             foreach (var item in document.RootElement.EnumerateArray())
             {
-                array.Add(InnerModel.DeserializeInnerModel(item));
+                if (item.ValueKind == JsonValueKind.Null)
+                {
+                    array.Add(null);
+                }
+                else
+                {
+                    array.Add(InnerModel.DeserializeInnerModel(item));
+                }
             }
             value = array;
             return Response.FromValue(value, response);

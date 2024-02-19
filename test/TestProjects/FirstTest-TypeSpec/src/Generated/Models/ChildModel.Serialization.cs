@@ -31,7 +31,14 @@ namespace FirstTestTypeSpec.Models
             writer.WriteStartArray();
             foreach (var item in Parent)
             {
-                ((IJsonModel<BaseModel>)item).Write(writer, options);
+                if (item != null)
+                {
+                    ((IJsonModel<BaseModel>)item).Write(writer, options);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             writer.WriteEndArray();
             writer.WritePropertyName("level"u8);
@@ -85,7 +92,14 @@ namespace FirstTestTypeSpec.Models
                     List<BaseModel> array = new List<BaseModel>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DeserializeBaseModel(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(DeserializeBaseModel(item));
+                        }
                     }
                     parent = array;
                     continue;

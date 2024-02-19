@@ -30,14 +30,7 @@ namespace AnomalyDetector.Models
             if (Optional.IsDefined(ModelState))
             {
                 writer.WritePropertyName("modelState"u8);
-                if (ModelState != null)
-                {
-                    ((IJsonModel<ModelState>)ModelState).Write(writer, options);
-                }
-                else
-                {
-                    writer.WriteNullValue();
-                }
+                ((IJsonModel<ModelState>)ModelState).Write(writer, options);
             }
             if (Optional.IsCollectionDefined(VariableStates))
             {
@@ -118,7 +111,14 @@ namespace AnomalyDetector.Models
                     List<VariableState> array = new List<VariableState>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(VariableState.DeserializeVariableState(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(VariableState.DeserializeVariableState(item));
+                        }
                     }
                     variableStates = array;
                     continue;

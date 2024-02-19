@@ -36,7 +36,14 @@ namespace _Type._Dictionary.Models
                 foreach (var item in Children)
                 {
                     writer.WritePropertyName(item.Key);
-                    ((IJsonModel<InnerModel>)item.Value).Write(writer, options);
+                    if (item.Value != null)
+                    {
+                        ((IJsonModel<InnerModel>)item.Value).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndObject();
             }
@@ -98,7 +105,14 @@ namespace _Type._Dictionary.Models
                     Dictionary<string, InnerModel> dictionary = new Dictionary<string, InnerModel>();
                     foreach (var property1 in property0.Value.EnumerateObject())
                     {
-                        dictionary.Add(property1.Name, DeserializeInnerModel(property1.Value));
+                        if (property1.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            dictionary.Add(property1.Name, null);
+                        }
+                        else
+                        {
+                            dictionary.Add(property1.Name, DeserializeInnerModel(property1.Value));
+                        }
                     }
                     children = dictionary;
                     continue;

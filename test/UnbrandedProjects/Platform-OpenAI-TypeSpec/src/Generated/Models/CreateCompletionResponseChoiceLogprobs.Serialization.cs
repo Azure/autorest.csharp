@@ -41,18 +41,20 @@ namespace OpenAI.Models
             writer.WriteStartArray();
             foreach (var item in TopLogprobs)
             {
-                if (item == null)
+                if (item != null)
+                {
+                    writer.WriteStartObject();
+                    foreach (var item0 in item)
+                    {
+                        writer.WritePropertyName(item0.Key);
+                        writer.WriteNumberValue(item0.Value);
+                    }
+                    writer.WriteEndObject();
+                }
+                else
                 {
                     writer.WriteNullValue();
-                    continue;
                 }
-                writer.WriteStartObject();
-                foreach (var item0 in item)
-                {
-                    writer.WritePropertyName(item0.Key);
-                    writer.WriteNumberValue(item0.Value);
-                }
-                writer.WriteEndObject();
             }
             writer.WriteEndArray();
             writer.WritePropertyName("text_offset"u8);
