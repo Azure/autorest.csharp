@@ -29,7 +29,14 @@ namespace MgmtParamOrdering.Models
                     List<EnvironmentContainerResourceData> array = new List<EnvironmentContainerResourceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(EnvironmentContainerResourceData.DeserializeEnvironmentContainerResourceData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(EnvironmentContainerResourceData.DeserializeEnvironmentContainerResourceData(item));
+                        }
                     }
                     value = array;
                     continue;

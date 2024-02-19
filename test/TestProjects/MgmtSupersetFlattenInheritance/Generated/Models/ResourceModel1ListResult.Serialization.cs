@@ -33,7 +33,14 @@ namespace MgmtSupersetFlattenInheritance.Models
                     List<ResourceModel1Data> array = new List<ResourceModel1Data>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ResourceModel1Data.DeserializeResourceModel1Data(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(ResourceModel1Data.DeserializeResourceModel1Data(item));
+                        }
                     }
                     value = array;
                     continue;

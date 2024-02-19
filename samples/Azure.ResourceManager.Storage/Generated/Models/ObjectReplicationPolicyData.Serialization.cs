@@ -37,7 +37,14 @@ namespace Azure.ResourceManager.Storage
                 writer.WriteStartArray();
                 foreach (var item in Rules)
                 {
-                    writer.WriteObjectValue(item);
+                    if (item != null)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -128,7 +135,14 @@ namespace Azure.ResourceManager.Storage
                             List<ObjectReplicationPolicyRule> array = new List<ObjectReplicationPolicyRule>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(ObjectReplicationPolicyRule.DeserializeObjectReplicationPolicyRule(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(ObjectReplicationPolicyRule.DeserializeObjectReplicationPolicyRule(item));
+                                }
                             }
                             rules = array;
                             continue;

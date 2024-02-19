@@ -38,7 +38,14 @@ namespace MgmtAcronymMapping.Models
                     List<DiskEncryptionSettings> array = new List<DiskEncryptionSettings>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DiskEncryptionSettings.DeserializeDiskEncryptionSettings(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(DiskEncryptionSettings.DeserializeDiskEncryptionSettings(item));
+                        }
                     }
                     encryptionSettings = array;
                     continue;
@@ -52,7 +59,14 @@ namespace MgmtAcronymMapping.Models
                     List<InstanceViewStatus> array = new List<InstanceViewStatus>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(InstanceViewStatus.DeserializeInstanceViewStatus(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(InstanceViewStatus.DeserializeInstanceViewStatus(item));
+                        }
                     }
                     statuses = array;
                     continue;

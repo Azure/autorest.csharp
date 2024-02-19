@@ -37,12 +37,12 @@ namespace Azure.ResourceManager.Sample.Models
             if (Optional.IsDefined(Vhd))
             {
                 writer.WritePropertyName("vhd"u8);
-                writer.WriteObjectValue(Vhd);
+                ((IJsonModel<VirtualHardDisk>)Vhd).Write(writer, options);
             }
             if (Optional.IsDefined(Image))
             {
                 writer.WritePropertyName("image"u8);
-                writer.WriteObjectValue(Image);
+                ((IJsonModel<VirtualHardDisk>)Image).Write(writer, options);
             }
             if (Optional.IsDefined(Caching))
             {
@@ -64,7 +64,7 @@ namespace Azure.ResourceManager.Sample.Models
             if (Optional.IsDefined(ManagedDisk))
             {
                 writer.WritePropertyName("managedDisk"u8);
-                writer.WriteObjectValue(ManagedDisk);
+                ((IJsonModel<ManagedDiskParameters>)ManagedDisk).Write(writer, options);
             }
             if (Optional.IsDefined(ToBeDetached))
             {

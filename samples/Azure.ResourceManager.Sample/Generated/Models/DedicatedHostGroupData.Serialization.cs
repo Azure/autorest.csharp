@@ -47,12 +47,14 @@ namespace Azure.ResourceManager.Sample
                 writer.WriteStartArray();
                 foreach (var item in HostUris)
                 {
-                    if (item == null)
+                    if (item != null)
+                    {
+                        writer.WriteStringValue(item.AbsoluteUri);
+                    }
+                    else
                     {
                         writer.WriteNullValue();
-                        continue;
                     }
-                    writer.WriteStringValue(item.AbsoluteUri);
                 }
                 writer.WriteEndArray();
             }
@@ -77,7 +79,14 @@ namespace Azure.ResourceManager.Sample
             if (options.Format != "W")
             {
                 writer.WritePropertyName("id"u8);
-                writer.WriteStringValue(Id);
+                if (Id != null)
+                {
+                    writer.WriteStringValue(Id);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             if (options.Format != "W")
             {
@@ -107,14 +116,21 @@ namespace Azure.ResourceManager.Sample
                 writer.WriteStartArray();
                 foreach (var item in Hosts)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    if (item != null)
+                    {
+                        JsonSerializer.Serialize(writer, item);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
             if (options.Format != "W" && Optional.IsDefined(InstanceView))
             {
                 writer.WritePropertyName("instanceView"u8);
-                writer.WriteObjectValue(InstanceView);
+                ((IJsonModel<DedicatedHostGroupInstanceView>)InstanceView).Write(writer, options);
             }
             if (Optional.IsDefined(SupportAutomaticPlacement))
             {
@@ -291,7 +307,14 @@ namespace Azure.ResourceManager.Sample
                             List<Resources.Models.SubResource> array = new List<Resources.Models.SubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(JsonSerializer.Deserialize<Resources.Models.SubResource>(item.GetRawText()));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(JsonSerializer.Deserialize<Resources.Models.SubResource>(item.GetRawText()));
+                                }
                             }
                             hosts = array;
                             continue;

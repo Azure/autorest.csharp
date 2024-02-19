@@ -23,7 +23,14 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteStartArray();
             foreach (var item in BlobRanges)
             {
-                writer.WriteObjectValue(item);
+                if (item != null)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             writer.WriteEndArray();
             writer.WriteEndObject();
@@ -49,7 +56,14 @@ namespace Azure.ResourceManager.Storage.Models
                     List<BlobRestoreRange> array = new List<BlobRestoreRange>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(BlobRestoreRange.DeserializeBlobRestoreRange(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(BlobRestoreRange.DeserializeBlobRestoreRange(item));
+                        }
                     }
                     blobRanges = array;
                     continue;

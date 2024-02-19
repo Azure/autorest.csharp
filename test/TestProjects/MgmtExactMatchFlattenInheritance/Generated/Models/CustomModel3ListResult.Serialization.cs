@@ -33,7 +33,14 @@ namespace MgmtExactMatchFlattenInheritance.Models
                     List<CustomModel3Data> array = new List<CustomModel3Data>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CustomModel3Data.DeserializeCustomModel3Data(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(CustomModel3Data.DeserializeCustomModel3Data(item));
+                        }
                     }
                     value = array;
                     continue;

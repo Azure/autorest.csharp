@@ -33,7 +33,14 @@ namespace MgmtPagination.Models
                     List<PageSizeIntegerModelData> array = new List<PageSizeIntegerModelData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(PageSizeIntegerModelData.DeserializePageSizeIntegerModelData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(PageSizeIntegerModelData.DeserializePageSizeIntegerModelData(item));
+                        }
                     }
                     value = array;
                     continue;

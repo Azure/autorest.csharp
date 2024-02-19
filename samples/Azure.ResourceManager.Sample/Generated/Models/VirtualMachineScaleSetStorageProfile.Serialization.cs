@@ -31,12 +31,12 @@ namespace Azure.ResourceManager.Sample.Models
             if (Optional.IsDefined(ImageReference))
             {
                 writer.WritePropertyName("imageReference"u8);
-                writer.WriteObjectValue(ImageReference);
+                ((IJsonModel<ImageReference>)ImageReference).Write(writer, options);
             }
             if (Optional.IsDefined(OSDisk))
             {
                 writer.WritePropertyName("osDisk"u8);
-                writer.WriteObjectValue(OSDisk);
+                ((IJsonModel<VirtualMachineScaleSetOSDisk>)OSDisk).Write(writer, options);
             }
             if (Optional.IsCollectionDefined(DataDisks))
             {
@@ -44,7 +44,14 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in DataDisks)
                 {
-                    writer.WriteObjectValue(item);
+                    if (item != null)
+                    {
+                        ((IJsonModel<VirtualMachineScaleSetDataDisk>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -120,7 +127,14 @@ namespace Azure.ResourceManager.Sample.Models
                     List<VirtualMachineScaleSetDataDisk> array = new List<VirtualMachineScaleSetDataDisk>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(VirtualMachineScaleSetDataDisk.DeserializeVirtualMachineScaleSetDataDisk(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(VirtualMachineScaleSetDataDisk.DeserializeVirtualMachineScaleSetDataDisk(item));
+                        }
                     }
                     dataDisks = array;
                     continue;

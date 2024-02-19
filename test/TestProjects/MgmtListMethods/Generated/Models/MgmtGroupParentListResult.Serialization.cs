@@ -29,7 +29,14 @@ namespace MgmtListMethods.Models
                     List<MgmtGroupParentData> array = new List<MgmtGroupParentData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(MgmtGroupParentData.DeserializeMgmtGroupParentData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(MgmtGroupParentData.DeserializeMgmtGroupParentData(item));
+                        }
                     }
                     value = array;
                     continue;

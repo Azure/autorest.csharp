@@ -32,7 +32,14 @@ namespace MgmtOperations.Models
                     List<UnpatchableResourceData> array = new List<UnpatchableResourceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(UnpatchableResourceData.DeserializeUnpatchableResourceData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(UnpatchableResourceData.DeserializeUnpatchableResourceData(item));
+                        }
                     }
                     value = array;
                     continue;

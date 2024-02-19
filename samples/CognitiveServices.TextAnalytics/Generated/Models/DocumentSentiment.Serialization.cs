@@ -56,7 +56,14 @@ namespace CognitiveServices.TextAnalytics.Models
                     List<SentenceSentiment> array = new List<SentenceSentiment>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(SentenceSentiment.DeserializeSentenceSentiment(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(SentenceSentiment.DeserializeSentenceSentiment(item));
+                        }
                     }
                     sentences = array;
                     continue;
@@ -66,7 +73,14 @@ namespace CognitiveServices.TextAnalytics.Models
                     List<TextAnalyticsWarning> array = new List<TextAnalyticsWarning>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(TextAnalyticsWarning.DeserializeTextAnalyticsWarning(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(TextAnalyticsWarning.DeserializeTextAnalyticsWarning(item));
+                        }
                     }
                     warnings = array;
                     continue;

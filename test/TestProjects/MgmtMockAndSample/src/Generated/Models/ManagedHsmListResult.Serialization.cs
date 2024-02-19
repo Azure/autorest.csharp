@@ -33,7 +33,14 @@ namespace MgmtMockAndSample.Models
                     List<ManagedHsmData> array = new List<ManagedHsmData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ManagedHsmData.DeserializeManagedHsmData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(ManagedHsmData.DeserializeManagedHsmData(item));
+                        }
                     }
                     value = array;
                     continue;

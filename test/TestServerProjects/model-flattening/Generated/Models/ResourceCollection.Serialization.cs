@@ -37,7 +37,14 @@ namespace model_flattening.Models
                 writer.WriteStartArray();
                 foreach (var item in Arrayofresources)
                 {
-                    ((IJsonModel<FlattenedProduct>)item).Write(writer, options);
+                    if (item != null)
+                    {
+                        ((IJsonModel<FlattenedProduct>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -48,7 +55,14 @@ namespace model_flattening.Models
                 foreach (var item in Dictionaryofresources)
                 {
                     writer.WritePropertyName(item.Key);
-                    ((IJsonModel<FlattenedProduct>)item.Value).Write(writer, options);
+                    if (item.Value != null)
+                    {
+                        ((IJsonModel<FlattenedProduct>)item.Value).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndObject();
             }
@@ -115,7 +129,14 @@ namespace model_flattening.Models
                     List<FlattenedProduct> array = new List<FlattenedProduct>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(FlattenedProduct.DeserializeFlattenedProduct(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(FlattenedProduct.DeserializeFlattenedProduct(item));
+                        }
                     }
                     arrayofresources = array;
                     continue;
@@ -129,7 +150,14 @@ namespace model_flattening.Models
                     Dictionary<string, FlattenedProduct> dictionary = new Dictionary<string, FlattenedProduct>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        dictionary.Add(property0.Name, FlattenedProduct.DeserializeFlattenedProduct(property0.Value));
+                        if (property0.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            dictionary.Add(property0.Name, null);
+                        }
+                        else
+                        {
+                            dictionary.Add(property0.Name, FlattenedProduct.DeserializeFlattenedProduct(property0.Value));
+                        }
                     }
                     dictionaryofresources = dictionary;
                     continue;

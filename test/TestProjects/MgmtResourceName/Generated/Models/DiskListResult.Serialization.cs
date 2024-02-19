@@ -33,7 +33,14 @@ namespace MgmtResourceName.Models
                     List<DiskData> array = new List<DiskData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DiskData.DeserializeDiskData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(DiskData.DeserializeDiskData(item));
+                        }
                     }
                     value = array;
                     continue;

@@ -34,7 +34,14 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in AllocatableVms)
                 {
-                    writer.WriteObjectValue(item);
+                    if (item != null)
+                    {
+                        ((IJsonModel<DedicatedHostAllocatableVm>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -90,7 +97,14 @@ namespace Azure.ResourceManager.Sample.Models
                     List<DedicatedHostAllocatableVm> array = new List<DedicatedHostAllocatableVm>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DedicatedHostAllocatableVm.DeserializeDedicatedHostAllocatableVm(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(DedicatedHostAllocatableVm.DeserializeDedicatedHostAllocatableVm(item));
+                        }
                     }
                     allocatableVms = array;
                     continue;

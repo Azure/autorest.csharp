@@ -29,7 +29,14 @@ namespace MgmtScopeResource.Models
                     List<ResourceLinkData> array = new List<ResourceLinkData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ResourceLinkData.DeserializeResourceLinkData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(ResourceLinkData.DeserializeResourceLinkData(item));
+                        }
                     }
                     value = array;
                     continue;

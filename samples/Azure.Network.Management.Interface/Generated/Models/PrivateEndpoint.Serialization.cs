@@ -50,7 +50,14 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in PrivateLinkServiceConnections)
                 {
-                    writer.WriteObjectValue(item);
+                    if (item != null)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -60,7 +67,14 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in ManualPrivateLinkServiceConnections)
                 {
-                    writer.WriteObjectValue(item);
+                    if (item != null)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -153,7 +167,14 @@ namespace Azure.Network.Management.Interface.Models
                             List<NetworkInterface> array = new List<NetworkInterface>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(NetworkInterface.DeserializeNetworkInterface(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(NetworkInterface.DeserializeNetworkInterface(item));
+                                }
                             }
                             networkInterfaces = array;
                             continue;
@@ -176,7 +197,14 @@ namespace Azure.Network.Management.Interface.Models
                             List<PrivateLinkServiceConnection> array = new List<PrivateLinkServiceConnection>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(PrivateLinkServiceConnection.DeserializePrivateLinkServiceConnection(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(PrivateLinkServiceConnection.DeserializePrivateLinkServiceConnection(item));
+                                }
                             }
                             privateLinkServiceConnections = array;
                             continue;
@@ -190,7 +218,14 @@ namespace Azure.Network.Management.Interface.Models
                             List<PrivateLinkServiceConnection> array = new List<PrivateLinkServiceConnection>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(PrivateLinkServiceConnection.DeserializePrivateLinkServiceConnection(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(PrivateLinkServiceConnection.DeserializePrivateLinkServiceConnection(item));
+                                }
                             }
                             manualPrivateLinkServiceConnections = array;
                             continue;

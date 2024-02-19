@@ -24,7 +24,14 @@ namespace UnbrandedTypeSpec.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("sourceUrl"u8);
-            writer.WriteStringValue(SourceUrl.AbsoluteUri);
+            if (SourceUrl != null)
+            {
+                writer.WriteStringValue(SourceUrl.AbsoluteUri);
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             writer.WritePropertyName("guid"u8);
             writer.WriteStringValue(Guid);
             if (options.Format != "W" && _serializedAdditionalRawData != null)

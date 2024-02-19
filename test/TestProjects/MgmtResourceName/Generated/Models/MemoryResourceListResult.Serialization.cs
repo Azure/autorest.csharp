@@ -33,7 +33,14 @@ namespace MgmtResourceName.Models
                     List<MemoryData> array = new List<MemoryData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(MemoryData.DeserializeMemoryData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(MemoryData.DeserializeMemoryData(item));
+                        }
                     }
                     value = array;
                     continue;

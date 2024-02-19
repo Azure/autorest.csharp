@@ -32,7 +32,14 @@ namespace Azure.ResourceManager.Storage.Models
                     List<StoragePrivateEndpointConnectionData> array = new List<StoragePrivateEndpointConnectionData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(StoragePrivateEndpointConnectionData.DeserializeStoragePrivateEndpointConnectionData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(StoragePrivateEndpointConnectionData.DeserializeStoragePrivateEndpointConnectionData(item));
+                        }
                     }
                     value = array;
                     continue;

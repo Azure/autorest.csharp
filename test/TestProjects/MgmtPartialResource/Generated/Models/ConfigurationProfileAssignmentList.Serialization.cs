@@ -32,7 +32,14 @@ namespace MgmtPartialResource.Models
                     List<ConfigurationProfileAssignmentData> array = new List<ConfigurationProfileAssignmentData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ConfigurationProfileAssignmentData.DeserializeConfigurationProfileAssignmentData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(ConfigurationProfileAssignmentData.DeserializeConfigurationProfileAssignmentData(item));
+                        }
                     }
                     value = array;
                     continue;

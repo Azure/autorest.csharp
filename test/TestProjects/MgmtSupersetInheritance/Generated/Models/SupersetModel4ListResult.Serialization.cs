@@ -33,7 +33,14 @@ namespace MgmtSupersetInheritance.Models
                     List<SupersetModel4Data> array = new List<SupersetModel4Data>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(SupersetModel4Data.DeserializeSupersetModel4Data(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(SupersetModel4Data.DeserializeSupersetModel4Data(item));
+                        }
                     }
                     value = array;
                     continue;

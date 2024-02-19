@@ -24,7 +24,14 @@ namespace CognitiveSearch.Models
             writer.WriteStartArray();
             foreach (var item in Skills)
             {
-                writer.WriteObjectValue(item);
+                if (item != null)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             writer.WriteEndArray();
             if (Optional.IsDefined(CognitiveServicesAccount))
@@ -68,7 +75,14 @@ namespace CognitiveSearch.Models
                     List<Skill> array = new List<Skill>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Skill.DeserializeSkill(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(Skill.DeserializeSkill(item));
+                        }
                     }
                     skills = array;
                     continue;

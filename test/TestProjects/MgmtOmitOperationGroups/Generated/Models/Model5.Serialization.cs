@@ -27,7 +27,14 @@ namespace MgmtOmitOperationGroups.Models
                 writer.WriteStartArray();
                 foreach (var item in Modelqs)
                 {
-                    writer.WriteObjectValue(item);
+                    if (item != null)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -64,7 +71,14 @@ namespace MgmtOmitOperationGroups.Models
                     List<ModelQ> array = new List<ModelQ>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ModelQ.DeserializeModelQ(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(ModelQ.DeserializeModelQ(item));
+                        }
                     }
                     modelqs = array;
                     continue;

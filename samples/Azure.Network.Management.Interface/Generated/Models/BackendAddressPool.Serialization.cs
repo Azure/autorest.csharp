@@ -87,7 +87,14 @@ namespace Azure.Network.Management.Interface.Models
                             List<NetworkInterfaceIPConfiguration> array = new List<NetworkInterfaceIPConfiguration>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(NetworkInterfaceIPConfiguration.DeserializeNetworkInterfaceIPConfiguration(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(NetworkInterfaceIPConfiguration.DeserializeNetworkInterfaceIPConfiguration(item));
+                                }
                             }
                             backendIPConfigurations = array;
                             continue;
@@ -101,7 +108,14 @@ namespace Azure.Network.Management.Interface.Models
                             List<SubResource> array = new List<SubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(DeserializeSubResource(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(DeserializeSubResource(item));
+                                }
                             }
                             loadBalancingRules = array;
                             continue;
@@ -124,7 +138,14 @@ namespace Azure.Network.Management.Interface.Models
                             List<SubResource> array = new List<SubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(DeserializeSubResource(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(DeserializeSubResource(item));
+                                }
                             }
                             outboundRules = array;
                             continue;

@@ -29,7 +29,14 @@ namespace MgmtNonStringPathVariable.Models
                     List<FakeData> array = new List<FakeData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(FakeData.DeserializeFakeData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(FakeData.DeserializeFakeData(item));
+                        }
                     }
                     value = array;
                     continue;

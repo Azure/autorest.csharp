@@ -61,14 +61,21 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in Hosts)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    if (item != null)
+                    {
+                        JsonSerializer.Serialize(writer, item);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
             if (options.Format != "W" && Optional.IsDefined(InstanceView))
             {
                 writer.WritePropertyName("instanceView"u8);
-                writer.WriteObjectValue(InstanceView);
+                ((IJsonModel<DedicatedHostGroupInstanceView>)InstanceView).Write(writer, options);
             }
             if (Optional.IsDefined(SupportAutomaticPlacement))
             {
@@ -179,7 +186,14 @@ namespace Azure.ResourceManager.Sample.Models
                             List<Resources.Models.SubResource> array = new List<Resources.Models.SubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(JsonSerializer.Deserialize<Resources.Models.SubResource>(item.GetRawText()));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(JsonSerializer.Deserialize<Resources.Models.SubResource>(item.GetRawText()));
+                                }
                             }
                             hosts = array;
                             continue;

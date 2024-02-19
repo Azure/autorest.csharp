@@ -40,7 +40,14 @@ namespace Azure.ResourceManager.Fake.Models
                     List<PrivateLinkResourceData> array = new List<PrivateLinkResourceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(PrivateLinkResourceData.DeserializePrivateLinkResourceData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(PrivateLinkResourceData.DeserializePrivateLinkResourceData(item));
+                        }
                     }
                     value = array;
                     continue;

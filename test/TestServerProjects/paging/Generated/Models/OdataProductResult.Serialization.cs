@@ -32,7 +32,14 @@ namespace paging.Models
                 writer.WriteStartArray();
                 foreach (var item in Values)
                 {
-                    ((IJsonModel<Product>)item).Write(writer, options);
+                    if (item != null)
+                    {
+                        ((IJsonModel<Product>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -94,7 +101,14 @@ namespace paging.Models
                     List<Product> array = new List<Product>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Product.DeserializeProduct(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(Product.DeserializeProduct(item));
+                        }
                     }
                     values = array;
                     continue;

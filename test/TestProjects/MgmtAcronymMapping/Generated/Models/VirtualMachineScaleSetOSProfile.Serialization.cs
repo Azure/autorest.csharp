@@ -52,7 +52,14 @@ namespace MgmtAcronymMapping.Models
                 writer.WriteStartArray();
                 foreach (var item in Secrets)
                 {
-                    writer.WriteObjectValue(item);
+                    if (item != null)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -121,7 +128,14 @@ namespace MgmtAcronymMapping.Models
                     List<VaultSecretGroup> array = new List<VaultSecretGroup>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(VaultSecretGroup.DeserializeVaultSecretGroup(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(VaultSecretGroup.DeserializeVaultSecretGroup(item));
+                        }
                     }
                     secrets = array;
                     continue;

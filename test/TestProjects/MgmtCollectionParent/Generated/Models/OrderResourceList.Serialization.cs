@@ -33,7 +33,14 @@ namespace MgmtCollectionParent.Models
                     List<OrderResourceData> array = new List<OrderResourceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(OrderResourceData.DeserializeOrderResourceData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(OrderResourceData.DeserializeOrderResourceData(item));
+                        }
                     }
                     value = array;
                     continue;

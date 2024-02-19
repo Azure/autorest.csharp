@@ -28,41 +28,69 @@ namespace _Type.Union.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("model"u8);
+            if (Model != null)
+            {
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Model);
 #else
-            using (JsonDocument document = JsonDocument.Parse(Model))
-            {
-                JsonSerializer.Serialize(writer, document.RootElement);
-            }
+                using (JsonDocument document = JsonDocument.Parse(Model))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
 #endif
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             writer.WritePropertyName("literal"u8);
+            if (Literal != null)
+            {
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Literal);
 #else
-            using (JsonDocument document = JsonDocument.Parse(Literal))
-            {
-                JsonSerializer.Serialize(writer, document.RootElement);
-            }
+                using (JsonDocument document = JsonDocument.Parse(Literal))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
 #endif
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             writer.WritePropertyName("int"u8);
+            if (Int != null)
+            {
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Int);
 #else
-            using (JsonDocument document = JsonDocument.Parse(Int))
-            {
-                JsonSerializer.Serialize(writer, document.RootElement);
-            }
+                using (JsonDocument document = JsonDocument.Parse(Int))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
 #endif
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             writer.WritePropertyName("boolean"u8);
+            if (Boolean != null)
+            {
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Boolean);
 #else
-            using (JsonDocument document = JsonDocument.Parse(Boolean))
-            {
-                JsonSerializer.Serialize(writer, document.RootElement);
-            }
+                using (JsonDocument document = JsonDocument.Parse(Boolean))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
 #endif
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)

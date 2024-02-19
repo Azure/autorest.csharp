@@ -30,7 +30,7 @@ namespace Azure.ResourceManager.Sample.Models
             if (Optional.IsDefined(ColocationStatus))
             {
                 writer.WritePropertyName("colocationStatus"u8);
-                writer.WriteObjectValue(ColocationStatus);
+                ((IJsonModel<InstanceViewStatus>)ColocationStatus).Write(writer, options);
             }
             if (Optional.IsDefined(Id))
             {

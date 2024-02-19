@@ -69,7 +69,14 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in SourceApplicationSecurityGroups)
                 {
-                    writer.WriteObjectValue(item);
+                    if (item != null)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -94,7 +101,14 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in DestinationApplicationSecurityGroups)
                 {
-                    writer.WriteObjectValue(item);
+                    if (item != null)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -240,7 +254,14 @@ namespace Azure.Network.Management.Interface.Models
                             List<ApplicationSecurityGroup> array = new List<ApplicationSecurityGroup>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(ApplicationSecurityGroup.DeserializeApplicationSecurityGroup(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(ApplicationSecurityGroup.DeserializeApplicationSecurityGroup(item));
+                                }
                             }
                             sourceApplicationSecurityGroups = array;
                             continue;
@@ -273,7 +294,14 @@ namespace Azure.Network.Management.Interface.Models
                             List<ApplicationSecurityGroup> array = new List<ApplicationSecurityGroup>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(ApplicationSecurityGroup.DeserializeApplicationSecurityGroup(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(ApplicationSecurityGroup.DeserializeApplicationSecurityGroup(item));
+                                }
                             }
                             destinationApplicationSecurityGroups = array;
                             continue;

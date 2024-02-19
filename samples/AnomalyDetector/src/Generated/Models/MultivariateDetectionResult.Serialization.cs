@@ -33,7 +33,14 @@ namespace AnomalyDetector.Models
                 writer.WriteStringValue(ResultId);
             }
             writer.WritePropertyName("summary"u8);
-            ((IJsonModel<MultivariateBatchDetectionResultSummary>)Summary).Write(writer, options);
+            if (Summary != null)
+            {
+                ((IJsonModel<MultivariateBatchDetectionResultSummary>)Summary).Write(writer, options);
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             writer.WritePropertyName("results"u8);
             writer.WriteStartArray();
             foreach (var item in Results)

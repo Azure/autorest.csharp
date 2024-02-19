@@ -23,7 +23,14 @@ namespace MgmtExpandResourceTypes.Models
                 writer.WriteStartArray();
                 foreach (var item in TargetResources)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    if (item != null)
+                    {
+                        JsonSerializer.Serialize(writer, item);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }

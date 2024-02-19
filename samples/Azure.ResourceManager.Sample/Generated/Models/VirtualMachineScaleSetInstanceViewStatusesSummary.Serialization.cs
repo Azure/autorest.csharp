@@ -34,7 +34,14 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in StatusesSummary)
                 {
-                    writer.WriteObjectValue(item);
+                    if (item != null)
+                    {
+                        ((IJsonModel<VirtualMachineStatusCodeCount>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -90,7 +97,14 @@ namespace Azure.ResourceManager.Sample.Models
                     List<VirtualMachineStatusCodeCount> array = new List<VirtualMachineStatusCodeCount>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(VirtualMachineStatusCodeCount.DeserializeVirtualMachineStatusCodeCount(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(VirtualMachineStatusCodeCount.DeserializeVirtualMachineStatusCodeCount(item));
+                        }
                     }
                     statusesSummary = array;
                     continue;

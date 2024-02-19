@@ -32,7 +32,14 @@ namespace MgmtSupersetFlattenInheritance.Models
                     List<CustomModel2> array = new List<CustomModel2>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CustomModel2.DeserializeCustomModel2(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(CustomModel2.DeserializeCustomModel2(item));
+                        }
                     }
                     value = array;
                     continue;

@@ -40,7 +40,14 @@ namespace MgmtExpandResourceTypes.Models
                             List<DnsResourceReference> array = new List<DnsResourceReference>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(DnsResourceReference.DeserializeDnsResourceReference(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(DnsResourceReference.DeserializeDnsResourceReference(item));
+                                }
                             }
                             dnsResourceReferences = array;
                             continue;

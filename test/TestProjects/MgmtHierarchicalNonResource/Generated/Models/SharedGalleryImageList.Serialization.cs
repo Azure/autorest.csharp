@@ -28,7 +28,14 @@ namespace MgmtHierarchicalNonResource.Models
                     List<SharedGalleryImage> array = new List<SharedGalleryImage>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(SharedGalleryImage.DeserializeSharedGalleryImage(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(SharedGalleryImage.DeserializeSharedGalleryImage(item));
+                        }
                     }
                     value = array;
                     continue;

@@ -26,7 +26,14 @@ namespace OpenAI.Models
             writer.WritePropertyName("prompt"u8);
             writer.WriteStringValue(Prompt);
             writer.WritePropertyName("image"u8);
-            writer.WriteBase64StringValue(Image.ToArray(), "D");
+            if (Image != null)
+            {
+                writer.WriteBase64StringValue(Image.ToArray(), "D");
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             if (OptionalProperty.IsDefined(Mask))
             {
                 writer.WritePropertyName("mask"u8);

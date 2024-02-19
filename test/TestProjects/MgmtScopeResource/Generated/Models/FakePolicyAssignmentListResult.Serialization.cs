@@ -33,7 +33,14 @@ namespace MgmtScopeResource.Models
                     List<FakePolicyAssignmentData> array = new List<FakePolicyAssignmentData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(FakePolicyAssignmentData.DeserializeFakePolicyAssignmentData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(FakePolicyAssignmentData.DeserializeFakePolicyAssignmentData(item));
+                        }
                     }
                     value = array;
                     continue;

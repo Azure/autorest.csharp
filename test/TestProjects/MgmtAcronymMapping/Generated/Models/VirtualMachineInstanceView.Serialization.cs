@@ -110,7 +110,14 @@ namespace MgmtAcronymMapping.Models
                     List<DiskInstanceView> array = new List<DiskInstanceView>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DiskInstanceView.DeserializeDiskInstanceView(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(DiskInstanceView.DeserializeDiskInstanceView(item));
+                        }
                     }
                     disks = array;
                     continue;
@@ -147,7 +154,14 @@ namespace MgmtAcronymMapping.Models
                     List<InstanceViewStatus> array = new List<InstanceViewStatus>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(InstanceViewStatus.DeserializeInstanceViewStatus(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(InstanceViewStatus.DeserializeInstanceViewStatus(item));
+                        }
                     }
                     statuses = array;
                     continue;

@@ -23,7 +23,14 @@ namespace MgmtMockAndSample.Models
                 JsonSerializer.Serialize(writer, SourceVault);
             }
             writer.WritePropertyName("keyUrl"u8);
-            writer.WriteStringValue(KeyUri.AbsoluteUri);
+            if (KeyUri != null)
+            {
+                writer.WriteStringValue(KeyUri.AbsoluteUri);
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             writer.WriteEndObject();
         }
 

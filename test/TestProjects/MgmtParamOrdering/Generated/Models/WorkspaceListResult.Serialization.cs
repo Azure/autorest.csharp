@@ -29,7 +29,14 @@ namespace MgmtParamOrdering.Models
                     List<WorkspaceData> array = new List<WorkspaceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(WorkspaceData.DeserializeWorkspaceData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(WorkspaceData.DeserializeWorkspaceData(item));
+                        }
                     }
                     value = array;
                     continue;

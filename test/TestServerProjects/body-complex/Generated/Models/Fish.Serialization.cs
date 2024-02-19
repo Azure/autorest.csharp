@@ -41,7 +41,14 @@ namespace body_complex.Models
                 writer.WriteStartArray();
                 foreach (var item in Siblings)
                 {
-                    ((IJsonModel<Fish>)item).Write(writer, options);
+                    if (item != null)
+                    {
+                        ((IJsonModel<Fish>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }

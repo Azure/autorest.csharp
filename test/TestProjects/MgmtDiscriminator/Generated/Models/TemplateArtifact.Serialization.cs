@@ -34,7 +34,14 @@ namespace MgmtDiscriminator.Models
             if (options.Format != "W")
             {
                 writer.WritePropertyName("id"u8);
-                writer.WriteStringValue(Id);
+                if (Id != null)
+                {
+                    writer.WriteStringValue(Id);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             if (options.Format != "W")
             {
@@ -54,14 +61,21 @@ namespace MgmtDiscriminator.Models
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
             writer.WritePropertyName("template"u8);
+            if (Template != null)
+            {
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Template);
 #else
-            using (JsonDocument document = JsonDocument.Parse(Template))
-            {
-                JsonSerializer.Serialize(writer, document.RootElement);
-            }
+                using (JsonDocument document = JsonDocument.Parse(Template))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
 #endif
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             if (Optional.IsDefined(ResourceGroup))
             {
                 writer.WritePropertyName("resourceGroup"u8);
@@ -72,19 +86,21 @@ namespace MgmtDiscriminator.Models
             foreach (var item in Parameters)
             {
                 writer.WritePropertyName(item.Key);
-                if (item.Value == null)
+                if (item.Value != null)
                 {
-                    writer.WriteNullValue();
-                    continue;
-                }
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                using (JsonDocument document = JsonDocument.Parse(item.Value))
-                {
-                    JsonSerializer.Serialize(writer, document.RootElement);
-                }
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             writer.WriteEndObject();
             writer.WriteEndObject();

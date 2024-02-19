@@ -29,7 +29,14 @@ namespace MgmtExtensionCommonRestOperation.Models
                     List<TypeTwoData> array = new List<TypeTwoData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(TypeTwoData.DeserializeTypeTwoData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(TypeTwoData.DeserializeTypeTwoData(item));
+                        }
                     }
                     value = array;
                     continue;

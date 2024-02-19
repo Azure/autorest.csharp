@@ -3323,7 +3323,14 @@ namespace body_array
                         List<Product> array = new List<Product>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            array.Add(Product.DeserializeProduct(item));
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(Product.DeserializeProduct(item));
+                            }
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
@@ -3348,7 +3355,14 @@ namespace body_array
                         List<Product> array = new List<Product>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            array.Add(Product.DeserializeProduct(item));
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(Product.DeserializeProduct(item));
+                            }
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
@@ -3386,7 +3400,14 @@ namespace body_array
                         List<Product> array = new List<Product>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            array.Add(Product.DeserializeProduct(item));
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(Product.DeserializeProduct(item));
+                            }
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
@@ -3411,7 +3432,14 @@ namespace body_array
                         List<Product> array = new List<Product>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            array.Add(Product.DeserializeProduct(item));
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(Product.DeserializeProduct(item));
+                            }
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
@@ -3449,7 +3477,14 @@ namespace body_array
                         List<Product> array = new List<Product>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            array.Add(Product.DeserializeProduct(item));
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(Product.DeserializeProduct(item));
+                            }
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
@@ -3474,7 +3509,14 @@ namespace body_array
                         List<Product> array = new List<Product>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            array.Add(Product.DeserializeProduct(item));
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(Product.DeserializeProduct(item));
+                            }
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
@@ -3512,7 +3554,14 @@ namespace body_array
                         List<Product> array = new List<Product>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            array.Add(Product.DeserializeProduct(item));
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(Product.DeserializeProduct(item));
+                            }
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
@@ -3537,7 +3586,14 @@ namespace body_array
                         List<Product> array = new List<Product>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            array.Add(Product.DeserializeProduct(item));
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(Product.DeserializeProduct(item));
+                            }
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
@@ -3575,7 +3631,14 @@ namespace body_array
                         List<Product> array = new List<Product>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            array.Add(Product.DeserializeProduct(item));
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(Product.DeserializeProduct(item));
+                            }
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
@@ -3600,7 +3663,14 @@ namespace body_array
                         List<Product> array = new List<Product>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            array.Add(Product.DeserializeProduct(item));
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(Product.DeserializeProduct(item));
+                            }
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
@@ -3625,7 +3695,14 @@ namespace body_array
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
             {
-                content.JsonWriter.WriteObjectValue(item);
+                if (item != null)
+                {
+                    content.JsonWriter.WriteObjectValue(item);
+                }
+                else
+                {
+                    content.JsonWriter.WriteNullValue();
+                }
             }
             content.JsonWriter.WriteEndArray();
             request.Content = content;
@@ -4126,17 +4203,19 @@ namespace body_array
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
             {
-                if (item == null)
+                if (item != null)
+                {
+                    content.JsonWriter.WriteStartArray();
+                    foreach (var item0 in item)
+                    {
+                        content.JsonWriter.WriteStringValue(item0);
+                    }
+                    content.JsonWriter.WriteEndArray();
+                }
+                else
                 {
                     content.JsonWriter.WriteNullValue();
-                    continue;
                 }
-                content.JsonWriter.WriteStartArray();
-                foreach (var item0 in item)
-                {
-                    content.JsonWriter.WriteStringValue(item0);
-                }
-                content.JsonWriter.WriteEndArray();
             }
             content.JsonWriter.WriteEndArray();
             request.Content = content;
@@ -4637,18 +4716,20 @@ namespace body_array
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
             {
-                if (item == null)
+                if (item != null)
+                {
+                    content.JsonWriter.WriteStartObject();
+                    foreach (var item0 in item)
+                    {
+                        content.JsonWriter.WritePropertyName(item0.Key);
+                        content.JsonWriter.WriteStringValue(item0.Value);
+                    }
+                    content.JsonWriter.WriteEndObject();
+                }
+                else
                 {
                     content.JsonWriter.WriteNullValue();
-                    continue;
                 }
-                content.JsonWriter.WriteStartObject();
-                foreach (var item0 in item)
-                {
-                    content.JsonWriter.WritePropertyName(item0.Key);
-                    content.JsonWriter.WriteStringValue(item0.Value);
-                }
-                content.JsonWriter.WriteEndObject();
             }
             content.JsonWriter.WriteEndArray();
             request.Content = content;

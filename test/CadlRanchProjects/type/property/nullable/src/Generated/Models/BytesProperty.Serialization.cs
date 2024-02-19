@@ -32,7 +32,14 @@ namespace _Type.Property.Nullable.Models
             if (NullableProperty != null)
             {
                 writer.WritePropertyName("nullableProperty"u8);
-                writer.WriteBase64StringValue(NullableProperty.ToArray(), "D");
+                if (NullableProperty != null)
+                {
+                    writer.WriteBase64StringValue(NullableProperty.ToArray(), "D");
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             else
             {

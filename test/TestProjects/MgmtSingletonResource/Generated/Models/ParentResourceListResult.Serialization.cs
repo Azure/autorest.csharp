@@ -29,7 +29,14 @@ namespace MgmtSingletonResource.Models
                     List<ParentResourceData> array = new List<ParentResourceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ParentResourceData.DeserializeParentResourceData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(ParentResourceData.DeserializeParentResourceData(item));
+                        }
                     }
                     value = array;
                     continue;

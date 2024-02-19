@@ -27,7 +27,14 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WriteStartArray();
                 foreach (var item in ResourceAccessRules)
                 {
-                    writer.WriteObjectValue(item);
+                    if (item != null)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -37,7 +44,14 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WriteStartArray();
                 foreach (var item in VirtualNetworkRules)
                 {
-                    writer.WriteObjectValue(item);
+                    if (item != null)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -47,7 +61,14 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WriteStartArray();
                 foreach (var item in IpRules)
                 {
-                    writer.WriteObjectValue(item);
+                    if (item != null)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -87,7 +108,14 @@ namespace Azure.ResourceManager.Storage.Models
                     List<ResourceAccessRule> array = new List<ResourceAccessRule>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ResourceAccessRule.DeserializeResourceAccessRule(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(ResourceAccessRule.DeserializeResourceAccessRule(item));
+                        }
                     }
                     resourceAccessRules = array;
                     continue;
@@ -101,7 +129,14 @@ namespace Azure.ResourceManager.Storage.Models
                     List<VirtualNetworkRule> array = new List<VirtualNetworkRule>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(VirtualNetworkRule.DeserializeVirtualNetworkRule(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(VirtualNetworkRule.DeserializeVirtualNetworkRule(item));
+                        }
                     }
                     virtualNetworkRules = array;
                     continue;
@@ -115,7 +150,14 @@ namespace Azure.ResourceManager.Storage.Models
                     List<IPRule> array = new List<IPRule>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(IPRule.DeserializeIPRule(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(IPRule.DeserializeIPRule(item));
+                        }
                     }
                     ipRules = array;
                     continue;

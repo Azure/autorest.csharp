@@ -33,7 +33,14 @@ namespace MgmtMockAndSample.Models
                     List<RoleAssignmentData> array = new List<RoleAssignmentData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(RoleAssignmentData.DeserializeRoleAssignmentData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(RoleAssignmentData.DeserializeRoleAssignmentData(item));
+                        }
                     }
                     value = array;
                     continue;

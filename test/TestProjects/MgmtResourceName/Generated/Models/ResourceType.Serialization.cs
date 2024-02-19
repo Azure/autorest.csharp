@@ -43,7 +43,14 @@ namespace MgmtResourceName.Models
                     List<ResourceOperation> array = new List<ResourceOperation>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ResourceOperation.DeserializeResourceOperation(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(ResourceOperation.DeserializeResourceOperation(item));
+                        }
                     }
                     operations = array;
                     continue;

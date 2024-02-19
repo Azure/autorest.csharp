@@ -44,7 +44,14 @@ namespace MgmtDiscriminator.Models
                 writer.WriteStartArray();
                 foreach (var item in Actions)
                 {
-                    ((IJsonModel<DeliveryRuleAction>)item).Write(writer, options);
+                    if (item != null)
+                    {
+                        ((IJsonModel<DeliveryRuleAction>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -55,7 +62,14 @@ namespace MgmtDiscriminator.Models
                 foreach (var item in ExtraMappingInfo)
                 {
                     writer.WritePropertyName(item.Key);
-                    ((IJsonModel<DeliveryRuleAction>)item.Value).Write(writer, options);
+                    if (item.Value != null)
+                    {
+                        ((IJsonModel<DeliveryRuleAction>)item.Value).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndObject();
             }
@@ -144,7 +158,14 @@ namespace MgmtDiscriminator.Models
                     List<DeliveryRuleAction> array = new List<DeliveryRuleAction>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DeliveryRuleAction.DeserializeDeliveryRuleAction(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(DeliveryRuleAction.DeserializeDeliveryRuleAction(item));
+                        }
                     }
                     actions = array;
                     continue;
@@ -158,7 +179,14 @@ namespace MgmtDiscriminator.Models
                     Dictionary<string, DeliveryRuleAction> dictionary = new Dictionary<string, DeliveryRuleAction>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        dictionary.Add(property0.Name, DeliveryRuleAction.DeserializeDeliveryRuleAction(property0.Value));
+                        if (property0.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            dictionary.Add(property0.Name, null);
+                        }
+                        else
+                        {
+                            dictionary.Add(property0.Name, DeliveryRuleAction.DeserializeDeliveryRuleAction(property0.Value));
+                        }
                     }
                     extraMappingInfo = dictionary;
                     continue;

@@ -40,7 +40,14 @@ namespace CognitiveServices.TextAnalytics.Models
                     List<TextAnalyticsWarning> array = new List<TextAnalyticsWarning>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(TextAnalyticsWarning.DeserializeTextAnalyticsWarning(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(TextAnalyticsWarning.DeserializeTextAnalyticsWarning(item));
+                        }
                     }
                     warnings = array;
                     continue;

@@ -29,7 +29,14 @@ namespace MgmtConstants.Models
                     List<OptionalMachineData> array = new List<OptionalMachineData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(OptionalMachineData.DeserializeOptionalMachineData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(OptionalMachineData.DeserializeOptionalMachineData(item));
+                        }
                     }
                     value = array;
                     continue;

@@ -33,7 +33,14 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteStartArray();
             foreach (var item in Value)
             {
-                writer.WriteObjectValue(item);
+                if (item != null)
+                {
+                    ((IJsonModel<ProximityPlacementGroupData>)item).Write(writer, options);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             writer.WriteEndArray();
             if (Optional.IsDefined(NextLink))
@@ -90,7 +97,14 @@ namespace Azure.ResourceManager.Sample.Models
                     List<ProximityPlacementGroupData> array = new List<ProximityPlacementGroupData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ProximityPlacementGroupData.DeserializeProximityPlacementGroupData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(ProximityPlacementGroupData.DeserializeProximityPlacementGroupData(item));
+                        }
                     }
                     value = array;
                     continue;

@@ -33,7 +33,14 @@ namespace Azure.ResourceManager.Storage.Models
                     List<DeletedAccountData> array = new List<DeletedAccountData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DeletedAccountData.DeserializeDeletedAccountData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(DeletedAccountData.DeserializeDeletedAccountData(item));
+                        }
                     }
                     value = array;
                     continue;

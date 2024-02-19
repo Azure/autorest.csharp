@@ -28,14 +28,21 @@ namespace _Type.Union.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("prop"u8);
+            if (Prop != null)
+            {
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Prop);
 #else
-            using (JsonDocument document = JsonDocument.Parse(Prop))
-            {
-                JsonSerializer.Serialize(writer, document.RootElement);
-            }
+                using (JsonDocument document = JsonDocument.Parse(Prop))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
 #endif
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)

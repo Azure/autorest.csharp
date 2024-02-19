@@ -32,7 +32,14 @@ namespace MgmtListMethods.Models
                     List<UpdateWorkspaceQuotas> array = new List<UpdateWorkspaceQuotas>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(UpdateWorkspaceQuotas.DeserializeUpdateWorkspaceQuotas(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(UpdateWorkspaceQuotas.DeserializeUpdateWorkspaceQuotas(item));
+                        }
                     }
                     value = array;
                     continue;

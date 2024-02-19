@@ -57,7 +57,14 @@ namespace UnbrandedTypeSpec.Models
             }
             writer.WriteEndObject();
             writer.WritePropertyName("requiredModel"u8);
-            ((IJsonModel<Thing>)RequiredModel).Write(writer, options);
+            if (RequiredModel != null)
+            {
+                ((IJsonModel<Thing>)RequiredModel).Write(writer, options);
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             if (OptionalProperty.IsDefined(IntExtensibleEnum))
             {
                 writer.WritePropertyName("intExtensibleEnum"u8);
@@ -131,14 +138,21 @@ namespace UnbrandedTypeSpec.Models
                 }
             }
             writer.WritePropertyName("requiredUnknown"u8);
+            if (RequiredUnknown != null)
+            {
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(RequiredUnknown);
 #else
-            using (JsonDocument document = JsonDocument.Parse(RequiredUnknown))
-            {
-                JsonSerializer.Serialize(writer, document.RootElement);
-            }
+                using (JsonDocument document = JsonDocument.Parse(RequiredUnknown))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
 #endif
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             if (OptionalProperty.IsDefined(OptionalUnknown))
             {
                 writer.WritePropertyName("optionalUnknown"u8);
@@ -249,7 +263,14 @@ namespace UnbrandedTypeSpec.Models
                 writer.WriteEndObject();
             }
             writer.WritePropertyName("modelWithRequiredNullable"u8);
-            ((IJsonModel<ModelWithRequiredNullableProperties>)ModelWithRequiredNullable).Write(writer, options);
+            if (ModelWithRequiredNullable != null)
+            {
+                ((IJsonModel<ModelWithRequiredNullableProperties>)ModelWithRequiredNullable).Write(writer, options);
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)

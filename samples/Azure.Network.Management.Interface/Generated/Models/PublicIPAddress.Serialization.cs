@@ -80,7 +80,14 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in IpTags)
                 {
-                    writer.WriteObjectValue(item);
+                    if (item != null)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -255,7 +262,14 @@ namespace Azure.Network.Management.Interface.Models
                             List<IpTag> array = new List<IpTag>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(IpTag.DeserializeIpTag(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(IpTag.DeserializeIpTag(item));
+                                }
                             }
                             ipTags = array;
                             continue;

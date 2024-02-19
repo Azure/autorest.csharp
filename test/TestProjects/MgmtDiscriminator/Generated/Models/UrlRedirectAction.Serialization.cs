@@ -28,7 +28,14 @@ namespace MgmtDiscriminator.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("parameters"u8);
-            ((IJsonModel<UrlRedirectActionParameters>)Parameters).Write(writer, options);
+            if (Parameters != null)
+            {
+                ((IJsonModel<UrlRedirectActionParameters>)Parameters).Write(writer, options);
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name.ToString());
             if (options.Format != "W" && Optional.IsDefined(Foo))

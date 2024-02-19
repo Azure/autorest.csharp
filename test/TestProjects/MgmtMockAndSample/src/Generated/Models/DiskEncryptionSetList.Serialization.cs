@@ -29,7 +29,14 @@ namespace MgmtMockAndSample.Models
                     List<DiskEncryptionSetData> array = new List<DiskEncryptionSetData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DiskEncryptionSetData.DeserializeDiskEncryptionSetData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(DiskEncryptionSetData.DeserializeDiskEncryptionSetData(item));
+                        }
                     }
                     value = array;
                     continue;

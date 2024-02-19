@@ -26,7 +26,14 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStringValue(ApplicationId.Value);
             }
             writer.WritePropertyName("permissions"u8);
-            writer.WriteObjectValue(Permissions);
+            if (Permissions != null)
+            {
+                writer.WriteObjectValue(Permissions);
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             writer.WriteEndObject();
         }
 

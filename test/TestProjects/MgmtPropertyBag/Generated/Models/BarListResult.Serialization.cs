@@ -29,7 +29,14 @@ namespace MgmtPropertyBag.Models
                     List<BarData> array = new List<BarData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(BarData.DeserializeBarData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(BarData.DeserializeBarData(item));
+                        }
                     }
                     value = array;
                     continue;

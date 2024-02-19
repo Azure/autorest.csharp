@@ -37,7 +37,14 @@ namespace body_complex.Models
                 writer.WriteStartArray();
                 foreach (var item in Salmons)
                 {
-                    ((IJsonModel<DotSalmon>)item).Write(writer, options);
+                    if (item != null)
+                    {
+                        ((IJsonModel<DotSalmon>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -52,7 +59,14 @@ namespace body_complex.Models
                 writer.WriteStartArray();
                 foreach (var item in Fishes)
                 {
-                    ((IJsonModel<DotFish>)item).Write(writer, options);
+                    if (item != null)
+                    {
+                        ((IJsonModel<DotFish>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -120,7 +134,14 @@ namespace body_complex.Models
                     List<DotSalmon> array = new List<DotSalmon>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DotSalmon.DeserializeDotSalmon(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(DotSalmon.DeserializeDotSalmon(item));
+                        }
                     }
                     salmons = array;
                     continue;
@@ -143,7 +164,14 @@ namespace body_complex.Models
                     List<DotFish> array = new List<DotFish>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DotFish.DeserializeDotFish(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(DotFish.DeserializeDotFish(item));
+                        }
                     }
                     fishes = array;
                     continue;

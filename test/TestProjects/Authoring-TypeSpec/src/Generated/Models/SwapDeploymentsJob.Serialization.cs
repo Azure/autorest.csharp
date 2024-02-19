@@ -61,7 +61,14 @@ namespace AuthoringTypeSpec.Models
             }
             writer.WriteEndArray();
             writer.WritePropertyName("errors"u8);
-            JsonSerializer.Serialize(writer, Errors);
+            if (Errors != null)
+            {
+                JsonSerializer.Serialize(writer, Errors);
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             if (options.Format != "W")
             {
                 writer.WritePropertyName("id"u8);

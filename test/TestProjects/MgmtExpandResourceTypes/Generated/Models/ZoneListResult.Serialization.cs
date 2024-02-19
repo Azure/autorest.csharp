@@ -33,7 +33,14 @@ namespace MgmtExpandResourceTypes.Models
                     List<ZoneData> array = new List<ZoneData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ZoneData.DeserializeZoneData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(ZoneData.DeserializeZoneData(item));
+                        }
                     }
                     value = array;
                     continue;

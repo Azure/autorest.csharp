@@ -40,7 +40,14 @@ namespace Azure.ResourceManager.Fake.Models
                     List<PrivateEndpointConnectionData> array = new List<PrivateEndpointConnectionData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(PrivateEndpointConnectionData.DeserializePrivateEndpointConnectionData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(PrivateEndpointConnectionData.DeserializePrivateEndpointConnectionData(item));
+                        }
                     }
                     value = array;
                     continue;

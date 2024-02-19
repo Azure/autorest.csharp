@@ -31,7 +31,14 @@ namespace Azure.ResourceManager.Storage.Models
                     List<StoragePrivateLinkResource> array = new List<StoragePrivateLinkResource>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(StoragePrivateLinkResource.DeserializeStoragePrivateLinkResource(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(StoragePrivateLinkResource.DeserializeStoragePrivateLinkResource(item));
+                        }
                     }
                     value = array;
                     continue;

@@ -25,7 +25,14 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WritePropertyName("type"u8);
             writer.WriteStringValue(RuleType.ToString());
             writer.WritePropertyName("definition"u8);
-            writer.WriteObjectValue(Definition);
+            if (Definition != null)
+            {
+                writer.WriteObjectValue(Definition);
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             writer.WriteEndObject();
         }
 

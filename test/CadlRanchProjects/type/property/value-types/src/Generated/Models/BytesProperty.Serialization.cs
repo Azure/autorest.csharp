@@ -28,7 +28,14 @@ namespace _Type.Property.ValueTypes.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("property"u8);
-            writer.WriteBase64StringValue(Property.ToArray(), "D");
+            if (Property != null)
+            {
+                writer.WriteBase64StringValue(Property.ToArray(), "D");
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)

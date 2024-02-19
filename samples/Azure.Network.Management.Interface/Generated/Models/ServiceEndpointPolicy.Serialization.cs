@@ -45,7 +45,14 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in ServiceEndpointPolicyDefinitions)
                 {
-                    writer.WriteObjectValue(item);
+                    if (item != null)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -128,7 +135,14 @@ namespace Azure.Network.Management.Interface.Models
                             List<ServiceEndpointPolicyDefinition> array = new List<ServiceEndpointPolicyDefinition>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(ServiceEndpointPolicyDefinition.DeserializeServiceEndpointPolicyDefinition(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(ServiceEndpointPolicyDefinition.DeserializeServiceEndpointPolicyDefinition(item));
+                                }
                             }
                             serviceEndpointPolicyDefinitions = array;
                             continue;
@@ -142,7 +156,14 @@ namespace Azure.Network.Management.Interface.Models
                             List<Subnet> array = new List<Subnet>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(Subnet.DeserializeSubnet(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(Subnet.DeserializeSubnet(item));
+                                }
                             }
                             subnets = array;
                             continue;

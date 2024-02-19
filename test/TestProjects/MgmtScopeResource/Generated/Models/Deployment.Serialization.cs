@@ -21,7 +21,14 @@ namespace MgmtScopeResource.Models
                 writer.WriteStringValue(Location);
             }
             writer.WritePropertyName("properties"u8);
-            writer.WriteObjectValue(Properties);
+            if (Properties != null)
+            {
+                writer.WriteObjectValue(Properties);
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags"u8);

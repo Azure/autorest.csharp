@@ -32,7 +32,14 @@ namespace MgmtOmitOperationGroups.Models
                     List<Model5> array = new List<Model5>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Model5.DeserializeModel5(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(Model5.DeserializeModel5(item));
+                        }
                     }
                     value = array;
                     continue;

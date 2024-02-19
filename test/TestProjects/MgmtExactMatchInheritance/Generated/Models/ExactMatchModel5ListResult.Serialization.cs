@@ -33,7 +33,14 @@ namespace MgmtExactMatchInheritance.Models
                     List<ExactMatchModel5Data> array = new List<ExactMatchModel5Data>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ExactMatchModel5Data.DeserializeExactMatchModel5Data(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(ExactMatchModel5Data.DeserializeExactMatchModel5Data(item));
+                        }
                     }
                     value = array;
                     continue;

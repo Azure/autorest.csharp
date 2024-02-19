@@ -172,7 +172,14 @@ namespace MgmtMockAndSample
                             List<KeyForDiskEncryptionSet> array = new List<KeyForDiskEncryptionSet>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(KeyForDiskEncryptionSet.DeserializeKeyForDiskEncryptionSet(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(KeyForDiskEncryptionSet.DeserializeKeyForDiskEncryptionSet(item));
+                                }
                             }
                             previousKeys = array;
                             continue;

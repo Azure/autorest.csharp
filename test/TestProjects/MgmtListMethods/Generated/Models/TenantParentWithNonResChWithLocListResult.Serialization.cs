@@ -29,7 +29,14 @@ namespace MgmtListMethods.Models
                     List<TenantParentWithNonResChWithLocData> array = new List<TenantParentWithNonResChWithLocData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(TenantParentWithNonResChWithLocData.DeserializeTenantParentWithNonResChWithLocData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(TenantParentWithNonResChWithLocData.DeserializeTenantParentWithNonResChWithLocData(item));
+                        }
                     }
                     value = array;
                     continue;

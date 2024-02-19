@@ -32,7 +32,14 @@ namespace MgmtScopeResource.Models
                     List<GuestConfigurationAssignmentData> array = new List<GuestConfigurationAssignmentData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(GuestConfigurationAssignmentData.DeserializeGuestConfigurationAssignmentData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(GuestConfigurationAssignmentData.DeserializeGuestConfigurationAssignmentData(item));
+                        }
                     }
                     value = array;
                     continue;

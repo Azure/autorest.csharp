@@ -28,7 +28,14 @@ namespace MgmtAcronymMapping.Models
                     List<VirtualMachineScaleSetSku> array = new List<VirtualMachineScaleSetSku>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(VirtualMachineScaleSetSku.DeserializeVirtualMachineScaleSetSku(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(VirtualMachineScaleSetSku.DeserializeVirtualMachineScaleSetSku(item));
+                        }
                     }
                     value = array;
                     continue;

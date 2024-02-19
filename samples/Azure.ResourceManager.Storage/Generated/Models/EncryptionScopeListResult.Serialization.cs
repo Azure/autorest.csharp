@@ -33,7 +33,14 @@ namespace Azure.ResourceManager.Storage.Models
                     List<EncryptionScopeData> array = new List<EncryptionScopeData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(EncryptionScopeData.DeserializeEncryptionScopeData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(EncryptionScopeData.DeserializeEncryptionScopeData(item));
+                        }
                     }
                     value = array;
                     continue;

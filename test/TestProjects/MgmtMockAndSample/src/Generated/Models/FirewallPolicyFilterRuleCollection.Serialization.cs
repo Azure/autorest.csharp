@@ -27,7 +27,14 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in Rules)
                 {
-                    writer.WriteObjectValue(item);
+                    if (item != null)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -77,7 +84,14 @@ namespace MgmtMockAndSample.Models
                     List<FirewallPolicyRule> array = new List<FirewallPolicyRule>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(FirewallPolicyRule.DeserializeFirewallPolicyRule(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(FirewallPolicyRule.DeserializeFirewallPolicyRule(item));
+                        }
                     }
                     rules = array;
                     continue;

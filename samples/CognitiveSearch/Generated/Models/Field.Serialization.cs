@@ -81,7 +81,14 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in Fields)
                 {
-                    writer.WriteObjectValue(item);
+                    if (item != null)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -223,7 +230,14 @@ namespace CognitiveSearch.Models
                     List<Field> array = new List<Field>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DeserializeField(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(DeserializeField(item));
+                        }
                     }
                     fields = array;
                     continue;

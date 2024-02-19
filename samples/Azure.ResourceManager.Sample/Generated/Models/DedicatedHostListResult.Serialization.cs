@@ -33,7 +33,14 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteStartArray();
             foreach (var item in Value)
             {
-                writer.WriteObjectValue(item);
+                if (item != null)
+                {
+                    ((IJsonModel<DedicatedHostData>)item).Write(writer, options);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             writer.WriteEndArray();
             if (Optional.IsDefined(NextLink))
@@ -90,7 +97,14 @@ namespace Azure.ResourceManager.Sample.Models
                     List<DedicatedHostData> array = new List<DedicatedHostData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DedicatedHostData.DeserializeDedicatedHostData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(DedicatedHostData.DeserializeDedicatedHostData(item));
+                        }
                     }
                     value = array;
                     continue;

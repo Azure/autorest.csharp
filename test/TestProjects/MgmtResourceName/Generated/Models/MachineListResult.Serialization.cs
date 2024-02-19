@@ -33,7 +33,14 @@ namespace MgmtResourceName.Models
                     List<MachineData> array = new List<MachineData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(MachineData.DeserializeMachineData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(MachineData.DeserializeMachineData(item));
+                        }
                     }
                     value = array;
                     continue;

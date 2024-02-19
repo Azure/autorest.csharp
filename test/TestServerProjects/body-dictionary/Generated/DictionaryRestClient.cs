@@ -3080,7 +3080,14 @@ namespace body_dictionary
                             Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                                }
                             }
                             value = dictionary;
                         }
@@ -3112,7 +3119,14 @@ namespace body_dictionary
                             Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                                }
                             }
                             value = dictionary;
                         }
@@ -3151,7 +3165,14 @@ namespace body_dictionary
                         Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
-                            dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                            if (property.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                dictionary.Add(property.Name, null);
+                            }
+                            else
+                            {
+                                dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                            }
                         }
                         value = dictionary;
                         return Response.FromValue(value, message.Response);
@@ -3176,7 +3197,14 @@ namespace body_dictionary
                         Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
-                            dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                            if (property.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                dictionary.Add(property.Name, null);
+                            }
+                            else
+                            {
+                                dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                            }
                         }
                         value = dictionary;
                         return Response.FromValue(value, message.Response);
@@ -3214,7 +3242,14 @@ namespace body_dictionary
                         Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
-                            dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                            if (property.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                dictionary.Add(property.Name, null);
+                            }
+                            else
+                            {
+                                dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                            }
                         }
                         value = dictionary;
                         return Response.FromValue(value, message.Response);
@@ -3239,7 +3274,14 @@ namespace body_dictionary
                         Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
-                            dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                            if (property.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                dictionary.Add(property.Name, null);
+                            }
+                            else
+                            {
+                                dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                            }
                         }
                         value = dictionary;
                         return Response.FromValue(value, message.Response);
@@ -3277,7 +3319,14 @@ namespace body_dictionary
                         Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
-                            dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                            if (property.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                dictionary.Add(property.Name, null);
+                            }
+                            else
+                            {
+                                dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                            }
                         }
                         value = dictionary;
                         return Response.FromValue(value, message.Response);
@@ -3302,7 +3351,14 @@ namespace body_dictionary
                         Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
-                            dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                            if (property.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                dictionary.Add(property.Name, null);
+                            }
+                            else
+                            {
+                                dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                            }
                         }
                         value = dictionary;
                         return Response.FromValue(value, message.Response);
@@ -3340,7 +3396,14 @@ namespace body_dictionary
                         Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
-                            dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                            if (property.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                dictionary.Add(property.Name, null);
+                            }
+                            else
+                            {
+                                dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                            }
                         }
                         value = dictionary;
                         return Response.FromValue(value, message.Response);
@@ -3365,7 +3428,14 @@ namespace body_dictionary
                         Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
-                            dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                            if (property.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                dictionary.Add(property.Name, null);
+                            }
+                            else
+                            {
+                                dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                            }
                         }
                         value = dictionary;
                         return Response.FromValue(value, message.Response);
@@ -3391,7 +3461,14 @@ namespace body_dictionary
             foreach (var item in arrayBody)
             {
                 content.JsonWriter.WritePropertyName(item.Key);
-                content.JsonWriter.WriteObjectValue(item.Value);
+                if (item.Value != null)
+                {
+                    content.JsonWriter.WriteObjectValue(item.Value);
+                }
+                else
+                {
+                    content.JsonWriter.WriteNullValue();
+                }
             }
             content.JsonWriter.WriteEndObject();
             request.Content = content;
@@ -3907,17 +3984,19 @@ namespace body_dictionary
             foreach (var item in arrayBody)
             {
                 content.JsonWriter.WritePropertyName(item.Key);
-                if (item.Value == null)
+                if (item.Value != null)
+                {
+                    content.JsonWriter.WriteStartArray();
+                    foreach (var item0 in item.Value)
+                    {
+                        content.JsonWriter.WriteStringValue(item0);
+                    }
+                    content.JsonWriter.WriteEndArray();
+                }
+                else
                 {
                     content.JsonWriter.WriteNullValue();
-                    continue;
                 }
-                content.JsonWriter.WriteStartArray();
-                foreach (var item0 in item.Value)
-                {
-                    content.JsonWriter.WriteStringValue(item0);
-                }
-                content.JsonWriter.WriteEndArray();
             }
             content.JsonWriter.WriteEndObject();
             request.Content = content;
@@ -4419,18 +4498,20 @@ namespace body_dictionary
             foreach (var item in arrayBody)
             {
                 content.JsonWriter.WritePropertyName(item.Key);
-                if (item.Value == null)
+                if (item.Value != null)
+                {
+                    content.JsonWriter.WriteStartObject();
+                    foreach (var item0 in item.Value)
+                    {
+                        content.JsonWriter.WritePropertyName(item0.Key);
+                        content.JsonWriter.WriteStringValue(item0.Value);
+                    }
+                    content.JsonWriter.WriteEndObject();
+                }
+                else
                 {
                     content.JsonWriter.WriteNullValue();
-                    continue;
                 }
-                content.JsonWriter.WriteStartObject();
-                foreach (var item0 in item.Value)
-                {
-                    content.JsonWriter.WritePropertyName(item0.Key);
-                    content.JsonWriter.WriteStringValue(item0.Value);
-                }
-                content.JsonWriter.WriteEndObject();
             }
             content.JsonWriter.WriteEndObject();
             request.Content = content;

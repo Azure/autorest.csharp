@@ -64,7 +64,14 @@ namespace AnomalyDetector.Models
                 writer.WriteEndArray();
             }
             writer.WritePropertyName("setupInfo"u8);
-            ((IJsonModel<MultivariateBatchDetectionOptions>)SetupInfo).Write(writer, options);
+            if (SetupInfo != null)
+            {
+                ((IJsonModel<MultivariateBatchDetectionOptions>)SetupInfo).Write(writer, options);
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)

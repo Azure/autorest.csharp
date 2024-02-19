@@ -29,7 +29,14 @@ namespace MgmtOperations.Models
                     List<AvailabilitySetChildData> array = new List<AvailabilitySetChildData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(AvailabilitySetChildData.DeserializeAvailabilitySetChildData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(AvailabilitySetChildData.DeserializeAvailabilitySetChildData(item));
+                        }
                     }
                     value = array;
                     continue;

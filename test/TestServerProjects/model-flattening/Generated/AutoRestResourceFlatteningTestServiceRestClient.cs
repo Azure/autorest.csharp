@@ -54,7 +54,14 @@ namespace model_flattening
                 content.JsonWriter.WriteStartArray();
                 foreach (var item in resourceArray)
                 {
-                    content.JsonWriter.WriteObjectValue(item);
+                    if (item != null)
+                    {
+                        content.JsonWriter.WriteObjectValue(item);
+                    }
+                    else
+                    {
+                        content.JsonWriter.WriteNullValue();
+                    }
                 }
                 content.JsonWriter.WriteEndArray();
                 request.Content = content;
@@ -122,7 +129,14 @@ namespace model_flattening
                         List<FlattenedProduct> array = new List<FlattenedProduct>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            array.Add(FlattenedProduct.DeserializeFlattenedProduct(item));
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(FlattenedProduct.DeserializeFlattenedProduct(item));
+                            }
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
@@ -147,7 +161,14 @@ namespace model_flattening
                         List<FlattenedProduct> array = new List<FlattenedProduct>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            array.Add(FlattenedProduct.DeserializeFlattenedProduct(item));
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(FlattenedProduct.DeserializeFlattenedProduct(item));
+                            }
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
@@ -174,7 +195,14 @@ namespace model_flattening
                 content.JsonWriter.WriteStartArray();
                 foreach (var item in resourceArray)
                 {
-                    content.JsonWriter.WriteObjectValue(item);
+                    if (item != null)
+                    {
+                        content.JsonWriter.WriteObjectValue(item);
+                    }
+                    else
+                    {
+                        content.JsonWriter.WriteNullValue();
+                    }
                 }
                 content.JsonWriter.WriteEndArray();
                 request.Content = content;
@@ -242,7 +270,14 @@ namespace model_flattening
                         List<ProductWrapper> array = new List<ProductWrapper>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            array.Add(ProductWrapper.DeserializeProductWrapper(item));
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(ProductWrapper.DeserializeProductWrapper(item));
+                            }
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
@@ -267,7 +302,14 @@ namespace model_flattening
                         List<ProductWrapper> array = new List<ProductWrapper>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            array.Add(ProductWrapper.DeserializeProductWrapper(item));
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(ProductWrapper.DeserializeProductWrapper(item));
+                            }
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
@@ -295,7 +337,14 @@ namespace model_flattening
                 foreach (var item in resourceDictionary)
                 {
                     content.JsonWriter.WritePropertyName(item.Key);
-                    content.JsonWriter.WriteObjectValue(item.Value);
+                    if (item.Value != null)
+                    {
+                        content.JsonWriter.WriteObjectValue(item.Value);
+                    }
+                    else
+                    {
+                        content.JsonWriter.WriteNullValue();
+                    }
                 }
                 content.JsonWriter.WriteEndObject();
                 request.Content = content;
@@ -363,7 +412,14 @@ namespace model_flattening
                         Dictionary<string, FlattenedProduct> dictionary = new Dictionary<string, FlattenedProduct>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
-                            dictionary.Add(property.Name, FlattenedProduct.DeserializeFlattenedProduct(property.Value));
+                            if (property.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                dictionary.Add(property.Name, null);
+                            }
+                            else
+                            {
+                                dictionary.Add(property.Name, FlattenedProduct.DeserializeFlattenedProduct(property.Value));
+                            }
                         }
                         value = dictionary;
                         return Response.FromValue(value, message.Response);
@@ -388,7 +444,14 @@ namespace model_flattening
                         Dictionary<string, FlattenedProduct> dictionary = new Dictionary<string, FlattenedProduct>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
-                            dictionary.Add(property.Name, FlattenedProduct.DeserializeFlattenedProduct(property.Value));
+                            if (property.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                dictionary.Add(property.Name, null);
+                            }
+                            else
+                            {
+                                dictionary.Add(property.Name, FlattenedProduct.DeserializeFlattenedProduct(property.Value));
+                            }
                         }
                         value = dictionary;
                         return Response.FromValue(value, message.Response);

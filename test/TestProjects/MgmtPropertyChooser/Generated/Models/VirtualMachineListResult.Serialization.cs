@@ -29,7 +29,14 @@ namespace MgmtPropertyChooser.Models
                     List<VirtualMachineData> array = new List<VirtualMachineData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(VirtualMachineData.DeserializeVirtualMachineData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(VirtualMachineData.DeserializeVirtualMachineData(item));
+                        }
                     }
                     value = array;
                     continue;

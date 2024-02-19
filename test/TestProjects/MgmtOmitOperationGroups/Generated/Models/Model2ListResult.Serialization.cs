@@ -33,7 +33,14 @@ namespace MgmtOmitOperationGroups.Models
                     List<Model2Data> array = new List<Model2Data>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Model2Data.DeserializeModel2Data(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(Model2Data.DeserializeModel2Data(item));
+                        }
                     }
                     value = array;
                     continue;

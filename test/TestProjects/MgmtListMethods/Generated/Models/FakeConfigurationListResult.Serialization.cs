@@ -23,7 +23,14 @@ namespace MgmtListMethods.Models
                 writer.WriteStartArray();
                 foreach (var item in Value)
                 {
-                    writer.WriteObjectValue(item);
+                    if (item != null)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -48,7 +55,14 @@ namespace MgmtListMethods.Models
                     List<FakeConfigurationData> array = new List<FakeConfigurationData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(FakeConfigurationData.DeserializeFakeConfigurationData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(FakeConfigurationData.DeserializeFakeConfigurationData(item));
+                        }
                     }
                     value = array;
                     continue;

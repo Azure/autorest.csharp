@@ -31,7 +31,14 @@ namespace MgmtAcronymMapping.Models
                     List<VirtualMachineSize> array = new List<VirtualMachineSize>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(VirtualMachineSize.DeserializeVirtualMachineSize(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(VirtualMachineSize.DeserializeVirtualMachineSize(item));
+                        }
                     }
                     value = array;
                     continue;

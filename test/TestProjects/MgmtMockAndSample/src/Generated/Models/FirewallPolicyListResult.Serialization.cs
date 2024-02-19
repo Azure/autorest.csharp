@@ -33,7 +33,14 @@ namespace MgmtMockAndSample.Models
                     List<FirewallPolicyData> array = new List<FirewallPolicyData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(FirewallPolicyData.DeserializeFirewallPolicyData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(FirewallPolicyData.DeserializeFirewallPolicyData(item));
+                        }
                     }
                     value = array;
                     continue;

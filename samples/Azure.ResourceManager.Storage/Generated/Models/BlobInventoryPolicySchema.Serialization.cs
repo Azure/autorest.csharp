@@ -24,7 +24,14 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteStartArray();
             foreach (var item in Rules)
             {
-                writer.WriteObjectValue(item);
+                if (item != null)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             writer.WriteEndArray();
             writer.WriteEndObject();
@@ -56,7 +63,14 @@ namespace Azure.ResourceManager.Storage.Models
                     List<BlobInventoryPolicyRule> array = new List<BlobInventoryPolicyRule>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(BlobInventoryPolicyRule.DeserializeBlobInventoryPolicyRule(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(BlobInventoryPolicyRule.DeserializeBlobInventoryPolicyRule(item));
+                        }
                     }
                     rules = array;
                     continue;

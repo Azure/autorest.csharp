@@ -74,7 +74,14 @@ namespace lro
             List<Product> array = new List<Product>();
             foreach (var item in document.RootElement.EnumerateArray())
             {
-                array.Add(Product.DeserializeProduct(item));
+                if (item.ValueKind == JsonValueKind.Null)
+                {
+                    array.Add(null);
+                }
+                else
+                {
+                    array.Add(Product.DeserializeProduct(item));
+                }
             }
             return array;
         }
@@ -85,7 +92,14 @@ namespace lro
             List<Product> array = new List<Product>();
             foreach (var item in document.RootElement.EnumerateArray())
             {
-                array.Add(Product.DeserializeProduct(item));
+                if (item.ValueKind == JsonValueKind.Null)
+                {
+                    array.Add(null);
+                }
+                else
+                {
+                    array.Add(Product.DeserializeProduct(item));
+                }
             }
             return array;
         }

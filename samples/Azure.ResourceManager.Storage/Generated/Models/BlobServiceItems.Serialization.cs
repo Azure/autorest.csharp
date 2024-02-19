@@ -32,7 +32,14 @@ namespace Azure.ResourceManager.Storage.Models
                     List<BlobServiceData> array = new List<BlobServiceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(BlobServiceData.DeserializeBlobServiceData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(BlobServiceData.DeserializeBlobServiceData(item));
+                        }
                     }
                     value = array;
                     continue;

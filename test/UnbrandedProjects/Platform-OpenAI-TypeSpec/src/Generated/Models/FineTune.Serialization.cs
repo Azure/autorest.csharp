@@ -47,7 +47,14 @@ namespace OpenAI.Models
             writer.WritePropertyName("status"u8);
             writer.WriteStringValue(Status.ToString());
             writer.WritePropertyName("hyperparams"u8);
-            ((IJsonModel<FineTuneHyperparams>)Hyperparams).Write(writer, options);
+            if (Hyperparams != null)
+            {
+                ((IJsonModel<FineTuneHyperparams>)Hyperparams).Write(writer, options);
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             writer.WritePropertyName("training_files"u8);
             writer.WriteStartArray();
             foreach (var item in TrainingFiles)

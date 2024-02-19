@@ -16,7 +16,14 @@ namespace Azure.ResourceManager.Storage.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("actions"u8);
-            writer.WriteObjectValue(Actions);
+            if (Actions != null)
+            {
+                writer.WriteObjectValue(Actions);
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             if (Optional.IsDefined(Filters))
             {
                 writer.WritePropertyName("filters"u8);

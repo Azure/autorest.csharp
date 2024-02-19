@@ -48,7 +48,14 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in FieldMappings)
                 {
-                    writer.WriteObjectValue(item);
+                    if (item != null)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -58,7 +65,14 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in OutputFieldMappings)
                 {
-                    writer.WriteObjectValue(item);
+                    if (item != null)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -146,7 +160,14 @@ namespace CognitiveSearch.Models
                     List<FieldMapping> array = new List<FieldMapping>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(FieldMapping.DeserializeFieldMapping(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(FieldMapping.DeserializeFieldMapping(item));
+                        }
                     }
                     fieldMappings = array;
                     continue;
@@ -160,7 +181,14 @@ namespace CognitiveSearch.Models
                     List<FieldMapping> array = new List<FieldMapping>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(FieldMapping.DeserializeFieldMapping(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(FieldMapping.DeserializeFieldMapping(item));
+                        }
                     }
                     outputFieldMappings = array;
                     continue;

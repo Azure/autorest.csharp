@@ -37,7 +37,14 @@ namespace TypeSchemaMapping.Models
                 writer.WriteStartArray();
                 foreach (var item in InternalListProperty)
                 {
-                    ((IJsonModel<InternalModel>)item).Write(writer, options);
+                    if (item != null)
+                    {
+                        ((IJsonModel<InternalModel>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -99,7 +106,14 @@ namespace TypeSchemaMapping.Models
                     List<InternalModel> array = new List<InternalModel>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(InternalModel.DeserializeInternalModel(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(InternalModel.DeserializeInternalModel(item));
+                        }
                     }
                     internalListProperty = array;
                     continue;

@@ -35,7 +35,14 @@ namespace MgmtDiscriminator.Models
                 writer.WriteStartArray();
                 foreach (var item in Value)
                 {
-                    ((IJsonModel<DeliveryRuleData>)item).Write(writer, options);
+                    if (item != null)
+                    {
+                        ((IJsonModel<DeliveryRuleData>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -91,7 +98,14 @@ namespace MgmtDiscriminator.Models
                     List<DeliveryRuleData> array = new List<DeliveryRuleData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DeliveryRuleData.DeserializeDeliveryRuleData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(DeliveryRuleData.DeserializeDeliveryRuleData(item));
+                        }
                     }
                     value = array;
                     continue;

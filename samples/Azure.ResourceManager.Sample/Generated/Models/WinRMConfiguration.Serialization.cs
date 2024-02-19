@@ -34,7 +34,14 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in Listeners)
                 {
-                    writer.WriteObjectValue(item);
+                    if (item != null)
+                    {
+                        ((IJsonModel<WinRMListener>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -90,7 +97,14 @@ namespace Azure.ResourceManager.Sample.Models
                     List<WinRMListener> array = new List<WinRMListener>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(WinRMListener.DeserializeWinRMListener(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(WinRMListener.DeserializeWinRMListener(item));
+                        }
                     }
                     listeners = array;
                     continue;

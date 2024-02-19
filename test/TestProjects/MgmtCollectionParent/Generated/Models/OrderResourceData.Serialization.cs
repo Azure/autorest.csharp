@@ -95,7 +95,14 @@ namespace MgmtCollectionParent
                             List<StageDetails> array = new List<StageDetails>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(StageDetails.DeserializeStageDetails(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(StageDetails.DeserializeStageDetails(item));
+                                }
                             }
                             orderStageHistory = array;
                             continue;

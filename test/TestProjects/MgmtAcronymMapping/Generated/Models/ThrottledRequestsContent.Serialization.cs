@@ -16,7 +16,14 @@ namespace MgmtAcronymMapping.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("blobContainerSasUri"u8);
-            writer.WriteStringValue(BlobContainerSasUri.AbsoluteUri);
+            if (BlobContainerSasUri != null)
+            {
+                writer.WriteStringValue(BlobContainerSasUri.AbsoluteUri);
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             writer.WritePropertyName("fromTime"u8);
             writer.WriteStringValue(FromTime, "O");
             writer.WritePropertyName("toTime"u8);

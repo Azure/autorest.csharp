@@ -45,7 +45,14 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in Routes)
                 {
-                    writer.WriteObjectValue(item);
+                    if (item != null)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -133,7 +140,14 @@ namespace Azure.Network.Management.Interface.Models
                             List<Route> array = new List<Route>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(Route.DeserializeRoute(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(Route.DeserializeRoute(item));
+                                }
                             }
                             routes = array;
                             continue;
@@ -147,7 +161,14 @@ namespace Azure.Network.Management.Interface.Models
                             List<Subnet> array = new List<Subnet>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(Subnet.DeserializeSubnet(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(Subnet.DeserializeSubnet(item));
+                                }
                             }
                             subnets = array;
                             continue;

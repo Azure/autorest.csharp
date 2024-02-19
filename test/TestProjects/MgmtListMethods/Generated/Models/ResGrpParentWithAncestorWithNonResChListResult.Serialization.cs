@@ -29,7 +29,14 @@ namespace MgmtListMethods.Models
                     List<ResGrpParentWithAncestorWithNonResChData> array = new List<ResGrpParentWithAncestorWithNonResChData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ResGrpParentWithAncestorWithNonResChData.DeserializeResGrpParentWithAncestorWithNonResChData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(ResGrpParentWithAncestorWithNonResChData.DeserializeResGrpParentWithAncestorWithNonResChData(item));
+                        }
                     }
                     value = array;
                     continue;

@@ -29,7 +29,14 @@ namespace MgmtListMethods.Models
                     List<TenantParentData> array = new List<TenantParentData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(TenantParentData.DeserializeTenantParentData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(TenantParentData.DeserializeTenantParentData(item));
+                        }
                     }
                     value = array;
                     continue;

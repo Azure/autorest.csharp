@@ -28,7 +28,14 @@ namespace MgmtMockAndSample.Models
                     List<EventData> array = new List<EventData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(EventData.DeserializeEventData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(EventData.DeserializeEventData(item));
+                        }
                     }
                     value = array;
                     continue;

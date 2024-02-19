@@ -47,9 +47,23 @@ namespace validation.Models
                 writer.WriteStringValue(Image);
             }
             writer.WritePropertyName("child"u8);
-            ((IJsonModel<ChildProduct>)Child).Write(writer, options);
+            if (Child != null)
+            {
+                ((IJsonModel<ChildProduct>)Child).Write(writer, options);
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             writer.WritePropertyName("constChild"u8);
-            ((IJsonModel<ConstantProduct>)ConstChild).Write(writer, options);
+            if (ConstChild != null)
+            {
+                ((IJsonModel<ConstantProduct>)ConstChild).Write(writer, options);
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             writer.WritePropertyName("constInt"u8);
             writer.WriteNumberValue(ConstInt.ToSerialInt32());
             writer.WritePropertyName("constString"u8);

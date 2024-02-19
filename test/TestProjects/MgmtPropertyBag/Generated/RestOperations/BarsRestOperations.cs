@@ -188,7 +188,14 @@ namespace MgmtPropertyBag
                         List<BarData> array = new List<BarData>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            array.Add(BarData.DeserializeBarData(item));
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(BarData.DeserializeBarData(item));
+                            }
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
@@ -226,7 +233,14 @@ namespace MgmtPropertyBag
                         List<BarData> array = new List<BarData>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            array.Add(BarData.DeserializeBarData(item));
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(BarData.DeserializeBarData(item));
+                            }
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);

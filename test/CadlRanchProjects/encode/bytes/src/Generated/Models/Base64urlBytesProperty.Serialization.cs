@@ -28,7 +28,14 @@ namespace Encode.Bytes.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("value"u8);
-            writer.WriteBase64StringValue(Value.ToArray(), "U");
+            if (Value != null)
+            {
+                writer.WriteBase64StringValue(Value.ToArray(), "U");
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)

@@ -29,7 +29,14 @@ namespace MgmtListMethods.Models
                     List<MgmtGrpParentWithNonResChData> array = new List<MgmtGrpParentWithNonResChData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(MgmtGrpParentWithNonResChData.DeserializeMgmtGrpParentWithNonResChData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(MgmtGrpParentWithNonResChData.DeserializeMgmtGrpParentWithNonResChData(item));
+                        }
                     }
                     value = array;
                     continue;

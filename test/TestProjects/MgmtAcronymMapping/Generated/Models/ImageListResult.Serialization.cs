@@ -29,7 +29,14 @@ namespace MgmtAcronymMapping.Models
                     List<ImageData> array = new List<ImageData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ImageData.DeserializeImageData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(ImageData.DeserializeImageData(item));
+                        }
                     }
                     value = array;
                     continue;

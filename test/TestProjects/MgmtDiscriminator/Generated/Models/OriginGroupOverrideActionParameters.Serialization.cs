@@ -31,7 +31,14 @@ namespace MgmtDiscriminator.Models
             writer.WritePropertyName("typeName"u8);
             writer.WriteStringValue(TypeName.ToString());
             writer.WritePropertyName("originGroup"u8);
-            JsonSerializer.Serialize(writer, OriginGroup);
+            if (OriginGroup != null)
+            {
+                JsonSerializer.Serialize(writer, OriginGroup);
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)

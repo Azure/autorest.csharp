@@ -32,7 +32,14 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteStartArray();
             foreach (var item in Value)
             {
-                writer.WriteObjectValue(item);
+                if (item != null)
+                {
+                    ((IJsonModel<SampleUsage>)item).Write(writer, options);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             writer.WriteEndArray();
             if (Optional.IsDefined(NextLink))
@@ -89,7 +96,14 @@ namespace Azure.ResourceManager.Sample.Models
                     List<SampleUsage> array = new List<SampleUsage>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(SampleUsage.DeserializeSampleUsage(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(SampleUsage.DeserializeSampleUsage(item));
+                        }
                     }
                     value = array;
                     continue;

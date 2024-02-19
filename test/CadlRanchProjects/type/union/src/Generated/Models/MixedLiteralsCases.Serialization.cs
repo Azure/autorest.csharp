@@ -28,41 +28,69 @@ namespace _Type.Union.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("stringLiteral"u8);
+            if (StringLiteral != null)
+            {
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(StringLiteral);
 #else
-            using (JsonDocument document = JsonDocument.Parse(StringLiteral))
-            {
-                JsonSerializer.Serialize(writer, document.RootElement);
-            }
+                using (JsonDocument document = JsonDocument.Parse(StringLiteral))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
 #endif
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             writer.WritePropertyName("intLiteral"u8);
+            if (IntLiteral != null)
+            {
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(IntLiteral);
 #else
-            using (JsonDocument document = JsonDocument.Parse(IntLiteral))
-            {
-                JsonSerializer.Serialize(writer, document.RootElement);
-            }
+                using (JsonDocument document = JsonDocument.Parse(IntLiteral))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
 #endif
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             writer.WritePropertyName("floatLiteral"u8);
+            if (FloatLiteral != null)
+            {
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(FloatLiteral);
 #else
-            using (JsonDocument document = JsonDocument.Parse(FloatLiteral))
-            {
-                JsonSerializer.Serialize(writer, document.RootElement);
-            }
+                using (JsonDocument document = JsonDocument.Parse(FloatLiteral))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
 #endif
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             writer.WritePropertyName("booleanLiteral"u8);
+            if (BooleanLiteral != null)
+            {
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(BooleanLiteral);
 #else
-            using (JsonDocument document = JsonDocument.Parse(BooleanLiteral))
-            {
-                JsonSerializer.Serialize(writer, document.RootElement);
-            }
+                using (JsonDocument document = JsonDocument.Parse(BooleanLiteral))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
 #endif
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)

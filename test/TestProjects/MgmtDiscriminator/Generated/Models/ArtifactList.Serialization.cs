@@ -35,7 +35,14 @@ namespace MgmtDiscriminator.Models
                 writer.WriteStartArray();
                 foreach (var item in Value)
                 {
-                    ((IJsonModel<ArtifactData>)item).Write(writer, options);
+                    if (item != null)
+                    {
+                        ((IJsonModel<ArtifactData>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -97,7 +104,14 @@ namespace MgmtDiscriminator.Models
                     List<ArtifactData> array = new List<ArtifactData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ArtifactData.DeserializeArtifactData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(ArtifactData.DeserializeArtifactData(item));
+                        }
                     }
                     value = array;
                     continue;

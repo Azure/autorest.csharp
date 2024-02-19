@@ -30,7 +30,14 @@ namespace MgmtMockAndSample.Models
                 writer.WriteEndObject();
             }
             writer.WritePropertyName("properties"u8);
-            writer.WriteObjectValue(Properties);
+            if (Properties != null)
+            {
+                writer.WriteObjectValue(Properties);
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             if (Optional.IsDefined(Identity))
             {
                 writer.WritePropertyName("identity"u8);

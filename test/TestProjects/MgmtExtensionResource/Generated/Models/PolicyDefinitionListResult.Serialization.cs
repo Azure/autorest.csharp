@@ -33,7 +33,14 @@ namespace MgmtExtensionResource.Models
                     List<PolicyDefinitionData> array = new List<PolicyDefinitionData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(PolicyDefinitionData.DeserializePolicyDefinitionData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(PolicyDefinitionData.DeserializePolicyDefinitionData(item));
+                        }
                     }
                     value = array;
                     continue;

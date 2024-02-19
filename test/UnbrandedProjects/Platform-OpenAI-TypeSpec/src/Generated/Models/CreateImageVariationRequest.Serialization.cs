@@ -24,7 +24,14 @@ namespace OpenAI.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("image"u8);
-            writer.WriteBase64StringValue(Image.ToArray(), "D");
+            if (Image != null)
+            {
+                writer.WriteBase64StringValue(Image.ToArray(), "D");
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             if (OptionalProperty.IsDefined(N))
             {
                 if (N != null)

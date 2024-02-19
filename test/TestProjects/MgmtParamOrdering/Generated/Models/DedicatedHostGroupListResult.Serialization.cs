@@ -29,7 +29,14 @@ namespace MgmtParamOrdering.Models
                     List<DedicatedHostGroupData> array = new List<DedicatedHostGroupData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DedicatedHostGroupData.DeserializeDedicatedHostGroupData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(DedicatedHostGroupData.DeserializeDedicatedHostGroupData(item));
+                        }
                     }
                     value = array;
                     continue;

@@ -33,7 +33,14 @@ namespace MgmtMockAndSample.Models
                     List<VaultData> array = new List<VaultData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(VaultData.DeserializeVaultData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(VaultData.DeserializeVaultData(item));
+                        }
                     }
                     value = array;
                     continue;

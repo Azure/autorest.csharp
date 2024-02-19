@@ -125,7 +125,14 @@ namespace MgmtHierarchicalNonResource.Models
                             List<GalleryImageFeature> array = new List<GalleryImageFeature>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(GalleryImageFeature.DeserializeGalleryImageFeature(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(GalleryImageFeature.DeserializeGalleryImageFeature(item));
+                                }
                             }
                             features = array;
                             continue;

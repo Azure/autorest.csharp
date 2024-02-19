@@ -33,7 +33,14 @@ namespace Azure.ResourceManager.Storage.Models
                     List<FileShareData> array = new List<FileShareData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(FileShareData.DeserializeFileShareData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(FileShareData.DeserializeFileShareData(item));
+                        }
                     }
                     value = array;
                     continue;

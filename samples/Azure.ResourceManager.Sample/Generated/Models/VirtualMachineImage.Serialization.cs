@@ -53,12 +53,12 @@ namespace Azure.ResourceManager.Sample.Models
             if (Optional.IsDefined(Plan))
             {
                 writer.WritePropertyName("plan"u8);
-                writer.WriteObjectValue(Plan);
+                ((IJsonModel<PurchasePlan>)Plan).Write(writer, options);
             }
             if (Optional.IsDefined(OSDiskImage))
             {
                 writer.WritePropertyName("osDiskImage"u8);
-                writer.WriteObjectValue(OSDiskImage);
+                ((IJsonModel<OSDiskImage>)OSDiskImage).Write(writer, options);
             }
             if (Optional.IsCollectionDefined(DataDiskImages))
             {
@@ -66,14 +66,21 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in DataDiskImages)
                 {
-                    writer.WriteObjectValue(item);
+                    if (item != null)
+                    {
+                        ((IJsonModel<DataDiskImage>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(AutomaticOSUpgradeProperties))
             {
                 writer.WritePropertyName("automaticOSUpgradeProperties"u8);
-                writer.WriteObjectValue(AutomaticOSUpgradeProperties);
+                ((IJsonModel<AutomaticOSUpgradeProperties>)AutomaticOSUpgradeProperties).Write(writer, options);
             }
             if (Optional.IsDefined(HyperVGeneration))
             {
@@ -83,7 +90,7 @@ namespace Azure.ResourceManager.Sample.Models
             if (Optional.IsDefined(Disallowed))
             {
                 writer.WritePropertyName("disallowed"u8);
-                writer.WriteObjectValue(Disallowed);
+                ((IJsonModel<DisallowedConfiguration>)Disallowed).Write(writer, options);
             }
             writer.WriteEndObject();
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -203,7 +210,14 @@ namespace Azure.ResourceManager.Sample.Models
                             List<DataDiskImage> array = new List<DataDiskImage>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(DataDiskImage.DeserializeDataDiskImage(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(DataDiskImage.DeserializeDataDiskImage(item));
+                                }
                             }
                             dataDiskImages = array;
                             continue;

@@ -33,7 +33,14 @@ namespace MgmtExpandResourceTypes.Models
                     List<RecordSetData> array = new List<RecordSetData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(RecordSetData.DeserializeRecordSetData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(RecordSetData.DeserializeRecordSetData(item));
+                        }
                     }
                     value = array;
                     continue;

@@ -32,7 +32,14 @@ namespace Azure.ResourceManager.Storage.Models
                     List<ObjectReplicationPolicyData> array = new List<ObjectReplicationPolicyData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ObjectReplicationPolicyData.DeserializeObjectReplicationPolicyData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(ObjectReplicationPolicyData.DeserializeObjectReplicationPolicyData(item));
+                        }
                     }
                     value = array;
                     continue;

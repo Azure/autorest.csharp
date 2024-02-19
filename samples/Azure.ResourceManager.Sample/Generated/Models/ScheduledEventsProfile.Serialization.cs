@@ -30,7 +30,7 @@ namespace Azure.ResourceManager.Sample.Models
             if (Optional.IsDefined(TerminateNotificationProfile))
             {
                 writer.WritePropertyName("terminateNotificationProfile"u8);
-                writer.WriteObjectValue(TerminateNotificationProfile);
+                ((IJsonModel<TerminateNotificationProfile>)TerminateNotificationProfile).Write(writer, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

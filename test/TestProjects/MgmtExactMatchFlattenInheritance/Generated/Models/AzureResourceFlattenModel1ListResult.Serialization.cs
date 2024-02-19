@@ -33,7 +33,14 @@ namespace MgmtExactMatchFlattenInheritance.Models
                     List<AzureResourceFlattenModel1Data> array = new List<AzureResourceFlattenModel1Data>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(AzureResourceFlattenModel1Data.DeserializeAzureResourceFlattenModel1Data(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(AzureResourceFlattenModel1Data.DeserializeAzureResourceFlattenModel1Data(item));
+                        }
                     }
                     value = array;
                     continue;

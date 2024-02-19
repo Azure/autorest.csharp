@@ -33,7 +33,14 @@ namespace MgmtPartialResource.Models
                     List<PublicIPAddressData> array = new List<PublicIPAddressData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(PublicIPAddressData.DeserializePublicIPAddressData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(PublicIPAddressData.DeserializePublicIPAddressData(item));
+                        }
                     }
                     value = array;
                     continue;

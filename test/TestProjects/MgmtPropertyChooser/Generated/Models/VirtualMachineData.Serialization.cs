@@ -152,7 +152,14 @@ namespace MgmtPropertyChooser
                     List<VirtualMachineExtension> array = new List<VirtualMachineExtension>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(VirtualMachineExtension.DeserializeVirtualMachineExtension(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(VirtualMachineExtension.DeserializeVirtualMachineExtension(item));
+                        }
                     }
                     resources = array;
                     continue;
@@ -235,7 +242,14 @@ namespace MgmtPropertyChooser
                     List<MgmtPropertyChooserResourceData> array = new List<MgmtPropertyChooserResourceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(MgmtPropertyChooserResourceData.DeserializeMgmtPropertyChooserResourceData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(MgmtPropertyChooserResourceData.DeserializeMgmtPropertyChooserResourceData(item));
+                        }
                     }
                     fakeResources = array;
                     continue;

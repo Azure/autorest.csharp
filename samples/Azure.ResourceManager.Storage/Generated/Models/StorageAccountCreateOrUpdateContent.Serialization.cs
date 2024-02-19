@@ -17,7 +17,14 @@ namespace Azure.ResourceManager.Storage.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("sku"u8);
-            writer.WriteObjectValue(Sku);
+            if (Sku != null)
+            {
+                writer.WriteObjectValue(Sku);
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind.ToString());
             writer.WritePropertyName("location"u8);

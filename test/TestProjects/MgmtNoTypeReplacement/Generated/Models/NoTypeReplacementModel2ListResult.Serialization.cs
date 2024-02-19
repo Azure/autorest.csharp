@@ -33,7 +33,14 @@ namespace MgmtNoTypeReplacement.Models
                     List<NoTypeReplacementModel2Data> array = new List<NoTypeReplacementModel2Data>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(NoTypeReplacementModel2Data.DeserializeNoTypeReplacementModel2Data(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(NoTypeReplacementModel2Data.DeserializeNoTypeReplacementModel2Data(item));
+                        }
                     }
                     value = array;
                     continue;

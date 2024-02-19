@@ -32,7 +32,14 @@ namespace MgmtAcronymMapping.Models
                 writer.WriteStartArray();
                 foreach (var item in DataDisks)
                 {
-                    writer.WriteObjectValue(item);
+                    if (item != null)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -77,7 +84,14 @@ namespace MgmtAcronymMapping.Models
                     List<DataDisk> array = new List<DataDisk>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DataDisk.DeserializeDataDisk(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(DataDisk.DeserializeDataDisk(item));
+                        }
                     }
                     dataDisks = array;
                     continue;

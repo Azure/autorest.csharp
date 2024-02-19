@@ -34,14 +34,21 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in Details)
                 {
-                    writer.WriteObjectValue(item);
+                    if (item != null)
+                    {
+                        ((IJsonModel<ApiErrorBase>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(Innererror))
             {
                 writer.WritePropertyName("innererror"u8);
-                writer.WriteObjectValue(Innererror);
+                ((IJsonModel<InnerError>)Innererror).Write(writer, options);
             }
             if (Optional.IsDefined(Code))
             {
@@ -114,7 +121,14 @@ namespace Azure.ResourceManager.Sample.Models
                     List<ApiErrorBase> array = new List<ApiErrorBase>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ApiErrorBase.DeserializeApiErrorBase(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(ApiErrorBase.DeserializeApiErrorBase(item));
+                        }
                     }
                     details = array;
                     continue;

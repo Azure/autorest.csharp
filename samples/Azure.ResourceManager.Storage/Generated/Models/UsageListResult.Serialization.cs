@@ -31,7 +31,14 @@ namespace Azure.ResourceManager.Storage.Models
                     List<StorageUsage> array = new List<StorageUsage>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(StorageUsage.DeserializeStorageUsage(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(StorageUsage.DeserializeStorageUsage(item));
+                        }
                     }
                     value = array;
                     continue;

@@ -56,7 +56,14 @@ namespace MgmtScopeResource.Models
                             List<WhatIfChange> array = new List<WhatIfChange>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(WhatIfChange.DeserializeWhatIfChange(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(WhatIfChange.DeserializeWhatIfChange(item));
+                                }
                             }
                             changes = array;
                             continue;

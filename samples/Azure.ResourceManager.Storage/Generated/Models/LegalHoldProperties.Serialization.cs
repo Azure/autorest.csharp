@@ -42,7 +42,14 @@ namespace Azure.ResourceManager.Storage.Models
                     List<TagProperty> array = new List<TagProperty>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(TagProperty.DeserializeTagProperty(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(TagProperty.DeserializeTagProperty(item));
+                        }
                     }
                     tags = array;
                     continue;

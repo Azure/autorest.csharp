@@ -33,7 +33,14 @@ namespace MgmtResourceName.Models
                     List<DisplayResourceData> array = new List<DisplayResourceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DisplayResourceData.DeserializeDisplayResourceData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(DisplayResourceData.DeserializeDisplayResourceData(item));
+                        }
                     }
                     value = array;
                     continue;

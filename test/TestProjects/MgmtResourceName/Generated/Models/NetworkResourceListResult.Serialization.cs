@@ -33,7 +33,14 @@ namespace MgmtResourceName.Models
                     List<NetworkData> array = new List<NetworkData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(NetworkData.DeserializeNetworkData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(NetworkData.DeserializeNetworkData(item));
+                        }
                     }
                     value = array;
                     continue;

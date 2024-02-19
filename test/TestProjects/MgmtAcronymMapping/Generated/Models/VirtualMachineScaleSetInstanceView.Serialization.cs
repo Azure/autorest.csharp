@@ -43,7 +43,14 @@ namespace MgmtAcronymMapping.Models
                     List<VirtualMachineScaleSetVmExtensionsSummary> array = new List<VirtualMachineScaleSetVmExtensionsSummary>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(VirtualMachineScaleSetVmExtensionsSummary.DeserializeVirtualMachineScaleSetVmExtensionsSummary(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(VirtualMachineScaleSetVmExtensionsSummary.DeserializeVirtualMachineScaleSetVmExtensionsSummary(item));
+                        }
                     }
                     extensions = array;
                     continue;
@@ -57,7 +64,14 @@ namespace MgmtAcronymMapping.Models
                     List<InstanceViewStatus> array = new List<InstanceViewStatus>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(InstanceViewStatus.DeserializeInstanceViewStatus(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(InstanceViewStatus.DeserializeInstanceViewStatus(item));
+                        }
                     }
                     statuses = array;
                     continue;
@@ -71,7 +85,14 @@ namespace MgmtAcronymMapping.Models
                     List<OrchestrationServiceSummary> array = new List<OrchestrationServiceSummary>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(OrchestrationServiceSummary.DeserializeOrchestrationServiceSummary(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(OrchestrationServiceSummary.DeserializeOrchestrationServiceSummary(item));
+                        }
                     }
                     orchestrationServices = array;
                     continue;

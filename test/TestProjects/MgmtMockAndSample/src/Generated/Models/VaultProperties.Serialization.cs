@@ -30,14 +30,28 @@ namespace MgmtMockAndSample.Models
             writer.WritePropertyName("tenantId"u8);
             writer.WriteStringValue(TenantId);
             writer.WritePropertyName("sku"u8);
-            writer.WriteObjectValue(Sku);
+            if (Sku != null)
+            {
+                writer.WriteObjectValue(Sku);
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             if (Optional.IsCollectionDefined(AccessPolicies))
             {
                 writer.WritePropertyName("accessPolicies"u8);
                 writer.WriteStartArray();
                 foreach (var item in AccessPolicies)
                 {
-                    writer.WriteObjectValue(item);
+                    if (item != null)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -191,7 +205,14 @@ namespace MgmtMockAndSample.Models
                     List<AccessPolicyEntry> array = new List<AccessPolicyEntry>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(AccessPolicyEntry.DeserializeAccessPolicyEntry(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(AccessPolicyEntry.DeserializeAccessPolicyEntry(item));
+                        }
                     }
                     accessPolicies = array;
                     continue;
@@ -314,7 +335,14 @@ namespace MgmtMockAndSample.Models
                     List<PrivateEndpointConnectionItem> array = new List<PrivateEndpointConnectionItem>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(PrivateEndpointConnectionItem.DeserializePrivateEndpointConnectionItem(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(PrivateEndpointConnectionItem.DeserializePrivateEndpointConnectionItem(item));
+                        }
                     }
                     privateEndpointConnections = array;
                     continue;

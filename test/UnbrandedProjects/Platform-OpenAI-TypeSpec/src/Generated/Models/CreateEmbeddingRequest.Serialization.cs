@@ -26,14 +26,21 @@ namespace OpenAI.Models
             writer.WritePropertyName("model"u8);
             writer.WriteStringValue(Model.ToString());
             writer.WritePropertyName("input"u8);
+            if (Input != null)
+            {
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Input);
 #else
-            using (JsonDocument document = JsonDocument.Parse(Input))
-            {
-                JsonSerializer.Serialize(writer, document.RootElement);
-            }
+                using (JsonDocument document = JsonDocument.Parse(Input))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
 #endif
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             if (OptionalProperty.IsDefined(User))
             {
                 writer.WritePropertyName("user"u8);

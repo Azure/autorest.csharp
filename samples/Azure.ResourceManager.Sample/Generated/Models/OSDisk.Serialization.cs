@@ -35,7 +35,7 @@ namespace Azure.ResourceManager.Sample.Models
             if (Optional.IsDefined(EncryptionSettings))
             {
                 writer.WritePropertyName("encryptionSettings"u8);
-                writer.WriteObjectValue(EncryptionSettings);
+                ((IJsonModel<DiskEncryptionSettings>)EncryptionSettings).Write(writer, options);
             }
             if (Optional.IsDefined(Name))
             {
@@ -45,12 +45,12 @@ namespace Azure.ResourceManager.Sample.Models
             if (Optional.IsDefined(Vhd))
             {
                 writer.WritePropertyName("vhd"u8);
-                writer.WriteObjectValue(Vhd);
+                ((IJsonModel<VirtualHardDisk>)Vhd).Write(writer, options);
             }
             if (Optional.IsDefined(Image))
             {
                 writer.WritePropertyName("image"u8);
-                writer.WriteObjectValue(Image);
+                ((IJsonModel<VirtualHardDisk>)Image).Write(writer, options);
             }
             if (Optional.IsDefined(Caching))
             {
@@ -65,7 +65,7 @@ namespace Azure.ResourceManager.Sample.Models
             if (Optional.IsDefined(DiffDiskSettings))
             {
                 writer.WritePropertyName("diffDiskSettings"u8);
-                writer.WriteObjectValue(DiffDiskSettings);
+                ((IJsonModel<DiffDiskSettings>)DiffDiskSettings).Write(writer, options);
             }
             writer.WritePropertyName("createOption"u8);
             writer.WriteStringValue(CreateOption.ToString());
@@ -77,7 +77,7 @@ namespace Azure.ResourceManager.Sample.Models
             if (Optional.IsDefined(ManagedDisk))
             {
                 writer.WritePropertyName("managedDisk"u8);
-                writer.WriteObjectValue(ManagedDisk);
+                ((IJsonModel<ManagedDiskParameters>)ManagedDisk).Write(writer, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

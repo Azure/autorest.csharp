@@ -96,7 +96,14 @@ namespace MgmtScopeResource
                             List<DataContainer> array = new List<DataContainer>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(DataContainer.DeserializeDataContainer(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(DataContainer.DeserializeDataContainer(item));
+                                }
                             }
                             data = array;
                             continue;

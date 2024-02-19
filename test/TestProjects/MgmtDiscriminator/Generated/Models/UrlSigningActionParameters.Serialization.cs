@@ -41,7 +41,14 @@ namespace MgmtDiscriminator.Models
                 writer.WriteStartArray();
                 foreach (var item in ParameterNameOverride)
                 {
-                    ((IJsonModel<UrlSigningParamIdentifier>)item).Write(writer, options);
+                    if (item != null)
+                    {
+                        ((IJsonModel<UrlSigningParamIdentifier>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -113,7 +120,14 @@ namespace MgmtDiscriminator.Models
                     List<UrlSigningParamIdentifier> array = new List<UrlSigningParamIdentifier>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(UrlSigningParamIdentifier.DeserializeUrlSigningParamIdentifier(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(UrlSigningParamIdentifier.DeserializeUrlSigningParamIdentifier(item));
+                        }
                     }
                     parameterNameOverride = array;
                     continue;

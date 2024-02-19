@@ -27,7 +27,14 @@ namespace required_optional.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("value"u8);
-            ((IJsonModel<Product>)Value).Write(writer, options);
+            if (Value != null)
+            {
+                ((IJsonModel<Product>)Value).Write(writer, options);
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)

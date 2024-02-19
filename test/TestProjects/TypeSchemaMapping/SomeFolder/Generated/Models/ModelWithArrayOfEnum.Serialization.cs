@@ -42,12 +42,14 @@ namespace TypeSchemaMapping.Models
                 writer.WriteStartArray();
                 foreach (var item in ArrayOfEnumCustomizedToNullable)
                 {
-                    if (item == null)
+                    if (item != null)
+                    {
+                        writer.WriteStringValue(item.Value.ToSerialString());
+                    }
+                    else
                     {
                         writer.WriteNullValue();
-                        continue;
                     }
-                    writer.WriteStringValue(item.Value.ToSerialString());
                 }
                 writer.WriteEndArray();
             }

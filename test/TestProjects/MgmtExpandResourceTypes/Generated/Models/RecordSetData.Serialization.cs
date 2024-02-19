@@ -53,7 +53,14 @@ namespace MgmtExpandResourceTypes
                 writer.WriteStartArray();
                 foreach (var item in ARecords)
                 {
-                    writer.WriteObjectValue(item);
+                    if (item != null)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -63,7 +70,14 @@ namespace MgmtExpandResourceTypes
                 writer.WriteStartArray();
                 foreach (var item in AaaaRecords)
                 {
-                    writer.WriteObjectValue(item);
+                    if (item != null)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -73,7 +87,14 @@ namespace MgmtExpandResourceTypes
                 writer.WriteStartArray();
                 foreach (var item in MxRecords)
                 {
-                    writer.WriteObjectValue(item);
+                    if (item != null)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -83,7 +104,14 @@ namespace MgmtExpandResourceTypes
                 writer.WriteStartArray();
                 foreach (var item in NsRecords)
                 {
-                    writer.WriteObjectValue(item);
+                    if (item != null)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -93,7 +121,14 @@ namespace MgmtExpandResourceTypes
                 writer.WriteStartArray();
                 foreach (var item in PtrRecords)
                 {
-                    writer.WriteObjectValue(item);
+                    if (item != null)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -103,7 +138,14 @@ namespace MgmtExpandResourceTypes
                 writer.WriteStartArray();
                 foreach (var item in SrvRecords)
                 {
-                    writer.WriteObjectValue(item);
+                    if (item != null)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -113,7 +155,14 @@ namespace MgmtExpandResourceTypes
                 writer.WriteStartArray();
                 foreach (var item in TxtRecords)
                 {
-                    writer.WriteObjectValue(item);
+                    if (item != null)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -133,7 +182,14 @@ namespace MgmtExpandResourceTypes
                 writer.WriteStartArray();
                 foreach (var item in CaaRecords)
                 {
-                    writer.WriteObjectValue(item);
+                    if (item != null)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -258,7 +314,14 @@ namespace MgmtExpandResourceTypes
                             List<ARecord> array = new List<ARecord>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(ARecord.DeserializeARecord(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(ARecord.DeserializeARecord(item));
+                                }
                             }
                             aRecords = array;
                             continue;
@@ -272,7 +335,14 @@ namespace MgmtExpandResourceTypes
                             List<AaaaRecord> array = new List<AaaaRecord>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(AaaaRecord.DeserializeAaaaRecord(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(AaaaRecord.DeserializeAaaaRecord(item));
+                                }
                             }
                             aaaaRecords = array;
                             continue;
@@ -286,7 +356,14 @@ namespace MgmtExpandResourceTypes
                             List<MxRecord> array = new List<MxRecord>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(MxRecord.DeserializeMxRecord(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(MxRecord.DeserializeMxRecord(item));
+                                }
                             }
                             mxRecords = array;
                             continue;
@@ -300,7 +377,14 @@ namespace MgmtExpandResourceTypes
                             List<NsRecord> array = new List<NsRecord>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(NsRecord.DeserializeNsRecord(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(NsRecord.DeserializeNsRecord(item));
+                                }
                             }
                             nsRecords = array;
                             continue;
@@ -314,7 +398,14 @@ namespace MgmtExpandResourceTypes
                             List<PtrRecord> array = new List<PtrRecord>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(PtrRecord.DeserializePtrRecord(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(PtrRecord.DeserializePtrRecord(item));
+                                }
                             }
                             ptrRecords = array;
                             continue;
@@ -328,7 +419,14 @@ namespace MgmtExpandResourceTypes
                             List<SrvRecord> array = new List<SrvRecord>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(SrvRecord.DeserializeSrvRecord(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(SrvRecord.DeserializeSrvRecord(item));
+                                }
                             }
                             srvRecords = array;
                             continue;
@@ -342,7 +440,14 @@ namespace MgmtExpandResourceTypes
                             List<TxtRecord> array = new List<TxtRecord>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(TxtRecord.DeserializeTxtRecord(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(TxtRecord.DeserializeTxtRecord(item));
+                                }
                             }
                             txtRecords = array;
                             continue;
@@ -374,7 +479,14 @@ namespace MgmtExpandResourceTypes
                             List<CaaRecord> array = new List<CaaRecord>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(CaaRecord.DeserializeCaaRecord(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(CaaRecord.DeserializeCaaRecord(item));
+                                }
                             }
                             caaRecords = array;
                             continue;

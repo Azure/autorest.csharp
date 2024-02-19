@@ -44,7 +44,14 @@ namespace MgmtResourceName
                     List<Models.ResourceType> array = new List<Models.ResourceType>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Models.ResourceType.DeserializeResourceType(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(Models.ResourceType.DeserializeResourceType(item));
+                        }
                     }
                     resourceTypes = array;
                     continue;
@@ -58,7 +65,14 @@ namespace MgmtResourceName
                     List<ResourceOperation> array = new List<ResourceOperation>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ResourceOperation.DeserializeResourceOperation(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(ResourceOperation.DeserializeResourceOperation(item));
+                        }
                     }
                     operations = array;
                     continue;

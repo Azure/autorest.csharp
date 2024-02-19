@@ -32,7 +32,14 @@ namespace MgmtSupersetFlattenInheritance.Models
                     List<WritableSubResourceModel1> array = new List<WritableSubResourceModel1>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(WritableSubResourceModel1.DeserializeWritableSubResourceModel1(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(WritableSubResourceModel1.DeserializeWritableSubResourceModel1(item));
+                        }
                     }
                     value = array;
                     continue;

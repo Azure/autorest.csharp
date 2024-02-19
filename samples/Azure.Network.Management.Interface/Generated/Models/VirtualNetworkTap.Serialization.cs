@@ -135,7 +135,14 @@ namespace Azure.Network.Management.Interface.Models
                             List<NetworkInterfaceTapConfiguration> array = new List<NetworkInterfaceTapConfiguration>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(NetworkInterfaceTapConfiguration.DeserializeNetworkInterfaceTapConfiguration(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(NetworkInterfaceTapConfiguration.DeserializeNetworkInterfaceTapConfiguration(item));
+                                }
                             }
                             networkInterfaceTapConfigurations = array;
                             continue;

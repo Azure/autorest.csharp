@@ -85,7 +85,14 @@ namespace MgmtPropertyBag
                         List<FooData> array = new List<FooData>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            array.Add(FooData.DeserializeFooData(item));
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(FooData.DeserializeFooData(item));
+                            }
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
@@ -117,7 +124,14 @@ namespace MgmtPropertyBag
                         List<FooData> array = new List<FooData>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            array.Add(FooData.DeserializeFooData(item));
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(FooData.DeserializeFooData(item));
+                            }
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
@@ -198,7 +212,14 @@ namespace MgmtPropertyBag
                         List<FooData> array = new List<FooData>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            array.Add(FooData.DeserializeFooData(item));
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(FooData.DeserializeFooData(item));
+                            }
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
@@ -236,7 +257,14 @@ namespace MgmtPropertyBag
                         List<FooData> array = new List<FooData>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            array.Add(FooData.DeserializeFooData(item));
+                            if (item.ValueKind == JsonValueKind.Null)
+                            {
+                                array.Add(null);
+                            }
+                            else
+                            {
+                                array.Add(FooData.DeserializeFooData(item));
+                            }
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);

@@ -32,7 +32,14 @@ namespace MgmtScopeResource.Models
                     List<Marketplace> array = new List<Marketplace>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Marketplace.DeserializeMarketplace(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(Marketplace.DeserializeMarketplace(item));
+                        }
                     }
                     value = array;
                     continue;

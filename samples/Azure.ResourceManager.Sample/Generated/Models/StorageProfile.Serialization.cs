@@ -31,12 +31,12 @@ namespace Azure.ResourceManager.Sample.Models
             if (Optional.IsDefined(ImageReference))
             {
                 writer.WritePropertyName("imageReference"u8);
-                writer.WriteObjectValue(ImageReference);
+                ((IJsonModel<ImageReference>)ImageReference).Write(writer, options);
             }
             if (Optional.IsDefined(OSDisk))
             {
                 writer.WritePropertyName("osDisk"u8);
-                writer.WriteObjectValue(OSDisk);
+                ((IJsonModel<OSDisk>)OSDisk).Write(writer, options);
             }
             if (Optional.IsCollectionDefined(DataDisks))
             {
@@ -44,7 +44,14 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in DataDisks)
                 {
-                    writer.WriteObjectValue(item);
+                    if (item != null)
+                    {
+                        ((IJsonModel<DataDisk>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -120,7 +127,14 @@ namespace Azure.ResourceManager.Sample.Models
                     List<DataDisk> array = new List<DataDisk>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DataDisk.DeserializeDataDisk(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(DataDisk.DeserializeDataDisk(item));
+                        }
                     }
                     dataDisks = array;
                     continue;

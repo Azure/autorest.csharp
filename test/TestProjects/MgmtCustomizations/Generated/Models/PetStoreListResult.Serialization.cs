@@ -32,7 +32,14 @@ namespace MgmtCustomizations.Models
                     List<PetStoreData> array = new List<PetStoreData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(PetStoreData.DeserializePetStoreData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(PetStoreData.DeserializePetStoreData(item));
+                        }
                     }
                     value = array;
                     continue;

@@ -28,23 +28,37 @@ namespace _Type.Union.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("string"u8);
+            if (String != null)
+            {
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(String);
 #else
-            using (JsonDocument document = JsonDocument.Parse(String))
-            {
-                JsonSerializer.Serialize(writer, document.RootElement);
-            }
+                using (JsonDocument document = JsonDocument.Parse(String))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
 #endif
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             writer.WritePropertyName("array"u8);
+            if (Array != null)
+            {
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Array);
 #else
-            using (JsonDocument document = JsonDocument.Parse(Array))
-            {
-                JsonSerializer.Serialize(writer, document.RootElement);
-            }
+                using (JsonDocument document = JsonDocument.Parse(Array))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
 #endif
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)

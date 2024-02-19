@@ -58,7 +58,14 @@ namespace MgmtScopeResource
                 foreach (var item in Parameters)
                 {
                     writer.WritePropertyName(item.Key);
-                    writer.WriteObjectValue(item.Value);
+                    if (item.Value != null)
+                    {
+                        writer.WriteObjectValue(item.Value);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndObject();
             }
@@ -90,7 +97,14 @@ namespace MgmtScopeResource
                 writer.WriteStartArray();
                 foreach (var item in NonComplianceMessages)
                 {
-                    writer.WriteObjectValue(item);
+                    if (item != null)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -206,7 +220,14 @@ namespace MgmtScopeResource
                             Dictionary<string, ParameterValuesValue> dictionary = new Dictionary<string, ParameterValuesValue>();
                             foreach (var property1 in property0.Value.EnumerateObject())
                             {
-                                dictionary.Add(property1.Name, ParameterValuesValue.DeserializeParameterValuesValue(property1.Value));
+                                if (property1.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property1.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property1.Name, ParameterValuesValue.DeserializeParameterValuesValue(property1.Value));
+                                }
                             }
                             parameters = dictionary;
                             continue;
@@ -243,7 +264,14 @@ namespace MgmtScopeResource
                             List<NonComplianceMessage> array = new List<NonComplianceMessage>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(NonComplianceMessage.DeserializeNonComplianceMessage(item));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(NonComplianceMessage.DeserializeNonComplianceMessage(item));
+                                }
                             }
                             nonComplianceMessages = array;
                             continue;

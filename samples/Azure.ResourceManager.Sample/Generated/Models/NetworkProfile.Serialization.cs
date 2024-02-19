@@ -34,7 +34,14 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in NetworkInterfaces)
                 {
-                    writer.WriteObjectValue(item);
+                    if (item != null)
+                    {
+                        ((IJsonModel<NetworkInterfaceReference>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -90,7 +97,14 @@ namespace Azure.ResourceManager.Sample.Models
                     List<NetworkInterfaceReference> array = new List<NetworkInterfaceReference>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(NetworkInterfaceReference.DeserializeNetworkInterfaceReference(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(NetworkInterfaceReference.DeserializeNetworkInterfaceReference(item));
+                        }
                     }
                     networkInterfaces = array;
                     continue;

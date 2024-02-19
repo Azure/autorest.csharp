@@ -33,7 +33,14 @@ namespace MgmtMockAndSample.Models
                     List<DeletedVaultData> array = new List<DeletedVaultData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DeletedVaultData.DeserializeDeletedVaultData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(DeletedVaultData.DeserializeDeletedVaultData(item));
+                        }
                     }
                     value = array;
                     continue;

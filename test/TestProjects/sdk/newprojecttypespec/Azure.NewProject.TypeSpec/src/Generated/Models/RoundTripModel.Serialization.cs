@@ -47,7 +47,14 @@ namespace Azure.NewProject.TypeSpec.Models
             }
             writer.WriteEndObject();
             writer.WritePropertyName("requiredModel"u8);
-            ((IJsonModel<Thing>)RequiredModel).Write(writer, options);
+            if (RequiredModel != null)
+            {
+                ((IJsonModel<Thing>)RequiredModel).Write(writer, options);
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             if (Optional.IsDefined(IntExtensibleEnum))
             {
                 writer.WritePropertyName("intExtensibleEnum"u8);
@@ -114,14 +121,21 @@ namespace Azure.NewProject.TypeSpec.Models
                 writer.WriteStringValue(StringFixedEnum.Value.ToSerialString());
             }
             writer.WritePropertyName("requiredUnknown"u8);
+            if (RequiredUnknown != null)
+            {
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(RequiredUnknown);
 #else
-            using (JsonDocument document = JsonDocument.Parse(RequiredUnknown))
-            {
-                JsonSerializer.Serialize(writer, document.RootElement);
-            }
+                using (JsonDocument document = JsonDocument.Parse(RequiredUnknown))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
 #endif
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             if (Optional.IsDefined(OptionalUnknown))
             {
                 writer.WritePropertyName("optionalUnknown"u8);

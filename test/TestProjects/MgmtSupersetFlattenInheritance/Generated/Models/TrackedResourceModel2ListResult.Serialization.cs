@@ -32,7 +32,14 @@ namespace MgmtSupersetFlattenInheritance.Models
                     List<TrackedResourceModel2> array = new List<TrackedResourceModel2>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(TrackedResourceModel2.DeserializeTrackedResourceModel2(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(TrackedResourceModel2.DeserializeTrackedResourceModel2(item));
+                        }
                     }
                     value = array;
                     continue;

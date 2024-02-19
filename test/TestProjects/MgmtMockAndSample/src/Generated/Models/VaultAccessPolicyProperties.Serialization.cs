@@ -20,7 +20,14 @@ namespace MgmtMockAndSample.Models
             writer.WriteStartArray();
             foreach (var item in AccessPolicies)
             {
-                writer.WriteObjectValue(item);
+                if (item != null)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             writer.WriteEndArray();
             writer.WriteEndObject();
@@ -40,7 +47,14 @@ namespace MgmtMockAndSample.Models
                     List<AccessPolicyEntry> array = new List<AccessPolicyEntry>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(AccessPolicyEntry.DeserializeAccessPolicyEntry(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(AccessPolicyEntry.DeserializeAccessPolicyEntry(item));
+                        }
                     }
                     accessPolicies = array;
                     continue;

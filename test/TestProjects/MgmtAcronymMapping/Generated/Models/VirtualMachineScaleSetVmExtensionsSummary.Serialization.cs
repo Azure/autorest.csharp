@@ -37,7 +37,14 @@ namespace MgmtAcronymMapping.Models
                     List<VirtualMachineStatusCodeCount> array = new List<VirtualMachineStatusCodeCount>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(VirtualMachineStatusCodeCount.DeserializeVirtualMachineStatusCodeCount(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(VirtualMachineStatusCodeCount.DeserializeVirtualMachineStatusCodeCount(item));
+                        }
                     }
                     statusesSummary = array;
                     continue;

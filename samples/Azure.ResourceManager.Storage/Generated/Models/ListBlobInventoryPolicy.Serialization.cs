@@ -32,7 +32,14 @@ namespace Azure.ResourceManager.Storage.Models
                     List<BlobInventoryPolicyData> array = new List<BlobInventoryPolicyData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(BlobInventoryPolicyData.DeserializeBlobInventoryPolicyData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(BlobInventoryPolicyData.DeserializeBlobInventoryPolicyData(item));
+                        }
                     }
                     value = array;
                     continue;

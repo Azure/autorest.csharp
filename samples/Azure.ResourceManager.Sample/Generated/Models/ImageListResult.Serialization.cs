@@ -33,7 +33,14 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteStartArray();
             foreach (var item in Images)
             {
-                writer.WriteObjectValue(item);
+                if (item != null)
+                {
+                    ((IJsonModel<ImageData>)item).Write(writer, options);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             writer.WriteEndArray();
             if (Optional.IsDefined(NextLink))
@@ -90,7 +97,14 @@ namespace Azure.ResourceManager.Sample.Models
                     List<ImageData> array = new List<ImageData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ImageData.DeserializeImageData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(ImageData.DeserializeImageData(item));
+                        }
                     }
                     value = array;
                     continue;

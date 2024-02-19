@@ -26,14 +26,21 @@ namespace UnbrandedTypeSpec.Models
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
             writer.WritePropertyName("requiredUnion"u8);
+            if (RequiredUnion != null)
+            {
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(RequiredUnion);
 #else
-            using (JsonDocument document = JsonDocument.Parse(RequiredUnion))
-            {
-                JsonSerializer.Serialize(writer, document.RootElement);
-            }
+                using (JsonDocument document = JsonDocument.Parse(RequiredUnion))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
 #endif
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             writer.WritePropertyName("requiredLiteralString"u8);
             writer.WriteStringValue(RequiredLiteralString.ToString());
             writer.WritePropertyName("requiredLiteralInt"u8);

@@ -28,7 +28,14 @@ namespace _Azure.Lro.RpcLegacy.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("error"u8);
-            JsonSerializer.Serialize(writer, Error);
+            if (Error != null)
+            {
+                JsonSerializer.Serialize(writer, Error);
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)

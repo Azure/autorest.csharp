@@ -32,7 +32,14 @@ namespace MgmtScopeResource.Models
                     List<DeploymentOperation> array = new List<DeploymentOperation>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DeploymentOperation.DeserializeDeploymentOperation(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(DeploymentOperation.DeserializeDeploymentOperation(item));
+                        }
                     }
                     value = array;
                     continue;

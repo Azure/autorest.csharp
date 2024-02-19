@@ -25,9 +25,23 @@ namespace CognitiveSearch.Models
             writer.WritePropertyName("type"u8);
             writer.WriteStringValue(Type.ToString());
             writer.WritePropertyName("credentials"u8);
-            writer.WriteObjectValue(Credentials);
+            if (Credentials != null)
+            {
+                writer.WriteObjectValue(Credentials);
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             writer.WritePropertyName("container"u8);
-            writer.WriteObjectValue(Container);
+            if (Container != null)
+            {
+                writer.WriteObjectValue(Container);
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             if (Optional.IsDefined(DataChangeDetectionPolicy))
             {
                 writer.WritePropertyName("dataChangeDetectionPolicy"u8);

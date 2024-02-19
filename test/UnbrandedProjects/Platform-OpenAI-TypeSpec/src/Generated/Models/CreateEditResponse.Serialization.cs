@@ -42,7 +42,14 @@ namespace OpenAI.Models
             }
             writer.WriteEndArray();
             writer.WritePropertyName("usage"u8);
-            ((IJsonModel<CompletionUsage>)Usage).Write(writer, options);
+            if (Usage != null)
+            {
+                ((IJsonModel<CompletionUsage>)Usage).Write(writer, options);
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)

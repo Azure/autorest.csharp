@@ -26,9 +26,23 @@ namespace OpenAI.Models
             writer.WritePropertyName("flagged"u8);
             writer.WriteBooleanValue(Flagged);
             writer.WritePropertyName("categories"u8);
-            ((IJsonModel<CreateModerationResponseResultCategories>)Categories).Write(writer, options);
+            if (Categories != null)
+            {
+                ((IJsonModel<CreateModerationResponseResultCategories>)Categories).Write(writer, options);
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             writer.WritePropertyName("category_scores"u8);
-            ((IJsonModel<CreateModerationResponseResultCategoryScores>)CategoryScores).Write(writer, options);
+            if (CategoryScores != null)
+            {
+                ((IJsonModel<CreateModerationResponseResultCategoryScores>)CategoryScores).Write(writer, options);
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)

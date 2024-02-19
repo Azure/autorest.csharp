@@ -48,7 +48,14 @@ namespace body_complex.Models
                 writer.WriteStartArray();
                 foreach (var item in Siblings)
                 {
-                    ((IJsonModel<Fish>)item).Write(writer, options);
+                    if (item != null)
+                    {
+                        ((IJsonModel<Fish>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -147,7 +154,14 @@ namespace body_complex.Models
                     List<Fish> array = new List<Fish>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DeserializeFish(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(DeserializeFish(item));
+                        }
                     }
                     siblings = array;
                     continue;

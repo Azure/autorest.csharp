@@ -28,7 +28,14 @@ namespace AnomalyDetector.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("dataSource"u8);
-            writer.WriteStringValue(DataSource.AbsoluteUri);
+            if (DataSource != null)
+            {
+                writer.WriteStringValue(DataSource.AbsoluteUri);
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             writer.WritePropertyName("topContributorCount"u8);
             writer.WriteNumberValue(TopContributorCount);
             writer.WritePropertyName("startTime"u8);

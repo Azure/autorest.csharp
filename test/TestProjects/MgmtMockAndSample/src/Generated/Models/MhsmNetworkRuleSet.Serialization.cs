@@ -33,7 +33,14 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in IpRules)
                 {
-                    writer.WriteObjectValue(item);
+                    if (item != null)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -43,7 +50,14 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in VirtualNetworkRules)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    if (item != null)
+                    {
+                        JsonSerializer.Serialize(writer, item);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -89,7 +103,14 @@ namespace MgmtMockAndSample.Models
                     List<MhsmipRule> array = new List<MhsmipRule>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(MhsmipRule.DeserializeMhsmipRule(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(MhsmipRule.DeserializeMhsmipRule(item));
+                        }
                     }
                     ipRules = array;
                     continue;
@@ -103,7 +124,14 @@ namespace MgmtMockAndSample.Models
                     List<WritableSubResource> array = new List<WritableSubResource>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(JsonSerializer.Deserialize<WritableSubResource>(item.GetRawText()));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(JsonSerializer.Deserialize<WritableSubResource>(item.GetRawText()));
+                        }
                     }
                     virtualNetworkRules = array;
                     continue;

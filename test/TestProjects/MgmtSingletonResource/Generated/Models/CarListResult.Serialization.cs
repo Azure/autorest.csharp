@@ -33,7 +33,14 @@ namespace MgmtSingletonResource.Models
                     List<CarData> array = new List<CarData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CarData.DeserializeCarData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(CarData.DeserializeCarData(item));
+                        }
                     }
                     value = array;
                     continue;

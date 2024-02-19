@@ -30,12 +30,12 @@ namespace Azure.ResourceManager.Sample.Models
             if (Optional.IsDefined(AvailablePatchSummary))
             {
                 writer.WritePropertyName("availablePatchSummary"u8);
-                writer.WriteObjectValue(AvailablePatchSummary);
+                ((IJsonModel<AvailablePatchSummary>)AvailablePatchSummary).Write(writer, options);
             }
             if (Optional.IsDefined(LastPatchInstallationSummary))
             {
                 writer.WritePropertyName("lastPatchInstallationSummary"u8);
-                writer.WriteObjectValue(LastPatchInstallationSummary);
+                ((IJsonModel<LastPatchInstallationSummary>)LastPatchInstallationSummary).Write(writer, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

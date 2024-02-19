@@ -48,7 +48,14 @@ namespace Azure.AI.FormRecognizer.Models
                     List<KeyValuePair> array = new List<KeyValuePair>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(KeyValuePair.DeserializeKeyValuePair(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(KeyValuePair.DeserializeKeyValuePair(item));
+                        }
                     }
                     keyValuePairs = array;
                     continue;
@@ -62,7 +69,14 @@ namespace Azure.AI.FormRecognizer.Models
                     List<DataTable> array = new List<DataTable>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DataTable.DeserializeDataTable(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(DataTable.DeserializeDataTable(item));
+                        }
                     }
                     tables = array;
                     continue;

@@ -59,7 +59,14 @@ namespace CognitiveServices.TextAnalytics.Models
                     List<TextAnalyticsError> array = new List<TextAnalyticsError>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DeserializeTextAnalyticsError(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(DeserializeTextAnalyticsError(item));
+                        }
                     }
                     details = array;
                     continue;

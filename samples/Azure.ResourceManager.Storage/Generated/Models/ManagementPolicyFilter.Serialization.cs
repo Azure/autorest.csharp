@@ -39,7 +39,14 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WriteStartArray();
                 foreach (var item in BlobIndexMatch)
                 {
-                    writer.WriteObjectValue(item);
+                    if (item != null)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -90,7 +97,14 @@ namespace Azure.ResourceManager.Storage.Models
                     List<TagFilter> array = new List<TagFilter>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(TagFilter.DeserializeTagFilter(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(TagFilter.DeserializeTagFilter(item));
+                        }
                     }
                     blobIndexMatch = array;
                     continue;

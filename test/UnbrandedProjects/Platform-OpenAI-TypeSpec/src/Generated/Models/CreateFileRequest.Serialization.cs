@@ -24,7 +24,14 @@ namespace OpenAI.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("file"u8);
-            writer.WriteBase64StringValue(File.ToArray(), "D");
+            if (File != null)
+            {
+                writer.WriteBase64StringValue(File.ToArray(), "D");
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             writer.WritePropertyName("purpose"u8);
             writer.WriteStringValue(Purpose);
             if (options.Format != "W" && _serializedAdditionalRawData != null)

@@ -87,7 +87,14 @@ namespace MgmtXmlDeserialization.Models
                 writer.WriteStartArray();
                 foreach (var item in Value)
                 {
-                    ((IJsonModel<XmlInstanceData>)item).Write(writer, options);
+                    if (item != null)
+                    {
+                        ((IJsonModel<XmlInstanceData>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -155,7 +162,14 @@ namespace MgmtXmlDeserialization.Models
                     List<XmlInstanceData> array = new List<XmlInstanceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(XmlInstanceData.DeserializeXmlInstanceData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(XmlInstanceData.DeserializeXmlInstanceData(item));
+                        }
                     }
                     value = array;
                     continue;

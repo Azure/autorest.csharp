@@ -33,7 +33,14 @@ namespace MgmtResourceName.Models
                     List<ProviderOperationData> array = new List<ProviderOperationData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ProviderOperationData.DeserializeProviderOperationData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(ProviderOperationData.DeserializeProviderOperationData(item));
+                        }
                     }
                     value = array;
                     continue;

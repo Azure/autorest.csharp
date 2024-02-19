@@ -29,7 +29,14 @@ namespace MgmtListMethods.Models
                     List<MgmtGrpParentWithLocData> array = new List<MgmtGrpParentWithLocData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(MgmtGrpParentWithLocData.DeserializeMgmtGrpParentWithLocData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(MgmtGrpParentWithLocData.DeserializeMgmtGrpParentWithLocData(item));
+                        }
                     }
                     value = array;
                     continue;

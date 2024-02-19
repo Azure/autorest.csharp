@@ -33,7 +33,14 @@ namespace MgmtScopeResource.Models
                     List<DeploymentExtendedData> array = new List<DeploymentExtendedData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DeploymentExtendedData.DeserializeDeploymentExtendedData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(DeploymentExtendedData.DeserializeDeploymentExtendedData(item));
+                        }
                     }
                     value = array;
                     continue;

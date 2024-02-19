@@ -28,7 +28,14 @@ namespace Payload.ContentNegotiation.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("content"u8);
-            writer.WriteBase64StringValue(Content.ToArray(), "D");
+            if (Content != null)
+            {
+                writer.WriteBase64StringValue(Content.ToArray(), "D");
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)

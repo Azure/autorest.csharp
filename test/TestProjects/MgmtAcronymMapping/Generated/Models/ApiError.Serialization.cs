@@ -35,7 +35,14 @@ namespace MgmtAcronymMapping.Models
                     List<ApiErrorBase> array = new List<ApiErrorBase>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ApiErrorBase.DeserializeApiErrorBase(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(ApiErrorBase.DeserializeApiErrorBase(item));
+                        }
                     }
                     details = array;
                     continue;

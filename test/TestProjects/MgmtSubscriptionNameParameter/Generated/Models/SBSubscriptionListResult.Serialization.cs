@@ -33,7 +33,14 @@ namespace MgmtSubscriptionNameParameter.Models
                     List<SBSubscriptionData> array = new List<SBSubscriptionData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(SBSubscriptionData.DeserializeSBSubscriptionData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(SBSubscriptionData.DeserializeSBSubscriptionData(item));
+                        }
                     }
                     value = array;
                     continue;

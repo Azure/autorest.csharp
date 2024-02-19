@@ -32,7 +32,14 @@ namespace MgmtExactMatchInheritance.Models
                     List<ExactMatchModel3> array = new List<ExactMatchModel3>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ExactMatchModel3.DeserializeExactMatchModel3(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(ExactMatchModel3.DeserializeExactMatchModel3(item));
+                        }
                     }
                     value = array;
                     continue;

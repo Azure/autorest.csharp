@@ -22,7 +22,14 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WriteStartArray();
                 foreach (var item in CorsRulesValue)
                 {
-                    writer.WriteObjectValue(item);
+                    if (item != null)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -47,7 +54,14 @@ namespace Azure.ResourceManager.Storage.Models
                     List<CorsRule> array = new List<CorsRule>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CorsRule.DeserializeCorsRule(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(CorsRule.DeserializeCorsRule(item));
+                        }
                     }
                     corsRules = array;
                     continue;

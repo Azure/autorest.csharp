@@ -83,7 +83,14 @@ namespace Azure.ResourceManager.Storage.Models
                     List<SKUCapability> array = new List<SKUCapability>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(SKUCapability.DeserializeSKUCapability(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(SKUCapability.DeserializeSKUCapability(item));
+                        }
                     }
                     capabilities = array;
                     continue;
@@ -97,7 +104,14 @@ namespace Azure.ResourceManager.Storage.Models
                     List<Restriction> array = new List<Restriction>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Restriction.DeserializeRestriction(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(Restriction.DeserializeRestriction(item));
+                        }
                     }
                     restrictions = array;
                     continue;

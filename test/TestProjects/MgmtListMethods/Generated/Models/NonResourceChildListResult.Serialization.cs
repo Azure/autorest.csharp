@@ -31,7 +31,14 @@ namespace MgmtListMethods.Models
                     List<NonResourceChild> array = new List<NonResourceChild>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(NonResourceChild.DeserializeNonResourceChild(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(NonResourceChild.DeserializeNonResourceChild(item));
+                        }
                     }
                     value = array;
                     continue;

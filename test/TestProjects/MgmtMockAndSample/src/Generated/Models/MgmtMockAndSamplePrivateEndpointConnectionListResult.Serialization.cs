@@ -33,7 +33,14 @@ namespace MgmtMockAndSample.Models
                     List<MgmtMockAndSamplePrivateEndpointConnectionData> array = new List<MgmtMockAndSamplePrivateEndpointConnectionData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(MgmtMockAndSamplePrivateEndpointConnectionData.DeserializeMgmtMockAndSamplePrivateEndpointConnectionData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(MgmtMockAndSamplePrivateEndpointConnectionData.DeserializeMgmtMockAndSamplePrivateEndpointConnectionData(item));
+                        }
                     }
                     value = array;
                     continue;

@@ -29,7 +29,14 @@ namespace MgmtMultipleParentResource.Models
                     List<ChildBodyData> array = new List<ChildBodyData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ChildBodyData.DeserializeChildBodyData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(ChildBodyData.DeserializeChildBodyData(item));
+                        }
                     }
                     value = array;
                     continue;

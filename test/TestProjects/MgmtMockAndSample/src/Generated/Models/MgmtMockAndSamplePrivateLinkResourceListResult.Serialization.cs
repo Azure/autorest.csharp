@@ -31,7 +31,14 @@ namespace MgmtMockAndSample.Models
                     List<MgmtMockAndSamplePrivateLinkResource> array = new List<MgmtMockAndSamplePrivateLinkResource>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(MgmtMockAndSamplePrivateLinkResource.DeserializeMgmtMockAndSamplePrivateLinkResource(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(MgmtMockAndSamplePrivateLinkResource.DeserializeMgmtMockAndSamplePrivateLinkResource(item));
+                        }
                     }
                     value = array;
                     continue;

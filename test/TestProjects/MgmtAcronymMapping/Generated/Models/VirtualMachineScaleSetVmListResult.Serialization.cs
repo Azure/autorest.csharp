@@ -29,7 +29,14 @@ namespace MgmtAcronymMapping.Models
                     List<VirtualMachineScaleSetVmData> array = new List<VirtualMachineScaleSetVmData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(VirtualMachineScaleSetVmData.DeserializeVirtualMachineScaleSetVmData(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(VirtualMachineScaleSetVmData.DeserializeVirtualMachineScaleSetVmData(item));
+                        }
                     }
                     value = array;
                     continue;

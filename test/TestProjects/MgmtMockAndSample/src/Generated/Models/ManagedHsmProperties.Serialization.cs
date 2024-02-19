@@ -245,7 +245,14 @@ namespace MgmtMockAndSample.Models
                     List<MhsmPrivateEndpointConnectionItem> array = new List<MhsmPrivateEndpointConnectionItem>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(MhsmPrivateEndpointConnectionItem.DeserializeMhsmPrivateEndpointConnectionItem(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(MhsmPrivateEndpointConnectionItem.DeserializeMhsmPrivateEndpointConnectionItem(item));
+                        }
                     }
                     privateEndpointConnections = array;
                     continue;
