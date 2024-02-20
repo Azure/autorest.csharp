@@ -58,7 +58,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeSnake(document.RootElement, options);
+            return DeserializeUnknownSnake(document.RootElement, options);
         }
 
         internal static UnknownSnake DeserializeUnknownSnake(JsonElement element, ModelReaderWriterOptions options = null)
@@ -116,7 +116,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeSnake(document.RootElement, options);
+                        return DeserializeUnknownSnake(document.RootElement, options);
                     }
                 default:
                     throw new FormatException($"The model {nameof(Snake)} does not support '{options.Format}' format.");

@@ -58,7 +58,7 @@ namespace PetStore.Models
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeFish(document.RootElement, options);
+            return DeserializeUnknownFish(document.RootElement, options);
         }
 
         internal static UnknownFish DeserializeUnknownFish(JsonElement element, ModelReaderWriterOptions options = null)
@@ -116,7 +116,7 @@ namespace PetStore.Models
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeFish(document.RootElement, options);
+                        return DeserializeUnknownFish(document.RootElement, options);
                     }
                 default:
                     throw new FormatException($"The model {nameof(Fish)} does not support '{options.Format}' format.");

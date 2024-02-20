@@ -58,7 +58,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeDog(document.RootElement, options);
+            return DeserializeUnknownDog(document.RootElement, options);
         }
 
         internal static UnknownDog DeserializeUnknownDog(JsonElement element, ModelReaderWriterOptions options = null)
@@ -116,7 +116,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeDog(document.RootElement, options);
+                        return DeserializeUnknownDog(document.RootElement, options);
                     }
                 default:
                     throw new FormatException($"The model {nameof(Dog)} does not support '{options.Format}' format.");

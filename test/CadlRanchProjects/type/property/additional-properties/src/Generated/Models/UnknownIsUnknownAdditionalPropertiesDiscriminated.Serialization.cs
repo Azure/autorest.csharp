@@ -55,7 +55,7 @@ namespace _Type.Property.AdditionalProperties.Models
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeIsUnknownAdditionalPropertiesDiscriminated(document.RootElement, options);
+            return DeserializeUnknownIsUnknownAdditionalPropertiesDiscriminated(document.RootElement, options);
         }
 
         internal static UnknownIsUnknownAdditionalPropertiesDiscriminated DeserializeUnknownIsUnknownAdditionalPropertiesDiscriminated(JsonElement element, ModelReaderWriterOptions options = null)
@@ -110,7 +110,7 @@ namespace _Type.Property.AdditionalProperties.Models
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeIsUnknownAdditionalPropertiesDiscriminated(document.RootElement, options);
+                        return DeserializeUnknownIsUnknownAdditionalPropertiesDiscriminated(document.RootElement, options);
                     }
                 default:
                     throw new FormatException($"The model {nameof(IsUnknownAdditionalPropertiesDiscriminated)} does not support '{options.Format}' format.");

@@ -65,7 +65,7 @@ namespace xms_error_responses.Models
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializePetActionError(document.RootElement, options);
+            return DeserializeUnknownPetActionError(document.RootElement, options);
         }
 
         internal static UnknownPetActionError DeserializeUnknownPetActionError(JsonElement element, ModelReaderWriterOptions options = null)
@@ -129,7 +129,7 @@ namespace xms_error_responses.Models
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializePetActionError(document.RootElement, options);
+                        return DeserializeUnknownPetActionError(document.RootElement, options);
                     }
                 default:
                     throw new FormatException($"The model {nameof(PetActionError)} does not support '{options.Format}' format.");
