@@ -80,7 +80,7 @@ namespace required_optional.Models
                     {
                         continue;
                     }
-                    value = Product.DeserializeProduct(property.Value);
+                    value = Product.DeserializeProduct(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

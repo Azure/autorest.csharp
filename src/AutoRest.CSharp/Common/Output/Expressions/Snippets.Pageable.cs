@@ -124,7 +124,7 @@ namespace AutoRest.CSharp.Common.Output.Models
             }
 
             var variable = new VariableReference(typeof(JsonElement), "e");
-            var deserializeImplementation = JsonSerializationMethodsBuilder.GetDeserializeValueExpression(new JsonElementExpression(variable), pageItemType);
+            var deserializeImplementation = JsonSerializationMethodsBuilder.GetDeserializeValueExpression(new JsonElementExpression(variable), pageItemType, null);
             return new FuncExpression(new[] { variable.Declaration }, deserializeImplementation);
         }
     }

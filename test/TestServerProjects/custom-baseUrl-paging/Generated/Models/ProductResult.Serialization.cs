@@ -94,7 +94,7 @@ namespace custom_baseUrl_paging.Models
                     List<Product> array = new List<Product>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Product.DeserializeProduct(item));
+                        array.Add(Product.DeserializeProduct(item, options));
                     }
                     values = array;
                     continue;

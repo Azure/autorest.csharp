@@ -73,10 +73,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
             {
                 switch (discriminator.GetString())
                 {
-                    case "golden": return Golden.DeserializeGolden(element);
+                    case "golden": return Golden.DeserializeGolden(element, options);
                 }
             }
-            return UnknownDog.DeserializeUnknownDog(element);
+            return UnknownDog.DeserializeUnknownDog(element, options);
         }
 
         BinaryData IPersistableModel<Dog>.Write(ModelReaderWriterOptions options)

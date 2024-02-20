@@ -129,7 +129,7 @@ namespace OpenAI.Models
                     {
                         continue;
                     }
-                    hyperparameters = CreateFineTuningJobRequestHyperparameters.DeserializeCreateFineTuningJobRequestHyperparameters(property.Value);
+                    hyperparameters = CreateFineTuningJobRequestHyperparameters.DeserializeCreateFineTuningJobRequestHyperparameters(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("suffix"u8))

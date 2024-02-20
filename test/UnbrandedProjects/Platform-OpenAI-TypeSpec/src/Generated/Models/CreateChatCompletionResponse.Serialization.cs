@@ -116,7 +116,7 @@ namespace OpenAI.Models
                     List<CreateChatCompletionResponseChoice> array = new List<CreateChatCompletionResponseChoice>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CreateChatCompletionResponseChoice.DeserializeCreateChatCompletionResponseChoice(item));
+                        array.Add(CreateChatCompletionResponseChoice.DeserializeCreateChatCompletionResponseChoice(item, options));
                     }
                     choices = array;
                     continue;
@@ -127,7 +127,7 @@ namespace OpenAI.Models
                     {
                         continue;
                     }
-                    usage = CompletionUsage.DeserializeCompletionUsage(property.Value);
+                    usage = CompletionUsage.DeserializeCompletionUsage(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

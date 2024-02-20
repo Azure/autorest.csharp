@@ -77,7 +77,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             {
                 if (property.NameEquals("inner"u8))
                 {
-                    inner = InnerModel.DeserializeInnerModel(property.Value);
+                    inner = InnerModel.DeserializeInnerModel(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("name"u8))

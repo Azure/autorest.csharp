@@ -78,11 +78,11 @@ namespace ModelsTypeSpec.Models
             {
                 switch (discriminator.GetString())
                 {
-                    case "A": return DerivedModelWithDiscriminatorA.DeserializeDerivedModelWithDiscriminatorA(element);
-                    case "B": return DerivedModelWithDiscriminatorB.DeserializeDerivedModelWithDiscriminatorB(element);
+                    case "A": return DerivedModelWithDiscriminatorA.DeserializeDerivedModelWithDiscriminatorA(element, options);
+                    case "B": return DerivedModelWithDiscriminatorB.DeserializeDerivedModelWithDiscriminatorB(element, options);
                 }
             }
-            return UnknownBaseModelWithDiscriminator.DeserializeUnknownBaseModelWithDiscriminator(element);
+            return UnknownBaseModelWithDiscriminator.DeserializeUnknownBaseModelWithDiscriminator(element, options);
         }
 
         BinaryData IPersistableModel<BaseModelWithDiscriminator>.Write(ModelReaderWriterOptions options)

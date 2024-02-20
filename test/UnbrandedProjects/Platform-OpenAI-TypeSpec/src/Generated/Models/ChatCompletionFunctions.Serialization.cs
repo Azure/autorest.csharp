@@ -89,7 +89,7 @@ namespace OpenAI.Models
                 }
                 if (property.NameEquals("parameters"u8))
                 {
-                    parameters = ChatCompletionFunctionParameters.DeserializeChatCompletionFunctionParameters(property.Value);
+                    parameters = ChatCompletionFunctionParameters.DeserializeChatCompletionFunctionParameters(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

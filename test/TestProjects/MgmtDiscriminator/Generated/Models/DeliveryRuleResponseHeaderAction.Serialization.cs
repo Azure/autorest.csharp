@@ -83,7 +83,7 @@ namespace MgmtDiscriminator.Models
             {
                 if (property.NameEquals("parameters"u8))
                 {
-                    parameters = HeaderActionParameters.DeserializeHeaderActionParameters(property.Value);
+                    parameters = HeaderActionParameters.DeserializeHeaderActionParameters(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("name"u8))

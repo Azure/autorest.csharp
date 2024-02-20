@@ -80,11 +80,11 @@ namespace xms_error_responses.Models
             {
                 switch (discriminator.GetString())
                 {
-                    case "AnimalNotFound": return AnimalNotFound.DeserializeAnimalNotFound(element);
-                    case "InvalidResourceLink": return LinkNotFound.DeserializeLinkNotFound(element);
+                    case "AnimalNotFound": return AnimalNotFound.DeserializeAnimalNotFound(element, options);
+                    case "InvalidResourceLink": return LinkNotFound.DeserializeLinkNotFound(element, options);
                 }
             }
-            return UnknownNotFoundErrorBase.DeserializeUnknownNotFoundErrorBase(element);
+            return UnknownNotFoundErrorBase.DeserializeUnknownNotFoundErrorBase(element, options);
         }
 
         BinaryData IPersistableModel<NotFoundErrorBase>.Write(ModelReaderWriterOptions options)
