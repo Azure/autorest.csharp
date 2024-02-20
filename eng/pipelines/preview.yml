@@ -35,9 +35,10 @@ extends:
     RegenerationJobCount: 10
     BuildPrereleaseVersion: true
     ${{ if eq(variables['Build.Reason'], 'Schedule') }}:
-      UseTypeSpecNext: false
-    ${{ else }}:
+      # In scheduled builds, we always use the "next" version of TypeSpec
       UseTypeSpecNext: true
+    ${{ else }}:
+      UseTypeSpecNext: ${{ parameters.UseTypeSpecNext }}
     EmitterPackageJsonPath: src/TypeSpec.Extension/Emitter.Csharp/package.json
     PublishInternal: true
     Packages:
