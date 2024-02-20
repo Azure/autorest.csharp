@@ -89,7 +89,7 @@ namespace ModelsTypeSpec.Models
                     {
                         continue;
                     }
-                    inner = DeserializeInputRecursiveModel(property.Value);
+                    inner = DeserializeInputRecursiveModel(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

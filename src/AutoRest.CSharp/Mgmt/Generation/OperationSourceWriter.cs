@@ -158,7 +158,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                 yield return UsingVar("document", JsonDocumentExpression.Parse(stream, async), out var document);
 
-                var deserializeExpression = JsonSerializationMethodsBuilder.GetDeserializeImplementation(resourceData, document.RootElement, null);
+                ValueExpression deserializeExpression = SerializableObjectTypeExpression.Deserialize(resourceData, document.RootElement);
                 if (_operationIdMappings is not null)
                 {
                     deserializeExpression = new InvokeInstanceMethodExpression(null, "ScrubId", new[]{deserializeExpression}, null, false);
@@ -175,7 +175,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             else
             {
-                yield return JsonSerializationMethodsBuilder.BuildDeserializationForMethods(_opSource.ResponseSerialization, async, null, stream, _opSource.ReturnType.Equals(typeof(BinaryData)));
+                yield return JsonSerializationMethodsBuilder.BuildDeserializationForMethods(_opSource.ResponseSerialization, async, null, stream, _opSource.ReturnType.Equals(typeof(BinaryData)), null);
             }
         }
     }

@@ -173,7 +173,7 @@ namespace Azure.ResourceManager.Sample
             {
                 if (property.NameEquals("sku"u8))
                 {
-                    sku = SampleSku.DeserializeSampleSku(property.Value);
+                    sku = SampleSku.DeserializeSampleSku(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))
@@ -294,7 +294,7 @@ namespace Azure.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            instanceView = DedicatedHostInstanceView.DeserializeDedicatedHostInstanceView(property0.Value);
+                            instanceView = DedicatedHostInstanceView.DeserializeDedicatedHostInstanceView(property0.Value, options);
                             continue;
                         }
                     }

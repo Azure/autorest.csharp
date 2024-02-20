@@ -92,7 +92,7 @@ namespace ModelsTypeSpec.Models
                     {
                         continue;
                     }
-                    innerError = DeserializeErrorModel(property.Value);
+                    innerError = DeserializeErrorModel(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

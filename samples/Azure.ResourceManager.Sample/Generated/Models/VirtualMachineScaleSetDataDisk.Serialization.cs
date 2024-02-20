@@ -165,7 +165,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    managedDisk = VirtualMachineScaleSetManagedDiskParameters.DeserializeVirtualMachineScaleSetManagedDiskParameters(property.Value);
+                    managedDisk = VirtualMachineScaleSetManagedDiskParameters.DeserializeVirtualMachineScaleSetManagedDiskParameters(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("diskIOPSReadWrite"u8))
