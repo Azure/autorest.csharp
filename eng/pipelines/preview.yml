@@ -34,7 +34,7 @@ extends:
   parameters:
     RegenerationJobCount: 10
     BuildPrereleaseVersion: true
-    ${{ if eq(variables['Build.Reason'], 'Scheduled') }}:
+    ${{ if eq(variables['Build.Reason'], 'Schedule') }}:
       UseTypeSpecNext: false
     ${{ else }}:
       UseTypeSpecNext: true
