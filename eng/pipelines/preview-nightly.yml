@@ -2,7 +2,7 @@ parameters:
 - name: UseTypeSpecNext
   displayName: Use TypeSpec "next" version
   type: boolean
-  default: false
+  default: true
 - name: RunUnitTests
   displayName: Run unit tests
   type: boolean
