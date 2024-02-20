@@ -80,14 +80,19 @@ namespace MgmtDiscriminator.Models
         }
 
         /// <summary> Gets or sets the type name. </summary>
+        [WirePath("typeName")]
         public QueryStringMatchConditionParametersTypeName TypeName { get; set; }
         /// <summary> Describes operator to be matched. </summary>
+        [WirePath("operator")]
         public QueryStringOperator Operator { get; set; }
         /// <summary> Describes if this is negate condition or not. </summary>
+        [WirePath("negateCondition")]
         public bool? NegateCondition { get; set; }
         /// <summary> The match value for the condition of the delivery rule. </summary>
+        [WirePath("matchValues")]
         public IList<string> MatchValues { get; }
         /// <summary> List of transforms. </summary>
+        [WirePath("transforms")]
         public IList<Transform> Transforms { get; }
     }
 }

@@ -42,6 +42,7 @@ namespace MgmtDiscriminator.Models
         }
 
         /// <summary> Defines the parameters for the condition. </summary>
+        [WirePath("parameters")]
         public RemoteAddressMatchConditionParameters Parameters { get; set; }
     }
 }

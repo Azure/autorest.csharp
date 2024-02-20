@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -20,6 +21,38 @@ namespace Azure.ResourceManager.Sample
     /// </summary>
     public partial class VirtualMachineScaleSetVmData : TrackedResourceData
     {
+        /// <summary>
+        /// Keeps track of any properties unknown to the library.
+        /// <para>
+        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmData"/>. </summary>
         /// <param name="location"> The location. </param>
         public VirtualMachineScaleSetVmData(AzureLocation location) : base(location)
@@ -119,7 +152,8 @@ namespace Azure.ResourceManager.Sample
         /// Specifies the protection policy of the virtual machine.
         /// Serialized Name: VirtualMachineScaleSetVM.properties.protectionPolicy
         /// </param>
-        internal VirtualMachineScaleSetVmData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string instanceId, SampleSku sku, SamplePlan plan, IReadOnlyList<VirtualMachineExtensionData> resources, IReadOnlyList<string> zones, bool? latestModelApplied, string vmId, VirtualMachineScaleSetVmInstanceView instanceView, HardwareProfile hardwareProfile, StorageProfile storageProfile, AdditionalCapabilities additionalCapabilities, OSProfile osProfile, SecurityProfile securityProfile, NetworkProfile networkProfile, VirtualMachineScaleSetVmNetworkProfileConfiguration networkProfileConfiguration, DiagnosticsProfile diagnosticsProfile, WritableSubResource availabilitySet, string provisioningState, string licenseType, string modelDefinitionApplied, VirtualMachineScaleSetVmProtectionPolicy protectionPolicy) : base(id, name, resourceType, systemData, tags, location)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetVmData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string instanceId, SampleSku sku, SamplePlan plan, IReadOnlyList<VirtualMachineExtensionData> resources, IReadOnlyList<string> zones, bool? latestModelApplied, string vmId, VirtualMachineScaleSetVmInstanceView instanceView, HardwareProfile hardwareProfile, StorageProfile storageProfile, AdditionalCapabilities additionalCapabilities, OSProfile osProfile, SecurityProfile securityProfile, NetworkProfile networkProfile, VirtualMachineScaleSetVmNetworkProfileConfiguration networkProfileConfiguration, DiagnosticsProfile diagnosticsProfile, WritableSubResource availabilitySet, string provisioningState, string licenseType, string modelDefinitionApplied, VirtualMachineScaleSetVmProtectionPolicy protectionPolicy, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData, tags, location)
         {
             InstanceId = instanceId;
             Sku = sku;
@@ -142,47 +176,61 @@ namespace Azure.ResourceManager.Sample
             LicenseType = licenseType;
             ModelDefinitionApplied = modelDefinitionApplied;
             ProtectionPolicy = protectionPolicy;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmData"/> for deserialization. </summary>
+        internal VirtualMachineScaleSetVmData()
+        {
         }
 
         /// <summary>
         /// The virtual machine instance ID.
         /// Serialized Name: VirtualMachineScaleSetVM.instanceId
         /// </summary>
+        [WirePath("instanceId")]
         public string InstanceId { get; }
         /// <summary>
         /// The virtual machine SKU.
         /// Serialized Name: VirtualMachineScaleSetVM.sku
         /// </summary>
+        [WirePath("sku")]
         public SampleSku Sku { get; }
         /// <summary>
         /// Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started -&gt;**. Enter any required information and then click **Save**.
         /// Serialized Name: VirtualMachineScaleSetVM.plan
         /// </summary>
+        [WirePath("plan")]
         public SamplePlan Plan { get; set; }
         /// <summary>
         /// The virtual machine child extension resources.
         /// Serialized Name: VirtualMachineScaleSetVM.resources
         /// </summary>
+        [WirePath("resources")]
         public IReadOnlyList<VirtualMachineExtensionData> Resources { get; }
         /// <summary>
         /// The virtual machine zones.
         /// Serialized Name: VirtualMachineScaleSetVM.zones
         /// </summary>
+        [WirePath("zones")]
         public IReadOnlyList<string> Zones { get; }
         /// <summary>
         /// Specifies whether the latest model has been applied to the virtual machine.
         /// Serialized Name: VirtualMachineScaleSetVM.properties.latestModelApplied
         /// </summary>
+        [WirePath("properties.latestModelApplied")]
         public bool? LatestModelApplied { get; }
         /// <summary>
         /// Azure VM unique ID.
         /// Serialized Name: VirtualMachineScaleSetVM.properties.vmId
         /// </summary>
+        [WirePath("properties.vmId")]
         public string VmId { get; }
         /// <summary>
         /// The virtual machine instance view.
         /// Serialized Name: VirtualMachineScaleSetVM.properties.instanceView
         /// </summary>
+        [WirePath("properties.instanceView")]
         public VirtualMachineScaleSetVmInstanceView InstanceView { get; }
         /// <summary>
         /// Specifies the hardware settings for the virtual machine.
@@ -193,6 +241,7 @@ namespace Azure.ResourceManager.Sample
         /// Specifies the size of the virtual machine. For more information about virtual machine sizes, see [Sizes for virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-sizes?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). &lt;br&gt;&lt;br&gt; The available VM sizes depend on region and availability set. For a list of available sizes use these APIs:  &lt;br&gt;&lt;br&gt; [List all available virtual machine sizes in an availability set](https://docs.microsoft.com/rest/api/compute/availabilitysets/listavailablesizes) &lt;br&gt;&lt;br&gt; [List all available virtual machine sizes in a region](https://docs.microsoft.com/rest/api/compute/virtualmachinesizes/list) &lt;br&gt;&lt;br&gt; [List all available virtual machine sizes for resizing](https://docs.microsoft.com/rest/api/compute/virtualmachines/listavailablesizes)
         /// Serialized Name: HardwareProfile.vmSize
         /// </summary>
+        [WirePath("properties.hardwareProfile.vmSize")]
         public VirtualMachineSizeType? HardwareVmSize
         {
             get => HardwareProfile is null ? default : HardwareProfile.VmSize;
@@ -208,6 +257,7 @@ namespace Azure.ResourceManager.Sample
         /// Specifies the storage settings for the virtual machine disks.
         /// Serialized Name: VirtualMachineScaleSetVM.properties.storageProfile
         /// </summary>
+        [WirePath("properties.storageProfile")]
         public StorageProfile StorageProfile { get; set; }
         /// <summary>
         /// Specifies additional capabilities enabled or disabled on the virtual machine in the scale set. For instance: whether the virtual machine has the capability to support attaching managed data disks with UltraSSD_LRS storage account type.
@@ -218,6 +268,7 @@ namespace Azure.ResourceManager.Sample
         /// The flag that enables or disables a capability to have one or more managed data disks with UltraSSD_LRS storage account type on the VM or VMSS. Managed disks with storage account type UltraSSD_LRS can be added to a virtual machine or virtual machine scale set only if this property is enabled.
         /// Serialized Name: AdditionalCapabilities.ultraSSDEnabled
         /// </summary>
+        [WirePath("properties.additionalCapabilities.ultraSSDEnabled")]
         public bool? UltraSSDEnabled
         {
             get => AdditionalCapabilities is null ? default : AdditionalCapabilities.UltraSSDEnabled;
@@ -233,6 +284,7 @@ namespace Azure.ResourceManager.Sample
         /// Specifies the operating system settings for the virtual machine.
         /// Serialized Name: VirtualMachineScaleSetVM.properties.osProfile
         /// </summary>
+        [WirePath("properties.osProfile")]
         public OSProfile OSProfile { get; set; }
         /// <summary>
         /// Specifies the Security related profile settings for the virtual machine.
@@ -243,6 +295,7 @@ namespace Azure.ResourceManager.Sample
         /// This property can be used by user in the request to enable or disable the Host Encryption for the virtual machine or virtual machine scale set. This will enable the encryption for all the disks including Resource/Temp disk at host itself. &lt;br&gt;&lt;br&gt; Default: The Encryption at host will be disabled unless this property is set to true for the resource.
         /// Serialized Name: SecurityProfile.encryptionAtHost
         /// </summary>
+        [WirePath("properties.securityProfile.encryptionAtHost")]
         public bool? EncryptionAtHost
         {
             get => SecurityProfile is null ? default : SecurityProfile.EncryptionAtHost;
@@ -263,6 +316,7 @@ namespace Azure.ResourceManager.Sample
         /// Specifies the list of resource Ids for the network interfaces associated with the virtual machine.
         /// Serialized Name: NetworkProfile.networkInterfaces
         /// </summary>
+        [WirePath("properties.networkProfile.networkInterfaces")]
         public IList<NetworkInterfaceReference> NetworkInterfaces
         {
             get
@@ -282,6 +336,7 @@ namespace Azure.ResourceManager.Sample
         /// The list of network configurations.
         /// Serialized Name: VirtualMachineScaleSetVMNetworkProfileConfiguration.networkInterfaceConfigurations
         /// </summary>
+        [WirePath("properties.networkProfileConfiguration.networkInterfaceConfigurations")]
         public IList<VirtualMachineScaleSetNetworkConfiguration> NetworkInterfaceConfigurations
         {
             get
@@ -301,6 +356,7 @@ namespace Azure.ResourceManager.Sample
         /// Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. &lt;br&gt;&lt;br&gt; You can easily view the output of your console log. &lt;br&gt;&lt;br&gt; Azure also enables you to see a screenshot of the VM from the hypervisor.
         /// Serialized Name: DiagnosticsProfile.bootDiagnostics
         /// </summary>
+        [WirePath("properties.diagnosticsProfile.bootDiagnostics")]
         public BootDiagnostics BootDiagnostics
         {
             get => DiagnosticsProfile is null ? default : DiagnosticsProfile.BootDiagnostics;
@@ -318,6 +374,7 @@ namespace Azure.ResourceManager.Sample
         /// </summary>
         internal WritableSubResource AvailabilitySet { get; set; }
         /// <summary> Gets or sets Id. </summary>
+        [WirePath("properties.availabilitySet.id")]
         public ResourceIdentifier AvailabilitySetId
         {
             get => AvailabilitySet is null ? default : AvailabilitySet.Id;
@@ -333,21 +390,25 @@ namespace Azure.ResourceManager.Sample
         /// The provisioning state, which only appears in the response.
         /// Serialized Name: VirtualMachineScaleSetVM.properties.provisioningState
         /// </summary>
+        [WirePath("properties.provisioningState")]
         public string ProvisioningState { get; }
         /// <summary>
         /// Specifies that the image or disk that is being used was licensed on-premises. This element is only used for images that contain the Windows Server operating system. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; Windows_Client &lt;br&gt;&lt;br&gt; Windows_Server &lt;br&gt;&lt;br&gt; If this element is included in a request for an update, the value must match the initial value. This value cannot be updated. &lt;br&gt;&lt;br&gt; For more information, see [Azure Hybrid Use Benefit for Windows Server](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) &lt;br&gt;&lt;br&gt; Minimum api-version: 2015-06-15
         /// Serialized Name: VirtualMachineScaleSetVM.properties.licenseType
         /// </summary>
+        [WirePath("properties.licenseType")]
         public string LicenseType { get; set; }
         /// <summary>
         /// Specifies whether the model applied to the virtual machine is the model of the virtual machine scale set or the customized model for the virtual machine.
         /// Serialized Name: VirtualMachineScaleSetVM.properties.modelDefinitionApplied
         /// </summary>
+        [WirePath("properties.modelDefinitionApplied")]
         public string ModelDefinitionApplied { get; }
         /// <summary>
         /// Specifies the protection policy of the virtual machine.
         /// Serialized Name: VirtualMachineScaleSetVM.properties.protectionPolicy
         /// </summary>
+        [WirePath("properties.protectionPolicy")]
         public VirtualMachineScaleSetVmProtectionPolicy ProtectionPolicy { get; set; }
     }
 }
