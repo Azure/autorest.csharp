@@ -610,14 +610,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 else
                 {
-                    int currentIndent = 2;
-                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
-                    int length = builder.Length;
-                    AppendChildObject(builder, Sku, options, currentIndent, false);
-                    if (builder.Length == length + emptyObjectLength)
-                    {
-                        builder.Length = builder.Length - emptyObjectLength - "  sku: ".Length;
-                    }
+                    AppendChildObject(builder, Sku, options, 2, false, "  sku: ");
                 }
             }
 
@@ -631,14 +624,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 else
                 {
-                    int currentIndent = 2;
-                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
-                    int length = builder.Length;
-                    AppendChildObject(builder, Plan, options, currentIndent, false);
-                    if (builder.Length == length + emptyObjectLength)
-                    {
-                        builder.Length = builder.Length - emptyObjectLength - "  plan: ".Length;
-                    }
+                    AppendChildObject(builder, Plan, options, 2, false, "  plan: ");
                 }
             }
 
@@ -657,14 +643,7 @@ namespace Azure.ResourceManager.Sample
                         builder.AppendLine("[");
                         foreach (var item in Resources)
                         {
-                            int currentIndent = 4;
-                            int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
-                            int length = builder.Length;
-                            AppendChildObject(builder, item, options, currentIndent, true);
-                            if (builder.Length == length + emptyObjectLength)
-                            {
-                                builder.Length = builder.Length - emptyObjectLength - "  resources: ".Length;
-                            }
+                            AppendChildObject(builder, item, options, 4, true, "  resources: ");
                         }
                         builder.AppendLine("  ]");
                     }
@@ -783,14 +762,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 else
                 {
-                    int currentIndent = 4;
-                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
-                    int length = builder.Length;
-                    AppendChildObject(builder, InstanceView, options, currentIndent, false);
-                    if (builder.Length == length + emptyObjectLength)
-                    {
-                        builder.Length = builder.Length - emptyObjectLength - "    instanceView: ".Length;
-                    }
+                    AppendChildObject(builder, InstanceView, options, 4, false, "    instanceView: ");
                 }
             }
 
@@ -804,14 +776,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 else
                 {
-                    int currentIndent = 4;
-                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
-                    int length = builder.Length;
-                    AppendChildObject(builder, HardwareProfile, options, currentIndent, false);
-                    if (builder.Length == length + emptyObjectLength)
-                    {
-                        builder.Length = builder.Length - emptyObjectLength - "    hardwareProfile: ".Length;
-                    }
+                    AppendChildObject(builder, HardwareProfile, options, 4, false, "    hardwareProfile: ");
                 }
             }
 
@@ -825,14 +790,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 else
                 {
-                    int currentIndent = 4;
-                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
-                    int length = builder.Length;
-                    AppendChildObject(builder, StorageProfile, options, currentIndent, false);
-                    if (builder.Length == length + emptyObjectLength)
-                    {
-                        builder.Length = builder.Length - emptyObjectLength - "    storageProfile: ".Length;
-                    }
+                    AppendChildObject(builder, StorageProfile, options, 4, false, "    storageProfile: ");
                 }
             }
 
@@ -846,14 +804,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 else
                 {
-                    int currentIndent = 4;
-                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
-                    int length = builder.Length;
-                    AppendChildObject(builder, AdditionalCapabilities, options, currentIndent, false);
-                    if (builder.Length == length + emptyObjectLength)
-                    {
-                        builder.Length = builder.Length - emptyObjectLength - "    additionalCapabilities: ".Length;
-                    }
+                    AppendChildObject(builder, AdditionalCapabilities, options, 4, false, "    additionalCapabilities: ");
                 }
             }
 
@@ -867,14 +818,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 else
                 {
-                    int currentIndent = 4;
-                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
-                    int length = builder.Length;
-                    AppendChildObject(builder, OSProfile, options, currentIndent, false);
-                    if (builder.Length == length + emptyObjectLength)
-                    {
-                        builder.Length = builder.Length - emptyObjectLength - "    osProfile: ".Length;
-                    }
+                    AppendChildObject(builder, OSProfile, options, 4, false, "    osProfile: ");
                 }
             }
 
@@ -888,14 +832,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 else
                 {
-                    int currentIndent = 4;
-                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
-                    int length = builder.Length;
-                    AppendChildObject(builder, SecurityProfile, options, currentIndent, false);
-                    if (builder.Length == length + emptyObjectLength)
-                    {
-                        builder.Length = builder.Length - emptyObjectLength - "    securityProfile: ".Length;
-                    }
+                    AppendChildObject(builder, SecurityProfile, options, 4, false, "    securityProfile: ");
                 }
             }
 
@@ -909,14 +846,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 else
                 {
-                    int currentIndent = 4;
-                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
-                    int length = builder.Length;
-                    AppendChildObject(builder, NetworkProfile, options, currentIndent, false);
-                    if (builder.Length == length + emptyObjectLength)
-                    {
-                        builder.Length = builder.Length - emptyObjectLength - "    networkProfile: ".Length;
-                    }
+                    AppendChildObject(builder, NetworkProfile, options, 4, false, "    networkProfile: ");
                 }
             }
 
@@ -930,14 +860,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 else
                 {
-                    int currentIndent = 4;
-                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
-                    int length = builder.Length;
-                    AppendChildObject(builder, NetworkProfileConfiguration, options, currentIndent, false);
-                    if (builder.Length == length + emptyObjectLength)
-                    {
-                        builder.Length = builder.Length - emptyObjectLength - "    networkProfileConfiguration: ".Length;
-                    }
+                    AppendChildObject(builder, NetworkProfileConfiguration, options, 4, false, "    networkProfileConfiguration: ");
                 }
             }
 
@@ -951,14 +874,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 else
                 {
-                    int currentIndent = 4;
-                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
-                    int length = builder.Length;
-                    AppendChildObject(builder, DiagnosticsProfile, options, currentIndent, false);
-                    if (builder.Length == length + emptyObjectLength)
-                    {
-                        builder.Length = builder.Length - emptyObjectLength - "    diagnosticsProfile: ".Length;
-                    }
+                    AppendChildObject(builder, DiagnosticsProfile, options, 4, false, "    diagnosticsProfile: ");
                 }
             }
 
@@ -972,14 +888,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 else
                 {
-                    int currentIndent = 4;
-                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
-                    int length = builder.Length;
-                    AppendChildObject(builder, AvailabilitySet, options, currentIndent, false);
-                    if (builder.Length == length + emptyObjectLength)
-                    {
-                        builder.Length = builder.Length - emptyObjectLength - "    availabilitySet: ".Length;
-                    }
+                    AppendChildObject(builder, AvailabilitySet, options, 4, false, "    availabilitySet: ");
                 }
             }
 
@@ -1059,14 +968,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 else
                 {
-                    int currentIndent = 4;
-                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
-                    int length = builder.Length;
-                    AppendChildObject(builder, ProtectionPolicy, options, currentIndent, false);
-                    if (builder.Length == length + emptyObjectLength)
-                    {
-                        builder.Length = builder.Length - emptyObjectLength - "    protectionPolicy: ".Length;
-                    }
+                    AppendChildObject(builder, ProtectionPolicy, options, 4, false, "    protectionPolicy: ");
                 }
             }
 
@@ -1075,12 +977,15 @@ namespace Azure.ResourceManager.Sample
             return BinaryData.FromString(builder.ToString());
         }
 
-        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine)
+        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine, string formattedPropertyName)
         {
             string indent = new string(' ', spaces);
+            int emptyObjectLength = 2 + spaces + Environment.NewLine.Length + Environment.NewLine.Length;
+            int length = stringBuilder.Length;
+            bool inMultilineString = false;
+
             BinaryData data = ModelReaderWriter.Write(childObject, options);
             string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            bool inMultilineString = false;
             for (int i = 0; i < lines.Length; i++)
             {
                 string line = lines[i];
@@ -1107,6 +1012,10 @@ namespace Azure.ResourceManager.Sample
                 {
                     stringBuilder.AppendLine($"{indent}{line}");
                 }
+            }
+            if (stringBuilder.Length == length + emptyObjectLength)
+            {
+                stringBuilder.Length = stringBuilder.Length - emptyObjectLength - formattedPropertyName.Length;
             }
         }
 

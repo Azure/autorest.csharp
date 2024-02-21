@@ -362,14 +362,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 else
                 {
-                    int currentIndent = 4;
-                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
-                    int length = builder.Length;
-                    AppendChildObject(builder, Policy, options, currentIndent, false);
-                    if (builder.Length == length + emptyObjectLength)
-                    {
-                        builder.Length = builder.Length - emptyObjectLength - "    policy: ".Length;
-                    }
+                    AppendChildObject(builder, Policy, options, 4, false, "    policy: ");
                 }
             }
 
@@ -383,14 +376,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 else
                 {
-                    int currentIndent = 4;
-                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
-                    int length = builder.Length;
-                    AppendChildObject(builder, RunningStatus, options, currentIndent, false);
-                    if (builder.Length == length + emptyObjectLength)
-                    {
-                        builder.Length = builder.Length - emptyObjectLength - "    runningStatus: ".Length;
-                    }
+                    AppendChildObject(builder, RunningStatus, options, 4, false, "    runningStatus: ");
                 }
             }
 
@@ -404,14 +390,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 else
                 {
-                    int currentIndent = 4;
-                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
-                    int length = builder.Length;
-                    AppendChildObject(builder, Progress, options, currentIndent, false);
-                    if (builder.Length == length + emptyObjectLength)
-                    {
-                        builder.Length = builder.Length - emptyObjectLength - "    progress: ".Length;
-                    }
+                    AppendChildObject(builder, Progress, options, 4, false, "    progress: ");
                 }
             }
 
@@ -425,14 +404,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 else
                 {
-                    int currentIndent = 4;
-                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
-                    int length = builder.Length;
-                    AppendChildObject(builder, Error, options, currentIndent, false);
-                    if (builder.Length == length + emptyObjectLength)
-                    {
-                        builder.Length = builder.Length - emptyObjectLength - "    error: ".Length;
-                    }
+                    AppendChildObject(builder, Error, options, 4, false, "    error: ");
                 }
             }
 
@@ -441,12 +413,15 @@ namespace Azure.ResourceManager.Sample
             return BinaryData.FromString(builder.ToString());
         }
 
-        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine)
+        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine, string formattedPropertyName)
         {
             string indent = new string(' ', spaces);
+            int emptyObjectLength = 2 + spaces + Environment.NewLine.Length + Environment.NewLine.Length;
+            int length = stringBuilder.Length;
+            bool inMultilineString = false;
+
             BinaryData data = ModelReaderWriter.Write(childObject, options);
             string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            bool inMultilineString = false;
             for (int i = 0; i < lines.Length; i++)
             {
                 string line = lines[i];
@@ -473,6 +448,10 @@ namespace Azure.ResourceManager.Sample
                 {
                     stringBuilder.AppendLine($"{indent}{line}");
                 }
+            }
+            if (stringBuilder.Length == length + emptyObjectLength)
+            {
+                stringBuilder.Length = stringBuilder.Length - emptyObjectLength - formattedPropertyName.Length;
             }
         }
 

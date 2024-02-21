@@ -315,14 +315,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 else
                 {
-                    int currentIndent = 4;
-                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
-                    int length = builder.Length;
-                    AppendChildObject(builder, NetworkSecurityGroup, options, currentIndent, false);
-                    if (builder.Length == length + emptyObjectLength)
-                    {
-                        builder.Length = builder.Length - emptyObjectLength - "    networkSecurityGroup: ".Length;
-                    }
+                    AppendChildObject(builder, NetworkSecurityGroup, options, 4, false, "    networkSecurityGroup: ");
                 }
             }
 
@@ -336,14 +329,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 else
                 {
-                    int currentIndent = 4;
-                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
-                    int length = builder.Length;
-                    AppendChildObject(builder, DnsSettings, options, currentIndent, false);
-                    if (builder.Length == length + emptyObjectLength)
-                    {
-                        builder.Length = builder.Length - emptyObjectLength - "    dnsSettings: ".Length;
-                    }
+                    AppendChildObject(builder, DnsSettings, options, 4, false, "    dnsSettings: ");
                 }
             }
 
@@ -362,14 +348,7 @@ namespace Azure.ResourceManager.Sample.Models
                         builder.AppendLine("[");
                         foreach (var item in IPConfigurations)
                         {
-                            int currentIndent = 6;
-                            int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
-                            int length = builder.Length;
-                            AppendChildObject(builder, item, options, currentIndent, true);
-                            if (builder.Length == length + emptyObjectLength)
-                            {
-                                builder.Length = builder.Length - emptyObjectLength - "    ipConfigurations: ".Length;
-                            }
+                            AppendChildObject(builder, item, options, 6, true, "    ipConfigurations: ");
                         }
                         builder.AppendLine("    ]");
                     }
@@ -396,12 +375,15 @@ namespace Azure.ResourceManager.Sample.Models
             return BinaryData.FromString(builder.ToString());
         }
 
-        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine)
+        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine, string formattedPropertyName)
         {
             string indent = new string(' ', spaces);
+            int emptyObjectLength = 2 + spaces + Environment.NewLine.Length + Environment.NewLine.Length;
+            int length = stringBuilder.Length;
+            bool inMultilineString = false;
+
             BinaryData data = ModelReaderWriter.Write(childObject, options);
             string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            bool inMultilineString = false;
             for (int i = 0; i < lines.Length; i++)
             {
                 string line = lines[i];
@@ -428,6 +410,10 @@ namespace Azure.ResourceManager.Sample.Models
                 {
                     stringBuilder.AppendLine($"{indent}{line}");
                 }
+            }
+            if (stringBuilder.Length == length + emptyObjectLength)
+            {
+                stringBuilder.Length = stringBuilder.Length - emptyObjectLength - formattedPropertyName.Length;
             }
         }
 

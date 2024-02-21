@@ -261,14 +261,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 else
                 {
-                    int currentIndent = 2;
-                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
-                    int length = builder.Length;
-                    AppendChildObject(builder, OSProfile, options, currentIndent, false);
-                    if (builder.Length == length + emptyObjectLength)
-                    {
-                        builder.Length = builder.Length - emptyObjectLength - "  osProfile: ".Length;
-                    }
+                    AppendChildObject(builder, OSProfile, options, 2, false, "  osProfile: ");
                 }
             }
 
@@ -282,14 +275,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 else
                 {
-                    int currentIndent = 2;
-                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
-                    int length = builder.Length;
-                    AppendChildObject(builder, StorageProfile, options, currentIndent, false);
-                    if (builder.Length == length + emptyObjectLength)
-                    {
-                        builder.Length = builder.Length - emptyObjectLength - "  storageProfile: ".Length;
-                    }
+                    AppendChildObject(builder, StorageProfile, options, 2, false, "  storageProfile: ");
                 }
             }
 
@@ -303,14 +289,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 else
                 {
-                    int currentIndent = 2;
-                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
-                    int length = builder.Length;
-                    AppendChildObject(builder, NetworkProfile, options, currentIndent, false);
-                    if (builder.Length == length + emptyObjectLength)
-                    {
-                        builder.Length = builder.Length - emptyObjectLength - "  networkProfile: ".Length;
-                    }
+                    AppendChildObject(builder, NetworkProfile, options, 2, false, "  networkProfile: ");
                 }
             }
 
@@ -324,14 +303,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 else
                 {
-                    int currentIndent = 2;
-                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
-                    int length = builder.Length;
-                    AppendChildObject(builder, SecurityProfile, options, currentIndent, false);
-                    if (builder.Length == length + emptyObjectLength)
-                    {
-                        builder.Length = builder.Length - emptyObjectLength - "  securityProfile: ".Length;
-                    }
+                    AppendChildObject(builder, SecurityProfile, options, 2, false, "  securityProfile: ");
                 }
             }
 
@@ -345,14 +317,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 else
                 {
-                    int currentIndent = 2;
-                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
-                    int length = builder.Length;
-                    AppendChildObject(builder, DiagnosticsProfile, options, currentIndent, false);
-                    if (builder.Length == length + emptyObjectLength)
-                    {
-                        builder.Length = builder.Length - emptyObjectLength - "  diagnosticsProfile: ".Length;
-                    }
+                    AppendChildObject(builder, DiagnosticsProfile, options, 2, false, "  diagnosticsProfile: ");
                 }
             }
 
@@ -366,14 +331,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 else
                 {
-                    int currentIndent = 2;
-                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
-                    int length = builder.Length;
-                    AppendChildObject(builder, ExtensionProfile, options, currentIndent, false);
-                    if (builder.Length == length + emptyObjectLength)
-                    {
-                        builder.Length = builder.Length - emptyObjectLength - "  extensionProfile: ".Length;
-                    }
+                    AppendChildObject(builder, ExtensionProfile, options, 2, false, "  extensionProfile: ");
                 }
             }
 
@@ -437,14 +395,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 else
                 {
-                    int currentIndent = 2;
-                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
-                    int length = builder.Length;
-                    AppendChildObject(builder, BillingProfile, options, currentIndent, false);
-                    if (builder.Length == length + emptyObjectLength)
-                    {
-                        builder.Length = builder.Length - emptyObjectLength - "  billingProfile: ".Length;
-                    }
+                    AppendChildObject(builder, BillingProfile, options, 2, false, "  billingProfile: ");
                 }
             }
 
@@ -458,14 +409,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 else
                 {
-                    int currentIndent = 2;
-                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
-                    int length = builder.Length;
-                    AppendChildObject(builder, ScheduledEventsProfile, options, currentIndent, false);
-                    if (builder.Length == length + emptyObjectLength)
-                    {
-                        builder.Length = builder.Length - emptyObjectLength - "  scheduledEventsProfile: ".Length;
-                    }
+                    AppendChildObject(builder, ScheduledEventsProfile, options, 2, false, "  scheduledEventsProfile: ");
                 }
             }
 
@@ -473,12 +417,15 @@ namespace Azure.ResourceManager.Sample.Models
             return BinaryData.FromString(builder.ToString());
         }
 
-        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine)
+        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine, string formattedPropertyName)
         {
             string indent = new string(' ', spaces);
+            int emptyObjectLength = 2 + spaces + Environment.NewLine.Length + Environment.NewLine.Length;
+            int length = stringBuilder.Length;
+            bool inMultilineString = false;
+
             BinaryData data = ModelReaderWriter.Write(childObject, options);
             string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            bool inMultilineString = false;
             for (int i = 0; i < lines.Length; i++)
             {
                 string line = lines[i];
@@ -505,6 +452,10 @@ namespace Azure.ResourceManager.Sample.Models
                 {
                     stringBuilder.AppendLine($"{indent}{line}");
                 }
+            }
+            if (stringBuilder.Length == length + emptyObjectLength)
+            {
+                stringBuilder.Length = stringBuilder.Length - emptyObjectLength - formattedPropertyName.Length;
             }
         }
 
