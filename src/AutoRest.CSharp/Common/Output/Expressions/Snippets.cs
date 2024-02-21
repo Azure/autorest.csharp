@@ -62,7 +62,6 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static BoolExpression GreaterThan(ValueExpression left, ValueExpression right) => new(new BinaryOperatorExpression(">", left, right));
         public static BoolExpression Equal(ValueExpression left, ValueExpression right) => new(new BinaryOperatorExpression("==", left, right));
         public static BoolExpression NotEqual(ValueExpression left, ValueExpression right) => new(new BinaryOperatorExpression("!=", left, right));
-        public static BoolExpression Is(ValueExpression value, CSharpType type) => new(new BinaryOperatorExpression("is", value, type));
 
         public static BoolExpression Is(XElementExpression value, string name, out XElementExpression xElement)
             => Is<XElementExpression>(value, name, d => new XElementExpression(d), out xElement);
