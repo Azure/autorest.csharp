@@ -44,15 +44,15 @@ model StringValueModel extends BaseModel{
 @access(Access.public)
 @usage(Usage.input)
 model ComplexModel {
-    arrayOfInt: int32[];
-    arrayOfModel: BaseModel[];
-    arrayOfIntArray: int32[][];
-    arrayOfModelArray: BaseModel[][];
+    arrayOfInt?: int32[];
+    arrayOfModel?: BaseModel[];
+    arrayOfIntArray?: int32[][];
+    arrayOfModelArray?: BaseModel[][];
 
-    dictOfInt: Record<int32>;
-    dictOfModel: Record<BaseModel>;
-    dictOfIntDict: Record<Record<int32>>;
-    dictOfModelDict: Record<Record<BaseModel>>;
+    dictOfInt?: Record<int32>;
+    dictOfModel?: Record<BaseModel>;
+    dictOfIntDict?: Record<Record<int32>>;
+    dictOfModelDict?: Record<Record<BaseModel>>;
 }
 
 @doc("Base model")

@@ -36,7 +36,11 @@ namespace Payload.JsonMergePatch.Models
             {
                 _extendedValue = value;
                 _extendedValueChanged = true;
+                _changed = true;
             }
         }
+
+        private bool _changed = false;
+        internal override bool Changed => _changed || base.Changed;
     }
 }

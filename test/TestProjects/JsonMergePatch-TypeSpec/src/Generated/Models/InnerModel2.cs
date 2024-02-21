@@ -7,11 +7,13 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace Payload.JsonMergePatch.Models
 {
-    /// <summary> The NormalBaseModel. </summary>
-    public partial class NormalBaseModel
+    /// <summary> It is the model used by Resource model. </summary>
+    public partial class InnerModel2
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -43,36 +45,61 @@ namespace Payload.JsonMergePatch.Models
         /// </list>
         /// </para>
         /// </summary>
-        private protected IDictionary<string, BinaryData> _serializedAdditionalRawData;
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="NormalBaseModel"/>. </summary>
-        public NormalBaseModel()
+        /// <summary> Initializes a new instance of <see cref="InnerModel2"/>. </summary>
+        public InnerModel2()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="NormalBaseModel"/>. </summary>
-        /// <param name="normalValue"></param>
+        /// <summary> Initializes a new instance of <see cref="InnerModel2"/>. </summary>
+        /// <param name="property1"></param>
+        /// <param name="property2"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal NormalBaseModel(string normalValue, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal InnerModel2(int? property1, int? property2, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
-            NormalValue = normalValue;
+            Property1 = property1;
+            Property2 = property2;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        private string _normalValue;
-        private protected bool _normalValueChanged = false;
-        public string NormalValue 
+        internal event PropertyChangedEventHandler PropertyChanged;
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
-            get => _normalValue;
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+
+        private int? _property1;
+        private bool _property1changed = false;
+        public int? Property1
+        {
+            get => _property1;
             set
             {
-                _normalValue = value;
-                _normalValueChanged = true;
+                _property1 = value;
+                _property1changed = true;
+                NotifyPropertyChanged();
                 _changed = true;
             }
         }
 
-        private bool _changed = false;
-        internal virtual bool Changed => _changed;
+        private int? _property2;
+        private bool _property2changed = false;
+        public int? Property2
+        {
+            get => _property2;
+            set
+            {
+                _property2 = value;
+                _property2changed = true;
+                _changed = true;
+            }
+        }
+
+        internal bool _changed = false;
     }
 }

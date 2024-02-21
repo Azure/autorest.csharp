@@ -108,6 +108,19 @@ namespace Payload.JsonMergePatch.Models
                 }
             }
 
+            if (_requiredStringValue2.IsChanged)
+            {
+                writer.WritePropertyName("optionalIntValue"u8);
+                if (RequiredStringValue2 != null)
+                {
+                    writer.WriteStringValue(RequiredStringValue2);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
+            }
+
             if (_requiredValueChanged)
             {
                 writer.WritePropertyName("requiredValue"u8);

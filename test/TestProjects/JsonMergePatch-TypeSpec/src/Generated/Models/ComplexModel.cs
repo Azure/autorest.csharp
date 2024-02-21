@@ -48,34 +48,16 @@ namespace Payload.JsonMergePatch.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ComplexModel"/>. </summary>
-        /// <param name="arrayOfInt"></param>
-        /// <param name="arrayOfModel"></param>
-        /// <param name="arrayOfIntArray"></param>
-        /// <param name="arrayOfModelArray"></param>
-        /// <param name="dictOfInt"></param>
-        /// <param name="dictOfModel"></param>
-        /// <param name="dictOfIntDict"></param>
-        /// <param name="dictOfModelDict"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="arrayOfInt"/>, <paramref name="arrayOfModel"/>, <paramref name="arrayOfIntArray"/>, <paramref name="arrayOfModelArray"/>, <paramref name="dictOfInt"/>, <paramref name="dictOfModel"/>, <paramref name="dictOfIntDict"/> or <paramref name="dictOfModelDict"/> is null. </exception>
-        public ComplexModel(IEnumerable<int> arrayOfInt, IEnumerable<BaseModel> arrayOfModel, IEnumerable<IList<int>> arrayOfIntArray, IEnumerable<IList<BaseModel>> arrayOfModelArray, IDictionary<string, int> dictOfInt, IDictionary<string, BaseModel> dictOfModel, IDictionary<string, IDictionary<string, int>> dictOfIntDict, IDictionary<string, IDictionary<string, BaseModel>> dictOfModelDict)
+        public ComplexModel()
         {
-            Argument.AssertNotNull(arrayOfInt, nameof(arrayOfInt));
-            Argument.AssertNotNull(arrayOfModel, nameof(arrayOfModel));
-            Argument.AssertNotNull(arrayOfIntArray, nameof(arrayOfIntArray));
-            Argument.AssertNotNull(arrayOfModelArray, nameof(arrayOfModelArray));
-            Argument.AssertNotNull(dictOfInt, nameof(dictOfInt));
-            Argument.AssertNotNull(dictOfModel, nameof(dictOfModel));
-            Argument.AssertNotNull(dictOfIntDict, nameof(dictOfIntDict));
-            Argument.AssertNotNull(dictOfModelDict, nameof(dictOfModelDict));
-
-            ArrayOfInt = arrayOfInt.ToList();
-            ArrayOfModel = arrayOfModel.ToList();
-            ArrayOfIntArray = arrayOfIntArray.ToList();
-            ArrayOfModelArray = arrayOfModelArray.ToList();
-            DictOfInt = dictOfInt;
-            DictOfModel = dictOfModel;
-            DictOfIntDict = dictOfIntDict;
-            DictOfModelDict = dictOfModelDict;
+            ArrayOfInt = new ChangeTrackingList<int>();
+            ArrayOfModel = new ChangeTrackingList<BaseModel>();
+            ArrayOfIntArray = new ChangeTrackingList<IList<int>>();
+            ArrayOfModelArray = new ChangeTrackingList<IList<BaseModel>>();
+            DictOfInt = new TrackingDictionary<string, int>();
+            DictOfModel = new ChangeTrackingDictionary<string, BaseModel>();
+            DictOfIntDict = new ChangeTrackingDictionary<string, IDictionary<string, int>>();
+            DictOfModelDict = new ChangeTrackingDictionary<string, IDictionary<string, BaseModel>>();
         }
 
         /// <summary> Initializes a new instance of <see cref="ComplexModel"/>. </summary>
@@ -88,31 +70,22 @@ namespace Payload.JsonMergePatch.Models
         /// <param name="dictOfIntDict"></param>
         /// <param name="dictOfModelDict"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal ComplexModel(IList<int> arrayOfInt, IList<BaseModel> arrayOfModel, IList<IList<int>> arrayOfIntArray, IList<IList<BaseModel>> arrayOfModelArray, IDictionary<string, int> dictOfInt, IDictionary<string, BaseModel> dictOfModel, IDictionary<string, IDictionary<string, int>> dictOfIntDict, IDictionary<string, IDictionary<string, BaseModel>> dictOfModelDict, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal ComplexModel(IList<int> arrayOfInt, IList<BaseModel> arrayOfModel, IList<IList<int>> arrayOfIntArray, IList<IList<BaseModel>> arrayOfModelArray, Optional<IDictionary<string, int>> dictOfInt, IDictionary<string, BaseModel> dictOfModel, IDictionary<string, IDictionary<string, int>> dictOfIntDict, IDictionary<string, IDictionary<string, BaseModel>> dictOfModelDict, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ArrayOfInt = arrayOfInt;
             ArrayOfModel = arrayOfModel;
             ArrayOfIntArray = arrayOfIntArray;
             ArrayOfModelArray = arrayOfModelArray;
-            DictOfInt = dictOfInt;
+            DictOfInt = new ChangeTrackingDictionary<string, int>(dictOfInt);
             DictOfModel = dictOfModel;
             DictOfIntDict = dictOfIntDict;
             DictOfModelDict = dictOfModelDict;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Initializes a new instance of <see cref="ComplexModel"/> for deserialization. </summary>
-        internal ComplexModel()
-        {
-        }
-
         /// <summary> Gets the array of int. </summary>
         public IList<int> ArrayOfInt { get; }
-        /// <summary>
-        /// Gets the array of model
-        /// Please note <see cref="BaseModel"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
-        /// The available derived classes include <see cref="IntValueModel"/> and <see cref="StringValueModel"/>.
-        /// </summary>
+        /// <summary> Gets the array of model. </summary>
         public IList<BaseModel> ArrayOfModel { get; }
         /// <summary> Gets the array of int array. </summary>
         public IList<IList<int>> ArrayOfIntArray { get; }
@@ -120,11 +93,7 @@ namespace Payload.JsonMergePatch.Models
         public IList<IList<BaseModel>> ArrayOfModelArray { get; }
         /// <summary> Gets the dict of int. </summary>
         public IDictionary<string, int> DictOfInt { get; }
-        /// <summary>
-        /// Gets the dict of model
-        /// Please note <see cref="BaseModel"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
-        /// The available derived classes include <see cref="IntValueModel"/> and <see cref="StringValueModel"/>.
-        /// </summary>
+        /// <summary> Gets the dict of model. </summary>
         public IDictionary<string, BaseModel> DictOfModel { get; }
         /// <summary> Gets the dict of int dict. </summary>
         public IDictionary<string, IDictionary<string, int>> DictOfIntDict { get; }

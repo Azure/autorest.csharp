@@ -34,7 +34,6 @@ namespace Payload.JsonMergePatch.Models
             {
                 WritePatch(writer);
             }
-
         }
 
         void WriteJson(Utf8JsonWriter writer, ModelReaderWriterOptions options)

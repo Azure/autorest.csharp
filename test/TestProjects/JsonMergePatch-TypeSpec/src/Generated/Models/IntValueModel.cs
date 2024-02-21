@@ -68,5 +68,8 @@ namespace Payload.JsonMergePatch.Models
                 _optionalIntValueChanged = true;
             }
         }
+
+        private bool _changed = false;
+        internal override bool Changed => _changed || base.Changed;
     }
 }

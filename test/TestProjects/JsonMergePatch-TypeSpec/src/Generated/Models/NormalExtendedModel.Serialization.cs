@@ -27,6 +27,8 @@ namespace Payload.JsonMergePatch.Models
             }
 
             writer.WriteStartObject();
+            IJsonModel<NormalBaseModel> baseModel = this;
+            baseModel.Write(writer, options);
             if (Optional.IsDefined(ExtendedValue))
             {
                 writer.WritePropertyName("extendedValue"u8);
@@ -55,10 +57,8 @@ namespace Payload.JsonMergePatch.Models
             writer.WriteEndObject();
         }
 
-        private protected override void WriteContent(Utf8JsonWriter writer)
-        {
-            base.WriteContent(writer);
-        }
+        private void WritePatch(Utf8JsonWriter writer)
+        { }
 
         NormalExtendedModel IJsonModel<NormalExtendedModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {

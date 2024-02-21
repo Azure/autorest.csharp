@@ -20,13 +20,34 @@ namespace Payload.JsonMergePatch.Models
 
         void IJsonModel<NormalBaseModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<NormalBaseModel>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
+            var format = options.Format == "W" || options.Format == "JMP/JMPI" ? ((IPersistableModel<NormalBaseModel>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J" || format != "JI")
             {
                 throw new FormatException($"The model {nameof(NormalBaseModel)} does not support '{format}' format.");
             }
 
-            writer.WriteStartObject();
+            if (options.Format == "W")
+            {
+                WriteJson(writer, options, format);
+            }
+            else if (options.Format == "JMP")
+            {
+                WritePatch(writer, format);
+            }
+        }
+        private void WritePatch(Utf8JsonWriter writer) { }
+
+        private protected void WriteContent()
+        {
+
+        }
+
+        private void WriteJson(Utf8JsonWriter writer, ModelReaderWriterOptions options, string format)
+        {
+            if (format != "JI")
+            {
+                writer.WriteStartObject();
+            }
             if (Optional.IsDefined(NormalValue))
             {
                 writer.WritePropertyName("normalValue"u8);
@@ -38,7 +59,7 @@ namespace Payload.JsonMergePatch.Models
                 {
                     writer.WritePropertyName(item.Key);
 #if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
+                    writer.WriteRawValue(item.Value);
 #else
                     using (JsonDocument document = JsonDocument.Parse(item.Value))
                     {
@@ -47,10 +68,13 @@ namespace Payload.JsonMergePatch.Models
 #endif
                 }
             }
-            writer.WriteEndObject();
+            if (options.Format != "JI")
+            {
+                writer.WriteEndObject();
+            }
         }
 
-        private protected virtual void WriteContent(Utf8JsonWriter writer)
+        private void WritePatch(Utf8JsonWriter writer, string format)
         {
 
         }
@@ -123,7 +147,7 @@ namespace Payload.JsonMergePatch.Models
             }
         }
 
-        string IPersistableModel<NormalBaseModel>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<NormalBaseModel>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";// options.FullWrite ? "J" : "JI";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>

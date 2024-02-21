@@ -7,11 +7,12 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Payload.JsonMergePatch.Models
 {
-    /// <summary> The NormalBaseModel. </summary>
-    public partial class NormalBaseModel
+    /// <summary> It is the model used by Resource model. </summary>
+    public partial class InnerModel1
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -43,36 +44,56 @@ namespace Payload.JsonMergePatch.Models
         /// </list>
         /// </para>
         /// </summary>
-        private protected IDictionary<string, BinaryData> _serializedAdditionalRawData;
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="NormalBaseModel"/>. </summary>
-        public NormalBaseModel()
+        /// <summary> Initializes a new instance of <see cref="InnerModel1"/>. </summary>
+        public InnerModel1()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="NormalBaseModel"/>. </summary>
-        /// <param name="normalValue"></param>
+        /// <summary> Initializes a new instance of <see cref="InnerModel1"/>. </summary>
+        /// <param name="innerModel2"></param>
+        /// <param name="property"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal NormalBaseModel(string normalValue, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal InnerModel1(InnerModel2 innerModel2, string property, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
-            NormalValue = normalValue;
+            InnerModel2 = innerModel2;
+            Property = property;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        private string _normalValue;
-        private protected bool _normalValueChanged = false;
-        public string NormalValue 
+        private void HandlePropertyChangeEvent(object sender, PropertyChangedEventArgs args)
         {
-            get => _normalValue;
+            _changed = true;
+        }
+
+        private InnerModel2 _innerModel2;
+        private bool _innerModel2Changed = false;
+        public InnerModel2 InnerModel2
+        {
+            get => _innerModel2;
             set
             {
-                _normalValue = value;
-                _normalValueChanged = true;
+                _innerModel2 = value;
+                _innerModel2Changed = true;
+                _innerModel2.PropertyChanged += HandlePropertyChangeEvent;
                 _changed = true;
             }
         }
 
-        private bool _changed = false;
-        internal virtual bool Changed => _changed;
+        private string _property;
+        private bool _propertyChanged = false;
+        public string Property
+        {
+            get => _property;
+            set
+            {
+                _property = value;
+                _propertyChanged = true;
+                _changed = true;
+            }
+        }
+
+        internal bool _changed = false;
     }
 }

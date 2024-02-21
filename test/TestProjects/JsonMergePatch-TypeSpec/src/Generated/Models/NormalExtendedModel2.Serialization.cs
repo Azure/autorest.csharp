@@ -26,7 +26,10 @@ namespace Payload.JsonMergePatch.Models
                 throw new FormatException($"The model {nameof(NormalExtendedModel2)} does not support '{format}' format.");
             }
 
-            writer.WriteStartObject();
+            if (format != "JI")
+            {
+                writer.WriteStartObject();
+            }
             if (Optional.IsDefined(ExtendedValue2))
             {
                 writer.WritePropertyName("extendedValue2"u8);
@@ -57,7 +60,10 @@ namespace Payload.JsonMergePatch.Models
 #endif
                 }
             }
-            writer.WriteEndObject();
+            if (format != "JI")
+            {
+                writer.WriteEndObject();
+            }
         }
 
         private void WritePatch(Utf8JsonWriter writer)

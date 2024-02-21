@@ -106,5 +106,8 @@ namespace Payload.JsonMergePatch.Models
 
         /// <summary> Gets or sets the kind. </summary>
         internal string Kind { get; set; }
+
+        private bool _changed = false;
+        internal virtual bool Changed => _changed;
     }
 }

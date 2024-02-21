@@ -38,6 +38,7 @@ namespace Payload.JsonMergePatch.Models
         {
             _requiredStringValue = requiredStringValue;
             _optionalStringValue = optionalStringValue;
+            _requiredStringValue2 = new Trackable<string>(_requiredStringValue, false);
         }
 
         /// <summary> Initializes a new instance of <see cref="StringValueModel"/> for deserialization. </summary>
@@ -56,6 +57,16 @@ namespace Payload.JsonMergePatch.Models
 
                 _requiredStringValue = value;
                 _requiredStringValueChanged = true;
+            }
+        }
+
+        private Trackable<string> _requiredStringValue2;
+        public string RequiredStringValue2
+        {
+            get => _requiredStringValue2.Value;
+            set
+            {
+                _requiredStringValue2 = value;
             }
         }
 
