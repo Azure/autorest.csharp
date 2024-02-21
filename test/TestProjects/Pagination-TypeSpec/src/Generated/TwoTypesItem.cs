@@ -139,7 +139,14 @@ namespace Pagination
         /// <include file="Docs/TwoTypesItem.xml" path="doc/members/member[@name='GetTextBlocklistItemsAsync(string,int?,int?,int?,CancellationToken)']/*" />
         public virtual AsyncPageable<TextBlockItem> GetTextBlocklistItemsAsync(string blocklistName, int? maxCount = null, int? skip = null, int? maxpagesize = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(blocklistName, nameof(blocklistName));
+            if (blocklistName == null)
+            {
+                throw new ArgumentNullException(nameof(blocklistName));
+            }
+            if (blocklistName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(blocklistName));
+            }
 
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetTextBlocklistItemsRequest(blocklistName, maxCount, skip, maxpagesize, context);
@@ -159,7 +166,14 @@ namespace Pagination
         /// <include file="Docs/TwoTypesItem.xml" path="doc/members/member[@name='GetTextBlocklistItems(string,int?,int?,int?,CancellationToken)']/*" />
         public virtual Pageable<TextBlockItem> GetTextBlocklistItems(string blocklistName, int? maxCount = null, int? skip = null, int? maxpagesize = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(blocklistName, nameof(blocklistName));
+            if (blocklistName == null)
+            {
+                throw new ArgumentNullException(nameof(blocklistName));
+            }
+            if (blocklistName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(blocklistName));
+            }
 
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetTextBlocklistItemsRequest(blocklistName, maxCount, skip, maxpagesize, context);
@@ -194,7 +208,14 @@ namespace Pagination
         /// <include file="Docs/TwoTypesItem.xml" path="doc/members/member[@name='GetTextBlocklistItemsAsync(string,int?,int?,int?,RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetTextBlocklistItemsAsync(string blocklistName, int? maxCount, int? skip, int? maxpagesize, RequestContext context)
         {
-            Argument.AssertNotNullOrEmpty(blocklistName, nameof(blocklistName));
+            if (blocklistName == null)
+            {
+                throw new ArgumentNullException(nameof(blocklistName));
+            }
+            if (blocklistName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(blocklistName));
+            }
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetTextBlocklistItemsRequest(blocklistName, maxCount, skip, maxpagesize, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetTextBlocklistItemsNextPageRequest(nextLink, blocklistName, maxCount, skip, maxpagesize, context);
@@ -228,7 +249,14 @@ namespace Pagination
         /// <include file="Docs/TwoTypesItem.xml" path="doc/members/member[@name='GetTextBlocklistItems(string,int?,int?,int?,RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetTextBlocklistItems(string blocklistName, int? maxCount, int? skip, int? maxpagesize, RequestContext context)
         {
-            Argument.AssertNotNullOrEmpty(blocklistName, nameof(blocklistName));
+            if (blocklistName == null)
+            {
+                throw new ArgumentNullException(nameof(blocklistName));
+            }
+            if (blocklistName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(blocklistName));
+            }
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetTextBlocklistItemsRequest(blocklistName, maxCount, skip, maxpagesize, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetTextBlocklistItemsNextPageRequest(nextLink, blocklistName, maxCount, skip, maxpagesize, context);

@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Azure.Core;
 using MgmtMultipleParentResource;
 
 namespace MgmtMultipleParentResource.Models
@@ -21,7 +20,10 @@ namespace MgmtMultipleParentResource.Models
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal SubParentsListResult(IEnumerable<SubParentData> value)
         {
-            Argument.AssertNotNull(value, nameof(value));
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
 
             Value = value.ToList();
         }

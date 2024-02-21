@@ -23,7 +23,10 @@ namespace Azure.ResourceManager.Storage.Models
         /// <exception cref="ArgumentNullException"> <paramref name="sku"/> is null. </exception>
         public StorageAccountCreateOrUpdateContent(StorageSku sku, StorageKind kind, AzureLocation location)
         {
-            Argument.AssertNotNull(sku, nameof(sku));
+            if (sku == null)
+            {
+                throw new ArgumentNullException(nameof(sku));
+            }
 
             Sku = sku;
             Kind = kind;

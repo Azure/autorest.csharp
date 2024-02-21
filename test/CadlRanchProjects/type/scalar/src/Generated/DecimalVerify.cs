@@ -194,7 +194,10 @@ namespace _Type.Scalar
         /// <include file="Docs/DecimalVerify.xml" path="doc/members/member[@name='VerifyAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> VerifyAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("DecimalVerify.Verify");
             scope.Start();
@@ -233,7 +236,10 @@ namespace _Type.Scalar
         /// <include file="Docs/DecimalVerify.xml" path="doc/members/member[@name='Verify(RequestContent,RequestContext)']/*" />
         public virtual Response Verify(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("DecimalVerify.Verify");
             scope.Start();

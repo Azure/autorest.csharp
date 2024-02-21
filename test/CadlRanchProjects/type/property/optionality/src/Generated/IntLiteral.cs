@@ -231,7 +231,10 @@ namespace _Type.Property.Optionality
         /// <include file="Docs/IntLiteral.xml" path="doc/members/member[@name='PutAllAsync(IntLiteralProperty,CancellationToken)']/*" />
         public virtual async Task<Response> PutAllAsync(IntLiteralProperty body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -246,7 +249,10 @@ namespace _Type.Property.Optionality
         /// <include file="Docs/IntLiteral.xml" path="doc/members/member[@name='PutAll(IntLiteralProperty,CancellationToken)']/*" />
         public virtual Response PutAll(IntLiteralProperty body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -277,7 +283,10 @@ namespace _Type.Property.Optionality
         /// <include file="Docs/IntLiteral.xml" path="doc/members/member[@name='PutAllAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutAllAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("IntLiteral.PutAll");
             scope.Start();
@@ -316,7 +325,10 @@ namespace _Type.Property.Optionality
         /// <include file="Docs/IntLiteral.xml" path="doc/members/member[@name='PutAll(RequestContent,RequestContext)']/*" />
         public virtual Response PutAll(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("IntLiteral.PutAll");
             scope.Start();
@@ -339,7 +351,10 @@ namespace _Type.Property.Optionality
         /// <include file="Docs/IntLiteral.xml" path="doc/members/member[@name='PutDefaultAsync(IntLiteralProperty,CancellationToken)']/*" />
         public virtual async Task<Response> PutDefaultAsync(IntLiteralProperty body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -354,7 +369,10 @@ namespace _Type.Property.Optionality
         /// <include file="Docs/IntLiteral.xml" path="doc/members/member[@name='PutDefault(IntLiteralProperty,CancellationToken)']/*" />
         public virtual Response PutDefault(IntLiteralProperty body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -385,7 +403,10 @@ namespace _Type.Property.Optionality
         /// <include file="Docs/IntLiteral.xml" path="doc/members/member[@name='PutDefaultAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutDefaultAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("IntLiteral.PutDefault");
             scope.Start();
@@ -424,7 +445,10 @@ namespace _Type.Property.Optionality
         /// <include file="Docs/IntLiteral.xml" path="doc/members/member[@name='PutDefault(RequestContent,RequestContext)']/*" />
         public virtual Response PutDefault(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("IntLiteral.PutDefault");
             scope.Start();

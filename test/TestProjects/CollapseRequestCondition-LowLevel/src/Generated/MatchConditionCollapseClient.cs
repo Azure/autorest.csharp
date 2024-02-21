@@ -47,8 +47,14 @@ namespace CollapseRequestCondition_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public MatchConditionCollapseClient(Uri endpoint, AzureKeyCredential credential, CollapseRequestConditionsClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
-            Argument.AssertNotNull(credential, nameof(credential));
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
+            if (credential == null)
+            {
+                throw new ArgumentNullException(nameof(credential));
+            }
             options ??= new CollapseRequestConditionsClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

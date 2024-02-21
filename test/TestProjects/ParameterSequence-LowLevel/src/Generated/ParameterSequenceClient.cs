@@ -47,8 +47,14 @@ namespace ParameterSequence_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public ParameterSequenceClient(Uri endpoint, AzureKeyCredential credential, ParameterSequenceClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
-            Argument.AssertNotNull(credential, nameof(credential));
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
+            if (credential == null)
+            {
+                throw new ArgumentNullException(nameof(credential));
+            }
             options ??= new ParameterSequenceClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -78,8 +84,18 @@ namespace ParameterSequence_LowLevel
         /// <include file="Docs/ParameterSequenceClient.xml" path="doc/members/member[@name='GetItemAsync(string,string,string,RequestContext)']/*" />
         public virtual async Task<Response> GetItemAsync(string itemName, string origin, string version, RequestContext context)
         {
-            Argument.AssertNotNullOrEmpty(itemName, nameof(itemName));
-            Argument.AssertNotNull(origin, nameof(origin));
+            if (itemName == null)
+            {
+                throw new ArgumentNullException(nameof(itemName));
+            }
+            if (itemName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(itemName));
+            }
+            if (origin == null)
+            {
+                throw new ArgumentNullException(nameof(origin));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ParameterSequenceClient.GetItem");
             scope.Start();
@@ -116,8 +132,18 @@ namespace ParameterSequence_LowLevel
         /// <include file="Docs/ParameterSequenceClient.xml" path="doc/members/member[@name='GetItem(string,string,string,RequestContext)']/*" />
         public virtual Response GetItem(string itemName, string origin, string version, RequestContext context)
         {
-            Argument.AssertNotNullOrEmpty(itemName, nameof(itemName));
-            Argument.AssertNotNull(origin, nameof(origin));
+            if (itemName == null)
+            {
+                throw new ArgumentNullException(nameof(itemName));
+            }
+            if (itemName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(itemName));
+            }
+            if (origin == null)
+            {
+                throw new ArgumentNullException(nameof(origin));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ParameterSequenceClient.GetItem");
             scope.Start();
@@ -154,8 +180,18 @@ namespace ParameterSequence_LowLevel
         /// <include file="Docs/ParameterSequenceClient.xml" path="doc/members/member[@name='SelectItemAsync(string,string,string,RequestContext)']/*" />
         public virtual async Task<Response> SelectItemAsync(string itemName, string origin, string version, RequestContext context)
         {
-            Argument.AssertNotNullOrEmpty(itemName, nameof(itemName));
-            Argument.AssertNotNull(origin, nameof(origin));
+            if (itemName == null)
+            {
+                throw new ArgumentNullException(nameof(itemName));
+            }
+            if (itemName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(itemName));
+            }
+            if (origin == null)
+            {
+                throw new ArgumentNullException(nameof(origin));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ParameterSequenceClient.SelectItem");
             scope.Start();
@@ -192,8 +228,18 @@ namespace ParameterSequence_LowLevel
         /// <include file="Docs/ParameterSequenceClient.xml" path="doc/members/member[@name='SelectItem(string,string,string,RequestContext)']/*" />
         public virtual Response SelectItem(string itemName, string origin, string version, RequestContext context)
         {
-            Argument.AssertNotNullOrEmpty(itemName, nameof(itemName));
-            Argument.AssertNotNull(origin, nameof(origin));
+            if (itemName == null)
+            {
+                throw new ArgumentNullException(nameof(itemName));
+            }
+            if (itemName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(itemName));
+            }
+            if (origin == null)
+            {
+                throw new ArgumentNullException(nameof(origin));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ParameterSequenceClient.SelectItem");
             scope.Start();

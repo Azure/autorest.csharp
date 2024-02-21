@@ -141,7 +141,10 @@ namespace _Type.Property.AdditionalProperties
         /// <include file="Docs/IsModelArray.xml" path="doc/members/member[@name='PutAsync(IsModelArrayAdditionalProperties,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(IsModelArrayAdditionalProperties body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -156,7 +159,10 @@ namespace _Type.Property.AdditionalProperties
         /// <include file="Docs/IsModelArray.xml" path="doc/members/member[@name='Put(IsModelArrayAdditionalProperties,CancellationToken)']/*" />
         public virtual Response Put(IsModelArrayAdditionalProperties body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -187,7 +193,10 @@ namespace _Type.Property.AdditionalProperties
         /// <include file="Docs/IsModelArray.xml" path="doc/members/member[@name='PutAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("IsModelArray.Put");
             scope.Start();
@@ -226,7 +235,10 @@ namespace _Type.Property.AdditionalProperties
         /// <include file="Docs/IsModelArray.xml" path="doc/members/member[@name='Put(RequestContent,RequestContext)']/*" />
         public virtual Response Put(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("IsModelArray.Put");
             scope.Start();

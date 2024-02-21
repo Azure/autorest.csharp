@@ -23,7 +23,10 @@ namespace _Type.Property.AdditionalProperties.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         protected ExtendsUnknownAdditionalPropertiesDiscriminated(string name)
         {
-            Argument.AssertNotNull(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
             Name = name;
             AdditionalProperties = new ChangeTrackingDictionary<string, BinaryData>();

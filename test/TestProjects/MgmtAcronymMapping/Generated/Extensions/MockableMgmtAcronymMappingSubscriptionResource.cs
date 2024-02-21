@@ -325,7 +325,10 @@ namespace MgmtAcronymMapping.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public virtual async Task<ArmOperation<LogAnalytics>> ExportRequestRateByIntervalLogAnalyticAsync(WaitUntil waitUntil, AzureLocation location, RequestRateByIntervalContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = LogAnalyticsClientDiagnostics.CreateScope("MockableMgmtAcronymMappingSubscriptionResource.ExportRequestRateByIntervalLogAnalytic");
             scope.Start();
@@ -368,7 +371,10 @@ namespace MgmtAcronymMapping.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public virtual ArmOperation<LogAnalytics> ExportRequestRateByIntervalLogAnalytic(WaitUntil waitUntil, AzureLocation location, RequestRateByIntervalContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = LogAnalyticsClientDiagnostics.CreateScope("MockableMgmtAcronymMappingSubscriptionResource.ExportRequestRateByIntervalLogAnalytic");
             scope.Start();
@@ -411,7 +417,10 @@ namespace MgmtAcronymMapping.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public virtual async Task<ArmOperation<LogAnalytics>> ExportThrottledRequestsLogAnalyticAsync(WaitUntil waitUntil, AzureLocation location, ThrottledRequestsContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = LogAnalyticsClientDiagnostics.CreateScope("MockableMgmtAcronymMappingSubscriptionResource.ExportThrottledRequestsLogAnalytic");
             scope.Start();
@@ -454,7 +463,10 @@ namespace MgmtAcronymMapping.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public virtual ArmOperation<LogAnalytics> ExportThrottledRequestsLogAnalytic(WaitUntil waitUntil, AzureLocation location, ThrottledRequestsContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = LogAnalyticsClientDiagnostics.CreateScope("MockableMgmtAcronymMappingSubscriptionResource.ExportThrottledRequestsLogAnalytic");
             scope.Start();

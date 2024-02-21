@@ -50,7 +50,10 @@ namespace Encode.Datetime
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='DefaultAsync(DefaultDatetimeProperty,CancellationToken)']/*" />
         public virtual async Task<Response<DefaultDatetimeProperty>> DefaultAsync(DefaultDatetimeProperty body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -64,7 +67,10 @@ namespace Encode.Datetime
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Default(DefaultDatetimeProperty,CancellationToken)']/*" />
         public virtual Response<DefaultDatetimeProperty> Default(DefaultDatetimeProperty body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -95,7 +101,10 @@ namespace Encode.Datetime
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='DefaultAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> DefaultAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Property.Default");
             scope.Start();
@@ -134,7 +143,10 @@ namespace Encode.Datetime
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Default(RequestContent,RequestContext)']/*" />
         public virtual Response Default(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Property.Default");
             scope.Start();
@@ -156,7 +168,10 @@ namespace Encode.Datetime
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Rfc3339Async(Rfc3339DatetimeProperty,CancellationToken)']/*" />
         public virtual async Task<Response<Rfc3339DatetimeProperty>> Rfc3339Async(Rfc3339DatetimeProperty body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -170,7 +185,10 @@ namespace Encode.Datetime
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Rfc3339(Rfc3339DatetimeProperty,CancellationToken)']/*" />
         public virtual Response<Rfc3339DatetimeProperty> Rfc3339(Rfc3339DatetimeProperty body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -201,7 +219,10 @@ namespace Encode.Datetime
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Rfc3339Async(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> Rfc3339Async(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Property.Rfc3339");
             scope.Start();
@@ -240,7 +261,10 @@ namespace Encode.Datetime
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Rfc3339(RequestContent,RequestContext)']/*" />
         public virtual Response Rfc3339(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Property.Rfc3339");
             scope.Start();
@@ -262,7 +286,10 @@ namespace Encode.Datetime
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Rfc7231Async(Rfc7231DatetimeProperty,CancellationToken)']/*" />
         public virtual async Task<Response<Rfc7231DatetimeProperty>> Rfc7231Async(Rfc7231DatetimeProperty body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -276,7 +303,10 @@ namespace Encode.Datetime
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Rfc7231(Rfc7231DatetimeProperty,CancellationToken)']/*" />
         public virtual Response<Rfc7231DatetimeProperty> Rfc7231(Rfc7231DatetimeProperty body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -307,7 +337,10 @@ namespace Encode.Datetime
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Rfc7231Async(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> Rfc7231Async(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Property.Rfc7231");
             scope.Start();
@@ -346,7 +379,10 @@ namespace Encode.Datetime
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Rfc7231(RequestContent,RequestContext)']/*" />
         public virtual Response Rfc7231(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Property.Rfc7231");
             scope.Start();
@@ -368,7 +404,10 @@ namespace Encode.Datetime
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='UnixTimestampAsync(UnixTimestampDatetimeProperty,CancellationToken)']/*" />
         public virtual async Task<Response<UnixTimestampDatetimeProperty>> UnixTimestampAsync(UnixTimestampDatetimeProperty body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -382,7 +421,10 @@ namespace Encode.Datetime
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='UnixTimestamp(UnixTimestampDatetimeProperty,CancellationToken)']/*" />
         public virtual Response<UnixTimestampDatetimeProperty> UnixTimestamp(UnixTimestampDatetimeProperty body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -413,7 +455,10 @@ namespace Encode.Datetime
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='UnixTimestampAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> UnixTimestampAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Property.UnixTimestamp");
             scope.Start();
@@ -452,7 +497,10 @@ namespace Encode.Datetime
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='UnixTimestamp(RequestContent,RequestContext)']/*" />
         public virtual Response UnixTimestamp(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Property.UnixTimestamp");
             scope.Start();
@@ -474,7 +522,10 @@ namespace Encode.Datetime
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='UnixTimestampArrayAsync(UnixTimestampArrayDatetimeProperty,CancellationToken)']/*" />
         public virtual async Task<Response<UnixTimestampArrayDatetimeProperty>> UnixTimestampArrayAsync(UnixTimestampArrayDatetimeProperty body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -488,7 +539,10 @@ namespace Encode.Datetime
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='UnixTimestampArray(UnixTimestampArrayDatetimeProperty,CancellationToken)']/*" />
         public virtual Response<UnixTimestampArrayDatetimeProperty> UnixTimestampArray(UnixTimestampArrayDatetimeProperty body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -519,7 +573,10 @@ namespace Encode.Datetime
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='UnixTimestampArrayAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> UnixTimestampArrayAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Property.UnixTimestampArray");
             scope.Start();
@@ -558,7 +615,10 @@ namespace Encode.Datetime
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='UnixTimestampArray(RequestContent,RequestContext)']/*" />
         public virtual Response UnixTimestampArray(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Property.UnixTimestampArray");
             scope.Start();

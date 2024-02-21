@@ -47,8 +47,14 @@ namespace body_string_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public EnumClient(Uri endpoint, AzureKeyCredential credential, AutoRestSwaggerBATServiceClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
-            Argument.AssertNotNull(credential, nameof(credential));
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
+            if (credential == null)
+            {
+                throw new ArgumentNullException(nameof(credential));
+            }
             options ??= new AutoRestSwaggerBATServiceClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -135,7 +141,10 @@ namespace body_string_LowLevel
         /// <include file="Docs/EnumClient.xml" path="doc/members/member[@name='PutNotExpandableAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutNotExpandableAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("EnumClient.PutNotExpandable");
             scope.Start();
@@ -169,7 +178,10 @@ namespace body_string_LowLevel
         /// <include file="Docs/EnumClient.xml" path="doc/members/member[@name='PutNotExpandable(RequestContent,RequestContext)']/*" />
         public virtual Response PutNotExpandable(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("EnumClient.PutNotExpandable");
             scope.Start();
@@ -263,7 +275,10 @@ namespace body_string_LowLevel
         /// <include file="Docs/EnumClient.xml" path="doc/members/member[@name='PutReferencedAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutReferencedAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("EnumClient.PutReferenced");
             scope.Start();
@@ -297,7 +312,10 @@ namespace body_string_LowLevel
         /// <include file="Docs/EnumClient.xml" path="doc/members/member[@name='PutReferenced(RequestContent,RequestContext)']/*" />
         public virtual Response PutReferenced(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("EnumClient.PutReferenced");
             scope.Start();
@@ -391,7 +409,10 @@ namespace body_string_LowLevel
         /// <include file="Docs/EnumClient.xml" path="doc/members/member[@name='PutReferencedConstantAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutReferencedConstantAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("EnumClient.PutReferencedConstant");
             scope.Start();
@@ -425,7 +446,10 @@ namespace body_string_LowLevel
         /// <include file="Docs/EnumClient.xml" path="doc/members/member[@name='PutReferencedConstant(RequestContent,RequestContext)']/*" />
         public virtual Response PutReferencedConstant(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("EnumClient.PutReferencedConstant");
             scope.Start();

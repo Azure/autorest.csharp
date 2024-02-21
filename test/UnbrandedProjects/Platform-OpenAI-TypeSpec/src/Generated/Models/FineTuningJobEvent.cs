@@ -3,7 +3,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.Collections.Generic;
 
 namespace OpenAI.Models
@@ -52,9 +51,18 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="object"/> or <paramref name="message"/> is null. </exception>
         internal FineTuningJobEvent(string id, string @object, DateTimeOffset createdAt, FineTuningJobEventLevel level, string message)
         {
-            ClientUtilities.AssertNotNull(id, nameof(id));
-            ClientUtilities.AssertNotNull(@object, nameof(@object));
-            ClientUtilities.AssertNotNull(message, nameof(message));
+            if (id == null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+            if (@object == null)
+            {
+                throw new ArgumentNullException(nameof(@object));
+            }
+            if (message == null)
+            {
+                throw new ArgumentNullException(nameof(message));
+            }
 
             Id = id;
             Object = @object;

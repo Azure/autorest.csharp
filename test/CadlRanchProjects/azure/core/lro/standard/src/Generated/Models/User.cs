@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace _Azure.Lro.Standard.Models
 {
@@ -51,7 +50,10 @@ namespace _Azure.Lro.Standard.Models
         /// <exception cref="ArgumentNullException"> <paramref name="role"/> is null. </exception>
         public User(string role)
         {
-            Argument.AssertNotNull(role, nameof(role));
+            if (role == null)
+            {
+                throw new ArgumentNullException(nameof(role));
+            }
 
             Role = role;
         }

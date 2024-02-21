@@ -51,7 +51,10 @@ namespace _Type._Dictionary.Models
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
         public InnerModel(string property)
         {
-            Argument.AssertNotNull(property, nameof(property));
+            if (property == null)
+            {
+                throw new ArgumentNullException(nameof(property));
+            }
 
             Property = property;
             Children = new ChangeTrackingDictionary<string, InnerModel>();

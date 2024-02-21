@@ -255,7 +255,14 @@ namespace ProtocolMethodsInRestClient
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Response> GetAsync(string resourceId, RequestContext context)
         {
-            Argument.AssertNotNullOrEmpty(resourceId, nameof(resourceId));
+            if (resourceId == null)
+            {
+                throw new ArgumentNullException(nameof(resourceId));
+            }
+            if (resourceId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceId));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("SecondTemplateClient.Get");
             scope.Start();
@@ -289,7 +296,14 @@ namespace ProtocolMethodsInRestClient
         /// <returns> The response returned from the service. </returns>
         public virtual Response Get(string resourceId, RequestContext context)
         {
-            Argument.AssertNotNullOrEmpty(resourceId, nameof(resourceId));
+            if (resourceId == null)
+            {
+                throw new ArgumentNullException(nameof(resourceId));
+            }
+            if (resourceId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceId));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("SecondTemplateClient.Get");
             scope.Start();

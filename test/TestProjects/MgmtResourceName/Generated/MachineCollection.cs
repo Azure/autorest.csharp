@@ -82,8 +82,18 @@ namespace MgmtResourceName
         /// <exception cref="ArgumentNullException"> <paramref name="machineName"/> or <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<MachineResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string machineName, MachineData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(machineName, nameof(machineName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (machineName == null)
+            {
+                throw new ArgumentNullException(nameof(machineName));
+            }
+            if (machineName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(machineName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _machineClientDiagnostics.CreateScope("MachineCollection.CreateOrUpdate");
             scope.Start();
@@ -130,8 +140,18 @@ namespace MgmtResourceName
         /// <exception cref="ArgumentNullException"> <paramref name="machineName"/> or <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<MachineResource> CreateOrUpdate(WaitUntil waitUntil, string machineName, MachineData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(machineName, nameof(machineName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (machineName == null)
+            {
+                throw new ArgumentNullException(nameof(machineName));
+            }
+            if (machineName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(machineName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _machineClientDiagnostics.CreateScope("MachineCollection.CreateOrUpdate");
             scope.Start();
@@ -176,7 +196,14 @@ namespace MgmtResourceName
         /// <exception cref="ArgumentNullException"> <paramref name="machineName"/> is null. </exception>
         public virtual async Task<Response<MachineResource>> GetAsync(string machineName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(machineName, nameof(machineName));
+            if (machineName == null)
+            {
+                throw new ArgumentNullException(nameof(machineName));
+            }
+            if (machineName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(machineName));
+            }
 
             using var scope = _machineClientDiagnostics.CreateScope("MachineCollection.Get");
             scope.Start();
@@ -220,7 +247,14 @@ namespace MgmtResourceName
         /// <exception cref="ArgumentNullException"> <paramref name="machineName"/> is null. </exception>
         public virtual Response<MachineResource> Get(string machineName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(machineName, nameof(machineName));
+            if (machineName == null)
+            {
+                throw new ArgumentNullException(nameof(machineName));
+            }
+            if (machineName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(machineName));
+            }
 
             using var scope = _machineClientDiagnostics.CreateScope("MachineCollection.Get");
             scope.Start();
@@ -321,7 +355,14 @@ namespace MgmtResourceName
         /// <exception cref="ArgumentNullException"> <paramref name="machineName"/> is null. </exception>
         public virtual async Task<Response<bool>> ExistsAsync(string machineName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(machineName, nameof(machineName));
+            if (machineName == null)
+            {
+                throw new ArgumentNullException(nameof(machineName));
+            }
+            if (machineName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(machineName));
+            }
 
             using var scope = _machineClientDiagnostics.CreateScope("MachineCollection.Exists");
             scope.Start();
@@ -364,7 +405,14 @@ namespace MgmtResourceName
         /// <exception cref="ArgumentNullException"> <paramref name="machineName"/> is null. </exception>
         public virtual Response<bool> Exists(string machineName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(machineName, nameof(machineName));
+            if (machineName == null)
+            {
+                throw new ArgumentNullException(nameof(machineName));
+            }
+            if (machineName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(machineName));
+            }
 
             using var scope = _machineClientDiagnostics.CreateScope("MachineCollection.Exists");
             scope.Start();
@@ -407,7 +455,14 @@ namespace MgmtResourceName
         /// <exception cref="ArgumentNullException"> <paramref name="machineName"/> is null. </exception>
         public virtual async Task<NullableResponse<MachineResource>> GetIfExistsAsync(string machineName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(machineName, nameof(machineName));
+            if (machineName == null)
+            {
+                throw new ArgumentNullException(nameof(machineName));
+            }
+            if (machineName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(machineName));
+            }
 
             using var scope = _machineClientDiagnostics.CreateScope("MachineCollection.GetIfExists");
             scope.Start();
@@ -452,7 +507,14 @@ namespace MgmtResourceName
         /// <exception cref="ArgumentNullException"> <paramref name="machineName"/> is null. </exception>
         public virtual NullableResponse<MachineResource> GetIfExists(string machineName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(machineName, nameof(machineName));
+            if (machineName == null)
+            {
+                throw new ArgumentNullException(nameof(machineName));
+            }
+            if (machineName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(machineName));
+            }
 
             using var scope = _machineClientDiagnostics.CreateScope("MachineCollection.GetIfExists");
             scope.Start();

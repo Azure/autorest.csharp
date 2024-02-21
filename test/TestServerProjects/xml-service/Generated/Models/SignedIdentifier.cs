@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace xml_service.Models
 {
@@ -52,8 +51,14 @@ namespace xml_service.Models
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="accessPolicy"/> is null. </exception>
         public SignedIdentifier(string id, AccessPolicy accessPolicy)
         {
-            Argument.AssertNotNull(id, nameof(id));
-            Argument.AssertNotNull(accessPolicy, nameof(accessPolicy));
+            if (id == null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+            if (accessPolicy == null)
+            {
+                throw new ArgumentNullException(nameof(accessPolicy));
+            }
 
             Id = id;
             AccessPolicy = accessPolicy;
