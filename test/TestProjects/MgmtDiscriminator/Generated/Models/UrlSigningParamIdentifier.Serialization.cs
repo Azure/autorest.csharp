@@ -109,35 +109,35 @@ namespace MgmtDiscriminator.Models
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ParamIndicator), out propertyOverride);
             if (Optional.IsDefined(ParamIndicator) || hasPropertyOverride)
             {
-                builder.Append("  paramIndicator:");
+                builder.Append("  paramIndicator: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($" {propertyOverride}");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{ParamIndicator.ToString()}'");
+                    builder.AppendLine($"'{ParamIndicator.ToString()}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ParamName), out propertyOverride);
             if (Optional.IsDefined(ParamName) || hasPropertyOverride)
             {
-                builder.Append("  paramName:");
+                builder.Append("  paramName: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($" {propertyOverride}");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
                     if (ParamName.Contains(Environment.NewLine))
                     {
-                        builder.AppendLine(" '''");
+                        builder.AppendLine("'''");
                         builder.AppendLine($"{ParamName}'''");
                     }
                     else
                     {
-                        builder.AppendLine($" '{ParamName}'");
+                        builder.AppendLine($"'{ParamName}'");
                     }
                 }
             }
@@ -172,7 +172,7 @@ namespace MgmtDiscriminator.Models
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($" {line}");
+                    stringBuilder.AppendLine($"{line}");
                 }
                 else
                 {

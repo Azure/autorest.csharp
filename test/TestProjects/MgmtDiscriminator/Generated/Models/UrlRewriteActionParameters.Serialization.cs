@@ -132,35 +132,35 @@ namespace MgmtDiscriminator.Models
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride);
             if (Optional.IsDefined(TypeName) || hasPropertyOverride)
             {
-                builder.Append("  typeName:");
+                builder.Append("  typeName: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($" {propertyOverride}");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{TypeName.ToString()}'");
+                    builder.AppendLine($"'{TypeName.ToString()}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(SourcePattern), out propertyOverride);
             if (Optional.IsDefined(SourcePattern) || hasPropertyOverride)
             {
-                builder.Append("  sourcePattern:");
+                builder.Append("  sourcePattern: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($" {propertyOverride}");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
                     if (SourcePattern.Contains(Environment.NewLine))
                     {
-                        builder.AppendLine(" '''");
+                        builder.AppendLine("'''");
                         builder.AppendLine($"{SourcePattern}'''");
                     }
                     else
                     {
-                        builder.AppendLine($" '{SourcePattern}'");
+                        builder.AppendLine($"'{SourcePattern}'");
                     }
                 }
             }
@@ -168,21 +168,21 @@ namespace MgmtDiscriminator.Models
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Destination), out propertyOverride);
             if (Optional.IsDefined(Destination) || hasPropertyOverride)
             {
-                builder.Append("  destination:");
+                builder.Append("  destination: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($" {propertyOverride}");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
                     if (Destination.Contains(Environment.NewLine))
                     {
-                        builder.AppendLine(" '''");
+                        builder.AppendLine("'''");
                         builder.AppendLine($"{Destination}'''");
                     }
                     else
                     {
-                        builder.AppendLine($" '{Destination}'");
+                        builder.AppendLine($"'{Destination}'");
                     }
                 }
             }
@@ -190,15 +190,15 @@ namespace MgmtDiscriminator.Models
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(PreserveUnmatchedPath), out propertyOverride);
             if (Optional.IsDefined(PreserveUnmatchedPath) || hasPropertyOverride)
             {
-                builder.Append("  preserveUnmatchedPath:");
+                builder.Append("  preserveUnmatchedPath: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($" {propertyOverride}");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
                     var boolValue = PreserveUnmatchedPath.Value == true ? "true" : "false";
-                    builder.AppendLine($" {boolValue}");
+                    builder.AppendLine($"{boolValue}");
                 }
             }
 
@@ -232,7 +232,7 @@ namespace MgmtDiscriminator.Models
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($" {line}");
+                    stringBuilder.AppendLine($"{line}");
                 }
                 else
                 {

@@ -132,49 +132,49 @@ namespace MgmtDiscriminator.Models
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride);
             if (Optional.IsDefined(TypeName) || hasPropertyOverride)
             {
-                builder.Append("  typeName:");
+                builder.Append("  typeName: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($" {propertyOverride}");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{TypeName.ToString()}'");
+                    builder.AppendLine($"'{TypeName.ToString()}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(QueryStringBehavior), out propertyOverride);
             if (Optional.IsDefined(QueryStringBehavior) || hasPropertyOverride)
             {
-                builder.Append("  queryStringBehavior:");
+                builder.Append("  queryStringBehavior: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($" {propertyOverride}");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{QueryStringBehavior.ToString()}'");
+                    builder.AppendLine($"'{QueryStringBehavior.ToString()}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(QueryParameters), out propertyOverride);
             if (Optional.IsDefined(QueryParameters) || hasPropertyOverride)
             {
-                builder.Append("  queryParameters:");
+                builder.Append("  queryParameters: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($" {propertyOverride}");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
                     if (QueryParameters.Contains(Environment.NewLine))
                     {
-                        builder.AppendLine(" '''");
+                        builder.AppendLine("'''");
                         builder.AppendLine($"{QueryParameters}'''");
                     }
                     else
                     {
-                        builder.AppendLine($" '{QueryParameters}'");
+                        builder.AppendLine($"'{QueryParameters}'");
                     }
                 }
             }
@@ -209,7 +209,7 @@ namespace MgmtDiscriminator.Models
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($" {line}");
+                    stringBuilder.AppendLine($"{line}");
                 }
                 else
                 {

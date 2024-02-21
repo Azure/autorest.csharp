@@ -68,6 +68,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 DateTimeProperty = now,
                 Duration = TimeSpan.FromDays(1),
                 Number = 4,
+                ShellProperty = new Shell()
             };
 
             var bicep = ModelReaderWriter.Write(data, new ModelReaderWriterOptions("bicep")).ToString();

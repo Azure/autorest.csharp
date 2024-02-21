@@ -15,27 +15,28 @@ using Azure.ResourceManager;
 
 namespace MgmtDiscriminator.Models
 {
-    public partial class DeliveryRuleRequestHeaderAction : IUtf8JsonSerializable, IJsonModel<DeliveryRuleRequestHeaderAction>
+    public partial class Shell : IUtf8JsonSerializable, IJsonModel<Shell>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeliveryRuleRequestHeaderAction>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Shell>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
-        void IJsonModel<DeliveryRuleRequestHeaderAction>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<Shell>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<DeliveryRuleRequestHeaderAction>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<Shell>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(DeliveryRuleRequestHeaderAction)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Shell)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("parameters"u8);
-            writer.WriteObjectValue(Parameters);
-            writer.WritePropertyName("name"u8);
-            writer.WriteStringValue(Name.ToString());
-            if (options.Format != "W" && Optional.IsDefined(Foo))
+            if (Optional.IsDefined(Name))
             {
-                writer.WritePropertyName("foo"u8);
-                writer.WriteStringValue(Foo);
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (Optional.IsDefined(ShellType))
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ShellType);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -55,19 +56,19 @@ namespace MgmtDiscriminator.Models
             writer.WriteEndObject();
         }
 
-        DeliveryRuleRequestHeaderAction IJsonModel<DeliveryRuleRequestHeaderAction>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Shell IJsonModel<Shell>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<DeliveryRuleRequestHeaderAction>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<Shell>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(DeliveryRuleRequestHeaderAction)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Shell)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeDeliveryRuleRequestHeaderAction(document.RootElement, options);
+            return DeserializeShell(document.RootElement, options);
         }
 
-        internal static DeliveryRuleRequestHeaderAction DeserializeDeliveryRuleRequestHeaderAction(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static Shell DeserializeShell(JsonElement element, ModelReaderWriterOptions options = null)
         {
             options ??= new ModelReaderWriterOptions("W");
 
@@ -75,26 +76,20 @@ namespace MgmtDiscriminator.Models
             {
                 return null;
             }
-            HeaderActionParameters parameters = default;
-            DeliveryRuleActionType name = default;
-            Optional<string> foo = default;
+            Optional<string> name = default;
+            Optional<string> type = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("parameters"u8))
-                {
-                    parameters = HeaderActionParameters.DeserializeHeaderActionParameters(property.Value);
-                    continue;
-                }
                 if (property.NameEquals("name"u8))
                 {
-                    name = new DeliveryRuleActionType(property.Value.GetString());
+                    name = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("foo"u8))
+                if (property.NameEquals("type"u8))
                 {
-                    foo = property.Value.GetString();
+                    type = property.Value.GetString();
                     continue;
                 }
                 if (options.Format != "W")
@@ -103,7 +98,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DeliveryRuleRequestHeaderAction(name, foo.Value, serializedAdditionalRawData, parameters);
+            return new Shell(name.Value, type.Value, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -127,49 +122,14 @@ namespace MgmtDiscriminator.Models
                 }
                 else
                 {
-                    builder.AppendLine($"'{Name.ToString()}'");
-                }
-            }
-
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Parameters), out propertyOverride);
-            if (Optional.IsDefined(Parameters) || hasPropertyOverride)
-            {
-                builder.Append("  parameters: ");
-                if (hasPropertyOverride)
-                {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
-                    int currentIndent = 2;
-                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
-                    int length = builder.Length;
-                    AppendChildObject(builder, Parameters, options, currentIndent, false);
-                    if (builder.Length == length + emptyObjectLength)
-                    {
-                        builder.Length = builder.Length - emptyObjectLength - "  parameters: ".Length;
-                    }
-                }
-            }
-
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Foo), out propertyOverride);
-            if (Optional.IsDefined(Foo) || hasPropertyOverride)
-            {
-                builder.Append("  foo: ");
-                if (hasPropertyOverride)
-                {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
-                    if (Foo.Contains(Environment.NewLine))
+                    if (Name.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
-                        builder.AppendLine($"{Foo}'''");
+                        builder.AppendLine($"{Name}'''");
                     }
                     else
                     {
-                        builder.AppendLine($"'{Foo}'");
+                        builder.AppendLine($"'{Name}'");
                     }
                 }
             }
@@ -213,9 +173,9 @@ namespace MgmtDiscriminator.Models
             }
         }
 
-        BinaryData IPersistableModel<DeliveryRuleRequestHeaderAction>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Shell>.Write(ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<DeliveryRuleRequestHeaderAction>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<Shell>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
@@ -224,28 +184,28 @@ namespace MgmtDiscriminator.Models
                 case "bicep":
                     return SerializeBicep(options);
                 default:
-                    throw new FormatException($"The model {nameof(DeliveryRuleRequestHeaderAction)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Shell)} does not support '{options.Format}' format.");
             }
         }
 
-        DeliveryRuleRequestHeaderAction IPersistableModel<DeliveryRuleRequestHeaderAction>.Create(BinaryData data, ModelReaderWriterOptions options)
+        Shell IPersistableModel<Shell>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<DeliveryRuleRequestHeaderAction>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<Shell>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeDeliveryRuleRequestHeaderAction(document.RootElement, options);
+                        return DeserializeShell(document.RootElement, options);
                     }
                 case "bicep":
                     throw new InvalidOperationException("Bicep deserialization is not supported for this type.");
                 default:
-                    throw new FormatException($"The model {nameof(DeliveryRuleRequestHeaderAction)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Shell)} does not support '{options.Format}' format.");
             }
         }
 
-        string IPersistableModel<DeliveryRuleRequestHeaderAction>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<Shell>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

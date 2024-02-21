@@ -142,28 +142,28 @@ namespace MgmtDiscriminator.Models
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride);
             if (Optional.IsDefined(TypeName) || hasPropertyOverride)
             {
-                builder.Append("  typeName:");
+                builder.Append("  typeName: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($" {propertyOverride}");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{TypeName.ToString()}'");
+                    builder.AppendLine($"'{TypeName.ToString()}'");
                 }
             }
 
             hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Algorithm), out propertyOverride);
             if (Optional.IsDefined(Algorithm) || hasPropertyOverride)
             {
-                builder.Append("  algorithm:");
+                builder.Append("  algorithm: ");
                 if (hasPropertyOverride)
                 {
-                    builder.AppendLine($" {propertyOverride}");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{Algorithm.Value.ToString()}'");
+                    builder.AppendLine($"'{Algorithm.Value.ToString()}'");
                 }
             }
 
@@ -172,17 +172,24 @@ namespace MgmtDiscriminator.Models
             {
                 if (ParameterNameOverride.Any() || hasPropertyOverride)
                 {
-                    builder.Append("  parameterNameOverride:");
+                    builder.Append("  parameterNameOverride: ");
                     if (hasPropertyOverride)
                     {
-                        builder.AppendLine($" {propertyOverride}");
+                        builder.AppendLine($"{propertyOverride}");
                     }
                     else
                     {
-                        builder.AppendLine(" [");
+                        builder.AppendLine("[");
                         foreach (var item in ParameterNameOverride)
                         {
-                            AppendChildObject(builder, item, options, 4, true);
+                            int currentIndent = 4;
+                            int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                            int length = builder.Length;
+                            AppendChildObject(builder, item, options, currentIndent, true);
+                            if (builder.Length == length + emptyObjectLength)
+                            {
+                                builder.Length = builder.Length - emptyObjectLength - "  parameterNameOverride: ".Length;
+                            }
                         }
                         builder.AppendLine("  ]");
                     }
@@ -219,7 +226,7 @@ namespace MgmtDiscriminator.Models
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($" {line}");
+                    stringBuilder.AppendLine($"{line}");
                 }
                 else
                 {
