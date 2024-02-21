@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -118,33 +119,62 @@ namespace Azure.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Name))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name), out propertyOverride);
+            if (Optional.IsDefined(Name) || hasPropertyOverride)
             {
-                builder.Append("  name:");
-                if (Name.Contains(Environment.NewLine))
+                builder.Append("  name: ");
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{Name}'''");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{Name}'");
+                    if (Name.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{Name}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{Name}'");
+                    }
                 }
             }
 
-            if (Optional.IsCollectionDefined(StatusesSummary))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(StatusesSummary), out propertyOverride);
+            if (Optional.IsCollectionDefined(StatusesSummary) || hasPropertyOverride)
             {
-                if (StatusesSummary.Any())
+                if (StatusesSummary.Any() || hasPropertyOverride)
                 {
-                    builder.Append("  statusesSummary:");
-                    builder.AppendLine(" [");
-                    foreach (var item in StatusesSummary)
+                    builder.Append("  statusesSummary: ");
+                    if (hasPropertyOverride)
                     {
-                        AppendChildObject(builder, item, options, 4, true);
+                        builder.AppendLine($"{propertyOverride}");
                     }
-                    builder.AppendLine("  ]");
+                    else
+                    {
+                        builder.AppendLine("[");
+                        foreach (var item in StatusesSummary)
+                        {
+                            int currentIndent = 4;
+                            int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                            int length = builder.Length;
+                            AppendChildObject(builder, item, options, currentIndent, true);
+                            if (builder.Length == length + emptyObjectLength)
+                            {
+                                builder.Length = builder.Length - emptyObjectLength - "  statusesSummary: ".Length;
+                            }
+                        }
+                        builder.AppendLine("  ]");
+                    }
                 }
             }
 
@@ -178,7 +208,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($" {line}");
+                    stringBuilder.AppendLine($"{line}");
                 }
                 else
                 {

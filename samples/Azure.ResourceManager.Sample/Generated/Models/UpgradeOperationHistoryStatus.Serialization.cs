@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -126,26 +127,56 @@ namespace Azure.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Code))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Code), out propertyOverride);
+            if (Optional.IsDefined(Code) || hasPropertyOverride)
             {
-                builder.Append("  code:");
-                builder.AppendLine($" '{Code.Value.ToSerialString()}'");
+                builder.Append("  code: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"'{Code.Value.ToSerialString()}'");
+                }
             }
 
-            if (Optional.IsDefined(StartOn))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(StartOn), out propertyOverride);
+            if (Optional.IsDefined(StartOn) || hasPropertyOverride)
             {
-                builder.Append("  startTime:");
-                var formattedDateTimeString = TypeFormatters.ToString(StartOn.Value, "o");
-                builder.AppendLine($" '{formattedDateTimeString}'");
+                builder.Append("  startTime: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    var formattedDateTimeString = TypeFormatters.ToString(StartOn.Value, "o");
+                    builder.AppendLine($"'{formattedDateTimeString}'");
+                }
             }
 
-            if (Optional.IsDefined(EndOn))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(EndOn), out propertyOverride);
+            if (Optional.IsDefined(EndOn) || hasPropertyOverride)
             {
-                builder.Append("  endTime:");
-                var formattedDateTimeString = TypeFormatters.ToString(EndOn.Value, "o");
-                builder.AppendLine($" '{formattedDateTimeString}'");
+                builder.Append("  endTime: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    var formattedDateTimeString = TypeFormatters.ToString(EndOn.Value, "o");
+                    builder.AppendLine($"'{formattedDateTimeString}'");
+                }
             }
 
             builder.AppendLine("}");
@@ -178,7 +209,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($" {line}");
+                    stringBuilder.AppendLine($"{line}");
                 }
                 else
                 {

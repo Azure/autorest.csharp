@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -111,18 +112,40 @@ namespace Azure.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(ServiceName))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ServiceName), out propertyOverride);
+            if (Optional.IsDefined(ServiceName) || hasPropertyOverride)
             {
-                builder.Append("  serviceName:");
-                builder.AppendLine($" '{ServiceName.Value.ToString()}'");
+                builder.Append("  serviceName: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"'{ServiceName.Value.ToString()}'");
+                }
             }
 
-            if (Optional.IsDefined(ServiceState))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ServiceState), out propertyOverride);
+            if (Optional.IsDefined(ServiceState) || hasPropertyOverride)
             {
-                builder.Append("  serviceState:");
-                builder.AppendLine($" '{ServiceState.Value.ToString()}'");
+                builder.Append("  serviceState: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"'{ServiceState.Value.ToString()}'");
+                }
             }
 
             builder.AppendLine("}");
@@ -155,7 +178,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($" {line}");
+                    stringBuilder.AppendLine($"{line}");
                 }
                 else
                 {

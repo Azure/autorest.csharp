@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -231,96 +232,203 @@ namespace Azure.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Name))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name), out propertyOverride);
+            if (Optional.IsDefined(Name) || hasPropertyOverride)
             {
-                builder.Append("  name:");
-                if (Name.Contains(Environment.NewLine))
+                builder.Append("  name: ");
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{Name}'''");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{Name}'");
-                }
-            }
-
-            if (Optional.IsDefined(Caching))
-            {
-                builder.Append("  caching:");
-                builder.AppendLine($" '{Caching.Value.ToSerialString()}'");
-            }
-
-            if (Optional.IsDefined(WriteAcceleratorEnabled))
-            {
-                builder.Append("  writeAcceleratorEnabled:");
-                var boolValue = WriteAcceleratorEnabled.Value == true ? "true" : "false";
-                builder.AppendLine($" {boolValue}");
-            }
-
-            if (Optional.IsDefined(CreateOption))
-            {
-                builder.Append("  createOption:");
-                builder.AppendLine($" '{CreateOption.ToString()}'");
-            }
-
-            if (Optional.IsDefined(DiffDiskSettings))
-            {
-                builder.Append("  diffDiskSettings:");
-                AppendChildObject(builder, DiffDiskSettings, options, 2, false);
-            }
-
-            if (Optional.IsDefined(DiskSizeGB))
-            {
-                builder.Append("  diskSizeGB:");
-                builder.AppendLine($" {DiskSizeGB.Value}");
-            }
-
-            if (Optional.IsDefined(OSType))
-            {
-                builder.Append("  osType:");
-                builder.AppendLine($" '{OSType.Value.ToSerialString()}'");
-            }
-
-            if (Optional.IsDefined(Image))
-            {
-                builder.Append("  image:");
-                AppendChildObject(builder, Image, options, 2, false);
-            }
-
-            if (Optional.IsCollectionDefined(VhdContainers))
-            {
-                if (VhdContainers.Any())
-                {
-                    builder.Append("  vhdContainers:");
-                    builder.AppendLine(" [");
-                    foreach (var item in VhdContainers)
+                    if (Name.Contains(Environment.NewLine))
                     {
-                        if (item == null)
-                        {
-                            builder.Append("null");
-                            continue;
-                        }
-                        if (item.Contains(Environment.NewLine))
-                        {
-                            builder.AppendLine("    '''");
-                            builder.AppendLine($"{item}'''");
-                        }
-                        else
-                        {
-                            builder.AppendLine($"    '{item}'");
-                        }
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{Name}'''");
                     }
-                    builder.AppendLine("  ]");
+                    else
+                    {
+                        builder.AppendLine($"'{Name}'");
+                    }
                 }
             }
 
-            if (Optional.IsDefined(ManagedDisk))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Caching), out propertyOverride);
+            if (Optional.IsDefined(Caching) || hasPropertyOverride)
             {
-                builder.Append("  managedDisk:");
-                AppendChildObject(builder, ManagedDisk, options, 2, false);
+                builder.Append("  caching: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"'{Caching.Value.ToSerialString()}'");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(WriteAcceleratorEnabled), out propertyOverride);
+            if (Optional.IsDefined(WriteAcceleratorEnabled) || hasPropertyOverride)
+            {
+                builder.Append("  writeAcceleratorEnabled: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    var boolValue = WriteAcceleratorEnabled.Value == true ? "true" : "false";
+                    builder.AppendLine($"{boolValue}");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(CreateOption), out propertyOverride);
+            if (Optional.IsDefined(CreateOption) || hasPropertyOverride)
+            {
+                builder.Append("  createOption: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"'{CreateOption.ToString()}'");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(DiffDiskSettings), out propertyOverride);
+            if (Optional.IsDefined(DiffDiskSettings) || hasPropertyOverride)
+            {
+                builder.Append("  diffDiskSettings: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    int currentIndent = 2;
+                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                    int length = builder.Length;
+                    AppendChildObject(builder, DiffDiskSettings, options, currentIndent, false);
+                    if (builder.Length == length + emptyObjectLength)
+                    {
+                        builder.Length = builder.Length - emptyObjectLength - "  diffDiskSettings: ".Length;
+                    }
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(DiskSizeGB), out propertyOverride);
+            if (Optional.IsDefined(DiskSizeGB) || hasPropertyOverride)
+            {
+                builder.Append("  diskSizeGB: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"{DiskSizeGB.Value}");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(OSType), out propertyOverride);
+            if (Optional.IsDefined(OSType) || hasPropertyOverride)
+            {
+                builder.Append("  osType: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"'{OSType.Value.ToSerialString()}'");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Image), out propertyOverride);
+            if (Optional.IsDefined(Image) || hasPropertyOverride)
+            {
+                builder.Append("  image: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    int currentIndent = 2;
+                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                    int length = builder.Length;
+                    AppendChildObject(builder, Image, options, currentIndent, false);
+                    if (builder.Length == length + emptyObjectLength)
+                    {
+                        builder.Length = builder.Length - emptyObjectLength - "  image: ".Length;
+                    }
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(VhdContainers), out propertyOverride);
+            if (Optional.IsCollectionDefined(VhdContainers) || hasPropertyOverride)
+            {
+                if (VhdContainers.Any() || hasPropertyOverride)
+                {
+                    builder.Append("  vhdContainers: ");
+                    if (hasPropertyOverride)
+                    {
+                        builder.AppendLine($"{propertyOverride}");
+                    }
+                    else
+                    {
+                        builder.AppendLine("[");
+                        foreach (var item in VhdContainers)
+                        {
+                            if (item == null)
+                            {
+                                builder.Append("null");
+                                continue;
+                            }
+                            if (item.Contains(Environment.NewLine))
+                            {
+                                builder.AppendLine("    '''");
+                                builder.AppendLine($"{item}'''");
+                            }
+                            else
+                            {
+                                builder.AppendLine($"    '{item}'");
+                            }
+                        }
+                        builder.AppendLine("  ]");
+                    }
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ManagedDisk), out propertyOverride);
+            if (Optional.IsDefined(ManagedDisk) || hasPropertyOverride)
+            {
+                builder.Append("  managedDisk: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    int currentIndent = 2;
+                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                    int length = builder.Length;
+                    AppendChildObject(builder, ManagedDisk, options, currentIndent, false);
+                    if (builder.Length == length + emptyObjectLength)
+                    {
+                        builder.Length = builder.Length - emptyObjectLength - "  managedDisk: ".Length;
+                    }
+                }
             }
 
             builder.AppendLine("}");
@@ -353,7 +461,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($" {line}");
+                    stringBuilder.AppendLine($"{line}");
                 }
                 else
                 {

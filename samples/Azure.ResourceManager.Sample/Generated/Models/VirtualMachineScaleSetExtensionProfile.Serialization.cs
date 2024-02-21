@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
@@ -119,33 +120,62 @@ namespace Azure.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsCollectionDefined(Extensions))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Extensions), out propertyOverride);
+            if (Optional.IsCollectionDefined(Extensions) || hasPropertyOverride)
             {
-                if (Extensions.Any())
+                if (Extensions.Any() || hasPropertyOverride)
                 {
-                    builder.Append("  extensions:");
-                    builder.AppendLine(" [");
-                    foreach (var item in Extensions)
+                    builder.Append("  extensions: ");
+                    if (hasPropertyOverride)
                     {
-                        AppendChildObject(builder, item, options, 4, true);
+                        builder.AppendLine($"{propertyOverride}");
                     }
-                    builder.AppendLine("  ]");
+                    else
+                    {
+                        builder.AppendLine("[");
+                        foreach (var item in Extensions)
+                        {
+                            int currentIndent = 4;
+                            int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                            int length = builder.Length;
+                            AppendChildObject(builder, item, options, currentIndent, true);
+                            if (builder.Length == length + emptyObjectLength)
+                            {
+                                builder.Length = builder.Length - emptyObjectLength - "  extensions: ".Length;
+                            }
+                        }
+                        builder.AppendLine("  ]");
+                    }
                 }
             }
 
-            if (Optional.IsDefined(ExtensionsTimeBudget))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ExtensionsTimeBudget), out propertyOverride);
+            if (Optional.IsDefined(ExtensionsTimeBudget) || hasPropertyOverride)
             {
-                builder.Append("  extensionsTimeBudget:");
-                if (ExtensionsTimeBudget.Contains(Environment.NewLine))
+                builder.Append("  extensionsTimeBudget: ");
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{ExtensionsTimeBudget}'''");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{ExtensionsTimeBudget}'");
+                    if (ExtensionsTimeBudget.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{ExtensionsTimeBudget}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{ExtensionsTimeBudget}'");
+                    }
                 }
             }
 
@@ -179,7 +209,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($" {line}");
+                    stringBuilder.AppendLine($"{line}");
                 }
                 else
                 {

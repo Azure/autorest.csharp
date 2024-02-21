@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -141,30 +142,68 @@ namespace Azure.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(SuccessfulInstanceCount))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(SuccessfulInstanceCount), out propertyOverride);
+            if (Optional.IsDefined(SuccessfulInstanceCount) || hasPropertyOverride)
             {
-                builder.Append("  successfulInstanceCount:");
-                builder.AppendLine($" {SuccessfulInstanceCount.Value}");
+                builder.Append("  successfulInstanceCount: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"{SuccessfulInstanceCount.Value}");
+                }
             }
 
-            if (Optional.IsDefined(FailedInstanceCount))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(FailedInstanceCount), out propertyOverride);
+            if (Optional.IsDefined(FailedInstanceCount) || hasPropertyOverride)
             {
-                builder.Append("  failedInstanceCount:");
-                builder.AppendLine($" {FailedInstanceCount.Value}");
+                builder.Append("  failedInstanceCount: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"{FailedInstanceCount.Value}");
+                }
             }
 
-            if (Optional.IsDefined(InProgressInstanceCount))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(InProgressInstanceCount), out propertyOverride);
+            if (Optional.IsDefined(InProgressInstanceCount) || hasPropertyOverride)
             {
-                builder.Append("  inProgressInstanceCount:");
-                builder.AppendLine($" {InProgressInstanceCount.Value}");
+                builder.Append("  inProgressInstanceCount: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"{InProgressInstanceCount.Value}");
+                }
             }
 
-            if (Optional.IsDefined(PendingInstanceCount))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(PendingInstanceCount), out propertyOverride);
+            if (Optional.IsDefined(PendingInstanceCount) || hasPropertyOverride)
             {
-                builder.Append("  pendingInstanceCount:");
-                builder.AppendLine($" {PendingInstanceCount.Value}");
+                builder.Append("  pendingInstanceCount: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"{PendingInstanceCount.Value}");
+                }
             }
 
             builder.AppendLine("}");
@@ -197,7 +236,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($" {line}");
+                    stringBuilder.AppendLine($"{line}");
                 }
                 else
                 {

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -107,26 +108,48 @@ namespace Azure.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(VmSize))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(VmSize), out propertyOverride);
+            if (Optional.IsDefined(VmSize) || hasPropertyOverride)
             {
-                builder.Append("  vmSize:");
-                if (VmSize.Contains(Environment.NewLine))
+                builder.Append("  vmSize: ");
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{VmSize}'''");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{VmSize}'");
+                    if (VmSize.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{VmSize}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{VmSize}'");
+                    }
                 }
             }
 
-            if (Optional.IsDefined(Count))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Count), out propertyOverride);
+            if (Optional.IsDefined(Count) || hasPropertyOverride)
             {
-                builder.Append("  count:");
-                builder.AppendLine($" '{Count.Value.ToString()}'");
+                builder.Append("  count: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"'{Count.Value.ToString()}'");
+                }
             }
 
             builder.AppendLine("}");
@@ -159,7 +182,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($" {line}");
+                    stringBuilder.AppendLine($"{line}");
                 }
                 else
                 {

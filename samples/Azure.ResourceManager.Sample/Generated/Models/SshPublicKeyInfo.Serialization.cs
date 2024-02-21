@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -103,33 +104,55 @@ namespace Azure.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Path))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Path), out propertyOverride);
+            if (Optional.IsDefined(Path) || hasPropertyOverride)
             {
-                builder.Append("  path:");
-                if (Path.Contains(Environment.NewLine))
+                builder.Append("  path: ");
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{Path}'''");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{Path}'");
+                    if (Path.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{Path}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{Path}'");
+                    }
                 }
             }
 
-            if (Optional.IsDefined(KeyData))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(KeyData), out propertyOverride);
+            if (Optional.IsDefined(KeyData) || hasPropertyOverride)
             {
-                builder.Append("  keyData:");
-                if (KeyData.Contains(Environment.NewLine))
+                builder.Append("  keyData: ");
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{KeyData}'''");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{KeyData}'");
+                    if (KeyData.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{KeyData}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{KeyData}'");
+                    }
                 }
             }
 
@@ -163,7 +186,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($" {line}");
+                    stringBuilder.AppendLine($"{line}");
                 }
                 else
                 {

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -126,24 +127,61 @@ namespace Azure.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(ConsoleScreenshotBlobUri))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ConsoleScreenshotBlobUri), out propertyOverride);
+            if (Optional.IsDefined(ConsoleScreenshotBlobUri) || hasPropertyOverride)
             {
-                builder.Append("  consoleScreenshotBlobUri:");
-                builder.AppendLine($" '{ConsoleScreenshotBlobUri.AbsoluteUri}'");
+                builder.Append("  consoleScreenshotBlobUri: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"'{ConsoleScreenshotBlobUri.AbsoluteUri}'");
+                }
             }
 
-            if (Optional.IsDefined(SerialConsoleLogBlobUri))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(SerialConsoleLogBlobUri), out propertyOverride);
+            if (Optional.IsDefined(SerialConsoleLogBlobUri) || hasPropertyOverride)
             {
-                builder.Append("  serialConsoleLogBlobUri:");
-                builder.AppendLine($" '{SerialConsoleLogBlobUri.AbsoluteUri}'");
+                builder.Append("  serialConsoleLogBlobUri: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"'{SerialConsoleLogBlobUri.AbsoluteUri}'");
+                }
             }
 
-            if (Optional.IsDefined(Status))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Status), out propertyOverride);
+            if (Optional.IsDefined(Status) || hasPropertyOverride)
             {
-                builder.Append("  status:");
-                AppendChildObject(builder, Status, options, 2, false);
+                builder.Append("  status: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    int currentIndent = 2;
+                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                    int length = builder.Length;
+                    AppendChildObject(builder, Status, options, currentIndent, false);
+                    if (builder.Length == length + emptyObjectLength)
+                    {
+                        builder.Length = builder.Length - emptyObjectLength - "  status: ".Length;
+                    }
+                }
             }
 
             builder.AppendLine("}");
@@ -176,7 +214,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($" {line}");
+                    stringBuilder.AppendLine($"{line}");
                 }
                 else
                 {

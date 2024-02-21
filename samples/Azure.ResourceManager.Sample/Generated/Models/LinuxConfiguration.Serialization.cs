@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -126,26 +127,63 @@ namespace Azure.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(DisablePasswordAuthentication))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(DisablePasswordAuthentication), out propertyOverride);
+            if (Optional.IsDefined(DisablePasswordAuthentication) || hasPropertyOverride)
             {
-                builder.Append("  disablePasswordAuthentication:");
-                var boolValue = DisablePasswordAuthentication.Value == true ? "true" : "false";
-                builder.AppendLine($" {boolValue}");
+                builder.Append("  disablePasswordAuthentication: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    var boolValue = DisablePasswordAuthentication.Value == true ? "true" : "false";
+                    builder.AppendLine($"{boolValue}");
+                }
             }
 
-            if (Optional.IsDefined(Ssh))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Ssh), out propertyOverride);
+            if (Optional.IsDefined(Ssh) || hasPropertyOverride)
             {
-                builder.Append("  ssh:");
-                AppendChildObject(builder, Ssh, options, 2, false);
+                builder.Append("  ssh: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    int currentIndent = 2;
+                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                    int length = builder.Length;
+                    AppendChildObject(builder, Ssh, options, currentIndent, false);
+                    if (builder.Length == length + emptyObjectLength)
+                    {
+                        builder.Length = builder.Length - emptyObjectLength - "  ssh: ".Length;
+                    }
+                }
             }
 
-            if (Optional.IsDefined(ProvisionVmAgent))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ProvisionVmAgent), out propertyOverride);
+            if (Optional.IsDefined(ProvisionVmAgent) || hasPropertyOverride)
             {
-                builder.Append("  provisionVMAgent:");
-                var boolValue = ProvisionVmAgent.Value == true ? "true" : "false";
-                builder.AppendLine($" {boolValue}");
+                builder.Append("  provisionVMAgent: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    var boolValue = ProvisionVmAgent.Value == true ? "true" : "false";
+                    builder.AppendLine($"{boolValue}");
+                }
             }
 
             builder.AppendLine("}");
@@ -178,7 +216,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($" {line}");
+                    stringBuilder.AppendLine($"{line}");
                 }
                 else
                 {

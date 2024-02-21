@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -250,114 +251,235 @@ namespace Azure.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Name))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name), out propertyOverride);
+            if (Optional.IsDefined(Name) || hasPropertyOverride)
             {
-                builder.Append("  name:");
-                if (Name.Contains(Environment.NewLine))
+                builder.Append("  name: ");
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{Name}'''");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{Name}'");
-                }
-            }
-
-            if (Optional.IsDefined(Location))
-            {
-                builder.Append("  location:");
-                builder.AppendLine($" '{Location.ToString()}'");
-            }
-
-            if (Optional.IsCollectionDefined(Tags))
-            {
-                if (Tags.Any())
-                {
-                    builder.Append("  tags:");
-                    builder.AppendLine(" {");
-                    foreach (var item in Tags)
+                    if (Name.Contains(Environment.NewLine))
                     {
-                        builder.Append($"    {item.Key}:");
-                        if (item.Value == null)
-                        {
-                            builder.Append("null");
-                            continue;
-                        }
-                        if (item.Value.Contains(Environment.NewLine))
-                        {
-                            builder.AppendLine(" '''");
-                            builder.AppendLine($"{item.Value}'''");
-                        }
-                        else
-                        {
-                            builder.AppendLine($" '{item.Value}'");
-                        }
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{Name}'''");
                     }
-                    builder.AppendLine("  }");
+                    else
+                    {
+                        builder.AppendLine($"'{Name}'");
+                    }
                 }
             }
 
-            if (Optional.IsDefined(Id))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Location), out propertyOverride);
+            if (Optional.IsDefined(Location) || hasPropertyOverride)
             {
-                builder.Append("  id:");
-                if (Id.Contains(Environment.NewLine))
+                builder.Append("  location: ");
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{Id}'''");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{Id}'");
+                    builder.AppendLine($"'{Location.ToString()}'");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Tags), out propertyOverride);
+            if (Optional.IsCollectionDefined(Tags) || hasPropertyOverride)
+            {
+                if (Tags.Any() || hasPropertyOverride)
+                {
+                    builder.Append("  tags: ");
+                    if (hasPropertyOverride)
+                    {
+                        builder.AppendLine($"{propertyOverride}");
+                    }
+                    else
+                    {
+                        builder.AppendLine("{");
+                        foreach (var item in Tags)
+                        {
+                            builder.Append($"    '{item.Key}': ");
+                            if (item.Value == null)
+                            {
+                                builder.Append("null");
+                                continue;
+                            }
+                            if (item.Value.Contains(Environment.NewLine))
+                            {
+                                builder.AppendLine("'''");
+                                builder.AppendLine($"{item.Value}'''");
+                            }
+                            else
+                            {
+                                builder.AppendLine($"'{item.Value}'");
+                            }
+                        }
+                        builder.AppendLine("  }");
+                    }
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Id), out propertyOverride);
+            if (Optional.IsDefined(Id) || hasPropertyOverride)
+            {
+                builder.Append("  id: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    if (Id.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{Id}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{Id}'");
+                    }
                 }
             }
 
             builder.Append("  properties:");
             builder.AppendLine(" {");
-            if (Optional.IsDefined(Plan))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Plan), out propertyOverride);
+            if (Optional.IsDefined(Plan) || hasPropertyOverride)
             {
-                builder.Append("    plan:");
-                AppendChildObject(builder, Plan, options, 4, false);
-            }
-
-            if (Optional.IsDefined(OSDiskImage))
-            {
-                builder.Append("    osDiskImage:");
-                AppendChildObject(builder, OSDiskImage, options, 4, false);
-            }
-
-            if (Optional.IsCollectionDefined(DataDiskImages))
-            {
-                if (DataDiskImages.Any())
+                builder.Append("    plan: ");
+                if (hasPropertyOverride)
                 {
-                    builder.Append("    dataDiskImages:");
-                    builder.AppendLine(" [");
-                    foreach (var item in DataDiskImages)
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    int currentIndent = 4;
+                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                    int length = builder.Length;
+                    AppendChildObject(builder, Plan, options, currentIndent, false);
+                    if (builder.Length == length + emptyObjectLength)
                     {
-                        AppendChildObject(builder, item, options, 6, true);
+                        builder.Length = builder.Length - emptyObjectLength - "    plan: ".Length;
                     }
-                    builder.AppendLine("    ]");
                 }
             }
 
-            if (Optional.IsDefined(AutomaticOSUpgradeProperties))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(OSDiskImage), out propertyOverride);
+            if (Optional.IsDefined(OSDiskImage) || hasPropertyOverride)
             {
-                builder.Append("    automaticOSUpgradeProperties:");
-                AppendChildObject(builder, AutomaticOSUpgradeProperties, options, 4, false);
+                builder.Append("    osDiskImage: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    int currentIndent = 4;
+                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                    int length = builder.Length;
+                    AppendChildObject(builder, OSDiskImage, options, currentIndent, false);
+                    if (builder.Length == length + emptyObjectLength)
+                    {
+                        builder.Length = builder.Length - emptyObjectLength - "    osDiskImage: ".Length;
+                    }
+                }
             }
 
-            if (Optional.IsDefined(HyperVGeneration))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(DataDiskImages), out propertyOverride);
+            if (Optional.IsCollectionDefined(DataDiskImages) || hasPropertyOverride)
             {
-                builder.Append("    hyperVGeneration:");
-                builder.AppendLine($" '{HyperVGeneration.Value.ToString()}'");
+                if (DataDiskImages.Any() || hasPropertyOverride)
+                {
+                    builder.Append("    dataDiskImages: ");
+                    if (hasPropertyOverride)
+                    {
+                        builder.AppendLine($"{propertyOverride}");
+                    }
+                    else
+                    {
+                        builder.AppendLine("[");
+                        foreach (var item in DataDiskImages)
+                        {
+                            int currentIndent = 6;
+                            int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                            int length = builder.Length;
+                            AppendChildObject(builder, item, options, currentIndent, true);
+                            if (builder.Length == length + emptyObjectLength)
+                            {
+                                builder.Length = builder.Length - emptyObjectLength - "    dataDiskImages: ".Length;
+                            }
+                        }
+                        builder.AppendLine("    ]");
+                    }
+                }
             }
 
-            if (Optional.IsDefined(Disallowed))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(AutomaticOSUpgradeProperties), out propertyOverride);
+            if (Optional.IsDefined(AutomaticOSUpgradeProperties) || hasPropertyOverride)
             {
-                builder.Append("    disallowed:");
-                AppendChildObject(builder, Disallowed, options, 4, false);
+                builder.Append("    automaticOSUpgradeProperties: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    int currentIndent = 4;
+                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                    int length = builder.Length;
+                    AppendChildObject(builder, AutomaticOSUpgradeProperties, options, currentIndent, false);
+                    if (builder.Length == length + emptyObjectLength)
+                    {
+                        builder.Length = builder.Length - emptyObjectLength - "    automaticOSUpgradeProperties: ".Length;
+                    }
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(HyperVGeneration), out propertyOverride);
+            if (Optional.IsDefined(HyperVGeneration) || hasPropertyOverride)
+            {
+                builder.Append("    hyperVGeneration: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"'{HyperVGeneration.Value.ToString()}'");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Disallowed), out propertyOverride);
+            if (Optional.IsDefined(Disallowed) || hasPropertyOverride)
+            {
+                builder.Append("    disallowed: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    int currentIndent = 4;
+                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                    int length = builder.Length;
+                    AppendChildObject(builder, Disallowed, options, currentIndent, false);
+                    if (builder.Length == length + emptyObjectLength)
+                    {
+                        builder.Length = builder.Length - emptyObjectLength - "    disallowed: ".Length;
+                    }
+                }
             }
 
             builder.AppendLine("  }");
@@ -391,7 +513,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($" {line}");
+                    stringBuilder.AppendLine($"{line}");
                 }
                 else
                 {

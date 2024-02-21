@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -89,19 +90,33 @@ namespace Azure.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(DomainNameLabel))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(DomainNameLabel), out propertyOverride);
+            if (Optional.IsDefined(DomainNameLabel) || hasPropertyOverride)
             {
-                builder.Append("  domainNameLabel:");
-                if (DomainNameLabel.Contains(Environment.NewLine))
+                builder.Append("  domainNameLabel: ");
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{DomainNameLabel}'''");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{DomainNameLabel}'");
+                    if (DomainNameLabel.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{DomainNameLabel}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{DomainNameLabel}'");
+                    }
                 }
             }
 
@@ -135,7 +150,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($" {line}");
+                    stringBuilder.AppendLine($"{line}");
                 }
                 else
                 {

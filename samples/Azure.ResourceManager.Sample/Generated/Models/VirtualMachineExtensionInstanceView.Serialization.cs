@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -165,61 +166,113 @@ namespace Azure.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Name))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name), out propertyOverride);
+            if (Optional.IsDefined(Name) || hasPropertyOverride)
             {
-                builder.Append("  name:");
-                if (Name.Contains(Environment.NewLine))
+                builder.Append("  name: ");
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{Name}'''");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{Name}'");
+                    if (Name.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{Name}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{Name}'");
+                    }
                 }
             }
 
-            if (Optional.IsDefined(TypeHandlerVersion))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TypeHandlerVersion), out propertyOverride);
+            if (Optional.IsDefined(TypeHandlerVersion) || hasPropertyOverride)
             {
-                builder.Append("  typeHandlerVersion:");
-                if (TypeHandlerVersion.Contains(Environment.NewLine))
+                builder.Append("  typeHandlerVersion: ");
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{TypeHandlerVersion}'''");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{TypeHandlerVersion}'");
+                    if (TypeHandlerVersion.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{TypeHandlerVersion}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{TypeHandlerVersion}'");
+                    }
                 }
             }
 
-            if (Optional.IsCollectionDefined(Substatuses))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Substatuses), out propertyOverride);
+            if (Optional.IsCollectionDefined(Substatuses) || hasPropertyOverride)
             {
-                if (Substatuses.Any())
+                if (Substatuses.Any() || hasPropertyOverride)
                 {
-                    builder.Append("  substatuses:");
-                    builder.AppendLine(" [");
-                    foreach (var item in Substatuses)
+                    builder.Append("  substatuses: ");
+                    if (hasPropertyOverride)
                     {
-                        AppendChildObject(builder, item, options, 4, true);
+                        builder.AppendLine($"{propertyOverride}");
                     }
-                    builder.AppendLine("  ]");
+                    else
+                    {
+                        builder.AppendLine("[");
+                        foreach (var item in Substatuses)
+                        {
+                            int currentIndent = 4;
+                            int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                            int length = builder.Length;
+                            AppendChildObject(builder, item, options, currentIndent, true);
+                            if (builder.Length == length + emptyObjectLength)
+                            {
+                                builder.Length = builder.Length - emptyObjectLength - "  substatuses: ".Length;
+                            }
+                        }
+                        builder.AppendLine("  ]");
+                    }
                 }
             }
 
-            if (Optional.IsCollectionDefined(Statuses))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Statuses), out propertyOverride);
+            if (Optional.IsCollectionDefined(Statuses) || hasPropertyOverride)
             {
-                if (Statuses.Any())
+                if (Statuses.Any() || hasPropertyOverride)
                 {
-                    builder.Append("  statuses:");
-                    builder.AppendLine(" [");
-                    foreach (var item in Statuses)
+                    builder.Append("  statuses: ");
+                    if (hasPropertyOverride)
                     {
-                        AppendChildObject(builder, item, options, 4, true);
+                        builder.AppendLine($"{propertyOverride}");
                     }
-                    builder.AppendLine("  ]");
+                    else
+                    {
+                        builder.AppendLine("[");
+                        foreach (var item in Statuses)
+                        {
+                            int currentIndent = 4;
+                            int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                            int length = builder.Length;
+                            AppendChildObject(builder, item, options, currentIndent, true);
+                            if (builder.Length == length + emptyObjectLength)
+                            {
+                                builder.Length = builder.Length - emptyObjectLength - "  statuses: ".Length;
+                            }
+                        }
+                        builder.AppendLine("  ]");
+                    }
                 }
             }
 
@@ -253,7 +306,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($" {line}");
+                    stringBuilder.AppendLine($"{line}");
                 }
                 else
                 {

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -113,30 +114,75 @@ namespace Azure.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Name))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name), out propertyOverride);
+            if (Optional.IsDefined(Name) || hasPropertyOverride)
             {
-                builder.Append("  name:");
-                AppendChildObject(builder, Name, options, 2, false);
+                builder.Append("  name: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    int currentIndent = 2;
+                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                    int length = builder.Length;
+                    AppendChildObject(builder, Name, options, currentIndent, false);
+                    if (builder.Length == length + emptyObjectLength)
+                    {
+                        builder.Length = builder.Length - emptyObjectLength - "  name: ".Length;
+                    }
+                }
             }
 
-            if (Optional.IsDefined(Unit))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Unit), out propertyOverride);
+            if (Optional.IsDefined(Unit) || hasPropertyOverride)
             {
-                builder.Append("  unit:");
-                builder.AppendLine($" '{Unit.ToString()}'");
+                builder.Append("  unit: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"'{Unit.ToString()}'");
+                }
             }
 
-            if (Optional.IsDefined(CurrentValue))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(CurrentValue), out propertyOverride);
+            if (Optional.IsDefined(CurrentValue) || hasPropertyOverride)
             {
-                builder.Append("  currentValue:");
-                builder.AppendLine($" {CurrentValue}");
+                builder.Append("  currentValue: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"{CurrentValue}");
+                }
             }
 
-            if (Optional.IsDefined(Limit))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Limit), out propertyOverride);
+            if (Optional.IsDefined(Limit) || hasPropertyOverride)
             {
-                builder.Append("  limit:");
-                builder.AppendLine($" '{Limit.ToString()}'");
+                builder.Append("  limit: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"'{Limit.ToString()}'");
+                }
             }
 
             builder.AppendLine("}");
@@ -169,7 +215,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($" {line}");
+                    stringBuilder.AppendLine($"{line}");
                 }
                 else
                 {

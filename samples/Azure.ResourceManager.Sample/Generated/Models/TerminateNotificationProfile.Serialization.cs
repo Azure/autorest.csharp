@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -107,27 +108,49 @@ namespace Azure.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(NotBeforeTimeout))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(NotBeforeTimeout), out propertyOverride);
+            if (Optional.IsDefined(NotBeforeTimeout) || hasPropertyOverride)
             {
-                builder.Append("  notBeforeTimeout:");
-                if (NotBeforeTimeout.Contains(Environment.NewLine))
+                builder.Append("  notBeforeTimeout: ");
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{NotBeforeTimeout}'''");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{NotBeforeTimeout}'");
+                    if (NotBeforeTimeout.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{NotBeforeTimeout}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{NotBeforeTimeout}'");
+                    }
                 }
             }
 
-            if (Optional.IsDefined(Enable))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Enable), out propertyOverride);
+            if (Optional.IsDefined(Enable) || hasPropertyOverride)
             {
-                builder.Append("  enable:");
-                var boolValue = Enable.Value == true ? "true" : "false";
-                builder.AppendLine($" {boolValue}");
+                builder.Append("  enable: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    var boolValue = Enable.Value == true ? "true" : "false";
+                    builder.AppendLine($"{boolValue}");
+                }
             }
 
             builder.AppendLine("}");
@@ -160,7 +183,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($" {line}");
+                    stringBuilder.AppendLine($"{line}");
                 }
                 else
                 {

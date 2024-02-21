@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
 namespace Azure.ResourceManager.Sample.Models
@@ -195,54 +196,145 @@ namespace Azure.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Lun))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Lun), out propertyOverride);
+            if (Optional.IsDefined(Lun) || hasPropertyOverride)
             {
-                builder.Append("  lun:");
-                builder.AppendLine($" {Lun}");
+                builder.Append("  lun: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"{Lun}");
+                }
             }
 
-            if (Optional.IsDefined(Snapshot))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Snapshot), out propertyOverride);
+            if (Optional.IsDefined(Snapshot) || hasPropertyOverride)
             {
-                builder.Append("  snapshot:");
-                AppendChildObject(builder, Snapshot, options, 2, false);
+                builder.Append("  snapshot: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    int currentIndent = 2;
+                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                    int length = builder.Length;
+                    AppendChildObject(builder, Snapshot, options, currentIndent, false);
+                    if (builder.Length == length + emptyObjectLength)
+                    {
+                        builder.Length = builder.Length - emptyObjectLength - "  snapshot: ".Length;
+                    }
+                }
             }
 
-            if (Optional.IsDefined(ManagedDisk))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ManagedDisk), out propertyOverride);
+            if (Optional.IsDefined(ManagedDisk) || hasPropertyOverride)
             {
-                builder.Append("  managedDisk:");
-                AppendChildObject(builder, ManagedDisk, options, 2, false);
+                builder.Append("  managedDisk: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    int currentIndent = 2;
+                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                    int length = builder.Length;
+                    AppendChildObject(builder, ManagedDisk, options, currentIndent, false);
+                    if (builder.Length == length + emptyObjectLength)
+                    {
+                        builder.Length = builder.Length - emptyObjectLength - "  managedDisk: ".Length;
+                    }
+                }
             }
 
-            if (Optional.IsDefined(BlobUri))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(BlobUri), out propertyOverride);
+            if (Optional.IsDefined(BlobUri) || hasPropertyOverride)
             {
-                builder.Append("  blobUri:");
-                builder.AppendLine($" '{BlobUri.AbsoluteUri}'");
+                builder.Append("  blobUri: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"'{BlobUri.AbsoluteUri}'");
+                }
             }
 
-            if (Optional.IsDefined(Caching))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Caching), out propertyOverride);
+            if (Optional.IsDefined(Caching) || hasPropertyOverride)
             {
-                builder.Append("  caching:");
-                builder.AppendLine($" '{Caching.Value.ToSerialString()}'");
+                builder.Append("  caching: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"'{Caching.Value.ToSerialString()}'");
+                }
             }
 
-            if (Optional.IsDefined(DiskSizeGB))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(DiskSizeGB), out propertyOverride);
+            if (Optional.IsDefined(DiskSizeGB) || hasPropertyOverride)
             {
-                builder.Append("  diskSizeGB:");
-                builder.AppendLine($" {DiskSizeGB.Value}");
+                builder.Append("  diskSizeGB: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"{DiskSizeGB.Value}");
+                }
             }
 
-            if (Optional.IsDefined(StorageAccountType))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(StorageAccountType), out propertyOverride);
+            if (Optional.IsDefined(StorageAccountType) || hasPropertyOverride)
             {
-                builder.Append("  storageAccountType:");
-                builder.AppendLine($" '{StorageAccountType.Value.ToString()}'");
+                builder.Append("  storageAccountType: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"'{StorageAccountType.Value.ToString()}'");
+                }
             }
 
-            if (Optional.IsDefined(DiskEncryptionSet))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(DiskEncryptionSet), out propertyOverride);
+            if (Optional.IsDefined(DiskEncryptionSet) || hasPropertyOverride)
             {
-                builder.Append("  diskEncryptionSet:");
-                AppendChildObject(builder, DiskEncryptionSet, options, 2, false);
+                builder.Append("  diskEncryptionSet: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    int currentIndent = 2;
+                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                    int length = builder.Length;
+                    AppendChildObject(builder, DiskEncryptionSet, options, currentIndent, false);
+                    if (builder.Length == length + emptyObjectLength)
+                    {
+                        builder.Length = builder.Length - emptyObjectLength - "  diskEncryptionSet: ".Length;
+                    }
+                }
             }
 
             builder.AppendLine("}");
@@ -275,7 +367,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($" {line}");
+                    stringBuilder.AppendLine($"{line}");
                 }
                 else
                 {

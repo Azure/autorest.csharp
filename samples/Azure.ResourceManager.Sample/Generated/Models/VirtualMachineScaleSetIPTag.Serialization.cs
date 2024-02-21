@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -103,33 +104,55 @@ namespace Azure.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(IPTagType))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(IPTagType), out propertyOverride);
+            if (Optional.IsDefined(IPTagType) || hasPropertyOverride)
             {
-                builder.Append("  ipTagType:");
-                if (IPTagType.Contains(Environment.NewLine))
+                builder.Append("  ipTagType: ");
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{IPTagType}'''");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{IPTagType}'");
+                    if (IPTagType.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{IPTagType}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{IPTagType}'");
+                    }
                 }
             }
 
-            if (Optional.IsDefined(Tag))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Tag), out propertyOverride);
+            if (Optional.IsDefined(Tag) || hasPropertyOverride)
             {
-                builder.Append("  tag:");
-                if (Tag.Contains(Environment.NewLine))
+                builder.Append("  tag: ");
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{Tag}'''");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{Tag}'");
+                    if (Tag.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{Tag}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{Tag}'");
+                    }
                 }
             }
 
@@ -163,7 +186,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($" {line}");
+                    stringBuilder.AppendLine($"{line}");
                 }
                 else
                 {

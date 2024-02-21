@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -107,32 +108,46 @@ namespace Azure.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsCollectionDefined(DnsServers))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(DnsServers), out propertyOverride);
+            if (Optional.IsCollectionDefined(DnsServers) || hasPropertyOverride)
             {
-                if (DnsServers.Any())
+                if (DnsServers.Any() || hasPropertyOverride)
                 {
-                    builder.Append("  dnsServers:");
-                    builder.AppendLine(" [");
-                    foreach (var item in DnsServers)
+                    builder.Append("  dnsServers: ");
+                    if (hasPropertyOverride)
                     {
-                        if (item == null)
-                        {
-                            builder.Append("null");
-                            continue;
-                        }
-                        if (item.Contains(Environment.NewLine))
-                        {
-                            builder.AppendLine("    '''");
-                            builder.AppendLine($"{item}'''");
-                        }
-                        else
-                        {
-                            builder.AppendLine($"    '{item}'");
-                        }
+                        builder.AppendLine($"{propertyOverride}");
                     }
-                    builder.AppendLine("  ]");
+                    else
+                    {
+                        builder.AppendLine("[");
+                        foreach (var item in DnsServers)
+                        {
+                            if (item == null)
+                            {
+                                builder.Append("null");
+                                continue;
+                            }
+                            if (item.Contains(Environment.NewLine))
+                            {
+                                builder.AppendLine("    '''");
+                                builder.AppendLine($"{item}'''");
+                            }
+                            else
+                            {
+                                builder.AppendLine($"    '{item}'");
+                            }
+                        }
+                        builder.AppendLine("  ]");
+                    }
                 }
             }
 
@@ -166,7 +181,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($" {line}");
+                    stringBuilder.AppendLine($"{line}");
                 }
                 else
                 {

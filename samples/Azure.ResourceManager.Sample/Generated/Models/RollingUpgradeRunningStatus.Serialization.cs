@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -141,32 +142,70 @@ namespace Azure.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Code))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Code), out propertyOverride);
+            if (Optional.IsDefined(Code) || hasPropertyOverride)
             {
-                builder.Append("  code:");
-                builder.AppendLine($" '{Code.Value.ToSerialString()}'");
+                builder.Append("  code: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"'{Code.Value.ToSerialString()}'");
+                }
             }
 
-            if (Optional.IsDefined(StartOn))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(StartOn), out propertyOverride);
+            if (Optional.IsDefined(StartOn) || hasPropertyOverride)
             {
-                builder.Append("  startTime:");
-                var formattedDateTimeString = TypeFormatters.ToString(StartOn.Value, "o");
-                builder.AppendLine($" '{formattedDateTimeString}'");
+                builder.Append("  startTime: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    var formattedDateTimeString = TypeFormatters.ToString(StartOn.Value, "o");
+                    builder.AppendLine($"'{formattedDateTimeString}'");
+                }
             }
 
-            if (Optional.IsDefined(LastAction))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(LastAction), out propertyOverride);
+            if (Optional.IsDefined(LastAction) || hasPropertyOverride)
             {
-                builder.Append("  lastAction:");
-                builder.AppendLine($" '{LastAction.Value.ToSerialString()}'");
+                builder.Append("  lastAction: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"'{LastAction.Value.ToSerialString()}'");
+                }
             }
 
-            if (Optional.IsDefined(LastActionOn))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(LastActionOn), out propertyOverride);
+            if (Optional.IsDefined(LastActionOn) || hasPropertyOverride)
             {
-                builder.Append("  lastActionTime:");
-                var formattedDateTimeString = TypeFormatters.ToString(LastActionOn.Value, "o");
-                builder.AppendLine($" '{formattedDateTimeString}'");
+                builder.Append("  lastActionTime: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    var formattedDateTimeString = TypeFormatters.ToString(LastActionOn.Value, "o");
+                    builder.AppendLine($"'{formattedDateTimeString}'");
+                }
             }
 
             builder.AppendLine("}");
@@ -199,7 +238,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($" {line}");
+                    stringBuilder.AppendLine($"{line}");
                 }
                 else
                 {

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -126,24 +127,68 @@ namespace Azure.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Mode))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Mode), out propertyOverride);
+            if (Optional.IsDefined(Mode) || hasPropertyOverride)
             {
-                builder.Append("  mode:");
-                builder.AppendLine($" '{Mode.Value.ToSerialString()}'");
+                builder.Append("  mode: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"'{Mode.Value.ToSerialString()}'");
+                }
             }
 
-            if (Optional.IsDefined(RollingUpgradePolicy))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(RollingUpgradePolicy), out propertyOverride);
+            if (Optional.IsDefined(RollingUpgradePolicy) || hasPropertyOverride)
             {
-                builder.Append("  rollingUpgradePolicy:");
-                AppendChildObject(builder, RollingUpgradePolicy, options, 2, false);
+                builder.Append("  rollingUpgradePolicy: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    int currentIndent = 2;
+                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                    int length = builder.Length;
+                    AppendChildObject(builder, RollingUpgradePolicy, options, currentIndent, false);
+                    if (builder.Length == length + emptyObjectLength)
+                    {
+                        builder.Length = builder.Length - emptyObjectLength - "  rollingUpgradePolicy: ".Length;
+                    }
+                }
             }
 
-            if (Optional.IsDefined(AutomaticOSUpgradePolicy))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(AutomaticOSUpgradePolicy), out propertyOverride);
+            if (Optional.IsDefined(AutomaticOSUpgradePolicy) || hasPropertyOverride)
             {
-                builder.Append("  automaticOSUpgradePolicy:");
-                AppendChildObject(builder, AutomaticOSUpgradePolicy, options, 2, false);
+                builder.Append("  automaticOSUpgradePolicy: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    int currentIndent = 2;
+                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                    int length = builder.Length;
+                    AppendChildObject(builder, AutomaticOSUpgradePolicy, options, currentIndent, false);
+                    if (builder.Length == length + emptyObjectLength)
+                    {
+                        builder.Length = builder.Length - emptyObjectLength - "  automaticOSUpgradePolicy: ".Length;
+                    }
+                }
             }
 
             builder.AppendLine("}");
@@ -176,7 +221,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($" {line}");
+                    stringBuilder.AppendLine($"{line}");
                 }
                 else
                 {

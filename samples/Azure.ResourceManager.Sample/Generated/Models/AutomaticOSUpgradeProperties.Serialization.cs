@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -89,13 +90,27 @@ namespace Azure.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(AutomaticOSUpgradeSupported))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(AutomaticOSUpgradeSupported), out propertyOverride);
+            if (Optional.IsDefined(AutomaticOSUpgradeSupported) || hasPropertyOverride)
             {
-                builder.Append("  automaticOSUpgradeSupported:");
-                var boolValue = AutomaticOSUpgradeSupported == true ? "true" : "false";
-                builder.AppendLine($" {boolValue}");
+                builder.Append("  automaticOSUpgradeSupported: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    var boolValue = AutomaticOSUpgradeSupported == true ? "true" : "false";
+                    builder.AppendLine($"{boolValue}");
+                }
             }
 
             builder.AppendLine("}");
@@ -128,7 +143,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($" {line}");
+                    stringBuilder.AppendLine($"{line}");
                 }
                 else
                 {

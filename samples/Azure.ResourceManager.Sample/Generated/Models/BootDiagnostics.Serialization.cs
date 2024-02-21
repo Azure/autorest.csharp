@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -111,19 +112,41 @@ namespace Azure.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Enabled))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Enabled), out propertyOverride);
+            if (Optional.IsDefined(Enabled) || hasPropertyOverride)
             {
-                builder.Append("  enabled:");
-                var boolValue = Enabled.Value == true ? "true" : "false";
-                builder.AppendLine($" {boolValue}");
+                builder.Append("  enabled: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    var boolValue = Enabled.Value == true ? "true" : "false";
+                    builder.AppendLine($"{boolValue}");
+                }
             }
 
-            if (Optional.IsDefined(StorageUri))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(StorageUri), out propertyOverride);
+            if (Optional.IsDefined(StorageUri) || hasPropertyOverride)
             {
-                builder.Append("  storageUri:");
-                builder.AppendLine($" '{StorageUri.AbsoluteUri}'");
+                builder.Append("  storageUri: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"'{StorageUri.AbsoluteUri}'");
+                }
             }
 
             builder.AppendLine("}");
@@ -156,7 +179,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($" {line}");
+                    stringBuilder.AppendLine($"{line}");
                 }
                 else
                 {

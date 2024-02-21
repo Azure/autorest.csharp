@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Models;
 
 namespace Azure.ResourceManager.Sample.Models
@@ -300,156 +301,266 @@ namespace Azure.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Name))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name), out propertyOverride);
+            if (Optional.IsDefined(Name) || hasPropertyOverride)
             {
-                builder.Append("  name:");
-                if (Name.Contains(Environment.NewLine))
+                builder.Append("  name: ");
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{Name}'''");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{Name}'");
+                    if (Name.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{Name}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{Name}'");
+                    }
                 }
             }
 
-            if (Optional.IsDefined(Id))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Id), out propertyOverride);
+            if (Optional.IsDefined(Id) || hasPropertyOverride)
             {
-                builder.Append("  id:");
-                builder.AppendLine($" '{Id.ToString()}'");
+                builder.Append("  id: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"'{Id.ToString()}'");
+                }
             }
 
-            if (Optional.IsDefined(SystemData))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(SystemData), out propertyOverride);
+            if (Optional.IsDefined(SystemData) || hasPropertyOverride)
             {
-                builder.Append("  systemData:");
-                builder.AppendLine($" '{SystemData.ToString()}'");
+                builder.Append("  systemData: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"'{SystemData.ToString()}'");
+                }
             }
 
             builder.Append("  properties:");
             builder.AppendLine(" {");
-            if (Optional.IsDefined(ForceUpdateTag))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ForceUpdateTag), out propertyOverride);
+            if (Optional.IsDefined(ForceUpdateTag) || hasPropertyOverride)
             {
-                builder.Append("    forceUpdateTag:");
-                if (ForceUpdateTag.Contains(Environment.NewLine))
+                builder.Append("    forceUpdateTag: ");
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{ForceUpdateTag}'''");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{ForceUpdateTag}'");
-                }
-            }
-
-            if (Optional.IsDefined(Publisher))
-            {
-                builder.Append("    publisher:");
-                if (Publisher.Contains(Environment.NewLine))
-                {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{Publisher}'''");
-                }
-                else
-                {
-                    builder.AppendLine($" '{Publisher}'");
-                }
-            }
-
-            if (Optional.IsDefined(TypePropertiesType))
-            {
-                builder.Append("    type:");
-                if (TypePropertiesType.Contains(Environment.NewLine))
-                {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{TypePropertiesType}'''");
-                }
-                else
-                {
-                    builder.AppendLine($" '{TypePropertiesType}'");
-                }
-            }
-
-            if (Optional.IsDefined(TypeHandlerVersion))
-            {
-                builder.Append("    typeHandlerVersion:");
-                if (TypeHandlerVersion.Contains(Environment.NewLine))
-                {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{TypeHandlerVersion}'''");
-                }
-                else
-                {
-                    builder.AppendLine($" '{TypeHandlerVersion}'");
-                }
-            }
-
-            if (Optional.IsDefined(AutoUpgradeMinorVersion))
-            {
-                builder.Append("    autoUpgradeMinorVersion:");
-                var boolValue = AutoUpgradeMinorVersion.Value == true ? "true" : "false";
-                builder.AppendLine($" {boolValue}");
-            }
-
-            if (Optional.IsDefined(EnableAutomaticUpgrade))
-            {
-                builder.Append("    enableAutomaticUpgrade:");
-                var boolValue = EnableAutomaticUpgrade.Value == true ? "true" : "false";
-                builder.AppendLine($" {boolValue}");
-            }
-
-            if (Optional.IsDefined(Settings))
-            {
-                builder.Append("    settings:");
-                builder.AppendLine($" '{Settings.ToString()}'");
-            }
-
-            if (Optional.IsDefined(ProtectedSettings))
-            {
-                builder.Append("    protectedSettings:");
-                builder.AppendLine($" '{ProtectedSettings.ToString()}'");
-            }
-
-            if (Optional.IsDefined(ProvisioningState))
-            {
-                builder.Append("    provisioningState:");
-                if (ProvisioningState.Contains(Environment.NewLine))
-                {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{ProvisioningState}'''");
-                }
-                else
-                {
-                    builder.AppendLine($" '{ProvisioningState}'");
-                }
-            }
-
-            if (Optional.IsCollectionDefined(ProvisionAfterExtensions))
-            {
-                if (ProvisionAfterExtensions.Any())
-                {
-                    builder.Append("    provisionAfterExtensions:");
-                    builder.AppendLine(" [");
-                    foreach (var item in ProvisionAfterExtensions)
+                    if (ForceUpdateTag.Contains(Environment.NewLine))
                     {
-                        if (item == null)
-                        {
-                            builder.Append("null");
-                            continue;
-                        }
-                        if (item.Contains(Environment.NewLine))
-                        {
-                            builder.AppendLine("      '''");
-                            builder.AppendLine($"{item}'''");
-                        }
-                        else
-                        {
-                            builder.AppendLine($"      '{item}'");
-                        }
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{ForceUpdateTag}'''");
                     }
-                    builder.AppendLine("    ]");
+                    else
+                    {
+                        builder.AppendLine($"'{ForceUpdateTag}'");
+                    }
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Publisher), out propertyOverride);
+            if (Optional.IsDefined(Publisher) || hasPropertyOverride)
+            {
+                builder.Append("    publisher: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    if (Publisher.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{Publisher}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{Publisher}'");
+                    }
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TypePropertiesType), out propertyOverride);
+            if (Optional.IsDefined(TypePropertiesType) || hasPropertyOverride)
+            {
+                builder.Append("    type: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    if (TypePropertiesType.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{TypePropertiesType}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{TypePropertiesType}'");
+                    }
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TypeHandlerVersion), out propertyOverride);
+            if (Optional.IsDefined(TypeHandlerVersion) || hasPropertyOverride)
+            {
+                builder.Append("    typeHandlerVersion: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    if (TypeHandlerVersion.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{TypeHandlerVersion}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{TypeHandlerVersion}'");
+                    }
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(AutoUpgradeMinorVersion), out propertyOverride);
+            if (Optional.IsDefined(AutoUpgradeMinorVersion) || hasPropertyOverride)
+            {
+                builder.Append("    autoUpgradeMinorVersion: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    var boolValue = AutoUpgradeMinorVersion.Value == true ? "true" : "false";
+                    builder.AppendLine($"{boolValue}");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(EnableAutomaticUpgrade), out propertyOverride);
+            if (Optional.IsDefined(EnableAutomaticUpgrade) || hasPropertyOverride)
+            {
+                builder.Append("    enableAutomaticUpgrade: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    var boolValue = EnableAutomaticUpgrade.Value == true ? "true" : "false";
+                    builder.AppendLine($"{boolValue}");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Settings), out propertyOverride);
+            if (Optional.IsDefined(Settings) || hasPropertyOverride)
+            {
+                builder.Append("    settings: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"'{Settings.ToString()}'");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ProtectedSettings), out propertyOverride);
+            if (Optional.IsDefined(ProtectedSettings) || hasPropertyOverride)
+            {
+                builder.Append("    protectedSettings: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"'{ProtectedSettings.ToString()}'");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ProvisioningState), out propertyOverride);
+            if (Optional.IsDefined(ProvisioningState) || hasPropertyOverride)
+            {
+                builder.Append("    provisioningState: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    if (ProvisioningState.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{ProvisioningState}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{ProvisioningState}'");
+                    }
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ProvisionAfterExtensions), out propertyOverride);
+            if (Optional.IsCollectionDefined(ProvisionAfterExtensions) || hasPropertyOverride)
+            {
+                if (ProvisionAfterExtensions.Any() || hasPropertyOverride)
+                {
+                    builder.Append("    provisionAfterExtensions: ");
+                    if (hasPropertyOverride)
+                    {
+                        builder.AppendLine($"{propertyOverride}");
+                    }
+                    else
+                    {
+                        builder.AppendLine("[");
+                        foreach (var item in ProvisionAfterExtensions)
+                        {
+                            if (item == null)
+                            {
+                                builder.Append("null");
+                                continue;
+                            }
+                            if (item.Contains(Environment.NewLine))
+                            {
+                                builder.AppendLine("      '''");
+                                builder.AppendLine($"{item}'''");
+                            }
+                            else
+                            {
+                                builder.AppendLine($"      '{item}'");
+                            }
+                        }
+                        builder.AppendLine("    ]");
+                    }
                 }
             }
 
@@ -484,7 +595,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($" {line}");
+                    stringBuilder.AppendLine($"{line}");
                 }
                 else
                 {

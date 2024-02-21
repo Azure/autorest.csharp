@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -171,42 +172,131 @@ namespace Azure.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(RunningStatus))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(RunningStatus), out propertyOverride);
+            if (Optional.IsDefined(RunningStatus) || hasPropertyOverride)
             {
-                builder.Append("  runningStatus:");
-                AppendChildObject(builder, RunningStatus, options, 2, false);
+                builder.Append("  runningStatus: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    int currentIndent = 2;
+                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                    int length = builder.Length;
+                    AppendChildObject(builder, RunningStatus, options, currentIndent, false);
+                    if (builder.Length == length + emptyObjectLength)
+                    {
+                        builder.Length = builder.Length - emptyObjectLength - "  runningStatus: ".Length;
+                    }
+                }
             }
 
-            if (Optional.IsDefined(Progress))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Progress), out propertyOverride);
+            if (Optional.IsDefined(Progress) || hasPropertyOverride)
             {
-                builder.Append("  progress:");
-                AppendChildObject(builder, Progress, options, 2, false);
+                builder.Append("  progress: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    int currentIndent = 2;
+                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                    int length = builder.Length;
+                    AppendChildObject(builder, Progress, options, currentIndent, false);
+                    if (builder.Length == length + emptyObjectLength)
+                    {
+                        builder.Length = builder.Length - emptyObjectLength - "  progress: ".Length;
+                    }
+                }
             }
 
-            if (Optional.IsDefined(Error))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Error), out propertyOverride);
+            if (Optional.IsDefined(Error) || hasPropertyOverride)
             {
-                builder.Append("  error:");
-                AppendChildObject(builder, Error, options, 2, false);
+                builder.Append("  error: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    int currentIndent = 2;
+                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                    int length = builder.Length;
+                    AppendChildObject(builder, Error, options, currentIndent, false);
+                    if (builder.Length == length + emptyObjectLength)
+                    {
+                        builder.Length = builder.Length - emptyObjectLength - "  error: ".Length;
+                    }
+                }
             }
 
-            if (Optional.IsDefined(StartedBy))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(StartedBy), out propertyOverride);
+            if (Optional.IsDefined(StartedBy) || hasPropertyOverride)
             {
-                builder.Append("  startedBy:");
-                builder.AppendLine($" '{StartedBy.Value.ToSerialString()}'");
+                builder.Append("  startedBy: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"'{StartedBy.Value.ToSerialString()}'");
+                }
             }
 
-            if (Optional.IsDefined(TargetImageReference))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TargetImageReference), out propertyOverride);
+            if (Optional.IsDefined(TargetImageReference) || hasPropertyOverride)
             {
-                builder.Append("  targetImageReference:");
-                AppendChildObject(builder, TargetImageReference, options, 2, false);
+                builder.Append("  targetImageReference: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    int currentIndent = 2;
+                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                    int length = builder.Length;
+                    AppendChildObject(builder, TargetImageReference, options, currentIndent, false);
+                    if (builder.Length == length + emptyObjectLength)
+                    {
+                        builder.Length = builder.Length - emptyObjectLength - "  targetImageReference: ".Length;
+                    }
+                }
             }
 
-            if (Optional.IsDefined(RollbackInfo))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(RollbackInfo), out propertyOverride);
+            if (Optional.IsDefined(RollbackInfo) || hasPropertyOverride)
             {
-                builder.Append("  rollbackInfo:");
-                AppendChildObject(builder, RollbackInfo, options, 2, false);
+                builder.Append("  rollbackInfo: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    int currentIndent = 2;
+                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                    int length = builder.Length;
+                    AppendChildObject(builder, RollbackInfo, options, currentIndent, false);
+                    if (builder.Length == length + emptyObjectLength)
+                    {
+                        builder.Length = builder.Length - emptyObjectLength - "  rollbackInfo: ".Length;
+                    }
+                }
             }
 
             builder.AppendLine("}");
@@ -239,7 +329,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($" {line}");
+                    stringBuilder.AppendLine($"{line}");
                 }
                 else
                 {

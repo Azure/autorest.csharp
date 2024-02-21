@@ -4,6 +4,9 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <Nullable>annotations</Nullable>
     <IncludeManagementSharedCode>true</IncludeManagementSharedCode>
+    <!--    Can be reverted once autorest.csharp is updated to consume System.ClientModel 1.1.0 https://github.com/Azure/autorest.csharp/issues/4216-->
+    <NoWarn>NU1605</NoWarn>
+    <!--    End Temp-->
   </PropertyGroup>
 
   <ItemGroup>

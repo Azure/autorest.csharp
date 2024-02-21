@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
 namespace Azure.ResourceManager.Sample.Models
@@ -98,18 +99,47 @@ namespace Azure.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(KeyUri))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(KeyUri), out propertyOverride);
+            if (Optional.IsDefined(KeyUri) || hasPropertyOverride)
             {
-                builder.Append("  keyUrl:");
-                builder.AppendLine($" '{KeyUri.AbsoluteUri}'");
+                builder.Append("  keyUrl: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"'{KeyUri.AbsoluteUri}'");
+                }
             }
 
-            if (Optional.IsDefined(SourceVault))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(SourceVault), out propertyOverride);
+            if (Optional.IsDefined(SourceVault) || hasPropertyOverride)
             {
-                builder.Append("  sourceVault:");
-                AppendChildObject(builder, SourceVault, options, 2, false);
+                builder.Append("  sourceVault: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    int currentIndent = 2;
+                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                    int length = builder.Length;
+                    AppendChildObject(builder, SourceVault, options, currentIndent, false);
+                    if (builder.Length == length + emptyObjectLength)
+                    {
+                        builder.Length = builder.Length - emptyObjectLength - "  sourceVault: ".Length;
+                    }
+                }
             }
 
             builder.AppendLine("}");
@@ -142,7 +172,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($" {line}");
+                    stringBuilder.AppendLine($"{line}");
                 }
                 else
                 {

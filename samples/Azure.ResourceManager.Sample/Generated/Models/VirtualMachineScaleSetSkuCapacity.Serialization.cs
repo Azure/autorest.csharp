@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -141,30 +142,68 @@ namespace Azure.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Minimum))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Minimum), out propertyOverride);
+            if (Optional.IsDefined(Minimum) || hasPropertyOverride)
             {
-                builder.Append("  minimum:");
-                builder.AppendLine($" '{Minimum.Value.ToString()}'");
+                builder.Append("  minimum: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"'{Minimum.Value.ToString()}'");
+                }
             }
 
-            if (Optional.IsDefined(Maximum))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Maximum), out propertyOverride);
+            if (Optional.IsDefined(Maximum) || hasPropertyOverride)
             {
-                builder.Append("  maximum:");
-                builder.AppendLine($" '{Maximum.Value.ToString()}'");
+                builder.Append("  maximum: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"'{Maximum.Value.ToString()}'");
+                }
             }
 
-            if (Optional.IsDefined(DefaultCapacity))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(DefaultCapacity), out propertyOverride);
+            if (Optional.IsDefined(DefaultCapacity) || hasPropertyOverride)
             {
-                builder.Append("  defaultCapacity:");
-                builder.AppendLine($" '{DefaultCapacity.Value.ToString()}'");
+                builder.Append("  defaultCapacity: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"'{DefaultCapacity.Value.ToString()}'");
+                }
             }
 
-            if (Optional.IsDefined(ScaleType))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ScaleType), out propertyOverride);
+            if (Optional.IsDefined(ScaleType) || hasPropertyOverride)
             {
-                builder.Append("  scaleType:");
-                builder.AppendLine($" '{ScaleType.Value.ToSerialString()}'");
+                builder.Append("  scaleType: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"'{ScaleType.Value.ToSerialString()}'");
+                }
             }
 
             builder.AppendLine("}");
@@ -197,7 +236,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($" {line}");
+                    stringBuilder.AppendLine($"{line}");
                 }
                 else
                 {

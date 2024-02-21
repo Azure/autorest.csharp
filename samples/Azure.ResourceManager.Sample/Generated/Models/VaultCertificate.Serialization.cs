@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -107,25 +108,47 @@ namespace Azure.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(CertificateUri))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(CertificateUri), out propertyOverride);
+            if (Optional.IsDefined(CertificateUri) || hasPropertyOverride)
             {
-                builder.Append("  certificateUrl:");
-                builder.AppendLine($" '{CertificateUri.AbsoluteUri}'");
-            }
-
-            if (Optional.IsDefined(CertificateStore))
-            {
-                builder.Append("  certificateStore:");
-                if (CertificateStore.Contains(Environment.NewLine))
+                builder.Append("  certificateUrl: ");
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{CertificateStore}'''");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{CertificateStore}'");
+                    builder.AppendLine($"'{CertificateUri.AbsoluteUri}'");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(CertificateStore), out propertyOverride);
+            if (Optional.IsDefined(CertificateStore) || hasPropertyOverride)
+            {
+                builder.Append("  certificateStore: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    if (CertificateStore.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{CertificateStore}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{CertificateStore}'");
+                    }
                 }
             }
 
@@ -159,7 +182,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($" {line}");
+                    stringBuilder.AppendLine($"{line}");
                 }
                 else
                 {

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -126,24 +127,61 @@ namespace Azure.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(SuccessfullyRolledbackInstanceCount))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(SuccessfullyRolledbackInstanceCount), out propertyOverride);
+            if (Optional.IsDefined(SuccessfullyRolledbackInstanceCount) || hasPropertyOverride)
             {
-                builder.Append("  successfullyRolledbackInstanceCount:");
-                builder.AppendLine($" {SuccessfullyRolledbackInstanceCount.Value}");
+                builder.Append("  successfullyRolledbackInstanceCount: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"{SuccessfullyRolledbackInstanceCount.Value}");
+                }
             }
 
-            if (Optional.IsDefined(FailedRolledbackInstanceCount))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(FailedRolledbackInstanceCount), out propertyOverride);
+            if (Optional.IsDefined(FailedRolledbackInstanceCount) || hasPropertyOverride)
             {
-                builder.Append("  failedRolledbackInstanceCount:");
-                builder.AppendLine($" {FailedRolledbackInstanceCount.Value}");
+                builder.Append("  failedRolledbackInstanceCount: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"{FailedRolledbackInstanceCount.Value}");
+                }
             }
 
-            if (Optional.IsDefined(RollbackError))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(RollbackError), out propertyOverride);
+            if (Optional.IsDefined(RollbackError) || hasPropertyOverride)
             {
-                builder.Append("  rollbackError:");
-                AppendChildObject(builder, RollbackError, options, 2, false);
+                builder.Append("  rollbackError: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    int currentIndent = 2;
+                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                    int length = builder.Length;
+                    AppendChildObject(builder, RollbackError, options, currentIndent, false);
+                    if (builder.Length == length + emptyObjectLength)
+                    {
+                        builder.Length = builder.Length - emptyObjectLength - "  rollbackError: ".Length;
+                    }
+                }
             }
 
             builder.AppendLine("}");
@@ -176,7 +214,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($" {line}");
+                    stringBuilder.AppendLine($"{line}");
                 }
                 else
                 {

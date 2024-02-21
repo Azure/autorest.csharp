@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -126,25 +127,69 @@ namespace Azure.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(DiskEncryptionKey))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(DiskEncryptionKey), out propertyOverride);
+            if (Optional.IsDefined(DiskEncryptionKey) || hasPropertyOverride)
             {
-                builder.Append("  diskEncryptionKey:");
-                AppendChildObject(builder, DiskEncryptionKey, options, 2, false);
+                builder.Append("  diskEncryptionKey: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    int currentIndent = 2;
+                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                    int length = builder.Length;
+                    AppendChildObject(builder, DiskEncryptionKey, options, currentIndent, false);
+                    if (builder.Length == length + emptyObjectLength)
+                    {
+                        builder.Length = builder.Length - emptyObjectLength - "  diskEncryptionKey: ".Length;
+                    }
+                }
             }
 
-            if (Optional.IsDefined(KeyEncryptionKey))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(KeyEncryptionKey), out propertyOverride);
+            if (Optional.IsDefined(KeyEncryptionKey) || hasPropertyOverride)
             {
-                builder.Append("  keyEncryptionKey:");
-                AppendChildObject(builder, KeyEncryptionKey, options, 2, false);
+                builder.Append("  keyEncryptionKey: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    int currentIndent = 2;
+                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                    int length = builder.Length;
+                    AppendChildObject(builder, KeyEncryptionKey, options, currentIndent, false);
+                    if (builder.Length == length + emptyObjectLength)
+                    {
+                        builder.Length = builder.Length - emptyObjectLength - "  keyEncryptionKey: ".Length;
+                    }
+                }
             }
 
-            if (Optional.IsDefined(Enabled))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Enabled), out propertyOverride);
+            if (Optional.IsDefined(Enabled) || hasPropertyOverride)
             {
-                builder.Append("  enabled:");
-                var boolValue = Enabled.Value == true ? "true" : "false";
-                builder.AppendLine($" {boolValue}");
+                builder.Append("  enabled: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    var boolValue = Enabled.Value == true ? "true" : "false";
+                    builder.AppendLine($"{boolValue}");
+                }
             }
 
             builder.AppendLine("}");
@@ -177,7 +222,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($" {line}");
+                    stringBuilder.AppendLine($"{line}");
                 }
                 else
                 {

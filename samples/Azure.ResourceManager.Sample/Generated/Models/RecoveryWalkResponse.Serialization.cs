@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -111,19 +112,41 @@ namespace Azure.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(WalkPerformed))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(WalkPerformed), out propertyOverride);
+            if (Optional.IsDefined(WalkPerformed) || hasPropertyOverride)
             {
-                builder.Append("  walkPerformed:");
-                var boolValue = WalkPerformed.Value == true ? "true" : "false";
-                builder.AppendLine($" {boolValue}");
+                builder.Append("  walkPerformed: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    var boolValue = WalkPerformed.Value == true ? "true" : "false";
+                    builder.AppendLine($"{boolValue}");
+                }
             }
 
-            if (Optional.IsDefined(NextPlatformUpdateDomain))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(NextPlatformUpdateDomain), out propertyOverride);
+            if (Optional.IsDefined(NextPlatformUpdateDomain) || hasPropertyOverride)
             {
-                builder.Append("  nextPlatformUpdateDomain:");
-                builder.AppendLine($" {NextPlatformUpdateDomain.Value}");
+                builder.Append("  nextPlatformUpdateDomain: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"{NextPlatformUpdateDomain.Value}");
+                }
             }
 
             builder.AppendLine("}");
@@ -156,7 +179,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($" {line}");
+                    stringBuilder.AppendLine($"{line}");
                 }
                 else
                 {

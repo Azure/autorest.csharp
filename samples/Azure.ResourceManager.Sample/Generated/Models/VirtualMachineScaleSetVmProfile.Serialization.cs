@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -242,80 +243,230 @@ namespace Azure.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(OSProfile))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(OSProfile), out propertyOverride);
+            if (Optional.IsDefined(OSProfile) || hasPropertyOverride)
             {
-                builder.Append("  osProfile:");
-                AppendChildObject(builder, OSProfile, options, 2, false);
-            }
-
-            if (Optional.IsDefined(StorageProfile))
-            {
-                builder.Append("  storageProfile:");
-                AppendChildObject(builder, StorageProfile, options, 2, false);
-            }
-
-            if (Optional.IsDefined(NetworkProfile))
-            {
-                builder.Append("  networkProfile:");
-                AppendChildObject(builder, NetworkProfile, options, 2, false);
-            }
-
-            if (Optional.IsDefined(SecurityProfile))
-            {
-                builder.Append("  securityProfile:");
-                AppendChildObject(builder, SecurityProfile, options, 2, false);
-            }
-
-            if (Optional.IsDefined(DiagnosticsProfile))
-            {
-                builder.Append("  diagnosticsProfile:");
-                AppendChildObject(builder, DiagnosticsProfile, options, 2, false);
-            }
-
-            if (Optional.IsDefined(ExtensionProfile))
-            {
-                builder.Append("  extensionProfile:");
-                AppendChildObject(builder, ExtensionProfile, options, 2, false);
-            }
-
-            if (Optional.IsDefined(LicenseType))
-            {
-                builder.Append("  licenseType:");
-                if (LicenseType.Contains(Environment.NewLine))
+                builder.Append("  osProfile: ");
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{LicenseType}'''");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{LicenseType}'");
+                    int currentIndent = 2;
+                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                    int length = builder.Length;
+                    AppendChildObject(builder, OSProfile, options, currentIndent, false);
+                    if (builder.Length == length + emptyObjectLength)
+                    {
+                        builder.Length = builder.Length - emptyObjectLength - "  osProfile: ".Length;
+                    }
                 }
             }
 
-            if (Optional.IsDefined(Priority))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(StorageProfile), out propertyOverride);
+            if (Optional.IsDefined(StorageProfile) || hasPropertyOverride)
             {
-                builder.Append("  priority:");
-                builder.AppendLine($" '{Priority.Value.ToString()}'");
+                builder.Append("  storageProfile: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    int currentIndent = 2;
+                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                    int length = builder.Length;
+                    AppendChildObject(builder, StorageProfile, options, currentIndent, false);
+                    if (builder.Length == length + emptyObjectLength)
+                    {
+                        builder.Length = builder.Length - emptyObjectLength - "  storageProfile: ".Length;
+                    }
+                }
             }
 
-            if (Optional.IsDefined(EvictionPolicy))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(NetworkProfile), out propertyOverride);
+            if (Optional.IsDefined(NetworkProfile) || hasPropertyOverride)
             {
-                builder.Append("  evictionPolicy:");
-                builder.AppendLine($" '{EvictionPolicy.Value.ToString()}'");
+                builder.Append("  networkProfile: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    int currentIndent = 2;
+                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                    int length = builder.Length;
+                    AppendChildObject(builder, NetworkProfile, options, currentIndent, false);
+                    if (builder.Length == length + emptyObjectLength)
+                    {
+                        builder.Length = builder.Length - emptyObjectLength - "  networkProfile: ".Length;
+                    }
+                }
             }
 
-            if (Optional.IsDefined(BillingProfile))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(SecurityProfile), out propertyOverride);
+            if (Optional.IsDefined(SecurityProfile) || hasPropertyOverride)
             {
-                builder.Append("  billingProfile:");
-                AppendChildObject(builder, BillingProfile, options, 2, false);
+                builder.Append("  securityProfile: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    int currentIndent = 2;
+                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                    int length = builder.Length;
+                    AppendChildObject(builder, SecurityProfile, options, currentIndent, false);
+                    if (builder.Length == length + emptyObjectLength)
+                    {
+                        builder.Length = builder.Length - emptyObjectLength - "  securityProfile: ".Length;
+                    }
+                }
             }
 
-            if (Optional.IsDefined(ScheduledEventsProfile))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(DiagnosticsProfile), out propertyOverride);
+            if (Optional.IsDefined(DiagnosticsProfile) || hasPropertyOverride)
             {
-                builder.Append("  scheduledEventsProfile:");
-                AppendChildObject(builder, ScheduledEventsProfile, options, 2, false);
+                builder.Append("  diagnosticsProfile: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    int currentIndent = 2;
+                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                    int length = builder.Length;
+                    AppendChildObject(builder, DiagnosticsProfile, options, currentIndent, false);
+                    if (builder.Length == length + emptyObjectLength)
+                    {
+                        builder.Length = builder.Length - emptyObjectLength - "  diagnosticsProfile: ".Length;
+                    }
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ExtensionProfile), out propertyOverride);
+            if (Optional.IsDefined(ExtensionProfile) || hasPropertyOverride)
+            {
+                builder.Append("  extensionProfile: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    int currentIndent = 2;
+                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                    int length = builder.Length;
+                    AppendChildObject(builder, ExtensionProfile, options, currentIndent, false);
+                    if (builder.Length == length + emptyObjectLength)
+                    {
+                        builder.Length = builder.Length - emptyObjectLength - "  extensionProfile: ".Length;
+                    }
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(LicenseType), out propertyOverride);
+            if (Optional.IsDefined(LicenseType) || hasPropertyOverride)
+            {
+                builder.Append("  licenseType: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    if (LicenseType.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{LicenseType}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{LicenseType}'");
+                    }
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Priority), out propertyOverride);
+            if (Optional.IsDefined(Priority) || hasPropertyOverride)
+            {
+                builder.Append("  priority: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"'{Priority.Value.ToString()}'");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(EvictionPolicy), out propertyOverride);
+            if (Optional.IsDefined(EvictionPolicy) || hasPropertyOverride)
+            {
+                builder.Append("  evictionPolicy: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"'{EvictionPolicy.Value.ToString()}'");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(BillingProfile), out propertyOverride);
+            if (Optional.IsDefined(BillingProfile) || hasPropertyOverride)
+            {
+                builder.Append("  billingProfile: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    int currentIndent = 2;
+                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                    int length = builder.Length;
+                    AppendChildObject(builder, BillingProfile, options, currentIndent, false);
+                    if (builder.Length == length + emptyObjectLength)
+                    {
+                        builder.Length = builder.Length - emptyObjectLength - "  billingProfile: ".Length;
+                    }
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ScheduledEventsProfile), out propertyOverride);
+            if (Optional.IsDefined(ScheduledEventsProfile) || hasPropertyOverride)
+            {
+                builder.Append("  scheduledEventsProfile: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    int currentIndent = 2;
+                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                    int length = builder.Length;
+                    AppendChildObject(builder, ScheduledEventsProfile, options, currentIndent, false);
+                    if (builder.Length == length + emptyObjectLength)
+                    {
+                        builder.Length = builder.Length - emptyObjectLength - "  scheduledEventsProfile: ".Length;
+                    }
+                }
             }
 
             builder.AppendLine("}");
@@ -348,7 +499,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($" {line}");
+                    stringBuilder.AppendLine($"{line}");
                 }
                 else
                 {

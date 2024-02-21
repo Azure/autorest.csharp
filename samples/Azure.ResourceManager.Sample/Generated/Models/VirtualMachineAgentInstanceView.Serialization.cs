@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -143,47 +144,91 @@ namespace Azure.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(VmAgentVersion))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(VmAgentVersion), out propertyOverride);
+            if (Optional.IsDefined(VmAgentVersion) || hasPropertyOverride)
             {
-                builder.Append("  vmAgentVersion:");
-                if (VmAgentVersion.Contains(Environment.NewLine))
+                builder.Append("  vmAgentVersion: ");
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{VmAgentVersion}'''");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{VmAgentVersion}'");
+                    if (VmAgentVersion.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{VmAgentVersion}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{VmAgentVersion}'");
+                    }
                 }
             }
 
-            if (Optional.IsCollectionDefined(ExtensionHandlers))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ExtensionHandlers), out propertyOverride);
+            if (Optional.IsCollectionDefined(ExtensionHandlers) || hasPropertyOverride)
             {
-                if (ExtensionHandlers.Any())
+                if (ExtensionHandlers.Any() || hasPropertyOverride)
                 {
-                    builder.Append("  extensionHandlers:");
-                    builder.AppendLine(" [");
-                    foreach (var item in ExtensionHandlers)
+                    builder.Append("  extensionHandlers: ");
+                    if (hasPropertyOverride)
                     {
-                        AppendChildObject(builder, item, options, 4, true);
+                        builder.AppendLine($"{propertyOverride}");
                     }
-                    builder.AppendLine("  ]");
+                    else
+                    {
+                        builder.AppendLine("[");
+                        foreach (var item in ExtensionHandlers)
+                        {
+                            int currentIndent = 4;
+                            int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                            int length = builder.Length;
+                            AppendChildObject(builder, item, options, currentIndent, true);
+                            if (builder.Length == length + emptyObjectLength)
+                            {
+                                builder.Length = builder.Length - emptyObjectLength - "  extensionHandlers: ".Length;
+                            }
+                        }
+                        builder.AppendLine("  ]");
+                    }
                 }
             }
 
-            if (Optional.IsCollectionDefined(Statuses))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Statuses), out propertyOverride);
+            if (Optional.IsCollectionDefined(Statuses) || hasPropertyOverride)
             {
-                if (Statuses.Any())
+                if (Statuses.Any() || hasPropertyOverride)
                 {
-                    builder.Append("  statuses:");
-                    builder.AppendLine(" [");
-                    foreach (var item in Statuses)
+                    builder.Append("  statuses: ");
+                    if (hasPropertyOverride)
                     {
-                        AppendChildObject(builder, item, options, 4, true);
+                        builder.AppendLine($"{propertyOverride}");
                     }
-                    builder.AppendLine("  ]");
+                    else
+                    {
+                        builder.AppendLine("[");
+                        foreach (var item in Statuses)
+                        {
+                            int currentIndent = 4;
+                            int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                            int length = builder.Length;
+                            AppendChildObject(builder, item, options, currentIndent, true);
+                            if (builder.Length == length + emptyObjectLength)
+                            {
+                                builder.Length = builder.Length - emptyObjectLength - "  statuses: ".Length;
+                            }
+                        }
+                        builder.AppendLine("  ]");
+                    }
                 }
             }
 
@@ -217,7 +262,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($" {line}");
+                    stringBuilder.AppendLine($"{line}");
                 }
                 else
                 {

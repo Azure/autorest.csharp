@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -111,18 +112,40 @@ namespace Azure.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Option))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Option), out propertyOverride);
+            if (Optional.IsDefined(Option) || hasPropertyOverride)
             {
-                builder.Append("  option:");
-                builder.AppendLine($" '{Option.Value.ToString()}'");
+                builder.Append("  option: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"'{Option.Value.ToString()}'");
+                }
             }
 
-            if (Optional.IsDefined(Placement))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Placement), out propertyOverride);
+            if (Optional.IsDefined(Placement) || hasPropertyOverride)
             {
-                builder.Append("  placement:");
-                builder.AppendLine($" '{Placement.Value.ToString()}'");
+                builder.Append("  placement: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"'{Placement.Value.ToString()}'");
+                }
             }
 
             builder.AppendLine("}");
@@ -155,7 +178,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($" {line}");
+                    stringBuilder.AppendLine($"{line}");
                 }
                 else
                 {

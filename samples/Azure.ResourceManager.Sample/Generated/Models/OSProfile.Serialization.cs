@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -211,102 +212,201 @@ namespace Azure.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(ComputerName))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ComputerName), out propertyOverride);
+            if (Optional.IsDefined(ComputerName) || hasPropertyOverride)
             {
-                builder.Append("  computerName:");
-                if (ComputerName.Contains(Environment.NewLine))
+                builder.Append("  computerName: ");
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{ComputerName}'''");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{ComputerName}'");
-                }
-            }
-
-            if (Optional.IsDefined(AdminUsername))
-            {
-                builder.Append("  adminUsername:");
-                if (AdminUsername.Contains(Environment.NewLine))
-                {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{AdminUsername}'''");
-                }
-                else
-                {
-                    builder.AppendLine($" '{AdminUsername}'");
-                }
-            }
-
-            if (Optional.IsDefined(AdminPassword))
-            {
-                builder.Append("  adminPassword:");
-                if (AdminPassword.Contains(Environment.NewLine))
-                {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{AdminPassword}'''");
-                }
-                else
-                {
-                    builder.AppendLine($" '{AdminPassword}'");
-                }
-            }
-
-            if (Optional.IsDefined(CustomData))
-            {
-                builder.Append("  customData:");
-                if (CustomData.Contains(Environment.NewLine))
-                {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{CustomData}'''");
-                }
-                else
-                {
-                    builder.AppendLine($" '{CustomData}'");
-                }
-            }
-
-            if (Optional.IsDefined(WindowsConfiguration))
-            {
-                builder.Append("  windowsConfiguration:");
-                AppendChildObject(builder, WindowsConfiguration, options, 2, false);
-            }
-
-            if (Optional.IsDefined(LinuxConfiguration))
-            {
-                builder.Append("  linuxConfiguration:");
-                AppendChildObject(builder, LinuxConfiguration, options, 2, false);
-            }
-
-            if (Optional.IsCollectionDefined(Secrets))
-            {
-                if (Secrets.Any())
-                {
-                    builder.Append("  secrets:");
-                    builder.AppendLine(" [");
-                    foreach (var item in Secrets)
+                    if (ComputerName.Contains(Environment.NewLine))
                     {
-                        AppendChildObject(builder, item, options, 4, true);
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{ComputerName}'''");
                     }
-                    builder.AppendLine("  ]");
+                    else
+                    {
+                        builder.AppendLine($"'{ComputerName}'");
+                    }
                 }
             }
 
-            if (Optional.IsDefined(AllowExtensionOperations))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(AdminUsername), out propertyOverride);
+            if (Optional.IsDefined(AdminUsername) || hasPropertyOverride)
             {
-                builder.Append("  allowExtensionOperations:");
-                var boolValue = AllowExtensionOperations.Value == true ? "true" : "false";
-                builder.AppendLine($" {boolValue}");
+                builder.Append("  adminUsername: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    if (AdminUsername.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{AdminUsername}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{AdminUsername}'");
+                    }
+                }
             }
 
-            if (Optional.IsDefined(RequireGuestProvisionSignal))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(AdminPassword), out propertyOverride);
+            if (Optional.IsDefined(AdminPassword) || hasPropertyOverride)
             {
-                builder.Append("  requireGuestProvisionSignal:");
-                var boolValue = RequireGuestProvisionSignal.Value == true ? "true" : "false";
-                builder.AppendLine($" {boolValue}");
+                builder.Append("  adminPassword: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    if (AdminPassword.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{AdminPassword}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{AdminPassword}'");
+                    }
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(CustomData), out propertyOverride);
+            if (Optional.IsDefined(CustomData) || hasPropertyOverride)
+            {
+                builder.Append("  customData: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    if (CustomData.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{CustomData}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{CustomData}'");
+                    }
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(WindowsConfiguration), out propertyOverride);
+            if (Optional.IsDefined(WindowsConfiguration) || hasPropertyOverride)
+            {
+                builder.Append("  windowsConfiguration: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    int currentIndent = 2;
+                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                    int length = builder.Length;
+                    AppendChildObject(builder, WindowsConfiguration, options, currentIndent, false);
+                    if (builder.Length == length + emptyObjectLength)
+                    {
+                        builder.Length = builder.Length - emptyObjectLength - "  windowsConfiguration: ".Length;
+                    }
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(LinuxConfiguration), out propertyOverride);
+            if (Optional.IsDefined(LinuxConfiguration) || hasPropertyOverride)
+            {
+                builder.Append("  linuxConfiguration: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    int currentIndent = 2;
+                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                    int length = builder.Length;
+                    AppendChildObject(builder, LinuxConfiguration, options, currentIndent, false);
+                    if (builder.Length == length + emptyObjectLength)
+                    {
+                        builder.Length = builder.Length - emptyObjectLength - "  linuxConfiguration: ".Length;
+                    }
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Secrets), out propertyOverride);
+            if (Optional.IsCollectionDefined(Secrets) || hasPropertyOverride)
+            {
+                if (Secrets.Any() || hasPropertyOverride)
+                {
+                    builder.Append("  secrets: ");
+                    if (hasPropertyOverride)
+                    {
+                        builder.AppendLine($"{propertyOverride}");
+                    }
+                    else
+                    {
+                        builder.AppendLine("[");
+                        foreach (var item in Secrets)
+                        {
+                            int currentIndent = 4;
+                            int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                            int length = builder.Length;
+                            AppendChildObject(builder, item, options, currentIndent, true);
+                            if (builder.Length == length + emptyObjectLength)
+                            {
+                                builder.Length = builder.Length - emptyObjectLength - "  secrets: ".Length;
+                            }
+                        }
+                        builder.AppendLine("  ]");
+                    }
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(AllowExtensionOperations), out propertyOverride);
+            if (Optional.IsDefined(AllowExtensionOperations) || hasPropertyOverride)
+            {
+                builder.Append("  allowExtensionOperations: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    var boolValue = AllowExtensionOperations.Value == true ? "true" : "false";
+                    builder.AppendLine($"{boolValue}");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(RequireGuestProvisionSignal), out propertyOverride);
+            if (Optional.IsDefined(RequireGuestProvisionSignal) || hasPropertyOverride)
+            {
+                builder.Append("  requireGuestProvisionSignal: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    var boolValue = RequireGuestProvisionSignal.Value == true ? "true" : "false";
+                    builder.AppendLine($"{boolValue}");
+                }
             }
 
             builder.AppendLine("}");
@@ -339,7 +439,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($" {line}");
+                    stringBuilder.AppendLine($"{line}");
                 }
                 else
                 {

@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
 using Azure.ResourceManager.Sample.Models;
@@ -302,128 +303,257 @@ namespace Azure.ResourceManager.Sample
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Name))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name), out propertyOverride);
+            if (Optional.IsDefined(Name) || hasPropertyOverride)
             {
-                builder.Append("  name:");
-                if (Name.Contains(Environment.NewLine))
+                builder.Append("  name: ");
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{Name}'''");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{Name}'");
-                }
-            }
-
-            if (Optional.IsDefined(Location))
-            {
-                builder.Append("  location:");
-                builder.AppendLine($" '{Location.ToString()}'");
-            }
-
-            if (Optional.IsCollectionDefined(Tags))
-            {
-                if (Tags.Any())
-                {
-                    builder.Append("  tags:");
-                    builder.AppendLine(" {");
-                    foreach (var item in Tags)
+                    if (Name.Contains(Environment.NewLine))
                     {
-                        builder.Append($"    {item.Key}:");
-                        if (item.Value == null)
-                        {
-                            builder.Append("null");
-                            continue;
-                        }
-                        if (item.Value.Contains(Environment.NewLine))
-                        {
-                            builder.AppendLine(" '''");
-                            builder.AppendLine($"{item.Value}'''");
-                        }
-                        else
-                        {
-                            builder.AppendLine($" '{item.Value}'");
-                        }
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{Name}'''");
                     }
-                    builder.AppendLine("  }");
+                    else
+                    {
+                        builder.AppendLine($"'{Name}'");
+                    }
                 }
             }
 
-            if (Optional.IsDefined(ExtendedLocation))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Location), out propertyOverride);
+            if (Optional.IsDefined(Location) || hasPropertyOverride)
             {
-                builder.Append("  extendedLocation:");
-                AppendChildObject(builder, ExtendedLocation, options, 2, false);
+                builder.Append("  location: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"'{Location.ToString()}'");
+                }
             }
 
-            if (Optional.IsDefined(Id))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Tags), out propertyOverride);
+            if (Optional.IsCollectionDefined(Tags) || hasPropertyOverride)
             {
-                builder.Append("  id:");
-                builder.AppendLine($" '{Id.ToString()}'");
+                if (Tags.Any() || hasPropertyOverride)
+                {
+                    builder.Append("  tags: ");
+                    if (hasPropertyOverride)
+                    {
+                        builder.AppendLine($"{propertyOverride}");
+                    }
+                    else
+                    {
+                        builder.AppendLine("{");
+                        foreach (var item in Tags)
+                        {
+                            builder.Append($"    '{item.Key}': ");
+                            if (item.Value == null)
+                            {
+                                builder.Append("null");
+                                continue;
+                            }
+                            if (item.Value.Contains(Environment.NewLine))
+                            {
+                                builder.AppendLine("'''");
+                                builder.AppendLine($"{item.Value}'''");
+                            }
+                            else
+                            {
+                                builder.AppendLine($"'{item.Value}'");
+                            }
+                        }
+                        builder.AppendLine("  }");
+                    }
+                }
             }
 
-            if (Optional.IsDefined(SystemData))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ExtendedLocation), out propertyOverride);
+            if (Optional.IsDefined(ExtendedLocation) || hasPropertyOverride)
             {
-                builder.Append("  systemData:");
-                builder.AppendLine($" '{SystemData.ToString()}'");
+                builder.Append("  extendedLocation: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    int currentIndent = 2;
+                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                    int length = builder.Length;
+                    AppendChildObject(builder, ExtendedLocation, options, currentIndent, false);
+                    if (builder.Length == length + emptyObjectLength)
+                    {
+                        builder.Length = builder.Length - emptyObjectLength - "  extendedLocation: ".Length;
+                    }
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Id), out propertyOverride);
+            if (Optional.IsDefined(Id) || hasPropertyOverride)
+            {
+                builder.Append("  id: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"'{Id.ToString()}'");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(SystemData), out propertyOverride);
+            if (Optional.IsDefined(SystemData) || hasPropertyOverride)
+            {
+                builder.Append("  systemData: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"'{SystemData.ToString()}'");
+                }
             }
 
             builder.Append("  properties:");
             builder.AppendLine(" {");
-            if (Optional.IsDefined(ProximityPlacementGroupType))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ProximityPlacementGroupType), out propertyOverride);
+            if (Optional.IsDefined(ProximityPlacementGroupType) || hasPropertyOverride)
             {
-                builder.Append("    proximityPlacementGroupType:");
-                builder.AppendLine($" '{ProximityPlacementGroupType.Value.ToString()}'");
-            }
-
-            if (Optional.IsCollectionDefined(VirtualMachines))
-            {
-                if (VirtualMachines.Any())
+                builder.Append("    proximityPlacementGroupType: ");
+                if (hasPropertyOverride)
                 {
-                    builder.Append("    virtualMachines:");
-                    builder.AppendLine(" [");
-                    foreach (var item in VirtualMachines)
-                    {
-                        AppendChildObject(builder, item, options, 6, true);
-                    }
-                    builder.AppendLine("    ]");
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($"'{ProximityPlacementGroupType.Value.ToString()}'");
                 }
             }
 
-            if (Optional.IsCollectionDefined(VirtualMachineScaleSets))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(VirtualMachines), out propertyOverride);
+            if (Optional.IsCollectionDefined(VirtualMachines) || hasPropertyOverride)
             {
-                if (VirtualMachineScaleSets.Any())
+                if (VirtualMachines.Any() || hasPropertyOverride)
                 {
-                    builder.Append("    virtualMachineScaleSets:");
-                    builder.AppendLine(" [");
-                    foreach (var item in VirtualMachineScaleSets)
+                    builder.Append("    virtualMachines: ");
+                    if (hasPropertyOverride)
                     {
-                        AppendChildObject(builder, item, options, 6, true);
+                        builder.AppendLine($"{propertyOverride}");
                     }
-                    builder.AppendLine("    ]");
+                    else
+                    {
+                        builder.AppendLine("[");
+                        foreach (var item in VirtualMachines)
+                        {
+                            int currentIndent = 6;
+                            int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                            int length = builder.Length;
+                            AppendChildObject(builder, item, options, currentIndent, true);
+                            if (builder.Length == length + emptyObjectLength)
+                            {
+                                builder.Length = builder.Length - emptyObjectLength - "    virtualMachines: ".Length;
+                            }
+                        }
+                        builder.AppendLine("    ]");
+                    }
                 }
             }
 
-            if (Optional.IsCollectionDefined(AvailabilitySets))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(VirtualMachineScaleSets), out propertyOverride);
+            if (Optional.IsCollectionDefined(VirtualMachineScaleSets) || hasPropertyOverride)
             {
-                if (AvailabilitySets.Any())
+                if (VirtualMachineScaleSets.Any() || hasPropertyOverride)
                 {
-                    builder.Append("    availabilitySets:");
-                    builder.AppendLine(" [");
-                    foreach (var item in AvailabilitySets)
+                    builder.Append("    virtualMachineScaleSets: ");
+                    if (hasPropertyOverride)
                     {
-                        AppendChildObject(builder, item, options, 6, true);
+                        builder.AppendLine($"{propertyOverride}");
                     }
-                    builder.AppendLine("    ]");
+                    else
+                    {
+                        builder.AppendLine("[");
+                        foreach (var item in VirtualMachineScaleSets)
+                        {
+                            int currentIndent = 6;
+                            int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                            int length = builder.Length;
+                            AppendChildObject(builder, item, options, currentIndent, true);
+                            if (builder.Length == length + emptyObjectLength)
+                            {
+                                builder.Length = builder.Length - emptyObjectLength - "    virtualMachineScaleSets: ".Length;
+                            }
+                        }
+                        builder.AppendLine("    ]");
+                    }
                 }
             }
 
-            if (Optional.IsDefined(ColocationStatus))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(AvailabilitySets), out propertyOverride);
+            if (Optional.IsCollectionDefined(AvailabilitySets) || hasPropertyOverride)
             {
-                builder.Append("    colocationStatus:");
-                AppendChildObject(builder, ColocationStatus, options, 4, false);
+                if (AvailabilitySets.Any() || hasPropertyOverride)
+                {
+                    builder.Append("    availabilitySets: ");
+                    if (hasPropertyOverride)
+                    {
+                        builder.AppendLine($"{propertyOverride}");
+                    }
+                    else
+                    {
+                        builder.AppendLine("[");
+                        foreach (var item in AvailabilitySets)
+                        {
+                            int currentIndent = 6;
+                            int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                            int length = builder.Length;
+                            AppendChildObject(builder, item, options, currentIndent, true);
+                            if (builder.Length == length + emptyObjectLength)
+                            {
+                                builder.Length = builder.Length - emptyObjectLength - "    availabilitySets: ".Length;
+                            }
+                        }
+                        builder.AppendLine("    ]");
+                    }
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ColocationStatus), out propertyOverride);
+            if (Optional.IsDefined(ColocationStatus) || hasPropertyOverride)
+            {
+                builder.Append("    colocationStatus: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    int currentIndent = 4;
+                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                    int length = builder.Length;
+                    AppendChildObject(builder, ColocationStatus, options, currentIndent, false);
+                    if (builder.Length == length + emptyObjectLength)
+                    {
+                        builder.Length = builder.Length - emptyObjectLength - "    colocationStatus: ".Length;
+                    }
+                }
             }
 
             builder.AppendLine("  }");
@@ -457,7 +587,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($" {line}");
+                    stringBuilder.AppendLine($"{line}");
                 }
                 else
                 {

@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -133,39 +134,83 @@ namespace Azure.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(AssetId))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(AssetId), out propertyOverride);
+            if (Optional.IsDefined(AssetId) || hasPropertyOverride)
             {
-                builder.Append("  assetId:");
-                if (AssetId.Contains(Environment.NewLine))
+                builder.Append("  assetId: ");
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{AssetId}'''");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{AssetId}'");
+                    if (AssetId.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{AssetId}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{AssetId}'");
+                    }
                 }
             }
 
-            if (Optional.IsDefined(AvailableCapacity))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(AvailableCapacity), out propertyOverride);
+            if (Optional.IsDefined(AvailableCapacity) || hasPropertyOverride)
             {
-                builder.Append("  availableCapacity:");
-                AppendChildObject(builder, AvailableCapacity, options, 2, false);
+                builder.Append("  availableCapacity: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    int currentIndent = 2;
+                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                    int length = builder.Length;
+                    AppendChildObject(builder, AvailableCapacity, options, currentIndent, false);
+                    if (builder.Length == length + emptyObjectLength)
+                    {
+                        builder.Length = builder.Length - emptyObjectLength - "  availableCapacity: ".Length;
+                    }
+                }
             }
 
-            if (Optional.IsCollectionDefined(Statuses))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Statuses), out propertyOverride);
+            if (Optional.IsCollectionDefined(Statuses) || hasPropertyOverride)
             {
-                if (Statuses.Any())
+                if (Statuses.Any() || hasPropertyOverride)
                 {
-                    builder.Append("  statuses:");
-                    builder.AppendLine(" [");
-                    foreach (var item in Statuses)
+                    builder.Append("  statuses: ");
+                    if (hasPropertyOverride)
                     {
-                        AppendChildObject(builder, item, options, 4, true);
+                        builder.AppendLine($"{propertyOverride}");
                     }
-                    builder.AppendLine("  ]");
+                    else
+                    {
+                        builder.AppendLine("[");
+                        foreach (var item in Statuses)
+                        {
+                            int currentIndent = 4;
+                            int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                            int length = builder.Length;
+                            AppendChildObject(builder, item, options, currentIndent, true);
+                            if (builder.Length == length + emptyObjectLength)
+                            {
+                                builder.Length = builder.Length - emptyObjectLength - "  statuses: ".Length;
+                            }
+                        }
+                        builder.AppendLine("  ]");
+                    }
                 }
             }
 
@@ -199,7 +244,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($" {line}");
+                    stringBuilder.AppendLine($"{line}");
                 }
                 else
                 {

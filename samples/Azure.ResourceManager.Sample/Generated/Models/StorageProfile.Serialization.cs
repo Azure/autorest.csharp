@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -137,31 +138,82 @@ namespace Azure.ResourceManager.Sample.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(ImageReference))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ImageReference), out propertyOverride);
+            if (Optional.IsDefined(ImageReference) || hasPropertyOverride)
             {
-                builder.Append("  imageReference:");
-                AppendChildObject(builder, ImageReference, options, 2, false);
-            }
-
-            if (Optional.IsDefined(OSDisk))
-            {
-                builder.Append("  osDisk:");
-                AppendChildObject(builder, OSDisk, options, 2, false);
-            }
-
-            if (Optional.IsCollectionDefined(DataDisks))
-            {
-                if (DataDisks.Any())
+                builder.Append("  imageReference: ");
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  dataDisks:");
-                    builder.AppendLine(" [");
-                    foreach (var item in DataDisks)
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    int currentIndent = 2;
+                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                    int length = builder.Length;
+                    AppendChildObject(builder, ImageReference, options, currentIndent, false);
+                    if (builder.Length == length + emptyObjectLength)
                     {
-                        AppendChildObject(builder, item, options, 4, true);
+                        builder.Length = builder.Length - emptyObjectLength - "  imageReference: ".Length;
                     }
-                    builder.AppendLine("  ]");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(OSDisk), out propertyOverride);
+            if (Optional.IsDefined(OSDisk) || hasPropertyOverride)
+            {
+                builder.Append("  osDisk: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    int currentIndent = 2;
+                    int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                    int length = builder.Length;
+                    AppendChildObject(builder, OSDisk, options, currentIndent, false);
+                    if (builder.Length == length + emptyObjectLength)
+                    {
+                        builder.Length = builder.Length - emptyObjectLength - "  osDisk: ".Length;
+                    }
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(DataDisks), out propertyOverride);
+            if (Optional.IsCollectionDefined(DataDisks) || hasPropertyOverride)
+            {
+                if (DataDisks.Any() || hasPropertyOverride)
+                {
+                    builder.Append("  dataDisks: ");
+                    if (hasPropertyOverride)
+                    {
+                        builder.AppendLine($"{propertyOverride}");
+                    }
+                    else
+                    {
+                        builder.AppendLine("[");
+                        foreach (var item in DataDisks)
+                        {
+                            int currentIndent = 4;
+                            int emptyObjectLength = 2 + currentIndent + Environment.NewLine.Length + Environment.NewLine.Length;
+                            int length = builder.Length;
+                            AppendChildObject(builder, item, options, currentIndent, true);
+                            if (builder.Length == length + emptyObjectLength)
+                            {
+                                builder.Length = builder.Length - emptyObjectLength - "  dataDisks: ".Length;
+                            }
+                        }
+                        builder.AppendLine("  ]");
+                    }
                 }
             }
 
@@ -195,7 +247,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($" {line}");
+                    stringBuilder.AppendLine($"{line}");
                 }
                 else
                 {
