@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using Azure.Core;
 
 namespace FlattenedParameters.Models
 {
@@ -18,7 +17,10 @@ namespace FlattenedParameters.Models
         /// <exception cref="ArgumentNullException"> <paramref name="required"/> is null. </exception>
         public Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema(string required)
         {
-            Argument.AssertNotNull(required, nameof(required));
+            if (required == null)
+            {
+                throw new ArgumentNullException(nameof(required));
+            }
 
             Required = required;
         }

@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace _Type.Property.AdditionalProperties.Models
 {
@@ -51,7 +50,10 @@ namespace _Type.Property.AdditionalProperties.Models
         /// <exception cref="ArgumentNullException"> <paramref name="state"/> is null. </exception>
         public ModelForRecord(string state)
         {
-            Argument.AssertNotNull(state, nameof(state));
+            if (state == null)
+            {
+                throw new ArgumentNullException(nameof(state));
+            }
 
             State = state;
         }

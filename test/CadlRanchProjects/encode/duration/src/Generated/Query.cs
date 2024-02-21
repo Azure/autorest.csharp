@@ -318,7 +318,10 @@ namespace Encode.Duration
         /// <include file="Docs/Query.xml" path="doc/members/member[@name='Int32SecondsArrayAsync(IEnumerable{TimeSpan},RequestContext)']/*" />
         public virtual async Task<Response> Int32SecondsArrayAsync(IEnumerable<TimeSpan> input, RequestContext context = null)
         {
-            Argument.AssertNotNull(input, nameof(input));
+            if (input == null)
+            {
+                throw new ArgumentNullException(nameof(input));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Query.Int32SecondsArray");
             scope.Start();
@@ -353,7 +356,10 @@ namespace Encode.Duration
         /// <include file="Docs/Query.xml" path="doc/members/member[@name='Int32SecondsArray(IEnumerable{TimeSpan},RequestContext)']/*" />
         public virtual Response Int32SecondsArray(IEnumerable<TimeSpan> input, RequestContext context = null)
         {
-            Argument.AssertNotNull(input, nameof(input));
+            if (input == null)
+            {
+                throw new ArgumentNullException(nameof(input));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Query.Int32SecondsArray");
             scope.Start();

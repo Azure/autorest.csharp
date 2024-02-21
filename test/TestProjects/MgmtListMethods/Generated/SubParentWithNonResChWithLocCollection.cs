@@ -83,8 +83,18 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChWithLocName"/> or <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<SubParentWithNonResChWithLocResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string subParentWithNonResChWithLocName, SubParentWithNonResChWithLocData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subParentWithNonResChWithLocName, nameof(subParentWithNonResChWithLocName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (subParentWithNonResChWithLocName == null)
+            {
+                throw new ArgumentNullException(nameof(subParentWithNonResChWithLocName));
+            }
+            if (subParentWithNonResChWithLocName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subParentWithNonResChWithLocName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _subParentWithNonResChWithLocClientDiagnostics.CreateScope("SubParentWithNonResChWithLocCollection.CreateOrUpdate");
             scope.Start();
@@ -132,8 +142,18 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChWithLocName"/> or <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<SubParentWithNonResChWithLocResource> CreateOrUpdate(WaitUntil waitUntil, string subParentWithNonResChWithLocName, SubParentWithNonResChWithLocData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subParentWithNonResChWithLocName, nameof(subParentWithNonResChWithLocName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (subParentWithNonResChWithLocName == null)
+            {
+                throw new ArgumentNullException(nameof(subParentWithNonResChWithLocName));
+            }
+            if (subParentWithNonResChWithLocName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subParentWithNonResChWithLocName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _subParentWithNonResChWithLocClientDiagnostics.CreateScope("SubParentWithNonResChWithLocCollection.CreateOrUpdate");
             scope.Start();
@@ -179,7 +199,14 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChWithLocName"/> is null. </exception>
         public virtual async Task<Response<SubParentWithNonResChWithLocResource>> GetAsync(string subParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subParentWithNonResChWithLocName, nameof(subParentWithNonResChWithLocName));
+            if (subParentWithNonResChWithLocName == null)
+            {
+                throw new ArgumentNullException(nameof(subParentWithNonResChWithLocName));
+            }
+            if (subParentWithNonResChWithLocName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subParentWithNonResChWithLocName));
+            }
 
             using var scope = _subParentWithNonResChWithLocClientDiagnostics.CreateScope("SubParentWithNonResChWithLocCollection.Get");
             scope.Start();
@@ -224,7 +251,14 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChWithLocName"/> is null. </exception>
         public virtual Response<SubParentWithNonResChWithLocResource> Get(string subParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subParentWithNonResChWithLocName, nameof(subParentWithNonResChWithLocName));
+            if (subParentWithNonResChWithLocName == null)
+            {
+                throw new ArgumentNullException(nameof(subParentWithNonResChWithLocName));
+            }
+            if (subParentWithNonResChWithLocName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subParentWithNonResChWithLocName));
+            }
 
             using var scope = _subParentWithNonResChWithLocClientDiagnostics.CreateScope("SubParentWithNonResChWithLocCollection.Get");
             scope.Start();
@@ -329,7 +363,14 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChWithLocName"/> is null. </exception>
         public virtual async Task<Response<bool>> ExistsAsync(string subParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subParentWithNonResChWithLocName, nameof(subParentWithNonResChWithLocName));
+            if (subParentWithNonResChWithLocName == null)
+            {
+                throw new ArgumentNullException(nameof(subParentWithNonResChWithLocName));
+            }
+            if (subParentWithNonResChWithLocName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subParentWithNonResChWithLocName));
+            }
 
             using var scope = _subParentWithNonResChWithLocClientDiagnostics.CreateScope("SubParentWithNonResChWithLocCollection.Exists");
             scope.Start();
@@ -372,7 +413,14 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChWithLocName"/> is null. </exception>
         public virtual Response<bool> Exists(string subParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subParentWithNonResChWithLocName, nameof(subParentWithNonResChWithLocName));
+            if (subParentWithNonResChWithLocName == null)
+            {
+                throw new ArgumentNullException(nameof(subParentWithNonResChWithLocName));
+            }
+            if (subParentWithNonResChWithLocName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subParentWithNonResChWithLocName));
+            }
 
             using var scope = _subParentWithNonResChWithLocClientDiagnostics.CreateScope("SubParentWithNonResChWithLocCollection.Exists");
             scope.Start();
@@ -415,7 +463,14 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChWithLocName"/> is null. </exception>
         public virtual async Task<NullableResponse<SubParentWithNonResChWithLocResource>> GetIfExistsAsync(string subParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subParentWithNonResChWithLocName, nameof(subParentWithNonResChWithLocName));
+            if (subParentWithNonResChWithLocName == null)
+            {
+                throw new ArgumentNullException(nameof(subParentWithNonResChWithLocName));
+            }
+            if (subParentWithNonResChWithLocName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subParentWithNonResChWithLocName));
+            }
 
             using var scope = _subParentWithNonResChWithLocClientDiagnostics.CreateScope("SubParentWithNonResChWithLocCollection.GetIfExists");
             scope.Start();
@@ -460,7 +515,14 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChWithLocName"/> is null. </exception>
         public virtual NullableResponse<SubParentWithNonResChWithLocResource> GetIfExists(string subParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subParentWithNonResChWithLocName, nameof(subParentWithNonResChWithLocName));
+            if (subParentWithNonResChWithLocName == null)
+            {
+                throw new ArgumentNullException(nameof(subParentWithNonResChWithLocName));
+            }
+            if (subParentWithNonResChWithLocName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subParentWithNonResChWithLocName));
+            }
 
             using var scope = _subParentWithNonResChWithLocClientDiagnostics.CreateScope("SubParentWithNonResChWithLocCollection.GetIfExists");
             scope.Start();

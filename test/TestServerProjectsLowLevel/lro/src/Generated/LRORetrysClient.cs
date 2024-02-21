@@ -47,8 +47,14 @@ namespace lro_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public LRORetrysClient(Uri endpoint, AzureKeyCredential credential, AutoRestLongRunningOperationTestServiceClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
-            Argument.AssertNotNull(credential, nameof(credential));
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
+            if (credential == null)
+            {
+                throw new ArgumentNullException(nameof(credential));
+            }
             options ??= new AutoRestLongRunningOperationTestServiceClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

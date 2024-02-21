@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
 {
@@ -55,7 +54,10 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         protected AbstractModel(string name)
         {
-            Argument.AssertNotNull(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
             Name = name;
         }

@@ -43,7 +43,10 @@ namespace ParametersCadl
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual ParameterOrders GetParameterOrdersClient(string apiVersion = "2022-05-15-preview")
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
 
             return new ParameterOrders(ClientDiagnostics, _pipeline, apiVersion);
         }

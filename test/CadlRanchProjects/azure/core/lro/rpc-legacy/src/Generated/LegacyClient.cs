@@ -35,7 +35,10 @@ namespace _Azure.Lro.RpcLegacy
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public LegacyClient(Uri endpoint, LegacyClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
             options ??= new LegacyClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -48,7 +51,10 @@ namespace _Azure.Lro.RpcLegacy
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual CreateResourcePollViaOperationLocation GetCreateResourcePollViaOperationLocationClient(string apiVersion = "2022-12-01-preview")
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
 
             return new CreateResourcePollViaOperationLocation(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
         }

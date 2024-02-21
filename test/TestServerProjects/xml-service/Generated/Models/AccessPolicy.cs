@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace xml_service.Models
 {
@@ -53,7 +52,10 @@ namespace xml_service.Models
         /// <exception cref="ArgumentNullException"> <paramref name="permission"/> is null. </exception>
         public AccessPolicy(DateTimeOffset start, DateTimeOffset expiry, string permission)
         {
-            Argument.AssertNotNull(permission, nameof(permission));
+            if (permission == null)
+            {
+                throw new ArgumentNullException(nameof(permission));
+            }
 
             Start = start;
             Expiry = expiry;

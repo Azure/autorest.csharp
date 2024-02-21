@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
@@ -19,7 +18,10 @@ namespace CognitiveSearch.Models
         /// <exception cref="ArgumentNullException"> <paramref name="referencePointParameter"/> is null. </exception>
         public DistanceScoringParameters(string referencePointParameter, double boostingDistance)
         {
-            Argument.AssertNotNull(referencePointParameter, nameof(referencePointParameter));
+            if (referencePointParameter == null)
+            {
+                throw new ArgumentNullException(nameof(referencePointParameter));
+            }
 
             ReferencePointParameter = referencePointParameter;
             BoostingDistance = boostingDistance;

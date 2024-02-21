@@ -49,7 +49,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithAndAsync(And,CancellationToken)']/*" />
         public virtual async Task<Response> WithAndAsync(And body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -63,7 +66,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithAnd(And,CancellationToken)']/*" />
         public virtual Response WithAnd(And body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -94,7 +100,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithAndAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithAndAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithAnd");
             scope.Start();
@@ -133,7 +142,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithAnd(RequestContent,RequestContext)']/*" />
         public virtual Response WithAnd(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithAnd");
             scope.Start();
@@ -155,7 +167,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithAsAsync(As,CancellationToken)']/*" />
         public virtual async Task<Response> WithAsAsync(As body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -169,7 +184,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithAs(As,CancellationToken)']/*" />
         public virtual Response WithAs(As body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -200,7 +218,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithAsAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithAsAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithAs");
             scope.Start();
@@ -239,7 +260,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithAs(RequestContent,RequestContext)']/*" />
         public virtual Response WithAs(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithAs");
             scope.Start();
@@ -261,7 +285,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithAssertAsync(Assert,CancellationToken)']/*" />
         public virtual async Task<Response> WithAssertAsync(Assert body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -275,7 +302,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithAssert(Assert,CancellationToken)']/*" />
         public virtual Response WithAssert(Assert body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -306,7 +336,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithAssertAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithAssertAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithAssert");
             scope.Start();
@@ -345,7 +378,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithAssert(RequestContent,RequestContext)']/*" />
         public virtual Response WithAssert(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithAssert");
             scope.Start();
@@ -367,7 +403,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithAsyncAsync(Async,CancellationToken)']/*" />
         public virtual async Task<Response> WithAsyncAsync(Async body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -381,7 +420,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithAsync(Async,CancellationToken)']/*" />
         public virtual Response WithAsync(Async body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -412,7 +454,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithAsyncAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithAsyncAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithAsync");
             scope.Start();
@@ -451,7 +496,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithAsync(RequestContent,RequestContext)']/*" />
         public virtual Response WithAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithAsync");
             scope.Start();
@@ -473,7 +521,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithAwaitAsync(Await,CancellationToken)']/*" />
         public virtual async Task<Response> WithAwaitAsync(Await body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -487,7 +538,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithAwait(Await,CancellationToken)']/*" />
         public virtual Response WithAwait(Await body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -518,7 +572,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithAwaitAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithAwaitAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithAwait");
             scope.Start();
@@ -557,7 +614,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithAwait(RequestContent,RequestContext)']/*" />
         public virtual Response WithAwait(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithAwait");
             scope.Start();
@@ -579,7 +639,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithBreakAsync(Break,CancellationToken)']/*" />
         public virtual async Task<Response> WithBreakAsync(Break body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -593,7 +656,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithBreak(Break,CancellationToken)']/*" />
         public virtual Response WithBreak(Break body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -624,7 +690,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithBreakAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithBreakAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithBreak");
             scope.Start();
@@ -663,7 +732,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithBreak(RequestContent,RequestContext)']/*" />
         public virtual Response WithBreak(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithBreak");
             scope.Start();
@@ -685,7 +757,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithClassAsync(Class,CancellationToken)']/*" />
         public virtual async Task<Response> WithClassAsync(Class body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -699,7 +774,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithClass(Class,CancellationToken)']/*" />
         public virtual Response WithClass(Class body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -730,7 +808,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithClassAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithClassAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithClass");
             scope.Start();
@@ -769,7 +850,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithClass(RequestContent,RequestContext)']/*" />
         public virtual Response WithClass(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithClass");
             scope.Start();
@@ -791,7 +875,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithConstructorAsync(Constructor,CancellationToken)']/*" />
         public virtual async Task<Response> WithConstructorAsync(Constructor body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -805,7 +892,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithConstructor(Constructor,CancellationToken)']/*" />
         public virtual Response WithConstructor(Constructor body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -836,7 +926,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithConstructorAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithConstructorAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithConstructor");
             scope.Start();
@@ -875,7 +968,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithConstructor(RequestContent,RequestContext)']/*" />
         public virtual Response WithConstructor(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithConstructor");
             scope.Start();
@@ -897,7 +993,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithContinueAsync(Continue,CancellationToken)']/*" />
         public virtual async Task<Response> WithContinueAsync(Continue body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -911,7 +1010,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithContinue(Continue,CancellationToken)']/*" />
         public virtual Response WithContinue(Continue body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -942,7 +1044,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithContinueAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithContinueAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithContinue");
             scope.Start();
@@ -981,7 +1086,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithContinue(RequestContent,RequestContext)']/*" />
         public virtual Response WithContinue(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithContinue");
             scope.Start();
@@ -1003,7 +1111,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithDefAsync(Def,CancellationToken)']/*" />
         public virtual async Task<Response> WithDefAsync(Def body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -1017,7 +1128,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithDef(Def,CancellationToken)']/*" />
         public virtual Response WithDef(Def body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -1048,7 +1162,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithDefAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithDefAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithDef");
             scope.Start();
@@ -1087,7 +1204,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithDef(RequestContent,RequestContext)']/*" />
         public virtual Response WithDef(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithDef");
             scope.Start();
@@ -1109,7 +1229,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithDelAsync(Del,CancellationToken)']/*" />
         public virtual async Task<Response> WithDelAsync(Del body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -1123,7 +1246,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithDel(Del,CancellationToken)']/*" />
         public virtual Response WithDel(Del body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -1154,7 +1280,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithDelAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithDelAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithDel");
             scope.Start();
@@ -1193,7 +1322,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithDel(RequestContent,RequestContext)']/*" />
         public virtual Response WithDel(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithDel");
             scope.Start();
@@ -1215,7 +1347,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithElifAsync(Elif,CancellationToken)']/*" />
         public virtual async Task<Response> WithElifAsync(Elif body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -1229,7 +1364,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithElif(Elif,CancellationToken)']/*" />
         public virtual Response WithElif(Elif body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -1260,7 +1398,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithElifAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithElifAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithElif");
             scope.Start();
@@ -1299,7 +1440,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithElif(RequestContent,RequestContext)']/*" />
         public virtual Response WithElif(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithElif");
             scope.Start();
@@ -1321,7 +1465,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithElseAsync(Else,CancellationToken)']/*" />
         public virtual async Task<Response> WithElseAsync(Else body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -1335,7 +1482,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithElse(Else,CancellationToken)']/*" />
         public virtual Response WithElse(Else body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -1366,7 +1516,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithElseAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithElseAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithElse");
             scope.Start();
@@ -1405,7 +1558,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithElse(RequestContent,RequestContext)']/*" />
         public virtual Response WithElse(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithElse");
             scope.Start();
@@ -1427,7 +1583,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithExceptAsync(Except,CancellationToken)']/*" />
         public virtual async Task<Response> WithExceptAsync(Except body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -1441,7 +1600,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithExcept(Except,CancellationToken)']/*" />
         public virtual Response WithExcept(Except body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -1472,7 +1634,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithExceptAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithExceptAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithExcept");
             scope.Start();
@@ -1511,7 +1676,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithExcept(RequestContent,RequestContext)']/*" />
         public virtual Response WithExcept(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithExcept");
             scope.Start();
@@ -1533,7 +1701,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithExecAsync(Exec,CancellationToken)']/*" />
         public virtual async Task<Response> WithExecAsync(Exec body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -1547,7 +1718,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithExec(Exec,CancellationToken)']/*" />
         public virtual Response WithExec(Exec body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -1578,7 +1752,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithExecAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithExecAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithExec");
             scope.Start();
@@ -1617,7 +1794,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithExec(RequestContent,RequestContext)']/*" />
         public virtual Response WithExec(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithExec");
             scope.Start();
@@ -1639,7 +1819,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithFinallyAsync(Finally,CancellationToken)']/*" />
         public virtual async Task<Response> WithFinallyAsync(Finally body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -1653,7 +1836,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithFinally(Finally,CancellationToken)']/*" />
         public virtual Response WithFinally(Finally body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -1684,7 +1870,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithFinallyAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithFinallyAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithFinally");
             scope.Start();
@@ -1723,7 +1912,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithFinally(RequestContent,RequestContext)']/*" />
         public virtual Response WithFinally(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithFinally");
             scope.Start();
@@ -1745,7 +1937,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithForAsync(For,CancellationToken)']/*" />
         public virtual async Task<Response> WithForAsync(For body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -1759,7 +1954,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithFor(For,CancellationToken)']/*" />
         public virtual Response WithFor(For body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -1790,7 +1988,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithForAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithForAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithFor");
             scope.Start();
@@ -1829,7 +2030,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithFor(RequestContent,RequestContext)']/*" />
         public virtual Response WithFor(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithFor");
             scope.Start();
@@ -1851,7 +2055,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithFromAsync(From,CancellationToken)']/*" />
         public virtual async Task<Response> WithFromAsync(From body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -1865,7 +2072,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithFrom(From,CancellationToken)']/*" />
         public virtual Response WithFrom(From body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -1896,7 +2106,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithFromAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithFromAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithFrom");
             scope.Start();
@@ -1935,7 +2148,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithFrom(RequestContent,RequestContext)']/*" />
         public virtual Response WithFrom(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithFrom");
             scope.Start();
@@ -1957,7 +2173,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithGlobalAsync(Global,CancellationToken)']/*" />
         public virtual async Task<Response> WithGlobalAsync(Global body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -1971,7 +2190,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithGlobal(Global,CancellationToken)']/*" />
         public virtual Response WithGlobal(Global body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -2002,7 +2224,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithGlobalAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithGlobalAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithGlobal");
             scope.Start();
@@ -2041,7 +2266,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithGlobal(RequestContent,RequestContext)']/*" />
         public virtual Response WithGlobal(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithGlobal");
             scope.Start();
@@ -2063,7 +2291,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithIfAsync(If,CancellationToken)']/*" />
         public virtual async Task<Response> WithIfAsync(If body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -2077,7 +2308,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithIf(If,CancellationToken)']/*" />
         public virtual Response WithIf(If body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -2108,7 +2342,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithIfAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithIfAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithIf");
             scope.Start();
@@ -2147,7 +2384,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithIf(RequestContent,RequestContext)']/*" />
         public virtual Response WithIf(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithIf");
             scope.Start();
@@ -2169,7 +2409,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithImportAsync(Import,CancellationToken)']/*" />
         public virtual async Task<Response> WithImportAsync(Import body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -2183,7 +2426,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithImport(Import,CancellationToken)']/*" />
         public virtual Response WithImport(Import body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -2214,7 +2460,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithImportAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithImportAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithImport");
             scope.Start();
@@ -2253,7 +2502,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithImport(RequestContent,RequestContext)']/*" />
         public virtual Response WithImport(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithImport");
             scope.Start();
@@ -2275,7 +2527,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithInAsync(In,CancellationToken)']/*" />
         public virtual async Task<Response> WithInAsync(In body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -2289,7 +2544,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithIn(In,CancellationToken)']/*" />
         public virtual Response WithIn(In body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -2320,7 +2578,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithInAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithInAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithIn");
             scope.Start();
@@ -2359,7 +2620,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithIn(RequestContent,RequestContext)']/*" />
         public virtual Response WithIn(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithIn");
             scope.Start();
@@ -2381,7 +2645,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithIsAsync(Is,CancellationToken)']/*" />
         public virtual async Task<Response> WithIsAsync(Is body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -2395,7 +2662,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithIs(Is,CancellationToken)']/*" />
         public virtual Response WithIs(Is body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -2426,7 +2696,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithIsAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithIsAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithIs");
             scope.Start();
@@ -2465,7 +2738,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithIs(RequestContent,RequestContext)']/*" />
         public virtual Response WithIs(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithIs");
             scope.Start();
@@ -2487,7 +2763,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithLambdaAsync(Lambda,CancellationToken)']/*" />
         public virtual async Task<Response> WithLambdaAsync(Lambda body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -2501,7 +2780,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithLambda(Lambda,CancellationToken)']/*" />
         public virtual Response WithLambda(Lambda body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -2532,7 +2814,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithLambdaAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithLambdaAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithLambda");
             scope.Start();
@@ -2571,7 +2856,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithLambda(RequestContent,RequestContext)']/*" />
         public virtual Response WithLambda(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithLambda");
             scope.Start();
@@ -2593,7 +2881,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithNotAsync(Not,CancellationToken)']/*" />
         public virtual async Task<Response> WithNotAsync(Not body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -2607,7 +2898,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithNot(Not,CancellationToken)']/*" />
         public virtual Response WithNot(Not body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -2638,7 +2932,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithNotAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithNotAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithNot");
             scope.Start();
@@ -2677,7 +2974,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithNot(RequestContent,RequestContext)']/*" />
         public virtual Response WithNot(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithNot");
             scope.Start();
@@ -2699,7 +2999,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithOrAsync(Or,CancellationToken)']/*" />
         public virtual async Task<Response> WithOrAsync(Or body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -2713,7 +3016,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithOr(Or,CancellationToken)']/*" />
         public virtual Response WithOr(Or body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -2744,7 +3050,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithOrAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithOrAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithOr");
             scope.Start();
@@ -2783,7 +3092,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithOr(RequestContent,RequestContext)']/*" />
         public virtual Response WithOr(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithOr");
             scope.Start();
@@ -2805,7 +3117,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithPassAsync(Pass,CancellationToken)']/*" />
         public virtual async Task<Response> WithPassAsync(Pass body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -2819,7 +3134,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithPass(Pass,CancellationToken)']/*" />
         public virtual Response WithPass(Pass body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -2850,7 +3168,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithPassAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithPassAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithPass");
             scope.Start();
@@ -2889,7 +3210,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithPass(RequestContent,RequestContext)']/*" />
         public virtual Response WithPass(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithPass");
             scope.Start();
@@ -2911,7 +3235,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithRaiseAsync(Raise,CancellationToken)']/*" />
         public virtual async Task<Response> WithRaiseAsync(Raise body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -2925,7 +3252,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithRaise(Raise,CancellationToken)']/*" />
         public virtual Response WithRaise(Raise body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -2956,7 +3286,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithRaiseAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithRaiseAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithRaise");
             scope.Start();
@@ -2995,7 +3328,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithRaise(RequestContent,RequestContext)']/*" />
         public virtual Response WithRaise(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithRaise");
             scope.Start();
@@ -3017,7 +3353,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithReturnAsync(Return,CancellationToken)']/*" />
         public virtual async Task<Response> WithReturnAsync(Return body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -3031,7 +3370,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithReturn(Return,CancellationToken)']/*" />
         public virtual Response WithReturn(Return body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -3062,7 +3404,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithReturnAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithReturnAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithReturn");
             scope.Start();
@@ -3101,7 +3446,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithReturn(RequestContent,RequestContext)']/*" />
         public virtual Response WithReturn(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithReturn");
             scope.Start();
@@ -3123,7 +3471,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithTryAsync(Try,CancellationToken)']/*" />
         public virtual async Task<Response> WithTryAsync(Try body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -3137,7 +3488,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithTry(Try,CancellationToken)']/*" />
         public virtual Response WithTry(Try body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -3168,7 +3522,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithTryAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithTryAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithTry");
             scope.Start();
@@ -3207,7 +3564,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithTry(RequestContent,RequestContext)']/*" />
         public virtual Response WithTry(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithTry");
             scope.Start();
@@ -3229,7 +3589,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithWhileAsync(While,CancellationToken)']/*" />
         public virtual async Task<Response> WithWhileAsync(While body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -3243,7 +3606,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithWhile(While,CancellationToken)']/*" />
         public virtual Response WithWhile(While body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -3274,7 +3640,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithWhileAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithWhileAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithWhile");
             scope.Start();
@@ -3313,7 +3682,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithWhile(RequestContent,RequestContext)']/*" />
         public virtual Response WithWhile(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithWhile");
             scope.Start();
@@ -3335,7 +3707,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithWithAsync(With,CancellationToken)']/*" />
         public virtual async Task<Response> WithWithAsync(With body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -3349,7 +3724,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithWith(With,CancellationToken)']/*" />
         public virtual Response WithWith(With body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -3380,7 +3758,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithWithAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithWithAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithWith");
             scope.Start();
@@ -3419,7 +3800,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithWith(RequestContent,RequestContext)']/*" />
         public virtual Response WithWith(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithWith");
             scope.Start();
@@ -3441,7 +3825,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithYieldAsync(Yield,CancellationToken)']/*" />
         public virtual async Task<Response> WithYieldAsync(Yield body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -3455,7 +3842,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithYield(Yield,CancellationToken)']/*" />
         public virtual Response WithYield(Yield body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -3486,7 +3876,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithYieldAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithYieldAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithYield");
             scope.Start();
@@ -3525,7 +3918,10 @@ namespace SpecialWords
         /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithYield(RequestContent,RequestContext)']/*" />
         public virtual Response WithYield(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithYield");
             scope.Start();

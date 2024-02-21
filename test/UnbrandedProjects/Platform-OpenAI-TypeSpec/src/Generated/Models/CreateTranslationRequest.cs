@@ -3,7 +3,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.Collections.Generic;
 
 namespace OpenAI.Models
@@ -52,7 +51,10 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="file"/> is null. </exception>
         public CreateTranslationRequest(BinaryData file, CreateTranslationRequestModel model)
         {
-            ClientUtilities.AssertNotNull(file, nameof(file));
+            if (file == null)
+            {
+                throw new ArgumentNullException(nameof(file));
+            }
 
             File = file;
             Model = model;

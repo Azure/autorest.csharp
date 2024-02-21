@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using Azure.Core;
 
 namespace Azure.Storage.Tables.Models
 {
@@ -19,8 +18,14 @@ namespace Azure.Storage.Tables.Models
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="accessPolicy"/> is null. </exception>
         public SignedIdentifier(string id, AccessPolicy accessPolicy)
         {
-            Argument.AssertNotNull(id, nameof(id));
-            Argument.AssertNotNull(accessPolicy, nameof(accessPolicy));
+            if (id == null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+            if (accessPolicy == null)
+            {
+                throw new ArgumentNullException(nameof(accessPolicy));
+            }
 
             Id = id;
             AccessPolicy = accessPolicy;

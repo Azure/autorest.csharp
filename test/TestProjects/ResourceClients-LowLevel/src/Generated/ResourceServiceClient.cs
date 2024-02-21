@@ -48,8 +48,14 @@ namespace ResourceClients_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public ResourceServiceClient(Uri endpoint, AzureKeyCredential credential, ResourceServiceClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
-            Argument.AssertNotNull(credential, nameof(credential));
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
+            if (credential == null)
+            {
+                throw new ArgumentNullException(nameof(credential));
+            }
             options ??= new ResourceServiceClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -208,7 +214,14 @@ namespace ResourceClients_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="groupId"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual ResourceGroup GetResourceGroup(string groupId)
         {
-            Argument.AssertNotNullOrEmpty(groupId, nameof(groupId));
+            if (groupId == null)
+            {
+                throw new ArgumentNullException(nameof(groupId));
+            }
+            if (groupId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(groupId));
+            }
 
             return new ResourceGroup(ClientDiagnostics, _pipeline, _keyCredential, _endpoint, groupId);
         }

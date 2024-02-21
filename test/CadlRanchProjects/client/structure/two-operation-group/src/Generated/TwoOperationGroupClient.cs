@@ -42,7 +42,10 @@ namespace Client.Structure.Service.TwoOperationGroup
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public TwoOperationGroupClient(Uri endpoint, TwoOperationGroupClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
             options ??= new TwoOperationGroupClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -56,7 +59,14 @@ namespace Client.Structure.Service.TwoOperationGroup
         /// <exception cref="ArgumentException"> <paramref name="client"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual Group1 GetGroup1Client(string client)
         {
-            Argument.AssertNotNullOrEmpty(client, nameof(client));
+            if (client == null)
+            {
+                throw new ArgumentNullException(nameof(client));
+            }
+            if (client.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(client));
+            }
 
             return new Group1(ClientDiagnostics, _pipeline, _endpoint, client);
         }
@@ -67,7 +77,14 @@ namespace Client.Structure.Service.TwoOperationGroup
         /// <exception cref="ArgumentException"> <paramref name="client"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual Group2 GetGroup2Client(string client)
         {
-            Argument.AssertNotNullOrEmpty(client, nameof(client));
+            if (client == null)
+            {
+                throw new ArgumentNullException(nameof(client));
+            }
+            if (client.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(client));
+            }
 
             return new Group2(ClientDiagnostics, _pipeline, _endpoint, client);
         }

@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace _Specs_.Azure.Core.Traits.Models
 {
@@ -51,7 +50,10 @@ namespace _Specs_.Azure.Core.Traits.Models
         /// <exception cref="ArgumentNullException"> <paramref name="userActionResult"/> is null. </exception>
         internal UserActionResponse(string userActionResult)
         {
-            Argument.AssertNotNull(userActionResult, nameof(userActionResult));
+            if (userActionResult == null)
+            {
+                throw new ArgumentNullException(nameof(userActionResult));
+            }
 
             UserActionResult = userActionResult;
         }

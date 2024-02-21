@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
@@ -22,8 +21,14 @@ namespace CognitiveSearch.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="sourceFields"/> is null. </exception>
         public Suggester(string name, SearchMode searchMode, IEnumerable<string> sourceFields)
         {
-            Argument.AssertNotNull(name, nameof(name));
-            Argument.AssertNotNull(sourceFields, nameof(sourceFields));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (sourceFields == null)
+            {
+                throw new ArgumentNullException(nameof(sourceFields));
+            }
 
             Name = name;
             SearchMode = searchMode;

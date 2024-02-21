@@ -82,8 +82,18 @@ namespace MgmtResourceName
         /// <exception cref="ArgumentNullException"> <paramref name="displayResourceName"/> or <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<DisplayResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string displayResourceName, DisplayResourceData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(displayResourceName, nameof(displayResourceName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (displayResourceName == null)
+            {
+                throw new ArgumentNullException(nameof(displayResourceName));
+            }
+            if (displayResourceName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(displayResourceName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _displayResourceClientDiagnostics.CreateScope("DisplayResourceCollection.CreateOrUpdate");
             scope.Start();
@@ -130,8 +140,18 @@ namespace MgmtResourceName
         /// <exception cref="ArgumentNullException"> <paramref name="displayResourceName"/> or <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<DisplayResource> CreateOrUpdate(WaitUntil waitUntil, string displayResourceName, DisplayResourceData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(displayResourceName, nameof(displayResourceName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (displayResourceName == null)
+            {
+                throw new ArgumentNullException(nameof(displayResourceName));
+            }
+            if (displayResourceName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(displayResourceName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _displayResourceClientDiagnostics.CreateScope("DisplayResourceCollection.CreateOrUpdate");
             scope.Start();
@@ -176,7 +196,14 @@ namespace MgmtResourceName
         /// <exception cref="ArgumentNullException"> <paramref name="displayResourceName"/> is null. </exception>
         public virtual async Task<Response<DisplayResource>> GetAsync(string displayResourceName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(displayResourceName, nameof(displayResourceName));
+            if (displayResourceName == null)
+            {
+                throw new ArgumentNullException(nameof(displayResourceName));
+            }
+            if (displayResourceName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(displayResourceName));
+            }
 
             using var scope = _displayResourceClientDiagnostics.CreateScope("DisplayResourceCollection.Get");
             scope.Start();
@@ -220,7 +247,14 @@ namespace MgmtResourceName
         /// <exception cref="ArgumentNullException"> <paramref name="displayResourceName"/> is null. </exception>
         public virtual Response<DisplayResource> Get(string displayResourceName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(displayResourceName, nameof(displayResourceName));
+            if (displayResourceName == null)
+            {
+                throw new ArgumentNullException(nameof(displayResourceName));
+            }
+            if (displayResourceName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(displayResourceName));
+            }
 
             using var scope = _displayResourceClientDiagnostics.CreateScope("DisplayResourceCollection.Get");
             scope.Start();
@@ -321,7 +355,14 @@ namespace MgmtResourceName
         /// <exception cref="ArgumentNullException"> <paramref name="displayResourceName"/> is null. </exception>
         public virtual async Task<Response<bool>> ExistsAsync(string displayResourceName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(displayResourceName, nameof(displayResourceName));
+            if (displayResourceName == null)
+            {
+                throw new ArgumentNullException(nameof(displayResourceName));
+            }
+            if (displayResourceName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(displayResourceName));
+            }
 
             using var scope = _displayResourceClientDiagnostics.CreateScope("DisplayResourceCollection.Exists");
             scope.Start();
@@ -364,7 +405,14 @@ namespace MgmtResourceName
         /// <exception cref="ArgumentNullException"> <paramref name="displayResourceName"/> is null. </exception>
         public virtual Response<bool> Exists(string displayResourceName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(displayResourceName, nameof(displayResourceName));
+            if (displayResourceName == null)
+            {
+                throw new ArgumentNullException(nameof(displayResourceName));
+            }
+            if (displayResourceName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(displayResourceName));
+            }
 
             using var scope = _displayResourceClientDiagnostics.CreateScope("DisplayResourceCollection.Exists");
             scope.Start();
@@ -407,7 +455,14 @@ namespace MgmtResourceName
         /// <exception cref="ArgumentNullException"> <paramref name="displayResourceName"/> is null. </exception>
         public virtual async Task<NullableResponse<DisplayResource>> GetIfExistsAsync(string displayResourceName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(displayResourceName, nameof(displayResourceName));
+            if (displayResourceName == null)
+            {
+                throw new ArgumentNullException(nameof(displayResourceName));
+            }
+            if (displayResourceName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(displayResourceName));
+            }
 
             using var scope = _displayResourceClientDiagnostics.CreateScope("DisplayResourceCollection.GetIfExists");
             scope.Start();
@@ -452,7 +507,14 @@ namespace MgmtResourceName
         /// <exception cref="ArgumentNullException"> <paramref name="displayResourceName"/> is null. </exception>
         public virtual NullableResponse<DisplayResource> GetIfExists(string displayResourceName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(displayResourceName, nameof(displayResourceName));
+            if (displayResourceName == null)
+            {
+                throw new ArgumentNullException(nameof(displayResourceName));
+            }
+            if (displayResourceName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(displayResourceName));
+            }
 
             using var scope = _displayResourceClientDiagnostics.CreateScope("DisplayResourceCollection.GetIfExists");
             scope.Start();

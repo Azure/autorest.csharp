@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 using NamespaceForEnums;
 
 namespace CustomNamespace
@@ -55,8 +54,14 @@ namespace CustomNamespace
         /// <exception cref="ArgumentNullException"> <paramref name="customizedFlattenedStringProperty"/> or <paramref name="propertyToField"/> is null. </exception>
         public RenamedModelStruct(string customizedFlattenedStringProperty, string propertyToField, CustomFruitEnum? fruit, CustomDaysOfWeek? daysOfWeek)
         {
-            Argument.AssertNotNull(customizedFlattenedStringProperty, nameof(customizedFlattenedStringProperty));
-            Argument.AssertNotNull(propertyToField, nameof(propertyToField));
+            if (customizedFlattenedStringProperty == null)
+            {
+                throw new ArgumentNullException(nameof(customizedFlattenedStringProperty));
+            }
+            if (propertyToField == null)
+            {
+                throw new ArgumentNullException(nameof(propertyToField));
+            }
 
             CustomizedFlattenedStringProperty = customizedFlattenedStringProperty;
             PropertyToField = propertyToField;

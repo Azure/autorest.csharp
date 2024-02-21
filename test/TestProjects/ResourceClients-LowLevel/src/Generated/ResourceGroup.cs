@@ -160,7 +160,14 @@ namespace ResourceClients_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="itemId"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual Resource GetResource(string itemId)
         {
-            Argument.AssertNotNullOrEmpty(itemId, nameof(itemId));
+            if (itemId == null)
+            {
+                throw new ArgumentNullException(nameof(itemId));
+            }
+            if (itemId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(itemId));
+            }
 
             return new Resource(ClientDiagnostics, _pipeline, _keyCredential, _endpoint, GroupId, itemId);
         }

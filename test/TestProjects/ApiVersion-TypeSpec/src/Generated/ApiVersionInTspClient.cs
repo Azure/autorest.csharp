@@ -57,8 +57,14 @@ namespace ApiVersionInTsp
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public ApiVersionInTspClient(Uri endpoint, AzureKeyCredential credential, ApiVersionInTspClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
-            Argument.AssertNotNull(credential, nameof(credential));
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
+            if (credential == null)
+            {
+                throw new ArgumentNullException(nameof(credential));
+            }
             options ??= new ApiVersionInTspClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

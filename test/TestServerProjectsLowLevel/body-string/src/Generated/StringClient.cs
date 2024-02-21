@@ -47,8 +47,14 @@ namespace body_string_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public StringClient(Uri endpoint, AzureKeyCredential credential, AutoRestSwaggerBATServiceClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
-            Argument.AssertNotNull(credential, nameof(credential));
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
+            if (credential == null)
+            {
+                throw new ArgumentNullException(nameof(credential));
+            }
             options ??= new AutoRestSwaggerBATServiceClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -257,7 +263,10 @@ namespace body_string_LowLevel
         /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='PutEmptyAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutEmptyAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("StringClient.PutEmpty");
             scope.Start();
@@ -291,7 +300,10 @@ namespace body_string_LowLevel
         /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='PutEmpty(RequestContent,RequestContext)']/*" />
         public virtual Response PutEmpty(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("StringClient.PutEmpty");
             scope.Start();
@@ -385,7 +397,10 @@ namespace body_string_LowLevel
         /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='PutMbcsAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutMbcsAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("StringClient.PutMbcs");
             scope.Start();
@@ -419,7 +434,10 @@ namespace body_string_LowLevel
         /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='PutMbcs(RequestContent,RequestContext)']/*" />
         public virtual Response PutMbcs(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("StringClient.PutMbcs");
             scope.Start();
@@ -513,7 +531,10 @@ namespace body_string_LowLevel
         /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='PutWhitespaceAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutWhitespaceAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("StringClient.PutWhitespace");
             scope.Start();
@@ -547,7 +568,10 @@ namespace body_string_LowLevel
         /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='PutWhitespace(RequestContent,RequestContext)']/*" />
         public virtual Response PutWhitespace(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("StringClient.PutWhitespace");
             scope.Start();
@@ -761,7 +785,10 @@ namespace body_string_LowLevel
         /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='PutBase64UrlEncodedAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutBase64UrlEncodedAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("StringClient.PutBase64UrlEncoded");
             scope.Start();
@@ -795,7 +822,10 @@ namespace body_string_LowLevel
         /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='PutBase64UrlEncoded(RequestContent,RequestContext)']/*" />
         public virtual Response PutBase64UrlEncoded(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("StringClient.PutBase64UrlEncoded");
             scope.Start();

@@ -60,7 +60,10 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="job"/> is null. </exception>
         public virtual async Task<Result<FineTuningJob>> CreateAsync(CreateFineTuningJobRequest job, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNull(job, nameof(job));
+            if (job == null)
+            {
+                throw new ArgumentNullException(nameof(job));
+            }
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             using RequestBody content = job.ToRequestBody();
@@ -81,7 +84,10 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="job"/> is null. </exception>
         public virtual Result<FineTuningJob> Create(CreateFineTuningJobRequest job, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNull(job, nameof(job));
+            if (job == null)
+            {
+                throw new ArgumentNullException(nameof(job));
+            }
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             using RequestBody content = job.ToRequestBody();
@@ -116,7 +122,10 @@ namespace OpenAI
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> CreateAsync(RequestBody content, RequestOptions context = null)
         {
-            ClientUtilities.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateSpan("FineTuningJobs.Create");
             scope.Start();
@@ -159,7 +168,10 @@ namespace OpenAI
         /// <returns> The response returned from the service. </returns>
         public virtual Result Create(RequestBody content, RequestOptions context = null)
         {
-            ClientUtilities.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateSpan("FineTuningJobs.Create");
             scope.Start();
@@ -278,7 +290,14 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual async Task<Result<FineTuningJob>> RetrieveAsync(string fineTuningJobId, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
+            if (fineTuningJobId == null)
+            {
+                throw new ArgumentNullException(nameof(fineTuningJobId));
+            }
+            if (fineTuningJobId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(fineTuningJobId));
+            }
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             Result result = await RetrieveAsync(fineTuningJobId, context).ConfigureAwait(false);
@@ -296,7 +315,14 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual Result<FineTuningJob> Retrieve(string fineTuningJobId, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
+            if (fineTuningJobId == null)
+            {
+                throw new ArgumentNullException(nameof(fineTuningJobId));
+            }
+            if (fineTuningJobId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(fineTuningJobId));
+            }
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             Result result = Retrieve(fineTuningJobId, context);
@@ -328,7 +354,14 @@ namespace OpenAI
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> RetrieveAsync(string fineTuningJobId, RequestOptions context)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
+            if (fineTuningJobId == null)
+            {
+                throw new ArgumentNullException(nameof(fineTuningJobId));
+            }
+            if (fineTuningJobId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(fineTuningJobId));
+            }
 
             using var scope = ClientDiagnostics.CreateSpan("FineTuningJobs.Retrieve");
             scope.Start();
@@ -369,7 +402,14 @@ namespace OpenAI
         /// <returns> The response returned from the service. </returns>
         public virtual Result Retrieve(string fineTuningJobId, RequestOptions context)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
+            if (fineTuningJobId == null)
+            {
+                throw new ArgumentNullException(nameof(fineTuningJobId));
+            }
+            if (fineTuningJobId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(fineTuningJobId));
+            }
 
             using var scope = ClientDiagnostics.CreateSpan("FineTuningJobs.Retrieve");
             scope.Start();
@@ -394,7 +434,14 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual async Task<Result<ListFineTuningJobEventsResponse>> GetEventsAsync(string fineTuningJobId, string after = null, int? limit = null, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
+            if (fineTuningJobId == null)
+            {
+                throw new ArgumentNullException(nameof(fineTuningJobId));
+            }
+            if (fineTuningJobId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(fineTuningJobId));
+            }
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             Result result = await GetEventsAsync(fineTuningJobId, after, limit, context).ConfigureAwait(false);
@@ -410,7 +457,14 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual Result<ListFineTuningJobEventsResponse> GetEvents(string fineTuningJobId, string after = null, int? limit = null, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
+            if (fineTuningJobId == null)
+            {
+                throw new ArgumentNullException(nameof(fineTuningJobId));
+            }
+            if (fineTuningJobId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(fineTuningJobId));
+            }
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             Result result = GetEvents(fineTuningJobId, after, limit, context);
@@ -442,7 +496,14 @@ namespace OpenAI
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> GetEventsAsync(string fineTuningJobId, string after, int? limit, RequestOptions context)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
+            if (fineTuningJobId == null)
+            {
+                throw new ArgumentNullException(nameof(fineTuningJobId));
+            }
+            if (fineTuningJobId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(fineTuningJobId));
+            }
 
             using var scope = ClientDiagnostics.CreateSpan("FineTuningJobs.GetEvents");
             scope.Start();
@@ -483,7 +544,14 @@ namespace OpenAI
         /// <returns> The response returned from the service. </returns>
         public virtual Result GetEvents(string fineTuningJobId, string after, int? limit, RequestOptions context)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
+            if (fineTuningJobId == null)
+            {
+                throw new ArgumentNullException(nameof(fineTuningJobId));
+            }
+            if (fineTuningJobId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(fineTuningJobId));
+            }
 
             using var scope = ClientDiagnostics.CreateSpan("FineTuningJobs.GetEvents");
             scope.Start();
@@ -506,7 +574,14 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual async Task<Result<FineTuningJob>> CancelAsync(string fineTuningJobId, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
+            if (fineTuningJobId == null)
+            {
+                throw new ArgumentNullException(nameof(fineTuningJobId));
+            }
+            if (fineTuningJobId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(fineTuningJobId));
+            }
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             Result result = await CancelAsync(fineTuningJobId, context).ConfigureAwait(false);
@@ -520,7 +595,14 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual Result<FineTuningJob> Cancel(string fineTuningJobId, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
+            if (fineTuningJobId == null)
+            {
+                throw new ArgumentNullException(nameof(fineTuningJobId));
+            }
+            if (fineTuningJobId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(fineTuningJobId));
+            }
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             Result result = Cancel(fineTuningJobId, context);
@@ -550,7 +632,14 @@ namespace OpenAI
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> CancelAsync(string fineTuningJobId, RequestOptions context)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
+            if (fineTuningJobId == null)
+            {
+                throw new ArgumentNullException(nameof(fineTuningJobId));
+            }
+            if (fineTuningJobId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(fineTuningJobId));
+            }
 
             using var scope = ClientDiagnostics.CreateSpan("FineTuningJobs.Cancel");
             scope.Start();
@@ -589,7 +678,14 @@ namespace OpenAI
         /// <returns> The response returned from the service. </returns>
         public virtual Result Cancel(string fineTuningJobId, RequestOptions context)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fineTuningJobId, nameof(fineTuningJobId));
+            if (fineTuningJobId == null)
+            {
+                throw new ArgumentNullException(nameof(fineTuningJobId));
+            }
+            if (fineTuningJobId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(fineTuningJobId));
+            }
 
             using var scope = ClientDiagnostics.CreateSpan("FineTuningJobs.Cancel");
             scope.Start();

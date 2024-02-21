@@ -59,7 +59,10 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="prompt"/> is null. </exception>
         public CreateCompletionRequest(CreateCompletionRequestModel model, BinaryData prompt)
         {
-            ClientUtilities.AssertNotNull(prompt, nameof(prompt));
+            if (prompt == null)
+            {
+                throw new ArgumentNullException(nameof(prompt));
+            }
 
             Model = model;
             Prompt = prompt;

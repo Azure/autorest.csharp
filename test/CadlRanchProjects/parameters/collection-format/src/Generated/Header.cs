@@ -62,7 +62,10 @@ namespace Parameters.CollectionFormat
         /// <include file="Docs/Header.xml" path="doc/members/member[@name='CsvAsync(IEnumerable{string},RequestContext)']/*" />
         public virtual async Task<Response> CsvAsync(IEnumerable<string> colors, RequestContext context = null)
         {
-            Argument.AssertNotNull(colors, nameof(colors));
+            if (colors == null)
+            {
+                throw new ArgumentNullException(nameof(colors));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Header.Csv");
             scope.Start();
@@ -97,7 +100,10 @@ namespace Parameters.CollectionFormat
         /// <include file="Docs/Header.xml" path="doc/members/member[@name='Csv(IEnumerable{string},RequestContext)']/*" />
         public virtual Response Csv(IEnumerable<string> colors, RequestContext context = null)
         {
-            Argument.AssertNotNull(colors, nameof(colors));
+            if (colors == null)
+            {
+                throw new ArgumentNullException(nameof(colors));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Header.Csv");
             scope.Start();

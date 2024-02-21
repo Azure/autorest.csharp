@@ -3,7 +3,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -50,7 +49,10 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         internal ImagesResponse(DateTimeOffset created, IEnumerable<Image> data)
         {
-            ClientUtilities.AssertNotNull(data, nameof(data));
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             Created = created;
             Data = data.ToList();
