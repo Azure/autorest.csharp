@@ -286,7 +286,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         new BoolExpression(propertyOverrideVariables.PropertyOverrides.Invoke("TryGetValue", Nameof(property.Value),
                             new KeywordExpression("out", propertyOverrideVariables.PropertyOverride))))));
 
-            var propertyNameString = $"{indent}{property.SerializedName}: ";
+            var formattedPropertyName = $"{indent}{property.SerializedName}: ";
             // we write the properties if there is a value or an override for that property
             yield return WrapInIsDefinedOrPropertyOverride(
                 property,
@@ -296,13 +296,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     propertyOverrideVariables.HasPropertyOverride,
                 new[]
                     {
-                        stringBuilder.Append(propertyNameString),
+                        stringBuilder.Append(formattedPropertyName),
                         new IfElseStatement(
                             new BoolExpression(propertyOverrideVariables.HasPropertyOverride),
                             stringBuilder.AppendLine(new FormattableStringExpression($"{{0}}",propertyOverrideVariables.PropertyOverride)),
                             property.CustomSerializationMethodName is {} serializationMethodName
                                 ? InvokeCustomBicepSerializationMethod(serializationMethodName, stringBuilder)
-                                : SerializeExpression(stringBuilder, propertyNameString, property.ValueSerialization!, property.Value, spaces))
+                                : SerializeExpression(stringBuilder, formattedPropertyName, property.ValueSerialization!, property.Value, spaces))
                     }));
 
             yield return EmptyLine;
@@ -310,7 +310,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static MethodBodyStatement SerializeExpression(
             StringBuilderExpression stringBuilder,
-            string propertyName,
+            string formattedPropertyName,
             BicepSerialization valueSerialization,
             ValueExpression expression,
             int spaces,
@@ -320,19 +320,19 @@ namespace AutoRest.CSharp.Common.Output.Builders
             {
                 BicepArraySerialization array => SerializeArray(
                     stringBuilder,
-                    propertyName,
+                    formattedPropertyName,
                     array,
                     new EnumerableExpression(TypeFactory.GetElementType(array.ImplementationType), expression),
                     spaces),
                 BicepDictionarySerialization dictionary => SerializeDictionary(
                     stringBuilder,
-                    propertyName,
+                    formattedPropertyName,
                     dictionary,
                     new DictionaryExpression(dictionary.Type.Arguments[0], dictionary.Type.Arguments[1], expression),
                     spaces),
                 BicepValueSerialization value => SerializeValue(
                     stringBuilder,
-                    propertyName,
+                    formattedPropertyName,
                     value,
                     expression,
                     spaces,
@@ -387,7 +387,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static MethodBodyStatement SerializeValue(
             StringBuilderExpression stringBuilder,
-            string propertyName,
+            string formattedPropertyName,
             BicepValueSerialization valueSerialization,
             ValueExpression expression,
             int spaces,
@@ -471,7 +471,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                                     "-",
                                     stringBuilder.Property(nameof(StringBuilder.Length)),
                                     emptyObjectLength),
-                                Literal(propertyName).Property(nameof(string.Length))))
+                                Literal(formattedPropertyName).Property(nameof(string.Length))))
                     }
             };
         }
