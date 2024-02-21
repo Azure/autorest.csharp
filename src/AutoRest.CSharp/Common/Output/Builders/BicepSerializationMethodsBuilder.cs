@@ -3,17 +3,14 @@
 
 using System;
 using System.ClientModel.Primitives;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Text;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization.Bicep;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -45,6 +42,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private static readonly Parameter IndentFirstLine =
             new Parameter("indentFirstLine", null, typeof(bool), null, ValidationType.None, null);
 
+        private static readonly Parameter FormattedPropertyName =
+            new Parameter("formattedPropertyName", null, typeof(string), null, ValidationType.None, null);
+
         private static readonly ValueExpression FormatExpression = new ModelReaderWriterOptionsExpression(KnownParameters.Serializations.Options).Format;
 
         public static IEnumerable<Method> BuildBicepSerializationMethods(BicepObjectSerialization objectSerialization)
@@ -72,7 +72,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     {
                         new Parameter("stringBuilder", null, typeof(StringBuilder), null, ValidationType.None,
                             null),
-                        ChildObject, KnownParameters.Serializations.Options, Spaces, IndentFirstLine
+                        ChildObject,
+                        KnownParameters.Serializations.Options,
+                        Spaces,
+                        IndentFirstLine,
+                        FormattedPropertyName
                     }),
                 WriteAppendChildObject().ToArray());
         }
@@ -214,6 +218,30 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             VariableReference data = new VariableReference(typeof(BinaryData), "data");
 
+            var emptyObjectLength = new VariableReference(typeof(int), "emptyObjectLength");
+            var length = new VariableReference(typeof(int), "length");
+            var stringBuilder = new StringBuilderExpression(new ParameterReference(StringBuilderParameter));
+
+            yield return Declare(
+                emptyObjectLength,
+                new BinaryOperatorExpression("+",
+                    new BinaryOperatorExpression("+",
+                        new BinaryOperatorExpression("+",
+                            // 2 chars for open and close brace
+                            new ConstantExpression(new Constant(2, typeof(int))),
+                            Spaces),
+                        // 2 new lines
+                        new TypeReference(typeof(Environment)).Property(nameof(Environment.NewLine))
+                            .Property(nameof(string.Length))),
+                    new TypeReference(typeof(Environment)).Property(nameof(Environment.NewLine))
+                        .Property(nameof(string.Length))));
+
+            yield return Declare(length, stringBuilder.Property(nameof(StringBuilder.Length)));
+
+            var inMultilineString = new VariableReference(typeof(bool), "inMultilineString");
+            yield return Declare(inMultilineString, BoolExpression.False);
+            yield return EmptyLine;
+
             yield return Declare(
                 data,
                 new InvokeStaticMethodExpression(typeof(ModelReaderWriter), nameof(ModelReaderWriter.Write),
@@ -239,10 +267,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     null,
                     false)
             );
-            var stringBuilder = new StringBuilderExpression(new ParameterReference(StringBuilderParameter));
             var line = new VariableReference(typeof(string), "line");
-            var inMultilineString = new VariableReference(typeof(bool), "inMultilineString");
-            yield return Declare(inMultilineString, BoolExpression.False);
+
             yield return new ForStatement("i", new ListExpression(typeof(string), lines), out var indexer)
             {
                 Declare(line, new IndexerExpression(lines, indexer)),
@@ -268,6 +294,23 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         Not(new BoolExpression(IndentFirstLine))),
                     stringBuilder.AppendLine(new FormattableStringExpression("{0}", line)),
                     stringBuilder.AppendLine(new FormattableStringExpression("{0}{1}", indent, line)))
+            };
+
+            yield return new IfStatement(
+                new BoolExpression(
+                    Equal(
+                        stringBuilder.Property(nameof(StringBuilder.Length)),
+                        new BinaryOperatorExpression("+", length, emptyObjectLength))))
+            {
+                Assign(
+                    stringBuilder.Property(nameof(StringBuilder.Length)),
+                    new BinaryOperatorExpression(
+                        "-",
+                        new BinaryOperatorExpression(
+                            "-",
+                            stringBuilder.Property(nameof(StringBuilder.Length)),
+                            emptyObjectLength),
+                        Literal(new StringExpression(FormattedPropertyName)).Property(nameof(string.Length))))
             };
         }
 
@@ -425,54 +468,20 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 }
             }
 
-            var currentIndent = new VariableReference(typeof(int), "currentIndent");
-            var emptyObjectLength = new VariableReference(typeof(int), "emptyObjectLength");
-            var length = new VariableReference(typeof(int), "length");
-
-            // If the child object is empty, we will remove it and the property name from the bicep.
-
-            int childObjectIndent = isArrayElement ? spaces + 2 : spaces;
-
             return new MethodBodyStatement[]
             {
-                Declare(currentIndent, new ConstantExpression(new Constant(childObjectIndent, typeof(int)))),
-                Declare(
-                    emptyObjectLength,
-                    new BinaryOperatorExpression("+",
-                        new BinaryOperatorExpression("+",
-                            new BinaryOperatorExpression("+",
-                                    // 2 chars for open and close brace
-                                    new ConstantExpression(new Constant(2, typeof(int))),
-                                currentIndent),
-                            // 2 new lines
-                            new TypeReference(typeof(Environment)).Property(nameof(Environment.NewLine)).Property(nameof(string.Length))),
-                        new TypeReference(typeof(Environment)).Property(nameof(Environment.NewLine)).Property(nameof(string.Length)))),
-                Declare(length, stringBuilder.Property(nameof(StringBuilder.Length))),
                 new InvokeStaticMethodStatement(
                     null,
                     AppendChildObjectMethodName,
                     new[]
                     {
-                        stringBuilder, expression, KnownParameters.Serializations.Options,
-                        currentIndent,
-                        isArrayElement ? BoolExpression.True : BoolExpression.False
-                    }),
-                    new IfStatement(
-                        new BoolExpression(
-                            Equal(
-                                stringBuilder.Property(nameof(StringBuilder.Length)),
-                                new BinaryOperatorExpression("+", length, emptyObjectLength))))
-                    {
-                        Assign(
-                            stringBuilder.Property(nameof(StringBuilder.Length)),
-                            new BinaryOperatorExpression(
-                                "-",
-                            new BinaryOperatorExpression(
-                                    "-",
-                                    stringBuilder.Property(nameof(StringBuilder.Length)),
-                                    emptyObjectLength),
-                                Literal(formattedPropertyName).Property(nameof(string.Length))))
-                    }
+                        stringBuilder,
+                        expression,
+                        KnownParameters.Serializations.Options,
+                        new ConstantExpression(new Constant(isArrayElement ? spaces + 2 : spaces, typeof(int))),
+                        isArrayElement ? BoolExpression.True : BoolExpression.False,
+                        Literal(formattedPropertyName)
+                    })
             };
         }
 
