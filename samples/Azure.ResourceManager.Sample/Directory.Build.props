@@ -1,6 +1,6 @@
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <NoWarn>$(NoWarn);AZC0030;AZC0032</NoWarn>
+    <NoWarn>$(NoWarn);AZC0030;AZC0032;NU1605</NoWarn>
   </PropertyGroup>
 
   <Import Project="..\..\Directory.Build.props" />

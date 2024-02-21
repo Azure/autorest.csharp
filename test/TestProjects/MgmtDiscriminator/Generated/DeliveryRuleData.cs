@@ -68,9 +68,10 @@ namespace MgmtDiscriminator
         /// <param name="duration"> A duration property to verify bicep generation. </param>
         /// <param name="number"> A number property to verify bicep generation. </param>
         /// <param name="uri"> A number property to verify bicep generation. </param>
+        /// <param name="shellProperty"> A shell property to verify bicep generation for empty objects. </param>
         /// <param name="properties"> The properties. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal DeliveryRuleData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, bool? boolProperty, AzureLocation? location, AzureLocation? locationWithCustomSerialization, DateTimeOffset? dateTimeProperty, TimeSpan? duration, int? number, Uri uri, DeliveryRuleProperties properties, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
+        internal DeliveryRuleData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, bool? boolProperty, AzureLocation? location, AzureLocation? locationWithCustomSerialization, DateTimeOffset? dateTimeProperty, TimeSpan? duration, int? number, Uri uri, Shell shellProperty, DeliveryRuleProperties properties, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             BoolProperty = boolProperty;
             Location = location;
@@ -79,6 +80,7 @@ namespace MgmtDiscriminator
             Duration = duration;
             Number = number;
             Uri = uri;
+            ShellProperty = shellProperty;
             Properties = properties;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
@@ -104,6 +106,9 @@ namespace MgmtDiscriminator
         /// <summary> A number property to verify bicep generation. </summary>
         [WirePath("uri")]
         public Uri Uri { get; set; }
+        /// <summary> A shell property to verify bicep generation for empty objects. </summary>
+        [WirePath("shellProperty")]
+        public Shell ShellProperty { get; set; }
         /// <summary> The properties. </summary>
         [WirePath("properties")]
         public DeliveryRuleProperties Properties { get; set; }

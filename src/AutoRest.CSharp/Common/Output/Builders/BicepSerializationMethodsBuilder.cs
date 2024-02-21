@@ -3,7 +3,6 @@
 
 using System;
 using System.ClientModel.Primitives;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +11,6 @@ using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization.Bicep;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -21,6 +19,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 using Constant = AutoRest.CSharp.Output.Models.Shared.Constant;
+using ConstantExpression = AutoRest.CSharp.Common.Output.Expressions.ValueExpressions.ConstantExpression;
 using Parameter = AutoRest.CSharp.Output.Models.Shared.Parameter;
 using ValidationType = AutoRest.CSharp.Output.Models.Shared.ValidationType;
 
@@ -42,6 +41,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static readonly Parameter IndentFirstLine =
             new Parameter("indentFirstLine", null, typeof(bool), null, ValidationType.None, null);
+
+        private static readonly Parameter FormattedPropertyName =
+            new Parameter("formattedPropertyName", null, typeof(string), null, ValidationType.None, null);
 
         private static readonly ValueExpression FormatExpression = new ModelReaderWriterOptionsExpression(KnownParameters.Serializations.Options).Format;
 
@@ -70,7 +72,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     {
                         new Parameter("stringBuilder", null, typeof(StringBuilder), null, ValidationType.None,
                             null),
-                        ChildObject, KnownParameters.Serializations.Options, Spaces, IndentFirstLine
+                        ChildObject,
+                        KnownParameters.Serializations.Options,
+                        Spaces,
+                        IndentFirstLine,
+                        FormattedPropertyName
                     }),
                 WriteAppendChildObject().ToArray());
         }
@@ -212,6 +218,30 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             VariableReference data = new VariableReference(typeof(BinaryData), "data");
 
+            var emptyObjectLength = new VariableReference(typeof(int), "emptyObjectLength");
+            var length = new VariableReference(typeof(int), "length");
+            var stringBuilder = new StringBuilderExpression(new ParameterReference(StringBuilderParameter));
+
+            yield return Declare(
+                emptyObjectLength,
+                new BinaryOperatorExpression("+",
+                    new BinaryOperatorExpression("+",
+                        new BinaryOperatorExpression("+",
+                            // 2 chars for open and close brace
+                            new ConstantExpression(new Constant(2, typeof(int))),
+                            Spaces),
+                        // 2 new lines
+                        new TypeReference(typeof(Environment)).Property(nameof(Environment.NewLine))
+                            .Property(nameof(string.Length))),
+                    new TypeReference(typeof(Environment)).Property(nameof(Environment.NewLine))
+                        .Property(nameof(string.Length))));
+
+            yield return Declare(length, stringBuilder.Property(nameof(StringBuilder.Length)));
+
+            var inMultilineString = new VariableReference(typeof(bool), "inMultilineString");
+            yield return Declare(inMultilineString, BoolExpression.False);
+            yield return EmptyLine;
+
             yield return Declare(
                 data,
                 new InvokeStaticMethodExpression(typeof(ModelReaderWriter), nameof(ModelReaderWriter.Write),
@@ -237,10 +267,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     null,
                     false)
             );
-            var stringBuilder = new StringBuilderExpression(new ParameterReference(StringBuilderParameter));
             var line = new VariableReference(typeof(string), "line");
-            var inMultilineString = new VariableReference(typeof(bool), "inMultilineString");
-            yield return Declare(inMultilineString, BoolExpression.False);
+
             yield return new ForStatement("i", new ListExpression(typeof(string), lines), out var indexer)
             {
                 Declare(line, new IndexerExpression(lines, indexer)),
@@ -264,8 +292,25 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 new IfElseStatement(
                     And(Equal(indexer, new ConstantExpression(new Constant(0, typeof(int)))),
                         Not(new BoolExpression(IndentFirstLine))),
-                    stringBuilder.AppendLine(new FormattableStringExpression(" {0}", line)),
+                    stringBuilder.AppendLine(new FormattableStringExpression("{0}", line)),
                     stringBuilder.AppendLine(new FormattableStringExpression("{0}{1}", indent, line)))
+            };
+
+            yield return new IfStatement(
+                new BoolExpression(
+                    Equal(
+                        stringBuilder.Property(nameof(StringBuilder.Length)),
+                        new BinaryOperatorExpression("+", length, emptyObjectLength))))
+            {
+                Assign(
+                    stringBuilder.Property(nameof(StringBuilder.Length)),
+                    new BinaryOperatorExpression(
+                        "-",
+                        new BinaryOperatorExpression(
+                            "-",
+                            stringBuilder.Property(nameof(StringBuilder.Length)),
+                            emptyObjectLength),
+                        Literal(new StringExpression(FormattedPropertyName)).Property(nameof(string.Length))))
             };
         }
 
@@ -284,6 +329,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         new BoolExpression(propertyOverrideVariables.PropertyOverrides.Invoke("TryGetValue", Nameof(property.Value),
                             new KeywordExpression("out", propertyOverrideVariables.PropertyOverride))))));
 
+            var formattedPropertyName = $"{indent}{property.SerializedName}: ";
             // we write the properties if there is a value or an override for that property
             yield return WrapInIsDefinedOrPropertyOverride(
                 property,
@@ -293,13 +339,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     propertyOverrideVariables.HasPropertyOverride,
                 new[]
                     {
-                        stringBuilder.Append($"{indent}{property.SerializedName}:"),
+                        stringBuilder.Append(formattedPropertyName),
                         new IfElseStatement(
                             new BoolExpression(propertyOverrideVariables.HasPropertyOverride),
-                            stringBuilder.AppendLine(new FormattableStringExpression($" {{0}}",propertyOverrideVariables.PropertyOverride)),
+                            stringBuilder.AppendLine(new FormattableStringExpression($"{{0}}",propertyOverrideVariables.PropertyOverride)),
                             property.CustomSerializationMethodName is {} serializationMethodName
                                 ? InvokeCustomBicepSerializationMethod(serializationMethodName, stringBuilder)
-                                : SerializeExpression(stringBuilder, property.ValueSerialization!, property.Value, spaces))
+                                : SerializeExpression(stringBuilder, formattedPropertyName, property.ValueSerialization!, property.Value, spaces))
                     }));
 
             yield return EmptyLine;
@@ -307,25 +353,29 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static MethodBodyStatement SerializeExpression(
             StringBuilderExpression stringBuilder,
-            BicepSerialization propertyValueSerialization,
+            string formattedPropertyName,
+            BicepSerialization valueSerialization,
             ValueExpression expression,
             int spaces,
             bool isArrayElement = false)
         {
-            return propertyValueSerialization switch
+            return valueSerialization switch
             {
                 BicepArraySerialization array => SerializeArray(
                     stringBuilder,
+                    formattedPropertyName,
                     array,
                     new EnumerableExpression(TypeFactory.GetElementType(array.ImplementationType), expression),
                     spaces),
                 BicepDictionarySerialization dictionary => SerializeDictionary(
                     stringBuilder,
+                    formattedPropertyName,
                     dictionary,
                     new DictionaryExpression(dictionary.Type.Arguments[0], dictionary.Type.Arguments[1], expression),
                     spaces),
                 BicepValueSerialization value => SerializeValue(
                     stringBuilder,
+                    formattedPropertyName,
                     value,
                     expression,
                     spaces,
@@ -336,6 +386,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static MethodBodyStatement SerializeArray(
             StringBuilderExpression stringBuilder,
+            string propertyName,
             BicepArraySerialization arraySerialization,
             EnumerableExpression array,
             int spaces)
@@ -343,11 +394,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
             string indent = new string(' ', spaces);
             return new[]
             {
-                stringBuilder.AppendLine(" ["),
+                stringBuilder.AppendLine("["),
                 new ForeachStatement("item", array, out var item)
                 {
                     CheckCollectionItemForNull(stringBuilder, arraySerialization.ValueSerialization, item),
-                    SerializeExpression(stringBuilder, arraySerialization.ValueSerialization, item, spaces, true)
+                    SerializeExpression(stringBuilder, propertyName, arraySerialization.ValueSerialization, item, spaces, true)
                 },
                 stringBuilder.AppendLine($"{indent}]"),
             };
@@ -355,6 +406,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static MethodBodyStatement SerializeDictionary(
             StringBuilderExpression stringBuilder,
+            string propertyName,
             BicepDictionarySerialization dictionarySerialization,
             DictionaryExpression dictionary,
             int spaces)
@@ -363,14 +415,14 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             return new[]
             {
-                stringBuilder.AppendLine(" {"),
+                stringBuilder.AppendLine("{"),
                 new ForeachStatement("item", dictionary, out KeyValuePairExpression keyValuePair)
                 {
                     stringBuilder.Append(
                         new FormattableStringExpression(
-                            $"{indent}{indent}'{{0}}':", keyValuePair.Key)),
+                            $"{indent}{indent}'{{0}}': ", keyValuePair.Key)),
                     CheckCollectionItemForNull(stringBuilder, dictionarySerialization.ValueSerialization, keyValuePair.Value),
-                    SerializeExpression(stringBuilder, dictionarySerialization.ValueSerialization, keyValuePair.Value, spaces + 2)
+                    SerializeExpression(stringBuilder, propertyName, dictionarySerialization.ValueSerialization, keyValuePair.Value, spaces + 2)
                 },
                 stringBuilder.AppendLine($"{indent}}}")
             };
@@ -378,13 +430,14 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static MethodBodyStatement SerializeValue(
             StringBuilderExpression stringBuilder,
+            string formattedPropertyName,
             BicepValueSerialization valueSerialization,
             ValueExpression expression,
             int spaces,
             bool isArrayElement = false)
         {
 
-            var indent = isArrayElement ? new string(' ', spaces + 2) : new string(' ', 1);
+            var indent = isArrayElement ? new string(' ', spaces + 2) : new string(' ', 0);
 
             if (valueSerialization.Type.IsFrameworkType)
             {
@@ -415,16 +468,19 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 }
             }
 
-            return new[]
+            return new MethodBodyStatement[]
             {
                 new InvokeStaticMethodStatement(
                     null,
                     AppendChildObjectMethodName,
                     new[]
                     {
-                        stringBuilder, expression, KnownParameters.Serializations.Options,
+                        stringBuilder,
+                        expression,
+                        KnownParameters.Serializations.Options,
                         new ConstantExpression(new Constant(isArrayElement ? spaces + 2 : spaces, typeof(int))),
-                        isArrayElement ? BoolExpression.True : BoolExpression.False
+                        isArrayElement ? BoolExpression.True : BoolExpression.False,
+                        Literal(formattedPropertyName)
                     })
             };
         }
