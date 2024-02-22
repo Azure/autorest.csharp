@@ -43,18 +43,18 @@ namespace AutoRest.CSharp.Common.Output.Models
             public static ValueExpression ToList(ValueExpression collection) => new InvokeStaticMethodExpression(Configuration.ApiTypes.OptionalType, Configuration.ApiTypes.OptionalToListName, new[] { collection });
             public static ValueExpression ToNullable(ValueExpression optional) => new InvokeStaticMethodExpression(Configuration.ApiTypes.OptionalType, Configuration.ApiTypes.OptionalToNullableName, new[] { optional });
 
-            public static MethodBodyStatement WrapInIsDefined(PropertySerialization serialization, MethodBodyStatement statement, bool forceCheck = false)
+            public static MethodBodyStatement WrapInIsDefined(PropertySerialization serialization, MethodBodyStatement statement, bool isBicep = false)
             {
-                if (!forceCheck)
+                //bicep shares its serialization types with JsonSerialization so we need the additional bool to know if we are serializing bicep.
+                //if we are serializing bicep, we don't need to check if the property is required
+                if (!isBicep && serialization.IsRequired)
                 {
-                    if (serialization.IsRequired)
-                    {
-                        return statement;
-                    }
-                    if (!serialization.Value.Type.IsNullable && serialization.Value.Type.IsValueType)
-                    {
-                        return statement;
-                    }
+                    return statement;
+                }
+
+                if (!serialization.Value.Type.IsNullable && serialization.Value.Type.IsValueType)
+                {
+                    return statement;
                 }
 
                 return TypeFactory.IsCollectionType(serialization.Value.Type) && !TypeFactory.IsReadOnlyMemory(serialization.Value.Type)
