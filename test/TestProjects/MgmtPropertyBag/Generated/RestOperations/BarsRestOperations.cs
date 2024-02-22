@@ -303,7 +303,7 @@ namespace MgmtPropertyBag
             {
                 uri.AppendQuery("$skip", skip.Value, true);
             }
-            if (items != null && !(items is ChangeTrackingList<int> changeTrackingList && changeTrackingList.IsUndefined))
+            if (items != null && !(items is ChangeTrackingList<string> changeTrackingList && changeTrackingList.IsUndefined))
             {
                 uri.AppendQueryDelimited("items", items, ",", true);
             }

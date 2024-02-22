@@ -470,7 +470,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 writer.Append($" != null && !(");
                 writer.WriteValueExpression(valueExpressoin);
-                writer.Append($" is {new CSharpType(Configuration.ApiTypes.ChangeTrackingListType, typeof(int))} {changeTrackingList:D} && {changeTrackingList}.IsUndefined)");
+                writer.Append($" is {new CSharpType(Configuration.ApiTypes.ChangeTrackingListType, type.Arguments)} {changeTrackingList:D} && {changeTrackingList}.IsUndefined)");
 
                 return writer.LineRaw(")").Scope();
             }
