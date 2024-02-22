@@ -27,7 +27,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Fields))
+            if (!(Fields is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("fields"u8);
                 writer.WriteStartArray();
@@ -42,7 +42,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 writer.WritePropertyName("nullProperty"u8);
                 writer.WriteNumberValue(NullProperty.Value);
             }
-            if (Optional.IsCollectionDefined(KeyValuePairs))
+            if (!(KeyValuePairs is ChangeTrackingDictionary<string, string> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("keyValuePairs"u8);
                 writer.WriteStartObject();

@@ -31,7 +31,7 @@ namespace model_flattening.Models
                 writer.WritePropertyName("productresource"u8);
                 writer.WriteObjectValue(Productresource);
             }
-            if (Optional.IsCollectionDefined(Arrayofresources))
+            if (!(Arrayofresources is ChangeTrackingList<FlattenedProduct> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("arrayofresources"u8);
                 writer.WriteStartArray();
@@ -41,7 +41,7 @@ namespace model_flattening.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(Dictionaryofresources))
+            if (!(Dictionaryofresources is ChangeTrackingDictionary<string, FlattenedProduct> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("dictionaryofresources"u8);
                 writer.WriteStartObject();

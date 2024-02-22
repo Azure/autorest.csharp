@@ -41,7 +41,7 @@ namespace MgmtScopeResource
                 writer.WritePropertyName("policyDefinitionId"u8);
                 writer.WriteStringValue(PolicyDefinitionId);
             }
-            if (Optional.IsCollectionDefined(NotScopes))
+            if (!(NotScopes is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("notScopes"u8);
                 writer.WriteStartArray();
@@ -51,7 +51,7 @@ namespace MgmtScopeResource
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(Parameters))
+            if (!(Parameters is ChangeTrackingDictionary<string, ParameterValuesValue> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("parameters"u8);
                 writer.WriteStartObject();
@@ -84,7 +84,7 @@ namespace MgmtScopeResource
                 writer.WritePropertyName("enforcementMode"u8);
                 writer.WriteStringValue(EnforcementMode.Value.ToString());
             }
-            if (Optional.IsCollectionDefined(NonComplianceMessages))
+            if (!(NonComplianceMessages is ChangeTrackingList<NonComplianceMessage> collection1 && collection1.IsUndefined))
             {
                 writer.WritePropertyName("nonComplianceMessages"u8);
                 writer.WriteStartArray();

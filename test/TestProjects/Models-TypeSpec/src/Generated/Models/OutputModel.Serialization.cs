@@ -48,7 +48,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteObjectValue(item.Value);
             }
             writer.WriteEndObject();
-            if (Optional.IsCollectionDefined(OptionalList))
+            if (!(OptionalList is ChangeTrackingList<CollectionItem> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("optionalList"u8);
                 writer.WriteStartArray();
@@ -58,7 +58,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(OptionalNullableList))
+            if (!(OptionalNullableList is ChangeTrackingList<CollectionItem> collection0 && collection0.IsUndefined))
             {
                 if (OptionalNullableList != null)
                 {
@@ -75,7 +75,7 @@ namespace ModelsTypeSpec.Models
                     writer.WriteNull("optionalNullableList");
                 }
             }
-            if (Optional.IsCollectionDefined(OptionalRecord))
+            if (!(OptionalRecord is ChangeTrackingDictionary<string, RecordItem> collection1 && collection1.IsUndefined))
             {
                 writer.WritePropertyName("optionalRecord"u8);
                 writer.WriteStartObject();
@@ -86,7 +86,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndObject();
             }
-            if (Optional.IsCollectionDefined(OptionalNullableRecord))
+            if (!(OptionalNullableRecord is ChangeTrackingDictionary<string, RecordItem> collection2 && collection2.IsUndefined))
             {
                 if (OptionalNullableRecord != null)
                 {

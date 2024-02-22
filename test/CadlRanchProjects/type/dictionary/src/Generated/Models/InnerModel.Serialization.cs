@@ -29,7 +29,7 @@ namespace _Type._Dictionary.Models
             writer.WriteStartObject();
             writer.WritePropertyName("property"u8);
             writer.WriteStringValue(Property);
-            if (Optional.IsCollectionDefined(Children))
+            if (!(Children is ChangeTrackingDictionary<string, InnerModel> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("children"u8);
                 writer.WriteStartObject();

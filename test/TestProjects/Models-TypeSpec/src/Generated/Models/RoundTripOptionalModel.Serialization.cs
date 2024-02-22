@@ -37,7 +37,7 @@ namespace ModelsTypeSpec.Models
                 writer.WritePropertyName("optionalInt"u8);
                 writer.WriteNumberValue(OptionalInt.Value);
             }
-            if (Optional.IsCollectionDefined(OptionalStringList))
+            if (!(OptionalStringList is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("optionalStringList"u8);
                 writer.WriteStartArray();
@@ -47,7 +47,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(OptionalIntList))
+            if (!(OptionalIntList is ChangeTrackingList<int> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("optionalIntList"u8);
                 writer.WriteStartArray();
@@ -57,7 +57,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(OptionalModelList))
+            if (!(OptionalModelList is ChangeTrackingList<CollectionItem> collection1 && collection1.IsUndefined))
             {
                 writer.WritePropertyName("optionalModelList"u8);
                 writer.WriteStartArray();
@@ -87,7 +87,7 @@ namespace ModelsTypeSpec.Models
                 writer.WritePropertyName("optionalExtensibleEnum"u8);
                 writer.WriteStringValue(OptionalExtensibleEnum.Value.ToString());
             }
-            if (Optional.IsCollectionDefined(OptionalIntRecord))
+            if (!(OptionalIntRecord is ChangeTrackingDictionary<string, int> collection2 && collection2.IsUndefined))
             {
                 writer.WritePropertyName("optionalIntRecord"u8);
                 writer.WriteStartObject();
@@ -98,7 +98,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndObject();
             }
-            if (Optional.IsCollectionDefined(OptionalStringRecord))
+            if (!(OptionalStringRecord is ChangeTrackingDictionary<string, string> collection3 && collection3.IsUndefined))
             {
                 writer.WritePropertyName("optionalStringRecord"u8);
                 writer.WriteStartObject();
@@ -109,7 +109,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndObject();
             }
-            if (Optional.IsCollectionDefined(OptionalModelRecord))
+            if (!(OptionalModelRecord is ChangeTrackingDictionary<string, RecordItem> collection4 && collection4.IsUndefined))
             {
                 writer.WritePropertyName("optionalModelRecord"u8);
                 writer.WriteStartObject();
@@ -130,7 +130,7 @@ namespace ModelsTypeSpec.Models
                 writer.WritePropertyName("optionalPlainTime"u8);
                 writer.WriteStringValue(OptionalPlainTime.Value, "T");
             }
-            if (Optional.IsCollectionDefined(OptionalCollectionWithNullableIntElement))
+            if (!(OptionalCollectionWithNullableIntElement is ChangeTrackingList<int?> collection5 && collection5.IsUndefined))
             {
                 writer.WritePropertyName("optionalCollectionWithNullableIntElement"u8);
                 writer.WriteStartArray();

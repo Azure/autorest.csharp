@@ -26,7 +26,7 @@ namespace validation.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(DisplayNames))
+            if (!(DisplayNames is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("display_names"u8);
                 writer.WriteStartArray();

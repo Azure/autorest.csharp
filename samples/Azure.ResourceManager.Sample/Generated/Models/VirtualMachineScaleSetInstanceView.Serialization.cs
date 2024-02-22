@@ -33,7 +33,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("virtualMachine"u8);
                 writer.WriteObjectValue(VirtualMachine);
             }
-            if (options.Format != "W" && Optional.IsCollectionDefined(Extensions))
+            if (options.Format != "W" && !(Extensions is ChangeTrackingList<VirtualMachineScaleSetVmExtensionsSummary> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("extensions"u8);
                 writer.WriteStartArray();
@@ -43,7 +43,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(Statuses))
+            if (!(Statuses is ChangeTrackingList<InstanceViewStatus> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("statuses"u8);
                 writer.WriteStartArray();
@@ -53,7 +53,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W" && Optional.IsCollectionDefined(OrchestrationServices))
+            if (options.Format != "W" && !(OrchestrationServices is ChangeTrackingList<OrchestrationServiceSummary> collection1 && collection1.IsUndefined))
             {
                 writer.WritePropertyName("orchestrationServices"u8);
                 writer.WriteStartArray();
@@ -180,7 +180,7 @@ namespace Azure.ResourceManager.Sample.Models
                 AppendChildObject(builder, VirtualMachine, options, 2, false);
             }
 
-            if (Optional.IsCollectionDefined(Extensions))
+            if (!(Extensions is ChangeTrackingList<VirtualMachineScaleSetVmExtensionsSummary> collection && collection.IsUndefined))
             {
                 if (Extensions.Any())
                 {
@@ -194,7 +194,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsCollectionDefined(Statuses))
+            if (!(Statuses is ChangeTrackingList<InstanceViewStatus> collection0 && collection0.IsUndefined))
             {
                 if (Statuses.Any())
                 {
@@ -208,7 +208,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsCollectionDefined(OrchestrationServices))
+            if (!(OrchestrationServices is ChangeTrackingList<OrchestrationServiceSummary> collection1 && collection1.IsUndefined))
             {
                 if (OrchestrationServices.Any())
                 {

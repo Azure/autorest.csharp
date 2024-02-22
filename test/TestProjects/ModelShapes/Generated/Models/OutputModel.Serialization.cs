@@ -54,7 +54,7 @@ namespace ModelShapes.Models
                 writer.WritePropertyName("NonRequiredInt"u8);
                 writer.WriteNumberValue(NonRequiredInt.Value);
             }
-            if (Optional.IsCollectionDefined(NonRequiredStringList))
+            if (!(NonRequiredStringList is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("NonRequiredStringList"u8);
                 writer.WriteStartArray();
@@ -64,7 +64,7 @@ namespace ModelShapes.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(NonRequiredIntList))
+            if (!(NonRequiredIntList is ChangeTrackingList<int> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("NonRequiredIntList"u8);
                 writer.WriteStartArray();
@@ -92,7 +92,7 @@ namespace ModelShapes.Models
             {
                 writer.WriteNull("RequiredNullableInt");
             }
-            if (RequiredNullableStringList != null && Optional.IsCollectionDefined(RequiredNullableStringList))
+            if (RequiredNullableStringList != null && !(RequiredNullableStringList is ChangeTrackingList<string> collection1 && collection1.IsUndefined))
             {
                 writer.WritePropertyName("RequiredNullableStringList"u8);
                 writer.WriteStartArray();
@@ -106,7 +106,7 @@ namespace ModelShapes.Models
             {
                 writer.WriteNull("RequiredNullableStringList");
             }
-            if (RequiredNullableIntList != null && Optional.IsCollectionDefined(RequiredNullableIntList))
+            if (RequiredNullableIntList != null && !(RequiredNullableIntList is ChangeTrackingList<int> collection2 && collection2.IsUndefined))
             {
                 writer.WritePropertyName("RequiredNullableIntList"u8);
                 writer.WriteStartArray();
@@ -144,7 +144,7 @@ namespace ModelShapes.Models
                     writer.WriteNull("NonRequiredNullableInt");
                 }
             }
-            if (Optional.IsCollectionDefined(NonRequiredNullableStringList))
+            if (!(NonRequiredNullableStringList is ChangeTrackingList<string> collection3 && collection3.IsUndefined))
             {
                 if (NonRequiredNullableStringList != null)
                 {
@@ -161,7 +161,7 @@ namespace ModelShapes.Models
                     writer.WriteNull("NonRequiredNullableStringList");
                 }
             }
-            if (Optional.IsCollectionDefined(NonRequiredNullableIntList))
+            if (!(NonRequiredNullableIntList is ChangeTrackingList<int> collection4 && collection4.IsUndefined))
             {
                 if (NonRequiredNullableIntList != null)
                 {

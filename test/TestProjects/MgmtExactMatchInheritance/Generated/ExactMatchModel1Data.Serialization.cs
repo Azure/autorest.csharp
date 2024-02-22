@@ -26,7 +26,7 @@ namespace MgmtExactMatchInheritance
                 writer.WritePropertyName("new"u8);
                 writer.WriteStringValue(New);
             }
-            if (Optional.IsCollectionDefined(SupportingUris))
+            if (!(SupportingUris is ChangeTrackingList<Uri> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("supportingUris"u8);
                 writer.WriteStartArray();

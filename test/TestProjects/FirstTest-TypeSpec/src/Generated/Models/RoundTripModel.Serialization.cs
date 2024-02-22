@@ -63,7 +63,7 @@ namespace FirstTestTypeSpec.Models
                 writer.WritePropertyName("intExtensibleEnum"u8);
                 writer.WriteNumberValue(IntExtensibleEnum.Value.ToSerialInt32());
             }
-            if (Optional.IsCollectionDefined(IntExtensibleEnumCollection))
+            if (!(IntExtensibleEnumCollection is ChangeTrackingList<IntExtensibleEnum> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("intExtensibleEnumCollection"u8);
                 writer.WriteStartArray();
@@ -78,7 +78,7 @@ namespace FirstTestTypeSpec.Models
                 writer.WritePropertyName("floatExtensibleEnum"u8);
                 writer.WriteNumberValue(FloatExtensibleEnum.Value.ToSerialInt32());
             }
-            if (Optional.IsCollectionDefined(FloatExtensibleEnumCollection))
+            if (!(FloatExtensibleEnumCollection is ChangeTrackingList<FloatExtensibleEnum> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("floatExtensibleEnumCollection"u8);
                 writer.WriteStartArray();
@@ -93,7 +93,7 @@ namespace FirstTestTypeSpec.Models
                 writer.WritePropertyName("floatFixedEnum"u8);
                 writer.WriteNumberValue(FloatFixedEnum.Value.ToSerialSingle());
             }
-            if (Optional.IsCollectionDefined(FloatFixedEnumCollection))
+            if (!(FloatFixedEnumCollection is ChangeTrackingList<FloatFixedEnum> collection1 && collection1.IsUndefined))
             {
                 writer.WritePropertyName("floatFixedEnumCollection"u8);
                 writer.WriteStartArray();
@@ -108,7 +108,7 @@ namespace FirstTestTypeSpec.Models
                 writer.WritePropertyName("intFixedEnum"u8);
                 writer.WriteNumberValue((int)IntFixedEnum.Value);
             }
-            if (Optional.IsCollectionDefined(IntFixedEnumCollection))
+            if (!(IntFixedEnumCollection is ChangeTrackingList<IntFixedEnum> collection2 && collection2.IsUndefined))
             {
                 writer.WritePropertyName("intFixedEnumCollection"u8);
                 writer.WriteStartArray();
@@ -171,7 +171,7 @@ namespace FirstTestTypeSpec.Models
 #endif
             }
             writer.WriteEndObject();
-            if (Optional.IsCollectionDefined(OptionalRecordUnknown))
+            if (!(OptionalRecordUnknown is ChangeTrackingDictionary<string, BinaryData> collection3 && collection3.IsUndefined))
             {
                 writer.WritePropertyName("optionalRecordUnknown"u8);
                 writer.WriteStartObject();
@@ -217,7 +217,7 @@ namespace FirstTestTypeSpec.Models
                 }
                 writer.WriteEndObject();
             }
-            if (options.Format != "W" && Optional.IsCollectionDefined(ReadOnlyOptionalRecordUnknown))
+            if (options.Format != "W" && !(ReadOnlyOptionalRecordUnknown is ChangeTrackingDictionary<string, BinaryData> collection4 && collection4.IsUndefined))
             {
                 writer.WritePropertyName("readOnlyOptionalRecordUnknown"u8);
                 writer.WriteStartObject();

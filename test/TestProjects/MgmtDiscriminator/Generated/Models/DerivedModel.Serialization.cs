@@ -113,7 +113,7 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsCollectionDefined(RequiredCollection))
+            if (!(RequiredCollection is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 if (RequiredCollection.Any())
                 {

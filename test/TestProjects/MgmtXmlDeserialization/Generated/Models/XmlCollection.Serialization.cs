@@ -34,7 +34,7 @@ namespace MgmtXmlDeserialization.Models
                 writer.WriteValue(NextLink);
                 writer.WriteEndElement();
             }
-            if (Optional.IsCollectionDefined(Value))
+            if (!(Value is ChangeTrackingList<XmlInstanceData> collection && collection.IsUndefined))
             {
                 foreach (var item in Value)
                 {
@@ -81,7 +81,7 @@ namespace MgmtXmlDeserialization.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Value))
+            if (!(Value is ChangeTrackingList<XmlInstanceData> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("value"u8);
                 writer.WriteStartArray();

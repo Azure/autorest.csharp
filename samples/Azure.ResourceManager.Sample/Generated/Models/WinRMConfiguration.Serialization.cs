@@ -28,7 +28,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Listeners))
+            if (!(Listeners is ChangeTrackingList<WinRMListener> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("listeners"u8);
                 writer.WriteStartArray();
@@ -109,7 +109,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsCollectionDefined(Listeners))
+            if (!(Listeners is ChangeTrackingList<WinRMListener> collection && collection.IsUndefined))
             {
                 if (Listeners.Any())
                 {

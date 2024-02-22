@@ -71,7 +71,7 @@ namespace AnomalyDetector.Models
                 writer.WriteBooleanValue(item);
             }
             writer.WriteEndArray();
-            if (Optional.IsCollectionDefined(Severity))
+            if (!(Severity is ChangeTrackingList<float> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("severity"u8);
                 writer.WriteStartArray();

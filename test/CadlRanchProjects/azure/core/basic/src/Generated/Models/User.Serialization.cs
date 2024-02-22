@@ -34,7 +34,7 @@ namespace _Specs_.Azure.Core.Basic.Models
             }
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (Optional.IsCollectionDefined(Orders))
+            if (!(Orders is ChangeTrackingList<UserOrder> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("orders"u8);
                 writer.WriteStartArray();

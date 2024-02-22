@@ -31,7 +31,7 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("maxFailedItemsPerBatch"u8);
                 writer.WriteNumberValue(MaxFailedItemsPerBatch.Value);
             }
-            if (Optional.IsCollectionDefined(Configuration))
+            if (!(Configuration is ChangeTrackingDictionary<string, object> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("configuration"u8);
                 writer.WriteStartObject();

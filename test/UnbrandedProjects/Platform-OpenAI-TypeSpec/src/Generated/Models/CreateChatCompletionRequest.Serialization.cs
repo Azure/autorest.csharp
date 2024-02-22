@@ -32,7 +32,7 @@ namespace OpenAI.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            if (OptionalProperty.IsCollectionDefined(Functions))
+            if (!(Functions is OptionalList<ChatCompletionFunctions> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("functions"u8);
                 writer.WriteStartArray();
@@ -138,7 +138,7 @@ namespace OpenAI.Models
                     writer.WriteNull("frequency_penalty");
                 }
             }
-            if (OptionalProperty.IsCollectionDefined(LogitBias))
+            if (!(LogitBias is OptionalDictionary<string, long> collection0 && collection0.IsUndefined))
             {
                 if (LogitBias != null)
                 {

@@ -38,7 +38,7 @@ namespace xml_service.Models
                 writer.WriteValue(Author);
                 writer.WriteEndAttribute();
             }
-            if (Optional.IsCollectionDefined(Slides))
+            if (!(Slides is ChangeTrackingList<Slide> collection && collection.IsUndefined))
             {
                 foreach (var item in Slides)
                 {

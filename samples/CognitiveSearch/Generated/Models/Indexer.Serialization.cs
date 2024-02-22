@@ -42,7 +42,7 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("parameters"u8);
                 writer.WriteObjectValue(Parameters);
             }
-            if (Optional.IsCollectionDefined(FieldMappings))
+            if (!(FieldMappings is ChangeTrackingList<FieldMapping> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("fieldMappings"u8);
                 writer.WriteStartArray();
@@ -52,7 +52,7 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(OutputFieldMappings))
+            if (!(OutputFieldMappings is ChangeTrackingList<FieldMapping> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("outputFieldMappings"u8);
                 writer.WriteStartArray();

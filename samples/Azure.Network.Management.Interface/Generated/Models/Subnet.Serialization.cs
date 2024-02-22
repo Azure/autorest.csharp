@@ -33,7 +33,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("addressPrefix"u8);
                 writer.WriteStringValue(AddressPrefix);
             }
-            if (Optional.IsCollectionDefined(AddressPrefixes))
+            if (!(AddressPrefixes is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("addressPrefixes"u8);
                 writer.WriteStartArray();
@@ -58,7 +58,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("natGateway"u8);
                 writer.WriteObjectValue(NatGateway);
             }
-            if (Optional.IsCollectionDefined(ServiceEndpoints))
+            if (!(ServiceEndpoints is ChangeTrackingList<ServiceEndpointPropertiesFormat> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("serviceEndpoints"u8);
                 writer.WriteStartArray();
@@ -68,7 +68,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(ServiceEndpointPolicies))
+            if (!(ServiceEndpointPolicies is ChangeTrackingList<ServiceEndpointPolicy> collection1 && collection1.IsUndefined))
             {
                 writer.WritePropertyName("serviceEndpointPolicies"u8);
                 writer.WriteStartArray();
@@ -78,7 +78,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(Delegations))
+            if (!(Delegations is ChangeTrackingList<Delegation> collection2 && collection2.IsUndefined))
             {
                 writer.WritePropertyName("delegations"u8);
                 writer.WriteStartArray();

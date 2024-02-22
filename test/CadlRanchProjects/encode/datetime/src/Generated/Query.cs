@@ -439,7 +439,7 @@ namespace Encode.Datetime
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/encode/datetime/query/unix-timestamp-array", false);
-            if (value != null && Optional.IsCollectionDefined(value))
+            if (value != null && !(value is ChangeTrackingList<DateTimeOffset> changeTrackingList && changeTrackingList.IsUndefined))
             {
                 uri.AppendQueryDelimited("value", value, ",", "U", true);
             }

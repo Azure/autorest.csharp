@@ -21,7 +21,7 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("count"u8);
                 writer.WriteBooleanValue(IncludeTotalResultCount.Value);
             }
-            if (Optional.IsCollectionDefined(Facets))
+            if (!(Facets is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("facets"u8);
                 writer.WriteStartArray();
@@ -66,7 +66,7 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("queryType"u8);
                 writer.WriteStringValue(QueryType.Value.ToSerialString());
             }
-            if (Optional.IsCollectionDefined(ScoringParameters))
+            if (!(ScoringParameters is ChangeTrackingList<string> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("scoringParameters"u8);
                 writer.WriteStartArray();

@@ -37,7 +37,7 @@ namespace MgmtDiscriminator.Models
                 writer.WritePropertyName("negateCondition"u8);
                 writer.WriteBooleanValue(NegateCondition.Value);
             }
-            if (Optional.IsCollectionDefined(Transforms))
+            if (!(Transforms is ChangeTrackingList<Transform> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("transforms"u8);
                 writer.WriteStartArray();
@@ -47,7 +47,7 @@ namespace MgmtDiscriminator.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(MatchValues))
+            if (!(MatchValues is ChangeTrackingList<RequestMethodMatchConditionParametersMatchValuesItem> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("matchValues"u8);
                 writer.WriteStartArray();
@@ -184,7 +184,7 @@ namespace MgmtDiscriminator.Models
                 builder.AppendLine($" {boolValue}");
             }
 
-            if (Optional.IsCollectionDefined(Transforms))
+            if (!(Transforms is ChangeTrackingList<Transform> collection && collection.IsUndefined))
             {
                 if (Transforms.Any())
                 {
@@ -198,7 +198,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            if (Optional.IsCollectionDefined(MatchValues))
+            if (!(MatchValues is ChangeTrackingList<RequestMethodMatchConditionParametersMatchValuesItem> collection0 && collection0.IsUndefined))
             {
                 if (MatchValues.Any())
                 {

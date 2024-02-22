@@ -22,7 +22,7 @@ namespace MgmtListMethods
                 writer.WritePropertyName("configValue"u8);
                 writer.WriteStringValue(ConfigValue);
             }
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();

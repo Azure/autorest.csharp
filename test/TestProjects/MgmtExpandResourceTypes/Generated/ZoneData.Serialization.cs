@@ -24,7 +24,7 @@ namespace MgmtExpandResourceTypes
                 writer.WritePropertyName("etag"u8);
                 writer.WriteStringValue(Etag);
             }
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -59,7 +59,7 @@ namespace MgmtExpandResourceTypes
                 writer.WritePropertyName("memoryType"u8);
                 writer.WriteNumberValue((long)MemoryType.Value);
             }
-            if (Optional.IsCollectionDefined(RegistrationVirtualNetworks))
+            if (!(RegistrationVirtualNetworks is ChangeTrackingList<WritableSubResource> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("registrationVirtualNetworks"u8);
                 writer.WriteStartArray();
@@ -69,7 +69,7 @@ namespace MgmtExpandResourceTypes
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(ResolutionVirtualNetworks))
+            if (!(ResolutionVirtualNetworks is ChangeTrackingList<WritableSubResource> collection1 && collection1.IsUndefined))
             {
                 writer.WritePropertyName("resolutionVirtualNetworks"u8);
                 writer.WriteStartArray();

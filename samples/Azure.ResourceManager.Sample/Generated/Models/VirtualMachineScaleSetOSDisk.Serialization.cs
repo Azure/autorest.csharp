@@ -65,7 +65,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("image"u8);
                 writer.WriteObjectValue(Image);
             }
-            if (Optional.IsCollectionDefined(VhdContainers))
+            if (!(VhdContainers is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("vhdContainers"u8);
                 writer.WriteStartArray();
@@ -290,7 +290,7 @@ namespace Azure.ResourceManager.Sample.Models
                 AppendChildObject(builder, Image, options, 2, false);
             }
 
-            if (Optional.IsCollectionDefined(VhdContainers))
+            if (!(VhdContainers is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 if (VhdContainers.Any())
                 {

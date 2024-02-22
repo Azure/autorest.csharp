@@ -64,7 +64,7 @@ namespace UnbrandedTypeSpec.Models
             }
             writer.WritePropertyName("requiredBadDescription"u8);
             writer.WriteStringValue(RequiredBadDescription);
-            if (OptionalProperty.IsCollectionDefined(OptionalNullableList))
+            if (!(OptionalNullableList is OptionalList<int> collection && collection.IsUndefined))
             {
                 if (OptionalNullableList != null)
                 {
@@ -81,7 +81,7 @@ namespace UnbrandedTypeSpec.Models
                     writer.WriteNull("optionalNullableList");
                 }
             }
-            if (RequiredNullableList != null && OptionalProperty.IsCollectionDefined(RequiredNullableList))
+            if (RequiredNullableList != null && !(RequiredNullableList is OptionalList<int> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("requiredNullableList"u8);
                 writer.WriteStartArray();

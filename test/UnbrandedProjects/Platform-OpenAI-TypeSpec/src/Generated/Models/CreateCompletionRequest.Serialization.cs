@@ -130,7 +130,7 @@ namespace OpenAI.Models
                     writer.WriteNull("frequency_penalty");
                 }
             }
-            if (OptionalProperty.IsCollectionDefined(LogitBias))
+            if (!(LogitBias is OptionalDictionary<string, long> collection && collection.IsUndefined))
             {
                 if (LogitBias != null)
                 {

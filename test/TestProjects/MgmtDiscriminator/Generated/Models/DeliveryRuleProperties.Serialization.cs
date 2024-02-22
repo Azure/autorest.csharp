@@ -38,7 +38,7 @@ namespace MgmtDiscriminator.Models
                 writer.WritePropertyName("conditions"u8);
                 writer.WriteObjectValue(Conditions);
             }
-            if (Optional.IsCollectionDefined(Actions))
+            if (!(Actions is ChangeTrackingList<DeliveryRuleAction> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("actions"u8);
                 writer.WriteStartArray();
@@ -48,7 +48,7 @@ namespace MgmtDiscriminator.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(ExtraMappingInfo))
+            if (!(ExtraMappingInfo is ChangeTrackingDictionary<string, DeliveryRuleAction> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("extraMappingInfo"u8);
                 writer.WriteStartObject();
@@ -203,7 +203,7 @@ namespace MgmtDiscriminator.Models
                 AppendChildObject(builder, Conditions, options, 2, false);
             }
 
-            if (Optional.IsCollectionDefined(Actions))
+            if (!(Actions is ChangeTrackingList<DeliveryRuleAction> collection && collection.IsUndefined))
             {
                 if (Actions.Any())
                 {
@@ -217,7 +217,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            if (Optional.IsCollectionDefined(ExtraMappingInfo))
+            if (!(ExtraMappingInfo is ChangeTrackingDictionary<string, DeliveryRuleAction> collection0 && collection0.IsUndefined))
             {
                 if (ExtraMappingInfo.Any())
                 {

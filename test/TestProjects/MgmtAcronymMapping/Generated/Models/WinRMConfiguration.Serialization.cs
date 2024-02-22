@@ -16,7 +16,7 @@ namespace MgmtAcronymMapping.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Listeners))
+            if (!(Listeners is ChangeTrackingList<WinRMListener> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("listeners"u8);
                 writer.WriteStartArray();

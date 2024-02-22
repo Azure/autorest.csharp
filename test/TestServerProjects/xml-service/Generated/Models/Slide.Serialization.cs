@@ -32,7 +32,7 @@ namespace xml_service.Models
                 writer.WriteValue(Title);
                 writer.WriteEndElement();
             }
-            if (Optional.IsCollectionDefined(Items))
+            if (!(Items is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 foreach (var item in Items)
                 {

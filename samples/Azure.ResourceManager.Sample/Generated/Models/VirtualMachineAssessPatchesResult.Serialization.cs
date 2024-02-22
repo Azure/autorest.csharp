@@ -58,7 +58,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("startDateTime"u8);
                 writer.WriteStringValue(StartOn.Value, "O");
             }
-            if (options.Format != "W" && Optional.IsCollectionDefined(Patches))
+            if (options.Format != "W" && !(Patches is ChangeTrackingList<VirtualMachineSoftwarePatchProperties> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("patches"u8);
                 writer.WriteStartArray();
@@ -256,7 +256,7 @@ namespace Azure.ResourceManager.Sample.Models
                 builder.AppendLine($" '{formattedDateTimeString}'");
             }
 
-            if (Optional.IsCollectionDefined(Patches))
+            if (!(Patches is ChangeTrackingList<VirtualMachineSoftwarePatchProperties> collection && collection.IsUndefined))
             {
                 if (Patches.Any())
                 {

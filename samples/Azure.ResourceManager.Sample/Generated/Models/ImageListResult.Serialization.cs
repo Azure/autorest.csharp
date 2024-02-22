@@ -114,7 +114,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsCollectionDefined(Images))
+            if (!(Images is ChangeTrackingList<ImageData> collection && collection.IsUndefined))
             {
                 if (Images.Any())
                 {

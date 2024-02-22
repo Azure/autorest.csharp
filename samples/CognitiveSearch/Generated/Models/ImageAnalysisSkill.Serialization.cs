@@ -21,7 +21,7 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("defaultLanguageCode"u8);
                 writer.WriteStringValue(DefaultLanguageCode.Value.ToString());
             }
-            if (Optional.IsCollectionDefined(VisualFeatures))
+            if (!(VisualFeatures is ChangeTrackingList<VisualFeature> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("visualFeatures"u8);
                 writer.WriteStartArray();
@@ -31,7 +31,7 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(Details))
+            if (!(Details is ChangeTrackingList<ImageDetail> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("details"u8);
                 writer.WriteStartArray();

@@ -16,7 +16,7 @@ namespace Azure.ResourceManager.Storage.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(CorsRulesValue))
+            if (!(CorsRulesValue is ChangeTrackingList<CorsRule> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("corsRules"u8);
                 writer.WriteStartArray();

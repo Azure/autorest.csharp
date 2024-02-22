@@ -36,7 +36,7 @@ namespace body_complex.Models
                 writer.WritePropertyName("color"u8);
                 writer.WriteStringValue(Color);
             }
-            if (Optional.IsCollectionDefined(Hates))
+            if (!(Hates is ChangeTrackingList<Dog> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("hates"u8);
                 writer.WriteStartArray();
