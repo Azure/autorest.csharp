@@ -47,8 +47,14 @@ namespace Parameters_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public ParametersLowlevelClient(Uri endpoint, AzureKeyCredential credential, ParametersLowlevelClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
-            Argument.AssertNotNull(credential, nameof(credential));
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
+            if (credential == null)
+            {
+                throw new ArgumentNullException(nameof(credential));
+            }
             options ??= new ParametersLowlevelClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -205,7 +211,10 @@ namespace Parameters_LowLevel
         /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='DeleteNoRequestBodyResponseBodyAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> DeleteNoRequestBodyResponseBodyAsync(string resourceName, RequestContext context)
         {
-            Argument.AssertNotNull(resourceName, nameof(resourceName));
+            if (resourceName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceName));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.DeleteNoRequestBodyResponseBody");
             scope.Start();
@@ -239,7 +248,10 @@ namespace Parameters_LowLevel
         /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='DeleteNoRequestBodyResponseBody(string,RequestContext)']/*" />
         public virtual Response DeleteNoRequestBodyResponseBody(string resourceName, RequestContext context)
         {
-            Argument.AssertNotNull(resourceName, nameof(resourceName));
+            if (resourceName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceName));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.DeleteNoRequestBodyResponseBody");
             scope.Start();
@@ -398,7 +410,14 @@ namespace Parameters_LowLevel
         /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='OptionalPathParametersAsync(int,string,int,RequestContext)']/*" />
         public virtual async Task<Response> OptionalPathParametersAsync(int id, string name, int skip, RequestContext context = null)
         {
-            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (name.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.OptionalPathParameters");
             scope.Start();
@@ -435,7 +454,14 @@ namespace Parameters_LowLevel
         /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='OptionalPathParameters(int,string,int,RequestContext)']/*" />
         public virtual Response OptionalPathParameters(int id, string name, int skip, RequestContext context = null)
         {
-            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (name.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.OptionalPathParameters");
             scope.Start();
@@ -472,7 +498,14 @@ namespace Parameters_LowLevel
         /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='OptionalPathParametersWithMixedSequenceAsync(int,string,int,RequestContext)']/*" />
         public virtual async Task<Response> OptionalPathParametersWithMixedSequenceAsync(int id, string name, int skip, RequestContext context = null)
         {
-            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (name.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.OptionalPathParametersWithMixedSequence");
             scope.Start();
@@ -509,7 +542,14 @@ namespace Parameters_LowLevel
         /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='OptionalPathParametersWithMixedSequence(int,string,int,RequestContext)']/*" />
         public virtual Response OptionalPathParametersWithMixedSequence(int id, string name, int skip, RequestContext context = null)
         {
-            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (name.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.OptionalPathParametersWithMixedSequence");
             scope.Start();
@@ -549,7 +589,14 @@ namespace Parameters_LowLevel
         /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='OptionalPathBodyParametersWithMixedSequenceAsync(int,string,int,int,RequestContent,int?,RequestContext)']/*" />
         public virtual async Task<Response> OptionalPathBodyParametersWithMixedSequenceAsync(int id, string name, int skip, int max, RequestContent content, int? top = null, RequestContext context = null)
         {
-            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (name.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.OptionalPathBodyParametersWithMixedSequence");
             scope.Start();
@@ -589,7 +636,14 @@ namespace Parameters_LowLevel
         /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='OptionalPathBodyParametersWithMixedSequence(int,string,int,int,RequestContent,int?,RequestContext)']/*" />
         public virtual Response OptionalPathBodyParametersWithMixedSequence(int id, string name, int skip, int max, RequestContent content, int? top = null, RequestContext context = null)
         {
-            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (name.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.OptionalPathBodyParametersWithMixedSequence");
             scope.Start();
@@ -626,7 +680,14 @@ namespace Parameters_LowLevel
         /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='RepeatableActionAsync(int,string,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> RepeatableActionAsync(int id, string name, RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (name.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.RepeatableAction");
             scope.Start();
@@ -663,7 +724,14 @@ namespace Parameters_LowLevel
         /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='RepeatableAction(int,string,RequestContent,RequestContext)']/*" />
         public virtual Response RepeatableAction(int id, string name, RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (name.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.RepeatableAction");
             scope.Start();

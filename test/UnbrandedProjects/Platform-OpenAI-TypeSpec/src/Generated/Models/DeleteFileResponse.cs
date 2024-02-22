@@ -3,7 +3,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.Collections.Generic;
 
 namespace OpenAI.Models
@@ -50,8 +49,14 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="object"/> is null. </exception>
         internal DeleteFileResponse(string id, string @object, bool deleted)
         {
-            ClientUtilities.AssertNotNull(id, nameof(id));
-            ClientUtilities.AssertNotNull(@object, nameof(@object));
+            if (id == null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+            if (@object == null)
+            {
+                throw new ArgumentNullException(nameof(@object));
+            }
 
             Id = id;
             Object = @object;

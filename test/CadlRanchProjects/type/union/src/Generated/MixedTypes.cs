@@ -138,7 +138,10 @@ namespace _Type.Union
         /// <include file="Docs/MixedTypes.xml" path="doc/members/member[@name='SendAsync(MixedTypesCases,CancellationToken)']/*" />
         public virtual async Task<Response> SendAsync(MixedTypesCases prop, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(prop, nameof(prop));
+            if (prop == null)
+            {
+                throw new ArgumentNullException(nameof(prop));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             SendRequest9 sendRequest9 = new SendRequest9(prop);
@@ -152,7 +155,10 @@ namespace _Type.Union
         /// <include file="Docs/MixedTypes.xml" path="doc/members/member[@name='Send(MixedTypesCases,CancellationToken)']/*" />
         public virtual Response Send(MixedTypesCases prop, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(prop, nameof(prop));
+            if (prop == null)
+            {
+                throw new ArgumentNullException(nameof(prop));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             SendRequest9 sendRequest9 = new SendRequest9(prop);
@@ -183,7 +189,10 @@ namespace _Type.Union
         /// <include file="Docs/MixedTypes.xml" path="doc/members/member[@name='SendAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> SendAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("MixedTypes.Send");
             scope.Start();
@@ -222,7 +231,10 @@ namespace _Type.Union
         /// <include file="Docs/MixedTypes.xml" path="doc/members/member[@name='Send(RequestContent,RequestContext)']/*" />
         public virtual Response Send(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("MixedTypes.Send");
             scope.Start();

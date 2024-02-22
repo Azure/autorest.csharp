@@ -60,7 +60,10 @@ namespace OpenAI
         [Obsolete("deprecated")]
         public virtual async Task<Result<FineTune>> CreateAsync(CreateFineTuneRequest fineTune, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNull(fineTune, nameof(fineTune));
+            if (fineTune == null)
+            {
+                throw new ArgumentNullException(nameof(fineTune));
+            }
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             using RequestBody content = fineTune.ToRequestBody();
@@ -81,7 +84,10 @@ namespace OpenAI
         [Obsolete("deprecated")]
         public virtual Result<FineTune> Create(CreateFineTuneRequest fineTune, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNull(fineTune, nameof(fineTune));
+            if (fineTune == null)
+            {
+                throw new ArgumentNullException(nameof(fineTune));
+            }
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             using RequestBody content = fineTune.ToRequestBody();
@@ -116,7 +122,10 @@ namespace OpenAI
         [Obsolete("deprecated")]
         public virtual async Task<Result> CreateAsync(RequestBody content, RequestOptions context = null)
         {
-            ClientUtilities.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateSpan("FineTunes.Create");
             scope.Start();
@@ -159,7 +168,10 @@ namespace OpenAI
         [Obsolete("deprecated")]
         public virtual Result Create(RequestBody content, RequestOptions context = null)
         {
-            ClientUtilities.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateSpan("FineTunes.Create");
             scope.Start();
@@ -277,7 +289,14 @@ namespace OpenAI
         [Obsolete("deprecated")]
         public virtual async Task<Result<FineTune>> RetrieveAsync(string fineTuneId, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
+            if (fineTuneId == null)
+            {
+                throw new ArgumentNullException(nameof(fineTuneId));
+            }
+            if (fineTuneId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(fineTuneId));
+            }
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             Result result = await RetrieveAsync(fineTuneId, context).ConfigureAwait(false);
@@ -296,7 +315,14 @@ namespace OpenAI
         [Obsolete("deprecated")]
         public virtual Result<FineTune> Retrieve(string fineTuneId, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
+            if (fineTuneId == null)
+            {
+                throw new ArgumentNullException(nameof(fineTuneId));
+            }
+            if (fineTuneId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(fineTuneId));
+            }
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             Result result = Retrieve(fineTuneId, context);
@@ -329,7 +355,14 @@ namespace OpenAI
         [Obsolete("deprecated")]
         public virtual async Task<Result> RetrieveAsync(string fineTuneId, RequestOptions context)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
+            if (fineTuneId == null)
+            {
+                throw new ArgumentNullException(nameof(fineTuneId));
+            }
+            if (fineTuneId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(fineTuneId));
+            }
 
             using var scope = ClientDiagnostics.CreateSpan("FineTunes.Retrieve");
             scope.Start();
@@ -371,7 +404,14 @@ namespace OpenAI
         [Obsolete("deprecated")]
         public virtual Result Retrieve(string fineTuneId, RequestOptions context)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
+            if (fineTuneId == null)
+            {
+                throw new ArgumentNullException(nameof(fineTuneId));
+            }
+            if (fineTuneId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(fineTuneId));
+            }
 
             using var scope = ClientDiagnostics.CreateSpan("FineTunes.Retrieve");
             scope.Start();
@@ -404,7 +444,14 @@ namespace OpenAI
         [Obsolete("deprecated")]
         public virtual async Task<Result<ListFineTuneEventsResponse>> GetEventsAsync(string fineTuneId, bool? stream = null, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
+            if (fineTuneId == null)
+            {
+                throw new ArgumentNullException(nameof(fineTuneId));
+            }
+            if (fineTuneId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(fineTuneId));
+            }
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             Result result = await GetEventsAsync(fineTuneId, stream, context).ConfigureAwait(false);
@@ -428,7 +475,14 @@ namespace OpenAI
         [Obsolete("deprecated")]
         public virtual Result<ListFineTuneEventsResponse> GetEvents(string fineTuneId, bool? stream = null, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
+            if (fineTuneId == null)
+            {
+                throw new ArgumentNullException(nameof(fineTuneId));
+            }
+            if (fineTuneId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(fineTuneId));
+            }
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             Result result = GetEvents(fineTuneId, stream, context);
@@ -468,7 +522,14 @@ namespace OpenAI
         [Obsolete("deprecated")]
         public virtual async Task<Result> GetEventsAsync(string fineTuneId, bool? stream, RequestOptions context)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
+            if (fineTuneId == null)
+            {
+                throw new ArgumentNullException(nameof(fineTuneId));
+            }
+            if (fineTuneId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(fineTuneId));
+            }
 
             using var scope = ClientDiagnostics.CreateSpan("FineTunes.GetEvents");
             scope.Start();
@@ -517,7 +578,14 @@ namespace OpenAI
         [Obsolete("deprecated")]
         public virtual Result GetEvents(string fineTuneId, bool? stream, RequestOptions context)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
+            if (fineTuneId == null)
+            {
+                throw new ArgumentNullException(nameof(fineTuneId));
+            }
+            if (fineTuneId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(fineTuneId));
+            }
 
             using var scope = ClientDiagnostics.CreateSpan("FineTunes.GetEvents");
             scope.Start();
@@ -541,7 +609,14 @@ namespace OpenAI
         [Obsolete("deprecated")]
         public virtual async Task<Result<FineTune>> CancelAsync(string fineTuneId, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
+            if (fineTuneId == null)
+            {
+                throw new ArgumentNullException(nameof(fineTuneId));
+            }
+            if (fineTuneId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(fineTuneId));
+            }
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             Result result = await CancelAsync(fineTuneId, context).ConfigureAwait(false);
@@ -556,7 +631,14 @@ namespace OpenAI
         [Obsolete("deprecated")]
         public virtual Result<FineTune> Cancel(string fineTuneId, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
+            if (fineTuneId == null)
+            {
+                throw new ArgumentNullException(nameof(fineTuneId));
+            }
+            if (fineTuneId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(fineTuneId));
+            }
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             Result result = Cancel(fineTuneId, context);
@@ -587,7 +669,14 @@ namespace OpenAI
         [Obsolete("deprecated")]
         public virtual async Task<Result> CancelAsync(string fineTuneId, RequestOptions context)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
+            if (fineTuneId == null)
+            {
+                throw new ArgumentNullException(nameof(fineTuneId));
+            }
+            if (fineTuneId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(fineTuneId));
+            }
 
             using var scope = ClientDiagnostics.CreateSpan("FineTunes.Cancel");
             scope.Start();
@@ -627,7 +716,14 @@ namespace OpenAI
         [Obsolete("deprecated")]
         public virtual Result Cancel(string fineTuneId, RequestOptions context)
         {
-            ClientUtilities.AssertNotNullOrEmpty(fineTuneId, nameof(fineTuneId));
+            if (fineTuneId == null)
+            {
+                throw new ArgumentNullException(nameof(fineTuneId));
+            }
+            if (fineTuneId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(fineTuneId));
+            }
 
             using var scope = ClientDiagnostics.CreateSpan("FineTunes.Cancel");
             scope.Start();

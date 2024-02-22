@@ -37,7 +37,10 @@ namespace SpecialHeaders.ConditionalRequest
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public ConditionalRequestClient(Uri endpoint, ConditionalRequestClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
             options ??= new ConditionalRequestClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

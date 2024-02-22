@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using Azure.Core;
 
 namespace Azure.Storage.Tables.Models
 {
@@ -20,7 +19,10 @@ namespace Azure.Storage.Tables.Models
         /// <exception cref="ArgumentNullException"> <paramref name="permission"/> is null. </exception>
         public AccessPolicy(DateTimeOffset start, DateTimeOffset expiry, string permission)
         {
-            Argument.AssertNotNull(permission, nameof(permission));
+            if (permission == null)
+            {
+                throw new ArgumentNullException(nameof(permission));
+            }
 
             Start = start;
             Expiry = expiry;

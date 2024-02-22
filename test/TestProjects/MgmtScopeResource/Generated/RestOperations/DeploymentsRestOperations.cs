@@ -63,8 +63,18 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response> DeleteAtScopeAsync(string scope, string deploymentName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(scope, nameof(scope));
-            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
+            if (scope == null)
+            {
+                throw new ArgumentNullException(nameof(scope));
+            }
+            if (deploymentName == null)
+            {
+                throw new ArgumentNullException(nameof(deploymentName));
+            }
+            if (deploymentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(deploymentName));
+            }
 
             using var message = CreateDeleteAtScopeRequest(scope, deploymentName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -86,8 +96,18 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response DeleteAtScope(string scope, string deploymentName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(scope, nameof(scope));
-            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
+            if (scope == null)
+            {
+                throw new ArgumentNullException(nameof(scope));
+            }
+            if (deploymentName == null)
+            {
+                throw new ArgumentNullException(nameof(deploymentName));
+            }
+            if (deploymentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(deploymentName));
+            }
 
             using var message = CreateDeleteAtScopeRequest(scope, deploymentName);
             _pipeline.Send(message, cancellationToken);
@@ -127,8 +147,18 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<bool>> CheckExistenceAtScopeAsync(string scope, string deploymentName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(scope, nameof(scope));
-            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
+            if (scope == null)
+            {
+                throw new ArgumentNullException(nameof(scope));
+            }
+            if (deploymentName == null)
+            {
+                throw new ArgumentNullException(nameof(deploymentName));
+            }
+            if (deploymentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(deploymentName));
+            }
 
             using var message = CreateCheckExistenceAtScopeRequest(scope, deploymentName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -157,8 +187,18 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<bool> CheckExistenceAtScope(string scope, string deploymentName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(scope, nameof(scope));
-            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
+            if (scope == null)
+            {
+                throw new ArgumentNullException(nameof(scope));
+            }
+            if (deploymentName == null)
+            {
+                throw new ArgumentNullException(nameof(deploymentName));
+            }
+            if (deploymentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(deploymentName));
+            }
 
             using var message = CreateCheckExistenceAtScopeRequest(scope, deploymentName);
             _pipeline.Send(message, cancellationToken);
@@ -210,9 +250,22 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response> CreateOrUpdateAtScopeAsync(string scope, string deploymentName, Deployment deployment, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(scope, nameof(scope));
-            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
-            Argument.AssertNotNull(deployment, nameof(deployment));
+            if (scope == null)
+            {
+                throw new ArgumentNullException(nameof(scope));
+            }
+            if (deploymentName == null)
+            {
+                throw new ArgumentNullException(nameof(deploymentName));
+            }
+            if (deploymentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(deploymentName));
+            }
+            if (deployment == null)
+            {
+                throw new ArgumentNullException(nameof(deployment));
+            }
 
             using var message = CreateCreateOrUpdateAtScopeRequest(scope, deploymentName, deployment);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -235,9 +288,22 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response CreateOrUpdateAtScope(string scope, string deploymentName, Deployment deployment, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(scope, nameof(scope));
-            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
-            Argument.AssertNotNull(deployment, nameof(deployment));
+            if (scope == null)
+            {
+                throw new ArgumentNullException(nameof(scope));
+            }
+            if (deploymentName == null)
+            {
+                throw new ArgumentNullException(nameof(deploymentName));
+            }
+            if (deploymentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(deploymentName));
+            }
+            if (deployment == null)
+            {
+                throw new ArgumentNullException(nameof(deployment));
+            }
 
             using var message = CreateCreateOrUpdateAtScopeRequest(scope, deploymentName, deployment);
             _pipeline.Send(message, cancellationToken);
@@ -277,8 +343,18 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<DeploymentExtendedData>> GetAtScopeAsync(string scope, string deploymentName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(scope, nameof(scope));
-            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
+            if (scope == null)
+            {
+                throw new ArgumentNullException(nameof(scope));
+            }
+            if (deploymentName == null)
+            {
+                throw new ArgumentNullException(nameof(deploymentName));
+            }
+            if (deploymentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(deploymentName));
+            }
 
             using var message = CreateGetAtScopeRequest(scope, deploymentName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -306,8 +382,18 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<DeploymentExtendedData> GetAtScope(string scope, string deploymentName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(scope, nameof(scope));
-            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
+            if (scope == null)
+            {
+                throw new ArgumentNullException(nameof(scope));
+            }
+            if (deploymentName == null)
+            {
+                throw new ArgumentNullException(nameof(deploymentName));
+            }
+            if (deploymentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(deploymentName));
+            }
 
             using var message = CreateGetAtScopeRequest(scope, deploymentName);
             _pipeline.Send(message, cancellationToken);
@@ -354,8 +440,18 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response> CancelAtScopeAsync(string scope, string deploymentName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(scope, nameof(scope));
-            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
+            if (scope == null)
+            {
+                throw new ArgumentNullException(nameof(scope));
+            }
+            if (deploymentName == null)
+            {
+                throw new ArgumentNullException(nameof(deploymentName));
+            }
+            if (deploymentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(deploymentName));
+            }
 
             using var message = CreateCancelAtScopeRequest(scope, deploymentName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -376,8 +472,18 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response CancelAtScope(string scope, string deploymentName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(scope, nameof(scope));
-            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
+            if (scope == null)
+            {
+                throw new ArgumentNullException(nameof(scope));
+            }
+            if (deploymentName == null)
+            {
+                throw new ArgumentNullException(nameof(deploymentName));
+            }
+            if (deploymentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(deploymentName));
+            }
 
             using var message = CreateCancelAtScopeRequest(scope, deploymentName);
             _pipeline.Send(message, cancellationToken);
@@ -422,9 +528,22 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response> ValidateAtScopeAsync(string scope, string deploymentName, Deployment deployment, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(scope, nameof(scope));
-            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
-            Argument.AssertNotNull(deployment, nameof(deployment));
+            if (scope == null)
+            {
+                throw new ArgumentNullException(nameof(scope));
+            }
+            if (deploymentName == null)
+            {
+                throw new ArgumentNullException(nameof(deploymentName));
+            }
+            if (deploymentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(deploymentName));
+            }
+            if (deployment == null)
+            {
+                throw new ArgumentNullException(nameof(deployment));
+            }
 
             using var message = CreateValidateAtScopeRequest(scope, deploymentName, deployment);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -448,9 +567,22 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response ValidateAtScope(string scope, string deploymentName, Deployment deployment, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(scope, nameof(scope));
-            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
-            Argument.AssertNotNull(deployment, nameof(deployment));
+            if (scope == null)
+            {
+                throw new ArgumentNullException(nameof(scope));
+            }
+            if (deploymentName == null)
+            {
+                throw new ArgumentNullException(nameof(deploymentName));
+            }
+            if (deploymentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(deploymentName));
+            }
+            if (deployment == null)
+            {
+                throw new ArgumentNullException(nameof(deployment));
+            }
 
             using var message = CreateValidateAtScopeRequest(scope, deploymentName, deployment);
             _pipeline.Send(message, cancellationToken);
@@ -492,8 +624,18 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<DeploymentExportResult>> ExportTemplateAtScopeAsync(string scope, string deploymentName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(scope, nameof(scope));
-            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
+            if (scope == null)
+            {
+                throw new ArgumentNullException(nameof(scope));
+            }
+            if (deploymentName == null)
+            {
+                throw new ArgumentNullException(nameof(deploymentName));
+            }
+            if (deploymentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(deploymentName));
+            }
 
             using var message = CreateExportTemplateAtScopeRequest(scope, deploymentName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -519,8 +661,18 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<DeploymentExportResult> ExportTemplateAtScope(string scope, string deploymentName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(scope, nameof(scope));
-            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
+            if (scope == null)
+            {
+                throw new ArgumentNullException(nameof(scope));
+            }
+            if (deploymentName == null)
+            {
+                throw new ArgumentNullException(nameof(deploymentName));
+            }
+            if (deploymentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(deploymentName));
+            }
 
             using var message = CreateExportTemplateAtScopeRequest(scope, deploymentName);
             _pipeline.Send(message, cancellationToken);
@@ -571,7 +723,10 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="scope"/> is null. </exception>
         public async Task<Response<DeploymentListResult>> ListAtScopeAsync(string scope, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(scope, nameof(scope));
+            if (scope == null)
+            {
+                throw new ArgumentNullException(nameof(scope));
+            }
 
             using var message = CreateListAtScopeRequest(scope, filter, top);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -597,7 +752,10 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="scope"/> is null. </exception>
         public Response<DeploymentListResult> ListAtScope(string scope, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(scope, nameof(scope));
+            if (scope == null)
+            {
+                throw new ArgumentNullException(nameof(scope));
+            }
 
             using var message = CreateListAtScopeRequest(scope, filter, top);
             _pipeline.Send(message, cancellationToken);
@@ -644,8 +802,18 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response> WhatIfAtTenantScopeAsync(string deploymentName, DeploymentWhatIf deploymentWhatIf, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
-            Argument.AssertNotNull(deploymentWhatIf, nameof(deploymentWhatIf));
+            if (deploymentName == null)
+            {
+                throw new ArgumentNullException(nameof(deploymentName));
+            }
+            if (deploymentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(deploymentName));
+            }
+            if (deploymentWhatIf == null)
+            {
+                throw new ArgumentNullException(nameof(deploymentWhatIf));
+            }
 
             using var message = CreateWhatIfAtTenantScopeRequest(deploymentName, deploymentWhatIf);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -667,8 +835,18 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response WhatIfAtTenantScope(string deploymentName, DeploymentWhatIf deploymentWhatIf, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
-            Argument.AssertNotNull(deploymentWhatIf, nameof(deploymentWhatIf));
+            if (deploymentName == null)
+            {
+                throw new ArgumentNullException(nameof(deploymentName));
+            }
+            if (deploymentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(deploymentName));
+            }
+            if (deploymentWhatIf == null)
+            {
+                throw new ArgumentNullException(nameof(deploymentWhatIf));
+            }
 
             using var message = CreateWhatIfAtTenantScopeRequest(deploymentName, deploymentWhatIf);
             _pipeline.Send(message, cancellationToken);
@@ -714,9 +892,26 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentException"> <paramref name="groupId"/> or <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response> WhatIfAtManagementGroupScopeAsync(string groupId, string deploymentName, DeploymentWhatIf deploymentWhatIf, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(groupId, nameof(groupId));
-            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
-            Argument.AssertNotNull(deploymentWhatIf, nameof(deploymentWhatIf));
+            if (groupId == null)
+            {
+                throw new ArgumentNullException(nameof(groupId));
+            }
+            if (groupId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(groupId));
+            }
+            if (deploymentName == null)
+            {
+                throw new ArgumentNullException(nameof(deploymentName));
+            }
+            if (deploymentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(deploymentName));
+            }
+            if (deploymentWhatIf == null)
+            {
+                throw new ArgumentNullException(nameof(deploymentWhatIf));
+            }
 
             using var message = CreateWhatIfAtManagementGroupScopeRequest(groupId, deploymentName, deploymentWhatIf);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -739,9 +934,26 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentException"> <paramref name="groupId"/> or <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response WhatIfAtManagementGroupScope(string groupId, string deploymentName, DeploymentWhatIf deploymentWhatIf, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(groupId, nameof(groupId));
-            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
-            Argument.AssertNotNull(deploymentWhatIf, nameof(deploymentWhatIf));
+            if (groupId == null)
+            {
+                throw new ArgumentNullException(nameof(groupId));
+            }
+            if (groupId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(groupId));
+            }
+            if (deploymentName == null)
+            {
+                throw new ArgumentNullException(nameof(deploymentName));
+            }
+            if (deploymentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(deploymentName));
+            }
+            if (deploymentWhatIf == null)
+            {
+                throw new ArgumentNullException(nameof(deploymentWhatIf));
+            }
 
             using var message = CreateWhatIfAtManagementGroupScopeRequest(groupId, deploymentName, deploymentWhatIf);
             _pipeline.Send(message, cancellationToken);
@@ -787,9 +999,26 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response> WhatIfAtSubscriptionScopeAsync(string subscriptionId, string deploymentName, DeploymentWhatIf deploymentWhatIf, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
-            Argument.AssertNotNull(deploymentWhatIf, nameof(deploymentWhatIf));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (deploymentName == null)
+            {
+                throw new ArgumentNullException(nameof(deploymentName));
+            }
+            if (deploymentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(deploymentName));
+            }
+            if (deploymentWhatIf == null)
+            {
+                throw new ArgumentNullException(nameof(deploymentWhatIf));
+            }
 
             using var message = CreateWhatIfAtSubscriptionScopeRequest(subscriptionId, deploymentName, deploymentWhatIf);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -812,9 +1041,26 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response WhatIfAtSubscriptionScope(string subscriptionId, string deploymentName, DeploymentWhatIf deploymentWhatIf, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
-            Argument.AssertNotNull(deploymentWhatIf, nameof(deploymentWhatIf));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (deploymentName == null)
+            {
+                throw new ArgumentNullException(nameof(deploymentName));
+            }
+            if (deploymentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(deploymentName));
+            }
+            if (deploymentWhatIf == null)
+            {
+                throw new ArgumentNullException(nameof(deploymentWhatIf));
+            }
 
             using var message = CreateWhatIfAtSubscriptionScopeRequest(subscriptionId, deploymentName, deploymentWhatIf);
             _pipeline.Send(message, cancellationToken);
@@ -863,10 +1109,34 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response> WhatIfAsync(string subscriptionId, string resourceGroupName, string deploymentName, DeploymentWhatIf deploymentWhatIf, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
-            Argument.AssertNotNull(deploymentWhatIf, nameof(deploymentWhatIf));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (resourceGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
+            }
+            if (deploymentName == null)
+            {
+                throw new ArgumentNullException(nameof(deploymentName));
+            }
+            if (deploymentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(deploymentName));
+            }
+            if (deploymentWhatIf == null)
+            {
+                throw new ArgumentNullException(nameof(deploymentWhatIf));
+            }
 
             using var message = CreateWhatIfRequest(subscriptionId, resourceGroupName, deploymentName, deploymentWhatIf);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -890,10 +1160,34 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response WhatIf(string subscriptionId, string resourceGroupName, string deploymentName, DeploymentWhatIf deploymentWhatIf, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
-            Argument.AssertNotNull(deploymentWhatIf, nameof(deploymentWhatIf));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (resourceGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
+            }
+            if (deploymentName == null)
+            {
+                throw new ArgumentNullException(nameof(deploymentName));
+            }
+            if (deploymentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(deploymentName));
+            }
+            if (deploymentWhatIf == null)
+            {
+                throw new ArgumentNullException(nameof(deploymentWhatIf));
+            }
 
             using var message = CreateWhatIfRequest(subscriptionId, resourceGroupName, deploymentName, deploymentWhatIf);
             _pipeline.Send(message, cancellationToken);
@@ -939,7 +1233,10 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="template"/> is null. </exception>
         public async Task<Response<TemplateHashResult>> CalculateTemplateHashAsync(BinaryData template, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(template, nameof(template));
+            if (template == null)
+            {
+                throw new ArgumentNullException(nameof(template));
+            }
 
             using var message = CreateCalculateTemplateHashRequest(template);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -963,7 +1260,10 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="template"/> is null. </exception>
         public Response<TemplateHashResult> CalculateTemplateHash(BinaryData template, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(template, nameof(template));
+            if (template == null)
+            {
+                throw new ArgumentNullException(nameof(template));
+            }
 
             using var message = CreateCalculateTemplateHashRequest(template);
             _pipeline.Send(message, cancellationToken);
@@ -1004,8 +1304,14 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="scope"/> is null. </exception>
         public async Task<Response<DeploymentListResult>> ListAtScopeNextPageAsync(string nextLink, string scope, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(nextLink, nameof(nextLink));
-            Argument.AssertNotNull(scope, nameof(scope));
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (scope == null)
+            {
+                throw new ArgumentNullException(nameof(scope));
+            }
 
             using var message = CreateListAtScopeNextPageRequest(nextLink, scope, filter, top);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1032,8 +1338,14 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="scope"/> is null. </exception>
         public Response<DeploymentListResult> ListAtScopeNextPage(string nextLink, string scope, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(nextLink, nameof(nextLink));
-            Argument.AssertNotNull(scope, nameof(scope));
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (scope == null)
+            {
+                throw new ArgumentNullException(nameof(scope));
+            }
 
             using var message = CreateListAtScopeNextPageRequest(nextLink, scope, filter, top);
             _pipeline.Send(message, cancellationToken);

@@ -42,7 +42,10 @@ namespace RenameGetList
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public RenameGetListClient(Uri endpoint, RenameGetListClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
             options ??= new RenameGetListClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -55,7 +58,10 @@ namespace RenameGetList
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Projects GetProjectsClient(string apiVersion = "2022-05-15-preview")
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
 
             return new Projects(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
         }
@@ -65,7 +71,10 @@ namespace RenameGetList
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Deployments GetDeploymentsClient(string apiVersion = "2022-05-15-preview")
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
 
             return new Deployments(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
         }

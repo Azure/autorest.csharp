@@ -81,8 +81,18 @@ namespace MgmtParent
         /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> or <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<DedicatedHostGroupResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string hostGroupName, DedicatedHostGroupData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(hostGroupName, nameof(hostGroupName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (hostGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(hostGroupName));
+            }
+            if (hostGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(hostGroupName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _dedicatedHostGroupClientDiagnostics.CreateScope("DedicatedHostGroupCollection.CreateOrUpdate");
             scope.Start();
@@ -130,8 +140,18 @@ namespace MgmtParent
         /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> or <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<DedicatedHostGroupResource> CreateOrUpdate(WaitUntil waitUntil, string hostGroupName, DedicatedHostGroupData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(hostGroupName, nameof(hostGroupName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (hostGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(hostGroupName));
+            }
+            if (hostGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(hostGroupName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _dedicatedHostGroupClientDiagnostics.CreateScope("DedicatedHostGroupCollection.CreateOrUpdate");
             scope.Start();
@@ -178,7 +198,14 @@ namespace MgmtParent
         /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> is null. </exception>
         public virtual async Task<Response<DedicatedHostGroupResource>> GetAsync(string hostGroupName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(hostGroupName, nameof(hostGroupName));
+            if (hostGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(hostGroupName));
+            }
+            if (hostGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(hostGroupName));
+            }
 
             using var scope = _dedicatedHostGroupClientDiagnostics.CreateScope("DedicatedHostGroupCollection.Get");
             scope.Start();
@@ -224,7 +251,14 @@ namespace MgmtParent
         /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> is null. </exception>
         public virtual Response<DedicatedHostGroupResource> Get(string hostGroupName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(hostGroupName, nameof(hostGroupName));
+            if (hostGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(hostGroupName));
+            }
+            if (hostGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(hostGroupName));
+            }
 
             using var scope = _dedicatedHostGroupClientDiagnostics.CreateScope("DedicatedHostGroupCollection.Get");
             scope.Start();
@@ -270,7 +304,14 @@ namespace MgmtParent
         /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> is null. </exception>
         public virtual async Task<Response<bool>> ExistsAsync(string hostGroupName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(hostGroupName, nameof(hostGroupName));
+            if (hostGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(hostGroupName));
+            }
+            if (hostGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(hostGroupName));
+            }
 
             using var scope = _dedicatedHostGroupClientDiagnostics.CreateScope("DedicatedHostGroupCollection.Exists");
             scope.Start();
@@ -314,7 +355,14 @@ namespace MgmtParent
         /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> is null. </exception>
         public virtual Response<bool> Exists(string hostGroupName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(hostGroupName, nameof(hostGroupName));
+            if (hostGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(hostGroupName));
+            }
+            if (hostGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(hostGroupName));
+            }
 
             using var scope = _dedicatedHostGroupClientDiagnostics.CreateScope("DedicatedHostGroupCollection.Exists");
             scope.Start();
@@ -358,7 +406,14 @@ namespace MgmtParent
         /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> is null. </exception>
         public virtual async Task<NullableResponse<DedicatedHostGroupResource>> GetIfExistsAsync(string hostGroupName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(hostGroupName, nameof(hostGroupName));
+            if (hostGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(hostGroupName));
+            }
+            if (hostGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(hostGroupName));
+            }
 
             using var scope = _dedicatedHostGroupClientDiagnostics.CreateScope("DedicatedHostGroupCollection.GetIfExists");
             scope.Start();
@@ -404,7 +459,14 @@ namespace MgmtParent
         /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> is null. </exception>
         public virtual NullableResponse<DedicatedHostGroupResource> GetIfExists(string hostGroupName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(hostGroupName, nameof(hostGroupName));
+            if (hostGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(hostGroupName));
+            }
+            if (hostGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(hostGroupName));
+            }
 
             using var scope = _dedicatedHostGroupClientDiagnostics.CreateScope("DedicatedHostGroupCollection.GetIfExists");
             scope.Start();

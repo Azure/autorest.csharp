@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
@@ -21,8 +20,14 @@ namespace CognitiveSearch.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="patterns"/> is null. </exception>
         public PatternCaptureTokenFilter(string name, IEnumerable<string> patterns) : base(name)
         {
-            Argument.AssertNotNull(name, nameof(name));
-            Argument.AssertNotNull(patterns, nameof(patterns));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (patterns == null)
+            {
+                throw new ArgumentNullException(nameof(patterns));
+            }
 
             Patterns = patterns.ToList();
             OdataType = "#Microsoft.Azure.Search.PatternCaptureTokenFilter";

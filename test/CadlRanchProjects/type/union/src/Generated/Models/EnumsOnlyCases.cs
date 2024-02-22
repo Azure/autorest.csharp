@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace _Type.Union.Models
 {
@@ -52,8 +51,14 @@ namespace _Type.Union.Models
         /// <exception cref="ArgumentNullException"> <paramref name="lr"/> or <paramref name="ud"/> is null. </exception>
         public EnumsOnlyCases(BinaryData lr, BinaryData ud)
         {
-            Argument.AssertNotNull(lr, nameof(lr));
-            Argument.AssertNotNull(ud, nameof(ud));
+            if (lr == null)
+            {
+                throw new ArgumentNullException(nameof(lr));
+            }
+            if (ud == null)
+            {
+                throw new ArgumentNullException(nameof(ud));
+            }
 
             Lr = lr;
             Ud = ud;

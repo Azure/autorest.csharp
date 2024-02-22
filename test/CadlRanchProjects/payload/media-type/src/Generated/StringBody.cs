@@ -50,7 +50,14 @@ namespace Payload.MediaType
         /// <include file="Docs/StringBody.xml" path="doc/members/member[@name='SendAsTextAsync(string,CancellationToken)']/*" />
         public virtual async Task<Response> SendAsTextAsync(string text, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(text, nameof(text));
+            if (text == null)
+            {
+                throw new ArgumentNullException(nameof(text));
+            }
+            if (text.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(text));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = text;
@@ -65,7 +72,14 @@ namespace Payload.MediaType
         /// <include file="Docs/StringBody.xml" path="doc/members/member[@name='SendAsText(string,CancellationToken)']/*" />
         public virtual Response SendAsText(string text, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(text, nameof(text));
+            if (text == null)
+            {
+                throw new ArgumentNullException(nameof(text));
+            }
+            if (text.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(text));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = text;
@@ -96,7 +110,10 @@ namespace Payload.MediaType
         /// <include file="Docs/StringBody.xml" path="doc/members/member[@name='SendAsTextAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> SendAsTextAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("StringBody.SendAsText");
             scope.Start();
@@ -135,7 +152,10 @@ namespace Payload.MediaType
         /// <include file="Docs/StringBody.xml" path="doc/members/member[@name='SendAsText(RequestContent,RequestContext)']/*" />
         public virtual Response SendAsText(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("StringBody.SendAsText");
             scope.Start();
@@ -246,7 +266,14 @@ namespace Payload.MediaType
         /// <include file="Docs/StringBody.xml" path="doc/members/member[@name='SendAsJsonAsync(string,CancellationToken)']/*" />
         public virtual async Task<Response> SendAsJsonAsync(string text, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(text, nameof(text));
+            if (text == null)
+            {
+                throw new ArgumentNullException(nameof(text));
+            }
+            if (text.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(text));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromObject(text);
@@ -261,7 +288,14 @@ namespace Payload.MediaType
         /// <include file="Docs/StringBody.xml" path="doc/members/member[@name='SendAsJson(string,CancellationToken)']/*" />
         public virtual Response SendAsJson(string text, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(text, nameof(text));
+            if (text == null)
+            {
+                throw new ArgumentNullException(nameof(text));
+            }
+            if (text.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(text));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromObject(text);
@@ -292,7 +326,10 @@ namespace Payload.MediaType
         /// <include file="Docs/StringBody.xml" path="doc/members/member[@name='SendAsJsonAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> SendAsJsonAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("StringBody.SendAsJson");
             scope.Start();
@@ -331,7 +368,10 @@ namespace Payload.MediaType
         /// <include file="Docs/StringBody.xml" path="doc/members/member[@name='SendAsJson(RequestContent,RequestContext)']/*" />
         public virtual Response SendAsJson(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("StringBody.SendAsJson");
             scope.Start();

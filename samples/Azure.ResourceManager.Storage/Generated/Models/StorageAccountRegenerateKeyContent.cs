@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using Azure.Core;
 
 namespace Azure.ResourceManager.Storage.Models
 {
@@ -18,7 +17,10 @@ namespace Azure.ResourceManager.Storage.Models
         /// <exception cref="ArgumentNullException"> <paramref name="keyName"/> is null. </exception>
         public StorageAccountRegenerateKeyContent(string keyName)
         {
-            Argument.AssertNotNull(keyName, nameof(keyName));
+            if (keyName == null)
+            {
+                throw new ArgumentNullException(nameof(keyName));
+            }
 
             KeyName = keyName;
         }

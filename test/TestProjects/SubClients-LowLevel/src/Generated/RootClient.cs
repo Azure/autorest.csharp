@@ -53,9 +53,22 @@ namespace SubClients_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="cachedParameter"/> is an empty string, and was expected to be non-empty. </exception>
         public RootClient(Uri endpoint, string cachedParameter, AzureKeyCredential credential, RootClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
-            Argument.AssertNotNullOrEmpty(cachedParameter, nameof(cachedParameter));
-            Argument.AssertNotNull(credential, nameof(credential));
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
+            if (cachedParameter == null)
+            {
+                throw new ArgumentNullException(nameof(cachedParameter));
+            }
+            if (cachedParameter.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(cachedParameter));
+            }
+            if (credential == null)
+            {
+                throw new ArgumentNullException(nameof(credential));
+            }
             options ??= new RootClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

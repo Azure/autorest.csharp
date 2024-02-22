@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace paging.Models
 {
@@ -52,8 +51,14 @@ namespace paging.Models
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> or <paramref name="tenant"/> is null. </exception>
         public CustomParameterGroup(string apiVersion, string tenant)
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-            Argument.AssertNotNull(tenant, nameof(tenant));
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
+            if (tenant == null)
+            {
+                throw new ArgumentNullException(nameof(tenant));
+            }
 
             ApiVersion = apiVersion;
             Tenant = tenant;

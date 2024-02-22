@@ -25,7 +25,10 @@ namespace MgmtParamOrdering
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
         public EnvironmentContainerResourceData(AzureLocation location, EnvironmentContainer properties) : base(location)
         {
-            Argument.AssertNotNull(properties, nameof(properties));
+            if (properties == null)
+            {
+                throw new ArgumentNullException(nameof(properties));
+            }
 
             Properties = properties;
         }

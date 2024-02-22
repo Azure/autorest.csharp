@@ -84,8 +84,18 @@ namespace MgmtXmlDeserialization
         /// <exception cref="ArgumentNullException"> <paramref name="xmlName"/> or <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<XmlInstanceResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string xmlName, XmlInstanceData data, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(xmlName, nameof(xmlName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (xmlName == null)
+            {
+                throw new ArgumentNullException(nameof(xmlName));
+            }
+            if (xmlName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(xmlName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstanceCollection.CreateOrUpdate");
             scope.Start();
@@ -134,8 +144,18 @@ namespace MgmtXmlDeserialization
         /// <exception cref="ArgumentNullException"> <paramref name="xmlName"/> or <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<XmlInstanceResource> CreateOrUpdate(WaitUntil waitUntil, string xmlName, XmlInstanceData data, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(xmlName, nameof(xmlName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (xmlName == null)
+            {
+                throw new ArgumentNullException(nameof(xmlName));
+            }
+            if (xmlName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(xmlName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstanceCollection.CreateOrUpdate");
             scope.Start();
@@ -181,7 +201,14 @@ namespace MgmtXmlDeserialization
         /// <exception cref="ArgumentNullException"> <paramref name="xmlName"/> is null. </exception>
         public virtual async Task<Response<XmlInstanceResource>> GetAsync(string xmlName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(xmlName, nameof(xmlName));
+            if (xmlName == null)
+            {
+                throw new ArgumentNullException(nameof(xmlName));
+            }
+            if (xmlName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(xmlName));
+            }
 
             using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstanceCollection.Get");
             scope.Start();
@@ -226,7 +253,14 @@ namespace MgmtXmlDeserialization
         /// <exception cref="ArgumentNullException"> <paramref name="xmlName"/> is null. </exception>
         public virtual Response<XmlInstanceResource> Get(string xmlName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(xmlName, nameof(xmlName));
+            if (xmlName == null)
+            {
+                throw new ArgumentNullException(nameof(xmlName));
+            }
+            if (xmlName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(xmlName));
+            }
 
             using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstanceCollection.Get");
             scope.Start();
@@ -337,7 +371,14 @@ namespace MgmtXmlDeserialization
         /// <exception cref="ArgumentNullException"> <paramref name="xmlName"/> is null. </exception>
         public virtual async Task<Response<bool>> ExistsAsync(string xmlName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(xmlName, nameof(xmlName));
+            if (xmlName == null)
+            {
+                throw new ArgumentNullException(nameof(xmlName));
+            }
+            if (xmlName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(xmlName));
+            }
 
             using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstanceCollection.Exists");
             scope.Start();
@@ -380,7 +421,14 @@ namespace MgmtXmlDeserialization
         /// <exception cref="ArgumentNullException"> <paramref name="xmlName"/> is null. </exception>
         public virtual Response<bool> Exists(string xmlName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(xmlName, nameof(xmlName));
+            if (xmlName == null)
+            {
+                throw new ArgumentNullException(nameof(xmlName));
+            }
+            if (xmlName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(xmlName));
+            }
 
             using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstanceCollection.Exists");
             scope.Start();
@@ -423,7 +471,14 @@ namespace MgmtXmlDeserialization
         /// <exception cref="ArgumentNullException"> <paramref name="xmlName"/> is null. </exception>
         public virtual async Task<NullableResponse<XmlInstanceResource>> GetIfExistsAsync(string xmlName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(xmlName, nameof(xmlName));
+            if (xmlName == null)
+            {
+                throw new ArgumentNullException(nameof(xmlName));
+            }
+            if (xmlName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(xmlName));
+            }
 
             using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstanceCollection.GetIfExists");
             scope.Start();
@@ -468,7 +523,14 @@ namespace MgmtXmlDeserialization
         /// <exception cref="ArgumentNullException"> <paramref name="xmlName"/> is null. </exception>
         public virtual NullableResponse<XmlInstanceResource> GetIfExists(string xmlName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(xmlName, nameof(xmlName));
+            if (xmlName == null)
+            {
+                throw new ArgumentNullException(nameof(xmlName));
+            }
+            if (xmlName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(xmlName));
+            }
 
             using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstanceCollection.GetIfExists");
             scope.Start();

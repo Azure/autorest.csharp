@@ -36,7 +36,10 @@ namespace Encode.Duration
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public DurationClient(Uri endpoint, DurationClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
             options ??= new DurationClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

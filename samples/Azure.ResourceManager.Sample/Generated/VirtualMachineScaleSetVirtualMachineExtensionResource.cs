@@ -286,7 +286,10 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentNullException"> <paramref name="extensionParameters"/> is null. </exception>
         public virtual async Task<ArmOperation<VirtualMachineScaleSetVirtualMachineExtensionResource>> UpdateAsync(WaitUntil waitUntil, VirtualMachineExtensionUpdate extensionParameters, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(extensionParameters, nameof(extensionParameters));
+            if (extensionParameters == null)
+            {
+                throw new ArgumentNullException(nameof(extensionParameters));
+            }
 
             using var scope = _virtualMachineScaleSetVirtualMachineExtensionVirtualMachineScaleSetVmExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetVirtualMachineExtensionResource.Update");
             scope.Start();
@@ -332,7 +335,10 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentNullException"> <paramref name="extensionParameters"/> is null. </exception>
         public virtual ArmOperation<VirtualMachineScaleSetVirtualMachineExtensionResource> Update(WaitUntil waitUntil, VirtualMachineExtensionUpdate extensionParameters, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(extensionParameters, nameof(extensionParameters));
+            if (extensionParameters == null)
+            {
+                throw new ArgumentNullException(nameof(extensionParameters));
+            }
 
             using var scope = _virtualMachineScaleSetVirtualMachineExtensionVirtualMachineScaleSetVmExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetVirtualMachineExtensionResource.Update");
             scope.Start();
@@ -378,8 +384,14 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
         public virtual async Task<Response<VirtualMachineScaleSetVirtualMachineExtensionResource>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(key, nameof(key));
-            Argument.AssertNotNull(value, nameof(value));
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
 
             using var scope = _virtualMachineScaleSetVirtualMachineExtensionVirtualMachineScaleSetVmExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetVirtualMachineExtensionResource.AddTag");
             scope.Start();
@@ -440,8 +452,14 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
         public virtual Response<VirtualMachineScaleSetVirtualMachineExtensionResource> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(key, nameof(key));
-            Argument.AssertNotNull(value, nameof(value));
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
 
             using var scope = _virtualMachineScaleSetVirtualMachineExtensionVirtualMachineScaleSetVmExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetVirtualMachineExtensionResource.AddTag");
             scope.Start();
@@ -501,7 +519,10 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
         public virtual async Task<Response<VirtualMachineScaleSetVirtualMachineExtensionResource>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(tags, nameof(tags));
+            if (tags == null)
+            {
+                throw new ArgumentNullException(nameof(tags));
+            }
 
             using var scope = _virtualMachineScaleSetVirtualMachineExtensionVirtualMachineScaleSetVmExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetVirtualMachineExtensionResource.SetTags");
             scope.Start();
@@ -558,7 +579,10 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
         public virtual Response<VirtualMachineScaleSetVirtualMachineExtensionResource> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(tags, nameof(tags));
+            if (tags == null)
+            {
+                throw new ArgumentNullException(nameof(tags));
+            }
 
             using var scope = _virtualMachineScaleSetVirtualMachineExtensionVirtualMachineScaleSetVmExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetVirtualMachineExtensionResource.SetTags");
             scope.Start();
@@ -615,7 +639,10 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public virtual async Task<Response<VirtualMachineScaleSetVirtualMachineExtensionResource>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(key, nameof(key));
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
 
             using var scope = _virtualMachineScaleSetVirtualMachineExtensionVirtualMachineScaleSetVmExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetVirtualMachineExtensionResource.RemoveTag");
             scope.Start();
@@ -675,7 +702,10 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public virtual Response<VirtualMachineScaleSetVirtualMachineExtensionResource> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(key, nameof(key));
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
 
             using var scope = _virtualMachineScaleSetVirtualMachineExtensionVirtualMachineScaleSetVmExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetVirtualMachineExtensionResource.RemoveTag");
             scope.Start();

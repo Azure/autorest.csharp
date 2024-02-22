@@ -36,7 +36,10 @@ namespace Payload.ContentNegotiation
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public ContentNegotiationClient(Uri endpoint, ContentNegotiationClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
             options ??= new ContentNegotiationClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

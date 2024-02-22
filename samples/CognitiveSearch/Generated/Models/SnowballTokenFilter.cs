@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
@@ -19,7 +18,10 @@ namespace CognitiveSearch.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public SnowballTokenFilter(string name, SnowballTokenFilterLanguage language) : base(name)
         {
-            Argument.AssertNotNull(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
             Language = language;
             OdataType = "#Microsoft.Azure.Search.SnowballTokenFilter";

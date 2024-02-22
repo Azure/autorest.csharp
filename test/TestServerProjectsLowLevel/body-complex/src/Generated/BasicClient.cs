@@ -48,8 +48,14 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public BasicClient(Uri endpoint, AzureKeyCredential credential, AutoRestComplexTestServiceClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
-            Argument.AssertNotNull(credential, nameof(credential));
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
+            if (credential == null)
+            {
+                throw new ArgumentNullException(nameof(credential));
+            }
             options ??= new AutoRestComplexTestServiceClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -137,7 +143,10 @@ namespace body_complex_LowLevel
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='PutValidAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutValidAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("BasicClient.PutValid");
             scope.Start();
@@ -171,7 +180,10 @@ namespace body_complex_LowLevel
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='PutValid(RequestContent,RequestContext)']/*" />
         public virtual Response PutValid(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("BasicClient.PutValid");
             scope.Start();

@@ -36,7 +36,10 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public UsageClient(Uri endpoint, UsageClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
             options ??= new UsageClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

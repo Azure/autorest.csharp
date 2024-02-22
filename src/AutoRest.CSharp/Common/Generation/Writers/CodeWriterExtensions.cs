@@ -364,7 +364,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 return writer.Line($"{parameter.Name:I} ??= {parameter.Initializer};");
             }
 
-            var validationStatement = Snippets.Extensible.Argument.ValidateParameter(parameter);
+            var validationStatement = Snippets.Argument.ValidateParameter(parameter);
 
             writer.WriteMethodBodyStatement(validationStatement);
 

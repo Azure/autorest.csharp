@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace Encode.Bytes.Models
 {
@@ -51,7 +50,10 @@ namespace Encode.Bytes.Models
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public Base64urlBytesProperty(BinaryData value)
         {
-            Argument.AssertNotNull(value, nameof(value));
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
 
             Value = value;
         }

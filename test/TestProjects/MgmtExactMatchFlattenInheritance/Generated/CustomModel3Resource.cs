@@ -197,7 +197,10 @@ namespace MgmtExactMatchFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<CustomModel3Resource>> UpdateAsync(WaitUntil waitUntil, CustomModel3Data data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(data, nameof(data));
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _customModel3ClientDiagnostics.CreateScope("CustomModel3Resource.Update");
             scope.Start();
@@ -243,7 +246,10 @@ namespace MgmtExactMatchFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<CustomModel3Resource> Update(WaitUntil waitUntil, CustomModel3Data data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(data, nameof(data));
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _customModel3ClientDiagnostics.CreateScope("CustomModel3Resource.Update");
             scope.Start();
