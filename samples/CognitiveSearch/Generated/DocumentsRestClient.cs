@@ -122,7 +122,7 @@ namespace CognitiveSearch
             {
                 uri.AppendQuery("$count", searchOptions.IncludeTotalResultCount.Value, true);
             }
-            if (searchOptions?.Facets != null && !(searchOptions?.Facets is ChangeTrackingList<int> changeTrackingList && changeTrackingList.IsUndefined))
+            if (searchOptions?.Facets != null && !(searchOptions?.Facets is ChangeTrackingList<string> changeTrackingList && changeTrackingList.IsUndefined))
             {
                 foreach (var param in searchOptions.Facets)
                 {
@@ -133,7 +133,7 @@ namespace CognitiveSearch
             {
                 uri.AppendQuery("$filter", searchOptions.Filter, true);
             }
-            if (searchOptions?.HighlightFields != null && !(searchOptions?.HighlightFields is ChangeTrackingList<int> changeTrackingList0 && changeTrackingList0.IsUndefined))
+            if (searchOptions?.HighlightFields != null && !(searchOptions?.HighlightFields is ChangeTrackingList<string> changeTrackingList0 && changeTrackingList0.IsUndefined))
             {
                 uri.AppendQueryDelimited("highlight", searchOptions.HighlightFields, ",", true);
             }
@@ -149,7 +149,7 @@ namespace CognitiveSearch
             {
                 uri.AppendQuery("minimumCoverage", searchOptions.MinimumCoverage.Value, true);
             }
-            if (searchOptions?.OrderBy != null && !(searchOptions?.OrderBy is ChangeTrackingList<int> changeTrackingList1 && changeTrackingList1.IsUndefined))
+            if (searchOptions?.OrderBy != null && !(searchOptions?.OrderBy is ChangeTrackingList<string> changeTrackingList1 && changeTrackingList1.IsUndefined))
             {
                 uri.AppendQueryDelimited("$orderby", searchOptions.OrderBy, ",", true);
             }
@@ -157,7 +157,7 @@ namespace CognitiveSearch
             {
                 uri.AppendQuery("queryType", searchOptions.QueryType.Value.ToSerialString(), true);
             }
-            if (searchOptions?.ScoringParameters != null && !(searchOptions?.ScoringParameters is ChangeTrackingList<int> changeTrackingList2 && changeTrackingList2.IsUndefined))
+            if (searchOptions?.ScoringParameters != null && !(searchOptions?.ScoringParameters is ChangeTrackingList<string> changeTrackingList2 && changeTrackingList2.IsUndefined))
             {
                 foreach (var param in searchOptions.ScoringParameters)
                 {
@@ -168,7 +168,7 @@ namespace CognitiveSearch
             {
                 uri.AppendQuery("scoringProfile", searchOptions.ScoringProfile, true);
             }
-            if (searchOptions?.SearchFields != null && !(searchOptions?.SearchFields is ChangeTrackingList<int> changeTrackingList3 && changeTrackingList3.IsUndefined))
+            if (searchOptions?.SearchFields != null && !(searchOptions?.SearchFields is ChangeTrackingList<string> changeTrackingList3 && changeTrackingList3.IsUndefined))
             {
                 uri.AppendQueryDelimited("searchFields", searchOptions.SearchFields, ",", true);
             }
@@ -176,7 +176,7 @@ namespace CognitiveSearch
             {
                 uri.AppendQuery("searchMode", searchOptions.SearchMode.Value.ToSerialString(), true);
             }
-            if (searchOptions?.Select != null && !(searchOptions?.Select is ChangeTrackingList<int> changeTrackingList4 && changeTrackingList4.IsUndefined))
+            if (searchOptions?.Select != null && !(searchOptions?.Select is ChangeTrackingList<string> changeTrackingList4 && changeTrackingList4.IsUndefined))
             {
                 uri.AppendQueryDelimited("$select", searchOptions.Select, ",", true);
             }
@@ -330,7 +330,7 @@ namespace CognitiveSearch
             uri.AppendPath("/docs('", false);
             uri.AppendPath(key, true);
             uri.AppendPath("')", false);
-            if (selectedFields != null && !(selectedFields is ChangeTrackingList<int> changeTrackingList && changeTrackingList.IsUndefined))
+            if (selectedFields != null && !(selectedFields is ChangeTrackingList<string> changeTrackingList && changeTrackingList.IsUndefined))
             {
                 uri.AppendQueryDelimited("$select", selectedFields, ",", true);
             }
@@ -431,15 +431,15 @@ namespace CognitiveSearch
             {
                 uri.AppendQuery("minimumCoverage", suggestOptions.MinimumCoverage.Value, true);
             }
-            if (suggestOptions?.OrderBy != null && !(suggestOptions?.OrderBy is ChangeTrackingList<int> changeTrackingList && changeTrackingList.IsUndefined))
+            if (suggestOptions?.OrderBy != null && !(suggestOptions?.OrderBy is ChangeTrackingList<string> changeTrackingList && changeTrackingList.IsUndefined))
             {
                 uri.AppendQueryDelimited("$orderby", suggestOptions.OrderBy, ",", true);
             }
-            if (suggestOptions?.SearchFields != null && !(suggestOptions?.SearchFields is ChangeTrackingList<int> changeTrackingList0 && changeTrackingList0.IsUndefined))
+            if (suggestOptions?.SearchFields != null && !(suggestOptions?.SearchFields is ChangeTrackingList<string> changeTrackingList0 && changeTrackingList0.IsUndefined))
             {
                 uri.AppendQueryDelimited("searchFields", suggestOptions.SearchFields, ",", true);
             }
-            if (suggestOptions?.Select != null && !(suggestOptions?.Select is ChangeTrackingList<int> changeTrackingList1 && changeTrackingList1.IsUndefined))
+            if (suggestOptions?.Select != null && !(suggestOptions?.Select is ChangeTrackingList<string> changeTrackingList1 && changeTrackingList1.IsUndefined))
             {
                 uri.AppendQueryDelimited("$select", suggestOptions.Select, ",", true);
             }
@@ -715,7 +715,7 @@ namespace CognitiveSearch
             {
                 uri.AppendQuery("minimumCoverage", autocompleteOptions.MinimumCoverage.Value, true);
             }
-            if (autocompleteOptions?.SearchFields != null && !(autocompleteOptions?.SearchFields is ChangeTrackingList<int> changeTrackingList && changeTrackingList.IsUndefined))
+            if (autocompleteOptions?.SearchFields != null && !(autocompleteOptions?.SearchFields is ChangeTrackingList<string> changeTrackingList && changeTrackingList.IsUndefined))
             {
                 uri.AppendQueryDelimited("searchFields", autocompleteOptions.SearchFields, ",", true);
             }
