@@ -646,7 +646,7 @@ namespace BodyAndPath_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/", false);
             uri.AppendPath(itemNameStream, true);
-            if (excluded != null && !(excluded is ChangeTrackingList<int> changeTrackingList && changeTrackingList.IsUndefined))
+            if (excluded != null && !(excluded is ChangeTrackingList<string> changeTrackingList && changeTrackingList.IsUndefined))
             {
                 foreach (var param in excluded)
                 {
