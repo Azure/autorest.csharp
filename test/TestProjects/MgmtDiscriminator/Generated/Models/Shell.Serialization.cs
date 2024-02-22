@@ -15,25 +15,28 @@ using Azure.ResourceManager;
 
 namespace MgmtDiscriminator.Models
 {
-    internal partial class UnknownPet : IUtf8JsonSerializable, IJsonModel<Pet>
+    public partial class Shell : IUtf8JsonSerializable, IJsonModel<Shell>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Pet>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Shell>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
-        void IJsonModel<Pet>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<Shell>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<Pet>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<Shell>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Pet)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Shell)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("kind"u8);
-            writer.WriteStringValue(Kind.ToSerialString());
-            if (options.Format != "W" && Optional.IsDefined(Id))
+            if (Optional.IsDefined(Name))
             {
-                writer.WritePropertyName("id"u8);
-                writer.WriteStringValue(Id);
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (Optional.IsDefined(ShellType))
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ShellType);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -53,19 +56,19 @@ namespace MgmtDiscriminator.Models
             writer.WriteEndObject();
         }
 
-        Pet IJsonModel<Pet>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Shell IJsonModel<Shell>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<Pet>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<Shell>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Pet)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Shell)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeUnknownPet(document.RootElement, options);
+            return DeserializeShell(document.RootElement, options);
         }
 
-        internal static UnknownPet DeserializeUnknownPet(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static Shell DeserializeShell(JsonElement element, ModelReaderWriterOptions options = null)
         {
             options ??= new ModelReaderWriterOptions("W");
 
@@ -73,20 +76,20 @@ namespace MgmtDiscriminator.Models
             {
                 return null;
             }
-            PetKind kind = default;
-            Optional<string> id = default;
+            Optional<string> name = default;
+            Optional<string> type = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("kind"u8))
+                if (property.NameEquals("name"u8))
                 {
-                    kind = property.Value.GetString().ToPetKind();
+                    name = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("id"u8))
+                if (property.NameEquals("type"u8))
                 {
-                    id = property.Value.GetString();
+                    type = property.Value.GetString();
                     continue;
                 }
                 if (options.Format != "W")
@@ -95,7 +98,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new UnknownPet(kind, id.Value, serializedAdditionalRawData);
+            return new Shell(name.Value, type.Value, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -109,38 +112,24 @@ namespace MgmtDiscriminator.Models
 
             builder.AppendLine("{");
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Kind), out propertyOverride);
-            if (Optional.IsDefined(Kind) || hasPropertyOverride)
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name), out propertyOverride);
+            if (Optional.IsDefined(Name) || hasPropertyOverride)
             {
-                builder.Append("  kind: ");
+                builder.Append("  name: ");
                 if (hasPropertyOverride)
                 {
                     builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($"'{Kind.ToSerialString()}'");
-                }
-            }
-
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Id), out propertyOverride);
-            if (Optional.IsDefined(Id) || hasPropertyOverride)
-            {
-                builder.Append("  id: ");
-                if (hasPropertyOverride)
-                {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
-                    if (Id.Contains(Environment.NewLine))
+                    if (Name.Contains(Environment.NewLine))
                     {
                         builder.AppendLine("'''");
-                        builder.AppendLine($"{Id}'''");
+                        builder.AppendLine($"{Name}'''");
                     }
                     else
                     {
-                        builder.AppendLine($"'{Id}'");
+                        builder.AppendLine($"'{Name}'");
                     }
                 }
             }
@@ -191,9 +180,9 @@ namespace MgmtDiscriminator.Models
             }
         }
 
-        BinaryData IPersistableModel<Pet>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Shell>.Write(ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<Pet>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<Shell>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
@@ -202,28 +191,28 @@ namespace MgmtDiscriminator.Models
                 case "bicep":
                     return SerializeBicep(options);
                 default:
-                    throw new FormatException($"The model {nameof(Pet)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Shell)} does not support '{options.Format}' format.");
             }
         }
 
-        Pet IPersistableModel<Pet>.Create(BinaryData data, ModelReaderWriterOptions options)
+        Shell IPersistableModel<Shell>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<Pet>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<Shell>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeUnknownPet(document.RootElement, options);
+                        return DeserializeShell(document.RootElement, options);
                     }
                 case "bicep":
                     throw new InvalidOperationException("Bicep deserialization is not supported for this type.");
                 default:
-                    throw new FormatException($"The model {nameof(Pet)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Shell)} does not support '{options.Format}' format.");
             }
         }
 
-        string IPersistableModel<Pet>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<Shell>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

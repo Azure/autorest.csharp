@@ -435,6 +435,11 @@
                     "type": "string",
                     "format": "url"
                 },
+                "shellProperty": {
+                    "description": "A shell property to verify bicep generation for empty objects.",
+                    "type": "object",
+                    "$ref": "#/definitions/Shell"
+                },
                 "properties": {
                     "description": "The properties",
                     "type": "object",
@@ -546,6 +551,20 @@
                         "name": "DogKind",
                         "modelAsString": false
                     }
+                }
+            }
+        },
+        "Shell": {
+            "description": "A shell type that can be used to validate bicep generation when no child properties are set",
+            "type": "object",
+            "properties": {
+                "name": {
+                    "description": "The name of the shell",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "The type of the shell",
+                    "type": "string"
                 }
             }
         },
