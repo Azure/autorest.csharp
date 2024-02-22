@@ -26,8 +26,11 @@ namespace TypeSchemaMapping.Models
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("ModelProperty"u8);
-            ModelProperty.WriteTo(writer);
+            if (ModelProperty.ValueKind != JsonValueKind.Undefined)
+            {
+                writer.WritePropertyName("ModelProperty"u8);
+                ModelProperty.WriteTo(writer);
+            }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
