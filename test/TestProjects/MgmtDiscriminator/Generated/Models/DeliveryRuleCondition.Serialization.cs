@@ -76,12 +76,12 @@ namespace MgmtDiscriminator.Models
             {
                 switch (discriminator.GetString())
                 {
-                    case "QueryString": return DeliveryRuleQueryStringCondition.DeserializeDeliveryRuleQueryStringCondition(element);
-                    case "RemoteAddress": return DeliveryRuleRemoteAddressCondition.DeserializeDeliveryRuleRemoteAddressCondition(element);
-                    case "RequestMethod": return DeliveryRuleRequestMethodCondition.DeserializeDeliveryRuleRequestMethodCondition(element);
+                    case "QueryString": return DeliveryRuleQueryStringCondition.DeserializeDeliveryRuleQueryStringCondition(element, options);
+                    case "RemoteAddress": return DeliveryRuleRemoteAddressCondition.DeserializeDeliveryRuleRemoteAddressCondition(element, options);
+                    case "RequestMethod": return DeliveryRuleRequestMethodCondition.DeserializeDeliveryRuleRequestMethodCondition(element, options);
                 }
             }
-            return UnknownDeliveryRuleCondition.DeserializeUnknownDeliveryRuleCondition(element);
+            return UnknownDeliveryRuleCondition.DeserializeUnknownDeliveryRuleCondition(element, options);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

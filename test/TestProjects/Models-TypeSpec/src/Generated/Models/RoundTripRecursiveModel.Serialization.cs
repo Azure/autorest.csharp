@@ -89,7 +89,7 @@ namespace ModelsTypeSpec.Models
                     {
                         continue;
                     }
-                    inner = DeserializeRoundTripRecursiveModel(property.Value);
+                    inner = DeserializeRoundTripRecursiveModel(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

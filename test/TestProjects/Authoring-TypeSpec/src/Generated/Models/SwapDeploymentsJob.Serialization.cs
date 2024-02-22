@@ -140,7 +140,7 @@ namespace AuthoringTypeSpec.Models
                     List<JobWarning> array = new List<JobWarning>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(JobWarning.DeserializeJobWarning(item));
+                        array.Add(JobWarning.DeserializeJobWarning(item, options));
                     }
                     warnings = array;
                     continue;

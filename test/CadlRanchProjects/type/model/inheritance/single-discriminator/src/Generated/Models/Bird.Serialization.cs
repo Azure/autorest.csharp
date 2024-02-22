@@ -73,13 +73,13 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             {
                 switch (discriminator.GetString())
                 {
-                    case "seagull": return SeaGull.DeserializeSeaGull(element);
-                    case "sparrow": return Sparrow.DeserializeSparrow(element);
-                    case "goose": return Goose.DeserializeGoose(element);
-                    case "eagle": return Eagle.DeserializeEagle(element);
+                    case "seagull": return SeaGull.DeserializeSeaGull(element, options);
+                    case "sparrow": return Sparrow.DeserializeSparrow(element, options);
+                    case "goose": return Goose.DeserializeGoose(element, options);
+                    case "eagle": return Eagle.DeserializeEagle(element, options);
                 }
             }
-            return UnknownBird.DeserializeUnknownBird(element);
+            return UnknownBird.DeserializeUnknownBird(element, options);
         }
 
         BinaryData IPersistableModel<Bird>.Write(ModelReaderWriterOptions options)

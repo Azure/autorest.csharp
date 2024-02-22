@@ -91,7 +91,7 @@ namespace ModelShapes.Models
                     {
                         continue;
                     }
-                    readonlyProperty = ReadonlyModel.DeserializeReadonlyModel(property.Value);
+                    readonlyProperty = ReadonlyModel.DeserializeReadonlyModel(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("ReadonlyListProperty"u8))
@@ -103,7 +103,7 @@ namespace ModelShapes.Models
                     List<ReadonlyModel> array = new List<ReadonlyModel>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ReadonlyModel.DeserializeReadonlyModel(item));
+                        array.Add(ReadonlyModel.DeserializeReadonlyModel(item, options));
                     }
                     readonlyListProperty = array;
                     continue;

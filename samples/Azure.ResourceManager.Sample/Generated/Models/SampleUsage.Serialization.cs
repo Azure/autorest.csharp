@@ -98,7 +98,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (property.NameEquals("name"u8))
                 {
-                    name = SampleUsageName.DeserializeSampleUsageName(property.Value);
+                    name = SampleUsageName.DeserializeSampleUsageName(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")
