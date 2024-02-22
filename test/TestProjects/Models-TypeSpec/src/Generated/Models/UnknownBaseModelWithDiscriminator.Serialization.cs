@@ -63,7 +63,7 @@ namespace ModelsTypeSpec.Models
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeUnknownBaseModelWithDiscriminator(document.RootElement, options);
+            return DeserializeBaseModelWithDiscriminator(document.RootElement, options);
         }
 
         internal static UnknownBaseModelWithDiscriminator DeserializeUnknownBaseModelWithDiscriminator(JsonElement element, ModelReaderWriterOptions options = null)
@@ -127,7 +127,7 @@ namespace ModelsTypeSpec.Models
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeUnknownBaseModelWithDiscriminator(document.RootElement, options);
+                        return DeserializeBaseModelWithDiscriminator(document.RootElement, options);
                     }
                 default:
                     throw new FormatException($"The model {nameof(BaseModelWithDiscriminator)} does not support '{options.Format}' format.");

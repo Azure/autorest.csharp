@@ -61,7 +61,7 @@ namespace MgmtDiscriminator.Models
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeUnknownDeliveryRuleAction(document.RootElement, options);
+            return DeserializeDeliveryRuleAction(document.RootElement, options);
         }
 
         internal static UnknownDeliveryRuleAction DeserializeUnknownDeliveryRuleAction(JsonElement element, ModelReaderWriterOptions options = null)
@@ -185,7 +185,7 @@ namespace MgmtDiscriminator.Models
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeUnknownDeliveryRuleAction(document.RootElement, options);
+                        return DeserializeDeliveryRuleAction(document.RootElement, options);
                     }
                 case "bicep":
                     throw new InvalidOperationException("Bicep deserialization is not supported for this type.");

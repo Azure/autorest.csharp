@@ -58,7 +58,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeUnknownAbstractModel(document.RootElement, options);
+            return DeserializeAbstractModel(document.RootElement, options);
         }
 
         internal static UnknownAbstractModel DeserializeUnknownAbstractModel(JsonElement element, ModelReaderWriterOptions options = null)
@@ -116,7 +116,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeUnknownAbstractModel(document.RootElement, options);
+                        return DeserializeAbstractModel(document.RootElement, options);
                     }
                 default:
                     throw new FormatException($"The model {nameof(AbstractModel)} does not support '{options.Format}' format.");
