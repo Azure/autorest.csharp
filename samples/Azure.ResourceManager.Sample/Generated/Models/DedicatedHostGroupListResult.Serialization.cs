@@ -91,7 +91,7 @@ namespace Azure.ResourceManager.Sample.Models
                     List<DedicatedHostGroupData> array = new List<DedicatedHostGroupData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DedicatedHostGroupData.DeserializeDedicatedHostGroupData(item));
+                        array.Add(DedicatedHostGroupData.DeserializeDedicatedHostGroupData(item, options));
                     }
                     value = array;
                     continue;

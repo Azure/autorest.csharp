@@ -303,7 +303,7 @@ namespace Azure.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            instanceView = DedicatedHostGroupInstanceView.DeserializeDedicatedHostGroupInstanceView(property0.Value);
+                            instanceView = DedicatedHostGroupInstanceView.DeserializeDedicatedHostGroupInstanceView(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("supportAutomaticPlacement"u8))

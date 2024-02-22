@@ -198,7 +198,7 @@ namespace Azure.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            publicIPAddressConfiguration = VirtualMachineScaleSetUpdatePublicIPAddressConfiguration.DeserializeVirtualMachineScaleSetUpdatePublicIPAddressConfiguration(property0.Value);
+                            publicIPAddressConfiguration = VirtualMachineScaleSetUpdatePublicIPAddressConfiguration.DeserializeVirtualMachineScaleSetUpdatePublicIPAddressConfiguration(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("privateIPAddressVersion"u8))

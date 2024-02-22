@@ -124,7 +124,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                     List<ResourceTypeAliasPath> array = new List<ResourceTypeAliasPath>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ResourceTypeAliasPath.DeserializeResourceTypeAliasPath(item));
+                        array.Add(ResourceTypeAliasPath.DeserializeResourceTypeAliasPath(item, options));
                     }
                     paths = array;
                     continue;
@@ -149,7 +149,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                     {
                         continue;
                     }
-                    defaultPattern = ResourceTypeAliasPattern.DeserializeResourceTypeAliasPattern(property.Value);
+                    defaultPattern = ResourceTypeAliasPattern.DeserializeResourceTypeAliasPattern(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("defaultMetadata"u8))
@@ -158,7 +158,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                     {
                         continue;
                     }
-                    defaultMetadata = ResourceTypeAliasPathMetadata.DeserializeResourceTypeAliasPathMetadata(property.Value);
+                    defaultMetadata = ResourceTypeAliasPathMetadata.DeserializeResourceTypeAliasPathMetadata(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

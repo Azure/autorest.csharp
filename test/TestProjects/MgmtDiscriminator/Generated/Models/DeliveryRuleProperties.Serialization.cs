@@ -133,7 +133,7 @@ namespace MgmtDiscriminator.Models
                     {
                         continue;
                     }
-                    conditions = DeliveryRuleCondition.DeserializeDeliveryRuleCondition(property.Value);
+                    conditions = DeliveryRuleCondition.DeserializeDeliveryRuleCondition(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("actions"u8))
@@ -145,7 +145,7 @@ namespace MgmtDiscriminator.Models
                     List<DeliveryRuleAction> array = new List<DeliveryRuleAction>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DeliveryRuleAction.DeserializeDeliveryRuleAction(item));
+                        array.Add(DeliveryRuleAction.DeserializeDeliveryRuleAction(item, options));
                     }
                     actions = array;
                     continue;
@@ -159,7 +159,7 @@ namespace MgmtDiscriminator.Models
                     Dictionary<string, DeliveryRuleAction> dictionary = new Dictionary<string, DeliveryRuleAction>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        dictionary.Add(property0.Name, DeliveryRuleAction.DeserializeDeliveryRuleAction(property0.Value));
+                        dictionary.Add(property0.Name, DeliveryRuleAction.DeserializeDeliveryRuleAction(property0.Value, options));
                     }
                     extraMappingInfo = dictionary;
                     continue;
@@ -170,7 +170,7 @@ namespace MgmtDiscriminator.Models
                     {
                         continue;
                     }
-                    pet = Pet.DeserializePet(property.Value);
+                    pet = Pet.DeserializePet(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("foo"u8))

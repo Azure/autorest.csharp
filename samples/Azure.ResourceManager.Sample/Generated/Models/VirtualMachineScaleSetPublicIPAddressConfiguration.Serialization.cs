@@ -142,7 +142,7 @@ namespace Azure.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            dnsSettings = VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings.DeserializeVirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings(property0.Value);
+                            dnsSettings = VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings.DeserializeVirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("ipTags"u8))
@@ -154,7 +154,7 @@ namespace Azure.ResourceManager.Sample.Models
                             List<VirtualMachineScaleSetIPTag> array = new List<VirtualMachineScaleSetIPTag>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(VirtualMachineScaleSetIPTag.DeserializeVirtualMachineScaleSetIPTag(item));
+                                array.Add(VirtualMachineScaleSetIPTag.DeserializeVirtualMachineScaleSetIPTag(item, options));
                             }
                             ipTags = array;
                             continue;

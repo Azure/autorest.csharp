@@ -308,7 +308,7 @@ namespace Azure.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            instanceView = VirtualMachineExtensionInstanceView.DeserializeVirtualMachineExtensionInstanceView(property0.Value);
+                            instanceView = VirtualMachineExtensionInstanceView.DeserializeVirtualMachineExtensionInstanceView(property0.Value, options);
                             continue;
                         }
                     }

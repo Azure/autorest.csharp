@@ -84,7 +84,7 @@ namespace MgmtDiscriminator.Models
             {
                 if (property.NameEquals("parameters"u8))
                 {
-                    parameters = UrlSigningActionParameters.DeserializeUrlSigningActionParameters(property.Value);
+                    parameters = UrlSigningActionParameters.DeserializeUrlSigningActionParameters(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("name"u8))

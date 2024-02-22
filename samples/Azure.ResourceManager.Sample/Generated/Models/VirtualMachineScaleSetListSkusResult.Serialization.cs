@@ -90,7 +90,7 @@ namespace Azure.ResourceManager.Sample.Models
                     List<VirtualMachineScaleSetSku> array = new List<VirtualMachineScaleSetSku>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(VirtualMachineScaleSetSku.DeserializeVirtualMachineScaleSetSku(item));
+                        array.Add(VirtualMachineScaleSetSku.DeserializeVirtualMachineScaleSetSku(item, options));
                     }
                     vmssSkus = array;
                     continue;

@@ -107,7 +107,7 @@ namespace AnomalyDetector.Models
                     {
                         continue;
                     }
-                    correlationChanges = CorrelationChanges.DeserializeCorrelationChanges(property.Value);
+                    correlationChanges = CorrelationChanges.DeserializeCorrelationChanges(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

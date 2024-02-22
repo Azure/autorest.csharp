@@ -105,7 +105,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    availableCapacity = DedicatedHostAvailableCapacity.DeserializeDedicatedHostAvailableCapacity(property.Value);
+                    availableCapacity = DedicatedHostAvailableCapacity.DeserializeDedicatedHostAvailableCapacity(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("statuses"u8))
@@ -117,7 +117,7 @@ namespace Azure.ResourceManager.Sample.Models
                     List<InstanceViewStatus> array = new List<InstanceViewStatus>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(InstanceViewStatus.DeserializeInstanceViewStatus(item));
+                        array.Add(InstanceViewStatus.DeserializeInstanceViewStatus(item, options));
                     }
                     statuses = array;
                     continue;

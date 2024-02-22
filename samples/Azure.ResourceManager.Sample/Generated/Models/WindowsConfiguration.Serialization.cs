@@ -144,7 +144,7 @@ namespace Azure.ResourceManager.Sample.Models
                     List<AdditionalUnattendContent> array = new List<AdditionalUnattendContent>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Models.AdditionalUnattendContent.DeserializeAdditionalUnattendContent(item));
+                        array.Add(Models.AdditionalUnattendContent.DeserializeAdditionalUnattendContent(item, options));
                     }
                     additionalUnattendContent = array;
                     continue;
@@ -155,7 +155,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    patchSettings = PatchSettings.DeserializePatchSettings(property.Value);
+                    patchSettings = PatchSettings.DeserializePatchSettings(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("winRM"u8))
@@ -164,7 +164,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    winRM = WinRMConfiguration.DeserializeWinRMConfiguration(property.Value);
+                    winRM = WinRMConfiguration.DeserializeWinRMConfiguration(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

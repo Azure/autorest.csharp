@@ -90,7 +90,7 @@ namespace MgmtDiscriminator.Models
                     {
                         continue;
                     }
-                    originGroupOverride = OriginGroupOverride.DeserializeOriginGroupOverride(property.Value);
+                    originGroupOverride = OriginGroupOverride.DeserializeOriginGroupOverride(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

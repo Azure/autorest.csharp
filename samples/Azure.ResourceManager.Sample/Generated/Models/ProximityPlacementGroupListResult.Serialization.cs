@@ -91,7 +91,7 @@ namespace Azure.ResourceManager.Sample.Models
                     List<ProximityPlacementGroupData> array = new List<ProximityPlacementGroupData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ProximityPlacementGroupData.DeserializeProximityPlacementGroupData(item));
+                        array.Add(ProximityPlacementGroupData.DeserializeProximityPlacementGroupData(item, options));
                     }
                     value = array;
                     continue;

@@ -88,7 +88,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    availablePatchSummary = AvailablePatchSummary.DeserializeAvailablePatchSummary(property.Value);
+                    availablePatchSummary = AvailablePatchSummary.DeserializeAvailablePatchSummary(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("lastPatchInstallationSummary"u8))
@@ -97,7 +97,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    lastPatchInstallationSummary = LastPatchInstallationSummary.DeserializeLastPatchInstallationSummary(property.Value);
+                    lastPatchInstallationSummary = LastPatchInstallationSummary.DeserializeLastPatchInstallationSummary(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

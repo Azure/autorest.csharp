@@ -84,7 +84,7 @@ namespace MgmtDiscriminator.Models
             {
                 if (property.NameEquals("parameters"u8))
                 {
-                    parameters = OriginGroupOverrideActionParameters.DeserializeOriginGroupOverrideActionParameters(property.Value);
+                    parameters = OriginGroupOverrideActionParameters.DeserializeOriginGroupOverrideActionParameters(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("name"u8))

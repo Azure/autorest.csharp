@@ -183,7 +183,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    error = ApiError.DeserializeApiError(property.Value);
+                    error = ApiError.DeserializeApiError(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

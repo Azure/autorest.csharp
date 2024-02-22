@@ -246,7 +246,7 @@ namespace Azure.ResourceManager.Sample
                             List<SubResourceWithColocationStatus> array = new List<SubResourceWithColocationStatus>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(SubResourceWithColocationStatus.DeserializeSubResourceWithColocationStatus(item));
+                                array.Add(SubResourceWithColocationStatus.DeserializeSubResourceWithColocationStatus(item, options));
                             }
                             virtualMachines = array;
                             continue;
@@ -260,7 +260,7 @@ namespace Azure.ResourceManager.Sample
                             List<SubResourceWithColocationStatus> array = new List<SubResourceWithColocationStatus>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(SubResourceWithColocationStatus.DeserializeSubResourceWithColocationStatus(item));
+                                array.Add(SubResourceWithColocationStatus.DeserializeSubResourceWithColocationStatus(item, options));
                             }
                             virtualMachineScaleSets = array;
                             continue;
@@ -274,7 +274,7 @@ namespace Azure.ResourceManager.Sample
                             List<SubResourceWithColocationStatus> array = new List<SubResourceWithColocationStatus>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(SubResourceWithColocationStatus.DeserializeSubResourceWithColocationStatus(item));
+                                array.Add(SubResourceWithColocationStatus.DeserializeSubResourceWithColocationStatus(item, options));
                             }
                             availabilitySets = array;
                             continue;
@@ -285,7 +285,7 @@ namespace Azure.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            colocationStatus = InstanceViewStatus.DeserializeInstanceViewStatus(property0.Value);
+                            colocationStatus = InstanceViewStatus.DeserializeInstanceViewStatus(property0.Value, options);
                             continue;
                         }
                     }

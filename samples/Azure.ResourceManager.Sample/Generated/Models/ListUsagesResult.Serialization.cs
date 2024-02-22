@@ -90,7 +90,7 @@ namespace Azure.ResourceManager.Sample.Models
                     List<SampleUsage> array = new List<SampleUsage>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(SampleUsage.DeserializeSampleUsage(item));
+                        array.Add(SampleUsage.DeserializeSampleUsage(item, options));
                     }
                     value = array;
                     continue;

@@ -235,7 +235,7 @@ namespace Azure.ResourceManager.Sample
                     {
                         continue;
                     }
-                    sku = SampleSku.DeserializeSampleSku(property.Value);
+                    sku = SampleSku.DeserializeSampleSku(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("plan"u8))
@@ -244,7 +244,7 @@ namespace Azure.ResourceManager.Sample
                     {
                         continue;
                     }
-                    plan = SamplePlan.DeserializeSamplePlan(property.Value);
+                    plan = SamplePlan.DeserializeSamplePlan(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("identity"u8))
@@ -328,7 +328,7 @@ namespace Azure.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            upgradePolicy = UpgradePolicy.DeserializeUpgradePolicy(property0.Value);
+                            upgradePolicy = UpgradePolicy.DeserializeUpgradePolicy(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("automaticRepairsPolicy"u8))
@@ -337,7 +337,7 @@ namespace Azure.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            automaticRepairsPolicy = AutomaticRepairsPolicy.DeserializeAutomaticRepairsPolicy(property0.Value);
+                            automaticRepairsPolicy = AutomaticRepairsPolicy.DeserializeAutomaticRepairsPolicy(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("virtualMachineProfile"u8))
@@ -346,7 +346,7 @@ namespace Azure.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            virtualMachineProfile = VirtualMachineScaleSetVmProfile.DeserializeVirtualMachineScaleSetVmProfile(property0.Value);
+                            virtualMachineProfile = VirtualMachineScaleSetVmProfile.DeserializeVirtualMachineScaleSetVmProfile(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"u8))
@@ -428,7 +428,7 @@ namespace Azure.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            additionalCapabilities = AdditionalCapabilities.DeserializeAdditionalCapabilities(property0.Value);
+                            additionalCapabilities = AdditionalCapabilities.DeserializeAdditionalCapabilities(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("scaleInPolicy"u8))
@@ -437,7 +437,7 @@ namespace Azure.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            scaleInPolicy = ScaleInPolicy.DeserializeScaleInPolicy(property0.Value);
+                            scaleInPolicy = ScaleInPolicy.DeserializeScaleInPolicy(property0.Value, options);
                             continue;
                         }
                     }

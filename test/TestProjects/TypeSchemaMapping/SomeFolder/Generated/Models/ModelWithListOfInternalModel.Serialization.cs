@@ -99,7 +99,7 @@ namespace TypeSchemaMapping.Models
                     List<InternalModel> array = new List<InternalModel>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(InternalModel.DeserializeInternalModel(item));
+                        array.Add(InternalModel.DeserializeInternalModel(item, options));
                     }
                     internalListProperty = array;
                     continue;

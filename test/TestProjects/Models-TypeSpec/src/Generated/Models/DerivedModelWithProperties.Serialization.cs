@@ -88,7 +88,7 @@ namespace ModelsTypeSpec.Models
                     List<CollectionItem> array = new List<CollectionItem>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CollectionItem.DeserializeCollectionItem(item));
+                        array.Add(CollectionItem.DeserializeCollectionItem(item, options));
                     }
                     requiredList = array;
                     continue;

@@ -98,7 +98,7 @@ namespace MgmtDiscriminator.Models
                     List<ArtifactData> array = new List<ArtifactData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ArtifactData.DeserializeArtifactData(item));
+                        array.Add(ArtifactData.DeserializeArtifactData(item, options));
                     }
                     value = array;
                     continue;

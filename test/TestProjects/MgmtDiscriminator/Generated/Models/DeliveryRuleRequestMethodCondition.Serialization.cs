@@ -84,7 +84,7 @@ namespace MgmtDiscriminator.Models
             {
                 if (property.NameEquals("parameters"u8))
                 {
-                    parameters = RequestMethodMatchConditionParameters.DeserializeRequestMethodMatchConditionParameters(property.Value);
+                    parameters = RequestMethodMatchConditionParameters.DeserializeRequestMethodMatchConditionParameters(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("name"u8))

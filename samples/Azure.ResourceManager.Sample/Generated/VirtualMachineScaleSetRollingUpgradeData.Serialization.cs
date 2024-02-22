@@ -197,7 +197,7 @@ namespace Azure.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            policy = RollingUpgradePolicy.DeserializeRollingUpgradePolicy(property0.Value);
+                            policy = RollingUpgradePolicy.DeserializeRollingUpgradePolicy(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("runningStatus"u8))
@@ -206,7 +206,7 @@ namespace Azure.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            runningStatus = RollingUpgradeRunningStatus.DeserializeRollingUpgradeRunningStatus(property0.Value);
+                            runningStatus = RollingUpgradeRunningStatus.DeserializeRollingUpgradeRunningStatus(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("progress"u8))
@@ -215,7 +215,7 @@ namespace Azure.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            progress = RollingUpgradeProgressInfo.DeserializeRollingUpgradeProgressInfo(property0.Value);
+                            progress = RollingUpgradeProgressInfo.DeserializeRollingUpgradeProgressInfo(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("error"u8))
@@ -224,7 +224,7 @@ namespace Azure.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            error = ApiError.DeserializeApiError(property0.Value);
+                            error = ApiError.DeserializeApiError(property0.Value, options);
                             continue;
                         }
                     }

@@ -112,7 +112,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    runningStatus = UpgradeOperationHistoryStatus.DeserializeUpgradeOperationHistoryStatus(property.Value);
+                    runningStatus = UpgradeOperationHistoryStatus.DeserializeUpgradeOperationHistoryStatus(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("progress"u8))
@@ -121,7 +121,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    progress = RollingUpgradeProgressInfo.DeserializeRollingUpgradeProgressInfo(property.Value);
+                    progress = RollingUpgradeProgressInfo.DeserializeRollingUpgradeProgressInfo(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("error"u8))
@@ -130,7 +130,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    error = ApiError.DeserializeApiError(property.Value);
+                    error = ApiError.DeserializeApiError(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("startedBy"u8))
@@ -148,7 +148,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    targetImageReference = ImageReference.DeserializeImageReference(property.Value);
+                    targetImageReference = ImageReference.DeserializeImageReference(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("rollbackInfo"u8))
@@ -157,7 +157,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    rollbackInfo = RollbackStatusInfo.DeserializeRollbackStatusInfo(property.Value);
+                    rollbackInfo = RollbackStatusInfo.DeserializeRollbackStatusInfo(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

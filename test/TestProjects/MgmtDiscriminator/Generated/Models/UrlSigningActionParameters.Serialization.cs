@@ -114,7 +114,7 @@ namespace MgmtDiscriminator.Models
                     List<UrlSigningParamIdentifier> array = new List<UrlSigningParamIdentifier>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(UrlSigningParamIdentifier.DeserializeUrlSigningParamIdentifier(item));
+                        array.Add(UrlSigningParamIdentifier.DeserializeUrlSigningParamIdentifier(item, options));
                     }
                     parameterNameOverride = array;
                     continue;

@@ -97,7 +97,7 @@ namespace Azure.ResourceManager.Sample.Models
                     List<UpgradeOperationHistoricalStatusInfo> array = new List<UpgradeOperationHistoricalStatusInfo>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(UpgradeOperationHistoricalStatusInfo.DeserializeUpgradeOperationHistoricalStatusInfo(item));
+                        array.Add(UpgradeOperationHistoricalStatusInfo.DeserializeUpgradeOperationHistoricalStatusInfo(item, options));
                     }
                     value = array;
                     continue;

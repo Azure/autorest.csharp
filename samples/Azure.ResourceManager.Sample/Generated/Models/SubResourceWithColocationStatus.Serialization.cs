@@ -88,7 +88,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    colocationStatus = InstanceViewStatus.DeserializeInstanceViewStatus(property.Value);
+                    colocationStatus = InstanceViewStatus.DeserializeInstanceViewStatus(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("id"u8))

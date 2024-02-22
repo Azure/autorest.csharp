@@ -139,12 +139,12 @@ namespace validation.Models
                 }
                 if (property.NameEquals("child"u8))
                 {
-                    child = ChildProduct.DeserializeChildProduct(property.Value);
+                    child = ChildProduct.DeserializeChildProduct(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("constChild"u8))
                 {
-                    constChild = ConstantProduct.DeserializeConstantProduct(property.Value);
+                    constChild = ConstantProduct.DeserializeConstantProduct(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("constInt"u8))

@@ -94,11 +94,11 @@ namespace MgmtDiscriminator
             {
                 switch (discriminator.GetString())
                 {
-                    case "roleAssignment": return RoleAssignmentArtifact.DeserializeRoleAssignmentArtifact(element);
-                    case "template": return TemplateArtifact.DeserializeTemplateArtifact(element);
+                    case "roleAssignment": return RoleAssignmentArtifact.DeserializeRoleAssignmentArtifact(element, options);
+                    case "template": return TemplateArtifact.DeserializeTemplateArtifact(element, options);
                 }
             }
-            return UnknownArtifact.DeserializeUnknownArtifact(element);
+            return UnknownArtifact.DeserializeUnknownArtifact(element, options);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

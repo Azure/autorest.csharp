@@ -92,7 +92,7 @@ namespace MgmtDiscriminator.Models
                     List<DeliveryRuleData> array = new List<DeliveryRuleData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DeliveryRuleData.DeserializeDeliveryRuleData(item));
+                        array.Add(DeliveryRuleData.DeserializeDeliveryRuleData(item, options));
                     }
                     value = array;
                     continue;

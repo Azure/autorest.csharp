@@ -228,7 +228,7 @@ namespace MgmtDiscriminator
                     {
                         continue;
                     }
-                    properties = DeliveryRuleProperties.DeserializeDeliveryRuleProperties(property.Value);
+                    properties = DeliveryRuleProperties.DeserializeDeliveryRuleProperties(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("id"u8))

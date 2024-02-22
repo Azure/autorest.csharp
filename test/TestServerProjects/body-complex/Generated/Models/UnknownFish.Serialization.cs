@@ -115,7 +115,7 @@ namespace body_complex.Models
                     List<Fish> array = new List<Fish>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DeserializeFish(item));
+                        array.Add(DeserializeFish(item, options));
                     }
                     siblings = array;
                     continue;

@@ -91,7 +91,7 @@ namespace Azure.ResourceManager.Sample.Models
                     List<ImageData> array = new List<ImageData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ImageData.DeserializeImageData(item));
+                        array.Add(ImageData.DeserializeImageData(item, options));
                     }
                     value = array;
                     continue;

@@ -333,7 +333,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     _writer.WriteMethodBodyStatement(new[]
                     {
                         new DeclareVariableStatement(value.Type, value.Declaration, Default),
-                        JsonSerializationMethodsBuilder.BuildDeserializationForMethods(serialization, async, value, new ResponseExpression(response).ContentStream, false),
+                        JsonSerializationMethodsBuilder.BuildDeserializationForMethods(serialization, async, value, new ResponseExpression(response).ContentStream, false, null),
                         Return(Extensible.RestOperations.GetTypedResponseFromValue(value, response))
                     });
                 }
