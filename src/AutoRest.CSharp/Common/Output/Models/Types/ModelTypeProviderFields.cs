@@ -176,8 +176,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return ValidationType.None;
             }
 
-            // or it is readonly in DPG (in Legacy Data Plane readonly property require validation)
-            if (inputModelProperty.IsReadOnly && !Configuration.Generation1ConvenienceClient)
+            // or it is readonly, and we don't validate such parameters
+            if (inputModelProperty.IsReadOnly && !Configuration.AssertModelConstructorParametersForReadOnlyProperties)
             {
                 return ValidationType.None;
             }
