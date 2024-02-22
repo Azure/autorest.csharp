@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Linq;
+using System.Text.Json;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
@@ -9,6 +10,7 @@ using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models.Serialization;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace AutoRest.CSharp.Common.Output.Models
 {
@@ -30,8 +32,8 @@ namespace AutoRest.CSharp.Common.Output.Models
             {
                 switch (value)
                 {
-                    case JsonElementExpression jsonElement:
-                        return jsonElement.ValueKindNotEqualsNull();
+                    case { Type: { Name: nameof(JsonElement) } }:
+                        return NotEqual(new MemberExpression(value, nameof(JsonElement.ValueKind)), FrameworkEnumValue(JsonValueKind.Undefined));
                     case { Type: { IsNullable: true, IsValueType: true } }:
                         return new BoolExpression(new MemberExpression(value, "HasValue"));
                     default:
@@ -54,7 +56,10 @@ namespace AutoRest.CSharp.Common.Output.Models
 
                 if (!serialization.Value.Type.IsNullable && serialization.Value.Type.IsValueType)
                 {
-                    return statement;
+                    if (!serialization.Value.Type.Equals(typeof(JsonElement)))
+                    {
+                        return statement;
+                    }
                 }
 
                 return TypeFactory.IsCollectionType(serialization.Value.Type) && !TypeFactory.IsReadOnlyMemory(serialization.Value.Type)
