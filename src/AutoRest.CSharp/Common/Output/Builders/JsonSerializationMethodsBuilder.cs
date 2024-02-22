@@ -45,10 +45,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
 {
     internal static class JsonSerializationMethodsBuilder
     {
-        public static IEnumerable<Method> BuildJsonSerializationMethods(SerializableObjectType model, JsonObjectSerialization json)
+        public static IEnumerable<Method> BuildJsonSerializationMethods(JsonObjectSerialization json)
         {
             var jsonModelInterface = json.IJsonModelInterface;
             var typeOfT = jsonModelInterface.Arguments[0];
+
+            var model = typeOfT.Implementation as SerializableObjectType;
+            Debug.Assert(model is not null);
 
             var useModelReaderWriter = Configuration.UseModelReaderWriter;
 
@@ -116,7 +119,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
         }
 
-        public static IEnumerable<Method> BuildIModelMethods(SerializableObjectType model, JsonObjectSerialization? json, XmlObjectSerialization? xml, BicepObjectSerialization? bicep)
+        public static IEnumerable<Method> BuildIModelMethods(JsonObjectSerialization? json, XmlObjectSerialization? xml, BicepObjectSerialization? bicep)
         {
             // we do not need this if model reader writer feature is not enabled
             if (!Configuration.UseModelReaderWriter)
@@ -127,9 +130,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
             // if we have json serialization, we must have this interface.
             // if we have xml serialization, we must have this interface.
             // therefore this type should never be null - because we cannot get here when json and xml both are null
-            Debug.Assert(iModelTInterface != null, model.Type.Name);
+            Debug.Assert(iModelTInterface != null, "iModelTInterface should not be null");
 
             var typeOfT = iModelTInterface.Arguments[0];
+            var model = typeOfT.Implementation as SerializableObjectType;
+            Debug.Assert(model is not null);
+
             var options = new ModelReaderWriterOptionsExpression(KnownParameters.Serializations.Options);
             // BinaryData IPersistableModel<T>.Write(ModelReaderWriterOptions options)
             yield return new
