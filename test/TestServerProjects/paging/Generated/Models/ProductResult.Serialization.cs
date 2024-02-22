@@ -26,7 +26,7 @@ namespace paging.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Values))
+            if (!(Values is ChangeTrackingList<Product> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("values"u8);
                 writer.WriteStartArray();

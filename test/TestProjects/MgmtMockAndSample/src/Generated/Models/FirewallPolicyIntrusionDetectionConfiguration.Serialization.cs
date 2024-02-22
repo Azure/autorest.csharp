@@ -16,7 +16,7 @@ namespace MgmtMockAndSample.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(SignatureOverrides))
+            if (!(SignatureOverrides is ChangeTrackingList<FirewallPolicyIntrusionDetectionSignatureSpecification> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("signatureOverrides"u8);
                 writer.WriteStartArray();
@@ -26,7 +26,7 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(BypassTrafficSettings))
+            if (!(BypassTrafficSettings is ChangeTrackingList<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("bypassTrafficSettings"u8);
                 writer.WriteStartArray();

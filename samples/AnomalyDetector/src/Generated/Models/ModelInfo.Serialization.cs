@@ -58,7 +58,7 @@ namespace AnomalyDetector.Models
                 writer.WritePropertyName("status"u8);
                 writer.WriteStringValue(Status.Value.ToSerialString());
             }
-            if (options.Format != "W" && Optional.IsCollectionDefined(Errors))
+            if (options.Format != "W" && !(Errors is ChangeTrackingList<ErrorResponse> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("errors"u8);
                 writer.WriteStartArray();

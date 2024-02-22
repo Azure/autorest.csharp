@@ -31,7 +31,7 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("flags"u8);
                 writer.WriteStringValue(Flags.Value.ToString());
             }
-            if (Optional.IsCollectionDefined(Stopwords))
+            if (!(Stopwords is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("stopwords"u8);
                 writer.WriteStartArray();

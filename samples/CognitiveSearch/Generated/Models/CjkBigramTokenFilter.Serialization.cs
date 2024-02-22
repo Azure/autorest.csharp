@@ -16,7 +16,7 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(IgnoreScripts))
+            if (!(IgnoreScripts is ChangeTrackingList<CjkBigramTokenFilterScripts> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("ignoreScripts"u8);
                 writer.WriteStartArray();

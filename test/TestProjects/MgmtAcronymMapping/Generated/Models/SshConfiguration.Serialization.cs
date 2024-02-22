@@ -16,7 +16,7 @@ namespace MgmtAcronymMapping.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(PublicKeys))
+            if (!(PublicKeys is ChangeTrackingList<SshPublicKeyInfo> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("publicKeys"u8);
                 writer.WriteStartArray();

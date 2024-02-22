@@ -52,7 +52,7 @@ namespace body_complex.Models
             }
             writer.WritePropertyName("length"u8);
             writer.WriteNumberValue(Length);
-            if (Optional.IsCollectionDefined(Siblings))
+            if (!(Siblings is ChangeTrackingList<Fish> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("siblings"u8);
                 writer.WriteStartArray();

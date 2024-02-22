@@ -33,7 +33,7 @@ namespace Azure.ResourceManager.Sample
             writer.WriteStartObject();
             writer.WritePropertyName("sku"u8);
             writer.WriteObjectValue(Sku);
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -83,7 +83,7 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("hostId"u8);
                 writer.WriteStringValue(HostId);
             }
-            if (options.Format != "W" && Optional.IsCollectionDefined(VirtualMachines))
+            if (options.Format != "W" && !(VirtualMachines is ChangeTrackingList<Resources.Models.SubResource> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("virtualMachines"u8);
                 writer.WriteStartArray();
@@ -334,7 +334,7 @@ namespace Azure.ResourceManager.Sample
                 builder.AppendLine($" '{Location.ToString()}'");
             }
 
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 if (Tags.Any())
                 {
@@ -409,7 +409,7 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsCollectionDefined(VirtualMachines))
+            if (!(VirtualMachines is ChangeTrackingList<Resources.Models.SubResource> collection0 && collection0.IsUndefined))
             {
                 if (VirtualMachines.Any())
                 {

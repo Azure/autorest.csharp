@@ -33,7 +33,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("osDisk"u8);
                 writer.WriteObjectValue(OSDisk);
             }
-            if (Optional.IsCollectionDefined(DataDisks))
+            if (!(DataDisks is ChangeTrackingList<ImageDataDisk> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("dataDisks"u8);
                 writer.WriteStartArray();
@@ -145,7 +145,7 @@ namespace Azure.ResourceManager.Sample.Models
                 AppendChildObject(builder, OSDisk, options, 2, false);
             }
 
-            if (Optional.IsCollectionDefined(DataDisks))
+            if (!(DataDisks is ChangeTrackingList<ImageDataDisk> collection && collection.IsUndefined))
             {
                 if (DataDisks.Any())
                 {

@@ -46,7 +46,7 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("plan"u8);
                 writer.WriteObjectValue(Plan);
             }
-            if (options.Format != "W" && Optional.IsCollectionDefined(Resources))
+            if (options.Format != "W" && !(Resources is ChangeTrackingList<VirtualMachineExtensionData> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("resources"u8);
                 writer.WriteStartArray();
@@ -56,7 +56,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W" && Optional.IsCollectionDefined(Zones))
+            if (options.Format != "W" && !(Zones is ChangeTrackingList<string> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("zones"u8);
                 writer.WriteStartArray();
@@ -66,7 +66,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection1 && collection1.IsUndefined))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -519,7 +519,7 @@ namespace Azure.ResourceManager.Sample
                 builder.AppendLine($" '{Location.ToString()}'");
             }
 
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 if (Tags.Any())
                 {
@@ -573,7 +573,7 @@ namespace Azure.ResourceManager.Sample
                 AppendChildObject(builder, Plan, options, 2, false);
             }
 
-            if (Optional.IsCollectionDefined(Resources))
+            if (!(Resources is ChangeTrackingList<VirtualMachineExtensionData> collection0 && collection0.IsUndefined))
             {
                 if (Resources.Any())
                 {
@@ -587,7 +587,7 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsCollectionDefined(Zones))
+            if (!(Zones is ChangeTrackingList<string> collection1 && collection1.IsUndefined))
             {
                 if (Zones.Any())
                 {

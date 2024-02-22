@@ -43,7 +43,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("typeHandlerVersion"u8);
                 writer.WriteStringValue(TypeHandlerVersion);
             }
-            if (Optional.IsCollectionDefined(Substatuses))
+            if (!(Substatuses is ChangeTrackingList<InstanceViewStatus> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("substatuses"u8);
                 writer.WriteStartArray();
@@ -53,7 +53,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(Statuses))
+            if (!(Statuses is ChangeTrackingList<InstanceViewStatus> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("statuses"u8);
                 writer.WriteStartArray();
@@ -195,7 +195,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsCollectionDefined(Substatuses))
+            if (!(Substatuses is ChangeTrackingList<InstanceViewStatus> collection && collection.IsUndefined))
             {
                 if (Substatuses.Any())
                 {
@@ -209,7 +209,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsCollectionDefined(Statuses))
+            if (!(Statuses is ChangeTrackingList<InstanceViewStatus> collection0 && collection0.IsUndefined))
             {
                 if (Statuses.Any())
                 {

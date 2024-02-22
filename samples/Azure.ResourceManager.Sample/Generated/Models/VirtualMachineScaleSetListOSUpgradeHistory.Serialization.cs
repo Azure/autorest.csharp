@@ -129,7 +129,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsCollectionDefined(Value))
+            if (!(Value is ChangeTrackingList<UpgradeOperationHistoricalStatusInfo> collection && collection.IsUndefined))
             {
                 if (Value.Any())
                 {

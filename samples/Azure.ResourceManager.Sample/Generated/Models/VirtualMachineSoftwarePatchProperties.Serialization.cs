@@ -48,7 +48,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("kbid"u8);
                 writer.WriteStringValue(Kbid);
             }
-            if (options.Format != "W" && Optional.IsCollectionDefined(Classifications))
+            if (options.Format != "W" && !(Classifications is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("classifications"u8);
                 writer.WriteStartArray();
@@ -280,7 +280,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsCollectionDefined(Classifications))
+            if (!(Classifications is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 if (Classifications.Any())
                 {

@@ -53,7 +53,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("maintenanceRedeployStatus"u8);
                 writer.WriteObjectValue(MaintenanceRedeployStatus);
             }
-            if (Optional.IsCollectionDefined(Disks))
+            if (!(Disks is ChangeTrackingList<DiskInstanceView> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("disks"u8);
                 writer.WriteStartArray();
@@ -63,7 +63,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(Extensions))
+            if (!(Extensions is ChangeTrackingList<VirtualMachineExtensionInstanceView> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("extensions"u8);
                 writer.WriteStartArray();
@@ -83,7 +83,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("bootDiagnostics"u8);
                 writer.WriteObjectValue(BootDiagnostics);
             }
-            if (Optional.IsCollectionDefined(Statuses))
+            if (!(Statuses is ChangeTrackingList<InstanceViewStatus> collection1 && collection1.IsUndefined))
             {
                 writer.WritePropertyName("statuses"u8);
                 writer.WriteStartArray();
@@ -320,7 +320,7 @@ namespace Azure.ResourceManager.Sample.Models
                 AppendChildObject(builder, MaintenanceRedeployStatus, options, 2, false);
             }
 
-            if (Optional.IsCollectionDefined(Disks))
+            if (!(Disks is ChangeTrackingList<DiskInstanceView> collection && collection.IsUndefined))
             {
                 if (Disks.Any())
                 {
@@ -334,7 +334,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsCollectionDefined(Extensions))
+            if (!(Extensions is ChangeTrackingList<VirtualMachineExtensionInstanceView> collection0 && collection0.IsUndefined))
             {
                 if (Extensions.Any())
                 {
@@ -360,7 +360,7 @@ namespace Azure.ResourceManager.Sample.Models
                 AppendChildObject(builder, BootDiagnostics, options, 2, false);
             }
 
-            if (Optional.IsCollectionDefined(Statuses))
+            if (!(Statuses is ChangeTrackingList<InstanceViewStatus> collection1 && collection1.IsUndefined))
             {
                 if (Statuses.Any())
                 {

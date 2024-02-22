@@ -22,7 +22,7 @@ namespace Azure.ResourceManager.Storage
             writer.WriteStartObject();
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Metadata))
+            if (!(Metadata is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("metadata"u8);
                 writer.WriteStartObject();
@@ -53,7 +53,7 @@ namespace Azure.ResourceManager.Storage
                 writer.WritePropertyName("accessTier"u8);
                 writer.WriteStringValue(AccessTier.Value.ToString());
             }
-            if (Optional.IsCollectionDefined(SignedIdentifiers))
+            if (!(SignedIdentifiers is ChangeTrackingList<SignedIdentifier> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("signedIdentifiers"u8);
                 writer.WriteStartArray();

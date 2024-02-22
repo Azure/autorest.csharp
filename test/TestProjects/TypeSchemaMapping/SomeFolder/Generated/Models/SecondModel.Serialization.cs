@@ -32,7 +32,7 @@ namespace TypeSchemaMapping.Models
                 writer.WritePropertyName("StringProperty"u8);
                 writer.WriteNumberValue(IntProperty);
             }
-            if (Optional.IsCollectionDefined(DictionaryProperty))
+            if (!(DictionaryProperty is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("DictionaryProperty"u8);
                 writer.WriteStartObject();

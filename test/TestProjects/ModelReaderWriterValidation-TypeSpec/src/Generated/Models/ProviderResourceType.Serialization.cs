@@ -32,7 +32,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 writer.WritePropertyName("resourceType"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (Optional.IsCollectionDefined(Locations))
+            if (!(Locations is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("locations"u8);
                 writer.WriteStartArray();
@@ -42,7 +42,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(LocationMappings))
+            if (!(LocationMappings is ChangeTrackingList<ProviderExtendedLocation> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("locationMappings"u8);
                 writer.WriteStartArray();
@@ -52,7 +52,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(Aliases))
+            if (!(Aliases is ChangeTrackingList<ResourceTypeAlias> collection1 && collection1.IsUndefined))
             {
                 writer.WritePropertyName("aliases"u8);
                 writer.WriteStartArray();
@@ -62,7 +62,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(ApiVersions))
+            if (!(ApiVersions is ChangeTrackingList<string> collection2 && collection2.IsUndefined))
             {
                 writer.WritePropertyName("apiVersions"u8);
                 writer.WriteStartArray();
@@ -77,7 +77,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 writer.WritePropertyName("defaultApiVersion"u8);
                 writer.WriteStringValue(DefaultApiVersion);
             }
-            if (Optional.IsCollectionDefined(ZoneMappings))
+            if (!(ZoneMappings is ChangeTrackingList<ZoneMapping> collection3 && collection3.IsUndefined))
             {
                 writer.WritePropertyName("zoneMappings"u8);
                 writer.WriteStartArray();
@@ -87,7 +87,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(ApiProfiles))
+            if (!(ApiProfiles is ChangeTrackingList<ApiProfile> collection4 && collection4.IsUndefined))
             {
                 writer.WritePropertyName("apiProfiles"u8);
                 writer.WriteStartArray();
@@ -102,7 +102,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 writer.WritePropertyName("capabilities"u8);
                 writer.WriteStringValue(Capabilities);
             }
-            if (Optional.IsCollectionDefined(Properties))
+            if (!(Properties is ChangeTrackingDictionary<string, string> collection5 && collection5.IsUndefined))
             {
                 writer.WritePropertyName("properties"u8);
                 writer.WriteStartObject();

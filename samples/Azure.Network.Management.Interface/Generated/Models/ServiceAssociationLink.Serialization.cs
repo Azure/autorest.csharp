@@ -43,7 +43,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("allowDelete"u8);
                 writer.WriteBooleanValue(AllowDelete.Value);
             }
-            if (Optional.IsCollectionDefined(Locations))
+            if (!(Locations is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("locations"u8);
                 writer.WriteStartArray();

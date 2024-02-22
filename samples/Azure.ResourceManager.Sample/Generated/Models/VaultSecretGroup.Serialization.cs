@@ -34,7 +34,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("sourceVault"u8);
                 JsonSerializer.Serialize(writer, SourceVault);
             }
-            if (Optional.IsCollectionDefined(VaultCertificates))
+            if (!(VaultCertificates is ChangeTrackingList<VaultCertificate> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("vaultCertificates"u8);
                 writer.WriteStartArray();
@@ -131,7 +131,7 @@ namespace Azure.ResourceManager.Sample.Models
                 AppendChildObject(builder, SourceVault, options, 2, false);
             }
 
-            if (Optional.IsCollectionDefined(VaultCertificates))
+            if (!(VaultCertificates is ChangeTrackingList<VaultCertificate> collection && collection.IsUndefined))
             {
                 if (VaultCertificates.Any())
                 {

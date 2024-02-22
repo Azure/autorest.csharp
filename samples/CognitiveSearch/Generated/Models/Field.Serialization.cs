@@ -65,7 +65,7 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("indexAnalyzer"u8);
                 writer.WriteStringValue(IndexAnalyzer.Value.ToString());
             }
-            if (Optional.IsCollectionDefined(SynonymMaps))
+            if (!(SynonymMaps is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("synonymMaps"u8);
                 writer.WriteStartArray();
@@ -75,7 +75,7 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(Fields))
+            if (!(Fields is ChangeTrackingList<Field> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("fields"u8);
                 writer.WriteStartArray();

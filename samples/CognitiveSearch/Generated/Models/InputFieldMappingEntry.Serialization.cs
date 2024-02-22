@@ -28,7 +28,7 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("sourceContext"u8);
                 writer.WriteStringValue(SourceContext);
             }
-            if (Optional.IsCollectionDefined(Inputs))
+            if (!(Inputs is ChangeTrackingList<InputFieldMappingEntry> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("inputs"u8);
                 writer.WriteStartArray();

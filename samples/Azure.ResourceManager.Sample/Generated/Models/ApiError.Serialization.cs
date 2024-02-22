@@ -28,7 +28,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Details))
+            if (!(Details is ChangeTrackingList<ApiErrorBase> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("details"u8);
                 writer.WriteStartArray();
@@ -157,7 +157,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsCollectionDefined(Details))
+            if (!(Details is ChangeTrackingList<ApiErrorBase> collection && collection.IsUndefined))
             {
                 if (Details.Any())
                 {

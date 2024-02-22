@@ -113,7 +113,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsCollectionDefined(VmssSkus))
+            if (!(VmssSkus is ChangeTrackingList<VirtualMachineScaleSetSku> collection && collection.IsUndefined))
             {
                 if (VmssSkus.Any())
                 {

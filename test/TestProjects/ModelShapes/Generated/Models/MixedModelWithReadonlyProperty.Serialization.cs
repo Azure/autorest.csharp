@@ -31,7 +31,7 @@ namespace ModelShapes.Models
                 writer.WritePropertyName("ReadonlyProperty"u8);
                 writer.WriteObjectValue(ReadonlyProperty);
             }
-            if (options.Format != "W" && Optional.IsCollectionDefined(ReadonlyListProperty))
+            if (options.Format != "W" && !(ReadonlyListProperty is ChangeTrackingList<ReadonlyModel> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("ReadonlyListProperty"u8);
                 writer.WriteStartArray();

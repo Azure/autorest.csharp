@@ -51,7 +51,7 @@ namespace MgmtMockAndSample.Models
                 writer.WritePropertyName("tenantId"u8);
                 writer.WriteStringValue(TenantId.Value);
             }
-            if (Optional.IsCollectionDefined(InitialAdminObjectIds))
+            if (!(InitialAdminObjectIds is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("initialAdminObjectIds"u8);
                 writer.WriteStartArray();

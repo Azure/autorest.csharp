@@ -28,7 +28,7 @@ namespace Azure.Network.Management.Interface.Models
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(BackendAddresses))
+            if (!(BackendAddresses is ChangeTrackingList<ApplicationGatewayBackendAddress> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("backendAddresses"u8);
                 writer.WriteStartArray();

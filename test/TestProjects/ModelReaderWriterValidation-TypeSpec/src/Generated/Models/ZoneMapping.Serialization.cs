@@ -32,7 +32,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location);
             }
-            if (Optional.IsCollectionDefined(Zones))
+            if (!(Zones is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("zones"u8);
                 writer.WriteStartArray();

@@ -439,7 +439,7 @@ namespace Encode.Duration
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/encode/duration/query/int32-seconds-array", false);
-            if (input != null && Optional.IsCollectionDefined(input))
+            if (input != null && !(input is ChangeTrackingList<int> changeTrackingList && changeTrackingList.IsUndefined))
             {
                 uri.AppendQueryDelimited("input", input, ",", "%s", true);
             }

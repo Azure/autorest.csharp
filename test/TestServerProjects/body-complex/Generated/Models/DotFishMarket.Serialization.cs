@@ -31,7 +31,7 @@ namespace body_complex.Models
                 writer.WritePropertyName("sampleSalmon"u8);
                 writer.WriteObjectValue(SampleSalmon);
             }
-            if (Optional.IsCollectionDefined(Salmons))
+            if (!(Salmons is ChangeTrackingList<DotSalmon> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("salmons"u8);
                 writer.WriteStartArray();
@@ -46,7 +46,7 @@ namespace body_complex.Models
                 writer.WritePropertyName("sampleFish"u8);
                 writer.WriteObjectValue(SampleFish);
             }
-            if (Optional.IsCollectionDefined(Fishes))
+            if (!(Fishes is ChangeTrackingList<DotFish> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("fishes"u8);
                 writer.WriteStartArray();

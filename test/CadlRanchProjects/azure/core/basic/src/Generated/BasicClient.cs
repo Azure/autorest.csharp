@@ -978,7 +978,7 @@ namespace _Specs_.Azure.Core.Basic
             {
                 uri.AppendQuery("maxpagesize", maxpagesize.Value, true);
             }
-            if (orderby != null && Optional.IsCollectionDefined(orderby))
+            if (orderby != null && !(orderby is ChangeTrackingList<int> changeTrackingList && changeTrackingList.IsUndefined))
             {
                 foreach (var param in orderby)
                 {
@@ -989,14 +989,14 @@ namespace _Specs_.Azure.Core.Basic
             {
                 uri.AppendQuery("filter", filter, true);
             }
-            if (select != null && Optional.IsCollectionDefined(select))
+            if (select != null && !(select is ChangeTrackingList<int> changeTrackingList0 && changeTrackingList0.IsUndefined))
             {
                 foreach (var param in select)
                 {
                     uri.AppendQuery("select", param, true);
                 }
             }
-            if (expand != null && Optional.IsCollectionDefined(expand))
+            if (expand != null && !(expand is ChangeTrackingList<int> changeTrackingList1 && changeTrackingList1.IsUndefined))
             {
                 foreach (var param in expand)
                 {

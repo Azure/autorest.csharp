@@ -42,7 +42,7 @@ namespace xml_service.Models
             {
                 writer.WriteObjectValue(DeleteRetentionPolicy, "DeleteRetentionPolicy");
             }
-            if (Optional.IsCollectionDefined(Cors))
+            if (!(Cors is ChangeTrackingList<CorsRule> collection && collection.IsUndefined))
             {
                 writer.WriteStartElement("Cors");
                 foreach (var item in Cors)

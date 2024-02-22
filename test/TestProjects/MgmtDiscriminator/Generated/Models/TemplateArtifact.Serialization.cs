@@ -274,7 +274,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            if (Optional.IsCollectionDefined(Parameters))
+            if (!(Parameters is ChangeTrackingDictionary<string, BinaryData> collection && collection.IsUndefined))
             {
                 if (Parameters.Any())
                 {

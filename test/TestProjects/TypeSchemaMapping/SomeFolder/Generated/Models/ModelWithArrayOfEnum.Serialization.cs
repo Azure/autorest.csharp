@@ -26,7 +26,7 @@ namespace TypeSchemaMapping.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(ArrayOfEnum))
+            if (!(ArrayOfEnum is ChangeTrackingList<EnumForModelWithArrayOfEnum> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("ArrayOfEnum"u8);
                 writer.WriteStartArray();
@@ -36,7 +36,7 @@ namespace TypeSchemaMapping.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(ArrayOfEnumCustomizedToNullable))
+            if (!(ArrayOfEnumCustomizedToNullable is ChangeTrackingList<EnumForModelWithArrayOfEnum?> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("ArrayOfEnumCustomizedToNullable"u8);
                 writer.WriteStartArray();

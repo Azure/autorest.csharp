@@ -27,7 +27,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Friends))
+            if (!(Friends is ChangeTrackingList<Bird> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("friends"u8);
                 writer.WriteStartArray();
@@ -37,7 +37,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(Hate))
+            if (!(Hate is ChangeTrackingDictionary<string, Bird> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("hate"u8);
                 writer.WriteStartObject();

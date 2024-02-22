@@ -69,7 +69,7 @@ namespace OpenAI.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            if (OptionalProperty.IsCollectionDefined(Events))
+            if (!(Events is OptionalList<FineTuneEvent> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("events"u8);
                 writer.WriteStartArray();

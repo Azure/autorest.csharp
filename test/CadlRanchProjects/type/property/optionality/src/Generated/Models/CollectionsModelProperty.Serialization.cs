@@ -27,7 +27,7 @@ namespace _Type.Property.Optionality.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Property))
+            if (!(Property is ChangeTrackingList<StringProperty> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("property"u8);
                 writer.WriteStartArray();

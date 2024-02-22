@@ -126,7 +126,7 @@ namespace OpenAI.Models
                     writer.WriteNull("classification_positive_class");
                 }
             }
-            if (OptionalProperty.IsCollectionDefined(ClassificationBetas))
+            if (!(ClassificationBetas is OptionalList<double> collection && collection.IsUndefined))
             {
                 if (ClassificationBetas != null)
                 {

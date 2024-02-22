@@ -110,7 +110,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("provisioningState"u8);
                 writer.WriteStringValue(ProvisioningState);
             }
-            if (Optional.IsCollectionDefined(ProvisionAfterExtensions))
+            if (!(ProvisionAfterExtensions is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("provisionAfterExtensions"u8);
                 writer.WriteStartArray();
@@ -426,7 +426,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsCollectionDefined(ProvisionAfterExtensions))
+            if (!(ProvisionAfterExtensions is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 if (ProvisionAfterExtensions.Any())
                 {

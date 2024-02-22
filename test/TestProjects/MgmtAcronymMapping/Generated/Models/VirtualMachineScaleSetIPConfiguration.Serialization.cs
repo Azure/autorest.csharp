@@ -42,7 +42,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WritePropertyName("publicIPAddressConfiguration"u8);
                 writer.WriteObjectValue(PublicIPAddressConfiguration);
             }
-            if (Optional.IsCollectionDefined(IPAddresses))
+            if (!(IPAddresses is ChangeTrackingList<IPAddress> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("ipAddresses"u8);
                 writer.WriteStartArray();
@@ -62,7 +62,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WritePropertyName("privateIPAddressVersion"u8);
                 writer.WriteStringValue(PrivateIPAddressVersion.Value.ToString());
             }
-            if (Optional.IsCollectionDefined(ApplicationGatewayBackendAddressPools))
+            if (!(ApplicationGatewayBackendAddressPools is ChangeTrackingList<WritableSubResource> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("applicationGatewayBackendAddressPools"u8);
                 writer.WriteStartArray();
@@ -72,7 +72,7 @@ namespace MgmtAcronymMapping.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(ApplicationSecurityGroups))
+            if (!(ApplicationSecurityGroups is ChangeTrackingList<WritableSubResource> collection1 && collection1.IsUndefined))
             {
                 writer.WritePropertyName("applicationSecurityGroups"u8);
                 writer.WriteStartArray();
@@ -82,7 +82,7 @@ namespace MgmtAcronymMapping.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(LoadBalancerBackendAddressPools))
+            if (!(LoadBalancerBackendAddressPools is ChangeTrackingList<WritableSubResource> collection2 && collection2.IsUndefined))
             {
                 writer.WritePropertyName("loadBalancerBackendAddressPools"u8);
                 writer.WriteStartArray();
@@ -92,7 +92,7 @@ namespace MgmtAcronymMapping.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(LoadBalancerInboundNatPools))
+            if (!(LoadBalancerInboundNatPools is ChangeTrackingList<WritableSubResource> collection3 && collection3.IsUndefined))
             {
                 writer.WritePropertyName("loadBalancerInboundNatPools"u8);
                 writer.WriteStartArray();

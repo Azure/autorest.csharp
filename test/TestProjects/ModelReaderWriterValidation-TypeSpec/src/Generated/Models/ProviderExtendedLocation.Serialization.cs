@@ -37,7 +37,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ProviderExtendedLocationType);
             }
-            if (Optional.IsCollectionDefined(ExtendedLocations))
+            if (!(ExtendedLocations is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("extendedLocations"u8);
                 writer.WriteStartArray();

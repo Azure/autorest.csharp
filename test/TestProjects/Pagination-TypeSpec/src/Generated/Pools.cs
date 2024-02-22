@@ -163,11 +163,11 @@ namespace Pagination
             {
                 uri.AppendQuery("$filter", filter, true);
             }
-            if (select != null && Optional.IsCollectionDefined(select))
+            if (select != null && !(select is ChangeTrackingList<int> changeTrackingList && changeTrackingList.IsUndefined))
             {
                 uri.AppendQueryDelimited("$select", select, ",", true);
             }
-            if (expand != null && Optional.IsCollectionDefined(expand))
+            if (expand != null && !(expand is ChangeTrackingList<int> changeTrackingList0 && changeTrackingList0.IsUndefined))
             {
                 uri.AppendQueryDelimited("$expand", expand, ",", true);
             }

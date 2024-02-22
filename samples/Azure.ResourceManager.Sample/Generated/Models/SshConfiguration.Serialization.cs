@@ -28,7 +28,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(PublicKeys))
+            if (!(PublicKeys is ChangeTrackingList<SshPublicKeyInfo> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("publicKeys"u8);
                 writer.WriteStartArray();
@@ -109,7 +109,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsCollectionDefined(PublicKeys))
+            if (!(PublicKeys is ChangeTrackingList<SshPublicKeyInfo> collection && collection.IsUndefined))
             {
                 if (PublicKeys.Any())
                 {

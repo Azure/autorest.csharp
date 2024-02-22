@@ -58,7 +58,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("dnsSettings"u8);
                 writer.WriteObjectValue(DnsSettings);
             }
-            if (Optional.IsCollectionDefined(IPConfigurations))
+            if (!(IPConfigurations is ChangeTrackingList<VirtualMachineScaleSetIPConfiguration> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("ipConfigurations"u8);
                 writer.WriteStartArray();
@@ -275,7 +275,7 @@ namespace Azure.ResourceManager.Sample.Models
                 AppendChildObject(builder, DnsSettings, options, 4, false);
             }
 
-            if (Optional.IsCollectionDefined(IPConfigurations))
+            if (!(IPConfigurations is ChangeTrackingList<VirtualMachineScaleSetIPConfiguration> collection && collection.IsUndefined))
             {
                 if (IPConfigurations.Any())
                 {

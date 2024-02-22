@@ -68,7 +68,7 @@ namespace FirstTestTypeSpec.Models
             }
             writer.WritePropertyName("requiredBadDescription"u8);
             writer.WriteStringValue(RequiredBadDescription);
-            if (Optional.IsCollectionDefined(OptionalNullableList))
+            if (!(OptionalNullableList is ChangeTrackingList<int> collection && collection.IsUndefined))
             {
                 if (OptionalNullableList != null)
                 {
@@ -85,7 +85,7 @@ namespace FirstTestTypeSpec.Models
                     writer.WriteNull("optionalNullableList");
                 }
             }
-            if (RequiredNullableList != null && Optional.IsCollectionDefined(RequiredNullableList))
+            if (RequiredNullableList != null && !(RequiredNullableList is ChangeTrackingList<int> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("requiredNullableList"u8);
                 writer.WriteStartArray();

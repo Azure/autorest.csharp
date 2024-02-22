@@ -21,7 +21,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("service"u8);
                 writer.WriteStringValue(Service);
             }
-            if (Optional.IsCollectionDefined(Locations))
+            if (!(Locations is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("locations"u8);
                 writer.WriteStartArray();

@@ -21,7 +21,7 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("maxTokenLength"u8);
                 writer.WriteNumberValue(MaxTokenLength.Value);
             }
-            if (Optional.IsCollectionDefined(Stopwords))
+            if (!(Stopwords is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("stopwords"u8);
                 writer.WriteStartArray();

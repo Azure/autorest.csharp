@@ -50,7 +50,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
 #endif
             }
-            if (options.Format != "W" && Optional.IsCollectionDefined(Resources))
+            if (options.Format != "W" && !(Resources is ChangeTrackingList<BinaryData> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("resources"u8);
                 writer.WriteStartArray();
@@ -217,7 +217,7 @@ namespace Azure.ResourceManager.Sample.Models
                 builder.AppendLine($" '{Parameters.ToString()}'");
             }
 
-            if (Optional.IsCollectionDefined(Resources))
+            if (!(Resources is ChangeTrackingList<BinaryData> collection && collection.IsUndefined))
             {
                 if (Resources.Any())
                 {

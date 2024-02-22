@@ -16,7 +16,7 @@ namespace MgmtMockAndSample.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Keys))
+            if (!(Keys is ChangeTrackingList<KeyPermission> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("keys"u8);
                 writer.WriteStartArray();
@@ -26,7 +26,7 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(Secrets))
+            if (!(Secrets is ChangeTrackingList<SecretPermission> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("secrets"u8);
                 writer.WriteStartArray();
@@ -36,7 +36,7 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(Certificates))
+            if (!(Certificates is ChangeTrackingList<CertificatePermission> collection1 && collection1.IsUndefined))
             {
                 writer.WritePropertyName("certificates"u8);
                 writer.WriteStartArray();
@@ -46,7 +46,7 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(Storage))
+            if (!(Storage is ChangeTrackingList<StoragePermission> collection2 && collection2.IsUndefined))
             {
                 writer.WritePropertyName("storage"u8);
                 writer.WriteStartArray();

@@ -27,7 +27,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(VirtualMachines))
+            if (!(VirtualMachines is ChangeTrackingList<WritableSubResource> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("virtualMachines"u8);
                 writer.WriteStartArray();

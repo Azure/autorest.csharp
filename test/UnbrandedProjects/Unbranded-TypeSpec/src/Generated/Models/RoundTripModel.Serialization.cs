@@ -59,7 +59,7 @@ namespace UnbrandedTypeSpec.Models
                 writer.WritePropertyName("intExtensibleEnum"u8);
                 writer.WriteNumberValue(IntExtensibleEnum.Value.ToSerialInt32());
             }
-            if (OptionalProperty.IsCollectionDefined(IntExtensibleEnumCollection))
+            if (!(IntExtensibleEnumCollection is OptionalList<IntExtensibleEnum> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("intExtensibleEnumCollection"u8);
                 writer.WriteStartArray();
@@ -74,7 +74,7 @@ namespace UnbrandedTypeSpec.Models
                 writer.WritePropertyName("floatExtensibleEnum"u8);
                 writer.WriteNumberValue(FloatExtensibleEnum.Value.ToSerialInt32());
             }
-            if (OptionalProperty.IsCollectionDefined(FloatExtensibleEnumCollection))
+            if (!(FloatExtensibleEnumCollection is OptionalList<FloatExtensibleEnum> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("floatExtensibleEnumCollection"u8);
                 writer.WriteStartArray();
@@ -89,7 +89,7 @@ namespace UnbrandedTypeSpec.Models
                 writer.WritePropertyName("floatFixedEnum"u8);
                 writer.WriteNumberValue(FloatFixedEnum.Value.ToSerialSingle());
             }
-            if (OptionalProperty.IsCollectionDefined(FloatFixedEnumCollection))
+            if (!(FloatFixedEnumCollection is OptionalList<FloatFixedEnum> collection1 && collection1.IsUndefined))
             {
                 writer.WritePropertyName("floatFixedEnumCollection"u8);
                 writer.WriteStartArray();
@@ -104,7 +104,7 @@ namespace UnbrandedTypeSpec.Models
                 writer.WritePropertyName("intFixedEnum"u8);
                 writer.WriteNumberValue((int)IntFixedEnum.Value);
             }
-            if (OptionalProperty.IsCollectionDefined(IntFixedEnumCollection))
+            if (!(IntFixedEnumCollection is OptionalList<IntFixedEnum> collection2 && collection2.IsUndefined))
             {
                 writer.WritePropertyName("intFixedEnumCollection"u8);
                 writer.WriteStartArray();
@@ -167,7 +167,7 @@ namespace UnbrandedTypeSpec.Models
 #endif
             }
             writer.WriteEndObject();
-            if (OptionalProperty.IsCollectionDefined(OptionalRecordUnknown))
+            if (!(OptionalRecordUnknown is OptionalDictionary<string, BinaryData> collection3 && collection3.IsUndefined))
             {
                 writer.WritePropertyName("optionalRecordUnknown"u8);
                 writer.WriteStartObject();
@@ -213,7 +213,7 @@ namespace UnbrandedTypeSpec.Models
                 }
                 writer.WriteEndObject();
             }
-            if (options.Format != "W" && OptionalProperty.IsCollectionDefined(ReadOnlyOptionalRecordUnknown))
+            if (options.Format != "W" && !(ReadOnlyOptionalRecordUnknown is OptionalDictionary<string, BinaryData> collection4 && collection4.IsUndefined))
             {
                 writer.WritePropertyName("readOnlyOptionalRecordUnknown"u8);
                 writer.WriteStartObject();

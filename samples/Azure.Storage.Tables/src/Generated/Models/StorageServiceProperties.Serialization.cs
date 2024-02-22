@@ -29,7 +29,7 @@ namespace Azure.Storage.Tables.Models
             {
                 writer.WriteObjectValue(MinuteMetrics, "MinuteMetrics");
             }
-            if (Optional.IsCollectionDefined(Cors))
+            if (!(Cors is ChangeTrackingList<CorsRule> collection && collection.IsUndefined))
             {
                 writer.WriteStartElement("Cors");
                 foreach (var item in Cors)

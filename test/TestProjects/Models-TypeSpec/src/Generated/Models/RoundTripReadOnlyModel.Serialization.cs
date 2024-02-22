@@ -140,7 +140,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndObject();
             }
-            if (options.Format != "W" && Optional.IsCollectionDefined(OptionalReadonlyStringList))
+            if (options.Format != "W" && !(OptionalReadonlyStringList is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("optionalReadonlyStringList"u8);
                 writer.WriteStartArray();
@@ -150,7 +150,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W" && Optional.IsCollectionDefined(OptionalReadonlyIntList))
+            if (options.Format != "W" && !(OptionalReadonlyIntList is ChangeTrackingList<int> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("optionalReadonlyIntList"u8);
                 writer.WriteStartArray();
@@ -160,7 +160,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W" && Optional.IsCollectionDefined(OptionalReadOnlyModelList))
+            if (options.Format != "W" && !(OptionalReadOnlyModelList is ChangeTrackingList<CollectionItem> collection1 && collection1.IsUndefined))
             {
                 writer.WritePropertyName("optionalReadOnlyModelList"u8);
                 writer.WriteStartArray();
@@ -186,7 +186,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteStringValue(item.Value);
             }
             writer.WriteEndObject();
-            if (options.Format != "W" && Optional.IsCollectionDefined(OptionalModelRecord))
+            if (options.Format != "W" && !(OptionalModelRecord is ChangeTrackingDictionary<string, RecordItem> collection2 && collection2.IsUndefined))
             {
                 writer.WritePropertyName("optionalModelRecord"u8);
                 writer.WriteStartObject();
@@ -209,7 +209,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteNumberValue(item.Value);
             }
             writer.WriteEndArray();
-            if (Optional.IsCollectionDefined(OptionalCollectionWithNullableBooleanElement))
+            if (!(OptionalCollectionWithNullableBooleanElement is ChangeTrackingList<bool?> collection3 && collection3.IsUndefined))
             {
                 writer.WritePropertyName("optionalCollectionWithNullableBooleanElement"u8);
                 writer.WriteStartArray();

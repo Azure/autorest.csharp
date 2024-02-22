@@ -23,7 +23,7 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("text"u8);
                 writer.WriteObjectValue(TextWeights);
             }
-            if (Optional.IsCollectionDefined(Functions))
+            if (!(Functions is ChangeTrackingList<ScoringFunction> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("functions"u8);
                 writer.WriteStartArray();

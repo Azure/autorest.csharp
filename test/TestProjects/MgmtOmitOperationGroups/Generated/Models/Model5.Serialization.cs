@@ -21,7 +21,7 @@ namespace MgmtOmitOperationGroups.Models
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (Optional.IsCollectionDefined(Modelqs))
+            if (!(Modelqs is ChangeTrackingList<ModelQ> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("modelqs"u8);
                 writer.WriteStartArray();

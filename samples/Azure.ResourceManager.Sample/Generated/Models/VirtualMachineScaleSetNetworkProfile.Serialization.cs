@@ -34,7 +34,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("healthProbe"u8);
                 JsonSerializer.Serialize(writer, HealthProbe);
             }
-            if (Optional.IsCollectionDefined(NetworkInterfaceConfigurations))
+            if (!(NetworkInterfaceConfigurations is ChangeTrackingList<VirtualMachineScaleSetNetworkConfiguration> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("networkInterfaceConfigurations"u8);
                 writer.WriteStartArray();
@@ -131,7 +131,7 @@ namespace Azure.ResourceManager.Sample.Models
                 AppendChildObject(builder, HealthProbe, options, 2, false);
             }
 
-            if (Optional.IsCollectionDefined(NetworkInterfaceConfigurations))
+            if (!(NetworkInterfaceConfigurations is ChangeTrackingList<VirtualMachineScaleSetNetworkConfiguration> collection && collection.IsUndefined))
             {
                 if (NetworkInterfaceConfigurations.Any())
                 {

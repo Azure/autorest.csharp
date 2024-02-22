@@ -47,7 +47,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 writer.WritePropertyName("registrationPolicy"u8);
                 writer.WriteStringValue(RegistrationPolicy);
             }
-            if (Optional.IsCollectionDefined(ResourceTypes))
+            if (!(ResourceTypes is ChangeTrackingList<ProviderResourceType> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("resourceTypes"u8);
                 writer.WriteStartArray();

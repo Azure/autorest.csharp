@@ -42,7 +42,7 @@ namespace AppConfiguration.Models
                 writer.WritePropertyName("last_modified"u8);
                 writer.WriteStringValue(LastModified.Value, "O");
             }
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();

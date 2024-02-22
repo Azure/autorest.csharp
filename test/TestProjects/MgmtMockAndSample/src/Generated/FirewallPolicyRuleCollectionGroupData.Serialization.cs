@@ -29,7 +29,7 @@ namespace MgmtMockAndSample
                 writer.WritePropertyName("priority"u8);
                 writer.WriteNumberValue(Priority.Value);
             }
-            if (Optional.IsCollectionDefined(RuleCollections))
+            if (!(RuleCollections is ChangeTrackingList<FirewallPolicyRuleCollection> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("ruleCollections"u8);
                 writer.WriteStartArray();

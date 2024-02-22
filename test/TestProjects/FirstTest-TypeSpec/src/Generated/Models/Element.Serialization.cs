@@ -27,7 +27,7 @@ namespace FirstTestTypeSpec.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Extension))
+            if (!(Extension is ChangeTrackingList<Extension> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("extension"u8);
                 writer.WriteStartArray();

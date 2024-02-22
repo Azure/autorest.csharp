@@ -40,7 +40,7 @@ namespace additionalProperties.Models
             }
             writer.WritePropertyName("@odata.location"u8);
             writer.WriteStringValue(OdataLocation);
-            if (Optional.IsCollectionDefined(AdditionalProperties))
+            if (!(AdditionalProperties is ChangeTrackingDictionary<string, float> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("additionalProperties"u8);
                 writer.WriteStartObject();

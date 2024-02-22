@@ -39,7 +39,7 @@ namespace MgmtSafeFlatten
                 writer.WritePropertyName("layerOneConflict"u8);
                 JsonSerializer.Serialize(writer, LayerOneConflict);
             }
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
