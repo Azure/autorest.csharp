@@ -18,62 +18,62 @@ namespace Inheritance.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(BaseClassProperty))
+            if (BaseClassProperty != null)
             {
                 writer.WritePropertyName("BaseClassProperty"u8);
                 writer.WriteStringValue(BaseClassProperty);
             }
-            if (Optional.IsDefined(DfeString))
+            if (DfeString != null)
             {
                 writer.WritePropertyName("DfeString"u8);
                 JsonSerializer.Serialize(writer, DfeString);
             }
-            if (Optional.IsDefined(DfeDouble))
+            if (DfeDouble != null)
             {
                 writer.WritePropertyName("DfeDouble"u8);
                 JsonSerializer.Serialize(writer, DfeDouble);
             }
-            if (Optional.IsDefined(DfeBool))
+            if (DfeBool != null)
             {
                 writer.WritePropertyName("DfeBool"u8);
                 JsonSerializer.Serialize(writer, DfeBool);
             }
-            if (Optional.IsDefined(DfeInt))
+            if (DfeInt != null)
             {
                 writer.WritePropertyName("DfeInt"u8);
                 JsonSerializer.Serialize(writer, DfeInt);
             }
-            if (Optional.IsDefined(DfeObject))
+            if (DfeObject != null)
             {
                 writer.WritePropertyName("DfeObject"u8);
                 JsonSerializer.Serialize(writer, DfeObject);
             }
-            if (Optional.IsDefined(DfeListOfT))
+            if (DfeListOfT != null)
             {
                 writer.WritePropertyName("DfeListOfT"u8);
                 JsonSerializer.Serialize(writer, DfeListOfT);
             }
-            if (Optional.IsDefined(DfeListOfString))
+            if (DfeListOfString != null)
             {
                 writer.WritePropertyName("DfeListOfString"u8);
                 JsonSerializer.Serialize(writer, DfeListOfString);
             }
-            if (Optional.IsDefined(DfeKeyValuePairs))
+            if (DfeKeyValuePairs != null)
             {
                 writer.WritePropertyName("DfeKeyValuePairs"u8);
                 JsonSerializer.Serialize(writer, DfeKeyValuePairs);
             }
-            if (Optional.IsDefined(DfeDateTime))
+            if (DfeDateTime != null)
             {
                 writer.WritePropertyName("DfeDateTime"u8);
                 JsonSerializer.Serialize(writer, DfeDateTime);
             }
-            if (Optional.IsDefined(DfeDuration))
+            if (DfeDuration != null)
             {
                 writer.WritePropertyName("DfeDuration"u8);
                 JsonSerializer.Serialize(writer, DfeDuration);
             }
-            if (Optional.IsDefined(DfeUri))
+            if (DfeUri != null)
             {
                 writer.WritePropertyName("DfeUri"u8);
                 JsonSerializer.Serialize(writer, DfeUri);

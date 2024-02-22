@@ -26,7 +26,7 @@ namespace ModelShapes.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && Optional.IsDefined(ReadonlyProperty))
+            if (options.Format != "W" && ReadonlyProperty != null)
             {
                 writer.WritePropertyName("ReadonlyProperty"u8);
                 writer.WriteObjectValue(ReadonlyProperty);

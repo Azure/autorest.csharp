@@ -21,7 +21,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(KeyVaultKeyVersion);
             writer.WritePropertyName("keyVaultUri"u8);
             writer.WriteStringValue(KeyVaultUri);
-            if (Optional.IsDefined(AccessCredentials))
+            if (AccessCredentials != null)
             {
                 writer.WritePropertyName("accessCredentials"u8);
                 writer.WriteObjectValue(AccessCredentials);

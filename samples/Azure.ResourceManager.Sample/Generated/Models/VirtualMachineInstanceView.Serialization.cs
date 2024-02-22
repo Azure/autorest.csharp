@@ -28,47 +28,47 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(PlatformUpdateDomain))
+            if (PlatformUpdateDomain.HasValue)
             {
                 writer.WritePropertyName("platformUpdateDomain"u8);
                 writer.WriteNumberValue(PlatformUpdateDomain.Value);
             }
-            if (Optional.IsDefined(PlatformFaultDomain))
+            if (PlatformFaultDomain.HasValue)
             {
                 writer.WritePropertyName("platformFaultDomain"u8);
                 writer.WriteNumberValue(PlatformFaultDomain.Value);
             }
-            if (Optional.IsDefined(ComputerName))
+            if (ComputerName != null)
             {
                 writer.WritePropertyName("computerName"u8);
                 writer.WriteStringValue(ComputerName);
             }
-            if (Optional.IsDefined(OSName))
+            if (OSName != null)
             {
                 writer.WritePropertyName("osName"u8);
                 writer.WriteStringValue(OSName);
             }
-            if (Optional.IsDefined(OSVersion))
+            if (OSVersion != null)
             {
                 writer.WritePropertyName("osVersion"u8);
                 writer.WriteStringValue(OSVersion);
             }
-            if (Optional.IsDefined(HyperVGeneration))
+            if (HyperVGeneration.HasValue)
             {
                 writer.WritePropertyName("hyperVGeneration"u8);
                 writer.WriteStringValue(HyperVGeneration.Value.ToString());
             }
-            if (Optional.IsDefined(RdpThumbPrint))
+            if (RdpThumbPrint != null)
             {
                 writer.WritePropertyName("rdpThumbPrint"u8);
                 writer.WriteStringValue(RdpThumbPrint);
             }
-            if (Optional.IsDefined(VmAgent))
+            if (VmAgent != null)
             {
                 writer.WritePropertyName("vmAgent"u8);
                 writer.WriteObjectValue(VmAgent);
             }
-            if (Optional.IsDefined(MaintenanceRedeployStatus))
+            if (MaintenanceRedeployStatus != null)
             {
                 writer.WritePropertyName("maintenanceRedeployStatus"u8);
                 writer.WriteObjectValue(MaintenanceRedeployStatus);
@@ -93,17 +93,17 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W" && Optional.IsDefined(VmHealth))
+            if (options.Format != "W" && VmHealth != null)
             {
                 writer.WritePropertyName("vmHealth"u8);
                 writer.WriteObjectValue(VmHealth);
             }
-            if (Optional.IsDefined(BootDiagnostics))
+            if (BootDiagnostics != null)
             {
                 writer.WritePropertyName("bootDiagnostics"u8);
                 writer.WriteObjectValue(BootDiagnostics);
             }
-            if (options.Format != "W" && Optional.IsDefined(AssignedHost))
+            if (options.Format != "W" && AssignedHost != null)
             {
                 writer.WritePropertyName("assignedHost"u8);
                 writer.WriteStringValue(AssignedHost);
@@ -118,7 +118,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(PatchStatus))
+            if (PatchStatus != null)
             {
                 writer.WritePropertyName("patchStatus"u8);
                 writer.WriteObjectValue(PatchStatus);
@@ -334,19 +334,19 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(PlatformUpdateDomain))
+            if (PlatformUpdateDomain.HasValue)
             {
                 builder.Append("  platformUpdateDomain:");
                 builder.AppendLine($" {PlatformUpdateDomain.Value}");
             }
 
-            if (Optional.IsDefined(PlatformFaultDomain))
+            if (PlatformFaultDomain.HasValue)
             {
                 builder.Append("  platformFaultDomain:");
                 builder.AppendLine($" {PlatformFaultDomain.Value}");
             }
 
-            if (Optional.IsDefined(ComputerName))
+            if (ComputerName != null)
             {
                 builder.Append("  computerName:");
                 if (ComputerName.Contains(Environment.NewLine))
@@ -360,7 +360,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(OSName))
+            if (OSName != null)
             {
                 builder.Append("  osName:");
                 if (OSName.Contains(Environment.NewLine))
@@ -374,7 +374,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(OSVersion))
+            if (OSVersion != null)
             {
                 builder.Append("  osVersion:");
                 if (OSVersion.Contains(Environment.NewLine))
@@ -388,13 +388,13 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(HyperVGeneration))
+            if (HyperVGeneration.HasValue)
             {
                 builder.Append("  hyperVGeneration:");
                 builder.AppendLine($" '{HyperVGeneration.Value.ToString()}'");
             }
 
-            if (Optional.IsDefined(RdpThumbPrint))
+            if (RdpThumbPrint != null)
             {
                 builder.Append("  rdpThumbPrint:");
                 if (RdpThumbPrint.Contains(Environment.NewLine))
@@ -408,13 +408,13 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(VmAgent))
+            if (VmAgent != null)
             {
                 builder.Append("  vmAgent:");
                 AppendChildObject(builder, VmAgent, options, 2, false);
             }
 
-            if (Optional.IsDefined(MaintenanceRedeployStatus))
+            if (MaintenanceRedeployStatus != null)
             {
                 builder.Append("  maintenanceRedeployStatus:");
                 AppendChildObject(builder, MaintenanceRedeployStatus, options, 2, false);
@@ -448,19 +448,19 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(VmHealth))
+            if (VmHealth != null)
             {
                 builder.Append("  vmHealth:");
                 AppendChildObject(builder, VmHealth, options, 2, false);
             }
 
-            if (Optional.IsDefined(BootDiagnostics))
+            if (BootDiagnostics != null)
             {
                 builder.Append("  bootDiagnostics:");
                 AppendChildObject(builder, BootDiagnostics, options, 2, false);
             }
 
-            if (Optional.IsDefined(AssignedHost))
+            if (AssignedHost != null)
             {
                 builder.Append("  assignedHost:");
                 if (AssignedHost.Contains(Environment.NewLine))
@@ -488,7 +488,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(PatchStatus))
+            if (PatchStatus != null)
             {
                 builder.Append("  patchStatus:");
                 AppendChildObject(builder, PatchStatus, options, 2, false);

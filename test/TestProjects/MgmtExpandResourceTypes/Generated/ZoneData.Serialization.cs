@@ -19,7 +19,7 @@ namespace MgmtExpandResourceTypes
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Etag))
+            if (Etag != null)
             {
                 writer.WritePropertyName("etag"u8);
                 writer.WriteStringValue(Etag);
@@ -39,22 +39,22 @@ namespace MgmtExpandResourceTypes
             writer.WriteStringValue(Location);
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(ZoneType))
+            if (ZoneType.HasValue)
             {
                 writer.WritePropertyName("zoneType"u8);
                 writer.WriteStringValue(ZoneType.Value.ToSerialString());
             }
-            if (Optional.IsDefined(MachineType))
+            if (MachineType.HasValue)
             {
                 writer.WritePropertyName("machineType"u8);
                 writer.WriteNumberValue((int)MachineType.Value);
             }
-            if (Optional.IsDefined(StorageType))
+            if (StorageType.HasValue)
             {
                 writer.WritePropertyName("storageType"u8);
                 writer.WriteNumberValue((int)StorageType.Value);
             }
-            if (Optional.IsDefined(MemoryType))
+            if (MemoryType.HasValue)
             {
                 writer.WritePropertyName("memoryType"u8);
                 writer.WriteNumberValue((long)MemoryType.Value);

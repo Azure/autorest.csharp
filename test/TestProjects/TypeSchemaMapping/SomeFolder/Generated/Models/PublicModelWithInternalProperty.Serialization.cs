@@ -26,12 +26,9 @@ namespace TypeSchemaMapping.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(StringPropertyJson))
-            {
-                writer.WritePropertyName("InternalProperty"u8);
-                StringPropertyJson.WriteTo(writer);
-            }
-            if (Optional.IsDefined(PublicProperty))
+            writer.WritePropertyName("InternalProperty"u8);
+            StringPropertyJson.WriteTo(writer);
+            if (PublicProperty != null)
             {
                 writer.WritePropertyName("PublicProperty"u8);
                 writer.WriteStringValue(PublicProperty);

@@ -19,11 +19,11 @@ namespace xml_service.Models
         private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "RootWithRefAndNoMeta");
-            if (Optional.IsDefined(RefToModel))
+            if (RefToModel != null)
             {
                 writer.WriteObjectValue(RefToModel, "RefToModel");
             }
-            if (Optional.IsDefined(Something))
+            if (Something != null)
             {
                 writer.WriteStartElement("Something");
                 writer.WriteValue(Something);

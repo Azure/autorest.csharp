@@ -28,7 +28,7 @@ namespace MgmtLRO.Models
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(Buzz))
+            if (Buzz.HasValue)
             {
                 writer.WritePropertyName("buzz"u8);
                 writer.WriteStringValue(Buzz.Value);

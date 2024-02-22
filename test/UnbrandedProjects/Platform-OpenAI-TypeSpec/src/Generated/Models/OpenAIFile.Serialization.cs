@@ -37,7 +37,7 @@ namespace OpenAI.Models
             writer.WriteStringValue(Purpose);
             writer.WritePropertyName("status"u8);
             writer.WriteStringValue(Status.ToString());
-            if (OptionalProperty.IsDefined(StatusDetails))
+            if (StatusDetails != null)
             {
                 if (StatusDetails != null)
                 {

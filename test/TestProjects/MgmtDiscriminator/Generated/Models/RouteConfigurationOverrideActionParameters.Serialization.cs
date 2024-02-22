@@ -29,7 +29,7 @@ namespace MgmtDiscriminator.Models
             writer.WriteStartObject();
             writer.WritePropertyName("typeName"u8);
             writer.WriteStringValue(TypeName.ToString());
-            if (Optional.IsDefined(OriginGroupOverride))
+            if (OriginGroupOverride != null)
             {
                 writer.WritePropertyName("originGroupOverride"u8);
                 writer.WriteObjectValue(OriginGroupOverride);
@@ -106,13 +106,10 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(TypeName))
-            {
-                builder.Append("  typeName:");
-                builder.AppendLine($" '{TypeName.ToString()}'");
-            }
+            builder.Append("  typeName:");
+            builder.AppendLine($" '{TypeName.ToString()}'");
 
-            if (Optional.IsDefined(OriginGroupOverride))
+            if (OriginGroupOverride != null)
             {
                 builder.Append("  originGroupOverride:");
                 AppendChildObject(builder, OriginGroupOverride, options, 2, false);

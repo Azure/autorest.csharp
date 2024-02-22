@@ -27,7 +27,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(VmDiskType))
+            if (VmDiskType.HasValue)
             {
                 writer.WritePropertyName("vmDiskType"u8);
                 writer.WriteStringValue(VmDiskType.Value.ToString());
@@ -98,7 +98,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(VmDiskType))
+            if (VmDiskType.HasValue)
             {
                 builder.Append("  vmDiskType:");
                 builder.AppendLine($" '{VmDiskType.Value.ToString()}'");

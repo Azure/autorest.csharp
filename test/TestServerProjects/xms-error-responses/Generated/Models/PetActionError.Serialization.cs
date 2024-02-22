@@ -28,12 +28,12 @@ namespace xms_error_responses.Models
             writer.WriteStartObject();
             writer.WritePropertyName("errorType"u8);
             writer.WriteStringValue(ErrorType);
-            if (Optional.IsDefined(ErrorMessage))
+            if (ErrorMessage != null)
             {
                 writer.WritePropertyName("errorMessage"u8);
                 writer.WriteStringValue(ErrorMessage);
             }
-            if (Optional.IsDefined(ActionResponse))
+            if (ActionResponse != null)
             {
                 writer.WritePropertyName("actionResponse"u8);
                 writer.WriteStringValue(ActionResponse);

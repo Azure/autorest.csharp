@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(BufferSize))
+            if (BufferSize.HasValue)
             {
                 writer.WritePropertyName("bufferSize"u8);
                 writer.WriteNumberValue(BufferSize.Value);

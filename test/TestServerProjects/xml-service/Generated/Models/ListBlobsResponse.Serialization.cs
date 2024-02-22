@@ -19,7 +19,7 @@ namespace xml_service.Models
         private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "EnumerationResults");
-            if (Optional.IsDefined(ServiceEndpoint))
+            if (ServiceEndpoint != null)
             {
                 writer.WriteStartAttribute("ServiceEndpoint");
                 writer.WriteValue(ServiceEndpoint);

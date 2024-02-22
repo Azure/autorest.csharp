@@ -48,7 +48,7 @@ namespace Azure.NewProject.TypeSpec.Models
             writer.WriteEndObject();
             writer.WritePropertyName("requiredModel"u8);
             writer.WriteObjectValue(RequiredModel);
-            if (Optional.IsDefined(IntExtensibleEnum))
+            if (IntExtensibleEnum.HasValue)
             {
                 writer.WritePropertyName("intExtensibleEnum"u8);
                 writer.WriteNumberValue(IntExtensibleEnum.Value.ToSerialInt32());
@@ -63,7 +63,7 @@ namespace Azure.NewProject.TypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(FloatExtensibleEnum))
+            if (FloatExtensibleEnum.HasValue)
             {
                 writer.WritePropertyName("floatExtensibleEnum"u8);
                 writer.WriteNumberValue(FloatExtensibleEnum.Value.ToSerialInt32());
@@ -78,7 +78,7 @@ namespace Azure.NewProject.TypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(FloatFixedEnum))
+            if (FloatFixedEnum.HasValue)
             {
                 writer.WritePropertyName("floatFixedEnum"u8);
                 writer.WriteNumberValue(FloatFixedEnum.Value.ToSerialSingle());
@@ -93,7 +93,7 @@ namespace Azure.NewProject.TypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(IntFixedEnum))
+            if (IntFixedEnum.HasValue)
             {
                 writer.WritePropertyName("intFixedEnum"u8);
                 writer.WriteNumberValue((int)IntFixedEnum.Value);
@@ -108,7 +108,7 @@ namespace Azure.NewProject.TypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(StringFixedEnum))
+            if (StringFixedEnum.HasValue)
             {
                 writer.WritePropertyName("stringFixedEnum"u8);
                 writer.WriteStringValue(StringFixedEnum.Value.ToSerialString());
@@ -122,7 +122,7 @@ namespace Azure.NewProject.TypeSpec.Models
                 JsonSerializer.Serialize(writer, document.RootElement);
             }
 #endif
-            if (Optional.IsDefined(OptionalUnknown))
+            if (OptionalUnknown != null)
             {
                 writer.WritePropertyName("optionalUnknown"u8);
 #if NET6_0_OR_GREATER

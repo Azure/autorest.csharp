@@ -28,7 +28,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && Optional.IsDefined(VirtualMachine))
+            if (options.Format != "W" && VirtualMachine != null)
             {
                 writer.WritePropertyName("virtualMachine"u8);
                 writer.WriteObjectValue(VirtualMachine);
@@ -174,7 +174,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(VirtualMachine))
+            if (VirtualMachine != null)
             {
                 builder.Append("  virtualMachine:");
                 AppendChildObject(builder, VirtualMachine, options, 2, false);

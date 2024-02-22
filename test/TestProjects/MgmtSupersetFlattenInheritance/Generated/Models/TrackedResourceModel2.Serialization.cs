@@ -17,12 +17,12 @@ namespace MgmtSupersetFlattenInheritance.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Foo))
+            if (Foo != null)
             {
                 writer.WritePropertyName("foo"u8);
                 writer.WriteStringValue(Foo);
             }
-            if (Optional.IsDefined(Bar))
+            if (Bar != null)
             {
                 writer.WritePropertyName("bar"u8);
                 writer.WriteStringValue(Bar);
@@ -42,7 +42,7 @@ namespace MgmtSupersetFlattenInheritance.Models
             writer.WriteStringValue(Location);
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(FooPropertiesFoo))
+            if (FooPropertiesFoo != null)
             {
                 writer.WritePropertyName("foo"u8);
                 writer.WriteStringValue(FooPropertiesFoo);

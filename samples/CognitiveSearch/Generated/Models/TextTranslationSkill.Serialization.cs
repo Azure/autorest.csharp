@@ -18,29 +18,29 @@ namespace CognitiveSearch.Models
             writer.WriteStartObject();
             writer.WritePropertyName("defaultToLanguageCode"u8);
             writer.WriteStringValue(DefaultToLanguageCode.ToString());
-            if (Optional.IsDefined(DefaultFromLanguageCode))
+            if (DefaultFromLanguageCode.HasValue)
             {
                 writer.WritePropertyName("defaultFromLanguageCode"u8);
                 writer.WriteStringValue(DefaultFromLanguageCode.Value.ToString());
             }
-            if (Optional.IsDefined(SuggestedFrom))
+            if (SuggestedFrom.HasValue)
             {
                 writer.WritePropertyName("suggestedFrom"u8);
                 writer.WriteStringValue(SuggestedFrom.Value.ToString());
             }
             writer.WritePropertyName("@odata.type"u8);
             writer.WriteStringValue(OdataType);
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Description))
+            if (Description != null)
             {
                 writer.WritePropertyName("description"u8);
                 writer.WriteStringValue(Description);
             }
-            if (Optional.IsDefined(Context))
+            if (Context != null)
             {
                 writer.WritePropertyName("context"u8);
                 writer.WriteStringValue(Context);

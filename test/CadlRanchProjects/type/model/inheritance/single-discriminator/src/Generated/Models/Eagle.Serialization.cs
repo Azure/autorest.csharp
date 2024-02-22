@@ -48,7 +48,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
                 }
                 writer.WriteEndObject();
             }
-            if (Optional.IsDefined(Partner))
+            if (Partner != null)
             {
                 writer.WritePropertyName("partner"u8);
                 writer.WriteObjectValue(Partner);

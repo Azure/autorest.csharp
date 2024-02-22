@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(OnlyOnSamePosition))
+            if (OnlyOnSamePosition.HasValue)
             {
                 writer.WritePropertyName("onlyOnSamePosition"u8);
                 writer.WriteBooleanValue(OnlyOnSamePosition.Value);

@@ -27,7 +27,7 @@ namespace ModelsTypeSpec.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(OptionalPropertyOnBase))
+            if (OptionalPropertyOnBase != null)
             {
                 writer.WritePropertyName("optionalPropertyOnBase"u8);
                 writer.WriteStringValue(OptionalPropertyOnBase);

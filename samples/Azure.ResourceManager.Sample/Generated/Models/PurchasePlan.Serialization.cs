@@ -107,7 +107,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 builder.Append("  name:");
                 if (Name.Contains(Environment.NewLine))
@@ -121,7 +121,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(Publisher))
+            if (Publisher != null)
             {
                 builder.Append("  publisher:");
                 if (Publisher.Contains(Environment.NewLine))
@@ -135,7 +135,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(Product))
+            if (Product != null)
             {
                 builder.Append("  product:");
                 if (Product.Contains(Environment.NewLine))

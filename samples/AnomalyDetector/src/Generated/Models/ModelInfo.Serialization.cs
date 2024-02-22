@@ -29,7 +29,7 @@ namespace AnomalyDetector.Models
             writer.WriteStartObject();
             writer.WritePropertyName("dataSource"u8);
             writer.WriteStringValue(DataSource);
-            if (Optional.IsDefined(DataSchema))
+            if (DataSchema.HasValue)
             {
                 writer.WritePropertyName("dataSchema"u8);
                 writer.WriteStringValue(DataSchema.Value.ToString());
@@ -38,22 +38,22 @@ namespace AnomalyDetector.Models
             writer.WriteStringValue(StartTime, "O");
             writer.WritePropertyName("endTime"u8);
             writer.WriteStringValue(EndTime, "O");
-            if (Optional.IsDefined(DisplayName))
+            if (DisplayName != null)
             {
                 writer.WritePropertyName("displayName"u8);
                 writer.WriteStringValue(DisplayName);
             }
-            if (Optional.IsDefined(SlidingWindow))
+            if (SlidingWindow.HasValue)
             {
                 writer.WritePropertyName("slidingWindow"u8);
                 writer.WriteNumberValue(SlidingWindow.Value);
             }
-            if (Optional.IsDefined(AlignPolicy))
+            if (AlignPolicy != null)
             {
                 writer.WritePropertyName("alignPolicy"u8);
                 writer.WriteObjectValue(AlignPolicy);
             }
-            if (Optional.IsDefined(Status))
+            if (Status.HasValue)
             {
                 writer.WritePropertyName("status"u8);
                 writer.WriteStringValue(Status.Value.ToSerialString());
@@ -68,7 +68,7 @@ namespace AnomalyDetector.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(DiagnosticsInfo))
+            if (DiagnosticsInfo != null)
             {
                 writer.WritePropertyName("diagnosticsInfo"u8);
                 writer.WriteObjectValue(DiagnosticsInfo);

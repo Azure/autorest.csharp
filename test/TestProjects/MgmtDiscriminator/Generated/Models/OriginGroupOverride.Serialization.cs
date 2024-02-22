@@ -28,12 +28,12 @@ namespace MgmtDiscriminator.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(OriginGroup))
+            if (OriginGroup != null)
             {
                 writer.WritePropertyName("originGroup"u8);
                 JsonSerializer.Serialize(writer, OriginGroup);
             }
-            if (Optional.IsDefined(ForwardingProtocol))
+            if (ForwardingProtocol.HasValue)
             {
                 writer.WritePropertyName("forwardingProtocol"u8);
                 writer.WriteStringValue(ForwardingProtocol.Value.ToString());
@@ -114,13 +114,13 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(OriginGroup))
+            if (OriginGroup != null)
             {
                 builder.Append("  originGroup:");
                 AppendChildObject(builder, OriginGroup, options, 2, false);
             }
 
-            if (Optional.IsDefined(ForwardingProtocol))
+            if (ForwardingProtocol.HasValue)
             {
                 builder.Append("  forwardingProtocol:");
                 builder.AppendLine($" '{ForwardingProtocol.Value.ToString()}'");

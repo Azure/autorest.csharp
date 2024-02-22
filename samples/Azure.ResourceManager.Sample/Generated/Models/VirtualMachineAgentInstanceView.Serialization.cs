@@ -28,7 +28,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(VmAgentVersion))
+            if (VmAgentVersion != null)
             {
                 writer.WritePropertyName("vmAgentVersion"u8);
                 writer.WriteStringValue(VmAgentVersion);
@@ -145,7 +145,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(VmAgentVersion))
+            if (VmAgentVersion != null)
             {
                 builder.Append("  vmAgentVersion:");
                 if (VmAgentVersion.Contains(Environment.NewLine))

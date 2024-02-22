@@ -15,17 +15,17 @@ namespace Azure.ResourceManager.Storage.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(RoutingChoice))
+            if (RoutingChoice.HasValue)
             {
                 writer.WritePropertyName("routingChoice"u8);
                 writer.WriteStringValue(RoutingChoice.Value.ToString());
             }
-            if (Optional.IsDefined(PublishMicrosoftEndpoints))
+            if (PublishMicrosoftEndpoints.HasValue)
             {
                 writer.WritePropertyName("publishMicrosoftEndpoints"u8);
                 writer.WriteBooleanValue(PublishMicrosoftEndpoints.Value);
             }
-            if (Optional.IsDefined(PublishInternetEndpoints))
+            if (PublishInternetEndpoints.HasValue)
             {
                 writer.WritePropertyName("publishInternetEndpoints"u8);
                 writer.WriteBooleanValue(PublishInternetEndpoints.Value);

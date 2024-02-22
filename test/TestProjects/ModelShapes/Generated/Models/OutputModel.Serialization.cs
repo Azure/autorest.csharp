@@ -44,12 +44,12 @@ namespace ModelShapes.Models
                 writer.WriteNumberValue(item);
             }
             writer.WriteEndArray();
-            if (Optional.IsDefined(NonRequiredString))
+            if (NonRequiredString != null)
             {
                 writer.WritePropertyName("NonRequiredString"u8);
                 writer.WriteStringValue(NonRequiredString);
             }
-            if (Optional.IsDefined(NonRequiredInt))
+            if (NonRequiredInt.HasValue)
             {
                 writer.WritePropertyName("NonRequiredInt"u8);
                 writer.WriteNumberValue(NonRequiredInt.Value);
@@ -120,7 +120,7 @@ namespace ModelShapes.Models
             {
                 writer.WriteNull("RequiredNullableIntList");
             }
-            if (Optional.IsDefined(NonRequiredNullableString))
+            if (NonRequiredNullableString != null)
             {
                 if (NonRequiredNullableString != null)
                 {
@@ -132,7 +132,7 @@ namespace ModelShapes.Models
                     writer.WriteNull("NonRequiredNullableString");
                 }
             }
-            if (Optional.IsDefined(NonRequiredNullableInt))
+            if (NonRequiredNullableInt.HasValue)
             {
                 if (NonRequiredNullableInt != null)
                 {
@@ -183,22 +183,19 @@ namespace ModelShapes.Models
                 writer.WritePropertyName("RequiredReadonlyInt"u8);
                 writer.WriteNumberValue(RequiredReadonlyInt);
             }
-            if (options.Format != "W" && Optional.IsDefined(NonRequiredReadonlyInt))
+            if (options.Format != "W" && NonRequiredReadonlyInt.HasValue)
             {
                 writer.WritePropertyName("NonRequiredReadonlyInt"u8);
                 writer.WriteNumberValue(NonRequiredReadonlyInt.Value);
             }
-            if (Optional.IsDefined(Vector))
+            writer.WritePropertyName("vector"u8);
+            writer.WriteStartArray();
+            foreach (var item in Vector.Span)
             {
-                writer.WritePropertyName("vector"u8);
-                writer.WriteStartArray();
-                foreach (var item in Vector.Span)
-                {
-                    writer.WriteNumberValue(item);
-                }
-                writer.WriteEndArray();
+                writer.WriteNumberValue(item);
             }
-            if (options.Format != "W" && Optional.IsDefined(VectorReadOnly))
+            writer.WriteEndArray();
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("vectorReadOnly"u8);
                 writer.WriteStartArray();
@@ -225,7 +222,7 @@ namespace ModelShapes.Models
                 writer.WriteNumberValue(item);
             }
             writer.WriteEndArray();
-            if (Optional.IsDefined(VectorNullable))
+            if (VectorNullable.HasValue)
             {
                 if (VectorNullable != null)
                 {
@@ -242,7 +239,7 @@ namespace ModelShapes.Models
                     writer.WriteNull("vectorNullable");
                 }
             }
-            if (options.Format != "W" && Optional.IsDefined(VectorReadOnlyNullable))
+            if (options.Format != "W" && VectorReadOnlyNullable.HasValue)
             {
                 if (VectorReadOnlyNullable != null)
                 {

@@ -15,12 +15,12 @@ namespace MgmtCustomizations.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Order))
+            if (Order.HasValue)
             {
                 writer.WritePropertyName("order"u8);
                 writer.WriteNumberValue(Order.Value);
             }
-            if (Optional.IsDefined(Pet))
+            if (Pet != null)
             {
                 writer.WritePropertyName("pet"u8);
                 writer.WriteObjectValue(Pet);

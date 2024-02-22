@@ -19,37 +19,37 @@ namespace MgmtPropertyChooser
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Plan))
+            if (Plan != null)
             {
                 writer.WritePropertyName("plan"u8);
                 JsonSerializer.Serialize(writer, Plan);
             }
-            if (Optional.IsDefined(Identity))
+            if (Identity != null)
             {
                 writer.WritePropertyName("identity"u8);
                 JsonSerializer.Serialize(writer, Identity);
             }
-            if (Optional.IsDefined(IdentityWithRenamedProperty))
+            if (IdentityWithRenamedProperty != null)
             {
                 writer.WritePropertyName("identityWithRenamedProperty"u8);
                 writer.WriteObjectValue(IdentityWithRenamedProperty);
             }
-            if (Optional.IsDefined(IdentityWithDifferentPropertyType))
+            if (IdentityWithDifferentPropertyType != null)
             {
                 writer.WritePropertyName("identityWithDifferentPropertyType"u8);
                 writer.WriteObjectValue(IdentityWithDifferentPropertyType);
             }
-            if (Optional.IsDefined(IdentityWithNoUserIdentity))
+            if (IdentityWithNoUserIdentity != null)
             {
                 writer.WritePropertyName("identityWithNoUserIdentity"u8);
                 JsonSerializer.Serialize(writer, IdentityWithNoUserIdentity);
             }
-            if (Optional.IsDefined(IdentityWithNoSystemIdentity))
+            if (IdentityWithNoSystemIdentity != null)
             {
                 writer.WritePropertyName("identityWithNoSystemIdentity"u8);
                 writer.WriteObjectValue(IdentityWithNoSystemIdentity);
             }
-            if (Optional.IsDefined(IdentityV3))
+            if (IdentityV3 != null)
             {
                 writer.WritePropertyName("identityV3"u8);
                 var serializeOptions = new JsonSerializerOptions { Converters = { new ManagedServiceIdentityTypeV3Converter() } };
@@ -65,12 +65,12 @@ namespace MgmtPropertyChooser
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(FakeSubResource))
+            if (FakeSubResource != null)
             {
                 writer.WritePropertyName("fakeSubResource"u8);
                 JsonSerializer.Serialize(writer, FakeSubResource);
             }
-            if (Optional.IsDefined(FakeWritableSubResource))
+            if (FakeWritableSubResource != null)
             {
                 writer.WritePropertyName("fakeWritableSubResource"u8);
                 JsonSerializer.Serialize(writer, FakeWritableSubResource);
@@ -90,12 +90,12 @@ namespace MgmtPropertyChooser
             writer.WriteStringValue(Location);
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(LicenseType))
+            if (LicenseType != null)
             {
                 writer.WritePropertyName("licenseType"u8);
                 writer.WriteStringValue(LicenseType);
             }
-            if (Optional.IsDefined(ExtensionsTimeBudget))
+            if (ExtensionsTimeBudget != null)
             {
                 writer.WritePropertyName("extensionsTimeBudget"u8);
                 writer.WriteStringValue(ExtensionsTimeBudget);

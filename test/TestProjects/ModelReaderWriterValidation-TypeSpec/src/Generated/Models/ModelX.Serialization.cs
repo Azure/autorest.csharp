@@ -37,7 +37,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(NullProperty))
+            if (NullProperty.HasValue)
             {
                 writer.WritePropertyName("nullProperty"u8);
                 writer.WriteNumberValue(NullProperty.Value);
@@ -60,7 +60,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             }
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind);
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);

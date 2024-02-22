@@ -27,7 +27,7 @@ namespace ExtensionClientName.Models
                 }
                 writer.WriteEndObject();
             }
-            if (Optional.IsDefined(RenamedPropertyString))
+            if (RenamedPropertyString != null)
             {
                 writer.WritePropertyName("originalPropertyString"u8);
                 writer.WriteStringValue(RenamedPropertyString);

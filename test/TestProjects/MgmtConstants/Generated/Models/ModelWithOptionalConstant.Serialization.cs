@@ -15,22 +15,22 @@ namespace MgmtConstants.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(OptionalStringConstant))
+            if (OptionalStringConstant.HasValue)
             {
                 writer.WritePropertyName("optionalStringConstant"u8);
                 writer.WriteStringValue(OptionalStringConstant.Value.ToString());
             }
-            if (Optional.IsDefined(OptionalIntConstant))
+            if (OptionalIntConstant.HasValue)
             {
                 writer.WritePropertyName("optionalIntConstant"u8);
                 writer.WriteNumberValue(OptionalIntConstant.Value.ToSerialInt32());
             }
-            if (Optional.IsDefined(OptionalBooleanConstant))
+            if (OptionalBooleanConstant.HasValue)
             {
                 writer.WritePropertyName("optionalBooleanConstant"u8);
                 writer.WriteBooleanValue(OptionalBooleanConstant.Value);
             }
-            if (Optional.IsDefined(OptionalFloatConstant))
+            if (OptionalFloatConstant.HasValue)
             {
                 writer.WritePropertyName("optionalFloatConstant"u8);
                 writer.WriteNumberValue(OptionalFloatConstant.Value.ToSerialSingle());

@@ -16,7 +16,7 @@ namespace MgmtNonStringPathVariable.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Buzz))
+            if (Buzz.HasValue)
             {
                 writer.WritePropertyName("buzz"u8);
                 writer.WriteStringValue(Buzz.Value);

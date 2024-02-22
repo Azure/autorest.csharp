@@ -91,12 +91,9 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(AutomaticOSUpgradeSupported))
-            {
-                builder.Append("  automaticOSUpgradeSupported:");
-                var boolValue = AutomaticOSUpgradeSupported == true ? "true" : "false";
-                builder.AppendLine($" {boolValue}");
-            }
+            builder.Append("  automaticOSUpgradeSupported:");
+            var boolValue = AutomaticOSUpgradeSupported == true ? "true" : "false";
+            builder.AppendLine($" {boolValue}");
 
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());

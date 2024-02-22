@@ -15,12 +15,12 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Min))
+            if (Min.HasValue)
             {
                 writer.WritePropertyName("min"u8);
                 writer.WriteNumberValue(Min.Value);
             }
-            if (Optional.IsDefined(Max))
+            if (Max.HasValue)
             {
                 writer.WritePropertyName("max"u8);
                 writer.WriteNumberValue(Max.Value);

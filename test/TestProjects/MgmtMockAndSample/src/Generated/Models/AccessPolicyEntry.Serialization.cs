@@ -20,7 +20,7 @@ namespace MgmtMockAndSample.Models
             writer.WriteStringValue(TenantId);
             writer.WritePropertyName("objectId"u8);
             writer.WriteStringValue(ObjectId);
-            if (Optional.IsDefined(ApplicationId))
+            if (ApplicationId.HasValue)
             {
                 writer.WritePropertyName("applicationId"u8);
                 writer.WriteStringValue(ApplicationId.Value);

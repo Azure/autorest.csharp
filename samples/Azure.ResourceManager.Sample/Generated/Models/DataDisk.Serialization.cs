@@ -29,54 +29,54 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteStartObject();
             writer.WritePropertyName("lun"u8);
             writer.WriteNumberValue(Lun);
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Vhd))
+            if (Vhd != null)
             {
                 writer.WritePropertyName("vhd"u8);
                 writer.WriteObjectValue(Vhd);
             }
-            if (Optional.IsDefined(Image))
+            if (Image != null)
             {
                 writer.WritePropertyName("image"u8);
                 writer.WriteObjectValue(Image);
             }
-            if (Optional.IsDefined(Caching))
+            if (Caching.HasValue)
             {
                 writer.WritePropertyName("caching"u8);
                 writer.WriteStringValue(Caching.Value.ToSerialString());
             }
-            if (Optional.IsDefined(WriteAcceleratorEnabled))
+            if (WriteAcceleratorEnabled.HasValue)
             {
                 writer.WritePropertyName("writeAcceleratorEnabled"u8);
                 writer.WriteBooleanValue(WriteAcceleratorEnabled.Value);
             }
             writer.WritePropertyName("createOption"u8);
             writer.WriteStringValue(CreateOption.ToString());
-            if (Optional.IsDefined(DiskSizeGB))
+            if (DiskSizeGB.HasValue)
             {
                 writer.WritePropertyName("diskSizeGB"u8);
                 writer.WriteNumberValue(DiskSizeGB.Value);
             }
-            if (Optional.IsDefined(ManagedDisk))
+            if (ManagedDisk != null)
             {
                 writer.WritePropertyName("managedDisk"u8);
                 writer.WriteObjectValue(ManagedDisk);
             }
-            if (Optional.IsDefined(ToBeDetached))
+            if (ToBeDetached.HasValue)
             {
                 writer.WritePropertyName("toBeDetached"u8);
                 writer.WriteBooleanValue(ToBeDetached.Value);
             }
-            if (options.Format != "W" && Optional.IsDefined(DiskIopsReadWrite))
+            if (options.Format != "W" && DiskIopsReadWrite.HasValue)
             {
                 writer.WritePropertyName("diskIOPSReadWrite"u8);
                 writer.WriteNumberValue(DiskIopsReadWrite.Value);
             }
-            if (options.Format != "W" && Optional.IsDefined(DiskMBpsReadWrite))
+            if (options.Format != "W" && DiskMBpsReadWrite.HasValue)
             {
                 writer.WritePropertyName("diskMBpsReadWrite"u8);
                 writer.WriteNumberValue(DiskMBpsReadWrite.Value);
@@ -245,7 +245,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 builder.Append("  name:");
                 if (Name.Contains(Environment.NewLine))
@@ -259,69 +259,63 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(Lun))
-            {
-                builder.Append("  lun:");
-                builder.AppendLine($" {Lun}");
-            }
+            builder.Append("  lun:");
+            builder.AppendLine($" {Lun}");
 
-            if (Optional.IsDefined(Vhd))
+            if (Vhd != null)
             {
                 builder.Append("  vhd:");
                 AppendChildObject(builder, Vhd, options, 2, false);
             }
 
-            if (Optional.IsDefined(Image))
+            if (Image != null)
             {
                 builder.Append("  image:");
                 AppendChildObject(builder, Image, options, 2, false);
             }
 
-            if (Optional.IsDefined(Caching))
+            if (Caching.HasValue)
             {
                 builder.Append("  caching:");
                 builder.AppendLine($" '{Caching.Value.ToSerialString()}'");
             }
 
-            if (Optional.IsDefined(WriteAcceleratorEnabled))
+            if (WriteAcceleratorEnabled.HasValue)
             {
                 builder.Append("  writeAcceleratorEnabled:");
                 var boolValue = WriteAcceleratorEnabled.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
             }
 
-            if (Optional.IsDefined(CreateOption))
-            {
-                builder.Append("  createOption:");
-                builder.AppendLine($" '{CreateOption.ToString()}'");
-            }
+            builder.Append("  createOption:");
+            builder.AppendLine($" '{CreateOption.ToString()}'");
 
-            if (Optional.IsDefined(DiskSizeGB))
+            if (DiskSizeGB.HasValue)
             {
                 builder.Append("  diskSizeGB:");
                 builder.AppendLine($" {DiskSizeGB.Value}");
             }
 
-            if (Optional.IsDefined(ManagedDisk))
+            if (ManagedDisk != null)
             {
                 builder.Append("  managedDisk:");
                 AppendChildObject(builder, ManagedDisk, options, 2, false);
             }
 
-            if (Optional.IsDefined(ToBeDetached))
+            if (ToBeDetached.HasValue)
             {
                 builder.Append("  toBeDetached:");
                 var boolValue = ToBeDetached.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
             }
 
-            if (Optional.IsDefined(DiskIopsReadWrite))
+            if (DiskIopsReadWrite.HasValue)
             {
                 builder.Append("  diskIOPSReadWrite:");
                 builder.AppendLine($" '{DiskIopsReadWrite.Value.ToString()}'");
             }
 
-            if (Optional.IsDefined(DiskMBpsReadWrite))
+            if (DiskMBpsReadWrite.HasValue)
             {
                 builder.Append("  diskMBpsReadWrite:");
                 builder.AppendLine($" '{DiskMBpsReadWrite.Value.ToString()}'");

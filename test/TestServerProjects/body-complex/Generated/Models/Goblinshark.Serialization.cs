@@ -26,17 +26,17 @@ namespace body_complex.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Jawsize))
+            if (Jawsize.HasValue)
             {
                 writer.WritePropertyName("jawsize"u8);
                 writer.WriteNumberValue(Jawsize.Value);
             }
-            if (Optional.IsDefined(Color))
+            if (Color.HasValue)
             {
                 writer.WritePropertyName("color"u8);
                 writer.WriteStringValue(Color.Value.ToString());
             }
-            if (Optional.IsDefined(Age))
+            if (Age.HasValue)
             {
                 writer.WritePropertyName("age"u8);
                 writer.WriteNumberValue(Age.Value);
@@ -45,7 +45,7 @@ namespace body_complex.Models
             writer.WriteStringValue(Birthday, "O");
             writer.WritePropertyName("fishtype"u8);
             writer.WriteStringValue(Fishtype);
-            if (Optional.IsDefined(Species))
+            if (Species != null)
             {
                 writer.WritePropertyName("species"u8);
                 writer.WriteStringValue(Species);

@@ -26,7 +26,7 @@ namespace httpInfrastructure.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(HttpCode))
+            if (HttpCode != null)
             {
                 writer.WritePropertyName("httpCode"u8);
                 writer.WriteStringValue(HttpCode);

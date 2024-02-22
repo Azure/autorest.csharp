@@ -33,22 +33,22 @@ namespace Azure.ResourceManager.Storage
                 }
                 writer.WriteEndObject();
             }
-            if (Optional.IsDefined(ShareQuota))
+            if (ShareQuota.HasValue)
             {
                 writer.WritePropertyName("shareQuota"u8);
                 writer.WriteNumberValue(ShareQuota.Value);
             }
-            if (Optional.IsDefined(EnabledProtocols))
+            if (EnabledProtocols.HasValue)
             {
                 writer.WritePropertyName("enabledProtocols"u8);
                 writer.WriteStringValue(EnabledProtocols.Value.ToString());
             }
-            if (Optional.IsDefined(RootSquash))
+            if (RootSquash.HasValue)
             {
                 writer.WritePropertyName("rootSquash"u8);
                 writer.WriteStringValue(RootSquash.Value.ToString());
             }
-            if (Optional.IsDefined(AccessTier))
+            if (AccessTier.HasValue)
             {
                 writer.WritePropertyName("accessTier"u8);
                 writer.WriteStringValue(AccessTier.Value.ToString());

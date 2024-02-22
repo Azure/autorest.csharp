@@ -28,14 +28,14 @@ namespace ModelWithConverterUsage.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(StringProperty))
+            if (StringProperty != null)
             {
                 writer.WritePropertyName("String_Property"u8);
                 writer.WriteStringValue(StringProperty);
             }
             writer.WritePropertyName("Enum_Property"u8);
             writer.WriteStringValue(EnumProperty.ToSerialString());
-            if (Optional.IsDefined(ObjProperty))
+            if (ObjProperty != null)
             {
                 writer.WritePropertyName("Obj_Property"u8);
                 writer.WriteObjectValue(ObjProperty);

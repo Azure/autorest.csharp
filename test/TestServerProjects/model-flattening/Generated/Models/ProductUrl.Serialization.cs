@@ -26,12 +26,12 @@ namespace model_flattening.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(OdataValue))
+            if (OdataValue != null)
             {
                 writer.WritePropertyName("@odata.value"u8);
                 writer.WriteStringValue(OdataValue);
             }
-            if (Optional.IsDefined(GenericValue))
+            if (GenericValue != null)
             {
                 writer.WritePropertyName("generic_value"u8);
                 writer.WriteStringValue(GenericValue);

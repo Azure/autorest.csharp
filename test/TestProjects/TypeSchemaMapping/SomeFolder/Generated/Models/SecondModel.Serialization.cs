@@ -27,11 +27,8 @@ namespace TypeSchemaMapping.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(IntProperty))
-            {
-                writer.WritePropertyName("StringProperty"u8);
-                writer.WriteNumberValue(IntProperty);
-            }
+            writer.WritePropertyName("StringProperty"u8);
+            writer.WriteNumberValue(IntProperty);
             if (!(DictionaryProperty is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("DictionaryProperty"u8);
@@ -43,7 +40,7 @@ namespace TypeSchemaMapping.Models
                 }
                 writer.WriteEndObject();
             }
-            if (Optional.IsDefined(DaysOfWeek))
+            if (DaysOfWeek.HasValue)
             {
                 writer.WritePropertyName("DaysOfWeek"u8);
                 writer.WriteStringValue(DaysOfWeek.Value.ToString());

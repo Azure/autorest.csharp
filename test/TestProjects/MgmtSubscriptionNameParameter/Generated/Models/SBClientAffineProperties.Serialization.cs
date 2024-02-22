@@ -15,17 +15,17 @@ namespace MgmtSubscriptionNameParameter.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(ClientId))
+            if (ClientId != null)
             {
                 writer.WritePropertyName("clientId"u8);
                 writer.WriteStringValue(ClientId);
             }
-            if (Optional.IsDefined(IsDurable))
+            if (IsDurable.HasValue)
             {
                 writer.WritePropertyName("isDurable"u8);
                 writer.WriteBooleanValue(IsDurable.Value);
             }
-            if (Optional.IsDefined(IsShared))
+            if (IsShared.HasValue)
             {
                 writer.WritePropertyName("isShared"u8);
                 writer.WriteBooleanValue(IsShared.Value);

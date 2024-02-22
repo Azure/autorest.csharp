@@ -26,12 +26,12 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(EnableProxy))
+            if (EnableProxy.HasValue)
             {
                 writer.WritePropertyName("enableProxy"u8);
                 writer.WriteBooleanValue(EnableProxy.Value);
             }
-            if (Optional.IsDefined(RequireProxyForNetworkRules))
+            if (RequireProxyForNetworkRules.HasValue)
             {
                 if (RequireProxyForNetworkRules != null)
                 {

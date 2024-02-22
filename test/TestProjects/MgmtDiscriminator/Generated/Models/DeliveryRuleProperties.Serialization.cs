@@ -28,12 +28,12 @@ namespace MgmtDiscriminator.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Order))
+            if (Order.HasValue)
             {
                 writer.WritePropertyName("order"u8);
                 writer.WriteNumberValue(Order.Value);
             }
-            if (Optional.IsDefined(Conditions))
+            if (Conditions != null)
             {
                 writer.WritePropertyName("conditions"u8);
                 writer.WriteObjectValue(Conditions);
@@ -59,12 +59,12 @@ namespace MgmtDiscriminator.Models
                 }
                 writer.WriteEndObject();
             }
-            if (Optional.IsDefined(Pet))
+            if (Pet != null)
             {
                 writer.WritePropertyName("pet"u8);
                 writer.WriteObjectValue(Pet);
             }
-            if (options.Format != "W" && Optional.IsDefined(Foo))
+            if (options.Format != "W" && Foo != null)
             {
                 writer.WritePropertyName("foo"u8);
                 writer.WriteStringValue(Foo);
@@ -191,13 +191,13 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Order))
+            if (Order.HasValue)
             {
                 builder.Append("  order:");
                 builder.AppendLine($" {Order.Value}");
             }
 
-            if (Optional.IsDefined(Conditions))
+            if (Conditions != null)
             {
                 builder.Append("  conditions:");
                 AppendChildObject(builder, Conditions, options, 2, false);
@@ -232,13 +232,13 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            if (Optional.IsDefined(Pet))
+            if (Pet != null)
             {
                 builder.Append("  pet:");
                 AppendChildObject(builder, Pet, options, 2, false);
             }
 
-            if (Optional.IsDefined(Foo))
+            if (Foo != null)
             {
                 builder.Append("  foo:");
                 if (Foo.Contains(Environment.NewLine))

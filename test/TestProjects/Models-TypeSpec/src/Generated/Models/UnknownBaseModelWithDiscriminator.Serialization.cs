@@ -29,7 +29,7 @@ namespace ModelsTypeSpec.Models
             writer.WriteStartObject();
             writer.WritePropertyName("discriminatorProperty"u8);
             writer.WriteStringValue(DiscriminatorProperty);
-            if (Optional.IsDefined(OptionalPropertyOnBase))
+            if (OptionalPropertyOnBase != null)
             {
                 writer.WritePropertyName("optionalPropertyOnBase"u8);
                 writer.WriteStringValue(OptionalPropertyOnBase);
