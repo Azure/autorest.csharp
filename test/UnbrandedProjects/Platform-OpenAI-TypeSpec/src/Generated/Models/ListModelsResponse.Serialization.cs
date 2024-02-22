@@ -86,7 +86,7 @@ namespace OpenAI.Models
                     List<Model> array = new List<Model>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Model.DeserializeModel(item));
+                        array.Add(Model.DeserializeModel(item, options));
                     }
                     data = array;
                     continue;

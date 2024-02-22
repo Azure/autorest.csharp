@@ -97,7 +97,7 @@ namespace FirstTestTypeSpec.Models
                     List<ThereLevelExtension> array = new List<ThereLevelExtension>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DeserializeThereLevelExtension(item));
+                        array.Add(DeserializeThereLevelExtension(item, options));
                     }
                     extension = array;
                     continue;

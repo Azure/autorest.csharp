@@ -182,7 +182,7 @@ namespace Azure.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            plan = PurchasePlan.DeserializePurchasePlan(property0.Value);
+                            plan = PurchasePlan.DeserializePurchasePlan(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("osDiskImage"u8))
@@ -191,7 +191,7 @@ namespace Azure.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            osDiskImage = OSDiskImage.DeserializeOSDiskImage(property0.Value);
+                            osDiskImage = OSDiskImage.DeserializeOSDiskImage(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("dataDiskImages"u8))
@@ -203,7 +203,7 @@ namespace Azure.ResourceManager.Sample.Models
                             List<DataDiskImage> array = new List<DataDiskImage>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(DataDiskImage.DeserializeDataDiskImage(item));
+                                array.Add(DataDiskImage.DeserializeDataDiskImage(item, options));
                             }
                             dataDiskImages = array;
                             continue;
@@ -214,7 +214,7 @@ namespace Azure.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            automaticOSUpgradeProperties = AutomaticOSUpgradeProperties.DeserializeAutomaticOSUpgradeProperties(property0.Value);
+                            automaticOSUpgradeProperties = AutomaticOSUpgradeProperties.DeserializeAutomaticOSUpgradeProperties(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("hyperVGeneration"u8))
@@ -232,7 +232,7 @@ namespace Azure.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            disallowed = DisallowedConfiguration.DeserializeDisallowedConfiguration(property0.Value);
+                            disallowed = DisallowedConfiguration.DeserializeDisallowedConfiguration(property0.Value, options);
                             continue;
                         }
                     }

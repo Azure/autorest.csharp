@@ -112,7 +112,7 @@ namespace Azure.ResourceManager.Sample.Models
                     List<DiskEncryptionSettings> array = new List<DiskEncryptionSettings>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DiskEncryptionSettings.DeserializeDiskEncryptionSettings(item));
+                        array.Add(DiskEncryptionSettings.DeserializeDiskEncryptionSettings(item, options));
                     }
                     encryptionSettings = array;
                     continue;
@@ -126,7 +126,7 @@ namespace Azure.ResourceManager.Sample.Models
                     List<InstanceViewStatus> array = new List<InstanceViewStatus>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(InstanceViewStatus.DeserializeInstanceViewStatus(item));
+                        array.Add(InstanceViewStatus.DeserializeInstanceViewStatus(item, options));
                     }
                     statuses = array;
                     continue;

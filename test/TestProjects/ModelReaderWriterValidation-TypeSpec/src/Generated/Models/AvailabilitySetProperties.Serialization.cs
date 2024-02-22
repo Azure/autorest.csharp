@@ -101,7 +101,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                     List<WritableSubResource> array = new List<WritableSubResource>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(WritableSubResource.DeserializeWritableSubResource(item));
+                        array.Add(WritableSubResource.DeserializeWritableSubResource(item, options));
                     }
                     virtualMachines = array;
                     continue;

@@ -114,7 +114,7 @@ namespace _Specs_.Azure.Core.Basic.Models
                     List<UserOrder> array = new List<UserOrder>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(UserOrder.DeserializeUserOrder(item));
+                        array.Add(UserOrder.DeserializeUserOrder(item, options));
                     }
                     orders = array;
                     continue;

@@ -94,9 +94,9 @@ namespace body_complex.Models
             {
                 switch (discriminator.GetString())
                 {
-                    case "cookiecuttershark": return Cookiecuttershark.DeserializeCookiecuttershark(element);
-                    case "goblin": return Goblinshark.DeserializeGoblinshark(element);
-                    case "sawshark": return Sawshark.DeserializeSawshark(element);
+                    case "cookiecuttershark": return Cookiecuttershark.DeserializeCookiecuttershark(element, options);
+                    case "goblin": return Goblinshark.DeserializeGoblinshark(element, options);
+                    case "sawshark": return Sawshark.DeserializeSawshark(element, options);
                 }
             }
             Optional<int> age = default;
@@ -147,7 +147,7 @@ namespace body_complex.Models
                     List<Fish> array = new List<Fish>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DeserializeFish(item));
+                        array.Add(DeserializeFish(item, options));
                     }
                     siblings = array;
                     continue;

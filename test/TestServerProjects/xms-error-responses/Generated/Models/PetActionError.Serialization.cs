@@ -80,11 +80,11 @@ namespace xms_error_responses.Models
             {
                 switch (discriminator.GetString())
                 {
-                    case "PetHungryOrThirstyError": return PetHungryOrThirstyError.DeserializePetHungryOrThirstyError(element);
-                    case "PetSadError": return PetSadError.DeserializePetSadError(element);
+                    case "PetHungryOrThirstyError": return PetHungryOrThirstyError.DeserializePetHungryOrThirstyError(element, options);
+                    case "PetSadError": return PetSadError.DeserializePetSadError(element, options);
                 }
             }
-            return UnknownPetActionError.DeserializeUnknownPetActionError(element);
+            return UnknownPetActionError.DeserializeUnknownPetActionError(element, options);
         }
 
         BinaryData IPersistableModel<PetActionError>.Write(ModelReaderWriterOptions options)

@@ -97,7 +97,7 @@ namespace _Type._Array.Models
                     List<InnerModel> array = new List<InnerModel>();
                     foreach (var item in property0.Value.EnumerateArray())
                     {
-                        array.Add(DeserializeInnerModel(item));
+                        array.Add(DeserializeInnerModel(item, options));
                     }
                     children = array;
                     continue;

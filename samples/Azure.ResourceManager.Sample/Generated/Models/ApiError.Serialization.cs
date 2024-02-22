@@ -114,7 +114,7 @@ namespace Azure.ResourceManager.Sample.Models
                     List<ApiErrorBase> array = new List<ApiErrorBase>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ApiErrorBase.DeserializeApiErrorBase(item));
+                        array.Add(ApiErrorBase.DeserializeApiErrorBase(item, options));
                     }
                     details = array;
                     continue;
@@ -125,7 +125,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    innererror = InnerError.DeserializeInnerError(property.Value);
+                    innererror = InnerError.DeserializeInnerError(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("code"u8))

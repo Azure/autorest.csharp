@@ -111,7 +111,7 @@ namespace body_complex.Models
                     List<Dog> array = new List<Dog>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Dog.DeserializeDog(item));
+                        array.Add(Dog.DeserializeDog(item, options));
                     }
                     hates = array;
                     continue;

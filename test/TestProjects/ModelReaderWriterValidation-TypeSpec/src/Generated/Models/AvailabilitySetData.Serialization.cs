@@ -120,7 +120,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                     {
                         continue;
                     }
-                    sku = ComputeSku.DeserializeComputeSku(property.Value);
+                    sku = ComputeSku.DeserializeComputeSku(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -129,7 +129,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                     {
                         continue;
                     }
-                    properties = AvailabilitySetProperties.DeserializeAvailabilitySetProperties(property.Value);
+                    properties = AvailabilitySetProperties.DeserializeAvailabilitySetProperties(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("id"u8))

@@ -253,7 +253,7 @@ namespace ModelsTypeSpec.Models
                     List<CollectionItem> array = new List<CollectionItem>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CollectionItem.DeserializeCollectionItem(item));
+                        array.Add(CollectionItem.DeserializeCollectionItem(item, options));
                     }
                     optionalModelList = array;
                     continue;
@@ -264,7 +264,7 @@ namespace ModelsTypeSpec.Models
                     {
                         continue;
                     }
-                    optionalModel = DerivedModel.DeserializeDerivedModel(property.Value);
+                    optionalModel = DerivedModel.DeserializeDerivedModel(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("optionalModelWithPropertiesOnBase"u8))
@@ -273,7 +273,7 @@ namespace ModelsTypeSpec.Models
                     {
                         continue;
                     }
-                    optionalModelWithPropertiesOnBase = DerivedModelWithProperties.DeserializeDerivedModelWithProperties(property.Value);
+                    optionalModelWithPropertiesOnBase = DerivedModelWithProperties.DeserializeDerivedModelWithProperties(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("optionalFixedStringEnum"u8))
@@ -331,7 +331,7 @@ namespace ModelsTypeSpec.Models
                     Dictionary<string, RecordItem> dictionary = new Dictionary<string, RecordItem>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value));
+                        dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value, options));
                     }
                     optionalModelRecord = dictionary;
                     continue;

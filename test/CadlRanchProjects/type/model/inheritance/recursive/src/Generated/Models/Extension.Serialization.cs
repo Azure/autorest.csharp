@@ -97,7 +97,7 @@ namespace _Type.Model.Inheritance.Recursive.Models
                     List<Extension> array = new List<Extension>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DeserializeExtension(item));
+                        array.Add(DeserializeExtension(item, options));
                     }
                     extension = array;
                     continue;

@@ -89,7 +89,7 @@ namespace OpenAI.Models
                     List<FineTuningJob> array = new List<FineTuningJob>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(FineTuningJob.DeserializeFineTuningJob(item));
+                        array.Add(FineTuningJob.DeserializeFineTuningJob(item, options));
                     }
                     data = array;
                     continue;

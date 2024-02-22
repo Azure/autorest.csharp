@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             T library;
             if (Configuration.Generation1ConvenienceClient)
             {
-                library = (T)(object)new DataPlaneOutputLibrary(CodeModel, (BuildContext<DataPlaneOutputLibrary>)(object)this);
+                throw new InvalidOperationException($"{nameof(BuildContext)} isn't supported in HLC");
             }
             else if (Configuration.AzureArm)
             {

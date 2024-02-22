@@ -2,14 +2,12 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Net;
 using System.Reflection;
 using System.Text.Json;
@@ -38,22 +36,22 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
 using Microsoft.CodeAnalysis;
-using YamlDotNet.Serialization.NodeTypeResolvers;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
-using ConstantExpression = AutoRest.CSharp.Common.Output.Expressions.ValueExpressions.ConstantExpression;
 using MemberExpression = AutoRest.CSharp.Common.Output.Expressions.ValueExpressions.MemberExpression;
 using SerializationFormat = AutoRest.CSharp.Output.Models.Serialization.SerializationFormat;
 using SwitchCase = AutoRest.CSharp.Common.Output.Expressions.Statements.SwitchCase;
-using ValidationType = AutoRest.CSharp.Output.Models.Shared.ValidationType;
 
 namespace AutoRest.CSharp.Common.Output.Builders
 {
     internal static class JsonSerializationMethodsBuilder
     {
-        public static IEnumerable<Method> BuildJsonSerializationMethods(SerializableObjectType model, JsonObjectSerialization json)
+        public static IEnumerable<Method> BuildJsonSerializationMethods(JsonObjectSerialization json)
         {
             var jsonModelInterface = json.IJsonModelInterface;
             var typeOfT = jsonModelInterface.Arguments[0];
+
+            var model = typeOfT.Implementation as SerializableObjectType;
+            Debug.Assert(model is not null);
 
             var useModelReaderWriter = Configuration.UseModelReaderWriter;
 
@@ -121,7 +119,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
         }
 
-        public static IEnumerable<Method> BuildIModelMethods(SerializableObjectType model, JsonObjectSerialization? json, XmlObjectSerialization? xml, BicepObjectSerialization? bicep)
+        public static IEnumerable<Method> BuildIModelMethods(JsonObjectSerialization? json, XmlObjectSerialization? xml, BicepObjectSerialization? bicep)
         {
             // we do not need this if model reader writer feature is not enabled
             if (!Configuration.UseModelReaderWriter)
@@ -132,9 +130,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
             // if we have json serialization, we must have this interface.
             // if we have xml serialization, we must have this interface.
             // therefore this type should never be null - because we cannot get here when json and xml both are null
-            Debug.Assert(iModelTInterface != null, model.Type.Name);
+            Debug.Assert(iModelTInterface != null, "iModelTInterface should not be null");
 
             var typeOfT = iModelTInterface.Arguments[0];
+            var model = typeOfT.Implementation as SerializableObjectType;
+            Debug.Assert(model is not null);
+
             var options = new ModelReaderWriterOptionsExpression(KnownParameters.Serializations.Options);
             // BinaryData IPersistableModel<T>.Write(ModelReaderWriterOptions options)
             yield return new
@@ -660,14 +661,14 @@ namespace AutoRest.CSharp.Common.Output.Builders
             {
                 yield return new IfStatement(jsonElement.TryGetProperty(discriminator.SerializedName, out var discriminatorElement))
                 {
-                    new SwitchStatement(discriminatorElement.GetString(), GetDiscriminatorCases(jsonElement, discriminator).ToArray())
+                    new SwitchStatement(discriminatorElement.GetString(), GetDiscriminatorCases(jsonElement, discriminator, options).ToArray())
                 };
             }
             // we redirect the deserialization to the `DefaultObjectType` (the unknown version of the discriminated set) if possible.
             // We could only do this when there is a discriminator, and the discriminator does not have a value (having a value indicating it is the child instead of base), and there is an unknown default object type to fall back, and I am not that fallback type.
             if (discriminator is { Value: null, DefaultObjectType: { } defaultObjectType } && !serialization.Type.Equals(defaultObjectType.Type))
             {
-                yield return Return(GetDeserializeImplementation(discriminator.DefaultObjectType.Type.Implementation, jsonElement, null));
+                yield return Return(GetDeserializeImplementation(discriminator.DefaultObjectType.Type.Implementation, jsonElement, options, null));
             }
             else
             {
@@ -675,11 +676,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
         }
 
-        private static IEnumerable<SwitchCase> GetDiscriminatorCases(JsonElementExpression element, ObjectTypeDiscriminator discriminator)
+        // TODO -- make the options parameter non-nullable again when we remove the `use-model-reader-writer` flag
+        private static IEnumerable<SwitchCase> GetDiscriminatorCases(JsonElementExpression element, ObjectTypeDiscriminator discriminator, ModelReaderWriterOptionsExpression? options)
         {
             foreach (var implementation in discriminator.Implementations)
             {
-                yield return new SwitchCase(Literal(implementation.Key), Return(GetDeserializeImplementation(implementation.Type.Implementation, element, null)), true);
+                yield return new SwitchCase(Literal(implementation.Key), Return(GetDeserializeImplementation(implementation.Type.Implementation, element, options, null)), true);
             }
         }
 
@@ -732,7 +734,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             {
                 yield return new ForeachStatement("property", element.EnumerateObject(), out var property)
                 {
-                    DeserializeIntoObjectProperties(serialization.Properties, new JsonPropertyExpression(property), propertyVariables, shouldTreatEmptyStringAsNull)
+                    DeserializeIntoObjectProperties(serialization.Properties, new JsonPropertyExpression(property), propertyVariables, shouldTreatEmptyStringAsNull, options)
                 };
             }
 
@@ -747,9 +749,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
         // TODO -- make the options parameter non-nullable again when we remove the `UseModelReaderWriter` flag.
         private static IEnumerable<MethodBodyStatement> DeserializeIntoObjectProperties(IEnumerable<JsonPropertySerialization> propertySerializations, JsonAdditionalPropertiesSerialization additionalPropertiesSerialization, JsonPropertyExpression jsonProperty, DictionaryExpression dictionary, ModelReaderWriterOptionsExpression? options, IReadOnlyDictionary<JsonPropertySerialization, VariableReference> propertyVariables, bool shouldTreatEmptyStringAsNull)
         {
-            yield return DeserializeIntoObjectProperties(propertySerializations, jsonProperty, propertyVariables, shouldTreatEmptyStringAsNull);
+            yield return DeserializeIntoObjectProperties(propertySerializations, jsonProperty, propertyVariables, shouldTreatEmptyStringAsNull, options);
             // in the case here, this line returns an empty statement, we only want the value here
-            yield return DeserializeValue(additionalPropertiesSerialization.ValueSerialization!, jsonProperty.Value, out var value);
+            yield return DeserializeValue(additionalPropertiesSerialization.ValueSerialization!, jsonProperty.Value, options, out var value);
             var additionalPropertiesStatement = dictionary.Add(jsonProperty.Name, value);
 
             yield return Serializations.WrapInCheckNotWire(
@@ -758,15 +760,15 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 additionalPropertiesStatement);
         }
 
-        private static MethodBodyStatement DeserializeIntoObjectProperties(IEnumerable<JsonPropertySerialization> propertySerializations, JsonPropertyExpression jsonProperty, IReadOnlyDictionary<JsonPropertySerialization, VariableReference> propertyVariables, bool shouldTreatEmptyStringAsNull)
+        private static MethodBodyStatement DeserializeIntoObjectProperties(IEnumerable<JsonPropertySerialization> propertySerializations, JsonPropertyExpression jsonProperty, IReadOnlyDictionary<JsonPropertySerialization, VariableReference> propertyVariables, bool shouldTreatEmptyStringAsNull, ModelReaderWriterOptionsExpression? options)
             => propertySerializations
                 .Select(p => new IfStatement(jsonProperty.NameEquals(p.SerializedName))
                 {
-                    DeserializeIntoObjectProperty(p, jsonProperty, propertyVariables, shouldTreatEmptyStringAsNull)
+                    DeserializeIntoObjectProperty(p, jsonProperty, propertyVariables, shouldTreatEmptyStringAsNull, options)
                 })
                 .ToArray();
 
-        private static MethodBodyStatement DeserializeIntoObjectProperty(JsonPropertySerialization jsonPropertySerialization, JsonPropertyExpression jsonProperty, IReadOnlyDictionary<JsonPropertySerialization, VariableReference> propertyVariables, bool shouldTreatEmptyStringAsNull)
+        private static MethodBodyStatement DeserializeIntoObjectProperty(JsonPropertySerialization jsonPropertySerialization, JsonPropertyExpression jsonProperty, IReadOnlyDictionary<JsonPropertySerialization, VariableReference> propertyVariables, bool shouldTreatEmptyStringAsNull, ModelReaderWriterOptionsExpression? options)
         {
             // write the deserialization hook
             if (jsonPropertySerialization.CustomDeserializationMethodName is { } deserializationMethodName)
@@ -785,7 +787,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 List<MethodBodyStatement> statements = new List<MethodBodyStatement>
                 {
                     CreatePropertyNullCheckStatement(jsonPropertySerialization, jsonProperty, propertyVariables, shouldTreatEmptyStringAsNull),
-                    DeserializeValue(jsonPropertySerialization.ValueSerialization, jsonProperty.Value, out var value)
+                    DeserializeValue(jsonPropertySerialization.ValueSerialization, jsonProperty.Value, options, out var value)
                 };
 
                 AssignValueStatement assignStatement = TypeFactory.IsReadOnlyMemory(jsonPropertySerialization.SerializedType!)
@@ -804,7 +806,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     CreatePropertyNullCheckStatement(jsonPropertySerialization, jsonProperty, propertyVariables, shouldTreatEmptyStringAsNull),
                     new ForeachStatement("property", jsonProperty.Value.EnumerateObject(), out var nestedItemVariable)
                     {
-                        DeserializeIntoObjectProperties(jsonPropertySerialization.PropertySerializations, new JsonPropertyExpression(nestedItemVariable), propertyVariables, shouldTreatEmptyStringAsNull)
+                        DeserializeIntoObjectProperties(jsonPropertySerialization.PropertySerializations, new JsonPropertyExpression(nestedItemVariable), propertyVariables, shouldTreatEmptyStringAsNull, options)
                     },
                     Continue
                 };
@@ -922,7 +924,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
         }
 
-        public static MethodBodyStatement BuildDeserializationForMethods(JsonSerialization serialization, bool async, ValueExpression? variable, StreamExpression stream, bool isBinaryData)
+        public static MethodBodyStatement BuildDeserializationForMethods(JsonSerialization serialization, bool async, ValueExpression? variable, StreamExpression stream, bool isBinaryData, ModelReaderWriterOptionsExpression? options)
         {
             if (isBinaryData)
             {
@@ -932,7 +934,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
 
             var declareDocument = UsingVar("document", JsonDocumentExpression.Parse(stream, async), out var document);
-            var deserializeValueBlock = DeserializeValue(serialization, document.RootElement, out var value);
+            var deserializeValueBlock = DeserializeValue(serialization, document.RootElement, options, out var value);
 
             if (!serialization.IsNullable)
             {
@@ -951,7 +953,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
             };
         }
 
-        public static MethodBodyStatement DeserializeValue(JsonSerialization serialization, JsonElementExpression element, out ValueExpression value)
+        // TODO -- make options parameter non-nullable again when we remove the `use-model-reader-writer` flag
+        public static MethodBodyStatement DeserializeValue(JsonSerialization serialization, JsonElementExpression element, ModelReaderWriterOptionsExpression? options, out ValueExpression value)
         {
             switch (serialization)
             {
@@ -966,7 +969,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         Declare(readOnlyMemory, New.Array(TypeFactory.GetElementType(jsonReadOnlyMemory.ImplementationType), element.GetArrayLength())),
                         new ForeachStatement("item", element.EnumerateArray(), out var readOnlyMemoryItem)
                         {
-                            DeserializeArrayItem(jsonReadOnlyMemory, value, new JsonElementExpression(readOnlyMemoryItem), index),
+                            DeserializeArrayItem(jsonReadOnlyMemory, value, new JsonElementExpression(readOnlyMemoryItem), options, index),
                             Increment(index)
                         }
                     };
@@ -980,7 +983,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         Declare(array, New.Instance(jsonArray.ImplementationType)),
                         new ForeachStatement("item", element.EnumerateArray(), out var arrayItem)
                         {
-                            DeserializeArrayItem(jsonArray, value, new JsonElementExpression(arrayItem)),
+                            DeserializeArrayItem(jsonArray, value, new JsonElementExpression(arrayItem), options),
                         }
                     };
 
@@ -990,7 +993,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         Declare("dictionary", New.Dictionary(jsonDictionary.Type.Arguments[0], jsonDictionary.Type.Arguments[1]), out var dictionary),
                         new ForeachStatement("property", element.EnumerateObject(), out var property)
                         {
-                            DeserializeDictionaryValue(jsonDictionary.ValueSerialization, dictionary, new JsonPropertyExpression(property))
+                            DeserializeDictionaryValue(jsonDictionary.ValueSerialization, dictionary, new JsonPropertyExpression(property), options)
                         }
                     };
                     value = dictionary;
@@ -998,11 +1001,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
                 case JsonValueSerialization { Options: JsonSerializationOptions.UseManagedServiceIdentityV3 } valueSerialization:
                     var declareSerializeOptions = Var("serializeOptions", New.JsonSerializerOptions(), out var serializeOptions);
-                    value = GetDeserializeValueExpression(element, valueSerialization.Type, valueSerialization.Format, serializeOptions);
+                    value = GetDeserializeValueExpression(element, valueSerialization.Type, options, valueSerialization.Format, serializeOptions);
                     return declareSerializeOptions;
 
                 case JsonValueSerialization valueSerialization:
-                    value = GetDeserializeValueExpression(element, valueSerialization.Type, valueSerialization.Format);
+                    value = GetDeserializeValueExpression(element, valueSerialization.Type, options, valueSerialization.Format);
                     return EmptyStatement;
 
                 default:
@@ -1010,7 +1013,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
         }
 
-        private static MethodBodyStatement DeserializeArrayItem(JsonArraySerialization serialization, ValueExpression arrayVariable, JsonElementExpression arrayItemVariable, ValueExpression? index = null)
+        private static MethodBodyStatement DeserializeArrayItem(JsonArraySerialization serialization, ValueExpression arrayVariable, JsonElementExpression arrayItemVariable, ModelReaderWriterOptionsExpression? options, ValueExpression? index = null)
         {
             bool isArray = index is not null;
 
@@ -1018,7 +1021,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             MethodBodyStatement deserializeAndAssign = new[]
             {
-                DeserializeValue(serialization.ValueSerialization, arrayItemVariable, out var value),
+                DeserializeValue(serialization.ValueSerialization, arrayItemVariable, options, out var value),
                 isArray ? InvokeArrayElementAssignment(arrayVariable, index!, value) : InvokeListAdd(arrayVariable, value)
             };
 
@@ -1037,11 +1040,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return statements;
         }
 
-        private static MethodBodyStatement DeserializeDictionaryValue(JsonSerialization serialization, DictionaryExpression dictionary, JsonPropertyExpression property)
+        private static MethodBodyStatement DeserializeDictionaryValue(JsonSerialization serialization, DictionaryExpression dictionary, JsonPropertyExpression property, ModelReaderWriterOptionsExpression? options)
         {
             var deserializeValueBlock = new[]
             {
-                DeserializeValue(serialization, property.Value, out var value),
+                DeserializeValue(serialization, property.Value, options, out var value),
                 dictionary.Add(property.Name, value)
             };
 
@@ -1058,7 +1061,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return deserializeValueBlock;
         }
 
-        public static ValueExpression GetDeserializeValueExpression(JsonElementExpression element, CSharpType serializationType, SerializationFormat serializationFormat = SerializationFormat.Default, ValueExpression? serializerOptions = null)
+        public static ValueExpression GetDeserializeValueExpression(JsonElementExpression element, CSharpType serializationType, ModelReaderWriterOptionsExpression? options, SerializationFormat serializationFormat = SerializationFormat.Default, ValueExpression? serializerOptions = null)
         {
             if (serializationType.SerializeAs != null)
             {
@@ -1076,10 +1079,10 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return GetFrameworkTypeValueExpression(frameworkType, element, serializationFormat, serializationType);
             }
 
-            return GetDeserializeImplementation(serializationType.Implementation, element, serializerOptions);
+            return GetDeserializeImplementation(serializationType.Implementation, element, options, serializerOptions);
         }
 
-        public static ValueExpression GetDeserializeImplementation(TypeProvider implementation, JsonElementExpression element, ValueExpression? serializerOptions)
+        private static ValueExpression GetDeserializeImplementation(TypeProvider implementation, JsonElementExpression element, ModelReaderWriterOptionsExpression? options, ValueExpression? serializerOptions)
         {
             switch (implementation)
             {
@@ -1093,7 +1096,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     return InvokeJsonSerializerDeserializeMethod(element, implementation.Type);
 
                 case SerializableObjectType type:
-                    return SerializableObjectTypeExpression.Deserialize(type, element);
+                    return SerializableObjectTypeExpression.Deserialize(type, element, options);
 
                 case EnumType clientEnum:
                     var value = GetFrameworkTypeValueExpression(clientEnum.ValueType.FrameworkType, element, SerializationFormat.Default, null);

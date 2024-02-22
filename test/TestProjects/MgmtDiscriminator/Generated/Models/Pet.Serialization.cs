@@ -76,11 +76,11 @@ namespace MgmtDiscriminator.Models
             {
                 switch (discriminator.GetString())
                 {
-                    case "Cat": return Cat.DeserializeCat(element);
-                    case "Dog": return Dog.DeserializeDog(element);
+                    case "Cat": return Cat.DeserializeCat(element, options);
+                    case "Dog": return Dog.DeserializeDog(element, options);
                 }
             }
-            return UnknownPet.DeserializeUnknownPet(element);
+            return UnknownPet.DeserializeUnknownPet(element, options);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

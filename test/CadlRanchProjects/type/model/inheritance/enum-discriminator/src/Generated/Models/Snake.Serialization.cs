@@ -73,10 +73,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
             {
                 switch (discriminator.GetString())
                 {
-                    case "cobra": return Cobra.DeserializeCobra(element);
+                    case "cobra": return Cobra.DeserializeCobra(element, options);
                 }
             }
-            return UnknownSnake.DeserializeUnknownSnake(element);
+            return UnknownSnake.DeserializeUnknownSnake(element, options);
         }
 
         BinaryData IPersistableModel<Snake>.Write(ModelReaderWriterOptions options)

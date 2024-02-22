@@ -72,7 +72,7 @@ namespace body_complex.Models
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeUnknownFish(document.RootElement, options);
+            return DeserializeFish(document.RootElement, options);
         }
 
         internal static UnknownFish DeserializeUnknownFish(JsonElement element, ModelReaderWriterOptions options = null)
@@ -115,7 +115,7 @@ namespace body_complex.Models
                     List<Fish> array = new List<Fish>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DeserializeFish(item));
+                        array.Add(DeserializeFish(item, options));
                     }
                     siblings = array;
                     continue;
@@ -151,7 +151,7 @@ namespace body_complex.Models
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeUnknownFish(document.RootElement, options);
+                        return DeserializeFish(document.RootElement, options);
                     }
                 default:
                     throw new FormatException($"The model {nameof(Fish)} does not support '{options.Format}' format.");

@@ -155,7 +155,7 @@ namespace MgmtXmlDeserialization.Models
                     List<XmlInstanceData> array = new List<XmlInstanceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(XmlInstanceData.DeserializeXmlInstanceData(item));
+                        array.Add(XmlInstanceData.DeserializeXmlInstanceData(item, options));
                     }
                     value = array;
                     continue;
