@@ -1,0 +1,385 @@
+{
+ "$id": "1",
+ "Name": "Payload.JsonMergePatch",
+ "Description": "Test for merge-patch+json content-type",
+ "ApiVersions": [
+  "v1.1"
+ ],
+ "Enums": [
+  {
+   "$id": "2",
+   "Kind": "Enum",
+   "Name": "Versions",
+   "EnumValueType": "String",
+   "AllowedValues": [
+    {
+     "$id": "3",
+     "Name": "v1_1",
+     "Value": "v1.1"
+    }
+   ],
+   "Namespace": "Payload.JsonMergePatch",
+   "Description": "",
+   "IsExtensible": true,
+   "IsNullable": false,
+   "Usage": "None"
+  }
+ ],
+ "Models": [
+  {
+   "$id": "4",
+   "Kind": "Model",
+   "Name": "PatchModel",
+   "Namespace": "Payload.JsonMergePatch",
+   "IsNullable": false,
+   "Usage": "RoundTrip",
+   "Properties": [
+    {
+     "$id": "5",
+     "Name": "requiredValue",
+     "SerializedName": "requiredValue",
+     "Description": "",
+     "Type": {
+      "$id": "6",
+      "Kind": "Primitive",
+      "Name": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "7",
+     "Name": "optionalValue",
+     "SerializedName": "optionalValue",
+     "Description": "",
+     "Type": {
+      "$id": "8",
+      "Kind": "Primitive",
+      "Name": "String",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "9",
+   "Kind": "Model",
+   "Name": "IntValueModel",
+   "Namespace": "Payload.JsonMergePatch",
+   "Accessibility": "public",
+   "IsNullable": false,
+   "Usage": "Input",
+   "Properties": [
+    {
+     "$id": "10",
+     "Name": "requiredIntValue",
+     "SerializedName": "requiredIntValue",
+     "Description": "",
+     "Type": {
+      "$id": "11",
+      "Kind": "Primitive",
+      "Name": "Int32",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "12",
+     "Name": "optionalIntValue",
+     "SerializedName": "optionalIntValue",
+     "Description": "",
+     "Type": {
+      "$id": "13",
+      "Kind": "Primitive",
+      "Name": "Int32",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "14",
+   "Kind": "Model",
+   "Name": "StringValueModel",
+   "Namespace": "Payload.JsonMergePatch",
+   "Accessibility": "public",
+   "IsNullable": false,
+   "Usage": "Input",
+   "Properties": [
+    {
+     "$id": "15",
+     "Name": "requiredStringValue",
+     "SerializedName": "requiredStringValue",
+     "Description": "",
+     "Type": {
+      "$id": "16",
+      "Kind": "Primitive",
+      "Name": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "17",
+     "Name": "optionalStringValue",
+     "SerializedName": "optionalStringValue",
+     "Description": "",
+     "Type": {
+      "$id": "18",
+      "Kind": "Primitive",
+      "Name": "String",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "19",
+   "Kind": "Model",
+   "Name": "BaseModel",
+   "Namespace": "Payload.JsonMergePatch",
+   "Accessibility": "public",
+   "IsNullable": false,
+   "Usage": "Input",
+   "Properties": [
+    {
+     "$id": "20",
+     "Name": "normalValue",
+     "SerializedName": "normalValue",
+     "Description": "",
+     "Type": {
+      "$id": "21",
+      "Kind": "Primitive",
+      "Name": "String",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "22",
+   "Kind": "Model",
+   "Name": "ExtendedModel",
+   "Namespace": "Payload.JsonMergePatch",
+   "Accessibility": "public",
+   "IsNullable": false,
+   "Usage": "Input",
+   "BaseModel": {
+    "$ref": "19"
+   },
+   "Properties": [
+    {
+     "$id": "23",
+     "Name": "extendedValue",
+     "SerializedName": "extendedValue",
+     "Description": "",
+     "Type": {
+      "$id": "24",
+      "Kind": "Primitive",
+      "Name": "String",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "25",
+   "Kind": "Model",
+   "Name": "NestedModel",
+   "Namespace": "Payload.JsonMergePatch",
+   "Accessibility": "public",
+   "IsNullable": false,
+   "Usage": "Input",
+   "Properties": [
+    {
+     "$id": "26",
+     "Name": "innerModel",
+     "SerializedName": "innerModel",
+     "Description": "",
+     "Type": {
+      "$id": "27",
+      "Kind": "Model",
+      "Name": "InnerModel",
+      "Namespace": "Payload.JsonMergePatch",
+      "Accessibility": "public",
+      "IsNullable": false,
+      "Usage": "Input",
+      "Properties": [
+       {
+        "$id": "28",
+        "Name": "property1",
+        "SerializedName": "property1",
+        "Description": "",
+        "Type": {
+         "$id": "29",
+         "Kind": "Primitive",
+         "Name": "Int32",
+         "IsNullable": false
+        },
+        "IsRequired": false,
+        "IsReadOnly": false
+       },
+       {
+        "$id": "30",
+        "Name": "property2",
+        "SerializedName": "property2",
+        "Description": "",
+        "Type": {
+         "$id": "31",
+         "Kind": "Primitive",
+         "Name": "Int32",
+         "IsNullable": false
+        },
+        "IsRequired": false,
+        "IsReadOnly": false
+       }
+      ]
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$ref": "27"
+  }
+ ],
+ "Clients": [
+  {
+   "$id": "32",
+   "Name": "JsonMergePatchClient",
+   "Description": "Test for merge-patch+json content-type",
+   "Operations": [
+    {
+     "$id": "33",
+     "Name": "patch",
+     "ResourceName": "JsonMergePatch",
+     "Parameters": [
+      {
+       "$id": "34",
+       "Name": "contentType",
+       "NameInRequest": "content-type",
+       "Type": {
+        "$id": "35",
+        "Kind": "Literal",
+        "Name": "Literal",
+        "LiteralValueType": {
+         "$id": "36",
+         "Kind": "Primitive",
+         "Name": "String",
+         "IsNullable": false
+        },
+        "Value": "application/merge-patch+json",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "DefaultValue": {
+        "$id": "37",
+        "Type": {
+         "$ref": "35"
+        },
+        "Value": "application/merge-patch+json"
+       },
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "38",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "4"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "39",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "40",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "41",
+        "Type": {
+         "$ref": "40"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "42",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "4"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "",
+     "Path": "/",
+     "RequestMediaTypes": [
+      "application/merge-patch+json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "43"
+   },
+   "Creatable": true
+  }
+ ]
+}
