@@ -45,9 +45,16 @@ namespace AutoRest.CSharp.Common.Output.Models
 
             public static MethodBodyStatement WrapInIsDefined(PropertySerialization serialization, MethodBodyStatement statement, bool forceCheck = false)
             {
-                if (!forceCheck && serialization.IsRequired)
+                if (!forceCheck)
                 {
-                    return statement;
+                    if (serialization.IsRequired)
+                    {
+                        return statement;
+                    }
+                    if (!serialization.Value.Type.IsNullable && serialization.Value.Type.IsValueType)
+                    {
+                        return statement;
+                    }
                 }
 
                 return TypeFactory.IsCollectionType(serialization.Value.Type) && !TypeFactory.IsReadOnlyMemory(serialization.Value.Type)

@@ -247,8 +247,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         property.CustomSerializationMethodName is {} serializationMethodName
                             ? InvokeCustomBicepSerializationMethod(serializationMethodName, stringBuilder)
                             : SerializeExpression(stringBuilder, property.ValueSerialization!, property.Value, spaces)
-                    }),
-                true);
+                    }));
 
             yield return EmptyLine;
         }
