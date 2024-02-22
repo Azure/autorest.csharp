@@ -18,7 +18,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             {
                 // create an empty object schema
                 var objectSchema = EmptyObjectSchema.FromName(schemaName);
-                MgmtContext.CodeModel.Schemas.Objects.Add(objectSchema);
+                MgmtContext.CodeModel!.Schemas.Objects.Add(objectSchema);
             }
 
             // check if their is duplicate names

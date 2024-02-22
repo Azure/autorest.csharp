@@ -7,7 +7,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -18,7 +17,6 @@ using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
-using Azure;
 using Azure.Core;
 using Request = AutoRest.CSharp.Output.Models.Requests.Request;
 using Response = AutoRest.CSharp.Output.Models.Responses.Response;
@@ -39,18 +37,17 @@ namespace AutoRest.CSharp.Output.Models
         private readonly TypeFactory _typeFactory;
         private readonly Dictionary<string, Parameter> _parameters;
 
-
         public RestClientBuilder(IEnumerable<InputParameter> clientParameters, TypeFactory typeFactory)
         {
             _typeFactory = typeFactory;
-            _parameters = clientParameters.DistinctBy(p => p.Name).ToDictionary(p => p.Name, BuildConstructorParameter);
+            _parameters = clientParameters.ToDictionary(p => p.Name, p => BuildConstructorParameter(p, _typeFactory));
         }
 
         public RestClientBuilder(IEnumerable<InputParameter> clientParameters, BuildContext context)
         {
             _typeFactory = context.TypeFactory;
             _library = context.BaseLibrary;
-            _parameters = clientParameters.ToDictionary(p => p.Name, BuildConstructorParameter);
+            _parameters = clientParameters.ToDictionary(p => p.Name, p => BuildConstructorParameter(p, _typeFactory));
         }
 
         /// <summary>
@@ -129,7 +126,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private Dictionary<InputParameter, Parameter> GetOperationAllParameters(InputOperation operation)
             => FilterOperationAllParameters(operation.Parameters)
-                .ToDictionary(p => p, parameter => BuildParameter(parameter));
+                .ToDictionary(p => p, parameter => BuildParameter(parameter, _typeFactory));
 
         public static IEnumerable<InputParameter> FilterOperationAllParameters(IReadOnlyList<InputParameter> parameters)
             => parameters
@@ -321,26 +318,29 @@ namespace AutoRest.CSharp.Output.Models
                             bodyParameterValue.Type,
                             null);
 
-                        // This method has a flattened body
-                        if (bodyRequestParameter.Kind == InputOperationParameterKind.Flattened && library != null)
-                        {
-                            var objectType = (SchemaObjectType)library.FindTypeForSchema(((CodeModelType)bodyRequestParameter.Type).Schema).Implementation;
+                        // TODO: This method has a flattened body
+                        //if (bodyRequestParameter.Kind == InputOperationParameterKind.Flattened && library != null)
+                        //{
+                        //    var objectType = (SchemaObjectType)library.ResolveModel((InputModelType)bodyRequestParameter.Type).Implementation;
 
-                            var initializationMap = new List<ObjectPropertyInitializer>();
-                            foreach ((_, InputParameter? inputParameter, _, _) in allParameters)
-                            {
-                                if (inputParameter is { VirtualParameter: { } virtualParameter })
-                                {
-                                    initializationMap.Add(new ObjectPropertyInitializer(objectType.GetPropertyForSchemaProperty(virtualParameter.TargetProperty, true), references[GetRequestParameterName(virtualParameter)].Reference));
-                                }
-                            }
+                        //    var initializationMap = new List<ObjectPropertyInitializer>();
+                        //    foreach ((_, InputParameter? inputParameter, _, _) in allParameters)
+                        //    {
+                        //        var virtualParameter = inputParameter?.VirtualParameter;
+                        //        if (virtualParameter is not null)
+                        //        {
+                        //            initializationMap.Add(new ObjectPropertyInitializer(objectType.GetPropertyForSchemaProperty(virtualParameter.TargetProperty, true), references[GetRequestParameterName(virtualParameter)].Reference));
+                        //        }
+                        //    }
 
-                            body = new FlattenedSchemaRequestBody(objectType, initializationMap.ToArray(), serialization);
-                        }
-                        else
-                        {
-                            body = new SchemaRequestBody(bodyParameterValue, serialization);
-                        }
+                        //    body = new FlattenedSchemaRequestBody(objectType, initializationMap.ToArray(), serialization);
+                        //}
+                        //else
+                        //{
+                        //    body = new SchemaRequestBody(bodyParameterValue, serialization);
+                        //}
+
+                        body = new SchemaRequestBody(bodyParameterValue, serialization);
                     }
                 }
             }
@@ -458,9 +458,9 @@ namespace AutoRest.CSharp.Output.Models
             };
         }
 
-        public virtual Parameter BuildConstructorParameter(InputParameter operationParameter)
+        public static Parameter BuildConstructorParameter(InputParameter operationParameter, TypeFactory typeFactory)
         {
-            var parameter = BuildParameter(operationParameter);
+            var parameter = BuildParameter(operationParameter, typeFactory);
             if (!operationParameter.IsEndpoint)
             {
                 return parameter;
@@ -478,10 +478,10 @@ namespace AutoRest.CSharp.Output.Models
         public static bool IsIgnoredHeaderParameter(InputParameter operationParameter)
             => operationParameter.Location == RequestLocation.Header && IgnoredRequestHeader.Contains(operationParameter.NameInRequest);
 
-        private Parameter BuildParameter(in InputParameter operationParameter, Type? typeOverride = null)
+        private static Parameter BuildParameter(in InputParameter operationParameter, TypeFactory typeFactory, Type? typeOverride = null)
         {
-            CSharpType type = typeOverride != null ? new CSharpType(typeOverride, operationParameter.Type.IsNullable) : _typeFactory.CreateType(operationParameter.Type);
-            return Parameter.FromInputParameter(operationParameter, type, _typeFactory);
+            CSharpType type = typeOverride != null ? new CSharpType(typeOverride, operationParameter.Type.IsNullable) : typeFactory.CreateType(operationParameter.Type);
+            return Parameter.FromInputParameter(operationParameter, type, typeFactory);
         }
 
         public static RestClientMethod BuildNextPageMethod(RestClientMethod method)

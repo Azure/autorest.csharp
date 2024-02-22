@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
         {
             ImmutableHashSet<string> enumsToKeepPlural = Configuration.MgmtConfiguration.KeepPluralEnums.ToImmutableHashSet();
 
-            foreach (var schema in MgmtContext.CodeModel.AllSchemas)
+            foreach (var schema in MgmtContext.CodeModel!.AllSchemas)
             {
                 if (schema is not SealedChoiceSchema && schema is not ChoiceSchema)
                     continue;

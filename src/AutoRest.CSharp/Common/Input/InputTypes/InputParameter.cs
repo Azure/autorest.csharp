@@ -51,6 +51,10 @@ internal record InputParameter(
     private SerializationFormat? _serializationFormat;
     public SerializationFormat SerializationFormat => _serializationFormat ??= GetSerializationFormat(Type, Location);
 
+    public string Name { get; internal set; } = Name;
+    public string NameInRequest { get; internal set; } = NameInRequest;
+    public bool IsRequired { get; internal set; } = IsRequired;
+
     private static SerializationFormat GetSerializationFormat(InputType parameterType, RequestLocation requestLocation)
     {
         var affectType = parameterType switch

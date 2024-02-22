@@ -8,6 +8,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -165,48 +166,13 @@ namespace AutoRest.CSharp.Output.Models.Types
                     getter != null && getter.IsPublic ? "public" : "internal",
                     property.Name,
                     declarationType);
-                Property schemaProperty;
-                if (backingProperty?.SchemaProperty is not null)
-                {
-                    schemaProperty = backingProperty.SchemaProperty;
-                }
-                else
-                {
-                    schemaProperty = new Property()
-                    {
-                        Nullable = declarationType.IsNullable,
-                        ReadOnly = property.IsReadOnly(),
-                        SerializedName = GetSerializedName(property.Name, SystemType),
-                        Summary = GetPropertySummary(setter != null, property.Name),
-                        Required = IsRequired(property, SystemType),
-                        Language = new Languages()
-                        {
-                            Default = new Language() { Name = property.Name },
-                        }
-                    };
-                    //We are only handling a small subset of cases because the set of reference types used from Azure.ResourceManager is known
-                    //If in the future we add more types which have unique cases we might need to update this code, but it will be obvious
-                    //given that the generation will fail with the new types
-                    if (TypeFactory.IsList(property.PropertyType))
-                    {
-                        schemaProperty.Schema = new ArraySchema()
-                        {
-                            Type = AllSchemaTypes.Array
-                        };
-                    }
-                    if (TypeFactory.IsDictionary(property.PropertyType))
-                    {
-                        schemaProperty.Schema = new DictionarySchema()
-                        {
-                            Type = AllSchemaTypes.Dictionary
-                        };
-                    }
-                }
+                //We are only handling a small subset of cases because the set of reference types used from Azure.ResourceManager is known
+                //If in the future we add more types which have unique cases we might need to update this code, but it will be obvious
+                //given that the generation will fail with the new types
+                InputType inputType = TypeFactory.IsDictionary(property.PropertyType) ? new InputDictionaryType(string.Empty, InputPrimitiveType.Boolean, InputPrimitiveType.Boolean, false, null) : InputPrimitiveType.Boolean;
+                InputModelProperty prop = new InputModelProperty(property.Name, GetSerializedName(property.Name, SystemType), $"Gets{GetPropertySummary(setter != null, property.Name)} {property.Name}", inputType, IsRequired(property, SystemType), property.IsReadOnly(), false, null);
+                yield return new ObjectTypeProperty(memberDeclarationOptions, prop.Description, prop.IsReadOnly, prop, new CSharpType(property.PropertyType) { SerializeAs = GetSerializeAs(property.PropertyType) });
 
-                yield return new ObjectTypeProperty(memberDeclarationOptions, schemaProperty.Summary!, schemaProperty.IsReadOnly, schemaProperty, new CSharpType(property.PropertyType)
-                {
-                    SerializeAs = GetSerializeAs(property.PropertyType)
-                });
             }
 
             static bool IsRequired(PropertyInfo property, Type systemType)

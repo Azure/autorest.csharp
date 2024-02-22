@@ -3,10 +3,8 @@
 
 using System;
 using System.Linq;
-using System.Text;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Report;
@@ -16,18 +14,13 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class MgmtReferenceType : MgmtObjectType
     {
-        public MgmtReferenceType(ObjectSchema objectSchema)
-            : base(objectSchema)
+        public MgmtReferenceType(InputModelType inputModel, string? name = default, string? nameSpace = default) : base(inputModel, name, nameSpace)
         {
         }
 
-        public MgmtReferenceType(ObjectSchema objectSchema, string? name = default, string? nameSpace = default) : base(objectSchema, name, nameSpace)
-        {
-        }
+        protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName); // TODO: && InputModel.Extensions?.MgmtReferenceType is true;
 
-        protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && ObjectSchema.Extensions?.MgmtReferenceType is true;
-
-        public override bool IncludeConverter => (ObjectSchema.Extensions?.MgmtPropertyReferenceType == true || ObjectSchema.Extensions?.MgmtTypeReferenceType == true) && ObjectSchema.Extensions?.MgmtReferenceType != true || base.IncludeConverter;
+        public override bool IncludeConverter => /* TODO: (InputModel.Extensions?.MgmtPropertyReferenceType == true || InputModel.Extensions?.MgmtTypeReferenceType == true) && InputModel.Extensions?.MgmtReferenceType != true || */base.IncludeConverter;
 
         protected override ObjectTypeProperty CreatePropertyType(ObjectTypeProperty objectTypeProperty)
         {
@@ -38,7 +31,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 var newProperty = ReferenceTypePropertyChooser.GetExactMatchForReferenceType(objectTypeProperty, objectTypeProperty.ValueType.FrameworkType, MgmtContext.Context);
                 if (newProperty != null)
                 {
-                    string fullSerializedName = this.GetFullSerializedName(objectTypeProperty);
+                    string fullSerializedName = GetFullSerializedName(objectTypeProperty);
                     MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
                         new TransformItem(TransformTypeName.ReplacePropertyType, fullSerializedName),
                        fullSerializedName,
@@ -52,7 +45,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override CSharpType? CreateInheritedType()
         {
-            return ObjectSchema.Extensions?.MgmtReferenceType == true ? CreateInheritedTypeWithNoExtraMatch() : base.CreateInheritedType();
+            return base.CreateInheritedType();
+            // TODO: return InputModel.Extensions?.MgmtReferenceType == true ? CreateInheritedTypeWithNoExtraMatch() : base.CreateInheritedType();
         }
 
         // the reference types do not need raw data field

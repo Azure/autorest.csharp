@@ -124,7 +124,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.WriteXmlDocumentationSummary(CreatePropertyDescription(property));
             if (Configuration.EnableBicepSerialization && objectType.Declaration.Accessibility == "public" && property.Declaration.Accessibility == "public")
             {
-                string? wrapper = property.SchemaProperty?.FlattenedNames?.FirstOrDefault();
+                string? wrapper = property.InputModelProperty?.FlattenedNames?.FirstOrDefault();
                 wrapper = wrapper is null ? string.Empty : $"{wrapper}.";
                 writer.Line($"[WirePath(\"{wrapper}{property.SerializedName}\")]");
             }
@@ -158,7 +158,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.WriteXmlDocumentationSummary(CreatePropertyDescription(property));
             if (Configuration.EnableBicepSerialization && objectType.Declaration.Accessibility == "public" && property.Declaration.Accessibility == "public")
             {
-                string? wrapper = property.UnderlyingProperty.SchemaProperty?.FlattenedNames?.FirstOrDefault();
+                string? wrapper = property.UnderlyingProperty.InputModelProperty?.FlattenedNames?.FirstOrDefault();
                 wrapper = wrapper is null ? string.Empty : $"{wrapper}.";
                 writer.Line($"[WirePath(\"{wrapper}{property.SerializedName}\")]");
             }

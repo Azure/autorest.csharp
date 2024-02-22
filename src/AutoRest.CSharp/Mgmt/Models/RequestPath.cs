@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -13,6 +14,7 @@ using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
+using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.ManagementGroups;
 using Azure.ResourceManager.Resources;
@@ -95,31 +97,27 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
     {
         var rawSegments = rawPath.Split('/', StringSplitOptions.RemoveEmptyEntries);
 
-        var segments = rawSegments.Select(raw => GetSegmentFromString(raw));
+        var segments = rawSegments.Select(GetSegmentFromString);
 
         return new RequestPath(segments);
     }
 
     public static RequestPath FromSegments(IEnumerable<Segment> segments) => new RequestPath(segments);
 
-    public static RequestPath FromOperation(Operation operation, OperationGroup operationGroup)
+    public static RequestPath FromOperation(InputOperation operation, InputClient inpuClient, TypeFactory typeFactory)
     {
-        foreach (var request in operation.Requests)
-        {
-            var httpRequest = request.Protocol.Http as HttpRequest;
-            if (httpRequest is null)
-                continue;
+        var inputParameters = operation.Parameters
+            .Where(p => p.Location is RequestLocation.Path or RequestLocation.Uri)
+            .ToDictionary(GetRequestParameterName);
 
-            var references = new MgmtRestClientBuilder(operationGroup).GetReferencesToOperationParameters(operation, request.Parameters);
-            var segments = new List<Segment>();
-            var segmentIndex = 0;
-            CreateSegments(httpRequest.Uri, references, segments, ref segmentIndex);
-            CreateSegments(httpRequest.Path, references, segments, ref segmentIndex);
+        var segments = new List<Segment>();
+        var segmentIndex = 0;
+        CreateSegments(operation.Uri, inputParameters, segments, typeFactory, ref segmentIndex);
+        CreateSegments(operation.Path, inputParameters, segments, typeFactory, ref segmentIndex);
 
-            return new RequestPath(CheckByIdPath(segments), operation.GetHttpPath());
-        }
+        return new RequestPath(CheckByIdPath(segments), operation.GetHttpPath());
 
-        throw new ErrorHelpers.ErrorException($"We didn't find request path for {operationGroup.Key}.{operation.CSharpName()}");
+        throw new ErrorHelpers.ErrorException($"We didn't find request path for {inpuClient.Key}.{operation.CleanName}");
     }
 
     private static Segment GetSegmentFromString(string str)
@@ -158,7 +156,7 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
             return segments;
 
         // this is a ById request path
-        return new List<Segment> { new Segment(first.Reference, first.Escape, true) };
+        return new List<Segment> { new(first.Reference, first.Escape, true) };
     }
 
     public bool IsById => Count == 1 && this.First().SkipUrlEncoding;
@@ -433,7 +431,7 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
         return requestScopeTypes.IsSubsetOf(resourceScopeTypes);
     }
 
-    private static void CreateSegments(string path, IReadOnlyDictionary<string, (ReferenceOrConstant ReferenceOrConstant, bool SkipUrlEncoding)> references, ICollection<Segment> segments, ref int segmentIndex)
+    private static void CreateSegments(string path, IReadOnlyDictionary<string, InputParameter> requestParameters, ICollection<Segment> segments, TypeFactory typeFactory, ref int segmentIndex)
     {
         foreach ((ReadOnlySpan<char> span, bool isLiteral) in Utilities.StringExtensions.GetPathParts(path))
         {
@@ -464,23 +462,24 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
             }
             else
             {
-                if (references.TryGetValue(span.ToString(), out var parameterReference))
+                if (requestParameters.TryGetValue(span.ToString(), out var inputParameter))
                 {
                     segmentIndex++;
-                    var (referenceOrConstant, skipUriEncoding) = parameterReference;
-                    var valueType = referenceOrConstant.Type;
 
-                    // we explicitly skip the `uri` variable in the path (which should be `endpoint`)
-                    if (valueType.Equals(typeof(Uri)))
+                    // we explicitly skip the `endpoint` variable in the path
+                    if (inputParameter.IsEndpoint)
                     {
                         continue;
                     }
 
-                    //for now we only assume expand variables are in the key slot which will be an odd slot
-                    CSharpType? expandableType = segmentIndex % 2 == 0 && !valueType.IsFrameworkType && valueType.Implementation is EnumType ? valueType : null;
+                    var type = typeFactory.CreateType(inputParameter.Type);
+                    var reference = CreateReference(inputParameter, type, typeFactory);
+                    var valueType = reference.Type;
 
+                    //for now we only assume expand variables are in the key slot which will be an odd slot
+                    CSharpType? expandableType = segmentIndex % 2 == 0 && valueType is { IsFrameworkType: false, Implementation: EnumType } ? valueType : null;
                     // this is either a constant but not string type, or it is not a constant, we just keep the information in this path segment
-                    segments.Add(new Segment(referenceOrConstant, !skipUriEncoding, expandableType: expandableType));
+                    segments.Add(new Segment(reference, !inputParameter.SkipUrlEncoding, expandableType: expandableType));
                 }
                 else
                 {
@@ -488,6 +487,37 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
                 }
             }
         }
+    }
+
+    private static ReferenceOrConstant CreateReference(InputParameter requestParameter, CSharpType type, TypeFactory typeFactory)
+    {
+        if (requestParameter.Kind != InputOperationParameterKind.Method)
+        {
+            return new Reference(requestParameter.CSharpName(), type);
+        }
+
+        if (requestParameter.Kind == InputOperationParameterKind.Constant)
+        {
+            return BuilderHelpers.ParseConstant(requestParameter.DefaultValue, typeFactory.CreateType(requestParameter.Type));
+        }
+
+        var groupedByParameter = requestParameter.GroupedBy;
+        if (groupedByParameter == null)
+        {
+            return new Reference(requestParameter.CSharpName(), type);
+        }
+
+        var groupModel = (SchemaObjectType)typeFactory.CreateType(groupedByParameter.Type).Implementation;
+        // TODO: handle it later
+        //var property = groupModel.GetPropertyForGroupedParameter(requestParameter.Name);
+        var property = groupModel.GetPropertyBySerializedName(requestParameter.NameInRequest ?? requestParameter.Name);
+
+        return new Reference($"{groupedByParameter.CSharpName()}.{property.Declaration.Name}", property.Declaration.Type);
+    }
+
+    private static string GetRequestParameterName(InputParameter requestParameter)
+    {
+        return requestParameter.NameInRequest ?? requestParameter.Name;
     }
 
     public int Count => _segments.Count;

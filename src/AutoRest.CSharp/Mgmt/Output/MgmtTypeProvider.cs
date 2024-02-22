@@ -164,7 +164,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             var client = set.RestClient;
             string? resourceName = resource is not null ? resource.ResourceName : client.Resources.Contains(DefaultResource) ? DefaultResource?.ResourceName : null;
 
-            string uniqueName = GetUniqueName(resourceName, client.OperationGroup.Key);
+            string uniqueName = GetUniqueName(resourceName, client.InputClient.Key);
 
             string uniqueVariable = uniqueName.ToVariableName();
             var result = new NameSet(
@@ -228,7 +228,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// </summary>
         public virtual IEnumerable<Resource> ChildResources => _childResources ??= MgmtContext.Library.ArmResources.Where(resource => resource.GetParents().Contains(this));
 
-        protected string GetOperationName(Operation operation, string clientResourceName)
+        protected string GetOperationName(InputOperation operation, string clientResourceName)
         {
             // search the configuration for a override of this operation
             if (operation.TryGetConfigOperationName(out var name))
@@ -244,13 +244,13 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// <param name="operation"></param>
         /// <param name="clientResourceName">For extension classes, use the ResourceName. For resources, use its operation group name</param>
         /// <returns></returns>
-        protected virtual string CalculateOperationName(Operation operation, string clientResourceName)
+        protected virtual string CalculateOperationName(InputOperation operation, string clientResourceName)
         {
             // search the configuration for a override of this operation
             if (operation.TryGetConfigOperationName(out var name))
                 return name;
 
-            var operationGroup = MgmtContext.Library.GetRestClient(operation).OperationGroup;
+            var operationGroup = MgmtContext.Library.GetRestClient(operation).InputClient;
             var ogKey = operationGroup.Key;
             var singularOGKey = ogKey.LastWordToSingular();
             if (ogKey == clientResourceName || singularOGKey == clientResourceName)
@@ -258,8 +258,8 @@ namespace AutoRest.CSharp.Mgmt.Output
                 return operation.MgmtCSharpName(false);
             }
 
-            var resourceName = string.Empty;
-            if (MgmtContext.Library.GetRestClientMethod(operation).IsListMethod(out _))
+            string resourceName;
+            if (operation.IsListMethod(out _))
             {
                 resourceName = ogKey.IsNullOrEmpty() ? string.Empty : singularOGKey.ResourceNameToPlural();
                 var opName = operation.MgmtCSharpName(!resourceName.IsNullOrEmpty());

@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.MgmtTest.Models;
@@ -18,11 +17,11 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
 {
     internal class MgmtTestOutputLibrary
     {
-        private readonly MockTestDefinitionModel _mockTestModel;
+        private readonly IReadOnlyList<InputClient> _mockTestModel;
         private readonly MgmtTestConfiguration _mgmtTestConfiguration;
-        public MgmtTestOutputLibrary(CodeModel codeModel, SourceInputModel sourceInputModel)
+        public MgmtTestOutputLibrary(InputNamespace inputNamespace)
         {
-            _mockTestModel = MgmtContext.CodeModel.TestModel!.MockTest;
+            _mockTestModel = inputNamespace.Clients;
             _mgmtTestConfiguration = Configuration.MgmtTestConfiguration!;
         }
 
@@ -43,26 +42,26 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
         private Dictionary<MgmtTypeProvider, List<MockTestCase>> EnsureMockTestCases()
         {
             var result = new Dictionary<MgmtTypeProvider, List<MockTestCase>>();
-            foreach (var exampleGroup in _mockTestModel.ExampleGroups)
+            foreach (var exampleGroup in _mockTestModel)
             {
                 var withSuffix = exampleGroup.Examples.Count > 1;
                 foreach (var example in exampleGroup.Examples)
                 {
                     // we need to find which resource or resource collection this test case belongs
-                    var operationId = exampleGroup.OperationId;
+                    var operationName = exampleGroup.Name;
 
                     // skip this operation if we find it in the `skipped-operations` configuration
-                    if (_mgmtTestConfiguration.SkippedOperations.Contains(operationId))
+                    if (_mgmtTestConfiguration.SkippedOperations.Contains(operationName))
                         continue;
 
-                    var providerAndOperations = FindCarriersFromOperationId(operationId);
+                    var providerAndOperations = FindCarriersFromOperationId(operationName);
                     foreach (var providerForExample in providerAndOperations)
                     {
                         // the operations on ArmClientExtensions are the same as the tenant extension, therefore we skip it here
                         // the source code generator will never write them if it is not in arm core
                         if (providerForExample.Carrier is ArmClientExtension)
                             continue;
-                        var mockTestCase = new MockTestCase(operationId, providerForExample.Carrier, providerForExample.Operation, example);
+                        var mockTestCase = new MockTestCase(operationName, providerForExample.Carrier, providerForExample.Operation, example.Value);
                         result.AddInList(mockTestCase.Owner, mockTestCase);
                     }
                 }
@@ -79,13 +78,13 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
             return Enumerable.Empty<MgmtTypeProviderAndOperation>();
         }
 
-        private Dictionary<string, List<MgmtTypeProviderAndOperation>>? _operationIdToProviders;
+        private Dictionary<string, List<MgmtTypeProviderAndOperation>>? _operationNameToProviders;
         private Dictionary<string, List<MgmtTypeProviderAndOperation>> EnsureOperationIdToProviders()
         {
-            if (_operationIdToProviders != null)
-                return _operationIdToProviders;
+            if (_operationNameToProviders != null)
+                return _operationNameToProviders;
 
-            _operationIdToProviders = new Dictionary<string, List<MgmtTypeProviderAndOperation>>();
+            _operationNameToProviders = new Dictionary<string, List<MgmtTypeProviderAndOperation>>();
             // iterate all the resources and resource collection
             var mgmtProviders = MgmtContext.Library.ArmResources.Cast<MgmtTypeProvider>()
                 .Concat(MgmtContext.Library.ResourceCollections)
@@ -99,12 +98,12 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
                         continue;
                     foreach (var restOperation in clientOperation)
                     {
-                        _operationIdToProviders.AddInList(restOperation.OperationId, new MgmtTypeProviderAndOperation(provider, clientOperation));
+                        _operationNameToProviders.AddInList(restOperation.Name, new MgmtTypeProviderAndOperation(provider, clientOperation));
                     }
                 }
             }
 
-            return _operationIdToProviders;
+            return _operationNameToProviders;
         }
 
         private MgmtMockTestProvider<MgmtExtensionWrapper>? _extensionWrapperMockTest;

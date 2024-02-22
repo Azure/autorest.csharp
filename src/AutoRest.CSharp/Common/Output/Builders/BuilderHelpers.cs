@@ -5,8 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Security;
 using System.Text;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
@@ -176,6 +176,7 @@ namespace AutoRest.CSharp.Output.Builders
                 escapeLength = slice.Length;
             return isMatch;
         }
+        public static string CSharpName(this InputParameter parameter) => parameter.Name.ToVariableName();
 
         public static string CSharpName(this RequestParameter parameter) => parameter.Language.Default.Name.ToVariableName();
 
@@ -184,8 +185,17 @@ namespace AutoRest.CSharp.Output.Builders
         public static string CSharpName(this Property property) =>
             (property.Language.Default.Name == null || property.Language.Default.Name == "null") ? "NullProperty" : property.Language.Default.Name.ToCleanName();
 
+        public static string CSharpName(this InputModelProperty property) =>
+            (property.Name == null || property.Name == "null") ? "NullProperty" : property.Name.ToCleanName();
+
+        public static string CSharpName(this InputOperation operation) =>
+            operation.Name.ToCleanName();
+
         public static string CSharpName(this Operation operation) =>
             operation.Language.Default.Name.ToCleanName();
+
+        public static string CSharpName(this InputType inputType) =>
+            inputType.Name.ToCleanName();
 
         public static string CSharpName(this Schema operation) =>
             operation.Language.Default.Name.ToCleanName();
@@ -264,6 +274,21 @@ namespace AutoRest.CSharp.Output.Builders
             }
 
             return newType.WithNullable(defaultType.IsNullable);
+        }
+
+        public static string CreateDerivedTypesDescription(CSharpType type)
+        {
+            if (TypeFactory.IsCollectionType(type))
+            {
+                type = TypeFactory.GetElementType(type);
+            }
+
+            if (type is { IsFrameworkType: false, Implementation: ObjectType objectType })
+            {
+                return objectType.CreateExtraDescriptionWithDiscriminator().ToString();
+            }
+
+            return string.Empty;
         }
 
         public static string CreateDescription(this Schema schema)

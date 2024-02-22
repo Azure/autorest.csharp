@@ -28,17 +28,20 @@ namespace AutoRest.CSharp.Mgmt.Output
             OperationType = $"{trimmedNamespace}ArmOperation<{returnType.Name}>";
             var resourceName = resource != null ? resource.ResourceName : $"{trimmedNamespace}Extensions";
             TypeName = $"{resourceName}{methodName}Operation";
-            var targetSchema = new ObjectSchema()
-            {
-                Language = new Languages()
-                {
-                    Default = new Language()
-                    {
-                        Name = TypeName,
-                        Namespace = MgmtContext.Context.DefaultNamespace
-                    }
-                }
-            };
+            var targetSchema = new InputModelType(
+                TypeName,
+                Configuration.Namespace,
+                null,
+                null,
+                null,
+                InputModelTypeUsage.None,
+                new List<InputModelProperty>(),
+                null,
+                new List<InputModelType>(),
+                null,
+                null,
+                null,
+                false);
             InterimType = new CSharpType(new MgmtObjectType(targetSchema), MgmtContext.Context.DefaultNamespace, TypeName);
         }
 

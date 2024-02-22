@@ -1,9 +1,11 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Security.Cryptography.X509Certificates;
+
 namespace AutoRest.CSharp.Common.Input;
 
-internal abstract record InputType(string Name, bool IsNullable)
+internal abstract record InputType(string Name, bool IsNullable, string? OriginalName = default)
 {
     internal InputType GetCollectionEquivalent(InputType inputType)
     {
@@ -24,4 +26,8 @@ internal abstract record InputType(string Name, bool IsNullable)
                 return inputType;
         }
     }
+
+    public string Name { get; internal set; } = Name;
+
+    public string? OriginalName { get; internal set; } = OriginalName;
 }

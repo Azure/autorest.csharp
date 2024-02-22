@@ -9,7 +9,6 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Models.Serialization;
@@ -24,7 +23,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             : this(declaration: new MemberDeclarationOptions(field.Accessibility, field.Name, field.Type),
                   parameterDescription: field.Description?.ToString() ?? string.Empty,
                   isReadOnly: field.Modifiers.HasFlag(FieldModifiers.ReadOnly),
-                  schemaProperty: null,
                   isRequired: field.IsRequired,
                   valueType: field.ValueType,
                   inputModelProperty: inputModelProperty,
@@ -36,15 +34,14 @@ namespace AutoRest.CSharp.Output.Models.Types
             InitializationValue = field.InitializationValue;
         }
 
-        public ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, CSharpType? valueType = null, bool optionalViaNullability = false)
-            : this(declaration, parameterDescription, isReadOnly, schemaProperty, schemaProperty?.IsRequired ?? false, valueType: valueType, optionalViaNullability: optionalViaNullability)
+        public ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, InputModelProperty? inputModelProperty, CSharpType? valueType = null, bool optionalViaNullability = false)
+            : this(declaration, parameterDescription, isReadOnly, inputModelProperty, inputModelProperty?.IsRequired ?? false, valueType: valueType, optionalViaNullability: optionalViaNullability)
         {
         }
 
-        private ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, bool isRequired, CSharpType? valueType = null, bool optionalViaNullability = false, InputModelProperty? inputModelProperty = null, bool isFlattenedProperty = false, FieldModifiers? getterModifiers = null, FieldModifiers? setterModifiers = null, SerializationFormat serializationFormat = SerializationFormat.Default)
+        private ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, InputModelProperty? inputModelProperty, bool isRequired, CSharpType? valueType = null, bool optionalViaNullability = false, bool isFlattenedProperty = false, FieldModifiers? getterModifiers = null, FieldModifiers? setterModifiers = null, SerializationFormat serializationFormat = SerializationFormat.Default)
         {
             IsReadOnly = isReadOnly;
-            SchemaProperty = schemaProperty;
             OptionalViaNullability = optionalViaNullability;
             ValueType = valueType ?? declaration.Type;
             Declaration = declaration;
@@ -67,11 +64,10 @@ namespace AutoRest.CSharp.Output.Models.Types
                 newDeclaration,
                 _baseParameterDescription,
                 IsReadOnly,
-                SchemaProperty,
+                InputModelProperty,
                 IsRequired,
                 valueType: ValueType,
                 optionalViaNullability: OptionalViaNullability,
-                inputModelProperty: InputModelProperty,
                 isFlattenedProperty: true);
         }
 
@@ -79,7 +75,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public ValueExpression? InitializationValue { get; }
 
-        public virtual string SerializedName => SchemaProperty?.SerializedName ?? InputModelProperty?.SerializedName ?? Declaration.Name;
+        public virtual string SerializedName => InputModelProperty?.SerializedName ?? InputModelProperty?.SerializedName ?? Declaration.Name;
 
         private bool IsFlattenedProperty { get; }
 
@@ -145,7 +141,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         public FormattableString FormattedDescription { get; }
         private FormattableString? _propertyDescription;
         public FormattableString PropertyDescription => _propertyDescription ??= $"{FormattedDescription}{CreateExtraPropertyDiscriminatorSummary(ValueType)}";
-        public Property? SchemaProperty { get; }
         public InputModelProperty? InputModelProperty { get; }
         private FormattableString? _parameterDescription;
         private string _baseParameterDescription; // inherited type "FlattenedObjectTypeProperty" need to pass this value into the base constructor so that some appended information will not be appended again in the flattened property
@@ -256,23 +251,15 @@ namespace AutoRest.CSharp.Output.Models.Types
         internal string CreateExtraDescriptionWithManagedServiceIdentity()
         {
             var extraDescription = string.Empty;
-            var originalObjSchema = SchemaProperty?.Schema as ObjectSchema;
-            var identityTypeSchema = originalObjSchema?.GetAllProperties()!.FirstOrDefault(p => p.SerializedName == "type")!.Schema;
-            if (identityTypeSchema != null)
+            var originalModelType = InputModelProperty?.Type as InputModelType;
+            var identityType = originalModelType?.GetAllProperties()!.FirstOrDefault(p => p.SerializedName == "type")!.Type;
+            if (identityType != null)
             {
                 var supportedTypesToShow = new List<string>();
                 var commonMsiSupportedTypeCount = typeof(ManagedServiceIdentityType).GetProperties().Length;
-                // unwrap constant schema if it is
-                if (identityTypeSchema is ConstantSchema constantIdentitySchema && constantIdentitySchema.ValueType is ChoiceSchema identityTypeChoiceSchema)
-                    identityTypeSchema = identityTypeChoiceSchema;
-
-                if (identityTypeSchema is ChoiceSchema choiceSchema && choiceSchema.Choices.Count < commonMsiSupportedTypeCount)
+                if (identityType is InputEnumType enumType && enumType.AllowedValues.Count < commonMsiSupportedTypeCount)
                 {
-                    supportedTypesToShow = choiceSchema.Choices.Select(c => c.Value).ToList();
-                }
-                else if (identityTypeSchema is SealedChoiceSchema sealedChoiceSchema && sealedChoiceSchema.Choices.Count < commonMsiSupportedTypeCount)
-                {
-                    supportedTypesToShow = sealedChoiceSchema.Choices.Select(c => c.Value).ToList();
+                    supportedTypesToShow = enumType.AllowedValues.Select(c => c.Name).ToList();
                 }
                 if (supportedTypesToShow.Count > 0)
                 {
@@ -325,23 +312,23 @@ namespace AutoRest.CSharp.Output.Models.Types
                     var items = type.IsUnion ? type.UnionItemTypes : ValueType.UnionItemTypes;
 
                     if (items is { Count: > 0 })
-                    {
+            {
                         unionTypeDescriptions = GetUnionTypesDescriptions(items);
-                    }
+            }
                 }
 
                 if (type.FrameworkType == typeof(BinaryData))
-                {
+            {
                     typeSpecificDesc = "this property";
                     return ConstructBinaryDataDescription(typeSpecificDesc, serializationFormat, unionTypeDescriptions);
-                }
+            }
                 if (TypeFactory.IsList(type) &&
                     type.Arguments[0].IsFrameworkType &&
                     type.Arguments[0].FrameworkType == typeof(BinaryData))
-                {
+            {
                     typeSpecificDesc = "the element of this property";
                     return ConstructBinaryDataDescription(typeSpecificDesc, serializationFormat, unionTypeDescriptions);
-                }
+            }
                 if (TypeFactory.IsDictionary(type) &&
                     type.Arguments[1].IsFrameworkType &&
                     type.Arguments[1].FrameworkType == typeof(BinaryData))
@@ -440,7 +427,7 @@ Examples:
                 }
             }
             else if (valueType.Implementation is ObjectType objectType)
-            {
+        {
                 updatedDescription = objectType.CreateExtraDescriptionWithDiscriminator();
             }
             return updatedDescription ?? $"";

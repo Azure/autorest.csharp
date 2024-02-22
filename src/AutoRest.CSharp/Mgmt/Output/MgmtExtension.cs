@@ -25,9 +25,9 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         public override bool IsStatic => IsArmCore ? false : true; // explicitly expand this for readability
 
-        private readonly IEnumerable<Operation> _allRawOperations;
+        private readonly IEnumerable<InputOperation> _allRawOperations;
 
-        public MgmtExtension(IEnumerable<Operation> allRawOperations, IEnumerable<MgmtMockableExtension> mockingExtensions, Type armCoreType, RequestPath? contextualPath = null)
+        public MgmtExtension(IEnumerable<InputOperation> allRawOperations, IEnumerable<MgmtMockableExtension> mockingExtensions, Type armCoreType, RequestPath? contextualPath = null)
             : base(armCoreType.Name)
         {
             _allRawOperations = allRawOperations;
@@ -109,13 +109,13 @@ namespace AutoRest.CSharp.Mgmt.Output
             });
         }
 
-        public string GetOperationName(Operation operation) => GetOperationName(operation, ResourceName);
+        public string GetOperationName(InputOperation operation) => GetOperationName(operation, ResourceName);
 
-        protected override string CalculateOperationName(Operation operation, string clientResourceName)
+        protected override string CalculateOperationName(InputOperation operation, string clientResourceName)
         {
             var operationName = base.CalculateOperationName(operation, clientResourceName);
 
-            if (MgmtContext.Library.GetRestClientMethod(operation).IsListMethod(out var itemType) && itemType is { IsFrameworkType: false, Implementation: ResourceData data })
+            if (operation.IsListMethod(out var itemType) && itemType is { IsFrameworkType: false, Implementation: ResourceData data })
             {
                 var requestPath = operation.GetRequestPath();
                 // we need to find the correct resource type that links with this resource data

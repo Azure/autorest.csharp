@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             T library;
             if (Configuration.Generation1ConvenienceClient)
             {
-                library = (T)(object)new DataPlaneOutputLibrary(CodeModel, (BuildContext<DataPlaneOutputLibrary>)(object)this);
+                library = (T)(object)new DataPlaneOutputLibrary(CodeModel!, (BuildContext<DataPlaneOutputLibrary>)(object)this);
             }
             else if (Configuration.AzureArm)
             {
@@ -38,8 +38,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             return library;
         }
 
-        public BuildContext(CodeModel codeModel, SourceInputModel? sourceInputModel)
-            : base(codeModel, sourceInputModel)
+        public BuildContext(CodeModel? codeModel, SourceInputModel? sourceInputModel, InputNamespace? inputNamespace = null)
+            : base(codeModel, sourceInputModel, inputNamespace)
         {
         }
 

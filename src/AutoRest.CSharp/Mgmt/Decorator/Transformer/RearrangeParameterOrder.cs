@@ -13,7 +13,7 @@ internal static class RearrangeParameterOrder
 {
     public static void Update()
     {
-        foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
+        foreach (var operationGroup in MgmtContext.CodeModel!.OperationGroups)
         {
             foreach (var operation in operationGroup.Operations)
             {

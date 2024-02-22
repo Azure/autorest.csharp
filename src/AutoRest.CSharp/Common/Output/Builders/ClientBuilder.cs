@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         }
 
         public static string GetClientPrefix(string name, BuildContext context)
-            => GetClientPrefix(name, context.DefaultName);
+            => GetClientPrefix(name, context.CodeModel?.Language.Default.Name ?? context.InputNamespace?.Name!);
 
         public static string GetClientPrefix(string? name, string namespaceName)
         {
@@ -151,41 +151,38 @@ namespace AutoRest.CSharp.Common.Output.Builders
         /// <summary>
         /// This function builds an enumerable of <see cref="PagingMethod"/> from an <see cref="OperationGroup"/> and a <see cref="RestClient"/>
         /// </summary>
-        /// <param name="operationGroup">The OperationGroup to build methods from</param>
+        /// <param name="inputClient">The OperationGroup to build methods from</param>
         /// <param name="restClient">The corresponding RestClient to the operation group</param>
         /// <param name="declaration">The type declaration options</param>
         /// <param name="nameOverrider">A delegate used for overriding the name of output <see cref="ClientMethod"/></param>
         /// <returns>An enumerable of <see cref="PagingMethod"/></returns>
-        public static IEnumerable<PagingMethod> BuildPagingMethods(OperationGroup operationGroup, CmcRestClient restClient, TypeDeclarationOptions Declaration,
-            Func<OperationGroup, Operation, RestClientMethod, string>? nameOverrider = default)
+        public static IEnumerable<PagingMethod> BuildPagingMethods(InputClient inputClient, CmcRestClient restClient, TypeDeclarationOptions Declaration,
+            Func<InputClient, InputOperation, RestClientMethod, string>? nameOverrider = default)
         {
-            foreach (var operation in operationGroup.Operations)
+            foreach (var operation in inputClient.Operations)
             {
-                Paging? paging = operation.Language.Default.Paging;
+                OperationPaging? paging = operation.Paging;
                 if (paging == null || operation.IsLongRunning)
                 {
                     continue;
                 }
 
-                foreach (var serviceRequest in operation.Requests)
+                RestClientMethod method = restClient.GetOperationMethod(operation);
+                RestClientMethod? nextPageMethod = restClient.GetNextOperationMethod(operation);
+
+                if (!(method.Responses.SingleOrDefault(r => r.ResponseBody != null)?.ResponseBody is ObjectResponseBody objectResponseBody))
                 {
-                    RestClientMethod method = restClient.GetOperationMethod(serviceRequest);
-                    RestClientMethod? nextPageMethod = restClient.GetNextOperationMethod(serviceRequest);
-
-                    if (!(method.Responses.SingleOrDefault(r => r.ResponseBody != null)?.ResponseBody is ObjectResponseBody objectResponseBody))
-                    {
-                        throw new InvalidOperationException($"Method {method.Name} has to have a return value");
-                    }
-
-                    var name = nameOverrider?.Invoke(operationGroup, operation, method) ?? method.Name;
-
-                    yield return new PagingMethod(
-                        method,
-                        nextPageMethod,
-                        name,
-                        new Diagnostic($"{Declaration.Name}.{name}"),
-                        new PagingResponseInfo(paging.NextLinkName, paging.ItemName, objectResponseBody.Type));
+                    throw new InvalidOperationException($"Method {method.Name} has to have a return value");
                 }
+
+                var name = nameOverrider?.Invoke(inputClient, operation, method) ?? method.Name;
+
+                yield return new PagingMethod(
+                    method,
+                    nextPageMethod,
+                    name,
+                    new Diagnostic($"{Declaration.Name}.{name}"),
+                    new PagingResponseInfo(paging.NextLinkName, paging.ItemName, objectResponseBody.Type));
             }
         }
     }

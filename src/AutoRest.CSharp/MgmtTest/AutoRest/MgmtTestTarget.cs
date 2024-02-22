@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         {
             Debug.Assert(codeModel.TestModel is not null);
             Debug.Assert(Configuration.MgmtTestConfiguration is not null);
-
+            var inputNamespace = new CodeModelConverter(codeModel, MgmtContext.SchemaUsageProvider!).CreateNamespace();
             MgmtTestOutputLibrary library;
             if (sourceInputModel == null)
             {
@@ -36,12 +36,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var sourceCodeProject = new SourceCodeProject(sourceFolder, Configuration.SharedSourceFolders);
                 sourceInputModel = new SourceInputModel(await sourceCodeProject.GetCompilationAsync());
                 InitializeMgmtContext(codeModel, sourceInputModel);
-                library = new MgmtTestOutputLibrary(codeModel, sourceInputModel);
+                library = new MgmtTestOutputLibrary(inputNamespace);
                 project.AddDirectory(sourceFolder);
             }
             else
             {
-                library = new MgmtTestOutputLibrary(codeModel, sourceInputModel);
+                library = new MgmtTestOutputLibrary(inputNamespace);
             }
 
             if (Configuration.MgmtTestConfiguration.Mock)

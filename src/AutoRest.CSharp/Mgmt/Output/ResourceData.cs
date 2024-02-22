@@ -3,8 +3,9 @@
 
 using System;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Builders;
 
@@ -12,15 +13,15 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class ResourceData : MgmtObjectType
     {
-        public ResourceData(ObjectSchema schema)
-            : this(schema, default, default)
+        public ResourceData(InputModelType inputModel)
+            : this(inputModel, null, null, null)
         {
         }
 
-        public ResourceData(ObjectSchema schema, string? name = default, string? nameSpace = default)
-            : base(schema, name, nameSpace)
+        public ResourceData(InputModelType inputModel, string? name = null, string? nameSpace = null, SerializableObjectType? defaultDerivedType = null)
+            : base(inputModel, name, nameSpace, defaultDerivedType)
         {
-            _clientPrefix = schema.Name;
+            _clientPrefix = inputModel.Name;
         }
 
         protected override bool IsResourceType => true;
@@ -28,9 +29,9 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected override FormattableString CreateDescription()
         {
             FormattableString baseDescription = $"{BuilderHelpers.EscapeXmlDocDescription($"A class representing the {_clientPrefix} data model.")}";
-            FormattableString extraDescription = string.IsNullOrWhiteSpace(ObjectSchema.Language.Default.Description) ?
+            FormattableString extraDescription = string.IsNullOrWhiteSpace(InputModel.Description) ?
                 (FormattableString)$"" :
-                $"{Environment.NewLine}{BuilderHelpers.EscapeXmlDocDescription(ObjectSchema.Language.Default.Description)}";
+                $"{Environment.NewLine}{BuilderHelpers.EscapeXmlDocDescription(InputModel.Description)}";
             return $"{baseDescription}{extraDescription}";
         }
 
@@ -40,7 +41,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         public bool IsTaggable => _isTaggable ??= EnsureIsTaggable();
         private bool EnsureIsTaggable()
         {
-            return ObjectSchema.HasTags();
+            return InputModel.HasTags();
         }
 
         private CSharpType? typeOfId;

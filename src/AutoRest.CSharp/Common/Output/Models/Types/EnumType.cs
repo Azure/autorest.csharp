@@ -29,8 +29,13 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
         }
 
-        public EnumType(InputEnumType input, string defaultNamespace, string defaultAccessibility, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
-            : base(defaultNamespace, sourceInputModel)
+        public EnumType(InputEnumType enumType, TypeFactory typeFactory, BuildContext context, string? newName = default)
+            : this(enumType, GetDefaultModelNamespace(null, context.DefaultNamespace), enumType.Accessibility ?? "public", typeFactory, context.SourceInputModel, newName)
+        {
+        }
+
+        public EnumType(InputEnumType input, string defaultNamespace, string defaultAccessibility, TypeFactory typeFactory, SourceInputModel? sourceInputModel, string? newName = default)
+            : base(Configuration.Generation1ConvenienceClient ? input.Namespace ?? defaultNamespace : defaultNamespace, sourceInputModel)
         {
             _allowedValues = input.AllowedValues;
             _typeFactory = typeFactory;
@@ -55,6 +60,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 _typeMapping = sourceInputModel?.CreateForModel(ExistingType);
             }
 
+            Description = string.IsNullOrWhiteSpace(input.Description) ? $"The {input.Name}." : input.Description;
             IsExtensible = isExtensible;
             ValueType = typeFactory.CreateType(input.EnumValueType);
             IsStringValueType = ValueType.Equals(typeof(string));
@@ -62,8 +68,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             IsFloatValueType = ValueType.Equals(typeof(float)) || ValueType.Equals(typeof(double));
             IsNumericValueType = IsIntValueType || IsFloatValueType;
             SerializationMethodName = IsStringValueType && IsExtensible ? "ToString" : $"ToSerial{ValueType.Name.FirstCharToUpperCase()}";
-
-            Description = input.Description;
         }
 
         public CSharpType ValueType { get; }
@@ -108,7 +112,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public static string GetAccessibility(Schema schema, BuildContext context)
         {
-            var usage = context.SchemaUsageProvider.GetUsage(schema);
+            var usage = context.SchemaUsageProvider!.GetUsage(schema);
             var hasUsage = usage.HasFlag(SchemaTypeUsage.Model);
             return schema.Extensions?.Accessibility ?? (hasUsage ? "public" : "internal");
         }

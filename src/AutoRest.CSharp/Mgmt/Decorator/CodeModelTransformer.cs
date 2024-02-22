@@ -13,12 +13,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public static void Transform()
         {
             // schema usage transformer must run first
-            SchemaUsageTransformer.Transform(MgmtContext.CodeModel);
-            DefaultDerivedSchema.AddDefaultDerivedSchemas(MgmtContext.CodeModel);
+            SchemaUsageTransformer.Transform(MgmtContext.CodeModel!);
+            DefaultDerivedSchema.AddDefaultDerivedSchemas(MgmtContext.CodeModel!);
             OmitOperationGroups.RemoveOperationGroups();
             PartialResourceResolver.Update();
             SubscriptionIdUpdater.Update();
-            ConstantSchemaTransformer.Transform(MgmtContext.CodeModel);
+            ConstantSchemaTransformer.Transform(MgmtContext.CodeModel!);
             CommonSingleWordModels.Update();
             SchemaNameAndFormatUpdater.ApplyRenameMapping();
             SchemaNameAndFormatUpdater.UpdateAcronyms();
@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 SerializedNamesUpdater.Update();
             }
             //eliminate client default value from property
-            ModelPropertyClientDefaultValueTransformer.Transform(MgmtContext.CodeModel);
+            ModelPropertyClientDefaultValueTransformer.Transform(MgmtContext.CodeModel!);
 
             CodeModelValidator.Validate();
         }

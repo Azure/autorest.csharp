@@ -32,6 +32,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private BuildContext<DataPlaneOutputLibrary> _context;
         public CachedDictionary<string, List<string>> _protocolMethodsDictionary;
 
+        private readonly CodeModelConverter _converter;
         private readonly InputNamespace _input;
         private readonly SourceInputModel? _sourceInputModel;
         private readonly Lazy<ModelFactoryTypeProvider?> _modelFactory;
@@ -47,7 +48,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             DefaultDerivedSchema.AddDefaultDerivedSchemas(codeModel);
             ConstantSchemaTransformer.Transform(codeModel);
             ModelPropertyClientDefaultValueTransformer.Transform(codeModel);
-            _input = new CodeModelConverter().CreateNamespace(codeModel, _context.SchemaUsageProvider);
+            _converter = new CodeModelConverter(codeModel, _context.SchemaUsageProvider!);
+            _input = _converter.CreateNamespace();
 
             _defaultNamespace = Configuration.Namespace;
             _libraryName = Configuration.LibraryName;
@@ -88,10 +90,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         public override CSharpType ResolveEnum(InputEnumType enumType) => _enums[enumType].Type;
         public override CSharpType ResolveModel(InputModelType model) => throw new NotImplementedException($"{nameof(ResolveModel)} is not implemented for HLC yet.");
 
-        public override CSharpType FindTypeForSchema(Schema schema) => _models[schema].Type;
-
-        public override TypeProvider FindTypeProviderForSchema(Schema schema) => _models[schema];
-
         public override CSharpType? FindTypeByName(string originalName)
         {
             foreach (var model in Models)
@@ -130,7 +128,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             SealedChoiceSchema sealedChoiceSchema => new EnumType(sealedChoiceSchema, _context),
             ChoiceSchema choiceSchema => new EnumType(choiceSchema, _context),
-            ObjectSchema objectSchema => new SchemaObjectType(objectSchema, _context),
+            ObjectSchema objectSchema => new SchemaObjectType(objectSchema, _context, _converter),
             _ => throw new NotImplementedException()
         };
 

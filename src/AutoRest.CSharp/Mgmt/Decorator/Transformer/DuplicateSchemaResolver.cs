@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
         {
             // step 1: categorize the schema by their names
             var schemaNameDict = new Dictionary<string, HashSet<Schema>>();
-            foreach (var schema in MgmtContext.CodeModel.AllSchemas)
+            foreach (var schema in MgmtContext.CodeModel!.AllSchemas)
             {
                 schemaNameDict.AddInList(schema.Name, schema);
             }
@@ -57,17 +57,17 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                 switch (schema)
                 {
                     case ChoiceSchema choiceSchema:
-                        MgmtContext.CodeModel.Schemas.Choices.Remove(choiceSchema);
+                        MgmtContext.CodeModel!.Schemas.Choices.Remove(choiceSchema);
                         break;
                     case SealedChoiceSchema sealedChoiceSchema:
-                        MgmtContext.CodeModel.Schemas.SealedChoices.Remove(sealedChoiceSchema);
+                        MgmtContext.CodeModel!.Schemas.SealedChoices.Remove(sealedChoiceSchema);
                         break;
                     default:
                         throw new InvalidOperationException("This will never happen");
                 }
             }
             // we have to iterate everything on the code model
-            foreach (var schema in MgmtContext.CodeModel.AllSchemas)
+            foreach (var schema in MgmtContext.CodeModel!.AllSchemas)
             {
                 // only change things in ObjectSchema because we only change ChoiceSchema and SealedChoiceSchema
                 // they could only appear as properties of ObjectSchemas

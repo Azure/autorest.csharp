@@ -15,7 +15,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
         public static void RemoveOperationGroups()
         {
             var omitSet = Configuration.MgmtConfiguration.OperationGroupsToOmit.ToHashSet();
-            if (MgmtContext.CodeModel.OperationGroups.FirstOrDefault(og => og.Key == "Operations") != null)
+            if (MgmtContext.CodeModel!.OperationGroups.FirstOrDefault(og => og.Key == "Operations") != null)
             {
                 omitSet.Add("Operations");
             }
@@ -53,7 +53,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             {
                 if (schema is ObjectSchema objSchema && !schemasToKeep.ContainsKey(objSchema))
                 {
-                    MgmtContext.CodeModel.Schemas.Objects.Remove(objSchema);
+                    MgmtContext.CodeModel!.Schemas.Objects.Remove(objSchema);
                     foreach (var og in schemasToOmit[schema])
                         MgmtReport.Instance.TransformSection.AddTransformLog(
                             new TransformItem(TransformTypeName.OperationGroupsToOmit, og.Key),
@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                 }
                 else if (schema is ChoiceSchema choiceSchema && !schemasToKeep.ContainsKey(choiceSchema))
                 {
-                    MgmtContext.CodeModel.Schemas.Choices.Remove(choiceSchema);
+                    MgmtContext.CodeModel!.Schemas.Choices.Remove(choiceSchema);
                     foreach (var og in schemasToOmit[schema])
                         MgmtReport.Instance.TransformSection.AddTransformLog(
                             new TransformItem(TransformTypeName.OperationGroupsToOmit, og.Key),
@@ -70,7 +70,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                 }
                 else if (schema is SealedChoiceSchema sealChoiceSchema && !schemasToKeep.ContainsKey(sealChoiceSchema))
                 {
-                    MgmtContext.CodeModel.Schemas.SealedChoices.Remove(sealChoiceSchema);
+                    MgmtContext.CodeModel!.Schemas.SealedChoices.Remove(sealChoiceSchema);
                     foreach (var og in schemasToOmit[schema])
                         MgmtReport.Instance.TransformSection.AddTransformLog(
                             new TransformItem(TransformTypeName.OperationGroupsToOmit, og.Key),

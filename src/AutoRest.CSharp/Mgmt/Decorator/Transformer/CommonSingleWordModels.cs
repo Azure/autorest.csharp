@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             {
                 _schemasToChange.Add(schemaName);
             }
-            foreach (var schema in MgmtContext.CodeModel.AllSchemas)
+            foreach (var schema in MgmtContext.CodeModel!.AllSchemas)
             {
                 string serializedName = schema.Language.Default.SerializedName ?? schema.Language.Default.Name;
                 if (_schemasToChange.Contains(serializedName))

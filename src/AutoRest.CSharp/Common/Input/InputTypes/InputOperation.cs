@@ -29,7 +29,8 @@ internal record InputOperation(
     OperationLongRunning? LongRunning,
     OperationPaging? Paging,
     bool GenerateProtocolMethod,
-    bool GenerateConvenienceMethod)
+    bool GenerateConvenienceMethod,
+    string? OriginalName)
 {
     public InputOperation() : this(
         Name: string.Empty,
@@ -50,7 +51,8 @@ internal record InputOperation(
         LongRunning: null,
         Paging: null,
         GenerateProtocolMethod: true,
-        GenerateConvenienceMethod: false)
+        GenerateConvenienceMethod: false,
+        OriginalName: null)
     { }
 
     public static InputOperation RemoveApiVersionParam(InputOperation operation)
@@ -74,7 +76,8 @@ internal record InputOperation(
             operation.LongRunning,
             operation.Paging,
             operation.GenerateProtocolMethod,
-            operation.GenerateConvenienceMethod);
+            operation.GenerateConvenienceMethod,
+            OriginalName: null);
     }
 
     private string? _cleanName;
@@ -104,4 +107,6 @@ internal record InputOperation(
             [ExampleMockValueBuilder.MockExampleAllParameterKey] = ExampleMockValueBuilder.BuildOperationExample(this, true)
         };
     }
+
+    public bool IsLongRunning => LongRunning != null;
 }
