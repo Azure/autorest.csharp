@@ -56,7 +56,10 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="messages"/> is null. </exception>
         public CreateChatCompletionRequest(CreateChatCompletionRequestModel model, IEnumerable<ChatCompletionRequestMessage> messages)
         {
-            ClientUtilities.AssertNotNull(messages, nameof(messages));
+            if (messages == null)
+            {
+                throw new ArgumentNullException(nameof(messages));
+            }
 
             Model = model;
             Messages = messages.ToList();

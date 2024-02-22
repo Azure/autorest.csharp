@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Azure.Core;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -26,7 +25,10 @@ namespace MgmtAcronymMapping.Models
         /// <exception cref="ArgumentNullException"> <paramref name="instanceIds"/> is null. </exception>
         public VirtualMachineScaleSetVmInstanceRequiredIds(IEnumerable<string> instanceIds)
         {
-            Argument.AssertNotNull(instanceIds, nameof(instanceIds));
+            if (instanceIds == null)
+            {
+                throw new ArgumentNullException(nameof(instanceIds));
+            }
 
             InstanceIds = instanceIds.ToList();
         }

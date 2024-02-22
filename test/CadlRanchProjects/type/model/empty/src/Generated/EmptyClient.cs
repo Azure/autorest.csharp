@@ -39,7 +39,10 @@ namespace _Type.Model.Empty
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public EmptyClient(Uri endpoint, EmptyClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
             options ??= new EmptyClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -53,7 +56,10 @@ namespace _Type.Model.Empty
         /// <include file="Docs/EmptyClient.xml" path="doc/members/member[@name='PutEmptyAsync(EmptyInput,CancellationToken)']/*" />
         public virtual async Task<Response> PutEmptyAsync(EmptyInput input, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(input, nameof(input));
+            if (input == null)
+            {
+                throw new ArgumentNullException(nameof(input));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -67,7 +73,10 @@ namespace _Type.Model.Empty
         /// <include file="Docs/EmptyClient.xml" path="doc/members/member[@name='PutEmpty(EmptyInput,CancellationToken)']/*" />
         public virtual Response PutEmpty(EmptyInput input, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(input, nameof(input));
+            if (input == null)
+            {
+                throw new ArgumentNullException(nameof(input));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -98,7 +107,10 @@ namespace _Type.Model.Empty
         /// <include file="Docs/EmptyClient.xml" path="doc/members/member[@name='PutEmptyAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutEmptyAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("EmptyClient.PutEmpty");
             scope.Start();
@@ -137,7 +149,10 @@ namespace _Type.Model.Empty
         /// <include file="Docs/EmptyClient.xml" path="doc/members/member[@name='PutEmpty(RequestContent,RequestContext)']/*" />
         public virtual Response PutEmpty(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("EmptyClient.PutEmpty");
             scope.Start();
@@ -247,7 +262,10 @@ namespace _Type.Model.Empty
         /// <include file="Docs/EmptyClient.xml" path="doc/members/member[@name='PostRoundTripEmptyAsync(EmptyInputOutput,CancellationToken)']/*" />
         public virtual async Task<Response<EmptyInputOutput>> PostRoundTripEmptyAsync(EmptyInputOutput body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -261,7 +279,10 @@ namespace _Type.Model.Empty
         /// <include file="Docs/EmptyClient.xml" path="doc/members/member[@name='PostRoundTripEmpty(EmptyInputOutput,CancellationToken)']/*" />
         public virtual Response<EmptyInputOutput> PostRoundTripEmpty(EmptyInputOutput body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -292,7 +313,10 @@ namespace _Type.Model.Empty
         /// <include file="Docs/EmptyClient.xml" path="doc/members/member[@name='PostRoundTripEmptyAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PostRoundTripEmptyAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("EmptyClient.PostRoundTripEmpty");
             scope.Start();
@@ -331,7 +355,10 @@ namespace _Type.Model.Empty
         /// <include file="Docs/EmptyClient.xml" path="doc/members/member[@name='PostRoundTripEmpty(RequestContent,RequestContext)']/*" />
         public virtual Response PostRoundTripEmpty(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("EmptyClient.PostRoundTripEmpty");
             scope.Start();

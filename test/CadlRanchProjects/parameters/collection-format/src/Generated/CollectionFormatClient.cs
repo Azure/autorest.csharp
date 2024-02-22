@@ -36,7 +36,10 @@ namespace Parameters.CollectionFormat
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public CollectionFormatClient(Uri endpoint, CollectionFormatClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
             options ??= new CollectionFormatClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

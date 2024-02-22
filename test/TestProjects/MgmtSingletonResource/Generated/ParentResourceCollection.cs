@@ -82,8 +82,18 @@ namespace MgmtSingletonResource
         /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> or <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<ParentResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string parentName, ParentResourceData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(parentName, nameof(parentName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (parentName == null)
+            {
+                throw new ArgumentNullException(nameof(parentName));
+            }
+            if (parentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(parentName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _parentResourceClientDiagnostics.CreateScope("ParentResourceCollection.CreateOrUpdate");
             scope.Start();
@@ -130,8 +140,18 @@ namespace MgmtSingletonResource
         /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> or <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<ParentResource> CreateOrUpdate(WaitUntil waitUntil, string parentName, ParentResourceData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(parentName, nameof(parentName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (parentName == null)
+            {
+                throw new ArgumentNullException(nameof(parentName));
+            }
+            if (parentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(parentName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _parentResourceClientDiagnostics.CreateScope("ParentResourceCollection.CreateOrUpdate");
             scope.Start();
@@ -177,7 +197,14 @@ namespace MgmtSingletonResource
         /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> is null. </exception>
         public virtual async Task<Response<ParentResource>> GetAsync(string parentName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(parentName, nameof(parentName));
+            if (parentName == null)
+            {
+                throw new ArgumentNullException(nameof(parentName));
+            }
+            if (parentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(parentName));
+            }
 
             using var scope = _parentResourceClientDiagnostics.CreateScope("ParentResourceCollection.Get");
             scope.Start();
@@ -222,7 +249,14 @@ namespace MgmtSingletonResource
         /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> is null. </exception>
         public virtual Response<ParentResource> Get(string parentName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(parentName, nameof(parentName));
+            if (parentName == null)
+            {
+                throw new ArgumentNullException(nameof(parentName));
+            }
+            if (parentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(parentName));
+            }
 
             using var scope = _parentResourceClientDiagnostics.CreateScope("ParentResourceCollection.Get");
             scope.Start();
@@ -325,7 +359,14 @@ namespace MgmtSingletonResource
         /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> is null. </exception>
         public virtual async Task<Response<bool>> ExistsAsync(string parentName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(parentName, nameof(parentName));
+            if (parentName == null)
+            {
+                throw new ArgumentNullException(nameof(parentName));
+            }
+            if (parentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(parentName));
+            }
 
             using var scope = _parentResourceClientDiagnostics.CreateScope("ParentResourceCollection.Exists");
             scope.Start();
@@ -368,7 +409,14 @@ namespace MgmtSingletonResource
         /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> is null. </exception>
         public virtual Response<bool> Exists(string parentName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(parentName, nameof(parentName));
+            if (parentName == null)
+            {
+                throw new ArgumentNullException(nameof(parentName));
+            }
+            if (parentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(parentName));
+            }
 
             using var scope = _parentResourceClientDiagnostics.CreateScope("ParentResourceCollection.Exists");
             scope.Start();
@@ -411,7 +459,14 @@ namespace MgmtSingletonResource
         /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> is null. </exception>
         public virtual async Task<NullableResponse<ParentResource>> GetIfExistsAsync(string parentName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(parentName, nameof(parentName));
+            if (parentName == null)
+            {
+                throw new ArgumentNullException(nameof(parentName));
+            }
+            if (parentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(parentName));
+            }
 
             using var scope = _parentResourceClientDiagnostics.CreateScope("ParentResourceCollection.GetIfExists");
             scope.Start();
@@ -456,7 +511,14 @@ namespace MgmtSingletonResource
         /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> is null. </exception>
         public virtual NullableResponse<ParentResource> GetIfExists(string parentName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(parentName, nameof(parentName));
+            if (parentName == null)
+            {
+                throw new ArgumentNullException(nameof(parentName));
+            }
+            if (parentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(parentName));
+            }
 
             using var scope = _parentResourceClientDiagnostics.CreateScope("ParentResourceCollection.GetIfExists");
             scope.Start();

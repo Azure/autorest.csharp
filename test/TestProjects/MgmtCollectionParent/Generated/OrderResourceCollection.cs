@@ -82,8 +82,22 @@ namespace MgmtCollectionParent
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="orderName"/> is null. </exception>
         public virtual async Task<Response<OrderResource>> GetAsync(string location, string orderName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(location, nameof(location));
-            Argument.AssertNotNullOrEmpty(orderName, nameof(orderName));
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+            if (location.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(location));
+            }
+            if (orderName == null)
+            {
+                throw new ArgumentNullException(nameof(orderName));
+            }
+            if (orderName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(orderName));
+            }
 
             using var scope = _orderResourceClientDiagnostics.CreateScope("OrderResourceCollection.Get");
             scope.Start();
@@ -129,8 +143,22 @@ namespace MgmtCollectionParent
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="orderName"/> is null. </exception>
         public virtual Response<OrderResource> Get(string location, string orderName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(location, nameof(location));
-            Argument.AssertNotNullOrEmpty(orderName, nameof(orderName));
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+            if (location.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(location));
+            }
+            if (orderName == null)
+            {
+                throw new ArgumentNullException(nameof(orderName));
+            }
+            if (orderName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(orderName));
+            }
 
             using var scope = _orderResourceClientDiagnostics.CreateScope("OrderResourceCollection.Get");
             scope.Start();
@@ -238,8 +266,22 @@ namespace MgmtCollectionParent
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="orderName"/> is null. </exception>
         public virtual async Task<Response<bool>> ExistsAsync(string location, string orderName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(location, nameof(location));
-            Argument.AssertNotNullOrEmpty(orderName, nameof(orderName));
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+            if (location.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(location));
+            }
+            if (orderName == null)
+            {
+                throw new ArgumentNullException(nameof(orderName));
+            }
+            if (orderName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(orderName));
+            }
 
             using var scope = _orderResourceClientDiagnostics.CreateScope("OrderResourceCollection.Exists");
             scope.Start();
@@ -283,8 +325,22 @@ namespace MgmtCollectionParent
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="orderName"/> is null. </exception>
         public virtual Response<bool> Exists(string location, string orderName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(location, nameof(location));
-            Argument.AssertNotNullOrEmpty(orderName, nameof(orderName));
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+            if (location.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(location));
+            }
+            if (orderName == null)
+            {
+                throw new ArgumentNullException(nameof(orderName));
+            }
+            if (orderName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(orderName));
+            }
 
             using var scope = _orderResourceClientDiagnostics.CreateScope("OrderResourceCollection.Exists");
             scope.Start();
@@ -328,8 +384,22 @@ namespace MgmtCollectionParent
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="orderName"/> is null. </exception>
         public virtual async Task<NullableResponse<OrderResource>> GetIfExistsAsync(string location, string orderName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(location, nameof(location));
-            Argument.AssertNotNullOrEmpty(orderName, nameof(orderName));
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+            if (location.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(location));
+            }
+            if (orderName == null)
+            {
+                throw new ArgumentNullException(nameof(orderName));
+            }
+            if (orderName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(orderName));
+            }
 
             using var scope = _orderResourceClientDiagnostics.CreateScope("OrderResourceCollection.GetIfExists");
             scope.Start();
@@ -375,8 +445,22 @@ namespace MgmtCollectionParent
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="orderName"/> is null. </exception>
         public virtual NullableResponse<OrderResource> GetIfExists(string location, string orderName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(location, nameof(location));
-            Argument.AssertNotNullOrEmpty(orderName, nameof(orderName));
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+            if (location.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(location));
+            }
+            if (orderName == null)
+            {
+                throw new ArgumentNullException(nameof(orderName));
+            }
+            if (orderName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(orderName));
+            }
 
             using var scope = _orderResourceClientDiagnostics.CreateScope("OrderResourceCollection.GetIfExists");
             scope.Start();

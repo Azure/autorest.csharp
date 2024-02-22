@@ -190,7 +190,10 @@ namespace Encode.Duration
         /// <include file="Docs/Header.xml" path="doc/members/member[@name='Iso8601ArrayAsync(IEnumerable{TimeSpan},RequestContext)']/*" />
         public virtual async Task<Response> Iso8601ArrayAsync(IEnumerable<TimeSpan> duration, RequestContext context = null)
         {
-            Argument.AssertNotNull(duration, nameof(duration));
+            if (duration == null)
+            {
+                throw new ArgumentNullException(nameof(duration));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Header.Iso8601Array");
             scope.Start();
@@ -225,7 +228,10 @@ namespace Encode.Duration
         /// <include file="Docs/Header.xml" path="doc/members/member[@name='Iso8601Array(IEnumerable{TimeSpan},RequestContext)']/*" />
         public virtual Response Iso8601Array(IEnumerable<TimeSpan> duration, RequestContext context = null)
         {
-            Argument.AssertNotNull(duration, nameof(duration));
+            if (duration == null)
+            {
+                throw new ArgumentNullException(nameof(duration));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Header.Iso8601Array");
             scope.Start();

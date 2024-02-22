@@ -45,7 +45,10 @@ namespace Server.Versions.Versioned
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public VersionedClient(Uri endpoint, VersionedClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
             options ??= new VersionedClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

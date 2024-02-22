@@ -176,7 +176,10 @@ namespace _Type.Scalar
         /// <include file="Docs/DecimalType.xml" path="doc/members/member[@name='RequestBodyAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> RequestBodyAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("DecimalType.RequestBody");
             scope.Start();
@@ -215,7 +218,10 @@ namespace _Type.Scalar
         /// <include file="Docs/DecimalType.xml" path="doc/members/member[@name='RequestBody(RequestContent,RequestContext)']/*" />
         public virtual Response RequestBody(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("DecimalType.RequestBody");
             scope.Start();

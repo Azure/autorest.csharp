@@ -65,7 +65,14 @@ namespace AuthoringTypeSpec
         /// <include file="Docs/Projects.xml" path="doc/members/member[@name='GetProjectAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> GetProjectAsync(string projectName, RequestContext context = null)
         {
-            Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
+            if (projectName == null)
+            {
+                throw new ArgumentNullException(nameof(projectName));
+            }
+            if (projectName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(projectName));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Projects.GetProject");
             scope.Start();
@@ -100,7 +107,14 @@ namespace AuthoringTypeSpec
         /// <include file="Docs/Projects.xml" path="doc/members/member[@name='GetProject(string,RequestContext)']/*" />
         public virtual Response GetProject(string projectName, RequestContext context = null)
         {
-            Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
+            if (projectName == null)
+            {
+                throw new ArgumentNullException(nameof(projectName));
+            }
+            if (projectName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(projectName));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Projects.GetProject");
             scope.Start();
@@ -179,8 +193,18 @@ namespace AuthoringTypeSpec
         /// <include file="Docs/Projects.xml" path="doc/members/member[@name='CreateOrUpdateAsync(WaitUntil,string,RequestContent,RequestContext)']/*" />
         public virtual async Task<Operation<BinaryData>> CreateOrUpdateAsync(WaitUntil waitUntil, string projectName, RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
-            Argument.AssertNotNull(content, nameof(content));
+            if (projectName == null)
+            {
+                throw new ArgumentNullException(nameof(projectName));
+            }
+            if (projectName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(projectName));
+            }
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Projects.CreateOrUpdate");
             scope.Start();
@@ -217,8 +241,18 @@ namespace AuthoringTypeSpec
         /// <include file="Docs/Projects.xml" path="doc/members/member[@name='CreateOrUpdate(WaitUntil,string,RequestContent,RequestContext)']/*" />
         public virtual Operation<BinaryData> CreateOrUpdate(WaitUntil waitUntil, string projectName, RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
-            Argument.AssertNotNull(content, nameof(content));
+            if (projectName == null)
+            {
+                throw new ArgumentNullException(nameof(projectName));
+            }
+            if (projectName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(projectName));
+            }
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Projects.CreateOrUpdate");
             scope.Start();
@@ -254,7 +288,14 @@ namespace AuthoringTypeSpec
         /// <include file="Docs/Projects.xml" path="doc/members/member[@name='DeleteAsync(WaitUntil,string,RequestContext)']/*" />
         public virtual async Task<Operation> DeleteAsync(WaitUntil waitUntil, string projectName, RequestContext context = null)
         {
-            Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
+            if (projectName == null)
+            {
+                throw new ArgumentNullException(nameof(projectName));
+            }
+            if (projectName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(projectName));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Projects.Delete");
             scope.Start();
@@ -290,7 +331,14 @@ namespace AuthoringTypeSpec
         /// <include file="Docs/Projects.xml" path="doc/members/member[@name='Delete(WaitUntil,string,RequestContext)']/*" />
         public virtual Operation Delete(WaitUntil waitUntil, string projectName, RequestContext context = null)
         {
-            Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
+            if (projectName == null)
+            {
+                throw new ArgumentNullException(nameof(projectName));
+            }
+            if (projectName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(projectName));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Projects.Delete");
             scope.Start();
@@ -327,8 +375,18 @@ namespace AuthoringTypeSpec
         /// <include file="Docs/Projects.xml" path="doc/members/member[@name='ExportAsync(WaitUntil,string,string,RequestContext)']/*" />
         public virtual async Task<Operation> ExportAsync(WaitUntil waitUntil, string projectName, string projectFileVersion, RequestContext context = null)
         {
-            Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
-            Argument.AssertNotNull(projectFileVersion, nameof(projectFileVersion));
+            if (projectName == null)
+            {
+                throw new ArgumentNullException(nameof(projectName));
+            }
+            if (projectName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(projectName));
+            }
+            if (projectFileVersion == null)
+            {
+                throw new ArgumentNullException(nameof(projectFileVersion));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Projects.Export");
             scope.Start();
@@ -365,8 +423,18 @@ namespace AuthoringTypeSpec
         /// <include file="Docs/Projects.xml" path="doc/members/member[@name='Export(WaitUntil,string,string,RequestContext)']/*" />
         public virtual Operation Export(WaitUntil waitUntil, string projectName, string projectFileVersion, RequestContext context = null)
         {
-            Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
-            Argument.AssertNotNull(projectFileVersion, nameof(projectFileVersion));
+            if (projectName == null)
+            {
+                throw new ArgumentNullException(nameof(projectName));
+            }
+            if (projectName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(projectName));
+            }
+            if (projectFileVersion == null)
+            {
+                throw new ArgumentNullException(nameof(projectFileVersion));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Projects.Export");
             scope.Start();
@@ -402,7 +470,14 @@ namespace AuthoringTypeSpec
         /// <include file="Docs/Projects.xml" path="doc/members/member[@name='ImportxAsync(WaitUntil,string,RequestContext)']/*" />
         public virtual async Task<Operation> ImportxAsync(WaitUntil waitUntil, string projectName, RequestContext context = null)
         {
-            Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
+            if (projectName == null)
+            {
+                throw new ArgumentNullException(nameof(projectName));
+            }
+            if (projectName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(projectName));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Projects.Importx");
             scope.Start();
@@ -438,7 +513,14 @@ namespace AuthoringTypeSpec
         /// <include file="Docs/Projects.xml" path="doc/members/member[@name='Importx(WaitUntil,string,RequestContext)']/*" />
         public virtual Operation Importx(WaitUntil waitUntil, string projectName, RequestContext context = null)
         {
-            Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
+            if (projectName == null)
+            {
+                throw new ArgumentNullException(nameof(projectName));
+            }
+            if (projectName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(projectName));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Projects.Importx");
             scope.Start();
@@ -475,8 +557,18 @@ namespace AuthoringTypeSpec
         /// <include file="Docs/Projects.xml" path="doc/members/member[@name='TrainAsync(WaitUntil,string,RequestContent,RequestContext)']/*" />
         public virtual async Task<Operation> TrainAsync(WaitUntil waitUntil, string projectName, RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
-            Argument.AssertNotNull(content, nameof(content));
+            if (projectName == null)
+            {
+                throw new ArgumentNullException(nameof(projectName));
+            }
+            if (projectName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(projectName));
+            }
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Projects.Train");
             scope.Start();
@@ -513,8 +605,18 @@ namespace AuthoringTypeSpec
         /// <include file="Docs/Projects.xml" path="doc/members/member[@name='Train(WaitUntil,string,RequestContent,RequestContext)']/*" />
         public virtual Operation Train(WaitUntil waitUntil, string projectName, RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
-            Argument.AssertNotNull(content, nameof(content));
+            if (projectName == null)
+            {
+                throw new ArgumentNullException(nameof(projectName));
+            }
+            if (projectName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(projectName));
+            }
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Projects.Train");
             scope.Start();

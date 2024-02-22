@@ -50,7 +50,10 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <include file="Docs/PublicOperation.xml" path="doc/members/member[@name='NoDecoratorInPublicAsync(string,CancellationToken)']/*" />
         public virtual async Task<Response<NoDecoratorModelInPublic>> NoDecoratorInPublicAsync(string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await NoDecoratorInPublicAsync(name, context).ConfigureAwait(false);
@@ -63,7 +66,10 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <include file="Docs/PublicOperation.xml" path="doc/members/member[@name='NoDecoratorInPublic(string,CancellationToken)']/*" />
         public virtual Response<NoDecoratorModelInPublic> NoDecoratorInPublic(string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = NoDecoratorInPublic(name, context);
@@ -93,7 +99,10 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <include file="Docs/PublicOperation.xml" path="doc/members/member[@name='NoDecoratorInPublicAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> NoDecoratorInPublicAsync(string name, RequestContext context)
         {
-            Argument.AssertNotNull(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("PublicOperation.NoDecoratorInPublic");
             scope.Start();
@@ -132,7 +141,10 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <include file="Docs/PublicOperation.xml" path="doc/members/member[@name='NoDecoratorInPublic(string,RequestContext)']/*" />
         public virtual Response NoDecoratorInPublic(string name, RequestContext context)
         {
-            Argument.AssertNotNull(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("PublicOperation.NoDecoratorInPublic");
             scope.Start();
@@ -154,7 +166,10 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <include file="Docs/PublicOperation.xml" path="doc/members/member[@name='PublicDecoratorInPublicAsync(string,CancellationToken)']/*" />
         public virtual async Task<Response<PublicDecoratorModelInPublic>> PublicDecoratorInPublicAsync(string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await PublicDecoratorInPublicAsync(name, context).ConfigureAwait(false);
@@ -167,7 +182,10 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <include file="Docs/PublicOperation.xml" path="doc/members/member[@name='PublicDecoratorInPublic(string,CancellationToken)']/*" />
         public virtual Response<PublicDecoratorModelInPublic> PublicDecoratorInPublic(string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = PublicDecoratorInPublic(name, context);
@@ -197,7 +215,10 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <include file="Docs/PublicOperation.xml" path="doc/members/member[@name='PublicDecoratorInPublicAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> PublicDecoratorInPublicAsync(string name, RequestContext context)
         {
-            Argument.AssertNotNull(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("PublicOperation.PublicDecoratorInPublic");
             scope.Start();
@@ -236,7 +257,10 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <include file="Docs/PublicOperation.xml" path="doc/members/member[@name='PublicDecoratorInPublic(string,RequestContext)']/*" />
         public virtual Response PublicDecoratorInPublic(string name, RequestContext context)
         {
-            Argument.AssertNotNull(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("PublicOperation.PublicDecoratorInPublic");
             scope.Start();

@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace ModelsTypeSpec.Models
 {
@@ -19,7 +18,10 @@ namespace ModelsTypeSpec.Models
         /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/> is null. </exception>
         public DerivedWithDiscriminatorDefinedOnBase(string requiredString) : base("A")
         {
-            Argument.AssertNotNull(requiredString, nameof(requiredString));
+            if (requiredString == null)
+            {
+                throw new ArgumentNullException(nameof(requiredString));
+            }
 
             RequiredString = requiredString;
         }

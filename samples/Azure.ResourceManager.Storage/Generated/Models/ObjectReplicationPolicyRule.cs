@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using Azure.Core;
 
 namespace Azure.ResourceManager.Storage.Models
 {
@@ -19,8 +18,14 @@ namespace Azure.ResourceManager.Storage.Models
         /// <exception cref="ArgumentNullException"> <paramref name="sourceContainer"/> or <paramref name="destinationContainer"/> is null. </exception>
         public ObjectReplicationPolicyRule(string sourceContainer, string destinationContainer)
         {
-            Argument.AssertNotNull(sourceContainer, nameof(sourceContainer));
-            Argument.AssertNotNull(destinationContainer, nameof(destinationContainer));
+            if (sourceContainer == null)
+            {
+                throw new ArgumentNullException(nameof(sourceContainer));
+            }
+            if (destinationContainer == null)
+            {
+                throw new ArgumentNullException(nameof(destinationContainer));
+            }
 
             SourceContainer = sourceContainer;
             DestinationContainer = destinationContainer;

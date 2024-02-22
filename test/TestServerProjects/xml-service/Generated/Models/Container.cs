@@ -52,8 +52,14 @@ namespace xml_service.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="properties"/> is null. </exception>
         internal Container(string name, ContainerProperties properties)
         {
-            Argument.AssertNotNull(name, nameof(name));
-            Argument.AssertNotNull(properties, nameof(properties));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (properties == null)
+            {
+                throw new ArgumentNullException(nameof(properties));
+            }
 
             Name = name;
             Properties = properties;

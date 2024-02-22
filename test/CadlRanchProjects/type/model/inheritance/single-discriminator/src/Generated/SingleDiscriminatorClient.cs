@@ -39,7 +39,10 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public SingleDiscriminatorClient(Uri endpoint, SingleDiscriminatorClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
             options ??= new SingleDiscriminatorClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -141,7 +144,10 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
         /// <include file="Docs/SingleDiscriminatorClient.xml" path="doc/members/member[@name='PutModelAsync(Bird,CancellationToken)']/*" />
         public virtual async Task<Response> PutModelAsync(Bird input, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(input, nameof(input));
+            if (input == null)
+            {
+                throw new ArgumentNullException(nameof(input));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -155,7 +161,10 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
         /// <include file="Docs/SingleDiscriminatorClient.xml" path="doc/members/member[@name='PutModel(Bird,CancellationToken)']/*" />
         public virtual Response PutModel(Bird input, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(input, nameof(input));
+            if (input == null)
+            {
+                throw new ArgumentNullException(nameof(input));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -186,7 +195,10 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
         /// <include file="Docs/SingleDiscriminatorClient.xml" path="doc/members/member[@name='PutModelAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutModelAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("SingleDiscriminatorClient.PutModel");
             scope.Start();
@@ -225,7 +237,10 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
         /// <include file="Docs/SingleDiscriminatorClient.xml" path="doc/members/member[@name='PutModel(RequestContent,RequestContext)']/*" />
         public virtual Response PutModel(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("SingleDiscriminatorClient.PutModel");
             scope.Start();
@@ -335,7 +350,10 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
         /// <include file="Docs/SingleDiscriminatorClient.xml" path="doc/members/member[@name='PutRecursiveModelAsync(Bird,CancellationToken)']/*" />
         public virtual async Task<Response> PutRecursiveModelAsync(Bird input, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(input, nameof(input));
+            if (input == null)
+            {
+                throw new ArgumentNullException(nameof(input));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -349,7 +367,10 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
         /// <include file="Docs/SingleDiscriminatorClient.xml" path="doc/members/member[@name='PutRecursiveModel(Bird,CancellationToken)']/*" />
         public virtual Response PutRecursiveModel(Bird input, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(input, nameof(input));
+            if (input == null)
+            {
+                throw new ArgumentNullException(nameof(input));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -380,7 +401,10 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
         /// <include file="Docs/SingleDiscriminatorClient.xml" path="doc/members/member[@name='PutRecursiveModelAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutRecursiveModelAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("SingleDiscriminatorClient.PutRecursiveModel");
             scope.Start();
@@ -419,7 +443,10 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
         /// <include file="Docs/SingleDiscriminatorClient.xml" path="doc/members/member[@name='PutRecursiveModel(RequestContent,RequestContext)']/*" />
         public virtual Response PutRecursiveModel(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("SingleDiscriminatorClient.PutRecursiveModel");
             scope.Start();

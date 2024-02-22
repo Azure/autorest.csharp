@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Azure.Core;
 
 namespace FirstTestTypeSpec.Models
 {
@@ -21,7 +20,10 @@ namespace FirstTestTypeSpec.Models
         /// <exception cref="ArgumentNullException"> <paramref name="parent"/> is null. </exception>
         public ChildModel(int level, IEnumerable<BaseModel> parent) : base(level)
         {
-            Argument.AssertNotNull(parent, nameof(parent));
+            if (parent == null)
+            {
+                throw new ArgumentNullException(nameof(parent));
+            }
 
             Parent = parent.ToList();
         }

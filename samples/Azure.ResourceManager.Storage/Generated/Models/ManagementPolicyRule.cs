@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using Azure.Core;
 
 namespace Azure.ResourceManager.Storage.Models
 {
@@ -20,8 +19,14 @@ namespace Azure.ResourceManager.Storage.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="definition"/> is null. </exception>
         public ManagementPolicyRule(string name, RuleType ruleType, ManagementPolicyDefinition definition)
         {
-            Argument.AssertNotNull(name, nameof(name));
-            Argument.AssertNotNull(definition, nameof(definition));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (definition == null)
+            {
+                throw new ArgumentNullException(nameof(definition));
+            }
 
             Name = name;
             RuleType = ruleType;

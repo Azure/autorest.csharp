@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -65,7 +64,10 @@ namespace Azure.ResourceManager.Sample.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal SampleUsage(int currentValue, long limit, SampleUsageName name)
         {
-            Argument.AssertNotNull(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
             Unit = UsageUnit.Count;
             CurrentValue = currentValue;

@@ -133,7 +133,10 @@ namespace MgmtExpandResourceTypes.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public virtual async Task<Response<DnsResourceReferenceResult>> GetByTargetResourcesDnsResourceReferenceAsync(DnsResourceReferenceContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = DnsResourceReferenceClientDiagnostics.CreateScope("MockableMgmtExpandResourceTypesSubscriptionResource.GetByTargetResourcesDnsResourceReference");
             scope.Start();
@@ -171,7 +174,10 @@ namespace MgmtExpandResourceTypes.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public virtual Response<DnsResourceReferenceResult> GetByTargetResourcesDnsResourceReference(DnsResourceReferenceContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = DnsResourceReferenceClientDiagnostics.CreateScope("MockableMgmtExpandResourceTypesSubscriptionResource.GetByTargetResourcesDnsResourceReference");
             scope.Start();

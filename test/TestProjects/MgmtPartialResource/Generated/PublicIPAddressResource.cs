@@ -283,7 +283,10 @@ namespace MgmtPartialResource
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<PublicIPAddressResource>> UpdateAsync(WaitUntil waitUntil, PublicIPAddressData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(data, nameof(data));
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _publicIPAddressClientDiagnostics.CreateScope("PublicIPAddressResource.Update");
             scope.Start();
@@ -329,7 +332,10 @@ namespace MgmtPartialResource
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<PublicIPAddressResource> Update(WaitUntil waitUntil, PublicIPAddressData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(data, nameof(data));
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _publicIPAddressClientDiagnostics.CreateScope("PublicIPAddressResource.Update");
             scope.Start();

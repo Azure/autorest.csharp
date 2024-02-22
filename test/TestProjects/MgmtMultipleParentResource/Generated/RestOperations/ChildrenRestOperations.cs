@@ -77,12 +77,50 @@ namespace MgmtMultipleParentResource
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="theParentName"/>, <paramref name="instanceId"/> or <paramref name="childName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string theParentName, string instanceId, string childName, ChildBodyData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(theParentName, nameof(theParentName));
-            Argument.AssertNotNullOrEmpty(instanceId, nameof(instanceId));
-            Argument.AssertNotNullOrEmpty(childName, nameof(childName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (resourceGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
+            }
+            if (theParentName == null)
+            {
+                throw new ArgumentNullException(nameof(theParentName));
+            }
+            if (theParentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(theParentName));
+            }
+            if (instanceId == null)
+            {
+                throw new ArgumentNullException(nameof(instanceId));
+            }
+            if (instanceId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(instanceId));
+            }
+            if (childName == null)
+            {
+                throw new ArgumentNullException(nameof(childName));
+            }
+            if (childName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(childName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, theParentName, instanceId, childName, data);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -108,12 +146,50 @@ namespace MgmtMultipleParentResource
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="theParentName"/>, <paramref name="instanceId"/> or <paramref name="childName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response CreateOrUpdate(string subscriptionId, string resourceGroupName, string theParentName, string instanceId, string childName, ChildBodyData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(theParentName, nameof(theParentName));
-            Argument.AssertNotNullOrEmpty(instanceId, nameof(instanceId));
-            Argument.AssertNotNullOrEmpty(childName, nameof(childName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (resourceGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
+            }
+            if (theParentName == null)
+            {
+                throw new ArgumentNullException(nameof(theParentName));
+            }
+            if (theParentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(theParentName));
+            }
+            if (instanceId == null)
+            {
+                throw new ArgumentNullException(nameof(instanceId));
+            }
+            if (instanceId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(instanceId));
+            }
+            if (childName == null)
+            {
+                throw new ArgumentNullException(nameof(childName));
+            }
+            if (childName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(childName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, theParentName, instanceId, childName, data);
             _pipeline.Send(message, cancellationToken);
@@ -167,12 +243,50 @@ namespace MgmtMultipleParentResource
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="theParentName"/>, <paramref name="instanceId"/> or <paramref name="childName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response> UpdateAsync(string subscriptionId, string resourceGroupName, string theParentName, string instanceId, string childName, ChildBodyUpdate childBody, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(theParentName, nameof(theParentName));
-            Argument.AssertNotNullOrEmpty(instanceId, nameof(instanceId));
-            Argument.AssertNotNullOrEmpty(childName, nameof(childName));
-            Argument.AssertNotNull(childBody, nameof(childBody));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (resourceGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
+            }
+            if (theParentName == null)
+            {
+                throw new ArgumentNullException(nameof(theParentName));
+            }
+            if (theParentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(theParentName));
+            }
+            if (instanceId == null)
+            {
+                throw new ArgumentNullException(nameof(instanceId));
+            }
+            if (instanceId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(instanceId));
+            }
+            if (childName == null)
+            {
+                throw new ArgumentNullException(nameof(childName));
+            }
+            if (childName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(childName));
+            }
+            if (childBody == null)
+            {
+                throw new ArgumentNullException(nameof(childBody));
+            }
 
             using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, theParentName, instanceId, childName, childBody);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -197,12 +311,50 @@ namespace MgmtMultipleParentResource
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="theParentName"/>, <paramref name="instanceId"/> or <paramref name="childName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response Update(string subscriptionId, string resourceGroupName, string theParentName, string instanceId, string childName, ChildBodyUpdate childBody, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(theParentName, nameof(theParentName));
-            Argument.AssertNotNullOrEmpty(instanceId, nameof(instanceId));
-            Argument.AssertNotNullOrEmpty(childName, nameof(childName));
-            Argument.AssertNotNull(childBody, nameof(childBody));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (resourceGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
+            }
+            if (theParentName == null)
+            {
+                throw new ArgumentNullException(nameof(theParentName));
+            }
+            if (theParentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(theParentName));
+            }
+            if (instanceId == null)
+            {
+                throw new ArgumentNullException(nameof(instanceId));
+            }
+            if (instanceId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(instanceId));
+            }
+            if (childName == null)
+            {
+                throw new ArgumentNullException(nameof(childName));
+            }
+            if (childName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(childName));
+            }
+            if (childBody == null)
+            {
+                throw new ArgumentNullException(nameof(childBody));
+            }
 
             using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, theParentName, instanceId, childName, childBody);
             _pipeline.Send(message, cancellationToken);
@@ -250,11 +402,46 @@ namespace MgmtMultipleParentResource
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="theParentName"/>, <paramref name="instanceId"/> or <paramref name="childName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response> DeleteAsync(string subscriptionId, string resourceGroupName, string theParentName, string instanceId, string childName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(theParentName, nameof(theParentName));
-            Argument.AssertNotNullOrEmpty(instanceId, nameof(instanceId));
-            Argument.AssertNotNullOrEmpty(childName, nameof(childName));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (resourceGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
+            }
+            if (theParentName == null)
+            {
+                throw new ArgumentNullException(nameof(theParentName));
+            }
+            if (theParentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(theParentName));
+            }
+            if (instanceId == null)
+            {
+                throw new ArgumentNullException(nameof(instanceId));
+            }
+            if (instanceId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(instanceId));
+            }
+            if (childName == null)
+            {
+                throw new ArgumentNullException(nameof(childName));
+            }
+            if (childName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(childName));
+            }
 
             using var message = CreateDeleteRequest(subscriptionId, resourceGroupName, theParentName, instanceId, childName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -280,11 +467,46 @@ namespace MgmtMultipleParentResource
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="theParentName"/>, <paramref name="instanceId"/> or <paramref name="childName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response Delete(string subscriptionId, string resourceGroupName, string theParentName, string instanceId, string childName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(theParentName, nameof(theParentName));
-            Argument.AssertNotNullOrEmpty(instanceId, nameof(instanceId));
-            Argument.AssertNotNullOrEmpty(childName, nameof(childName));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (resourceGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
+            }
+            if (theParentName == null)
+            {
+                throw new ArgumentNullException(nameof(theParentName));
+            }
+            if (theParentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(theParentName));
+            }
+            if (instanceId == null)
+            {
+                throw new ArgumentNullException(nameof(instanceId));
+            }
+            if (instanceId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(instanceId));
+            }
+            if (childName == null)
+            {
+                throw new ArgumentNullException(nameof(childName));
+            }
+            if (childName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(childName));
+            }
 
             using var message = CreateDeleteRequest(subscriptionId, resourceGroupName, theParentName, instanceId, childName);
             _pipeline.Send(message, cancellationToken);
@@ -339,11 +561,46 @@ namespace MgmtMultipleParentResource
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="theParentName"/>, <paramref name="instanceId"/> or <paramref name="childName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<ChildBodyData>> GetAsync(string subscriptionId, string resourceGroupName, string theParentName, string instanceId, string childName, string expand = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(theParentName, nameof(theParentName));
-            Argument.AssertNotNullOrEmpty(instanceId, nameof(instanceId));
-            Argument.AssertNotNullOrEmpty(childName, nameof(childName));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (resourceGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
+            }
+            if (theParentName == null)
+            {
+                throw new ArgumentNullException(nameof(theParentName));
+            }
+            if (theParentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(theParentName));
+            }
+            if (instanceId == null)
+            {
+                throw new ArgumentNullException(nameof(instanceId));
+            }
+            if (instanceId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(instanceId));
+            }
+            if (childName == null)
+            {
+                throw new ArgumentNullException(nameof(childName));
+            }
+            if (childName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(childName));
+            }
 
             using var message = CreateGetRequest(subscriptionId, resourceGroupName, theParentName, instanceId, childName, expand);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -375,11 +632,46 @@ namespace MgmtMultipleParentResource
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="theParentName"/>, <paramref name="instanceId"/> or <paramref name="childName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<ChildBodyData> Get(string subscriptionId, string resourceGroupName, string theParentName, string instanceId, string childName, string expand = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(theParentName, nameof(theParentName));
-            Argument.AssertNotNullOrEmpty(instanceId, nameof(instanceId));
-            Argument.AssertNotNullOrEmpty(childName, nameof(childName));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (resourceGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
+            }
+            if (theParentName == null)
+            {
+                throw new ArgumentNullException(nameof(theParentName));
+            }
+            if (theParentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(theParentName));
+            }
+            if (instanceId == null)
+            {
+                throw new ArgumentNullException(nameof(instanceId));
+            }
+            if (instanceId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(instanceId));
+            }
+            if (childName == null)
+            {
+                throw new ArgumentNullException(nameof(childName));
+            }
+            if (childName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(childName));
+            }
 
             using var message = CreateGetRequest(subscriptionId, resourceGroupName, theParentName, instanceId, childName, expand);
             _pipeline.Send(message, cancellationToken);
@@ -437,10 +729,38 @@ namespace MgmtMultipleParentResource
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="theParentName"/> or <paramref name="instanceId"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<ChildBodiesListResult>> ListAsync(string subscriptionId, string resourceGroupName, string theParentName, string instanceId, string expand = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(theParentName, nameof(theParentName));
-            Argument.AssertNotNullOrEmpty(instanceId, nameof(instanceId));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (resourceGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
+            }
+            if (theParentName == null)
+            {
+                throw new ArgumentNullException(nameof(theParentName));
+            }
+            if (theParentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(theParentName));
+            }
+            if (instanceId == null)
+            {
+                throw new ArgumentNullException(nameof(instanceId));
+            }
+            if (instanceId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(instanceId));
+            }
 
             using var message = CreateListRequest(subscriptionId, resourceGroupName, theParentName, instanceId, expand);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -469,10 +789,38 @@ namespace MgmtMultipleParentResource
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="theParentName"/> or <paramref name="instanceId"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<ChildBodiesListResult> List(string subscriptionId, string resourceGroupName, string theParentName, string instanceId, string expand = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(theParentName, nameof(theParentName));
-            Argument.AssertNotNullOrEmpty(instanceId, nameof(instanceId));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (resourceGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
+            }
+            if (theParentName == null)
+            {
+                throw new ArgumentNullException(nameof(theParentName));
+            }
+            if (theParentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(theParentName));
+            }
+            if (instanceId == null)
+            {
+                throw new ArgumentNullException(nameof(instanceId));
+            }
+            if (instanceId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(instanceId));
+            }
 
             using var message = CreateListRequest(subscriptionId, resourceGroupName, theParentName, instanceId, expand);
             _pipeline.Send(message, cancellationToken);
@@ -516,11 +864,42 @@ namespace MgmtMultipleParentResource
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="theParentName"/> or <paramref name="instanceId"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<ChildBodiesListResult>> ListNextPageAsync(string nextLink, string subscriptionId, string resourceGroupName, string theParentName, string instanceId, string expand = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(nextLink, nameof(nextLink));
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(theParentName, nameof(theParentName));
-            Argument.AssertNotNullOrEmpty(instanceId, nameof(instanceId));
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (resourceGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
+            }
+            if (theParentName == null)
+            {
+                throw new ArgumentNullException(nameof(theParentName));
+            }
+            if (theParentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(theParentName));
+            }
+            if (instanceId == null)
+            {
+                throw new ArgumentNullException(nameof(instanceId));
+            }
+            if (instanceId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(instanceId));
+            }
 
             using var message = CreateListNextPageRequest(nextLink, subscriptionId, resourceGroupName, theParentName, instanceId, expand);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -550,11 +929,42 @@ namespace MgmtMultipleParentResource
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="theParentName"/> or <paramref name="instanceId"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<ChildBodiesListResult> ListNextPage(string nextLink, string subscriptionId, string resourceGroupName, string theParentName, string instanceId, string expand = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(nextLink, nameof(nextLink));
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(theParentName, nameof(theParentName));
-            Argument.AssertNotNullOrEmpty(instanceId, nameof(instanceId));
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (resourceGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
+            }
+            if (theParentName == null)
+            {
+                throw new ArgumentNullException(nameof(theParentName));
+            }
+            if (theParentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(theParentName));
+            }
+            if (instanceId == null)
+            {
+                throw new ArgumentNullException(nameof(instanceId));
+            }
+            if (instanceId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(instanceId));
+            }
 
             using var message = CreateListNextPageRequest(nextLink, subscriptionId, resourceGroupName, theParentName, instanceId, expand);
             _pipeline.Send(message, cancellationToken);

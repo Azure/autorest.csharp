@@ -58,7 +58,10 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         /// <include file="Docs/ModelInOperation.xml" path="doc/members/member[@name='InputToInputOutputAsync(InputModel,CancellationToken)']/*" />
         public virtual async Task<Response> InputToInputOutputAsync(InputModel body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -80,7 +83,10 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         /// <include file="Docs/ModelInOperation.xml" path="doc/members/member[@name='InputToInputOutput(InputModel,CancellationToken)']/*" />
         public virtual Response InputToInputOutput(InputModel body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -116,7 +122,10 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         /// <include file="Docs/ModelInOperation.xml" path="doc/members/member[@name='InputToInputOutputAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> InputToInputOutputAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelInOperation.InputToInputOutput");
             scope.Start();
@@ -160,7 +169,10 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         /// <include file="Docs/ModelInOperation.xml" path="doc/members/member[@name='InputToInputOutput(RequestContent,RequestContext)']/*" />
         public virtual Response InputToInputOutput(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelInOperation.InputToInputOutput");
             scope.Start();

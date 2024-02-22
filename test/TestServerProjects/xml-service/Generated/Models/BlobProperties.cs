@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace xml_service.Models
 {
@@ -52,7 +51,10 @@ namespace xml_service.Models
         /// <exception cref="ArgumentNullException"> <paramref name="etag"/> is null. </exception>
         internal BlobProperties(DateTimeOffset lastModified, string etag)
         {
-            Argument.AssertNotNull(etag, nameof(etag));
+            if (etag == null)
+            {
+                throw new ArgumentNullException(nameof(etag));
+            }
 
             LastModified = lastModified;
             Etag = etag;

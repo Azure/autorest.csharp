@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Azure.Core;
 using MgmtConstants;
 
 namespace MgmtConstants.Models
@@ -21,7 +20,10 @@ namespace MgmtConstants.Models
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal OptionalMachineListResult(IEnumerable<OptionalMachineData> value)
         {
-            Argument.AssertNotNull(value, nameof(value));
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
 
             Value = value.ToList();
         }

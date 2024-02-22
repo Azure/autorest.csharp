@@ -26,6 +26,12 @@ namespace AutoRest.CSharp.Common.Output.Models
             public static ValueExpression InvalidOperationException(ValueExpression message)
                 => Instance(typeof(InvalidOperationException), message);
 
+            public static ValueExpression ArgumentNullException(ValueExpression parameter)
+                => Instance(typeof(ArgumentNullException), Nameof(parameter));
+
+            public static ValueExpression ArgumentException(ValueExpression parameter)
+                => Instance(typeof(ArgumentException), Literal("Value cannot be an empty string."), Nameof(parameter));
+
             public static EnumerableExpression Array(CSharpType? elementType) => new(elementType ?? typeof(object), new NewArrayExpression(elementType));
             public static EnumerableExpression Array(CSharpType? elementType, params ValueExpression[] items) => new(elementType ?? typeof(object), new NewArrayExpression(elementType, new ArrayInitializerExpression(items)));
             public static EnumerableExpression Array(CSharpType? elementType, bool isInline, params ValueExpression[] items) => new(elementType ?? typeof(object), new NewArrayExpression(elementType, new ArrayInitializerExpression(items, isInline)));

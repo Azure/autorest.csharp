@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace azure_parameter_grouping.Models
 {
@@ -52,7 +51,10 @@ namespace azure_parameter_grouping.Models
         /// <exception cref="ArgumentNullException"> <paramref name="path"/> is null. </exception>
         public ParameterGroupingPostRequiredParameters(string path, int body)
         {
-            Argument.AssertNotNull(path, nameof(path));
+            if (path == null)
+            {
+                throw new ArgumentNullException(nameof(path));
+            }
 
             Path = path;
             Body = body;

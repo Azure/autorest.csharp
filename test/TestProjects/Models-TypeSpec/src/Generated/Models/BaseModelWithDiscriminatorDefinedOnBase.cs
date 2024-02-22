@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace ModelsTypeSpec.Models
 {
@@ -23,7 +22,10 @@ namespace ModelsTypeSpec.Models
         /// <exception cref="ArgumentNullException"> <paramref name="kind"/> is null. </exception>
         protected BaseModelWithDiscriminatorDefinedOnBase(string kind) : base(kind)
         {
-            Argument.AssertNotNull(kind, nameof(kind));
+            if (kind == null)
+            {
+                throw new ArgumentNullException(nameof(kind));
+            }
         }
 
         /// <summary> Initializes a new instance of <see cref="BaseModelWithDiscriminatorDefinedOnBase"/>. </summary>
