@@ -25,7 +25,20 @@ namespace AutoRest.CSharp.Common.Output.Models
                 return Not(BoolExpression.Is(collection, collectionDeclarationExpression)
                     .And(new MemberExpression(collectionReference, "IsUndefined")));
             }
-            public static BoolExpression IsDefined(ValueExpression value) => new(new InvokeStaticMethodExpression(Configuration.ApiTypes.OptionalType, Configuration.ApiTypes.OptionalIsDefinedName, new[] { value }));
+
+            public static BoolExpression IsDefined(TypedValueExpression value)
+            {
+                switch (value)
+                {
+                    case JsonElementExpression jsonElement:
+                        return jsonElement.ValueKindNotEqualsNull();
+                    case { Type: { IsNullable: true, IsValueType: true } }:
+                        return new BoolExpression(new MemberExpression(value, "HasValue"));
+                    default:
+                        return NotEqual(value, Null);
+                }
+            }
+
             public static ValueExpression ToDictionary(ValueExpression dictionary) => new InvokeStaticMethodExpression(Configuration.ApiTypes.OptionalType, Configuration.ApiTypes.OptionalToDictionaryName, new[] { dictionary });
             public static ValueExpression ToList(ValueExpression collection) => new InvokeStaticMethodExpression(Configuration.ApiTypes.OptionalType, Configuration.ApiTypes.OptionalToListName, new[] { collection });
             public static ValueExpression ToNullable(ValueExpression optional) => new InvokeStaticMethodExpression(Configuration.ApiTypes.OptionalType, Configuration.ApiTypes.OptionalToNullableName, new[] { optional });
