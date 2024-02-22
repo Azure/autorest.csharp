@@ -9,7 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Azure.Core;
 
 namespace body_formdata.Models
 {
@@ -53,7 +52,10 @@ namespace body_formdata.Models
         /// <exception cref="ArgumentNullException"> <paramref name="fileContent"/> is null. </exception>
         internal Paths1P3Stk3FormdataStreamUploadfilesPostRequestbodyContentMultipartFormDataSchema(IEnumerable<Stream> fileContent)
         {
-            Argument.AssertNotNull(fileContent, nameof(fileContent));
+            if (fileContent == null)
+            {
+                throw new ArgumentNullException(nameof(fileContent));
+            }
 
             FileContent = fileContent.ToList();
         }

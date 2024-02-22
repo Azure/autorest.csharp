@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace ModelReaderWriterValidationTypeSpec.Models
 {
@@ -19,7 +18,10 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
         public AvailabilitySetData(string location) : base(location)
         {
-            Argument.AssertNotNull(location, nameof(location));
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
         }
 
         /// <summary> Initializes a new instance of <see cref="AvailabilitySetData"/>. </summary>

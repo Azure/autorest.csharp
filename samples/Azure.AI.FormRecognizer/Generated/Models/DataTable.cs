@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
 {
@@ -22,7 +21,10 @@ namespace Azure.AI.FormRecognizer.Models
         /// <exception cref="ArgumentNullException"> <paramref name="cells"/> is null. </exception>
         internal DataTable(int rows, int columns, IEnumerable<DataTableCell> cells)
         {
-            Argument.AssertNotNull(cells, nameof(cells));
+            if (cells == null)
+            {
+                throw new ArgumentNullException(nameof(cells));
+            }
 
             Rows = rows;
             Columns = columns;

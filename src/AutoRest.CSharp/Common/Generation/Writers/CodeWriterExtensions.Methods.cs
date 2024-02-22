@@ -232,6 +232,11 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line();
                     break;
 
+                case ThrowStatement throwStatement:
+                    writer.WriteValueExpression(throwStatement.ThrowExpression);
+                    writer.LineRaw(";");
+                    break;
+
                 case MethodBodyStatements(var statements):
                     foreach (var statement in statements)
                     {

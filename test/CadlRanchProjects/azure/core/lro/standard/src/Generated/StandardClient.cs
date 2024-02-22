@@ -41,7 +41,10 @@ namespace _Azure.Lro.Standard
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public StandardClient(Uri endpoint, StandardClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
             options ??= new StandardClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -61,8 +64,18 @@ namespace _Azure.Lro.Standard
         /// <include file="Docs/StandardClient.xml" path="doc/members/member[@name='CreateOrReplaceAsync(WaitUntil,string,User,CancellationToken)']/*" />
         public virtual async Task<Operation<User>> CreateOrReplaceAsync(WaitUntil waitUntil, string name, User resource, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(name, nameof(name));
-            Argument.AssertNotNull(resource, nameof(resource));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (name.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
+            }
+            if (resource == null)
+            {
+                throw new ArgumentNullException(nameof(resource));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = resource.ToRequestContent();
@@ -81,8 +94,18 @@ namespace _Azure.Lro.Standard
         /// <include file="Docs/StandardClient.xml" path="doc/members/member[@name='CreateOrReplace(WaitUntil,string,User,CancellationToken)']/*" />
         public virtual Operation<User> CreateOrReplace(WaitUntil waitUntil, string name, User resource, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(name, nameof(name));
-            Argument.AssertNotNull(resource, nameof(resource));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (name.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
+            }
+            if (resource == null)
+            {
+                throw new ArgumentNullException(nameof(resource));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = resource.ToRequestContent();
@@ -116,8 +139,18 @@ namespace _Azure.Lro.Standard
         /// <include file="Docs/StandardClient.xml" path="doc/members/member[@name='CreateOrReplaceAsync(WaitUntil,string,RequestContent,RequestContext)']/*" />
         public virtual async Task<Operation<BinaryData>> CreateOrReplaceAsync(WaitUntil waitUntil, string name, RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNullOrEmpty(name, nameof(name));
-            Argument.AssertNotNull(content, nameof(content));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (name.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
+            }
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("StandardClient.CreateOrReplace");
             scope.Start();
@@ -159,8 +192,18 @@ namespace _Azure.Lro.Standard
         /// <include file="Docs/StandardClient.xml" path="doc/members/member[@name='CreateOrReplace(WaitUntil,string,RequestContent,RequestContext)']/*" />
         public virtual Operation<BinaryData> CreateOrReplace(WaitUntil waitUntil, string name, RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNullOrEmpty(name, nameof(name));
-            Argument.AssertNotNull(content, nameof(content));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (name.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
+            }
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("StandardClient.CreateOrReplace");
             scope.Start();
@@ -197,7 +240,14 @@ namespace _Azure.Lro.Standard
         /// <include file="Docs/StandardClient.xml" path="doc/members/member[@name='DeleteAsync(WaitUntil,string,RequestContext)']/*" />
         public virtual async Task<Operation> DeleteAsync(WaitUntil waitUntil, string name, RequestContext context = null)
         {
-            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (name.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("StandardClient.Delete");
             scope.Start();
@@ -234,7 +284,14 @@ namespace _Azure.Lro.Standard
         /// <include file="Docs/StandardClient.xml" path="doc/members/member[@name='Delete(WaitUntil,string,RequestContext)']/*" />
         public virtual Operation Delete(WaitUntil waitUntil, string name, RequestContext context = null)
         {
-            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (name.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("StandardClient.Delete");
             scope.Start();
@@ -261,8 +318,18 @@ namespace _Azure.Lro.Standard
         /// <include file="Docs/StandardClient.xml" path="doc/members/member[@name='ExportAsync(WaitUntil,string,string,CancellationToken)']/*" />
         public virtual async Task<Operation<ExportedUser>> ExportAsync(WaitUntil waitUntil, string name, string format, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(name, nameof(name));
-            Argument.AssertNotNull(format, nameof(format));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (name.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
+            }
+            if (format == null)
+            {
+                throw new ArgumentNullException(nameof(format));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Operation<BinaryData> response = await ExportAsync(waitUntil, name, format, context).ConfigureAwait(false);
@@ -280,8 +347,18 @@ namespace _Azure.Lro.Standard
         /// <include file="Docs/StandardClient.xml" path="doc/members/member[@name='Export(WaitUntil,string,string,CancellationToken)']/*" />
         public virtual Operation<ExportedUser> Export(WaitUntil waitUntil, string name, string format, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(name, nameof(name));
-            Argument.AssertNotNull(format, nameof(format));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (name.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
+            }
+            if (format == null)
+            {
+                throw new ArgumentNullException(nameof(format));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Operation<BinaryData> response = Export(waitUntil, name, format, context);
@@ -314,8 +391,18 @@ namespace _Azure.Lro.Standard
         /// <include file="Docs/StandardClient.xml" path="doc/members/member[@name='ExportAsync(WaitUntil,string,string,RequestContext)']/*" />
         public virtual async Task<Operation<BinaryData>> ExportAsync(WaitUntil waitUntil, string name, string format, RequestContext context)
         {
-            Argument.AssertNotNullOrEmpty(name, nameof(name));
-            Argument.AssertNotNull(format, nameof(format));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (name.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
+            }
+            if (format == null)
+            {
+                throw new ArgumentNullException(nameof(format));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("StandardClient.Export");
             scope.Start();
@@ -357,8 +444,18 @@ namespace _Azure.Lro.Standard
         /// <include file="Docs/StandardClient.xml" path="doc/members/member[@name='Export(WaitUntil,string,string,RequestContext)']/*" />
         public virtual Operation<BinaryData> Export(WaitUntil waitUntil, string name, string format, RequestContext context)
         {
-            Argument.AssertNotNullOrEmpty(name, nameof(name));
-            Argument.AssertNotNull(format, nameof(format));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (name.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
+            }
+            if (format == null)
+            {
+                throw new ArgumentNullException(nameof(format));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("StandardClient.Export");
             scope.Start();

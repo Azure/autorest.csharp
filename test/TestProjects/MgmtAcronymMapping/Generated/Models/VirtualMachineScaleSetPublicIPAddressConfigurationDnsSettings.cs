@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using Azure.Core;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -24,7 +23,10 @@ namespace MgmtAcronymMapping.Models
         /// <exception cref="ArgumentNullException"> <paramref name="domainNameLabel"/> is null. </exception>
         public VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings(string domainNameLabel)
         {
-            Argument.AssertNotNull(domainNameLabel, nameof(domainNameLabel));
+            if (domainNameLabel == null)
+            {
+                throw new ArgumentNullException(nameof(domainNameLabel));
+            }
 
             DomainNameLabel = domainNameLabel;
         }

@@ -3,7 +3,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -53,7 +52,10 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="embeddingProperty"/> is null. </exception>
         internal Embedding(long index, IEnumerable<double> embeddingProperty)
         {
-            ClientUtilities.AssertNotNull(embeddingProperty, nameof(embeddingProperty));
+            if (embeddingProperty == null)
+            {
+                throw new ArgumentNullException(nameof(embeddingProperty));
+            }
 
             Index = index;
             EmbeddingProperty = embeddingProperty.ToList();

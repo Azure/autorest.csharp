@@ -69,7 +69,10 @@ namespace MgmtMockAndSample
         /// <exception cref="ArgumentNullException"> <paramref name="template"/> is null. </exception>
         public async Task<Response<TemplateHashResult>> CalculateTemplateHashAsync(BinaryData template, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(template, nameof(template));
+            if (template == null)
+            {
+                throw new ArgumentNullException(nameof(template));
+            }
 
             using var message = CreateCalculateTemplateHashRequest(template);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -93,7 +96,10 @@ namespace MgmtMockAndSample
         /// <exception cref="ArgumentNullException"> <paramref name="template"/> is null. </exception>
         public Response<TemplateHashResult> CalculateTemplateHash(BinaryData template, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(template, nameof(template));
+            if (template == null)
+            {
+                throw new ArgumentNullException(nameof(template));
+            }
 
             using var message = CreateCalculateTemplateHashRequest(template);
             _pipeline.Send(message, cancellationToken);

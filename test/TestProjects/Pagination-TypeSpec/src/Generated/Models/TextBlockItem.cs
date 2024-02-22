@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace Pagination.Models
 {
@@ -52,8 +51,14 @@ namespace Pagination.Models
         /// <exception cref="ArgumentNullException"> <paramref name="blockItemId"/> or <paramref name="text"/> is null. </exception>
         internal TextBlockItem(string blockItemId, string text)
         {
-            Argument.AssertNotNull(blockItemId, nameof(blockItemId));
-            Argument.AssertNotNull(text, nameof(text));
+            if (blockItemId == null)
+            {
+                throw new ArgumentNullException(nameof(blockItemId));
+            }
+            if (text == null)
+            {
+                throw new ArgumentNullException(nameof(text));
+            }
 
             BlockItemId = blockItemId;
             Text = text;

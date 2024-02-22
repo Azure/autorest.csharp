@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace MgmtDiscriminator.Models
 {
@@ -19,7 +18,10 @@ namespace MgmtDiscriminator.Models
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public DeliveryRuleResponseHeaderAction(HeaderActionParameters parameters)
         {
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
 
             Parameters = parameters;
             Name = DeliveryRuleActionType.ModifyResponseHeader;

@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using Azure;
-using Azure.Core;
 
 namespace _Azure.Lro.RpcLegacy.Models
 {
@@ -52,7 +51,10 @@ namespace _Azure.Lro.RpcLegacy.Models
         /// <exception cref="ArgumentNullException"> <paramref name="error"/> is null. </exception>
         internal ErrorResponse(ResponseError error)
         {
-            Argument.AssertNotNull(error, nameof(error));
+            if (error == null)
+            {
+                throw new ArgumentNullException(nameof(error));
+            }
 
             Error = error;
         }

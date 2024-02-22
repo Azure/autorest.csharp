@@ -3,7 +3,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -51,9 +50,18 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="model"/>, <paramref name="data"/> or <paramref name="usage"/> is null. </exception>
         internal CreateEmbeddingResponse(string model, IEnumerable<Embedding> data, CreateEmbeddingResponseUsage usage)
         {
-            ClientUtilities.AssertNotNull(model, nameof(model));
-            ClientUtilities.AssertNotNull(data, nameof(data));
-            ClientUtilities.AssertNotNull(usage, nameof(usage));
+            if (model == null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
+            if (usage == null)
+            {
+                throw new ArgumentNullException(nameof(usage));
+            }
 
             Model = model;
             Data = data.ToList();

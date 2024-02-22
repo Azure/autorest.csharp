@@ -65,9 +65,30 @@ namespace MgmtSingletonResource
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="carName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<IgnitionData>> GetAsync(string subscriptionId, string resourceGroupName, string carName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(carName, nameof(carName));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (resourceGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
+            }
+            if (carName == null)
+            {
+                throw new ArgumentNullException(nameof(carName));
+            }
+            if (carName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(carName));
+            }
 
             using var message = CreateGetRequest(subscriptionId, resourceGroupName, carName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -95,9 +116,30 @@ namespace MgmtSingletonResource
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="carName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<IgnitionData> Get(string subscriptionId, string resourceGroupName, string carName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(carName, nameof(carName));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (resourceGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
+            }
+            if (carName == null)
+            {
+                throw new ArgumentNullException(nameof(carName));
+            }
+            if (carName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(carName));
+            }
 
             using var message = CreateGetRequest(subscriptionId, resourceGroupName, carName);
             _pipeline.Send(message, cancellationToken);

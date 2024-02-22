@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using Azure.Core;
 
 namespace MgmtMockAndSample.Models
 {
@@ -18,7 +17,10 @@ namespace MgmtMockAndSample.Models
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public MhsmipRule(string value)
         {
-            Argument.AssertNotNull(value, nameof(value));
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
 
             Value = value;
         }

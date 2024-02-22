@@ -3,7 +3,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -50,8 +49,14 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="object"/> or <paramref name="data"/> is null. </exception>
         internal ListFineTuneEventsResponse(string @object, IEnumerable<FineTuneEvent> data)
         {
-            ClientUtilities.AssertNotNull(@object, nameof(@object));
-            ClientUtilities.AssertNotNull(data, nameof(data));
+            if (@object == null)
+            {
+                throw new ArgumentNullException(nameof(@object));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             Object = @object;
             Data = data.ToList();

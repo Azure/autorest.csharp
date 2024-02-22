@@ -21,7 +21,10 @@ namespace MgmtMockAndSample.Models
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
         public VaultCreateOrUpdateContent(AzureLocation location, VaultProperties properties)
         {
-            Argument.AssertNotNull(properties, nameof(properties));
+            if (properties == null)
+            {
+                throw new ArgumentNullException(nameof(properties));
+            }
 
             Location = location;
             Tags = new ChangeTrackingDictionary<string, string>();
