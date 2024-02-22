@@ -43,7 +43,10 @@ namespace PetStore
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public PetStoreClient(Uri endpoint, PetStoreClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
             options ??= new PetStoreClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

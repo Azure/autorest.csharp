@@ -183,8 +183,18 @@ namespace MgmtOmitOperationGroups.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> or <paramref name="model5"/> is null. </exception>
         public virtual async Task<Response<Model5>> CreateOrUpdateModel5Async(string model5SName, Model5 model5, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(model5SName, nameof(model5SName));
-            Argument.AssertNotNull(model5, nameof(model5));
+            if (model5SName == null)
+            {
+                throw new ArgumentNullException(nameof(model5SName));
+            }
+            if (model5SName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(model5SName));
+            }
+            if (model5 == null)
+            {
+                throw new ArgumentNullException(nameof(model5));
+            }
 
             using var scope = Model5sClientDiagnostics.CreateScope("MockableMgmtOmitOperationGroupsResourceGroupResource.CreateOrUpdateModel5");
             scope.Start();
@@ -223,8 +233,18 @@ namespace MgmtOmitOperationGroups.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> or <paramref name="model5"/> is null. </exception>
         public virtual Response<Model5> CreateOrUpdateModel5(string model5SName, Model5 model5, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(model5SName, nameof(model5SName));
-            Argument.AssertNotNull(model5, nameof(model5));
+            if (model5SName == null)
+            {
+                throw new ArgumentNullException(nameof(model5SName));
+            }
+            if (model5SName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(model5SName));
+            }
+            if (model5 == null)
+            {
+                throw new ArgumentNullException(nameof(model5));
+            }
 
             using var scope = Model5sClientDiagnostics.CreateScope("MockableMgmtOmitOperationGroupsResourceGroupResource.CreateOrUpdateModel5");
             scope.Start();
@@ -262,7 +282,14 @@ namespace MgmtOmitOperationGroups.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> is null. </exception>
         public virtual async Task<Response<Model5>> GetModel5Async(string model5SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(model5SName, nameof(model5SName));
+            if (model5SName == null)
+            {
+                throw new ArgumentNullException(nameof(model5SName));
+            }
+            if (model5SName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(model5SName));
+            }
 
             using var scope = Model5sClientDiagnostics.CreateScope("MockableMgmtOmitOperationGroupsResourceGroupResource.GetModel5");
             scope.Start();
@@ -300,7 +327,14 @@ namespace MgmtOmitOperationGroups.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> is null. </exception>
         public virtual Response<Model5> GetModel5(string model5SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(model5SName, nameof(model5SName));
+            if (model5SName == null)
+            {
+                throw new ArgumentNullException(nameof(model5SName));
+            }
+            if (model5SName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(model5SName));
+            }
 
             using var scope = Model5sClientDiagnostics.CreateScope("MockableMgmtOmitOperationGroupsResourceGroupResource.GetModel5");
             scope.Start();

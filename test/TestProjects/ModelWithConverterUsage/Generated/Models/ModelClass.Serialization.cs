@@ -101,7 +101,7 @@ namespace ModelWithConverterUsage.Models
                     {
                         continue;
                     }
-                    objProperty = Product.DeserializeProduct(property.Value);
+                    objProperty = Product.DeserializeProduct(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

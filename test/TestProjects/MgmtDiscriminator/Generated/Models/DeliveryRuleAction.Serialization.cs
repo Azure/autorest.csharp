@@ -75,18 +75,18 @@ namespace MgmtDiscriminator.Models
             {
                 switch (discriminator.GetString())
                 {
-                    case "CacheExpiration": return DeliveryRuleCacheExpirationAction.DeserializeDeliveryRuleCacheExpirationAction(element);
-                    case "CacheKeyQueryString": return DeliveryRuleCacheKeyQueryStringAction.DeserializeDeliveryRuleCacheKeyQueryStringAction(element);
-                    case "ModifyRequestHeader": return DeliveryRuleRequestHeaderAction.DeserializeDeliveryRuleRequestHeaderAction(element);
-                    case "ModifyResponseHeader": return DeliveryRuleResponseHeaderAction.DeserializeDeliveryRuleResponseHeaderAction(element);
-                    case "OriginGroupOverride": return OriginGroupOverrideAction.DeserializeOriginGroupOverrideAction(element);
-                    case "RouteConfigurationOverride": return DeliveryRuleRouteConfigurationOverrideAction.DeserializeDeliveryRuleRouteConfigurationOverrideAction(element);
-                    case "UrlRedirect": return UrlRedirectAction.DeserializeUrlRedirectAction(element);
-                    case "UrlRewrite": return UrlRewriteAction.DeserializeUrlRewriteAction(element);
-                    case "UrlSigning": return UrlSigningAction.DeserializeUrlSigningAction(element);
+                    case "CacheExpiration": return DeliveryRuleCacheExpirationAction.DeserializeDeliveryRuleCacheExpirationAction(element, options);
+                    case "CacheKeyQueryString": return DeliveryRuleCacheKeyQueryStringAction.DeserializeDeliveryRuleCacheKeyQueryStringAction(element, options);
+                    case "ModifyRequestHeader": return DeliveryRuleRequestHeaderAction.DeserializeDeliveryRuleRequestHeaderAction(element, options);
+                    case "ModifyResponseHeader": return DeliveryRuleResponseHeaderAction.DeserializeDeliveryRuleResponseHeaderAction(element, options);
+                    case "OriginGroupOverride": return OriginGroupOverrideAction.DeserializeOriginGroupOverrideAction(element, options);
+                    case "RouteConfigurationOverride": return DeliveryRuleRouteConfigurationOverrideAction.DeserializeDeliveryRuleRouteConfigurationOverrideAction(element, options);
+                    case "UrlRedirect": return UrlRedirectAction.DeserializeUrlRedirectAction(element, options);
+                    case "UrlRewrite": return UrlRewriteAction.DeserializeUrlRewriteAction(element, options);
+                    case "UrlSigning": return UrlSigningAction.DeserializeUrlSigningAction(element, options);
                 }
             }
-            return UnknownDeliveryRuleAction.DeserializeUnknownDeliveryRuleAction(element);
+            return UnknownDeliveryRuleAction.DeserializeUnknownDeliveryRuleAction(element, options);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

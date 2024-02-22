@@ -80,7 +80,7 @@ namespace custom_baseUrl_paging.Models
                     {
                         continue;
                     }
-                    properties = ProductProperties.DeserializeProductProperties(property.Value);
+                    properties = ProductProperties.DeserializeProductProperties(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

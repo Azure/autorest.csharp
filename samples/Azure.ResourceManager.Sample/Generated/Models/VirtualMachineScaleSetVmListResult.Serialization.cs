@@ -90,7 +90,7 @@ namespace Azure.ResourceManager.Sample.Models
                     List<VirtualMachineScaleSetVmData> array = new List<VirtualMachineScaleSetVmData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(VirtualMachineScaleSetVmData.DeserializeVirtualMachineScaleSetVmData(item));
+                        array.Add(VirtualMachineScaleSetVmData.DeserializeVirtualMachineScaleSetVmData(item, options));
                     }
                     value = array;
                     continue;

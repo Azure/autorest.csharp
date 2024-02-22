@@ -68,7 +68,7 @@ namespace body_complex.Models
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeUnknownMyBaseType(document.RootElement, options);
+            return DeserializeMyBaseType(document.RootElement, options);
         }
 
         internal static UnknownMyBaseType DeserializeUnknownMyBaseType(JsonElement element, ModelReaderWriterOptions options = null)
@@ -144,7 +144,7 @@ namespace body_complex.Models
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeUnknownMyBaseType(document.RootElement, options);
+                        return DeserializeMyBaseType(document.RootElement, options);
                     }
                 default:
                     throw new FormatException($"The model {nameof(MyBaseType)} does not support '{options.Format}' format.");

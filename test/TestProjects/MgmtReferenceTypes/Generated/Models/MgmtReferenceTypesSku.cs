@@ -20,7 +20,10 @@ namespace Azure.ResourceManager.Fake.Models
         [InitializationConstructor]
         public MgmtReferenceTypesSku(string name)
         {
-            Argument.AssertNotNull(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
             Name = name;
         }

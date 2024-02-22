@@ -18,21 +18,49 @@ using Azure.ResourceManager.Sample.Models;
 
 namespace Azure.ResourceManager.Sample
 {
-    public partial class DedicatedHostData : IUtf8JsonSerializable, IJsonModel<DedicatedHostData>
+    public partial class DedicatedHostGroupData : IUtf8JsonSerializable, IJsonModel<DedicatedHostGroupData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DedicatedHostData>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DedicatedHostGroupData>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
-        void IJsonModel<DedicatedHostData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<DedicatedHostGroupData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<DedicatedHostData>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<DedicatedHostGroupData>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(DedicatedHostData)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(DedicatedHostGroupData)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("sku"u8);
-            writer.WriteObjectValue(Sku);
+            if (Optional.IsCollectionDefined(Zones))
+            {
+                writer.WritePropertyName("zones"u8);
+                writer.WriteStartArray();
+                foreach (var item in Zones)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsCollectionDefined(HostUris))
+            {
+                writer.WritePropertyName("hostUris"u8);
+                writer.WriteStartArray();
+                foreach (var item in HostUris)
+                {
+                    if (item == null)
+                    {
+                        writer.WriteNullValue();
+                        continue;
+                    }
+                    writer.WriteStringValue(item.AbsoluteUri);
+                }
+                writer.WriteEndArray();
+            }
+            if (options.Format != "W" && Optional.IsDefined(TenantId))
+            {
+                writer.WritePropertyName("tenantId"u8);
+                writer.WriteStringValue(TenantId.Value);
+            }
             if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags"u8);
@@ -68,50 +96,30 @@ namespace Azure.ResourceManager.Sample
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(PlatformFaultDomain))
+            if (Optional.IsDefined(PlatformFaultDomainCount))
             {
-                writer.WritePropertyName("platformFaultDomain"u8);
-                writer.WriteNumberValue(PlatformFaultDomain.Value);
+                writer.WritePropertyName("platformFaultDomainCount"u8);
+                writer.WriteNumberValue(PlatformFaultDomainCount.Value);
             }
-            if (Optional.IsDefined(AutoReplaceOnFailure))
+            if (options.Format != "W" && Optional.IsCollectionDefined(Hosts))
             {
-                writer.WritePropertyName("autoReplaceOnFailure"u8);
-                writer.WriteBooleanValue(AutoReplaceOnFailure.Value);
-            }
-            if (options.Format != "W" && Optional.IsDefined(HostId))
-            {
-                writer.WritePropertyName("hostId"u8);
-                writer.WriteStringValue(HostId);
-            }
-            if (options.Format != "W" && Optional.IsCollectionDefined(VirtualMachines))
-            {
-                writer.WritePropertyName("virtualMachines"u8);
+                writer.WritePropertyName("hosts"u8);
                 writer.WriteStartArray();
-                foreach (var item in VirtualMachines)
+                foreach (var item in Hosts)
                 {
                     JsonSerializer.Serialize(writer, item);
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(LicenseType))
-            {
-                writer.WritePropertyName("licenseType"u8);
-                writer.WriteStringValue(LicenseType.Value.ToSerialString());
-            }
-            if (options.Format != "W" && Optional.IsDefined(ProvisioningOn))
-            {
-                writer.WritePropertyName("provisioningTime"u8);
-                writer.WriteStringValue(ProvisioningOn.Value, "O");
-            }
-            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
-            {
-                writer.WritePropertyName("provisioningState"u8);
-                writer.WriteStringValue(ProvisioningState);
-            }
             if (options.Format != "W" && Optional.IsDefined(InstanceView))
             {
                 writer.WritePropertyName("instanceView"u8);
                 writer.WriteObjectValue(InstanceView);
+            }
+            if (Optional.IsDefined(SupportAutomaticPlacement))
+            {
+                writer.WritePropertyName("supportAutomaticPlacement"u8);
+                writer.WriteBooleanValue(SupportAutomaticPlacement.Value);
             }
             writer.WriteEndObject();
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -132,19 +140,19 @@ namespace Azure.ResourceManager.Sample
             writer.WriteEndObject();
         }
 
-        DedicatedHostData IJsonModel<DedicatedHostData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        DedicatedHostGroupData IJsonModel<DedicatedHostGroupData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<DedicatedHostData>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<DedicatedHostGroupData>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(DedicatedHostData)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(DedicatedHostGroupData)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeDedicatedHostData(document.RootElement, options);
+            return DeserializeDedicatedHostGroupData(document.RootElement, options);
         }
 
-        internal static DedicatedHostData DeserializeDedicatedHostData(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static DedicatedHostGroupData DeserializeDedicatedHostGroupData(JsonElement element, ModelReaderWriterOptions options = null)
         {
             options ??= new ModelReaderWriterOptions("W");
 
@@ -152,28 +160,65 @@ namespace Azure.ResourceManager.Sample
             {
                 return null;
             }
-            SampleSku sku = default;
+            Optional<IList<string>> zones = default;
+            Optional<IList<Uri>> hostUris = default;
+            Optional<Guid> tenantId = default;
             Optional<IDictionary<string, string>> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             Optional<SystemData> systemData = default;
-            Optional<int> platformFaultDomain = default;
-            Optional<bool> autoReplaceOnFailure = default;
-            Optional<string> hostId = default;
-            Optional<IReadOnlyList<Resources.Models.SubResource>> virtualMachines = default;
-            Optional<DedicatedHostLicenseType> licenseType = default;
-            Optional<DateTimeOffset> provisioningTime = default;
-            Optional<string> provisioningState = default;
-            Optional<DedicatedHostInstanceView> instanceView = default;
+            Optional<int> platformFaultDomainCount = default;
+            Optional<IReadOnlyList<Resources.Models.SubResource>> hosts = default;
+            Optional<DedicatedHostGroupInstanceView> instanceView = default;
+            Optional<bool> supportAutomaticPlacement = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("sku"u8))
+                if (property.NameEquals("zones"u8))
                 {
-                    sku = SampleSku.DeserializeSampleSku(property.Value);
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<string> array = new List<string>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(item.GetString());
+                    }
+                    zones = array;
+                    continue;
+                }
+                if (property.NameEquals("hostUris"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<Uri> array = new List<Uri>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(new Uri(item.GetString()));
+                        }
+                    }
+                    hostUris = array;
+                    continue;
+                }
+                if (property.NameEquals("tenantId"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    tenantId = property.Value.GetGuid();
                     continue;
                 }
                 if (property.NameEquals("tags"u8))
@@ -228,30 +273,16 @@ namespace Azure.ResourceManager.Sample
                     }
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.NameEquals("platformFaultDomain"u8))
+                        if (property0.NameEquals("platformFaultDomainCount"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
                                 continue;
                             }
-                            platformFaultDomain = property0.Value.GetInt32();
+                            platformFaultDomainCount = property0.Value.GetInt32();
                             continue;
                         }
-                        if (property0.NameEquals("autoReplaceOnFailure"u8))
-                        {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                continue;
-                            }
-                            autoReplaceOnFailure = property0.Value.GetBoolean();
-                            continue;
-                        }
-                        if (property0.NameEquals("hostId"u8))
-                        {
-                            hostId = property0.Value.GetString();
-                            continue;
-                        }
-                        if (property0.NameEquals("virtualMachines"u8))
+                        if (property0.NameEquals("hosts"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -262,30 +293,7 @@ namespace Azure.ResourceManager.Sample
                             {
                                 array.Add(JsonSerializer.Deserialize<Resources.Models.SubResource>(item.GetRawText()));
                             }
-                            virtualMachines = array;
-                            continue;
-                        }
-                        if (property0.NameEquals("licenseType"u8))
-                        {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                continue;
-                            }
-                            licenseType = property0.Value.GetString().ToDedicatedHostLicenseType();
-                            continue;
-                        }
-                        if (property0.NameEquals("provisioningTime"u8))
-                        {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                continue;
-                            }
-                            provisioningTime = property0.Value.GetDateTimeOffset("O");
-                            continue;
-                        }
-                        if (property0.NameEquals("provisioningState"u8))
-                        {
-                            provisioningState = property0.Value.GetString();
+                            hosts = array;
                             continue;
                         }
                         if (property0.NameEquals("instanceView"u8))
@@ -294,7 +302,16 @@ namespace Azure.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            instanceView = DedicatedHostInstanceView.DeserializeDedicatedHostInstanceView(property0.Value);
+                            instanceView = DedicatedHostGroupInstanceView.DeserializeDedicatedHostGroupInstanceView(property0.Value, options);
+                            continue;
+                        }
+                        if (property0.NameEquals("supportAutomaticPlacement"u8))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                continue;
+                            }
+                            supportAutomaticPlacement = property0.Value.GetBoolean();
                             continue;
                         }
                     }
@@ -306,7 +323,7 @@ namespace Azure.ResourceManager.Sample
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DedicatedHostData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, sku, Optional.ToNullable(platformFaultDomain), Optional.ToNullable(autoReplaceOnFailure), hostId.Value, Optional.ToList(virtualMachines), Optional.ToNullable(licenseType), Optional.ToNullable(provisioningTime), provisioningState.Value, instanceView.Value, serializedAdditionalRawData);
+            return new DedicatedHostGroupData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, Optional.ToList(zones), Optional.ToList(hostUris), Optional.ToNullable(tenantId), Optional.ToNullable(platformFaultDomainCount), Optional.ToList(hosts), instanceView.Value, Optional.ToNullable(supportAutomaticPlacement), serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -362,10 +379,56 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsDefined(Sku))
+            if (Optional.IsCollectionDefined(Zones))
             {
-                builder.Append("  sku:");
-                AppendChildObject(builder, Sku, options, 2, false);
+                if (Zones.Any())
+                {
+                    builder.Append("  zones:");
+                    builder.AppendLine(" [");
+                    foreach (var item in Zones)
+                    {
+                        if (item == null)
+                        {
+                            builder.Append("null");
+                            continue;
+                        }
+                        if (item.Contains(Environment.NewLine))
+                        {
+                            builder.AppendLine("    '''");
+                            builder.AppendLine($"{item}'''");
+                        }
+                        else
+                        {
+                            builder.AppendLine($"    '{item}'");
+                        }
+                    }
+                    builder.AppendLine("  ]");
+                }
+            }
+
+            if (Optional.IsCollectionDefined(HostUris))
+            {
+                if (HostUris.Any())
+                {
+                    builder.Append("  hostUris:");
+                    builder.AppendLine(" [");
+                    foreach (var item in HostUris)
+                    {
+                        if (item == null)
+                        {
+                            builder.Append("null");
+                            continue;
+                        }
+                        builder.AppendLine($"    '{item.AbsoluteUri}'");
+                    }
+                    builder.AppendLine("  ]");
+                }
+            }
+
+            if (Optional.IsDefined(TenantId))
+            {
+                builder.Append("  tenantId:");
+                builder.AppendLine($" '{TenantId.Value.ToString()}'");
             }
 
             if (Optional.IsDefined(Id))
@@ -382,40 +445,19 @@ namespace Azure.ResourceManager.Sample
 
             builder.Append("  properties:");
             builder.AppendLine(" {");
-            if (Optional.IsDefined(PlatformFaultDomain))
+            if (Optional.IsDefined(PlatformFaultDomainCount))
             {
-                builder.Append("    platformFaultDomain:");
-                builder.AppendLine($" {PlatformFaultDomain.Value}");
+                builder.Append("    platformFaultDomainCount:");
+                builder.AppendLine($" {PlatformFaultDomainCount.Value}");
             }
 
-            if (Optional.IsDefined(AutoReplaceOnFailure))
+            if (Optional.IsCollectionDefined(Hosts))
             {
-                builder.Append("    autoReplaceOnFailure:");
-                var boolValue = AutoReplaceOnFailure.Value == true ? "true" : "false";
-                builder.AppendLine($" {boolValue}");
-            }
-
-            if (Optional.IsDefined(HostId))
-            {
-                builder.Append("    hostId:");
-                if (HostId.Contains(Environment.NewLine))
+                if (Hosts.Any())
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{HostId}'''");
-                }
-                else
-                {
-                    builder.AppendLine($" '{HostId}'");
-                }
-            }
-
-            if (Optional.IsCollectionDefined(VirtualMachines))
-            {
-                if (VirtualMachines.Any())
-                {
-                    builder.Append("    virtualMachines:");
+                    builder.Append("    hosts:");
                     builder.AppendLine(" [");
-                    foreach (var item in VirtualMachines)
+                    foreach (var item in Hosts)
                     {
                         AppendChildObject(builder, item, options, 6, true);
                     }
@@ -423,37 +465,17 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsDefined(LicenseType))
-            {
-                builder.Append("    licenseType:");
-                builder.AppendLine($" '{LicenseType.Value.ToSerialString()}'");
-            }
-
-            if (Optional.IsDefined(ProvisioningOn))
-            {
-                builder.Append("    provisioningTime:");
-                var formattedDateTimeString = TypeFormatters.ToString(ProvisioningOn.Value, "o");
-                builder.AppendLine($" '{formattedDateTimeString}'");
-            }
-
-            if (Optional.IsDefined(ProvisioningState))
-            {
-                builder.Append("    provisioningState:");
-                if (ProvisioningState.Contains(Environment.NewLine))
-                {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{ProvisioningState}'''");
-                }
-                else
-                {
-                    builder.AppendLine($" '{ProvisioningState}'");
-                }
-            }
-
             if (Optional.IsDefined(InstanceView))
             {
                 builder.Append("    instanceView:");
                 AppendChildObject(builder, InstanceView, options, 4, false);
+            }
+
+            if (Optional.IsDefined(SupportAutomaticPlacement))
+            {
+                builder.Append("    supportAutomaticPlacement:");
+                var boolValue = SupportAutomaticPlacement.Value == true ? "true" : "false";
+                builder.AppendLine($" {boolValue}");
             }
 
             builder.AppendLine("  }");
@@ -496,9 +518,9 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        BinaryData IPersistableModel<DedicatedHostData>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<DedicatedHostGroupData>.Write(ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<DedicatedHostData>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<DedicatedHostGroupData>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
@@ -507,28 +529,28 @@ namespace Azure.ResourceManager.Sample
                 case "bicep":
                     return SerializeBicep(options);
                 default:
-                    throw new FormatException($"The model {nameof(DedicatedHostData)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(DedicatedHostGroupData)} does not support '{options.Format}' format.");
             }
         }
 
-        DedicatedHostData IPersistableModel<DedicatedHostData>.Create(BinaryData data, ModelReaderWriterOptions options)
+        DedicatedHostGroupData IPersistableModel<DedicatedHostGroupData>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<DedicatedHostData>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<DedicatedHostGroupData>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeDedicatedHostData(document.RootElement, options);
+                        return DeserializeDedicatedHostGroupData(document.RootElement, options);
                     }
                 case "bicep":
                     throw new InvalidOperationException("Bicep deserialization is not supported for this type.");
                 default:
-                    throw new FormatException($"The model {nameof(DedicatedHostData)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(DedicatedHostGroupData)} does not support '{options.Format}' format.");
             }
         }
 
-        string IPersistableModel<DedicatedHostData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<DedicatedHostGroupData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

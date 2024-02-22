@@ -3,7 +3,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.Collections.Generic;
 
 namespace OpenAI.Models
@@ -57,7 +56,10 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="text"/> is null. </exception>
         internal CreateCompletionResponseChoice(long index, string text, CreateCompletionResponseChoiceLogprobs logprobs, CreateCompletionResponseChoiceFinishReason finishReason)
         {
-            ClientUtilities.AssertNotNull(text, nameof(text));
+            if (text == null)
+            {
+                throw new ArgumentNullException(nameof(text));
+            }
 
             Index = index;
             Text = text;

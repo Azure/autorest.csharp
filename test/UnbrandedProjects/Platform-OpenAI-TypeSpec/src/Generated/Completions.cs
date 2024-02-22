@@ -52,7 +52,10 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="createCompletionRequest"/> is null. </exception>
         public virtual async Task<Result<CreateCompletionResponse>> CreateAsync(CreateCompletionRequest createCompletionRequest, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNull(createCompletionRequest, nameof(createCompletionRequest));
+            if (createCompletionRequest == null)
+            {
+                throw new ArgumentNullException(nameof(createCompletionRequest));
+            }
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             using RequestBody content = createCompletionRequest.ToRequestBody();
@@ -65,7 +68,10 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="createCompletionRequest"/> is null. </exception>
         public virtual Result<CreateCompletionResponse> Create(CreateCompletionRequest createCompletionRequest, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNull(createCompletionRequest, nameof(createCompletionRequest));
+            if (createCompletionRequest == null)
+            {
+                throw new ArgumentNullException(nameof(createCompletionRequest));
+            }
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             using RequestBody content = createCompletionRequest.ToRequestBody();
@@ -95,7 +101,10 @@ namespace OpenAI
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> CreateAsync(RequestBody content, RequestOptions context = null)
         {
-            ClientUtilities.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateSpan("Completions.Create");
             scope.Start();
@@ -133,7 +142,10 @@ namespace OpenAI
         /// <returns> The response returned from the service. </returns>
         public virtual Result Create(RequestBody content, RequestOptions context = null)
         {
-            ClientUtilities.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateSpan("Completions.Create");
             scope.Start();

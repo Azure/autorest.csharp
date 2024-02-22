@@ -18,23 +18,23 @@ using Azure.ResourceManager.Sample.Models;
 
 namespace Azure.ResourceManager.Sample
 {
-    public partial class AvailabilitySetData : IUtf8JsonSerializable, IJsonModel<AvailabilitySetData>
+    public partial class ProximityPlacementGroupData : IUtf8JsonSerializable, IJsonModel<ProximityPlacementGroupData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AvailabilitySetData>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ProximityPlacementGroupData>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
-        void IJsonModel<AvailabilitySetData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<ProximityPlacementGroupData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<AvailabilitySetData>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<ProximityPlacementGroupData>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(AvailabilitySetData)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ProximityPlacementGroupData)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Sku))
+            if (Optional.IsDefined(ExtendedLocation))
             {
-                writer.WritePropertyName("sku"u8);
-                writer.WriteObjectValue(Sku);
+                writer.WritePropertyName("extendedLocation"u8);
+                JsonSerializer.Serialize(writer, ExtendedLocation);
             }
             if (Optional.IsCollectionDefined(Tags))
             {
@@ -71,40 +71,45 @@ namespace Azure.ResourceManager.Sample
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(PlatformUpdateDomainCount))
+            if (Optional.IsDefined(ProximityPlacementGroupType))
             {
-                writer.WritePropertyName("platformUpdateDomainCount"u8);
-                writer.WriteNumberValue(PlatformUpdateDomainCount.Value);
+                writer.WritePropertyName("proximityPlacementGroupType"u8);
+                writer.WriteStringValue(ProximityPlacementGroupType.Value.ToString());
             }
-            if (Optional.IsDefined(PlatformFaultDomainCount))
-            {
-                writer.WritePropertyName("platformFaultDomainCount"u8);
-                writer.WriteNumberValue(PlatformFaultDomainCount.Value);
-            }
-            if (Optional.IsCollectionDefined(VirtualMachines))
+            if (options.Format != "W" && Optional.IsCollectionDefined(VirtualMachines))
             {
                 writer.WritePropertyName("virtualMachines"u8);
                 writer.WriteStartArray();
                 foreach (var item in VirtualMachines)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(ProximityPlacementGroup))
+            if (options.Format != "W" && Optional.IsCollectionDefined(VirtualMachineScaleSets))
             {
-                writer.WritePropertyName("proximityPlacementGroup"u8);
-                JsonSerializer.Serialize(writer, ProximityPlacementGroup);
-            }
-            if (options.Format != "W" && Optional.IsCollectionDefined(Statuses))
-            {
-                writer.WritePropertyName("statuses"u8);
+                writer.WritePropertyName("virtualMachineScaleSets"u8);
                 writer.WriteStartArray();
-                foreach (var item in Statuses)
+                foreach (var item in VirtualMachineScaleSets)
                 {
                     writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
+            }
+            if (options.Format != "W" && Optional.IsCollectionDefined(AvailabilitySets))
+            {
+                writer.WritePropertyName("availabilitySets"u8);
+                writer.WriteStartArray();
+                foreach (var item in AvailabilitySets)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsDefined(ColocationStatus))
+            {
+                writer.WritePropertyName("colocationStatus"u8);
+                writer.WriteObjectValue(ColocationStatus);
             }
             writer.WriteEndObject();
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -125,19 +130,19 @@ namespace Azure.ResourceManager.Sample
             writer.WriteEndObject();
         }
 
-        AvailabilitySetData IJsonModel<AvailabilitySetData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ProximityPlacementGroupData IJsonModel<ProximityPlacementGroupData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<AvailabilitySetData>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<ProximityPlacementGroupData>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(AvailabilitySetData)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ProximityPlacementGroupData)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeAvailabilitySetData(document.RootElement, options);
+            return DeserializeProximityPlacementGroupData(document.RootElement, options);
         }
 
-        internal static AvailabilitySetData DeserializeAvailabilitySetData(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static ProximityPlacementGroupData DeserializeProximityPlacementGroupData(JsonElement element, ModelReaderWriterOptions options = null)
         {
             options ??= new ModelReaderWriterOptions("W");
 
@@ -145,29 +150,29 @@ namespace Azure.ResourceManager.Sample
             {
                 return null;
             }
-            Optional<SampleSku> sku = default;
+            Optional<ExtendedLocation> extendedLocation = default;
             Optional<IDictionary<string, string>> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             Optional<SystemData> systemData = default;
-            Optional<int> platformUpdateDomainCount = default;
-            Optional<int> platformFaultDomainCount = default;
-            Optional<IList<WritableSubResource>> virtualMachines = default;
-            Optional<WritableSubResource> proximityPlacementGroup = default;
-            Optional<IReadOnlyList<InstanceViewStatus>> statuses = default;
+            Optional<ProximityPlacementGroupType> proximityPlacementGroupType = default;
+            Optional<IReadOnlyList<SubResourceWithColocationStatus>> virtualMachines = default;
+            Optional<IReadOnlyList<SubResourceWithColocationStatus>> virtualMachineScaleSets = default;
+            Optional<IReadOnlyList<SubResourceWithColocationStatus>> availabilitySets = default;
+            Optional<InstanceViewStatus> colocationStatus = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("sku"u8))
+                if (property.NameEquals("extendedLocation"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         continue;
                     }
-                    sku = SampleSku.DeserializeSampleSku(property.Value);
+                    extendedLocation = JsonSerializer.Deserialize<ExtendedLocation>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("tags"u8))
@@ -222,22 +227,13 @@ namespace Azure.ResourceManager.Sample
                     }
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.NameEquals("platformUpdateDomainCount"u8))
+                        if (property0.NameEquals("proximityPlacementGroupType"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
                                 continue;
                             }
-                            platformUpdateDomainCount = property0.Value.GetInt32();
-                            continue;
-                        }
-                        if (property0.NameEquals("platformFaultDomainCount"u8))
-                        {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                continue;
-                            }
-                            platformFaultDomainCount = property0.Value.GetInt32();
+                            proximityPlacementGroupType = new ProximityPlacementGroupType(property0.Value.GetString());
                             continue;
                         }
                         if (property0.NameEquals("virtualMachines"u8))
@@ -246,35 +242,49 @@ namespace Azure.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            List<WritableSubResource> array = new List<WritableSubResource>();
+                            List<SubResourceWithColocationStatus> array = new List<SubResourceWithColocationStatus>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(JsonSerializer.Deserialize<WritableSubResource>(item.GetRawText()));
+                                array.Add(SubResourceWithColocationStatus.DeserializeSubResourceWithColocationStatus(item, options));
                             }
                             virtualMachines = array;
                             continue;
                         }
-                        if (property0.NameEquals("proximityPlacementGroup"u8))
+                        if (property0.NameEquals("virtualMachineScaleSets"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
                                 continue;
                             }
-                            proximityPlacementGroup = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.GetRawText());
-                            continue;
-                        }
-                        if (property0.NameEquals("statuses"u8))
-                        {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                continue;
-                            }
-                            List<InstanceViewStatus> array = new List<InstanceViewStatus>();
+                            List<SubResourceWithColocationStatus> array = new List<SubResourceWithColocationStatus>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(InstanceViewStatus.DeserializeInstanceViewStatus(item));
+                                array.Add(SubResourceWithColocationStatus.DeserializeSubResourceWithColocationStatus(item, options));
                             }
-                            statuses = array;
+                            virtualMachineScaleSets = array;
+                            continue;
+                        }
+                        if (property0.NameEquals("availabilitySets"u8))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                continue;
+                            }
+                            List<SubResourceWithColocationStatus> array = new List<SubResourceWithColocationStatus>();
+                            foreach (var item in property0.Value.EnumerateArray())
+                            {
+                                array.Add(SubResourceWithColocationStatus.DeserializeSubResourceWithColocationStatus(item, options));
+                            }
+                            availabilitySets = array;
+                            continue;
+                        }
+                        if (property0.NameEquals("colocationStatus"u8))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                continue;
+                            }
+                            colocationStatus = InstanceViewStatus.DeserializeInstanceViewStatus(property0.Value, options);
                             continue;
                         }
                     }
@@ -286,7 +296,7 @@ namespace Azure.ResourceManager.Sample
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new AvailabilitySetData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, sku.Value, Optional.ToNullable(platformUpdateDomainCount), Optional.ToNullable(platformFaultDomainCount), Optional.ToList(virtualMachines), proximityPlacementGroup, Optional.ToList(statuses), serializedAdditionalRawData);
+            return new ProximityPlacementGroupData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, extendedLocation, Optional.ToNullable(proximityPlacementGroupType), Optional.ToList(virtualMachines), Optional.ToList(virtualMachineScaleSets), Optional.ToList(availabilitySets), colocationStatus.Value, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -342,10 +352,10 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsDefined(Sku))
+            if (Optional.IsDefined(ExtendedLocation))
             {
-                builder.Append("  sku:");
-                AppendChildObject(builder, Sku, options, 2, false);
+                builder.Append("  extendedLocation:");
+                AppendChildObject(builder, ExtendedLocation, options, 2, false);
             }
 
             if (Optional.IsDefined(Id))
@@ -362,16 +372,10 @@ namespace Azure.ResourceManager.Sample
 
             builder.Append("  properties:");
             builder.AppendLine(" {");
-            if (Optional.IsDefined(PlatformUpdateDomainCount))
+            if (Optional.IsDefined(ProximityPlacementGroupType))
             {
-                builder.Append("    platformUpdateDomainCount:");
-                builder.AppendLine($" {PlatformUpdateDomainCount.Value}");
-            }
-
-            if (Optional.IsDefined(PlatformFaultDomainCount))
-            {
-                builder.Append("    platformFaultDomainCount:");
-                builder.AppendLine($" {PlatformFaultDomainCount.Value}");
+                builder.Append("    proximityPlacementGroupType:");
+                builder.AppendLine($" '{ProximityPlacementGroupType.Value.ToString()}'");
             }
 
             if (Optional.IsCollectionDefined(VirtualMachines))
@@ -388,24 +392,38 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsDefined(ProximityPlacementGroup))
+            if (Optional.IsCollectionDefined(VirtualMachineScaleSets))
             {
-                builder.Append("    proximityPlacementGroup:");
-                AppendChildObject(builder, ProximityPlacementGroup, options, 4, false);
-            }
-
-            if (Optional.IsCollectionDefined(Statuses))
-            {
-                if (Statuses.Any())
+                if (VirtualMachineScaleSets.Any())
                 {
-                    builder.Append("    statuses:");
+                    builder.Append("    virtualMachineScaleSets:");
                     builder.AppendLine(" [");
-                    foreach (var item in Statuses)
+                    foreach (var item in VirtualMachineScaleSets)
                     {
                         AppendChildObject(builder, item, options, 6, true);
                     }
                     builder.AppendLine("    ]");
                 }
+            }
+
+            if (Optional.IsCollectionDefined(AvailabilitySets))
+            {
+                if (AvailabilitySets.Any())
+                {
+                    builder.Append("    availabilitySets:");
+                    builder.AppendLine(" [");
+                    foreach (var item in AvailabilitySets)
+                    {
+                        AppendChildObject(builder, item, options, 6, true);
+                    }
+                    builder.AppendLine("    ]");
+                }
+            }
+
+            if (Optional.IsDefined(ColocationStatus))
+            {
+                builder.Append("    colocationStatus:");
+                AppendChildObject(builder, ColocationStatus, options, 4, false);
             }
 
             builder.AppendLine("  }");
@@ -448,9 +466,9 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        BinaryData IPersistableModel<AvailabilitySetData>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ProximityPlacementGroupData>.Write(ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<AvailabilitySetData>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<ProximityPlacementGroupData>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
@@ -459,28 +477,28 @@ namespace Azure.ResourceManager.Sample
                 case "bicep":
                     return SerializeBicep(options);
                 default:
-                    throw new FormatException($"The model {nameof(AvailabilitySetData)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ProximityPlacementGroupData)} does not support '{options.Format}' format.");
             }
         }
 
-        AvailabilitySetData IPersistableModel<AvailabilitySetData>.Create(BinaryData data, ModelReaderWriterOptions options)
+        ProximityPlacementGroupData IPersistableModel<ProximityPlacementGroupData>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<AvailabilitySetData>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<ProximityPlacementGroupData>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeAvailabilitySetData(document.RootElement, options);
+                        return DeserializeProximityPlacementGroupData(document.RootElement, options);
                     }
                 case "bicep":
                     throw new InvalidOperationException("Bicep deserialization is not supported for this type.");
                 default:
-                    throw new FormatException($"The model {nameof(AvailabilitySetData)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ProximityPlacementGroupData)} does not support '{options.Format}' format.");
             }
         }
 
-        string IPersistableModel<AvailabilitySetData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ProximityPlacementGroupData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

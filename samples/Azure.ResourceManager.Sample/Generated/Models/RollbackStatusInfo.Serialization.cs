@@ -111,7 +111,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    rollbackError = ApiError.DeserializeApiError(property.Value);
+                    rollbackError = ApiError.DeserializeApiError(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

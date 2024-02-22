@@ -98,7 +98,7 @@ namespace _Type._Dictionary.Models
                     Dictionary<string, InnerModel> dictionary = new Dictionary<string, InnerModel>();
                     foreach (var property1 in property0.Value.EnumerateObject())
                     {
-                        dictionary.Add(property1.Name, DeserializeInnerModel(property1.Value));
+                        dictionary.Add(property1.Name, DeserializeInnerModel(property1.Value, options));
                     }
                     children = dictionary;
                     continue;

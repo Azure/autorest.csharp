@@ -13,23 +13,29 @@ using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
+using Azure.ResourceManager.Resources.Models;
 using Azure.ResourceManager.Sample.Models;
 
 namespace Azure.ResourceManager.Sample
 {
-    public partial class VirtualMachineScaleSetRollingUpgradeData : IUtf8JsonSerializable, IJsonModel<VirtualMachineScaleSetRollingUpgradeData>
+    public partial class AvailabilitySetData : IUtf8JsonSerializable, IJsonModel<AvailabilitySetData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachineScaleSetRollingUpgradeData>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AvailabilitySetData>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
-        void IJsonModel<VirtualMachineScaleSetRollingUpgradeData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<AvailabilitySetData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineScaleSetRollingUpgradeData>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<AvailabilitySetData>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(VirtualMachineScaleSetRollingUpgradeData)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(AvailabilitySetData)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
+            if (Optional.IsDefined(Sku))
+            {
+                writer.WritePropertyName("sku"u8);
+                writer.WriteObjectValue(Sku);
+            }
             if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags"u8);
@@ -65,25 +71,40 @@ namespace Azure.ResourceManager.Sample
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (options.Format != "W" && Optional.IsDefined(Policy))
+            if (Optional.IsDefined(PlatformUpdateDomainCount))
             {
-                writer.WritePropertyName("policy"u8);
-                writer.WriteObjectValue(Policy);
+                writer.WritePropertyName("platformUpdateDomainCount"u8);
+                writer.WriteNumberValue(PlatformUpdateDomainCount.Value);
             }
-            if (options.Format != "W" && Optional.IsDefined(RunningStatus))
+            if (Optional.IsDefined(PlatformFaultDomainCount))
             {
-                writer.WritePropertyName("runningStatus"u8);
-                writer.WriteObjectValue(RunningStatus);
+                writer.WritePropertyName("platformFaultDomainCount"u8);
+                writer.WriteNumberValue(PlatformFaultDomainCount.Value);
             }
-            if (options.Format != "W" && Optional.IsDefined(Progress))
+            if (Optional.IsCollectionDefined(VirtualMachines))
             {
-                writer.WritePropertyName("progress"u8);
-                writer.WriteObjectValue(Progress);
+                writer.WritePropertyName("virtualMachines"u8);
+                writer.WriteStartArray();
+                foreach (var item in VirtualMachines)
+                {
+                    JsonSerializer.Serialize(writer, item);
+                }
+                writer.WriteEndArray();
             }
-            if (options.Format != "W" && Optional.IsDefined(Error))
+            if (Optional.IsDefined(ProximityPlacementGroup))
             {
-                writer.WritePropertyName("error"u8);
-                writer.WriteObjectValue(Error);
+                writer.WritePropertyName("proximityPlacementGroup"u8);
+                JsonSerializer.Serialize(writer, ProximityPlacementGroup);
+            }
+            if (options.Format != "W" && Optional.IsCollectionDefined(Statuses))
+            {
+                writer.WritePropertyName("statuses"u8);
+                writer.WriteStartArray();
+                foreach (var item in Statuses)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
             }
             writer.WriteEndObject();
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -104,19 +125,19 @@ namespace Azure.ResourceManager.Sample
             writer.WriteEndObject();
         }
 
-        VirtualMachineScaleSetRollingUpgradeData IJsonModel<VirtualMachineScaleSetRollingUpgradeData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        AvailabilitySetData IJsonModel<AvailabilitySetData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineScaleSetRollingUpgradeData>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<AvailabilitySetData>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(VirtualMachineScaleSetRollingUpgradeData)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(AvailabilitySetData)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeVirtualMachineScaleSetRollingUpgradeData(document.RootElement, options);
+            return DeserializeAvailabilitySetData(document.RootElement, options);
         }
 
-        internal static VirtualMachineScaleSetRollingUpgradeData DeserializeVirtualMachineScaleSetRollingUpgradeData(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static AvailabilitySetData DeserializeAvailabilitySetData(JsonElement element, ModelReaderWriterOptions options = null)
         {
             options ??= new ModelReaderWriterOptions("W");
 
@@ -124,20 +145,31 @@ namespace Azure.ResourceManager.Sample
             {
                 return null;
             }
+            Optional<SampleSku> sku = default;
             Optional<IDictionary<string, string>> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             Optional<SystemData> systemData = default;
-            Optional<RollingUpgradePolicy> policy = default;
-            Optional<RollingUpgradeRunningStatus> runningStatus = default;
-            Optional<RollingUpgradeProgressInfo> progress = default;
-            Optional<ApiError> error = default;
+            Optional<int> platformUpdateDomainCount = default;
+            Optional<int> platformFaultDomainCount = default;
+            Optional<IList<WritableSubResource>> virtualMachines = default;
+            Optional<WritableSubResource> proximityPlacementGroup = default;
+            Optional<IReadOnlyList<InstanceViewStatus>> statuses = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
+                if (property.NameEquals("sku"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    sku = SampleSku.DeserializeSampleSku(property.Value, options);
+                    continue;
+                }
                 if (property.NameEquals("tags"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -190,40 +222,59 @@ namespace Azure.ResourceManager.Sample
                     }
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.NameEquals("policy"u8))
+                        if (property0.NameEquals("platformUpdateDomainCount"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
                                 continue;
                             }
-                            policy = RollingUpgradePolicy.DeserializeRollingUpgradePolicy(property0.Value);
+                            platformUpdateDomainCount = property0.Value.GetInt32();
                             continue;
                         }
-                        if (property0.NameEquals("runningStatus"u8))
+                        if (property0.NameEquals("platformFaultDomainCount"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
                                 continue;
                             }
-                            runningStatus = RollingUpgradeRunningStatus.DeserializeRollingUpgradeRunningStatus(property0.Value);
+                            platformFaultDomainCount = property0.Value.GetInt32();
                             continue;
                         }
-                        if (property0.NameEquals("progress"u8))
+                        if (property0.NameEquals("virtualMachines"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
                                 continue;
                             }
-                            progress = RollingUpgradeProgressInfo.DeserializeRollingUpgradeProgressInfo(property0.Value);
+                            List<WritableSubResource> array = new List<WritableSubResource>();
+                            foreach (var item in property0.Value.EnumerateArray())
+                            {
+                                array.Add(JsonSerializer.Deserialize<WritableSubResource>(item.GetRawText()));
+                            }
+                            virtualMachines = array;
                             continue;
                         }
-                        if (property0.NameEquals("error"u8))
+                        if (property0.NameEquals("proximityPlacementGroup"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
                                 continue;
                             }
-                            error = ApiError.DeserializeApiError(property0.Value);
+                            proximityPlacementGroup = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.GetRawText());
+                            continue;
+                        }
+                        if (property0.NameEquals("statuses"u8))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                continue;
+                            }
+                            List<InstanceViewStatus> array = new List<InstanceViewStatus>();
+                            foreach (var item in property0.Value.EnumerateArray())
+                            {
+                                array.Add(InstanceViewStatus.DeserializeInstanceViewStatus(item, options));
+                            }
+                            statuses = array;
                             continue;
                         }
                     }
@@ -235,7 +286,7 @@ namespace Azure.ResourceManager.Sample
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineScaleSetRollingUpgradeData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, policy.Value, runningStatus.Value, progress.Value, error.Value, serializedAdditionalRawData);
+            return new AvailabilitySetData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, sku.Value, Optional.ToNullable(platformUpdateDomainCount), Optional.ToNullable(platformFaultDomainCount), Optional.ToList(virtualMachines), proximityPlacementGroup, Optional.ToList(statuses), serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -291,6 +342,12 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
+            if (Optional.IsDefined(Sku))
+            {
+                builder.Append("  sku:");
+                AppendChildObject(builder, Sku, options, 2, false);
+            }
+
             if (Optional.IsDefined(Id))
             {
                 builder.Append("  id:");
@@ -305,28 +362,50 @@ namespace Azure.ResourceManager.Sample
 
             builder.Append("  properties:");
             builder.AppendLine(" {");
-            if (Optional.IsDefined(Policy))
+            if (Optional.IsDefined(PlatformUpdateDomainCount))
             {
-                builder.Append("    policy:");
-                AppendChildObject(builder, Policy, options, 4, false);
+                builder.Append("    platformUpdateDomainCount:");
+                builder.AppendLine($" {PlatformUpdateDomainCount.Value}");
             }
 
-            if (Optional.IsDefined(RunningStatus))
+            if (Optional.IsDefined(PlatformFaultDomainCount))
             {
-                builder.Append("    runningStatus:");
-                AppendChildObject(builder, RunningStatus, options, 4, false);
+                builder.Append("    platformFaultDomainCount:");
+                builder.AppendLine($" {PlatformFaultDomainCount.Value}");
             }
 
-            if (Optional.IsDefined(Progress))
+            if (Optional.IsCollectionDefined(VirtualMachines))
             {
-                builder.Append("    progress:");
-                AppendChildObject(builder, Progress, options, 4, false);
+                if (VirtualMachines.Any())
+                {
+                    builder.Append("    virtualMachines:");
+                    builder.AppendLine(" [");
+                    foreach (var item in VirtualMachines)
+                    {
+                        AppendChildObject(builder, item, options, 6, true);
+                    }
+                    builder.AppendLine("    ]");
+                }
             }
 
-            if (Optional.IsDefined(Error))
+            if (Optional.IsDefined(ProximityPlacementGroup))
             {
-                builder.Append("    error:");
-                AppendChildObject(builder, Error, options, 4, false);
+                builder.Append("    proximityPlacementGroup:");
+                AppendChildObject(builder, ProximityPlacementGroup, options, 4, false);
+            }
+
+            if (Optional.IsCollectionDefined(Statuses))
+            {
+                if (Statuses.Any())
+                {
+                    builder.Append("    statuses:");
+                    builder.AppendLine(" [");
+                    foreach (var item in Statuses)
+                    {
+                        AppendChildObject(builder, item, options, 6, true);
+                    }
+                    builder.AppendLine("    ]");
+                }
             }
 
             builder.AppendLine("  }");
@@ -369,9 +448,9 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        BinaryData IPersistableModel<VirtualMachineScaleSetRollingUpgradeData>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<AvailabilitySetData>.Write(ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineScaleSetRollingUpgradeData>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<AvailabilitySetData>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
@@ -380,28 +459,28 @@ namespace Azure.ResourceManager.Sample
                 case "bicep":
                     return SerializeBicep(options);
                 default:
-                    throw new FormatException($"The model {nameof(VirtualMachineScaleSetRollingUpgradeData)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(AvailabilitySetData)} does not support '{options.Format}' format.");
             }
         }
 
-        VirtualMachineScaleSetRollingUpgradeData IPersistableModel<VirtualMachineScaleSetRollingUpgradeData>.Create(BinaryData data, ModelReaderWriterOptions options)
+        AvailabilitySetData IPersistableModel<AvailabilitySetData>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineScaleSetRollingUpgradeData>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<AvailabilitySetData>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeVirtualMachineScaleSetRollingUpgradeData(document.RootElement, options);
+                        return DeserializeAvailabilitySetData(document.RootElement, options);
                     }
                 case "bicep":
                     throw new InvalidOperationException("Bicep deserialization is not supported for this type.");
                 default:
-                    throw new FormatException($"The model {nameof(VirtualMachineScaleSetRollingUpgradeData)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(AvailabilitySetData)} does not support '{options.Format}' format.");
             }
         }
 
-        string IPersistableModel<VirtualMachineScaleSetRollingUpgradeData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<AvailabilitySetData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

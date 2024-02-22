@@ -99,7 +99,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    osDisk = ImageOSDisk.DeserializeImageOSDisk(property.Value);
+                    osDisk = ImageOSDisk.DeserializeImageOSDisk(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("dataDisks"u8))
@@ -111,7 +111,7 @@ namespace Azure.ResourceManager.Sample.Models
                     List<ImageDataDisk> array = new List<ImageDataDisk>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ImageDataDisk.DeserializeImageDataDisk(item));
+                        array.Add(ImageDataDisk.DeserializeImageDataDisk(item, options));
                     }
                     dataDisks = array;
                     continue;

@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace Pagination.Models
 {
@@ -52,7 +51,10 @@ namespace Pagination.Models
         /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/> is null. </exception>
         public ListLedgerEntryInputBody(string requiredString, int requiredInt)
         {
-            Argument.AssertNotNull(requiredString, nameof(requiredString));
+            if (requiredString == null)
+            {
+                throw new ArgumentNullException(nameof(requiredString));
+            }
 
             RequiredString = requiredString;
             RequiredInt = requiredInt;

@@ -18,24 +18,19 @@ using Azure.ResourceManager.Sample.Models;
 
 namespace Azure.ResourceManager.Sample
 {
-    public partial class ProximityPlacementGroupData : IUtf8JsonSerializable, IJsonModel<ProximityPlacementGroupData>
+    public partial class ImageData : IUtf8JsonSerializable, IJsonModel<ImageData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ProximityPlacementGroupData>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ImageData>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
-        void IJsonModel<ProximityPlacementGroupData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<ImageData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<ProximityPlacementGroupData>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<ImageData>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ProximityPlacementGroupData)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ImageData)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(ExtendedLocation))
-            {
-                writer.WritePropertyName("extendedLocation"u8);
-                JsonSerializer.Serialize(writer, ExtendedLocation);
-            }
             if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags"u8);
@@ -71,45 +66,25 @@ namespace Azure.ResourceManager.Sample
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(ProximityPlacementGroupType))
+            if (Optional.IsDefined(SourceVirtualMachine))
             {
-                writer.WritePropertyName("proximityPlacementGroupType"u8);
-                writer.WriteStringValue(ProximityPlacementGroupType.Value.ToString());
+                writer.WritePropertyName("sourceVirtualMachine"u8);
+                JsonSerializer.Serialize(writer, SourceVirtualMachine);
             }
-            if (options.Format != "W" && Optional.IsCollectionDefined(VirtualMachines))
+            if (Optional.IsDefined(StorageProfile))
             {
-                writer.WritePropertyName("virtualMachines"u8);
-                writer.WriteStartArray();
-                foreach (var item in VirtualMachines)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
+                writer.WritePropertyName("storageProfile"u8);
+                writer.WriteObjectValue(StorageProfile);
             }
-            if (options.Format != "W" && Optional.IsCollectionDefined(VirtualMachineScaleSets))
+            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
             {
-                writer.WritePropertyName("virtualMachineScaleSets"u8);
-                writer.WriteStartArray();
-                foreach (var item in VirtualMachineScaleSets)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
+                writer.WritePropertyName("provisioningState"u8);
+                writer.WriteStringValue(ProvisioningState);
             }
-            if (options.Format != "W" && Optional.IsCollectionDefined(AvailabilitySets))
+            if (Optional.IsDefined(HyperVGeneration))
             {
-                writer.WritePropertyName("availabilitySets"u8);
-                writer.WriteStartArray();
-                foreach (var item in AvailabilitySets)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            if (Optional.IsDefined(ColocationStatus))
-            {
-                writer.WritePropertyName("colocationStatus"u8);
-                writer.WriteObjectValue(ColocationStatus);
+                writer.WritePropertyName("hyperVGeneration"u8);
+                writer.WriteStringValue(HyperVGeneration.Value.ToString());
             }
             writer.WriteEndObject();
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -130,19 +105,19 @@ namespace Azure.ResourceManager.Sample
             writer.WriteEndObject();
         }
 
-        ProximityPlacementGroupData IJsonModel<ProximityPlacementGroupData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ImageData IJsonModel<ImageData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<ProximityPlacementGroupData>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<ImageData>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ProximityPlacementGroupData)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ImageData)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeProximityPlacementGroupData(document.RootElement, options);
+            return DeserializeImageData(document.RootElement, options);
         }
 
-        internal static ProximityPlacementGroupData DeserializeProximityPlacementGroupData(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static ImageData DeserializeImageData(JsonElement element, ModelReaderWriterOptions options = null)
         {
             options ??= new ModelReaderWriterOptions("W");
 
@@ -150,31 +125,20 @@ namespace Azure.ResourceManager.Sample
             {
                 return null;
             }
-            Optional<ExtendedLocation> extendedLocation = default;
             Optional<IDictionary<string, string>> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             Optional<SystemData> systemData = default;
-            Optional<ProximityPlacementGroupType> proximityPlacementGroupType = default;
-            Optional<IReadOnlyList<SubResourceWithColocationStatus>> virtualMachines = default;
-            Optional<IReadOnlyList<SubResourceWithColocationStatus>> virtualMachineScaleSets = default;
-            Optional<IReadOnlyList<SubResourceWithColocationStatus>> availabilitySets = default;
-            Optional<InstanceViewStatus> colocationStatus = default;
+            Optional<WritableSubResource> sourceVirtualMachine = default;
+            Optional<ImageStorageProfile> storageProfile = default;
+            Optional<string> provisioningState = default;
+            Optional<HyperVGeneration> hyperVGeneration = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("extendedLocation"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    extendedLocation = JsonSerializer.Deserialize<ExtendedLocation>(property.Value.GetRawText());
-                    continue;
-                }
                 if (property.NameEquals("tags"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -227,64 +191,36 @@ namespace Azure.ResourceManager.Sample
                     }
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.NameEquals("proximityPlacementGroupType"u8))
+                        if (property0.NameEquals("sourceVirtualMachine"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
                                 continue;
                             }
-                            proximityPlacementGroupType = new ProximityPlacementGroupType(property0.Value.GetString());
+                            sourceVirtualMachine = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.GetRawText());
                             continue;
                         }
-                        if (property0.NameEquals("virtualMachines"u8))
+                        if (property0.NameEquals("storageProfile"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
                                 continue;
                             }
-                            List<SubResourceWithColocationStatus> array = new List<SubResourceWithColocationStatus>();
-                            foreach (var item in property0.Value.EnumerateArray())
-                            {
-                                array.Add(SubResourceWithColocationStatus.DeserializeSubResourceWithColocationStatus(item));
-                            }
-                            virtualMachines = array;
+                            storageProfile = ImageStorageProfile.DeserializeImageStorageProfile(property0.Value, options);
                             continue;
                         }
-                        if (property0.NameEquals("virtualMachineScaleSets"u8))
+                        if (property0.NameEquals("provisioningState"u8))
                         {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                continue;
-                            }
-                            List<SubResourceWithColocationStatus> array = new List<SubResourceWithColocationStatus>();
-                            foreach (var item in property0.Value.EnumerateArray())
-                            {
-                                array.Add(SubResourceWithColocationStatus.DeserializeSubResourceWithColocationStatus(item));
-                            }
-                            virtualMachineScaleSets = array;
+                            provisioningState = property0.Value.GetString();
                             continue;
                         }
-                        if (property0.NameEquals("availabilitySets"u8))
+                        if (property0.NameEquals("hyperVGeneration"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
                                 continue;
                             }
-                            List<SubResourceWithColocationStatus> array = new List<SubResourceWithColocationStatus>();
-                            foreach (var item in property0.Value.EnumerateArray())
-                            {
-                                array.Add(SubResourceWithColocationStatus.DeserializeSubResourceWithColocationStatus(item));
-                            }
-                            availabilitySets = array;
-                            continue;
-                        }
-                        if (property0.NameEquals("colocationStatus"u8))
-                        {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                continue;
-                            }
-                            colocationStatus = InstanceViewStatus.DeserializeInstanceViewStatus(property0.Value);
+                            hyperVGeneration = new HyperVGeneration(property0.Value.GetString());
                             continue;
                         }
                     }
@@ -296,7 +232,7 @@ namespace Azure.ResourceManager.Sample
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ProximityPlacementGroupData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, extendedLocation, Optional.ToNullable(proximityPlacementGroupType), Optional.ToList(virtualMachines), Optional.ToList(virtualMachineScaleSets), Optional.ToList(availabilitySets), colocationStatus.Value, serializedAdditionalRawData);
+            return new ImageData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, sourceVirtualMachine, storageProfile.Value, provisioningState.Value, Optional.ToNullable(hyperVGeneration), serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -352,12 +288,6 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsDefined(ExtendedLocation))
-            {
-                builder.Append("  extendedLocation:");
-                AppendChildObject(builder, ExtendedLocation, options, 2, false);
-            }
-
             if (Optional.IsDefined(Id))
             {
                 builder.Append("  id:");
@@ -372,58 +302,36 @@ namespace Azure.ResourceManager.Sample
 
             builder.Append("  properties:");
             builder.AppendLine(" {");
-            if (Optional.IsDefined(ProximityPlacementGroupType))
+            if (Optional.IsDefined(SourceVirtualMachine))
             {
-                builder.Append("    proximityPlacementGroupType:");
-                builder.AppendLine($" '{ProximityPlacementGroupType.Value.ToString()}'");
+                builder.Append("    sourceVirtualMachine:");
+                AppendChildObject(builder, SourceVirtualMachine, options, 4, false);
             }
 
-            if (Optional.IsCollectionDefined(VirtualMachines))
+            if (Optional.IsDefined(StorageProfile))
             {
-                if (VirtualMachines.Any())
+                builder.Append("    storageProfile:");
+                AppendChildObject(builder, StorageProfile, options, 4, false);
+            }
+
+            if (Optional.IsDefined(ProvisioningState))
+            {
+                builder.Append("    provisioningState:");
+                if (ProvisioningState.Contains(Environment.NewLine))
                 {
-                    builder.Append("    virtualMachines:");
-                    builder.AppendLine(" [");
-                    foreach (var item in VirtualMachines)
-                    {
-                        AppendChildObject(builder, item, options, 6, true);
-                    }
-                    builder.AppendLine("    ]");
+                    builder.AppendLine(" '''");
+                    builder.AppendLine($"{ProvisioningState}'''");
+                }
+                else
+                {
+                    builder.AppendLine($" '{ProvisioningState}'");
                 }
             }
 
-            if (Optional.IsCollectionDefined(VirtualMachineScaleSets))
+            if (Optional.IsDefined(HyperVGeneration))
             {
-                if (VirtualMachineScaleSets.Any())
-                {
-                    builder.Append("    virtualMachineScaleSets:");
-                    builder.AppendLine(" [");
-                    foreach (var item in VirtualMachineScaleSets)
-                    {
-                        AppendChildObject(builder, item, options, 6, true);
-                    }
-                    builder.AppendLine("    ]");
-                }
-            }
-
-            if (Optional.IsCollectionDefined(AvailabilitySets))
-            {
-                if (AvailabilitySets.Any())
-                {
-                    builder.Append("    availabilitySets:");
-                    builder.AppendLine(" [");
-                    foreach (var item in AvailabilitySets)
-                    {
-                        AppendChildObject(builder, item, options, 6, true);
-                    }
-                    builder.AppendLine("    ]");
-                }
-            }
-
-            if (Optional.IsDefined(ColocationStatus))
-            {
-                builder.Append("    colocationStatus:");
-                AppendChildObject(builder, ColocationStatus, options, 4, false);
+                builder.Append("    hyperVGeneration:");
+                builder.AppendLine($" '{HyperVGeneration.Value.ToString()}'");
             }
 
             builder.AppendLine("  }");
@@ -466,9 +374,9 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        BinaryData IPersistableModel<ProximityPlacementGroupData>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ImageData>.Write(ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<ProximityPlacementGroupData>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<ImageData>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
@@ -477,28 +385,28 @@ namespace Azure.ResourceManager.Sample
                 case "bicep":
                     return SerializeBicep(options);
                 default:
-                    throw new FormatException($"The model {nameof(ProximityPlacementGroupData)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ImageData)} does not support '{options.Format}' format.");
             }
         }
 
-        ProximityPlacementGroupData IPersistableModel<ProximityPlacementGroupData>.Create(BinaryData data, ModelReaderWriterOptions options)
+        ImageData IPersistableModel<ImageData>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<ProximityPlacementGroupData>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<ImageData>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeProximityPlacementGroupData(document.RootElement, options);
+                        return DeserializeImageData(document.RootElement, options);
                     }
                 case "bicep":
                     throw new InvalidOperationException("Bicep deserialization is not supported for this type.");
                 default:
-                    throw new FormatException($"The model {nameof(ProximityPlacementGroupData)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ImageData)} does not support '{options.Format}' format.");
             }
         }
 
-        string IPersistableModel<ProximityPlacementGroupData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ImageData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

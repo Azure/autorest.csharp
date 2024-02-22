@@ -62,7 +62,10 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal virtual async Task<Response<OuterModel>> OperationAsync(string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await OperationAsync(name, context).ConfigureAwait(false);
@@ -87,7 +90,10 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal virtual Response<OuterModel> Operation(string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Operation(name, context);
@@ -126,7 +132,10 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <returns> The response returned from the service. </returns>
         internal virtual async Task<Response> OperationAsync(string name, RequestContext context)
         {
-            Argument.AssertNotNull(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("RelativeModelInOperation.Operation");
             scope.Start();
@@ -174,7 +183,10 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <returns> The response returned from the service. </returns>
         internal virtual Response Operation(string name, RequestContext context)
         {
-            Argument.AssertNotNull(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("RelativeModelInOperation.Operation");
             scope.Start();
@@ -205,7 +217,10 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <exception cref="ArgumentNullException"> <paramref name="kind"/> is null. </exception>
         internal virtual async Task<Response<AbstractModel>> DiscriminatorAsync(string kind, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(kind, nameof(kind));
+            if (kind == null)
+            {
+                throw new ArgumentNullException(nameof(kind));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await DiscriminatorAsync(kind, context).ConfigureAwait(false);
@@ -227,7 +242,10 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <exception cref="ArgumentNullException"> <paramref name="kind"/> is null. </exception>
         internal virtual Response<AbstractModel> Discriminator(string kind, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(kind, nameof(kind));
+            if (kind == null)
+            {
+                throw new ArgumentNullException(nameof(kind));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Discriminator(kind, context);
@@ -263,7 +281,10 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <returns> The response returned from the service. </returns>
         internal virtual async Task<Response> DiscriminatorAsync(string kind, RequestContext context)
         {
-            Argument.AssertNotNull(kind, nameof(kind));
+            if (kind == null)
+            {
+                throw new ArgumentNullException(nameof(kind));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("RelativeModelInOperation.Discriminator");
             scope.Start();
@@ -308,7 +329,10 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <returns> The response returned from the service. </returns>
         internal virtual Response Discriminator(string kind, RequestContext context)
         {
-            Argument.AssertNotNull(kind, nameof(kind));
+            if (kind == null)
+            {
+                throw new ArgumentNullException(nameof(kind));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("RelativeModelInOperation.Discriminator");
             scope.Start();

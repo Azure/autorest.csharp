@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace Authentication.ApiKey.Models
 {
@@ -51,7 +50,10 @@ namespace Authentication.ApiKey.Models
         /// <exception cref="ArgumentNullException"> <paramref name="error"/> is null. </exception>
         internal InvalidAuth(string error)
         {
-            Argument.AssertNotNull(error, nameof(error));
+            if (error == null)
+            {
+                throw new ArgumentNullException(nameof(error));
+            }
 
             Error = error;
         }

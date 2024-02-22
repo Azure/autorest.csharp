@@ -76,10 +76,10 @@ namespace ModelsTypeSpec.Models
             {
                 switch (discriminator.GetString())
                 {
-                    case "A": return DerivedWithDiscriminatorDefinedOnBase.DeserializeDerivedWithDiscriminatorDefinedOnBase(element);
+                    case "A": return DerivedWithDiscriminatorDefinedOnBase.DeserializeDerivedWithDiscriminatorDefinedOnBase(element, options);
                 }
             }
-            return UnknownBaseModelWithDiscriminatorDefinedOnBase.DeserializeUnknownBaseModelWithDiscriminatorDefinedOnBase(element);
+            return UnknownBaseModelWithDiscriminatorDefinedOnBase.DeserializeUnknownBaseModelWithDiscriminatorDefinedOnBase(element, options);
         }
 
         BinaryData IPersistableModel<BaseModelWithDiscriminatorDefinedOnBase>.Write(ModelReaderWriterOptions options)

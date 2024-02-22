@@ -73,10 +73,10 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             {
                 switch (discriminator.GetString())
                 {
-                    case "t-rex": return TRex.DeserializeTRex(element);
+                    case "t-rex": return TRex.DeserializeTRex(element, options);
                 }
             }
-            return UnknownDinosaur.DeserializeUnknownDinosaur(element);
+            return UnknownDinosaur.DeserializeUnknownDinosaur(element, options);
         }
 
         BinaryData IPersistableModel<Dinosaur>.Write(ModelReaderWriterOptions options)

@@ -173,7 +173,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 });
                 MgmtReport.Instance.ModelSection.Add(mi.FullName, mi);
 
-                WriteArmModel(project, model, serializeWriter, $"{name}.cs", $"Models/{name}.Serialization.cs");
+                WriteArmModel(project, model, serializeWriter, $"{name}.cs", $"{name}.Serialization.cs");
             }
 
             foreach (var resource in MgmtContext.Library.ArmResources)

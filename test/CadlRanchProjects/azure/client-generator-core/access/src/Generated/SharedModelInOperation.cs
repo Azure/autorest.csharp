@@ -50,7 +50,10 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <include file="Docs/SharedModelInOperation.xml" path="doc/members/member[@name='PublicAsync(string,CancellationToken)']/*" />
         public virtual async Task<Response<SharedModel>> PublicAsync(string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await PublicAsync(name, context).ConfigureAwait(false);
@@ -63,7 +66,10 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <include file="Docs/SharedModelInOperation.xml" path="doc/members/member[@name='Public(string,CancellationToken)']/*" />
         public virtual Response<SharedModel> Public(string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Public(name, context);
@@ -93,7 +99,10 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <include file="Docs/SharedModelInOperation.xml" path="doc/members/member[@name='PublicAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> PublicAsync(string name, RequestContext context)
         {
-            Argument.AssertNotNull(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("SharedModelInOperation.Public");
             scope.Start();
@@ -132,7 +141,10 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <include file="Docs/SharedModelInOperation.xml" path="doc/members/member[@name='Public(string,RequestContext)']/*" />
         public virtual Response Public(string name, RequestContext context)
         {
-            Argument.AssertNotNull(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("SharedModelInOperation.Public");
             scope.Start();
@@ -153,7 +165,10 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal virtual async Task<Response<SharedModel>> InternalAsync(string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await InternalAsync(name, context).ConfigureAwait(false);
@@ -165,7 +180,10 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal virtual Response<SharedModel> Internal(string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Internal(name, context);
@@ -194,7 +212,10 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <returns> The response returned from the service. </returns>
         internal virtual async Task<Response> InternalAsync(string name, RequestContext context)
         {
-            Argument.AssertNotNull(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("SharedModelInOperation.Internal");
             scope.Start();
@@ -232,7 +253,10 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <returns> The response returned from the service. </returns>
         internal virtual Response Internal(string name, RequestContext context)
         {
-            Argument.AssertNotNull(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("SharedModelInOperation.Internal");
             scope.Start();

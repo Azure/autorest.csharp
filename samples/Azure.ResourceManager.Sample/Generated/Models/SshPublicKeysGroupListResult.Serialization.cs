@@ -90,7 +90,7 @@ namespace Azure.ResourceManager.Sample.Models
                     List<SshPublicKeyData> array = new List<SshPublicKeyData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(SshPublicKeyData.DeserializeSshPublicKeyData(item));
+                        array.Add(SshPublicKeyData.DeserializeSshPublicKeyData(item, options));
                     }
                     value = array;
                     continue;

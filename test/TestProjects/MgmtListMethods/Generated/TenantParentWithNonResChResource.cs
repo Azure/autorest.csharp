@@ -198,7 +198,10 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<TenantParentWithNonResChResource>> UpdateAsync(WaitUntil waitUntil, TenantParentWithNonResChData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(data, nameof(data));
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _tenantParentWithNonResChClientDiagnostics.CreateScope("TenantParentWithNonResChResource.Update");
             scope.Start();
@@ -244,7 +247,10 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<TenantParentWithNonResChResource> Update(WaitUntil waitUntil, TenantParentWithNonResChData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(data, nameof(data));
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _tenantParentWithNonResChClientDiagnostics.CreateScope("TenantParentWithNonResChResource.Update");
             scope.Start();
@@ -348,8 +354,14 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
         public virtual async Task<Response<TenantParentWithNonResChResource>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(key, nameof(key));
-            Argument.AssertNotNull(value, nameof(value));
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
 
             using var scope = _tenantParentWithNonResChClientDiagnostics.CreateScope("TenantParentWithNonResChResource.AddTag");
             scope.Start();
@@ -405,8 +417,14 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
         public virtual Response<TenantParentWithNonResChResource> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(key, nameof(key));
-            Argument.AssertNotNull(value, nameof(value));
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
 
             using var scope = _tenantParentWithNonResChClientDiagnostics.CreateScope("TenantParentWithNonResChResource.AddTag");
             scope.Start();
@@ -461,7 +479,10 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
         public virtual async Task<Response<TenantParentWithNonResChResource>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(tags, nameof(tags));
+            if (tags == null)
+            {
+                throw new ArgumentNullException(nameof(tags));
+            }
 
             using var scope = _tenantParentWithNonResChClientDiagnostics.CreateScope("TenantParentWithNonResChResource.SetTags");
             scope.Start();
@@ -517,7 +538,10 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
         public virtual Response<TenantParentWithNonResChResource> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(tags, nameof(tags));
+            if (tags == null)
+            {
+                throw new ArgumentNullException(nameof(tags));
+            }
 
             using var scope = _tenantParentWithNonResChClientDiagnostics.CreateScope("TenantParentWithNonResChResource.SetTags");
             scope.Start();
@@ -573,7 +597,10 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public virtual async Task<Response<TenantParentWithNonResChResource>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(key, nameof(key));
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
 
             using var scope = _tenantParentWithNonResChClientDiagnostics.CreateScope("TenantParentWithNonResChResource.RemoveTag");
             scope.Start();
@@ -628,7 +655,10 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public virtual Response<TenantParentWithNonResChResource> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(key, nameof(key));
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
 
             using var scope = _tenantParentWithNonResChClientDiagnostics.CreateScope("TenantParentWithNonResChResource.RemoveTag");
             scope.Start();

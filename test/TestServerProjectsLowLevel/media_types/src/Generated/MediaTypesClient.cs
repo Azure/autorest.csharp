@@ -47,8 +47,14 @@ namespace media_types_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public MediaTypesClient(Uri endpoint, AzureKeyCredential credential, MediaTypesClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
-            Argument.AssertNotNull(credential, nameof(credential));
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
+            if (credential == null)
+            {
+                throw new ArgumentNullException(nameof(credential));
+            }
             options ??= new MediaTypesClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -266,7 +272,10 @@ namespace media_types_LowLevel
         /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='BinaryBodyWithTwoContentTypesAsync(RequestContent,ContentType,RequestContext)']/*" />
         public virtual async Task<Response> BinaryBodyWithTwoContentTypesAsync(RequestContent content, ContentType contentType, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.BinaryBodyWithTwoContentTypes");
             scope.Start();
@@ -301,7 +310,10 @@ namespace media_types_LowLevel
         /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='BinaryBodyWithTwoContentTypes(RequestContent,ContentType,RequestContext)']/*" />
         public virtual Response BinaryBodyWithTwoContentTypes(RequestContent content, ContentType contentType, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.BinaryBodyWithTwoContentTypes");
             scope.Start();
@@ -336,7 +348,10 @@ namespace media_types_LowLevel
         /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='BinaryBodyWithThreeContentTypesAsync(RequestContent,ContentType,RequestContext)']/*" />
         public virtual async Task<Response> BinaryBodyWithThreeContentTypesAsync(RequestContent content, ContentType contentType, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.BinaryBodyWithThreeContentTypes");
             scope.Start();
@@ -371,7 +386,10 @@ namespace media_types_LowLevel
         /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='BinaryBodyWithThreeContentTypes(RequestContent,ContentType,RequestContext)']/*" />
         public virtual Response BinaryBodyWithThreeContentTypes(RequestContent content, ContentType contentType, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.BinaryBodyWithThreeContentTypes");
             scope.Start();
@@ -406,7 +424,10 @@ namespace media_types_LowLevel
         /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='BodyThreeTypesAsync(RequestContent,ContentType,RequestContext)']/*" />
         public virtual async Task<Response> BodyThreeTypesAsync(RequestContent content, ContentType contentType, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.BodyThreeTypes");
             scope.Start();
@@ -441,7 +462,10 @@ namespace media_types_LowLevel
         /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='BodyThreeTypes(RequestContent,ContentType,RequestContext)']/*" />
         public virtual Response BodyThreeTypes(RequestContent content, ContentType contentType, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.BodyThreeTypes");
             scope.Start();
@@ -476,7 +500,10 @@ namespace media_types_LowLevel
         /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='PutTextAndJsonBodyAsync(RequestContent,ContentType,RequestContext)']/*" />
         public virtual async Task<Response> PutTextAndJsonBodyAsync(RequestContent content, ContentType contentType, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.PutTextAndJsonBody");
             scope.Start();
@@ -511,7 +538,10 @@ namespace media_types_LowLevel
         /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='PutTextAndJsonBody(RequestContent,ContentType,RequestContext)']/*" />
         public virtual Response PutTextAndJsonBody(RequestContent content, ContentType contentType, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.PutTextAndJsonBody");
             scope.Start();

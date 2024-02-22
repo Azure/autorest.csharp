@@ -83,10 +83,10 @@ namespace body_complex.Models
             {
                 switch (discriminator.GetString())
                 {
-                    case "Kind1": return MyDerivedType.DeserializeMyDerivedType(element);
+                    case "Kind1": return MyDerivedType.DeserializeMyDerivedType(element, options);
                 }
             }
-            return UnknownMyBaseType.DeserializeUnknownMyBaseType(element);
+            return UnknownMyBaseType.DeserializeUnknownMyBaseType(element, options);
         }
 
         BinaryData IPersistableModel<MyBaseType>.Write(ModelReaderWriterOptions options)

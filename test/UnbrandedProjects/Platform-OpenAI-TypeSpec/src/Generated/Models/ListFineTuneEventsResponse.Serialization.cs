@@ -86,7 +86,7 @@ namespace OpenAI.Models
                     List<FineTuneEvent> array = new List<FineTuneEvent>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(FineTuneEvent.DeserializeFineTuneEvent(item));
+                        array.Add(FineTuneEvent.DeserializeFineTuneEvent(item, options));
                     }
                     data = array;
                     continue;

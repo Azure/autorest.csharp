@@ -105,7 +105,7 @@ namespace OpenAI.Models
                     {
                         continue;
                     }
-                    functionCall = ChatCompletionResponseMessageFunctionCall.DeserializeChatCompletionResponseMessageFunctionCall(property.Value);
+                    functionCall = ChatCompletionResponseMessageFunctionCall.DeserializeChatCompletionResponseMessageFunctionCall(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

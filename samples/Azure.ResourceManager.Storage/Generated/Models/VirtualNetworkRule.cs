@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using Azure.Core;
 
 namespace Azure.ResourceManager.Storage.Models
 {
@@ -18,7 +17,10 @@ namespace Azure.ResourceManager.Storage.Models
         /// <exception cref="ArgumentNullException"> <paramref name="virtualNetworkResourceId"/> is null. </exception>
         public VirtualNetworkRule(string virtualNetworkResourceId)
         {
-            Argument.AssertNotNull(virtualNetworkResourceId, nameof(virtualNetworkResourceId));
+            if (virtualNetworkResourceId == null)
+            {
+                throw new ArgumentNullException(nameof(virtualNetworkResourceId));
+            }
 
             VirtualNetworkResourceId = virtualNetworkResourceId;
         }

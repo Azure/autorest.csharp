@@ -36,7 +36,10 @@ namespace _Type._Array
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public ArrayClient(Uri endpoint, ArrayClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
             options ??= new ArrayClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace _Type.Property.Nullable.Models
 {
@@ -51,7 +50,10 @@ namespace _Type.Property.Nullable.Models
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
         internal InnerModel(string property)
         {
-            Argument.AssertNotNull(property, nameof(property));
+            if (property == null)
+            {
+                throw new ArgumentNullException(nameof(property));
+            }
 
             Property = property;
         }

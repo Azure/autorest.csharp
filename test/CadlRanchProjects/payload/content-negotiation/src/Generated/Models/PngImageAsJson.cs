@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace Payload.ContentNegotiation.Models
 {
@@ -51,7 +50,10 @@ namespace Payload.ContentNegotiation.Models
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         internal PngImageAsJson(BinaryData content)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             Content = content;
         }

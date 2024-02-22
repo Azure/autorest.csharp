@@ -51,7 +51,10 @@ namespace _Specs_.Azure.Core.Basic.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public User(string name)
         {
-            Argument.AssertNotNull(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
             Name = name;
             Orders = new ChangeTrackingList<UserOrder>();

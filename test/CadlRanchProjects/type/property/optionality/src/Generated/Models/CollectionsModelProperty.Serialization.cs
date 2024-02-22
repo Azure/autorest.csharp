@@ -89,7 +89,7 @@ namespace _Type.Property.Optionality.Models
                     List<StringProperty> array = new List<StringProperty>();
                     foreach (var item in property0.Value.EnumerateArray())
                     {
-                        array.Add(StringProperty.DeserializeStringProperty(item));
+                        array.Add(StringProperty.DeserializeStringProperty(item, options));
                     }
                     property = array;
                     continue;

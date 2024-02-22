@@ -83,7 +83,14 @@ namespace MgmtExactMatchFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual async Task<ArmOperation<CustomModel2Resource>> CreateOrUpdateAsync(WaitUntil waitUntil, string name, string foo = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (name.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
+            }
 
             using var scope = _customModel2ClientDiagnostics.CreateScope("CustomModel2Collection.CreateOrUpdate");
             scope.Start();
@@ -131,7 +138,14 @@ namespace MgmtExactMatchFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual ArmOperation<CustomModel2Resource> CreateOrUpdate(WaitUntil waitUntil, string name, string foo = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (name.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
+            }
 
             using var scope = _customModel2ClientDiagnostics.CreateScope("CustomModel2Collection.CreateOrUpdate");
             scope.Start();
@@ -177,7 +191,14 @@ namespace MgmtExactMatchFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual async Task<Response<CustomModel2Resource>> GetAsync(string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (name.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
+            }
 
             using var scope = _customModel2ClientDiagnostics.CreateScope("CustomModel2Collection.Get");
             scope.Start();
@@ -222,7 +243,14 @@ namespace MgmtExactMatchFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual Response<CustomModel2Resource> Get(string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (name.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
+            }
 
             using var scope = _customModel2ClientDiagnostics.CreateScope("CustomModel2Collection.Get");
             scope.Start();
@@ -325,7 +353,14 @@ namespace MgmtExactMatchFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual async Task<Response<bool>> ExistsAsync(string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (name.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
+            }
 
             using var scope = _customModel2ClientDiagnostics.CreateScope("CustomModel2Collection.Exists");
             scope.Start();
@@ -368,7 +403,14 @@ namespace MgmtExactMatchFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual Response<bool> Exists(string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (name.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
+            }
 
             using var scope = _customModel2ClientDiagnostics.CreateScope("CustomModel2Collection.Exists");
             scope.Start();
@@ -411,7 +453,14 @@ namespace MgmtExactMatchFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual async Task<NullableResponse<CustomModel2Resource>> GetIfExistsAsync(string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (name.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
+            }
 
             using var scope = _customModel2ClientDiagnostics.CreateScope("CustomModel2Collection.GetIfExists");
             scope.Start();
@@ -456,7 +505,14 @@ namespace MgmtExactMatchFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual NullableResponse<CustomModel2Resource> GetIfExists(string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (name.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
+            }
 
             using var scope = _customModel2ClientDiagnostics.CreateScope("CustomModel2Collection.GetIfExists");
             scope.Start();

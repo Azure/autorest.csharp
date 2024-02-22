@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace _Type.Model.Usage.Models
 {
@@ -51,7 +50,10 @@ namespace _Type.Model.Usage.Models
         /// <exception cref="ArgumentNullException"> <paramref name="requiredProp"/> is null. </exception>
         public InputRecord(string requiredProp)
         {
-            Argument.AssertNotNull(requiredProp, nameof(requiredProp));
+            if (requiredProp == null)
+            {
+                throw new ArgumentNullException(nameof(requiredProp));
+            }
 
             RequiredProp = requiredProp;
         }

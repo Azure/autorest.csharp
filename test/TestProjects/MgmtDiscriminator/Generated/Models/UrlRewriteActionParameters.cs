@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace MgmtDiscriminator.Models
 {
@@ -53,8 +52,14 @@ namespace MgmtDiscriminator.Models
         /// <exception cref="ArgumentNullException"> <paramref name="sourcePattern"/> or <paramref name="destination"/> is null. </exception>
         public UrlRewriteActionParameters(UrlRewriteActionParametersTypeName typeName, string sourcePattern, string destination)
         {
-            Argument.AssertNotNull(sourcePattern, nameof(sourcePattern));
-            Argument.AssertNotNull(destination, nameof(destination));
+            if (sourcePattern == null)
+            {
+                throw new ArgumentNullException(nameof(sourcePattern));
+            }
+            if (destination == null)
+            {
+                throw new ArgumentNullException(nameof(destination));
+            }
 
             TypeName = typeName;
             SourcePattern = sourcePattern;

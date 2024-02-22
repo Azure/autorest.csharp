@@ -36,7 +36,10 @@ namespace _Type.Property.Optionality
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public OptionalClient(Uri endpoint, OptionalClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
             options ??= new OptionalClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

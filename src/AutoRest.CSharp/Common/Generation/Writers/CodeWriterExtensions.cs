@@ -364,7 +364,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 return writer.Line($"{parameter.Name:I} ??= {parameter.Initializer};");
             }
 
-            var validationStatement = Snippets.Extensible.Argument.ValidateParameter(parameter);
+            var validationStatement = Snippets.Argument.ValidateParameter(parameter);
 
             writer.WriteMethodBodyStatement(validationStatement);
 
@@ -487,7 +487,7 @@ namespace AutoRest.CSharp.Generation.Writers
             switch (serialization)
             {
                 case JsonSerialization jsonSerialization:
-                    writer.WriteMethodBodyStatement(JsonSerializationMethodsBuilder.BuildDeserializationForMethods(jsonSerialization, async, variable, streamExpression, type is not null && type.Equals(typeof(BinaryData))));
+                    writer.WriteMethodBodyStatement(JsonSerializationMethodsBuilder.BuildDeserializationForMethods(jsonSerialization, async, variable, streamExpression, type is not null && type.Equals(typeof(BinaryData)), null));
                     break;
                 case XmlElementSerialization xmlSerialization:
                     writer.WriteMethodBodyStatement(XmlSerializationMethodsBuilder.BuildDeserializationForMethods(xmlSerialization, variable, streamExpression));

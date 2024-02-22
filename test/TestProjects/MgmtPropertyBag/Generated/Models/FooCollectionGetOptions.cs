@@ -7,7 +7,6 @@
 
 using System;
 using Azure;
-using Azure.Core;
 
 namespace MgmtPropertyBag.Models
 {
@@ -19,7 +18,10 @@ namespace MgmtPropertyBag.Models
         /// <exception cref="ArgumentNullException"> <paramref name="fooName"/> is null. </exception>
         public FooCollectionGetOptions(string fooName)
         {
-            Argument.AssertNotNull(fooName, nameof(fooName));
+            if (fooName == null)
+            {
+                throw new ArgumentNullException(nameof(fooName));
+            }
 
             FooName = fooName;
         }
