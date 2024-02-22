@@ -239,7 +239,7 @@ namespace OpenAI.Models
                     List<ChatCompletionRequestMessage> array = new List<ChatCompletionRequestMessage>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ChatCompletionRequestMessage.DeserializeChatCompletionRequestMessage(item));
+                        array.Add(ChatCompletionRequestMessage.DeserializeChatCompletionRequestMessage(item, options));
                     }
                     messages = array;
                     continue;
@@ -253,7 +253,7 @@ namespace OpenAI.Models
                     List<ChatCompletionFunctions> array = new List<ChatCompletionFunctions>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ChatCompletionFunctions.DeserializeChatCompletionFunctions(item));
+                        array.Add(ChatCompletionFunctions.DeserializeChatCompletionFunctions(item, options));
                     }
                     functions = array;
                     continue;

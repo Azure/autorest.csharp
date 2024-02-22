@@ -347,7 +347,7 @@ namespace UnbrandedTypeSpec.Models
                 }
                 if (property.NameEquals("requiredModel"u8))
                 {
-                    requiredModel = Thing.DeserializeThing(property.Value);
+                    requiredModel = Thing.DeserializeThing(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("intExtensibleEnum"u8))
@@ -544,7 +544,7 @@ namespace UnbrandedTypeSpec.Models
                 }
                 if (property.NameEquals("modelWithRequiredNullable"u8))
                 {
-                    modelWithRequiredNullable = ModelWithRequiredNullableProperties.DeserializeModelWithRequiredNullableProperties(property.Value);
+                    modelWithRequiredNullable = ModelWithRequiredNullableProperties.DeserializeModelWithRequiredNullableProperties(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

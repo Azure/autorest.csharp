@@ -101,7 +101,7 @@ namespace OpenAI.Models
                         logprobs = null;
                         continue;
                     }
-                    logprobs = CreateCompletionResponseChoiceLogprobs.DeserializeCreateCompletionResponseChoiceLogprobs(property.Value);
+                    logprobs = CreateCompletionResponseChoiceLogprobs.DeserializeCreateCompletionResponseChoiceLogprobs(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("finish_reason"u8))

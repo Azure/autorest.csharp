@@ -85,7 +85,7 @@ namespace xms_error_responses.Models
             {
                 switch (discriminator.GetString())
                 {
-                    case "PetHungryOrThirstyError": return PetHungryOrThirstyError.DeserializePetHungryOrThirstyError(element);
+                    case "PetHungryOrThirstyError": return PetHungryOrThirstyError.DeserializePetHungryOrThirstyError(element, options);
                 }
             }
             Optional<string> reason = default;

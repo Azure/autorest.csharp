@@ -75,10 +75,10 @@ namespace body_complex.Models
             {
                 switch (discriminator.GetString())
                 {
-                    case "DotSalmon": return DotSalmon.DeserializeDotSalmon(element);
+                    case "DotSalmon": return DotSalmon.DeserializeDotSalmon(element, options);
                 }
             }
-            return UnknownDotFish.DeserializeUnknownDotFish(element);
+            return UnknownDotFish.DeserializeUnknownDotFish(element, options);
         }
 
         BinaryData IPersistableModel<DotFish>.Write(ModelReaderWriterOptions options)

@@ -85,7 +85,7 @@ namespace FirstTestTypeSpec.Models
                     List<BaseModel> array = new List<BaseModel>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DeserializeBaseModel(item));
+                        array.Add(DeserializeBaseModel(item, options));
                     }
                     parent = array;
                     continue;

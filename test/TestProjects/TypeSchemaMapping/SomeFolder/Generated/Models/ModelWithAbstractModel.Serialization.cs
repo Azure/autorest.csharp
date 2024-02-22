@@ -80,7 +80,7 @@ namespace TypeSchemaMapping.Models
                     {
                         continue;
                     }
-                    abstractModelProperty = AbstractModel.DeserializeAbstractModel(property.Value);
+                    abstractModelProperty = AbstractModel.DeserializeAbstractModel(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

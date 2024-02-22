@@ -97,7 +97,7 @@ namespace body_complex.Models
             {
                 switch (discriminator.GetString())
                 {
-                    case "smart_salmon": return SmartSalmon.DeserializeSmartSalmon(element);
+                    case "smart_salmon": return SmartSalmon.DeserializeSmartSalmon(element, options);
                 }
             }
             Optional<string> location = default;
@@ -148,7 +148,7 @@ namespace body_complex.Models
                     List<Fish> array = new List<Fish>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DeserializeFish(item));
+                        array.Add(DeserializeFish(item, options));
                     }
                     siblings = array;
                     continue;
