@@ -162,16 +162,16 @@ namespace Payload.MultiPart.Models
                     {
                         string boundary = Guid.NewGuid().ToString();
                         using MultipartFormData content = new MultipartFormData(boundary);
-                        content.Add(BinaryData.FromString(Id), "id");
-                        content.Add(BinaryData.FromObjectAsJson(Address), "address");
-                        content.Add(ProfileImage.WithMediaType("application/octet-stream"), "profileImage", "profileImage.wav", null);
+                        content.Add(new MultipartBodyPart(BinaryData.FromString(Id), new Dictionary<string, string>()), "id");
+                        content.Add(new MultipartBodyPart(BinaryData.FromObjectAsJson(Address), new Dictionary<string, string>()), "address");
+                        content.Add(new MultipartBodyPart(ProfileImage.WithMediaType("application/octet-stream"), new Dictionary<string, string>()), "profileImage", "profileImage.wav");
                         foreach (Address item in PreviousAddresses)
                         {
-                            content.Add(BinaryData.FromObjectAsJson(item), "previousAddresses");
+                            content.Add(new MultipartBodyPart(BinaryData.FromObjectAsJson(item), new Dictionary<string, string>()), "previousAddresses");
                         }
                         foreach (BinaryData item in Pictures)
                         {
-                            content.Add(item.WithMediaType("application/octet-stream"), "pictures", "pictures.wav", null);
+                            content.Add(new MultipartBodyPart(item.WithMediaType("application/octet-stream"), new Dictionary<string, string>()), "pictures", "pictures.wav");
                         }
                         BinaryData binaryData = ModelReaderWriter.Write(content, new ModelReaderWriterOptions("MPFD"));
                         return binaryData;
@@ -213,22 +213,22 @@ namespace Payload.MultiPart.Models
                             }
                             if (propertyName == "address")
                             {
-                                address = part.Content.ToObjectFromJson<Address>();
+                                address = (part.Content as BinaryData).ToObjectFromJson<Address>();
                                 continue;
                             }
                             if (propertyName == "profileImage")
                             {
-                                profileImage = part.Content;
+                                profileImage = (part.Content as BinaryData);
                                 continue;
                             }
                             if (propertyName == "previousAddresses")
                             {
-                                previousAddresses = part.Content.ToObjectFromJson<IList<Address>>();
+                                previousAddresses = (part.Content as BinaryData).ToObjectFromJson<IList<Address>>();
                                 continue;
                             }
                             if (propertyName == "pictures")
                             {
-                                pictures = part.Content.ToObjectFromJson<IList<BinaryData>>();
+                                pictures = (part.Content as BinaryData).ToObjectFromJson<IList<BinaryData>>();
                                 continue;
                             }
                         }

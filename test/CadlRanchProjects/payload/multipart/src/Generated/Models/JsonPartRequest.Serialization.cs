@@ -106,8 +106,8 @@ namespace Payload.MultiPart.Models
                     {
                         string boundary = Guid.NewGuid().ToString();
                         using MultipartFormData content = new MultipartFormData(boundary);
-                        content.Add(BinaryData.FromObjectAsJson(Address), "address");
-                        content.Add(ProfileImage.WithMediaType("application/octet-stream"), "profileImage", "profileImage.wav", null);
+                        content.Add(new MultipartBodyPart(BinaryData.FromObjectAsJson(Address), new Dictionary<string, string>()), "address");
+                        content.Add(new MultipartBodyPart(ProfileImage.WithMediaType("application/octet-stream"), new Dictionary<string, string>()), "profileImage", "profileImage.wav");
                         BinaryData binaryData = ModelReaderWriter.Write(content, new ModelReaderWriterOptions("MPFD"));
                         return binaryData;
                     }
@@ -140,12 +140,12 @@ namespace Payload.MultiPart.Models
                             string propertyName = part.Name;
                             if (propertyName == "address")
                             {
-                                address = part.Content.ToObjectFromJson<Address>();
+                                address = (part.Content as BinaryData).ToObjectFromJson<Address>();
                                 continue;
                             }
                             if (propertyName == "profileImage")
                             {
-                                profileImage = part.Content;
+                                profileImage = (part.Content as BinaryData);
                                 continue;
                             }
                         }
