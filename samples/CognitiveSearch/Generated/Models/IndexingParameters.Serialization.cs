@@ -59,7 +59,7 @@ namespace CognitiveSearch.Models
             Optional<int> batchSize = default;
             Optional<int> maxFailedItems = default;
             Optional<int> maxFailedItemsPerBatch = default;
-            Optional<IDictionary<string, object>> configuration = default;
+            IDictionary<string, object> configuration = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("batchSize"u8))
@@ -111,7 +111,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new IndexingParameters(Optional.ToNullable(batchSize), Optional.ToNullable(maxFailedItems), Optional.ToNullable(maxFailedItemsPerBatch), Optional.ToDictionary(configuration));
+            return new IndexingParameters(Optional.ToNullable(batchSize), Optional.ToNullable(maxFailedItems), Optional.ToNullable(maxFailedItemsPerBatch), configuration ?? new ChangeTrackingDictionary<string, object>());
         }
     }
 }

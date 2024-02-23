@@ -130,7 +130,7 @@ namespace Azure.Network.Management.Interface.Models
             Optional<string> name = default;
             Optional<string> type = default;
             Optional<string> location = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             IList<FrontendIPConfiguration> frontendIPConfigurations = default;
             IList<BackendAddressPool> backendAddressPools = default;
             IList<LoadBalancingRule> loadBalancingRules = default;
@@ -315,7 +315,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new LoadBalancer(id.Value, name.Value, type.Value, location.Value, Optional.ToDictionary(tags), sku.Value, etag.Value, frontendIPConfigurations ?? new ChangeTrackingList<FrontendIPConfiguration>(), backendAddressPools ?? new ChangeTrackingList<BackendAddressPool>(), loadBalancingRules ?? new ChangeTrackingList<LoadBalancingRule>(), probes ?? new ChangeTrackingList<Probe>(), inboundNatRules ?? new ChangeTrackingList<InboundNatRule>(), inboundNatPools ?? new ChangeTrackingList<InboundNatPool>(), outboundRules ?? new ChangeTrackingList<OutboundRule>(), resourceGuid.Value, Optional.ToNullable(provisioningState));
+            return new LoadBalancer(id.Value, name.Value, type.Value, location.Value, tags ?? new ChangeTrackingDictionary<string, string>(), sku.Value, etag.Value, frontendIPConfigurations ?? new ChangeTrackingList<FrontendIPConfiguration>(), backendAddressPools ?? new ChangeTrackingList<BackendAddressPool>(), loadBalancingRules ?? new ChangeTrackingList<LoadBalancingRule>(), probes ?? new ChangeTrackingList<Probe>(), inboundNatRules ?? new ChangeTrackingList<InboundNatRule>(), inboundNatPools ?? new ChangeTrackingList<InboundNatPool>(), outboundRules ?? new ChangeTrackingList<OutboundRule>(), resourceGuid.Value, Optional.ToNullable(provisioningState));
         }
     }
 }

@@ -149,8 +149,8 @@ namespace ModelsTypeSpec.Models
             IReadOnlyDictionary<string, RecordItem> requiredModelRecord = default;
             IReadOnlyList<CollectionItem> optionalList = default;
             IReadOnlyList<CollectionItem> optionalNullableList = default;
-            Optional<IReadOnlyDictionary<string, RecordItem>> optionalRecord = default;
-            Optional<IReadOnlyDictionary<string, RecordItem>> optionalNullableRecord = default;
+            IReadOnlyDictionary<string, RecordItem> optionalRecord = default;
+            IReadOnlyDictionary<string, RecordItem> optionalNullableRecord = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -252,7 +252,7 @@ namespace ModelsTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new OutputModel(requiredString, requiredInt, requiredModel, requiredList, requiredModelRecord, optionalList ?? new ChangeTrackingList<CollectionItem>(), optionalNullableList ?? new ChangeTrackingList<CollectionItem>(), Optional.ToDictionary(optionalRecord), Optional.ToDictionary(optionalNullableRecord), serializedAdditionalRawData);
+            return new OutputModel(requiredString, requiredInt, requiredModel, requiredList, requiredModelRecord, optionalList ?? new ChangeTrackingList<CollectionItem>(), optionalNullableList ?? new ChangeTrackingList<CollectionItem>(), optionalRecord ?? new ChangeTrackingDictionary<string, RecordItem>(), optionalNullableRecord ?? new ChangeTrackingDictionary<string, RecordItem>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<OutputModel>.Write(ModelReaderWriterOptions options)

@@ -43,7 +43,7 @@ namespace MgmtPropertyChooser.Models
                 return null;
             }
             Optional<ResourceIdentityType> type = default;
-            Optional<IDictionary<string, UserAssignedIdentity>> userAssignedIdentities = default;
+            IDictionary<string, UserAssignedIdentity> userAssignedIdentities = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("type"u8))
@@ -70,7 +70,7 @@ namespace MgmtPropertyChooser.Models
                     continue;
                 }
             }
-            return new IdentityWithNoSystemIdentity(Optional.ToNullable(type), Optional.ToDictionary(userAssignedIdentities));
+            return new IdentityWithNoSystemIdentity(Optional.ToNullable(type), userAssignedIdentities ?? new ChangeTrackingDictionary<string, UserAssignedIdentity>());
         }
     }
 }

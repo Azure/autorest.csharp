@@ -152,7 +152,7 @@ namespace MgmtExpandResourceTypes
             string name = default;
             ResourceType type = default;
             Optional<SystemData> systemData = default;
-            Optional<IDictionary<string, string>> metadata = default;
+            IDictionary<string, string> metadata = default;
             Optional<long> ttl = default;
             Optional<string> fqdn = default;
             Optional<string> provisioningState = default;
@@ -383,7 +383,7 @@ namespace MgmtExpandResourceTypes
                     continue;
                 }
             }
-            return new RecordSetData(id, name, type, systemData.Value, etag.Value, Optional.ToDictionary(metadata), Optional.ToNullable(ttl), fqdn.Value, provisioningState.Value, targetResource, aRecords ?? new ChangeTrackingList<ARecord>(), aaaaRecords ?? new ChangeTrackingList<AaaaRecord>(), mxRecords ?? new ChangeTrackingList<MxRecord>(), nsRecords ?? new ChangeTrackingList<NsRecord>(), ptrRecords ?? new ChangeTrackingList<PtrRecord>(), srvRecords ?? new ChangeTrackingList<SrvRecord>(), txtRecords ?? new ChangeTrackingList<TxtRecord>(), cnameRecord.Value, soaRecord.Value, caaRecords ?? new ChangeTrackingList<CaaRecord>());
+            return new RecordSetData(id, name, type, systemData.Value, etag.Value, metadata ?? new ChangeTrackingDictionary<string, string>(), Optional.ToNullable(ttl), fqdn.Value, provisioningState.Value, targetResource, aRecords ?? new ChangeTrackingList<ARecord>(), aaaaRecords ?? new ChangeTrackingList<AaaaRecord>(), mxRecords ?? new ChangeTrackingList<MxRecord>(), nsRecords ?? new ChangeTrackingList<NsRecord>(), ptrRecords ?? new ChangeTrackingList<PtrRecord>(), srvRecords ?? new ChangeTrackingList<SrvRecord>(), txtRecords ?? new ChangeTrackingList<TxtRecord>(), cnameRecord.Value, soaRecord.Value, caaRecords ?? new ChangeTrackingList<CaaRecord>());
         }
     }
 }

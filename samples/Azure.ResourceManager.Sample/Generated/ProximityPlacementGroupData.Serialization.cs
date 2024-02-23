@@ -151,7 +151,7 @@ namespace Azure.ResourceManager.Sample
                 return null;
             }
             Optional<ExtendedLocation> extendedLocation = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -296,7 +296,7 @@ namespace Azure.ResourceManager.Sample
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ProximityPlacementGroupData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, extendedLocation, Optional.ToNullable(proximityPlacementGroupType), virtualMachines ?? new ChangeTrackingList<SubResourceWithColocationStatus>(), virtualMachineScaleSets ?? new ChangeTrackingList<SubResourceWithColocationStatus>(), availabilitySets ?? new ChangeTrackingList<SubResourceWithColocationStatus>(), colocationStatus.Value, serializedAdditionalRawData);
+            return new ProximityPlacementGroupData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, extendedLocation, Optional.ToNullable(proximityPlacementGroupType), virtualMachines ?? new ChangeTrackingList<SubResourceWithColocationStatus>(), virtualMachineScaleSets ?? new ChangeTrackingList<SubResourceWithColocationStatus>(), availabilitySets ?? new ChangeTrackingList<SubResourceWithColocationStatus>(), colocationStatus.Value, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

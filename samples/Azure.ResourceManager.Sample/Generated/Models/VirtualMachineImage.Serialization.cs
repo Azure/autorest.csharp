@@ -126,7 +126,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
             string name = default;
             AzureLocation location = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             Optional<string> id = default;
             Optional<PurchasePlan> plan = default;
             Optional<OSDiskImage> osDiskImage = default;
@@ -244,7 +244,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineImage(id.Value, serializedAdditionalRawData, name, location, Optional.ToDictionary(tags), plan.Value, osDiskImage.Value, dataDiskImages ?? new ChangeTrackingList<DataDiskImage>(), automaticOSUpgradeProperties.Value, Optional.ToNullable(hyperVGeneration), disallowed.Value);
+            return new VirtualMachineImage(id.Value, serializedAdditionalRawData, name, location, tags ?? new ChangeTrackingDictionary<string, string>(), plan.Value, osDiskImage.Value, dataDiskImages ?? new ChangeTrackingList<DataDiskImage>(), automaticOSUpgradeProperties.Value, Optional.ToNullable(hyperVGeneration), disallowed.Value);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

@@ -21,7 +21,7 @@ namespace CognitiveSearch.Models
             }
             Optional<long> odataCount = default;
             Optional<double> searchCoverage = default;
-            Optional<IReadOnlyDictionary<string, IList<FacetResult>>> searchFacets = default;
+            IReadOnlyDictionary<string, IList<FacetResult>> searchFacets = default;
             Optional<SearchRequest> searchNextPageParameters = default;
             IReadOnlyList<SearchResult> value = default;
             Optional<string> odataNextLink = default;
@@ -96,7 +96,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new SearchDocumentsResult(Optional.ToNullable(odataCount), Optional.ToNullable(searchCoverage), Optional.ToDictionary(searchFacets), searchNextPageParameters.Value, value, odataNextLink.Value);
+            return new SearchDocumentsResult(Optional.ToNullable(odataCount), Optional.ToNullable(searchCoverage), searchFacets ?? new ChangeTrackingDictionary<string, IList<FacetResult>>(), searchNextPageParameters.Value, value, odataNextLink.Value);
         }
     }
 }

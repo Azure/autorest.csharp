@@ -114,7 +114,7 @@ namespace MgmtScopeResource
             Optional<string> policyDefinitionId = default;
             Optional<string> scope = default;
             IList<string> notScopes = default;
-            Optional<IDictionary<string, ParameterValuesValue>> parameters = default;
+            IDictionary<string, ParameterValuesValue> parameters = default;
             Optional<string> description = default;
             Optional<BinaryData> metadata = default;
             Optional<EnforcementMode> enforcementMode = default;
@@ -252,7 +252,7 @@ namespace MgmtScopeResource
                     continue;
                 }
             }
-            return new FakePolicyAssignmentData(id, name, type, systemData.Value, location.Value, identity, displayName.Value, policyDefinitionId.Value, scope.Value, notScopes ?? new ChangeTrackingList<string>(), Optional.ToDictionary(parameters), description.Value, metadata.Value, Optional.ToNullable(enforcementMode), nonComplianceMessages ?? new ChangeTrackingList<NonComplianceMessage>());
+            return new FakePolicyAssignmentData(id, name, type, systemData.Value, location.Value, identity, displayName.Value, policyDefinitionId.Value, scope.Value, notScopes ?? new ChangeTrackingList<string>(), parameters ?? new ChangeTrackingDictionary<string, ParameterValuesValue>(), description.Value, metadata.Value, Optional.ToNullable(enforcementMode), nonComplianceMessages ?? new ChangeTrackingList<NonComplianceMessage>());
         }
     }
 }

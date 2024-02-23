@@ -45,7 +45,7 @@ namespace MgmtListMethods
                 return null;
             }
             Optional<string> configValue = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -102,7 +102,7 @@ namespace MgmtListMethods
                     continue;
                 }
             }
-            return new FakeConfigurationData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, configValue.Value);
+            return new FakeConfigurationData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, configValue.Value);
         }
     }
 }

@@ -64,7 +64,7 @@ namespace Azure.Network.Management.Interface.Models
             Optional<string> name = default;
             Optional<string> type = default;
             Optional<string> location = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             IList<ServiceEndpointPolicyDefinition> serviceEndpointPolicyDefinitions = default;
             IReadOnlyList<Subnet> subnets = default;
             Optional<string> resourceGuid = default;
@@ -165,7 +165,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new ServiceEndpointPolicy(id.Value, name.Value, type.Value, location.Value, Optional.ToDictionary(tags), etag.Value, serviceEndpointPolicyDefinitions ?? new ChangeTrackingList<ServiceEndpointPolicyDefinition>(), subnets ?? new ChangeTrackingList<Subnet>(), resourceGuid.Value, Optional.ToNullable(provisioningState));
+            return new ServiceEndpointPolicy(id.Value, name.Value, type.Value, location.Value, tags ?? new ChangeTrackingDictionary<string, string>(), etag.Value, serviceEndpointPolicyDefinitions ?? new ChangeTrackingList<ServiceEndpointPolicyDefinition>(), subnets ?? new ChangeTrackingList<Subnet>(), resourceGuid.Value, Optional.ToNullable(provisioningState));
         }
     }
 }

@@ -40,7 +40,7 @@ namespace MgmtMockAndSample.Models
                 return null;
             }
             Optional<AzureLocation> location = default;
-            Optional<IReadOnlyDictionary<string, string>> tags = default;
+            IReadOnlyDictionary<string, string> tags = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
@@ -143,7 +143,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new MgmtMockAndSamplePrivateLinkResource(id, name, type, systemData.Value, groupId.Value, requiredMembers ?? new ChangeTrackingList<string>(), requiredZoneNames ?? new ChangeTrackingList<string>(), Optional.ToNullable(location), Optional.ToDictionary(tags));
+            return new MgmtMockAndSamplePrivateLinkResource(id, name, type, systemData.Value, groupId.Value, requiredMembers ?? new ChangeTrackingList<string>(), requiredZoneNames ?? new ChangeTrackingList<string>(), Optional.ToNullable(location), tags ?? new ChangeTrackingDictionary<string, string>());
         }
     }
 }

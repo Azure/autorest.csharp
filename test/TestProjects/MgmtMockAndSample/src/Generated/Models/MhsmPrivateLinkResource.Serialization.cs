@@ -58,7 +58,7 @@ namespace MgmtMockAndSample.Models
                 return null;
             }
             Optional<ManagedHsmSku> sku = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -167,7 +167,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new MhsmPrivateLinkResource(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, groupId.Value, requiredMembers ?? new ChangeTrackingList<string>(), requiredZoneNames ?? new ChangeTrackingList<string>(), sku.Value);
+            return new MhsmPrivateLinkResource(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, groupId.Value, requiredMembers ?? new ChangeTrackingList<string>(), requiredZoneNames ?? new ChangeTrackingList<string>(), sku.Value);
         }
     }
 }

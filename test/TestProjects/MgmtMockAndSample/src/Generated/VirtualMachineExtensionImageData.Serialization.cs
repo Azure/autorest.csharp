@@ -55,7 +55,7 @@ namespace MgmtMockAndSample
                 return null;
             }
             Optional<AzureLocation> location = default;
-            Optional<IReadOnlyDictionary<string, string>> tags = default;
+            IReadOnlyDictionary<string, string> tags = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
@@ -160,7 +160,7 @@ namespace MgmtMockAndSample
                     continue;
                 }
             }
-            return new VirtualMachineExtensionImageData(id, name, type, systemData.Value, operatingSystem.Value, computeRole.Value, handlerSchema.Value, Optional.ToNullable(vmScaleSetEnabled), Optional.ToNullable(supportsMultipleExtensions), Optional.ToNullable(location), Optional.ToDictionary(tags));
+            return new VirtualMachineExtensionImageData(id, name, type, systemData.Value, operatingSystem.Value, computeRole.Value, handlerSchema.Value, Optional.ToNullable(vmScaleSetEnabled), Optional.ToNullable(supportsMultipleExtensions), Optional.ToNullable(location), tags ?? new ChangeTrackingDictionary<string, string>());
         }
     }
 }

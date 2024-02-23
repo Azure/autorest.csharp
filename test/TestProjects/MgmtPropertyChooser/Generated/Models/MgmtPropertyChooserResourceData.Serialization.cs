@@ -40,7 +40,7 @@ namespace MgmtPropertyChooser.Models
                 return null;
             }
             string location = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
@@ -91,7 +91,7 @@ namespace MgmtPropertyChooser.Models
                     continue;
                 }
             }
-            return new MgmtPropertyChooserResourceData(id, name, type, systemData.Value, location, Optional.ToDictionary(tags));
+            return new MgmtPropertyChooserResourceData(id, name, type, systemData.Value, location, tags ?? new ChangeTrackingDictionary<string, string>());
         }
     }
 }

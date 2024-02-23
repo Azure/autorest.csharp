@@ -107,7 +107,7 @@ namespace MgmtMockAndSample
             }
             Optional<string> etag = default;
             Optional<ManagedServiceIdentity> identity = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -351,7 +351,7 @@ namespace MgmtMockAndSample
                     continue;
                 }
             }
-            return new FirewallPolicyData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, etag.Value, identity, startupProbe.Value, readinessProbe.Value, Optional.ToNullable(desiredStatusCode), ruleCollectionGroups ?? new ChangeTrackingList<WritableSubResource>(), Optional.ToNullable(provisioningState), basePolicy, firewalls ?? new ChangeTrackingList<WritableSubResource>(), childPolicies ?? new ChangeTrackingList<WritableSubResource>(), threatIntelWhitelist.Value, insights.Value, snat.Value, dnsSettings.Value, intrusionDetection.Value, transportSecurity.Value, sku.Value);
+            return new FirewallPolicyData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, etag.Value, identity, startupProbe.Value, readinessProbe.Value, Optional.ToNullable(desiredStatusCode), ruleCollectionGroups ?? new ChangeTrackingList<WritableSubResource>(), Optional.ToNullable(provisioningState), basePolicy, firewalls ?? new ChangeTrackingList<WritableSubResource>(), childPolicies ?? new ChangeTrackingList<WritableSubResource>(), threatIntelWhitelist.Value, insights.Value, snat.Value, dnsSettings.Value, intrusionDetection.Value, transportSecurity.Value, sku.Value);
         }
     }
 }

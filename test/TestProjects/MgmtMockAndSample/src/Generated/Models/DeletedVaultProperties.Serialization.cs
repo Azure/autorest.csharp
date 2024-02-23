@@ -24,7 +24,7 @@ namespace MgmtMockAndSample.Models
             Optional<AzureLocation> location = default;
             Optional<DateTimeOffset> deletionDate = default;
             Optional<DateTimeOffset> scheduledPurgeDate = default;
-            Optional<IReadOnlyDictionary<string, string>> tags = default;
+            IReadOnlyDictionary<string, string> tags = default;
             Optional<bool> purgeProtectionEnabled = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -84,7 +84,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new DeletedVaultProperties(vaultId.Value, Optional.ToNullable(location), Optional.ToNullable(deletionDate), Optional.ToNullable(scheduledPurgeDate), Optional.ToDictionary(tags), Optional.ToNullable(purgeProtectionEnabled));
+            return new DeletedVaultProperties(vaultId.Value, Optional.ToNullable(location), Optional.ToNullable(deletionDate), Optional.ToNullable(scheduledPurgeDate), tags ?? new ChangeTrackingDictionary<string, string>(), Optional.ToNullable(purgeProtectionEnabled));
         }
     }
 }
