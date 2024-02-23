@@ -873,7 +873,7 @@ namespace MgmtPropertyBag
             {
                 uri.AppendQuery("$orderby", orderby, true);
             }
-            if (countryOrRegions != null && Optional.IsCollectionDefined(countryOrRegions))
+            if (countryOrRegions != null && !(countryOrRegions is ChangeTrackingList<string> changeTrackingList && changeTrackingList.IsUndefined))
             {
                 foreach (var param in countryOrRegions)
                 {
