@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text.Json;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
@@ -13,6 +14,7 @@ using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Models.Types
@@ -39,6 +41,17 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
             #endregion
 
             #region Utf8JsonWriterExtensions
+            foreach (var method in BuildWriteStringValueMethods())
+            {
+                yield return method;
+            }
+
+            yield return BuildWriteNonEmptyArrayMethod();
+
+            yield return BuildWriteBase64StringValueMethod();
+
+            yield return BuildWriteNumberValueMethod();
+
             yield return BuildWriteObjectValueMethod();
             #endregion
         }
@@ -51,6 +64,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         public const string ThrowNonNullablePropertyIsNull = "ThrowNonNullablePropertyIsNull";
         public const string WriteNumberValue = "WriteNumberValue";
         public const string WriteStringValue = "WriteStringValue";
+        public const string WriteNonEmptyArray = "WriteNonEmptyArray";
         public const string WriteBase64StringValue = "WriteBase64StringValue";
         public const string WriteObjectValue = "WriteObjectValue";
 
@@ -104,6 +118,144 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
                 }),
                 SwitchCase.Default(Throw(New.Instance(typeof(NotSupportedException), new FormattableStringExpression("Not supported value kind {0}", element.ValueKind))))
             };
+            return new Method(signature, body);
+        }
+
+        private IEnumerable<Method> BuildWriteStringValueMethods()
+        {
+            var writer = new Utf8JsonWriterExpression(KnownParameters.Serializations.Utf8JsonWriter);
+            var formatParameter = new Parameter("format", null, typeof(string), null, ValidationType.None, null);
+            var dateTimeOffsetValueParameter = new Parameter("value", null, typeof(DateTimeOffset), null, ValidationType.None, null);
+            yield return new Method(
+                new MethodSignature(
+                    Name: WriteStringValue,
+                    Modifiers: _methodModifiers,
+                    ReturnType: null,
+                    Parameters: new[] { KnownParameters.Serializations.Utf8JsonWriter, dateTimeOffsetValueParameter, formatParameter },
+                    Summary: null, Description: null, ReturnDescription: null),
+                writer.WriteStringValue(new InvokeStaticMethodExpression(typeof(TypeFormatters), "ToString", new ValueExpression[] { dateTimeOffsetValueParameter, formatParameter })) // TODO -- TypeFormatters also need to convert to a typeprovider
+                );
+
+            var dateTimeValueParameter = new Parameter("value", null, typeof(DateTime), null, ValidationType.None, null);
+            yield return new Method(
+                new MethodSignature(
+                    Name: WriteStringValue,
+                    Modifiers: _methodModifiers,
+                    ReturnType: null,
+                    Parameters: new[] { KnownParameters.Serializations.Utf8JsonWriter, dateTimeValueParameter, formatParameter },
+                    Summary: null, Description: null, ReturnDescription: null),
+                writer.WriteStringValue(new InvokeStaticMethodExpression(typeof(TypeFormatters), "ToString", new ValueExpression[] { dateTimeValueParameter, formatParameter })) // TODO -- TypeFormatters also need to convert to a typeprovider
+                );
+
+            var timeSpanValueParameter = new Parameter("value", null, typeof(TimeSpan), null, ValidationType.None, null);
+            yield return new Method(
+                new MethodSignature(
+                    Name: WriteStringValue,
+                    Modifiers: _methodModifiers,
+                    ReturnType: null,
+                    Parameters: new[] { KnownParameters.Serializations.Utf8JsonWriter, timeSpanValueParameter, formatParameter },
+                    Summary: null, Description: null, ReturnDescription: null),
+                writer.WriteStringValue(new InvokeStaticMethodExpression(typeof(TypeFormatters), "ToString", new ValueExpression[] { timeSpanValueParameter, formatParameter })) // TODO -- TypeFormatters also need to convert to a typeprovider
+                );
+
+            var charValueParameter = new Parameter("value", null, typeof(char), null, ValidationType.None, null);
+            yield return new Method(
+                new MethodSignature(
+                    Name: WriteStringValue,
+                    Modifiers: _methodModifiers,
+                    ReturnType: null,
+                    Parameters: new[] { KnownParameters.Serializations.Utf8JsonWriter, charValueParameter, formatParameter },
+                    Summary: null, Description: null, ReturnDescription: null),
+                writer.WriteStringValue(((ValueExpression)charValueParameter).Invoke(nameof(char.ToString), new MemberExpression(typeof(CultureInfo), nameof(CultureInfo.InvariantCulture))))
+                );
+        }
+
+        private Method BuildWriteNonEmptyArrayMethod()
+        {
+            var nameParameter = new Parameter("name", null, typeof(string), null, ValidationType.None, null);
+            var valuesParameter = new Parameter("values", null, typeof(IReadOnlyList<string>), null, ValidationType.None, null);
+            var signature = new MethodSignature(
+                Name: WriteNonEmptyArray,
+                Modifiers: _methodModifiers,
+                ReturnType: null,
+                Parameters: new[] { KnownParameters.Serializations.Utf8JsonWriter, nameParameter, valuesParameter },
+                Summary: null, Description: null, ReturnDescription: null);
+            var writer = new Utf8JsonWriterExpression(KnownParameters.Serializations.Utf8JsonWriter);
+            var name = new StringExpression(nameParameter);
+            var values = new EnumerableExpression(typeof(string), valuesParameter);
+            var body = new IfStatement(values.Any())
+            {
+                writer.WriteStartArray(name),
+                new ForeachStatement("s", values, out var s)
+                {
+                    writer.WriteStringValue(s)
+                },
+                writer.WriteEndArray()
+            };
+            return new Method(signature, body);
+        }
+
+        private Method BuildWriteBase64StringValueMethod()
+        {
+            var valueParameter = new Parameter("value", null, typeof(byte[]), null, ValidationType.None, null);
+            var formatParameter = new Parameter("format", null, typeof(string), null, ValidationType.None, null);
+            var signature = new MethodSignature(
+                Name: WriteBase64StringValue,
+                Modifiers: _methodModifiers,
+                Parameters: new[] { KnownParameters.Serializations.Utf8JsonWriter, valueParameter, formatParameter },
+                ReturnType: null,
+                Summary: null, Description: null, ReturnDescription: null);
+            var writer = new Utf8JsonWriterExpression(KnownParameters.Serializations.Utf8JsonWriter);
+            var value = (ValueExpression)valueParameter;
+            var format = new StringExpression(formatParameter);
+            var body = new MethodBodyStatement[]
+            {
+                new IfStatement(Equal(value, Null))
+                {
+                    writer.WriteNullValue(),
+                    Return()
+                },
+                new SwitchStatement(format)
+                {
+                    new(Literal("U"), new MethodBodyStatement[]
+                    {
+                        writer.WriteStringValue(new InvokeStaticMethodExpression(typeof(TypeFormatters), "ToBase64UrlString", new ValueExpression[] { value })),
+                        Break
+                    }),
+                    new(Literal("D"), new MethodBodyStatement[]
+                    {
+                        writer.WriteBase64StringValue(value),
+                        Break
+                    }),
+                    SwitchCase.Default(Throw(New.Instance(typeof(ArgumentException), new FormattableStringExpression("Format is not supported: '{0}'", format), Nameof(format))))
+                }
+            };
+
+            return new Method(signature, body);
+        }
+
+        private Method BuildWriteNumberValueMethod()
+        {
+            var valueParameter = new Parameter("value", null, typeof(DateTimeOffset), null, ValidationType.None, null);
+            var formatParameter = new Parameter("format", null, typeof(string), null, ValidationType.None, null);
+            var signature = new MethodSignature(
+                Name: WriteNumberValue,
+                Modifiers: _methodModifiers,
+                Parameters: new[] { KnownParameters.Serializations.Utf8JsonWriter, valueParameter, formatParameter },
+                ReturnType: null,
+                Summary: null, Description: null, ReturnDescription: null);
+            var writer = new Utf8JsonWriterExpression(KnownParameters.Serializations.Utf8JsonWriter);
+            var value = new DateTimeOffsetExpression(valueParameter);
+            var format = new StringExpression(formatParameter);
+            var body = new MethodBodyStatement[]
+            {
+                new IfStatement(NotEqual(format, Literal("U")))
+                {
+                    Throw(New.Instance(typeof(ArgumentOutOfRangeException), format, Literal("Only 'U' format is supported when writing a DateTimeOffset as a Number."))),
+                },
+                writer.WriteNumberValue(value.ToUnixTimeSeconds())
+            };
+
             return new Method(signature, body);
         }
 

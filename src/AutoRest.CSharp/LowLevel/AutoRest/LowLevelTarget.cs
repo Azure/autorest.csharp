@@ -73,7 +73,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var serializationExtensionWriter = new CodeWriter();
             var serializationExtension = ModelSerializationExtensionsTypeProvider.Instance;
             new ExpressionTypeProviderWriter(serializationExtensionWriter, serializationExtension).Write();
-            project.AddGeneratedFile($"Internal/{serializationExtension.Type.Name}.cs", serializationExtensionWriter.ToString());
+            project.AddHelperFile($"Internal/{serializationExtension.Type.Name}.cs", serializationExtensionWriter.ToString());
 
             if (Configuration.GenerateTestProject)
             {

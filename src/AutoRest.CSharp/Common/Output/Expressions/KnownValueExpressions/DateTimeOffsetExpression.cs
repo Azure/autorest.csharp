@@ -15,6 +15,9 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
         public static DateTimeOffsetExpression FromUnixTimeSeconds(ValueExpression expression)
             => new(InvokeStatic(nameof(DateTimeOffset.FromUnixTimeSeconds), expression));
 
+        public LongExpression ToUnixTimeSeconds()
+            => new(Invoke(nameof(DateTimeOffset.ToUnixTimeSeconds)));
+
         public static DateTimeOffsetExpression Parse(string s) => Parse(Literal(s));
 
         public static DateTimeOffsetExpression Parse(ValueExpression expression)
