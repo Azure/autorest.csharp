@@ -40,7 +40,7 @@ namespace MgmtExtensionCommonRestOperation.Models
                     continue;
                 }
             }
-            return new TypeOneListResult(value ?? new ChangeTrackingList<TypeOneData>(), nextLink.Value);
+            return new TypeOneListResult(value, nextLink.Value);
         }
     }
 }

@@ -117,7 +117,7 @@ namespace ModelsTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Int32ValuesFacet(field, serializedAdditionalRawData, values ?? new ChangeTrackingList<int>(), value, kind);
+            return new Int32ValuesFacet(field, serializedAdditionalRawData, values, value, kind);
         }
 
         BinaryData IPersistableModel<Int32ValuesFacet>.Write(ModelReaderWriterOptions options)

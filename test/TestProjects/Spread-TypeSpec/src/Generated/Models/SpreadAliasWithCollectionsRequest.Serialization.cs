@@ -118,7 +118,7 @@ namespace SpreadTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new SpreadAliasWithCollectionsRequest(requiredStringList ?? new ChangeTrackingList<string>(), optionalStringList ?? new ChangeTrackingList<string>(), serializedAdditionalRawData);
+            return new SpreadAliasWithCollectionsRequest(requiredStringList, optionalStringList ?? new ChangeTrackingList<string>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<SpreadAliasWithCollectionsRequest>.Write(ModelReaderWriterOptions options)

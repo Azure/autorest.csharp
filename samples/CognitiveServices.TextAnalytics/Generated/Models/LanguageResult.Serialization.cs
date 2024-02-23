@@ -60,7 +60,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            return new LanguageResult(documents ?? new ChangeTrackingList<DocumentLanguage>(), errors ?? new ChangeTrackingList<DocumentError>(), statistics.Value, modelVersion);
+            return new LanguageResult(documents, errors, statistics.Value, modelVersion);
         }
     }
 }

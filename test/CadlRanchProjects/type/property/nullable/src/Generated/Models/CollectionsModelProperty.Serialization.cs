@@ -113,7 +113,7 @@ namespace _Type.Property.Nullable.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new CollectionsModelProperty(requiredProperty, nullableProperty ?? new ChangeTrackingList<InnerModel>(), serializedAdditionalRawData);
+            return new CollectionsModelProperty(requiredProperty, nullableProperty, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<CollectionsModelProperty>.Write(ModelReaderWriterOptions options)

@@ -101,7 +101,7 @@ namespace AnomalyDetector.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new MultivariateLastDetectionOptions(variables ?? new ChangeTrackingList<VariableValues>(), topContributorCount, serializedAdditionalRawData);
+            return new MultivariateLastDetectionOptions(variables, topContributorCount, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<MultivariateLastDetectionOptions>.Write(ModelReaderWriterOptions options)

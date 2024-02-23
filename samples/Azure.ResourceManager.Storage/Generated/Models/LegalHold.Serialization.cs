@@ -71,7 +71,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new LegalHold(Optional.ToNullable(hasLegalHold), tags ?? new ChangeTrackingList<string>(), Optional.ToNullable(allowProtectedAppendWritesAll));
+            return new LegalHold(Optional.ToNullable(hasLegalHold), tags, Optional.ToNullable(allowProtectedAppendWritesAll));
         }
     }
 }

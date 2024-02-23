@@ -92,7 +92,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineScaleSetVmInstanceRequiredIds(instanceIds ?? new ChangeTrackingList<string>(), serializedAdditionalRawData);
+            return new VirtualMachineScaleSetVmInstanceRequiredIds(instanceIds, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<VirtualMachineScaleSetVmInstanceRequiredIds>.Write(ModelReaderWriterOptions options)

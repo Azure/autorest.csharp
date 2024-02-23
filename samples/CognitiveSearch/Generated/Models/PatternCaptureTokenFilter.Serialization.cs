@@ -77,7 +77,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new PatternCaptureTokenFilter(odataType, name, patterns ?? new ChangeTrackingList<string>(), Optional.ToNullable(preserveOriginal));
+            return new PatternCaptureTokenFilter(odataType, name, patterns, Optional.ToNullable(preserveOriginal));
         }
     }
 }

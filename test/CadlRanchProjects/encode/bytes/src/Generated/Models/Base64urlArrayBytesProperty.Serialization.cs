@@ -105,7 +105,7 @@ namespace Encode.Bytes.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Base64urlArrayBytesProperty(value ?? new ChangeTrackingList<BinaryData>(), serializedAdditionalRawData);
+            return new Base64urlArrayBytesProperty(value, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<Base64urlArrayBytesProperty>.Write(ModelReaderWriterOptions options)

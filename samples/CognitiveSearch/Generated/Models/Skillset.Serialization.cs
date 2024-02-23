@@ -88,7 +88,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new Skillset(name, description, skills ?? new ChangeTrackingList<Skill>(), cognitiveServices.Value, odataEtag.Value);
+            return new Skillset(name, description, skills, cognitiveServices.Value, odataEtag.Value);
         }
     }
 }

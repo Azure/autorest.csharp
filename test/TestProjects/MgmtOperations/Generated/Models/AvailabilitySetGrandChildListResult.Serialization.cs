@@ -40,7 +40,7 @@ namespace MgmtOperations.Models
                     continue;
                 }
             }
-            return new AvailabilitySetGrandChildListResult(value ?? new ChangeTrackingList<AvailabilitySetGrandChildData>(), nextLink.Value);
+            return new AvailabilitySetGrandChildListResult(value, nextLink.Value);
         }
     }
 }

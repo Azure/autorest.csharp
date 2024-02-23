@@ -40,7 +40,7 @@ namespace MgmtConstants.Models
                     continue;
                 }
             }
-            return new OptionalMachineListResult(value ?? new ChangeTrackingList<OptionalMachineData>(), nextLink.Value);
+            return new OptionalMachineListResult(value, nextLink.Value);
         }
     }
 }

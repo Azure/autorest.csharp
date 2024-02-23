@@ -73,7 +73,7 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            return new TrainResult(trainingDocuments ?? new ChangeTrackingList<TrainingDocumentInfo>(), fields ?? new ChangeTrackingList<FormFieldsReport>(), Optional.ToNullable(averageModelAccuracy), errors ?? new ChangeTrackingList<ErrorInformation>());
+            return new TrainResult(trainingDocuments, fields ?? new ChangeTrackingList<FormFieldsReport>(), Optional.ToNullable(averageModelAccuracy), errors ?? new ChangeTrackingList<ErrorInformation>());
         }
     }
 }

@@ -216,7 +216,7 @@ namespace AnomalyDetector.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new UnivariateEntireDetectionResult(period, expectedValues ?? new ChangeTrackingList<float>(), upperMargins ?? new ChangeTrackingList<float>(), lowerMargins ?? new ChangeTrackingList<float>(), isAnomaly ?? new ChangeTrackingList<bool>(), isNegativeAnomaly ?? new ChangeTrackingList<bool>(), isPositiveAnomaly ?? new ChangeTrackingList<bool>(), severity ?? new ChangeTrackingList<float>(), serializedAdditionalRawData);
+            return new UnivariateEntireDetectionResult(period, expectedValues, upperMargins, lowerMargins, isAnomaly, isNegativeAnomaly, isPositiveAnomaly, severity ?? new ChangeTrackingList<float>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<UnivariateEntireDetectionResult>.Write(ModelReaderWriterOptions options)

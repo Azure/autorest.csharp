@@ -84,7 +84,7 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            return new AnalyzeResult(version, readResults ?? new ChangeTrackingList<ReadResult>(), pageResults ?? new ChangeTrackingList<PageResult>(), documentResults ?? new ChangeTrackingList<DocumentResult>(), errors ?? new ChangeTrackingList<ErrorInformation>());
+            return new AnalyzeResult(version, readResults, pageResults ?? new ChangeTrackingList<PageResult>(), documentResults ?? new ChangeTrackingList<DocumentResult>(), errors ?? new ChangeTrackingList<ErrorInformation>());
         }
     }
 }

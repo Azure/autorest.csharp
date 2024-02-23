@@ -105,7 +105,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new ShaperSkill(odataType, name.Value, description.Value, context.Value, inputs ?? new ChangeTrackingList<InputFieldMappingEntry>(), outputs ?? new ChangeTrackingList<OutputFieldMappingEntry>());
+            return new ShaperSkill(odataType, name.Value, description.Value, context.Value, inputs, outputs);
         }
     }
 }

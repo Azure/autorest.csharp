@@ -55,7 +55,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            return new DocumentLanguage(id, detectedLanguage, warnings ?? new ChangeTrackingList<TextAnalyticsWarning>(), statistics.Value);
+            return new DocumentLanguage(id, detectedLanguage, warnings, statistics.Value);
         }
     }
 }

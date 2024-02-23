@@ -261,7 +261,7 @@ namespace FirstTestTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Thing(name, requiredUnion, requiredLiteralString, requiredLiteralInt, requiredLiteralFloat, requiredLiteralBool, Optional.ToNullable(optionalLiteralString), Optional.ToNullable(optionalLiteralInt), Optional.ToNullable(optionalLiteralFloat), Optional.ToNullable(optionalLiteralBool), requiredBadDescription, optionalNullableList ?? new ChangeTrackingList<int>(), requiredNullableList ?? new ChangeTrackingList<int>(), serializedAdditionalRawData);
+            return new Thing(name, requiredUnion, requiredLiteralString, requiredLiteralInt, requiredLiteralFloat, requiredLiteralBool, Optional.ToNullable(optionalLiteralString), Optional.ToNullable(optionalLiteralInt), Optional.ToNullable(optionalLiteralFloat), Optional.ToNullable(optionalLiteralBool), requiredBadDescription, optionalNullableList ?? new ChangeTrackingList<int>(), requiredNullableList, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<Thing>.Write(ModelReaderWriterOptions options)

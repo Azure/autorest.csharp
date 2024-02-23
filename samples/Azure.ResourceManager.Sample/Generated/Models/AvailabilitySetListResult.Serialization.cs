@@ -106,7 +106,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new AvailabilitySetListResult(value ?? new ChangeTrackingList<AvailabilitySetData>(), nextLink.Value, serializedAdditionalRawData);
+            return new AvailabilitySetListResult(value, nextLink.Value, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

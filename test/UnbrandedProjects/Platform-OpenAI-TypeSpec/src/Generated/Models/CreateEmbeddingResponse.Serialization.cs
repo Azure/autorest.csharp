@@ -113,7 +113,7 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new CreateEmbeddingResponse(@object, model, data ?? new OptionalList<Embedding>(), usage, serializedAdditionalRawData);
+            return new CreateEmbeddingResponse(@object, model, data, usage, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<CreateEmbeddingResponse>.Write(ModelReaderWriterOptions options)

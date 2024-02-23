@@ -121,7 +121,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineScaleSetListOSUpgradeHistory(value ?? new ChangeTrackingList<UpgradeOperationHistoricalStatusInfo>(), Optional.ToNullable(etag), nextLink.Value, serializedAdditionalRawData);
+            return new VirtualMachineScaleSetListOSUpgradeHistory(value, Optional.ToNullable(etag), nextLink.Value, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

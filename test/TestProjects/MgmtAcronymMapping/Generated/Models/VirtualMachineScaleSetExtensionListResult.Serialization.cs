@@ -40,7 +40,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetExtensionListResult(value ?? new ChangeTrackingList<VirtualMachineScaleSetExtensionData>(), nextLink.Value);
+            return new VirtualMachineScaleSetExtensionListResult(value, nextLink.Value);
         }
     }
 }

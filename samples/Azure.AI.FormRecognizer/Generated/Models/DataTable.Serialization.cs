@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
 {
@@ -45,7 +44,7 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            return new DataTable(rows, columns, cells ?? new ChangeTrackingList<DataTableCell>());
+            return new DataTable(rows, columns, cells);
         }
     }
 }

@@ -166,7 +166,7 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new CreateCompletionResponseChoiceLogprobs(tokens ?? new OptionalList<string>(), tokenLogprobs ?? new OptionalList<double>(), topLogprobs ?? new OptionalList<IDictionary<string, long>>(), textOffset ?? new OptionalList<long>(), serializedAdditionalRawData);
+            return new CreateCompletionResponseChoiceLogprobs(tokens, tokenLogprobs, topLogprobs, textOffset, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<CreateCompletionResponseChoiceLogprobs>.Write(ModelReaderWriterOptions options)

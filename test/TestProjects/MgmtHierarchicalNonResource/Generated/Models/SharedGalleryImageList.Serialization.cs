@@ -39,7 +39,7 @@ namespace MgmtHierarchicalNonResource.Models
                     continue;
                 }
             }
-            return new SharedGalleryImageList(value ?? new ChangeTrackingList<SharedGalleryImage>(), nextLink.Value);
+            return new SharedGalleryImageList(value, nextLink.Value);
         }
     }
 }

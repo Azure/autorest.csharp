@@ -40,7 +40,7 @@ namespace MgmtScopeResource.Models
                     continue;
                 }
             }
-            return new ResourceLinkResult(value ?? new ChangeTrackingList<ResourceLinkData>(), nextLink.Value);
+            return new ResourceLinkResult(value, nextLink.Value);
         }
     }
 }

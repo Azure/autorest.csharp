@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
 {
@@ -50,7 +49,7 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            return new DocumentResult(docType, pageRange ?? new ChangeTrackingList<int>(), fields);
+            return new DocumentResult(docType, pageRange, fields);
         }
     }
 }

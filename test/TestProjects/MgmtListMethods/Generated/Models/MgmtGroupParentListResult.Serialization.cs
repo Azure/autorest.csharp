@@ -40,7 +40,7 @@ namespace MgmtListMethods.Models
                     continue;
                 }
             }
-            return new MgmtGroupParentListResult(value ?? new ChangeTrackingList<MgmtGroupParentData>(), nextLink.Value);
+            return new MgmtGroupParentListResult(value, nextLink.Value);
         }
     }
 }

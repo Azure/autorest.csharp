@@ -46,7 +46,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new ManagementPolicySchema(rules ?? new ChangeTrackingList<ManagementPolicyRule>());
+            return new ManagementPolicySchema(rules);
         }
     }
 }

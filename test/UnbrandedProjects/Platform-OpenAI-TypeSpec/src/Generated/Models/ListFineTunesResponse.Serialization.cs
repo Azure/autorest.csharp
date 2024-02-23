@@ -97,7 +97,7 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ListFineTunesResponse(@object, data ?? new OptionalList<FineTune>(), serializedAdditionalRawData);
+            return new ListFineTunesResponse(@object, data, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ListFineTunesResponse>.Write(ModelReaderWriterOptions options)

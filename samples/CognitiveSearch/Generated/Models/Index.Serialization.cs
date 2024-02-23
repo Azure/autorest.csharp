@@ -271,7 +271,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new Index(name, fields ?? new ChangeTrackingList<Field>(), scoringProfiles ?? new ChangeTrackingList<ScoringProfile>(), defaultScoringProfile.Value, corsOptions.Value, suggesters ?? new ChangeTrackingList<Suggester>(), analyzers ?? new ChangeTrackingList<Analyzer>(), tokenizers ?? new ChangeTrackingList<Tokenizer>(), tokenFilters ?? new ChangeTrackingList<TokenFilter>(), charFilters ?? new ChangeTrackingList<CharFilter>(), encryptionKey.Value, similarity.Value, odataEtag.Value);
+            return new Index(name, fields, scoringProfiles ?? new ChangeTrackingList<ScoringProfile>(), defaultScoringProfile.Value, corsOptions.Value, suggesters ?? new ChangeTrackingList<Suggester>(), analyzers ?? new ChangeTrackingList<Analyzer>(), tokenizers ?? new ChangeTrackingList<Tokenizer>(), tokenFilters ?? new ChangeTrackingList<TokenFilter>(), charFilters ?? new ChangeTrackingList<CharFilter>(), encryptionKey.Value, similarity.Value, odataEtag.Value);
         }
     }
 }

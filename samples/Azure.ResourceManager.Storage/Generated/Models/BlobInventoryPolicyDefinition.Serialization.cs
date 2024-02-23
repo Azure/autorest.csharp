@@ -85,7 +85,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new BlobInventoryPolicyDefinition(filters.Value, format, schedule, objectType, schemaFields ?? new ChangeTrackingList<string>());
+            return new BlobInventoryPolicyDefinition(filters.Value, format, schedule, objectType, schemaFields);
         }
     }
 }

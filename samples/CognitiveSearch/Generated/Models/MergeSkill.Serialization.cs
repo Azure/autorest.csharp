@@ -127,7 +127,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new MergeSkill(odataType, name.Value, description.Value, context.Value, inputs ?? new ChangeTrackingList<InputFieldMappingEntry>(), outputs ?? new ChangeTrackingList<OutputFieldMappingEntry>(), insertPreTag.Value, insertPostTag.Value);
+            return new MergeSkill(odataType, name.Value, description.Value, context.Value, inputs, outputs, insertPreTag.Value, insertPostTag.Value);
         }
     }
 }

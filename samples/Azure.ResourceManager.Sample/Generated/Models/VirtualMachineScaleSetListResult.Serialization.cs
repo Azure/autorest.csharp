@@ -106,7 +106,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineScaleSetListResult(value ?? new ChangeTrackingList<VirtualMachineScaleSetData>(), nextLink.Value, serializedAdditionalRawData);
+            return new VirtualMachineScaleSetListResult(value, nextLink.Value, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

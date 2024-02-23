@@ -40,7 +40,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new DiskEncryptionSetList(value ?? new ChangeTrackingList<DiskEncryptionSetData>(), nextLink.Value);
+            return new DiskEncryptionSetList(value, nextLink.Value);
         }
     }
 }

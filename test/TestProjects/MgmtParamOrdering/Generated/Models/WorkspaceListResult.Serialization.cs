@@ -40,7 +40,7 @@ namespace MgmtParamOrdering.Models
                     continue;
                 }
             }
-            return new WorkspaceListResult(value ?? new ChangeTrackingList<WorkspaceData>(), nextLink.Value);
+            return new WorkspaceListResult(value, nextLink.Value);
         }
     }
 }

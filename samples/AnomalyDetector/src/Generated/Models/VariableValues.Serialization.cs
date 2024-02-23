@@ -119,7 +119,7 @@ namespace AnomalyDetector.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VariableValues(variable, timestamps ?? new ChangeTrackingList<string>(), values ?? new ChangeTrackingList<float>(), serializedAdditionalRawData);
+            return new VariableValues(variable, timestamps, values, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<VariableValues>.Write(ModelReaderWriterOptions options)

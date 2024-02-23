@@ -105,7 +105,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DerivedModel(optionalString.Value, serializedAdditionalRawData, requiredCollection ?? new ChangeTrackingList<string>());
+            return new DerivedModel(optionalString.Value, serializedAdditionalRawData, requiredCollection);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

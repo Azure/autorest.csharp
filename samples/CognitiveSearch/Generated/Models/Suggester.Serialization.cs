@@ -62,7 +62,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new Suggester(name, searchMode, sourceFields ?? new ChangeTrackingList<string>());
+            return new Suggester(name, searchMode, sourceFields);
         }
     }
 }

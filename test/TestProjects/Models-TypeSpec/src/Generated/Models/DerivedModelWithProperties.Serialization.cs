@@ -104,7 +104,7 @@ namespace ModelsTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DerivedModelWithProperties(optionalPropertyOnBase.Value, serializedAdditionalRawData, requiredList ?? new ChangeTrackingList<CollectionItem>());
+            return new DerivedModelWithProperties(optionalPropertyOnBase.Value, serializedAdditionalRawData, requiredList);
         }
 
         BinaryData IPersistableModel<DerivedModelWithProperties>.Write(ModelReaderWriterOptions options)

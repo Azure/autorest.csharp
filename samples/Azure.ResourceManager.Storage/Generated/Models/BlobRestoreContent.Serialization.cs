@@ -55,7 +55,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new BlobRestoreContent(timeToRestore, blobRanges ?? new ChangeTrackingList<BlobRestoreRange>());
+            return new BlobRestoreContent(timeToRestore, blobRanges);
         }
     }
 }

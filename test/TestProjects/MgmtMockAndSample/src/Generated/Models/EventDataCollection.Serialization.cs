@@ -39,7 +39,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new EventDataCollection(value ?? new ChangeTrackingList<EventData>(), nextLink.Value);
+            return new EventDataCollection(value, nextLink.Value);
         }
     }
 }

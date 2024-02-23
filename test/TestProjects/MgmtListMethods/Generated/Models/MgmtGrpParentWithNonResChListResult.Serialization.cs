@@ -40,7 +40,7 @@ namespace MgmtListMethods.Models
                     continue;
                 }
             }
-            return new MgmtGrpParentWithNonResChListResult(value ?? new ChangeTrackingList<MgmtGrpParentWithNonResChData>(), nextLink.Value);
+            return new MgmtGrpParentWithNonResChListResult(value, nextLink.Value);
         }
     }
 }

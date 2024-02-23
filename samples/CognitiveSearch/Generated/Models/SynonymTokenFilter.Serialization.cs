@@ -92,7 +92,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new SynonymTokenFilter(odataType, name, synonyms ?? new ChangeTrackingList<string>(), Optional.ToNullable(ignoreCase), Optional.ToNullable(expand));
+            return new SynonymTokenFilter(odataType, name, synonyms, Optional.ToNullable(ignoreCase), Optional.ToNullable(expand));
         }
     }
 }

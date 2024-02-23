@@ -93,7 +93,7 @@ namespace Encode.Datetime.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new UnixTimestampArrayDatetimeProperty(value ?? new ChangeTrackingList<DateTimeOffset>(), serializedAdditionalRawData);
+            return new UnixTimestampArrayDatetimeProperty(value, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<UnixTimestampArrayDatetimeProperty>.Write(ModelReaderWriterOptions options)

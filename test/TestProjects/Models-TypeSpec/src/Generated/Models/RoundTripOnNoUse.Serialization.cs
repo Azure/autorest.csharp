@@ -101,7 +101,7 @@ namespace ModelsTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new RoundTripOnNoUse(baseModelProp, serializedAdditionalRawData, requiredList ?? new ChangeTrackingList<CollectionItem>());
+            return new RoundTripOnNoUse(baseModelProp, serializedAdditionalRawData, requiredList);
         }
 
         BinaryData IPersistableModel<RoundTripOnNoUse>.Write(ModelReaderWriterOptions options)

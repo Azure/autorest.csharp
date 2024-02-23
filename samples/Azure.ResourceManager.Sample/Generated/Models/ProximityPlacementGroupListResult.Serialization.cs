@@ -106,7 +106,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ProximityPlacementGroupListResult(value ?? new ChangeTrackingList<ProximityPlacementGroupData>(), nextLink.Value, serializedAdditionalRawData);
+            return new ProximityPlacementGroupListResult(value, nextLink.Value, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

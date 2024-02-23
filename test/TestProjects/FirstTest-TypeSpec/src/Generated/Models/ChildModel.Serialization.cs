@@ -101,7 +101,7 @@ namespace FirstTestTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ChildModel(level, serializedAdditionalRawData, parent ?? new ChangeTrackingList<BaseModel>());
+            return new ChildModel(level, serializedAdditionalRawData, parent);
         }
 
         BinaryData IPersistableModel<ChildModel>.Write(ModelReaderWriterOptions options)

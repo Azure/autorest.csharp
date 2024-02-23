@@ -96,7 +96,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new ManagementPolicyFilter(prefixMatch ?? new ChangeTrackingList<string>(), blobTypes ?? new ChangeTrackingList<string>(), blobIndexMatch ?? new ChangeTrackingList<TagFilter>());
+            return new ManagementPolicyFilter(prefixMatch ?? new ChangeTrackingList<string>(), blobTypes, blobIndexMatch ?? new ChangeTrackingList<TagFilter>());
         }
     }
 }

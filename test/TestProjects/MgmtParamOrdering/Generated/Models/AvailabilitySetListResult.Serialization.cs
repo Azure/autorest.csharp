@@ -40,7 +40,7 @@ namespace MgmtParamOrdering.Models
                     continue;
                 }
             }
-            return new AvailabilitySetListResult(value ?? new ChangeTrackingList<AvailabilitySetData>(), nextLink.Value);
+            return new AvailabilitySetListResult(value, nextLink.Value);
         }
     }
 }

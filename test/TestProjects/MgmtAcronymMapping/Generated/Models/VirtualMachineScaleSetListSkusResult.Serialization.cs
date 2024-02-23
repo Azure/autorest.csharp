@@ -39,7 +39,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetListSkusResult(value ?? new ChangeTrackingList<VirtualMachineScaleSetSku>(), nextLink.Value);
+            return new VirtualMachineScaleSetListSkusResult(value, nextLink.Value);
         }
     }
 }

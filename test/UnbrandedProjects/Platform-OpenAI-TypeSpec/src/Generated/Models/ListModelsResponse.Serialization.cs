@@ -97,7 +97,7 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ListModelsResponse(@object, data ?? new OptionalList<Model>(), serializedAdditionalRawData);
+            return new ListModelsResponse(@object, data, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ListModelsResponse>.Write(ModelReaderWriterOptions options)

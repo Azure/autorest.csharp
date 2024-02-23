@@ -61,7 +61,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new CorsOptions(allowedOrigins ?? new ChangeTrackingList<string>(), Optional.ToNullable(maxAgeInSeconds));
+            return new CorsOptions(allowedOrigins, Optional.ToNullable(maxAgeInSeconds));
         }
     }
 }

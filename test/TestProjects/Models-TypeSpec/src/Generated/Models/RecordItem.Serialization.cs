@@ -93,7 +93,7 @@ namespace ModelsTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new RecordItem(serializedAdditionalRawData, requiredList ?? new ChangeTrackingList<CollectionItem>());
+            return new RecordItem(serializedAdditionalRawData, requiredList);
         }
 
         BinaryData IPersistableModel<RecordItem>.Write(ModelReaderWriterOptions options)

@@ -106,7 +106,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new SshPublicKeysGroupListResult(value ?? new ChangeTrackingList<SshPublicKeyData>(), nextLink.Value, serializedAdditionalRawData);
+            return new SshPublicKeysGroupListResult(value, nextLink.Value, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

@@ -105,7 +105,7 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new CreateModerationResponse(id, model, results ?? new OptionalList<CreateModerationResponseResult>(), serializedAdditionalRawData);
+            return new CreateModerationResponse(id, model, results, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<CreateModerationResponse>.Write(ModelReaderWriterOptions options)

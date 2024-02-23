@@ -77,7 +77,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new KeywordMarkerTokenFilter(odataType, name, keywords ?? new ChangeTrackingList<string>(), Optional.ToNullable(ignoreCase));
+            return new KeywordMarkerTokenFilter(odataType, name, keywords, Optional.ToNullable(ignoreCase));
         }
     }
 }
