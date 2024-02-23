@@ -2,9 +2,9 @@
 // Licensed under the MIT License.
 
 using System.Text.Json;
-using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
@@ -34,15 +34,18 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
             => new InvokeInstanceMethodStatement(Untyped, nameof(Utf8JsonWriter.WriteRawValue), value);
 
         public MethodBodyStatement WriteNumberValue(ValueExpression value, string? format)
-            => new InvokeStaticMethodStatement(Configuration.ApiTypes.Utf8JsonWriterExtensionsType, Configuration.ApiTypes.Utf8JsonWriterExtensionsWriteNumberValueName, new[] { Untyped, value, Literal(format) }, null, true);
+            => new InvokeStaticMethodStatement(ModelSerializationExtensionsTypeProvider.Instance.Type, ModelSerializationExtensionsTypeProvider.WriteNumberValue, new[] { Untyped, value, Literal(format) }, null, true);
 
         public MethodBodyStatement WriteStringValue(ValueExpression value, string? format)
-            => new InvokeStaticMethodStatement(Configuration.ApiTypes.Utf8JsonWriterExtensionsType, Configuration.ApiTypes.Utf8JsonWriterExtensionsWriteStringValueName, new[] { Untyped, value, Literal(format) }, null, true);
+            => new InvokeStaticMethodStatement(ModelSerializationExtensionsTypeProvider.Instance.Type, ModelSerializationExtensionsTypeProvider.WriteStringValue, new[] { Untyped, value, Literal(format) }, null, true);
 
         public MethodBodyStatement WriteObjectValue(ValueExpression value)
-            => new InvokeStaticMethodStatement(Configuration.ApiTypes.Utf8JsonWriterExtensionsType, Configuration.ApiTypes.Utf8JsonWriterExtensionsWriteObjectValueName, new[] { Untyped, value }, null, true);
+            => new InvokeStaticMethodStatement(ModelSerializationExtensionsTypeProvider.Instance.Type, ModelSerializationExtensionsTypeProvider.WriteObjectValue, new[] { Untyped, value }, null, true);
+
+        public MethodBodyStatement WriteBase64StringValue(ValueExpression value)
+            => Invoke(nameof(Utf8JsonWriter.WriteBase64StringValue), value).ToStatement();
 
         public MethodBodyStatement WriteBase64StringValue(ValueExpression value, string? format)
-            => new InvokeStaticMethodStatement(Configuration.ApiTypes.Utf8JsonWriterExtensionsType, Configuration.ApiTypes.Utf8JsonWriterExtensionsWriteBase64StringValueName, new[] { Untyped, value, Literal(format) }, null, true);
+            => new InvokeStaticMethodStatement(ModelSerializationExtensionsTypeProvider.Instance.Type, ModelSerializationExtensionsTypeProvider.WriteBase64StringValue, new[] { Untyped, value, Literal(format) }, null, true);
     }
 }

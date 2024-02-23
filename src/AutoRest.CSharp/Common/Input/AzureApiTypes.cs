@@ -70,8 +70,6 @@ namespace AutoRest.CSharp.Common.Input
 
         public override Type IXmlSerializableType => typeof(IXmlSerializable);
 
-        public override Type Utf8JsonWriterExtensionsType => typeof(Utf8JsonWriterExtensions);
-
         public override Type OptionalType => typeof(Optional);
         public override Type OptionalPropertyType => typeof(Optional<>);
 

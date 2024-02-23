@@ -74,6 +74,7 @@ namespace AutoRest.CSharp.Common.Output.Models
 
         public static MethodBodyStatement EmptyLine => new EmptyLineStatement();
         public static KeywordStatement Continue => new("continue", null);
+        public static KeywordStatement Break => new("break", null);
         public static KeywordStatement Return(ValueExpression expression) => new("return", expression);
         public static KeywordStatement Throw(ValueExpression expression) => new("throw", expression);
 

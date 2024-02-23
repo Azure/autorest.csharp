@@ -123,7 +123,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     if (includeSerializer)
                     {
-                        writer.Append($"writer.{nameof(Utf8JsonWriterExtensions.WriteObjectValue)}(model);");
+                        writer.Append($"writer.WriteObjectValue(model);"); // TODO -- this is temporary, will resolve when https://github.com/Azure/autorest.csharp/pull/4191 merges
                     }
                     else
                     {

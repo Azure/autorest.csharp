@@ -19,6 +19,7 @@ using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Mgmt.Report;
 using AutoRest.CSharp.Output.Models.Types;
 using Microsoft.CodeAnalysis;
+using AutoRest.CSharp.Common.Output.Models.Types;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
@@ -225,6 +226,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 modelFactoryWriter.Write();
                 AddGeneratedFile(project, $"{modelFactoryProvider.Type.Name}.cs", modelFactoryWriter.ToString());
             }
+
+            var serializationExtensionWriter = new CodeWriter();
+            var serializationExtension = ModelSerializationExtensionsTypeProvider.Instance;
+            new ExpressionTypeProviderWriter(serializationExtensionWriter, serializationExtension).Write();
+            AddGeneratedFile(project, $"Internal/{serializationExtension.Type.Name}.cs", serializationExtensionWriter.ToString());
 
             if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))
                 throw new InvalidOperationException($"At least one file was overridden during the generation process. Filenames are: {string.Join(", ", overriddenFilenames)}");

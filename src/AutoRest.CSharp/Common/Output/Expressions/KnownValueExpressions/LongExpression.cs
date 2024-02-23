@@ -5,8 +5,8 @@ using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
 {
-    internal sealed record IntExpression(ValueExpression Untyped) : TypedValueExpression<int>(Untyped)
+    internal sealed record LongExpression(ValueExpression Untyped) : TypedValueExpression<long>(Untyped)
     {
-        public static IntExpression MaxValue => new(StaticProperty(nameof(int.MaxValue)));
+        public static LongExpression MaxValue => new(StaticProperty(nameof(long.MaxValue)));
     }
 }

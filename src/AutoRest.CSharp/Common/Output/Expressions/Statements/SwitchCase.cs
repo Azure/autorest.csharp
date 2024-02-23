@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Generation.Types;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.Statements
 {

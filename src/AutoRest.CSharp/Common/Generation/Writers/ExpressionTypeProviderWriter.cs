@@ -26,7 +26,9 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (_writer.Namespace(_provider.Declaration.Namespace))
             {
-                _writer.Append($"{_provider.Declaration.Accessibility} partial class {_provider.Type:D}")
+                _writer.Append($"{_provider.Declaration.Accessibility} ")
+                    .AppendRawIf("static ", _provider.IsStatic)
+                    .Append($"partial class {_provider.Type:D}") // TODO -- need to support struct
                     .AppendRawIf(" : ", _provider.Inherits != null || _provider.Implements.Any())
                     .AppendIf($"{_provider.Inherits},", _provider.Inherits != null);
 

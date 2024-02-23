@@ -8,6 +8,8 @@ using System.ClientModel.Primitives;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Output.Expressions;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Models.Types;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -87,12 +89,6 @@ namespace AutoRest.CSharp.Common.Input
         public abstract Type IUtf8JsonSerializableType { get; }
         public abstract Type IXmlSerializableType { get; }
         public string IUtf8JsonSerializableWriteName => nameof(IUtf8JsonWriteable.Write);
-
-        public abstract Type Utf8JsonWriterExtensionsType { get; }
-        public string Utf8JsonWriterExtensionsWriteObjectValueName => nameof(ModelSerializationExtensions.WriteObjectValue);
-        public string Utf8JsonWriterExtensionsWriteNumberValueName => nameof(ModelSerializationExtensions.WriteNumberValue);
-        public string Utf8JsonWriterExtensionsWriteStringValueName => nameof(ModelSerializationExtensions.WriteStringValue);
-        public string Utf8JsonWriterExtensionsWriteBase64StringValueName => nameof(ModelSerializationExtensions.WriteBase64StringValue);
 
         public abstract Type OptionalType { get; }
         public abstract Type OptionalPropertyType { get; }

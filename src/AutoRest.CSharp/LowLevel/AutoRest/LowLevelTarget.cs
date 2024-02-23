@@ -5,6 +5,7 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Generation.Writers;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Common.Output.PostProcessing;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
@@ -68,6 +69,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 modelFactoryWriter.Write();
                 project.AddGeneratedFile($"{modelFactoryProvider.Type.Name}.cs", modelFactoryWriter.ToString());
             }
+
+            var serializationExtensionWriter = new CodeWriter();
+            var serializationExtension = ModelSerializationExtensionsTypeProvider.Instance;
+            new ExpressionTypeProviderWriter(serializationExtensionWriter, serializationExtension).Write();
+            project.AddGeneratedFile($"Internal/{serializationExtension.Type.Name}.cs", serializationExtensionWriter.ToString());
 
             if (Configuration.GenerateTestProject)
             {

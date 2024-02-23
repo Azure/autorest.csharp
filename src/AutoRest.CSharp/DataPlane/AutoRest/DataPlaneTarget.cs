@@ -4,6 +4,7 @@
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
@@ -83,6 +84,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
                 project.AddGeneratedFile($"{operation.Type.Name}.cs", codeWriter.ToString());
             }
+
+            var serializationExtensionWriter = new CodeWriter();
+            var serializationExtension = ModelSerializationExtensionsTypeProvider.Instance;
+            new ExpressionTypeProviderWriter(serializationExtensionWriter, serializationExtension).Write();
+            project.AddGeneratedFile($"Internal/{serializationExtension.Type.Name}.cs", serializationExtensionWriter.ToString());
         }
     }
 }
