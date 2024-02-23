@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Text.Json;
 using AutoRest.CSharp.Common.Input;
@@ -38,6 +39,18 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         {
             #region JsonElementExtensions
             yield return BuildGetObjectMethod();
+
+            yield return BuildGetBytesFromBase64();
+
+            yield return BuildGetDateTimeOffsetMethod();
+
+            yield return BuildGetTimeSpanMethod();
+
+            yield return BuildGetCharMethod();
+
+            yield return BuildThrowNonNullablePropertyIsNullMethod();
+
+            yield return BuildGetRequiredStringMethod();
             #endregion
 
             #region Utf8JsonWriterExtensions
@@ -62,15 +75,19 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         public const string GetObject = "GetObject";
         public const string GetTimeSpan = "GetTimeSpan";
         public const string ThrowNonNullablePropertyIsNull = "ThrowNonNullablePropertyIsNull";
+        public const string GetRequiredString = "GetRequiredString";
         public const string WriteNumberValue = "WriteNumberValue";
         public const string WriteStringValue = "WriteStringValue";
         public const string WriteNonEmptyArray = "WriteNonEmptyArray";
         public const string WriteBase64StringValue = "WriteBase64StringValue";
         public const string WriteObjectValue = "WriteObjectValue";
 
+        private readonly Parameter _formatParameter = new Parameter("format", null, typeof(string), null, ValidationType.None, null);
+        private readonly Parameter _propertyParameter = new Parameter("property", null, typeof(JsonProperty), null, ValidationType.None, null);
+
+        #region JsonElementExtensions methods
         private Method BuildGetObjectMethod()
         {
-            var elementParameter = new Parameter("element", null, typeof(JsonElement), null, ValidationType.None, null);
             var signature = new MethodSignature(
                 Name: GetObject,
                 Summary: null,
@@ -78,8 +95,8 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
                 Modifiers: _methodModifiers,
                 ReturnType: typeof(object),
                 ReturnDescription: null,
-                Parameters: new[] { elementParameter });
-            var element = new JsonElementExpression(elementParameter);
+                Parameters: new[] { KnownParameters.Serializations.JsonElement });
+            var element = new JsonElementExpression(KnownParameters.Serializations.JsonElement);
             var body = new SwitchStatement(element.ValueKind)
             {
                 new(JsonValueKindExpression.String, Return(element.GetString())),
@@ -121,19 +138,147 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
             return new Method(signature, body);
         }
 
+        private Method BuildGetBytesFromBase64()
+        {
+            var signature = new MethodSignature(
+                Name: GetBytesFromBase64,
+                Modifiers: _methodModifiers,
+                Parameters: new[] { KnownParameters.Serializations.JsonElement, _formatParameter },
+                ReturnType: typeof(byte[]),
+                Summary: null, Description: null, ReturnDescription: null);
+            var element = new JsonElementExpression(KnownParameters.Serializations.JsonElement);
+            var format = new StringExpression(_formatParameter);
+            var body = new MethodBodyStatement[]
+            {
+                new IfStatement(element.ValueKindEqualsNull())
+                {
+                    Return(Null)
+                },
+                EmptyLine,
+                Return(new SwitchExpression(format,
+                    new SwitchCaseExpression(Literal("U"), new InvokeStaticMethodExpression(typeof(TypeFormatters), nameof(TypeFormatters.FromBase64UrlString), new[] { new InvokeStaticMethodExpression(Type, GetRequiredString, new[] { element }, CallAsExtension: true) })),
+                    new SwitchCaseExpression(Literal("D"), element.GetBytesFromBase64()),
+                    SwitchCaseExpression.Default(ThrowExpression(New.Instance(typeof(ArgumentException), new FormattableStringExpression("Format is not supported: '{0}'", format), Nameof(format))))
+                    ))
+            };
+
+            return new Method(signature, body);
+        }
+
+        private Method BuildGetDateTimeOffsetMethod()
+        {
+            var signature = new MethodSignature(
+                Name: GetDateTimeOffset,
+                Modifiers: _methodModifiers,
+                Parameters: new[] { KnownParameters.Serializations.JsonElement, _formatParameter },
+                ReturnType: typeof(DateTimeOffset),
+                Summary: null, Description: null, ReturnDescription: null);
+            var element = new JsonElementExpression(KnownParameters.Serializations.JsonElement);
+            var format = new StringExpression(_formatParameter);
+            var body = new SwitchExpression(format,
+                SwitchCaseExpression.When(Literal("U"), Equal(element.ValueKind, JsonValueKindExpression.Number), DateTimeOffsetExpression.FromUnixTimeSeconds(element.GetInt64())),
+                // relying on the param check of the inner call to throw ArgumentNullException if GetString() returns null
+                SwitchCaseExpression.Default(new InvokeStaticMethodExpression(typeof(TypeFormatters), nameof(TypeFormatters.ParseDateTimeOffset), new[] { element.GetString(), format }))
+                );
+
+            return new Method(signature, body);
+        }
+
+        private Method BuildGetTimeSpanMethod()
+        {
+            var signature = new MethodSignature(
+                Name: GetTimeSpan,
+                Modifiers: _methodModifiers,
+                Parameters: new[] { KnownParameters.Serializations.JsonElement, _formatParameter },
+                ReturnType: typeof(TimeSpan),
+                Summary: null, Description: null, ReturnDescription: null);
+            var element = new JsonElementExpression(KnownParameters.Serializations.JsonElement);
+            // relying on the param check of the inner call to throw ArgumentNullException if GetString() returns null
+            var body = new InvokeStaticMethodExpression(typeof(TypeFormatters), nameof(TypeFormatters.ParseTimeSpan), new ValueExpression[] { element.GetString(), _formatParameter });
+
+            return new Method(signature, body);
+        }
+
+        private Method BuildGetCharMethod()
+        {
+            var signature = new MethodSignature(
+                Name: GetChar,
+                Modifiers: _methodModifiers,
+                Parameters: new[] { KnownParameters.Serializations.JsonElement },
+                ReturnType: typeof(char),
+                Summary: null, Description: null, ReturnDescription: null);
+            var element = new JsonElementExpression(KnownParameters.Serializations.JsonElement);
+            var body = new IfElseStatement(
+                element.ValueKindEqualsNull(),
+                new MethodBodyStatement[]
+                {
+                    Var("text", element.GetString(), out var text),
+                    new IfStatement(Equal(text, Null).Or(NotEqual(text.Length, Literal(1))))
+                    {
+                        Throw(New.Instance(typeof(NotSupportedException), new FormattableStringExpression("Cannot convert \\\"{0}\\\" to a char", text)))
+                    },
+                    Return(text.Index(0))
+                },
+                Throw(New.Instance(typeof(NotSupportedException), new FormattableStringExpression("Cannot convert {0} to a char", element.ValueKind)))
+                );
+
+            return new Method(signature, body);
+        }
+
+        private Method BuildThrowNonNullablePropertyIsNullMethod()
+        {
+            var signature = new MethodSignature(
+                Name: ThrowNonNullablePropertyIsNull,
+                Modifiers: _methodModifiers,
+                Parameters: new[] { _propertyParameter },
+                ReturnType: null,
+                Attributes: new[]
+                {
+                    new CSharpAttribute(typeof(ConditionalAttribute), Literal("DEBUG"))
+                },
+                Summary: null, Description: null, ReturnDescription: null);
+            var property = new JsonPropertyExpression(_propertyParameter);
+            var body = Throw(New.Instance(typeof(JsonException), new FormattableStringExpression("A property '{0}' defined as non-nullable but received as null from the service. This exception only happens in DEBUG builds of the library and would be ignored in the release build", property.Name)));
+
+            return new Method(signature, body);
+        }
+
+        private Method BuildGetRequiredStringMethod()
+        {
+            var signature = new MethodSignature(
+                Name: GetRequiredString,
+                Modifiers: _methodModifiers,
+                Parameters: new[] { KnownParameters.Serializations.JsonElement },
+                ReturnType: typeof(string),
+                Summary: null, Description: null, ReturnDescription: null);
+            var element = new JsonElementExpression(KnownParameters.Serializations.JsonElement);
+            var body = new MethodBodyStatement[]
+            {
+                Var("value", element.GetString(), out var value),
+                new IfStatement(Equal(value, Null))
+                {
+                    Throw(New.Instance(typeof(InvalidOperationException), new FormattableStringExpression("The requested operation requires an element of type 'String', but the target element has type '{0}'.", element.ValueKind)))
+                },
+                Return(value)
+            };
+
+            return new Method(signature, body);
+        }
+        #endregion
+
+        #region Utf8JsonWriterExtension methods
         private IEnumerable<Method> BuildWriteStringValueMethods()
         {
             var writer = new Utf8JsonWriterExpression(KnownParameters.Serializations.Utf8JsonWriter);
-            var formatParameter = new Parameter("format", null, typeof(string), null, ValidationType.None, null);
             var dateTimeOffsetValueParameter = new Parameter("value", null, typeof(DateTimeOffset), null, ValidationType.None, null);
             yield return new Method(
                 new MethodSignature(
                     Name: WriteStringValue,
                     Modifiers: _methodModifiers,
                     ReturnType: null,
-                    Parameters: new[] { KnownParameters.Serializations.Utf8JsonWriter, dateTimeOffsetValueParameter, formatParameter },
+                    Parameters: new[] { KnownParameters.Serializations.Utf8JsonWriter, dateTimeOffsetValueParameter, _formatParameter },
                     Summary: null, Description: null, ReturnDescription: null),
-                writer.WriteStringValue(new InvokeStaticMethodExpression(typeof(TypeFormatters), "ToString", new ValueExpression[] { dateTimeOffsetValueParameter, formatParameter })) // TODO -- TypeFormatters also need to convert to a typeprovider
+                writer.WriteStringValue(new InvokeStaticMethodExpression(typeof(TypeFormatters), "ToString", new ValueExpression[] { dateTimeOffsetValueParameter, _formatParameter })) // TODO -- TypeFormatters also need to convert to a typeprovider
                 );
 
             var dateTimeValueParameter = new Parameter("value", null, typeof(DateTime), null, ValidationType.None, null);
@@ -142,9 +287,9 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
                     Name: WriteStringValue,
                     Modifiers: _methodModifiers,
                     ReturnType: null,
-                    Parameters: new[] { KnownParameters.Serializations.Utf8JsonWriter, dateTimeValueParameter, formatParameter },
+                    Parameters: new[] { KnownParameters.Serializations.Utf8JsonWriter, dateTimeValueParameter, _formatParameter },
                     Summary: null, Description: null, ReturnDescription: null),
-                writer.WriteStringValue(new InvokeStaticMethodExpression(typeof(TypeFormatters), "ToString", new ValueExpression[] { dateTimeValueParameter, formatParameter })) // TODO -- TypeFormatters also need to convert to a typeprovider
+                writer.WriteStringValue(new InvokeStaticMethodExpression(typeof(TypeFormatters), "ToString", new ValueExpression[] { dateTimeValueParameter, _formatParameter })) // TODO -- TypeFormatters also need to convert to a typeprovider
                 );
 
             var timeSpanValueParameter = new Parameter("value", null, typeof(TimeSpan), null, ValidationType.None, null);
@@ -153,9 +298,9 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
                     Name: WriteStringValue,
                     Modifiers: _methodModifiers,
                     ReturnType: null,
-                    Parameters: new[] { KnownParameters.Serializations.Utf8JsonWriter, timeSpanValueParameter, formatParameter },
+                    Parameters: new[] { KnownParameters.Serializations.Utf8JsonWriter, timeSpanValueParameter, _formatParameter },
                     Summary: null, Description: null, ReturnDescription: null),
-                writer.WriteStringValue(new InvokeStaticMethodExpression(typeof(TypeFormatters), "ToString", new ValueExpression[] { timeSpanValueParameter, formatParameter })) // TODO -- TypeFormatters also need to convert to a typeprovider
+                writer.WriteStringValue(new InvokeStaticMethodExpression(typeof(TypeFormatters), "ToString", new ValueExpression[] { timeSpanValueParameter, _formatParameter })) // TODO -- TypeFormatters also need to convert to a typeprovider
                 );
 
             var charValueParameter = new Parameter("value", null, typeof(char), null, ValidationType.None, null);
@@ -164,7 +309,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
                     Name: WriteStringValue,
                     Modifiers: _methodModifiers,
                     ReturnType: null,
-                    Parameters: new[] { KnownParameters.Serializations.Utf8JsonWriter, charValueParameter, formatParameter },
+                    Parameters: new[] { KnownParameters.Serializations.Utf8JsonWriter, charValueParameter, _formatParameter },
                     Summary: null, Description: null, ReturnDescription: null),
                 writer.WriteStringValue(((ValueExpression)charValueParameter).Invoke(nameof(char.ToString), new MemberExpression(typeof(CultureInfo), nameof(CultureInfo.InvariantCulture))))
                 );
@@ -198,16 +343,15 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         private Method BuildWriteBase64StringValueMethod()
         {
             var valueParameter = new Parameter("value", null, typeof(byte[]), null, ValidationType.None, null);
-            var formatParameter = new Parameter("format", null, typeof(string), null, ValidationType.None, null);
             var signature = new MethodSignature(
                 Name: WriteBase64StringValue,
                 Modifiers: _methodModifiers,
-                Parameters: new[] { KnownParameters.Serializations.Utf8JsonWriter, valueParameter, formatParameter },
+                Parameters: new[] { KnownParameters.Serializations.Utf8JsonWriter, valueParameter, _formatParameter },
                 ReturnType: null,
                 Summary: null, Description: null, ReturnDescription: null);
             var writer = new Utf8JsonWriterExpression(KnownParameters.Serializations.Utf8JsonWriter);
             var value = (ValueExpression)valueParameter;
-            var format = new StringExpression(formatParameter);
+            var format = new StringExpression(_formatParameter);
             var body = new MethodBodyStatement[]
             {
                 new IfStatement(Equal(value, Null))
@@ -237,16 +381,15 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         private Method BuildWriteNumberValueMethod()
         {
             var valueParameter = new Parameter("value", null, typeof(DateTimeOffset), null, ValidationType.None, null);
-            var formatParameter = new Parameter("format", null, typeof(string), null, ValidationType.None, null);
             var signature = new MethodSignature(
                 Name: WriteNumberValue,
                 Modifiers: _methodModifiers,
-                Parameters: new[] { KnownParameters.Serializations.Utf8JsonWriter, valueParameter, formatParameter },
+                Parameters: new[] { KnownParameters.Serializations.Utf8JsonWriter, valueParameter, _formatParameter },
                 ReturnType: null,
                 Summary: null, Description: null, ReturnDescription: null);
             var writer = new Utf8JsonWriterExpression(KnownParameters.Serializations.Utf8JsonWriter);
             var value = new DateTimeOffsetExpression(valueParameter);
-            var format = new StringExpression(formatParameter);
+            var format = new StringExpression(_formatParameter);
             var body = new MethodBodyStatement[]
             {
                 new IfStatement(NotEqual(format, Literal("U")))
@@ -410,5 +553,6 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
                 return new(declaration, body);
             }
         }
+        #endregion
     }
 }

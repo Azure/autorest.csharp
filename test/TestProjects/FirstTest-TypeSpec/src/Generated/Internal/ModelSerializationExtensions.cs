@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text.Json;
@@ -56,6 +57,62 @@ namespace FirstTestTypeSpec
                 default:
                     throw new NotSupportedException($"Not supported value kind {element.ValueKind}");
             }
+        }
+
+        public static byte[] GetBytesFromBase64(this JsonElement element, string format)
+        {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+
+            return format switch
+            {
+                "U" => TypeFormatters.FromBase64UrlString(element.GetRequiredString()),
+                "D" => element.GetBytesFromBase64(),
+                _ => throw new ArgumentException($"Format is not supported: '{format}'", nameof(format))
+            };
+        }
+
+        public static DateTimeOffset GetDateTimeOffset(this JsonElement element, string format) => format switch
+        {
+            "U" when element.ValueKind == JsonValueKind.Number => DateTimeOffset.FromUnixTimeSeconds(element.GetInt64()),
+            _ => TypeFormatters.ParseDateTimeOffset(element.GetString(), format)
+        };
+
+        public static TimeSpan GetTimeSpan(this JsonElement element, string format) => TypeFormatters.ParseTimeSpan(element.GetString(), format);
+
+        public static char GetChar(this JsonElement element)
+        {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                var text = element.GetString();
+                if (text == null || text.Length != 1)
+                {
+                    throw new NotSupportedException($"Cannot convert \"{text}\" to a char");
+                }
+                return text[0];
+            }
+            else
+            {
+                throw new NotSupportedException($"Cannot convert {element.ValueKind} to a char");
+            }
+        }
+
+        [Conditional("DEBUG")]
+        public static void ThrowNonNullablePropertyIsNull(this JsonProperty property)
+        {
+            throw new JsonException($"A property '{property.Name}' defined as non-nullable but received as null from the service. This exception only happens in DEBUG builds of the library and would be ignored in the release build");
+        }
+
+        public static string GetRequiredString(this JsonElement element)
+        {
+            var value = element.GetString();
+            if (value == null)
+            {
+                throw new InvalidOperationException($"The requested operation requires an element of type 'String', but the target element has type '{element.ValueKind}'.");
+            }
+            return value;
         }
 
         public static void WriteStringValue(this Utf8JsonWriter writer, DateTimeOffset value, string format)

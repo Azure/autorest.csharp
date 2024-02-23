@@ -19,6 +19,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
         public ValueExpression InvokeClone() => Invoke(nameof(JsonElement.Clone));
         public ValueExpression GetArrayLength() => Invoke(nameof(JsonElement.GetArrayLength));
         public ValueExpression GetBoolean() => Invoke(nameof(JsonElement.GetBoolean));
+        public ValueExpression GetBytesFromBase64() => Invoke(nameof(JsonElement.GetBytesFromBase64));
         public ValueExpression GetBytesFromBase64(string? format) => Extensible.JsonElement.GetBytesFromBase64(this, format);
         public ValueExpression GetChar() => Extensible.JsonElement.GetChar(this);
         public ValueExpression GetDateTimeOffset(string? format) => Extensible.JsonElement.GetDateTimeOffset(this, format);

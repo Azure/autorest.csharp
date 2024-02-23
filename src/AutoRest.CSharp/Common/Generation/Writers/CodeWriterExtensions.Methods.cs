@@ -436,6 +436,12 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     break;
 
+                case SwitchCaseWhenExpression(var matchExpression, var conditionExpression):
+                    writer.WriteValueExpression(matchExpression);
+                    writer.AppendRaw(" when ");
+                    writer.WriteValueExpression(conditionExpression);
+                    break;
+
                 case DictionaryInitializerExpression(var values):
                     if (values is not { Count: > 0 })
                     {
