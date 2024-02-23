@@ -77,7 +77,7 @@ namespace MgmtDiscriminator.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<DeliveryRuleData>> value = default;
+            IReadOnlyList<DeliveryRuleData> value = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -102,7 +102,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DeliveryRuleListResult(Optional.ToList(value), serializedAdditionalRawData);
+            return new DeliveryRuleListResult(value ?? new ChangeTrackingList<DeliveryRuleData>(), serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

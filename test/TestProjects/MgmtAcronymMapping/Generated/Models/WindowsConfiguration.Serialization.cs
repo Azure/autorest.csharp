@@ -63,7 +63,7 @@ namespace MgmtAcronymMapping.Models
             Optional<bool> provisionVmAgent = default;
             Optional<bool> enableAutomaticUpdates = default;
             Optional<string> timeZone = default;
-            Optional<IList<AdditionalUnattendContent>> additionalUnattendContent = default;
+            IList<AdditionalUnattendContent> additionalUnattendContent = default;
             Optional<PatchSettings> patchSettings = default;
             Optional<WinRMConfiguration> winRM = default;
             foreach (var property in element.EnumerateObject())
@@ -124,7 +124,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new WindowsConfiguration(Optional.ToNullable(provisionVmAgent), Optional.ToNullable(enableAutomaticUpdates), timeZone.Value, Optional.ToList(additionalUnattendContent), patchSettings.Value, winRM.Value);
+            return new WindowsConfiguration(Optional.ToNullable(provisionVmAgent), Optional.ToNullable(enableAutomaticUpdates), timeZone.Value, additionalUnattendContent ?? new ChangeTrackingList<AdditionalUnattendContent>(), patchSettings.Value, winRM.Value);
         }
     }
 }

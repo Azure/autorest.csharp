@@ -20,7 +20,7 @@ namespace MgmtScopeResource.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<FakePolicyAssignmentData>> value = default;
+            IReadOnlyList<FakePolicyAssignmentData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -44,7 +44,7 @@ namespace MgmtScopeResource.Models
                     continue;
                 }
             }
-            return new FakePolicyAssignmentListResult(Optional.ToList(value), nextLink.Value);
+            return new FakePolicyAssignmentListResult(value ?? new ChangeTrackingList<FakePolicyAssignmentData>(), nextLink.Value);
         }
     }
 }

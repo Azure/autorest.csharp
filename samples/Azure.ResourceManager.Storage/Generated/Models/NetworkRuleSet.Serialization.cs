@@ -63,9 +63,9 @@ namespace Azure.ResourceManager.Storage.Models
                 return null;
             }
             Optional<Bypass> bypass = default;
-            Optional<IList<ResourceAccessRule>> resourceAccessRules = default;
-            Optional<IList<VirtualNetworkRule>> virtualNetworkRules = default;
-            Optional<IList<IPRule>> ipRules = default;
+            IList<ResourceAccessRule> resourceAccessRules = default;
+            IList<VirtualNetworkRule> virtualNetworkRules = default;
+            IList<IPRule> ipRules = default;
             DefaultAction defaultAction = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -126,7 +126,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new NetworkRuleSet(Optional.ToNullable(bypass), Optional.ToList(resourceAccessRules), Optional.ToList(virtualNetworkRules), Optional.ToList(ipRules), defaultAction);
+            return new NetworkRuleSet(Optional.ToNullable(bypass), resourceAccessRules ?? new ChangeTrackingList<ResourceAccessRule>(), virtualNetworkRules ?? new ChangeTrackingList<VirtualNetworkRule>(), ipRules ?? new ChangeTrackingList<IPRule>(), defaultAction);
         }
     }
 }

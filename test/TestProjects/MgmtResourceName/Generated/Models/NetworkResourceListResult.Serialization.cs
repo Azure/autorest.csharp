@@ -20,7 +20,7 @@ namespace MgmtResourceName.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<NetworkData>> value = default;
+            IReadOnlyList<NetworkData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -44,7 +44,7 @@ namespace MgmtResourceName.Models
                     continue;
                 }
             }
-            return new NetworkResourceListResult(Optional.ToList(value), nextLink.Value);
+            return new NetworkResourceListResult(value ?? new ChangeTrackingList<NetworkData>(), nextLink.Value);
         }
     }
 }

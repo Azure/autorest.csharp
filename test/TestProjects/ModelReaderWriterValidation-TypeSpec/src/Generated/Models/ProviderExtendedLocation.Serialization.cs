@@ -87,7 +87,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             }
             Optional<string> location = default;
             Optional<string> type = default;
-            Optional<IReadOnlyList<string>> extendedLocations = default;
+            IReadOnlyList<string> extendedLocations = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -122,7 +122,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ProviderExtendedLocation(location.Value, type.Value, Optional.ToList(extendedLocations), serializedAdditionalRawData);
+            return new ProviderExtendedLocation(location.Value, type.Value, extendedLocations ?? new ChangeTrackingList<string>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ProviderExtendedLocation>.Write(ModelReaderWriterOptions options)

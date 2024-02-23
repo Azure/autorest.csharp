@@ -20,7 +20,7 @@ namespace MgmtOperations.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<UnpatchableResourceData>> value = default;
+            IReadOnlyList<UnpatchableResourceData> value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -38,7 +38,7 @@ namespace MgmtOperations.Models
                     continue;
                 }
             }
-            return new UnpatchableResourceListResult(Optional.ToList(value));
+            return new UnpatchableResourceListResult(value ?? new ChangeTrackingList<UnpatchableResourceData>());
         }
     }
 }

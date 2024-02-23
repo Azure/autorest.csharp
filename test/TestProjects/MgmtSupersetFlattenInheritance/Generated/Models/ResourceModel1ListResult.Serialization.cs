@@ -20,7 +20,7 @@ namespace MgmtSupersetFlattenInheritance.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<ResourceModel1Data>> value = default;
+            IReadOnlyList<ResourceModel1Data> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -44,7 +44,7 @@ namespace MgmtSupersetFlattenInheritance.Models
                     continue;
                 }
             }
-            return new ResourceModel1ListResult(Optional.ToList(value), nextLink.Value);
+            return new ResourceModel1ListResult(value ?? new ChangeTrackingList<ResourceModel1Data>(), nextLink.Value);
         }
     }
 }

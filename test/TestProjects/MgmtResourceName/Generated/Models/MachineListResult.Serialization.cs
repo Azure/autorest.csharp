@@ -20,7 +20,7 @@ namespace MgmtResourceName.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<MachineData>> value = default;
+            IReadOnlyList<MachineData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -44,7 +44,7 @@ namespace MgmtResourceName.Models
                     continue;
                 }
             }
-            return new MachineListResult(Optional.ToList(value), nextLink.Value);
+            return new MachineListResult(value ?? new ChangeTrackingList<MachineData>(), nextLink.Value);
         }
     }
 }

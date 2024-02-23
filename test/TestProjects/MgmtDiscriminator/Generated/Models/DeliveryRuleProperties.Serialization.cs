@@ -109,7 +109,7 @@ namespace MgmtDiscriminator.Models
             }
             Optional<int> order = default;
             Optional<DeliveryRuleCondition> conditions = default;
-            Optional<IList<DeliveryRuleAction>> actions = default;
+            IList<DeliveryRuleAction> actions = default;
             Optional<IDictionary<string, DeliveryRuleAction>> extraMappingInfo = default;
             Optional<Pet> pet = default;
             Optional<string> foo = default;
@@ -183,7 +183,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DeliveryRuleProperties(Optional.ToNullable(order), conditions.Value, Optional.ToList(actions), Optional.ToDictionary(extraMappingInfo), pet.Value, foo.Value, serializedAdditionalRawData);
+            return new DeliveryRuleProperties(Optional.ToNullable(order), conditions.Value, actions ?? new ChangeTrackingList<DeliveryRuleAction>(), Optional.ToDictionary(extraMappingInfo), pet.Value, foo.Value, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

@@ -131,13 +131,13 @@ namespace Azure.Network.Management.Interface.Models
             Optional<string> type = default;
             Optional<string> location = default;
             Optional<IDictionary<string, string>> tags = default;
-            Optional<IList<FrontendIPConfiguration>> frontendIPConfigurations = default;
-            Optional<IList<BackendAddressPool>> backendAddressPools = default;
-            Optional<IList<LoadBalancingRule>> loadBalancingRules = default;
-            Optional<IList<Probe>> probes = default;
-            Optional<IList<InboundNatRule>> inboundNatRules = default;
-            Optional<IList<InboundNatPool>> inboundNatPools = default;
-            Optional<IList<OutboundRule>> outboundRules = default;
+            IList<FrontendIPConfiguration> frontendIPConfigurations = default;
+            IList<BackendAddressPool> backendAddressPools = default;
+            IList<LoadBalancingRule> loadBalancingRules = default;
+            IList<Probe> probes = default;
+            IList<InboundNatRule> inboundNatRules = default;
+            IList<InboundNatPool> inboundNatPools = default;
+            IList<OutboundRule> outboundRules = default;
             Optional<string> resourceGuid = default;
             Optional<ProvisioningState> provisioningState = default;
             foreach (var property in element.EnumerateObject())
@@ -315,7 +315,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new LoadBalancer(id.Value, name.Value, type.Value, location.Value, Optional.ToDictionary(tags), sku.Value, etag.Value, Optional.ToList(frontendIPConfigurations), Optional.ToList(backendAddressPools), Optional.ToList(loadBalancingRules), Optional.ToList(probes), Optional.ToList(inboundNatRules), Optional.ToList(inboundNatPools), Optional.ToList(outboundRules), resourceGuid.Value, Optional.ToNullable(provisioningState));
+            return new LoadBalancer(id.Value, name.Value, type.Value, location.Value, Optional.ToDictionary(tags), sku.Value, etag.Value, frontendIPConfigurations ?? new ChangeTrackingList<FrontendIPConfiguration>(), backendAddressPools ?? new ChangeTrackingList<BackendAddressPool>(), loadBalancingRules ?? new ChangeTrackingList<LoadBalancingRule>(), probes ?? new ChangeTrackingList<Probe>(), inboundNatRules ?? new ChangeTrackingList<InboundNatRule>(), inboundNatPools ?? new ChangeTrackingList<InboundNatPool>(), outboundRules ?? new ChangeTrackingList<OutboundRule>(), resourceGuid.Value, Optional.ToNullable(provisioningState));
         }
     }
 }

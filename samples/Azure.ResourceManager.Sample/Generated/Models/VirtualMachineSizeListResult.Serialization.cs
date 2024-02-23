@@ -76,7 +76,7 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<VirtualMachineSize>> value = default;
+            IReadOnlyList<VirtualMachineSize> value = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -101,7 +101,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineSizeListResult(Optional.ToList(value), serializedAdditionalRawData);
+            return new VirtualMachineSizeListResult(value ?? new ChangeTrackingList<VirtualMachineSize>(), serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

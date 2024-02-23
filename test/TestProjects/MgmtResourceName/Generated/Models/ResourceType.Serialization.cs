@@ -21,7 +21,7 @@ namespace MgmtResourceName.Models
             }
             Optional<string> name = default;
             Optional<string> displayName = default;
-            Optional<IReadOnlyList<ResourceOperation>> operations = default;
+            IReadOnlyList<ResourceOperation> operations = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -49,7 +49,7 @@ namespace MgmtResourceName.Models
                     continue;
                 }
             }
-            return new ResourceType(name.Value, displayName.Value, Optional.ToList(operations));
+            return new ResourceType(name.Value, displayName.Value, operations ?? new ChangeTrackingList<ResourceOperation>());
         }
     }
 }

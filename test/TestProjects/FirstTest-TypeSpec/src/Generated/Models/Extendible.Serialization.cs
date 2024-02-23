@@ -75,7 +75,7 @@ namespace FirstTestTypeSpec.Models
             {
                 return null;
             }
-            Optional<IList<ThereLevelExtension>> extension = default;
+            IList<ThereLevelExtension> extension = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -100,7 +100,7 @@ namespace FirstTestTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Extendible(Optional.ToList(extension), serializedAdditionalRawData);
+            return new Extendible(extension ?? new ChangeTrackingList<ThereLevelExtension>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<Extendible>.Write(ModelReaderWriterOptions options)

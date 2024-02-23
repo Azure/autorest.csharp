@@ -19,7 +19,7 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<NetworkInterface>> value = default;
+            IReadOnlyList<NetworkInterface> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -43,7 +43,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new NetworkInterfaceListResult(Optional.ToList(value), nextLink.Value);
+            return new NetworkInterfaceListResult(value ?? new ChangeTrackingList<NetworkInterface>(), nextLink.Value);
         }
     }
 }

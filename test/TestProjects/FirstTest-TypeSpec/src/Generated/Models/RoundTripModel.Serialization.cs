@@ -286,13 +286,13 @@ namespace FirstTestTypeSpec.Models
             IDictionary<string, StringExtensibleEnum?> requiredDictionary = default;
             Thing requiredModel = default;
             Optional<IntExtensibleEnum> intExtensibleEnum = default;
-            Optional<IList<IntExtensibleEnum>> intExtensibleEnumCollection = default;
+            IList<IntExtensibleEnum> intExtensibleEnumCollection = default;
             Optional<FloatExtensibleEnum> floatExtensibleEnum = default;
-            Optional<IList<FloatExtensibleEnum>> floatExtensibleEnumCollection = default;
+            IList<FloatExtensibleEnum> floatExtensibleEnumCollection = default;
             Optional<FloatFixedEnum> floatFixedEnum = default;
-            Optional<IList<FloatFixedEnum>> floatFixedEnumCollection = default;
+            IList<FloatFixedEnum> floatFixedEnumCollection = default;
             Optional<IntFixedEnum> intFixedEnum = default;
-            Optional<IList<IntFixedEnum>> intFixedEnumCollection = default;
+            IList<IntFixedEnum> intFixedEnumCollection = default;
             Optional<StringFixedEnum?> stringFixedEnum = default;
             BinaryData requiredUnknown = default;
             Optional<BinaryData> optionalUnknown = default;
@@ -557,7 +557,7 @@ namespace FirstTestTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new RoundTripModel(requiredString, requiredInt, requiredCollection, requiredDictionary, requiredModel, Optional.ToNullable(intExtensibleEnum), Optional.ToList(intExtensibleEnumCollection), Optional.ToNullable(floatExtensibleEnum), Optional.ToList(floatExtensibleEnumCollection), Optional.ToNullable(floatFixedEnum), Optional.ToList(floatFixedEnumCollection), Optional.ToNullable(intFixedEnum), Optional.ToList(intFixedEnumCollection), Optional.ToNullable(stringFixedEnum), requiredUnknown, optionalUnknown.Value, requiredRecordUnknown, Optional.ToDictionary(optionalRecordUnknown), readOnlyRequiredRecordUnknown, Optional.ToDictionary(readOnlyOptionalRecordUnknown), modelWithRequiredNullable, serializedAdditionalRawData);
+            return new RoundTripModel(requiredString, requiredInt, requiredCollection, requiredDictionary, requiredModel, Optional.ToNullable(intExtensibleEnum), intExtensibleEnumCollection ?? new ChangeTrackingList<IntExtensibleEnum>(), Optional.ToNullable(floatExtensibleEnum), floatExtensibleEnumCollection ?? new ChangeTrackingList<FloatExtensibleEnum>(), Optional.ToNullable(floatFixedEnum), floatFixedEnumCollection ?? new ChangeTrackingList<FloatFixedEnum>(), Optional.ToNullable(intFixedEnum), intFixedEnumCollection ?? new ChangeTrackingList<IntFixedEnum>(), Optional.ToNullable(stringFixedEnum), requiredUnknown, optionalUnknown.Value, requiredRecordUnknown, Optional.ToDictionary(optionalRecordUnknown), readOnlyRequiredRecordUnknown, Optional.ToDictionary(readOnlyOptionalRecordUnknown), modelWithRequiredNullable, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<RoundTripModel>.Write(ModelReaderWriterOptions options)

@@ -19,7 +19,7 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<VaultIssue>> issues = default;
+            IReadOnlyList<VaultIssue> issues = default;
             Optional<string> result = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -43,7 +43,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new VaultValidationResult(Optional.ToList(issues), result.Value);
+            return new VaultValidationResult(issues ?? new ChangeTrackingList<VaultIssue>(), result.Value);
         }
     }
 }

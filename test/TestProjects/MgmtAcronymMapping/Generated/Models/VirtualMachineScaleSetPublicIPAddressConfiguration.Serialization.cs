@@ -64,7 +64,7 @@ namespace MgmtAcronymMapping.Models
             string name = default;
             Optional<int> idleTimeoutInMinutes = default;
             Optional<VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings> dnsSettings = default;
-            Optional<IList<VirtualMachineScaleSetIPTag>> ipTags = default;
+            IList<VirtualMachineScaleSetIPTag> ipTags = default;
             Optional<WritableSubResource> publicIPPrefix = default;
             Optional<IPVersion> publicIPAddressVersion = default;
             foreach (var property in element.EnumerateObject())
@@ -137,7 +137,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetPublicIPAddressConfiguration(name, Optional.ToNullable(idleTimeoutInMinutes), dnsSettings.Value, Optional.ToList(ipTags), publicIPPrefix, Optional.ToNullable(publicIPAddressVersion));
+            return new VirtualMachineScaleSetPublicIPAddressConfiguration(name, Optional.ToNullable(idleTimeoutInMinutes), dnsSettings.Value, ipTags ?? new ChangeTrackingList<VirtualMachineScaleSetIPTag>(), publicIPPrefix, Optional.ToNullable(publicIPAddressVersion));
         }
     }
 }

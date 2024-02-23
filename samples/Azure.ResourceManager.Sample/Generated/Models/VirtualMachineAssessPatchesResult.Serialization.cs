@@ -117,7 +117,7 @@ namespace Azure.ResourceManager.Sample.Models
             Optional<int> criticalAndSecurityPatchCount = default;
             Optional<int> otherPatchCount = default;
             Optional<DateTimeOffset> startDateTime = default;
-            Optional<IReadOnlyList<VirtualMachineSoftwarePatchProperties>> patches = default;
+            IReadOnlyList<VirtualMachineSoftwarePatchProperties> patches = default;
             Optional<ApiError> error = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -202,7 +202,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineAssessPatchesResult(Optional.ToNullable(status), assessmentActivityId.Value, Optional.ToNullable(rebootPending), Optional.ToNullable(criticalAndSecurityPatchCount), Optional.ToNullable(otherPatchCount), Optional.ToNullable(startDateTime), Optional.ToList(patches), error.Value, serializedAdditionalRawData);
+            return new VirtualMachineAssessPatchesResult(Optional.ToNullable(status), assessmentActivityId.Value, Optional.ToNullable(rebootPending), Optional.ToNullable(criticalAndSecurityPatchCount), Optional.ToNullable(otherPatchCount), Optional.ToNullable(startDateTime), patches ?? new ChangeTrackingList<VirtualMachineSoftwarePatchProperties>(), error.Value, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

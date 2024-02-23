@@ -143,10 +143,10 @@ namespace Azure.ResourceManager.Sample.Models
             Optional<bool> primary = default;
             Optional<VirtualMachineScaleSetPublicIPAddressConfiguration> publicIPAddressConfiguration = default;
             Optional<IPVersion> privateIPAddressVersion = default;
-            Optional<IList<WritableSubResource>> applicationGatewayBackendAddressPools = default;
-            Optional<IList<WritableSubResource>> applicationSecurityGroups = default;
-            Optional<IList<WritableSubResource>> loadBalancerBackendAddressPools = default;
-            Optional<IList<WritableSubResource>> loadBalancerInboundNatPools = default;
+            IList<WritableSubResource> applicationGatewayBackendAddressPools = default;
+            IList<WritableSubResource> applicationSecurityGroups = default;
+            IList<WritableSubResource> loadBalancerBackendAddressPools = default;
+            IList<WritableSubResource> loadBalancerInboundNatPools = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -271,7 +271,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineScaleSetIPConfiguration(id.Value, serializedAdditionalRawData, name, subnet, Optional.ToNullable(primary), publicIPAddressConfiguration.Value, Optional.ToNullable(privateIPAddressVersion), Optional.ToList(applicationGatewayBackendAddressPools), Optional.ToList(applicationSecurityGroups), Optional.ToList(loadBalancerBackendAddressPools), Optional.ToList(loadBalancerInboundNatPools));
+            return new VirtualMachineScaleSetIPConfiguration(id.Value, serializedAdditionalRawData, name, subnet, Optional.ToNullable(primary), publicIPAddressConfiguration.Value, Optional.ToNullable(privateIPAddressVersion), applicationGatewayBackendAddressPools ?? new ChangeTrackingList<WritableSubResource>(), applicationSecurityGroups ?? new ChangeTrackingList<WritableSubResource>(), loadBalancerBackendAddressPools ?? new ChangeTrackingList<WritableSubResource>(), loadBalancerInboundNatPools ?? new ChangeTrackingList<WritableSubResource>());
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

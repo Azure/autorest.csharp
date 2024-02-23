@@ -78,7 +78,7 @@ namespace _Type._Array.Models
                 return null;
             }
             string property = default;
-            Optional<IList<InnerModel>> children = default;
+            IList<InnerModel> children = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property0 in element.EnumerateObject())
@@ -108,7 +108,7 @@ namespace _Type._Array.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new InnerModel(property, Optional.ToList(children), serializedAdditionalRawData);
+            return new InnerModel(property, children ?? new ChangeTrackingList<InnerModel>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<InnerModel>.Write(ModelReaderWriterOptions options)

@@ -157,16 +157,16 @@ namespace MgmtExpandResourceTypes
             Optional<string> fqdn = default;
             Optional<string> provisioningState = default;
             Optional<WritableSubResource> targetResource = default;
-            Optional<IList<ARecord>> aRecords = default;
-            Optional<IList<AaaaRecord>> aaaaRecords = default;
-            Optional<IList<MxRecord>> mxRecords = default;
-            Optional<IList<NsRecord>> nsRecords = default;
-            Optional<IList<PtrRecord>> ptrRecords = default;
-            Optional<IList<SrvRecord>> srvRecords = default;
-            Optional<IList<TxtRecord>> txtRecords = default;
+            IList<ARecord> aRecords = default;
+            IList<AaaaRecord> aaaaRecords = default;
+            IList<MxRecord> mxRecords = default;
+            IList<NsRecord> nsRecords = default;
+            IList<PtrRecord> ptrRecords = default;
+            IList<SrvRecord> srvRecords = default;
+            IList<TxtRecord> txtRecords = default;
             Optional<CnameRecord> cnameRecord = default;
             Optional<SoaRecord> soaRecord = default;
-            Optional<IList<CaaRecord>> caaRecords = default;
+            IList<CaaRecord> caaRecords = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"u8))
@@ -383,7 +383,7 @@ namespace MgmtExpandResourceTypes
                     continue;
                 }
             }
-            return new RecordSetData(id, name, type, systemData.Value, etag.Value, Optional.ToDictionary(metadata), Optional.ToNullable(ttl), fqdn.Value, provisioningState.Value, targetResource, Optional.ToList(aRecords), Optional.ToList(aaaaRecords), Optional.ToList(mxRecords), Optional.ToList(nsRecords), Optional.ToList(ptrRecords), Optional.ToList(srvRecords), Optional.ToList(txtRecords), cnameRecord.Value, soaRecord.Value, Optional.ToList(caaRecords));
+            return new RecordSetData(id, name, type, systemData.Value, etag.Value, Optional.ToDictionary(metadata), Optional.ToNullable(ttl), fqdn.Value, provisioningState.Value, targetResource, aRecords ?? new ChangeTrackingList<ARecord>(), aaaaRecords ?? new ChangeTrackingList<AaaaRecord>(), mxRecords ?? new ChangeTrackingList<MxRecord>(), nsRecords ?? new ChangeTrackingList<NsRecord>(), ptrRecords ?? new ChangeTrackingList<PtrRecord>(), srvRecords ?? new ChangeTrackingList<SrvRecord>(), txtRecords ?? new ChangeTrackingList<TxtRecord>(), cnameRecord.Value, soaRecord.Value, caaRecords ?? new ChangeTrackingList<CaaRecord>());
         }
     }
 }

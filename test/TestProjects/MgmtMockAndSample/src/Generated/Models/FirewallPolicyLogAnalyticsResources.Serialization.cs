@@ -41,7 +41,7 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<IList<FirewallPolicyLogAnalyticsWorkspace>> workspaces = default;
+            IList<FirewallPolicyLogAnalyticsWorkspace> workspaces = default;
             Optional<WritableSubResource> defaultWorkspaceId = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -69,7 +69,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new FirewallPolicyLogAnalyticsResources(Optional.ToList(workspaces), defaultWorkspaceId);
+            return new FirewallPolicyLogAnalyticsResources(workspaces ?? new ChangeTrackingList<FirewallPolicyLogAnalyticsWorkspace>(), defaultWorkspaceId);
         }
     }
 }

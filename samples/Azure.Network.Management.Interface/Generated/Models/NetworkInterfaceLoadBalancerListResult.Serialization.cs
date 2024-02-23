@@ -19,7 +19,7 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<LoadBalancer>> value = default;
+            IReadOnlyList<LoadBalancer> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -43,7 +43,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new NetworkInterfaceLoadBalancerListResult(Optional.ToList(value), nextLink.Value);
+            return new NetworkInterfaceLoadBalancerListResult(value ?? new ChangeTrackingList<LoadBalancer>(), nextLink.Value);
         }
     }
 }

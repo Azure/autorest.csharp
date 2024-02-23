@@ -81,10 +81,10 @@ namespace Azure.Network.Management.Interface.Models
             Optional<string> location = default;
             Optional<IDictionary<string, string>> tags = default;
             Optional<Subnet> subnet = default;
-            Optional<IReadOnlyList<NetworkInterface>> networkInterfaces = default;
+            IReadOnlyList<NetworkInterface> networkInterfaces = default;
             Optional<ProvisioningState> provisioningState = default;
-            Optional<IList<PrivateLinkServiceConnection>> privateLinkServiceConnections = default;
-            Optional<IList<PrivateLinkServiceConnection>> manualPrivateLinkServiceConnections = default;
+            IList<PrivateLinkServiceConnection> privateLinkServiceConnections = default;
+            IList<PrivateLinkServiceConnection> manualPrivateLinkServiceConnections = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"u8))
@@ -199,7 +199,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new PrivateEndpoint(id.Value, name.Value, type.Value, location.Value, Optional.ToDictionary(tags), etag.Value, subnet.Value, Optional.ToList(networkInterfaces), Optional.ToNullable(provisioningState), Optional.ToList(privateLinkServiceConnections), Optional.ToList(manualPrivateLinkServiceConnections));
+            return new PrivateEndpoint(id.Value, name.Value, type.Value, location.Value, Optional.ToDictionary(tags), etag.Value, subnet.Value, networkInterfaces ?? new ChangeTrackingList<NetworkInterface>(), Optional.ToNullable(provisioningState), privateLinkServiceConnections ?? new ChangeTrackingList<PrivateLinkServiceConnection>(), manualPrivateLinkServiceConnections ?? new ChangeTrackingList<PrivateLinkServiceConnection>());
         }
     }
 }

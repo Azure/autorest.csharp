@@ -96,7 +96,7 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<ApiErrorBase>> details = default;
+            IReadOnlyList<ApiErrorBase> details = default;
             Optional<InnerError> innererror = default;
             Optional<string> code = default;
             Optional<string> target = default;
@@ -149,7 +149,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ApiError(Optional.ToList(details), innererror.Value, code.Value, target.Value, message.Value, serializedAdditionalRawData);
+            return new ApiError(details ?? new ChangeTrackingList<ApiErrorBase>(), innererror.Value, code.Value, target.Value, message.Value, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
