@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace AdditionalPropertiesEx.Models
 {
@@ -20,7 +19,10 @@ namespace AdditionalPropertiesEx.Models
         /// <exception cref="ArgumentNullException"> <paramref name="additionalProperties"/> is null. </exception>
         internal OutputAdditionalPropertiesModelStruct(int id, IReadOnlyDictionary<string, string> additionalProperties)
         {
-            Argument.AssertNotNull(additionalProperties, nameof(additionalProperties));
+            if (additionalProperties == null)
+            {
+                throw new ArgumentNullException(nameof(additionalProperties));
+            }
 
             Id = id;
             AdditionalProperties = additionalProperties;

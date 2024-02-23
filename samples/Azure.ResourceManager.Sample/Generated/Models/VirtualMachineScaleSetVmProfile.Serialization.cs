@@ -27,57 +27,57 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(OSProfile))
+            if (OSProfile != null)
             {
                 writer.WritePropertyName("osProfile"u8);
                 writer.WriteObjectValue(OSProfile);
             }
-            if (Optional.IsDefined(StorageProfile))
+            if (StorageProfile != null)
             {
                 writer.WritePropertyName("storageProfile"u8);
                 writer.WriteObjectValue(StorageProfile);
             }
-            if (Optional.IsDefined(NetworkProfile))
+            if (NetworkProfile != null)
             {
                 writer.WritePropertyName("networkProfile"u8);
                 writer.WriteObjectValue(NetworkProfile);
             }
-            if (Optional.IsDefined(SecurityProfile))
+            if (SecurityProfile != null)
             {
                 writer.WritePropertyName("securityProfile"u8);
                 writer.WriteObjectValue(SecurityProfile);
             }
-            if (Optional.IsDefined(DiagnosticsProfile))
+            if (DiagnosticsProfile != null)
             {
                 writer.WritePropertyName("diagnosticsProfile"u8);
                 writer.WriteObjectValue(DiagnosticsProfile);
             }
-            if (Optional.IsDefined(ExtensionProfile))
+            if (ExtensionProfile != null)
             {
                 writer.WritePropertyName("extensionProfile"u8);
                 writer.WriteObjectValue(ExtensionProfile);
             }
-            if (Optional.IsDefined(LicenseType))
+            if (LicenseType != null)
             {
                 writer.WritePropertyName("licenseType"u8);
                 writer.WriteStringValue(LicenseType);
             }
-            if (Optional.IsDefined(Priority))
+            if (Priority.HasValue)
             {
                 writer.WritePropertyName("priority"u8);
                 writer.WriteStringValue(Priority.Value.ToString());
             }
-            if (Optional.IsDefined(EvictionPolicy))
+            if (EvictionPolicy.HasValue)
             {
                 writer.WritePropertyName("evictionPolicy"u8);
                 writer.WriteStringValue(EvictionPolicy.Value.ToString());
             }
-            if (Optional.IsDefined(BillingProfile))
+            if (BillingProfile != null)
             {
                 writer.WritePropertyName("billingProfile"u8);
                 writer.WriteObjectValue(BillingProfile);
             }
-            if (Optional.IsDefined(ScheduledEventsProfile))
+            if (ScheduledEventsProfile != null)
             {
                 writer.WritePropertyName("scheduledEventsProfile"u8);
                 writer.WriteObjectValue(ScheduledEventsProfile);
@@ -141,7 +141,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    osProfile = VirtualMachineScaleSetOSProfile.DeserializeVirtualMachineScaleSetOSProfile(property.Value);
+                    osProfile = VirtualMachineScaleSetOSProfile.DeserializeVirtualMachineScaleSetOSProfile(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("storageProfile"u8))
@@ -150,7 +150,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    storageProfile = VirtualMachineScaleSetStorageProfile.DeserializeVirtualMachineScaleSetStorageProfile(property.Value);
+                    storageProfile = VirtualMachineScaleSetStorageProfile.DeserializeVirtualMachineScaleSetStorageProfile(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("networkProfile"u8))
@@ -159,7 +159,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    networkProfile = VirtualMachineScaleSetNetworkProfile.DeserializeVirtualMachineScaleSetNetworkProfile(property.Value);
+                    networkProfile = VirtualMachineScaleSetNetworkProfile.DeserializeVirtualMachineScaleSetNetworkProfile(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("securityProfile"u8))
@@ -168,7 +168,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    securityProfile = SecurityProfile.DeserializeSecurityProfile(property.Value);
+                    securityProfile = SecurityProfile.DeserializeSecurityProfile(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("diagnosticsProfile"u8))
@@ -177,7 +177,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    diagnosticsProfile = DiagnosticsProfile.DeserializeDiagnosticsProfile(property.Value);
+                    diagnosticsProfile = DiagnosticsProfile.DeserializeDiagnosticsProfile(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("extensionProfile"u8))
@@ -186,7 +186,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    extensionProfile = VirtualMachineScaleSetExtensionProfile.DeserializeVirtualMachineScaleSetExtensionProfile(property.Value);
+                    extensionProfile = VirtualMachineScaleSetExtensionProfile.DeserializeVirtualMachineScaleSetExtensionProfile(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("licenseType"u8))
@@ -218,7 +218,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    billingProfile = BillingProfile.DeserializeBillingProfile(property.Value);
+                    billingProfile = BillingProfile.DeserializeBillingProfile(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("scheduledEventsProfile"u8))
@@ -227,7 +227,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    scheduledEventsProfile = ScheduledEventsProfile.DeserializeScheduledEventsProfile(property.Value);
+                    scheduledEventsProfile = ScheduledEventsProfile.DeserializeScheduledEventsProfile(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")
@@ -244,43 +244,43 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(OSProfile))
+            if (OSProfile != null)
             {
                 builder.Append("  osProfile:");
                 AppendChildObject(builder, OSProfile, options, 2, false);
             }
 
-            if (Optional.IsDefined(StorageProfile))
+            if (StorageProfile != null)
             {
                 builder.Append("  storageProfile:");
                 AppendChildObject(builder, StorageProfile, options, 2, false);
             }
 
-            if (Optional.IsDefined(NetworkProfile))
+            if (NetworkProfile != null)
             {
                 builder.Append("  networkProfile:");
                 AppendChildObject(builder, NetworkProfile, options, 2, false);
             }
 
-            if (Optional.IsDefined(SecurityProfile))
+            if (SecurityProfile != null)
             {
                 builder.Append("  securityProfile:");
                 AppendChildObject(builder, SecurityProfile, options, 2, false);
             }
 
-            if (Optional.IsDefined(DiagnosticsProfile))
+            if (DiagnosticsProfile != null)
             {
                 builder.Append("  diagnosticsProfile:");
                 AppendChildObject(builder, DiagnosticsProfile, options, 2, false);
             }
 
-            if (Optional.IsDefined(ExtensionProfile))
+            if (ExtensionProfile != null)
             {
                 builder.Append("  extensionProfile:");
                 AppendChildObject(builder, ExtensionProfile, options, 2, false);
             }
 
-            if (Optional.IsDefined(LicenseType))
+            if (LicenseType != null)
             {
                 builder.Append("  licenseType:");
                 if (LicenseType.Contains(Environment.NewLine))
@@ -294,25 +294,25 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(Priority))
+            if (Priority.HasValue)
             {
                 builder.Append("  priority:");
                 builder.AppendLine($" '{Priority.Value.ToString()}'");
             }
 
-            if (Optional.IsDefined(EvictionPolicy))
+            if (EvictionPolicy.HasValue)
             {
                 builder.Append("  evictionPolicy:");
                 builder.AppendLine($" '{EvictionPolicy.Value.ToString()}'");
             }
 
-            if (Optional.IsDefined(BillingProfile))
+            if (BillingProfile != null)
             {
                 builder.Append("  billingProfile:");
                 AppendChildObject(builder, BillingProfile, options, 2, false);
             }
 
-            if (Optional.IsDefined(ScheduledEventsProfile))
+            if (ScheduledEventsProfile != null)
             {
                 builder.Append("  scheduledEventsProfile:");
                 AppendChildObject(builder, ScheduledEventsProfile, options, 2, false);

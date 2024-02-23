@@ -28,31 +28,31 @@ namespace model_flattening.Models
             writer.WriteStartObject();
             writer.WritePropertyName("base_product_id"u8);
             writer.WriteStringValue(ProductId);
-            if (Optional.IsDefined(Description))
+            if (Description != null)
             {
                 writer.WritePropertyName("base_product_description"u8);
                 writer.WriteStringValue(Description);
             }
             writer.WritePropertyName("details"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(MaxProductDisplayName))
+            if (MaxProductDisplayName != null)
             {
                 writer.WritePropertyName("max_product_display_name"u8);
                 writer.WriteStringValue(MaxProductDisplayName);
             }
-            if (Optional.IsDefined(Capacity))
+            if (Capacity.HasValue)
             {
                 writer.WritePropertyName("max_product_capacity"u8);
                 writer.WriteStringValue(Capacity.Value.ToString());
             }
             writer.WritePropertyName("max_product_image"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(GenericValue))
+            if (GenericValue != null)
             {
                 writer.WritePropertyName("generic_value"u8);
                 writer.WriteStringValue(GenericValue);
             }
-            if (Optional.IsDefined(OdataValue))
+            if (OdataValue != null)
             {
                 writer.WritePropertyName("@odata.value"u8);
                 writer.WriteStringValue(OdataValue);

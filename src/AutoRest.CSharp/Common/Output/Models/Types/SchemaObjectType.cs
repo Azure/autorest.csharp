@@ -29,6 +29,7 @@ namespace AutoRest.CSharp.Output.Models.Types
     {
         private readonly SerializationBuilder _serializationBuilder;
         private readonly TypeFactory _typeFactory;
+        private readonly OutputLibrary? _library;
         private readonly SchemaTypeUsage _usage;
 
         private readonly IReadOnlyList<KnownMediaType> _supportedSerializationFormats;
@@ -36,18 +37,16 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ObjectTypeProperty? _additionalPropertiesProperty;
         private CSharpType? _implementsDictionaryType;
 
-        private BuildContext _context;
-
-        public SchemaObjectType(ObjectSchema objectSchema, BuildContext context)
-            : base(context)
+        public SchemaObjectType(ObjectSchema objectSchema, string defaultNamespace, TypeFactory typeFactory, SchemaUsageProvider schemaUsageProvider, OutputLibrary? library, SourceInputModel? sourceInputModel)
+            : base(defaultNamespace, sourceInputModel)
         {
-            _context = context;
             DefaultName = objectSchema.CSharpName();
-            DefaultNamespace = GetDefaultModelNamespace(objectSchema.Extensions?.Namespace, context.DefaultNamespace);
+            DefaultNamespace = GetDefaultModelNamespace(objectSchema.Extensions?.Namespace, defaultNamespace);
             ObjectSchema = objectSchema;
-            _typeFactory = context.TypeFactory;
+            _typeFactory = typeFactory;
+            _library = library;
             _serializationBuilder = new SerializationBuilder();
-            _usage = context.SchemaUsageProvider.GetUsage(ObjectSchema);
+            _usage = schemaUsageProvider.GetUsage(ObjectSchema);
 
             var hasUsage = _usage.HasFlag(SchemaTypeUsage.Model);
 
@@ -735,14 +734,14 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return _defaultDerivedType;
 
             _hasCalculatedDefaultDerivedType = true;
-            if (_context.BaseLibrary is null)
+            if (_library is null)
                 return null;
 
             var defaultDerivedSchema = ObjectSchema.GetDefaultDerivedSchema();
             if (defaultDerivedSchema is null)
                 return null;
 
-            return _context.BaseLibrary.FindTypeProviderForSchema(defaultDerivedSchema) as SerializableObjectType;
+            return _library.FindTypeProviderForSchema(defaultDerivedSchema) as SerializableObjectType;
         }
     }
 }

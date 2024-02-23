@@ -27,12 +27,12 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(AvailablePatchSummary))
+            if (AvailablePatchSummary != null)
             {
                 writer.WritePropertyName("availablePatchSummary"u8);
                 writer.WriteObjectValue(AvailablePatchSummary);
             }
-            if (Optional.IsDefined(LastPatchInstallationSummary))
+            if (LastPatchInstallationSummary != null)
             {
                 writer.WritePropertyName("lastPatchInstallationSummary"u8);
                 writer.WriteObjectValue(LastPatchInstallationSummary);
@@ -87,7 +87,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    availablePatchSummary = AvailablePatchSummary.DeserializeAvailablePatchSummary(property.Value);
+                    availablePatchSummary = AvailablePatchSummary.DeserializeAvailablePatchSummary(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("lastPatchInstallationSummary"u8))
@@ -96,7 +96,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    lastPatchInstallationSummary = LastPatchInstallationSummary.DeserializeLastPatchInstallationSummary(property.Value);
+                    lastPatchInstallationSummary = LastPatchInstallationSummary.DeserializeLastPatchInstallationSummary(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")
@@ -113,13 +113,13 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(AvailablePatchSummary))
+            if (AvailablePatchSummary != null)
             {
                 builder.Append("  availablePatchSummary:");
                 AppendChildObject(builder, AvailablePatchSummary, options, 2, false);
             }
 
-            if (Optional.IsDefined(LastPatchInstallationSummary))
+            if (LastPatchInstallationSummary != null)
             {
                 builder.Append("  lastPatchInstallationSummary:");
                 AppendChildObject(builder, LastPatchInstallationSummary, options, 2, false);

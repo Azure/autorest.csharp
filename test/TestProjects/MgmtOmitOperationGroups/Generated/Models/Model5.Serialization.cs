@@ -16,12 +16,12 @@ namespace MgmtOmitOperationGroups.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (Optional.IsCollectionDefined(Modelqs))
+            if (!(Modelqs is ChangeTrackingList<ModelQ> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("modelqs"u8);
                 writer.WriteStartArray();

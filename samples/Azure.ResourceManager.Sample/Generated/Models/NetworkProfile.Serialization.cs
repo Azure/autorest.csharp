@@ -28,7 +28,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(NetworkInterfaces))
+            if (!(NetworkInterfaces is ChangeTrackingList<NetworkInterfaceReference> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("networkInterfaces"u8);
                 writer.WriteStartArray();
@@ -90,7 +90,7 @@ namespace Azure.ResourceManager.Sample.Models
                     List<NetworkInterfaceReference> array = new List<NetworkInterfaceReference>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(NetworkInterfaceReference.DeserializeNetworkInterfaceReference(item));
+                        array.Add(NetworkInterfaceReference.DeserializeNetworkInterfaceReference(item, options));
                     }
                     networkInterfaces = array;
                     continue;
@@ -109,7 +109,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsCollectionDefined(NetworkInterfaces))
+            if (!(NetworkInterfaces is ChangeTrackingList<NetworkInterfaceReference> collection && collection.IsUndefined))
             {
                 if (NetworkInterfaces.Any())
                 {

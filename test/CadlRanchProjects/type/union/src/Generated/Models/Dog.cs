@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace _Type.Union.Models
 {
@@ -51,7 +50,10 @@ namespace _Type.Union.Models
         /// <exception cref="ArgumentNullException"> <paramref name="bark"/> is null. </exception>
         public Dog(string bark)
         {
-            Argument.AssertNotNull(bark, nameof(bark));
+            if (bark == null)
+            {
+                throw new ArgumentNullException(nameof(bark));
+            }
 
             Bark = bark;
         }

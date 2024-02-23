@@ -98,7 +98,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (property.NameEquals("name"u8))
                 {
-                    name = SampleUsageName.DeserializeSampleUsageName(property.Value);
+                    name = SampleUsageName.DeserializeSampleUsageName(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")
@@ -115,29 +115,20 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 builder.Append("  name:");
                 AppendChildObject(builder, Name, options, 2, false);
             }
 
-            if (Optional.IsDefined(Unit))
-            {
-                builder.Append("  unit:");
-                builder.AppendLine($" '{Unit.ToString()}'");
-            }
+            builder.Append("  unit:");
+            builder.AppendLine($" '{Unit.ToString()}'");
 
-            if (Optional.IsDefined(CurrentValue))
-            {
-                builder.Append("  currentValue:");
-                builder.AppendLine($" {CurrentValue}");
-            }
+            builder.Append("  currentValue:");
+            builder.AppendLine($" {CurrentValue}");
 
-            if (Optional.IsDefined(Limit))
-            {
-                builder.Append("  limit:");
-                builder.AppendLine($" '{Limit.ToString()}'");
-            }
+            builder.Append("  limit:");
+            builder.AppendLine($" '{Limit.ToString()}'");
 
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());

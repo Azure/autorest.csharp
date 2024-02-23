@@ -36,12 +36,12 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            if (Optional.IsDefined(Etag))
+            if (Etag.HasValue)
             {
                 writer.WritePropertyName("etag"u8);
                 writer.WriteStringValue(Etag.Value.ToString());
             }
-            if (Optional.IsDefined(NextLink))
+            if (NextLink != null)
             {
                 writer.WritePropertyName("nextLink"u8);
                 writer.WriteStringValue(NextLink);
@@ -96,7 +96,7 @@ namespace Azure.ResourceManager.Sample.Models
                     List<UpgradeOperationHistoricalStatusInfo> array = new List<UpgradeOperationHistoricalStatusInfo>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(UpgradeOperationHistoricalStatusInfo.DeserializeUpgradeOperationHistoricalStatusInfo(item));
+                        array.Add(UpgradeOperationHistoricalStatusInfo.DeserializeUpgradeOperationHistoricalStatusInfo(item, options));
                     }
                     value = array;
                     continue;
@@ -129,7 +129,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsCollectionDefined(Value))
+            if (!(Value is ChangeTrackingList<UpgradeOperationHistoricalStatusInfo> collection && collection.IsUndefined))
             {
                 if (Value.Any())
                 {
@@ -143,13 +143,13 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(Etag))
+            if (Etag.HasValue)
             {
                 builder.Append("  etag:");
                 builder.AppendLine($" '{Etag.Value.ToString()}'");
             }
 
-            if (Optional.IsDefined(NextLink))
+            if (NextLink != null)
             {
                 builder.Append("  nextLink:");
                 if (NextLink.Contains(Environment.NewLine))

@@ -23,7 +23,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStringValue(item);
             }
             writer.WriteEndArray();
-            if (Optional.IsDefined(MaxAgeInSeconds))
+            if (MaxAgeInSeconds.HasValue)
             {
                 writer.WritePropertyName("maxAgeInSeconds"u8);
                 writer.WriteNumberValue(MaxAgeInSeconds.Value);

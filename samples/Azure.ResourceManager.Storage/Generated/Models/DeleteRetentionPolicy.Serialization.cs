@@ -15,12 +15,12 @@ namespace Azure.ResourceManager.Storage.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Enabled))
+            if (Enabled.HasValue)
             {
                 writer.WritePropertyName("enabled"u8);
                 writer.WriteBooleanValue(Enabled.Value);
             }
-            if (Optional.IsDefined(Days))
+            if (Days.HasValue)
             {
                 writer.WritePropertyName("days"u8);
                 writer.WriteNumberValue(Days.Value);

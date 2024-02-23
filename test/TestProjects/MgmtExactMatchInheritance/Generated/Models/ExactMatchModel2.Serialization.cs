@@ -15,22 +15,22 @@ namespace MgmtExactMatchInheritance.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(New))
+            if (New != null)
             {
                 writer.WritePropertyName("new"u8);
                 writer.WriteStringValue(New);
             }
-            if (Optional.IsDefined(ID))
+            if (ID != null)
             {
                 writer.WritePropertyName("iD"u8);
                 writer.WriteStringValue(ID);
             }
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(ExactMatchModel7Type))
+            if (ExactMatchModel7Type != null)
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ExactMatchModel7Type);

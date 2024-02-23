@@ -27,17 +27,17 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(DiskEncryptionKey))
+            if (DiskEncryptionKey != null)
             {
                 writer.WritePropertyName("diskEncryptionKey"u8);
                 writer.WriteObjectValue(DiskEncryptionKey);
             }
-            if (Optional.IsDefined(KeyEncryptionKey))
+            if (KeyEncryptionKey != null)
             {
                 writer.WritePropertyName("keyEncryptionKey"u8);
                 writer.WriteObjectValue(KeyEncryptionKey);
             }
-            if (Optional.IsDefined(Enabled))
+            if (Enabled.HasValue)
             {
                 writer.WritePropertyName("enabled"u8);
                 writer.WriteBooleanValue(Enabled.Value);
@@ -93,7 +93,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    diskEncryptionKey = KeyVaultSecretReference.DeserializeKeyVaultSecretReference(property.Value);
+                    diskEncryptionKey = KeyVaultSecretReference.DeserializeKeyVaultSecretReference(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("keyEncryptionKey"u8))
@@ -102,7 +102,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    keyEncryptionKey = KeyVaultKeyReference.DeserializeKeyVaultKeyReference(property.Value);
+                    keyEncryptionKey = KeyVaultKeyReference.DeserializeKeyVaultKeyReference(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("enabled"u8))
@@ -128,19 +128,19 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(DiskEncryptionKey))
+            if (DiskEncryptionKey != null)
             {
                 builder.Append("  diskEncryptionKey:");
                 AppendChildObject(builder, DiskEncryptionKey, options, 2, false);
             }
 
-            if (Optional.IsDefined(KeyEncryptionKey))
+            if (KeyEncryptionKey != null)
             {
                 builder.Append("  keyEncryptionKey:");
                 AppendChildObject(builder, KeyEncryptionKey, options, 2, false);
             }
 
-            if (Optional.IsDefined(Enabled))
+            if (Enabled.HasValue)
             {
                 builder.Append("  enabled:");
                 var boolValue = Enabled.Value == true ? "true" : "false";

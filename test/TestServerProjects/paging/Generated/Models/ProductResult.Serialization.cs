@@ -26,7 +26,7 @@ namespace paging.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Values))
+            if (!(Values is ChangeTrackingList<Product> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("values"u8);
                 writer.WriteStartArray();
@@ -36,7 +36,7 @@ namespace paging.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(NextLink))
+            if (NextLink != null)
             {
                 writer.WritePropertyName("nextLink"u8);
                 writer.WriteStringValue(NextLink);
@@ -94,7 +94,7 @@ namespace paging.Models
                     List<Product> array = new List<Product>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Product.DeserializeProduct(item));
+                        array.Add(Product.DeserializeProduct(item, options));
                     }
                     values = array;
                     continue;

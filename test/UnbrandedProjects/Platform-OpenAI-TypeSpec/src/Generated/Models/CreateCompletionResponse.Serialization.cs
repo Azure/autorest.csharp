@@ -38,7 +38,7 @@ namespace OpenAI.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            if (OptionalProperty.IsDefined(Usage))
+            if (Usage != null)
             {
                 writer.WritePropertyName("usage"u8);
                 writer.WriteObjectValue(Usage);
@@ -116,7 +116,7 @@ namespace OpenAI.Models
                     List<CreateCompletionResponseChoice> array = new List<CreateCompletionResponseChoice>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CreateCompletionResponseChoice.DeserializeCreateCompletionResponseChoice(item));
+                        array.Add(CreateCompletionResponseChoice.DeserializeCreateCompletionResponseChoice(item, options));
                     }
                     choices = array;
                     continue;
@@ -127,7 +127,7 @@ namespace OpenAI.Models
                     {
                         continue;
                     }
-                    usage = CompletionUsage.DeserializeCompletionUsage(property.Value);
+                    usage = CompletionUsage.DeserializeCompletionUsage(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

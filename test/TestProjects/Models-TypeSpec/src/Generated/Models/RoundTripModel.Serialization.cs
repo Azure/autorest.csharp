@@ -31,12 +31,12 @@ namespace ModelsTypeSpec.Models
             writer.WriteStringValue(RequiredString);
             writer.WritePropertyName("requiredInt"u8);
             writer.WriteNumberValue(RequiredInt);
-            if (Optional.IsDefined(NonRequiredString))
+            if (NonRequiredString != null)
             {
                 writer.WritePropertyName("nonRequiredString"u8);
                 writer.WriteStringValue(NonRequiredString);
             }
-            if (Optional.IsDefined(NonRequiredInt))
+            if (NonRequiredInt.HasValue)
             {
                 writer.WritePropertyName("nonRequiredInt"u8);
                 writer.WriteNumberValue(NonRequiredInt.Value);
@@ -59,7 +59,7 @@ namespace ModelsTypeSpec.Models
             {
                 writer.WriteNull("requiredNullableString");
             }
-            if (Optional.IsDefined(NonRequiredNullableInt))
+            if (NonRequiredNullableInt.HasValue)
             {
                 if (NonRequiredNullableInt != null)
                 {
@@ -71,7 +71,7 @@ namespace ModelsTypeSpec.Models
                     writer.WriteNull("nonRequiredNullableInt");
                 }
             }
-            if (Optional.IsDefined(NonRequiredNullableString))
+            if (NonRequiredNullableString != null)
             {
                 if (NonRequiredNullableString != null)
                 {
@@ -88,7 +88,7 @@ namespace ModelsTypeSpec.Models
                 writer.WritePropertyName("requiredReadonlyInt"u8);
                 writer.WriteNumberValue(RequiredReadonlyInt);
             }
-            if (options.Format != "W" && Optional.IsDefined(NonRequiredReadonlyInt))
+            if (options.Format != "W" && NonRequiredReadonlyInt.HasValue)
             {
                 writer.WritePropertyName("nonRequiredReadonlyInt"u8);
                 writer.WriteNumberValue(NonRequiredReadonlyInt.Value);
@@ -134,7 +134,7 @@ namespace ModelsTypeSpec.Models
             writer.WriteEndObject();
             writer.WritePropertyName("requiredBytes"u8);
             writer.WriteBase64StringValue(RequiredBytes.ToArray(), "D");
-            if (Optional.IsDefined(OptionalBytes))
+            if (OptionalBytes != null)
             {
                 writer.WritePropertyName("optionalBytes"u8);
                 writer.WriteBase64StringValue(OptionalBytes.ToArray(), "D");
@@ -146,7 +146,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteNumberValue(item);
             }
             writer.WriteEndArray();
-            if (Optional.IsCollectionDefined(OptionalUint8Array))
+            if (!(OptionalUint8Array is ChangeTrackingList<int> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("optionalUint8Array"u8);
                 writer.WriteStartArray();
@@ -165,7 +165,7 @@ namespace ModelsTypeSpec.Models
                 JsonSerializer.Serialize(writer, document.RootElement);
             }
 #endif
-            if (Optional.IsDefined(OptionalUnknown))
+            if (OptionalUnknown != null)
             {
                 writer.WritePropertyName("optionalUnknown"u8);
 #if NET6_0_OR_GREATER
@@ -184,7 +184,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteNumberValue(item);
             }
             writer.WriteEndArray();
-            if (Optional.IsCollectionDefined(OptionalInt8Array))
+            if (!(OptionalInt8Array is ChangeTrackingList<int> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("optionalInt8Array"u8);
                 writer.WriteStartArray();
@@ -194,7 +194,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (RequiredNullableIntList != null && Optional.IsCollectionDefined(RequiredNullableIntList))
+            if (RequiredNullableIntList != null && !(RequiredNullableIntList is ChangeTrackingList<int> collection1 && collection1.IsUndefined))
             {
                 writer.WritePropertyName("requiredNullableIntList"u8);
                 writer.WriteStartArray();
@@ -208,7 +208,7 @@ namespace ModelsTypeSpec.Models
             {
                 writer.WriteNull("requiredNullableIntList");
             }
-            if (RequiredNullableStringList != null && Optional.IsCollectionDefined(RequiredNullableStringList))
+            if (RequiredNullableStringList != null && !(RequiredNullableStringList is ChangeTrackingList<string> collection2 && collection2.IsUndefined))
             {
                 writer.WritePropertyName("requiredNullableStringList"u8);
                 writer.WriteStartArray();
@@ -222,7 +222,7 @@ namespace ModelsTypeSpec.Models
             {
                 writer.WriteNull("requiredNullableStringList");
             }
-            if (Optional.IsCollectionDefined(NonRequiredNullableIntList))
+            if (!(NonRequiredNullableIntList is ChangeTrackingList<int> collection3 && collection3.IsUndefined))
             {
                 if (NonRequiredNullableIntList != null)
                 {
@@ -239,7 +239,7 @@ namespace ModelsTypeSpec.Models
                     writer.WriteNull("nonRequiredNullableIntList");
                 }
             }
-            if (Optional.IsCollectionDefined(NonRequiredNullableStringList))
+            if (!(NonRequiredNullableStringList is ChangeTrackingList<string> collection4 && collection4.IsUndefined))
             {
                 if (NonRequiredNullableStringList != null)
                 {
@@ -408,7 +408,7 @@ namespace ModelsTypeSpec.Models
                 }
                 if (property.NameEquals("requiredModel"u8))
                 {
-                    requiredModel = BaseModelWithDiscriminator.DeserializeBaseModelWithDiscriminator(property.Value);
+                    requiredModel = BaseModelWithDiscriminator.DeserializeBaseModelWithDiscriminator(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("requiredFixedStringEnum"u8))
@@ -431,7 +431,7 @@ namespace ModelsTypeSpec.Models
                     List<CollectionItem> array = new List<CollectionItem>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CollectionItem.DeserializeCollectionItem(item));
+                        array.Add(CollectionItem.DeserializeCollectionItem(item, options));
                     }
                     requiredList = array;
                     continue;
@@ -461,7 +461,7 @@ namespace ModelsTypeSpec.Models
                     Dictionary<string, RecordItem> dictionary = new Dictionary<string, RecordItem>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value));
+                        dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value, options));
                     }
                     requiredModelRecord = dictionary;
                     continue;

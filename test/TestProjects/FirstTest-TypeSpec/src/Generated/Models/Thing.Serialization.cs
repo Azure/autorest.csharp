@@ -46,29 +46,29 @@ namespace FirstTestTypeSpec.Models
             writer.WriteNumberValue(RequiredLiteralFloat.ToSerialSingle());
             writer.WritePropertyName("requiredLiteralBool"u8);
             writer.WriteBooleanValue(RequiredLiteralBool);
-            if (Optional.IsDefined(OptionalLiteralString))
+            if (OptionalLiteralString.HasValue)
             {
                 writer.WritePropertyName("optionalLiteralString"u8);
                 writer.WriteStringValue(OptionalLiteralString.Value.ToString());
             }
-            if (Optional.IsDefined(OptionalLiteralInt))
+            if (OptionalLiteralInt.HasValue)
             {
                 writer.WritePropertyName("optionalLiteralInt"u8);
                 writer.WriteNumberValue(OptionalLiteralInt.Value.ToSerialInt32());
             }
-            if (Optional.IsDefined(OptionalLiteralFloat))
+            if (OptionalLiteralFloat.HasValue)
             {
                 writer.WritePropertyName("optionalLiteralFloat"u8);
                 writer.WriteNumberValue(OptionalLiteralFloat.Value.ToSerialSingle());
             }
-            if (Optional.IsDefined(OptionalLiteralBool))
+            if (OptionalLiteralBool.HasValue)
             {
                 writer.WritePropertyName("optionalLiteralBool"u8);
                 writer.WriteBooleanValue(OptionalLiteralBool.Value);
             }
             writer.WritePropertyName("requiredBadDescription"u8);
             writer.WriteStringValue(RequiredBadDescription);
-            if (Optional.IsCollectionDefined(OptionalNullableList))
+            if (!(OptionalNullableList is ChangeTrackingList<int> collection && collection.IsUndefined))
             {
                 if (OptionalNullableList != null)
                 {
@@ -85,7 +85,7 @@ namespace FirstTestTypeSpec.Models
                     writer.WriteNull("optionalNullableList");
                 }
             }
-            if (RequiredNullableList != null && Optional.IsCollectionDefined(RequiredNullableList))
+            if (RequiredNullableList != null && !(RequiredNullableList is ChangeTrackingList<int> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("requiredNullableList"u8);
                 writer.WriteStartArray();

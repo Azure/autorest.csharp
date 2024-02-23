@@ -34,7 +34,7 @@ namespace SpreadTypeSpec.Models
                 writer.WriteStringValue(item);
             }
             writer.WriteEndArray();
-            if (Optional.IsCollectionDefined(OptionalStringList))
+            if (!(OptionalStringList is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("optionalStringList"u8);
                 writer.WriteStartArray();

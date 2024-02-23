@@ -27,17 +27,17 @@ namespace ModelsTypeSpec.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(OptionalString))
+            if (OptionalString != null)
             {
                 writer.WritePropertyName("optionalString"u8);
                 writer.WriteStringValue(OptionalString);
             }
-            if (Optional.IsDefined(OptionalInt))
+            if (OptionalInt.HasValue)
             {
                 writer.WritePropertyName("optionalInt"u8);
                 writer.WriteNumberValue(OptionalInt.Value);
             }
-            if (Optional.IsCollectionDefined(OptionalStringList))
+            if (!(OptionalStringList is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("optionalStringList"u8);
                 writer.WriteStartArray();
@@ -47,7 +47,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(OptionalIntList))
+            if (!(OptionalIntList is ChangeTrackingList<int> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("optionalIntList"u8);
                 writer.WriteStartArray();
@@ -57,7 +57,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(OptionalModelList))
+            if (!(OptionalModelList is ChangeTrackingList<CollectionItem> collection1 && collection1.IsUndefined))
             {
                 writer.WritePropertyName("optionalModelList"u8);
                 writer.WriteStartArray();
@@ -67,27 +67,27 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(OptionalModel))
+            if (OptionalModel != null)
             {
                 writer.WritePropertyName("optionalModel"u8);
                 writer.WriteObjectValue(OptionalModel);
             }
-            if (Optional.IsDefined(OptionalModelWithPropertiesOnBase))
+            if (OptionalModelWithPropertiesOnBase != null)
             {
                 writer.WritePropertyName("optionalModelWithPropertiesOnBase"u8);
                 writer.WriteObjectValue(OptionalModelWithPropertiesOnBase);
             }
-            if (Optional.IsDefined(OptionalFixedStringEnum))
+            if (OptionalFixedStringEnum.HasValue)
             {
                 writer.WritePropertyName("optionalFixedStringEnum"u8);
                 writer.WriteStringValue(OptionalFixedStringEnum.Value.ToSerialString());
             }
-            if (Optional.IsDefined(OptionalExtensibleEnum))
+            if (OptionalExtensibleEnum.HasValue)
             {
                 writer.WritePropertyName("optionalExtensibleEnum"u8);
                 writer.WriteStringValue(OptionalExtensibleEnum.Value.ToString());
             }
-            if (Optional.IsCollectionDefined(OptionalIntRecord))
+            if (!(OptionalIntRecord is ChangeTrackingDictionary<string, int> collection2 && collection2.IsUndefined))
             {
                 writer.WritePropertyName("optionalIntRecord"u8);
                 writer.WriteStartObject();
@@ -98,7 +98,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndObject();
             }
-            if (Optional.IsCollectionDefined(OptionalStringRecord))
+            if (!(OptionalStringRecord is ChangeTrackingDictionary<string, string> collection3 && collection3.IsUndefined))
             {
                 writer.WritePropertyName("optionalStringRecord"u8);
                 writer.WriteStartObject();
@@ -109,7 +109,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndObject();
             }
-            if (Optional.IsCollectionDefined(OptionalModelRecord))
+            if (!(OptionalModelRecord is ChangeTrackingDictionary<string, RecordItem> collection4 && collection4.IsUndefined))
             {
                 writer.WritePropertyName("optionalModelRecord"u8);
                 writer.WriteStartObject();
@@ -120,17 +120,17 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndObject();
             }
-            if (Optional.IsDefined(OptionalPlainDate))
+            if (OptionalPlainDate.HasValue)
             {
                 writer.WritePropertyName("optionalPlainDate"u8);
                 writer.WriteStringValue(OptionalPlainDate.Value, "D");
             }
-            if (Optional.IsDefined(OptionalPlainTime))
+            if (OptionalPlainTime.HasValue)
             {
                 writer.WritePropertyName("optionalPlainTime"u8);
                 writer.WriteStringValue(OptionalPlainTime.Value, "T");
             }
-            if (Optional.IsCollectionDefined(OptionalCollectionWithNullableIntElement))
+            if (!(OptionalCollectionWithNullableIntElement is ChangeTrackingList<int?> collection5 && collection5.IsUndefined))
             {
                 writer.WritePropertyName("optionalCollectionWithNullableIntElement"u8);
                 writer.WriteStartArray();
@@ -253,7 +253,7 @@ namespace ModelsTypeSpec.Models
                     List<CollectionItem> array = new List<CollectionItem>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CollectionItem.DeserializeCollectionItem(item));
+                        array.Add(CollectionItem.DeserializeCollectionItem(item, options));
                     }
                     optionalModelList = array;
                     continue;
@@ -264,7 +264,7 @@ namespace ModelsTypeSpec.Models
                     {
                         continue;
                     }
-                    optionalModel = DerivedModel.DeserializeDerivedModel(property.Value);
+                    optionalModel = DerivedModel.DeserializeDerivedModel(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("optionalModelWithPropertiesOnBase"u8))
@@ -273,7 +273,7 @@ namespace ModelsTypeSpec.Models
                     {
                         continue;
                     }
-                    optionalModelWithPropertiesOnBase = DerivedModelWithProperties.DeserializeDerivedModelWithProperties(property.Value);
+                    optionalModelWithPropertiesOnBase = DerivedModelWithProperties.DeserializeDerivedModelWithProperties(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("optionalFixedStringEnum"u8))
@@ -331,7 +331,7 @@ namespace ModelsTypeSpec.Models
                     Dictionary<string, RecordItem> dictionary = new Dictionary<string, RecordItem>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value));
+                        dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value, options));
                     }
                     optionalModelRecord = dictionary;
                     continue;

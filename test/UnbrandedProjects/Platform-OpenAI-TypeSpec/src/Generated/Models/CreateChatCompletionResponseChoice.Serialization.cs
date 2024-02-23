@@ -81,7 +81,7 @@ namespace OpenAI.Models
                 }
                 if (property.NameEquals("message"u8))
                 {
-                    message = ChatCompletionResponseMessage.DeserializeChatCompletionResponseMessage(property.Value);
+                    message = ChatCompletionResponseMessage.DeserializeChatCompletionResponseMessage(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("finish_reason"u8))

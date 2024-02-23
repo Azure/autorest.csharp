@@ -15,47 +15,47 @@ namespace MgmtAcronymMapping.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(OSProfile))
+            if (OSProfile != null)
             {
                 writer.WritePropertyName("osProfile"u8);
                 writer.WriteObjectValue(OSProfile);
             }
-            if (Optional.IsDefined(StorageProfile))
+            if (StorageProfile != null)
             {
                 writer.WritePropertyName("storageProfile"u8);
                 writer.WriteObjectValue(StorageProfile);
             }
-            if (Optional.IsDefined(NetworkProfile))
+            if (NetworkProfile != null)
             {
                 writer.WritePropertyName("networkProfile"u8);
                 writer.WriteObjectValue(NetworkProfile);
             }
-            if (Optional.IsDefined(SecurityProfile))
+            if (SecurityProfile != null)
             {
                 writer.WritePropertyName("securityProfile"u8);
                 writer.WriteObjectValue(SecurityProfile);
             }
-            if (Optional.IsDefined(DiagnosticsProfile))
+            if (DiagnosticsProfile != null)
             {
                 writer.WritePropertyName("diagnosticsProfile"u8);
                 writer.WriteObjectValue(DiagnosticsProfile);
             }
-            if (Optional.IsDefined(ExtensionProfile))
+            if (ExtensionProfile != null)
             {
                 writer.WritePropertyName("extensionProfile"u8);
                 writer.WriteObjectValue(ExtensionProfile);
             }
-            if (Optional.IsDefined(LicenseType))
+            if (LicenseType != null)
             {
                 writer.WritePropertyName("licenseType"u8);
                 writer.WriteStringValue(LicenseType);
             }
-            if (Optional.IsDefined(BillingProfile))
+            if (BillingProfile != null)
             {
                 writer.WritePropertyName("billingProfile"u8);
                 writer.WriteObjectValue(BillingProfile);
             }
-            if (Optional.IsDefined(ScheduledEventsProfile))
+            if (ScheduledEventsProfile != null)
             {
                 writer.WritePropertyName("scheduledEventsProfile"u8);
                 writer.WriteObjectValue(ScheduledEventsProfile);

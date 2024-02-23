@@ -16,12 +16,12 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(IncludeTotalResultCount))
+            if (IncludeTotalResultCount.HasValue)
             {
                 writer.WritePropertyName("count"u8);
                 writer.WriteBooleanValue(IncludeTotalResultCount.Value);
             }
-            if (Optional.IsCollectionDefined(Facets))
+            if (!(Facets is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("facets"u8);
                 writer.WriteStartArray();
@@ -31,42 +31,42 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(Filter))
+            if (Filter != null)
             {
                 writer.WritePropertyName("filter"u8);
                 writer.WriteStringValue(Filter);
             }
-            if (Optional.IsDefined(HighlightFields))
+            if (HighlightFields != null)
             {
                 writer.WritePropertyName("highlight"u8);
                 writer.WriteStringValue(HighlightFields);
             }
-            if (Optional.IsDefined(HighlightPostTag))
+            if (HighlightPostTag != null)
             {
                 writer.WritePropertyName("highlightPostTag"u8);
                 writer.WriteStringValue(HighlightPostTag);
             }
-            if (Optional.IsDefined(HighlightPreTag))
+            if (HighlightPreTag != null)
             {
                 writer.WritePropertyName("highlightPreTag"u8);
                 writer.WriteStringValue(HighlightPreTag);
             }
-            if (Optional.IsDefined(MinimumCoverage))
+            if (MinimumCoverage.HasValue)
             {
                 writer.WritePropertyName("minimumCoverage"u8);
                 writer.WriteNumberValue(MinimumCoverage.Value);
             }
-            if (Optional.IsDefined(OrderBy))
+            if (OrderBy != null)
             {
                 writer.WritePropertyName("orderby"u8);
                 writer.WriteStringValue(OrderBy);
             }
-            if (Optional.IsDefined(QueryType))
+            if (QueryType.HasValue)
             {
                 writer.WritePropertyName("queryType"u8);
                 writer.WriteStringValue(QueryType.Value.ToSerialString());
             }
-            if (Optional.IsCollectionDefined(ScoringParameters))
+            if (!(ScoringParameters is ChangeTrackingList<string> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("scoringParameters"u8);
                 writer.WriteStartArray();
@@ -76,37 +76,37 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(ScoringProfile))
+            if (ScoringProfile != null)
             {
                 writer.WritePropertyName("scoringProfile"u8);
                 writer.WriteStringValue(ScoringProfile);
             }
-            if (Optional.IsDefined(SearchText))
+            if (SearchText != null)
             {
                 writer.WritePropertyName("search"u8);
                 writer.WriteStringValue(SearchText);
             }
-            if (Optional.IsDefined(SearchFields))
+            if (SearchFields != null)
             {
                 writer.WritePropertyName("searchFields"u8);
                 writer.WriteStringValue(SearchFields);
             }
-            if (Optional.IsDefined(SearchMode))
+            if (SearchMode.HasValue)
             {
                 writer.WritePropertyName("searchMode"u8);
                 writer.WriteStringValue(SearchMode.Value.ToSerialString());
             }
-            if (Optional.IsDefined(Select))
+            if (Select != null)
             {
                 writer.WritePropertyName("select"u8);
                 writer.WriteStringValue(Select);
             }
-            if (Optional.IsDefined(Skip))
+            if (Skip.HasValue)
             {
                 writer.WritePropertyName("skip"u8);
                 writer.WriteNumberValue(Skip.Value);
             }
-            if (Optional.IsDefined(Top))
+            if (Top.HasValue)
             {
                 writer.WritePropertyName("top"u8);
                 writer.WriteNumberValue(Top.Value);

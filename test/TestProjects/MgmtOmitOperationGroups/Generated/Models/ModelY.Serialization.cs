@@ -15,7 +15,7 @@ namespace MgmtOmitOperationGroups.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(E))
+            if (E != null)
             {
                 writer.WritePropertyName("e"u8);
                 writer.WriteStringValue(E);

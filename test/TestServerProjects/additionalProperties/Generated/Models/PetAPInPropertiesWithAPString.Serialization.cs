@@ -28,19 +28,19 @@ namespace additionalProperties.Models
             writer.WriteStartObject();
             writer.WritePropertyName("id"u8);
             writer.WriteNumberValue(Id);
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format != "W" && Optional.IsDefined(Status))
+            if (options.Format != "W" && Status.HasValue)
             {
                 writer.WritePropertyName("status"u8);
                 writer.WriteBooleanValue(Status.Value);
             }
             writer.WritePropertyName("@odata.location"u8);
             writer.WriteStringValue(OdataLocation);
-            if (Optional.IsCollectionDefined(AdditionalProperties))
+            if (!(AdditionalProperties is ChangeTrackingDictionary<string, float> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("additionalProperties"u8);
                 writer.WriteStartObject();

@@ -29,7 +29,7 @@ namespace _Type.Property.Nullable.Models
             writer.WriteStartObject();
             writer.WritePropertyName("requiredProperty"u8);
             writer.WriteStringValue(RequiredProperty);
-            if (NullableProperty != null && Optional.IsCollectionDefined(NullableProperty))
+            if (NullableProperty != null && !(NullableProperty is ChangeTrackingList<InnerModel> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("nullableProperty"u8);
                 writer.WriteStartArray();
@@ -102,7 +102,7 @@ namespace _Type.Property.Nullable.Models
                     List<InnerModel> array = new List<InnerModel>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(InnerModel.DeserializeInnerModel(item));
+                        array.Add(InnerModel.DeserializeInnerModel(item, options));
                     }
                     nullableProperty = array;
                     continue;

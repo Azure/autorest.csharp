@@ -36,7 +36,10 @@ namespace Parameters.Spread
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public SpreadClient(Uri endpoint, SpreadClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
             options ??= new SpreadClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

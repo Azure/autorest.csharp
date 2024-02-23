@@ -141,7 +141,10 @@ namespace _Type.Property.AdditionalProperties
         /// <include file="Docs/ExtendsUnknown.xml" path="doc/members/member[@name='PutAsync(ExtendsUnknownAdditionalProperties,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(ExtendsUnknownAdditionalProperties body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -156,7 +159,10 @@ namespace _Type.Property.AdditionalProperties
         /// <include file="Docs/ExtendsUnknown.xml" path="doc/members/member[@name='Put(ExtendsUnknownAdditionalProperties,CancellationToken)']/*" />
         public virtual Response Put(ExtendsUnknownAdditionalProperties body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -187,7 +193,10 @@ namespace _Type.Property.AdditionalProperties
         /// <include file="Docs/ExtendsUnknown.xml" path="doc/members/member[@name='PutAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ExtendsUnknown.Put");
             scope.Start();
@@ -226,7 +235,10 @@ namespace _Type.Property.AdditionalProperties
         /// <include file="Docs/ExtendsUnknown.xml" path="doc/members/member[@name='Put(RequestContent,RequestContext)']/*" />
         public virtual Response Put(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ExtendsUnknown.Put");
             scope.Start();

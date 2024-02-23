@@ -195,7 +195,10 @@ namespace MgmtExactMatchInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<ExactMatchModel5Resource>> UpdateAsync(WaitUntil waitUntil, ExactMatchModel5Data data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(data, nameof(data));
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _exactMatchModel5ClientDiagnostics.CreateScope("ExactMatchModel5Resource.Update");
             scope.Start();
@@ -242,7 +245,10 @@ namespace MgmtExactMatchInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<ExactMatchModel5Resource> Update(WaitUntil waitUntil, ExactMatchModel5Data data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(data, nameof(data));
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _exactMatchModel5ClientDiagnostics.CreateScope("ExactMatchModel5Resource.Update");
             scope.Start();
@@ -290,8 +296,14 @@ namespace MgmtExactMatchInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
         public virtual async Task<Response<ExactMatchModel5Resource>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(key, nameof(key));
-            Argument.AssertNotNull(value, nameof(value));
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
 
             using var scope = _exactMatchModel5ClientDiagnostics.CreateScope("ExactMatchModel5Resource.AddTag");
             scope.Start();
@@ -347,8 +359,14 @@ namespace MgmtExactMatchInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
         public virtual Response<ExactMatchModel5Resource> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(key, nameof(key));
-            Argument.AssertNotNull(value, nameof(value));
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
 
             using var scope = _exactMatchModel5ClientDiagnostics.CreateScope("ExactMatchModel5Resource.AddTag");
             scope.Start();
@@ -403,7 +421,10 @@ namespace MgmtExactMatchInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
         public virtual async Task<Response<ExactMatchModel5Resource>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(tags, nameof(tags));
+            if (tags == null)
+            {
+                throw new ArgumentNullException(nameof(tags));
+            }
 
             using var scope = _exactMatchModel5ClientDiagnostics.CreateScope("ExactMatchModel5Resource.SetTags");
             scope.Start();
@@ -459,7 +480,10 @@ namespace MgmtExactMatchInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
         public virtual Response<ExactMatchModel5Resource> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(tags, nameof(tags));
+            if (tags == null)
+            {
+                throw new ArgumentNullException(nameof(tags));
+            }
 
             using var scope = _exactMatchModel5ClientDiagnostics.CreateScope("ExactMatchModel5Resource.SetTags");
             scope.Start();
@@ -515,7 +539,10 @@ namespace MgmtExactMatchInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public virtual async Task<Response<ExactMatchModel5Resource>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(key, nameof(key));
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
 
             using var scope = _exactMatchModel5ClientDiagnostics.CreateScope("ExactMatchModel5Resource.RemoveTag");
             scope.Start();
@@ -570,7 +597,10 @@ namespace MgmtExactMatchInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public virtual Response<ExactMatchModel5Resource> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(key, nameof(key));
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
 
             using var scope = _exactMatchModel5ClientDiagnostics.CreateScope("ExactMatchModel5Resource.RemoveTag");
             scope.Start();

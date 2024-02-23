@@ -15,12 +15,12 @@ namespace HlcConstants.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(RequiredConstantModel))
+            if (RequiredConstantModel != null)
             {
                 writer.WritePropertyName("requiredConstantModel"u8);
                 writer.WriteObjectValue(RequiredConstantModel);
             }
-            if (Optional.IsDefined(OptionalConstantModel))
+            if (OptionalConstantModel != null)
             {
                 writer.WritePropertyName("optionalConstantModel"u8);
                 writer.WriteObjectValue(OptionalConstantModel);

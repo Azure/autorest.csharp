@@ -46,10 +46,10 @@ namespace AutoRest.CSharp.Output.Models
             _parameters = clientParameters.DistinctBy(p => p.Name).ToDictionary(p => p.Name, BuildConstructorParameter);
         }
 
-        public RestClientBuilder(IEnumerable<InputParameter> clientParameters, BuildContext context)
+        public RestClientBuilder(IEnumerable<InputParameter> clientParameters, TypeFactory typeFactory, OutputLibrary library)
         {
-            _typeFactory = context.TypeFactory;
-            _library = context.BaseLibrary;
+            _typeFactory = typeFactory;
+            _library = library;
             _parameters = clientParameters.ToDictionary(p => p.Name, BuildConstructorParameter);
         }
 

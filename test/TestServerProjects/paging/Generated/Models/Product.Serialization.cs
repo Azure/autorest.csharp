@@ -26,7 +26,7 @@ namespace paging.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Properties))
+            if (Properties != null)
             {
                 writer.WritePropertyName("properties"u8);
                 writer.WriteObjectValue(Properties);
@@ -80,7 +80,7 @@ namespace paging.Models
                     {
                         continue;
                     }
-                    properties = ProductProperties.DeserializeProductProperties(property.Value);
+                    properties = ProductProperties.DeserializeProductProperties(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

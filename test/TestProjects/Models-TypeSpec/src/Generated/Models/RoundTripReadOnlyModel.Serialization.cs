@@ -37,12 +37,12 @@ namespace ModelsTypeSpec.Models
                 writer.WritePropertyName("requiredReadonlyInt"u8);
                 writer.WriteNumberValue(RequiredReadonlyInt);
             }
-            if (options.Format != "W" && Optional.IsDefined(OptionalReadonlyString))
+            if (options.Format != "W" && OptionalReadonlyString != null)
             {
                 writer.WritePropertyName("optionalReadonlyString"u8);
                 writer.WriteStringValue(OptionalReadonlyString);
             }
-            if (options.Format != "W" && Optional.IsDefined(OptionalReadonlyInt))
+            if (options.Format != "W" && OptionalReadonlyInt.HasValue)
             {
                 writer.WritePropertyName("optionalReadonlyInt"u8);
                 writer.WriteNumberValue(OptionalReadonlyInt.Value);
@@ -52,7 +52,7 @@ namespace ModelsTypeSpec.Models
                 writer.WritePropertyName("requiredReadonlyModel"u8);
                 writer.WriteObjectValue(RequiredReadonlyModel);
             }
-            if (options.Format != "W" && Optional.IsDefined(OptionalReadonlyModel))
+            if (options.Format != "W" && OptionalReadonlyModel != null)
             {
                 writer.WritePropertyName("optionalReadonlyModel"u8);
                 writer.WriteObjectValue(OptionalReadonlyModel);
@@ -140,7 +140,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndObject();
             }
-            if (options.Format != "W" && Optional.IsCollectionDefined(OptionalReadonlyStringList))
+            if (options.Format != "W" && !(OptionalReadonlyStringList is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("optionalReadonlyStringList"u8);
                 writer.WriteStartArray();
@@ -150,7 +150,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W" && Optional.IsCollectionDefined(OptionalReadonlyIntList))
+            if (options.Format != "W" && !(OptionalReadonlyIntList is ChangeTrackingList<int> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("optionalReadonlyIntList"u8);
                 writer.WriteStartArray();
@@ -160,7 +160,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W" && Optional.IsCollectionDefined(OptionalReadOnlyModelList))
+            if (options.Format != "W" && !(OptionalReadOnlyModelList is ChangeTrackingList<CollectionItem> collection1 && collection1.IsUndefined))
             {
                 writer.WritePropertyName("optionalReadOnlyModelList"u8);
                 writer.WriteStartArray();
@@ -186,7 +186,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteStringValue(item.Value);
             }
             writer.WriteEndObject();
-            if (options.Format != "W" && Optional.IsCollectionDefined(OptionalModelRecord))
+            if (options.Format != "W" && !(OptionalModelRecord is ChangeTrackingDictionary<string, RecordItem> collection2 && collection2.IsUndefined))
             {
                 writer.WritePropertyName("optionalModelRecord"u8);
                 writer.WriteStartObject();
@@ -209,7 +209,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteNumberValue(item.Value);
             }
             writer.WriteEndArray();
-            if (Optional.IsCollectionDefined(OptionalCollectionWithNullableBooleanElement))
+            if (!(OptionalCollectionWithNullableBooleanElement is ChangeTrackingList<bool?> collection3 && collection3.IsUndefined))
             {
                 writer.WritePropertyName("optionalCollectionWithNullableBooleanElement"u8);
                 writer.WriteStartArray();
@@ -316,7 +316,7 @@ namespace ModelsTypeSpec.Models
                 }
                 if (property.NameEquals("requiredReadonlyModel"u8))
                 {
-                    requiredReadonlyModel = DerivedModel.DeserializeDerivedModel(property.Value);
+                    requiredReadonlyModel = DerivedModel.DeserializeDerivedModel(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("optionalReadonlyModel"u8))
@@ -325,7 +325,7 @@ namespace ModelsTypeSpec.Models
                     {
                         continue;
                     }
-                    optionalReadonlyModel = DerivedModel.DeserializeDerivedModel(property.Value);
+                    optionalReadonlyModel = DerivedModel.DeserializeDerivedModel(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("requiredReadonlyFixedStringEnum"u8))
@@ -373,7 +373,7 @@ namespace ModelsTypeSpec.Models
                     List<CollectionItem> array = new List<CollectionItem>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CollectionItem.DeserializeCollectionItem(item));
+                        array.Add(CollectionItem.DeserializeCollectionItem(item, options));
                     }
                     requiredReadOnlyModelList = array;
                     continue;
@@ -403,7 +403,7 @@ namespace ModelsTypeSpec.Models
                     Dictionary<string, RecordItem> dictionary = new Dictionary<string, RecordItem>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value));
+                        dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value, options));
                     }
                     requiredReadOnlyModelRecord = dictionary;
                     continue;
@@ -445,7 +445,7 @@ namespace ModelsTypeSpec.Models
                     List<CollectionItem> array = new List<CollectionItem>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CollectionItem.DeserializeCollectionItem(item));
+                        array.Add(CollectionItem.DeserializeCollectionItem(item, options));
                     }
                     optionalReadOnlyModelList = array;
                     continue;
@@ -479,7 +479,7 @@ namespace ModelsTypeSpec.Models
                     Dictionary<string, RecordItem> dictionary = new Dictionary<string, RecordItem>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value));
+                        dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value, options));
                     }
                     optionalModelRecord = dictionary;
                     continue;

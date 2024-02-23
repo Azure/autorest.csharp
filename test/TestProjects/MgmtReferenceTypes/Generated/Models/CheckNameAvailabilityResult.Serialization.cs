@@ -18,17 +18,17 @@ namespace Azure.ResourceManager.Fake.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(NameAvailable))
+            if (NameAvailable.HasValue)
             {
                 writer.WritePropertyName("nameAvailable"u8);
                 writer.WriteBooleanValue(NameAvailable.Value);
             }
-            if (Optional.IsDefined(Reason))
+            if (Reason.HasValue)
             {
                 writer.WritePropertyName("reason"u8);
                 writer.WriteStringValue(Reason.Value.ToString());
             }
-            if (Optional.IsDefined(Message))
+            if (Message != null)
             {
                 writer.WritePropertyName("message"u8);
                 writer.WriteStringValue(Message);

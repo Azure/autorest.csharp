@@ -28,12 +28,12 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsCollectionDefined(EncryptionSettings))
+            if (!(EncryptionSettings is ChangeTrackingList<DiskEncryptionSettings> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("encryptionSettings"u8);
                 writer.WriteStartArray();
@@ -43,7 +43,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(Statuses))
+            if (!(Statuses is ChangeTrackingList<InstanceViewStatus> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("statuses"u8);
                 writer.WriteStartArray();
@@ -112,7 +112,7 @@ namespace Azure.ResourceManager.Sample.Models
                     List<DiskEncryptionSettings> array = new List<DiskEncryptionSettings>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DiskEncryptionSettings.DeserializeDiskEncryptionSettings(item));
+                        array.Add(DiskEncryptionSettings.DeserializeDiskEncryptionSettings(item, options));
                     }
                     encryptionSettings = array;
                     continue;
@@ -126,7 +126,7 @@ namespace Azure.ResourceManager.Sample.Models
                     List<InstanceViewStatus> array = new List<InstanceViewStatus>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(InstanceViewStatus.DeserializeInstanceViewStatus(item));
+                        array.Add(InstanceViewStatus.DeserializeInstanceViewStatus(item, options));
                     }
                     statuses = array;
                     continue;
@@ -145,7 +145,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 builder.Append("  name:");
                 if (Name.Contains(Environment.NewLine))
@@ -159,7 +159,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsCollectionDefined(EncryptionSettings))
+            if (!(EncryptionSettings is ChangeTrackingList<DiskEncryptionSettings> collection && collection.IsUndefined))
             {
                 if (EncryptionSettings.Any())
                 {
@@ -173,7 +173,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsCollectionDefined(Statuses))
+            if (!(Statuses is ChangeTrackingList<InstanceViewStatus> collection0 && collection0.IsUndefined))
             {
                 if (Statuses.Any())
                 {

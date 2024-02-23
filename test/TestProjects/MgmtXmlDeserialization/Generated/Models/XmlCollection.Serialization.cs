@@ -22,19 +22,19 @@ namespace MgmtXmlDeserialization.Models
         private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "XmlCollection");
-            if (Optional.IsDefined(Count))
+            if (Count.HasValue)
             {
                 writer.WriteStartElement("count");
                 writer.WriteValue(Count.Value);
                 writer.WriteEndElement();
             }
-            if (Optional.IsDefined(NextLink))
+            if (NextLink != null)
             {
                 writer.WriteStartElement("nextLink");
                 writer.WriteValue(NextLink);
                 writer.WriteEndElement();
             }
-            if (Optional.IsCollectionDefined(Value))
+            if (!(Value is ChangeTrackingList<XmlInstanceData> collection && collection.IsUndefined))
             {
                 foreach (var item in Value)
                 {
@@ -81,7 +81,7 @@ namespace MgmtXmlDeserialization.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Value))
+            if (!(Value is ChangeTrackingList<XmlInstanceData> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("value"u8);
                 writer.WriteStartArray();
@@ -91,12 +91,12 @@ namespace MgmtXmlDeserialization.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(Count))
+            if (Count.HasValue)
             {
                 writer.WritePropertyName("count"u8);
                 writer.WriteNumberValue(Count.Value);
             }
-            if (Optional.IsDefined(NextLink))
+            if (NextLink != null)
             {
                 writer.WritePropertyName("nextLink"u8);
                 writer.WriteStringValue(NextLink);
@@ -155,7 +155,7 @@ namespace MgmtXmlDeserialization.Models
                     List<XmlInstanceData> array = new List<XmlInstanceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(XmlInstanceData.DeserializeXmlInstanceData(item));
+                        array.Add(XmlInstanceData.DeserializeXmlInstanceData(item, options));
                     }
                     value = array;
                     continue;

@@ -27,12 +27,12 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Path))
+            if (Path != null)
             {
                 writer.WritePropertyName("path"u8);
                 writer.WriteStringValue(Path);
             }
-            if (Optional.IsCollectionDefined(ApiVersions))
+            if (!(ApiVersions is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("apiVersions"u8);
                 writer.WriteStartArray();
@@ -42,12 +42,12 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(Pattern))
+            if (Pattern != null)
             {
                 writer.WritePropertyName("pattern"u8);
                 writer.WriteObjectValue(Pattern);
             }
-            if (Optional.IsDefined(Metadata))
+            if (Metadata != null)
             {
                 writer.WritePropertyName("metadata"u8);
                 writer.WriteObjectValue(Metadata);
@@ -123,7 +123,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                     {
                         continue;
                     }
-                    pattern = ResourceTypeAliasPattern.DeserializeResourceTypeAliasPattern(property.Value);
+                    pattern = ResourceTypeAliasPattern.DeserializeResourceTypeAliasPattern(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("metadata"u8))
@@ -132,7 +132,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                     {
                         continue;
                     }
-                    metadata = ResourceTypeAliasPathMetadata.DeserializeResourceTypeAliasPathMetadata(property.Value);
+                    metadata = ResourceTypeAliasPathMetadata.DeserializeResourceTypeAliasPathMetadata(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

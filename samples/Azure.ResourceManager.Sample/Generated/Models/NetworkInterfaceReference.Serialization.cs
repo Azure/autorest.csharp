@@ -27,14 +27,14 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(Primary))
+            if (Primary.HasValue)
             {
                 writer.WritePropertyName("primary"u8);
                 writer.WriteBooleanValue(Primary.Value);
@@ -124,7 +124,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 builder.Append("  id:");
                 if (Id.Contains(Environment.NewLine))
@@ -140,7 +140,7 @@ namespace Azure.ResourceManager.Sample.Models
 
             builder.Append("  properties:");
             builder.AppendLine(" {");
-            if (Optional.IsDefined(Primary))
+            if (Primary.HasValue)
             {
                 builder.Append("    primary:");
                 var boolValue = Primary.Value == true ? "true" : "false";

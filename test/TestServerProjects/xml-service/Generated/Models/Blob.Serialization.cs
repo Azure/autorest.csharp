@@ -30,7 +30,7 @@ namespace xml_service.Models
             writer.WriteValue(Snapshot);
             writer.WriteEndElement();
             writer.WriteObjectValue(Properties, "Properties");
-            if (Optional.IsCollectionDefined(Metadata))
+            if (!(Metadata is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 foreach (var pair in Metadata)
                 {

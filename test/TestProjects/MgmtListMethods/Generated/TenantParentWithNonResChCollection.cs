@@ -82,8 +82,18 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithNonResChName"/> or <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<TenantParentWithNonResChResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string tenantParentWithNonResChName, TenantParentWithNonResChData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(tenantParentWithNonResChName, nameof(tenantParentWithNonResChName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (tenantParentWithNonResChName == null)
+            {
+                throw new ArgumentNullException(nameof(tenantParentWithNonResChName));
+            }
+            if (tenantParentWithNonResChName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(tenantParentWithNonResChName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _tenantParentWithNonResChClientDiagnostics.CreateScope("TenantParentWithNonResChCollection.CreateOrUpdate");
             scope.Start();
@@ -133,8 +143,18 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithNonResChName"/> or <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<TenantParentWithNonResChResource> CreateOrUpdate(WaitUntil waitUntil, string tenantParentWithNonResChName, TenantParentWithNonResChData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(tenantParentWithNonResChName, nameof(tenantParentWithNonResChName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (tenantParentWithNonResChName == null)
+            {
+                throw new ArgumentNullException(nameof(tenantParentWithNonResChName));
+            }
+            if (tenantParentWithNonResChName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(tenantParentWithNonResChName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _tenantParentWithNonResChClientDiagnostics.CreateScope("TenantParentWithNonResChCollection.CreateOrUpdate");
             scope.Start();
@@ -182,7 +202,14 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithNonResChName"/> is null. </exception>
         public virtual async Task<Response<TenantParentWithNonResChResource>> GetAsync(string tenantParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(tenantParentWithNonResChName, nameof(tenantParentWithNonResChName));
+            if (tenantParentWithNonResChName == null)
+            {
+                throw new ArgumentNullException(nameof(tenantParentWithNonResChName));
+            }
+            if (tenantParentWithNonResChName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(tenantParentWithNonResChName));
+            }
 
             using var scope = _tenantParentWithNonResChClientDiagnostics.CreateScope("TenantParentWithNonResChCollection.Get");
             scope.Start();
@@ -227,7 +254,14 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithNonResChName"/> is null. </exception>
         public virtual Response<TenantParentWithNonResChResource> Get(string tenantParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(tenantParentWithNonResChName, nameof(tenantParentWithNonResChName));
+            if (tenantParentWithNonResChName == null)
+            {
+                throw new ArgumentNullException(nameof(tenantParentWithNonResChName));
+            }
+            if (tenantParentWithNonResChName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(tenantParentWithNonResChName));
+            }
 
             using var scope = _tenantParentWithNonResChClientDiagnostics.CreateScope("TenantParentWithNonResChCollection.Get");
             scope.Start();
@@ -332,7 +366,14 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithNonResChName"/> is null. </exception>
         public virtual async Task<Response<bool>> ExistsAsync(string tenantParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(tenantParentWithNonResChName, nameof(tenantParentWithNonResChName));
+            if (tenantParentWithNonResChName == null)
+            {
+                throw new ArgumentNullException(nameof(tenantParentWithNonResChName));
+            }
+            if (tenantParentWithNonResChName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(tenantParentWithNonResChName));
+            }
 
             using var scope = _tenantParentWithNonResChClientDiagnostics.CreateScope("TenantParentWithNonResChCollection.Exists");
             scope.Start();
@@ -375,7 +416,14 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithNonResChName"/> is null. </exception>
         public virtual Response<bool> Exists(string tenantParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(tenantParentWithNonResChName, nameof(tenantParentWithNonResChName));
+            if (tenantParentWithNonResChName == null)
+            {
+                throw new ArgumentNullException(nameof(tenantParentWithNonResChName));
+            }
+            if (tenantParentWithNonResChName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(tenantParentWithNonResChName));
+            }
 
             using var scope = _tenantParentWithNonResChClientDiagnostics.CreateScope("TenantParentWithNonResChCollection.Exists");
             scope.Start();
@@ -418,7 +466,14 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithNonResChName"/> is null. </exception>
         public virtual async Task<NullableResponse<TenantParentWithNonResChResource>> GetIfExistsAsync(string tenantParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(tenantParentWithNonResChName, nameof(tenantParentWithNonResChName));
+            if (tenantParentWithNonResChName == null)
+            {
+                throw new ArgumentNullException(nameof(tenantParentWithNonResChName));
+            }
+            if (tenantParentWithNonResChName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(tenantParentWithNonResChName));
+            }
 
             using var scope = _tenantParentWithNonResChClientDiagnostics.CreateScope("TenantParentWithNonResChCollection.GetIfExists");
             scope.Start();
@@ -463,7 +518,14 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithNonResChName"/> is null. </exception>
         public virtual NullableResponse<TenantParentWithNonResChResource> GetIfExists(string tenantParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(tenantParentWithNonResChName, nameof(tenantParentWithNonResChName));
+            if (tenantParentWithNonResChName == null)
+            {
+                throw new ArgumentNullException(nameof(tenantParentWithNonResChName));
+            }
+            if (tenantParentWithNonResChName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(tenantParentWithNonResChName));
+            }
 
             using var scope = _tenantParentWithNonResChClientDiagnostics.CreateScope("TenantParentWithNonResChCollection.GetIfExists");
             scope.Start();

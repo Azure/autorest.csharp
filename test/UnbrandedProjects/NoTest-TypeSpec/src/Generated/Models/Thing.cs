@@ -52,9 +52,18 @@ namespace NoTestTypeSpec.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredBadDescription"/> is null. </exception>
         internal Thing(string name, BinaryData requiredUnion, string requiredBadDescription, IEnumerable<int> requiredNullableList)
         {
-            ClientUtilities.AssertNotNull(name, nameof(name));
-            ClientUtilities.AssertNotNull(requiredUnion, nameof(requiredUnion));
-            ClientUtilities.AssertNotNull(requiredBadDescription, nameof(requiredBadDescription));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (requiredUnion == null)
+            {
+                throw new ArgumentNullException(nameof(requiredUnion));
+            }
+            if (requiredBadDescription == null)
+            {
+                throw new ArgumentNullException(nameof(requiredBadDescription));
+            }
 
             Name = name;
             RequiredUnion = requiredUnion;

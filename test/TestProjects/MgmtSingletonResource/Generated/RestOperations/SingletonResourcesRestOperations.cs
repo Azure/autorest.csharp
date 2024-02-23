@@ -88,10 +88,34 @@ namespace MgmtSingletonResource
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="parentName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<SingletonResourceData>> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string parentName, SingletonResourceData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(parentName, nameof(parentName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (resourceGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
+            }
+            if (parentName == null)
+            {
+                throw new ArgumentNullException(nameof(parentName));
+            }
+            if (parentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(parentName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, parentName, data);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -119,10 +143,34 @@ namespace MgmtSingletonResource
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="parentName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<SingletonResourceData> CreateOrUpdate(string subscriptionId, string resourceGroupName, string parentName, SingletonResourceData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(parentName, nameof(parentName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (resourceGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
+            }
+            if (parentName == null)
+            {
+                throw new ArgumentNullException(nameof(parentName));
+            }
+            if (parentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(parentName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, parentName, data);
             _pipeline.Send(message, cancellationToken);
@@ -187,9 +235,30 @@ namespace MgmtSingletonResource
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="parentName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<SingletonResourceData>> GetAsync(string subscriptionId, string resourceGroupName, string parentName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(parentName, nameof(parentName));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (resourceGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
+            }
+            if (parentName == null)
+            {
+                throw new ArgumentNullException(nameof(parentName));
+            }
+            if (parentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(parentName));
+            }
 
             using var message = CreateGetRequest(subscriptionId, resourceGroupName, parentName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -218,9 +287,30 @@ namespace MgmtSingletonResource
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="parentName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<SingletonResourceData> Get(string subscriptionId, string resourceGroupName, string parentName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(parentName, nameof(parentName));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (resourceGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
+            }
+            if (parentName == null)
+            {
+                throw new ArgumentNullException(nameof(parentName));
+            }
+            if (parentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(parentName));
+            }
 
             using var message = CreateGetRequest(subscriptionId, resourceGroupName, parentName);
             _pipeline.Send(message, cancellationToken);

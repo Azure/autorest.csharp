@@ -17,12 +17,12 @@ namespace MgmtExtensionResource.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(ParameterType))
+            if (ParameterType.HasValue)
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ParameterType.Value.ToString());
             }
-            if (Optional.IsCollectionDefined(AllowedValues))
+            if (!(AllowedValues is ChangeTrackingList<BinaryData> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("allowedValues"u8);
                 writer.WriteStartArray();
@@ -44,7 +44,7 @@ namespace MgmtExtensionResource.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(DefaultValue))
+            if (DefaultValue != null)
             {
                 writer.WritePropertyName("defaultValue"u8);
 #if NET6_0_OR_GREATER
@@ -56,7 +56,7 @@ namespace MgmtExtensionResource.Models
                 }
 #endif
             }
-            if (Optional.IsDefined(Metadata))
+            if (Metadata != null)
             {
                 writer.WritePropertyName("metadata"u8);
                 writer.WriteObjectValue(Metadata);

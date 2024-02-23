@@ -30,12 +30,12 @@ namespace MgmtDiscriminator.Models
             writer.WriteStartObject();
             writer.WritePropertyName("typeName"u8);
             writer.WriteStringValue(TypeName.ToString());
-            if (Optional.IsDefined(Algorithm))
+            if (Algorithm.HasValue)
             {
                 writer.WritePropertyName("algorithm"u8);
                 writer.WriteStringValue(Algorithm.Value.ToString());
             }
-            if (Optional.IsCollectionDefined(ParameterNameOverride))
+            if (!(ParameterNameOverride is ChangeTrackingList<UrlSigningParamIdentifier> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("parameterNameOverride"u8);
                 writer.WriteStartArray();
@@ -113,7 +113,7 @@ namespace MgmtDiscriminator.Models
                     List<UrlSigningParamIdentifier> array = new List<UrlSigningParamIdentifier>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(UrlSigningParamIdentifier.DeserializeUrlSigningParamIdentifier(item));
+                        array.Add(UrlSigningParamIdentifier.DeserializeUrlSigningParamIdentifier(item, options));
                     }
                     parameterNameOverride = array;
                     continue;
@@ -132,19 +132,16 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(TypeName))
-            {
-                builder.Append("  typeName:");
-                builder.AppendLine($" '{TypeName.ToString()}'");
-            }
+            builder.Append("  typeName:");
+            builder.AppendLine($" '{TypeName.ToString()}'");
 
-            if (Optional.IsDefined(Algorithm))
+            if (Algorithm.HasValue)
             {
                 builder.Append("  algorithm:");
                 builder.AppendLine($" '{Algorithm.Value.ToString()}'");
             }
 
-            if (Optional.IsCollectionDefined(ParameterNameOverride))
+            if (!(ParameterNameOverride is ChangeTrackingList<UrlSigningParamIdentifier> collection && collection.IsUndefined))
             {
                 if (ParameterNameOverride.Any())
                 {

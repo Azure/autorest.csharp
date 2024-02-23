@@ -82,8 +82,18 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="configurationName"/> or <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<FakeConfigurationResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string configurationName, FakeConfigurationData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(configurationName, nameof(configurationName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (configurationName == null)
+            {
+                throw new ArgumentNullException(nameof(configurationName));
+            }
+            if (configurationName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(configurationName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _fakeConfigurationConfigurationsClientDiagnostics.CreateScope("FakeConfigurationCollection.CreateOrUpdate");
             scope.Start();
@@ -133,8 +143,18 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="configurationName"/> or <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<FakeConfigurationResource> CreateOrUpdate(WaitUntil waitUntil, string configurationName, FakeConfigurationData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(configurationName, nameof(configurationName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (configurationName == null)
+            {
+                throw new ArgumentNullException(nameof(configurationName));
+            }
+            if (configurationName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(configurationName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _fakeConfigurationConfigurationsClientDiagnostics.CreateScope("FakeConfigurationCollection.CreateOrUpdate");
             scope.Start();
@@ -182,7 +202,14 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="configurationName"/> is null. </exception>
         public virtual async Task<Response<FakeConfigurationResource>> GetAsync(string configurationName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(configurationName, nameof(configurationName));
+            if (configurationName == null)
+            {
+                throw new ArgumentNullException(nameof(configurationName));
+            }
+            if (configurationName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(configurationName));
+            }
 
             using var scope = _fakeConfigurationConfigurationsClientDiagnostics.CreateScope("FakeConfigurationCollection.Get");
             scope.Start();
@@ -227,7 +254,14 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="configurationName"/> is null. </exception>
         public virtual Response<FakeConfigurationResource> Get(string configurationName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(configurationName, nameof(configurationName));
+            if (configurationName == null)
+            {
+                throw new ArgumentNullException(nameof(configurationName));
+            }
+            if (configurationName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(configurationName));
+            }
 
             using var scope = _fakeConfigurationConfigurationsClientDiagnostics.CreateScope("FakeConfigurationCollection.Get");
             scope.Start();
@@ -330,7 +364,14 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="configurationName"/> is null. </exception>
         public virtual async Task<Response<bool>> ExistsAsync(string configurationName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(configurationName, nameof(configurationName));
+            if (configurationName == null)
+            {
+                throw new ArgumentNullException(nameof(configurationName));
+            }
+            if (configurationName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(configurationName));
+            }
 
             using var scope = _fakeConfigurationConfigurationsClientDiagnostics.CreateScope("FakeConfigurationCollection.Exists");
             scope.Start();
@@ -373,7 +414,14 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="configurationName"/> is null. </exception>
         public virtual Response<bool> Exists(string configurationName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(configurationName, nameof(configurationName));
+            if (configurationName == null)
+            {
+                throw new ArgumentNullException(nameof(configurationName));
+            }
+            if (configurationName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(configurationName));
+            }
 
             using var scope = _fakeConfigurationConfigurationsClientDiagnostics.CreateScope("FakeConfigurationCollection.Exists");
             scope.Start();
@@ -416,7 +464,14 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="configurationName"/> is null. </exception>
         public virtual async Task<NullableResponse<FakeConfigurationResource>> GetIfExistsAsync(string configurationName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(configurationName, nameof(configurationName));
+            if (configurationName == null)
+            {
+                throw new ArgumentNullException(nameof(configurationName));
+            }
+            if (configurationName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(configurationName));
+            }
 
             using var scope = _fakeConfigurationConfigurationsClientDiagnostics.CreateScope("FakeConfigurationCollection.GetIfExists");
             scope.Start();
@@ -461,7 +516,14 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="configurationName"/> is null. </exception>
         public virtual NullableResponse<FakeConfigurationResource> GetIfExists(string configurationName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(configurationName, nameof(configurationName));
+            if (configurationName == null)
+            {
+                throw new ArgumentNullException(nameof(configurationName));
+            }
+            if (configurationName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(configurationName));
+            }
 
             using var scope = _fakeConfigurationConfigurationsClientDiagnostics.CreateScope("FakeConfigurationCollection.GetIfExists");
             scope.Start();

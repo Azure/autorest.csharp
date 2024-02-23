@@ -26,12 +26,12 @@ namespace body_complex.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(SampleSalmon))
+            if (SampleSalmon != null)
             {
                 writer.WritePropertyName("sampleSalmon"u8);
                 writer.WriteObjectValue(SampleSalmon);
             }
-            if (Optional.IsCollectionDefined(Salmons))
+            if (!(Salmons is ChangeTrackingList<DotSalmon> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("salmons"u8);
                 writer.WriteStartArray();
@@ -41,12 +41,12 @@ namespace body_complex.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(SampleFish))
+            if (SampleFish != null)
             {
                 writer.WritePropertyName("sampleFish"u8);
                 writer.WriteObjectValue(SampleFish);
             }
-            if (Optional.IsCollectionDefined(Fishes))
+            if (!(Fishes is ChangeTrackingList<DotFish> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("fishes"u8);
                 writer.WriteStartArray();
@@ -108,7 +108,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    sampleSalmon = DotSalmon.DeserializeDotSalmon(property.Value);
+                    sampleSalmon = DotSalmon.DeserializeDotSalmon(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("salmons"u8))
@@ -120,7 +120,7 @@ namespace body_complex.Models
                     List<DotSalmon> array = new List<DotSalmon>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DotSalmon.DeserializeDotSalmon(item));
+                        array.Add(DotSalmon.DeserializeDotSalmon(item, options));
                     }
                     salmons = array;
                     continue;
@@ -131,7 +131,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    sampleFish = DotFish.DeserializeDotFish(property.Value);
+                    sampleFish = DotFish.DeserializeDotFish(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("fishes"u8))
@@ -143,7 +143,7 @@ namespace body_complex.Models
                     List<DotFish> array = new List<DotFish>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DotFish.DeserializeDotFish(item));
+                        array.Add(DotFish.DeserializeDotFish(item, options));
                     }
                     fishes = array;
                     continue;

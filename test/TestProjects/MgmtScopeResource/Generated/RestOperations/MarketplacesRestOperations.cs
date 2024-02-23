@@ -98,7 +98,10 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="scope"/> is null. </exception>
         public async Task<Response<MarketplacesListResult>> ListAsync(string scope, string filter = null, int? top = null, string skiptoken = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(scope, nameof(scope));
+            if (scope == null)
+            {
+                throw new ArgumentNullException(nameof(scope));
+            }
 
             using var message = CreateListRequest(scope, filter, top, skiptoken);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -125,7 +128,10 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="scope"/> is null. </exception>
         public Response<MarketplacesListResult> List(string scope, string filter = null, int? top = null, string skiptoken = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(scope, nameof(scope));
+            if (scope == null)
+            {
+                throw new ArgumentNullException(nameof(scope));
+            }
 
             using var message = CreateListRequest(scope, filter, top, skiptoken);
             _pipeline.Send(message, cancellationToken);
@@ -175,8 +181,14 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="scope"/> is null. </exception>
         public async Task<Response<MarketplacesListResult>> ListNextPageAsync(string nextLink, string scope, string filter = null, int? top = null, string skiptoken = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(nextLink, nameof(nextLink));
-            Argument.AssertNotNull(scope, nameof(scope));
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (scope == null)
+            {
+                throw new ArgumentNullException(nameof(scope));
+            }
 
             using var message = CreateListNextPageRequest(nextLink, scope, filter, top, skiptoken);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -204,8 +216,14 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="scope"/> is null. </exception>
         public Response<MarketplacesListResult> ListNextPage(string nextLink, string scope, string filter = null, int? top = null, string skiptoken = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(nextLink, nameof(nextLink));
-            Argument.AssertNotNull(scope, nameof(scope));
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (scope == null)
+            {
+                throw new ArgumentNullException(nameof(scope));
+            }
 
             using var message = CreateListNextPageRequest(nextLink, scope, filter, top, skiptoken);
             _pipeline.Send(message, cancellationToken);

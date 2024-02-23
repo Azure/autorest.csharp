@@ -28,12 +28,12 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && Optional.IsDefined(VirtualMachine))
+            if (options.Format != "W" && VirtualMachine != null)
             {
                 writer.WritePropertyName("virtualMachine"u8);
                 writer.WriteObjectValue(VirtualMachine);
             }
-            if (options.Format != "W" && Optional.IsCollectionDefined(Extensions))
+            if (options.Format != "W" && !(Extensions is ChangeTrackingList<VirtualMachineScaleSetVmExtensionsSummary> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("extensions"u8);
                 writer.WriteStartArray();
@@ -43,7 +43,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(Statuses))
+            if (!(Statuses is ChangeTrackingList<InstanceViewStatus> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("statuses"u8);
                 writer.WriteStartArray();
@@ -53,7 +53,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W" && Optional.IsCollectionDefined(OrchestrationServices))
+            if (options.Format != "W" && !(OrchestrationServices is ChangeTrackingList<OrchestrationServiceSummary> collection1 && collection1.IsUndefined))
             {
                 writer.WritePropertyName("orchestrationServices"u8);
                 writer.WriteStartArray();
@@ -115,7 +115,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    virtualMachine = VirtualMachineScaleSetInstanceViewStatusesSummary.DeserializeVirtualMachineScaleSetInstanceViewStatusesSummary(property.Value);
+                    virtualMachine = VirtualMachineScaleSetInstanceViewStatusesSummary.DeserializeVirtualMachineScaleSetInstanceViewStatusesSummary(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("extensions"u8))
@@ -127,7 +127,7 @@ namespace Azure.ResourceManager.Sample.Models
                     List<VirtualMachineScaleSetVmExtensionsSummary> array = new List<VirtualMachineScaleSetVmExtensionsSummary>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(VirtualMachineScaleSetVmExtensionsSummary.DeserializeVirtualMachineScaleSetVmExtensionsSummary(item));
+                        array.Add(VirtualMachineScaleSetVmExtensionsSummary.DeserializeVirtualMachineScaleSetVmExtensionsSummary(item, options));
                     }
                     extensions = array;
                     continue;
@@ -141,7 +141,7 @@ namespace Azure.ResourceManager.Sample.Models
                     List<InstanceViewStatus> array = new List<InstanceViewStatus>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(InstanceViewStatus.DeserializeInstanceViewStatus(item));
+                        array.Add(InstanceViewStatus.DeserializeInstanceViewStatus(item, options));
                     }
                     statuses = array;
                     continue;
@@ -155,7 +155,7 @@ namespace Azure.ResourceManager.Sample.Models
                     List<OrchestrationServiceSummary> array = new List<OrchestrationServiceSummary>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(OrchestrationServiceSummary.DeserializeOrchestrationServiceSummary(item));
+                        array.Add(OrchestrationServiceSummary.DeserializeOrchestrationServiceSummary(item, options));
                     }
                     orchestrationServices = array;
                     continue;
@@ -174,13 +174,13 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(VirtualMachine))
+            if (VirtualMachine != null)
             {
                 builder.Append("  virtualMachine:");
                 AppendChildObject(builder, VirtualMachine, options, 2, false);
             }
 
-            if (Optional.IsCollectionDefined(Extensions))
+            if (!(Extensions is ChangeTrackingList<VirtualMachineScaleSetVmExtensionsSummary> collection && collection.IsUndefined))
             {
                 if (Extensions.Any())
                 {
@@ -194,7 +194,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsCollectionDefined(Statuses))
+            if (!(Statuses is ChangeTrackingList<InstanceViewStatus> collection0 && collection0.IsUndefined))
             {
                 if (Statuses.Any())
                 {
@@ -208,7 +208,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsCollectionDefined(OrchestrationServices))
+            if (!(OrchestrationServices is ChangeTrackingList<OrchestrationServiceSummary> collection1 && collection1.IsUndefined))
             {
                 if (OrchestrationServices.Any())
                 {

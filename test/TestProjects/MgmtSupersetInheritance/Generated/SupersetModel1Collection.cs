@@ -82,8 +82,18 @@ namespace MgmtSupersetInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel1SName"/> or <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<SupersetModel1Resource>> CreateOrUpdateAsync(WaitUntil waitUntil, string supersetModel1SName, SupersetModel1Data data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(supersetModel1SName, nameof(supersetModel1SName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (supersetModel1SName == null)
+            {
+                throw new ArgumentNullException(nameof(supersetModel1SName));
+            }
+            if (supersetModel1SName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(supersetModel1SName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _supersetModel1ClientDiagnostics.CreateScope("SupersetModel1Collection.CreateOrUpdate");
             scope.Start();
@@ -132,8 +142,18 @@ namespace MgmtSupersetInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel1SName"/> or <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<SupersetModel1Resource> CreateOrUpdate(WaitUntil waitUntil, string supersetModel1SName, SupersetModel1Data data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(supersetModel1SName, nameof(supersetModel1SName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (supersetModel1SName == null)
+            {
+                throw new ArgumentNullException(nameof(supersetModel1SName));
+            }
+            if (supersetModel1SName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(supersetModel1SName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _supersetModel1ClientDiagnostics.CreateScope("SupersetModel1Collection.CreateOrUpdate");
             scope.Start();
@@ -180,7 +200,14 @@ namespace MgmtSupersetInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel1SName"/> is null. </exception>
         public virtual async Task<Response<SupersetModel1Resource>> GetAsync(string supersetModel1SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(supersetModel1SName, nameof(supersetModel1SName));
+            if (supersetModel1SName == null)
+            {
+                throw new ArgumentNullException(nameof(supersetModel1SName));
+            }
+            if (supersetModel1SName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(supersetModel1SName));
+            }
 
             using var scope = _supersetModel1ClientDiagnostics.CreateScope("SupersetModel1Collection.Get");
             scope.Start();
@@ -224,7 +251,14 @@ namespace MgmtSupersetInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel1SName"/> is null. </exception>
         public virtual Response<SupersetModel1Resource> Get(string supersetModel1SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(supersetModel1SName, nameof(supersetModel1SName));
+            if (supersetModel1SName == null)
+            {
+                throw new ArgumentNullException(nameof(supersetModel1SName));
+            }
+            if (supersetModel1SName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(supersetModel1SName));
+            }
 
             using var scope = _supersetModel1ClientDiagnostics.CreateScope("SupersetModel1Collection.Get");
             scope.Start();
@@ -325,7 +359,14 @@ namespace MgmtSupersetInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel1SName"/> is null. </exception>
         public virtual async Task<Response<bool>> ExistsAsync(string supersetModel1SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(supersetModel1SName, nameof(supersetModel1SName));
+            if (supersetModel1SName == null)
+            {
+                throw new ArgumentNullException(nameof(supersetModel1SName));
+            }
+            if (supersetModel1SName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(supersetModel1SName));
+            }
 
             using var scope = _supersetModel1ClientDiagnostics.CreateScope("SupersetModel1Collection.Exists");
             scope.Start();
@@ -368,7 +409,14 @@ namespace MgmtSupersetInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel1SName"/> is null. </exception>
         public virtual Response<bool> Exists(string supersetModel1SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(supersetModel1SName, nameof(supersetModel1SName));
+            if (supersetModel1SName == null)
+            {
+                throw new ArgumentNullException(nameof(supersetModel1SName));
+            }
+            if (supersetModel1SName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(supersetModel1SName));
+            }
 
             using var scope = _supersetModel1ClientDiagnostics.CreateScope("SupersetModel1Collection.Exists");
             scope.Start();
@@ -411,7 +459,14 @@ namespace MgmtSupersetInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel1SName"/> is null. </exception>
         public virtual async Task<NullableResponse<SupersetModel1Resource>> GetIfExistsAsync(string supersetModel1SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(supersetModel1SName, nameof(supersetModel1SName));
+            if (supersetModel1SName == null)
+            {
+                throw new ArgumentNullException(nameof(supersetModel1SName));
+            }
+            if (supersetModel1SName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(supersetModel1SName));
+            }
 
             using var scope = _supersetModel1ClientDiagnostics.CreateScope("SupersetModel1Collection.GetIfExists");
             scope.Start();
@@ -456,7 +511,14 @@ namespace MgmtSupersetInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel1SName"/> is null. </exception>
         public virtual NullableResponse<SupersetModel1Resource> GetIfExists(string supersetModel1SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(supersetModel1SName, nameof(supersetModel1SName));
+            if (supersetModel1SName == null)
+            {
+                throw new ArgumentNullException(nameof(supersetModel1SName));
+            }
+            if (supersetModel1SName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(supersetModel1SName));
+            }
 
             using var scope = _supersetModel1ClientDiagnostics.CreateScope("SupersetModel1Collection.GetIfExists");
             scope.Start();

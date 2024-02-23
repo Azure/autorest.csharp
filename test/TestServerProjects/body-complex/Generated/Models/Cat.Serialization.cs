@@ -26,12 +26,12 @@ namespace body_complex.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Color))
+            if (Color != null)
             {
                 writer.WritePropertyName("color"u8);
                 writer.WriteStringValue(Color);
             }
-            if (Optional.IsCollectionDefined(Hates))
+            if (!(Hates is ChangeTrackingList<Dog> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("hates"u8);
                 writer.WriteStartArray();
@@ -41,12 +41,12 @@ namespace body_complex.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(Id))
+            if (Id.HasValue)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteNumberValue(Id.Value);
             }
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
@@ -111,7 +111,7 @@ namespace body_complex.Models
                     List<Dog> array = new List<Dog>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Dog.DeserializeDog(item));
+                        array.Add(Dog.DeserializeDog(item, options));
                     }
                     hates = array;
                     continue;

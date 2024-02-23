@@ -80,9 +80,26 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="groupId"/> or <paramref name="mgmtGrpParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<MgmtGrpParentWithLocData>> CreateOrUpdateAsync(string groupId, string mgmtGrpParentWithLocName, MgmtGrpParentWithLocData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(groupId, nameof(groupId));
-            Argument.AssertNotNullOrEmpty(mgmtGrpParentWithLocName, nameof(mgmtGrpParentWithLocName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (groupId == null)
+            {
+                throw new ArgumentNullException(nameof(groupId));
+            }
+            if (groupId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(groupId));
+            }
+            if (mgmtGrpParentWithLocName == null)
+            {
+                throw new ArgumentNullException(nameof(mgmtGrpParentWithLocName));
+            }
+            if (mgmtGrpParentWithLocName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(mgmtGrpParentWithLocName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var message = CreateCreateOrUpdateRequest(groupId, mgmtGrpParentWithLocName, data);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -109,9 +126,26 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="groupId"/> or <paramref name="mgmtGrpParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<MgmtGrpParentWithLocData> CreateOrUpdate(string groupId, string mgmtGrpParentWithLocName, MgmtGrpParentWithLocData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(groupId, nameof(groupId));
-            Argument.AssertNotNullOrEmpty(mgmtGrpParentWithLocName, nameof(mgmtGrpParentWithLocName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (groupId == null)
+            {
+                throw new ArgumentNullException(nameof(groupId));
+            }
+            if (groupId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(groupId));
+            }
+            if (mgmtGrpParentWithLocName == null)
+            {
+                throw new ArgumentNullException(nameof(mgmtGrpParentWithLocName));
+            }
+            if (mgmtGrpParentWithLocName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(mgmtGrpParentWithLocName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var message = CreateCreateOrUpdateRequest(groupId, mgmtGrpParentWithLocName, data);
             _pipeline.Send(message, cancellationToken);
@@ -167,8 +201,22 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="groupId"/> or <paramref name="mgmtGrpParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<MgmtGrpParentWithLocData>> GetAsync(string groupId, string mgmtGrpParentWithLocName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(groupId, nameof(groupId));
-            Argument.AssertNotNullOrEmpty(mgmtGrpParentWithLocName, nameof(mgmtGrpParentWithLocName));
+            if (groupId == null)
+            {
+                throw new ArgumentNullException(nameof(groupId));
+            }
+            if (groupId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(groupId));
+            }
+            if (mgmtGrpParentWithLocName == null)
+            {
+                throw new ArgumentNullException(nameof(mgmtGrpParentWithLocName));
+            }
+            if (mgmtGrpParentWithLocName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(mgmtGrpParentWithLocName));
+            }
 
             using var message = CreateGetRequest(groupId, mgmtGrpParentWithLocName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -196,8 +244,22 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="groupId"/> or <paramref name="mgmtGrpParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<MgmtGrpParentWithLocData> Get(string groupId, string mgmtGrpParentWithLocName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(groupId, nameof(groupId));
-            Argument.AssertNotNullOrEmpty(mgmtGrpParentWithLocName, nameof(mgmtGrpParentWithLocName));
+            if (groupId == null)
+            {
+                throw new ArgumentNullException(nameof(groupId));
+            }
+            if (groupId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(groupId));
+            }
+            if (mgmtGrpParentWithLocName == null)
+            {
+                throw new ArgumentNullException(nameof(mgmtGrpParentWithLocName));
+            }
+            if (mgmtGrpParentWithLocName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(mgmtGrpParentWithLocName));
+            }
 
             using var message = CreateGetRequest(groupId, mgmtGrpParentWithLocName);
             _pipeline.Send(message, cancellationToken);
@@ -252,7 +314,14 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="groupId"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<MgmtGrpParentWithLocListResult>> ListAsync(string groupId, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(groupId, nameof(groupId));
+            if (groupId == null)
+            {
+                throw new ArgumentNullException(nameof(groupId));
+            }
+            if (groupId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(groupId));
+            }
 
             using var message = CreateListRequest(groupId);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -277,7 +346,14 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="groupId"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<MgmtGrpParentWithLocListResult> List(string groupId, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(groupId, nameof(groupId));
+            if (groupId == null)
+            {
+                throw new ArgumentNullException(nameof(groupId));
+            }
+            if (groupId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(groupId));
+            }
 
             using var message = CreateListRequest(groupId);
             _pipeline.Send(message, cancellationToken);
@@ -325,8 +401,18 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="groupId"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<MgmtGrpParentWithLocListResult>> ListNextPageAsync(string nextLink, string groupId, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(nextLink, nameof(nextLink));
-            Argument.AssertNotNullOrEmpty(groupId, nameof(groupId));
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (groupId == null)
+            {
+                throw new ArgumentNullException(nameof(groupId));
+            }
+            if (groupId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(groupId));
+            }
 
             using var message = CreateListNextPageRequest(nextLink, groupId);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -352,8 +438,18 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="groupId"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<MgmtGrpParentWithLocListResult> ListNextPage(string nextLink, string groupId, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(nextLink, nameof(nextLink));
-            Argument.AssertNotNullOrEmpty(groupId, nameof(groupId));
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (groupId == null)
+            {
+                throw new ArgumentNullException(nameof(groupId));
+            }
+            if (groupId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(groupId));
+            }
 
             using var message = CreateListNextPageRequest(nextLink, groupId);
             _pipeline.Send(message, cancellationToken);

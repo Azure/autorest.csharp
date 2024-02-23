@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace _Specs_.Azure.Core.Basic.Models
 {
@@ -51,7 +50,10 @@ namespace _Specs_.Azure.Core.Basic.Models
         /// <exception cref="ArgumentNullException"> <paramref name="inputName"/> is null. </exception>
         public ListItemInputBody(string inputName)
         {
-            Argument.AssertNotNull(inputName, nameof(inputName));
+            if (inputName == null)
+            {
+                throw new ArgumentNullException(nameof(inputName));
+            }
 
             InputName = inputName;
         }

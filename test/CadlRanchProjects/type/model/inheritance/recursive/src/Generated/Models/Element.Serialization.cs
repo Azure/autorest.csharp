@@ -27,7 +27,7 @@ namespace _Type.Model.Inheritance.Recursive.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Extension))
+            if (!(Extension is ChangeTrackingList<Extension> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("extension"u8);
                 writer.WriteStartArray();
@@ -89,7 +89,7 @@ namespace _Type.Model.Inheritance.Recursive.Models
                     List<Extension> array = new List<Extension>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Models.Extension.DeserializeExtension(item));
+                        array.Add(Models.Extension.DeserializeExtension(item, options));
                     }
                     extension = array;
                     continue;

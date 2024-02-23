@@ -16,7 +16,7 @@ namespace ExtensionClientName.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(RenamedProperty))
+            if (!(RenamedProperty is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("originalProperty"u8);
                 writer.WriteStartObject();
@@ -27,7 +27,7 @@ namespace ExtensionClientName.Models
                 }
                 writer.WriteEndObject();
             }
-            if (Optional.IsDefined(RenamedPropertyString))
+            if (RenamedPropertyString != null)
             {
                 writer.WritePropertyName("originalPropertyString"u8);
                 writer.WriteStringValue(RenamedPropertyString);

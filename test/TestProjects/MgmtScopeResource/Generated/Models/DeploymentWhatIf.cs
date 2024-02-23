@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using Azure.Core;
 
 namespace MgmtScopeResource.Models
 {
@@ -18,7 +17,10 @@ namespace MgmtScopeResource.Models
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
         public DeploymentWhatIf(DeploymentWhatIfProperties properties)
         {
-            Argument.AssertNotNull(properties, nameof(properties));
+            if (properties == null)
+            {
+                throw new ArgumentNullException(nameof(properties));
+            }
 
             Properties = properties;
         }

@@ -48,7 +48,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteObjectValue(item.Value);
             }
             writer.WriteEndObject();
-            if (Optional.IsCollectionDefined(OptionalList))
+            if (!(OptionalList is ChangeTrackingList<CollectionItem> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("optionalList"u8);
                 writer.WriteStartArray();
@@ -58,7 +58,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(OptionalNullableList))
+            if (!(OptionalNullableList is ChangeTrackingList<CollectionItem> collection0 && collection0.IsUndefined))
             {
                 if (OptionalNullableList != null)
                 {
@@ -75,7 +75,7 @@ namespace ModelsTypeSpec.Models
                     writer.WriteNull("optionalNullableList");
                 }
             }
-            if (Optional.IsCollectionDefined(OptionalRecord))
+            if (!(OptionalRecord is ChangeTrackingDictionary<string, RecordItem> collection1 && collection1.IsUndefined))
             {
                 writer.WritePropertyName("optionalRecord"u8);
                 writer.WriteStartObject();
@@ -86,7 +86,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndObject();
             }
-            if (Optional.IsCollectionDefined(OptionalNullableRecord))
+            if (!(OptionalNullableRecord is ChangeTrackingDictionary<string, RecordItem> collection2 && collection2.IsUndefined))
             {
                 if (OptionalNullableRecord != null)
                 {
@@ -167,7 +167,7 @@ namespace ModelsTypeSpec.Models
                 }
                 if (property.NameEquals("requiredModel"u8))
                 {
-                    requiredModel = DerivedModel.DeserializeDerivedModel(property.Value);
+                    requiredModel = DerivedModel.DeserializeDerivedModel(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("requiredList"u8))
@@ -175,7 +175,7 @@ namespace ModelsTypeSpec.Models
                     List<CollectionItem> array = new List<CollectionItem>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CollectionItem.DeserializeCollectionItem(item));
+                        array.Add(CollectionItem.DeserializeCollectionItem(item, options));
                     }
                     requiredList = array;
                     continue;
@@ -185,7 +185,7 @@ namespace ModelsTypeSpec.Models
                     Dictionary<string, RecordItem> dictionary = new Dictionary<string, RecordItem>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value));
+                        dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value, options));
                     }
                     requiredModelRecord = dictionary;
                     continue;
@@ -199,7 +199,7 @@ namespace ModelsTypeSpec.Models
                     List<CollectionItem> array = new List<CollectionItem>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CollectionItem.DeserializeCollectionItem(item));
+                        array.Add(CollectionItem.DeserializeCollectionItem(item, options));
                     }
                     optionalList = array;
                     continue;
@@ -213,7 +213,7 @@ namespace ModelsTypeSpec.Models
                     List<CollectionItem> array = new List<CollectionItem>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CollectionItem.DeserializeCollectionItem(item));
+                        array.Add(CollectionItem.DeserializeCollectionItem(item, options));
                     }
                     optionalNullableList = array;
                     continue;
@@ -227,7 +227,7 @@ namespace ModelsTypeSpec.Models
                     Dictionary<string, RecordItem> dictionary = new Dictionary<string, RecordItem>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value));
+                        dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value, options));
                     }
                     optionalRecord = dictionary;
                     continue;
@@ -241,7 +241,7 @@ namespace ModelsTypeSpec.Models
                     Dictionary<string, RecordItem> dictionary = new Dictionary<string, RecordItem>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value));
+                        dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value, options));
                     }
                     optionalNullableRecord = dictionary;
                     continue;

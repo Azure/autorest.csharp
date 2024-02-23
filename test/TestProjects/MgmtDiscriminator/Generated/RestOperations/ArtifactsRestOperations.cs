@@ -80,9 +80,22 @@ namespace MgmtDiscriminator
         /// <exception cref="ArgumentException"> <paramref name="artifactName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<ArtifactData>> CreateOrUpdateAsync(string resourceScope, string artifactName, ArtifactData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(resourceScope, nameof(resourceScope));
-            Argument.AssertNotNullOrEmpty(artifactName, nameof(artifactName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (resourceScope == null)
+            {
+                throw new ArgumentNullException(nameof(resourceScope));
+            }
+            if (artifactName == null)
+            {
+                throw new ArgumentNullException(nameof(artifactName));
+            }
+            if (artifactName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(artifactName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var message = CreateCreateOrUpdateRequest(resourceScope, artifactName, data);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -109,9 +122,22 @@ namespace MgmtDiscriminator
         /// <exception cref="ArgumentException"> <paramref name="artifactName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<ArtifactData> CreateOrUpdate(string resourceScope, string artifactName, ArtifactData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(resourceScope, nameof(resourceScope));
-            Argument.AssertNotNullOrEmpty(artifactName, nameof(artifactName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (resourceScope == null)
+            {
+                throw new ArgumentNullException(nameof(resourceScope));
+            }
+            if (artifactName == null)
+            {
+                throw new ArgumentNullException(nameof(artifactName));
+            }
+            if (artifactName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(artifactName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var message = CreateCreateOrUpdateRequest(resourceScope, artifactName, data);
             _pipeline.Send(message, cancellationToken);
@@ -167,8 +193,18 @@ namespace MgmtDiscriminator
         /// <exception cref="ArgumentException"> <paramref name="artifactName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<ArtifactData>> GetAsync(string resourceScope, string artifactName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(resourceScope, nameof(resourceScope));
-            Argument.AssertNotNullOrEmpty(artifactName, nameof(artifactName));
+            if (resourceScope == null)
+            {
+                throw new ArgumentNullException(nameof(resourceScope));
+            }
+            if (artifactName == null)
+            {
+                throw new ArgumentNullException(nameof(artifactName));
+            }
+            if (artifactName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(artifactName));
+            }
 
             using var message = CreateGetRequest(resourceScope, artifactName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -196,8 +232,18 @@ namespace MgmtDiscriminator
         /// <exception cref="ArgumentException"> <paramref name="artifactName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<ArtifactData> Get(string resourceScope, string artifactName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(resourceScope, nameof(resourceScope));
-            Argument.AssertNotNullOrEmpty(artifactName, nameof(artifactName));
+            if (resourceScope == null)
+            {
+                throw new ArgumentNullException(nameof(resourceScope));
+            }
+            if (artifactName == null)
+            {
+                throw new ArgumentNullException(nameof(artifactName));
+            }
+            if (artifactName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(artifactName));
+            }
 
             using var message = CreateGetRequest(resourceScope, artifactName);
             _pipeline.Send(message, cancellationToken);
@@ -255,8 +301,18 @@ namespace MgmtDiscriminator
         /// <exception cref="ArgumentException"> <paramref name="artifactName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<ArtifactData>> DeleteAsync(string resourceScope, string artifactName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(resourceScope, nameof(resourceScope));
-            Argument.AssertNotNullOrEmpty(artifactName, nameof(artifactName));
+            if (resourceScope == null)
+            {
+                throw new ArgumentNullException(nameof(resourceScope));
+            }
+            if (artifactName == null)
+            {
+                throw new ArgumentNullException(nameof(artifactName));
+            }
+            if (artifactName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(artifactName));
+            }
 
             using var message = CreateDeleteRequest(resourceScope, artifactName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -284,8 +340,18 @@ namespace MgmtDiscriminator
         /// <exception cref="ArgumentException"> <paramref name="artifactName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<ArtifactData> Delete(string resourceScope, string artifactName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(resourceScope, nameof(resourceScope));
-            Argument.AssertNotNullOrEmpty(artifactName, nameof(artifactName));
+            if (resourceScope == null)
+            {
+                throw new ArgumentNullException(nameof(resourceScope));
+            }
+            if (artifactName == null)
+            {
+                throw new ArgumentNullException(nameof(artifactName));
+            }
+            if (artifactName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(artifactName));
+            }
 
             using var message = CreateDeleteRequest(resourceScope, artifactName);
             _pipeline.Send(message, cancellationToken);
@@ -339,7 +405,10 @@ namespace MgmtDiscriminator
         /// <exception cref="ArgumentNullException"> <paramref name="resourceScope"/> is null. </exception>
         public async Task<Response<ArtifactList>> ListAsync(string resourceScope, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(resourceScope, nameof(resourceScope));
+            if (resourceScope == null)
+            {
+                throw new ArgumentNullException(nameof(resourceScope));
+            }
 
             using var message = CreateListRequest(resourceScope);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -363,7 +432,10 @@ namespace MgmtDiscriminator
         /// <exception cref="ArgumentNullException"> <paramref name="resourceScope"/> is null. </exception>
         public Response<ArtifactList> List(string resourceScope, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(resourceScope, nameof(resourceScope));
+            if (resourceScope == null)
+            {
+                throw new ArgumentNullException(nameof(resourceScope));
+            }
 
             using var message = CreateListRequest(resourceScope);
             _pipeline.Send(message, cancellationToken);
@@ -410,8 +482,14 @@ namespace MgmtDiscriminator
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="resourceScope"/> is null. </exception>
         public async Task<Response<ArtifactList>> ListNextPageAsync(string nextLink, string resourceScope, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(nextLink, nameof(nextLink));
-            Argument.AssertNotNull(resourceScope, nameof(resourceScope));
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (resourceScope == null)
+            {
+                throw new ArgumentNullException(nameof(resourceScope));
+            }
 
             using var message = CreateListNextPageRequest(nextLink, resourceScope);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -436,8 +514,14 @@ namespace MgmtDiscriminator
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="resourceScope"/> is null. </exception>
         public Response<ArtifactList> ListNextPage(string nextLink, string resourceScope, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(nextLink, nameof(nextLink));
-            Argument.AssertNotNull(resourceScope, nameof(resourceScope));
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (resourceScope == null)
+            {
+                throw new ArgumentNullException(nameof(resourceScope));
+            }
 
             using var message = CreateListNextPageRequest(nextLink, resourceScope);
             _pipeline.Send(message, cancellationToken);

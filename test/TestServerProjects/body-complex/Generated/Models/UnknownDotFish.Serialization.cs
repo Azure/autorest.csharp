@@ -28,7 +28,7 @@ namespace body_complex.Models
             writer.WriteStartObject();
             writer.WritePropertyName("fish.type"u8);
             writer.WriteStringValue(FishType);
-            if (Optional.IsDefined(Species))
+            if (Species != null)
             {
                 writer.WritePropertyName("species"u8);
                 writer.WriteStringValue(Species);
@@ -60,7 +60,7 @@ namespace body_complex.Models
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeUnknownDotFish(document.RootElement, options);
+            return DeserializeDotFish(document.RootElement, options);
         }
 
         internal static UnknownDotFish DeserializeUnknownDotFish(JsonElement element, ModelReaderWriterOptions options = null)
@@ -118,7 +118,7 @@ namespace body_complex.Models
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeUnknownDotFish(document.RootElement, options);
+                        return DeserializeDotFish(document.RootElement, options);
                     }
                 default:
                     throw new FormatException($"The model {nameof(DotFish)} does not support '{options.Format}' format.");

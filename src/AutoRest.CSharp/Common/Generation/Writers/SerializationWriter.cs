@@ -219,7 +219,7 @@ namespace AutoRest.CSharp.Generation.Writers
             // the methods that implement the interface IJsonModel<T> (and IJsonModel<object> if eligible) (do not include the methods inherited from IModel<T> or IModel<object>)
             if (model.IncludeSerializer)
             {
-                foreach (var method in JsonSerializationMethodsBuilder.BuildJsonSerializationMethods(model, json))
+                foreach (var method in JsonSerializationMethodsBuilder.BuildJsonSerializationMethods(json))
                 {
                     writer.WriteMethod(method);
                 }
@@ -245,7 +245,7 @@ namespace AutoRest.CSharp.Generation.Writers
         /// <param name="bicep"></param>
         private static void WriteIModelImplementations(CodeWriter writer, SerializableObjectType model, JsonObjectSerialization? json, XmlObjectSerialization? xml, BicepObjectSerialization? bicep)
         {
-            foreach (var method in JsonSerializationMethodsBuilder.BuildIModelMethods(model, json, xml, bicep))
+            foreach (var method in JsonSerializationMethodsBuilder.BuildIModelMethods(json, xml, bicep))
             {
                 writer.WriteMethod(method);
             }

@@ -28,17 +28,17 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(ImageReference))
+            if (ImageReference != null)
             {
                 writer.WritePropertyName("imageReference"u8);
                 writer.WriteObjectValue(ImageReference);
             }
-            if (Optional.IsDefined(OSDisk))
+            if (OSDisk != null)
             {
                 writer.WritePropertyName("osDisk"u8);
                 writer.WriteObjectValue(OSDisk);
             }
-            if (Optional.IsCollectionDefined(DataDisks))
+            if (!(DataDisks is ChangeTrackingList<VirtualMachineScaleSetDataDisk> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("dataDisks"u8);
                 writer.WriteStartArray();
@@ -99,7 +99,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    imageReference = ImageReference.DeserializeImageReference(property.Value);
+                    imageReference = ImageReference.DeserializeImageReference(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("osDisk"u8))
@@ -108,7 +108,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    osDisk = VirtualMachineScaleSetOSDisk.DeserializeVirtualMachineScaleSetOSDisk(property.Value);
+                    osDisk = VirtualMachineScaleSetOSDisk.DeserializeVirtualMachineScaleSetOSDisk(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("dataDisks"u8))
@@ -120,7 +120,7 @@ namespace Azure.ResourceManager.Sample.Models
                     List<VirtualMachineScaleSetDataDisk> array = new List<VirtualMachineScaleSetDataDisk>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(VirtualMachineScaleSetDataDisk.DeserializeVirtualMachineScaleSetDataDisk(item));
+                        array.Add(VirtualMachineScaleSetDataDisk.DeserializeVirtualMachineScaleSetDataDisk(item, options));
                     }
                     dataDisks = array;
                     continue;
@@ -139,19 +139,19 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(ImageReference))
+            if (ImageReference != null)
             {
                 builder.Append("  imageReference:");
                 AppendChildObject(builder, ImageReference, options, 2, false);
             }
 
-            if (Optional.IsDefined(OSDisk))
+            if (OSDisk != null)
             {
                 builder.Append("  osDisk:");
                 AppendChildObject(builder, OSDisk, options, 2, false);
             }
 
-            if (Optional.IsCollectionDefined(DataDisks))
+            if (!(DataDisks is ChangeTrackingList<VirtualMachineScaleSetDataDisk> collection && collection.IsUndefined))
             {
                 if (DataDisks.Any())
                 {

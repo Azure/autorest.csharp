@@ -32,7 +32,7 @@ namespace OpenAI.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            if (OptionalProperty.IsCollectionDefined(Functions))
+            if (!(Functions is OptionalList<ChatCompletionFunctions> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("functions"u8);
                 writer.WriteStartArray();
@@ -42,7 +42,7 @@ namespace OpenAI.Models
                 }
                 writer.WriteEndArray();
             }
-            if (OptionalProperty.IsDefined(FunctionCall))
+            if (FunctionCall != null)
             {
                 writer.WritePropertyName("function_call"u8);
 #if NET6_0_OR_GREATER
@@ -54,7 +54,7 @@ namespace OpenAI.Models
                 }
 #endif
             }
-            if (OptionalProperty.IsDefined(Temperature))
+            if (Temperature.HasValue)
             {
                 if (Temperature != null)
                 {
@@ -66,7 +66,7 @@ namespace OpenAI.Models
                     writer.WriteNull("temperature");
                 }
             }
-            if (OptionalProperty.IsDefined(TopP))
+            if (TopP.HasValue)
             {
                 if (TopP != null)
                 {
@@ -78,7 +78,7 @@ namespace OpenAI.Models
                     writer.WriteNull("top_p");
                 }
             }
-            if (OptionalProperty.IsDefined(N))
+            if (N.HasValue)
             {
                 if (N != null)
                 {
@@ -90,7 +90,7 @@ namespace OpenAI.Models
                     writer.WriteNull("n");
                 }
             }
-            if (OptionalProperty.IsDefined(MaxTokens))
+            if (MaxTokens.HasValue)
             {
                 if (MaxTokens != null)
                 {
@@ -102,7 +102,7 @@ namespace OpenAI.Models
                     writer.WriteNull("max_tokens");
                 }
             }
-            if (OptionalProperty.IsDefined(Stop))
+            if (Stop != null)
             {
                 writer.WritePropertyName("stop"u8);
 #if NET6_0_OR_GREATER
@@ -114,7 +114,7 @@ namespace OpenAI.Models
                 }
 #endif
             }
-            if (OptionalProperty.IsDefined(PresencePenalty))
+            if (PresencePenalty.HasValue)
             {
                 if (PresencePenalty != null)
                 {
@@ -126,7 +126,7 @@ namespace OpenAI.Models
                     writer.WriteNull("presence_penalty");
                 }
             }
-            if (OptionalProperty.IsDefined(FrequencyPenalty))
+            if (FrequencyPenalty.HasValue)
             {
                 if (FrequencyPenalty != null)
                 {
@@ -138,7 +138,7 @@ namespace OpenAI.Models
                     writer.WriteNull("frequency_penalty");
                 }
             }
-            if (OptionalProperty.IsCollectionDefined(LogitBias))
+            if (!(LogitBias is OptionalDictionary<string, long> collection0 && collection0.IsUndefined))
             {
                 if (LogitBias != null)
                 {
@@ -156,12 +156,12 @@ namespace OpenAI.Models
                     writer.WriteNull("logit_bias");
                 }
             }
-            if (OptionalProperty.IsDefined(User))
+            if (User != null)
             {
                 writer.WritePropertyName("user"u8);
                 writer.WriteStringValue(User);
             }
-            if (OptionalProperty.IsDefined(Stream))
+            if (Stream.HasValue)
             {
                 if (Stream != null)
                 {
@@ -239,7 +239,7 @@ namespace OpenAI.Models
                     List<ChatCompletionRequestMessage> array = new List<ChatCompletionRequestMessage>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ChatCompletionRequestMessage.DeserializeChatCompletionRequestMessage(item));
+                        array.Add(ChatCompletionRequestMessage.DeserializeChatCompletionRequestMessage(item, options));
                     }
                     messages = array;
                     continue;
@@ -253,7 +253,7 @@ namespace OpenAI.Models
                     List<ChatCompletionFunctions> array = new List<ChatCompletionFunctions>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ChatCompletionFunctions.DeserializeChatCompletionFunctions(item));
+                        array.Add(ChatCompletionFunctions.DeserializeChatCompletionFunctions(item, options));
                     }
                     functions = array;
                     continue;

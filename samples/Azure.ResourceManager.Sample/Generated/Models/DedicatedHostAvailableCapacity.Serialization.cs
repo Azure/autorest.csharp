@@ -28,7 +28,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(AllocatableVms))
+            if (!(AllocatableVms is ChangeTrackingList<DedicatedHostAllocatableVm> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("allocatableVMs"u8);
                 writer.WriteStartArray();
@@ -90,7 +90,7 @@ namespace Azure.ResourceManager.Sample.Models
                     List<DedicatedHostAllocatableVm> array = new List<DedicatedHostAllocatableVm>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DedicatedHostAllocatableVm.DeserializeDedicatedHostAllocatableVm(item));
+                        array.Add(DedicatedHostAllocatableVm.DeserializeDedicatedHostAllocatableVm(item, options));
                     }
                     allocatableVms = array;
                     continue;
@@ -109,7 +109,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsCollectionDefined(AllocatableVms))
+            if (!(AllocatableVms is ChangeTrackingList<DedicatedHostAllocatableVm> collection && collection.IsUndefined))
             {
                 if (AllocatableVms.Any())
                 {

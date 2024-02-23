@@ -47,8 +47,14 @@ namespace security_aad_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public AutorestSecurityAadClient(Uri endpoint, TokenCredential credential, AutorestSecurityAadClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
-            Argument.AssertNotNull(credential, nameof(credential));
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
+            if (credential == null)
+            {
+                throw new ArgumentNullException(nameof(credential));
+            }
             options ??= new AutorestSecurityAadClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

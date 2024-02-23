@@ -45,7 +45,10 @@ namespace ServiceVersionOverride_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public ServiceVersionOverrideClient(Uri endpoint, ServiceVersionOverrideClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
             options ??= new ServiceVersionOverrideClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -72,7 +75,10 @@ namespace ServiceVersionOverride_LowLevel
         /// <include file="Docs/ServiceVersionOverrideClient.xml" path="doc/members/member[@name='OperationAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> OperationAsync(string notApiVersionEnum, RequestContext context = null)
         {
-            Argument.AssertNotNull(notApiVersionEnum, nameof(notApiVersionEnum));
+            if (notApiVersionEnum == null)
+            {
+                throw new ArgumentNullException(nameof(notApiVersionEnum));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ServiceVersionOverrideClient.Operation");
             scope.Start();
@@ -106,7 +112,10 @@ namespace ServiceVersionOverride_LowLevel
         /// <include file="Docs/ServiceVersionOverrideClient.xml" path="doc/members/member[@name='Operation(string,RequestContext)']/*" />
         public virtual Response Operation(string notApiVersionEnum, RequestContext context = null)
         {
-            Argument.AssertNotNull(notApiVersionEnum, nameof(notApiVersionEnum));
+            if (notApiVersionEnum == null)
+            {
+                throw new ArgumentNullException(nameof(notApiVersionEnum));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ServiceVersionOverrideClient.Operation");
             scope.Start();

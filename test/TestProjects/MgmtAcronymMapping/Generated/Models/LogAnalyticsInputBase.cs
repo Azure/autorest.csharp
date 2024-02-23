@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using Azure.Core;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -32,7 +31,10 @@ namespace MgmtAcronymMapping.Models
         /// <exception cref="ArgumentNullException"> <paramref name="blobContainerSasUri"/> is null. </exception>
         public LogAnalyticsInputBase(Uri blobContainerSasUri, DateTimeOffset fromTime, DateTimeOffset toTime)
         {
-            Argument.AssertNotNull(blobContainerSasUri, nameof(blobContainerSasUri));
+            if (blobContainerSasUri == null)
+            {
+                throw new ArgumentNullException(nameof(blobContainerSasUri));
+            }
 
             BlobContainerSasUri = blobContainerSasUri;
             FromTime = fromTime;

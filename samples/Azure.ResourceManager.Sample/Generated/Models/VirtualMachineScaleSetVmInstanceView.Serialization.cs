@@ -28,32 +28,32 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(PlatformUpdateDomain))
+            if (PlatformUpdateDomain.HasValue)
             {
                 writer.WritePropertyName("platformUpdateDomain"u8);
                 writer.WriteNumberValue(PlatformUpdateDomain.Value);
             }
-            if (Optional.IsDefined(PlatformFaultDomain))
+            if (PlatformFaultDomain.HasValue)
             {
                 writer.WritePropertyName("platformFaultDomain"u8);
                 writer.WriteNumberValue(PlatformFaultDomain.Value);
             }
-            if (Optional.IsDefined(RdpThumbPrint))
+            if (RdpThumbPrint != null)
             {
                 writer.WritePropertyName("rdpThumbPrint"u8);
                 writer.WriteStringValue(RdpThumbPrint);
             }
-            if (Optional.IsDefined(VmAgent))
+            if (VmAgent != null)
             {
                 writer.WritePropertyName("vmAgent"u8);
                 writer.WriteObjectValue(VmAgent);
             }
-            if (Optional.IsDefined(MaintenanceRedeployStatus))
+            if (MaintenanceRedeployStatus != null)
             {
                 writer.WritePropertyName("maintenanceRedeployStatus"u8);
                 writer.WriteObjectValue(MaintenanceRedeployStatus);
             }
-            if (Optional.IsCollectionDefined(Disks))
+            if (!(Disks is ChangeTrackingList<DiskInstanceView> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("disks"u8);
                 writer.WriteStartArray();
@@ -63,7 +63,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(Extensions))
+            if (!(Extensions is ChangeTrackingList<VirtualMachineExtensionInstanceView> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("extensions"u8);
                 writer.WriteStartArray();
@@ -73,17 +73,17 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W" && Optional.IsDefined(VmHealth))
+            if (options.Format != "W" && VmHealth != null)
             {
                 writer.WritePropertyName("vmHealth"u8);
                 writer.WriteObjectValue(VmHealth);
             }
-            if (Optional.IsDefined(BootDiagnostics))
+            if (BootDiagnostics != null)
             {
                 writer.WritePropertyName("bootDiagnostics"u8);
                 writer.WriteObjectValue(BootDiagnostics);
             }
-            if (Optional.IsCollectionDefined(Statuses))
+            if (!(Statuses is ChangeTrackingList<InstanceViewStatus> collection1 && collection1.IsUndefined))
             {
                 writer.WritePropertyName("statuses"u8);
                 writer.WriteStartArray();
@@ -93,12 +93,12 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W" && Optional.IsDefined(AssignedHost))
+            if (options.Format != "W" && AssignedHost != null)
             {
                 writer.WritePropertyName("assignedHost"u8);
                 writer.WriteStringValue(AssignedHost);
             }
-            if (Optional.IsDefined(PlacementGroupId))
+            if (PlacementGroupId != null)
             {
                 writer.WritePropertyName("placementGroupId"u8);
                 writer.WriteStringValue(PlacementGroupId);
@@ -186,7 +186,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    vmAgent = VirtualMachineAgentInstanceView.DeserializeVirtualMachineAgentInstanceView(property.Value);
+                    vmAgent = VirtualMachineAgentInstanceView.DeserializeVirtualMachineAgentInstanceView(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("maintenanceRedeployStatus"u8))
@@ -195,7 +195,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    maintenanceRedeployStatus = MaintenanceRedeployStatus.DeserializeMaintenanceRedeployStatus(property.Value);
+                    maintenanceRedeployStatus = MaintenanceRedeployStatus.DeserializeMaintenanceRedeployStatus(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("disks"u8))
@@ -207,7 +207,7 @@ namespace Azure.ResourceManager.Sample.Models
                     List<DiskInstanceView> array = new List<DiskInstanceView>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DiskInstanceView.DeserializeDiskInstanceView(item));
+                        array.Add(DiskInstanceView.DeserializeDiskInstanceView(item, options));
                     }
                     disks = array;
                     continue;
@@ -221,7 +221,7 @@ namespace Azure.ResourceManager.Sample.Models
                     List<VirtualMachineExtensionInstanceView> array = new List<VirtualMachineExtensionInstanceView>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(VirtualMachineExtensionInstanceView.DeserializeVirtualMachineExtensionInstanceView(item));
+                        array.Add(VirtualMachineExtensionInstanceView.DeserializeVirtualMachineExtensionInstanceView(item, options));
                     }
                     extensions = array;
                     continue;
@@ -232,7 +232,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    vmHealth = VirtualMachineHealthStatus.DeserializeVirtualMachineHealthStatus(property.Value);
+                    vmHealth = VirtualMachineHealthStatus.DeserializeVirtualMachineHealthStatus(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("bootDiagnostics"u8))
@@ -241,7 +241,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    bootDiagnostics = BootDiagnosticsInstanceView.DeserializeBootDiagnosticsInstanceView(property.Value);
+                    bootDiagnostics = BootDiagnosticsInstanceView.DeserializeBootDiagnosticsInstanceView(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("statuses"u8))
@@ -253,7 +253,7 @@ namespace Azure.ResourceManager.Sample.Models
                     List<InstanceViewStatus> array = new List<InstanceViewStatus>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(InstanceViewStatus.DeserializeInstanceViewStatus(item));
+                        array.Add(InstanceViewStatus.DeserializeInstanceViewStatus(item, options));
                     }
                     statuses = array;
                     continue;
@@ -282,19 +282,19 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(PlatformUpdateDomain))
+            if (PlatformUpdateDomain.HasValue)
             {
                 builder.Append("  platformUpdateDomain:");
                 builder.AppendLine($" {PlatformUpdateDomain.Value}");
             }
 
-            if (Optional.IsDefined(PlatformFaultDomain))
+            if (PlatformFaultDomain.HasValue)
             {
                 builder.Append("  platformFaultDomain:");
                 builder.AppendLine($" {PlatformFaultDomain.Value}");
             }
 
-            if (Optional.IsDefined(RdpThumbPrint))
+            if (RdpThumbPrint != null)
             {
                 builder.Append("  rdpThumbPrint:");
                 if (RdpThumbPrint.Contains(Environment.NewLine))
@@ -308,19 +308,19 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(VmAgent))
+            if (VmAgent != null)
             {
                 builder.Append("  vmAgent:");
                 AppendChildObject(builder, VmAgent, options, 2, false);
             }
 
-            if (Optional.IsDefined(MaintenanceRedeployStatus))
+            if (MaintenanceRedeployStatus != null)
             {
                 builder.Append("  maintenanceRedeployStatus:");
                 AppendChildObject(builder, MaintenanceRedeployStatus, options, 2, false);
             }
 
-            if (Optional.IsCollectionDefined(Disks))
+            if (!(Disks is ChangeTrackingList<DiskInstanceView> collection && collection.IsUndefined))
             {
                 if (Disks.Any())
                 {
@@ -334,7 +334,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsCollectionDefined(Extensions))
+            if (!(Extensions is ChangeTrackingList<VirtualMachineExtensionInstanceView> collection0 && collection0.IsUndefined))
             {
                 if (Extensions.Any())
                 {
@@ -348,19 +348,19 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(VmHealth))
+            if (VmHealth != null)
             {
                 builder.Append("  vmHealth:");
                 AppendChildObject(builder, VmHealth, options, 2, false);
             }
 
-            if (Optional.IsDefined(BootDiagnostics))
+            if (BootDiagnostics != null)
             {
                 builder.Append("  bootDiagnostics:");
                 AppendChildObject(builder, BootDiagnostics, options, 2, false);
             }
 
-            if (Optional.IsCollectionDefined(Statuses))
+            if (!(Statuses is ChangeTrackingList<InstanceViewStatus> collection1 && collection1.IsUndefined))
             {
                 if (Statuses.Any())
                 {
@@ -374,7 +374,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(AssignedHost))
+            if (AssignedHost != null)
             {
                 builder.Append("  assignedHost:");
                 if (AssignedHost.Contains(Environment.NewLine))
@@ -388,7 +388,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(PlacementGroupId))
+            if (PlacementGroupId != null)
             {
                 builder.Append("  placementGroupId:");
                 if (PlacementGroupId.Contains(Environment.NewLine))

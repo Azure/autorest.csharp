@@ -283,7 +283,10 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<FakePolicyAssignmentResource>> UpdateAsync(WaitUntil waitUntil, FakePolicyAssignmentData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(data, nameof(data));
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignmentResource.Update");
             scope.Start();
@@ -331,7 +334,10 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<FakePolicyAssignmentResource> Update(WaitUntil waitUntil, FakePolicyAssignmentData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(data, nameof(data));
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignmentResource.Update");
             scope.Start();

@@ -83,8 +83,18 @@ namespace MgmtSafeFlatten
         /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> or <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<TypeOneResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string typeOneName, TypeOneData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(typeOneName, nameof(typeOneName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (typeOneName == null)
+            {
+                throw new ArgumentNullException(nameof(typeOneName));
+            }
+            if (typeOneName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(typeOneName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneCollection.CreateOrUpdate");
             scope.Start();
@@ -134,8 +144,18 @@ namespace MgmtSafeFlatten
         /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> or <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<TypeOneResource> CreateOrUpdate(WaitUntil waitUntil, string typeOneName, TypeOneData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(typeOneName, nameof(typeOneName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (typeOneName == null)
+            {
+                throw new ArgumentNullException(nameof(typeOneName));
+            }
+            if (typeOneName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(typeOneName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneCollection.CreateOrUpdate");
             scope.Start();
@@ -183,7 +203,14 @@ namespace MgmtSafeFlatten
         /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> is null. </exception>
         public virtual async Task<Response<TypeOneResource>> GetAsync(string typeOneName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(typeOneName, nameof(typeOneName));
+            if (typeOneName == null)
+            {
+                throw new ArgumentNullException(nameof(typeOneName));
+            }
+            if (typeOneName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(typeOneName));
+            }
 
             using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneCollection.Get");
             scope.Start();
@@ -228,7 +255,14 @@ namespace MgmtSafeFlatten
         /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> is null. </exception>
         public virtual Response<TypeOneResource> Get(string typeOneName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(typeOneName, nameof(typeOneName));
+            if (typeOneName == null)
+            {
+                throw new ArgumentNullException(nameof(typeOneName));
+            }
+            if (typeOneName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(typeOneName));
+            }
 
             using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneCollection.Get");
             scope.Start();
@@ -331,7 +365,14 @@ namespace MgmtSafeFlatten
         /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> is null. </exception>
         public virtual async Task<Response<bool>> ExistsAsync(string typeOneName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(typeOneName, nameof(typeOneName));
+            if (typeOneName == null)
+            {
+                throw new ArgumentNullException(nameof(typeOneName));
+            }
+            if (typeOneName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(typeOneName));
+            }
 
             using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneCollection.Exists");
             scope.Start();
@@ -374,7 +415,14 @@ namespace MgmtSafeFlatten
         /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> is null. </exception>
         public virtual Response<bool> Exists(string typeOneName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(typeOneName, nameof(typeOneName));
+            if (typeOneName == null)
+            {
+                throw new ArgumentNullException(nameof(typeOneName));
+            }
+            if (typeOneName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(typeOneName));
+            }
 
             using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneCollection.Exists");
             scope.Start();
@@ -417,7 +465,14 @@ namespace MgmtSafeFlatten
         /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> is null. </exception>
         public virtual async Task<NullableResponse<TypeOneResource>> GetIfExistsAsync(string typeOneName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(typeOneName, nameof(typeOneName));
+            if (typeOneName == null)
+            {
+                throw new ArgumentNullException(nameof(typeOneName));
+            }
+            if (typeOneName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(typeOneName));
+            }
 
             using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneCollection.GetIfExists");
             scope.Start();
@@ -462,7 +517,14 @@ namespace MgmtSafeFlatten
         /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> is null. </exception>
         public virtual NullableResponse<TypeOneResource> GetIfExists(string typeOneName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(typeOneName, nameof(typeOneName));
+            if (typeOneName == null)
+            {
+                throw new ArgumentNullException(nameof(typeOneName));
+            }
+            if (typeOneName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(typeOneName));
+            }
 
             using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneCollection.GetIfExists");
             scope.Start();

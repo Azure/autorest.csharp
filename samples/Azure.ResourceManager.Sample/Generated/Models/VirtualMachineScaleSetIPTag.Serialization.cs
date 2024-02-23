@@ -27,12 +27,12 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(IPTagType))
+            if (IPTagType != null)
             {
                 writer.WritePropertyName("ipTagType"u8);
                 writer.WriteStringValue(IPTagType);
             }
-            if (Optional.IsDefined(Tag))
+            if (Tag != null)
             {
                 writer.WritePropertyName("tag"u8);
                 writer.WriteStringValue(Tag);
@@ -105,7 +105,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(IPTagType))
+            if (IPTagType != null)
             {
                 builder.Append("  ipTagType:");
                 if (IPTagType.Contains(Environment.NewLine))
@@ -119,7 +119,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(Tag))
+            if (Tag != null)
             {
                 builder.Append("  tag:");
                 if (Tag.Contains(Environment.NewLine))

@@ -76,8 +76,22 @@ namespace MgmtNoTypeReplacement
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<NoTypeReplacementModel1ListResult>> ListAsync(string subscriptionId, string resourceGroupName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (resourceGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
+            }
 
             using var message = CreateListRequest(subscriptionId, resourceGroupName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -102,8 +116,22 @@ namespace MgmtNoTypeReplacement
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<NoTypeReplacementModel1ListResult> List(string subscriptionId, string resourceGroupName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (resourceGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
+            }
 
             using var message = CreateListRequest(subscriptionId, resourceGroupName);
             _pipeline.Send(message, cancellationToken);
@@ -168,10 +196,34 @@ namespace MgmtNoTypeReplacement
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="noTypeReplacementModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<NoTypeReplacementModel1Data>> PutAsync(string subscriptionId, string resourceGroupName, string noTypeReplacementModel1SName, NoTypeReplacementModel1Data data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(noTypeReplacementModel1SName, nameof(noTypeReplacementModel1SName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (resourceGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
+            }
+            if (noTypeReplacementModel1SName == null)
+            {
+                throw new ArgumentNullException(nameof(noTypeReplacementModel1SName));
+            }
+            if (noTypeReplacementModel1SName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(noTypeReplacementModel1SName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var message = CreatePutRequest(subscriptionId, resourceGroupName, noTypeReplacementModel1SName, data);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -198,10 +250,34 @@ namespace MgmtNoTypeReplacement
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="noTypeReplacementModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<NoTypeReplacementModel1Data> Put(string subscriptionId, string resourceGroupName, string noTypeReplacementModel1SName, NoTypeReplacementModel1Data data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(noTypeReplacementModel1SName, nameof(noTypeReplacementModel1SName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (resourceGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
+            }
+            if (noTypeReplacementModel1SName == null)
+            {
+                throw new ArgumentNullException(nameof(noTypeReplacementModel1SName));
+            }
+            if (noTypeReplacementModel1SName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(noTypeReplacementModel1SName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var message = CreatePutRequest(subscriptionId, resourceGroupName, noTypeReplacementModel1SName, data);
             _pipeline.Send(message, cancellationToken);
@@ -261,9 +337,30 @@ namespace MgmtNoTypeReplacement
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="noTypeReplacementModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<NoTypeReplacementModel1Data>> GetAsync(string subscriptionId, string resourceGroupName, string noTypeReplacementModel1SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(noTypeReplacementModel1SName, nameof(noTypeReplacementModel1SName));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (resourceGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
+            }
+            if (noTypeReplacementModel1SName == null)
+            {
+                throw new ArgumentNullException(nameof(noTypeReplacementModel1SName));
+            }
+            if (noTypeReplacementModel1SName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(noTypeReplacementModel1SName));
+            }
 
             using var message = CreateGetRequest(subscriptionId, resourceGroupName, noTypeReplacementModel1SName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -291,9 +388,30 @@ namespace MgmtNoTypeReplacement
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="noTypeReplacementModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<NoTypeReplacementModel1Data> Get(string subscriptionId, string resourceGroupName, string noTypeReplacementModel1SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(noTypeReplacementModel1SName, nameof(noTypeReplacementModel1SName));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (resourceGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
+            }
+            if (noTypeReplacementModel1SName == null)
+            {
+                throw new ArgumentNullException(nameof(noTypeReplacementModel1SName));
+            }
+            if (noTypeReplacementModel1SName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(noTypeReplacementModel1SName));
+            }
 
             using var message = CreateGetRequest(subscriptionId, resourceGroupName, noTypeReplacementModel1SName);
             _pipeline.Send(message, cancellationToken);

@@ -26,12 +26,12 @@ namespace xms_error_responses.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && Optional.IsDefined(Name))
+            if (options.Format != "W" && Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(AniType))
+            if (AniType != null)
             {
                 writer.WritePropertyName("aniType"u8);
                 writer.WriteStringValue(AniType);

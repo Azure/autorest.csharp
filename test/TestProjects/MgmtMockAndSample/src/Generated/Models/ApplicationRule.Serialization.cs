@@ -16,7 +16,7 @@ namespace MgmtMockAndSample.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(SourceAddresses))
+            if (!(SourceAddresses is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("sourceAddresses"u8);
                 writer.WriteStartArray();
@@ -26,7 +26,7 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(DestinationAddresses))
+            if (!(DestinationAddresses is ChangeTrackingList<string> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("destinationAddresses"u8);
                 writer.WriteStartArray();
@@ -36,7 +36,7 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(Protocols))
+            if (!(Protocols is ChangeTrackingList<FirewallPolicyRuleApplicationProtocol> collection1 && collection1.IsUndefined))
             {
                 writer.WritePropertyName("protocols"u8);
                 writer.WriteStartArray();
@@ -46,7 +46,7 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(TargetFqdns))
+            if (!(TargetFqdns is ChangeTrackingList<string> collection2 && collection2.IsUndefined))
             {
                 writer.WritePropertyName("targetFqdns"u8);
                 writer.WriteStartArray();
@@ -56,7 +56,7 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(TargetUrls))
+            if (!(TargetUrls is ChangeTrackingList<string> collection3 && collection3.IsUndefined))
             {
                 writer.WritePropertyName("targetUrls"u8);
                 writer.WriteStartArray();
@@ -66,7 +66,7 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(FqdnTags))
+            if (!(FqdnTags is ChangeTrackingList<string> collection4 && collection4.IsUndefined))
             {
                 writer.WritePropertyName("fqdnTags"u8);
                 writer.WriteStartArray();
@@ -76,7 +76,7 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(SourceIpGroups))
+            if (!(SourceIpGroups is ChangeTrackingList<string> collection5 && collection5.IsUndefined))
             {
                 writer.WritePropertyName("sourceIpGroups"u8);
                 writer.WriteStartArray();
@@ -86,12 +86,12 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(TerminateTLS))
+            if (TerminateTLS.HasValue)
             {
                 writer.WritePropertyName("terminateTLS"u8);
                 writer.WriteBooleanValue(TerminateTLS.Value);
             }
-            if (Optional.IsCollectionDefined(WebCategories))
+            if (!(WebCategories is ChangeTrackingList<string> collection6 && collection6.IsUndefined))
             {
                 writer.WritePropertyName("webCategories"u8);
                 writer.WriteStartArray();
@@ -101,12 +101,12 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Description))
+            if (Description != null)
             {
                 writer.WritePropertyName("description"u8);
                 writer.WriteStringValue(Description);

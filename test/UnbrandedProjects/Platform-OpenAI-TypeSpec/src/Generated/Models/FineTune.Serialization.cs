@@ -69,7 +69,7 @@ namespace OpenAI.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            if (OptionalProperty.IsCollectionDefined(Events))
+            if (!(Events is OptionalList<FineTuneEvent> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("events"u8);
                 writer.WriteStartArray();
@@ -181,7 +181,7 @@ namespace OpenAI.Models
                 }
                 if (property.NameEquals("hyperparams"u8))
                 {
-                    hyperparams = FineTuneHyperparams.DeserializeFineTuneHyperparams(property.Value);
+                    hyperparams = FineTuneHyperparams.DeserializeFineTuneHyperparams(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("training_files"u8))
@@ -189,7 +189,7 @@ namespace OpenAI.Models
                     List<OpenAIFile> array = new List<OpenAIFile>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(OpenAIFile.DeserializeOpenAIFile(item));
+                        array.Add(OpenAIFile.DeserializeOpenAIFile(item, options));
                     }
                     trainingFiles = array;
                     continue;
@@ -199,7 +199,7 @@ namespace OpenAI.Models
                     List<OpenAIFile> array = new List<OpenAIFile>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(OpenAIFile.DeserializeOpenAIFile(item));
+                        array.Add(OpenAIFile.DeserializeOpenAIFile(item, options));
                     }
                     validationFiles = array;
                     continue;
@@ -209,7 +209,7 @@ namespace OpenAI.Models
                     List<OpenAIFile> array = new List<OpenAIFile>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(OpenAIFile.DeserializeOpenAIFile(item));
+                        array.Add(OpenAIFile.DeserializeOpenAIFile(item, options));
                     }
                     resultFiles = array;
                     continue;
@@ -223,7 +223,7 @@ namespace OpenAI.Models
                     List<FineTuneEvent> array = new List<FineTuneEvent>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(FineTuneEvent.DeserializeFineTuneEvent(item));
+                        array.Add(FineTuneEvent.DeserializeFineTuneEvent(item, options));
                     }
                     events = array;
                     continue;

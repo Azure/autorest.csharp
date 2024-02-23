@@ -30,37 +30,37 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteStartObject();
             writer.WritePropertyName("lun"u8);
             writer.WriteNumberValue(Lun);
-            if (Optional.IsDefined(Snapshot))
+            if (Snapshot != null)
             {
                 writer.WritePropertyName("snapshot"u8);
                 JsonSerializer.Serialize(writer, Snapshot);
             }
-            if (Optional.IsDefined(ManagedDisk))
+            if (ManagedDisk != null)
             {
                 writer.WritePropertyName("managedDisk"u8);
                 JsonSerializer.Serialize(writer, ManagedDisk);
             }
-            if (Optional.IsDefined(BlobUri))
+            if (BlobUri != null)
             {
                 writer.WritePropertyName("blobUri"u8);
                 writer.WriteStringValue(BlobUri.AbsoluteUri);
             }
-            if (Optional.IsDefined(Caching))
+            if (Caching.HasValue)
             {
                 writer.WritePropertyName("caching"u8);
                 writer.WriteStringValue(Caching.Value.ToSerialString());
             }
-            if (Optional.IsDefined(DiskSizeGB))
+            if (DiskSizeGB.HasValue)
             {
                 writer.WritePropertyName("diskSizeGB"u8);
                 writer.WriteNumberValue(DiskSizeGB.Value);
             }
-            if (Optional.IsDefined(StorageAccountType))
+            if (StorageAccountType.HasValue)
             {
                 writer.WritePropertyName("storageAccountType"u8);
                 writer.WriteStringValue(StorageAccountType.Value.ToString());
             }
-            if (Optional.IsDefined(DiskEncryptionSet))
+            if (DiskEncryptionSet != null)
             {
                 writer.WritePropertyName("diskEncryptionSet"u8);
                 JsonSerializer.Serialize(writer, DiskEncryptionSet);
@@ -197,49 +197,46 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Lun))
-            {
-                builder.Append("  lun:");
-                builder.AppendLine($" {Lun}");
-            }
+            builder.Append("  lun:");
+            builder.AppendLine($" {Lun}");
 
-            if (Optional.IsDefined(Snapshot))
+            if (Snapshot != null)
             {
                 builder.Append("  snapshot:");
                 AppendChildObject(builder, Snapshot, options, 2, false);
             }
 
-            if (Optional.IsDefined(ManagedDisk))
+            if (ManagedDisk != null)
             {
                 builder.Append("  managedDisk:");
                 AppendChildObject(builder, ManagedDisk, options, 2, false);
             }
 
-            if (Optional.IsDefined(BlobUri))
+            if (BlobUri != null)
             {
                 builder.Append("  blobUri:");
                 builder.AppendLine($" '{BlobUri.AbsoluteUri}'");
             }
 
-            if (Optional.IsDefined(Caching))
+            if (Caching.HasValue)
             {
                 builder.Append("  caching:");
                 builder.AppendLine($" '{Caching.Value.ToSerialString()}'");
             }
 
-            if (Optional.IsDefined(DiskSizeGB))
+            if (DiskSizeGB.HasValue)
             {
                 builder.Append("  diskSizeGB:");
                 builder.AppendLine($" {DiskSizeGB.Value}");
             }
 
-            if (Optional.IsDefined(StorageAccountType))
+            if (StorageAccountType.HasValue)
             {
                 builder.Append("  storageAccountType:");
                 builder.AppendLine($" '{StorageAccountType.Value.ToString()}'");
             }
 
-            if (Optional.IsDefined(DiskEncryptionSet))
+            if (DiskEncryptionSet != null)
             {
                 builder.Append("  diskEncryptionSet:");
                 AppendChildObject(builder, DiskEncryptionSet, options, 2, false);

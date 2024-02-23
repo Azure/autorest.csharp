@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace FirstTestTypeSpec.Models
 {
@@ -52,7 +51,10 @@ namespace FirstTestTypeSpec.Models
         /// <exception cref="ArgumentNullException"> <paramref name="sourceUrl"/> is null. </exception>
         public ModelWithFormat(Uri sourceUrl, Guid guid)
         {
-            Argument.AssertNotNull(sourceUrl, nameof(sourceUrl));
+            if (sourceUrl == null)
+            {
+                throw new ArgumentNullException(nameof(sourceUrl));
+            }
 
             SourceUrl = sourceUrl;
             Guid = guid;

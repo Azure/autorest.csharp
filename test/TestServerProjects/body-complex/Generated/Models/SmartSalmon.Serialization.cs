@@ -26,31 +26,31 @@ namespace body_complex.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(CollegeDegree))
+            if (CollegeDegree != null)
             {
                 writer.WritePropertyName("college_degree"u8);
                 writer.WriteStringValue(CollegeDegree);
             }
-            if (Optional.IsDefined(Location))
+            if (Location != null)
             {
                 writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location);
             }
-            if (Optional.IsDefined(Iswild))
+            if (Iswild.HasValue)
             {
                 writer.WritePropertyName("iswild"u8);
                 writer.WriteBooleanValue(Iswild.Value);
             }
             writer.WritePropertyName("fishtype"u8);
             writer.WriteStringValue(Fishtype);
-            if (Optional.IsDefined(Species))
+            if (Species != null)
             {
                 writer.WritePropertyName("species"u8);
                 writer.WriteStringValue(Species);
             }
             writer.WritePropertyName("length"u8);
             writer.WriteNumberValue(Length);
-            if (Optional.IsCollectionDefined(Siblings))
+            if (!(Siblings is ChangeTrackingList<Fish> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("siblings"u8);
                 writer.WriteStartArray();
@@ -142,7 +142,7 @@ namespace body_complex.Models
                     List<Fish> array = new List<Fish>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DeserializeFish(item));
+                        array.Add(DeserializeFish(item, options));
                     }
                     siblings = array;
                     continue;

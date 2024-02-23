@@ -194,7 +194,10 @@ namespace MgmtNoTypeReplacement
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<NoTypeReplacementModel2Resource>> UpdateAsync(WaitUntil waitUntil, NoTypeReplacementModel2Data data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(data, nameof(data));
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _noTypeReplacementModel2ClientDiagnostics.CreateScope("NoTypeReplacementModel2Resource.Update");
             scope.Start();
@@ -241,7 +244,10 @@ namespace MgmtNoTypeReplacement
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<NoTypeReplacementModel2Resource> Update(WaitUntil waitUntil, NoTypeReplacementModel2Data data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(data, nameof(data));
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _noTypeReplacementModel2ClientDiagnostics.CreateScope("NoTypeReplacementModel2Resource.Update");
             scope.Start();

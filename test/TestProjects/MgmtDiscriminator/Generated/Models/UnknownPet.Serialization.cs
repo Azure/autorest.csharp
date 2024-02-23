@@ -29,7 +29,7 @@ namespace MgmtDiscriminator.Models
             writer.WriteStartObject();
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind.ToSerialString());
-            if (options.Format != "W" && Optional.IsDefined(Id))
+            if (options.Format != "W" && Id != null)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
@@ -61,7 +61,7 @@ namespace MgmtDiscriminator.Models
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeUnknownPet(document.RootElement, options);
+            return DeserializePet(document.RootElement, options);
         }
 
         internal static UnknownPet DeserializeUnknownPet(JsonElement element, ModelReaderWriterOptions options = null)
@@ -102,13 +102,10 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Kind))
-            {
-                builder.Append("  kind:");
-                builder.AppendLine($" '{Kind.ToSerialString()}'");
-            }
+            builder.Append("  kind:");
+            builder.AppendLine($" '{Kind.ToSerialString()}'");
 
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 builder.Append("  id:");
                 if (Id.Contains(Environment.NewLine))
@@ -185,7 +182,7 @@ namespace MgmtDiscriminator.Models
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeUnknownPet(document.RootElement, options);
+                        return DeserializePet(document.RootElement, options);
                     }
                 case "bicep":
                     throw new InvalidOperationException("Bicep deserialization is not supported for this type.");

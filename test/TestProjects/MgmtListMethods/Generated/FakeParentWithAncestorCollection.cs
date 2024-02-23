@@ -82,8 +82,18 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorName"/> or <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<FakeParentWithAncestorResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string fakeParentWithAncestorName, FakeParentWithAncestorData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(fakeParentWithAncestorName, nameof(fakeParentWithAncestorName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (fakeParentWithAncestorName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeParentWithAncestorName));
+            }
+            if (fakeParentWithAncestorName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(fakeParentWithAncestorName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _fakeParentWithAncestorClientDiagnostics.CreateScope("FakeParentWithAncestorCollection.CreateOrUpdate");
             scope.Start();
@@ -133,8 +143,18 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorName"/> or <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<FakeParentWithAncestorResource> CreateOrUpdate(WaitUntil waitUntil, string fakeParentWithAncestorName, FakeParentWithAncestorData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(fakeParentWithAncestorName, nameof(fakeParentWithAncestorName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (fakeParentWithAncestorName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeParentWithAncestorName));
+            }
+            if (fakeParentWithAncestorName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(fakeParentWithAncestorName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _fakeParentWithAncestorClientDiagnostics.CreateScope("FakeParentWithAncestorCollection.CreateOrUpdate");
             scope.Start();
@@ -182,7 +202,14 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorName"/> is null. </exception>
         public virtual async Task<Response<FakeParentWithAncestorResource>> GetAsync(string fakeParentWithAncestorName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(fakeParentWithAncestorName, nameof(fakeParentWithAncestorName));
+            if (fakeParentWithAncestorName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeParentWithAncestorName));
+            }
+            if (fakeParentWithAncestorName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(fakeParentWithAncestorName));
+            }
 
             using var scope = _fakeParentWithAncestorClientDiagnostics.CreateScope("FakeParentWithAncestorCollection.Get");
             scope.Start();
@@ -227,7 +254,14 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorName"/> is null. </exception>
         public virtual Response<FakeParentWithAncestorResource> Get(string fakeParentWithAncestorName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(fakeParentWithAncestorName, nameof(fakeParentWithAncestorName));
+            if (fakeParentWithAncestorName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeParentWithAncestorName));
+            }
+            if (fakeParentWithAncestorName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(fakeParentWithAncestorName));
+            }
 
             using var scope = _fakeParentWithAncestorClientDiagnostics.CreateScope("FakeParentWithAncestorCollection.Get");
             scope.Start();
@@ -332,7 +366,14 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorName"/> is null. </exception>
         public virtual async Task<Response<bool>> ExistsAsync(string fakeParentWithAncestorName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(fakeParentWithAncestorName, nameof(fakeParentWithAncestorName));
+            if (fakeParentWithAncestorName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeParentWithAncestorName));
+            }
+            if (fakeParentWithAncestorName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(fakeParentWithAncestorName));
+            }
 
             using var scope = _fakeParentWithAncestorClientDiagnostics.CreateScope("FakeParentWithAncestorCollection.Exists");
             scope.Start();
@@ -375,7 +416,14 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorName"/> is null. </exception>
         public virtual Response<bool> Exists(string fakeParentWithAncestorName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(fakeParentWithAncestorName, nameof(fakeParentWithAncestorName));
+            if (fakeParentWithAncestorName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeParentWithAncestorName));
+            }
+            if (fakeParentWithAncestorName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(fakeParentWithAncestorName));
+            }
 
             using var scope = _fakeParentWithAncestorClientDiagnostics.CreateScope("FakeParentWithAncestorCollection.Exists");
             scope.Start();
@@ -418,7 +466,14 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorName"/> is null. </exception>
         public virtual async Task<NullableResponse<FakeParentWithAncestorResource>> GetIfExistsAsync(string fakeParentWithAncestorName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(fakeParentWithAncestorName, nameof(fakeParentWithAncestorName));
+            if (fakeParentWithAncestorName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeParentWithAncestorName));
+            }
+            if (fakeParentWithAncestorName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(fakeParentWithAncestorName));
+            }
 
             using var scope = _fakeParentWithAncestorClientDiagnostics.CreateScope("FakeParentWithAncestorCollection.GetIfExists");
             scope.Start();
@@ -463,7 +518,14 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorName"/> is null. </exception>
         public virtual NullableResponse<FakeParentWithAncestorResource> GetIfExists(string fakeParentWithAncestorName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(fakeParentWithAncestorName, nameof(fakeParentWithAncestorName));
+            if (fakeParentWithAncestorName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeParentWithAncestorName));
+            }
+            if (fakeParentWithAncestorName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(fakeParentWithAncestorName));
+            }
 
             using var scope = _fakeParentWithAncestorClientDiagnostics.CreateScope("FakeParentWithAncestorCollection.GetIfExists");
             scope.Start();

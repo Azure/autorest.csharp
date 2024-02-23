@@ -28,37 +28,37 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && Optional.IsDefined(Status))
+            if (options.Format != "W" && Status.HasValue)
             {
                 writer.WritePropertyName("status"u8);
                 writer.WriteStringValue(Status.Value.ToString());
             }
-            if (options.Format != "W" && Optional.IsDefined(AssessmentActivityId))
+            if (options.Format != "W" && AssessmentActivityId != null)
             {
                 writer.WritePropertyName("assessmentActivityId"u8);
                 writer.WriteStringValue(AssessmentActivityId);
             }
-            if (options.Format != "W" && Optional.IsDefined(RebootPending))
+            if (options.Format != "W" && RebootPending.HasValue)
             {
                 writer.WritePropertyName("rebootPending"u8);
                 writer.WriteBooleanValue(RebootPending.Value);
             }
-            if (options.Format != "W" && Optional.IsDefined(CriticalAndSecurityPatchCount))
+            if (options.Format != "W" && CriticalAndSecurityPatchCount.HasValue)
             {
                 writer.WritePropertyName("criticalAndSecurityPatchCount"u8);
                 writer.WriteNumberValue(CriticalAndSecurityPatchCount.Value);
             }
-            if (options.Format != "W" && Optional.IsDefined(OtherPatchCount))
+            if (options.Format != "W" && OtherPatchCount.HasValue)
             {
                 writer.WritePropertyName("otherPatchCount"u8);
                 writer.WriteNumberValue(OtherPatchCount.Value);
             }
-            if (options.Format != "W" && Optional.IsDefined(StartOn))
+            if (options.Format != "W" && StartOn.HasValue)
             {
                 writer.WritePropertyName("startDateTime"u8);
                 writer.WriteStringValue(StartOn.Value, "O");
             }
-            if (options.Format != "W" && Optional.IsCollectionDefined(Patches))
+            if (options.Format != "W" && !(Patches is ChangeTrackingList<VirtualMachineSoftwarePatchProperties> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("patches"u8);
                 writer.WriteStartArray();
@@ -68,7 +68,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W" && Optional.IsDefined(Error))
+            if (options.Format != "W" && Error != null)
             {
                 writer.WritePropertyName("error"u8);
                 writer.WriteObjectValue(Error);
@@ -182,7 +182,7 @@ namespace Azure.ResourceManager.Sample.Models
                     List<VirtualMachineSoftwarePatchProperties> array = new List<VirtualMachineSoftwarePatchProperties>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(VirtualMachineSoftwarePatchProperties.DeserializeVirtualMachineSoftwarePatchProperties(item));
+                        array.Add(VirtualMachineSoftwarePatchProperties.DeserializeVirtualMachineSoftwarePatchProperties(item, options));
                     }
                     patches = array;
                     continue;
@@ -193,7 +193,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    error = ApiError.DeserializeApiError(property.Value);
+                    error = ApiError.DeserializeApiError(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")
@@ -210,13 +210,13 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Status))
+            if (Status.HasValue)
             {
                 builder.Append("  status:");
                 builder.AppendLine($" '{Status.Value.ToString()}'");
             }
 
-            if (Optional.IsDefined(AssessmentActivityId))
+            if (AssessmentActivityId != null)
             {
                 builder.Append("  assessmentActivityId:");
                 if (AssessmentActivityId.Contains(Environment.NewLine))
@@ -230,33 +230,33 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(RebootPending))
+            if (RebootPending.HasValue)
             {
                 builder.Append("  rebootPending:");
                 var boolValue = RebootPending.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
             }
 
-            if (Optional.IsDefined(CriticalAndSecurityPatchCount))
+            if (CriticalAndSecurityPatchCount.HasValue)
             {
                 builder.Append("  criticalAndSecurityPatchCount:");
                 builder.AppendLine($" {CriticalAndSecurityPatchCount.Value}");
             }
 
-            if (Optional.IsDefined(OtherPatchCount))
+            if (OtherPatchCount.HasValue)
             {
                 builder.Append("  otherPatchCount:");
                 builder.AppendLine($" {OtherPatchCount.Value}");
             }
 
-            if (Optional.IsDefined(StartOn))
+            if (StartOn.HasValue)
             {
                 builder.Append("  startDateTime:");
                 var formattedDateTimeString = TypeFormatters.ToString(StartOn.Value, "o");
                 builder.AppendLine($" '{formattedDateTimeString}'");
             }
 
-            if (Optional.IsCollectionDefined(Patches))
+            if (!(Patches is ChangeTrackingList<VirtualMachineSoftwarePatchProperties> collection && collection.IsUndefined))
             {
                 if (Patches.Any())
                 {
@@ -270,7 +270,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(Error))
+            if (Error != null)
             {
                 builder.Append("  error:");
                 AppendChildObject(builder, Error, options, 2, false);

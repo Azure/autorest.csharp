@@ -15,7 +15,7 @@ namespace MgmtSafeFlatten.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(LayerTwo))
+            if (LayerTwo != null)
             {
                 writer.WritePropertyName("layerTwo"u8);
                 writer.WriteObjectValue(LayerTwo);

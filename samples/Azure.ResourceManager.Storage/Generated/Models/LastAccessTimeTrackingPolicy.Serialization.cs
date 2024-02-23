@@ -18,17 +18,17 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteStartObject();
             writer.WritePropertyName("enable"u8);
             writer.WriteBooleanValue(Enable);
-            if (Optional.IsDefined(Name))
+            if (Name.HasValue)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name.Value.ToString());
             }
-            if (Optional.IsDefined(TrackingGranularityInDays))
+            if (TrackingGranularityInDays.HasValue)
             {
                 writer.WritePropertyName("trackingGranularityInDays"u8);
                 writer.WriteNumberValue(TrackingGranularityInDays.Value);
             }
-            if (Optional.IsCollectionDefined(BlobType))
+            if (!(BlobType is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("blobType"u8);
                 writer.WriteStartArray();

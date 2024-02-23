@@ -3,7 +3,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.Collections.Generic;
 
 namespace OpenAI.Models
@@ -55,7 +54,10 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
         internal CreateChatCompletionResponseChoice(long index, ChatCompletionResponseMessage message, CreateChatCompletionResponseChoiceFinishReason finishReason)
         {
-            ClientUtilities.AssertNotNull(message, nameof(message));
+            if (message == null)
+            {
+                throw new ArgumentNullException(nameof(message));
+            }
 
             Index = index;
             Message = message;

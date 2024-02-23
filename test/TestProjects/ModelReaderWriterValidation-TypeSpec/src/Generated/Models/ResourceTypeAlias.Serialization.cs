@@ -27,12 +27,12 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsCollectionDefined(Paths))
+            if (!(Paths is ChangeTrackingList<ResourceTypeAliasPath> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("paths"u8);
                 writer.WriteStartArray();
@@ -42,22 +42,22 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(AliasType))
+            if (AliasType.HasValue)
             {
                 writer.WritePropertyName("aliasType"u8);
                 writer.WriteStringValue(AliasType.Value.ToSerialString());
             }
-            if (Optional.IsDefined(DefaultPath))
+            if (DefaultPath != null)
             {
                 writer.WritePropertyName("defaultPath"u8);
                 writer.WriteStringValue(DefaultPath);
             }
-            if (Optional.IsDefined(DefaultPattern))
+            if (DefaultPattern != null)
             {
                 writer.WritePropertyName("defaultPattern"u8);
                 writer.WriteObjectValue(DefaultPattern);
             }
-            if (Optional.IsDefined(DefaultMetadata))
+            if (DefaultMetadata != null)
             {
                 writer.WritePropertyName("defaultMetadata"u8);
                 writer.WriteObjectValue(DefaultMetadata);
@@ -124,7 +124,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                     List<ResourceTypeAliasPath> array = new List<ResourceTypeAliasPath>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ResourceTypeAliasPath.DeserializeResourceTypeAliasPath(item));
+                        array.Add(ResourceTypeAliasPath.DeserializeResourceTypeAliasPath(item, options));
                     }
                     paths = array;
                     continue;
@@ -149,7 +149,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                     {
                         continue;
                     }
-                    defaultPattern = ResourceTypeAliasPattern.DeserializeResourceTypeAliasPattern(property.Value);
+                    defaultPattern = ResourceTypeAliasPattern.DeserializeResourceTypeAliasPattern(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("defaultMetadata"u8))
@@ -158,7 +158,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                     {
                         continue;
                     }
-                    defaultMetadata = ResourceTypeAliasPathMetadata.DeserializeResourceTypeAliasPathMetadata(property.Value);
+                    defaultMetadata = ResourceTypeAliasPathMetadata.DeserializeResourceTypeAliasPathMetadata(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

@@ -26,7 +26,7 @@ namespace httpInfrastructure.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(HttpStatusCode))
+            if (HttpStatusCode != null)
             {
                 writer.WritePropertyName("httpStatusCode"u8);
                 writer.WriteStringValue(HttpStatusCode);

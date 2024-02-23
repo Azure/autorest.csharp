@@ -29,7 +29,7 @@ namespace _Type._Dictionary.Models
             writer.WriteStartObject();
             writer.WritePropertyName("property"u8);
             writer.WriteStringValue(Property);
-            if (Optional.IsCollectionDefined(Children))
+            if (!(Children is ChangeTrackingDictionary<string, InnerModel> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("children"u8);
                 writer.WriteStartObject();
@@ -98,7 +98,7 @@ namespace _Type._Dictionary.Models
                     Dictionary<string, InnerModel> dictionary = new Dictionary<string, InnerModel>();
                     foreach (var property1 in property0.Value.EnumerateObject())
                     {
-                        dictionary.Add(property1.Name, DeserializeInnerModel(property1.Value));
+                        dictionary.Add(property1.Name, DeserializeInnerModel(property1.Value, options));
                     }
                     children = dictionary;
                     continue;

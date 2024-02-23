@@ -27,22 +27,22 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(MaxBatchInstancePercent))
+            if (MaxBatchInstancePercent.HasValue)
             {
                 writer.WritePropertyName("maxBatchInstancePercent"u8);
                 writer.WriteNumberValue(MaxBatchInstancePercent.Value);
             }
-            if (Optional.IsDefined(MaxUnhealthyInstancePercent))
+            if (MaxUnhealthyInstancePercent.HasValue)
             {
                 writer.WritePropertyName("maxUnhealthyInstancePercent"u8);
                 writer.WriteNumberValue(MaxUnhealthyInstancePercent.Value);
             }
-            if (Optional.IsDefined(MaxUnhealthyUpgradedInstancePercent))
+            if (MaxUnhealthyUpgradedInstancePercent.HasValue)
             {
                 writer.WritePropertyName("maxUnhealthyUpgradedInstancePercent"u8);
                 writer.WriteNumberValue(MaxUnhealthyUpgradedInstancePercent.Value);
             }
-            if (Optional.IsDefined(PauseTimeBetweenBatches))
+            if (PauseTimeBetweenBatches != null)
             {
                 writer.WritePropertyName("pauseTimeBetweenBatches"u8);
                 writer.WriteStringValue(PauseTimeBetweenBatches);
@@ -139,25 +139,25 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(MaxBatchInstancePercent))
+            if (MaxBatchInstancePercent.HasValue)
             {
                 builder.Append("  maxBatchInstancePercent:");
                 builder.AppendLine($" {MaxBatchInstancePercent.Value}");
             }
 
-            if (Optional.IsDefined(MaxUnhealthyInstancePercent))
+            if (MaxUnhealthyInstancePercent.HasValue)
             {
                 builder.Append("  maxUnhealthyInstancePercent:");
                 builder.AppendLine($" {MaxUnhealthyInstancePercent.Value}");
             }
 
-            if (Optional.IsDefined(MaxUnhealthyUpgradedInstancePercent))
+            if (MaxUnhealthyUpgradedInstancePercent.HasValue)
             {
                 builder.Append("  maxUnhealthyUpgradedInstancePercent:");
                 builder.AppendLine($" {MaxUnhealthyUpgradedInstancePercent.Value}");
             }
 
-            if (Optional.IsDefined(PauseTimeBetweenBatches))
+            if (PauseTimeBetweenBatches != null)
             {
                 builder.Append("  pauseTimeBetweenBatches:");
                 if (PauseTimeBetweenBatches.Contains(Environment.NewLine))

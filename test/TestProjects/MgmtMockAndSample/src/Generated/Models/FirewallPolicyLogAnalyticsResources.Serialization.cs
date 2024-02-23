@@ -17,7 +17,7 @@ namespace MgmtMockAndSample.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Workspaces))
+            if (!(Workspaces is ChangeTrackingList<FirewallPolicyLogAnalyticsWorkspace> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("workspaces"u8);
                 writer.WriteStartArray();
@@ -27,7 +27,7 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(DefaultWorkspaceId))
+            if (DefaultWorkspaceId != null)
             {
                 writer.WritePropertyName("defaultWorkspaceId"u8);
                 JsonSerializer.Serialize(writer, DefaultWorkspaceId);

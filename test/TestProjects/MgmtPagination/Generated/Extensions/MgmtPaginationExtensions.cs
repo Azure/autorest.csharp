@@ -43,7 +43,10 @@ namespace MgmtPagination
         /// <returns> Returns a <see cref="PageSizeIntegerModelResource"/> object. </returns>
         public static PageSizeIntegerModelResource GetPageSizeIntegerModelResource(this ArmClient client, ResourceIdentifier id)
         {
-            Argument.AssertNotNull(client, nameof(client));
+            if (client == null)
+            {
+                throw new ArgumentNullException(nameof(client));
+            }
 
             return GetMockableMgmtPaginationArmClient(client).GetPageSizeIntegerModelResource(id);
         }
@@ -62,7 +65,10 @@ namespace MgmtPagination
         /// <returns> Returns a <see cref="PageSizeInt64ModelResource"/> object. </returns>
         public static PageSizeInt64ModelResource GetPageSizeInt64ModelResource(this ArmClient client, ResourceIdentifier id)
         {
-            Argument.AssertNotNull(client, nameof(client));
+            if (client == null)
+            {
+                throw new ArgumentNullException(nameof(client));
+            }
 
             return GetMockableMgmtPaginationArmClient(client).GetPageSizeInt64ModelResource(id);
         }
@@ -81,7 +87,10 @@ namespace MgmtPagination
         /// <returns> Returns a <see cref="PageSizeInt32ModelResource"/> object. </returns>
         public static PageSizeInt32ModelResource GetPageSizeInt32ModelResource(this ArmClient client, ResourceIdentifier id)
         {
-            Argument.AssertNotNull(client, nameof(client));
+            if (client == null)
+            {
+                throw new ArgumentNullException(nameof(client));
+            }
 
             return GetMockableMgmtPaginationArmClient(client).GetPageSizeInt32ModelResource(id);
         }
@@ -100,7 +109,10 @@ namespace MgmtPagination
         /// <returns> Returns a <see cref="PageSizeNumericModelResource"/> object. </returns>
         public static PageSizeNumericModelResource GetPageSizeNumericModelResource(this ArmClient client, ResourceIdentifier id)
         {
-            Argument.AssertNotNull(client, nameof(client));
+            if (client == null)
+            {
+                throw new ArgumentNullException(nameof(client));
+            }
 
             return GetMockableMgmtPaginationArmClient(client).GetPageSizeNumericModelResource(id);
         }
@@ -119,7 +131,10 @@ namespace MgmtPagination
         /// <returns> Returns a <see cref="PageSizeFloatModelResource"/> object. </returns>
         public static PageSizeFloatModelResource GetPageSizeFloatModelResource(this ArmClient client, ResourceIdentifier id)
         {
-            Argument.AssertNotNull(client, nameof(client));
+            if (client == null)
+            {
+                throw new ArgumentNullException(nameof(client));
+            }
 
             return GetMockableMgmtPaginationArmClient(client).GetPageSizeFloatModelResource(id);
         }
@@ -138,7 +153,10 @@ namespace MgmtPagination
         /// <returns> Returns a <see cref="PageSizeDoubleModelResource"/> object. </returns>
         public static PageSizeDoubleModelResource GetPageSizeDoubleModelResource(this ArmClient client, ResourceIdentifier id)
         {
-            Argument.AssertNotNull(client, nameof(client));
+            if (client == null)
+            {
+                throw new ArgumentNullException(nameof(client));
+            }
 
             return GetMockableMgmtPaginationArmClient(client).GetPageSizeDoubleModelResource(id);
         }
@@ -157,7 +175,10 @@ namespace MgmtPagination
         /// <returns> Returns a <see cref="PageSizeDecimalModelResource"/> object. </returns>
         public static PageSizeDecimalModelResource GetPageSizeDecimalModelResource(this ArmClient client, ResourceIdentifier id)
         {
-            Argument.AssertNotNull(client, nameof(client));
+            if (client == null)
+            {
+                throw new ArgumentNullException(nameof(client));
+            }
 
             return GetMockableMgmtPaginationArmClient(client).GetPageSizeDecimalModelResource(id);
         }
@@ -176,7 +197,10 @@ namespace MgmtPagination
         /// <returns> Returns a <see cref="PageSizeStringModelResource"/> object. </returns>
         public static PageSizeStringModelResource GetPageSizeStringModelResource(this ArmClient client, ResourceIdentifier id)
         {
-            Argument.AssertNotNull(client, nameof(client));
+            if (client == null)
+            {
+                throw new ArgumentNullException(nameof(client));
+            }
 
             return GetMockableMgmtPaginationArmClient(client).GetPageSizeStringModelResource(id);
         }
@@ -193,7 +217,10 @@ namespace MgmtPagination
         /// <returns> An object representing collection of PageSizeIntegerModelResources and their operations over a PageSizeIntegerModelResource. </returns>
         public static PageSizeIntegerModelCollection GetPageSizeIntegerModels(this ResourceGroupResource resourceGroupResource)
         {
-            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+            if (resourceGroupResource == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResource));
+            }
 
             return GetMockableMgmtPaginationResourceGroupResource(resourceGroupResource).GetPageSizeIntegerModels();
         }
@@ -230,7 +257,10 @@ namespace MgmtPagination
         [ForwardsClientCalls]
         public static async Task<Response<PageSizeIntegerModelResource>> GetPageSizeIntegerModelAsync(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+            if (resourceGroupResource == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResource));
+            }
 
             return await GetMockableMgmtPaginationResourceGroupResource(resourceGroupResource).GetPageSizeIntegerModelAsync(name, cancellationToken).ConfigureAwait(false);
         }
@@ -267,7 +297,10 @@ namespace MgmtPagination
         [ForwardsClientCalls]
         public static Response<PageSizeIntegerModelResource> GetPageSizeIntegerModel(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+            if (resourceGroupResource == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResource));
+            }
 
             return GetMockableMgmtPaginationResourceGroupResource(resourceGroupResource).GetPageSizeIntegerModel(name, cancellationToken);
         }
@@ -284,7 +317,10 @@ namespace MgmtPagination
         /// <returns> An object representing collection of PageSizeInt64ModelResources and their operations over a PageSizeInt64ModelResource. </returns>
         public static PageSizeInt64ModelCollection GetPageSizeInt64Models(this ResourceGroupResource resourceGroupResource)
         {
-            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+            if (resourceGroupResource == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResource));
+            }
 
             return GetMockableMgmtPaginationResourceGroupResource(resourceGroupResource).GetPageSizeInt64Models();
         }
@@ -321,7 +357,10 @@ namespace MgmtPagination
         [ForwardsClientCalls]
         public static async Task<Response<PageSizeInt64ModelResource>> GetPageSizeInt64ModelAsync(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+            if (resourceGroupResource == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResource));
+            }
 
             return await GetMockableMgmtPaginationResourceGroupResource(resourceGroupResource).GetPageSizeInt64ModelAsync(name, cancellationToken).ConfigureAwait(false);
         }
@@ -358,7 +397,10 @@ namespace MgmtPagination
         [ForwardsClientCalls]
         public static Response<PageSizeInt64ModelResource> GetPageSizeInt64Model(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+            if (resourceGroupResource == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResource));
+            }
 
             return GetMockableMgmtPaginationResourceGroupResource(resourceGroupResource).GetPageSizeInt64Model(name, cancellationToken);
         }
@@ -375,7 +417,10 @@ namespace MgmtPagination
         /// <returns> An object representing collection of PageSizeInt32ModelResources and their operations over a PageSizeInt32ModelResource. </returns>
         public static PageSizeInt32ModelCollection GetPageSizeInt32Models(this ResourceGroupResource resourceGroupResource)
         {
-            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+            if (resourceGroupResource == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResource));
+            }
 
             return GetMockableMgmtPaginationResourceGroupResource(resourceGroupResource).GetPageSizeInt32Models();
         }
@@ -412,7 +457,10 @@ namespace MgmtPagination
         [ForwardsClientCalls]
         public static async Task<Response<PageSizeInt32ModelResource>> GetPageSizeInt32ModelAsync(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+            if (resourceGroupResource == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResource));
+            }
 
             return await GetMockableMgmtPaginationResourceGroupResource(resourceGroupResource).GetPageSizeInt32ModelAsync(name, cancellationToken).ConfigureAwait(false);
         }
@@ -449,7 +497,10 @@ namespace MgmtPagination
         [ForwardsClientCalls]
         public static Response<PageSizeInt32ModelResource> GetPageSizeInt32Model(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+            if (resourceGroupResource == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResource));
+            }
 
             return GetMockableMgmtPaginationResourceGroupResource(resourceGroupResource).GetPageSizeInt32Model(name, cancellationToken);
         }
@@ -466,7 +517,10 @@ namespace MgmtPagination
         /// <returns> An object representing collection of PageSizeNumericModelResources and their operations over a PageSizeNumericModelResource. </returns>
         public static PageSizeNumericModelCollection GetPageSizeNumericModels(this ResourceGroupResource resourceGroupResource)
         {
-            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+            if (resourceGroupResource == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResource));
+            }
 
             return GetMockableMgmtPaginationResourceGroupResource(resourceGroupResource).GetPageSizeNumericModels();
         }
@@ -503,7 +557,10 @@ namespace MgmtPagination
         [ForwardsClientCalls]
         public static async Task<Response<PageSizeNumericModelResource>> GetPageSizeNumericModelAsync(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+            if (resourceGroupResource == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResource));
+            }
 
             return await GetMockableMgmtPaginationResourceGroupResource(resourceGroupResource).GetPageSizeNumericModelAsync(name, cancellationToken).ConfigureAwait(false);
         }
@@ -540,7 +597,10 @@ namespace MgmtPagination
         [ForwardsClientCalls]
         public static Response<PageSizeNumericModelResource> GetPageSizeNumericModel(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+            if (resourceGroupResource == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResource));
+            }
 
             return GetMockableMgmtPaginationResourceGroupResource(resourceGroupResource).GetPageSizeNumericModel(name, cancellationToken);
         }
@@ -557,7 +617,10 @@ namespace MgmtPagination
         /// <returns> An object representing collection of PageSizeFloatModelResources and their operations over a PageSizeFloatModelResource. </returns>
         public static PageSizeFloatModelCollection GetPageSizeFloatModels(this ResourceGroupResource resourceGroupResource)
         {
-            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+            if (resourceGroupResource == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResource));
+            }
 
             return GetMockableMgmtPaginationResourceGroupResource(resourceGroupResource).GetPageSizeFloatModels();
         }
@@ -594,7 +657,10 @@ namespace MgmtPagination
         [ForwardsClientCalls]
         public static async Task<Response<PageSizeFloatModelResource>> GetPageSizeFloatModelAsync(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+            if (resourceGroupResource == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResource));
+            }
 
             return await GetMockableMgmtPaginationResourceGroupResource(resourceGroupResource).GetPageSizeFloatModelAsync(name, cancellationToken).ConfigureAwait(false);
         }
@@ -631,7 +697,10 @@ namespace MgmtPagination
         [ForwardsClientCalls]
         public static Response<PageSizeFloatModelResource> GetPageSizeFloatModel(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+            if (resourceGroupResource == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResource));
+            }
 
             return GetMockableMgmtPaginationResourceGroupResource(resourceGroupResource).GetPageSizeFloatModel(name, cancellationToken);
         }
@@ -648,7 +717,10 @@ namespace MgmtPagination
         /// <returns> An object representing collection of PageSizeDoubleModelResources and their operations over a PageSizeDoubleModelResource. </returns>
         public static PageSizeDoubleModelCollection GetPageSizeDoubleModels(this ResourceGroupResource resourceGroupResource)
         {
-            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+            if (resourceGroupResource == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResource));
+            }
 
             return GetMockableMgmtPaginationResourceGroupResource(resourceGroupResource).GetPageSizeDoubleModels();
         }
@@ -685,7 +757,10 @@ namespace MgmtPagination
         [ForwardsClientCalls]
         public static async Task<Response<PageSizeDoubleModelResource>> GetPageSizeDoubleModelAsync(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+            if (resourceGroupResource == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResource));
+            }
 
             return await GetMockableMgmtPaginationResourceGroupResource(resourceGroupResource).GetPageSizeDoubleModelAsync(name, cancellationToken).ConfigureAwait(false);
         }
@@ -722,7 +797,10 @@ namespace MgmtPagination
         [ForwardsClientCalls]
         public static Response<PageSizeDoubleModelResource> GetPageSizeDoubleModel(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+            if (resourceGroupResource == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResource));
+            }
 
             return GetMockableMgmtPaginationResourceGroupResource(resourceGroupResource).GetPageSizeDoubleModel(name, cancellationToken);
         }
@@ -739,7 +817,10 @@ namespace MgmtPagination
         /// <returns> An object representing collection of PageSizeDecimalModelResources and their operations over a PageSizeDecimalModelResource. </returns>
         public static PageSizeDecimalModelCollection GetPageSizeDecimalModels(this ResourceGroupResource resourceGroupResource)
         {
-            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+            if (resourceGroupResource == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResource));
+            }
 
             return GetMockableMgmtPaginationResourceGroupResource(resourceGroupResource).GetPageSizeDecimalModels();
         }
@@ -776,7 +857,10 @@ namespace MgmtPagination
         [ForwardsClientCalls]
         public static async Task<Response<PageSizeDecimalModelResource>> GetPageSizeDecimalModelAsync(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+            if (resourceGroupResource == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResource));
+            }
 
             return await GetMockableMgmtPaginationResourceGroupResource(resourceGroupResource).GetPageSizeDecimalModelAsync(name, cancellationToken).ConfigureAwait(false);
         }
@@ -813,7 +897,10 @@ namespace MgmtPagination
         [ForwardsClientCalls]
         public static Response<PageSizeDecimalModelResource> GetPageSizeDecimalModel(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+            if (resourceGroupResource == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResource));
+            }
 
             return GetMockableMgmtPaginationResourceGroupResource(resourceGroupResource).GetPageSizeDecimalModel(name, cancellationToken);
         }
@@ -830,7 +917,10 @@ namespace MgmtPagination
         /// <returns> An object representing collection of PageSizeStringModelResources and their operations over a PageSizeStringModelResource. </returns>
         public static PageSizeStringModelCollection GetPageSizeStringModels(this ResourceGroupResource resourceGroupResource)
         {
-            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+            if (resourceGroupResource == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResource));
+            }
 
             return GetMockableMgmtPaginationResourceGroupResource(resourceGroupResource).GetPageSizeStringModels();
         }
@@ -867,7 +957,10 @@ namespace MgmtPagination
         [ForwardsClientCalls]
         public static async Task<Response<PageSizeStringModelResource>> GetPageSizeStringModelAsync(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+            if (resourceGroupResource == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResource));
+            }
 
             return await GetMockableMgmtPaginationResourceGroupResource(resourceGroupResource).GetPageSizeStringModelAsync(name, cancellationToken).ConfigureAwait(false);
         }
@@ -904,7 +997,10 @@ namespace MgmtPagination
         [ForwardsClientCalls]
         public static Response<PageSizeStringModelResource> GetPageSizeStringModel(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+            if (resourceGroupResource == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResource));
+            }
 
             return GetMockableMgmtPaginationResourceGroupResource(resourceGroupResource).GetPageSizeStringModel(name, cancellationToken);
         }

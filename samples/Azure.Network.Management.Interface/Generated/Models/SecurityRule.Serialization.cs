@@ -16,44 +16,44 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(Description))
+            if (Description != null)
             {
                 writer.WritePropertyName("description"u8);
                 writer.WriteStringValue(Description);
             }
-            if (Optional.IsDefined(Protocol))
+            if (Protocol.HasValue)
             {
                 writer.WritePropertyName("protocol"u8);
                 writer.WriteStringValue(Protocol.Value.ToString());
             }
-            if (Optional.IsDefined(SourcePortRange))
+            if (SourcePortRange != null)
             {
                 writer.WritePropertyName("sourcePortRange"u8);
                 writer.WriteStringValue(SourcePortRange);
             }
-            if (Optional.IsDefined(DestinationPortRange))
+            if (DestinationPortRange != null)
             {
                 writer.WritePropertyName("destinationPortRange"u8);
                 writer.WriteStringValue(DestinationPortRange);
             }
-            if (Optional.IsDefined(SourceAddressPrefix))
+            if (SourceAddressPrefix != null)
             {
                 writer.WritePropertyName("sourceAddressPrefix"u8);
                 writer.WriteStringValue(SourceAddressPrefix);
             }
-            if (Optional.IsCollectionDefined(SourceAddressPrefixes))
+            if (!(SourceAddressPrefixes is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("sourceAddressPrefixes"u8);
                 writer.WriteStartArray();
@@ -63,7 +63,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(SourceApplicationSecurityGroups))
+            if (!(SourceApplicationSecurityGroups is ChangeTrackingList<ApplicationSecurityGroup> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("sourceApplicationSecurityGroups"u8);
                 writer.WriteStartArray();
@@ -73,12 +73,12 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(DestinationAddressPrefix))
+            if (DestinationAddressPrefix != null)
             {
                 writer.WritePropertyName("destinationAddressPrefix"u8);
                 writer.WriteStringValue(DestinationAddressPrefix);
             }
-            if (Optional.IsCollectionDefined(DestinationAddressPrefixes))
+            if (!(DestinationAddressPrefixes is ChangeTrackingList<string> collection1 && collection1.IsUndefined))
             {
                 writer.WritePropertyName("destinationAddressPrefixes"u8);
                 writer.WriteStartArray();
@@ -88,7 +88,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(DestinationApplicationSecurityGroups))
+            if (!(DestinationApplicationSecurityGroups is ChangeTrackingList<ApplicationSecurityGroup> collection2 && collection2.IsUndefined))
             {
                 writer.WritePropertyName("destinationApplicationSecurityGroups"u8);
                 writer.WriteStartArray();
@@ -98,7 +98,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(SourcePortRanges))
+            if (!(SourcePortRanges is ChangeTrackingList<string> collection3 && collection3.IsUndefined))
             {
                 writer.WritePropertyName("sourcePortRanges"u8);
                 writer.WriteStartArray();
@@ -108,7 +108,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(DestinationPortRanges))
+            if (!(DestinationPortRanges is ChangeTrackingList<string> collection4 && collection4.IsUndefined))
             {
                 writer.WritePropertyName("destinationPortRanges"u8);
                 writer.WriteStartArray();
@@ -118,17 +118,17 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(Access))
+            if (Access.HasValue)
             {
                 writer.WritePropertyName("access"u8);
                 writer.WriteStringValue(Access.Value.ToString());
             }
-            if (Optional.IsDefined(Priority))
+            if (Priority.HasValue)
             {
                 writer.WritePropertyName("priority"u8);
                 writer.WriteNumberValue(Priority.Value);
             }
-            if (Optional.IsDefined(Direction))
+            if (Direction.HasValue)
             {
                 writer.WritePropertyName("direction"u8);
                 writer.WriteStringValue(Direction.Value.ToString());

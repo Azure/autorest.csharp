@@ -27,19 +27,19 @@ namespace MgmtDiscriminator.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Bark))
+            if (Bark != null)
             {
                 writer.WritePropertyName("bark"u8);
                 writer.WriteStringValue(Bark);
             }
-            if (Optional.IsDefined(DogKind))
+            if (DogKind.HasValue)
             {
                 writer.WritePropertyName("dogKind"u8);
                 writer.WriteStringValue(DogKind.Value.ToSerialString());
             }
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind.ToSerialString());
-            if (options.Format != "W" && Optional.IsDefined(Id))
+            if (options.Format != "W" && Id != null)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
@@ -128,7 +128,7 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Bark))
+            if (Bark != null)
             {
                 builder.Append("  bark:");
                 if (Bark.Contains(Environment.NewLine))
@@ -142,19 +142,16 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            if (Optional.IsDefined(DogKind))
+            if (DogKind.HasValue)
             {
                 builder.Append("  dogKind:");
                 builder.AppendLine($" '{DogKind.Value.ToSerialString()}'");
             }
 
-            if (Optional.IsDefined(Kind))
-            {
-                builder.Append("  kind:");
-                builder.AppendLine($" '{Kind.ToSerialString()}'");
-            }
+            builder.Append("  kind:");
+            builder.AppendLine($" '{Kind.ToSerialString()}'");
 
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 builder.Append("  id:");
                 if (Id.Contains(Environment.NewLine))

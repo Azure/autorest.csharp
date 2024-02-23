@@ -35,7 +35,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            if (Optional.IsDefined(NextLink))
+            if (NextLink != null)
             {
                 writer.WritePropertyName("nextLink"u8);
                 writer.WriteStringValue(NextLink);
@@ -89,7 +89,7 @@ namespace Azure.ResourceManager.Sample.Models
                     List<VirtualMachineScaleSetSku> array = new List<VirtualMachineScaleSetSku>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(VirtualMachineScaleSetSku.DeserializeVirtualMachineScaleSetSku(item));
+                        array.Add(VirtualMachineScaleSetSku.DeserializeVirtualMachineScaleSetSku(item, options));
                     }
                     vmssSkus = array;
                     continue;
@@ -113,7 +113,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsCollectionDefined(VmssSkus))
+            if (!(VmssSkus is ChangeTrackingList<VirtualMachineScaleSetSku> collection && collection.IsUndefined))
             {
                 if (VmssSkus.Any())
                 {
@@ -127,7 +127,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(NextLink))
+            if (NextLink != null)
             {
                 builder.Append("  nextLink:");
                 if (NextLink.Contains(Environment.NewLine))

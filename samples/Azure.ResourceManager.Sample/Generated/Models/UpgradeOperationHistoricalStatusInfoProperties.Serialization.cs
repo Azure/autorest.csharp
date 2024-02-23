@@ -27,32 +27,32 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && Optional.IsDefined(RunningStatus))
+            if (options.Format != "W" && RunningStatus != null)
             {
                 writer.WritePropertyName("runningStatus"u8);
                 writer.WriteObjectValue(RunningStatus);
             }
-            if (options.Format != "W" && Optional.IsDefined(Progress))
+            if (options.Format != "W" && Progress != null)
             {
                 writer.WritePropertyName("progress"u8);
                 writer.WriteObjectValue(Progress);
             }
-            if (options.Format != "W" && Optional.IsDefined(Error))
+            if (options.Format != "W" && Error != null)
             {
                 writer.WritePropertyName("error"u8);
                 writer.WriteObjectValue(Error);
             }
-            if (options.Format != "W" && Optional.IsDefined(StartedBy))
+            if (options.Format != "W" && StartedBy.HasValue)
             {
                 writer.WritePropertyName("startedBy"u8);
                 writer.WriteStringValue(StartedBy.Value.ToSerialString());
             }
-            if (options.Format != "W" && Optional.IsDefined(TargetImageReference))
+            if (options.Format != "W" && TargetImageReference != null)
             {
                 writer.WritePropertyName("targetImageReference"u8);
                 writer.WriteObjectValue(TargetImageReference);
             }
-            if (options.Format != "W" && Optional.IsDefined(RollbackInfo))
+            if (options.Format != "W" && RollbackInfo != null)
             {
                 writer.WritePropertyName("rollbackInfo"u8);
                 writer.WriteObjectValue(RollbackInfo);
@@ -111,7 +111,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    runningStatus = UpgradeOperationHistoryStatus.DeserializeUpgradeOperationHistoryStatus(property.Value);
+                    runningStatus = UpgradeOperationHistoryStatus.DeserializeUpgradeOperationHistoryStatus(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("progress"u8))
@@ -120,7 +120,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    progress = RollingUpgradeProgressInfo.DeserializeRollingUpgradeProgressInfo(property.Value);
+                    progress = RollingUpgradeProgressInfo.DeserializeRollingUpgradeProgressInfo(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("error"u8))
@@ -129,7 +129,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    error = ApiError.DeserializeApiError(property.Value);
+                    error = ApiError.DeserializeApiError(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("startedBy"u8))
@@ -147,7 +147,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    targetImageReference = ImageReference.DeserializeImageReference(property.Value);
+                    targetImageReference = ImageReference.DeserializeImageReference(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("rollbackInfo"u8))
@@ -156,7 +156,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    rollbackInfo = RollbackStatusInfo.DeserializeRollbackStatusInfo(property.Value);
+                    rollbackInfo = RollbackStatusInfo.DeserializeRollbackStatusInfo(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")
@@ -173,37 +173,37 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(RunningStatus))
+            if (RunningStatus != null)
             {
                 builder.Append("  runningStatus:");
                 AppendChildObject(builder, RunningStatus, options, 2, false);
             }
 
-            if (Optional.IsDefined(Progress))
+            if (Progress != null)
             {
                 builder.Append("  progress:");
                 AppendChildObject(builder, Progress, options, 2, false);
             }
 
-            if (Optional.IsDefined(Error))
+            if (Error != null)
             {
                 builder.Append("  error:");
                 AppendChildObject(builder, Error, options, 2, false);
             }
 
-            if (Optional.IsDefined(StartedBy))
+            if (StartedBy.HasValue)
             {
                 builder.Append("  startedBy:");
                 builder.AppendLine($" '{StartedBy.Value.ToSerialString()}'");
             }
 
-            if (Optional.IsDefined(TargetImageReference))
+            if (TargetImageReference != null)
             {
                 builder.Append("  targetImageReference:");
                 AppendChildObject(builder, TargetImageReference, options, 2, false);
             }
 
-            if (Optional.IsDefined(RollbackInfo))
+            if (RollbackInfo != null)
             {
                 builder.Append("  rollbackInfo:");
                 AppendChildObject(builder, RollbackInfo, options, 2, false);

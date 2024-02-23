@@ -15,17 +15,17 @@ namespace MgmtAcronymMapping.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Mode))
+            if (Mode.HasValue)
             {
                 writer.WritePropertyName("mode"u8);
                 writer.WriteStringValue(Mode.Value.ToSerialString());
             }
-            if (Optional.IsDefined(RollingUpgradePolicy))
+            if (RollingUpgradePolicy != null)
             {
                 writer.WritePropertyName("rollingUpgradePolicy"u8);
                 writer.WriteObjectValue(RollingUpgradePolicy);
             }
-            if (Optional.IsDefined(AutomaticOSUpgradePolicy))
+            if (AutomaticOSUpgradePolicy != null)
             {
                 writer.WritePropertyName("automaticOSUpgradePolicy"u8);
                 writer.WriteObjectValue(AutomaticOSUpgradePolicy);

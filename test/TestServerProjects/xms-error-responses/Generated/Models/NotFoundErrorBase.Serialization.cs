@@ -26,14 +26,14 @@ namespace xms_error_responses.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Reason))
+            if (Reason != null)
             {
                 writer.WritePropertyName("reason"u8);
                 writer.WriteStringValue(Reason);
             }
             writer.WritePropertyName("whatNotFound"u8);
             writer.WriteStringValue(WhatNotFound);
-            if (Optional.IsDefined(SomeBaseProp))
+            if (SomeBaseProp != null)
             {
                 writer.WritePropertyName("someBaseProp"u8);
                 writer.WriteStringValue(SomeBaseProp);
@@ -80,11 +80,11 @@ namespace xms_error_responses.Models
             {
                 switch (discriminator.GetString())
                 {
-                    case "AnimalNotFound": return AnimalNotFound.DeserializeAnimalNotFound(element);
-                    case "InvalidResourceLink": return LinkNotFound.DeserializeLinkNotFound(element);
+                    case "AnimalNotFound": return AnimalNotFound.DeserializeAnimalNotFound(element, options);
+                    case "InvalidResourceLink": return LinkNotFound.DeserializeLinkNotFound(element, options);
                 }
             }
-            return UnknownNotFoundErrorBase.DeserializeUnknownNotFoundErrorBase(element);
+            return UnknownNotFoundErrorBase.DeserializeUnknownNotFoundErrorBase(element, options);
         }
 
         BinaryData IPersistableModel<NotFoundErrorBase>.Write(ModelReaderWriterOptions options)

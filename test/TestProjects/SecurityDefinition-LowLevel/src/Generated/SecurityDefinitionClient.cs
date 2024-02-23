@@ -59,8 +59,14 @@ namespace SecurityDefinition_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public SecurityDefinitionClient(Uri endpoint, AzureKeyCredential credential, SecurityDefinitionClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
-            Argument.AssertNotNull(credential, nameof(credential));
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
+            if (credential == null)
+            {
+                throw new ArgumentNullException(nameof(credential));
+            }
             options ??= new SecurityDefinitionClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -77,8 +83,14 @@ namespace SecurityDefinition_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public SecurityDefinitionClient(Uri endpoint, TokenCredential credential, SecurityDefinitionClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
-            Argument.AssertNotNull(credential, nameof(credential));
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
+            if (credential == null)
+            {
+                throw new ArgumentNullException(nameof(credential));
+            }
             options ??= new SecurityDefinitionClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -106,7 +118,10 @@ namespace SecurityDefinition_LowLevel
         /// <include file="Docs/SecurityDefinitionClient.xml" path="doc/members/member[@name='OperationAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> OperationAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("SecurityDefinitionClient.Operation");
             scope.Start();
@@ -140,7 +155,10 @@ namespace SecurityDefinition_LowLevel
         /// <include file="Docs/SecurityDefinitionClient.xml" path="doc/members/member[@name='Operation(RequestContent,RequestContext)']/*" />
         public virtual Response Operation(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("SecurityDefinitionClient.Operation");
             scope.Start();

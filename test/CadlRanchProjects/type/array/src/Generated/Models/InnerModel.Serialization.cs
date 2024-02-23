@@ -29,7 +29,7 @@ namespace _Type._Array.Models
             writer.WriteStartObject();
             writer.WritePropertyName("property"u8);
             writer.WriteStringValue(Property);
-            if (Optional.IsCollectionDefined(Children))
+            if (!(Children is ChangeTrackingList<InnerModel> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("children"u8);
                 writer.WriteStartArray();
@@ -97,7 +97,7 @@ namespace _Type._Array.Models
                     List<InnerModel> array = new List<InnerModel>();
                     foreach (var item in property0.Value.EnumerateArray())
                     {
-                        array.Add(DeserializeInnerModel(item));
+                        array.Add(DeserializeInnerModel(item, options));
                     }
                     children = array;
                     continue;

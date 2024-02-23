@@ -27,17 +27,17 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Location))
+            if (Location != null)
             {
                 writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location);
             }
-            if (Optional.IsDefined(ProviderExtendedLocationType))
+            if (ProviderExtendedLocationType != null)
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ProviderExtendedLocationType);
             }
-            if (Optional.IsCollectionDefined(ExtendedLocations))
+            if (!(ExtendedLocations is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("extendedLocations"u8);
                 writer.WriteStartArray();

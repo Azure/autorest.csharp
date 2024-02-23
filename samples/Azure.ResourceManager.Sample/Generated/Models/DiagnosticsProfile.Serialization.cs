@@ -27,7 +27,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(BootDiagnostics))
+            if (BootDiagnostics != null)
             {
                 writer.WritePropertyName("bootDiagnostics"u8);
                 writer.WriteObjectValue(BootDiagnostics);
@@ -81,7 +81,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    bootDiagnostics = BootDiagnostics.DeserializeBootDiagnostics(property.Value);
+                    bootDiagnostics = BootDiagnostics.DeserializeBootDiagnostics(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")
@@ -98,7 +98,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(BootDiagnostics))
+            if (BootDiagnostics != null)
             {
                 builder.Append("  bootDiagnostics:");
                 AppendChildObject(builder, BootDiagnostics, options, 2, false);

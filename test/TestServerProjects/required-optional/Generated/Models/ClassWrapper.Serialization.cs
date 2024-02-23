@@ -73,7 +73,7 @@ namespace required_optional.Models
             {
                 if (property.NameEquals("value"u8))
                 {
-                    value = Product.DeserializeProduct(property.Value);
+                    value = Product.DeserializeProduct(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

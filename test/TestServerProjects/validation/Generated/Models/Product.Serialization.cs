@@ -26,7 +26,7 @@ namespace validation.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(DisplayNames))
+            if (!(DisplayNames is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("display_names"u8);
                 writer.WriteStartArray();
@@ -36,12 +36,12 @@ namespace validation.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(Capacity))
+            if (Capacity.HasValue)
             {
                 writer.WritePropertyName("capacity"u8);
                 writer.WriteNumberValue(Capacity.Value);
             }
-            if (Optional.IsDefined(Image))
+            if (Image != null)
             {
                 writer.WritePropertyName("image"u8);
                 writer.WriteStringValue(Image);
@@ -54,7 +54,7 @@ namespace validation.Models
             writer.WriteNumberValue(ConstInt.ToSerialInt32());
             writer.WritePropertyName("constString"u8);
             writer.WriteStringValue(ConstString.ToString());
-            if (Optional.IsDefined(ConstStringAsEnum))
+            if (ConstStringAsEnum.HasValue)
             {
                 writer.WritePropertyName("constStringAsEnum"u8);
                 writer.WriteStringValue(ConstStringAsEnum.Value.ToString());
@@ -139,12 +139,12 @@ namespace validation.Models
                 }
                 if (property.NameEquals("child"u8))
                 {
-                    child = ChildProduct.DeserializeChildProduct(property.Value);
+                    child = ChildProduct.DeserializeChildProduct(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("constChild"u8))
                 {
-                    constChild = ConstantProduct.DeserializeConstantProduct(property.Value);
+                    constChild = ConstantProduct.DeserializeConstantProduct(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("constInt"u8))

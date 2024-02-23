@@ -26,7 +26,7 @@ namespace TypeSchemaMapping.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(InternalProperty))
+            if (InternalProperty != null)
             {
                 writer.WritePropertyName("InternalProperty"u8);
                 writer.WriteObjectValue(InternalProperty);
@@ -80,7 +80,7 @@ namespace TypeSchemaMapping.Models
                     {
                         continue;
                     }
-                    internalProperty = InternalModel.DeserializeInternalModel(property.Value);
+                    internalProperty = InternalModel.DeserializeInternalModel(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

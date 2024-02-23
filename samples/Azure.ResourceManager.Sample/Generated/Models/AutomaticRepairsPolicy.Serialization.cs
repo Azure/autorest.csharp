@@ -27,12 +27,12 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Enabled))
+            if (Enabled.HasValue)
             {
                 writer.WritePropertyName("enabled"u8);
                 writer.WriteBooleanValue(Enabled.Value);
             }
-            if (Optional.IsDefined(GracePeriod))
+            if (GracePeriod != null)
             {
                 writer.WritePropertyName("gracePeriod"u8);
                 writer.WriteStringValue(GracePeriod);
@@ -109,14 +109,14 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Enabled))
+            if (Enabled.HasValue)
             {
                 builder.Append("  enabled:");
                 var boolValue = Enabled.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
             }
 
-            if (Optional.IsDefined(GracePeriod))
+            if (GracePeriod != null)
             {
                 builder.Append("  gracePeriod:");
                 if (GracePeriod.Contains(Environment.NewLine))

@@ -16,7 +16,7 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(DnsServers))
+            if (!(DnsServers is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("dnsServers"u8);
                 writer.WriteStartArray();
@@ -26,7 +26,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(InternalDnsNameLabel))
+            if (InternalDnsNameLabel != null)
             {
                 writer.WritePropertyName("internalDnsNameLabel"u8);
                 writer.WriteStringValue(InternalDnsNameLabel);

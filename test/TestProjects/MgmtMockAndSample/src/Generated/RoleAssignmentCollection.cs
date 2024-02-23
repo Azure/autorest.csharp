@@ -75,8 +75,18 @@ namespace MgmtMockAndSample
         /// <exception cref="ArgumentNullException"> <paramref name="roleAssignmentName"/> or <paramref name="content"/> is null. </exception>
         public virtual async Task<ArmOperation<RoleAssignmentResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string roleAssignmentName, RoleAssignmentCreateOrUpdateContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(roleAssignmentName, nameof(roleAssignmentName));
-            Argument.AssertNotNull(content, nameof(content));
+            if (roleAssignmentName == null)
+            {
+                throw new ArgumentNullException(nameof(roleAssignmentName));
+            }
+            if (roleAssignmentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(roleAssignmentName));
+            }
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = _roleAssignmentClientDiagnostics.CreateScope("RoleAssignmentCollection.CreateOrUpdate");
             scope.Start();
@@ -126,8 +136,18 @@ namespace MgmtMockAndSample
         /// <exception cref="ArgumentNullException"> <paramref name="roleAssignmentName"/> or <paramref name="content"/> is null. </exception>
         public virtual ArmOperation<RoleAssignmentResource> CreateOrUpdate(WaitUntil waitUntil, string roleAssignmentName, RoleAssignmentCreateOrUpdateContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(roleAssignmentName, nameof(roleAssignmentName));
-            Argument.AssertNotNull(content, nameof(content));
+            if (roleAssignmentName == null)
+            {
+                throw new ArgumentNullException(nameof(roleAssignmentName));
+            }
+            if (roleAssignmentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(roleAssignmentName));
+            }
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = _roleAssignmentClientDiagnostics.CreateScope("RoleAssignmentCollection.CreateOrUpdate");
             scope.Start();
@@ -175,7 +195,14 @@ namespace MgmtMockAndSample
         /// <exception cref="ArgumentNullException"> <paramref name="roleAssignmentName"/> is null. </exception>
         public virtual async Task<Response<RoleAssignmentResource>> GetAsync(string roleAssignmentName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(roleAssignmentName, nameof(roleAssignmentName));
+            if (roleAssignmentName == null)
+            {
+                throw new ArgumentNullException(nameof(roleAssignmentName));
+            }
+            if (roleAssignmentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(roleAssignmentName));
+            }
 
             using var scope = _roleAssignmentClientDiagnostics.CreateScope("RoleAssignmentCollection.Get");
             scope.Start();
@@ -220,7 +247,14 @@ namespace MgmtMockAndSample
         /// <exception cref="ArgumentNullException"> <paramref name="roleAssignmentName"/> is null. </exception>
         public virtual Response<RoleAssignmentResource> Get(string roleAssignmentName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(roleAssignmentName, nameof(roleAssignmentName));
+            if (roleAssignmentName == null)
+            {
+                throw new ArgumentNullException(nameof(roleAssignmentName));
+            }
+            if (roleAssignmentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(roleAssignmentName));
+            }
 
             using var scope = _roleAssignmentClientDiagnostics.CreateScope("RoleAssignmentCollection.Get");
             scope.Start();
@@ -465,7 +499,14 @@ namespace MgmtMockAndSample
         /// <exception cref="ArgumentNullException"> <paramref name="roleAssignmentName"/> is null. </exception>
         public virtual async Task<Response<bool>> ExistsAsync(string roleAssignmentName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(roleAssignmentName, nameof(roleAssignmentName));
+            if (roleAssignmentName == null)
+            {
+                throw new ArgumentNullException(nameof(roleAssignmentName));
+            }
+            if (roleAssignmentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(roleAssignmentName));
+            }
 
             using var scope = _roleAssignmentClientDiagnostics.CreateScope("RoleAssignmentCollection.Exists");
             scope.Start();
@@ -508,7 +549,14 @@ namespace MgmtMockAndSample
         /// <exception cref="ArgumentNullException"> <paramref name="roleAssignmentName"/> is null. </exception>
         public virtual Response<bool> Exists(string roleAssignmentName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(roleAssignmentName, nameof(roleAssignmentName));
+            if (roleAssignmentName == null)
+            {
+                throw new ArgumentNullException(nameof(roleAssignmentName));
+            }
+            if (roleAssignmentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(roleAssignmentName));
+            }
 
             using var scope = _roleAssignmentClientDiagnostics.CreateScope("RoleAssignmentCollection.Exists");
             scope.Start();
@@ -551,7 +599,14 @@ namespace MgmtMockAndSample
         /// <exception cref="ArgumentNullException"> <paramref name="roleAssignmentName"/> is null. </exception>
         public virtual async Task<NullableResponse<RoleAssignmentResource>> GetIfExistsAsync(string roleAssignmentName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(roleAssignmentName, nameof(roleAssignmentName));
+            if (roleAssignmentName == null)
+            {
+                throw new ArgumentNullException(nameof(roleAssignmentName));
+            }
+            if (roleAssignmentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(roleAssignmentName));
+            }
 
             using var scope = _roleAssignmentClientDiagnostics.CreateScope("RoleAssignmentCollection.GetIfExists");
             scope.Start();
@@ -596,7 +651,14 @@ namespace MgmtMockAndSample
         /// <exception cref="ArgumentNullException"> <paramref name="roleAssignmentName"/> is null. </exception>
         public virtual NullableResponse<RoleAssignmentResource> GetIfExists(string roleAssignmentName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(roleAssignmentName, nameof(roleAssignmentName));
+            if (roleAssignmentName == null)
+            {
+                throw new ArgumentNullException(nameof(roleAssignmentName));
+            }
+            if (roleAssignmentName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(roleAssignmentName));
+            }
 
             using var scope = _roleAssignmentClientDiagnostics.CreateScope("RoleAssignmentCollection.GetIfExists");
             scope.Start();

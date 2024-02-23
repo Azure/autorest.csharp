@@ -16,7 +16,7 @@ namespace MgmtMockAndSample.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Servers))
+            if (!(Servers is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("servers"u8);
                 writer.WriteStartArray();
@@ -26,12 +26,12 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(EnableProxy))
+            if (EnableProxy.HasValue)
             {
                 writer.WritePropertyName("enableProxy"u8);
                 writer.WriteBooleanValue(EnableProxy.Value);
             }
-            if (Optional.IsDefined(RequireProxyForNetworkRules))
+            if (RequireProxyForNetworkRules.HasValue)
             {
                 if (RequireProxyForNetworkRules != null)
                 {

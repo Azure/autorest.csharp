@@ -19,7 +19,10 @@ namespace CognitiveSearch.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public StandardAnalyzer(string name) : base(name)
         {
-            Argument.AssertNotNull(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
             Stopwords = new ChangeTrackingList<string>();
             OdataType = "#Microsoft.Azure.Search.StandardAnalyzer";

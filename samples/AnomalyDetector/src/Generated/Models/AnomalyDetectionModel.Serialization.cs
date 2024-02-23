@@ -36,7 +36,7 @@ namespace AnomalyDetector.Models
             writer.WriteStringValue(CreatedTime, "O");
             writer.WritePropertyName("lastUpdatedTime"u8);
             writer.WriteStringValue(LastUpdatedTime, "O");
-            if (Optional.IsDefined(ModelInfo))
+            if (ModelInfo != null)
             {
                 writer.WritePropertyName("modelInfo"u8);
                 writer.WriteObjectValue(ModelInfo);
@@ -108,7 +108,7 @@ namespace AnomalyDetector.Models
                     {
                         continue;
                     }
-                    modelInfo = ModelInfo.DeserializeModelInfo(property.Value);
+                    modelInfo = ModelInfo.DeserializeModelInfo(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

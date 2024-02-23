@@ -26,14 +26,14 @@ namespace xms_error_responses.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Reason))
+            if (Reason != null)
             {
                 writer.WritePropertyName("reason"u8);
                 writer.WriteStringValue(Reason);
             }
             writer.WritePropertyName("whatNotFound"u8);
             writer.WriteStringValue(WhatNotFound);
-            if (Optional.IsDefined(SomeBaseProp))
+            if (SomeBaseProp != null)
             {
                 writer.WritePropertyName("someBaseProp"u8);
                 writer.WriteStringValue(SomeBaseProp);
@@ -65,7 +65,7 @@ namespace xms_error_responses.Models
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeUnknownNotFoundErrorBase(document.RootElement, options);
+            return DeserializeNotFoundErrorBase(document.RootElement, options);
         }
 
         internal static UnknownNotFoundErrorBase DeserializeUnknownNotFoundErrorBase(JsonElement element, ModelReaderWriterOptions options = null)
@@ -129,7 +129,7 @@ namespace xms_error_responses.Models
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeUnknownNotFoundErrorBase(document.RootElement, options);
+                        return DeserializeNotFoundErrorBase(document.RootElement, options);
                     }
                 default:
                     throw new FormatException($"The model {nameof(NotFoundErrorBase)} does not support '{options.Format}' format.");

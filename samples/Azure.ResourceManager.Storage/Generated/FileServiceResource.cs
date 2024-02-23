@@ -269,7 +269,10 @@ namespace Azure.ResourceManager.Storage
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<FileServiceResource>> CreateOrUpdateAsync(WaitUntil waitUntil, FileServiceData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(data, nameof(data));
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _fileServiceClientDiagnostics.CreateScope("FileServiceResource.CreateOrUpdate");
             scope.Start();
@@ -317,7 +320,10 @@ namespace Azure.ResourceManager.Storage
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<FileServiceResource> CreateOrUpdate(WaitUntil waitUntil, FileServiceData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(data, nameof(data));
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _fileServiceClientDiagnostics.CreateScope("FileServiceResource.CreateOrUpdate");
             scope.Start();

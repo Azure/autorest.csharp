@@ -28,22 +28,22 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && Optional.IsDefined(Name))
+            if (options.Format != "W" && Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format != "W" && Optional.IsDefined(AssetId))
+            if (options.Format != "W" && AssetId != null)
             {
                 writer.WritePropertyName("assetId"u8);
                 writer.WriteStringValue(AssetId);
             }
-            if (Optional.IsDefined(AvailableCapacity))
+            if (AvailableCapacity != null)
             {
                 writer.WritePropertyName("availableCapacity"u8);
                 writer.WriteObjectValue(AvailableCapacity);
             }
-            if (Optional.IsCollectionDefined(Statuses))
+            if (!(Statuses is ChangeTrackingList<InstanceViewStatus> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("statuses"u8);
                 writer.WriteStartArray();
@@ -115,7 +115,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    availableCapacity = DedicatedHostAvailableCapacity.DeserializeDedicatedHostAvailableCapacity(property.Value);
+                    availableCapacity = DedicatedHostAvailableCapacity.DeserializeDedicatedHostAvailableCapacity(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("statuses"u8))
@@ -127,7 +127,7 @@ namespace Azure.ResourceManager.Sample.Models
                     List<InstanceViewStatus> array = new List<InstanceViewStatus>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(InstanceViewStatus.DeserializeInstanceViewStatus(item));
+                        array.Add(InstanceViewStatus.DeserializeInstanceViewStatus(item, options));
                     }
                     statuses = array;
                     continue;
@@ -146,7 +146,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 builder.Append("  name:");
                 if (Name.Contains(Environment.NewLine))
@@ -160,7 +160,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(AssetId))
+            if (AssetId != null)
             {
                 builder.Append("  assetId:");
                 if (AssetId.Contains(Environment.NewLine))
@@ -174,13 +174,13 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(AvailableCapacity))
+            if (AvailableCapacity != null)
             {
                 builder.Append("  availableCapacity:");
                 AppendChildObject(builder, AvailableCapacity, options, 2, false);
             }
 
-            if (Optional.IsCollectionDefined(Statuses))
+            if (!(Statuses is ChangeTrackingList<InstanceViewStatus> collection && collection.IsUndefined))
             {
                 if (Statuses.Any())
                 {

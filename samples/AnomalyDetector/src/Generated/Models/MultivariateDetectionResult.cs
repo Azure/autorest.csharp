@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Azure.Core;
 
 namespace AnomalyDetector.Models
 {
@@ -53,8 +52,14 @@ namespace AnomalyDetector.Models
         /// <exception cref="ArgumentNullException"> <paramref name="summary"/> or <paramref name="results"/> is null. </exception>
         internal MultivariateDetectionResult(MultivariateBatchDetectionResultSummary summary, IEnumerable<AnomalyState> results)
         {
-            Argument.AssertNotNull(summary, nameof(summary));
-            Argument.AssertNotNull(results, nameof(results));
+            if (summary == null)
+            {
+                throw new ArgumentNullException(nameof(summary));
+            }
+            if (results == null)
+            {
+                throw new ArgumentNullException(nameof(results));
+            }
 
             Summary = summary;
             Results = results.ToList();

@@ -16,17 +16,17 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (Optional.IsDefined(Location))
+            if (Location != null)
             {
                 writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location);
             }
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -39,7 +39,7 @@ namespace Azure.Network.Management.Interface.Models
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Routes))
+            if (!(Routes is ChangeTrackingList<Route> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("routes"u8);
                 writer.WriteStartArray();
@@ -49,7 +49,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(DisableBgpRoutePropagation))
+            if (DisableBgpRoutePropagation.HasValue)
             {
                 writer.WritePropertyName("disableBgpRoutePropagation"u8);
                 writer.WriteBooleanValue(DisableBgpRoutePropagation.Value);

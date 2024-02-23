@@ -195,7 +195,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<TrackedResourceModel1Resource>> UpdateAsync(WaitUntil waitUntil, TrackedResourceModel1Data data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(data, nameof(data));
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _trackedResourceModel1ClientDiagnostics.CreateScope("TrackedResourceModel1Resource.Update");
             scope.Start();
@@ -242,7 +245,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<TrackedResourceModel1Resource> Update(WaitUntil waitUntil, TrackedResourceModel1Data data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(data, nameof(data));
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _trackedResourceModel1ClientDiagnostics.CreateScope("TrackedResourceModel1Resource.Update");
             scope.Start();
@@ -290,8 +296,14 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
         public virtual async Task<Response<TrackedResourceModel1Resource>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(key, nameof(key));
-            Argument.AssertNotNull(value, nameof(value));
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
 
             using var scope = _trackedResourceModel1ClientDiagnostics.CreateScope("TrackedResourceModel1Resource.AddTag");
             scope.Start();
@@ -347,8 +359,14 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
         public virtual Response<TrackedResourceModel1Resource> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(key, nameof(key));
-            Argument.AssertNotNull(value, nameof(value));
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
 
             using var scope = _trackedResourceModel1ClientDiagnostics.CreateScope("TrackedResourceModel1Resource.AddTag");
             scope.Start();
@@ -403,7 +421,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
         public virtual async Task<Response<TrackedResourceModel1Resource>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(tags, nameof(tags));
+            if (tags == null)
+            {
+                throw new ArgumentNullException(nameof(tags));
+            }
 
             using var scope = _trackedResourceModel1ClientDiagnostics.CreateScope("TrackedResourceModel1Resource.SetTags");
             scope.Start();
@@ -459,7 +480,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
         public virtual Response<TrackedResourceModel1Resource> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(tags, nameof(tags));
+            if (tags == null)
+            {
+                throw new ArgumentNullException(nameof(tags));
+            }
 
             using var scope = _trackedResourceModel1ClientDiagnostics.CreateScope("TrackedResourceModel1Resource.SetTags");
             scope.Start();
@@ -515,7 +539,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public virtual async Task<Response<TrackedResourceModel1Resource>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(key, nameof(key));
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
 
             using var scope = _trackedResourceModel1ClientDiagnostics.CreateScope("TrackedResourceModel1Resource.RemoveTag");
             scope.Start();
@@ -570,7 +597,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public virtual Response<TrackedResourceModel1Resource> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(key, nameof(key));
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
 
             using var scope = _trackedResourceModel1ClientDiagnostics.CreateScope("TrackedResourceModel1Resource.RemoveTag");
             scope.Start();

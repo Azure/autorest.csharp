@@ -42,7 +42,7 @@ namespace _Azure.Lro.RpcLegacy.Models
                 writer.WritePropertyName("status"u8);
                 writer.WriteStringValue(Status.ToString());
             }
-            if (options.Format != "W" && Optional.IsCollectionDefined(Errors))
+            if (options.Format != "W" && !(Errors is ChangeTrackingList<ErrorResponse> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("errors"u8);
                 writer.WriteStartArray();
@@ -52,7 +52,7 @@ namespace _Azure.Lro.RpcLegacy.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W" && Optional.IsCollectionDefined(Results))
+            if (options.Format != "W" && !(Results is ChangeTrackingList<string> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("results"u8);
                 writer.WriteStartArray();
@@ -133,7 +133,7 @@ namespace _Azure.Lro.RpcLegacy.Models
                     List<ErrorResponse> array = new List<ErrorResponse>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ErrorResponse.DeserializeErrorResponse(item));
+                        array.Add(ErrorResponse.DeserializeErrorResponse(item, options));
                     }
                     errors = array;
                     continue;

@@ -54,9 +54,18 @@ namespace xml_service.Models
         /// <exception cref="ArgumentNullException"> <paramref name="serviceEndpoint"/>, <paramref name="prefix"/> or <paramref name="nextMarker"/> is null. </exception>
         internal ListContainersResponse(string serviceEndpoint, string prefix, int maxResults, string nextMarker)
         {
-            Argument.AssertNotNull(serviceEndpoint, nameof(serviceEndpoint));
-            Argument.AssertNotNull(prefix, nameof(prefix));
-            Argument.AssertNotNull(nextMarker, nameof(nextMarker));
+            if (serviceEndpoint == null)
+            {
+                throw new ArgumentNullException(nameof(serviceEndpoint));
+            }
+            if (prefix == null)
+            {
+                throw new ArgumentNullException(nameof(prefix));
+            }
+            if (nextMarker == null)
+            {
+                throw new ArgumentNullException(nameof(nextMarker));
+            }
 
             ServiceEndpoint = serviceEndpoint;
             Prefix = prefix;

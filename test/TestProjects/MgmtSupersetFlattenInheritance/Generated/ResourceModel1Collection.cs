@@ -82,8 +82,18 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> or <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<ResourceModel1Resource>> CreateOrUpdateAsync(WaitUntil waitUntil, string resourceModel1SName, ResourceModel1Data data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(resourceModel1SName, nameof(resourceModel1SName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (resourceModel1SName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceModel1SName));
+            }
+            if (resourceModel1SName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceModel1SName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _resourceModel1ClientDiagnostics.CreateScope("ResourceModel1Collection.CreateOrUpdate");
             scope.Start();
@@ -132,8 +142,18 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> or <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<ResourceModel1Resource> CreateOrUpdate(WaitUntil waitUntil, string resourceModel1SName, ResourceModel1Data data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(resourceModel1SName, nameof(resourceModel1SName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (resourceModel1SName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceModel1SName));
+            }
+            if (resourceModel1SName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceModel1SName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _resourceModel1ClientDiagnostics.CreateScope("ResourceModel1Collection.CreateOrUpdate");
             scope.Start();
@@ -180,7 +200,14 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> is null. </exception>
         public virtual async Task<Response<ResourceModel1Resource>> GetAsync(string resourceModel1SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(resourceModel1SName, nameof(resourceModel1SName));
+            if (resourceModel1SName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceModel1SName));
+            }
+            if (resourceModel1SName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceModel1SName));
+            }
 
             using var scope = _resourceModel1ClientDiagnostics.CreateScope("ResourceModel1Collection.Get");
             scope.Start();
@@ -224,7 +251,14 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> is null. </exception>
         public virtual Response<ResourceModel1Resource> Get(string resourceModel1SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(resourceModel1SName, nameof(resourceModel1SName));
+            if (resourceModel1SName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceModel1SName));
+            }
+            if (resourceModel1SName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceModel1SName));
+            }
 
             using var scope = _resourceModel1ClientDiagnostics.CreateScope("ResourceModel1Collection.Get");
             scope.Start();
@@ -325,7 +359,14 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> is null. </exception>
         public virtual async Task<Response<bool>> ExistsAsync(string resourceModel1SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(resourceModel1SName, nameof(resourceModel1SName));
+            if (resourceModel1SName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceModel1SName));
+            }
+            if (resourceModel1SName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceModel1SName));
+            }
 
             using var scope = _resourceModel1ClientDiagnostics.CreateScope("ResourceModel1Collection.Exists");
             scope.Start();
@@ -368,7 +409,14 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> is null. </exception>
         public virtual Response<bool> Exists(string resourceModel1SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(resourceModel1SName, nameof(resourceModel1SName));
+            if (resourceModel1SName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceModel1SName));
+            }
+            if (resourceModel1SName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceModel1SName));
+            }
 
             using var scope = _resourceModel1ClientDiagnostics.CreateScope("ResourceModel1Collection.Exists");
             scope.Start();
@@ -411,7 +459,14 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> is null. </exception>
         public virtual async Task<NullableResponse<ResourceModel1Resource>> GetIfExistsAsync(string resourceModel1SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(resourceModel1SName, nameof(resourceModel1SName));
+            if (resourceModel1SName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceModel1SName));
+            }
+            if (resourceModel1SName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceModel1SName));
+            }
 
             using var scope = _resourceModel1ClientDiagnostics.CreateScope("ResourceModel1Collection.GetIfExists");
             scope.Start();
@@ -456,7 +511,14 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> is null. </exception>
         public virtual NullableResponse<ResourceModel1Resource> GetIfExists(string resourceModel1SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(resourceModel1SName, nameof(resourceModel1SName));
+            if (resourceModel1SName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceModel1SName));
+            }
+            if (resourceModel1SName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceModel1SName));
+            }
 
             using var scope = _resourceModel1ClientDiagnostics.CreateScope("ResourceModel1Collection.GetIfExists");
             scope.Start();

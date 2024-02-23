@@ -83,8 +83,18 @@ namespace MgmtSubscriptionNameParameter
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionName"/> or <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<SBSubscriptionResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string subscriptionName, SBSubscriptionData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionName, nameof(subscriptionName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (subscriptionName == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionName));
+            }
+            if (subscriptionName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _sbSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscriptionCollection.CreateOrUpdate");
             scope.Start();
@@ -134,8 +144,18 @@ namespace MgmtSubscriptionNameParameter
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionName"/> or <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<SBSubscriptionResource> CreateOrUpdate(WaitUntil waitUntil, string subscriptionName, SBSubscriptionData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionName, nameof(subscriptionName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (subscriptionName == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionName));
+            }
+            if (subscriptionName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _sbSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscriptionCollection.CreateOrUpdate");
             scope.Start();
@@ -183,7 +203,14 @@ namespace MgmtSubscriptionNameParameter
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionName"/> is null. </exception>
         public virtual async Task<Response<SBSubscriptionResource>> GetAsync(string subscriptionName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionName, nameof(subscriptionName));
+            if (subscriptionName == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionName));
+            }
+            if (subscriptionName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionName));
+            }
 
             using var scope = _sbSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscriptionCollection.Get");
             scope.Start();
@@ -228,7 +255,14 @@ namespace MgmtSubscriptionNameParameter
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionName"/> is null. </exception>
         public virtual Response<SBSubscriptionResource> Get(string subscriptionName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionName, nameof(subscriptionName));
+            if (subscriptionName == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionName));
+            }
+            if (subscriptionName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionName));
+            }
 
             using var scope = _sbSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscriptionCollection.Get");
             scope.Start();
@@ -337,7 +371,14 @@ namespace MgmtSubscriptionNameParameter
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionName"/> is null. </exception>
         public virtual async Task<Response<bool>> ExistsAsync(string subscriptionName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionName, nameof(subscriptionName));
+            if (subscriptionName == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionName));
+            }
+            if (subscriptionName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionName));
+            }
 
             using var scope = _sbSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscriptionCollection.Exists");
             scope.Start();
@@ -380,7 +421,14 @@ namespace MgmtSubscriptionNameParameter
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionName"/> is null. </exception>
         public virtual Response<bool> Exists(string subscriptionName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionName, nameof(subscriptionName));
+            if (subscriptionName == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionName));
+            }
+            if (subscriptionName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionName));
+            }
 
             using var scope = _sbSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscriptionCollection.Exists");
             scope.Start();
@@ -423,7 +471,14 @@ namespace MgmtSubscriptionNameParameter
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionName"/> is null. </exception>
         public virtual async Task<NullableResponse<SBSubscriptionResource>> GetIfExistsAsync(string subscriptionName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionName, nameof(subscriptionName));
+            if (subscriptionName == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionName));
+            }
+            if (subscriptionName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionName));
+            }
 
             using var scope = _sbSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscriptionCollection.GetIfExists");
             scope.Start();
@@ -468,7 +523,14 @@ namespace MgmtSubscriptionNameParameter
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionName"/> is null. </exception>
         public virtual NullableResponse<SBSubscriptionResource> GetIfExists(string subscriptionName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionName, nameof(subscriptionName));
+            if (subscriptionName == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionName));
+            }
+            if (subscriptionName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionName));
+            }
 
             using var scope = _sbSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscriptionCollection.GetIfExists");
             scope.Start();

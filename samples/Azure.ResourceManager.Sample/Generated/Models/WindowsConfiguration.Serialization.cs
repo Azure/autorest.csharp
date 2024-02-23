@@ -28,22 +28,22 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(ProvisionVmAgent))
+            if (ProvisionVmAgent.HasValue)
             {
                 writer.WritePropertyName("provisionVMAgent"u8);
                 writer.WriteBooleanValue(ProvisionVmAgent.Value);
             }
-            if (Optional.IsDefined(EnableAutomaticUpdates))
+            if (EnableAutomaticUpdates.HasValue)
             {
                 writer.WritePropertyName("enableAutomaticUpdates"u8);
                 writer.WriteBooleanValue(EnableAutomaticUpdates.Value);
             }
-            if (Optional.IsDefined(TimeZone))
+            if (TimeZone != null)
             {
                 writer.WritePropertyName("timeZone"u8);
                 writer.WriteStringValue(TimeZone);
             }
-            if (Optional.IsCollectionDefined(AdditionalUnattendContent))
+            if (!(AdditionalUnattendContent is ChangeTrackingList<AdditionalUnattendContent> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("additionalUnattendContent"u8);
                 writer.WriteStartArray();
@@ -53,12 +53,12 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(PatchSettings))
+            if (PatchSettings != null)
             {
                 writer.WritePropertyName("patchSettings"u8);
                 writer.WriteObjectValue(PatchSettings);
             }
-            if (Optional.IsDefined(WinRM))
+            if (WinRM != null)
             {
                 writer.WritePropertyName("winRM"u8);
                 writer.WriteObjectValue(WinRM);
@@ -143,7 +143,7 @@ namespace Azure.ResourceManager.Sample.Models
                     List<AdditionalUnattendContent> array = new List<AdditionalUnattendContent>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Models.AdditionalUnattendContent.DeserializeAdditionalUnattendContent(item));
+                        array.Add(Models.AdditionalUnattendContent.DeserializeAdditionalUnattendContent(item, options));
                     }
                     additionalUnattendContent = array;
                     continue;
@@ -154,7 +154,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    patchSettings = PatchSettings.DeserializePatchSettings(property.Value);
+                    patchSettings = PatchSettings.DeserializePatchSettings(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("winRM"u8))
@@ -163,7 +163,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    winRM = WinRMConfiguration.DeserializeWinRMConfiguration(property.Value);
+                    winRM = WinRMConfiguration.DeserializeWinRMConfiguration(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")
@@ -180,21 +180,21 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(ProvisionVmAgent))
+            if (ProvisionVmAgent.HasValue)
             {
                 builder.Append("  provisionVMAgent:");
                 var boolValue = ProvisionVmAgent.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
             }
 
-            if (Optional.IsDefined(EnableAutomaticUpdates))
+            if (EnableAutomaticUpdates.HasValue)
             {
                 builder.Append("  enableAutomaticUpdates:");
                 var boolValue = EnableAutomaticUpdates.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
             }
 
-            if (Optional.IsDefined(TimeZone))
+            if (TimeZone != null)
             {
                 builder.Append("  timeZone:");
                 if (TimeZone.Contains(Environment.NewLine))
@@ -208,7 +208,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsCollectionDefined(AdditionalUnattendContent))
+            if (!(AdditionalUnattendContent is ChangeTrackingList<AdditionalUnattendContent> collection && collection.IsUndefined))
             {
                 if (AdditionalUnattendContent.Any())
                 {
@@ -222,13 +222,13 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(PatchSettings))
+            if (PatchSettings != null)
             {
                 builder.Append("  patchSettings:");
                 AppendChildObject(builder, PatchSettings, options, 2, false);
             }
 
-            if (Optional.IsDefined(WinRM))
+            if (WinRM != null)
             {
                 builder.Append("  winRM:");
                 AppendChildObject(builder, WinRM, options, 2, false);

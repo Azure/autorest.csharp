@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace ModelsTypeSpec.Models
 {
@@ -51,7 +50,10 @@ namespace ModelsTypeSpec.Models
         /// <exception cref="ArgumentNullException"> <paramref name="requiredModelRecord"/> is null. </exception>
         public CollectionItem(IDictionary<string, RecordItem> requiredModelRecord)
         {
-            Argument.AssertNotNull(requiredModelRecord, nameof(requiredModelRecord));
+            if (requiredModelRecord == null)
+            {
+                throw new ArgumentNullException(nameof(requiredModelRecord));
+            }
 
             RequiredModelRecord = requiredModelRecord;
         }

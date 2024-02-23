@@ -26,19 +26,19 @@ namespace xms_error_responses.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Reason))
+            if (Reason != null)
             {
                 writer.WritePropertyName("reason"u8);
                 writer.WriteStringValue(Reason);
             }
             writer.WritePropertyName("errorType"u8);
             writer.WriteStringValue(ErrorType);
-            if (Optional.IsDefined(ErrorMessage))
+            if (ErrorMessage != null)
             {
                 writer.WritePropertyName("errorMessage"u8);
                 writer.WriteStringValue(ErrorMessage);
             }
-            if (Optional.IsDefined(ActionResponse))
+            if (ActionResponse != null)
             {
                 writer.WritePropertyName("actionResponse"u8);
                 writer.WriteStringValue(ActionResponse);
@@ -85,7 +85,7 @@ namespace xms_error_responses.Models
             {
                 switch (discriminator.GetString())
                 {
-                    case "PetHungryOrThirstyError": return PetHungryOrThirstyError.DeserializePetHungryOrThirstyError(element);
+                    case "PetHungryOrThirstyError": return PetHungryOrThirstyError.DeserializePetHungryOrThirstyError(element, options);
                 }
             }
             Optional<string> reason = default;

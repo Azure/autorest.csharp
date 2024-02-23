@@ -87,10 +87,38 @@ namespace MgmtOperations
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/> or <paramref name="availabilitySetChildName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<AvailabilitySetGrandChildListResult>> ListAsync(string subscriptionId, string resourceGroupName, string availabilitySetName, string availabilitySetChildName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(availabilitySetName, nameof(availabilitySetName));
-            Argument.AssertNotNullOrEmpty(availabilitySetChildName, nameof(availabilitySetChildName));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (resourceGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
+            }
+            if (availabilitySetName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetName));
+            }
+            if (availabilitySetName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(availabilitySetName));
+            }
+            if (availabilitySetChildName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetChildName));
+            }
+            if (availabilitySetChildName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(availabilitySetChildName));
+            }
 
             using var message = CreateListRequest(subscriptionId, resourceGroupName, availabilitySetName, availabilitySetChildName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -118,10 +146,38 @@ namespace MgmtOperations
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/> or <paramref name="availabilitySetChildName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<AvailabilitySetGrandChildListResult> List(string subscriptionId, string resourceGroupName, string availabilitySetName, string availabilitySetChildName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(availabilitySetName, nameof(availabilitySetName));
-            Argument.AssertNotNullOrEmpty(availabilitySetChildName, nameof(availabilitySetChildName));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (resourceGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
+            }
+            if (availabilitySetName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetName));
+            }
+            if (availabilitySetName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(availabilitySetName));
+            }
+            if (availabilitySetChildName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetChildName));
+            }
+            if (availabilitySetChildName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(availabilitySetChildName));
+            }
 
             using var message = CreateListRequest(subscriptionId, resourceGroupName, availabilitySetName, availabilitySetChildName);
             _pipeline.Send(message, cancellationToken);
@@ -192,11 +248,46 @@ namespace MgmtOperations
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, <paramref name="availabilitySetChildName"/> or <paramref name="availabilitySetGrandChildName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<AvailabilitySetGrandChildData>> GetAsync(string subscriptionId, string resourceGroupName, string availabilitySetName, string availabilitySetChildName, string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(availabilitySetName, nameof(availabilitySetName));
-            Argument.AssertNotNullOrEmpty(availabilitySetChildName, nameof(availabilitySetChildName));
-            Argument.AssertNotNullOrEmpty(availabilitySetGrandChildName, nameof(availabilitySetGrandChildName));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (resourceGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
+            }
+            if (availabilitySetName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetName));
+            }
+            if (availabilitySetName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(availabilitySetName));
+            }
+            if (availabilitySetChildName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetChildName));
+            }
+            if (availabilitySetChildName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(availabilitySetChildName));
+            }
+            if (availabilitySetGrandChildName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
+            }
+            if (availabilitySetGrandChildName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(availabilitySetGrandChildName));
+            }
 
             using var message = CreateGetRequest(subscriptionId, resourceGroupName, availabilitySetName, availabilitySetChildName, availabilitySetGrandChildName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -227,11 +318,46 @@ namespace MgmtOperations
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, <paramref name="availabilitySetChildName"/> or <paramref name="availabilitySetGrandChildName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<AvailabilitySetGrandChildData> Get(string subscriptionId, string resourceGroupName, string availabilitySetName, string availabilitySetChildName, string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(availabilitySetName, nameof(availabilitySetName));
-            Argument.AssertNotNullOrEmpty(availabilitySetChildName, nameof(availabilitySetChildName));
-            Argument.AssertNotNullOrEmpty(availabilitySetGrandChildName, nameof(availabilitySetGrandChildName));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (resourceGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
+            }
+            if (availabilitySetName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetName));
+            }
+            if (availabilitySetName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(availabilitySetName));
+            }
+            if (availabilitySetChildName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetChildName));
+            }
+            if (availabilitySetChildName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(availabilitySetChildName));
+            }
+            if (availabilitySetGrandChildName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
+            }
+            if (availabilitySetGrandChildName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(availabilitySetGrandChildName));
+            }
 
             using var message = CreateGetRequest(subscriptionId, resourceGroupName, availabilitySetName, availabilitySetChildName, availabilitySetGrandChildName);
             _pipeline.Send(message, cancellationToken);
@@ -309,12 +435,50 @@ namespace MgmtOperations
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, <paramref name="availabilitySetChildName"/> or <paramref name="availabilitySetGrandChildName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<AvailabilitySetGrandChildData>> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string availabilitySetName, string availabilitySetChildName, string availabilitySetGrandChildName, AvailabilitySetGrandChildData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(availabilitySetName, nameof(availabilitySetName));
-            Argument.AssertNotNullOrEmpty(availabilitySetChildName, nameof(availabilitySetChildName));
-            Argument.AssertNotNullOrEmpty(availabilitySetGrandChildName, nameof(availabilitySetGrandChildName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (resourceGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
+            }
+            if (availabilitySetName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetName));
+            }
+            if (availabilitySetName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(availabilitySetName));
+            }
+            if (availabilitySetChildName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetChildName));
+            }
+            if (availabilitySetChildName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(availabilitySetChildName));
+            }
+            if (availabilitySetGrandChildName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
+            }
+            if (availabilitySetGrandChildName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(availabilitySetGrandChildName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, availabilitySetName, availabilitySetChildName, availabilitySetGrandChildName, data);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -344,12 +508,50 @@ namespace MgmtOperations
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, <paramref name="availabilitySetChildName"/> or <paramref name="availabilitySetGrandChildName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<AvailabilitySetGrandChildData> CreateOrUpdate(string subscriptionId, string resourceGroupName, string availabilitySetName, string availabilitySetChildName, string availabilitySetGrandChildName, AvailabilitySetGrandChildData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(availabilitySetName, nameof(availabilitySetName));
-            Argument.AssertNotNullOrEmpty(availabilitySetChildName, nameof(availabilitySetChildName));
-            Argument.AssertNotNullOrEmpty(availabilitySetGrandChildName, nameof(availabilitySetGrandChildName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (resourceGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
+            }
+            if (availabilitySetName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetName));
+            }
+            if (availabilitySetName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(availabilitySetName));
+            }
+            if (availabilitySetChildName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetChildName));
+            }
+            if (availabilitySetChildName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(availabilitySetChildName));
+            }
+            if (availabilitySetGrandChildName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
+            }
+            if (availabilitySetGrandChildName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(availabilitySetGrandChildName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, availabilitySetName, availabilitySetChildName, availabilitySetGrandChildName, data);
             _pipeline.Send(message, cancellationToken);

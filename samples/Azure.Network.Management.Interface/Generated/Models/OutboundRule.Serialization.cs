@@ -16,24 +16,24 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(AllocatedOutboundPorts))
+            if (AllocatedOutboundPorts.HasValue)
             {
                 writer.WritePropertyName("allocatedOutboundPorts"u8);
                 writer.WriteNumberValue(AllocatedOutboundPorts.Value);
             }
-            if (Optional.IsCollectionDefined(FrontendIPConfigurations))
+            if (!(FrontendIPConfigurations is ChangeTrackingList<SubResource> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("frontendIPConfigurations"u8);
                 writer.WriteStartArray();
@@ -43,22 +43,22 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(BackendAddressPool))
+            if (BackendAddressPool != null)
             {
                 writer.WritePropertyName("backendAddressPool"u8);
                 writer.WriteObjectValue(BackendAddressPool);
             }
-            if (Optional.IsDefined(Protocol))
+            if (Protocol.HasValue)
             {
                 writer.WritePropertyName("protocol"u8);
                 writer.WriteStringValue(Protocol.Value.ToString());
             }
-            if (Optional.IsDefined(EnableTcpReset))
+            if (EnableTcpReset.HasValue)
             {
                 writer.WritePropertyName("enableTcpReset"u8);
                 writer.WriteBooleanValue(EnableTcpReset.Value);
             }
-            if (Optional.IsDefined(IdleTimeoutInMinutes))
+            if (IdleTimeoutInMinutes.HasValue)
             {
                 writer.WritePropertyName("idleTimeoutInMinutes"u8);
                 writer.WriteNumberValue(IdleTimeoutInMinutes.Value);

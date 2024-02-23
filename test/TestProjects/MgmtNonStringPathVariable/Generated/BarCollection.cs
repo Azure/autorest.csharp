@@ -79,7 +79,10 @@ namespace MgmtNonStringPathVariable
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<BarResource>> CreateOrUpdateAsync(WaitUntil waitUntil, int barName, BarData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(data, nameof(data));
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _barClientDiagnostics.CreateScope("BarCollection.CreateOrUpdate");
             scope.Start();
@@ -126,7 +129,10 @@ namespace MgmtNonStringPathVariable
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<BarResource> CreateOrUpdate(WaitUntil waitUntil, int barName, BarData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(data, nameof(data));
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _barClientDiagnostics.CreateScope("BarCollection.CreateOrUpdate");
             scope.Start();

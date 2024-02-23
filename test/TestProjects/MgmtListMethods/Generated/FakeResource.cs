@@ -684,7 +684,10 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<FakeResource>> UpdateAsync(WaitUntil waitUntil, FakeData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(data, nameof(data));
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _fakeClientDiagnostics.CreateScope("FakeResource.Update");
             scope.Start();
@@ -732,7 +735,10 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<FakeResource> Update(WaitUntil waitUntil, FakeData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(data, nameof(data));
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _fakeClientDiagnostics.CreateScope("FakeResource.Update");
             scope.Start();
@@ -780,7 +786,10 @@ namespace MgmtListMethods
         /// <returns> An async collection of <see cref="FakeConfigurationResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<FakeConfigurationResource> UpdateConfigurationsAsync(FakeConfigurationListResult value, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(value, nameof(value));
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeRestClient.CreateUpdateConfigurationsRequest(Id.SubscriptionId, Id.Name, value);
             return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new FakeConfigurationResource(Client, FakeConfigurationData.DeserializeFakeConfigurationData(e)), _fakeClientDiagnostics, Pipeline, "FakeResource.UpdateConfigurations", "value", null, cancellationToken);
@@ -813,7 +822,10 @@ namespace MgmtListMethods
         /// <returns> A collection of <see cref="FakeConfigurationResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<FakeConfigurationResource> UpdateConfigurations(FakeConfigurationListResult value, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(value, nameof(value));
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeRestClient.CreateUpdateConfigurationsRequest(Id.SubscriptionId, Id.Name, value);
             return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => new FakeConfigurationResource(Client, FakeConfigurationData.DeserializeFakeConfigurationData(e)), _fakeClientDiagnostics, Pipeline, "FakeResource.UpdateConfigurations", "value", null, cancellationToken);
@@ -846,8 +858,14 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
         public virtual async Task<Response<FakeResource>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(key, nameof(key));
-            Argument.AssertNotNull(value, nameof(value));
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
 
             using var scope = _fakeClientDiagnostics.CreateScope("FakeResource.AddTag");
             scope.Start();
@@ -903,8 +921,14 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
         public virtual Response<FakeResource> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(key, nameof(key));
-            Argument.AssertNotNull(value, nameof(value));
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
 
             using var scope = _fakeClientDiagnostics.CreateScope("FakeResource.AddTag");
             scope.Start();
@@ -959,7 +983,10 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
         public virtual async Task<Response<FakeResource>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(tags, nameof(tags));
+            if (tags == null)
+            {
+                throw new ArgumentNullException(nameof(tags));
+            }
 
             using var scope = _fakeClientDiagnostics.CreateScope("FakeResource.SetTags");
             scope.Start();
@@ -1015,7 +1042,10 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
         public virtual Response<FakeResource> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(tags, nameof(tags));
+            if (tags == null)
+            {
+                throw new ArgumentNullException(nameof(tags));
+            }
 
             using var scope = _fakeClientDiagnostics.CreateScope("FakeResource.SetTags");
             scope.Start();
@@ -1071,7 +1101,10 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public virtual async Task<Response<FakeResource>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(key, nameof(key));
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
 
             using var scope = _fakeClientDiagnostics.CreateScope("FakeResource.RemoveTag");
             scope.Start();
@@ -1126,7 +1159,10 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public virtual Response<FakeResource> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(key, nameof(key));
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
 
             using var scope = _fakeClientDiagnostics.CreateScope("FakeResource.RemoveTag");
             scope.Start();

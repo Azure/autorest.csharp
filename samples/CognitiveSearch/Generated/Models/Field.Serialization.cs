@@ -20,52 +20,52 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(Name);
             writer.WritePropertyName("type"u8);
             writer.WriteStringValue(Type.ToString());
-            if (Optional.IsDefined(Key))
+            if (Key.HasValue)
             {
                 writer.WritePropertyName("key"u8);
                 writer.WriteBooleanValue(Key.Value);
             }
-            if (Optional.IsDefined(Retrievable))
+            if (Retrievable.HasValue)
             {
                 writer.WritePropertyName("retrievable"u8);
                 writer.WriteBooleanValue(Retrievable.Value);
             }
-            if (Optional.IsDefined(Searchable))
+            if (Searchable.HasValue)
             {
                 writer.WritePropertyName("searchable"u8);
                 writer.WriteBooleanValue(Searchable.Value);
             }
-            if (Optional.IsDefined(Filterable))
+            if (Filterable.HasValue)
             {
                 writer.WritePropertyName("filterable"u8);
                 writer.WriteBooleanValue(Filterable.Value);
             }
-            if (Optional.IsDefined(Sortable))
+            if (Sortable.HasValue)
             {
                 writer.WritePropertyName("sortable"u8);
                 writer.WriteBooleanValue(Sortable.Value);
             }
-            if (Optional.IsDefined(Facetable))
+            if (Facetable.HasValue)
             {
                 writer.WritePropertyName("facetable"u8);
                 writer.WriteBooleanValue(Facetable.Value);
             }
-            if (Optional.IsDefined(Analyzer))
+            if (Analyzer.HasValue)
             {
                 writer.WritePropertyName("analyzer"u8);
                 writer.WriteStringValue(Analyzer.Value.ToString());
             }
-            if (Optional.IsDefined(SearchAnalyzer))
+            if (SearchAnalyzer.HasValue)
             {
                 writer.WritePropertyName("searchAnalyzer"u8);
                 writer.WriteStringValue(SearchAnalyzer.Value.ToString());
             }
-            if (Optional.IsDefined(IndexAnalyzer))
+            if (IndexAnalyzer.HasValue)
             {
                 writer.WritePropertyName("indexAnalyzer"u8);
                 writer.WriteStringValue(IndexAnalyzer.Value.ToString());
             }
-            if (Optional.IsCollectionDefined(SynonymMaps))
+            if (!(SynonymMaps is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("synonymMaps"u8);
                 writer.WriteStartArray();
@@ -75,7 +75,7 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(Fields))
+            if (!(Fields is ChangeTrackingList<Field> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("fields"u8);
                 writer.WriteStartArray();

@@ -50,7 +50,10 @@ namespace Projection.ProjectedName
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='JsonAsync(JsonProjectedNameModel,CancellationToken)']/*" />
         public virtual async Task<Response> JsonAsync(JsonProjectedNameModel jsonProjectedNameModel, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(jsonProjectedNameModel, nameof(jsonProjectedNameModel));
+            if (jsonProjectedNameModel == null)
+            {
+                throw new ArgumentNullException(nameof(jsonProjectedNameModel));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = jsonProjectedNameModel.ToRequestContent();
@@ -64,7 +67,10 @@ namespace Projection.ProjectedName
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Json(JsonProjectedNameModel,CancellationToken)']/*" />
         public virtual Response Json(JsonProjectedNameModel jsonProjectedNameModel, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(jsonProjectedNameModel, nameof(jsonProjectedNameModel));
+            if (jsonProjectedNameModel == null)
+            {
+                throw new ArgumentNullException(nameof(jsonProjectedNameModel));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = jsonProjectedNameModel.ToRequestContent();
@@ -95,7 +101,10 @@ namespace Projection.ProjectedName
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='JsonAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> JsonAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Property.Json");
             scope.Start();
@@ -134,7 +143,10 @@ namespace Projection.ProjectedName
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Json(RequestContent,RequestContext)']/*" />
         public virtual Response Json(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Property.Json");
             scope.Start();
@@ -156,7 +168,10 @@ namespace Projection.ProjectedName
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='ClientAsync(ClientProjectedNameModel,CancellationToken)']/*" />
         public virtual async Task<Response> ClientAsync(ClientProjectedNameModel clientProjectedNameModel, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(clientProjectedNameModel, nameof(clientProjectedNameModel));
+            if (clientProjectedNameModel == null)
+            {
+                throw new ArgumentNullException(nameof(clientProjectedNameModel));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = clientProjectedNameModel.ToRequestContent();
@@ -170,7 +185,10 @@ namespace Projection.ProjectedName
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Client(ClientProjectedNameModel,CancellationToken)']/*" />
         public virtual Response Client(ClientProjectedNameModel clientProjectedNameModel, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(clientProjectedNameModel, nameof(clientProjectedNameModel));
+            if (clientProjectedNameModel == null)
+            {
+                throw new ArgumentNullException(nameof(clientProjectedNameModel));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = clientProjectedNameModel.ToRequestContent();
@@ -201,7 +219,10 @@ namespace Projection.ProjectedName
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='ClientAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> ClientAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Property.Client");
             scope.Start();
@@ -240,7 +261,10 @@ namespace Projection.ProjectedName
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Client(RequestContent,RequestContext)']/*" />
         public virtual Response Client(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Property.Client");
             scope.Start();
@@ -262,7 +286,10 @@ namespace Projection.ProjectedName
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='LanguageAsync(LanguageProjectedNameModel,CancellationToken)']/*" />
         public virtual async Task<Response> LanguageAsync(LanguageProjectedNameModel languageProjectedNameModel, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(languageProjectedNameModel, nameof(languageProjectedNameModel));
+            if (languageProjectedNameModel == null)
+            {
+                throw new ArgumentNullException(nameof(languageProjectedNameModel));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = languageProjectedNameModel.ToRequestContent();
@@ -276,7 +303,10 @@ namespace Projection.ProjectedName
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Language(LanguageProjectedNameModel,CancellationToken)']/*" />
         public virtual Response Language(LanguageProjectedNameModel languageProjectedNameModel, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(languageProjectedNameModel, nameof(languageProjectedNameModel));
+            if (languageProjectedNameModel == null)
+            {
+                throw new ArgumentNullException(nameof(languageProjectedNameModel));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = languageProjectedNameModel.ToRequestContent();
@@ -307,7 +337,10 @@ namespace Projection.ProjectedName
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='LanguageAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> LanguageAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Property.Language");
             scope.Start();
@@ -346,7 +379,10 @@ namespace Projection.ProjectedName
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Language(RequestContent,RequestContext)']/*" />
         public virtual Response Language(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Property.Language");
             scope.Start();
@@ -368,7 +404,10 @@ namespace Projection.ProjectedName
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='JsonAndClientAsync(JsonAndClientProjectedNameModel,CancellationToken)']/*" />
         public virtual async Task<Response> JsonAndClientAsync(JsonAndClientProjectedNameModel jsonAndClientProjectedNameModel, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(jsonAndClientProjectedNameModel, nameof(jsonAndClientProjectedNameModel));
+            if (jsonAndClientProjectedNameModel == null)
+            {
+                throw new ArgumentNullException(nameof(jsonAndClientProjectedNameModel));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = jsonAndClientProjectedNameModel.ToRequestContent();
@@ -382,7 +421,10 @@ namespace Projection.ProjectedName
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='JsonAndClient(JsonAndClientProjectedNameModel,CancellationToken)']/*" />
         public virtual Response JsonAndClient(JsonAndClientProjectedNameModel jsonAndClientProjectedNameModel, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(jsonAndClientProjectedNameModel, nameof(jsonAndClientProjectedNameModel));
+            if (jsonAndClientProjectedNameModel == null)
+            {
+                throw new ArgumentNullException(nameof(jsonAndClientProjectedNameModel));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = jsonAndClientProjectedNameModel.ToRequestContent();
@@ -413,7 +455,10 @@ namespace Projection.ProjectedName
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='JsonAndClientAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> JsonAndClientAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Property.JsonAndClient");
             scope.Start();
@@ -452,7 +497,10 @@ namespace Projection.ProjectedName
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='JsonAndClient(RequestContent,RequestContext)']/*" />
         public virtual Response JsonAndClient(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Property.JsonAndClient");
             scope.Start();

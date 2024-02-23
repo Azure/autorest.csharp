@@ -34,7 +34,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            if (Optional.IsDefined(OptionalPropertyOnBase))
+            if (OptionalPropertyOnBase != null)
             {
                 writer.WritePropertyName("optionalPropertyOnBase"u8);
                 writer.WriteStringValue(OptionalPropertyOnBase);
@@ -88,7 +88,7 @@ namespace ModelsTypeSpec.Models
                     List<CollectionItem> array = new List<CollectionItem>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CollectionItem.DeserializeCollectionItem(item));
+                        array.Add(CollectionItem.DeserializeCollectionItem(item, options));
                     }
                     requiredList = array;
                     continue;

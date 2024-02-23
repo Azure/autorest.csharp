@@ -20,25 +20,25 @@ namespace xml_service.Models
         private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "slideshow");
-            if (Optional.IsDefined(Title))
+            if (Title != null)
             {
                 writer.WriteStartAttribute("title");
                 writer.WriteValue(Title);
                 writer.WriteEndAttribute();
             }
-            if (Optional.IsDefined(Date))
+            if (Date != null)
             {
                 writer.WriteStartAttribute("date");
                 writer.WriteValue(Date);
                 writer.WriteEndAttribute();
             }
-            if (Optional.IsDefined(Author))
+            if (Author != null)
             {
                 writer.WriteStartAttribute("author");
                 writer.WriteValue(Author);
                 writer.WriteEndAttribute();
             }
-            if (Optional.IsCollectionDefined(Slides))
+            if (!(Slides is ChangeTrackingList<Slide> collection && collection.IsUndefined))
             {
                 foreach (var item in Slides)
                 {

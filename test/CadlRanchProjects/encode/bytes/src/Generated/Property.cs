@@ -50,7 +50,10 @@ namespace Encode.Bytes
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='DefaultAsync(DefaultBytesProperty,CancellationToken)']/*" />
         public virtual async Task<Response<DefaultBytesProperty>> DefaultAsync(DefaultBytesProperty body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -64,7 +67,10 @@ namespace Encode.Bytes
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Default(DefaultBytesProperty,CancellationToken)']/*" />
         public virtual Response<DefaultBytesProperty> Default(DefaultBytesProperty body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -95,7 +101,10 @@ namespace Encode.Bytes
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='DefaultAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> DefaultAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Property.Default");
             scope.Start();
@@ -134,7 +143,10 @@ namespace Encode.Bytes
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Default(RequestContent,RequestContext)']/*" />
         public virtual Response Default(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Property.Default");
             scope.Start();
@@ -156,7 +168,10 @@ namespace Encode.Bytes
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Base64Async(Base64BytesProperty,CancellationToken)']/*" />
         public virtual async Task<Response<Base64BytesProperty>> Base64Async(Base64BytesProperty body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -170,7 +185,10 @@ namespace Encode.Bytes
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Base64(Base64BytesProperty,CancellationToken)']/*" />
         public virtual Response<Base64BytesProperty> Base64(Base64BytesProperty body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -201,7 +219,10 @@ namespace Encode.Bytes
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Base64Async(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> Base64Async(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Property.Base64");
             scope.Start();
@@ -240,7 +261,10 @@ namespace Encode.Bytes
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Base64(RequestContent,RequestContext)']/*" />
         public virtual Response Base64(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Property.Base64");
             scope.Start();
@@ -262,7 +286,10 @@ namespace Encode.Bytes
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Base64urlAsync(Base64urlBytesProperty,CancellationToken)']/*" />
         public virtual async Task<Response<Base64urlBytesProperty>> Base64urlAsync(Base64urlBytesProperty body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -276,7 +303,10 @@ namespace Encode.Bytes
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Base64url(Base64urlBytesProperty,CancellationToken)']/*" />
         public virtual Response<Base64urlBytesProperty> Base64url(Base64urlBytesProperty body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -307,7 +337,10 @@ namespace Encode.Bytes
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Base64urlAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> Base64urlAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Property.Base64url");
             scope.Start();
@@ -346,7 +379,10 @@ namespace Encode.Bytes
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Base64url(RequestContent,RequestContext)']/*" />
         public virtual Response Base64url(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Property.Base64url");
             scope.Start();
@@ -368,7 +404,10 @@ namespace Encode.Bytes
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Base64urlArrayAsync(Base64urlArrayBytesProperty,CancellationToken)']/*" />
         public virtual async Task<Response<Base64urlArrayBytesProperty>> Base64urlArrayAsync(Base64urlArrayBytesProperty body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -382,7 +421,10 @@ namespace Encode.Bytes
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Base64urlArray(Base64urlArrayBytesProperty,CancellationToken)']/*" />
         public virtual Response<Base64urlArrayBytesProperty> Base64urlArray(Base64urlArrayBytesProperty body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -413,7 +455,10 @@ namespace Encode.Bytes
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Base64urlArrayAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> Base64urlArrayAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Property.Base64urlArray");
             scope.Start();
@@ -452,7 +497,10 @@ namespace Encode.Bytes
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Base64urlArray(RequestContent,RequestContext)']/*" />
         public virtual Response Base64urlArray(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Property.Base64urlArray");
             scope.Start();

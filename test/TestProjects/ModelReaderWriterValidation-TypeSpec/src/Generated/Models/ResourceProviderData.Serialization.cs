@@ -27,27 +27,27 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (Optional.IsDefined(Namespace))
+            if (Namespace != null)
             {
                 writer.WritePropertyName("namespace"u8);
                 writer.WriteStringValue(Namespace);
             }
-            if (Optional.IsDefined(RegistrationState))
+            if (RegistrationState != null)
             {
                 writer.WritePropertyName("registrationState"u8);
                 writer.WriteStringValue(RegistrationState);
             }
-            if (Optional.IsDefined(RegistrationPolicy))
+            if (RegistrationPolicy != null)
             {
                 writer.WritePropertyName("registrationPolicy"u8);
                 writer.WriteStringValue(RegistrationPolicy);
             }
-            if (Optional.IsCollectionDefined(ResourceTypes))
+            if (!(ResourceTypes is ChangeTrackingList<ProviderResourceType> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("resourceTypes"u8);
                 writer.WriteStartArray();
@@ -57,7 +57,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(ProviderAuthorizationConsentState))
+            if (ProviderAuthorizationConsentState.HasValue)
             {
                 writer.WritePropertyName("providerAuthorizationConsentState"u8);
                 writer.WriteStringValue(ProviderAuthorizationConsentState.Value.ToString());
@@ -139,7 +139,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                     List<ProviderResourceType> array = new List<ProviderResourceType>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ProviderResourceType.DeserializeProviderResourceType(item));
+                        array.Add(ProviderResourceType.DeserializeProviderResourceType(item, options));
                     }
                     resourceTypes = array;
                     continue;

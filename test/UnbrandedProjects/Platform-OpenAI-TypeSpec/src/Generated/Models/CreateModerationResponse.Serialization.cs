@@ -94,7 +94,7 @@ namespace OpenAI.Models
                     List<CreateModerationResponseResult> array = new List<CreateModerationResponseResult>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CreateModerationResponseResult.DeserializeCreateModerationResponseResult(item));
+                        array.Add(CreateModerationResponseResult.DeserializeCreateModerationResponseResult(item, options));
                     }
                     results = array;
                     continue;

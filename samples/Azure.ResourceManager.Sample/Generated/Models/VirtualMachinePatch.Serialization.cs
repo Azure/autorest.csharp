@@ -28,17 +28,17 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Plan))
+            if (Plan != null)
             {
                 writer.WritePropertyName("plan"u8);
                 writer.WriteObjectValue(Plan);
             }
-            if (Optional.IsDefined(Identity))
+            if (Identity != null)
             {
                 writer.WritePropertyName("identity"u8);
                 JsonSerializer.Serialize(writer, Identity);
             }
-            if (Optional.IsCollectionDefined(Zones))
+            if (!(Zones is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("zones"u8);
                 writer.WriteStartArray();
@@ -48,7 +48,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -61,102 +61,102 @@ namespace Azure.ResourceManager.Sample.Models
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(HardwareProfile))
+            if (HardwareProfile != null)
             {
                 writer.WritePropertyName("hardwareProfile"u8);
                 writer.WriteObjectValue(HardwareProfile);
             }
-            if (Optional.IsDefined(StorageProfile))
+            if (StorageProfile != null)
             {
                 writer.WritePropertyName("storageProfile"u8);
                 writer.WriteObjectValue(StorageProfile);
             }
-            if (Optional.IsDefined(AdditionalCapabilities))
+            if (AdditionalCapabilities != null)
             {
                 writer.WritePropertyName("additionalCapabilities"u8);
                 writer.WriteObjectValue(AdditionalCapabilities);
             }
-            if (Optional.IsDefined(OSProfile))
+            if (OSProfile != null)
             {
                 writer.WritePropertyName("osProfile"u8);
                 writer.WriteObjectValue(OSProfile);
             }
-            if (Optional.IsDefined(NetworkProfile))
+            if (NetworkProfile != null)
             {
                 writer.WritePropertyName("networkProfile"u8);
                 writer.WriteObjectValue(NetworkProfile);
             }
-            if (Optional.IsDefined(SecurityProfile))
+            if (SecurityProfile != null)
             {
                 writer.WritePropertyName("securityProfile"u8);
                 writer.WriteObjectValue(SecurityProfile);
             }
-            if (Optional.IsDefined(DiagnosticsProfile))
+            if (DiagnosticsProfile != null)
             {
                 writer.WritePropertyName("diagnosticsProfile"u8);
                 writer.WriteObjectValue(DiagnosticsProfile);
             }
-            if (Optional.IsDefined(AvailabilitySet))
+            if (AvailabilitySet != null)
             {
                 writer.WritePropertyName("availabilitySet"u8);
                 JsonSerializer.Serialize(writer, AvailabilitySet);
             }
-            if (Optional.IsDefined(VirtualMachineScaleSet))
+            if (VirtualMachineScaleSet != null)
             {
                 writer.WritePropertyName("virtualMachineScaleSet"u8);
                 JsonSerializer.Serialize(writer, VirtualMachineScaleSet);
             }
-            if (Optional.IsDefined(ProximityPlacementGroup))
+            if (ProximityPlacementGroup != null)
             {
                 writer.WritePropertyName("proximityPlacementGroup"u8);
                 JsonSerializer.Serialize(writer, ProximityPlacementGroup);
             }
-            if (Optional.IsDefined(Priority))
+            if (Priority.HasValue)
             {
                 writer.WritePropertyName("priority"u8);
                 writer.WriteStringValue(Priority.Value.ToString());
             }
-            if (Optional.IsDefined(EvictionPolicy))
+            if (EvictionPolicy.HasValue)
             {
                 writer.WritePropertyName("evictionPolicy"u8);
                 writer.WriteStringValue(EvictionPolicy.Value.ToString());
             }
-            if (Optional.IsDefined(BillingProfile))
+            if (BillingProfile != null)
             {
                 writer.WritePropertyName("billingProfile"u8);
                 writer.WriteObjectValue(BillingProfile);
             }
-            if (Optional.IsDefined(Host))
+            if (Host != null)
             {
                 writer.WritePropertyName("host"u8);
                 JsonSerializer.Serialize(writer, Host);
             }
-            if (Optional.IsDefined(HostGroup))
+            if (HostGroup != null)
             {
                 writer.WritePropertyName("hostGroup"u8);
                 JsonSerializer.Serialize(writer, HostGroup);
             }
-            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
+            if (options.Format != "W" && ProvisioningState != null)
             {
                 writer.WritePropertyName("provisioningState"u8);
                 writer.WriteStringValue(ProvisioningState);
             }
-            if (options.Format != "W" && Optional.IsDefined(InstanceView))
+            if (options.Format != "W" && InstanceView != null)
             {
                 writer.WritePropertyName("instanceView"u8);
                 writer.WriteObjectValue(InstanceView);
             }
-            if (Optional.IsDefined(LicenseType))
+            if (LicenseType != null)
             {
                 writer.WritePropertyName("licenseType"u8);
                 writer.WriteStringValue(LicenseType);
             }
-            if (options.Format != "W" && Optional.IsDefined(VmId))
+            if (options.Format != "W" && VmId != null)
             {
                 writer.WritePropertyName("vmId"u8);
                 writer.WriteStringValue(VmId);
             }
-            if (Optional.IsDefined(ExtensionsTimeBudget))
+            if (ExtensionsTimeBudget != null)
             {
                 writer.WritePropertyName("extensionsTimeBudget"u8);
                 writer.WriteStringValue(ExtensionsTimeBudget);
@@ -234,7 +234,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    plan = SamplePlan.DeserializeSamplePlan(property.Value);
+                    plan = SamplePlan.DeserializeSamplePlan(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("identity"u8))
@@ -289,7 +289,7 @@ namespace Azure.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            hardwareProfile = HardwareProfile.DeserializeHardwareProfile(property0.Value);
+                            hardwareProfile = HardwareProfile.DeserializeHardwareProfile(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("storageProfile"u8))
@@ -298,7 +298,7 @@ namespace Azure.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            storageProfile = StorageProfile.DeserializeStorageProfile(property0.Value);
+                            storageProfile = StorageProfile.DeserializeStorageProfile(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("additionalCapabilities"u8))
@@ -307,7 +307,7 @@ namespace Azure.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            additionalCapabilities = AdditionalCapabilities.DeserializeAdditionalCapabilities(property0.Value);
+                            additionalCapabilities = AdditionalCapabilities.DeserializeAdditionalCapabilities(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("osProfile"u8))
@@ -316,7 +316,7 @@ namespace Azure.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            osProfile = OSProfile.DeserializeOSProfile(property0.Value);
+                            osProfile = OSProfile.DeserializeOSProfile(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("networkProfile"u8))
@@ -325,7 +325,7 @@ namespace Azure.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            networkProfile = NetworkProfile.DeserializeNetworkProfile(property0.Value);
+                            networkProfile = NetworkProfile.DeserializeNetworkProfile(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("securityProfile"u8))
@@ -334,7 +334,7 @@ namespace Azure.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            securityProfile = SecurityProfile.DeserializeSecurityProfile(property0.Value);
+                            securityProfile = SecurityProfile.DeserializeSecurityProfile(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("diagnosticsProfile"u8))
@@ -343,7 +343,7 @@ namespace Azure.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            diagnosticsProfile = DiagnosticsProfile.DeserializeDiagnosticsProfile(property0.Value);
+                            diagnosticsProfile = DiagnosticsProfile.DeserializeDiagnosticsProfile(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("availabilitySet"u8))
@@ -397,7 +397,7 @@ namespace Azure.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            billingProfile = BillingProfile.DeserializeBillingProfile(property0.Value);
+                            billingProfile = BillingProfile.DeserializeBillingProfile(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("host"u8))
@@ -429,7 +429,7 @@ namespace Azure.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            instanceView = VirtualMachineInstanceView.DeserializeVirtualMachineInstanceView(property0.Value);
+                            instanceView = VirtualMachineInstanceView.DeserializeVirtualMachineInstanceView(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("licenseType"u8))

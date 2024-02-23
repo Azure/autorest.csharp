@@ -16,12 +16,12 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Sku))
+            if (Sku != null)
             {
                 writer.WritePropertyName("sku"u8);
                 writer.WriteObjectValue(Sku);
             }
-            if (Optional.IsCollectionDefined(Zones))
+            if (!(Zones is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("zones"u8);
                 writer.WriteStartArray();
@@ -31,17 +31,17 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (Optional.IsDefined(Location))
+            if (Location != null)
             {
                 writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location);
             }
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -54,27 +54,27 @@ namespace Azure.Network.Management.Interface.Models
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(PublicIPAllocationMethod))
+            if (PublicIPAllocationMethod.HasValue)
             {
                 writer.WritePropertyName("publicIPAllocationMethod"u8);
                 writer.WriteStringValue(PublicIPAllocationMethod.Value.ToString());
             }
-            if (Optional.IsDefined(PublicIPAddressVersion))
+            if (PublicIPAddressVersion.HasValue)
             {
                 writer.WritePropertyName("publicIPAddressVersion"u8);
                 writer.WriteStringValue(PublicIPAddressVersion.Value.ToString());
             }
-            if (Optional.IsDefined(DnsSettings))
+            if (DnsSettings != null)
             {
                 writer.WritePropertyName("dnsSettings"u8);
                 writer.WriteObjectValue(DnsSettings);
             }
-            if (Optional.IsDefined(DdosSettings))
+            if (DdosSettings != null)
             {
                 writer.WritePropertyName("ddosSettings"u8);
                 writer.WriteObjectValue(DdosSettings);
             }
-            if (Optional.IsCollectionDefined(IpTags))
+            if (!(IpTags is ChangeTrackingList<IpTag> collection1 && collection1.IsUndefined))
             {
                 writer.WritePropertyName("ipTags"u8);
                 writer.WriteStartArray();
@@ -84,17 +84,17 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(IpAddress))
+            if (IpAddress != null)
             {
                 writer.WritePropertyName("ipAddress"u8);
                 writer.WriteStringValue(IpAddress);
             }
-            if (Optional.IsDefined(PublicIPPrefix))
+            if (PublicIPPrefix != null)
             {
                 writer.WritePropertyName("publicIPPrefix"u8);
                 writer.WriteObjectValue(PublicIPPrefix);
             }
-            if (Optional.IsDefined(IdleTimeoutInMinutes))
+            if (IdleTimeoutInMinutes.HasValue)
             {
                 writer.WritePropertyName("idleTimeoutInMinutes"u8);
                 writer.WriteNumberValue(IdleTimeoutInMinutes.Value);

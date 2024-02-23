@@ -76,8 +76,22 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<TrackedResourceModel2ListResult>> ListAsync(string subscriptionId, string resourceGroupName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (resourceGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
+            }
 
             using var message = CreateListRequest(subscriptionId, resourceGroupName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -102,8 +116,22 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<TrackedResourceModel2ListResult> List(string subscriptionId, string resourceGroupName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (resourceGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
+            }
 
             using var message = CreateListRequest(subscriptionId, resourceGroupName);
             _pipeline.Send(message, cancellationToken);
@@ -168,10 +196,34 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="trackedResourceModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<TrackedResourceModel2>> PutAsync(string subscriptionId, string resourceGroupName, string trackedResourceModel2SName, TrackedResourceModel2 trackedResourceModel2, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(trackedResourceModel2SName, nameof(trackedResourceModel2SName));
-            Argument.AssertNotNull(trackedResourceModel2, nameof(trackedResourceModel2));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (resourceGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
+            }
+            if (trackedResourceModel2SName == null)
+            {
+                throw new ArgumentNullException(nameof(trackedResourceModel2SName));
+            }
+            if (trackedResourceModel2SName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(trackedResourceModel2SName));
+            }
+            if (trackedResourceModel2 == null)
+            {
+                throw new ArgumentNullException(nameof(trackedResourceModel2));
+            }
 
             using var message = CreatePutRequest(subscriptionId, resourceGroupName, trackedResourceModel2SName, trackedResourceModel2);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -198,10 +250,34 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="trackedResourceModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<TrackedResourceModel2> Put(string subscriptionId, string resourceGroupName, string trackedResourceModel2SName, TrackedResourceModel2 trackedResourceModel2, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(trackedResourceModel2SName, nameof(trackedResourceModel2SName));
-            Argument.AssertNotNull(trackedResourceModel2, nameof(trackedResourceModel2));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (resourceGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
+            }
+            if (trackedResourceModel2SName == null)
+            {
+                throw new ArgumentNullException(nameof(trackedResourceModel2SName));
+            }
+            if (trackedResourceModel2SName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(trackedResourceModel2SName));
+            }
+            if (trackedResourceModel2 == null)
+            {
+                throw new ArgumentNullException(nameof(trackedResourceModel2));
+            }
 
             using var message = CreatePutRequest(subscriptionId, resourceGroupName, trackedResourceModel2SName, trackedResourceModel2);
             _pipeline.Send(message, cancellationToken);
@@ -261,9 +337,30 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="trackedResourceModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<TrackedResourceModel2>> GetAsync(string subscriptionId, string resourceGroupName, string trackedResourceModel2SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(trackedResourceModel2SName, nameof(trackedResourceModel2SName));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (resourceGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
+            }
+            if (trackedResourceModel2SName == null)
+            {
+                throw new ArgumentNullException(nameof(trackedResourceModel2SName));
+            }
+            if (trackedResourceModel2SName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(trackedResourceModel2SName));
+            }
 
             using var message = CreateGetRequest(subscriptionId, resourceGroupName, trackedResourceModel2SName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -289,9 +386,30 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="trackedResourceModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<TrackedResourceModel2> Get(string subscriptionId, string resourceGroupName, string trackedResourceModel2SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(trackedResourceModel2SName, nameof(trackedResourceModel2SName));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (resourceGroupName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
+            }
+            if (trackedResourceModel2SName == null)
+            {
+                throw new ArgumentNullException(nameof(trackedResourceModel2SName));
+            }
+            if (trackedResourceModel2SName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(trackedResourceModel2SName));
+            }
 
             using var message = CreateGetRequest(subscriptionId, resourceGroupName, trackedResourceModel2SName);
             _pipeline.Send(message, cancellationToken);

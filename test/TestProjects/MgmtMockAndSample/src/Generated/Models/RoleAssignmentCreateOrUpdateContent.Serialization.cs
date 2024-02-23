@@ -17,17 +17,17 @@ namespace MgmtMockAndSample.Models
             writer.WriteStartObject();
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(RoleDefinitionId))
+            if (RoleDefinitionId != null)
             {
                 writer.WritePropertyName("roleDefinitionId"u8);
                 writer.WriteStringValue(RoleDefinitionId);
             }
-            if (Optional.IsDefined(PrincipalId))
+            if (PrincipalId != null)
             {
                 writer.WritePropertyName("principalId"u8);
                 writer.WriteStringValue(PrincipalId);
             }
-            if (Optional.IsDefined(CanDelegate))
+            if (CanDelegate.HasValue)
             {
                 writer.WritePropertyName("canDelegate"u8);
                 writer.WriteBooleanValue(CanDelegate.Value);

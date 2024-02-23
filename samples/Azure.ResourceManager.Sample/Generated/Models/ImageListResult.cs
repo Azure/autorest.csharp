@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Azure.Core;
 using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
@@ -59,7 +58,10 @@ namespace Azure.ResourceManager.Sample.Models
         /// <exception cref="ArgumentNullException"> <paramref name="images"/> is null. </exception>
         internal ImageListResult(IEnumerable<ImageData> images)
         {
-            Argument.AssertNotNull(images, nameof(images));
+            if (images == null)
+            {
+                throw new ArgumentNullException(nameof(images));
+            }
 
             Images = images.ToList();
         }

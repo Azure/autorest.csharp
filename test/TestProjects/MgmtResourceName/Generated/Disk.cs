@@ -194,7 +194,10 @@ namespace MgmtResourceName
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<Disk>> UpdateAsync(WaitUntil waitUntil, DiskData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(data, nameof(data));
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _diskClientDiagnostics.CreateScope("Disk.Update");
             scope.Start();
@@ -241,7 +244,10 @@ namespace MgmtResourceName
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<Disk> Update(WaitUntil waitUntil, DiskData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(data, nameof(data));
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _diskClientDiagnostics.CreateScope("Disk.Update");
             scope.Start();

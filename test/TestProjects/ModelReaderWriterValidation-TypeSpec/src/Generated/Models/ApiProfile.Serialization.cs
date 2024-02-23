@@ -27,12 +27,12 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(ProfileVersion))
+            if (ProfileVersion != null)
             {
                 writer.WritePropertyName("profileVersion"u8);
                 writer.WriteStringValue(ProfileVersion);
             }
-            if (Optional.IsDefined(ApiVersion))
+            if (ApiVersion != null)
             {
                 writer.WritePropertyName("apiVersion"u8);
                 writer.WriteStringValue(ApiVersion);

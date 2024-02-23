@@ -36,7 +36,10 @@ namespace _Type.Union
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public UnionClient(Uri endpoint, UnionClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
             options ??= new UnionClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

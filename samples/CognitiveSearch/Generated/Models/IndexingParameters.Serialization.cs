@@ -16,22 +16,22 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(BatchSize))
+            if (BatchSize.HasValue)
             {
                 writer.WritePropertyName("batchSize"u8);
                 writer.WriteNumberValue(BatchSize.Value);
             }
-            if (Optional.IsDefined(MaxFailedItems))
+            if (MaxFailedItems.HasValue)
             {
                 writer.WritePropertyName("maxFailedItems"u8);
                 writer.WriteNumberValue(MaxFailedItems.Value);
             }
-            if (Optional.IsDefined(MaxFailedItemsPerBatch))
+            if (MaxFailedItemsPerBatch.HasValue)
             {
                 writer.WritePropertyName("maxFailedItemsPerBatch"u8);
                 writer.WriteNumberValue(MaxFailedItemsPerBatch.Value);
             }
-            if (Optional.IsCollectionDefined(Configuration))
+            if (!(Configuration is ChangeTrackingDictionary<string, object> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("configuration"u8);
                 writer.WriteStartObject();

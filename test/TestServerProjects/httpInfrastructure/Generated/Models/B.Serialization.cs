@@ -26,12 +26,12 @@ namespace httpInfrastructure.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(TextStatusCode))
+            if (TextStatusCode != null)
             {
                 writer.WritePropertyName("textStatusCode"u8);
                 writer.WriteStringValue(TextStatusCode);
             }
-            if (Optional.IsDefined(StatusCode))
+            if (StatusCode != null)
             {
                 writer.WritePropertyName("statusCode"u8);
                 writer.WriteStringValue(StatusCode);

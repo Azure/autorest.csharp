@@ -19,34 +19,34 @@ namespace MgmtAcronymMapping.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(Primary))
+            if (Primary.HasValue)
             {
                 writer.WritePropertyName("primary"u8);
                 writer.WriteBooleanValue(Primary.Value);
             }
-            if (Optional.IsDefined(EnableAcceleratedNetworking))
+            if (EnableAcceleratedNetworking.HasValue)
             {
                 writer.WritePropertyName("enableAcceleratedNetworking"u8);
                 writer.WriteBooleanValue(EnableAcceleratedNetworking.Value);
             }
-            if (Optional.IsDefined(NetworkSecurityGroup))
+            if (NetworkSecurityGroup != null)
             {
                 writer.WritePropertyName("networkSecurityGroup"u8);
                 JsonSerializer.Serialize(writer, NetworkSecurityGroup);
             }
-            if (Optional.IsDefined(DnsSettings))
+            if (DnsSettings != null)
             {
                 writer.WritePropertyName("dnsSettings"u8);
                 writer.WriteObjectValue(DnsSettings);
             }
-            if (Optional.IsCollectionDefined(IPConfigurations))
+            if (!(IPConfigurations is ChangeTrackingList<VirtualMachineScaleSetIPConfiguration> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("ipConfigurations"u8);
                 writer.WriteStartArray();
@@ -56,7 +56,7 @@ namespace MgmtAcronymMapping.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(EnableIPForwarding))
+            if (EnableIPForwarding.HasValue)
             {
                 writer.WritePropertyName("enableIPForwarding"u8);
                 writer.WriteBooleanValue(EnableIPForwarding.Value);

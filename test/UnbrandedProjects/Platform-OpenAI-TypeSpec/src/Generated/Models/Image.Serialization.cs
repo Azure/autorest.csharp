@@ -23,12 +23,12 @@ namespace OpenAI.Models
             }
 
             writer.WriteStartObject();
-            if (OptionalProperty.IsDefined(Url))
+            if (Url != null)
             {
                 writer.WritePropertyName("url"u8);
                 writer.WriteStringValue(Url.AbsoluteUri);
             }
-            if (OptionalProperty.IsDefined(B64Json))
+            if (B64Json != null)
             {
                 writer.WritePropertyName("b64_json"u8);
                 writer.WriteBase64StringValue(B64Json.ToArray(), "D");

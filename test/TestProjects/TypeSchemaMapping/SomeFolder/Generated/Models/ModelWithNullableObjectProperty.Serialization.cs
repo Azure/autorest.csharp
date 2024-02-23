@@ -26,7 +26,7 @@ namespace TypeSchemaMapping.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(ModelProperty))
+            if (ModelProperty.ValueKind != JsonValueKind.Undefined)
             {
                 writer.WritePropertyName("ModelProperty"u8);
                 ModelProperty.WriteTo(writer);

@@ -197,7 +197,10 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<SubParentWithLocResource>> UpdateAsync(WaitUntil waitUntil, SubParentWithLocData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(data, nameof(data));
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _subParentWithLocClientDiagnostics.CreateScope("SubParentWithLocResource.Update");
             scope.Start();
@@ -245,7 +248,10 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<SubParentWithLocResource> Update(WaitUntil waitUntil, SubParentWithLocData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(data, nameof(data));
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _subParentWithLocClientDiagnostics.CreateScope("SubParentWithLocResource.Update");
             scope.Start();
@@ -293,8 +299,14 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
         public virtual async Task<Response<SubParentWithLocResource>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(key, nameof(key));
-            Argument.AssertNotNull(value, nameof(value));
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
 
             using var scope = _subParentWithLocClientDiagnostics.CreateScope("SubParentWithLocResource.AddTag");
             scope.Start();
@@ -350,8 +362,14 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
         public virtual Response<SubParentWithLocResource> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(key, nameof(key));
-            Argument.AssertNotNull(value, nameof(value));
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
 
             using var scope = _subParentWithLocClientDiagnostics.CreateScope("SubParentWithLocResource.AddTag");
             scope.Start();
@@ -406,7 +424,10 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
         public virtual async Task<Response<SubParentWithLocResource>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(tags, nameof(tags));
+            if (tags == null)
+            {
+                throw new ArgumentNullException(nameof(tags));
+            }
 
             using var scope = _subParentWithLocClientDiagnostics.CreateScope("SubParentWithLocResource.SetTags");
             scope.Start();
@@ -462,7 +483,10 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
         public virtual Response<SubParentWithLocResource> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(tags, nameof(tags));
+            if (tags == null)
+            {
+                throw new ArgumentNullException(nameof(tags));
+            }
 
             using var scope = _subParentWithLocClientDiagnostics.CreateScope("SubParentWithLocResource.SetTags");
             scope.Start();
@@ -518,7 +542,10 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public virtual async Task<Response<SubParentWithLocResource>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(key, nameof(key));
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
 
             using var scope = _subParentWithLocClientDiagnostics.CreateScope("SubParentWithLocResource.RemoveTag");
             scope.Start();
@@ -573,7 +600,10 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public virtual Response<SubParentWithLocResource> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(key, nameof(key));
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
 
             using var scope = _subParentWithLocClientDiagnostics.CreateScope("SubParentWithLocResource.RemoveTag");
             scope.Start();

@@ -17,32 +17,32 @@ namespace AppConfiguration.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Key))
+            if (Key != null)
             {
                 writer.WritePropertyName("key"u8);
                 writer.WriteStringValue(Key);
             }
-            if (Optional.IsDefined(Label))
+            if (Label != null)
             {
                 writer.WritePropertyName("label"u8);
                 writer.WriteStringValue(Label);
             }
-            if (Optional.IsDefined(ContentType))
+            if (ContentType != null)
             {
                 writer.WritePropertyName("content_type"u8);
                 writer.WriteStringValue(ContentType);
             }
-            if (Optional.IsDefined(Value))
+            if (Value != null)
             {
                 writer.WritePropertyName("value"u8);
                 writer.WriteStringValue(Value);
             }
-            if (Optional.IsDefined(LastModified))
+            if (LastModified.HasValue)
             {
                 writer.WritePropertyName("last_modified"u8);
                 writer.WriteStringValue(LastModified.Value, "O");
             }
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -53,12 +53,12 @@ namespace AppConfiguration.Models
                 }
                 writer.WriteEndObject();
             }
-            if (Optional.IsDefined(Locked))
+            if (Locked.HasValue)
             {
                 writer.WritePropertyName("locked"u8);
                 writer.WriteBooleanValue(Locked.Value);
             }
-            if (Optional.IsDefined(Etag))
+            if (Etag != null)
             {
                 writer.WritePropertyName("etag"u8);
                 writer.WriteStringValue(Etag);

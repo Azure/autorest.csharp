@@ -28,7 +28,7 @@ namespace body_complex.Models
             writer.WriteStartObject();
             writer.WritePropertyName("fish.type"u8);
             writer.WriteStringValue(FishType);
-            if (Optional.IsDefined(Species))
+            if (Species != null)
             {
                 writer.WritePropertyName("species"u8);
                 writer.WriteStringValue(Species);
@@ -75,10 +75,10 @@ namespace body_complex.Models
             {
                 switch (discriminator.GetString())
                 {
-                    case "DotSalmon": return DotSalmon.DeserializeDotSalmon(element);
+                    case "DotSalmon": return DotSalmon.DeserializeDotSalmon(element, options);
                 }
             }
-            return UnknownDotFish.DeserializeUnknownDotFish(element);
+            return UnknownDotFish.DeserializeUnknownDotFish(element, options);
         }
 
         BinaryData IPersistableModel<DotFish>.Write(ModelReaderWriterOptions options)

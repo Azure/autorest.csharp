@@ -82,7 +82,14 @@ namespace Azure.ResourceManager.Storage
         /// <exception cref="ArgumentNullException"> <paramref name="deletedAccountName"/> is null. </exception>
         public virtual async Task<Response<DeletedAccountResource>> GetAsync(AzureLocation location, string deletedAccountName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(deletedAccountName, nameof(deletedAccountName));
+            if (deletedAccountName == null)
+            {
+                throw new ArgumentNullException(nameof(deletedAccountName));
+            }
+            if (deletedAccountName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(deletedAccountName));
+            }
 
             using var scope = _deletedAccountClientDiagnostics.CreateScope("DeletedAccountCollection.Get");
             scope.Start();
@@ -128,7 +135,14 @@ namespace Azure.ResourceManager.Storage
         /// <exception cref="ArgumentNullException"> <paramref name="deletedAccountName"/> is null. </exception>
         public virtual Response<DeletedAccountResource> Get(AzureLocation location, string deletedAccountName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(deletedAccountName, nameof(deletedAccountName));
+            if (deletedAccountName == null)
+            {
+                throw new ArgumentNullException(nameof(deletedAccountName));
+            }
+            if (deletedAccountName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(deletedAccountName));
+            }
 
             using var scope = _deletedAccountClientDiagnostics.CreateScope("DeletedAccountCollection.Get");
             scope.Start();
@@ -234,7 +248,14 @@ namespace Azure.ResourceManager.Storage
         /// <exception cref="ArgumentNullException"> <paramref name="deletedAccountName"/> is null. </exception>
         public virtual async Task<Response<bool>> ExistsAsync(AzureLocation location, string deletedAccountName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(deletedAccountName, nameof(deletedAccountName));
+            if (deletedAccountName == null)
+            {
+                throw new ArgumentNullException(nameof(deletedAccountName));
+            }
+            if (deletedAccountName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(deletedAccountName));
+            }
 
             using var scope = _deletedAccountClientDiagnostics.CreateScope("DeletedAccountCollection.Exists");
             scope.Start();
@@ -278,7 +299,14 @@ namespace Azure.ResourceManager.Storage
         /// <exception cref="ArgumentNullException"> <paramref name="deletedAccountName"/> is null. </exception>
         public virtual Response<bool> Exists(AzureLocation location, string deletedAccountName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(deletedAccountName, nameof(deletedAccountName));
+            if (deletedAccountName == null)
+            {
+                throw new ArgumentNullException(nameof(deletedAccountName));
+            }
+            if (deletedAccountName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(deletedAccountName));
+            }
 
             using var scope = _deletedAccountClientDiagnostics.CreateScope("DeletedAccountCollection.Exists");
             scope.Start();
@@ -322,7 +350,14 @@ namespace Azure.ResourceManager.Storage
         /// <exception cref="ArgumentNullException"> <paramref name="deletedAccountName"/> is null. </exception>
         public virtual async Task<NullableResponse<DeletedAccountResource>> GetIfExistsAsync(AzureLocation location, string deletedAccountName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(deletedAccountName, nameof(deletedAccountName));
+            if (deletedAccountName == null)
+            {
+                throw new ArgumentNullException(nameof(deletedAccountName));
+            }
+            if (deletedAccountName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(deletedAccountName));
+            }
 
             using var scope = _deletedAccountClientDiagnostics.CreateScope("DeletedAccountCollection.GetIfExists");
             scope.Start();
@@ -368,7 +403,14 @@ namespace Azure.ResourceManager.Storage
         /// <exception cref="ArgumentNullException"> <paramref name="deletedAccountName"/> is null. </exception>
         public virtual NullableResponse<DeletedAccountResource> GetIfExists(AzureLocation location, string deletedAccountName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(deletedAccountName, nameof(deletedAccountName));
+            if (deletedAccountName == null)
+            {
+                throw new ArgumentNullException(nameof(deletedAccountName));
+            }
+            if (deletedAccountName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(deletedAccountName));
+            }
 
             using var scope = _deletedAccountClientDiagnostics.CreateScope("DeletedAccountCollection.GetIfExists");
             scope.Start();

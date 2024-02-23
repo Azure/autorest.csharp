@@ -27,7 +27,7 @@ namespace _Type.Property.Optionality.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Property))
+            if (!(Property is ChangeTrackingList<StringProperty> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("property"u8);
                 writer.WriteStartArray();
@@ -89,7 +89,7 @@ namespace _Type.Property.Optionality.Models
                     List<StringProperty> array = new List<StringProperty>();
                     foreach (var item in property0.Value.EnumerateArray())
                     {
-                        array.Add(StringProperty.DeserializeStringProperty(item));
+                        array.Add(StringProperty.DeserializeStringProperty(item, options));
                     }
                     property = array;
                     continue;

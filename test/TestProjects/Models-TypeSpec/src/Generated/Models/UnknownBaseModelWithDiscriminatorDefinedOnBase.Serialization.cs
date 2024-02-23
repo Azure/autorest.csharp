@@ -27,7 +27,7 @@ namespace ModelsTypeSpec.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(OptionalString))
+            if (OptionalString != null)
             {
                 writer.WritePropertyName("optionalString"u8);
                 writer.WriteStringValue(OptionalString);
@@ -61,7 +61,7 @@ namespace ModelsTypeSpec.Models
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeUnknownBaseModelWithDiscriminatorDefinedOnBase(document.RootElement, options);
+            return DeserializeBaseModelWithDiscriminatorDefinedOnBase(document.RootElement, options);
         }
 
         internal static UnknownBaseModelWithDiscriminatorDefinedOnBase DeserializeUnknownBaseModelWithDiscriminatorDefinedOnBase(JsonElement element, ModelReaderWriterOptions options = null)
@@ -119,7 +119,7 @@ namespace ModelsTypeSpec.Models
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeUnknownBaseModelWithDiscriminatorDefinedOnBase(document.RootElement, options);
+                        return DeserializeBaseModelWithDiscriminatorDefinedOnBase(document.RootElement, options);
                     }
                 default:
                     throw new FormatException($"The model {nameof(BaseModelWithDiscriminatorDefinedOnBase)} does not support '{options.Format}' format.");

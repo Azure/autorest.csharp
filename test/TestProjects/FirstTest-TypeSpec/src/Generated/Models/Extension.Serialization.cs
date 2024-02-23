@@ -29,7 +29,7 @@ namespace FirstTestTypeSpec.Models
             writer.WriteStartObject();
             writer.WritePropertyName("level"u8);
             writer.WriteNumberValue(Level);
-            if (Optional.IsCollectionDefined(Extension))
+            if (!(Extension is ChangeTrackingList<Extension> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("extension"u8);
                 writer.WriteStartArray();
@@ -97,7 +97,7 @@ namespace FirstTestTypeSpec.Models
                     List<Extension> array = new List<Extension>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DeserializeExtension(item));
+                        array.Add(DeserializeExtension(item, options));
                     }
                     extension = array;
                     continue;

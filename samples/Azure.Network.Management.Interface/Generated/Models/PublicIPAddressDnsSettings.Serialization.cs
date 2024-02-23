@@ -15,17 +15,17 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(DomainNameLabel))
+            if (DomainNameLabel != null)
             {
                 writer.WritePropertyName("domainNameLabel"u8);
                 writer.WriteStringValue(DomainNameLabel);
             }
-            if (Optional.IsDefined(Fqdn))
+            if (Fqdn != null)
             {
                 writer.WritePropertyName("fqdn"u8);
                 writer.WriteStringValue(Fqdn);
             }
-            if (Optional.IsDefined(ReverseFqdn))
+            if (ReverseFqdn != null)
             {
                 writer.WritePropertyName("reverseFqdn"u8);
                 writer.WriteStringValue(ReverseFqdn);

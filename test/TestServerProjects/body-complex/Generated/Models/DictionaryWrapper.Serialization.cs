@@ -26,7 +26,7 @@ namespace body_complex.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(DefaultProgram))
+            if (!(DefaultProgram is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 if (DefaultProgram != null)
                 {

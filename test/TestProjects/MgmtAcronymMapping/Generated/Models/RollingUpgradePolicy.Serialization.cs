@@ -15,22 +15,22 @@ namespace MgmtAcronymMapping.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(MaxBatchInstancePercent))
+            if (MaxBatchInstancePercent.HasValue)
             {
                 writer.WritePropertyName("maxBatchInstancePercent"u8);
                 writer.WriteNumberValue(MaxBatchInstancePercent.Value);
             }
-            if (Optional.IsDefined(MaxUnhealthyInstancePercent))
+            if (MaxUnhealthyInstancePercent.HasValue)
             {
                 writer.WritePropertyName("maxUnhealthyInstancePercent"u8);
                 writer.WriteNumberValue(MaxUnhealthyInstancePercent.Value);
             }
-            if (Optional.IsDefined(MaxUnhealthyUpgradedInstancePercent))
+            if (MaxUnhealthyUpgradedInstancePercent.HasValue)
             {
                 writer.WritePropertyName("maxUnhealthyUpgradedInstancePercent"u8);
                 writer.WriteNumberValue(MaxUnhealthyUpgradedInstancePercent.Value);
             }
-            if (Optional.IsDefined(PauseTimeBetweenBatches))
+            if (PauseTimeBetweenBatches != null)
             {
                 writer.WritePropertyName("pauseTimeBetweenBatches"u8);
                 writer.WriteStringValue(PauseTimeBetweenBatches);

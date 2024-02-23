@@ -26,7 +26,7 @@ namespace ModelWithConverterUsage.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(ConstProperty))
+            if (ConstProperty != null)
             {
                 writer.WritePropertyName("Const_Property"u8);
                 writer.WriteStringValue(ConstProperty);

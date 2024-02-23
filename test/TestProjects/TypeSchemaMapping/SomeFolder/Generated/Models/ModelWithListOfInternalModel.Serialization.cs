@@ -26,12 +26,12 @@ namespace TypeSchemaMapping.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && Optional.IsDefined(StringProperty))
+            if (options.Format != "W" && StringProperty != null)
             {
                 writer.WritePropertyName("StringProperty"u8);
                 writer.WriteStringValue(StringProperty);
             }
-            if (options.Format != "W" && Optional.IsCollectionDefined(InternalListProperty))
+            if (options.Format != "W" && !(InternalListProperty is ChangeTrackingList<InternalModel> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("InternalListProperty"u8);
                 writer.WriteStartArray();
@@ -99,7 +99,7 @@ namespace TypeSchemaMapping.Models
                     List<InternalModel> array = new List<InternalModel>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(InternalModel.DeserializeInternalModel(item));
+                        array.Add(InternalModel.DeserializeInternalModel(item, options));
                     }
                     internalListProperty = array;
                     continue;
