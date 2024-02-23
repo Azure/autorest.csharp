@@ -1116,9 +1116,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
 
             var targetType = jsonPropertySerialization.Value.Type;
-            if (TypeFactory.IsList(targetType) && !TypeFactory.IsReadOnlyMemory(targetType))
+            if (TypeFactory.IsList(targetType) && !TypeFactory.IsReadOnlyMemory(targetType) && !jsonPropertySerialization.IsRequired)
             {
-                return InvokeOptional.ToList(variable);
+                return InvokeOptional.FallBackToChangeTrackingList(variable);
             }
 
             if (sourceType.FrameworkType != Configuration.ApiTypes.OptionalPropertyType)

@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Common.Output.Models
 
             public static ValueExpression ToDictionary(ValueExpression dictionary) => new InvokeStaticMethodExpression(Configuration.ApiTypes.OptionalType, Configuration.ApiTypes.OptionalToDictionaryName, new[] { dictionary });
 
-            public static ValueExpression ToList(TypedValueExpression collection)
+            public static ValueExpression FallBackToChangeTrackingList(TypedValueExpression collection)
             {
                 var changeTrackingType = new CSharpType(Configuration.ApiTypes.ChangeTrackingListType, collection.Type.Arguments);
                 return NullCoalescing(collection, New.Instance(changeTrackingType));
