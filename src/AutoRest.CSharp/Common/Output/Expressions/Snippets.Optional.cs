@@ -45,7 +45,7 @@ namespace AutoRest.CSharp.Common.Output.Models
             public static ValueExpression ToList(TypedValueExpression collection)
             {
                 var changeTrackingType = new CSharpType(Configuration.ApiTypes.ChangeTrackingListType, collection.Type.Arguments);
-                return new TernaryConditionalOperator(Equal(collection, Null), New.Instance(changeTrackingType), collection);
+                return NullCoalescing(collection, New.Instance(changeTrackingType));
             }
 
             public static ValueExpression ToNullable(ValueExpression optional) => new InvokeStaticMethodExpression(Configuration.ApiTypes.OptionalType, Configuration.ApiTypes.OptionalToNullableName, new[] { optional });
