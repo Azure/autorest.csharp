@@ -906,7 +906,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 if (jsonProperty.SerializedType is { } type)
                 {
                     var propertyDeclaration = new CodeWriterDeclaration(jsonProperty.SerializedName.ToVariableName());
-                    if (!jsonProperty.IsRequired)
+                    if (!jsonProperty.IsRequired && !TypeFactory.IsList(type))
                     {
                         if (type.IsFrameworkType && type.FrameworkType == typeof(Nullable<>))
                         {
@@ -1110,7 +1110,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private static ValueExpression GetOptional(PropertySerialization jsonPropertySerialization, TypedValueExpression variable)
         {
             var sourceType = variable.Type;
-            if (!sourceType.IsFrameworkType || sourceType.FrameworkType != Configuration.ApiTypes.OptionalPropertyType)
+            if (!sourceType.IsFrameworkType)
             {
                 return variable;
             }
@@ -1119,6 +1119,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
             if (TypeFactory.IsList(targetType) && !TypeFactory.IsReadOnlyMemory(targetType))
             {
                 return InvokeOptional.ToList(variable);
+            }
+
+            if (sourceType.FrameworkType != Configuration.ApiTypes.OptionalPropertyType)
+            {
+                return variable;
             }
 
             if (TypeFactory.IsDictionary(targetType))
