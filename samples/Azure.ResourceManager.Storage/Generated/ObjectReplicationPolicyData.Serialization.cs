@@ -21,12 +21,12 @@ namespace Azure.ResourceManager.Storage
             writer.WriteStartObject();
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(SourceAccount))
+            if (SourceAccount != null)
             {
                 writer.WritePropertyName("sourceAccount"u8);
                 writer.WriteStringValue(SourceAccount);
             }
-            if (Optional.IsDefined(DestinationAccount))
+            if (DestinationAccount != null)
             {
                 writer.WritePropertyName("destinationAccount"u8);
                 writer.WriteStringValue(DestinationAccount);

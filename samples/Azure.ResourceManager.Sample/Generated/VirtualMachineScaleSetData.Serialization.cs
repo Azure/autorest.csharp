@@ -31,17 +31,17 @@ namespace Azure.ResourceManager.Sample
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Sku))
+            if (Sku != null)
             {
                 writer.WritePropertyName("sku"u8);
                 writer.WriteObjectValue(Sku);
             }
-            if (Optional.IsDefined(Plan))
+            if (Plan != null)
             {
                 writer.WritePropertyName("plan"u8);
                 writer.WriteObjectValue(Plan);
             }
-            if (Optional.IsDefined(Identity))
+            if (Identity != null)
             {
                 writer.WritePropertyName("identity"u8);
                 JsonSerializer.Serialize(writer, Identity);
@@ -84,79 +84,79 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format != "W" && Optional.IsDefined(SystemData))
+            if (options.Format != "W" && SystemData != null)
             {
                 writer.WritePropertyName("systemData"u8);
                 JsonSerializer.Serialize(writer, SystemData);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(UpgradePolicy))
+            if (UpgradePolicy != null)
             {
                 writer.WritePropertyName("upgradePolicy"u8);
                 writer.WriteObjectValue(UpgradePolicy);
             }
-            if (Optional.IsDefined(AutomaticRepairsPolicy))
+            if (AutomaticRepairsPolicy != null)
             {
                 writer.WritePropertyName("automaticRepairsPolicy"u8);
                 writer.WriteObjectValue(AutomaticRepairsPolicy);
             }
-            if (Optional.IsDefined(VirtualMachineProfile))
+            if (VirtualMachineProfile != null)
             {
                 writer.WritePropertyName("virtualMachineProfile"u8);
                 writer.WriteObjectValue(VirtualMachineProfile);
             }
-            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
+            if (options.Format != "W" && ProvisioningState != null)
             {
                 writer.WritePropertyName("provisioningState"u8);
                 writer.WriteStringValue(ProvisioningState);
             }
-            if (Optional.IsDefined(Overprovision))
+            if (Overprovision.HasValue)
             {
                 writer.WritePropertyName("overprovision"u8);
                 writer.WriteBooleanValue(Overprovision.Value);
             }
-            if (Optional.IsDefined(DoNotRunExtensionsOnOverprovisionedVms))
+            if (DoNotRunExtensionsOnOverprovisionedVms.HasValue)
             {
                 writer.WritePropertyName("doNotRunExtensionsOnOverprovisionedVMs"u8);
                 writer.WriteBooleanValue(DoNotRunExtensionsOnOverprovisionedVms.Value);
             }
-            if (options.Format != "W" && Optional.IsDefined(UniqueId))
+            if (options.Format != "W" && UniqueId != null)
             {
                 writer.WritePropertyName("uniqueId"u8);
                 writer.WriteStringValue(UniqueId);
             }
-            if (Optional.IsDefined(SinglePlacementGroup))
+            if (SinglePlacementGroup.HasValue)
             {
                 writer.WritePropertyName("singlePlacementGroup"u8);
                 writer.WriteBooleanValue(SinglePlacementGroup.Value);
             }
-            if (Optional.IsDefined(ZoneBalance))
+            if (ZoneBalance.HasValue)
             {
                 writer.WritePropertyName("zoneBalance"u8);
                 writer.WriteBooleanValue(ZoneBalance.Value);
             }
-            if (Optional.IsDefined(PlatformFaultDomainCount))
+            if (PlatformFaultDomainCount.HasValue)
             {
                 writer.WritePropertyName("platformFaultDomainCount"u8);
                 writer.WriteNumberValue(PlatformFaultDomainCount.Value);
             }
-            if (Optional.IsDefined(ProximityPlacementGroup))
+            if (ProximityPlacementGroup != null)
             {
                 writer.WritePropertyName("proximityPlacementGroup"u8);
                 JsonSerializer.Serialize(writer, ProximityPlacementGroup);
             }
-            if (Optional.IsDefined(HostGroup))
+            if (HostGroup != null)
             {
                 writer.WritePropertyName("hostGroup"u8);
                 JsonSerializer.Serialize(writer, HostGroup);
             }
-            if (Optional.IsDefined(AdditionalCapabilities))
+            if (AdditionalCapabilities != null)
             {
                 writer.WritePropertyName("additionalCapabilities"u8);
                 writer.WriteObjectValue(AdditionalCapabilities);
             }
-            if (Optional.IsDefined(ScaleInPolicy))
+            if (ScaleInPolicy != null)
             {
                 writer.WritePropertyName("scaleInPolicy"u8);
                 writer.WriteObjectValue(ScaleInPolicy);
@@ -456,7 +456,7 @@ namespace Azure.ResourceManager.Sample
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 builder.Append("  name:");
                 if (Name.Contains(Environment.NewLine))
@@ -470,11 +470,8 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsDefined(Location))
-            {
-                builder.Append("  location:");
-                builder.AppendLine($" '{Location.ToString()}'");
-            }
+            builder.Append("  location:");
+            builder.AppendLine($" '{Location.ToString()}'");
 
             if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
@@ -504,19 +501,19 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsDefined(Sku))
+            if (Sku != null)
             {
                 builder.Append("  sku:");
                 AppendChildObject(builder, Sku, options, 2, false);
             }
 
-            if (Optional.IsDefined(Plan))
+            if (Plan != null)
             {
                 builder.Append("  plan:");
                 AppendChildObject(builder, Plan, options, 2, false);
             }
 
-            if (Optional.IsDefined(Identity))
+            if (Identity != null)
             {
                 builder.Append("  identity:");
                 AppendChildObject(builder, Identity, options, 2, false);
@@ -549,13 +546,13 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 builder.Append("  id:");
                 builder.AppendLine($" '{Id.ToString()}'");
             }
 
-            if (Optional.IsDefined(SystemData))
+            if (SystemData != null)
             {
                 builder.Append("  systemData:");
                 builder.AppendLine($" '{SystemData.ToString()}'");
@@ -563,25 +560,25 @@ namespace Azure.ResourceManager.Sample
 
             builder.Append("  properties:");
             builder.AppendLine(" {");
-            if (Optional.IsDefined(UpgradePolicy))
+            if (UpgradePolicy != null)
             {
                 builder.Append("    upgradePolicy:");
                 AppendChildObject(builder, UpgradePolicy, options, 4, false);
             }
 
-            if (Optional.IsDefined(AutomaticRepairsPolicy))
+            if (AutomaticRepairsPolicy != null)
             {
                 builder.Append("    automaticRepairsPolicy:");
                 AppendChildObject(builder, AutomaticRepairsPolicy, options, 4, false);
             }
 
-            if (Optional.IsDefined(VirtualMachineProfile))
+            if (VirtualMachineProfile != null)
             {
                 builder.Append("    virtualMachineProfile:");
                 AppendChildObject(builder, VirtualMachineProfile, options, 4, false);
             }
 
-            if (Optional.IsDefined(ProvisioningState))
+            if (ProvisioningState != null)
             {
                 builder.Append("    provisioningState:");
                 if (ProvisioningState.Contains(Environment.NewLine))
@@ -595,21 +592,21 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsDefined(Overprovision))
+            if (Overprovision.HasValue)
             {
                 builder.Append("    overprovision:");
                 var boolValue = Overprovision.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
             }
 
-            if (Optional.IsDefined(DoNotRunExtensionsOnOverprovisionedVms))
+            if (DoNotRunExtensionsOnOverprovisionedVms.HasValue)
             {
                 builder.Append("    doNotRunExtensionsOnOverprovisionedVMs:");
                 var boolValue = DoNotRunExtensionsOnOverprovisionedVms.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
             }
 
-            if (Optional.IsDefined(UniqueId))
+            if (UniqueId != null)
             {
                 builder.Append("    uniqueId:");
                 if (UniqueId.Contains(Environment.NewLine))
@@ -623,45 +620,45 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsDefined(SinglePlacementGroup))
+            if (SinglePlacementGroup.HasValue)
             {
                 builder.Append("    singlePlacementGroup:");
                 var boolValue = SinglePlacementGroup.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
             }
 
-            if (Optional.IsDefined(ZoneBalance))
+            if (ZoneBalance.HasValue)
             {
                 builder.Append("    zoneBalance:");
                 var boolValue = ZoneBalance.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
             }
 
-            if (Optional.IsDefined(PlatformFaultDomainCount))
+            if (PlatformFaultDomainCount.HasValue)
             {
                 builder.Append("    platformFaultDomainCount:");
                 builder.AppendLine($" {PlatformFaultDomainCount.Value}");
             }
 
-            if (Optional.IsDefined(ProximityPlacementGroup))
+            if (ProximityPlacementGroup != null)
             {
                 builder.Append("    proximityPlacementGroup:");
                 AppendChildObject(builder, ProximityPlacementGroup, options, 4, false);
             }
 
-            if (Optional.IsDefined(HostGroup))
+            if (HostGroup != null)
             {
                 builder.Append("    hostGroup:");
                 AppendChildObject(builder, HostGroup, options, 4, false);
             }
 
-            if (Optional.IsDefined(AdditionalCapabilities))
+            if (AdditionalCapabilities != null)
             {
                 builder.Append("    additionalCapabilities:");
                 AppendChildObject(builder, AdditionalCapabilities, options, 4, false);
             }
 
-            if (Optional.IsDefined(ScaleInPolicy))
+            if (ScaleInPolicy != null)
             {
                 builder.Append("    scaleInPolicy:");
                 AppendChildObject(builder, ScaleInPolicy, options, 4, false);

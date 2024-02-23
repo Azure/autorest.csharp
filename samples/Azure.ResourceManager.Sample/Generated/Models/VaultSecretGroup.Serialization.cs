@@ -29,7 +29,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(SourceVault))
+            if (SourceVault != null)
             {
                 writer.WritePropertyName("sourceVault"u8);
                 JsonSerializer.Serialize(writer, SourceVault);
@@ -125,7 +125,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(SourceVault))
+            if (SourceVault != null)
             {
                 builder.Append("  sourceVault:");
                 AppendChildObject(builder, SourceVault, options, 2, false);

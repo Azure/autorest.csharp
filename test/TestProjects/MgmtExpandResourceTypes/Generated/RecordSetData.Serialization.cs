@@ -19,7 +19,7 @@ namespace MgmtExpandResourceTypes
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Etag))
+            if (Etag != null)
             {
                 writer.WritePropertyName("etag"u8);
                 writer.WriteStringValue(Etag);
@@ -37,12 +37,12 @@ namespace MgmtExpandResourceTypes
                 }
                 writer.WriteEndObject();
             }
-            if (Optional.IsDefined(TTL))
+            if (TTL.HasValue)
             {
                 writer.WritePropertyName("TTL"u8);
                 writer.WriteNumberValue(TTL.Value);
             }
-            if (Optional.IsDefined(TargetResource))
+            if (TargetResource != null)
             {
                 writer.WritePropertyName("targetResource"u8);
                 JsonSerializer.Serialize(writer, TargetResource);
@@ -117,12 +117,12 @@ namespace MgmtExpandResourceTypes
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(CnameRecord))
+            if (CnameRecord != null)
             {
                 writer.WritePropertyName("CNAMERecord"u8);
                 writer.WriteObjectValue(CnameRecord);
             }
-            if (Optional.IsDefined(SoaRecord))
+            if (SoaRecord != null)
             {
                 writer.WritePropertyName("SOARecord"u8);
                 writer.WriteObjectValue(SoaRecord);

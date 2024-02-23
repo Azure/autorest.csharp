@@ -19,7 +19,7 @@ namespace xml_service.Models
         private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "ModelWithByteProperty");
-            if (Optional.IsDefined(Bytes))
+            if (Bytes != null)
             {
                 writer.WriteStartElement("Bytes");
                 writer.WriteValue(Bytes, "D");

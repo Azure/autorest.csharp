@@ -18,26 +18,26 @@ namespace CognitiveSearch.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (Optional.IsDefined(Description))
+            if (Description != null)
             {
                 writer.WritePropertyName("description"u8);
                 writer.WriteStringValue(Description);
             }
             writer.WritePropertyName("dataSourceName"u8);
             writer.WriteStringValue(DataSourceName);
-            if (Optional.IsDefined(SkillsetName))
+            if (SkillsetName != null)
             {
                 writer.WritePropertyName("skillsetName"u8);
                 writer.WriteStringValue(SkillsetName);
             }
             writer.WritePropertyName("targetIndexName"u8);
             writer.WriteStringValue(TargetIndexName);
-            if (Optional.IsDefined(Schedule))
+            if (Schedule != null)
             {
                 writer.WritePropertyName("schedule"u8);
                 writer.WriteObjectValue(Schedule);
             }
-            if (Optional.IsDefined(Parameters))
+            if (Parameters != null)
             {
                 writer.WritePropertyName("parameters"u8);
                 writer.WriteObjectValue(Parameters);
@@ -62,12 +62,12 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(IsDisabled))
+            if (IsDisabled.HasValue)
             {
                 writer.WritePropertyName("disabled"u8);
                 writer.WriteBooleanValue(IsDisabled.Value);
             }
-            if (Optional.IsDefined(ETag))
+            if (ETag != null)
             {
                 writer.WritePropertyName("@odata.etag"u8);
                 writer.WriteStringValue(ETag);

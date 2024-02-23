@@ -36,12 +36,12 @@ namespace validation.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(Capacity))
+            if (Capacity.HasValue)
             {
                 writer.WritePropertyName("capacity"u8);
                 writer.WriteNumberValue(Capacity.Value);
             }
-            if (Optional.IsDefined(Image))
+            if (Image != null)
             {
                 writer.WritePropertyName("image"u8);
                 writer.WriteStringValue(Image);
@@ -54,7 +54,7 @@ namespace validation.Models
             writer.WriteNumberValue(ConstInt.ToSerialInt32());
             writer.WritePropertyName("constString"u8);
             writer.WriteStringValue(ConstString.ToString());
-            if (Optional.IsDefined(ConstStringAsEnum))
+            if (ConstStringAsEnum.HasValue)
             {
                 writer.WritePropertyName("constStringAsEnum"u8);
                 writer.WriteStringValue(ConstStringAsEnum.Value.ToString());

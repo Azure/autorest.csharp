@@ -27,7 +27,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(UltraSSDEnabled))
+            if (UltraSSDEnabled.HasValue)
             {
                 writer.WritePropertyName("ultraSSDEnabled"u8);
                 writer.WriteBooleanValue(UltraSSDEnabled.Value);
@@ -98,7 +98,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(UltraSSDEnabled))
+            if (UltraSSDEnabled.HasValue)
             {
                 builder.Append("  ultraSSDEnabled:");
                 var boolValue = UltraSSDEnabled.Value == true ? "true" : "false";

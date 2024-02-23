@@ -38,22 +38,22 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(Innererror))
+            if (Innererror != null)
             {
                 writer.WritePropertyName("innererror"u8);
                 writer.WriteObjectValue(Innererror);
             }
-            if (Optional.IsDefined(Code))
+            if (Code != null)
             {
                 writer.WritePropertyName("code"u8);
                 writer.WriteStringValue(Code);
             }
-            if (Optional.IsDefined(Target))
+            if (Target != null)
             {
                 writer.WritePropertyName("target"u8);
                 writer.WriteStringValue(Target);
             }
-            if (Optional.IsDefined(Message))
+            if (Message != null)
             {
                 writer.WritePropertyName("message"u8);
                 writer.WriteStringValue(Message);
@@ -171,13 +171,13 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(Innererror))
+            if (Innererror != null)
             {
                 builder.Append("  innererror:");
                 AppendChildObject(builder, Innererror, options, 2, false);
             }
 
-            if (Optional.IsDefined(Code))
+            if (Code != null)
             {
                 builder.Append("  code:");
                 if (Code.Contains(Environment.NewLine))
@@ -191,7 +191,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(Target))
+            if (Target != null)
             {
                 builder.Append("  target:");
                 if (Target.Contains(Environment.NewLine))
@@ -205,7 +205,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(Message))
+            if (Message != null)
             {
                 builder.Append("  message:");
                 if (Message.Contains(Environment.NewLine))

@@ -17,7 +17,7 @@ namespace MgmtListMethods
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(ConfigValue))
+            if (ConfigValue != null)
             {
                 writer.WritePropertyName("configValue"u8);
                 writer.WriteStringValue(ConfigValue);

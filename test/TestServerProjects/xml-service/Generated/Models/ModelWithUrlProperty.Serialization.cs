@@ -19,7 +19,7 @@ namespace xml_service.Models
         private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "ModelWithUrlProperty");
-            if (Optional.IsDefined(Url))
+            if (Url != null)
             {
                 writer.WriteStartElement("Url");
                 writer.WriteValue(Url);

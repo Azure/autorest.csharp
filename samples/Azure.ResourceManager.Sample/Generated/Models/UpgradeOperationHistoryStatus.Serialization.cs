@@ -27,17 +27,17 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && Optional.IsDefined(Code))
+            if (options.Format != "W" && Code.HasValue)
             {
                 writer.WritePropertyName("code"u8);
                 writer.WriteStringValue(Code.Value.ToSerialString());
             }
-            if (options.Format != "W" && Optional.IsDefined(StartOn))
+            if (options.Format != "W" && StartOn.HasValue)
             {
                 writer.WritePropertyName("startTime"u8);
                 writer.WriteStringValue(StartOn.Value, "O");
             }
-            if (options.Format != "W" && Optional.IsDefined(EndOn))
+            if (options.Format != "W" && EndOn.HasValue)
             {
                 writer.WritePropertyName("endTime"u8);
                 writer.WriteStringValue(EndOn.Value, "O");
@@ -128,20 +128,20 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Code))
+            if (Code.HasValue)
             {
                 builder.Append("  code:");
                 builder.AppendLine($" '{Code.Value.ToSerialString()}'");
             }
 
-            if (Optional.IsDefined(StartOn))
+            if (StartOn.HasValue)
             {
                 builder.Append("  startTime:");
                 var formattedDateTimeString = TypeFormatters.ToString(StartOn.Value, "o");
                 builder.AppendLine($" '{formattedDateTimeString}'");
             }
 
-            if (Optional.IsDefined(EndOn))
+            if (EndOn.HasValue)
             {
                 builder.Append("  endTime:");
                 var formattedDateTimeString = TypeFormatters.ToString(EndOn.Value, "o");

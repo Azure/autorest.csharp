@@ -26,12 +26,12 @@ namespace body_dictionary.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Integer))
+            if (Integer.HasValue)
             {
                 writer.WritePropertyName("integer"u8);
                 writer.WriteNumberValue(Integer.Value);
             }
-            if (Optional.IsDefined(String))
+            if (String != null)
             {
                 writer.WritePropertyName("string"u8);
                 writer.WriteStringValue(String);

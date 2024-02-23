@@ -30,17 +30,17 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndObject();
             }
-            if (Optional.IsDefined(HttpMethod))
+            if (HttpMethod != null)
             {
                 writer.WritePropertyName("httpMethod"u8);
                 writer.WriteStringValue(HttpMethod);
             }
-            if (Optional.IsDefined(Timeout))
+            if (Timeout.HasValue)
             {
                 writer.WritePropertyName("timeout"u8);
                 writer.WriteStringValue(Timeout.Value, "P");
             }
-            if (Optional.IsDefined(BatchSize))
+            if (BatchSize.HasValue)
             {
                 if (BatchSize != null)
                 {
@@ -52,7 +52,7 @@ namespace CognitiveSearch.Models
                     writer.WriteNull("batchSize");
                 }
             }
-            if (Optional.IsDefined(DegreeOfParallelism))
+            if (DegreeOfParallelism.HasValue)
             {
                 if (DegreeOfParallelism != null)
                 {
@@ -66,17 +66,17 @@ namespace CognitiveSearch.Models
             }
             writer.WritePropertyName("@odata.type"u8);
             writer.WriteStringValue(OdataType);
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Description))
+            if (Description != null)
             {
                 writer.WritePropertyName("description"u8);
                 writer.WriteStringValue(Description);
             }
-            if (Optional.IsDefined(Context))
+            if (Context != null)
             {
                 writer.WritePropertyName("context"u8);
                 writer.WriteStringValue(Context);

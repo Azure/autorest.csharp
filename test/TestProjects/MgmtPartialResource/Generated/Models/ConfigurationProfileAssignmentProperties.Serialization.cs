@@ -15,12 +15,12 @@ namespace MgmtPartialResource.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(ConfigurationProfile))
+            if (ConfigurationProfile != null)
             {
                 writer.WritePropertyName("configurationProfile"u8);
                 writer.WriteStringValue(ConfigurationProfile);
             }
-            if (Optional.IsDefined(TargetId))
+            if (TargetId != null)
             {
                 writer.WritePropertyName("targetId"u8);
                 writer.WriteStringValue(TargetId);

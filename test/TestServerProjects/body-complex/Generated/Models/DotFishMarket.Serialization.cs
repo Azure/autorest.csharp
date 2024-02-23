@@ -26,7 +26,7 @@ namespace body_complex.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(SampleSalmon))
+            if (SampleSalmon != null)
             {
                 writer.WritePropertyName("sampleSalmon"u8);
                 writer.WriteObjectValue(SampleSalmon);
@@ -41,7 +41,7 @@ namespace body_complex.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(SampleFish))
+            if (SampleFish != null)
             {
                 writer.WritePropertyName("sampleFish"u8);
                 writer.WriteObjectValue(SampleFish);

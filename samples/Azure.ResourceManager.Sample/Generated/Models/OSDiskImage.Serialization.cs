@@ -91,11 +91,8 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(OperatingSystem))
-            {
-                builder.Append("  operatingSystem:");
-                builder.AppendLine($" '{OperatingSystem.ToSerialString()}'");
-            }
+            builder.Append("  operatingSystem:");
+            builder.AppendLine($" '{OperatingSystem.ToSerialString()}'");
 
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());

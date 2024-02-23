@@ -100,7 +100,7 @@ namespace CustomizationsInTsp.Models
                 writer.WriteNumberValue(item);
             }
             writer.WriteEndArray();
-            if (Optional.IsDefined(VectorOptional))
+            if (VectorOptional.HasValue)
             {
                 if (VectorOptional != null)
                 {
@@ -131,7 +131,7 @@ namespace CustomizationsInTsp.Models
             {
                 writer.WriteNull("vectorNullable");
             }
-            if (Optional.IsDefined(VectorOptionalNullable))
+            if (VectorOptionalNullable.HasValue)
             {
                 if (VectorOptionalNullable != null)
                 {
@@ -158,7 +158,7 @@ namespace CustomizationsInTsp.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W" && Optional.IsDefined(VectorOptionalReadOnly))
+            if (options.Format != "W" && VectorOptionalReadOnly.HasValue)
             {
                 if (VectorOptionalReadOnly != null)
                 {
@@ -192,7 +192,7 @@ namespace CustomizationsInTsp.Models
                     writer.WriteNull("vectorNullableReadOnly");
                 }
             }
-            if (options.Format != "W" && Optional.IsDefined(VectorOptionalNullableReadOnly))
+            if (options.Format != "W" && VectorOptionalNullableReadOnly.HasValue)
             {
                 if (VectorOptionalNullableReadOnly != null)
                 {

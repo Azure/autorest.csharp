@@ -28,7 +28,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(OSDisk))
+            if (OSDisk != null)
             {
                 writer.WritePropertyName("osDisk"u8);
                 writer.WriteObjectValue(OSDisk);
@@ -43,7 +43,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(ZoneResilient))
+            if (ZoneResilient.HasValue)
             {
                 writer.WritePropertyName("zoneResilient"u8);
                 writer.WriteBooleanValue(ZoneResilient.Value);
@@ -139,7 +139,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(OSDisk))
+            if (OSDisk != null)
             {
                 builder.Append("  osDisk:");
                 AppendChildObject(builder, OSDisk, options, 2, false);
@@ -159,7 +159,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(ZoneResilient))
+            if (ZoneResilient.HasValue)
             {
                 builder.Append("  zoneResilient:");
                 var boolValue = ZoneResilient.Value == true ? "true" : "false";

@@ -15,7 +15,7 @@ namespace MgmtMockAndSample.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(CertificateAuthority))
+            if (CertificateAuthority != null)
             {
                 writer.WritePropertyName("certificateAuthority"u8);
                 writer.WriteObjectValue(CertificateAuthority);

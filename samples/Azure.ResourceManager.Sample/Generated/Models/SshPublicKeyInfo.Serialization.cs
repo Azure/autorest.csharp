@@ -27,12 +27,12 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Path))
+            if (Path != null)
             {
                 writer.WritePropertyName("path"u8);
                 writer.WriteStringValue(Path);
             }
-            if (Optional.IsDefined(KeyData))
+            if (KeyData != null)
             {
                 writer.WritePropertyName("keyData"u8);
                 writer.WriteStringValue(KeyData);
@@ -105,7 +105,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Path))
+            if (Path != null)
             {
                 builder.Append("  path:");
                 if (Path.Contains(Environment.NewLine))
@@ -119,7 +119,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(KeyData))
+            if (KeyData != null)
             {
                 builder.Append("  keyData:");
                 if (KeyData.Contains(Environment.NewLine))

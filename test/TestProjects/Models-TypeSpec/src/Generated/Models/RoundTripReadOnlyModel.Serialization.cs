@@ -37,12 +37,12 @@ namespace ModelsTypeSpec.Models
                 writer.WritePropertyName("requiredReadonlyInt"u8);
                 writer.WriteNumberValue(RequiredReadonlyInt);
             }
-            if (options.Format != "W" && Optional.IsDefined(OptionalReadonlyString))
+            if (options.Format != "W" && OptionalReadonlyString != null)
             {
                 writer.WritePropertyName("optionalReadonlyString"u8);
                 writer.WriteStringValue(OptionalReadonlyString);
             }
-            if (options.Format != "W" && Optional.IsDefined(OptionalReadonlyInt))
+            if (options.Format != "W" && OptionalReadonlyInt.HasValue)
             {
                 writer.WritePropertyName("optionalReadonlyInt"u8);
                 writer.WriteNumberValue(OptionalReadonlyInt.Value);
@@ -52,7 +52,7 @@ namespace ModelsTypeSpec.Models
                 writer.WritePropertyName("requiredReadonlyModel"u8);
                 writer.WriteObjectValue(RequiredReadonlyModel);
             }
-            if (options.Format != "W" && Optional.IsDefined(OptionalReadonlyModel))
+            if (options.Format != "W" && OptionalReadonlyModel != null)
             {
                 writer.WritePropertyName("optionalReadonlyModel"u8);
                 writer.WriteObjectValue(OptionalReadonlyModel);

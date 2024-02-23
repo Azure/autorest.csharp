@@ -19,17 +19,17 @@ namespace MgmtAcronymMapping
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Sku))
+            if (Sku != null)
             {
                 writer.WritePropertyName("sku"u8);
                 writer.WriteObjectValue(Sku);
             }
-            if (Optional.IsDefined(Plan))
+            if (Plan != null)
             {
                 writer.WritePropertyName("plan"u8);
                 writer.WriteObjectValue(Plan);
             }
-            if (Optional.IsDefined(Identity))
+            if (Identity != null)
             {
                 writer.WritePropertyName("identity"u8);
                 JsonSerializer.Serialize(writer, Identity);
@@ -59,77 +59,77 @@ namespace MgmtAcronymMapping
             writer.WriteStringValue(Location);
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(IPsecSomething))
+            if (IPsecSomething != null)
             {
                 writer.WritePropertyName("ipsecSomething"u8);
                 writer.WriteStringValue(IPsecSomething);
             }
-            if (Optional.IsDefined(TestIPsec))
+            if (TestIPsec != null)
             {
                 writer.WritePropertyName("testIPSec"u8);
                 writer.WriteStringValue(TestIPsec);
             }
-            if (Optional.IsDefined(P2SServer))
+            if (P2SServer != null)
             {
                 writer.WritePropertyName("p2sServer"u8);
                 writer.WriteStringValue(P2SServer);
             }
-            if (Optional.IsDefined(UpgradePolicy))
+            if (UpgradePolicy != null)
             {
                 writer.WritePropertyName("upgradePolicy"u8);
                 writer.WriteObjectValue(UpgradePolicy);
             }
-            if (Optional.IsDefined(AutomaticRepairsPolicy))
+            if (AutomaticRepairsPolicy != null)
             {
                 writer.WritePropertyName("automaticRepairsPolicy"u8);
                 writer.WriteObjectValue(AutomaticRepairsPolicy);
             }
-            if (Optional.IsDefined(VirtualMachineProfile))
+            if (VirtualMachineProfile != null)
             {
                 writer.WritePropertyName("virtualMachineProfile"u8);
                 writer.WriteObjectValue(VirtualMachineProfile);
             }
-            if (Optional.IsDefined(Overprovision))
+            if (Overprovision.HasValue)
             {
                 writer.WritePropertyName("overprovision"u8);
                 writer.WriteBooleanValue(Overprovision.Value);
             }
-            if (Optional.IsDefined(DoNotRunExtensionsOnOverprovisionedVms))
+            if (DoNotRunExtensionsOnOverprovisionedVms.HasValue)
             {
                 writer.WritePropertyName("doNotRunExtensionsOnOverprovisionedVMs"u8);
                 writer.WriteBooleanValue(DoNotRunExtensionsOnOverprovisionedVms.Value);
             }
-            if (Optional.IsDefined(SinglePlacementGroup))
+            if (SinglePlacementGroup.HasValue)
             {
                 writer.WritePropertyName("singlePlacementGroup"u8);
                 writer.WriteBooleanValue(SinglePlacementGroup.Value);
             }
-            if (Optional.IsDefined(ZoneBalance))
+            if (ZoneBalance.HasValue)
             {
                 writer.WritePropertyName("zoneBalance"u8);
                 writer.WriteBooleanValue(ZoneBalance.Value);
             }
-            if (Optional.IsDefined(PlatformFaultDomainCount))
+            if (PlatformFaultDomainCount.HasValue)
             {
                 writer.WritePropertyName("platformFaultDomainCount"u8);
                 writer.WriteNumberValue(PlatformFaultDomainCount.Value);
             }
-            if (Optional.IsDefined(ProximityPlacementGroup))
+            if (ProximityPlacementGroup != null)
             {
                 writer.WritePropertyName("proximityPlacementGroup"u8);
                 JsonSerializer.Serialize(writer, ProximityPlacementGroup);
             }
-            if (Optional.IsDefined(HostGroup))
+            if (HostGroup != null)
             {
                 writer.WritePropertyName("hostGroup"u8);
                 JsonSerializer.Serialize(writer, HostGroup);
             }
-            if (Optional.IsDefined(AdditionalCapabilities))
+            if (AdditionalCapabilities != null)
             {
                 writer.WritePropertyName("additionalCapabilities"u8);
                 writer.WriteObjectValue(AdditionalCapabilities);
             }
-            if (Optional.IsDefined(ScaleInPolicy))
+            if (ScaleInPolicy != null)
             {
                 writer.WritePropertyName("scaleInPolicy"u8);
                 writer.WriteObjectValue(ScaleInPolicy);

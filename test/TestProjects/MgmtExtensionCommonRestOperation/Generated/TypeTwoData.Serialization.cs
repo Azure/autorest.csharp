@@ -17,7 +17,7 @@ namespace MgmtExtensionCommonRestOperation
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(MyType))
+            if (MyType != null)
             {
                 writer.WritePropertyName("MyType"u8);
                 writer.WriteStringValue(MyType);

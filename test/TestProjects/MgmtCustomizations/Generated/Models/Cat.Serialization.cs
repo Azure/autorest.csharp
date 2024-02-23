@@ -16,24 +16,21 @@ namespace MgmtCustomizations.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Sleep))
+            if (Sleep != null)
             {
                 writer.WritePropertyName("sleep"u8);
                 writer.WriteStringValue(Sleep);
             }
-            if (Optional.IsDefined(Jump))
+            if (Jump != null)
             {
                 writer.WritePropertyName("jump"u8);
                 writer.WriteStringValue(Jump);
             }
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind.ToSerialString());
-            if (Optional.IsDefined(Size))
-            {
-                writer.WritePropertyName("size"u8);
-                SerializeSizeProperty(writer);
-            }
-            if (Optional.IsDefined(DateOfBirth))
+            writer.WritePropertyName("size"u8);
+            SerializeSizeProperty(writer);
+            if (DateOfBirth.HasValue)
             {
                 writer.WritePropertyName("dateOfBirth"u8);
                 SerializeDateOfBirthProperty(writer);

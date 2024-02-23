@@ -28,12 +28,12 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && Optional.IsDefined(AssetId))
+            if (options.Format != "W" && AssetId != null)
             {
                 writer.WritePropertyName("assetId"u8);
                 writer.WriteStringValue(AssetId);
             }
-            if (Optional.IsDefined(AvailableCapacity))
+            if (AvailableCapacity != null)
             {
                 writer.WritePropertyName("availableCapacity"u8);
                 writer.WriteObjectValue(AvailableCapacity);
@@ -135,7 +135,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(AssetId))
+            if (AssetId != null)
             {
                 builder.Append("  assetId:");
                 if (AssetId.Contains(Environment.NewLine))
@@ -149,7 +149,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(AvailableCapacity))
+            if (AvailableCapacity != null)
             {
                 builder.Append("  availableCapacity:");
                 AppendChildObject(builder, AvailableCapacity, options, 2, false);

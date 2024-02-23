@@ -36,7 +36,7 @@ namespace paging.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(OdataNextLink))
+            if (OdataNextLink != null)
             {
                 writer.WritePropertyName("odata.nextLink"u8);
                 writer.WriteStringValue(OdataNextLink);

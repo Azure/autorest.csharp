@@ -15,17 +15,17 @@ namespace MgmtOmitOperationGroups.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(C))
+            if (C != null)
             {
                 writer.WritePropertyName("c"u8);
                 writer.WriteStringValue(C);
             }
-            if (Optional.IsDefined(D))
+            if (D != null)
             {
                 writer.WritePropertyName("d"u8);
                 writer.WriteStringValue(D);
             }
-            if (Optional.IsDefined(E))
+            if (E != null)
             {
                 writer.WritePropertyName("e"u8);
                 writer.WriteStringValue(E);

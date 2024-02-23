@@ -29,7 +29,7 @@ namespace ModelsTypeSpec.Models
             writer.WriteStartObject();
             writer.WritePropertyName("message"u8);
             writer.WriteStringValue(Message);
-            if (Optional.IsDefined(Inner))
+            if (Inner != null)
             {
                 writer.WritePropertyName("inner"u8);
                 writer.WriteObjectValue(Inner);

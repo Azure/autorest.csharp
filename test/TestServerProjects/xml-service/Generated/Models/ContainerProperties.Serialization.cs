@@ -25,25 +25,25 @@ namespace xml_service.Models
             writer.WriteStartElement("Etag");
             writer.WriteValue(Etag);
             writer.WriteEndElement();
-            if (Optional.IsDefined(LeaseStatus))
+            if (LeaseStatus.HasValue)
             {
                 writer.WriteStartElement("LeaseStatus");
                 writer.WriteValue(LeaseStatus.Value.ToSerialString());
                 writer.WriteEndElement();
             }
-            if (Optional.IsDefined(LeaseState))
+            if (LeaseState.HasValue)
             {
                 writer.WriteStartElement("LeaseState");
                 writer.WriteValue(LeaseState.Value.ToSerialString());
                 writer.WriteEndElement();
             }
-            if (Optional.IsDefined(LeaseDuration))
+            if (LeaseDuration.HasValue)
             {
                 writer.WriteStartElement("LeaseDuration");
                 writer.WriteValue(LeaseDuration.Value.ToSerialString());
                 writer.WriteEndElement();
             }
-            if (Optional.IsDefined(PublicAccess))
+            if (PublicAccess.HasValue)
             {
                 writer.WriteStartElement("PublicAccess");
                 writer.WriteValue(PublicAccess.Value.ToString());

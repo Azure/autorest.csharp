@@ -27,7 +27,7 @@ namespace ModelsTypeSpec.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(OptionalString))
+            if (OptionalString != null)
             {
                 writer.WritePropertyName("optionalString"u8);
                 writer.WriteStringValue(OptionalString);

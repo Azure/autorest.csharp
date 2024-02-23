@@ -27,7 +27,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(PatchMode))
+            if (PatchMode.HasValue)
             {
                 writer.WritePropertyName("patchMode"u8);
                 writer.WriteStringValue(PatchMode.Value.ToString());
@@ -98,7 +98,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(PatchMode))
+            if (PatchMode.HasValue)
             {
                 builder.Append("  patchMode:");
                 builder.AppendLine($" '{PatchMode.Value.ToString()}'");

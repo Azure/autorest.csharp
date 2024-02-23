@@ -17,12 +17,12 @@ namespace MgmtMockAndSample.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Duration))
+            if (Duration.HasValue)
             {
                 writer.WritePropertyName("duration"u8);
                 writer.WriteStringValue(Duration.Value, "P");
             }
-            if (Optional.IsDefined(CreateOn))
+            if (CreateOn.HasValue)
             {
                 writer.WritePropertyName("createOn"u8);
                 writer.WriteStringValue(CreateOn.Value, "O");
@@ -41,7 +41,7 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(VaultUri))
+            if (VaultUri != null)
             {
                 writer.WritePropertyName("vaultUri"u8);
                 writer.WriteStringValue(VaultUri.AbsoluteUri);
@@ -56,67 +56,67 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(EnabledForDiskEncryption))
+            if (EnabledForDiskEncryption.HasValue)
             {
                 writer.WritePropertyName("enabledForDiskEncryption"u8);
                 writer.WriteBooleanValue(EnabledForDiskEncryption.Value);
             }
-            if (Optional.IsDefined(EnabledForTemplateDeployment))
+            if (EnabledForTemplateDeployment.HasValue)
             {
                 writer.WritePropertyName("enabledForTemplateDeployment"u8);
                 writer.WriteBooleanValue(EnabledForTemplateDeployment.Value);
             }
-            if (Optional.IsDefined(EnableSoftDelete))
+            if (EnableSoftDelete.HasValue)
             {
                 writer.WritePropertyName("enableSoftDelete"u8);
                 writer.WriteBooleanValue(EnableSoftDelete.Value);
             }
-            if (Optional.IsDefined(SoftDeleteRetentionInDays))
+            if (SoftDeleteRetentionInDays.HasValue)
             {
                 writer.WritePropertyName("softDeleteRetentionInDays"u8);
                 writer.WriteNumberValue(SoftDeleteRetentionInDays.Value);
             }
-            if (Optional.IsDefined(EnableRbacAuthorization))
+            if (EnableRbacAuthorization.HasValue)
             {
                 writer.WritePropertyName("enableRbacAuthorization"u8);
                 writer.WriteBooleanValue(EnableRbacAuthorization.Value);
             }
-            if (Optional.IsDefined(CreateMode))
+            if (CreateMode.HasValue)
             {
                 writer.WritePropertyName("createMode"u8);
                 writer.WriteStringValue(CreateMode.Value.ToSerialString());
             }
-            if (Optional.IsDefined(EnablePurgeProtection))
+            if (EnablePurgeProtection.HasValue)
             {
                 writer.WritePropertyName("enablePurgeProtection"u8);
                 writer.WriteBooleanValue(EnablePurgeProtection.Value);
             }
-            if (Optional.IsDefined(NetworkAcls))
+            if (NetworkAcls != null)
             {
                 writer.WritePropertyName("networkAcls"u8);
                 writer.WriteObjectValue(NetworkAcls);
             }
-            if (Optional.IsDefined(ProvisioningState))
+            if (ProvisioningState.HasValue)
             {
                 writer.WritePropertyName("provisioningState"u8);
                 writer.WriteStringValue(ProvisioningState.Value.ToString());
             }
-            if (Optional.IsDefined(PublicNetworkAccess))
+            if (PublicNetworkAccess != null)
             {
                 writer.WritePropertyName("publicNetworkAccess"u8);
                 writer.WriteStringValue(PublicNetworkAccess);
             }
-            if (Optional.IsDefined(ReadWriteSingleStringProperty))
+            if (ReadWriteSingleStringProperty != null)
             {
                 writer.WritePropertyName("readWriteSingleStringProperty"u8);
                 writer.WriteObjectValue(ReadWriteSingleStringProperty);
             }
-            if (Optional.IsDefined(ReadOnlySingleStringProperty))
+            if (ReadOnlySingleStringProperty != null)
             {
                 writer.WritePropertyName("readOnlySingleStringProperty"u8);
                 writer.WriteObjectValue(ReadOnlySingleStringProperty);
             }
-            if (Optional.IsDefined(ExtremelyDeepStringProperty))
+            if (ExtremelyDeepStringProperty != null)
             {
                 writer.WritePropertyName("extremelyDeepStringProperty"u8);
                 writer.WriteObjectValue(ExtremelyDeepStringProperty);

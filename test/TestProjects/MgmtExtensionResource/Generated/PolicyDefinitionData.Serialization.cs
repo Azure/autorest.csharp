@@ -21,27 +21,27 @@ namespace MgmtExtensionResource
             writer.WriteStartObject();
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(PolicyType))
+            if (PolicyType.HasValue)
             {
                 writer.WritePropertyName("policyType"u8);
                 writer.WriteStringValue(PolicyType.Value.ToString());
             }
-            if (Optional.IsDefined(Mode))
+            if (Mode != null)
             {
                 writer.WritePropertyName("mode"u8);
                 writer.WriteStringValue(Mode);
             }
-            if (Optional.IsDefined(DisplayName))
+            if (DisplayName != null)
             {
                 writer.WritePropertyName("displayName"u8);
                 writer.WriteStringValue(DisplayName);
             }
-            if (Optional.IsDefined(Description))
+            if (Description != null)
             {
                 writer.WritePropertyName("description"u8);
                 writer.WriteStringValue(Description);
             }
-            if (Optional.IsDefined(PolicyRule))
+            if (PolicyRule != null)
             {
                 writer.WritePropertyName("policyRule"u8);
 #if NET6_0_OR_GREATER
@@ -53,7 +53,7 @@ namespace MgmtExtensionResource
                 }
 #endif
             }
-            if (Optional.IsDefined(Metadata))
+            if (Metadata != null)
             {
                 writer.WritePropertyName("metadata"u8);
 #if NET6_0_OR_GREATER

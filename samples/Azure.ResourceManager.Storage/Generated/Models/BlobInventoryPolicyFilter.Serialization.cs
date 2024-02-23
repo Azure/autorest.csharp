@@ -36,12 +36,12 @@ namespace Azure.ResourceManager.Storage.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(IncludeBlobVersions))
+            if (IncludeBlobVersions.HasValue)
             {
                 writer.WritePropertyName("includeBlobVersions"u8);
                 writer.WriteBooleanValue(IncludeBlobVersions.Value);
             }
-            if (Optional.IsDefined(IncludeSnapshots))
+            if (IncludeSnapshots.HasValue)
             {
                 writer.WritePropertyName("includeSnapshots"u8);
                 writer.WriteBooleanValue(IncludeSnapshots.Value);

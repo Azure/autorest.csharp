@@ -15,7 +15,7 @@ namespace MgmtExpandResourceTypes.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Ptrdname))
+            if (Ptrdname != null)
             {
                 writer.WritePropertyName("ptrdname"u8);
                 writer.WriteStringValue(Ptrdname);

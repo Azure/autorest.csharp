@@ -19,47 +19,47 @@ namespace Azure.ResourceManager.Storage
             writer.WriteStartObject();
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(Cors))
+            if (Cors != null)
             {
                 writer.WritePropertyName("cors"u8);
                 writer.WriteObjectValue(Cors);
             }
-            if (Optional.IsDefined(DefaultServiceVersion))
+            if (DefaultServiceVersion != null)
             {
                 writer.WritePropertyName("defaultServiceVersion"u8);
                 writer.WriteStringValue(DefaultServiceVersion);
             }
-            if (Optional.IsDefined(DeleteRetentionPolicy))
+            if (DeleteRetentionPolicy != null)
             {
                 writer.WritePropertyName("deleteRetentionPolicy"u8);
                 writer.WriteObjectValue(DeleteRetentionPolicy);
             }
-            if (Optional.IsDefined(IsVersioningEnabled))
+            if (IsVersioningEnabled.HasValue)
             {
                 writer.WritePropertyName("isVersioningEnabled"u8);
                 writer.WriteBooleanValue(IsVersioningEnabled.Value);
             }
-            if (Optional.IsDefined(AutomaticSnapshotPolicyEnabled))
+            if (AutomaticSnapshotPolicyEnabled.HasValue)
             {
                 writer.WritePropertyName("automaticSnapshotPolicyEnabled"u8);
                 writer.WriteBooleanValue(AutomaticSnapshotPolicyEnabled.Value);
             }
-            if (Optional.IsDefined(ChangeFeed))
+            if (ChangeFeed != null)
             {
                 writer.WritePropertyName("changeFeed"u8);
                 writer.WriteObjectValue(ChangeFeed);
             }
-            if (Optional.IsDefined(RestorePolicy))
+            if (RestorePolicy != null)
             {
                 writer.WritePropertyName("restorePolicy"u8);
                 writer.WriteObjectValue(RestorePolicy);
             }
-            if (Optional.IsDefined(ContainerDeleteRetentionPolicy))
+            if (ContainerDeleteRetentionPolicy != null)
             {
                 writer.WritePropertyName("containerDeleteRetentionPolicy"u8);
                 writer.WriteObjectValue(ContainerDeleteRetentionPolicy);
             }
-            if (Optional.IsDefined(LastAccessTimeTrackingPolicy))
+            if (LastAccessTimeTrackingPolicy != null)
             {
                 writer.WritePropertyName("lastAccessTimeTrackingPolicy"u8);
                 writer.WriteObjectValue(LastAccessTimeTrackingPolicy);

@@ -21,7 +21,7 @@ namespace TypeSchemaMapping.Models
         private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "ModelWithCustomUsageViaAttribute");
-            if (Optional.IsDefined(ModelProperty))
+            if (ModelProperty != null)
             {
                 writer.WriteStartElement("ModelProperty");
                 writer.WriteValue(ModelProperty);
@@ -55,7 +55,7 @@ namespace TypeSchemaMapping.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(ModelProperty))
+            if (ModelProperty != null)
             {
                 writer.WritePropertyName("ModelProperty"u8);
                 writer.WriteStringValue(ModelProperty);

@@ -28,32 +28,32 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(ComputerNamePrefix))
+            if (ComputerNamePrefix != null)
             {
                 writer.WritePropertyName("computerNamePrefix"u8);
                 writer.WriteStringValue(ComputerNamePrefix);
             }
-            if (Optional.IsDefined(AdminUsername))
+            if (AdminUsername != null)
             {
                 writer.WritePropertyName("adminUsername"u8);
                 writer.WriteStringValue(AdminUsername);
             }
-            if (Optional.IsDefined(AdminPassword))
+            if (AdminPassword != null)
             {
                 writer.WritePropertyName("adminPassword"u8);
                 writer.WriteStringValue(AdminPassword);
             }
-            if (Optional.IsDefined(CustomData))
+            if (CustomData != null)
             {
                 writer.WritePropertyName("customData"u8);
                 writer.WriteStringValue(CustomData);
             }
-            if (Optional.IsDefined(WindowsConfiguration))
+            if (WindowsConfiguration != null)
             {
                 writer.WritePropertyName("windowsConfiguration"u8);
                 writer.WriteObjectValue(WindowsConfiguration);
             }
-            if (Optional.IsDefined(LinuxConfiguration))
+            if (LinuxConfiguration != null)
             {
                 writer.WritePropertyName("linuxConfiguration"u8);
                 writer.WriteObjectValue(LinuxConfiguration);
@@ -183,7 +183,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(ComputerNamePrefix))
+            if (ComputerNamePrefix != null)
             {
                 builder.Append("  computerNamePrefix:");
                 if (ComputerNamePrefix.Contains(Environment.NewLine))
@@ -197,7 +197,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(AdminUsername))
+            if (AdminUsername != null)
             {
                 builder.Append("  adminUsername:");
                 if (AdminUsername.Contains(Environment.NewLine))
@@ -211,7 +211,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(AdminPassword))
+            if (AdminPassword != null)
             {
                 builder.Append("  adminPassword:");
                 if (AdminPassword.Contains(Environment.NewLine))
@@ -225,7 +225,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(CustomData))
+            if (CustomData != null)
             {
                 builder.Append("  customData:");
                 if (CustomData.Contains(Environment.NewLine))
@@ -239,13 +239,13 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(WindowsConfiguration))
+            if (WindowsConfiguration != null)
             {
                 builder.Append("  windowsConfiguration:");
                 AppendChildObject(builder, WindowsConfiguration, options, 2, false);
             }
 
-            if (Optional.IsDefined(LinuxConfiguration))
+            if (LinuxConfiguration != null)
             {
                 builder.Append("  linuxConfiguration:");
                 AppendChildObject(builder, LinuxConfiguration, options, 2, false);

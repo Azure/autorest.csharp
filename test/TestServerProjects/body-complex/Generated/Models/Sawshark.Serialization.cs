@@ -26,12 +26,12 @@ namespace body_complex.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Picture))
+            if (Picture != null)
             {
                 writer.WritePropertyName("picture"u8);
                 writer.WriteBase64StringValue(Picture, "D");
             }
-            if (Optional.IsDefined(Age))
+            if (Age.HasValue)
             {
                 writer.WritePropertyName("age"u8);
                 writer.WriteNumberValue(Age.Value);
@@ -40,7 +40,7 @@ namespace body_complex.Models
             writer.WriteStringValue(Birthday, "O");
             writer.WritePropertyName("fishtype"u8);
             writer.WriteStringValue(Fishtype);
-            if (Optional.IsDefined(Species))
+            if (Species != null)
             {
                 writer.WritePropertyName("species"u8);
                 writer.WriteStringValue(Species);

@@ -26,12 +26,12 @@ namespace lro.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Code))
+            if (Code.HasValue)
             {
                 writer.WritePropertyName("code"u8);
                 writer.WriteNumberValue(Code.Value);
             }
-            if (Optional.IsDefined(Message))
+            if (Message != null)
             {
                 writer.WritePropertyName("message"u8);
                 writer.WriteStringValue(Message);

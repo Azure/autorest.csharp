@@ -25,7 +25,7 @@ namespace OpenAI.Models
             writer.WriteStartObject();
             writer.WritePropertyName("training_file"u8);
             writer.WriteStringValue(TrainingFile);
-            if (OptionalProperty.IsDefined(ValidationFile))
+            if (ValidationFile != null)
             {
                 if (ValidationFile != null)
                 {
@@ -39,12 +39,12 @@ namespace OpenAI.Models
             }
             writer.WritePropertyName("model"u8);
             writer.WriteStringValue(Model.ToString());
-            if (OptionalProperty.IsDefined(Hyperparameters))
+            if (Hyperparameters != null)
             {
                 writer.WritePropertyName("hyperparameters"u8);
                 writer.WriteObjectValue(Hyperparameters);
             }
-            if (OptionalProperty.IsDefined(Suffix))
+            if (Suffix != null)
             {
                 if (Suffix != null)
                 {

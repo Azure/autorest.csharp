@@ -22,17 +22,17 @@ namespace Azure.ResourceManager.Storage
             writer.WriteStartObject();
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(DefaultEncryptionScope))
+            if (DefaultEncryptionScope != null)
             {
                 writer.WritePropertyName("defaultEncryptionScope"u8);
                 writer.WriteStringValue(DefaultEncryptionScope);
             }
-            if (Optional.IsDefined(DenyEncryptionScopeOverride))
+            if (DenyEncryptionScopeOverride.HasValue)
             {
                 writer.WritePropertyName("denyEncryptionScopeOverride"u8);
                 writer.WriteBooleanValue(DenyEncryptionScopeOverride.Value);
             }
-            if (Optional.IsDefined(PublicAccess))
+            if (PublicAccess.HasValue)
             {
                 writer.WritePropertyName("publicAccess"u8);
                 writer.WriteStringValue(PublicAccess.Value.ToSerialString());
@@ -48,17 +48,17 @@ namespace Azure.ResourceManager.Storage
                 }
                 writer.WriteEndObject();
             }
-            if (Optional.IsDefined(ImmutableStorageWithVersioning))
+            if (ImmutableStorageWithVersioning != null)
             {
                 writer.WritePropertyName("immutableStorageWithVersioning"u8);
                 writer.WriteObjectValue(ImmutableStorageWithVersioning);
             }
-            if (Optional.IsDefined(EnableNfsV3RootSquash))
+            if (EnableNfsV3RootSquash.HasValue)
             {
                 writer.WritePropertyName("enableNfsV3RootSquash"u8);
                 writer.WriteBooleanValue(EnableNfsV3RootSquash.Value);
             }
-            if (Optional.IsDefined(EnableNfsV3AllSquash))
+            if (EnableNfsV3AllSquash.HasValue)
             {
                 writer.WritePropertyName("enableNfsV3AllSquash"u8);
                 writer.WriteBooleanValue(EnableNfsV3AllSquash.Value);

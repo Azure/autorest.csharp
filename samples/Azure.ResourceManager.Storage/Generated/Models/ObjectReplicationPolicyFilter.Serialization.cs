@@ -26,7 +26,7 @@ namespace Azure.ResourceManager.Storage.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(MinCreationTime))
+            if (MinCreationTime != null)
             {
                 writer.WritePropertyName("minCreationTime"u8);
                 writer.WriteStringValue(MinCreationTime);

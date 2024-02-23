@@ -27,7 +27,7 @@ namespace AnomalyDetector.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && Optional.IsDefined(Period))
+            if (options.Format != "W" && Period.HasValue)
             {
                 writer.WritePropertyName("period"u8);
                 writer.WriteNumberValue(Period.Value);

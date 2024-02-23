@@ -17,7 +17,7 @@ namespace MgmtExactMatchFlattenInheritance.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Foo))
+            if (Foo.HasValue)
             {
                 writer.WritePropertyName("foo"u8);
                 writer.WriteNumberValue(Foo.Value);

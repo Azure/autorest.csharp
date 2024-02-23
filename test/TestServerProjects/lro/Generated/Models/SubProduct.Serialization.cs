@@ -26,19 +26,19 @@ namespace lro.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && Optional.IsDefined(Id))
+            if (options.Format != "W" && Id != null)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(ProvisioningState))
+            if (ProvisioningState != null)
             {
                 writer.WritePropertyName("provisioningState"u8);
                 writer.WriteStringValue(ProvisioningState);
             }
-            if (options.Format != "W" && Optional.IsDefined(ProvisioningStateValues))
+            if (options.Format != "W" && ProvisioningStateValues.HasValue)
             {
                 writer.WritePropertyName("provisioningStateValues"u8);
                 writer.WriteStringValue(ProvisioningStateValues.Value.ToString());

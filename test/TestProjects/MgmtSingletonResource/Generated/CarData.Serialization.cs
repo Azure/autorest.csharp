@@ -16,7 +16,7 @@ namespace MgmtSingletonResource
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Horsepower))
+            if (Horsepower != null)
             {
                 writer.WritePropertyName("horsepower"u8);
                 writer.WriteStringValue(Horsepower);

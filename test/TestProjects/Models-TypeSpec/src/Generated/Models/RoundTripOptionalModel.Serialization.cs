@@ -27,12 +27,12 @@ namespace ModelsTypeSpec.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(OptionalString))
+            if (OptionalString != null)
             {
                 writer.WritePropertyName("optionalString"u8);
                 writer.WriteStringValue(OptionalString);
             }
-            if (Optional.IsDefined(OptionalInt))
+            if (OptionalInt.HasValue)
             {
                 writer.WritePropertyName("optionalInt"u8);
                 writer.WriteNumberValue(OptionalInt.Value);
@@ -67,22 +67,22 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(OptionalModel))
+            if (OptionalModel != null)
             {
                 writer.WritePropertyName("optionalModel"u8);
                 writer.WriteObjectValue(OptionalModel);
             }
-            if (Optional.IsDefined(OptionalModelWithPropertiesOnBase))
+            if (OptionalModelWithPropertiesOnBase != null)
             {
                 writer.WritePropertyName("optionalModelWithPropertiesOnBase"u8);
                 writer.WriteObjectValue(OptionalModelWithPropertiesOnBase);
             }
-            if (Optional.IsDefined(OptionalFixedStringEnum))
+            if (OptionalFixedStringEnum.HasValue)
             {
                 writer.WritePropertyName("optionalFixedStringEnum"u8);
                 writer.WriteStringValue(OptionalFixedStringEnum.Value.ToSerialString());
             }
-            if (Optional.IsDefined(OptionalExtensibleEnum))
+            if (OptionalExtensibleEnum.HasValue)
             {
                 writer.WritePropertyName("optionalExtensibleEnum"u8);
                 writer.WriteStringValue(OptionalExtensibleEnum.Value.ToString());
@@ -120,12 +120,12 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndObject();
             }
-            if (Optional.IsDefined(OptionalPlainDate))
+            if (OptionalPlainDate.HasValue)
             {
                 writer.WritePropertyName("optionalPlainDate"u8);
                 writer.WriteStringValue(OptionalPlainDate.Value, "D");
             }
-            if (Optional.IsDefined(OptionalPlainTime))
+            if (OptionalPlainTime.HasValue)
             {
                 writer.WritePropertyName("optionalPlainTime"u8);
                 writer.WriteStringValue(OptionalPlainTime.Value, "T");

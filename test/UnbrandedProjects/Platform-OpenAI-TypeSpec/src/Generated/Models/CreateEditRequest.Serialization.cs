@@ -25,7 +25,7 @@ namespace OpenAI.Models
             writer.WriteStartObject();
             writer.WritePropertyName("model"u8);
             writer.WriteStringValue(Model.ToString());
-            if (OptionalProperty.IsDefined(Input))
+            if (Input != null)
             {
                 if (Input != null)
                 {
@@ -39,7 +39,7 @@ namespace OpenAI.Models
             }
             writer.WritePropertyName("instruction"u8);
             writer.WriteStringValue(Instruction);
-            if (OptionalProperty.IsDefined(N))
+            if (N.HasValue)
             {
                 if (N != null)
                 {
@@ -51,7 +51,7 @@ namespace OpenAI.Models
                     writer.WriteNull("n");
                 }
             }
-            if (OptionalProperty.IsDefined(Temperature))
+            if (Temperature.HasValue)
             {
                 if (Temperature != null)
                 {
@@ -63,7 +63,7 @@ namespace OpenAI.Models
                     writer.WriteNull("temperature");
                 }
             }
-            if (OptionalProperty.IsDefined(TopP))
+            if (TopP.HasValue)
             {
                 if (TopP != null)
                 {

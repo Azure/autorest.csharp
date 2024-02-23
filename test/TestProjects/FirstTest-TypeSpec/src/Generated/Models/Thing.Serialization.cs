@@ -46,22 +46,22 @@ namespace FirstTestTypeSpec.Models
             writer.WriteNumberValue(RequiredLiteralFloat.ToSerialSingle());
             writer.WritePropertyName("requiredLiteralBool"u8);
             writer.WriteBooleanValue(RequiredLiteralBool);
-            if (Optional.IsDefined(OptionalLiteralString))
+            if (OptionalLiteralString.HasValue)
             {
                 writer.WritePropertyName("optionalLiteralString"u8);
                 writer.WriteStringValue(OptionalLiteralString.Value.ToString());
             }
-            if (Optional.IsDefined(OptionalLiteralInt))
+            if (OptionalLiteralInt.HasValue)
             {
                 writer.WritePropertyName("optionalLiteralInt"u8);
                 writer.WriteNumberValue(OptionalLiteralInt.Value.ToSerialInt32());
             }
-            if (Optional.IsDefined(OptionalLiteralFloat))
+            if (OptionalLiteralFloat.HasValue)
             {
                 writer.WritePropertyName("optionalLiteralFloat"u8);
                 writer.WriteNumberValue(OptionalLiteralFloat.Value.ToSerialSingle());
             }
-            if (Optional.IsDefined(OptionalLiteralBool))
+            if (OptionalLiteralBool.HasValue)
             {
                 writer.WritePropertyName("optionalLiteralBool"u8);
                 writer.WriteBooleanValue(OptionalLiteralBool.Value);

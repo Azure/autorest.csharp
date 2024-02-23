@@ -27,12 +27,12 @@ namespace CognitiveSearch.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            if (Optional.IsDefined(CognitiveServicesAccount))
+            if (CognitiveServicesAccount != null)
             {
                 writer.WritePropertyName("cognitiveServices"u8);
                 writer.WriteObjectValue(CognitiveServicesAccount);
             }
-            if (Optional.IsDefined(ETag))
+            if (ETag != null)
             {
                 writer.WritePropertyName("@odata.etag"u8);
                 writer.WriteStringValue(ETag);

@@ -35,12 +35,12 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(DefaultScoringProfile))
+            if (DefaultScoringProfile != null)
             {
                 writer.WritePropertyName("defaultScoringProfile"u8);
                 writer.WriteStringValue(DefaultScoringProfile);
             }
-            if (Optional.IsDefined(CorsOptions))
+            if (CorsOptions != null)
             {
                 writer.WritePropertyName("corsOptions"u8);
                 writer.WriteObjectValue(CorsOptions);
@@ -95,17 +95,17 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(EncryptionKey))
+            if (EncryptionKey != null)
             {
                 writer.WritePropertyName("encryptionKey"u8);
                 writer.WriteObjectValue(EncryptionKey);
             }
-            if (Optional.IsDefined(Similarity))
+            if (Similarity != null)
             {
                 writer.WritePropertyName("similarity"u8);
                 writer.WriteObjectValue(Similarity);
             }
-            if (Optional.IsDefined(ETag))
+            if (ETag != null)
             {
                 writer.WritePropertyName("@odata.etag"u8);
                 writer.WriteStringValue(ETag);

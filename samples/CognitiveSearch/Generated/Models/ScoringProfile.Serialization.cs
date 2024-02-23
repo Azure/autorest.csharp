@@ -18,7 +18,7 @@ namespace CognitiveSearch.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (Optional.IsDefined(TextWeights))
+            if (TextWeights != null)
             {
                 writer.WritePropertyName("text"u8);
                 writer.WriteObjectValue(TextWeights);
@@ -33,7 +33,7 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(FunctionAggregation))
+            if (FunctionAggregation.HasValue)
             {
                 writer.WritePropertyName("functionAggregation"u8);
                 writer.WriteStringValue(FunctionAggregation.Value.ToSerialString());

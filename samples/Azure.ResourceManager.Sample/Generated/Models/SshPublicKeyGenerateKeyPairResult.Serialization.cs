@@ -107,7 +107,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(PrivateKey))
+            if (PrivateKey != null)
             {
                 builder.Append("  privateKey:");
                 if (PrivateKey.Contains(Environment.NewLine))
@@ -121,7 +121,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(PublicKey))
+            if (PublicKey != null)
             {
                 builder.Append("  publicKey:");
                 if (PublicKey.Contains(Environment.NewLine))
@@ -135,7 +135,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 builder.Append("  id:");
                 if (Id.Contains(Environment.NewLine))

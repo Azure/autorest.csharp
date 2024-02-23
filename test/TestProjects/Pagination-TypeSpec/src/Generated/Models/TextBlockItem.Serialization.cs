@@ -29,7 +29,7 @@ namespace Pagination.Models
             writer.WriteStartObject();
             writer.WritePropertyName("blockItemId"u8);
             writer.WriteStringValue(BlockItemId);
-            if (Optional.IsDefined(Description))
+            if (Description != null)
             {
                 writer.WritePropertyName("description"u8);
                 writer.WriteStringValue(Description);

@@ -27,7 +27,7 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndObject();
             }
-            if (Optional.IsDefined(Identity))
+            if (Identity != null)
             {
                 writer.WritePropertyName("identity"u8);
                 var serializeOptions = new JsonSerializerOptions { Converters = { new ManagedServiceIdentityTypeV3Converter() } };
@@ -35,22 +35,22 @@ namespace MgmtMockAndSample.Models
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(EncryptionType))
+            if (EncryptionType.HasValue)
             {
                 writer.WritePropertyName("encryptionType"u8);
                 writer.WriteStringValue(EncryptionType.Value.ToString());
             }
-            if (Optional.IsDefined(ActiveKey))
+            if (ActiveKey != null)
             {
                 writer.WritePropertyName("activeKey"u8);
                 writer.WriteObjectValue(ActiveKey);
             }
-            if (Optional.IsDefined(RotationToLatestKeyVersionEnabled))
+            if (RotationToLatestKeyVersionEnabled.HasValue)
             {
                 writer.WritePropertyName("rotationToLatestKeyVersionEnabled"u8);
                 writer.WriteBooleanValue(RotationToLatestKeyVersionEnabled.Value);
             }
-            if (Optional.IsDefined(FederatedClientId))
+            if (FederatedClientId != null)
             {
                 writer.WritePropertyName("federatedClientId"u8);
                 writer.WriteStringValue(FederatedClientId);

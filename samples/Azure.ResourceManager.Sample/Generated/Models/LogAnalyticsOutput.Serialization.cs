@@ -27,7 +27,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && Optional.IsDefined(Output))
+            if (options.Format != "W" && Output != null)
             {
                 writer.WritePropertyName("output"u8);
                 writer.WriteStringValue(Output);
@@ -94,7 +94,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Output))
+            if (Output != null)
             {
                 builder.Append("  output:");
                 if (Output.Contains(Environment.NewLine))

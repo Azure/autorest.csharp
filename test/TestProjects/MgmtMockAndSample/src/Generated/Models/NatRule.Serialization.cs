@@ -56,12 +56,12 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(TranslatedAddress))
+            if (TranslatedAddress != null)
             {
                 writer.WritePropertyName("translatedAddress"u8);
                 writer.WriteStringValue(TranslatedAddress);
             }
-            if (Optional.IsDefined(TranslatedPort))
+            if (TranslatedPort != null)
             {
                 writer.WritePropertyName("translatedPort"u8);
                 writer.WriteStringValue(TranslatedPort);
@@ -76,17 +76,17 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(TranslatedFqdn))
+            if (TranslatedFqdn != null)
             {
                 writer.WritePropertyName("translatedFqdn"u8);
                 writer.WriteStringValue(TranslatedFqdn);
             }
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Description))
+            if (Description != null)
             {
                 writer.WritePropertyName("description"u8);
                 writer.WriteStringValue(Description);

@@ -27,12 +27,12 @@ namespace OpenAI.Models
             writer.WriteStringValue(Prompt);
             writer.WritePropertyName("image"u8);
             writer.WriteBase64StringValue(Image.ToArray(), "D");
-            if (OptionalProperty.IsDefined(Mask))
+            if (Mask != null)
             {
                 writer.WritePropertyName("mask"u8);
                 writer.WriteBase64StringValue(Mask.ToArray(), "D");
             }
-            if (OptionalProperty.IsDefined(N))
+            if (N.HasValue)
             {
                 if (N != null)
                 {
@@ -44,17 +44,17 @@ namespace OpenAI.Models
                     writer.WriteNull("n");
                 }
             }
-            if (OptionalProperty.IsDefined(Size))
+            if (Size.HasValue)
             {
                 writer.WritePropertyName("size"u8);
                 writer.WriteStringValue(Size.Value.ToString());
             }
-            if (OptionalProperty.IsDefined(ResponseFormat))
+            if (ResponseFormat.HasValue)
             {
                 writer.WritePropertyName("response_format"u8);
                 writer.WriteStringValue(ResponseFormat.Value.ToString());
             }
-            if (OptionalProperty.IsDefined(User))
+            if (User != null)
             {
                 writer.WritePropertyName("user"u8);
                 writer.WriteStringValue(User);

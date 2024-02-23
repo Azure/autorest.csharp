@@ -17,12 +17,12 @@ namespace CognitiveSearch.Models
             writer.WriteStartObject();
             writer.WritePropertyName("sourceFieldName"u8);
             writer.WriteStringValue(SourceFieldName);
-            if (Optional.IsDefined(TargetFieldName))
+            if (TargetFieldName != null)
             {
                 writer.WritePropertyName("targetFieldName"u8);
                 writer.WriteStringValue(TargetFieldName);
             }
-            if (Optional.IsDefined(MappingFunction))
+            if (MappingFunction != null)
             {
                 writer.WritePropertyName("mappingFunction"u8);
                 writer.WriteObjectValue(MappingFunction);

@@ -19,22 +19,22 @@ namespace MgmtSafeFlatten
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(MyType))
+            if (MyType != null)
             {
                 writer.WritePropertyName("MyType"u8);
                 writer.WriteStringValue(MyType);
             }
-            if (Optional.IsDefined(LayerOne))
+            if (LayerOne != null)
             {
                 writer.WritePropertyName("layerOne"u8);
                 writer.WriteObjectValue(LayerOne);
             }
-            if (Optional.IsDefined(LayerOneType))
+            if (LayerOneType != null)
             {
                 writer.WritePropertyName("layerOneType"u8);
                 writer.WriteObjectValue(LayerOneType);
             }
-            if (Optional.IsDefined(LayerOneConflict))
+            if (LayerOneConflict != null)
             {
                 writer.WritePropertyName("layerOneConflict"u8);
                 JsonSerializer.Serialize(writer, LayerOneConflict);

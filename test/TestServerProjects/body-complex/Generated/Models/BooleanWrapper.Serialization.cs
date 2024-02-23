@@ -26,12 +26,12 @@ namespace body_complex.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(FieldTrue))
+            if (FieldTrue.HasValue)
             {
                 writer.WritePropertyName("field_true"u8);
                 writer.WriteBooleanValue(FieldTrue.Value);
             }
-            if (Optional.IsDefined(FieldFalse))
+            if (FieldFalse.HasValue)
             {
                 writer.WritePropertyName("field_false"u8);
                 writer.WriteBooleanValue(FieldFalse.Value);

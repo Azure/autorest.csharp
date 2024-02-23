@@ -29,12 +29,12 @@ namespace SpreadTypeSpec.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (Optional.IsDefined(Color))
+            if (Color != null)
             {
                 writer.WritePropertyName("color"u8);
                 writer.WriteStringValue(Color);
             }
-            if (Optional.IsDefined(Age))
+            if (Age.HasValue)
             {
                 writer.WritePropertyName("age"u8);
                 writer.WriteNumberValue(Age.Value);

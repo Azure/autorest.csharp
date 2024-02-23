@@ -49,7 +49,7 @@ namespace ModelsTypeSpec.Models
             {
                 writer.WriteNull("requiredNullableString");
             }
-            if (Optional.IsDefined(NonRequiredNullableInt))
+            if (NonRequiredNullableInt.HasValue)
             {
                 if (NonRequiredNullableInt != null)
                 {
@@ -61,7 +61,7 @@ namespace ModelsTypeSpec.Models
                     writer.WriteNull("nonRequiredNullableInt");
                 }
             }
-            if (Optional.IsDefined(NonRequiredNullableString))
+            if (NonRequiredNullableString != null)
             {
                 if (NonRequiredNullableString != null)
                 {

@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Linq;
+using System.Text.Json;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
@@ -9,6 +10,7 @@ using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models.Serialization;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace AutoRest.CSharp.Common.Output.Models
 {
@@ -25,16 +27,39 @@ namespace AutoRest.CSharp.Common.Output.Models
                 return Not(BoolExpression.Is(collection, collectionDeclarationExpression)
                     .And(new MemberExpression(collectionReference, "IsUndefined")));
             }
-            public static BoolExpression IsDefined(ValueExpression value) => new(new InvokeStaticMethodExpression(Configuration.ApiTypes.OptionalType, Configuration.ApiTypes.OptionalIsDefinedName, new[] { value }));
+
+            public static BoolExpression IsDefined(TypedValueExpression value)
+            {
+                switch (value)
+                {
+                    case { Type: { Name: nameof(JsonElement) } }:
+                        return NotEqual(new MemberExpression(value, nameof(JsonElement.ValueKind)), FrameworkEnumValue(JsonValueKind.Undefined));
+                    case { Type: { IsNullable: true, IsValueType: true } }:
+                        return new BoolExpression(new MemberExpression(value, "HasValue"));
+                    default:
+                        return NotEqual(value, Null);
+                }
+            }
+
             public static ValueExpression ToDictionary(ValueExpression dictionary) => new InvokeStaticMethodExpression(Configuration.ApiTypes.OptionalType, Configuration.ApiTypes.OptionalToDictionaryName, new[] { dictionary });
             public static ValueExpression ToList(ValueExpression collection) => new InvokeStaticMethodExpression(Configuration.ApiTypes.OptionalType, Configuration.ApiTypes.OptionalToListName, new[] { collection });
             public static ValueExpression ToNullable(ValueExpression optional) => new InvokeStaticMethodExpression(Configuration.ApiTypes.OptionalType, Configuration.ApiTypes.OptionalToNullableName, new[] { optional });
 
-            public static MethodBodyStatement WrapInIsDefined(PropertySerialization serialization, MethodBodyStatement statement, bool forceCheck = false)
+            public static MethodBodyStatement WrapInIsDefined(PropertySerialization serialization, MethodBodyStatement statement, bool isBicep = false)
             {
-                if (!forceCheck && serialization.IsRequired)
+                //bicep shares its serialization types with JsonSerialization so we need the additional bool to know if we are serializing bicep.
+                //if we are serializing bicep, we don't need to check if the property is required
+                if (!isBicep && serialization.IsRequired)
                 {
                     return statement;
+                }
+
+                if (!serialization.Value.Type.IsNullable && serialization.Value.Type.IsValueType)
+                {
+                    if (!serialization.Value.Type.Equals(typeof(JsonElement)))
+                    {
+                        return statement;
+                    }
                 }
 
                 return TypeFactory.IsCollectionType(serialization.Value.Type) && !TypeFactory.IsReadOnlyMemory(serialization.Value.Type)

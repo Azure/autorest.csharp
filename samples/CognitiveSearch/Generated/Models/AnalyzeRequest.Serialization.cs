@@ -17,12 +17,12 @@ namespace CognitiveSearch.Models
             writer.WriteStartObject();
             writer.WritePropertyName("text"u8);
             writer.WriteStringValue(Text);
-            if (Optional.IsDefined(Analyzer))
+            if (Analyzer.HasValue)
             {
                 writer.WritePropertyName("analyzer"u8);
                 writer.WriteStringValue(Analyzer.Value.ToString());
             }
-            if (Optional.IsDefined(Tokenizer))
+            if (Tokenizer.HasValue)
             {
                 writer.WritePropertyName("tokenizer"u8);
                 writer.WriteStringValue(Tokenizer.Value.ToString());

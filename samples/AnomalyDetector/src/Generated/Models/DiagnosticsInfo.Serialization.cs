@@ -27,7 +27,7 @@ namespace AnomalyDetector.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(ModelState))
+            if (ModelState != null)
             {
                 writer.WritePropertyName("modelState"u8);
                 writer.WriteObjectValue(ModelState);

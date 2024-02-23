@@ -26,7 +26,7 @@ namespace model_flattening.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Productresource))
+            if (Productresource != null)
             {
                 writer.WritePropertyName("productresource"u8);
                 writer.WriteObjectValue(Productresource);
