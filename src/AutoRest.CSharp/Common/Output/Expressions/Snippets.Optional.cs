@@ -40,11 +40,15 @@ namespace AutoRest.CSharp.Common.Output.Models
                 }
             }
 
-            public static ValueExpression ToDictionary(ValueExpression dictionary) => new InvokeStaticMethodExpression(Configuration.ApiTypes.OptionalType, Configuration.ApiTypes.OptionalToDictionaryName, new[] { dictionary });
-
-            public static ValueExpression FallBackToChangeTrackingList(TypedValueExpression collection)
+            public static ValueExpression FallBackToChangeTrackingCollection(TypedValueExpression collection)
             {
-                var changeTrackingType = new CSharpType(Configuration.ApiTypes.ChangeTrackingListType, collection.Type.Arguments);
+                if (!TypeFactory.IsCollectionType(collection.Type) || TypeFactory.IsReadOnlyMemory(collection.Type))
+                {
+                    return collection;
+                }
+
+                var collectionType = collection.Type.Arguments.Count == 1 ? Configuration.ApiTypes.ChangeTrackingListType : Configuration.ApiTypes.ChangeTrackingDictionaryType;
+                var changeTrackingType = new CSharpType(collectionType, collection.Type.Arguments);
                 return NullCoalescing(collection, New.Instance(changeTrackingType));
             }
 

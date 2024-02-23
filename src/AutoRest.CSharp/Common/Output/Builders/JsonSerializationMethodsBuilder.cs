@@ -906,7 +906,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 if (jsonProperty.SerializedType is { } type)
                 {
                     var propertyDeclaration = new CodeWriterDeclaration(jsonProperty.SerializedName.ToVariableName());
-                    if (!jsonProperty.IsRequired && !TypeFactory.IsList(type))
+                    if (!jsonProperty.IsRequired && !TypeFactory.IsCollectionType(type))
                     {
                         if (type.IsFrameworkType && type.FrameworkType == typeof(Nullable<>))
                         {
@@ -1116,29 +1116,22 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
 
             var targetType = jsonPropertySerialization.Value.Type;
-            if (TypeFactory.IsList(targetType) && !TypeFactory.IsReadOnlyMemory(targetType) && !jsonPropertySerialization.IsRequired)
-            {
-                return InvokeOptional.FallBackToChangeTrackingList(variable);
-            }
 
-            if (sourceType.FrameworkType != Configuration.ApiTypes.OptionalPropertyType)
+            if (sourceType.FrameworkType == Configuration.ApiTypes.OptionalPropertyType)
             {
-                return variable;
-            }
+                if (targetType is { IsValueType: true, IsNullable: true })
+                {
+                    return InvokeOptional.ToNullable(variable);
+                }
 
-            if (TypeFactory.IsDictionary(targetType))
-            {
-                return InvokeOptional.ToDictionary(variable);
+                if (targetType.IsNullable)
+                {
+                    return new MemberExpression(variable, "Value");
+                }
             }
-
-            if (targetType is { IsValueType: true, IsNullable: true })
+            else if (!jsonPropertySerialization.IsRequired)
             {
-                return InvokeOptional.ToNullable(variable);
-            }
-
-            if (targetType.IsNullable)
-            {
-                return new MemberExpression(variable, "Value");
+                return InvokeOptional.FallBackToChangeTrackingCollection(variable);
             }
 
             return variable;
