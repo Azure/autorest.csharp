@@ -122,7 +122,7 @@ namespace MgmtPropertyChooser
             IReadOnlyList<MgmtPropertyChooserResourceData> fakeResources = default;
             Optional<SubResource> fakeSubResource = default;
             Optional<WritableSubResource> fakeWritableSubResource = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -334,7 +334,7 @@ namespace MgmtPropertyChooser
                     continue;
                 }
             }
-            return new VirtualMachineData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, plan, resources ?? new ChangeTrackingList<VirtualMachineExtension>(), identity, identityWithRenamedProperty.Value, identityWithDifferentPropertyType.Value, identityWithNoUserIdentity, identityWithNoSystemIdentity.Value, identityV3, zones ?? new ChangeTrackingList<string>(), fakeResources ?? new ChangeTrackingList<MgmtPropertyChooserResourceData>(), fakeSubResource, fakeWritableSubResource, provisioningState.Value, licenseType.Value, vmId.Value, extensionsTimeBudget.Value);
+            return new VirtualMachineData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, plan, resources ?? new ChangeTrackingList<VirtualMachineExtension>(), identity, identityWithRenamedProperty.Value, identityWithDifferentPropertyType.Value, identityWithNoUserIdentity, identityWithNoSystemIdentity.Value, identityV3, zones ?? new ChangeTrackingList<string>(), fakeResources ?? new ChangeTrackingList<MgmtPropertyChooserResourceData>(), fakeSubResource, fakeWritableSubResource, provisioningState.Value, licenseType.Value, vmId.Value, extensionsTimeBudget.Value);
         }
     }
 }

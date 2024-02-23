@@ -203,7 +203,7 @@ namespace Azure.ResourceManager.Sample.Models
             Optional<SamplePlan> plan = default;
             Optional<ManagedServiceIdentity> identity = default;
             IList<string> zones = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             Optional<HardwareProfile> hardwareProfile = default;
             Optional<StorageProfile> storageProfile = default;
             Optional<AdditionalCapabilities> additionalCapabilities = default;
@@ -456,7 +456,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachinePatch(Optional.ToDictionary(tags), serializedAdditionalRawData, plan.Value, identity, zones ?? new ChangeTrackingList<string>(), hardwareProfile.Value, storageProfile.Value, additionalCapabilities.Value, osProfile.Value, networkProfile.Value, securityProfile.Value, diagnosticsProfile.Value, availabilitySet, virtualMachineScaleSet, proximityPlacementGroup, Optional.ToNullable(priority), Optional.ToNullable(evictionPolicy), billingProfile.Value, host, hostGroup, provisioningState.Value, instanceView.Value, licenseType.Value, vmId.Value, extensionsTimeBudget.Value);
+            return new VirtualMachinePatch(tags ?? new ChangeTrackingDictionary<string, string>(), serializedAdditionalRawData, plan.Value, identity, zones ?? new ChangeTrackingList<string>(), hardwareProfile.Value, storageProfile.Value, additionalCapabilities.Value, osProfile.Value, networkProfile.Value, securityProfile.Value, diagnosticsProfile.Value, availabilitySet, virtualMachineScaleSet, proximityPlacementGroup, Optional.ToNullable(priority), Optional.ToNullable(evictionPolicy), billingProfile.Value, host, hostGroup, provisioningState.Value, instanceView.Value, licenseType.Value, vmId.Value, extensionsTimeBudget.Value);
         }
 
         BinaryData IPersistableModel<VirtualMachinePatch>.Write(ModelReaderWriterOptions options)

@@ -79,7 +79,7 @@ namespace Azure.Network.Management.Interface.Models
             Optional<string> name = default;
             Optional<string> type = default;
             Optional<string> location = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             Optional<Subnet> subnet = default;
             IReadOnlyList<NetworkInterface> networkInterfaces = default;
             Optional<ProvisioningState> provisioningState = default;
@@ -199,7 +199,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new PrivateEndpoint(id.Value, name.Value, type.Value, location.Value, Optional.ToDictionary(tags), etag.Value, subnet.Value, networkInterfaces ?? new ChangeTrackingList<NetworkInterface>(), Optional.ToNullable(provisioningState), privateLinkServiceConnections ?? new ChangeTrackingList<PrivateLinkServiceConnection>(), manualPrivateLinkServiceConnections ?? new ChangeTrackingList<PrivateLinkServiceConnection>());
+            return new PrivateEndpoint(id.Value, name.Value, type.Value, location.Value, tags ?? new ChangeTrackingDictionary<string, string>(), etag.Value, subnet.Value, networkInterfaces ?? new ChangeTrackingList<NetworkInterface>(), Optional.ToNullable(provisioningState), privateLinkServiceConnections ?? new ChangeTrackingList<PrivateLinkServiceConnection>(), manualPrivateLinkServiceConnections ?? new ChangeTrackingList<PrivateLinkServiceConnection>());
         }
     }
 }

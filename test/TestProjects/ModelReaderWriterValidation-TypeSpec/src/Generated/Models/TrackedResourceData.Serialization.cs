@@ -97,7 +97,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             string name = default;
             string type = default;
             string location = default;
-            Optional<IReadOnlyDictionary<string, string>> tags = default;
+            IReadOnlyDictionary<string, string> tags = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -142,7 +142,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new TrackedResourceData(id, name, type, location, Optional.ToDictionary(tags), serializedAdditionalRawData);
+            return new TrackedResourceData(id, name, type, location, tags ?? new ChangeTrackingDictionary<string, string>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<TrackedResourceData>.Write(ModelReaderWriterOptions options)

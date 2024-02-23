@@ -146,7 +146,7 @@ namespace Azure.ResourceManager.Sample
                 return null;
             }
             Optional<SampleSku> sku = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -286,7 +286,7 @@ namespace Azure.ResourceManager.Sample
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new AvailabilitySetData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, sku.Value, Optional.ToNullable(platformUpdateDomainCount), Optional.ToNullable(platformFaultDomainCount), virtualMachines ?? new ChangeTrackingList<WritableSubResource>(), proximityPlacementGroup, statuses ?? new ChangeTrackingList<InstanceViewStatus>(), serializedAdditionalRawData);
+            return new AvailabilitySetData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, sku.Value, Optional.ToNullable(platformUpdateDomainCount), Optional.ToNullable(platformFaultDomainCount), virtualMachines ?? new ChangeTrackingList<WritableSubResource>(), proximityPlacementGroup, statuses ?? new ChangeTrackingList<InstanceViewStatus>(), serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

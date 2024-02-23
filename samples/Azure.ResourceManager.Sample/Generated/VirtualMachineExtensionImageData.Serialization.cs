@@ -128,7 +128,7 @@ namespace Azure.ResourceManager.Sample
             {
                 return null;
             }
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -237,7 +237,7 @@ namespace Azure.ResourceManager.Sample
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineExtensionImageData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, operatingSystem.Value, computeRole.Value, handlerSchema.Value, Optional.ToNullable(vmScaleSetEnabled), Optional.ToNullable(supportsMultipleExtensions), serializedAdditionalRawData);
+            return new VirtualMachineExtensionImageData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, operatingSystem.Value, computeRole.Value, handlerSchema.Value, Optional.ToNullable(vmScaleSetEnabled), Optional.ToNullable(supportsMultipleExtensions), serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

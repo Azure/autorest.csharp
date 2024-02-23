@@ -45,7 +45,7 @@ namespace MgmtParamOrdering
                 return null;
             }
             Optional<string> bar = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -102,7 +102,7 @@ namespace MgmtParamOrdering
                     continue;
                 }
             }
-            return new AvailabilitySetData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, bar.Value);
+            return new AvailabilitySetData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, bar.Value);
         }
     }
 }

@@ -283,7 +283,7 @@ namespace ModelsTypeSpec.Models
             IReadOnlyList<CollectionItem> optionalReadOnlyModelList = default;
             IReadOnlyDictionary<string, int> optionalReadOnlyIntRecord = default;
             IReadOnlyDictionary<string, string> optionalReadOnlyStringRecord = default;
-            Optional<IReadOnlyDictionary<string, RecordItem>> optionalModelRecord = default;
+            IReadOnlyDictionary<string, RecordItem> optionalModelRecord = default;
             IReadOnlyList<int?> requiredCollectionWithNullableIntElement = default;
             IReadOnlyList<bool?> optionalCollectionWithNullableBooleanElement = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
@@ -528,7 +528,7 @@ namespace ModelsTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new RoundTripReadOnlyModel(requiredReadonlyString, requiredReadonlyInt, optionalReadonlyString.Value, Optional.ToNullable(optionalReadonlyInt), requiredReadonlyModel, optionalReadonlyModel.Value, requiredReadonlyFixedStringEnum, requiredReadonlyExtensibleEnum, optionalReadonlyFixedStringEnum, optionalReadonlyExtensibleEnum, requiredReadonlyStringList, requiredReadonlyIntList, requiredReadOnlyModelList, requiredReadOnlyIntRecord, requiredStringRecord, requiredReadOnlyModelRecord, optionalReadonlyStringList ?? new ChangeTrackingList<string>(), optionalReadonlyIntList ?? new ChangeTrackingList<int>(), optionalReadOnlyModelList ?? new ChangeTrackingList<CollectionItem>(), optionalReadOnlyIntRecord, optionalReadOnlyStringRecord, Optional.ToDictionary(optionalModelRecord), requiredCollectionWithNullableIntElement, optionalCollectionWithNullableBooleanElement ?? new ChangeTrackingList<bool?>(), serializedAdditionalRawData);
+            return new RoundTripReadOnlyModel(requiredReadonlyString, requiredReadonlyInt, optionalReadonlyString.Value, Optional.ToNullable(optionalReadonlyInt), requiredReadonlyModel, optionalReadonlyModel.Value, requiredReadonlyFixedStringEnum, requiredReadonlyExtensibleEnum, optionalReadonlyFixedStringEnum, optionalReadonlyExtensibleEnum, requiredReadonlyStringList, requiredReadonlyIntList, requiredReadOnlyModelList, requiredReadOnlyIntRecord, requiredStringRecord, requiredReadOnlyModelRecord, optionalReadonlyStringList ?? new ChangeTrackingList<string>(), optionalReadonlyIntList ?? new ChangeTrackingList<int>(), optionalReadOnlyModelList ?? new ChangeTrackingList<CollectionItem>(), optionalReadOnlyIntRecord, optionalReadOnlyStringRecord, optionalModelRecord ?? new ChangeTrackingDictionary<string, RecordItem>(), requiredCollectionWithNullableIntElement, optionalCollectionWithNullableBooleanElement ?? new ChangeTrackingList<bool?>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<RoundTripReadOnlyModel>.Write(ModelReaderWriterOptions options)

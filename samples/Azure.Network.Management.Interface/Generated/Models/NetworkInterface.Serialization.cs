@@ -84,7 +84,7 @@ namespace Azure.Network.Management.Interface.Models
             Optional<string> name = default;
             Optional<string> type = default;
             Optional<string> location = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             Optional<SubResource> virtualMachine = default;
             Optional<NetworkSecurityGroup> networkSecurityGroup = default;
             Optional<PrivateEndpoint> privateEndpoint = default;
@@ -276,7 +276,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new NetworkInterface(id.Value, name.Value, type.Value, location.Value, Optional.ToDictionary(tags), etag.Value, virtualMachine.Value, networkSecurityGroup.Value, privateEndpoint.Value, ipConfigurations ?? new ChangeTrackingList<NetworkInterfaceIPConfiguration>(), tapConfigurations ?? new ChangeTrackingList<NetworkInterfaceTapConfiguration>(), dnsSettings.Value, macAddress.Value, Optional.ToNullable(primary), Optional.ToNullable(enableAcceleratedNetworking), Optional.ToNullable(enableIPForwarding), hostedWorkloads ?? new ChangeTrackingList<string>(), resourceGuid.Value, Optional.ToNullable(provisioningState));
+            return new NetworkInterface(id.Value, name.Value, type.Value, location.Value, tags ?? new ChangeTrackingDictionary<string, string>(), etag.Value, virtualMachine.Value, networkSecurityGroup.Value, privateEndpoint.Value, ipConfigurations ?? new ChangeTrackingList<NetworkInterfaceIPConfiguration>(), tapConfigurations ?? new ChangeTrackingList<NetworkInterfaceTapConfiguration>(), dnsSettings.Value, macAddress.Value, Optional.ToNullable(primary), Optional.ToNullable(enableAcceleratedNetworking), Optional.ToNullable(enableIPForwarding), hostedWorkloads ?? new ChangeTrackingList<string>(), resourceGuid.Value, Optional.ToNullable(provisioningState));
         }
     }
 }

@@ -46,7 +46,7 @@ namespace MgmtLRO
                 return null;
             }
             Optional<FakeProperties> properties = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -107,7 +107,7 @@ namespace MgmtLRO
                     continue;
                 }
             }
-            return new FakeData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, properties.Value);
+            return new FakeData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, properties.Value);
         }
     }
 }

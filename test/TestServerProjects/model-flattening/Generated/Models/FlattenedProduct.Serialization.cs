@@ -120,7 +120,7 @@ namespace model_flattening.Models
             }
             Optional<string> id = default;
             Optional<string> type = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             Optional<string> location = default;
             Optional<string> name = default;
             Optional<string> pName = default;
@@ -207,7 +207,7 @@ namespace model_flattening.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new FlattenedProduct(id.Value, type.Value, Optional.ToDictionary(tags), location.Value, name.Value, serializedAdditionalRawData, pName.Value, type0.Value, Optional.ToNullable(provisioningStateValues), provisioningState.Value);
+            return new FlattenedProduct(id.Value, type.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location.Value, name.Value, serializedAdditionalRawData, pName.Value, type0.Value, Optional.ToNullable(provisioningStateValues), provisioningState.Value);
         }
 
         BinaryData IPersistableModel<FlattenedProduct>.Write(ModelReaderWriterOptions options)

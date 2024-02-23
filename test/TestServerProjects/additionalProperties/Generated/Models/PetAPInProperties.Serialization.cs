@@ -90,7 +90,7 @@ namespace additionalProperties.Models
             int id = default;
             Optional<string> name = default;
             Optional<bool> status = default;
-            Optional<IDictionary<string, float>> additionalProperties = default;
+            IDictionary<string, float> additionalProperties = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -134,7 +134,7 @@ namespace additionalProperties.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new PetAPInProperties(id, name.Value, Optional.ToNullable(status), Optional.ToDictionary(additionalProperties), serializedAdditionalRawData);
+            return new PetAPInProperties(id, name.Value, Optional.ToNullable(status), additionalProperties ?? new ChangeTrackingDictionary<string, float>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<PetAPInProperties>.Write(ModelReaderWriterOptions options)

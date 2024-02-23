@@ -50,7 +50,7 @@ namespace MgmtParamOrdering
                 return null;
             }
             IList<string> zones = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -116,7 +116,7 @@ namespace MgmtParamOrdering
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, zones ?? new ChangeTrackingList<string>());
+            return new VirtualMachineScaleSetData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, zones ?? new ChangeTrackingList<string>());
         }
     }
 }

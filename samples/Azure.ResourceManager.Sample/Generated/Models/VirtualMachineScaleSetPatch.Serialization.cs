@@ -143,7 +143,7 @@ namespace Azure.ResourceManager.Sample.Models
             Optional<SampleSku> sku = default;
             Optional<SamplePlan> plan = default;
             Optional<ManagedServiceIdentity> identity = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             Optional<UpgradePolicy> upgradePolicy = default;
             Optional<AutomaticRepairsPolicy> automaticRepairsPolicy = default;
             Optional<VirtualMachineScaleSetUpdateVmProfile> virtualMachineProfile = default;
@@ -297,7 +297,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineScaleSetPatch(Optional.ToDictionary(tags), serializedAdditionalRawData, sku.Value, plan.Value, identity, upgradePolicy.Value, automaticRepairsPolicy.Value, virtualMachineProfile.Value, Optional.ToNullable(overprovision), Optional.ToNullable(doNotRunExtensionsOnOverprovisionedVms), Optional.ToNullable(singlePlacementGroup), additionalCapabilities.Value, scaleInPolicy.Value, proximityPlacementGroup);
+            return new VirtualMachineScaleSetPatch(tags ?? new ChangeTrackingDictionary<string, string>(), serializedAdditionalRawData, sku.Value, plan.Value, identity, upgradePolicy.Value, automaticRepairsPolicy.Value, virtualMachineProfile.Value, Optional.ToNullable(overprovision), Optional.ToNullable(doNotRunExtensionsOnOverprovisionedVms), Optional.ToNullable(singlePlacementGroup), additionalCapabilities.Value, scaleInPolicy.Value, proximityPlacementGroup);
         }
 
         BinaryData IPersistableModel<VirtualMachineScaleSetPatch>.Write(ModelReaderWriterOptions options)

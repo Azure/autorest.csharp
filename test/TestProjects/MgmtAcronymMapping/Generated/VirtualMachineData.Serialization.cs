@@ -152,7 +152,7 @@ namespace MgmtAcronymMapping
             Optional<MgmtAcronymMappingPlan> plan = default;
             Optional<ManagedServiceIdentity> identity = default;
             IList<string> zones = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -432,7 +432,7 @@ namespace MgmtAcronymMapping
                     continue;
                 }
             }
-            return new VirtualMachineData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, plan.Value, identity, zones ?? new ChangeTrackingList<string>(), hardwareProfile.Value, storageProfile.Value, additionalCapabilities.Value, osProfile.Value, networkProfile.Value, securityProfile.Value, diagnosticsProfile.Value, availabilitySet, virtualMachineScaleSet, proximityPlacementGroup, Optional.ToNullable(priority), Optional.ToNullable(evictionPolicy), billingProfile.Value, host, hostGroup, provisioningState.Value, instanceView.Value, licenseType.Value, vmId.Value, extensionsTimeBudget.Value);
+            return new VirtualMachineData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, plan.Value, identity, zones ?? new ChangeTrackingList<string>(), hardwareProfile.Value, storageProfile.Value, additionalCapabilities.Value, osProfile.Value, networkProfile.Value, securityProfile.Value, diagnosticsProfile.Value, availabilitySet, virtualMachineScaleSet, proximityPlacementGroup, Optional.ToNullable(priority), Optional.ToNullable(evictionPolicy), billingProfile.Value, host, hostGroup, provisioningState.Value, instanceView.Value, licenseType.Value, vmId.Value, extensionsTimeBudget.Value);
         }
     }
 }
