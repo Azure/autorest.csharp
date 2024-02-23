@@ -100,7 +100,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 );
         }
 
-        public static IEnumerable<Method> BuildJsonSerializationMethods(SerializableObjectType model, JsonObjectSerialization json)
+        public static IEnumerable<Method> BuildJsonSerializationMethods(JsonObjectSerialization json)
         {
             var jsonModelInterface = json.IJsonModelInterface;
             var typeOfT = jsonModelInterface.Arguments[0];
