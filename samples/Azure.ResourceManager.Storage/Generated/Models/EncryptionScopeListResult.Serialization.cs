@@ -20,7 +20,7 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<EncryptionScopeData>> value = default;
+            IReadOnlyList<EncryptionScopeData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -44,7 +44,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new EncryptionScopeListResult(Optional.ToList(value), nextLink.Value);
+            return new EncryptionScopeListResult(value ?? new ChangeTrackingList<EncryptionScopeData>(), nextLink.Value);
         }
     }
 }

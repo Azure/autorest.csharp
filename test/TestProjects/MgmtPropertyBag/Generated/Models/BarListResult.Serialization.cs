@@ -40,7 +40,7 @@ namespace MgmtPropertyBag.Models
                     continue;
                 }
             }
-            return new BarListResult(value, nextLink.Value);
+            return new BarListResult(value ?? new ChangeTrackingList<BarData>(), nextLink.Value);
         }
     }
 }

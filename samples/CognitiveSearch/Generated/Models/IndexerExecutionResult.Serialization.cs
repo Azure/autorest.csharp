@@ -101,7 +101,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new IndexerExecutionResult(status, errorMessage.Value, Optional.ToNullable(startTime), Optional.ToNullable(endTime), errors, warnings, itemsProcessed, itemsFailed, initialTrackingState.Value, finalTrackingState.Value);
+            return new IndexerExecutionResult(status, errorMessage.Value, Optional.ToNullable(startTime), Optional.ToNullable(endTime), errors ?? new ChangeTrackingList<ItemError>(), warnings ?? new ChangeTrackingList<ItemWarning>(), itemsProcessed, itemsFailed, initialTrackingState.Value, finalTrackingState.Value);
         }
     }
 }

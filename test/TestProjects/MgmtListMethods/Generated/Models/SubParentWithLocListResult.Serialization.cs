@@ -40,7 +40,7 @@ namespace MgmtListMethods.Models
                     continue;
                 }
             }
-            return new SubParentWithLocListResult(value, nextLink.Value);
+            return new SubParentWithLocListResult(value ?? new ChangeTrackingList<SubParentWithLocData>(), nextLink.Value);
         }
     }
 }

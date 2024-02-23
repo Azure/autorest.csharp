@@ -40,7 +40,7 @@ namespace MgmtSingletonResource.Models
                     continue;
                 }
             }
-            return new ParentResourceListResult(value, nextLink.Value);
+            return new ParentResourceListResult(value ?? new ChangeTrackingList<ParentResourceData>(), nextLink.Value);
         }
     }
 }

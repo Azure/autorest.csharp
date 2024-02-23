@@ -40,7 +40,7 @@ namespace MgmtMultipleParentResource.Models
                     continue;
                 }
             }
-            return new TheParentsListResult(value, nextLink.Value);
+            return new TheParentsListResult(value ?? new ChangeTrackingList<TheParentData>(), nextLink.Value);
         }
     }
 }

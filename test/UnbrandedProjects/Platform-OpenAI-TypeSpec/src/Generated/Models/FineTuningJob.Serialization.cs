@@ -253,7 +253,7 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new FineTuningJob(id, @object, createdAt, finishedAt, model, fineTunedModel, organizationId, status, hyperparameters, trainingFile, validationFile, resultFiles, trainedTokens, error, serializedAdditionalRawData);
+            return new FineTuningJob(id, @object, createdAt, finishedAt, model, fineTunedModel, organizationId, status, hyperparameters, trainingFile, validationFile, resultFiles ?? new OptionalList<string>(), trainedTokens, error, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<FineTuningJob>.Write(ModelReaderWriterOptions options)

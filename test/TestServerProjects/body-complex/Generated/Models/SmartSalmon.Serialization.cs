@@ -94,7 +94,7 @@ namespace body_complex.Models
             string fishtype = default;
             Optional<string> species = default;
             float length = default;
-            Optional<IList<Fish>> siblings = default;
+            IList<Fish> siblings = default;
             IDictionary<string, object> additionalProperties = default;
             Dictionary<string, object> additionalPropertiesDictionary = new Dictionary<string, object>();
             foreach (var property in element.EnumerateObject())
@@ -150,7 +150,7 @@ namespace body_complex.Models
                 additionalPropertiesDictionary.Add(property.Name, property.Value.GetObject());
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new SmartSalmon(fishtype, species.Value, length, Optional.ToList(siblings), location.Value, Optional.ToNullable(iswild), collegeDegree.Value, additionalProperties);
+            return new SmartSalmon(fishtype, species.Value, length, siblings ?? new ChangeTrackingList<Fish>(), location.Value, Optional.ToNullable(iswild), collegeDegree.Value, additionalProperties);
         }
 
         BinaryData IPersistableModel<SmartSalmon>.Write(ModelReaderWriterOptions options)

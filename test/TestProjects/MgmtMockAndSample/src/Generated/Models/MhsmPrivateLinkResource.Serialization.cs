@@ -65,8 +65,8 @@ namespace MgmtMockAndSample.Models
             ResourceType type = default;
             Optional<SystemData> systemData = default;
             Optional<string> groupId = default;
-            Optional<IReadOnlyList<string>> requiredMembers = default;
-            Optional<IList<string>> requiredZoneNames = default;
+            IReadOnlyList<string> requiredMembers = default;
+            IList<string> requiredZoneNames = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sku"u8))
@@ -167,7 +167,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new MhsmPrivateLinkResource(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, groupId.Value, Optional.ToList(requiredMembers), Optional.ToList(requiredZoneNames), sku.Value);
+            return new MhsmPrivateLinkResource(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, groupId.Value, requiredMembers ?? new ChangeTrackingList<string>(), requiredZoneNames ?? new ChangeTrackingList<string>(), sku.Value);
         }
     }
 }

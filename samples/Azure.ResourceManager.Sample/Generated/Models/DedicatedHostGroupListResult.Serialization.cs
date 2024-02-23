@@ -106,7 +106,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DedicatedHostGroupListResult(value, nextLink.Value, serializedAdditionalRawData);
+            return new DedicatedHostGroupListResult(value ?? new ChangeTrackingList<DedicatedHostGroupData>(), nextLink.Value, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

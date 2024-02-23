@@ -40,7 +40,7 @@ namespace MgmtNonStringPathVariable.Models
                     continue;
                 }
             }
-            return new FakeListResult(value, nextLink.Value);
+            return new FakeListResult(value ?? new ChangeTrackingList<FakeData>(), nextLink.Value);
         }
     }
 }

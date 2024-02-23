@@ -177,7 +177,7 @@ namespace ModelsTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new RoundTripPrimitiveModel(serializedAdditionalRawData, requiredString, requiredInt, requiredInt64, requiredSafeInt, requiredFloat, requiredDouble, requiredBoolean, requiredDateTimeOffset, requiredTimeSpan, requiredCollectionWithNullableFloatElement);
+            return new RoundTripPrimitiveModel(serializedAdditionalRawData, requiredString, requiredInt, requiredInt64, requiredSafeInt, requiredFloat, requiredDouble, requiredBoolean, requiredDateTimeOffset, requiredTimeSpan, requiredCollectionWithNullableFloatElement ?? new ChangeTrackingList<float?>());
         }
 
         BinaryData IPersistableModel<RoundTripPrimitiveModel>.Write(ModelReaderWriterOptions options)

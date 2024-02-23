@@ -60,7 +60,7 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            return new TextLine(text, boundingBox, Optional.ToNullable(language), words);
+            return new TextLine(text, boundingBox ?? new ChangeTrackingList<float>(), Optional.ToNullable(language), words ?? new ChangeTrackingList<TextWord>());
         }
     }
 }

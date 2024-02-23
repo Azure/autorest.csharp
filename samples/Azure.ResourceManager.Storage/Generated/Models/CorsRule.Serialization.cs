@@ -108,7 +108,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new CorsRule(allowedOrigins, allowedMethods, maxAgeInSeconds, exposedHeaders, allowedHeaders);
+            return new CorsRule(allowedOrigins ?? new ChangeTrackingList<string>(), allowedMethods ?? new ChangeTrackingList<CorsRuleAllowedMethodsItem>(), maxAgeInSeconds, exposedHeaders ?? new ChangeTrackingList<string>(), allowedHeaders ?? new ChangeTrackingList<string>());
         }
     }
 }

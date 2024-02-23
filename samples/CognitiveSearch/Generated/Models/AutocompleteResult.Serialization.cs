@@ -43,7 +43,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new AutocompleteResult(Optional.ToNullable(searchCoverage), value);
+            return new AutocompleteResult(Optional.ToNullable(searchCoverage), value ?? new ChangeTrackingList<AutocompleteItem>());
         }
     }
 }

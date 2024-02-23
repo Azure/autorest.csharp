@@ -112,7 +112,7 @@ namespace AnomalyDetector.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new MultivariateDetectionResult(resultId, summary, results, serializedAdditionalRawData);
+            return new MultivariateDetectionResult(resultId, summary, results ?? new ChangeTrackingList<AnomalyState>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<MultivariateDetectionResult>.Write(ModelReaderWriterOptions options)

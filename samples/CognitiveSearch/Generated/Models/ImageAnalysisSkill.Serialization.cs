@@ -82,8 +82,8 @@ namespace CognitiveSearch.Models
                 return null;
             }
             Optional<ImageAnalysisSkillLanguage> defaultLanguageCode = default;
-            Optional<IList<VisualFeature>> visualFeatures = default;
-            Optional<IList<ImageDetail>> details = default;
+            IList<VisualFeature> visualFeatures = default;
+            IList<ImageDetail> details = default;
             string odataType = default;
             Optional<string> name = default;
             Optional<string> description = default;
@@ -170,7 +170,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new ImageAnalysisSkill(odataType, name.Value, description.Value, context.Value, inputs, outputs, Optional.ToNullable(defaultLanguageCode), Optional.ToList(visualFeatures), Optional.ToList(details));
+            return new ImageAnalysisSkill(odataType, name.Value, description.Value, context.Value, inputs ?? new ChangeTrackingList<InputFieldMappingEntry>(), outputs ?? new ChangeTrackingList<OutputFieldMappingEntry>(), Optional.ToNullable(defaultLanguageCode), visualFeatures ?? new ChangeTrackingList<VisualFeature>(), details ?? new ChangeTrackingList<ImageDetail>());
         }
     }
 }

@@ -125,7 +125,7 @@ namespace Azure.ResourceManager.Sample.Models
             Optional<string> name = default;
             Optional<string> version = default;
             Optional<string> kbid = default;
-            Optional<IReadOnlyList<string>> classifications = default;
+            IReadOnlyList<string> classifications = default;
             Optional<SoftwareUpdateRebootBehavior> rebootBehavior = default;
             Optional<string> activityId = default;
             Optional<DateTimeOffset> publishedDate = default;
@@ -216,7 +216,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineSoftwarePatchProperties(patchId.Value, name.Value, version.Value, kbid.Value, Optional.ToList(classifications), Optional.ToNullable(rebootBehavior), activityId.Value, Optional.ToNullable(publishedDate), Optional.ToNullable(lastModifiedDateTime), Optional.ToNullable(assessmentState), serializedAdditionalRawData);
+            return new VirtualMachineSoftwarePatchProperties(patchId.Value, name.Value, version.Value, kbid.Value, classifications ?? new ChangeTrackingList<string>(), Optional.ToNullable(rebootBehavior), activityId.Value, Optional.ToNullable(publishedDate), Optional.ToNullable(lastModifiedDateTime), Optional.ToNullable(assessmentState), serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

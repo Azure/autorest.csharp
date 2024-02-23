@@ -40,7 +40,7 @@ namespace MgmtParent.Models
                     continue;
                 }
             }
-            return new DedicatedHostListResult(value, nextLink.Value);
+            return new DedicatedHostListResult(value ?? new ChangeTrackingList<DedicatedHostData>(), nextLink.Value);
         }
     }
 }

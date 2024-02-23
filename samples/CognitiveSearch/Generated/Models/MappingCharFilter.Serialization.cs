@@ -62,7 +62,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new MappingCharFilter(odataType, name, mappings);
+            return new MappingCharFilter(odataType, name, mappings ?? new ChangeTrackingList<string>());
         }
     }
 }

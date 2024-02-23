@@ -93,7 +93,7 @@ namespace Pagination.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DimensionValueListItem(value, serializedAdditionalRawData);
+            return new DimensionValueListItem(value ?? new ChangeTrackingList<string>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<DimensionValueListItem>.Write(ModelReaderWriterOptions options)

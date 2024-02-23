@@ -165,7 +165,7 @@ namespace Azure.ResourceManager.Sample
             Optional<BinaryData> settings = default;
             Optional<BinaryData> protectedSettings = default;
             Optional<string> provisioningState = default;
-            Optional<IList<string>> provisionAfterExtensions = default;
+            IList<string> provisionAfterExtensions = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -282,7 +282,7 @@ namespace Azure.ResourceManager.Sample
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineScaleSetExtensionData(id.Value, serializedAdditionalRawData, name.Value, Optional.ToNullable(type), forceUpdateTag.Value, publisher.Value, type0.Value, typeHandlerVersion.Value, Optional.ToNullable(autoUpgradeMinorVersion), Optional.ToNullable(enableAutomaticUpgrade), settings.Value, protectedSettings.Value, provisioningState.Value, Optional.ToList(provisionAfterExtensions));
+            return new VirtualMachineScaleSetExtensionData(id.Value, serializedAdditionalRawData, name.Value, Optional.ToNullable(type), forceUpdateTag.Value, publisher.Value, type0.Value, typeHandlerVersion.Value, Optional.ToNullable(autoUpgradeMinorVersion), Optional.ToNullable(enableAutomaticUpgrade), settings.Value, protectedSettings.Value, provisioningState.Value, provisionAfterExtensions ?? new ChangeTrackingList<string>());
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

@@ -60,7 +60,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            return new EntityLinkingResult(documents, errors, statistics.Value, modelVersion);
+            return new EntityLinkingResult(documents ?? new ChangeTrackingList<DocumentLinkedEntities>(), errors ?? new ChangeTrackingList<DocumentError>(), statistics.Value, modelVersion);
         }
     }
 }

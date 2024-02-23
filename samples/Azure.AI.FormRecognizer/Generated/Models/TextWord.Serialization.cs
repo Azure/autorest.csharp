@@ -49,7 +49,7 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            return new TextWord(text, boundingBox, Optional.ToNullable(confidence));
+            return new TextWord(text, boundingBox ?? new ChangeTrackingList<float>(), Optional.ToNullable(confidence));
         }
     }
 }

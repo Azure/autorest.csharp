@@ -62,7 +62,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new BlobInventoryPolicySchema(enabled, type, rules);
+            return new BlobInventoryPolicySchema(enabled, type, rules ?? new ChangeTrackingList<BlobInventoryPolicyRule>());
         }
     }
 }

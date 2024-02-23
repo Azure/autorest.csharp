@@ -93,7 +93,7 @@ namespace Encode.Duration.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new FloatSecondsDurationArrayProperty(value, serializedAdditionalRawData);
+            return new FloatSecondsDurationArrayProperty(value ?? new ChangeTrackingList<TimeSpan>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<FloatSecondsDurationArrayProperty>.Write(ModelReaderWriterOptions options)

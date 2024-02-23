@@ -40,7 +40,7 @@ namespace MgmtParamOrdering.Models
                     continue;
                 }
             }
-            return new DedicatedHostGroupListResult(value, nextLink.Value);
+            return new DedicatedHostGroupListResult(value ?? new ChangeTrackingList<DedicatedHostGroupData>(), nextLink.Value);
         }
     }
 }

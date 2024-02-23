@@ -111,7 +111,7 @@ namespace Azure.Network.Management.Interface.Models
             }
             Optional<PublicIPAddressSku> sku = default;
             Optional<string> etag = default;
-            Optional<IList<string>> zones = default;
+            IList<string> zones = default;
             Optional<string> id = default;
             Optional<string> name = default;
             Optional<string> type = default;
@@ -122,7 +122,7 @@ namespace Azure.Network.Management.Interface.Models
             Optional<IPConfiguration> ipConfiguration = default;
             Optional<PublicIPAddressDnsSettings> dnsSettings = default;
             Optional<DdosSettings> ddosSettings = default;
-            Optional<IList<IpTag>> ipTags = default;
+            IList<IpTag> ipTags = default;
             Optional<string> ipAddress = default;
             Optional<SubResource> publicIPPrefix = default;
             Optional<int> idleTimeoutInMinutes = default;
@@ -301,7 +301,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new PublicIPAddress(id.Value, name.Value, type.Value, location.Value, Optional.ToDictionary(tags), sku.Value, etag.Value, Optional.ToList(zones), Optional.ToNullable(publicIPAllocationMethod), Optional.ToNullable(publicIPAddressVersion), ipConfiguration.Value, dnsSettings.Value, ddosSettings.Value, Optional.ToList(ipTags), ipAddress.Value, publicIPPrefix.Value, Optional.ToNullable(idleTimeoutInMinutes), resourceGuid.Value, Optional.ToNullable(provisioningState));
+            return new PublicIPAddress(id.Value, name.Value, type.Value, location.Value, Optional.ToDictionary(tags), sku.Value, etag.Value, zones ?? new ChangeTrackingList<string>(), Optional.ToNullable(publicIPAllocationMethod), Optional.ToNullable(publicIPAddressVersion), ipConfiguration.Value, dnsSettings.Value, ddosSettings.Value, ipTags ?? new ChangeTrackingList<IpTag>(), ipAddress.Value, publicIPPrefix.Value, Optional.ToNullable(idleTimeoutInMinutes), resourceGuid.Value, Optional.ToNullable(provisioningState));
         }
     }
 }

@@ -40,7 +40,7 @@ namespace MgmtListMethods.Models
                     continue;
                 }
             }
-            return new FakeParentWithAncestorListResult(value, nextLink.Value);
+            return new FakeParentWithAncestorListResult(value ?? new ChangeTrackingList<FakeParentWithAncestorData>(), nextLink.Value);
         }
     }
 }

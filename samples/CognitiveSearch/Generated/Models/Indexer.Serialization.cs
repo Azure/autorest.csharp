@@ -88,8 +88,8 @@ namespace CognitiveSearch.Models
             string targetIndexName = default;
             Optional<IndexingSchedule> schedule = default;
             Optional<IndexingParameters> parameters = default;
-            Optional<IList<FieldMapping>> fieldMappings = default;
-            Optional<IList<FieldMapping>> outputFieldMappings = default;
+            IList<FieldMapping> fieldMappings = default;
+            IList<FieldMapping> outputFieldMappings = default;
             Optional<bool> disabled = default;
             Optional<string> odataEtag = default;
             foreach (var property in element.EnumerateObject())
@@ -180,7 +180,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new Indexer(name, description.Value, dataSourceName, skillsetName.Value, targetIndexName, schedule.Value, parameters.Value, Optional.ToList(fieldMappings), Optional.ToList(outputFieldMappings), Optional.ToNullable(disabled), odataEtag.Value);
+            return new Indexer(name, description.Value, dataSourceName, skillsetName.Value, targetIndexName, schedule.Value, parameters.Value, fieldMappings ?? new ChangeTrackingList<FieldMapping>(), outputFieldMappings ?? new ChangeTrackingList<FieldMapping>(), Optional.ToNullable(disabled), odataEtag.Value);
         }
     }
 }

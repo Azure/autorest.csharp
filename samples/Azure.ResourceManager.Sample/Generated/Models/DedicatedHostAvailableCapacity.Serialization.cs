@@ -76,7 +76,7 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<DedicatedHostAllocatableVm>> allocatableVms = default;
+            IReadOnlyList<DedicatedHostAllocatableVm> allocatableVms = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -101,7 +101,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DedicatedHostAvailableCapacity(Optional.ToList(allocatableVms), serializedAdditionalRawData);
+            return new DedicatedHostAvailableCapacity(allocatableVms ?? new ChangeTrackingList<DedicatedHostAllocatableVm>(), serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

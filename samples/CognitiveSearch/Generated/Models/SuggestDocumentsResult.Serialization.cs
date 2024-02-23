@@ -43,7 +43,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new SuggestDocumentsResult(value, Optional.ToNullable(searchCoverage));
+            return new SuggestDocumentsResult(value ?? new ChangeTrackingList<SuggestResult>(), Optional.ToNullable(searchCoverage));
         }
     }
 }

@@ -134,10 +134,10 @@ namespace MgmtMockAndSample.Models
             Optional<DateTimeOffset> createOn = default;
             Guid tenantId = default;
             MgmtMockAndSampleSku sku = default;
-            Optional<IList<AccessPolicyEntry>> accessPolicies = default;
+            IList<AccessPolicyEntry> accessPolicies = default;
             Optional<Uri> vaultUri = default;
             Optional<string> hsmPoolResourceId = default;
-            Optional<IList<string>> deployments = default;
+            IList<string> deployments = default;
             Optional<bool> enabledForDiskEncryption = default;
             Optional<bool> enabledForTemplateDeployment = default;
             Optional<bool> enableSoftDelete = default;
@@ -147,7 +147,7 @@ namespace MgmtMockAndSample.Models
             Optional<bool> enablePurgeProtection = default;
             Optional<NetworkRuleSet> networkAcls = default;
             Optional<VaultProvisioningState> provisioningState = default;
-            Optional<IReadOnlyList<PrivateEndpointConnectionItem>> privateEndpointConnections = default;
+            IReadOnlyList<PrivateEndpointConnectionItem> privateEndpointConnections = default;
             Optional<string> publicNetworkAccess = default;
             Optional<SinglePropertyModel> readWriteSingleStringProperty = default;
             Optional<ReadOnlySinglePropertyModel> readOnlySingleStringProperty = default;
@@ -352,7 +352,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new VaultProperties(Optional.ToNullable(duration), Optional.ToNullable(createOn), tenantId, sku, Optional.ToList(accessPolicies), vaultUri.Value, hsmPoolResourceId.Value, Optional.ToList(deployments), Optional.ToNullable(enabledForDiskEncryption), Optional.ToNullable(enabledForTemplateDeployment), Optional.ToNullable(enableSoftDelete), Optional.ToNullable(softDeleteRetentionInDays), Optional.ToNullable(enableRbacAuthorization), Optional.ToNullable(createMode), Optional.ToNullable(enablePurgeProtection), networkAcls.Value, Optional.ToNullable(provisioningState), Optional.ToList(privateEndpointConnections), publicNetworkAccess.Value, readWriteSingleStringProperty.Value, readOnlySingleStringProperty.Value, extremelyDeepStringProperty.Value);
+            return new VaultProperties(Optional.ToNullable(duration), Optional.ToNullable(createOn), tenantId, sku, accessPolicies ?? new ChangeTrackingList<AccessPolicyEntry>(), vaultUri.Value, hsmPoolResourceId.Value, deployments ?? new ChangeTrackingList<string>(), Optional.ToNullable(enabledForDiskEncryption), Optional.ToNullable(enabledForTemplateDeployment), Optional.ToNullable(enableSoftDelete), Optional.ToNullable(softDeleteRetentionInDays), Optional.ToNullable(enableRbacAuthorization), Optional.ToNullable(createMode), Optional.ToNullable(enablePurgeProtection), networkAcls.Value, Optional.ToNullable(provisioningState), privateEndpointConnections ?? new ChangeTrackingList<PrivateEndpointConnectionItem>(), publicNetworkAccess.Value, readWriteSingleStringProperty.Value, readOnlySingleStringProperty.Value, extremelyDeepStringProperty.Value);
         }
     }
 }

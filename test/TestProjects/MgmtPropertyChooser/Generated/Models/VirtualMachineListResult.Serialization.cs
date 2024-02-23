@@ -40,7 +40,7 @@ namespace MgmtPropertyChooser.Models
                     continue;
                 }
             }
-            return new VirtualMachineListResult(value, nextLink.Value);
+            return new VirtualMachineListResult(value ?? new ChangeTrackingList<VirtualMachineData>(), nextLink.Value);
         }
     }
 }

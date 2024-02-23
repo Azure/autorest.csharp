@@ -50,7 +50,7 @@ namespace CognitiveSearch.Models
             string name = default;
             Optional<string> source = default;
             Optional<string> sourceContext = default;
-            Optional<IList<InputFieldMappingEntry>> inputs = default;
+            IList<InputFieldMappingEntry> inputs = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -83,7 +83,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new InputFieldMappingEntry(name, source.Value, sourceContext.Value, Optional.ToList(inputs));
+            return new InputFieldMappingEntry(name, source.Value, sourceContext.Value, inputs ?? new ChangeTrackingList<InputFieldMappingEntry>());
         }
     }
 }

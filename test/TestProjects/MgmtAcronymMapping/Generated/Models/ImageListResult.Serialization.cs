@@ -40,7 +40,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new ImageListResult(value, nextLink.Value);
+            return new ImageListResult(value ?? new ChangeTrackingList<ImageData>(), nextLink.Value);
         }
     }
 }

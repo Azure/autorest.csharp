@@ -20,7 +20,7 @@ namespace MgmtExpandResourceTypes.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<ZoneData>> value = default;
+            IReadOnlyList<ZoneData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -44,7 +44,7 @@ namespace MgmtExpandResourceTypes.Models
                     continue;
                 }
             }
-            return new ZoneListResult(Optional.ToList(value), nextLink.Value);
+            return new ZoneListResult(value ?? new ChangeTrackingList<ZoneData>(), nextLink.Value);
         }
     }
 }

@@ -81,7 +81,7 @@ namespace MgmtAcronymMapping.Models
             Optional<string> customData = default;
             Optional<WindowsConfiguration> windowsConfiguration = default;
             Optional<LinuxConfiguration> linuxConfiguration = default;
-            Optional<IList<VaultSecretGroup>> secrets = default;
+            IList<VaultSecretGroup> secrets = default;
             Optional<bool> allowExtensionOperations = default;
             Optional<bool> requireGuestProvisionSignal = default;
             foreach (var property in element.EnumerateObject())
@@ -157,7 +157,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new OSProfile(computerName.Value, adminUsername.Value, adminPassword.Value, customData.Value, windowsConfiguration.Value, linuxConfiguration.Value, Optional.ToList(secrets), Optional.ToNullable(allowExtensionOperations), Optional.ToNullable(requireGuestProvisionSignal));
+            return new OSProfile(computerName.Value, adminUsername.Value, adminPassword.Value, customData.Value, windowsConfiguration.Value, linuxConfiguration.Value, secrets ?? new ChangeTrackingList<VaultSecretGroup>(), Optional.ToNullable(allowExtensionOperations), Optional.ToNullable(requireGuestProvisionSignal));
         }
     }
 }

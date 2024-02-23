@@ -113,7 +113,7 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new CreateEditResponse(@object, created, choices, usage, serializedAdditionalRawData);
+            return new CreateEditResponse(@object, created, choices ?? new OptionalList<CreateEditResponseChoice>(), usage, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<CreateEditResponse>.Write(ModelReaderWriterOptions options)

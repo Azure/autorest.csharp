@@ -92,7 +92,7 @@ namespace required_optional.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ArrayWrapper(value, serializedAdditionalRawData);
+            return new ArrayWrapper(value ?? new ChangeTrackingList<string>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ArrayWrapper>.Write(ModelReaderWriterOptions options)

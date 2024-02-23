@@ -109,7 +109,7 @@ namespace ModelsTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new NumericValuesFacetint32(field, serializedAdditionalRawData, values, value);
+            return new NumericValuesFacetint32(field, serializedAdditionalRawData, values ?? new ChangeTrackingList<int>(), value);
         }
 
         BinaryData IPersistableModel<NumericValuesFacetint32>.Write(ModelReaderWriterOptions options)

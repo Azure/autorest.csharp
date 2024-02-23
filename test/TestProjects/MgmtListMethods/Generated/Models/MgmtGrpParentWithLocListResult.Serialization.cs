@@ -40,7 +40,7 @@ namespace MgmtListMethods.Models
                     continue;
                 }
             }
-            return new MgmtGrpParentWithLocListResult(value, nextLink.Value);
+            return new MgmtGrpParentWithLocListResult(value ?? new ChangeTrackingList<MgmtGrpParentWithLocData>(), nextLink.Value);
         }
     }
 }

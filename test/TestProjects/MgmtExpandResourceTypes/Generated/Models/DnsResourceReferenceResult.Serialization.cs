@@ -19,7 +19,7 @@ namespace MgmtExpandResourceTypes.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<DnsResourceReference>> dnsResourceReferences = default;
+            IReadOnlyList<DnsResourceReference> dnsResourceReferences = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("properties"u8))
@@ -49,7 +49,7 @@ namespace MgmtExpandResourceTypes.Models
                     continue;
                 }
             }
-            return new DnsResourceReferenceResult(Optional.ToList(dnsResourceReferences));
+            return new DnsResourceReferenceResult(dnsResourceReferences ?? new ChangeTrackingList<DnsResourceReference>());
         }
     }
 }

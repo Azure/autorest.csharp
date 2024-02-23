@@ -104,7 +104,7 @@ namespace lro.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new RadiologyInsightsData(patients, configuration.Value, serializedAdditionalRawData);
+            return new RadiologyInsightsData(patients ?? new ChangeTrackingList<string>(), configuration.Value, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<RadiologyInsightsData>.Write(ModelReaderWriterOptions options)

@@ -42,7 +42,7 @@ namespace MgmtAcronymMapping.Models
                 return null;
             }
             Optional<WritableSubResource> sourceVault = default;
-            Optional<IList<VaultCertificate>> vaultCertificates = default;
+            IList<VaultCertificate> vaultCertificates = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sourceVault"u8))
@@ -69,7 +69,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VaultSecretGroup(sourceVault, Optional.ToList(vaultCertificates));
+            return new VaultSecretGroup(sourceVault, vaultCertificates ?? new ChangeTrackingList<VaultCertificate>());
         }
     }
 }

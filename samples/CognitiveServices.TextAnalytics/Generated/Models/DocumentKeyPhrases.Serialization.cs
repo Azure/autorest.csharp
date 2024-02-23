@@ -60,7 +60,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            return new DocumentKeyPhrases(id, keyPhrases, warnings, statistics.Value);
+            return new DocumentKeyPhrases(id, keyPhrases ?? new ChangeTrackingList<string>(), warnings ?? new ChangeTrackingList<TextAnalyticsWarning>(), statistics.Value);
         }
     }
 }

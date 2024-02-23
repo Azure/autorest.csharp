@@ -88,7 +88,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
             Optional<ImageReference> imageReference = default;
             Optional<OSDisk> osDisk = default;
-            Optional<IList<DataDisk>> dataDisks = default;
+            IList<DataDisk> dataDisks = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -131,7 +131,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new StorageProfile(imageReference.Value, osDisk.Value, Optional.ToList(dataDisks), serializedAdditionalRawData);
+            return new StorageProfile(imageReference.Value, osDisk.Value, dataDisks ?? new ChangeTrackingList<DataDisk>(), serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

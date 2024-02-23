@@ -20,7 +20,7 @@ namespace MgmtPartialResource.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<ConfigurationProfileAssignmentData>> value = default;
+            IReadOnlyList<ConfigurationProfileAssignmentData> value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -38,7 +38,7 @@ namespace MgmtPartialResource.Models
                     continue;
                 }
             }
-            return new ConfigurationProfileAssignmentList(Optional.ToList(value));
+            return new ConfigurationProfileAssignmentList(value ?? new ChangeTrackingList<ConfigurationProfileAssignmentData>());
         }
     }
 }

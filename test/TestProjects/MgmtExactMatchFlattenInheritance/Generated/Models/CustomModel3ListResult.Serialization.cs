@@ -20,7 +20,7 @@ namespace MgmtExactMatchFlattenInheritance.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<CustomModel3Data>> value = default;
+            IReadOnlyList<CustomModel3Data> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -44,7 +44,7 @@ namespace MgmtExactMatchFlattenInheritance.Models
                     continue;
                 }
             }
-            return new CustomModel3ListResult(Optional.ToList(value), nextLink.Value);
+            return new CustomModel3ListResult(value ?? new ChangeTrackingList<CustomModel3Data>(), nextLink.Value);
         }
     }
 }

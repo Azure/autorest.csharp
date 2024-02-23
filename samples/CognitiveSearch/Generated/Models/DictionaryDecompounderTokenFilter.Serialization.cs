@@ -122,7 +122,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new DictionaryDecompounderTokenFilter(odataType, name, wordList, Optional.ToNullable(minWordSize), Optional.ToNullable(minSubwordSize), Optional.ToNullable(maxSubwordSize), Optional.ToNullable(onlyLongestMatch));
+            return new DictionaryDecompounderTokenFilter(odataType, name, wordList ?? new ChangeTrackingList<string>(), Optional.ToNullable(minWordSize), Optional.ToNullable(minSubwordSize), Optional.ToNullable(maxSubwordSize), Optional.ToNullable(onlyLongestMatch));
         }
     }
 }

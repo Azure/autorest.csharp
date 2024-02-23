@@ -92,7 +92,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new CommonGramTokenFilter(odataType, name, commonWords, Optional.ToNullable(ignoreCase), Optional.ToNullable(queryMode));
+            return new CommonGramTokenFilter(odataType, name, commonWords ?? new ChangeTrackingList<string>(), Optional.ToNullable(ignoreCase), Optional.ToNullable(queryMode));
         }
     }
 }

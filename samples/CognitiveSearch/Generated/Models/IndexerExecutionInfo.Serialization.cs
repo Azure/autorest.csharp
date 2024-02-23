@@ -55,7 +55,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new IndexerExecutionInfo(status, lastResult.Value, executionHistory, limits);
+            return new IndexerExecutionInfo(status, lastResult.Value, executionHistory ?? new ChangeTrackingList<IndexerExecutionResult>(), limits);
         }
     }
 }

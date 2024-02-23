@@ -331,24 +331,24 @@ namespace ModelShapes.Models
             IReadOnlyList<int> requiredIntList = default;
             Optional<string> nonRequiredString = default;
             Optional<int> nonRequiredInt = default;
-            Optional<IReadOnlyList<string>> nonRequiredStringList = default;
-            Optional<IReadOnlyList<int>> nonRequiredIntList = default;
+            IReadOnlyList<string> nonRequiredStringList = default;
+            IReadOnlyList<int> nonRequiredIntList = default;
             string requiredNullableString = default;
             int? requiredNullableInt = default;
             IReadOnlyList<string> requiredNullableStringList = default;
             IReadOnlyList<int> requiredNullableIntList = default;
             Optional<string> nonRequiredNullableString = default;
             Optional<int?> nonRequiredNullableInt = default;
-            Optional<IReadOnlyList<string>> nonRequiredNullableStringList = default;
-            Optional<IReadOnlyList<int>> nonRequiredNullableIntList = default;
+            IReadOnlyList<string> nonRequiredNullableStringList = default;
+            IReadOnlyList<int> nonRequiredNullableIntList = default;
             int requiredReadonlyInt = default;
             Optional<int> nonRequiredReadonlyInt = default;
-            Optional<ReadOnlyMemory<float>> vector = default;
-            Optional<ReadOnlyMemory<float>> vectorReadOnly = default;
+            ReadOnlyMemory<float> vector = default;
+            ReadOnlyMemory<float> vectorReadOnly = default;
             ReadOnlyMemory<float> vectorReadOnlyRequired = default;
             ReadOnlyMemory<float> vectorRequired = default;
-            Optional<ReadOnlyMemory<float>?> vectorNullable = default;
-            Optional<ReadOnlyMemory<float>?> vectorReadOnlyNullable = default;
+            ReadOnlyMemory<float>? vectorNullable = default;
+            ReadOnlyMemory<float>? vectorReadOnlyNullable = default;
             ReadOnlyMemory<float>? vectorReadOnlyRequiredNullable = default;
             ReadOnlyMemory<float>? vectorRequiredNullable = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
@@ -673,7 +673,7 @@ namespace ModelShapes.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new OutputModel(requiredString, requiredInt, requiredStringList, requiredIntList, nonRequiredString.Value, Optional.ToNullable(nonRequiredInt), Optional.ToList(nonRequiredStringList), Optional.ToList(nonRequiredIntList), requiredNullableString, requiredNullableInt, requiredNullableStringList, requiredNullableIntList, nonRequiredNullableString.Value, Optional.ToNullable(nonRequiredNullableInt), Optional.ToList(nonRequiredNullableStringList), Optional.ToList(nonRequiredNullableIntList), requiredReadonlyInt, Optional.ToNullable(nonRequiredReadonlyInt), vector, vectorReadOnly, vectorReadOnlyRequired, vectorRequired, Optional.ToNullable(vectorNullable), Optional.ToNullable(vectorReadOnlyNullable), vectorReadOnlyRequiredNullable, vectorRequiredNullable, serializedAdditionalRawData);
+            return new OutputModel(requiredString, requiredInt, requiredStringList ?? new ChangeTrackingList<string>(), requiredIntList ?? new ChangeTrackingList<int>(), nonRequiredString.Value, Optional.ToNullable(nonRequiredInt), nonRequiredStringList ?? new ChangeTrackingList<string>(), nonRequiredIntList ?? new ChangeTrackingList<int>(), requiredNullableString, requiredNullableInt, requiredNullableStringList ?? new ChangeTrackingList<string>(), requiredNullableIntList ?? new ChangeTrackingList<int>(), nonRequiredNullableString.Value, Optional.ToNullable(nonRequiredNullableInt), nonRequiredNullableStringList ?? new ChangeTrackingList<string>(), nonRequiredNullableIntList ?? new ChangeTrackingList<int>(), requiredReadonlyInt, Optional.ToNullable(nonRequiredReadonlyInt), vector, vectorReadOnly, vectorReadOnlyRequired, vectorRequired, vectorNullable, vectorReadOnlyNullable, vectorReadOnlyRequiredNullable, vectorRequiredNullable, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<OutputModel>.Write(ModelReaderWriterOptions options)

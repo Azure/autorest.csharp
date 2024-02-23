@@ -40,7 +40,7 @@ namespace MgmtListMethods.Models
                     continue;
                 }
             }
-            return new TenantTestListResult(value, nextLink.Value);
+            return new TenantTestListResult(value ?? new ChangeTrackingList<TenantTestData>(), nextLink.Value);
         }
     }
 }

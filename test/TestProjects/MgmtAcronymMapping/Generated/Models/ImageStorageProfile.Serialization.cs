@@ -46,7 +46,7 @@ namespace MgmtAcronymMapping.Models
                 return null;
             }
             Optional<ImageOSDisk> osDisk = default;
-            Optional<IList<ImageDataDisk>> dataDisks = default;
+            IList<ImageDataDisk> dataDisks = default;
             Optional<bool> zoneResilient = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -83,7 +83,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new ImageStorageProfile(osDisk.Value, Optional.ToList(dataDisks), Optional.ToNullable(zoneResilient));
+            return new ImageStorageProfile(osDisk.Value, dataDisks ?? new ChangeTrackingList<ImageDataDisk>(), Optional.ToNullable(zoneResilient));
         }
     }
 }

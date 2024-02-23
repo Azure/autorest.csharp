@@ -40,7 +40,7 @@ namespace MgmtListMethods.Models
                     continue;
                 }
             }
-            return new TenantParentWithNonResChListResult(value, nextLink.Value);
+            return new TenantParentWithNonResChListResult(value ?? new ChangeTrackingList<TenantParentWithNonResChData>(), nextLink.Value);
         }
     }
 }

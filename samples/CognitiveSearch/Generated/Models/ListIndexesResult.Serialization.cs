@@ -7,6 +7,7 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
@@ -32,7 +33,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new ListIndexesResult(value);
+            return new ListIndexesResult(value ?? new ChangeTrackingList<Index>());
         }
     }
 }

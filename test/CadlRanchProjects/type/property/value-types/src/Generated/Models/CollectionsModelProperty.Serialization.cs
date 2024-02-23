@@ -93,7 +93,7 @@ namespace _Type.Property.ValueTypes.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new CollectionsModelProperty(property, serializedAdditionalRawData);
+            return new CollectionsModelProperty(property ?? new ChangeTrackingList<InnerModel>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<CollectionsModelProperty>.Write(ModelReaderWriterOptions options)

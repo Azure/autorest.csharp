@@ -46,7 +46,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new VaultAccessPolicyProperties(accessPolicies);
+            return new VaultAccessPolicyProperties(accessPolicies ?? new ChangeTrackingList<AccessPolicyEntry>());
         }
     }
 }

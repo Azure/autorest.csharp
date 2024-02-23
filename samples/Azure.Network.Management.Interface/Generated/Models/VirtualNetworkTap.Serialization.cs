@@ -70,7 +70,7 @@ namespace Azure.Network.Management.Interface.Models
             Optional<string> type = default;
             Optional<string> location = default;
             Optional<IDictionary<string, string>> tags = default;
-            Optional<IReadOnlyList<NetworkInterfaceTapConfiguration>> networkInterfaceTapConfigurations = default;
+            IReadOnlyList<NetworkInterfaceTapConfiguration> networkInterfaceTapConfigurations = default;
             Optional<string> resourceGuid = default;
             Optional<ProvisioningState> provisioningState = default;
             Optional<NetworkInterfaceIPConfiguration> destinationNetworkInterfaceIPConfiguration = default;
@@ -185,7 +185,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new VirtualNetworkTap(id.Value, name.Value, type.Value, location.Value, Optional.ToDictionary(tags), etag.Value, Optional.ToList(networkInterfaceTapConfigurations), resourceGuid.Value, Optional.ToNullable(provisioningState), destinationNetworkInterfaceIPConfiguration.Value, destinationLoadBalancerFrontEndIPConfiguration.Value, Optional.ToNullable(destinationPort));
+            return new VirtualNetworkTap(id.Value, name.Value, type.Value, location.Value, Optional.ToDictionary(tags), etag.Value, networkInterfaceTapConfigurations ?? new ChangeTrackingList<NetworkInterfaceTapConfiguration>(), resourceGuid.Value, Optional.ToNullable(provisioningState), destinationNetworkInterfaceIPConfiguration.Value, destinationLoadBalancerFrontEndIPConfiguration.Value, Optional.ToNullable(destinationPort));
         }
     }
 }

@@ -40,7 +40,7 @@ namespace MgmtParamOrdering.Models
                     continue;
                 }
             }
-            return new EnvironmentContainerResourceListResult(value, nextLink.Value);
+            return new EnvironmentContainerResourceListResult(value ?? new ChangeTrackingList<EnvironmentContainerResourceData>(), nextLink.Value);
         }
     }
 }

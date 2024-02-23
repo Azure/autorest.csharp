@@ -21,9 +21,9 @@ namespace Azure.AI.FormRecognizer.Models
             }
             string version = default;
             IReadOnlyList<ReadResult> readResults = default;
-            Optional<IReadOnlyList<PageResult>> pageResults = default;
-            Optional<IReadOnlyList<DocumentResult>> documentResults = default;
-            Optional<IReadOnlyList<ErrorInformation>> errors = default;
+            IReadOnlyList<PageResult> pageResults = default;
+            IReadOnlyList<DocumentResult> documentResults = default;
+            IReadOnlyList<ErrorInformation> errors = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("version"u8))
@@ -84,7 +84,7 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            return new AnalyzeResult(version, readResults, Optional.ToList(pageResults), Optional.ToList(documentResults), Optional.ToList(errors));
+            return new AnalyzeResult(version, readResults ?? new ChangeTrackingList<ReadResult>(), pageResults ?? new ChangeTrackingList<PageResult>(), documentResults ?? new ChangeTrackingList<DocumentResult>(), errors ?? new ChangeTrackingList<ErrorInformation>());
         }
     }
 }

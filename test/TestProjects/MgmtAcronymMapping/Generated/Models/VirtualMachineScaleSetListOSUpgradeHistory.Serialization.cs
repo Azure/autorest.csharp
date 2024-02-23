@@ -39,7 +39,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetListOSUpgradeHistory(value, nextLink.Value);
+            return new VirtualMachineScaleSetListOSUpgradeHistory(value ?? new ChangeTrackingList<UpgradeOperationHistoricalStatusInfo>(), nextLink.Value);
         }
     }
 }

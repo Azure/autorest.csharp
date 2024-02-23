@@ -60,7 +60,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            return new SentimentResponse(documents, errors, statistics.Value, modelVersion);
+            return new SentimentResponse(documents ?? new ChangeTrackingList<DocumentSentiment>(), errors ?? new ChangeTrackingList<DocumentError>(), statistics.Value, modelVersion);
         }
     }
 }

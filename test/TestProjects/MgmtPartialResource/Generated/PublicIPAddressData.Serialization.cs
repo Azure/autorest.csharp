@@ -87,7 +87,7 @@ namespace MgmtPartialResource
             }
             Optional<PublicIPAddressSku> sku = default;
             Optional<string> etag = default;
-            Optional<IList<string>> zones = default;
+            IList<string> zones = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
@@ -241,7 +241,7 @@ namespace MgmtPartialResource
                     continue;
                 }
             }
-            return new PublicIPAddressData(id, name, type, systemData.Value, sku.Value, etag.Value, Optional.ToList(zones), Optional.ToNullable(publicIPAllocationMethod), Optional.ToNullable(publicIPAddressVersion), ipAddress.Value, Optional.ToNullable(idleTimeoutInMinutes), resourceGuid.Value, servicePublicIPAddress.Value, Optional.ToNullable(migrationPhase), linkedPublicIPAddress.Value, Optional.ToNullable(deleteOption));
+            return new PublicIPAddressData(id, name, type, systemData.Value, sku.Value, etag.Value, zones ?? new ChangeTrackingList<string>(), Optional.ToNullable(publicIPAllocationMethod), Optional.ToNullable(publicIPAddressVersion), ipAddress.Value, Optional.ToNullable(idleTimeoutInMinutes), resourceGuid.Value, servicePublicIPAddress.Value, Optional.ToNullable(migrationPhase), linkedPublicIPAddress.Value, Optional.ToNullable(deleteOption));
         }
     }
 }

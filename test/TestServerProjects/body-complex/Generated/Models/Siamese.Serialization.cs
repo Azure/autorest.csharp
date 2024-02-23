@@ -96,7 +96,7 @@ namespace body_complex.Models
             }
             Optional<string> breed = default;
             Optional<string> color = default;
-            Optional<IList<Dog>> hates = default;
+            IList<Dog> hates = default;
             Optional<int> id = default;
             Optional<string> name = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
@@ -147,7 +147,7 @@ namespace body_complex.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Siamese(Optional.ToNullable(id), name.Value, serializedAdditionalRawData, color.Value, Optional.ToList(hates), breed.Value);
+            return new Siamese(Optional.ToNullable(id), name.Value, serializedAdditionalRawData, color.Value, hates ?? new ChangeTrackingList<Dog>(), breed.Value);
         }
 
         BinaryData IPersistableModel<Siamese>.Write(ModelReaderWriterOptions options)

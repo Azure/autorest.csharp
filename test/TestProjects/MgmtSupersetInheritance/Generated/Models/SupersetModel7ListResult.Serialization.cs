@@ -20,7 +20,7 @@ namespace MgmtSupersetInheritance.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<SupersetModel7Data>> value = default;
+            IReadOnlyList<SupersetModel7Data> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -44,7 +44,7 @@ namespace MgmtSupersetInheritance.Models
                     continue;
                 }
             }
-            return new SupersetModel7ListResult(Optional.ToList(value), nextLink.Value);
+            return new SupersetModel7ListResult(value ?? new ChangeTrackingList<SupersetModel7Data>(), nextLink.Value);
         }
     }
 }

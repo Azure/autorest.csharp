@@ -116,11 +116,11 @@ namespace MgmtMockAndSample
             Optional<Probe> startupProbe = default;
             Optional<Probe> readinessProbe = default;
             Optional<DesiredStatusCode> desiredStatusCode = default;
-            Optional<IReadOnlyList<WritableSubResource>> ruleCollectionGroups = default;
+            IReadOnlyList<WritableSubResource> ruleCollectionGroups = default;
             Optional<ProvisioningState> provisioningState = default;
             Optional<WritableSubResource> basePolicy = default;
-            Optional<IReadOnlyList<WritableSubResource>> firewalls = default;
-            Optional<IReadOnlyList<WritableSubResource>> childPolicies = default;
+            IReadOnlyList<WritableSubResource> firewalls = default;
+            IReadOnlyList<WritableSubResource> childPolicies = default;
             Optional<FirewallPolicyThreatIntelWhitelist> threatIntelWhitelist = default;
             Optional<FirewallPolicyInsights> insights = default;
             Optional<FirewallPolicySnat> snat = default;
@@ -351,7 +351,7 @@ namespace MgmtMockAndSample
                     continue;
                 }
             }
-            return new FirewallPolicyData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, etag.Value, identity, startupProbe.Value, readinessProbe.Value, Optional.ToNullable(desiredStatusCode), Optional.ToList(ruleCollectionGroups), Optional.ToNullable(provisioningState), basePolicy, Optional.ToList(firewalls), Optional.ToList(childPolicies), threatIntelWhitelist.Value, insights.Value, snat.Value, dnsSettings.Value, intrusionDetection.Value, transportSecurity.Value, sku.Value);
+            return new FirewallPolicyData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, etag.Value, identity, startupProbe.Value, readinessProbe.Value, Optional.ToNullable(desiredStatusCode), ruleCollectionGroups ?? new ChangeTrackingList<WritableSubResource>(), Optional.ToNullable(provisioningState), basePolicy, firewalls ?? new ChangeTrackingList<WritableSubResource>(), childPolicies ?? new ChangeTrackingList<WritableSubResource>(), threatIntelWhitelist.Value, insights.Value, snat.Value, dnsSettings.Value, intrusionDetection.Value, transportSecurity.Value, sku.Value);
         }
     }
 }

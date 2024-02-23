@@ -106,7 +106,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ImageListResult(value, nextLink.Value, serializedAdditionalRawData);
+            return new ImageListResult(value ?? new ChangeTrackingList<ImageData>(), nextLink.Value, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

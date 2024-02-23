@@ -121,17 +121,17 @@ namespace Azure.Network.Management.Interface.Models
             Optional<string> name = default;
             Optional<string> etag = default;
             Optional<string> id = default;
-            Optional<IList<VirtualNetworkTap>> virtualNetworkTaps = default;
-            Optional<IList<ApplicationGatewayBackendAddressPool>> applicationGatewayBackendAddressPools = default;
-            Optional<IList<BackendAddressPool>> loadBalancerBackendAddressPools = default;
-            Optional<IList<InboundNatRule>> loadBalancerInboundNatRules = default;
+            IList<VirtualNetworkTap> virtualNetworkTaps = default;
+            IList<ApplicationGatewayBackendAddressPool> applicationGatewayBackendAddressPools = default;
+            IList<BackendAddressPool> loadBalancerBackendAddressPools = default;
+            IList<InboundNatRule> loadBalancerInboundNatRules = default;
             Optional<string> privateIPAddress = default;
             Optional<IPAllocationMethod> privateIPAllocationMethod = default;
             Optional<IPVersion> privateIPAddressVersion = default;
             Optional<Subnet> subnet = default;
             Optional<bool> primary = default;
             Optional<PublicIPAddress> publicIPAddress = default;
-            Optional<IList<ApplicationSecurityGroup>> applicationSecurityGroups = default;
+            IList<ApplicationSecurityGroup> applicationSecurityGroups = default;
             Optional<ProvisioningState> provisioningState = default;
             Optional<NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties> privateLinkConnectionProperties = default;
             foreach (var property in element.EnumerateObject())
@@ -302,7 +302,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new NetworkInterfaceIPConfiguration(id.Value, name.Value, etag.Value, Optional.ToList(virtualNetworkTaps), Optional.ToList(applicationGatewayBackendAddressPools), Optional.ToList(loadBalancerBackendAddressPools), Optional.ToList(loadBalancerInboundNatRules), privateIPAddress.Value, Optional.ToNullable(privateIPAllocationMethod), Optional.ToNullable(privateIPAddressVersion), subnet.Value, Optional.ToNullable(primary), publicIPAddress.Value, Optional.ToList(applicationSecurityGroups), Optional.ToNullable(provisioningState), privateLinkConnectionProperties.Value);
+            return new NetworkInterfaceIPConfiguration(id.Value, name.Value, etag.Value, virtualNetworkTaps ?? new ChangeTrackingList<VirtualNetworkTap>(), applicationGatewayBackendAddressPools ?? new ChangeTrackingList<ApplicationGatewayBackendAddressPool>(), loadBalancerBackendAddressPools ?? new ChangeTrackingList<BackendAddressPool>(), loadBalancerInboundNatRules ?? new ChangeTrackingList<InboundNatRule>(), privateIPAddress.Value, Optional.ToNullable(privateIPAllocationMethod), Optional.ToNullable(privateIPAddressVersion), subnet.Value, Optional.ToNullable(primary), publicIPAddress.Value, applicationSecurityGroups ?? new ChangeTrackingList<ApplicationSecurityGroup>(), Optional.ToNullable(provisioningState), privateLinkConnectionProperties.Value);
         }
     }
 }

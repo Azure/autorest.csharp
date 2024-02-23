@@ -158,9 +158,9 @@ namespace Azure.ResourceManager.Sample
             ResourceType type = default;
             Optional<SystemData> systemData = default;
             Optional<ProximityPlacementGroupType> proximityPlacementGroupType = default;
-            Optional<IReadOnlyList<SubResourceWithColocationStatus>> virtualMachines = default;
-            Optional<IReadOnlyList<SubResourceWithColocationStatus>> virtualMachineScaleSets = default;
-            Optional<IReadOnlyList<SubResourceWithColocationStatus>> availabilitySets = default;
+            IReadOnlyList<SubResourceWithColocationStatus> virtualMachines = default;
+            IReadOnlyList<SubResourceWithColocationStatus> virtualMachineScaleSets = default;
+            IReadOnlyList<SubResourceWithColocationStatus> availabilitySets = default;
             Optional<InstanceViewStatus> colocationStatus = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -296,7 +296,7 @@ namespace Azure.ResourceManager.Sample
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ProximityPlacementGroupData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, extendedLocation, Optional.ToNullable(proximityPlacementGroupType), Optional.ToList(virtualMachines), Optional.ToList(virtualMachineScaleSets), Optional.ToList(availabilitySets), colocationStatus.Value, serializedAdditionalRawData);
+            return new ProximityPlacementGroupData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, extendedLocation, Optional.ToNullable(proximityPlacementGroupType), virtualMachines ?? new ChangeTrackingList<SubResourceWithColocationStatus>(), virtualMachineScaleSets ?? new ChangeTrackingList<SubResourceWithColocationStatus>(), availabilitySets ?? new ChangeTrackingList<SubResourceWithColocationStatus>(), colocationStatus.Value, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

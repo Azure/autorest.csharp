@@ -40,7 +40,7 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Optional<IList<string>> prefixMatch = default;
+            IList<string> prefixMatch = default;
             Optional<string> minCreationTime = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -64,7 +64,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new ObjectReplicationPolicyFilter(Optional.ToList(prefixMatch), minCreationTime.Value);
+            return new ObjectReplicationPolicyFilter(prefixMatch ?? new ChangeTrackingList<string>(), minCreationTime.Value);
         }
     }
 }

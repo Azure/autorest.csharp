@@ -105,7 +105,7 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ListPaginatedFineTuningJobsResponse(@object, data, hasMore, serializedAdditionalRawData);
+            return new ListPaginatedFineTuningJobsResponse(@object, data ?? new OptionalList<FineTuningJob>(), hasMore, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ListPaginatedFineTuningJobsResponse>.Write(ModelReaderWriterOptions options)

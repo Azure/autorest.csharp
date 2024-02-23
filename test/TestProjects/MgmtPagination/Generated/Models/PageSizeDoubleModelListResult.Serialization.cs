@@ -20,7 +20,7 @@ namespace MgmtPagination.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<PageSizeDoubleModelData>> value = default;
+            IReadOnlyList<PageSizeDoubleModelData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -44,7 +44,7 @@ namespace MgmtPagination.Models
                     continue;
                 }
             }
-            return new PageSizeDoubleModelListResult(Optional.ToList(value), nextLink.Value);
+            return new PageSizeDoubleModelListResult(value ?? new ChangeTrackingList<PageSizeDoubleModelData>(), nextLink.Value);
         }
     }
 }
