@@ -20,7 +20,7 @@ namespace MgmtPagination.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<PageSizeInt64ModelData>> value = default;
+            IReadOnlyList<PageSizeInt64ModelData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -44,7 +44,7 @@ namespace MgmtPagination.Models
                     continue;
                 }
             }
-            return new PageSizeInt64ModelListResult(Optional.ToList(value), nextLink.Value);
+            return new PageSizeInt64ModelListResult(value ?? new ChangeTrackingList<PageSizeInt64ModelData>(), nextLink.Value);
         }
     }
 }

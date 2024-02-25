@@ -69,9 +69,9 @@ namespace Azure.Network.Management.Interface.Models
             Optional<string> name = default;
             Optional<string> type = default;
             Optional<string> location = default;
-            Optional<IDictionary<string, string>> tags = default;
-            Optional<IList<Route>> routes = default;
-            Optional<IReadOnlyList<Subnet>> subnets = default;
+            IDictionary<string, string> tags = default;
+            IList<Route> routes = default;
+            IReadOnlyList<Subnet> subnets = default;
             Optional<bool> disableBgpRoutePropagation = default;
             Optional<ProvisioningState> provisioningState = default;
             foreach (var property in element.EnumerateObject())
@@ -174,7 +174,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new RouteTable(id.Value, name.Value, type.Value, location.Value, Optional.ToDictionary(tags), etag.Value, Optional.ToList(routes), Optional.ToList(subnets), Optional.ToNullable(disableBgpRoutePropagation), Optional.ToNullable(provisioningState));
+            return new RouteTable(id.Value, name.Value, type.Value, location.Value, tags ?? new ChangeTrackingDictionary<string, string>(), etag.Value, routes ?? new ChangeTrackingList<Route>(), subnets ?? new ChangeTrackingList<Subnet>(), Optional.ToNullable(disableBgpRoutePropagation), Optional.ToNullable(provisioningState));
         }
     }
 }

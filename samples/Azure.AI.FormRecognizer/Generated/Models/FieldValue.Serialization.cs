@@ -27,12 +27,12 @@ namespace Azure.AI.FormRecognizer.Models
             Optional<string> valuePhoneNumber = default;
             Optional<float> valueNumber = default;
             Optional<int> valueInteger = default;
-            Optional<IReadOnlyList<FieldValue>> valueArray = default;
-            Optional<IReadOnlyDictionary<string, FieldValue>> valueObject = default;
+            IReadOnlyList<FieldValue> valueArray = default;
+            IReadOnlyDictionary<string, FieldValue> valueObject = default;
             Optional<string> text = default;
-            Optional<IReadOnlyList<float>> boundingBox = default;
+            IReadOnlyList<float> boundingBox = default;
             Optional<float> confidence = default;
-            Optional<IReadOnlyList<string>> elements = default;
+            IReadOnlyList<string> elements = default;
             Optional<int> page = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -167,7 +167,7 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            return new FieldValue(type, valueString.Value, Optional.ToNullable(valueDate), Optional.ToNullable(valueTime), valuePhoneNumber.Value, Optional.ToNullable(valueNumber), Optional.ToNullable(valueInteger), Optional.ToList(valueArray), Optional.ToDictionary(valueObject), text.Value, Optional.ToList(boundingBox), Optional.ToNullable(confidence), Optional.ToList(elements), Optional.ToNullable(page));
+            return new FieldValue(type, valueString.Value, Optional.ToNullable(valueDate), Optional.ToNullable(valueTime), valuePhoneNumber.Value, Optional.ToNullable(valueNumber), Optional.ToNullable(valueInteger), valueArray ?? new ChangeTrackingList<FieldValue>(), valueObject ?? new ChangeTrackingDictionary<string, FieldValue>(), text.Value, boundingBox ?? new ChangeTrackingList<float>(), Optional.ToNullable(confidence), elements ?? new ChangeTrackingList<string>(), Optional.ToNullable(page));
         }
     }
 }

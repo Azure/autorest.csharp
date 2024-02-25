@@ -53,7 +53,7 @@ namespace MgmtConstants
             {
                 return null;
             }
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -137,7 +137,7 @@ namespace MgmtConstants
                     continue;
                 }
             }
-            return new OptionalMachineData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, listener.Value, content.Value);
+            return new OptionalMachineData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, listener.Value, content.Value);
         }
     }
 }

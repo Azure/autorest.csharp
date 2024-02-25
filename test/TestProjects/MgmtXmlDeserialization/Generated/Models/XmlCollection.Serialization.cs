@@ -139,7 +139,7 @@ namespace MgmtXmlDeserialization.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<XmlInstanceData>> value = default;
+            IReadOnlyList<XmlInstanceData> value = default;
             Optional<long> count = default;
             Optional<string> nextLink = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
@@ -180,7 +180,7 @@ namespace MgmtXmlDeserialization.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new XmlCollection(Optional.ToList(value), Optional.ToNullable(count), nextLink.Value, serializedAdditionalRawData);
+            return new XmlCollection(value ?? new ChangeTrackingList<XmlInstanceData>(), Optional.ToNullable(count), nextLink.Value, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<XmlCollection>.Write(ModelReaderWriterOptions options)

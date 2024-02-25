@@ -185,19 +185,19 @@ namespace ModelsTypeSpec.Models
             }
             Optional<string> optionalString = default;
             Optional<int> optionalInt = default;
-            Optional<IList<string>> optionalStringList = default;
-            Optional<IList<int>> optionalIntList = default;
-            Optional<IList<CollectionItem>> optionalModelList = default;
+            IList<string> optionalStringList = default;
+            IList<int> optionalIntList = default;
+            IList<CollectionItem> optionalModelList = default;
             Optional<DerivedModel> optionalModel = default;
             Optional<DerivedModelWithProperties> optionalModelWithPropertiesOnBase = default;
             Optional<FixedStringEnum> optionalFixedStringEnum = default;
             Optional<ExtensibleEnum> optionalExtensibleEnum = default;
-            Optional<IDictionary<string, int>> optionalIntRecord = default;
-            Optional<IDictionary<string, string>> optionalStringRecord = default;
-            Optional<IDictionary<string, RecordItem>> optionalModelRecord = default;
+            IDictionary<string, int> optionalIntRecord = default;
+            IDictionary<string, string> optionalStringRecord = default;
+            IDictionary<string, RecordItem> optionalModelRecord = default;
             Optional<DateTimeOffset> optionalPlainDate = default;
             Optional<TimeSpan> optionalPlainTime = default;
-            Optional<IList<int?>> optionalCollectionWithNullableIntElement = default;
+            IList<int?> optionalCollectionWithNullableIntElement = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -381,7 +381,7 @@ namespace ModelsTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new RoundTripOptionalModel(optionalString.Value, Optional.ToNullable(optionalInt), Optional.ToList(optionalStringList), Optional.ToList(optionalIntList), Optional.ToList(optionalModelList), optionalModel.Value, optionalModelWithPropertiesOnBase.Value, Optional.ToNullable(optionalFixedStringEnum), Optional.ToNullable(optionalExtensibleEnum), Optional.ToDictionary(optionalIntRecord), Optional.ToDictionary(optionalStringRecord), Optional.ToDictionary(optionalModelRecord), Optional.ToNullable(optionalPlainDate), Optional.ToNullable(optionalPlainTime), Optional.ToList(optionalCollectionWithNullableIntElement), serializedAdditionalRawData);
+            return new RoundTripOptionalModel(optionalString.Value, Optional.ToNullable(optionalInt), optionalStringList ?? new ChangeTrackingList<string>(), optionalIntList ?? new ChangeTrackingList<int>(), optionalModelList ?? new ChangeTrackingList<CollectionItem>(), optionalModel.Value, optionalModelWithPropertiesOnBase.Value, Optional.ToNullable(optionalFixedStringEnum), Optional.ToNullable(optionalExtensibleEnum), optionalIntRecord ?? new ChangeTrackingDictionary<string, int>(), optionalStringRecord ?? new ChangeTrackingDictionary<string, string>(), optionalModelRecord ?? new ChangeTrackingDictionary<string, RecordItem>(), Optional.ToNullable(optionalPlainDate), Optional.ToNullable(optionalPlainTime), optionalCollectionWithNullableIntElement ?? new ChangeTrackingList<int?>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<RoundTripOptionalModel>.Write(ModelReaderWriterOptions options)

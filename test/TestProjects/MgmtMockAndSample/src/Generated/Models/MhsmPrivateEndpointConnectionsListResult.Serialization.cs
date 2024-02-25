@@ -20,7 +20,7 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<MhsmPrivateEndpointConnectionData>> value = default;
+            IReadOnlyList<MhsmPrivateEndpointConnectionData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -44,7 +44,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new MhsmPrivateEndpointConnectionsListResult(Optional.ToList(value), nextLink.Value);
+            return new MhsmPrivateEndpointConnectionsListResult(value ?? new ChangeTrackingList<MhsmPrivateEndpointConnectionData>(), nextLink.Value);
         }
     }
 }

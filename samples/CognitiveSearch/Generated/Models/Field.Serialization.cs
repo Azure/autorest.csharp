@@ -105,8 +105,8 @@ namespace CognitiveSearch.Models
             Optional<AnalyzerName> analyzer = default;
             Optional<AnalyzerName> searchAnalyzer = default;
             Optional<AnalyzerName> indexAnalyzer = default;
-            Optional<IList<string>> synonymMaps = default;
-            Optional<IList<Field>> fields = default;
+            IList<string> synonymMaps = default;
+            IList<Field> fields = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -229,7 +229,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new Field(name, type, Optional.ToNullable(key), Optional.ToNullable(retrievable), Optional.ToNullable(searchable), Optional.ToNullable(filterable), Optional.ToNullable(sortable), Optional.ToNullable(facetable), Optional.ToNullable(analyzer), Optional.ToNullable(searchAnalyzer), Optional.ToNullable(indexAnalyzer), Optional.ToList(synonymMaps), Optional.ToList(fields));
+            return new Field(name, type, Optional.ToNullable(key), Optional.ToNullable(retrievable), Optional.ToNullable(searchable), Optional.ToNullable(filterable), Optional.ToNullable(sortable), Optional.ToNullable(facetable), Optional.ToNullable(analyzer), Optional.ToNullable(searchAnalyzer), Optional.ToNullable(indexAnalyzer), synonymMaps ?? new ChangeTrackingList<string>(), fields ?? new ChangeTrackingList<Field>());
         }
     }
 }

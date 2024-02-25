@@ -331,24 +331,24 @@ namespace ModelShapes.Models
             IList<int> requiredIntList = default;
             Optional<string> nonRequiredString = default;
             Optional<int> nonRequiredInt = default;
-            Optional<IList<string>> nonRequiredStringList = default;
-            Optional<IList<int>> nonRequiredIntList = default;
+            IList<string> nonRequiredStringList = default;
+            IList<int> nonRequiredIntList = default;
             string requiredNullableString = default;
             int? requiredNullableInt = default;
             IList<string> requiredNullableStringList = default;
             IList<int> requiredNullableIntList = default;
             Optional<string> nonRequiredNullableString = default;
             Optional<int?> nonRequiredNullableInt = default;
-            Optional<IList<string>> nonRequiredNullableStringList = default;
-            Optional<IList<int>> nonRequiredNullableIntList = default;
+            IList<string> nonRequiredNullableStringList = default;
+            IList<int> nonRequiredNullableIntList = default;
             int requiredReadonlyInt = default;
             Optional<int> nonRequiredReadonlyInt = default;
-            Optional<ReadOnlyMemory<float>> vector = default;
-            Optional<ReadOnlyMemory<float>> vectorReadOnly = default;
+            ReadOnlyMemory<float> vector = default;
+            ReadOnlyMemory<float> vectorReadOnly = default;
             ReadOnlyMemory<float> vectorReadOnlyRequired = default;
             ReadOnlyMemory<float> vectorRequired = default;
-            Optional<ReadOnlyMemory<float>?> vectorNullable = default;
-            Optional<ReadOnlyMemory<float>?> vectorReadOnlyNullable = default;
+            ReadOnlyMemory<float>? vectorNullable = default;
+            ReadOnlyMemory<float>? vectorReadOnlyNullable = default;
             ReadOnlyMemory<float>? vectorReadOnlyRequiredNullable = default;
             ReadOnlyMemory<float>? vectorRequiredNullable = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
@@ -673,7 +673,7 @@ namespace ModelShapes.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new MixedModel(requiredString, requiredInt, requiredStringList, requiredIntList, nonRequiredString.Value, Optional.ToNullable(nonRequiredInt), Optional.ToList(nonRequiredStringList), Optional.ToList(nonRequiredIntList), requiredNullableString, requiredNullableInt, requiredNullableStringList, requiredNullableIntList, nonRequiredNullableString.Value, Optional.ToNullable(nonRequiredNullableInt), Optional.ToList(nonRequiredNullableStringList), Optional.ToList(nonRequiredNullableIntList), requiredReadonlyInt, Optional.ToNullable(nonRequiredReadonlyInt), vector, vectorReadOnly, vectorReadOnlyRequired, vectorRequired, Optional.ToNullable(vectorNullable), Optional.ToNullable(vectorReadOnlyNullable), vectorReadOnlyRequiredNullable, vectorRequiredNullable, serializedAdditionalRawData);
+            return new MixedModel(requiredString, requiredInt, requiredStringList, requiredIntList, nonRequiredString.Value, Optional.ToNullable(nonRequiredInt), nonRequiredStringList ?? new ChangeTrackingList<string>(), nonRequiredIntList ?? new ChangeTrackingList<int>(), requiredNullableString, requiredNullableInt, requiredNullableStringList, requiredNullableIntList, nonRequiredNullableString.Value, Optional.ToNullable(nonRequiredNullableInt), nonRequiredNullableStringList ?? new ChangeTrackingList<string>(), nonRequiredNullableIntList ?? new ChangeTrackingList<int>(), requiredReadonlyInt, Optional.ToNullable(nonRequiredReadonlyInt), vector, vectorReadOnly, vectorReadOnlyRequired, vectorRequired, vectorNullable, vectorReadOnlyNullable, vectorReadOnlyRequiredNullable, vectorRequiredNullable, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<MixedModel>.Write(ModelReaderWriterOptions options)

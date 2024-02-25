@@ -315,15 +315,15 @@ namespace ModelsTypeSpec.Models
             BinaryData requiredBytes = default;
             Optional<BinaryData> optionalBytes = default;
             IList<int> requiredUint8Array = default;
-            Optional<IList<int>> optionalUint8Array = default;
+            IList<int> optionalUint8Array = default;
             BinaryData requiredUnknown = default;
             Optional<BinaryData> optionalUnknown = default;
             IList<int> requiredInt8Array = default;
-            Optional<IList<int>> optionalInt8Array = default;
+            IList<int> optionalInt8Array = default;
             IList<int> requiredNullableIntList = default;
             IList<string> requiredNullableStringList = default;
-            Optional<IList<int>> nonRequiredNullableIntList = default;
-            Optional<IList<string>> nonRequiredNullableStringList = default;
+            IList<int> nonRequiredNullableIntList = default;
+            IList<string> nonRequiredNullableStringList = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -606,7 +606,7 @@ namespace ModelsTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new RoundTripModel(serializedAdditionalRawData, requiredString, requiredInt, nonRequiredString.Value, Optional.ToNullable(nonRequiredInt), requiredNullableInt, requiredNullableString, Optional.ToNullable(nonRequiredNullableInt), nonRequiredNullableString.Value, requiredReadonlyInt, Optional.ToNullable(nonRequiredReadonlyInt), requiredModel, requiredFixedStringEnum, requiredFixedIntEnum, requiredExtensibleEnum, requiredList, requiredIntRecord, requiredStringRecord, requiredModelRecord, requiredBytes, optionalBytes.Value, requiredUint8Array, Optional.ToList(optionalUint8Array), requiredUnknown, optionalUnknown.Value, requiredInt8Array, Optional.ToList(optionalInt8Array), requiredNullableIntList, requiredNullableStringList, Optional.ToList(nonRequiredNullableIntList), Optional.ToList(nonRequiredNullableStringList));
+            return new RoundTripModel(serializedAdditionalRawData, requiredString, requiredInt, nonRequiredString.Value, Optional.ToNullable(nonRequiredInt), requiredNullableInt, requiredNullableString, Optional.ToNullable(nonRequiredNullableInt), nonRequiredNullableString.Value, requiredReadonlyInt, Optional.ToNullable(nonRequiredReadonlyInt), requiredModel, requiredFixedStringEnum, requiredFixedIntEnum, requiredExtensibleEnum, requiredList, requiredIntRecord, requiredStringRecord, requiredModelRecord, requiredBytes, optionalBytes.Value, requiredUint8Array, optionalUint8Array ?? new ChangeTrackingList<int>(), requiredUnknown, optionalUnknown.Value, requiredInt8Array, optionalInt8Array ?? new ChangeTrackingList<int>(), requiredNullableIntList, requiredNullableStringList, nonRequiredNullableIntList ?? new ChangeTrackingList<int>(), nonRequiredNullableStringList ?? new ChangeTrackingList<string>());
         }
 
         BinaryData IPersistableModel<RoundTripModel>.Write(ModelReaderWriterOptions options)

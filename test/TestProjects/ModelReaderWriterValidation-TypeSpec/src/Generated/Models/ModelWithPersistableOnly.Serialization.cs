@@ -102,9 +102,9 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 return null;
             }
             Optional<string> name = default;
-            Optional<IList<string>> fields = default;
+            IList<string> fields = default;
             Optional<int> nullProperty = default;
-            Optional<IDictionary<string, string>> keyValuePairs = default;
+            IDictionary<string, string> keyValuePairs = default;
             int xProperty = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -163,7 +163,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ModelWithPersistableOnly(name.Value, Optional.ToList(fields), Optional.ToNullable(nullProperty), Optional.ToDictionary(keyValuePairs), xProperty, serializedAdditionalRawData);
+            return new ModelWithPersistableOnly(name.Value, fields ?? new ChangeTrackingList<string>(), Optional.ToNullable(nullProperty), keyValuePairs ?? new ChangeTrackingDictionary<string, string>(), xProperty, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ModelWithPersistableOnly>.Write(ModelReaderWriterOptions options)

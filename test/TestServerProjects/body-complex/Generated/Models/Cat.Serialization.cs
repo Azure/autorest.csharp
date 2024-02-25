@@ -90,7 +90,7 @@ namespace body_complex.Models
                 return null;
             }
             Optional<string> color = default;
-            Optional<IList<Dog>> hates = default;
+            IList<Dog> hates = default;
             Optional<int> id = default;
             Optional<string> name = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
@@ -136,7 +136,7 @@ namespace body_complex.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Cat(Optional.ToNullable(id), name.Value, serializedAdditionalRawData, color.Value, Optional.ToList(hates));
+            return new Cat(Optional.ToNullable(id), name.Value, serializedAdditionalRawData, color.Value, hates ?? new ChangeTrackingList<Dog>());
         }
 
         BinaryData IPersistableModel<Cat>.Write(ModelReaderWriterOptions options)

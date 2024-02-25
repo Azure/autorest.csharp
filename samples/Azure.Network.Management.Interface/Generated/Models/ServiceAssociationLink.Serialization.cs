@@ -71,7 +71,7 @@ namespace Azure.Network.Management.Interface.Models
             Optional<string> link = default;
             Optional<ProvisioningState> provisioningState = default;
             Optional<bool> allowDelete = default;
-            Optional<IList<string>> locations = default;
+            IList<string> locations = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -149,7 +149,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new ServiceAssociationLink(id.Value, name.Value, etag.Value, type.Value, linkedResourceType.Value, link.Value, Optional.ToNullable(provisioningState), Optional.ToNullable(allowDelete), Optional.ToList(locations));
+            return new ServiceAssociationLink(id.Value, name.Value, etag.Value, type.Value, linkedResourceType.Value, link.Value, Optional.ToNullable(provisioningState), Optional.ToNullable(allowDelete), locations ?? new ChangeTrackingList<string>());
         }
     }
 }

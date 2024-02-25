@@ -64,14 +64,14 @@ namespace MgmtMockAndSample
             }
             Optional<ManagedServiceIdentity> identity = default;
             Optional<AzureLocation> location = default;
-            Optional<IReadOnlyDictionary<string, string>> tags = default;
+            IReadOnlyDictionary<string, string> tags = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             Optional<SystemData> systemData = default;
             Optional<DiskEncryptionSetType> encryptionType = default;
             Optional<KeyForDiskEncryptionSet> activeKey = default;
-            Optional<IReadOnlyList<KeyForDiskEncryptionSet>> previousKeys = default;
+            IReadOnlyList<KeyForDiskEncryptionSet> previousKeys = default;
             Optional<string> provisioningState = default;
             Optional<bool> rotationToLatestKeyVersionEnabled = default;
             Optional<DateTimeOffset> lastKeyRotationTimestamp = default;
@@ -218,7 +218,7 @@ namespace MgmtMockAndSample
                     continue;
                 }
             }
-            return new DiskEncryptionSetData(id, name, type, systemData.Value, identity, Optional.ToNullable(encryptionType), activeKey.Value, Optional.ToList(previousKeys), provisioningState.Value, Optional.ToNullable(rotationToLatestKeyVersionEnabled), Optional.ToNullable(lastKeyRotationTimestamp), federatedClientId.Value, Optional.ToNullable(minimumTlsVersion), Optional.ToNullable(location), Optional.ToDictionary(tags));
+            return new DiskEncryptionSetData(id, name, type, systemData.Value, identity, Optional.ToNullable(encryptionType), activeKey.Value, previousKeys ?? new ChangeTrackingList<KeyForDiskEncryptionSet>(), provisioningState.Value, Optional.ToNullable(rotationToLatestKeyVersionEnabled), Optional.ToNullable(lastKeyRotationTimestamp), federatedClientId.Value, Optional.ToNullable(minimumTlsVersion), Optional.ToNullable(location), tags ?? new ChangeTrackingDictionary<string, string>());
         }
     }
 }
