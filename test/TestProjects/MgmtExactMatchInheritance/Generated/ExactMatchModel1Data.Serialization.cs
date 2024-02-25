@@ -136,6 +136,11 @@ namespace MgmtExactMatchInheritance
                 writer.WritePropertyName("type19"u8);
                 JsonSerializer.Serialize(writer, Type19);
             }
+            if (Type20 != null)
+            {
+                writer.WritePropertyName("type20"u8);
+                JsonSerializer.Serialize(writer, Type20);
+            }
             writer.WriteEndObject();
         }
 
@@ -166,6 +171,7 @@ namespace MgmtExactMatchInheritance
             Optional<DataFactoryLinkedServiceReference> type17 = default;
             Optional<DataFactorySecretString> type18 = default;
             Optional<DataFactoryKeyVaultSecretReference> type19 = default;
+            Optional<DataFactoryElement<IDictionary<string, BinaryData>>> type20 = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
@@ -369,6 +375,15 @@ namespace MgmtExactMatchInheritance
                     type19 = JsonSerializer.Deserialize<DataFactoryKeyVaultSecretReference>(property.Value.GetRawText());
                     continue;
                 }
+                if (property.NameEquals("type20"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    type20 = JsonSerializer.Deserialize<DataFactoryElement<IDictionary<string, BinaryData>>>(property.Value.GetRawText());
+                    continue;
+                }
                 if (property.NameEquals("id"u8))
                 {
                     id = new ResourceIdentifier(property.Value.GetString());
@@ -394,7 +409,7 @@ namespace MgmtExactMatchInheritance
                     continue;
                 }
             }
-            return new ExactMatchModel1Data(id, name, type, systemData.Value, @new.Value, supportingUris ?? new ChangeTrackingList<Uri>(), Optional.ToNullable(type1), Optional.ToNullable(type2), type3.Value, type4.Value, type5.Value, type6.Value, type7.Value, type8.Value, type9.Value, type10.Value, type11.Value, type12.Value, type13.Value, type14.Value, type15.Value, type16.Value, type17, type18, type19);
+            return new ExactMatchModel1Data(id, name, type, systemData.Value, @new.Value, supportingUris ?? new ChangeTrackingList<Uri>(), Optional.ToNullable(type1), Optional.ToNullable(type2), type3.Value, type4.Value, type5.Value, type6.Value, type7.Value, type8.Value, type9.Value, type10.Value, type11.Value, type12.Value, type13.Value, type14.Value, type15.Value, type16.Value, type17, type18, type19, type20.Value);
         }
     }
 }
