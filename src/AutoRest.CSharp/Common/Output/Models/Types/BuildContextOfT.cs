@@ -7,6 +7,7 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Decorator;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -15,6 +16,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 #pragma warning restore SA1649 // File name should match first type name
     {
         private TypeFactory? _typeFactory;
+        private InputNamespace? _inputNamespace;
 
         private T? _library;
         public T Library => _library ??= EnsureLibrary();
@@ -28,7 +30,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
             else if (Configuration.AzureArm)
             {
-                library = (T)(object)new MgmtOutputLibrary();
+                library = (T)(object)new MgmtOutputLibrary(_inputNamespace!);
             }
             else
             {
@@ -38,9 +40,11 @@ namespace AutoRest.CSharp.Output.Models.Types
             return library;
         }
 
-        public BuildContext(CodeModel? codeModel, SourceInputModel? sourceInputModel, InputNamespace? inputNamespace = null)
-            : base(codeModel, sourceInputModel, inputNamespace)
+        public BuildContext(CodeModel codeModel, SourceInputModel? sourceInputModel)
+            : base(codeModel, sourceInputModel)
         {
+            CodeModelTransformer.Transform(codeModel);
+            _inputNamespace = new CodeModelConverter(codeModel).CreateNamespace();
         }
 
         public override TypeFactory TypeFactory => _typeFactory ??= new TypeFactory(Library);

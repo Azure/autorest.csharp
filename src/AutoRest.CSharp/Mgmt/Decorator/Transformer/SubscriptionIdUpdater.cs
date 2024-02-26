@@ -11,10 +11,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 {
     internal static class SubscriptionIdUpdater
     {
-        public static void Update()
+        public static void Update(CodeModel codeModel)
         {
             bool setSubParam = false;
-            foreach (var operationGroup in MgmtContext.CodeModel!.OperationGroups)
+            foreach (var operationGroup in codeModel.OperationGroups)
             {
                 foreach (var op in operationGroup.Operations)
                 {

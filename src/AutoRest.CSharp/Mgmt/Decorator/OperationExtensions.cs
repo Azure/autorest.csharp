@@ -12,7 +12,6 @@ using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Mgmt.Report;
-using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
 
@@ -84,7 +83,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             operationSetOfResource = null;
             // first we need to ensure this operation at least returns a collection of something
-            if (!operation.IsListMethod(out var valueType))
+            if (!MgmtContext.Library.GetRestClientMethod(operation).IsListMethod(out var valueType))
                 return false;
 
             // then check if its path is a prefix of which resource's operationSet

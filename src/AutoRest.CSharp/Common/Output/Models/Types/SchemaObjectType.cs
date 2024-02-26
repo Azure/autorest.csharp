@@ -11,13 +11,11 @@ using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
-using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -44,7 +42,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             DefaultName = inputModel.CSharpName();
             InputModel = inputModel;
             _serializationBuilder = new SerializationBuilder();
-            _usage = context.InputModelTypeUsageProvider?.GetUsage(inputModel) ?? inputModel.Usage;
+            _usage = inputModel.Usage;
 
             DefaultAccessibility = inputModel.Accessibility ?? "public";
 
@@ -359,13 +357,13 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             return new ObjectTypeConstructor(
                 Type,
-                IsAbstract ? Protected : _usage.HasFlag(SchemaTypeUsage.Input) ? Public : Internal,
+                IsAbstract ? Protected : _usage.HasFlag(InputModelTypeUsage.Input) ? Public : Internal,
                 defaultCtorParameters,
                 defaultCtorInitializers,
                 baseCtor);
         }
 
-        public override bool IncludeConverter => _usage.HasFlag(SchemaTypeUsage.Converter);
+        public override bool IncludeConverter => _usage.HasFlag(InputModelTypeUsage.Converter);
 
         public CSharpType? ImplementsDictionaryType => _implementsDictionaryType ??= CreateInheritedDictionaryType();
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()
@@ -499,7 +497,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             bool isCollection = TypeFactory.IsCollectionType(type) && !TypeFactory.IsReadOnlyMemory(type);
 
             bool propertyShouldOmitSetter = IsStruct ||
-                              !_usage.HasFlag(SchemaTypeUsage.Input) ||
+                              !_usage.HasFlag(InputModelTypeUsage.Input) ||
                               property.IsReadOnly;
 
 
@@ -511,8 +509,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 // In mixed models required properties are not readonly
                 propertyShouldOmitSetter |= property.IsRequired &&
-                              _usage.HasFlag(SchemaTypeUsage.Input) &&
-                              !_usage.HasFlag(SchemaTypeUsage.Output);
+                              _usage.HasFlag(InputModelTypeUsage.Input) &&
+                              !_usage.HasFlag(InputModelTypeUsage.Output);
             }
 
             // we should remove the setter of required constant
@@ -540,7 +538,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private CSharpType GetDefaultPropertyType(InputModelProperty property)
         {
             var valueType = MgmtContext.TypeFactory.CreateType(property.Type);
-            if (!_usage.HasFlag(SchemaTypeUsage.Input) ||
+            if (!_usage.HasFlag(InputModelTypeUsage.Input) ||
                 property.IsReadOnly)
             {
                 valueType = TypeFactory.GetOutputType(valueType);
@@ -647,13 +645,13 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override bool EnsureIncludeSerializer()
         {
             // TODO -- this should always return true when use model reader writer is enabled.
-            return Configuration.UseModelReaderWriter || _usage.HasFlag(SchemaTypeUsage.Input);
+            return Configuration.UseModelReaderWriter || _usage.HasFlag(InputModelTypeUsage.Input);
         }
 
         protected override bool EnsureIncludeDeserializer()
         {
             // TODO -- this should always return true when use model reader writer is enabled.
-            return Configuration.UseModelReaderWriter || _usage.HasFlag(SchemaTypeUsage.Output);
+            return Configuration.UseModelReaderWriter || _usage.HasFlag(InputModelTypeUsage.Output);
         }
 
         protected override JsonObjectSerialization? BuildJsonSerialization()
@@ -661,10 +659,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             return _serializationBuilder.BuildJsonObjectSerialization(InputModel, this);
         }
 
-        protected override XmlObjectSerialization? BuildXmlSerialization()
-        {
-            return _serializationBuilder.BuildXmlObjectSerialization(InputModel, this);
-        }
+        // TODO: do we need xml serialization for MPG? it's always null for DPG
+        protected override XmlObjectSerialization? BuildXmlSerialization() => null;
 
         private IEnumerable<ObjectTypeDiscriminatorImplementation> GetDerivedTypes(IReadOnlyList<InputModelType> derivedInputTypes)
         {

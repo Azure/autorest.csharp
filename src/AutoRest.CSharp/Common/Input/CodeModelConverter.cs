@@ -25,10 +25,10 @@ namespace AutoRest.CSharp.Common.Input
         private readonly Dictionary<InputOperation, Operation> _inputOperationToOperationMap;
         private readonly ICollection<ExampleGroup>? _exampleGroups;
 
-        public CodeModelConverter(CodeModel codeModel, SchemaUsageProvider schemaUsages)
+        public CodeModelConverter(CodeModel codeModel)
         {
             _codeModel = codeModel;
-            _schemaUsages = schemaUsages;
+            _schemaUsages = new SchemaUsageProvider(codeModel);
             _operationsCache = new Dictionary<ServiceRequest, Func<InputOperation>>();
             _parametersCache = new Dictionary<RequestParameter, Func<InputParameter>>();
             _modelsCache = new Dictionary<ObjectSchema, InputModelType>();
@@ -292,6 +292,7 @@ namespace AutoRest.CSharp.Common.Input
                 SchemaTypeUsage.Input => InputModelTypeUsage.Input,
                 SchemaTypeUsage.Output => InputModelTypeUsage.Output,
                 SchemaTypeUsage.RoundTrip => InputModelTypeUsage.RoundTrip,
+                SchemaTypeUsage.Converter => InputModelTypeUsage.Converter,
                 _ => InputModelTypeUsage.None
             };
 

@@ -8,7 +8,6 @@ using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Serialization;
@@ -230,7 +229,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
             if (parameter.DefaultValue != null)
             {
                 CSharpType constantTypeReference = typeFactory.CreateType(parameter.Type);
-                return BuilderHelpers.ParseConstant(parameter.DefaultValue, constantTypeReference);
+                return BuilderHelpers.ParseConstant(parameter.DefaultValue.Value, constantTypeReference);
             }
 
             return null;

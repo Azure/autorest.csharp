@@ -10,7 +10,6 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.MgmtTest.Models;
@@ -39,7 +38,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
         {
             // get the type of this schema in the type factory if the type is not specified
             // get the type from TypeFactory cannot get the replaced types, therefore we need to put an argument in the signature as a hint in case this might happen in the replaced type case
-            type ??= MgmtContext.Context.Library.TypeFactory.CreateType(exampleValue.Type);
+            type ??= MgmtContext.Context.TypeFactory.CreateType(exampleValue.Type);
 
             if (exampleValue.Type != null && ReferenceTypePropertyChooser.TryGetCachedExactMatch(exampleValue.Type, out CSharpType? replaceType) && replaceType != null)
                 type = replaceType;

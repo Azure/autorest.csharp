@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         {
             Debug.Assert(codeModel.TestModel is not null);
             Debug.Assert(Configuration.MgmtTestConfiguration is not null);
-            var inputNamespace = new CodeModelConverter(codeModel, MgmtContext.SchemaUsageProvider!).CreateNamespace();
+            var inputNamespace = new CodeModelConverter(codeModel).CreateNamespace();
             MgmtTestOutputLibrary library;
             if (sourceInputModel == null)
             {

@@ -1,18 +1,11 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License
 
-using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Mgmt.Models;
-using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -29,12 +22,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// <param name="itemType"></param>
         /// <param name="valuePropertyName"></param>
         /// <returns></returns>
-        internal static bool IsListMethod(this InputOperation operation, [MaybeNullWhen(false)] out CSharpType itemType, [MaybeNullWhen(false)] out string valuePropertyName)
+        internal static bool IsListMethod(this RestClientMethod method, [MaybeNullWhen(false)] out CSharpType itemType, [MaybeNullWhen(false)] out string valuePropertyName)
         {
             itemType = null;
             valuePropertyName = null;
-
-            var method = MgmtContext.Library.GetRestClientMethod(operation);
             var returnType = method.ReturnType;
             if (returnType == null)
                 return false;
@@ -49,7 +40,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
             else
             {
-                valuePropertyName = operation.Paging?.ItemName ?? "value";
+                valuePropertyName = method.Operation.Paging?.ItemName ?? "value";
                 var schemaObject = (SchemaObjectType)returnType.Implementation;
                 itemType = GetValueProperty(schemaObject, valuePropertyName)?.ValueType.Arguments.FirstOrDefault();
             }
@@ -66,7 +57,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// <param name="method"></param>
         /// <param name="itemType">The type of the item in the collection</param>
         /// <returns></returns>
-        public static bool IsListMethod(this InputOperation operation, [MaybeNullWhen(false)] out CSharpType itemType) => IsListMethod(operation, out itemType, out _);
+        public static bool IsListMethod(this RestClientMethod method, [MaybeNullWhen(false)] out CSharpType itemType) => IsListMethod(method, out itemType, out _);
 
 
         private static ObjectTypeProperty? GetValueProperty(SchemaObjectType schemaObject, string pageingItemName)

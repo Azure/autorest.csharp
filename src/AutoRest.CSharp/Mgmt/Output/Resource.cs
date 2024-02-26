@@ -335,7 +335,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 return positions.Contains(Position);
             }
             // In the resource class, we need to exclude the List operations
-            if (operation.IsListMethod(out var valueType))
+            if (MgmtContext.Library.GetRestClientMethod(operation).IsListMethod(out var valueType))
                 return !valueType.EqualsByName(ResourceData.Type);
             return true;
         }

@@ -17,7 +17,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             CodeModel = codeModel;
             SchemaUsageProvider = codeModel is null ? null : new SchemaUsageProvider(codeModel);
-            InputModelTypeUsageProvider = inputNamespace is null ? null : new InputTypeUsageProvider(inputNamespace);
             SourceInputModel = sourceInputModel;
             DefaultLibraryName = defaultLibraryName;
             DefaultNamespace = defaultNamespace;
@@ -29,7 +28,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         public InputNamespace? InputNamespace { get; } = null;
         public CodeModel? CodeModel { get; }
         public SchemaUsageProvider? SchemaUsageProvider { get; }
-        public InputTypeUsageProvider? InputModelTypeUsageProvider { get; }
         public string DefaultNamespace { get; }
         public string DefaultLibraryName { get; }
         public SourceInputModel? SourceInputModel { get; }

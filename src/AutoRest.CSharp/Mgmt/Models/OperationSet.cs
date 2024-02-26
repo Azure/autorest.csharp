@@ -10,6 +10,7 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Common.Input;
 using Azure.Core;
+using AutoRest.CSharp.Mgmt.AutoRest;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
@@ -19,8 +20,6 @@ namespace AutoRest.CSharp.Mgmt.Models
     internal class OperationSet : IReadOnlyCollection<InputOperation>, IEquatable<OperationSet>
     {
         private readonly InputClient? _inputClient;
-        private readonly IReadOnlyDictionary<string, OperationSet> _rawRequestPathToOperationSets;
-        private readonly TypeFactory _typeFactory;
 
         /// <summary>
         /// The raw request path of string of the operations in this <see cref="OperationSet"/>
@@ -34,11 +33,9 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public int Count => Operations.Count;
 
-        public OperationSet(string requestPath, InputClient? inputClient, IReadOnlyDictionary<string, OperationSet> rawRequestPathToOperationSets, TypeFactory typeFactory)
+        public OperationSet(string requestPath, InputClient? inputClient)
         {
             _inputClient = inputClient;
-            _rawRequestPathToOperationSets = rawRequestPathToOperationSets;
-            _typeFactory = typeFactory;
             RequestPath = requestPath;
             Operations = new HashSet<InputOperation>();
         }
@@ -104,7 +101,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             {
                 if (operation != null)
                 {
-                    return Models.RequestPath.FromOperation(operation, _inputClient, _typeFactory);
+                    return Models.RequestPath.FromOperation(operation, _inputClient);
                 }
             }
 
@@ -112,7 +109,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             // therefore this must be a request path for a virtual resource
             // we find an operation with a prefix of this and take that many segment from its path as the request path of this operation set
             OperationSet? hintOperationSet = null;
-            foreach (var operationSet in _rawRequestPathToOperationSets.Values)
+            foreach (var operationSet in MgmtContext.Library.RawRequestPathToOperationSets.Values)
             {
                 // skip myself
                 if (operationSet == this)

@@ -9,7 +9,6 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
@@ -17,12 +16,10 @@ using AutoRest.CSharp.Mgmt.Report;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
-using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Humanizer.Inflections;
-using static AutoRest.CSharp.Mgmt.Decorator.Transformer.PartialResourceResolver;
 
 namespace AutoRest.CSharp.Mgmt.AutoRest
 {
@@ -91,23 +88,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         /// </summary>
         private readonly Dictionary<InputClient, IEnumerable<string>> _operationGroupToRequestPaths = new();
 
-        public TypeFactory TypeFactory { get; }
-
-        public MgmtOutputLibrary()
+        public MgmtOutputLibrary(InputNamespace inputNamespace)
         {
-            TypeFactory = new TypeFactory(this);
-
-            if (MgmtContext.CodeModel is not null)
-            {
-                ApplyGlobalConfigurations();
-                CodeModelTransformer.Transform();
-                var codeModelConverter = new CodeModelConverter(MgmtContext.CodeModel, MgmtContext.SchemaUsageProvider!);
-                _input = codeModelConverter.CreateNamespace();
-            }
-            else
-            {
-                _input = MgmtContext.InputNamespace!;
-            }
+            _input = inputNamespace;
 
             // these dictionaries are initialized right now and they would not change later
             RawRequestPathToOperationSets = CategorizeOperationGroups();
@@ -121,7 +104,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             RawRequestPathToResourceData = new CachedDictionary<string, ResourceData>(EnsureRequestPathToResourceData);
             RequestPathToResources = new CachedDictionary<RequestPath, ResourceObjectAssociation>(EnsureRequestPathToResourcesMap);
             PagingMethods = new CachedDictionary<RestClientMethod, PagingMethod>(EnsurePagingMethods);
-            RestClientMethods = new CachedDictionary<InputOperation, RestClientMethod>(EnsureRestClientMethods);
+            RestClientMethods = new CachedDictionary<InputOperation, RestClientMethod>(EnsureRestClientMethods); // Why is it not working with CachedDictionary? And what is the purpose using it here?
             ResourceSchemaMap = new CachedDictionary<InputType, TypeProvider>(EnsureResourceSchemaMap);
             SchemaMap = new CachedDictionary<InputType, TypeProvider>(EnsureSchemaMap);
             ChildOperations = new CachedDictionary<RequestPath, HashSet<InputOperation>>(EnsureResourceChildOperations);
@@ -129,14 +112,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             // initialize the property bag collection
             // TODO -- considering provide a customized comparer
             PropertyBagModels = new HashSet<TypeProvider>();
-        }
-
-        private static void ApplyGlobalConfigurations()
-        {
-            foreach ((var word, var plural) in Configuration.MgmtConfiguration.IrregularPluralWords)
-            {
-                Vocabularies.Default.AddIrregular(word, plural);
-            }
         }
 
         public Dictionary<CSharpType, OperationSource> CSharpTypeToOperationSource { get; } = new Dictionary<CSharpType, OperationSource>();
@@ -195,7 +170,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         continue;
 
                     // get the request path and operation set
-                    RequestPath requestPath = RequestPath.FromOperation(operation, client, TypeFactory);
+                    RequestPath requestPath = RequestPath.FromOperation(operation, client);
                     var operationSet = RawRequestPathToOperationSets[requestPath];
                     if (operationSet.TryGetResourceDataSchema(out var resourceDataSchema))
                     {
@@ -505,7 +480,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         }
 
         public Dictionary<InputEnumType, EnumType> EnsureAllEnumMap()
-            => _input.Enums.ToDictionary(e => e, e => new EnumType(e, TypeFactory, MgmtContext.Context), InputEnumType.IgnoreNullabilityComparer);
+            => _input.Enums.ToDictionary(e => e, e => new EnumType(e, MgmtContext.TypeFactory, MgmtContext.Context), InputEnumType.IgnoreNullabilityComparer);
 
         private IEnumerable<TypeProvider>? _models;
         public IEnumerable<TypeProvider> Models => _models ??= SchemaMap.Values.Where(m => m is not SystemObjectType);
@@ -806,7 +781,17 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         }
 
         public override CSharpType ResolveEnum(InputEnumType enumType) => AllEnumMap[enumType].Type;
-        public override CSharpType ResolveModel(InputModelType model) => throw new NotImplementedException($"{nameof(ResolveModel)} is not implemented for MPG yet.");
+
+        public override CSharpType ResolveModel(InputModelType model)
+        {
+            if (_schemaOrNameToModels.TryGetValue(model, out var value))
+            {
+                return value.Type;
+            }
+
+            // TODO: model has been turned in to a new instance somewhere, need to fix it later
+            return FindTypeByName(model.Name) ?? throw new InvalidOperationException($"Cannot find model {model.Name}");
+        }
 
         public override CSharpType? FindTypeByName(string originalName)
         {
@@ -834,7 +819,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private TypeProvider BuildModel(InputType inputType, MgmtObjectType? defaultDerivedType = null) => inputType switch
         {
-            InputEnumType enumType => new EnumType(enumType, TypeFactory, MgmtContext.Context),
+            InputEnumType enumType => new EnumType(enumType, MgmtContext.TypeFactory, MgmtContext.Context),
             // TODO: handle this when regen resource manager
             // inputType.Extensions != null && (inputType.Extensions.MgmtReferenceType || inputType.Extensions.MgmtPropertyReferenceType || inputType.Extensions.MgmtTypeReferenceType) ? new MgmtReferenceType(inputModel, TypeFactory)
             InputModelType inputModel => new MgmtObjectType(inputModel, defaultDerivedType: defaultDerivedType),
@@ -906,7 +891,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     }
                     else
                     {
-                        operationSet = new OperationSet(path, inputClient, rawRequestPathToOperationSets, TypeFactory);
+                        operationSet = new OperationSet(path, inputClient)
+                        {
+                            operation
+                        };
                         rawRequestPathToOperationSets.Add(path, operationSet);
                     }
                 }
@@ -915,7 +903,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             // add operation set for the partial resources here
             foreach (var path in Configuration.MgmtConfiguration.PartialResources.Keys)
             {
-                rawRequestPathToOperationSets.Add(path, new OperationSet(path, null, rawRequestPathToOperationSets, TypeFactory));
+                rawRequestPathToOperationSets.Add(path, new OperationSet(path, null));
             }
 
             return rawRequestPathToOperationSets;
@@ -928,7 +916,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             {
                 foreach (var operation in operationGroup.Operations)
                 {
-                    operationsToRequestPath[operation] = RequestPath.FromOperation(operation, operationGroup, TypeFactory);
+                    operationsToRequestPath[operation] = RequestPath.FromOperation(operation, operationGroup);
                 }
             }
             return operationsToRequestPath;

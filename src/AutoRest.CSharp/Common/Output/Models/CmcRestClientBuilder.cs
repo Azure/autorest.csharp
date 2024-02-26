@@ -10,7 +10,6 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
@@ -18,9 +17,7 @@ using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
-using Azure;
 using Azure.Core;
-using Operation = AutoRest.CSharp.Input.Operation;
 using Request = AutoRest.CSharp.Output.Models.Requests.Request;
 using Response = AutoRest.CSharp.Output.Models.Responses.Response;
 using StatusCodes = AutoRest.CSharp.Output.Models.Responses.StatusCodes;
@@ -44,16 +41,12 @@ namespace AutoRest.CSharp.Output.Models
             ["If-Unmodified-Since"] = RequestConditionHeaders.IfUnmodifiedSince
         };
 
-        private readonly SerializationBuilder _serializationBuilder;
         protected readonly BuildContext _context;
-        private readonly OutputLibrary _library;
         private readonly Dictionary<string, Parameter> _parameters;
 
         public CmcRestClientBuilder(IEnumerable<InputParameter> clientParameters, BuildContext context)
         {
-            _serializationBuilder = new SerializationBuilder();
             _context = context;
-            _library = context.BaseLibrary!;
             _parameters = clientParameters.ToDictionary(p => p.Name, BuildConstructorParameter);
         }
 
@@ -67,6 +60,12 @@ namespace AutoRest.CSharp.Output.Models
         }
 
         private static string GetRequestParameterName(InputParameter requestParameter) => requestParameter.NameInRequest ?? requestParameter.Name;
+
+        public IReadOnlyDictionary<string, (ReferenceOrConstant ReferenceOrConstant, bool SkipUrlEncoding)> GetReferencesToOperationParameters(InputOperation operation, IEnumerable<InputParameter> requestParameters)
+        {
+            var allParameters = GetOperationAllParameters(operation, requestParameters);
+            return allParameters.ToDictionary(kvp => GetRequestParameterName(kvp.Key), kvp => (CreateReference(kvp.Key, kvp.Value), kvp.Value.SkipUrlEncoding));
+        }
 
         /// <summary>
         /// Build CmcRestClientMethod for mgmt
@@ -110,7 +109,8 @@ namespace AutoRest.CSharp.Output.Models
                 .Where(rp => !IsIgnoredHeaderParameter(rp))
                 .ToArray();
 
-            return parameters.ToDictionary(rp => rp, requestParameter => BuildParameter(requestParameter, null, operation.KeepClientDefaultValue));
+            // TODO: why are there duplicates in the list?
+            return parameters.Distinct().ToDictionary(rp => rp, requestParameter => BuildParameter(requestParameter, null, operation.KeepClientDefaultValue));
         }
 
         private Response[] BuildResponses(InputOperation operation, bool headAsBoolean, out CSharpType? responseType, Func<string?, bool>? returnNullOn404Func = null)
@@ -307,7 +307,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private ReferenceOrConstant CreateReference(InputParameter requestParameter, Parameter parameter)
         {
-            if (requestParameter.Kind != InputOperationParameterKind.Method)
+            if (requestParameter.Kind == InputOperationParameterKind.Client)
             {
                 return (ReferenceOrConstant)_parameters[requestParameter.Name];
             }

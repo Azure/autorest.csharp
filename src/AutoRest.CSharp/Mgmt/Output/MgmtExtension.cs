@@ -10,7 +10,6 @@ using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
@@ -115,7 +114,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             var operationName = base.CalculateOperationName(operation, clientResourceName);
 
-            if (operation.IsListMethod(out var itemType) && itemType is { IsFrameworkType: false, Implementation: ResourceData data })
+            if (MgmtContext.Library.GetRestClientMethod(operation).IsListMethod(out var itemType) && itemType is { IsFrameworkType: false, Implementation: ResourceData data })
             {
                 var requestPath = operation.GetRequestPath();
                 // we need to find the correct resource type that links with this resource data

@@ -10,6 +10,7 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Report;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis;
@@ -41,7 +42,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 }
                 else
                 {
-                    await MgmtTarget.ExecuteAsync(project, codeModel, sourceInputModel, null);
+                    CodeModelTransformer.Transform(codeModel);
+                    await MgmtTarget.ExecuteAsync(project, codeModel, sourceInputModel);
                     if (Configuration.MgmtTestConfiguration is not null && !Configuration.MgmtConfiguration.MgmtDebug.ReportOnly)
                         await MgmtTestTarget.ExecuteAsync(project, codeModel, sourceInputModel);
                 }
@@ -49,7 +51,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
             else
             {
-                await LowLevelTarget.ExecuteAsync(project, new CodeModelConverter(codeModel, new SchemaUsageProvider(codeModel)).CreateNamespace(), sourceInputModel, false);
+                await LowLevelTarget.ExecuteAsync(project, new CodeModelConverter(codeModel).CreateNamespace(), sourceInputModel, false);
             }
             return project;
         }

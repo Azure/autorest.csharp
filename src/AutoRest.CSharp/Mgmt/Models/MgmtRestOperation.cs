@@ -124,7 +124,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             ThrowIfNull = throwIfNull;
             Operation = operation;
             Method = method;
-            PagingMethod = GetPagingMethodWrapper(method, operation);
+            PagingMethod = GetPagingMethodWrapper(method);
             RestClient = restClient;
             RequestPath = requestPath;
             ContextualPath = contextualPath;
@@ -283,7 +283,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             Dictionary<ResourceMatchType, HashSet<Resource>> matches = new Dictionary<ResourceMatchType, HashSet<Resource>>();
             foreach (var resource in restClient.Resources)
             {
-                var match = GetMatchType(Operation.HttpMethod, resource.RequestPath, requestPath, Operation.IsListMethod(out var _));
+                var match = GetMatchType(Operation.HttpMethod, resource.RequestPath, requestPath, method.IsListMethod(out var _));
                 if (match == ResourceMatchType.None)
                     continue;
                 if (match == ResourceMatchType.Exact)
@@ -578,12 +578,12 @@ namespace AutoRest.CSharp.Mgmt.Models
             };
         }
 
-        private PagingMethodWrapper? GetPagingMethodWrapper(RestClientMethod method, InputOperation operation)
+        private PagingMethodWrapper? GetPagingMethodWrapper(RestClientMethod method)
         {
             if (MgmtContext.Library.PagingMethods.TryGetValue(method, out var pagingMethod))
                 return new PagingMethodWrapper(pagingMethod);
 
-            if (operation.IsListMethod(out var itemType, out var valuePropertyName))
+            if (method.IsListMethod(out var itemType, out var valuePropertyName))
                 return new PagingMethodWrapper(method, itemType, valuePropertyName);
 
             return null;
