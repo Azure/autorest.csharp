@@ -26,12 +26,12 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(ImageReference))
+            if (ImageReference != null)
             {
                 writer.WritePropertyName("imageReference"u8);
                 writer.WriteObjectValue(ImageReference);
             }
-            if (Optional.IsDefined(OSDisk))
+            if (OSDisk != null)
             {
                 writer.WritePropertyName("osDisk"u8);
                 writer.WriteObjectValue(OSDisk);
@@ -86,7 +86,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
             Optional<ImageReference> imageReference = default;
             Optional<VirtualMachineScaleSetUpdateOSDisk> osDisk = default;
-            Optional<IList<VirtualMachineScaleSetDataDisk>> dataDisks = default;
+            IList<VirtualMachineScaleSetDataDisk> dataDisks = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -129,7 +129,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineScaleSetUpdateStorageProfile(imageReference.Value, osDisk.Value, Optional.ToList(dataDisks), serializedAdditionalRawData);
+            return new VirtualMachineScaleSetUpdateStorageProfile(imageReference.Value, osDisk.Value, dataDisks ?? new ChangeTrackingList<VirtualMachineScaleSetDataDisk>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<VirtualMachineScaleSetUpdateStorageProfile>.Write(ModelReaderWriterOptions options)

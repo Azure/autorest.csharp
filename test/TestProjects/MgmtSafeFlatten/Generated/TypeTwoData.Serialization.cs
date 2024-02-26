@@ -18,12 +18,12 @@ namespace MgmtSafeFlatten
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(MyType))
+            if (MyType != null)
             {
                 writer.WritePropertyName("MyType"u8);
                 writer.WriteStringValue(MyType);
             }
-            if (Optional.IsDefined(Properties))
+            if (Properties != null)
             {
                 writer.WritePropertyName("properties"u8);
                 writer.WriteObjectValue(Properties);
@@ -52,7 +52,7 @@ namespace MgmtSafeFlatten
             }
             Optional<string> myType = default;
             Optional<LayerOneSingle> properties = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -118,7 +118,7 @@ namespace MgmtSafeFlatten
                     continue;
                 }
             }
-            return new TypeTwoData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, myType.Value, properties.Value);
+            return new TypeTwoData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, myType.Value, properties.Value);
         }
     }
 }

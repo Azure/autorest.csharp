@@ -46,7 +46,7 @@ namespace MgmtDiscriminator.Models
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format != "W" && Optional.IsDefined(SystemData))
+            if (options.Format != "W" && SystemData != null)
             {
                 writer.WritePropertyName("systemData"u8);
                 JsonSerializer.Serialize(writer, SystemData);
@@ -141,7 +141,7 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 builder.Append("  name:");
                 if (Name.Contains(Environment.NewLine))
@@ -155,19 +155,16 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            if (Optional.IsDefined(Kind))
-            {
-                builder.Append("  kind:");
-                builder.AppendLine($" '{Kind.ToString()}'");
-            }
+            builder.Append("  kind:");
+            builder.AppendLine($" '{Kind.ToString()}'");
 
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 builder.Append("  id:");
                 builder.AppendLine($" '{Id.ToString()}'");
             }
 
-            if (Optional.IsDefined(SystemData))
+            if (SystemData != null)
             {
                 builder.Append("  systemData:");
                 builder.AppendLine($" '{SystemData.ToString()}'");

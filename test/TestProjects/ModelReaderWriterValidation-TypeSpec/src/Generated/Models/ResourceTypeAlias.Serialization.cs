@@ -27,7 +27,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
@@ -42,22 +42,22 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(AliasType))
+            if (AliasType.HasValue)
             {
                 writer.WritePropertyName("aliasType"u8);
                 writer.WriteStringValue(AliasType.Value.ToSerialString());
             }
-            if (Optional.IsDefined(DefaultPath))
+            if (DefaultPath != null)
             {
                 writer.WritePropertyName("defaultPath"u8);
                 writer.WriteStringValue(DefaultPath);
             }
-            if (Optional.IsDefined(DefaultPattern))
+            if (DefaultPattern != null)
             {
                 writer.WritePropertyName("defaultPattern"u8);
                 writer.WriteObjectValue(DefaultPattern);
             }
-            if (Optional.IsDefined(DefaultMetadata))
+            if (DefaultMetadata != null)
             {
                 writer.WritePropertyName("defaultMetadata"u8);
                 writer.WriteObjectValue(DefaultMetadata);
@@ -101,7 +101,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 return null;
             }
             Optional<string> name = default;
-            Optional<IReadOnlyList<ResourceTypeAliasPath>> paths = default;
+            IReadOnlyList<ResourceTypeAliasPath> paths = default;
             Optional<ResourceTypeAliasType> aliasType = default;
             Optional<string> defaultPath = default;
             Optional<ResourceTypeAliasPattern> defaultPattern = default;
@@ -167,7 +167,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ResourceTypeAlias(name.Value, Optional.ToList(paths), Optional.ToNullable(aliasType), defaultPath.Value, defaultPattern.Value, defaultMetadata.Value, serializedAdditionalRawData);
+            return new ResourceTypeAlias(name.Value, paths ?? new ChangeTrackingList<ResourceTypeAliasPath>(), Optional.ToNullable(aliasType), defaultPath.Value, defaultPattern.Value, defaultMetadata.Value, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ResourceTypeAlias>.Write(ModelReaderWriterOptions options)

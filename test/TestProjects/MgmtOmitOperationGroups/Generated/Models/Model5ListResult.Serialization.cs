@@ -19,7 +19,7 @@ namespace MgmtOmitOperationGroups.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<Model5>> value = default;
+            IReadOnlyList<Model5> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -43,7 +43,7 @@ namespace MgmtOmitOperationGroups.Models
                     continue;
                 }
             }
-            return new Model5ListResult(Optional.ToList(value), nextLink.Value);
+            return new Model5ListResult(value ?? new ChangeTrackingList<Model5>(), nextLink.Value);
         }
     }
 }

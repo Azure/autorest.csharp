@@ -26,7 +26,7 @@ namespace multiple_inheritance.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(IsAShowHorse))
+            if (IsAShowHorse.HasValue)
             {
                 writer.WritePropertyName("isAShowHorse"u8);
                 writer.WriteBooleanValue(IsAShowHorse.Value);

@@ -34,27 +34,27 @@ namespace MgmtParamOrdering
             writer.WriteStringValue(Location);
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(Description))
+            if (Description != null)
             {
                 writer.WritePropertyName("description"u8);
                 writer.WriteStringValue(Description);
             }
-            if (Optional.IsDefined(FriendlyName))
+            if (FriendlyName != null)
             {
                 writer.WritePropertyName("friendlyName"u8);
                 writer.WriteStringValue(FriendlyName);
             }
-            if (Optional.IsDefined(KeyVault))
+            if (KeyVault != null)
             {
                 writer.WritePropertyName("keyVault"u8);
                 writer.WriteStringValue(KeyVault);
             }
-            if (Optional.IsDefined(ApplicationInsights))
+            if (ApplicationInsights != null)
             {
                 writer.WritePropertyName("applicationInsights"u8);
                 writer.WriteStringValue(ApplicationInsights);
             }
-            if (Optional.IsDefined(ContainerRegistry))
+            if (ContainerRegistry != null)
             {
                 if (ContainerRegistry != null)
                 {
@@ -66,32 +66,32 @@ namespace MgmtParamOrdering
                     writer.WriteNull("containerRegistry");
                 }
             }
-            if (Optional.IsDefined(StorageAccount))
+            if (StorageAccount != null)
             {
                 writer.WritePropertyName("storageAccount"u8);
                 writer.WriteStringValue(StorageAccount);
             }
-            if (Optional.IsDefined(DiscoveryUri))
+            if (DiscoveryUri != null)
             {
                 writer.WritePropertyName("discoveryUrl"u8);
                 writer.WriteStringValue(DiscoveryUri.AbsoluteUri);
             }
-            if (Optional.IsDefined(HbiWorkspace))
+            if (HbiWorkspace.HasValue)
             {
                 writer.WritePropertyName("hbiWorkspace"u8);
                 writer.WriteBooleanValue(HbiWorkspace.Value);
             }
-            if (Optional.IsDefined(ImageBuildCompute))
+            if (ImageBuildCompute != null)
             {
                 writer.WritePropertyName("imageBuildCompute"u8);
                 writer.WriteStringValue(ImageBuildCompute);
             }
-            if (Optional.IsDefined(AllowPublicAccessWhenBehindVnet))
+            if (AllowPublicAccessWhenBehindVnet.HasValue)
             {
                 writer.WritePropertyName("allowPublicAccessWhenBehindVnet"u8);
                 writer.WriteBooleanValue(AllowPublicAccessWhenBehindVnet.Value);
             }
-            if (Optional.IsDefined(PrimaryUserAssignedIdentity))
+            if (PrimaryUserAssignedIdentity != null)
             {
                 writer.WritePropertyName("primaryUserAssignedIdentity"u8);
                 writer.WriteStringValue(PrimaryUserAssignedIdentity);
@@ -106,7 +106,7 @@ namespace MgmtParamOrdering
             {
                 return null;
             }
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -295,7 +295,7 @@ namespace MgmtParamOrdering
                     continue;
                 }
             }
-            return new WorkspaceData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, workspaceId.Value, description.Value, friendlyName.Value, keyVault.Value, applicationInsights.Value, containerRegistry.Value, storageAccount.Value, discoveryUrl.Value, Optional.ToNullable(provisioningState), Optional.ToNullable(hbiWorkspace), serviceProvisionedResourceGroup.Value, Optional.ToNullable(privateLinkCount), imageBuildCompute.Value, Optional.ToNullable(allowPublicAccessWhenBehindVnet), primaryUserAssignedIdentity.Value, Optional.ToNullable(tenantId));
+            return new WorkspaceData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, workspaceId.Value, description.Value, friendlyName.Value, keyVault.Value, applicationInsights.Value, containerRegistry.Value, storageAccount.Value, discoveryUrl.Value, Optional.ToNullable(provisioningState), Optional.ToNullable(hbiWorkspace), serviceProvisionedResourceGroup.Value, Optional.ToNullable(privateLinkCount), imageBuildCompute.Value, Optional.ToNullable(allowPublicAccessWhenBehindVnet), primaryUserAssignedIdentity.Value, Optional.ToNullable(tenantId));
         }
     }
 }

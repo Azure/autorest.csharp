@@ -16,7 +16,7 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Sku))
+            if (Sku != null)
             {
                 writer.WritePropertyName("sku"u8);
                 writer.WriteObjectValue(Sku);
@@ -31,12 +31,12 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (Optional.IsDefined(Location))
+            if (Location != null)
             {
                 writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location);
@@ -54,22 +54,22 @@ namespace Azure.Network.Management.Interface.Models
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(PublicIPAllocationMethod))
+            if (PublicIPAllocationMethod.HasValue)
             {
                 writer.WritePropertyName("publicIPAllocationMethod"u8);
                 writer.WriteStringValue(PublicIPAllocationMethod.Value.ToString());
             }
-            if (Optional.IsDefined(PublicIPAddressVersion))
+            if (PublicIPAddressVersion.HasValue)
             {
                 writer.WritePropertyName("publicIPAddressVersion"u8);
                 writer.WriteStringValue(PublicIPAddressVersion.Value.ToString());
             }
-            if (Optional.IsDefined(DnsSettings))
+            if (DnsSettings != null)
             {
                 writer.WritePropertyName("dnsSettings"u8);
                 writer.WriteObjectValue(DnsSettings);
             }
-            if (Optional.IsDefined(DdosSettings))
+            if (DdosSettings != null)
             {
                 writer.WritePropertyName("ddosSettings"u8);
                 writer.WriteObjectValue(DdosSettings);
@@ -84,17 +84,17 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(IpAddress))
+            if (IpAddress != null)
             {
                 writer.WritePropertyName("ipAddress"u8);
                 writer.WriteStringValue(IpAddress);
             }
-            if (Optional.IsDefined(PublicIPPrefix))
+            if (PublicIPPrefix != null)
             {
                 writer.WritePropertyName("publicIPPrefix"u8);
                 writer.WriteObjectValue(PublicIPPrefix);
             }
-            if (Optional.IsDefined(IdleTimeoutInMinutes))
+            if (IdleTimeoutInMinutes.HasValue)
             {
                 writer.WritePropertyName("idleTimeoutInMinutes"u8);
                 writer.WriteNumberValue(IdleTimeoutInMinutes.Value);
@@ -111,18 +111,18 @@ namespace Azure.Network.Management.Interface.Models
             }
             Optional<PublicIPAddressSku> sku = default;
             Optional<string> etag = default;
-            Optional<IList<string>> zones = default;
+            IList<string> zones = default;
             Optional<string> id = default;
             Optional<string> name = default;
             Optional<string> type = default;
             Optional<string> location = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             Optional<IPAllocationMethod> publicIPAllocationMethod = default;
             Optional<IPVersion> publicIPAddressVersion = default;
             Optional<IPConfiguration> ipConfiguration = default;
             Optional<PublicIPAddressDnsSettings> dnsSettings = default;
             Optional<DdosSettings> ddosSettings = default;
-            Optional<IList<IpTag>> ipTags = default;
+            IList<IpTag> ipTags = default;
             Optional<string> ipAddress = default;
             Optional<SubResource> publicIPPrefix = default;
             Optional<int> idleTimeoutInMinutes = default;
@@ -301,7 +301,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new PublicIPAddress(id.Value, name.Value, type.Value, location.Value, Optional.ToDictionary(tags), sku.Value, etag.Value, Optional.ToList(zones), Optional.ToNullable(publicIPAllocationMethod), Optional.ToNullable(publicIPAddressVersion), ipConfiguration.Value, dnsSettings.Value, ddosSettings.Value, Optional.ToList(ipTags), ipAddress.Value, publicIPPrefix.Value, Optional.ToNullable(idleTimeoutInMinutes), resourceGuid.Value, Optional.ToNullable(provisioningState));
+            return new PublicIPAddress(id.Value, name.Value, type.Value, location.Value, tags ?? new ChangeTrackingDictionary<string, string>(), sku.Value, etag.Value, zones ?? new ChangeTrackingList<string>(), Optional.ToNullable(publicIPAllocationMethod), Optional.ToNullable(publicIPAddressVersion), ipConfiguration.Value, dnsSettings.Value, ddosSettings.Value, ipTags ?? new ChangeTrackingList<IpTag>(), ipAddress.Value, publicIPPrefix.Value, Optional.ToNullable(idleTimeoutInMinutes), resourceGuid.Value, Optional.ToNullable(provisioningState));
         }
     }
 }

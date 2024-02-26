@@ -34,7 +34,7 @@ namespace OpenAI.Models
                 JsonSerializer.Serialize(writer, document.RootElement);
             }
 #endif
-            if (OptionalProperty.IsDefined(User))
+            if (User != null)
             {
                 writer.WritePropertyName("user"u8);
                 writer.WriteStringValue(User);

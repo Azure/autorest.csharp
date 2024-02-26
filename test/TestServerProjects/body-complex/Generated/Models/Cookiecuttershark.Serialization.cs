@@ -26,7 +26,7 @@ namespace body_complex.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Age))
+            if (Age.HasValue)
             {
                 writer.WritePropertyName("age"u8);
                 writer.WriteNumberValue(Age.Value);
@@ -35,7 +35,7 @@ namespace body_complex.Models
             writer.WriteStringValue(Birthday, "O");
             writer.WritePropertyName("fishtype"u8);
             writer.WriteStringValue(Fishtype);
-            if (Optional.IsDefined(Species))
+            if (Species != null)
             {
                 writer.WritePropertyName("species"u8);
                 writer.WriteStringValue(Species);
@@ -95,7 +95,7 @@ namespace body_complex.Models
             string fishtype = default;
             Optional<string> species = default;
             float length = default;
-            Optional<IList<Fish>> siblings = default;
+            IList<Fish> siblings = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -149,7 +149,7 @@ namespace body_complex.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Cookiecuttershark(fishtype, species.Value, length, Optional.ToList(siblings), serializedAdditionalRawData, Optional.ToNullable(age), birthday);
+            return new Cookiecuttershark(fishtype, species.Value, length, siblings ?? new ChangeTrackingList<Fish>(), serializedAdditionalRawData, Optional.ToNullable(age), birthday);
         }
 
         BinaryData IPersistableModel<Cookiecuttershark>.Write(ModelReaderWriterOptions options)

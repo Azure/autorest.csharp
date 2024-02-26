@@ -39,7 +39,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(ExtensionsTimeBudget))
+            if (ExtensionsTimeBudget != null)
             {
                 writer.WritePropertyName("extensionsTimeBudget"u8);
                 writer.WriteStringValue(ExtensionsTimeBudget);
@@ -82,7 +82,7 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<IList<VirtualMachineScaleSetExtensionData>> extensions = default;
+            IList<VirtualMachineScaleSetExtensionData> extensions = default;
             Optional<string> extensionsTimeBudget = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -113,7 +113,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineScaleSetExtensionProfile(Optional.ToList(extensions), extensionsTimeBudget.Value, serializedAdditionalRawData);
+            return new VirtualMachineScaleSetExtensionProfile(extensions ?? new ChangeTrackingList<VirtualMachineScaleSetExtensionData>(), extensionsTimeBudget.Value, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -135,7 +135,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(ExtensionsTimeBudget))
+            if (ExtensionsTimeBudget != null)
             {
                 builder.Append("  extensionsTimeBudget:");
                 if (ExtensionsTimeBudget.Contains(Environment.NewLine))

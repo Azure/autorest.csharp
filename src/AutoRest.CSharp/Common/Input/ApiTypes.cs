@@ -97,8 +97,6 @@ namespace AutoRest.CSharp.Common.Input
         public abstract Type OptionalType { get; }
         public abstract Type OptionalPropertyType { get; }
 
-        public string OptionalIsCollectionDefinedName => nameof(OptionalProperty.IsCollectionDefined);
-        public string OptionalIsDefinedName => nameof(OptionalProperty.IsDefined);
         public string OptionalToDictionaryName => nameof(OptionalProperty.ToDictionary);
         public string OptionalToListName => nameof(OptionalProperty.ToList);
         public string OptionalToNullableName => nameof(OptionalProperty.ToNullable);

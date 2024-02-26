@@ -20,7 +20,7 @@ namespace MgmtResourceName.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<DisplayResourceData>> value = default;
+            IReadOnlyList<DisplayResourceData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -44,7 +44,7 @@ namespace MgmtResourceName.Models
                     continue;
                 }
             }
-            return new DisplayResourceListResult(Optional.ToList(value), nextLink.Value);
+            return new DisplayResourceListResult(value ?? new ChangeTrackingList<DisplayResourceData>(), nextLink.Value);
         }
     }
 }

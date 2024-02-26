@@ -26,12 +26,12 @@ namespace body_complex.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Field))
+            if (Field.HasValue)
             {
                 writer.WritePropertyName("field"u8);
                 writer.WriteStringValue(Field.Value, "D");
             }
-            if (Optional.IsDefined(Leap))
+            if (Leap.HasValue)
             {
                 writer.WritePropertyName("leap"u8);
                 writer.WriteStringValue(Leap.Value, "D");

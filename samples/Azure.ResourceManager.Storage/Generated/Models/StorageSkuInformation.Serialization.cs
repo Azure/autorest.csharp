@@ -23,9 +23,9 @@ namespace Azure.ResourceManager.Storage.Models
             Optional<StorageSkuTier> tier = default;
             Optional<ResourceType> resourceType = default;
             Optional<StorageKind> kind = default;
-            Optional<IReadOnlyList<string>> locations = default;
-            Optional<IReadOnlyList<SKUCapability>> capabilities = default;
-            Optional<IReadOnlyList<Restriction>> restrictions = default;
+            IReadOnlyList<string> locations = default;
+            IReadOnlyList<SKUCapability> capabilities = default;
+            IReadOnlyList<Restriction> restrictions = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -103,7 +103,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new StorageSkuInformation(name, Optional.ToNullable(tier), Optional.ToNullable(resourceType), Optional.ToNullable(kind), Optional.ToList(locations), Optional.ToList(capabilities), Optional.ToList(restrictions));
+            return new StorageSkuInformation(name, Optional.ToNullable(tier), Optional.ToNullable(resourceType), Optional.ToNullable(kind), locations ?? new ChangeTrackingList<string>(), capabilities ?? new ChangeTrackingList<SKUCapability>(), restrictions ?? new ChangeTrackingList<Restriction>());
         }
     }
 }

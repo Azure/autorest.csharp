@@ -29,7 +29,7 @@ namespace MgmtDiscriminator.Models
             writer.WriteStartObject();
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind.ToSerialString());
-            if (options.Format != "W" && Optional.IsDefined(Id))
+            if (options.Format != "W" && Id != null)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
@@ -88,13 +88,10 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Kind))
-            {
-                builder.Append("  kind:");
-                builder.AppendLine($" '{Kind.ToSerialString()}'");
-            }
+            builder.Append("  kind:");
+            builder.AppendLine($" '{Kind.ToSerialString()}'");
 
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 builder.Append("  id:");
                 if (Id.Contains(Environment.NewLine))

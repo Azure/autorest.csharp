@@ -26,24 +26,24 @@ namespace xms_error_responses.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(HungryOrThirsty))
+            if (HungryOrThirsty != null)
             {
                 writer.WritePropertyName("hungryOrThirsty"u8);
                 writer.WriteStringValue(HungryOrThirsty);
             }
-            if (Optional.IsDefined(Reason))
+            if (Reason != null)
             {
                 writer.WritePropertyName("reason"u8);
                 writer.WriteStringValue(Reason);
             }
             writer.WritePropertyName("errorType"u8);
             writer.WriteStringValue(ErrorType);
-            if (Optional.IsDefined(ErrorMessage))
+            if (ErrorMessage != null)
             {
                 writer.WritePropertyName("errorMessage"u8);
                 writer.WriteStringValue(ErrorMessage);
             }
-            if (Optional.IsDefined(ActionResponse))
+            if (ActionResponse != null)
             {
                 writer.WritePropertyName("actionResponse"u8);
                 writer.WriteStringValue(ActionResponse);

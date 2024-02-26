@@ -32,7 +32,7 @@ namespace MgmtDiscriminator.Models
             writer.WriteStringValue(TypeName.ToString());
             writer.WritePropertyName("operator"u8);
             writer.WriteStringValue(Operator.ToString());
-            if (Optional.IsDefined(NegateCondition))
+            if (NegateCondition.HasValue)
             {
                 writer.WritePropertyName("negateCondition"u8);
                 writer.WriteBooleanValue(NegateCondition.Value);
@@ -98,8 +98,8 @@ namespace MgmtDiscriminator.Models
             RemoteAddressMatchConditionParametersTypeName typeName = default;
             RemoteAddressOperator @operator = default;
             Optional<bool> negateCondition = default;
-            Optional<IList<string>> matchValues = default;
-            Optional<IList<Transform>> transforms = default;
+            IList<string> matchValues = default;
+            IList<Transform> transforms = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -157,7 +157,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new RemoteAddressMatchConditionParameters(typeName, @operator, Optional.ToNullable(negateCondition), Optional.ToList(matchValues), Optional.ToList(transforms), serializedAdditionalRawData);
+            return new RemoteAddressMatchConditionParameters(typeName, @operator, Optional.ToNullable(negateCondition), matchValues ?? new ChangeTrackingList<string>(), transforms ?? new ChangeTrackingList<Transform>(), serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -165,19 +165,13 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(TypeName))
-            {
-                builder.Append("  typeName:");
-                builder.AppendLine($" '{TypeName.ToString()}'");
-            }
+            builder.Append("  typeName:");
+            builder.AppendLine($" '{TypeName.ToString()}'");
 
-            if (Optional.IsDefined(Operator))
-            {
-                builder.Append("  operator:");
-                builder.AppendLine($" '{Operator.ToString()}'");
-            }
+            builder.Append("  operator:");
+            builder.AppendLine($" '{Operator.ToString()}'");
 
-            if (Optional.IsDefined(NegateCondition))
+            if (NegateCondition.HasValue)
             {
                 builder.Append("  negateCondition:");
                 var boolValue = NegateCondition.Value == true ? "true" : "false";

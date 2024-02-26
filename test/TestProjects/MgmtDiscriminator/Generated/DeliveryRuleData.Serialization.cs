@@ -29,42 +29,42 @@ namespace MgmtDiscriminator
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(BoolProperty))
+            if (BoolProperty.HasValue)
             {
                 writer.WritePropertyName("boolProperty"u8);
                 writer.WriteBooleanValue(BoolProperty.Value);
             }
-            if (Optional.IsDefined(Location))
+            if (Location.HasValue)
             {
                 writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location.Value);
             }
-            if (Optional.IsDefined(LocationWithCustomSerialization))
+            if (LocationWithCustomSerialization.HasValue)
             {
                 writer.WritePropertyName("locationWithCustomSerialization"u8);
                 writer.WriteStringValue(LocationWithCustomSerialization.Value);
             }
-            if (Optional.IsDefined(DateTimeProperty))
+            if (DateTimeProperty.HasValue)
             {
                 writer.WritePropertyName("dateTimeProperty"u8);
                 writer.WriteStringValue(DateTimeProperty.Value, "O");
             }
-            if (Optional.IsDefined(Duration))
+            if (Duration.HasValue)
             {
                 writer.WritePropertyName("duration"u8);
                 writer.WriteStringValue(Duration.Value, "P");
             }
-            if (Optional.IsDefined(Number))
+            if (Number.HasValue)
             {
                 writer.WritePropertyName("number"u8);
                 writer.WriteNumberValue(Number.Value);
             }
-            if (Optional.IsDefined(Uri))
+            if (Uri != null)
             {
                 writer.WritePropertyName("uri"u8);
                 writer.WriteStringValue(Uri.AbsoluteUri);
             }
-            if (Optional.IsDefined(Properties))
+            if (Properties != null)
             {
                 writer.WritePropertyName("properties"u8);
                 writer.WriteObjectValue(Properties);
@@ -84,7 +84,7 @@ namespace MgmtDiscriminator
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format != "W" && Optional.IsDefined(SystemData))
+            if (options.Format != "W" && SystemData != null)
             {
                 writer.WritePropertyName("systemData"u8);
                 JsonSerializer.Serialize(writer, SystemData);
@@ -253,7 +253,7 @@ namespace MgmtDiscriminator
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 builder.Append("  name:");
                 if (Name.Contains(Environment.NewLine))
@@ -267,64 +267,64 @@ namespace MgmtDiscriminator
                 }
             }
 
-            if (Optional.IsDefined(Location))
+            if (Location.HasValue)
             {
                 builder.Append("  location:");
                 builder.AppendLine($" '{Location.Value.ToString()}'");
             }
 
-            if (Optional.IsDefined(BoolProperty))
+            if (BoolProperty.HasValue)
             {
                 builder.Append("  boolProperty:");
                 var boolValue = BoolProperty.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
             }
 
-            if (Optional.IsDefined(LocationWithCustomSerialization))
+            if (LocationWithCustomSerialization.HasValue)
             {
                 builder.Append("  locationWithCustomSerialization:");
                 SerializeLocation(builder);
             }
 
-            if (Optional.IsDefined(DateTimeProperty))
+            if (DateTimeProperty.HasValue)
             {
                 builder.Append("  dateTimeProperty:");
                 var formattedDateTimeString = TypeFormatters.ToString(DateTimeProperty.Value, "o");
                 builder.AppendLine($" '{formattedDateTimeString}'");
             }
 
-            if (Optional.IsDefined(Duration))
+            if (Duration.HasValue)
             {
                 builder.Append("  duration:");
                 var formattedTimeSpan = TypeFormatters.ToString(Duration.Value, "P");
                 builder.AppendLine($" '{formattedTimeSpan}'");
             }
 
-            if (Optional.IsDefined(Number))
+            if (Number.HasValue)
             {
                 builder.Append("  number:");
                 builder.AppendLine($" {Number.Value}");
             }
 
-            if (Optional.IsDefined(Uri))
+            if (Uri != null)
             {
                 builder.Append("  uri:");
                 builder.AppendLine($" '{Uri.AbsoluteUri}'");
             }
 
-            if (Optional.IsDefined(Properties))
+            if (Properties != null)
             {
                 builder.Append("  properties:");
                 AppendChildObject(builder, Properties, options, 2, false);
             }
 
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 builder.Append("  id:");
                 builder.AppendLine($" '{Id.ToString()}'");
             }
 
-            if (Optional.IsDefined(SystemData))
+            if (SystemData != null)
             {
                 builder.Append("  systemData:");
                 builder.AppendLine($" '{SystemData.ToString()}'");

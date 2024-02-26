@@ -26,17 +26,17 @@ namespace body_complex.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Field))
+            if (Field != null)
             {
                 writer.WritePropertyName("field"u8);
                 writer.WriteStringValue(Field);
             }
-            if (Optional.IsDefined(Empty))
+            if (Empty != null)
             {
                 writer.WritePropertyName("empty"u8);
                 writer.WriteStringValue(Empty);
             }
-            if (Optional.IsDefined(NullProperty))
+            if (NullProperty != null)
             {
                 writer.WritePropertyName("null"u8);
                 writer.WriteStringValue(NullProperty);

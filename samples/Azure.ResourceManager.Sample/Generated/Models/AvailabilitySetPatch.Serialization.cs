@@ -27,7 +27,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Sku))
+            if (Sku != null)
             {
                 writer.WritePropertyName("sku"u8);
                 writer.WriteObjectValue(Sku);
@@ -45,12 +45,12 @@ namespace Azure.ResourceManager.Sample.Models
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(PlatformUpdateDomainCount))
+            if (PlatformUpdateDomainCount.HasValue)
             {
                 writer.WritePropertyName("platformUpdateDomainCount"u8);
                 writer.WriteNumberValue(PlatformUpdateDomainCount.Value);
             }
-            if (Optional.IsDefined(PlatformFaultDomainCount))
+            if (PlatformFaultDomainCount.HasValue)
             {
                 writer.WritePropertyName("platformFaultDomainCount"u8);
                 writer.WriteNumberValue(PlatformFaultDomainCount.Value);
@@ -65,7 +65,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(ProximityPlacementGroup))
+            if (ProximityPlacementGroup != null)
             {
                 writer.WritePropertyName("proximityPlacementGroup"u8);
                 JsonSerializer.Serialize(writer, ProximityPlacementGroup);
@@ -120,12 +120,12 @@ namespace Azure.ResourceManager.Sample.Models
                 return null;
             }
             Optional<SampleSku> sku = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             Optional<int> platformUpdateDomainCount = default;
             Optional<int> platformFaultDomainCount = default;
-            Optional<IList<WritableSubResource>> virtualMachines = default;
+            IList<WritableSubResource> virtualMachines = default;
             Optional<WritableSubResource> proximityPlacementGroup = default;
-            Optional<IReadOnlyList<InstanceViewStatus>> statuses = default;
+            IReadOnlyList<InstanceViewStatus> statuses = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -226,7 +226,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new AvailabilitySetPatch(Optional.ToDictionary(tags), serializedAdditionalRawData, sku.Value, Optional.ToNullable(platformUpdateDomainCount), Optional.ToNullable(platformFaultDomainCount), Optional.ToList(virtualMachines), proximityPlacementGroup, Optional.ToList(statuses));
+            return new AvailabilitySetPatch(tags ?? new ChangeTrackingDictionary<string, string>(), serializedAdditionalRawData, sku.Value, Optional.ToNullable(platformUpdateDomainCount), Optional.ToNullable(platformFaultDomainCount), virtualMachines ?? new ChangeTrackingList<WritableSubResource>(), proximityPlacementGroup, statuses ?? new ChangeTrackingList<InstanceViewStatus>());
         }
 
         BinaryData IPersistableModel<AvailabilitySetPatch>.Write(ModelReaderWriterOptions options)

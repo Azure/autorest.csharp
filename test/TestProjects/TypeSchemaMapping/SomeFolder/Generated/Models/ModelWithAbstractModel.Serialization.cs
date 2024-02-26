@@ -26,7 +26,7 @@ namespace TypeSchemaMapping.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(AbstractModelProperty))
+            if (AbstractModelProperty != null)
             {
                 writer.WritePropertyName("AbstractModelProperty"u8);
                 writer.WriteObjectValue(AbstractModelProperty);

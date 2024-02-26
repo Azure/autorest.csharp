@@ -16,7 +16,7 @@ namespace MgmtPropertyBag
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Details))
+            if (Details != null)
             {
                 writer.WritePropertyName("details"u8);
                 writer.WriteStringValue(Details);

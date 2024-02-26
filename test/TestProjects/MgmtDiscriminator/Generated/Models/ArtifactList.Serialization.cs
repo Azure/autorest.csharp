@@ -39,7 +39,7 @@ namespace MgmtDiscriminator.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W" && Optional.IsDefined(NextLink))
+            if (options.Format != "W" && NextLink != null)
             {
                 writer.WritePropertyName("nextLink"u8);
                 writer.WriteStringValue(NextLink);
@@ -82,7 +82,7 @@ namespace MgmtDiscriminator.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<ArtifactData>> value = default;
+            IReadOnlyList<ArtifactData> value = default;
             Optional<string> nextLink = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -113,7 +113,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ArtifactList(Optional.ToList(value), nextLink.Value, serializedAdditionalRawData);
+            return new ArtifactList(value ?? new ChangeTrackingList<ArtifactData>(), nextLink.Value, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -135,7 +135,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            if (Optional.IsDefined(NextLink))
+            if (NextLink != null)
             {
                 builder.Append("  nextLink:");
                 if (NextLink.Contains(Environment.NewLine))

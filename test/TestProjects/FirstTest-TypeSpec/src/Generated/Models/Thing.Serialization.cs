@@ -46,22 +46,22 @@ namespace FirstTestTypeSpec.Models
             writer.WriteNumberValue(RequiredLiteralFloat.ToSerialSingle());
             writer.WritePropertyName("requiredLiteralBool"u8);
             writer.WriteBooleanValue(RequiredLiteralBool);
-            if (Optional.IsDefined(OptionalLiteralString))
+            if (OptionalLiteralString.HasValue)
             {
                 writer.WritePropertyName("optionalLiteralString"u8);
                 writer.WriteStringValue(OptionalLiteralString.Value.ToString());
             }
-            if (Optional.IsDefined(OptionalLiteralInt))
+            if (OptionalLiteralInt.HasValue)
             {
                 writer.WritePropertyName("optionalLiteralInt"u8);
                 writer.WriteNumberValue(OptionalLiteralInt.Value.ToSerialInt32());
             }
-            if (Optional.IsDefined(OptionalLiteralFloat))
+            if (OptionalLiteralFloat.HasValue)
             {
                 writer.WritePropertyName("optionalLiteralFloat"u8);
                 writer.WriteNumberValue(OptionalLiteralFloat.Value.ToSerialSingle());
             }
-            if (Optional.IsDefined(OptionalLiteralBool))
+            if (OptionalLiteralBool.HasValue)
             {
                 writer.WritePropertyName("optionalLiteralBool"u8);
                 writer.WriteBooleanValue(OptionalLiteralBool.Value);
@@ -148,7 +148,7 @@ namespace FirstTestTypeSpec.Models
             Optional<ThingOptionalLiteralFloat> optionalLiteralFloat = default;
             Optional<bool> optionalLiteralBool = default;
             string requiredBadDescription = default;
-            Optional<IList<int>> optionalNullableList = default;
+            IList<int> optionalNullableList = default;
             IList<int> requiredNullableList = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -261,7 +261,7 @@ namespace FirstTestTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Thing(name, requiredUnion, requiredLiteralString, requiredLiteralInt, requiredLiteralFloat, requiredLiteralBool, Optional.ToNullable(optionalLiteralString), Optional.ToNullable(optionalLiteralInt), Optional.ToNullable(optionalLiteralFloat), Optional.ToNullable(optionalLiteralBool), requiredBadDescription, Optional.ToList(optionalNullableList), requiredNullableList, serializedAdditionalRawData);
+            return new Thing(name, requiredUnion, requiredLiteralString, requiredLiteralInt, requiredLiteralFloat, requiredLiteralBool, Optional.ToNullable(optionalLiteralString), Optional.ToNullable(optionalLiteralInt), Optional.ToNullable(optionalLiteralFloat), Optional.ToNullable(optionalLiteralBool), requiredBadDescription, optionalNullableList ?? new ChangeTrackingList<int>(), requiredNullableList, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<Thing>.Write(ModelReaderWriterOptions options)

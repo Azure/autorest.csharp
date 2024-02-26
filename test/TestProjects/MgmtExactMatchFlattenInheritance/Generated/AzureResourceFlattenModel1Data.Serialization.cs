@@ -17,7 +17,7 @@ namespace MgmtExactMatchFlattenInheritance
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Foo))
+            if (Foo.HasValue)
             {
                 writer.WritePropertyName("foo"u8);
                 writer.WriteNumberValue(Foo.Value);
@@ -37,12 +37,12 @@ namespace MgmtExactMatchFlattenInheritance
             writer.WriteStringValue(Location);
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(FooPropertiesFoo))
+            if (FooPropertiesFoo != null)
             {
                 writer.WritePropertyName("foo"u8);
                 writer.WriteStringValue(FooPropertiesFoo);
             }
-            if (Optional.IsDefined(IdPropertiesId))
+            if (IdPropertiesId != null)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(IdPropertiesId);
@@ -58,7 +58,7 @@ namespace MgmtExactMatchFlattenInheritance
                 return null;
             }
             Optional<int> foo = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -143,7 +143,7 @@ namespace MgmtExactMatchFlattenInheritance
                     continue;
                 }
             }
-            return new AzureResourceFlattenModel1Data(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, Optional.ToNullable(foo), foo0.Value, id0.Value);
+            return new AzureResourceFlattenModel1Data(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, Optional.ToNullable(foo), foo0.Value, id0.Value);
         }
     }
 }

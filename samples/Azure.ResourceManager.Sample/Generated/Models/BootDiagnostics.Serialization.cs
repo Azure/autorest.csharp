@@ -27,12 +27,12 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Enabled))
+            if (Enabled.HasValue)
             {
                 writer.WritePropertyName("enabled"u8);
                 writer.WriteBooleanValue(Enabled.Value);
             }
-            if (Optional.IsDefined(StorageUri))
+            if (StorageUri != null)
             {
                 writer.WritePropertyName("storageUri"u8);
                 writer.WriteStringValue(StorageUri.AbsoluteUri);
@@ -113,14 +113,14 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Enabled))
+            if (Enabled.HasValue)
             {
                 builder.Append("  enabled:");
                 var boolValue = Enabled.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
             }
 
-            if (Optional.IsDefined(StorageUri))
+            if (StorageUri != null)
             {
                 builder.Append("  storageUri:");
                 builder.AppendLine($" '{StorageUri.AbsoluteUri}'");

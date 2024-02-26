@@ -16,12 +16,12 @@ namespace MgmtAcronymMapping.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Protocol))
+            if (Protocol.HasValue)
             {
                 writer.WritePropertyName("protocol"u8);
                 writer.WriteStringValue(Protocol.Value.ToSerialString());
             }
-            if (Optional.IsDefined(CertificateUri))
+            if (CertificateUri != null)
             {
                 writer.WritePropertyName("certificateUrl"u8);
                 writer.WriteStringValue(CertificateUri.AbsoluteUri);

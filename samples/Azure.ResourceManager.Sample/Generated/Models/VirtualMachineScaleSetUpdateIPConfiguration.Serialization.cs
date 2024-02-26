@@ -29,34 +29,34 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(Subnet))
+            if (Subnet != null)
             {
                 writer.WritePropertyName("subnet"u8);
                 JsonSerializer.Serialize(writer, Subnet);
             }
-            if (Optional.IsDefined(Primary))
+            if (Primary.HasValue)
             {
                 writer.WritePropertyName("primary"u8);
                 writer.WriteBooleanValue(Primary.Value);
             }
-            if (Optional.IsDefined(PublicIPAddressConfiguration))
+            if (PublicIPAddressConfiguration != null)
             {
                 writer.WritePropertyName("publicIPAddressConfiguration"u8);
                 writer.WriteObjectValue(PublicIPAddressConfiguration);
             }
-            if (Optional.IsDefined(PrivateIPAddressVersion))
+            if (PrivateIPAddressVersion.HasValue)
             {
                 writer.WritePropertyName("privateIPAddressVersion"u8);
                 writer.WriteStringValue(PrivateIPAddressVersion.Value.ToString());
@@ -146,10 +146,10 @@ namespace Azure.ResourceManager.Sample.Models
             Optional<bool> primary = default;
             Optional<VirtualMachineScaleSetUpdatePublicIPAddressConfiguration> publicIPAddressConfiguration = default;
             Optional<IPVersion> privateIPAddressVersion = default;
-            Optional<IList<WritableSubResource>> applicationGatewayBackendAddressPools = default;
-            Optional<IList<WritableSubResource>> applicationSecurityGroups = default;
-            Optional<IList<WritableSubResource>> loadBalancerBackendAddressPools = default;
-            Optional<IList<WritableSubResource>> loadBalancerInboundNatPools = default;
+            IList<WritableSubResource> applicationGatewayBackendAddressPools = default;
+            IList<WritableSubResource> applicationSecurityGroups = default;
+            IList<WritableSubResource> loadBalancerBackendAddressPools = default;
+            IList<WritableSubResource> loadBalancerInboundNatPools = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -274,7 +274,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineScaleSetUpdateIPConfiguration(id.Value, serializedAdditionalRawData, name.Value, subnet, Optional.ToNullable(primary), publicIPAddressConfiguration.Value, Optional.ToNullable(privateIPAddressVersion), Optional.ToList(applicationGatewayBackendAddressPools), Optional.ToList(applicationSecurityGroups), Optional.ToList(loadBalancerBackendAddressPools), Optional.ToList(loadBalancerInboundNatPools));
+            return new VirtualMachineScaleSetUpdateIPConfiguration(id.Value, serializedAdditionalRawData, name.Value, subnet, Optional.ToNullable(primary), publicIPAddressConfiguration.Value, Optional.ToNullable(privateIPAddressVersion), applicationGatewayBackendAddressPools ?? new ChangeTrackingList<WritableSubResource>(), applicationSecurityGroups ?? new ChangeTrackingList<WritableSubResource>(), loadBalancerBackendAddressPools ?? new ChangeTrackingList<WritableSubResource>(), loadBalancerInboundNatPools ?? new ChangeTrackingList<WritableSubResource>());
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -282,7 +282,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 builder.Append("  name:");
                 if (Name.Contains(Environment.NewLine))
@@ -296,7 +296,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 builder.Append("  id:");
                 if (Id.Contains(Environment.NewLine))
@@ -312,26 +312,26 @@ namespace Azure.ResourceManager.Sample.Models
 
             builder.Append("  properties:");
             builder.AppendLine(" {");
-            if (Optional.IsDefined(Subnet))
+            if (Subnet != null)
             {
                 builder.Append("    subnet:");
                 AppendChildObject(builder, Subnet, options, 4, false);
             }
 
-            if (Optional.IsDefined(Primary))
+            if (Primary.HasValue)
             {
                 builder.Append("    primary:");
                 var boolValue = Primary.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
             }
 
-            if (Optional.IsDefined(PublicIPAddressConfiguration))
+            if (PublicIPAddressConfiguration != null)
             {
                 builder.Append("    publicIPAddressConfiguration:");
                 AppendChildObject(builder, PublicIPAddressConfiguration, options, 4, false);
             }
 
-            if (Optional.IsDefined(PrivateIPAddressVersion))
+            if (PrivateIPAddressVersion.HasValue)
             {
                 builder.Append("    privateIPAddressVersion:");
                 builder.AppendLine($" '{PrivateIPAddressVersion.Value.ToString()}'");

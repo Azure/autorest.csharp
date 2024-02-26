@@ -26,12 +26,12 @@ namespace ModelShapes.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Code))
+            if (Code != null)
             {
                 writer.WritePropertyName("Code"u8);
                 writer.WriteStringValue(Code);
             }
-            if (Optional.IsDefined(Status))
+            if (Status != null)
             {
                 writer.WritePropertyName("Status"u8);
                 writer.WriteStringValue(Status);

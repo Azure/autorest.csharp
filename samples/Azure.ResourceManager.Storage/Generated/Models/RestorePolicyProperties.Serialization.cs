@@ -18,7 +18,7 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteStartObject();
             writer.WritePropertyName("enabled"u8);
             writer.WriteBooleanValue(Enabled);
-            if (Optional.IsDefined(Days))
+            if (Days.HasValue)
             {
                 writer.WritePropertyName("days"u8);
                 writer.WriteNumberValue(Days.Value);

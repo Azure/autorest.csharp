@@ -56,12 +56,12 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(TranslatedAddress))
+            if (TranslatedAddress != null)
             {
                 writer.WritePropertyName("translatedAddress"u8);
                 writer.WriteStringValue(TranslatedAddress);
             }
-            if (Optional.IsDefined(TranslatedPort))
+            if (TranslatedPort != null)
             {
                 writer.WritePropertyName("translatedPort"u8);
                 writer.WriteStringValue(TranslatedPort);
@@ -76,17 +76,17 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(TranslatedFqdn))
+            if (TranslatedFqdn != null)
             {
                 writer.WritePropertyName("translatedFqdn"u8);
                 writer.WriteStringValue(TranslatedFqdn);
             }
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Description))
+            if (Description != null)
             {
                 writer.WritePropertyName("description"u8);
                 writer.WriteStringValue(Description);
@@ -102,13 +102,13 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<IList<FirewallPolicyRuleNetworkProtocol>> ipProtocols = default;
-            Optional<IList<string>> sourceAddresses = default;
-            Optional<IList<string>> destinationAddresses = default;
-            Optional<IList<string>> destinationPorts = default;
+            IList<FirewallPolicyRuleNetworkProtocol> ipProtocols = default;
+            IList<string> sourceAddresses = default;
+            IList<string> destinationAddresses = default;
+            IList<string> destinationPorts = default;
             Optional<string> translatedAddress = default;
             Optional<string> translatedPort = default;
-            Optional<IList<string>> sourceIpGroups = default;
+            IList<string> sourceIpGroups = default;
             Optional<string> translatedFqdn = default;
             Optional<string> name = default;
             Optional<string> description = default;
@@ -216,7 +216,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new NatRule(name.Value, description.Value, ruleType, Optional.ToList(ipProtocols), Optional.ToList(sourceAddresses), Optional.ToList(destinationAddresses), Optional.ToList(destinationPorts), translatedAddress.Value, translatedPort.Value, Optional.ToList(sourceIpGroups), translatedFqdn.Value);
+            return new NatRule(name.Value, description.Value, ruleType, ipProtocols ?? new ChangeTrackingList<FirewallPolicyRuleNetworkProtocol>(), sourceAddresses ?? new ChangeTrackingList<string>(), destinationAddresses ?? new ChangeTrackingList<string>(), destinationPorts ?? new ChangeTrackingList<string>(), translatedAddress.Value, translatedPort.Value, sourceIpGroups ?? new ChangeTrackingList<string>(), translatedFqdn.Value);
         }
     }
 }

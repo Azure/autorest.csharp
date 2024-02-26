@@ -16,7 +16,7 @@ namespace MgmtParamOrdering.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Description))
+            if (Description != null)
             {
                 writer.WritePropertyName("description"u8);
                 writer.WriteStringValue(Description);
@@ -53,8 +53,8 @@ namespace MgmtParamOrdering.Models
                 return null;
             }
             Optional<string> description = default;
-            Optional<IDictionary<string, string>> properties = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> properties = default;
+            IDictionary<string, string> tags = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("description"u8))
@@ -91,7 +91,7 @@ namespace MgmtParamOrdering.Models
                     continue;
                 }
             }
-            return new EnvironmentContainer(description.Value, Optional.ToDictionary(properties), Optional.ToDictionary(tags));
+            return new EnvironmentContainer(description.Value, properties ?? new ChangeTrackingDictionary<string, string>(), tags ?? new ChangeTrackingDictionary<string, string>());
         }
     }
 }

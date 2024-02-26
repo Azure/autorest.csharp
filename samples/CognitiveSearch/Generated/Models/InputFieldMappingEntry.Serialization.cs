@@ -18,12 +18,12 @@ namespace CognitiveSearch.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (Optional.IsDefined(Source))
+            if (Source != null)
             {
                 writer.WritePropertyName("source"u8);
                 writer.WriteStringValue(Source);
             }
-            if (Optional.IsDefined(SourceContext))
+            if (SourceContext != null)
             {
                 writer.WritePropertyName("sourceContext"u8);
                 writer.WriteStringValue(SourceContext);
@@ -50,7 +50,7 @@ namespace CognitiveSearch.Models
             string name = default;
             Optional<string> source = default;
             Optional<string> sourceContext = default;
-            Optional<IList<InputFieldMappingEntry>> inputs = default;
+            IList<InputFieldMappingEntry> inputs = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -83,7 +83,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new InputFieldMappingEntry(name, source.Value, sourceContext.Value, Optional.ToList(inputs));
+            return new InputFieldMappingEntry(name, source.Value, sourceContext.Value, inputs ?? new ChangeTrackingList<InputFieldMappingEntry>());
         }
     }
 }

@@ -27,12 +27,12 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(ProtectFromScaleIn))
+            if (ProtectFromScaleIn.HasValue)
             {
                 writer.WritePropertyName("protectFromScaleIn"u8);
                 writer.WriteBooleanValue(ProtectFromScaleIn.Value);
             }
-            if (Optional.IsDefined(ProtectFromScaleSetActions))
+            if (ProtectFromScaleSetActions.HasValue)
             {
                 writer.WritePropertyName("protectFromScaleSetActions"u8);
                 writer.WriteBooleanValue(ProtectFromScaleSetActions.Value);
@@ -113,14 +113,14 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(ProtectFromScaleIn))
+            if (ProtectFromScaleIn.HasValue)
             {
                 builder.Append("  protectFromScaleIn:");
                 var boolValue = ProtectFromScaleIn.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
             }
 
-            if (Optional.IsDefined(ProtectFromScaleSetActions))
+            if (ProtectFromScaleSetActions.HasValue)
             {
                 builder.Append("  protectFromScaleSetActions:");
                 var boolValue = ProtectFromScaleSetActions.Value == true ? "true" : "false";

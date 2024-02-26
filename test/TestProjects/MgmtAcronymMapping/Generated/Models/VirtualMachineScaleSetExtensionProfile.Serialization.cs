@@ -27,7 +27,7 @@ namespace MgmtAcronymMapping.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(ExtensionsTimeBudget))
+            if (ExtensionsTimeBudget != null)
             {
                 writer.WritePropertyName("extensionsTimeBudget"u8);
                 writer.WriteStringValue(ExtensionsTimeBudget);
@@ -41,7 +41,7 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<IList<VirtualMachineScaleSetExtensionData>> extensions = default;
+            IList<VirtualMachineScaleSetExtensionData> extensions = default;
             Optional<string> extensionsTimeBudget = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -65,7 +65,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetExtensionProfile(Optional.ToList(extensions), extensionsTimeBudget.Value);
+            return new VirtualMachineScaleSetExtensionProfile(extensions ?? new ChangeTrackingList<VirtualMachineScaleSetExtensionData>(), extensionsTimeBudget.Value);
         }
     }
 }

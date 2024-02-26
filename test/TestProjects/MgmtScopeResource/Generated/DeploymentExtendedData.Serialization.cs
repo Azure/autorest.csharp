@@ -23,7 +23,7 @@ namespace MgmtScopeResource
             }
             Optional<string> location = default;
             Optional<DeploymentPropertiesExtended> properties = default;
-            Optional<IReadOnlyDictionary<string, string>> tags = default;
+            IReadOnlyDictionary<string, string> tags = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
@@ -83,7 +83,7 @@ namespace MgmtScopeResource
                     continue;
                 }
             }
-            return new DeploymentExtendedData(id, name, type, systemData.Value, location.Value, properties.Value, Optional.ToDictionary(tags));
+            return new DeploymentExtendedData(id, name, type, systemData.Value, location.Value, properties.Value, tags ?? new ChangeTrackingDictionary<string, string>());
         }
     }
 }

@@ -16,17 +16,17 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(LowerCaseTerms))
+            if (LowerCaseTerms.HasValue)
             {
                 writer.WritePropertyName("lowercase"u8);
                 writer.WriteBooleanValue(LowerCaseTerms.Value);
             }
-            if (Optional.IsDefined(Pattern))
+            if (Pattern != null)
             {
                 writer.WritePropertyName("pattern"u8);
                 writer.WriteStringValue(Pattern);
             }
-            if (Optional.IsDefined(Flags))
+            if (Flags.HasValue)
             {
                 writer.WritePropertyName("flags"u8);
                 writer.WriteStringValue(Flags.Value.ToString());
@@ -57,7 +57,7 @@ namespace CognitiveSearch.Models
             Optional<bool> lowercase = default;
             Optional<string> pattern = default;
             Optional<RegexFlags> flags = default;
-            Optional<IList<string>> stopwords = default;
+            IList<string> stopwords = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
@@ -110,7 +110,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new PatternAnalyzer(odataType, name, Optional.ToNullable(lowercase), pattern.Value, Optional.ToNullable(flags), Optional.ToList(stopwords));
+            return new PatternAnalyzer(odataType, name, Optional.ToNullable(lowercase), pattern.Value, Optional.ToNullable(flags), stopwords ?? new ChangeTrackingList<string>());
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<FileShareData>> value = default;
+            IReadOnlyList<FileShareData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -44,7 +44,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new FileShareItems(Optional.ToList(value), nextLink.Value);
+            return new FileShareItems(value ?? new ChangeTrackingList<FileShareData>(), nextLink.Value);
         }
     }
 }

@@ -17,7 +17,7 @@ namespace MgmtSupersetFlattenInheritance
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Foo))
+            if (Foo != null)
             {
                 writer.WritePropertyName("foo"u8);
                 writer.WriteStringValue(Foo);
@@ -45,7 +45,7 @@ namespace MgmtSupersetFlattenInheritance
                 return null;
             }
             Optional<string> foo = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -102,7 +102,7 @@ namespace MgmtSupersetFlattenInheritance
                     continue;
                 }
             }
-            return new TrackedResourceModel1Data(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, foo.Value);
+            return new TrackedResourceModel1Data(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, foo.Value);
         }
     }
 }

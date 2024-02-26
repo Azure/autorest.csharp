@@ -28,12 +28,12 @@ namespace MgmtParent.Models
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(PlatformFaultDomain))
+            if (PlatformFaultDomain.HasValue)
             {
                 writer.WritePropertyName("platformFaultDomain"u8);
                 writer.WriteNumberValue(PlatformFaultDomain.Value);
             }
-            if (Optional.IsDefined(AutoReplaceOnFailure))
+            if (AutoReplaceOnFailure.HasValue)
             {
                 writer.WritePropertyName("autoReplaceOnFailure"u8);
                 writer.WriteBooleanValue(AutoReplaceOnFailure.Value);

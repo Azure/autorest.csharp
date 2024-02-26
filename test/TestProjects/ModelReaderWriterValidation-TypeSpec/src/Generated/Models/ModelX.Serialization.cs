@@ -37,7 +37,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(NullProperty))
+            if (NullProperty.HasValue)
             {
                 writer.WritePropertyName("nullProperty"u8);
                 writer.WriteNumberValue(NullProperty.Value);
@@ -60,7 +60,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             }
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind);
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
@@ -103,9 +103,9 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             {
                 return null;
             }
-            Optional<IList<string>> fields = default;
+            IList<string> fields = default;
             Optional<int> nullProperty = default;
-            Optional<IDictionary<string, string>> keyValuePairs = default;
+            IDictionary<string, string> keyValuePairs = default;
             int xProperty = default;
             string kind = default;
             Optional<string> name = default;
@@ -171,7 +171,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ModelX(kind, name.Value, serializedAdditionalRawData, Optional.ToList(fields), Optional.ToNullable(nullProperty), Optional.ToDictionary(keyValuePairs), xProperty);
+            return new ModelX(kind, name.Value, serializedAdditionalRawData, fields ?? new ChangeTrackingList<string>(), Optional.ToNullable(nullProperty), keyValuePairs ?? new ChangeTrackingDictionary<string, string>(), xProperty);
         }
 
         BinaryData IPersistableModel<ModelX>.Write(ModelReaderWriterOptions options)

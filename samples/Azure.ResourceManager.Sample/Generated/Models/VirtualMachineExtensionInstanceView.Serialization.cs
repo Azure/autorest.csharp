@@ -28,17 +28,17 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(VirtualMachineExtensionInstanceViewType))
+            if (VirtualMachineExtensionInstanceViewType != null)
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(VirtualMachineExtensionInstanceViewType);
             }
-            if (Optional.IsDefined(TypeHandlerVersion))
+            if (TypeHandlerVersion != null)
             {
                 writer.WritePropertyName("typeHandlerVersion"u8);
                 writer.WriteStringValue(TypeHandlerVersion);
@@ -104,8 +104,8 @@ namespace Azure.ResourceManager.Sample.Models
             Optional<string> name = default;
             Optional<string> type = default;
             Optional<string> typeHandlerVersion = default;
-            Optional<IList<InstanceViewStatus>> substatuses = default;
-            Optional<IList<InstanceViewStatus>> statuses = default;
+            IList<InstanceViewStatus> substatuses = default;
+            IList<InstanceViewStatus> statuses = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -159,7 +159,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineExtensionInstanceView(name.Value, type.Value, typeHandlerVersion.Value, Optional.ToList(substatuses), Optional.ToList(statuses), serializedAdditionalRawData);
+            return new VirtualMachineExtensionInstanceView(name.Value, type.Value, typeHandlerVersion.Value, substatuses ?? new ChangeTrackingList<InstanceViewStatus>(), statuses ?? new ChangeTrackingList<InstanceViewStatus>(), serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -167,7 +167,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 builder.Append("  name:");
                 if (Name.Contains(Environment.NewLine))
@@ -181,7 +181,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(TypeHandlerVersion))
+            if (TypeHandlerVersion != null)
             {
                 builder.Append("  typeHandlerVersion:");
                 if (TypeHandlerVersion.Contains(Environment.NewLine))

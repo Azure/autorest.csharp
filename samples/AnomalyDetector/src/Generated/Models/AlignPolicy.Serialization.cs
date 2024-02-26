@@ -27,17 +27,17 @@ namespace AnomalyDetector.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(AlignMode))
+            if (AlignMode.HasValue)
             {
                 writer.WritePropertyName("alignMode"u8);
                 writer.WriteStringValue(AlignMode.Value.ToSerialString());
             }
-            if (Optional.IsDefined(FillNAMethod))
+            if (FillNAMethod.HasValue)
             {
                 writer.WritePropertyName("fillNAMethod"u8);
                 writer.WriteStringValue(FillNAMethod.Value.ToString());
             }
-            if (Optional.IsDefined(PaddingValue))
+            if (PaddingValue.HasValue)
             {
                 writer.WritePropertyName("paddingValue"u8);
                 writer.WriteNumberValue(PaddingValue.Value);

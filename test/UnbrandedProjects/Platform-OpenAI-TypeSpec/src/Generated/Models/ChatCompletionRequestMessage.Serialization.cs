@@ -34,12 +34,12 @@ namespace OpenAI.Models
             {
                 writer.WriteNull("content");
             }
-            if (OptionalProperty.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (OptionalProperty.IsDefined(FunctionCall))
+            if (FunctionCall != null)
             {
                 writer.WritePropertyName("function_call"u8);
                 writer.WriteObjectValue(FunctionCall);

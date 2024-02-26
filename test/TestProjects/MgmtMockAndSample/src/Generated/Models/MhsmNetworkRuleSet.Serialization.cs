@@ -17,12 +17,12 @@ namespace MgmtMockAndSample.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Bypass))
+            if (Bypass.HasValue)
             {
                 writer.WritePropertyName("bypass"u8);
                 writer.WriteStringValue(Bypass.Value.ToString());
             }
-            if (Optional.IsDefined(DefaultAction))
+            if (DefaultAction.HasValue)
             {
                 writer.WritePropertyName("defaultAction"u8);
                 writer.WriteStringValue(DefaultAction.Value.ToString());
@@ -58,8 +58,8 @@ namespace MgmtMockAndSample.Models
             }
             Optional<NetworkRuleBypassOption> bypass = default;
             Optional<NetworkRuleAction> defaultAction = default;
-            Optional<IList<MhsmipRule>> ipRules = default;
-            Optional<IList<WritableSubResource>> virtualNetworkRules = default;
+            IList<MhsmipRule> ipRules = default;
+            IList<WritableSubResource> virtualNetworkRules = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("bypass"u8))
@@ -109,7 +109,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new MhsmNetworkRuleSet(Optional.ToNullable(bypass), Optional.ToNullable(defaultAction), Optional.ToList(ipRules), Optional.ToList(virtualNetworkRules));
+            return new MhsmNetworkRuleSet(Optional.ToNullable(bypass), Optional.ToNullable(defaultAction), ipRules ?? new ChangeTrackingList<MhsmipRule>(), virtualNetworkRules ?? new ChangeTrackingList<WritableSubResource>());
         }
     }
 }

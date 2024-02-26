@@ -18,7 +18,7 @@ namespace MgmtPartialResource
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Sku))
+            if (Sku != null)
             {
                 writer.WritePropertyName("sku"u8);
                 writer.WriteObjectValue(Sku);
@@ -35,42 +35,42 @@ namespace MgmtPartialResource
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(PublicIPAllocationMethod))
+            if (PublicIPAllocationMethod.HasValue)
             {
                 writer.WritePropertyName("publicIPAllocationMethod"u8);
                 writer.WriteStringValue(PublicIPAllocationMethod.Value.ToString());
             }
-            if (Optional.IsDefined(PublicIPAddressVersion))
+            if (PublicIPAddressVersion.HasValue)
             {
                 writer.WritePropertyName("publicIPAddressVersion"u8);
                 writer.WriteStringValue(PublicIPAddressVersion.Value.ToString());
             }
-            if (Optional.IsDefined(IpAddress))
+            if (IpAddress != null)
             {
                 writer.WritePropertyName("ipAddress"u8);
                 writer.WriteStringValue(IpAddress);
             }
-            if (Optional.IsDefined(IdleTimeoutInMinutes))
+            if (IdleTimeoutInMinutes.HasValue)
             {
                 writer.WritePropertyName("idleTimeoutInMinutes"u8);
                 writer.WriteNumberValue(IdleTimeoutInMinutes.Value);
             }
-            if (Optional.IsDefined(ServicePublicIPAddress))
+            if (ServicePublicIPAddress != null)
             {
                 writer.WritePropertyName("servicePublicIPAddress"u8);
                 writer.WriteObjectValue(ServicePublicIPAddress);
             }
-            if (Optional.IsDefined(MigrationPhase))
+            if (MigrationPhase.HasValue)
             {
                 writer.WritePropertyName("migrationPhase"u8);
                 writer.WriteStringValue(MigrationPhase.Value.ToString());
             }
-            if (Optional.IsDefined(LinkedPublicIPAddress))
+            if (LinkedPublicIPAddress != null)
             {
                 writer.WritePropertyName("linkedPublicIPAddress"u8);
                 writer.WriteObjectValue(LinkedPublicIPAddress);
             }
-            if (Optional.IsDefined(DeleteOption))
+            if (DeleteOption.HasValue)
             {
                 writer.WritePropertyName("deleteOption"u8);
                 writer.WriteStringValue(DeleteOption.Value.ToString());
@@ -87,7 +87,7 @@ namespace MgmtPartialResource
             }
             Optional<PublicIPAddressSku> sku = default;
             Optional<string> etag = default;
-            Optional<IList<string>> zones = default;
+            IList<string> zones = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
@@ -241,7 +241,7 @@ namespace MgmtPartialResource
                     continue;
                 }
             }
-            return new PublicIPAddressData(id, name, type, systemData.Value, sku.Value, etag.Value, Optional.ToList(zones), Optional.ToNullable(publicIPAllocationMethod), Optional.ToNullable(publicIPAddressVersion), ipAddress.Value, Optional.ToNullable(idleTimeoutInMinutes), resourceGuid.Value, servicePublicIPAddress.Value, Optional.ToNullable(migrationPhase), linkedPublicIPAddress.Value, Optional.ToNullable(deleteOption));
+            return new PublicIPAddressData(id, name, type, systemData.Value, sku.Value, etag.Value, zones ?? new ChangeTrackingList<string>(), Optional.ToNullable(publicIPAllocationMethod), Optional.ToNullable(publicIPAddressVersion), ipAddress.Value, Optional.ToNullable(idleTimeoutInMinutes), resourceGuid.Value, servicePublicIPAddress.Value, Optional.ToNullable(migrationPhase), linkedPublicIPAddress.Value, Optional.ToNullable(deleteOption));
         }
     }
 }

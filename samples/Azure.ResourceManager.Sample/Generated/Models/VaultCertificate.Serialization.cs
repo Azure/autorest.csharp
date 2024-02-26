@@ -27,12 +27,12 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(CertificateUri))
+            if (CertificateUri != null)
             {
                 writer.WritePropertyName("certificateUrl"u8);
                 writer.WriteStringValue(CertificateUri.AbsoluteUri);
             }
-            if (Optional.IsDefined(CertificateStore))
+            if (CertificateStore != null)
             {
                 writer.WritePropertyName("certificateStore"u8);
                 writer.WriteStringValue(CertificateStore);
@@ -109,13 +109,13 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(CertificateUri))
+            if (CertificateUri != null)
             {
                 builder.Append("  certificateUrl:");
                 builder.AppendLine($" '{CertificateUri.AbsoluteUri}'");
             }
 
-            if (Optional.IsDefined(CertificateStore))
+            if (CertificateStore != null)
             {
                 builder.Append("  certificateStore:");
                 if (CertificateStore.Contains(Environment.NewLine))

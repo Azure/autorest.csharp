@@ -19,7 +19,7 @@ namespace MgmtAcronymMapping
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Plan))
+            if (Plan != null)
             {
                 writer.WritePropertyName("plan"u8);
                 writer.WriteObjectValue(Plan);
@@ -39,57 +39,57 @@ namespace MgmtAcronymMapping
             writer.WriteStringValue(Location);
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(HardwareProfile))
+            if (HardwareProfile != null)
             {
                 writer.WritePropertyName("hardwareProfile"u8);
                 writer.WriteObjectValue(HardwareProfile);
             }
-            if (Optional.IsDefined(StorageProfile))
+            if (StorageProfile != null)
             {
                 writer.WritePropertyName("storageProfile"u8);
                 writer.WriteObjectValue(StorageProfile);
             }
-            if (Optional.IsDefined(AdditionalCapabilities))
+            if (AdditionalCapabilities != null)
             {
                 writer.WritePropertyName("additionalCapabilities"u8);
                 writer.WriteObjectValue(AdditionalCapabilities);
             }
-            if (Optional.IsDefined(OSProfile))
+            if (OSProfile != null)
             {
                 writer.WritePropertyName("osProfile"u8);
                 writer.WriteObjectValue(OSProfile);
             }
-            if (Optional.IsDefined(SecurityProfile))
+            if (SecurityProfile != null)
             {
                 writer.WritePropertyName("securityProfile"u8);
                 writer.WriteObjectValue(SecurityProfile);
             }
-            if (Optional.IsDefined(NetworkProfile))
+            if (NetworkProfile != null)
             {
                 writer.WritePropertyName("networkProfile"u8);
                 writer.WriteObjectValue(NetworkProfile);
             }
-            if (Optional.IsDefined(NetworkProfileConfiguration))
+            if (NetworkProfileConfiguration != null)
             {
                 writer.WritePropertyName("networkProfileConfiguration"u8);
                 writer.WriteObjectValue(NetworkProfileConfiguration);
             }
-            if (Optional.IsDefined(DiagnosticsProfile))
+            if (DiagnosticsProfile != null)
             {
                 writer.WritePropertyName("diagnosticsProfile"u8);
                 writer.WriteObjectValue(DiagnosticsProfile);
             }
-            if (Optional.IsDefined(AvailabilitySet))
+            if (AvailabilitySet != null)
             {
                 writer.WritePropertyName("availabilitySet"u8);
                 JsonSerializer.Serialize(writer, AvailabilitySet);
             }
-            if (Optional.IsDefined(LicenseType))
+            if (LicenseType != null)
             {
                 writer.WritePropertyName("licenseType"u8);
                 writer.WriteStringValue(LicenseType);
             }
-            if (Optional.IsDefined(ProtectionPolicy))
+            if (ProtectionPolicy != null)
             {
                 writer.WritePropertyName("protectionPolicy"u8);
                 writer.WriteObjectValue(ProtectionPolicy);
@@ -107,8 +107,8 @@ namespace MgmtAcronymMapping
             Optional<string> instanceId = default;
             Optional<MgmtAcronymMappingSku> sku = default;
             Optional<MgmtAcronymMappingPlan> plan = default;
-            Optional<IReadOnlyList<string>> zones = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IReadOnlyList<string> zones = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -353,7 +353,7 @@ namespace MgmtAcronymMapping
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetVmData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, instanceId.Value, sku.Value, plan.Value, Optional.ToList(zones), Optional.ToNullable(latestModelApplied), vmId.Value, instanceView.Value, hardwareProfile.Value, storageProfile.Value, additionalCapabilities.Value, osProfile.Value, securityProfile.Value, networkProfile.Value, networkProfileConfiguration.Value, diagnosticsProfile.Value, availabilitySet, provisioningState.Value, licenseType.Value, modelDefinitionApplied.Value, protectionPolicy.Value);
+            return new VirtualMachineScaleSetVmData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, instanceId.Value, sku.Value, plan.Value, zones ?? new ChangeTrackingList<string>(), Optional.ToNullable(latestModelApplied), vmId.Value, instanceView.Value, hardwareProfile.Value, storageProfile.Value, additionalCapabilities.Value, osProfile.Value, securityProfile.Value, networkProfile.Value, networkProfileConfiguration.Value, diagnosticsProfile.Value, availabilitySet, provisioningState.Value, licenseType.Value, modelDefinitionApplied.Value, protectionPolicy.Value);
         }
     }
 }

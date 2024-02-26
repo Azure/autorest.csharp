@@ -23,7 +23,7 @@ namespace OpenAI.Models
             }
 
             writer.WriteStartObject();
-            if (OptionalProperty.IsDefined(NEpochs))
+            if (NEpochs != null)
             {
                 writer.WritePropertyName("n_epochs"u8);
 #if NET6_0_OR_GREATER

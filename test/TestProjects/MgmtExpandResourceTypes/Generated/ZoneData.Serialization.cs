@@ -19,7 +19,7 @@ namespace MgmtExpandResourceTypes
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Etag))
+            if (Etag != null)
             {
                 writer.WritePropertyName("etag"u8);
                 writer.WriteStringValue(Etag);
@@ -39,22 +39,22 @@ namespace MgmtExpandResourceTypes
             writer.WriteStringValue(Location);
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(ZoneType))
+            if (ZoneType.HasValue)
             {
                 writer.WritePropertyName("zoneType"u8);
                 writer.WriteStringValue(ZoneType.Value.ToSerialString());
             }
-            if (Optional.IsDefined(MachineType))
+            if (MachineType.HasValue)
             {
                 writer.WritePropertyName("machineType"u8);
                 writer.WriteNumberValue((int)MachineType.Value);
             }
-            if (Optional.IsDefined(StorageType))
+            if (StorageType.HasValue)
             {
                 writer.WritePropertyName("storageType"u8);
                 writer.WriteNumberValue((int)StorageType.Value);
             }
-            if (Optional.IsDefined(MemoryType))
+            if (MemoryType.HasValue)
             {
                 writer.WritePropertyName("memoryType"u8);
                 writer.WriteNumberValue((long)MemoryType.Value);
@@ -90,7 +90,7 @@ namespace MgmtExpandResourceTypes
                 return null;
             }
             Optional<string> etag = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -99,13 +99,13 @@ namespace MgmtExpandResourceTypes
             Optional<long> maxNumberOfRecordSets = default;
             Optional<long> maxNumberOfRecordsPerRecordSet = default;
             Optional<long> numberOfRecordSets = default;
-            Optional<IReadOnlyList<string>> nameServers = default;
+            IReadOnlyList<string> nameServers = default;
             Optional<ZoneType> zoneType = default;
             Optional<MachineType> machineType = default;
             Optional<StorageType> storageType = default;
             Optional<MemoryType> memoryType = default;
-            Optional<IList<WritableSubResource>> registrationVirtualNetworks = default;
-            Optional<IList<WritableSubResource>> resolutionVirtualNetworks = default;
+            IList<WritableSubResource> registrationVirtualNetworks = default;
+            IList<WritableSubResource> resolutionVirtualNetworks = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"u8))
@@ -274,7 +274,7 @@ namespace MgmtExpandResourceTypes
                     continue;
                 }
             }
-            return new ZoneData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, etag.Value, Optional.ToNullable(maxNumberOfRecordSets), Optional.ToNullable(maxNumberOfRecordsPerRecordSet), Optional.ToNullable(numberOfRecordSets), Optional.ToList(nameServers), Optional.ToNullable(zoneType), Optional.ToNullable(machineType), Optional.ToNullable(storageType), Optional.ToNullable(memoryType), Optional.ToList(registrationVirtualNetworks), Optional.ToList(resolutionVirtualNetworks));
+            return new ZoneData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, etag.Value, Optional.ToNullable(maxNumberOfRecordSets), Optional.ToNullable(maxNumberOfRecordsPerRecordSet), Optional.ToNullable(numberOfRecordSets), nameServers ?? new ChangeTrackingList<string>(), Optional.ToNullable(zoneType), Optional.ToNullable(machineType), Optional.ToNullable(storageType), Optional.ToNullable(memoryType), registrationVirtualNetworks ?? new ChangeTrackingList<WritableSubResource>(), resolutionVirtualNetworks ?? new ChangeTrackingList<WritableSubResource>());
         }
     }
 }

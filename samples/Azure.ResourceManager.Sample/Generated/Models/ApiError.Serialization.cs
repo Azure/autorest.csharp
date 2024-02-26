@@ -38,22 +38,22 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(Innererror))
+            if (Innererror != null)
             {
                 writer.WritePropertyName("innererror"u8);
                 writer.WriteObjectValue(Innererror);
             }
-            if (Optional.IsDefined(Code))
+            if (Code != null)
             {
                 writer.WritePropertyName("code"u8);
                 writer.WriteStringValue(Code);
             }
-            if (Optional.IsDefined(Target))
+            if (Target != null)
             {
                 writer.WritePropertyName("target"u8);
                 writer.WriteStringValue(Target);
             }
-            if (Optional.IsDefined(Message))
+            if (Message != null)
             {
                 writer.WritePropertyName("message"u8);
                 writer.WriteStringValue(Message);
@@ -96,7 +96,7 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<ApiErrorBase>> details = default;
+            IReadOnlyList<ApiErrorBase> details = default;
             Optional<InnerError> innererror = default;
             Optional<string> code = default;
             Optional<string> target = default;
@@ -149,7 +149,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ApiError(Optional.ToList(details), innererror.Value, code.Value, target.Value, message.Value, serializedAdditionalRawData);
+            return new ApiError(details ?? new ChangeTrackingList<ApiErrorBase>(), innererror.Value, code.Value, target.Value, message.Value, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -171,13 +171,13 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(Innererror))
+            if (Innererror != null)
             {
                 builder.Append("  innererror:");
                 AppendChildObject(builder, Innererror, options, 2, false);
             }
 
-            if (Optional.IsDefined(Code))
+            if (Code != null)
             {
                 builder.Append("  code:");
                 if (Code.Contains(Environment.NewLine))
@@ -191,7 +191,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(Target))
+            if (Target != null)
             {
                 builder.Append("  target:");
                 if (Target.Contains(Environment.NewLine))
@@ -205,7 +205,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(Message))
+            if (Message != null)
             {
                 builder.Append("  message:");
                 if (Message.Contains(Environment.NewLine))

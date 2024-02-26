@@ -17,12 +17,9 @@ namespace MgmtCustomizations.Models
             writer.WriteStartObject();
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind.ToSerialString());
-            if (Optional.IsDefined(Size))
-            {
-                writer.WritePropertyName("size"u8);
-                SerializeSizeProperty(writer);
-            }
-            if (Optional.IsDefined(DateOfBirth))
+            writer.WritePropertyName("size"u8);
+            SerializeSizeProperty(writer);
+            if (DateOfBirth.HasValue)
             {
                 writer.WritePropertyName("dateOfBirth"u8);
                 SerializeDateOfBirthProperty(writer);

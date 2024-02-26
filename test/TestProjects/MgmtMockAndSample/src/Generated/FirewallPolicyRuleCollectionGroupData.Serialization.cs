@@ -17,14 +17,14 @@ namespace MgmtMockAndSample
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(Priority))
+            if (Priority.HasValue)
             {
                 writer.WritePropertyName("priority"u8);
                 writer.WriteNumberValue(Priority.Value);
@@ -54,7 +54,7 @@ namespace MgmtMockAndSample
             Optional<ResourceType> type = default;
             Optional<string> id = default;
             Optional<int> priority = default;
-            Optional<IList<FirewallPolicyRuleCollection>> ruleCollections = default;
+            IList<FirewallPolicyRuleCollection> ruleCollections = default;
             Optional<ProvisioningState> provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -127,7 +127,7 @@ namespace MgmtMockAndSample
                     continue;
                 }
             }
-            return new FirewallPolicyRuleCollectionGroupData(id.Value, name.Value, etag.Value, Optional.ToNullable(type), Optional.ToNullable(priority), Optional.ToList(ruleCollections), Optional.ToNullable(provisioningState));
+            return new FirewallPolicyRuleCollectionGroupData(id.Value, name.Value, etag.Value, Optional.ToNullable(type), Optional.ToNullable(priority), ruleCollections ?? new ChangeTrackingList<FirewallPolicyRuleCollection>(), Optional.ToNullable(provisioningState));
         }
     }
 }

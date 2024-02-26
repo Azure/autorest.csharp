@@ -26,7 +26,7 @@ namespace xml_service.Models
             writer.WriteStartElement("Prefix");
             writer.WriteValue(Prefix);
             writer.WriteEndElement();
-            if (Optional.IsDefined(Marker))
+            if (Marker != null)
             {
                 writer.WriteStartElement("Marker");
                 writer.WriteValue(Marker);

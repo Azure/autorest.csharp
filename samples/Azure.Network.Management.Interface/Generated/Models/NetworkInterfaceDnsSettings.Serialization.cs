@@ -26,7 +26,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(InternalDnsNameLabel))
+            if (InternalDnsNameLabel != null)
             {
                 writer.WritePropertyName("internalDnsNameLabel"u8);
                 writer.WriteStringValue(InternalDnsNameLabel);
@@ -40,8 +40,8 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<IList<string>> dnsServers = default;
-            Optional<IReadOnlyList<string>> appliedDnsServers = default;
+            IList<string> dnsServers = default;
+            IReadOnlyList<string> appliedDnsServers = default;
             Optional<string> internalDnsNameLabel = default;
             Optional<string> internalFqdn = default;
             Optional<string> internalDomainNameSuffix = default;
@@ -91,7 +91,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new NetworkInterfaceDnsSettings(Optional.ToList(dnsServers), Optional.ToList(appliedDnsServers), internalDnsNameLabel.Value, internalFqdn.Value, internalDomainNameSuffix.Value);
+            return new NetworkInterfaceDnsSettings(dnsServers ?? new ChangeTrackingList<string>(), appliedDnsServers ?? new ChangeTrackingList<string>(), internalDnsNameLabel.Value, internalFqdn.Value, internalDomainNameSuffix.Value);
         }
     }
 }

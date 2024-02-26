@@ -20,37 +20,37 @@ namespace MgmtAcronymMapping.Models
             writer.WriteStartObject();
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(ForceUpdateTag))
+            if (ForceUpdateTag != null)
             {
                 writer.WritePropertyName("forceUpdateTag"u8);
                 writer.WriteStringValue(ForceUpdateTag);
             }
-            if (Optional.IsDefined(Publisher))
+            if (Publisher != null)
             {
                 writer.WritePropertyName("publisher"u8);
                 writer.WriteStringValue(Publisher);
             }
-            if (Optional.IsDefined(TypePropertiesType))
+            if (TypePropertiesType != null)
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(TypePropertiesType);
             }
-            if (Optional.IsDefined(TypeHandlerVersion))
+            if (TypeHandlerVersion != null)
             {
                 writer.WritePropertyName("typeHandlerVersion"u8);
                 writer.WriteStringValue(TypeHandlerVersion);
             }
-            if (Optional.IsDefined(AutoUpgradeMinorVersion))
+            if (AutoUpgradeMinorVersion.HasValue)
             {
                 writer.WritePropertyName("autoUpgradeMinorVersion"u8);
                 writer.WriteBooleanValue(AutoUpgradeMinorVersion.Value);
             }
-            if (Optional.IsDefined(EnableAutomaticUpgrade))
+            if (EnableAutomaticUpgrade.HasValue)
             {
                 writer.WritePropertyName("enableAutomaticUpgrade"u8);
                 writer.WriteBooleanValue(EnableAutomaticUpgrade.Value);
             }
-            if (Optional.IsDefined(Settings))
+            if (Settings != null)
             {
                 writer.WritePropertyName("settings"u8);
 #if NET6_0_OR_GREATER
@@ -62,7 +62,7 @@ namespace MgmtAcronymMapping.Models
                 }
 #endif
             }
-            if (Optional.IsDefined(ProtectedSettings))
+            if (ProtectedSettings != null)
             {
                 writer.WritePropertyName("protectedSettings"u8);
 #if NET6_0_OR_GREATER
@@ -107,7 +107,7 @@ namespace MgmtAcronymMapping.Models
             Optional<BinaryData> settings = default;
             Optional<BinaryData> protectedSettings = default;
             Optional<string> provisioningState = default;
-            Optional<IList<string>> provisionAfterExtensions = default;
+            IList<string> provisionAfterExtensions = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -222,7 +222,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetExtensionPatch(id, name, type, systemData.Value, forceUpdateTag.Value, publisher.Value, type0.Value, typeHandlerVersion.Value, Optional.ToNullable(autoUpgradeMinorVersion), Optional.ToNullable(enableAutomaticUpgrade), settings.Value, protectedSettings.Value, provisioningState.Value, Optional.ToList(provisionAfterExtensions));
+            return new VirtualMachineScaleSetExtensionPatch(id, name, type, systemData.Value, forceUpdateTag.Value, publisher.Value, type0.Value, typeHandlerVersion.Value, Optional.ToNullable(autoUpgradeMinorVersion), Optional.ToNullable(enableAutomaticUpgrade), settings.Value, protectedSettings.Value, provisioningState.Value, provisionAfterExtensions ?? new ChangeTrackingList<string>());
         }
     }
 }

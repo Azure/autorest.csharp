@@ -26,7 +26,7 @@ namespace body_complex.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Id))
+            if (Id.HasValue)
             {
                 if (Id != null)
                 {
@@ -38,12 +38,12 @@ namespace body_complex.Models
                     writer.WriteNull("id");
                 }
             }
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Color))
+            if (Color.HasValue)
             {
                 writer.WritePropertyName("color"u8);
                 writer.WriteStringValue(Color.Value.ToString());

@@ -17,7 +17,7 @@ namespace MgmtMockAndSample.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Settings))
+            if (Settings != null)
             {
                 writer.WritePropertyName("settings"u8);
 #if NET6_0_OR_GREATER
@@ -29,7 +29,7 @@ namespace MgmtMockAndSample.Models
                 }
 #endif
             }
-            if (Optional.IsDefined(ProtectedSettings))
+            if (ProtectedSettings != null)
             {
                 writer.WritePropertyName("protectedSettings"u8);
 #if NET6_0_OR_GREATER
@@ -41,12 +41,12 @@ namespace MgmtMockAndSample.Models
                 }
 #endif
             }
-            if (Optional.IsDefined(RawMessage))
+            if (RawMessage != null)
             {
                 writer.WritePropertyName("rawMessage"u8);
                 writer.WriteBase64StringValue(RawMessage, "D");
             }
-            if (Optional.IsDefined(TenantId))
+            if (TenantId.HasValue)
             {
                 writer.WritePropertyName("tenantId"u8);
                 writer.WriteStringValue(TenantId.Value);
@@ -61,32 +61,32 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(EnableSoftDelete))
+            if (EnableSoftDelete.HasValue)
             {
                 writer.WritePropertyName("enableSoftDelete"u8);
                 writer.WriteBooleanValue(EnableSoftDelete.Value);
             }
-            if (Optional.IsDefined(SoftDeleteRetentionInDays))
+            if (SoftDeleteRetentionInDays.HasValue)
             {
                 writer.WritePropertyName("softDeleteRetentionInDays"u8);
                 writer.WriteNumberValue(SoftDeleteRetentionInDays.Value);
             }
-            if (Optional.IsDefined(EnablePurgeProtection))
+            if (EnablePurgeProtection.HasValue)
             {
                 writer.WritePropertyName("enablePurgeProtection"u8);
                 writer.WriteBooleanValue(EnablePurgeProtection.Value);
             }
-            if (Optional.IsDefined(CreateMode))
+            if (CreateMode.HasValue)
             {
                 writer.WritePropertyName("createMode"u8);
                 writer.WriteStringValue(CreateMode.Value.ToSerialString());
             }
-            if (Optional.IsDefined(NetworkAcls))
+            if (NetworkAcls != null)
             {
                 writer.WritePropertyName("networkAcls"u8);
                 writer.WriteObjectValue(NetworkAcls);
             }
-            if (Optional.IsDefined(PublicNetworkAccess))
+            if (PublicNetworkAccess.HasValue)
             {
                 writer.WritePropertyName("publicNetworkAccess"u8);
                 writer.WriteStringValue(PublicNetworkAccess.Value.ToString());
@@ -104,7 +104,7 @@ namespace MgmtMockAndSample.Models
             Optional<BinaryData> protectedSettings = default;
             Optional<byte[]> rawMessage = default;
             Optional<Guid> tenantId = default;
-            Optional<IList<string>> initialAdminObjectIds = default;
+            IList<string> initialAdminObjectIds = default;
             Optional<Uri> hsmUri = default;
             Optional<bool> enableSoftDelete = default;
             Optional<int> softDeleteRetentionInDays = default;
@@ -113,7 +113,7 @@ namespace MgmtMockAndSample.Models
             Optional<string> statusMessage = default;
             Optional<ProvisioningState> provisioningState = default;
             Optional<MhsmNetworkRuleSet> networkAcls = default;
-            Optional<IReadOnlyList<MhsmPrivateEndpointConnectionItem>> privateEndpointConnections = default;
+            IReadOnlyList<MhsmPrivateEndpointConnectionItem> privateEndpointConnections = default;
             Optional<PublicNetworkAccess> publicNetworkAccess = default;
             Optional<DateTimeOffset> scheduledPurgeDate = default;
             foreach (var property in element.EnumerateObject())
@@ -269,7 +269,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new ManagedHsmProperties(settings.Value, protectedSettings.Value, rawMessage.Value, Optional.ToNullable(tenantId), Optional.ToList(initialAdminObjectIds), hsmUri.Value, Optional.ToNullable(enableSoftDelete), Optional.ToNullable(softDeleteRetentionInDays), Optional.ToNullable(enablePurgeProtection), Optional.ToNullable(createMode), statusMessage.Value, Optional.ToNullable(provisioningState), networkAcls.Value, Optional.ToList(privateEndpointConnections), Optional.ToNullable(publicNetworkAccess), Optional.ToNullable(scheduledPurgeDate));
+            return new ManagedHsmProperties(settings.Value, protectedSettings.Value, rawMessage.Value, Optional.ToNullable(tenantId), initialAdminObjectIds ?? new ChangeTrackingList<string>(), hsmUri.Value, Optional.ToNullable(enableSoftDelete), Optional.ToNullable(softDeleteRetentionInDays), Optional.ToNullable(enablePurgeProtection), Optional.ToNullable(createMode), statusMessage.Value, Optional.ToNullable(provisioningState), networkAcls.Value, privateEndpointConnections ?? new ChangeTrackingList<MhsmPrivateEndpointConnectionItem>(), Optional.ToNullable(publicNetworkAccess), Optional.ToNullable(scheduledPurgeDate));
         }
     }
 }

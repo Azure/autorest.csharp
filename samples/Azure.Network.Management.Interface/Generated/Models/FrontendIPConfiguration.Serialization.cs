@@ -16,7 +16,7 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
@@ -31,39 +31,39 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(PrivateIPAddress))
+            if (PrivateIPAddress != null)
             {
                 writer.WritePropertyName("privateIPAddress"u8);
                 writer.WriteStringValue(PrivateIPAddress);
             }
-            if (Optional.IsDefined(PrivateIPAllocationMethod))
+            if (PrivateIPAllocationMethod.HasValue)
             {
                 writer.WritePropertyName("privateIPAllocationMethod"u8);
                 writer.WriteStringValue(PrivateIPAllocationMethod.Value.ToString());
             }
-            if (Optional.IsDefined(PrivateIPAddressVersion))
+            if (PrivateIPAddressVersion.HasValue)
             {
                 writer.WritePropertyName("privateIPAddressVersion"u8);
                 writer.WriteStringValue(PrivateIPAddressVersion.Value.ToString());
             }
-            if (Optional.IsDefined(Subnet))
+            if (Subnet != null)
             {
                 writer.WritePropertyName("subnet"u8);
                 writer.WriteObjectValue(Subnet);
             }
-            if (Optional.IsDefined(PublicIPAddress))
+            if (PublicIPAddress != null)
             {
                 writer.WritePropertyName("publicIPAddress"u8);
                 writer.WriteObjectValue(PublicIPAddress);
             }
-            if (Optional.IsDefined(PublicIPPrefix))
+            if (PublicIPPrefix != null)
             {
                 writer.WritePropertyName("publicIPPrefix"u8);
                 writer.WriteObjectValue(PublicIPPrefix);
@@ -81,12 +81,12 @@ namespace Azure.Network.Management.Interface.Models
             Optional<string> name = default;
             Optional<string> etag = default;
             Optional<string> type = default;
-            Optional<IList<string>> zones = default;
+            IList<string> zones = default;
             Optional<string> id = default;
-            Optional<IReadOnlyList<SubResource>> inboundNatRules = default;
-            Optional<IReadOnlyList<SubResource>> inboundNatPools = default;
-            Optional<IReadOnlyList<SubResource>> outboundRules = default;
-            Optional<IReadOnlyList<SubResource>> loadBalancingRules = default;
+            IReadOnlyList<SubResource> inboundNatRules = default;
+            IReadOnlyList<SubResource> inboundNatPools = default;
+            IReadOnlyList<SubResource> outboundRules = default;
+            IReadOnlyList<SubResource> loadBalancingRules = default;
             Optional<string> privateIPAddress = default;
             Optional<IPAllocationMethod> privateIPAllocationMethod = default;
             Optional<IPVersion> privateIPAddressVersion = default;
@@ -258,7 +258,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new FrontendIPConfiguration(id.Value, name.Value, etag.Value, type.Value, Optional.ToList(zones), Optional.ToList(inboundNatRules), Optional.ToList(inboundNatPools), Optional.ToList(outboundRules), Optional.ToList(loadBalancingRules), privateIPAddress.Value, Optional.ToNullable(privateIPAllocationMethod), Optional.ToNullable(privateIPAddressVersion), subnet.Value, publicIPAddress.Value, publicIPPrefix.Value, Optional.ToNullable(provisioningState));
+            return new FrontendIPConfiguration(id.Value, name.Value, etag.Value, type.Value, zones ?? new ChangeTrackingList<string>(), inboundNatRules ?? new ChangeTrackingList<SubResource>(), inboundNatPools ?? new ChangeTrackingList<SubResource>(), outboundRules ?? new ChangeTrackingList<SubResource>(), loadBalancingRules ?? new ChangeTrackingList<SubResource>(), privateIPAddress.Value, Optional.ToNullable(privateIPAllocationMethod), Optional.ToNullable(privateIPAddressVersion), subnet.Value, publicIPAddress.Value, publicIPPrefix.Value, Optional.ToNullable(provisioningState));
         }
     }
 }

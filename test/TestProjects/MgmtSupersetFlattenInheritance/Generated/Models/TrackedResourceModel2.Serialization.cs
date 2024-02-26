@@ -17,12 +17,12 @@ namespace MgmtSupersetFlattenInheritance.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Foo))
+            if (Foo != null)
             {
                 writer.WritePropertyName("foo"u8);
                 writer.WriteStringValue(Foo);
             }
-            if (Optional.IsDefined(Bar))
+            if (Bar != null)
             {
                 writer.WritePropertyName("bar"u8);
                 writer.WriteStringValue(Bar);
@@ -42,7 +42,7 @@ namespace MgmtSupersetFlattenInheritance.Models
             writer.WriteStringValue(Location);
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(FooPropertiesFoo))
+            if (FooPropertiesFoo != null)
             {
                 writer.WritePropertyName("foo"u8);
                 writer.WriteStringValue(FooPropertiesFoo);
@@ -59,7 +59,7 @@ namespace MgmtSupersetFlattenInheritance.Models
             }
             Optional<string> foo = default;
             Optional<string> bar = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -139,7 +139,7 @@ namespace MgmtSupersetFlattenInheritance.Models
                     continue;
                 }
             }
-            return new TrackedResourceModel2(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, foo.Value, bar.Value, foo0.Value);
+            return new TrackedResourceModel2(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, foo.Value, bar.Value, foo0.Value);
         }
     }
 }

@@ -36,7 +36,7 @@ namespace paging.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(NextLink))
+            if (NextLink != null)
             {
                 writer.WritePropertyName("nextLink"u8);
                 writer.WriteStringValue(NextLink);
@@ -79,7 +79,7 @@ namespace paging.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<Product>> value = default;
+            IReadOnlyList<Product> value = default;
             Optional<string> nextLink = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -110,7 +110,7 @@ namespace paging.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ProductResultValue(Optional.ToList(value), nextLink.Value, serializedAdditionalRawData);
+            return new ProductResultValue(value ?? new ChangeTrackingList<Product>(), nextLink.Value, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ProductResultValue>.Write(ModelReaderWriterOptions options)

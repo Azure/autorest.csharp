@@ -19,7 +19,7 @@ namespace MgmtMockAndSample
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Identity))
+            if (Identity != null)
             {
                 writer.WritePropertyName("identity"u8);
                 var serializeOptions = new JsonSerializerOptions { Converters = { new ManagedServiceIdentityTypeV3Converter() } };
@@ -40,57 +40,57 @@ namespace MgmtMockAndSample
             writer.WriteStringValue(Location);
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(StartupProbe))
+            if (StartupProbe != null)
             {
                 writer.WritePropertyName("startupProbe"u8);
                 writer.WriteObjectValue(StartupProbe);
             }
-            if (Optional.IsDefined(ReadinessProbe))
+            if (ReadinessProbe != null)
             {
                 writer.WritePropertyName("readinessProbe"u8);
                 writer.WriteObjectValue(ReadinessProbe);
             }
-            if (Optional.IsDefined(DesiredStatusCode))
+            if (DesiredStatusCode.HasValue)
             {
                 writer.WritePropertyName("desiredStatusCode"u8);
                 writer.WriteNumberValue(DesiredStatusCode.Value.ToSerialInt32());
             }
-            if (Optional.IsDefined(BasePolicy))
+            if (BasePolicy != null)
             {
                 writer.WritePropertyName("basePolicy"u8);
                 JsonSerializer.Serialize(writer, BasePolicy);
             }
-            if (Optional.IsDefined(ThreatIntelWhitelist))
+            if (ThreatIntelWhitelist != null)
             {
                 writer.WritePropertyName("threatIntelWhitelist"u8);
                 writer.WriteObjectValue(ThreatIntelWhitelist);
             }
-            if (Optional.IsDefined(Insights))
+            if (Insights != null)
             {
                 writer.WritePropertyName("insights"u8);
                 writer.WriteObjectValue(Insights);
             }
-            if (Optional.IsDefined(Snat))
+            if (Snat != null)
             {
                 writer.WritePropertyName("snat"u8);
                 writer.WriteObjectValue(Snat);
             }
-            if (Optional.IsDefined(DnsSettings))
+            if (DnsSettings != null)
             {
                 writer.WritePropertyName("dnsSettings"u8);
                 writer.WriteObjectValue(DnsSettings);
             }
-            if (Optional.IsDefined(IntrusionDetection))
+            if (IntrusionDetection != null)
             {
                 writer.WritePropertyName("intrusionDetection"u8);
                 writer.WriteObjectValue(IntrusionDetection);
             }
-            if (Optional.IsDefined(TransportSecurity))
+            if (TransportSecurity != null)
             {
                 writer.WritePropertyName("transportSecurity"u8);
                 writer.WriteObjectValue(TransportSecurity);
             }
-            if (Optional.IsDefined(Sku))
+            if (Sku != null)
             {
                 writer.WritePropertyName("sku"u8);
                 writer.WriteObjectValue(Sku);
@@ -107,7 +107,7 @@ namespace MgmtMockAndSample
             }
             Optional<string> etag = default;
             Optional<ManagedServiceIdentity> identity = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -116,11 +116,11 @@ namespace MgmtMockAndSample
             Optional<Probe> startupProbe = default;
             Optional<Probe> readinessProbe = default;
             Optional<DesiredStatusCode> desiredStatusCode = default;
-            Optional<IReadOnlyList<WritableSubResource>> ruleCollectionGroups = default;
+            IReadOnlyList<WritableSubResource> ruleCollectionGroups = default;
             Optional<ProvisioningState> provisioningState = default;
             Optional<WritableSubResource> basePolicy = default;
-            Optional<IReadOnlyList<WritableSubResource>> firewalls = default;
-            Optional<IReadOnlyList<WritableSubResource>> childPolicies = default;
+            IReadOnlyList<WritableSubResource> firewalls = default;
+            IReadOnlyList<WritableSubResource> childPolicies = default;
             Optional<FirewallPolicyThreatIntelWhitelist> threatIntelWhitelist = default;
             Optional<FirewallPolicyInsights> insights = default;
             Optional<FirewallPolicySnat> snat = default;
@@ -351,7 +351,7 @@ namespace MgmtMockAndSample
                     continue;
                 }
             }
-            return new FirewallPolicyData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, etag.Value, identity, startupProbe.Value, readinessProbe.Value, Optional.ToNullable(desiredStatusCode), Optional.ToList(ruleCollectionGroups), Optional.ToNullable(provisioningState), basePolicy, Optional.ToList(firewalls), Optional.ToList(childPolicies), threatIntelWhitelist.Value, insights.Value, snat.Value, dnsSettings.Value, intrusionDetection.Value, transportSecurity.Value, sku.Value);
+            return new FirewallPolicyData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, etag.Value, identity, startupProbe.Value, readinessProbe.Value, Optional.ToNullable(desiredStatusCode), ruleCollectionGroups ?? new ChangeTrackingList<WritableSubResource>(), Optional.ToNullable(provisioningState), basePolicy, firewalls ?? new ChangeTrackingList<WritableSubResource>(), childPolicies ?? new ChangeTrackingList<WritableSubResource>(), threatIntelWhitelist.Value, insights.Value, snat.Value, dnsSettings.Value, intrusionDetection.Value, transportSecurity.Value, sku.Value);
         }
     }
 }

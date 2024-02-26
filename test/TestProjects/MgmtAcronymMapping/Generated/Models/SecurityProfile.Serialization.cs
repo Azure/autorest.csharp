@@ -15,7 +15,7 @@ namespace MgmtAcronymMapping.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(EncryptionAtHost))
+            if (EncryptionAtHost.HasValue)
             {
                 writer.WritePropertyName("encryptionAtHost"u8);
                 writer.WriteBooleanValue(EncryptionAtHost.Value);

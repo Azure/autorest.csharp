@@ -20,7 +20,7 @@ namespace MgmtCollectionParent.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<OrderResourceData>> value = default;
+            IReadOnlyList<OrderResourceData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -44,7 +44,7 @@ namespace MgmtCollectionParent.Models
                     continue;
                 }
             }
-            return new OrderResourceList(Optional.ToList(value), nextLink.Value);
+            return new OrderResourceList(value ?? new ChangeTrackingList<OrderResourceData>(), nextLink.Value);
         }
     }
 }

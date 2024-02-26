@@ -15,7 +15,7 @@ namespace MgmtExpandResourceTypes.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Ipv4Address))
+            if (Ipv4Address != null)
             {
                 writer.WritePropertyName("ipv4Address"u8);
                 writer.WriteStringValue(Ipv4Address);

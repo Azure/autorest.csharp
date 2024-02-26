@@ -26,7 +26,7 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(OutputUnigrams))
+            if (OutputUnigrams.HasValue)
             {
                 writer.WritePropertyName("outputUnigrams"u8);
                 writer.WriteBooleanValue(OutputUnigrams.Value);
@@ -44,7 +44,7 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            Optional<IList<CjkBigramTokenFilterScripts>> ignoreScripts = default;
+            IList<CjkBigramTokenFilterScripts> ignoreScripts = default;
             Optional<bool> outputUnigrams = default;
             string odataType = default;
             string name = default;
@@ -84,7 +84,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new CjkBigramTokenFilter(odataType, name, Optional.ToList(ignoreScripts), Optional.ToNullable(outputUnigrams));
+            return new CjkBigramTokenFilter(odataType, name, ignoreScripts ?? new ChangeTrackingList<CjkBigramTokenFilterScripts>(), Optional.ToNullable(outputUnigrams));
         }
     }
 }

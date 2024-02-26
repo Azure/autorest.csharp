@@ -29,7 +29,7 @@ namespace CustomizationsInTsp.Models
             writer.WriteStartObject();
             writer.WritePropertyName("requiredIntOnBase"u8);
             writer.WriteNumberValue(RequiredIntOnBase);
-            if (Optional.IsDefined(OptionalInt))
+            if (OptionalInt.HasValue)
             {
                 writer.WritePropertyName("optionalInt"u8);
                 writer.WriteNumberValue(OptionalInt.Value);

@@ -27,7 +27,7 @@ namespace AnomalyDetector.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && Optional.IsDefined(Period))
+            if (options.Format != "W" && Period.HasValue)
             {
                 writer.WritePropertyName("period"u8);
                 writer.WriteNumberValue(Period.Value);
@@ -91,8 +91,8 @@ namespace AnomalyDetector.Models
                 return null;
             }
             Optional<int> period = default;
-            Optional<IReadOnlyList<bool>> isChangePoint = default;
-            Optional<IReadOnlyList<float>> confidenceScores = default;
+            IReadOnlyList<bool> isChangePoint = default;
+            IReadOnlyList<float> confidenceScores = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -140,7 +140,7 @@ namespace AnomalyDetector.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new UnivariateChangePointDetectionResult(Optional.ToNullable(period), Optional.ToList(isChangePoint), Optional.ToList(confidenceScores), serializedAdditionalRawData);
+            return new UnivariateChangePointDetectionResult(Optional.ToNullable(period), isChangePoint ?? new ChangeTrackingList<bool>(), confidenceScores ?? new ChangeTrackingList<float>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<UnivariateChangePointDetectionResult>.Write(ModelReaderWriterOptions options)

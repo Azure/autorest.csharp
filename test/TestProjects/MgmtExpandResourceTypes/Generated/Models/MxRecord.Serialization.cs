@@ -15,12 +15,12 @@ namespace MgmtExpandResourceTypes.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Preference))
+            if (Preference.HasValue)
             {
                 writer.WritePropertyName("preference"u8);
                 writer.WriteNumberValue(Preference.Value);
             }
-            if (Optional.IsDefined(Exchange))
+            if (Exchange != null)
             {
                 writer.WritePropertyName("exchange"u8);
                 writer.WriteStringValue(Exchange);

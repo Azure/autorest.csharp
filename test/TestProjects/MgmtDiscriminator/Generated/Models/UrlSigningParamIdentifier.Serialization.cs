@@ -99,13 +99,10 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(ParamIndicator))
-            {
-                builder.Append("  paramIndicator:");
-                builder.AppendLine($" '{ParamIndicator.ToString()}'");
-            }
+            builder.Append("  paramIndicator:");
+            builder.AppendLine($" '{ParamIndicator.ToString()}'");
 
-            if (Optional.IsDefined(ParamName))
+            if (ParamName != null)
             {
                 builder.Append("  paramName:");
                 if (ParamName.Contains(Environment.NewLine))

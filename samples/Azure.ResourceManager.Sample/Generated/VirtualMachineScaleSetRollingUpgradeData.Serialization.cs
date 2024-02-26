@@ -58,29 +58,29 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format != "W" && Optional.IsDefined(SystemData))
+            if (options.Format != "W" && SystemData != null)
             {
                 writer.WritePropertyName("systemData"u8);
                 JsonSerializer.Serialize(writer, SystemData);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (options.Format != "W" && Optional.IsDefined(Policy))
+            if (options.Format != "W" && Policy != null)
             {
                 writer.WritePropertyName("policy"u8);
                 writer.WriteObjectValue(Policy);
             }
-            if (options.Format != "W" && Optional.IsDefined(RunningStatus))
+            if (options.Format != "W" && RunningStatus != null)
             {
                 writer.WritePropertyName("runningStatus"u8);
                 writer.WriteObjectValue(RunningStatus);
             }
-            if (options.Format != "W" && Optional.IsDefined(Progress))
+            if (options.Format != "W" && Progress != null)
             {
                 writer.WritePropertyName("progress"u8);
                 writer.WriteObjectValue(Progress);
             }
-            if (options.Format != "W" && Optional.IsDefined(Error))
+            if (options.Format != "W" && Error != null)
             {
                 writer.WritePropertyName("error"u8);
                 writer.WriteObjectValue(Error);
@@ -124,7 +124,7 @@ namespace Azure.ResourceManager.Sample
             {
                 return null;
             }
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -235,7 +235,7 @@ namespace Azure.ResourceManager.Sample
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineScaleSetRollingUpgradeData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, policy.Value, runningStatus.Value, progress.Value, error.Value, serializedAdditionalRawData);
+            return new VirtualMachineScaleSetRollingUpgradeData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, policy.Value, runningStatus.Value, progress.Value, error.Value, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -243,7 +243,7 @@ namespace Azure.ResourceManager.Sample
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 builder.Append("  name:");
                 if (Name.Contains(Environment.NewLine))
@@ -257,11 +257,8 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsDefined(Location))
-            {
-                builder.Append("  location:");
-                builder.AppendLine($" '{Location.ToString()}'");
-            }
+            builder.Append("  location:");
+            builder.AppendLine($" '{Location.ToString()}'");
 
             if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
@@ -291,13 +288,13 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 builder.Append("  id:");
                 builder.AppendLine($" '{Id.ToString()}'");
             }
 
-            if (Optional.IsDefined(SystemData))
+            if (SystemData != null)
             {
                 builder.Append("  systemData:");
                 builder.AppendLine($" '{SystemData.ToString()}'");
@@ -305,25 +302,25 @@ namespace Azure.ResourceManager.Sample
 
             builder.Append("  properties:");
             builder.AppendLine(" {");
-            if (Optional.IsDefined(Policy))
+            if (Policy != null)
             {
                 builder.Append("    policy:");
                 AppendChildObject(builder, Policy, options, 4, false);
             }
 
-            if (Optional.IsDefined(RunningStatus))
+            if (RunningStatus != null)
             {
                 builder.Append("    runningStatus:");
                 AppendChildObject(builder, RunningStatus, options, 4, false);
             }
 
-            if (Optional.IsDefined(Progress))
+            if (Progress != null)
             {
                 builder.Append("    progress:");
                 AppendChildObject(builder, Progress, options, 4, false);
             }
 
-            if (Optional.IsDefined(Error))
+            if (Error != null)
             {
                 builder.Append("    error:");
                 AppendChildObject(builder, Error, options, 4, false);

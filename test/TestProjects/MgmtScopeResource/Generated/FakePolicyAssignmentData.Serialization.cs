@@ -19,24 +19,24 @@ namespace MgmtScopeResource
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Location))
+            if (Location != null)
             {
                 writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location);
             }
-            if (Optional.IsDefined(Identity))
+            if (Identity != null)
             {
                 writer.WritePropertyName("identity"u8);
                 JsonSerializer.Serialize(writer, Identity);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(DisplayName))
+            if (DisplayName != null)
             {
                 writer.WritePropertyName("displayName"u8);
                 writer.WriteStringValue(DisplayName);
             }
-            if (Optional.IsDefined(PolicyDefinitionId))
+            if (PolicyDefinitionId != null)
             {
                 writer.WritePropertyName("policyDefinitionId"u8);
                 writer.WriteStringValue(PolicyDefinitionId);
@@ -62,12 +62,12 @@ namespace MgmtScopeResource
                 }
                 writer.WriteEndObject();
             }
-            if (Optional.IsDefined(Description))
+            if (Description != null)
             {
                 writer.WritePropertyName("description"u8);
                 writer.WriteStringValue(Description);
             }
-            if (Optional.IsDefined(Metadata))
+            if (Metadata != null)
             {
                 writer.WritePropertyName("metadata"u8);
 #if NET6_0_OR_GREATER
@@ -79,7 +79,7 @@ namespace MgmtScopeResource
                 }
 #endif
             }
-            if (Optional.IsDefined(EnforcementMode))
+            if (EnforcementMode.HasValue)
             {
                 writer.WritePropertyName("enforcementMode"u8);
                 writer.WriteStringValue(EnforcementMode.Value.ToString());
@@ -113,12 +113,12 @@ namespace MgmtScopeResource
             Optional<string> displayName = default;
             Optional<string> policyDefinitionId = default;
             Optional<string> scope = default;
-            Optional<IList<string>> notScopes = default;
-            Optional<IDictionary<string, ParameterValuesValue>> parameters = default;
+            IList<string> notScopes = default;
+            IDictionary<string, ParameterValuesValue> parameters = default;
             Optional<string> description = default;
             Optional<BinaryData> metadata = default;
             Optional<EnforcementMode> enforcementMode = default;
-            Optional<IList<NonComplianceMessage>> nonComplianceMessages = default;
+            IList<NonComplianceMessage> nonComplianceMessages = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("location"u8))
@@ -252,7 +252,7 @@ namespace MgmtScopeResource
                     continue;
                 }
             }
-            return new FakePolicyAssignmentData(id, name, type, systemData.Value, location.Value, identity, displayName.Value, policyDefinitionId.Value, scope.Value, Optional.ToList(notScopes), Optional.ToDictionary(parameters), description.Value, metadata.Value, Optional.ToNullable(enforcementMode), Optional.ToList(nonComplianceMessages));
+            return new FakePolicyAssignmentData(id, name, type, systemData.Value, location.Value, identity, displayName.Value, policyDefinitionId.Value, scope.Value, notScopes ?? new ChangeTrackingList<string>(), parameters ?? new ChangeTrackingDictionary<string, ParameterValuesValue>(), description.Value, metadata.Value, Optional.ToNullable(enforcementMode), nonComplianceMessages ?? new ChangeTrackingList<NonComplianceMessage>());
         }
     }
 }

@@ -26,12 +26,12 @@ namespace model_flattening.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && Optional.IsDefined(Id))
+            if (options.Format != "W" && Id != null)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format != "W" && Optional.IsDefined(Type))
+            if (options.Format != "W" && Type != null)
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(Type);
@@ -47,12 +47,12 @@ namespace model_flattening.Models
                 }
                 writer.WriteEndObject();
             }
-            if (Optional.IsDefined(Location))
+            if (Location != null)
             {
                 writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location);
             }
-            if (options.Format != "W" && Optional.IsDefined(Name))
+            if (options.Format != "W" && Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
@@ -97,7 +97,7 @@ namespace model_flattening.Models
             }
             Optional<string> id = default;
             Optional<string> type = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             Optional<string> location = default;
             Optional<string> name = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
@@ -144,7 +144,7 @@ namespace model_flattening.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Resource(id.Value, type.Value, Optional.ToDictionary(tags), location.Value, name.Value, serializedAdditionalRawData);
+            return new Resource(id.Value, type.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location.Value, name.Value, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<Resource>.Write(ModelReaderWriterOptions options)

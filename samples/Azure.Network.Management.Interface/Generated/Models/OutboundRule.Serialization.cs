@@ -16,19 +16,19 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(AllocatedOutboundPorts))
+            if (AllocatedOutboundPorts.HasValue)
             {
                 writer.WritePropertyName("allocatedOutboundPorts"u8);
                 writer.WriteNumberValue(AllocatedOutboundPorts.Value);
@@ -43,22 +43,22 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(BackendAddressPool))
+            if (BackendAddressPool != null)
             {
                 writer.WritePropertyName("backendAddressPool"u8);
                 writer.WriteObjectValue(BackendAddressPool);
             }
-            if (Optional.IsDefined(Protocol))
+            if (Protocol.HasValue)
             {
                 writer.WritePropertyName("protocol"u8);
                 writer.WriteStringValue(Protocol.Value.ToString());
             }
-            if (Optional.IsDefined(EnableTcpReset))
+            if (EnableTcpReset.HasValue)
             {
                 writer.WritePropertyName("enableTcpReset"u8);
                 writer.WriteBooleanValue(EnableTcpReset.Value);
             }
-            if (Optional.IsDefined(IdleTimeoutInMinutes))
+            if (IdleTimeoutInMinutes.HasValue)
             {
                 writer.WritePropertyName("idleTimeoutInMinutes"u8);
                 writer.WriteNumberValue(IdleTimeoutInMinutes.Value);
@@ -78,7 +78,7 @@ namespace Azure.Network.Management.Interface.Models
             Optional<string> type = default;
             Optional<string> id = default;
             Optional<int> allocatedOutboundPorts = default;
-            Optional<IList<SubResource>> frontendIPConfigurations = default;
+            IList<SubResource> frontendIPConfigurations = default;
             Optional<SubResource> backendAddressPool = default;
             Optional<ProvisioningState> provisioningState = default;
             Optional<LoadBalancerOutboundRuleProtocol> protocol = default;
@@ -187,7 +187,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new OutboundRule(id.Value, name.Value, etag.Value, type.Value, Optional.ToNullable(allocatedOutboundPorts), Optional.ToList(frontendIPConfigurations), backendAddressPool.Value, Optional.ToNullable(provisioningState), Optional.ToNullable(protocol), Optional.ToNullable(enableTcpReset), Optional.ToNullable(idleTimeoutInMinutes));
+            return new OutboundRule(id.Value, name.Value, etag.Value, type.Value, Optional.ToNullable(allocatedOutboundPorts), frontendIPConfigurations ?? new ChangeTrackingList<SubResource>(), backendAddressPool.Value, Optional.ToNullable(provisioningState), Optional.ToNullable(protocol), Optional.ToNullable(enableTcpReset), Optional.ToNullable(idleTimeoutInMinutes));
         }
     }
 }

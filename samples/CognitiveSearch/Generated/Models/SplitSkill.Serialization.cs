@@ -16,17 +16,17 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(DefaultLanguageCode))
+            if (DefaultLanguageCode.HasValue)
             {
                 writer.WritePropertyName("defaultLanguageCode"u8);
                 writer.WriteStringValue(DefaultLanguageCode.Value.ToString());
             }
-            if (Optional.IsDefined(TextSplitMode))
+            if (TextSplitMode.HasValue)
             {
                 writer.WritePropertyName("textSplitMode"u8);
                 writer.WriteStringValue(TextSplitMode.Value.ToSerialString());
             }
-            if (Optional.IsDefined(MaximumPageLength))
+            if (MaximumPageLength.HasValue)
             {
                 if (MaximumPageLength != null)
                 {
@@ -40,17 +40,17 @@ namespace CognitiveSearch.Models
             }
             writer.WritePropertyName("@odata.type"u8);
             writer.WriteStringValue(OdataType);
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Description))
+            if (Description != null)
             {
                 writer.WritePropertyName("description"u8);
                 writer.WriteStringValue(Description);
             }
-            if (Optional.IsDefined(Context))
+            if (Context != null)
             {
                 writer.WritePropertyName("context"u8);
                 writer.WriteStringValue(Context);

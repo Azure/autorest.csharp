@@ -27,12 +27,12 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(TokenType))
+            if (TokenType.HasValue)
             {
                 writer.WritePropertyName("tokenType"u8);
                 writer.WriteStringValue(TokenType.Value.ToString());
             }
-            if (Optional.IsDefined(Attributes))
+            if (Attributes.HasValue)
             {
                 writer.WritePropertyName("attributes"u8);
                 writer.WriteStringValue(Attributes.Value.ToString());

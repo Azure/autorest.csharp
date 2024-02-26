@@ -27,17 +27,17 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && Optional.IsDefined(SuccessfullyRolledbackInstanceCount))
+            if (options.Format != "W" && SuccessfullyRolledbackInstanceCount.HasValue)
             {
                 writer.WritePropertyName("successfullyRolledbackInstanceCount"u8);
                 writer.WriteNumberValue(SuccessfullyRolledbackInstanceCount.Value);
             }
-            if (options.Format != "W" && Optional.IsDefined(FailedRolledbackInstanceCount))
+            if (options.Format != "W" && FailedRolledbackInstanceCount.HasValue)
             {
                 writer.WritePropertyName("failedRolledbackInstanceCount"u8);
                 writer.WriteNumberValue(FailedRolledbackInstanceCount.Value);
             }
-            if (options.Format != "W" && Optional.IsDefined(RollbackError))
+            if (options.Format != "W" && RollbackError != null)
             {
                 writer.WritePropertyName("rollbackError"u8);
                 writer.WriteObjectValue(RollbackError);
@@ -128,19 +128,19 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(SuccessfullyRolledbackInstanceCount))
+            if (SuccessfullyRolledbackInstanceCount.HasValue)
             {
                 builder.Append("  successfullyRolledbackInstanceCount:");
                 builder.AppendLine($" {SuccessfullyRolledbackInstanceCount.Value}");
             }
 
-            if (Optional.IsDefined(FailedRolledbackInstanceCount))
+            if (FailedRolledbackInstanceCount.HasValue)
             {
                 builder.Append("  failedRolledbackInstanceCount:");
                 builder.AppendLine($" {FailedRolledbackInstanceCount.Value}");
             }
 
-            if (Optional.IsDefined(RollbackError))
+            if (RollbackError != null)
             {
                 builder.Append("  rollbackError:");
                 AppendChildObject(builder, RollbackError, options, 2, false);

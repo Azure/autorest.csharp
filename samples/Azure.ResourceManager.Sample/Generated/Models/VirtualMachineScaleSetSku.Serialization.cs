@@ -27,17 +27,17 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && Optional.IsDefined(ResourceType))
+            if (options.Format != "W" && ResourceType.HasValue)
             {
                 writer.WritePropertyName("resourceType"u8);
                 writer.WriteStringValue(ResourceType.Value);
             }
-            if (options.Format != "W" && Optional.IsDefined(Sku))
+            if (options.Format != "W" && Sku != null)
             {
                 writer.WritePropertyName("sku"u8);
                 writer.WriteObjectValue(Sku);
             }
-            if (options.Format != "W" && Optional.IsDefined(Capacity))
+            if (options.Format != "W" && Capacity != null)
             {
                 writer.WritePropertyName("capacity"u8);
                 writer.WriteObjectValue(Capacity);
@@ -128,19 +128,19 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(ResourceType))
+            if (ResourceType.HasValue)
             {
                 builder.Append("  resourceType:");
                 builder.AppendLine($" '{ResourceType.Value.ToString()}'");
             }
 
-            if (Optional.IsDefined(Sku))
+            if (Sku != null)
             {
                 builder.Append("  sku:");
                 AppendChildObject(builder, Sku, options, 2, false);
             }
 
-            if (Optional.IsDefined(Capacity))
+            if (Capacity != null)
             {
                 builder.Append("  capacity:");
                 AppendChildObject(builder, Capacity, options, 2, false);

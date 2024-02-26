@@ -17,7 +17,7 @@ namespace MgmtPropertyChooser.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(ResourceIdentityType))
+            if (ResourceIdentityType.HasValue)
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceIdentityType.Value.ToSerialString());
@@ -45,7 +45,7 @@ namespace MgmtPropertyChooser.Models
             Optional<string> principalId = default;
             Optional<int> tenantId = default;
             Optional<ResourceIdentityType> type = default;
-            Optional<IDictionary<string, UserAssignedIdentity>> userAssignedIdentities = default;
+            IDictionary<string, UserAssignedIdentity> userAssignedIdentities = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("principalId"u8))
@@ -86,7 +86,7 @@ namespace MgmtPropertyChooser.Models
                     continue;
                 }
             }
-            return new IdentityWithDifferentPropertyType(principalId.Value, Optional.ToNullable(tenantId), Optional.ToNullable(type), Optional.ToDictionary(userAssignedIdentities));
+            return new IdentityWithDifferentPropertyType(principalId.Value, Optional.ToNullable(tenantId), Optional.ToNullable(type), userAssignedIdentities ?? new ChangeTrackingDictionary<string, UserAssignedIdentity>());
         }
     }
 }

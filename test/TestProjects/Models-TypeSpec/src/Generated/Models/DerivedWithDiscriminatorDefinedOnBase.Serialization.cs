@@ -29,12 +29,12 @@ namespace ModelsTypeSpec.Models
             writer.WriteStartObject();
             writer.WritePropertyName("requiredString"u8);
             writer.WriteStringValue(RequiredString);
-            if (Optional.IsDefined(OptionalInt))
+            if (OptionalInt.HasValue)
             {
                 writer.WritePropertyName("optionalInt"u8);
                 writer.WriteNumberValue(OptionalInt.Value);
             }
-            if (Optional.IsDefined(OptionalString))
+            if (OptionalString != null)
             {
                 writer.WritePropertyName("optionalString"u8);
                 writer.WriteStringValue(OptionalString);

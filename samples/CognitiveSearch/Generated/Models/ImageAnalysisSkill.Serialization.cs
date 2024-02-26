@@ -16,7 +16,7 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(DefaultLanguageCode))
+            if (DefaultLanguageCode.HasValue)
             {
                 writer.WritePropertyName("defaultLanguageCode"u8);
                 writer.WriteStringValue(DefaultLanguageCode.Value.ToString());
@@ -43,17 +43,17 @@ namespace CognitiveSearch.Models
             }
             writer.WritePropertyName("@odata.type"u8);
             writer.WriteStringValue(OdataType);
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Description))
+            if (Description != null)
             {
                 writer.WritePropertyName("description"u8);
                 writer.WriteStringValue(Description);
             }
-            if (Optional.IsDefined(Context))
+            if (Context != null)
             {
                 writer.WritePropertyName("context"u8);
                 writer.WriteStringValue(Context);
@@ -82,8 +82,8 @@ namespace CognitiveSearch.Models
                 return null;
             }
             Optional<ImageAnalysisSkillLanguage> defaultLanguageCode = default;
-            Optional<IList<VisualFeature>> visualFeatures = default;
-            Optional<IList<ImageDetail>> details = default;
+            IList<VisualFeature> visualFeatures = default;
+            IList<ImageDetail> details = default;
             string odataType = default;
             Optional<string> name = default;
             Optional<string> description = default;
@@ -170,7 +170,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new ImageAnalysisSkill(odataType, name.Value, description.Value, context.Value, inputs, outputs, Optional.ToNullable(defaultLanguageCode), Optional.ToList(visualFeatures), Optional.ToList(details));
+            return new ImageAnalysisSkill(odataType, name.Value, description.Value, context.Value, inputs, outputs, Optional.ToNullable(defaultLanguageCode), visualFeatures ?? new ChangeTrackingList<VisualFeature>(), details ?? new ChangeTrackingList<ImageDetail>());
         }
     }
 }

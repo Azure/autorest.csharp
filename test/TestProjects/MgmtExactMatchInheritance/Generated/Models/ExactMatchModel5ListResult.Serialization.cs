@@ -20,7 +20,7 @@ namespace MgmtExactMatchInheritance.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<ExactMatchModel5Data>> value = default;
+            IReadOnlyList<ExactMatchModel5Data> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -44,7 +44,7 @@ namespace MgmtExactMatchInheritance.Models
                     continue;
                 }
             }
-            return new ExactMatchModel5ListResult(Optional.ToList(value), nextLink.Value);
+            return new ExactMatchModel5ListResult(value ?? new ChangeTrackingList<ExactMatchModel5Data>(), nextLink.Value);
         }
     }
 }

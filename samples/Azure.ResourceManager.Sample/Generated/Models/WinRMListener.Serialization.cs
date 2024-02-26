@@ -27,12 +27,12 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Protocol))
+            if (Protocol.HasValue)
             {
                 writer.WritePropertyName("protocol"u8);
                 writer.WriteStringValue(Protocol.Value.ToSerialString());
             }
-            if (Optional.IsDefined(CertificateUri))
+            if (CertificateUri != null)
             {
                 writer.WritePropertyName("certificateUrl"u8);
                 writer.WriteStringValue(CertificateUri.AbsoluteUri);
@@ -113,13 +113,13 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Protocol))
+            if (Protocol.HasValue)
             {
                 builder.Append("  protocol:");
                 builder.AppendLine($" '{Protocol.Value.ToSerialString()}'");
             }
 
-            if (Optional.IsDefined(CertificateUri))
+            if (CertificateUri != null)
             {
                 builder.Append("  certificateUrl:");
                 builder.AppendLine($" '{CertificateUri.AbsoluteUri}'");

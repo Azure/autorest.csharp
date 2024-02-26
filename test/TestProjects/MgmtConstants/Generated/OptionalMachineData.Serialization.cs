@@ -33,12 +33,12 @@ namespace MgmtConstants
             writer.WriteStringValue(Location);
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(Listener))
+            if (Listener != null)
             {
                 writer.WritePropertyName("listener"u8);
                 writer.WriteObjectValue(Listener);
             }
-            if (Optional.IsDefined(Content))
+            if (Content != null)
             {
                 writer.WritePropertyName("content"u8);
                 writer.WriteObjectValue(Content);
@@ -53,7 +53,7 @@ namespace MgmtConstants
             {
                 return null;
             }
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -137,7 +137,7 @@ namespace MgmtConstants
                     continue;
                 }
             }
-            return new OptionalMachineData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, listener.Value, content.Value);
+            return new OptionalMachineData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, listener.Value, content.Value);
         }
     }
 }

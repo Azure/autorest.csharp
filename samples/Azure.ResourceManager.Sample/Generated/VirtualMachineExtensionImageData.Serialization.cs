@@ -57,34 +57,34 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format != "W" && Optional.IsDefined(SystemData))
+            if (options.Format != "W" && SystemData != null)
             {
                 writer.WritePropertyName("systemData"u8);
                 JsonSerializer.Serialize(writer, SystemData);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(OperatingSystem))
+            if (OperatingSystem != null)
             {
                 writer.WritePropertyName("operatingSystem"u8);
                 writer.WriteStringValue(OperatingSystem);
             }
-            if (Optional.IsDefined(ComputeRole))
+            if (ComputeRole != null)
             {
                 writer.WritePropertyName("computeRole"u8);
                 writer.WriteStringValue(ComputeRole);
             }
-            if (Optional.IsDefined(HandlerSchema))
+            if (HandlerSchema != null)
             {
                 writer.WritePropertyName("handlerSchema"u8);
                 writer.WriteStringValue(HandlerSchema);
             }
-            if (Optional.IsDefined(VmScaleSetEnabled))
+            if (VmScaleSetEnabled.HasValue)
             {
                 writer.WritePropertyName("vmScaleSetEnabled"u8);
                 writer.WriteBooleanValue(VmScaleSetEnabled.Value);
             }
-            if (Optional.IsDefined(SupportsMultipleExtensions))
+            if (SupportsMultipleExtensions.HasValue)
             {
                 writer.WritePropertyName("supportsMultipleExtensions"u8);
                 writer.WriteBooleanValue(SupportsMultipleExtensions.Value);
@@ -128,7 +128,7 @@ namespace Azure.ResourceManager.Sample
             {
                 return null;
             }
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -237,7 +237,7 @@ namespace Azure.ResourceManager.Sample
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineExtensionImageData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, operatingSystem.Value, computeRole.Value, handlerSchema.Value, Optional.ToNullable(vmScaleSetEnabled), Optional.ToNullable(supportsMultipleExtensions), serializedAdditionalRawData);
+            return new VirtualMachineExtensionImageData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, operatingSystem.Value, computeRole.Value, handlerSchema.Value, Optional.ToNullable(vmScaleSetEnabled), Optional.ToNullable(supportsMultipleExtensions), serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -245,7 +245,7 @@ namespace Azure.ResourceManager.Sample
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 builder.Append("  name:");
                 if (Name.Contains(Environment.NewLine))
@@ -259,11 +259,8 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsDefined(Location))
-            {
-                builder.Append("  location:");
-                builder.AppendLine($" '{Location.ToString()}'");
-            }
+            builder.Append("  location:");
+            builder.AppendLine($" '{Location.ToString()}'");
 
             if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
@@ -293,13 +290,13 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 builder.Append("  id:");
                 builder.AppendLine($" '{Id.ToString()}'");
             }
 
-            if (Optional.IsDefined(SystemData))
+            if (SystemData != null)
             {
                 builder.Append("  systemData:");
                 builder.AppendLine($" '{SystemData.ToString()}'");
@@ -307,7 +304,7 @@ namespace Azure.ResourceManager.Sample
 
             builder.Append("  properties:");
             builder.AppendLine(" {");
-            if (Optional.IsDefined(OperatingSystem))
+            if (OperatingSystem != null)
             {
                 builder.Append("    operatingSystem:");
                 if (OperatingSystem.Contains(Environment.NewLine))
@@ -321,7 +318,7 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsDefined(ComputeRole))
+            if (ComputeRole != null)
             {
                 builder.Append("    computeRole:");
                 if (ComputeRole.Contains(Environment.NewLine))
@@ -335,7 +332,7 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsDefined(HandlerSchema))
+            if (HandlerSchema != null)
             {
                 builder.Append("    handlerSchema:");
                 if (HandlerSchema.Contains(Environment.NewLine))
@@ -349,14 +346,14 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsDefined(VmScaleSetEnabled))
+            if (VmScaleSetEnabled.HasValue)
             {
                 builder.Append("    vmScaleSetEnabled:");
                 var boolValue = VmScaleSetEnabled.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
             }
 
-            if (Optional.IsDefined(SupportsMultipleExtensions))
+            if (SupportsMultipleExtensions.HasValue)
             {
                 builder.Append("    supportsMultipleExtensions:");
                 var boolValue = SupportsMultipleExtensions.Value == true ? "true" : "false";

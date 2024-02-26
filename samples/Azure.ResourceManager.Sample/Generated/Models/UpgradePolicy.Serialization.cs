@@ -27,17 +27,17 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Mode))
+            if (Mode.HasValue)
             {
                 writer.WritePropertyName("mode"u8);
                 writer.WriteStringValue(Mode.Value.ToSerialString());
             }
-            if (Optional.IsDefined(RollingUpgradePolicy))
+            if (RollingUpgradePolicy != null)
             {
                 writer.WritePropertyName("rollingUpgradePolicy"u8);
                 writer.WriteObjectValue(RollingUpgradePolicy);
             }
-            if (Optional.IsDefined(AutomaticOSUpgradePolicy))
+            if (AutomaticOSUpgradePolicy != null)
             {
                 writer.WritePropertyName("automaticOSUpgradePolicy"u8);
                 writer.WriteObjectValue(AutomaticOSUpgradePolicy);
@@ -128,19 +128,19 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Mode))
+            if (Mode.HasValue)
             {
                 builder.Append("  mode:");
                 builder.AppendLine($" '{Mode.Value.ToSerialString()}'");
             }
 
-            if (Optional.IsDefined(RollingUpgradePolicy))
+            if (RollingUpgradePolicy != null)
             {
                 builder.Append("  rollingUpgradePolicy:");
                 AppendChildObject(builder, RollingUpgradePolicy, options, 2, false);
             }
 
-            if (Optional.IsDefined(AutomaticOSUpgradePolicy))
+            if (AutomaticOSUpgradePolicy != null)
             {
                 builder.Append("  automaticOSUpgradePolicy:");
                 AppendChildObject(builder, AutomaticOSUpgradePolicy, options, 2, false);

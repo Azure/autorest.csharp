@@ -17,12 +17,12 @@ namespace MgmtSupersetInheritance.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Foo))
+            if (Foo != null)
             {
                 writer.WritePropertyName("foo"u8);
                 writer.WriteStringValue(Foo);
             }
-            if (Optional.IsDefined(New))
+            if (New != null)
             {
                 writer.WritePropertyName("new"u8);
                 writer.WriteStringValue(New);
@@ -51,7 +51,7 @@ namespace MgmtSupersetInheritance.Models
             }
             Optional<string> foo = default;
             Optional<string> @new = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -113,7 +113,7 @@ namespace MgmtSupersetInheritance.Models
                     continue;
                 }
             }
-            return new SupersetModel5(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, foo.Value, @new.Value);
+            return new SupersetModel5(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, foo.Value, @new.Value);
         }
     }
 }

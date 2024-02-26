@@ -30,7 +30,7 @@ namespace MgmtDiscriminator.Models
             writer.WriteStartObject();
             writer.WritePropertyName("typeName"u8);
             writer.WriteStringValue(TypeName.ToString());
-            if (Optional.IsDefined(Algorithm))
+            if (Algorithm.HasValue)
             {
                 writer.WritePropertyName("algorithm"u8);
                 writer.WriteStringValue(Algorithm.Value.ToString());
@@ -85,7 +85,7 @@ namespace MgmtDiscriminator.Models
             }
             UrlSigningActionParametersTypeName typeName = default;
             Optional<Algorithm> algorithm = default;
-            Optional<IList<UrlSigningParamIdentifier>> parameterNameOverride = default;
+            IList<UrlSigningParamIdentifier> parameterNameOverride = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -124,7 +124,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new UrlSigningActionParameters(typeName, Optional.ToNullable(algorithm), Optional.ToList(parameterNameOverride), serializedAdditionalRawData);
+            return new UrlSigningActionParameters(typeName, Optional.ToNullable(algorithm), parameterNameOverride ?? new ChangeTrackingList<UrlSigningParamIdentifier>(), serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -132,13 +132,10 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(TypeName))
-            {
-                builder.Append("  typeName:");
-                builder.AppendLine($" '{TypeName.ToString()}'");
-            }
+            builder.Append("  typeName:");
+            builder.AppendLine($" '{TypeName.ToString()}'");
 
-            if (Optional.IsDefined(Algorithm))
+            if (Algorithm.HasValue)
             {
                 builder.Append("  algorithm:");
                 builder.AppendLine($" '{Algorithm.Value.ToString()}'");

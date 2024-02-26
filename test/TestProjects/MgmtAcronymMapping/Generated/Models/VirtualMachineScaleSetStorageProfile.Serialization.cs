@@ -16,12 +16,12 @@ namespace MgmtAcronymMapping.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(ImageReference))
+            if (ImageReference != null)
             {
                 writer.WritePropertyName("imageReference"u8);
                 writer.WriteObjectValue(ImageReference);
             }
-            if (Optional.IsDefined(OSDisk))
+            if (OSDisk != null)
             {
                 writer.WritePropertyName("osDisk"u8);
                 writer.WriteObjectValue(OSDisk);
@@ -47,7 +47,7 @@ namespace MgmtAcronymMapping.Models
             }
             Optional<ImageReference> imageReference = default;
             Optional<VirtualMachineScaleSetOSDisk> osDisk = default;
-            Optional<IList<VirtualMachineScaleSetDataDisk>> dataDisks = default;
+            IList<VirtualMachineScaleSetDataDisk> dataDisks = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("imageReference"u8))
@@ -83,7 +83,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetStorageProfile(imageReference.Value, osDisk.Value, Optional.ToList(dataDisks));
+            return new VirtualMachineScaleSetStorageProfile(imageReference.Value, osDisk.Value, dataDisks ?? new ChangeTrackingList<VirtualMachineScaleSetDataDisk>());
         }
     }
 }

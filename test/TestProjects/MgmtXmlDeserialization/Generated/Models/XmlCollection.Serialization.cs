@@ -22,13 +22,13 @@ namespace MgmtXmlDeserialization.Models
         private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "XmlCollection");
-            if (Optional.IsDefined(Count))
+            if (Count.HasValue)
             {
                 writer.WriteStartElement("count");
                 writer.WriteValue(Count.Value);
                 writer.WriteEndElement();
             }
-            if (Optional.IsDefined(NextLink))
+            if (NextLink != null)
             {
                 writer.WriteStartElement("nextLink");
                 writer.WriteValue(NextLink);
@@ -91,12 +91,12 @@ namespace MgmtXmlDeserialization.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(Count))
+            if (Count.HasValue)
             {
                 writer.WritePropertyName("count"u8);
                 writer.WriteNumberValue(Count.Value);
             }
-            if (Optional.IsDefined(NextLink))
+            if (NextLink != null)
             {
                 writer.WritePropertyName("nextLink"u8);
                 writer.WriteStringValue(NextLink);
@@ -139,7 +139,7 @@ namespace MgmtXmlDeserialization.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<XmlInstanceData>> value = default;
+            IReadOnlyList<XmlInstanceData> value = default;
             Optional<long> count = default;
             Optional<string> nextLink = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
@@ -180,7 +180,7 @@ namespace MgmtXmlDeserialization.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new XmlCollection(Optional.ToList(value), Optional.ToNullable(count), nextLink.Value, serializedAdditionalRawData);
+            return new XmlCollection(value ?? new ChangeTrackingList<XmlInstanceData>(), Optional.ToNullable(count), nextLink.Value, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<XmlCollection>.Write(ModelReaderWriterOptions options)

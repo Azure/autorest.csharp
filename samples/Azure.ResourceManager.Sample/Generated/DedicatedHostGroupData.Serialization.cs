@@ -56,7 +56,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W" && Optional.IsDefined(TenantId))
+            if (options.Format != "W" && TenantId.HasValue)
             {
                 writer.WritePropertyName("tenantId"u8);
                 writer.WriteStringValue(TenantId.Value);
@@ -89,14 +89,14 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format != "W" && Optional.IsDefined(SystemData))
+            if (options.Format != "W" && SystemData != null)
             {
                 writer.WritePropertyName("systemData"u8);
                 JsonSerializer.Serialize(writer, SystemData);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(PlatformFaultDomainCount))
+            if (PlatformFaultDomainCount.HasValue)
             {
                 writer.WritePropertyName("platformFaultDomainCount"u8);
                 writer.WriteNumberValue(PlatformFaultDomainCount.Value);
@@ -111,12 +111,12 @@ namespace Azure.ResourceManager.Sample
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W" && Optional.IsDefined(InstanceView))
+            if (options.Format != "W" && InstanceView != null)
             {
                 writer.WritePropertyName("instanceView"u8);
                 writer.WriteObjectValue(InstanceView);
             }
-            if (Optional.IsDefined(SupportAutomaticPlacement))
+            if (SupportAutomaticPlacement.HasValue)
             {
                 writer.WritePropertyName("supportAutomaticPlacement"u8);
                 writer.WriteBooleanValue(SupportAutomaticPlacement.Value);
@@ -160,17 +160,17 @@ namespace Azure.ResourceManager.Sample
             {
                 return null;
             }
-            Optional<IList<string>> zones = default;
-            Optional<IList<Uri>> hostUris = default;
+            IList<string> zones = default;
+            IList<Uri> hostUris = default;
             Optional<Guid> tenantId = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             Optional<SystemData> systemData = default;
             Optional<int> platformFaultDomainCount = default;
-            Optional<IReadOnlyList<Resources.Models.SubResource>> hosts = default;
+            IReadOnlyList<Resources.Models.SubResource> hosts = default;
             Optional<DedicatedHostGroupInstanceView> instanceView = default;
             Optional<bool> supportAutomaticPlacement = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
@@ -323,7 +323,7 @@ namespace Azure.ResourceManager.Sample
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DedicatedHostGroupData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, Optional.ToList(zones), Optional.ToList(hostUris), Optional.ToNullable(tenantId), Optional.ToNullable(platformFaultDomainCount), Optional.ToList(hosts), instanceView.Value, Optional.ToNullable(supportAutomaticPlacement), serializedAdditionalRawData);
+            return new DedicatedHostGroupData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, zones ?? new ChangeTrackingList<string>(), hostUris ?? new ChangeTrackingList<Uri>(), Optional.ToNullable(tenantId), Optional.ToNullable(platformFaultDomainCount), hosts ?? new ChangeTrackingList<Resources.Models.SubResource>(), instanceView.Value, Optional.ToNullable(supportAutomaticPlacement), serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -331,7 +331,7 @@ namespace Azure.ResourceManager.Sample
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 builder.Append("  name:");
                 if (Name.Contains(Environment.NewLine))
@@ -345,11 +345,8 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsDefined(Location))
-            {
-                builder.Append("  location:");
-                builder.AppendLine($" '{Location.ToString()}'");
-            }
+            builder.Append("  location:");
+            builder.AppendLine($" '{Location.ToString()}'");
 
             if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
@@ -425,19 +422,19 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsDefined(TenantId))
+            if (TenantId.HasValue)
             {
                 builder.Append("  tenantId:");
                 builder.AppendLine($" '{TenantId.Value.ToString()}'");
             }
 
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 builder.Append("  id:");
                 builder.AppendLine($" '{Id.ToString()}'");
             }
 
-            if (Optional.IsDefined(SystemData))
+            if (SystemData != null)
             {
                 builder.Append("  systemData:");
                 builder.AppendLine($" '{SystemData.ToString()}'");
@@ -445,7 +442,7 @@ namespace Azure.ResourceManager.Sample
 
             builder.Append("  properties:");
             builder.AppendLine(" {");
-            if (Optional.IsDefined(PlatformFaultDomainCount))
+            if (PlatformFaultDomainCount.HasValue)
             {
                 builder.Append("    platformFaultDomainCount:");
                 builder.AppendLine($" {PlatformFaultDomainCount.Value}");
@@ -465,13 +462,13 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsDefined(InstanceView))
+            if (InstanceView != null)
             {
                 builder.Append("    instanceView:");
                 AppendChildObject(builder, InstanceView, options, 4, false);
             }
 
-            if (Optional.IsDefined(SupportAutomaticPlacement))
+            if (SupportAutomaticPlacement.HasValue)
             {
                 builder.Append("    supportAutomaticPlacement:");
                 var boolValue = SupportAutomaticPlacement.Value == true ? "true" : "false";

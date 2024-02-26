@@ -26,12 +26,12 @@ namespace CustomNamespace
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(PropertyRenamedAndTypeChanged))
+            if (PropertyRenamedAndTypeChanged.HasValue)
             {
                 writer.WritePropertyName("ModelProperty"u8);
                 writer.WriteNumberValue(PropertyRenamedAndTypeChanged.Value);
             }
-            if (Optional.IsDefined(_field))
+            if (_field != null)
             {
                 writer.WritePropertyName("PropertyToField"u8);
                 writer.WriteStringValue(_field);

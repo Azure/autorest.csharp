@@ -28,22 +28,22 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && Optional.IsDefined(PatchId))
+            if (options.Format != "W" && PatchId != null)
             {
                 writer.WritePropertyName("patchId"u8);
                 writer.WriteStringValue(PatchId);
             }
-            if (options.Format != "W" && Optional.IsDefined(Name))
+            if (options.Format != "W" && Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format != "W" && Optional.IsDefined(Version))
+            if (options.Format != "W" && Version != null)
             {
                 writer.WritePropertyName("version"u8);
                 writer.WriteStringValue(Version);
             }
-            if (options.Format != "W" && Optional.IsDefined(Kbid))
+            if (options.Format != "W" && Kbid != null)
             {
                 writer.WritePropertyName("kbid"u8);
                 writer.WriteStringValue(Kbid);
@@ -58,27 +58,27 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W" && Optional.IsDefined(RebootBehavior))
+            if (options.Format != "W" && RebootBehavior.HasValue)
             {
                 writer.WritePropertyName("rebootBehavior"u8);
                 writer.WriteStringValue(RebootBehavior.Value.ToString());
             }
-            if (options.Format != "W" && Optional.IsDefined(ActivityId))
+            if (options.Format != "W" && ActivityId != null)
             {
                 writer.WritePropertyName("activityId"u8);
                 writer.WriteStringValue(ActivityId);
             }
-            if (options.Format != "W" && Optional.IsDefined(PublishedOn))
+            if (options.Format != "W" && PublishedOn.HasValue)
             {
                 writer.WritePropertyName("publishedDate"u8);
                 writer.WriteStringValue(PublishedOn.Value, "O");
             }
-            if (options.Format != "W" && Optional.IsDefined(LastModifiedOn))
+            if (options.Format != "W" && LastModifiedOn.HasValue)
             {
                 writer.WritePropertyName("lastModifiedDateTime"u8);
                 writer.WriteStringValue(LastModifiedOn.Value, "O");
             }
-            if (options.Format != "W" && Optional.IsDefined(AssessmentState))
+            if (options.Format != "W" && AssessmentState.HasValue)
             {
                 writer.WritePropertyName("assessmentState"u8);
                 writer.WriteStringValue(AssessmentState.Value.ToString());
@@ -125,7 +125,7 @@ namespace Azure.ResourceManager.Sample.Models
             Optional<string> name = default;
             Optional<string> version = default;
             Optional<string> kbid = default;
-            Optional<IReadOnlyList<string>> classifications = default;
+            IReadOnlyList<string> classifications = default;
             Optional<SoftwareUpdateRebootBehavior> rebootBehavior = default;
             Optional<string> activityId = default;
             Optional<DateTimeOffset> publishedDate = default;
@@ -216,7 +216,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineSoftwarePatchProperties(patchId.Value, name.Value, version.Value, kbid.Value, Optional.ToList(classifications), Optional.ToNullable(rebootBehavior), activityId.Value, Optional.ToNullable(publishedDate), Optional.ToNullable(lastModifiedDateTime), Optional.ToNullable(assessmentState), serializedAdditionalRawData);
+            return new VirtualMachineSoftwarePatchProperties(patchId.Value, name.Value, version.Value, kbid.Value, classifications ?? new ChangeTrackingList<string>(), Optional.ToNullable(rebootBehavior), activityId.Value, Optional.ToNullable(publishedDate), Optional.ToNullable(lastModifiedDateTime), Optional.ToNullable(assessmentState), serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -224,7 +224,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 builder.Append("  name:");
                 if (Name.Contains(Environment.NewLine))
@@ -238,7 +238,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(PatchId))
+            if (PatchId != null)
             {
                 builder.Append("  patchId:");
                 if (PatchId.Contains(Environment.NewLine))
@@ -252,7 +252,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(Version))
+            if (Version != null)
             {
                 builder.Append("  version:");
                 if (Version.Contains(Environment.NewLine))
@@ -266,7 +266,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(Kbid))
+            if (Kbid != null)
             {
                 builder.Append("  kbid:");
                 if (Kbid.Contains(Environment.NewLine))
@@ -307,13 +307,13 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(RebootBehavior))
+            if (RebootBehavior.HasValue)
             {
                 builder.Append("  rebootBehavior:");
                 builder.AppendLine($" '{RebootBehavior.Value.ToString()}'");
             }
 
-            if (Optional.IsDefined(ActivityId))
+            if (ActivityId != null)
             {
                 builder.Append("  activityId:");
                 if (ActivityId.Contains(Environment.NewLine))
@@ -327,21 +327,21 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(PublishedOn))
+            if (PublishedOn.HasValue)
             {
                 builder.Append("  publishedDate:");
                 var formattedDateTimeString = TypeFormatters.ToString(PublishedOn.Value, "o");
                 builder.AppendLine($" '{formattedDateTimeString}'");
             }
 
-            if (Optional.IsDefined(LastModifiedOn))
+            if (LastModifiedOn.HasValue)
             {
                 builder.Append("  lastModifiedDateTime:");
                 var formattedDateTimeString = TypeFormatters.ToString(LastModifiedOn.Value, "o");
                 builder.AppendLine($" '{formattedDateTimeString}'");
             }
 
-            if (Optional.IsDefined(AssessmentState))
+            if (AssessmentState.HasValue)
             {
                 builder.Append("  assessmentState:");
                 builder.AppendLine($" '{AssessmentState.Value.ToString()}'");

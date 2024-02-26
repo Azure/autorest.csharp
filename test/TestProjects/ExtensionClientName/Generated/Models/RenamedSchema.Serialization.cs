@@ -27,7 +27,7 @@ namespace ExtensionClientName.Models
                 }
                 writer.WriteEndObject();
             }
-            if (Optional.IsDefined(RenamedPropertyString))
+            if (RenamedPropertyString != null)
             {
                 writer.WritePropertyName("originalPropertyString"u8);
                 writer.WriteStringValue(RenamedPropertyString);
@@ -41,7 +41,7 @@ namespace ExtensionClientName.Models
             {
                 return null;
             }
-            Optional<IDictionary<string, string>> originalProperty = default;
+            IDictionary<string, string> originalProperty = default;
             Optional<string> originalPropertyString = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -65,7 +65,7 @@ namespace ExtensionClientName.Models
                     continue;
                 }
             }
-            return new RenamedSchema(Optional.ToDictionary(originalProperty), originalPropertyString.Value);
+            return new RenamedSchema(originalProperty ?? new ChangeTrackingDictionary<string, string>(), originalPropertyString.Value);
         }
     }
 }

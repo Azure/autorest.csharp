@@ -28,12 +28,12 @@ namespace additionalProperties.Models
             writer.WriteStartObject();
             writer.WritePropertyName("id"u8);
             writer.WriteNumberValue(Id);
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format != "W" && Optional.IsDefined(Status))
+            if (options.Format != "W" && Status.HasValue)
             {
                 writer.WritePropertyName("status"u8);
                 writer.WriteBooleanValue(Status.Value);
@@ -83,7 +83,7 @@ namespace additionalProperties.Models
             Optional<string> name = default;
             Optional<bool> status = default;
             string odataLocation = default;
-            Optional<IDictionary<string, float>> additionalProperties = default;
+            IDictionary<string, float> additionalProperties = default;
             IDictionary<string, string> moreAdditionalProperties = default;
             Dictionary<string, string> additionalPropertiesDictionary = new Dictionary<string, string>();
             foreach (var property in element.EnumerateObject())
@@ -129,7 +129,7 @@ namespace additionalProperties.Models
                 additionalPropertiesDictionary.Add(property.Name, property.Value.GetString());
             }
             moreAdditionalProperties = additionalPropertiesDictionary;
-            return new PetAPInPropertiesWithAPString(id, name.Value, Optional.ToNullable(status), odataLocation, Optional.ToDictionary(additionalProperties), moreAdditionalProperties);
+            return new PetAPInPropertiesWithAPString(id, name.Value, Optional.ToNullable(status), odataLocation, additionalProperties ?? new ChangeTrackingDictionary<string, float>(), moreAdditionalProperties);
         }
 
         BinaryData IPersistableModel<PetAPInPropertiesWithAPString>.Write(ModelReaderWriterOptions options)

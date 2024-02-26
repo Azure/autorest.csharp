@@ -48,7 +48,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
                 }
                 writer.WriteEndObject();
             }
-            if (Optional.IsDefined(Partner))
+            if (Partner != null)
             {
                 writer.WritePropertyName("partner"u8);
                 writer.WriteObjectValue(Partner);
@@ -95,8 +95,8 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             {
                 return null;
             }
-            Optional<IList<Bird>> friends = default;
-            Optional<IDictionary<string, Bird>> hate = default;
+            IList<Bird> friends = default;
+            IDictionary<string, Bird> hate = default;
             Optional<Bird> partner = default;
             string kind = default;
             int wingspan = default;
@@ -157,7 +157,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Eagle(kind, wingspan, serializedAdditionalRawData, Optional.ToList(friends), Optional.ToDictionary(hate), partner.Value);
+            return new Eagle(kind, wingspan, serializedAdditionalRawData, friends ?? new ChangeTrackingList<Bird>(), hate ?? new ChangeTrackingDictionary<string, Bird>(), partner.Value);
         }
 
         BinaryData IPersistableModel<Eagle>.Write(ModelReaderWriterOptions options)

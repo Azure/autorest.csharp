@@ -31,17 +31,17 @@ namespace Azure.ResourceManager.Sample
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && Optional.IsDefined(InstanceId))
+            if (options.Format != "W" && InstanceId != null)
             {
                 writer.WritePropertyName("instanceId"u8);
                 writer.WriteStringValue(InstanceId);
             }
-            if (options.Format != "W" && Optional.IsDefined(Sku))
+            if (options.Format != "W" && Sku != null)
             {
                 writer.WritePropertyName("sku"u8);
                 writer.WriteObjectValue(Sku);
             }
-            if (Optional.IsDefined(Plan))
+            if (Plan != null)
             {
                 writer.WritePropertyName("plan"u8);
                 writer.WriteObjectValue(Plan);
@@ -94,89 +94,89 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format != "W" && Optional.IsDefined(SystemData))
+            if (options.Format != "W" && SystemData != null)
             {
                 writer.WritePropertyName("systemData"u8);
                 JsonSerializer.Serialize(writer, SystemData);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (options.Format != "W" && Optional.IsDefined(LatestModelApplied))
+            if (options.Format != "W" && LatestModelApplied.HasValue)
             {
                 writer.WritePropertyName("latestModelApplied"u8);
                 writer.WriteBooleanValue(LatestModelApplied.Value);
             }
-            if (options.Format != "W" && Optional.IsDefined(VmId))
+            if (options.Format != "W" && VmId != null)
             {
                 writer.WritePropertyName("vmId"u8);
                 writer.WriteStringValue(VmId);
             }
-            if (options.Format != "W" && Optional.IsDefined(InstanceView))
+            if (options.Format != "W" && InstanceView != null)
             {
                 writer.WritePropertyName("instanceView"u8);
                 writer.WriteObjectValue(InstanceView);
             }
-            if (Optional.IsDefined(HardwareProfile))
+            if (HardwareProfile != null)
             {
                 writer.WritePropertyName("hardwareProfile"u8);
                 writer.WriteObjectValue(HardwareProfile);
             }
-            if (Optional.IsDefined(StorageProfile))
+            if (StorageProfile != null)
             {
                 writer.WritePropertyName("storageProfile"u8);
                 writer.WriteObjectValue(StorageProfile);
             }
-            if (Optional.IsDefined(AdditionalCapabilities))
+            if (AdditionalCapabilities != null)
             {
                 writer.WritePropertyName("additionalCapabilities"u8);
                 writer.WriteObjectValue(AdditionalCapabilities);
             }
-            if (Optional.IsDefined(OSProfile))
+            if (OSProfile != null)
             {
                 writer.WritePropertyName("osProfile"u8);
                 writer.WriteObjectValue(OSProfile);
             }
-            if (Optional.IsDefined(SecurityProfile))
+            if (SecurityProfile != null)
             {
                 writer.WritePropertyName("securityProfile"u8);
                 writer.WriteObjectValue(SecurityProfile);
             }
-            if (Optional.IsDefined(NetworkProfile))
+            if (NetworkProfile != null)
             {
                 writer.WritePropertyName("networkProfile"u8);
                 writer.WriteObjectValue(NetworkProfile);
             }
-            if (Optional.IsDefined(NetworkProfileConfiguration))
+            if (NetworkProfileConfiguration != null)
             {
                 writer.WritePropertyName("networkProfileConfiguration"u8);
                 writer.WriteObjectValue(NetworkProfileConfiguration);
             }
-            if (Optional.IsDefined(DiagnosticsProfile))
+            if (DiagnosticsProfile != null)
             {
                 writer.WritePropertyName("diagnosticsProfile"u8);
                 writer.WriteObjectValue(DiagnosticsProfile);
             }
-            if (Optional.IsDefined(AvailabilitySet))
+            if (AvailabilitySet != null)
             {
                 writer.WritePropertyName("availabilitySet"u8);
                 JsonSerializer.Serialize(writer, AvailabilitySet);
             }
-            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
+            if (options.Format != "W" && ProvisioningState != null)
             {
                 writer.WritePropertyName("provisioningState"u8);
                 writer.WriteStringValue(ProvisioningState);
             }
-            if (Optional.IsDefined(LicenseType))
+            if (LicenseType != null)
             {
                 writer.WritePropertyName("licenseType"u8);
                 writer.WriteStringValue(LicenseType);
             }
-            if (options.Format != "W" && Optional.IsDefined(ModelDefinitionApplied))
+            if (options.Format != "W" && ModelDefinitionApplied != null)
             {
                 writer.WritePropertyName("modelDefinitionApplied"u8);
                 writer.WriteStringValue(ModelDefinitionApplied);
             }
-            if (Optional.IsDefined(ProtectionPolicy))
+            if (ProtectionPolicy != null)
             {
                 writer.WritePropertyName("protectionPolicy"u8);
                 writer.WriteObjectValue(ProtectionPolicy);
@@ -223,9 +223,9 @@ namespace Azure.ResourceManager.Sample
             Optional<string> instanceId = default;
             Optional<SampleSku> sku = default;
             Optional<SamplePlan> plan = default;
-            Optional<IReadOnlyList<VirtualMachineExtensionData>> resources = default;
-            Optional<IReadOnlyList<string>> zones = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IReadOnlyList<VirtualMachineExtensionData> resources = default;
+            IReadOnlyList<string> zones = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -491,7 +491,7 @@ namespace Azure.ResourceManager.Sample
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineScaleSetVmData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, instanceId.Value, sku.Value, plan.Value, Optional.ToList(resources), Optional.ToList(zones), Optional.ToNullable(latestModelApplied), vmId.Value, instanceView.Value, hardwareProfile.Value, storageProfile.Value, additionalCapabilities.Value, osProfile.Value, securityProfile.Value, networkProfile.Value, networkProfileConfiguration.Value, diagnosticsProfile.Value, availabilitySet, provisioningState.Value, licenseType.Value, modelDefinitionApplied.Value, protectionPolicy.Value, serializedAdditionalRawData);
+            return new VirtualMachineScaleSetVmData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, instanceId.Value, sku.Value, plan.Value, resources ?? new ChangeTrackingList<VirtualMachineExtensionData>(), zones ?? new ChangeTrackingList<string>(), Optional.ToNullable(latestModelApplied), vmId.Value, instanceView.Value, hardwareProfile.Value, storageProfile.Value, additionalCapabilities.Value, osProfile.Value, securityProfile.Value, networkProfile.Value, networkProfileConfiguration.Value, diagnosticsProfile.Value, availabilitySet, provisioningState.Value, licenseType.Value, modelDefinitionApplied.Value, protectionPolicy.Value, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -499,7 +499,7 @@ namespace Azure.ResourceManager.Sample
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 builder.Append("  name:");
                 if (Name.Contains(Environment.NewLine))
@@ -513,11 +513,8 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsDefined(Location))
-            {
-                builder.Append("  location:");
-                builder.AppendLine($" '{Location.ToString()}'");
-            }
+            builder.Append("  location:");
+            builder.AppendLine($" '{Location.ToString()}'");
 
             if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
@@ -547,7 +544,7 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsDefined(InstanceId))
+            if (InstanceId != null)
             {
                 builder.Append("  instanceId:");
                 if (InstanceId.Contains(Environment.NewLine))
@@ -561,13 +558,13 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsDefined(Sku))
+            if (Sku != null)
             {
                 builder.Append("  sku:");
                 AppendChildObject(builder, Sku, options, 2, false);
             }
 
-            if (Optional.IsDefined(Plan))
+            if (Plan != null)
             {
                 builder.Append("  plan:");
                 AppendChildObject(builder, Plan, options, 2, false);
@@ -614,13 +611,13 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 builder.Append("  id:");
                 builder.AppendLine($" '{Id.ToString()}'");
             }
 
-            if (Optional.IsDefined(SystemData))
+            if (SystemData != null)
             {
                 builder.Append("  systemData:");
                 builder.AppendLine($" '{SystemData.ToString()}'");
@@ -628,14 +625,14 @@ namespace Azure.ResourceManager.Sample
 
             builder.Append("  properties:");
             builder.AppendLine(" {");
-            if (Optional.IsDefined(LatestModelApplied))
+            if (LatestModelApplied.HasValue)
             {
                 builder.Append("    latestModelApplied:");
                 var boolValue = LatestModelApplied.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
             }
 
-            if (Optional.IsDefined(VmId))
+            if (VmId != null)
             {
                 builder.Append("    vmId:");
                 if (VmId.Contains(Environment.NewLine))
@@ -649,67 +646,67 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsDefined(InstanceView))
+            if (InstanceView != null)
             {
                 builder.Append("    instanceView:");
                 AppendChildObject(builder, InstanceView, options, 4, false);
             }
 
-            if (Optional.IsDefined(HardwareProfile))
+            if (HardwareProfile != null)
             {
                 builder.Append("    hardwareProfile:");
                 AppendChildObject(builder, HardwareProfile, options, 4, false);
             }
 
-            if (Optional.IsDefined(StorageProfile))
+            if (StorageProfile != null)
             {
                 builder.Append("    storageProfile:");
                 AppendChildObject(builder, StorageProfile, options, 4, false);
             }
 
-            if (Optional.IsDefined(AdditionalCapabilities))
+            if (AdditionalCapabilities != null)
             {
                 builder.Append("    additionalCapabilities:");
                 AppendChildObject(builder, AdditionalCapabilities, options, 4, false);
             }
 
-            if (Optional.IsDefined(OSProfile))
+            if (OSProfile != null)
             {
                 builder.Append("    osProfile:");
                 AppendChildObject(builder, OSProfile, options, 4, false);
             }
 
-            if (Optional.IsDefined(SecurityProfile))
+            if (SecurityProfile != null)
             {
                 builder.Append("    securityProfile:");
                 AppendChildObject(builder, SecurityProfile, options, 4, false);
             }
 
-            if (Optional.IsDefined(NetworkProfile))
+            if (NetworkProfile != null)
             {
                 builder.Append("    networkProfile:");
                 AppendChildObject(builder, NetworkProfile, options, 4, false);
             }
 
-            if (Optional.IsDefined(NetworkProfileConfiguration))
+            if (NetworkProfileConfiguration != null)
             {
                 builder.Append("    networkProfileConfiguration:");
                 AppendChildObject(builder, NetworkProfileConfiguration, options, 4, false);
             }
 
-            if (Optional.IsDefined(DiagnosticsProfile))
+            if (DiagnosticsProfile != null)
             {
                 builder.Append("    diagnosticsProfile:");
                 AppendChildObject(builder, DiagnosticsProfile, options, 4, false);
             }
 
-            if (Optional.IsDefined(AvailabilitySet))
+            if (AvailabilitySet != null)
             {
                 builder.Append("    availabilitySet:");
                 AppendChildObject(builder, AvailabilitySet, options, 4, false);
             }
 
-            if (Optional.IsDefined(ProvisioningState))
+            if (ProvisioningState != null)
             {
                 builder.Append("    provisioningState:");
                 if (ProvisioningState.Contains(Environment.NewLine))
@@ -723,7 +720,7 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsDefined(LicenseType))
+            if (LicenseType != null)
             {
                 builder.Append("    licenseType:");
                 if (LicenseType.Contains(Environment.NewLine))
@@ -737,7 +734,7 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsDefined(ModelDefinitionApplied))
+            if (ModelDefinitionApplied != null)
             {
                 builder.Append("    modelDefinitionApplied:");
                 if (ModelDefinitionApplied.Contains(Environment.NewLine))
@@ -751,7 +748,7 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsDefined(ProtectionPolicy))
+            if (ProtectionPolicy != null)
             {
                 builder.Append("    protectionPolicy:");
                 AppendChildObject(builder, ProtectionPolicy, options, 4, false);

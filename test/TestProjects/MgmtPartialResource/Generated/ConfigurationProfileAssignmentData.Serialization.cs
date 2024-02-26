@@ -18,7 +18,7 @@ namespace MgmtPartialResource
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Properties))
+            if (Properties != null)
             {
                 writer.WritePropertyName("properties"u8);
                 writer.WriteObjectValue(Properties);
@@ -46,7 +46,7 @@ namespace MgmtPartialResource
                 return null;
             }
             Optional<ConfigurationProfileAssignmentProperties> properties = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -107,7 +107,7 @@ namespace MgmtPartialResource
                     continue;
                 }
             }
-            return new ConfigurationProfileAssignmentData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, properties.Value);
+            return new ConfigurationProfileAssignmentData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, properties.Value);
         }
     }
 }

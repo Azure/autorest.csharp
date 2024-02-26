@@ -28,17 +28,17 @@ namespace MgmtAcronymMapping.Models
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(SourceVirtualMachine))
+            if (SourceVirtualMachine != null)
             {
                 writer.WritePropertyName("sourceVirtualMachine"u8);
                 JsonSerializer.Serialize(writer, SourceVirtualMachine);
             }
-            if (Optional.IsDefined(StorageProfile))
+            if (StorageProfile != null)
             {
                 writer.WritePropertyName("storageProfile"u8);
                 writer.WriteObjectValue(StorageProfile);
             }
-            if (Optional.IsDefined(HyperVGeneration))
+            if (HyperVGeneration.HasValue)
             {
                 writer.WritePropertyName("hyperVGeneration"u8);
                 writer.WriteStringValue(HyperVGeneration.Value.ToString());

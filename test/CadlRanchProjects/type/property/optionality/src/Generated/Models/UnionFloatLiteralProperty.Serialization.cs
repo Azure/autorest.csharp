@@ -27,7 +27,7 @@ namespace _Type.Property.Optionality.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Property))
+            if (Property != null)
             {
                 writer.WritePropertyName("property"u8);
 #if NET6_0_OR_GREATER

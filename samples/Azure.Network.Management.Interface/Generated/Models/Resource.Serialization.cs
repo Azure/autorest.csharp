@@ -16,12 +16,12 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (Optional.IsDefined(Location))
+            if (Location != null)
             {
                 writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location);
@@ -50,7 +50,7 @@ namespace Azure.Network.Management.Interface.Models
             Optional<string> name = default;
             Optional<string> type = default;
             Optional<string> location = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -88,7 +88,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new Resource(id.Value, name.Value, type.Value, location.Value, Optional.ToDictionary(tags));
+            return new Resource(id.Value, name.Value, type.Value, location.Value, tags ?? new ChangeTrackingDictionary<string, string>());
         }
     }
 }

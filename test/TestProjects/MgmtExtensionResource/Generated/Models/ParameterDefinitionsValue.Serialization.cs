@@ -17,7 +17,7 @@ namespace MgmtExtensionResource.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(ParameterType))
+            if (ParameterType.HasValue)
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ParameterType.Value.ToString());
@@ -44,7 +44,7 @@ namespace MgmtExtensionResource.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(DefaultValue))
+            if (DefaultValue != null)
             {
                 writer.WritePropertyName("defaultValue"u8);
 #if NET6_0_OR_GREATER
@@ -56,7 +56,7 @@ namespace MgmtExtensionResource.Models
                 }
 #endif
             }
-            if (Optional.IsDefined(Metadata))
+            if (Metadata != null)
             {
                 writer.WritePropertyName("metadata"u8);
                 writer.WriteObjectValue(Metadata);
@@ -71,7 +71,7 @@ namespace MgmtExtensionResource.Models
                 return null;
             }
             Optional<ParameterType> type = default;
-            Optional<IList<BinaryData>> allowedValues = default;
+            IList<BinaryData> allowedValues = default;
             Optional<BinaryData> defaultValue = default;
             Optional<ParameterDefinitionsValueMetadata> metadata = default;
             foreach (var property in element.EnumerateObject())
@@ -125,7 +125,7 @@ namespace MgmtExtensionResource.Models
                     continue;
                 }
             }
-            return new ParameterDefinitionsValue(Optional.ToNullable(type), Optional.ToList(allowedValues), defaultValue.Value, metadata.Value);
+            return new ParameterDefinitionsValue(Optional.ToNullable(type), allowedValues ?? new ChangeTrackingList<BinaryData>(), defaultValue.Value, metadata.Value);
         }
     }
 }

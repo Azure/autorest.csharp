@@ -16,19 +16,19 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(AddressPrefix))
+            if (AddressPrefix != null)
             {
                 writer.WritePropertyName("addressPrefix"u8);
                 writer.WriteStringValue(AddressPrefix);
@@ -43,17 +43,17 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(NetworkSecurityGroup))
+            if (NetworkSecurityGroup != null)
             {
                 writer.WritePropertyName("networkSecurityGroup"u8);
                 writer.WriteObjectValue(NetworkSecurityGroup);
             }
-            if (Optional.IsDefined(RouteTable))
+            if (RouteTable != null)
             {
                 writer.WritePropertyName("routeTable"u8);
                 writer.WriteObjectValue(RouteTable);
             }
-            if (Optional.IsDefined(NatGateway))
+            if (NatGateway != null)
             {
                 writer.WritePropertyName("natGateway"u8);
                 writer.WriteObjectValue(NatGateway);
@@ -88,12 +88,12 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(PrivateEndpointNetworkPolicies))
+            if (PrivateEndpointNetworkPolicies != null)
             {
                 writer.WritePropertyName("privateEndpointNetworkPolicies"u8);
                 writer.WriteStringValue(PrivateEndpointNetworkPolicies);
             }
-            if (Optional.IsDefined(PrivateLinkServiceNetworkPolicies))
+            if (PrivateLinkServiceNetworkPolicies != null)
             {
                 writer.WritePropertyName("privateLinkServiceNetworkPolicies"u8);
                 writer.WriteStringValue(PrivateLinkServiceNetworkPolicies);
@@ -112,18 +112,18 @@ namespace Azure.Network.Management.Interface.Models
             Optional<string> etag = default;
             Optional<string> id = default;
             Optional<string> addressPrefix = default;
-            Optional<IList<string>> addressPrefixes = default;
+            IList<string> addressPrefixes = default;
             Optional<NetworkSecurityGroup> networkSecurityGroup = default;
             Optional<RouteTable> routeTable = default;
             Optional<SubResource> natGateway = default;
-            Optional<IList<ServiceEndpointPropertiesFormat>> serviceEndpoints = default;
-            Optional<IList<ServiceEndpointPolicy>> serviceEndpointPolicies = default;
-            Optional<IReadOnlyList<PrivateEndpoint>> privateEndpoints = default;
-            Optional<IReadOnlyList<IPConfiguration>> ipConfigurations = default;
-            Optional<IReadOnlyList<IPConfigurationProfile>> ipConfigurationProfiles = default;
-            Optional<IReadOnlyList<ResourceNavigationLink>> resourceNavigationLinks = default;
-            Optional<IReadOnlyList<ServiceAssociationLink>> serviceAssociationLinks = default;
-            Optional<IList<Delegation>> delegations = default;
+            IList<ServiceEndpointPropertiesFormat> serviceEndpoints = default;
+            IList<ServiceEndpointPolicy> serviceEndpointPolicies = default;
+            IReadOnlyList<PrivateEndpoint> privateEndpoints = default;
+            IReadOnlyList<IPConfiguration> ipConfigurations = default;
+            IReadOnlyList<IPConfigurationProfile> ipConfigurationProfiles = default;
+            IReadOnlyList<ResourceNavigationLink> resourceNavigationLinks = default;
+            IReadOnlyList<ServiceAssociationLink> serviceAssociationLinks = default;
+            IList<Delegation> delegations = default;
             Optional<string> purpose = default;
             Optional<ProvisioningState> provisioningState = default;
             Optional<string> privateEndpointNetworkPolicies = default;
@@ -340,7 +340,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new Subnet(id.Value, name.Value, etag.Value, addressPrefix.Value, Optional.ToList(addressPrefixes), networkSecurityGroup.Value, routeTable.Value, natGateway.Value, Optional.ToList(serviceEndpoints), Optional.ToList(serviceEndpointPolicies), Optional.ToList(privateEndpoints), Optional.ToList(ipConfigurations), Optional.ToList(ipConfigurationProfiles), Optional.ToList(resourceNavigationLinks), Optional.ToList(serviceAssociationLinks), Optional.ToList(delegations), purpose.Value, Optional.ToNullable(provisioningState), privateEndpointNetworkPolicies.Value, privateLinkServiceNetworkPolicies.Value);
+            return new Subnet(id.Value, name.Value, etag.Value, addressPrefix.Value, addressPrefixes ?? new ChangeTrackingList<string>(), networkSecurityGroup.Value, routeTable.Value, natGateway.Value, serviceEndpoints ?? new ChangeTrackingList<ServiceEndpointPropertiesFormat>(), serviceEndpointPolicies ?? new ChangeTrackingList<ServiceEndpointPolicy>(), privateEndpoints ?? new ChangeTrackingList<PrivateEndpoint>(), ipConfigurations ?? new ChangeTrackingList<IPConfiguration>(), ipConfigurationProfiles ?? new ChangeTrackingList<IPConfigurationProfile>(), resourceNavigationLinks ?? new ChangeTrackingList<ResourceNavigationLink>(), serviceAssociationLinks ?? new ChangeTrackingList<ServiceAssociationLink>(), delegations ?? new ChangeTrackingList<Delegation>(), purpose.Value, Optional.ToNullable(provisioningState), privateEndpointNetworkPolicies.Value, privateLinkServiceNetworkPolicies.Value);
         }
     }
 }

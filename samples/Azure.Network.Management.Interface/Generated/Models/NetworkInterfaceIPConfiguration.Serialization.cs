@@ -16,12 +16,12 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
@@ -68,32 +68,32 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(PrivateIPAddress))
+            if (PrivateIPAddress != null)
             {
                 writer.WritePropertyName("privateIPAddress"u8);
                 writer.WriteStringValue(PrivateIPAddress);
             }
-            if (Optional.IsDefined(PrivateIPAllocationMethod))
+            if (PrivateIPAllocationMethod.HasValue)
             {
                 writer.WritePropertyName("privateIPAllocationMethod"u8);
                 writer.WriteStringValue(PrivateIPAllocationMethod.Value.ToString());
             }
-            if (Optional.IsDefined(PrivateIPAddressVersion))
+            if (PrivateIPAddressVersion.HasValue)
             {
                 writer.WritePropertyName("privateIPAddressVersion"u8);
                 writer.WriteStringValue(PrivateIPAddressVersion.Value.ToString());
             }
-            if (Optional.IsDefined(Subnet))
+            if (Subnet != null)
             {
                 writer.WritePropertyName("subnet"u8);
                 writer.WriteObjectValue(Subnet);
             }
-            if (Optional.IsDefined(Primary))
+            if (Primary.HasValue)
             {
                 writer.WritePropertyName("primary"u8);
                 writer.WriteBooleanValue(Primary.Value);
             }
-            if (Optional.IsDefined(PublicIPAddress))
+            if (PublicIPAddress != null)
             {
                 writer.WritePropertyName("publicIPAddress"u8);
                 writer.WriteObjectValue(PublicIPAddress);
@@ -121,17 +121,17 @@ namespace Azure.Network.Management.Interface.Models
             Optional<string> name = default;
             Optional<string> etag = default;
             Optional<string> id = default;
-            Optional<IList<VirtualNetworkTap>> virtualNetworkTaps = default;
-            Optional<IList<ApplicationGatewayBackendAddressPool>> applicationGatewayBackendAddressPools = default;
-            Optional<IList<BackendAddressPool>> loadBalancerBackendAddressPools = default;
-            Optional<IList<InboundNatRule>> loadBalancerInboundNatRules = default;
+            IList<VirtualNetworkTap> virtualNetworkTaps = default;
+            IList<ApplicationGatewayBackendAddressPool> applicationGatewayBackendAddressPools = default;
+            IList<BackendAddressPool> loadBalancerBackendAddressPools = default;
+            IList<InboundNatRule> loadBalancerInboundNatRules = default;
             Optional<string> privateIPAddress = default;
             Optional<IPAllocationMethod> privateIPAllocationMethod = default;
             Optional<IPVersion> privateIPAddressVersion = default;
             Optional<Subnet> subnet = default;
             Optional<bool> primary = default;
             Optional<PublicIPAddress> publicIPAddress = default;
-            Optional<IList<ApplicationSecurityGroup>> applicationSecurityGroups = default;
+            IList<ApplicationSecurityGroup> applicationSecurityGroups = default;
             Optional<ProvisioningState> provisioningState = default;
             Optional<NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties> privateLinkConnectionProperties = default;
             foreach (var property in element.EnumerateObject())
@@ -302,7 +302,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new NetworkInterfaceIPConfiguration(id.Value, name.Value, etag.Value, Optional.ToList(virtualNetworkTaps), Optional.ToList(applicationGatewayBackendAddressPools), Optional.ToList(loadBalancerBackendAddressPools), Optional.ToList(loadBalancerInboundNatRules), privateIPAddress.Value, Optional.ToNullable(privateIPAllocationMethod), Optional.ToNullable(privateIPAddressVersion), subnet.Value, Optional.ToNullable(primary), publicIPAddress.Value, Optional.ToList(applicationSecurityGroups), Optional.ToNullable(provisioningState), privateLinkConnectionProperties.Value);
+            return new NetworkInterfaceIPConfiguration(id.Value, name.Value, etag.Value, virtualNetworkTaps ?? new ChangeTrackingList<VirtualNetworkTap>(), applicationGatewayBackendAddressPools ?? new ChangeTrackingList<ApplicationGatewayBackendAddressPool>(), loadBalancerBackendAddressPools ?? new ChangeTrackingList<BackendAddressPool>(), loadBalancerInboundNatRules ?? new ChangeTrackingList<InboundNatRule>(), privateIPAddress.Value, Optional.ToNullable(privateIPAllocationMethod), Optional.ToNullable(privateIPAddressVersion), subnet.Value, Optional.ToNullable(primary), publicIPAddress.Value, applicationSecurityGroups ?? new ChangeTrackingList<ApplicationSecurityGroup>(), Optional.ToNullable(provisioningState), privateLinkConnectionProperties.Value);
         }
     }
 }

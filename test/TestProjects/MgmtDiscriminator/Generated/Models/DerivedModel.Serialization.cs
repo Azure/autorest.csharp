@@ -35,7 +35,7 @@ namespace MgmtDiscriminator.Models
                 writer.WriteStringValue(item);
             }
             writer.WriteEndArray();
-            if (Optional.IsDefined(OptionalString))
+            if (OptionalString != null)
             {
                 writer.WritePropertyName("optionalString"u8);
                 writer.WriteStringValue(OptionalString);
@@ -140,7 +140,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            if (Optional.IsDefined(OptionalString))
+            if (OptionalString != null)
             {
                 builder.Append("  optionalString:");
                 if (OptionalString.Contains(Environment.NewLine))
