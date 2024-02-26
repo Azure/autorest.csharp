@@ -906,15 +906,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 if (jsonProperty.SerializedType is { } type)
                 {
                     var propertyDeclaration = new CodeWriterDeclaration(jsonProperty.SerializedName.ToVariableName());
-                    if (!jsonProperty.IsRequired && !TypeFactory.IsCollectionType(type))
-                    {
-                        if (type.IsFrameworkType && type.FrameworkType == typeof(Nullable<>))
-                        {
-                            type = new CSharpType(type.Arguments[0].FrameworkType);
-                        }
-                        type = new CSharpType(Configuration.ApiTypes.OptionalPropertyType, type);
-                    }
-
                     propertyVariables.Add(jsonProperty, new VariableReference(type, propertyDeclaration));
                 }
                 else if (jsonProperty.PropertySerializations != null)
@@ -1110,24 +1101,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private static ValueExpression GetOptional(PropertySerialization jsonPropertySerialization, TypedValueExpression variable)
         {
             var sourceType = variable.Type;
-            if (!sourceType.IsFrameworkType)
+            if (!sourceType.IsFrameworkType || jsonPropertySerialization.SerializationConstructorParameterName == "serializedAdditionalRawData")
             {
                 return variable;
-            }
-
-            var targetType = jsonPropertySerialization.Value.Type;
-
-            if (sourceType.FrameworkType == Configuration.ApiTypes.OptionalPropertyType)
-            {
-                if (targetType is { IsValueType: true, IsNullable: true })
-                {
-                    return InvokeOptional.ToNullable(variable);
-                }
-
-                if (targetType.IsNullable)
-                {
-                    return new MemberExpression(variable, "Value");
-                }
             }
             else if (!jsonPropertySerialization.IsRequired)
             {

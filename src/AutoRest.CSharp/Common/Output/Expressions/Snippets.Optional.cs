@@ -52,8 +52,6 @@ namespace AutoRest.CSharp.Common.Output.Models
                 return NullCoalescing(collection, New.Instance(changeTrackingType));
             }
 
-            public static ValueExpression ToNullable(ValueExpression optional) => new InvokeStaticMethodExpression(Configuration.ApiTypes.OptionalType, Configuration.ApiTypes.OptionalToNullableName, new[] { optional });
-
             public static MethodBodyStatement WrapInIsDefined(PropertySerialization serialization, MethodBodyStatement statement, bool isBicep = false)
             {
                 //bicep shares its serialization types with JsonSerialization so we need the additional bool to know if we are serializing bicep.
