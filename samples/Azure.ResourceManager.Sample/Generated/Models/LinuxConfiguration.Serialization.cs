@@ -80,9 +80,9 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<bool> disablePasswordAuthentication = default;
-            Optional<SshConfiguration> ssh = default;
-            Optional<bool> provisionVmAgent = default;
+            bool disablePasswordAuthentication = default;
+            SshConfiguration ssh = default;
+            bool provisionVmAgent = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -120,7 +120,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new LinuxConfiguration(Optional.ToNullable(disablePasswordAuthentication), ssh.Value, Optional.ToNullable(provisionVmAgent), serializedAdditionalRawData);
+            return new LinuxConfiguration(disablePasswordAuthentication, ssh, provisionVmAgent, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

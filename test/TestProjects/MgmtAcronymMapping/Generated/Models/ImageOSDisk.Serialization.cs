@@ -67,13 +67,13 @@ namespace MgmtAcronymMapping.Models
             }
             OperatingSystemType osType = default;
             OperatingSystemStateType osState = default;
-            Optional<WritableSubResource> snapshot = default;
-            Optional<WritableSubResource> managedDisk = default;
-            Optional<Uri> blobUri = default;
-            Optional<CachingType> caching = default;
-            Optional<int> diskSizeGB = default;
-            Optional<StorageAccountType> storageAccountType = default;
-            Optional<WritableSubResource> diskEncryptionSet = default;
+            WritableSubResource snapshot = default;
+            WritableSubResource managedDisk = default;
+            Uri blobUri = default;
+            CachingType caching = default;
+            int diskSizeGB = default;
+            StorageAccountType storageAccountType = default;
+            WritableSubResource diskEncryptionSet = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("osType"u8))
@@ -153,10 +153,10 @@ namespace MgmtAcronymMapping.Models
             return new ImageOSDisk(
                 snapshot,
                 managedDisk,
-                blobUri.Value,
-                Optional.ToNullable(caching),
-                Optional.ToNullable(diskSizeGB),
-                Optional.ToNullable(storageAccountType),
+                blobUri,
+                caching,
+                diskSizeGB,
+                storageAccountType,
                 diskEncryptionSet,
                 osType,
                 osState);

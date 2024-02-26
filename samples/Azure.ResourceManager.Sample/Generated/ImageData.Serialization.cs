@@ -130,11 +130,11 @@ namespace Azure.ResourceManager.Sample
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
-            Optional<WritableSubResource> sourceVirtualMachine = default;
-            Optional<ImageStorageProfile> storageProfile = default;
-            Optional<string> provisioningState = default;
-            Optional<HyperVGeneration> hyperVGeneration = default;
+            SystemData systemData = default;
+            WritableSubResource sourceVirtualMachine = default;
+            ImageStorageProfile storageProfile = default;
+            string provisioningState = default;
+            HyperVGeneration hyperVGeneration = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -236,13 +236,13 @@ namespace Azure.ResourceManager.Sample
                 id,
                 name,
                 type,
-                systemData.Value,
+                systemData,
                 tags ?? new ChangeTrackingDictionary<string, string>(),
                 location,
                 sourceVirtualMachine,
-                storageProfile.Value,
-                provisioningState.Value,
-                Optional.ToNullable(hyperVGeneration),
+                storageProfile,
+                provisioningState,
+                hyperVGeneration,
                 serializedAdditionalRawData);
         }
 

@@ -120,17 +120,17 @@ namespace Azure.ResourceManager.Sample.Models
                 return null;
             }
             int lun = default;
-            Optional<string> name = default;
-            Optional<VirtualHardDisk> vhd = default;
-            Optional<VirtualHardDisk> image = default;
-            Optional<CachingType> caching = default;
-            Optional<bool> writeAcceleratorEnabled = default;
+            string name = default;
+            VirtualHardDisk vhd = default;
+            VirtualHardDisk image = default;
+            CachingType caching = default;
+            bool writeAcceleratorEnabled = default;
             DiskCreateOptionType createOption = default;
-            Optional<int> diskSizeGB = default;
-            Optional<ManagedDiskParameters> managedDisk = default;
-            Optional<bool> toBeDetached = default;
-            Optional<long> diskIOPSReadWrite = default;
-            Optional<long> diskMBpsReadWrite = default;
+            int diskSizeGB = default;
+            ManagedDiskParameters managedDisk = default;
+            bool toBeDetached = default;
+            long diskIOPSReadWrite = default;
+            long diskMBpsReadWrite = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -239,17 +239,17 @@ namespace Azure.ResourceManager.Sample.Models
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new DataDisk(
                 lun,
-                name.Value,
-                vhd.Value,
-                image.Value,
-                Optional.ToNullable(caching),
-                Optional.ToNullable(writeAcceleratorEnabled),
+                name,
+                vhd,
+                image,
+                caching,
+                writeAcceleratorEnabled,
                 createOption,
-                Optional.ToNullable(diskSizeGB),
-                managedDisk.Value,
-                Optional.ToNullable(toBeDetached),
-                Optional.ToNullable(diskIOPSReadWrite),
-                Optional.ToNullable(diskMBpsReadWrite),
+                diskSizeGB,
+                managedDisk,
+                toBeDetached,
+                diskIOPSReadWrite,
+                diskMBpsReadWrite,
                 serializedAdditionalRawData);
         }
 

@@ -33,7 +33,7 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            Optional<int> maxTokenLength = default;
+            int maxTokenLength = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
@@ -58,7 +58,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new UaxUrlEmailTokenizer(odataType, name, Optional.ToNullable(maxTokenLength));
+            return new UaxUrlEmailTokenizer(odataType, name, maxTokenLength);
         }
     }
 }

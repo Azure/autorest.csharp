@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace MgmtHierarchicalNonResource.Models
 {
@@ -18,8 +17,8 @@ namespace MgmtHierarchicalNonResource.Models
             {
                 return null;
             }
-            Optional<int> min = default;
-            Optional<int> max = default;
+            int min = default;
+            int max = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("min"u8))
@@ -41,7 +40,7 @@ namespace MgmtHierarchicalNonResource.Models
                     continue;
                 }
             }
-            return new ResourceRange(Optional.ToNullable(min), Optional.ToNullable(max));
+            return new ResourceRange(min, max);
         }
     }
 }

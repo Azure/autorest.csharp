@@ -27,7 +27,7 @@ namespace Azure.ResourceManager.Fake.Models
             {
                 return null;
             }
-            Optional<ResourceIdentifier> id = default;
+            ResourceIdentifier id = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))

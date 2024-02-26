@@ -51,16 +51,16 @@ namespace MgmtMockAndSample
             {
                 return null;
             }
-            Optional<string> etag = default;
-            Optional<AzureLocation> location = default;
+            string etag = default;
+            AzureLocation location = default;
             IReadOnlyDictionary<string, string> tags = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
-            Optional<Azure.ResourceManager.Resources.Models.SubResource> privateEndpoint = default;
-            Optional<MgmtMockAndSamplePrivateLinkServiceConnectionState> privateLinkServiceConnectionState = default;
-            Optional<MgmtMockAndSamplePrivateEndpointConnectionProvisioningState> provisioningState = default;
+            SystemData systemData = default;
+            Azure.ResourceManager.Resources.Models.SubResource privateEndpoint = default;
+            MgmtMockAndSamplePrivateLinkServiceConnectionState privateLinkServiceConnectionState = default;
+            MgmtMockAndSamplePrivateEndpointConnectionProvisioningState provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"u8))
@@ -159,12 +159,12 @@ namespace MgmtMockAndSample
                 id,
                 name,
                 type,
-                systemData.Value,
-                etag.Value,
+                systemData,
+                etag,
                 privateEndpoint,
-                privateLinkServiceConnectionState.Value,
-                Optional.ToNullable(provisioningState),
-                Optional.ToNullable(location),
+                privateLinkServiceConnectionState,
+                provisioningState,
+                location,
                 tags ?? new ChangeTrackingDictionary<string, string>());
         }
     }

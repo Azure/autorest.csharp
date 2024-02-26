@@ -20,11 +20,11 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<string> mhsmId = default;
-            Optional<AzureLocation> location = default;
-            Optional<DateTimeOffset> deletionDate = default;
-            Optional<DateTimeOffset> scheduledPurgeDate = default;
-            Optional<bool> purgeProtectionEnabled = default;
+            string mhsmId = default;
+            AzureLocation location = default;
+            DateTimeOffset deletionDate = default;
+            DateTimeOffset scheduledPurgeDate = default;
+            bool purgeProtectionEnabled = default;
             IReadOnlyDictionary<string, string> tags = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -85,11 +85,11 @@ namespace MgmtMockAndSample.Models
                 }
             }
             return new DeletedManagedHsmProperties(
-                mhsmId.Value,
-                Optional.ToNullable(location),
-                Optional.ToNullable(deletionDate),
-                Optional.ToNullable(scheduledPurgeDate),
-                Optional.ToNullable(purgeProtectionEnabled),
+                mhsmId,
+                location,
+                deletionDate,
+                scheduledPurgeDate,
+                purgeProtectionEnabled,
                 tags ?? new ChangeTrackingDictionary<string, string>());
         }
     }

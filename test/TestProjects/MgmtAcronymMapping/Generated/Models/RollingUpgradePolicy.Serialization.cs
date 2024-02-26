@@ -44,10 +44,10 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<int> maxBatchInstancePercent = default;
-            Optional<int> maxUnhealthyInstancePercent = default;
-            Optional<int> maxUnhealthyUpgradedInstancePercent = default;
-            Optional<string> pauseTimeBetweenBatches = default;
+            int maxBatchInstancePercent = default;
+            int maxUnhealthyInstancePercent = default;
+            int maxUnhealthyUpgradedInstancePercent = default;
+            string pauseTimeBetweenBatches = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("maxBatchInstancePercent"u8))
@@ -83,7 +83,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new RollingUpgradePolicy(Optional.ToNullable(maxBatchInstancePercent), Optional.ToNullable(maxUnhealthyInstancePercent), Optional.ToNullable(maxUnhealthyUpgradedInstancePercent), pauseTimeBetweenBatches.Value);
+            return new RollingUpgradePolicy(maxBatchInstancePercent, maxUnhealthyInstancePercent, maxUnhealthyUpgradedInstancePercent, pauseTimeBetweenBatches);
         }
     }
 }

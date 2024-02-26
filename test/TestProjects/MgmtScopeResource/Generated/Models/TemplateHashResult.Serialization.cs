@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace MgmtScopeResource.Models
 {
@@ -18,8 +17,8 @@ namespace MgmtScopeResource.Models
             {
                 return null;
             }
-            Optional<string> minifiedTemplate = default;
-            Optional<string> templateHash = default;
+            string minifiedTemplate = default;
+            string templateHash = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("minifiedTemplate"u8))
@@ -33,7 +32,7 @@ namespace MgmtScopeResource.Models
                     continue;
                 }
             }
-            return new TemplateHashResult(minifiedTemplate.Value, templateHash.Value);
+            return new TemplateHashResult(minifiedTemplate, templateHash);
         }
     }
 }

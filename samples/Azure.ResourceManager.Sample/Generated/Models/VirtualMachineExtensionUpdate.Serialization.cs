@@ -133,14 +133,14 @@ namespace Azure.ResourceManager.Sample.Models
                 return null;
             }
             IDictionary<string, string> tags = default;
-            Optional<string> forceUpdateTag = default;
-            Optional<string> publisher = default;
-            Optional<string> type = default;
-            Optional<string> typeHandlerVersion = default;
-            Optional<bool> autoUpgradeMinorVersion = default;
-            Optional<bool> enableAutomaticUpgrade = default;
-            Optional<BinaryData> settings = default;
-            Optional<BinaryData> protectedSettings = default;
+            string forceUpdateTag = default;
+            string publisher = default;
+            string type = default;
+            string typeHandlerVersion = default;
+            bool autoUpgradeMinorVersion = default;
+            bool enableAutomaticUpgrade = default;
+            BinaryData settings = default;
+            BinaryData protectedSettings = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -236,14 +236,14 @@ namespace Azure.ResourceManager.Sample.Models
             return new VirtualMachineExtensionUpdate(
                 tags ?? new ChangeTrackingDictionary<string, string>(),
                 serializedAdditionalRawData,
-                forceUpdateTag.Value,
-                publisher.Value,
-                type.Value,
-                typeHandlerVersion.Value,
-                Optional.ToNullable(autoUpgradeMinorVersion),
-                Optional.ToNullable(enableAutomaticUpgrade),
-                settings.Value,
-                protectedSettings.Value);
+                forceUpdateTag,
+                publisher,
+                type,
+                typeHandlerVersion,
+                autoUpgradeMinorVersion,
+                enableAutomaticUpgrade,
+                settings,
+                protectedSettings);
         }
 
         BinaryData IPersistableModel<VirtualMachineExtensionUpdate>.Write(ModelReaderWriterOptions options)

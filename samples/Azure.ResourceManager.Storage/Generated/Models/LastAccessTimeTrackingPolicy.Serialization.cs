@@ -48,8 +48,8 @@ namespace Azure.ResourceManager.Storage.Models
                 return null;
             }
             bool enable = default;
-            Optional<Name> name = default;
-            Optional<int> trackingGranularityInDays = default;
+            Name name = default;
+            int trackingGranularityInDays = default;
             IList<string> blobType = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -91,7 +91,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new LastAccessTimeTrackingPolicy(enable, Optional.ToNullable(name), Optional.ToNullable(trackingGranularityInDays), blobType ?? new ChangeTrackingList<string>());
+            return new LastAccessTimeTrackingPolicy(enable, name, trackingGranularityInDays, blobType ?? new ChangeTrackingList<string>());
         }
     }
 }

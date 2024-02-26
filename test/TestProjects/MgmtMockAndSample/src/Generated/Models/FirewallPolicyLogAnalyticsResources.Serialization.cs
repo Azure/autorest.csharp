@@ -42,7 +42,7 @@ namespace MgmtMockAndSample.Models
                 return null;
             }
             IList<FirewallPolicyLogAnalyticsWorkspace> workspaces = default;
-            Optional<WritableSubResource> defaultWorkspaceId = default;
+            WritableSubResource defaultWorkspaceId = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("workspaces"u8))

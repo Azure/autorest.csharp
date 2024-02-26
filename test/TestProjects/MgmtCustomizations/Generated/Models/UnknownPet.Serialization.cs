@@ -35,9 +35,9 @@ namespace MgmtCustomizations.Models
                 return null;
             }
             PetKind kind = default;
-            Optional<string> name = default;
-            Optional<int> size = default;
-            Optional<DateTimeOffset> dateOfBirth = default;
+            string name = default;
+            int size = default;
+            DateTimeOffset dateOfBirth = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("kind"u8))
@@ -65,7 +65,7 @@ namespace MgmtCustomizations.Models
                     continue;
                 }
             }
-            return new UnknownPet(kind, name.Value, size, Optional.ToNullable(dateOfBirth));
+            return new UnknownPet(kind, name, size, dateOfBirth);
         }
     }
 }

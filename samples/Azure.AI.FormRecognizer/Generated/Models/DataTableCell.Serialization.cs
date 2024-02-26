@@ -21,14 +21,14 @@ namespace Azure.AI.FormRecognizer.Models
             }
             int rowIndex = default;
             int columnIndex = default;
-            Optional<int> rowSpan = default;
-            Optional<int> columnSpan = default;
+            int rowSpan = default;
+            int columnSpan = default;
             string text = default;
             IReadOnlyList<float> boundingBox = default;
             float confidence = default;
             IReadOnlyList<string> elements = default;
-            Optional<bool> isHeader = default;
-            Optional<bool> isFooter = default;
+            bool isHeader = default;
+            bool isFooter = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("rowIndex"u8))
@@ -115,14 +115,14 @@ namespace Azure.AI.FormRecognizer.Models
             return new DataTableCell(
                 rowIndex,
                 columnIndex,
-                Optional.ToNullable(rowSpan),
-                Optional.ToNullable(columnSpan),
+                rowSpan,
+                columnSpan,
                 text,
                 boundingBox,
                 confidence,
                 elements ?? new ChangeTrackingList<string>(),
-                Optional.ToNullable(isHeader),
-                Optional.ToNullable(isFooter));
+                isHeader,
+                isFooter);
         }
     }
 }

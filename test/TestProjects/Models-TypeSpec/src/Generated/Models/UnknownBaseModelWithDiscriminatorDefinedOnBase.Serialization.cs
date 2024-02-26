@@ -72,7 +72,7 @@ namespace ModelsTypeSpec.Models
             {
                 return null;
             }
-            Optional<string> optionalString = default;
+            string optionalString = default;
             string kind = "Unknown";
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -94,7 +94,7 @@ namespace ModelsTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new UnknownBaseModelWithDiscriminatorDefinedOnBase(kind, serializedAdditionalRawData, optionalString.Value);
+            return new UnknownBaseModelWithDiscriminatorDefinedOnBase(kind, serializedAdditionalRawData, optionalString);
         }
 
         BinaryData IPersistableModel<BaseModelWithDiscriminatorDefinedOnBase>.Write(ModelReaderWriterOptions options)

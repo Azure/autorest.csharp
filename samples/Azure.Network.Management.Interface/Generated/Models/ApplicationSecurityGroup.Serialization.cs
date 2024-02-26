@@ -49,14 +49,14 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> etag = default;
-            Optional<string> id = default;
-            Optional<string> name = default;
-            Optional<string> type = default;
-            Optional<string> location = default;
+            string etag = default;
+            string id = default;
+            string name = default;
+            string type = default;
+            string location = default;
             IDictionary<string, string> tags = default;
-            Optional<string> resourceGuid = default;
-            Optional<ProvisioningState> provisioningState = default;
+            string resourceGuid = default;
+            ProvisioningState provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"u8))
@@ -126,14 +126,14 @@ namespace Azure.Network.Management.Interface.Models
                 }
             }
             return new ApplicationSecurityGroup(
-                id.Value,
-                name.Value,
-                type.Value,
-                location.Value,
+                id,
+                name,
+                type,
+                location,
                 tags ?? new ChangeTrackingDictionary<string, string>(),
-                etag.Value,
-                resourceGuid.Value,
-                Optional.ToNullable(provisioningState));
+                etag,
+                resourceGuid,
+                provisioningState);
         }
     }
 }

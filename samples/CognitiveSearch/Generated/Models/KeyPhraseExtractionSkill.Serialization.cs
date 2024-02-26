@@ -73,12 +73,12 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            Optional<KeyPhraseExtractionSkillLanguage> defaultLanguageCode = default;
-            Optional<int?> maxKeyPhraseCount = default;
+            KeyPhraseExtractionSkillLanguage defaultLanguageCode = default;
+            int? maxKeyPhraseCount = default;
             string odataType = default;
-            Optional<string> name = default;
-            Optional<string> description = default;
-            Optional<string> context = default;
+            string name = default;
+            string description = default;
+            string context = default;
             IList<InputFieldMappingEntry> inputs = default;
             IList<OutputFieldMappingEntry> outputs = default;
             foreach (var property in element.EnumerateObject())
@@ -145,13 +145,13 @@ namespace CognitiveSearch.Models
             }
             return new KeyPhraseExtractionSkill(
                 odataType,
-                name.Value,
-                description.Value,
-                context.Value,
+                name,
+                description,
+                context,
                 inputs,
                 outputs,
-                Optional.ToNullable(defaultLanguageCode),
-                Optional.ToNullable(maxKeyPhraseCount));
+                defaultLanguageCode,
+                maxKeyPhraseCount);
         }
     }
 }

@@ -38,8 +38,8 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            Optional<int> maxTokenCount = default;
-            Optional<bool> consumeAllTokens = default;
+            int maxTokenCount = default;
+            bool consumeAllTokens = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
@@ -73,7 +73,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new LimitTokenFilter(odataType, name, Optional.ToNullable(maxTokenCount), Optional.ToNullable(consumeAllTokens));
+            return new LimitTokenFilter(odataType, name, maxTokenCount, consumeAllTokens);
         }
     }
 }

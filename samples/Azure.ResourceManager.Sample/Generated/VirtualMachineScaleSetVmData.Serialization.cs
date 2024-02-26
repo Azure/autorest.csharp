@@ -220,9 +220,9 @@ namespace Azure.ResourceManager.Sample
             {
                 return null;
             }
-            Optional<string> instanceId = default;
-            Optional<SampleSku> sku = default;
-            Optional<SamplePlan> plan = default;
+            string instanceId = default;
+            SampleSku sku = default;
+            SamplePlan plan = default;
             IReadOnlyList<VirtualMachineExtensionData> resources = default;
             IReadOnlyList<string> zones = default;
             IDictionary<string, string> tags = default;
@@ -230,23 +230,23 @@ namespace Azure.ResourceManager.Sample
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
-            Optional<bool> latestModelApplied = default;
-            Optional<string> vmId = default;
-            Optional<VirtualMachineScaleSetVmInstanceView> instanceView = default;
-            Optional<HardwareProfile> hardwareProfile = default;
-            Optional<StorageProfile> storageProfile = default;
-            Optional<AdditionalCapabilities> additionalCapabilities = default;
-            Optional<OSProfile> osProfile = default;
-            Optional<SecurityProfile> securityProfile = default;
-            Optional<NetworkProfile> networkProfile = default;
-            Optional<VirtualMachineScaleSetVmNetworkProfileConfiguration> networkProfileConfiguration = default;
-            Optional<DiagnosticsProfile> diagnosticsProfile = default;
-            Optional<WritableSubResource> availabilitySet = default;
-            Optional<string> provisioningState = default;
-            Optional<string> licenseType = default;
-            Optional<string> modelDefinitionApplied = default;
-            Optional<VirtualMachineScaleSetVmProtectionPolicy> protectionPolicy = default;
+            SystemData systemData = default;
+            bool latestModelApplied = default;
+            string vmId = default;
+            VirtualMachineScaleSetVmInstanceView instanceView = default;
+            HardwareProfile hardwareProfile = default;
+            StorageProfile storageProfile = default;
+            AdditionalCapabilities additionalCapabilities = default;
+            OSProfile osProfile = default;
+            SecurityProfile securityProfile = default;
+            NetworkProfile networkProfile = default;
+            VirtualMachineScaleSetVmNetworkProfileConfiguration networkProfileConfiguration = default;
+            DiagnosticsProfile diagnosticsProfile = default;
+            WritableSubResource availabilitySet = default;
+            string provisioningState = default;
+            string licenseType = default;
+            string modelDefinitionApplied = default;
+            VirtualMachineScaleSetVmProtectionPolicy protectionPolicy = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -495,30 +495,30 @@ namespace Azure.ResourceManager.Sample
                 id,
                 name,
                 type,
-                systemData.Value,
+                systemData,
                 tags ?? new ChangeTrackingDictionary<string, string>(),
                 location,
-                instanceId.Value,
-                sku.Value,
-                plan.Value,
+                instanceId,
+                sku,
+                plan,
                 resources ?? new ChangeTrackingList<VirtualMachineExtensionData>(),
                 zones ?? new ChangeTrackingList<string>(),
-                Optional.ToNullable(latestModelApplied),
-                vmId.Value,
-                instanceView.Value,
-                hardwareProfile.Value,
-                storageProfile.Value,
-                additionalCapabilities.Value,
-                osProfile.Value,
-                securityProfile.Value,
-                networkProfile.Value,
-                networkProfileConfiguration.Value,
-                diagnosticsProfile.Value,
+                latestModelApplied,
+                vmId,
+                instanceView,
+                hardwareProfile,
+                storageProfile,
+                additionalCapabilities,
+                osProfile,
+                securityProfile,
+                networkProfile,
+                networkProfileConfiguration,
+                diagnosticsProfile,
                 availabilitySet,
-                provisioningState.Value,
-                licenseType.Value,
-                modelDefinitionApplied.Value,
-                protectionPolicy.Value,
+                provisioningState,
+                licenseType,
+                modelDefinitionApplied,
+                protectionPolicy,
                 serializedAdditionalRawData);
         }
 

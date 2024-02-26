@@ -52,11 +52,11 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<FirewallPolicyFilterRuleCollectionAction> action = default;
+            FirewallPolicyFilterRuleCollectionAction action = default;
             IList<FirewallPolicyRule> rules = default;
             FirewallPolicyRuleCollectionType ruleCollectionType = default;
-            Optional<string> name = default;
-            Optional<int> priority = default;
+            string name = default;
+            int priority = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("action"u8))
@@ -102,7 +102,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new FirewallPolicyFilterRuleCollection(ruleCollectionType, name.Value, Optional.ToNullable(priority), action.Value, rules ?? new ChangeTrackingList<FirewallPolicyRule>());
+            return new FirewallPolicyFilterRuleCollection(ruleCollectionType, name, priority, action, rules ?? new ChangeTrackingList<FirewallPolicyRule>());
         }
     }
 }

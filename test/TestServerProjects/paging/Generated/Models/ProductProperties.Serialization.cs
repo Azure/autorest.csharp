@@ -74,8 +74,8 @@ namespace paging.Models
             {
                 return null;
             }
-            Optional<int> id = default;
-            Optional<string> name = default;
+            int id = default;
+            string name = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -100,7 +100,7 @@ namespace paging.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ProductProperties(Optional.ToNullable(id), name.Value, serializedAdditionalRawData);
+            return new ProductProperties(id, name, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ProductProperties>.Write(ModelReaderWriterOptions options)

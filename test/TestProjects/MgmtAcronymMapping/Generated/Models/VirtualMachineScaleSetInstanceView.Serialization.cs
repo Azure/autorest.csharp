@@ -19,7 +19,7 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<VirtualMachineScaleSetInstanceViewStatusesSummary> virtualMachine = default;
+            VirtualMachineScaleSetInstanceViewStatusesSummary virtualMachine = default;
             IReadOnlyList<VirtualMachineScaleSetVmExtensionsSummary> extensions = default;
             IReadOnlyList<InstanceViewStatus> statuses = default;
             IReadOnlyList<OrchestrationServiceSummary> orchestrationServices = default;
@@ -77,7 +77,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetInstanceView(virtualMachine.Value, extensions ?? new ChangeTrackingList<VirtualMachineScaleSetVmExtensionsSummary>(), statuses ?? new ChangeTrackingList<InstanceViewStatus>(), orchestrationServices ?? new ChangeTrackingList<OrchestrationServiceSummary>());
+            return new VirtualMachineScaleSetInstanceView(virtualMachine, extensions ?? new ChangeTrackingList<VirtualMachineScaleSetVmExtensionsSummary>(), statuses ?? new ChangeTrackingList<InstanceViewStatus>(), orchestrationServices ?? new ChangeTrackingList<OrchestrationServiceSummary>());
         }
     }
 }

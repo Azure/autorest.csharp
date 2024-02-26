@@ -147,16 +147,16 @@ namespace MgmtExpandResourceTypes
             {
                 return null;
             }
-            Optional<string> etag = default;
+            string etag = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
+            SystemData systemData = default;
             IDictionary<string, string> metadata = default;
-            Optional<long> ttl = default;
-            Optional<string> fqdn = default;
-            Optional<string> provisioningState = default;
-            Optional<WritableSubResource> targetResource = default;
+            long ttl = default;
+            string fqdn = default;
+            string provisioningState = default;
+            WritableSubResource targetResource = default;
             IList<ARecord> aRecords = default;
             IList<AaaaRecord> aaaaRecords = default;
             IList<MxRecord> mxRecords = default;
@@ -164,8 +164,8 @@ namespace MgmtExpandResourceTypes
             IList<PtrRecord> ptrRecords = default;
             IList<SrvRecord> srvRecords = default;
             IList<TxtRecord> txtRecords = default;
-            Optional<CnameRecord> cnameRecord = default;
-            Optional<SoaRecord> soaRecord = default;
+            CnameRecord cnameRecord = default;
+            SoaRecord soaRecord = default;
             IList<CaaRecord> caaRecords = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -387,12 +387,12 @@ namespace MgmtExpandResourceTypes
                 id,
                 name,
                 type,
-                systemData.Value,
-                etag.Value,
+                systemData,
+                etag,
                 metadata ?? new ChangeTrackingDictionary<string, string>(),
-                Optional.ToNullable(ttl),
-                fqdn.Value,
-                provisioningState.Value,
+                ttl,
+                fqdn,
+                provisioningState,
                 targetResource,
                 aRecords ?? new ChangeTrackingList<ARecord>(),
                 aaaaRecords ?? new ChangeTrackingList<AaaaRecord>(),
@@ -401,8 +401,8 @@ namespace MgmtExpandResourceTypes
                 ptrRecords ?? new ChangeTrackingList<PtrRecord>(),
                 srvRecords ?? new ChangeTrackingList<SrvRecord>(),
                 txtRecords ?? new ChangeTrackingList<TxtRecord>(),
-                cnameRecord.Value,
-                soaRecord.Value,
+                cnameRecord,
+                soaRecord,
                 caaRecords ?? new ChangeTrackingList<CaaRecord>());
         }
     }

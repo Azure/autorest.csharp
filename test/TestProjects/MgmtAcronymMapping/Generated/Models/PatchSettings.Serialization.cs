@@ -29,7 +29,7 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<InGuestPatchMode> patchMode = default;
+            InGuestPatchMode patchMode = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("patchMode"u8))
@@ -42,7 +42,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new PatchSettings(Optional.ToNullable(patchMode));
+            return new PatchSettings(patchMode);
         }
     }
 }

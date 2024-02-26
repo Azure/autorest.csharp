@@ -95,8 +95,8 @@ namespace SpreadTypeSpec.Models
                 return null;
             }
             string name = default;
-            Optional<string> color = default;
-            Optional<int> age = default;
+            string color = default;
+            int age = default;
             IList<int> items = default;
             IList<string> elements = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
@@ -154,8 +154,8 @@ namespace SpreadTypeSpec.Models
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new SpreadAliasWithOptionalPropsRequest(
                 name,
-                color.Value,
-                Optional.ToNullable(age),
+                color,
+                age,
                 items,
                 elements ?? new ChangeTrackingList<string>(),
                 serializedAdditionalRawData);

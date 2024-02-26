@@ -150,32 +150,32 @@ namespace MgmtExactMatchInheritance
             {
                 return null;
             }
-            Optional<string> @new = default;
+            string @new = default;
             IList<Uri> supportingUris = default;
-            Optional<Type1> type1 = default;
-            Optional<Type2> type2 = default;
-            Optional<IPAddress> type3 = default;
-            Optional<object> type4 = default;
-            Optional<DataFactoryElement<string>> type5 = default;
-            Optional<DataFactoryElement<double>> type6 = default;
-            Optional<DataFactoryElement<bool>> type7 = default;
-            Optional<DataFactoryElement<int>> type8 = default;
-            Optional<DataFactoryElement<BinaryData>> type9 = default;
-            Optional<DataFactoryElement<IList<SeparateClass>>> type10 = default;
-            Optional<DataFactoryElement<IList<string>>> type11 = default;
-            Optional<DataFactoryElement<IDictionary<string, string>>> type12 = default;
-            Optional<DataFactoryElement<IList<SeparateClass>>> type13 = default;
-            Optional<DataFactoryElement<DateTimeOffset>> type14 = default;
-            Optional<DataFactoryElement<TimeSpan>> type15 = default;
-            Optional<DataFactoryElement<Uri>> type16 = default;
-            Optional<DataFactoryLinkedServiceReference> type17 = default;
-            Optional<DataFactorySecretString> type18 = default;
-            Optional<DataFactoryKeyVaultSecretReference> type19 = default;
-            Optional<DataFactoryElement<IDictionary<string, BinaryData>>> type20 = default;
+            Type1 type1 = default;
+            Type2 type2 = default;
+            IPAddress type3 = default;
+            object type4 = default;
+            DataFactoryElement<string> type5 = default;
+            DataFactoryElement<double> type6 = default;
+            DataFactoryElement<bool> type7 = default;
+            DataFactoryElement<int> type8 = default;
+            DataFactoryElement<BinaryData> type9 = default;
+            DataFactoryElement<IList<SeparateClass>> type10 = default;
+            DataFactoryElement<IList<string>> type11 = default;
+            DataFactoryElement<IDictionary<string, string>> type12 = default;
+            DataFactoryElement<IList<SeparateClass>> type13 = default;
+            DataFactoryElement<DateTimeOffset> type14 = default;
+            DataFactoryElement<TimeSpan> type15 = default;
+            DataFactoryElement<Uri> type16 = default;
+            DataFactoryLinkedServiceReference type17 = default;
+            DataFactorySecretString type18 = default;
+            DataFactoryKeyVaultSecretReference type19 = default;
+            DataFactoryElement<IDictionary<string, BinaryData>> type20 = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
+            SystemData systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("new"u8))
@@ -413,29 +413,29 @@ namespace MgmtExactMatchInheritance
                 id,
                 name,
                 type,
-                systemData.Value,
-                @new.Value,
+                systemData,
+                @new,
                 supportingUris ?? new ChangeTrackingList<Uri>(),
-                Optional.ToNullable(type1),
-                Optional.ToNullable(type2),
-                type3.Value,
-                type4.Value,
-                type5.Value,
-                type6.Value,
-                type7.Value,
-                type8.Value,
-                type9.Value,
-                type10.Value,
-                type11.Value,
-                type12.Value,
-                type13.Value,
-                type14.Value,
-                type15.Value,
-                type16.Value,
+                type1,
+                type2,
+                type3,
+                type4,
+                type5,
+                type6,
+                type7,
+                type8,
+                type9,
+                type10,
+                type11,
+                type12,
+                type13,
+                type14,
+                type15,
+                type16,
                 type17,
                 type18,
                 type19,
-                type20.Value);
+                type20);
         }
     }
 }

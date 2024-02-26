@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
@@ -18,10 +17,10 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            Optional<int?> maxFieldsPerIndex = default;
-            Optional<int?> maxFieldNestingDepthPerIndex = default;
-            Optional<int?> maxComplexCollectionFieldsPerIndex = default;
-            Optional<int?> maxComplexObjectsInCollectionsPerDocument = default;
+            int? maxFieldsPerIndex = default;
+            int? maxFieldNestingDepthPerIndex = default;
+            int? maxComplexCollectionFieldsPerIndex = default;
+            int? maxComplexObjectsInCollectionsPerDocument = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("maxFieldsPerIndex"u8))
@@ -65,7 +64,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new ServiceLimits(Optional.ToNullable(maxFieldsPerIndex), Optional.ToNullable(maxFieldNestingDepthPerIndex), Optional.ToNullable(maxComplexCollectionFieldsPerIndex), Optional.ToNullable(maxComplexObjectsInCollectionsPerDocument));
+            return new ServiceLimits(maxFieldsPerIndex, maxFieldNestingDepthPerIndex, maxComplexCollectionFieldsPerIndex, maxComplexObjectsInCollectionsPerDocument);
         }
     }
 }

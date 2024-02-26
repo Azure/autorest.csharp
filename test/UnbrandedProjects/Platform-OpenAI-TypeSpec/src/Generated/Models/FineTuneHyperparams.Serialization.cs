@@ -88,9 +88,9 @@ namespace OpenAI.Models
             long batchSize = default;
             double promptLossWeight = default;
             double learningRateMultiplier = default;
-            OptionalProperty<bool> computeClassificationMetrics = default;
-            OptionalProperty<string> classificationPositiveClass = default;
-            OptionalProperty<long> classificationNClasses = default;
+            bool computeClassificationMetrics = default;
+            string classificationPositiveClass = default;
+            long classificationNClasses = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -149,9 +149,9 @@ namespace OpenAI.Models
                 batchSize,
                 promptLossWeight,
                 learningRateMultiplier,
-                OptionalProperty.ToNullable(computeClassificationMetrics),
-                classificationPositiveClass.Value,
-                OptionalProperty.ToNullable(classificationNClasses),
+                computeClassificationMetrics,
+                classificationPositiveClass,
+                classificationNClasses,
                 serializedAdditionalRawData);
         }
 

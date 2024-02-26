@@ -99,12 +99,12 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<CachingType> caching = default;
-            Optional<bool> writeAcceleratorEnabled = default;
-            Optional<int> diskSizeGB = default;
-            Optional<VirtualHardDisk> image = default;
+            CachingType caching = default;
+            bool writeAcceleratorEnabled = default;
+            int diskSizeGB = default;
+            VirtualHardDisk image = default;
             IList<string> vhdContainers = default;
-            Optional<VirtualMachineScaleSetManagedDiskParameters> managedDisk = default;
+            VirtualMachineScaleSetManagedDiskParameters managedDisk = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -175,12 +175,12 @@ namespace Azure.ResourceManager.Sample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new VirtualMachineScaleSetUpdateOSDisk(
-                Optional.ToNullable(caching),
-                Optional.ToNullable(writeAcceleratorEnabled),
-                Optional.ToNullable(diskSizeGB),
-                image.Value,
+                caching,
+                writeAcceleratorEnabled,
+                diskSizeGB,
+                image,
                 vhdContainers ?? new ChangeTrackingList<string>(),
-                managedDisk.Value,
+                managedDisk,
                 serializedAdditionalRawData);
         }
 

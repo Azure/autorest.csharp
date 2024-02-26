@@ -129,10 +129,10 @@ namespace MgmtMockAndSample.Models
             IList<string> targetUrls = default;
             IList<string> fqdnTags = default;
             IList<string> sourceIpGroups = default;
-            Optional<bool> terminateTLS = default;
+            bool terminateTLS = default;
             IList<string> webCategories = default;
-            Optional<string> name = default;
-            Optional<string> description = default;
+            string name = default;
+            string description = default;
             FirewallPolicyRuleType ruleType = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -274,8 +274,8 @@ namespace MgmtMockAndSample.Models
                 }
             }
             return new ApplicationRule(
-                name.Value,
-                description.Value,
+                name,
+                description,
                 ruleType,
                 sourceAddresses ?? new ChangeTrackingList<string>(),
                 destinationAddresses ?? new ChangeTrackingList<string>(),
@@ -284,7 +284,7 @@ namespace MgmtMockAndSample.Models
                 targetUrls ?? new ChangeTrackingList<string>(),
                 fqdnTags ?? new ChangeTrackingList<string>(),
                 sourceIpGroups ?? new ChangeTrackingList<string>(),
-                Optional.ToNullable(terminateTLS),
+                terminateTLS,
                 webCategories ?? new ChangeTrackingList<string>());
         }
     }

@@ -24,7 +24,7 @@ namespace Azure.AI.FormRecognizer.Models
             float width = default;
             float height = default;
             LengthUnit unit = default;
-            Optional<Language> language = default;
+            Language language = default;
             IReadOnlyList<TextLine> lines = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -83,7 +83,7 @@ namespace Azure.AI.FormRecognizer.Models
                 width,
                 height,
                 unit,
-                Optional.ToNullable(language),
+                language,
                 lines ?? new ChangeTrackingList<TextLine>());
         }
     }

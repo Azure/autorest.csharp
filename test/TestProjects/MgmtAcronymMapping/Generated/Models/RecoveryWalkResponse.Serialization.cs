@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -18,8 +17,8 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<bool> walkPerformed = default;
-            Optional<int> nextPlatformUpdateDomain = default;
+            bool walkPerformed = default;
+            int nextPlatformUpdateDomain = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("walkPerformed"u8))
@@ -41,7 +40,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new RecoveryWalkResponse(Optional.ToNullable(walkPerformed), Optional.ToNullable(nextPlatformUpdateDomain));
+            return new RecoveryWalkResponse(walkPerformed, nextPlatformUpdateDomain);
         }
     }
 }

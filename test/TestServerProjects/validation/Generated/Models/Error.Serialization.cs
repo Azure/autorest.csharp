@@ -79,9 +79,9 @@ namespace validation.Models
             {
                 return null;
             }
-            Optional<int> code = default;
-            Optional<string> message = default;
-            Optional<string> fields = default;
+            int code = default;
+            string message = default;
+            string fields = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -111,7 +111,7 @@ namespace validation.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Error(Optional.ToNullable(code), message.Value, fields.Value, serializedAdditionalRawData);
+            return new Error(code, message, fields, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<Error>.Write(ModelReaderWriterOptions options)

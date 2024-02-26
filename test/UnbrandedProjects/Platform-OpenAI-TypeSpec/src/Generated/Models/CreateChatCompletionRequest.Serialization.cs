@@ -214,17 +214,17 @@ namespace OpenAI.Models
             CreateChatCompletionRequestModel model = default;
             IList<ChatCompletionRequestMessage> messages = default;
             IList<ChatCompletionFunctions> functions = default;
-            OptionalProperty<BinaryData> functionCall = default;
-            OptionalProperty<double?> temperature = default;
-            OptionalProperty<double?> topP = default;
-            OptionalProperty<long?> n = default;
-            OptionalProperty<long?> maxTokens = default;
-            OptionalProperty<BinaryData> stop = default;
-            OptionalProperty<double?> presencePenalty = default;
-            OptionalProperty<double?> frequencyPenalty = default;
+            BinaryData functionCall = default;
+            double? temperature = default;
+            double? topP = default;
+            long? n = default;
+            long? maxTokens = default;
+            BinaryData stop = default;
+            double? presencePenalty = default;
+            double? frequencyPenalty = default;
             IDictionary<string, long> logitBias = default;
-            OptionalProperty<string> user = default;
-            OptionalProperty<bool?> stream = default;
+            string user = default;
+            bool? stream = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -375,17 +375,17 @@ namespace OpenAI.Models
                 model,
                 messages,
                 functions ?? new OptionalList<ChatCompletionFunctions>(),
-                functionCall.Value,
-                OptionalProperty.ToNullable(temperature),
-                OptionalProperty.ToNullable(topP),
-                OptionalProperty.ToNullable(n),
-                OptionalProperty.ToNullable(maxTokens),
-                stop.Value,
-                OptionalProperty.ToNullable(presencePenalty),
-                OptionalProperty.ToNullable(frequencyPenalty),
+                functionCall,
+                temperature,
+                topP,
+                n,
+                maxTokens,
+                stop,
+                presencePenalty,
+                frequencyPenalty,
                 logitBias ?? new OptionalDictionary<string, long>(),
-                user.Value,
-                OptionalProperty.ToNullable(stream),
+                user,
+                stream,
                 serializedAdditionalRawData);
         }
 

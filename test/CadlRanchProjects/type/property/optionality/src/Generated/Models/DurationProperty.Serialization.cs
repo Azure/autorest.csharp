@@ -70,7 +70,7 @@ namespace _Type.Property.Optionality.Models
             {
                 return null;
             }
-            Optional<TimeSpan> property = default;
+            TimeSpan property = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property0 in element.EnumerateObject())
@@ -90,7 +90,7 @@ namespace _Type.Property.Optionality.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DurationProperty(Optional.ToNullable(property), serializedAdditionalRawData);
+            return new DurationProperty(property, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<DurationProperty>.Write(ModelReaderWriterOptions options)

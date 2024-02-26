@@ -114,11 +114,11 @@ namespace OpenAI.Models
                 return null;
             }
             CreateEditRequestModel model = default;
-            OptionalProperty<string> input = default;
+            string input = default;
             string instruction = default;
-            OptionalProperty<long?> n = default;
-            OptionalProperty<double?> temperature = default;
-            OptionalProperty<double?> topP = default;
+            long? n = default;
+            double? temperature = default;
+            double? topP = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -181,11 +181,11 @@ namespace OpenAI.Models
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new CreateEditRequest(
                 model,
-                input.Value,
+                input,
                 instruction,
-                OptionalProperty.ToNullable(n),
-                OptionalProperty.ToNullable(temperature),
-                OptionalProperty.ToNullable(topP),
+                n,
+                temperature,
+                topP,
                 serializedAdditionalRawData);
         }
 

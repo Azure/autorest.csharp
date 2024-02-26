@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -18,9 +17,9 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<int> successfullyRolledbackInstanceCount = default;
-            Optional<int> failedRolledbackInstanceCount = default;
-            Optional<ApiError> rollbackError = default;
+            int successfullyRolledbackInstanceCount = default;
+            int failedRolledbackInstanceCount = default;
+            ApiError rollbackError = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("successfullyRolledbackInstanceCount"u8))
@@ -51,7 +50,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new RollbackStatusInfo(Optional.ToNullable(successfullyRolledbackInstanceCount), Optional.ToNullable(failedRolledbackInstanceCount), rollbackError.Value);
+            return new RollbackStatusInfo(successfullyRolledbackInstanceCount, failedRolledbackInstanceCount, rollbackError);
         }
     }
 }

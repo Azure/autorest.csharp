@@ -87,10 +87,10 @@ namespace OpenAI.Models
             }
             BinaryData file = default;
             CreateTranscriptionRequestModel model = default;
-            OptionalProperty<string> prompt = default;
-            OptionalProperty<CreateTranscriptionRequestResponseFormat> responseFormat = default;
-            OptionalProperty<double> temperature = default;
-            OptionalProperty<string> language = default;
+            string prompt = default;
+            CreateTranscriptionRequestResponseFormat responseFormat = default;
+            double temperature = default;
+            string language = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -142,10 +142,10 @@ namespace OpenAI.Models
             return new CreateTranscriptionRequest(
                 file,
                 model,
-                prompt.Value,
-                OptionalProperty.ToNullable(responseFormat),
-                OptionalProperty.ToNullable(temperature),
-                language.Value,
+                prompt,
+                responseFormat,
+                temperature,
+                language,
                 serializedAdditionalRawData);
         }
 

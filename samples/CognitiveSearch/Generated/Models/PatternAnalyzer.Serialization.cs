@@ -54,9 +54,9 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            Optional<bool> lowercase = default;
-            Optional<string> pattern = default;
-            Optional<RegexFlags> flags = default;
+            bool lowercase = default;
+            string pattern = default;
+            RegexFlags flags = default;
             IList<string> stopwords = default;
             string odataType = default;
             string name = default;
@@ -113,9 +113,9 @@ namespace CognitiveSearch.Models
             return new PatternAnalyzer(
                 odataType,
                 name,
-                Optional.ToNullable(lowercase),
-                pattern.Value,
-                Optional.ToNullable(flags),
+                lowercase,
+                pattern,
+                flags,
                 stopwords ?? new ChangeTrackingList<string>());
         }
     }

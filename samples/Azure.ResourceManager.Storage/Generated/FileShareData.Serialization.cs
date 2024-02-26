@@ -73,29 +73,29 @@ namespace Azure.ResourceManager.Storage
             {
                 return null;
             }
-            Optional<ETag> etag = default;
+            ETag etag = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
-            Optional<DateTimeOffset> lastModifiedTime = default;
+            SystemData systemData = default;
+            DateTimeOffset lastModifiedTime = default;
             IDictionary<string, string> metadata = default;
-            Optional<int> shareQuota = default;
-            Optional<EnabledProtocol> enabledProtocols = default;
-            Optional<RootSquashType> rootSquash = default;
-            Optional<string> version = default;
-            Optional<bool> deleted = default;
-            Optional<DateTimeOffset> deletedTime = default;
-            Optional<int> remainingRetentionDays = default;
-            Optional<ShareAccessTier> accessTier = default;
-            Optional<DateTimeOffset> accessTierChangeTime = default;
-            Optional<string> accessTierStatus = default;
-            Optional<long> shareUsageBytes = default;
-            Optional<LeaseStatus> leaseStatus = default;
-            Optional<LeaseState> leaseState = default;
-            Optional<LeaseDuration> leaseDuration = default;
+            int shareQuota = default;
+            EnabledProtocol enabledProtocols = default;
+            RootSquashType rootSquash = default;
+            string version = default;
+            bool deleted = default;
+            DateTimeOffset deletedTime = default;
+            int remainingRetentionDays = default;
+            ShareAccessTier accessTier = default;
+            DateTimeOffset accessTierChangeTime = default;
+            string accessTierStatus = default;
+            long shareUsageBytes = default;
+            LeaseStatus leaseStatus = default;
+            LeaseState leaseState = default;
+            LeaseDuration leaseDuration = default;
             IList<SignedIdentifier> signedIdentifiers = default;
-            Optional<DateTimeOffset> snapshotTime = default;
+            DateTimeOffset snapshotTime = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"u8))
@@ -312,26 +312,26 @@ namespace Azure.ResourceManager.Storage
                 id,
                 name,
                 type,
-                systemData.Value,
-                Optional.ToNullable(lastModifiedTime),
+                systemData,
+                lastModifiedTime,
                 metadata ?? new ChangeTrackingDictionary<string, string>(),
-                Optional.ToNullable(shareQuota),
-                Optional.ToNullable(enabledProtocols),
-                Optional.ToNullable(rootSquash),
-                version.Value,
-                Optional.ToNullable(deleted),
-                Optional.ToNullable(deletedTime),
-                Optional.ToNullable(remainingRetentionDays),
-                Optional.ToNullable(accessTier),
-                Optional.ToNullable(accessTierChangeTime),
-                accessTierStatus.Value,
-                Optional.ToNullable(shareUsageBytes),
-                Optional.ToNullable(leaseStatus),
-                Optional.ToNullable(leaseState),
-                Optional.ToNullable(leaseDuration),
+                shareQuota,
+                enabledProtocols,
+                rootSquash,
+                version,
+                deleted,
+                deletedTime,
+                remainingRetentionDays,
+                accessTier,
+                accessTierChangeTime,
+                accessTierStatus,
+                shareUsageBytes,
+                leaseStatus,
+                leaseState,
+                leaseDuration,
                 signedIdentifiers ?? new ChangeTrackingList<SignedIdentifier>(),
-                Optional.ToNullable(snapshotTime),
-                Optional.ToNullable(etag));
+                snapshotTime,
+                etag);
         }
     }
 }

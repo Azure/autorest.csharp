@@ -19,9 +19,9 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<UpgradeState> code = default;
-            Optional<DateTimeOffset> startTime = default;
-            Optional<DateTimeOffset> endTime = default;
+            UpgradeState code = default;
+            DateTimeOffset startTime = default;
+            DateTimeOffset endTime = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("code"u8))
@@ -52,7 +52,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new UpgradeOperationHistoryStatus(Optional.ToNullable(code), Optional.ToNullable(startTime), Optional.ToNullable(endTime));
+            return new UpgradeOperationHistoryStatus(code, startTime, endTime);
         }
     }
 }

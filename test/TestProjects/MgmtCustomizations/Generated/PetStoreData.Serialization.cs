@@ -31,11 +31,11 @@ namespace MgmtCustomizations
             {
                 return null;
             }
-            Optional<PetStoreProperties> properties = default;
+            PetStoreProperties properties = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
+            SystemData systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("properties"u8))
@@ -72,7 +72,7 @@ namespace MgmtCustomizations
                     continue;
                 }
             }
-            return new PetStoreData(id, name, type, systemData.Value, properties.Value);
+            return new PetStoreData(id, name, type, systemData, properties);
         }
     }
 }

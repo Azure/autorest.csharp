@@ -73,17 +73,17 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> etag = default;
-            Optional<string> type = default;
-            Optional<string> id = default;
-            Optional<int> allocatedOutboundPorts = default;
+            string name = default;
+            string etag = default;
+            string type = default;
+            string id = default;
+            int allocatedOutboundPorts = default;
             IList<SubResource> frontendIPConfigurations = default;
-            Optional<SubResource> backendAddressPool = default;
-            Optional<ProvisioningState> provisioningState = default;
-            Optional<LoadBalancerOutboundRuleProtocol> protocol = default;
-            Optional<bool> enableTcpReset = default;
-            Optional<int> idleTimeoutInMinutes = default;
+            SubResource backendAddressPool = default;
+            ProvisioningState provisioningState = default;
+            LoadBalancerOutboundRuleProtocol protocol = default;
+            bool enableTcpReset = default;
+            int idleTimeoutInMinutes = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -188,17 +188,17 @@ namespace Azure.Network.Management.Interface.Models
                 }
             }
             return new OutboundRule(
-                id.Value,
-                name.Value,
-                etag.Value,
-                type.Value,
-                Optional.ToNullable(allocatedOutboundPorts),
+                id,
+                name,
+                etag,
+                type,
+                allocatedOutboundPorts,
                 frontendIPConfigurations ?? new ChangeTrackingList<SubResource>(),
-                backendAddressPool.Value,
-                Optional.ToNullable(provisioningState),
-                Optional.ToNullable(protocol),
-                Optional.ToNullable(enableTcpReset),
-                Optional.ToNullable(idleTimeoutInMinutes));
+                backendAddressPool,
+                provisioningState,
+                protocol,
+                enableTcpReset,
+                idleTimeoutInMinutes);
         }
     }
 }

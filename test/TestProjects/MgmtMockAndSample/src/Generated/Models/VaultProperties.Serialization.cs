@@ -130,28 +130,28 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<TimeSpan> duration = default;
-            Optional<DateTimeOffset> createOn = default;
+            TimeSpan duration = default;
+            DateTimeOffset createOn = default;
             Guid tenantId = default;
             MgmtMockAndSampleSku sku = default;
             IList<AccessPolicyEntry> accessPolicies = default;
-            Optional<Uri> vaultUri = default;
-            Optional<string> hsmPoolResourceId = default;
+            Uri vaultUri = default;
+            string hsmPoolResourceId = default;
             IList<string> deployments = default;
-            Optional<bool> enabledForDiskEncryption = default;
-            Optional<bool> enabledForTemplateDeployment = default;
-            Optional<bool> enableSoftDelete = default;
-            Optional<int> softDeleteRetentionInDays = default;
-            Optional<bool> enableRbacAuthorization = default;
-            Optional<CreateMode> createMode = default;
-            Optional<bool> enablePurgeProtection = default;
-            Optional<NetworkRuleSet> networkAcls = default;
-            Optional<VaultProvisioningState> provisioningState = default;
+            bool enabledForDiskEncryption = default;
+            bool enabledForTemplateDeployment = default;
+            bool enableSoftDelete = default;
+            int softDeleteRetentionInDays = default;
+            bool enableRbacAuthorization = default;
+            CreateMode createMode = default;
+            bool enablePurgeProtection = default;
+            NetworkRuleSet networkAcls = default;
+            VaultProvisioningState provisioningState = default;
             IReadOnlyList<PrivateEndpointConnectionItem> privateEndpointConnections = default;
-            Optional<string> publicNetworkAccess = default;
-            Optional<SinglePropertyModel> readWriteSingleStringProperty = default;
-            Optional<ReadOnlySinglePropertyModel> readOnlySingleStringProperty = default;
-            Optional<ExtremelyDeepSinglePropertyModel> extremelyDeepStringProperty = default;
+            string publicNetworkAccess = default;
+            SinglePropertyModel readWriteSingleStringProperty = default;
+            ReadOnlySinglePropertyModel readOnlySingleStringProperty = default;
+            ExtremelyDeepSinglePropertyModel extremelyDeepStringProperty = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("duration"u8))
@@ -353,28 +353,28 @@ namespace MgmtMockAndSample.Models
                 }
             }
             return new VaultProperties(
-                Optional.ToNullable(duration),
-                Optional.ToNullable(createOn),
+                duration,
+                createOn,
                 tenantId,
                 sku,
                 accessPolicies ?? new ChangeTrackingList<AccessPolicyEntry>(),
-                vaultUri.Value,
-                hsmPoolResourceId.Value,
+                vaultUri,
+                hsmPoolResourceId,
                 deployments ?? new ChangeTrackingList<string>(),
-                Optional.ToNullable(enabledForDiskEncryption),
-                Optional.ToNullable(enabledForTemplateDeployment),
-                Optional.ToNullable(enableSoftDelete),
-                Optional.ToNullable(softDeleteRetentionInDays),
-                Optional.ToNullable(enableRbacAuthorization),
-                Optional.ToNullable(createMode),
-                Optional.ToNullable(enablePurgeProtection),
-                networkAcls.Value,
-                Optional.ToNullable(provisioningState),
+                enabledForDiskEncryption,
+                enabledForTemplateDeployment,
+                enableSoftDelete,
+                softDeleteRetentionInDays,
+                enableRbacAuthorization,
+                createMode,
+                enablePurgeProtection,
+                networkAcls,
+                provisioningState,
                 privateEndpointConnections ?? new ChangeTrackingList<PrivateEndpointConnectionItem>(),
-                publicNetworkAccess.Value,
-                readWriteSingleStringProperty.Value,
-                readOnlySingleStringProperty.Value,
-                extremelyDeepStringProperty.Value);
+                publicNetworkAccess,
+                readWriteSingleStringProperty,
+                readOnlySingleStringProperty,
+                extremelyDeepStringProperty);
         }
     }
 }

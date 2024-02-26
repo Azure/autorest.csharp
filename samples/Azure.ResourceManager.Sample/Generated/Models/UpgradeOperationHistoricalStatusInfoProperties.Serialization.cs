@@ -95,12 +95,12 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<UpgradeOperationHistoryStatus> runningStatus = default;
-            Optional<RollingUpgradeProgressInfo> progress = default;
-            Optional<ApiError> error = default;
-            Optional<UpgradeOperationInvoker> startedBy = default;
-            Optional<ImageReference> targetImageReference = default;
-            Optional<RollbackStatusInfo> rollbackInfo = default;
+            UpgradeOperationHistoryStatus runningStatus = default;
+            RollingUpgradeProgressInfo progress = default;
+            ApiError error = default;
+            UpgradeOperationInvoker startedBy = default;
+            ImageReference targetImageReference = default;
+            RollbackStatusInfo rollbackInfo = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -166,12 +166,12 @@ namespace Azure.ResourceManager.Sample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new UpgradeOperationHistoricalStatusInfoProperties(
-                runningStatus.Value,
-                progress.Value,
-                error.Value,
-                Optional.ToNullable(startedBy),
-                targetImageReference.Value,
-                rollbackInfo.Value,
+                runningStatus,
+                progress,
+                error,
+                startedBy,
+                targetImageReference,
+                rollbackInfo,
                 serializedAdditionalRawData);
         }
 

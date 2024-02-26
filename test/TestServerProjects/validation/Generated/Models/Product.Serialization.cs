@@ -98,13 +98,13 @@ namespace validation.Models
                 return null;
             }
             IList<string> displayNames = default;
-            Optional<int> capacity = default;
-            Optional<string> image = default;
+            int capacity = default;
+            string image = default;
             ChildProduct child = default;
             ConstantProduct constChild = default;
             ProductConstInt constInt = default;
             ProductConstString constString = default;
-            Optional<EnumConst> constStringAsEnum = default;
+            EnumConst constStringAsEnum = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -174,13 +174,13 @@ namespace validation.Models
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new Product(
                 displayNames ?? new ChangeTrackingList<string>(),
-                Optional.ToNullable(capacity),
-                image.Value,
+                capacity,
+                image,
                 child,
                 constChild,
                 constInt,
                 constString,
-                Optional.ToNullable(constStringAsEnum),
+                constStringAsEnum,
                 serializedAdditionalRawData);
         }
 

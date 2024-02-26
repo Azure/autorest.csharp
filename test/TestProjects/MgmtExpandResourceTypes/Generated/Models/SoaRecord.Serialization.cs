@@ -59,13 +59,13 @@ namespace MgmtExpandResourceTypes.Models
             {
                 return null;
             }
-            Optional<string> host = default;
-            Optional<string> email = default;
-            Optional<long> serialNumber = default;
-            Optional<long> refreshTime = default;
-            Optional<long> retryTime = default;
-            Optional<long> expireTime = default;
-            Optional<long> minimumTTL = default;
+            string host = default;
+            string email = default;
+            long serialNumber = default;
+            long refreshTime = default;
+            long retryTime = default;
+            long expireTime = default;
+            long minimumTTL = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("host"u8))
@@ -125,13 +125,13 @@ namespace MgmtExpandResourceTypes.Models
                 }
             }
             return new SoaRecord(
-                host.Value,
-                email.Value,
-                Optional.ToNullable(serialNumber),
-                Optional.ToNullable(refreshTime),
-                Optional.ToNullable(retryTime),
-                Optional.ToNullable(expireTime),
-                Optional.ToNullable(minimumTTL));
+                host,
+                email,
+                serialNumber,
+                refreshTime,
+                retryTime,
+                expireTime,
+                minimumTTL);
         }
     }
 }

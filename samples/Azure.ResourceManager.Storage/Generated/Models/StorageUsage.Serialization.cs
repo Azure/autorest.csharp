@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace Azure.ResourceManager.Storage.Models
 {
@@ -18,10 +17,10 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Optional<UsageUnit> unit = default;
-            Optional<int> currentValue = default;
-            Optional<int> limit = default;
-            Optional<UsageName> name = default;
+            UsageUnit unit = default;
+            int currentValue = default;
+            int limit = default;
+            UsageName name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("unit"u8))
@@ -61,7 +60,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new StorageUsage(Optional.ToNullable(unit), Optional.ToNullable(currentValue), Optional.ToNullable(limit), name.Value);
+            return new StorageUsage(unit, currentValue, limit, name);
         }
     }
 }

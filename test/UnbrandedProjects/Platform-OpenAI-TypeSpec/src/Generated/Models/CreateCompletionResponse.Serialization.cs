@@ -86,7 +86,7 @@ namespace OpenAI.Models
             DateTimeOffset created = default;
             string model = default;
             IReadOnlyList<CreateCompletionResponseChoice> choices = default;
-            OptionalProperty<CompletionUsage> usage = default;
+            CompletionUsage usage = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -142,7 +142,7 @@ namespace OpenAI.Models
                 created,
                 model,
                 choices,
-                usage.Value,
+                usage,
                 serializedAdditionalRawData);
         }
 

@@ -69,7 +69,7 @@ namespace httpInfrastructure.Models
             {
                 return null;
             }
-            Optional<string> httpStatusCode = default;
+            string httpStatusCode = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -85,7 +85,7 @@ namespace httpInfrastructure.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new D(httpStatusCode.Value, serializedAdditionalRawData);
+            return new D(httpStatusCode, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<D>.Write(ModelReaderWriterOptions options)

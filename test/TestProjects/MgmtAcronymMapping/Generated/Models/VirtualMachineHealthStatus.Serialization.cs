@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -18,7 +17,7 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<InstanceViewStatus> status = default;
+            InstanceViewStatus status = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("status"u8))
@@ -31,7 +30,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineHealthStatus(status.Value);
+            return new VirtualMachineHealthStatus(status);
         }
     }
 }

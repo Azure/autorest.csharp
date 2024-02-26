@@ -75,15 +75,15 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<string> computerName = default;
-            Optional<string> adminUsername = default;
-            Optional<string> adminPassword = default;
-            Optional<string> customData = default;
-            Optional<WindowsConfiguration> windowsConfiguration = default;
-            Optional<LinuxConfiguration> linuxConfiguration = default;
+            string computerName = default;
+            string adminUsername = default;
+            string adminPassword = default;
+            string customData = default;
+            WindowsConfiguration windowsConfiguration = default;
+            LinuxConfiguration linuxConfiguration = default;
             IList<VaultSecretGroup> secrets = default;
-            Optional<bool> allowExtensionOperations = default;
-            Optional<bool> requireGuestProvisionSignal = default;
+            bool allowExtensionOperations = default;
+            bool requireGuestProvisionSignal = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("computerName"u8))
@@ -158,15 +158,15 @@ namespace MgmtAcronymMapping.Models
                 }
             }
             return new OSProfile(
-                computerName.Value,
-                adminUsername.Value,
-                adminPassword.Value,
-                customData.Value,
-                windowsConfiguration.Value,
-                linuxConfiguration.Value,
+                computerName,
+                adminUsername,
+                adminPassword,
+                customData,
+                windowsConfiguration,
+                linuxConfiguration,
                 secrets ?? new ChangeTrackingList<VaultSecretGroup>(),
-                Optional.ToNullable(allowExtensionOperations),
-                Optional.ToNullable(requireGuestProvisionSignal));
+                allowExtensionOperations,
+                requireGuestProvisionSignal);
         }
     }
 }

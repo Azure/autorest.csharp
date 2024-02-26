@@ -40,9 +40,9 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<StorageAccountType> storageAccountType = default;
-            Optional<WritableSubResource> diskEncryptionSet = default;
-            Optional<string> id = default;
+            StorageAccountType storageAccountType = default;
+            WritableSubResource diskEncryptionSet = default;
+            string id = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("storageAccountType"u8))
@@ -69,7 +69,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new ManagedDiskParameters(id.Value, Optional.ToNullable(storageAccountType), diskEncryptionSet);
+            return new ManagedDiskParameters(id, storageAccountType, diskEncryptionSet);
         }
     }
 }

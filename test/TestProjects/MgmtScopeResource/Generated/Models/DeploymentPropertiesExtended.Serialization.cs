@@ -19,14 +19,14 @@ namespace MgmtScopeResource.Models
             {
                 return null;
             }
-            Optional<ProvisioningState> provisioningState = default;
-            Optional<string> correlationId = default;
-            Optional<DateTimeOffset> timestamp = default;
-            Optional<TimeSpan> duration = default;
-            Optional<BinaryData> outputs = default;
-            Optional<BinaryData> parameters = default;
-            Optional<DeploymentMode> mode = default;
-            Optional<ErrorResponse> errorResponse = default;
+            ProvisioningState provisioningState = default;
+            string correlationId = default;
+            DateTimeOffset timestamp = default;
+            TimeSpan duration = default;
+            BinaryData outputs = default;
+            BinaryData parameters = default;
+            DeploymentMode mode = default;
+            ErrorResponse errorResponse = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("provisioningState"u8))
@@ -99,14 +99,14 @@ namespace MgmtScopeResource.Models
                 }
             }
             return new DeploymentPropertiesExtended(
-                Optional.ToNullable(provisioningState),
-                correlationId.Value,
-                Optional.ToNullable(timestamp),
-                Optional.ToNullable(duration),
-                outputs.Value,
-                parameters.Value,
-                Optional.ToNullable(mode),
-                errorResponse.Value);
+                provisioningState,
+                correlationId,
+                timestamp,
+                duration,
+                outputs,
+                parameters,
+                mode,
+                errorResponse);
         }
     }
 }

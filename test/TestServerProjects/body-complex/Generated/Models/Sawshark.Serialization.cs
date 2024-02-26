@@ -95,11 +95,11 @@ namespace body_complex.Models
             {
                 return null;
             }
-            Optional<byte[]> picture = default;
-            Optional<int> age = default;
+            byte[] picture = default;
+            int age = default;
             DateTimeOffset birthday = default;
             string fishtype = default;
-            Optional<string> species = default;
+            string species = default;
             float length = default;
             IList<Fish> siblings = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
@@ -166,13 +166,13 @@ namespace body_complex.Models
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new Sawshark(
                 fishtype,
-                species.Value,
+                species,
                 length,
                 siblings ?? new ChangeTrackingList<Fish>(),
                 serializedAdditionalRawData,
-                Optional.ToNullable(age),
+                age,
                 birthday,
-                picture.Value);
+                picture);
         }
 
         BinaryData IPersistableModel<Sawshark>.Write(ModelReaderWriterOptions options)

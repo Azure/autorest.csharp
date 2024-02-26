@@ -40,9 +40,9 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Optional<DateTimeOffset> startTime = default;
-            Optional<DateTimeOffset> expiryTime = default;
-            Optional<string> permission = default;
+            DateTimeOffset startTime = default;
+            DateTimeOffset expiryTime = default;
+            string permission = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("startTime"u8))
@@ -69,7 +69,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new AccessPolicy(Optional.ToNullable(startTime), Optional.ToNullable(expiryTime), permission.Value);
+            return new AccessPolicy(startTime, expiryTime, permission);
         }
     }
 }

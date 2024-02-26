@@ -96,15 +96,15 @@ namespace CognitiveSearch.Models
             }
             string name = default;
             DataType type = default;
-            Optional<bool> key = default;
-            Optional<bool> retrievable = default;
-            Optional<bool> searchable = default;
-            Optional<bool> filterable = default;
-            Optional<bool> sortable = default;
-            Optional<bool> facetable = default;
-            Optional<AnalyzerName> analyzer = default;
-            Optional<AnalyzerName> searchAnalyzer = default;
-            Optional<AnalyzerName> indexAnalyzer = default;
+            bool key = default;
+            bool retrievable = default;
+            bool searchable = default;
+            bool filterable = default;
+            bool sortable = default;
+            bool facetable = default;
+            AnalyzerName analyzer = default;
+            AnalyzerName searchAnalyzer = default;
+            AnalyzerName indexAnalyzer = default;
             IList<string> synonymMaps = default;
             IList<Field> fields = default;
             foreach (var property in element.EnumerateObject())
@@ -232,15 +232,15 @@ namespace CognitiveSearch.Models
             return new Field(
                 name,
                 type,
-                Optional.ToNullable(key),
-                Optional.ToNullable(retrievable),
-                Optional.ToNullable(searchable),
-                Optional.ToNullable(filterable),
-                Optional.ToNullable(sortable),
-                Optional.ToNullable(facetable),
-                Optional.ToNullable(analyzer),
-                Optional.ToNullable(searchAnalyzer),
-                Optional.ToNullable(indexAnalyzer),
+                key,
+                retrievable,
+                searchable,
+                filterable,
+                sortable,
+                facetable,
+                analyzer,
+                searchAnalyzer,
+                indexAnalyzer,
                 synonymMaps ?? new ChangeTrackingList<string>(),
                 fields ?? new ChangeTrackingList<Field>());
         }

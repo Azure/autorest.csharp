@@ -20,12 +20,12 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<string> vaultId = default;
-            Optional<AzureLocation> location = default;
-            Optional<DateTimeOffset> deletionDate = default;
-            Optional<DateTimeOffset> scheduledPurgeDate = default;
+            string vaultId = default;
+            AzureLocation location = default;
+            DateTimeOffset deletionDate = default;
+            DateTimeOffset scheduledPurgeDate = default;
             IReadOnlyDictionary<string, string> tags = default;
-            Optional<bool> purgeProtectionEnabled = default;
+            bool purgeProtectionEnabled = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("vaultId"u8))
@@ -85,12 +85,12 @@ namespace MgmtMockAndSample.Models
                 }
             }
             return new DeletedVaultProperties(
-                vaultId.Value,
-                Optional.ToNullable(location),
-                Optional.ToNullable(deletionDate),
-                Optional.ToNullable(scheduledPurgeDate),
+                vaultId,
+                location,
+                deletionDate,
+                scheduledPurgeDate,
                 tags ?? new ChangeTrackingDictionary<string, string>(),
-                Optional.ToNullable(purgeProtectionEnabled));
+                purgeProtectionEnabled);
         }
     }
 }

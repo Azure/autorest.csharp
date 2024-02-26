@@ -74,15 +74,15 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> etag = default;
-            Optional<string> id = default;
-            Optional<string> name = default;
-            Optional<string> type = default;
-            Optional<string> location = default;
+            string etag = default;
+            string id = default;
+            string name = default;
+            string type = default;
+            string location = default;
             IDictionary<string, string> tags = default;
-            Optional<Subnet> subnet = default;
+            Subnet subnet = default;
             IReadOnlyList<NetworkInterface> networkInterfaces = default;
-            Optional<ProvisioningState> provisioningState = default;
+            ProvisioningState provisioningState = default;
             IList<PrivateLinkServiceConnection> privateLinkServiceConnections = default;
             IList<PrivateLinkServiceConnection> manualPrivateLinkServiceConnections = default;
             foreach (var property in element.EnumerateObject())
@@ -200,15 +200,15 @@ namespace Azure.Network.Management.Interface.Models
                 }
             }
             return new PrivateEndpoint(
-                id.Value,
-                name.Value,
-                type.Value,
-                location.Value,
+                id,
+                name,
+                type,
+                location,
                 tags ?? new ChangeTrackingDictionary<string, string>(),
-                etag.Value,
-                subnet.Value,
+                etag,
+                subnet,
                 networkInterfaces ?? new ChangeTrackingList<NetworkInterface>(),
-                Optional.ToNullable(provisioningState),
+                provisioningState,
                 privateLinkServiceConnections ?? new ChangeTrackingList<PrivateLinkServiceConnection>(),
                 manualPrivateLinkServiceConnections ?? new ChangeTrackingList<PrivateLinkServiceConnection>());
         }

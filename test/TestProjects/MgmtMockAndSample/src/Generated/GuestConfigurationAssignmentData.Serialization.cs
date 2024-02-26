@@ -40,11 +40,11 @@ namespace MgmtMockAndSample
             {
                 return null;
             }
-            Optional<GuestConfigurationAssignmentProperties> properties = default;
-            Optional<string> id = default;
-            Optional<string> name = default;
-            Optional<AzureLocation> location = default;
-            Optional<ResourceType> type = default;
+            GuestConfigurationAssignmentProperties properties = default;
+            string id = default;
+            string name = default;
+            AzureLocation location = default;
+            ResourceType type = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("properties"u8))
@@ -85,7 +85,7 @@ namespace MgmtMockAndSample
                     continue;
                 }
             }
-            return new GuestConfigurationAssignmentData(id.Value, name.Value, Optional.ToNullable(location), Optional.ToNullable(type), properties.Value);
+            return new GuestConfigurationAssignmentData(id, name, location, type, properties);
         }
     }
 }

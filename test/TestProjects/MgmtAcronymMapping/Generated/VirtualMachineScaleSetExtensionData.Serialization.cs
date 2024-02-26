@@ -98,18 +98,18 @@ namespace MgmtAcronymMapping
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> type = default;
-            Optional<string> id = default;
-            Optional<string> forceUpdateTag = default;
-            Optional<string> publisher = default;
-            Optional<string> type0 = default;
-            Optional<string> typeHandlerVersion = default;
-            Optional<bool> autoUpgradeMinorVersion = default;
-            Optional<bool> enableAutomaticUpgrade = default;
-            Optional<BinaryData> settings = default;
-            Optional<BinaryData> protectedSettings = default;
-            Optional<string> provisioningState = default;
+            string name = default;
+            string type = default;
+            string id = default;
+            string forceUpdateTag = default;
+            string publisher = default;
+            string type0 = default;
+            string typeHandlerVersion = default;
+            bool autoUpgradeMinorVersion = default;
+            bool enableAutomaticUpgrade = default;
+            BinaryData settings = default;
+            BinaryData protectedSettings = default;
+            string provisioningState = default;
             IList<string> provisionAfterExtensions = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -217,18 +217,18 @@ namespace MgmtAcronymMapping
                 }
             }
             return new VirtualMachineScaleSetExtensionData(
-                id.Value,
-                name.Value,
-                type.Value,
-                forceUpdateTag.Value,
-                publisher.Value,
-                type0.Value,
-                typeHandlerVersion.Value,
-                Optional.ToNullable(autoUpgradeMinorVersion),
-                Optional.ToNullable(enableAutomaticUpgrade),
-                settings.Value,
-                protectedSettings.Value,
-                provisioningState.Value,
+                id,
+                name,
+                type,
+                forceUpdateTag,
+                publisher,
+                type0,
+                typeHandlerVersion,
+                autoUpgradeMinorVersion,
+                enableAutomaticUpgrade,
+                settings,
+                protectedSettings,
+                provisioningState,
                 provisionAfterExtensions ?? new ChangeTrackingList<string>());
         }
     }

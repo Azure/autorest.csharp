@@ -115,11 +115,11 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<string> schema = default;
-            Optional<string> contentVersion = default;
-            Optional<BinaryData> parameters = default;
+            string schema = default;
+            string contentVersion = default;
+            BinaryData parameters = default;
             IReadOnlyList<BinaryData> resources = default;
-            Optional<string> id = default;
+            string id = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -176,11 +176,11 @@ namespace Azure.ResourceManager.Sample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new VirtualMachineCaptureResult(
-                id.Value,
+                id,
                 serializedAdditionalRawData,
-                schema.Value,
-                contentVersion.Value,
-                parameters.Value,
+                schema,
+                contentVersion,
+                parameters,
                 resources ?? new ChangeTrackingList<BinaryData>());
         }
 

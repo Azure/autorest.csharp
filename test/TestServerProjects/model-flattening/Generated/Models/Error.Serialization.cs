@@ -79,9 +79,9 @@ namespace model_flattening.Models
             {
                 return null;
             }
-            Optional<int> status = default;
-            Optional<string> message = default;
-            Optional<Error> parentError = default;
+            int status = default;
+            string message = default;
+            Error parentError = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -115,7 +115,7 @@ namespace model_flattening.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Error(Optional.ToNullable(status), message.Value, parentError.Value, serializedAdditionalRawData);
+            return new Error(status, message, parentError, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<Error>.Write(ModelReaderWriterOptions options)

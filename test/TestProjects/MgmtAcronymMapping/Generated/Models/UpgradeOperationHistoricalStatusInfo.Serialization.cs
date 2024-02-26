@@ -18,9 +18,9 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<UpgradeOperationHistoricalStatusInfoProperties> properties = default;
-            Optional<ResourceType> type = default;
-            Optional<AzureLocation> location = default;
+            UpgradeOperationHistoricalStatusInfoProperties properties = default;
+            ResourceType type = default;
+            AzureLocation location = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("properties"u8))
@@ -51,7 +51,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new UpgradeOperationHistoricalStatusInfo(properties.Value, Optional.ToNullable(type), Optional.ToNullable(location));
+            return new UpgradeOperationHistoricalStatusInfo(properties, type, location);
         }
     }
 }

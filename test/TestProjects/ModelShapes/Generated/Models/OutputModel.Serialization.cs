@@ -329,20 +329,20 @@ namespace ModelShapes.Models
             int requiredInt = default;
             IReadOnlyList<string> requiredStringList = default;
             IReadOnlyList<int> requiredIntList = default;
-            Optional<string> nonRequiredString = default;
-            Optional<int> nonRequiredInt = default;
+            string nonRequiredString = default;
+            int nonRequiredInt = default;
             IReadOnlyList<string> nonRequiredStringList = default;
             IReadOnlyList<int> nonRequiredIntList = default;
             string requiredNullableString = default;
             int? requiredNullableInt = default;
             IReadOnlyList<string> requiredNullableStringList = default;
             IReadOnlyList<int> requiredNullableIntList = default;
-            Optional<string> nonRequiredNullableString = default;
-            Optional<int?> nonRequiredNullableInt = default;
+            string nonRequiredNullableString = default;
+            int? nonRequiredNullableInt = default;
             IReadOnlyList<string> nonRequiredNullableStringList = default;
             IReadOnlyList<int> nonRequiredNullableIntList = default;
             int requiredReadonlyInt = default;
-            Optional<int> nonRequiredReadonlyInt = default;
+            int nonRequiredReadonlyInt = default;
             ReadOnlyMemory<float> vector = default;
             ReadOnlyMemory<float> vectorReadOnly = default;
             ReadOnlyMemory<float> vectorReadOnlyRequired = default;
@@ -678,20 +678,20 @@ namespace ModelShapes.Models
                 requiredInt,
                 requiredStringList,
                 requiredIntList,
-                nonRequiredString.Value,
-                Optional.ToNullable(nonRequiredInt),
+                nonRequiredString,
+                nonRequiredInt,
                 nonRequiredStringList ?? new ChangeTrackingList<string>(),
                 nonRequiredIntList ?? new ChangeTrackingList<int>(),
                 requiredNullableString,
                 requiredNullableInt,
                 requiredNullableStringList,
                 requiredNullableIntList,
-                nonRequiredNullableString.Value,
-                Optional.ToNullable(nonRequiredNullableInt),
+                nonRequiredNullableString,
+                nonRequiredNullableInt,
                 nonRequiredNullableStringList ?? new ChangeTrackingList<string>(),
                 nonRequiredNullableIntList ?? new ChangeTrackingList<int>(),
                 requiredReadonlyInt,
-                Optional.ToNullable(nonRequiredReadonlyInt),
+                nonRequiredReadonlyInt,
                 vector,
                 vectorReadOnly,
                 vectorReadOnlyRequired,

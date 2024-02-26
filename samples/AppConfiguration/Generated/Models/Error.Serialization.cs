@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace AppConfiguration.Models
 {
@@ -18,11 +17,11 @@ namespace AppConfiguration.Models
             {
                 return null;
             }
-            Optional<string> type = default;
-            Optional<string> title = default;
-            Optional<string> name = default;
-            Optional<string> detail = default;
-            Optional<int> status = default;
+            string type = default;
+            string title = default;
+            string name = default;
+            string detail = default;
+            int status = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("type"u8))
@@ -55,7 +54,7 @@ namespace AppConfiguration.Models
                     continue;
                 }
             }
-            return new Error(type.Value, title.Value, name.Value, detail.Value, Optional.ToNullable(status));
+            return new Error(type, title, name, detail, status);
         }
     }
 }

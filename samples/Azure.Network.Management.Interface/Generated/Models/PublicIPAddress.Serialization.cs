@@ -109,25 +109,25 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<PublicIPAddressSku> sku = default;
-            Optional<string> etag = default;
+            PublicIPAddressSku sku = default;
+            string etag = default;
             IList<string> zones = default;
-            Optional<string> id = default;
-            Optional<string> name = default;
-            Optional<string> type = default;
-            Optional<string> location = default;
+            string id = default;
+            string name = default;
+            string type = default;
+            string location = default;
             IDictionary<string, string> tags = default;
-            Optional<IPAllocationMethod> publicIPAllocationMethod = default;
-            Optional<IPVersion> publicIPAddressVersion = default;
-            Optional<IPConfiguration> ipConfiguration = default;
-            Optional<PublicIPAddressDnsSettings> dnsSettings = default;
-            Optional<DdosSettings> ddosSettings = default;
+            IPAllocationMethod publicIPAllocationMethod = default;
+            IPVersion publicIPAddressVersion = default;
+            IPConfiguration ipConfiguration = default;
+            PublicIPAddressDnsSettings dnsSettings = default;
+            DdosSettings ddosSettings = default;
             IList<IpTag> ipTags = default;
-            Optional<string> ipAddress = default;
-            Optional<SubResource> publicIPPrefix = default;
-            Optional<int> idleTimeoutInMinutes = default;
-            Optional<string> resourceGuid = default;
-            Optional<ProvisioningState> provisioningState = default;
+            string ipAddress = default;
+            SubResource publicIPPrefix = default;
+            int idleTimeoutInMinutes = default;
+            string resourceGuid = default;
+            ProvisioningState provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sku"u8))
@@ -302,25 +302,25 @@ namespace Azure.Network.Management.Interface.Models
                 }
             }
             return new PublicIPAddress(
-                id.Value,
-                name.Value,
-                type.Value,
-                location.Value,
+                id,
+                name,
+                type,
+                location,
                 tags ?? new ChangeTrackingDictionary<string, string>(),
-                sku.Value,
-                etag.Value,
+                sku,
+                etag,
                 zones ?? new ChangeTrackingList<string>(),
-                Optional.ToNullable(publicIPAllocationMethod),
-                Optional.ToNullable(publicIPAddressVersion),
-                ipConfiguration.Value,
-                dnsSettings.Value,
-                ddosSettings.Value,
+                publicIPAllocationMethod,
+                publicIPAddressVersion,
+                ipConfiguration,
+                dnsSettings,
+                ddosSettings,
                 ipTags ?? new ChangeTrackingList<IpTag>(),
-                ipAddress.Value,
-                publicIPPrefix.Value,
-                Optional.ToNullable(idleTimeoutInMinutes),
-                resourceGuid.Value,
-                Optional.ToNullable(provisioningState));
+                ipAddress,
+                publicIPPrefix,
+                idleTimeoutInMinutes,
+                resourceGuid,
+                provisioningState);
         }
     }
 }

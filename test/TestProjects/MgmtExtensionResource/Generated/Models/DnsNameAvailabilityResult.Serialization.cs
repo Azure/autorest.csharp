@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace MgmtExtensionResource.Models
 {
@@ -18,7 +17,7 @@ namespace MgmtExtensionResource.Models
             {
                 return null;
             }
-            Optional<bool> available = default;
+            bool available = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("available"u8))
@@ -31,7 +30,7 @@ namespace MgmtExtensionResource.Models
                     continue;
                 }
             }
-            return new DnsNameAvailabilityResult(Optional.ToNullable(available));
+            return new DnsNameAvailabilityResult(available);
         }
     }
 }

@@ -50,10 +50,10 @@ namespace Azure.ResourceManager.Fake.Models
                 return null;
             }
             string name = default;
-            Optional<MgmtReferenceTypesSkuTier> tier = default;
-            Optional<string> size = default;
-            Optional<string> family = default;
-            Optional<int> capacity = default;
+            MgmtReferenceTypesSkuTier tier = default;
+            string size = default;
+            string family = default;
+            int capacity = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -90,7 +90,7 @@ namespace Azure.ResourceManager.Fake.Models
                     continue;
                 }
             }
-            return new MgmtReferenceTypesSku(name, Optional.ToNullable(tier), size.Value, family.Value, Optional.ToNullable(capacity));
+            return new MgmtReferenceTypesSku(name, tier, size, family, capacity);
         }
 
         internal partial class MgmtReferenceTypesSkuConverter : JsonConverter<MgmtReferenceTypesSku>

@@ -19,9 +19,9 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<Azure.ResourceManager.Resources.Models.SubResource> privateEndpoint = default;
-            Optional<MhsmPrivateLinkServiceConnectionState> privateLinkServiceConnectionState = default;
-            Optional<MgmtMockAndSamplePrivateEndpointConnectionProvisioningState> provisioningState = default;
+            Azure.ResourceManager.Resources.Models.SubResource privateEndpoint = default;
+            MhsmPrivateLinkServiceConnectionState privateLinkServiceConnectionState = default;
+            MgmtMockAndSamplePrivateEndpointConnectionProvisioningState provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("properties"u8))
@@ -64,7 +64,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new MhsmPrivateEndpointConnectionItem(privateEndpoint, privateLinkServiceConnectionState.Value, Optional.ToNullable(provisioningState));
+            return new MhsmPrivateEndpointConnectionItem(privateEndpoint, privateLinkServiceConnectionState, provisioningState);
         }
     }
 }

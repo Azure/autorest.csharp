@@ -19,11 +19,11 @@ namespace MgmtSingletonResource
             {
                 return null;
             }
-            Optional<bool> hitBrake = default;
+            bool hitBrake = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
+            SystemData systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("hitBrake"u8))
@@ -60,7 +60,7 @@ namespace MgmtSingletonResource
                     continue;
                 }
             }
-            return new BrakeData(id, name, type, systemData.Value, Optional.ToNullable(hitBrake));
+            return new BrakeData(id, name, type, systemData, hitBrake);
         }
     }
 }

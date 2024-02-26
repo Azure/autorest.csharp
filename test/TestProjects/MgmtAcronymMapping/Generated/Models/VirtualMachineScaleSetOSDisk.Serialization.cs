@@ -82,17 +82,17 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<CachingType> caching = default;
-            Optional<bool> writeAcceleratorEnabled = default;
+            string name = default;
+            CachingType caching = default;
+            bool writeAcceleratorEnabled = default;
             DiskCreateOptionType createOption = default;
-            Optional<DiffDiskSettings> diffDiskSettings = default;
-            Optional<int> diskSizeGB = default;
-            Optional<OperatingSystemType> osType = default;
-            Optional<VirtualHardDisk> image = default;
+            DiffDiskSettings diffDiskSettings = default;
+            int diskSizeGB = default;
+            OperatingSystemType osType = default;
+            VirtualHardDisk image = default;
             IList<string> vhdContainers = default;
-            Optional<VirtualMachineScaleSetManagedDiskParameters> managedDisk = default;
-            Optional<DiskSecurityType> securityType = default;
+            VirtualMachineScaleSetManagedDiskParameters managedDisk = default;
+            DiskSecurityType securityType = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -193,17 +193,17 @@ namespace MgmtAcronymMapping.Models
                 }
             }
             return new VirtualMachineScaleSetOSDisk(
-                name.Value,
-                Optional.ToNullable(caching),
-                Optional.ToNullable(writeAcceleratorEnabled),
+                name,
+                caching,
+                writeAcceleratorEnabled,
                 createOption,
-                diffDiskSettings.Value,
-                Optional.ToNullable(diskSizeGB),
-                Optional.ToNullable(osType),
-                image.Value,
+                diffDiskSettings,
+                diskSizeGB,
+                osType,
+                image,
                 vhdContainers ?? new ChangeTrackingList<string>(),
-                managedDisk.Value,
-                Optional.ToNullable(securityType));
+                managedDisk,
+                securityType);
         }
     }
 }

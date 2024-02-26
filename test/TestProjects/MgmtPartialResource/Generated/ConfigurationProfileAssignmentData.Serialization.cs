@@ -45,13 +45,13 @@ namespace MgmtPartialResource
             {
                 return null;
             }
-            Optional<ConfigurationProfileAssignmentProperties> properties = default;
+            ConfigurationProfileAssignmentProperties properties = default;
             IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
+            SystemData systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("properties"u8))
@@ -111,10 +111,10 @@ namespace MgmtPartialResource
                 id,
                 name,
                 type,
-                systemData.Value,
+                systemData,
                 tags ?? new ChangeTrackingDictionary<string, string>(),
                 location,
-                properties.Value);
+                properties);
         }
     }
 }

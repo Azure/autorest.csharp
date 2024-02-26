@@ -98,24 +98,24 @@ namespace MgmtSubscriptionNameParameter
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
-            Optional<long> messageCount = default;
-            Optional<DateTimeOffset> createdAt = default;
-            Optional<DateTimeOffset> accessedAt = default;
-            Optional<DateTimeOffset> updatedAt = default;
-            Optional<TimeSpan> lockDuration = default;
-            Optional<bool> requiresSession = default;
-            Optional<TimeSpan> defaultMessageTimeToLive = default;
-            Optional<bool> deadLetteringOnFilterEvaluationExceptions = default;
-            Optional<bool> deadLetteringOnMessageExpiration = default;
-            Optional<TimeSpan> duplicateDetectionHistoryTimeWindow = default;
-            Optional<int> maxDeliveryCount = default;
-            Optional<bool> enableBatchedOperations = default;
-            Optional<TimeSpan> autoDeleteOnIdle = default;
-            Optional<string> forwardTo = default;
-            Optional<string> forwardDeadLetteredMessagesTo = default;
-            Optional<bool> isClientAffine = default;
-            Optional<SBClientAffineProperties> clientAffineProperties = default;
+            SystemData systemData = default;
+            long messageCount = default;
+            DateTimeOffset createdAt = default;
+            DateTimeOffset accessedAt = default;
+            DateTimeOffset updatedAt = default;
+            TimeSpan lockDuration = default;
+            bool requiresSession = default;
+            TimeSpan defaultMessageTimeToLive = default;
+            bool deadLetteringOnFilterEvaluationExceptions = default;
+            bool deadLetteringOnMessageExpiration = default;
+            TimeSpan duplicateDetectionHistoryTimeWindow = default;
+            int maxDeliveryCount = default;
+            bool enableBatchedOperations = default;
+            TimeSpan autoDeleteOnIdle = default;
+            string forwardTo = default;
+            string forwardDeadLetteredMessagesTo = default;
+            bool isClientAffine = default;
+            SBClientAffineProperties clientAffineProperties = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -304,24 +304,24 @@ namespace MgmtSubscriptionNameParameter
                 id,
                 name,
                 type,
-                systemData.Value,
-                Optional.ToNullable(messageCount),
-                Optional.ToNullable(createdAt),
-                Optional.ToNullable(accessedAt),
-                Optional.ToNullable(updatedAt),
-                Optional.ToNullable(lockDuration),
-                Optional.ToNullable(requiresSession),
-                Optional.ToNullable(defaultMessageTimeToLive),
-                Optional.ToNullable(deadLetteringOnFilterEvaluationExceptions),
-                Optional.ToNullable(deadLetteringOnMessageExpiration),
-                Optional.ToNullable(duplicateDetectionHistoryTimeWindow),
-                Optional.ToNullable(maxDeliveryCount),
-                Optional.ToNullable(enableBatchedOperations),
-                Optional.ToNullable(autoDeleteOnIdle),
-                forwardTo.Value,
-                forwardDeadLetteredMessagesTo.Value,
-                Optional.ToNullable(isClientAffine),
-                clientAffineProperties.Value);
+                systemData,
+                messageCount,
+                createdAt,
+                accessedAt,
+                updatedAt,
+                lockDuration,
+                requiresSession,
+                defaultMessageTimeToLive,
+                deadLetteringOnFilterEvaluationExceptions,
+                deadLetteringOnMessageExpiration,
+                duplicateDetectionHistoryTimeWindow,
+                maxDeliveryCount,
+                enableBatchedOperations,
+                autoDeleteOnIdle,
+                forwardTo,
+                forwardDeadLetteredMessagesTo,
+                isClientAffine,
+                clientAffineProperties);
         }
     }
 }

@@ -105,29 +105,29 @@ namespace MgmtMockAndSample
             {
                 return null;
             }
-            Optional<string> etag = default;
-            Optional<ManagedServiceIdentity> identity = default;
+            string etag = default;
+            ManagedServiceIdentity identity = default;
             IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
-            Optional<Probe> startupProbe = default;
-            Optional<Probe> readinessProbe = default;
-            Optional<DesiredStatusCode> desiredStatusCode = default;
+            SystemData systemData = default;
+            Probe startupProbe = default;
+            Probe readinessProbe = default;
+            DesiredStatusCode desiredStatusCode = default;
             IReadOnlyList<WritableSubResource> ruleCollectionGroups = default;
-            Optional<ProvisioningState> provisioningState = default;
-            Optional<WritableSubResource> basePolicy = default;
+            ProvisioningState provisioningState = default;
+            WritableSubResource basePolicy = default;
             IReadOnlyList<WritableSubResource> firewalls = default;
             IReadOnlyList<WritableSubResource> childPolicies = default;
-            Optional<FirewallPolicyThreatIntelWhitelist> threatIntelWhitelist = default;
-            Optional<FirewallPolicyInsights> insights = default;
-            Optional<FirewallPolicySnat> snat = default;
-            Optional<DnsSettings> dnsSettings = default;
-            Optional<FirewallPolicyIntrusionDetection> intrusionDetection = default;
-            Optional<FirewallPolicyTransportSecurity> transportSecurity = default;
-            Optional<FirewallPolicySku> sku = default;
+            FirewallPolicyThreatIntelWhitelist threatIntelWhitelist = default;
+            FirewallPolicyInsights insights = default;
+            FirewallPolicySnat snat = default;
+            DnsSettings dnsSettings = default;
+            FirewallPolicyIntrusionDetection intrusionDetection = default;
+            FirewallPolicyTransportSecurity transportSecurity = default;
+            FirewallPolicySku sku = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"u8))
@@ -355,26 +355,26 @@ namespace MgmtMockAndSample
                 id,
                 name,
                 type,
-                systemData.Value,
+                systemData,
                 tags ?? new ChangeTrackingDictionary<string, string>(),
                 location,
-                etag.Value,
+                etag,
                 identity,
-                startupProbe.Value,
-                readinessProbe.Value,
-                Optional.ToNullable(desiredStatusCode),
+                startupProbe,
+                readinessProbe,
+                desiredStatusCode,
                 ruleCollectionGroups ?? new ChangeTrackingList<WritableSubResource>(),
-                Optional.ToNullable(provisioningState),
+                provisioningState,
                 basePolicy,
                 firewalls ?? new ChangeTrackingList<WritableSubResource>(),
                 childPolicies ?? new ChangeTrackingList<WritableSubResource>(),
-                threatIntelWhitelist.Value,
-                insights.Value,
-                snat.Value,
-                dnsSettings.Value,
-                intrusionDetection.Value,
-                transportSecurity.Value,
-                sku.Value);
+                threatIntelWhitelist,
+                insights,
+                snat,
+                dnsSettings,
+                intrusionDetection,
+                transportSecurity,
+                sku);
         }
     }
 }

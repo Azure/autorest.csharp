@@ -69,17 +69,17 @@ namespace MgmtAcronymMapping.Models
                 return null;
             }
             int lun = default;
-            Optional<string> name = default;
-            Optional<VirtualHardDisk> vhd = default;
-            Optional<VirtualHardDisk> image = default;
-            Optional<CachingType> caching = default;
-            Optional<bool> writeAcceleratorEnabled = default;
+            string name = default;
+            VirtualHardDisk vhd = default;
+            VirtualHardDisk image = default;
+            CachingType caching = default;
+            bool writeAcceleratorEnabled = default;
             DiskCreateOptionType createOption = default;
-            Optional<int> diskSizeGB = default;
-            Optional<ManagedDiskParameters> managedDisk = default;
-            Optional<bool> toBeDetached = default;
-            Optional<long> diskIOPSReadWrite = default;
-            Optional<long> diskMBpsReadWrite = default;
+            int diskSizeGB = default;
+            ManagedDiskParameters managedDisk = default;
+            bool toBeDetached = default;
+            long diskIOPSReadWrite = default;
+            long diskMBpsReadWrite = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("lun"u8))
@@ -181,17 +181,17 @@ namespace MgmtAcronymMapping.Models
             }
             return new DataDisk(
                 lun,
-                name.Value,
-                vhd.Value,
-                image.Value,
-                Optional.ToNullable(caching),
-                Optional.ToNullable(writeAcceleratorEnabled),
+                name,
+                vhd,
+                image,
+                caching,
+                writeAcceleratorEnabled,
                 createOption,
-                Optional.ToNullable(diskSizeGB),
-                managedDisk.Value,
-                Optional.ToNullable(toBeDetached),
-                Optional.ToNullable(diskIOPSReadWrite),
-                Optional.ToNullable(diskMBpsReadWrite));
+                diskSizeGB,
+                managedDisk,
+                toBeDetached,
+                diskIOPSReadWrite,
+                diskMBpsReadWrite);
         }
     }
 }

@@ -19,9 +19,9 @@ namespace MgmtSupersetInheritance.Models
             {
                 return null;
             }
-            Optional<string> createdBy = default;
-            Optional<DateTimeOffset> createdAt = default;
-            Optional<string> lastModifiedBy = default;
+            string createdBy = default;
+            DateTimeOffset createdAt = default;
+            string lastModifiedBy = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("createdBy"u8))
@@ -44,7 +44,7 @@ namespace MgmtSupersetInheritance.Models
                     continue;
                 }
             }
-            return new SupersetModel7SystemData(createdBy.Value, Optional.ToNullable(createdAt), lastModifiedBy.Value);
+            return new SupersetModel7SystemData(createdBy, createdAt, lastModifiedBy);
         }
     }
 }

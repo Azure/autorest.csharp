@@ -20,9 +20,9 @@ namespace Azure.ResourceManager.Storage.Models
                 return null;
             }
             StorageSkuName name = default;
-            Optional<StorageSkuTier> tier = default;
-            Optional<ResourceType> resourceType = default;
-            Optional<StorageKind> kind = default;
+            StorageSkuTier tier = default;
+            ResourceType resourceType = default;
+            StorageKind kind = default;
             IReadOnlyList<string> locations = default;
             IReadOnlyList<SKUCapability> capabilities = default;
             IReadOnlyList<Restriction> restrictions = default;
@@ -105,9 +105,9 @@ namespace Azure.ResourceManager.Storage.Models
             }
             return new StorageSkuInformation(
                 name,
-                Optional.ToNullable(tier),
-                Optional.ToNullable(resourceType),
-                Optional.ToNullable(kind),
+                tier,
+                resourceType,
+                kind,
                 locations ?? new ChangeTrackingList<string>(),
                 capabilities ?? new ChangeTrackingList<SKUCapability>(),
                 restrictions ?? new ChangeTrackingList<Restriction>());

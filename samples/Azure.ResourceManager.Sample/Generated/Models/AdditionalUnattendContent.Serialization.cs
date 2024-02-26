@@ -85,10 +85,10 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<PassName> passName = default;
-            Optional<ComponentName> componentName = default;
-            Optional<SettingName> settingName = default;
-            Optional<string> content = default;
+            PassName passName = default;
+            ComponentName componentName = default;
+            SettingName settingName = default;
+            string content = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -131,7 +131,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new AdditionalUnattendContent(Optional.ToNullable(passName), Optional.ToNullable(componentName), Optional.ToNullable(settingName), content.Value, serializedAdditionalRawData);
+            return new AdditionalUnattendContent(passName, componentName, settingName, content, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

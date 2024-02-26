@@ -124,12 +124,12 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<LoadBalancerSku> sku = default;
-            Optional<string> etag = default;
-            Optional<string> id = default;
-            Optional<string> name = default;
-            Optional<string> type = default;
-            Optional<string> location = default;
+            LoadBalancerSku sku = default;
+            string etag = default;
+            string id = default;
+            string name = default;
+            string type = default;
+            string location = default;
             IDictionary<string, string> tags = default;
             IList<FrontendIPConfiguration> frontendIPConfigurations = default;
             IList<BackendAddressPool> backendAddressPools = default;
@@ -138,8 +138,8 @@ namespace Azure.Network.Management.Interface.Models
             IList<InboundNatRule> inboundNatRules = default;
             IList<InboundNatPool> inboundNatPools = default;
             IList<OutboundRule> outboundRules = default;
-            Optional<string> resourceGuid = default;
-            Optional<ProvisioningState> provisioningState = default;
+            string resourceGuid = default;
+            ProvisioningState provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sku"u8))
@@ -316,13 +316,13 @@ namespace Azure.Network.Management.Interface.Models
                 }
             }
             return new LoadBalancer(
-                id.Value,
-                name.Value,
-                type.Value,
-                location.Value,
+                id,
+                name,
+                type,
+                location,
                 tags ?? new ChangeTrackingDictionary<string, string>(),
-                sku.Value,
-                etag.Value,
+                sku,
+                etag,
                 frontendIPConfigurations ?? new ChangeTrackingList<FrontendIPConfiguration>(),
                 backendAddressPools ?? new ChangeTrackingList<BackendAddressPool>(),
                 loadBalancingRules ?? new ChangeTrackingList<LoadBalancingRule>(),
@@ -330,8 +330,8 @@ namespace Azure.Network.Management.Interface.Models
                 inboundNatRules ?? new ChangeTrackingList<InboundNatRule>(),
                 inboundNatPools ?? new ChangeTrackingList<InboundNatPool>(),
                 outboundRules ?? new ChangeTrackingList<OutboundRule>(),
-                resourceGuid.Value,
-                Optional.ToNullable(provisioningState));
+                resourceGuid,
+                provisioningState);
         }
     }
 }

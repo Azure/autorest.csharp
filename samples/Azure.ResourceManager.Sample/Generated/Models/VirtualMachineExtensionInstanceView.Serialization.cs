@@ -101,9 +101,9 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> type = default;
-            Optional<string> typeHandlerVersion = default;
+            string name = default;
+            string type = default;
+            string typeHandlerVersion = default;
             IList<InstanceViewStatus> substatuses = default;
             IList<InstanceViewStatus> statuses = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
@@ -160,9 +160,9 @@ namespace Azure.ResourceManager.Sample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new VirtualMachineExtensionInstanceView(
-                name.Value,
-                type.Value,
-                typeHandlerVersion.Value,
+                name,
+                type,
+                typeHandlerVersion,
                 substatuses ?? new ChangeTrackingList<InstanceViewStatus>(),
                 statuses ?? new ChangeTrackingList<InstanceViewStatus>(),
                 serializedAdditionalRawData);

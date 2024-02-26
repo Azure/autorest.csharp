@@ -82,16 +82,16 @@ namespace CognitiveSearch.Models
                 return null;
             }
             string name = default;
-            Optional<string> description = default;
+            string description = default;
             string dataSourceName = default;
-            Optional<string> skillsetName = default;
+            string skillsetName = default;
             string targetIndexName = default;
-            Optional<IndexingSchedule> schedule = default;
-            Optional<IndexingParameters> parameters = default;
+            IndexingSchedule schedule = default;
+            IndexingParameters parameters = default;
             IList<FieldMapping> fieldMappings = default;
             IList<FieldMapping> outputFieldMappings = default;
-            Optional<bool> disabled = default;
-            Optional<string> odataEtag = default;
+            bool disabled = default;
+            string odataEtag = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -182,16 +182,16 @@ namespace CognitiveSearch.Models
             }
             return new Indexer(
                 name,
-                description.Value,
+                description,
                 dataSourceName,
-                skillsetName.Value,
+                skillsetName,
                 targetIndexName,
-                schedule.Value,
-                parameters.Value,
+                schedule,
+                parameters,
                 fieldMappings ?? new ChangeTrackingList<FieldMapping>(),
                 outputFieldMappings ?? new ChangeTrackingList<FieldMapping>(),
-                Optional.ToNullable(disabled),
-                odataEtag.Value);
+                disabled,
+                odataEtag);
         }
     }
 }

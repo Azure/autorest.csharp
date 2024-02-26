@@ -73,7 +73,7 @@ namespace CustomizationsInTsp.Models
                 return null;
             }
             int requiredIntOnBase = default;
-            Optional<int> optionalInt = default;
+            int optionalInt = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -98,7 +98,7 @@ namespace CustomizationsInTsp.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new RenamedModel(requiredIntOnBase, Optional.ToNullable(optionalInt), serializedAdditionalRawData);
+            return new RenamedModel(requiredIntOnBase, optionalInt, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<RenamedModel>.Write(ModelReaderWriterOptions options)

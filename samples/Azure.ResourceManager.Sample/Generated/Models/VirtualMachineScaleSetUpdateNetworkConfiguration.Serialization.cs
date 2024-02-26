@@ -115,14 +115,14 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> id = default;
-            Optional<bool> primary = default;
-            Optional<bool> enableAcceleratedNetworking = default;
-            Optional<WritableSubResource> networkSecurityGroup = default;
-            Optional<VirtualMachineScaleSetNetworkConfigurationDnsSettings> dnsSettings = default;
+            string name = default;
+            string id = default;
+            bool primary = default;
+            bool enableAcceleratedNetworking = default;
+            WritableSubResource networkSecurityGroup = default;
+            VirtualMachineScaleSetNetworkConfigurationDnsSettings dnsSettings = default;
             IList<VirtualMachineScaleSetUpdateIPConfiguration> ipConfigurations = default;
-            Optional<bool> enableIPForwarding = default;
+            bool enableIPForwarding = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -215,15 +215,15 @@ namespace Azure.ResourceManager.Sample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new VirtualMachineScaleSetUpdateNetworkConfiguration(
-                id.Value,
+                id,
                 serializedAdditionalRawData,
-                name.Value,
-                Optional.ToNullable(primary),
-                Optional.ToNullable(enableAcceleratedNetworking),
+                name,
+                primary,
+                enableAcceleratedNetworking,
                 networkSecurityGroup,
-                dnsSettings.Value,
+                dnsSettings,
                 ipConfigurations ?? new ChangeTrackingList<VirtualMachineScaleSetUpdateIPConfiguration>(),
-                Optional.ToNullable(enableIPForwarding));
+                enableIPForwarding);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

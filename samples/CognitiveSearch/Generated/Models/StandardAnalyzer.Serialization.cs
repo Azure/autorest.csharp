@@ -44,7 +44,7 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            Optional<int> maxTokenLength = default;
+            int maxTokenLength = default;
             IList<string> stopwords = default;
             string odataType = default;
             string name = default;
@@ -84,7 +84,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new StandardAnalyzer(odataType, name, Optional.ToNullable(maxTokenLength), stopwords ?? new ChangeTrackingList<string>());
+            return new StandardAnalyzer(odataType, name, maxTokenLength, stopwords ?? new ChangeTrackingList<string>());
         }
     }
 }

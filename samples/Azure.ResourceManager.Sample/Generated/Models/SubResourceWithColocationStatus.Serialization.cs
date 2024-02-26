@@ -75,8 +75,8 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<InstanceViewStatus> colocationStatus = default;
-            Optional<string> id = default;
+            InstanceViewStatus colocationStatus = default;
+            string id = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -101,7 +101,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new SubResourceWithColocationStatus(id.Value, serializedAdditionalRawData, colocationStatus.Value);
+            return new SubResourceWithColocationStatus(id, serializedAdditionalRawData, colocationStatus);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

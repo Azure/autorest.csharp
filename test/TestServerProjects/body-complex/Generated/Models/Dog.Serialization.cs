@@ -79,9 +79,9 @@ namespace body_complex.Models
             {
                 return null;
             }
-            Optional<string> food = default;
-            Optional<int> id = default;
-            Optional<string> name = default;
+            string food = default;
+            int id = default;
+            string name = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -111,7 +111,7 @@ namespace body_complex.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Dog(Optional.ToNullable(id), name.Value, serializedAdditionalRawData, food.Value);
+            return new Dog(id, name, serializedAdditionalRawData, food);
         }
 
         BinaryData IPersistableModel<Dog>.Write(ModelReaderWriterOptions options)

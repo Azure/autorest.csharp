@@ -104,11 +104,11 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 return null;
             }
             IList<string> fields = default;
-            Optional<int> nullProperty = default;
+            int nullProperty = default;
             IDictionary<string, string> keyValuePairs = default;
             int xProperty = default;
             string kind = default;
-            Optional<string> name = default;
+            string name = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -173,10 +173,10 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ModelX(
                 kind,
-                name.Value,
+                name,
                 serializedAdditionalRawData,
                 fields ?? new ChangeTrackingList<string>(),
-                Optional.ToNullable(nullProperty),
+                nullProperty,
                 keyValuePairs ?? new ChangeTrackingDictionary<string, string>(),
                 xProperty);
         }

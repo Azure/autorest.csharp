@@ -37,8 +37,8 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<string> id = default;
-            Optional<bool> primary = default;
+            string id = default;
+            bool primary = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -68,7 +68,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new NetworkInterfaceReference(id.Value, Optional.ToNullable(primary));
+            return new NetworkInterfaceReference(id, primary);
         }
     }
 }

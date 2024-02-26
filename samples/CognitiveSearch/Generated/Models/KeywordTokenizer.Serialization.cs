@@ -33,7 +33,7 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            Optional<int> bufferSize = default;
+            int bufferSize = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
@@ -58,7 +58,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new KeywordTokenizer(odataType, name, Optional.ToNullable(bufferSize));
+            return new KeywordTokenizer(odataType, name, bufferSize);
         }
     }
 }

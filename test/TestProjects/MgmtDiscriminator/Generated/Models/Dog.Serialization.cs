@@ -82,10 +82,10 @@ namespace MgmtDiscriminator.Models
             {
                 return null;
             }
-            Optional<string> bark = default;
-            Optional<DogKind> dogKind = default;
+            string bark = default;
+            DogKind dogKind = default;
             PetKind kind = default;
-            Optional<string> id = default;
+            string id = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -120,7 +120,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Dog(kind, id.Value, serializedAdditionalRawData, bark.Value, Optional.ToNullable(dogKind));
+            return new Dog(kind, id, serializedAdditionalRawData, bark, dogKind);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

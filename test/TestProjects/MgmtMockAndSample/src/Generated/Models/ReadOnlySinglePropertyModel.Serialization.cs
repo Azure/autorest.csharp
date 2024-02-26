@@ -24,7 +24,7 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<string> readOnlySomething = default;
+            string readOnlySomething = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("readOnlySomething"u8))
@@ -33,7 +33,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new ReadOnlySinglePropertyModel(readOnlySomething.Value);
+            return new ReadOnlySinglePropertyModel(readOnlySomething);
         }
     }
 }

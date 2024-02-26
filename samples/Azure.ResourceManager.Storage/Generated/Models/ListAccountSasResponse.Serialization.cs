@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace Azure.ResourceManager.Storage.Models
 {
@@ -18,7 +17,7 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Optional<string> accountSasToken = default;
+            string accountSasToken = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("accountSasToken"u8))
@@ -27,7 +26,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new ListAccountSasResponse(accountSasToken.Value);
+            return new ListAccountSasResponse(accountSasToken);
         }
     }
 }

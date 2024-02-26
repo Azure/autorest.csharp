@@ -85,10 +85,10 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<int> maxBatchInstancePercent = default;
-            Optional<int> maxUnhealthyInstancePercent = default;
-            Optional<int> maxUnhealthyUpgradedInstancePercent = default;
-            Optional<string> pauseTimeBetweenBatches = default;
+            int maxBatchInstancePercent = default;
+            int maxUnhealthyInstancePercent = default;
+            int maxUnhealthyUpgradedInstancePercent = default;
+            string pauseTimeBetweenBatches = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -131,7 +131,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new RollingUpgradePolicy(Optional.ToNullable(maxBatchInstancePercent), Optional.ToNullable(maxUnhealthyInstancePercent), Optional.ToNullable(maxUnhealthyUpgradedInstancePercent), pauseTimeBetweenBatches.Value, serializedAdditionalRawData);
+            return new RollingUpgradePolicy(maxBatchInstancePercent, maxUnhealthyInstancePercent, maxUnhealthyUpgradedInstancePercent, pauseTimeBetweenBatches, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

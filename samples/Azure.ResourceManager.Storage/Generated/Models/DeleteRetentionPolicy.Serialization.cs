@@ -34,8 +34,8 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Optional<bool> enabled = default;
-            Optional<int> days = default;
+            bool enabled = default;
+            int days = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("enabled"u8))
@@ -57,7 +57,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new DeleteRetentionPolicy(Optional.ToNullable(enabled), Optional.ToNullable(days));
+            return new DeleteRetentionPolicy(enabled, days);
         }
     }
 }

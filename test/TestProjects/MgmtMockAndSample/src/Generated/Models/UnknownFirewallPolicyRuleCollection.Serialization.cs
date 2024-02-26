@@ -37,8 +37,8 @@ namespace MgmtMockAndSample.Models
                 return null;
             }
             FirewallPolicyRuleCollectionType ruleCollectionType = "Unknown";
-            Optional<string> name = default;
-            Optional<int> priority = default;
+            string name = default;
+            int priority = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("ruleCollectionType"u8))
@@ -61,7 +61,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new UnknownFirewallPolicyRuleCollection(ruleCollectionType, name.Value, Optional.ToNullable(priority));
+            return new UnknownFirewallPolicyRuleCollection(ruleCollectionType, name, priority);
         }
     }
 }

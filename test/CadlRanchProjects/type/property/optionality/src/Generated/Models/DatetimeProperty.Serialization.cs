@@ -70,7 +70,7 @@ namespace _Type.Property.Optionality.Models
             {
                 return null;
             }
-            Optional<DateTimeOffset> property = default;
+            DateTimeOffset property = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property0 in element.EnumerateObject())
@@ -90,7 +90,7 @@ namespace _Type.Property.Optionality.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DatetimeProperty(Optional.ToNullable(property), serializedAdditionalRawData);
+            return new DatetimeProperty(property, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<DatetimeProperty>.Write(ModelReaderWriterOptions options)

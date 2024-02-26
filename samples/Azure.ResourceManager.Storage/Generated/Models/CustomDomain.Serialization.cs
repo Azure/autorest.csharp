@@ -32,7 +32,7 @@ namespace Azure.ResourceManager.Storage.Models
                 return null;
             }
             string name = default;
-            Optional<bool> useSubDomainName = default;
+            bool useSubDomainName = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -50,7 +50,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new CustomDomain(name, Optional.ToNullable(useSubDomainName));
+            return new CustomDomain(name, useSubDomainName);
         }
     }
 }

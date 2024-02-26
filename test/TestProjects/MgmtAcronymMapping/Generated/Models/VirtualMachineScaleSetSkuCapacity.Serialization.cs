@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -18,10 +17,10 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<long> minimum = default;
-            Optional<long> maximum = default;
-            Optional<long> defaultCapacity = default;
-            Optional<VirtualMachineScaleSetSkuScaleType> scaleType = default;
+            long minimum = default;
+            long maximum = default;
+            long defaultCapacity = default;
+            VirtualMachineScaleSetSkuScaleType scaleType = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("minimum"u8))
@@ -61,7 +60,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetSkuCapacity(Optional.ToNullable(minimum), Optional.ToNullable(maximum), Optional.ToNullable(defaultCapacity), Optional.ToNullable(scaleType));
+            return new VirtualMachineScaleSetSkuCapacity(minimum, maximum, defaultCapacity, scaleType);
         }
     }
 }

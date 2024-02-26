@@ -34,10 +34,10 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<string> id = default;
-            Optional<string> name = default;
-            Optional<AzureLocation> location = default;
-            Optional<ResourceType> type = default;
+            string id = default;
+            string name = default;
+            AzureLocation location = default;
+            ResourceType type = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -69,7 +69,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new GuestConfigurationBaseResource(id.Value, name.Value, Optional.ToNullable(location), Optional.ToNullable(type));
+            return new GuestConfigurationBaseResource(id, name, location, type);
         }
     }
 }

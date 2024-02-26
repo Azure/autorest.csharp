@@ -99,11 +99,11 @@ namespace OpenAI.Models
             }
             string prompt = default;
             BinaryData image = default;
-            OptionalProperty<BinaryData> mask = default;
-            OptionalProperty<long?> n = default;
-            OptionalProperty<CreateImageEditRequestSize> size = default;
-            OptionalProperty<CreateImageEditRequestResponseFormat> responseFormat = default;
-            OptionalProperty<string> user = default;
+            BinaryData mask = default;
+            long? n = default;
+            CreateImageEditRequestSize size = default;
+            CreateImageEditRequestResponseFormat responseFormat = default;
+            string user = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -169,11 +169,11 @@ namespace OpenAI.Models
             return new CreateImageEditRequest(
                 prompt,
                 image,
-                mask.Value,
-                OptionalProperty.ToNullable(n),
-                OptionalProperty.ToNullable(size),
-                OptionalProperty.ToNullable(responseFormat),
-                user.Value,
+                mask,
+                n,
+                size,
+                responseFormat,
+                user,
                 serializedAdditionalRawData);
         }
 

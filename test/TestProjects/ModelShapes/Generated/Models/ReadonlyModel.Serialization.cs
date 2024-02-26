@@ -69,7 +69,7 @@ namespace ModelShapes.Models
             {
                 return null;
             }
-            Optional<string> name = default;
+            string name = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -85,7 +85,7 @@ namespace ModelShapes.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ReadonlyModel(name.Value, serializedAdditionalRawData);
+            return new ReadonlyModel(name, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ReadonlyModel>.Write(ModelReaderWriterOptions options)

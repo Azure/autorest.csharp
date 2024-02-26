@@ -103,11 +103,11 @@ namespace Azure.ResourceManager.Sample.Models
                 return null;
             }
             string name = default;
-            Optional<int> idleTimeoutInMinutes = default;
-            Optional<VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings> dnsSettings = default;
+            int idleTimeoutInMinutes = default;
+            VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings dnsSettings = default;
             IList<VirtualMachineScaleSetIPTag> ipTags = default;
-            Optional<WritableSubResource> publicIPPrefix = default;
-            Optional<IPVersion> publicIPAddressVersion = default;
+            WritableSubResource publicIPPrefix = default;
+            IPVersion publicIPAddressVersion = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -187,11 +187,11 @@ namespace Azure.ResourceManager.Sample.Models
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new VirtualMachineScaleSetPublicIPAddressConfiguration(
                 name,
-                Optional.ToNullable(idleTimeoutInMinutes),
-                dnsSettings.Value,
+                idleTimeoutInMinutes,
+                dnsSettings,
                 ipTags ?? new ChangeTrackingList<VirtualMachineScaleSetIPTag>(),
                 publicIPPrefix,
-                Optional.ToNullable(publicIPAddressVersion),
+                publicIPAddressVersion,
                 serializedAdditionalRawData);
         }
 

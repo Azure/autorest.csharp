@@ -34,8 +34,8 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<DiffDiskOption> option = default;
-            Optional<DiffDiskPlacement> placement = default;
+            DiffDiskOption option = default;
+            DiffDiskPlacement placement = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("option"u8))
@@ -57,7 +57,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new DiffDiskSettings(Optional.ToNullable(option), Optional.ToNullable(placement));
+            return new DiffDiskSettings(option, placement);
         }
     }
 }
