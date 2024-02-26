@@ -20,6 +20,8 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal static partial class CodeWriterExtensions
     {
+        private const int SingleLineParameterThreshold = 6;
+
         public static void WriteMethodBodyStatement(this CodeWriter writer, MethodBodyStatement bodyStatement)
         {
             switch (bodyStatement)
@@ -535,8 +537,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Append($"new {type}");
                     if (parameters.Count > 0 || initExpression is not { Parameters.Count: > 0 })
                     {
-                        //magic number to decide when to use single line
-                        WriteArguments(writer, parameters, parameters.Count < 6);
+                        WriteArguments(writer, parameters, parameters.Count < SingleLineParameterThreshold);
                     }
 
                     if (initExpression is { Parameters.Count: > 0 })
