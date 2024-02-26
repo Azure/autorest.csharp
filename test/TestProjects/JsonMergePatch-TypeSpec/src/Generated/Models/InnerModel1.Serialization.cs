@@ -69,7 +69,7 @@ namespace Payload.JsonMergePatch.Models
                     writer.WriteNullValue();
                 }
             }
-            if (Optional.IsDefined(Property))
+            if (_propertyChanged)
             {
                 writer.WritePropertyName("property"u8);
                 writer.WriteStringValue(Property);

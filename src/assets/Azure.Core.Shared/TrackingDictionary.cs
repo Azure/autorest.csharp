@@ -12,7 +12,7 @@ namespace Azure.Core
     public class TrackingDictionary<TKey, TValue> : IDictionary<TKey, TValue>, IReadOnlyDictionary<TKey, TValue> where TKey : notnull
     {
         private ChangeTrackingDictionary<TKey, TValue> _dictionary;
-        private IList<TKey>? _changedKeys;
+        private IList<TKey>? _changedKeys = default;
 
         public IList<TKey>? ChangedKeys => _changedKeys;
 
