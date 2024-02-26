@@ -621,6 +621,10 @@
               "store",
               "secretName"
             ]
+          },
+          "type20": {
+            "type": "object",
+            "x-ms-format": "dfe-key-object-value-pairs"
           }
         },
         "allOf": [
