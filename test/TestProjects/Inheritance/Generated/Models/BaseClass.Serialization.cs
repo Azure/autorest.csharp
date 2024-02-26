@@ -206,7 +206,19 @@ namespace Inheritance.Models
                     continue;
                 }
             }
-            return new BaseClass(baseClassProperty.Value, dfeString.Value, dfeDouble.Value, dfeBool.Value, dfeInt.Value, dfeObject.Value, dfeListOfT.Value, dfeListOfString.Value, dfeKeyValuePairs.Value, dfeDateTime.Value, dfeDuration.Value, dfeUri.Value);
+            return new BaseClass(
+                baseClassProperty.Value,
+                dfeString.Value,
+                dfeDouble.Value,
+                dfeBool.Value,
+                dfeInt.Value,
+                dfeObject.Value,
+                dfeListOfT.Value,
+                dfeListOfString.Value,
+                dfeKeyValuePairs.Value,
+                dfeDateTime.Value,
+                dfeDuration.Value,
+                dfeUri.Value);
         }
     }
 }

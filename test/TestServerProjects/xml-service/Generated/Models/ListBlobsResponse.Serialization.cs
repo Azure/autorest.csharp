@@ -93,7 +93,16 @@ namespace xml_service.Models
             {
                 nextMarker = (string)nextMarkerElement;
             }
-            return new ListBlobsResponse(serviceEndpoint, containerName, prefix, marker, maxResults, delimiter, blobs, nextMarker, serializedAdditionalRawData: null);
+            return new ListBlobsResponse(
+                serviceEndpoint,
+                containerName,
+                prefix,
+                marker,
+                maxResults,
+                delimiter,
+                blobs,
+                nextMarker,
+                serializedAdditionalRawData: null);
         }
 
         BinaryData IPersistableModel<ListBlobsResponse>.Write(ModelReaderWriterOptions options)

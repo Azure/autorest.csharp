@@ -102,7 +102,14 @@ namespace MgmtListMethods
                     continue;
                 }
             }
-            return new FakeConfigurationData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, configValue.Value);
+            return new FakeConfigurationData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                configValue.Value);
         }
     }
 }

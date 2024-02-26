@@ -102,7 +102,14 @@ namespace MgmtParent
                     continue;
                 }
             }
-            return new DedicatedHostGroupData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, foo.Value);
+            return new DedicatedHostGroupData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                foo.Value);
         }
     }
 }

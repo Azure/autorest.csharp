@@ -201,7 +201,20 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new InboundNatRule(id.Value, name.Value, etag.Value, type.Value, frontendIPConfiguration.Value, backendIPConfiguration.Value, Optional.ToNullable(protocol), Optional.ToNullable(frontendPort), Optional.ToNullable(backendPort), Optional.ToNullable(idleTimeoutInMinutes), Optional.ToNullable(enableFloatingIP), Optional.ToNullable(enableTcpReset), Optional.ToNullable(provisioningState));
+            return new InboundNatRule(
+                id.Value,
+                name.Value,
+                etag.Value,
+                type.Value,
+                frontendIPConfiguration.Value,
+                backendIPConfiguration.Value,
+                Optional.ToNullable(protocol),
+                Optional.ToNullable(frontendPort),
+                Optional.ToNullable(backendPort),
+                Optional.ToNullable(idleTimeoutInMinutes),
+                Optional.ToNullable(enableFloatingIP),
+                Optional.ToNullable(enableTcpReset),
+                Optional.ToNullable(provisioningState));
         }
     }
 }

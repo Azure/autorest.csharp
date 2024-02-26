@@ -96,7 +96,13 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new SearchDocumentsResult(Optional.ToNullable(odataCount), Optional.ToNullable(searchCoverage), searchFacets ?? new ChangeTrackingDictionary<string, IList<FacetResult>>(), searchNextPageParameters.Value, value, odataNextLink.Value);
+            return new SearchDocumentsResult(
+                Optional.ToNullable(odataCount),
+                Optional.ToNullable(searchCoverage),
+                searchFacets ?? new ChangeTrackingDictionary<string, IList<FacetResult>>(),
+                searchNextPageParameters.Value,
+                value,
+                odataNextLink.Value);
         }
     }
 }

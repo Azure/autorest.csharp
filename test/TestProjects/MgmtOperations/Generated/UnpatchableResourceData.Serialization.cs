@@ -102,7 +102,14 @@ namespace MgmtOperations
                     continue;
                 }
             }
-            return new UnpatchableResourceData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, foo.Value);
+            return new UnpatchableResourceData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                foo.Value);
         }
     }
 }

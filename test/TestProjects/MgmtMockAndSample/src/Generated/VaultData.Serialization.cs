@@ -94,7 +94,15 @@ namespace MgmtMockAndSample
                     continue;
                 }
             }
-            return new VaultData(id, name, type, systemData.Value, Optional.ToNullable(location), tags ?? new ChangeTrackingDictionary<string, string>(), properties, identity);
+            return new VaultData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                Optional.ToNullable(location),
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                properties,
+                identity);
         }
     }
 }

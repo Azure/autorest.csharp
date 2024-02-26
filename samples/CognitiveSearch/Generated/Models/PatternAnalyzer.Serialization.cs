@@ -110,7 +110,13 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new PatternAnalyzer(odataType, name, Optional.ToNullable(lowercase), pattern.Value, Optional.ToNullable(flags), stopwords ?? new ChangeTrackingList<string>());
+            return new PatternAnalyzer(
+                odataType,
+                name,
+                Optional.ToNullable(lowercase),
+                pattern.Value,
+                Optional.ToNullable(flags),
+                stopwords ?? new ChangeTrackingList<string>());
         }
     }
 }

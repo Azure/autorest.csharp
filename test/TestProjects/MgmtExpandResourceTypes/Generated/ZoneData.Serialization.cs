@@ -274,7 +274,24 @@ namespace MgmtExpandResourceTypes
                     continue;
                 }
             }
-            return new ZoneData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, etag.Value, Optional.ToNullable(maxNumberOfRecordSets), Optional.ToNullable(maxNumberOfRecordsPerRecordSet), Optional.ToNullable(numberOfRecordSets), nameServers ?? new ChangeTrackingList<string>(), Optional.ToNullable(zoneType), Optional.ToNullable(machineType), Optional.ToNullable(storageType), Optional.ToNullable(memoryType), registrationVirtualNetworks ?? new ChangeTrackingList<WritableSubResource>(), resolutionVirtualNetworks ?? new ChangeTrackingList<WritableSubResource>());
+            return new ZoneData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                etag.Value,
+                Optional.ToNullable(maxNumberOfRecordSets),
+                Optional.ToNullable(maxNumberOfRecordsPerRecordSet),
+                Optional.ToNullable(numberOfRecordSets),
+                nameServers ?? new ChangeTrackingList<string>(),
+                Optional.ToNullable(zoneType),
+                Optional.ToNullable(machineType),
+                Optional.ToNullable(storageType),
+                Optional.ToNullable(memoryType),
+                registrationVirtualNetworks ?? new ChangeTrackingList<WritableSubResource>(),
+                resolutionVirtualNetworks ?? new ChangeTrackingList<WritableSubResource>());
         }
     }
 }

@@ -159,7 +159,14 @@ namespace body_complex.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Salmon(fishtype, species.Value, length, siblings ?? new ChangeTrackingList<Fish>(), serializedAdditionalRawData, location.Value, Optional.ToNullable(iswild));
+            return new Salmon(
+                fishtype,
+                species.Value,
+                length,
+                siblings ?? new ChangeTrackingList<Fish>(),
+                serializedAdditionalRawData,
+                location.Value,
+                Optional.ToNullable(iswild));
         }
 
         BinaryData IPersistableModel<Salmon>.Write(ModelReaderWriterOptions options)

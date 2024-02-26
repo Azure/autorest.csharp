@@ -274,7 +274,20 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineScaleSetVmInstanceView(Optional.ToNullable(platformUpdateDomain), Optional.ToNullable(platformFaultDomain), rdpThumbPrint.Value, vmAgent.Value, maintenanceRedeployStatus.Value, disks ?? new ChangeTrackingList<DiskInstanceView>(), extensions ?? new ChangeTrackingList<VirtualMachineExtensionInstanceView>(), vmHealth.Value, bootDiagnostics.Value, statuses ?? new ChangeTrackingList<InstanceViewStatus>(), assignedHost.Value, placementGroupId.Value, serializedAdditionalRawData);
+            return new VirtualMachineScaleSetVmInstanceView(
+                Optional.ToNullable(platformUpdateDomain),
+                Optional.ToNullable(platformFaultDomain),
+                rdpThumbPrint.Value,
+                vmAgent.Value,
+                maintenanceRedeployStatus.Value,
+                disks ?? new ChangeTrackingList<DiskInstanceView>(),
+                extensions ?? new ChangeTrackingList<VirtualMachineExtensionInstanceView>(),
+                vmHealth.Value,
+                bootDiagnostics.Value,
+                statuses ?? new ChangeTrackingList<InstanceViewStatus>(),
+                assignedHost.Value,
+                placementGroupId.Value,
+                serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

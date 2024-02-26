@@ -107,7 +107,14 @@ namespace MgmtNonStringPathVariable
                     continue;
                 }
             }
-            return new BarData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, properties.Value);
+            return new BarData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                properties.Value);
         }
     }
 }

@@ -138,7 +138,16 @@ namespace Azure.ResourceManager.Storage
                     continue;
                 }
             }
-            return new ImmutabilityPolicyData(id, name, type, systemData.Value, Optional.ToNullable(immutabilityPeriodSinceCreationInDays), Optional.ToNullable(state), Optional.ToNullable(allowProtectedAppendWrites), Optional.ToNullable(allowProtectedAppendWritesAll), Optional.ToNullable(etag));
+            return new ImmutabilityPolicyData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                Optional.ToNullable(immutabilityPeriodSinceCreationInDays),
+                Optional.ToNullable(state),
+                Optional.ToNullable(allowProtectedAppendWrites),
+                Optional.ToNullable(allowProtectedAppendWritesAll),
+                Optional.ToNullable(etag));
         }
     }
 }

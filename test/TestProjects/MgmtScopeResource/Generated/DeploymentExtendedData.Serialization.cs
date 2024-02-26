@@ -83,7 +83,14 @@ namespace MgmtScopeResource
                     continue;
                 }
             }
-            return new DeploymentExtendedData(id, name, type, systemData.Value, location.Value, properties.Value, tags ?? new ChangeTrackingDictionary<string, string>());
+            return new DeploymentExtendedData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                location.Value,
+                properties.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>());
         }
     }
 }

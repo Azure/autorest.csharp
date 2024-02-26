@@ -99,7 +99,14 @@ namespace MgmtOperations.Models
                     continue;
                 }
             }
-            return new ConnectionSharedKey(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, value);
+            return new ConnectionSharedKey(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                value);
         }
     }
 }

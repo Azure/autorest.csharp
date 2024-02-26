@@ -235,7 +235,18 @@ namespace Azure.ResourceManager.Sample
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineScaleSetRollingUpgradeData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, policy.Value, runningStatus.Value, progress.Value, error.Value, serializedAdditionalRawData);
+            return new VirtualMachineScaleSetRollingUpgradeData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                policy.Value,
+                runningStatus.Value,
+                progress.Value,
+                error.Value,
+                serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

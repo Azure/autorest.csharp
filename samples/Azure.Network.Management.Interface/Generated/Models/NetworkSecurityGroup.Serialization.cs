@@ -195,7 +195,19 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new NetworkSecurityGroup(id.Value, name.Value, type.Value, location.Value, tags ?? new ChangeTrackingDictionary<string, string>(), etag.Value, securityRules ?? new ChangeTrackingList<SecurityRule>(), defaultSecurityRules ?? new ChangeTrackingList<SecurityRule>(), networkInterfaces ?? new ChangeTrackingList<NetworkInterface>(), subnets ?? new ChangeTrackingList<Subnet>(), resourceGuid.Value, Optional.ToNullable(provisioningState));
+            return new NetworkSecurityGroup(
+                id.Value,
+                name.Value,
+                type.Value,
+                location.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                etag.Value,
+                securityRules ?? new ChangeTrackingList<SecurityRule>(),
+                defaultSecurityRules ?? new ChangeTrackingList<SecurityRule>(),
+                networkInterfaces ?? new ChangeTrackingList<NetworkInterface>(),
+                subnets ?? new ChangeTrackingList<Subnet>(),
+                resourceGuid.Value,
+                Optional.ToNullable(provisioningState));
         }
     }
 }

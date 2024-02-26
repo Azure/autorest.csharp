@@ -104,7 +104,14 @@ namespace MgmtCollectionParent
                     continue;
                 }
             }
-            return new OrderResourceData(id, name, type, systemData.Value, orderItemIds ?? new ChangeTrackingList<string>(), currentStage.Value, orderStageHistory ?? new ChangeTrackingList<StageDetails>());
+            return new OrderResourceData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                orderItemIds ?? new ChangeTrackingList<string>(),
+                currentStage.Value,
+                orderStageHistory ?? new ChangeTrackingList<StageDetails>());
         }
     }
 }

@@ -143,7 +143,14 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ThrottledRequestsContent(blobContainerSasUri, fromTime, toTime, Optional.ToNullable(groupByThrottlePolicy), Optional.ToNullable(groupByOperationName), Optional.ToNullable(groupByResourceName), serializedAdditionalRawData);
+            return new ThrottledRequestsContent(
+                blobContainerSasUri,
+                fromTime,
+                toTime,
+                Optional.ToNullable(groupByThrottlePolicy),
+                Optional.ToNullable(groupByOperationName),
+                Optional.ToNullable(groupByResourceName),
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ThrottledRequestsContent>.Write(ModelReaderWriterOptions options)

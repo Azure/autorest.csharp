@@ -118,7 +118,14 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new PathHierarchyTokenizerV2(odataType, name, Optional.ToNullable(delimiter), Optional.ToNullable(replacement), Optional.ToNullable(maxTokenLength), Optional.ToNullable(reverse), Optional.ToNullable(skip));
+            return new PathHierarchyTokenizerV2(
+                odataType,
+                name,
+                Optional.ToNullable(delimiter),
+                Optional.ToNullable(replacement),
+                Optional.ToNullable(maxTokenLength),
+                Optional.ToNullable(reverse),
+                Optional.ToNullable(skip));
         }
     }
 }

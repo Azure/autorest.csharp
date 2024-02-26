@@ -333,7 +333,20 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new CreateFineTuneRequest(trainingFile, validationFile.Value, OptionalProperty.ToNullable(model), OptionalProperty.ToNullable(nEpochs), OptionalProperty.ToNullable(batchSize), OptionalProperty.ToNullable(learningRateMultiplier), OptionalProperty.ToNullable(promptLossRate), OptionalProperty.ToNullable(computeClassificationMetrics), OptionalProperty.ToNullable(classificationNClasses), classificationPositiveClass.Value, classificationBetas ?? new OptionalList<double>(), suffix.Value, serializedAdditionalRawData);
+            return new CreateFineTuneRequest(
+                trainingFile,
+                validationFile.Value,
+                OptionalProperty.ToNullable(model),
+                OptionalProperty.ToNullable(nEpochs),
+                OptionalProperty.ToNullable(batchSize),
+                OptionalProperty.ToNullable(learningRateMultiplier),
+                OptionalProperty.ToNullable(promptLossRate),
+                OptionalProperty.ToNullable(computeClassificationMetrics),
+                OptionalProperty.ToNullable(classificationNClasses),
+                classificationPositiveClass.Value,
+                classificationBetas ?? new OptionalList<double>(),
+                suffix.Value,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<CreateFineTuneRequest>.Write(ModelReaderWriterOptions options)

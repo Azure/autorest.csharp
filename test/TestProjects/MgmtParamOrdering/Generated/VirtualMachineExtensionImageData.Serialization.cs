@@ -102,7 +102,14 @@ namespace MgmtParamOrdering
                     continue;
                 }
             }
-            return new VirtualMachineExtensionImageData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, bar.Value);
+            return new VirtualMachineExtensionImageData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                bar.Value);
         }
     }
 }

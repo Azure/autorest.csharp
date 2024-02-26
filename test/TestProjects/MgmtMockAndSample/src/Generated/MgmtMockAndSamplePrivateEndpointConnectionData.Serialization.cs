@@ -155,7 +155,17 @@ namespace MgmtMockAndSample
                     continue;
                 }
             }
-            return new MgmtMockAndSamplePrivateEndpointConnectionData(id, name, type, systemData.Value, etag.Value, privateEndpoint, privateLinkServiceConnectionState.Value, Optional.ToNullable(provisioningState), Optional.ToNullable(location), tags ?? new ChangeTrackingDictionary<string, string>());
+            return new MgmtMockAndSamplePrivateEndpointConnectionData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                etag.Value,
+                privateEndpoint,
+                privateLinkServiceConnectionState.Value,
+                Optional.ToNullable(provisioningState),
+                Optional.ToNullable(location),
+                tags ?? new ChangeTrackingDictionary<string, string>());
         }
     }
 }

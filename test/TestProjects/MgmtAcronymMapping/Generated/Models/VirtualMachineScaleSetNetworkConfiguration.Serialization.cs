@@ -163,7 +163,15 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetNetworkConfiguration(id.Value, name, Optional.ToNullable(primary), Optional.ToNullable(enableAcceleratedNetworking), networkSecurityGroup, dnsSettings.Value, ipConfigurations ?? new ChangeTrackingList<VirtualMachineScaleSetIPConfiguration>(), Optional.ToNullable(enableIPForwarding));
+            return new VirtualMachineScaleSetNetworkConfiguration(
+                id.Value,
+                name,
+                Optional.ToNullable(primary),
+                Optional.ToNullable(enableAcceleratedNetworking),
+                networkSecurityGroup,
+                dnsSettings.Value,
+                ipConfigurations ?? new ChangeTrackingList<VirtualMachineScaleSetIPConfiguration>(),
+                Optional.ToNullable(enableIPForwarding));
         }
     }
 }

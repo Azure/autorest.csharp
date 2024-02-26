@@ -150,7 +150,16 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new OcrSkill(odataType, name.Value, description.Value, context.Value, inputs, outputs, Optional.ToNullable(textExtractionAlgorithm), Optional.ToNullable(defaultLanguageCode), Optional.ToNullable(detectOrientation));
+            return new OcrSkill(
+                odataType,
+                name.Value,
+                description.Value,
+                context.Value,
+                inputs,
+                outputs,
+                Optional.ToNullable(textExtractionAlgorithm),
+                Optional.ToNullable(defaultLanguageCode),
+                Optional.ToNullable(detectOrientation));
         }
     }
 }

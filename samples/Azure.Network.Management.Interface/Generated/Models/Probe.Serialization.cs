@@ -173,7 +173,18 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new Probe(id.Value, name.Value, etag.Value, type.Value, loadBalancingRules ?? new ChangeTrackingList<SubResource>(), Optional.ToNullable(protocol), Optional.ToNullable(port), Optional.ToNullable(intervalInSeconds), Optional.ToNullable(numberOfProbes), requestPath.Value, Optional.ToNullable(provisioningState));
+            return new Probe(
+                id.Value,
+                name.Value,
+                etag.Value,
+                type.Value,
+                loadBalancingRules ?? new ChangeTrackingList<SubResource>(),
+                Optional.ToNullable(protocol),
+                Optional.ToNullable(port),
+                Optional.ToNullable(intervalInSeconds),
+                Optional.ToNullable(numberOfProbes),
+                requestPath.Value,
+                Optional.ToNullable(provisioningState));
         }
     }
 }

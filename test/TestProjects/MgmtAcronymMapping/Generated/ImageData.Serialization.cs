@@ -159,7 +159,17 @@ namespace MgmtAcronymMapping
                     continue;
                 }
             }
-            return new ImageData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, sourceVirtualMachine, storageProfile.Value, provisioningState.Value, Optional.ToNullable(hyperVGeneration));
+            return new ImageData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                sourceVirtualMachine,
+                storageProfile.Value,
+                provisioningState.Value,
+                Optional.ToNullable(hyperVGeneration));
         }
     }
 }

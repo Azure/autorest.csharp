@@ -142,7 +142,13 @@ namespace multiple_inheritance.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Kitten(name, serializedAdditionalRawData, Optional.ToNullable(likesMilk), Optional.ToNullable(meows), Optional.ToNullable(hisses), Optional.ToNullable(eatsMiceYet));
+            return new Kitten(
+                name,
+                serializedAdditionalRawData,
+                Optional.ToNullable(likesMilk),
+                Optional.ToNullable(meows),
+                Optional.ToNullable(hisses),
+                Optional.ToNullable(eatsMiceYet));
         }
 
         BinaryData IPersistableModel<Kitten>.Write(ModelReaderWriterOptions options)

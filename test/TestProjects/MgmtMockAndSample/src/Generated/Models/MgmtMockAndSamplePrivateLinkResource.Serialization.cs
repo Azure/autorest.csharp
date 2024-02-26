@@ -143,7 +143,16 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new MgmtMockAndSamplePrivateLinkResource(id, name, type, systemData.Value, groupId.Value, requiredMembers ?? new ChangeTrackingList<string>(), requiredZoneNames ?? new ChangeTrackingList<string>(), Optional.ToNullable(location), tags ?? new ChangeTrackingDictionary<string, string>());
+            return new MgmtMockAndSamplePrivateLinkResource(
+                id,
+                name,
+                type,
+                systemData.Value,
+                groupId.Value,
+                requiredMembers ?? new ChangeTrackingList<string>(),
+                requiredZoneNames ?? new ChangeTrackingList<string>(),
+                Optional.ToNullable(location),
+                tags ?? new ChangeTrackingDictionary<string, string>());
         }
     }
 }

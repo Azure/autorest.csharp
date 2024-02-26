@@ -167,7 +167,17 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new MhsmPrivateLinkResource(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, groupId.Value, requiredMembers ?? new ChangeTrackingList<string>(), requiredZoneNames ?? new ChangeTrackingList<string>(), sku.Value);
+            return new MhsmPrivateLinkResource(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                groupId.Value,
+                requiredMembers ?? new ChangeTrackingList<string>(),
+                requiredZoneNames ?? new ChangeTrackingList<string>(),
+                sku.Value);
         }
     }
 }

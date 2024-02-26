@@ -191,7 +191,17 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new EntityRecognitionSkill(odataType, name.Value, description.Value, context.Value, inputs, outputs, categories ?? new ChangeTrackingList<EntityCategory>(), Optional.ToNullable(defaultLanguageCode), Optional.ToNullable(includeTypelessEntities), Optional.ToNullable(minimumPrecision));
+            return new EntityRecognitionSkill(
+                odataType,
+                name.Value,
+                description.Value,
+                context.Value,
+                inputs,
+                outputs,
+                categories ?? new ChangeTrackingList<EntityCategory>(),
+                Optional.ToNullable(defaultLanguageCode),
+                Optional.ToNullable(includeTypelessEntities),
+                Optional.ToNullable(minimumPrecision));
         }
     }
 }

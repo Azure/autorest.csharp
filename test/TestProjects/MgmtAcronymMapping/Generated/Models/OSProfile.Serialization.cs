@@ -157,7 +157,16 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new OSProfile(computerName.Value, adminUsername.Value, adminPassword.Value, customData.Value, windowsConfiguration.Value, linuxConfiguration.Value, secrets ?? new ChangeTrackingList<VaultSecretGroup>(), Optional.ToNullable(allowExtensionOperations), Optional.ToNullable(requireGuestProvisionSignal));
+            return new OSProfile(
+                computerName.Value,
+                adminUsername.Value,
+                adminPassword.Value,
+                customData.Value,
+                windowsConfiguration.Value,
+                linuxConfiguration.Value,
+                secrets ?? new ChangeTrackingList<VaultSecretGroup>(),
+                Optional.ToNullable(allowExtensionOperations),
+                Optional.ToNullable(requireGuestProvisionSignal));
         }
     }
 }

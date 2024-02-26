@@ -150,7 +150,15 @@ namespace body_complex.Models
                 additionalPropertiesDictionary.Add(property.Name, property.Value.GetObject());
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new SmartSalmon(fishtype, species.Value, length, siblings ?? new ChangeTrackingList<Fish>(), location.Value, Optional.ToNullable(iswild), collegeDegree.Value, additionalProperties);
+            return new SmartSalmon(
+                fishtype,
+                species.Value,
+                length,
+                siblings ?? new ChangeTrackingList<Fish>(),
+                location.Value,
+                Optional.ToNullable(iswild),
+                collegeDegree.Value,
+                additionalProperties);
         }
 
         BinaryData IPersistableModel<SmartSalmon>.Write(ModelReaderWriterOptions options)

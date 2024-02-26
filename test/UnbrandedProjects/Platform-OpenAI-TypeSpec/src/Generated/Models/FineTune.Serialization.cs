@@ -234,7 +234,21 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new FineTune(id, @object, createdAt, updatedAt, model, fineTunedModel, organizationId, status, hyperparams, trainingFiles, validationFiles, resultFiles, events ?? new OptionalList<FineTuneEvent>(), serializedAdditionalRawData);
+            return new FineTune(
+                id,
+                @object,
+                createdAt,
+                updatedAt,
+                model,
+                fineTunedModel,
+                organizationId,
+                status,
+                hyperparams,
+                trainingFiles,
+                validationFiles,
+                resultFiles,
+                events ?? new OptionalList<FineTuneEvent>(),
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<FineTune>.Write(ModelReaderWriterOptions options)

@@ -226,7 +226,17 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetUpdateIPConfiguration(id.Value, name.Value, subnet, Optional.ToNullable(primary), publicIPAddressConfiguration.Value, Optional.ToNullable(privateIPAddressVersion), applicationGatewayBackendAddressPools ?? new ChangeTrackingList<WritableSubResource>(), applicationSecurityGroups ?? new ChangeTrackingList<WritableSubResource>(), loadBalancerBackendAddressPools ?? new ChangeTrackingList<WritableSubResource>(), loadBalancerInboundNatPools ?? new ChangeTrackingList<WritableSubResource>());
+            return new VirtualMachineScaleSetUpdateIPConfiguration(
+                id.Value,
+                name.Value,
+                subnet,
+                Optional.ToNullable(primary),
+                publicIPAddressConfiguration.Value,
+                Optional.ToNullable(privateIPAddressVersion),
+                applicationGatewayBackendAddressPools ?? new ChangeTrackingList<WritableSubResource>(),
+                applicationSecurityGroups ?? new ChangeTrackingList<WritableSubResource>(),
+                loadBalancerBackendAddressPools ?? new ChangeTrackingList<WritableSubResource>(),
+                loadBalancerInboundNatPools ?? new ChangeTrackingList<WritableSubResource>());
         }
     }
 }

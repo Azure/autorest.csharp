@@ -323,7 +323,21 @@ namespace Azure.ResourceManager.Sample
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DedicatedHostGroupData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, zones ?? new ChangeTrackingList<string>(), hostUris ?? new ChangeTrackingList<Uri>(), Optional.ToNullable(tenantId), Optional.ToNullable(platformFaultDomainCount), hosts ?? new ChangeTrackingList<Resources.Models.SubResource>(), instanceView.Value, Optional.ToNullable(supportAutomaticPlacement), serializedAdditionalRawData);
+            return new DedicatedHostGroupData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                zones ?? new ChangeTrackingList<string>(),
+                hostUris ?? new ChangeTrackingList<Uri>(),
+                Optional.ToNullable(tenantId),
+                Optional.ToNullable(platformFaultDomainCount),
+                hosts ?? new ChangeTrackingList<Resources.Models.SubResource>(),
+                instanceView.Value,
+                Optional.ToNullable(supportAutomaticPlacement),
+                serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

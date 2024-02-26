@@ -91,7 +91,13 @@ namespace MgmtPropertyChooser.Models
                     continue;
                 }
             }
-            return new MgmtPropertyChooserResourceData(id, name, type, systemData.Value, location, tags ?? new ChangeTrackingDictionary<string, string>());
+            return new MgmtPropertyChooserResourceData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                location,
+                tags ?? new ChangeTrackingDictionary<string, string>());
         }
     }
 }

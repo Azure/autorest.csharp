@@ -181,7 +181,16 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new RoleAssignmentArtifact(id, name, type, systemData.Value, kind, serializedAdditionalRawData, roleDefinitionId, principalIds, resourceGroup.Value);
+            return new RoleAssignmentArtifact(
+                id,
+                name,
+                type,
+                systemData.Value,
+                kind,
+                serializedAdditionalRawData,
+                roleDefinitionId,
+                principalIds,
+                resourceGroup.Value);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

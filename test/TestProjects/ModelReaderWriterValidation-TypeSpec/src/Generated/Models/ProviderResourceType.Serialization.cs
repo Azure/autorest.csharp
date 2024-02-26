@@ -284,7 +284,18 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ProviderResourceType(resourceType.Value, locations ?? new ChangeTrackingList<string>(), locationMappings ?? new ChangeTrackingList<ProviderExtendedLocation>(), aliases ?? new ChangeTrackingList<ResourceTypeAlias>(), apiVersions ?? new ChangeTrackingList<string>(), defaultApiVersion.Value, zoneMappings ?? new ChangeTrackingList<ZoneMapping>(), apiProfiles ?? new ChangeTrackingList<ApiProfile>(), capabilities.Value, properties ?? new ChangeTrackingDictionary<string, string>(), serializedAdditionalRawData);
+            return new ProviderResourceType(
+                resourceType.Value,
+                locations ?? new ChangeTrackingList<string>(),
+                locationMappings ?? new ChangeTrackingList<ProviderExtendedLocation>(),
+                aliases ?? new ChangeTrackingList<ResourceTypeAlias>(),
+                apiVersions ?? new ChangeTrackingList<string>(),
+                defaultApiVersion.Value,
+                zoneMappings ?? new ChangeTrackingList<ZoneMapping>(),
+                apiProfiles ?? new ChangeTrackingList<ApiProfile>(),
+                capabilities.Value,
+                properties ?? new ChangeTrackingDictionary<string, string>(),
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ProviderResourceType>.Write(ModelReaderWriterOptions options)

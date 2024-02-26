@@ -172,7 +172,14 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new WindowsConfiguration(Optional.ToNullable(provisionVmAgent), Optional.ToNullable(enableAutomaticUpdates), timeZone.Value, additionalUnattendContent ?? new ChangeTrackingList<AdditionalUnattendContent>(), patchSettings.Value, winRM.Value, serializedAdditionalRawData);
+            return new WindowsConfiguration(
+                Optional.ToNullable(provisionVmAgent),
+                Optional.ToNullable(enableAutomaticUpdates),
+                timeZone.Value,
+                additionalUnattendContent ?? new ChangeTrackingList<AdditionalUnattendContent>(),
+                patchSettings.Value,
+                winRM.Value,
+                serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

@@ -214,7 +214,16 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineScaleSetUpdateNetworkConfiguration(id.Value, serializedAdditionalRawData, name.Value, Optional.ToNullable(primary), Optional.ToNullable(enableAcceleratedNetworking), networkSecurityGroup, dnsSettings.Value, ipConfigurations ?? new ChangeTrackingList<VirtualMachineScaleSetUpdateIPConfiguration>(), Optional.ToNullable(enableIPForwarding));
+            return new VirtualMachineScaleSetUpdateNetworkConfiguration(
+                id.Value,
+                serializedAdditionalRawData,
+                name.Value,
+                Optional.ToNullable(primary),
+                Optional.ToNullable(enableAcceleratedNetworking),
+                networkSecurityGroup,
+                dnsSettings.Value,
+                ipConfigurations ?? new ChangeTrackingList<VirtualMachineScaleSetUpdateIPConfiguration>(),
+                Optional.ToNullable(enableIPForwarding));
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

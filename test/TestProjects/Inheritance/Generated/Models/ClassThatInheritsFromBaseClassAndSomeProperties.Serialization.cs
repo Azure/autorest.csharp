@@ -228,7 +228,21 @@ namespace Inheritance.Models
                     continue;
                 }
             }
-            return new ClassThatInheritsFromBaseClassAndSomeProperties(baseClassProperty.Value, dfeString.Value, dfeDouble.Value, dfeBool.Value, dfeInt.Value, dfeObject.Value, dfeListOfT.Value, dfeListOfString.Value, dfeKeyValuePairs.Value, dfeDateTime.Value, dfeDuration.Value, dfeUri.Value, someProperty.Value, someOtherProperty.Value);
+            return new ClassThatInheritsFromBaseClassAndSomeProperties(
+                baseClassProperty.Value,
+                dfeString.Value,
+                dfeDouble.Value,
+                dfeBool.Value,
+                dfeInt.Value,
+                dfeObject.Value,
+                dfeListOfT.Value,
+                dfeListOfString.Value,
+                dfeKeyValuePairs.Value,
+                dfeDateTime.Value,
+                dfeDuration.Value,
+                dfeUri.Value,
+                someProperty.Value,
+                someOtherProperty.Value);
         }
     }
 }

@@ -587,7 +587,31 @@ namespace ModelsTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new InputModel(requiredString, requiredInt, requiredNullableInt, requiredNullableString, Optional.ToNullable(nonRequiredNullableInt), nonRequiredNullableString.Value, requiredModel, requiredModel2, requiredIntList, requiredStringList, requiredModelList, requiredModelRecord, requiredCollectionWithNullableFloatElement, requiredCollectionWithNullableBooleanElement, requiredNullableModelList, requiredNullableStringList, requiredNullableIntList, nonRequiredModelList ?? new ChangeTrackingList<CollectionItem>(), nonRequiredStringList ?? new ChangeTrackingList<string>(), nonRequiredIntList ?? new ChangeTrackingList<int>(), nonRequiredNullableModelList ?? new ChangeTrackingList<CollectionItem>(), nonRequiredNullableStringList ?? new ChangeTrackingList<string>(), nonRequiredNullableIntList ?? new ChangeTrackingList<int>(), serializedAdditionalRawData);
+            return new InputModel(
+                requiredString,
+                requiredInt,
+                requiredNullableInt,
+                requiredNullableString,
+                Optional.ToNullable(nonRequiredNullableInt),
+                nonRequiredNullableString.Value,
+                requiredModel,
+                requiredModel2,
+                requiredIntList,
+                requiredStringList,
+                requiredModelList,
+                requiredModelRecord,
+                requiredCollectionWithNullableFloatElement,
+                requiredCollectionWithNullableBooleanElement,
+                requiredNullableModelList,
+                requiredNullableStringList,
+                requiredNullableIntList,
+                nonRequiredModelList ?? new ChangeTrackingList<CollectionItem>(),
+                nonRequiredStringList ?? new ChangeTrackingList<string>(),
+                nonRequiredIntList ?? new ChangeTrackingList<int>(),
+                nonRequiredNullableModelList ?? new ChangeTrackingList<CollectionItem>(),
+                nonRequiredNullableStringList ?? new ChangeTrackingList<string>(),
+                nonRequiredNullableIntList ?? new ChangeTrackingList<int>(),
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<InputModel>.Write(ModelReaderWriterOptions options)

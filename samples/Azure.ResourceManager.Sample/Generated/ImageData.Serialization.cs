@@ -232,7 +232,18 @@ namespace Azure.ResourceManager.Sample
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ImageData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, sourceVirtualMachine, storageProfile.Value, provisioningState.Value, Optional.ToNullable(hyperVGeneration), serializedAdditionalRawData);
+            return new ImageData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                sourceVirtualMachine,
+                storageProfile.Value,
+                provisioningState.Value,
+                Optional.ToNullable(hyperVGeneration),
+                serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

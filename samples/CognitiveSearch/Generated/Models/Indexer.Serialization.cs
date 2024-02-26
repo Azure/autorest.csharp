@@ -180,7 +180,18 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new Indexer(name, description.Value, dataSourceName, skillsetName.Value, targetIndexName, schedule.Value, parameters.Value, fieldMappings ?? new ChangeTrackingList<FieldMapping>(), outputFieldMappings ?? new ChangeTrackingList<FieldMapping>(), Optional.ToNullable(disabled), odataEtag.Value);
+            return new Indexer(
+                name,
+                description.Value,
+                dataSourceName,
+                skillsetName.Value,
+                targetIndexName,
+                schedule.Value,
+                parameters.Value,
+                fieldMappings ?? new ChangeTrackingList<FieldMapping>(),
+                outputFieldMappings ?? new ChangeTrackingList<FieldMapping>(),
+                Optional.ToNullable(disabled),
+                odataEtag.Value);
         }
     }
 }

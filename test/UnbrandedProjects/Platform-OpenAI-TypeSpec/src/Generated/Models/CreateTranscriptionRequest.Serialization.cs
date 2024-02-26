@@ -139,7 +139,14 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new CreateTranscriptionRequest(file, model, prompt.Value, OptionalProperty.ToNullable(responseFormat), OptionalProperty.ToNullable(temperature), language.Value, serializedAdditionalRawData);
+            return new CreateTranscriptionRequest(
+                file,
+                model,
+                prompt.Value,
+                OptionalProperty.ToNullable(responseFormat),
+                OptionalProperty.ToNullable(temperature),
+                language.Value,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<CreateTranscriptionRequest>.Write(ModelReaderWriterOptions options)

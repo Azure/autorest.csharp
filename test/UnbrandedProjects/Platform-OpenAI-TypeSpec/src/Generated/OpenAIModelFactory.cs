@@ -39,7 +39,14 @@ namespace OpenAI.Models
         /// <returns> A new <see cref="Models.CreateTranscriptionRequest"/> instance for mocking. </returns>
         public static CreateTranscriptionRequest CreateTranscriptionRequest(BinaryData file = null, CreateTranscriptionRequestModel model = default, string prompt = null, CreateTranscriptionRequestResponseFormat? responseFormat = null, double? temperature = null, string language = null)
         {
-            return new CreateTranscriptionRequest(file, model, prompt, responseFormat, temperature, language, serializedAdditionalRawData: null);
+            return new CreateTranscriptionRequest(
+                file,
+                model,
+                prompt,
+                responseFormat,
+                temperature,
+                language,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateTranscriptionResponse"/>. </summary>
@@ -73,7 +80,13 @@ namespace OpenAI.Models
         /// <returns> A new <see cref="Models.CreateTranslationRequest"/> instance for mocking. </returns>
         public static CreateTranslationRequest CreateTranslationRequest(BinaryData file = null, CreateTranslationRequestModel model = default, string prompt = null, CreateTranslationRequestResponseFormat? responseFormat = null, double? temperature = null)
         {
-            return new CreateTranslationRequest(file, model, prompt, responseFormat, temperature, serializedAdditionalRawData: null);
+            return new CreateTranslationRequest(
+                file,
+                model,
+                prompt,
+                responseFormat,
+                temperature,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateTranslationResponse"/>. </summary>
@@ -165,7 +178,22 @@ namespace OpenAI.Models
             functions ??= new List<ChatCompletionFunctions>();
             logitBias ??= new Dictionary<string, long>();
 
-            return new CreateChatCompletionRequest(model, messages?.ToList(), functions?.ToList(), functionCall, temperature, topP, n, maxTokens, stop, presencePenalty, frequencyPenalty, logitBias, user, stream, serializedAdditionalRawData: null);
+            return new CreateChatCompletionRequest(
+                model,
+                messages?.ToList(),
+                functions?.ToList(),
+                functionCall,
+                temperature,
+                topP,
+                n,
+                maxTokens,
+                stop,
+                presencePenalty,
+                frequencyPenalty,
+                logitBias,
+                user,
+                stream,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ChatCompletionRequestMessage"/>. </summary>
@@ -220,7 +248,14 @@ namespace OpenAI.Models
         {
             choices ??= new List<CreateChatCompletionResponseChoice>();
 
-            return new CreateChatCompletionResponse(id, @object, created, model, choices?.ToList(), usage, serializedAdditionalRawData: null);
+            return new CreateChatCompletionResponse(
+                id,
+                @object,
+                created,
+                model,
+                choices?.ToList(),
+                usage,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateChatCompletionResponseChoice"/>. </summary>
@@ -308,7 +343,13 @@ namespace OpenAI.Models
         /// <returns> A new <see cref="Models.CreateFineTuningJobRequest"/> instance for mocking. </returns>
         public static CreateFineTuningJobRequest CreateFineTuningJobRequest(string trainingFile = null, string validationFile = null, CreateFineTuningJobRequestModel model = default, CreateFineTuningJobRequestHyperparameters hyperparameters = null, string suffix = null)
         {
-            return new CreateFineTuningJobRequest(trainingFile, validationFile, model, hyperparameters, suffix, serializedAdditionalRawData: null);
+            return new CreateFineTuningJobRequest(
+                trainingFile,
+                validationFile,
+                model,
+                hyperparameters,
+                suffix,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.FineTuningJob"/>. </summary>
@@ -358,7 +399,22 @@ namespace OpenAI.Models
         {
             resultFiles ??= new List<string>();
 
-            return new FineTuningJob(id, @object, createdAt, finishedAt, model, fineTunedModel, organizationId, status, hyperparameters, trainingFile, validationFile, resultFiles?.ToList(), trainedTokens, error, serializedAdditionalRawData: null);
+            return new FineTuningJob(
+                id,
+                @object,
+                createdAt,
+                finishedAt,
+                model,
+                fineTunedModel,
+                organizationId,
+                status,
+                hyperparameters,
+                trainingFile,
+                validationFile,
+                resultFiles?.ToList(),
+                trainedTokens,
+                error,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.FineTuningJobHyperparameters"/>. </summary>
@@ -420,7 +476,13 @@ namespace OpenAI.Models
         /// <returns> A new <see cref="Models.FineTuningJobEvent"/> instance for mocking. </returns>
         public static FineTuningJobEvent FineTuningJobEvent(string id = null, string @object = null, DateTimeOffset createdAt = default, FineTuningJobEventLevel level = default, string message = null)
         {
-            return new FineTuningJobEvent(id, @object, createdAt, level, message, serializedAdditionalRawData: null);
+            return new FineTuningJobEvent(
+                id,
+                @object,
+                createdAt,
+                level,
+                message,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateCompletionRequest"/>. </summary>
@@ -518,7 +580,24 @@ namespace OpenAI.Models
         {
             logitBias ??= new Dictionary<string, long>();
 
-            return new CreateCompletionRequest(model, prompt, suffix, temperature, topP, n, maxTokens, stop, presencePenalty, frequencyPenalty, logitBias, user, stream, logprobs, echo, bestOf, serializedAdditionalRawData: null);
+            return new CreateCompletionRequest(
+                model,
+                prompt,
+                suffix,
+                temperature,
+                topP,
+                n,
+                maxTokens,
+                stop,
+                presencePenalty,
+                frequencyPenalty,
+                logitBias,
+                user,
+                stream,
+                logprobs,
+                echo,
+                bestOf,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateCompletionResponse"/>. </summary>
@@ -533,7 +612,14 @@ namespace OpenAI.Models
         {
             choices ??= new List<CreateCompletionResponseChoice>();
 
-            return new CreateCompletionResponse(id, @object, created, model, choices?.ToList(), usage, serializedAdditionalRawData: null);
+            return new CreateCompletionResponse(
+                id,
+                @object,
+                created,
+                model,
+                choices?.ToList(),
+                usage,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateCompletionResponseChoice"/>. </summary>
@@ -593,7 +679,14 @@ namespace OpenAI.Models
         /// <returns> A new <see cref="Models.CreateEditRequest"/> instance for mocking. </returns>
         public static CreateEditRequest CreateEditRequest(CreateEditRequestModel model = default, string input = null, string instruction = null, long? n = null, double? temperature = null, double? topP = null)
         {
-            return new CreateEditRequest(model, input, instruction, n, temperature, topP, serializedAdditionalRawData: null);
+            return new CreateEditRequest(
+                model,
+                input,
+                instruction,
+                n,
+                temperature,
+                topP,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateEditResponse"/>. </summary>
@@ -705,7 +798,16 @@ namespace OpenAI.Models
         /// <returns> A new <see cref="Models.OpenAIFile"/> instance for mocking. </returns>
         public static OpenAIFile OpenAIFile(string id = null, OpenAIFileObject @object = default, long bytes = default, DateTimeOffset createdAt = default, string filename = null, string purpose = null, OpenAIFileStatus status = default, string statusDetails = null)
         {
-            return new OpenAIFile(id, @object, bytes, createdAt, filename, purpose, status, statusDetails, serializedAdditionalRawData: null);
+            return new OpenAIFile(
+                id,
+                @object,
+                bytes,
+                createdAt,
+                filename,
+                purpose,
+                status,
+                statusDetails,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DeleteFileResponse"/>. </summary>
@@ -819,7 +921,20 @@ namespace OpenAI.Models
         {
             classificationBetas ??= new List<double>();
 
-            return new CreateFineTuneRequest(trainingFile, validationFile, model, nEpochs, batchSize, learningRateMultiplier, promptLossRate, computeClassificationMetrics, classificationNClasses, classificationPositiveClass, classificationBetas?.ToList(), suffix, serializedAdditionalRawData: null);
+            return new CreateFineTuneRequest(
+                trainingFile,
+                validationFile,
+                model,
+                nEpochs,
+                batchSize,
+                learningRateMultiplier,
+                promptLossRate,
+                computeClassificationMetrics,
+                classificationNClasses,
+                classificationPositiveClass,
+                classificationBetas?.ToList(),
+                suffix,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.FineTune"/>. </summary>
@@ -850,7 +965,21 @@ namespace OpenAI.Models
             resultFiles ??= new List<OpenAIFile>();
             events ??= new List<FineTuneEvent>();
 
-            return new FineTune(id, @object, createdAt, updatedAt, model, fineTunedModel, organizationId, status, hyperparams, trainingFiles?.ToList(), validationFiles?.ToList(), resultFiles?.ToList(), events?.ToList(), serializedAdditionalRawData: null);
+            return new FineTune(
+                id,
+                @object,
+                createdAt,
+                updatedAt,
+                model,
+                fineTunedModel,
+                organizationId,
+                status,
+                hyperparams,
+                trainingFiles?.ToList(),
+                validationFiles?.ToList(),
+                resultFiles?.ToList(),
+                events?.ToList(),
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.FineTuneHyperparams"/>. </summary>
@@ -870,7 +999,15 @@ namespace OpenAI.Models
         /// <returns> A new <see cref="Models.FineTuneHyperparams"/> instance for mocking. </returns>
         public static FineTuneHyperparams FineTuneHyperparams(long nEpochs = default, long batchSize = default, double promptLossWeight = default, double learningRateMultiplier = default, bool? computeClassificationMetrics = null, string classificationPositiveClass = null, long? classificationNClasses = null)
         {
-            return new FineTuneHyperparams(nEpochs, batchSize, promptLossWeight, learningRateMultiplier, computeClassificationMetrics, classificationPositiveClass, classificationNClasses, serializedAdditionalRawData: null);
+            return new FineTuneHyperparams(
+                nEpochs,
+                batchSize,
+                promptLossWeight,
+                learningRateMultiplier,
+                computeClassificationMetrics,
+                classificationPositiveClass,
+                classificationNClasses,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.FineTuneEvent"/>. </summary>
@@ -947,7 +1084,13 @@ namespace OpenAI.Models
         /// <returns> A new <see cref="Models.CreateImageRequest"/> instance for mocking. </returns>
         public static CreateImageRequest CreateImageRequest(string prompt = null, long? n = null, CreateImageRequestSize? size = null, CreateImageRequestResponseFormat? responseFormat = null, string user = null)
         {
-            return new CreateImageRequest(prompt, n, size, responseFormat, user, serializedAdditionalRawData: null);
+            return new CreateImageRequest(
+                prompt,
+                n,
+                size,
+                responseFormat,
+                user,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ImagesResponse"/>. </summary>
@@ -988,7 +1131,15 @@ namespace OpenAI.Models
         /// <returns> A new <see cref="Models.CreateImageEditRequest"/> instance for mocking. </returns>
         public static CreateImageEditRequest CreateImageEditRequest(string prompt = null, BinaryData image = null, BinaryData mask = null, long? n = null, CreateImageEditRequestSize? size = null, CreateImageEditRequestResponseFormat? responseFormat = null, string user = null)
         {
-            return new CreateImageEditRequest(prompt, image, mask, n, size, responseFormat, user, serializedAdditionalRawData: null);
+            return new CreateImageEditRequest(
+                prompt,
+                image,
+                mask,
+                n,
+                size,
+                responseFormat,
+                user,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateImageVariationRequest"/>. </summary>
@@ -1003,7 +1154,13 @@ namespace OpenAI.Models
         /// <returns> A new <see cref="Models.CreateImageVariationRequest"/> instance for mocking. </returns>
         public static CreateImageVariationRequest CreateImageVariationRequest(BinaryData image = null, long? n = null, CreateImageVariationRequestSize? size = null, CreateImageVariationRequestResponseFormat? responseFormat = null, string user = null)
         {
-            return new CreateImageVariationRequest(image, n, size, responseFormat, user, serializedAdditionalRawData: null);
+            return new CreateImageVariationRequest(
+                image,
+                n,
+                size,
+                responseFormat,
+                user,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateModerationRequest"/>. </summary>
@@ -1078,7 +1235,19 @@ namespace OpenAI.Models
         /// <returns> A new <see cref="Models.CreateModerationResponseResultCategories"/> instance for mocking. </returns>
         public static CreateModerationResponseResultCategories CreateModerationResponseResultCategories(bool hate = default, bool hateThreatening = default, bool harassment = default, bool harassmentThreatening = default, bool selfHarm = default, bool selfHarmIntent = default, bool selfHarmInstructive = default, bool sexual = default, bool sexualMinors = default, bool violence = default, bool violenceGraphic = default)
         {
-            return new CreateModerationResponseResultCategories(hate, hateThreatening, harassment, harassmentThreatening, selfHarm, selfHarmIntent, selfHarmInstructive, sexual, sexualMinors, violence, violenceGraphic, serializedAdditionalRawData: null);
+            return new CreateModerationResponseResultCategories(
+                hate,
+                hateThreatening,
+                harassment,
+                harassmentThreatening,
+                selfHarm,
+                selfHarmIntent,
+                selfHarmInstructive,
+                sexual,
+                sexualMinors,
+                violence,
+                violenceGraphic,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateModerationResponseResultCategoryScores"/>. </summary>
@@ -1096,7 +1265,19 @@ namespace OpenAI.Models
         /// <returns> A new <see cref="Models.CreateModerationResponseResultCategoryScores"/> instance for mocking. </returns>
         public static CreateModerationResponseResultCategoryScores CreateModerationResponseResultCategoryScores(double hate = default, double hateThreatening = default, double harassment = default, double harassmentThreatening = default, double selfHarm = default, double selfHarmIntent = default, double selfHarmInstructive = default, double sexual = default, double sexualMinors = default, double violence = default, double violenceGraphic = default)
         {
-            return new CreateModerationResponseResultCategoryScores(hate, hateThreatening, harassment, harassmentThreatening, selfHarm, selfHarmIntent, selfHarmInstructive, sexual, sexualMinors, violence, violenceGraphic, serializedAdditionalRawData: null);
+            return new CreateModerationResponseResultCategoryScores(
+                hate,
+                hateThreatening,
+                harassment,
+                harassmentThreatening,
+                selfHarm,
+                selfHarmIntent,
+                selfHarmInstructive,
+                sexual,
+                sexualMinors,
+                violence,
+                violenceGraphic,
+                serializedAdditionalRawData: null);
         }
     }
 }

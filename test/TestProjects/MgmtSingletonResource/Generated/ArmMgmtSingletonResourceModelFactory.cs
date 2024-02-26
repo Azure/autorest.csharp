@@ -77,7 +77,14 @@ namespace MgmtSingletonResource.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new ParentResourceData(id, name, resourceType, systemData, tags, location, @new);
+            return new ParentResourceData(
+                id,
+                name,
+                resourceType,
+                systemData,
+                tags,
+                location,
+                @new);
         }
     }
 }

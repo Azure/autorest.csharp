@@ -158,7 +158,16 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new SplitSkill(odataType, name.Value, description.Value, context.Value, inputs, outputs, Optional.ToNullable(defaultLanguageCode), Optional.ToNullable(textSplitMode), Optional.ToNullable(maximumPageLength));
+            return new SplitSkill(
+                odataType,
+                name.Value,
+                description.Value,
+                context.Value,
+                inputs,
+                outputs,
+                Optional.ToNullable(defaultLanguageCode),
+                Optional.ToNullable(textSplitMode),
+                Optional.ToNullable(maximumPageLength));
         }
     }
 }

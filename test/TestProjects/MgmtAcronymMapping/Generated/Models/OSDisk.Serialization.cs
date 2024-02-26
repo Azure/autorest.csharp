@@ -181,7 +181,18 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new OSDisk(Optional.ToNullable(osType), encryptionSettings.Value, name.Value, vhd.Value, image.Value, Optional.ToNullable(caching), Optional.ToNullable(writeAcceleratorEnabled), diffDiskSettings.Value, createOption, Optional.ToNullable(diskSizeGB), managedDisk.Value);
+            return new OSDisk(
+                Optional.ToNullable(osType),
+                encryptionSettings.Value,
+                name.Value,
+                vhd.Value,
+                image.Value,
+                Optional.ToNullable(caching),
+                Optional.ToNullable(writeAcceleratorEnabled),
+                diffDiskSettings.Value,
+                createOption,
+                Optional.ToNullable(diskSizeGB),
+                managedDisk.Value);
         }
     }
 }

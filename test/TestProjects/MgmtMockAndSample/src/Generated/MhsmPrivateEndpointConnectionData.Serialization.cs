@@ -179,7 +179,18 @@ namespace MgmtMockAndSample
                     continue;
                 }
             }
-            return new MhsmPrivateEndpointConnectionData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, etag.Value, privateEndpoint, privateLinkServiceConnectionState.Value, Optional.ToNullable(provisioningState), sku.Value);
+            return new MhsmPrivateEndpointConnectionData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                etag.Value,
+                privateEndpoint,
+                privateLinkServiceConnectionState.Value,
+                Optional.ToNullable(provisioningState),
+                sku.Value);
         }
     }
 }
