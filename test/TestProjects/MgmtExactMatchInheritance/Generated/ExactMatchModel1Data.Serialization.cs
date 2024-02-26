@@ -136,6 +136,11 @@ namespace MgmtExactMatchInheritance
                 writer.WritePropertyName("type19"u8);
                 JsonSerializer.Serialize(writer, Type19);
             }
+            if (Type20 != null)
+            {
+                writer.WritePropertyName("type20"u8);
+                JsonSerializer.Serialize(writer, Type20);
+            }
             writer.WriteEndObject();
         }
 
@@ -166,6 +171,7 @@ namespace MgmtExactMatchInheritance
             Optional<DataFactoryLinkedServiceReference> type17 = default;
             Optional<DataFactorySecretString> type18 = default;
             Optional<DataFactoryKeyVaultSecretReference> type19 = default;
+            Optional<DataFactoryElement<IDictionary<string, BinaryData>>> type20 = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
@@ -369,6 +375,15 @@ namespace MgmtExactMatchInheritance
                     type19 = JsonSerializer.Deserialize<DataFactoryKeyVaultSecretReference>(property.Value.GetRawText());
                     continue;
                 }
+                if (property.NameEquals("type20"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    type20 = JsonSerializer.Deserialize<DataFactoryElement<IDictionary<string, BinaryData>>>(property.Value.GetRawText());
+                    continue;
+                }
                 if (property.NameEquals("id"u8))
                 {
                     id = new ResourceIdentifier(property.Value.GetString());
@@ -419,7 +434,8 @@ namespace MgmtExactMatchInheritance
                 type16.Value,
                 type17,
                 type18,
-                type19);
+                type19,
+                type20.Value);
         }
     }
 }
