@@ -207,7 +207,17 @@ namespace model_flattening.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new FlattenedProduct(id.Value, type.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location.Value, name.Value, serializedAdditionalRawData, pName.Value, type0.Value, Optional.ToNullable(provisioningStateValues), provisioningState.Value);
+            return new FlattenedProduct(
+                id.Value,
+                type.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location.Value,
+                name.Value,
+                serializedAdditionalRawData,
+                pName.Value,
+                type0.Value,
+                Optional.ToNullable(provisioningStateValues),
+                provisioningState.Value);
         }
 
         BinaryData IPersistableModel<FlattenedProduct>.Write(ModelReaderWriterOptions options)

@@ -101,7 +101,13 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new NetworkInterfaceTapConfiguration(id.Value, name.Value, etag.Value, type.Value, virtualNetworkTap.Value, Optional.ToNullable(provisioningState));
+            return new NetworkInterfaceTapConfiguration(
+                id.Value,
+                name.Value,
+                etag.Value,
+                type.Value,
+                virtualNetworkTap.Value,
+                Optional.ToNullable(provisioningState));
         }
     }
 }

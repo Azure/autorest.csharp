@@ -141,7 +141,13 @@ namespace CustomizationsInTsp.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ModelToAddAdditionalSerializableProperty(requiredIntOnBase, Optional.ToNullable(optionalInt), serializedAdditionalRawData, requiredInt, additionalSerializableProperty, Optional.ToNullable(additionalNullableSerializableProperty));
+            return new ModelToAddAdditionalSerializableProperty(
+                requiredIntOnBase,
+                Optional.ToNullable(optionalInt),
+                serializedAdditionalRawData,
+                requiredInt,
+                additionalSerializableProperty,
+                Optional.ToNullable(additionalNullableSerializableProperty));
         }
 
         BinaryData IPersistableModel<ModelToAddAdditionalSerializableProperty>.Write(ModelReaderWriterOptions options)

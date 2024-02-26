@@ -216,7 +216,18 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new NatRule(name.Value, description.Value, ruleType, ipProtocols ?? new ChangeTrackingList<FirewallPolicyRuleNetworkProtocol>(), sourceAddresses ?? new ChangeTrackingList<string>(), destinationAddresses ?? new ChangeTrackingList<string>(), destinationPorts ?? new ChangeTrackingList<string>(), translatedAddress.Value, translatedPort.Value, sourceIpGroups ?? new ChangeTrackingList<string>(), translatedFqdn.Value);
+            return new NatRule(
+                name.Value,
+                description.Value,
+                ruleType,
+                ipProtocols ?? new ChangeTrackingList<FirewallPolicyRuleNetworkProtocol>(),
+                sourceAddresses ?? new ChangeTrackingList<string>(),
+                destinationAddresses ?? new ChangeTrackingList<string>(),
+                destinationPorts ?? new ChangeTrackingList<string>(),
+                translatedAddress.Value,
+                translatedPort.Value,
+                sourceIpGroups ?? new ChangeTrackingList<string>(),
+                translatedFqdn.Value);
         }
     }
 }

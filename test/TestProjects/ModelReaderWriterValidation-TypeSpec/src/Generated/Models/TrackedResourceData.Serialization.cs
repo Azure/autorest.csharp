@@ -142,7 +142,13 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new TrackedResourceData(id, name, type, location, tags ?? new ChangeTrackingDictionary<string, string>(), serializedAdditionalRawData);
+            return new TrackedResourceData(
+                id,
+                name,
+                type,
+                location,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<TrackedResourceData>.Write(ModelReaderWriterOptions options)

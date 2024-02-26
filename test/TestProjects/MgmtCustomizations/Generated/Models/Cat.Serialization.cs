@@ -93,7 +93,14 @@ namespace MgmtCustomizations.Models
                     continue;
                 }
             }
-            return new Cat(kind, name.Value, size, Optional.ToNullable(dateOfBirth), sleep.Value, jump.Value, meow.Value);
+            return new Cat(
+                kind,
+                name.Value,
+                size,
+                Optional.ToNullable(dateOfBirth),
+                sleep.Value,
+                jump.Value,
+                meow.Value);
         }
     }
 }

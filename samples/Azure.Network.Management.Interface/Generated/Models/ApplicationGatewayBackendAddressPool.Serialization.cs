@@ -127,7 +127,14 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new ApplicationGatewayBackendAddressPool(id.Value, name.Value, etag.Value, type.Value, backendIPConfigurations ?? new ChangeTrackingList<NetworkInterfaceIPConfiguration>(), backendAddresses ?? new ChangeTrackingList<ApplicationGatewayBackendAddress>(), Optional.ToNullable(provisioningState));
+            return new ApplicationGatewayBackendAddressPool(
+                id.Value,
+                name.Value,
+                etag.Value,
+                type.Value,
+                backendIPConfigurations ?? new ChangeTrackingList<NetworkInterfaceIPConfiguration>(),
+                backendAddresses ?? new ChangeTrackingList<ApplicationGatewayBackendAddress>(),
+                Optional.ToNullable(provisioningState));
         }
     }
 }

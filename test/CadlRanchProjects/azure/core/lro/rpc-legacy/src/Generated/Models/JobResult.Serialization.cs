@@ -158,7 +158,13 @@ namespace _Azure.Lro.RpcLegacy.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new JobResult(jobId, comment, status, errors ?? new ChangeTrackingList<ErrorResponse>(), results ?? new ChangeTrackingList<string>(), serializedAdditionalRawData);
+            return new JobResult(
+                jobId,
+                comment,
+                status,
+                errors ?? new ChangeTrackingList<ErrorResponse>(),
+                results ?? new ChangeTrackingList<string>(),
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<JobResult>.Write(ModelReaderWriterOptions options)

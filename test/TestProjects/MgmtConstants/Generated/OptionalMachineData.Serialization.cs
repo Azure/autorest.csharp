@@ -137,7 +137,15 @@ namespace MgmtConstants
                     continue;
                 }
             }
-            return new OptionalMachineData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, listener.Value, content.Value);
+            return new OptionalMachineData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                listener.Value,
+                content.Value);
         }
     }
 }

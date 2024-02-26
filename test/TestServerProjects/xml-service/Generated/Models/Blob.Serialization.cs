@@ -78,7 +78,13 @@ namespace xml_service.Models
                 }
                 metadata = dictionary;
             }
-            return new Blob(name, deleted, snapshot, properties, metadata, serializedAdditionalRawData: null);
+            return new Blob(
+                name,
+                deleted,
+                snapshot,
+                properties,
+                metadata,
+                serializedAdditionalRawData: null);
         }
 
         BinaryData IPersistableModel<Blob>.Write(ModelReaderWriterOptions options)

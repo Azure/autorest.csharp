@@ -122,7 +122,15 @@ namespace MgmtMockAndSample
                     continue;
                 }
             }
-            return new ManagedHsmData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, properties.Value, sku.Value);
+            return new ManagedHsmData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                properties.Value,
+                sku.Value);
         }
     }
 }

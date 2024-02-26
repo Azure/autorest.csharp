@@ -171,7 +171,14 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ModelX(kind, name.Value, serializedAdditionalRawData, fields ?? new ChangeTrackingList<string>(), Optional.ToNullable(nullProperty), keyValuePairs ?? new ChangeTrackingDictionary<string, string>(), xProperty);
+            return new ModelX(
+                kind,
+                name.Value,
+                serializedAdditionalRawData,
+                fields ?? new ChangeTrackingList<string>(),
+                Optional.ToNullable(nullProperty),
+                keyValuePairs ?? new ChangeTrackingDictionary<string, string>(),
+                xProperty);
         }
 
         BinaryData IPersistableModel<ModelX>.Write(ModelReaderWriterOptions options)

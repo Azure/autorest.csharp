@@ -154,7 +154,17 @@ namespace AnomalyDetector.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new UnivariateLastDetectionResult(period, suggestedWindow, expectedValue, upperMargin, lowerMargin, isAnomaly, isNegativeAnomaly, isPositiveAnomaly, Optional.ToNullable(severity), serializedAdditionalRawData);
+            return new UnivariateLastDetectionResult(
+                period,
+                suggestedWindow,
+                expectedValue,
+                upperMargin,
+                lowerMargin,
+                isAnomaly,
+                isNegativeAnomaly,
+                isPositiveAnomaly,
+                Optional.ToNullable(severity),
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<UnivariateLastDetectionResult>.Write(ModelReaderWriterOptions options)

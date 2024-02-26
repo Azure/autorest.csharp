@@ -88,7 +88,14 @@ namespace xml_service.Models
             {
                 publicAccess = new PublicAccessType(publicAccessElement.Value);
             }
-            return new ContainerProperties(lastModified, etag, leaseStatus, leaseState, leaseDuration, publicAccess, serializedAdditionalRawData: null);
+            return new ContainerProperties(
+                lastModified,
+                etag,
+                leaseStatus,
+                leaseState,
+                leaseDuration,
+                publicAccess,
+                serializedAdditionalRawData: null);
         }
 
         BinaryData IPersistableModel<ContainerProperties>.Write(ModelReaderWriterOptions options)

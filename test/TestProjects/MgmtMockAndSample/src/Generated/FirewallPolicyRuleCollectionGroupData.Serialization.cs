@@ -127,7 +127,14 @@ namespace MgmtMockAndSample
                     continue;
                 }
             }
-            return new FirewallPolicyRuleCollectionGroupData(id.Value, name.Value, etag.Value, Optional.ToNullable(type), Optional.ToNullable(priority), ruleCollections ?? new ChangeTrackingList<FirewallPolicyRuleCollection>(), Optional.ToNullable(provisioningState));
+            return new FirewallPolicyRuleCollectionGroupData(
+                id.Value,
+                name.Value,
+                etag.Value,
+                Optional.ToNullable(type),
+                Optional.ToNullable(priority),
+                ruleCollections ?? new ChangeTrackingList<FirewallPolicyRuleCollection>(),
+                Optional.ToNullable(provisioningState));
         }
     }
 }

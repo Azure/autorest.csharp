@@ -160,7 +160,19 @@ namespace MgmtHierarchicalNonResource.Models
                     continue;
                 }
             }
-            return new SharedGalleryImage(name.Value, location.Value, uniqueId.Value, Optional.ToNullable(osType), Optional.ToNullable(osState), Optional.ToNullable(endOfLifeDate), identifier.Value, recommended.Value, disallowed.Value, Optional.ToNullable(hyperVGeneration), features ?? new ChangeTrackingList<GalleryImageFeature>(), purchasePlan.Value);
+            return new SharedGalleryImage(
+                name.Value,
+                location.Value,
+                uniqueId.Value,
+                Optional.ToNullable(osType),
+                Optional.ToNullable(osState),
+                Optional.ToNullable(endOfLifeDate),
+                identifier.Value,
+                recommended.Value,
+                disallowed.Value,
+                Optional.ToNullable(hyperVGeneration),
+                features ?? new ChangeTrackingList<GalleryImageFeature>(),
+                purchasePlan.Value);
         }
     }
 }

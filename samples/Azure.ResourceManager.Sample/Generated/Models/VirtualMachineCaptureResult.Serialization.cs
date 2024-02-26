@@ -175,7 +175,13 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineCaptureResult(id.Value, serializedAdditionalRawData, schema.Value, contentVersion.Value, parameters.Value, resources ?? new ChangeTrackingList<BinaryData>());
+            return new VirtualMachineCaptureResult(
+                id.Value,
+                serializedAdditionalRawData,
+                schema.Value,
+                contentVersion.Value,
+                parameters.Value,
+                resources ?? new ChangeTrackingList<BinaryData>());
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

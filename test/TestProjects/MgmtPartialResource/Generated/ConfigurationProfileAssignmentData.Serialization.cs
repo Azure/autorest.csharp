@@ -107,7 +107,14 @@ namespace MgmtPartialResource
                     continue;
                 }
             }
-            return new ConfigurationProfileAssignmentData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, properties.Value);
+            return new ConfigurationProfileAssignmentData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                properties.Value);
         }
     }
 }

@@ -517,7 +517,28 @@ namespace Azure.NewProject.TypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new RoundTripModel(requiredString, requiredInt, requiredCollection, requiredDictionary, requiredModel, Optional.ToNullable(intExtensibleEnum), intExtensibleEnumCollection ?? new ChangeTrackingList<IntExtensibleEnum>(), Optional.ToNullable(floatExtensibleEnum), floatExtensibleEnumCollection ?? new ChangeTrackingList<FloatExtensibleEnum>(), Optional.ToNullable(floatFixedEnum), floatFixedEnumCollection ?? new ChangeTrackingList<FloatFixedEnum>(), Optional.ToNullable(intFixedEnum), intFixedEnumCollection ?? new ChangeTrackingList<IntFixedEnum>(), Optional.ToNullable(stringFixedEnum), requiredUnknown, optionalUnknown.Value, requiredRecordUnknown, optionalRecordUnknown ?? new ChangeTrackingDictionary<string, BinaryData>(), readOnlyRequiredRecordUnknown, readOnlyOptionalRecordUnknown ?? new ChangeTrackingDictionary<string, BinaryData>(), serializedAdditionalRawData);
+            return new RoundTripModel(
+                requiredString,
+                requiredInt,
+                requiredCollection,
+                requiredDictionary,
+                requiredModel,
+                Optional.ToNullable(intExtensibleEnum),
+                intExtensibleEnumCollection ?? new ChangeTrackingList<IntExtensibleEnum>(),
+                Optional.ToNullable(floatExtensibleEnum),
+                floatExtensibleEnumCollection ?? new ChangeTrackingList<FloatExtensibleEnum>(),
+                Optional.ToNullable(floatFixedEnum),
+                floatFixedEnumCollection ?? new ChangeTrackingList<FloatFixedEnum>(),
+                Optional.ToNullable(intFixedEnum),
+                intFixedEnumCollection ?? new ChangeTrackingList<IntFixedEnum>(),
+                Optional.ToNullable(stringFixedEnum),
+                requiredUnknown,
+                optionalUnknown.Value,
+                requiredRecordUnknown,
+                optionalRecordUnknown ?? new ChangeTrackingDictionary<string, BinaryData>(),
+                readOnlyRequiredRecordUnknown,
+                readOnlyOptionalRecordUnknown ?? new ChangeTrackingDictionary<string, BinaryData>(),
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<RoundTripModel>.Write(ModelReaderWriterOptions options)

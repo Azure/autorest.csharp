@@ -161,7 +161,14 @@ namespace AnomalyDetector.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new UnivariateChangePointDetectionOptions(series, granularity, Optional.ToNullable(customInterval), Optional.ToNullable(period), Optional.ToNullable(stableTrendWindow), Optional.ToNullable(threshold), serializedAdditionalRawData);
+            return new UnivariateChangePointDetectionOptions(
+                series,
+                granularity,
+                Optional.ToNullable(customInterval),
+                Optional.ToNullable(period),
+                Optional.ToNullable(stableTrendWindow),
+                Optional.ToNullable(threshold),
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<UnivariateChangePointDetectionOptions>.Write(ModelReaderWriterOptions options)

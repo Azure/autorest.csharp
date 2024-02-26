@@ -100,7 +100,14 @@ namespace MgmtParamOrdering
                     continue;
                 }
             }
-            return new EnvironmentContainerResourceData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, properties);
+            return new EnvironmentContainerResourceData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                properties);
         }
     }
 }

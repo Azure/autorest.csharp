@@ -150,7 +150,15 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new UrlRedirectActionParameters(typeName, redirectType, Optional.ToNullable(destinationProtocol), customPath.Value, customHostname.Value, customQueryString.Value, customFragment.Value, serializedAdditionalRawData);
+            return new UrlRedirectActionParameters(
+                typeName,
+                redirectType,
+                Optional.ToNullable(destinationProtocol),
+                customPath.Value,
+                customHostname.Value,
+                customQueryString.Value,
+                customFragment.Value,
+                serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

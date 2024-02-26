@@ -212,7 +212,19 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new WebApiSkill(odataType, name.Value, description.Value, context.Value, inputs, outputs, uri, httpHeaders ?? new ChangeTrackingDictionary<string, string>(), httpMethod.Value, Optional.ToNullable(timeout), Optional.ToNullable(batchSize), Optional.ToNullable(degreeOfParallelism));
+            return new WebApiSkill(
+                odataType,
+                name.Value,
+                description.Value,
+                context.Value,
+                inputs,
+                outputs,
+                uri,
+                httpHeaders ?? new ChangeTrackingDictionary<string, string>(),
+                httpMethod.Value,
+                Optional.ToNullable(timeout),
+                Optional.ToNullable(batchSize),
+                Optional.ToNullable(degreeOfParallelism));
         }
     }
 }

@@ -352,7 +352,29 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new VaultProperties(Optional.ToNullable(duration), Optional.ToNullable(createOn), tenantId, sku, accessPolicies ?? new ChangeTrackingList<AccessPolicyEntry>(), vaultUri.Value, hsmPoolResourceId.Value, deployments ?? new ChangeTrackingList<string>(), Optional.ToNullable(enabledForDiskEncryption), Optional.ToNullable(enabledForTemplateDeployment), Optional.ToNullable(enableSoftDelete), Optional.ToNullable(softDeleteRetentionInDays), Optional.ToNullable(enableRbacAuthorization), Optional.ToNullable(createMode), Optional.ToNullable(enablePurgeProtection), networkAcls.Value, Optional.ToNullable(provisioningState), privateEndpointConnections ?? new ChangeTrackingList<PrivateEndpointConnectionItem>(), publicNetworkAccess.Value, readWriteSingleStringProperty.Value, readOnlySingleStringProperty.Value, extremelyDeepStringProperty.Value);
+            return new VaultProperties(
+                Optional.ToNullable(duration),
+                Optional.ToNullable(createOn),
+                tenantId,
+                sku,
+                accessPolicies ?? new ChangeTrackingList<AccessPolicyEntry>(),
+                vaultUri.Value,
+                hsmPoolResourceId.Value,
+                deployments ?? new ChangeTrackingList<string>(),
+                Optional.ToNullable(enabledForDiskEncryption),
+                Optional.ToNullable(enabledForTemplateDeployment),
+                Optional.ToNullable(enableSoftDelete),
+                Optional.ToNullable(softDeleteRetentionInDays),
+                Optional.ToNullable(enableRbacAuthorization),
+                Optional.ToNullable(createMode),
+                Optional.ToNullable(enablePurgeProtection),
+                networkAcls.Value,
+                Optional.ToNullable(provisioningState),
+                privateEndpointConnections ?? new ChangeTrackingList<PrivateEndpointConnectionItem>(),
+                publicNetworkAccess.Value,
+                readWriteSingleStringProperty.Value,
+                readOnlySingleStringProperty.Value,
+                extremelyDeepStringProperty.Value);
         }
     }
 }

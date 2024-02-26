@@ -308,7 +308,30 @@ namespace Azure.ResourceManager.Storage
                     continue;
                 }
             }
-            return new FileShareData(id, name, type, systemData.Value, Optional.ToNullable(lastModifiedTime), metadata ?? new ChangeTrackingDictionary<string, string>(), Optional.ToNullable(shareQuota), Optional.ToNullable(enabledProtocols), Optional.ToNullable(rootSquash), version.Value, Optional.ToNullable(deleted), Optional.ToNullable(deletedTime), Optional.ToNullable(remainingRetentionDays), Optional.ToNullable(accessTier), Optional.ToNullable(accessTierChangeTime), accessTierStatus.Value, Optional.ToNullable(shareUsageBytes), Optional.ToNullable(leaseStatus), Optional.ToNullable(leaseState), Optional.ToNullable(leaseDuration), signedIdentifiers ?? new ChangeTrackingList<SignedIdentifier>(), Optional.ToNullable(snapshotTime), Optional.ToNullable(etag));
+            return new FileShareData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                Optional.ToNullable(lastModifiedTime),
+                metadata ?? new ChangeTrackingDictionary<string, string>(),
+                Optional.ToNullable(shareQuota),
+                Optional.ToNullable(enabledProtocols),
+                Optional.ToNullable(rootSquash),
+                version.Value,
+                Optional.ToNullable(deleted),
+                Optional.ToNullable(deletedTime),
+                Optional.ToNullable(remainingRetentionDays),
+                Optional.ToNullable(accessTier),
+                Optional.ToNullable(accessTierChangeTime),
+                accessTierStatus.Value,
+                Optional.ToNullable(shareUsageBytes),
+                Optional.ToNullable(leaseStatus),
+                Optional.ToNullable(leaseState),
+                Optional.ToNullable(leaseDuration),
+                signedIdentifiers ?? new ChangeTrackingList<SignedIdentifier>(),
+                Optional.ToNullable(snapshotTime),
+                Optional.ToNullable(etag));
         }
     }
 }

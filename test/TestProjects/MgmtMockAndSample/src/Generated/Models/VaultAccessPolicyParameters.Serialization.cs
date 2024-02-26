@@ -74,7 +74,13 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new VaultAccessPolicyParameters(id, name, type, systemData.Value, Optional.ToNullable(location), properties);
+            return new VaultAccessPolicyParameters(
+                id,
+                name,
+                type,
+                systemData.Value,
+                Optional.ToNullable(location),
+                properties);
         }
     }
 }

@@ -162,7 +162,22 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineInstanceView(Optional.ToNullable(platformUpdateDomain), Optional.ToNullable(platformFaultDomain), computerName.Value, osName.Value, osVersion.Value, Optional.ToNullable(hyperVGeneration), rdpThumbPrint.Value, vmAgent.Value, maintenanceRedeployStatus.Value, disks ?? new ChangeTrackingList<DiskInstanceView>(), vmHealth.Value, bootDiagnostics.Value, assignedHost.Value, statuses ?? new ChangeTrackingList<InstanceViewStatus>(), patchStatus.Value);
+            return new VirtualMachineInstanceView(
+                Optional.ToNullable(platformUpdateDomain),
+                Optional.ToNullable(platformFaultDomain),
+                computerName.Value,
+                osName.Value,
+                osVersion.Value,
+                Optional.ToNullable(hyperVGeneration),
+                rdpThumbPrint.Value,
+                vmAgent.Value,
+                maintenanceRedeployStatus.Value,
+                disks ?? new ChangeTrackingList<DiskInstanceView>(),
+                vmHealth.Value,
+                bootDiagnostics.Value,
+                assignedHost.Value,
+                statuses ?? new ChangeTrackingList<InstanceViewStatus>(),
+                patchStatus.Value);
         }
     }
 }

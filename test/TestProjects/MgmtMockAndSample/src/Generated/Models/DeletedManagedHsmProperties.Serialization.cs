@@ -84,7 +84,13 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new DeletedManagedHsmProperties(mhsmId.Value, Optional.ToNullable(location), Optional.ToNullable(deletionDate), Optional.ToNullable(scheduledPurgeDate), Optional.ToNullable(purgeProtectionEnabled), tags ?? new ChangeTrackingDictionary<string, string>());
+            return new DeletedManagedHsmProperties(
+                mhsmId.Value,
+                Optional.ToNullable(location),
+                Optional.ToNullable(deletionDate),
+                Optional.ToNullable(scheduledPurgeDate),
+                Optional.ToNullable(purgeProtectionEnabled),
+                tags ?? new ChangeTrackingDictionary<string, string>());
         }
     }
 }

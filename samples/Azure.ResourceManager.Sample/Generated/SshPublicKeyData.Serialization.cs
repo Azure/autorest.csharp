@@ -185,7 +185,15 @@ namespace Azure.ResourceManager.Sample
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new SshPublicKeyData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, publicKey.Value, serializedAdditionalRawData);
+            return new SshPublicKeyData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                publicKey.Value,
+                serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

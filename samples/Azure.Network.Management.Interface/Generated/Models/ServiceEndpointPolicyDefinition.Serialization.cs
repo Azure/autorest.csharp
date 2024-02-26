@@ -128,7 +128,14 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new ServiceEndpointPolicyDefinition(id.Value, name.Value, etag.Value, description.Value, service.Value, serviceResources ?? new ChangeTrackingList<string>(), Optional.ToNullable(provisioningState));
+            return new ServiceEndpointPolicyDefinition(
+                id.Value,
+                name.Value,
+                etag.Value,
+                description.Value,
+                service.Value,
+                serviceResources ?? new ChangeTrackingList<string>(),
+                Optional.ToNullable(provisioningState));
         }
     }
 }

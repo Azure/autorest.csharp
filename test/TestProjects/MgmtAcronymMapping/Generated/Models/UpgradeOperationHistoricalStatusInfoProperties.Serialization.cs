@@ -81,7 +81,13 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new UpgradeOperationHistoricalStatusInfoProperties(runningStatus.Value, progress.Value, error.Value, Optional.ToNullable(startedBy), targetImageReference.Value, rollbackInfo.Value);
+            return new UpgradeOperationHistoricalStatusInfoProperties(
+                runningStatus.Value,
+                progress.Value,
+                error.Value,
+                Optional.ToNullable(startedBy),
+                targetImageReference.Value,
+                rollbackInfo.Value);
         }
     }
 }

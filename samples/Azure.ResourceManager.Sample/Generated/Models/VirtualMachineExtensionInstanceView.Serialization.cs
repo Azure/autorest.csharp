@@ -159,7 +159,13 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineExtensionInstanceView(name.Value, type.Value, typeHandlerVersion.Value, substatuses ?? new ChangeTrackingList<InstanceViewStatus>(), statuses ?? new ChangeTrackingList<InstanceViewStatus>(), serializedAdditionalRawData);
+            return new VirtualMachineExtensionInstanceView(
+                name.Value,
+                type.Value,
+                typeHandlerVersion.Value,
+                substatuses ?? new ChangeTrackingList<InstanceViewStatus>(),
+                statuses ?? new ChangeTrackingList<InstanceViewStatus>(),
+                serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

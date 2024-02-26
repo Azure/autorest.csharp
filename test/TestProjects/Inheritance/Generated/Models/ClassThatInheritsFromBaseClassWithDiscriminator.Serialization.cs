@@ -214,7 +214,20 @@ namespace Inheritance.Models
                     continue;
                 }
             }
-            return new ClassThatInheritsFromBaseClassWithDiscriminator(baseClassProperty.Value, dfeString.Value, dfeDouble.Value, dfeBool.Value, dfeInt.Value, dfeObject.Value, dfeListOfT.Value, dfeListOfString.Value, dfeKeyValuePairs.Value, dfeDateTime.Value, dfeDuration.Value, dfeUri.Value, discriminatorProperty);
+            return new ClassThatInheritsFromBaseClassWithDiscriminator(
+                baseClassProperty.Value,
+                dfeString.Value,
+                dfeDouble.Value,
+                dfeBool.Value,
+                dfeInt.Value,
+                dfeObject.Value,
+                dfeListOfT.Value,
+                dfeListOfString.Value,
+                dfeKeyValuePairs.Value,
+                dfeDateTime.Value,
+                dfeDuration.Value,
+                dfeUri.Value,
+                discriminatorProperty);
         }
     }
 }

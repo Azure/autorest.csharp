@@ -172,7 +172,16 @@ namespace validation.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Product(displayNames ?? new ChangeTrackingList<string>(), Optional.ToNullable(capacity), image.Value, child, constChild, constInt, constString, Optional.ToNullable(constStringAsEnum), serializedAdditionalRawData);
+            return new Product(
+                displayNames ?? new ChangeTrackingList<string>(),
+                Optional.ToNullable(capacity),
+                image.Value,
+                child,
+                constChild,
+                constInt,
+                constString,
+                Optional.ToNullable(constStringAsEnum),
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<Product>.Write(ModelReaderWriterOptions options)

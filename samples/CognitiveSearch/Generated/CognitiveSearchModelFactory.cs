@@ -27,7 +27,13 @@ namespace CognitiveSearch.Models
             facets ??= new Dictionary<string, IList<FacetResult>>();
             results ??= new List<SearchResult>();
 
-            return new SearchDocumentsResult(count, coverage, facets, nextPageParameters, results?.ToList(), nextLink);
+            return new SearchDocumentsResult(
+                count,
+                coverage,
+                facets,
+                nextPageParameters,
+                results?.ToList(),
+                nextLink);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.FacetResult"/>. </summary>
@@ -167,7 +173,17 @@ namespace CognitiveSearch.Models
             errors ??= new List<ItemError>();
             warnings ??= new List<ItemWarning>();
 
-            return new IndexerExecutionResult(status, errorMessage, startTime, endTime, errors?.ToList(), warnings?.ToList(), itemCount, failedItemCount, initialTrackingState, finalTrackingState);
+            return new IndexerExecutionResult(
+                status,
+                errorMessage,
+                startTime,
+                endTime,
+                errors?.ToList(),
+                warnings?.ToList(),
+                itemCount,
+                failedItemCount,
+                initialTrackingState,
+                finalTrackingState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ItemError"/>. </summary>
@@ -180,7 +196,13 @@ namespace CognitiveSearch.Models
         /// <returns> A new <see cref="Models.ItemError"/> instance for mocking. </returns>
         public static ItemError ItemError(string key = null, string errorMessage = null, int statusCode = default, string name = null, string details = null, string documentationLink = null)
         {
-            return new ItemError(key, errorMessage, statusCode, name, details, documentationLink);
+            return new ItemError(
+                key,
+                errorMessage,
+                statusCode,
+                name,
+                details,
+                documentationLink);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ItemWarning"/>. </summary>
@@ -337,7 +359,14 @@ namespace CognitiveSearch.Models
                 throw new ArgumentNullException(nameof(skillsetCounter));
             }
 
-            return new ServiceCounters(documentCounter, indexCounter, indexerCounter, dataSourceCounter, storageSizeCounter, synonymMapCounter, skillsetCounter);
+            return new ServiceCounters(
+                documentCounter,
+                indexCounter,
+                indexerCounter,
+                dataSourceCounter,
+                storageSizeCounter,
+                synonymMapCounter,
+                skillsetCounter);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ResourceCounter"/>. </summary>

@@ -192,7 +192,18 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetOSDisk(name.Value, Optional.ToNullable(caching), Optional.ToNullable(writeAcceleratorEnabled), createOption, diffDiskSettings.Value, Optional.ToNullable(diskSizeGB), Optional.ToNullable(osType), image.Value, vhdContainers ?? new ChangeTrackingList<string>(), managedDisk.Value, Optional.ToNullable(securityType));
+            return new VirtualMachineScaleSetOSDisk(
+                name.Value,
+                Optional.ToNullable(caching),
+                Optional.ToNullable(writeAcceleratorEnabled),
+                createOption,
+                diffDiskSettings.Value,
+                Optional.ToNullable(diskSizeGB),
+                Optional.ToNullable(osType),
+                image.Value,
+                vhdContainers ?? new ChangeTrackingList<string>(),
+                managedDisk.Value,
+                Optional.ToNullable(securityType));
         }
     }
 }

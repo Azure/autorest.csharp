@@ -105,7 +105,16 @@ namespace Azure.ResourceManager.Storage
                     continue;
                 }
             }
-            return new DeletedAccountData(id, name, type, systemData.Value, storageAccountResourceId.Value, Optional.ToNullable(location), restoreReference.Value, creationTime.Value, deletionTime.Value);
+            return new DeletedAccountData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                storageAccountResourceId.Value,
+                Optional.ToNullable(location),
+                restoreReference.Value,
+                creationTime.Value,
+                deletionTime.Value);
         }
     }
 }

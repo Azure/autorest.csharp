@@ -190,7 +190,15 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new FirewallPolicyIntrusionDetectionBypassTrafficSpecifications(name.Value, description.Value, Optional.ToNullable(protocol), sourceAddresses ?? new ChangeTrackingList<string>(), destinationAddresses ?? new ChangeTrackingList<string>(), destinationPorts ?? new ChangeTrackingList<string>(), sourceIpGroups ?? new ChangeTrackingList<string>(), destinationIpGroups ?? new ChangeTrackingList<string>());
+            return new FirewallPolicyIntrusionDetectionBypassTrafficSpecifications(
+                name.Value,
+                description.Value,
+                Optional.ToNullable(protocol),
+                sourceAddresses ?? new ChangeTrackingList<string>(),
+                destinationAddresses ?? new ChangeTrackingList<string>(),
+                destinationPorts ?? new ChangeTrackingList<string>(),
+                sourceIpGroups ?? new ChangeTrackingList<string>(),
+                destinationIpGroups ?? new ChangeTrackingList<string>());
         }
     }
 }

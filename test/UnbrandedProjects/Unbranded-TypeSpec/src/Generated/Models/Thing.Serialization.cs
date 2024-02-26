@@ -257,7 +257,21 @@ namespace UnbrandedTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Thing(name, requiredUnion, requiredLiteralString, requiredLiteralInt, requiredLiteralFloat, requiredLiteralBool, OptionalProperty.ToNullable(optionalLiteralString), OptionalProperty.ToNullable(optionalLiteralInt), OptionalProperty.ToNullable(optionalLiteralFloat), OptionalProperty.ToNullable(optionalLiteralBool), requiredBadDescription, optionalNullableList ?? new OptionalList<int>(), requiredNullableList, serializedAdditionalRawData);
+            return new Thing(
+                name,
+                requiredUnion,
+                requiredLiteralString,
+                requiredLiteralInt,
+                requiredLiteralFloat,
+                requiredLiteralBool,
+                OptionalProperty.ToNullable(optionalLiteralString),
+                OptionalProperty.ToNullable(optionalLiteralInt),
+                OptionalProperty.ToNullable(optionalLiteralFloat),
+                OptionalProperty.ToNullable(optionalLiteralBool),
+                requiredBadDescription,
+                optionalNullableList ?? new OptionalList<int>(),
+                requiredNullableList,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<Thing>.Write(ModelReaderWriterOptions options)

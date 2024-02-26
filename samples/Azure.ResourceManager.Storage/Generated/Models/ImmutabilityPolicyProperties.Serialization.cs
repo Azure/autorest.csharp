@@ -100,7 +100,13 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new ImmutabilityPolicyProperties(Optional.ToNullable(etag), updateHistory ?? new ChangeTrackingList<UpdateHistoryProperty>(), Optional.ToNullable(immutabilityPeriodSinceCreationInDays), Optional.ToNullable(state), Optional.ToNullable(allowProtectedAppendWrites), Optional.ToNullable(allowProtectedAppendWritesAll));
+            return new ImmutabilityPolicyProperties(
+                Optional.ToNullable(etag),
+                updateHistory ?? new ChangeTrackingList<UpdateHistoryProperty>(),
+                Optional.ToNullable(immutabilityPeriodSinceCreationInDays),
+                Optional.ToNullable(state),
+                Optional.ToNullable(allowProtectedAppendWrites),
+                Optional.ToNullable(allowProtectedAppendWritesAll));
         }
     }
 }

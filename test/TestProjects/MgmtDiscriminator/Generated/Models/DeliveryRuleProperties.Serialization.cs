@@ -183,7 +183,14 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DeliveryRuleProperties(Optional.ToNullable(order), conditions.Value, actions ?? new ChangeTrackingList<DeliveryRuleAction>(), extraMappingInfo ?? new ChangeTrackingDictionary<string, DeliveryRuleAction>(), pet.Value, foo.Value, serializedAdditionalRawData);
+            return new DeliveryRuleProperties(
+                Optional.ToNullable(order),
+                conditions.Value,
+                actions ?? new ChangeTrackingList<DeliveryRuleAction>(),
+                extraMappingInfo ?? new ChangeTrackingDictionary<string, DeliveryRuleAction>(),
+                pet.Value,
+                foo.Value,
+                serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

@@ -125,7 +125,15 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new ApplicationSecurityGroup(id.Value, name.Value, type.Value, location.Value, tags ?? new ChangeTrackingDictionary<string, string>(), etag.Value, resourceGuid.Value, Optional.ToNullable(provisioningState));
+            return new ApplicationSecurityGroup(
+                id.Value,
+                name.Value,
+                type.Value,
+                location.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                etag.Value,
+                resourceGuid.Value,
+                Optional.ToNullable(provisioningState));
         }
     }
 }

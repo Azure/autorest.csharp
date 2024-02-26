@@ -40,7 +40,22 @@ namespace MgmtScopeResource.Models
             parameters ??= new Dictionary<string, ParameterValuesValue>();
             nonComplianceMessages ??= new List<NonComplianceMessage>();
 
-            return new FakePolicyAssignmentData(id, name, resourceType, systemData, location, identity, displayName, policyDefinitionId, scope, notScopes?.ToList(), parameters, description, metadata, enforcementMode, nonComplianceMessages?.ToList());
+            return new FakePolicyAssignmentData(
+                id,
+                name,
+                resourceType,
+                systemData,
+                location,
+                identity,
+                displayName,
+                policyDefinitionId,
+                scope,
+                notScopes?.ToList(),
+                parameters,
+                description,
+                metadata,
+                enforcementMode,
+                nonComplianceMessages?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtScopeResource.DeploymentExtendedData"/>. </summary>
@@ -56,7 +71,14 @@ namespace MgmtScopeResource.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new DeploymentExtendedData(id, name, resourceType, systemData, location, properties, tags);
+            return new DeploymentExtendedData(
+                id,
+                name,
+                resourceType,
+                systemData,
+                location,
+                properties,
+                tags);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DeploymentPropertiesExtended"/>. </summary>
@@ -71,7 +93,15 @@ namespace MgmtScopeResource.Models
         /// <returns> A new <see cref="Models.DeploymentPropertiesExtended"/> instance for mocking. </returns>
         public static DeploymentPropertiesExtended DeploymentPropertiesExtended(ProvisioningState? provisioningState = null, string correlationId = null, DateTimeOffset? timestamp = null, TimeSpan? duration = null, BinaryData outputs = null, BinaryData parameters = null, DeploymentMode? mode = null, string error = null)
         {
-            return new DeploymentPropertiesExtended(provisioningState, correlationId, timestamp, duration, outputs, parameters, mode, error != null ? new ErrorResponse(error) : null);
+            return new DeploymentPropertiesExtended(
+                provisioningState,
+                correlationId,
+                timestamp,
+                duration,
+                outputs,
+                parameters,
+                mode,
+                error != null ? new ErrorResponse(error) : null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DeploymentValidateResult"/>. </summary>
@@ -139,7 +169,17 @@ namespace MgmtScopeResource.Models
         /// <returns> A new <see cref="Models.DeploymentOperationProperties"/> instance for mocking. </returns>
         public static DeploymentOperationProperties DeploymentOperationProperties(ProvisioningOperation? provisioningOperation = null, string provisioningState = null, DateTimeOffset? timestamp = null, TimeSpan? duration = null, TimeSpan? anotherDuration = null, string serviceRequestId = null, string statusCode = null, StatusMessage statusMessage = null, BinaryData requestContent = null, BinaryData responseContent = null)
         {
-            return new DeploymentOperationProperties(provisioningOperation, provisioningState, timestamp, duration, anotherDuration, serviceRequestId, statusCode, statusMessage, requestContent != null ? new HttpMessage(requestContent) : null, responseContent != null ? new HttpMessage(responseContent) : null);
+            return new DeploymentOperationProperties(
+                provisioningOperation,
+                provisioningState,
+                timestamp,
+                duration,
+                anotherDuration,
+                serviceRequestId,
+                statusCode,
+                statusMessage,
+                requestContent != null ? new HttpMessage(requestContent) : null,
+                responseContent != null ? new HttpMessage(responseContent) : null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.StatusMessage"/>. </summary>
@@ -196,7 +236,15 @@ namespace MgmtScopeResource.Models
         {
             data ??= new List<DataContainer>();
 
-            return new VMInsightsOnboardingStatusData(id, name, resourceType, systemData, resourceId, onboardingStatus, dataStatus, data?.ToList());
+            return new VMInsightsOnboardingStatusData(
+                id,
+                name,
+                resourceType,
+                systemData,
+                resourceId,
+                onboardingStatus,
+                dataStatus,
+                data?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DataContainer"/>. </summary>
@@ -262,7 +310,16 @@ namespace MgmtScopeResource.Models
         /// <returns> A new <see cref="Models.GuestConfigurationAssignmentProperties"/> instance for mocking. </returns>
         public static GuestConfigurationAssignmentProperties GuestConfigurationAssignmentProperties(string targetResourceId = null, ComplianceStatus? complianceStatus = null, DateTimeOffset? lastComplianceStatusChecked = null, string latestReportId = null, string parameterHash = null, string context = null, string assignmentHash = null, ProvisioningState? provisioningState = null, string resourceType = null)
         {
-            return new GuestConfigurationAssignmentProperties(targetResourceId, complianceStatus, lastComplianceStatusChecked, latestReportId, parameterHash, context, assignmentHash, provisioningState, resourceType);
+            return new GuestConfigurationAssignmentProperties(
+                targetResourceId,
+                complianceStatus,
+                lastComplianceStatusChecked,
+                latestReportId,
+                parameterHash,
+                context,
+                assignmentHash,
+                provisioningState,
+                resourceType);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.GuestConfigurationBaseResource"/>. </summary>
@@ -314,7 +371,39 @@ namespace MgmtScopeResource.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new Marketplace(id, name, resourceType, systemData, billingPeriodId, usageStart, usageEnd, resourceRate, offerName, resourceGroup, additionalInfo, orderNumber, instanceName, instanceId, currency, consumedQuantity, unitOfMeasure, pretaxCost, isEstimated, meterId, subscriptionGuid, subscriptionName, accountName, departmentName, consumedService, costCenter, additionalProperties, publisherName, planName, isRecurringCharge, etag, tags);
+            return new Marketplace(
+                id,
+                name,
+                resourceType,
+                systemData,
+                billingPeriodId,
+                usageStart,
+                usageEnd,
+                resourceRate,
+                offerName,
+                resourceGroup,
+                additionalInfo,
+                orderNumber,
+                instanceName,
+                instanceId,
+                currency,
+                consumedQuantity,
+                unitOfMeasure,
+                pretaxCost,
+                isEstimated,
+                meterId,
+                subscriptionGuid,
+                subscriptionName,
+                accountName,
+                departmentName,
+                consumedService,
+                costCenter,
+                additionalProperties,
+                publisherName,
+                planName,
+                isRecurringCharge,
+                etag,
+                tags);
         }
     }
 }

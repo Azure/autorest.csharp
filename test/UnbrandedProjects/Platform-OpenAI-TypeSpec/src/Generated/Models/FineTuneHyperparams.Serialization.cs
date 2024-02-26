@@ -144,7 +144,15 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new FineTuneHyperparams(nEpochs, batchSize, promptLossWeight, learningRateMultiplier, OptionalProperty.ToNullable(computeClassificationMetrics), classificationPositiveClass.Value, OptionalProperty.ToNullable(classificationNClasses), serializedAdditionalRawData);
+            return new FineTuneHyperparams(
+                nEpochs,
+                batchSize,
+                promptLossWeight,
+                learningRateMultiplier,
+                OptionalProperty.ToNullable(computeClassificationMetrics),
+                classificationPositiveClass.Value,
+                OptionalProperty.ToNullable(classificationNClasses),
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<FineTuneHyperparams>.Write(ModelReaderWriterOptions options)

@@ -126,7 +126,16 @@ namespace MgmtScopeResource.Models
                     continue;
                 }
             }
-            return new GuestConfigurationAssignmentProperties(targetResourceId.Value, Optional.ToNullable(complianceStatus), Optional.ToNullable(lastComplianceStatusChecked), latestReportId.Value, parameterHash.Value, context.Value, assignmentHash.Value, Optional.ToNullable(provisioningState), resourceType.Value);
+            return new GuestConfigurationAssignmentProperties(
+                targetResourceId.Value,
+                Optional.ToNullable(complianceStatus),
+                Optional.ToNullable(lastComplianceStatusChecked),
+                latestReportId.Value,
+                parameterHash.Value,
+                context.Value,
+                assignmentHash.Value,
+                Optional.ToNullable(provisioningState),
+                resourceType.Value);
         }
     }
 }

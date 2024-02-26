@@ -185,7 +185,15 @@ namespace lro.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Product(id.Value, type.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location.Value, name.Value, serializedAdditionalRawData, provisioningState.Value, Optional.ToNullable(provisioningStateValues));
+            return new Product(
+                id.Value,
+                type.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location.Value,
+                name.Value,
+                serializedAdditionalRawData,
+                provisioningState.Value,
+                Optional.ToNullable(provisioningStateValues));
         }
 
         BinaryData IPersistableModel<Product>.Write(ModelReaderWriterOptions options)

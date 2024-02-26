@@ -102,7 +102,14 @@ namespace MgmtOperations
                     continue;
                 }
             }
-            return new AvailabilitySetGrandChildData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, bar.Value);
+            return new AvailabilitySetGrandChildData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                bar.Value);
         }
     }
 }

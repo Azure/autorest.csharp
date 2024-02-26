@@ -31,7 +31,16 @@ namespace MgmtExactMatchFlattenInheritance.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new AzureResourceFlattenModel1Data(id, name, resourceType, systemData, tags, location, foo, fooPropertiesFoo, idPropertiesId);
+            return new AzureResourceFlattenModel1Data(
+                id,
+                name,
+                resourceType,
+                systemData,
+                tags,
+                location,
+                foo,
+                fooPropertiesFoo,
+                idPropertiesId);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.AzureResourceFlattenModel2"/>. </summary>
@@ -47,7 +56,14 @@ namespace MgmtExactMatchFlattenInheritance.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new AzureResourceFlattenModel2(id, name, resourceType, systemData, tags, location, foo);
+            return new AzureResourceFlattenModel2(
+                id,
+                name,
+                resourceType,
+                systemData,
+                tags,
+                location,
+                foo);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.AzureResourceFlattenModel3"/>. </summary>
@@ -63,7 +79,14 @@ namespace MgmtExactMatchFlattenInheritance.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new AzureResourceFlattenModel3(id, name, resourceType, systemData, tags, location, foo);
+            return new AzureResourceFlattenModel3(
+                id,
+                name,
+                resourceType,
+                systemData,
+                tags,
+                location,
+                foo);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.AzureResourceFlattenModel5"/>. </summary>

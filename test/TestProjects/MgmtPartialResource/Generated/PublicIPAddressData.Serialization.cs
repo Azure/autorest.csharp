@@ -241,7 +241,23 @@ namespace MgmtPartialResource
                     continue;
                 }
             }
-            return new PublicIPAddressData(id, name, type, systemData.Value, sku.Value, etag.Value, zones ?? new ChangeTrackingList<string>(), Optional.ToNullable(publicIPAllocationMethod), Optional.ToNullable(publicIPAddressVersion), ipAddress.Value, Optional.ToNullable(idleTimeoutInMinutes), resourceGuid.Value, servicePublicIPAddress.Value, Optional.ToNullable(migrationPhase), linkedPublicIPAddress.Value, Optional.ToNullable(deleteOption));
+            return new PublicIPAddressData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                sku.Value,
+                etag.Value,
+                zones ?? new ChangeTrackingList<string>(),
+                Optional.ToNullable(publicIPAllocationMethod),
+                Optional.ToNullable(publicIPAddressVersion),
+                ipAddress.Value,
+                Optional.ToNullable(idleTimeoutInMinutes),
+                resourceGuid.Value,
+                servicePublicIPAddress.Value,
+                Optional.ToNullable(migrationPhase),
+                linkedPublicIPAddress.Value,
+                Optional.ToNullable(deleteOption));
         }
     }
 }

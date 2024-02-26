@@ -136,7 +136,14 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new CreateCompletionResponse(id, @object, created, model, choices, usage.Value, serializedAdditionalRawData);
+            return new CreateCompletionResponse(
+                id,
+                @object,
+                created,
+                model,
+                choices,
+                usage.Value,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<CreateCompletionResponse>.Write(ModelReaderWriterOptions options)

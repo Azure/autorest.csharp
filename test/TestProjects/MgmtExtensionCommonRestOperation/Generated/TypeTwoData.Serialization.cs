@@ -102,7 +102,14 @@ namespace MgmtExtensionCommonRestOperation
                     continue;
                 }
             }
-            return new TypeTwoData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, myType.Value);
+            return new TypeTwoData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                myType.Value);
         }
     }
 }

@@ -74,7 +74,31 @@ namespace ModelsTypeSpec.Models
             nonRequiredNullableStringList ??= new List<string>();
             nonRequiredNullableIntList ??= new List<int>();
 
-            return new InputModel(requiredString, requiredInt, requiredNullableInt, requiredNullableString, nonRequiredNullableInt, nonRequiredNullableString, requiredModel, requiredModel2, requiredIntList?.ToList(), requiredStringList?.ToList(), requiredModelList?.ToList(), requiredModelRecord, requiredCollectionWithNullableFloatElement?.ToList(), requiredCollectionWithNullableBooleanElement?.ToList(), requiredNullableModelList?.ToList(), requiredNullableStringList?.ToList(), requiredNullableIntList?.ToList(), nonRequiredModelList?.ToList(), nonRequiredStringList?.ToList(), nonRequiredIntList?.ToList(), nonRequiredNullableModelList?.ToList(), nonRequiredNullableStringList?.ToList(), nonRequiredNullableIntList?.ToList(), serializedAdditionalRawData: null);
+            return new InputModel(
+                requiredString,
+                requiredInt,
+                requiredNullableInt,
+                requiredNullableString,
+                nonRequiredNullableInt,
+                nonRequiredNullableString,
+                requiredModel,
+                requiredModel2,
+                requiredIntList?.ToList(),
+                requiredStringList?.ToList(),
+                requiredModelList?.ToList(),
+                requiredModelRecord,
+                requiredCollectionWithNullableFloatElement?.ToList(),
+                requiredCollectionWithNullableBooleanElement?.ToList(),
+                requiredNullableModelList?.ToList(),
+                requiredNullableStringList?.ToList(),
+                requiredNullableIntList?.ToList(),
+                nonRequiredModelList?.ToList(),
+                nonRequiredStringList?.ToList(),
+                nonRequiredIntList?.ToList(),
+                nonRequiredNullableModelList?.ToList(),
+                nonRequiredNullableStringList?.ToList(),
+                nonRequiredNullableIntList?.ToList(),
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.RoundTripModel"/>. </summary>
@@ -124,7 +148,38 @@ namespace ModelsTypeSpec.Models
             nonRequiredNullableIntList ??= new List<int>();
             nonRequiredNullableStringList ??= new List<string>();
 
-            return new RoundTripModel(serializedAdditionalRawData: null, requiredString, requiredInt, nonRequiredString, nonRequiredInt, requiredNullableInt, requiredNullableString, nonRequiredNullableInt, nonRequiredNullableString, requiredReadonlyInt, nonRequiredReadonlyInt, requiredModel, requiredFixedStringEnum, requiredFixedIntEnum, requiredExtensibleEnum, requiredList?.ToList(), requiredIntRecord, requiredStringRecord, requiredModelRecord, requiredBytes, optionalBytes, requiredUint8Array?.ToList(), optionalUint8Array?.ToList(), requiredUnknown, optionalUnknown, requiredInt8Array?.ToList(), optionalInt8Array?.ToList(), requiredNullableIntList?.ToList(), requiredNullableStringList?.ToList(), nonRequiredNullableIntList?.ToList(), nonRequiredNullableStringList?.ToList());
+            return new RoundTripModel(
+                serializedAdditionalRawData: null,
+                requiredString,
+                requiredInt,
+                nonRequiredString,
+                nonRequiredInt,
+                requiredNullableInt,
+                requiredNullableString,
+                nonRequiredNullableInt,
+                nonRequiredNullableString,
+                requiredReadonlyInt,
+                nonRequiredReadonlyInt,
+                requiredModel,
+                requiredFixedStringEnum,
+                requiredFixedIntEnum,
+                requiredExtensibleEnum,
+                requiredList?.ToList(),
+                requiredIntRecord,
+                requiredStringRecord,
+                requiredModelRecord,
+                requiredBytes,
+                optionalBytes,
+                requiredUint8Array?.ToList(),
+                optionalUint8Array?.ToList(),
+                requiredUnknown,
+                optionalUnknown,
+                requiredInt8Array?.ToList(),
+                optionalInt8Array?.ToList(),
+                requiredNullableIntList?.ToList(),
+                requiredNullableStringList?.ToList(),
+                nonRequiredNullableIntList?.ToList(),
+                nonRequiredNullableStringList?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.BaseModelWithProperties"/>. </summary>
@@ -189,7 +244,32 @@ namespace ModelsTypeSpec.Models
             requiredCollectionWithNullableIntElement ??= new List<int?>();
             optionalCollectionWithNullableBooleanElement ??= new List<bool?>();
 
-            return new RoundTripReadOnlyModel(requiredReadonlyString, requiredReadonlyInt, optionalReadonlyString, optionalReadonlyInt, requiredReadonlyModel, optionalReadonlyModel, requiredReadonlyFixedStringEnum, requiredReadonlyExtensibleEnum, optionalReadonlyFixedStringEnum, optionalReadonlyExtensibleEnum, requiredReadonlyStringList?.ToList(), requiredReadonlyIntList?.ToList(), requiredReadOnlyModelList?.ToList(), requiredReadOnlyIntRecord, requiredStringRecord, requiredReadOnlyModelRecord, optionalReadonlyStringList?.ToList(), optionalReadonlyIntList?.ToList(), optionalReadOnlyModelList?.ToList(), optionalReadOnlyIntRecord, optionalReadOnlyStringRecord, optionalModelRecord, requiredCollectionWithNullableIntElement?.ToList(), optionalCollectionWithNullableBooleanElement?.ToList(), serializedAdditionalRawData: null);
+            return new RoundTripReadOnlyModel(
+                requiredReadonlyString,
+                requiredReadonlyInt,
+                optionalReadonlyString,
+                optionalReadonlyInt,
+                requiredReadonlyModel,
+                optionalReadonlyModel,
+                requiredReadonlyFixedStringEnum,
+                requiredReadonlyExtensibleEnum,
+                optionalReadonlyFixedStringEnum,
+                optionalReadonlyExtensibleEnum,
+                requiredReadonlyStringList?.ToList(),
+                requiredReadonlyIntList?.ToList(),
+                requiredReadOnlyModelList?.ToList(),
+                requiredReadOnlyIntRecord,
+                requiredStringRecord,
+                requiredReadOnlyModelRecord,
+                optionalReadonlyStringList?.ToList(),
+                optionalReadonlyIntList?.ToList(),
+                optionalReadOnlyModelList?.ToList(),
+                optionalReadOnlyIntRecord,
+                optionalReadOnlyStringRecord,
+                optionalModelRecord,
+                requiredCollectionWithNullableIntElement?.ToList(),
+                optionalCollectionWithNullableBooleanElement?.ToList(),
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.OutputModel"/>. </summary>
@@ -212,7 +292,17 @@ namespace ModelsTypeSpec.Models
             optionalRecord ??= new Dictionary<string, RecordItem>();
             optionalNullableRecord ??= new Dictionary<string, RecordItem>();
 
-            return new OutputModel(requiredString, requiredInt, requiredModel, requiredList?.ToList(), requiredModelRecord, optionalList?.ToList(), optionalNullableList?.ToList(), optionalRecord, optionalNullableRecord, serializedAdditionalRawData: null);
+            return new OutputModel(
+                requiredString,
+                requiredInt,
+                requiredModel,
+                requiredList?.ToList(),
+                requiredModelRecord,
+                optionalList?.ToList(),
+                optionalNullableList?.ToList(),
+                optionalRecord,
+                optionalNullableRecord,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.InputRecursiveModel"/>. </summary>

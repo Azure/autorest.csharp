@@ -137,7 +137,13 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetPublicIPAddressConfiguration(name, Optional.ToNullable(idleTimeoutInMinutes), dnsSettings.Value, ipTags ?? new ChangeTrackingList<VirtualMachineScaleSetIPTag>(), publicIPPrefix, Optional.ToNullable(publicIPAddressVersion));
+            return new VirtualMachineScaleSetPublicIPAddressConfiguration(
+                name,
+                Optional.ToNullable(idleTimeoutInMinutes),
+                dnsSettings.Value,
+                ipTags ?? new ChangeTrackingList<VirtualMachineScaleSetIPTag>(),
+                publicIPPrefix,
+                Optional.ToNullable(publicIPAddressVersion));
         }
     }
 }

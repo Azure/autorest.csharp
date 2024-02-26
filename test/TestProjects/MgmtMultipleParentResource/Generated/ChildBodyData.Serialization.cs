@@ -195,7 +195,20 @@ namespace MgmtMultipleParentResource
                     continue;
                 }
             }
-            return new ChildBodyData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, Optional.ToNullable(asyncExecution), runAsUser.Value, runAsPassword.Value, Optional.ToNullable(timeoutInSeconds), outputBlobUri.Value, errorBlobUri.Value, provisioningState.Value);
+            return new ChildBodyData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                Optional.ToNullable(asyncExecution),
+                runAsUser.Value,
+                runAsPassword.Value,
+                Optional.ToNullable(timeoutInSeconds),
+                outputBlobUri.Value,
+                errorBlobUri.Value,
+                provisioningState.Value);
         }
     }
 }

@@ -101,7 +101,13 @@ namespace MgmtExactMatchInheritance.Models
                     continue;
                 }
             }
-            return new ExactMatchModel10(id, name, type, systemData.Value, Optional.ToNullable(location), tags ?? new ChangeTrackingDictionary<string, string>());
+            return new ExactMatchModel10(
+                id,
+                name,
+                type,
+                systemData.Value,
+                Optional.ToNullable(location),
+                tags ?? new ChangeTrackingDictionary<string, string>());
         }
 
         internal partial class ExactMatchModel10Converter : JsonConverter<ExactMatchModel10>

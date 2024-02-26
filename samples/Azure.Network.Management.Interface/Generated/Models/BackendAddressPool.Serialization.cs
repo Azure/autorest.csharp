@@ -142,7 +142,16 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new BackendAddressPool(id.Value, name.Value, etag.Value, type.Value, backendIPConfigurations ?? new ChangeTrackingList<NetworkInterfaceIPConfiguration>(), loadBalancingRules ?? new ChangeTrackingList<SubResource>(), outboundRule.Value, outboundRules ?? new ChangeTrackingList<SubResource>(), Optional.ToNullable(provisioningState));
+            return new BackendAddressPool(
+                id.Value,
+                name.Value,
+                etag.Value,
+                type.Value,
+                backendIPConfigurations ?? new ChangeTrackingList<NetworkInterfaceIPConfiguration>(),
+                loadBalancingRules ?? new ChangeTrackingList<SubResource>(),
+                outboundRule.Value,
+                outboundRules ?? new ChangeTrackingList<SubResource>(),
+                Optional.ToNullable(provisioningState));
         }
     }
 }

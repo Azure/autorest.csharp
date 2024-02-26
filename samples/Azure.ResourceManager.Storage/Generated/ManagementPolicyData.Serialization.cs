@@ -98,7 +98,13 @@ namespace Azure.ResourceManager.Storage
                     continue;
                 }
             }
-            return new ManagementPolicyData(id, name, type, systemData.Value, Optional.ToNullable(lastModifiedTime), policy.Value);
+            return new ManagementPolicyData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                Optional.ToNullable(lastModifiedTime),
+                policy.Value);
         }
     }
 }

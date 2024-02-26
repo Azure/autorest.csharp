@@ -84,7 +84,13 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new DeletedVaultProperties(vaultId.Value, Optional.ToNullable(location), Optional.ToNullable(deletionDate), Optional.ToNullable(scheduledPurgeDate), tags ?? new ChangeTrackingDictionary<string, string>(), Optional.ToNullable(purgeProtectionEnabled));
+            return new DeletedVaultProperties(
+                vaultId.Value,
+                Optional.ToNullable(location),
+                Optional.ToNullable(deletionDate),
+                Optional.ToNullable(scheduledPurgeDate),
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                Optional.ToNullable(purgeProtectionEnabled));
         }
     }
 }

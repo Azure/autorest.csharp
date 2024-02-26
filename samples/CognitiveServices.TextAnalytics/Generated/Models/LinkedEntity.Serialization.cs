@@ -63,7 +63,13 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            return new LinkedEntity(name, matches, language, id.Value, url, dataSource);
+            return new LinkedEntity(
+                name,
+                matches,
+                language,
+                id.Value,
+                url,
+                dataSource);
         }
     }
 }

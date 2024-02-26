@@ -171,7 +171,14 @@ namespace model_flattening.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new SimpleProduct(baseProductId, baseProductDescription.Value, serializedAdditionalRawData, maxProductDisplayName.Value, Optional.ToNullable(maxProductCapacity), genericValue.Value, odataValue.Value);
+            return new SimpleProduct(
+                baseProductId,
+                baseProductDescription.Value,
+                serializedAdditionalRawData,
+                maxProductDisplayName.Value,
+                Optional.ToNullable(maxProductCapacity),
+                genericValue.Value,
+                odataValue.Value);
         }
 
         BinaryData IPersistableModel<SimpleProduct>.Write(ModelReaderWriterOptions options)

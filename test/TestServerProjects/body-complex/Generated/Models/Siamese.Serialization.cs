@@ -147,7 +147,13 @@ namespace body_complex.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Siamese(Optional.ToNullable(id), name.Value, serializedAdditionalRawData, color.Value, hates ?? new ChangeTrackingList<Dog>(), breed.Value);
+            return new Siamese(
+                Optional.ToNullable(id),
+                name.Value,
+                serializedAdditionalRawData,
+                color.Value,
+                hates ?? new ChangeTrackingList<Dog>(),
+                breed.Value);
         }
 
         BinaryData IPersistableModel<Siamese>.Write(ModelReaderWriterOptions options)

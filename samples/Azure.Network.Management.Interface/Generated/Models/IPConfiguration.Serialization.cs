@@ -136,7 +136,15 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new IPConfiguration(id.Value, name.Value, etag.Value, privateIPAddress.Value, Optional.ToNullable(privateIPAllocationMethod), subnet.Value, publicIPAddress.Value, Optional.ToNullable(provisioningState));
+            return new IPConfiguration(
+                id.Value,
+                name.Value,
+                etag.Value,
+                privateIPAddress.Value,
+                Optional.ToNullable(privateIPAllocationMethod),
+                subnet.Value,
+                publicIPAddress.Value,
+                Optional.ToNullable(provisioningState));
         }
     }
 }

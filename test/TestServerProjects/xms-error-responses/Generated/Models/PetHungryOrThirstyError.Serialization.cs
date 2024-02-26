@@ -126,7 +126,13 @@ namespace xms_error_responses.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new PetHungryOrThirstyError(actionResponse.Value, serializedAdditionalRawData, errorType, errorMessage.Value, reason.Value, hungryOrThirsty.Value);
+            return new PetHungryOrThirstyError(
+                actionResponse.Value,
+                serializedAdditionalRawData,
+                errorType,
+                errorMessage.Value,
+                reason.Value,
+                hungryOrThirsty.Value);
         }
 
         BinaryData IPersistableModel<PetHungryOrThirstyError>.Write(ModelReaderWriterOptions options)

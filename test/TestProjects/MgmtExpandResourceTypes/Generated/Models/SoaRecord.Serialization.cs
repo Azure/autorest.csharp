@@ -124,7 +124,14 @@ namespace MgmtExpandResourceTypes.Models
                     continue;
                 }
             }
-            return new SoaRecord(host.Value, email.Value, Optional.ToNullable(serialNumber), Optional.ToNullable(refreshTime), Optional.ToNullable(retryTime), Optional.ToNullable(expireTime), Optional.ToNullable(minimumTTL));
+            return new SoaRecord(
+                host.Value,
+                email.Value,
+                Optional.ToNullable(serialNumber),
+                Optional.ToNullable(refreshTime),
+                Optional.ToNullable(retryTime),
+                Optional.ToNullable(expireTime),
+                Optional.ToNullable(minimumTTL));
         }
     }
 }

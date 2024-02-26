@@ -273,7 +273,19 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new ApplicationRule(name.Value, description.Value, ruleType, sourceAddresses ?? new ChangeTrackingList<string>(), destinationAddresses ?? new ChangeTrackingList<string>(), protocols ?? new ChangeTrackingList<FirewallPolicyRuleApplicationProtocol>(), targetFqdns ?? new ChangeTrackingList<string>(), targetUrls ?? new ChangeTrackingList<string>(), fqdnTags ?? new ChangeTrackingList<string>(), sourceIpGroups ?? new ChangeTrackingList<string>(), Optional.ToNullable(terminateTLS), webCategories ?? new ChangeTrackingList<string>());
+            return new ApplicationRule(
+                name.Value,
+                description.Value,
+                ruleType,
+                sourceAddresses ?? new ChangeTrackingList<string>(),
+                destinationAddresses ?? new ChangeTrackingList<string>(),
+                protocols ?? new ChangeTrackingList<FirewallPolicyRuleApplicationProtocol>(),
+                targetFqdns ?? new ChangeTrackingList<string>(),
+                targetUrls ?? new ChangeTrackingList<string>(),
+                fqdnTags ?? new ChangeTrackingList<string>(),
+                sourceIpGroups ?? new ChangeTrackingList<string>(),
+                Optional.ToNullable(terminateTLS),
+                webCategories ?? new ChangeTrackingList<string>());
         }
     }
 }

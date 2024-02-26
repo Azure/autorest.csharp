@@ -229,7 +229,20 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new Field(name, type, Optional.ToNullable(key), Optional.ToNullable(retrievable), Optional.ToNullable(searchable), Optional.ToNullable(filterable), Optional.ToNullable(sortable), Optional.ToNullable(facetable), Optional.ToNullable(analyzer), Optional.ToNullable(searchAnalyzer), Optional.ToNullable(indexAnalyzer), synonymMaps ?? new ChangeTrackingList<string>(), fields ?? new ChangeTrackingList<Field>());
+            return new Field(
+                name,
+                type,
+                Optional.ToNullable(key),
+                Optional.ToNullable(retrievable),
+                Optional.ToNullable(searchable),
+                Optional.ToNullable(filterable),
+                Optional.ToNullable(sortable),
+                Optional.ToNullable(facetable),
+                Optional.ToNullable(analyzer),
+                Optional.ToNullable(searchAnalyzer),
+                Optional.ToNullable(indexAnalyzer),
+                synonymMaps ?? new ChangeTrackingList<string>(),
+                fields ?? new ChangeTrackingList<Field>());
         }
     }
 }

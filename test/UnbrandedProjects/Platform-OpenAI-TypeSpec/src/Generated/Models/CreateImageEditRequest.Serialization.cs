@@ -166,7 +166,15 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new CreateImageEditRequest(prompt, image, mask.Value, OptionalProperty.ToNullable(n), OptionalProperty.ToNullable(size), OptionalProperty.ToNullable(responseFormat), user.Value, serializedAdditionalRawData);
+            return new CreateImageEditRequest(
+                prompt,
+                image,
+                mask.Value,
+                OptionalProperty.ToNullable(n),
+                OptionalProperty.ToNullable(size),
+                OptionalProperty.ToNullable(responseFormat),
+                user.Value,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<CreateImageEditRequest>.Write(ModelReaderWriterOptions options)

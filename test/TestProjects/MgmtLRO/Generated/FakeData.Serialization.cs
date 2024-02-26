@@ -107,7 +107,14 @@ namespace MgmtLRO
                     continue;
                 }
             }
-            return new FakeData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, properties.Value);
+            return new FakeData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                properties.Value);
         }
     }
 }

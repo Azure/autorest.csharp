@@ -381,7 +381,23 @@ namespace ModelsTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new RoundTripOptionalModel(optionalString.Value, Optional.ToNullable(optionalInt), optionalStringList ?? new ChangeTrackingList<string>(), optionalIntList ?? new ChangeTrackingList<int>(), optionalModelList ?? new ChangeTrackingList<CollectionItem>(), optionalModel.Value, optionalModelWithPropertiesOnBase.Value, Optional.ToNullable(optionalFixedStringEnum), Optional.ToNullable(optionalExtensibleEnum), optionalIntRecord ?? new ChangeTrackingDictionary<string, int>(), optionalStringRecord ?? new ChangeTrackingDictionary<string, string>(), optionalModelRecord ?? new ChangeTrackingDictionary<string, RecordItem>(), Optional.ToNullable(optionalPlainDate), Optional.ToNullable(optionalPlainTime), optionalCollectionWithNullableIntElement ?? new ChangeTrackingList<int?>(), serializedAdditionalRawData);
+            return new RoundTripOptionalModel(
+                optionalString.Value,
+                Optional.ToNullable(optionalInt),
+                optionalStringList ?? new ChangeTrackingList<string>(),
+                optionalIntList ?? new ChangeTrackingList<int>(),
+                optionalModelList ?? new ChangeTrackingList<CollectionItem>(),
+                optionalModel.Value,
+                optionalModelWithPropertiesOnBase.Value,
+                Optional.ToNullable(optionalFixedStringEnum),
+                Optional.ToNullable(optionalExtensibleEnum),
+                optionalIntRecord ?? new ChangeTrackingDictionary<string, int>(),
+                optionalStringRecord ?? new ChangeTrackingDictionary<string, string>(),
+                optionalModelRecord ?? new ChangeTrackingDictionary<string, RecordItem>(),
+                Optional.ToNullable(optionalPlainDate),
+                Optional.ToNullable(optionalPlainTime),
+                optionalCollectionWithNullableIntElement ?? new ChangeTrackingList<int?>(),
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<RoundTripOptionalModel>.Write(ModelReaderWriterOptions options)

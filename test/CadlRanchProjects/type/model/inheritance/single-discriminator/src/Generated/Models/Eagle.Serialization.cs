@@ -157,7 +157,13 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Eagle(kind, wingspan, serializedAdditionalRawData, friends ?? new ChangeTrackingList<Bird>(), hate ?? new ChangeTrackingDictionary<string, Bird>(), partner.Value);
+            return new Eagle(
+                kind,
+                wingspan,
+                serializedAdditionalRawData,
+                friends ?? new ChangeTrackingList<Bird>(),
+                hate ?? new ChangeTrackingDictionary<string, Bird>(),
+                partner.Value);
         }
 
         BinaryData IPersistableModel<Eagle>.Write(ModelReaderWriterOptions options)

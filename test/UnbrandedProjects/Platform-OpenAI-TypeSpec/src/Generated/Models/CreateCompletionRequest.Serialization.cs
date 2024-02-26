@@ -413,7 +413,24 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new CreateCompletionRequest(model, prompt, suffix.Value, OptionalProperty.ToNullable(temperature), OptionalProperty.ToNullable(topP), OptionalProperty.ToNullable(n), OptionalProperty.ToNullable(maxTokens), stop.Value, OptionalProperty.ToNullable(presencePenalty), OptionalProperty.ToNullable(frequencyPenalty), logitBias ?? new OptionalDictionary<string, long>(), user.Value, OptionalProperty.ToNullable(stream), OptionalProperty.ToNullable(logprobs), OptionalProperty.ToNullable(echo), OptionalProperty.ToNullable(bestOf), serializedAdditionalRawData);
+            return new CreateCompletionRequest(
+                model,
+                prompt,
+                suffix.Value,
+                OptionalProperty.ToNullable(temperature),
+                OptionalProperty.ToNullable(topP),
+                OptionalProperty.ToNullable(n),
+                OptionalProperty.ToNullable(maxTokens),
+                stop.Value,
+                OptionalProperty.ToNullable(presencePenalty),
+                OptionalProperty.ToNullable(frequencyPenalty),
+                logitBias ?? new OptionalDictionary<string, long>(),
+                user.Value,
+                OptionalProperty.ToNullable(stream),
+                OptionalProperty.ToNullable(logprobs),
+                OptionalProperty.ToNullable(echo),
+                OptionalProperty.ToNullable(bestOf),
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<CreateCompletionRequest>.Write(ModelReaderWriterOptions options)

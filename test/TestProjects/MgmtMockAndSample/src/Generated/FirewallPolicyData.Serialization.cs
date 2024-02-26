@@ -351,7 +351,30 @@ namespace MgmtMockAndSample
                     continue;
                 }
             }
-            return new FirewallPolicyData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, etag.Value, identity, startupProbe.Value, readinessProbe.Value, Optional.ToNullable(desiredStatusCode), ruleCollectionGroups ?? new ChangeTrackingList<WritableSubResource>(), Optional.ToNullable(provisioningState), basePolicy, firewalls ?? new ChangeTrackingList<WritableSubResource>(), childPolicies ?? new ChangeTrackingList<WritableSubResource>(), threatIntelWhitelist.Value, insights.Value, snat.Value, dnsSettings.Value, intrusionDetection.Value, transportSecurity.Value, sku.Value);
+            return new FirewallPolicyData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                etag.Value,
+                identity,
+                startupProbe.Value,
+                readinessProbe.Value,
+                Optional.ToNullable(desiredStatusCode),
+                ruleCollectionGroups ?? new ChangeTrackingList<WritableSubResource>(),
+                Optional.ToNullable(provisioningState),
+                basePolicy,
+                firewalls ?? new ChangeTrackingList<WritableSubResource>(),
+                childPolicies ?? new ChangeTrackingList<WritableSubResource>(),
+                threatIntelWhitelist.Value,
+                insights.Value,
+                snat.Value,
+                dnsSettings.Value,
+                intrusionDetection.Value,
+                transportSecurity.Value,
+                sku.Value);
         }
     }
 }
