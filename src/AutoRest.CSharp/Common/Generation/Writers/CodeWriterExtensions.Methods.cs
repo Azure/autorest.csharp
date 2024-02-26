@@ -494,17 +494,17 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                     break;
 
-                case ObjectInitializerExpression(var properties, var isInline):
-                    if (properties is not { Count: > 0 })
+                case ObjectInitializerExpression(var parameters, var useSingleLine):
+                    if (parameters is not { Count: > 0 })
                     {
                         writer.AppendRaw("{}");
                         break;
                     }
 
-                    if (isInline)
+                    if (useSingleLine)
                     {
                         writer.AppendRaw("{");
-                        foreach (var (name, value) in properties)
+                        foreach (var (name, value) in parameters)
                         {
                             writer.Append($"{name} = ");
                             writer.WriteValueExpression(value);
@@ -518,7 +518,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     {
                         writer.Line();
                         writer.LineRaw("{");
-                        foreach (var (name, value) in properties)
+                        foreach (var (name, value) in parameters)
                         {
                             writer.Append($"{name} = ");
                             writer.WriteValueExpression(value);
@@ -531,16 +531,17 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                     break;
 
-                case NewInstanceExpression(var type, var arguments, var properties):
+                case NewInstanceExpression(var type, var parameters, var initExpression):
                     writer.Append($"new {type}");
-                    if (arguments.Count > 0 || properties is not { Properties.Count: > 0 })
+                    if (parameters.Count > 0 || initExpression is not { Parameters.Count: > 0 })
                     {
-                        WriteArguments(writer, arguments);
+                        //magic number to decide when to use single line
+                        WriteArguments(writer, parameters, parameters.Count < 6);
                     }
 
-                    if (properties is { Properties.Count: > 0 })
+                    if (initExpression is { Parameters.Count: > 0 })
                     {
-                        writer.WriteValueExpression(properties);
+                        writer.WriteValueExpression(initExpression);
                     }
                     break;
 
@@ -686,17 +687,34 @@ namespace AutoRest.CSharp.Generation.Writers
                     break;
             }
 
-            static void WriteArguments(CodeWriter writer, IEnumerable<ValueExpression> arguments)
+            static void WriteArguments(CodeWriter writer, IEnumerable<ValueExpression> arguments, bool useSingleLine = true)
             {
-                writer.AppendRaw("(");
-                foreach (var argument in arguments)
+                if (useSingleLine)
                 {
-                    writer.WriteValueExpression(argument);
-                    writer.AppendRaw(", ");
-                }
+                    writer.AppendRaw("(");
+                    foreach (var argument in arguments)
+                    {
+                        writer.WriteValueExpression(argument);
+                        writer.AppendRaw(", ");
+                    }
 
-                writer.RemoveTrailingComma();
-                writer.AppendRaw(")");
+                    writer.RemoveTrailingComma();
+                    writer.AppendRaw(")");
+                }
+                else
+                {
+                    writer.LineRaw("(");
+                    foreach (var argument in arguments)
+                    {
+                        writer.AppendRaw("\t");
+                        writer.WriteValueExpression(argument);
+                        writer.LineRaw(",");
+                    }
+
+                    writer.RemoveTrailingCharacter();
+                    writer.RemoveTrailingComma();
+                    writer.AppendRaw(")");
+                }
             }
 
             static void WriteTypeArguments(CodeWriter writer, IEnumerable<CSharpType>? typeArguments)
