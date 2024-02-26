@@ -121,7 +121,7 @@ namespace AutoRest.CSharp.Common.Input
             SkipCSProjPackageReference = skipCSProjPackageReference;
             Generation1ConvenienceClient = generation1ConvenienceClient;
 
-            PublicRestClients = generation1ConvenienceClient;
+            PublicRestClientsTemporaryFlag = generation1ConvenienceClient;
             GenerateLongRunningOperationTypes = generation1ConvenienceClient;
             GenerateResponseHeaderModels = generation1ConvenienceClient;
 
@@ -269,7 +269,9 @@ namespace AutoRest.CSharp.Common.Input
         public static bool SkipSerializationFormatXml { get; private set; }
         public static bool DisablePaginationTopRenaming { get; private set; }
 
-        public static bool PublicRestClients { get; private set; }
+        // Temporary flag needed in the process of consolidation
+        // Will be eliminated at the final step
+        public static bool PublicRestClientsTemporaryFlag { get; private set; }
         public static bool GenerateLongRunningOperationTypes { get; private set; }
         public static bool GenerateResponseHeaderModels { get; private set; }
 
