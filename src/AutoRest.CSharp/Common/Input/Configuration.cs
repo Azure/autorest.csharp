@@ -121,10 +121,9 @@ namespace AutoRest.CSharp.Common.Input
             SkipCSProjPackageReference = skipCSProjPackageReference;
             Generation1ConvenienceClient = generation1ConvenienceClient;
 
-            AssertModelConstructorParametersForReadOnlyProperties = generation1ConvenienceClient;
             PublicRestClients = generation1ConvenienceClient;
             GenerateLongRunningOperationTypes = generation1ConvenienceClient;
-            GenerateResponseHeadersModels = generation1ConvenienceClient;
+            GenerateResponseHeaderModels = generation1ConvenienceClient;
 
             SingleTopLevelClient = singleTopLevelClient;
             GenerateModelFactory = generateModelFactory;
@@ -270,10 +269,9 @@ namespace AutoRest.CSharp.Common.Input
         public static bool SkipSerializationFormatXml { get; private set; }
         public static bool DisablePaginationTopRenaming { get; private set; }
 
-        public static bool AssertModelConstructorParametersForReadOnlyProperties { get; private set; }
         public static bool PublicRestClients { get; private set; }
         public static bool GenerateLongRunningOperationTypes { get; private set; }
-        public static bool GenerateResponseHeadersModels { get; private set; }
+        public static bool GenerateResponseHeaderModels { get; private set; }
 
         /// <summary>
         /// Whether we will generate model factory for this library.

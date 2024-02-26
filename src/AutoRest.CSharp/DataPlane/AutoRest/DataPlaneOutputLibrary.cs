@@ -189,7 +189,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Dictionary<InputOperation, DataPlaneResponseHeaderGroupType> EnsureHeaderModels()
         {
             var headerModels = new Dictionary<InputOperation, DataPlaneResponseHeaderGroupType>();
-            if (Configuration.GenerateResponseHeadersModels)
+            if (Configuration.GenerateResponseHeaderModels)
             {
                 foreach (var inputClient in _input.Clients)
                 {
