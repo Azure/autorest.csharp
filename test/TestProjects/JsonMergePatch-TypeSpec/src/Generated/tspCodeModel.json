@@ -1,0 +1,535 @@
+{
+ "$id": "1",
+ "Name": "Payload.JsonMergePatch",
+ "Description": "Test for merge-patch+json content-type",
+ "ApiVersions": [
+  "v1.1"
+ ],
+ "Enums": [
+  {
+   "$id": "2",
+   "Kind": "Enum",
+   "Name": "BaseModelKind",
+   "EnumValueType": "String",
+   "AllowedValues": [
+    {
+     "$id": "3",
+     "Name": "intValue",
+     "Value": "intValue",
+     "Description": "The base model kind is an integer value"
+    },
+    {
+     "$id": "4",
+     "Name": "string",
+     "Value": "string",
+     "Description": "The base model kind is a string value"
+    }
+   ],
+   "Namespace": "Payload.JsonMergePatch",
+   "Description": "Type of base model",
+   "IsExtensible": true,
+   "IsNullable": false,
+   "Usage": "None"
+  },
+  {
+   "$id": "5",
+   "Kind": "Enum",
+   "Name": "Versions",
+   "EnumValueType": "String",
+   "AllowedValues": [
+    {
+     "$id": "6",
+     "Name": "v1_1",
+     "Value": "v1.1"
+    }
+   ],
+   "Namespace": "Payload.JsonMergePatch",
+   "Description": "",
+   "IsExtensible": true,
+   "IsNullable": false,
+   "Usage": "None"
+  }
+ ],
+ "Models": [
+  {
+   "$id": "7",
+   "Kind": "Model",
+   "Name": "BaseModel",
+   "Namespace": "Payload.JsonMergePatch",
+   "Accessibility": "public",
+   "Description": "Base model",
+   "IsNullable": false,
+   "DiscriminatorPropertyName": "kind",
+   "Usage": "Input",
+   "Properties": [
+    {
+     "$id": "8",
+     "Name": "requiredValue",
+     "SerializedName": "requiredValue",
+     "Description": "",
+     "Type": {
+      "$id": "9",
+      "Kind": "Intrinsic",
+      "Name": "unknown",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "10",
+     "Name": "optionalValue",
+     "SerializedName": "optionalValue",
+     "Description": "",
+     "Type": {
+      "$id": "11",
+      "Kind": "Intrinsic",
+      "Name": "unknown",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "12",
+     "Name": "kind",
+     "SerializedName": "kind",
+     "Description": "",
+     "Type": {
+      "$ref": "2"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": true
+    }
+   ]
+  },
+  {
+   "$id": "13",
+   "Kind": "Model",
+   "Name": "IntValueModel",
+   "Namespace": "Payload.JsonMergePatch",
+   "Accessibility": "public",
+   "Description": "It is the model used by Resource model",
+   "IsNullable": false,
+   "DiscriminatorValue": "intValue",
+   "Usage": "Input",
+   "BaseModel": {
+    "$ref": "7"
+   },
+   "Properties": [
+    {
+     "$id": "14",
+     "Name": "requiredIntValue",
+     "SerializedName": "requiredIntValue",
+     "Description": "",
+     "Type": {
+      "$id": "15",
+      "Kind": "Primitive",
+      "Name": "Int32",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "16",
+     "Name": "optionalIntValue",
+     "SerializedName": "optionalIntValue",
+     "Description": "",
+     "Type": {
+      "$id": "17",
+      "Kind": "Primitive",
+      "Name": "Int32",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "18",
+   "Kind": "Model",
+   "Name": "StringValueModel",
+   "Namespace": "Payload.JsonMergePatch",
+   "Accessibility": "public",
+   "Description": "It is the model used by Resource model",
+   "IsNullable": false,
+   "DiscriminatorValue": "string",
+   "Usage": "Input",
+   "BaseModel": {
+    "$ref": "7"
+   },
+   "Properties": [
+    {
+     "$id": "19",
+     "Name": "requiredStringValue",
+     "SerializedName": "requiredStringValue",
+     "Description": "",
+     "Type": {
+      "$id": "20",
+      "Kind": "Primitive",
+      "Name": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "21",
+     "Name": "optionalStringValue",
+     "SerializedName": "optionalStringValue",
+     "Description": "",
+     "Type": {
+      "$id": "22",
+      "Kind": "Primitive",
+      "Name": "String",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "23",
+   "Kind": "Model",
+   "Name": "ComplexModel",
+   "Namespace": "Payload.JsonMergePatch",
+   "Accessibility": "public",
+   "Description": "It is the model used by Resource model",
+   "IsNullable": false,
+   "Usage": "Input",
+   "Properties": [
+    {
+     "$id": "24",
+     "Name": "arrayOfInt",
+     "SerializedName": "arrayOfInt",
+     "Description": "",
+     "Type": {
+      "$id": "25",
+      "Kind": "Array",
+      "Name": "Array",
+      "ElementType": {
+       "$id": "26",
+       "Kind": "Primitive",
+       "Name": "Int32",
+       "IsNullable": false
+      },
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "27",
+     "Name": "arrayOfModel",
+     "SerializedName": "arrayOfModel",
+     "Description": "",
+     "Type": {
+      "$id": "28",
+      "Kind": "Array",
+      "Name": "Array",
+      "ElementType": {
+       "$ref": "7"
+      },
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "29",
+     "Name": "arrayOfIntArray",
+     "SerializedName": "arrayOfIntArray",
+     "Description": "",
+     "Type": {
+      "$id": "30",
+      "Kind": "Array",
+      "Name": "Array",
+      "ElementType": {
+       "$id": "31",
+       "Kind": "Array",
+       "Name": "Array",
+       "ElementType": {
+        "$id": "32",
+        "Kind": "Primitive",
+        "Name": "Int32",
+        "IsNullable": false
+       },
+       "IsNullable": false
+      },
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "33",
+     "Name": "arrayOfModelArray",
+     "SerializedName": "arrayOfModelArray",
+     "Description": "",
+     "Type": {
+      "$id": "34",
+      "Kind": "Array",
+      "Name": "Array",
+      "ElementType": {
+       "$id": "35",
+       "Kind": "Array",
+       "Name": "Array",
+       "ElementType": {
+        "$ref": "7"
+       },
+       "IsNullable": false
+      },
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "36",
+     "Name": "dictOfInt",
+     "SerializedName": "dictOfInt",
+     "Description": "",
+     "Type": {
+      "$id": "37",
+      "Kind": "Dictionary",
+      "Name": "Dictionary",
+      "KeyType": {
+       "$id": "38",
+       "Kind": "Primitive",
+       "Name": "String",
+       "IsNullable": false
+      },
+      "ValueType": {
+       "$id": "39",
+       "Kind": "Primitive",
+       "Name": "Int32",
+       "IsNullable": false
+      },
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "40",
+     "Name": "dictOfModel",
+     "SerializedName": "dictOfModel",
+     "Description": "",
+     "Type": {
+      "$id": "41",
+      "Kind": "Dictionary",
+      "Name": "Dictionary",
+      "KeyType": {
+       "$id": "42",
+       "Kind": "Primitive",
+       "Name": "String",
+       "IsNullable": false
+      },
+      "ValueType": {
+       "$ref": "7"
+      },
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "43",
+     "Name": "dictOfIntDict",
+     "SerializedName": "dictOfIntDict",
+     "Description": "",
+     "Type": {
+      "$id": "44",
+      "Kind": "Dictionary",
+      "Name": "Dictionary",
+      "KeyType": {
+       "$id": "45",
+       "Kind": "Primitive",
+       "Name": "String",
+       "IsNullable": false
+      },
+      "ValueType": {
+       "$id": "46",
+       "Kind": "Dictionary",
+       "Name": "Dictionary",
+       "KeyType": {
+        "$id": "47",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "ValueType": {
+        "$id": "48",
+        "Kind": "Primitive",
+        "Name": "Int32",
+        "IsNullable": false
+       },
+       "IsNullable": false
+      },
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "49",
+     "Name": "dictOfModelDict",
+     "SerializedName": "dictOfModelDict",
+     "Description": "",
+     "Type": {
+      "$id": "50",
+      "Kind": "Dictionary",
+      "Name": "Dictionary",
+      "KeyType": {
+       "$id": "51",
+       "Kind": "Primitive",
+       "Name": "String",
+       "IsNullable": false
+      },
+      "ValueType": {
+       "$id": "52",
+       "Kind": "Dictionary",
+       "Name": "Dictionary",
+       "KeyType": {
+        "$id": "53",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "ValueType": {
+        "$ref": "7"
+       },
+       "IsNullable": false
+      },
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "54",
+   "Kind": "Model",
+   "Name": "NormalBaseModel",
+   "Namespace": "Payload.JsonMergePatch",
+   "Accessibility": "public",
+   "IsNullable": false,
+   "Usage": "Input",
+   "Properties": [
+    {
+     "$id": "55",
+     "Name": "normalValue",
+     "SerializedName": "normalValue",
+     "Description": "",
+     "Type": {
+      "$id": "56",
+      "Kind": "Primitive",
+      "Name": "String",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "57",
+   "Kind": "Model",
+   "Name": "NormalExtendedModel",
+   "Namespace": "Payload.JsonMergePatch",
+   "Accessibility": "public",
+   "IsNullable": false,
+   "Usage": "Input",
+   "BaseModel": {
+    "$ref": "54"
+   },
+   "Properties": [
+    {
+     "$id": "58",
+     "Name": "extendedValue",
+     "SerializedName": "extendedValue",
+     "Description": "",
+     "Type": {
+      "$id": "59",
+      "Kind": "Primitive",
+      "Name": "String",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
+  }
+ ],
+ "Clients": [
+  {
+   "$id": "60",
+   "Name": "JsonMergePatchClient",
+   "Description": "Test for merge-patch+json content-type",
+   "Operations": [
+    {
+     "$id": "61",
+     "Name": "Hello",
+     "ResourceName": "JsonMergePatch",
+     "Description": "It is the model used by Resource model",
+     "Parameters": [
+      {
+       "$id": "62",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "63",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "64",
+        "Type": {
+         "$ref": "63"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "65",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "",
+     "Path": "/test",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "66"
+   },
+   "Creatable": true
+  }
+ ]
+}

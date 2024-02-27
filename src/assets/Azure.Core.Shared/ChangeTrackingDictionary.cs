@@ -12,6 +12,7 @@ namespace Azure.Core
     internal class ChangeTrackingDictionary<TKey, TValue> : IDictionary<TKey, TValue>, IReadOnlyDictionary<TKey, TValue> where TKey: notnull
     {
         private IDictionary<TKey, TValue>? _innerDictionary;
+        private IList<TKey>? _changedKeys;
 
         public ChangeTrackingDictionary()
         {
@@ -44,6 +45,7 @@ namespace Azure.Core
         }
 
         public bool IsUndefined => _innerDictionary == null;
+        public IList<TKey>? ChangedKeys => _changedKeys;
 
         public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
         {
@@ -66,6 +68,7 @@ namespace Azure.Core
         public void Add(KeyValuePair<TKey, TValue> item)
         {
             EnsureDictionary().Add(item);
+            AddChangedKey(item.Key);
         }
 
         public void Clear()
@@ -100,7 +103,12 @@ namespace Azure.Core
                 return false;
             }
 
-            return EnsureDictionary().Remove(item);
+            if (EnsureDictionary().Remove(item))
+            {
+                AddChangedKey(item.Key);
+                return true;
+            }
+            return false;
         }
 
         public int Count
@@ -131,6 +139,7 @@ namespace Azure.Core
         public void Add(TKey key, TValue value)
         {
             EnsureDictionary().Add(key, value);
+            AddChangedKey(key);
         }
 
         public bool ContainsKey(TKey key)
@@ -150,7 +159,12 @@ namespace Azure.Core
                 return false;
             }
 
-            return EnsureDictionary().Remove(key);
+            if (EnsureDictionary().Remove(key))
+            {
+                AddChangedKey(key);
+                return true;
+            }
+            return false;
         }
 
         public bool TryGetValue(TKey key, out TValue value)
@@ -174,7 +188,11 @@ namespace Azure.Core
 
                 return EnsureDictionary()[key];
             }
-            set => EnsureDictionary()[key] = value;
+            set
+            {
+                EnsureDictionary()[key] = value;
+                AddChangedKey(key);
+            }
         }
 
         IEnumerable<TKey> IReadOnlyDictionary<TKey, TValue>.Keys => Keys;
@@ -210,6 +228,19 @@ namespace Azure.Core
         private IDictionary<TKey, TValue> EnsureDictionary()
         {
             return _innerDictionary ??= new Dictionary<TKey, TValue>();
+        }
+
+        private IList<TKey> EnsureChangedKeys()
+        {
+            return _changedKeys ??= new List<TKey>();
+        }
+
+        private void AddChangedKey(TKey key)
+        {
+            if (!EnsureChangedKeys().Contains(key))
+            {
+                EnsureChangedKeys().Add(key);
+            }
         }
     }
 }

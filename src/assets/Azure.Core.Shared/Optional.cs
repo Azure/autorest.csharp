@@ -9,6 +9,7 @@ using System.Text.Json;
 
 namespace Azure.Core
 {
+
     internal static class Optional
     {
         public static bool IsCollectionDefined<T>(IEnumerable<T> collection)
@@ -24,6 +25,11 @@ namespace Azure.Core
         public static bool IsCollectionDefined<TKey, TValue>(IDictionary<TKey, TValue> collection)
         {
             return !(collection is ChangeTrackingDictionary<TKey, TValue> changeTrackingList && changeTrackingList.IsUndefined);
+        }
+
+        public static bool IsCollectionChanged<TKey, TValue>(IDictionary<TKey, TValue> collection)
+        {
+            return !(collection is ChangeTrackingDictionary<TKey, TValue> changeTrackingList && !(changeTrackingList.ChangedKeys?.Count > 0));
         }
 
         public static bool IsDefined<T>(T? value) where T: struct
@@ -107,5 +113,20 @@ namespace Azure.Core
 
         public static implicit operator Optional<T>(T value) => new Optional<T>(value);
         public static implicit operator T(Optional<T> optional) => optional.Value;
+    }
+
+    internal readonly partial struct Trackable<T>
+    {
+        public Trackable(T value, bool changed): this()
+        {
+            Value = value;
+            IsChanged = changed;
+        }
+
+        public T Value { get; }
+        public bool IsChanged { get; }
+
+        public static implicit operator Trackable<T>(T value) => new Trackable<T>(value, true);
+        //public static implicit operator T(Trackable<T> trackable) => trackable.Value;
     }
 }
