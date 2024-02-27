@@ -29,7 +29,8 @@ internal record InputOperation(
     OperationLongRunning? LongRunning,
     OperationPaging? Paging,
     bool GenerateProtocolMethod,
-    bool GenerateConvenienceMethod)
+    bool GenerateConvenienceMethod,
+    bool KeepClientDefaultValue)
 {
     public InputOperation() : this(
         Name: string.Empty,
@@ -50,7 +51,8 @@ internal record InputOperation(
         LongRunning: null,
         Paging: null,
         GenerateProtocolMethod: true,
-        GenerateConvenienceMethod: false)
+        GenerateConvenienceMethod: false,
+        KeepClientDefaultValue: false)
     { }
 
     public static InputOperation RemoveApiVersionParam(InputOperation operation)
@@ -74,7 +76,8 @@ internal record InputOperation(
             operation.LongRunning,
             operation.Paging,
             operation.GenerateProtocolMethod,
-            operation.GenerateConvenienceMethod);
+            operation.GenerateConvenienceMethod,
+            operation.KeepClientDefaultValue);
     }
 
     private string? _cleanName;
@@ -90,8 +93,6 @@ internal record InputOperation(
             return _cleanName;
         }
     }
-
-    public bool KeepClientDefaultValue { get; set; } = Configuration.MethodsToKeepClientDefaultValue.Contains(Name);
 
     private IReadOnlyDictionary<string, InputOperationExample>? _examples;
     public IReadOnlyDictionary<string, InputOperationExample> Examples => _examples ??= EnsureExamples();

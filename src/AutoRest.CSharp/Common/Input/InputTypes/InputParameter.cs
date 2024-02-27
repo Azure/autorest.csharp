@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Serialization;
 
@@ -14,8 +13,8 @@ internal record InputParameter(
     InputType Type,
     RequestLocation Location,
     InputConstant? DefaultValue,
-    VirtualParameter? VirtualParameter,
     InputParameter? GroupedBy,
+    InputModelProperty? FlattenedBodyProperty,
     InputOperationParameterKind Kind,
     bool IsRequired,
     bool IsApiVersion,
@@ -34,7 +33,7 @@ internal record InputParameter(
         Type: InputPrimitiveType.Object,
         Location: RequestLocation.None,
         DefaultValue: null,
-        VirtualParameter: null,
+        FlattenedBodyProperty: null,
         GroupedBy: null,
         Kind: InputOperationParameterKind.Method,
         IsRequired: false,

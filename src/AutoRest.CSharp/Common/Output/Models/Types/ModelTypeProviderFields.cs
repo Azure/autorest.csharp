@@ -132,7 +132,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     }
                     var existingCSharpType = BuilderHelpers.GetTypeFromExisting(existingMember, typeof(object), typeFactory);
                     var isReadOnly = IsReadOnly(existingMember);
-                    var inputModelProperty = new InputModelProperty(existingMember.Name, existingMember.Name, "to be removed by post process", GetInputTypeFromExistingMemberType(existingCSharpType), false, isReadOnly, false);
+                    var inputModelProperty = new InputModelProperty(existingMember.Name, existingMember.Name, "to be removed by post process", GetInputTypeFromExistingMemberType(existingCSharpType), null, false, isReadOnly, false);
                     // we put the original type typeof(object) here as fallback. We do not really care about what type we get here, just to ensure there is a type generated
                     // therefore the top type here is reasonable
                     // the serialization will be generated for this type and it might has issues if the type is not recognized properly.
@@ -157,7 +157,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             if (TypeFactory.IsList(type))
             {
-                return new InputListType("Array", GetInputTypeFromExistingMemberType(type.Arguments[0]), false);
+                return new InputListType("Array", GetInputTypeFromExistingMemberType(type.Arguments[0]), TypeFactory.IsReadOnlyMemory(type), false);
             }
 
             if (TypeFactory.IsDictionary(type))

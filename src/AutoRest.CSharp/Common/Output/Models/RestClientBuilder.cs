@@ -324,14 +324,15 @@ namespace AutoRest.CSharp.Output.Models
                         // This method has a flattened body
                         if (bodyRequestParameter.Kind == InputOperationParameterKind.Flattened && library != null)
                         {
+                            Debugger.Launch();
                             var objectType = (SchemaObjectType)library.FindTypeForSchema(((CodeModelType)bodyRequestParameter.Type).Schema).Implementation;
 
                             var initializationMap = new List<ObjectPropertyInitializer>();
                             foreach ((_, InputParameter? inputParameter, _, _) in allParameters)
                             {
-                                if (inputParameter is { VirtualParameter: { } virtualParameter })
+                                if (inputParameter is { FlattenedBodyProperty: { } flattenedProperty })
                                 {
-                                    initializationMap.Add(new ObjectPropertyInitializer(objectType.GetPropertyForSchemaProperty(virtualParameter.TargetProperty, true), references[GetRequestParameterName(virtualParameter)].Reference));
+                                    //initializationMap.Add(new ObjectPropertyInitializer(objectType.Get(virtualParameter.TargetProperty, true), references[flattenedProperty.SerializedName].Reference));
                                 }
                             }
 
@@ -366,10 +367,15 @@ namespace AutoRest.CSharp.Output.Models
                 return parameter;
             }
 
-            var groupModel = (SchemaObjectType)_typeFactory.CreateType(groupedByParameter.Type with {IsNullable = false}).Implementation;
-            var property = groupModel.GetPropertyForGroupedParameter(operationParameter.Name);
+            var groupedByParameterType = _typeFactory.CreateType(groupedByParameter.Type);
+            var (propertyName, propertyType) = groupedByParameterType.Implementation switch
+            {
+                ModelTypeProvider modelType when modelType.Fields.GetFieldByParameterName(parameter.Name) is { } field => (field.Name, field.Type),
+                SchemaObjectType schemaObjectType when schemaObjectType.GetPropertyForGroupedParameter(operationParameter.Name).Declaration is { } declaration => (declaration.Name, declaration.Type),
+                _ => throw new InvalidOperationException($"Unable to find object property for grouped parameter {parameter.Name} in {groupedByParameterType.Name}")
+            };
 
-            return new Reference($"{groupedByParameter.Name.ToVariableName()}.{property.Declaration.Name}", property.Declaration.Type);
+            return new Reference($"{groupedByParameter.Name.ToVariableName()}.{propertyName}", propertyType);
         }
 
         private static ResponseBody? BuildResponseBody(OperationResponse response, TypeFactory typeFactory)

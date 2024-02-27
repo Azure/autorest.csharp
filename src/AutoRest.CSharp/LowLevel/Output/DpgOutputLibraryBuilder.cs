@@ -24,20 +24,18 @@ namespace AutoRest.CSharp.Output.Models
 
         private readonly InputNamespace _rootNamespace;
         private readonly SourceInputModel? _sourceInputModel;
-        private readonly string _defaultNamespace;
         private readonly string _libraryName;
 
         public DpgOutputLibraryBuilder(InputNamespace rootNamespace, SourceInputModel? sourceInputModel)
         {
             _rootNamespace = rootNamespace;
             _sourceInputModel = sourceInputModel;
-            _defaultNamespace = Configuration.Namespace;
             _libraryName = Configuration.LibraryName;
         }
 
         public DpgOutputLibrary Build(bool isTspInput)
         {
-            var inputClients = UpdateOperations();
+            var inputClients = UpdateOperations().ToList();
 
             var clientInfosByName = inputClients
                 .Select(og => CreateClientInfo(og, _sourceInputModel, _rootNamespace.Name))
@@ -57,19 +55,19 @@ namespace AutoRest.CSharp.Output.Models
 
             if (isTspInput)
             {
-                CreateModels(models, library.TypeFactory);
-                CreateEnums(enums, models, library.TypeFactory);
+                CreateModels(_rootNamespace.Models, models, library.TypeFactory, _sourceInputModel);
+                CreateEnums(_rootNamespace.Enums, enums, models, library.TypeFactory, _sourceInputModel);
             }
             CreateClients(clients, topLevelClientInfos, library.TypeFactory, clientOptions, parametersInClientOptions);
 
             return library;
         }
 
-        private void CreateEnums(IDictionary<InputEnumType, EnumType> dictionary, IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory)
+        public static void CreateEnums(IReadOnlyList<InputEnumType> inputEnums, IDictionary<InputEnumType, EnumType> enums, IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
         {
-            foreach (var inputEnum in _rootNamespace.Enums)
+            foreach (var inputEnum in inputEnums)
             {
-                dictionary.Add(inputEnum, new EnumType(inputEnum, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), "public", typeFactory, _sourceInputModel));
+                enums.Add(inputEnum, new EnumType(inputEnum, TypeProvider.GetDefaultModelNamespace(null, Configuration.Namespace), "public", typeFactory, sourceInputModel));
             }
 
             List<(InputModelType, InputModelProperty, InputEnumType)> enumsToReplace = new List<(InputModelType, InputModelProperty, InputEnumType)>();
@@ -82,20 +80,20 @@ namespace AutoRest.CSharp.Output.Models
 
                     if (union.IsAllLiteralString() || union.IsAllLiteralStringPlusString())
                     {
-                        string modelname = models[model].Type.Name;
+                        string modelName = models[model].Type.Name;
                         InputEnumType inputEnum = new InputEnumType(
-                            $"{modelname}{GetNameWithCorrectPluralization(union, property.Name)}",
+                            $"{modelName}{GetNameWithCorrectPluralization(union, property.Name)}",
                             model.Namespace,
                             model.Accessibility,
                             null,
-                            $"Enum for {property.Name} in {modelname}",
+                            $"Enum for {property.Name} in {modelName}",
                             model.Usage,
                             InputPrimitiveType.String,
                             union.GetEnum(),
                             true,
                             union.IsNullable);
                         enumsToReplace.Add((model, property, inputEnum));
-                        dictionary.Add(inputEnum, new EnumType(inputEnum, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), "public", typeFactory, _sourceInputModel));
+                        enums.Add(inputEnum, new EnumType(inputEnum, TypeProvider.GetDefaultModelNamespace(null, Configuration.Namespace), "public", typeFactory, sourceInputModel));
                     }
                 }
             }
@@ -106,20 +104,32 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        private void CreateModels(IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory)
+        public static void CreateModels(IReadOnlyList<InputModelType> inputModels, IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
         {
-            Dictionary<string, ModelTypeProvider> defaultDerivedTypes = new Dictionary<string, ModelTypeProvider>();
-
-            foreach (var model in _rootNamespace.Models)
+            var defaultDerivedTypes = new Dictionary<string, ModelTypeProvider>();
+            foreach (var model in inputModels)
             {
-                ModelTypeProvider? defaultDerivedType = GetDefaultDerivedType(models, typeFactory, model, defaultDerivedTypes);
-
-                var typeProvider = new ModelTypeProvider(model, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), _sourceInputModel, typeFactory, defaultDerivedType);
+                ModelTypeProvider? defaultDerivedType = GetDefaultDerivedType(models, typeFactory, model, defaultDerivedTypes, sourceInputModel);
+                var typeProvider = new ModelTypeProvider(model, TypeProvider.GetDefaultModelNamespace(null, Configuration.Namespace), sourceInputModel, typeFactory, defaultDerivedType);
                 models.Add(model, typeProvider);
             }
         }
 
-        private string GetNameWithCorrectPluralization(InputType type, string name)
+        public static IReadOnlyDictionary<InputModelType, ModelTypeProvider> CreateModels(IReadOnlyList<InputModelType> inputModels, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
+        {
+            var models = new Dictionary<InputModelType, ModelTypeProvider>();
+            CreateModels(inputModels, models, typeFactory, sourceInputModel);
+            return models;
+        }
+
+        public static IReadOnlyDictionary<InputEnumType, EnumType> CreateEnums(IReadOnlyList<InputEnumType> inputEnums, IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
+        {
+            var enums = new Dictionary<InputEnumType, EnumType>();
+            CreateEnums(inputEnums, enums, models, typeFactory, sourceInputModel);
+            return enums;
+        }
+
+        private static string GetNameWithCorrectPluralization(InputType type, string name)
         {
             //TODO: Probably needs special casing for ipThing to become IPThing
             string result = name.FirstCharToUpperCase();
@@ -133,7 +143,7 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        private ModelTypeProvider? GetDefaultDerivedType(IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory, InputModelType model, Dictionary<string, ModelTypeProvider> defaultDerivedTypes)
+        private static ModelTypeProvider? GetDefaultDerivedType(IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory, InputModelType model, Dictionary<string, ModelTypeProvider> defaultDerivedTypes, SourceInputModel? sourceInputModel)
         {
             //only want to create one instance of the default derived per polymorphic set
             ModelTypeProvider? defaultDerivedType = null;
@@ -169,7 +179,7 @@ namespace AutoRest.CSharp.Output.Models
                     {
                         IsUnknownDiscriminatorModel = true
                     };
-                    defaultDerivedType = new ModelTypeProvider(unknownDerviedType, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), _sourceInputModel, typeFactory, null);
+                    defaultDerivedType = new ModelTypeProvider(unknownDerviedType, TypeProvider.GetDefaultModelNamespace(null, Configuration.Namespace), sourceInputModel, typeFactory, null);
                     defaultDerivedTypes.Add(defaultDerivedName, defaultDerivedType);
                     models.Add(unknownDerviedType, defaultDerivedType);
                 }
@@ -199,8 +209,6 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     Name = UpdateOperationName(operation, operation.ResourceName ?? clientName),
                     Parameters = UpdateOperationParameters(operation.Parameters),
-                    // to update the lazy initialization of `Paging.NextLinkOperation`
-                    Paging = operation.Paging with { NextLinkOperationRef = operation.Paging.NextLinkOperation != null ? () => operationsMap[operation.Paging.NextLinkOperation] : null }
                 };
             }
             else
@@ -246,7 +254,7 @@ namespace AutoRest.CSharp.Output.Models
                 : $"Client options for {_libraryName} library clients.";
 
             IReadOnlyList<string>? apiVersions = _sourceInputModel?.GetServiceVersionOverrides() ?? _rootNamespace.ApiVersions;
-            return new ClientOptionsTypeProvider(apiVersions, clientOptionsName, _defaultNamespace, description, _sourceInputModel)
+            return new ClientOptionsTypeProvider(apiVersions, clientOptionsName, Configuration.Namespace, description, _sourceInputModel)
             {
                 AdditionalParameters = parametersInClientOptions
             };
@@ -294,7 +302,7 @@ namespace AutoRest.CSharp.Output.Models
             if (topLevelClientInfo == null)
             {
                 var clientName = ClientBuilder.GetClientPrefix(_libraryName, _rootNamespace.Name) + ClientBuilder.GetClientSuffix();
-                var clientNamespace = _defaultNamespace;
+                var clientNamespace = Configuration.Namespace;
                 var infoForEndpoint = topLevelClients.FirstOrDefault(c => c.ClientParameters.Any(p => p.IsEndpoint));
                 var endpointParameter = infoForEndpoint?.ClientParameters.FirstOrDefault(p => p.IsEndpoint);
                 var clientParameters = endpointParameter != null ? new[] { endpointParameter } : Array.Empty<InputParameter>();
