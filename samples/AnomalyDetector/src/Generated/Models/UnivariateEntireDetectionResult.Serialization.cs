@@ -71,7 +71,7 @@ namespace AnomalyDetector.Models
                 writer.WriteBooleanValue(item);
             }
             writer.WriteEndArray();
-            if (Optional.IsCollectionDefined(Severity))
+            if (!(Severity is ChangeTrackingList<float> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("severity"u8);
                 writer.WriteStartArray();
@@ -126,7 +126,7 @@ namespace AnomalyDetector.Models
             IReadOnlyList<bool> isAnomaly = default;
             IReadOnlyList<bool> isNegativeAnomaly = default;
             IReadOnlyList<bool> isPositiveAnomaly = default;
-            Optional<IReadOnlyList<float>> severity = default;
+            IReadOnlyList<float> severity = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -216,7 +216,16 @@ namespace AnomalyDetector.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new UnivariateEntireDetectionResult(period, expectedValues, upperMargins, lowerMargins, isAnomaly, isNegativeAnomaly, isPositiveAnomaly, Optional.ToList(severity), serializedAdditionalRawData);
+            return new UnivariateEntireDetectionResult(
+                period,
+                expectedValues,
+                upperMargins,
+                lowerMargins,
+                isAnomaly,
+                isNegativeAnomaly,
+                isPositiveAnomaly,
+                severity ?? new ChangeTrackingList<float>(),
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<UnivariateEntireDetectionResult>.Write(ModelReaderWriterOptions options)

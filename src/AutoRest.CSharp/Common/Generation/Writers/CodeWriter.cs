@@ -487,7 +487,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 byte b => SyntaxFactory.Literal(b).ToString(),
                 bool b => b ? "true" : "false",
                 BinaryData bd => bd.ToArray().Length == 0 ? "new byte[] { }" : SyntaxFactory.Literal(bd.ToString()).ToString(),
-                _ => throw new NotImplementedException()
+                _ => throw new NotImplementedException($"Unknown literal type {o?.GetType().Name ?? "'null'"}")
             });
         }
 

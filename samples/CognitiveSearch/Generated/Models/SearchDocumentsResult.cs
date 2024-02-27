@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Azure.Core;
@@ -17,11 +16,8 @@ namespace CognitiveSearch.Models
     {
         /// <summary> Initializes a new instance of <see cref="SearchDocumentsResult"/>. </summary>
         /// <param name="results"> The sequence of results returned by the query. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="results"/> is null. </exception>
         internal SearchDocumentsResult(IEnumerable<SearchResult> results)
         {
-            Argument.AssertNotNull(results, nameof(results));
-
             Facets = new ChangeTrackingDictionary<string, IList<FacetResult>>();
             Results = results.ToList();
         }

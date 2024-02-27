@@ -21,7 +21,7 @@ namespace Azure.Network.Management.Interface.Models
             }
             Optional<SubResource> networkSecurityGroup = default;
             Optional<EffectiveNetworkSecurityGroupAssociation> association = default;
-            Optional<IReadOnlyList<EffectiveNetworkSecurityRule>> effectiveSecurityRules = default;
+            IReadOnlyList<EffectiveNetworkSecurityRule> effectiveSecurityRules = default;
             Optional<string> tagMap = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -63,7 +63,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new EffectiveNetworkSecurityGroup(networkSecurityGroup.Value, association.Value, Optional.ToList(effectiveSecurityRules), tagMap.Value);
+            return new EffectiveNetworkSecurityGroup(networkSecurityGroup.Value, association.Value, effectiveSecurityRules ?? new ChangeTrackingList<EffectiveNetworkSecurityRule>(), tagMap.Value);
         }
     }
 }

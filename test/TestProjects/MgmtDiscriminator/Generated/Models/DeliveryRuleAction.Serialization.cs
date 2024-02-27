@@ -28,7 +28,7 @@ namespace MgmtDiscriminator.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name.ToString());
-            if (options.Format != "W" && Optional.IsDefined(Foo))
+            if (options.Format != "W" && Foo != null)
             {
                 writer.WritePropertyName("foo"u8);
                 writer.WriteStringValue(Foo);
@@ -75,18 +75,18 @@ namespace MgmtDiscriminator.Models
             {
                 switch (discriminator.GetString())
                 {
-                    case "CacheExpiration": return DeliveryRuleCacheExpirationAction.DeserializeDeliveryRuleCacheExpirationAction(element);
-                    case "CacheKeyQueryString": return DeliveryRuleCacheKeyQueryStringAction.DeserializeDeliveryRuleCacheKeyQueryStringAction(element);
-                    case "ModifyRequestHeader": return DeliveryRuleRequestHeaderAction.DeserializeDeliveryRuleRequestHeaderAction(element);
-                    case "ModifyResponseHeader": return DeliveryRuleResponseHeaderAction.DeserializeDeliveryRuleResponseHeaderAction(element);
-                    case "OriginGroupOverride": return OriginGroupOverrideAction.DeserializeOriginGroupOverrideAction(element);
-                    case "RouteConfigurationOverride": return DeliveryRuleRouteConfigurationOverrideAction.DeserializeDeliveryRuleRouteConfigurationOverrideAction(element);
-                    case "UrlRedirect": return UrlRedirectAction.DeserializeUrlRedirectAction(element);
-                    case "UrlRewrite": return UrlRewriteAction.DeserializeUrlRewriteAction(element);
-                    case "UrlSigning": return UrlSigningAction.DeserializeUrlSigningAction(element);
+                    case "CacheExpiration": return DeliveryRuleCacheExpirationAction.DeserializeDeliveryRuleCacheExpirationAction(element, options);
+                    case "CacheKeyQueryString": return DeliveryRuleCacheKeyQueryStringAction.DeserializeDeliveryRuleCacheKeyQueryStringAction(element, options);
+                    case "ModifyRequestHeader": return DeliveryRuleRequestHeaderAction.DeserializeDeliveryRuleRequestHeaderAction(element, options);
+                    case "ModifyResponseHeader": return DeliveryRuleResponseHeaderAction.DeserializeDeliveryRuleResponseHeaderAction(element, options);
+                    case "OriginGroupOverride": return OriginGroupOverrideAction.DeserializeOriginGroupOverrideAction(element, options);
+                    case "RouteConfigurationOverride": return DeliveryRuleRouteConfigurationOverrideAction.DeserializeDeliveryRuleRouteConfigurationOverrideAction(element, options);
+                    case "UrlRedirect": return UrlRedirectAction.DeserializeUrlRedirectAction(element, options);
+                    case "UrlRewrite": return UrlRewriteAction.DeserializeUrlRewriteAction(element, options);
+                    case "UrlSigning": return UrlSigningAction.DeserializeUrlSigningAction(element, options);
                 }
             }
-            return UnknownDeliveryRuleAction.DeserializeUnknownDeliveryRuleAction(element);
+            return UnknownDeliveryRuleAction.DeserializeUnknownDeliveryRuleAction(element, options);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -94,13 +94,10 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Name))
-            {
-                builder.Append("  name:");
-                builder.AppendLine($" '{Name.ToString()}'");
-            }
+            builder.Append("  name:");
+            builder.AppendLine($" '{Name.ToString()}'");
 
-            if (Optional.IsDefined(Foo))
+            if (Foo != null)
             {
                 builder.Append("  foo:");
                 if (Foo.Contains(Environment.NewLine))

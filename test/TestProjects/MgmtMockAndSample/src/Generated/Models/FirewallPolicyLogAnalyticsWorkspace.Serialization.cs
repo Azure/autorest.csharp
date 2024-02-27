@@ -16,12 +16,12 @@ namespace MgmtMockAndSample.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Region))
+            if (Region != null)
             {
                 writer.WritePropertyName("region"u8);
                 writer.WriteStringValue(Region);
             }
-            if (Optional.IsDefined(WorkspaceId))
+            if (WorkspaceId != null)
             {
                 writer.WritePropertyName("workspaceId"u8);
                 JsonSerializer.Serialize(writer, WorkspaceId);

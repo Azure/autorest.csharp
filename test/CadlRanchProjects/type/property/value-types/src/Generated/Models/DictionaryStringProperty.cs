@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace _Type.Property.ValueTypes.Models
 {
@@ -51,7 +50,10 @@ namespace _Type.Property.ValueTypes.Models
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
         public DictionaryStringProperty(IDictionary<string, string> property)
         {
-            Argument.AssertNotNull(property, nameof(property));
+            if (property == null)
+            {
+                throw new ArgumentNullException(nameof(property));
+            }
 
             Property = property;
         }

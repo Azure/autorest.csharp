@@ -20,7 +20,10 @@ namespace CognitiveSearch.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public CustomAnalyzer(string name, TokenizerName tokenizer) : base(name)
         {
-            Argument.AssertNotNull(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
             Tokenizer = tokenizer;
             TokenFilters = new ChangeTrackingList<TokenFilterName>();

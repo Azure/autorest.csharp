@@ -29,7 +29,7 @@ namespace _Type.Property.AdditionalProperties.Models
             writer.WriteStartObject();
             writer.WritePropertyName("index"u8);
             writer.WriteNumberValue(Index);
-            if (Optional.IsDefined(Age))
+            if (Age.HasValue)
             {
                 writer.WritePropertyName("age"u8);
                 writer.WriteNumberValue(Age.Value);

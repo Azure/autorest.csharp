@@ -46,7 +46,7 @@ namespace MgmtDiscriminator.Models
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format != "W" && Optional.IsDefined(SystemData))
+            if (options.Format != "W" && SystemData != null)
             {
                 writer.WritePropertyName("systemData"u8);
                 JsonSerializer.Serialize(writer, SystemData);
@@ -78,7 +78,7 @@ namespace MgmtDiscriminator.Models
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeUnknownArtifact(document.RootElement, options);
+            return DeserializeArtifactData(document.RootElement, options);
         }
 
         internal static UnknownArtifact DeserializeUnknownArtifact(JsonElement element, ModelReaderWriterOptions options = null)
@@ -133,7 +133,13 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new UnknownArtifact(id, name, type, systemData.Value, kind, serializedAdditionalRawData);
+            return new UnknownArtifact(
+                id,
+                name,
+                type,
+                systemData.Value,
+                kind,
+                serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -141,7 +147,7 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 builder.Append("  name:");
                 if (Name.Contains(Environment.NewLine))
@@ -155,19 +161,16 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            if (Optional.IsDefined(Kind))
-            {
-                builder.Append("  kind:");
-                builder.AppendLine($" '{Kind.ToString()}'");
-            }
+            builder.Append("  kind:");
+            builder.AppendLine($" '{Kind.ToString()}'");
 
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 builder.Append("  id:");
                 builder.AppendLine($" '{Id.ToString()}'");
             }
 
-            if (Optional.IsDefined(SystemData))
+            if (SystemData != null)
             {
                 builder.Append("  systemData:");
                 builder.AppendLine($" '{SystemData.ToString()}'");
@@ -236,7 +239,7 @@ namespace MgmtDiscriminator.Models
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeUnknownArtifact(document.RootElement, options);
+                        return DeserializeArtifactData(document.RootElement, options);
                     }
                 case "bicep":
                     throw new InvalidOperationException("Bicep deserialization is not supported for this type.");

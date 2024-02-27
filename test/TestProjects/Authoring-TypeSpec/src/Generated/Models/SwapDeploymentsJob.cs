@@ -9,7 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Azure;
-using Azure.Core;
 
 namespace AuthoringTypeSpec.Models
 {
@@ -56,9 +55,18 @@ namespace AuthoringTypeSpec.Models
         /// <exception cref="ArgumentNullException"> <paramref name="jobId"/>, <paramref name="warnings"/> or <paramref name="errors"/> is null. </exception>
         internal SwapDeploymentsJob(string jobId, JobStatus status, IEnumerable<JobWarning> warnings, ResponseError errors)
         {
-            Argument.AssertNotNull(jobId, nameof(jobId));
-            Argument.AssertNotNull(warnings, nameof(warnings));
-            Argument.AssertNotNull(errors, nameof(errors));
+            if (jobId == null)
+            {
+                throw new ArgumentNullException(nameof(jobId));
+            }
+            if (warnings == null)
+            {
+                throw new ArgumentNullException(nameof(warnings));
+            }
+            if (errors == null)
+            {
+                throw new ArgumentNullException(nameof(errors));
+            }
 
             JobId = jobId;
             Status = status;

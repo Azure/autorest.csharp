@@ -43,7 +43,10 @@ namespace MgmtSubscriptionNameParameter
         /// <returns> Returns a <see cref="SBSubscriptionResource"/> object. </returns>
         public static SBSubscriptionResource GetSBSubscriptionResource(this ArmClient client, ResourceIdentifier id)
         {
-            Argument.AssertNotNull(client, nameof(client));
+            if (client == null)
+            {
+                throw new ArgumentNullException(nameof(client));
+            }
 
             return GetMockableMgmtSubscriptionNameParameterArmClient(client).GetSBSubscriptionResource(id);
         }
@@ -60,7 +63,10 @@ namespace MgmtSubscriptionNameParameter
         /// <returns> An object representing collection of SBSubscriptionResources and their operations over a SBSubscriptionResource. </returns>
         public static SBSubscriptionCollection GetSBSubscriptions(this ResourceGroupResource resourceGroupResource)
         {
-            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+            if (resourceGroupResource == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResource));
+            }
 
             return GetMockableMgmtSubscriptionNameParameterResourceGroupResource(resourceGroupResource).GetSBSubscriptions();
         }
@@ -98,7 +104,10 @@ namespace MgmtSubscriptionNameParameter
         [ForwardsClientCalls]
         public static async Task<Response<SBSubscriptionResource>> GetSBSubscriptionAsync(this ResourceGroupResource resourceGroupResource, string subscriptionName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+            if (resourceGroupResource == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResource));
+            }
 
             return await GetMockableMgmtSubscriptionNameParameterResourceGroupResource(resourceGroupResource).GetSBSubscriptionAsync(subscriptionName, cancellationToken).ConfigureAwait(false);
         }
@@ -136,7 +145,10 @@ namespace MgmtSubscriptionNameParameter
         [ForwardsClientCalls]
         public static Response<SBSubscriptionResource> GetSBSubscription(this ResourceGroupResource resourceGroupResource, string subscriptionName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+            if (resourceGroupResource == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResource));
+            }
 
             return GetMockableMgmtSubscriptionNameParameterResourceGroupResource(resourceGroupResource).GetSBSubscription(subscriptionName, cancellationToken);
         }

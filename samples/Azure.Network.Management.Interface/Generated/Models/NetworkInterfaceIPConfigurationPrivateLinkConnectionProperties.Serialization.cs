@@ -21,7 +21,7 @@ namespace Azure.Network.Management.Interface.Models
             }
             Optional<string> groupId = default;
             Optional<string> requiredMemberName = default;
-            Optional<IReadOnlyList<string>> fqdns = default;
+            IReadOnlyList<string> fqdns = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("groupId"u8))
@@ -49,7 +49,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties(groupId.Value, requiredMemberName.Value, Optional.ToList(fqdns));
+            return new NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties(groupId.Value, requiredMemberName.Value, fqdns ?? new ChangeTrackingList<string>());
         }
     }
 }

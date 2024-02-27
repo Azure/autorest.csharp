@@ -16,17 +16,17 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (Optional.IsDefined(Location))
+            if (Location != null)
             {
                 writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location);
             }
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -39,7 +39,7 @@ namespace Azure.Network.Management.Interface.Models
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(ServiceEndpointPolicyDefinitions))
+            if (!(ServiceEndpointPolicyDefinitions is ChangeTrackingList<ServiceEndpointPolicyDefinition> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("serviceEndpointPolicyDefinitions"u8);
                 writer.WriteStartArray();
@@ -64,9 +64,9 @@ namespace Azure.Network.Management.Interface.Models
             Optional<string> name = default;
             Optional<string> type = default;
             Optional<string> location = default;
-            Optional<IDictionary<string, string>> tags = default;
-            Optional<IList<ServiceEndpointPolicyDefinition>> serviceEndpointPolicyDefinitions = default;
-            Optional<IReadOnlyList<Subnet>> subnets = default;
+            IDictionary<string, string> tags = default;
+            IList<ServiceEndpointPolicyDefinition> serviceEndpointPolicyDefinitions = default;
+            IReadOnlyList<Subnet> subnets = default;
             Optional<string> resourceGuid = default;
             Optional<ProvisioningState> provisioningState = default;
             foreach (var property in element.EnumerateObject())
@@ -165,7 +165,17 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new ServiceEndpointPolicy(id.Value, name.Value, type.Value, location.Value, Optional.ToDictionary(tags), etag.Value, Optional.ToList(serviceEndpointPolicyDefinitions), Optional.ToList(subnets), resourceGuid.Value, Optional.ToNullable(provisioningState));
+            return new ServiceEndpointPolicy(
+                id.Value,
+                name.Value,
+                type.Value,
+                location.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                etag.Value,
+                serviceEndpointPolicyDefinitions ?? new ChangeTrackingList<ServiceEndpointPolicyDefinition>(),
+                subnets ?? new ChangeTrackingList<Subnet>(),
+                resourceGuid.Value,
+                Optional.ToNullable(provisioningState));
         }
     }
 }

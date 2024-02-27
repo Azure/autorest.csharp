@@ -32,12 +32,12 @@ namespace MgmtDiscriminator.Models
             writer.WriteStringValue(TypeName.ToString());
             writer.WritePropertyName("operator"u8);
             writer.WriteStringValue(Operator.ToString());
-            if (Optional.IsDefined(NegateCondition))
+            if (NegateCondition.HasValue)
             {
                 writer.WritePropertyName("negateCondition"u8);
                 writer.WriteBooleanValue(NegateCondition.Value);
             }
-            if (Optional.IsCollectionDefined(Transforms))
+            if (!(Transforms is ChangeTrackingList<Transform> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("transforms"u8);
                 writer.WriteStartArray();
@@ -47,7 +47,7 @@ namespace MgmtDiscriminator.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(MatchValues))
+            if (!(MatchValues is ChangeTrackingList<RequestMethodMatchConditionParametersMatchValuesItem> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("matchValues"u8);
                 writer.WriteStartArray();
@@ -98,8 +98,8 @@ namespace MgmtDiscriminator.Models
             RequestMethodMatchConditionParametersTypeName typeName = default;
             RequestMethodOperator @operator = default;
             Optional<bool> negateCondition = default;
-            Optional<IList<Transform>> transforms = default;
-            Optional<IList<RequestMethodMatchConditionParametersMatchValuesItem>> matchValues = default;
+            IList<Transform> transforms = default;
+            IList<RequestMethodMatchConditionParametersMatchValuesItem> matchValues = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -157,7 +157,13 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new RequestMethodMatchConditionParameters(typeName, @operator, Optional.ToNullable(negateCondition), Optional.ToList(transforms), Optional.ToList(matchValues), serializedAdditionalRawData);
+            return new RequestMethodMatchConditionParameters(
+                typeName,
+                @operator,
+                Optional.ToNullable(negateCondition),
+                transforms ?? new ChangeTrackingList<Transform>(),
+                matchValues ?? new ChangeTrackingList<RequestMethodMatchConditionParametersMatchValuesItem>(),
+                serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -165,26 +171,20 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(TypeName))
-            {
-                builder.Append("  typeName:");
-                builder.AppendLine($" '{TypeName.ToString()}'");
-            }
+            builder.Append("  typeName:");
+            builder.AppendLine($" '{TypeName.ToString()}'");
 
-            if (Optional.IsDefined(Operator))
-            {
-                builder.Append("  operator:");
-                builder.AppendLine($" '{Operator.ToString()}'");
-            }
+            builder.Append("  operator:");
+            builder.AppendLine($" '{Operator.ToString()}'");
 
-            if (Optional.IsDefined(NegateCondition))
+            if (NegateCondition.HasValue)
             {
                 builder.Append("  negateCondition:");
                 var boolValue = NegateCondition.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
             }
 
-            if (Optional.IsCollectionDefined(Transforms))
+            if (!(Transforms is ChangeTrackingList<Transform> collection && collection.IsUndefined))
             {
                 if (Transforms.Any())
                 {
@@ -198,7 +198,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            if (Optional.IsCollectionDefined(MatchValues))
+            if (!(MatchValues is ChangeTrackingList<RequestMethodMatchConditionParametersMatchValuesItem> collection0 && collection0.IsUndefined))
             {
                 if (MatchValues.Any())
                 {

@@ -25,7 +25,7 @@ namespace OpenAI.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (OptionalProperty.IsDefined(Description))
+            if (Description != null)
             {
                 writer.WritePropertyName("description"u8);
                 writer.WriteStringValue(Description);
@@ -89,7 +89,7 @@ namespace OpenAI.Models
                 }
                 if (property.NameEquals("parameters"u8))
                 {
-                    parameters = ChatCompletionFunctionParameters.DeserializeChatCompletionFunctionParameters(property.Value);
+                    parameters = ChatCompletionFunctionParameters.DeserializeChatCompletionFunctionParameters(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

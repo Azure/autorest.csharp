@@ -27,17 +27,17 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(DisablePasswordAuthentication))
+            if (DisablePasswordAuthentication.HasValue)
             {
                 writer.WritePropertyName("disablePasswordAuthentication"u8);
                 writer.WriteBooleanValue(DisablePasswordAuthentication.Value);
             }
-            if (Optional.IsDefined(Ssh))
+            if (Ssh != null)
             {
                 writer.WritePropertyName("ssh"u8);
                 writer.WriteObjectValue(Ssh);
             }
-            if (Optional.IsDefined(ProvisionVmAgent))
+            if (ProvisionVmAgent.HasValue)
             {
                 writer.WritePropertyName("provisionVMAgent"u8);
                 writer.WriteBooleanValue(ProvisionVmAgent.Value);
@@ -102,7 +102,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    ssh = SshConfiguration.DeserializeSshConfiguration(property.Value);
+                    ssh = SshConfiguration.DeserializeSshConfiguration(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("provisionVMAgent"u8))
@@ -128,20 +128,20 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(DisablePasswordAuthentication))
+            if (DisablePasswordAuthentication.HasValue)
             {
                 builder.Append("  disablePasswordAuthentication:");
                 var boolValue = DisablePasswordAuthentication.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
             }
 
-            if (Optional.IsDefined(Ssh))
+            if (Ssh != null)
             {
                 builder.Append("  ssh:");
                 AppendChildObject(builder, Ssh, options, 2, false);
             }
 
-            if (Optional.IsDefined(ProvisionVmAgent))
+            if (ProvisionVmAgent.HasValue)
             {
                 builder.Append("  provisionVMAgent:");
                 var boolValue = ProvisionVmAgent.Value == true ? "true" : "false";

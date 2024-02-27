@@ -88,7 +88,14 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new MaintenanceRedeployStatus(Optional.ToNullable(isCustomerInitiatedMaintenanceAllowed), Optional.ToNullable(preMaintenanceWindowStartTime), Optional.ToNullable(preMaintenanceWindowEndTime), Optional.ToNullable(maintenanceWindowStartTime), Optional.ToNullable(maintenanceWindowEndTime), Optional.ToNullable(lastOperationResultCode), lastOperationMessage.Value);
+            return new MaintenanceRedeployStatus(
+                Optional.ToNullable(isCustomerInitiatedMaintenanceAllowed),
+                Optional.ToNullable(preMaintenanceWindowStartTime),
+                Optional.ToNullable(preMaintenanceWindowEndTime),
+                Optional.ToNullable(maintenanceWindowStartTime),
+                Optional.ToNullable(maintenanceWindowEndTime),
+                Optional.ToNullable(lastOperationResultCode),
+                lastOperationMessage.Value);
         }
     }
 }

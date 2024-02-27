@@ -18,12 +18,12 @@ namespace Inheritance.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(StringProperty))
+            if (StringProperty != null)
             {
                 writer.WritePropertyName("StringProperty"u8);
                 writer.WriteStringValue(StringProperty);
             }
-            if (Optional.IsDefined(ModelProperty))
+            if (ModelProperty != null)
             {
                 writer.WritePropertyName("ModelProperty"u8);
                 writer.WriteObjectValue(ModelProperty);

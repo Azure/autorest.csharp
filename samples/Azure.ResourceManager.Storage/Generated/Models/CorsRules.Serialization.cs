@@ -16,7 +16,7 @@ namespace Azure.ResourceManager.Storage.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(CorsRulesValue))
+            if (!(CorsRulesValue is ChangeTrackingList<CorsRule> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("corsRules"u8);
                 writer.WriteStartArray();
@@ -35,7 +35,7 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Optional<IList<CorsRule>> corsRules = default;
+            IList<CorsRule> corsRules = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("corsRules"u8))
@@ -53,7 +53,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new CorsRules(Optional.ToList(corsRules));
+            return new CorsRules(corsRules ?? new ChangeTrackingList<CorsRule>());
         }
     }
 }

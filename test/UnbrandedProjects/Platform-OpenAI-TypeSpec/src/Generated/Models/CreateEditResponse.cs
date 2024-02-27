@@ -3,7 +3,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -52,8 +51,14 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="choices"/> or <paramref name="usage"/> is null. </exception>
         internal CreateEditResponse(DateTimeOffset created, IEnumerable<CreateEditResponseChoice> choices, CompletionUsage usage)
         {
-            ClientUtilities.AssertNotNull(choices, nameof(choices));
-            ClientUtilities.AssertNotNull(usage, nameof(usage));
+            if (choices == null)
+            {
+                throw new ArgumentNullException(nameof(choices));
+            }
+            if (usage == null)
+            {
+                throw new ArgumentNullException(nameof(usage));
+            }
 
             Created = created;
             Choices = choices.ToList();

@@ -33,7 +33,7 @@ namespace MgmtDiscriminator.Models
             writer.WriteStringValue(CacheBehavior.ToString());
             writer.WritePropertyName("cacheType"u8);
             writer.WriteStringValue(CacheType.ToString());
-            if (Optional.IsDefined(CacheDuration))
+            if (CacheDuration.HasValue)
             {
                 if (CacheDuration != null)
                 {
@@ -130,25 +130,16 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(TypeName))
-            {
-                builder.Append("  typeName:");
-                builder.AppendLine($" '{TypeName.ToString()}'");
-            }
+            builder.Append("  typeName:");
+            builder.AppendLine($" '{TypeName.ToString()}'");
 
-            if (Optional.IsDefined(CacheBehavior))
-            {
-                builder.Append("  cacheBehavior:");
-                builder.AppendLine($" '{CacheBehavior.ToString()}'");
-            }
+            builder.Append("  cacheBehavior:");
+            builder.AppendLine($" '{CacheBehavior.ToString()}'");
 
-            if (Optional.IsDefined(CacheType))
-            {
-                builder.Append("  cacheType:");
-                builder.AppendLine($" '{CacheType.ToString()}'");
-            }
+            builder.Append("  cacheType:");
+            builder.AppendLine($" '{CacheType.ToString()}'");
 
-            if (Optional.IsDefined(CacheDuration))
+            if (CacheDuration.HasValue)
             {
                 builder.Append("  cacheDuration:");
                 var formattedTimeSpan = TypeFormatters.ToString(CacheDuration.Value, "P");

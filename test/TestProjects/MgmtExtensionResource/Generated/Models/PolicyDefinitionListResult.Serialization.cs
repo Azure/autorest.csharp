@@ -20,7 +20,7 @@ namespace MgmtExtensionResource.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<PolicyDefinitionData>> value = default;
+            IReadOnlyList<PolicyDefinitionData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -44,7 +44,7 @@ namespace MgmtExtensionResource.Models
                     continue;
                 }
             }
-            return new PolicyDefinitionListResult(Optional.ToList(value), nextLink.Value);
+            return new PolicyDefinitionListResult(value ?? new ChangeTrackingList<PolicyDefinitionData>(), nextLink.Value);
         }
     }
 }

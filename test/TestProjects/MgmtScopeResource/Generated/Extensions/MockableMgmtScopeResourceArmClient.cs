@@ -237,7 +237,10 @@ namespace MgmtScopeResource.Mocking
         /// <returns> An async collection of <see cref="ResourceLinkResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<ResourceLinkResource> GetAllAsync(ResourceIdentifier scope, Filter? filter = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(scope, nameof(scope));
+            if (scope == null)
+            {
+                throw new ArgumentNullException(nameof(scope));
+            }
 
             Azure.Core.HttpMessage FirstPageRequest(int? pageSizeHint) => ResourceLinkRestClient.CreateListAtSourceScopeRequest(scope, filter);
             Azure.Core.HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => ResourceLinkRestClient.CreateListAtSourceScopeNextPageRequest(nextLink, scope, filter);
@@ -272,7 +275,10 @@ namespace MgmtScopeResource.Mocking
         /// <returns> A collection of <see cref="ResourceLinkResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<ResourceLinkResource> GetAll(ResourceIdentifier scope, Filter? filter = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(scope, nameof(scope));
+            if (scope == null)
+            {
+                throw new ArgumentNullException(nameof(scope));
+            }
 
             Azure.Core.HttpMessage FirstPageRequest(int? pageSizeHint) => ResourceLinkRestClient.CreateListAtSourceScopeRequest(scope, filter);
             Azure.Core.HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => ResourceLinkRestClient.CreateListAtSourceScopeNextPageRequest(nextLink, scope, filter);
@@ -305,7 +311,10 @@ namespace MgmtScopeResource.Mocking
         /// <returns> An async collection of <see cref="Marketplace"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<Marketplace> GetMarketplacesAsync(ResourceIdentifier scope, string filter = null, int? top = null, string skiptoken = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(scope, nameof(scope));
+            if (scope == null)
+            {
+                throw new ArgumentNullException(nameof(scope));
+            }
 
             Azure.Core.HttpMessage FirstPageRequest(int? pageSizeHint) => MarketplacesRestClient.CreateListRequest(scope, filter, top, skiptoken);
             Azure.Core.HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => MarketplacesRestClient.CreateListNextPageRequest(nextLink, scope, filter, top, skiptoken);
@@ -338,7 +347,10 @@ namespace MgmtScopeResource.Mocking
         /// <returns> A collection of <see cref="Marketplace"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<Marketplace> GetMarketplaces(ResourceIdentifier scope, string filter = null, int? top = null, string skiptoken = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(scope, nameof(scope));
+            if (scope == null)
+            {
+                throw new ArgumentNullException(nameof(scope));
+            }
 
             Azure.Core.HttpMessage FirstPageRequest(int? pageSizeHint) => MarketplacesRestClient.CreateListRequest(scope, filter, top, skiptoken);
             Azure.Core.HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => MarketplacesRestClient.CreateListNextPageRequest(nextLink, scope, filter, top, skiptoken);

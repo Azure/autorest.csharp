@@ -37,7 +37,10 @@ namespace SpecialHeaders.ClientRequestId
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public ClientRequestIdClient(Uri endpoint, ClientRequestIdClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
             options ??= new ClientRequestIdClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

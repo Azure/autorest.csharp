@@ -17,27 +17,27 @@ namespace MgmtMockAndSample.Models
             writer.WriteStartObject();
             writer.WritePropertyName("disableProbe"u8);
             writer.WriteBooleanValue(DisableProbe);
-            if (Optional.IsDefined(InitialDelaySeconds))
+            if (InitialDelaySeconds.HasValue)
             {
                 writer.WritePropertyName("initialDelaySeconds"u8);
                 writer.WriteNumberValue(InitialDelaySeconds.Value);
             }
-            if (Optional.IsDefined(PeriodSeconds))
+            if (PeriodSeconds.HasValue)
             {
                 writer.WritePropertyName("periodSeconds"u8);
                 writer.WriteNumberValue(PeriodSeconds.Value);
             }
-            if (Optional.IsDefined(TimeoutSeconds))
+            if (TimeoutSeconds.HasValue)
             {
                 writer.WritePropertyName("timeoutSeconds"u8);
                 writer.WriteNumberValue(TimeoutSeconds.Value);
             }
-            if (Optional.IsDefined(FailureThreshold))
+            if (FailureThreshold.HasValue)
             {
                 writer.WritePropertyName("failureThreshold"u8);
                 writer.WriteNumberValue(FailureThreshold.Value);
             }
-            if (Optional.IsDefined(SuccessThreshold))
+            if (SuccessThreshold.HasValue)
             {
                 writer.WritePropertyName("successThreshold"u8);
                 writer.WriteNumberValue(SuccessThreshold.Value);
@@ -110,7 +110,13 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new Probe(disableProbe, Optional.ToNullable(initialDelaySeconds), Optional.ToNullable(periodSeconds), Optional.ToNullable(timeoutSeconds), Optional.ToNullable(failureThreshold), Optional.ToNullable(successThreshold));
+            return new Probe(
+                disableProbe,
+                Optional.ToNullable(initialDelaySeconds),
+                Optional.ToNullable(periodSeconds),
+                Optional.ToNullable(timeoutSeconds),
+                Optional.ToNullable(failureThreshold),
+                Optional.ToNullable(successThreshold));
         }
     }
 }

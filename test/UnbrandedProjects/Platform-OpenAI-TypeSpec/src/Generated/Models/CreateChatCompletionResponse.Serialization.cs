@@ -38,7 +38,7 @@ namespace OpenAI.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            if (OptionalProperty.IsDefined(Usage))
+            if (Usage != null)
             {
                 writer.WritePropertyName("usage"u8);
                 writer.WriteObjectValue(Usage);
@@ -116,7 +116,7 @@ namespace OpenAI.Models
                     List<CreateChatCompletionResponseChoice> array = new List<CreateChatCompletionResponseChoice>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CreateChatCompletionResponseChoice.DeserializeCreateChatCompletionResponseChoice(item));
+                        array.Add(CreateChatCompletionResponseChoice.DeserializeCreateChatCompletionResponseChoice(item, options));
                     }
                     choices = array;
                     continue;
@@ -127,7 +127,7 @@ namespace OpenAI.Models
                     {
                         continue;
                     }
-                    usage = CompletionUsage.DeserializeCompletionUsage(property.Value);
+                    usage = CompletionUsage.DeserializeCompletionUsage(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")
@@ -136,7 +136,14 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new CreateChatCompletionResponse(id, @object, created, model, choices, usage.Value, serializedAdditionalRawData);
+            return new CreateChatCompletionResponse(
+                id,
+                @object,
+                created,
+                model,
+                choices,
+                usage.Value,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<CreateChatCompletionResponse>.Write(ModelReaderWriterOptions options)

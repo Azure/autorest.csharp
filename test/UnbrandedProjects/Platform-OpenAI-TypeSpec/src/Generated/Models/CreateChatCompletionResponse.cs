@@ -3,7 +3,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -53,10 +52,22 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="object"/>, <paramref name="model"/> or <paramref name="choices"/> is null. </exception>
         internal CreateChatCompletionResponse(string id, string @object, DateTimeOffset created, string model, IEnumerable<CreateChatCompletionResponseChoice> choices)
         {
-            ClientUtilities.AssertNotNull(id, nameof(id));
-            ClientUtilities.AssertNotNull(@object, nameof(@object));
-            ClientUtilities.AssertNotNull(model, nameof(model));
-            ClientUtilities.AssertNotNull(choices, nameof(choices));
+            if (id == null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+            if (@object == null)
+            {
+                throw new ArgumentNullException(nameof(@object));
+            }
+            if (model == null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+            if (choices == null)
+            {
+                throw new ArgumentNullException(nameof(choices));
+            }
 
             Id = id;
             Object = @object;

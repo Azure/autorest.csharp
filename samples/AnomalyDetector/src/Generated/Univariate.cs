@@ -67,7 +67,10 @@ namespace AnomalyDetector
         /// <include file="Docs/Univariate.xml" path="doc/members/member[@name='DetectUnivariateEntireSeriesAsync(UnivariateDetectionOptions,CancellationToken)']/*" />
         public virtual async Task<Response<UnivariateEntireDetectionResult>> DetectUnivariateEntireSeriesAsync(UnivariateDetectionOptions options, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(options, nameof(options));
+            if (options == null)
+            {
+                throw new ArgumentNullException(nameof(options));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = options.ToRequestContent();
@@ -88,7 +91,10 @@ namespace AnomalyDetector
         /// <include file="Docs/Univariate.xml" path="doc/members/member[@name='DetectUnivariateEntireSeries(UnivariateDetectionOptions,CancellationToken)']/*" />
         public virtual Response<UnivariateEntireDetectionResult> DetectUnivariateEntireSeries(UnivariateDetectionOptions options, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(options, nameof(options));
+            if (options == null)
+            {
+                throw new ArgumentNullException(nameof(options));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = options.ToRequestContent();
@@ -119,7 +125,10 @@ namespace AnomalyDetector
         /// <include file="Docs/Univariate.xml" path="doc/members/member[@name='DetectUnivariateEntireSeriesAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> DetectUnivariateEntireSeriesAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Univariate.DetectUnivariateEntireSeries");
             scope.Start();
@@ -158,7 +167,10 @@ namespace AnomalyDetector
         /// <include file="Docs/Univariate.xml" path="doc/members/member[@name='DetectUnivariateEntireSeries(RequestContent,RequestContext)']/*" />
         public virtual Response DetectUnivariateEntireSeries(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Univariate.DetectUnivariateEntireSeries");
             scope.Start();
@@ -185,7 +197,10 @@ namespace AnomalyDetector
         /// <include file="Docs/Univariate.xml" path="doc/members/member[@name='DetectUnivariateLastPointAsync(UnivariateDetectionOptions,CancellationToken)']/*" />
         public virtual async Task<Response<UnivariateLastDetectionResult>> DetectUnivariateLastPointAsync(UnivariateDetectionOptions options, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(options, nameof(options));
+            if (options == null)
+            {
+                throw new ArgumentNullException(nameof(options));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = options.ToRequestContent();
@@ -204,7 +219,10 @@ namespace AnomalyDetector
         /// <include file="Docs/Univariate.xml" path="doc/members/member[@name='DetectUnivariateLastPoint(UnivariateDetectionOptions,CancellationToken)']/*" />
         public virtual Response<UnivariateLastDetectionResult> DetectUnivariateLastPoint(UnivariateDetectionOptions options, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(options, nameof(options));
+            if (options == null)
+            {
+                throw new ArgumentNullException(nameof(options));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = options.ToRequestContent();
@@ -235,7 +253,10 @@ namespace AnomalyDetector
         /// <include file="Docs/Univariate.xml" path="doc/members/member[@name='DetectUnivariateLastPointAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> DetectUnivariateLastPointAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Univariate.DetectUnivariateLastPoint");
             scope.Start();
@@ -274,7 +295,10 @@ namespace AnomalyDetector
         /// <include file="Docs/Univariate.xml" path="doc/members/member[@name='DetectUnivariateLastPoint(RequestContent,RequestContext)']/*" />
         public virtual Response DetectUnivariateLastPoint(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Univariate.DetectUnivariateLastPoint");
             scope.Start();
@@ -298,7 +322,10 @@ namespace AnomalyDetector
         /// <include file="Docs/Univariate.xml" path="doc/members/member[@name='DetectUnivariateChangePointAsync(UnivariateChangePointDetectionOptions,CancellationToken)']/*" />
         public virtual async Task<Response<UnivariateChangePointDetectionResult>> DetectUnivariateChangePointAsync(UnivariateChangePointDetectionOptions options, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(options, nameof(options));
+            if (options == null)
+            {
+                throw new ArgumentNullException(nameof(options));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = options.ToRequestContent();
@@ -314,7 +341,10 @@ namespace AnomalyDetector
         /// <include file="Docs/Univariate.xml" path="doc/members/member[@name='DetectUnivariateChangePoint(UnivariateChangePointDetectionOptions,CancellationToken)']/*" />
         public virtual Response<UnivariateChangePointDetectionResult> DetectUnivariateChangePoint(UnivariateChangePointDetectionOptions options, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(options, nameof(options));
+            if (options == null)
+            {
+                throw new ArgumentNullException(nameof(options));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = options.ToRequestContent();
@@ -345,7 +375,10 @@ namespace AnomalyDetector
         /// <include file="Docs/Univariate.xml" path="doc/members/member[@name='DetectUnivariateChangePointAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> DetectUnivariateChangePointAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Univariate.DetectUnivariateChangePoint");
             scope.Start();
@@ -384,7 +417,10 @@ namespace AnomalyDetector
         /// <include file="Docs/Univariate.xml" path="doc/members/member[@name='DetectUnivariateChangePoint(RequestContent,RequestContext)']/*" />
         public virtual Response DetectUnivariateChangePoint(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Univariate.DetectUnivariateChangePoint");
             scope.Start();

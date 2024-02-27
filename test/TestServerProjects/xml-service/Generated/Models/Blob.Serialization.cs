@@ -30,7 +30,7 @@ namespace xml_service.Models
             writer.WriteValue(Snapshot);
             writer.WriteEndElement();
             writer.WriteObjectValue(Properties, "Properties");
-            if (Optional.IsCollectionDefined(Metadata))
+            if (!(Metadata is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 foreach (var pair in Metadata)
                 {
@@ -78,7 +78,13 @@ namespace xml_service.Models
                 }
                 metadata = dictionary;
             }
-            return new Blob(name, deleted, snapshot, properties, metadata, serializedAdditionalRawData: null);
+            return new Blob(
+                name,
+                deleted,
+                snapshot,
+                properties,
+                metadata,
+                serializedAdditionalRawData: null);
         }
 
         BinaryData IPersistableModel<Blob>.Write(ModelReaderWriterOptions options)

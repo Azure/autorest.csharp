@@ -19,7 +19,7 @@ namespace xml_service.Models
         private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "EnumerationResults");
-            if (Optional.IsDefined(ServiceEndpoint))
+            if (ServiceEndpoint != null)
             {
                 writer.WriteStartAttribute("ServiceEndpoint");
                 writer.WriteValue(ServiceEndpoint);
@@ -93,7 +93,16 @@ namespace xml_service.Models
             {
                 nextMarker = (string)nextMarkerElement;
             }
-            return new ListBlobsResponse(serviceEndpoint, containerName, prefix, marker, maxResults, delimiter, blobs, nextMarker, serializedAdditionalRawData: null);
+            return new ListBlobsResponse(
+                serviceEndpoint,
+                containerName,
+                prefix,
+                marker,
+                maxResults,
+                delimiter,
+                blobs,
+                nextMarker,
+                serializedAdditionalRawData: null);
         }
 
         BinaryData IPersistableModel<ListBlobsResponse>.Write(ModelReaderWriterOptions options)

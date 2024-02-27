@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
@@ -18,7 +17,10 @@ namespace CognitiveSearch.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public MicrosoftLanguageStemmingTokenizer(string name) : base(name)
         {
-            Argument.AssertNotNull(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
             OdataType = "#Microsoft.Azure.Search.MicrosoftLanguageStemmingTokenizer";
         }

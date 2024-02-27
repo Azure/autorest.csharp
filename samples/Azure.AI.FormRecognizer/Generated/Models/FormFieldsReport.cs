@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
 {
@@ -19,7 +18,10 @@ namespace Azure.AI.FormRecognizer.Models
         /// <exception cref="ArgumentNullException"> <paramref name="fieldName"/> is null. </exception>
         internal FormFieldsReport(string fieldName, float accuracy)
         {
-            Argument.AssertNotNull(fieldName, nameof(fieldName));
+            if (fieldName == null)
+            {
+                throw new ArgumentNullException(nameof(fieldName));
+            }
 
             FieldName = fieldName;
             Accuracy = accuracy;

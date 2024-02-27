@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using Azure.Core;
 
 namespace Azure.Storage.Tables.Models
 {
@@ -22,8 +21,14 @@ namespace Azure.Storage.Tables.Models
         /// <exception cref="ArgumentNullException"> <paramref name="version"/> or <paramref name="retentionPolicy"/> is null. </exception>
         public Logging(string version, bool delete, bool read, bool write, RetentionPolicy retentionPolicy)
         {
-            Argument.AssertNotNull(version, nameof(version));
-            Argument.AssertNotNull(retentionPolicy, nameof(retentionPolicy));
+            if (version == null)
+            {
+                throw new ArgumentNullException(nameof(version));
+            }
+            if (retentionPolicy == null)
+            {
+                throw new ArgumentNullException(nameof(retentionPolicy));
+            }
 
             Version = version;
             Delete = delete;

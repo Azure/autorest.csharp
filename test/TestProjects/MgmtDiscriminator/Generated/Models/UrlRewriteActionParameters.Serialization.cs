@@ -33,7 +33,7 @@ namespace MgmtDiscriminator.Models
             writer.WriteStringValue(SourcePattern);
             writer.WritePropertyName("destination"u8);
             writer.WriteStringValue(Destination);
-            if (Optional.IsDefined(PreserveUnmatchedPath))
+            if (PreserveUnmatchedPath.HasValue)
             {
                 writer.WritePropertyName("preserveUnmatchedPath"u8);
                 writer.WriteBooleanValue(PreserveUnmatchedPath.Value);
@@ -122,13 +122,10 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(TypeName))
-            {
-                builder.Append("  typeName:");
-                builder.AppendLine($" '{TypeName.ToString()}'");
-            }
+            builder.Append("  typeName:");
+            builder.AppendLine($" '{TypeName.ToString()}'");
 
-            if (Optional.IsDefined(SourcePattern))
+            if (SourcePattern != null)
             {
                 builder.Append("  sourcePattern:");
                 if (SourcePattern.Contains(Environment.NewLine))
@@ -142,7 +139,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            if (Optional.IsDefined(Destination))
+            if (Destination != null)
             {
                 builder.Append("  destination:");
                 if (Destination.Contains(Environment.NewLine))
@@ -156,7 +153,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            if (Optional.IsDefined(PreserveUnmatchedPath))
+            if (PreserveUnmatchedPath.HasValue)
             {
                 builder.Append("  preserveUnmatchedPath:");
                 var boolValue = PreserveUnmatchedPath.Value == true ? "true" : "false";

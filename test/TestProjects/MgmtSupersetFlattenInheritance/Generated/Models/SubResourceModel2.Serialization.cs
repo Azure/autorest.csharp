@@ -17,12 +17,12 @@ namespace MgmtSupersetFlattenInheritance.Models
             writer.WriteStartObject();
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(IdPropertiesId))
+            if (IdPropertiesId != null)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(IdPropertiesId);
             }
-            if (Optional.IsDefined(Foo))
+            if (Foo != null)
             {
                 writer.WritePropertyName("foo"u8);
                 writer.WriteStringValue(Foo);

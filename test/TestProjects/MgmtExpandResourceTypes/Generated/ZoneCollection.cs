@@ -85,8 +85,18 @@ namespace MgmtExpandResourceTypes
         /// <exception cref="ArgumentNullException"> <paramref name="zoneName"/> or <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<ZoneResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string zoneName, ZoneData data, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(zoneName, nameof(zoneName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (zoneName == null)
+            {
+                throw new ArgumentNullException(nameof(zoneName));
+            }
+            if (zoneName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(zoneName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _zoneClientDiagnostics.CreateScope("ZoneCollection.CreateOrUpdate");
             scope.Start();
@@ -136,8 +146,18 @@ namespace MgmtExpandResourceTypes
         /// <exception cref="ArgumentNullException"> <paramref name="zoneName"/> or <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<ZoneResource> CreateOrUpdate(WaitUntil waitUntil, string zoneName, ZoneData data, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(zoneName, nameof(zoneName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (zoneName == null)
+            {
+                throw new ArgumentNullException(nameof(zoneName));
+            }
+            if (zoneName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(zoneName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _zoneClientDiagnostics.CreateScope("ZoneCollection.CreateOrUpdate");
             scope.Start();
@@ -183,7 +203,14 @@ namespace MgmtExpandResourceTypes
         /// <exception cref="ArgumentNullException"> <paramref name="zoneName"/> is null. </exception>
         public virtual async Task<Response<ZoneResource>> GetAsync(string zoneName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(zoneName, nameof(zoneName));
+            if (zoneName == null)
+            {
+                throw new ArgumentNullException(nameof(zoneName));
+            }
+            if (zoneName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(zoneName));
+            }
 
             using var scope = _zoneClientDiagnostics.CreateScope("ZoneCollection.Get");
             scope.Start();
@@ -228,7 +255,14 @@ namespace MgmtExpandResourceTypes
         /// <exception cref="ArgumentNullException"> <paramref name="zoneName"/> is null. </exception>
         public virtual Response<ZoneResource> Get(string zoneName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(zoneName, nameof(zoneName));
+            if (zoneName == null)
+            {
+                throw new ArgumentNullException(nameof(zoneName));
+            }
+            if (zoneName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(zoneName));
+            }
 
             using var scope = _zoneClientDiagnostics.CreateScope("ZoneCollection.Get");
             scope.Start();
@@ -335,7 +369,14 @@ namespace MgmtExpandResourceTypes
         /// <exception cref="ArgumentNullException"> <paramref name="zoneName"/> is null. </exception>
         public virtual async Task<Response<bool>> ExistsAsync(string zoneName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(zoneName, nameof(zoneName));
+            if (zoneName == null)
+            {
+                throw new ArgumentNullException(nameof(zoneName));
+            }
+            if (zoneName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(zoneName));
+            }
 
             using var scope = _zoneClientDiagnostics.CreateScope("ZoneCollection.Exists");
             scope.Start();
@@ -378,7 +419,14 @@ namespace MgmtExpandResourceTypes
         /// <exception cref="ArgumentNullException"> <paramref name="zoneName"/> is null. </exception>
         public virtual Response<bool> Exists(string zoneName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(zoneName, nameof(zoneName));
+            if (zoneName == null)
+            {
+                throw new ArgumentNullException(nameof(zoneName));
+            }
+            if (zoneName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(zoneName));
+            }
 
             using var scope = _zoneClientDiagnostics.CreateScope("ZoneCollection.Exists");
             scope.Start();
@@ -421,7 +469,14 @@ namespace MgmtExpandResourceTypes
         /// <exception cref="ArgumentNullException"> <paramref name="zoneName"/> is null. </exception>
         public virtual async Task<NullableResponse<ZoneResource>> GetIfExistsAsync(string zoneName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(zoneName, nameof(zoneName));
+            if (zoneName == null)
+            {
+                throw new ArgumentNullException(nameof(zoneName));
+            }
+            if (zoneName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(zoneName));
+            }
 
             using var scope = _zoneClientDiagnostics.CreateScope("ZoneCollection.GetIfExists");
             scope.Start();
@@ -466,7 +521,14 @@ namespace MgmtExpandResourceTypes
         /// <exception cref="ArgumentNullException"> <paramref name="zoneName"/> is null. </exception>
         public virtual NullableResponse<ZoneResource> GetIfExists(string zoneName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(zoneName, nameof(zoneName));
+            if (zoneName == null)
+            {
+                throw new ArgumentNullException(nameof(zoneName));
+            }
+            if (zoneName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(zoneName));
+            }
 
             using var scope = _zoneClientDiagnostics.CreateScope("ZoneCollection.GetIfExists");
             scope.Start();

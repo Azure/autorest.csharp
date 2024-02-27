@@ -138,7 +138,10 @@ namespace _Type.Union
         /// <include file="Docs/ModelsOnly.xml" path="doc/members/member[@name='SendAsync(BinaryData,CancellationToken)']/*" />
         public virtual async Task<Response> SendAsync(BinaryData prop, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(prop, nameof(prop));
+            if (prop == null)
+            {
+                throw new ArgumentNullException(nameof(prop));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             SendRequest5 sendRequest5 = new SendRequest5(prop);
@@ -152,7 +155,10 @@ namespace _Type.Union
         /// <include file="Docs/ModelsOnly.xml" path="doc/members/member[@name='Send(BinaryData,CancellationToken)']/*" />
         public virtual Response Send(BinaryData prop, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(prop, nameof(prop));
+            if (prop == null)
+            {
+                throw new ArgumentNullException(nameof(prop));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             SendRequest5 sendRequest5 = new SendRequest5(prop);
@@ -183,7 +189,10 @@ namespace _Type.Union
         /// <include file="Docs/ModelsOnly.xml" path="doc/members/member[@name='SendAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> SendAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOnly.Send");
             scope.Start();
@@ -222,7 +231,10 @@ namespace _Type.Union
         /// <include file="Docs/ModelsOnly.xml" path="doc/members/member[@name='Send(RequestContent,RequestContext)']/*" />
         public virtual Response Send(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ModelsOnly.Send");
             scope.Start();

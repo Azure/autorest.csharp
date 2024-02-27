@@ -141,7 +141,10 @@ namespace _Type.Property.ValueTypes
         /// <include file="Docs/Boolean.xml" path="doc/members/member[@name='PutAsync(BooleanProperty,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(BooleanProperty body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -156,7 +159,10 @@ namespace _Type.Property.ValueTypes
         /// <include file="Docs/Boolean.xml" path="doc/members/member[@name='Put(BooleanProperty,CancellationToken)']/*" />
         public virtual Response Put(BooleanProperty body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -187,7 +193,10 @@ namespace _Type.Property.ValueTypes
         /// <include file="Docs/Boolean.xml" path="doc/members/member[@name='PutAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Boolean.Put");
             scope.Start();
@@ -226,7 +235,10 @@ namespace _Type.Property.ValueTypes
         /// <include file="Docs/Boolean.xml" path="doc/members/member[@name='Put(RequestContent,RequestContext)']/*" />
         public virtual Response Put(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Boolean.Put");
             scope.Start();

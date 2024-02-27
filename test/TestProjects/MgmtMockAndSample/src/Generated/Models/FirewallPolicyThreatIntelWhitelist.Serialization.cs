@@ -17,7 +17,7 @@ namespace MgmtMockAndSample.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(IpAddresses))
+            if (!(IpAddresses is ChangeTrackingList<IPAddress> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("ipAddresses"u8);
                 writer.WriteStartArray();
@@ -32,7 +32,7 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(Fqdns))
+            if (!(Fqdns is ChangeTrackingList<string> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("fqdns"u8);
                 writer.WriteStartArray();
@@ -51,8 +51,8 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<IList<IPAddress>> ipAddresses = default;
-            Optional<IList<string>> fqdns = default;
+            IList<IPAddress> ipAddresses = default;
+            IList<string> fqdns = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("ipAddresses"u8))
@@ -91,7 +91,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new FirewallPolicyThreatIntelWhitelist(Optional.ToList(ipAddresses), Optional.ToList(fqdns));
+            return new FirewallPolicyThreatIntelWhitelist(ipAddresses ?? new ChangeTrackingList<IPAddress>(), fqdns ?? new ChangeTrackingList<string>());
         }
     }
 }

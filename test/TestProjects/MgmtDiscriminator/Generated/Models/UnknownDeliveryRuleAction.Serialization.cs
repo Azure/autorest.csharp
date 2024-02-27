@@ -29,7 +29,7 @@ namespace MgmtDiscriminator.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name.ToString());
-            if (options.Format != "W" && Optional.IsDefined(Foo))
+            if (options.Format != "W" && Foo != null)
             {
                 writer.WritePropertyName("foo"u8);
                 writer.WriteStringValue(Foo);
@@ -61,7 +61,7 @@ namespace MgmtDiscriminator.Models
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeUnknownDeliveryRuleAction(document.RootElement, options);
+            return DeserializeDeliveryRuleAction(document.RootElement, options);
         }
 
         internal static UnknownDeliveryRuleAction DeserializeUnknownDeliveryRuleAction(JsonElement element, ModelReaderWriterOptions options = null)
@@ -102,13 +102,10 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Name))
-            {
-                builder.Append("  name:");
-                builder.AppendLine($" '{Name.ToString()}'");
-            }
+            builder.Append("  name:");
+            builder.AppendLine($" '{Name.ToString()}'");
 
-            if (Optional.IsDefined(Foo))
+            if (Foo != null)
             {
                 builder.Append("  foo:");
                 if (Foo.Contains(Environment.NewLine))
@@ -185,7 +182,7 @@ namespace MgmtDiscriminator.Models
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeUnknownDeliveryRuleAction(document.RootElement, options);
+                        return DeserializeDeliveryRuleAction(document.RootElement, options);
                     }
                 case "bicep":
                     throw new InvalidOperationException("Bicep deserialization is not supported for this type.");

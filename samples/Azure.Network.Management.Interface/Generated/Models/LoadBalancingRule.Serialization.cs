@@ -15,69 +15,69 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(FrontendIPConfiguration))
+            if (FrontendIPConfiguration != null)
             {
                 writer.WritePropertyName("frontendIPConfiguration"u8);
                 writer.WriteObjectValue(FrontendIPConfiguration);
             }
-            if (Optional.IsDefined(BackendAddressPool))
+            if (BackendAddressPool != null)
             {
                 writer.WritePropertyName("backendAddressPool"u8);
                 writer.WriteObjectValue(BackendAddressPool);
             }
-            if (Optional.IsDefined(Probe))
+            if (Probe != null)
             {
                 writer.WritePropertyName("probe"u8);
                 writer.WriteObjectValue(Probe);
             }
-            if (Optional.IsDefined(Protocol))
+            if (Protocol.HasValue)
             {
                 writer.WritePropertyName("protocol"u8);
                 writer.WriteStringValue(Protocol.Value.ToString());
             }
-            if (Optional.IsDefined(LoadDistribution))
+            if (LoadDistribution.HasValue)
             {
                 writer.WritePropertyName("loadDistribution"u8);
                 writer.WriteStringValue(LoadDistribution.Value.ToString());
             }
-            if (Optional.IsDefined(FrontendPort))
+            if (FrontendPort.HasValue)
             {
                 writer.WritePropertyName("frontendPort"u8);
                 writer.WriteNumberValue(FrontendPort.Value);
             }
-            if (Optional.IsDefined(BackendPort))
+            if (BackendPort.HasValue)
             {
                 writer.WritePropertyName("backendPort"u8);
                 writer.WriteNumberValue(BackendPort.Value);
             }
-            if (Optional.IsDefined(IdleTimeoutInMinutes))
+            if (IdleTimeoutInMinutes.HasValue)
             {
                 writer.WritePropertyName("idleTimeoutInMinutes"u8);
                 writer.WriteNumberValue(IdleTimeoutInMinutes.Value);
             }
-            if (Optional.IsDefined(EnableFloatingIP))
+            if (EnableFloatingIP.HasValue)
             {
                 writer.WritePropertyName("enableFloatingIP"u8);
                 writer.WriteBooleanValue(EnableFloatingIP.Value);
             }
-            if (Optional.IsDefined(EnableTcpReset))
+            if (EnableTcpReset.HasValue)
             {
                 writer.WritePropertyName("enableTcpReset"u8);
                 writer.WriteBooleanValue(EnableTcpReset.Value);
             }
-            if (Optional.IsDefined(DisableOutboundSnat))
+            if (DisableOutboundSnat.HasValue)
             {
                 writer.WritePropertyName("disableOutboundSnat"u8);
                 writer.WriteBooleanValue(DisableOutboundSnat.Value);
@@ -251,7 +251,23 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new LoadBalancingRule(id.Value, name.Value, etag.Value, type.Value, frontendIPConfiguration.Value, backendAddressPool.Value, probe.Value, Optional.ToNullable(protocol), Optional.ToNullable(loadDistribution), Optional.ToNullable(frontendPort), Optional.ToNullable(backendPort), Optional.ToNullable(idleTimeoutInMinutes), Optional.ToNullable(enableFloatingIP), Optional.ToNullable(enableTcpReset), Optional.ToNullable(disableOutboundSnat), Optional.ToNullable(provisioningState));
+            return new LoadBalancingRule(
+                id.Value,
+                name.Value,
+                etag.Value,
+                type.Value,
+                frontendIPConfiguration.Value,
+                backendAddressPool.Value,
+                probe.Value,
+                Optional.ToNullable(protocol),
+                Optional.ToNullable(loadDistribution),
+                Optional.ToNullable(frontendPort),
+                Optional.ToNullable(backendPort),
+                Optional.ToNullable(idleTimeoutInMinutes),
+                Optional.ToNullable(enableFloatingIP),
+                Optional.ToNullable(enableTcpReset),
+                Optional.ToNullable(disableOutboundSnat),
+                Optional.ToNullable(provisioningState));
         }
     }
 }

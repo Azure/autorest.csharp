@@ -16,19 +16,19 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(BackendAddresses))
+            if (!(BackendAddresses is ChangeTrackingList<ApplicationGatewayBackendAddress> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("backendAddresses"u8);
                 writer.WriteStartArray();
@@ -52,8 +52,8 @@ namespace Azure.Network.Management.Interface.Models
             Optional<string> etag = default;
             Optional<string> type = default;
             Optional<string> id = default;
-            Optional<IReadOnlyList<NetworkInterfaceIPConfiguration>> backendIPConfigurations = default;
-            Optional<IList<ApplicationGatewayBackendAddress>> backendAddresses = default;
+            IReadOnlyList<NetworkInterfaceIPConfiguration> backendIPConfigurations = default;
+            IList<ApplicationGatewayBackendAddress> backendAddresses = default;
             Optional<ProvisioningState> provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -127,7 +127,14 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new ApplicationGatewayBackendAddressPool(id.Value, name.Value, etag.Value, type.Value, Optional.ToList(backendIPConfigurations), Optional.ToList(backendAddresses), Optional.ToNullable(provisioningState));
+            return new ApplicationGatewayBackendAddressPool(
+                id.Value,
+                name.Value,
+                etag.Value,
+                type.Value,
+                backendIPConfigurations ?? new ChangeTrackingList<NetworkInterfaceIPConfiguration>(),
+                backendAddresses ?? new ChangeTrackingList<ApplicationGatewayBackendAddress>(),
+                Optional.ToNullable(provisioningState));
         }
     }
 }

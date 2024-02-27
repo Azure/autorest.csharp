@@ -23,17 +23,17 @@ namespace OpenAI.Models
             }
 
             writer.WriteStartObject();
-            if (OptionalProperty.IsDefined(Message))
+            if (Message != null)
             {
                 writer.WritePropertyName("message"u8);
                 writer.WriteStringValue(Message);
             }
-            if (OptionalProperty.IsDefined(Code))
+            if (Code != null)
             {
                 writer.WritePropertyName("code"u8);
                 writer.WriteStringValue(Code);
             }
-            if (OptionalProperty.IsDefined(Param))
+            if (Param != null)
             {
                 if (Param != null)
                 {

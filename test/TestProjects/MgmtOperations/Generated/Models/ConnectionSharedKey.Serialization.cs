@@ -19,7 +19,7 @@ namespace MgmtOperations.Models
             writer.WriteStartObject();
             writer.WritePropertyName("value"u8);
             writer.WriteStringValue(Value);
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -42,7 +42,7 @@ namespace MgmtOperations.Models
                 return null;
             }
             string value = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -99,7 +99,14 @@ namespace MgmtOperations.Models
                     continue;
                 }
             }
-            return new ConnectionSharedKey(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, value);
+            return new ConnectionSharedKey(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                value);
         }
     }
 }

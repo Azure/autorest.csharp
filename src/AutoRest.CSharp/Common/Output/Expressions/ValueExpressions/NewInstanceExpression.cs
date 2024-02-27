@@ -6,5 +6,5 @@ using AutoRest.CSharp.Generation.Types;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
 {
-    internal record NewInstanceExpression(CSharpType Type, IReadOnlyList<ValueExpression> Arguments, ObjectInitializerExpression? Properties = null) : ValueExpression;
+    internal record NewInstanceExpression(CSharpType Type, IReadOnlyList<ValueExpression> Parameters, ObjectInitializerExpression? InitExpression = null) : ValueExpression;
 }

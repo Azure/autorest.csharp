@@ -43,7 +43,10 @@ namespace MgmtCustomizations
         /// <returns> Returns a <see cref="PetStoreResource"/> object. </returns>
         public static PetStoreResource GetPetStoreResource(this ArmClient client, ResourceIdentifier id)
         {
-            Argument.AssertNotNull(client, nameof(client));
+            if (client == null)
+            {
+                throw new ArgumentNullException(nameof(client));
+            }
 
             return GetMockableMgmtCustomizationsArmClient(client).GetPetStoreResource(id);
         }
@@ -60,7 +63,10 @@ namespace MgmtCustomizations
         /// <returns> An object representing collection of PetStoreResources and their operations over a PetStoreResource. </returns>
         public static PetStoreCollection GetPetStores(this ResourceGroupResource resourceGroupResource)
         {
-            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+            if (resourceGroupResource == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResource));
+            }
 
             return GetMockableMgmtCustomizationsResourceGroupResource(resourceGroupResource).GetPetStores();
         }
@@ -98,7 +104,10 @@ namespace MgmtCustomizations
         [ForwardsClientCalls]
         public static async Task<Response<PetStoreResource>> GetPetStoreAsync(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+            if (resourceGroupResource == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResource));
+            }
 
             return await GetMockableMgmtCustomizationsResourceGroupResource(resourceGroupResource).GetPetStoreAsync(name, cancellationToken).ConfigureAwait(false);
         }
@@ -136,7 +145,10 @@ namespace MgmtCustomizations
         [ForwardsClientCalls]
         public static Response<PetStoreResource> GetPetStore(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+            if (resourceGroupResource == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResource));
+            }
 
             return GetMockableMgmtCustomizationsResourceGroupResource(resourceGroupResource).GetPetStore(name, cancellationToken);
         }

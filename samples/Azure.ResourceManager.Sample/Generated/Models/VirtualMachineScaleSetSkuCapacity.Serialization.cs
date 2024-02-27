@@ -27,22 +27,22 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && Optional.IsDefined(Minimum))
+            if (options.Format != "W" && Minimum.HasValue)
             {
                 writer.WritePropertyName("minimum"u8);
                 writer.WriteNumberValue(Minimum.Value);
             }
-            if (options.Format != "W" && Optional.IsDefined(Maximum))
+            if (options.Format != "W" && Maximum.HasValue)
             {
                 writer.WritePropertyName("maximum"u8);
                 writer.WriteNumberValue(Maximum.Value);
             }
-            if (options.Format != "W" && Optional.IsDefined(DefaultCapacity))
+            if (options.Format != "W" && DefaultCapacity.HasValue)
             {
                 writer.WritePropertyName("defaultCapacity"u8);
                 writer.WriteNumberValue(DefaultCapacity.Value);
             }
-            if (options.Format != "W" && Optional.IsDefined(ScaleType))
+            if (options.Format != "W" && ScaleType.HasValue)
             {
                 writer.WritePropertyName("scaleType"u8);
                 writer.WriteStringValue(ScaleType.Value.ToSerialString());
@@ -143,25 +143,25 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Minimum))
+            if (Minimum.HasValue)
             {
                 builder.Append("  minimum:");
                 builder.AppendLine($" '{Minimum.Value.ToString()}'");
             }
 
-            if (Optional.IsDefined(Maximum))
+            if (Maximum.HasValue)
             {
                 builder.Append("  maximum:");
                 builder.AppendLine($" '{Maximum.Value.ToString()}'");
             }
 
-            if (Optional.IsDefined(DefaultCapacity))
+            if (DefaultCapacity.HasValue)
             {
                 builder.Append("  defaultCapacity:");
                 builder.AppendLine($" '{DefaultCapacity.Value.ToString()}'");
             }
 
-            if (Optional.IsDefined(ScaleType))
+            if (ScaleType.HasValue)
             {
                 builder.Append("  scaleType:");
                 builder.AppendLine($" '{ScaleType.Value.ToSerialString()}'");

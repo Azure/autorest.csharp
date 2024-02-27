@@ -26,7 +26,7 @@ namespace body_complex.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(DefaultProgram))
+            if (!(DefaultProgram is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 if (DefaultProgram != null)
                 {
@@ -82,7 +82,7 @@ namespace body_complex.Models
             {
                 return null;
             }
-            Optional<IDictionary<string, string>> defaultProgram = default;
+            IDictionary<string, string> defaultProgram = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -107,7 +107,7 @@ namespace body_complex.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DictionaryWrapper(Optional.ToDictionary(defaultProgram), serializedAdditionalRawData);
+            return new DictionaryWrapper(defaultProgram ?? new ChangeTrackingDictionary<string, string>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<DictionaryWrapper>.Write(ModelReaderWriterOptions options)

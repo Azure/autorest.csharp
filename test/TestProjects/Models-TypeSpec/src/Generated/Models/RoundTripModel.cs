@@ -37,16 +37,46 @@ namespace ModelsTypeSpec.Models
         /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredModel"/>, <paramref name="requiredList"/>, <paramref name="requiredIntRecord"/>, <paramref name="requiredStringRecord"/>, <paramref name="requiredModelRecord"/>, <paramref name="requiredBytes"/>, <paramref name="requiredUint8Array"/>, <paramref name="requiredUnknown"/> or <paramref name="requiredInt8Array"/> is null. </exception>
         public RoundTripModel(string requiredString, int requiredInt, int? requiredNullableInt, string requiredNullableString, BaseModelWithDiscriminator requiredModel, FixedStringEnum requiredFixedStringEnum, FixedIntEnum requiredFixedIntEnum, ExtensibleEnum requiredExtensibleEnum, IEnumerable<CollectionItem> requiredList, IDictionary<string, int> requiredIntRecord, IDictionary<string, string> requiredStringRecord, IDictionary<string, RecordItem> requiredModelRecord, BinaryData requiredBytes, IEnumerable<byte> requiredUint8Array, BinaryData requiredUnknown, IEnumerable<sbyte> requiredInt8Array, IEnumerable<int> requiredNullableIntList, IEnumerable<string> requiredNullableStringList)
         {
-            Argument.AssertNotNull(requiredString, nameof(requiredString));
-            Argument.AssertNotNull(requiredModel, nameof(requiredModel));
-            Argument.AssertNotNull(requiredList, nameof(requiredList));
-            Argument.AssertNotNull(requiredIntRecord, nameof(requiredIntRecord));
-            Argument.AssertNotNull(requiredStringRecord, nameof(requiredStringRecord));
-            Argument.AssertNotNull(requiredModelRecord, nameof(requiredModelRecord));
-            Argument.AssertNotNull(requiredBytes, nameof(requiredBytes));
-            Argument.AssertNotNull(requiredUint8Array, nameof(requiredUint8Array));
-            Argument.AssertNotNull(requiredUnknown, nameof(requiredUnknown));
-            Argument.AssertNotNull(requiredInt8Array, nameof(requiredInt8Array));
+            if (requiredString == null)
+            {
+                throw new ArgumentNullException(nameof(requiredString));
+            }
+            if (requiredModel == null)
+            {
+                throw new ArgumentNullException(nameof(requiredModel));
+            }
+            if (requiredList == null)
+            {
+                throw new ArgumentNullException(nameof(requiredList));
+            }
+            if (requiredIntRecord == null)
+            {
+                throw new ArgumentNullException(nameof(requiredIntRecord));
+            }
+            if (requiredStringRecord == null)
+            {
+                throw new ArgumentNullException(nameof(requiredStringRecord));
+            }
+            if (requiredModelRecord == null)
+            {
+                throw new ArgumentNullException(nameof(requiredModelRecord));
+            }
+            if (requiredBytes == null)
+            {
+                throw new ArgumentNullException(nameof(requiredBytes));
+            }
+            if (requiredUint8Array == null)
+            {
+                throw new ArgumentNullException(nameof(requiredUint8Array));
+            }
+            if (requiredUnknown == null)
+            {
+                throw new ArgumentNullException(nameof(requiredUnknown));
+            }
+            if (requiredInt8Array == null)
+            {
+                throw new ArgumentNullException(nameof(requiredInt8Array));
+            }
 
             RequiredString = requiredString;
             RequiredInt = requiredInt;

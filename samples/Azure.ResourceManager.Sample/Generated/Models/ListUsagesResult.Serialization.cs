@@ -35,7 +35,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            if (Optional.IsDefined(NextLink))
+            if (NextLink != null)
             {
                 writer.WritePropertyName("nextLink"u8);
                 writer.WriteStringValue(NextLink);
@@ -89,7 +89,7 @@ namespace Azure.ResourceManager.Sample.Models
                     List<SampleUsage> array = new List<SampleUsage>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(SampleUsage.DeserializeSampleUsage(item));
+                        array.Add(SampleUsage.DeserializeSampleUsage(item, options));
                     }
                     value = array;
                     continue;
@@ -113,7 +113,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsCollectionDefined(Value))
+            if (!(Value is ChangeTrackingList<SampleUsage> collection && collection.IsUndefined))
             {
                 if (Value.Any())
                 {
@@ -127,7 +127,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(NextLink))
+            if (NextLink != null)
             {
                 builder.Append("  nextLink:");
                 if (NextLink.Contains(Environment.NewLine))

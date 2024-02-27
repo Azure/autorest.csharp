@@ -24,10 +24,10 @@ namespace MgmtAcronymMapping.Models
             Optional<string> rdpThumbPrint = default;
             Optional<VirtualMachineAgentInstanceView> vmAgent = default;
             Optional<MaintenanceRedeployStatus> maintenanceRedeployStatus = default;
-            Optional<IReadOnlyList<DiskInstanceView>> disks = default;
+            IReadOnlyList<DiskInstanceView> disks = default;
             Optional<VirtualMachineHealthStatus> vmHealth = default;
             Optional<BootDiagnosticsInstanceView> bootDiagnostics = default;
-            Optional<IReadOnlyList<InstanceViewStatus>> statuses = default;
+            IReadOnlyList<InstanceViewStatus> statuses = default;
             Optional<string> assignedHost = default;
             Optional<ResourceIdentifier> placementGroupId = default;
             foreach (var property in element.EnumerateObject())
@@ -134,7 +134,18 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetVmInstanceView(Optional.ToNullable(platformUpdateDomain), Optional.ToNullable(platformFaultDomain), rdpThumbPrint.Value, vmAgent.Value, maintenanceRedeployStatus.Value, Optional.ToList(disks), vmHealth.Value, bootDiagnostics.Value, Optional.ToList(statuses), assignedHost.Value, placementGroupId.Value);
+            return new VirtualMachineScaleSetVmInstanceView(
+                Optional.ToNullable(platformUpdateDomain),
+                Optional.ToNullable(platformFaultDomain),
+                rdpThumbPrint.Value,
+                vmAgent.Value,
+                maintenanceRedeployStatus.Value,
+                disks ?? new ChangeTrackingList<DiskInstanceView>(),
+                vmHealth.Value,
+                bootDiagnostics.Value,
+                statuses ?? new ChangeTrackingList<InstanceViewStatus>(),
+                assignedHost.Value,
+                placementGroupId.Value);
         }
     }
 }

@@ -26,7 +26,7 @@ namespace TypeSchemaMapping.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(AbstractModelProperty))
+            if (AbstractModelProperty != null)
             {
                 writer.WritePropertyName("AbstractModelProperty"u8);
                 writer.WriteObjectValue(AbstractModelProperty);
@@ -80,7 +80,7 @@ namespace TypeSchemaMapping.Models
                     {
                         continue;
                     }
-                    abstractModelProperty = AbstractModel.DeserializeAbstractModel(property.Value);
+                    abstractModelProperty = AbstractModel.DeserializeAbstractModel(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

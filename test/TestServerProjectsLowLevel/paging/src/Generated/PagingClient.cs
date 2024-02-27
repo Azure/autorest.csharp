@@ -49,8 +49,14 @@ namespace paging_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public PagingClient(Uri endpoint, AzureKeyCredential credential, PagingClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
-            Argument.AssertNotNull(credential, nameof(credential));
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
+            if (credential == null)
+            {
+                throw new ArgumentNullException(nameof(credential));
+            }
             options ??= new PagingClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -244,7 +250,10 @@ namespace paging_LowLevel
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetSinglePagesWithBodyParamsAsync(RequestContent,RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetSinglePagesWithBodyParamsAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetSinglePagesWithBodyParamsRequest(content, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetSinglePagesWithBodyParamsNextPageRequest(nextLink, content, context);
@@ -269,7 +278,10 @@ namespace paging_LowLevel
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetSinglePagesWithBodyParams(RequestContent,RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetSinglePagesWithBodyParams(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetSinglePagesWithBodyParamsRequest(content, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetSinglePagesWithBodyParamsNextPageRequest(nextLink, content, context);
@@ -860,8 +872,18 @@ namespace paging_LowLevel
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesFragmentNextLinkAsync(string,string,RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetMultiplePagesFragmentNextLinkAsync(string tenant, string apiVersion, RequestContext context)
         {
-            Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+            if (tenant == null)
+            {
+                throw new ArgumentNullException(nameof(tenant));
+            }
+            if (tenant.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(tenant));
+            }
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesFragmentNextLinkRequest(tenant, apiVersion, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateNextFragmentRequest(tenant, nextLink, apiVersion, context);
@@ -888,8 +910,18 @@ namespace paging_LowLevel
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesFragmentNextLink(string,string,RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetMultiplePagesFragmentNextLink(string tenant, string apiVersion, RequestContext context)
         {
-            Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+            if (tenant == null)
+            {
+                throw new ArgumentNullException(nameof(tenant));
+            }
+            if (tenant.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(tenant));
+            }
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesFragmentNextLinkRequest(tenant, apiVersion, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateNextFragmentRequest(tenant, nextLink, apiVersion, context);
@@ -916,8 +948,18 @@ namespace paging_LowLevel
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesFragmentWithGroupingNextLinkAsync(string,string,RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetMultiplePagesFragmentWithGroupingNextLinkAsync(string tenant, string apiVersion, RequestContext context)
         {
-            Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+            if (tenant == null)
+            {
+                throw new ArgumentNullException(nameof(tenant));
+            }
+            if (tenant.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(tenant));
+            }
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesFragmentWithGroupingNextLinkRequest(tenant, apiVersion, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateNextFragmentWithGroupingRequest(tenant, nextLink, apiVersion, context);
@@ -944,8 +986,18 @@ namespace paging_LowLevel
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesFragmentWithGroupingNextLink(string,string,RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetMultiplePagesFragmentWithGroupingNextLink(string tenant, string apiVersion, RequestContext context)
         {
-            Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+            if (tenant == null)
+            {
+                throw new ArgumentNullException(nameof(tenant));
+            }
+            if (tenant.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(tenant));
+            }
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesFragmentWithGroupingNextLinkRequest(tenant, apiVersion, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateNextFragmentWithGroupingRequest(tenant, nextLink, apiVersion, context);
@@ -1057,9 +1109,22 @@ namespace paging_LowLevel
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='NextFragmentAsync(string,string,string,RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> NextFragmentAsync(string tenant, string nextLink, string apiVersion, RequestContext context)
         {
-            Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
-            Argument.AssertNotNull(nextLink, nameof(nextLink));
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+            if (tenant == null)
+            {
+                throw new ArgumentNullException(nameof(tenant));
+            }
+            if (tenant.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(tenant));
+            }
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateNextFragmentRequest(tenant, nextLink, apiVersion, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateNextFragmentRequest(tenant, nextLink, apiVersion, context);
@@ -1087,9 +1152,22 @@ namespace paging_LowLevel
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='NextFragment(string,string,string,RequestContext)']/*" />
         public virtual Pageable<BinaryData> NextFragment(string tenant, string nextLink, string apiVersion, RequestContext context)
         {
-            Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
-            Argument.AssertNotNull(nextLink, nameof(nextLink));
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+            if (tenant == null)
+            {
+                throw new ArgumentNullException(nameof(tenant));
+            }
+            if (tenant.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(tenant));
+            }
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateNextFragmentRequest(tenant, nextLink, apiVersion, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateNextFragmentRequest(tenant, nextLink, apiVersion, context);
@@ -1117,9 +1195,22 @@ namespace paging_LowLevel
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='NextFragmentWithGroupingAsync(string,string,string,RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> NextFragmentWithGroupingAsync(string tenant, string nextLink, string apiVersion, RequestContext context)
         {
-            Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
-            Argument.AssertNotNull(nextLink, nameof(nextLink));
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+            if (tenant == null)
+            {
+                throw new ArgumentNullException(nameof(tenant));
+            }
+            if (tenant.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(tenant));
+            }
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateNextFragmentWithGroupingRequest(tenant, nextLink, apiVersion, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateNextFragmentWithGroupingRequest(tenant, nextLink, apiVersion, context);
@@ -1147,9 +1238,22 @@ namespace paging_LowLevel
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='NextFragmentWithGrouping(string,string,string,RequestContext)']/*" />
         public virtual Pageable<BinaryData> NextFragmentWithGrouping(string tenant, string nextLink, string apiVersion, RequestContext context)
         {
-            Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
-            Argument.AssertNotNull(nextLink, nameof(nextLink));
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+            if (tenant == null)
+            {
+                throw new ArgumentNullException(nameof(tenant));
+            }
+            if (tenant.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(tenant));
+            }
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateNextFragmentWithGroupingRequest(tenant, nextLink, apiVersion, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateNextFragmentWithGroupingRequest(tenant, nextLink, apiVersion, context);

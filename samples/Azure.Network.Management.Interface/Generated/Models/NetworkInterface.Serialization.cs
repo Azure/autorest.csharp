@@ -16,17 +16,17 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (Optional.IsDefined(Location))
+            if (Location != null)
             {
                 writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location);
             }
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -39,12 +39,12 @@ namespace Azure.Network.Management.Interface.Models
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(NetworkSecurityGroup))
+            if (NetworkSecurityGroup != null)
             {
                 writer.WritePropertyName("networkSecurityGroup"u8);
                 writer.WriteObjectValue(NetworkSecurityGroup);
             }
-            if (Optional.IsCollectionDefined(IpConfigurations))
+            if (!(IpConfigurations is ChangeTrackingList<NetworkInterfaceIPConfiguration> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("ipConfigurations"u8);
                 writer.WriteStartArray();
@@ -54,17 +54,17 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(DnsSettings))
+            if (DnsSettings != null)
             {
                 writer.WritePropertyName("dnsSettings"u8);
                 writer.WriteObjectValue(DnsSettings);
             }
-            if (Optional.IsDefined(EnableAcceleratedNetworking))
+            if (EnableAcceleratedNetworking.HasValue)
             {
                 writer.WritePropertyName("enableAcceleratedNetworking"u8);
                 writer.WriteBooleanValue(EnableAcceleratedNetworking.Value);
             }
-            if (Optional.IsDefined(EnableIPForwarding))
+            if (EnableIPForwarding.HasValue)
             {
                 writer.WritePropertyName("enableIPForwarding"u8);
                 writer.WriteBooleanValue(EnableIPForwarding.Value);
@@ -84,18 +84,18 @@ namespace Azure.Network.Management.Interface.Models
             Optional<string> name = default;
             Optional<string> type = default;
             Optional<string> location = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             Optional<SubResource> virtualMachine = default;
             Optional<NetworkSecurityGroup> networkSecurityGroup = default;
             Optional<PrivateEndpoint> privateEndpoint = default;
-            Optional<IList<NetworkInterfaceIPConfiguration>> ipConfigurations = default;
-            Optional<IReadOnlyList<NetworkInterfaceTapConfiguration>> tapConfigurations = default;
+            IList<NetworkInterfaceIPConfiguration> ipConfigurations = default;
+            IReadOnlyList<NetworkInterfaceTapConfiguration> tapConfigurations = default;
             Optional<NetworkInterfaceDnsSettings> dnsSettings = default;
             Optional<string> macAddress = default;
             Optional<bool> primary = default;
             Optional<bool> enableAcceleratedNetworking = default;
             Optional<bool> enableIPForwarding = default;
-            Optional<IReadOnlyList<string>> hostedWorkloads = default;
+            IReadOnlyList<string> hostedWorkloads = default;
             Optional<string> resourceGuid = default;
             Optional<ProvisioningState> provisioningState = default;
             foreach (var property in element.EnumerateObject())
@@ -276,7 +276,26 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new NetworkInterface(id.Value, name.Value, type.Value, location.Value, Optional.ToDictionary(tags), etag.Value, virtualMachine.Value, networkSecurityGroup.Value, privateEndpoint.Value, Optional.ToList(ipConfigurations), Optional.ToList(tapConfigurations), dnsSettings.Value, macAddress.Value, Optional.ToNullable(primary), Optional.ToNullable(enableAcceleratedNetworking), Optional.ToNullable(enableIPForwarding), Optional.ToList(hostedWorkloads), resourceGuid.Value, Optional.ToNullable(provisioningState));
+            return new NetworkInterface(
+                id.Value,
+                name.Value,
+                type.Value,
+                location.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                etag.Value,
+                virtualMachine.Value,
+                networkSecurityGroup.Value,
+                privateEndpoint.Value,
+                ipConfigurations ?? new ChangeTrackingList<NetworkInterfaceIPConfiguration>(),
+                tapConfigurations ?? new ChangeTrackingList<NetworkInterfaceTapConfiguration>(),
+                dnsSettings.Value,
+                macAddress.Value,
+                Optional.ToNullable(primary),
+                Optional.ToNullable(enableAcceleratedNetworking),
+                Optional.ToNullable(enableIPForwarding),
+                hostedWorkloads ?? new ChangeTrackingList<string>(),
+                resourceGuid.Value,
+                Optional.ToNullable(provisioningState));
         }
     }
 }

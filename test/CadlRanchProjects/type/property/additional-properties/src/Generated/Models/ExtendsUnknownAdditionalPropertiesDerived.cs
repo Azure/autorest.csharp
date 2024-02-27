@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace _Type.Property.AdditionalProperties.Models
 {
@@ -20,7 +19,10 @@ namespace _Type.Property.AdditionalProperties.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public ExtendsUnknownAdditionalPropertiesDerived(string name, int index) : base(name)
         {
-            Argument.AssertNotNull(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
             Index = index;
         }

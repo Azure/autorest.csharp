@@ -16,7 +16,7 @@ namespace MgmtMockAndSample.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Keys))
+            if (!(Keys is ChangeTrackingList<KeyPermission> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("keys"u8);
                 writer.WriteStartArray();
@@ -26,7 +26,7 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(Secrets))
+            if (!(Secrets is ChangeTrackingList<SecretPermission> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("secrets"u8);
                 writer.WriteStartArray();
@@ -36,7 +36,7 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(Certificates))
+            if (!(Certificates is ChangeTrackingList<CertificatePermission> collection1 && collection1.IsUndefined))
             {
                 writer.WritePropertyName("certificates"u8);
                 writer.WriteStartArray();
@@ -46,7 +46,7 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(Storage))
+            if (!(Storage is ChangeTrackingList<StoragePermission> collection2 && collection2.IsUndefined))
             {
                 writer.WritePropertyName("storage"u8);
                 writer.WriteStartArray();
@@ -65,10 +65,10 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<IList<KeyPermission>> keys = default;
-            Optional<IList<SecretPermission>> secrets = default;
-            Optional<IList<CertificatePermission>> certificates = default;
-            Optional<IList<StoragePermission>> storage = default;
+            IList<KeyPermission> keys = default;
+            IList<SecretPermission> secrets = default;
+            IList<CertificatePermission> certificates = default;
+            IList<StoragePermission> storage = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("keys"u8))
@@ -128,7 +128,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new Permissions(Optional.ToList(keys), Optional.ToList(secrets), Optional.ToList(certificates), Optional.ToList(storage));
+            return new Permissions(keys ?? new ChangeTrackingList<KeyPermission>(), secrets ?? new ChangeTrackingList<SecretPermission>(), certificates ?? new ChangeTrackingList<CertificatePermission>(), storage ?? new ChangeTrackingList<StoragePermission>());
         }
     }
 }

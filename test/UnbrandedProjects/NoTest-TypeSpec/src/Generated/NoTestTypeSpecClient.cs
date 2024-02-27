@@ -48,8 +48,14 @@ namespace NoTestTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public NoTestTypeSpecClient(Uri endpoint, KeyCredential credential, NoTestTypeSpecClientOptions options)
         {
-            ClientUtilities.AssertNotNull(endpoint, nameof(endpoint));
-            ClientUtilities.AssertNotNull(credential, nameof(credential));
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
+            if (credential == null)
+            {
+                throw new ArgumentNullException(nameof(credential));
+            }
             options ??= new NoTestTypeSpecClientOptions();
 
             ClientDiagnostics = new TelemetrySource(options, true);
@@ -66,8 +72,14 @@ namespace NoTestTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
         public virtual async Task<Result<Thing>> SayHiAsync(string headParameter, string queryParameter, string optionalQuery = null, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNull(headParameter, nameof(headParameter));
-            ClientUtilities.AssertNotNull(queryParameter, nameof(queryParameter));
+            if (headParameter == null)
+            {
+                throw new ArgumentNullException(nameof(headParameter));
+            }
+            if (queryParameter == null)
+            {
+                throw new ArgumentNullException(nameof(queryParameter));
+            }
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             Result result = await SayHiAsync(headParameter, queryParameter, optionalQuery, context).ConfigureAwait(false);
@@ -82,8 +94,14 @@ namespace NoTestTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
         public virtual Result<Thing> SayHi(string headParameter, string queryParameter, string optionalQuery = null, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNull(headParameter, nameof(headParameter));
-            ClientUtilities.AssertNotNull(queryParameter, nameof(queryParameter));
+            if (headParameter == null)
+            {
+                throw new ArgumentNullException(nameof(headParameter));
+            }
+            if (queryParameter == null)
+            {
+                throw new ArgumentNullException(nameof(queryParameter));
+            }
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             Result result = SayHi(headParameter, queryParameter, optionalQuery, context);
@@ -114,8 +132,14 @@ namespace NoTestTypeSpec
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> SayHiAsync(string headParameter, string queryParameter, string optionalQuery, RequestOptions context)
         {
-            ClientUtilities.AssertNotNull(headParameter, nameof(headParameter));
-            ClientUtilities.AssertNotNull(queryParameter, nameof(queryParameter));
+            if (headParameter == null)
+            {
+                throw new ArgumentNullException(nameof(headParameter));
+            }
+            if (queryParameter == null)
+            {
+                throw new ArgumentNullException(nameof(queryParameter));
+            }
 
             using var scope = ClientDiagnostics.CreateSpan("NoTestTypeSpecClient.SayHi");
             scope.Start();
@@ -155,8 +179,14 @@ namespace NoTestTypeSpec
         /// <returns> The response returned from the service. </returns>
         public virtual Result SayHi(string headParameter, string queryParameter, string optionalQuery, RequestOptions context)
         {
-            ClientUtilities.AssertNotNull(headParameter, nameof(headParameter));
-            ClientUtilities.AssertNotNull(queryParameter, nameof(queryParameter));
+            if (headParameter == null)
+            {
+                throw new ArgumentNullException(nameof(headParameter));
+            }
+            if (queryParameter == null)
+            {
+                throw new ArgumentNullException(nameof(queryParameter));
+            }
 
             using var scope = ClientDiagnostics.CreateSpan("NoTestTypeSpecClient.SayHi");
             scope.Start();

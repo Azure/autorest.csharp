@@ -15,7 +15,7 @@ namespace NameConflicts.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Property))
+            if (Property != null)
             {
                 writer.WritePropertyName("property"u8);
                 writer.WriteStringValue(Property);

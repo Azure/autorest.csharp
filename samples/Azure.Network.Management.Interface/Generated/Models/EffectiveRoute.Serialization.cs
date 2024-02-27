@@ -23,8 +23,8 @@ namespace Azure.Network.Management.Interface.Models
             Optional<bool> disableBgpRoutePropagation = default;
             Optional<EffectiveRouteSource> source = default;
             Optional<EffectiveRouteState> state = default;
-            Optional<IReadOnlyList<string>> addressPrefix = default;
-            Optional<IReadOnlyList<string>> nextHopIpAddress = default;
+            IReadOnlyList<string> addressPrefix = default;
+            IReadOnlyList<string> nextHopIpAddress = default;
             Optional<RouteNextHopType> nextHopType = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -98,7 +98,14 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new EffectiveRoute(name.Value, Optional.ToNullable(disableBgpRoutePropagation), Optional.ToNullable(source), Optional.ToNullable(state), Optional.ToList(addressPrefix), Optional.ToList(nextHopIpAddress), Optional.ToNullable(nextHopType));
+            return new EffectiveRoute(
+                name.Value,
+                Optional.ToNullable(disableBgpRoutePropagation),
+                Optional.ToNullable(source),
+                Optional.ToNullable(state),
+                addressPrefix ?? new ChangeTrackingList<string>(),
+                nextHopIpAddress ?? new ChangeTrackingList<string>(),
+                Optional.ToNullable(nextHopType));
         }
     }
 }

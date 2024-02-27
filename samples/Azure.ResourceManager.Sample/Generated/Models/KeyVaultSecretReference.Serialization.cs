@@ -100,13 +100,13 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(SecretUri))
+            if (SecretUri != null)
             {
                 builder.Append("  secretUrl:");
                 builder.AppendLine($" '{SecretUri.AbsoluteUri}'");
             }
 
-            if (Optional.IsDefined(SourceVault))
+            if (SourceVault != null)
             {
                 builder.Append("  sourceVault:");
                 AppendChildObject(builder, SourceVault, options, 2, false);

@@ -27,7 +27,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(EncryptionAtHost))
+            if (EncryptionAtHost.HasValue)
             {
                 writer.WritePropertyName("encryptionAtHost"u8);
                 writer.WriteBooleanValue(EncryptionAtHost.Value);
@@ -98,7 +98,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(EncryptionAtHost))
+            if (EncryptionAtHost.HasValue)
             {
                 builder.Append("  encryptionAtHost:");
                 var boolValue = EncryptionAtHost.Value == true ? "true" : "false";

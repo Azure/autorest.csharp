@@ -27,12 +27,12 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && Optional.IsDefined(WalkPerformed))
+            if (options.Format != "W" && WalkPerformed.HasValue)
             {
                 writer.WritePropertyName("walkPerformed"u8);
                 writer.WriteBooleanValue(WalkPerformed.Value);
             }
-            if (options.Format != "W" && Optional.IsDefined(NextPlatformUpdateDomain))
+            if (options.Format != "W" && NextPlatformUpdateDomain.HasValue)
             {
                 writer.WritePropertyName("nextPlatformUpdateDomain"u8);
                 writer.WriteNumberValue(NextPlatformUpdateDomain.Value);
@@ -113,14 +113,14 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(WalkPerformed))
+            if (WalkPerformed.HasValue)
             {
                 builder.Append("  walkPerformed:");
                 var boolValue = WalkPerformed.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
             }
 
-            if (Optional.IsDefined(NextPlatformUpdateDomain))
+            if (NextPlatformUpdateDomain.HasValue)
             {
                 builder.Append("  nextPlatformUpdateDomain:");
                 builder.AppendLine($" {NextPlatformUpdateDomain.Value}");

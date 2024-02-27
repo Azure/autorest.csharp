@@ -16,37 +16,37 @@ namespace MgmtAcronymMapping.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(ComputerName))
+            if (ComputerName != null)
             {
                 writer.WritePropertyName("computerName"u8);
                 writer.WriteStringValue(ComputerName);
             }
-            if (Optional.IsDefined(AdminUsername))
+            if (AdminUsername != null)
             {
                 writer.WritePropertyName("adminUsername"u8);
                 writer.WriteStringValue(AdminUsername);
             }
-            if (Optional.IsDefined(AdminPassword))
+            if (AdminPassword != null)
             {
                 writer.WritePropertyName("adminPassword"u8);
                 writer.WriteStringValue(AdminPassword);
             }
-            if (Optional.IsDefined(CustomData))
+            if (CustomData != null)
             {
                 writer.WritePropertyName("customData"u8);
                 writer.WriteStringValue(CustomData);
             }
-            if (Optional.IsDefined(WindowsConfiguration))
+            if (WindowsConfiguration != null)
             {
                 writer.WritePropertyName("windowsConfiguration"u8);
                 writer.WriteObjectValue(WindowsConfiguration);
             }
-            if (Optional.IsDefined(LinuxConfiguration))
+            if (LinuxConfiguration != null)
             {
                 writer.WritePropertyName("linuxConfiguration"u8);
                 writer.WriteObjectValue(LinuxConfiguration);
             }
-            if (Optional.IsCollectionDefined(Secrets))
+            if (!(Secrets is ChangeTrackingList<VaultSecretGroup> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("secrets"u8);
                 writer.WriteStartArray();
@@ -56,12 +56,12 @@ namespace MgmtAcronymMapping.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(AllowExtensionOperations))
+            if (AllowExtensionOperations.HasValue)
             {
                 writer.WritePropertyName("allowExtensionOperations"u8);
                 writer.WriteBooleanValue(AllowExtensionOperations.Value);
             }
-            if (Optional.IsDefined(RequireGuestProvisionSignal))
+            if (RequireGuestProvisionSignal.HasValue)
             {
                 writer.WritePropertyName("requireGuestProvisionSignal"u8);
                 writer.WriteBooleanValue(RequireGuestProvisionSignal.Value);
@@ -81,7 +81,7 @@ namespace MgmtAcronymMapping.Models
             Optional<string> customData = default;
             Optional<WindowsConfiguration> windowsConfiguration = default;
             Optional<LinuxConfiguration> linuxConfiguration = default;
-            Optional<IList<VaultSecretGroup>> secrets = default;
+            IList<VaultSecretGroup> secrets = default;
             Optional<bool> allowExtensionOperations = default;
             Optional<bool> requireGuestProvisionSignal = default;
             foreach (var property in element.EnumerateObject())
@@ -157,7 +157,16 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new OSProfile(computerName.Value, adminUsername.Value, adminPassword.Value, customData.Value, windowsConfiguration.Value, linuxConfiguration.Value, Optional.ToList(secrets), Optional.ToNullable(allowExtensionOperations), Optional.ToNullable(requireGuestProvisionSignal));
+            return new OSProfile(
+                computerName.Value,
+                adminUsername.Value,
+                adminPassword.Value,
+                customData.Value,
+                windowsConfiguration.Value,
+                linuxConfiguration.Value,
+                secrets ?? new ChangeTrackingList<VaultSecretGroup>(),
+                Optional.ToNullable(allowExtensionOperations),
+                Optional.ToNullable(requireGuestProvisionSignal));
         }
     }
 }

@@ -31,7 +31,7 @@ namespace MgmtDiscriminator.Models
             writer.WriteStringValue(TypeName.ToString());
             writer.WritePropertyName("queryStringBehavior"u8);
             writer.WriteStringValue(QueryStringBehavior.ToString());
-            if (Optional.IsDefined(QueryParameters))
+            if (QueryParameters != null)
             {
                 if (QueryParameters != null)
                 {
@@ -122,19 +122,13 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(TypeName))
-            {
-                builder.Append("  typeName:");
-                builder.AppendLine($" '{TypeName.ToString()}'");
-            }
+            builder.Append("  typeName:");
+            builder.AppendLine($" '{TypeName.ToString()}'");
 
-            if (Optional.IsDefined(QueryStringBehavior))
-            {
-                builder.Append("  queryStringBehavior:");
-                builder.AppendLine($" '{QueryStringBehavior.ToString()}'");
-            }
+            builder.Append("  queryStringBehavior:");
+            builder.AppendLine($" '{QueryStringBehavior.ToString()}'");
 
-            if (Optional.IsDefined(QueryParameters))
+            if (QueryParameters != null)
             {
                 builder.Append("  queryParameters:");
                 if (QueryParameters.Contains(Environment.NewLine))

@@ -19,13 +19,13 @@ namespace xml_service.Models
         private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "Error");
-            if (Optional.IsDefined(Status))
+            if (Status.HasValue)
             {
                 writer.WriteStartElement("status");
                 writer.WriteValue(Status.Value);
                 writer.WriteEndElement();
             }
-            if (Optional.IsDefined(Message))
+            if (Message != null)
             {
                 writer.WriteStartElement("message");
                 writer.WriteValue(Message);

@@ -27,7 +27,7 @@ namespace _Type.Property.Optionality.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(OptionalProperty))
+            if (OptionalProperty != null)
             {
                 writer.WritePropertyName("optionalProperty"u8);
                 writer.WriteStringValue(OptionalProperty);

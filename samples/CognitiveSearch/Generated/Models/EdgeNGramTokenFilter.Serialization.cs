@@ -15,17 +15,17 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(MinGram))
+            if (MinGram.HasValue)
             {
                 writer.WritePropertyName("minGram"u8);
                 writer.WriteNumberValue(MinGram.Value);
             }
-            if (Optional.IsDefined(MaxGram))
+            if (MaxGram.HasValue)
             {
                 writer.WritePropertyName("maxGram"u8);
                 writer.WriteNumberValue(MaxGram.Value);
             }
-            if (Optional.IsDefined(Side))
+            if (Side.HasValue)
             {
                 writer.WritePropertyName("side"u8);
                 writer.WriteStringValue(Side.Value.ToSerialString());

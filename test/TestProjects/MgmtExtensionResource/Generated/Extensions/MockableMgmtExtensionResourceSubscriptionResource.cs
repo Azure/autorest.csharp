@@ -148,8 +148,18 @@ namespace MgmtExtensionResource.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="domainNameLabel"/> is null. </exception>
         public virtual async Task<Response<DnsNameAvailabilityResult>> CheckDnsNameAvailabilityAsync(string location, string domainNameLabel, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(location, nameof(location));
-            Argument.AssertNotNull(domainNameLabel, nameof(domainNameLabel));
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+            if (location.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(location));
+            }
+            if (domainNameLabel == null)
+            {
+                throw new ArgumentNullException(nameof(domainNameLabel));
+            }
 
             using var scope = DefaultClientDiagnostics.CreateScope("MockableMgmtExtensionResourceSubscriptionResource.CheckDnsNameAvailability");
             scope.Start();
@@ -189,8 +199,18 @@ namespace MgmtExtensionResource.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="domainNameLabel"/> is null. </exception>
         public virtual Response<DnsNameAvailabilityResult> CheckDnsNameAvailability(string location, string domainNameLabel, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(location, nameof(location));
-            Argument.AssertNotNull(domainNameLabel, nameof(domainNameLabel));
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+            if (location.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(location));
+            }
+            if (domainNameLabel == null)
+            {
+                throw new ArgumentNullException(nameof(domainNameLabel));
+            }
 
             using var scope = DefaultClientDiagnostics.CreateScope("MockableMgmtExtensionResourceSubscriptionResource.CheckDnsNameAvailability");
             scope.Start();
@@ -228,7 +248,10 @@ namespace MgmtExtensionResource.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public virtual async Task<Response> ValidateSomethingOrphanedPostAsync(ValidateSomethingContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = OrphanedPostClientDiagnostics.CreateScope("MockableMgmtExtensionResourceSubscriptionResource.ValidateSomethingOrphanedPost");
             scope.Start();
@@ -266,7 +289,10 @@ namespace MgmtExtensionResource.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public virtual Response ValidateSomethingOrphanedPost(ValidateSomethingContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = OrphanedPostClientDiagnostics.CreateScope("MockableMgmtExtensionResourceSubscriptionResource.ValidateSomethingOrphanedPost");
             scope.Start();

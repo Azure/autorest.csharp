@@ -66,7 +66,10 @@ namespace AnomalyDetector.Models
         /// <exception cref="ArgumentNullException"> <paramref name="dataSource"/> is null. </exception>
         public ModelInfo(string dataSource, DateTimeOffset startTime, DateTimeOffset endTime)
         {
-            Argument.AssertNotNull(dataSource, nameof(dataSource));
+            if (dataSource == null)
+            {
+                throw new ArgumentNullException(nameof(dataSource));
+            }
 
             DataSource = dataSource;
             StartTime = startTime;

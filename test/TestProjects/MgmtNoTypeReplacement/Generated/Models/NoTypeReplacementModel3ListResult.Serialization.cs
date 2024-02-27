@@ -20,7 +20,7 @@ namespace MgmtNoTypeReplacement.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<NoTypeReplacementModel3Data>> value = default;
+            IReadOnlyList<NoTypeReplacementModel3Data> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -44,7 +44,7 @@ namespace MgmtNoTypeReplacement.Models
                     continue;
                 }
             }
-            return new NoTypeReplacementModel3ListResult(Optional.ToList(value), nextLink.Value);
+            return new NoTypeReplacementModel3ListResult(value ?? new ChangeTrackingList<NoTypeReplacementModel3Data>(), nextLink.Value);
         }
     }
 }

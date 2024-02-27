@@ -26,21 +26,21 @@ namespace body_complex.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(PropD1))
+            if (PropD1 != null)
             {
                 writer.WritePropertyName("propD1"u8);
                 writer.WriteStringValue(PropD1);
             }
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind.ToString());
-            if (Optional.IsDefined(PropB1))
+            if (PropB1 != null)
             {
                 writer.WritePropertyName("propB1"u8);
                 writer.WriteStringValue(PropB1);
             }
             writer.WritePropertyName("helper"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(PropBH1))
+            if (PropBH1 != null)
             {
                 writer.WritePropertyName("propBH1"u8);
                 writer.WriteStringValue(PropBH1);

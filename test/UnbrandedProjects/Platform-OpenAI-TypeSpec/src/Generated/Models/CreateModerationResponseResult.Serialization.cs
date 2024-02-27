@@ -81,12 +81,12 @@ namespace OpenAI.Models
                 }
                 if (property.NameEquals("categories"u8))
                 {
-                    categories = CreateModerationResponseResultCategories.DeserializeCreateModerationResponseResultCategories(property.Value);
+                    categories = CreateModerationResponseResultCategories.DeserializeCreateModerationResponseResultCategories(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("category_scores"u8))
                 {
-                    categoryScores = CreateModerationResponseResultCategoryScores.DeserializeCreateModerationResponseResultCategoryScores(property.Value);
+                    categoryScores = CreateModerationResponseResultCategoryScores.DeserializeCreateModerationResponseResultCategoryScores(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

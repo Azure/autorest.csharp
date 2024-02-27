@@ -329,6 +329,7 @@ namespace AutoRest.CSharp.Generation.Types
             XMsFormat.DataFactoryElementOfObject => typeof(DataFactoryElement<BinaryData>),
             XMsFormat.DataFactoryElementOfListOfString => typeof(DataFactoryElement<IList<string>>),
             XMsFormat.DataFactoryElementOfKeyValuePairs => typeof(DataFactoryElement<IDictionary<string, string>>),
+            XMsFormat.DataFactoryElementOfKeyObjectValuePairs => typeof(DataFactoryElement<IDictionary<string, BinaryData>>),
             _ => null
         };
 

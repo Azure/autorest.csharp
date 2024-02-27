@@ -29,7 +29,7 @@ namespace MgmtDiscriminator.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name.ToString());
-            if (options.Format != "W" && Optional.IsDefined(Foo))
+            if (options.Format != "W" && Foo != null)
             {
                 writer.WritePropertyName("foo"u8);
                 writer.WriteStringValue(Foo);
@@ -76,12 +76,12 @@ namespace MgmtDiscriminator.Models
             {
                 switch (discriminator.GetString())
                 {
-                    case "QueryString": return DeliveryRuleQueryStringCondition.DeserializeDeliveryRuleQueryStringCondition(element);
-                    case "RemoteAddress": return DeliveryRuleRemoteAddressCondition.DeserializeDeliveryRuleRemoteAddressCondition(element);
-                    case "RequestMethod": return DeliveryRuleRequestMethodCondition.DeserializeDeliveryRuleRequestMethodCondition(element);
+                    case "QueryString": return DeliveryRuleQueryStringCondition.DeserializeDeliveryRuleQueryStringCondition(element, options);
+                    case "RemoteAddress": return DeliveryRuleRemoteAddressCondition.DeserializeDeliveryRuleRemoteAddressCondition(element, options);
+                    case "RequestMethod": return DeliveryRuleRequestMethodCondition.DeserializeDeliveryRuleRequestMethodCondition(element, options);
                 }
             }
-            return UnknownDeliveryRuleCondition.DeserializeUnknownDeliveryRuleCondition(element);
+            return UnknownDeliveryRuleCondition.DeserializeUnknownDeliveryRuleCondition(element, options);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -89,13 +89,10 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Name))
-            {
-                builder.Append("  name:");
-                builder.AppendLine($" '{Name.ToString()}'");
-            }
+            builder.Append("  name:");
+            builder.AppendLine($" '{Name.ToString()}'");
 
-            if (Optional.IsDefined(Foo))
+            if (Foo != null)
             {
                 builder.Append("  foo:");
                 if (Foo.Contains(Environment.NewLine))

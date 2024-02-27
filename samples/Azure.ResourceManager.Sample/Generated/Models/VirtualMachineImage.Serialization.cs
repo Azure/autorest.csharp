@@ -32,7 +32,7 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteStringValue(Name);
             writer.WritePropertyName("location"u8);
             writer.WriteStringValue(Location);
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -43,24 +43,24 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndObject();
             }
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(Plan))
+            if (Plan != null)
             {
                 writer.WritePropertyName("plan"u8);
                 writer.WriteObjectValue(Plan);
             }
-            if (Optional.IsDefined(OSDiskImage))
+            if (OSDiskImage != null)
             {
                 writer.WritePropertyName("osDiskImage"u8);
                 writer.WriteObjectValue(OSDiskImage);
             }
-            if (Optional.IsCollectionDefined(DataDiskImages))
+            if (!(DataDiskImages is ChangeTrackingList<DataDiskImage> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("dataDiskImages"u8);
                 writer.WriteStartArray();
@@ -70,17 +70,17 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(AutomaticOSUpgradeProperties))
+            if (AutomaticOSUpgradeProperties != null)
             {
                 writer.WritePropertyName("automaticOSUpgradeProperties"u8);
                 writer.WriteObjectValue(AutomaticOSUpgradeProperties);
             }
-            if (Optional.IsDefined(HyperVGeneration))
+            if (HyperVGeneration.HasValue)
             {
                 writer.WritePropertyName("hyperVGeneration"u8);
                 writer.WriteStringValue(HyperVGeneration.Value.ToString());
             }
-            if (Optional.IsDefined(Disallowed))
+            if (Disallowed != null)
             {
                 writer.WritePropertyName("disallowed"u8);
                 writer.WriteObjectValue(Disallowed);
@@ -126,11 +126,11 @@ namespace Azure.ResourceManager.Sample.Models
             }
             string name = default;
             AzureLocation location = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             Optional<string> id = default;
             Optional<PurchasePlan> plan = default;
             Optional<OSDiskImage> osDiskImage = default;
-            Optional<IList<DataDiskImage>> dataDiskImages = default;
+            IList<DataDiskImage> dataDiskImages = default;
             Optional<AutomaticOSUpgradeProperties> automaticOSUpgradeProperties = default;
             Optional<HyperVGeneration> hyperVGeneration = default;
             Optional<DisallowedConfiguration> disallowed = default;
@@ -182,7 +182,7 @@ namespace Azure.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            plan = PurchasePlan.DeserializePurchasePlan(property0.Value);
+                            plan = PurchasePlan.DeserializePurchasePlan(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("osDiskImage"u8))
@@ -191,7 +191,7 @@ namespace Azure.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            osDiskImage = OSDiskImage.DeserializeOSDiskImage(property0.Value);
+                            osDiskImage = OSDiskImage.DeserializeOSDiskImage(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("dataDiskImages"u8))
@@ -203,7 +203,7 @@ namespace Azure.ResourceManager.Sample.Models
                             List<DataDiskImage> array = new List<DataDiskImage>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(DataDiskImage.DeserializeDataDiskImage(item));
+                                array.Add(DataDiskImage.DeserializeDataDiskImage(item, options));
                             }
                             dataDiskImages = array;
                             continue;
@@ -214,7 +214,7 @@ namespace Azure.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            automaticOSUpgradeProperties = AutomaticOSUpgradeProperties.DeserializeAutomaticOSUpgradeProperties(property0.Value);
+                            automaticOSUpgradeProperties = AutomaticOSUpgradeProperties.DeserializeAutomaticOSUpgradeProperties(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("hyperVGeneration"u8))
@@ -232,7 +232,7 @@ namespace Azure.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            disallowed = DisallowedConfiguration.DeserializeDisallowedConfiguration(property0.Value);
+                            disallowed = DisallowedConfiguration.DeserializeDisallowedConfiguration(property0.Value, options);
                             continue;
                         }
                     }
@@ -244,7 +244,18 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineImage(id.Value, serializedAdditionalRawData, name, location, Optional.ToDictionary(tags), plan.Value, osDiskImage.Value, Optional.ToList(dataDiskImages), automaticOSUpgradeProperties.Value, Optional.ToNullable(hyperVGeneration), disallowed.Value);
+            return new VirtualMachineImage(
+                id.Value,
+                serializedAdditionalRawData,
+                name,
+                location,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                plan.Value,
+                osDiskImage.Value,
+                dataDiskImages ?? new ChangeTrackingList<DataDiskImage>(),
+                automaticOSUpgradeProperties.Value,
+                Optional.ToNullable(hyperVGeneration),
+                disallowed.Value);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -252,7 +263,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 builder.Append("  name:");
                 if (Name.Contains(Environment.NewLine))
@@ -266,13 +277,10 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(Location))
-            {
-                builder.Append("  location:");
-                builder.AppendLine($" '{Location.ToString()}'");
-            }
+            builder.Append("  location:");
+            builder.AppendLine($" '{Location.ToString()}'");
 
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 if (Tags.Any())
                 {
@@ -300,7 +308,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 builder.Append("  id:");
                 if (Id.Contains(Environment.NewLine))
@@ -316,19 +324,19 @@ namespace Azure.ResourceManager.Sample.Models
 
             builder.Append("  properties:");
             builder.AppendLine(" {");
-            if (Optional.IsDefined(Plan))
+            if (Plan != null)
             {
                 builder.Append("    plan:");
                 AppendChildObject(builder, Plan, options, 4, false);
             }
 
-            if (Optional.IsDefined(OSDiskImage))
+            if (OSDiskImage != null)
             {
                 builder.Append("    osDiskImage:");
                 AppendChildObject(builder, OSDiskImage, options, 4, false);
             }
 
-            if (Optional.IsCollectionDefined(DataDiskImages))
+            if (!(DataDiskImages is ChangeTrackingList<DataDiskImage> collection0 && collection0.IsUndefined))
             {
                 if (DataDiskImages.Any())
                 {
@@ -342,19 +350,19 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(AutomaticOSUpgradeProperties))
+            if (AutomaticOSUpgradeProperties != null)
             {
                 builder.Append("    automaticOSUpgradeProperties:");
                 AppendChildObject(builder, AutomaticOSUpgradeProperties, options, 4, false);
             }
 
-            if (Optional.IsDefined(HyperVGeneration))
+            if (HyperVGeneration.HasValue)
             {
                 builder.Append("    hyperVGeneration:");
                 builder.AppendLine($" '{HyperVGeneration.Value.ToString()}'");
             }
 
-            if (Optional.IsDefined(Disallowed))
+            if (Disallowed != null)
             {
                 builder.Append("    disallowed:");
                 AppendChildObject(builder, Disallowed, options, 4, false);

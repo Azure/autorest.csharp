@@ -16,7 +16,7 @@ namespace MgmtExpandResourceTypes.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Value))
+            if (!(Value is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("value"u8);
                 writer.WriteStartArray();
@@ -35,7 +35,7 @@ namespace MgmtExpandResourceTypes.Models
             {
                 return null;
             }
-            Optional<IList<string>> value = default;
+            IList<string> value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -53,7 +53,7 @@ namespace MgmtExpandResourceTypes.Models
                     continue;
                 }
             }
-            return new TxtRecord(Optional.ToList(value));
+            return new TxtRecord(value ?? new ChangeTrackingList<string>());
         }
     }
 }

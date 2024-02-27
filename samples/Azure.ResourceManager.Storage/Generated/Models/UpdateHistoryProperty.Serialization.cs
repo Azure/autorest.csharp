@@ -94,7 +94,15 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new UpdateHistoryProperty(Optional.ToNullable(update), Optional.ToNullable(immutabilityPeriodSinceCreationInDays), Optional.ToNullable(timestamp), objectIdentifier.Value, Optional.ToNullable(tenantId), upn.Value, Optional.ToNullable(allowProtectedAppendWrites), Optional.ToNullable(allowProtectedAppendWritesAll));
+            return new UpdateHistoryProperty(
+                Optional.ToNullable(update),
+                Optional.ToNullable(immutabilityPeriodSinceCreationInDays),
+                Optional.ToNullable(timestamp),
+                objectIdentifier.Value,
+                Optional.ToNullable(tenantId),
+                upn.Value,
+                Optional.ToNullable(allowProtectedAppendWrites),
+                Optional.ToNullable(allowProtectedAppendWritesAll));
         }
     }
 }

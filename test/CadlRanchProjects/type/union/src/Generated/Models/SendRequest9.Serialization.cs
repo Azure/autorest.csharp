@@ -74,7 +74,7 @@ namespace _Type.Union.Models
             {
                 if (property.NameEquals("prop"u8))
                 {
-                    prop = MixedTypesCases.DeserializeMixedTypesCases(property.Value);
+                    prop = MixedTypesCases.DeserializeMixedTypesCases(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

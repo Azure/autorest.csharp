@@ -20,7 +20,7 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<StorageAccountData>> value = default;
+            IReadOnlyList<StorageAccountData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -44,7 +44,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new StorageAccountListResult(Optional.ToList(value), nextLink.Value);
+            return new StorageAccountListResult(value ?? new ChangeTrackingList<StorageAccountData>(), nextLink.Value);
         }
     }
 }

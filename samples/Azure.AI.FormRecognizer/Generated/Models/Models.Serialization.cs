@@ -20,7 +20,7 @@ namespace Azure.AI.FormRecognizer.Models
                 return null;
             }
             Optional<ModelsSummary> summary = default;
-            Optional<IReadOnlyList<ModelInfo>> modelList = default;
+            IReadOnlyList<ModelInfo> modelList = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -53,7 +53,7 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            return new Models(summary.Value, Optional.ToList(modelList), nextLink.Value);
+            return new Models(summary.Value, modelList ?? new ChangeTrackingList<ModelInfo>(), nextLink.Value);
         }
     }
 }

@@ -19,7 +19,7 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<ApiErrorBase>> details = default;
+            IReadOnlyList<ApiErrorBase> details = default;
             Optional<InnerError> innererror = default;
             Optional<string> code = default;
             Optional<string> target = default;
@@ -65,7 +65,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new ApiError(Optional.ToList(details), innererror.Value, code.Value, target.Value, message.Value);
+            return new ApiError(details ?? new ChangeTrackingList<ApiErrorBase>(), innererror.Value, code.Value, target.Value, message.Value);
         }
     }
 }

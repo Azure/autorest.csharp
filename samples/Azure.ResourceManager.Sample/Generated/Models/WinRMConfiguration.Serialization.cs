@@ -28,7 +28,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Listeners))
+            if (!(Listeners is ChangeTrackingList<WinRMListener> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("listeners"u8);
                 writer.WriteStartArray();
@@ -76,7 +76,7 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<IList<WinRMListener>> listeners = default;
+            IList<WinRMListener> listeners = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -90,7 +90,7 @@ namespace Azure.ResourceManager.Sample.Models
                     List<WinRMListener> array = new List<WinRMListener>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(WinRMListener.DeserializeWinRMListener(item));
+                        array.Add(WinRMListener.DeserializeWinRMListener(item, options));
                     }
                     listeners = array;
                     continue;
@@ -101,7 +101,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new WinRMConfiguration(Optional.ToList(listeners), serializedAdditionalRawData);
+            return new WinRMConfiguration(listeners ?? new ChangeTrackingList<WinRMListener>(), serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -109,7 +109,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsCollectionDefined(Listeners))
+            if (!(Listeners is ChangeTrackingList<WinRMListener> collection && collection.IsUndefined))
             {
                 if (Listeners.Any())
                 {

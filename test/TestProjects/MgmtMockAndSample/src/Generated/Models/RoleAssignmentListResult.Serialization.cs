@@ -20,7 +20,7 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<RoleAssignmentData>> value = default;
+            IReadOnlyList<RoleAssignmentData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -44,7 +44,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new RoleAssignmentListResult(Optional.ToList(value), nextLink.Value);
+            return new RoleAssignmentListResult(value ?? new ChangeTrackingList<RoleAssignmentData>(), nextLink.Value);
         }
     }
 }

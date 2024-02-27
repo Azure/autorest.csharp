@@ -26,7 +26,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(InstanceIds))
+            if (!(InstanceIds is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("instanceIds"u8);
                 writer.WriteStartArray();
@@ -36,7 +36,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(TempDisk))
+            if (TempDisk.HasValue)
             {
                 writer.WritePropertyName("tempDisk"u8);
                 writer.WriteBooleanValue(TempDisk.Value);
@@ -79,7 +79,7 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<IList<string>> instanceIds = default;
+            IList<string> instanceIds = default;
             Optional<bool> tempDisk = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -114,7 +114,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineScaleSetReimageContent(Optional.ToNullable(tempDisk), serializedAdditionalRawData, Optional.ToList(instanceIds));
+            return new VirtualMachineScaleSetReimageContent(Optional.ToNullable(tempDisk), serializedAdditionalRawData, instanceIds ?? new ChangeTrackingList<string>());
         }
 
         BinaryData IPersistableModel<VirtualMachineScaleSetReimageContent>.Write(ModelReaderWriterOptions options)

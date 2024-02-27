@@ -26,31 +26,31 @@ namespace body_complex.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(CollegeDegree))
+            if (CollegeDegree != null)
             {
                 writer.WritePropertyName("college_degree"u8);
                 writer.WriteStringValue(CollegeDegree);
             }
-            if (Optional.IsDefined(Location))
+            if (Location != null)
             {
                 writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location);
             }
-            if (Optional.IsDefined(Iswild))
+            if (Iswild.HasValue)
             {
                 writer.WritePropertyName("iswild"u8);
                 writer.WriteBooleanValue(Iswild.Value);
             }
             writer.WritePropertyName("fishtype"u8);
             writer.WriteStringValue(Fishtype);
-            if (Optional.IsDefined(Species))
+            if (Species != null)
             {
                 writer.WritePropertyName("species"u8);
                 writer.WriteStringValue(Species);
             }
             writer.WritePropertyName("length"u8);
             writer.WriteNumberValue(Length);
-            if (Optional.IsCollectionDefined(Siblings))
+            if (!(Siblings is ChangeTrackingList<Fish> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("siblings"u8);
                 writer.WriteStartArray();
@@ -94,7 +94,7 @@ namespace body_complex.Models
             string fishtype = default;
             Optional<string> species = default;
             float length = default;
-            Optional<IList<Fish>> siblings = default;
+            IList<Fish> siblings = default;
             IDictionary<string, object> additionalProperties = default;
             Dictionary<string, object> additionalPropertiesDictionary = new Dictionary<string, object>();
             foreach (var property in element.EnumerateObject())
@@ -142,7 +142,7 @@ namespace body_complex.Models
                     List<Fish> array = new List<Fish>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DeserializeFish(item));
+                        array.Add(DeserializeFish(item, options));
                     }
                     siblings = array;
                     continue;
@@ -150,7 +150,15 @@ namespace body_complex.Models
                 additionalPropertiesDictionary.Add(property.Name, property.Value.GetObject());
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new SmartSalmon(fishtype, species.Value, length, Optional.ToList(siblings), location.Value, Optional.ToNullable(iswild), collegeDegree.Value, additionalProperties);
+            return new SmartSalmon(
+                fishtype,
+                species.Value,
+                length,
+                siblings ?? new ChangeTrackingList<Fish>(),
+                location.Value,
+                Optional.ToNullable(iswild),
+                collegeDegree.Value,
+                additionalProperties);
         }
 
         BinaryData IPersistableModel<SmartSalmon>.Write(ModelReaderWriterOptions options)

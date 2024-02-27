@@ -16,12 +16,12 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Service))
+            if (Service != null)
             {
                 writer.WritePropertyName("service"u8);
                 writer.WriteStringValue(Service);
             }
-            if (Optional.IsCollectionDefined(Locations))
+            if (!(Locations is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("locations"u8);
                 writer.WriteStartArray();
@@ -41,7 +41,7 @@ namespace Azure.Network.Management.Interface.Models
                 return null;
             }
             Optional<string> service = default;
-            Optional<IList<string>> locations = default;
+            IList<string> locations = default;
             Optional<ProvisioningState> provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -74,7 +74,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new ServiceEndpointPropertiesFormat(service.Value, Optional.ToList(locations), Optional.ToNullable(provisioningState));
+            return new ServiceEndpointPropertiesFormat(service.Value, locations ?? new ChangeTrackingList<string>(), Optional.ToNullable(provisioningState));
         }
     }
 }

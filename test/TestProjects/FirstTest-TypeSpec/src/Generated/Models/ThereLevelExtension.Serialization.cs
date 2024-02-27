@@ -29,7 +29,7 @@ namespace FirstTestTypeSpec.Models
             writer.WriteStartObject();
             writer.WritePropertyName("level"u8);
             writer.WriteNumberValue(Level);
-            if (Optional.IsCollectionDefined(Extension))
+            if (!(Extension is ChangeTrackingList<ThereLevelExtension> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("extension"u8);
                 writer.WriteStartArray();
@@ -77,8 +77,13 @@ namespace FirstTestTypeSpec.Models
             {
                 return null;
             }
+<<<<<<< HEAD
             sbyte level = default;
             Optional<IReadOnlyList<ThereLevelExtension>> extension = default;
+=======
+            int level = default;
+            IReadOnlyList<ThereLevelExtension> extension = default;
+>>>>>>> fd80da346309aeffad326ac47b7cf50bb5d968bb
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -97,7 +102,7 @@ namespace FirstTestTypeSpec.Models
                     List<ThereLevelExtension> array = new List<ThereLevelExtension>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DeserializeThereLevelExtension(item));
+                        array.Add(DeserializeThereLevelExtension(item, options));
                     }
                     extension = array;
                     continue;
@@ -108,7 +113,7 @@ namespace FirstTestTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ThereLevelExtension(Optional.ToList(extension), serializedAdditionalRawData, level);
+            return new ThereLevelExtension(extension ?? new ChangeTrackingList<ThereLevelExtension>(), serializedAdditionalRawData, level);
         }
 
         BinaryData IPersistableModel<ThereLevelExtension>.Write(ModelReaderWriterOptions options)

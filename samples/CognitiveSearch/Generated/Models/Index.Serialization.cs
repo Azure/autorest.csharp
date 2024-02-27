@@ -25,7 +25,7 @@ namespace CognitiveSearch.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            if (Optional.IsCollectionDefined(ScoringProfiles))
+            if (!(ScoringProfiles is ChangeTrackingList<ScoringProfile> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("scoringProfiles"u8);
                 writer.WriteStartArray();
@@ -35,17 +35,17 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(DefaultScoringProfile))
+            if (DefaultScoringProfile != null)
             {
                 writer.WritePropertyName("defaultScoringProfile"u8);
                 writer.WriteStringValue(DefaultScoringProfile);
             }
-            if (Optional.IsDefined(CorsOptions))
+            if (CorsOptions != null)
             {
                 writer.WritePropertyName("corsOptions"u8);
                 writer.WriteObjectValue(CorsOptions);
             }
-            if (Optional.IsCollectionDefined(Suggesters))
+            if (!(Suggesters is ChangeTrackingList<Suggester> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("suggesters"u8);
                 writer.WriteStartArray();
@@ -55,7 +55,7 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(Analyzers))
+            if (!(Analyzers is ChangeTrackingList<Analyzer> collection1 && collection1.IsUndefined))
             {
                 writer.WritePropertyName("analyzers"u8);
                 writer.WriteStartArray();
@@ -65,7 +65,7 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(Tokenizers))
+            if (!(Tokenizers is ChangeTrackingList<Tokenizer> collection2 && collection2.IsUndefined))
             {
                 writer.WritePropertyName("tokenizers"u8);
                 writer.WriteStartArray();
@@ -75,7 +75,7 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(TokenFilters))
+            if (!(TokenFilters is ChangeTrackingList<TokenFilter> collection3 && collection3.IsUndefined))
             {
                 writer.WritePropertyName("tokenFilters"u8);
                 writer.WriteStartArray();
@@ -85,7 +85,7 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(CharFilters))
+            if (!(CharFilters is ChangeTrackingList<CharFilter> collection4 && collection4.IsUndefined))
             {
                 writer.WritePropertyName("charFilters"u8);
                 writer.WriteStartArray();
@@ -95,17 +95,17 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(EncryptionKey))
+            if (EncryptionKey != null)
             {
                 writer.WritePropertyName("encryptionKey"u8);
                 writer.WriteObjectValue(EncryptionKey);
             }
-            if (Optional.IsDefined(Similarity))
+            if (Similarity != null)
             {
                 writer.WritePropertyName("similarity"u8);
                 writer.WriteObjectValue(Similarity);
             }
-            if (Optional.IsDefined(ETag))
+            if (ETag != null)
             {
                 writer.WritePropertyName("@odata.etag"u8);
                 writer.WriteStringValue(ETag);
@@ -121,14 +121,14 @@ namespace CognitiveSearch.Models
             }
             string name = default;
             IList<Field> fields = default;
-            Optional<IList<ScoringProfile>> scoringProfiles = default;
+            IList<ScoringProfile> scoringProfiles = default;
             Optional<string> defaultScoringProfile = default;
             Optional<CorsOptions> corsOptions = default;
-            Optional<IList<Suggester>> suggesters = default;
-            Optional<IList<Analyzer>> analyzers = default;
-            Optional<IList<Tokenizer>> tokenizers = default;
-            Optional<IList<TokenFilter>> tokenFilters = default;
-            Optional<IList<CharFilter>> charFilters = default;
+            IList<Suggester> suggesters = default;
+            IList<Analyzer> analyzers = default;
+            IList<Tokenizer> tokenizers = default;
+            IList<TokenFilter> tokenFilters = default;
+            IList<CharFilter> charFilters = default;
             Optional<EncryptionKey> encryptionKey = default;
             Optional<Similarity> similarity = default;
             Optional<string> odataEtag = default;
@@ -271,7 +271,20 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new Index(name, fields, Optional.ToList(scoringProfiles), defaultScoringProfile.Value, corsOptions.Value, Optional.ToList(suggesters), Optional.ToList(analyzers), Optional.ToList(tokenizers), Optional.ToList(tokenFilters), Optional.ToList(charFilters), encryptionKey.Value, similarity.Value, odataEtag.Value);
+            return new Index(
+                name,
+                fields,
+                scoringProfiles ?? new ChangeTrackingList<ScoringProfile>(),
+                defaultScoringProfile.Value,
+                corsOptions.Value,
+                suggesters ?? new ChangeTrackingList<Suggester>(),
+                analyzers ?? new ChangeTrackingList<Analyzer>(),
+                tokenizers ?? new ChangeTrackingList<Tokenizer>(),
+                tokenFilters ?? new ChangeTrackingList<TokenFilter>(),
+                charFilters ?? new ChangeTrackingList<CharFilter>(),
+                encryptionKey.Value,
+                similarity.Value,
+                odataEtag.Value);
         }
     }
 }

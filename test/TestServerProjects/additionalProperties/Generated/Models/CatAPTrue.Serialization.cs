@@ -26,19 +26,19 @@ namespace additionalProperties.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Friendly))
+            if (Friendly.HasValue)
             {
                 writer.WritePropertyName("friendly"u8);
                 writer.WriteBooleanValue(Friendly.Value);
             }
             writer.WritePropertyName("id"u8);
             writer.WriteNumberValue(Id);
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format != "W" && Optional.IsDefined(Status))
+            if (options.Format != "W" && Status.HasValue)
             {
                 writer.WritePropertyName("status"u8);
                 writer.WriteBooleanValue(Status.Value);

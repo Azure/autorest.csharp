@@ -28,7 +28,7 @@ namespace ModelWithConverterUsage.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(ModelProperty))
+            if (ModelProperty != null)
             {
                 writer.WritePropertyName("Model_Property"u8);
                 writer.WriteStringValue(ModelProperty);

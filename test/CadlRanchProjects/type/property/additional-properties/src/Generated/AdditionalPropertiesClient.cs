@@ -36,7 +36,10 @@ namespace _Type.Property.AdditionalProperties
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public AdditionalPropertiesClient(Uri endpoint, AdditionalPropertiesClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
             options ??= new AdditionalPropertiesClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

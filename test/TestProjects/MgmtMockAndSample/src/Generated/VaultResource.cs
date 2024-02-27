@@ -356,7 +356,10 @@ namespace MgmtMockAndSample
         /// <exception cref="ArgumentNullException"> <paramref name="patch"/> is null. </exception>
         public virtual async Task<Response<VaultResource>> UpdateAsync(VaultPatch patch, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(patch, nameof(patch));
+            if (patch == null)
+            {
+                throw new ArgumentNullException(nameof(patch));
+            }
 
             using var scope = _vaultClientDiagnostics.CreateScope("VaultResource.Update");
             scope.Start();
@@ -398,7 +401,10 @@ namespace MgmtMockAndSample
         /// <exception cref="ArgumentNullException"> <paramref name="patch"/> is null. </exception>
         public virtual Response<VaultResource> Update(VaultPatch patch, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(patch, nameof(patch));
+            if (patch == null)
+            {
+                throw new ArgumentNullException(nameof(patch));
+            }
 
             using var scope = _vaultClientDiagnostics.CreateScope("VaultResource.Update");
             scope.Start();
@@ -647,7 +653,10 @@ namespace MgmtMockAndSample
         /// <exception cref="ArgumentNullException"> <paramref name="vaultAccessPolicyParameters"/> is null. </exception>
         public virtual async Task<Response<VaultAccessPolicyParameters>> UpdateAccessPolicyAsync(AccessPolicyUpdateKind operationKind, VaultAccessPolicyParameters vaultAccessPolicyParameters, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(vaultAccessPolicyParameters, nameof(vaultAccessPolicyParameters));
+            if (vaultAccessPolicyParameters == null)
+            {
+                throw new ArgumentNullException(nameof(vaultAccessPolicyParameters));
+            }
 
             using var scope = _vaultClientDiagnostics.CreateScope("VaultResource.UpdateAccessPolicy");
             scope.Start();
@@ -686,7 +695,10 @@ namespace MgmtMockAndSample
         /// <exception cref="ArgumentNullException"> <paramref name="vaultAccessPolicyParameters"/> is null. </exception>
         public virtual Response<VaultAccessPolicyParameters> UpdateAccessPolicy(AccessPolicyUpdateKind operationKind, VaultAccessPolicyParameters vaultAccessPolicyParameters, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(vaultAccessPolicyParameters, nameof(vaultAccessPolicyParameters));
+            if (vaultAccessPolicyParameters == null)
+            {
+                throw new ArgumentNullException(nameof(vaultAccessPolicyParameters));
+            }
 
             using var scope = _vaultClientDiagnostics.CreateScope("VaultResource.UpdateAccessPolicy");
             scope.Start();
@@ -779,8 +791,14 @@ namespace MgmtMockAndSample
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
         public virtual async Task<Response<VaultResource>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(key, nameof(key));
-            Argument.AssertNotNull(value, nameof(value));
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
 
             using var scope = _vaultClientDiagnostics.CreateScope("VaultResource.AddTag");
             scope.Start();
@@ -841,8 +859,14 @@ namespace MgmtMockAndSample
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
         public virtual Response<VaultResource> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(key, nameof(key));
-            Argument.AssertNotNull(value, nameof(value));
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
 
             using var scope = _vaultClientDiagnostics.CreateScope("VaultResource.AddTag");
             scope.Start();
@@ -902,7 +926,10 @@ namespace MgmtMockAndSample
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
         public virtual async Task<Response<VaultResource>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(tags, nameof(tags));
+            if (tags == null)
+            {
+                throw new ArgumentNullException(nameof(tags));
+            }
 
             using var scope = _vaultClientDiagnostics.CreateScope("VaultResource.SetTags");
             scope.Start();
@@ -959,7 +986,10 @@ namespace MgmtMockAndSample
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
         public virtual Response<VaultResource> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(tags, nameof(tags));
+            if (tags == null)
+            {
+                throw new ArgumentNullException(nameof(tags));
+            }
 
             using var scope = _vaultClientDiagnostics.CreateScope("VaultResource.SetTags");
             scope.Start();
@@ -1016,7 +1046,10 @@ namespace MgmtMockAndSample
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public virtual async Task<Response<VaultResource>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(key, nameof(key));
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
 
             using var scope = _vaultClientDiagnostics.CreateScope("VaultResource.RemoveTag");
             scope.Start();
@@ -1076,7 +1109,10 @@ namespace MgmtMockAndSample
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public virtual Response<VaultResource> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(key, nameof(key));
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
 
             using var scope = _vaultClientDiagnostics.CreateScope("VaultResource.RemoveTag");
             scope.Start();

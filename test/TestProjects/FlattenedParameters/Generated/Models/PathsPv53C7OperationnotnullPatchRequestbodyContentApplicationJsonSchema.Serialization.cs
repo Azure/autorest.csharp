@@ -15,7 +15,7 @@ namespace FlattenedParameters.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Items))
+            if (!(Items is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("items"u8);
                 writer.WriteStartArray();

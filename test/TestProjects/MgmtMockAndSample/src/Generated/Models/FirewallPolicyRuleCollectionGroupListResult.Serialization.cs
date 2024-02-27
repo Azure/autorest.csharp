@@ -20,7 +20,7 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<FirewallPolicyRuleCollectionGroupData>> value = default;
+            IReadOnlyList<FirewallPolicyRuleCollectionGroupData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -44,7 +44,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new FirewallPolicyRuleCollectionGroupListResult(Optional.ToList(value), nextLink.Value);
+            return new FirewallPolicyRuleCollectionGroupListResult(value ?? new ChangeTrackingList<FirewallPolicyRuleCollectionGroupData>(), nextLink.Value);
         }
     }
 }

@@ -29,7 +29,7 @@ namespace AnomalyDetector.Models
             writer.WriteStartObject();
             writer.WritePropertyName("dataSource"u8);
             writer.WriteStringValue(DataSource);
-            if (Optional.IsDefined(DataSchema))
+            if (DataSchema.HasValue)
             {
                 writer.WritePropertyName("dataSchema"u8);
                 writer.WriteStringValue(DataSchema.Value.ToString());
@@ -38,27 +38,27 @@ namespace AnomalyDetector.Models
             writer.WriteStringValue(StartTime, "O");
             writer.WritePropertyName("endTime"u8);
             writer.WriteStringValue(EndTime, "O");
-            if (Optional.IsDefined(DisplayName))
+            if (DisplayName != null)
             {
                 writer.WritePropertyName("displayName"u8);
                 writer.WriteStringValue(DisplayName);
             }
-            if (Optional.IsDefined(SlidingWindow))
+            if (SlidingWindow.HasValue)
             {
                 writer.WritePropertyName("slidingWindow"u8);
                 writer.WriteNumberValue(SlidingWindow.Value);
             }
-            if (Optional.IsDefined(AlignPolicy))
+            if (AlignPolicy != null)
             {
                 writer.WritePropertyName("alignPolicy"u8);
                 writer.WriteObjectValue(AlignPolicy);
             }
-            if (Optional.IsDefined(Status))
+            if (Status.HasValue)
             {
                 writer.WritePropertyName("status"u8);
                 writer.WriteStringValue(Status.Value.ToSerialString());
             }
-            if (options.Format != "W" && Optional.IsCollectionDefined(Errors))
+            if (options.Format != "W" && !(Errors is ChangeTrackingList<ErrorResponse> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("errors"u8);
                 writer.WriteStartArray();
@@ -68,7 +68,7 @@ namespace AnomalyDetector.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(DiagnosticsInfo))
+            if (DiagnosticsInfo != null)
             {
                 writer.WritePropertyName("diagnosticsInfo"u8);
                 writer.WriteObjectValue(DiagnosticsInfo);
@@ -119,7 +119,7 @@ namespace AnomalyDetector.Models
             Optional<int> slidingWindow = default;
             Optional<AlignPolicy> alignPolicy = default;
             Optional<ModelStatus> status = default;
-            Optional<IReadOnlyList<ErrorResponse>> errors = default;
+            IReadOnlyList<ErrorResponse> errors = default;
             Optional<DiagnosticsInfo> diagnosticsInfo = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -169,7 +169,7 @@ namespace AnomalyDetector.Models
                     {
                         continue;
                     }
-                    alignPolicy = AlignPolicy.DeserializeAlignPolicy(property.Value);
+                    alignPolicy = AlignPolicy.DeserializeAlignPolicy(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("status"u8))
@@ -190,7 +190,7 @@ namespace AnomalyDetector.Models
                     List<ErrorResponse> array = new List<ErrorResponse>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ErrorResponse.DeserializeErrorResponse(item));
+                        array.Add(ErrorResponse.DeserializeErrorResponse(item, options));
                     }
                     errors = array;
                     continue;
@@ -201,7 +201,7 @@ namespace AnomalyDetector.Models
                     {
                         continue;
                     }
-                    diagnosticsInfo = DiagnosticsInfo.DeserializeDiagnosticsInfo(property.Value);
+                    diagnosticsInfo = DiagnosticsInfo.DeserializeDiagnosticsInfo(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")
@@ -210,7 +210,18 @@ namespace AnomalyDetector.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ModelInfo(dataSource, Optional.ToNullable(dataSchema), startTime, endTime, displayName.Value, Optional.ToNullable(slidingWindow), alignPolicy.Value, Optional.ToNullable(status), Optional.ToList(errors), diagnosticsInfo.Value, serializedAdditionalRawData);
+            return new ModelInfo(
+                dataSource,
+                Optional.ToNullable(dataSchema),
+                startTime,
+                endTime,
+                displayName.Value,
+                Optional.ToNullable(slidingWindow),
+                alignPolicy.Value,
+                Optional.ToNullable(status),
+                errors ?? new ChangeTrackingList<ErrorResponse>(),
+                diagnosticsInfo.Value,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ModelInfo>.Write(ModelReaderWriterOptions options)

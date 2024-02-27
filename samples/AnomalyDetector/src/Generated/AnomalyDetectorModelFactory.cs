@@ -79,7 +79,16 @@ namespace AnomalyDetector.Models
             isPositiveAnomaly ??= new List<bool>();
             severity ??= new List<float>();
 
-            return new UnivariateEntireDetectionResult(period, expectedValues?.ToList(), upperMargins?.ToList(), lowerMargins?.ToList(), isAnomaly?.ToList(), isNegativeAnomaly?.ToList(), isPositiveAnomaly?.ToList(), severity?.ToList(), serializedAdditionalRawData: null);
+            return new UnivariateEntireDetectionResult(
+                period,
+                expectedValues?.ToList(),
+                upperMargins?.ToList(),
+                lowerMargins?.ToList(),
+                isAnomaly?.ToList(),
+                isNegativeAnomaly?.ToList(),
+                isPositiveAnomaly?.ToList(),
+                severity?.ToList(),
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.UnivariateLastDetectionResult"/>. </summary>
@@ -120,7 +129,17 @@ namespace AnomalyDetector.Models
         /// <returns> A new <see cref="Models.UnivariateLastDetectionResult"/> instance for mocking. </returns>
         public static UnivariateLastDetectionResult UnivariateLastDetectionResult(int period = default, int suggestedWindow = default, float expectedValue = default, float upperMargin = default, float lowerMargin = default, bool isAnomaly = default, bool isNegativeAnomaly = default, bool isPositiveAnomaly = default, float? severity = null)
         {
-            return new UnivariateLastDetectionResult(period, suggestedWindow, expectedValue, upperMargin, lowerMargin, isAnomaly, isNegativeAnomaly, isPositiveAnomaly, severity, serializedAdditionalRawData: null);
+            return new UnivariateLastDetectionResult(
+                period,
+                suggestedWindow,
+                expectedValue,
+                upperMargin,
+                lowerMargin,
+                isAnomaly,
+                isNegativeAnomaly,
+                isPositiveAnomaly,
+                severity,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.UnivariateChangePointDetectionOptions"/>. </summary>
@@ -155,7 +174,14 @@ namespace AnomalyDetector.Models
         {
             series ??= new List<TimeSeriesPoint>();
 
-            return new UnivariateChangePointDetectionOptions(series?.ToList(), granularity, customInterval, period, stableTrendWindow, threshold, serializedAdditionalRawData: null);
+            return new UnivariateChangePointDetectionOptions(
+                series?.ToList(),
+                granularity,
+                customInterval,
+                period,
+                stableTrendWindow,
+                threshold,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.UnivariateChangePointDetectionResult"/>. </summary>
@@ -296,7 +322,18 @@ namespace AnomalyDetector.Models
         {
             errors ??= new List<ErrorResponse>();
 
-            return new ModelInfo(dataSource, dataSchema, startTime, endTime, displayName, slidingWindow, alignPolicy, status, errors?.ToList(), diagnosticsInfo, serializedAdditionalRawData: null);
+            return new ModelInfo(
+                dataSource,
+                dataSchema,
+                startTime,
+                endTime,
+                displayName,
+                slidingWindow,
+                alignPolicy,
+                status,
+                errors?.ToList(),
+                diagnosticsInfo,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.AnomalyDetectionModel"/>. </summary>

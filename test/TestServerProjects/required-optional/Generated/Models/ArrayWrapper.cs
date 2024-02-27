@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Azure.Core;
 
 namespace required_optional.Models
 {
@@ -52,7 +51,10 @@ namespace required_optional.Models
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public ArrayWrapper(IEnumerable<string> value)
         {
-            Argument.AssertNotNull(value, nameof(value));
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
 
             Value = value.ToList();
         }

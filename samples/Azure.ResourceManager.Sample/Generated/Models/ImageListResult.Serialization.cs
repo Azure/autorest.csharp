@@ -36,7 +36,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            if (Optional.IsDefined(NextLink))
+            if (NextLink != null)
             {
                 writer.WritePropertyName("nextLink"u8);
                 writer.WriteStringValue(NextLink);
@@ -90,7 +90,7 @@ namespace Azure.ResourceManager.Sample.Models
                     List<ImageData> array = new List<ImageData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ImageData.DeserializeImageData(item));
+                        array.Add(ImageData.DeserializeImageData(item, options));
                     }
                     value = array;
                     continue;
@@ -114,7 +114,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsCollectionDefined(Images))
+            if (!(Images is ChangeTrackingList<ImageData> collection && collection.IsUndefined))
             {
                 if (Images.Any())
                 {
@@ -128,7 +128,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(NextLink))
+            if (NextLink != null)
             {
                 builder.Append("  nextLink:");
                 if (NextLink.Contains(Environment.NewLine))

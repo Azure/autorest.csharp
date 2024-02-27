@@ -19,7 +19,7 @@ namespace FlattenedParameters.Models
             writer.WriteStartObject();
             writer.WritePropertyName("required"u8);
             writer.WriteStringValue(Required);
-            if (Optional.IsDefined(NonRequired))
+            if (NonRequired != null)
             {
                 writer.WritePropertyName("non_required"u8);
                 writer.WriteStringValue(NonRequired);

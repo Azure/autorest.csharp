@@ -25,7 +25,7 @@ namespace Azure.AI.FormRecognizer.Models
             float height = default;
             LengthUnit unit = default;
             Optional<Language> language = default;
-            Optional<IReadOnlyList<TextLine>> lines = default;
+            IReadOnlyList<TextLine> lines = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("page"u8))
@@ -77,7 +77,14 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            return new ReadResult(page, angle, width, height, unit, Optional.ToNullable(language), Optional.ToList(lines));
+            return new ReadResult(
+                page,
+                angle,
+                width,
+                height,
+                unit,
+                Optional.ToNullable(language),
+                lines ?? new ChangeTrackingList<TextLine>());
         }
     }
 }

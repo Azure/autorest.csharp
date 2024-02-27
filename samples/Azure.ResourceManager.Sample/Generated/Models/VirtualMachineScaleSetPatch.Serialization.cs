@@ -28,22 +28,22 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Sku))
+            if (Sku != null)
             {
                 writer.WritePropertyName("sku"u8);
                 writer.WriteObjectValue(Sku);
             }
-            if (Optional.IsDefined(Plan))
+            if (Plan != null)
             {
                 writer.WritePropertyName("plan"u8);
                 writer.WriteObjectValue(Plan);
             }
-            if (Optional.IsDefined(Identity))
+            if (Identity != null)
             {
                 writer.WritePropertyName("identity"u8);
                 JsonSerializer.Serialize(writer, Identity);
             }
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -56,47 +56,47 @@ namespace Azure.ResourceManager.Sample.Models
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(UpgradePolicy))
+            if (UpgradePolicy != null)
             {
                 writer.WritePropertyName("upgradePolicy"u8);
                 writer.WriteObjectValue(UpgradePolicy);
             }
-            if (Optional.IsDefined(AutomaticRepairsPolicy))
+            if (AutomaticRepairsPolicy != null)
             {
                 writer.WritePropertyName("automaticRepairsPolicy"u8);
                 writer.WriteObjectValue(AutomaticRepairsPolicy);
             }
-            if (Optional.IsDefined(VirtualMachineProfile))
+            if (VirtualMachineProfile != null)
             {
                 writer.WritePropertyName("virtualMachineProfile"u8);
                 writer.WriteObjectValue(VirtualMachineProfile);
             }
-            if (Optional.IsDefined(Overprovision))
+            if (Overprovision.HasValue)
             {
                 writer.WritePropertyName("overprovision"u8);
                 writer.WriteBooleanValue(Overprovision.Value);
             }
-            if (Optional.IsDefined(DoNotRunExtensionsOnOverprovisionedVms))
+            if (DoNotRunExtensionsOnOverprovisionedVms.HasValue)
             {
                 writer.WritePropertyName("doNotRunExtensionsOnOverprovisionedVMs"u8);
                 writer.WriteBooleanValue(DoNotRunExtensionsOnOverprovisionedVms.Value);
             }
-            if (Optional.IsDefined(SinglePlacementGroup))
+            if (SinglePlacementGroup.HasValue)
             {
                 writer.WritePropertyName("singlePlacementGroup"u8);
                 writer.WriteBooleanValue(SinglePlacementGroup.Value);
             }
-            if (Optional.IsDefined(AdditionalCapabilities))
+            if (AdditionalCapabilities != null)
             {
                 writer.WritePropertyName("additionalCapabilities"u8);
                 writer.WriteObjectValue(AdditionalCapabilities);
             }
-            if (Optional.IsDefined(ScaleInPolicy))
+            if (ScaleInPolicy != null)
             {
                 writer.WritePropertyName("scaleInPolicy"u8);
                 writer.WriteObjectValue(ScaleInPolicy);
             }
-            if (Optional.IsDefined(ProximityPlacementGroup))
+            if (ProximityPlacementGroup != null)
             {
                 writer.WritePropertyName("proximityPlacementGroup"u8);
                 JsonSerializer.Serialize(writer, ProximityPlacementGroup);
@@ -143,7 +143,7 @@ namespace Azure.ResourceManager.Sample.Models
             Optional<SampleSku> sku = default;
             Optional<SamplePlan> plan = default;
             Optional<ManagedServiceIdentity> identity = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             Optional<UpgradePolicy> upgradePolicy = default;
             Optional<AutomaticRepairsPolicy> automaticRepairsPolicy = default;
             Optional<VirtualMachineScaleSetUpdateVmProfile> virtualMachineProfile = default;
@@ -163,7 +163,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    sku = SampleSku.DeserializeSampleSku(property.Value);
+                    sku = SampleSku.DeserializeSampleSku(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("plan"u8))
@@ -172,7 +172,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    plan = SamplePlan.DeserializeSamplePlan(property.Value);
+                    plan = SamplePlan.DeserializeSamplePlan(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("identity"u8))
@@ -213,7 +213,7 @@ namespace Azure.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            upgradePolicy = UpgradePolicy.DeserializeUpgradePolicy(property0.Value);
+                            upgradePolicy = UpgradePolicy.DeserializeUpgradePolicy(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("automaticRepairsPolicy"u8))
@@ -222,7 +222,7 @@ namespace Azure.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            automaticRepairsPolicy = AutomaticRepairsPolicy.DeserializeAutomaticRepairsPolicy(property0.Value);
+                            automaticRepairsPolicy = AutomaticRepairsPolicy.DeserializeAutomaticRepairsPolicy(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("virtualMachineProfile"u8))
@@ -231,7 +231,7 @@ namespace Azure.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            virtualMachineProfile = VirtualMachineScaleSetUpdateVmProfile.DeserializeVirtualMachineScaleSetUpdateVmProfile(property0.Value);
+                            virtualMachineProfile = VirtualMachineScaleSetUpdateVmProfile.DeserializeVirtualMachineScaleSetUpdateVmProfile(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("overprovision"u8))
@@ -267,7 +267,7 @@ namespace Azure.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            additionalCapabilities = AdditionalCapabilities.DeserializeAdditionalCapabilities(property0.Value);
+                            additionalCapabilities = AdditionalCapabilities.DeserializeAdditionalCapabilities(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("scaleInPolicy"u8))
@@ -276,7 +276,7 @@ namespace Azure.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            scaleInPolicy = ScaleInPolicy.DeserializeScaleInPolicy(property0.Value);
+                            scaleInPolicy = ScaleInPolicy.DeserializeScaleInPolicy(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("proximityPlacementGroup"u8))
@@ -297,7 +297,21 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineScaleSetPatch(Optional.ToDictionary(tags), serializedAdditionalRawData, sku.Value, plan.Value, identity, upgradePolicy.Value, automaticRepairsPolicy.Value, virtualMachineProfile.Value, Optional.ToNullable(overprovision), Optional.ToNullable(doNotRunExtensionsOnOverprovisionedVms), Optional.ToNullable(singlePlacementGroup), additionalCapabilities.Value, scaleInPolicy.Value, proximityPlacementGroup);
+            return new VirtualMachineScaleSetPatch(
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                serializedAdditionalRawData,
+                sku.Value,
+                plan.Value,
+                identity,
+                upgradePolicy.Value,
+                automaticRepairsPolicy.Value,
+                virtualMachineProfile.Value,
+                Optional.ToNullable(overprovision),
+                Optional.ToNullable(doNotRunExtensionsOnOverprovisionedVms),
+                Optional.ToNullable(singlePlacementGroup),
+                additionalCapabilities.Value,
+                scaleInPolicy.Value,
+                proximityPlacementGroup);
         }
 
         BinaryData IPersistableModel<VirtualMachineScaleSetPatch>.Write(ModelReaderWriterOptions options)

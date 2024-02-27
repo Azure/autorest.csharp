@@ -26,12 +26,12 @@ namespace TypeSchemaMapping.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && Optional.IsDefined(StringProperty))
+            if (options.Format != "W" && StringProperty != null)
             {
                 writer.WritePropertyName("StringProperty"u8);
                 writer.WriteStringValue(StringProperty);
             }
-            if (options.Format != "W" && Optional.IsCollectionDefined(InternalListProperty))
+            if (options.Format != "W" && !(InternalListProperty is ChangeTrackingList<InternalModel> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("InternalListProperty"u8);
                 writer.WriteStartArray();
@@ -80,7 +80,7 @@ namespace TypeSchemaMapping.Models
                 return null;
             }
             Optional<string> stringProperty = default;
-            Optional<IReadOnlyList<InternalModel>> internalListProperty = default;
+            IReadOnlyList<InternalModel> internalListProperty = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -99,7 +99,7 @@ namespace TypeSchemaMapping.Models
                     List<InternalModel> array = new List<InternalModel>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(InternalModel.DeserializeInternalModel(item));
+                        array.Add(InternalModel.DeserializeInternalModel(item, options));
                     }
                     internalListProperty = array;
                     continue;
@@ -110,7 +110,7 @@ namespace TypeSchemaMapping.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ModelWithListOfInternalModel(stringProperty.Value, Optional.ToList(internalListProperty), serializedAdditionalRawData);
+            return new ModelWithListOfInternalModel(stringProperty.Value, internalListProperty ?? new ChangeTrackingList<InternalModel>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ModelWithListOfInternalModel>.Write(ModelReaderWriterOptions options)

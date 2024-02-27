@@ -17,12 +17,12 @@ namespace FlattenedParameters.Models
             writer.WriteStartObject();
             writer.WritePropertyName("flattened"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(Required))
+            if (Required != null)
             {
                 writer.WritePropertyName("required"u8);
                 writer.WriteStringValue(Required);
             }
-            if (Optional.IsDefined(NonRequired))
+            if (NonRequired != null)
             {
                 writer.WritePropertyName("non_required"u8);
                 writer.WriteStringValue(NonRequired);

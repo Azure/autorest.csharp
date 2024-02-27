@@ -27,7 +27,7 @@ namespace _Type.Model.Inheritance.Recursive.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Extension))
+            if (!(Extension is ChangeTrackingList<Extension> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("extension"u8);
                 writer.WriteStartArray();
@@ -75,7 +75,7 @@ namespace _Type.Model.Inheritance.Recursive.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<Extension>> extension = default;
+            IReadOnlyList<Extension> extension = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -89,7 +89,7 @@ namespace _Type.Model.Inheritance.Recursive.Models
                     List<Extension> array = new List<Extension>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Models.Extension.DeserializeExtension(item));
+                        array.Add(Models.Extension.DeserializeExtension(item, options));
                     }
                     extension = array;
                     continue;
@@ -100,7 +100,7 @@ namespace _Type.Model.Inheritance.Recursive.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Element(Optional.ToList(extension), serializedAdditionalRawData);
+            return new Element(extension ?? new ChangeTrackingList<Extension>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<Element>.Write(ModelReaderWriterOptions options)

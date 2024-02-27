@@ -16,7 +16,7 @@ namespace MgmtScopeResource.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Context))
+            if (Context != null)
             {
                 writer.WritePropertyName("context"u8);
                 writer.WriteStringValue(Context);
@@ -126,7 +126,16 @@ namespace MgmtScopeResource.Models
                     continue;
                 }
             }
-            return new GuestConfigurationAssignmentProperties(targetResourceId.Value, Optional.ToNullable(complianceStatus), Optional.ToNullable(lastComplianceStatusChecked), latestReportId.Value, parameterHash.Value, context.Value, assignmentHash.Value, Optional.ToNullable(provisioningState), resourceType.Value);
+            return new GuestConfigurationAssignmentProperties(
+                targetResourceId.Value,
+                Optional.ToNullable(complianceStatus),
+                Optional.ToNullable(lastComplianceStatusChecked),
+                latestReportId.Value,
+                parameterHash.Value,
+                context.Value,
+                assignmentHash.Value,
+                Optional.ToNullable(provisioningState),
+                resourceType.Value);
         }
     }
 }

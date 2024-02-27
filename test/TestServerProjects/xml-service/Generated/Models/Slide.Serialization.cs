@@ -20,19 +20,19 @@ namespace xml_service.Models
         private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "slide");
-            if (Optional.IsDefined(Type))
+            if (Type != null)
             {
                 writer.WriteStartAttribute("type");
                 writer.WriteValue(Type);
                 writer.WriteEndAttribute();
             }
-            if (Optional.IsDefined(Title))
+            if (Title != null)
             {
                 writer.WriteStartElement("title");
                 writer.WriteValue(Title);
                 writer.WriteEndElement();
             }
-            if (Optional.IsCollectionDefined(Items))
+            if (!(Items is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 foreach (var item in Items)
                 {

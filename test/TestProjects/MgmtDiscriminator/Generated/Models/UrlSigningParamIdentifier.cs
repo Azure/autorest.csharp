@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace MgmtDiscriminator.Models
 {
@@ -52,7 +51,10 @@ namespace MgmtDiscriminator.Models
         /// <exception cref="ArgumentNullException"> <paramref name="paramName"/> is null. </exception>
         public UrlSigningParamIdentifier(ParamIndicator paramIndicator, string paramName)
         {
-            Argument.AssertNotNull(paramName, nameof(paramName));
+            if (paramName == null)
+            {
+                throw new ArgumentNullException(nameof(paramName));
+            }
 
             ParamIndicator = paramIndicator;
             ParamName = paramName;

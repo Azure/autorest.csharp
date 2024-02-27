@@ -28,7 +28,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(AllocatableVms))
+            if (!(AllocatableVms is ChangeTrackingList<DedicatedHostAllocatableVm> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("allocatableVMs"u8);
                 writer.WriteStartArray();
@@ -76,7 +76,7 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<DedicatedHostAllocatableVm>> allocatableVms = default;
+            IReadOnlyList<DedicatedHostAllocatableVm> allocatableVms = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -90,7 +90,7 @@ namespace Azure.ResourceManager.Sample.Models
                     List<DedicatedHostAllocatableVm> array = new List<DedicatedHostAllocatableVm>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DedicatedHostAllocatableVm.DeserializeDedicatedHostAllocatableVm(item));
+                        array.Add(DedicatedHostAllocatableVm.DeserializeDedicatedHostAllocatableVm(item, options));
                     }
                     allocatableVms = array;
                     continue;
@@ -101,7 +101,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DedicatedHostAvailableCapacity(Optional.ToList(allocatableVms), serializedAdditionalRawData);
+            return new DedicatedHostAvailableCapacity(allocatableVms ?? new ChangeTrackingList<DedicatedHostAllocatableVm>(), serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -109,7 +109,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsCollectionDefined(AllocatableVms))
+            if (!(AllocatableVms is ChangeTrackingList<DedicatedHostAllocatableVm> collection && collection.IsUndefined))
             {
                 if (AllocatableVms.Any())
                 {

@@ -52,7 +52,10 @@ namespace SpreadTypeSpec.Models
         /// <exception cref="ArgumentNullException"> <paramref name="requiredStringList"/> is null. </exception>
         public SpreadAliasWithCollectionsRequest(IEnumerable<string> requiredStringList)
         {
-            Argument.AssertNotNull(requiredStringList, nameof(requiredStringList));
+            if (requiredStringList == null)
+            {
+                throw new ArgumentNullException(nameof(requiredStringList));
+            }
 
             RequiredStringList = requiredStringList.ToList();
             OptionalStringList = new ChangeTrackingList<string>();

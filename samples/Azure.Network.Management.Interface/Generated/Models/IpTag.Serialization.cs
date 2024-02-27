@@ -15,12 +15,12 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(IpTagType))
+            if (IpTagType != null)
             {
                 writer.WritePropertyName("ipTagType"u8);
                 writer.WriteStringValue(IpTagType);
             }
-            if (Optional.IsDefined(Tag))
+            if (Tag != null)
             {
                 writer.WritePropertyName("tag"u8);
                 writer.WriteStringValue(Tag);

@@ -208,7 +208,10 @@ namespace MgmtScopeResource.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="template"/> is null. </exception>
         public virtual async Task<Response<TemplateHashResult>> CalculateTemplateHashDeploymentAsync(BinaryData template, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(template, nameof(template));
+            if (template == null)
+            {
+                throw new ArgumentNullException(nameof(template));
+            }
 
             using var scope = DeploymentExtendedDeploymentsClientDiagnostics.CreateScope("MockableMgmtScopeResourceTenantResource.CalculateTemplateHashDeployment");
             scope.Start();
@@ -250,7 +253,10 @@ namespace MgmtScopeResource.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="template"/> is null. </exception>
         public virtual Response<TemplateHashResult> CalculateTemplateHashDeployment(BinaryData template, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(template, nameof(template));
+            if (template == null)
+            {
+                throw new ArgumentNullException(nameof(template));
+            }
 
             using var scope = DeploymentExtendedDeploymentsClientDiagnostics.CreateScope("MockableMgmtScopeResourceTenantResource.CalculateTemplateHashDeployment");
             scope.Start();

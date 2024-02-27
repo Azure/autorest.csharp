@@ -28,17 +28,17 @@ namespace MgmtDiscriminator.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Order))
+            if (Order.HasValue)
             {
                 writer.WritePropertyName("order"u8);
                 writer.WriteNumberValue(Order.Value);
             }
-            if (Optional.IsDefined(Conditions))
+            if (Conditions != null)
             {
                 writer.WritePropertyName("conditions"u8);
                 writer.WriteObjectValue(Conditions);
             }
-            if (Optional.IsCollectionDefined(Actions))
+            if (!(Actions is ChangeTrackingList<DeliveryRuleAction> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("actions"u8);
                 writer.WriteStartArray();
@@ -48,7 +48,7 @@ namespace MgmtDiscriminator.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(ExtraMappingInfo))
+            if (!(ExtraMappingInfo is ChangeTrackingDictionary<string, DeliveryRuleAction> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("extraMappingInfo"u8);
                 writer.WriteStartObject();
@@ -59,12 +59,12 @@ namespace MgmtDiscriminator.Models
                 }
                 writer.WriteEndObject();
             }
-            if (Optional.IsDefined(Pet))
+            if (Pet != null)
             {
                 writer.WritePropertyName("pet"u8);
                 writer.WriteObjectValue(Pet);
             }
-            if (options.Format != "W" && Optional.IsDefined(Foo))
+            if (options.Format != "W" && Foo != null)
             {
                 writer.WritePropertyName("foo"u8);
                 writer.WriteStringValue(Foo);
@@ -109,8 +109,8 @@ namespace MgmtDiscriminator.Models
             }
             Optional<int> order = default;
             Optional<DeliveryRuleCondition> conditions = default;
-            Optional<IList<DeliveryRuleAction>> actions = default;
-            Optional<IDictionary<string, DeliveryRuleAction>> extraMappingInfo = default;
+            IList<DeliveryRuleAction> actions = default;
+            IDictionary<string, DeliveryRuleAction> extraMappingInfo = default;
             Optional<Pet> pet = default;
             Optional<string> foo = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
@@ -132,7 +132,7 @@ namespace MgmtDiscriminator.Models
                     {
                         continue;
                     }
-                    conditions = DeliveryRuleCondition.DeserializeDeliveryRuleCondition(property.Value);
+                    conditions = DeliveryRuleCondition.DeserializeDeliveryRuleCondition(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("actions"u8))
@@ -144,7 +144,7 @@ namespace MgmtDiscriminator.Models
                     List<DeliveryRuleAction> array = new List<DeliveryRuleAction>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DeliveryRuleAction.DeserializeDeliveryRuleAction(item));
+                        array.Add(DeliveryRuleAction.DeserializeDeliveryRuleAction(item, options));
                     }
                     actions = array;
                     continue;
@@ -158,7 +158,7 @@ namespace MgmtDiscriminator.Models
                     Dictionary<string, DeliveryRuleAction> dictionary = new Dictionary<string, DeliveryRuleAction>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        dictionary.Add(property0.Name, DeliveryRuleAction.DeserializeDeliveryRuleAction(property0.Value));
+                        dictionary.Add(property0.Name, DeliveryRuleAction.DeserializeDeliveryRuleAction(property0.Value, options));
                     }
                     extraMappingInfo = dictionary;
                     continue;
@@ -169,7 +169,7 @@ namespace MgmtDiscriminator.Models
                     {
                         continue;
                     }
-                    pet = Pet.DeserializePet(property.Value);
+                    pet = Pet.DeserializePet(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("foo"u8))
@@ -183,7 +183,14 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DeliveryRuleProperties(Optional.ToNullable(order), conditions.Value, Optional.ToList(actions), Optional.ToDictionary(extraMappingInfo), pet.Value, foo.Value, serializedAdditionalRawData);
+            return new DeliveryRuleProperties(
+                Optional.ToNullable(order),
+                conditions.Value,
+                actions ?? new ChangeTrackingList<DeliveryRuleAction>(),
+                extraMappingInfo ?? new ChangeTrackingDictionary<string, DeliveryRuleAction>(),
+                pet.Value,
+                foo.Value,
+                serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -191,19 +198,19 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Order))
+            if (Order.HasValue)
             {
                 builder.Append("  order:");
                 builder.AppendLine($" {Order.Value}");
             }
 
-            if (Optional.IsDefined(Conditions))
+            if (Conditions != null)
             {
                 builder.Append("  conditions:");
                 AppendChildObject(builder, Conditions, options, 2, false);
             }
 
-            if (Optional.IsCollectionDefined(Actions))
+            if (!(Actions is ChangeTrackingList<DeliveryRuleAction> collection && collection.IsUndefined))
             {
                 if (Actions.Any())
                 {
@@ -217,7 +224,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            if (Optional.IsCollectionDefined(ExtraMappingInfo))
+            if (!(ExtraMappingInfo is ChangeTrackingDictionary<string, DeliveryRuleAction> collection0 && collection0.IsUndefined))
             {
                 if (ExtraMappingInfo.Any())
                 {
@@ -232,13 +239,13 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            if (Optional.IsDefined(Pet))
+            if (Pet != null)
             {
                 builder.Append("  pet:");
                 AppendChildObject(builder, Pet, options, 2, false);
             }
 
-            if (Optional.IsDefined(Foo))
+            if (Foo != null)
             {
                 builder.Append("  foo:");
                 if (Foo.Contains(Environment.NewLine))

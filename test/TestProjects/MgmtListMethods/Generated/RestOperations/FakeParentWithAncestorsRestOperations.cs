@@ -71,10 +71,34 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="fakeName"/> or <paramref name="fakeParentWithAncestorName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<FakeParentWithAncestorData>> CreateOrUpdateAsync(string subscriptionId, string fakeName, string fakeParentWithAncestorName, FakeParentWithAncestorData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
-            Argument.AssertNotNullOrEmpty(fakeParentWithAncestorName, nameof(fakeParentWithAncestorName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (fakeName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeName));
+            }
+            if (fakeName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(fakeName));
+            }
+            if (fakeParentWithAncestorName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeParentWithAncestorName));
+            }
+            if (fakeParentWithAncestorName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(fakeParentWithAncestorName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var message = CreateCreateOrUpdateRequest(subscriptionId, fakeName, fakeParentWithAncestorName, data);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -102,10 +126,34 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="fakeName"/> or <paramref name="fakeParentWithAncestorName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<FakeParentWithAncestorData> CreateOrUpdate(string subscriptionId, string fakeName, string fakeParentWithAncestorName, FakeParentWithAncestorData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
-            Argument.AssertNotNullOrEmpty(fakeParentWithAncestorName, nameof(fakeParentWithAncestorName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (fakeName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeName));
+            }
+            if (fakeName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(fakeName));
+            }
+            if (fakeParentWithAncestorName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeParentWithAncestorName));
+            }
+            if (fakeParentWithAncestorName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(fakeParentWithAncestorName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var message = CreateCreateOrUpdateRequest(subscriptionId, fakeName, fakeParentWithAncestorName, data);
             _pipeline.Send(message, cancellationToken);
@@ -152,9 +200,30 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="fakeName"/> or <paramref name="fakeParentWithAncestorName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<FakeParentWithAncestorData>> GetAsync(string subscriptionId, string fakeName, string fakeParentWithAncestorName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
-            Argument.AssertNotNullOrEmpty(fakeParentWithAncestorName, nameof(fakeParentWithAncestorName));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (fakeName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeName));
+            }
+            if (fakeName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(fakeName));
+            }
+            if (fakeParentWithAncestorName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeParentWithAncestorName));
+            }
+            if (fakeParentWithAncestorName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(fakeParentWithAncestorName));
+            }
 
             using var message = CreateGetRequest(subscriptionId, fakeName, fakeParentWithAncestorName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -183,9 +252,30 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="fakeName"/> or <paramref name="fakeParentWithAncestorName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<FakeParentWithAncestorData> Get(string subscriptionId, string fakeName, string fakeParentWithAncestorName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
-            Argument.AssertNotNullOrEmpty(fakeParentWithAncestorName, nameof(fakeParentWithAncestorName));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (fakeName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeName));
+            }
+            if (fakeName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(fakeName));
+            }
+            if (fakeParentWithAncestorName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeParentWithAncestorName));
+            }
+            if (fakeParentWithAncestorName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(fakeParentWithAncestorName));
+            }
 
             using var message = CreateGetRequest(subscriptionId, fakeName, fakeParentWithAncestorName);
             _pipeline.Send(message, cancellationToken);
@@ -232,8 +322,22 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="fakeName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<FakeParentWithAncestorListResult>> ListAsync(string subscriptionId, string fakeName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (fakeName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeName));
+            }
+            if (fakeName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(fakeName));
+            }
 
             using var message = CreateListRequest(subscriptionId, fakeName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -259,8 +363,22 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="fakeName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<FakeParentWithAncestorListResult> List(string subscriptionId, string fakeName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (fakeName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeName));
+            }
+            if (fakeName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(fakeName));
+            }
 
             using var message = CreateListRequest(subscriptionId, fakeName);
             _pipeline.Send(message, cancellationToken);
@@ -302,7 +420,14 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<FakeParentWithAncestorListResult>> ListBySubscriptionAsync(string subscriptionId, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
 
             using var message = CreateListBySubscriptionRequest(subscriptionId);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -327,7 +452,14 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<FakeParentWithAncestorListResult> ListBySubscription(string subscriptionId, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
 
             using var message = CreateListBySubscriptionRequest(subscriptionId);
             _pipeline.Send(message, cancellationToken);
@@ -368,9 +500,26 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="fakeName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<FakeParentWithAncestorListResult>> ListNextPageAsync(string nextLink, string subscriptionId, string fakeName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(nextLink, nameof(nextLink));
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (fakeName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeName));
+            }
+            if (fakeName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(fakeName));
+            }
 
             using var message = CreateListNextPageRequest(nextLink, subscriptionId, fakeName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -397,9 +546,26 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="fakeName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<FakeParentWithAncestorListResult> ListNextPage(string nextLink, string subscriptionId, string fakeName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(nextLink, nameof(nextLink));
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
+            if (fakeName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeName));
+            }
+            if (fakeName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(fakeName));
+            }
 
             using var message = CreateListNextPageRequest(nextLink, subscriptionId, fakeName);
             _pipeline.Send(message, cancellationToken);
@@ -439,8 +605,18 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<FakeParentWithAncestorListResult>> ListBySubscriptionNextPageAsync(string nextLink, string subscriptionId, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(nextLink, nameof(nextLink));
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
 
             using var message = CreateListBySubscriptionNextPageRequest(nextLink, subscriptionId);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -466,8 +642,18 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<FakeParentWithAncestorListResult> ListBySubscriptionNextPage(string nextLink, string subscriptionId, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(nextLink, nameof(nextLink));
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (subscriptionId.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
+            }
 
             using var message = CreateListBySubscriptionNextPageRequest(nextLink, subscriptionId);
             _pipeline.Send(message, cancellationToken);

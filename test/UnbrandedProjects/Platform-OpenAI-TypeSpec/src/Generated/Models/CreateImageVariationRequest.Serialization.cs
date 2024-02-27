@@ -25,7 +25,7 @@ namespace OpenAI.Models
             writer.WriteStartObject();
             writer.WritePropertyName("image"u8);
             writer.WriteBase64StringValue(Image.ToArray(), "D");
-            if (OptionalProperty.IsDefined(N))
+            if (N.HasValue)
             {
                 if (N != null)
                 {
@@ -37,17 +37,17 @@ namespace OpenAI.Models
                     writer.WriteNull("n");
                 }
             }
-            if (OptionalProperty.IsDefined(Size))
+            if (Size.HasValue)
             {
                 writer.WritePropertyName("size"u8);
                 writer.WriteStringValue(Size.Value.ToString());
             }
-            if (OptionalProperty.IsDefined(ResponseFormat))
+            if (ResponseFormat.HasValue)
             {
                 writer.WritePropertyName("response_format"u8);
                 writer.WriteStringValue(ResponseFormat.Value.ToString());
             }
-            if (OptionalProperty.IsDefined(User))
+            if (User != null)
             {
                 writer.WritePropertyName("user"u8);
                 writer.WriteStringValue(User);
@@ -143,7 +143,13 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new CreateImageVariationRequest(image, OptionalProperty.ToNullable(n), OptionalProperty.ToNullable(size), OptionalProperty.ToNullable(responseFormat), user.Value, serializedAdditionalRawData);
+            return new CreateImageVariationRequest(
+                image,
+                OptionalProperty.ToNullable(n),
+                OptionalProperty.ToNullable(size),
+                OptionalProperty.ToNullable(responseFormat),
+                user.Value,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<CreateImageVariationRequest>.Write(ModelReaderWriterOptions options)

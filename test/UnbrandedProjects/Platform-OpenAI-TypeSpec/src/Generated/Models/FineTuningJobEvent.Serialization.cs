@@ -111,7 +111,13 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new FineTuningJobEvent(id, @object, createdAt, level, message, serializedAdditionalRawData);
+            return new FineTuningJobEvent(
+                id,
+                @object,
+                createdAt,
+                level,
+                message,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<FineTuningJobEvent>.Write(ModelReaderWriterOptions options)

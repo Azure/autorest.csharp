@@ -15,24 +15,24 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(LinkedResourceType))
+            if (LinkedResourceType != null)
             {
                 writer.WritePropertyName("linkedResourceType"u8);
                 writer.WriteStringValue(LinkedResourceType);
             }
-            if (Optional.IsDefined(Link))
+            if (Link != null)
             {
                 writer.WritePropertyName("link"u8);
                 writer.WriteStringValue(Link);
@@ -108,7 +108,14 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new ResourceNavigationLink(id.Value, name.Value, etag.Value, type.Value, linkedResourceType.Value, link.Value, Optional.ToNullable(provisioningState));
+            return new ResourceNavigationLink(
+                id.Value,
+                name.Value,
+                etag.Value,
+                type.Value,
+                linkedResourceType.Value,
+                link.Value,
+                Optional.ToNullable(provisioningState));
         }
     }
 }

@@ -194,7 +194,10 @@ namespace MgmtSupersetInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<SupersetModel7Resource>> UpdateAsync(WaitUntil waitUntil, SupersetModel7Data data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(data, nameof(data));
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _supersetModel7ClientDiagnostics.CreateScope("SupersetModel7Resource.Update");
             scope.Start();
@@ -239,7 +242,10 @@ namespace MgmtSupersetInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<SupersetModel7Resource> Update(WaitUntil waitUntil, SupersetModel7Data data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(data, nameof(data));
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _supersetModel7ClientDiagnostics.CreateScope("SupersetModel7Resource.Update");
             scope.Start();
