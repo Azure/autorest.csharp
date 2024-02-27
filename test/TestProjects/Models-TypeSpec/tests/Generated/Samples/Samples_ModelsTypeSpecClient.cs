@@ -1863,18 +1863,6 @@ new CollectionItem(new Dictionary<string, RecordItem>
 default
 })
 })
-<<<<<<< HEAD
-            }, new Dictionary<string, int>
-            {
-                ["key"] = 1234
-            }, new Dictionary<string, string>
-            {
-                ["key"] = "<requiredStringRecord>"
-            }, new Dictionary<string, RecordItem>
-            {
-                ["key"] = default
-            }, BinaryData.FromObjectAsJson(new object()), new byte[] { 123 }, BinaryData.FromObjectAsJson(new object()), new sbyte[] { 123 }, new int[] { 1234 }, new string[] { "<requiredNullableStringList>" });
-=======
             },
                 new Dictionary<string, int>
                 {
@@ -1889,12 +1877,11 @@ default
                     ["key"] = default
                 },
                 BinaryData.FromObjectAsJson(new object()),
-                new int[] { 1234 },
+                new byte[] { 123 },
                 BinaryData.FromObjectAsJson(new object()),
-                new int[] { 1234 },
+                new sbyte[] { 123 },
                 new int[] { 1234 },
                 new string[] { "<requiredNullableStringList>" });
->>>>>>> fd80da346309aeffad326ac47b7cf50bb5d968bb
             Response<OutputModel> response = client.RoundTripToOutput(input);
         }
 
@@ -1923,18 +1910,6 @@ new CollectionItem(new Dictionary<string, RecordItem>
 default
 })
 })
-<<<<<<< HEAD
-            }, new Dictionary<string, int>
-            {
-                ["key"] = 1234
-            }, new Dictionary<string, string>
-            {
-                ["key"] = "<requiredStringRecord>"
-            }, new Dictionary<string, RecordItem>
-            {
-                ["key"] = default
-            }, BinaryData.FromObjectAsJson(new object()), new byte[] { 123 }, BinaryData.FromObjectAsJson(new object()), new sbyte[] { 123 }, new int[] { 1234 }, new string[] { "<requiredNullableStringList>" });
-=======
             },
                 new Dictionary<string, int>
                 {
@@ -1949,12 +1924,11 @@ default
                     ["key"] = default
                 },
                 BinaryData.FromObjectAsJson(new object()),
-                new int[] { 1234 },
+                new byte[] { 123 },
                 BinaryData.FromObjectAsJson(new object()),
-                new int[] { 1234 },
+                new sbyte[] { 123 },
                 new int[] { 1234 },
                 new string[] { "<requiredNullableStringList>" });
->>>>>>> fd80da346309aeffad326ac47b7cf50bb5d968bb
             Response<OutputModel> response = await client.RoundTripToOutputAsync(input);
         }
 
@@ -2178,18 +2152,6 @@ new CollectionItem(new Dictionary<string, RecordItem>
 default
 })
 })
-<<<<<<< HEAD
-            }, new Dictionary<string, int>
-            {
-                ["key"] = 1234
-            }, new Dictionary<string, string>
-            {
-                ["key"] = "<requiredStringRecord>"
-            }, new Dictionary<string, RecordItem>
-            {
-                ["key"] = default
-            }, BinaryData.FromObjectAsJson(new object()), new byte[] { 123 }, BinaryData.FromObjectAsJson(new object()), new sbyte[] { 123 }, new int[] { 1234 }, new string[] { "<requiredNullableStringList>" })
-=======
             },
                 new Dictionary<string, int>
                 {
@@ -2204,12 +2166,11 @@ default
                     ["key"] = default
                 },
                 BinaryData.FromObjectAsJson(new object()),
-                new int[] { 1234 },
+                new byte[] { 123 },
                 BinaryData.FromObjectAsJson(new object()),
-                new int[] { 1234 },
+                new sbyte[] { 123 },
                 new int[] { 1234 },
                 new string[] { "<requiredNullableStringList>" })
->>>>>>> fd80da346309aeffad326ac47b7cf50bb5d968bb
             {
                 NonRequiredString = "<nonRequiredString>",
                 NonRequiredInt = 1234,
@@ -2253,18 +2214,6 @@ new CollectionItem(new Dictionary<string, RecordItem>
 default
 })
 })
-<<<<<<< HEAD
-            }, new Dictionary<string, int>
-            {
-                ["key"] = 1234
-            }, new Dictionary<string, string>
-            {
-                ["key"] = "<requiredStringRecord>"
-            }, new Dictionary<string, RecordItem>
-            {
-                ["key"] = default
-            }, BinaryData.FromObjectAsJson(new object()), new byte[] { 123 }, BinaryData.FromObjectAsJson(new object()), new sbyte[] { 123 }, new int[] { 1234 }, new string[] { "<requiredNullableStringList>" })
-=======
             },
                 new Dictionary<string, int>
                 {
@@ -2279,12 +2228,11 @@ default
                     ["key"] = default
                 },
                 BinaryData.FromObjectAsJson(new object()),
-                new int[] { 1234 },
+                new byte[] { 123 },
                 BinaryData.FromObjectAsJson(new object()),
-                new int[] { 1234 },
+                new sbyte[] { 123 },
                 new int[] { 1234 },
                 new string[] { "<requiredNullableStringList>" })
->>>>>>> fd80da346309aeffad326ac47b7cf50bb5d968bb
             {
                 NonRequiredString = "<nonRequiredString>",
                 NonRequiredInt = 1234,

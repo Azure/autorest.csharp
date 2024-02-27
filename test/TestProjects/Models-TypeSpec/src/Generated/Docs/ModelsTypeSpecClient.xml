@@ -1650,17 +1650,13 @@ new Dictionary<string, string>
 new Dictionary<string, RecordItem>
 {
     ["key"] = default
-<<<<<<< HEAD
-}, BinaryData.FromObjectAsJson(new object()), new byte[] { 123 }, BinaryData.FromObjectAsJson(new object()), new sbyte[] { 123 }, new int[] { 1234 }, new string[] { "<requiredNullableStringList>" });
-=======
 },
 BinaryData.FromObjectAsJson(new object()),
-new int[] { 1234 },
+new byte[] { 123 },
 BinaryData.FromObjectAsJson(new object()),
-new int[] { 1234 },
+new sbyte[] { 123 },
 new int[] { 1234 },
 new string[] { "<requiredNullableStringList>" });
->>>>>>> fd80da346309aeffad326ac47b7cf50bb5d968bb
 Response<OutputModel> response = await client.RoundTripToOutputAsync(input);
 ]]></code>
 This sample shows how to call RoundTripToOutputAsync with all parameters.
@@ -1701,17 +1697,13 @@ new Dictionary<string, string>
 new Dictionary<string, RecordItem>
 {
     ["key"] = default
-<<<<<<< HEAD
-}, BinaryData.FromObjectAsJson(new object()), new byte[] { 123 }, BinaryData.FromObjectAsJson(new object()), new sbyte[] { 123 }, new int[] { 1234 }, new string[] { "<requiredNullableStringList>" })
-=======
 },
 BinaryData.FromObjectAsJson(new object()),
-new int[] { 1234 },
+new byte[] { 123 },
 BinaryData.FromObjectAsJson(new object()),
-new int[] { 1234 },
+new sbyte[] { 123 },
 new int[] { 1234 },
 new string[] { "<requiredNullableStringList>" })
->>>>>>> fd80da346309aeffad326ac47b7cf50bb5d968bb
 {
     NonRequiredString = "<nonRequiredString>",
     NonRequiredInt = 1234,
@@ -1764,17 +1756,13 @@ new Dictionary<string, string>
 new Dictionary<string, RecordItem>
 {
     ["key"] = default
-<<<<<<< HEAD
-}, BinaryData.FromObjectAsJson(new object()), new byte[] { 123 }, BinaryData.FromObjectAsJson(new object()), new sbyte[] { 123 }, new int[] { 1234 }, new string[] { "<requiredNullableStringList>" });
-=======
 },
 BinaryData.FromObjectAsJson(new object()),
-new int[] { 1234 },
+new byte[] { 123 },
 BinaryData.FromObjectAsJson(new object()),
-new int[] { 1234 },
+new sbyte[] { 123 },
 new int[] { 1234 },
 new string[] { "<requiredNullableStringList>" });
->>>>>>> fd80da346309aeffad326ac47b7cf50bb5d968bb
 Response<OutputModel> response = client.RoundTripToOutput(input);
 ]]></code>
 This sample shows how to call RoundTripToOutput with all parameters.
@@ -1815,17 +1803,13 @@ new Dictionary<string, string>
 new Dictionary<string, RecordItem>
 {
     ["key"] = default
-<<<<<<< HEAD
-}, BinaryData.FromObjectAsJson(new object()), new byte[] { 123 }, BinaryData.FromObjectAsJson(new object()), new sbyte[] { 123 }, new int[] { 1234 }, new string[] { "<requiredNullableStringList>" })
-=======
 },
 BinaryData.FromObjectAsJson(new object()),
-new int[] { 1234 },
+new byte[] { 123 },
 BinaryData.FromObjectAsJson(new object()),
-new int[] { 1234 },
+new sbyte[] { 123 },
 new int[] { 1234 },
 new string[] { "<requiredNullableStringList>" })
->>>>>>> fd80da346309aeffad326ac47b7cf50bb5d968bb
 {
     NonRequiredString = "<nonRequiredString>",
     NonRequiredInt = 1234,

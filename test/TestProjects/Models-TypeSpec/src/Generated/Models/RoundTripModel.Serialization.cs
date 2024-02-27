@@ -146,7 +146,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteNumberValue(item);
             }
             writer.WriteEndArray();
-            if (!(OptionalUint8Array is ChangeTrackingList<int> collection && collection.IsUndefined))
+            if (!(OptionalUint8Array is ChangeTrackingList<byte> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("optionalUint8Array"u8);
                 writer.WriteStartArray();
@@ -184,7 +184,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteNumberValue(item);
             }
             writer.WriteEndArray();
-            if (!(OptionalInt8Array is ChangeTrackingList<int> collection0 && collection0.IsUndefined))
+            if (!(OptionalInt8Array is ChangeTrackingList<sbyte> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("optionalInt8Array"u8);
                 writer.WriteStartArray();
@@ -314,21 +314,12 @@ namespace ModelsTypeSpec.Models
             IDictionary<string, RecordItem> requiredModelRecord = default;
             BinaryData requiredBytes = default;
             Optional<BinaryData> optionalBytes = default;
-<<<<<<< HEAD
             IList<byte> requiredUint8Array = default;
-            Optional<IList<byte>> optionalUint8Array = default;
+            IList<byte> optionalUint8Array = default;
             BinaryData requiredUnknown = default;
             Optional<BinaryData> optionalUnknown = default;
             IList<sbyte> requiredInt8Array = default;
-            Optional<IList<sbyte>> optionalInt8Array = default;
-=======
-            IList<int> requiredUint8Array = default;
-            IList<int> optionalUint8Array = default;
-            BinaryData requiredUnknown = default;
-            Optional<BinaryData> optionalUnknown = default;
-            IList<int> requiredInt8Array = default;
-            IList<int> optionalInt8Array = default;
->>>>>>> fd80da346309aeffad326ac47b7cf50bb5d968bb
+            IList<sbyte> optionalInt8Array = default;
             IList<int> requiredNullableIntList = default;
             IList<string> requiredNullableStringList = default;
             IList<int> nonRequiredNullableIntList = default;
@@ -638,11 +629,11 @@ namespace ModelsTypeSpec.Models
                 requiredBytes,
                 optionalBytes.Value,
                 requiredUint8Array,
-                optionalUint8Array ?? new ChangeTrackingList<int>(),
+                optionalUint8Array ?? new ChangeTrackingList<byte>(),
                 requiredUnknown,
                 optionalUnknown.Value,
                 requiredInt8Array,
-                optionalInt8Array ?? new ChangeTrackingList<int>(),
+                optionalInt8Array ?? new ChangeTrackingList<sbyte>(),
                 requiredNullableIntList,
                 requiredNullableStringList,
                 nonRequiredNullableIntList ?? new ChangeTrackingList<int>(),
