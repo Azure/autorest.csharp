@@ -905,8 +905,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
             {
                 if (jsonProperty.ValueSerialization is { } valueSerialization)
                 {
+                    var type = jsonProperty.SerializedType is not null && TypeFactory.IsCollectionType(jsonProperty.SerializedType)
+                        ? jsonProperty.SerializedType
+                        : valueSerialization.Type;
                     var propertyDeclaration = new CodeWriterDeclaration(jsonProperty.SerializedName.ToVariableName());
-                    propertyVariables.Add(jsonProperty, new VariableReference(valueSerialization.Type, propertyDeclaration));
+                    propertyVariables.Add(jsonProperty, new VariableReference(type, propertyDeclaration));
                 }
                 else if (jsonProperty.PropertySerializations != null)
                 {
@@ -1107,7 +1110,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
             else if (!jsonPropertySerialization.IsRequired)
             {
-                return InvokeOptional.FallBackToChangeTrackingCollection(variable);
+                return InvokeOptional.FallBackToChangeTrackingCollection(variable, jsonPropertySerialization.SerializedType);
             }
 
             return variable;
