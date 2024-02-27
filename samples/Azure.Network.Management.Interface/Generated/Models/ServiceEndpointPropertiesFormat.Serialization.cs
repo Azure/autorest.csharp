@@ -40,9 +40,9 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> service = default;
+            string service = default;
             IList<string> locations = default;
-            Optional<ProvisioningState> provisioningState = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("service"u8))
@@ -74,7 +74,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new ServiceEndpointPropertiesFormat(service.Value, locations ?? new ChangeTrackingList<string>(), Optional.ToNullable(provisioningState));
+            return new ServiceEndpointPropertiesFormat(service, locations ?? new ChangeTrackingList<string>(), provisioningState);
         }
     }
 }

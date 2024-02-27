@@ -19,7 +19,7 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<string> name = default;
+            string name = default;
             IReadOnlyList<DiskEncryptionSettings> encryptionSettings = default;
             IReadOnlyList<InstanceViewStatus> statuses = default;
             foreach (var property in element.EnumerateObject())
@@ -58,7 +58,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new DiskInstanceView(name.Value, encryptionSettings ?? new ChangeTrackingList<DiskEncryptionSettings>(), statuses ?? new ChangeTrackingList<InstanceViewStatus>());
+            return new DiskInstanceView(name, encryptionSettings ?? new ChangeTrackingList<DiskEncryptionSettings>(), statuses ?? new ChangeTrackingList<InstanceViewStatus>());
         }
     }
 }

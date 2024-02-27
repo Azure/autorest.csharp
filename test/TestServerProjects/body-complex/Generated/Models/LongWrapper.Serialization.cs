@@ -74,8 +74,8 @@ namespace body_complex.Models
             {
                 return null;
             }
-            Optional<long> field1 = default;
-            Optional<long> field2 = default;
+            long? field1 = default;
+            long? field2 = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -104,7 +104,7 @@ namespace body_complex.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new LongWrapper(Optional.ToNullable(field1), Optional.ToNullable(field2), serializedAdditionalRawData);
+            return new LongWrapper(field1, field2, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<LongWrapper>.Write(ModelReaderWriterOptions options)

@@ -44,10 +44,10 @@ namespace MgmtSupersetInheritance.Models
             {
                 return null;
             }
-            Optional<string> id = default;
-            Optional<string> name = default;
-            Optional<string> type = default;
-            Optional<string> @new = default;
+            string id = default;
+            string name = default;
+            string type = default;
+            string @new = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("iD"u8))
@@ -71,7 +71,7 @@ namespace MgmtSupersetInheritance.Models
                     continue;
                 }
             }
-            return new SupersetModel2(id.Value, name.Value, type.Value, @new.Value);
+            return new SupersetModel2(id, name, type, @new);
         }
     }
 }

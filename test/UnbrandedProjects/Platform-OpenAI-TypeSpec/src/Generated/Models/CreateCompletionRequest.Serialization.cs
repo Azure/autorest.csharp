@@ -241,20 +241,20 @@ namespace OpenAI.Models
             }
             CreateCompletionRequestModel model = default;
             BinaryData prompt = default;
-            OptionalProperty<string> suffix = default;
-            OptionalProperty<double?> temperature = default;
-            OptionalProperty<double?> topP = default;
-            OptionalProperty<long?> n = default;
-            OptionalProperty<long?> maxTokens = default;
-            OptionalProperty<BinaryData> stop = default;
-            OptionalProperty<double?> presencePenalty = default;
-            OptionalProperty<double?> frequencyPenalty = default;
+            string suffix = default;
+            double? temperature = default;
+            double? topP = default;
+            long? n = default;
+            long? maxTokens = default;
+            BinaryData stop = default;
+            double? presencePenalty = default;
+            double? frequencyPenalty = default;
             IDictionary<string, long> logitBias = default;
-            OptionalProperty<string> user = default;
-            OptionalProperty<bool?> stream = default;
-            OptionalProperty<long?> logprobs = default;
-            OptionalProperty<bool?> echo = default;
-            OptionalProperty<long?> bestOf = default;
+            string user = default;
+            bool? stream = default;
+            long? logprobs = default;
+            bool? echo = default;
+            long? bestOf = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -416,20 +416,20 @@ namespace OpenAI.Models
             return new CreateCompletionRequest(
                 model,
                 prompt,
-                suffix.Value,
-                OptionalProperty.ToNullable(temperature),
-                OptionalProperty.ToNullable(topP),
-                OptionalProperty.ToNullable(n),
-                OptionalProperty.ToNullable(maxTokens),
-                stop.Value,
-                OptionalProperty.ToNullable(presencePenalty),
-                OptionalProperty.ToNullable(frequencyPenalty),
+                suffix,
+                temperature,
+                topP,
+                n,
+                maxTokens,
+                stop,
+                presencePenalty,
+                frequencyPenalty,
                 logitBias ?? new OptionalDictionary<string, long>(),
-                user.Value,
-                OptionalProperty.ToNullable(stream),
-                OptionalProperty.ToNullable(logprobs),
-                OptionalProperty.ToNullable(echo),
-                OptionalProperty.ToNullable(bestOf),
+                user,
+                stream,
+                logprobs,
+                echo,
+                bestOf,
                 serializedAdditionalRawData);
         }
 

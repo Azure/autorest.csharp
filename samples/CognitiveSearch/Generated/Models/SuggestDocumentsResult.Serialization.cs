@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
@@ -20,7 +19,7 @@ namespace CognitiveSearch.Models
                 return null;
             }
             IReadOnlyList<SuggestResult> value = default;
-            Optional<double> searchCoverage = default;
+            double? searchCoverage = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -43,7 +42,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new SuggestDocumentsResult(value, Optional.ToNullable(searchCoverage));
+            return new SuggestDocumentsResult(value, searchCoverage);
         }
     }
 }

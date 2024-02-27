@@ -77,7 +77,7 @@ namespace _Type.Property.Optionality.Models
             {
                 return null;
             }
-            Optional<BinaryData> property = default;
+            BinaryData property = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property0 in element.EnumerateObject())
@@ -97,7 +97,7 @@ namespace _Type.Property.Optionality.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new UnionIntLiteralProperty(property.Value, serializedAdditionalRawData);
+            return new UnionIntLiteralProperty(property, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<UnionIntLiteralProperty>.Write(ModelReaderWriterOptions options)

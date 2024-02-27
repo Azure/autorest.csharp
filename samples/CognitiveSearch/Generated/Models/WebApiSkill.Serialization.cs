@@ -106,14 +106,14 @@ namespace CognitiveSearch.Models
             }
             string uri = default;
             IDictionary<string, string> httpHeaders = default;
-            Optional<string> httpMethod = default;
-            Optional<TimeSpan> timeout = default;
-            Optional<int?> batchSize = default;
-            Optional<int?> degreeOfParallelism = default;
+            string httpMethod = default;
+            TimeSpan? timeout = default;
+            int? batchSize = default;
+            int? degreeOfParallelism = default;
             string odataType = default;
-            Optional<string> name = default;
-            Optional<string> description = default;
-            Optional<string> context = default;
+            string name = default;
+            string description = default;
+            string context = default;
             IList<InputFieldMappingEntry> inputs = default;
             IList<OutputFieldMappingEntry> outputs = default;
             foreach (var property in element.EnumerateObject())
@@ -214,17 +214,17 @@ namespace CognitiveSearch.Models
             }
             return new WebApiSkill(
                 odataType,
-                name.Value,
-                description.Value,
-                context.Value,
+                name,
+                description,
+                context,
                 inputs,
                 outputs,
                 uri,
                 httpHeaders ?? new ChangeTrackingDictionary<string, string>(),
-                httpMethod.Value,
-                Optional.ToNullable(timeout),
-                Optional.ToNullable(batchSize),
-                Optional.ToNullable(degreeOfParallelism));
+                httpMethod,
+                timeout,
+                batchSize,
+                degreeOfParallelism);
         }
     }
 }

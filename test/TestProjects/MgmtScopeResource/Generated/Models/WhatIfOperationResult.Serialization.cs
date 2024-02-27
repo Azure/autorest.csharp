@@ -19,8 +19,8 @@ namespace MgmtScopeResource.Models
             {
                 return null;
             }
-            Optional<string> status = default;
-            Optional<ErrorResponse> errorResponse = default;
+            string status = default;
+            ErrorResponse errorResponse = default;
             IReadOnlyList<WhatIfChange> changes = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -65,7 +65,7 @@ namespace MgmtScopeResource.Models
                     continue;
                 }
             }
-            return new WhatIfOperationResult(status.Value, errorResponse.Value, changes ?? new ChangeTrackingList<WhatIfChange>());
+            return new WhatIfOperationResult(status, errorResponse, changes ?? new ChangeTrackingList<WhatIfChange>());
         }
     }
 }

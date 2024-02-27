@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace MgmtHierarchicalNonResource.Models
 {
@@ -18,8 +17,8 @@ namespace MgmtHierarchicalNonResource.Models
             {
                 return null;
             }
-            Optional<ResourceRange> vCpus = default;
-            Optional<ResourceRange> memory = default;
+            ResourceRange vCpus = default;
+            ResourceRange memory = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("vCPUs"u8))
@@ -41,7 +40,7 @@ namespace MgmtHierarchicalNonResource.Models
                     continue;
                 }
             }
-            return new RecommendedMachineConfiguration(vCpus.Value, memory.Value);
+            return new RecommendedMachineConfiguration(vCpus, memory);
         }
     }
 }

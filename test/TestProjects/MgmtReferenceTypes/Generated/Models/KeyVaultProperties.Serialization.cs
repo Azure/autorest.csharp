@@ -37,8 +37,8 @@ namespace Azure.ResourceManager.Fake.Models
             {
                 return null;
             }
-            Optional<string> keyIdentifier = default;
-            Optional<string> identity = default;
+            string keyIdentifier = default;
+            string identity = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("keyIdentifier"u8))
@@ -52,7 +52,7 @@ namespace Azure.ResourceManager.Fake.Models
                     continue;
                 }
             }
-            return new KeyVaultProperties(keyIdentifier.Value, identity.Value);
+            return new KeyVaultProperties(keyIdentifier, identity);
         }
 
         internal partial class KeyVaultPropertiesConverter : JsonConverter<KeyVaultProperties>

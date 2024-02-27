@@ -31,11 +31,11 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<string> schema = default;
-            Optional<string> contentVersion = default;
-            Optional<BinaryData> parameters = default;
+            string schema = default;
+            string contentVersion = default;
+            BinaryData parameters = default;
             IReadOnlyList<BinaryData> resources = default;
-            Optional<string> id = default;
+            string id = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("$schema"u8))
@@ -84,7 +84,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineCaptureResult(id.Value, schema.Value, contentVersion.Value, parameters.Value, resources ?? new ChangeTrackingList<BinaryData>());
+            return new VirtualMachineCaptureResult(id, schema, contentVersion, parameters, resources ?? new ChangeTrackingList<BinaryData>());
         }
     }
 }

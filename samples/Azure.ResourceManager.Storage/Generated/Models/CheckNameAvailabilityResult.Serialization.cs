@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace Azure.ResourceManager.Storage.Models
 {
@@ -18,9 +17,9 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Optional<bool> nameAvailable = default;
-            Optional<Reason> reason = default;
-            Optional<string> message = default;
+            bool? nameAvailable = default;
+            Reason? reason = default;
+            string message = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("nameAvailable"u8))
@@ -47,7 +46,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new CheckNameAvailabilityResult(Optional.ToNullable(nameAvailable), Optional.ToNullable(reason), message.Value);
+            return new CheckNameAvailabilityResult(nameAvailable, reason, message);
         }
     }
 }

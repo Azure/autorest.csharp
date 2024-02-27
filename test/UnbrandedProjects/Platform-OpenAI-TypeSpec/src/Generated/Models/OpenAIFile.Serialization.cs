@@ -94,7 +94,7 @@ namespace OpenAI.Models
             string filename = default;
             string purpose = default;
             OpenAIFileStatus status = default;
-            OptionalProperty<string> statusDetails = default;
+            string statusDetails = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -158,7 +158,7 @@ namespace OpenAI.Models
                 filename,
                 purpose,
                 status,
-                statusDetails.Value,
+                statusDetails,
                 serializedAdditionalRawData);
         }
 

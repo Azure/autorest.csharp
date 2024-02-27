@@ -200,30 +200,30 @@ namespace Azure.ResourceManager.Sample
             {
                 return null;
             }
-            Optional<SampleSku> sku = default;
-            Optional<SamplePlan> plan = default;
-            Optional<ManagedServiceIdentity> identity = default;
+            SampleSku sku = default;
+            SamplePlan plan = default;
+            ManagedServiceIdentity identity = default;
             IList<string> zones = default;
             IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
-            Optional<UpgradePolicy> upgradePolicy = default;
-            Optional<AutomaticRepairsPolicy> automaticRepairsPolicy = default;
-            Optional<VirtualMachineScaleSetVmProfile> virtualMachineProfile = default;
-            Optional<string> provisioningState = default;
-            Optional<bool> overprovision = default;
-            Optional<bool> doNotRunExtensionsOnOverprovisionedVms = default;
-            Optional<string> uniqueId = default;
-            Optional<bool> singlePlacementGroup = default;
-            Optional<bool> zoneBalance = default;
-            Optional<int> platformFaultDomainCount = default;
-            Optional<WritableSubResource> proximityPlacementGroup = default;
-            Optional<WritableSubResource> hostGroup = default;
-            Optional<AdditionalCapabilities> additionalCapabilities = default;
-            Optional<ScaleInPolicy> scaleInPolicy = default;
+            SystemData systemData = default;
+            UpgradePolicy upgradePolicy = default;
+            AutomaticRepairsPolicy automaticRepairsPolicy = default;
+            VirtualMachineScaleSetVmProfile virtualMachineProfile = default;
+            string provisioningState = default;
+            bool? overprovision = default;
+            bool? doNotRunExtensionsOnOverprovisionedVms = default;
+            string uniqueId = default;
+            bool? singlePlacementGroup = default;
+            bool? zoneBalance = default;
+            int? platformFaultDomainCount = default;
+            WritableSubResource proximityPlacementGroup = default;
+            WritableSubResource hostGroup = default;
+            AdditionalCapabilities additionalCapabilities = default;
+            ScaleInPolicy scaleInPolicy = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -452,27 +452,27 @@ namespace Azure.ResourceManager.Sample
                 id,
                 name,
                 type,
-                systemData.Value,
+                systemData,
                 tags ?? new ChangeTrackingDictionary<string, string>(),
                 location,
-                sku.Value,
-                plan.Value,
+                sku,
+                plan,
                 identity,
                 zones ?? new ChangeTrackingList<string>(),
-                upgradePolicy.Value,
-                automaticRepairsPolicy.Value,
-                virtualMachineProfile.Value,
-                provisioningState.Value,
-                Optional.ToNullable(overprovision),
-                Optional.ToNullable(doNotRunExtensionsOnOverprovisionedVms),
-                uniqueId.Value,
-                Optional.ToNullable(singlePlacementGroup),
-                Optional.ToNullable(zoneBalance),
-                Optional.ToNullable(platformFaultDomainCount),
+                upgradePolicy,
+                automaticRepairsPolicy,
+                virtualMachineProfile,
+                provisioningState,
+                overprovision,
+                doNotRunExtensionsOnOverprovisionedVms,
+                uniqueId,
+                singlePlacementGroup,
+                zoneBalance,
+                platformFaultDomainCount,
                 proximityPlacementGroup,
                 hostGroup,
-                additionalCapabilities.Value,
-                scaleInPolicy.Value,
+                additionalCapabilities,
+                scaleInPolicy,
                 serializedAdditionalRawData);
         }
 

@@ -129,11 +129,11 @@ namespace Azure.ResourceManager.Sample
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
-            Optional<RollingUpgradePolicy> policy = default;
-            Optional<RollingUpgradeRunningStatus> runningStatus = default;
-            Optional<RollingUpgradeProgressInfo> progress = default;
-            Optional<ApiError> error = default;
+            SystemData systemData = default;
+            RollingUpgradePolicy policy = default;
+            RollingUpgradeRunningStatus runningStatus = default;
+            RollingUpgradeProgressInfo progress = default;
+            ApiError error = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -239,13 +239,13 @@ namespace Azure.ResourceManager.Sample
                 id,
                 name,
                 type,
-                systemData.Value,
+                systemData,
                 tags ?? new ChangeTrackingDictionary<string, string>(),
                 location,
-                policy.Value,
-                runningStatus.Value,
-                progress.Value,
-                error.Value,
+                policy,
+                runningStatus,
+                progress,
+                error,
                 serializedAdditionalRawData);
         }
 

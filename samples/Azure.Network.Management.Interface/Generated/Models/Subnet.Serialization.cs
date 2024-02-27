@@ -108,14 +108,14 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> etag = default;
-            Optional<string> id = default;
-            Optional<string> addressPrefix = default;
+            string name = default;
+            string etag = default;
+            string id = default;
+            string addressPrefix = default;
             IList<string> addressPrefixes = default;
-            Optional<NetworkSecurityGroup> networkSecurityGroup = default;
-            Optional<RouteTable> routeTable = default;
-            Optional<SubResource> natGateway = default;
+            NetworkSecurityGroup networkSecurityGroup = default;
+            RouteTable routeTable = default;
+            SubResource natGateway = default;
             IList<ServiceEndpointPropertiesFormat> serviceEndpoints = default;
             IList<ServiceEndpointPolicy> serviceEndpointPolicies = default;
             IReadOnlyList<PrivateEndpoint> privateEndpoints = default;
@@ -124,10 +124,10 @@ namespace Azure.Network.Management.Interface.Models
             IReadOnlyList<ResourceNavigationLink> resourceNavigationLinks = default;
             IReadOnlyList<ServiceAssociationLink> serviceAssociationLinks = default;
             IList<Delegation> delegations = default;
-            Optional<string> purpose = default;
-            Optional<ProvisioningState> provisioningState = default;
-            Optional<string> privateEndpointNetworkPolicies = default;
-            Optional<string> privateLinkServiceNetworkPolicies = default;
+            string purpose = default;
+            ProvisioningState? provisioningState = default;
+            string privateEndpointNetworkPolicies = default;
+            string privateLinkServiceNetworkPolicies = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -341,14 +341,14 @@ namespace Azure.Network.Management.Interface.Models
                 }
             }
             return new Subnet(
-                id.Value,
-                name.Value,
-                etag.Value,
-                addressPrefix.Value,
+                id,
+                name,
+                etag,
+                addressPrefix,
                 addressPrefixes ?? new ChangeTrackingList<string>(),
-                networkSecurityGroup.Value,
-                routeTable.Value,
-                natGateway.Value,
+                networkSecurityGroup,
+                routeTable,
+                natGateway,
                 serviceEndpoints ?? new ChangeTrackingList<ServiceEndpointPropertiesFormat>(),
                 serviceEndpointPolicies ?? new ChangeTrackingList<ServiceEndpointPolicy>(),
                 privateEndpoints ?? new ChangeTrackingList<PrivateEndpoint>(),
@@ -357,10 +357,10 @@ namespace Azure.Network.Management.Interface.Models
                 resourceNavigationLinks ?? new ChangeTrackingList<ResourceNavigationLink>(),
                 serviceAssociationLinks ?? new ChangeTrackingList<ServiceAssociationLink>(),
                 delegations ?? new ChangeTrackingList<Delegation>(),
-                purpose.Value,
-                Optional.ToNullable(provisioningState),
-                privateEndpointNetworkPolicies.Value,
-                privateLinkServiceNetworkPolicies.Value);
+                purpose,
+                provisioningState,
+                privateEndpointNetworkPolicies,
+                privateLinkServiceNetworkPolicies);
         }
     }
 }

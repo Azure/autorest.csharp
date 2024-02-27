@@ -62,21 +62,21 @@ namespace MgmtMockAndSample
             {
                 return null;
             }
-            Optional<ManagedServiceIdentity> identity = default;
-            Optional<AzureLocation> location = default;
+            ManagedServiceIdentity identity = default;
+            AzureLocation? location = default;
             IReadOnlyDictionary<string, string> tags = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
-            Optional<DiskEncryptionSetType> encryptionType = default;
-            Optional<KeyForDiskEncryptionSet> activeKey = default;
+            SystemData systemData = default;
+            DiskEncryptionSetType? encryptionType = default;
+            KeyForDiskEncryptionSet activeKey = default;
             IReadOnlyList<KeyForDiskEncryptionSet> previousKeys = default;
-            Optional<string> provisioningState = default;
-            Optional<bool> rotationToLatestKeyVersionEnabled = default;
-            Optional<DateTimeOffset> lastKeyRotationTimestamp = default;
-            Optional<string> federatedClientId = default;
-            Optional<MinimumTlsVersion> minimumTlsVersion = default;
+            string provisioningState = default;
+            bool? rotationToLatestKeyVersionEnabled = default;
+            DateTimeOffset? lastKeyRotationTimestamp = default;
+            string federatedClientId = default;
+            MinimumTlsVersion? minimumTlsVersion = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("identity"u8))
@@ -222,17 +222,17 @@ namespace MgmtMockAndSample
                 id,
                 name,
                 type,
-                systemData.Value,
+                systemData,
                 identity,
-                Optional.ToNullable(encryptionType),
-                activeKey.Value,
+                encryptionType,
+                activeKey,
                 previousKeys ?? new ChangeTrackingList<KeyForDiskEncryptionSet>(),
-                provisioningState.Value,
-                Optional.ToNullable(rotationToLatestKeyVersionEnabled),
-                Optional.ToNullable(lastKeyRotationTimestamp),
-                federatedClientId.Value,
-                Optional.ToNullable(minimumTlsVersion),
-                Optional.ToNullable(location),
+                provisioningState,
+                rotationToLatestKeyVersionEnabled,
+                lastKeyRotationTimestamp,
+                federatedClientId,
+                minimumTlsVersion,
+                location,
                 tags ?? new ChangeTrackingDictionary<string, string>());
         }
     }

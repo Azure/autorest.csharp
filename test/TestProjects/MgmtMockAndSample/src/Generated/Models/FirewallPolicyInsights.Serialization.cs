@@ -39,9 +39,9 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<bool> isEnabled = default;
-            Optional<int> retentionDays = default;
-            Optional<FirewallPolicyLogAnalyticsResources> logAnalyticsResources = default;
+            bool? isEnabled = default;
+            int? retentionDays = default;
+            FirewallPolicyLogAnalyticsResources logAnalyticsResources = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("isEnabled"u8))
@@ -72,7 +72,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new FirewallPolicyInsights(Optional.ToNullable(isEnabled), Optional.ToNullable(retentionDays), logAnalyticsResources.Value);
+            return new FirewallPolicyInsights(isEnabled, retentionDays, logAnalyticsResources);
         }
     }
 }

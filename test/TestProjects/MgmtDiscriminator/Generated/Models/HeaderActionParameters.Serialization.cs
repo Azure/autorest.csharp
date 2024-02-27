@@ -79,7 +79,7 @@ namespace MgmtDiscriminator.Models
             HeaderActionParametersTypeName typeName = default;
             HeaderAction headerAction = default;
             string headerName = default;
-            Optional<string> value = default;
+            string value = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -110,7 +110,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new HeaderActionParameters(typeName, headerAction, headerName, value.Value, serializedAdditionalRawData);
+            return new HeaderActionParameters(typeName, headerAction, headerName, value, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

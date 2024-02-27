@@ -98,11 +98,11 @@ namespace model_flattening.Models
                 return null;
             }
             string baseProductId = default;
-            Optional<string> baseProductDescription = default;
-            Optional<string> maxProductDisplayName = default;
-            Optional<SimpleProductPropertiesMaxProductCapacity> maxProductCapacity = default;
-            Optional<string> genericValue = default;
-            Optional<string> odataValue = default;
+            string baseProductDescription = default;
+            string maxProductDisplayName = default;
+            SimpleProductPropertiesMaxProductCapacity? maxProductCapacity = default;
+            string genericValue = default;
+            string odataValue = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -173,12 +173,12 @@ namespace model_flattening.Models
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new SimpleProduct(
                 baseProductId,
-                baseProductDescription.Value,
+                baseProductDescription,
                 serializedAdditionalRawData,
-                maxProductDisplayName.Value,
-                Optional.ToNullable(maxProductCapacity),
-                genericValue.Value,
-                odataValue.Value);
+                maxProductDisplayName,
+                maxProductCapacity,
+                genericValue,
+                odataValue);
         }
 
         BinaryData IPersistableModel<SimpleProduct>.Write(ModelReaderWriterOptions options)

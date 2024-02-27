@@ -21,7 +21,7 @@ namespace MgmtNoTypeReplacement.Models
                 return null;
             }
             IReadOnlyList<NoTypeReplacementModel2Data> value = default;
-            Optional<string> nextLink = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -44,7 +44,7 @@ namespace MgmtNoTypeReplacement.Models
                     continue;
                 }
             }
-            return new NoTypeReplacementModel2ListResult(value ?? new ChangeTrackingList<NoTypeReplacementModel2Data>(), nextLink.Value);
+            return new NoTypeReplacementModel2ListResult(value ?? new ChangeTrackingList<NoTypeReplacementModel2Data>(), nextLink);
         }
     }
 }

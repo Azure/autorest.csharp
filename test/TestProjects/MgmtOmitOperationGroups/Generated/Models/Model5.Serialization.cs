@@ -40,8 +40,8 @@ namespace MgmtOmitOperationGroups.Models
             {
                 return null;
             }
-            Optional<string> id = default;
-            Optional<string> k = default;
+            string id = default;
+            string k = default;
             IList<ModelQ> modelqs = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -70,7 +70,7 @@ namespace MgmtOmitOperationGroups.Models
                     continue;
                 }
             }
-            return new Model5(id.Value, k.Value, modelqs ?? new ChangeTrackingList<ModelQ>());
+            return new Model5(id, k, modelqs ?? new ChangeTrackingList<ModelQ>());
         }
     }
 }

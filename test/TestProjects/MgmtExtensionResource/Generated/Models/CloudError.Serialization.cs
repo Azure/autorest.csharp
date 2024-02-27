@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace MgmtExtensionResource.Models
 {
@@ -18,7 +17,7 @@ namespace MgmtExtensionResource.Models
             {
                 return null;
             }
-            Optional<ErrorResponse> error = default;
+            ErrorResponse error = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("error"u8))
@@ -31,7 +30,7 @@ namespace MgmtExtensionResource.Models
                     continue;
                 }
             }
-            return new CloudError(error.Value);
+            return new CloudError(error);
         }
     }
 }

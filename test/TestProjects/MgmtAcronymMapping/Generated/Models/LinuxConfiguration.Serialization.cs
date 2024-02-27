@@ -39,9 +39,9 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<bool> disablePasswordAuthentication = default;
-            Optional<SshConfiguration> ssh = default;
-            Optional<bool> provisionVmAgent = default;
+            bool? disablePasswordAuthentication = default;
+            SshConfiguration ssh = default;
+            bool? provisionVmAgent = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("disablePasswordAuthentication"u8))
@@ -72,7 +72,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new LinuxConfiguration(Optional.ToNullable(disablePasswordAuthentication), ssh.Value, Optional.ToNullable(provisionVmAgent));
+            return new LinuxConfiguration(disablePasswordAuthentication, ssh, provisionVmAgent);
         }
     }
 }

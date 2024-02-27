@@ -101,7 +101,7 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<VirtualMachineScaleSetInstanceViewStatusesSummary> virtualMachine = default;
+            VirtualMachineScaleSetInstanceViewStatusesSummary virtualMachine = default;
             IReadOnlyList<VirtualMachineScaleSetVmExtensionsSummary> extensions = default;
             IReadOnlyList<InstanceViewStatus> statuses = default;
             IReadOnlyList<OrchestrationServiceSummary> orchestrationServices = default;
@@ -166,7 +166,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineScaleSetInstanceView(virtualMachine.Value, extensions ?? new ChangeTrackingList<VirtualMachineScaleSetVmExtensionsSummary>(), statuses ?? new ChangeTrackingList<InstanceViewStatus>(), orchestrationServices ?? new ChangeTrackingList<OrchestrationServiceSummary>(), serializedAdditionalRawData);
+            return new VirtualMachineScaleSetInstanceView(virtualMachine, extensions ?? new ChangeTrackingList<VirtualMachineScaleSetVmExtensionsSummary>(), statuses ?? new ChangeTrackingList<InstanceViewStatus>(), orchestrationServices ?? new ChangeTrackingList<OrchestrationServiceSummary>(), serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

@@ -194,17 +194,17 @@ namespace OpenAI.Models
                 return null;
             }
             string trainingFile = default;
-            OptionalProperty<string> validationFile = default;
-            OptionalProperty<CreateFineTuneRequestModel> model = default;
-            OptionalProperty<long?> nEpochs = default;
-            OptionalProperty<long?> batchSize = default;
-            OptionalProperty<double?> learningRateMultiplier = default;
-            OptionalProperty<double?> promptLossRate = default;
-            OptionalProperty<bool?> computeClassificationMetrics = default;
-            OptionalProperty<long?> classificationNClasses = default;
-            OptionalProperty<string> classificationPositiveClass = default;
+            string validationFile = default;
+            CreateFineTuneRequestModel? model = default;
+            long? nEpochs = default;
+            long? batchSize = default;
+            double? learningRateMultiplier = default;
+            double? promptLossRate = default;
+            bool? computeClassificationMetrics = default;
+            long? classificationNClasses = default;
+            string classificationPositiveClass = default;
             IList<double> classificationBetas = default;
-            OptionalProperty<string> suffix = default;
+            string suffix = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -335,17 +335,17 @@ namespace OpenAI.Models
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new CreateFineTuneRequest(
                 trainingFile,
-                validationFile.Value,
-                OptionalProperty.ToNullable(model),
-                OptionalProperty.ToNullable(nEpochs),
-                OptionalProperty.ToNullable(batchSize),
-                OptionalProperty.ToNullable(learningRateMultiplier),
-                OptionalProperty.ToNullable(promptLossRate),
-                OptionalProperty.ToNullable(computeClassificationMetrics),
-                OptionalProperty.ToNullable(classificationNClasses),
-                classificationPositiveClass.Value,
+                validationFile,
+                model,
+                nEpochs,
+                batchSize,
+                learningRateMultiplier,
+                promptLossRate,
+                computeClassificationMetrics,
+                classificationNClasses,
+                classificationPositiveClass,
                 classificationBetas ?? new OptionalList<double>(),
-                suffix.Value,
+                suffix,
                 serializedAdditionalRawData);
         }
 

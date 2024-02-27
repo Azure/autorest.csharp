@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
@@ -19,7 +18,7 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            Optional<double> searchCoverage = default;
+            double? searchCoverage = default;
             IReadOnlyList<AutocompleteItem> value = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -43,7 +42,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new AutocompleteResult(Optional.ToNullable(searchCoverage), value);
+            return new AutocompleteResult(searchCoverage, value);
         }
     }
 }

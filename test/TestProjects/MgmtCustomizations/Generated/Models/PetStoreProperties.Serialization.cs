@@ -34,8 +34,8 @@ namespace MgmtCustomizations.Models
             {
                 return null;
             }
-            Optional<int> order = default;
-            Optional<Pet> pet = default;
+            int? order = default;
+            Pet pet = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("order"u8))
@@ -57,7 +57,7 @@ namespace MgmtCustomizations.Models
                     continue;
                 }
             }
-            return new PetStoreProperties(Optional.ToNullable(order), pet.Value);
+            return new PetStoreProperties(order, pet);
         }
     }
 }

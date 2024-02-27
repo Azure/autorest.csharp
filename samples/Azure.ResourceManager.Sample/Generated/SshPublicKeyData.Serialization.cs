@@ -113,8 +113,8 @@ namespace Azure.ResourceManager.Sample
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
-            Optional<string> publicKey = default;
+            SystemData systemData = default;
+            string publicKey = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -189,10 +189,10 @@ namespace Azure.ResourceManager.Sample
                 id,
                 name,
                 type,
-                systemData.Value,
+                systemData,
                 tags ?? new ChangeTrackingDictionary<string, string>(),
                 location,
-                publicKey.Value,
+                publicKey,
                 serializedAdditionalRawData);
         }
 

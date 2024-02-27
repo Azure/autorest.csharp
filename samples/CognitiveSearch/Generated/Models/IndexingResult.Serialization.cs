@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
@@ -19,7 +18,7 @@ namespace CognitiveSearch.Models
                 return null;
             }
             string key = default;
-            Optional<string> errorMessage = default;
+            string errorMessage = default;
             bool status = default;
             int statusCode = default;
             foreach (var property in element.EnumerateObject())
@@ -45,7 +44,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new IndexingResult(key, errorMessage.Value, status, statusCode);
+            return new IndexingResult(key, errorMessage, status, statusCode);
         }
     }
 }

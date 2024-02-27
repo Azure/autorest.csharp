@@ -71,7 +71,7 @@ namespace OpenAI.Models
                 return null;
             }
             string name = default;
-            OptionalProperty<string> description = default;
+            string description = default;
             ChatCompletionFunctionParameters parameters = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -98,7 +98,7 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ChatCompletionFunctions(name, description.Value, parameters, serializedAdditionalRawData);
+            return new ChatCompletionFunctions(name, description, parameters, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ChatCompletionFunctions>.Write(ModelReaderWriterOptions options)

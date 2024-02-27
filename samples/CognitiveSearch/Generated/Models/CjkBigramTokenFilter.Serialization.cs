@@ -45,7 +45,7 @@ namespace CognitiveSearch.Models
                 return null;
             }
             IList<CjkBigramTokenFilterScripts> ignoreScripts = default;
-            Optional<bool> outputUnigrams = default;
+            bool? outputUnigrams = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
@@ -84,7 +84,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new CjkBigramTokenFilter(odataType, name, ignoreScripts ?? new ChangeTrackingList<CjkBigramTokenFilterScripts>(), Optional.ToNullable(outputUnigrams));
+            return new CjkBigramTokenFilter(odataType, name, ignoreScripts ?? new ChangeTrackingList<CjkBigramTokenFilterScripts>(), outputUnigrams);
         }
     }
 }

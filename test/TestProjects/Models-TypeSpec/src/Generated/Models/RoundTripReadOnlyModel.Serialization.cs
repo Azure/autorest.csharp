@@ -264,10 +264,10 @@ namespace ModelsTypeSpec.Models
             }
             string requiredReadonlyString = default;
             int requiredReadonlyInt = default;
-            Optional<string> optionalReadonlyString = default;
-            Optional<int> optionalReadonlyInt = default;
+            string optionalReadonlyString = default;
+            int? optionalReadonlyInt = default;
             DerivedModel requiredReadonlyModel = default;
-            Optional<DerivedModel> optionalReadonlyModel = default;
+            DerivedModel optionalReadonlyModel = default;
             FixedStringEnum requiredReadonlyFixedStringEnum = default;
             ExtensibleEnum requiredReadonlyExtensibleEnum = default;
             FixedStringEnum optionalReadonlyFixedStringEnum = default;
@@ -531,10 +531,10 @@ namespace ModelsTypeSpec.Models
             return new RoundTripReadOnlyModel(
                 requiredReadonlyString,
                 requiredReadonlyInt,
-                optionalReadonlyString.Value,
-                Optional.ToNullable(optionalReadonlyInt),
+                optionalReadonlyString,
+                optionalReadonlyInt,
                 requiredReadonlyModel,
-                optionalReadonlyModel.Value,
+                optionalReadonlyModel,
                 requiredReadonlyFixedStringEnum,
                 requiredReadonlyExtensibleEnum,
                 optionalReadonlyFixedStringEnum,

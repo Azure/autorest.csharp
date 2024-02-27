@@ -50,12 +50,12 @@ namespace MgmtCustomizations.Models
             {
                 return null;
             }
-            Optional<string> jump = default;
+            string jump = default;
             PetKind kind = default;
-            Optional<string> name = default;
-            Optional<int> size = default;
-            Optional<DateTimeOffset> dateOfBirth = default;
-            Optional<string> bark = default;
+            string name = default;
+            int size = default;
+            DateTimeOffset? dateOfBirth = default;
+            string bark = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("jump"u8))
@@ -119,11 +119,11 @@ namespace MgmtCustomizations.Models
             }
             return new Dog(
                 kind,
-                name.Value,
+                name,
                 size,
-                Optional.ToNullable(dateOfBirth),
-                bark.Value,
-                jump.Value);
+                dateOfBirth,
+                bark,
+                jump);
         }
     }
 }

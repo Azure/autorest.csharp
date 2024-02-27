@@ -37,7 +37,7 @@ namespace MgmtScopeResource.Models
             {
                 return null;
             }
-            Optional<BinaryData> value = default;
+            BinaryData value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -50,7 +50,7 @@ namespace MgmtScopeResource.Models
                     continue;
                 }
             }
-            return new ParameterValuesValue(value.Value);
+            return new ParameterValuesValue(value);
         }
     }
 }

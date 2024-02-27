@@ -70,7 +70,7 @@ namespace ModelsTypeSpec.Models
             {
                 return null;
             }
-            Optional<string> optionalPropertyOnBase = default;
+            string optionalPropertyOnBase = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -86,7 +86,7 @@ namespace ModelsTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new BaseModelWithProperties(optionalPropertyOnBase.Value, serializedAdditionalRawData);
+            return new BaseModelWithProperties(optionalPropertyOnBase, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<BaseModelWithProperties>.Write(ModelReaderWriterOptions options)

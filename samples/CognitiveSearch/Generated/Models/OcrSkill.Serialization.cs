@@ -71,13 +71,13 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            Optional<TextExtractionAlgorithm> textExtractionAlgorithm = default;
-            Optional<OcrSkillLanguage> defaultLanguageCode = default;
-            Optional<bool> detectOrientation = default;
+            TextExtractionAlgorithm? textExtractionAlgorithm = default;
+            OcrSkillLanguage? defaultLanguageCode = default;
+            bool? detectOrientation = default;
             string odataType = default;
-            Optional<string> name = default;
-            Optional<string> description = default;
-            Optional<string> context = default;
+            string name = default;
+            string description = default;
+            string context = default;
             IList<InputFieldMappingEntry> inputs = default;
             IList<OutputFieldMappingEntry> outputs = default;
             foreach (var property in element.EnumerateObject())
@@ -152,14 +152,14 @@ namespace CognitiveSearch.Models
             }
             return new OcrSkill(
                 odataType,
-                name.Value,
-                description.Value,
-                context.Value,
+                name,
+                description,
+                context,
                 inputs,
                 outputs,
-                Optional.ToNullable(textExtractionAlgorithm),
-                Optional.ToNullable(defaultLanguageCode),
-                Optional.ToNullable(detectOrientation));
+                textExtractionAlgorithm,
+                defaultLanguageCode,
+                detectOrientation);
         }
     }
 }

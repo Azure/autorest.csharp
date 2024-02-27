@@ -44,13 +44,13 @@ namespace MgmtCustomizations.Models
             {
                 return null;
             }
-            Optional<string> sleep = default;
-            Optional<string> jump = default;
-            Optional<string> meow = default;
+            string sleep = default;
+            string jump = default;
+            string meow = default;
             PetKind kind = default;
-            Optional<string> name = default;
-            Optional<int> size = default;
-            Optional<DateTimeOffset> dateOfBirth = default;
+            string name = default;
+            int size = default;
+            DateTimeOffset? dateOfBirth = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sleep"u8))
@@ -95,12 +95,12 @@ namespace MgmtCustomizations.Models
             }
             return new Cat(
                 kind,
-                name.Value,
+                name,
                 size,
-                Optional.ToNullable(dateOfBirth),
-                sleep.Value,
-                jump.Value,
-                meow.Value);
+                dateOfBirth,
+                sleep,
+                jump,
+                meow);
         }
     }
 }

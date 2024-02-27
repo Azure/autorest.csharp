@@ -139,10 +139,10 @@ namespace UnbrandedTypeSpec.Models
             ThingRequiredLiteralInt requiredLiteralInt = default;
             ThingRequiredLiteralFloat requiredLiteralFloat = default;
             bool requiredLiteralBool = default;
-            OptionalProperty<ThingOptionalLiteralString> optionalLiteralString = default;
-            OptionalProperty<ThingOptionalLiteralInt> optionalLiteralInt = default;
-            OptionalProperty<ThingOptionalLiteralFloat> optionalLiteralFloat = default;
-            OptionalProperty<bool> optionalLiteralBool = default;
+            ThingOptionalLiteralString? optionalLiteralString = default;
+            ThingOptionalLiteralInt? optionalLiteralInt = default;
+            ThingOptionalLiteralFloat? optionalLiteralFloat = default;
+            bool? optionalLiteralBool = default;
             string requiredBadDescription = default;
             IList<int> optionalNullableList = default;
             IList<int> requiredNullableList = default;
@@ -264,10 +264,10 @@ namespace UnbrandedTypeSpec.Models
                 requiredLiteralInt,
                 requiredLiteralFloat,
                 requiredLiteralBool,
-                OptionalProperty.ToNullable(optionalLiteralString),
-                OptionalProperty.ToNullable(optionalLiteralInt),
-                OptionalProperty.ToNullable(optionalLiteralFloat),
-                OptionalProperty.ToNullable(optionalLiteralBool),
+                optionalLiteralString,
+                optionalLiteralInt,
+                optionalLiteralFloat,
+                optionalLiteralBool,
                 requiredBadDescription,
                 optionalNullableList ?? new OptionalList<int>(),
                 requiredNullableList,

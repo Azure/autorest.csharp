@@ -53,8 +53,8 @@ namespace MgmtMockAndSample.Models
                 return null;
             }
             IList<string> servers = default;
-            Optional<bool> enableProxy = default;
-            Optional<bool?> requireProxyForNetworkRules = default;
+            bool? enableProxy = default;
+            bool? requireProxyForNetworkRules = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("servers"u8))
@@ -91,7 +91,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new DnsSettings(servers ?? new ChangeTrackingList<string>(), Optional.ToNullable(enableProxy), Optional.ToNullable(requireProxyForNetworkRules));
+            return new DnsSettings(servers ?? new ChangeTrackingList<string>(), enableProxy, requireProxyForNetworkRules);
         }
     }
 }

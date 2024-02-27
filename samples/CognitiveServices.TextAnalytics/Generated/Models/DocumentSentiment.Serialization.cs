@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
@@ -21,7 +20,7 @@ namespace CognitiveServices.TextAnalytics.Models
             }
             string id = default;
             DocumentSentimentValue sentiment = default;
-            Optional<DocumentStatistics> statistics = default;
+            DocumentStatistics statistics = default;
             SentimentConfidenceScorePerLabel confidenceScores = default;
             IReadOnlyList<SentenceSentiment> sentences = default;
             IReadOnlyList<TextAnalyticsWarning> warnings = default;
@@ -75,7 +74,7 @@ namespace CognitiveServices.TextAnalytics.Models
             return new DocumentSentiment(
                 id,
                 sentiment,
-                statistics.Value,
+                statistics,
                 confidenceScores,
                 sentences,
                 warnings);

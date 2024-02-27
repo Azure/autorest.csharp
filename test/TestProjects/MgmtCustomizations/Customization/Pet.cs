@@ -27,7 +27,7 @@ namespace MgmtCustomizations.Models
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static void DeserializeSizeProperty(JsonProperty property, ref Optional<int> size)
+        internal static void DeserializeSizeProperty(JsonProperty property, ref int size)
         {
             if (property.Value.ValueKind == JsonValueKind.Null)
             {

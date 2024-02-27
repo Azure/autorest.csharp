@@ -92,22 +92,22 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> etag = default;
-            Optional<string> type = default;
-            Optional<string> id = default;
-            Optional<SubResource> frontendIPConfiguration = default;
-            Optional<SubResource> backendAddressPool = default;
-            Optional<SubResource> probe = default;
-            Optional<TransportProtocol> protocol = default;
-            Optional<LoadDistribution> loadDistribution = default;
-            Optional<int> frontendPort = default;
-            Optional<int> backendPort = default;
-            Optional<int> idleTimeoutInMinutes = default;
-            Optional<bool> enableFloatingIP = default;
-            Optional<bool> enableTcpReset = default;
-            Optional<bool> disableOutboundSnat = default;
-            Optional<ProvisioningState> provisioningState = default;
+            string name = default;
+            string etag = default;
+            string type = default;
+            string id = default;
+            SubResource frontendIPConfiguration = default;
+            SubResource backendAddressPool = default;
+            SubResource probe = default;
+            TransportProtocol? protocol = default;
+            LoadDistribution? loadDistribution = default;
+            int? frontendPort = default;
+            int? backendPort = default;
+            int? idleTimeoutInMinutes = default;
+            bool? enableFloatingIP = default;
+            bool? enableTcpReset = default;
+            bool? disableOutboundSnat = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -252,22 +252,22 @@ namespace Azure.Network.Management.Interface.Models
                 }
             }
             return new LoadBalancingRule(
-                id.Value,
-                name.Value,
-                etag.Value,
-                type.Value,
-                frontendIPConfiguration.Value,
-                backendAddressPool.Value,
-                probe.Value,
-                Optional.ToNullable(protocol),
-                Optional.ToNullable(loadDistribution),
-                Optional.ToNullable(frontendPort),
-                Optional.ToNullable(backendPort),
-                Optional.ToNullable(idleTimeoutInMinutes),
-                Optional.ToNullable(enableFloatingIP),
-                Optional.ToNullable(enableTcpReset),
-                Optional.ToNullable(disableOutboundSnat),
-                Optional.ToNullable(provisioningState));
+                id,
+                name,
+                etag,
+                type,
+                frontendIPConfiguration,
+                backendAddressPool,
+                probe,
+                protocol,
+                loadDistribution,
+                frontendPort,
+                backendPort,
+                idleTimeoutInMinutes,
+                enableFloatingIP,
+                enableTcpReset,
+                disableOutboundSnat,
+                provisioningState);
         }
     }
 }

@@ -144,33 +144,33 @@ namespace MgmtAcronymMapping
             {
                 return null;
             }
-            Optional<MgmtAcronymMappingSku> sku = default;
-            Optional<MgmtAcronymMappingPlan> plan = default;
-            Optional<ManagedServiceIdentity> identity = default;
+            MgmtAcronymMappingSku sku = default;
+            MgmtAcronymMappingPlan plan = default;
+            ManagedServiceIdentity identity = default;
             IList<string> zones = default;
             IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
-            Optional<string> ipsecSomething = default;
-            Optional<string> testIPsec = default;
-            Optional<string> p2sServer = default;
-            Optional<UpgradePolicy> upgradePolicy = default;
-            Optional<AutomaticRepairsPolicy> automaticRepairsPolicy = default;
-            Optional<VirtualMachineScaleSetVmProfile> virtualMachineProfile = default;
-            Optional<string> provisioningState = default;
-            Optional<bool> overprovision = default;
-            Optional<bool> doNotRunExtensionsOnOverprovisionedVms = default;
-            Optional<string> uniqueId = default;
-            Optional<bool> singlePlacementGroup = default;
-            Optional<bool> zoneBalance = default;
-            Optional<int> platformFaultDomainCount = default;
-            Optional<WritableSubResource> proximityPlacementGroup = default;
-            Optional<WritableSubResource> hostGroup = default;
-            Optional<AdditionalCapabilities> additionalCapabilities = default;
-            Optional<ScaleInPolicy> scaleInPolicy = default;
+            SystemData systemData = default;
+            string ipsecSomething = default;
+            string testIPsec = default;
+            string p2sServer = default;
+            UpgradePolicy upgradePolicy = default;
+            AutomaticRepairsPolicy automaticRepairsPolicy = default;
+            VirtualMachineScaleSetVmProfile virtualMachineProfile = default;
+            string provisioningState = default;
+            bool? overprovision = default;
+            bool? doNotRunExtensionsOnOverprovisionedVms = default;
+            string uniqueId = default;
+            bool? singlePlacementGroup = default;
+            bool? zoneBalance = default;
+            int? platformFaultDomainCount = default;
+            WritableSubResource proximityPlacementGroup = default;
+            WritableSubResource hostGroup = default;
+            AdditionalCapabilities additionalCapabilities = default;
+            ScaleInPolicy scaleInPolicy = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sku"u8))
@@ -407,30 +407,30 @@ namespace MgmtAcronymMapping
                 id,
                 name,
                 type,
-                systemData.Value,
+                systemData,
                 tags ?? new ChangeTrackingDictionary<string, string>(),
                 location,
-                sku.Value,
-                plan.Value,
+                sku,
+                plan,
                 identity,
                 zones ?? new ChangeTrackingList<string>(),
-                ipsecSomething.Value,
-                testIPsec.Value,
-                p2sServer.Value,
-                upgradePolicy.Value,
-                automaticRepairsPolicy.Value,
-                virtualMachineProfile.Value,
-                provisioningState.Value,
-                Optional.ToNullable(overprovision),
-                Optional.ToNullable(doNotRunExtensionsOnOverprovisionedVms),
-                uniqueId.Value,
-                Optional.ToNullable(singlePlacementGroup),
-                Optional.ToNullable(zoneBalance),
-                Optional.ToNullable(platformFaultDomainCount),
+                ipsecSomething,
+                testIPsec,
+                p2sServer,
+                upgradePolicy,
+                automaticRepairsPolicy,
+                virtualMachineProfile,
+                provisioningState,
+                overprovision,
+                doNotRunExtensionsOnOverprovisionedVms,
+                uniqueId,
+                singlePlacementGroup,
+                zoneBalance,
+                platformFaultDomainCount,
                 proximityPlacementGroup,
                 hostGroup,
-                additionalCapabilities.Value,
-                scaleInPolicy.Value);
+                additionalCapabilities,
+                scaleInPolicy);
         }
     }
 }

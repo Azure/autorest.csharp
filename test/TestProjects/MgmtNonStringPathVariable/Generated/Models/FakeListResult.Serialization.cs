@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 using MgmtNonStringPathVariable;
 
 namespace MgmtNonStringPathVariable.Models
@@ -21,7 +20,7 @@ namespace MgmtNonStringPathVariable.Models
                 return null;
             }
             IReadOnlyList<FakeData> value = default;
-            Optional<string> nextLink = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -40,7 +39,7 @@ namespace MgmtNonStringPathVariable.Models
                     continue;
                 }
             }
-            return new FakeListResult(value, nextLink.Value);
+            return new FakeListResult(value, nextLink);
         }
     }
 }

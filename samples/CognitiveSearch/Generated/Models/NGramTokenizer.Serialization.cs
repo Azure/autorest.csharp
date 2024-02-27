@@ -49,8 +49,8 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            Optional<int> minGram = default;
-            Optional<int> maxGram = default;
+            int? minGram = default;
+            int? maxGram = default;
             IList<TokenCharacterKind> tokenChars = default;
             string odataType = default;
             string name = default;
@@ -99,7 +99,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new NGramTokenizer(odataType, name, Optional.ToNullable(minGram), Optional.ToNullable(maxGram), tokenChars ?? new ChangeTrackingList<TokenCharacterKind>());
+            return new NGramTokenizer(odataType, name, minGram, maxGram, tokenChars ?? new ChangeTrackingList<TokenCharacterKind>());
         }
     }
 }

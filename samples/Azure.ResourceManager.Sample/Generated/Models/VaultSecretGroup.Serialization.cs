@@ -82,7 +82,7 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<WritableSubResource> sourceVault = default;
+            WritableSubResource sourceVault = default;
             IList<VaultCertificate> vaultCertificates = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();

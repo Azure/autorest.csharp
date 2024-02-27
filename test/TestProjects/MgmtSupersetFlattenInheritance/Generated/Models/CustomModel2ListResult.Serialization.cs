@@ -20,7 +20,7 @@ namespace MgmtSupersetFlattenInheritance.Models
                 return null;
             }
             IReadOnlyList<CustomModel2> value = default;
-            Optional<string> nextLink = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -43,7 +43,7 @@ namespace MgmtSupersetFlattenInheritance.Models
                     continue;
                 }
             }
-            return new CustomModel2ListResult(value ?? new ChangeTrackingList<CustomModel2>(), nextLink.Value);
+            return new CustomModel2ListResult(value ?? new ChangeTrackingList<CustomModel2>(), nextLink);
         }
     }
 }
