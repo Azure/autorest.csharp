@@ -144,7 +144,13 @@ namespace model_flattening.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Resource(id.Value, type.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location.Value, name.Value, serializedAdditionalRawData);
+            return new Resource(
+                id.Value,
+                type.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location.Value,
+                name.Value,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<Resource>.Write(ModelReaderWriterOptions options)

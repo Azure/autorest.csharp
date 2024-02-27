@@ -403,7 +403,34 @@ namespace MgmtAcronymMapping
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, sku.Value, plan.Value, identity, zones ?? new ChangeTrackingList<string>(), ipsecSomething.Value, testIPsec.Value, p2sServer.Value, upgradePolicy.Value, automaticRepairsPolicy.Value, virtualMachineProfile.Value, provisioningState.Value, Optional.ToNullable(overprovision), Optional.ToNullable(doNotRunExtensionsOnOverprovisionedVms), uniqueId.Value, Optional.ToNullable(singlePlacementGroup), Optional.ToNullable(zoneBalance), Optional.ToNullable(platformFaultDomainCount), proximityPlacementGroup, hostGroup, additionalCapabilities.Value, scaleInPolicy.Value);
+            return new VirtualMachineScaleSetData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                sku.Value,
+                plan.Value,
+                identity,
+                zones ?? new ChangeTrackingList<string>(),
+                ipsecSomething.Value,
+                testIPsec.Value,
+                p2sServer.Value,
+                upgradePolicy.Value,
+                automaticRepairsPolicy.Value,
+                virtualMachineProfile.Value,
+                provisioningState.Value,
+                Optional.ToNullable(overprovision),
+                Optional.ToNullable(doNotRunExtensionsOnOverprovisionedVms),
+                uniqueId.Value,
+                Optional.ToNullable(singlePlacementGroup),
+                Optional.ToNullable(zoneBalance),
+                Optional.ToNullable(platformFaultDomainCount),
+                proximityPlacementGroup,
+                hostGroup,
+                additionalCapabilities.Value,
+                scaleInPolicy.Value);
         }
     }
 }

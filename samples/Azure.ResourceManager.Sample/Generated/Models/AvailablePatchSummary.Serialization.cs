@@ -192,7 +192,16 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new AvailablePatchSummary(Optional.ToNullable(status), assessmentActivityId.Value, Optional.ToNullable(rebootPending), Optional.ToNullable(criticalAndSecurityPatchCount), Optional.ToNullable(otherPatchCount), Optional.ToNullable(startTime), Optional.ToNullable(lastModifiedTime), error.Value, serializedAdditionalRawData);
+            return new AvailablePatchSummary(
+                Optional.ToNullable(status),
+                assessmentActivityId.Value,
+                Optional.ToNullable(rebootPending),
+                Optional.ToNullable(criticalAndSecurityPatchCount),
+                Optional.ToNullable(otherPatchCount),
+                Optional.ToNullable(startTime),
+                Optional.ToNullable(lastModifiedTime),
+                error.Value,
+                serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

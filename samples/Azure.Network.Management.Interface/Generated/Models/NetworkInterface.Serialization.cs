@@ -277,7 +277,26 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new NetworkInterface(id.Value, name.Value, type.Value, location.Value, tags ?? new ChangeTrackingDictionary<string, string>(), etag.Value, virtualMachine.Value, networkSecurityGroup.Value, privateEndpoint.Value, ipConfigurations ?? new ChangeTrackingList<NetworkInterfaceIPConfiguration>(), tapConfigurations ?? new ChangeTrackingList<NetworkInterfaceTapConfiguration>(), dnsSettings.Value, macAddress.Value, Optional.ToNullable(primary), Optional.ToNullable(enableAcceleratedNetworking), Optional.ToNullable(enableIPForwarding), hostedWorkloads ?? new ChangeTrackingList<string>(), resourceGuid.Value, Optional.ToNullable(provisioningState));
+            return new NetworkInterface(
+                id.Value,
+                name.Value,
+                type.Value,
+                location.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                etag.Value,
+                virtualMachine.Value,
+                networkSecurityGroup.Value,
+                privateEndpoint.Value,
+                ipConfigurations ?? new ChangeTrackingList<NetworkInterfaceIPConfiguration>(),
+                tapConfigurations ?? new ChangeTrackingList<NetworkInterfaceTapConfiguration>(),
+                dnsSettings.Value,
+                macAddress.Value,
+                Optional.ToNullable(primary),
+                Optional.ToNullable(enableAcceleratedNetworking),
+                Optional.ToNullable(enableIPForwarding),
+                hostedWorkloads ?? new ChangeTrackingList<string>(),
+                resourceGuid.Value,
+                Optional.ToNullable(provisioningState));
         }
     }
 }

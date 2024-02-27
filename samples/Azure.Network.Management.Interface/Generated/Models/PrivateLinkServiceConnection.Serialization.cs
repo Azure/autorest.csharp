@@ -150,7 +150,16 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new PrivateLinkServiceConnection(id.Value, name.Value, type.Value, etag.Value, Optional.ToNullable(provisioningState), privateLinkServiceId.Value, groupIds ?? new ChangeTrackingList<string>(), requestMessage.Value, privateLinkServiceConnectionState.Value);
+            return new PrivateLinkServiceConnection(
+                id.Value,
+                name.Value,
+                type.Value,
+                etag.Value,
+                Optional.ToNullable(provisioningState),
+                privateLinkServiceId.Value,
+                groupIds ?? new ChangeTrackingList<string>(),
+                requestMessage.Value,
+                privateLinkServiceConnectionState.Value);
         }
     }
 }

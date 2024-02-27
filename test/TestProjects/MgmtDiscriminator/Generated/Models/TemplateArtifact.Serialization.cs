@@ -212,7 +212,16 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new TemplateArtifact(id, name, type, systemData.Value, kind, serializedAdditionalRawData, template, resourceGroup.Value, parameters);
+            return new TemplateArtifact(
+                id,
+                name,
+                type,
+                systemData.Value,
+                kind,
+                serializedAdditionalRawData,
+                template,
+                resourceGroup.Value,
+                parameters);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

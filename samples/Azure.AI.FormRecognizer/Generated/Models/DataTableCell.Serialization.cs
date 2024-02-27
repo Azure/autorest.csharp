@@ -112,7 +112,17 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            return new DataTableCell(rowIndex, columnIndex, Optional.ToNullable(rowSpan), Optional.ToNullable(columnSpan), text, boundingBox, confidence, elements ?? new ChangeTrackingList<string>(), Optional.ToNullable(isHeader), Optional.ToNullable(isFooter));
+            return new DataTableCell(
+                rowIndex,
+                columnIndex,
+                Optional.ToNullable(rowSpan),
+                Optional.ToNullable(columnSpan),
+                text,
+                boundingBox,
+                confidence,
+                elements ?? new ChangeTrackingList<string>(),
+                Optional.ToNullable(isHeader),
+                Optional.ToNullable(isFooter));
         }
     }
 }

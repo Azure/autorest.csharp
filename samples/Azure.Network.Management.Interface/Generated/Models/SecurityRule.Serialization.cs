@@ -347,7 +347,26 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new SecurityRule(id.Value, name.Value, etag.Value, description.Value, Optional.ToNullable(protocol), sourcePortRange.Value, destinationPortRange.Value, sourceAddressPrefix.Value, sourceAddressPrefixes ?? new ChangeTrackingList<string>(), sourceApplicationSecurityGroups ?? new ChangeTrackingList<ApplicationSecurityGroup>(), destinationAddressPrefix.Value, destinationAddressPrefixes ?? new ChangeTrackingList<string>(), destinationApplicationSecurityGroups ?? new ChangeTrackingList<ApplicationSecurityGroup>(), sourcePortRanges ?? new ChangeTrackingList<string>(), destinationPortRanges ?? new ChangeTrackingList<string>(), Optional.ToNullable(access), Optional.ToNullable(priority), Optional.ToNullable(direction), Optional.ToNullable(provisioningState));
+            return new SecurityRule(
+                id.Value,
+                name.Value,
+                etag.Value,
+                description.Value,
+                Optional.ToNullable(protocol),
+                sourcePortRange.Value,
+                destinationPortRange.Value,
+                sourceAddressPrefix.Value,
+                sourceAddressPrefixes ?? new ChangeTrackingList<string>(),
+                sourceApplicationSecurityGroups ?? new ChangeTrackingList<ApplicationSecurityGroup>(),
+                destinationAddressPrefix.Value,
+                destinationAddressPrefixes ?? new ChangeTrackingList<string>(),
+                destinationApplicationSecurityGroups ?? new ChangeTrackingList<ApplicationSecurityGroup>(),
+                sourcePortRanges ?? new ChangeTrackingList<string>(),
+                destinationPortRanges ?? new ChangeTrackingList<string>(),
+                Optional.ToNullable(access),
+                Optional.ToNullable(priority),
+                Optional.ToNullable(direction),
+                Optional.ToNullable(provisioningState));
         }
     }
 }

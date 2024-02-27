@@ -173,7 +173,13 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ImagePatch(tags ?? new ChangeTrackingDictionary<string, string>(), serializedAdditionalRawData, sourceVirtualMachine, storageProfile.Value, provisioningState.Value, Optional.ToNullable(hyperVGeneration));
+            return new ImagePatch(
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                serializedAdditionalRawData,
+                sourceVirtualMachine,
+                storageProfile.Value,
+                provisioningState.Value,
+                Optional.ToNullable(hyperVGeneration));
         }
 
         BinaryData IPersistableModel<ImagePatch>.Write(ModelReaderWriterOptions options)

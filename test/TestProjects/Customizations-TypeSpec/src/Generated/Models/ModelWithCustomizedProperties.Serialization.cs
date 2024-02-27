@@ -509,7 +509,28 @@ namespace CustomizationsInTsp.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ModelWithCustomizedProperties(propertyToMakeInternal, propertyToRename, propertyToMakeFloat, propertyToMakeInt, propertyToMakeDuration, propertyToMakeString, propertyToMakeJsonElement, propertyToField, badListName, badDictionaryName, badListOfListName, badListOfDictionaryName, vector, vectorOptional, vectorNullable, vectorOptionalNullable, vectorReadOnly, vectorOptionalReadOnly, vectorNullableReadOnly, vectorOptionalNullableReadOnly, serializedAdditionalRawData);
+            return new ModelWithCustomizedProperties(
+                propertyToMakeInternal,
+                propertyToRename,
+                propertyToMakeFloat,
+                propertyToMakeInt,
+                propertyToMakeDuration,
+                propertyToMakeString,
+                propertyToMakeJsonElement,
+                propertyToField,
+                badListName,
+                badDictionaryName,
+                badListOfListName,
+                badListOfDictionaryName,
+                vector,
+                vectorOptional,
+                vectorNullable,
+                vectorOptionalNullable,
+                vectorReadOnly,
+                vectorOptionalReadOnly,
+                vectorNullableReadOnly,
+                vectorOptionalNullableReadOnly,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ModelWithCustomizedProperties>.Write(ModelReaderWriterOptions options)

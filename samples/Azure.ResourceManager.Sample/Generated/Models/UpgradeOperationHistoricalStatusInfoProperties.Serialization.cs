@@ -166,7 +166,14 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new UpgradeOperationHistoricalStatusInfoProperties(runningStatus.Value, progress.Value, error.Value, Optional.ToNullable(startedBy), targetImageReference.Value, rollbackInfo.Value, serializedAdditionalRawData);
+            return new UpgradeOperationHistoricalStatusInfoProperties(
+                runningStatus.Value,
+                progress.Value,
+                error.Value,
+                Optional.ToNullable(startedBy),
+                targetImageReference.Value,
+                rollbackInfo.Value,
+                serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

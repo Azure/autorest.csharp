@@ -102,7 +102,14 @@ namespace MgmtSingletonResource
                     continue;
                 }
             }
-            return new ParentResourceData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, @new.Value);
+            return new ParentResourceData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                @new.Value);
         }
     }
 }

@@ -143,7 +143,16 @@ namespace MgmtExactMatchFlattenInheritance
                     continue;
                 }
             }
-            return new AzureResourceFlattenModel1Data(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, Optional.ToNullable(foo), foo0.Value, id0.Value);
+            return new AzureResourceFlattenModel1Data(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                Optional.ToNullable(foo),
+                foo0.Value,
+                id0.Value);
         }
     }
 }

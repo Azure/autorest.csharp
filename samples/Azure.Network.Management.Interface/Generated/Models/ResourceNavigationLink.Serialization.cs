@@ -109,7 +109,14 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new ResourceNavigationLink(id.Value, name.Value, etag.Value, type.Value, linkedResourceType.Value, link.Value, Optional.ToNullable(provisioningState));
+            return new ResourceNavigationLink(
+                id.Value,
+                name.Value,
+                etag.Value,
+                type.Value,
+                linkedResourceType.Value,
+                link.Value,
+                Optional.ToNullable(provisioningState));
         }
     }
 }

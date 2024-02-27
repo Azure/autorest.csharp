@@ -144,7 +144,16 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetDataDisk(name.Value, lun, Optional.ToNullable(caching), Optional.ToNullable(writeAcceleratorEnabled), createOption, Optional.ToNullable(diskSizeGB), managedDisk.Value, Optional.ToNullable(diskIOPSReadWrite), Optional.ToNullable(diskMBpsReadWrite));
+            return new VirtualMachineScaleSetDataDisk(
+                name.Value,
+                lun,
+                Optional.ToNullable(caching),
+                Optional.ToNullable(writeAcceleratorEnabled),
+                createOption,
+                Optional.ToNullable(diskSizeGB),
+                managedDisk.Value,
+                Optional.ToNullable(diskIOPSReadWrite),
+                Optional.ToNullable(diskMBpsReadWrite));
         }
     }
 }

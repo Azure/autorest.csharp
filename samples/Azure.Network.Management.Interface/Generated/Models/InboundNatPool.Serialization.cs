@@ -207,7 +207,20 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new InboundNatPool(id.Value, name.Value, etag.Value, type.Value, frontendIPConfiguration.Value, Optional.ToNullable(protocol), Optional.ToNullable(frontendPortRangeStart), Optional.ToNullable(frontendPortRangeEnd), Optional.ToNullable(backendPort), Optional.ToNullable(idleTimeoutInMinutes), Optional.ToNullable(enableFloatingIP), Optional.ToNullable(enableTcpReset), Optional.ToNullable(provisioningState));
+            return new InboundNatPool(
+                id.Value,
+                name.Value,
+                etag.Value,
+                type.Value,
+                frontendIPConfiguration.Value,
+                Optional.ToNullable(protocol),
+                Optional.ToNullable(frontendPortRangeStart),
+                Optional.ToNullable(frontendPortRangeEnd),
+                Optional.ToNullable(backendPort),
+                Optional.ToNullable(idleTimeoutInMinutes),
+                Optional.ToNullable(enableFloatingIP),
+                Optional.ToNullable(enableTcpReset),
+                Optional.ToNullable(provisioningState));
         }
     }
 }

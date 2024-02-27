@@ -160,7 +160,18 @@ namespace MgmtMockAndSample
                     continue;
                 }
             }
-            return new VirtualMachineExtensionImageData(id, name, type, systemData.Value, operatingSystem.Value, computeRole.Value, handlerSchema.Value, Optional.ToNullable(vmScaleSetEnabled), Optional.ToNullable(supportsMultipleExtensions), Optional.ToNullable(location), tags ?? new ChangeTrackingDictionary<string, string>());
+            return new VirtualMachineExtensionImageData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                operatingSystem.Value,
+                computeRole.Value,
+                handlerSchema.Value,
+                Optional.ToNullable(vmScaleSetEnabled),
+                Optional.ToNullable(supportsMultipleExtensions),
+                Optional.ToNullable(location),
+                tags ?? new ChangeTrackingDictionary<string, string>());
         }
     }
 }

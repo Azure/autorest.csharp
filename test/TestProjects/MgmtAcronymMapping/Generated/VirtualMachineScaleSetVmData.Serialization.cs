@@ -353,7 +353,33 @@ namespace MgmtAcronymMapping
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetVmData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, instanceId.Value, sku.Value, plan.Value, zones ?? new ChangeTrackingList<string>(), Optional.ToNullable(latestModelApplied), vmId.Value, instanceView.Value, hardwareProfile.Value, storageProfile.Value, additionalCapabilities.Value, osProfile.Value, securityProfile.Value, networkProfile.Value, networkProfileConfiguration.Value, diagnosticsProfile.Value, availabilitySet, provisioningState.Value, licenseType.Value, modelDefinitionApplied.Value, protectionPolicy.Value);
+            return new VirtualMachineScaleSetVmData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                instanceId.Value,
+                sku.Value,
+                plan.Value,
+                zones ?? new ChangeTrackingList<string>(),
+                Optional.ToNullable(latestModelApplied),
+                vmId.Value,
+                instanceView.Value,
+                hardwareProfile.Value,
+                storageProfile.Value,
+                additionalCapabilities.Value,
+                osProfile.Value,
+                securityProfile.Value,
+                networkProfile.Value,
+                networkProfileConfiguration.Value,
+                diagnosticsProfile.Value,
+                availabilitySet,
+                provisioningState.Value,
+                licenseType.Value,
+                modelDefinitionApplied.Value,
+                protectionPolicy.Value);
         }
     }
 }

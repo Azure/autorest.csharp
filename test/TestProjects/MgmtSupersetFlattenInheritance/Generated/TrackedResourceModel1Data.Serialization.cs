@@ -102,7 +102,14 @@ namespace MgmtSupersetFlattenInheritance
                     continue;
                 }
             }
-            return new TrackedResourceModel1Data(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, foo.Value);
+            return new TrackedResourceModel1Data(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                foo.Value);
         }
     }
 }

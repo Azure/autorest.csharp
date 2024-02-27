@@ -150,7 +150,16 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new OpenAIFile(id, @object, bytes, createdAt, filename, purpose, status, statusDetails.Value, serializedAdditionalRawData);
+            return new OpenAIFile(
+                id,
+                @object,
+                bytes,
+                createdAt,
+                filename,
+                purpose,
+                status,
+                statusDetails.Value,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<OpenAIFile>.Write(ModelReaderWriterOptions options)

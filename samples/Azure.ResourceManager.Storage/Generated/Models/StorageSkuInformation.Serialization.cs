@@ -103,7 +103,14 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new StorageSkuInformation(name, Optional.ToNullable(tier), Optional.ToNullable(resourceType), Optional.ToNullable(kind), locations ?? new ChangeTrackingList<string>(), capabilities ?? new ChangeTrackingList<SKUCapability>(), restrictions ?? new ChangeTrackingList<Restriction>());
+            return new StorageSkuInformation(
+                name,
+                Optional.ToNullable(tier),
+                Optional.ToNullable(resourceType),
+                Optional.ToNullable(kind),
+                locations ?? new ChangeTrackingList<string>(),
+                capabilities ?? new ChangeTrackingList<SKUCapability>(),
+                restrictions ?? new ChangeTrackingList<Restriction>());
         }
     }
 }

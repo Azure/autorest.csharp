@@ -540,7 +540,38 @@ namespace Azure.ResourceManager.Sample
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, plan.Value, resources ?? new ChangeTrackingList<VirtualMachineExtensionData>(), identity, zones ?? new ChangeTrackingList<string>(), hardwareProfile.Value, storageProfile.Value, additionalCapabilities.Value, osProfile.Value, networkProfile.Value, securityProfile.Value, diagnosticsProfile.Value, availabilitySet, virtualMachineScaleSet, proximityPlacementGroup, Optional.ToNullable(priority), Optional.ToNullable(evictionPolicy), billingProfile.Value, host, hostGroup, provisioningState.Value, instanceView.Value, licenseType.Value, vmId.Value, extensionsTimeBudget.Value, serializedAdditionalRawData);
+            return new VirtualMachineData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                plan.Value,
+                resources ?? new ChangeTrackingList<VirtualMachineExtensionData>(),
+                identity,
+                zones ?? new ChangeTrackingList<string>(),
+                hardwareProfile.Value,
+                storageProfile.Value,
+                additionalCapabilities.Value,
+                osProfile.Value,
+                networkProfile.Value,
+                securityProfile.Value,
+                diagnosticsProfile.Value,
+                availabilitySet,
+                virtualMachineScaleSet,
+                proximityPlacementGroup,
+                Optional.ToNullable(priority),
+                Optional.ToNullable(evictionPolicy),
+                billingProfile.Value,
+                host,
+                hostGroup,
+                provisioningState.Value,
+                instanceView.Value,
+                licenseType.Value,
+                vmId.Value,
+                extensionsTimeBudget.Value,
+                serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

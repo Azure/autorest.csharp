@@ -269,7 +269,23 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new ManagedHsmProperties(settings.Value, protectedSettings.Value, rawMessage.Value, Optional.ToNullable(tenantId), initialAdminObjectIds ?? new ChangeTrackingList<string>(), hsmUri.Value, Optional.ToNullable(enableSoftDelete), Optional.ToNullable(softDeleteRetentionInDays), Optional.ToNullable(enablePurgeProtection), Optional.ToNullable(createMode), statusMessage.Value, Optional.ToNullable(provisioningState), networkAcls.Value, privateEndpointConnections ?? new ChangeTrackingList<MhsmPrivateEndpointConnectionItem>(), Optional.ToNullable(publicNetworkAccess), Optional.ToNullable(scheduledPurgeDate));
+            return new ManagedHsmProperties(
+                settings.Value,
+                protectedSettings.Value,
+                rawMessage.Value,
+                Optional.ToNullable(tenantId),
+                initialAdminObjectIds ?? new ChangeTrackingList<string>(),
+                hsmUri.Value,
+                Optional.ToNullable(enableSoftDelete),
+                Optional.ToNullable(softDeleteRetentionInDays),
+                Optional.ToNullable(enablePurgeProtection),
+                Optional.ToNullable(createMode),
+                statusMessage.Value,
+                Optional.ToNullable(provisioningState),
+                networkAcls.Value,
+                privateEndpointConnections ?? new ChangeTrackingList<MhsmPrivateEndpointConnectionItem>(),
+                Optional.ToNullable(publicNetworkAccess),
+                Optional.ToNullable(scheduledPurgeDate));
         }
     }
 }

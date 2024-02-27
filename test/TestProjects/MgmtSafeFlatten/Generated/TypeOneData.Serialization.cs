@@ -149,7 +149,17 @@ namespace MgmtSafeFlatten
                     continue;
                 }
             }
-            return new TypeOneData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, myType.Value, layerOne.Value, layerOneType.Value, layerOneConflict);
+            return new TypeOneData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                myType.Value,
+                layerOne.Value,
+                layerOneType.Value,
+                layerOneConflict);
         }
     }
 }

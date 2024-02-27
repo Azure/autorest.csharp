@@ -102,7 +102,14 @@ namespace MgmtSupersetInheritance
                     continue;
                 }
             }
-            return new SupersetModel4Data(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, @new.Value);
+            return new SupersetModel4Data(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                @new.Value);
         }
     }
 }

@@ -252,7 +252,17 @@ namespace ModelsTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new OutputModel(requiredString, requiredInt, requiredModel, requiredList, requiredModelRecord, optionalList ?? new ChangeTrackingList<CollectionItem>(), optionalNullableList ?? new ChangeTrackingList<CollectionItem>(), optionalRecord ?? new ChangeTrackingDictionary<string, RecordItem>(), optionalNullableRecord ?? new ChangeTrackingDictionary<string, RecordItem>(), serializedAdditionalRawData);
+            return new OutputModel(
+                requiredString,
+                requiredInt,
+                requiredModel,
+                requiredList,
+                requiredModelRecord,
+                optionalList ?? new ChangeTrackingList<CollectionItem>(),
+                optionalNullableList ?? new ChangeTrackingList<CollectionItem>(),
+                optionalRecord ?? new ChangeTrackingDictionary<string, RecordItem>(),
+                optionalNullableRecord ?? new ChangeTrackingDictionary<string, RecordItem>(),
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<OutputModel>.Write(ModelReaderWriterOptions options)

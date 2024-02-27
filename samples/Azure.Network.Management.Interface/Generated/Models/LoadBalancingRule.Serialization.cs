@@ -252,7 +252,23 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new LoadBalancingRule(id.Value, name.Value, etag.Value, type.Value, frontendIPConfiguration.Value, backendAddressPool.Value, probe.Value, Optional.ToNullable(protocol), Optional.ToNullable(loadDistribution), Optional.ToNullable(frontendPort), Optional.ToNullable(backendPort), Optional.ToNullable(idleTimeoutInMinutes), Optional.ToNullable(enableFloatingIP), Optional.ToNullable(enableTcpReset), Optional.ToNullable(disableOutboundSnat), Optional.ToNullable(provisioningState));
+            return new LoadBalancingRule(
+                id.Value,
+                name.Value,
+                etag.Value,
+                type.Value,
+                frontendIPConfiguration.Value,
+                backendAddressPool.Value,
+                probe.Value,
+                Optional.ToNullable(protocol),
+                Optional.ToNullable(loadDistribution),
+                Optional.ToNullable(frontendPort),
+                Optional.ToNullable(backendPort),
+                Optional.ToNullable(idleTimeoutInMinutes),
+                Optional.ToNullable(enableFloatingIP),
+                Optional.ToNullable(enableTcpReset),
+                Optional.ToNullable(disableOutboundSnat),
+                Optional.ToNullable(provisioningState));
         }
     }
 }

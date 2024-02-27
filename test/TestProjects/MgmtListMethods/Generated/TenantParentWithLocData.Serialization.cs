@@ -102,7 +102,14 @@ namespace MgmtListMethods
                     continue;
                 }
             }
-            return new TenantParentWithLocData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, bar.Value);
+            return new TenantParentWithLocData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                bar.Value);
         }
     }
 }

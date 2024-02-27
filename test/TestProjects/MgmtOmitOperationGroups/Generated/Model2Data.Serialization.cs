@@ -95,7 +95,15 @@ namespace MgmtOmitOperationGroups
                     continue;
                 }
             }
-            return new Model2Data(id, name, type, systemData.Value, b.Value, modelx.Value, f.Value, g.Value);
+            return new Model2Data(
+                id,
+                name,
+                type,
+                systemData.Value,
+                b.Value,
+                modelx.Value,
+                f.Value,
+                g.Value);
         }
     }
 }

@@ -90,7 +90,15 @@ namespace MgmtMockAndSample
                     continue;
                 }
             }
-            return new RoleAssignmentData(id, name, type, systemData.Value, scope.Value, roleDefinitionId.Value, principalId.Value, Optional.ToNullable(canDelegate));
+            return new RoleAssignmentData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                scope.Value,
+                roleDefinitionId.Value,
+                principalId.Value,
+                Optional.ToNullable(canDelegate));
         }
     }
 }

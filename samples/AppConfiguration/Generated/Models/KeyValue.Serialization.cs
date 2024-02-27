@@ -141,7 +141,15 @@ namespace AppConfiguration.Models
                     continue;
                 }
             }
-            return new KeyValue(key.Value, label.Value, contentType.Value, value.Value, Optional.ToNullable(lastModified), tags ?? new ChangeTrackingDictionary<string, string>(), Optional.ToNullable(locked), etag.Value);
+            return new KeyValue(
+                key.Value,
+                label.Value,
+                contentType.Value,
+                value.Value,
+                Optional.ToNullable(lastModified),
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                Optional.ToNullable(locked),
+                etag.Value);
         }
     }
 }

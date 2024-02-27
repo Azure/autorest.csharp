@@ -127,7 +127,14 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetOSProfile(computerNamePrefix.Value, adminUsername.Value, adminPassword.Value, customData.Value, windowsConfiguration.Value, linuxConfiguration.Value, secrets ?? new ChangeTrackingList<VaultSecretGroup>());
+            return new VirtualMachineScaleSetOSProfile(
+                computerNamePrefix.Value,
+                adminUsername.Value,
+                adminPassword.Value,
+                customData.Value,
+                windowsConfiguration.Value,
+                linuxConfiguration.Value,
+                secrets ?? new ChangeTrackingList<VaultSecretGroup>());
         }
     }
 }

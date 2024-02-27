@@ -170,7 +170,16 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new ImageAnalysisSkill(odataType, name.Value, description.Value, context.Value, inputs, outputs, Optional.ToNullable(defaultLanguageCode), visualFeatures ?? new ChangeTrackingList<VisualFeature>(), details ?? new ChangeTrackingList<ImageDetail>());
+            return new ImageAnalysisSkill(
+                odataType,
+                name.Value,
+                description.Value,
+                context.Value,
+                inputs,
+                outputs,
+                Optional.ToNullable(defaultLanguageCode),
+                visualFeatures ?? new ChangeTrackingList<VisualFeature>(),
+                details ?? new ChangeTrackingList<ImageDetail>());
         }
     }
 }

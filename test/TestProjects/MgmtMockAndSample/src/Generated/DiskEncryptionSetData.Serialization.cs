@@ -218,7 +218,22 @@ namespace MgmtMockAndSample
                     continue;
                 }
             }
-            return new DiskEncryptionSetData(id, name, type, systemData.Value, identity, Optional.ToNullable(encryptionType), activeKey.Value, previousKeys ?? new ChangeTrackingList<KeyForDiskEncryptionSet>(), provisioningState.Value, Optional.ToNullable(rotationToLatestKeyVersionEnabled), Optional.ToNullable(lastKeyRotationTimestamp), federatedClientId.Value, Optional.ToNullable(minimumTlsVersion), Optional.ToNullable(location), tags ?? new ChangeTrackingDictionary<string, string>());
+            return new DiskEncryptionSetData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                identity,
+                Optional.ToNullable(encryptionType),
+                activeKey.Value,
+                previousKeys ?? new ChangeTrackingList<KeyForDiskEncryptionSet>(),
+                provisioningState.Value,
+                Optional.ToNullable(rotationToLatestKeyVersionEnabled),
+                Optional.ToNullable(lastKeyRotationTimestamp),
+                federatedClientId.Value,
+                Optional.ToNullable(minimumTlsVersion),
+                Optional.ToNullable(location),
+                tags ?? new ChangeTrackingDictionary<string, string>());
         }
     }
 }

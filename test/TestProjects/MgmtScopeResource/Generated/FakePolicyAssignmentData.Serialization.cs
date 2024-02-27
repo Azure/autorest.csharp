@@ -252,7 +252,22 @@ namespace MgmtScopeResource
                     continue;
                 }
             }
-            return new FakePolicyAssignmentData(id, name, type, systemData.Value, location.Value, identity, displayName.Value, policyDefinitionId.Value, scope.Value, notScopes ?? new ChangeTrackingList<string>(), parameters ?? new ChangeTrackingDictionary<string, ParameterValuesValue>(), description.Value, metadata.Value, Optional.ToNullable(enforcementMode), nonComplianceMessages ?? new ChangeTrackingList<NonComplianceMessage>());
+            return new FakePolicyAssignmentData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                location.Value,
+                identity,
+                displayName.Value,
+                policyDefinitionId.Value,
+                scope.Value,
+                notScopes ?? new ChangeTrackingList<string>(),
+                parameters ?? new ChangeTrackingDictionary<string, ParameterValuesValue>(),
+                description.Value,
+                metadata.Value,
+                Optional.ToNullable(enforcementMode),
+                nonComplianceMessages ?? new ChangeTrackingList<NonComplianceMessage>());
         }
     }
 }

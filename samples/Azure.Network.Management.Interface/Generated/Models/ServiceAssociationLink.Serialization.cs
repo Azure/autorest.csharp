@@ -150,7 +150,16 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new ServiceAssociationLink(id.Value, name.Value, etag.Value, type.Value, linkedResourceType.Value, link.Value, Optional.ToNullable(provisioningState), Optional.ToNullable(allowDelete), locations ?? new ChangeTrackingList<string>());
+            return new ServiceAssociationLink(
+                id.Value,
+                name.Value,
+                etag.Value,
+                type.Value,
+                linkedResourceType.Value,
+                link.Value,
+                Optional.ToNullable(provisioningState),
+                Optional.ToNullable(allowDelete),
+                locations ?? new ChangeTrackingList<string>());
         }
     }
 }

@@ -159,7 +159,14 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ResourceProviderData(id.Value, @namespace.Value, registrationState.Value, registrationPolicy.Value, resourceTypes ?? new ChangeTrackingList<ProviderResourceType>(), Optional.ToNullable(providerAuthorizationConsentState), serializedAdditionalRawData);
+            return new ResourceProviderData(
+                id.Value,
+                @namespace.Value,
+                registrationState.Value,
+                registrationPolicy.Value,
+                resourceTypes ?? new ChangeTrackingList<ProviderResourceType>(),
+                Optional.ToNullable(providerAuthorizationConsentState),
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ResourceProviderData>.Write(ModelReaderWriterOptions options)

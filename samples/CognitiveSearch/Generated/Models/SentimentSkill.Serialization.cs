@@ -120,7 +120,14 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new SentimentSkill(odataType, name.Value, description.Value, context.Value, inputs, outputs, Optional.ToNullable(defaultLanguageCode));
+            return new SentimentSkill(
+                odataType,
+                name.Value,
+                description.Value,
+                context.Value,
+                inputs,
+                outputs,
+                Optional.ToNullable(defaultLanguageCode));
         }
     }
 }

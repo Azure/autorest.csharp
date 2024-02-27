@@ -168,7 +168,21 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            return new FieldValue(type, valueString.Value, Optional.ToNullable(valueDate), Optional.ToNullable(valueTime), valuePhoneNumber.Value, Optional.ToNullable(valueNumber), Optional.ToNullable(valueInteger), valueArray ?? new ChangeTrackingList<FieldValue>(), valueObject ?? new ChangeTrackingDictionary<string, FieldValue>(), text.Value, boundingBox ?? new ChangeTrackingList<float>(), Optional.ToNullable(confidence), elements ?? new ChangeTrackingList<string>(), Optional.ToNullable(page));
+            return new FieldValue(
+                type,
+                valueString.Value,
+                Optional.ToNullable(valueDate),
+                Optional.ToNullable(valueTime),
+                valuePhoneNumber.Value,
+                Optional.ToNullable(valueNumber),
+                Optional.ToNullable(valueInteger),
+                valueArray ?? new ChangeTrackingList<FieldValue>(),
+                valueObject ?? new ChangeTrackingDictionary<string, FieldValue>(),
+                text.Value,
+                boundingBox ?? new ChangeTrackingList<float>(),
+                Optional.ToNullable(confidence),
+                elements ?? new ChangeTrackingList<string>(),
+                Optional.ToNullable(page));
         }
     }
 }

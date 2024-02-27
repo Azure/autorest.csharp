@@ -303,7 +303,23 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new NetworkInterfaceIPConfiguration(id.Value, name.Value, etag.Value, virtualNetworkTaps ?? new ChangeTrackingList<VirtualNetworkTap>(), applicationGatewayBackendAddressPools ?? new ChangeTrackingList<ApplicationGatewayBackendAddressPool>(), loadBalancerBackendAddressPools ?? new ChangeTrackingList<BackendAddressPool>(), loadBalancerInboundNatRules ?? new ChangeTrackingList<InboundNatRule>(), privateIPAddress.Value, Optional.ToNullable(privateIPAllocationMethod), Optional.ToNullable(privateIPAddressVersion), subnet.Value, Optional.ToNullable(primary), publicIPAddress.Value, applicationSecurityGroups ?? new ChangeTrackingList<ApplicationSecurityGroup>(), Optional.ToNullable(provisioningState), privateLinkConnectionProperties.Value);
+            return new NetworkInterfaceIPConfiguration(
+                id.Value,
+                name.Value,
+                etag.Value,
+                virtualNetworkTaps ?? new ChangeTrackingList<VirtualNetworkTap>(),
+                applicationGatewayBackendAddressPools ?? new ChangeTrackingList<ApplicationGatewayBackendAddressPool>(),
+                loadBalancerBackendAddressPools ?? new ChangeTrackingList<BackendAddressPool>(),
+                loadBalancerInboundNatRules ?? new ChangeTrackingList<InboundNatRule>(),
+                privateIPAddress.Value,
+                Optional.ToNullable(privateIPAllocationMethod),
+                Optional.ToNullable(privateIPAddressVersion),
+                subnet.Value,
+                Optional.ToNullable(primary),
+                publicIPAddress.Value,
+                applicationSecurityGroups ?? new ChangeTrackingList<ApplicationSecurityGroup>(),
+                Optional.ToNullable(provisioningState),
+                privateLinkConnectionProperties.Value);
         }
     }
 }

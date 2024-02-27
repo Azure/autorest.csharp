@@ -175,7 +175,14 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineScaleSetUpdateOSDisk(Optional.ToNullable(caching), Optional.ToNullable(writeAcceleratorEnabled), Optional.ToNullable(diskSizeGB), image.Value, vhdContainers ?? new ChangeTrackingList<string>(), managedDisk.Value, serializedAdditionalRawData);
+            return new VirtualMachineScaleSetUpdateOSDisk(
+                Optional.ToNullable(caching),
+                Optional.ToNullable(writeAcceleratorEnabled),
+                Optional.ToNullable(diskSizeGB),
+                image.Value,
+                vhdContainers ?? new ChangeTrackingList<string>(),
+                managedDisk.Value,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<VirtualMachineScaleSetUpdateOSDisk>.Write(ModelReaderWriterOptions options)

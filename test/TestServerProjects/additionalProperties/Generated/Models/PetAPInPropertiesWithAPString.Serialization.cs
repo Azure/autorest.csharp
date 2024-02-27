@@ -129,7 +129,13 @@ namespace additionalProperties.Models
                 additionalPropertiesDictionary.Add(property.Name, property.Value.GetString());
             }
             moreAdditionalProperties = additionalPropertiesDictionary;
-            return new PetAPInPropertiesWithAPString(id, name.Value, Optional.ToNullable(status), odataLocation, additionalProperties ?? new ChangeTrackingDictionary<string, float>(), moreAdditionalProperties);
+            return new PetAPInPropertiesWithAPString(
+                id,
+                name.Value,
+                Optional.ToNullable(status),
+                odataLocation,
+                additionalProperties ?? new ChangeTrackingDictionary<string, float>(),
+                moreAdditionalProperties);
         }
 
         BinaryData IPersistableModel<PetAPInPropertiesWithAPString>.Write(ModelReaderWriterOptions options)

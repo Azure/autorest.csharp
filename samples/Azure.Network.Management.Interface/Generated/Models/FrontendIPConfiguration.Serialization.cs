@@ -259,7 +259,23 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new FrontendIPConfiguration(id.Value, name.Value, etag.Value, type.Value, zones ?? new ChangeTrackingList<string>(), inboundNatRules ?? new ChangeTrackingList<SubResource>(), inboundNatPools ?? new ChangeTrackingList<SubResource>(), outboundRules ?? new ChangeTrackingList<SubResource>(), loadBalancingRules ?? new ChangeTrackingList<SubResource>(), privateIPAddress.Value, Optional.ToNullable(privateIPAllocationMethod), Optional.ToNullable(privateIPAddressVersion), subnet.Value, publicIPAddress.Value, publicIPPrefix.Value, Optional.ToNullable(provisioningState));
+            return new FrontendIPConfiguration(
+                id.Value,
+                name.Value,
+                etag.Value,
+                type.Value,
+                zones ?? new ChangeTrackingList<string>(),
+                inboundNatRules ?? new ChangeTrackingList<SubResource>(),
+                inboundNatPools ?? new ChangeTrackingList<SubResource>(),
+                outboundRules ?? new ChangeTrackingList<SubResource>(),
+                loadBalancingRules ?? new ChangeTrackingList<SubResource>(),
+                privateIPAddress.Value,
+                Optional.ToNullable(privateIPAllocationMethod),
+                Optional.ToNullable(privateIPAddressVersion),
+                subnet.Value,
+                publicIPAddress.Value,
+                publicIPPrefix.Value,
+                Optional.ToNullable(provisioningState));
         }
     }
 }

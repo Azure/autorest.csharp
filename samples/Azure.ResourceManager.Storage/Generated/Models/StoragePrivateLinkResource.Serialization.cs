@@ -119,7 +119,14 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new StoragePrivateLinkResource(id, name, type, systemData.Value, groupId.Value, requiredMembers ?? new ChangeTrackingList<string>(), requiredZoneNames ?? new ChangeTrackingList<string>());
+            return new StoragePrivateLinkResource(
+                id,
+                name,
+                type,
+                systemData.Value,
+                groupId.Value,
+                requiredMembers ?? new ChangeTrackingList<string>(),
+                requiredZoneNames ?? new ChangeTrackingList<string>());
         }
     }
 }

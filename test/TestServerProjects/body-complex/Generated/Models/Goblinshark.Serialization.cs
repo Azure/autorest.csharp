@@ -180,7 +180,16 @@ namespace body_complex.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Goblinshark(fishtype, species.Value, length, siblings ?? new ChangeTrackingList<Fish>(), serializedAdditionalRawData, Optional.ToNullable(age), birthday, Optional.ToNullable(jawsize), Optional.ToNullable(color));
+            return new Goblinshark(
+                fishtype,
+                species.Value,
+                length,
+                siblings ?? new ChangeTrackingList<Fish>(),
+                serializedAdditionalRawData,
+                Optional.ToNullable(age),
+                birthday,
+                Optional.ToNullable(jawsize),
+                Optional.ToNullable(color));
         }
 
         BinaryData IPersistableModel<Goblinshark>.Write(ModelReaderWriterOptions options)

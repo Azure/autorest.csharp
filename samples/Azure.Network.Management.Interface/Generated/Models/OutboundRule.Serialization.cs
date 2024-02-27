@@ -188,7 +188,18 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new OutboundRule(id.Value, name.Value, etag.Value, type.Value, Optional.ToNullable(allocatedOutboundPorts), frontendIPConfigurations ?? new ChangeTrackingList<SubResource>(), backendAddressPool.Value, Optional.ToNullable(provisioningState), Optional.ToNullable(protocol), Optional.ToNullable(enableTcpReset), Optional.ToNullable(idleTimeoutInMinutes));
+            return new OutboundRule(
+                id.Value,
+                name.Value,
+                etag.Value,
+                type.Value,
+                Optional.ToNullable(allocatedOutboundPorts),
+                frontendIPConfigurations ?? new ChangeTrackingList<SubResource>(),
+                backendAddressPool.Value,
+                Optional.ToNullable(provisioningState),
+                Optional.ToNullable(protocol),
+                Optional.ToNullable(enableTcpReset),
+                Optional.ToNullable(idleTimeoutInMinutes));
         }
     }
 }

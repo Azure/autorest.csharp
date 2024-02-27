@@ -46,11 +46,13 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             _typeFactory = new TypeFactory(this);
             _sourceInputModel = sourceInputModel;
+
             // schema usage transformer must run first
             SchemaUsageTransformer.Transform(codeModel);
             DefaultDerivedSchema.AddDefaultDerivedSchemas(codeModel);
             ConstantSchemaTransformer.Transform(codeModel);
             ModelPropertyClientDefaultValueTransformer.Transform(codeModel);
+
             _input = new CodeModelConverter().CreateNamespace(codeModel, _schemaUsageProvider);
 
             _defaultNamespace = Configuration.Namespace;
@@ -187,15 +189,18 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Dictionary<InputOperation, DataPlaneResponseHeaderGroupType> EnsureHeaderModels()
         {
             var headerModels = new Dictionary<InputOperation, DataPlaneResponseHeaderGroupType>();
-            foreach (var inputClient in _input.Clients)
+            if (Configuration.GenerateResponseHeaderModels)
             {
-                var clientPrefix = ClientBuilder.GetClientPrefix(GetClientDeclarationName(inputClient), _input.Name);
-                foreach (var operation in inputClient.Operations)
+                foreach (var inputClient in _input.Clients)
                 {
-                    var headers = DataPlaneResponseHeaderGroupType.TryCreate(operation, _typeFactory, clientPrefix, _sourceInputModel);
-                    if (headers != null)
+                    var clientPrefix = ClientBuilder.GetClientPrefix(GetClientDeclarationName(inputClient), _input.Name);
+                    foreach (var operation in inputClient.Operations)
                     {
-                        headerModels.Add(operation, headers);
+                        var headers = DataPlaneResponseHeaderGroupType.TryCreate(operation, _typeFactory, clientPrefix, _sourceInputModel);
+                        if (headers != null)
+                        {
+                            headerModels.Add(operation, headers);
+                        }
                     }
                 }
             }
@@ -207,7 +212,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             var operations = new Dictionary<InputOperation, LongRunningOperation>();
 
-            if (Configuration.PublicClients)
+            if (Configuration.PublicClients && Configuration.GenerateLongRunningOperationTypes)
             {
                 foreach (var client in _input.Clients)
                 {

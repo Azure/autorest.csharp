@@ -110,7 +110,17 @@ namespace MgmtScopeResource.Models
                     continue;
                 }
             }
-            return new DeploymentOperationProperties(Optional.ToNullable(provisioningOperation), provisioningState.Value, Optional.ToNullable(timestamp), Optional.ToNullable(duration), Optional.ToNullable(anotherDuration), serviceRequestId.Value, statusCode.Value, statusMessage.Value, request.Value, response.Value);
+            return new DeploymentOperationProperties(
+                Optional.ToNullable(provisioningOperation),
+                provisioningState.Value,
+                Optional.ToNullable(timestamp),
+                Optional.ToNullable(duration),
+                Optional.ToNullable(anotherDuration),
+                serviceRequestId.Value,
+                statusCode.Value,
+                statusMessage.Value,
+                request.Value,
+                response.Value);
         }
     }
 }

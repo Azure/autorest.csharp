@@ -282,7 +282,21 @@ namespace Azure.ResourceManager.Sample
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineScaleSetExtensionData(id.Value, serializedAdditionalRawData, name.Value, Optional.ToNullable(type), forceUpdateTag.Value, publisher.Value, type0.Value, typeHandlerVersion.Value, Optional.ToNullable(autoUpgradeMinorVersion), Optional.ToNullable(enableAutomaticUpgrade), settings.Value, protectedSettings.Value, provisioningState.Value, provisionAfterExtensions ?? new ChangeTrackingList<string>());
+            return new VirtualMachineScaleSetExtensionData(
+                id.Value,
+                serializedAdditionalRawData,
+                name.Value,
+                Optional.ToNullable(type),
+                forceUpdateTag.Value,
+                publisher.Value,
+                type0.Value,
+                typeHandlerVersion.Value,
+                Optional.ToNullable(autoUpgradeMinorVersion),
+                Optional.ToNullable(enableAutomaticUpgrade),
+                settings.Value,
+                protectedSettings.Value,
+                provisioningState.Value,
+                provisionAfterExtensions ?? new ChangeTrackingList<string>());
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

@@ -157,7 +157,13 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new QueryStringMatchConditionParameters(typeName, @operator, Optional.ToNullable(negateCondition), matchValues ?? new ChangeTrackingList<string>(), transforms ?? new ChangeTrackingList<Transform>(), serializedAdditionalRawData);
+            return new QueryStringMatchConditionParameters(
+                typeName,
+                @operator,
+                Optional.ToNullable(negateCondition),
+                matchValues ?? new ChangeTrackingList<string>(),
+                transforms ?? new ChangeTrackingList<Transform>(),
+                serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

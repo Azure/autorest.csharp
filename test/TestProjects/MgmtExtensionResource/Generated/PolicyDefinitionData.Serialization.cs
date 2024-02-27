@@ -192,7 +192,18 @@ namespace MgmtExtensionResource
                     continue;
                 }
             }
-            return new PolicyDefinitionData(id, name, type, systemData.Value, Optional.ToNullable(policyType), mode.Value, displayName.Value, description.Value, policyRule.Value, metadata.Value, parameters ?? new ChangeTrackingDictionary<string, ParameterDefinitionsValue>());
+            return new PolicyDefinitionData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                Optional.ToNullable(policyType),
+                mode.Value,
+                displayName.Value,
+                description.Value,
+                policyRule.Value,
+                metadata.Value,
+                parameters ?? new ChangeTrackingDictionary<string, ParameterDefinitionsValue>());
         }
     }
 }

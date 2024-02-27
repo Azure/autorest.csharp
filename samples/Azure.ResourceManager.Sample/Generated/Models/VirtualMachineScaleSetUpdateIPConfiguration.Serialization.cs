@@ -275,7 +275,18 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineScaleSetUpdateIPConfiguration(id.Value, serializedAdditionalRawData, name.Value, subnet, Optional.ToNullable(primary), publicIPAddressConfiguration.Value, Optional.ToNullable(privateIPAddressVersion), applicationGatewayBackendAddressPools ?? new ChangeTrackingList<WritableSubResource>(), applicationSecurityGroups ?? new ChangeTrackingList<WritableSubResource>(), loadBalancerBackendAddressPools ?? new ChangeTrackingList<WritableSubResource>(), loadBalancerInboundNatPools ?? new ChangeTrackingList<WritableSubResource>());
+            return new VirtualMachineScaleSetUpdateIPConfiguration(
+                id.Value,
+                serializedAdditionalRawData,
+                name.Value,
+                subnet,
+                Optional.ToNullable(primary),
+                publicIPAddressConfiguration.Value,
+                Optional.ToNullable(privateIPAddressVersion),
+                applicationGatewayBackendAddressPools ?? new ChangeTrackingList<WritableSubResource>(),
+                applicationSecurityGroups ?? new ChangeTrackingList<WritableSubResource>(),
+                loadBalancerBackendAddressPools ?? new ChangeTrackingList<WritableSubResource>(),
+                loadBalancerInboundNatPools ?? new ChangeTrackingList<WritableSubResource>());
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

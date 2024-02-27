@@ -120,6 +120,11 @@ namespace AutoRest.CSharp.Common.Input
             SkipCSProj = skipCSProj;
             SkipCSProjPackageReference = skipCSProjPackageReference;
             Generation1ConvenienceClient = generation1ConvenienceClient;
+
+            PublicRestClientsTemporaryFlag = generation1ConvenienceClient;
+            GenerateLongRunningOperationTypes = generation1ConvenienceClient;
+            GenerateResponseHeaderModels = generation1ConvenienceClient;
+
             SingleTopLevelClient = singleTopLevelClient;
             GenerateModelFactory = generateModelFactory;
             PublicDiscriminatorProperty = publicDiscriminatorProperty;
@@ -263,6 +268,12 @@ namespace AutoRest.CSharp.Common.Input
         public static bool SingleTopLevelClient { get; private set; }
         public static bool SkipSerializationFormatXml { get; private set; }
         public static bool DisablePaginationTopRenaming { get; private set; }
+
+        // Temporary flag needed in the process of consolidation
+        // Will be eliminated at the final step
+        public static bool PublicRestClientsTemporaryFlag { get; private set; }
+        public static bool GenerateLongRunningOperationTypes { get; private set; }
+        public static bool GenerateResponseHeaderModels { get; private set; }
 
         /// <summary>
         /// Whether we will generate model factory for this library.

@@ -302,7 +302,26 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new PublicIPAddress(id.Value, name.Value, type.Value, location.Value, tags ?? new ChangeTrackingDictionary<string, string>(), sku.Value, etag.Value, zones ?? new ChangeTrackingList<string>(), Optional.ToNullable(publicIPAllocationMethod), Optional.ToNullable(publicIPAddressVersion), ipConfiguration.Value, dnsSettings.Value, ddosSettings.Value, ipTags ?? new ChangeTrackingList<IpTag>(), ipAddress.Value, publicIPPrefix.Value, Optional.ToNullable(idleTimeoutInMinutes), resourceGuid.Value, Optional.ToNullable(provisioningState));
+            return new PublicIPAddress(
+                id.Value,
+                name.Value,
+                type.Value,
+                location.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                sku.Value,
+                etag.Value,
+                zones ?? new ChangeTrackingList<string>(),
+                Optional.ToNullable(publicIPAllocationMethod),
+                Optional.ToNullable(publicIPAddressVersion),
+                ipConfiguration.Value,
+                dnsSettings.Value,
+                ddosSettings.Value,
+                ipTags ?? new ChangeTrackingList<IpTag>(),
+                ipAddress.Value,
+                publicIPPrefix.Value,
+                Optional.ToNullable(idleTimeoutInMinutes),
+                resourceGuid.Value,
+                Optional.ToNullable(provisioningState));
         }
     }
 }

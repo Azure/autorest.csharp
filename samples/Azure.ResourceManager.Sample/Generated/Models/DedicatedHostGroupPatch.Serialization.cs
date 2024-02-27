@@ -212,7 +212,14 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DedicatedHostGroupPatch(tags ?? new ChangeTrackingDictionary<string, string>(), serializedAdditionalRawData, zones ?? new ChangeTrackingList<string>(), Optional.ToNullable(platformFaultDomainCount), hosts ?? new ChangeTrackingList<Resources.Models.SubResource>(), instanceView.Value, Optional.ToNullable(supportAutomaticPlacement));
+            return new DedicatedHostGroupPatch(
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                serializedAdditionalRawData,
+                zones ?? new ChangeTrackingList<string>(),
+                Optional.ToNullable(platformFaultDomainCount),
+                hosts ?? new ChangeTrackingList<Resources.Models.SubResource>(),
+                instanceView.Value,
+                Optional.ToNullable(supportAutomaticPlacement));
         }
 
         BinaryData IPersistableModel<DedicatedHostGroupPatch>.Write(ModelReaderWriterOptions options)

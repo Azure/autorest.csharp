@@ -176,7 +176,15 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineScaleSetOSProfile(computerNamePrefix.Value, adminUsername.Value, adminPassword.Value, customData.Value, windowsConfiguration.Value, linuxConfiguration.Value, secrets ?? new ChangeTrackingList<VaultSecretGroup>(), serializedAdditionalRawData);
+            return new VirtualMachineScaleSetOSProfile(
+                computerNamePrefix.Value,
+                adminUsername.Value,
+                adminPassword.Value,
+                customData.Value,
+                windowsConfiguration.Value,
+                linuxConfiguration.Value,
+                secrets ?? new ChangeTrackingList<VaultSecretGroup>(),
+                serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

@@ -240,7 +240,19 @@ namespace CustomizationsInTsp.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new RootModel(Optional.ToNullable(propertyExtensibleEnum), propertyModelToMakeInternal.Value, propertyModelToRename.Value, propertyModelToChangeNamespace.Value, propertyModelWithCustomizedProperties.Value, Optional.ToNullable(propertyEnumToRename), Optional.ToNullable(propertyEnumWithValueToRename), Optional.ToNullable(propertyEnumToBeMadeExtensible), propertyModelToAddAdditionalSerializableProperty.Value, Optional.ToNullable(propertyToMoveToCustomization), Optional.ToNullable(propertyModelStruct), serializedAdditionalRawData);
+            return new RootModel(
+                Optional.ToNullable(propertyExtensibleEnum),
+                propertyModelToMakeInternal.Value,
+                propertyModelToRename.Value,
+                propertyModelToChangeNamespace.Value,
+                propertyModelWithCustomizedProperties.Value,
+                Optional.ToNullable(propertyEnumToRename),
+                Optional.ToNullable(propertyEnumWithValueToRename),
+                Optional.ToNullable(propertyEnumToBeMadeExtensible),
+                propertyModelToAddAdditionalSerializableProperty.Value,
+                Optional.ToNullable(propertyToMoveToCustomization),
+                Optional.ToNullable(propertyModelStruct),
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<RootModel>.Write(ModelReaderWriterOptions options)

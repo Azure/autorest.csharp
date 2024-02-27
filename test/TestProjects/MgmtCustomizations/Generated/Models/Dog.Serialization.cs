@@ -117,7 +117,13 @@ namespace MgmtCustomizations.Models
                     continue;
                 }
             }
-            return new Dog(kind, name.Value, size, Optional.ToNullable(dateOfBirth), bark.Value, jump.Value);
+            return new Dog(
+                kind,
+                name.Value,
+                size,
+                Optional.ToNullable(dateOfBirth),
+                bark.Value,
+                jump.Value);
         }
     }
 }

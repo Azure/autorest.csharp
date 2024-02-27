@@ -150,7 +150,14 @@ namespace body_complex.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Cookiecuttershark(fishtype, species.Value, length, siblings ?? new ChangeTrackingList<Fish>(), serializedAdditionalRawData, Optional.ToNullable(age), birthday);
+            return new Cookiecuttershark(
+                fishtype,
+                species.Value,
+                length,
+                siblings ?? new ChangeTrackingList<Fish>(),
+                serializedAdditionalRawData,
+                Optional.ToNullable(age),
+                birthday);
         }
 
         BinaryData IPersistableModel<Cookiecuttershark>.Write(ModelReaderWriterOptions options)

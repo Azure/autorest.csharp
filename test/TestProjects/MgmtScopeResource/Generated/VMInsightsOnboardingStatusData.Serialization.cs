@@ -105,7 +105,15 @@ namespace MgmtScopeResource
                     continue;
                 }
             }
-            return new VMInsightsOnboardingStatusData(id, name, type, systemData.Value, resourceId.Value, Optional.ToNullable(onboardingStatus), Optional.ToNullable(dataStatus), data ?? new ChangeTrackingList<DataContainer>());
+            return new VMInsightsOnboardingStatusData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                resourceId.Value,
+                Optional.ToNullable(onboardingStatus),
+                Optional.ToNullable(dataStatus),
+                data ?? new ChangeTrackingList<DataContainer>());
         }
     }
 }

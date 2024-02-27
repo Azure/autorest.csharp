@@ -163,7 +163,13 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ModelWithPersistableOnly(name.Value, fields ?? new ChangeTrackingList<string>(), Optional.ToNullable(nullProperty), keyValuePairs ?? new ChangeTrackingDictionary<string, string>(), xProperty, serializedAdditionalRawData);
+            return new ModelWithPersistableOnly(
+                name.Value,
+                fields ?? new ChangeTrackingList<string>(),
+                Optional.ToNullable(nullProperty),
+                keyValuePairs ?? new ChangeTrackingDictionary<string, string>(),
+                xProperty,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ModelWithPersistableOnly>.Write(ModelReaderWriterOptions options)

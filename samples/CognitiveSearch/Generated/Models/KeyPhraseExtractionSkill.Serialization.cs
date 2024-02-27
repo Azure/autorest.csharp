@@ -143,7 +143,15 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new KeyPhraseExtractionSkill(odataType, name.Value, description.Value, context.Value, inputs, outputs, Optional.ToNullable(defaultLanguageCode), Optional.ToNullable(maxKeyPhraseCount));
+            return new KeyPhraseExtractionSkill(
+                odataType,
+                name.Value,
+                description.Value,
+                context.Value,
+                inputs,
+                outputs,
+                Optional.ToNullable(defaultLanguageCode),
+                Optional.ToNullable(maxKeyPhraseCount));
         }
     }
 }

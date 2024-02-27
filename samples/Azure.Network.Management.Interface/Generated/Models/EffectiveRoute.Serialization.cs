@@ -98,7 +98,14 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new EffectiveRoute(name.Value, Optional.ToNullable(disableBgpRoutePropagation), Optional.ToNullable(source), Optional.ToNullable(state), addressPrefix ?? new ChangeTrackingList<string>(), nextHopIpAddress ?? new ChangeTrackingList<string>(), Optional.ToNullable(nextHopType));
+            return new EffectiveRoute(
+                name.Value,
+                Optional.ToNullable(disableBgpRoutePropagation),
+                Optional.ToNullable(source),
+                Optional.ToNullable(state),
+                addressPrefix ?? new ChangeTrackingList<string>(),
+                nextHopIpAddress ?? new ChangeTrackingList<string>(),
+                Optional.ToNullable(nextHopType));
         }
     }
 }

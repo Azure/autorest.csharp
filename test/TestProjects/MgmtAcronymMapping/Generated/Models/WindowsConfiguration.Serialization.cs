@@ -124,7 +124,13 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new WindowsConfiguration(Optional.ToNullable(provisionVmAgent), Optional.ToNullable(enableAutomaticUpdates), timeZone.Value, additionalUnattendContent ?? new ChangeTrackingList<AdditionalUnattendContent>(), patchSettings.Value, winRM.Value);
+            return new WindowsConfiguration(
+                Optional.ToNullable(provisionVmAgent),
+                Optional.ToNullable(enableAutomaticUpdates),
+                timeZone.Value,
+                additionalUnattendContent ?? new ChangeTrackingList<AdditionalUnattendContent>(),
+                patchSettings.Value,
+                winRM.Value);
         }
     }
 }

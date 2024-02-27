@@ -153,7 +153,17 @@ namespace Azure.ResourceManager.Storage
                     continue;
                 }
             }
-            return new EncryptionScopeData(id, name, type, systemData.Value, Optional.ToNullable(source), Optional.ToNullable(state), Optional.ToNullable(creationTime), Optional.ToNullable(lastModifiedTime), keyVaultProperties.Value, Optional.ToNullable(requireInfrastructureEncryption));
+            return new EncryptionScopeData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                Optional.ToNullable(source),
+                Optional.ToNullable(state),
+                Optional.ToNullable(creationTime),
+                Optional.ToNullable(lastModifiedTime),
+                keyVaultProperties.Value,
+                Optional.ToNullable(requireInfrastructureEncryption));
         }
     }
 }

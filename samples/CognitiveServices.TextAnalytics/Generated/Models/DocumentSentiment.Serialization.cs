@@ -72,7 +72,13 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            return new DocumentSentiment(id, sentiment, statistics.Value, confidenceScores, sentences, warnings);
+            return new DocumentSentiment(
+                id,
+                sentiment,
+                statistics.Value,
+                confidenceScores,
+                sentences,
+                warnings);
         }
     }
 }

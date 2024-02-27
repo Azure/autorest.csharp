@@ -233,7 +233,17 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new NetworkRule(name.Value, description.Value, ruleType, ipProtocols ?? new ChangeTrackingList<FirewallPolicyRuleNetworkProtocol>(), sourceAddresses ?? new ChangeTrackingList<string>(), destinationAddresses ?? new ChangeTrackingList<string>(), destinationPorts ?? new ChangeTrackingList<string>(), sourceIpGroups ?? new ChangeTrackingList<string>(), destinationIpGroups ?? new ChangeTrackingList<string>(), destinationFqdns ?? new ChangeTrackingList<string>());
+            return new NetworkRule(
+                name.Value,
+                description.Value,
+                ruleType,
+                ipProtocols ?? new ChangeTrackingList<FirewallPolicyRuleNetworkProtocol>(),
+                sourceAddresses ?? new ChangeTrackingList<string>(),
+                destinationAddresses ?? new ChangeTrackingList<string>(),
+                destinationPorts ?? new ChangeTrackingList<string>(),
+                sourceIpGroups ?? new ChangeTrackingList<string>(),
+                destinationIpGroups ?? new ChangeTrackingList<string>(),
+                destinationFqdns ?? new ChangeTrackingList<string>());
         }
     }
 }

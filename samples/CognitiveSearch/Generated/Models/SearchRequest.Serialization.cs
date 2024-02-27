@@ -267,7 +267,24 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new SearchRequest(Optional.ToNullable(count), facets ?? new ChangeTrackingList<string>(), filter.Value, highlight.Value, highlightPostTag.Value, highlightPreTag.Value, Optional.ToNullable(minimumCoverage), orderby.Value, Optional.ToNullable(queryType), scoringParameters ?? new ChangeTrackingList<string>(), scoringProfile.Value, search.Value, searchFields.Value, Optional.ToNullable(searchMode), select.Value, Optional.ToNullable(skip), Optional.ToNullable(top));
+            return new SearchRequest(
+                Optional.ToNullable(count),
+                facets ?? new ChangeTrackingList<string>(),
+                filter.Value,
+                highlight.Value,
+                highlightPostTag.Value,
+                highlightPreTag.Value,
+                Optional.ToNullable(minimumCoverage),
+                orderby.Value,
+                Optional.ToNullable(queryType),
+                scoringParameters ?? new ChangeTrackingList<string>(),
+                scoringProfile.Value,
+                search.Value,
+                searchFields.Value,
+                Optional.ToNullable(searchMode),
+                select.Value,
+                Optional.ToNullable(skip),
+                Optional.ToNullable(top));
         }
     }
 }

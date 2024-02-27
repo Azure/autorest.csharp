@@ -245,7 +245,18 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineImage(id.Value, serializedAdditionalRawData, name, location, tags ?? new ChangeTrackingDictionary<string, string>(), plan.Value, osDiskImage.Value, dataDiskImages ?? new ChangeTrackingList<DataDiskImage>(), automaticOSUpgradeProperties.Value, Optional.ToNullable(hyperVGeneration), disallowed.Value);
+            return new VirtualMachineImage(
+                id.Value,
+                serializedAdditionalRawData,
+                name,
+                location,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                plan.Value,
+                osDiskImage.Value,
+                dataDiskImages ?? new ChangeTrackingList<DataDiskImage>(),
+                automaticOSUpgradeProperties.Value,
+                Optional.ToNullable(hyperVGeneration),
+                disallowed.Value);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

@@ -175,7 +175,17 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new RouteTable(id.Value, name.Value, type.Value, location.Value, tags ?? new ChangeTrackingDictionary<string, string>(), etag.Value, routes ?? new ChangeTrackingList<Route>(), subnets ?? new ChangeTrackingList<Subnet>(), Optional.ToNullable(disableBgpRoutePropagation), Optional.ToNullable(provisioningState));
+            return new RouteTable(
+                id.Value,
+                name.Value,
+                type.Value,
+                location.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                etag.Value,
+                routes ?? new ChangeTrackingList<Route>(),
+                subnets ?? new ChangeTrackingList<Subnet>(),
+                Optional.ToNullable(disableBgpRoutePropagation),
+                Optional.ToNullable(provisioningState));
         }
     }
 }

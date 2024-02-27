@@ -88,7 +88,13 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new ImageReference(id.Value, publisher.Value, offer.Value, sku.Value, version.Value, exactVersion.Value);
+            return new ImageReference(
+                id.Value,
+                publisher.Value,
+                offer.Value,
+                sku.Value,
+                version.Value,
+                exactVersion.Value);
         }
     }
 }

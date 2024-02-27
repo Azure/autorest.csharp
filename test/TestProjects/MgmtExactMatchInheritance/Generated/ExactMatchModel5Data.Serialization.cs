@@ -105,7 +105,14 @@ namespace MgmtExactMatchInheritance
                     continue;
                 }
             }
-            return new ExactMatchModel5Data(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, @new.Value);
+            return new ExactMatchModel5Data(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                @new.Value);
         }
 
         internal partial class ExactMatchModel5DataConverter : JsonConverter<ExactMatchModel5Data>

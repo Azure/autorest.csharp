@@ -27,7 +27,13 @@ namespace CognitiveSearch.Models
             facets ??= new Dictionary<string, IList<FacetResult>>();
             results ??= new List<SearchResult>();
 
-            return new SearchDocumentsResult(count, coverage, facets, nextPageParameters, results?.ToList(), nextLink);
+            return new SearchDocumentsResult(
+                count,
+                coverage,
+                facets,
+                nextPageParameters,
+                results?.ToList(),
+                nextLink);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.FacetResult"/>. </summary>
@@ -111,19 +117,9 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of <see cref="Models.AutocompleteItem"/>. </summary>
         /// <param name="text"> The completed term. </param>
         /// <param name="queryPlusText"> The query along with the completed term. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="text"/> or <paramref name="queryPlusText"/> is null. </exception>
         /// <returns> A new <see cref="Models.AutocompleteItem"/> instance for mocking. </returns>
         public static AutocompleteItem AutocompleteItem(string text = null, string queryPlusText = null)
         {
-            if (text == null)
-            {
-                throw new ArgumentNullException(nameof(text));
-            }
-            if (queryPlusText == null)
-            {
-                throw new ArgumentNullException(nameof(queryPlusText));
-            }
-
             return new AutocompleteItem(text, queryPlusText);
         }
 
@@ -177,7 +173,17 @@ namespace CognitiveSearch.Models
             errors ??= new List<ItemError>();
             warnings ??= new List<ItemWarning>();
 
-            return new IndexerExecutionResult(status, errorMessage, startTime, endTime, errors?.ToList(), warnings?.ToList(), itemCount, failedItemCount, initialTrackingState, finalTrackingState);
+            return new IndexerExecutionResult(
+                status,
+                errorMessage,
+                startTime,
+                endTime,
+                errors?.ToList(),
+                warnings?.ToList(),
+                itemCount,
+                failedItemCount,
+                initialTrackingState,
+                finalTrackingState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ItemError"/>. </summary>
@@ -190,7 +196,13 @@ namespace CognitiveSearch.Models
         /// <returns> A new <see cref="Models.ItemError"/> instance for mocking. </returns>
         public static ItemError ItemError(string key = null, string errorMessage = null, int statusCode = default, string name = null, string details = null, string documentationLink = null)
         {
-            return new ItemError(key, errorMessage, statusCode, name, details, documentationLink);
+            return new ItemError(
+                key,
+                errorMessage,
+                statusCode,
+                name,
+                details,
+                documentationLink);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ItemWarning"/>. </summary>
@@ -281,15 +293,9 @@ namespace CognitiveSearch.Models
         /// <param name="startOffset"> The index of the first character of the token in the input text. </param>
         /// <param name="endOffset"> The index of the last character of the token in the input text. </param>
         /// <param name="position"> The position of the token in the input text relative to other tokens. The first token in the input text has position 0, the next has position 1, and so on. Depending on the analyzer used, some tokens might have the same position, for example if they are synonyms of each other. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="token"/> is null. </exception>
         /// <returns> A new <see cref="Models.TokenInfo"/> instance for mocking. </returns>
         public static TokenInfo TokenInfo(string token = null, int startOffset = default, int endOffset = default, int position = default)
         {
-            if (token == null)
-            {
-                throw new ArgumentNullException(nameof(token));
-            }
-
             return new TokenInfo(token, startOffset, endOffset, position);
         }
 
@@ -353,7 +359,14 @@ namespace CognitiveSearch.Models
                 throw new ArgumentNullException(nameof(skillsetCounter));
             }
 
-            return new ServiceCounters(documentCounter, indexCounter, indexerCounter, dataSourceCounter, storageSizeCounter, synonymMapCounter, skillsetCounter);
+            return new ServiceCounters(
+                documentCounter,
+                indexCounter,
+                indexerCounter,
+                dataSourceCounter,
+                storageSizeCounter,
+                synonymMapCounter,
+                skillsetCounter);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ResourceCounter"/>. </summary>

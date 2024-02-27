@@ -606,7 +606,38 @@ namespace ModelsTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new RoundTripModel(serializedAdditionalRawData, requiredString, requiredInt, nonRequiredString.Value, Optional.ToNullable(nonRequiredInt), requiredNullableInt, requiredNullableString, Optional.ToNullable(nonRequiredNullableInt), nonRequiredNullableString.Value, requiredReadonlyInt, Optional.ToNullable(nonRequiredReadonlyInt), requiredModel, requiredFixedStringEnum, requiredFixedIntEnum, requiredExtensibleEnum, requiredList, requiredIntRecord, requiredStringRecord, requiredModelRecord, requiredBytes, optionalBytes.Value, requiredUint8Array, optionalUint8Array ?? new ChangeTrackingList<int>(), requiredUnknown, optionalUnknown.Value, requiredInt8Array, optionalInt8Array ?? new ChangeTrackingList<int>(), requiredNullableIntList, requiredNullableStringList, nonRequiredNullableIntList ?? new ChangeTrackingList<int>(), nonRequiredNullableStringList ?? new ChangeTrackingList<string>());
+            return new RoundTripModel(
+                serializedAdditionalRawData,
+                requiredString,
+                requiredInt,
+                nonRequiredString.Value,
+                Optional.ToNullable(nonRequiredInt),
+                requiredNullableInt,
+                requiredNullableString,
+                Optional.ToNullable(nonRequiredNullableInt),
+                nonRequiredNullableString.Value,
+                requiredReadonlyInt,
+                Optional.ToNullable(nonRequiredReadonlyInt),
+                requiredModel,
+                requiredFixedStringEnum,
+                requiredFixedIntEnum,
+                requiredExtensibleEnum,
+                requiredList,
+                requiredIntRecord,
+                requiredStringRecord,
+                requiredModelRecord,
+                requiredBytes,
+                optionalBytes.Value,
+                requiredUint8Array,
+                optionalUint8Array ?? new ChangeTrackingList<int>(),
+                requiredUnknown,
+                optionalUnknown.Value,
+                requiredInt8Array,
+                optionalInt8Array ?? new ChangeTrackingList<int>(),
+                requiredNullableIntList,
+                requiredNullableStringList,
+                nonRequiredNullableIntList ?? new ChangeTrackingList<int>(),
+                nonRequiredNullableStringList ?? new ChangeTrackingList<string>());
         }
 
         BinaryData IPersistableModel<RoundTripModel>.Write(ModelReaderWriterOptions options)

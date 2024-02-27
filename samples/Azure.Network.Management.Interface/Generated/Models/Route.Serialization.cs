@@ -118,7 +118,14 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new Route(id.Value, name.Value, etag.Value, addressPrefix.Value, Optional.ToNullable(nextHopType), nextHopIpAddress.Value, Optional.ToNullable(provisioningState));
+            return new Route(
+                id.Value,
+                name.Value,
+                etag.Value,
+                addressPrefix.Value,
+                Optional.ToNullable(nextHopType),
+                nextHopIpAddress.Value,
+                Optional.ToNullable(provisioningState));
         }
     }
 }

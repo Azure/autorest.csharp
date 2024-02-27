@@ -152,7 +152,15 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new RequestRateByIntervalContent(blobContainerSasUri, fromTime, toTime, Optional.ToNullable(groupByThrottlePolicy), Optional.ToNullable(groupByOperationName), Optional.ToNullable(groupByResourceName), serializedAdditionalRawData, intervalLength);
+            return new RequestRateByIntervalContent(
+                blobContainerSasUri,
+                fromTime,
+                toTime,
+                Optional.ToNullable(groupByThrottlePolicy),
+                Optional.ToNullable(groupByOperationName),
+                Optional.ToNullable(groupByResourceName),
+                serializedAdditionalRawData,
+                intervalLength);
         }
 
         BinaryData IPersistableModel<RequestRateByIntervalContent>.Write(ModelReaderWriterOptions options)

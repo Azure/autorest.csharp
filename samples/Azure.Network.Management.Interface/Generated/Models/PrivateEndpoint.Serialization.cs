@@ -200,7 +200,18 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new PrivateEndpoint(id.Value, name.Value, type.Value, location.Value, tags ?? new ChangeTrackingDictionary<string, string>(), etag.Value, subnet.Value, networkInterfaces ?? new ChangeTrackingList<NetworkInterface>(), Optional.ToNullable(provisioningState), privateLinkServiceConnections ?? new ChangeTrackingList<PrivateLinkServiceConnection>(), manualPrivateLinkServiceConnections ?? new ChangeTrackingList<PrivateLinkServiceConnection>());
+            return new PrivateEndpoint(
+                id.Value,
+                name.Value,
+                type.Value,
+                location.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                etag.Value,
+                subnet.Value,
+                networkInterfaces ?? new ChangeTrackingList<NetworkInterface>(),
+                Optional.ToNullable(provisioningState),
+                privateLinkServiceConnections ?? new ChangeTrackingList<PrivateLinkServiceConnection>(),
+                manualPrivateLinkServiceConnections ?? new ChangeTrackingList<PrivateLinkServiceConnection>());
         }
     }
 }

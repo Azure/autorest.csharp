@@ -230,7 +230,19 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new OSDisk(Optional.ToNullable(osType), encryptionSettings.Value, name.Value, vhd.Value, image.Value, Optional.ToNullable(caching), Optional.ToNullable(writeAcceleratorEnabled), diffDiskSettings.Value, createOption, Optional.ToNullable(diskSizeGB), managedDisk.Value, serializedAdditionalRawData);
+            return new OSDisk(
+                Optional.ToNullable(osType),
+                encryptionSettings.Value,
+                name.Value,
+                vhd.Value,
+                image.Value,
+                Optional.ToNullable(caching),
+                Optional.ToNullable(writeAcceleratorEnabled),
+                diffDiskSettings.Value,
+                createOption,
+                Optional.ToNullable(diskSizeGB),
+                managedDisk.Value,
+                serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

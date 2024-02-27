@@ -150,7 +150,13 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ApiError(details ?? new ChangeTrackingList<ApiErrorBase>(), innererror.Value, code.Value, target.Value, message.Value, serializedAdditionalRawData);
+            return new ApiError(
+                details ?? new ChangeTrackingList<ApiErrorBase>(),
+                innererror.Value,
+                code.Value,
+                target.Value,
+                message.Value,
+                serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

@@ -159,7 +159,14 @@ namespace body_complex.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Shark(fishtype, species.Value, length, siblings ?? new ChangeTrackingList<Fish>(), serializedAdditionalRawData, Optional.ToNullable(age), birthday);
+            return new Shark(
+                fishtype,
+                species.Value,
+                length,
+                siblings ?? new ChangeTrackingList<Fish>(),
+                serializedAdditionalRawData,
+                Optional.ToNullable(age),
+                birthday);
         }
 
         BinaryData IPersistableModel<Shark>.Write(ModelReaderWriterOptions options)

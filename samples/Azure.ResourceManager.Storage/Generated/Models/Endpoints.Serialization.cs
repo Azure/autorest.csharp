@@ -77,7 +77,15 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new Endpoints(blob.Value, queue.Value, table.Value, file.Value, web.Value, dfs.Value, microsoftEndpoints.Value, internetEndpoints.Value);
+            return new Endpoints(
+                blob.Value,
+                queue.Value,
+                table.Value,
+                file.Value,
+                web.Value,
+                dfs.Value,
+                microsoftEndpoints.Value,
+                internetEndpoints.Value);
         }
     }
 }

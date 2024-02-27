@@ -111,7 +111,14 @@ namespace Azure.ResourceManager.Fake.Models
                     continue;
                 }
             }
-            return new PrivateLinkResourceData(id, name, type, systemData.Value, groupId.Value, requiredMembers ?? new ChangeTrackingList<string>(), requiredZoneNames ?? new ChangeTrackingList<string>());
+            return new PrivateLinkResourceData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                groupId.Value,
+                requiredMembers ?? new ChangeTrackingList<string>(),
+                requiredZoneNames ?? new ChangeTrackingList<string>());
         }
 
         internal partial class PrivateLinkResourceDataConverter : JsonConverter<PrivateLinkResourceData>

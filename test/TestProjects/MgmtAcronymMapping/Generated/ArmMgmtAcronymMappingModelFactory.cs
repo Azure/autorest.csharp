@@ -123,7 +123,36 @@ namespace MgmtAcronymMapping.Models
             zones ??= new List<string>();
             networkInterfaces ??= new List<NetworkInterfaceReference>();
 
-            return new VirtualMachineData(id, name, resourceType, systemData, tags, location, plan, identity, zones?.ToList(), hardwareVmSize != null ? new HardwareProfile(hardwareVmSize) : null, storageProfile, ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled) : null, osProfile, networkInterfaces != null ? new NetworkProfile(networkInterfaces?.ToList()) : null, encryptionAtHost != null ? new SecurityProfile(encryptionAtHost) : null, bootDiagnostics != null ? new DiagnosticsProfile(bootDiagnostics) : null, availabilitySetId != null ? ResourceManagerModelFactory.WritableSubResource(availabilitySetId) : null, virtualMachineScaleSetId != null ? ResourceManagerModelFactory.WritableSubResource(virtualMachineScaleSetId) : null, proximityPlacementGroupId != null ? ResourceManagerModelFactory.WritableSubResource(proximityPlacementGroupId) : null, priority, evictionPolicy, billingMaxPrice != null ? new BillingProfile(billingMaxPrice) : null, hostId != null ? ResourceManagerModelFactory.WritableSubResource(hostId) : null, hostGroupId != null ? ResourceManagerModelFactory.WritableSubResource(hostGroupId) : null, provisioningState, instanceView, licenseType, vmId, extensionsTimeBudget);
+            return new VirtualMachineData(
+                id,
+                name,
+                resourceType,
+                systemData,
+                tags,
+                location,
+                plan,
+                identity,
+                zones?.ToList(),
+                hardwareVmSize != null ? new HardwareProfile(hardwareVmSize) : null,
+                storageProfile,
+                ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled) : null,
+                osProfile,
+                networkInterfaces != null ? new NetworkProfile(networkInterfaces?.ToList()) : null,
+                encryptionAtHost != null ? new SecurityProfile(encryptionAtHost) : null,
+                bootDiagnostics != null ? new DiagnosticsProfile(bootDiagnostics) : null,
+                availabilitySetId != null ? ResourceManagerModelFactory.WritableSubResource(availabilitySetId) : null,
+                virtualMachineScaleSetId != null ? ResourceManagerModelFactory.WritableSubResource(virtualMachineScaleSetId) : null,
+                proximityPlacementGroupId != null ? ResourceManagerModelFactory.WritableSubResource(proximityPlacementGroupId) : null,
+                priority,
+                evictionPolicy,
+                billingMaxPrice != null ? new BillingProfile(billingMaxPrice) : null,
+                hostId != null ? ResourceManagerModelFactory.WritableSubResource(hostId) : null,
+                hostGroupId != null ? ResourceManagerModelFactory.WritableSubResource(hostGroupId) : null,
+                provisioningState,
+                instanceView,
+                licenseType,
+                vmId,
+                extensionsTimeBudget);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ImageReference"/>. </summary>
@@ -154,7 +183,13 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.ImageReference"/> instance for mocking. </returns>
         public static ImageReference ImageReference(string id = null, string publisher = null, string offer = null, string sku = null, string version = null, string exactVersion = null)
         {
-            return new ImageReference(id, publisher, offer, sku, version, exactVersion);
+            return new ImageReference(
+                id,
+                publisher,
+                offer,
+                sku,
+                version,
+                exactVersion);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DataDisk"/>. </summary>
@@ -209,7 +244,19 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.DataDisk"/> instance for mocking. </returns>
         public static DataDisk DataDisk(int lun = default, string name = null, Uri vhdUri = null, Uri imageUri = null, CachingType? caching = null, bool? writeAcceleratorEnabled = null, DiskCreateOptionType createOption = default, int? diskSizeGB = null, ManagedDiskParameters managedDisk = null, bool? toBeDetached = null, long? diskIopsReadWrite = null, long? diskMBpsReadWrite = null)
         {
-            return new DataDisk(lun, name, vhdUri != null ? new VirtualHardDisk(vhdUri) : null, imageUri != null ? new VirtualHardDisk(imageUri) : null, caching, writeAcceleratorEnabled, createOption, diskSizeGB, managedDisk, toBeDetached, diskIopsReadWrite, diskMBpsReadWrite);
+            return new DataDisk(
+                lun,
+                name,
+                vhdUri != null ? new VirtualHardDisk(vhdUri) : null,
+                imageUri != null ? new VirtualHardDisk(imageUri) : null,
+                caching,
+                writeAcceleratorEnabled,
+                createOption,
+                diskSizeGB,
+                managedDisk,
+                toBeDetached,
+                diskIopsReadWrite,
+                diskMBpsReadWrite);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachineInstanceView"/>. </summary>
@@ -279,7 +326,22 @@ namespace MgmtAcronymMapping.Models
             disks ??= new List<DiskInstanceView>();
             statuses ??= new List<InstanceViewStatus>();
 
-            return new VirtualMachineInstanceView(platformUpdateDomain, platformFaultDomain, computerName, osName, osVersion, hyperVGeneration, rdpThumbPrint, vmAgent, maintenanceRedeployStatus, disks?.ToList(), vmHealthStatus != null ? new VirtualMachineHealthStatus(vmHealthStatus) : null, bootDiagnostics, assignedHost, statuses?.ToList(), patchStatus);
+            return new VirtualMachineInstanceView(
+                platformUpdateDomain,
+                platformFaultDomain,
+                computerName,
+                osName,
+                osVersion,
+                hyperVGeneration,
+                rdpThumbPrint,
+                vmAgent,
+                maintenanceRedeployStatus,
+                disks?.ToList(),
+                vmHealthStatus != null ? new VirtualMachineHealthStatus(vmHealthStatus) : null,
+                bootDiagnostics,
+                assignedHost,
+                statuses?.ToList(),
+                patchStatus);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachineAgentInstanceView"/>. </summary>
@@ -355,7 +417,14 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.MaintenanceRedeployStatus"/> instance for mocking. </returns>
         public static MaintenanceRedeployStatus MaintenanceRedeployStatus(bool? isCustomerInitiatedMaintenanceAllowed = null, DateTimeOffset? preMaintenanceWindowStartOn = null, DateTimeOffset? preMaintenanceWindowEndOn = null, DateTimeOffset? maintenanceWindowStartOn = null, DateTimeOffset? maintenanceWindowEndOn = null, MaintenanceOperationResultCodeType? lastOperationResultCode = null, string lastOperationMessage = null)
         {
-            return new MaintenanceRedeployStatus(isCustomerInitiatedMaintenanceAllowed, preMaintenanceWindowStartOn, preMaintenanceWindowEndOn, maintenanceWindowStartOn, maintenanceWindowEndOn, lastOperationResultCode, lastOperationMessage);
+            return new MaintenanceRedeployStatus(
+                isCustomerInitiatedMaintenanceAllowed,
+                preMaintenanceWindowStartOn,
+                preMaintenanceWindowEndOn,
+                maintenanceWindowStartOn,
+                maintenanceWindowEndOn,
+                lastOperationResultCode,
+                lastOperationMessage);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DiskInstanceView"/>. </summary>
@@ -454,7 +523,16 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.AvailablePatchSummary"/> instance for mocking. </returns>
         public static AvailablePatchSummary AvailablePatchSummary(PatchOperationStatus? status = null, string assessmentActivityId = null, bool? rebootPending = null, int? criticalAndSecurityPatchCount = null, int? otherPatchCount = null, Uri uri = null, DateTimeOffset? startOn = null, DateTimeOffset? lastModifiedOn = null, ApiError error = null)
         {
-            return new AvailablePatchSummary(status, assessmentActivityId, rebootPending, criticalAndSecurityPatchCount, otherPatchCount, uri, startOn, lastModifiedOn, error);
+            return new AvailablePatchSummary(
+                status,
+                assessmentActivityId,
+                rebootPending,
+                criticalAndSecurityPatchCount,
+                otherPatchCount,
+                uri,
+                startOn,
+                lastModifiedOn,
+                error);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ApiError"/>. </summary>
@@ -576,7 +654,20 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.LastPatchInstallationSummary"/> instance for mocking. </returns>
         public static LastPatchInstallationSummary LastPatchInstallationSummary(PatchOperationStatus? status = null, string installationActivityId = null, bool? maintenanceWindowExceeded = null, RebootStatus? rebootStatus = null, int? notSelectedPatchCount = null, int? excludedPatchCount = null, int? pendingPatchCount = null, int? installedPatchCount = null, int? failedPatchCount = null, DateTimeOffset? startOn = null, DateTimeOffset? lastModifiedOn = null, string startedBy = null, ApiError error = null)
         {
-            return new LastPatchInstallationSummary(status, installationActivityId, maintenanceWindowExceeded, rebootStatus, notSelectedPatchCount, excludedPatchCount, pendingPatchCount, installedPatchCount, failedPatchCount, startOn, lastModifiedOn, startedBy, error);
+            return new LastPatchInstallationSummary(
+                status,
+                installationActivityId,
+                maintenanceWindowExceeded,
+                rebootStatus,
+                notSelectedPatchCount,
+                excludedPatchCount,
+                pendingPatchCount,
+                installedPatchCount,
+                failedPatchCount,
+                startOn,
+                lastModifiedOn,
+                startedBy,
+                error);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtAcronymMapping.ImageData"/>. </summary>
@@ -607,7 +698,17 @@ namespace MgmtAcronymMapping.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new ImageData(id, name, resourceType, systemData, tags, location, sourceVirtualMachineId != null ? ResourceManagerModelFactory.WritableSubResource(sourceVirtualMachineId) : null, storageProfile, provisioningState, hyperVGeneration);
+            return new ImageData(
+                id,
+                name,
+                resourceType,
+                systemData,
+                tags,
+                location,
+                sourceVirtualMachineId != null ? ResourceManagerModelFactory.WritableSubResource(sourceVirtualMachineId) : null,
+                storageProfile,
+                provisioningState,
+                hyperVGeneration);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachineCaptureResult"/>. </summary>
@@ -667,7 +768,13 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.VirtualMachineSize"/> instance for mocking. </returns>
         public static VirtualMachineSize VirtualMachineSize(string name = null, int? numberOfCores = null, int? osDiskSizeInMB = null, int? resourceDiskSizeInMB = null, int? memoryInMB = null, int? maxDataDiskCount = null)
         {
-            return new VirtualMachineSize(name, numberOfCores, osDiskSizeInMB, resourceDiskSizeInMB, memoryInMB, maxDataDiskCount);
+            return new VirtualMachineSize(
+                name,
+                numberOfCores,
+                osDiskSizeInMB,
+                resourceDiskSizeInMB,
+                memoryInMB,
+                maxDataDiskCount);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.RetrieveBootDiagnosticsDataResult"/>. </summary>
@@ -723,7 +830,15 @@ namespace MgmtAcronymMapping.Models
         {
             patches ??= new List<VirtualMachineSoftwarePatchProperties>();
 
-            return new VirtualMachineAssessPatchesResult(status, assessmentActivityId, rebootPending, criticalAndSecurityPatchCount, otherPatchCount, startOn, patches?.ToList(), error);
+            return new VirtualMachineAssessPatchesResult(
+                status,
+                assessmentActivityId,
+                rebootPending,
+                criticalAndSecurityPatchCount,
+                otherPatchCount,
+                startOn,
+                patches?.ToList(),
+                error);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachineSoftwarePatchProperties"/>. </summary>
@@ -772,7 +887,17 @@ namespace MgmtAcronymMapping.Models
         {
             classifications ??= new List<string>();
 
-            return new VirtualMachineSoftwarePatchProperties(patchId, name, version, kbid, classifications?.ToList(), rebootBehavior, activityId, publishedOn, lastModifiedOn, assessmentState);
+            return new VirtualMachineSoftwarePatchProperties(
+                patchId,
+                name,
+                version,
+                kbid,
+                classifications?.ToList(),
+                rebootBehavior,
+                activityId,
+                publishedOn,
+                lastModifiedOn,
+                assessmentState);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtAcronymMapping.VirtualMachineScaleSetData"/>. </summary>
@@ -873,7 +998,34 @@ namespace MgmtAcronymMapping.Models
             zones ??= new List<string>();
             scaleInRules ??= new List<VirtualMachineScaleSetScaleInRule>();
 
-            return new VirtualMachineScaleSetData(id, name, resourceType, systemData, tags, location, sku, plan, identity, zones?.ToList(), ipsecSomething, testIPsec, p2sServer, upgradePolicy, automaticRepairsPolicy, virtualMachineProfile, provisioningState, overprovision, doNotRunExtensionsOnOverprovisionedVms, uniqueId, singlePlacementGroup, zoneBalance, platformFaultDomainCount, proximityPlacementGroupId != null ? ResourceManagerModelFactory.WritableSubResource(proximityPlacementGroupId) : null, hostGroupId != null ? ResourceManagerModelFactory.WritableSubResource(hostGroupId) : null, ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled) : null, scaleInRules != null ? new ScaleInPolicy(scaleInRules?.ToList()) : null);
+            return new VirtualMachineScaleSetData(
+                id,
+                name,
+                resourceType,
+                systemData,
+                tags,
+                location,
+                sku,
+                plan,
+                identity,
+                zones?.ToList(),
+                ipsecSomething,
+                testIPsec,
+                p2sServer,
+                upgradePolicy,
+                automaticRepairsPolicy,
+                virtualMachineProfile,
+                provisioningState,
+                overprovision,
+                doNotRunExtensionsOnOverprovisionedVms,
+                uniqueId,
+                singlePlacementGroup,
+                zoneBalance,
+                platformFaultDomainCount,
+                proximityPlacementGroupId != null ? ResourceManagerModelFactory.WritableSubResource(proximityPlacementGroupId) : null,
+                hostGroupId != null ? ResourceManagerModelFactory.WritableSubResource(hostGroupId) : null,
+                ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled) : null,
+                scaleInRules != null ? new ScaleInPolicy(scaleInRules?.ToList()) : null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtAcronymMapping.VirtualMachineScaleSetExtensionData"/>. </summary>
@@ -934,7 +1086,20 @@ namespace MgmtAcronymMapping.Models
         {
             provisionAfterExtensions ??= new List<string>();
 
-            return new VirtualMachineScaleSetExtensionData(id, name, resourceType, forceUpdateTag, publisher, typePropertiesType, typeHandlerVersion, autoUpgradeMinorVersion, enableAutomaticUpgrade, settings, protectedSettings, provisioningState, provisionAfterExtensions?.ToList());
+            return new VirtualMachineScaleSetExtensionData(
+                id,
+                name,
+                resourceType,
+                forceUpdateTag,
+                publisher,
+                typePropertiesType,
+                typeHandlerVersion,
+                autoUpgradeMinorVersion,
+                enableAutomaticUpgrade,
+                settings,
+                protectedSettings,
+                provisioningState,
+                provisionAfterExtensions?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.SubResourceReadOnly"/>. </summary>
@@ -1073,7 +1238,21 @@ namespace MgmtAcronymMapping.Models
         {
             provisionAfterExtensions ??= new List<string>();
 
-            return new VirtualMachineScaleSetExtensionPatch(id, name, resourceType, systemData, forceUpdateTag, publisher, typePropertiesType, typeHandlerVersion, autoUpgradeMinorVersion, enableAutomaticUpgrade, settings, protectedSettings, provisioningState, provisionAfterExtensions?.ToList());
+            return new VirtualMachineScaleSetExtensionPatch(
+                id,
+                name,
+                resourceType,
+                systemData,
+                forceUpdateTag,
+                publisher,
+                typePropertiesType,
+                typeHandlerVersion,
+                autoUpgradeMinorVersion,
+                enableAutomaticUpgrade,
+                settings,
+                protectedSettings,
+                provisioningState,
+                provisionAfterExtensions?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachineScaleSetSku"/>. </summary>
@@ -1165,7 +1344,13 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.UpgradeOperationHistoricalStatusInfoProperties"/> instance for mocking. </returns>
         public static UpgradeOperationHistoricalStatusInfoProperties UpgradeOperationHistoricalStatusInfoProperties(UpgradeOperationHistoryStatus runningStatus = null, RollingUpgradeProgressInfo progress = null, ApiError error = null, UpgradeOperationInvoker? startedBy = null, ImageReference targetImageReference = null, RollbackStatusInfo rollbackInfo = null)
         {
-            return new UpgradeOperationHistoricalStatusInfoProperties(runningStatus, progress, error, startedBy, targetImageReference, rollbackInfo);
+            return new UpgradeOperationHistoricalStatusInfoProperties(
+                runningStatus,
+                progress,
+                error,
+                startedBy,
+                targetImageReference,
+                rollbackInfo);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.UpgradeOperationHistoryStatus"/>. </summary>
@@ -1257,7 +1442,17 @@ namespace MgmtAcronymMapping.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new VirtualMachineScaleSetRollingUpgradeData(id, name, resourceType, systemData, tags, location, policy, runningStatus, progress, error);
+            return new VirtualMachineScaleSetRollingUpgradeData(
+                id,
+                name,
+                resourceType,
+                systemData,
+                tags,
+                location,
+                policy,
+                runningStatus,
+                progress,
+                error);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.RollingUpgradeRunningStatus"/>. </summary>
@@ -1393,7 +1588,33 @@ namespace MgmtAcronymMapping.Models
             networkInterfaces ??= new List<NetworkInterfaceReference>();
             networkInterfaceConfigurations ??= new List<VirtualMachineScaleSetNetworkConfiguration>();
 
-            return new VirtualMachineScaleSetVmData(id, name, resourceType, systemData, tags, location, instanceId, sku, plan, zones?.ToList(), latestModelApplied, vmId, instanceView, hardwareVmSize != null ? new HardwareProfile(hardwareVmSize) : null, storageProfile, ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled) : null, osProfile, encryptionAtHost != null ? new SecurityProfile(encryptionAtHost) : null, networkInterfaces != null ? new NetworkProfile(networkInterfaces?.ToList()) : null, networkInterfaceConfigurations != null ? new VirtualMachineScaleSetVmNetworkProfileConfiguration(networkInterfaceConfigurations?.ToList()) : null, bootDiagnostics != null ? new DiagnosticsProfile(bootDiagnostics) : null, availabilitySetId != null ? ResourceManagerModelFactory.WritableSubResource(availabilitySetId) : null, provisioningState, licenseType, modelDefinitionApplied, protectionPolicy);
+            return new VirtualMachineScaleSetVmData(
+                id,
+                name,
+                resourceType,
+                systemData,
+                tags,
+                location,
+                instanceId,
+                sku,
+                plan,
+                zones?.ToList(),
+                latestModelApplied,
+                vmId,
+                instanceView,
+                hardwareVmSize != null ? new HardwareProfile(hardwareVmSize) : null,
+                storageProfile,
+                ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled) : null,
+                osProfile,
+                encryptionAtHost != null ? new SecurityProfile(encryptionAtHost) : null,
+                networkInterfaces != null ? new NetworkProfile(networkInterfaces?.ToList()) : null,
+                networkInterfaceConfigurations != null ? new VirtualMachineScaleSetVmNetworkProfileConfiguration(networkInterfaceConfigurations?.ToList()) : null,
+                bootDiagnostics != null ? new DiagnosticsProfile(bootDiagnostics) : null,
+                availabilitySetId != null ? ResourceManagerModelFactory.WritableSubResource(availabilitySetId) : null,
+                provisioningState,
+                licenseType,
+                modelDefinitionApplied,
+                protectionPolicy);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachineScaleSetVmInstanceView"/>. </summary>
@@ -1447,7 +1668,18 @@ namespace MgmtAcronymMapping.Models
             disks ??= new List<DiskInstanceView>();
             statuses ??= new List<InstanceViewStatus>();
 
-            return new VirtualMachineScaleSetVmInstanceView(platformUpdateDomain, platformFaultDomain, rdpThumbPrint, vmAgent, maintenanceRedeployStatus, disks?.ToList(), vmHealthStatus != null ? new VirtualMachineHealthStatus(vmHealthStatus) : null, bootDiagnostics, statuses?.ToList(), assignedHost, placementGroupId);
+            return new VirtualMachineScaleSetVmInstanceView(
+                platformUpdateDomain,
+                platformFaultDomain,
+                rdpThumbPrint,
+                vmAgent,
+                maintenanceRedeployStatus,
+                disks?.ToList(),
+                vmHealthStatus != null ? new VirtualMachineHealthStatus(vmHealthStatus) : null,
+                bootDiagnostics,
+                statuses?.ToList(),
+                assignedHost,
+                placementGroupId);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.LogAnalytics"/>. </summary>

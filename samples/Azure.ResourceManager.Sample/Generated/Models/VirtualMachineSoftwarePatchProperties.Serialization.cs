@@ -217,7 +217,18 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineSoftwarePatchProperties(patchId.Value, name.Value, version.Value, kbid.Value, classifications ?? new ChangeTrackingList<string>(), Optional.ToNullable(rebootBehavior), activityId.Value, Optional.ToNullable(publishedDate), Optional.ToNullable(lastModifiedDateTime), Optional.ToNullable(assessmentState), serializedAdditionalRawData);
+            return new VirtualMachineSoftwarePatchProperties(
+                patchId.Value,
+                name.Value,
+                version.Value,
+                kbid.Value,
+                classifications ?? new ChangeTrackingList<string>(),
+                Optional.ToNullable(rebootBehavior),
+                activityId.Value,
+                Optional.ToNullable(publishedDate),
+                Optional.ToNullable(lastModifiedDateTime),
+                Optional.ToNullable(assessmentState),
+                serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

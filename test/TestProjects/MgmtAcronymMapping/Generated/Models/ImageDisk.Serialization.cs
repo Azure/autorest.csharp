@@ -134,7 +134,14 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new ImageDisk(snapshot, managedDisk, blobUri.Value, Optional.ToNullable(caching), Optional.ToNullable(diskSizeGB), Optional.ToNullable(storageAccountType), diskEncryptionSet);
+            return new ImageDisk(
+                snapshot,
+                managedDisk,
+                blobUri.Value,
+                Optional.ToNullable(caching),
+                Optional.ToNullable(diskSizeGB),
+                Optional.ToNullable(storageAccountType),
+                diskEncryptionSet);
         }
     }
 }

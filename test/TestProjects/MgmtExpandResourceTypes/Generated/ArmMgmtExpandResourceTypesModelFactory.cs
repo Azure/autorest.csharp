@@ -51,7 +51,27 @@ namespace MgmtExpandResourceTypes.Models
             txtRecords ??= new List<TxtRecord>();
             caaRecords ??= new List<CaaRecord>();
 
-            return new RecordSetData(id, name, resourceType, systemData, etag, metadata, ttl, fqdn, provisioningState, targetResourceId != null ? ResourceManagerModelFactory.WritableSubResource(targetResourceId) : null, aRecords?.ToList(), aaaaRecords?.ToList(), mxRecords?.ToList(), nsRecords?.ToList(), ptrRecords?.ToList(), srvRecords?.ToList(), txtRecords?.ToList(), cname != null ? new CnameRecord(cname) : null, soaRecord, caaRecords?.ToList());
+            return new RecordSetData(
+                id,
+                name,
+                resourceType,
+                systemData,
+                etag,
+                metadata,
+                ttl,
+                fqdn,
+                provisioningState,
+                targetResourceId != null ? ResourceManagerModelFactory.WritableSubResource(targetResourceId) : null,
+                aRecords?.ToList(),
+                aaaaRecords?.ToList(),
+                mxRecords?.ToList(),
+                nsRecords?.ToList(),
+                ptrRecords?.ToList(),
+                srvRecords?.ToList(),
+                txtRecords?.ToList(),
+                cname != null ? new CnameRecord(cname) : null,
+                soaRecord,
+                caaRecords?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtExpandResourceTypes.ZoneData"/>. </summary>
@@ -80,7 +100,24 @@ namespace MgmtExpandResourceTypes.Models
             registrationVirtualNetworks ??= new List<WritableSubResource>();
             resolutionVirtualNetworks ??= new List<WritableSubResource>();
 
-            return new ZoneData(id, name, resourceType, systemData, tags, location, etag, maxNumberOfRecordSets, maxNumberOfRecordsPerRecordSet, numberOfRecordSets, nameServers?.ToList(), zoneType, machineType, storageType, memoryType, registrationVirtualNetworks?.ToList(), resolutionVirtualNetworks?.ToList());
+            return new ZoneData(
+                id,
+                name,
+                resourceType,
+                systemData,
+                tags,
+                location,
+                etag,
+                maxNumberOfRecordSets,
+                maxNumberOfRecordsPerRecordSet,
+                numberOfRecordSets,
+                nameServers?.ToList(),
+                zoneType,
+                machineType,
+                storageType,
+                memoryType,
+                registrationVirtualNetworks?.ToList(),
+                resolutionVirtualNetworks?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DnsResourceReferenceResult"/>. </summary>

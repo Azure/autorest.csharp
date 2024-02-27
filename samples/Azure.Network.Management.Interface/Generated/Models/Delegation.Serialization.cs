@@ -108,7 +108,13 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new Delegation(id.Value, name.Value, etag.Value, serviceName.Value, actions ?? new ChangeTrackingList<string>(), Optional.ToNullable(provisioningState));
+            return new Delegation(
+                id.Value,
+                name.Value,
+                etag.Value,
+                serviceName.Value,
+                actions ?? new ChangeTrackingList<string>(),
+                Optional.ToNullable(provisioningState));
         }
     }
 }

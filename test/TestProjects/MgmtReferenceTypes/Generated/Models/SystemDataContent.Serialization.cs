@@ -112,7 +112,13 @@ namespace Azure.ResourceManager.Fake.Models
                     continue;
                 }
             }
-            return new SystemDataContent(createdBy.Value, Optional.ToNullable(createdByType), Optional.ToNullable(createdAt), lastModifiedBy.Value, Optional.ToNullable(lastModifiedByType), Optional.ToNullable(lastModifiedAt));
+            return new SystemDataContent(
+                createdBy.Value,
+                Optional.ToNullable(createdByType),
+                Optional.ToNullable(createdAt),
+                lastModifiedBy.Value,
+                Optional.ToNullable(lastModifiedByType),
+                Optional.ToNullable(lastModifiedAt));
         }
 
         internal partial class SystemDataContentConverter : JsonConverter<SystemDataContent>

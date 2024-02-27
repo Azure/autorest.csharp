@@ -104,7 +104,15 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineAssessPatchesResult(Optional.ToNullable(status), assessmentActivityId.Value, Optional.ToNullable(rebootPending), Optional.ToNullable(criticalAndSecurityPatchCount), Optional.ToNullable(otherPatchCount), Optional.ToNullable(startDateTime), patches ?? new ChangeTrackingList<VirtualMachineSoftwarePatchProperties>(), error.Value);
+            return new VirtualMachineAssessPatchesResult(
+                Optional.ToNullable(status),
+                assessmentActivityId.Value,
+                Optional.ToNullable(rebootPending),
+                Optional.ToNullable(criticalAndSecurityPatchCount),
+                Optional.ToNullable(otherPatchCount),
+                Optional.ToNullable(startDateTime),
+                patches ?? new ChangeTrackingList<VirtualMachineSoftwarePatchProperties>(),
+                error.Value);
         }
     }
 }

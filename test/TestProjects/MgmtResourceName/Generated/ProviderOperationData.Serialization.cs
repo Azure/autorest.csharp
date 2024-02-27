@@ -88,7 +88,14 @@ namespace MgmtResourceName
                     continue;
                 }
             }
-            return new ProviderOperationData(id, name, type, systemData.Value, displayName.Value, resourceTypes ?? new ChangeTrackingList<Models.ResourceType>(), operations ?? new ChangeTrackingList<ResourceOperation>());
+            return new ProviderOperationData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                displayName.Value,
+                resourceTypes ?? new ChangeTrackingList<Models.ResourceType>(),
+                operations ?? new ChangeTrackingList<ResourceOperation>());
         }
     }
 }

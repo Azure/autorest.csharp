@@ -341,7 +341,27 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new Subnet(id.Value, name.Value, etag.Value, addressPrefix.Value, addressPrefixes ?? new ChangeTrackingList<string>(), networkSecurityGroup.Value, routeTable.Value, natGateway.Value, serviceEndpoints ?? new ChangeTrackingList<ServiceEndpointPropertiesFormat>(), serviceEndpointPolicies ?? new ChangeTrackingList<ServiceEndpointPolicy>(), privateEndpoints ?? new ChangeTrackingList<PrivateEndpoint>(), ipConfigurations ?? new ChangeTrackingList<IPConfiguration>(), ipConfigurationProfiles ?? new ChangeTrackingList<IPConfigurationProfile>(), resourceNavigationLinks ?? new ChangeTrackingList<ResourceNavigationLink>(), serviceAssociationLinks ?? new ChangeTrackingList<ServiceAssociationLink>(), delegations ?? new ChangeTrackingList<Delegation>(), purpose.Value, Optional.ToNullable(provisioningState), privateEndpointNetworkPolicies.Value, privateLinkServiceNetworkPolicies.Value);
+            return new Subnet(
+                id.Value,
+                name.Value,
+                etag.Value,
+                addressPrefix.Value,
+                addressPrefixes ?? new ChangeTrackingList<string>(),
+                networkSecurityGroup.Value,
+                routeTable.Value,
+                natGateway.Value,
+                serviceEndpoints ?? new ChangeTrackingList<ServiceEndpointPropertiesFormat>(),
+                serviceEndpointPolicies ?? new ChangeTrackingList<ServiceEndpointPolicy>(),
+                privateEndpoints ?? new ChangeTrackingList<PrivateEndpoint>(),
+                ipConfigurations ?? new ChangeTrackingList<IPConfiguration>(),
+                ipConfigurationProfiles ?? new ChangeTrackingList<IPConfigurationProfile>(),
+                resourceNavigationLinks ?? new ChangeTrackingList<ResourceNavigationLink>(),
+                serviceAssociationLinks ?? new ChangeTrackingList<ServiceAssociationLink>(),
+                delegations ?? new ChangeTrackingList<Delegation>(),
+                purpose.Value,
+                Optional.ToNullable(provisioningState),
+                privateEndpointNetworkPolicies.Value,
+                privateLinkServiceNetworkPolicies.Value);
         }
     }
 }

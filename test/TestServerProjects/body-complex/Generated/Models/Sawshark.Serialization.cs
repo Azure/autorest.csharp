@@ -165,7 +165,15 @@ namespace body_complex.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Sawshark(fishtype, species.Value, length, siblings ?? new ChangeTrackingList<Fish>(), serializedAdditionalRawData, Optional.ToNullable(age), birthday, picture.Value);
+            return new Sawshark(
+                fishtype,
+                species.Value,
+                length,
+                siblings ?? new ChangeTrackingList<Fish>(),
+                serializedAdditionalRawData,
+                Optional.ToNullable(age),
+                birthday,
+                picture.Value);
         }
 
         BinaryData IPersistableModel<Sawshark>.Write(ModelReaderWriterOptions options)

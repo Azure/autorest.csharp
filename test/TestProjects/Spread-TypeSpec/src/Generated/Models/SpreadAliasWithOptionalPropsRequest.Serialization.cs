@@ -152,7 +152,13 @@ namespace SpreadTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new SpreadAliasWithOptionalPropsRequest(name, color.Value, Optional.ToNullable(age), items, elements ?? new ChangeTrackingList<string>(), serializedAdditionalRawData);
+            return new SpreadAliasWithOptionalPropsRequest(
+                name,
+                color.Value,
+                Optional.ToNullable(age),
+                items,
+                elements ?? new ChangeTrackingList<string>(),
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<SpreadAliasWithOptionalPropsRequest>.Write(ModelReaderWriterOptions options)

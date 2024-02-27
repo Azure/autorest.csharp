@@ -204,7 +204,19 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new WordDelimiterTokenFilter(odataType, name, Optional.ToNullable(generateWordParts), Optional.ToNullable(generateNumberParts), Optional.ToNullable(catenateWords), Optional.ToNullable(catenateNumbers), Optional.ToNullable(catenateAll), Optional.ToNullable(splitOnCaseChange), Optional.ToNullable(preserveOriginal), Optional.ToNullable(splitOnNumerics), Optional.ToNullable(stemEnglishPossessive), protectedWords ?? new ChangeTrackingList<string>());
+            return new WordDelimiterTokenFilter(
+                odataType,
+                name,
+                Optional.ToNullable(generateWordParts),
+                Optional.ToNullable(generateNumberParts),
+                Optional.ToNullable(catenateWords),
+                Optional.ToNullable(catenateNumbers),
+                Optional.ToNullable(catenateAll),
+                Optional.ToNullable(splitOnCaseChange),
+                Optional.ToNullable(preserveOriginal),
+                Optional.ToNullable(splitOnNumerics),
+                Optional.ToNullable(stemEnglishPossessive),
+                protectedWords ?? new ChangeTrackingList<string>());
         }
     }
 }
