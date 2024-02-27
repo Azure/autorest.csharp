@@ -554,6 +554,9 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override IEnumerable<Method> BuildMethods()
         {
+            if (Configuration.Generation1ConvenienceClient)
+                yield break;
+
             if (IncludeDeserializer)
                 yield return Snippets.Extensible.Model.BuildFromOperationResponseMethod(this, GetFromResponseModifiers());
             if (IncludeSerializer)
