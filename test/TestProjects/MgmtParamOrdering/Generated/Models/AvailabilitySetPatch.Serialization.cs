@@ -15,7 +15,7 @@ namespace MgmtParamOrdering.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -28,12 +28,12 @@ namespace MgmtParamOrdering.Models
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(PlatformUpdateDomainCount))
+            if (PlatformUpdateDomainCount.HasValue)
             {
                 writer.WritePropertyName("platformUpdateDomainCount"u8);
                 writer.WriteNumberValue(PlatformUpdateDomainCount.Value);
             }
-            if (Optional.IsDefined(PlatformFaultDomainCount))
+            if (PlatformFaultDomainCount.HasValue)
             {
                 writer.WritePropertyName("platformFaultDomainCount"u8);
                 writer.WriteNumberValue(PlatformFaultDomainCount.Value);

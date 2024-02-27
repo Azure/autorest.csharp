@@ -27,7 +27,7 @@ namespace _Type.Property.Optionality.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Property))
+            if (!(Property is ChangeTrackingList<StringProperty> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("property"u8);
                 writer.WriteStartArray();
@@ -75,7 +75,7 @@ namespace _Type.Property.Optionality.Models
             {
                 return null;
             }
-            Optional<IList<StringProperty>> property = default;
+            IList<StringProperty> property = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property0 in element.EnumerateObject())
@@ -100,7 +100,7 @@ namespace _Type.Property.Optionality.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new CollectionsModelProperty(Optional.ToList(property), serializedAdditionalRawData);
+            return new CollectionsModelProperty(property ?? new ChangeTrackingList<StringProperty>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<CollectionsModelProperty>.Write(ModelReaderWriterOptions options)

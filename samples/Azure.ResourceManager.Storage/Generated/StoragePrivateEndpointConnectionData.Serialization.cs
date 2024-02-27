@@ -20,12 +20,12 @@ namespace Azure.ResourceManager.Storage
             writer.WriteStartObject();
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(PrivateEndpoint))
+            if (PrivateEndpoint != null)
             {
                 writer.WritePropertyName("privateEndpoint"u8);
                 JsonSerializer.Serialize(writer, PrivateEndpoint);
             }
-            if (Optional.IsDefined(ConnectionState))
+            if (ConnectionState != null)
             {
                 writer.WritePropertyName("privateLinkServiceConnectionState"u8);
                 writer.WriteObjectValue(ConnectionState);
@@ -113,7 +113,14 @@ namespace Azure.ResourceManager.Storage
                     continue;
                 }
             }
-            return new StoragePrivateEndpointConnectionData(id, name, type, systemData.Value, privateEndpoint, privateLinkServiceConnectionState.Value, Optional.ToNullable(provisioningState));
+            return new StoragePrivateEndpointConnectionData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                privateEndpoint,
+                privateLinkServiceConnectionState.Value,
+                Optional.ToNullable(provisioningState));
         }
     }
 }

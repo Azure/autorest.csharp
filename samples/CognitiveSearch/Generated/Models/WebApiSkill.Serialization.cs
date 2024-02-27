@@ -19,7 +19,7 @@ namespace CognitiveSearch.Models
             writer.WriteStartObject();
             writer.WritePropertyName("uri"u8);
             writer.WriteStringValue(Uri);
-            if (Optional.IsCollectionDefined(HttpHeaders))
+            if (!(HttpHeaders is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("httpHeaders"u8);
                 writer.WriteStartObject();
@@ -30,17 +30,17 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndObject();
             }
-            if (Optional.IsDefined(HttpMethod))
+            if (HttpMethod != null)
             {
                 writer.WritePropertyName("httpMethod"u8);
                 writer.WriteStringValue(HttpMethod);
             }
-            if (Optional.IsDefined(Timeout))
+            if (Timeout.HasValue)
             {
                 writer.WritePropertyName("timeout"u8);
                 writer.WriteStringValue(Timeout.Value, "P");
             }
-            if (Optional.IsDefined(BatchSize))
+            if (BatchSize.HasValue)
             {
                 if (BatchSize != null)
                 {
@@ -52,7 +52,7 @@ namespace CognitiveSearch.Models
                     writer.WriteNull("batchSize");
                 }
             }
-            if (Optional.IsDefined(DegreeOfParallelism))
+            if (DegreeOfParallelism.HasValue)
             {
                 if (DegreeOfParallelism != null)
                 {
@@ -66,17 +66,17 @@ namespace CognitiveSearch.Models
             }
             writer.WritePropertyName("@odata.type"u8);
             writer.WriteStringValue(OdataType);
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Description))
+            if (Description != null)
             {
                 writer.WritePropertyName("description"u8);
                 writer.WriteStringValue(Description);
             }
-            if (Optional.IsDefined(Context))
+            if (Context != null)
             {
                 writer.WritePropertyName("context"u8);
                 writer.WriteStringValue(Context);
@@ -105,7 +105,7 @@ namespace CognitiveSearch.Models
                 return null;
             }
             string uri = default;
-            Optional<IDictionary<string, string>> httpHeaders = default;
+            IDictionary<string, string> httpHeaders = default;
             Optional<string> httpMethod = default;
             Optional<TimeSpan> timeout = default;
             Optional<int?> batchSize = default;
@@ -212,7 +212,19 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new WebApiSkill(odataType, name.Value, description.Value, context.Value, inputs, outputs, uri, Optional.ToDictionary(httpHeaders), httpMethod.Value, Optional.ToNullable(timeout), Optional.ToNullable(batchSize), Optional.ToNullable(degreeOfParallelism));
+            return new WebApiSkill(
+                odataType,
+                name.Value,
+                description.Value,
+                context.Value,
+                inputs,
+                outputs,
+                uri,
+                httpHeaders ?? new ChangeTrackingDictionary<string, string>(),
+                httpMethod.Value,
+                Optional.ToNullable(timeout),
+                Optional.ToNullable(batchSize),
+                Optional.ToNullable(degreeOfParallelism));
         }
     }
 }

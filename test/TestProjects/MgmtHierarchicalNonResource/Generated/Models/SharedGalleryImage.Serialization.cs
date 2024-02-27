@@ -29,7 +29,7 @@ namespace MgmtHierarchicalNonResource.Models
             Optional<RecommendedMachineConfiguration> recommended = default;
             Optional<Disallowed> disallowed = default;
             Optional<HyperVGeneration> hyperVGeneration = default;
-            Optional<IReadOnlyList<GalleryImageFeature>> features = default;
+            IReadOnlyList<GalleryImageFeature> features = default;
             Optional<ImagePurchasePlan> purchasePlan = default;
             Optional<string> uniqueId = default;
             foreach (var property in element.EnumerateObject())
@@ -160,7 +160,19 @@ namespace MgmtHierarchicalNonResource.Models
                     continue;
                 }
             }
-            return new SharedGalleryImage(name.Value, location.Value, uniqueId.Value, Optional.ToNullable(osType), Optional.ToNullable(osState), Optional.ToNullable(endOfLifeDate), identifier.Value, recommended.Value, disallowed.Value, Optional.ToNullable(hyperVGeneration), Optional.ToList(features), purchasePlan.Value);
+            return new SharedGalleryImage(
+                name.Value,
+                location.Value,
+                uniqueId.Value,
+                Optional.ToNullable(osType),
+                Optional.ToNullable(osState),
+                Optional.ToNullable(endOfLifeDate),
+                identifier.Value,
+                recommended.Value,
+                disallowed.Value,
+                Optional.ToNullable(hyperVGeneration),
+                features ?? new ChangeTrackingList<GalleryImageFeature>(),
+                purchasePlan.Value);
         }
     }
 }

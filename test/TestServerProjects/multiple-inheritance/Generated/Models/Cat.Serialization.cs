@@ -26,17 +26,17 @@ namespace multiple_inheritance.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(LikesMilk))
+            if (LikesMilk.HasValue)
             {
                 writer.WritePropertyName("likesMilk"u8);
                 writer.WriteBooleanValue(LikesMilk.Value);
             }
-            if (Optional.IsDefined(Meows))
+            if (Meows.HasValue)
             {
                 writer.WritePropertyName("meows"u8);
                 writer.WriteBooleanValue(Meows.Value);
             }
-            if (Optional.IsDefined(Hisses))
+            if (Hisses.HasValue)
             {
                 writer.WritePropertyName("hisses"u8);
                 writer.WriteBooleanValue(Hisses.Value);

@@ -27,27 +27,27 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Code))
+            if (Code != null)
             {
                 writer.WritePropertyName("code"u8);
                 writer.WriteStringValue(Code);
             }
-            if (Optional.IsDefined(Level))
+            if (Level.HasValue)
             {
                 writer.WritePropertyName("level"u8);
                 writer.WriteStringValue(Level.Value.ToSerialString());
             }
-            if (Optional.IsDefined(DisplayStatus))
+            if (DisplayStatus != null)
             {
                 writer.WritePropertyName("displayStatus"u8);
                 writer.WriteStringValue(DisplayStatus);
             }
-            if (Optional.IsDefined(Message))
+            if (Message != null)
             {
                 writer.WritePropertyName("message"u8);
                 writer.WriteStringValue(Message);
             }
-            if (Optional.IsDefined(Time))
+            if (Time.HasValue)
             {
                 writer.WritePropertyName("time"u8);
                 writer.WriteStringValue(Time.Value, "O");
@@ -138,7 +138,13 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new InstanceViewStatus(code.Value, Optional.ToNullable(level), displayStatus.Value, message.Value, Optional.ToNullable(time), serializedAdditionalRawData);
+            return new InstanceViewStatus(
+                code.Value,
+                Optional.ToNullable(level),
+                displayStatus.Value,
+                message.Value,
+                Optional.ToNullable(time),
+                serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -146,7 +152,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Code))
+            if (Code != null)
             {
                 builder.Append("  code:");
                 if (Code.Contains(Environment.NewLine))
@@ -160,13 +166,13 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(Level))
+            if (Level.HasValue)
             {
                 builder.Append("  level:");
                 builder.AppendLine($" '{Level.Value.ToSerialString()}'");
             }
 
-            if (Optional.IsDefined(DisplayStatus))
+            if (DisplayStatus != null)
             {
                 builder.Append("  displayStatus:");
                 if (DisplayStatus.Contains(Environment.NewLine))
@@ -180,7 +186,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(Message))
+            if (Message != null)
             {
                 builder.Append("  message:");
                 if (Message.Contains(Environment.NewLine))
@@ -194,7 +200,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(Time))
+            if (Time.HasValue)
             {
                 builder.Append("  time:");
                 var formattedDateTimeString = TypeFormatters.ToString(Time.Value, "o");

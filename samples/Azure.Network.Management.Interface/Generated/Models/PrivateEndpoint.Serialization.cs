@@ -16,17 +16,17 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (Optional.IsDefined(Location))
+            if (Location != null)
             {
                 writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location);
             }
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -39,12 +39,12 @@ namespace Azure.Network.Management.Interface.Models
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(Subnet))
+            if (Subnet != null)
             {
                 writer.WritePropertyName("subnet"u8);
                 writer.WriteObjectValue(Subnet);
             }
-            if (Optional.IsCollectionDefined(PrivateLinkServiceConnections))
+            if (!(PrivateLinkServiceConnections is ChangeTrackingList<PrivateLinkServiceConnection> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("privateLinkServiceConnections"u8);
                 writer.WriteStartArray();
@@ -54,7 +54,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(ManualPrivateLinkServiceConnections))
+            if (!(ManualPrivateLinkServiceConnections is ChangeTrackingList<PrivateLinkServiceConnection> collection1 && collection1.IsUndefined))
             {
                 writer.WritePropertyName("manualPrivateLinkServiceConnections"u8);
                 writer.WriteStartArray();
@@ -79,12 +79,12 @@ namespace Azure.Network.Management.Interface.Models
             Optional<string> name = default;
             Optional<string> type = default;
             Optional<string> location = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             Optional<Subnet> subnet = default;
-            Optional<IReadOnlyList<NetworkInterface>> networkInterfaces = default;
+            IReadOnlyList<NetworkInterface> networkInterfaces = default;
             Optional<ProvisioningState> provisioningState = default;
-            Optional<IList<PrivateLinkServiceConnection>> privateLinkServiceConnections = default;
-            Optional<IList<PrivateLinkServiceConnection>> manualPrivateLinkServiceConnections = default;
+            IList<PrivateLinkServiceConnection> privateLinkServiceConnections = default;
+            IList<PrivateLinkServiceConnection> manualPrivateLinkServiceConnections = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"u8))
@@ -199,7 +199,18 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new PrivateEndpoint(id.Value, name.Value, type.Value, location.Value, Optional.ToDictionary(tags), etag.Value, subnet.Value, Optional.ToList(networkInterfaces), Optional.ToNullable(provisioningState), Optional.ToList(privateLinkServiceConnections), Optional.ToList(manualPrivateLinkServiceConnections));
+            return new PrivateEndpoint(
+                id.Value,
+                name.Value,
+                type.Value,
+                location.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                etag.Value,
+                subnet.Value,
+                networkInterfaces ?? new ChangeTrackingList<NetworkInterface>(),
+                Optional.ToNullable(provisioningState),
+                privateLinkServiceConnections ?? new ChangeTrackingList<PrivateLinkServiceConnection>(),
+                manualPrivateLinkServiceConnections ?? new ChangeTrackingList<PrivateLinkServiceConnection>());
         }
     }
 }

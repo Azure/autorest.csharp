@@ -26,12 +26,12 @@ namespace model_flattening.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Productresource))
+            if (Productresource != null)
             {
                 writer.WritePropertyName("productresource"u8);
                 writer.WriteObjectValue(Productresource);
             }
-            if (Optional.IsCollectionDefined(Arrayofresources))
+            if (!(Arrayofresources is ChangeTrackingList<FlattenedProduct> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("arrayofresources"u8);
                 writer.WriteStartArray();
@@ -41,7 +41,7 @@ namespace model_flattening.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(Dictionaryofresources))
+            if (!(Dictionaryofresources is ChangeTrackingDictionary<string, FlattenedProduct> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("dictionaryofresources"u8);
                 writer.WriteStartObject();
@@ -91,8 +91,8 @@ namespace model_flattening.Models
                 return null;
             }
             Optional<FlattenedProduct> productresource = default;
-            Optional<IList<FlattenedProduct>> arrayofresources = default;
-            Optional<IDictionary<string, FlattenedProduct>> dictionaryofresources = default;
+            IList<FlattenedProduct> arrayofresources = default;
+            IDictionary<string, FlattenedProduct> dictionaryofresources = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -140,7 +140,7 @@ namespace model_flattening.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ResourceCollection(productresource.Value, Optional.ToList(arrayofresources), Optional.ToDictionary(dictionaryofresources), serializedAdditionalRawData);
+            return new ResourceCollection(productresource.Value, arrayofresources ?? new ChangeTrackingList<FlattenedProduct>(), dictionaryofresources ?? new ChangeTrackingDictionary<string, FlattenedProduct>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ResourceCollection>.Write(ModelReaderWriterOptions options)

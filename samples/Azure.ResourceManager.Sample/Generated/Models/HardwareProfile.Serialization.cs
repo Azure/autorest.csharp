@@ -27,7 +27,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(VmSize))
+            if (VmSize.HasValue)
             {
                 writer.WritePropertyName("vmSize"u8);
                 writer.WriteStringValue(VmSize.Value.ToString());
@@ -98,7 +98,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(VmSize))
+            if (VmSize.HasValue)
             {
                 builder.Append("  vmSize:");
                 builder.AppendLine($" '{VmSize.Value.ToString()}'");

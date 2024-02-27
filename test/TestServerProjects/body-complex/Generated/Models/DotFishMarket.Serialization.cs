@@ -26,12 +26,12 @@ namespace body_complex.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(SampleSalmon))
+            if (SampleSalmon != null)
             {
                 writer.WritePropertyName("sampleSalmon"u8);
                 writer.WriteObjectValue(SampleSalmon);
             }
-            if (Optional.IsCollectionDefined(Salmons))
+            if (!(Salmons is ChangeTrackingList<DotSalmon> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("salmons"u8);
                 writer.WriteStartArray();
@@ -41,12 +41,12 @@ namespace body_complex.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(SampleFish))
+            if (SampleFish != null)
             {
                 writer.WritePropertyName("sampleFish"u8);
                 writer.WriteObjectValue(SampleFish);
             }
-            if (Optional.IsCollectionDefined(Fishes))
+            if (!(Fishes is ChangeTrackingList<DotFish> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("fishes"u8);
                 writer.WriteStartArray();
@@ -95,9 +95,9 @@ namespace body_complex.Models
                 return null;
             }
             Optional<DotSalmon> sampleSalmon = default;
-            Optional<IReadOnlyList<DotSalmon>> salmons = default;
+            IReadOnlyList<DotSalmon> salmons = default;
             Optional<DotFish> sampleFish = default;
-            Optional<IReadOnlyList<DotFish>> fishes = default;
+            IReadOnlyList<DotFish> fishes = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -154,7 +154,7 @@ namespace body_complex.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DotFishMarket(sampleSalmon.Value, Optional.ToList(salmons), sampleFish.Value, Optional.ToList(fishes), serializedAdditionalRawData);
+            return new DotFishMarket(sampleSalmon.Value, salmons ?? new ChangeTrackingList<DotSalmon>(), sampleFish.Value, fishes ?? new ChangeTrackingList<DotFish>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<DotFishMarket>.Write(ModelReaderWriterOptions options)

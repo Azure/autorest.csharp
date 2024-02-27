@@ -36,7 +36,17 @@ namespace MgmtSafeFlatten.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new TypeOneData(id, name, resourceType, systemData, tags, location, myType, layerTwoMyProp != null ? new LayerOneSingle(new LayerTwoSingle(layerTwoMyProp)) : null, layerOneType, layerOneConflictId != null ? ResourceManagerModelFactory.WritableSubResource(layerOneConflictId) : null);
+            return new TypeOneData(
+                id,
+                name,
+                resourceType,
+                systemData,
+                tags,
+                location,
+                myType,
+                layerTwoMyProp != null ? new LayerOneSingle(new LayerTwoSingle(layerTwoMyProp)) : null,
+                layerOneType,
+                layerOneConflictId != null ? ResourceManagerModelFactory.WritableSubResource(layerOneConflictId) : null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtSafeFlatten.TypeTwoData"/>. </summary>
@@ -53,7 +63,15 @@ namespace MgmtSafeFlatten.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new TypeTwoData(id, name, resourceType, systemData, tags, location, myType, layerTwoMyProp != null ? new LayerOneSingle(new LayerTwoSingle(layerTwoMyProp)) : null);
+            return new TypeTwoData(
+                id,
+                name,
+                resourceType,
+                systemData,
+                tags,
+                location,
+                myType,
+                layerTwoMyProp != null ? new LayerOneSingle(new LayerTwoSingle(layerTwoMyProp)) : null);
         }
     }
 }

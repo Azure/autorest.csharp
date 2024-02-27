@@ -27,12 +27,12 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && Optional.IsDefined(ConsoleScreenshotBlobUri))
+            if (options.Format != "W" && ConsoleScreenshotBlobUri != null)
             {
                 writer.WritePropertyName("consoleScreenshotBlobUri"u8);
                 writer.WriteStringValue(ConsoleScreenshotBlobUri.AbsoluteUri);
             }
-            if (options.Format != "W" && Optional.IsDefined(SerialConsoleLogBlobUri))
+            if (options.Format != "W" && SerialConsoleLogBlobUri != null)
             {
                 writer.WritePropertyName("serialConsoleLogBlobUri"u8);
                 writer.WriteStringValue(SerialConsoleLogBlobUri.AbsoluteUri);
@@ -113,13 +113,13 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(ConsoleScreenshotBlobUri))
+            if (ConsoleScreenshotBlobUri != null)
             {
                 builder.Append("  consoleScreenshotBlobUri:");
                 builder.AppendLine($" '{ConsoleScreenshotBlobUri.AbsoluteUri}'");
             }
 
-            if (Optional.IsDefined(SerialConsoleLogBlobUri))
+            if (SerialConsoleLogBlobUri != null)
             {
                 builder.Append("  serialConsoleLogBlobUri:");
                 builder.AppendLine($" '{SerialConsoleLogBlobUri.AbsoluteUri}'");

@@ -15,12 +15,12 @@ namespace MgmtAcronymMapping.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(EnableAutomaticOSUpgrade))
+            if (EnableAutomaticOSUpgrade.HasValue)
             {
                 writer.WritePropertyName("enableAutomaticOSUpgrade"u8);
                 writer.WriteBooleanValue(EnableAutomaticOSUpgrade.Value);
             }
-            if (Optional.IsDefined(DisableAutomaticRollback))
+            if (DisableAutomaticRollback.HasValue)
             {
                 writer.WritePropertyName("disableAutomaticRollback"u8);
                 writer.WriteBooleanValue(DisableAutomaticRollback.Value);

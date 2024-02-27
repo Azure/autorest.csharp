@@ -27,12 +27,12 @@ namespace AnomalyDetector.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(ModelState))
+            if (ModelState != null)
             {
                 writer.WritePropertyName("modelState"u8);
                 writer.WriteObjectValue(ModelState);
             }
-            if (Optional.IsCollectionDefined(VariableStates))
+            if (!(VariableStates is ChangeTrackingList<VariableState> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("variableStates"u8);
                 writer.WriteStartArray();
@@ -81,7 +81,7 @@ namespace AnomalyDetector.Models
                 return null;
             }
             Optional<ModelState> modelState = default;
-            Optional<IList<VariableState>> variableStates = default;
+            IList<VariableState> variableStates = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -115,7 +115,7 @@ namespace AnomalyDetector.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DiagnosticsInfo(modelState.Value, Optional.ToList(variableStates), serializedAdditionalRawData);
+            return new DiagnosticsInfo(modelState.Value, variableStates ?? new ChangeTrackingList<VariableState>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<DiagnosticsInfo>.Write(ModelReaderWriterOptions options)

@@ -16,7 +16,7 @@ namespace MgmtMockAndSample.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Servers))
+            if (!(Servers is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("servers"u8);
                 writer.WriteStartArray();
@@ -26,12 +26,12 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(EnableProxy))
+            if (EnableProxy.HasValue)
             {
                 writer.WritePropertyName("enableProxy"u8);
                 writer.WriteBooleanValue(EnableProxy.Value);
             }
-            if (Optional.IsDefined(RequireProxyForNetworkRules))
+            if (RequireProxyForNetworkRules.HasValue)
             {
                 if (RequireProxyForNetworkRules != null)
                 {
@@ -52,7 +52,7 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<IList<string>> servers = default;
+            IList<string> servers = default;
             Optional<bool> enableProxy = default;
             Optional<bool?> requireProxyForNetworkRules = default;
             foreach (var property in element.EnumerateObject())
@@ -91,7 +91,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new DnsSettings(Optional.ToList(servers), Optional.ToNullable(enableProxy), Optional.ToNullable(requireProxyForNetworkRules));
+            return new DnsSettings(servers ?? new ChangeTrackingList<string>(), Optional.ToNullable(enableProxy), Optional.ToNullable(requireProxyForNetworkRules));
         }
     }
 }

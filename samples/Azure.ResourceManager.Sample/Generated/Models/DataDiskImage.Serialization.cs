@@ -27,7 +27,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && Optional.IsDefined(Lun))
+            if (options.Format != "W" && Lun.HasValue)
             {
                 writer.WritePropertyName("lun"u8);
                 writer.WriteNumberValue(Lun.Value);
@@ -98,7 +98,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Lun))
+            if (Lun.HasValue)
             {
                 builder.Append("  lun:");
                 builder.AppendLine($" {Lun.Value}");

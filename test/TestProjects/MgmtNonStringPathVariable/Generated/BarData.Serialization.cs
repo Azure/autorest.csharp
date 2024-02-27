@@ -18,12 +18,12 @@ namespace MgmtNonStringPathVariable
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Properties))
+            if (Properties != null)
             {
                 writer.WritePropertyName("properties"u8);
                 writer.WriteObjectValue(Properties);
             }
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -46,7 +46,7 @@ namespace MgmtNonStringPathVariable
                 return null;
             }
             Optional<BarProperties> properties = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -107,7 +107,14 @@ namespace MgmtNonStringPathVariable
                     continue;
                 }
             }
-            return new BarData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, properties.Value);
+            return new BarData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                properties.Value);
         }
     }
 }

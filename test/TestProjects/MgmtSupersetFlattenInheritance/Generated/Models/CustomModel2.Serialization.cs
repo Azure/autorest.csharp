@@ -15,24 +15,24 @@ namespace MgmtSupersetFlattenInheritance.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (Optional.IsDefined(Bar))
+            if (Bar != null)
             {
                 writer.WritePropertyName("bar"u8);
                 writer.WriteStringValue(Bar);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(IdPropertiesId))
+            if (IdPropertiesId != null)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(IdPropertiesId);
             }
-            if (Optional.IsDefined(Foo))
+            if (Foo != null)
             {
                 writer.WritePropertyName("foo"u8);
                 writer.WriteStringValue(Foo);

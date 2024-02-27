@@ -20,29 +20,29 @@ namespace xml_service.Models
         private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "StorageServiceProperties");
-            if (Optional.IsDefined(Logging))
+            if (Logging != null)
             {
                 writer.WriteObjectValue(Logging, "Logging");
             }
-            if (Optional.IsDefined(HourMetrics))
+            if (HourMetrics != null)
             {
                 writer.WriteObjectValue(HourMetrics, "HourMetrics");
             }
-            if (Optional.IsDefined(MinuteMetrics))
+            if (MinuteMetrics != null)
             {
                 writer.WriteObjectValue(MinuteMetrics, "MinuteMetrics");
             }
-            if (Optional.IsDefined(DefaultServiceVersion))
+            if (DefaultServiceVersion != null)
             {
                 writer.WriteStartElement("DefaultServiceVersion");
                 writer.WriteValue(DefaultServiceVersion);
                 writer.WriteEndElement();
             }
-            if (Optional.IsDefined(DeleteRetentionPolicy))
+            if (DeleteRetentionPolicy != null)
             {
                 writer.WriteObjectValue(DeleteRetentionPolicy, "DeleteRetentionPolicy");
             }
-            if (Optional.IsCollectionDefined(Cors))
+            if (!(Cors is ChangeTrackingList<CorsRule> collection && collection.IsUndefined))
             {
                 writer.WriteStartElement("Cors");
                 foreach (var item in Cors)
@@ -95,7 +95,14 @@ namespace xml_service.Models
                 }
                 cors = array;
             }
-            return new StorageServiceProperties(logging, hourMetrics, minuteMetrics, cors, defaultServiceVersion, deleteRetentionPolicy, serializedAdditionalRawData: null);
+            return new StorageServiceProperties(
+                logging,
+                hourMetrics,
+                minuteMetrics,
+                cors,
+                defaultServiceVersion,
+                deleteRetentionPolicy,
+                serializedAdditionalRawData: null);
         }
 
         BinaryData IPersistableModel<StorageServiceProperties>.Write(ModelReaderWriterOptions options)

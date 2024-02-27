@@ -17,7 +17,7 @@ namespace CognitiveSearch.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (Optional.IsDefined(Description))
+            if (Description != null)
             {
                 writer.WritePropertyName("description"u8);
                 writer.WriteStringValue(Description);
@@ -28,17 +28,17 @@ namespace CognitiveSearch.Models
             writer.WriteObjectValue(Credentials);
             writer.WritePropertyName("container"u8);
             writer.WriteObjectValue(Container);
-            if (Optional.IsDefined(DataChangeDetectionPolicy))
+            if (DataChangeDetectionPolicy != null)
             {
                 writer.WritePropertyName("dataChangeDetectionPolicy"u8);
                 writer.WriteObjectValue(DataChangeDetectionPolicy);
             }
-            if (Optional.IsDefined(DataDeletionDetectionPolicy))
+            if (DataDeletionDetectionPolicy != null)
             {
                 writer.WritePropertyName("dataDeletionDetectionPolicy"u8);
                 writer.WriteObjectValue(DataDeletionDetectionPolicy);
             }
-            if (Optional.IsDefined(ETag))
+            if (ETag != null)
             {
                 writer.WritePropertyName("@odata.etag"u8);
                 writer.WriteStringValue(ETag);
@@ -111,7 +111,15 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new DataSource(name, description.Value, type, credentials, container, dataChangeDetectionPolicy.Value, dataDeletionDetectionPolicy.Value, odataEtag.Value);
+            return new DataSource(
+                name,
+                description.Value,
+                type,
+                credentials,
+                container,
+                dataChangeDetectionPolicy.Value,
+                dataDeletionDetectionPolicy.Value,
+                odataEtag.Value);
         }
     }
 }

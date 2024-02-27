@@ -15,14 +15,14 @@ namespace MgmtScopeResource.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Location))
+            if (Location != null)
             {
                 writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteObjectValue(Properties);
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();

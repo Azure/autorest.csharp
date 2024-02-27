@@ -18,7 +18,7 @@ namespace MgmtAcronymMapping
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -43,7 +43,7 @@ namespace MgmtAcronymMapping
             {
                 return null;
             }
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -147,7 +147,17 @@ namespace MgmtAcronymMapping
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetRollingUpgradeData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, policy.Value, runningStatus.Value, progress.Value, error.Value);
+            return new VirtualMachineScaleSetRollingUpgradeData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                policy.Value,
+                runningStatus.Value,
+                progress.Value,
+                error.Value);
         }
     }
 }

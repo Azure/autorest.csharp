@@ -15,7 +15,7 @@ namespace MgmtAcronymMapping.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(UltraSSDEnabled))
+            if (UltraSSDEnabled.HasValue)
             {
                 writer.WritePropertyName("ultraSSDEnabled"u8);
                 writer.WriteBooleanValue(UltraSSDEnabled.Value);

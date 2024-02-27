@@ -26,7 +26,7 @@ namespace body_complex.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Array))
+            if (!(Array is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("array"u8);
                 writer.WriteStartArray();
@@ -74,7 +74,7 @@ namespace body_complex.Models
             {
                 return null;
             }
-            Optional<IList<string>> array = default;
+            IList<string> array = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -99,7 +99,7 @@ namespace body_complex.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ArrayWrapper(Optional.ToList(array), serializedAdditionalRawData);
+            return new ArrayWrapper(array ?? new ChangeTrackingList<string>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ArrayWrapper>.Write(ModelReaderWriterOptions options)

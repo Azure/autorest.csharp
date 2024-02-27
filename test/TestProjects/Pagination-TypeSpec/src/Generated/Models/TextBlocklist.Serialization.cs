@@ -29,7 +29,7 @@ namespace Pagination.Models
             writer.WriteStartObject();
             writer.WritePropertyName("blocklistName"u8);
             writer.WriteStringValue(BlocklistName);
-            if (Optional.IsDefined(Description))
+            if (Description != null)
             {
                 writer.WritePropertyName("description"u8);
                 writer.WriteStringValue(Description);

@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
@@ -454,8 +455,8 @@ namespace AutoRest.CSharp.Common.Input
             { Type: AllSchemaTypes.Uuid } => InputPrimitiveType.Guid,
             { Type: AllSchemaTypes.Uri } => InputPrimitiveType.Uri,
 
-            ChoiceSchema choiceSchema => CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, true),
-            SealedChoiceSchema choiceSchema => CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, false),
+            ChoiceSchema choiceSchema => CreateEnumType(choiceSchema),
+            SealedChoiceSchema choiceSchema => CreateEnumType(choiceSchema),
 
             ArraySchema array => new InputListType(array.Name, CreateType(array.ElementType, modelsCache, array.NullableItems ?? false), false),
             DictionarySchema dictionary => new InputDictionaryType(dictionary.Name, InputPrimitiveType.String, CreateType(dictionary.ElementType, modelsCache, dictionary.NullableItems ?? false), false),
@@ -490,6 +491,12 @@ namespace AutoRest.CSharp.Common.Input
 
             return new InputConstant(normalizedValue, valueType);
         }
+
+        public static InputEnumType CreateEnumType(SealedChoiceSchema schema)
+            => CreateEnumType(schema, schema.ChoiceType, schema.Choices, false);
+
+        public static InputEnumType CreateEnumType(ChoiceSchema schema)
+            => CreateEnumType(schema, schema.ChoiceType, schema.Choices, true);
 
         public static InputEnumType CreateEnumType(Schema schema, PrimitiveSchema choiceType, IEnumerable<ChoiceValue> choices, bool isExtensible) => new InputEnumType(
                 Name: schema.Name,

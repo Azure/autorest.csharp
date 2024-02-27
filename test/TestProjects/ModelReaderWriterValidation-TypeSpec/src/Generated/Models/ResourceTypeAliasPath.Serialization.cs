@@ -27,12 +27,12 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Path))
+            if (Path != null)
             {
                 writer.WritePropertyName("path"u8);
                 writer.WriteStringValue(Path);
             }
-            if (Optional.IsCollectionDefined(ApiVersions))
+            if (!(ApiVersions is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("apiVersions"u8);
                 writer.WriteStartArray();
@@ -42,12 +42,12 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(Pattern))
+            if (Pattern != null)
             {
                 writer.WritePropertyName("pattern"u8);
                 writer.WriteObjectValue(Pattern);
             }
-            if (Optional.IsDefined(Metadata))
+            if (Metadata != null)
             {
                 writer.WritePropertyName("metadata"u8);
                 writer.WriteObjectValue(Metadata);
@@ -91,7 +91,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 return null;
             }
             Optional<string> path = default;
-            Optional<IReadOnlyList<string>> apiVersions = default;
+            IReadOnlyList<string> apiVersions = default;
             Optional<ResourceTypeAliasPattern> pattern = default;
             Optional<ResourceTypeAliasPathMetadata> metadata = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
@@ -141,7 +141,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ResourceTypeAliasPath(path.Value, Optional.ToList(apiVersions), pattern.Value, metadata.Value, serializedAdditionalRawData);
+            return new ResourceTypeAliasPath(path.Value, apiVersions ?? new ChangeTrackingList<string>(), pattern.Value, metadata.Value, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ResourceTypeAliasPath>.Write(ModelReaderWriterOptions options)

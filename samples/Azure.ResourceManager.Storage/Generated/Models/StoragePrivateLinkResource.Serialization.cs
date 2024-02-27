@@ -19,7 +19,7 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteStartObject();
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(RequiredZoneNames))
+            if (!(RequiredZoneNames is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("requiredZoneNames"u8);
                 writer.WriteStartArray();
@@ -44,8 +44,8 @@ namespace Azure.ResourceManager.Storage.Models
             ResourceType type = default;
             Optional<SystemData> systemData = default;
             Optional<string> groupId = default;
-            Optional<IReadOnlyList<string>> requiredMembers = default;
-            Optional<IList<string>> requiredZoneNames = default;
+            IReadOnlyList<string> requiredMembers = default;
+            IList<string> requiredZoneNames = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -118,7 +118,14 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new StoragePrivateLinkResource(id, name, type, systemData.Value, groupId.Value, Optional.ToList(requiredMembers), Optional.ToList(requiredZoneNames));
+            return new StoragePrivateLinkResource(
+                id,
+                name,
+                type,
+                systemData.Value,
+                groupId.Value,
+                requiredMembers ?? new ChangeTrackingList<string>(),
+                requiredZoneNames ?? new ChangeTrackingList<string>());
         }
     }
 }

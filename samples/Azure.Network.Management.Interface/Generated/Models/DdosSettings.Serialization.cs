@@ -15,17 +15,17 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(DdosCustomPolicy))
+            if (DdosCustomPolicy != null)
             {
                 writer.WritePropertyName("ddosCustomPolicy"u8);
                 writer.WriteObjectValue(DdosCustomPolicy);
             }
-            if (Optional.IsDefined(ProtectionCoverage))
+            if (ProtectionCoverage.HasValue)
             {
                 writer.WritePropertyName("protectionCoverage"u8);
                 writer.WriteStringValue(ProtectionCoverage.Value.ToString());
             }
-            if (Optional.IsDefined(ProtectedIP))
+            if (ProtectedIP.HasValue)
             {
                 writer.WritePropertyName("protectedIP"u8);
                 writer.WriteBooleanValue(ProtectedIP.Value);

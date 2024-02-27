@@ -19,7 +19,7 @@ namespace MgmtScopeResource.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<Marketplace>> value = default;
+            IReadOnlyList<Marketplace> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -43,7 +43,7 @@ namespace MgmtScopeResource.Models
                     continue;
                 }
             }
-            return new MarketplacesListResult(Optional.ToList(value), nextLink.Value);
+            return new MarketplacesListResult(value ?? new ChangeTrackingList<Marketplace>(), nextLink.Value);
         }
     }
 }

@@ -4,6 +4,7 @@
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Types;
 
@@ -13,9 +14,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
     {
         public static void Execute(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel)
         {
-            BuildContext<DataPlaneOutputLibrary> context = new BuildContext<DataPlaneOutputLibrary>(codeModel, sourceInputModel);
-
-            var library = context.Library;
+            var library = new DataPlaneOutputLibrary(codeModel, sourceInputModel);
             var modelWriter = new ModelWriter();
             var clientWriter = new DataPlaneClientWriter();
             var restClientWriter = new RestClientWriter();

@@ -42,7 +42,7 @@ namespace _Azure.Lro.RpcLegacy.Models
                 writer.WritePropertyName("status"u8);
                 writer.WriteStringValue(Status.ToString());
             }
-            if (options.Format != "W" && Optional.IsCollectionDefined(Errors))
+            if (options.Format != "W" && !(Errors is ChangeTrackingList<ErrorResponse> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("errors"u8);
                 writer.WriteStartArray();
@@ -52,7 +52,7 @@ namespace _Azure.Lro.RpcLegacy.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W" && Optional.IsCollectionDefined(Results))
+            if (options.Format != "W" && !(Results is ChangeTrackingList<string> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("results"u8);
                 writer.WriteStartArray();
@@ -103,8 +103,8 @@ namespace _Azure.Lro.RpcLegacy.Models
             string jobId = default;
             string comment = default;
             JobStatus status = default;
-            Optional<IReadOnlyList<ErrorResponse>> errors = default;
-            Optional<IReadOnlyList<string>> results = default;
+            IReadOnlyList<ErrorResponse> errors = default;
+            IReadOnlyList<string> results = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -158,7 +158,13 @@ namespace _Azure.Lro.RpcLegacy.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new JobResult(jobId, comment, status, Optional.ToList(errors), Optional.ToList(results), serializedAdditionalRawData);
+            return new JobResult(
+                jobId,
+                comment,
+                status,
+                errors ?? new ChangeTrackingList<ErrorResponse>(),
+                results ?? new ChangeTrackingList<string>(),
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<JobResult>.Write(ModelReaderWriterOptions options)

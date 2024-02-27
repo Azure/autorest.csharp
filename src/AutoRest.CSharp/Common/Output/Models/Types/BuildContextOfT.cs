@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 #pragma warning restore SA1649 // File name should match first type name
     {
         private TypeFactory? _typeFactory;
-        private InputNamespace? _inputNamespace;
+        private InputNamespace _inputNamespace;
 
         private T? _library;
         public T Library => _library ??= EnsureLibrary();
@@ -24,18 +24,15 @@ namespace AutoRest.CSharp.Output.Models.Types
         private T EnsureLibrary()
         {
             T library;
-            if (Configuration.Generation1ConvenienceClient)
+            if (Configuration.AzureArm)
             {
-                library = (T)(object)new DataPlaneOutputLibrary(CodeModel!, (BuildContext<DataPlaneOutputLibrary>)(object)this);
-            }
-            else if (Configuration.AzureArm)
-            {
-                library = (T)(object)new MgmtOutputLibrary(_inputNamespace!);
+                library = (T)(object)new MgmtOutputLibrary(_inputNamespace);
             }
             else
             {
-                throw new InvalidOperationException($"{nameof(BuildContext)} isn't supported in DPG");
+                throw new InvalidOperationException($"{nameof(BuildContext)} is supported only in MPG");
             }
+
             BaseLibrary = library;
             return library;
         }

@@ -15,22 +15,22 @@ namespace MgmtSupersetInheritance.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Id))
+            if (Id.HasValue)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteNumberValue(Id.Value);
             }
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(SupersetModel3Type))
+            if (SupersetModel3Type != null)
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(SupersetModel3Type);
             }
-            if (Optional.IsDefined(New))
+            if (New != null)
             {
                 writer.WritePropertyName("new"u8);
                 writer.WriteStringValue(New);

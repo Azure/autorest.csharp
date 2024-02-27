@@ -15,37 +15,37 @@ namespace MgmtExpandResourceTypes.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Host))
+            if (Host != null)
             {
                 writer.WritePropertyName("host"u8);
                 writer.WriteStringValue(Host);
             }
-            if (Optional.IsDefined(Email))
+            if (Email != null)
             {
                 writer.WritePropertyName("email"u8);
                 writer.WriteStringValue(Email);
             }
-            if (Optional.IsDefined(SerialNumber))
+            if (SerialNumber.HasValue)
             {
                 writer.WritePropertyName("serialNumber"u8);
                 writer.WriteNumberValue(SerialNumber.Value);
             }
-            if (Optional.IsDefined(RefreshTime))
+            if (RefreshTime.HasValue)
             {
                 writer.WritePropertyName("refreshTime"u8);
                 writer.WriteNumberValue(RefreshTime.Value);
             }
-            if (Optional.IsDefined(RetryTime))
+            if (RetryTime.HasValue)
             {
                 writer.WritePropertyName("retryTime"u8);
                 writer.WriteNumberValue(RetryTime.Value);
             }
-            if (Optional.IsDefined(ExpireTime))
+            if (ExpireTime.HasValue)
             {
                 writer.WritePropertyName("expireTime"u8);
                 writer.WriteNumberValue(ExpireTime.Value);
             }
-            if (Optional.IsDefined(MinimumTtl))
+            if (MinimumTtl.HasValue)
             {
                 writer.WritePropertyName("minimumTTL"u8);
                 writer.WriteNumberValue(MinimumTtl.Value);
@@ -124,7 +124,14 @@ namespace MgmtExpandResourceTypes.Models
                     continue;
                 }
             }
-            return new SoaRecord(host.Value, email.Value, Optional.ToNullable(serialNumber), Optional.ToNullable(refreshTime), Optional.ToNullable(retryTime), Optional.ToNullable(expireTime), Optional.ToNullable(minimumTTL));
+            return new SoaRecord(
+                host.Value,
+                email.Value,
+                Optional.ToNullable(serialNumber),
+                Optional.ToNullable(refreshTime),
+                Optional.ToNullable(retryTime),
+                Optional.ToNullable(expireTime),
+                Optional.ToNullable(minimumTTL));
         }
     }
 }

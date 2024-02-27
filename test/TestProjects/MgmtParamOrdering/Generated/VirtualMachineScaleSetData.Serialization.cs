@@ -17,7 +17,7 @@ namespace MgmtParamOrdering
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Zones))
+            if (!(Zones is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("zones"u8);
                 writer.WriteStartArray();
@@ -27,7 +27,7 @@ namespace MgmtParamOrdering
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -49,8 +49,8 @@ namespace MgmtParamOrdering
             {
                 return null;
             }
-            Optional<IList<string>> zones = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IList<string> zones = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -116,7 +116,14 @@ namespace MgmtParamOrdering
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, Optional.ToList(zones));
+            return new VirtualMachineScaleSetData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                zones ?? new ChangeTrackingList<string>());
         }
     }
 }

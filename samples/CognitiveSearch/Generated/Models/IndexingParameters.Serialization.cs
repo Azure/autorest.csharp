@@ -16,22 +16,22 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(BatchSize))
+            if (BatchSize.HasValue)
             {
                 writer.WritePropertyName("batchSize"u8);
                 writer.WriteNumberValue(BatchSize.Value);
             }
-            if (Optional.IsDefined(MaxFailedItems))
+            if (MaxFailedItems.HasValue)
             {
                 writer.WritePropertyName("maxFailedItems"u8);
                 writer.WriteNumberValue(MaxFailedItems.Value);
             }
-            if (Optional.IsDefined(MaxFailedItemsPerBatch))
+            if (MaxFailedItemsPerBatch.HasValue)
             {
                 writer.WritePropertyName("maxFailedItemsPerBatch"u8);
                 writer.WriteNumberValue(MaxFailedItemsPerBatch.Value);
             }
-            if (Optional.IsCollectionDefined(Configuration))
+            if (!(Configuration is ChangeTrackingDictionary<string, object> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("configuration"u8);
                 writer.WriteStartObject();
@@ -59,7 +59,7 @@ namespace CognitiveSearch.Models
             Optional<int> batchSize = default;
             Optional<int> maxFailedItems = default;
             Optional<int> maxFailedItemsPerBatch = default;
-            Optional<IDictionary<string, object>> configuration = default;
+            IDictionary<string, object> configuration = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("batchSize"u8))
@@ -111,7 +111,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new IndexingParameters(Optional.ToNullable(batchSize), Optional.ToNullable(maxFailedItems), Optional.ToNullable(maxFailedItemsPerBatch), Optional.ToDictionary(configuration));
+            return new IndexingParameters(Optional.ToNullable(batchSize), Optional.ToNullable(maxFailedItems), Optional.ToNullable(maxFailedItemsPerBatch), configuration ?? new ChangeTrackingDictionary<string, object>());
         }
     }
 }

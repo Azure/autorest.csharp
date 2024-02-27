@@ -26,27 +26,27 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Caching))
+            if (Caching.HasValue)
             {
                 writer.WritePropertyName("caching"u8);
                 writer.WriteStringValue(Caching.Value.ToSerialString());
             }
-            if (Optional.IsDefined(WriteAcceleratorEnabled))
+            if (WriteAcceleratorEnabled.HasValue)
             {
                 writer.WritePropertyName("writeAcceleratorEnabled"u8);
                 writer.WriteBooleanValue(WriteAcceleratorEnabled.Value);
             }
-            if (Optional.IsDefined(DiskSizeGB))
+            if (DiskSizeGB.HasValue)
             {
                 writer.WritePropertyName("diskSizeGB"u8);
                 writer.WriteNumberValue(DiskSizeGB.Value);
             }
-            if (Optional.IsDefined(Image))
+            if (Image != null)
             {
                 writer.WritePropertyName("image"u8);
                 writer.WriteObjectValue(Image);
             }
-            if (Optional.IsCollectionDefined(VhdContainers))
+            if (!(VhdContainers is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("vhdContainers"u8);
                 writer.WriteStartArray();
@@ -56,7 +56,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(ManagedDisk))
+            if (ManagedDisk != null)
             {
                 writer.WritePropertyName("managedDisk"u8);
                 writer.WriteObjectValue(ManagedDisk);
@@ -103,7 +103,7 @@ namespace Azure.ResourceManager.Sample.Models
             Optional<bool> writeAcceleratorEnabled = default;
             Optional<int> diskSizeGB = default;
             Optional<VirtualHardDisk> image = default;
-            Optional<IList<string>> vhdContainers = default;
+            IList<string> vhdContainers = default;
             Optional<VirtualMachineScaleSetManagedDiskParameters> managedDisk = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -174,7 +174,14 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineScaleSetUpdateOSDisk(Optional.ToNullable(caching), Optional.ToNullable(writeAcceleratorEnabled), Optional.ToNullable(diskSizeGB), image.Value, Optional.ToList(vhdContainers), managedDisk.Value, serializedAdditionalRawData);
+            return new VirtualMachineScaleSetUpdateOSDisk(
+                Optional.ToNullable(caching),
+                Optional.ToNullable(writeAcceleratorEnabled),
+                Optional.ToNullable(diskSizeGB),
+                image.Value,
+                vhdContainers ?? new ChangeTrackingList<string>(),
+                managedDisk.Value,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<VirtualMachineScaleSetUpdateOSDisk>.Write(ModelReaderWriterOptions options)

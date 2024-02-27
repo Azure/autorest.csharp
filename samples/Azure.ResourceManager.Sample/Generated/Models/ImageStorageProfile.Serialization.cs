@@ -28,12 +28,12 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(OSDisk))
+            if (OSDisk != null)
             {
                 writer.WritePropertyName("osDisk"u8);
                 writer.WriteObjectValue(OSDisk);
             }
-            if (Optional.IsCollectionDefined(DataDisks))
+            if (!(DataDisks is ChangeTrackingList<ImageDataDisk> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("dataDisks"u8);
                 writer.WriteStartArray();
@@ -43,7 +43,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(ZoneResilient))
+            if (ZoneResilient.HasValue)
             {
                 writer.WritePropertyName("zoneResilient"u8);
                 writer.WriteBooleanValue(ZoneResilient.Value);
@@ -87,7 +87,7 @@ namespace Azure.ResourceManager.Sample.Models
                 return null;
             }
             Optional<ImageOSDisk> osDisk = default;
-            Optional<IList<ImageDataDisk>> dataDisks = default;
+            IList<ImageDataDisk> dataDisks = default;
             Optional<bool> zoneResilient = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -131,7 +131,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ImageStorageProfile(osDisk.Value, Optional.ToList(dataDisks), Optional.ToNullable(zoneResilient), serializedAdditionalRawData);
+            return new ImageStorageProfile(osDisk.Value, dataDisks ?? new ChangeTrackingList<ImageDataDisk>(), Optional.ToNullable(zoneResilient), serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -139,13 +139,13 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(OSDisk))
+            if (OSDisk != null)
             {
                 builder.Append("  osDisk:");
                 AppendChildObject(builder, OSDisk, options, 2, false);
             }
 
-            if (Optional.IsCollectionDefined(DataDisks))
+            if (!(DataDisks is ChangeTrackingList<ImageDataDisk> collection && collection.IsUndefined))
             {
                 if (DataDisks.Any())
                 {
@@ -159,7 +159,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(ZoneResilient))
+            if (ZoneResilient.HasValue)
             {
                 builder.Append("  zoneResilient:");
                 var boolValue = ZoneResilient.Value == true ? "true" : "false";

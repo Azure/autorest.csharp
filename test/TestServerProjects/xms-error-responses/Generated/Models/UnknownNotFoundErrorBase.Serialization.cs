@@ -26,14 +26,14 @@ namespace xms_error_responses.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Reason))
+            if (Reason != null)
             {
                 writer.WritePropertyName("reason"u8);
                 writer.WriteStringValue(Reason);
             }
             writer.WritePropertyName("whatNotFound"u8);
             writer.WriteStringValue(WhatNotFound);
-            if (Optional.IsDefined(SomeBaseProp))
+            if (SomeBaseProp != null)
             {
                 writer.WritePropertyName("someBaseProp"u8);
                 writer.WriteStringValue(SomeBaseProp);

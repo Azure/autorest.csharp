@@ -33,7 +33,7 @@ namespace MgmtDiscriminator.Models
             writer.WriteStringValue(HeaderAction.ToString());
             writer.WritePropertyName("headerName"u8);
             writer.WriteStringValue(HeaderName);
-            if (Optional.IsDefined(Value))
+            if (Value != null)
             {
                 writer.WritePropertyName("value"u8);
                 writer.WriteStringValue(Value);
@@ -118,19 +118,13 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(TypeName))
-            {
-                builder.Append("  typeName:");
-                builder.AppendLine($" '{TypeName.ToString()}'");
-            }
+            builder.Append("  typeName:");
+            builder.AppendLine($" '{TypeName.ToString()}'");
 
-            if (Optional.IsDefined(HeaderAction))
-            {
-                builder.Append("  headerAction:");
-                builder.AppendLine($" '{HeaderAction.ToString()}'");
-            }
+            builder.Append("  headerAction:");
+            builder.AppendLine($" '{HeaderAction.ToString()}'");
 
-            if (Optional.IsDefined(HeaderName))
+            if (HeaderName != null)
             {
                 builder.Append("  headerName:");
                 if (HeaderName.Contains(Environment.NewLine))
@@ -144,7 +138,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            if (Optional.IsDefined(Value))
+            if (Value != null)
             {
                 builder.Append("  value:");
                 if (Value.Contains(Environment.NewLine))

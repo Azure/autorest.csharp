@@ -29,22 +29,22 @@ namespace CustomNamespace
             writer.WriteStartObject();
             writer.WritePropertyName("ModelProperty"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(CustomizedFlattenedStringProperty))
+            if (CustomizedFlattenedStringProperty != null)
             {
                 writer.WritePropertyName("ModelProperty"u8);
                 writer.WriteStringValue(CustomizedFlattenedStringProperty);
             }
-            if (Optional.IsDefined(PropertyToField))
+            if (PropertyToField != null)
             {
                 writer.WritePropertyName("PropertyToField"u8);
                 writer.WriteStringValue(PropertyToField);
             }
-            if (Optional.IsDefined(Fruit))
+            if (Fruit.HasValue)
             {
                 writer.WritePropertyName("Fruit"u8);
                 writer.WriteStringValue(Fruit.Value.ToSerialString());
             }
-            if (Optional.IsDefined(DaysOfWeek))
+            if (DaysOfWeek.HasValue)
             {
                 writer.WritePropertyName("DaysOfWeek"u8);
                 writer.WriteStringValue(DaysOfWeek.Value.ToString());

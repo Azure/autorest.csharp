@@ -16,7 +16,7 @@ namespace MgmtAcronymMapping.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(DnsServers))
+            if (!(DnsServers is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("dnsServers"u8);
                 writer.WriteStartArray();
@@ -35,7 +35,7 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<IList<string>> dnsServers = default;
+            IList<string> dnsServers = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("dnsServers"u8))
@@ -53,7 +53,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetNetworkConfigurationDnsSettings(Optional.ToList(dnsServers));
+            return new VirtualMachineScaleSetNetworkConfigurationDnsSettings(dnsServers ?? new ChangeTrackingList<string>());
         }
     }
 }

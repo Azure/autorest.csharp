@@ -15,17 +15,17 @@ namespace MgmtMockAndSample.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(IsEnabled))
+            if (IsEnabled.HasValue)
             {
                 writer.WritePropertyName("isEnabled"u8);
                 writer.WriteBooleanValue(IsEnabled.Value);
             }
-            if (Optional.IsDefined(RetentionDays))
+            if (RetentionDays.HasValue)
             {
                 writer.WritePropertyName("retentionDays"u8);
                 writer.WriteNumberValue(RetentionDays.Value);
             }
-            if (Optional.IsDefined(LogAnalyticsResources))
+            if (LogAnalyticsResources != null)
             {
                 writer.WritePropertyName("logAnalyticsResources"u8);
                 writer.WriteObjectValue(LogAnalyticsResources);

@@ -19,7 +19,7 @@ namespace xml_service.Models
         private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "Metrics");
-            if (Optional.IsDefined(Version))
+            if (Version != null)
             {
                 writer.WriteStartElement("Version");
                 writer.WriteValue(Version);
@@ -28,13 +28,13 @@ namespace xml_service.Models
             writer.WriteStartElement("Enabled");
             writer.WriteValue(Enabled);
             writer.WriteEndElement();
-            if (Optional.IsDefined(IncludeAPIs))
+            if (IncludeAPIs.HasValue)
             {
                 writer.WriteStartElement("IncludeAPIs");
                 writer.WriteValue(IncludeAPIs.Value);
                 writer.WriteEndElement();
             }
-            if (Optional.IsDefined(RetentionPolicy))
+            if (RetentionPolicy != null)
             {
                 writer.WriteObjectValue(RetentionPolicy, "RetentionPolicy");
             }

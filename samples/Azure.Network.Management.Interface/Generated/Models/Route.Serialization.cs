@@ -15,29 +15,29 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(AddressPrefix))
+            if (AddressPrefix != null)
             {
                 writer.WritePropertyName("addressPrefix"u8);
                 writer.WriteStringValue(AddressPrefix);
             }
-            if (Optional.IsDefined(NextHopType))
+            if (NextHopType.HasValue)
             {
                 writer.WritePropertyName("nextHopType"u8);
                 writer.WriteStringValue(NextHopType.Value.ToString());
             }
-            if (Optional.IsDefined(NextHopIpAddress))
+            if (NextHopIpAddress != null)
             {
                 writer.WritePropertyName("nextHopIpAddress"u8);
                 writer.WriteStringValue(NextHopIpAddress);
@@ -117,7 +117,14 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new Route(id.Value, name.Value, etag.Value, addressPrefix.Value, Optional.ToNullable(nextHopType), nextHopIpAddress.Value, Optional.ToNullable(provisioningState));
+            return new Route(
+                id.Value,
+                name.Value,
+                etag.Value,
+                addressPrefix.Value,
+                Optional.ToNullable(nextHopType),
+                nextHopIpAddress.Value,
+                Optional.ToNullable(provisioningState));
         }
     }
 }

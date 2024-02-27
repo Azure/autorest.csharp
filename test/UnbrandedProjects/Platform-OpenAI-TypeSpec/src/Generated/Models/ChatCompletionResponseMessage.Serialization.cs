@@ -34,7 +34,7 @@ namespace OpenAI.Models
             {
                 writer.WriteNull("content");
             }
-            if (OptionalProperty.IsDefined(FunctionCall))
+            if (FunctionCall != null)
             {
                 writer.WritePropertyName("function_call"u8);
                 writer.WriteObjectValue(FunctionCall);

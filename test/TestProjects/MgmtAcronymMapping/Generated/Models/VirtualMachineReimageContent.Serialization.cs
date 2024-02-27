@@ -15,7 +15,7 @@ namespace MgmtAcronymMapping.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(TempDisk))
+            if (TempDisk.HasValue)
             {
                 writer.WritePropertyName("tempDisk"u8);
                 writer.WriteBooleanValue(TempDisk.Value);

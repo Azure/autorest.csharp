@@ -16,12 +16,12 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
@@ -42,10 +42,10 @@ namespace Azure.Network.Management.Interface.Models
             Optional<string> etag = default;
             Optional<string> type = default;
             Optional<string> id = default;
-            Optional<IReadOnlyList<NetworkInterfaceIPConfiguration>> backendIPConfigurations = default;
-            Optional<IReadOnlyList<SubResource>> loadBalancingRules = default;
+            IReadOnlyList<NetworkInterfaceIPConfiguration> backendIPConfigurations = default;
+            IReadOnlyList<SubResource> loadBalancingRules = default;
             Optional<SubResource> outboundRule = default;
-            Optional<IReadOnlyList<SubResource>> outboundRules = default;
+            IReadOnlyList<SubResource> outboundRules = default;
             Optional<ProvisioningState> provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -142,7 +142,16 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new BackendAddressPool(id.Value, name.Value, etag.Value, type.Value, Optional.ToList(backendIPConfigurations), Optional.ToList(loadBalancingRules), outboundRule.Value, Optional.ToList(outboundRules), Optional.ToNullable(provisioningState));
+            return new BackendAddressPool(
+                id.Value,
+                name.Value,
+                etag.Value,
+                type.Value,
+                backendIPConfigurations ?? new ChangeTrackingList<NetworkInterfaceIPConfiguration>(),
+                loadBalancingRules ?? new ChangeTrackingList<SubResource>(),
+                outboundRule.Value,
+                outboundRules ?? new ChangeTrackingList<SubResource>(),
+                Optional.ToNullable(provisioningState));
         }
     }
 }

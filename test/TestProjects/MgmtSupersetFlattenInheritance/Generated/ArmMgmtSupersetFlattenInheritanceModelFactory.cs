@@ -72,7 +72,14 @@ namespace MgmtSupersetFlattenInheritance.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new TrackedResourceModel1Data(id, name, resourceType, systemData, tags, location, foo);
+            return new TrackedResourceModel1Data(
+                id,
+                name,
+                resourceType,
+                systemData,
+                tags,
+                location,
+                foo);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.TrackedResourceModel2"/>. </summary>
@@ -90,7 +97,16 @@ namespace MgmtSupersetFlattenInheritance.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new TrackedResourceModel2(id, name, resourceType, systemData, tags, location, foo, bar, fooPropertiesFoo);
+            return new TrackedResourceModel2(
+                id,
+                name,
+                resourceType,
+                systemData,
+                tags,
+                location,
+                foo,
+                bar,
+                fooPropertiesFoo);
         }
     }
 }

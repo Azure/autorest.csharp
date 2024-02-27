@@ -15,7 +15,7 @@ namespace MgmtMultipleParentResource.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -28,32 +28,32 @@ namespace MgmtMultipleParentResource.Models
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(AsyncExecution))
+            if (AsyncExecution.HasValue)
             {
                 writer.WritePropertyName("asyncExecution"u8);
                 writer.WriteBooleanValue(AsyncExecution.Value);
             }
-            if (Optional.IsDefined(RunAsUser))
+            if (RunAsUser != null)
             {
                 writer.WritePropertyName("runAsUser"u8);
                 writer.WriteStringValue(RunAsUser);
             }
-            if (Optional.IsDefined(RunAsPassword))
+            if (RunAsPassword != null)
             {
                 writer.WritePropertyName("runAsPassword"u8);
                 writer.WriteStringValue(RunAsPassword);
             }
-            if (Optional.IsDefined(TimeoutInSeconds))
+            if (TimeoutInSeconds.HasValue)
             {
                 writer.WritePropertyName("timeoutInSeconds"u8);
                 writer.WriteNumberValue(TimeoutInSeconds.Value);
             }
-            if (Optional.IsDefined(OutputBlobUri))
+            if (OutputBlobUri != null)
             {
                 writer.WritePropertyName("outputBlobUri"u8);
                 writer.WriteStringValue(OutputBlobUri.AbsoluteUri);
             }
-            if (Optional.IsDefined(ErrorBlobUri))
+            if (ErrorBlobUri != null)
             {
                 writer.WritePropertyName("errorBlobUri"u8);
                 writer.WriteStringValue(ErrorBlobUri.AbsoluteUri);

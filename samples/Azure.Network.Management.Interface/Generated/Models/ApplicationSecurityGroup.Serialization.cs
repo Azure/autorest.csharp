@@ -16,17 +16,17 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (Optional.IsDefined(Location))
+            if (Location != null)
             {
                 writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location);
             }
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -54,7 +54,7 @@ namespace Azure.Network.Management.Interface.Models
             Optional<string> name = default;
             Optional<string> type = default;
             Optional<string> location = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             Optional<string> resourceGuid = default;
             Optional<ProvisioningState> provisioningState = default;
             foreach (var property in element.EnumerateObject())
@@ -125,7 +125,15 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new ApplicationSecurityGroup(id.Value, name.Value, type.Value, location.Value, Optional.ToDictionary(tags), etag.Value, resourceGuid.Value, Optional.ToNullable(provisioningState));
+            return new ApplicationSecurityGroup(
+                id.Value,
+                name.Value,
+                type.Value,
+                location.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                etag.Value,
+                resourceGuid.Value,
+                Optional.ToNullable(provisioningState));
         }
     }
 }

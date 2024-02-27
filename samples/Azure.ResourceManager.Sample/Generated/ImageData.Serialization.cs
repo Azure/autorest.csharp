@@ -31,7 +31,7 @@ namespace Azure.ResourceManager.Sample
             }
 
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -59,29 +59,29 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format != "W" && Optional.IsDefined(SystemData))
+            if (options.Format != "W" && SystemData != null)
             {
                 writer.WritePropertyName("systemData"u8);
                 JsonSerializer.Serialize(writer, SystemData);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(SourceVirtualMachine))
+            if (SourceVirtualMachine != null)
             {
                 writer.WritePropertyName("sourceVirtualMachine"u8);
                 JsonSerializer.Serialize(writer, SourceVirtualMachine);
             }
-            if (Optional.IsDefined(StorageProfile))
+            if (StorageProfile != null)
             {
                 writer.WritePropertyName("storageProfile"u8);
                 writer.WriteObjectValue(StorageProfile);
             }
-            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
+            if (options.Format != "W" && ProvisioningState != null)
             {
                 writer.WritePropertyName("provisioningState"u8);
                 writer.WriteStringValue(ProvisioningState);
             }
-            if (Optional.IsDefined(HyperVGeneration))
+            if (HyperVGeneration.HasValue)
             {
                 writer.WritePropertyName("hyperVGeneration"u8);
                 writer.WriteStringValue(HyperVGeneration.Value.ToString());
@@ -125,7 +125,7 @@ namespace Azure.ResourceManager.Sample
             {
                 return null;
             }
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -232,7 +232,18 @@ namespace Azure.ResourceManager.Sample
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ImageData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, sourceVirtualMachine, storageProfile.Value, provisioningState.Value, Optional.ToNullable(hyperVGeneration), serializedAdditionalRawData);
+            return new ImageData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                sourceVirtualMachine,
+                storageProfile.Value,
+                provisioningState.Value,
+                Optional.ToNullable(hyperVGeneration),
+                serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -240,7 +251,7 @@ namespace Azure.ResourceManager.Sample
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 builder.Append("  name:");
                 if (Name.Contains(Environment.NewLine))
@@ -254,13 +265,10 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsDefined(Location))
-            {
-                builder.Append("  location:");
-                builder.AppendLine($" '{Location.ToString()}'");
-            }
+            builder.Append("  location:");
+            builder.AppendLine($" '{Location.ToString()}'");
 
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 if (Tags.Any())
                 {
@@ -288,13 +296,13 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 builder.Append("  id:");
                 builder.AppendLine($" '{Id.ToString()}'");
             }
 
-            if (Optional.IsDefined(SystemData))
+            if (SystemData != null)
             {
                 builder.Append("  systemData:");
                 builder.AppendLine($" '{SystemData.ToString()}'");
@@ -302,19 +310,19 @@ namespace Azure.ResourceManager.Sample
 
             builder.Append("  properties:");
             builder.AppendLine(" {");
-            if (Optional.IsDefined(SourceVirtualMachine))
+            if (SourceVirtualMachine != null)
             {
                 builder.Append("    sourceVirtualMachine:");
                 AppendChildObject(builder, SourceVirtualMachine, options, 4, false);
             }
 
-            if (Optional.IsDefined(StorageProfile))
+            if (StorageProfile != null)
             {
                 builder.Append("    storageProfile:");
                 AppendChildObject(builder, StorageProfile, options, 4, false);
             }
 
-            if (Optional.IsDefined(ProvisioningState))
+            if (ProvisioningState != null)
             {
                 builder.Append("    provisioningState:");
                 if (ProvisioningState.Contains(Environment.NewLine))
@@ -328,7 +336,7 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsDefined(HyperVGeneration))
+            if (HyperVGeneration.HasValue)
             {
                 builder.Append("    hyperVGeneration:");
                 builder.AppendLine($" '{HyperVGeneration.Value.ToString()}'");

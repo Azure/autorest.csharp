@@ -31,12 +31,12 @@ namespace Azure.ResourceManager.Sample
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Plan))
+            if (Plan != null)
             {
                 writer.WritePropertyName("plan"u8);
                 writer.WriteObjectValue(Plan);
             }
-            if (options.Format != "W" && Optional.IsCollectionDefined(Resources))
+            if (options.Format != "W" && !(Resources is ChangeTrackingList<VirtualMachineExtensionData> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("resources"u8);
                 writer.WriteStartArray();
@@ -46,12 +46,12 @@ namespace Azure.ResourceManager.Sample
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(Identity))
+            if (Identity != null)
             {
                 writer.WritePropertyName("identity"u8);
                 JsonSerializer.Serialize(writer, Identity);
             }
-            if (Optional.IsCollectionDefined(Zones))
+            if (!(Zones is ChangeTrackingList<string> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("zones"u8);
                 writer.WriteStartArray();
@@ -61,7 +61,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection1 && collection1.IsUndefined))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -89,109 +89,109 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format != "W" && Optional.IsDefined(SystemData))
+            if (options.Format != "W" && SystemData != null)
             {
                 writer.WritePropertyName("systemData"u8);
                 JsonSerializer.Serialize(writer, SystemData);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(HardwareProfile))
+            if (HardwareProfile != null)
             {
                 writer.WritePropertyName("hardwareProfile"u8);
                 writer.WriteObjectValue(HardwareProfile);
             }
-            if (Optional.IsDefined(StorageProfile))
+            if (StorageProfile != null)
             {
                 writer.WritePropertyName("storageProfile"u8);
                 writer.WriteObjectValue(StorageProfile);
             }
-            if (Optional.IsDefined(AdditionalCapabilities))
+            if (AdditionalCapabilities != null)
             {
                 writer.WritePropertyName("additionalCapabilities"u8);
                 writer.WriteObjectValue(AdditionalCapabilities);
             }
-            if (Optional.IsDefined(OSProfile))
+            if (OSProfile != null)
             {
                 writer.WritePropertyName("osProfile"u8);
                 writer.WriteObjectValue(OSProfile);
             }
-            if (Optional.IsDefined(NetworkProfile))
+            if (NetworkProfile != null)
             {
                 writer.WritePropertyName("networkProfile"u8);
                 writer.WriteObjectValue(NetworkProfile);
             }
-            if (Optional.IsDefined(SecurityProfile))
+            if (SecurityProfile != null)
             {
                 writer.WritePropertyName("securityProfile"u8);
                 writer.WriteObjectValue(SecurityProfile);
             }
-            if (Optional.IsDefined(DiagnosticsProfile))
+            if (DiagnosticsProfile != null)
             {
                 writer.WritePropertyName("diagnosticsProfile"u8);
                 writer.WriteObjectValue(DiagnosticsProfile);
             }
-            if (Optional.IsDefined(AvailabilitySet))
+            if (AvailabilitySet != null)
             {
                 writer.WritePropertyName("availabilitySet"u8);
                 JsonSerializer.Serialize(writer, AvailabilitySet);
             }
-            if (Optional.IsDefined(VirtualMachineScaleSet))
+            if (VirtualMachineScaleSet != null)
             {
                 writer.WritePropertyName("virtualMachineScaleSet"u8);
                 JsonSerializer.Serialize(writer, VirtualMachineScaleSet);
             }
-            if (Optional.IsDefined(ProximityPlacementGroup))
+            if (ProximityPlacementGroup != null)
             {
                 writer.WritePropertyName("proximityPlacementGroup"u8);
                 JsonSerializer.Serialize(writer, ProximityPlacementGroup);
             }
-            if (Optional.IsDefined(Priority))
+            if (Priority.HasValue)
             {
                 writer.WritePropertyName("priority"u8);
                 writer.WriteStringValue(Priority.Value.ToString());
             }
-            if (Optional.IsDefined(EvictionPolicy))
+            if (EvictionPolicy.HasValue)
             {
                 writer.WritePropertyName("evictionPolicy"u8);
                 writer.WriteStringValue(EvictionPolicy.Value.ToString());
             }
-            if (Optional.IsDefined(BillingProfile))
+            if (BillingProfile != null)
             {
                 writer.WritePropertyName("billingProfile"u8);
                 writer.WriteObjectValue(BillingProfile);
             }
-            if (Optional.IsDefined(Host))
+            if (Host != null)
             {
                 writer.WritePropertyName("host"u8);
                 JsonSerializer.Serialize(writer, Host);
             }
-            if (Optional.IsDefined(HostGroup))
+            if (HostGroup != null)
             {
                 writer.WritePropertyName("hostGroup"u8);
                 JsonSerializer.Serialize(writer, HostGroup);
             }
-            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
+            if (options.Format != "W" && ProvisioningState != null)
             {
                 writer.WritePropertyName("provisioningState"u8);
                 writer.WriteStringValue(ProvisioningState);
             }
-            if (options.Format != "W" && Optional.IsDefined(InstanceView))
+            if (options.Format != "W" && InstanceView != null)
             {
                 writer.WritePropertyName("instanceView"u8);
                 writer.WriteObjectValue(InstanceView);
             }
-            if (Optional.IsDefined(LicenseType))
+            if (LicenseType != null)
             {
                 writer.WritePropertyName("licenseType"u8);
                 writer.WriteStringValue(LicenseType);
             }
-            if (options.Format != "W" && Optional.IsDefined(VmId))
+            if (options.Format != "W" && VmId != null)
             {
                 writer.WritePropertyName("vmId"u8);
                 writer.WriteStringValue(VmId);
             }
-            if (Optional.IsDefined(ExtensionsTimeBudget))
+            if (ExtensionsTimeBudget != null)
             {
                 writer.WritePropertyName("extensionsTimeBudget"u8);
                 writer.WriteStringValue(ExtensionsTimeBudget);
@@ -236,10 +236,10 @@ namespace Azure.ResourceManager.Sample
                 return null;
             }
             Optional<SamplePlan> plan = default;
-            Optional<IReadOnlyList<VirtualMachineExtensionData>> resources = default;
+            IReadOnlyList<VirtualMachineExtensionData> resources = default;
             Optional<ManagedServiceIdentity> identity = default;
-            Optional<IList<string>> zones = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IList<string> zones = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -540,7 +540,38 @@ namespace Azure.ResourceManager.Sample
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, plan.Value, Optional.ToList(resources), identity, Optional.ToList(zones), hardwareProfile.Value, storageProfile.Value, additionalCapabilities.Value, osProfile.Value, networkProfile.Value, securityProfile.Value, diagnosticsProfile.Value, availabilitySet, virtualMachineScaleSet, proximityPlacementGroup, Optional.ToNullable(priority), Optional.ToNullable(evictionPolicy), billingProfile.Value, host, hostGroup, provisioningState.Value, instanceView.Value, licenseType.Value, vmId.Value, extensionsTimeBudget.Value, serializedAdditionalRawData);
+            return new VirtualMachineData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                plan.Value,
+                resources ?? new ChangeTrackingList<VirtualMachineExtensionData>(),
+                identity,
+                zones ?? new ChangeTrackingList<string>(),
+                hardwareProfile.Value,
+                storageProfile.Value,
+                additionalCapabilities.Value,
+                osProfile.Value,
+                networkProfile.Value,
+                securityProfile.Value,
+                diagnosticsProfile.Value,
+                availabilitySet,
+                virtualMachineScaleSet,
+                proximityPlacementGroup,
+                Optional.ToNullable(priority),
+                Optional.ToNullable(evictionPolicy),
+                billingProfile.Value,
+                host,
+                hostGroup,
+                provisioningState.Value,
+                instanceView.Value,
+                licenseType.Value,
+                vmId.Value,
+                extensionsTimeBudget.Value,
+                serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -548,7 +579,7 @@ namespace Azure.ResourceManager.Sample
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 builder.Append("  name:");
                 if (Name.Contains(Environment.NewLine))
@@ -562,13 +593,10 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsDefined(Location))
-            {
-                builder.Append("  location:");
-                builder.AppendLine($" '{Location.ToString()}'");
-            }
+            builder.Append("  location:");
+            builder.AppendLine($" '{Location.ToString()}'");
 
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 if (Tags.Any())
                 {
@@ -596,13 +624,13 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsDefined(Plan))
+            if (Plan != null)
             {
                 builder.Append("  plan:");
                 AppendChildObject(builder, Plan, options, 2, false);
             }
 
-            if (Optional.IsCollectionDefined(Resources))
+            if (!(Resources is ChangeTrackingList<VirtualMachineExtensionData> collection0 && collection0.IsUndefined))
             {
                 if (Resources.Any())
                 {
@@ -616,13 +644,13 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsDefined(Identity))
+            if (Identity != null)
             {
                 builder.Append("  identity:");
                 AppendChildObject(builder, Identity, options, 2, false);
             }
 
-            if (Optional.IsCollectionDefined(Zones))
+            if (!(Zones is ChangeTrackingList<string> collection1 && collection1.IsUndefined))
             {
                 if (Zones.Any())
                 {
@@ -649,13 +677,13 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 builder.Append("  id:");
                 builder.AppendLine($" '{Id.ToString()}'");
             }
 
-            if (Optional.IsDefined(SystemData))
+            if (SystemData != null)
             {
                 builder.Append("  systemData:");
                 builder.AppendLine($" '{SystemData.ToString()}'");
@@ -663,97 +691,97 @@ namespace Azure.ResourceManager.Sample
 
             builder.Append("  properties:");
             builder.AppendLine(" {");
-            if (Optional.IsDefined(HardwareProfile))
+            if (HardwareProfile != null)
             {
                 builder.Append("    hardwareProfile:");
                 AppendChildObject(builder, HardwareProfile, options, 4, false);
             }
 
-            if (Optional.IsDefined(StorageProfile))
+            if (StorageProfile != null)
             {
                 builder.Append("    storageProfile:");
                 AppendChildObject(builder, StorageProfile, options, 4, false);
             }
 
-            if (Optional.IsDefined(AdditionalCapabilities))
+            if (AdditionalCapabilities != null)
             {
                 builder.Append("    additionalCapabilities:");
                 AppendChildObject(builder, AdditionalCapabilities, options, 4, false);
             }
 
-            if (Optional.IsDefined(OSProfile))
+            if (OSProfile != null)
             {
                 builder.Append("    osProfile:");
                 AppendChildObject(builder, OSProfile, options, 4, false);
             }
 
-            if (Optional.IsDefined(NetworkProfile))
+            if (NetworkProfile != null)
             {
                 builder.Append("    networkProfile:");
                 AppendChildObject(builder, NetworkProfile, options, 4, false);
             }
 
-            if (Optional.IsDefined(SecurityProfile))
+            if (SecurityProfile != null)
             {
                 builder.Append("    securityProfile:");
                 AppendChildObject(builder, SecurityProfile, options, 4, false);
             }
 
-            if (Optional.IsDefined(DiagnosticsProfile))
+            if (DiagnosticsProfile != null)
             {
                 builder.Append("    diagnosticsProfile:");
                 AppendChildObject(builder, DiagnosticsProfile, options, 4, false);
             }
 
-            if (Optional.IsDefined(AvailabilitySet))
+            if (AvailabilitySet != null)
             {
                 builder.Append("    availabilitySet:");
                 AppendChildObject(builder, AvailabilitySet, options, 4, false);
             }
 
-            if (Optional.IsDefined(VirtualMachineScaleSet))
+            if (VirtualMachineScaleSet != null)
             {
                 builder.Append("    virtualMachineScaleSet:");
                 AppendChildObject(builder, VirtualMachineScaleSet, options, 4, false);
             }
 
-            if (Optional.IsDefined(ProximityPlacementGroup))
+            if (ProximityPlacementGroup != null)
             {
                 builder.Append("    proximityPlacementGroup:");
                 AppendChildObject(builder, ProximityPlacementGroup, options, 4, false);
             }
 
-            if (Optional.IsDefined(Priority))
+            if (Priority.HasValue)
             {
                 builder.Append("    priority:");
                 builder.AppendLine($" '{Priority.Value.ToString()}'");
             }
 
-            if (Optional.IsDefined(EvictionPolicy))
+            if (EvictionPolicy.HasValue)
             {
                 builder.Append("    evictionPolicy:");
                 builder.AppendLine($" '{EvictionPolicy.Value.ToString()}'");
             }
 
-            if (Optional.IsDefined(BillingProfile))
+            if (BillingProfile != null)
             {
                 builder.Append("    billingProfile:");
                 AppendChildObject(builder, BillingProfile, options, 4, false);
             }
 
-            if (Optional.IsDefined(Host))
+            if (Host != null)
             {
                 builder.Append("    host:");
                 AppendChildObject(builder, Host, options, 4, false);
             }
 
-            if (Optional.IsDefined(HostGroup))
+            if (HostGroup != null)
             {
                 builder.Append("    hostGroup:");
                 AppendChildObject(builder, HostGroup, options, 4, false);
             }
 
-            if (Optional.IsDefined(ProvisioningState))
+            if (ProvisioningState != null)
             {
                 builder.Append("    provisioningState:");
                 if (ProvisioningState.Contains(Environment.NewLine))
@@ -767,13 +795,13 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsDefined(InstanceView))
+            if (InstanceView != null)
             {
                 builder.Append("    instanceView:");
                 AppendChildObject(builder, InstanceView, options, 4, false);
             }
 
-            if (Optional.IsDefined(LicenseType))
+            if (LicenseType != null)
             {
                 builder.Append("    licenseType:");
                 if (LicenseType.Contains(Environment.NewLine))
@@ -787,7 +815,7 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsDefined(VmId))
+            if (VmId != null)
             {
                 builder.Append("    vmId:");
                 if (VmId.Contains(Environment.NewLine))
@@ -801,7 +829,7 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsDefined(ExtensionsTimeBudget))
+            if (ExtensionsTimeBudget != null)
             {
                 builder.Append("    extensionsTimeBudget:");
                 if (ExtensionsTimeBudget.Contains(Environment.NewLine))

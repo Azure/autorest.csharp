@@ -43,7 +43,7 @@ namespace AnomalyDetector.Models
             writer.WriteBooleanValue(IsNegativeAnomaly);
             writer.WritePropertyName("isPositiveAnomaly"u8);
             writer.WriteBooleanValue(IsPositiveAnomaly);
-            if (Optional.IsDefined(Severity))
+            if (Severity.HasValue)
             {
                 writer.WritePropertyName("severity"u8);
                 writer.WriteNumberValue(Severity.Value);
@@ -154,7 +154,17 @@ namespace AnomalyDetector.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new UnivariateLastDetectionResult(period, suggestedWindow, expectedValue, upperMargin, lowerMargin, isAnomaly, isNegativeAnomaly, isPositiveAnomaly, Optional.ToNullable(severity), serializedAdditionalRawData);
+            return new UnivariateLastDetectionResult(
+                period,
+                suggestedWindow,
+                expectedValue,
+                upperMargin,
+                lowerMargin,
+                isAnomaly,
+                isNegativeAnomaly,
+                isPositiveAnomaly,
+                Optional.ToNullable(severity),
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<UnivariateLastDetectionResult>.Write(ModelReaderWriterOptions options)

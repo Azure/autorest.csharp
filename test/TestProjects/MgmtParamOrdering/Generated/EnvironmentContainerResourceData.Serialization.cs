@@ -20,7 +20,7 @@ namespace MgmtParamOrdering
             writer.WriteStartObject();
             writer.WritePropertyName("properties"u8);
             writer.WriteObjectValue(Properties);
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -43,7 +43,7 @@ namespace MgmtParamOrdering
                 return null;
             }
             EnvironmentContainer properties = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -100,7 +100,14 @@ namespace MgmtParamOrdering
                     continue;
                 }
             }
-            return new EnvironmentContainerResourceData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, properties);
+            return new EnvironmentContainerResourceData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                properties);
         }
     }
 }

@@ -20,17 +20,17 @@ namespace Azure.ResourceManager.Storage
             writer.WriteStartObject();
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(ImmutabilityPeriodSinceCreationInDays))
+            if (ImmutabilityPeriodSinceCreationInDays.HasValue)
             {
                 writer.WritePropertyName("immutabilityPeriodSinceCreationInDays"u8);
                 writer.WriteNumberValue(ImmutabilityPeriodSinceCreationInDays.Value);
             }
-            if (Optional.IsDefined(AllowProtectedAppendWrites))
+            if (AllowProtectedAppendWrites.HasValue)
             {
                 writer.WritePropertyName("allowProtectedAppendWrites"u8);
                 writer.WriteBooleanValue(AllowProtectedAppendWrites.Value);
             }
-            if (Optional.IsDefined(AllowProtectedAppendWritesAll))
+            if (AllowProtectedAppendWritesAll.HasValue)
             {
                 writer.WritePropertyName("allowProtectedAppendWritesAll"u8);
                 writer.WriteBooleanValue(AllowProtectedAppendWritesAll.Value);
@@ -138,7 +138,16 @@ namespace Azure.ResourceManager.Storage
                     continue;
                 }
             }
-            return new ImmutabilityPolicyData(id, name, type, systemData.Value, Optional.ToNullable(immutabilityPeriodSinceCreationInDays), Optional.ToNullable(state), Optional.ToNullable(allowProtectedAppendWrites), Optional.ToNullable(allowProtectedAppendWritesAll), Optional.ToNullable(etag));
+            return new ImmutabilityPolicyData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                Optional.ToNullable(immutabilityPeriodSinceCreationInDays),
+                Optional.ToNullable(state),
+                Optional.ToNullable(allowProtectedAppendWrites),
+                Optional.ToNullable(allowProtectedAppendWritesAll),
+                Optional.ToNullable(etag));
         }
     }
 }

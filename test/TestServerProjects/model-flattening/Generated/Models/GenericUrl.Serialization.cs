@@ -26,7 +26,7 @@ namespace model_flattening.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(GenericValue))
+            if (GenericValue != null)
             {
                 writer.WritePropertyName("generic_value"u8);
                 writer.WriteStringValue(GenericValue);

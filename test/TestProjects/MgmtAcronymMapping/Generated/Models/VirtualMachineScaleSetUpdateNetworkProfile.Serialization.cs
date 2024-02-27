@@ -15,12 +15,12 @@ namespace MgmtAcronymMapping.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(HealthProbe))
+            if (HealthProbe != null)
             {
                 writer.WritePropertyName("healthProbe"u8);
                 JsonSerializer.Serialize(writer, HealthProbe);
             }
-            if (Optional.IsCollectionDefined(NetworkInterfaceConfigurations))
+            if (!(NetworkInterfaceConfigurations is ChangeTrackingList<VirtualMachineScaleSetUpdateNetworkConfiguration> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("networkInterfaceConfigurations"u8);
                 writer.WriteStartArray();

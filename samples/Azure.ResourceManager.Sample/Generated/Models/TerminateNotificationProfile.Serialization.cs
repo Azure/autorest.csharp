@@ -27,12 +27,12 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(NotBeforeTimeout))
+            if (NotBeforeTimeout != null)
             {
                 writer.WritePropertyName("notBeforeTimeout"u8);
                 writer.WriteStringValue(NotBeforeTimeout);
             }
-            if (Optional.IsDefined(Enable))
+            if (Enable.HasValue)
             {
                 writer.WritePropertyName("enable"u8);
                 writer.WriteBooleanValue(Enable.Value);
@@ -109,7 +109,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(NotBeforeTimeout))
+            if (NotBeforeTimeout != null)
             {
                 builder.Append("  notBeforeTimeout:");
                 if (NotBeforeTimeout.Contains(Environment.NewLine))
@@ -123,7 +123,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(Enable))
+            if (Enable.HasValue)
             {
                 builder.Append("  enable:");
                 var boolValue = Enable.Value == true ? "true" : "false";

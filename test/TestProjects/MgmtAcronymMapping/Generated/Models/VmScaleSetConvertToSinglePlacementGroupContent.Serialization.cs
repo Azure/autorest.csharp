@@ -15,7 +15,7 @@ namespace MgmtAcronymMapping.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(ActivePlacementGroupId))
+            if (ActivePlacementGroupId != null)
             {
                 writer.WritePropertyName("activePlacementGroupId"u8);
                 writer.WriteStringValue(ActivePlacementGroupId);

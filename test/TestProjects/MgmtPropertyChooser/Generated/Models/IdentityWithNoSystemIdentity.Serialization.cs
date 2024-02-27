@@ -17,12 +17,12 @@ namespace MgmtPropertyChooser.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(ResourceIdentityType))
+            if (ResourceIdentityType.HasValue)
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceIdentityType.Value.ToSerialString());
             }
-            if (Optional.IsCollectionDefined(UserAssignedIdentities))
+            if (!(UserAssignedIdentities is ChangeTrackingDictionary<string, UserAssignedIdentity> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("userAssignedIdentities"u8);
                 writer.WriteStartObject();
@@ -43,7 +43,7 @@ namespace MgmtPropertyChooser.Models
                 return null;
             }
             Optional<ResourceIdentityType> type = default;
-            Optional<IDictionary<string, UserAssignedIdentity>> userAssignedIdentities = default;
+            IDictionary<string, UserAssignedIdentity> userAssignedIdentities = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("type"u8))
@@ -70,7 +70,7 @@ namespace MgmtPropertyChooser.Models
                     continue;
                 }
             }
-            return new IdentityWithNoSystemIdentity(Optional.ToNullable(type), Optional.ToDictionary(userAssignedIdentities));
+            return new IdentityWithNoSystemIdentity(Optional.ToNullable(type), userAssignedIdentities ?? new ChangeTrackingDictionary<string, UserAssignedIdentity>());
         }
     }
 }

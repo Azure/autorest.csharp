@@ -30,7 +30,14 @@ namespace MgmtParamOrdering.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new AvailabilitySetData(id, name, resourceType, systemData, tags, location, bar);
+            return new AvailabilitySetData(
+                id,
+                name,
+                resourceType,
+                systemData,
+                tags,
+                location,
+                bar);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtParamOrdering.DedicatedHostGroupData"/>. </summary>
@@ -46,7 +53,14 @@ namespace MgmtParamOrdering.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new DedicatedHostGroupData(id, name, resourceType, systemData, tags, location, foo);
+            return new DedicatedHostGroupData(
+                id,
+                name,
+                resourceType,
+                systemData,
+                tags,
+                location,
+                foo);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtParamOrdering.DedicatedHostData"/>. </summary>
@@ -62,7 +76,14 @@ namespace MgmtParamOrdering.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new DedicatedHostData(id, name, resourceType, systemData, tags, location, foo);
+            return new DedicatedHostData(
+                id,
+                name,
+                resourceType,
+                systemData,
+                tags,
+                location,
+                foo);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtParamOrdering.VirtualMachineExtensionImageData"/>. </summary>
@@ -78,7 +99,14 @@ namespace MgmtParamOrdering.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new VirtualMachineExtensionImageData(id, name, resourceType, systemData, tags, location, bar);
+            return new VirtualMachineExtensionImageData(
+                id,
+                name,
+                resourceType,
+                systemData,
+                tags,
+                location,
+                bar);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtParamOrdering.EnvironmentContainerResourceData"/>. </summary>
@@ -94,7 +122,14 @@ namespace MgmtParamOrdering.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new EnvironmentContainerResourceData(id, name, resourceType, systemData, tags, location, properties);
+            return new EnvironmentContainerResourceData(
+                id,
+                name,
+                resourceType,
+                systemData,
+                tags,
+                location,
+                properties);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtParamOrdering.WorkspaceData"/>. </summary>
@@ -125,7 +160,29 @@ namespace MgmtParamOrdering.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new WorkspaceData(id, name, resourceType, systemData, tags, location, workspaceId, description, friendlyName, keyVault, applicationInsights, containerRegistry, storageAccount, discoveryUri, provisioningState, hbiWorkspace, serviceProvisionedResourceGroup, privateLinkCount, imageBuildCompute, allowPublicAccessWhenBehindVnet, primaryUserAssignedIdentity, tenantId);
+            return new WorkspaceData(
+                id,
+                name,
+                resourceType,
+                systemData,
+                tags,
+                location,
+                workspaceId,
+                description,
+                friendlyName,
+                keyVault,
+                applicationInsights,
+                containerRegistry,
+                storageAccount,
+                discoveryUri,
+                provisioningState,
+                hbiWorkspace,
+                serviceProvisionedResourceGroup,
+                privateLinkCount,
+                imageBuildCompute,
+                allowPublicAccessWhenBehindVnet,
+                primaryUserAssignedIdentity,
+                tenantId);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtParamOrdering.VirtualMachineScaleSetData"/>. </summary>
@@ -142,7 +199,14 @@ namespace MgmtParamOrdering.Models
             tags ??= new Dictionary<string, string>();
             zones ??= new List<string>();
 
-            return new VirtualMachineScaleSetData(id, name, resourceType, systemData, tags, location, zones?.ToList());
+            return new VirtualMachineScaleSetData(
+                id,
+                name,
+                resourceType,
+                systemData,
+                tags,
+                location,
+                zones?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachineScaleSetInstanceView"/>. </summary>

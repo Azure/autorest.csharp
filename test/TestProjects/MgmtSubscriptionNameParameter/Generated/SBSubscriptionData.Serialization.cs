@@ -20,67 +20,67 @@ namespace MgmtSubscriptionNameParameter
             writer.WriteStartObject();
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(LockDuration))
+            if (LockDuration.HasValue)
             {
                 writer.WritePropertyName("lockDuration"u8);
                 writer.WriteStringValue(LockDuration.Value, "P");
             }
-            if (Optional.IsDefined(RequiresSession))
+            if (RequiresSession.HasValue)
             {
                 writer.WritePropertyName("requiresSession"u8);
                 writer.WriteBooleanValue(RequiresSession.Value);
             }
-            if (Optional.IsDefined(DefaultMessageTimeToLive))
+            if (DefaultMessageTimeToLive.HasValue)
             {
                 writer.WritePropertyName("defaultMessageTimeToLive"u8);
                 writer.WriteStringValue(DefaultMessageTimeToLive.Value, "P");
             }
-            if (Optional.IsDefined(DeadLetteringOnFilterEvaluationExceptions))
+            if (DeadLetteringOnFilterEvaluationExceptions.HasValue)
             {
                 writer.WritePropertyName("deadLetteringOnFilterEvaluationExceptions"u8);
                 writer.WriteBooleanValue(DeadLetteringOnFilterEvaluationExceptions.Value);
             }
-            if (Optional.IsDefined(DeadLetteringOnMessageExpiration))
+            if (DeadLetteringOnMessageExpiration.HasValue)
             {
                 writer.WritePropertyName("deadLetteringOnMessageExpiration"u8);
                 writer.WriteBooleanValue(DeadLetteringOnMessageExpiration.Value);
             }
-            if (Optional.IsDefined(DuplicateDetectionHistoryTimeWindow))
+            if (DuplicateDetectionHistoryTimeWindow.HasValue)
             {
                 writer.WritePropertyName("duplicateDetectionHistoryTimeWindow"u8);
                 writer.WriteStringValue(DuplicateDetectionHistoryTimeWindow.Value, "P");
             }
-            if (Optional.IsDefined(MaxDeliveryCount))
+            if (MaxDeliveryCount.HasValue)
             {
                 writer.WritePropertyName("maxDeliveryCount"u8);
                 writer.WriteNumberValue(MaxDeliveryCount.Value);
             }
-            if (Optional.IsDefined(EnableBatchedOperations))
+            if (EnableBatchedOperations.HasValue)
             {
                 writer.WritePropertyName("enableBatchedOperations"u8);
                 writer.WriteBooleanValue(EnableBatchedOperations.Value);
             }
-            if (Optional.IsDefined(AutoDeleteOnIdle))
+            if (AutoDeleteOnIdle.HasValue)
             {
                 writer.WritePropertyName("autoDeleteOnIdle"u8);
                 writer.WriteStringValue(AutoDeleteOnIdle.Value, "P");
             }
-            if (Optional.IsDefined(ForwardTo))
+            if (ForwardTo != null)
             {
                 writer.WritePropertyName("forwardTo"u8);
                 writer.WriteStringValue(ForwardTo);
             }
-            if (Optional.IsDefined(ForwardDeadLetteredMessagesTo))
+            if (ForwardDeadLetteredMessagesTo != null)
             {
                 writer.WritePropertyName("forwardDeadLetteredMessagesTo"u8);
                 writer.WriteStringValue(ForwardDeadLetteredMessagesTo);
             }
-            if (Optional.IsDefined(IsClientAffine))
+            if (IsClientAffine.HasValue)
             {
                 writer.WritePropertyName("isClientAffine"u8);
                 writer.WriteBooleanValue(IsClientAffine.Value);
             }
-            if (Optional.IsDefined(ClientAffineProperties))
+            if (ClientAffineProperties != null)
             {
                 writer.WritePropertyName("clientAffineProperties"u8);
                 writer.WriteObjectValue(ClientAffineProperties);
@@ -300,7 +300,28 @@ namespace MgmtSubscriptionNameParameter
                     continue;
                 }
             }
-            return new SBSubscriptionData(id, name, type, systemData.Value, Optional.ToNullable(messageCount), Optional.ToNullable(createdAt), Optional.ToNullable(accessedAt), Optional.ToNullable(updatedAt), Optional.ToNullable(lockDuration), Optional.ToNullable(requiresSession), Optional.ToNullable(defaultMessageTimeToLive), Optional.ToNullable(deadLetteringOnFilterEvaluationExceptions), Optional.ToNullable(deadLetteringOnMessageExpiration), Optional.ToNullable(duplicateDetectionHistoryTimeWindow), Optional.ToNullable(maxDeliveryCount), Optional.ToNullable(enableBatchedOperations), Optional.ToNullable(autoDeleteOnIdle), forwardTo.Value, forwardDeadLetteredMessagesTo.Value, Optional.ToNullable(isClientAffine), clientAffineProperties.Value);
+            return new SBSubscriptionData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                Optional.ToNullable(messageCount),
+                Optional.ToNullable(createdAt),
+                Optional.ToNullable(accessedAt),
+                Optional.ToNullable(updatedAt),
+                Optional.ToNullable(lockDuration),
+                Optional.ToNullable(requiresSession),
+                Optional.ToNullable(defaultMessageTimeToLive),
+                Optional.ToNullable(deadLetteringOnFilterEvaluationExceptions),
+                Optional.ToNullable(deadLetteringOnMessageExpiration),
+                Optional.ToNullable(duplicateDetectionHistoryTimeWindow),
+                Optional.ToNullable(maxDeliveryCount),
+                Optional.ToNullable(enableBatchedOperations),
+                Optional.ToNullable(autoDeleteOnIdle),
+                forwardTo.Value,
+                forwardDeadLetteredMessagesTo.Value,
+                Optional.ToNullable(isClientAffine),
+                clientAffineProperties.Value);
         }
     }
 }

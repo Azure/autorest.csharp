@@ -205,6 +205,7 @@ namespace AutoRest.CSharp.Input
         public const string DataFactoryElementOfListOfT = "dfe-list-generic";
         public const string DataFactoryElementOfListOfString = "dfe-list-string";
         public const string DataFactoryElementOfKeyValuePairs = "dfe-key-value-pairs";
+        public const string DataFactoryElementOfKeyObjectValuePairs = "dfe-key-object-value-pairs";
         public const string DataFactoryElementOfDateTime = "dfe-date-time";
         public const string DataFactoryElementOfDuration = "dfe-duration";
         public const string DataFactoryElementOfUri = "dfe-uri";

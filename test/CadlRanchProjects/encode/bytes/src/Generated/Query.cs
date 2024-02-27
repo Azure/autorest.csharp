@@ -397,7 +397,7 @@ namespace Encode.Bytes
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/encode/bytes/query/base64url-array", false);
-            if (value != null && Optional.IsCollectionDefined(value))
+            if (value != null && !(value is ChangeTrackingList<BinaryData> changeTrackingList && changeTrackingList.IsUndefined))
             {
                 uri.AppendQueryDelimited("value", value, ",", "U", true);
             }

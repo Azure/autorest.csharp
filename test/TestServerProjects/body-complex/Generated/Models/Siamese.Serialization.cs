@@ -26,17 +26,17 @@ namespace body_complex.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Breed))
+            if (Breed != null)
             {
                 writer.WritePropertyName("breed"u8);
                 writer.WriteStringValue(Breed);
             }
-            if (Optional.IsDefined(Color))
+            if (Color != null)
             {
                 writer.WritePropertyName("color"u8);
                 writer.WriteStringValue(Color);
             }
-            if (Optional.IsCollectionDefined(Hates))
+            if (!(Hates is ChangeTrackingList<Dog> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("hates"u8);
                 writer.WriteStartArray();
@@ -46,12 +46,12 @@ namespace body_complex.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(Id))
+            if (Id.HasValue)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteNumberValue(Id.Value);
             }
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
@@ -96,7 +96,7 @@ namespace body_complex.Models
             }
             Optional<string> breed = default;
             Optional<string> color = default;
-            Optional<IList<Dog>> hates = default;
+            IList<Dog> hates = default;
             Optional<int> id = default;
             Optional<string> name = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
@@ -147,7 +147,13 @@ namespace body_complex.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Siamese(Optional.ToNullable(id), name.Value, serializedAdditionalRawData, color.Value, Optional.ToList(hates), breed.Value);
+            return new Siamese(
+                Optional.ToNullable(id),
+                name.Value,
+                serializedAdditionalRawData,
+                color.Value,
+                hates ?? new ChangeTrackingList<Dog>(),
+                breed.Value);
         }
 
         BinaryData IPersistableModel<Siamese>.Write(ModelReaderWriterOptions options)

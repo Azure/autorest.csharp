@@ -26,7 +26,7 @@ namespace Azure.AI.FormRecognizer.Models
             string text = default;
             IReadOnlyList<float> boundingBox = default;
             float confidence = default;
-            Optional<IReadOnlyList<string>> elements = default;
+            IReadOnlyList<string> elements = default;
             Optional<bool> isHeader = default;
             Optional<bool> isFooter = default;
             foreach (var property in element.EnumerateObject())
@@ -112,7 +112,17 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            return new DataTableCell(rowIndex, columnIndex, Optional.ToNullable(rowSpan), Optional.ToNullable(columnSpan), text, boundingBox, confidence, Optional.ToList(elements), Optional.ToNullable(isHeader), Optional.ToNullable(isFooter));
+            return new DataTableCell(
+                rowIndex,
+                columnIndex,
+                Optional.ToNullable(rowSpan),
+                Optional.ToNullable(columnSpan),
+                text,
+                boundingBox,
+                confidence,
+                elements ?? new ChangeTrackingList<string>(),
+                Optional.ToNullable(isHeader),
+                Optional.ToNullable(isFooter));
         }
     }
 }

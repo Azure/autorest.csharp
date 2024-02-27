@@ -33,7 +33,7 @@ namespace Azure.ResourceManager.Sample
             writer.WriteStartObject();
             writer.WritePropertyName("sku"u8);
             writer.WriteObjectValue(Sku);
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -61,29 +61,29 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format != "W" && Optional.IsDefined(SystemData))
+            if (options.Format != "W" && SystemData != null)
             {
                 writer.WritePropertyName("systemData"u8);
                 JsonSerializer.Serialize(writer, SystemData);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(PlatformFaultDomain))
+            if (PlatformFaultDomain.HasValue)
             {
                 writer.WritePropertyName("platformFaultDomain"u8);
                 writer.WriteNumberValue(PlatformFaultDomain.Value);
             }
-            if (Optional.IsDefined(AutoReplaceOnFailure))
+            if (AutoReplaceOnFailure.HasValue)
             {
                 writer.WritePropertyName("autoReplaceOnFailure"u8);
                 writer.WriteBooleanValue(AutoReplaceOnFailure.Value);
             }
-            if (options.Format != "W" && Optional.IsDefined(HostId))
+            if (options.Format != "W" && HostId != null)
             {
                 writer.WritePropertyName("hostId"u8);
                 writer.WriteStringValue(HostId);
             }
-            if (options.Format != "W" && Optional.IsCollectionDefined(VirtualMachines))
+            if (options.Format != "W" && !(VirtualMachines is ChangeTrackingList<Resources.Models.SubResource> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("virtualMachines"u8);
                 writer.WriteStartArray();
@@ -93,22 +93,22 @@ namespace Azure.ResourceManager.Sample
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(LicenseType))
+            if (LicenseType.HasValue)
             {
                 writer.WritePropertyName("licenseType"u8);
                 writer.WriteStringValue(LicenseType.Value.ToSerialString());
             }
-            if (options.Format != "W" && Optional.IsDefined(ProvisioningOn))
+            if (options.Format != "W" && ProvisioningOn.HasValue)
             {
                 writer.WritePropertyName("provisioningTime"u8);
                 writer.WriteStringValue(ProvisioningOn.Value, "O");
             }
-            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
+            if (options.Format != "W" && ProvisioningState != null)
             {
                 writer.WritePropertyName("provisioningState"u8);
                 writer.WriteStringValue(ProvisioningState);
             }
-            if (options.Format != "W" && Optional.IsDefined(InstanceView))
+            if (options.Format != "W" && InstanceView != null)
             {
                 writer.WritePropertyName("instanceView"u8);
                 writer.WriteObjectValue(InstanceView);
@@ -153,7 +153,7 @@ namespace Azure.ResourceManager.Sample
                 return null;
             }
             SampleSku sku = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -162,7 +162,7 @@ namespace Azure.ResourceManager.Sample
             Optional<int> platformFaultDomain = default;
             Optional<bool> autoReplaceOnFailure = default;
             Optional<string> hostId = default;
-            Optional<IReadOnlyList<Resources.Models.SubResource>> virtualMachines = default;
+            IReadOnlyList<Resources.Models.SubResource> virtualMachines = default;
             Optional<DedicatedHostLicenseType> licenseType = default;
             Optional<DateTimeOffset> provisioningTime = default;
             Optional<string> provisioningState = default;
@@ -306,7 +306,23 @@ namespace Azure.ResourceManager.Sample
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DedicatedHostData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, sku, Optional.ToNullable(platformFaultDomain), Optional.ToNullable(autoReplaceOnFailure), hostId.Value, Optional.ToList(virtualMachines), Optional.ToNullable(licenseType), Optional.ToNullable(provisioningTime), provisioningState.Value, instanceView.Value, serializedAdditionalRawData);
+            return new DedicatedHostData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                sku,
+                Optional.ToNullable(platformFaultDomain),
+                Optional.ToNullable(autoReplaceOnFailure),
+                hostId.Value,
+                virtualMachines ?? new ChangeTrackingList<Resources.Models.SubResource>(),
+                Optional.ToNullable(licenseType),
+                Optional.ToNullable(provisioningTime),
+                provisioningState.Value,
+                instanceView.Value,
+                serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -314,7 +330,7 @@ namespace Azure.ResourceManager.Sample
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 builder.Append("  name:");
                 if (Name.Contains(Environment.NewLine))
@@ -328,13 +344,10 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsDefined(Location))
-            {
-                builder.Append("  location:");
-                builder.AppendLine($" '{Location.ToString()}'");
-            }
+            builder.Append("  location:");
+            builder.AppendLine($" '{Location.ToString()}'");
 
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 if (Tags.Any())
                 {
@@ -362,19 +375,19 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsDefined(Sku))
+            if (Sku != null)
             {
                 builder.Append("  sku:");
                 AppendChildObject(builder, Sku, options, 2, false);
             }
 
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 builder.Append("  id:");
                 builder.AppendLine($" '{Id.ToString()}'");
             }
 
-            if (Optional.IsDefined(SystemData))
+            if (SystemData != null)
             {
                 builder.Append("  systemData:");
                 builder.AppendLine($" '{SystemData.ToString()}'");
@@ -382,20 +395,20 @@ namespace Azure.ResourceManager.Sample
 
             builder.Append("  properties:");
             builder.AppendLine(" {");
-            if (Optional.IsDefined(PlatformFaultDomain))
+            if (PlatformFaultDomain.HasValue)
             {
                 builder.Append("    platformFaultDomain:");
                 builder.AppendLine($" {PlatformFaultDomain.Value}");
             }
 
-            if (Optional.IsDefined(AutoReplaceOnFailure))
+            if (AutoReplaceOnFailure.HasValue)
             {
                 builder.Append("    autoReplaceOnFailure:");
                 var boolValue = AutoReplaceOnFailure.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
             }
 
-            if (Optional.IsDefined(HostId))
+            if (HostId != null)
             {
                 builder.Append("    hostId:");
                 if (HostId.Contains(Environment.NewLine))
@@ -409,7 +422,7 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsCollectionDefined(VirtualMachines))
+            if (!(VirtualMachines is ChangeTrackingList<Resources.Models.SubResource> collection0 && collection0.IsUndefined))
             {
                 if (VirtualMachines.Any())
                 {
@@ -423,20 +436,20 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsDefined(LicenseType))
+            if (LicenseType.HasValue)
             {
                 builder.Append("    licenseType:");
                 builder.AppendLine($" '{LicenseType.Value.ToSerialString()}'");
             }
 
-            if (Optional.IsDefined(ProvisioningOn))
+            if (ProvisioningOn.HasValue)
             {
                 builder.Append("    provisioningTime:");
                 var formattedDateTimeString = TypeFormatters.ToString(ProvisioningOn.Value, "o");
                 builder.AppendLine($" '{formattedDateTimeString}'");
             }
 
-            if (Optional.IsDefined(ProvisioningState))
+            if (ProvisioningState != null)
             {
                 builder.Append("    provisioningState:");
                 if (ProvisioningState.Contains(Environment.NewLine))
@@ -450,7 +463,7 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsDefined(InstanceView))
+            if (InstanceView != null)
             {
                 builder.Append("    instanceView:");
                 AppendChildObject(builder, InstanceView, options, 4, false);

@@ -19,7 +19,7 @@ namespace MgmtPropertyChooser.Models
             writer.WriteStartObject();
             writer.WritePropertyName("location"u8);
             writer.WriteStringValue(Location);
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -40,7 +40,7 @@ namespace MgmtPropertyChooser.Models
                 return null;
             }
             string location = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
@@ -91,7 +91,13 @@ namespace MgmtPropertyChooser.Models
                     continue;
                 }
             }
-            return new MgmtPropertyChooserResourceData(id, name, type, systemData.Value, location, Optional.ToDictionary(tags));
+            return new MgmtPropertyChooserResourceData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                location,
+                tags ?? new ChangeTrackingDictionary<string, string>());
         }
     }
 }

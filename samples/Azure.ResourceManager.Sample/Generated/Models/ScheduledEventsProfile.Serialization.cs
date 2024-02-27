@@ -27,7 +27,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(TerminateNotificationProfile))
+            if (TerminateNotificationProfile != null)
             {
                 writer.WritePropertyName("terminateNotificationProfile"u8);
                 writer.WriteObjectValue(TerminateNotificationProfile);
@@ -98,7 +98,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(TerminateNotificationProfile))
+            if (TerminateNotificationProfile != null)
             {
                 builder.Append("  terminateNotificationProfile:");
                 AppendChildObject(builder, TerminateNotificationProfile, options, 2, false);

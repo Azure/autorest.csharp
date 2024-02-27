@@ -108,7 +108,16 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new AvailablePatchSummary(Optional.ToNullable(status), assessmentActivityId.Value, Optional.ToNullable(rebootPending), Optional.ToNullable(criticalAndSecurityPatchCount), Optional.ToNullable(otherPatchCount), uri.Value, Optional.ToNullable(startTime), Optional.ToNullable(lastModifiedTime), error.Value);
+            return new AvailablePatchSummary(
+                Optional.ToNullable(status),
+                assessmentActivityId.Value,
+                Optional.ToNullable(rebootPending),
+                Optional.ToNullable(criticalAndSecurityPatchCount),
+                Optional.ToNullable(otherPatchCount),
+                uri.Value,
+                Optional.ToNullable(startTime),
+                Optional.ToNullable(lastModifiedTime),
+                error.Value);
         }
     }
 }

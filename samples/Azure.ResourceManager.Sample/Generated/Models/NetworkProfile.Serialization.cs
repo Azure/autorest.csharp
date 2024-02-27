@@ -28,7 +28,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(NetworkInterfaces))
+            if (!(NetworkInterfaces is ChangeTrackingList<NetworkInterfaceReference> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("networkInterfaces"u8);
                 writer.WriteStartArray();
@@ -76,7 +76,7 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<IList<NetworkInterfaceReference>> networkInterfaces = default;
+            IList<NetworkInterfaceReference> networkInterfaces = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -101,7 +101,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new NetworkProfile(Optional.ToList(networkInterfaces), serializedAdditionalRawData);
+            return new NetworkProfile(networkInterfaces ?? new ChangeTrackingList<NetworkInterfaceReference>(), serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -109,7 +109,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsCollectionDefined(NetworkInterfaces))
+            if (!(NetworkInterfaces is ChangeTrackingList<NetworkInterfaceReference> collection && collection.IsUndefined))
             {
                 if (NetworkInterfaces.Any())
                 {

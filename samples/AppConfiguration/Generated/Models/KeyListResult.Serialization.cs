@@ -19,7 +19,7 @@ namespace AppConfiguration.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<Key>> items = default;
+            IReadOnlyList<Key> items = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -43,7 +43,7 @@ namespace AppConfiguration.Models
                     continue;
                 }
             }
-            return new KeyListResult(Optional.ToList(items), nextLink.Value);
+            return new KeyListResult(items ?? new ChangeTrackingList<Key>(), nextLink.Value);
         }
     }
 }

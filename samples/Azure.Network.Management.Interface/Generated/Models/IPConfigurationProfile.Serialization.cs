@@ -15,19 +15,19 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(Subnet))
+            if (Subnet != null)
             {
                 writer.WritePropertyName("subnet"u8);
                 writer.WriteObjectValue(Subnet);
@@ -101,7 +101,13 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new IPConfigurationProfile(id.Value, name.Value, type.Value, etag.Value, subnet.Value, Optional.ToNullable(provisioningState));
+            return new IPConfigurationProfile(
+                id.Value,
+                name.Value,
+                type.Value,
+                etag.Value,
+                subnet.Value,
+                Optional.ToNullable(provisioningState));
         }
     }
 }

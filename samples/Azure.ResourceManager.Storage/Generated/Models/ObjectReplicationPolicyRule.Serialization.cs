@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Storage.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(RuleId))
+            if (RuleId != null)
             {
                 writer.WritePropertyName("ruleId"u8);
                 writer.WriteStringValue(RuleId);
@@ -24,7 +24,7 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteStringValue(SourceContainer);
             writer.WritePropertyName("destinationContainer"u8);
             writer.WriteStringValue(DestinationContainer);
-            if (Optional.IsDefined(Filters))
+            if (Filters != null)
             {
                 writer.WritePropertyName("filters"u8);
                 writer.WriteObjectValue(Filters);

@@ -27,12 +27,9 @@ namespace TypeSchemaMapping.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(IntProperty))
-            {
-                writer.WritePropertyName("StringProperty"u8);
-                writer.WriteNumberValue(IntProperty);
-            }
-            if (Optional.IsCollectionDefined(DictionaryProperty))
+            writer.WritePropertyName("StringProperty"u8);
+            writer.WriteNumberValue(IntProperty);
+            if (!(DictionaryProperty is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("DictionaryProperty"u8);
                 writer.WriteStartObject();
@@ -43,7 +40,7 @@ namespace TypeSchemaMapping.Models
                 }
                 writer.WriteEndObject();
             }
-            if (Optional.IsDefined(DaysOfWeek))
+            if (DaysOfWeek.HasValue)
             {
                 writer.WritePropertyName("DaysOfWeek"u8);
                 writer.WriteStringValue(DaysOfWeek.Value.ToString());
@@ -87,7 +84,7 @@ namespace TypeSchemaMapping.Models
                 return null;
             }
             Optional<int> stringProperty = default;
-            Optional<IReadOnlyDictionary<string, string>> dictionaryProperty = default;
+            IReadOnlyDictionary<string, string> dictionaryProperty = default;
             Optional<CustomDaysOfWeek> daysOfWeek = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -131,7 +128,7 @@ namespace TypeSchemaMapping.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new SecondModel(stringProperty, Optional.ToDictionary(dictionaryProperty), Optional.ToNullable(daysOfWeek), serializedAdditionalRawData);
+            return new SecondModel(stringProperty, dictionaryProperty ?? new ChangeTrackingDictionary<string, string>(), Optional.ToNullable(daysOfWeek), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<SecondModel>.Write(ModelReaderWriterOptions options)

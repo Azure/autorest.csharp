@@ -20,22 +20,22 @@ namespace Azure.ResourceManager.Storage
             writer.WriteStartObject();
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(Source))
+            if (Source.HasValue)
             {
                 writer.WritePropertyName("source"u8);
                 writer.WriteStringValue(Source.Value.ToString());
             }
-            if (Optional.IsDefined(State))
+            if (State.HasValue)
             {
                 writer.WritePropertyName("state"u8);
                 writer.WriteStringValue(State.Value.ToString());
             }
-            if (Optional.IsDefined(KeyVaultProperties))
+            if (KeyVaultProperties != null)
             {
                 writer.WritePropertyName("keyVaultProperties"u8);
                 writer.WriteObjectValue(KeyVaultProperties);
             }
-            if (Optional.IsDefined(RequireInfrastructureEncryption))
+            if (RequireInfrastructureEncryption.HasValue)
             {
                 writer.WritePropertyName("requireInfrastructureEncryption"u8);
                 writer.WriteBooleanValue(RequireInfrastructureEncryption.Value);
@@ -153,7 +153,17 @@ namespace Azure.ResourceManager.Storage
                     continue;
                 }
             }
-            return new EncryptionScopeData(id, name, type, systemData.Value, Optional.ToNullable(source), Optional.ToNullable(state), Optional.ToNullable(creationTime), Optional.ToNullable(lastModifiedTime), keyVaultProperties.Value, Optional.ToNullable(requireInfrastructureEncryption));
+            return new EncryptionScopeData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                Optional.ToNullable(source),
+                Optional.ToNullable(state),
+                Optional.ToNullable(creationTime),
+                Optional.ToNullable(lastModifiedTime),
+                keyVaultProperties.Value,
+                Optional.ToNullable(requireInfrastructureEncryption));
         }
     }
 }

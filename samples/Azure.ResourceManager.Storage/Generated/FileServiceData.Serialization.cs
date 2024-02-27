@@ -19,17 +19,17 @@ namespace Azure.ResourceManager.Storage
             writer.WriteStartObject();
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(Cors))
+            if (Cors != null)
             {
                 writer.WritePropertyName("cors"u8);
                 writer.WriteObjectValue(Cors);
             }
-            if (Optional.IsDefined(ShareDeleteRetentionPolicy))
+            if (ShareDeleteRetentionPolicy != null)
             {
                 writer.WritePropertyName("shareDeleteRetentionPolicy"u8);
                 writer.WriteObjectValue(ShareDeleteRetentionPolicy);
             }
-            if (Optional.IsDefined(ProtocolSettings))
+            if (ProtocolSettings != null)
             {
                 writer.WritePropertyName("protocolSettings"u8);
                 writer.WriteObjectValue(ProtocolSettings);
@@ -127,7 +127,15 @@ namespace Azure.ResourceManager.Storage
                     continue;
                 }
             }
-            return new FileServiceData(id, name, type, systemData.Value, sku.Value, cors.Value, shareDeleteRetentionPolicy.Value, protocolSettings.Value);
+            return new FileServiceData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                sku.Value,
+                cors.Value,
+                shareDeleteRetentionPolicy.Value,
+                protocolSettings.Value);
         }
     }
 }

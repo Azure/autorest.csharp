@@ -26,7 +26,7 @@ namespace TypeSchemaMapping.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(ArrayOfEnum))
+            if (!(ArrayOfEnum is ChangeTrackingList<EnumForModelWithArrayOfEnum> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("ArrayOfEnum"u8);
                 writer.WriteStartArray();
@@ -36,7 +36,7 @@ namespace TypeSchemaMapping.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(ArrayOfEnumCustomizedToNullable))
+            if (!(ArrayOfEnumCustomizedToNullable is ChangeTrackingList<EnumForModelWithArrayOfEnum?> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("ArrayOfEnumCustomizedToNullable"u8);
                 writer.WriteStartArray();
@@ -89,8 +89,8 @@ namespace TypeSchemaMapping.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<EnumForModelWithArrayOfEnum>> arrayOfEnum = default;
-            Optional<IReadOnlyList<EnumForModelWithArrayOfEnum?>> arrayOfEnumCustomizedToNullable = default;
+            IReadOnlyList<EnumForModelWithArrayOfEnum> arrayOfEnum = default;
+            IReadOnlyList<EnumForModelWithArrayOfEnum?> arrayOfEnumCustomizedToNullable = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -136,7 +136,7 @@ namespace TypeSchemaMapping.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ModelWithArrayOfEnum(Optional.ToList(arrayOfEnum), Optional.ToList(arrayOfEnumCustomizedToNullable), serializedAdditionalRawData);
+            return new ModelWithArrayOfEnum(arrayOfEnum ?? new ChangeTrackingList<EnumForModelWithArrayOfEnum>(), arrayOfEnumCustomizedToNullable ?? new ChangeTrackingList<EnumForModelWithArrayOfEnum?>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ModelWithArrayOfEnum>.Write(ModelReaderWriterOptions options)

@@ -24,7 +24,7 @@ namespace MgmtAcronymMapping.Models
             Optional<string> name = default;
             Optional<string> version = default;
             Optional<string> kbid = default;
-            Optional<IReadOnlyList<string>> classifications = default;
+            IReadOnlyList<string> classifications = default;
             Optional<SoftwareUpdateRebootBehavior> rebootBehavior = default;
             Optional<string> activityId = default;
             Optional<DateTimeOffset> publishedDate = default;
@@ -108,7 +108,17 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineSoftwarePatchProperties(patchId.Value, name.Value, version.Value, kbid.Value, Optional.ToList(classifications), Optional.ToNullable(rebootBehavior), activityId.Value, Optional.ToNullable(publishedDate), Optional.ToNullable(lastModifiedDateTime), Optional.ToNullable(assessmentState));
+            return new VirtualMachineSoftwarePatchProperties(
+                patchId.Value,
+                name.Value,
+                version.Value,
+                kbid.Value,
+                classifications ?? new ChangeTrackingList<string>(),
+                Optional.ToNullable(rebootBehavior),
+                activityId.Value,
+                Optional.ToNullable(publishedDate),
+                Optional.ToNullable(lastModifiedDateTime),
+                Optional.ToNullable(assessmentState));
         }
     }
 }

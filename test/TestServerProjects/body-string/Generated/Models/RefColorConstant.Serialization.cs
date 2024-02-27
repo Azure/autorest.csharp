@@ -28,7 +28,7 @@ namespace body_string.Models
             writer.WriteStartObject();
             writer.WritePropertyName("ColorConstant"u8);
             writer.WriteStringValue(ColorConstant.ToString());
-            if (Optional.IsDefined(Field1))
+            if (Field1 != null)
             {
                 writer.WritePropertyName("field1"u8);
                 writer.WriteStringValue(Field1);

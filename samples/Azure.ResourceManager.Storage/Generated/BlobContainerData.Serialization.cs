@@ -22,22 +22,22 @@ namespace Azure.ResourceManager.Storage
             writer.WriteStartObject();
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(DefaultEncryptionScope))
+            if (DefaultEncryptionScope != null)
             {
                 writer.WritePropertyName("defaultEncryptionScope"u8);
                 writer.WriteStringValue(DefaultEncryptionScope);
             }
-            if (Optional.IsDefined(DenyEncryptionScopeOverride))
+            if (DenyEncryptionScopeOverride.HasValue)
             {
                 writer.WritePropertyName("denyEncryptionScopeOverride"u8);
                 writer.WriteBooleanValue(DenyEncryptionScopeOverride.Value);
             }
-            if (Optional.IsDefined(PublicAccess))
+            if (PublicAccess.HasValue)
             {
                 writer.WritePropertyName("publicAccess"u8);
                 writer.WriteStringValue(PublicAccess.Value.ToSerialString());
             }
-            if (Optional.IsCollectionDefined(Metadata))
+            if (!(Metadata is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("metadata"u8);
                 writer.WriteStartObject();
@@ -48,17 +48,17 @@ namespace Azure.ResourceManager.Storage
                 }
                 writer.WriteEndObject();
             }
-            if (Optional.IsDefined(ImmutableStorageWithVersioning))
+            if (ImmutableStorageWithVersioning != null)
             {
                 writer.WritePropertyName("immutableStorageWithVersioning"u8);
                 writer.WriteObjectValue(ImmutableStorageWithVersioning);
             }
-            if (Optional.IsDefined(EnableNfsV3RootSquash))
+            if (EnableNfsV3RootSquash.HasValue)
             {
                 writer.WritePropertyName("enableNfsV3RootSquash"u8);
                 writer.WriteBooleanValue(EnableNfsV3RootSquash.Value);
             }
-            if (Optional.IsDefined(EnableNfsV3AllSquash))
+            if (EnableNfsV3AllSquash.HasValue)
             {
                 writer.WritePropertyName("enableNfsV3AllSquash"u8);
                 writer.WriteBooleanValue(EnableNfsV3AllSquash.Value);
@@ -89,7 +89,7 @@ namespace Azure.ResourceManager.Storage
             Optional<LeaseStatus> leaseStatus = default;
             Optional<LeaseState> leaseState = default;
             Optional<LeaseDuration> leaseDuration = default;
-            Optional<IDictionary<string, string>> metadata = default;
+            IDictionary<string, string> metadata = default;
             Optional<ImmutabilityPolicyProperties> immutabilityPolicy = default;
             Optional<LegalHoldProperties> legalHold = default;
             Optional<bool> hasLegalHold = default;
@@ -313,7 +313,31 @@ namespace Azure.ResourceManager.Storage
                     continue;
                 }
             }
-            return new BlobContainerData(id, name, type, systemData.Value, version.Value, Optional.ToNullable(deleted), Optional.ToNullable(deletedTime), Optional.ToNullable(remainingRetentionDays), defaultEncryptionScope.Value, Optional.ToNullable(denyEncryptionScopeOverride), Optional.ToNullable(publicAccess), Optional.ToNullable(lastModifiedTime), Optional.ToNullable(leaseStatus), Optional.ToNullable(leaseState), Optional.ToNullable(leaseDuration), Optional.ToDictionary(metadata), immutabilityPolicy.Value, legalHold.Value, Optional.ToNullable(hasLegalHold), Optional.ToNullable(hasImmutabilityPolicy), immutableStorageWithVersioning.Value, Optional.ToNullable(enableNfsV3RootSquash), Optional.ToNullable(enableNfsV3AllSquash), Optional.ToNullable(etag));
+            return new BlobContainerData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                version.Value,
+                Optional.ToNullable(deleted),
+                Optional.ToNullable(deletedTime),
+                Optional.ToNullable(remainingRetentionDays),
+                defaultEncryptionScope.Value,
+                Optional.ToNullable(denyEncryptionScopeOverride),
+                Optional.ToNullable(publicAccess),
+                Optional.ToNullable(lastModifiedTime),
+                Optional.ToNullable(leaseStatus),
+                Optional.ToNullable(leaseState),
+                Optional.ToNullable(leaseDuration),
+                metadata ?? new ChangeTrackingDictionary<string, string>(),
+                immutabilityPolicy.Value,
+                legalHold.Value,
+                Optional.ToNullable(hasLegalHold),
+                Optional.ToNullable(hasImmutabilityPolicy),
+                immutableStorageWithVersioning.Value,
+                Optional.ToNullable(enableNfsV3RootSquash),
+                Optional.ToNullable(enableNfsV3AllSquash),
+                Optional.ToNullable(etag));
         }
     }
 }

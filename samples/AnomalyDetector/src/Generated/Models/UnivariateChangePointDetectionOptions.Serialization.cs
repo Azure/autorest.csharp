@@ -36,22 +36,22 @@ namespace AnomalyDetector.Models
             writer.WriteEndArray();
             writer.WritePropertyName("granularity"u8);
             writer.WriteStringValue(Granularity.ToSerialString());
-            if (Optional.IsDefined(CustomInterval))
+            if (CustomInterval.HasValue)
             {
                 writer.WritePropertyName("customInterval"u8);
                 writer.WriteNumberValue(CustomInterval.Value);
             }
-            if (Optional.IsDefined(Period))
+            if (Period.HasValue)
             {
                 writer.WritePropertyName("period"u8);
                 writer.WriteNumberValue(Period.Value);
             }
-            if (Optional.IsDefined(StableTrendWindow))
+            if (StableTrendWindow.HasValue)
             {
                 writer.WritePropertyName("stableTrendWindow"u8);
                 writer.WriteNumberValue(StableTrendWindow.Value);
             }
-            if (Optional.IsDefined(Threshold))
+            if (Threshold.HasValue)
             {
                 writer.WritePropertyName("threshold"u8);
                 writer.WriteNumberValue(Threshold.Value);
@@ -161,7 +161,14 @@ namespace AnomalyDetector.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new UnivariateChangePointDetectionOptions(series, granularity, Optional.ToNullable(customInterval), Optional.ToNullable(period), Optional.ToNullable(stableTrendWindow), Optional.ToNullable(threshold), serializedAdditionalRawData);
+            return new UnivariateChangePointDetectionOptions(
+                series,
+                granularity,
+                Optional.ToNullable(customInterval),
+                Optional.ToNullable(period),
+                Optional.ToNullable(stableTrendWindow),
+                Optional.ToNullable(threshold),
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<UnivariateChangePointDetectionOptions>.Write(ModelReaderWriterOptions options)

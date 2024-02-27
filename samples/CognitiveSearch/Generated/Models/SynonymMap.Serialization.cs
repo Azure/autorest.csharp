@@ -21,12 +21,12 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(Format.ToString());
             writer.WritePropertyName("synonyms"u8);
             writer.WriteStringValue(Synonyms);
-            if (Optional.IsDefined(EncryptionKey))
+            if (EncryptionKey != null)
             {
                 writer.WritePropertyName("encryptionKey"u8);
                 writer.WriteObjectValue(EncryptionKey);
             }
-            if (Optional.IsDefined(ETag))
+            if (ETag != null)
             {
                 writer.WritePropertyName("@odata.etag"u8);
                 writer.WriteStringValue(ETag);

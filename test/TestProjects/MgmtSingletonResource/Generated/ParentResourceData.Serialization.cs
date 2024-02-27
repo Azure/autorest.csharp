@@ -17,12 +17,12 @@ namespace MgmtSingletonResource
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(New))
+            if (New != null)
             {
                 writer.WritePropertyName("new"u8);
                 writer.WriteStringValue(New);
             }
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -45,7 +45,7 @@ namespace MgmtSingletonResource
                 return null;
             }
             Optional<string> @new = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -102,7 +102,14 @@ namespace MgmtSingletonResource
                     continue;
                 }
             }
-            return new ParentResourceData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, @new.Value);
+            return new ParentResourceData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                @new.Value);
         }
     }
 }

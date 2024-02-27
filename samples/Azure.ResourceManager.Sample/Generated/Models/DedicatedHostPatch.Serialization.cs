@@ -27,7 +27,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -40,22 +40,22 @@ namespace Azure.ResourceManager.Sample.Models
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(PlatformFaultDomain))
+            if (PlatformFaultDomain.HasValue)
             {
                 writer.WritePropertyName("platformFaultDomain"u8);
                 writer.WriteNumberValue(PlatformFaultDomain.Value);
             }
-            if (Optional.IsDefined(AutoReplaceOnFailure))
+            if (AutoReplaceOnFailure.HasValue)
             {
                 writer.WritePropertyName("autoReplaceOnFailure"u8);
                 writer.WriteBooleanValue(AutoReplaceOnFailure.Value);
             }
-            if (options.Format != "W" && Optional.IsDefined(HostId))
+            if (options.Format != "W" && HostId != null)
             {
                 writer.WritePropertyName("hostId"u8);
                 writer.WriteStringValue(HostId);
             }
-            if (options.Format != "W" && Optional.IsCollectionDefined(VirtualMachines))
+            if (options.Format != "W" && !(VirtualMachines is ChangeTrackingList<Resources.Models.SubResource> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("virtualMachines"u8);
                 writer.WriteStartArray();
@@ -65,22 +65,22 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(LicenseType))
+            if (LicenseType.HasValue)
             {
                 writer.WritePropertyName("licenseType"u8);
                 writer.WriteStringValue(LicenseType.Value.ToSerialString());
             }
-            if (options.Format != "W" && Optional.IsDefined(ProvisioningOn))
+            if (options.Format != "W" && ProvisioningOn.HasValue)
             {
                 writer.WritePropertyName("provisioningTime"u8);
                 writer.WriteStringValue(ProvisioningOn.Value, "O");
             }
-            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
+            if (options.Format != "W" && ProvisioningState != null)
             {
                 writer.WritePropertyName("provisioningState"u8);
                 writer.WriteStringValue(ProvisioningState);
             }
-            if (options.Format != "W" && Optional.IsDefined(InstanceView))
+            if (options.Format != "W" && InstanceView != null)
             {
                 writer.WritePropertyName("instanceView"u8);
                 writer.WriteObjectValue(InstanceView);
@@ -124,11 +124,11 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             Optional<int> platformFaultDomain = default;
             Optional<bool> autoReplaceOnFailure = default;
             Optional<string> hostId = default;
-            Optional<IReadOnlyList<Resources.Models.SubResource>> virtualMachines = default;
+            IReadOnlyList<Resources.Models.SubResource> virtualMachines = default;
             Optional<DedicatedHostLicenseType> licenseType = default;
             Optional<DateTimeOffset> provisioningTime = default;
             Optional<string> provisioningState = default;
@@ -238,7 +238,17 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DedicatedHostPatch(Optional.ToDictionary(tags), serializedAdditionalRawData, Optional.ToNullable(platformFaultDomain), Optional.ToNullable(autoReplaceOnFailure), hostId.Value, Optional.ToList(virtualMachines), Optional.ToNullable(licenseType), Optional.ToNullable(provisioningTime), provisioningState.Value, instanceView.Value);
+            return new DedicatedHostPatch(
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                serializedAdditionalRawData,
+                Optional.ToNullable(platformFaultDomain),
+                Optional.ToNullable(autoReplaceOnFailure),
+                hostId.Value,
+                virtualMachines ?? new ChangeTrackingList<Resources.Models.SubResource>(),
+                Optional.ToNullable(licenseType),
+                Optional.ToNullable(provisioningTime),
+                provisioningState.Value,
+                instanceView.Value);
         }
 
         BinaryData IPersistableModel<DedicatedHostPatch>.Write(ModelReaderWriterOptions options)

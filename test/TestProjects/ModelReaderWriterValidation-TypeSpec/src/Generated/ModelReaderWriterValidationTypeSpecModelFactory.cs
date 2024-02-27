@@ -25,7 +25,13 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             fields ??= new List<string>();
             keyValuePairs ??= new Dictionary<string, string>();
 
-            return new ModelWithPersistableOnly(name, fields?.ToList(), nullProperty, keyValuePairs, xProperty, serializedAdditionalRawData: null);
+            return new ModelWithPersistableOnly(
+                name,
+                fields?.ToList(),
+                nullProperty,
+                keyValuePairs,
+                xProperty,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.TrackedResourceData"/>. </summary>
@@ -39,7 +45,13 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new TrackedResourceData(id, name, resourceType, location, tags, serializedAdditionalRawData: null);
+            return new TrackedResourceData(
+                id,
+                name,
+                resourceType,
+                location,
+                tags,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.AvailabilitySetData"/>. </summary>
@@ -55,7 +67,15 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new AvailabilitySetData(id, name, resourceType, location, tags, serializedAdditionalRawData: null, sku, properties);
+            return new AvailabilitySetData(
+                id,
+                name,
+                resourceType,
+                location,
+                tags,
+                serializedAdditionalRawData: null,
+                sku,
+                properties);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ResourceProviderData"/>. </summary>
@@ -70,7 +90,14 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         {
             resourceTypes ??= new List<ProviderResourceType>();
 
-            return new ResourceProviderData(id, @namespace, registrationState, registrationPolicy, resourceTypes?.ToList(), providerAuthorizationConsentState, serializedAdditionalRawData: null);
+            return new ResourceProviderData(
+                id,
+                @namespace,
+                registrationState,
+                registrationPolicy,
+                resourceTypes?.ToList(),
+                providerAuthorizationConsentState,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ProviderResourceType"/>. </summary>
@@ -95,7 +122,18 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             apiProfiles ??= new List<ApiProfile>();
             properties ??= new Dictionary<string, string>();
 
-            return new ProviderResourceType(resourceType, locations?.ToList(), locationMappings?.ToList(), aliases?.ToList(), apiVersions?.ToList(), defaultApiVersion, zoneMappings?.ToList(), apiProfiles?.ToList(), capabilities, properties, serializedAdditionalRawData: null);
+            return new ProviderResourceType(
+                resourceType,
+                locations?.ToList(),
+                locationMappings?.ToList(),
+                aliases?.ToList(),
+                apiVersions?.ToList(),
+                defaultApiVersion,
+                zoneMappings?.ToList(),
+                apiProfiles?.ToList(),
+                capabilities,
+                properties,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ProviderExtendedLocation"/>. </summary>
@@ -122,7 +160,14 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         {
             paths ??= new List<ResourceTypeAliasPath>();
 
-            return new ResourceTypeAlias(name, paths?.ToList(), aliasType, defaultPath, defaultPattern, defaultMetadata, serializedAdditionalRawData: null);
+            return new ResourceTypeAlias(
+                name,
+                paths?.ToList(),
+                aliasType,
+                defaultPath,
+                defaultPattern,
+                defaultMetadata,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ResourceTypeAliasPath"/>. </summary>
@@ -189,7 +234,14 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             fields ??= new List<string>();
             keyValuePairs ??= new Dictionary<string, string>();
 
-            return new ModelX("X", name, serializedAdditionalRawData: null, fields?.ToList(), nullProperty, keyValuePairs, xProperty);
+            return new ModelX(
+                "X",
+                name,
+                serializedAdditionalRawData: null,
+                fields?.ToList(),
+                nullProperty,
+                keyValuePairs,
+                xProperty);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ModelY"/>. </summary>

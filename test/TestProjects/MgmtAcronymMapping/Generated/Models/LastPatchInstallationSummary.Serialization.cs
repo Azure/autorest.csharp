@@ -144,7 +144,20 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new LastPatchInstallationSummary(Optional.ToNullable(status), installationActivityId.Value, Optional.ToNullable(maintenanceWindowExceeded), Optional.ToNullable(rebootStatus), Optional.ToNullable(notSelectedPatchCount), Optional.ToNullable(excludedPatchCount), Optional.ToNullable(pendingPatchCount), Optional.ToNullable(installedPatchCount), Optional.ToNullable(failedPatchCount), Optional.ToNullable(startTime), Optional.ToNullable(lastModifiedTime), startedBy.Value, error.Value);
+            return new LastPatchInstallationSummary(
+                Optional.ToNullable(status),
+                installationActivityId.Value,
+                Optional.ToNullable(maintenanceWindowExceeded),
+                Optional.ToNullable(rebootStatus),
+                Optional.ToNullable(notSelectedPatchCount),
+                Optional.ToNullable(excludedPatchCount),
+                Optional.ToNullable(pendingPatchCount),
+                Optional.ToNullable(installedPatchCount),
+                Optional.ToNullable(failedPatchCount),
+                Optional.ToNullable(startTime),
+                Optional.ToNullable(lastModifiedTime),
+                startedBy.Value,
+                error.Value);
         }
     }
 }

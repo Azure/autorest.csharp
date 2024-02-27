@@ -27,57 +27,57 @@ namespace CustomizationsInTsp.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(PropertyExtensibleEnum))
+            if (PropertyExtensibleEnum.HasValue)
             {
                 writer.WritePropertyName("propertyExtensibleEnum"u8);
                 writer.WriteStringValue(PropertyExtensibleEnum.Value.ToString());
             }
-            if (Optional.IsDefined(PropertyModelToMakeInternal))
+            if (PropertyModelToMakeInternal != null)
             {
                 writer.WritePropertyName("propertyModelToMakeInternal"u8);
                 writer.WriteObjectValue(PropertyModelToMakeInternal);
             }
-            if (Optional.IsDefined(PropertyModelToRename))
+            if (PropertyModelToRename != null)
             {
                 writer.WritePropertyName("propertyModelToRename"u8);
                 writer.WriteObjectValue(PropertyModelToRename);
             }
-            if (Optional.IsDefined(PropertyModelToChangeNamespace))
+            if (PropertyModelToChangeNamespace != null)
             {
                 writer.WritePropertyName("propertyModelToChangeNamespace"u8);
                 writer.WriteObjectValue(PropertyModelToChangeNamespace);
             }
-            if (Optional.IsDefined(PropertyModelWithCustomizedProperties))
+            if (PropertyModelWithCustomizedProperties != null)
             {
                 writer.WritePropertyName("propertyModelWithCustomizedProperties"u8);
                 writer.WriteObjectValue(PropertyModelWithCustomizedProperties);
             }
-            if (Optional.IsDefined(PropertyEnumToRename))
+            if (PropertyEnumToRename.HasValue)
             {
                 writer.WritePropertyName("propertyEnumToRename"u8);
                 writer.WriteStringValue(PropertyEnumToRename.Value.ToSerialString());
             }
-            if (Optional.IsDefined(PropertyEnumWithValueToRename))
+            if (PropertyEnumWithValueToRename.HasValue)
             {
                 writer.WritePropertyName("propertyEnumWithValueToRename"u8);
                 writer.WriteStringValue(PropertyEnumWithValueToRename.Value.ToSerialString());
             }
-            if (Optional.IsDefined(PropertyEnumToBeMadeExtensible))
+            if (PropertyEnumToBeMadeExtensible.HasValue)
             {
                 writer.WritePropertyName("propertyEnumToBeMadeExtensible"u8);
                 writer.WriteStringValue(PropertyEnumToBeMadeExtensible.Value.ToString());
             }
-            if (Optional.IsDefined(PropertyModelToAddAdditionalSerializableProperty))
+            if (PropertyModelToAddAdditionalSerializableProperty != null)
             {
                 writer.WritePropertyName("propertyModelToAddAdditionalSerializableProperty"u8);
                 writer.WriteObjectValue(PropertyModelToAddAdditionalSerializableProperty);
             }
-            if (Optional.IsDefined(PropertyToMoveToCustomization))
+            if (PropertyToMoveToCustomization.HasValue)
             {
                 writer.WritePropertyName("propertyToMoveToCustomization"u8);
                 writer.WriteStringValue(PropertyToMoveToCustomization.Value.ToString());
             }
-            if (Optional.IsDefined(PropertyModelStruct))
+            if (PropertyModelStruct.HasValue)
             {
                 writer.WritePropertyName("propertyModelStruct"u8);
                 writer.WriteObjectValue(PropertyModelStruct);
@@ -240,7 +240,19 @@ namespace CustomizationsInTsp.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new RootModel(Optional.ToNullable(propertyExtensibleEnum), propertyModelToMakeInternal.Value, propertyModelToRename.Value, propertyModelToChangeNamespace.Value, propertyModelWithCustomizedProperties.Value, Optional.ToNullable(propertyEnumToRename), Optional.ToNullable(propertyEnumWithValueToRename), Optional.ToNullable(propertyEnumToBeMadeExtensible), propertyModelToAddAdditionalSerializableProperty.Value, Optional.ToNullable(propertyToMoveToCustomization), Optional.ToNullable(propertyModelStruct), serializedAdditionalRawData);
+            return new RootModel(
+                Optional.ToNullable(propertyExtensibleEnum),
+                propertyModelToMakeInternal.Value,
+                propertyModelToRename.Value,
+                propertyModelToChangeNamespace.Value,
+                propertyModelWithCustomizedProperties.Value,
+                Optional.ToNullable(propertyEnumToRename),
+                Optional.ToNullable(propertyEnumWithValueToRename),
+                Optional.ToNullable(propertyEnumToBeMadeExtensible),
+                propertyModelToAddAdditionalSerializableProperty.Value,
+                Optional.ToNullable(propertyToMoveToCustomization),
+                Optional.ToNullable(propertyModelStruct),
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<RootModel>.Write(ModelReaderWriterOptions options)

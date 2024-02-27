@@ -21,13 +21,8 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         private ObjectTypeProperty[]? _myProperties;
 
-        public MgmtObjectType(InputModelType inputModel)
-            : this(inputModel, null, null, null)
-        {
-        }
-
         public MgmtObjectType(InputModelType inputModel, string? name = null, string? nameSpace = null, SerializableObjectType? defaultDerivedType = null)
-            : base(inputModel, MgmtContext.Context, defaultDerivedType)
+            : base(inputModel, MgmtContext.Context.DefaultNamespace, MgmtContext.TypeFactory, MgmtContext.Context.SourceInputModel, defaultDerivedType)
         {
             _defaultName = name;
             _defaultNamespace = nameSpace;

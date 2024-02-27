@@ -26,7 +26,7 @@ namespace validation.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(DisplayNames))
+            if (!(DisplayNames is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("display_names"u8);
                 writer.WriteStartArray();
@@ -36,12 +36,12 @@ namespace validation.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(Capacity))
+            if (Capacity.HasValue)
             {
                 writer.WritePropertyName("capacity"u8);
                 writer.WriteNumberValue(Capacity.Value);
             }
-            if (Optional.IsDefined(Image))
+            if (Image != null)
             {
                 writer.WritePropertyName("image"u8);
                 writer.WriteStringValue(Image);
@@ -54,7 +54,7 @@ namespace validation.Models
             writer.WriteNumberValue(ConstInt.ToSerialInt32());
             writer.WritePropertyName("constString"u8);
             writer.WriteStringValue(ConstString.ToString());
-            if (Optional.IsDefined(ConstStringAsEnum))
+            if (ConstStringAsEnum.HasValue)
             {
                 writer.WritePropertyName("constStringAsEnum"u8);
                 writer.WriteStringValue(ConstStringAsEnum.Value.ToString());
@@ -97,7 +97,7 @@ namespace validation.Models
             {
                 return null;
             }
-            Optional<IList<string>> displayNames = default;
+            IList<string> displayNames = default;
             Optional<int> capacity = default;
             Optional<string> image = default;
             ChildProduct child = default;
@@ -172,7 +172,16 @@ namespace validation.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Product(Optional.ToList(displayNames), Optional.ToNullable(capacity), image.Value, child, constChild, constInt, constString, Optional.ToNullable(constStringAsEnum), serializedAdditionalRawData);
+            return new Product(
+                displayNames ?? new ChangeTrackingList<string>(),
+                Optional.ToNullable(capacity),
+                image.Value,
+                child,
+                constChild,
+                constInt,
+                constString,
+                Optional.ToNullable(constStringAsEnum),
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<Product>.Write(ModelReaderWriterOptions options)

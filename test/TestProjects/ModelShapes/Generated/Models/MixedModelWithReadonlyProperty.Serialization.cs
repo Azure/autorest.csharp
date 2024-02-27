@@ -26,12 +26,12 @@ namespace ModelShapes.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && Optional.IsDefined(ReadonlyProperty))
+            if (options.Format != "W" && ReadonlyProperty != null)
             {
                 writer.WritePropertyName("ReadonlyProperty"u8);
                 writer.WriteObjectValue(ReadonlyProperty);
             }
-            if (options.Format != "W" && Optional.IsCollectionDefined(ReadonlyListProperty))
+            if (options.Format != "W" && !(ReadonlyListProperty is ChangeTrackingList<ReadonlyModel> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("ReadonlyListProperty"u8);
                 writer.WriteStartArray();
@@ -80,7 +80,7 @@ namespace ModelShapes.Models
                 return null;
             }
             Optional<ReadonlyModel> readonlyProperty = default;
-            Optional<IReadOnlyList<ReadonlyModel>> readonlyListProperty = default;
+            IReadOnlyList<ReadonlyModel> readonlyListProperty = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -114,7 +114,7 @@ namespace ModelShapes.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new MixedModelWithReadonlyProperty(readonlyProperty.Value, Optional.ToList(readonlyListProperty), serializedAdditionalRawData);
+            return new MixedModelWithReadonlyProperty(readonlyProperty.Value, readonlyListProperty ?? new ChangeTrackingList<ReadonlyModel>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<MixedModelWithReadonlyProperty>.Write(ModelReaderWriterOptions options)

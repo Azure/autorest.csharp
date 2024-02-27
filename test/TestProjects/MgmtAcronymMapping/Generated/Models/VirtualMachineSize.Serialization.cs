@@ -77,7 +77,13 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineSize(name.Value, Optional.ToNullable(numberOfCores), Optional.ToNullable(osDiskSizeInMB), Optional.ToNullable(resourceDiskSizeInMB), Optional.ToNullable(memoryInMB), Optional.ToNullable(maxDataDiskCount));
+            return new VirtualMachineSize(
+                name.Value,
+                Optional.ToNullable(numberOfCores),
+                Optional.ToNullable(osDiskSizeInMB),
+                Optional.ToNullable(resourceDiskSizeInMB),
+                Optional.ToNullable(memoryInMB),
+                Optional.ToNullable(maxDataDiskCount));
         }
     }
 }

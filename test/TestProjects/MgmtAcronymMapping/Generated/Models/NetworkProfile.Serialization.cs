@@ -16,7 +16,7 @@ namespace MgmtAcronymMapping.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(NetworkInterfaces))
+            if (!(NetworkInterfaces is ChangeTrackingList<NetworkInterfaceReference> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("networkInterfaces"u8);
                 writer.WriteStartArray();
@@ -35,7 +35,7 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<IList<NetworkInterfaceReference>> networkInterfaces = default;
+            IList<NetworkInterfaceReference> networkInterfaces = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("networkInterfaces"u8))
@@ -53,7 +53,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new NetworkProfile(Optional.ToList(networkInterfaces));
+            return new NetworkProfile(networkInterfaces ?? new ChangeTrackingList<NetworkInterfaceReference>());
         }
     }
 }

@@ -17,12 +17,12 @@ namespace MgmtListMethods
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Bar))
+            if (Bar != null)
             {
                 writer.WritePropertyName("bar"u8);
                 writer.WriteStringValue(Bar);
             }
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -45,7 +45,7 @@ namespace MgmtListMethods
                 return null;
             }
             Optional<string> bar = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -102,7 +102,14 @@ namespace MgmtListMethods
                     continue;
                 }
             }
-            return new MgmtGrpParentWithLocData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, bar.Value);
+            return new MgmtGrpParentWithLocData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                bar.Value);
         }
     }
 }

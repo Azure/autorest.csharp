@@ -15,7 +15,7 @@ namespace MgmtAcronymMapping.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(VmSize))
+            if (VmSize.HasValue)
             {
                 writer.WritePropertyName("vmSize"u8);
                 writer.WriteStringValue(VmSize.Value.ToString());

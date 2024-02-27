@@ -57,7 +57,13 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new ItemError(key.Value, errorMessage, statusCode, name.Value, details.Value, documentationLink.Value);
+            return new ItemError(
+                key.Value,
+                errorMessage,
+                statusCode,
+                name.Value,
+                details.Value,
+                documentationLink.Value);
         }
     }
 }

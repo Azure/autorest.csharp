@@ -31,27 +31,27 @@ namespace MgmtDiscriminator.Models
             writer.WriteStringValue(TypeName.ToString());
             writer.WritePropertyName("redirectType"u8);
             writer.WriteStringValue(RedirectType.ToString());
-            if (Optional.IsDefined(DestinationProtocol))
+            if (DestinationProtocol.HasValue)
             {
                 writer.WritePropertyName("destinationProtocol"u8);
                 writer.WriteStringValue(DestinationProtocol.Value.ToString());
             }
-            if (Optional.IsDefined(CustomPath))
+            if (CustomPath != null)
             {
                 writer.WritePropertyName("customPath"u8);
                 writer.WriteStringValue(CustomPath);
             }
-            if (Optional.IsDefined(CustomHostname))
+            if (CustomHostname != null)
             {
                 writer.WritePropertyName("customHostname"u8);
                 writer.WriteStringValue(CustomHostname);
             }
-            if (Optional.IsDefined(CustomQueryString))
+            if (CustomQueryString != null)
             {
                 writer.WritePropertyName("customQueryString"u8);
                 writer.WriteStringValue(CustomQueryString);
             }
-            if (Optional.IsDefined(CustomFragment))
+            if (CustomFragment != null)
             {
                 writer.WritePropertyName("customFragment"u8);
                 writer.WriteStringValue(CustomFragment);
@@ -150,7 +150,15 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new UrlRedirectActionParameters(typeName, redirectType, Optional.ToNullable(destinationProtocol), customPath.Value, customHostname.Value, customQueryString.Value, customFragment.Value, serializedAdditionalRawData);
+            return new UrlRedirectActionParameters(
+                typeName,
+                redirectType,
+                Optional.ToNullable(destinationProtocol),
+                customPath.Value,
+                customHostname.Value,
+                customQueryString.Value,
+                customFragment.Value,
+                serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -158,25 +166,19 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(TypeName))
-            {
-                builder.Append("  typeName:");
-                builder.AppendLine($" '{TypeName.ToString()}'");
-            }
+            builder.Append("  typeName:");
+            builder.AppendLine($" '{TypeName.ToString()}'");
 
-            if (Optional.IsDefined(RedirectType))
-            {
-                builder.Append("  redirectType:");
-                builder.AppendLine($" '{RedirectType.ToString()}'");
-            }
+            builder.Append("  redirectType:");
+            builder.AppendLine($" '{RedirectType.ToString()}'");
 
-            if (Optional.IsDefined(DestinationProtocol))
+            if (DestinationProtocol.HasValue)
             {
                 builder.Append("  destinationProtocol:");
                 builder.AppendLine($" '{DestinationProtocol.Value.ToString()}'");
             }
 
-            if (Optional.IsDefined(CustomPath))
+            if (CustomPath != null)
             {
                 builder.Append("  customPath:");
                 if (CustomPath.Contains(Environment.NewLine))
@@ -190,7 +192,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            if (Optional.IsDefined(CustomHostname))
+            if (CustomHostname != null)
             {
                 builder.Append("  customHostname:");
                 if (CustomHostname.Contains(Environment.NewLine))
@@ -204,7 +206,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            if (Optional.IsDefined(CustomQueryString))
+            if (CustomQueryString != null)
             {
                 builder.Append("  customQueryString:");
                 if (CustomQueryString.Contains(Environment.NewLine))
@@ -218,7 +220,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            if (Optional.IsDefined(CustomFragment))
+            if (CustomFragment != null)
             {
                 builder.Append("  customFragment:");
                 if (CustomFragment.Contains(Environment.NewLine))

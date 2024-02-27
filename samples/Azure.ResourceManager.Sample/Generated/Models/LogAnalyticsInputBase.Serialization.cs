@@ -32,17 +32,17 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteStringValue(FromTime, "O");
             writer.WritePropertyName("toTime"u8);
             writer.WriteStringValue(ToTime, "O");
-            if (Optional.IsDefined(GroupByThrottlePolicy))
+            if (GroupByThrottlePolicy.HasValue)
             {
                 writer.WritePropertyName("groupByThrottlePolicy"u8);
                 writer.WriteBooleanValue(GroupByThrottlePolicy.Value);
             }
-            if (Optional.IsDefined(GroupByOperationName))
+            if (GroupByOperationName.HasValue)
             {
                 writer.WritePropertyName("groupByOperationName"u8);
                 writer.WriteBooleanValue(GroupByOperationName.Value);
             }
-            if (Optional.IsDefined(GroupByResourceName))
+            if (GroupByResourceName.HasValue)
             {
                 writer.WritePropertyName("groupByResourceName"u8);
                 writer.WriteBooleanValue(GroupByResourceName.Value);
@@ -143,7 +143,14 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new LogAnalyticsInputBase(blobContainerSasUri, fromTime, toTime, Optional.ToNullable(groupByThrottlePolicy), Optional.ToNullable(groupByOperationName), Optional.ToNullable(groupByResourceName), serializedAdditionalRawData);
+            return new LogAnalyticsInputBase(
+                blobContainerSasUri,
+                fromTime,
+                toTime,
+                Optional.ToNullable(groupByThrottlePolicy),
+                Optional.ToNullable(groupByOperationName),
+                Optional.ToNullable(groupByResourceName),
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<LogAnalyticsInputBase>.Write(ModelReaderWriterOptions options)

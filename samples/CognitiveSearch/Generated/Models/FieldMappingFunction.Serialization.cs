@@ -18,7 +18,7 @@ namespace CognitiveSearch.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (Optional.IsCollectionDefined(Parameters))
+            if (!(Parameters is ChangeTrackingDictionary<string, object> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("parameters"u8);
                 writer.WriteStartObject();
@@ -44,7 +44,7 @@ namespace CognitiveSearch.Models
                 return null;
             }
             string name = default;
-            Optional<IDictionary<string, object>> parameters = default;
+            IDictionary<string, object> parameters = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -74,7 +74,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new FieldMappingFunction(name, Optional.ToDictionary(parameters));
+            return new FieldMappingFunction(name, parameters ?? new ChangeTrackingDictionary<string, object>());
         }
     }
 }

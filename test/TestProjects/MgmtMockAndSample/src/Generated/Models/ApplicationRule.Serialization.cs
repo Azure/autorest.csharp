@@ -16,7 +16,7 @@ namespace MgmtMockAndSample.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(SourceAddresses))
+            if (!(SourceAddresses is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("sourceAddresses"u8);
                 writer.WriteStartArray();
@@ -26,7 +26,7 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(DestinationAddresses))
+            if (!(DestinationAddresses is ChangeTrackingList<string> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("destinationAddresses"u8);
                 writer.WriteStartArray();
@@ -36,7 +36,7 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(Protocols))
+            if (!(Protocols is ChangeTrackingList<FirewallPolicyRuleApplicationProtocol> collection1 && collection1.IsUndefined))
             {
                 writer.WritePropertyName("protocols"u8);
                 writer.WriteStartArray();
@@ -46,7 +46,7 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(TargetFqdns))
+            if (!(TargetFqdns is ChangeTrackingList<string> collection2 && collection2.IsUndefined))
             {
                 writer.WritePropertyName("targetFqdns"u8);
                 writer.WriteStartArray();
@@ -56,7 +56,7 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(TargetUrls))
+            if (!(TargetUrls is ChangeTrackingList<string> collection3 && collection3.IsUndefined))
             {
                 writer.WritePropertyName("targetUrls"u8);
                 writer.WriteStartArray();
@@ -66,7 +66,7 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(FqdnTags))
+            if (!(FqdnTags is ChangeTrackingList<string> collection4 && collection4.IsUndefined))
             {
                 writer.WritePropertyName("fqdnTags"u8);
                 writer.WriteStartArray();
@@ -76,7 +76,7 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(SourceIpGroups))
+            if (!(SourceIpGroups is ChangeTrackingList<string> collection5 && collection5.IsUndefined))
             {
                 writer.WritePropertyName("sourceIpGroups"u8);
                 writer.WriteStartArray();
@@ -86,12 +86,12 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(TerminateTLS))
+            if (TerminateTLS.HasValue)
             {
                 writer.WritePropertyName("terminateTLS"u8);
                 writer.WriteBooleanValue(TerminateTLS.Value);
             }
-            if (Optional.IsCollectionDefined(WebCategories))
+            if (!(WebCategories is ChangeTrackingList<string> collection6 && collection6.IsUndefined))
             {
                 writer.WritePropertyName("webCategories"u8);
                 writer.WriteStartArray();
@@ -101,12 +101,12 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Description))
+            if (Description != null)
             {
                 writer.WritePropertyName("description"u8);
                 writer.WriteStringValue(Description);
@@ -122,15 +122,15 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<IList<string>> sourceAddresses = default;
-            Optional<IList<string>> destinationAddresses = default;
-            Optional<IList<FirewallPolicyRuleApplicationProtocol>> protocols = default;
-            Optional<IList<string>> targetFqdns = default;
-            Optional<IList<string>> targetUrls = default;
-            Optional<IList<string>> fqdnTags = default;
-            Optional<IList<string>> sourceIpGroups = default;
+            IList<string> sourceAddresses = default;
+            IList<string> destinationAddresses = default;
+            IList<FirewallPolicyRuleApplicationProtocol> protocols = default;
+            IList<string> targetFqdns = default;
+            IList<string> targetUrls = default;
+            IList<string> fqdnTags = default;
+            IList<string> sourceIpGroups = default;
             Optional<bool> terminateTLS = default;
-            Optional<IList<string>> webCategories = default;
+            IList<string> webCategories = default;
             Optional<string> name = default;
             Optional<string> description = default;
             FirewallPolicyRuleType ruleType = default;
@@ -273,7 +273,19 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new ApplicationRule(name.Value, description.Value, ruleType, Optional.ToList(sourceAddresses), Optional.ToList(destinationAddresses), Optional.ToList(protocols), Optional.ToList(targetFqdns), Optional.ToList(targetUrls), Optional.ToList(fqdnTags), Optional.ToList(sourceIpGroups), Optional.ToNullable(terminateTLS), Optional.ToList(webCategories));
+            return new ApplicationRule(
+                name.Value,
+                description.Value,
+                ruleType,
+                sourceAddresses ?? new ChangeTrackingList<string>(),
+                destinationAddresses ?? new ChangeTrackingList<string>(),
+                protocols ?? new ChangeTrackingList<FirewallPolicyRuleApplicationProtocol>(),
+                targetFqdns ?? new ChangeTrackingList<string>(),
+                targetUrls ?? new ChangeTrackingList<string>(),
+                fqdnTags ?? new ChangeTrackingList<string>(),
+                sourceIpGroups ?? new ChangeTrackingList<string>(),
+                Optional.ToNullable(terminateTLS),
+                webCategories ?? new ChangeTrackingList<string>());
         }
     }
 }

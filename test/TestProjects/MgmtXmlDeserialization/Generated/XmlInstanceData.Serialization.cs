@@ -40,7 +40,7 @@ namespace MgmtXmlDeserialization
                 writer.WriteValue(ResourceType);
                 writer.WriteEndElement();
             }
-            if (options.Format != "W" && Optional.IsDefined(SystemData))
+            if (options.Format != "W" && SystemData != null)
             {
                 writer.WriteStartElement("systemData");
                 writer.WriteValue(SystemData);
@@ -104,7 +104,7 @@ namespace MgmtXmlDeserialization
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format != "W" && Optional.IsDefined(SystemData))
+            if (options.Format != "W" && SystemData != null)
             {
                 writer.WritePropertyName("systemData"u8);
                 JsonSerializer.Serialize(writer, SystemData);

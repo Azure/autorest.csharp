@@ -29,7 +29,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Value))
+            if (!(Value is ChangeTrackingList<VirtualMachineExtensionData> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("value"u8);
                 writer.WriteStartArray();
@@ -77,7 +77,7 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<VirtualMachineExtensionData>> value = default;
+            IReadOnlyList<VirtualMachineExtensionData> value = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -102,7 +102,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineExtensionsListResult(Optional.ToList(value), serializedAdditionalRawData);
+            return new VirtualMachineExtensionsListResult(value ?? new ChangeTrackingList<VirtualMachineExtensionData>(), serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -110,7 +110,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsCollectionDefined(Value))
+            if (!(Value is ChangeTrackingList<VirtualMachineExtensionData> collection && collection.IsUndefined))
             {
                 if (Value.Any())
                 {

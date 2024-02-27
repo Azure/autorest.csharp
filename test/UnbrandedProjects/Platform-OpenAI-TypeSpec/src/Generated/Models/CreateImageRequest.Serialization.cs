@@ -25,7 +25,7 @@ namespace OpenAI.Models
             writer.WriteStartObject();
             writer.WritePropertyName("prompt"u8);
             writer.WriteStringValue(Prompt);
-            if (OptionalProperty.IsDefined(N))
+            if (N.HasValue)
             {
                 if (N != null)
                 {
@@ -37,17 +37,17 @@ namespace OpenAI.Models
                     writer.WriteNull("n");
                 }
             }
-            if (OptionalProperty.IsDefined(Size))
+            if (Size.HasValue)
             {
                 writer.WritePropertyName("size"u8);
                 writer.WriteStringValue(Size.Value.ToString());
             }
-            if (OptionalProperty.IsDefined(ResponseFormat))
+            if (ResponseFormat.HasValue)
             {
                 writer.WritePropertyName("response_format"u8);
                 writer.WriteStringValue(ResponseFormat.Value.ToString());
             }
-            if (OptionalProperty.IsDefined(User))
+            if (User != null)
             {
                 writer.WritePropertyName("user"u8);
                 writer.WriteStringValue(User);
@@ -143,7 +143,13 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new CreateImageRequest(prompt, OptionalProperty.ToNullable(n), OptionalProperty.ToNullable(size), OptionalProperty.ToNullable(responseFormat), user.Value, serializedAdditionalRawData);
+            return new CreateImageRequest(
+                prompt,
+                OptionalProperty.ToNullable(n),
+                OptionalProperty.ToNullable(size),
+                OptionalProperty.ToNullable(responseFormat),
+                user.Value,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<CreateImageRequest>.Write(ModelReaderWriterOptions options)

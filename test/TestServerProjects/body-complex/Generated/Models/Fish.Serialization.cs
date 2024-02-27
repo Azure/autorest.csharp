@@ -28,14 +28,14 @@ namespace body_complex.Models
             writer.WriteStartObject();
             writer.WritePropertyName("fishtype"u8);
             writer.WriteStringValue(Fishtype);
-            if (Optional.IsDefined(Species))
+            if (Species != null)
             {
                 writer.WritePropertyName("species"u8);
                 writer.WriteStringValue(Species);
             }
             writer.WritePropertyName("length"u8);
             writer.WriteNumberValue(Length);
-            if (Optional.IsCollectionDefined(Siblings))
+            if (!(Siblings is ChangeTrackingList<Fish> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("siblings"u8);
                 writer.WriteStartArray();

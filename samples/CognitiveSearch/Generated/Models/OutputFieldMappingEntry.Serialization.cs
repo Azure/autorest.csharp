@@ -17,7 +17,7 @@ namespace CognitiveSearch.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (Optional.IsDefined(TargetName))
+            if (TargetName != null)
             {
                 writer.WritePropertyName("targetName"u8);
                 writer.WriteStringValue(TargetName);

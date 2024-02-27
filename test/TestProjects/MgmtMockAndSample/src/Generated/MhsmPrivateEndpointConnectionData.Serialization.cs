@@ -19,17 +19,17 @@ namespace MgmtMockAndSample
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Etag))
+            if (Etag != null)
             {
                 writer.WritePropertyName("etag"u8);
                 writer.WriteStringValue(Etag);
             }
-            if (Optional.IsDefined(Sku))
+            if (Sku != null)
             {
                 writer.WritePropertyName("sku"u8);
                 writer.WriteObjectValue(Sku);
             }
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -44,17 +44,17 @@ namespace MgmtMockAndSample
             writer.WriteStringValue(Location);
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(PrivateEndpoint))
+            if (PrivateEndpoint != null)
             {
                 writer.WritePropertyName("privateEndpoint"u8);
                 JsonSerializer.Serialize(writer, PrivateEndpoint);
             }
-            if (Optional.IsDefined(PrivateLinkServiceConnectionState))
+            if (PrivateLinkServiceConnectionState != null)
             {
                 writer.WritePropertyName("privateLinkServiceConnectionState"u8);
                 writer.WriteObjectValue(PrivateLinkServiceConnectionState);
             }
-            if (Optional.IsDefined(ProvisioningState))
+            if (ProvisioningState.HasValue)
             {
                 writer.WritePropertyName("provisioningState"u8);
                 writer.WriteStringValue(ProvisioningState.Value.ToString());
@@ -71,7 +71,7 @@ namespace MgmtMockAndSample
             }
             Optional<string> etag = default;
             Optional<ManagedHsmSku> sku = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -179,7 +179,18 @@ namespace MgmtMockAndSample
                     continue;
                 }
             }
-            return new MhsmPrivateEndpointConnectionData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, etag.Value, privateEndpoint, privateLinkServiceConnectionState.Value, Optional.ToNullable(provisioningState), sku.Value);
+            return new MhsmPrivateEndpointConnectionData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                etag.Value,
+                privateEndpoint,
+                privateLinkServiceConnectionState.Value,
+                Optional.ToNullable(provisioningState),
+                sku.Value);
         }
     }
 }

@@ -15,19 +15,19 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(VirtualNetworkTap))
+            if (VirtualNetworkTap != null)
             {
                 writer.WritePropertyName("virtualNetworkTap"u8);
                 writer.WriteObjectValue(VirtualNetworkTap);
@@ -101,7 +101,13 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new NetworkInterfaceTapConfiguration(id.Value, name.Value, etag.Value, type.Value, virtualNetworkTap.Value, Optional.ToNullable(provisioningState));
+            return new NetworkInterfaceTapConfiguration(
+                id.Value,
+                name.Value,
+                etag.Value,
+                type.Value,
+                virtualNetworkTap.Value,
+                Optional.ToNullable(provisioningState));
         }
     }
 }

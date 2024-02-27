@@ -17,12 +17,12 @@ namespace MgmtOmitOperationGroups
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(B))
+            if (B != null)
             {
                 writer.WritePropertyName("b"u8);
                 writer.WriteStringValue(B);
             }
-            if (Optional.IsDefined(Modelx))
+            if (Modelx != null)
             {
                 writer.WritePropertyName("modelx"u8);
                 writer.WriteObjectValue(Modelx);
@@ -95,7 +95,15 @@ namespace MgmtOmitOperationGroups
                     continue;
                 }
             }
-            return new Model2Data(id, name, type, systemData.Value, b.Value, modelx.Value, f.Value, g.Value);
+            return new Model2Data(
+                id,
+                name,
+                type,
+                systemData.Value,
+                b.Value,
+                modelx.Value,
+                f.Value,
+                g.Value);
         }
     }
 }

@@ -19,19 +19,19 @@ namespace xml_service.Models
         private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "banana");
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WriteStartElement("name");
                 writer.WriteValue(Name);
                 writer.WriteEndElement();
             }
-            if (Optional.IsDefined(Flavor))
+            if (Flavor != null)
             {
                 writer.WriteStartElement("flavor");
                 writer.WriteValue(Flavor);
                 writer.WriteEndElement();
             }
-            if (Optional.IsDefined(Expiration))
+            if (Expiration.HasValue)
             {
                 writer.WriteStartElement("expiration");
                 writer.WriteValue(Expiration.Value, "O");

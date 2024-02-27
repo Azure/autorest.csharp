@@ -34,7 +34,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            if (Optional.IsDefined(OptionalPropertyOnBase))
+            if (OptionalPropertyOnBase != null)
             {
                 writer.WritePropertyName("optionalPropertyOnBase"u8);
                 writer.WriteStringValue(OptionalPropertyOnBase);

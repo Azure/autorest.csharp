@@ -161,7 +161,16 @@ namespace AuthoringTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new SwapDeploymentsJob(jobId, createdDateTime, lastUpdatedDateTime, expirationDateTime, status, warnings, errors, id, serializedAdditionalRawData);
+            return new SwapDeploymentsJob(
+                jobId,
+                createdDateTime,
+                lastUpdatedDateTime,
+                expirationDateTime,
+                status,
+                warnings,
+                errors,
+                id,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<SwapDeploymentsJob>.Write(ModelReaderWriterOptions options)

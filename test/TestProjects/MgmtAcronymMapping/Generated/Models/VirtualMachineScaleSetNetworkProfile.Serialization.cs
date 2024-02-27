@@ -17,12 +17,12 @@ namespace MgmtAcronymMapping.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(HealthProbe))
+            if (HealthProbe != null)
             {
                 writer.WritePropertyName("healthProbe"u8);
                 JsonSerializer.Serialize(writer, HealthProbe);
             }
-            if (Optional.IsCollectionDefined(NetworkInterfaceConfigurations))
+            if (!(NetworkInterfaceConfigurations is ChangeTrackingList<VirtualMachineScaleSetNetworkConfiguration> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("networkInterfaceConfigurations"u8);
                 writer.WriteStartArray();
@@ -42,7 +42,7 @@ namespace MgmtAcronymMapping.Models
                 return null;
             }
             Optional<WritableSubResource> healthProbe = default;
-            Optional<IList<VirtualMachineScaleSetNetworkConfiguration>> networkInterfaceConfigurations = default;
+            IList<VirtualMachineScaleSetNetworkConfiguration> networkInterfaceConfigurations = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("healthProbe"u8))
@@ -69,7 +69,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetNetworkProfile(healthProbe, Optional.ToList(networkInterfaceConfigurations));
+            return new VirtualMachineScaleSetNetworkProfile(healthProbe, networkInterfaceConfigurations ?? new ChangeTrackingList<VirtualMachineScaleSetNetworkConfiguration>());
         }
     }
 }

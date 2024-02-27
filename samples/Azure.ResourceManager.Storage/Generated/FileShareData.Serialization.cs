@@ -22,7 +22,7 @@ namespace Azure.ResourceManager.Storage
             writer.WriteStartObject();
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Metadata))
+            if (!(Metadata is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("metadata"u8);
                 writer.WriteStartObject();
@@ -33,27 +33,27 @@ namespace Azure.ResourceManager.Storage
                 }
                 writer.WriteEndObject();
             }
-            if (Optional.IsDefined(ShareQuota))
+            if (ShareQuota.HasValue)
             {
                 writer.WritePropertyName("shareQuota"u8);
                 writer.WriteNumberValue(ShareQuota.Value);
             }
-            if (Optional.IsDefined(EnabledProtocols))
+            if (EnabledProtocols.HasValue)
             {
                 writer.WritePropertyName("enabledProtocols"u8);
                 writer.WriteStringValue(EnabledProtocols.Value.ToString());
             }
-            if (Optional.IsDefined(RootSquash))
+            if (RootSquash.HasValue)
             {
                 writer.WritePropertyName("rootSquash"u8);
                 writer.WriteStringValue(RootSquash.Value.ToString());
             }
-            if (Optional.IsDefined(AccessTier))
+            if (AccessTier.HasValue)
             {
                 writer.WritePropertyName("accessTier"u8);
                 writer.WriteStringValue(AccessTier.Value.ToString());
             }
-            if (Optional.IsCollectionDefined(SignedIdentifiers))
+            if (!(SignedIdentifiers is ChangeTrackingList<SignedIdentifier> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("signedIdentifiers"u8);
                 writer.WriteStartArray();
@@ -79,7 +79,7 @@ namespace Azure.ResourceManager.Storage
             ResourceType type = default;
             Optional<SystemData> systemData = default;
             Optional<DateTimeOffset> lastModifiedTime = default;
-            Optional<IDictionary<string, string>> metadata = default;
+            IDictionary<string, string> metadata = default;
             Optional<int> shareQuota = default;
             Optional<EnabledProtocol> enabledProtocols = default;
             Optional<RootSquashType> rootSquash = default;
@@ -94,7 +94,7 @@ namespace Azure.ResourceManager.Storage
             Optional<LeaseStatus> leaseStatus = default;
             Optional<LeaseState> leaseState = default;
             Optional<LeaseDuration> leaseDuration = default;
-            Optional<IList<SignedIdentifier>> signedIdentifiers = default;
+            IList<SignedIdentifier> signedIdentifiers = default;
             Optional<DateTimeOffset> snapshotTime = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -308,7 +308,30 @@ namespace Azure.ResourceManager.Storage
                     continue;
                 }
             }
-            return new FileShareData(id, name, type, systemData.Value, Optional.ToNullable(lastModifiedTime), Optional.ToDictionary(metadata), Optional.ToNullable(shareQuota), Optional.ToNullable(enabledProtocols), Optional.ToNullable(rootSquash), version.Value, Optional.ToNullable(deleted), Optional.ToNullable(deletedTime), Optional.ToNullable(remainingRetentionDays), Optional.ToNullable(accessTier), Optional.ToNullable(accessTierChangeTime), accessTierStatus.Value, Optional.ToNullable(shareUsageBytes), Optional.ToNullable(leaseStatus), Optional.ToNullable(leaseState), Optional.ToNullable(leaseDuration), Optional.ToList(signedIdentifiers), Optional.ToNullable(snapshotTime), Optional.ToNullable(etag));
+            return new FileShareData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                Optional.ToNullable(lastModifiedTime),
+                metadata ?? new ChangeTrackingDictionary<string, string>(),
+                Optional.ToNullable(shareQuota),
+                Optional.ToNullable(enabledProtocols),
+                Optional.ToNullable(rootSquash),
+                version.Value,
+                Optional.ToNullable(deleted),
+                Optional.ToNullable(deletedTime),
+                Optional.ToNullable(remainingRetentionDays),
+                Optional.ToNullable(accessTier),
+                Optional.ToNullable(accessTierChangeTime),
+                accessTierStatus.Value,
+                Optional.ToNullable(shareUsageBytes),
+                Optional.ToNullable(leaseStatus),
+                Optional.ToNullable(leaseState),
+                Optional.ToNullable(leaseDuration),
+                signedIdentifiers ?? new ChangeTrackingList<SignedIdentifier>(),
+                Optional.ToNullable(snapshotTime),
+                Optional.ToNullable(etag));
         }
     }
 }

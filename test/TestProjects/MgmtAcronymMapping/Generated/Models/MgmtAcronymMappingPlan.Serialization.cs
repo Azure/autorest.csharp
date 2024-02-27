@@ -15,22 +15,22 @@ namespace MgmtAcronymMapping.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Publisher))
+            if (Publisher != null)
             {
                 writer.WritePropertyName("publisher"u8);
                 writer.WriteStringValue(Publisher);
             }
-            if (Optional.IsDefined(Product))
+            if (Product != null)
             {
                 writer.WritePropertyName("product"u8);
                 writer.WriteStringValue(Product);
             }
-            if (Optional.IsDefined(PromotionCode))
+            if (PromotionCode != null)
             {
                 writer.WritePropertyName("promotionCode"u8);
                 writer.WriteStringValue(PromotionCode);

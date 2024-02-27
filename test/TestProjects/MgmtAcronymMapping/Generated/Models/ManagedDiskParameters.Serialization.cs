@@ -16,17 +16,17 @@ namespace MgmtAcronymMapping.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(StorageAccountType))
+            if (StorageAccountType.HasValue)
             {
                 writer.WritePropertyName("storageAccountType"u8);
                 writer.WriteStringValue(StorageAccountType.Value.ToString());
             }
-            if (Optional.IsDefined(DiskEncryptionSet))
+            if (DiskEncryptionSet != null)
             {
                 writer.WritePropertyName("diskEncryptionSet"u8);
                 JsonSerializer.Serialize(writer, DiskEncryptionSet);
             }
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);

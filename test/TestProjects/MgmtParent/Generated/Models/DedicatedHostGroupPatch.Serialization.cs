@@ -15,7 +15,7 @@ namespace MgmtParent.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Zones))
+            if (!(Zones is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("zones"u8);
                 writer.WriteStartArray();
@@ -25,7 +25,7 @@ namespace MgmtParent.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -38,12 +38,12 @@ namespace MgmtParent.Models
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(PlatformFaultDomainCount))
+            if (PlatformFaultDomainCount.HasValue)
             {
                 writer.WritePropertyName("platformFaultDomainCount"u8);
                 writer.WriteNumberValue(PlatformFaultDomainCount.Value);
             }
-            if (Optional.IsDefined(SupportAutomaticPlacement))
+            if (SupportAutomaticPlacement.HasValue)
             {
                 writer.WritePropertyName("supportAutomaticPlacement"u8);
                 writer.WriteBooleanValue(SupportAutomaticPlacement.Value);

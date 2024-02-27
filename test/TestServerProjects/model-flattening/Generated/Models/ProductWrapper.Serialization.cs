@@ -28,7 +28,7 @@ namespace model_flattening.Models
             writer.WriteStartObject();
             writer.WritePropertyName("property"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(Value))
+            if (Value != null)
             {
                 writer.WritePropertyName("value"u8);
                 writer.WriteStringValue(Value);

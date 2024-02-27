@@ -9,10 +9,17 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HelloDemo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
-RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum[] { StringFixedEnum.One }, new Dictionary<string, StringExtensibleEnum>
+RoundTripModel action = new RoundTripModel(
+"<requiredString>",
+1234,
+new StringFixedEnum[] { StringFixedEnum.One },
+new Dictionary<string, StringExtensibleEnum>
 {
     ["key"] = StringExtensibleEnum.One
-}, new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>"), BinaryData.FromObjectAsJson(new object()), new Dictionary<string, BinaryData>
+},
+new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>"),
+BinaryData.FromObjectAsJson(new object()),
+new Dictionary<string, BinaryData>
 {
     ["key"] = BinaryData.FromObjectAsJson(new object())
 });
@@ -24,16 +31,23 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HelloDemo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
-RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum[] { StringFixedEnum.One }, new Dictionary<string, StringExtensibleEnum>
+RoundTripModel action = new RoundTripModel(
+"<requiredString>",
+1234,
+new StringFixedEnum[] { StringFixedEnum.One },
+new Dictionary<string, StringExtensibleEnum>
 {
     ["key"] = StringExtensibleEnum.One
-}, new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>")
+},
+new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>")
 {
     OptionalLiteralString = ThingOptionalLiteralString.Reject,
     OptionalLiteralInt = ThingOptionalLiteralInt._456,
     OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
     OptionalLiteralBool = true,
-}, BinaryData.FromObjectAsJson(new object()), new Dictionary<string, BinaryData>
+},
+BinaryData.FromObjectAsJson(new object()),
+new Dictionary<string, BinaryData>
 {
     ["key"] = BinaryData.FromObjectAsJson(new object())
 })
@@ -64,10 +78,17 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HelloDemo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
-RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum[] { StringFixedEnum.One }, new Dictionary<string, StringExtensibleEnum>
+RoundTripModel action = new RoundTripModel(
+"<requiredString>",
+1234,
+new StringFixedEnum[] { StringFixedEnum.One },
+new Dictionary<string, StringExtensibleEnum>
 {
     ["key"] = StringExtensibleEnum.One
-}, new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>"), BinaryData.FromObjectAsJson(new object()), new Dictionary<string, BinaryData>
+},
+new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>"),
+BinaryData.FromObjectAsJson(new object()),
+new Dictionary<string, BinaryData>
 {
     ["key"] = BinaryData.FromObjectAsJson(new object())
 });
@@ -79,16 +100,23 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HelloDemo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
-RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum[] { StringFixedEnum.One }, new Dictionary<string, StringExtensibleEnum>
+RoundTripModel action = new RoundTripModel(
+"<requiredString>",
+1234,
+new StringFixedEnum[] { StringFixedEnum.One },
+new Dictionary<string, StringExtensibleEnum>
 {
     ["key"] = StringExtensibleEnum.One
-}, new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>")
+},
+new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>")
 {
     OptionalLiteralString = ThingOptionalLiteralString.Reject,
     OptionalLiteralInt = ThingOptionalLiteralInt._456,
     OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
     OptionalLiteralBool = true,
-}, BinaryData.FromObjectAsJson(new object()), new Dictionary<string, BinaryData>
+},
+BinaryData.FromObjectAsJson(new object()),
+new Dictionary<string, BinaryData>
 {
     ["key"] = BinaryData.FromObjectAsJson(new object())
 })

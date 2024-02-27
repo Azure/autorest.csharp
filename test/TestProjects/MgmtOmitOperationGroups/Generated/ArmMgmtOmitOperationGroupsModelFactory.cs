@@ -49,7 +49,15 @@ namespace MgmtOmitOperationGroups.Models
         /// <returns> A new <see cref="MgmtOmitOperationGroups.Model2Data"/> instance for mocking. </returns>
         public static Model2Data Model2Data(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string b = null, ModelX modelx = null, string f = null, string g = null)
         {
-            return new Model2Data(id, name, resourceType, systemData, b, modelx, f, g);
+            return new Model2Data(
+                id,
+                name,
+                resourceType,
+                systemData,
+                b,
+                modelx,
+                f,
+                g);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Model4"/>. </summary>

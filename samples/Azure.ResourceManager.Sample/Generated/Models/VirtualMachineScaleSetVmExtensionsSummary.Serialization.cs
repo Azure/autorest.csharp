@@ -28,12 +28,12 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && Optional.IsDefined(Name))
+            if (options.Format != "W" && Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format != "W" && Optional.IsCollectionDefined(StatusesSummary))
+            if (options.Format != "W" && !(StatusesSummary is ChangeTrackingList<VirtualMachineStatusCodeCount> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("statusesSummary"u8);
                 writer.WriteStartArray();
@@ -82,7 +82,7 @@ namespace Azure.ResourceManager.Sample.Models
                 return null;
             }
             Optional<string> name = default;
-            Optional<IReadOnlyList<VirtualMachineStatusCodeCount>> statusesSummary = default;
+            IReadOnlyList<VirtualMachineStatusCodeCount> statusesSummary = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -112,7 +112,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineScaleSetVmExtensionsSummary(name.Value, Optional.ToList(statusesSummary), serializedAdditionalRawData);
+            return new VirtualMachineScaleSetVmExtensionsSummary(name.Value, statusesSummary ?? new ChangeTrackingList<VirtualMachineStatusCodeCount>(), serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -120,7 +120,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 builder.Append("  name:");
                 if (Name.Contains(Environment.NewLine))
@@ -134,7 +134,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsCollectionDefined(StatusesSummary))
+            if (!(StatusesSummary is ChangeTrackingList<VirtualMachineStatusCodeCount> collection && collection.IsUndefined))
             {
                 if (StatusesSummary.Any())
                 {

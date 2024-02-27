@@ -26,14 +26,14 @@ namespace azure_special_properties.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Status))
+            if (Status.HasValue)
             {
                 writer.WritePropertyName("status"u8);
                 writer.WriteNumberValue(Status.Value);
             }
             writer.WritePropertyName("constantId"u8);
             writer.WriteNumberValue(ConstantId.ToSerialInt32());
-            if (Optional.IsDefined(Message))
+            if (Message != null)
             {
                 writer.WritePropertyName("message"u8);
                 writer.WriteStringValue(Message);

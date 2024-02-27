@@ -29,7 +29,7 @@ namespace Azure.ResourceManager.Sample
             }
 
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -57,14 +57,14 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format != "W" && Optional.IsDefined(SystemData))
+            if (options.Format != "W" && SystemData != null)
             {
                 writer.WritePropertyName("systemData"u8);
                 JsonSerializer.Serialize(writer, SystemData);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(PublicKey))
+            if (PublicKey != null)
             {
                 writer.WritePropertyName("publicKey"u8);
                 writer.WriteStringValue(PublicKey);
@@ -108,7 +108,7 @@ namespace Azure.ResourceManager.Sample
             {
                 return null;
             }
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -185,7 +185,15 @@ namespace Azure.ResourceManager.Sample
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new SshPublicKeyData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, publicKey.Value, serializedAdditionalRawData);
+            return new SshPublicKeyData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                publicKey.Value,
+                serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -193,7 +201,7 @@ namespace Azure.ResourceManager.Sample
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 builder.Append("  name:");
                 if (Name.Contains(Environment.NewLine))
@@ -207,13 +215,10 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsDefined(Location))
-            {
-                builder.Append("  location:");
-                builder.AppendLine($" '{Location.ToString()}'");
-            }
+            builder.Append("  location:");
+            builder.AppendLine($" '{Location.ToString()}'");
 
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 if (Tags.Any())
                 {
@@ -241,13 +246,13 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 builder.Append("  id:");
                 builder.AppendLine($" '{Id.ToString()}'");
             }
 
-            if (Optional.IsDefined(SystemData))
+            if (SystemData != null)
             {
                 builder.Append("  systemData:");
                 builder.AppendLine($" '{SystemData.ToString()}'");
@@ -255,7 +260,7 @@ namespace Azure.ResourceManager.Sample
 
             builder.Append("  properties:");
             builder.AppendLine(" {");
-            if (Optional.IsDefined(PublicKey))
+            if (PublicKey != null)
             {
                 builder.Append("    publicKey:");
                 if (PublicKey.Contains(Environment.NewLine))

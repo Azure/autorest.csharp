@@ -27,17 +27,17 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Tier))
+            if (Tier != null)
             {
                 writer.WritePropertyName("tier"u8);
                 writer.WriteStringValue(Tier);
             }
-            if (Optional.IsDefined(Capacity))
+            if (Capacity.HasValue)
             {
                 writer.WritePropertyName("capacity"u8);
                 writer.WriteNumberValue(Capacity.Value);
@@ -120,7 +120,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 builder.Append("  name:");
                 if (Name.Contains(Environment.NewLine))
@@ -134,7 +134,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(Tier))
+            if (Tier != null)
             {
                 builder.Append("  tier:");
                 if (Tier.Contains(Environment.NewLine))
@@ -148,7 +148,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(Capacity))
+            if (Capacity.HasValue)
             {
                 builder.Append("  capacity:");
                 builder.AppendLine($" '{Capacity.Value.ToString()}'");

@@ -29,7 +29,15 @@ namespace MgmtConstants.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new OptionalMachineData(id, name, resourceType, systemData, tags, location, listener, content);
+            return new OptionalMachineData(
+                id,
+                name,
+                resourceType,
+                systemData,
+                tags,
+                location,
+                listener,
+                content);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ModelWithRequiredConstant"/>. </summary>

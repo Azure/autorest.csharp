@@ -27,12 +27,12 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && Optional.IsDefined(ServiceName))
+            if (options.Format != "W" && ServiceName.HasValue)
             {
                 writer.WritePropertyName("serviceName"u8);
                 writer.WriteStringValue(ServiceName.Value.ToString());
             }
-            if (options.Format != "W" && Optional.IsDefined(ServiceState))
+            if (options.Format != "W" && ServiceState.HasValue)
             {
                 writer.WritePropertyName("serviceState"u8);
                 writer.WriteStringValue(ServiceState.Value.ToString());
@@ -113,13 +113,13 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(ServiceName))
+            if (ServiceName.HasValue)
             {
                 builder.Append("  serviceName:");
                 builder.AppendLine($" '{ServiceName.Value.ToString()}'");
             }
 
-            if (Optional.IsDefined(ServiceState))
+            if (ServiceState.HasValue)
             {
                 builder.Append("  serviceState:");
                 builder.AppendLine($" '{ServiceState.Value.ToString()}'");

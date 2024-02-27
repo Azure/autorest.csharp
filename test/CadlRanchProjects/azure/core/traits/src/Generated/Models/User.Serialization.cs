@@ -32,7 +32,7 @@ namespace _Specs_.Azure.Core.Traits.Models
                 writer.WritePropertyName("id"u8);
                 writer.WriteNumberValue(Id);
             }
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);

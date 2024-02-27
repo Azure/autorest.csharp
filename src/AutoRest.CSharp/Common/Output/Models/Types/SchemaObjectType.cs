@@ -29,16 +29,19 @@ namespace AutoRest.CSharp.Output.Models.Types
     {
         private readonly SerializationBuilder _serializationBuilder;
         private readonly InputModelTypeUsage _usage;
+        private readonly TypeFactory _typeFactory;
+
         private ObjectTypeProperty? _additionalPropertiesProperty;
         private CSharpType? _implementsDictionaryType;
 
         // TODO: remove this constructor once HLC consolidation is done
-        public SchemaObjectType(ObjectSchema objectSchema, BuildContext context, CodeModelConverter converter)
-            : this(converter.GetOrCreateModel(objectSchema), context){ }
+        public SchemaObjectType(ObjectSchema objectSchema, string defaultNamespace, TypeFactory typeFactory, SourceInputModel? sourceInputModel, CodeModelConverter converter)
+            : this(converter.GetOrCreateModel(objectSchema), defaultNamespace, typeFactory, sourceInputModel){ }
 
-        public SchemaObjectType(InputModelType inputModel, BuildContext context, SerializableObjectType? defaultDerivedType = null)
-            : base(context)
+        public SchemaObjectType(InputModelType inputModel, string defaultNamespace, TypeFactory typeFactory, SourceInputModel? sourceInputModel, SerializableObjectType? defaultDerivedType = null)
+            : base(defaultNamespace, sourceInputModel)
         {
+            _typeFactory = typeFactory;
             DefaultName = inputModel.CSharpName();
             InputModel = inputModel;
             _serializationBuilder = new SerializationBuilder();
@@ -308,7 +311,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                         defaultParameterValue = Constant.Default(inputType);
                     }
 
-                    var validate = property.InputModelProperty?.Type.IsNullable != true && !inputType.IsValueType ? ValidationType.AssertNotNull : ValidationType.None;
+                    var validate = property.InputModelProperty?.Type.IsNullable != true && !inputType.IsValueType && property.InputModelProperty?.IsReadOnly != true ? ValidationType.AssertNotNull : ValidationType.None;
                     var defaultCtorParameter = new Parameter(
                         property.Declaration.Name.ToVariableName(),
                         property.ParameterDescription,

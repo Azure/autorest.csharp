@@ -17,7 +17,7 @@ namespace MgmtMockAndSample.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(SourceVault))
+            if (SourceVault != null)
             {
                 writer.WritePropertyName("sourceVault"u8);
                 JsonSerializer.Serialize(writer, SourceVault);

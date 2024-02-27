@@ -20,7 +20,7 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<VaultData>> value = default;
+            IReadOnlyList<VaultData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -44,7 +44,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new VaultListResult(Optional.ToList(value), nextLink.Value);
+            return new VaultListResult(value ?? new ChangeTrackingList<VaultData>(), nextLink.Value);
         }
     }
 }

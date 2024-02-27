@@ -28,7 +28,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(NetworkInterfaceConfigurations))
+            if (!(NetworkInterfaceConfigurations is ChangeTrackingList<VirtualMachineScaleSetNetworkConfiguration> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("networkInterfaceConfigurations"u8);
                 writer.WriteStartArray();
@@ -76,7 +76,7 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<IList<VirtualMachineScaleSetNetworkConfiguration>> networkInterfaceConfigurations = default;
+            IList<VirtualMachineScaleSetNetworkConfiguration> networkInterfaceConfigurations = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -101,7 +101,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineScaleSetVmNetworkProfileConfiguration(Optional.ToList(networkInterfaceConfigurations), serializedAdditionalRawData);
+            return new VirtualMachineScaleSetVmNetworkProfileConfiguration(networkInterfaceConfigurations ?? new ChangeTrackingList<VirtualMachineScaleSetNetworkConfiguration>(), serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -109,7 +109,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsCollectionDefined(NetworkInterfaceConfigurations))
+            if (!(NetworkInterfaceConfigurations is ChangeTrackingList<VirtualMachineScaleSetNetworkConfiguration> collection && collection.IsUndefined))
             {
                 if (NetworkInterfaceConfigurations.Any())
                 {

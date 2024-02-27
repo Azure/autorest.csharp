@@ -27,41 +27,41 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
             writer.WritePropertyName("lun"u8);
             writer.WriteNumberValue(Lun);
-            if (Optional.IsDefined(Caching))
+            if (Caching.HasValue)
             {
                 writer.WritePropertyName("caching"u8);
                 writer.WriteStringValue(Caching.Value.ToSerialString());
             }
-            if (Optional.IsDefined(WriteAcceleratorEnabled))
+            if (WriteAcceleratorEnabled.HasValue)
             {
                 writer.WritePropertyName("writeAcceleratorEnabled"u8);
                 writer.WriteBooleanValue(WriteAcceleratorEnabled.Value);
             }
             writer.WritePropertyName("createOption"u8);
             writer.WriteStringValue(CreateOption.ToString());
-            if (Optional.IsDefined(DiskSizeGB))
+            if (DiskSizeGB.HasValue)
             {
                 writer.WritePropertyName("diskSizeGB"u8);
                 writer.WriteNumberValue(DiskSizeGB.Value);
             }
-            if (Optional.IsDefined(ManagedDisk))
+            if (ManagedDisk != null)
             {
                 writer.WritePropertyName("managedDisk"u8);
                 writer.WriteObjectValue(ManagedDisk);
             }
-            if (Optional.IsDefined(DiskIopsReadWrite))
+            if (DiskIopsReadWrite.HasValue)
             {
                 writer.WritePropertyName("diskIOPSReadWrite"u8);
                 writer.WriteNumberValue(DiskIopsReadWrite.Value);
             }
-            if (Optional.IsDefined(DiskMBpsReadWrite))
+            if (DiskMBpsReadWrite.HasValue)
             {
                 writer.WritePropertyName("diskMBpsReadWrite"u8);
                 writer.WriteNumberValue(DiskMBpsReadWrite.Value);
@@ -192,7 +192,17 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineScaleSetDataDisk(name.Value, lun, Optional.ToNullable(caching), Optional.ToNullable(writeAcceleratorEnabled), createOption, Optional.ToNullable(diskSizeGB), managedDisk.Value, Optional.ToNullable(diskIOPSReadWrite), Optional.ToNullable(diskMBpsReadWrite), serializedAdditionalRawData);
+            return new VirtualMachineScaleSetDataDisk(
+                name.Value,
+                lun,
+                Optional.ToNullable(caching),
+                Optional.ToNullable(writeAcceleratorEnabled),
+                createOption,
+                Optional.ToNullable(diskSizeGB),
+                managedDisk.Value,
+                Optional.ToNullable(diskIOPSReadWrite),
+                Optional.ToNullable(diskMBpsReadWrite),
+                serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -200,7 +210,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 builder.Append("  name:");
                 if (Name.Contains(Environment.NewLine))
@@ -214,50 +224,44 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Optional.IsDefined(Lun))
-            {
-                builder.Append("  lun:");
-                builder.AppendLine($" {Lun}");
-            }
+            builder.Append("  lun:");
+            builder.AppendLine($" {Lun}");
 
-            if (Optional.IsDefined(Caching))
+            if (Caching.HasValue)
             {
                 builder.Append("  caching:");
                 builder.AppendLine($" '{Caching.Value.ToSerialString()}'");
             }
 
-            if (Optional.IsDefined(WriteAcceleratorEnabled))
+            if (WriteAcceleratorEnabled.HasValue)
             {
                 builder.Append("  writeAcceleratorEnabled:");
                 var boolValue = WriteAcceleratorEnabled.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
             }
 
-            if (Optional.IsDefined(CreateOption))
-            {
-                builder.Append("  createOption:");
-                builder.AppendLine($" '{CreateOption.ToString()}'");
-            }
+            builder.Append("  createOption:");
+            builder.AppendLine($" '{CreateOption.ToString()}'");
 
-            if (Optional.IsDefined(DiskSizeGB))
+            if (DiskSizeGB.HasValue)
             {
                 builder.Append("  diskSizeGB:");
                 builder.AppendLine($" {DiskSizeGB.Value}");
             }
 
-            if (Optional.IsDefined(ManagedDisk))
+            if (ManagedDisk != null)
             {
                 builder.Append("  managedDisk:");
                 AppendChildObject(builder, ManagedDisk, options, 2, false);
             }
 
-            if (Optional.IsDefined(DiskIopsReadWrite))
+            if (DiskIopsReadWrite.HasValue)
             {
                 builder.Append("  diskIOPSReadWrite:");
                 builder.AppendLine($" '{DiskIopsReadWrite.Value.ToString()}'");
             }
 
-            if (Optional.IsDefined(DiskMBpsReadWrite))
+            if (DiskMBpsReadWrite.HasValue)
             {
                 builder.Append("  diskMBpsReadWrite:");
                 builder.AppendLine($" '{DiskMBpsReadWrite.Value.ToString()}'");

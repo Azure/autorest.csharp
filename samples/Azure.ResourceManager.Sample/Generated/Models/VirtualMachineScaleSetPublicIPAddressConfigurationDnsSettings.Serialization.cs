@@ -91,7 +91,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(DomainNameLabel))
+            if (DomainNameLabel != null)
             {
                 builder.Append("  domainNameLabel:");
                 if (DomainNameLabel.Contains(Environment.NewLine))

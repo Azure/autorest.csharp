@@ -16,7 +16,7 @@ namespace MgmtAcronymMapping.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(PublicKeys))
+            if (!(PublicKeys is ChangeTrackingList<SshPublicKeyInfo> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("publicKeys"u8);
                 writer.WriteStartArray();
@@ -35,7 +35,7 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<IList<SshPublicKeyInfo>> publicKeys = default;
+            IList<SshPublicKeyInfo> publicKeys = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("publicKeys"u8))
@@ -53,7 +53,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new SshConfiguration(Optional.ToList(publicKeys));
+            return new SshConfiguration(publicKeys ?? new ChangeTrackingList<SshPublicKeyInfo>());
         }
     }
 }

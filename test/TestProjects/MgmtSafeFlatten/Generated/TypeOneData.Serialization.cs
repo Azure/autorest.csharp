@@ -19,27 +19,27 @@ namespace MgmtSafeFlatten
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(MyType))
+            if (MyType != null)
             {
                 writer.WritePropertyName("MyType"u8);
                 writer.WriteStringValue(MyType);
             }
-            if (Optional.IsDefined(LayerOne))
+            if (LayerOne != null)
             {
                 writer.WritePropertyName("layerOne"u8);
                 writer.WriteObjectValue(LayerOne);
             }
-            if (Optional.IsDefined(LayerOneType))
+            if (LayerOneType != null)
             {
                 writer.WritePropertyName("layerOneType"u8);
                 writer.WriteObjectValue(LayerOneType);
             }
-            if (Optional.IsDefined(LayerOneConflict))
+            if (LayerOneConflict != null)
             {
                 writer.WritePropertyName("layerOneConflict"u8);
                 JsonSerializer.Serialize(writer, LayerOneConflict);
             }
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -65,7 +65,7 @@ namespace MgmtSafeFlatten
             Optional<LayerOneSingle> layerOne = default;
             Optional<LayerOneBaseType> layerOneType = default;
             Optional<WritableSubResource> layerOneConflict = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -149,7 +149,17 @@ namespace MgmtSafeFlatten
                     continue;
                 }
             }
-            return new TypeOneData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, myType.Value, layerOne.Value, layerOneType.Value, layerOneConflict);
+            return new TypeOneData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                myType.Value,
+                layerOne.Value,
+                layerOneType.Value,
+                layerOneConflict);
         }
     }
 }

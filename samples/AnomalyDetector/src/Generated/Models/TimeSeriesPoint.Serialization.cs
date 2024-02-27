@@ -27,7 +27,7 @@ namespace AnomalyDetector.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Timestamp))
+            if (Timestamp.HasValue)
             {
                 writer.WritePropertyName("timestamp"u8);
                 writer.WriteStringValue(Timestamp.Value, "O");
