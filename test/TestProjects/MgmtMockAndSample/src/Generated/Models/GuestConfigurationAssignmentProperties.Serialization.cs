@@ -126,7 +126,16 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new GuestConfigurationAssignmentProperties(targetResourceId.Value, Optional.ToNullable(complianceStatus), Optional.ToNullable(lastComplianceStatusChecked), latestReportId.Value, parameterHash.Value, context.Value, assignmentHash.Value, Optional.ToNullable(provisioningState), Optional.ToNullable(resourceType));
+            return new GuestConfigurationAssignmentProperties(
+                targetResourceId.Value,
+                Optional.ToNullable(complianceStatus),
+                Optional.ToNullable(lastComplianceStatusChecked),
+                latestReportId.Value,
+                parameterHash.Value,
+                context.Value,
+                assignmentHash.Value,
+                Optional.ToNullable(provisioningState),
+                Optional.ToNullable(resourceType));
         }
     }
 }

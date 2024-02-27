@@ -138,7 +138,13 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new InstanceViewStatus(code.Value, Optional.ToNullable(level), displayStatus.Value, message.Value, Optional.ToNullable(time), serializedAdditionalRawData);
+            return new InstanceViewStatus(
+                code.Value,
+                Optional.ToNullable(level),
+                displayStatus.Value,
+                message.Value,
+                Optional.ToNullable(time),
+                serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

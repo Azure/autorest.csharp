@@ -19,7 +19,7 @@ namespace MgmtListMethods.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<UpdateWorkspaceQuotas>> value = default;
+            IReadOnlyList<UpdateWorkspaceQuotas> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -43,7 +43,7 @@ namespace MgmtListMethods.Models
                     continue;
                 }
             }
-            return new UpdateWorkspaceQuotasResult(Optional.ToList(value), nextLink.Value);
+            return new UpdateWorkspaceQuotasResult(value ?? new ChangeTrackingList<UpdateWorkspaceQuotas>(), nextLink.Value);
         }
     }
 }

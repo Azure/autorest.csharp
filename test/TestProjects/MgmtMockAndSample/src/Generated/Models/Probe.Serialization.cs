@@ -110,7 +110,13 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new Probe(disableProbe, Optional.ToNullable(initialDelaySeconds), Optional.ToNullable(periodSeconds), Optional.ToNullable(timeoutSeconds), Optional.ToNullable(failureThreshold), Optional.ToNullable(successThreshold));
+            return new Probe(
+                disableProbe,
+                Optional.ToNullable(initialDelaySeconds),
+                Optional.ToNullable(periodSeconds),
+                Optional.ToNullable(timeoutSeconds),
+                Optional.ToNullable(failureThreshold),
+                Optional.ToNullable(successThreshold));
         }
     }
 }

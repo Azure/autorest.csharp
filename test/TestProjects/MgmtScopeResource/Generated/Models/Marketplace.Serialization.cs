@@ -22,7 +22,7 @@ namespace MgmtScopeResource.Models
                 return null;
             }
             Optional<string> etag = default;
-            Optional<IReadOnlyDictionary<string, string>> tags = default;
+            IReadOnlyDictionary<string, string> tags = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
@@ -277,7 +277,39 @@ namespace MgmtScopeResource.Models
                     continue;
                 }
             }
-            return new Marketplace(id, name, type, systemData.Value, billingPeriodId.Value, Optional.ToNullable(usageStart), Optional.ToNullable(usageEnd), Optional.ToNullable(resourceRate), offerName.Value, resourceGroup.Value, additionalInfo.Value, orderNumber.Value, instanceName.Value, instanceId.Value, currency.Value, Optional.ToNullable(consumedQuantity), unitOfMeasure.Value, Optional.ToNullable(pretaxCost), Optional.ToNullable(isEstimated), Optional.ToNullable(meterId), Optional.ToNullable(subscriptionGuid), subscriptionName.Value, accountName.Value, departmentName.Value, consumedService.Value, costCenter.Value, additionalProperties.Value, publisherName.Value, planName.Value, Optional.ToNullable(isRecurringCharge), etag.Value, Optional.ToDictionary(tags));
+            return new Marketplace(
+                id,
+                name,
+                type,
+                systemData.Value,
+                billingPeriodId.Value,
+                Optional.ToNullable(usageStart),
+                Optional.ToNullable(usageEnd),
+                Optional.ToNullable(resourceRate),
+                offerName.Value,
+                resourceGroup.Value,
+                additionalInfo.Value,
+                orderNumber.Value,
+                instanceName.Value,
+                instanceId.Value,
+                currency.Value,
+                Optional.ToNullable(consumedQuantity),
+                unitOfMeasure.Value,
+                Optional.ToNullable(pretaxCost),
+                Optional.ToNullable(isEstimated),
+                Optional.ToNullable(meterId),
+                Optional.ToNullable(subscriptionGuid),
+                subscriptionName.Value,
+                accountName.Value,
+                departmentName.Value,
+                consumedService.Value,
+                costCenter.Value,
+                additionalProperties.Value,
+                publisherName.Value,
+                planName.Value,
+                Optional.ToNullable(isRecurringCharge),
+                etag.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>());
         }
     }
 }

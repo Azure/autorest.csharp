@@ -21,7 +21,7 @@ namespace Azure.ResourceManager.Storage.Models
                 return null;
             }
             Optional<ETag> etag = default;
-            Optional<IReadOnlyList<UpdateHistoryProperty>> updateHistory = default;
+            IReadOnlyList<UpdateHistoryProperty> updateHistory = default;
             Optional<int> immutabilityPeriodSinceCreationInDays = default;
             Optional<ImmutabilityPolicyState> state = default;
             Optional<bool> allowProtectedAppendWrites = default;
@@ -100,7 +100,13 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new ImmutabilityPolicyProperties(Optional.ToNullable(etag), Optional.ToList(updateHistory), Optional.ToNullable(immutabilityPeriodSinceCreationInDays), Optional.ToNullable(state), Optional.ToNullable(allowProtectedAppendWrites), Optional.ToNullable(allowProtectedAppendWritesAll));
+            return new ImmutabilityPolicyProperties(
+                Optional.ToNullable(etag),
+                updateHistory ?? new ChangeTrackingList<UpdateHistoryProperty>(),
+                Optional.ToNullable(immutabilityPeriodSinceCreationInDays),
+                Optional.ToNullable(state),
+                Optional.ToNullable(allowProtectedAppendWrites),
+                Optional.ToNullable(allowProtectedAppendWritesAll));
         }
     }
 }

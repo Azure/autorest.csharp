@@ -59,7 +59,7 @@ namespace MgmtSupersetFlattenInheritance.Models
             }
             Optional<string> foo = default;
             Optional<string> bar = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -139,7 +139,16 @@ namespace MgmtSupersetFlattenInheritance.Models
                     continue;
                 }
             }
-            return new TrackedResourceModel2(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, foo.Value, bar.Value, foo0.Value);
+            return new TrackedResourceModel2(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                foo.Value,
+                bar.Value,
+                foo0.Value);
         }
     }
 }

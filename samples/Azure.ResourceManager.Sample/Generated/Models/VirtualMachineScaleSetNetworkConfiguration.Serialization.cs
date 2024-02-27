@@ -118,7 +118,7 @@ namespace Azure.ResourceManager.Sample.Models
             Optional<bool> enableAcceleratedNetworking = default;
             Optional<WritableSubResource> networkSecurityGroup = default;
             Optional<VirtualMachineScaleSetNetworkConfigurationDnsSettings> dnsSettings = default;
-            Optional<IList<VirtualMachineScaleSetIPConfiguration>> ipConfigurations = default;
+            IList<VirtualMachineScaleSetIPConfiguration> ipConfigurations = default;
             Optional<bool> enableIPForwarding = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -211,7 +211,16 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineScaleSetNetworkConfiguration(id.Value, serializedAdditionalRawData, name, Optional.ToNullable(primary), Optional.ToNullable(enableAcceleratedNetworking), networkSecurityGroup, dnsSettings.Value, Optional.ToList(ipConfigurations), Optional.ToNullable(enableIPForwarding));
+            return new VirtualMachineScaleSetNetworkConfiguration(
+                id.Value,
+                serializedAdditionalRawData,
+                name,
+                Optional.ToNullable(primary),
+                Optional.ToNullable(enableAcceleratedNetworking),
+                networkSecurityGroup,
+                dnsSettings.Value,
+                ipConfigurations ?? new ChangeTrackingList<VirtualMachineScaleSetIPConfiguration>(),
+                Optional.ToNullable(enableIPForwarding));
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

@@ -58,7 +58,7 @@ namespace MgmtExactMatchFlattenInheritance
                 return null;
             }
             Optional<int> foo = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -143,7 +143,16 @@ namespace MgmtExactMatchFlattenInheritance
                     continue;
                 }
             }
-            return new AzureResourceFlattenModel1Data(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, Optional.ToNullable(foo), foo0.Value, id0.Value);
+            return new AzureResourceFlattenModel1Data(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                Optional.ToNullable(foo),
+                foo0.Value,
+                id0.Value);
         }
     }
 }

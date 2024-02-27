@@ -118,7 +118,7 @@ namespace Azure.ResourceManager.Sample.Models
             Optional<string> schema = default;
             Optional<string> contentVersion = default;
             Optional<BinaryData> parameters = default;
-            Optional<IReadOnlyList<BinaryData>> resources = default;
+            IReadOnlyList<BinaryData> resources = default;
             Optional<string> id = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -175,7 +175,13 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineCaptureResult(id.Value, serializedAdditionalRawData, schema.Value, contentVersion.Value, parameters.Value, Optional.ToList(resources));
+            return new VirtualMachineCaptureResult(
+                id.Value,
+                serializedAdditionalRawData,
+                schema.Value,
+                contentVersion.Value,
+                parameters.Value,
+                resources ?? new ChangeTrackingList<BinaryData>());
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

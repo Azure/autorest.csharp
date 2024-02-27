@@ -136,7 +136,14 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new CreateChatCompletionResponse(id, @object, created, model, choices, usage.Value, serializedAdditionalRawData);
+            return new CreateChatCompletionResponse(
+                id,
+                @object,
+                created,
+                model,
+                choices,
+                usage.Value,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<CreateChatCompletionResponse>.Write(ModelReaderWriterOptions options)

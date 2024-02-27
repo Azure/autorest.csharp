@@ -101,7 +101,13 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new IPConfigurationProfile(id.Value, name.Value, type.Value, etag.Value, subnet.Value, Optional.ToNullable(provisioningState));
+            return new IPConfigurationProfile(
+                id.Value,
+                name.Value,
+                type.Value,
+                etag.Value,
+                subnet.Value,
+                Optional.ToNullable(provisioningState));
         }
     }
 }

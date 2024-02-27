@@ -20,7 +20,7 @@ namespace MgmtScopeResource.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<DeploymentExtendedData>> value = default;
+            IReadOnlyList<DeploymentExtendedData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -44,7 +44,7 @@ namespace MgmtScopeResource.Models
                     continue;
                 }
             }
-            return new DeploymentListResult(Optional.ToList(value), nextLink.Value);
+            return new DeploymentListResult(value ?? new ChangeTrackingList<DeploymentExtendedData>(), nextLink.Value);
         }
     }
 }

@@ -22,7 +22,7 @@ namespace MgmtMockAndSample
                 return null;
             }
             Optional<AzureLocation> location = default;
-            Optional<IReadOnlyDictionary<string, string>> tags = default;
+            IReadOnlyDictionary<string, string> tags = default;
             VaultProperties properties = default;
             Optional<ManagedServiceIdentity> identity = default;
             ResourceIdentifier id = default;
@@ -94,7 +94,15 @@ namespace MgmtMockAndSample
                     continue;
                 }
             }
-            return new VaultData(id, name, type, systemData.Value, Optional.ToNullable(location), Optional.ToDictionary(tags), properties, identity);
+            return new VaultData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                Optional.ToNullable(location),
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                properties,
+                identity);
         }
     }
 }

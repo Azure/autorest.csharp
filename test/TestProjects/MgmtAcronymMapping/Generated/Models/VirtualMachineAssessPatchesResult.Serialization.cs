@@ -26,7 +26,7 @@ namespace MgmtAcronymMapping.Models
             Optional<int> criticalAndSecurityPatchCount = default;
             Optional<int> otherPatchCount = default;
             Optional<DateTimeOffset> startDateTime = default;
-            Optional<IReadOnlyList<VirtualMachineSoftwarePatchProperties>> patches = default;
+            IReadOnlyList<VirtualMachineSoftwarePatchProperties> patches = default;
             Optional<ApiError> error = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -104,7 +104,15 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineAssessPatchesResult(Optional.ToNullable(status), assessmentActivityId.Value, Optional.ToNullable(rebootPending), Optional.ToNullable(criticalAndSecurityPatchCount), Optional.ToNullable(otherPatchCount), Optional.ToNullable(startDateTime), Optional.ToList(patches), error.Value);
+            return new VirtualMachineAssessPatchesResult(
+                Optional.ToNullable(status),
+                assessmentActivityId.Value,
+                Optional.ToNullable(rebootPending),
+                Optional.ToNullable(criticalAndSecurityPatchCount),
+                Optional.ToNullable(otherPatchCount),
+                Optional.ToNullable(startDateTime),
+                patches ?? new ChangeTrackingList<VirtualMachineSoftwarePatchProperties>(),
+                error.Value);
         }
     }
 }

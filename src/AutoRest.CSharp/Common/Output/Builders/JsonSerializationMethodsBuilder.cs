@@ -961,7 +961,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 if (jsonProperty.SerializedType is { } type)
                 {
                     var propertyDeclaration = new CodeWriterDeclaration(jsonProperty.SerializedName.ToVariableName());
-                    if (!jsonProperty.IsRequired)
+                    if (!jsonProperty.IsRequired && !TypeFactory.IsCollectionType(type))
                     {
                         if (type.IsFrameworkType && type.FrameworkType == typeof(Nullable<>))
                         {
@@ -1165,30 +1165,28 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private static ValueExpression GetOptional(PropertySerialization jsonPropertySerialization, TypedValueExpression variable)
         {
             var sourceType = variable.Type;
-            if (!sourceType.IsFrameworkType || sourceType.FrameworkType != Configuration.ApiTypes.OptionalPropertyType)
+            if (!sourceType.IsFrameworkType)
             {
                 return variable;
             }
 
             var targetType = jsonPropertySerialization.Value.Type;
-            if (TypeFactory.IsList(targetType) && !TypeFactory.IsReadOnlyMemory(targetType))
-            {
-                return InvokeOptional.ToList(variable);
-            }
 
-            if (TypeFactory.IsDictionary(targetType))
+            if (sourceType.FrameworkType == Configuration.ApiTypes.OptionalPropertyType)
             {
-                return InvokeOptional.ToDictionary(variable);
-            }
+                if (targetType is { IsValueType: true, IsNullable: true })
+                {
+                    return InvokeOptional.ToNullable(variable);
+                }
 
-            if (targetType is { IsValueType: true, IsNullable: true })
-            {
-                return InvokeOptional.ToNullable(variable);
+                if (targetType.IsNullable)
+                {
+                    return new MemberExpression(variable, "Value");
+                }
             }
-
-            if (targetType.IsNullable)
+            else if (!jsonPropertySerialization.IsRequired)
             {
-                return new MemberExpression(variable, "Value");
+                return InvokeOptional.FallBackToChangeTrackingCollection(variable);
             }
 
             return variable;

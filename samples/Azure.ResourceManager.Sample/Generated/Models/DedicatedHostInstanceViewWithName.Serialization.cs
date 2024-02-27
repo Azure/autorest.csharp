@@ -94,7 +94,7 @@ namespace Azure.ResourceManager.Sample.Models
             Optional<string> name = default;
             Optional<string> assetId = default;
             Optional<DedicatedHostAvailableCapacity> availableCapacity = default;
-            Optional<IReadOnlyList<InstanceViewStatus>> statuses = default;
+            IReadOnlyList<InstanceViewStatus> statuses = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -138,7 +138,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DedicatedHostInstanceViewWithName(assetId.Value, availableCapacity.Value, Optional.ToList(statuses), serializedAdditionalRawData, name.Value);
+            return new DedicatedHostInstanceViewWithName(assetId.Value, availableCapacity.Value, statuses ?? new ChangeTrackingList<InstanceViewStatus>(), serializedAdditionalRawData, name.Value);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

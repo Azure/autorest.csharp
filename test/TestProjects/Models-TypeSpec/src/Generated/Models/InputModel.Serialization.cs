@@ -308,12 +308,12 @@ namespace ModelsTypeSpec.Models
             IList<CollectionItem> requiredNullableModelList = default;
             IList<string> requiredNullableStringList = default;
             IList<int> requiredNullableIntList = default;
-            Optional<IList<CollectionItem>> nonRequiredModelList = default;
-            Optional<IList<string>> nonRequiredStringList = default;
-            Optional<IList<int>> nonRequiredIntList = default;
-            Optional<IList<CollectionItem>> nonRequiredNullableModelList = default;
-            Optional<IList<string>> nonRequiredNullableStringList = default;
-            Optional<IList<int>> nonRequiredNullableIntList = default;
+            IList<CollectionItem> nonRequiredModelList = default;
+            IList<string> nonRequiredStringList = default;
+            IList<int> nonRequiredIntList = default;
+            IList<CollectionItem> nonRequiredNullableModelList = default;
+            IList<string> nonRequiredNullableStringList = default;
+            IList<int> nonRequiredNullableIntList = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -587,7 +587,31 @@ namespace ModelsTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new InputModel(requiredString, requiredInt, requiredNullableInt, requiredNullableString, Optional.ToNullable(nonRequiredNullableInt), nonRequiredNullableString.Value, requiredModel, requiredModel2, requiredIntList, requiredStringList, requiredModelList, requiredModelRecord, requiredCollectionWithNullableFloatElement, requiredCollectionWithNullableBooleanElement, requiredNullableModelList, requiredNullableStringList, requiredNullableIntList, Optional.ToList(nonRequiredModelList), Optional.ToList(nonRequiredStringList), Optional.ToList(nonRequiredIntList), Optional.ToList(nonRequiredNullableModelList), Optional.ToList(nonRequiredNullableStringList), Optional.ToList(nonRequiredNullableIntList), serializedAdditionalRawData);
+            return new InputModel(
+                requiredString,
+                requiredInt,
+                requiredNullableInt,
+                requiredNullableString,
+                Optional.ToNullable(nonRequiredNullableInt),
+                nonRequiredNullableString.Value,
+                requiredModel,
+                requiredModel2,
+                requiredIntList,
+                requiredStringList,
+                requiredModelList,
+                requiredModelRecord,
+                requiredCollectionWithNullableFloatElement,
+                requiredCollectionWithNullableBooleanElement,
+                requiredNullableModelList,
+                requiredNullableStringList,
+                requiredNullableIntList,
+                nonRequiredModelList ?? new ChangeTrackingList<CollectionItem>(),
+                nonRequiredStringList ?? new ChangeTrackingList<string>(),
+                nonRequiredIntList ?? new ChangeTrackingList<int>(),
+                nonRequiredNullableModelList ?? new ChangeTrackingList<CollectionItem>(),
+                nonRequiredNullableStringList ?? new ChangeTrackingList<string>(),
+                nonRequiredNullableIntList ?? new ChangeTrackingList<int>(),
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<InputModel>.Write(ModelReaderWriterOptions options)

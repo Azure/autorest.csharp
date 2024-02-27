@@ -213,7 +213,7 @@ namespace OpenAI.Models
             }
             CreateChatCompletionRequestModel model = default;
             IList<ChatCompletionRequestMessage> messages = default;
-            OptionalProperty<IList<ChatCompletionFunctions>> functions = default;
+            IList<ChatCompletionFunctions> functions = default;
             OptionalProperty<BinaryData> functionCall = default;
             OptionalProperty<double?> temperature = default;
             OptionalProperty<double?> topP = default;
@@ -222,7 +222,7 @@ namespace OpenAI.Models
             OptionalProperty<BinaryData> stop = default;
             OptionalProperty<double?> presencePenalty = default;
             OptionalProperty<double?> frequencyPenalty = default;
-            OptionalProperty<IDictionary<string, long>> logitBias = default;
+            IDictionary<string, long> logitBias = default;
             OptionalProperty<string> user = default;
             OptionalProperty<bool?> stream = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
@@ -371,7 +371,22 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new CreateChatCompletionRequest(model, messages, OptionalProperty.ToList(functions), functionCall.Value, OptionalProperty.ToNullable(temperature), OptionalProperty.ToNullable(topP), OptionalProperty.ToNullable(n), OptionalProperty.ToNullable(maxTokens), stop.Value, OptionalProperty.ToNullable(presencePenalty), OptionalProperty.ToNullable(frequencyPenalty), OptionalProperty.ToDictionary(logitBias), user.Value, OptionalProperty.ToNullable(stream), serializedAdditionalRawData);
+            return new CreateChatCompletionRequest(
+                model,
+                messages,
+                functions ?? new OptionalList<ChatCompletionFunctions>(),
+                functionCall.Value,
+                OptionalProperty.ToNullable(temperature),
+                OptionalProperty.ToNullable(topP),
+                OptionalProperty.ToNullable(n),
+                OptionalProperty.ToNullable(maxTokens),
+                stop.Value,
+                OptionalProperty.ToNullable(presencePenalty),
+                OptionalProperty.ToNullable(frequencyPenalty),
+                logitBias ?? new OptionalDictionary<string, long>(),
+                user.Value,
+                OptionalProperty.ToNullable(stream),
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<CreateChatCompletionRequest>.Write(ModelReaderWriterOptions options)

@@ -52,7 +52,7 @@ namespace MgmtSafeFlatten
             }
             Optional<string> myType = default;
             Optional<LayerOneSingle> properties = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -118,7 +118,15 @@ namespace MgmtSafeFlatten
                     continue;
                 }
             }
-            return new TypeTwoData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, myType.Value, properties.Value);
+            return new TypeTwoData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                myType.Value,
+                properties.Value);
         }
     }
 }

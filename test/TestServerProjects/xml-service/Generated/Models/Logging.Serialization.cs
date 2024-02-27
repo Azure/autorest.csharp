@@ -66,7 +66,13 @@ namespace xml_service.Models
             {
                 retentionPolicy = RetentionPolicy.DeserializeRetentionPolicy(retentionPolicyElement);
             }
-            return new Logging(version, delete, read, write, retentionPolicy, serializedAdditionalRawData: null);
+            return new Logging(
+                version,
+                delete,
+                read,
+                write,
+                retentionPolicy,
+                serializedAdditionalRawData: null);
         }
 
         BinaryData IPersistableModel<Logging>.Write(ModelReaderWriterOptions options)

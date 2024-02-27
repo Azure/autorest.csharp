@@ -21,7 +21,7 @@ namespace CognitiveServices.TextAnalytics.Models
             }
             InnerErrorCodeValue code = default;
             string message = default;
-            Optional<IReadOnlyDictionary<string, string>> details = default;
+            IReadOnlyDictionary<string, string> details = default;
             Optional<string> target = default;
             Optional<InnerError> innererror = default;
             foreach (var property in element.EnumerateObject())
@@ -65,7 +65,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            return new InnerError(code, message, Optional.ToDictionary(details), target.Value, innererror.Value);
+            return new InnerError(code, message, details ?? new ChangeTrackingDictionary<string, string>(), target.Value, innererror.Value);
         }
     }
 }

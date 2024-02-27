@@ -67,7 +67,7 @@ namespace Azure.Network.Management.Interface.Models
             Optional<string> etag = default;
             Optional<string> type = default;
             Optional<string> id = default;
-            Optional<IReadOnlyList<SubResource>> loadBalancingRules = default;
+            IReadOnlyList<SubResource> loadBalancingRules = default;
             Optional<ProbeProtocol> protocol = default;
             Optional<int> port = default;
             Optional<int> intervalInSeconds = default;
@@ -173,7 +173,18 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new Probe(id.Value, name.Value, etag.Value, type.Value, Optional.ToList(loadBalancingRules), Optional.ToNullable(protocol), Optional.ToNullable(port), Optional.ToNullable(intervalInSeconds), Optional.ToNullable(numberOfProbes), requestPath.Value, Optional.ToNullable(provisioningState));
+            return new Probe(
+                id.Value,
+                name.Value,
+                etag.Value,
+                type.Value,
+                loadBalancingRules ?? new ChangeTrackingList<SubResource>(),
+                Optional.ToNullable(protocol),
+                Optional.ToNullable(port),
+                Optional.ToNullable(intervalInSeconds),
+                Optional.ToNullable(numberOfProbes),
+                requestPath.Value,
+                Optional.ToNullable(provisioningState));
         }
     }
 }

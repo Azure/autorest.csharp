@@ -104,7 +104,7 @@ namespace MgmtMockAndSample.Models
             Optional<BinaryData> protectedSettings = default;
             Optional<byte[]> rawMessage = default;
             Optional<Guid> tenantId = default;
-            Optional<IList<string>> initialAdminObjectIds = default;
+            IList<string> initialAdminObjectIds = default;
             Optional<Uri> hsmUri = default;
             Optional<bool> enableSoftDelete = default;
             Optional<int> softDeleteRetentionInDays = default;
@@ -113,7 +113,7 @@ namespace MgmtMockAndSample.Models
             Optional<string> statusMessage = default;
             Optional<ProvisioningState> provisioningState = default;
             Optional<MhsmNetworkRuleSet> networkAcls = default;
-            Optional<IReadOnlyList<MhsmPrivateEndpointConnectionItem>> privateEndpointConnections = default;
+            IReadOnlyList<MhsmPrivateEndpointConnectionItem> privateEndpointConnections = default;
             Optional<PublicNetworkAccess> publicNetworkAccess = default;
             Optional<DateTimeOffset> scheduledPurgeDate = default;
             foreach (var property in element.EnumerateObject())
@@ -269,7 +269,23 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new ManagedHsmProperties(settings.Value, protectedSettings.Value, rawMessage.Value, Optional.ToNullable(tenantId), Optional.ToList(initialAdminObjectIds), hsmUri.Value, Optional.ToNullable(enableSoftDelete), Optional.ToNullable(softDeleteRetentionInDays), Optional.ToNullable(enablePurgeProtection), Optional.ToNullable(createMode), statusMessage.Value, Optional.ToNullable(provisioningState), networkAcls.Value, Optional.ToList(privateEndpointConnections), Optional.ToNullable(publicNetworkAccess), Optional.ToNullable(scheduledPurgeDate));
+            return new ManagedHsmProperties(
+                settings.Value,
+                protectedSettings.Value,
+                rawMessage.Value,
+                Optional.ToNullable(tenantId),
+                initialAdminObjectIds ?? new ChangeTrackingList<string>(),
+                hsmUri.Value,
+                Optional.ToNullable(enableSoftDelete),
+                Optional.ToNullable(softDeleteRetentionInDays),
+                Optional.ToNullable(enablePurgeProtection),
+                Optional.ToNullable(createMode),
+                statusMessage.Value,
+                Optional.ToNullable(provisioningState),
+                networkAcls.Value,
+                privateEndpointConnections ?? new ChangeTrackingList<MhsmPrivateEndpointConnectionItem>(),
+                Optional.ToNullable(publicNetworkAccess),
+                Optional.ToNullable(scheduledPurgeDate));
         }
     }
 }

@@ -59,7 +59,7 @@ namespace Azure.ResourceManager.Storage
             Optional<DateTimeOffset> enabledTime = default;
             Optional<string> sourceAccount = default;
             Optional<string> destinationAccount = default;
-            Optional<IList<ObjectReplicationPolicyRule>> rules = default;
+            IList<ObjectReplicationPolicyRule> rules = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -137,7 +137,16 @@ namespace Azure.ResourceManager.Storage
                     continue;
                 }
             }
-            return new ObjectReplicationPolicyData(id, name, type, systemData.Value, policyId.Value, Optional.ToNullable(enabledTime), sourceAccount.Value, destinationAccount.Value, Optional.ToList(rules));
+            return new ObjectReplicationPolicyData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                policyId.Value,
+                Optional.ToNullable(enabledTime),
+                sourceAccount.Value,
+                destinationAccount.Value,
+                rules ?? new ChangeTrackingList<ObjectReplicationPolicyRule>());
         }
     }
 }

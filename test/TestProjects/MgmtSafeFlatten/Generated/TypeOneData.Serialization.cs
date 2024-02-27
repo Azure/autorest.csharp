@@ -65,7 +65,7 @@ namespace MgmtSafeFlatten
             Optional<LayerOneSingle> layerOne = default;
             Optional<LayerOneBaseType> layerOneType = default;
             Optional<WritableSubResource> layerOneConflict = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -149,7 +149,17 @@ namespace MgmtSafeFlatten
                     continue;
                 }
             }
-            return new TypeOneData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, myType.Value, layerOne.Value, layerOneType.Value, layerOneConflict);
+            return new TypeOneData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                myType.Value,
+                layerOne.Value,
+                layerOneType.Value,
+                layerOneConflict);
         }
     }
 }

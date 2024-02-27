@@ -161,7 +161,14 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineSize(name.Value, Optional.ToNullable(numberOfCores), Optional.ToNullable(osDiskSizeInMB), Optional.ToNullable(resourceDiskSizeInMB), Optional.ToNullable(memoryInMB), Optional.ToNullable(maxDataDiskCount), serializedAdditionalRawData);
+            return new VirtualMachineSize(
+                name.Value,
+                Optional.ToNullable(numberOfCores),
+                Optional.ToNullable(osDiskSizeInMB),
+                Optional.ToNullable(resourceDiskSizeInMB),
+                Optional.ToNullable(memoryInMB),
+                Optional.ToNullable(maxDataDiskCount),
+                serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

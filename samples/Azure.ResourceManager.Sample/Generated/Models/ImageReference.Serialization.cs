@@ -141,7 +141,14 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ImageReference(id.Value, serializedAdditionalRawData, publisher.Value, offer.Value, sku.Value, version.Value, exactVersion.Value);
+            return new ImageReference(
+                id.Value,
+                serializedAdditionalRawData,
+                publisher.Value,
+                offer.Value,
+                sku.Value,
+                version.Value,
+                exactVersion.Value);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

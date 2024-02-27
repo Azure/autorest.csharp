@@ -123,7 +123,14 @@ namespace Parameters.Spread.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new SpreadWithMultipleParametersRequest(prop1, prop2, prop3, prop4, prop5, prop6, serializedAdditionalRawData);
+            return new SpreadWithMultipleParametersRequest(
+                prop1,
+                prop2,
+                prop3,
+                prop4,
+                prop5,
+                prop6,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<SpreadWithMultipleParametersRequest>.Write(ModelReaderWriterOptions options)

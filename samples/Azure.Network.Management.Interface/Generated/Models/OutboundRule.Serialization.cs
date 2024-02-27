@@ -78,7 +78,7 @@ namespace Azure.Network.Management.Interface.Models
             Optional<string> type = default;
             Optional<string> id = default;
             Optional<int> allocatedOutboundPorts = default;
-            Optional<IList<SubResource>> frontendIPConfigurations = default;
+            IList<SubResource> frontendIPConfigurations = default;
             Optional<SubResource> backendAddressPool = default;
             Optional<ProvisioningState> provisioningState = default;
             Optional<LoadBalancerOutboundRuleProtocol> protocol = default;
@@ -187,7 +187,18 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new OutboundRule(id.Value, name.Value, etag.Value, type.Value, Optional.ToNullable(allocatedOutboundPorts), Optional.ToList(frontendIPConfigurations), backendAddressPool.Value, Optional.ToNullable(provisioningState), Optional.ToNullable(protocol), Optional.ToNullable(enableTcpReset), Optional.ToNullable(idleTimeoutInMinutes));
+            return new OutboundRule(
+                id.Value,
+                name.Value,
+                etag.Value,
+                type.Value,
+                Optional.ToNullable(allocatedOutboundPorts),
+                frontendIPConfigurations ?? new ChangeTrackingList<SubResource>(),
+                backendAddressPool.Value,
+                Optional.ToNullable(provisioningState),
+                Optional.ToNullable(protocol),
+                Optional.ToNullable(enableTcpReset),
+                Optional.ToNullable(idleTimeoutInMinutes));
         }
     }
 }

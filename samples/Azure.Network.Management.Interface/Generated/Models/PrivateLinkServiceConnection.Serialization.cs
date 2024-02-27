@@ -69,7 +69,7 @@ namespace Azure.Network.Management.Interface.Models
             Optional<string> id = default;
             Optional<ProvisioningState> provisioningState = default;
             Optional<string> privateLinkServiceId = default;
-            Optional<IList<string>> groupIds = default;
+            IList<string> groupIds = default;
             Optional<string> requestMessage = default;
             Optional<PrivateLinkServiceConnectionState> privateLinkServiceConnectionState = default;
             foreach (var property in element.EnumerateObject())
@@ -149,7 +149,16 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new PrivateLinkServiceConnection(id.Value, name.Value, type.Value, etag.Value, Optional.ToNullable(provisioningState), privateLinkServiceId.Value, Optional.ToList(groupIds), requestMessage.Value, privateLinkServiceConnectionState.Value);
+            return new PrivateLinkServiceConnection(
+                id.Value,
+                name.Value,
+                type.Value,
+                etag.Value,
+                Optional.ToNullable(provisioningState),
+                privateLinkServiceId.Value,
+                groupIds ?? new ChangeTrackingList<string>(),
+                requestMessage.Value,
+                privateLinkServiceConnectionState.Value);
         }
     }
 }

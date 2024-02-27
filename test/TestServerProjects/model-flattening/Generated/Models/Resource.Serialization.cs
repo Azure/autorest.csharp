@@ -97,7 +97,7 @@ namespace model_flattening.Models
             }
             Optional<string> id = default;
             Optional<string> type = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             Optional<string> location = default;
             Optional<string> name = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
@@ -144,7 +144,13 @@ namespace model_flattening.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Resource(id.Value, type.Value, Optional.ToDictionary(tags), location.Value, name.Value, serializedAdditionalRawData);
+            return new Resource(
+                id.Value,
+                type.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location.Value,
+                name.Value,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<Resource>.Write(ModelReaderWriterOptions options)

@@ -153,7 +153,7 @@ namespace Azure.ResourceManager.Sample
                 return null;
             }
             SampleSku sku = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -162,7 +162,7 @@ namespace Azure.ResourceManager.Sample
             Optional<int> platformFaultDomain = default;
             Optional<bool> autoReplaceOnFailure = default;
             Optional<string> hostId = default;
-            Optional<IReadOnlyList<Resources.Models.SubResource>> virtualMachines = default;
+            IReadOnlyList<Resources.Models.SubResource> virtualMachines = default;
             Optional<DedicatedHostLicenseType> licenseType = default;
             Optional<DateTimeOffset> provisioningTime = default;
             Optional<string> provisioningState = default;
@@ -306,7 +306,23 @@ namespace Azure.ResourceManager.Sample
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DedicatedHostData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, sku, Optional.ToNullable(platformFaultDomain), Optional.ToNullable(autoReplaceOnFailure), hostId.Value, Optional.ToList(virtualMachines), Optional.ToNullable(licenseType), Optional.ToNullable(provisioningTime), provisioningState.Value, instanceView.Value, serializedAdditionalRawData);
+            return new DedicatedHostData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                sku,
+                Optional.ToNullable(platformFaultDomain),
+                Optional.ToNullable(autoReplaceOnFailure),
+                hostId.Value,
+                virtualMachines ?? new ChangeTrackingList<Resources.Models.SubResource>(),
+                Optional.ToNullable(licenseType),
+                Optional.ToNullable(provisioningTime),
+                provisioningState.Value,
+                instanceView.Value,
+                serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

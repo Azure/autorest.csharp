@@ -23,7 +23,13 @@ namespace model_flattening.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new Resource(id, type, tags, location, name, serializedAdditionalRawData: null);
+            return new Resource(
+                id,
+                type,
+                tags,
+                location,
+                name,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.FlattenedProduct"/>. </summary>
@@ -41,7 +47,17 @@ namespace model_flattening.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new FlattenedProduct(id, type, tags, location, name, serializedAdditionalRawData: null, pName, typePropertiesType, provisioningStateValues, provisioningState);
+            return new FlattenedProduct(
+                id,
+                type,
+                tags,
+                location,
+                name,
+                serializedAdditionalRawData: null,
+                pName,
+                typePropertiesType,
+                provisioningStateValues,
+                provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ProductWrapper"/>. </summary>
@@ -64,7 +80,16 @@ namespace model_flattening.Models
         /// <returns> A new <see cref="Models.FlattenParameterGroup"/> instance for mocking. </returns>
         public static FlattenParameterGroup FlattenParameterGroup(string name = null, SimpleProduct simpleBodyProduct = null, string productId = null, string description = null, string maxProductDisplayName = null, SimpleProductPropertiesMaxProductCapacity? capacity = null, string genericValue = null, string odataValue = null)
         {
-            return new FlattenParameterGroup(name, simpleBodyProduct, productId, description, maxProductDisplayName, capacity, genericValue, odataValue, serializedAdditionalRawData: null);
+            return new FlattenParameterGroup(
+                name,
+                simpleBodyProduct,
+                productId,
+                description,
+                maxProductDisplayName,
+                capacity,
+                genericValue,
+                odataValue,
+                serializedAdditionalRawData: null);
         }
     }
 }

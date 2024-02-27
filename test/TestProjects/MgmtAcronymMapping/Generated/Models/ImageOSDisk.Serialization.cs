@@ -150,7 +150,16 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new ImageOSDisk(snapshot, managedDisk, blobUri.Value, Optional.ToNullable(caching), Optional.ToNullable(diskSizeGB), Optional.ToNullable(storageAccountType), diskEncryptionSet, osType, osState);
+            return new ImageOSDisk(
+                snapshot,
+                managedDisk,
+                blobUri.Value,
+                Optional.ToNullable(caching),
+                Optional.ToNullable(diskSizeGB),
+                Optional.ToNullable(storageAccountType),
+                diskEncryptionSet,
+                osType,
+                osState);
         }
     }
 }

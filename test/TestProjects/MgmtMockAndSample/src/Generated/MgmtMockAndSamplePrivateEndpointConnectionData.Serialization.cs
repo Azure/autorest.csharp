@@ -53,7 +53,7 @@ namespace MgmtMockAndSample
             }
             Optional<string> etag = default;
             Optional<AzureLocation> location = default;
-            Optional<IReadOnlyDictionary<string, string>> tags = default;
+            IReadOnlyDictionary<string, string> tags = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
@@ -155,7 +155,17 @@ namespace MgmtMockAndSample
                     continue;
                 }
             }
-            return new MgmtMockAndSamplePrivateEndpointConnectionData(id, name, type, systemData.Value, etag.Value, privateEndpoint, privateLinkServiceConnectionState.Value, Optional.ToNullable(provisioningState), Optional.ToNullable(location), Optional.ToDictionary(tags));
+            return new MgmtMockAndSamplePrivateEndpointConnectionData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                etag.Value,
+                privateEndpoint,
+                privateLinkServiceConnectionState.Value,
+                Optional.ToNullable(provisioningState),
+                Optional.ToNullable(location),
+                tags ?? new ChangeTrackingDictionary<string, string>());
         }
     }
 }

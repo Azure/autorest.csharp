@@ -52,7 +52,7 @@ namespace MgmtMockAndSample
             }
             Optional<ManagedHsmProperties> properties = default;
             Optional<ManagedHsmSku> sku = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -122,7 +122,15 @@ namespace MgmtMockAndSample
                     continue;
                 }
             }
-            return new ManagedHsmData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, properties.Value, sku.Value);
+            return new ManagedHsmData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                properties.Value,
+                sku.Value);
         }
     }
 }

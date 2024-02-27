@@ -143,7 +143,16 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new TextTranslationSkill(odataType, name.Value, description.Value, context.Value, inputs, outputs, defaultToLanguageCode, Optional.ToNullable(defaultFromLanguageCode), Optional.ToNullable(suggestedFrom));
+            return new TextTranslationSkill(
+                odataType,
+                name.Value,
+                description.Value,
+                context.Value,
+                inputs,
+                outputs,
+                defaultToLanguageCode,
+                Optional.ToNullable(defaultFromLanguageCode),
+                Optional.ToNullable(suggestedFrom));
         }
     }
 }

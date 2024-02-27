@@ -203,7 +203,7 @@ namespace OpenAI.Models
             OptionalProperty<bool?> computeClassificationMetrics = default;
             OptionalProperty<long?> classificationNClasses = default;
             OptionalProperty<string> classificationPositiveClass = default;
-            OptionalProperty<IList<double>> classificationBetas = default;
+            IList<double> classificationBetas = default;
             OptionalProperty<string> suffix = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -333,7 +333,20 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new CreateFineTuneRequest(trainingFile, validationFile.Value, OptionalProperty.ToNullable(model), OptionalProperty.ToNullable(nEpochs), OptionalProperty.ToNullable(batchSize), OptionalProperty.ToNullable(learningRateMultiplier), OptionalProperty.ToNullable(promptLossRate), OptionalProperty.ToNullable(computeClassificationMetrics), OptionalProperty.ToNullable(classificationNClasses), classificationPositiveClass.Value, OptionalProperty.ToList(classificationBetas), suffix.Value, serializedAdditionalRawData);
+            return new CreateFineTuneRequest(
+                trainingFile,
+                validationFile.Value,
+                OptionalProperty.ToNullable(model),
+                OptionalProperty.ToNullable(nEpochs),
+                OptionalProperty.ToNullable(batchSize),
+                OptionalProperty.ToNullable(learningRateMultiplier),
+                OptionalProperty.ToNullable(promptLossRate),
+                OptionalProperty.ToNullable(computeClassificationMetrics),
+                OptionalProperty.ToNullable(classificationNClasses),
+                classificationPositiveClass.Value,
+                classificationBetas ?? new OptionalList<double>(),
+                suffix.Value,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<CreateFineTuneRequest>.Write(ModelReaderWriterOptions options)

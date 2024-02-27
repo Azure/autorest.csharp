@@ -19,7 +19,7 @@ namespace MgmtExactMatchFlattenInheritance.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<AzureResourceFlattenModel3>> value = default;
+            IReadOnlyList<AzureResourceFlattenModel3> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -43,7 +43,7 @@ namespace MgmtExactMatchFlattenInheritance.Models
                     continue;
                 }
             }
-            return new AzureResourceFlattenModel3ListResult(Optional.ToList(value), nextLink.Value);
+            return new AzureResourceFlattenModel3ListResult(value ?? new ChangeTrackingList<AzureResourceFlattenModel3>(), nextLink.Value);
         }
     }
 }

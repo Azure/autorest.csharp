@@ -45,7 +45,7 @@ namespace MgmtParent
                 return null;
             }
             Optional<string> foo = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -102,7 +102,14 @@ namespace MgmtParent
                     continue;
                 }
             }
-            return new DedicatedHostData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, foo.Value);
+            return new DedicatedHostData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                foo.Value);
         }
     }
 }

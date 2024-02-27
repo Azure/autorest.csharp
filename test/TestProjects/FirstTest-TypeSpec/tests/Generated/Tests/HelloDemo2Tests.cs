@@ -80,13 +80,21 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             HelloDemo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
-            RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum?[] { StringFixedEnum.One }, new Dictionary<string, StringExtensibleEnum?>
-            {
-                ["key"] = StringExtensibleEnum.One
-            }, new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }), BinaryData.FromObjectAsJson(new object()), new Dictionary<string, BinaryData>
-            {
-                ["key"] = BinaryData.FromObjectAsJson(new object())
-            }, new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One));
+            RoundTripModel action = new RoundTripModel(
+                "<requiredString>",
+                1234,
+                new StringFixedEnum?[] { StringFixedEnum.One },
+                new Dictionary<string, StringExtensibleEnum?>
+                {
+                    ["key"] = StringExtensibleEnum.One
+                },
+                new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }),
+                BinaryData.FromObjectAsJson(new object()),
+                new Dictionary<string, BinaryData>
+                {
+                    ["key"] = BinaryData.FromObjectAsJson(new object())
+                },
+                new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One));
             Response<RoundTripModel> response = await client.HelloAgainAsync("<p2>", "<p1>", action);
         }
 
@@ -181,20 +189,28 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             HelloDemo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
-            RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum?[] { StringFixedEnum.One }, new Dictionary<string, StringExtensibleEnum?>
-            {
-                ["key"] = StringExtensibleEnum.One
-            }, new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 })
-            {
-                OptionalLiteralString = ThingOptionalLiteralString.Reject,
-                OptionalLiteralInt = ThingOptionalLiteralInt._456,
-                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
-                OptionalLiteralBool = true,
-                OptionalNullableList = { 1234 },
-            }, BinaryData.FromObjectAsJson(new object()), new Dictionary<string, BinaryData>
-            {
-                ["key"] = BinaryData.FromObjectAsJson(new object())
-            }, new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One))
+            RoundTripModel action = new RoundTripModel(
+                "<requiredString>",
+                1234,
+                new StringFixedEnum?[] { StringFixedEnum.One },
+                new Dictionary<string, StringExtensibleEnum?>
+                {
+                    ["key"] = StringExtensibleEnum.One
+                },
+                new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 })
+                {
+                    OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                    OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                    OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+                    OptionalLiteralBool = true,
+                    OptionalNullableList = { 1234 },
+                },
+                BinaryData.FromObjectAsJson(new object()),
+                new Dictionary<string, BinaryData>
+                {
+                    ["key"] = BinaryData.FromObjectAsJson(new object())
+                },
+                new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One))
             {
                 IntExtensibleEnum = IntExtensibleEnum.One,
                 IntExtensibleEnumCollection = { IntExtensibleEnum.One },

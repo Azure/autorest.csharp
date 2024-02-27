@@ -104,7 +104,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             Optional<string> @namespace = default;
             Optional<string> registrationState = default;
             Optional<string> registrationPolicy = default;
-            Optional<IReadOnlyList<ProviderResourceType>> resourceTypes = default;
+            IReadOnlyList<ProviderResourceType> resourceTypes = default;
             Optional<ProviderAuthorizationConsentState> providerAuthorizationConsentState = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -159,7 +159,14 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ResourceProviderData(id.Value, @namespace.Value, registrationState.Value, registrationPolicy.Value, Optional.ToList(resourceTypes), Optional.ToNullable(providerAuthorizationConsentState), serializedAdditionalRawData);
+            return new ResourceProviderData(
+                id.Value,
+                @namespace.Value,
+                registrationState.Value,
+                registrationPolicy.Value,
+                resourceTypes ?? new ChangeTrackingList<ProviderResourceType>(),
+                Optional.ToNullable(providerAuthorizationConsentState),
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ResourceProviderData>.Write(ModelReaderWriterOptions options)

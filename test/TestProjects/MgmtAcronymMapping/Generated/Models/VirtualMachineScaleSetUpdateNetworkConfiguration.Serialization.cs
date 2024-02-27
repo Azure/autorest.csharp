@@ -80,7 +80,7 @@ namespace MgmtAcronymMapping.Models
             Optional<bool> enableAcceleratedNetworking = default;
             Optional<WritableSubResource> networkSecurityGroup = default;
             Optional<VirtualMachineScaleSetNetworkConfigurationDnsSettings> dnsSettings = default;
-            Optional<IList<VirtualMachineScaleSetUpdateIPConfiguration>> ipConfigurations = default;
+            IList<VirtualMachineScaleSetUpdateIPConfiguration> ipConfigurations = default;
             Optional<bool> enableIPForwarding = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -166,7 +166,15 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetUpdateNetworkConfiguration(id.Value, name.Value, Optional.ToNullable(primary), Optional.ToNullable(enableAcceleratedNetworking), networkSecurityGroup, dnsSettings.Value, Optional.ToList(ipConfigurations), Optional.ToNullable(enableIPForwarding));
+            return new VirtualMachineScaleSetUpdateNetworkConfiguration(
+                id.Value,
+                name.Value,
+                Optional.ToNullable(primary),
+                Optional.ToNullable(enableAcceleratedNetworking),
+                networkSecurityGroup,
+                dnsSettings.Value,
+                ipConfigurations ?? new ChangeTrackingList<VirtualMachineScaleSetUpdateIPConfiguration>(),
+                Optional.ToNullable(enableIPForwarding));
         }
     }
 }

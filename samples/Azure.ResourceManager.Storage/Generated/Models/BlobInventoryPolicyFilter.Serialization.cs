@@ -55,8 +55,8 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Optional<IList<string>> prefixMatch = default;
-            Optional<IList<string>> blobTypes = default;
+            IList<string> prefixMatch = default;
+            IList<string> blobTypes = default;
             Optional<bool> includeBlobVersions = default;
             Optional<bool> includeSnapshots = default;
             foreach (var property in element.EnumerateObject())
@@ -108,7 +108,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new BlobInventoryPolicyFilter(Optional.ToList(prefixMatch), Optional.ToList(blobTypes), Optional.ToNullable(includeBlobVersions), Optional.ToNullable(includeSnapshots));
+            return new BlobInventoryPolicyFilter(prefixMatch ?? new ChangeTrackingList<string>(), blobTypes ?? new ChangeTrackingList<string>(), Optional.ToNullable(includeBlobVersions), Optional.ToNullable(includeSnapshots));
         }
     }
 }

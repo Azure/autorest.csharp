@@ -98,8 +98,8 @@ namespace MgmtDiscriminator.Models
             RequestMethodMatchConditionParametersTypeName typeName = default;
             RequestMethodOperator @operator = default;
             Optional<bool> negateCondition = default;
-            Optional<IList<Transform>> transforms = default;
-            Optional<IList<RequestMethodMatchConditionParametersMatchValuesItem>> matchValues = default;
+            IList<Transform> transforms = default;
+            IList<RequestMethodMatchConditionParametersMatchValuesItem> matchValues = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -157,7 +157,13 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new RequestMethodMatchConditionParameters(typeName, @operator, Optional.ToNullable(negateCondition), Optional.ToList(transforms), Optional.ToList(matchValues), serializedAdditionalRawData);
+            return new RequestMethodMatchConditionParameters(
+                typeName,
+                @operator,
+                Optional.ToNullable(negateCondition),
+                transforms ?? new ChangeTrackingList<Transform>(),
+                matchValues ?? new ChangeTrackingList<RequestMethodMatchConditionParametersMatchValuesItem>(),
+                serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

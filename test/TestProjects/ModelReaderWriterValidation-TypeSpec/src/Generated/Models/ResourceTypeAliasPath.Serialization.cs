@@ -91,7 +91,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 return null;
             }
             Optional<string> path = default;
-            Optional<IReadOnlyList<string>> apiVersions = default;
+            IReadOnlyList<string> apiVersions = default;
             Optional<ResourceTypeAliasPattern> pattern = default;
             Optional<ResourceTypeAliasPathMetadata> metadata = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
@@ -141,7 +141,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ResourceTypeAliasPath(path.Value, Optional.ToList(apiVersions), pattern.Value, metadata.Value, serializedAdditionalRawData);
+            return new ResourceTypeAliasPath(path.Value, apiVersions ?? new ChangeTrackingList<string>(), pattern.Value, metadata.Value, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ResourceTypeAliasPath>.Write(ModelReaderWriterOptions options)

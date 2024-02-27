@@ -121,7 +121,7 @@ namespace CognitiveSearch.Models
                 return null;
             }
             Optional<bool> count = default;
-            Optional<IList<string>> facets = default;
+            IList<string> facets = default;
             Optional<string> filter = default;
             Optional<string> highlight = default;
             Optional<string> highlightPostTag = default;
@@ -129,7 +129,7 @@ namespace CognitiveSearch.Models
             Optional<double> minimumCoverage = default;
             Optional<string> orderby = default;
             Optional<QueryType> queryType = default;
-            Optional<IList<string>> scoringParameters = default;
+            IList<string> scoringParameters = default;
             Optional<string> scoringProfile = default;
             Optional<string> search = default;
             Optional<string> searchFields = default;
@@ -267,7 +267,24 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new SearchRequest(Optional.ToNullable(count), Optional.ToList(facets), filter.Value, highlight.Value, highlightPostTag.Value, highlightPreTag.Value, Optional.ToNullable(minimumCoverage), orderby.Value, Optional.ToNullable(queryType), Optional.ToList(scoringParameters), scoringProfile.Value, search.Value, searchFields.Value, Optional.ToNullable(searchMode), select.Value, Optional.ToNullable(skip), Optional.ToNullable(top));
+            return new SearchRequest(
+                Optional.ToNullable(count),
+                facets ?? new ChangeTrackingList<string>(),
+                filter.Value,
+                highlight.Value,
+                highlightPostTag.Value,
+                highlightPreTag.Value,
+                Optional.ToNullable(minimumCoverage),
+                orderby.Value,
+                Optional.ToNullable(queryType),
+                scoringParameters ?? new ChangeTrackingList<string>(),
+                scoringProfile.Value,
+                search.Value,
+                searchFields.Value,
+                Optional.ToNullable(searchMode),
+                select.Value,
+                Optional.ToNullable(skip),
+                Optional.ToNullable(top));
         }
     }
 }

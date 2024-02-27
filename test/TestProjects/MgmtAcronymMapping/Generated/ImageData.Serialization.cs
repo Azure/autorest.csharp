@@ -59,7 +59,7 @@ namespace MgmtAcronymMapping
             {
                 return null;
             }
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -159,7 +159,17 @@ namespace MgmtAcronymMapping
                     continue;
                 }
             }
-            return new ImageData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, sourceVirtualMachine, storageProfile.Value, provisioningState.Value, Optional.ToNullable(hyperVGeneration));
+            return new ImageData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                sourceVirtualMachine,
+                storageProfile.Value,
+                provisioningState.Value,
+                Optional.ToNullable(hyperVGeneration));
         }
     }
 }

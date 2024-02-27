@@ -52,8 +52,8 @@ namespace Azure.Network.Management.Interface.Models
             Optional<string> etag = default;
             Optional<string> type = default;
             Optional<string> id = default;
-            Optional<IReadOnlyList<NetworkInterfaceIPConfiguration>> backendIPConfigurations = default;
-            Optional<IList<ApplicationGatewayBackendAddress>> backendAddresses = default;
+            IReadOnlyList<NetworkInterfaceIPConfiguration> backendIPConfigurations = default;
+            IList<ApplicationGatewayBackendAddress> backendAddresses = default;
             Optional<ProvisioningState> provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -127,7 +127,14 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new ApplicationGatewayBackendAddressPool(id.Value, name.Value, etag.Value, type.Value, Optional.ToList(backendIPConfigurations), Optional.ToList(backendAddresses), Optional.ToNullable(provisioningState));
+            return new ApplicationGatewayBackendAddressPool(
+                id.Value,
+                name.Value,
+                etag.Value,
+                type.Value,
+                backendIPConfigurations ?? new ChangeTrackingList<NetworkInterfaceIPConfiguration>(),
+                backendAddresses ?? new ChangeTrackingList<ApplicationGatewayBackendAddress>(),
+                Optional.ToNullable(provisioningState));
         }
     }
 }

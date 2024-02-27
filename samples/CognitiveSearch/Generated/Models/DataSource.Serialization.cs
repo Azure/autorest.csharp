@@ -111,7 +111,15 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new DataSource(name, description.Value, type, credentials, container, dataChangeDetectionPolicy.Value, dataDeletionDetectionPolicy.Value, odataEtag.Value);
+            return new DataSource(
+                name,
+                description.Value,
+                type,
+                credentials,
+                container,
+                dataChangeDetectionPolicy.Value,
+                dataDeletionDetectionPolicy.Value,
+                odataEtag.Value);
         }
     }
 }

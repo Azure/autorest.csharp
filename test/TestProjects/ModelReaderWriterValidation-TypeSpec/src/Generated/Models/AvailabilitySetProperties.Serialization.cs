@@ -85,7 +85,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             {
                 return null;
             }
-            Optional<IList<WritableSubResource>> virtualMachines = default;
+            IList<WritableSubResource> virtualMachines = default;
             Optional<int> platformFaultDomainCount = default;
             Optional<int> platformUpdateDomainCount = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
@@ -130,7 +130,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new AvailabilitySetProperties(Optional.ToList(virtualMachines), Optional.ToNullable(platformFaultDomainCount), Optional.ToNullable(platformUpdateDomainCount), serializedAdditionalRawData);
+            return new AvailabilitySetProperties(virtualMachines ?? new ChangeTrackingList<WritableSubResource>(), Optional.ToNullable(platformFaultDomainCount), Optional.ToNullable(platformUpdateDomainCount), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<AvailabilitySetProperties>.Write(ModelReaderWriterOptions options)

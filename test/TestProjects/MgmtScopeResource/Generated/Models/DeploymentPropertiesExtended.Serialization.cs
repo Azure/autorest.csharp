@@ -98,7 +98,15 @@ namespace MgmtScopeResource.Models
                     continue;
                 }
             }
-            return new DeploymentPropertiesExtended(Optional.ToNullable(provisioningState), correlationId.Value, Optional.ToNullable(timestamp), Optional.ToNullable(duration), outputs.Value, parameters.Value, Optional.ToNullable(mode), errorResponse.Value);
+            return new DeploymentPropertiesExtended(
+                Optional.ToNullable(provisioningState),
+                correlationId.Value,
+                Optional.ToNullable(timestamp),
+                Optional.ToNullable(duration),
+                outputs.Value,
+                parameters.Value,
+                Optional.ToNullable(mode),
+                errorResponse.Value);
         }
     }
 }

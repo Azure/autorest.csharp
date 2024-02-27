@@ -77,7 +77,7 @@ namespace AppConfiguration.Models
             Optional<string> contentType = default;
             Optional<string> value = default;
             Optional<DateTimeOffset> lastModified = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             Optional<bool> locked = default;
             Optional<string> etag = default;
             foreach (var property in element.EnumerateObject())
@@ -140,7 +140,15 @@ namespace AppConfiguration.Models
                     continue;
                 }
             }
-            return new KeyValue(key.Value, label.Value, contentType.Value, value.Value, Optional.ToNullable(lastModified), Optional.ToDictionary(tags), Optional.ToNullable(locked), etag.Value);
+            return new KeyValue(
+                key.Value,
+                label.Value,
+                contentType.Value,
+                value.Value,
+                Optional.ToNullable(lastModified),
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                Optional.ToNullable(locked),
+                etag.Value);
         }
     }
 }

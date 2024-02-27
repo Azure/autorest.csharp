@@ -105,7 +105,7 @@ namespace Azure.ResourceManager.Sample.Models
             string name = default;
             Optional<int> idleTimeoutInMinutes = default;
             Optional<VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings> dnsSettings = default;
-            Optional<IList<VirtualMachineScaleSetIPTag>> ipTags = default;
+            IList<VirtualMachineScaleSetIPTag> ipTags = default;
             Optional<WritableSubResource> publicIPPrefix = default;
             Optional<IPVersion> publicIPAddressVersion = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
@@ -185,7 +185,14 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineScaleSetPublicIPAddressConfiguration(name, Optional.ToNullable(idleTimeoutInMinutes), dnsSettings.Value, Optional.ToList(ipTags), publicIPPrefix, Optional.ToNullable(publicIPAddressVersion), serializedAdditionalRawData);
+            return new VirtualMachineScaleSetPublicIPAddressConfiguration(
+                name,
+                Optional.ToNullable(idleTimeoutInMinutes),
+                dnsSettings.Value,
+                ipTags ?? new ChangeTrackingList<VirtualMachineScaleSetIPTag>(),
+                publicIPPrefix,
+                Optional.ToNullable(publicIPAddressVersion),
+                serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

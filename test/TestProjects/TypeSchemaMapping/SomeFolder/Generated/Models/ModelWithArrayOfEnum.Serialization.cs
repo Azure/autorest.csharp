@@ -89,8 +89,8 @@ namespace TypeSchemaMapping.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<EnumForModelWithArrayOfEnum>> arrayOfEnum = default;
-            Optional<IReadOnlyList<EnumForModelWithArrayOfEnum?>> arrayOfEnumCustomizedToNullable = default;
+            IReadOnlyList<EnumForModelWithArrayOfEnum> arrayOfEnum = default;
+            IReadOnlyList<EnumForModelWithArrayOfEnum?> arrayOfEnumCustomizedToNullable = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -136,7 +136,7 @@ namespace TypeSchemaMapping.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ModelWithArrayOfEnum(Optional.ToList(arrayOfEnum), Optional.ToList(arrayOfEnumCustomizedToNullable), serializedAdditionalRawData);
+            return new ModelWithArrayOfEnum(arrayOfEnum ?? new ChangeTrackingList<EnumForModelWithArrayOfEnum>(), arrayOfEnumCustomizedToNullable ?? new ChangeTrackingList<EnumForModelWithArrayOfEnum?>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ModelWithArrayOfEnum>.Write(ModelReaderWriterOptions options)

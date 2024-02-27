@@ -22,8 +22,8 @@ namespace MgmtResourceName
                 return null;
             }
             Optional<string> displayName = default;
-            Optional<IReadOnlyList<Models.ResourceType>> resourceTypes = default;
-            Optional<IReadOnlyList<ResourceOperation>> operations = default;
+            IReadOnlyList<Models.ResourceType> resourceTypes = default;
+            IReadOnlyList<ResourceOperation> operations = default;
             ResourceIdentifier id = default;
             string name = default;
             Azure.Core.ResourceType type = default;
@@ -88,7 +88,14 @@ namespace MgmtResourceName
                     continue;
                 }
             }
-            return new ProviderOperationData(id, name, type, systemData.Value, displayName.Value, Optional.ToList(resourceTypes), Optional.ToList(operations));
+            return new ProviderOperationData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                displayName.Value,
+                resourceTypes ?? new ChangeTrackingList<Models.ResourceType>(),
+                operations ?? new ChangeTrackingList<ResourceOperation>());
         }
     }
 }

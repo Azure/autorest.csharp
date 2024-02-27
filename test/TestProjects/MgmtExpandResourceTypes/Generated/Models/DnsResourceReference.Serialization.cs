@@ -20,7 +20,7 @@ namespace MgmtExpandResourceTypes.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<WritableSubResource>> dnsResources = default;
+            IReadOnlyList<WritableSubResource> dnsResources = default;
             Optional<WritableSubResource> targetResource = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -48,7 +48,7 @@ namespace MgmtExpandResourceTypes.Models
                     continue;
                 }
             }
-            return new DnsResourceReference(Optional.ToList(dnsResources), targetResource);
+            return new DnsResourceReference(dnsResources ?? new ChangeTrackingList<WritableSubResource>(), targetResource);
         }
     }
 }

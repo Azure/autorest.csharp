@@ -105,7 +105,13 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new ConditionalSkill(odataType, name.Value, description.Value, context.Value, inputs, outputs);
+            return new ConditionalSkill(
+                odataType,
+                name.Value,
+                description.Value,
+                context.Value,
+                inputs,
+                outputs);
         }
     }
 }

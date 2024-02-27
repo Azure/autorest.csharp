@@ -97,7 +97,7 @@ namespace validation.Models
             {
                 return null;
             }
-            Optional<IList<string>> displayNames = default;
+            IList<string> displayNames = default;
             Optional<int> capacity = default;
             Optional<string> image = default;
             ChildProduct child = default;
@@ -172,7 +172,16 @@ namespace validation.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Product(Optional.ToList(displayNames), Optional.ToNullable(capacity), image.Value, child, constChild, constInt, constString, Optional.ToNullable(constStringAsEnum), serializedAdditionalRawData);
+            return new Product(
+                displayNames ?? new ChangeTrackingList<string>(),
+                Optional.ToNullable(capacity),
+                image.Value,
+                child,
+                constChild,
+                constInt,
+                constString,
+                Optional.ToNullable(constStringAsEnum),
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<Product>.Write(ModelReaderWriterOptions options)

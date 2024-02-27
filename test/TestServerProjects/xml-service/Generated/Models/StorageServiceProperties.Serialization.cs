@@ -95,7 +95,14 @@ namespace xml_service.Models
                 }
                 cors = array;
             }
-            return new StorageServiceProperties(logging, hourMetrics, minuteMetrics, cors, defaultServiceVersion, deleteRetentionPolicy, serializedAdditionalRawData: null);
+            return new StorageServiceProperties(
+                logging,
+                hourMetrics,
+                minuteMetrics,
+                cors,
+                defaultServiceVersion,
+                deleteRetentionPolicy,
+                serializedAdditionalRawData: null);
         }
 
         BinaryData IPersistableModel<StorageServiceProperties>.Write(ModelReaderWriterOptions options)

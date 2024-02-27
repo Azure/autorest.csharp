@@ -245,7 +245,20 @@ namespace MgmtDiscriminator
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DeliveryRuleData(id, name, type, systemData.Value, Optional.ToNullable(boolProperty), Optional.ToNullable(location), Optional.ToNullable(locationWithCustomSerialization), Optional.ToNullable(dateTimeProperty), Optional.ToNullable(duration), Optional.ToNullable(number), uri.Value, properties.Value, serializedAdditionalRawData);
+            return new DeliveryRuleData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                Optional.ToNullable(boolProperty),
+                Optional.ToNullable(location),
+                Optional.ToNullable(locationWithCustomSerialization),
+                Optional.ToNullable(dateTimeProperty),
+                Optional.ToNullable(duration),
+                Optional.ToNullable(number),
+                uri.Value,
+                properties.Value,
+                serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

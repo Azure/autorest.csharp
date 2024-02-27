@@ -46,7 +46,7 @@ namespace MgmtExactMatchInheritance.Models
                 return null;
             }
             Optional<AzureLocation> location = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
@@ -101,7 +101,13 @@ namespace MgmtExactMatchInheritance.Models
                     continue;
                 }
             }
-            return new ExactMatchModel10(id, name, type, systemData.Value, Optional.ToNullable(location), Optional.ToDictionary(tags));
+            return new ExactMatchModel10(
+                id,
+                name,
+                type,
+                systemData.Value,
+                Optional.ToNullable(location),
+                tags ?? new ChangeTrackingDictionary<string, string>());
         }
 
         internal partial class ExactMatchModel10Converter : JsonConverter<ExactMatchModel10>

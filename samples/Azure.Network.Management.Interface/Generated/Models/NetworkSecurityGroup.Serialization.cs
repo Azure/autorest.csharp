@@ -64,11 +64,11 @@ namespace Azure.Network.Management.Interface.Models
             Optional<string> name = default;
             Optional<string> type = default;
             Optional<string> location = default;
-            Optional<IDictionary<string, string>> tags = default;
-            Optional<IList<SecurityRule>> securityRules = default;
-            Optional<IReadOnlyList<SecurityRule>> defaultSecurityRules = default;
-            Optional<IReadOnlyList<NetworkInterface>> networkInterfaces = default;
-            Optional<IReadOnlyList<Subnet>> subnets = default;
+            IDictionary<string, string> tags = default;
+            IList<SecurityRule> securityRules = default;
+            IReadOnlyList<SecurityRule> defaultSecurityRules = default;
+            IReadOnlyList<NetworkInterface> networkInterfaces = default;
+            IReadOnlyList<Subnet> subnets = default;
             Optional<string> resourceGuid = default;
             Optional<ProvisioningState> provisioningState = default;
             foreach (var property in element.EnumerateObject())
@@ -195,7 +195,19 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new NetworkSecurityGroup(id.Value, name.Value, type.Value, location.Value, Optional.ToDictionary(tags), etag.Value, Optional.ToList(securityRules), Optional.ToList(defaultSecurityRules), Optional.ToList(networkInterfaces), Optional.ToList(subnets), resourceGuid.Value, Optional.ToNullable(provisioningState));
+            return new NetworkSecurityGroup(
+                id.Value,
+                name.Value,
+                type.Value,
+                location.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                etag.Value,
+                securityRules ?? new ChangeTrackingList<SecurityRule>(),
+                defaultSecurityRules ?? new ChangeTrackingList<SecurityRule>(),
+                networkInterfaces ?? new ChangeTrackingList<NetworkInterface>(),
+                subnets ?? new ChangeTrackingList<Subnet>(),
+                resourceGuid.Value,
+                Optional.ToNullable(provisioningState));
         }
     }
 }

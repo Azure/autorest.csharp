@@ -160,17 +160,17 @@ namespace Azure.ResourceManager.Sample
             {
                 return null;
             }
-            Optional<IList<string>> zones = default;
-            Optional<IList<Uri>> hostUris = default;
+            IList<string> zones = default;
+            IList<Uri> hostUris = default;
             Optional<Guid> tenantId = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             Optional<SystemData> systemData = default;
             Optional<int> platformFaultDomainCount = default;
-            Optional<IReadOnlyList<Resources.Models.SubResource>> hosts = default;
+            IReadOnlyList<Resources.Models.SubResource> hosts = default;
             Optional<DedicatedHostGroupInstanceView> instanceView = default;
             Optional<bool> supportAutomaticPlacement = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
@@ -323,7 +323,21 @@ namespace Azure.ResourceManager.Sample
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DedicatedHostGroupData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, Optional.ToList(zones), Optional.ToList(hostUris), Optional.ToNullable(tenantId), Optional.ToNullable(platformFaultDomainCount), Optional.ToList(hosts), instanceView.Value, Optional.ToNullable(supportAutomaticPlacement), serializedAdditionalRawData);
+            return new DedicatedHostGroupData(
+                id,
+                name,
+                type,
+                systemData.Value,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                zones ?? new ChangeTrackingList<string>(),
+                hostUris ?? new ChangeTrackingList<Uri>(),
+                Optional.ToNullable(tenantId),
+                Optional.ToNullable(platformFaultDomainCount),
+                hosts ?? new ChangeTrackingList<Resources.Models.SubResource>(),
+                instanceView.Value,
+                Optional.ToNullable(supportAutomaticPlacement),
+                serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

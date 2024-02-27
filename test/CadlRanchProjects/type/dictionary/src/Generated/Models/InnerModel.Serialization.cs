@@ -79,7 +79,7 @@ namespace _Type._Dictionary.Models
                 return null;
             }
             string property = default;
-            Optional<IDictionary<string, InnerModel>> children = default;
+            IDictionary<string, InnerModel> children = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property0 in element.EnumerateObject())
@@ -109,7 +109,7 @@ namespace _Type._Dictionary.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new InnerModel(property, Optional.ToDictionary(children), serializedAdditionalRawData);
+            return new InnerModel(property, children ?? new ChangeTrackingDictionary<string, InnerModel>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<InnerModel>.Write(ModelReaderWriterOptions options)
