@@ -30,7 +30,7 @@ namespace MgmtNonStringPathVariable.Models
             {
                 return null;
             }
-            Guid buzz = default;
+            Guid? buzz = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("buzz"u8))

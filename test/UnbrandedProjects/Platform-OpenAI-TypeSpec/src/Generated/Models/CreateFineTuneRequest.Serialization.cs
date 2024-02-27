@@ -195,7 +195,7 @@ namespace OpenAI.Models
             }
             string trainingFile = default;
             string validationFile = default;
-            CreateFineTuneRequestModel model = default;
+            CreateFineTuneRequestModel? model = default;
             long? nEpochs = default;
             long? batchSize = default;
             double? learningRateMultiplier = default;

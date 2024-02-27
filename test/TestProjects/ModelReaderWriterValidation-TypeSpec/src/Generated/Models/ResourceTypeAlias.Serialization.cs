@@ -102,7 +102,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             }
             string name = default;
             IReadOnlyList<ResourceTypeAliasPath> paths = default;
-            ResourceTypeAliasType aliasType = default;
+            ResourceTypeAliasType? aliasType = default;
             string defaultPath = default;
             ResourceTypeAliasPattern defaultPattern = default;
             ResourceTypeAliasPathMetadata defaultMetadata = default;

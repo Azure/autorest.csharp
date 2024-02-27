@@ -674,7 +674,7 @@ namespace NameConflicts.Models
             string @where = default;
             string @while = default;
             string @yield = default;
-            SystemEnum system = default;
+            SystemEnum? system = default;
             string toString = default;
             string @equals = default;
             string getHashCode = default;

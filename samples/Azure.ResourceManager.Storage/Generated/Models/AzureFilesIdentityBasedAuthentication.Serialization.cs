@@ -38,7 +38,7 @@ namespace Azure.ResourceManager.Storage.Models
             }
             DirectoryServiceOption directoryServiceOptions = default;
             ActiveDirectoryProperties activeDirectoryProperties = default;
-            DefaultSharePermission defaultSharePermission = default;
+            DefaultSharePermission? defaultSharePermission = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("directoryServiceOptions"u8))

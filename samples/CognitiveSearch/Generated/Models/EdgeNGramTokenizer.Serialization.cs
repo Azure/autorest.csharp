@@ -49,8 +49,8 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            int minGram = default;
-            int maxGram = default;
+            int? minGram = default;
+            int? maxGram = default;
             IList<TokenCharacterKind> tokenChars = default;
             string odataType = default;
             string name = default;

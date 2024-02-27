@@ -117,16 +117,16 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            OperatingSystemType osType = default;
+            OperatingSystemType? osType = default;
             DiskEncryptionSettings encryptionSettings = default;
             string name = default;
             VirtualHardDisk vhd = default;
             VirtualHardDisk image = default;
-            CachingType caching = default;
-            bool writeAcceleratorEnabled = default;
+            CachingType? caching = default;
+            bool? writeAcceleratorEnabled = default;
             DiffDiskSettings diffDiskSettings = default;
             DiskCreateOptionType createOption = default;
-            int diskSizeGB = default;
+            int? diskSizeGB = default;
             ManagedDiskParameters managedDisk = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();

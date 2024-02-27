@@ -43,7 +43,7 @@ namespace MgmtAcronymMapping.Models
                 return null;
             }
             string name = default;
-            int idleTimeoutInMinutes = default;
+            int? idleTimeoutInMinutes = default;
             VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings dnsSettings = default;
             foreach (var property in element.EnumerateObject())
             {

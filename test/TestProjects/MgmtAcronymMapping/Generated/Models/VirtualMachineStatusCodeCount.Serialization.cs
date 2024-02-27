@@ -18,7 +18,7 @@ namespace MgmtAcronymMapping.Models
                 return null;
             }
             string code = default;
-            int count = default;
+            int? count = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("code"u8))

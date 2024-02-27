@@ -74,8 +74,8 @@ namespace multiple_inheritance.Models
             {
                 return null;
             }
-            bool meows = default;
-            bool hisses = default;
+            bool? meows = default;
+            bool? hisses = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

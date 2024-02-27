@@ -98,13 +98,13 @@ namespace validation.Models
                 return null;
             }
             IList<string> displayNames = default;
-            int capacity = default;
+            int? capacity = default;
             string image = default;
             ChildProduct child = default;
             ConstantProduct constChild = default;
             ProductConstInt constInt = default;
             ProductConstString constString = default;
-            EnumConst constStringAsEnum = default;
+            EnumConst? constStringAsEnum = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

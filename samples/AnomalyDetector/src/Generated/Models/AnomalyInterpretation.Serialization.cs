@@ -81,7 +81,7 @@ namespace AnomalyDetector.Models
                 return null;
             }
             string variable = default;
-            float contributionScore = default;
+            float? contributionScore = default;
             CorrelationChanges correlationChanges = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();

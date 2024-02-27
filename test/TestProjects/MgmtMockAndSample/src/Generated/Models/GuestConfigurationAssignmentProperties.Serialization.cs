@@ -31,7 +31,7 @@ namespace MgmtMockAndSample.Models
                 return null;
             }
             string targetResourceId = default;
-            ComplianceStatus complianceStatus = default;
+            ComplianceStatus? complianceStatus = default;
             DateTimeOffset? lastComplianceStatusChecked = default;
             string latestReportId = default;
             string parameterHash = default;

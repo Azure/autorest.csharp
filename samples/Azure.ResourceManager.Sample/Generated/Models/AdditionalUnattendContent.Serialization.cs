@@ -85,9 +85,9 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            PassName passName = default;
-            ComponentName componentName = default;
-            SettingName settingName = default;
+            PassName? passName = default;
+            ComponentName? componentName = default;
+            SettingName? settingName = default;
             string content = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();

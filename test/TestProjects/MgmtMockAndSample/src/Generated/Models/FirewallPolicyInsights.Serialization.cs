@@ -39,8 +39,8 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            bool isEnabled = default;
-            int retentionDays = default;
+            bool? isEnabled = default;
+            int? retentionDays = default;
             FirewallPolicyLogAnalyticsResources logAnalyticsResources = default;
             foreach (var property in element.EnumerateObject())
             {

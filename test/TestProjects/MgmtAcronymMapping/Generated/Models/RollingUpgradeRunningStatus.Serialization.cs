@@ -19,10 +19,10 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            RollingUpgradeStatusCode code = default;
-            DateTimeOffset startTime = default;
-            RollingUpgradeActionType lastAction = default;
-            DateTimeOffset lastActionTime = default;
+            RollingUpgradeStatusCode? code = default;
+            DateTimeOffset? startTime = default;
+            RollingUpgradeActionType? lastAction = default;
+            DateTimeOffset? lastActionTime = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("code"u8))

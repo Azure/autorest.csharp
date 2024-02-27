@@ -115,10 +115,10 @@ namespace MgmtAcronymMapping.Models
             string name = default;
             string id = default;
             WritableSubResource subnet = default;
-            bool primary = default;
+            bool? primary = default;
             VirtualMachineScaleSetPublicIPAddressConfiguration publicIPAddressConfiguration = default;
             IList<IPAddress> ipAddresses = default;
-            IPVersion privateIPAddressVersion = default;
+            IPVersion? privateIPAddressVersion = default;
             IList<WritableSubResource> applicationGatewayBackendAddressPools = default;
             IList<WritableSubResource> applicationSecurityGroups = default;
             IList<WritableSubResource> loadBalancerBackendAddressPools = default;

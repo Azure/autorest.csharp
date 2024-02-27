@@ -70,7 +70,7 @@ namespace MgmtExtensionResource.Models
             {
                 return null;
             }
-            ParameterType type = default;
+            ParameterType? type = default;
             IList<BinaryData> allowedValues = default;
             BinaryData defaultValue = default;
             ParameterDefinitionsValueMetadata metadata = default;

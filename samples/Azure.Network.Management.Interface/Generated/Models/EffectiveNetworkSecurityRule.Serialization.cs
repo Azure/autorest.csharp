@@ -20,7 +20,7 @@ namespace Azure.Network.Management.Interface.Models
                 return null;
             }
             string name = default;
-            EffectiveSecurityRuleProtocol protocol = default;
+            EffectiveSecurityRuleProtocol? protocol = default;
             string sourcePortRange = default;
             string destinationPortRange = default;
             IReadOnlyList<string> sourcePortRanges = default;
@@ -31,9 +31,9 @@ namespace Azure.Network.Management.Interface.Models
             IReadOnlyList<string> destinationAddressPrefixes = default;
             IReadOnlyList<string> expandedSourceAddressPrefix = default;
             IReadOnlyList<string> expandedDestinationAddressPrefix = default;
-            SecurityRuleAccess access = default;
-            int priority = default;
-            SecurityRuleDirection direction = default;
+            SecurityRuleAccess? access = default;
+            int? priority = default;
+            SecurityRuleDirection? direction = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))

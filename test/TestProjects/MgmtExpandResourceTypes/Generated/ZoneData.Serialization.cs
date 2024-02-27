@@ -96,14 +96,14 @@ namespace MgmtExpandResourceTypes
             string name = default;
             ResourceType type = default;
             SystemData systemData = default;
-            long maxNumberOfRecordSets = default;
-            long maxNumberOfRecordsPerRecordSet = default;
-            long numberOfRecordSets = default;
+            long? maxNumberOfRecordSets = default;
+            long? maxNumberOfRecordsPerRecordSet = default;
+            long? numberOfRecordSets = default;
             IReadOnlyList<string> nameServers = default;
-            ZoneType zoneType = default;
-            MachineType machineType = default;
-            StorageType storageType = default;
-            MemoryType memoryType = default;
+            ZoneType? zoneType = default;
+            MachineType? machineType = default;
+            StorageType? storageType = default;
+            MemoryType? memoryType = default;
             IList<WritableSubResource> registrationVirtualNetworks = default;
             IList<WritableSubResource> resolutionVirtualNetworks = default;
             foreach (var property in element.EnumerateObject())

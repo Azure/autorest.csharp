@@ -50,10 +50,10 @@ namespace Azure.ResourceManager.Fake.Models
                 return null;
             }
             string name = default;
-            MgmtReferenceTypesSkuTier tier = default;
+            MgmtReferenceTypesSkuTier? tier = default;
             string size = default;
             string family = default;
-            int capacity = default;
+            int? capacity = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))

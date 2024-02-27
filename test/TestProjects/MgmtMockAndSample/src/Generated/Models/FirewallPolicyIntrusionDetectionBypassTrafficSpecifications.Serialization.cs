@@ -92,7 +92,7 @@ namespace MgmtMockAndSample.Models
             }
             string name = default;
             string description = default;
-            FirewallPolicyIntrusionDetectionProtocol protocol = default;
+            FirewallPolicyIntrusionDetectionProtocol? protocol = default;
             IList<string> sourceAddresses = default;
             IList<string> destinationAddresses = default;
             IList<string> destinationPorts = default;

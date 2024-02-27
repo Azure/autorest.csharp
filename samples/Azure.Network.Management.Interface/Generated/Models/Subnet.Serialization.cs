@@ -125,7 +125,7 @@ namespace Azure.Network.Management.Interface.Models
             IReadOnlyList<ServiceAssociationLink> serviceAssociationLinks = default;
             IList<Delegation> delegations = default;
             string purpose = default;
-            ProvisioningState provisioningState = default;
+            ProvisioningState? provisioningState = default;
             string privateEndpointNetworkPolicies = default;
             string privateLinkServiceNetworkPolicies = default;
             foreach (var property in element.EnumerateObject())

@@ -34,8 +34,8 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            bool enableAutomaticOSUpgrade = default;
-            bool disableAutomaticRollback = default;
+            bool? enableAutomaticOSUpgrade = default;
+            bool? disableAutomaticRollback = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("enableAutomaticOSUpgrade"u8))

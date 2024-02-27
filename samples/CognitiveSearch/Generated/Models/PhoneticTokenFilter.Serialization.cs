@@ -38,8 +38,8 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            PhoneticEncoder encoder = default;
-            bool replace = default;
+            PhoneticEncoder? encoder = default;
+            bool? replace = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())

@@ -61,11 +61,11 @@ namespace MgmtExpandResourceTypes.Models
             }
             string host = default;
             string email = default;
-            long serialNumber = default;
-            long refreshTime = default;
-            long retryTime = default;
-            long expireTime = default;
-            long minimumTTL = default;
+            long? serialNumber = default;
+            long? refreshTime = default;
+            long? retryTime = default;
+            long? expireTime = default;
+            long? minimumTTL = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("host"u8))

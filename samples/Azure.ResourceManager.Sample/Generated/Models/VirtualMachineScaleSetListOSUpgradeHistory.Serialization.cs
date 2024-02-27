@@ -85,7 +85,7 @@ namespace Azure.ResourceManager.Sample.Models
                 return null;
             }
             IReadOnlyList<UpgradeOperationHistoricalStatusInfo> value = default;
-            ETag etag = default;
+            ETag? etag = default;
             string nextLink = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();

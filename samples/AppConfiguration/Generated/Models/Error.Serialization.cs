@@ -21,7 +21,7 @@ namespace AppConfiguration.Models
             string title = default;
             string name = default;
             string detail = default;
-            int status = default;
+            int? status = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("type"u8))

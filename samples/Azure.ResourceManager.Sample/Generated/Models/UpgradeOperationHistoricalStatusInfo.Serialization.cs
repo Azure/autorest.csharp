@@ -82,7 +82,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
             UpgradeOperationHistoricalStatusInfoProperties properties = default;
             string type = default;
-            AzureLocation location = default;
+            AzureLocation? location = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

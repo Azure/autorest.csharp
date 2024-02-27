@@ -33,7 +33,7 @@ namespace CognitiveSearch.Models
                 return null;
             }
             TimeSpan interval = default;
-            DateTimeOffset startTime = default;
+            DateTimeOffset? startTime = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("interval"u8))

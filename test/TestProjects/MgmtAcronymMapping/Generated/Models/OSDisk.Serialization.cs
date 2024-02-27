@@ -76,16 +76,16 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            OperatingSystemType osType = default;
+            OperatingSystemType? osType = default;
             DiskEncryptionSettings encryptionSettings = default;
             string name = default;
             VirtualHardDisk vhd = default;
             VirtualHardDisk image = default;
-            CachingType caching = default;
-            bool writeAcceleratorEnabled = default;
+            CachingType? caching = default;
+            bool? writeAcceleratorEnabled = default;
             DiffDiskSettings diffDiskSettings = default;
             DiskCreateOptionType createOption = default;
-            int diskSizeGB = default;
+            int? diskSizeGB = default;
             ManagedDiskParameters managedDisk = default;
             foreach (var property in element.EnumerateObject())
             {

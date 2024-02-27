@@ -29,7 +29,7 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            double maxPrice = default;
+            double? maxPrice = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("maxPrice"u8))

@@ -41,7 +41,7 @@ namespace MgmtAcronymMapping.Models
             }
             KeyVaultSecretReference diskEncryptionKey = default;
             KeyVaultKeyReference keyEncryptionKey = default;
-            bool enabled = default;
+            bool? enabled = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("diskEncryptionKey"u8))

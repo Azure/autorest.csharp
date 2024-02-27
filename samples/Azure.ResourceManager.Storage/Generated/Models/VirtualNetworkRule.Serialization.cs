@@ -37,8 +37,8 @@ namespace Azure.ResourceManager.Storage.Models
                 return null;
             }
             string id = default;
-            Action action = default;
-            State state = default;
+            Action? action = default;
+            State? state = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))

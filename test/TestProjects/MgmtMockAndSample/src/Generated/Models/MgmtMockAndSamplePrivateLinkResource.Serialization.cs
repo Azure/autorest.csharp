@@ -39,7 +39,7 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            AzureLocation location = default;
+            AzureLocation? location = default;
             IReadOnlyDictionary<string, string> tags = default;
             ResourceIdentifier id = default;
             string name = default;

@@ -88,7 +88,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
             ImageOSDisk osDisk = default;
             IList<ImageDataDisk> dataDisks = default;
-            bool zoneResilient = default;
+            bool? zoneResilient = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

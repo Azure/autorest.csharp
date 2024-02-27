@@ -139,7 +139,7 @@ namespace Azure.Network.Management.Interface.Models
             IList<InboundNatPool> inboundNatPools = default;
             IList<OutboundRule> outboundRules = default;
             string resourceGuid = default;
-            ProvisioningState provisioningState = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sku"u8))

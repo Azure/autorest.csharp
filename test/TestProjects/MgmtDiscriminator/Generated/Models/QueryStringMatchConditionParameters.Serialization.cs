@@ -97,7 +97,7 @@ namespace MgmtDiscriminator.Models
             }
             QueryStringMatchConditionParametersTypeName typeName = default;
             QueryStringOperator @operator = default;
-            bool negateCondition = default;
+            bool? negateCondition = default;
             IList<string> matchValues = default;
             IList<Transform> transforms = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;

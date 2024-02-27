@@ -56,7 +56,7 @@ namespace MgmtMockAndSample.Models
             IList<FirewallPolicyRule> rules = default;
             FirewallPolicyRuleCollectionType ruleCollectionType = default;
             string name = default;
-            int priority = default;
+            int? priority = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("action"u8))

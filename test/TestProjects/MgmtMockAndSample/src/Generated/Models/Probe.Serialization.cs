@@ -52,11 +52,11 @@ namespace MgmtMockAndSample.Models
                 return null;
             }
             bool disableProbe = default;
-            int initialDelaySeconds = default;
-            int periodSeconds = default;
-            int timeoutSeconds = default;
-            int failureThreshold = default;
-            int successThreshold = default;
+            int? initialDelaySeconds = default;
+            int? periodSeconds = default;
+            int? timeoutSeconds = default;
+            int? failureThreshold = default;
+            int? successThreshold = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("disableProbe"u8))

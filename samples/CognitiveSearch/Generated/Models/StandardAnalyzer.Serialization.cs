@@ -44,7 +44,7 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            int maxTokenLength = default;
+            int? maxTokenLength = default;
             IList<string> stopwords = default;
             string odataType = default;
             string name = default;

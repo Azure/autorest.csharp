@@ -80,9 +80,9 @@ namespace AnomalyDetector.Models
             {
                 return null;
             }
-            AlignMode alignMode = default;
-            FillNAMethod fillNAMethod = default;
-            float paddingValue = default;
+            AlignMode? alignMode = default;
+            FillNAMethod? fillNAMethod = default;
+            float? paddingValue = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

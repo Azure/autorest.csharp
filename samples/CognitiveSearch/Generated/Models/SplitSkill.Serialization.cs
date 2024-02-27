@@ -78,8 +78,8 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            SplitSkillLanguage defaultLanguageCode = default;
-            TextSplitMode textSplitMode = default;
+            SplitSkillLanguage? defaultLanguageCode = default;
+            TextSplitMode? textSplitMode = default;
             int? maximumPageLength = default;
             string odataType = default;
             string name = default;

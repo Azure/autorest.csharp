@@ -17,10 +17,10 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            int successfulInstanceCount = default;
-            int failedInstanceCount = default;
-            int inProgressInstanceCount = default;
-            int pendingInstanceCount = default;
+            int? successfulInstanceCount = default;
+            int? failedInstanceCount = default;
+            int? inProgressInstanceCount = default;
+            int? pendingInstanceCount = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("successfulInstanceCount"u8))

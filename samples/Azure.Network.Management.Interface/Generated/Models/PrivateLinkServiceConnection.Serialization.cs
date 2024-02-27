@@ -67,7 +67,7 @@ namespace Azure.Network.Management.Interface.Models
             string type = default;
             string etag = default;
             string id = default;
-            ProvisioningState provisioningState = default;
+            ProvisioningState? provisioningState = default;
             string privateLinkServiceId = default;
             IList<string> groupIds = default;
             string requestMessage = default;

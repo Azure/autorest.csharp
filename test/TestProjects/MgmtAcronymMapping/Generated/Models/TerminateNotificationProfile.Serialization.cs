@@ -35,7 +35,7 @@ namespace MgmtAcronymMapping.Models
                 return null;
             }
             string notBeforeTimeout = default;
-            bool enable = default;
+            bool? enable = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("notBeforeTimeout"u8))

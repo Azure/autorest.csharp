@@ -79,7 +79,7 @@ namespace Azure.ResourceManager.Sample.Models
                 return null;
             }
             string id = default;
-            bool primary = default;
+            bool? primary = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

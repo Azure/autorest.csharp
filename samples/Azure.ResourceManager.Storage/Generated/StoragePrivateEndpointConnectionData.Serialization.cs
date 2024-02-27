@@ -46,7 +46,7 @@ namespace Azure.ResourceManager.Storage
             SystemData systemData = default;
             SubResource privateEndpoint = default;
             StoragePrivateLinkServiceConnectionState privateLinkServiceConnectionState = default;
-            StoragePrivateEndpointConnectionProvisioningState provisioningState = default;
+            StoragePrivateEndpointConnectionProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))

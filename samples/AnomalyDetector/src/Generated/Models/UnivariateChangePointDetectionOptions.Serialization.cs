@@ -96,10 +96,10 @@ namespace AnomalyDetector.Models
             }
             IList<TimeSeriesPoint> series = default;
             TimeGranularity granularity = default;
-            int customInterval = default;
-            int period = default;
-            int stableTrendWindow = default;
-            float threshold = default;
+            int? customInterval = default;
+            int? period = default;
+            int? stableTrendWindow = default;
+            float? threshold = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

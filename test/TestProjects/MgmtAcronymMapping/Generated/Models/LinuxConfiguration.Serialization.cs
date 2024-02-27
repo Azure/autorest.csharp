@@ -39,9 +39,9 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            bool disablePasswordAuthentication = default;
+            bool? disablePasswordAuthentication = default;
             SshConfiguration ssh = default;
-            bool provisionVmAgent = default;
+            bool? provisionVmAgent = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("disablePasswordAuthentication"u8))

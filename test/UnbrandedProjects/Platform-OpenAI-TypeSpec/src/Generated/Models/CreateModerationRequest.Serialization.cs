@@ -76,7 +76,7 @@ namespace OpenAI.Models
                 return null;
             }
             BinaryData input = default;
-            CreateModerationRequestModel model = default;
+            CreateModerationRequestModel? model = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

@@ -47,7 +47,7 @@ namespace Azure.Network.Management.Interface.Models
             string etag = default;
             string id = default;
             Subnet subnet = default;
-            ProvisioningState provisioningState = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))

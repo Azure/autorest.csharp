@@ -19,14 +19,14 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            PatchOperationStatus status = default;
+            PatchOperationStatus? status = default;
             string assessmentActivityId = default;
-            bool rebootPending = default;
-            int criticalAndSecurityPatchCount = default;
-            int otherPatchCount = default;
+            bool? rebootPending = default;
+            int? criticalAndSecurityPatchCount = default;
+            int? otherPatchCount = default;
             Uri uri = default;
-            DateTimeOffset startTime = default;
-            DateTimeOffset lastModifiedTime = default;
+            DateTimeOffset? startTime = default;
+            DateTimeOffset? lastModifiedTime = default;
             ApiError error = default;
             foreach (var property in element.EnumerateObject())
             {

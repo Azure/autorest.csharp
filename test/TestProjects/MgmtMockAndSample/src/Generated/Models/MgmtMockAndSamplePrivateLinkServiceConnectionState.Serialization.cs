@@ -39,9 +39,9 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            MgmtMockAndSamplePrivateEndpointServiceConnectionStatus status = default;
+            MgmtMockAndSamplePrivateEndpointServiceConnectionStatus? status = default;
             string description = default;
-            ActionsRequired actionsRequired = default;
+            ActionsRequired? actionsRequired = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("status"u8))

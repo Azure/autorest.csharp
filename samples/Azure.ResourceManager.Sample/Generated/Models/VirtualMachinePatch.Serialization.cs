@@ -214,8 +214,8 @@ namespace Azure.ResourceManager.Sample.Models
             WritableSubResource availabilitySet = default;
             WritableSubResource virtualMachineScaleSet = default;
             WritableSubResource proximityPlacementGroup = default;
-            VirtualMachinePriorityType priority = default;
-            VirtualMachineEvictionPolicyType evictionPolicy = default;
+            VirtualMachinePriorityType? priority = default;
+            VirtualMachineEvictionPolicyType? evictionPolicy = default;
             BillingProfile billingProfile = default;
             WritableSubResource host = default;
             WritableSubResource hostGroup = default;

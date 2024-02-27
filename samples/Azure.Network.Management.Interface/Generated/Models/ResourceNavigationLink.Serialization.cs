@@ -53,7 +53,7 @@ namespace Azure.Network.Management.Interface.Models
             string id = default;
             string linkedResourceType = default;
             string link = default;
-            ProvisioningState provisioningState = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))

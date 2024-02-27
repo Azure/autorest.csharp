@@ -30,9 +30,9 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            bool enabled = default;
-            DateTimeOffset timeStamp = default;
-            MigrationState migrationState = default;
+            bool? enabled = default;
+            DateTimeOffset? timeStamp = default;
+            MigrationState? migrationState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("enabled"u8))

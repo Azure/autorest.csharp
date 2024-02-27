@@ -20,12 +20,12 @@ namespace Azure.Network.Management.Interface.Models
                 return null;
             }
             string name = default;
-            bool disableBgpRoutePropagation = default;
-            EffectiveRouteSource source = default;
-            EffectiveRouteState state = default;
+            bool? disableBgpRoutePropagation = default;
+            EffectiveRouteSource? source = default;
+            EffectiveRouteState? state = default;
             IReadOnlyList<string> addressPrefix = default;
             IReadOnlyList<string> nextHopIpAddress = default;
-            RouteNextHopType nextHopType = default;
+            RouteNextHopType? nextHopType = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))

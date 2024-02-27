@@ -111,12 +111,12 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            PatchOperationStatus status = default;
+            PatchOperationStatus? status = default;
             string assessmentActivityId = default;
-            bool rebootPending = default;
-            int criticalAndSecurityPatchCount = default;
-            int otherPatchCount = default;
-            DateTimeOffset startDateTime = default;
+            bool? rebootPending = default;
+            int? criticalAndSecurityPatchCount = default;
+            int? otherPatchCount = default;
+            DateTimeOffset? startDateTime = default;
             IReadOnlyList<VirtualMachineSoftwarePatchProperties> patches = default;
             ApiError error = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;

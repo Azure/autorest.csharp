@@ -34,7 +34,7 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            FirewallPolicyIntrusionDetectionStateType mode = default;
+            FirewallPolicyIntrusionDetectionStateType? mode = default;
             FirewallPolicyIntrusionDetectionConfiguration configuration = default;
             foreach (var property in element.EnumerateObject())
             {

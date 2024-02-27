@@ -37,9 +37,9 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            bool hasLegalHold = default;
+            bool? hasLegalHold = default;
             IList<string> tags = default;
-            bool allowProtectedAppendWritesAll = default;
+            bool? allowProtectedAppendWritesAll = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("hasLegalHold"u8))

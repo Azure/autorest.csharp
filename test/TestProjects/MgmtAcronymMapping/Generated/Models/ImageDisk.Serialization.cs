@@ -64,9 +64,9 @@ namespace MgmtAcronymMapping.Models
             WritableSubResource snapshot = default;
             WritableSubResource managedDisk = default;
             Uri blobUri = default;
-            CachingType caching = default;
-            int diskSizeGB = default;
-            StorageAccountType storageAccountType = default;
+            CachingType? caching = default;
+            int? diskSizeGB = default;
+            StorageAccountType? storageAccountType = default;
             WritableSubResource diskEncryptionSet = default;
             foreach (var property in element.EnumerateObject())
             {

@@ -53,7 +53,7 @@ namespace MgmtMockAndSample.Models
                 return null;
             }
             IList<string> servers = default;
-            bool enableProxy = default;
+            bool? enableProxy = default;
             bool? requireProxyForNetworkRules = default;
             foreach (var property in element.EnumerateObject())
             {

@@ -120,23 +120,23 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            bool count = default;
+            bool? count = default;
             IList<string> facets = default;
             string filter = default;
             string highlight = default;
             string highlightPostTag = default;
             string highlightPreTag = default;
-            double minimumCoverage = default;
+            double? minimumCoverage = default;
             string orderby = default;
-            QueryType queryType = default;
+            QueryType? queryType = default;
             IList<string> scoringParameters = default;
             string scoringProfile = default;
             string search = default;
             string searchFields = default;
-            SearchMode searchMode = default;
+            SearchMode? searchMode = default;
             string select = default;
-            int skip = default;
-            int top = default;
+            int? skip = default;
+            int? top = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("count"u8))

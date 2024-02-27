@@ -33,7 +33,7 @@ namespace Azure.ResourceManager.Storage
             ResourceType type = default;
             SystemData systemData = default;
             string storageAccountResourceId = default;
-            AzureLocation location = default;
+            AzureLocation? location = default;
             string restoreReference = default;
             string creationTime = default;
             string deletionTime = default;

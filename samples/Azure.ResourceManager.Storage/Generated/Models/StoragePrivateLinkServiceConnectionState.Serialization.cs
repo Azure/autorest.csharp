@@ -39,7 +39,7 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            StoragePrivateEndpointServiceConnectionStatus status = default;
+            StoragePrivateEndpointServiceConnectionStatus? status = default;
             string description = default;
             string actionRequired = default;
             foreach (var property in element.EnumerateObject())

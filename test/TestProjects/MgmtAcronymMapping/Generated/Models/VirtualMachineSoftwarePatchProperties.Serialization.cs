@@ -25,11 +25,11 @@ namespace MgmtAcronymMapping.Models
             string version = default;
             string kbid = default;
             IReadOnlyList<string> classifications = default;
-            SoftwareUpdateRebootBehavior rebootBehavior = default;
+            SoftwareUpdateRebootBehavior? rebootBehavior = default;
             string activityId = default;
-            DateTimeOffset publishedDate = default;
-            DateTimeOffset lastModifiedDateTime = default;
-            PatchAssessmentState assessmentState = default;
+            DateTimeOffset? publishedDate = default;
+            DateTimeOffset? lastModifiedDateTime = default;
+            PatchAssessmentState? assessmentState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("patchId"u8))

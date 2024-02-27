@@ -104,7 +104,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 return null;
             }
             IList<string> fields = default;
-            int nullProperty = default;
+            int? nullProperty = default;
             IDictionary<string, string> keyValuePairs = default;
             int xProperty = default;
             string kind = default;

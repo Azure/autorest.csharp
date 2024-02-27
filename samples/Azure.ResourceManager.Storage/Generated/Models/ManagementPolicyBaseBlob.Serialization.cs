@@ -47,7 +47,7 @@ namespace Azure.ResourceManager.Storage.Models
             DateAfterModification tierToCool = default;
             DateAfterModification tierToArchive = default;
             DateAfterModification delete = default;
-            bool enableAutoTierToHotFromCool = default;
+            bool? enableAutoTierToHotFromCool = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("tierToCool"u8))

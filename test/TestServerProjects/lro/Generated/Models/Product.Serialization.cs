@@ -114,7 +114,7 @@ namespace lro.Models
             string location = default;
             string name = default;
             string provisioningState = default;
-            ProductPropertiesProvisioningStateValues provisioningStateValues = default;
+            ProductPropertiesProvisioningStateValues? provisioningStateValues = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

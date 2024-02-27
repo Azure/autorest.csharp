@@ -19,8 +19,8 @@ namespace MgmtAcronymMapping.Models
                 return null;
             }
             UpgradeOperationHistoricalStatusInfoProperties properties = default;
-            ResourceType type = default;
-            AzureLocation location = default;
+            ResourceType? type = default;
+            AzureLocation? location = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("properties"u8))

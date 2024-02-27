@@ -127,8 +127,8 @@ namespace Azure.ResourceManager.Sample.Models
             DiagnosticsProfile diagnosticsProfile = default;
             VirtualMachineScaleSetExtensionProfile extensionProfile = default;
             string licenseType = default;
-            VirtualMachinePriorityType priority = default;
-            VirtualMachineEvictionPolicyType evictionPolicy = default;
+            VirtualMachinePriorityType? priority = default;
+            VirtualMachineEvictionPolicyType? evictionPolicy = default;
             BillingProfile billingProfile = default;
             ScheduledEventsProfile scheduledEventsProfile = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;

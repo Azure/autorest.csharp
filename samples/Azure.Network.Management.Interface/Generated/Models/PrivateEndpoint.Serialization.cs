@@ -82,7 +82,7 @@ namespace Azure.Network.Management.Interface.Models
             IDictionary<string, string> tags = default;
             Subnet subnet = default;
             IReadOnlyList<NetworkInterface> networkInterfaces = default;
-            ProvisioningState provisioningState = default;
+            ProvisioningState? provisioningState = default;
             IList<PrivateLinkServiceConnection> privateLinkServiceConnections = default;
             IList<PrivateLinkServiceConnection> manualPrivateLinkServiceConnections = default;
             foreach (var property in element.EnumerateObject())

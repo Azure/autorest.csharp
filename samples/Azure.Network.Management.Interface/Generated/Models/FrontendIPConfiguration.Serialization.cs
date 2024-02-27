@@ -88,12 +88,12 @@ namespace Azure.Network.Management.Interface.Models
             IReadOnlyList<SubResource> outboundRules = default;
             IReadOnlyList<SubResource> loadBalancingRules = default;
             string privateIPAddress = default;
-            IPAllocationMethod privateIPAllocationMethod = default;
-            IPVersion privateIPAddressVersion = default;
+            IPAllocationMethod? privateIPAllocationMethod = default;
+            IPVersion? privateIPAddressVersion = default;
             Subnet subnet = default;
             PublicIPAddress publicIPAddress = default;
             SubResource publicIPPrefix = default;
-            ProvisioningState provisioningState = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))

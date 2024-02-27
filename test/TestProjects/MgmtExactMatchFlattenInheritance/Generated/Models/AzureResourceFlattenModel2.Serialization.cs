@@ -44,7 +44,7 @@ namespace MgmtExactMatchFlattenInheritance.Models
             {
                 return null;
             }
-            int foo = default;
+            int? foo = default;
             IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;

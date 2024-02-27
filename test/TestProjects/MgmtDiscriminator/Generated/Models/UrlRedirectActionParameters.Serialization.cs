@@ -96,7 +96,7 @@ namespace MgmtDiscriminator.Models
             }
             UrlRedirectActionParametersTypeName typeName = default;
             RedirectType redirectType = default;
-            DestinationProtocol destinationProtocol = default;
+            DestinationProtocol? destinationProtocol = default;
             string customPath = default;
             string customHostname = default;
             string customQueryString = default;

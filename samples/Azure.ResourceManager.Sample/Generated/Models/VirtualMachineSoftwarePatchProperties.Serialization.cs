@@ -126,11 +126,11 @@ namespace Azure.ResourceManager.Sample.Models
             string version = default;
             string kbid = default;
             IReadOnlyList<string> classifications = default;
-            SoftwareUpdateRebootBehavior rebootBehavior = default;
+            SoftwareUpdateRebootBehavior? rebootBehavior = default;
             string activityId = default;
-            DateTimeOffset publishedDate = default;
-            DateTimeOffset lastModifiedDateTime = default;
-            PatchAssessmentState assessmentState = default;
+            DateTimeOffset? publishedDate = default;
+            DateTimeOffset? lastModifiedDateTime = default;
+            PatchAssessmentState? assessmentState = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

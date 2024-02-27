@@ -20,7 +20,7 @@ namespace Azure.AI.FormRecognizer.Models
                 return null;
             }
             int page = default;
-            int clusterId = default;
+            int? clusterId = default;
             IReadOnlyList<KeyValuePair> keyValuePairs = default;
             IReadOnlyList<DataTable> tables = default;
             foreach (var property in element.EnumerateObject())

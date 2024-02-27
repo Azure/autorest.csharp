@@ -35,9 +35,9 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            bool enabled = default;
-            DateTimeOffset lastEnabledTime = default;
-            KeyType keyType = default;
+            bool? enabled = default;
+            DateTimeOffset? lastEnabledTime = default;
+            KeyType? keyType = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("enabled"u8))

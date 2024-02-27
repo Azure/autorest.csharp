@@ -71,10 +71,10 @@ namespace additionalProperties.Models
             {
                 return null;
             }
-            bool friendly = default;
+            bool? friendly = default;
             int id = default;
             string name = default;
-            bool status = default;
+            bool? status = default;
             IDictionary<string, object> additionalProperties = default;
             Dictionary<string, object> additionalPropertiesDictionary = new Dictionary<string, object>();
             foreach (var property in element.EnumerateObject())

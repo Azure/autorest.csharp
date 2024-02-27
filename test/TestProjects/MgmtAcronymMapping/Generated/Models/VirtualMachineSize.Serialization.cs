@@ -18,11 +18,11 @@ namespace MgmtAcronymMapping.Models
                 return null;
             }
             string name = default;
-            int numberOfCores = default;
-            int osDiskSizeInMB = default;
-            int resourceDiskSizeInMB = default;
-            int memoryInMB = default;
-            int maxDataDiskCount = default;
+            int? numberOfCores = default;
+            int? osDiskSizeInMB = default;
+            int? resourceDiskSizeInMB = default;
+            int? memoryInMB = default;
+            int? maxDataDiskCount = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))

@@ -19,9 +19,9 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            UpgradeState code = default;
-            DateTimeOffset startTime = default;
-            DateTimeOffset endTime = default;
+            UpgradeState? code = default;
+            DateTimeOffset? startTime = default;
+            DateTimeOffset? endTime = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("code"u8))

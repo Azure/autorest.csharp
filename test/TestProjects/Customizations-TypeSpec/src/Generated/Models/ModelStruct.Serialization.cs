@@ -78,7 +78,7 @@ namespace CustomizationsInTsp.Models
             options ??= new ModelReaderWriterOptions("W");
 
             int requiredInt = default;
-            int optionalInt = default;
+            int? optionalInt = default;
             string optionalString = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();

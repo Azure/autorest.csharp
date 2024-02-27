@@ -79,7 +79,7 @@ namespace MgmtDiscriminator.Models
             UrlRewriteActionParametersTypeName typeName = default;
             string sourcePattern = default;
             string destination = default;
-            bool preserveUnmatchedPath = default;
+            bool? preserveUnmatchedPath = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

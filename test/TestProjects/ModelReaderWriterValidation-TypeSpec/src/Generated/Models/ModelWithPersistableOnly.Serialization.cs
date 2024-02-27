@@ -103,7 +103,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             }
             string name = default;
             IList<string> fields = default;
-            int nullProperty = default;
+            int? nullProperty = default;
             IDictionary<string, string> keyValuePairs = default;
             int xProperty = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;

@@ -19,8 +19,8 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            bool allowProtectedAppendWritesAll = default;
-            DateTimeOffset timestamp = default;
+            bool? allowProtectedAppendWritesAll = default;
+            DateTimeOffset? timestamp = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("allowProtectedAppendWritesAll"u8))

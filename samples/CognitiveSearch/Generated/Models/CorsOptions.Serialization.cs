@@ -38,7 +38,7 @@ namespace CognitiveSearch.Models
                 return null;
             }
             IList<string> allowedOrigins = default;
-            long maxAgeInSeconds = default;
+            long? maxAgeInSeconds = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("allowedOrigins"u8))

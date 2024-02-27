@@ -36,8 +36,8 @@ namespace MgmtMockAndSample.Models
             }
             string id = default;
             string name = default;
-            AzureLocation location = default;
-            ResourceType type = default;
+            AzureLocation? location = default;
+            ResourceType? type = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))

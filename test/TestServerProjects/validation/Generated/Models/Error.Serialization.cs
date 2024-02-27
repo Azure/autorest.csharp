@@ -79,7 +79,7 @@ namespace validation.Models
             {
                 return null;
             }
-            int code = default;
+            int? code = default;
             string message = default;
             string fields = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;

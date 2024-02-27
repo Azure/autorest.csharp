@@ -101,8 +101,8 @@ namespace OpenAI.Models
             BinaryData image = default;
             BinaryData mask = default;
             long? n = default;
-            CreateImageEditRequestSize size = default;
-            CreateImageEditRequestResponseFormat responseFormat = default;
+            CreateImageEditRequestSize? size = default;
+            CreateImageEditRequestResponseFormat? responseFormat = default;
             string user = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();

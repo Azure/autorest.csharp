@@ -84,15 +84,15 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            bool generateWordParts = default;
-            bool generateNumberParts = default;
-            bool catenateWords = default;
-            bool catenateNumbers = default;
-            bool catenateAll = default;
-            bool splitOnCaseChange = default;
-            bool preserveOriginal = default;
-            bool splitOnNumerics = default;
-            bool stemEnglishPossessive = default;
+            bool? generateWordParts = default;
+            bool? generateNumberParts = default;
+            bool? catenateWords = default;
+            bool? catenateNumbers = default;
+            bool? catenateAll = default;
+            bool? splitOnCaseChange = default;
+            bool? preserveOriginal = default;
+            bool? splitOnNumerics = default;
+            bool? stemEnglishPossessive = default;
             IList<string> protectedWords = default;
             string odataType = default;
             string name = default;

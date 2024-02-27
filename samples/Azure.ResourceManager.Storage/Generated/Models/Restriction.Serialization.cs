@@ -21,7 +21,7 @@ namespace Azure.ResourceManager.Storage.Models
             }
             string type = default;
             IReadOnlyList<string> values = default;
-            ReasonCode reasonCode = default;
+            ReasonCode? reasonCode = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("type"u8))

@@ -82,7 +82,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             }
             string name = default;
             string tier = default;
-            long capacity = default;
+            long? capacity = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

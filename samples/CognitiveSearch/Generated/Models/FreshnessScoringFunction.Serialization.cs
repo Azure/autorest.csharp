@@ -41,7 +41,7 @@ namespace CognitiveSearch.Models
             string type = default;
             string fieldName = default;
             double boost = default;
-            ScoringFunctionInterpolation interpolation = default;
+            ScoringFunctionInterpolation? interpolation = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("freshness"u8))

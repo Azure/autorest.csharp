@@ -29,7 +29,7 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            LoadBalancerSkuName name = default;
+            LoadBalancerSkuName? name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))

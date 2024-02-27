@@ -116,10 +116,10 @@ namespace Azure.ResourceManager.Sample.Models
             }
             IList<string> zones = default;
             IDictionary<string, string> tags = default;
-            int platformFaultDomainCount = default;
+            int? platformFaultDomainCount = default;
             IReadOnlyList<Resources.Models.SubResource> hosts = default;
             DedicatedHostGroupInstanceView instanceView = default;
-            bool supportAutomaticPlacement = default;
+            bool? supportAutomaticPlacement = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

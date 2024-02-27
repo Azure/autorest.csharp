@@ -101,7 +101,7 @@ namespace body_complex.Models
                 }
             }
             string location = default;
-            bool iswild = default;
+            bool? iswild = default;
             string fishtype = "salmon";
             string species = default;
             float length = default;

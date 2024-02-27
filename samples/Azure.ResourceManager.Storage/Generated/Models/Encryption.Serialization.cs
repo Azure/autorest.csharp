@@ -48,7 +48,7 @@ namespace Azure.ResourceManager.Storage.Models
             }
             EncryptionServices services = default;
             KeySource keySource = default;
-            bool requireInfrastructureEncryption = default;
+            bool? requireInfrastructureEncryption = default;
             KeyVaultProperties keyvaultproperties = default;
             EncryptionIdentity identity = default;
             foreach (var property in element.EnumerateObject())

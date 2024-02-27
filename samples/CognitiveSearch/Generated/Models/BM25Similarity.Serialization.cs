@@ -36,8 +36,8 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            double k1 = default;
-            double b = default;
+            double? k1 = default;
+            double? b = default;
             string odataType = default;
             foreach (var property in element.EnumerateObject())
             {

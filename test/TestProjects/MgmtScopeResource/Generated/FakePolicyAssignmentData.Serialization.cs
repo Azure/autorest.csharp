@@ -117,7 +117,7 @@ namespace MgmtScopeResource
             IDictionary<string, ParameterValuesValue> parameters = default;
             string description = default;
             BinaryData metadata = default;
-            EnforcementMode enforcementMode = default;
+            EnforcementMode? enforcementMode = default;
             IList<NonComplianceMessage> nonComplianceMessages = default;
             foreach (var property in element.EnumerateObject())
             {

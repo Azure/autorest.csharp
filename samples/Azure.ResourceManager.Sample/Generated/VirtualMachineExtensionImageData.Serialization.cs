@@ -137,8 +137,8 @@ namespace Azure.ResourceManager.Sample
             string operatingSystem = default;
             string computeRole = default;
             string handlerSchema = default;
-            bool vmScaleSetEnabled = default;
-            bool supportsMultipleExtensions = default;
+            bool? vmScaleSetEnabled = default;
+            bool? supportsMultipleExtensions = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

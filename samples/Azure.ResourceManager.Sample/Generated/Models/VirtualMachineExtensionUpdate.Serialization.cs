@@ -137,8 +137,8 @@ namespace Azure.ResourceManager.Sample.Models
             string publisher = default;
             string type = default;
             string typeHandlerVersion = default;
-            bool autoUpgradeMinorVersion = default;
-            bool enableAutomaticUpgrade = default;
+            bool? autoUpgradeMinorVersion = default;
+            bool? enableAutomaticUpgrade = default;
             BinaryData settings = default;
             BinaryData protectedSettings = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;

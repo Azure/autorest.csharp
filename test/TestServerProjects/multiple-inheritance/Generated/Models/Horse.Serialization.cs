@@ -71,7 +71,7 @@ namespace multiple_inheritance.Models
             {
                 return null;
             }
-            bool isAShowHorse = default;
+            bool? isAShowHorse = default;
             string name = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();

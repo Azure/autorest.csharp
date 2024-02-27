@@ -29,7 +29,7 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            FirewallPolicyFilterRuleCollectionActionType type = default;
+            FirewallPolicyFilterRuleCollectionActionType? type = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("type"u8))

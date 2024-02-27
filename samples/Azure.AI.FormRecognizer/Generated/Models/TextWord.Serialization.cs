@@ -20,7 +20,7 @@ namespace Azure.AI.FormRecognizer.Models
             }
             string text = default;
             IReadOnlyList<float> boundingBox = default;
-            float confidence = default;
+            float? confidence = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("text"u8))

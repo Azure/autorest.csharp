@@ -123,8 +123,8 @@ namespace Azure.ResourceManager.Sample.Models
             WindowsConfiguration windowsConfiguration = default;
             LinuxConfiguration linuxConfiguration = default;
             IList<VaultSecretGroup> secrets = default;
-            bool allowExtensionOperations = default;
-            bool requireGuestProvisionSignal = default;
+            bool? allowExtensionOperations = default;
+            bool? requireGuestProvisionSignal = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

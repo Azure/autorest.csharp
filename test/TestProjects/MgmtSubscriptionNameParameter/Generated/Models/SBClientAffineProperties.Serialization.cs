@@ -40,8 +40,8 @@ namespace MgmtSubscriptionNameParameter.Models
                 return null;
             }
             string clientId = default;
-            bool isDurable = default;
-            bool isShared = default;
+            bool? isDurable = default;
+            bool? isShared = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("clientId"u8))

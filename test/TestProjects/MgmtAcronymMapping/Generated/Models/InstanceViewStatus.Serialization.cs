@@ -51,10 +51,10 @@ namespace MgmtAcronymMapping.Models
                 return null;
             }
             string code = default;
-            StatusLevelType level = default;
+            StatusLevelType? level = default;
             string displayStatus = default;
             string message = default;
-            DateTimeOffset time = default;
+            DateTimeOffset? time = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("code"u8))

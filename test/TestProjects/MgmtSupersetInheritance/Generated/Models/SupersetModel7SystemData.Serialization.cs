@@ -20,7 +20,7 @@ namespace MgmtSupersetInheritance.Models
                 return null;
             }
             string createdBy = default;
-            DateTimeOffset createdAt = default;
+            DateTimeOffset? createdAt = default;
             string lastModifiedBy = default;
             foreach (var property in element.EnumerateObject())
             {

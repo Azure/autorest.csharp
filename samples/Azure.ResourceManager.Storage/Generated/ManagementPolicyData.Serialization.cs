@@ -39,7 +39,7 @@ namespace Azure.ResourceManager.Storage
             string name = default;
             ResourceType type = default;
             SystemData systemData = default;
-            DateTimeOffset lastModifiedTime = default;
+            DateTimeOffset? lastModifiedTime = default;
             ManagementPolicySchema policy = default;
             foreach (var property in element.EnumerateObject())
             {

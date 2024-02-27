@@ -73,7 +73,7 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            KeyPhraseExtractionSkillLanguage defaultLanguageCode = default;
+            KeyPhraseExtractionSkillLanguage? defaultLanguageCode = default;
             int? maxKeyPhraseCount = default;
             string odataType = default;
             string name = default;

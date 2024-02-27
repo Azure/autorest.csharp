@@ -147,9 +147,9 @@ namespace Azure.ResourceManager.Sample.Models
             UpgradePolicy upgradePolicy = default;
             AutomaticRepairsPolicy automaticRepairsPolicy = default;
             VirtualMachineScaleSetUpdateVmProfile virtualMachineProfile = default;
-            bool overprovision = default;
-            bool doNotRunExtensionsOnOverprovisionedVms = default;
-            bool singlePlacementGroup = default;
+            bool? overprovision = default;
+            bool? doNotRunExtensionsOnOverprovisionedVms = default;
+            bool? singlePlacementGroup = default;
             AdditionalCapabilities additionalCapabilities = default;
             ScaleInPolicy scaleInPolicy = default;
             WritableSubResource proximityPlacementGroup = default;

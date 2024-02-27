@@ -82,7 +82,7 @@ namespace body_complex.Models
                 return null;
             }
             string location = default;
-            bool iswild = default;
+            bool? iswild = default;
             string fishType = default;
             string species = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;

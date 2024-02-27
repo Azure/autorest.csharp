@@ -38,8 +38,8 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            int maxTokenCount = default;
-            bool consumeAllTokens = default;
+            int? maxTokenCount = default;
+            bool? consumeAllTokens = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())

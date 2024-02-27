@@ -65,13 +65,13 @@ namespace MgmtAcronymMapping.Models
             }
             string name = default;
             int lun = default;
-            CachingType caching = default;
-            bool writeAcceleratorEnabled = default;
+            CachingType? caching = default;
+            bool? writeAcceleratorEnabled = default;
             DiskCreateOptionType createOption = default;
-            int diskSizeGB = default;
+            int? diskSizeGB = default;
             VirtualMachineScaleSetManagedDiskParameters managedDisk = default;
-            long diskIOPSReadWrite = default;
-            long diskMBpsReadWrite = default;
+            long? diskIOPSReadWrite = default;
+            long? diskMBpsReadWrite = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))

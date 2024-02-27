@@ -75,7 +75,7 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            bool enabled = default;
+            bool? enabled = default;
             Uri storageUri = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();

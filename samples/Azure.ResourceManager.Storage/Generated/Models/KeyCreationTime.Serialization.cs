@@ -19,8 +19,8 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            DateTimeOffset key1 = default;
-            DateTimeOffset key2 = default;
+            DateTimeOffset? key1 = default;
+            DateTimeOffset? key2 = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("key1"u8))

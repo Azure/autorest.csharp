@@ -44,9 +44,9 @@ namespace MgmtExpandResourceTypes.Models
             {
                 return null;
             }
-            int priority = default;
-            int weight = default;
-            int port = default;
+            int? priority = default;
+            int? weight = default;
+            int? port = default;
             string target = default;
             foreach (var property in element.EnumerateObject())
             {

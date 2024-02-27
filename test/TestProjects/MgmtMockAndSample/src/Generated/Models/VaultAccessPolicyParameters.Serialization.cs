@@ -27,7 +27,7 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            AzureLocation location = default;
+            AzureLocation? location = default;
             VaultAccessPolicyProperties properties = default;
             ResourceIdentifier id = default;
             string name = default;

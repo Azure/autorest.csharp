@@ -91,7 +91,7 @@ namespace body_complex.Models
             }
             string color = default;
             IList<Dog> hates = default;
-            int id = default;
+            int? id = default;
             string name = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();

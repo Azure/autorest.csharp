@@ -28,9 +28,9 @@ namespace MgmtScopeResource.Models
             ResourceType type = default;
             SystemData systemData = default;
             string billingPeriodId = default;
-            DateTimeOffset usageStart = default;
-            DateTimeOffset usageEnd = default;
-            decimal resourceRate = default;
+            DateTimeOffset? usageStart = default;
+            DateTimeOffset? usageEnd = default;
+            decimal? resourceRate = default;
             string offerName = default;
             string resourceGroup = default;
             string additionalInfo = default;
@@ -38,12 +38,12 @@ namespace MgmtScopeResource.Models
             string instanceName = default;
             string instanceId = default;
             string currency = default;
-            decimal consumedQuantity = default;
+            decimal? consumedQuantity = default;
             string unitOfMeasure = default;
-            decimal pretaxCost = default;
-            bool isEstimated = default;
-            Guid meterId = default;
-            Guid subscriptionGuid = default;
+            decimal? pretaxCost = default;
+            bool? isEstimated = default;
+            Guid? meterId = default;
+            Guid? subscriptionGuid = default;
             string subscriptionName = default;
             string accountName = default;
             string departmentName = default;
@@ -52,7 +52,7 @@ namespace MgmtScopeResource.Models
             string additionalProperties = default;
             string publisherName = default;
             string planName = default;
-            bool isRecurringCharge = default;
+            bool? isRecurringCharge = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"u8))

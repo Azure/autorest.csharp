@@ -19,17 +19,17 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            PatchOperationStatus status = default;
+            PatchOperationStatus? status = default;
             string installationActivityId = default;
-            bool maintenanceWindowExceeded = default;
-            RebootStatus rebootStatus = default;
-            int notSelectedPatchCount = default;
-            int excludedPatchCount = default;
-            int pendingPatchCount = default;
-            int installedPatchCount = default;
-            int failedPatchCount = default;
-            DateTimeOffset startTime = default;
-            DateTimeOffset lastModifiedTime = default;
+            bool? maintenanceWindowExceeded = default;
+            RebootStatus? rebootStatus = default;
+            int? notSelectedPatchCount = default;
+            int? excludedPatchCount = default;
+            int? pendingPatchCount = default;
+            int? installedPatchCount = default;
+            int? failedPatchCount = default;
+            DateTimeOffset? startTime = default;
+            DateTimeOffset? lastModifiedTime = default;
             string startedBy = default;
             ApiError error = default;
             foreach (var property in element.EnumerateObject())

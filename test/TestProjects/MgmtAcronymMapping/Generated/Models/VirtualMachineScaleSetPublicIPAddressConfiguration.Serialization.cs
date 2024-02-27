@@ -62,11 +62,11 @@ namespace MgmtAcronymMapping.Models
                 return null;
             }
             string name = default;
-            int idleTimeoutInMinutes = default;
+            int? idleTimeoutInMinutes = default;
             VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings dnsSettings = default;
             IList<VirtualMachineScaleSetIPTag> ipTags = default;
             WritableSubResource publicIPPrefix = default;
-            IPVersion publicIPAddressVersion = default;
+            IPVersion? publicIPAddressVersion = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))

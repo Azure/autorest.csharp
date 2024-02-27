@@ -43,8 +43,8 @@ namespace MgmtMockAndSample
             GuestConfigurationAssignmentProperties properties = default;
             string id = default;
             string name = default;
-            AzureLocation location = default;
-            ResourceType type = default;
+            AzureLocation? location = default;
+            ResourceType? type = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("properties"u8))

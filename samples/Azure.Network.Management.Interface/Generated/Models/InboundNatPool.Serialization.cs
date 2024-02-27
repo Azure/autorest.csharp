@@ -82,14 +82,14 @@ namespace Azure.Network.Management.Interface.Models
             string type = default;
             string id = default;
             SubResource frontendIPConfiguration = default;
-            TransportProtocol protocol = default;
-            int frontendPortRangeStart = default;
-            int frontendPortRangeEnd = default;
-            int backendPort = default;
-            int idleTimeoutInMinutes = default;
-            bool enableFloatingIP = default;
-            bool enableTcpReset = default;
-            ProvisioningState provisioningState = default;
+            TransportProtocol? protocol = default;
+            int? frontendPortRangeStart = default;
+            int? frontendPortRangeEnd = default;
+            int? backendPort = default;
+            int? idleTimeoutInMinutes = default;
+            bool? enableFloatingIP = default;
+            bool? enableTcpReset = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))

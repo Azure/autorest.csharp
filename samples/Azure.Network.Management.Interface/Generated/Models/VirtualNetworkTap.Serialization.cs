@@ -72,10 +72,10 @@ namespace Azure.Network.Management.Interface.Models
             IDictionary<string, string> tags = default;
             IReadOnlyList<NetworkInterfaceTapConfiguration> networkInterfaceTapConfigurations = default;
             string resourceGuid = default;
-            ProvisioningState provisioningState = default;
+            ProvisioningState? provisioningState = default;
             NetworkInterfaceIPConfiguration destinationNetworkInterfaceIPConfiguration = default;
             FrontendIPConfiguration destinationLoadBalancerFrontEndIPConfiguration = default;
-            int destinationPort = default;
+            int? destinationPort = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"u8))

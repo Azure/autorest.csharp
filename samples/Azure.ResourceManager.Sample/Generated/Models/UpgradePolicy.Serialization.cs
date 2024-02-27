@@ -80,7 +80,7 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            UpgradeMode mode = default;
+            UpgradeMode? mode = default;
             RollingUpgradePolicy rollingUpgradePolicy = default;
             AutomaticOSUpgradePolicy automaticOSUpgradePolicy = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;

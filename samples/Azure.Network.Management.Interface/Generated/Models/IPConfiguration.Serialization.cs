@@ -61,10 +61,10 @@ namespace Azure.Network.Management.Interface.Models
             string etag = default;
             string id = default;
             string privateIPAddress = default;
-            IPAllocationMethod privateIPAllocationMethod = default;
+            IPAllocationMethod? privateIPAllocationMethod = default;
             Subnet subnet = default;
             PublicIPAddress publicIPAddress = default;
-            ProvisioningState provisioningState = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))

@@ -96,7 +96,7 @@ namespace body_complex.Models
                 return null;
             }
             byte[] picture = default;
-            int age = default;
+            int? age = default;
             DateTimeOffset birthday = default;
             string fishtype = default;
             string species = default;

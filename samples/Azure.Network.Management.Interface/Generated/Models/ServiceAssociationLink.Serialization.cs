@@ -69,8 +69,8 @@ namespace Azure.Network.Management.Interface.Models
             string id = default;
             string linkedResourceType = default;
             string link = default;
-            ProvisioningState provisioningState = default;
-            bool allowDelete = default;
+            ProvisioningState? provisioningState = default;
+            bool? allowDelete = default;
             IList<string> locations = default;
             foreach (var property in element.EnumerateObject())
             {

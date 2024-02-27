@@ -51,11 +51,11 @@ namespace MgmtMockAndSample
             }
             string name = default;
             string etag = default;
-            ResourceType type = default;
+            ResourceType? type = default;
             string id = default;
-            int priority = default;
+            int? priority = default;
             IList<FirewallPolicyRuleCollection> ruleCollections = default;
-            ProvisioningState provisioningState = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))

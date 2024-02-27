@@ -75,7 +75,7 @@ namespace body_complex.Models
                 return null;
             }
             string id = default;
-            int size = default;
+            int? size = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

@@ -105,13 +105,13 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            PatchOperationStatus status = default;
+            PatchOperationStatus? status = default;
             string assessmentActivityId = default;
-            bool rebootPending = default;
-            int criticalAndSecurityPatchCount = default;
-            int otherPatchCount = default;
-            DateTimeOffset startTime = default;
-            DateTimeOffset lastModifiedTime = default;
+            bool? rebootPending = default;
+            int? criticalAndSecurityPatchCount = default;
+            int? otherPatchCount = default;
+            DateTimeOffset? startTime = default;
+            DateTimeOffset? lastModifiedTime = default;
             ApiError error = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();

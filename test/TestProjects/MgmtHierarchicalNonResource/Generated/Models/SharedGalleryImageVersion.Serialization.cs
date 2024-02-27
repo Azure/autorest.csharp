@@ -21,8 +21,8 @@ namespace MgmtHierarchicalNonResource.Models
             }
             string name = default;
             string location = default;
-            DateTimeOffset publishedDate = default;
-            DateTimeOffset endOfLifeDate = default;
+            DateTimeOffset? publishedDate = default;
+            DateTimeOffset? endOfLifeDate = default;
             string uniqueId = default;
             foreach (var property in element.EnumerateObject())
             {

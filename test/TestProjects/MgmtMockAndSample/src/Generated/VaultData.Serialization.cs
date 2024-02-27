@@ -21,7 +21,7 @@ namespace MgmtMockAndSample
             {
                 return null;
             }
-            AzureLocation location = default;
+            AzureLocation? location = default;
             IReadOnlyDictionary<string, string> tags = default;
             VaultProperties properties = default;
             ManagedServiceIdentity identity = default;

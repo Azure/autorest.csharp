@@ -42,8 +42,8 @@ namespace Azure.ResourceManager.Fake.Models
             {
                 return null;
             }
-            bool nameAvailable = default;
-            CheckNameAvailabilityReason reason = default;
+            bool? nameAvailable = default;
+            CheckNameAvailabilityReason? reason = default;
             string message = default;
             foreach (var property in element.EnumerateObject())
             {

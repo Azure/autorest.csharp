@@ -20,9 +20,9 @@ namespace Azure.ResourceManager.Storage.Models
                 return null;
             }
             string tag = default;
-            DateTimeOffset timestamp = default;
+            DateTimeOffset? timestamp = default;
             string objectIdentifier = default;
-            Guid tenantId = default;
+            Guid? tenantId = default;
             string upn = default;
             foreach (var property in element.EnumerateObject())
             {

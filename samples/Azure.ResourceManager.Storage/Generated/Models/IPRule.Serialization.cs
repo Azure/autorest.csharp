@@ -32,7 +32,7 @@ namespace Azure.ResourceManager.Storage.Models
                 return null;
             }
             string value = default;
-            Action action = default;
+            Action? action = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))

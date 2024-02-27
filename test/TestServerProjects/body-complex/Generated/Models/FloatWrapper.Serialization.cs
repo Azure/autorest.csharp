@@ -74,8 +74,8 @@ namespace body_complex.Models
             {
                 return null;
             }
-            float field1 = default;
-            float field2 = default;
+            float? field1 = default;
+            float? field2 = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

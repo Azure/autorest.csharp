@@ -38,7 +38,7 @@ namespace MgmtAcronymMapping.Models
                 return null;
             }
             string id = default;
-            bool primary = default;
+            bool? primary = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))

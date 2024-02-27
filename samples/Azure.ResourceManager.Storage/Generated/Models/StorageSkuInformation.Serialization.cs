@@ -20,9 +20,9 @@ namespace Azure.ResourceManager.Storage.Models
                 return null;
             }
             StorageSkuName name = default;
-            StorageSkuTier tier = default;
-            ResourceType resourceType = default;
-            StorageKind kind = default;
+            StorageSkuTier? tier = default;
+            ResourceType? resourceType = default;
+            StorageKind? kind = default;
             IReadOnlyList<string> locations = default;
             IReadOnlyList<SKUCapability> capabilities = default;
             IReadOnlyList<Restriction> restrictions = default;

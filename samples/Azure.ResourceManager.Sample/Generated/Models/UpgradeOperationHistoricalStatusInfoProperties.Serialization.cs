@@ -98,7 +98,7 @@ namespace Azure.ResourceManager.Sample.Models
             UpgradeOperationHistoryStatus runningStatus = default;
             RollingUpgradeProgressInfo progress = default;
             ApiError error = default;
-            UpgradeOperationInvoker startedBy = default;
+            UpgradeOperationInvoker? startedBy = default;
             ImageReference targetImageReference = default;
             RollbackStatusInfo rollbackInfo = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;

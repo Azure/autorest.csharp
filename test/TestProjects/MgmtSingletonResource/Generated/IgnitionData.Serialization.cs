@@ -19,7 +19,7 @@ namespace MgmtSingletonResource
             {
                 return null;
             }
-            bool pushButton = default;
+            bool? pushButton = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;

@@ -85,7 +85,7 @@ namespace TypeSchemaMapping.Models
             }
             int stringProperty = default;
             IReadOnlyDictionary<string, string> dictionaryProperty = default;
-            CustomDaysOfWeek daysOfWeek = default;
+            CustomDaysOfWeek? daysOfWeek = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

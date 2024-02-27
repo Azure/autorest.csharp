@@ -90,8 +90,8 @@ namespace CustomNamespace
 
             string modelProperty = default;
             string propertyToField = default;
-            CustomFruitEnum fruit = default;
-            CustomDaysOfWeek daysOfWeek = default;
+            CustomFruitEnum? fruit = default;
+            CustomDaysOfWeek? daysOfWeek = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

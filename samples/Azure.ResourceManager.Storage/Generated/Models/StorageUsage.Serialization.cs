@@ -17,9 +17,9 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            UsageUnit unit = default;
-            int currentValue = default;
-            int limit = default;
+            UsageUnit? unit = default;
+            int? currentValue = default;
+            int? limit = default;
             UsageName name = default;
             foreach (var property in element.EnumerateObject())
             {

@@ -19,14 +19,14 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            ImmutabilityPolicyUpdateType update = default;
-            int immutabilityPeriodSinceCreationInDays = default;
-            DateTimeOffset timestamp = default;
+            ImmutabilityPolicyUpdateType? update = default;
+            int? immutabilityPeriodSinceCreationInDays = default;
+            DateTimeOffset? timestamp = default;
             string objectIdentifier = default;
-            Guid tenantId = default;
+            Guid? tenantId = default;
             string upn = default;
-            bool allowProtectedAppendWrites = default;
-            bool allowProtectedAppendWritesAll = default;
+            bool? allowProtectedAppendWrites = default;
+            bool? allowProtectedAppendWritesAll = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("update"u8))

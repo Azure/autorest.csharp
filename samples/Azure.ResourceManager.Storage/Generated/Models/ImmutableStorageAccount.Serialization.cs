@@ -34,7 +34,7 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            bool enabled = default;
+            bool? enabled = default;
             AccountImmutabilityPolicyProperties immutabilityPolicy = default;
             foreach (var property in element.EnumerateObject())
             {

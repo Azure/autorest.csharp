@@ -21,8 +21,8 @@ namespace Azure.ResourceManager.Storage.Models
             }
             string keyName = default;
             string value = default;
-            KeyPermission permissions = default;
-            DateTimeOffset creationTime = default;
+            KeyPermission? permissions = default;
+            DateTimeOffset? creationTime = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("keyName"u8))

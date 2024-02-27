@@ -19,10 +19,10 @@ namespace MgmtCollectionParent.Models
             {
                 return null;
             }
-            StageStatus stageStatus = default;
-            StageName stageName = default;
+            StageStatus? stageStatus = default;
+            StageName? stageName = default;
             string displayName = default;
-            DateTimeOffset startTime = default;
+            DateTimeOffset? startTime = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("stageStatus"u8))

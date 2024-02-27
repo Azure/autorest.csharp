@@ -297,13 +297,13 @@ namespace ModelsTypeSpec.Models
             string requiredString = default;
             int requiredInt = default;
             string nonRequiredString = default;
-            int nonRequiredInt = default;
+            int? nonRequiredInt = default;
             int? requiredNullableInt = default;
             string requiredNullableString = default;
             int? nonRequiredNullableInt = default;
             string nonRequiredNullableString = default;
             int requiredReadonlyInt = default;
-            int nonRequiredReadonlyInt = default;
+            int? nonRequiredReadonlyInt = default;
             BaseModelWithDiscriminator requiredModel = default;
             FixedStringEnum requiredFixedStringEnum = default;
             FixedIntEnum requiredFixedIntEnum = default;

@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            BlobRestoreProgressStatus status = default;
+            BlobRestoreProgressStatus? status = default;
             string failureReason = default;
             string restoreId = default;
             BlobRestoreContent parameters = default;

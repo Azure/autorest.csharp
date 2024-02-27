@@ -83,8 +83,8 @@ namespace OpenAI.Models
             BinaryData file = default;
             CreateTranslationRequestModel model = default;
             string prompt = default;
-            CreateTranslationRequestResponseFormat responseFormat = default;
-            double temperature = default;
+            CreateTranslationRequestResponseFormat? responseFormat = default;
+            double? temperature = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

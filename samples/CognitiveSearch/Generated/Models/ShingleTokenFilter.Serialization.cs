@@ -58,10 +58,10 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            int maxShingleSize = default;
-            int minShingleSize = default;
-            bool outputUnigrams = default;
-            bool outputUnigramsIfNoShingles = default;
+            int? maxShingleSize = default;
+            int? minShingleSize = default;
+            bool? outputUnigrams = default;
+            bool? outputUnigramsIfNoShingles = default;
             string tokenSeparator = default;
             string filterToken = default;
             string odataType = default;

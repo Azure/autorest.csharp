@@ -34,7 +34,7 @@ namespace MgmtExpandResourceTypes.Models
             {
                 return null;
             }
-            int preference = default;
+            int? preference = default;
             string exchange = default;
             foreach (var property in element.EnumerateObject())
             {

@@ -107,7 +107,7 @@ namespace MgmtDiscriminator.Models
             {
                 return null;
             }
-            int order = default;
+            int? order = default;
             DeliveryRuleCondition conditions = default;
             IList<DeliveryRuleAction> actions = default;
             IDictionary<string, DeliveryRuleAction> extraMappingInfo = default;

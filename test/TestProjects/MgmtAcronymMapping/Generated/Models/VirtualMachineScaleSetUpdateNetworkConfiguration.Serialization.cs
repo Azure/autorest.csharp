@@ -76,12 +76,12 @@ namespace MgmtAcronymMapping.Models
             }
             string name = default;
             string id = default;
-            bool primary = default;
-            bool enableAcceleratedNetworking = default;
+            bool? primary = default;
+            bool? enableAcceleratedNetworking = default;
             WritableSubResource networkSecurityGroup = default;
             VirtualMachineScaleSetNetworkConfigurationDnsSettings dnsSettings = default;
             IList<VirtualMachineScaleSetUpdateIPConfiguration> ipConfigurations = default;
-            bool enableIPForwarding = default;
+            bool? enableIPForwarding = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))

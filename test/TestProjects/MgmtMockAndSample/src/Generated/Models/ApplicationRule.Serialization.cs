@@ -129,7 +129,7 @@ namespace MgmtMockAndSample.Models
             IList<string> targetUrls = default;
             IList<string> fqdnTags = default;
             IList<string> sourceIpGroups = default;
-            bool terminateTLS = default;
+            bool? terminateTLS = default;
             IList<string> webCategories = default;
             string name = default;
             string description = default;

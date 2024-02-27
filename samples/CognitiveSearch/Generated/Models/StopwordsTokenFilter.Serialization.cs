@@ -55,9 +55,9 @@ namespace CognitiveSearch.Models
                 return null;
             }
             IList<string> stopwords = default;
-            StopwordsList stopwordsList = default;
-            bool ignoreCase = default;
-            bool removeTrailing = default;
+            StopwordsList? stopwordsList = default;
+            bool? ignoreCase = default;
+            bool? removeTrailing = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())

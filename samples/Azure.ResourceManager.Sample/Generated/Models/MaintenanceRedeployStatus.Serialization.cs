@@ -100,12 +100,12 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            bool isCustomerInitiatedMaintenanceAllowed = default;
-            DateTimeOffset preMaintenanceWindowStartTime = default;
-            DateTimeOffset preMaintenanceWindowEndTime = default;
-            DateTimeOffset maintenanceWindowStartTime = default;
-            DateTimeOffset maintenanceWindowEndTime = default;
-            MaintenanceOperationResultCodeType lastOperationResultCode = default;
+            bool? isCustomerInitiatedMaintenanceAllowed = default;
+            DateTimeOffset? preMaintenanceWindowStartTime = default;
+            DateTimeOffset? preMaintenanceWindowEndTime = default;
+            DateTimeOffset? maintenanceWindowStartTime = default;
+            DateTimeOffset? maintenanceWindowEndTime = default;
+            MaintenanceOperationResultCodeType? lastOperationResultCode = default;
             string lastOperationMessage = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();

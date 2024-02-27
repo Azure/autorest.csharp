@@ -85,9 +85,9 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            int maxBatchInstancePercent = default;
-            int maxUnhealthyInstancePercent = default;
-            int maxUnhealthyUpgradedInstancePercent = default;
+            int? maxBatchInstancePercent = default;
+            int? maxUnhealthyInstancePercent = default;
+            int? maxUnhealthyUpgradedInstancePercent = default;
             string pauseTimeBetweenBatches = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();

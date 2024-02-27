@@ -92,15 +92,15 @@ namespace MgmtPartialResource
             string name = default;
             ResourceType type = default;
             SystemData systemData = default;
-            IPAllocationMethod publicIPAllocationMethod = default;
-            IPVersion publicIPAddressVersion = default;
+            IPAllocationMethod? publicIPAllocationMethod = default;
+            IPVersion? publicIPAddressVersion = default;
             string ipAddress = default;
-            int idleTimeoutInMinutes = default;
+            int? idleTimeoutInMinutes = default;
             string resourceGuid = default;
             PublicIPAddressData servicePublicIPAddress = default;
-            PublicIPAddressMigrationPhase migrationPhase = default;
+            PublicIPAddressMigrationPhase? migrationPhase = default;
             PublicIPAddressData linkedPublicIPAddress = default;
-            DeleteOption deleteOption = default;
+            DeleteOption? deleteOption = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sku"u8))

@@ -39,7 +39,7 @@ namespace MgmtExpandResourceTypes.Models
             {
                 return null;
             }
-            int flags = default;
+            int? flags = default;
             string tag = default;
             string value = default;
             foreach (var property in element.EnumerateObject())

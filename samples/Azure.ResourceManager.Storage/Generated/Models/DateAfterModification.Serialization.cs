@@ -34,8 +34,8 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            float daysAfterModificationGreaterThan = default;
-            float daysAfterLastAccessTimeGreaterThan = default;
+            float? daysAfterModificationGreaterThan = default;
+            float? daysAfterLastAccessTimeGreaterThan = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("daysAfterModificationGreaterThan"u8))

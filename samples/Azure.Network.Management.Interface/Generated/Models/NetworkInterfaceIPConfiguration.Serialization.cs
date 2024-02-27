@@ -126,13 +126,13 @@ namespace Azure.Network.Management.Interface.Models
             IList<BackendAddressPool> loadBalancerBackendAddressPools = default;
             IList<InboundNatRule> loadBalancerInboundNatRules = default;
             string privateIPAddress = default;
-            IPAllocationMethod privateIPAllocationMethod = default;
-            IPVersion privateIPAddressVersion = default;
+            IPAllocationMethod? privateIPAllocationMethod = default;
+            IPVersion? privateIPAddressVersion = default;
             Subnet subnet = default;
-            bool primary = default;
+            bool? primary = default;
             PublicIPAddress publicIPAddress = default;
             IList<ApplicationSecurityGroup> applicationSecurityGroups = default;
-            ProvisioningState provisioningState = default;
+            ProvisioningState? provisioningState = default;
             NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties privateLinkConnectionProperties = default;
             foreach (var property in element.EnumerateObject())
             {

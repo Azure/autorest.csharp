@@ -120,14 +120,14 @@ namespace MgmtParamOrdering
             string containerRegistry = default;
             string storageAccount = default;
             Uri discoveryUrl = default;
-            ProvisioningState provisioningState = default;
-            bool hbiWorkspace = default;
+            ProvisioningState? provisioningState = default;
+            bool? hbiWorkspace = default;
             string serviceProvisionedResourceGroup = default;
-            int privateLinkCount = default;
+            int? privateLinkCount = default;
             string imageBuildCompute = default;
-            bool allowPublicAccessWhenBehindVnet = default;
+            bool? allowPublicAccessWhenBehindVnet = default;
             string primaryUserAssignedIdentity = default;
-            Guid tenantId = default;
+            Guid? tenantId = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("tags"u8))

@@ -21,11 +21,11 @@ namespace MgmtMockAndSample.Models
                 return null;
             }
             string vaultId = default;
-            AzureLocation location = default;
-            DateTimeOffset deletionDate = default;
-            DateTimeOffset scheduledPurgeDate = default;
+            AzureLocation? location = default;
+            DateTimeOffset? deletionDate = default;
+            DateTimeOffset? scheduledPurgeDate = default;
             IReadOnlyDictionary<string, string> tags = default;
-            bool purgeProtectionEnabled = default;
+            bool? purgeProtectionEnabled = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("vaultId"u8))

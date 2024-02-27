@@ -161,12 +161,12 @@ namespace MgmtAcronymMapping
             AutomaticRepairsPolicy automaticRepairsPolicy = default;
             VirtualMachineScaleSetVmProfile virtualMachineProfile = default;
             string provisioningState = default;
-            bool overprovision = default;
-            bool doNotRunExtensionsOnOverprovisionedVms = default;
+            bool? overprovision = default;
+            bool? doNotRunExtensionsOnOverprovisionedVms = default;
             string uniqueId = default;
-            bool singlePlacementGroup = default;
-            bool zoneBalance = default;
-            int platformFaultDomainCount = default;
+            bool? singlePlacementGroup = default;
+            bool? zoneBalance = default;
+            int? platformFaultDomainCount = default;
             WritableSubResource proximityPlacementGroup = default;
             WritableSubResource hostGroup = default;
             AdditionalCapabilities additionalCapabilities = default;

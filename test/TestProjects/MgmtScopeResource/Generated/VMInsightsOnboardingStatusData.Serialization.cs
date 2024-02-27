@@ -26,8 +26,8 @@ namespace MgmtScopeResource
             ResourceType type = default;
             SystemData systemData = default;
             string resourceId = default;
-            OnboardingStatus onboardingStatus = default;
-            DataStatus dataStatus = default;
+            OnboardingStatus? onboardingStatus = default;
+            DataStatus? dataStatus = default;
             IReadOnlyList<DataContainer> data = default;
             foreach (var property in element.EnumerateObject())
             {

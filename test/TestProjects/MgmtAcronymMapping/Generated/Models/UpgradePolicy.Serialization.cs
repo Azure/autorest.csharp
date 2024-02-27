@@ -39,7 +39,7 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            UpgradeMode mode = default;
+            UpgradeMode? mode = default;
             RollingUpgradePolicy rollingUpgradePolicy = default;
             AutomaticOSUpgradePolicy automaticOSUpgradePolicy = default;
             foreach (var property in element.EnumerateObject())

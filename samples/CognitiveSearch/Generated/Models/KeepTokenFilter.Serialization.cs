@@ -42,7 +42,7 @@ namespace CognitiveSearch.Models
                 return null;
             }
             IList<string> keepWords = default;
-            bool keepWordsCase = default;
+            bool? keepWordsCase = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())

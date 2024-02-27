@@ -70,7 +70,7 @@ namespace _Type.Property.Optionality.Models
             {
                 return null;
             }
-            DateTimeOffset property = default;
+            DateTimeOffset? property = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property0 in element.EnumerateObject())

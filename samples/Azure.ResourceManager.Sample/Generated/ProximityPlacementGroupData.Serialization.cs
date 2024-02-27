@@ -157,7 +157,7 @@ namespace Azure.ResourceManager.Sample
             string name = default;
             ResourceType type = default;
             SystemData systemData = default;
-            ProximityPlacementGroupType proximityPlacementGroupType = default;
+            ProximityPlacementGroupType? proximityPlacementGroupType = default;
             IReadOnlyList<SubResourceWithColocationStatus> virtualMachines = default;
             IReadOnlyList<SubResourceWithColocationStatus> virtualMachineScaleSets = default;
             IReadOnlyList<SubResourceWithColocationStatus> availabilitySets = default;

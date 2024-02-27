@@ -44,7 +44,7 @@ namespace MgmtSupersetInheritance.Models
             {
                 return null;
             }
-            int id = default;
+            int? id = default;
             string name = default;
             string type = default;
             string @new = default;

@@ -99,15 +99,15 @@ namespace Azure.Network.Management.Interface.Models
             SubResource frontendIPConfiguration = default;
             SubResource backendAddressPool = default;
             SubResource probe = default;
-            TransportProtocol protocol = default;
-            LoadDistribution loadDistribution = default;
-            int frontendPort = default;
-            int backendPort = default;
-            int idleTimeoutInMinutes = default;
-            bool enableFloatingIP = default;
-            bool enableTcpReset = default;
-            bool disableOutboundSnat = default;
-            ProvisioningState provisioningState = default;
+            TransportProtocol? protocol = default;
+            LoadDistribution? loadDistribution = default;
+            int? frontendPort = default;
+            int? backendPort = default;
+            int? idleTimeoutInMinutes = default;
+            bool? enableFloatingIP = default;
+            bool? enableTcpReset = default;
+            bool? disableOutboundSnat = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))

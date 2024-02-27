@@ -19,7 +19,7 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            bool hasLegalHold = default;
+            bool? hasLegalHold = default;
             IReadOnlyList<TagProperty> tags = default;
             ProtectedAppendWritesHistory protectedAppendWritesHistory = default;
             foreach (var property in element.EnumerateObject())

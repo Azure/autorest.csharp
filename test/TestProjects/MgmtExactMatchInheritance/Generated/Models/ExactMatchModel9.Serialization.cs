@@ -39,7 +39,7 @@ namespace MgmtExactMatchInheritance.Models
             {
                 return null;
             }
-            int id = default;
+            int? id = default;
             string name = default;
             string type = default;
             foreach (var property in element.EnumerateObject())

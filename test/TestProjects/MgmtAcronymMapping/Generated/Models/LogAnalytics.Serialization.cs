@@ -20,9 +20,9 @@ namespace MgmtAcronymMapping.Models
                 return null;
             }
             LogAnalyticsOutput properties = default;
-            ContentType contentType = default;
+            ContentType? contentType = default;
             BinaryData content = default;
-            RequestMethod method = default;
+            RequestMethod? method = default;
             Uri basePath = default;
             foreach (var property in element.EnumerateObject())
             {

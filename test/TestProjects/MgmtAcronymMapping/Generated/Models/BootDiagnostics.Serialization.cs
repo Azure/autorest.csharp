@@ -35,7 +35,7 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            bool enabled = default;
+            bool? enabled = default;
             Uri storageUri = default;
             foreach (var property in element.EnumerateObject())
             {

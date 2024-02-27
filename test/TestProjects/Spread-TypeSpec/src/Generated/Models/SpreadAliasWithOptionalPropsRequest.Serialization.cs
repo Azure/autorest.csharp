@@ -96,7 +96,7 @@ namespace SpreadTypeSpec.Models
             }
             string name = default;
             string color = default;
-            int age = default;
+            int? age = default;
             IList<int> items = default;
             IList<string> elements = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;

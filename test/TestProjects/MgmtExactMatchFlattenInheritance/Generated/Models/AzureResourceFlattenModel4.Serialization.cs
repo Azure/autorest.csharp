@@ -47,7 +47,7 @@ namespace MgmtExactMatchFlattenInheritance.Models
             {
                 return null;
             }
-            int foo = default;
+            int? foo = default;
             string id = default;
             string name = default;
             string type = default;

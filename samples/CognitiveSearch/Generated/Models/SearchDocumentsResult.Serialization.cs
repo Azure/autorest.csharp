@@ -19,8 +19,8 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            long odataCount = default;
-            double searchCoverage = default;
+            long? odataCount = default;
+            double? searchCoverage = default;
             IReadOnlyDictionary<string, IList<FacetResult>> searchFacets = default;
             SearchRequest searchNextPageParameters = default;
             IReadOnlyList<SearchResult> value = default;

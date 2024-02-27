@@ -19,12 +19,12 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            int platformUpdateDomain = default;
-            int platformFaultDomain = default;
+            int? platformUpdateDomain = default;
+            int? platformFaultDomain = default;
             string computerName = default;
             string osName = default;
             string osVersion = default;
-            HyperVGenerationType hyperVGeneration = default;
+            HyperVGenerationType? hyperVGeneration = default;
             string rdpThumbPrint = default;
             VirtualMachineAgentInstanceView vmAgent = default;
             MaintenanceRedeployStatus maintenanceRedeployStatus = default;

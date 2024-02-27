@@ -90,7 +90,7 @@ namespace body_complex.Models
             {
                 return null;
             }
-            int age = default;
+            int? age = default;
             DateTimeOffset birthday = default;
             string fishtype = default;
             string species = default;

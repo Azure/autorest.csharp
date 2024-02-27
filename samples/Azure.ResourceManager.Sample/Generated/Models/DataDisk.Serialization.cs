@@ -123,14 +123,14 @@ namespace Azure.ResourceManager.Sample.Models
             string name = default;
             VirtualHardDisk vhd = default;
             VirtualHardDisk image = default;
-            CachingType caching = default;
-            bool writeAcceleratorEnabled = default;
+            CachingType? caching = default;
+            bool? writeAcceleratorEnabled = default;
             DiskCreateOptionType createOption = default;
-            int diskSizeGB = default;
+            int? diskSizeGB = default;
             ManagedDiskParameters managedDisk = default;
-            bool toBeDetached = default;
-            long diskIOPSReadWrite = default;
-            long diskMBpsReadWrite = default;
+            bool? toBeDetached = default;
+            long? diskIOPSReadWrite = default;
+            long? diskMBpsReadWrite = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

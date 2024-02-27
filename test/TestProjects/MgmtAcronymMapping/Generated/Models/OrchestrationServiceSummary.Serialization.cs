@@ -17,8 +17,8 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            OrchestrationServiceName serviceName = default;
-            OrchestrationServiceState serviceState = default;
+            OrchestrationServiceName? serviceName = default;
+            OrchestrationServiceState? serviceState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("serviceName"u8))

@@ -79,7 +79,7 @@ namespace model_flattening.Models
             {
                 return null;
             }
-            int status = default;
+            int? status = default;
             string message = default;
             Error parentError = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;

@@ -153,7 +153,7 @@ namespace MgmtExpandResourceTypes
             ResourceType type = default;
             SystemData systemData = default;
             IDictionary<string, string> metadata = default;
-            long ttl = default;
+            long? ttl = default;
             string fqdn = default;
             string provisioningState = default;
             WritableSubResource targetResource = default;

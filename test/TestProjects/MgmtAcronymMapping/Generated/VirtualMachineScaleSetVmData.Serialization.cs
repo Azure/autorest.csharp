@@ -114,7 +114,7 @@ namespace MgmtAcronymMapping
             string name = default;
             ResourceType type = default;
             SystemData systemData = default;
-            bool latestModelApplied = default;
+            bool? latestModelApplied = default;
             string vmId = default;
             VirtualMachineScaleSetVmInstanceView instanceView = default;
             HardwareProfile hardwareProfile = default;

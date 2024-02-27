@@ -44,10 +44,10 @@ namespace MgmtConstants.Models
             {
                 return null;
             }
-            StringConstant optionalStringConstant = default;
-            IntConstant optionalIntConstant = default;
-            bool optionalBooleanConstant = default;
-            FloatConstant optionalFloatConstant = default;
+            StringConstant? optionalStringConstant = default;
+            IntConstant? optionalIntConstant = default;
+            bool? optionalBooleanConstant = default;
+            FloatConstant? optionalFloatConstant = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("optionalStringConstant"u8))

@@ -54,12 +54,12 @@ namespace Azure.ResourceManager.Storage
             string name = default;
             ResourceType type = default;
             SystemData systemData = default;
-            EncryptionScopeSource source = default;
-            EncryptionScopeState state = default;
-            DateTimeOffset creationTime = default;
-            DateTimeOffset lastModifiedTime = default;
+            EncryptionScopeSource? source = default;
+            EncryptionScopeState? state = default;
+            DateTimeOffset? creationTime = default;
+            DateTimeOffset? lastModifiedTime = default;
             EncryptionScopeKeyVaultProperties keyVaultProperties = default;
-            bool requireInfrastructureEncryption = default;
+            bool? requireInfrastructureEncryption = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))

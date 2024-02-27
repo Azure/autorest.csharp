@@ -34,7 +34,7 @@ namespace MgmtCustomizations.Models
             {
                 return null;
             }
-            int order = default;
+            int? order = default;
             Pet pet = default;
             foreach (var property in element.EnumerateObject())
             {

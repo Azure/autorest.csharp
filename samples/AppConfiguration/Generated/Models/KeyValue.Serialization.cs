@@ -76,9 +76,9 @@ namespace AppConfiguration.Models
             string label = default;
             string contentType = default;
             string value = default;
-            DateTimeOffset lastModified = default;
+            DateTimeOffset? lastModified = default;
             IDictionary<string, string> tags = default;
-            bool locked = default;
+            bool? locked = default;
             string etag = default;
             foreach (var property in element.EnumerateObject())
             {

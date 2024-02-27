@@ -18,7 +18,7 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            double searchCoverage = default;
+            double? searchCoverage = default;
             IReadOnlyList<AutocompleteItem> value = default;
             foreach (var property in element.EnumerateObject())
             {

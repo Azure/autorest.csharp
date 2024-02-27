@@ -100,7 +100,7 @@ namespace model_flattening.Models
             string baseProductId = default;
             string baseProductDescription = default;
             string maxProductDisplayName = default;
-            SimpleProductPropertiesMaxProductCapacity maxProductCapacity = default;
+            SimpleProductPropertiesMaxProductCapacity? maxProductCapacity = default;
             string genericValue = default;
             string odataValue = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;

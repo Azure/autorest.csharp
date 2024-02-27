@@ -92,8 +92,8 @@ namespace OpenAI.Models
             }
             string prompt = default;
             long? n = default;
-            CreateImageRequestSize size = default;
-            CreateImageRequestResponseFormat responseFormat = default;
+            CreateImageRequestSize? size = default;
+            CreateImageRequestResponseFormat? responseFormat = default;
             string user = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();

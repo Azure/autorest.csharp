@@ -184,19 +184,19 @@ namespace ModelsTypeSpec.Models
                 return null;
             }
             string optionalString = default;
-            int optionalInt = default;
+            int? optionalInt = default;
             IList<string> optionalStringList = default;
             IList<int> optionalIntList = default;
             IList<CollectionItem> optionalModelList = default;
             DerivedModel optionalModel = default;
             DerivedModelWithProperties optionalModelWithPropertiesOnBase = default;
-            FixedStringEnum optionalFixedStringEnum = default;
-            ExtensibleEnum optionalExtensibleEnum = default;
+            FixedStringEnum? optionalFixedStringEnum = default;
+            ExtensibleEnum? optionalExtensibleEnum = default;
             IDictionary<string, int> optionalIntRecord = default;
             IDictionary<string, string> optionalStringRecord = default;
             IDictionary<string, RecordItem> optionalModelRecord = default;
-            DateTimeOffset optionalPlainDate = default;
-            TimeSpan optionalPlainTime = default;
+            DateTimeOffset? optionalPlainDate = default;
+            TimeSpan? optionalPlainTime = default;
             IList<int?> optionalCollectionWithNullableIntElement = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();

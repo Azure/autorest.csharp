@@ -81,7 +81,7 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            ImageAnalysisSkillLanguage defaultLanguageCode = default;
+            ImageAnalysisSkillLanguage? defaultLanguageCode = default;
             IList<VisualFeature> visualFeatures = default;
             IList<ImageDetail> details = default;
             string odataType = default;

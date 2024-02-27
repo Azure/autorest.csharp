@@ -19,11 +19,11 @@ namespace MgmtScopeResource.Models
             {
                 return null;
             }
-            ProvisioningOperation provisioningOperation = default;
+            ProvisioningOperation? provisioningOperation = default;
             string provisioningState = default;
-            DateTimeOffset timestamp = default;
-            TimeSpan duration = default;
-            TimeSpan anotherDuration = default;
+            DateTimeOffset? timestamp = default;
+            TimeSpan? duration = default;
+            TimeSpan? anotherDuration = default;
             string serviceRequestId = default;
             string statusCode = default;
             StatusMessage statusMessage = default;

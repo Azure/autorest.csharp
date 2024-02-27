@@ -69,8 +69,8 @@ namespace CognitiveSearch.Models
                 return null;
             }
             TextTranslationSkillLanguage defaultToLanguageCode = default;
-            TextTranslationSkillLanguage defaultFromLanguageCode = default;
-            TextTranslationSkillLanguage suggestedFrom = default;
+            TextTranslationSkillLanguage? defaultFromLanguageCode = default;
+            TextTranslationSkillLanguage? suggestedFrom = default;
             string odataType = default;
             string name = default;
             string description = default;

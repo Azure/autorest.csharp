@@ -132,7 +132,7 @@ namespace Azure.ResourceManager.Sample.Models
             OSDiskImage osDiskImage = default;
             IList<DataDiskImage> dataDiskImages = default;
             AutomaticOSUpgradeProperties automaticOSUpgradeProperties = default;
-            HyperVGeneration hyperVGeneration = default;
+            HyperVGeneration? hyperVGeneration = default;
             DisallowedConfiguration disallowed = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();

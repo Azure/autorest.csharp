@@ -19,7 +19,7 @@ namespace MgmtMockAndSample.Models
             }
             string type = default;
             string description = default;
-            int sev = default;
+            int? sev = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("type"u8))

@@ -92,12 +92,12 @@ namespace Azure.Network.Management.Interface.Models
             IReadOnlyList<NetworkInterfaceTapConfiguration> tapConfigurations = default;
             NetworkInterfaceDnsSettings dnsSettings = default;
             string macAddress = default;
-            bool primary = default;
-            bool enableAcceleratedNetworking = default;
-            bool enableIPForwarding = default;
+            bool? primary = default;
+            bool? enableAcceleratedNetworking = default;
+            bool? enableIPForwarding = default;
             IReadOnlyList<string> hostedWorkloads = default;
             string resourceGuid = default;
-            ProvisioningState provisioningState = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"u8))

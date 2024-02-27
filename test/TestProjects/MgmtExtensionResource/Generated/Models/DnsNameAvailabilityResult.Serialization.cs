@@ -17,7 +17,7 @@ namespace MgmtExtensionResource.Models
             {
                 return null;
             }
-            bool available = default;
+            bool? available = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("available"u8))

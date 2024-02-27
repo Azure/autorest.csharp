@@ -140,7 +140,7 @@ namespace MgmtXmlDeserialization.Models
                 return null;
             }
             IReadOnlyList<XmlInstanceData> value = default;
-            long count = default;
+            long? count = default;
             string nextLink = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();

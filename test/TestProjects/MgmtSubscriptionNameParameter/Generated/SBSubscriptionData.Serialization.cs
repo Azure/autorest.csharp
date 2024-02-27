@@ -99,22 +99,22 @@ namespace MgmtSubscriptionNameParameter
             string name = default;
             ResourceType type = default;
             SystemData systemData = default;
-            long messageCount = default;
-            DateTimeOffset createdAt = default;
-            DateTimeOffset accessedAt = default;
-            DateTimeOffset updatedAt = default;
-            TimeSpan lockDuration = default;
-            bool requiresSession = default;
-            TimeSpan defaultMessageTimeToLive = default;
-            bool deadLetteringOnFilterEvaluationExceptions = default;
-            bool deadLetteringOnMessageExpiration = default;
-            TimeSpan duplicateDetectionHistoryTimeWindow = default;
-            int maxDeliveryCount = default;
-            bool enableBatchedOperations = default;
-            TimeSpan autoDeleteOnIdle = default;
+            long? messageCount = default;
+            DateTimeOffset? createdAt = default;
+            DateTimeOffset? accessedAt = default;
+            DateTimeOffset? updatedAt = default;
+            TimeSpan? lockDuration = default;
+            bool? requiresSession = default;
+            TimeSpan? defaultMessageTimeToLive = default;
+            bool? deadLetteringOnFilterEvaluationExceptions = default;
+            bool? deadLetteringOnMessageExpiration = default;
+            TimeSpan? duplicateDetectionHistoryTimeWindow = default;
+            int? maxDeliveryCount = default;
+            bool? enableBatchedOperations = default;
+            TimeSpan? autoDeleteOnIdle = default;
             string forwardTo = default;
             string forwardDeadLetteredMessagesTo = default;
-            bool isClientAffine = default;
+            bool? isClientAffine = default;
             SBClientAffineProperties clientAffineProperties = default;
             foreach (var property in element.EnumerateObject())
             {

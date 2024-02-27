@@ -107,9 +107,9 @@ namespace Azure.ResourceManager.Sample.Models
             WritableSubResource snapshot = default;
             WritableSubResource managedDisk = default;
             Uri blobUri = default;
-            CachingType caching = default;
-            int diskSizeGB = default;
-            StorageAccountType storageAccountType = default;
+            CachingType? caching = default;
+            int? diskSizeGB = default;
+            StorageAccountType? storageAccountType = default;
             WritableSubResource diskEncryptionSet = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();

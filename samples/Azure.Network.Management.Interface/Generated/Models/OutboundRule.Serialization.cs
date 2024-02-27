@@ -77,13 +77,13 @@ namespace Azure.Network.Management.Interface.Models
             string etag = default;
             string type = default;
             string id = default;
-            int allocatedOutboundPorts = default;
+            int? allocatedOutboundPorts = default;
             IList<SubResource> frontendIPConfigurations = default;
             SubResource backendAddressPool = default;
-            ProvisioningState provisioningState = default;
-            LoadBalancerOutboundRuleProtocol protocol = default;
-            bool enableTcpReset = default;
-            int idleTimeoutInMinutes = default;
+            ProvisioningState? provisioningState = default;
+            LoadBalancerOutboundRuleProtocol? protocol = default;
+            bool? enableTcpReset = default;
+            int? idleTimeoutInMinutes = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))

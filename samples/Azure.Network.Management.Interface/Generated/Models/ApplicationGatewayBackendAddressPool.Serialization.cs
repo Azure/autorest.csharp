@@ -54,7 +54,7 @@ namespace Azure.Network.Management.Interface.Models
             string id = default;
             IReadOnlyList<NetworkInterfaceIPConfiguration> backendIPConfigurations = default;
             IList<ApplicationGatewayBackendAddress> backendAddresses = default;
-            ProvisioningState provisioningState = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))

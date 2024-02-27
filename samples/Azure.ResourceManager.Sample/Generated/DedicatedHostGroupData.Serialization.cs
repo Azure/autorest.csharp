@@ -162,17 +162,17 @@ namespace Azure.ResourceManager.Sample
             }
             IList<string> zones = default;
             IList<Uri> hostUris = default;
-            Guid tenantId = default;
+            Guid? tenantId = default;
             IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             SystemData systemData = default;
-            int platformFaultDomainCount = default;
+            int? platformFaultDomainCount = default;
             IReadOnlyList<Resources.Models.SubResource> hosts = default;
             DedicatedHostGroupInstanceView instanceView = default;
-            bool supportAutomaticPlacement = default;
+            bool? supportAutomaticPlacement = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

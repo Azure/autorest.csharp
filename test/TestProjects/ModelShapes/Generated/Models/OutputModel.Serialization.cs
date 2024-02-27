@@ -330,7 +330,7 @@ namespace ModelShapes.Models
             IReadOnlyList<string> requiredStringList = default;
             IReadOnlyList<int> requiredIntList = default;
             string nonRequiredString = default;
-            int nonRequiredInt = default;
+            int? nonRequiredInt = default;
             IReadOnlyList<string> nonRequiredStringList = default;
             IReadOnlyList<int> nonRequiredIntList = default;
             string requiredNullableString = default;
@@ -342,7 +342,7 @@ namespace ModelShapes.Models
             IReadOnlyList<string> nonRequiredNullableStringList = default;
             IReadOnlyList<int> nonRequiredNullableIntList = default;
             int requiredReadonlyInt = default;
-            int nonRequiredReadonlyInt = default;
+            int? nonRequiredReadonlyInt = default;
             ReadOnlyMemory<float> vector = default;
             ReadOnlyMemory<float> vectorReadOnly = default;
             ReadOnlyMemory<float> vectorReadOnlyRequired = default;

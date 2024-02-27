@@ -54,7 +54,7 @@ namespace MgmtMockAndSample
             {
                 return null;
             }
-            AzureLocation location = default;
+            AzureLocation? location = default;
             IReadOnlyDictionary<string, string> tags = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -63,8 +63,8 @@ namespace MgmtMockAndSample
             string operatingSystem = default;
             string computeRole = default;
             string handlerSchema = default;
-            bool vmScaleSetEnabled = default;
-            bool supportsMultipleExtensions = default;
+            bool? vmScaleSetEnabled = default;
+            bool? supportsMultipleExtensions = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("location"u8))

@@ -86,10 +86,10 @@ namespace multiple_inheritance.Models
             {
                 return null;
             }
-            bool eatsMiceYet = default;
-            bool likesMilk = default;
-            bool meows = default;
-            bool hisses = default;
+            bool? eatsMiceYet = default;
+            bool? likesMilk = default;
+            bool? meows = default;
+            bool? hisses = default;
             string name = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();

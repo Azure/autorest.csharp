@@ -84,7 +84,7 @@ namespace lro.Models
             }
             string id = default;
             string provisioningState = default;
-            SubProductPropertiesProvisioningStateValues provisioningStateValues = default;
+            SubProductPropertiesProvisioningStateValues? provisioningStateValues = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

@@ -96,7 +96,7 @@ namespace CognitiveSearch.Models
                 return null;
             }
             IList<EntityCategory> categories = default;
-            EntityRecognitionSkillLanguage defaultLanguageCode = default;
+            EntityRecognitionSkillLanguage? defaultLanguageCode = default;
             bool? includeTypelessEntities = default;
             double? minimumPrecision = default;
             string odataType = default;

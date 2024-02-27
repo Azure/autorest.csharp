@@ -125,7 +125,7 @@ namespace model_flattening.Models
             string name = default;
             string pName = default;
             string type0 = default;
-            FlattenedProductPropertiesProvisioningStateValues provisioningStateValues = default;
+            FlattenedProductPropertiesProvisioningStateValues? provisioningStateValues = default;
             string provisioningState = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();

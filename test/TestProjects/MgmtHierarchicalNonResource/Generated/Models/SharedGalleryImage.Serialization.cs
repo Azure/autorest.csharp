@@ -22,13 +22,13 @@ namespace MgmtHierarchicalNonResource.Models
             }
             string name = default;
             string location = default;
-            OperatingSystemType osType = default;
-            OperatingSystemStateType osState = default;
-            DateTimeOffset endOfLifeDate = default;
+            OperatingSystemType? osType = default;
+            OperatingSystemStateType? osState = default;
+            DateTimeOffset? endOfLifeDate = default;
             GalleryImageIdentifier identifier = default;
             RecommendedMachineConfiguration recommended = default;
             Disallowed disallowed = default;
-            HyperVGeneration hyperVGeneration = default;
+            HyperVGeneration? hyperVGeneration = default;
             IReadOnlyList<GalleryImageFeature> features = default;
             ImagePurchasePlan purchasePlan = default;
             string uniqueId = default;

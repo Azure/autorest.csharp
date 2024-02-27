@@ -40,8 +40,8 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            DateTimeOffset startTime = default;
-            DateTimeOffset expiryTime = default;
+            DateTimeOffset? startTime = default;
+            DateTimeOffset? expiryTime = default;
             string permission = default;
             foreach (var property in element.EnumerateObject())
             {

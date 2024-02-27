@@ -43,8 +43,8 @@ namespace MgmtPropertyChooser.Models
                 return null;
             }
             string principalId = default;
-            int tenantId = default;
-            ResourceIdentityType type = default;
+            int? tenantId = default;
+            ResourceIdentityType? type = default;
             IDictionary<string, UserAssignedIdentity> userAssignedIdentities = default;
             foreach (var property in element.EnumerateObject())
             {

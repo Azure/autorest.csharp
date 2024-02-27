@@ -55,8 +55,8 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            NetworkRuleBypassOption bypass = default;
-            NetworkRuleAction defaultAction = default;
+            NetworkRuleBypassOption? bypass = default;
+            NetworkRuleAction? defaultAction = default;
             IList<IPRule> ipRules = default;
             IList<VirtualNetworkRule> virtualNetworkRules = default;
             foreach (var property in element.EnumerateObject())

@@ -19,9 +19,9 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            TimeSpan maxRunTime = default;
-            long maxDocumentExtractionSize = default;
-            long maxDocumentContentCharactersToExtract = default;
+            TimeSpan? maxRunTime = default;
+            long? maxDocumentExtractionSize = default;
+            long? maxDocumentContentCharactersToExtract = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("maxRunTime"u8))

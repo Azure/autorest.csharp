@@ -35,7 +35,7 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Guid tenantId = default;
+            Guid? tenantId = default;
             string resourceId = default;
             foreach (var property in element.EnumerateObject())
             {

@@ -54,9 +54,9 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            bool lowercase = default;
+            bool? lowercase = default;
             string pattern = default;
-            RegexFlags flags = default;
+            RegexFlags? flags = default;
             IList<string> stopwords = default;
             string odataType = default;
             string name = default;

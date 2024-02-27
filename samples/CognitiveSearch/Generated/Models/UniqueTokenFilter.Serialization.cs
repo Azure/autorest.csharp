@@ -33,7 +33,7 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            bool onlyOnSamePosition = default;
+            bool? onlyOnSamePosition = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())

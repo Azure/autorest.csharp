@@ -112,13 +112,13 @@ namespace AnomalyDetector.Models
                 return null;
             }
             string dataSource = default;
-            DataSchema dataSchema = default;
+            DataSchema? dataSchema = default;
             DateTimeOffset startTime = default;
             DateTimeOffset endTime = default;
             string displayName = default;
-            int slidingWindow = default;
+            int? slidingWindow = default;
             AlignPolicy alignPolicy = default;
-            ModelStatus status = default;
+            ModelStatus? status = default;
             IReadOnlyList<ErrorResponse> errors = default;
             DiagnosticsInfo diagnosticsInfo = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;

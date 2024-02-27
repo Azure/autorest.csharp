@@ -64,7 +64,7 @@ namespace Azure.Network.Management.Interface.Models
             string description = default;
             string service = default;
             IList<string> serviceResources = default;
-            ProvisioningState provisioningState = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))

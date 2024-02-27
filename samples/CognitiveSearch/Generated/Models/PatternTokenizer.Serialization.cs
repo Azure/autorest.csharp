@@ -44,8 +44,8 @@ namespace CognitiveSearch.Models
                 return null;
             }
             string pattern = default;
-            RegexFlags flags = default;
-            int group = default;
+            RegexFlags? flags = default;
+            int? group = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())

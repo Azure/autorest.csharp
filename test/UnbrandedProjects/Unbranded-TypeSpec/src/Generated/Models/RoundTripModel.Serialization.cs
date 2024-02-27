@@ -281,13 +281,13 @@ namespace UnbrandedTypeSpec.Models
             IList<StringFixedEnum?> requiredCollection = default;
             IDictionary<string, StringExtensibleEnum?> requiredDictionary = default;
             Thing requiredModel = default;
-            IntExtensibleEnum intExtensibleEnum = default;
+            IntExtensibleEnum? intExtensibleEnum = default;
             IList<IntExtensibleEnum> intExtensibleEnumCollection = default;
-            FloatExtensibleEnum floatExtensibleEnum = default;
+            FloatExtensibleEnum? floatExtensibleEnum = default;
             IList<FloatExtensibleEnum> floatExtensibleEnumCollection = default;
-            FloatFixedEnum floatFixedEnum = default;
+            FloatFixedEnum? floatFixedEnum = default;
             IList<FloatFixedEnum> floatFixedEnumCollection = default;
-            IntFixedEnum intFixedEnum = default;
+            IntFixedEnum? intFixedEnum = default;
             IList<IntFixedEnum> intFixedEnumCollection = default;
             StringFixedEnum? stringFixedEnum = default;
             BinaryData requiredUnknown = default;

@@ -56,9 +56,9 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            int batchSize = default;
-            int maxFailedItems = default;
-            int maxFailedItemsPerBatch = default;
+            int? batchSize = default;
+            int? maxFailedItems = default;
+            int? maxFailedItemsPerBatch = default;
             IDictionary<string, object> configuration = default;
             foreach (var property in element.EnumerateObject())
             {

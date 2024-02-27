@@ -75,8 +75,8 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            DiffDiskOption option = default;
-            DiffDiskPlacement placement = default;
+            DiffDiskOption? option = default;
+            DiffDiskPlacement? placement = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

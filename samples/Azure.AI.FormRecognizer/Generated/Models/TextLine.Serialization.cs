@@ -20,7 +20,7 @@ namespace Azure.AI.FormRecognizer.Models
             }
             string text = default;
             IReadOnlyList<float> boundingBox = default;
-            Language language = default;
+            Language? language = default;
             IReadOnlyList<TextWord> words = default;
             foreach (var property in element.EnumerateObject())
             {

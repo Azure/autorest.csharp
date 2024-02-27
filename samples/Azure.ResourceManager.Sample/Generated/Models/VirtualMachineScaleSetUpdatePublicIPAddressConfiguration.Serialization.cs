@@ -84,7 +84,7 @@ namespace Azure.ResourceManager.Sample.Models
                 return null;
             }
             string name = default;
-            int idleTimeoutInMinutes = default;
+            int? idleTimeoutInMinutes = default;
             VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings dnsSettings = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();

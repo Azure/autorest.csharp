@@ -117,12 +117,12 @@ namespace Azure.ResourceManager.Sample.Models
             }
             string name = default;
             string id = default;
-            bool primary = default;
-            bool enableAcceleratedNetworking = default;
+            bool? primary = default;
+            bool? enableAcceleratedNetworking = default;
             WritableSubResource networkSecurityGroup = default;
             VirtualMachineScaleSetNetworkConfigurationDnsSettings dnsSettings = default;
             IList<VirtualMachineScaleSetUpdateIPConfiguration> ipConfigurations = default;
-            bool enableIPForwarding = default;
+            bool? enableIPForwarding = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

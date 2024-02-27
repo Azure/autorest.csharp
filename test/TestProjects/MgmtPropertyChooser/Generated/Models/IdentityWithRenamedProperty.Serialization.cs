@@ -44,7 +44,7 @@ namespace MgmtPropertyChooser.Models
             }
             string testPrincipalId = default;
             string tenantId = default;
-            ResourceIdentityType type = default;
+            ResourceIdentityType? type = default;
             IDictionary<string, UserAssignedIdentity> userAssignedIdentities = default;
             foreach (var property in element.EnumerateObject())
             {

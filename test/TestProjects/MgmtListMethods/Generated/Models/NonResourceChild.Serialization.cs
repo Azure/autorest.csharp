@@ -18,7 +18,7 @@ namespace MgmtListMethods.Models
                 return null;
             }
             string name = default;
-            int numberOfCores = default;
+            int? numberOfCores = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))

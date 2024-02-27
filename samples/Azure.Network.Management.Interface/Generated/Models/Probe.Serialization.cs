@@ -68,12 +68,12 @@ namespace Azure.Network.Management.Interface.Models
             string type = default;
             string id = default;
             IReadOnlyList<SubResource> loadBalancingRules = default;
-            ProbeProtocol protocol = default;
-            int port = default;
-            int intervalInSeconds = default;
-            int numberOfProbes = default;
+            ProbeProtocol? protocol = default;
+            int? port = default;
+            int? intervalInSeconds = default;
+            int? numberOfProbes = default;
             string requestPath = default;
-            ProvisioningState provisioningState = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))

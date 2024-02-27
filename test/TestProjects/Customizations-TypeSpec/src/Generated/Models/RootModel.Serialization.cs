@@ -120,17 +120,17 @@ namespace CustomizationsInTsp.Models
             {
                 return null;
             }
-            ExtensibleEnumWithOperator propertyExtensibleEnum = default;
+            ExtensibleEnumWithOperator? propertyExtensibleEnum = default;
             ModelToMakeInternal propertyModelToMakeInternal = default;
             RenamedModel propertyModelToRename = default;
             ModelToChangeNamespace propertyModelToChangeNamespace = default;
             ModelWithCustomizedProperties propertyModelWithCustomizedProperties = default;
-            RenamedEnum propertyEnumToRename = default;
-            EnumWithValueToRename propertyEnumWithValueToRename = default;
-            EnumToBeMadeExtensible propertyEnumToBeMadeExtensible = default;
+            RenamedEnum? propertyEnumToRename = default;
+            EnumWithValueToRename? propertyEnumWithValueToRename = default;
+            EnumToBeMadeExtensible? propertyEnumToBeMadeExtensible = default;
             ModelToAddAdditionalSerializableProperty propertyModelToAddAdditionalSerializableProperty = default;
-            NormalEnum propertyToMoveToCustomization = default;
-            ModelStruct propertyModelStruct = default;
+            NormalEnum? propertyToMoveToCustomization = default;
+            ModelStruct? propertyModelStruct = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

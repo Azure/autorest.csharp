@@ -28,7 +28,7 @@ namespace MgmtExactMatchInheritance.Models
                 return null;
             }
             string name = default;
-            ResourceType type = default;
+            ResourceType? type = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))

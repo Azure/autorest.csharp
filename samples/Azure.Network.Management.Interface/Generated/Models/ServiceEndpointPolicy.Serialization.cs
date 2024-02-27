@@ -68,7 +68,7 @@ namespace Azure.Network.Management.Interface.Models
             IList<ServiceEndpointPolicyDefinition> serviceEndpointPolicyDefinitions = default;
             IReadOnlyList<Subnet> subnets = default;
             string resourceGuid = default;
-            ProvisioningState provisioningState = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"u8))

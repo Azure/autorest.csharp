@@ -44,9 +44,9 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            int maxBatchInstancePercent = default;
-            int maxUnhealthyInstancePercent = default;
-            int maxUnhealthyUpgradedInstancePercent = default;
+            int? maxBatchInstancePercent = default;
+            int? maxUnhealthyInstancePercent = default;
+            int? maxUnhealthyUpgradedInstancePercent = default;
             string pauseTimeBetweenBatches = default;
             foreach (var property in element.EnumerateObject())
             {

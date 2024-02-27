@@ -27,7 +27,7 @@ namespace Azure.ResourceManager.Storage.Models
                 return null;
             }
             StorageSkuName name = default;
-            StorageSkuTier tier = default;
+            StorageSkuTier? tier = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))

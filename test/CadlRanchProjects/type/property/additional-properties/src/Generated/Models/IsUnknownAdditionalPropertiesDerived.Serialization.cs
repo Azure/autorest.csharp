@@ -72,7 +72,7 @@ namespace _Type.Property.AdditionalProperties.Models
                 return null;
             }
             int index = default;
-            float age = default;
+            float? age = default;
             string name = default;
             IDictionary<string, BinaryData> additionalProperties = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();

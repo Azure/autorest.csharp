@@ -88,8 +88,8 @@ namespace OpenAI.Models
             BinaryData file = default;
             CreateTranscriptionRequestModel model = default;
             string prompt = default;
-            CreateTranscriptionRequestResponseFormat responseFormat = default;
-            double temperature = default;
+            CreateTranscriptionRequestResponseFormat? responseFormat = default;
+            double? temperature = default;
             string language = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();

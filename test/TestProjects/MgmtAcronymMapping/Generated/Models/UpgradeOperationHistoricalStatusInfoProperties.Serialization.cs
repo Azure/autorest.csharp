@@ -20,7 +20,7 @@ namespace MgmtAcronymMapping.Models
             UpgradeOperationHistoryStatus runningStatus = default;
             RollingUpgradeProgressInfo progress = default;
             ApiError error = default;
-            UpgradeOperationInvoker startedBy = default;
+            UpgradeOperationInvoker? startedBy = default;
             ImageReference targetImageReference = default;
             RollbackStatusInfo rollbackInfo = default;
             foreach (var property in element.EnumerateObject())

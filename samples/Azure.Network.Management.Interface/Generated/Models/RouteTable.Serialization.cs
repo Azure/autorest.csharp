@@ -72,8 +72,8 @@ namespace Azure.Network.Management.Interface.Models
             IDictionary<string, string> tags = default;
             IList<Route> routes = default;
             IReadOnlyList<Subnet> subnets = default;
-            bool disableBgpRoutePropagation = default;
-            ProvisioningState provisioningState = default;
+            bool? disableBgpRoutePropagation = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"u8))

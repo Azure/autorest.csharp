@@ -17,8 +17,8 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            bool walkPerformed = default;
-            int nextPlatformUpdateDomain = default;
+            bool? walkPerformed = default;
+            int? nextPlatformUpdateDomain = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("walkPerformed"u8))

@@ -107,7 +107,7 @@ namespace CognitiveSearch.Models
             string uri = default;
             IDictionary<string, string> httpHeaders = default;
             string httpMethod = default;
-            TimeSpan timeout = default;
+            TimeSpan? timeout = default;
             int? batchSize = default;
             int? degreeOfParallelism = default;
             string odataType = default;

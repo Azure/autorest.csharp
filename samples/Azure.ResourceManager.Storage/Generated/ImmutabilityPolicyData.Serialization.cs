@@ -45,15 +45,15 @@ namespace Azure.ResourceManager.Storage
             {
                 return null;
             }
-            ETag etag = default;
+            ETag? etag = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             SystemData systemData = default;
-            int immutabilityPeriodSinceCreationInDays = default;
-            ImmutabilityPolicyState state = default;
-            bool allowProtectedAppendWrites = default;
-            bool allowProtectedAppendWritesAll = default;
+            int? immutabilityPeriodSinceCreationInDays = default;
+            ImmutabilityPolicyState? state = default;
+            bool? allowProtectedAppendWrites = default;
+            bool? allowProtectedAppendWritesAll = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"u8))

@@ -50,7 +50,7 @@ namespace CognitiveSearch.Models
             string name = default;
             TextWeights text = default;
             IList<ScoringFunction> functions = default;
-            ScoringFunctionAggregation functionAggregation = default;
+            ScoringFunctionAggregation? functionAggregation = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))

@@ -125,12 +125,12 @@ namespace Azure.ResourceManager.Sample.Models
                 return null;
             }
             IDictionary<string, string> tags = default;
-            int platformFaultDomain = default;
-            bool autoReplaceOnFailure = default;
+            int? platformFaultDomain = default;
+            bool? autoReplaceOnFailure = default;
             string hostId = default;
             IReadOnlyList<Resources.Models.SubResource> virtualMachines = default;
-            DedicatedHostLicenseType licenseType = default;
-            DateTimeOffset provisioningTime = default;
+            DedicatedHostLicenseType? licenseType = default;
+            DateTimeOffset? provisioningTime = default;
             string provisioningState = default;
             DedicatedHostInstanceView instanceView = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;

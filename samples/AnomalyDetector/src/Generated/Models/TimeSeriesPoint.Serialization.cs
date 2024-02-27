@@ -72,7 +72,7 @@ namespace AnomalyDetector.Models
             {
                 return null;
             }
-            DateTimeOffset timestamp = default;
+            DateTimeOffset? timestamp = default;
             float value = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();

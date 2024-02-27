@@ -56,7 +56,7 @@ namespace Azure.Network.Management.Interface.Models
             string location = default;
             IDictionary<string, string> tags = default;
             string resourceGuid = default;
-            ProvisioningState provisioningState = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"u8))

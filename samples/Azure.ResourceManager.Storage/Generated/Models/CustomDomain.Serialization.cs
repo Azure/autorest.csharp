@@ -32,7 +32,7 @@ namespace Azure.ResourceManager.Storage.Models
                 return null;
             }
             string name = default;
-            bool useSubDomainName = default;
+            bool? useSubDomainName = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))

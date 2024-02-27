@@ -73,29 +73,29 @@ namespace Azure.ResourceManager.Storage
             {
                 return null;
             }
-            ETag etag = default;
+            ETag? etag = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             SystemData systemData = default;
-            DateTimeOffset lastModifiedTime = default;
+            DateTimeOffset? lastModifiedTime = default;
             IDictionary<string, string> metadata = default;
-            int shareQuota = default;
-            EnabledProtocol enabledProtocols = default;
-            RootSquashType rootSquash = default;
+            int? shareQuota = default;
+            EnabledProtocol? enabledProtocols = default;
+            RootSquashType? rootSquash = default;
             string version = default;
-            bool deleted = default;
-            DateTimeOffset deletedTime = default;
-            int remainingRetentionDays = default;
-            ShareAccessTier accessTier = default;
-            DateTimeOffset accessTierChangeTime = default;
+            bool? deleted = default;
+            DateTimeOffset? deletedTime = default;
+            int? remainingRetentionDays = default;
+            ShareAccessTier? accessTier = default;
+            DateTimeOffset? accessTierChangeTime = default;
             string accessTierStatus = default;
-            long shareUsageBytes = default;
-            LeaseStatus leaseStatus = default;
-            LeaseState leaseState = default;
-            LeaseDuration leaseDuration = default;
+            long? shareUsageBytes = default;
+            LeaseStatus? leaseStatus = default;
+            LeaseState? leaseState = default;
+            LeaseDuration? leaseDuration = default;
             IList<SignedIdentifier> signedIdentifiers = default;
-            DateTimeOffset snapshotTime = default;
+            DateTimeOffset? snapshotTime = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"u8))

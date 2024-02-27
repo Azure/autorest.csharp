@@ -74,7 +74,7 @@ namespace subscriptionId_apiVersion.Models
             {
                 return null;
             }
-            int code = default;
+            int? code = default;
             string message = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();

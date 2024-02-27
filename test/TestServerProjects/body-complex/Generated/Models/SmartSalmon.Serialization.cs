@@ -90,7 +90,7 @@ namespace body_complex.Models
             }
             string collegeDegree = default;
             string location = default;
-            bool iswild = default;
+            bool? iswild = default;
             string fishtype = default;
             string species = default;
             float length = default;

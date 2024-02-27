@@ -265,7 +265,7 @@ namespace ModelsTypeSpec.Models
             string requiredReadonlyString = default;
             int requiredReadonlyInt = default;
             string optionalReadonlyString = default;
-            int optionalReadonlyInt = default;
+            int? optionalReadonlyInt = default;
             DerivedModel requiredReadonlyModel = default;
             DerivedModel optionalReadonlyModel = default;
             FixedStringEnum requiredReadonlyFixedStringEnum = default;

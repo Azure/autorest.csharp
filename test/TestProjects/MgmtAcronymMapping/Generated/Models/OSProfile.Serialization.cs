@@ -82,8 +82,8 @@ namespace MgmtAcronymMapping.Models
             WindowsConfiguration windowsConfiguration = default;
             LinuxConfiguration linuxConfiguration = default;
             IList<VaultSecretGroup> secrets = default;
-            bool allowExtensionOperations = default;
-            bool requireGuestProvisionSignal = default;
+            bool? allowExtensionOperations = default;
+            bool? requireGuestProvisionSignal = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("computerName"u8))

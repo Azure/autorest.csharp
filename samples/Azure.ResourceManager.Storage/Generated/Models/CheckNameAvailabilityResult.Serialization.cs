@@ -17,8 +17,8 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            bool nameAvailable = default;
-            Reason reason = default;
+            bool? nameAvailable = default;
+            Reason? reason = default;
             string message = default;
             foreach (var property in element.EnumerateObject())
             {

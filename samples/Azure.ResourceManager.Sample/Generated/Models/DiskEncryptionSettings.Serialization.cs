@@ -82,7 +82,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
             KeyVaultSecretReference diskEncryptionKey = default;
             KeyVaultKeyReference keyEncryptionKey = default;
-            bool enabled = default;
+            bool? enabled = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

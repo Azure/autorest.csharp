@@ -81,7 +81,7 @@ namespace additionalProperties.Models
             }
             int id = default;
             string name = default;
-            bool status = default;
+            bool? status = default;
             string odataLocation = default;
             IDictionary<string, float> additionalProperties = default;
             IDictionary<string, string> moreAdditionalProperties = default;

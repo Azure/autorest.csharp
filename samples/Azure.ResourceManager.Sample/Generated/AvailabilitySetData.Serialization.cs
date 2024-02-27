@@ -152,8 +152,8 @@ namespace Azure.ResourceManager.Sample
             string name = default;
             ResourceType type = default;
             SystemData systemData = default;
-            int platformUpdateDomainCount = default;
-            int platformFaultDomainCount = default;
+            int? platformUpdateDomainCount = default;
+            int? platformFaultDomainCount = default;
             IList<WritableSubResource> virtualMachines = default;
             WritableSubResource proximityPlacementGroup = default;
             IReadOnlyList<InstanceViewStatus> statuses = default;

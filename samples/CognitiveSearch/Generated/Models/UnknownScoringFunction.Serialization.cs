@@ -38,7 +38,7 @@ namespace CognitiveSearch.Models
             string type = "Unknown";
             string fieldName = default;
             double boost = default;
-            ScoringFunctionInterpolation interpolation = default;
+            ScoringFunctionInterpolation? interpolation = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("type"u8))

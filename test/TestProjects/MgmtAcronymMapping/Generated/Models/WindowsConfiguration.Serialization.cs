@@ -60,8 +60,8 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            bool provisionVmAgent = default;
-            bool enableAutomaticUpdates = default;
+            bool? provisionVmAgent = default;
+            bool? enableAutomaticUpdates = default;
             string timeZone = default;
             IList<AdditionalUnattendContent> additionalUnattendContent = default;
             PatchSettings patchSettings = default;

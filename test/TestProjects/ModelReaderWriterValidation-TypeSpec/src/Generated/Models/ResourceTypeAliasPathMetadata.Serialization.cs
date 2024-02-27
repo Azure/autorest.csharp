@@ -75,8 +75,8 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             {
                 return null;
             }
-            ResourceTypeAliasPathTokenType tokenType = default;
-            ResourceTypeAliasPathAttributes attributes = default;
+            ResourceTypeAliasPathTokenType? tokenType = default;
+            ResourceTypeAliasPathAttributes? attributes = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

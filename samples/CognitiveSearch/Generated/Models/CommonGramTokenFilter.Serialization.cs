@@ -47,8 +47,8 @@ namespace CognitiveSearch.Models
                 return null;
             }
             IList<string> commonWords = default;
-            bool ignoreCase = default;
-            bool queryMode = default;
+            bool? ignoreCase = default;
+            bool? queryMode = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())

@@ -85,10 +85,10 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            RollingUpgradeStatusCode code = default;
-            DateTimeOffset startTime = default;
-            RollingUpgradeActionType lastAction = default;
-            DateTimeOffset lastActionTime = default;
+            RollingUpgradeStatusCode? code = default;
+            DateTimeOffset? startTime = default;
+            RollingUpgradeActionType? lastAction = default;
+            DateTimeOffset? lastActionTime = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

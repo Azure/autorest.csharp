@@ -117,17 +117,17 @@ namespace Azure.Network.Management.Interface.Models
             string type = default;
             string location = default;
             IDictionary<string, string> tags = default;
-            IPAllocationMethod publicIPAllocationMethod = default;
-            IPVersion publicIPAddressVersion = default;
+            IPAllocationMethod? publicIPAllocationMethod = default;
+            IPVersion? publicIPAddressVersion = default;
             IPConfiguration ipConfiguration = default;
             PublicIPAddressDnsSettings dnsSettings = default;
             DdosSettings ddosSettings = default;
             IList<IpTag> ipTags = default;
             string ipAddress = default;
             SubResource publicIPPrefix = default;
-            int idleTimeoutInMinutes = default;
+            int? idleTimeoutInMinutes = default;
             string resourceGuid = default;
-            ProvisioningState provisioningState = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sku"u8))

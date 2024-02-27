@@ -38,7 +38,7 @@ namespace MgmtMockAndSample.Models
             }
             Guid tenantId = default;
             string objectId = default;
-            Guid applicationId = default;
+            Guid? applicationId = default;
             Permissions permissions = default;
             foreach (var property in element.EnumerateObject())
             {

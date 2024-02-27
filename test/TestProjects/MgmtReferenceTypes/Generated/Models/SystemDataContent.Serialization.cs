@@ -58,11 +58,11 @@ namespace Azure.ResourceManager.Fake.Models
                 return null;
             }
             string createdBy = default;
-            CreatedByType createdByType = default;
-            DateTimeOffset createdAt = default;
+            CreatedByType? createdByType = default;
+            DateTimeOffset? createdAt = default;
             string lastModifiedBy = default;
-            CreatedByType lastModifiedByType = default;
-            DateTimeOffset lastModifiedAt = default;
+            CreatedByType? lastModifiedByType = default;
+            DateTimeOffset? lastModifiedAt = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("createdBy"u8))

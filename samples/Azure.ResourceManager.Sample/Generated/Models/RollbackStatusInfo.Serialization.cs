@@ -80,8 +80,8 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            int successfullyRolledbackInstanceCount = default;
-            int failedRolledbackInstanceCount = default;
+            int? successfullyRolledbackInstanceCount = default;
+            int? failedRolledbackInstanceCount = default;
             ApiError rollbackError = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();

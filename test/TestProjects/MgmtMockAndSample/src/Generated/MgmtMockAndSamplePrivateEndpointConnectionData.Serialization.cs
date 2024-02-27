@@ -52,7 +52,7 @@ namespace MgmtMockAndSample
                 return null;
             }
             string etag = default;
-            AzureLocation location = default;
+            AzureLocation? location = default;
             IReadOnlyDictionary<string, string> tags = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -60,7 +60,7 @@ namespace MgmtMockAndSample
             SystemData systemData = default;
             Azure.ResourceManager.Resources.Models.SubResource privateEndpoint = default;
             MgmtMockAndSamplePrivateLinkServiceConnectionState privateLinkServiceConnectionState = default;
-            MgmtMockAndSamplePrivateEndpointConnectionProvisioningState provisioningState = default;
+            MgmtMockAndSamplePrivateEndpointConnectionProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"u8))

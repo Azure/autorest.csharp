@@ -152,8 +152,8 @@ namespace MgmtExactMatchInheritance
             }
             string @new = default;
             IList<Uri> supportingUris = default;
-            Type1 type1 = default;
-            Type2 type2 = default;
+            Type1? type1 = default;
+            Type2? type2 = default;
             IPAddress type3 = default;
             object type4 = default;
             DataFactoryElement<string> type5 = default;

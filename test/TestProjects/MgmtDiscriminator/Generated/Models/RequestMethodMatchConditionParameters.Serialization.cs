@@ -97,7 +97,7 @@ namespace MgmtDiscriminator.Models
             }
             RequestMethodMatchConditionParametersTypeName typeName = default;
             RequestMethodOperator @operator = default;
-            bool negateCondition = default;
+            bool? negateCondition = default;
             IList<Transform> transforms = default;
             IList<RequestMethodMatchConditionParametersMatchValuesItem> matchValues = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;

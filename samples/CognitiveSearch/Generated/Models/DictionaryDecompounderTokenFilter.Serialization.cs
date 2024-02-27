@@ -57,10 +57,10 @@ namespace CognitiveSearch.Models
                 return null;
             }
             IList<string> wordList = default;
-            int minWordSize = default;
-            int minSubwordSize = default;
-            int maxSubwordSize = default;
-            bool onlyLongestMatch = default;
+            int? minWordSize = default;
+            int? minSubwordSize = default;
+            int? maxSubwordSize = default;
+            bool? onlyLongestMatch = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())

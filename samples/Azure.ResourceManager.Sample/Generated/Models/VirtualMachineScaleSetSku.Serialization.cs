@@ -80,7 +80,7 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            ResourceType resourceType = default;
+            ResourceType? resourceType = default;
             SampleSku sku = default;
             VirtualMachineScaleSetSkuCapacity capacity = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;

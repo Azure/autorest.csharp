@@ -19,7 +19,7 @@ namespace CognitiveSearch.Models
                 return null;
             }
             IReadOnlyList<SuggestResult> value = default;
-            double searchCoverage = default;
+            double? searchCoverage = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))

@@ -61,7 +61,7 @@ namespace MgmtExtensionResource.Models
             string displayName = default;
             string description = default;
             string strongType = default;
-            bool assignPermissions = default;
+            bool? assignPermissions = default;
             IDictionary<string, BinaryData> additionalProperties = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

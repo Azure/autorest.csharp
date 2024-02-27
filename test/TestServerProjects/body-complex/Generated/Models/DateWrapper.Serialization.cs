@@ -74,8 +74,8 @@ namespace body_complex.Models
             {
                 return null;
             }
-            DateTimeOffset field = default;
-            DateTimeOffset leap = default;
+            DateTimeOffset? field = default;
+            DateTimeOffset? leap = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

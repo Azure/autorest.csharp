@@ -38,8 +38,8 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            int minGram = default;
-            int maxGram = default;
+            int? minGram = default;
+            int? maxGram = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())

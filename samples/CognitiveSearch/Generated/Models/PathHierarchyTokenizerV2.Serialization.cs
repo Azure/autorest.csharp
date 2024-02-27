@@ -53,11 +53,11 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            char delimiter = default;
-            char replacement = default;
-            int maxTokenLength = default;
-            bool reverse = default;
-            int skip = default;
+            char? delimiter = default;
+            char? replacement = default;
+            int? maxTokenLength = default;
+            bool? reverse = default;
+            int? skip = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())

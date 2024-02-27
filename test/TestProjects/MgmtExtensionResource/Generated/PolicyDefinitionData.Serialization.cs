@@ -90,7 +90,7 @@ namespace MgmtExtensionResource
             string name = default;
             ResourceType type = default;
             SystemData systemData = default;
-            PolicyType policyType = default;
+            PolicyType? policyType = default;
             string mode = default;
             string displayName = default;
             string description = default;

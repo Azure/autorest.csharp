@@ -96,11 +96,11 @@ namespace Azure.ResourceManager.Sample.Models
                 return null;
             }
             string name = default;
-            int numberOfCores = default;
-            int osDiskSizeInMB = default;
-            int resourceDiskSizeInMB = default;
-            int memoryInMB = default;
-            int maxDataDiskCount = default;
+            int? numberOfCores = default;
+            int? osDiskSizeInMB = default;
+            int? resourceDiskSizeInMB = default;
+            int? memoryInMB = default;
+            int? maxDataDiskCount = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

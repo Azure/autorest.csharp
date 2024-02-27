@@ -80,9 +80,9 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            bool disablePasswordAuthentication = default;
+            bool? disablePasswordAuthentication = default;
             SshConfiguration ssh = default;
-            bool provisionVmAgent = default;
+            bool? provisionVmAgent = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

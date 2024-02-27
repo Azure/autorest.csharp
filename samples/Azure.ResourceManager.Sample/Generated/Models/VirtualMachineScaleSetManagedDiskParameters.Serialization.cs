@@ -76,7 +76,7 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            StorageAccountType storageAccountType = default;
+            StorageAccountType? storageAccountType = default;
             WritableSubResource diskEncryptionSet = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();

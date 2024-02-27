@@ -29,7 +29,7 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            bool encryptionAtHost = default;
+            bool? encryptionAtHost = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("encryptionAtHost"u8))

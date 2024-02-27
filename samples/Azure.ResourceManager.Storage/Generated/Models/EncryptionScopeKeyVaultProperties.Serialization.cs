@@ -32,7 +32,7 @@ namespace Azure.ResourceManager.Storage.Models
             }
             Uri keyUri = default;
             string currentVersionedKeyIdentifier = default;
-            DateTimeOffset lastKeyRotationTimestamp = default;
+            DateTimeOffset? lastKeyRotationTimestamp = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("keyUri"u8))

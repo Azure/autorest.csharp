@@ -34,8 +34,8 @@ namespace MgmtNonStringPathVariable.Models
             {
                 return null;
             }
-            int platformUpdateDomainCount = default;
-            int platformFaultDomainCount = default;
+            int? platformUpdateDomainCount = default;
+            int? platformFaultDomainCount = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("platformUpdateDomainCount"u8))

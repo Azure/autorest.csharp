@@ -74,7 +74,7 @@ namespace lro_parameterized_endpoints.Models
             {
                 return null;
             }
-            int status = default;
+            int? status = default;
             string message = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();

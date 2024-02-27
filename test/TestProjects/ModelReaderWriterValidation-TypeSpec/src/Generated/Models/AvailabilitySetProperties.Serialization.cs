@@ -86,8 +86,8 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 return null;
             }
             IList<WritableSubResource> virtualMachines = default;
-            int platformFaultDomainCount = default;
-            int platformUpdateDomainCount = default;
+            int? platformFaultDomainCount = default;
+            int? platformUpdateDomainCount = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

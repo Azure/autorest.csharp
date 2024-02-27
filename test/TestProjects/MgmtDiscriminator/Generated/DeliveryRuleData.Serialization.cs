@@ -127,12 +127,12 @@ namespace MgmtDiscriminator
             {
                 return null;
             }
-            bool boolProperty = default;
-            AzureLocation location = default;
-            AzureLocation locationWithCustomSerialization = default;
-            DateTimeOffset dateTimeProperty = default;
-            TimeSpan duration = default;
-            int number = default;
+            bool? boolProperty = default;
+            AzureLocation? location = default;
+            AzureLocation? locationWithCustomSerialization = default;
+            DateTimeOffset? dateTimeProperty = default;
+            TimeSpan? duration = default;
+            int? number = default;
             Uri uri = default;
             DeliveryRuleProperties properties = default;
             ResourceIdentifier id = default;

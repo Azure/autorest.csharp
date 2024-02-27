@@ -71,9 +71,9 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            TextExtractionAlgorithm textExtractionAlgorithm = default;
-            OcrSkillLanguage defaultLanguageCode = default;
-            bool detectOrientation = default;
+            TextExtractionAlgorithm? textExtractionAlgorithm = default;
+            OcrSkillLanguage? defaultLanguageCode = default;
+            bool? detectOrientation = default;
             string odataType = default;
             string name = default;
             string description = default;

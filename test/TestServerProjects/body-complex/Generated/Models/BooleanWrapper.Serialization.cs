@@ -74,8 +74,8 @@ namespace body_complex.Models
             {
                 return null;
             }
-            bool fieldTrue = default;
-            bool fieldFalse = default;
+            bool? fieldTrue = default;
+            bool? fieldFalse = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

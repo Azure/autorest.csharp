@@ -29,7 +29,7 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            FirewallPolicySkuTier tier = default;
+            FirewallPolicySkuTier? tier = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("tier"u8))

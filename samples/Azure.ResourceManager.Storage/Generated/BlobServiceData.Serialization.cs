@@ -82,8 +82,8 @@ namespace Azure.ResourceManager.Storage
             CorsRules cors = default;
             string defaultServiceVersion = default;
             DeleteRetentionPolicy deleteRetentionPolicy = default;
-            bool isVersioningEnabled = default;
-            bool automaticSnapshotPolicyEnabled = default;
+            bool? isVersioningEnabled = default;
+            bool? automaticSnapshotPolicyEnabled = default;
             ChangeFeed changeFeed = default;
             RestorePolicyProperties restorePolicy = default;
             DeleteRetentionPolicy containerDeleteRetentionPolicy = default;

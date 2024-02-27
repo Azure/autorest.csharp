@@ -100,9 +100,9 @@ namespace body_complex.Models
             {
                 return null;
             }
-            int jawsize = default;
-            GoblinSharkColor color = default;
-            int age = default;
+            int? jawsize = default;
+            GoblinSharkColor? color = default;
+            int? age = default;
             DateTimeOffset birthday = default;
             string fishtype = default;
             string species = default;

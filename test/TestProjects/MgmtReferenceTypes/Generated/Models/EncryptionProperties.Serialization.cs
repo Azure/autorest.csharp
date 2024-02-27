@@ -37,7 +37,7 @@ namespace Azure.ResourceManager.Fake.Models
             {
                 return null;
             }
-            EncryptionStatus status = default;
+            EncryptionStatus? status = default;
             KeyVaultProperties keyVaultProperties = default;
             foreach (var property in element.EnumerateObject())
             {

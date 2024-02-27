@@ -141,8 +141,8 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            int platformUpdateDomain = default;
-            int platformFaultDomain = default;
+            int? platformUpdateDomain = default;
+            int? platformFaultDomain = default;
             string rdpThumbPrint = default;
             VirtualMachineAgentInstanceView vmAgent = default;
             MaintenanceRedeployStatus maintenanceRedeployStatus = default;

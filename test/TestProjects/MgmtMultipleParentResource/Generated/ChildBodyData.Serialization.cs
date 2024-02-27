@@ -79,10 +79,10 @@ namespace MgmtMultipleParentResource
             string name = default;
             ResourceType type = default;
             SystemData systemData = default;
-            bool asyncExecution = default;
+            bool? asyncExecution = default;
             string runAsUser = default;
             string runAsPassword = default;
-            int timeoutInSeconds = default;
+            int? timeoutInSeconds = default;
             Uri outputBlobUri = default;
             Uri errorBlobUri = default;
             string provisioningState = default;

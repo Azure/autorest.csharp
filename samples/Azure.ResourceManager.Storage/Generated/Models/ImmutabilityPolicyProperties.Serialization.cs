@@ -20,12 +20,12 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            ETag etag = default;
+            ETag? etag = default;
             IReadOnlyList<UpdateHistoryProperty> updateHistory = default;
-            int immutabilityPeriodSinceCreationInDays = default;
-            ImmutabilityPolicyState state = default;
-            bool allowProtectedAppendWrites = default;
-            bool allowProtectedAppendWritesAll = default;
+            int? immutabilityPeriodSinceCreationInDays = default;
+            ImmutabilityPolicyState? state = default;
+            bool? allowProtectedAppendWrites = default;
+            bool? allowProtectedAppendWritesAll = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"u8))

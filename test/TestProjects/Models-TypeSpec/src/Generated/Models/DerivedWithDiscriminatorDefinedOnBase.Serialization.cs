@@ -80,7 +80,7 @@ namespace ModelsTypeSpec.Models
                 return null;
             }
             string requiredString = default;
-            int optionalInt = default;
+            int? optionalInt = default;
             string optionalString = default;
             string kind = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;

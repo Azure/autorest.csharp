@@ -39,9 +39,9 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            RoutingChoice routingChoice = default;
-            bool publishMicrosoftEndpoints = default;
-            bool publishInternetEndpoints = default;
+            RoutingChoice? routingChoice = default;
+            bool? publishMicrosoftEndpoints = default;
+            bool? publishInternetEndpoints = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("routingChoice"u8))

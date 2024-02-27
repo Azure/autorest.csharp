@@ -147,7 +147,7 @@ namespace Azure.Network.Management.Interface.Models
             string etag = default;
             string id = default;
             string description = default;
-            SecurityRuleProtocol protocol = default;
+            SecurityRuleProtocol? protocol = default;
             string sourcePortRange = default;
             string destinationPortRange = default;
             string sourceAddressPrefix = default;
@@ -158,10 +158,10 @@ namespace Azure.Network.Management.Interface.Models
             IList<ApplicationSecurityGroup> destinationApplicationSecurityGroups = default;
             IList<string> sourcePortRanges = default;
             IList<string> destinationPortRanges = default;
-            SecurityRuleAccess access = default;
-            int priority = default;
-            SecurityRuleDirection direction = default;
-            ProvisioningState provisioningState = default;
+            SecurityRuleAccess? access = default;
+            int? priority = default;
+            SecurityRuleDirection? direction = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))

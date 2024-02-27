@@ -19,9 +19,9 @@ namespace MgmtListMethods.Models
             }
             string id = default;
             string type = default;
-            long limit = default;
-            QuotaUnit unit = default;
-            Status status = default;
+            long? limit = default;
+            QuotaUnit? unit = default;
+            Status? status = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))

@@ -23,7 +23,7 @@ namespace MgmtMockAndSample.Models
             string etag = default;
             Azure.ResourceManager.Resources.Models.SubResource privateEndpoint = default;
             MgmtMockAndSamplePrivateLinkServiceConnectionState privateLinkServiceConnectionState = default;
-            MgmtMockAndSamplePrivateEndpointConnectionProvisioningState provisioningState = default;
+            MgmtMockAndSamplePrivateEndpointConnectionProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))

@@ -56,9 +56,9 @@ namespace Azure.Network.Management.Interface.Models
             string etag = default;
             string id = default;
             string addressPrefix = default;
-            RouteNextHopType nextHopType = default;
+            RouteNextHopType? nextHopType = default;
             string nextHopIpAddress = default;
-            ProvisioningState provisioningState = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))

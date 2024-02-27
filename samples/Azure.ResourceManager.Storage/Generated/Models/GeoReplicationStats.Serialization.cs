@@ -19,9 +19,9 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            GeoReplicationStatus status = default;
-            DateTimeOffset lastSyncTime = default;
-            bool canFailover = default;
+            GeoReplicationStatus? status = default;
+            DateTimeOffset? lastSyncTime = default;
+            bool? canFailover = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("status"u8))

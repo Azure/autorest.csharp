@@ -43,9 +43,9 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            int maxTokenLength = default;
-            bool isSearchTokenizer = default;
-            MicrosoftStemmingTokenizerLanguage language = default;
+            int? maxTokenLength = default;
+            bool? isSearchTokenizer = default;
+            MicrosoftStemmingTokenizerLanguage? language = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())

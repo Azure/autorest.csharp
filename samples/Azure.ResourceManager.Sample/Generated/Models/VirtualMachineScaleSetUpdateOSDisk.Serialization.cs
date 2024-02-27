@@ -99,9 +99,9 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            CachingType caching = default;
-            bool writeAcceleratorEnabled = default;
-            int diskSizeGB = default;
+            CachingType? caching = default;
+            bool? writeAcceleratorEnabled = default;
+            int? diskSizeGB = default;
             VirtualHardDisk image = default;
             IList<string> vhdContainers = default;
             VirtualMachineScaleSetManagedDiskParameters managedDisk = default;

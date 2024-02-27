@@ -90,7 +90,7 @@ namespace AnomalyDetector.Models
             {
                 return null;
             }
-            int period = default;
+            int? period = default;
             IReadOnlyList<bool> isChangePoint = default;
             IReadOnlyList<float> confidenceScores = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;

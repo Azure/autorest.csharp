@@ -68,7 +68,7 @@ namespace additionalProperties.Models
             }
             int id = default;
             string name = default;
-            bool status = default;
+            bool? status = default;
             IDictionary<string, string> additionalProperties = default;
             Dictionary<string, string> additionalPropertiesDictionary = new Dictionary<string, string>();
             foreach (var property in element.EnumerateObject())

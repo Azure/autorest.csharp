@@ -69,7 +69,7 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            bool tempDisk = default;
+            bool? tempDisk = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

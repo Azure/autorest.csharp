@@ -29,7 +29,7 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            VirtualMachineSizeType vmSize = default;
+            VirtualMachineSizeType? vmSize = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("vmSize"u8))

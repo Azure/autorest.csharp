@@ -143,10 +143,10 @@ namespace FirstTestTypeSpec.Models
             ThingRequiredLiteralInt requiredLiteralInt = default;
             ThingRequiredLiteralFloat requiredLiteralFloat = default;
             bool requiredLiteralBool = default;
-            ThingOptionalLiteralString optionalLiteralString = default;
-            ThingOptionalLiteralInt optionalLiteralInt = default;
-            ThingOptionalLiteralFloat optionalLiteralFloat = default;
-            bool optionalLiteralBool = default;
+            ThingOptionalLiteralString? optionalLiteralString = default;
+            ThingOptionalLiteralInt? optionalLiteralInt = default;
+            ThingOptionalLiteralFloat? optionalLiteralFloat = default;
+            bool? optionalLiteralBool = default;
             string requiredBadDescription = default;
             IList<int> optionalNullableList = default;
             IList<int> requiredNullableList = default;

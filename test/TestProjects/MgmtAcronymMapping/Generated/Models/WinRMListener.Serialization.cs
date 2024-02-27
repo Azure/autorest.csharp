@@ -35,7 +35,7 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            ProtocolType protocol = default;
+            ProtocolType? protocol = default;
             Uri certificateUrl = default;
             foreach (var property in element.EnumerateObject())
             {

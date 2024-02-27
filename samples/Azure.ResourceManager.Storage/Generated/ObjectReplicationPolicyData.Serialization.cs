@@ -56,7 +56,7 @@ namespace Azure.ResourceManager.Storage
             ResourceType type = default;
             SystemData systemData = default;
             string policyId = default;
-            DateTimeOffset enabledTime = default;
+            DateTimeOffset? enabledTime = default;
             string sourceAccount = default;
             string destinationAccount = default;
             IList<ObjectReplicationPolicyRule> rules = default;

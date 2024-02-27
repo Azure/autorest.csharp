@@ -33,7 +33,7 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            bool preserveOriginal = default;
+            bool? preserveOriginal = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())

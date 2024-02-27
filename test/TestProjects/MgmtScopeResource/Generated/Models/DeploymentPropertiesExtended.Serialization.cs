@@ -19,13 +19,13 @@ namespace MgmtScopeResource.Models
             {
                 return null;
             }
-            ProvisioningState provisioningState = default;
+            ProvisioningState? provisioningState = default;
             string correlationId = default;
-            DateTimeOffset timestamp = default;
-            TimeSpan duration = default;
+            DateTimeOffset? timestamp = default;
+            TimeSpan? duration = default;
             BinaryData outputs = default;
             BinaryData parameters = default;
-            DeploymentMode mode = default;
+            DeploymentMode? mode = default;
             ErrorResponse errorResponse = default;
             foreach (var property in element.EnumerateObject())
             {

@@ -115,9 +115,9 @@ namespace MgmtMockAndSample
             SystemData systemData = default;
             Probe startupProbe = default;
             Probe readinessProbe = default;
-            DesiredStatusCode desiredStatusCode = default;
+            DesiredStatusCode? desiredStatusCode = default;
             IReadOnlyList<WritableSubResource> ruleCollectionGroups = default;
-            ProvisioningState provisioningState = default;
+            ProvisioningState? provisioningState = default;
             WritableSubResource basePolicy = default;
             IReadOnlyList<WritableSubResource> firewalls = default;
             IReadOnlyList<WritableSubResource> childPolicies = default;

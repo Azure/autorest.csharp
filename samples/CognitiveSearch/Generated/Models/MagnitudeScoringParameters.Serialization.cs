@@ -35,7 +35,7 @@ namespace CognitiveSearch.Models
             }
             double boostingRangeStart = default;
             double boostingRangeEnd = default;
-            bool constantBoostBeyondRange = default;
+            bool? constantBoostBeyondRange = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("boostingRangeStart"u8))

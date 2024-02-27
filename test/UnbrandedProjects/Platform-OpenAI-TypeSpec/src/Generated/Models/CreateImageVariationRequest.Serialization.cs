@@ -92,8 +92,8 @@ namespace OpenAI.Models
             }
             BinaryData image = default;
             long? n = default;
-            CreateImageVariationRequestSize size = default;
-            CreateImageVariationRequestResponseFormat responseFormat = default;
+            CreateImageVariationRequestSize? size = default;
+            CreateImageVariationRequestResponseFormat? responseFormat = default;
             string user = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();

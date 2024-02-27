@@ -47,8 +47,8 @@ namespace CognitiveSearch.Models
                 return null;
             }
             IList<string> synonyms = default;
-            bool ignoreCase = default;
-            bool expand = default;
+            bool? ignoreCase = default;
+            bool? expand = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())

@@ -108,13 +108,13 @@ namespace AnomalyDetector.Models
                 return null;
             }
             IList<TimeSeriesPoint> series = default;
-            TimeGranularity granularity = default;
-            int customInterval = default;
-            int period = default;
-            float maxAnomalyRatio = default;
-            int sensitivity = default;
-            ImputeMode imputeMode = default;
-            float imputeFixedValue = default;
+            TimeGranularity? granularity = default;
+            int? customInterval = default;
+            int? period = default;
+            float? maxAnomalyRatio = default;
+            int? sensitivity = default;
+            ImputeMode? imputeMode = default;
+            float? imputeFixedValue = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

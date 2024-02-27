@@ -19,7 +19,7 @@ namespace MgmtMockAndSample.Models
                 return null;
             }
             SenderAuthorization authorization = default;
-            Guid tenantId = default;
+            Guid? tenantId = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("authorization"u8))

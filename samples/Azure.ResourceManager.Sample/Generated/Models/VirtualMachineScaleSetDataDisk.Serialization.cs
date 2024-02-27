@@ -106,13 +106,13 @@ namespace Azure.ResourceManager.Sample.Models
             }
             string name = default;
             int lun = default;
-            CachingType caching = default;
-            bool writeAcceleratorEnabled = default;
+            CachingType? caching = default;
+            bool? writeAcceleratorEnabled = default;
             DiskCreateOptionType createOption = default;
-            int diskSizeGB = default;
+            int? diskSizeGB = default;
             VirtualMachineScaleSetManagedDiskParameters managedDisk = default;
-            long diskIOPSReadWrite = default;
-            long diskMBpsReadWrite = default;
+            long? diskIOPSReadWrite = default;
+            long? diskMBpsReadWrite = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

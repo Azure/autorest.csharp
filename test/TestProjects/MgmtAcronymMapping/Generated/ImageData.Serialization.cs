@@ -68,7 +68,7 @@ namespace MgmtAcronymMapping
             WritableSubResource sourceVirtualMachine = default;
             ImageStorageProfile storageProfile = default;
             string provisioningState = default;
-            HyperVGenerationType hyperVGeneration = default;
+            HyperVGenerationType? hyperVGeneration = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("tags"u8))

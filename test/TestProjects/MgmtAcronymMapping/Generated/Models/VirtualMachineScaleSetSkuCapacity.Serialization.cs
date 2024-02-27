@@ -17,10 +17,10 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            long minimum = default;
-            long maximum = default;
-            long defaultCapacity = default;
-            VirtualMachineScaleSetSkuScaleType scaleType = default;
+            long? minimum = default;
+            long? maximum = default;
+            long? defaultCapacity = default;
+            VirtualMachineScaleSetSkuScaleType? scaleType = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("minimum"u8))

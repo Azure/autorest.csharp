@@ -63,20 +63,20 @@ namespace MgmtMockAndSample
                 return null;
             }
             ManagedServiceIdentity identity = default;
-            AzureLocation location = default;
+            AzureLocation? location = default;
             IReadOnlyDictionary<string, string> tags = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             SystemData systemData = default;
-            DiskEncryptionSetType encryptionType = default;
+            DiskEncryptionSetType? encryptionType = default;
             KeyForDiskEncryptionSet activeKey = default;
             IReadOnlyList<KeyForDiskEncryptionSet> previousKeys = default;
             string provisioningState = default;
-            bool rotationToLatestKeyVersionEnabled = default;
-            DateTimeOffset lastKeyRotationTimestamp = default;
+            bool? rotationToLatestKeyVersionEnabled = default;
+            DateTimeOffset? lastKeyRotationTimestamp = default;
             string federatedClientId = default;
-            MinimumTlsVersion minimumTlsVersion = default;
+            MinimumTlsVersion? minimumTlsVersion = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("identity"u8))

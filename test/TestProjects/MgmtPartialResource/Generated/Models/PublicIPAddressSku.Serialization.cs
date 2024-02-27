@@ -34,8 +34,8 @@ namespace MgmtPartialResource.Models
             {
                 return null;
             }
-            PublicIPAddressSkuName name = default;
-            PublicIPAddressSkuTier tier = default;
+            PublicIPAddressSkuName? name = default;
+            PublicIPAddressSkuTier? tier = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))

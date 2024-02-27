@@ -47,7 +47,7 @@ namespace Azure.ResourceManager.Fake.Models
             SystemData systemData = default;
             PrivateEndpoint privateEndpoint = default;
             MgmtReferenceTypesPrivateLinkServiceConnectionState privateLinkServiceConnectionState = default;
-            MgmtReferenceTypesPrivateEndpointConnectionProvisioningState provisioningState = default;
+            MgmtReferenceTypesPrivateEndpointConnectionProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))

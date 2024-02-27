@@ -74,7 +74,7 @@ namespace body_array.Models
             {
                 return null;
             }
-            int integer = default;
+            int? integer = default;
             string @string = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();

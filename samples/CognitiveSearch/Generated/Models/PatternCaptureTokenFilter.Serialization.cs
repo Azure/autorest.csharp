@@ -42,7 +42,7 @@ namespace CognitiveSearch.Models
                 return null;
             }
             IList<string> patterns = default;
-            bool preserveOriginal = default;
+            bool? preserveOriginal = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())

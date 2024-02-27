@@ -29,7 +29,7 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            bool ultraSSDEnabled = default;
+            bool? ultraSSDEnabled = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("ultraSSDEnabled"u8))

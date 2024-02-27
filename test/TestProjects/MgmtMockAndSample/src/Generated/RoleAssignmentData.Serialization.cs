@@ -26,7 +26,7 @@ namespace MgmtMockAndSample
             string scope = default;
             string roleDefinitionId = default;
             string principalId = default;
-            bool canDelegate = default;
+            bool? canDelegate = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))

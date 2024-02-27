@@ -130,23 +130,23 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            TimeSpan duration = default;
-            DateTimeOffset createOn = default;
+            TimeSpan? duration = default;
+            DateTimeOffset? createOn = default;
             Guid tenantId = default;
             MgmtMockAndSampleSku sku = default;
             IList<AccessPolicyEntry> accessPolicies = default;
             Uri vaultUri = default;
             string hsmPoolResourceId = default;
             IList<string> deployments = default;
-            bool enabledForDiskEncryption = default;
-            bool enabledForTemplateDeployment = default;
-            bool enableSoftDelete = default;
-            int softDeleteRetentionInDays = default;
-            bool enableRbacAuthorization = default;
-            CreateMode createMode = default;
-            bool enablePurgeProtection = default;
+            bool? enabledForDiskEncryption = default;
+            bool? enabledForTemplateDeployment = default;
+            bool? enableSoftDelete = default;
+            int? softDeleteRetentionInDays = default;
+            bool? enableRbacAuthorization = default;
+            CreateMode? createMode = default;
+            bool? enablePurgeProtection = default;
             NetworkRuleSet networkAcls = default;
-            VaultProvisioningState provisioningState = default;
+            VaultProvisioningState? provisioningState = default;
             IReadOnlyList<PrivateEndpointConnectionItem> privateEndpointConnections = default;
             string publicNetworkAccess = default;
             SinglePropertyModel readWriteSingleStringProperty = default;

@@ -19,7 +19,7 @@ namespace MgmtSingletonResource
             {
                 return null;
             }
-            bool hitBrake = default;
+            bool? hitBrake = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;

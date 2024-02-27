@@ -76,7 +76,7 @@ namespace azure_special_properties.Models
             {
                 return null;
             }
-            int status = default;
+            int? status = default;
             ErrorConstantId constantId = default;
             string message = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;

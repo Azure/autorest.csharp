@@ -70,7 +70,7 @@ namespace _Type.Property.Optionality.Models
             {
                 return null;
             }
-            FloatLiteralPropertyProperty property = default;
+            FloatLiteralPropertyProperty? property = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property0 in element.EnumerateObject())

@@ -89,7 +89,7 @@ namespace additionalProperties.Models
             }
             int id = default;
             string name = default;
-            bool status = default;
+            bool? status = default;
             IDictionary<string, float> additionalProperties = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();

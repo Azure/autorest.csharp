@@ -121,8 +121,8 @@ namespace Azure.ResourceManager.Sample.Models
             }
             SampleSku sku = default;
             IDictionary<string, string> tags = default;
-            int platformUpdateDomainCount = default;
-            int platformFaultDomainCount = default;
+            int? platformUpdateDomainCount = default;
+            int? platformFaultDomainCount = default;
             IList<WritableSubResource> virtualMachines = default;
             WritableSubResource proximityPlacementGroup = default;
             IReadOnlyList<InstanceViewStatus> statuses = default;

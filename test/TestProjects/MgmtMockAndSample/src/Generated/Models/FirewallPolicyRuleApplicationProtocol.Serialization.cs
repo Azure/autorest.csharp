@@ -34,8 +34,8 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            FirewallPolicyRuleApplicationProtocolType protocolType = default;
-            int port = default;
+            FirewallPolicyRuleApplicationProtocolType? protocolType = default;
+            int? port = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("protocolType"u8))

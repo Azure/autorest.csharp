@@ -42,7 +42,7 @@ namespace Azure.ResourceManager.Fake.Models
             {
                 return null;
             }
-            MgmtReferenceTypesPrivateEndpointServiceConnectionStatus status = default;
+            MgmtReferenceTypesPrivateEndpointServiceConnectionStatus? status = default;
             string description = default;
             string actionsRequired = default;
             foreach (var property in element.EnumerateObject())

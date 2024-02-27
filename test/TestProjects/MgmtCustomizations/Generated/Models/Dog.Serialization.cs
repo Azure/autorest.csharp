@@ -54,7 +54,7 @@ namespace MgmtCustomizations.Models
             PetKind kind = default;
             string name = default;
             int size = default;
-            DateTimeOffset dateOfBirth = default;
+            DateTimeOffset? dateOfBirth = default;
             string bark = default;
             foreach (var property in element.EnumerateObject())
             {

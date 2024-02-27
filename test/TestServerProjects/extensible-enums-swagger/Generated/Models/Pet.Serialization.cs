@@ -77,7 +77,7 @@ namespace extensible_enums_swagger.Models
                 return null;
             }
             string name = default;
-            DaysOfWeekExtensibleEnum daysOfWeek = default;
+            DaysOfWeekExtensibleEnum? daysOfWeek = default;
             IntEnum intEnum = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();

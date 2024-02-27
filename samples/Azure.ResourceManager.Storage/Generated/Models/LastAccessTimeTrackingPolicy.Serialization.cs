@@ -48,8 +48,8 @@ namespace Azure.ResourceManager.Storage.Models
                 return null;
             }
             bool enable = default;
-            Name name = default;
-            int trackingGranularityInDays = default;
+            Name? name = default;
+            int? trackingGranularityInDays = default;
             IList<string> blobType = default;
             foreach (var property in element.EnumerateObject())
             {

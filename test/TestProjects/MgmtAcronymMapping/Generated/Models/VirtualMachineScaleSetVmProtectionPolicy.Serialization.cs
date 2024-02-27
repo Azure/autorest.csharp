@@ -34,8 +34,8 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            bool protectFromScaleIn = default;
-            bool protectFromScaleSetActions = default;
+            bool? protectFromScaleIn = default;
+            bool? protectFromScaleSetActions = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("protectFromScaleIn"u8))

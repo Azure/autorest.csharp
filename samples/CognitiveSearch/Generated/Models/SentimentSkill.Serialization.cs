@@ -61,7 +61,7 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            SentimentSkillLanguage defaultLanguageCode = default;
+            SentimentSkillLanguage? defaultLanguageCode = default;
             string odataType = default;
             string name = default;
             string description = default;

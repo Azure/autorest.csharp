@@ -73,7 +73,7 @@ namespace CustomizationsInTsp.Models
                 return null;
             }
             int requiredIntOnBase = default;
-            int optionalInt = default;
+            int? optionalInt = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

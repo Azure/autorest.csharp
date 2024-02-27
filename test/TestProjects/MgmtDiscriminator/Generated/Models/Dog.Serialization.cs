@@ -83,7 +83,7 @@ namespace MgmtDiscriminator.Models
                 return null;
             }
             string bark = default;
-            DogKind dogKind = default;
+            DogKind? dogKind = default;
             PetKind kind = default;
             string id = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;

@@ -22,8 +22,8 @@ namespace CognitiveSearch.Models
             }
             IndexerExecutionStatus status = default;
             string errorMessage = default;
-            DateTimeOffset startTime = default;
-            DateTimeOffset endTime = default;
+            DateTimeOffset? startTime = default;
+            DateTimeOffset? endTime = default;
             IReadOnlyList<ItemError> errors = default;
             IReadOnlyList<ItemWarning> warnings = default;
             int itemsProcessed = default;

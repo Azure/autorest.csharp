@@ -21,7 +21,7 @@ namespace Azure.AI.FormRecognizer.Models
             }
             IReadOnlyList<TrainingDocumentInfo> trainingDocuments = default;
             IReadOnlyList<FormFieldsReport> fields = default;
-            float averageModelAccuracy = default;
+            float? averageModelAccuracy = default;
             IReadOnlyList<ErrorInformation> errors = default;
             foreach (var property in element.EnumerateObject())
             {

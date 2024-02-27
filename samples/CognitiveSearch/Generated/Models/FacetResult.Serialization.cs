@@ -19,7 +19,7 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            long count = default;
+            long? count = default;
             IReadOnlyDictionary<string, object> additionalProperties = default;
             Dictionary<string, object> additionalPropertiesDictionary = new Dictionary<string, object>();
             foreach (var property in element.EnumerateObject())

@@ -103,19 +103,19 @@ namespace MgmtMockAndSample.Models
             BinaryData settings = default;
             BinaryData protectedSettings = default;
             byte[] rawMessage = default;
-            Guid tenantId = default;
+            Guid? tenantId = default;
             IList<string> initialAdminObjectIds = default;
             Uri hsmUri = default;
-            bool enableSoftDelete = default;
-            int softDeleteRetentionInDays = default;
-            bool enablePurgeProtection = default;
-            CreateMode createMode = default;
+            bool? enableSoftDelete = default;
+            int? softDeleteRetentionInDays = default;
+            bool? enablePurgeProtection = default;
+            CreateMode? createMode = default;
             string statusMessage = default;
-            ProvisioningState provisioningState = default;
+            ProvisioningState? provisioningState = default;
             MhsmNetworkRuleSet networkAcls = default;
             IReadOnlyList<MhsmPrivateEndpointConnectionItem> privateEndpointConnections = default;
-            PublicNetworkAccess publicNetworkAccess = default;
-            DateTimeOffset scheduledPurgeDate = default;
+            PublicNetworkAccess? publicNetworkAccess = default;
+            DateTimeOffset? scheduledPurgeDate = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("settings"u8))

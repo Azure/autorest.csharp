@@ -47,7 +47,7 @@ namespace MgmtAcronymMapping.Models
             }
             ImageOSDisk osDisk = default;
             IList<ImageDataDisk> dataDisks = default;
-            bool zoneResilient = default;
+            bool? zoneResilient = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("osDisk"u8))

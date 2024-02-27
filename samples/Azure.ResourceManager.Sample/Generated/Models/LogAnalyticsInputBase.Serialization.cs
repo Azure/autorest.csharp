@@ -88,9 +88,9 @@ namespace Azure.ResourceManager.Sample.Models
             Uri blobContainerSasUri = default;
             DateTimeOffset fromTime = default;
             DateTimeOffset toTime = default;
-            bool groupByThrottlePolicy = default;
-            bool groupByOperationName = default;
-            bool groupByResourceName = default;
+            bool? groupByThrottlePolicy = default;
+            bool? groupByOperationName = default;
+            bool? groupByResourceName = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

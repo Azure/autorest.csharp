@@ -102,8 +102,8 @@ namespace MgmtAcronymMapping.Models
             string publisher = default;
             string type0 = default;
             string typeHandlerVersion = default;
-            bool autoUpgradeMinorVersion = default;
-            bool enableAutomaticUpgrade = default;
+            bool? autoUpgradeMinorVersion = default;
+            bool? enableAutomaticUpgrade = default;
             BinaryData settings = default;
             BinaryData protectedSettings = default;
             string provisioningState = default;

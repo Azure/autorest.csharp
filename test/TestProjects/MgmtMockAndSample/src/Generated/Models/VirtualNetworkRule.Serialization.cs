@@ -32,7 +32,7 @@ namespace MgmtMockAndSample.Models
                 return null;
             }
             string id = default;
-            bool ignoreMissingVnetServiceEndpoint = default;
+            bool? ignoreMissingVnetServiceEndpoint = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))

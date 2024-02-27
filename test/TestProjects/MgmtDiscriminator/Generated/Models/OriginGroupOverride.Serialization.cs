@@ -77,7 +77,7 @@ namespace MgmtDiscriminator.Models
                 return null;
             }
             WritableSubResource originGroup = default;
-            ForwardingProtocol forwardingProtocol = default;
+            ForwardingProtocol? forwardingProtocol = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

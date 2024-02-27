@@ -73,30 +73,30 @@ namespace Azure.ResourceManager.Storage
             {
                 return null;
             }
-            ETag etag = default;
+            ETag? etag = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             SystemData systemData = default;
             string version = default;
-            bool deleted = default;
-            DateTimeOffset deletedTime = default;
-            int remainingRetentionDays = default;
+            bool? deleted = default;
+            DateTimeOffset? deletedTime = default;
+            int? remainingRetentionDays = default;
             string defaultEncryptionScope = default;
-            bool denyEncryptionScopeOverride = default;
-            PublicAccess publicAccess = default;
-            DateTimeOffset lastModifiedTime = default;
-            LeaseStatus leaseStatus = default;
-            LeaseState leaseState = default;
-            LeaseDuration leaseDuration = default;
+            bool? denyEncryptionScopeOverride = default;
+            PublicAccess? publicAccess = default;
+            DateTimeOffset? lastModifiedTime = default;
+            LeaseStatus? leaseStatus = default;
+            LeaseState? leaseState = default;
+            LeaseDuration? leaseDuration = default;
             IDictionary<string, string> metadata = default;
             ImmutabilityPolicyProperties immutabilityPolicy = default;
             LegalHoldProperties legalHold = default;
-            bool hasLegalHold = default;
-            bool hasImmutabilityPolicy = default;
+            bool? hasLegalHold = default;
+            bool? hasImmutabilityPolicy = default;
             ImmutableStorageWithVersioning immutableStorageWithVersioning = default;
-            bool enableNfsV3RootSquash = default;
-            bool enableNfsV3AllSquash = default;
+            bool? enableNfsV3RootSquash = default;
+            bool? enableNfsV3AllSquash = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"u8))

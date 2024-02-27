@@ -90,7 +90,7 @@ namespace CognitiveSearch.Models
             IndexingParameters parameters = default;
             IList<FieldMapping> fieldMappings = default;
             IList<FieldMapping> outputFieldMappings = default;
-            bool disabled = default;
+            bool? disabled = default;
             string odataEtag = default;
             foreach (var property in element.EnumerateObject())
             {

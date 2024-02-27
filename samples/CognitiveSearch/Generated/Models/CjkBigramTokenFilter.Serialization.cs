@@ -45,7 +45,7 @@ namespace CognitiveSearch.Models
                 return null;
             }
             IList<CjkBigramTokenFilterScripts> ignoreScripts = default;
-            bool outputUnigrams = default;
+            bool? outputUnigrams = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())

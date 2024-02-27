@@ -17,8 +17,8 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            int successfullyRolledbackInstanceCount = default;
-            int failedRolledbackInstanceCount = default;
+            int? successfullyRolledbackInstanceCount = default;
+            int? failedRolledbackInstanceCount = default;
             ApiError rollbackError = default;
             foreach (var property in element.EnumerateObject())
             {

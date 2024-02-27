@@ -57,8 +57,8 @@ namespace Azure.ResourceManager.Storage.Models
             }
             IList<string> prefixMatch = default;
             IList<string> blobTypes = default;
-            bool includeBlobVersions = default;
-            bool includeSnapshots = default;
+            bool? includeBlobVersions = default;
+            bool? includeSnapshots = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("prefixMatch"u8))

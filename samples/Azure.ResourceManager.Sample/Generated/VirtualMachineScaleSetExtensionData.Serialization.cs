@@ -154,14 +154,14 @@ namespace Azure.ResourceManager.Sample
                 return null;
             }
             string name = default;
-            ResourceType type = default;
+            ResourceType? type = default;
             string id = default;
             string forceUpdateTag = default;
             string publisher = default;
             string type0 = default;
             string typeHandlerVersion = default;
-            bool autoUpgradeMinorVersion = default;
-            bool enableAutomaticUpgrade = default;
+            bool? autoUpgradeMinorVersion = default;
+            bool? enableAutomaticUpgrade = default;
             BinaryData settings = default;
             BinaryData protectedSettings = default;
             string provisioningState = default;

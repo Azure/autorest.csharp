@@ -40,8 +40,8 @@ namespace Azure.Network.Management.Interface.Models
                 return null;
             }
             SubResource ddosCustomPolicy = default;
-            DdosSettingsProtectionCoverage protectionCoverage = default;
-            bool protectedIP = default;
+            DdosSettingsProtectionCoverage? protectionCoverage = default;
+            bool? protectedIP = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("ddosCustomPolicy"u8))

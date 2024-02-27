@@ -21,10 +21,10 @@ namespace MgmtMockAndSample.Models
                 return null;
             }
             string mhsmId = default;
-            AzureLocation location = default;
-            DateTimeOffset deletionDate = default;
-            DateTimeOffset scheduledPurgeDate = default;
-            bool purgeProtectionEnabled = default;
+            AzureLocation? location = default;
+            DateTimeOffset? deletionDate = default;
+            DateTimeOffset? scheduledPurgeDate = default;
+            bool? purgeProtectionEnabled = default;
             IReadOnlyDictionary<string, string> tags = default;
             foreach (var property in element.EnumerateObject())
             {

@@ -44,10 +44,10 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            PassName passName = default;
-            ComponentName componentName = default;
-            SettingName settingName = default;
-            int backupFrequency = default;
+            PassName? passName = default;
+            ComponentName? componentName = default;
+            SettingName? settingName = default;
+            int? backupFrequency = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("passName"u8))

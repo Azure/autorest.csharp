@@ -38,7 +38,7 @@ namespace MgmtMockAndSample.Models
             }
             FirewallPolicyRuleCollectionType ruleCollectionType = "Unknown";
             string name = default;
-            int priority = default;
+            int? priority = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("ruleCollectionType"u8))

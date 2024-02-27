@@ -22,18 +22,18 @@ namespace Azure.AI.FormRecognizer.Models
             }
             FieldValueType type = default;
             string valueString = default;
-            DateTimeOffset valueDate = default;
-            TimeSpan valueTime = default;
+            DateTimeOffset? valueDate = default;
+            TimeSpan? valueTime = default;
             string valuePhoneNumber = default;
-            float valueNumber = default;
-            int valueInteger = default;
+            float? valueNumber = default;
+            int? valueInteger = default;
             IReadOnlyList<FieldValue> valueArray = default;
             IReadOnlyDictionary<string, FieldValue> valueObject = default;
             string text = default;
             IReadOnlyList<float> boundingBox = default;
-            float confidence = default;
+            float? confidence = default;
             IReadOnlyList<string> elements = default;
-            int page = default;
+            int? page = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("type"u8))

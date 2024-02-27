@@ -62,7 +62,7 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Bypass bypass = default;
+            Bypass? bypass = default;
             IList<ResourceAccessRule> resourceAccessRules = default;
             IList<VirtualNetworkRule> virtualNetworkRules = default;
             IList<IPRule> ipRules = default;

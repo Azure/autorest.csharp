@@ -91,10 +91,10 @@ namespace AnomalyDetector.Models
                 return null;
             }
             string variable = default;
-            float filledNARatio = default;
-            int effectiveCount = default;
-            DateTimeOffset firstTimestamp = default;
-            DateTimeOffset lastTimestamp = default;
+            float? filledNARatio = default;
+            int? effectiveCount = default;
+            DateTimeOffset? firstTimestamp = default;
+            DateTimeOffset? lastTimestamp = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

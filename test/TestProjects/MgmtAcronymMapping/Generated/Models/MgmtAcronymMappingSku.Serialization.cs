@@ -41,7 +41,7 @@ namespace MgmtAcronymMapping.Models
             }
             string name = default;
             string tier = default;
-            long capacity = default;
+            long? capacity = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))

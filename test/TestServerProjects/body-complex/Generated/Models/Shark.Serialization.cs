@@ -99,7 +99,7 @@ namespace body_complex.Models
                     case "sawshark": return Sawshark.DeserializeSawshark(element, options);
                 }
             }
-            int age = default;
+            int? age = default;
             DateTimeOffset birthday = default;
             string fishtype = "shark";
             string species = default;

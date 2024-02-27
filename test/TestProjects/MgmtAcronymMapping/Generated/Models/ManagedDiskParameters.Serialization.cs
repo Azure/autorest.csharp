@@ -40,7 +40,7 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            StorageAccountType storageAccountType = default;
+            StorageAccountType? storageAccountType = default;
             WritableSubResource diskEncryptionSet = default;
             string id = default;
             foreach (var property in element.EnumerateObject())
