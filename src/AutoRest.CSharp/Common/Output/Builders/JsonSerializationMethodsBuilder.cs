@@ -437,7 +437,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         public static MethodBodyStatement SerializeExpression(Utf8JsonWriterExpression utf8JsonWriter, JsonSerialization? serialization, ValueExpression expression)
             => serialization switch
             {
-                JsonArraySerialization array => SerializeArray(utf8JsonWriter, array, new EnumerableExpression(TypeFactory.GetElementType(array.ImplementationType), expression)),
+                JsonArraySerialization array => SerializeArray(utf8JsonWriter, array, new EnumerableExpression(TypeFactory.GetElementType(array.Type), expression)),
                 JsonDictionarySerialization dictionary => SerializeDictionary(utf8JsonWriter, dictionary, new DictionaryExpression(dictionary.Type.Arguments[0], dictionary.Type.Arguments[1], expression)),
                 JsonValueSerialization value => SerializeValue(utf8JsonWriter, value, expression),
                 _ => throw new NotSupportedException()
@@ -903,10 +903,10 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             foreach (JsonPropertySerialization jsonProperty in jsonProperties)
             {
-                if (jsonProperty.SerializedType is { } type)
+                if (jsonProperty.ValueSerialization is { } valueSerialization)
                 {
                     var propertyDeclaration = new CodeWriterDeclaration(jsonProperty.SerializedName.ToVariableName());
-                    propertyVariables.Add(jsonProperty, new VariableReference(type, propertyDeclaration));
+                    propertyVariables.Add(jsonProperty, new VariableReference(valueSerialization.Type, propertyDeclaration));
                 }
                 else if (jsonProperty.PropertySerializations != null)
                 {
@@ -949,15 +949,15 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             switch (serialization)
             {
-                case JsonArraySerialization jsonReadOnlyMemory when TypeFactory.IsArray(jsonReadOnlyMemory.ImplementationType):
-                    var readOnlyMemory = new VariableReference(jsonReadOnlyMemory.ImplementationType, "array");
+                case JsonArraySerialization jsonReadOnlyMemory when TypeFactory.IsArray(jsonReadOnlyMemory.Type):
+                    var readOnlyMemory = new VariableReference(jsonReadOnlyMemory.Type, "array");
                     value = readOnlyMemory;
                     VariableReference index = new VariableReference(typeof(int), "index");
 
                     return new MethodBodyStatement[]
                     {
                         Declare(index, Int(0)),
-                        Declare(readOnlyMemory, New.Array(TypeFactory.GetElementType(jsonReadOnlyMemory.ImplementationType), element.GetArrayLength())),
+                        Declare(readOnlyMemory, New.Array(TypeFactory.GetElementType(jsonReadOnlyMemory.Type), element.GetArrayLength())),
                         new ForeachStatement("item", element.EnumerateArray(), out var readOnlyMemoryItem)
                         {
                             DeserializeArrayItem(jsonReadOnlyMemory, value, new JsonElementExpression(readOnlyMemoryItem), options, index),
@@ -966,12 +966,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     };
 
                 case JsonArraySerialization jsonArray:
-                    var array = new VariableReference(jsonArray.ImplementationType, "array");
+                    var array = new VariableReference(jsonArray.Type, "array");
                     value = array;
 
                     return new MethodBodyStatement[]
                     {
-                        Declare(array, New.Instance(jsonArray.ImplementationType)),
+                        Declare(array, New.Instance(jsonArray.Type)),
                         new ForeachStatement("item", element.EnumerateArray(), out var arrayItem)
                         {
                             DeserializeArrayItem(jsonArray, value, new JsonElementExpression(arrayItem), options),

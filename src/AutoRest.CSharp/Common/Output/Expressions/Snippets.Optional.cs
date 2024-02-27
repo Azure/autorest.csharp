@@ -49,7 +49,12 @@ namespace AutoRest.CSharp.Common.Output.Models
 
                 var collectionType = collection.Type.Arguments.Count == 1 ? Configuration.ApiTypes.ChangeTrackingListType : Configuration.ApiTypes.ChangeTrackingDictionaryType;
                 var changeTrackingType = new CSharpType(collectionType, collection.Type.Arguments);
-                return NullCoalescing(collection, New.Instance(changeTrackingType));
+                // We need to cast the collection to the interface type to avoid an issue where roslyn doesn't simplify
+                // the global::Azure.Core.ChangeTrackingList to ChangeTrackingList in a ternal conditional operator
+                var interfaceType = collection.Type.Arguments.Count == 1
+                    ? new CSharpType(typeof(System.Collections.Generic.IList<>), collection.Type.Arguments)
+                    : new CSharpType(typeof(System.Collections.Generic.IDictionary<,>), collection.Type.Arguments);
+                return new TernaryConditionalOperator(Equal(collection, Null), New.Instance(changeTrackingType), collection.CastTo(interfaceType));
             }
 
             public static MethodBodyStatement WrapInIsDefined(PropertySerialization serialization, MethodBodyStatement statement, bool isBicep = false)
