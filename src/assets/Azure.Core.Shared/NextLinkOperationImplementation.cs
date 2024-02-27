@@ -79,7 +79,7 @@ namespace Azure.Core
         {
             Argument.AssertNotNull(rehydrationToken, nameof(rehydrationToken));
 
-            var lroDetails = ((IPersistableModel<RehydrationToken>)rehydrationToken!).Write(new ModelReaderWriterOptions("J")).ToObjectFromJson<Dictionary<string, string>>();
+            var lroDetails = ModelReaderWriter.Write(rehydrationToken!, new ModelReaderWriterOptions("J")).ToObjectFromJson<Dictionary<string, string>>();
             if (!Uri.TryCreate(lroDetails["initialUri"], UriKind.Absolute, out var startRequestUri))
                 throw new InvalidOperationException("Invalid initial URI");
             if (!lroDetails.TryGetValue("nextRequestUri", out var nextRequestUri))
@@ -95,12 +95,14 @@ namespace Azure.Core
             return new NextLinkOperationImplementation(pipeline, requestMethod, startRequestUri, nextRequestUri, headerSource, lastKnownLocation, finalStateVia, apiVersionStr);
         }
 
-        public static IOperation<T>? Create<T>(
+        public static IOperation<T> Create<T>(
             IOperationSource<T> operationSource,
             HttpPipeline pipeline,
             RehydrationToken? rehydrationToken,
             string? apiVersionOverride = null)
         {
+            Argument.AssertNotNull(rehydrationToken, nameof(rehydrationToken));
+
             var operation = Create(pipeline, rehydrationToken, apiVersionOverride);
             return new OperationToOperationOfT<T>(operationSource, operation);
         }
