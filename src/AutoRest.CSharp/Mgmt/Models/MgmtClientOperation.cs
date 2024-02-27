@@ -151,7 +151,7 @@ namespace AutoRest.CSharp.Mgmt.Models
                     defaultApiVersion = $@"
 <item>
 <term>Default Api Version</term>
-<description>{string.Join(", ", operation.Operation.Parameters.Where(p => p.IsApiVersion))}</description>
+<description>{string.Join(", ", operation.Operation.Parameters.Where(p => p.IsApiVersion).Select(x => x.DefaultValue?.Value))}</description>
 </item>";
                 }
                     return (FormattableString)$@"<item>

@@ -437,9 +437,7 @@ namespace AutoRest.CSharp.Output.Models
         }
 
         protected static bool IsMethodParameter(InputParameter requestParameter)
-            => requestParameter.Kind == InputOperationParameterKind.Method &&
-                !requestParameter.IsRequired && // we should put the parameter in signature when it is not Constant or "it is Constant, but it is optional"
-                requestParameter.GroupedBy == null;
+            => requestParameter.Kind == InputOperationParameterKind.Method && requestParameter.GroupedBy == null;
 
         private static bool IsIgnoredHeaderParameter(InputParameter requestParameter)
             => requestParameter.Location == RequestLocation.Header && IgnoredRequestHeader.Contains(GetRequestParameterName(requestParameter));
@@ -450,7 +448,7 @@ namespace AutoRest.CSharp.Output.Models
             CSharpType type = typeOverride != null
                 ? new CSharpType(typeOverride, isNullable)
                 : _context.TypeFactory.CreateType(requestParameter.Type);
-            return Parameter.FromRequestParameter(requestParameter, type, _context.TypeFactory, keepClientDefaultValue);
+            return Parameter.FromInputParameter(requestParameter, type, _context.TypeFactory, keepClientDefaultValue);
         }
 
         private Constant ParseConstant(InputConstant constant) =>

@@ -153,50 +153,6 @@ namespace AutoRest.CSharp.Output.Models.Shared
             return ValidationType.None;
         }
 
-        public static Parameter FromRequestParameter(in InputParameter requestParameter, CSharpType type, TypeFactory typeFactory, bool shouldKeepClientDefaultValue = false)
-        {
-            var name = requestParameter.CSharpName();
-            var skipUrlEncoding = requestParameter.SkipUrlEncoding;
-            var requestLocation = requestParameter.Location;
-
-            var clientDefaultValue = GetClientDefaultValue(requestParameter, typeFactory);
-            bool keepClientDefaultValue = shouldKeepClientDefaultValue || requestParameter.IsApiVersion || requestParameter.IsContentType || requestParameter.IsEndpoint;
-            var defaultValue = keepClientDefaultValue
-                ? clientDefaultValue ?? ParseConstant(requestParameter, typeFactory)
-                : ParseConstant(requestParameter, typeFactory);
-            var initializer = (FormattableString?)null;
-
-            if (defaultValue != null && !TypeFactory.CanBeInitializedInline(type, defaultValue))
-            {
-                initializer = type.GetParameterInitializer(defaultValue.Value);
-                type = type.WithNullable(true);
-                defaultValue = Constant.Default(type);
-            }
-
-            if (!requestParameter.IsRequired && defaultValue == null)
-            {
-                defaultValue = Constant.Default(type);
-            }
-
-            var validation = requestParameter.IsRequired && initializer == null
-                ? GetValidation(type, requestLocation, skipUrlEncoding)
-                : ValidationType.None;
-
-            var inputType = TypeFactory.GetInputType(type);
-            return new Parameter(
-                name,
-                CreateDescription(requestParameter, inputType, keepClientDefaultValue ? null : clientDefaultValue),
-                inputType,
-                defaultValue,
-                validation,
-                initializer,
-                IsApiVersionParameter: requestParameter.IsApiVersion,
-                IsEndpoint: requestParameter.IsEndpoint,
-                IsResourceIdentifier: requestParameter.IsResourceParameter,
-                SkipUrlEncoding: skipUrlEncoding,
-                RequestLocation: requestLocation);
-        }
-
         private static FormattableString CreateDescription(InputParameter requestParameter, CSharpType type, Constant? defaultValue = null)
         {
             FormattableString description = string.IsNullOrWhiteSpace(requestParameter.Description) ?

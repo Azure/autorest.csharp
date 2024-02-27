@@ -19,7 +19,6 @@ using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
-using Humanizer.Inflections;
 
 namespace AutoRest.CSharp.Mgmt.AutoRest
 {

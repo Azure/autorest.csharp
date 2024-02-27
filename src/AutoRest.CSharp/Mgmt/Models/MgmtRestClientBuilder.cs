@@ -8,6 +8,8 @@ using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Generation.Writers;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
@@ -53,6 +55,51 @@ namespace AutoRest.CSharp.Mgmt.Models
                 }
             }
             return parameters.ToList();
+        }
+
+        public override Parameter BuildConstructorParameter(InputParameter requestParameter)
+        {
+            var parameter = base.BuildConstructorParameter(requestParameter);
+            return parameter.IsApiVersionParameter
+                ? parameter with { DefaultValue = Constant.Default(parameter.Type.WithNullable(true)), Initializer = parameter.DefaultValue?.GetConstantFormattable() }
+                : parameter;
+        }
+
+
+        protected override Parameter[] BuildMethodParameters(IReadOnlyDictionary<InputParameter, Parameter> allParameters)
+        {
+            List<Parameter> requiredParameters = new();
+            List<Parameter> optionalParameters = new();
+            List<Parameter> bodyParameters = new();
+            foreach (var (requestParameter, parameter) in allParameters)
+            {
+                // Grouped and flattened parameters shouldn't be added to methods
+                if (IsMethodParameter(requestParameter))
+                {
+                    // sort the parameters by the following sequence:
+                    // 1. required parameters
+                    // 2. body parameters (if exists), note that form data can generate multiple body parameters (e.g. "in": "formdata")
+                    //    see test project `body-formdata` for more details
+                    // 3. optional parameters
+                    if (parameter.RequestLocation == RequestLocation.Body)
+                    {
+                        bodyParameters.Add(parameter);
+                    }
+                    else if (parameter.IsOptionalInSignature)
+                    {
+                        optionalParameters.Add(parameter);
+                    }
+                    else
+                    {
+                        requiredParameters.Add(parameter);
+                    }
+                }
+            }
+
+            requiredParameters.AddRange(bodyParameters.OrderBy(p => p.IsOptionalInSignature)); // move required body parameters at the beginning
+            requiredParameters.AddRange(optionalParameters);
+
+            return requiredParameters.ToArray();
         }
     }
 }
