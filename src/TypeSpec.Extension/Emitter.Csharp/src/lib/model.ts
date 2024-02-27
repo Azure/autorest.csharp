@@ -69,6 +69,7 @@ import {
     getAccess,
     getClientType,
     getUsageOverride,
+    getWireName,
     isInternal
 } from "@azure-tools/typespec-client-generator-core";
 import { capitalize, getSerializeName, getTypeName } from "./utils.js";
@@ -651,7 +652,7 @@ export function getInputType(
                 }
                 if (isNeverType(value.type) || isVoidType(value.type)) return;
                 const name = getTypeName(context, value);
-                const serializedName = getSerializeName(context, value);
+                const serializedName = getWireName(context, value);
                 const literalTypeContext: LiteralTypeContext = {
                     ModelName: model.Name,
                     PropertyName: name,
