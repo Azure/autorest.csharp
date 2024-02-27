@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 
                 foreach (var property in objSchema.Properties)
                 {
-                    if (TypeFactory.ToFrameworkType(property.Schema) != typeof(DateTimeOffset))
+                    if (MgmtContext.TypeFactory.ToFrameworkType(property.Schema) != typeof(DateTimeOffset))
                         continue;
 
                     var propName = property.CSharpName();

@@ -25,10 +25,12 @@ namespace AutoRest.CSharp.Generation.Types
     internal class TypeFactory
     {
         private readonly OutputLibrary _library;
+        private readonly Type _unknownType;
 
         public TypeFactory(OutputLibrary library)
         {
             _library = library;
+            _unknownType = Configuration.Generation1ConvenienceClient ? typeof(object) : typeof(BinaryData);
         }
 
         private Type AzureResponseErrorType => typeof(ResponseError);
@@ -89,7 +91,8 @@ namespace AutoRest.CSharp.Generation.Types
                 InputTypeKind.Uri => new CSharpType(typeof(Uri), inputType.IsNullable),
                 _ => new CSharpType(typeof(object), inputType.IsNullable),
             },
-            InputIntrinsicType { Kind: InputIntrinsicTypeKind.Unknown } => typeof(BinaryData),
+            InputGenericType genericType => new CSharpType(genericType.Type, CreateType(genericType.ArgumentType)).WithNullable(inputType.IsNullable),
+            InputIntrinsicType { Kind: InputIntrinsicTypeKind.Unknown } => _unknownType,
             CodeModelType cmt => CreateType(cmt.Schema, cmt.IsNullable),
             _ => throw new Exception("Unknown type")
         };
@@ -281,9 +284,9 @@ namespace AutoRest.CSharp.Generation.Types
         internal static bool IsOperationOfPageable(CSharpType type)
             => type.IsFrameworkType && type.FrameworkType == typeof(Operation<>) && type.Arguments.Count == 1 && IsPageable(type.Arguments[0]);
 
-        internal static Type? ToFrameworkType(Schema schema) => ToFrameworkType(schema, schema.Extensions?.Format);
+        internal Type? ToFrameworkType(Schema schema) => ToFrameworkType(schema, schema.Extensions?.Format);
 
-        internal static Type? ToFrameworkType(Schema schema, string? format) => schema.Type switch
+        internal Type? ToFrameworkType(Schema schema, string? format) => schema.Type switch
         {
             AllSchemaTypes.Integer => typeof(int),
             AllSchemaTypes.Boolean => typeof(bool),
@@ -299,8 +302,8 @@ namespace AutoRest.CSharp.Generation.Types
             AllSchemaTypes.Unixtime => typeof(DateTimeOffset),
             AllSchemaTypes.Uri => typeof(Uri),
             AllSchemaTypes.Uuid => typeof(Guid),
-            AllSchemaTypes.Any => Configuration.AzureArm ? typeof(BinaryData) : typeof(object),
-            AllSchemaTypes.AnyObject => ToXMsFormatType(format) ?? (Configuration.AzureArm ? typeof(BinaryData) : typeof(object)),
+            AllSchemaTypes.Any => _unknownType,
+            AllSchemaTypes.AnyObject => ToXMsFormatType(format) ?? _unknownType,
             AllSchemaTypes.Binary => typeof(byte[]),
             _ => null
         };
