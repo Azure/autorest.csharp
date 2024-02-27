@@ -3,11 +3,10 @@
 
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input.Source;
 
 namespace AutoRest.CSharp.Output.Models.Serialization
 {
-    internal abstract record PropertySerialization
+    internal abstract class PropertySerialization
     {
         /// <summary>
         /// Name of the parameter in serialization constructor. Used in deserialization logic only

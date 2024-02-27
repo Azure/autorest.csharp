@@ -725,7 +725,9 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override XmlObjectSerialization? BuildXmlSerialization()
         {
-            return _supportedSerializationFormats.Contains(KnownMediaType.Xml) ? _serializationBuilder.BuildXmlObjectSerialization(ObjectSchema, this) : null;
+            return _supportedSerializationFormats.Contains(KnownMediaType.Xml)
+                ? SerializationBuilder.BuildXmlObjectSerialization(ObjectSchema.Serialization?.Xml?.Name ?? ObjectSchema.Language.Default.Name, this, _typeFactory)
+                : null;
         }
 
         private SerializableObjectType? BuildDefaultDerivedType()

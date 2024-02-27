@@ -7,7 +7,7 @@ using AutoRest.CSharp.Output.Models.Serialization.Json;
 
 namespace AutoRest.CSharp.Output.Models.Serialization.Bicep
 {
-    internal record BicepPropertySerialization : PropertySerialization
+    internal class BicepPropertySerialization : PropertySerialization
     {
         public BicepPropertySerialization(JsonPropertySerialization serialization, string? customSerializationMethodName)
             : base(
