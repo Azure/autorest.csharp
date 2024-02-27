@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
         public bool IsAccessibilityOverridden { get; }
-        public override bool IncludeConverter => false;
+        public override bool IncludeConverter => _inputModelSerialization.IncludeConverter;
         protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && _inputModel.DiscriminatorPropertyName is not null;
 
         public ModelTypeProviderFields Fields => _fields ??= EnsureFields();
@@ -304,61 +304,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                 Initializer: new(true, baseInitializers));
         }
 
-        private IEnumerable<JsonPropertySerialization> CreatePropertySerializations()
-        {
-            foreach (var objType in EnumerateHierarchy())
-            {
-                foreach (var property in objType.Properties)
-                {
-                    if (property.InputModelProperty is not { } inputModelProperty)
-                        continue;
-
-                    var declaredName = property.Declaration.Name;
-                    var serializationMapping = GetForMemberSerialization(declaredName);
-                    var serializedName = serializationMapping?.SerializationPath?[^1] ?? inputModelProperty.SerializedName;
-                    var valueSerialization = SerializationBuilder.BuildJsonSerialization(inputModelProperty.Type, property.Declaration.Type, false, property.SerializationFormat);
-
-                    var memberValueExpression = new TypedMemberExpression(null, declaredName, property.Declaration.Type);
-                    TypedMemberExpression? enumerableExpression = null;
-                    if (TypeFactory.IsReadOnlyMemory(property.Declaration.Type))
-                    {
-                        enumerableExpression = property.Declaration.Type.IsNullable
-                            ? new TypedMemberExpression(null, $"{property.Declaration.Name}.{nameof(Nullable<ReadOnlyMemory<object>>.Value)}.{nameof(ReadOnlyMemory<object>.Span)}", typeof(ReadOnlySpan<>).MakeGenericType(property.Declaration.Type.Arguments[0].FrameworkType))
-                            : new TypedMemberExpression(null, $"{property.Declaration.Name}.{nameof(ReadOnlyMemory<object>.Span)}", typeof(ReadOnlySpan<>).MakeGenericType(property.Declaration.Type.Arguments[0].FrameworkType));
-                    }
-
-                    yield return new JsonPropertySerialization(
-                        declaredName.ToVariableName(),
-                        memberValueExpression,
-                        serializedName,
-                        property.ValueType.IsNullable && property.OptionalViaNullability ? property.ValueType.WithNullable(false) : property.ValueType,
-                        valueSerialization,
-                        property.IsRequired,
-                        ShouldExcludeInWireSerialization(property, inputModelProperty),
-                        serializationHooks: new CustomSerializationHooks(
-                            serializationMapping?.JsonSerializationValueHook,
-                            serializationMapping?.JsonDeserializationValueHook,
-                            serializationMapping?.BicepSerializationValueHook),
-                        enumerableExpression: enumerableExpression);
-                }
-            }
-        }
-
-        private static bool ShouldExcludeInWireSerialization(ObjectTypeProperty property, InputModelProperty inputProperty)
-        {
-            if (inputProperty.IsDiscriminator)
-            {
-                return false;
-            }
-
-            if (property.InitializationValue is not null)
-            {
-                return false;
-            }
-
-            return inputProperty.IsReadOnly;
-        }
-
         private void GetConstructorParameters(IEnumerable<Parameter> parameters, out IReadOnlyList<Parameter> fullParameterList, out IReadOnlyList<ValueExpression> baseInitializers, bool isInitializer)
         {
             var parameterList = new List<Parameter>();
@@ -589,8 +534,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return null;
             // Serialization uses field and property names that first need to verified for uniqueness
             // For that, FieldDeclaration instances must be written in the main partial class before JsonObjectSerialization is created for the serialization partial class
+            var properties = SerializationBuilder.GetPropertySerializations(this, _typeFactory);
             var additionalProperties = CreateAdditionalPropertiesSerialization();
-            return new(this, SerializationConstructor.Signature.Parameters, CreatePropertySerializations().ToArray(), additionalProperties, Discriminator, false);
+            return new(this, SerializationConstructor.Signature.Parameters, properties, additionalProperties, Discriminator, IncludeConverter);
         }
 
         private JsonAdditionalPropertiesSerialization? CreateAdditionalPropertiesSerialization()
