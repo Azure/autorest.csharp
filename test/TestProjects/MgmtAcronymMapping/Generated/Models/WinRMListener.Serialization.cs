@@ -35,8 +35,8 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<ProtocolType> protocol = default;
-            Optional<Uri> certificateUrl = default;
+            ProtocolType? protocol = default;
+            Uri certificateUrl = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("protocol"u8))
@@ -58,7 +58,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new WinRMListener(Optional.ToNullable(protocol), certificateUrl.Value);
+            return new WinRMListener(protocol, certificateUrl);
         }
     }
 }

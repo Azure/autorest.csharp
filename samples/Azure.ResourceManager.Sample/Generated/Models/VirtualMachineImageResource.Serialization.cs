@@ -89,7 +89,7 @@ namespace Azure.ResourceManager.Sample.Models
             string name = default;
             AzureLocation location = default;
             IDictionary<string, string> tags = default;
-            Optional<string> id = default;
+            string id = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -129,7 +129,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineImageResource(id.Value, serializedAdditionalRawData, name, location, tags ?? new ChangeTrackingDictionary<string, string>());
+            return new VirtualMachineImageResource(id, serializedAdditionalRawData, name, location, tags ?? new ChangeTrackingDictionary<string, string>());
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

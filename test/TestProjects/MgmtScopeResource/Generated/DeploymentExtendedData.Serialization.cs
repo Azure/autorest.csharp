@@ -21,13 +21,13 @@ namespace MgmtScopeResource
             {
                 return null;
             }
-            Optional<string> location = default;
-            Optional<DeploymentPropertiesExtended> properties = default;
+            string location = default;
+            DeploymentPropertiesExtended properties = default;
             IReadOnlyDictionary<string, string> tags = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
+            SystemData systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("location"u8))
@@ -87,9 +87,9 @@ namespace MgmtScopeResource
                 id,
                 name,
                 type,
-                systemData.Value,
-                location.Value,
-                properties.Value,
+                systemData,
+                location,
+                properties,
                 tags ?? new ChangeTrackingDictionary<string, string>());
         }
     }

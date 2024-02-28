@@ -34,8 +34,8 @@ namespace MgmtSupersetFlattenInheritance.Models
             {
                 return null;
             }
-            Optional<string> id = default;
-            Optional<string> foo = default;
+            string id = default;
+            string foo = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -49,7 +49,7 @@ namespace MgmtSupersetFlattenInheritance.Models
                     continue;
                 }
             }
-            return new WritableSubResourceModel1(id.Value, foo.Value);
+            return new WritableSubResourceModel1(id, foo);
         }
     }
 }

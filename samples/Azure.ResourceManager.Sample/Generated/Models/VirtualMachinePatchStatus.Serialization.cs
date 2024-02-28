@@ -75,8 +75,8 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<AvailablePatchSummary> availablePatchSummary = default;
-            Optional<LastPatchInstallationSummary> lastPatchInstallationSummary = default;
+            AvailablePatchSummary availablePatchSummary = default;
+            LastPatchInstallationSummary lastPatchInstallationSummary = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -105,7 +105,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachinePatchStatus(availablePatchSummary.Value, lastPatchInstallationSummary.Value, serializedAdditionalRawData);
+            return new VirtualMachinePatchStatus(availablePatchSummary, lastPatchInstallationSummary, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

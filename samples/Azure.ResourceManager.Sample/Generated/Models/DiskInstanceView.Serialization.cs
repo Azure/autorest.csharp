@@ -91,7 +91,7 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<string> name = default;
+            string name = default;
             IReadOnlyList<DiskEncryptionSettings> encryptionSettings = default;
             IReadOnlyList<InstanceViewStatus> statuses = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
@@ -137,7 +137,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DiskInstanceView(name.Value, encryptionSettings ?? new ChangeTrackingList<DiskEncryptionSettings>(), statuses ?? new ChangeTrackingList<InstanceViewStatus>(), serializedAdditionalRawData);
+            return new DiskInstanceView(name, encryptionSettings ?? new ChangeTrackingList<DiskEncryptionSettings>(), statuses ?? new ChangeTrackingList<InstanceViewStatus>(), serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

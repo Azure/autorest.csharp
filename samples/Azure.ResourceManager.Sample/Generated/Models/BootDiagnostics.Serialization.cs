@@ -75,8 +75,8 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<bool> enabled = default;
-            Optional<Uri> storageUri = default;
+            bool? enabled = default;
+            Uri storageUri = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -105,7 +105,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new BootDiagnostics(Optional.ToNullable(enabled), storageUri.Value, serializedAdditionalRawData);
+            return new BootDiagnostics(enabled, storageUri, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

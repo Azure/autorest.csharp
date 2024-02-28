@@ -84,10 +84,10 @@ namespace body_complex.Models
             {
                 return null;
             }
-            Optional<string> propD1 = default;
+            string propD1 = default;
             MyKind kind = default;
-            Optional<string> propB1 = default;
-            Optional<string> propBH1 = default;
+            string propB1 = default;
+            string propBH1 = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -130,7 +130,7 @@ namespace body_complex.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new MyDerivedType(kind, propB1.Value, propBH1.Value, serializedAdditionalRawData, propD1.Value);
+            return new MyDerivedType(kind, propB1, propBH1, serializedAdditionalRawData, propD1);
         }
 
         BinaryData IPersistableModel<MyDerivedType>.Write(ModelReaderWriterOptions options)

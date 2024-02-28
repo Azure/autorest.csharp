@@ -37,8 +37,8 @@ namespace CognitiveSearch.Models
                 return null;
             }
             string sourceFieldName = default;
-            Optional<string> targetFieldName = default;
-            Optional<FieldMappingFunction> mappingFunction = default;
+            string targetFieldName = default;
+            FieldMappingFunction mappingFunction = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sourceFieldName"u8))
@@ -61,7 +61,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new FieldMapping(sourceFieldName, targetFieldName.Value, mappingFunction.Value);
+            return new FieldMapping(sourceFieldName, targetFieldName, mappingFunction);
         }
     }
 }

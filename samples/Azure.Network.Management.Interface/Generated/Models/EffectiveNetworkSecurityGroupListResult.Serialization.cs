@@ -20,7 +20,7 @@ namespace Azure.Network.Management.Interface.Models
                 return null;
             }
             IReadOnlyList<EffectiveNetworkSecurityGroup> value = default;
-            Optional<string> nextLink = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -43,7 +43,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new EffectiveNetworkSecurityGroupListResult(value ?? new ChangeTrackingList<EffectiveNetworkSecurityGroup>(), nextLink.Value);
+            return new EffectiveNetworkSecurityGroupListResult(value ?? new ChangeTrackingList<EffectiveNetworkSecurityGroup>(), nextLink);
         }
     }
 }

@@ -52,13 +52,13 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> etag = default;
-            Optional<string> id = default;
-            Optional<string> addressPrefix = default;
-            Optional<RouteNextHopType> nextHopType = default;
-            Optional<string> nextHopIpAddress = default;
-            Optional<ProvisioningState> provisioningState = default;
+            string name = default;
+            string etag = default;
+            string id = default;
+            string addressPrefix = default;
+            RouteNextHopType? nextHopType = default;
+            string nextHopIpAddress = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -118,13 +118,13 @@ namespace Azure.Network.Management.Interface.Models
                 }
             }
             return new Route(
-                id.Value,
-                name.Value,
-                etag.Value,
-                addressPrefix.Value,
-                Optional.ToNullable(nextHopType),
-                nextHopIpAddress.Value,
-                Optional.ToNullable(provisioningState));
+                id,
+                name,
+                etag,
+                addressPrefix,
+                nextHopType,
+                nextHopIpAddress,
+                provisioningState);
         }
     }
 }

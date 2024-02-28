@@ -58,13 +58,13 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> etag = default;
-            Optional<string> id = default;
-            Optional<string> description = default;
-            Optional<string> service = default;
+            string name = default;
+            string etag = default;
+            string id = default;
+            string description = default;
+            string service = default;
             IList<string> serviceResources = default;
-            Optional<ProvisioningState> provisioningState = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -129,13 +129,13 @@ namespace Azure.Network.Management.Interface.Models
                 }
             }
             return new ServiceEndpointPolicyDefinition(
-                id.Value,
-                name.Value,
-                etag.Value,
-                description.Value,
-                service.Value,
+                id,
+                name,
+                etag,
+                description,
+                service,
                 serviceResources ?? new ChangeTrackingList<string>(),
-                Optional.ToNullable(provisioningState));
+                provisioningState);
         }
     }
 }

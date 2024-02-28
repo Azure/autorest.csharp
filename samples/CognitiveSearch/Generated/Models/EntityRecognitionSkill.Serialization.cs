@@ -96,13 +96,13 @@ namespace CognitiveSearch.Models
                 return null;
             }
             IList<EntityCategory> categories = default;
-            Optional<EntityRecognitionSkillLanguage> defaultLanguageCode = default;
-            Optional<bool?> includeTypelessEntities = default;
-            Optional<double?> minimumPrecision = default;
+            EntityRecognitionSkillLanguage? defaultLanguageCode = default;
+            bool? includeTypelessEntities = default;
+            double? minimumPrecision = default;
             string odataType = default;
-            Optional<string> name = default;
-            Optional<string> description = default;
-            Optional<string> context = default;
+            string name = default;
+            string description = default;
+            string context = default;
             IList<InputFieldMappingEntry> inputs = default;
             IList<OutputFieldMappingEntry> outputs = default;
             foreach (var property in element.EnumerateObject())
@@ -193,15 +193,15 @@ namespace CognitiveSearch.Models
             }
             return new EntityRecognitionSkill(
                 odataType,
-                name.Value,
-                description.Value,
-                context.Value,
+                name,
+                description,
+                context,
                 inputs,
                 outputs,
                 categories ?? new ChangeTrackingList<EntityCategory>(),
-                Optional.ToNullable(defaultLanguageCode),
-                Optional.ToNullable(includeTypelessEntities),
-                Optional.ToNullable(minimumPrecision));
+                defaultLanguageCode,
+                includeTypelessEntities,
+                minimumPrecision);
         }
     }
 }

@@ -21,7 +21,7 @@ namespace MgmtPagination.Models
                 return null;
             }
             IReadOnlyList<PageSizeNumericModelData> value = default;
-            Optional<string> nextLink = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -44,7 +44,7 @@ namespace MgmtPagination.Models
                     continue;
                 }
             }
-            return new PageSizeNumericModelListResult(value ?? new ChangeTrackingList<PageSizeNumericModelData>(), nextLink.Value);
+            return new PageSizeNumericModelListResult(value ?? new ChangeTrackingList<PageSizeNumericModelData>(), nextLink);
         }
     }
 }

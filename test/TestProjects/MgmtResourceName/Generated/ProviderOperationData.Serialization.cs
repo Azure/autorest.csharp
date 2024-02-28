@@ -21,13 +21,13 @@ namespace MgmtResourceName
             {
                 return null;
             }
-            Optional<string> displayName = default;
+            string displayName = default;
             IReadOnlyList<Models.ResourceType> resourceTypes = default;
             IReadOnlyList<ResourceOperation> operations = default;
             ResourceIdentifier id = default;
             string name = default;
             Azure.Core.ResourceType type = default;
-            Optional<SystemData> systemData = default;
+            SystemData systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("displayName"u8))
@@ -92,8 +92,8 @@ namespace MgmtResourceName
                 id,
                 name,
                 type,
-                systemData.Value,
-                displayName.Value,
+                systemData,
+                displayName,
                 resourceTypes ?? new ChangeTrackingList<Models.ResourceType>(),
                 operations ?? new ChangeTrackingList<ResourceOperation>());
         }

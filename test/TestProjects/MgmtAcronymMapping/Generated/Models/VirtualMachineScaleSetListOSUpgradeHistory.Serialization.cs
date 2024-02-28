@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -20,7 +19,7 @@ namespace MgmtAcronymMapping.Models
                 return null;
             }
             IReadOnlyList<UpgradeOperationHistoricalStatusInfo> value = default;
-            Optional<string> nextLink = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -39,7 +38,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetListOSUpgradeHistory(value, nextLink.Value);
+            return new VirtualMachineScaleSetListOSUpgradeHistory(value, nextLink);
         }
     }
 }

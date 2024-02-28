@@ -21,7 +21,7 @@ namespace MgmtMockAndSample.Models
                 return null;
             }
             IReadOnlyList<VaultData> value = default;
-            Optional<string> nextLink = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -44,7 +44,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new VaultListResult(value ?? new ChangeTrackingList<VaultData>(), nextLink.Value);
+            return new VaultListResult(value ?? new ChangeTrackingList<VaultData>(), nextLink);
         }
     }
 }

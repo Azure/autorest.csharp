@@ -39,9 +39,9 @@ namespace MgmtExpandResourceTypes.Models
             {
                 return null;
             }
-            Optional<int> flags = default;
-            Optional<string> tag = default;
-            Optional<string> value = default;
+            int? flags = default;
+            string tag = default;
+            string value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("flags"u8))
@@ -64,7 +64,7 @@ namespace MgmtExpandResourceTypes.Models
                     continue;
                 }
             }
-            return new CaaRecord(Optional.ToNullable(flags), tag.Value, value.Value);
+            return new CaaRecord(flags, tag, value);
         }
     }
 }

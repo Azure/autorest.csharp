@@ -41,7 +41,7 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<WritableSubResource> sourceVault = default;
+            WritableSubResource sourceVault = default;
             IList<VaultCertificate> vaultCertificates = default;
             foreach (var property in element.EnumerateObject())
             {

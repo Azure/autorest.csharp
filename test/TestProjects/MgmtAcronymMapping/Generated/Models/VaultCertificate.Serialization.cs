@@ -35,8 +35,8 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<Uri> certificateUrl = default;
-            Optional<string> certificateStore = default;
+            Uri certificateUrl = default;
+            string certificateStore = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("certificateUrl"u8))
@@ -54,7 +54,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VaultCertificate(certificateUrl.Value, certificateStore.Value);
+            return new VaultCertificate(certificateUrl, certificateStore);
         }
     }
 }

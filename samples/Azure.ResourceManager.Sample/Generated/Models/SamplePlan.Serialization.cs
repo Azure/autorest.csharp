@@ -85,10 +85,10 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> publisher = default;
-            Optional<string> product = default;
-            Optional<string> promotionCode = default;
+            string name = default;
+            string publisher = default;
+            string product = default;
+            string promotionCode = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -119,7 +119,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new SamplePlan(name.Value, publisher.Value, product.Value, promotionCode.Value, serializedAdditionalRawData);
+            return new SamplePlan(name, publisher, product, promotionCode, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

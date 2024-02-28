@@ -19,21 +19,21 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<EffectiveSecurityRuleProtocol> protocol = default;
-            Optional<string> sourcePortRange = default;
-            Optional<string> destinationPortRange = default;
+            string name = default;
+            EffectiveSecurityRuleProtocol? protocol = default;
+            string sourcePortRange = default;
+            string destinationPortRange = default;
             IReadOnlyList<string> sourcePortRanges = default;
             IReadOnlyList<string> destinationPortRanges = default;
-            Optional<string> sourceAddressPrefix = default;
-            Optional<string> destinationAddressPrefix = default;
+            string sourceAddressPrefix = default;
+            string destinationAddressPrefix = default;
             IReadOnlyList<string> sourceAddressPrefixes = default;
             IReadOnlyList<string> destinationAddressPrefixes = default;
             IReadOnlyList<string> expandedSourceAddressPrefix = default;
             IReadOnlyList<string> expandedDestinationAddressPrefix = default;
-            Optional<SecurityRuleAccess> access = default;
-            Optional<int> priority = default;
-            Optional<SecurityRuleDirection> direction = default;
+            SecurityRuleAccess? access = default;
+            int? priority = default;
+            SecurityRuleDirection? direction = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -183,21 +183,21 @@ namespace Azure.Network.Management.Interface.Models
                 }
             }
             return new EffectiveNetworkSecurityRule(
-                name.Value,
-                Optional.ToNullable(protocol),
-                sourcePortRange.Value,
-                destinationPortRange.Value,
+                name,
+                protocol,
+                sourcePortRange,
+                destinationPortRange,
                 sourcePortRanges ?? new ChangeTrackingList<string>(),
                 destinationPortRanges ?? new ChangeTrackingList<string>(),
-                sourceAddressPrefix.Value,
-                destinationAddressPrefix.Value,
+                sourceAddressPrefix,
+                destinationAddressPrefix,
                 sourceAddressPrefixes ?? new ChangeTrackingList<string>(),
                 destinationAddressPrefixes ?? new ChangeTrackingList<string>(),
                 expandedSourceAddressPrefix ?? new ChangeTrackingList<string>(),
                 expandedDestinationAddressPrefix ?? new ChangeTrackingList<string>(),
-                Optional.ToNullable(access),
-                Optional.ToNullable(priority),
-                Optional.ToNullable(direction));
+                access,
+                priority,
+                direction);
         }
     }
 }

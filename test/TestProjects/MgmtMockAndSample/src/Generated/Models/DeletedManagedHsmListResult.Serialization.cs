@@ -21,7 +21,7 @@ namespace MgmtMockAndSample.Models
                 return null;
             }
             IReadOnlyList<DeletedManagedHsmData> value = default;
-            Optional<string> nextLink = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -44,7 +44,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new DeletedManagedHsmListResult(value ?? new ChangeTrackingList<DeletedManagedHsmData>(), nextLink.Value);
+            return new DeletedManagedHsmListResult(value ?? new ChangeTrackingList<DeletedManagedHsmData>(), nextLink);
         }
     }
 }

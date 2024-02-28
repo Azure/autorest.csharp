@@ -75,8 +75,8 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             {
                 return null;
             }
-            Optional<string> profileVersion = default;
-            Optional<string> apiVersion = default;
+            string profileVersion = default;
+            string apiVersion = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -97,7 +97,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ApiProfile(profileVersion.Value, apiVersion.Value, serializedAdditionalRawData);
+            return new ApiProfile(profileVersion, apiVersion, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ApiProfile>.Write(ModelReaderWriterOptions options)

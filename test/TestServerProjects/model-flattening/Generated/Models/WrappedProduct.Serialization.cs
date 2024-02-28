@@ -69,7 +69,7 @@ namespace model_flattening.Models
             {
                 return null;
             }
-            Optional<string> value = default;
+            string value = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -85,7 +85,7 @@ namespace model_flattening.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new WrappedProduct(value.Value, serializedAdditionalRawData);
+            return new WrappedProduct(value, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<WrappedProduct>.Write(ModelReaderWriterOptions options)

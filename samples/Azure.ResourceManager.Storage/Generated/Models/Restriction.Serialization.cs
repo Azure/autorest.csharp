@@ -19,9 +19,9 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Optional<string> type = default;
+            string type = default;
             IReadOnlyList<string> values = default;
-            Optional<ReasonCode> reasonCode = default;
+            ReasonCode? reasonCode = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("type"u8))
@@ -53,7 +53,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new Restriction(type.Value, values ?? new ChangeTrackingList<string>(), Optional.ToNullable(reasonCode));
+            return new Restriction(type, values ?? new ChangeTrackingList<string>(), reasonCode);
         }
     }
 }

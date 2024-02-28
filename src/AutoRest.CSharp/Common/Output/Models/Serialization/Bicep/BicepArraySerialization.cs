@@ -11,7 +11,7 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Bicep
     {
         public BicepArraySerialization(JsonArraySerialization serialization) : base(serialization)
         {
-            ImplementationType = serialization.ImplementationType;
+            ImplementationType = serialization.Type;
             ValueSerialization = Create(serialization.ValueSerialization);
         }
 

@@ -20,11 +20,11 @@ namespace MgmtMockAndSample
             {
                 return null;
             }
-            Optional<DeletedManagedHsmProperties> properties = default;
+            DeletedManagedHsmProperties properties = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
+            SystemData systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("properties"u8))
@@ -61,7 +61,7 @@ namespace MgmtMockAndSample
                     continue;
                 }
             }
-            return new DeletedManagedHsmData(id, name, type, systemData.Value, properties.Value);
+            return new DeletedManagedHsmData(id, name, type, systemData, properties);
         }
     }
 }

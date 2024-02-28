@@ -44,7 +44,7 @@ namespace MgmtPropertyChooser.Models
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
+            SystemData systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("location"u8))
@@ -95,7 +95,7 @@ namespace MgmtPropertyChooser.Models
                 id,
                 name,
                 type,
-                systemData.Value,
+                systemData,
                 location,
                 tags ?? new ChangeTrackingDictionary<string, string>());
         }

@@ -63,15 +63,15 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<string> name = default;
+            string name = default;
             int lun = default;
-            Optional<CachingType> caching = default;
-            Optional<bool> writeAcceleratorEnabled = default;
+            CachingType? caching = default;
+            bool? writeAcceleratorEnabled = default;
             DiskCreateOptionType createOption = default;
-            Optional<int> diskSizeGB = default;
-            Optional<VirtualMachineScaleSetManagedDiskParameters> managedDisk = default;
-            Optional<long> diskIOPSReadWrite = default;
-            Optional<long> diskMBpsReadWrite = default;
+            int? diskSizeGB = default;
+            VirtualMachineScaleSetManagedDiskParameters managedDisk = default;
+            long? diskIOPSReadWrite = default;
+            long? diskMBpsReadWrite = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -145,15 +145,15 @@ namespace MgmtAcronymMapping.Models
                 }
             }
             return new VirtualMachineScaleSetDataDisk(
-                name.Value,
+                name,
                 lun,
-                Optional.ToNullable(caching),
-                Optional.ToNullable(writeAcceleratorEnabled),
+                caching,
+                writeAcceleratorEnabled,
                 createOption,
-                Optional.ToNullable(diskSizeGB),
-                managedDisk.Value,
-                Optional.ToNullable(diskIOPSReadWrite),
-                Optional.ToNullable(diskMBpsReadWrite));
+                diskSizeGB,
+                managedDisk,
+                diskIOPSReadWrite,
+                diskMBpsReadWrite);
         }
     }
 }

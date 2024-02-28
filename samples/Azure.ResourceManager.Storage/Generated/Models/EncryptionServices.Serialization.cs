@@ -44,10 +44,10 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Optional<EncryptionService> blob = default;
-            Optional<EncryptionService> file = default;
-            Optional<EncryptionService> table = default;
-            Optional<EncryptionService> queue = default;
+            EncryptionService blob = default;
+            EncryptionService file = default;
+            EncryptionService table = default;
+            EncryptionService queue = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("blob"u8))
@@ -87,7 +87,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new EncryptionServices(blob.Value, file.Value, table.Value, queue.Value);
+            return new EncryptionServices(blob, file, table, queue);
         }
     }
 }

@@ -39,9 +39,9 @@ namespace MgmtExactMatchFlattenInheritance.Models
             {
                 return null;
             }
-            Optional<string> id = default;
-            Optional<string> name = default;
-            Optional<string> type = default;
+            string id = default;
+            string name = default;
+            string type = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -60,7 +60,7 @@ namespace MgmtExactMatchFlattenInheritance.Models
                     continue;
                 }
             }
-            return new AzureResourceFlattenModel7(id.Value, name.Value, type.Value);
+            return new AzureResourceFlattenModel7(id, name, type);
         }
     }
 }

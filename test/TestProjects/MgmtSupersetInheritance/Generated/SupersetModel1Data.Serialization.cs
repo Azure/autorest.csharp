@@ -30,11 +30,11 @@ namespace MgmtSupersetInheritance
             {
                 return null;
             }
-            Optional<string> @new = default;
+            string @new = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
+            SystemData systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("new"u8))
@@ -67,7 +67,7 @@ namespace MgmtSupersetInheritance
                     continue;
                 }
             }
-            return new SupersetModel1Data(id, name, type, systemData.Value, @new.Value);
+            return new SupersetModel1Data(id, name, type, systemData, @new);
         }
     }
 }

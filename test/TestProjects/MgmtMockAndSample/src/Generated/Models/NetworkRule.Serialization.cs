@@ -114,8 +114,8 @@ namespace MgmtMockAndSample.Models
             IList<string> sourceIpGroups = default;
             IList<string> destinationIpGroups = default;
             IList<string> destinationFqdns = default;
-            Optional<string> name = default;
-            Optional<string> description = default;
+            string name = default;
+            string description = default;
             FirewallPolicyRuleType ruleType = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -234,8 +234,8 @@ namespace MgmtMockAndSample.Models
                 }
             }
             return new NetworkRule(
-                name.Value,
-                description.Value,
+                name,
+                description,
                 ruleType,
                 ipProtocols ?? new ChangeTrackingList<FirewallPolicyRuleNetworkProtocol>(),
                 sourceAddresses ?? new ChangeTrackingList<string>(),

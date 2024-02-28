@@ -111,14 +111,14 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<PatchOperationStatus> status = default;
-            Optional<string> assessmentActivityId = default;
-            Optional<bool> rebootPending = default;
-            Optional<int> criticalAndSecurityPatchCount = default;
-            Optional<int> otherPatchCount = default;
-            Optional<DateTimeOffset> startDateTime = default;
+            PatchOperationStatus? status = default;
+            string assessmentActivityId = default;
+            bool? rebootPending = default;
+            int? criticalAndSecurityPatchCount = default;
+            int? otherPatchCount = default;
+            DateTimeOffset? startDateTime = default;
             IReadOnlyList<VirtualMachineSoftwarePatchProperties> patches = default;
-            Optional<ApiError> error = default;
+            ApiError error = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -203,14 +203,14 @@ namespace Azure.ResourceManager.Sample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new VirtualMachineAssessPatchesResult(
-                Optional.ToNullable(status),
-                assessmentActivityId.Value,
-                Optional.ToNullable(rebootPending),
-                Optional.ToNullable(criticalAndSecurityPatchCount),
-                Optional.ToNullable(otherPatchCount),
-                Optional.ToNullable(startDateTime),
+                status,
+                assessmentActivityId,
+                rebootPending,
+                criticalAndSecurityPatchCount,
+                otherPatchCount,
+                startDateTime,
                 patches ?? new ChangeTrackingList<VirtualMachineSoftwarePatchProperties>(),
-                error.Value,
+                error,
                 serializedAdditionalRawData);
         }
 

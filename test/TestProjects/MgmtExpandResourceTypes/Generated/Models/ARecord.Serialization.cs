@@ -29,7 +29,7 @@ namespace MgmtExpandResourceTypes.Models
             {
                 return null;
             }
-            Optional<string> ipv4Address = default;
+            string ipv4Address = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("ipv4Address"u8))
@@ -38,7 +38,7 @@ namespace MgmtExpandResourceTypes.Models
                     continue;
                 }
             }
-            return new ARecord(ipv4Address.Value);
+            return new ARecord(ipv4Address);
         }
     }
 }

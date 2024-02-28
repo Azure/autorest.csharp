@@ -38,7 +38,7 @@ namespace CognitiveSearch.Models
             string keyVaultKeyName = default;
             string keyVaultKeyVersion = default;
             string keyVaultUri = default;
-            Optional<AzureActiveDirectoryApplicationCredentials> accessCredentials = default;
+            AzureActiveDirectoryApplicationCredentials accessCredentials = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("keyVaultKeyName"u8))
@@ -66,7 +66,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new EncryptionKey(keyVaultKeyName, keyVaultKeyVersion, keyVaultUri, accessCredentials.Value);
+            return new EncryptionKey(keyVaultKeyName, keyVaultKeyVersion, keyVaultUri, accessCredentials);
         }
     }
 }

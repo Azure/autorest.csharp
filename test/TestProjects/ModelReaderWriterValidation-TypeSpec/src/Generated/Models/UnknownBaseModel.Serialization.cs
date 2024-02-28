@@ -73,7 +73,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 return null;
             }
             string kind = "Unknown";
-            Optional<string> name = default;
+            string name = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -94,7 +94,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new UnknownBaseModel(kind, name.Value, serializedAdditionalRawData);
+            return new UnknownBaseModel(kind, name, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<BaseModel>.Write(ModelReaderWriterOptions options)

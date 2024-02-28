@@ -79,7 +79,7 @@ namespace Azure.ResourceManager.Sample.Models
                 return null;
             }
             IReadOnlyList<VirtualMachineScaleSetSku> vmssSkus = default;
-            Optional<string> nextLink = default;
+            string nextLink = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -105,7 +105,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineScaleSetListSkusResult(vmssSkus, nextLink.Value, serializedAdditionalRawData);
+            return new VirtualMachineScaleSetListSkusResult(vmssSkus, nextLink, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

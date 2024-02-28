@@ -45,8 +45,8 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<ImageReference> imageReference = default;
-            Optional<OSDisk> osDisk = default;
+            ImageReference imageReference = default;
+            OSDisk osDisk = default;
             IList<DataDisk> dataDisks = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -83,7 +83,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new StorageProfile(imageReference.Value, osDisk.Value, dataDisks ?? new ChangeTrackingList<DataDisk>());
+            return new StorageProfile(imageReference, osDisk, dataDisks ?? new ChangeTrackingList<DataDisk>());
         }
     }
 }

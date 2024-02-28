@@ -86,7 +86,7 @@ namespace MgmtDiscriminator.Models
             CacheExpirationActionParametersTypeName typeName = default;
             CacheBehavior cacheBehavior = default;
             CacheType cacheType = default;
-            Optional<TimeSpan?> cacheDuration = default;
+            TimeSpan? cacheDuration = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -122,7 +122,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new CacheExpirationActionParameters(typeName, cacheBehavior, cacheType, Optional.ToNullable(cacheDuration), serializedAdditionalRawData);
+            return new CacheExpirationActionParameters(typeName, cacheBehavior, cacheType, cacheDuration, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

@@ -94,9 +94,9 @@ namespace body_complex.Models
             {
                 return null;
             }
-            Optional<DotSalmon> sampleSalmon = default;
+            DotSalmon sampleSalmon = default;
             IReadOnlyList<DotSalmon> salmons = default;
-            Optional<DotFish> sampleFish = default;
+            DotFish sampleFish = default;
             IReadOnlyList<DotFish> fishes = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -154,7 +154,7 @@ namespace body_complex.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DotFishMarket(sampleSalmon.Value, salmons ?? new ChangeTrackingList<DotSalmon>(), sampleFish.Value, fishes ?? new ChangeTrackingList<DotFish>(), serializedAdditionalRawData);
+            return new DotFishMarket(sampleSalmon, salmons ?? new ChangeTrackingList<DotSalmon>(), sampleFish, fishes ?? new ChangeTrackingList<DotFish>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<DotFishMarket>.Write(ModelReaderWriterOptions options)

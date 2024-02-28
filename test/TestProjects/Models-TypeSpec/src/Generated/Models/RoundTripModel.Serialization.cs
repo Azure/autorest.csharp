@@ -296,14 +296,14 @@ namespace ModelsTypeSpec.Models
             }
             string requiredString = default;
             int requiredInt = default;
-            Optional<string> nonRequiredString = default;
-            Optional<int> nonRequiredInt = default;
+            string nonRequiredString = default;
+            int? nonRequiredInt = default;
             int? requiredNullableInt = default;
             string requiredNullableString = default;
-            Optional<int?> nonRequiredNullableInt = default;
-            Optional<string> nonRequiredNullableString = default;
+            int? nonRequiredNullableInt = default;
+            string nonRequiredNullableString = default;
             int requiredReadonlyInt = default;
-            Optional<int> nonRequiredReadonlyInt = default;
+            int? nonRequiredReadonlyInt = default;
             BaseModelWithDiscriminator requiredModel = default;
             FixedStringEnum requiredFixedStringEnum = default;
             FixedIntEnum requiredFixedIntEnum = default;
@@ -313,11 +313,11 @@ namespace ModelsTypeSpec.Models
             IDictionary<string, string> requiredStringRecord = default;
             IDictionary<string, RecordItem> requiredModelRecord = default;
             BinaryData requiredBytes = default;
-            Optional<BinaryData> optionalBytes = default;
+            BinaryData optionalBytes = default;
             IList<byte> requiredUint8Array = default;
             IList<byte> optionalUint8Array = default;
             BinaryData requiredUnknown = default;
-            Optional<BinaryData> optionalUnknown = default;
+            BinaryData optionalUnknown = default;
             IList<sbyte> requiredInt8Array = default;
             IList<sbyte> optionalInt8Array = default;
             IList<int> requiredNullableIntList = default;
@@ -610,14 +610,14 @@ namespace ModelsTypeSpec.Models
                 serializedAdditionalRawData,
                 requiredString,
                 requiredInt,
-                nonRequiredString.Value,
-                Optional.ToNullable(nonRequiredInt),
+                nonRequiredString,
+                nonRequiredInt,
                 requiredNullableInt,
                 requiredNullableString,
-                Optional.ToNullable(nonRequiredNullableInt),
-                nonRequiredNullableString.Value,
+                nonRequiredNullableInt,
+                nonRequiredNullableString,
                 requiredReadonlyInt,
-                Optional.ToNullable(nonRequiredReadonlyInt),
+                nonRequiredReadonlyInt,
                 requiredModel,
                 requiredFixedStringEnum,
                 requiredFixedIntEnum,
@@ -627,11 +627,11 @@ namespace ModelsTypeSpec.Models
                 requiredStringRecord,
                 requiredModelRecord,
                 requiredBytes,
-                optionalBytes.Value,
+                optionalBytes,
                 requiredUint8Array,
                 optionalUint8Array ?? new ChangeTrackingList<byte>(),
                 requiredUnknown,
-                optionalUnknown.Value,
+                optionalUnknown,
                 requiredInt8Array,
                 optionalInt8Array ?? new ChangeTrackingList<sbyte>(),
                 requiredNullableIntList,

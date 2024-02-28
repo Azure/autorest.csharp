@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace MgmtMockAndSample.Models
 {
@@ -18,9 +17,9 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<string> action = default;
-            Optional<string> role = default;
-            Optional<string> scope = default;
+            string action = default;
+            string role = default;
+            string scope = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("action"u8))
@@ -39,7 +38,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new SenderAuthorization(action.Value, role.Value, scope.Value);
+            return new SenderAuthorization(action, role, scope);
         }
     }
 }

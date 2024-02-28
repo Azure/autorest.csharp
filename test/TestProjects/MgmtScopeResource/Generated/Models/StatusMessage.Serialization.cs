@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace MgmtScopeResource.Models
 {
@@ -18,8 +17,8 @@ namespace MgmtScopeResource.Models
             {
                 return null;
             }
-            Optional<string> status = default;
-            Optional<ErrorResponse> errorResponse = default;
+            string status = default;
+            ErrorResponse errorResponse = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("status"u8))
@@ -37,7 +36,7 @@ namespace MgmtScopeResource.Models
                     continue;
                 }
             }
-            return new StatusMessage(status.Value, errorResponse.Value);
+            return new StatusMessage(status, errorResponse);
         }
     }
 }

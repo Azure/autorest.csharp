@@ -91,10 +91,10 @@ namespace OpenAI.Models
                 return null;
             }
             string prompt = default;
-            OptionalProperty<long?> n = default;
-            OptionalProperty<CreateImageRequestSize> size = default;
-            OptionalProperty<CreateImageRequestResponseFormat> responseFormat = default;
-            OptionalProperty<string> user = default;
+            long? n = default;
+            CreateImageRequestSize? size = default;
+            CreateImageRequestResponseFormat? responseFormat = default;
+            string user = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -145,10 +145,10 @@ namespace OpenAI.Models
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new CreateImageRequest(
                 prompt,
-                OptionalProperty.ToNullable(n),
-                OptionalProperty.ToNullable(size),
-                OptionalProperty.ToNullable(responseFormat),
-                user.Value,
+                n,
+                size,
+                responseFormat,
+                user,
                 serializedAdditionalRawData);
         }
 

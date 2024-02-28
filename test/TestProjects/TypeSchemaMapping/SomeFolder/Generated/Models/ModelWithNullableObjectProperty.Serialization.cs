@@ -69,7 +69,7 @@ namespace TypeSchemaMapping.Models
             {
                 return null;
             }
-            Optional<JsonElement> modelProperty = default;
+            JsonElement modelProperty = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

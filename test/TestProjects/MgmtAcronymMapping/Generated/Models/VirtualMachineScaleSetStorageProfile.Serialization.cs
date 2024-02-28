@@ -45,8 +45,8 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<ImageReference> imageReference = default;
-            Optional<VirtualMachineScaleSetOSDisk> osDisk = default;
+            ImageReference imageReference = default;
+            VirtualMachineScaleSetOSDisk osDisk = default;
             IList<VirtualMachineScaleSetDataDisk> dataDisks = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -83,7 +83,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetStorageProfile(imageReference.Value, osDisk.Value, dataDisks ?? new ChangeTrackingList<VirtualMachineScaleSetDataDisk>());
+            return new VirtualMachineScaleSetStorageProfile(imageReference, osDisk, dataDisks ?? new ChangeTrackingList<VirtualMachineScaleSetDataDisk>());
         }
     }
 }

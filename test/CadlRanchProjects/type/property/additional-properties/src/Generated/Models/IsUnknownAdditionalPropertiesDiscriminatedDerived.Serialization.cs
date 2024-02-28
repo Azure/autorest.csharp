@@ -74,7 +74,7 @@ namespace _Type.Property.AdditionalProperties.Models
                 return null;
             }
             int index = default;
-            Optional<float> age = default;
+            float? age = default;
             string name = default;
             string kind = default;
             IDictionary<string, BinaryData> additionalProperties = default;
@@ -108,7 +108,7 @@ namespace _Type.Property.AdditionalProperties.Models
                 additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new IsUnknownAdditionalPropertiesDiscriminatedDerived(name, kind, additionalProperties, index, Optional.ToNullable(age));
+            return new IsUnknownAdditionalPropertiesDiscriminatedDerived(name, kind, additionalProperties, index, age);
         }
 
         BinaryData IPersistableModel<IsUnknownAdditionalPropertiesDiscriminatedDerived>.Write(ModelReaderWriterOptions options)

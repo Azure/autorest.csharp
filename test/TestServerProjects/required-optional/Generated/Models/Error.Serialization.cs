@@ -74,8 +74,8 @@ namespace required_optional.Models
             {
                 return null;
             }
-            Optional<int> status = default;
-            Optional<string> message = default;
+            int? status = default;
+            string message = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -100,7 +100,7 @@ namespace required_optional.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Error(Optional.ToNullable(status), message.Value, serializedAdditionalRawData);
+            return new Error(status, message, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<Error>.Write(ModelReaderWriterOptions options)

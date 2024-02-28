@@ -103,8 +103,8 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             {
                 return null;
             }
-            Optional<ComputeSku> sku = default;
-            Optional<AvailabilitySetProperties> properties = default;
+            ComputeSku sku = default;
+            AvailabilitySetProperties properties = default;
             string id = default;
             string name = default;
             string type = default;
@@ -179,8 +179,8 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 location,
                 tags ?? new ChangeTrackingDictionary<string, string>(),
                 serializedAdditionalRawData,
-                sku.Value,
-                properties.Value);
+                sku,
+                properties);
         }
 
         BinaryData IPersistableModel<AvailabilitySetData>.Write(ModelReaderWriterOptions options)

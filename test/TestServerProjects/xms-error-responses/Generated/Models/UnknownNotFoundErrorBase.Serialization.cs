@@ -76,9 +76,9 @@ namespace xms_error_responses.Models
             {
                 return null;
             }
-            Optional<string> reason = default;
+            string reason = default;
             string whatNotFound = "Unknown";
-            Optional<string> someBaseProp = default;
+            string someBaseProp = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -104,7 +104,7 @@ namespace xms_error_responses.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new UnknownNotFoundErrorBase(someBaseProp.Value, serializedAdditionalRawData, reason.Value, whatNotFound);
+            return new UnknownNotFoundErrorBase(someBaseProp, serializedAdditionalRawData, reason, whatNotFound);
         }
 
         BinaryData IPersistableModel<NotFoundErrorBase>.Write(ModelReaderWriterOptions options)

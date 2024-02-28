@@ -56,8 +56,8 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<NetworkRuleBypassOption> bypass = default;
-            Optional<NetworkRuleAction> defaultAction = default;
+            NetworkRuleBypassOption? bypass = default;
+            NetworkRuleAction? defaultAction = default;
             IList<MhsmipRule> ipRules = default;
             IList<WritableSubResource> virtualNetworkRules = default;
             foreach (var property in element.EnumerateObject())
@@ -109,7 +109,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new MhsmNetworkRuleSet(Optional.ToNullable(bypass), Optional.ToNullable(defaultAction), ipRules ?? new ChangeTrackingList<MhsmipRule>(), virtualNetworkRules ?? new ChangeTrackingList<WritableSubResource>());
+            return new MhsmNetworkRuleSet(bypass, defaultAction, ipRules ?? new ChangeTrackingList<MhsmipRule>(), virtualNetworkRules ?? new ChangeTrackingList<WritableSubResource>());
         }
     }
 }

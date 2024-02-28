@@ -35,8 +35,8 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<bool> enabled = default;
-            Optional<Uri> storageUri = default;
+            bool? enabled = default;
+            Uri storageUri = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("enabled"u8))
@@ -58,7 +58,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new BootDiagnostics(Optional.ToNullable(enabled), storageUri.Value);
+            return new BootDiagnostics(enabled, storageUri);
         }
     }
 }
