@@ -27,9 +27,9 @@ namespace Azure.ResourceManager.Sample
         {
         }
 
-        internal SampleArmOperation(Response response, RehydrationToken? rehydrationToken = null)
+        internal SampleArmOperation(Response response, RequestMethod? requestMethod = null)
         {
-            _operation = OperationInternal.Succeeded(response, rehydrationToken);
+            _operation = OperationInternal.Succeeded(response, requestMethod);
             _rehydrationToken = null;
         }
 

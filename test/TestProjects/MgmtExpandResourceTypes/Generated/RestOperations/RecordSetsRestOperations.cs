@@ -37,24 +37,6 @@ namespace MgmtExpandResourceTypes
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
-        internal RequestUriBuilder CreateUpdateRequestUri(string subscriptionId, string resourceGroupName, string zoneName, RecordType recordType, string relativeRecordSetName, RecordSetData data, string ifMatch)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Network/dnsZones/", false);
-            uri.AppendPath(zoneName, true);
-            uri.AppendPath("/", false);
-            uri.AppendPath(recordType.ToSerialString(), true);
-            uri.AppendPath("/", false);
-            uri.AppendPath(relativeRecordSetName, false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string zoneName, RecordType recordType, string relativeRecordSetName, RecordSetData data, string ifMatch)
         {
             var message = _pipeline.CreateMessage();
@@ -209,24 +191,6 @@ namespace MgmtExpandResourceTypes
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateCreateOrUpdateRequestUri(string subscriptionId, string resourceGroupName, string zoneName, RecordType recordType, string relativeRecordSetName, RecordSetData data, string ifMatch, string ifNoneMatch)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Network/dnsZones/", false);
-            uri.AppendPath(zoneName, true);
-            uri.AppendPath("/", false);
-            uri.AppendPath(recordType.ToSerialString(), true);
-            uri.AppendPath("/", false);
-            uri.AppendPath(relativeRecordSetName, false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
         }
 
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string zoneName, RecordType recordType, string relativeRecordSetName, RecordSetData data, string ifMatch, string ifNoneMatch)
@@ -393,24 +357,6 @@ namespace MgmtExpandResourceTypes
             }
         }
 
-        internal RequestUriBuilder CreateDeleteRequestUri(string subscriptionId, string resourceGroupName, string zoneName, RecordType recordType, string relativeRecordSetName, string ifMatch)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Network/dnsZones/", false);
-            uri.AppendPath(zoneName, true);
-            uri.AppendPath("/", false);
-            uri.AppendPath(recordType.ToSerialString(), true);
-            uri.AppendPath("/", false);
-            uri.AppendPath(relativeRecordSetName, false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateDeleteRequest(string subscriptionId, string resourceGroupName, string zoneName, RecordType recordType, string relativeRecordSetName, string ifMatch)
         {
             var message = _pipeline.CreateMessage();
@@ -543,24 +489,6 @@ namespace MgmtExpandResourceTypes
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetRequestUri(string subscriptionId, string resourceGroupName, string zoneName, RecordType recordType, string relativeRecordSetName)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Network/dnsZones/", false);
-            uri.AppendPath(zoneName, true);
-            uri.AppendPath("/", false);
-            uri.AppendPath(recordType.ToSerialString(), true);
-            uri.AppendPath("/", false);
-            uri.AppendPath(relativeRecordSetName, false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
         }
 
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string zoneName, RecordType recordType, string relativeRecordSetName)
@@ -703,30 +631,6 @@ namespace MgmtExpandResourceTypes
             }
         }
 
-        internal RequestUriBuilder CreateListByTypeRequestUri(string subscriptionId, string resourceGroupName, string zoneName, RecordType recordType, int? top, string recordsetnamesuffix)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Network/dnsZones/", false);
-            uri.AppendPath(zoneName, true);
-            uri.AppendPath("/", false);
-            uri.AppendPath(recordType.ToSerialString(), true);
-            if (top != null)
-            {
-                uri.AppendQuery("$top", top.Value, true);
-            }
-            if (recordsetnamesuffix != null)
-            {
-                uri.AppendQuery("$recordsetnamesuffix", recordsetnamesuffix, true);
-            }
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateListByTypeRequest(string subscriptionId, string resourceGroupName, string zoneName, RecordType recordType, int? top, string recordsetnamesuffix)
         {
             var message = _pipeline.CreateMessage();
@@ -863,29 +767,6 @@ namespace MgmtExpandResourceTypes
             }
         }
 
-        internal RequestUriBuilder CreateListByDnsZoneRequestUri(string subscriptionId, string resourceGroupName, string zoneName, int? top, string recordsetnamesuffix)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Network/dnsZones/", false);
-            uri.AppendPath(zoneName, true);
-            uri.AppendPath("/recordsets", false);
-            if (top != null)
-            {
-                uri.AppendQuery("$top", top.Value, true);
-            }
-            if (recordsetnamesuffix != null)
-            {
-                uri.AppendQuery("$recordsetnamesuffix", recordsetnamesuffix, true);
-            }
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateListByDnsZoneRequest(string subscriptionId, string resourceGroupName, string zoneName, int? top, string recordsetnamesuffix)
         {
             var message = _pipeline.CreateMessage();
@@ -1017,29 +898,6 @@ namespace MgmtExpandResourceTypes
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateListAllByDnsZoneRequestUri(string subscriptionId, string resourceGroupName, string zoneName, int? top, string recordSetNameSuffix)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Network/dnsZones/", false);
-            uri.AppendPath(zoneName, true);
-            uri.AppendPath("/all", false);
-            if (top != null)
-            {
-                uri.AppendQuery("$top", top.Value, true);
-            }
-            if (recordSetNameSuffix != null)
-            {
-                uri.AppendQuery("$recordsetnamesuffix", recordSetNameSuffix, true);
-            }
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
         }
 
         internal HttpMessage CreateListAllByDnsZoneRequest(string subscriptionId, string resourceGroupName, string zoneName, int? top, string recordSetNameSuffix)
@@ -1175,14 +1033,6 @@ namespace MgmtExpandResourceTypes
             }
         }
 
-        internal RequestUriBuilder CreateListByTypeNextPageRequestUri(string nextLink, string subscriptionId, string resourceGroupName, string zoneName, RecordType recordType, int? top, string recordsetnamesuffix)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            return uri;
-        }
-
         internal HttpMessage CreateListByTypeNextPageRequest(string nextLink, string subscriptionId, string resourceGroupName, string zoneName, RecordType recordType, int? top, string recordsetnamesuffix)
         {
             var message = _pipeline.CreateMessage();
@@ -1313,14 +1163,6 @@ namespace MgmtExpandResourceTypes
             }
         }
 
-        internal RequestUriBuilder CreateListByDnsZoneNextPageRequestUri(string nextLink, string subscriptionId, string resourceGroupName, string zoneName, int? top, string recordsetnamesuffix)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            return uri;
-        }
-
         internal HttpMessage CreateListByDnsZoneNextPageRequest(string nextLink, string subscriptionId, string resourceGroupName, string zoneName, int? top, string recordsetnamesuffix)
         {
             var message = _pipeline.CreateMessage();
@@ -1447,14 +1289,6 @@ namespace MgmtExpandResourceTypes
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateListAllByDnsZoneNextPageRequestUri(string nextLink, string subscriptionId, string resourceGroupName, string zoneName, int? top, string recordSetNameSuffix)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            return uri;
         }
 
         internal HttpMessage CreateListAllByDnsZoneNextPageRequest(string nextLink, string subscriptionId, string resourceGroupName, string zoneName, int? top, string recordSetNameSuffix)

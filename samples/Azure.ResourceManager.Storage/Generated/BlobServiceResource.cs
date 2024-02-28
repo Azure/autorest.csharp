@@ -275,9 +275,7 @@ namespace Azure.ResourceManager.Storage
             try
             {
                 var response = await _blobServiceRestClient.SetServicePropertiesAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, data, cancellationToken).ConfigureAwait(false);
-                var uri = _blobServiceRestClient.CreateSetServicePropertiesRequestUri(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, data);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), NextLinkOperationImplementation.HeaderSource.None.ToString(), null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new StorageArmOperation<BlobServiceResource>(Response.FromValue(new BlobServiceResource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new StorageArmOperation<BlobServiceResource>(Response.FromValue(new BlobServiceResource(Client, response), response.GetRawResponse()), RequestMethod.Put);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -326,9 +324,7 @@ namespace Azure.ResourceManager.Storage
             try
             {
                 var response = _blobServiceRestClient.SetServiceProperties(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, data, cancellationToken);
-                var uri = _blobServiceRestClient.CreateSetServicePropertiesRequestUri(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, data);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), NextLinkOperationImplementation.HeaderSource.None.ToString(), null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new StorageArmOperation<BlobServiceResource>(Response.FromValue(new BlobServiceResource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new StorageArmOperation<BlobServiceResource>(Response.FromValue(new BlobServiceResource(Client, response), response.GetRawResponse()), RequestMethod.Put);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

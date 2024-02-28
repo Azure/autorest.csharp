@@ -27,10 +27,10 @@ namespace MgmtMultipleParentResource
         {
         }
 
-        internal MgmtMultipleParentResourceArmOperation(Response<T> response, RehydrationToken? rehydrationToken = null)
+        internal MgmtMultipleParentResourceArmOperation(Response<T> response, RequestMethod? requestMethod = null)
         {
-            _operation = OperationInternal<T>.Succeeded(response.GetRawResponse(), response.Value, rehydrationToken);
-            _rehydrationToken = rehydrationToken;
+            _operation = OperationInternal<T>.Succeeded(response.GetRawResponse(), response.Value, requestMethod);
+            _rehydrationToken = null;
         }
 
         internal MgmtMultipleParentResourceArmOperation(IOperationSource<T> source, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia, bool skipApiVersionOverride = false, string apiVersionOverrideValue = null)

@@ -27,10 +27,10 @@ namespace MgmtSubscriptionNameParameter
         {
         }
 
-        internal MgmtSubscriptionNameParameterArmOperation(Response response, RehydrationToken? rehydrationToken = null)
+        internal MgmtSubscriptionNameParameterArmOperation(Response response, RequestMethod? requestMethod = null)
         {
-            _operation = OperationInternal.Succeeded(response, rehydrationToken);
-            _rehydrationToken = rehydrationToken;
+            _operation = OperationInternal.Succeeded(response, requestMethod);
+            _rehydrationToken = null;
         }
 
         internal MgmtSubscriptionNameParameterArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia, bool skipApiVersionOverride = false, string apiVersionOverrideValue = null)

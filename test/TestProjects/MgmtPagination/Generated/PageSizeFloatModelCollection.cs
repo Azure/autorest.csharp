@@ -100,9 +100,7 @@ namespace MgmtPagination
             try
             {
                 var response = await _pageSizeFloatModelRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, data, cancellationToken).ConfigureAwait(false);
-                var uri = _pageSizeFloatModelRestClient.CreatePutRequestUri(Id.SubscriptionId, Id.ResourceGroupName, name, data);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), NextLinkOperationImplementation.HeaderSource.None.ToString(), null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtPaginationArmOperation<PageSizeFloatModelResource>(Response.FromValue(new PageSizeFloatModelResource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new MgmtPaginationArmOperation<PageSizeFloatModelResource>(Response.FromValue(new PageSizeFloatModelResource(Client, response), response.GetRawResponse()), RequestMethod.Put);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -160,9 +158,7 @@ namespace MgmtPagination
             try
             {
                 var response = _pageSizeFloatModelRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, data, cancellationToken);
-                var uri = _pageSizeFloatModelRestClient.CreatePutRequestUri(Id.SubscriptionId, Id.ResourceGroupName, name, data);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), NextLinkOperationImplementation.HeaderSource.None.ToString(), null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtPaginationArmOperation<PageSizeFloatModelResource>(Response.FromValue(new PageSizeFloatModelResource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new MgmtPaginationArmOperation<PageSizeFloatModelResource>(Response.FromValue(new PageSizeFloatModelResource(Client, response), response.GetRawResponse()), RequestMethod.Put);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

@@ -100,9 +100,7 @@ namespace MgmtListMethods
             try
             {
                 var response = await _fakeParentWithAncestorRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.Name, fakeParentWithAncestorName, data, cancellationToken).ConfigureAwait(false);
-                var uri = _fakeParentWithAncestorRestClient.CreateCreateOrUpdateRequestUri(Id.SubscriptionId, Id.Name, fakeParentWithAncestorName, data);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), NextLinkOperationImplementation.HeaderSource.None.ToString(), null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtListMethodsArmOperation<FakeParentWithAncestorResource>(Response.FromValue(new FakeParentWithAncestorResource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new MgmtListMethodsArmOperation<FakeParentWithAncestorResource>(Response.FromValue(new FakeParentWithAncestorResource(Client, response), response.GetRawResponse()), RequestMethod.Put);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -161,9 +159,7 @@ namespace MgmtListMethods
             try
             {
                 var response = _fakeParentWithAncestorRestClient.CreateOrUpdate(Id.SubscriptionId, Id.Name, fakeParentWithAncestorName, data, cancellationToken);
-                var uri = _fakeParentWithAncestorRestClient.CreateCreateOrUpdateRequestUri(Id.SubscriptionId, Id.Name, fakeParentWithAncestorName, data);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), NextLinkOperationImplementation.HeaderSource.None.ToString(), null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtListMethodsArmOperation<FakeParentWithAncestorResource>(Response.FromValue(new FakeParentWithAncestorResource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new MgmtListMethodsArmOperation<FakeParentWithAncestorResource>(Response.FromValue(new FakeParentWithAncestorResource(Client, response), response.GetRawResponse()), RequestMethod.Put);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

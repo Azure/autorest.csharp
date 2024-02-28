@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                     foreach (var method in restClient.Methods.Select(m => m.Method))
                     {
-                        RequestWriterHelpers.WriteRequestAndUriCreation(writer, method, "internal", restClient.Fields, null, true, restClient.Parameters);
+                        RequestWriterHelpers.WriteRequestCreation(writer, method, "internal", restClient.Fields, null, true, restClient.Parameters);
                         WriteOperation(writer, restClient, method, true);
                         WriteOperation(writer, restClient, method, false);
                     }

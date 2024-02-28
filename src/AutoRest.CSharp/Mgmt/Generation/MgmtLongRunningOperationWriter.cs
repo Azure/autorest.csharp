@@ -66,9 +66,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                     _writer.Line();
 
-                    using (_writer.Scope($"internal {_name}({_responseType} {Configuration.ApiTypes.ResponseParameterName}, {typeof(RehydrationToken?)} rehydrationToken = null)"))
+                    using (_writer.Scope($"internal {_name}({_responseType} {Configuration.ApiTypes.ResponseParameterName}, {typeof(RequestMethod?)} requestMethod = null)"))
                     {
-                        _writer.Line($"_operation = {_operationInternalType}.Succeeded({_responseString}, rehydrationToken);");
+                        _writer.Line($"_operation = {_operationInternalType}.Succeeded({_responseString}, requestMethod);");
                         _writer.Line($"_rehydrationToken = null;");
                     }
                     _writer.Line();

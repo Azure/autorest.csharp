@@ -37,16 +37,6 @@ namespace MgmtScopeResource
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
-        internal RequestUriBuilder CreateDeleteRequestUri(string linkId)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/", false);
-            uri.AppendPath(linkId, false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal Azure.Core.HttpMessage CreateDeleteRequest(string linkId)
         {
             var message = _pipeline.CreateMessage();
@@ -106,16 +96,6 @@ namespace MgmtScopeResource
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateCreateOrUpdateRequestUri(string linkId, ResourceLinkData data)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/", false);
-            uri.AppendPath(linkId, false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
         }
 
         internal Azure.Core.HttpMessage CreateCreateOrUpdateRequest(string linkId, ResourceLinkData data)
@@ -204,16 +184,6 @@ namespace MgmtScopeResource
             }
         }
 
-        internal RequestUriBuilder CreateGetRequestUri(string linkId)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/", false);
-            uri.AppendPath(linkId, false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal Azure.Core.HttpMessage CreateGetRequest(string linkId)
         {
             var message = _pipeline.CreateMessage();
@@ -286,21 +256,6 @@ namespace MgmtScopeResource
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateListAtSubscriptionRequestUri(string subscriptionId, string filter)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/providers/Microsoft.Resources/links", false);
-            if (filter != null)
-            {
-                uri.AppendQuery("$filter", filter, true);
-            }
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
         }
 
         internal Azure.Core.HttpMessage CreateListAtSubscriptionRequest(string subscriptionId, string filter)
@@ -390,21 +345,6 @@ namespace MgmtScopeResource
             }
         }
 
-        internal RequestUriBuilder CreateListAtSourceScopeRequestUri(string scope, Filter? filter)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/", false);
-            uri.AppendPath(scope, false);
-            uri.AppendPath("/providers/Microsoft.Resources/links", false);
-            if (filter != null)
-            {
-                uri.AppendQuery("$filter", filter.Value.ToString(), true);
-            }
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal Azure.Core.HttpMessage CreateListAtSourceScopeRequest(string scope, Filter? filter)
         {
             var message = _pipeline.CreateMessage();
@@ -480,14 +420,6 @@ namespace MgmtScopeResource
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateListAtSubscriptionNextPageRequestUri(string nextLink, string subscriptionId, string filter)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            return uri;
         }
 
         internal Azure.Core.HttpMessage CreateListAtSubscriptionNextPageRequest(string nextLink, string subscriptionId, string filter)
@@ -578,14 +510,6 @@ namespace MgmtScopeResource
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateListAtSourceScopeNextPageRequestUri(string nextLink, string scope, Filter? filter)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            return uri;
         }
 
         internal Azure.Core.HttpMessage CreateListAtSourceScopeNextPageRequest(string nextLink, string scope, Filter? filter)

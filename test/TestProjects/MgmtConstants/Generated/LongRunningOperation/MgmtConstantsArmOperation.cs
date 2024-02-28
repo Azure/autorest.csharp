@@ -27,10 +27,10 @@ namespace MgmtConstants
         {
         }
 
-        internal MgmtConstantsArmOperation(Response response, RehydrationToken? rehydrationToken = null)
+        internal MgmtConstantsArmOperation(Response response, RequestMethod? requestMethod = null)
         {
-            _operation = OperationInternal.Succeeded(response, rehydrationToken);
-            _rehydrationToken = rehydrationToken;
+            _operation = OperationInternal.Succeeded(response, requestMethod);
+            _rehydrationToken = null;
         }
 
         internal MgmtConstantsArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia, bool skipApiVersionOverride = false, string apiVersionOverrideValue = null)

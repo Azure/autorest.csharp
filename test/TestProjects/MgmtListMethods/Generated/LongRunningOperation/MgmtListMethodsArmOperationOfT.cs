@@ -27,10 +27,10 @@ namespace MgmtListMethods
         {
         }
 
-        internal MgmtListMethodsArmOperation(Response<T> response, RehydrationToken? rehydrationToken = null)
+        internal MgmtListMethodsArmOperation(Response<T> response, RequestMethod? requestMethod = null)
         {
-            _operation = OperationInternal<T>.Succeeded(response.GetRawResponse(), response.Value, rehydrationToken);
-            _rehydrationToken = rehydrationToken;
+            _operation = OperationInternal<T>.Succeeded(response.GetRawResponse(), response.Value, requestMethod);
+            _rehydrationToken = null;
         }
 
         internal MgmtListMethodsArmOperation(IOperationSource<T> source, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia, bool skipApiVersionOverride = false, string apiVersionOverrideValue = null)

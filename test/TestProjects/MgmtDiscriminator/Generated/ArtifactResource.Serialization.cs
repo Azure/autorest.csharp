@@ -13,26 +13,14 @@ namespace MgmtDiscriminator
 {
     public partial class ArtifactResource : IJsonModel<ArtifactData>
     {
-        void IJsonModel<ArtifactData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            writer.WriteStringValue(ModelReaderWriter.Write(Data, options));
-        }
+        void IJsonModel<ArtifactData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options) => ((IJsonModel<ArtifactData>)Data).Write(writer, options);
 
-        ArtifactData IJsonModel<ArtifactData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            return ModelReaderWriter.Read<ArtifactData>(new BinaryData(reader.ValueSequence), options);
-        }
+        ArtifactData IJsonModel<ArtifactData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<ArtifactData>)Data).Create(ref reader, options);
 
-        BinaryData IPersistableModel<ArtifactData>.Write(ModelReaderWriterOptions options)
-        {
-            return ModelReaderWriter.Write(Data, options);
-        }
+        BinaryData IPersistableModel<ArtifactData>.Write(ModelReaderWriterOptions options) => ModelReaderWriter.Write(Data, options);
 
-        ArtifactData IPersistableModel<ArtifactData>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            return ModelReaderWriter.Read<ArtifactData>(data, options);
-        }
+        ArtifactData IPersistableModel<ArtifactData>.Create(BinaryData data, ModelReaderWriterOptions options) => ModelReaderWriter.Read<ArtifactData>(data, options);
 
-        string IPersistableModel<ArtifactData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ArtifactData>.GetFormatFromOptions(ModelReaderWriterOptions options) => ((IPersistableModel<ArtifactData>)Data).GetFormatFromOptions(options);
     }
 }

@@ -100,9 +100,7 @@ namespace MgmtListMethods
             try
             {
                 var response = await _fakeConfigurationConfigurationsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.Name, configurationName, data, cancellationToken).ConfigureAwait(false);
-                var uri = _fakeConfigurationConfigurationsRestClient.CreateCreateOrUpdateRequestUri(Id.SubscriptionId, Id.Name, configurationName, data);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), NextLinkOperationImplementation.HeaderSource.None.ToString(), null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtListMethodsArmOperation<FakeConfigurationResource>(Response.FromValue(new FakeConfigurationResource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new MgmtListMethodsArmOperation<FakeConfigurationResource>(Response.FromValue(new FakeConfigurationResource(Client, response), response.GetRawResponse()), RequestMethod.Put);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -161,9 +159,7 @@ namespace MgmtListMethods
             try
             {
                 var response = _fakeConfigurationConfigurationsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.Name, configurationName, data, cancellationToken);
-                var uri = _fakeConfigurationConfigurationsRestClient.CreateCreateOrUpdateRequestUri(Id.SubscriptionId, Id.Name, configurationName, data);
-                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), NextLinkOperationImplementation.HeaderSource.None.ToString(), null, OperationFinalStateVia.OriginalUri.ToString());
-                var operation = new MgmtListMethodsArmOperation<FakeConfigurationResource>(Response.FromValue(new FakeConfigurationResource(Client, response), response.GetRawResponse()), rehydrationToken);
+                var operation = new MgmtListMethodsArmOperation<FakeConfigurationResource>(Response.FromValue(new FakeConfigurationResource(Client, response), response.GetRawResponse()), RequestMethod.Put);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

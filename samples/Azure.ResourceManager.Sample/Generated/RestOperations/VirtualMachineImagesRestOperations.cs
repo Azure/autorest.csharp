@@ -38,26 +38,6 @@ namespace Azure.ResourceManager.Sample
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
-        internal RequestUriBuilder CreateGetRequestUri(string subscriptionId, AzureLocation location, string publisherName, string offer, string skus, string version)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/providers/Microsoft.Compute/locations/", false);
-            uri.AppendPath(location, true);
-            uri.AppendPath("/publishers/", false);
-            uri.AppendPath(publisherName, true);
-            uri.AppendPath("/artifacttypes/vmimage/offers/", false);
-            uri.AppendPath(offer, true);
-            uri.AppendPath("/skus/", false);
-            uri.AppendPath(skus, true);
-            uri.AppendPath("/versions/", false);
-            uri.AppendPath(version, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateGetRequest(string subscriptionId, AzureLocation location, string publisherName, string offer, string skus, string version)
         {
             var message = _pipeline.CreateMessage();
@@ -220,37 +200,6 @@ namespace Azure.ResourceManager.Sample
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateListRequestUri(string subscriptionId, AzureLocation location, string publisherName, string offer, string skus, string expand, int? top, string orderby)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/providers/Microsoft.Compute/locations/", false);
-            uri.AppendPath(location, true);
-            uri.AppendPath("/publishers/", false);
-            uri.AppendPath(publisherName, true);
-            uri.AppendPath("/artifacttypes/vmimage/offers/", false);
-            uri.AppendPath(offer, true);
-            uri.AppendPath("/skus/", false);
-            uri.AppendPath(skus, true);
-            uri.AppendPath("/versions", false);
-            if (expand != null)
-            {
-                uri.AppendQuery("$expand", expand, true);
-            }
-            if (top != null)
-            {
-                uri.AppendQuery("$top", top.Value, true);
-            }
-            if (orderby != null)
-            {
-                uri.AppendQuery("$orderby", orderby, true);
-            }
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
         }
 
         internal HttpMessage CreateListRequest(string subscriptionId, AzureLocation location, string publisherName, string offer, string skus, string expand, int? top, string orderby)
@@ -426,21 +375,6 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        internal RequestUriBuilder CreateListOffersRequestUri(string subscriptionId, AzureLocation location, string publisherName)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/providers/Microsoft.Compute/locations/", false);
-            uri.AppendPath(location, true);
-            uri.AppendPath("/publishers/", false);
-            uri.AppendPath(publisherName, true);
-            uri.AppendPath("/artifacttypes/vmimage/offers", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateListOffersRequest(string subscriptionId, AzureLocation location, string publisherName)
         {
             var message = _pipeline.CreateMessage();
@@ -556,19 +490,6 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        internal RequestUriBuilder CreateListPublishersRequestUri(string subscriptionId, AzureLocation location)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/providers/Microsoft.Compute/locations/", false);
-            uri.AppendPath(location, true);
-            uri.AppendPath("/publishers", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateListPublishersRequest(string subscriptionId, AzureLocation location)
         {
             var message = _pipeline.CreateMessage();
@@ -662,23 +583,6 @@ namespace Azure.ResourceManager.Sample
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateListSkusRequestUri(string subscriptionId, AzureLocation location, string publisherName, string offer)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/providers/Microsoft.Compute/locations/", false);
-            uri.AppendPath(location, true);
-            uri.AppendPath("/publishers/", false);
-            uri.AppendPath(publisherName, true);
-            uri.AppendPath("/artifacttypes/vmimage/offers/", false);
-            uri.AppendPath(offer, true);
-            uri.AppendPath("/skus", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
         }
 
         internal HttpMessage CreateListSkusRequest(string subscriptionId, AzureLocation location, string publisherName, string offer)

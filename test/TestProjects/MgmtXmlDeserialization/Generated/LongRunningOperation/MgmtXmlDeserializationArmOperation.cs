@@ -27,10 +27,10 @@ namespace MgmtXmlDeserialization
         {
         }
 
-        internal MgmtXmlDeserializationArmOperation(Response response, RehydrationToken? rehydrationToken = null)
+        internal MgmtXmlDeserializationArmOperation(Response response, RequestMethod? requestMethod = null)
         {
-            _operation = OperationInternal.Succeeded(response, rehydrationToken);
-            _rehydrationToken = rehydrationToken;
+            _operation = OperationInternal.Succeeded(response, requestMethod);
+            _rehydrationToken = null;
         }
 
         internal MgmtXmlDeserializationArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia, bool skipApiVersionOverride = false, string apiVersionOverrideValue = null)
