@@ -13,8 +13,8 @@ namespace dpg_customization_LowLevel.Models
     {
         internal static ProductResult DeserializeProductResult(JsonElement element)
         {
-            Optional<IReadOnlyList<Product>> values = default;
-            Optional<string> nextLink = default;
+            IReadOnlyList<Product> values = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("values"))
@@ -38,7 +38,7 @@ namespace dpg_customization_LowLevel.Models
                     continue;
                 }
             }
-            return new ProductResult(Optional.ToList(values), nextLink.Value);
+            return new ProductResult(values ?? new ChangeTrackingList<Product>(), nextLink);
         }
     }
 }
