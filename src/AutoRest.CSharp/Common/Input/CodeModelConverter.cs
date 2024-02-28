@@ -23,7 +23,6 @@ namespace AutoRest.CSharp.Common.Input
         private readonly Dictionary<ObjectSchema, InputModelType> _modelsCache;
         private readonly Dictionary<ObjectSchema, List<InputModelProperty>> _modelPropertiesCache;
         private readonly Dictionary<ObjectSchema, List<InputModelType>> _derivedModelsCache;
-        private readonly Dictionary<InputOperation, Operation> _inputOperationToOperationMap;
 
         public CodeModelConverter(CodeModel codeModel, SchemaUsageProvider schemaUsages)
         {
@@ -35,14 +34,23 @@ namespace AutoRest.CSharp.Common.Input
             _modelsCache = new Dictionary<ObjectSchema, InputModelType>();
             _modelPropertiesCache = new Dictionary<ObjectSchema, List<InputModelProperty>>();
             _derivedModelsCache = new Dictionary<ObjectSchema, List<InputModelType>>();
-            _inputOperationToOperationMap = new Dictionary<InputOperation, Operation>();
         }
 
-        public InputNamespace CreateNamespace()
+        public InputNamespace CreateNamespace() => CreateNamespace(null, null);
+
+        public (InputNamespace Namespace, IReadOnlyDictionary<ServiceRequest, InputOperation> ServiceRequestToInputOperation, IReadOnlyDictionary<InputOperation, Operation> InputOperationToOperation) CreateNamespaceWithMaps()
+        {
+            var serviceRequestToInputOperation = new Dictionary<ServiceRequest, InputOperation>();
+            var inputOperationToOperation = new Dictionary<InputOperation, Operation>();
+            var inputNamespace = CreateNamespace(serviceRequestToInputOperation, inputOperationToOperation);
+            return (inputNamespace, serviceRequestToInputOperation, inputOperationToOperation);
+        }
+
+        private InputNamespace CreateNamespace(Dictionary<ServiceRequest, InputOperation>? serviceRequestToInputOperation, Dictionary<InputOperation, Operation>? inputOperationToOperation)
         {
             var enums = CreateEnums().Values.ToList();
             var models = CreateModels();
-            var clients = CreateClients(_codeModel.OperationGroups);
+            var clients = CreateClients(_codeModel.OperationGroups, serviceRequestToInputOperation, inputOperationToOperation);
 
             return new(Name: _codeModel.Language.Default.Name,
                 Description: _codeModel.Language.Default.Description,
@@ -53,19 +61,23 @@ namespace AutoRest.CSharp.Common.Input
                 Auth: GetAuth(_codeModel.Security.Schemes.OfType<SecurityScheme>()));
         }
 
-        public IReadOnlyDictionary<InputOperation, Operation> GetCurrentInputOperationToOperationMap()
-            => new Dictionary<InputOperation, Operation>(_inputOperationToOperationMap);
+        private IReadOnlyList<InputClient> CreateClients(IEnumerable<OperationGroup> operationGroups, Dictionary<ServiceRequest, InputOperation>? serviceRequestToInputOperation, Dictionary<InputOperation, Operation>? inputOperationToOperation)
+        {
+            var clients = new List<InputClient>();
+            foreach (var og in operationGroups)
+            {
+                clients.Add(CreateClient(og, serviceRequestToInputOperation, inputOperationToOperation));
+            }
+            return clients;
+        }
 
-        public IReadOnlyList<InputClient> CreateClients(IEnumerable<OperationGroup> operationGroups)
-            => operationGroups.Select(CreateClient).ToList();
-
-        public InputClient CreateClient(OperationGroup operationGroup)
+        private InputClient CreateClient(OperationGroup operationGroup, Dictionary<ServiceRequest, InputOperation>? serviceRequestToInputOperation, Dictionary<InputOperation, Operation>? inputOperationToOperation)
         {
             var parameters = Array.Empty<InputParameter>();
             return new(
                 Name: operationGroup.Language.Default.Name,
                 Description: operationGroup.Language.Default.Description,
-                Operations: CreateOperations(operationGroup.Operations).Values.ToArray(),
+                Operations: CreateOperations(operationGroup.Operations, serviceRequestToInputOperation, inputOperationToOperation),
                 Parameters: parameters,
                 Parent: null)
             {
@@ -73,9 +85,10 @@ namespace AutoRest.CSharp.Common.Input
             };
         }
 
-        public IReadOnlyDictionary<ServiceRequest, InputOperation> CreateOperations(IEnumerable<Operation> operations)
+        public IReadOnlyList<InputOperation> CreateOperations(ICollection<Operation> operations, Dictionary<ServiceRequest, InputOperation>? serviceRequestToInputOperation, Dictionary<InputOperation, Operation>? inputOperationToOperation)
         {
             var serviceRequests = new List<ServiceRequest>();
+            var inputOperations = new List<InputOperation>();
             foreach (var operation in operations)
             {
                 foreach (var serviceRequest in operation.Requests)
@@ -95,13 +108,37 @@ namespace AutoRest.CSharp.Common.Input
                 }
             }
 
-            return serviceRequests.ToDictionary(sr => sr, sr => _operationsCache[sr]());
+            foreach (var serviceRequest in serviceRequests)
+            {
+                var inputOperation = _operationsCache[serviceRequest]();
+                inputOperations.Add(inputOperation);
+                if (serviceRequestToInputOperation is not null)
+                {
+                    serviceRequestToInputOperation[serviceRequest] = inputOperation;
+                }
+            }
+
+            if (serviceRequestToInputOperation is not null && inputOperationToOperation is not null)
+            {
+                foreach (var operation in operations)
+                {
+                    foreach (var serviceRequest in operation.Requests)
+                    {
+                        if (serviceRequestToInputOperation.TryGetValue(serviceRequest, out var inputOperation))
+                        {
+                            inputOperationToOperation[inputOperation] = operation;
+                        }
+                    }
+                }
+            }
+
+            return inputOperations;
         }
 
         private InputOperation CreateOperation(ServiceRequest serviceRequest, Operation operation, HttpRequest httpRequest)
         {
             var parameters = CreateOperationParameters(operation.Parameters.Concat(serviceRequest.Parameters).ToList());
-            var inputOperation = new InputOperation(
+            return new InputOperation(
                 Name: operation.Language.Default.Name,
                 ResourceName: null,
                 Summary: operation.Language.Default.Summary,
@@ -122,9 +159,6 @@ namespace AutoRest.CSharp.Common.Input
                 GenerateProtocolMethod: true,
                 GenerateConvenienceMethod: false,
                 KeepClientDefaultValue: Configuration.MethodsToKeepClientDefaultValue.Contains(operation.OperationId));
-
-            _inputOperationToOperationMap[inputOperation] = operation;
-            return inputOperation;
         }
 
         public List<InputParameter> CreateOperationParameters(IReadOnlyCollection<RequestParameter> requestParameters)

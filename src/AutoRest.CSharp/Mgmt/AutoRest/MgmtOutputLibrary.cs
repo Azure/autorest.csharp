@@ -80,6 +80,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private CachedDictionary<RequestPath, HashSet<Operation>> ChildOperations { get; }
 
+        private IReadOnlyDictionary<ServiceRequest, InputOperation>? _serviceRequestToInputOperations;
+
         private Dictionary<string, string> _mergedOperations;
 
         private readonly IReadOnlyDictionary<Schema, InputEnumType> _schemaToInputEnumMap;
@@ -329,6 +331,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     "ReplaceType", originalModel.Declaration.FullName, replacedType.Declaration.FullName);
             }
 
+
+            var codeModelConverter = new CodeModelConverter(MgmtContext.CodeModel, MgmtContext.Context.SchemaUsageProvider);
+            (_, _serviceRequestToInputOperations, _) = codeModelConverter.CreateNamespaceWithMaps();;
             return _schemaOrNameToModels;
         }
 
@@ -338,6 +343,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public OperationGroup GetOperationGroup(Operation operation) => OperationsToOperationGroups[operation];
 
         public OperationSet GetOperationSet(string requestPath) => RawRequestPathToOperationSets[requestPath];
+
+        public InputOperation GetInputOperationByServiceRequest(ServiceRequest serviceRequest) =>
+            _serviceRequestToInputOperations?[serviceRequest] ??
+            throw new InvalidOperationException("Models aren't initialized yet");
 
         public RestClientMethod GetRestClientMethod(Operation operation)
         {

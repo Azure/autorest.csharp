@@ -310,8 +310,6 @@ namespace AutoRest.CSharp.Generation.Types
         internal static bool IsOperationOfPageable(CSharpType type)
             => type.IsFrameworkType && type.FrameworkType == typeof(Operation<>) && type.Arguments.Count == 1 && IsPageable(type.Arguments[0]);
 
-        internal Type? ToFrameworkType(Schema schema) => ToFrameworkType(schema, schema.Extensions?.Format);
-
         internal Type? ToFrameworkType(Schema schema, string? format) => schema.Type switch
         {
             AllSchemaTypes.Integer => typeof(int),

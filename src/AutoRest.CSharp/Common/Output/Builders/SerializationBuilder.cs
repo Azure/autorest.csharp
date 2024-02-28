@@ -199,15 +199,9 @@ namespace AutoRest.CSharp.Output.Builders
                 case ConstantSchema constantSchema:
                     return BuildSerialization(constantSchema.ValueType, type, isCollectionElement);
                 case ArraySchema arraySchema:
-                    return new JsonArraySerialization(
-                        TypeFactory.GetImplementationType(type),
-                        BuildSerialization(arraySchema.ElementType, TypeFactory.GetElementType(type), true),
-                        type.IsNullable);
+                    return new JsonArraySerialization(type, BuildSerialization(arraySchema.ElementType, TypeFactory.GetElementType(type), true), type.IsNullable || (isCollectionElement && !type.IsValueType));
                 case DictionarySchema dictionarySchema:
-                    return new JsonDictionarySerialization(
-                        TypeFactory.GetImplementationType(type),
-                        BuildSerialization(dictionarySchema.ElementType, TypeFactory.GetElementType(type), true),
-                        type.IsNullable);
+                    return new JsonDictionarySerialization(type, BuildSerialization(dictionarySchema.ElementType, TypeFactory.GetElementType(type), true), type.IsNullable || (isCollectionElement && !type.IsValueType));
                 default:
                     JsonSerializationOptions options = IsManagedServiceIdentityV3(schema, type) ? JsonSerializationOptions.UseManagedServiceIdentityV3 : JsonSerializationOptions.None;
                     return new JsonValueSerialization(type, BuilderHelpers.GetSerializationFormat(schema), type.IsNullable || (isCollectionElement && !type.IsValueType), options);

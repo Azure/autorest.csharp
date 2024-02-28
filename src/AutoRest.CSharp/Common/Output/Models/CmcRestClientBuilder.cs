@@ -11,6 +11,7 @@ using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
@@ -124,8 +125,8 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     continue;
                 }
-                //return new InputOperation(..);
-                throw new NotImplementedException("Needs Input Operation");
+
+                return MgmtContext.Library.GetInputOperationByServiceRequest(serviceRequest);
             }
             return new InputOperation();
         }

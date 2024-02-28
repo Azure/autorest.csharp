@@ -8,6 +8,8 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Builders;
+using Azure.Core;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 {
@@ -30,8 +32,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 
                 foreach (var property in objSchema.Properties)
                 {
-                    if (MgmtContext.TypeFactory.ToFrameworkType(property.Schema) != typeof(DateTimeOffset))
+                    if (property.Schema.Type is not (AllSchemaTypes.Date or AllSchemaTypes.DateTime or AllSchemaTypes.Unixtime))
+                    {
                         continue;
+                    }
 
                     var propName = property.CSharpName();
 
