@@ -482,10 +482,17 @@ namespace AutoRest.CSharp.Output.Builders
             {
                 foreach (var objectTypeProperty in objectTypeLevel.Properties)
                 {
-                    if (objectTypeProperty != objectTypeLevel.AdditionalPropertiesProperty)
+                    if (objectTypeProperty == objectTypeLevel.AdditionalPropertiesProperty)
                     {
-                        propertyBag.Properties.Add(objectTypeProperty);
+                        continue;
                     }
+
+                    if (objectTypeLevel is SerializableObjectType serializableObjectType && objectTypeProperty == serializableObjectType.RawDataField)
+                    {
+                        continue;
+                    }
+
+                    propertyBag.Properties.Add(objectTypeProperty);
                 }
             }
 
