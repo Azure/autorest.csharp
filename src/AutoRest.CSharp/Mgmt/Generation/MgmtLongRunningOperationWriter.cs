@@ -69,7 +69,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     using (_writer.Scope($"internal {_name}({_responseType} {Configuration.ApiTypes.ResponseParameterName}, {typeof(RehydrationToken?)} rehydrationToken = null)"))
                     {
                         _writer.Line($"_operation = {_operationInternalType}.Succeeded({_responseString}, rehydrationToken);");
-                        _writer.Line($"_rehydrationToken = rehydrationToken;");
+                        _writer.Line($"_rehydrationToken = null;");
                     }
                     _writer.Line();
 

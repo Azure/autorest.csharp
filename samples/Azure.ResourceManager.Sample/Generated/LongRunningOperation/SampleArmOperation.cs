@@ -30,7 +30,7 @@ namespace Azure.ResourceManager.Sample
         internal SampleArmOperation(Response response, RehydrationToken? rehydrationToken = null)
         {
             _operation = OperationInternal.Succeeded(response, rehydrationToken);
-            _rehydrationToken = rehydrationToken;
+            _rehydrationToken = null;
         }
 
         internal SampleArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia, bool skipApiVersionOverride = false, string apiVersionOverrideValue = null)
