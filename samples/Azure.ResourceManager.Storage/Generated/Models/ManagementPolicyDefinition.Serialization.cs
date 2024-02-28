@@ -33,7 +33,7 @@ namespace Azure.ResourceManager.Storage.Models
                 return null;
             }
             ManagementPolicyAction actions = default;
-            Optional<ManagementPolicyFilter> filters = default;
+            ManagementPolicyFilter filters = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("actions"u8))
@@ -51,7 +51,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new ManagementPolicyDefinition(actions, filters.Value);
+            return new ManagementPolicyDefinition(actions, filters);
         }
     }
 }

@@ -70,7 +70,7 @@ namespace body_complex.Models
             {
                 return null;
             }
-            Optional<TimeSpan> field = default;
+            TimeSpan? field = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -90,7 +90,7 @@ namespace body_complex.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DurationWrapper(Optional.ToNullable(field), serializedAdditionalRawData);
+            return new DurationWrapper(field, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<DurationWrapper>.Write(ModelReaderWriterOptions options)

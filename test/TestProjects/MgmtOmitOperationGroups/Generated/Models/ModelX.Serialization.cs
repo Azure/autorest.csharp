@@ -39,9 +39,9 @@ namespace MgmtOmitOperationGroups.Models
             {
                 return null;
             }
-            Optional<string> c = default;
-            Optional<string> d = default;
-            Optional<string> e = default;
+            string c = default;
+            string d = default;
+            string e = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("c"u8))
@@ -60,7 +60,7 @@ namespace MgmtOmitOperationGroups.Models
                     continue;
                 }
             }
-            return new ModelX(e.Value, c.Value, d.Value);
+            return new ModelX(e, c, d);
         }
     }
 }

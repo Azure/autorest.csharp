@@ -21,7 +21,7 @@ namespace MgmtExpandResourceTypes.Models
                 return null;
             }
             IReadOnlyList<RecordSetData> value = default;
-            Optional<string> nextLink = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -44,7 +44,7 @@ namespace MgmtExpandResourceTypes.Models
                     continue;
                 }
             }
-            return new RecordSetListResult(value ?? new ChangeTrackingList<RecordSetData>(), nextLink.Value);
+            return new RecordSetListResult(value ?? new ChangeTrackingList<RecordSetData>(), nextLink);
         }
     }
 }

@@ -36,7 +36,7 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Optional<bool> enabled = default;
+            bool? enabled = default;
             string name = default;
             RuleType type = default;
             ManagementPolicyDefinition definition = default;
@@ -67,7 +67,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new ManagementPolicyRule(Optional.ToNullable(enabled), name, type, definition);
+            return new ManagementPolicyRule(enabled, name, type, definition);
         }
     }
 }

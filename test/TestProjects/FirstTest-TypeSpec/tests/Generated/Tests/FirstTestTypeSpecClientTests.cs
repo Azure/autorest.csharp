@@ -724,7 +724,7 @@ namespace FirstTestTypeSpec.Tests
 
             using RequestContent content = RequestContent.Create(new
             {
-                level = 1234,
+                level = 123,
             });
             Response response = await client.RecursiveExtensionAsync(content);
         }
@@ -737,7 +737,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            Extension input = new Extension(1234);
+            Extension input = new Extension(123);
             Response response = await client.RecursiveExtensionAsync(input);
         }
 
@@ -751,7 +751,7 @@ namespace FirstTestTypeSpec.Tests
 
             using RequestContent content = RequestContent.Create(new
             {
-                level = 1234,
+                level = 123,
                 extension = new object[]
             {
 null
@@ -768,7 +768,7 @@ null
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            Extension input = new Extension(1234);
+            Extension input = new Extension(123);
             Response response = await client.RecursiveExtensionAsync(input);
         }
 
@@ -810,7 +810,7 @@ null
             {
 new
 {
-level = 1234,
+level = 123,
 extension = new object[]
 {
 null
@@ -831,7 +831,7 @@ null
 
             Extendible input = new Extendible
             {
-                Extension = { new ThereLevelExtension(1234) },
+                Extension = { new ThereLevelExtension(123) },
             };
             Response response = await client.ThreeLevelRecursiveAsync(input);
         }
@@ -850,10 +850,10 @@ null
             {
 new
 {
-level = 1234,
+level = 123,
 }
             },
-                level = 1234,
+                level = 123,
             });
             Response response = await client.RecursiveModelsAsync(content);
         }
@@ -866,9 +866,9 @@ level = 1234,
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            ChildModel input = new ChildModel(1234, new BaseModel[]
+            ChildModel input = new ChildModel(123, new BaseModel[]
             {
-new BaseModel(1234)
+new BaseModel(123)
             });
             Response response = await client.RecursiveModelsAsync(input);
         }
@@ -887,10 +887,10 @@ new BaseModel(1234)
             {
 new
 {
-level = 1234,
+level = 123,
 }
             },
-                level = 1234,
+                level = 123,
             });
             Response response = await client.RecursiveModelsAsync(content);
         }
@@ -903,9 +903,9 @@ level = 1234,
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            ChildModel input = new ChildModel(1234, new BaseModel[]
+            ChildModel input = new ChildModel(123, new BaseModel[]
             {
-new BaseModel(1234)
+new BaseModel(123)
             });
             Response response = await client.RecursiveModelsAsync(input);
         }

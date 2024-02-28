@@ -120,23 +120,23 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            Optional<bool> count = default;
+            bool? count = default;
             IList<string> facets = default;
-            Optional<string> filter = default;
-            Optional<string> highlight = default;
-            Optional<string> highlightPostTag = default;
-            Optional<string> highlightPreTag = default;
-            Optional<double> minimumCoverage = default;
-            Optional<string> orderby = default;
-            Optional<QueryType> queryType = default;
+            string filter = default;
+            string highlight = default;
+            string highlightPostTag = default;
+            string highlightPreTag = default;
+            double? minimumCoverage = default;
+            string orderby = default;
+            QueryType? queryType = default;
             IList<string> scoringParameters = default;
-            Optional<string> scoringProfile = default;
-            Optional<string> search = default;
-            Optional<string> searchFields = default;
-            Optional<SearchMode> searchMode = default;
-            Optional<string> select = default;
-            Optional<int> skip = default;
-            Optional<int> top = default;
+            string scoringProfile = default;
+            string search = default;
+            string searchFields = default;
+            SearchMode? searchMode = default;
+            string select = default;
+            int? skip = default;
+            int? top = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("count"u8))
@@ -268,23 +268,23 @@ namespace CognitiveSearch.Models
                 }
             }
             return new SearchRequest(
-                Optional.ToNullable(count),
+                count,
                 facets ?? new ChangeTrackingList<string>(),
-                filter.Value,
-                highlight.Value,
-                highlightPostTag.Value,
-                highlightPreTag.Value,
-                Optional.ToNullable(minimumCoverage),
-                orderby.Value,
-                Optional.ToNullable(queryType),
+                filter,
+                highlight,
+                highlightPostTag,
+                highlightPreTag,
+                minimumCoverage,
+                orderby,
+                queryType,
                 scoringParameters ?? new ChangeTrackingList<string>(),
-                scoringProfile.Value,
-                search.Value,
-                searchFields.Value,
-                Optional.ToNullable(searchMode),
-                select.Value,
-                Optional.ToNullable(skip),
-                Optional.ToNullable(top));
+                scoringProfile,
+                search,
+                searchFields,
+                searchMode,
+                select,
+                skip,
+                top);
         }
     }
 }

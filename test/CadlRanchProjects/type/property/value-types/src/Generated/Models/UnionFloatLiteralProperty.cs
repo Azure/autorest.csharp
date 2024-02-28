@@ -85,10 +85,10 @@ namespace _Type.Property.ValueTypes.Models
         /// Supported types:
         /// <list type="bullet">
         /// <item>
-        /// <description>42.42</description>
+        /// <description>43.125</description>
         /// </item>
         /// <item>
-        /// <description>43.43</description>
+        /// <description>46.875</description>
         /// </item>
         /// </list>
         /// </remarks>

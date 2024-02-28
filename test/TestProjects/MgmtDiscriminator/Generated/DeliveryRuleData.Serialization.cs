@@ -127,18 +127,18 @@ namespace MgmtDiscriminator
             {
                 return null;
             }
-            Optional<bool> boolProperty = default;
-            Optional<AzureLocation> location = default;
-            Optional<AzureLocation> locationWithCustomSerialization = default;
-            Optional<DateTimeOffset> dateTimeProperty = default;
-            Optional<TimeSpan> duration = default;
-            Optional<int> number = default;
-            Optional<Uri> uri = default;
-            Optional<DeliveryRuleProperties> properties = default;
+            bool? boolProperty = default;
+            AzureLocation? location = default;
+            AzureLocation? locationWithCustomSerialization = default;
+            DateTimeOffset? dateTimeProperty = default;
+            TimeSpan? duration = default;
+            int? number = default;
+            Uri uri = default;
+            DeliveryRuleProperties properties = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
+            SystemData systemData = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -249,15 +249,15 @@ namespace MgmtDiscriminator
                 id,
                 name,
                 type,
-                systemData.Value,
-                Optional.ToNullable(boolProperty),
-                Optional.ToNullable(location),
-                Optional.ToNullable(locationWithCustomSerialization),
-                Optional.ToNullable(dateTimeProperty),
-                Optional.ToNullable(duration),
-                Optional.ToNullable(number),
-                uri.Value,
-                properties.Value,
+                systemData,
+                boolProperty,
+                location,
+                locationWithCustomSerialization,
+                dateTimeProperty,
+                duration,
+                number,
+                uri,
+                properties,
                 serializedAdditionalRawData);
         }
 

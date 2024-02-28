@@ -19,7 +19,7 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            Optional<string> code = default;
+            string code = default;
             string message = default;
             IReadOnlyList<SearchError> details = default;
             foreach (var property in element.EnumerateObject())
@@ -49,7 +49,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new SearchError(code.Value, message, details ?? new ChangeTrackingList<SearchError>());
+            return new SearchError(code, message, details ?? new ChangeTrackingList<SearchError>());
         }
     }
 }

@@ -113,12 +113,12 @@ namespace MgmtAcronymMapping.Models
                 return null;
             }
             string name = default;
-            Optional<string> id = default;
-            Optional<WritableSubResource> subnet = default;
-            Optional<bool> primary = default;
-            Optional<VirtualMachineScaleSetPublicIPAddressConfiguration> publicIPAddressConfiguration = default;
+            string id = default;
+            WritableSubResource subnet = default;
+            bool? primary = default;
+            VirtualMachineScaleSetPublicIPAddressConfiguration publicIPAddressConfiguration = default;
             IList<IPAddress> ipAddresses = default;
-            Optional<IPVersion> privateIPAddressVersion = default;
+            IPVersion? privateIPAddressVersion = default;
             IList<WritableSubResource> applicationGatewayBackendAddressPools = default;
             IList<WritableSubResource> applicationSecurityGroups = default;
             IList<WritableSubResource> loadBalancerBackendAddressPools = default;
@@ -262,13 +262,13 @@ namespace MgmtAcronymMapping.Models
                 }
             }
             return new VirtualMachineScaleSetIPConfiguration(
-                id.Value,
+                id,
                 name,
                 subnet,
-                Optional.ToNullable(primary),
-                publicIPAddressConfiguration.Value,
+                primary,
+                publicIPAddressConfiguration,
                 ipAddresses ?? new ChangeTrackingList<IPAddress>(),
-                Optional.ToNullable(privateIPAddressVersion),
+                privateIPAddressVersion,
                 applicationGatewayBackendAddressPools ?? new ChangeTrackingList<WritableSubResource>(),
                 applicationSecurityGroups ?? new ChangeTrackingList<WritableSubResource>(),
                 loadBalancerBackendAddressPools ?? new ChangeTrackingList<WritableSubResource>(),

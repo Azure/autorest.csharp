@@ -20,7 +20,7 @@ namespace AppConfiguration.Models
                 return null;
             }
             IReadOnlyList<Label> items = default;
-            Optional<string> nextLink = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("items"u8))
@@ -43,7 +43,7 @@ namespace AppConfiguration.Models
                     continue;
                 }
             }
-            return new LabelListResult(items ?? new ChangeTrackingList<Label>(), nextLink.Value);
+            return new LabelListResult(items ?? new ChangeTrackingList<Label>(), nextLink);
         }
     }
 }

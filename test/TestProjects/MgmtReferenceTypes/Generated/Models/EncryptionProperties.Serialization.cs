@@ -37,8 +37,8 @@ namespace Azure.ResourceManager.Fake.Models
             {
                 return null;
             }
-            Optional<EncryptionStatus> status = default;
-            Optional<KeyVaultProperties> keyVaultProperties = default;
+            EncryptionStatus? status = default;
+            KeyVaultProperties keyVaultProperties = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("status"u8))
@@ -60,7 +60,7 @@ namespace Azure.ResourceManager.Fake.Models
                     continue;
                 }
             }
-            return new EncryptionProperties(Optional.ToNullable(status), keyVaultProperties.Value);
+            return new EncryptionProperties(status, keyVaultProperties);
         }
 
         internal partial class EncryptionPropertiesConverter : JsonConverter<EncryptionProperties>

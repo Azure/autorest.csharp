@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 using MgmtPropertyBag;
 
 namespace MgmtPropertyBag.Models
@@ -21,7 +20,7 @@ namespace MgmtPropertyBag.Models
                 return null;
             }
             IReadOnlyList<BarData> value = default;
-            Optional<string> nextLink = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -40,7 +39,7 @@ namespace MgmtPropertyBag.Models
                     continue;
                 }
             }
-            return new BarListResult(value, nextLink.Value);
+            return new BarListResult(value, nextLink);
         }
     }
 }

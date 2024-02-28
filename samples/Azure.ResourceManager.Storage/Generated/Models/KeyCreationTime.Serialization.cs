@@ -20,8 +20,8 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Optional<DateTimeOffset> key1 = default;
-            Optional<DateTimeOffset> key2 = default;
+            DateTimeOffset? key1 = default;
+            DateTimeOffset? key2 = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("key1"u8))
@@ -43,7 +43,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new KeyCreationTime(Optional.ToNullable(key1), Optional.ToNullable(key2));
+            return new KeyCreationTime(key1, key2);
         }
     }
 }

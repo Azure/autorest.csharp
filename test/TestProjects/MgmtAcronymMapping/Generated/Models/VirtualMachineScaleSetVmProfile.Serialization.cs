@@ -79,17 +79,17 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<VirtualMachineScaleSetOSProfile> osProfile = default;
-            Optional<VirtualMachineScaleSetStorageProfile> storageProfile = default;
-            Optional<VirtualMachineScaleSetNetworkProfile> networkProfile = default;
-            Optional<SecurityProfile> securityProfile = default;
-            Optional<DiagnosticsProfile> diagnosticsProfile = default;
-            Optional<VirtualMachineScaleSetExtensionProfile> extensionProfile = default;
-            Optional<string> licenseType = default;
-            Optional<VirtualMachinePriorityType> priority = default;
-            Optional<VirtualMachineEvictionPolicyType> evictionPolicy = default;
-            Optional<BillingProfile> billingProfile = default;
-            Optional<ScheduledEventsProfile> scheduledEventsProfile = default;
+            VirtualMachineScaleSetOSProfile osProfile = default;
+            VirtualMachineScaleSetStorageProfile storageProfile = default;
+            VirtualMachineScaleSetNetworkProfile networkProfile = default;
+            SecurityProfile securityProfile = default;
+            DiagnosticsProfile diagnosticsProfile = default;
+            VirtualMachineScaleSetExtensionProfile extensionProfile = default;
+            string licenseType = default;
+            VirtualMachinePriorityType? priority = default;
+            VirtualMachineEvictionPolicyType? evictionPolicy = default;
+            BillingProfile billingProfile = default;
+            ScheduledEventsProfile scheduledEventsProfile = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("osProfile"u8))
@@ -189,17 +189,17 @@ namespace MgmtAcronymMapping.Models
                 }
             }
             return new VirtualMachineScaleSetVmProfile(
-                osProfile.Value,
-                storageProfile.Value,
-                networkProfile.Value,
-                securityProfile.Value,
-                diagnosticsProfile.Value,
-                extensionProfile.Value,
-                licenseType.Value,
-                Optional.ToNullable(priority),
-                Optional.ToNullable(evictionPolicy),
-                billingProfile.Value,
-                scheduledEventsProfile.Value);
+                osProfile,
+                storageProfile,
+                networkProfile,
+                securityProfile,
+                diagnosticsProfile,
+                extensionProfile,
+                licenseType,
+                priority,
+                evictionPolicy,
+                billingProfile,
+                scheduledEventsProfile);
         }
     }
 }

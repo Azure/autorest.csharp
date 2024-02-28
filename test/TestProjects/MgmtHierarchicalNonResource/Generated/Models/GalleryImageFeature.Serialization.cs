@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace MgmtHierarchicalNonResource.Models
 {
@@ -18,8 +17,8 @@ namespace MgmtHierarchicalNonResource.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> value = default;
+            string name = default;
+            string value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -33,7 +32,7 @@ namespace MgmtHierarchicalNonResource.Models
                     continue;
                 }
             }
-            return new GalleryImageFeature(name.Value, value.Value);
+            return new GalleryImageFeature(name, value);
         }
     }
 }

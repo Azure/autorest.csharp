@@ -19,10 +19,10 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<RollingUpgradeStatusCode> code = default;
-            Optional<DateTimeOffset> startTime = default;
-            Optional<RollingUpgradeActionType> lastAction = default;
-            Optional<DateTimeOffset> lastActionTime = default;
+            RollingUpgradeStatusCode? code = default;
+            DateTimeOffset? startTime = default;
+            RollingUpgradeActionType? lastAction = default;
+            DateTimeOffset? lastActionTime = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("code"u8))
@@ -62,7 +62,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new RollingUpgradeRunningStatus(Optional.ToNullable(code), Optional.ToNullable(startTime), Optional.ToNullable(lastAction), Optional.ToNullable(lastActionTime));
+            return new RollingUpgradeRunningStatus(code, startTime, lastAction, lastActionTime);
         }
     }
 }

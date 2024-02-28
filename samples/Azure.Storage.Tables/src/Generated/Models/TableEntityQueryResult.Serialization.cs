@@ -20,7 +20,7 @@ namespace Azure.Storage.Tables.Models
             {
                 return null;
             }
-            Optional<string> odataMetadata = default;
+            string odataMetadata = default;
             IReadOnlyList<IDictionary<string, object>> value = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -63,7 +63,7 @@ namespace Azure.Storage.Tables.Models
                     continue;
                 }
             }
-            return new TableEntityQueryResult(odataMetadata.Value, value ?? new ChangeTrackingList<IDictionary<string, object>>());
+            return new TableEntityQueryResult(odataMetadata, value ?? new ChangeTrackingList<IDictionary<string, object>>());
         }
     }
 }

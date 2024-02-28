@@ -31,9 +31,9 @@ namespace MgmtScopeResource.Models
             {
                 return null;
             }
-            Optional<string> sourceId = default;
+            string sourceId = default;
             string targetId = default;
-            Optional<string> notes = default;
+            string notes = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sourceId"u8))
@@ -52,7 +52,7 @@ namespace MgmtScopeResource.Models
                     continue;
                 }
             }
-            return new ResourceLinkProperties(sourceId.Value, targetId, notes.Value);
+            return new ResourceLinkProperties(sourceId, targetId, notes);
         }
     }
 }

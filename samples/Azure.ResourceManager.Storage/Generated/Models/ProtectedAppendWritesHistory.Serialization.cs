@@ -20,8 +20,8 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Optional<bool> allowProtectedAppendWritesAll = default;
-            Optional<DateTimeOffset> timestamp = default;
+            bool? allowProtectedAppendWritesAll = default;
+            DateTimeOffset? timestamp = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("allowProtectedAppendWritesAll"u8))
@@ -43,7 +43,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new ProtectedAppendWritesHistory(Optional.ToNullable(allowProtectedAppendWritesAll), Optional.ToNullable(timestamp));
+            return new ProtectedAppendWritesHistory(allowProtectedAppendWritesAll, timestamp);
         }
     }
 }

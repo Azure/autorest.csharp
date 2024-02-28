@@ -46,10 +46,10 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> id = default;
-            Optional<string> name = default;
-            Optional<string> type = default;
-            Optional<string> location = default;
+            string id = default;
+            string name = default;
+            string type = default;
+            string location = default;
             IDictionary<string, string> tags = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -88,7 +88,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new Resource(id.Value, name.Value, type.Value, location.Value, tags ?? new ChangeTrackingDictionary<string, string>());
+            return new Resource(id, name, type, location, tags ?? new ChangeTrackingDictionary<string, string>());
         }
     }
 }

@@ -20,10 +20,10 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Optional<string> keyName = default;
-            Optional<string> value = default;
-            Optional<KeyPermission> permissions = default;
-            Optional<DateTimeOffset> creationTime = default;
+            string keyName = default;
+            string value = default;
+            KeyPermission? permissions = default;
+            DateTimeOffset? creationTime = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("keyName"u8))
@@ -55,7 +55,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new StorageAccountKey(keyName.Value, value.Value, Optional.ToNullable(permissions), Optional.ToNullable(creationTime));
+            return new StorageAccountKey(keyName, value, permissions, creationTime);
         }
     }
 }

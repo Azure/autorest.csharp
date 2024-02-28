@@ -871,7 +871,7 @@
          "Type": {
           "$id": "115",
           "Kind": "Primitive",
-          "Name": "Int32",
+          "Name": "SByte",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -952,7 +952,7 @@
          "Type": {
           "$id": "124",
           "Kind": "Primitive",
-          "Name": "Int32",
+          "Name": "SByte",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -990,7 +990,7 @@
      "Type": {
       "$id": "127",
       "Kind": "Primitive",
-      "Name": "Int32",
+      "Name": "SByte",
       "IsNullable": false
      },
      "IsRequired": true,

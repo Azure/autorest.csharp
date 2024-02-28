@@ -70,7 +70,7 @@ namespace body_complex.Models
             {
                 return null;
             }
-            Optional<byte[]> field = default;
+            byte[] field = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -90,7 +90,7 @@ namespace body_complex.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ByteWrapper(field.Value, serializedAdditionalRawData);
+            return new ByteWrapper(field, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ByteWrapper>.Write(ModelReaderWriterOptions options)

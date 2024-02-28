@@ -319,16 +319,16 @@ namespace ModelShapes.Models
             int requiredInt = default;
             IList<string> requiredStringList = default;
             IList<int> requiredIntList = default;
-            Optional<string> nonRequiredString = default;
-            Optional<int> nonRequiredInt = default;
+            string nonRequiredString = default;
+            int? nonRequiredInt = default;
             IList<string> nonRequiredStringList = default;
             IList<int> nonRequiredIntList = default;
             string requiredNullableString = default;
             int? requiredNullableInt = default;
             IList<string> requiredNullableStringList = default;
             IList<int> requiredNullableIntList = default;
-            Optional<string> nonRequiredNullableString = default;
-            Optional<int?> nonRequiredNullableInt = default;
+            string nonRequiredNullableString = default;
+            int? nonRequiredNullableInt = default;
             IList<string> nonRequiredNullableStringList = default;
             IList<int> nonRequiredNullableIntList = default;
             ReadOnlyMemory<float> vector = default;
@@ -652,16 +652,16 @@ namespace ModelShapes.Models
                 requiredInt,
                 requiredStringList,
                 requiredIntList,
-                nonRequiredString.Value,
-                Optional.ToNullable(nonRequiredInt),
+                nonRequiredString,
+                nonRequiredInt,
                 nonRequiredStringList ?? new ChangeTrackingList<string>(),
                 nonRequiredIntList ?? new ChangeTrackingList<int>(),
                 requiredNullableString,
                 requiredNullableInt,
                 requiredNullableStringList,
                 requiredNullableIntList,
-                nonRequiredNullableString.Value,
-                Optional.ToNullable(nonRequiredNullableInt),
+                nonRequiredNullableString,
+                nonRequiredNullableInt,
                 nonRequiredNullableStringList ?? new ChangeTrackingList<string>(),
                 nonRequiredNullableIntList ?? new ChangeTrackingList<int>(),
                 vector,

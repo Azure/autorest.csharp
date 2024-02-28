@@ -142,18 +142,18 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<int> platformUpdateDomain = default;
-            Optional<int> platformFaultDomain = default;
-            Optional<string> rdpThumbPrint = default;
-            Optional<VirtualMachineAgentInstanceView> vmAgent = default;
-            Optional<MaintenanceRedeployStatus> maintenanceRedeployStatus = default;
+            int? platformUpdateDomain = default;
+            int? platformFaultDomain = default;
+            string rdpThumbPrint = default;
+            VirtualMachineAgentInstanceView vmAgent = default;
+            MaintenanceRedeployStatus maintenanceRedeployStatus = default;
             IReadOnlyList<DiskInstanceView> disks = default;
             IReadOnlyList<VirtualMachineExtensionInstanceView> extensions = default;
-            Optional<VirtualMachineHealthStatus> vmHealth = default;
-            Optional<BootDiagnosticsInstanceView> bootDiagnostics = default;
+            VirtualMachineHealthStatus vmHealth = default;
+            BootDiagnosticsInstanceView bootDiagnostics = default;
             IReadOnlyList<InstanceViewStatus> statuses = default;
-            Optional<string> assignedHost = default;
-            Optional<string> placementGroupId = default;
+            string assignedHost = default;
+            string placementGroupId = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -276,18 +276,18 @@ namespace Azure.ResourceManager.Sample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new VirtualMachineScaleSetVmInstanceView(
-                Optional.ToNullable(platformUpdateDomain),
-                Optional.ToNullable(platformFaultDomain),
-                rdpThumbPrint.Value,
-                vmAgent.Value,
-                maintenanceRedeployStatus.Value,
+                platformUpdateDomain,
+                platformFaultDomain,
+                rdpThumbPrint,
+                vmAgent,
+                maintenanceRedeployStatus,
                 disks ?? new ChangeTrackingList<DiskInstanceView>(),
                 extensions ?? new ChangeTrackingList<VirtualMachineExtensionInstanceView>(),
-                vmHealth.Value,
-                bootDiagnostics.Value,
+                vmHealth,
+                bootDiagnostics,
                 statuses ?? new ChangeTrackingList<InstanceViewStatus>(),
-                assignedHost.Value,
-                placementGroupId.Value,
+                assignedHost,
+                placementGroupId,
                 serializedAdditionalRawData);
         }
 

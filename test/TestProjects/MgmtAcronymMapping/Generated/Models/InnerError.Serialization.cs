@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -18,8 +17,8 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<string> exceptiontype = default;
-            Optional<string> errordetail = default;
+            string exceptiontype = default;
+            string errordetail = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("exceptiontype"u8))
@@ -33,7 +32,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new InnerError(exceptiontype.Value, errordetail.Value);
+            return new InnerError(exceptiontype, errordetail);
         }
     }
 }

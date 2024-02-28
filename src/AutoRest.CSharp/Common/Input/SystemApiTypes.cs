@@ -82,9 +82,6 @@ namespace AutoRest.CSharp.Common.Input
 
         public override Type IXmlSerializableType => throw new NotSupportedException("Xml serialization is not supported in non-branded libraries yet");
 
-        public override Type OptionalType => typeof(OptionalProperty);
-        public override Type OptionalPropertyType => typeof(OptionalProperty<>);
-
         public override Type RequestFailedExceptionType => typeof(MessageFailedException);
 
         public override Type ResponseClassifierType => typeof(ResponseErrorClassifier);

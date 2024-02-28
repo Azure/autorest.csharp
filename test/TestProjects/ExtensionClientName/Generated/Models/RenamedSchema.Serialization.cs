@@ -42,7 +42,7 @@ namespace ExtensionClientName.Models
                 return null;
             }
             IDictionary<string, string> originalProperty = default;
-            Optional<string> originalPropertyString = default;
+            string originalPropertyString = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("originalProperty"u8))
@@ -65,7 +65,7 @@ namespace ExtensionClientName.Models
                     continue;
                 }
             }
-            return new RenamedSchema(originalProperty ?? new ChangeTrackingDictionary<string, string>(), originalPropertyString.Value);
+            return new RenamedSchema(originalProperty ?? new ChangeTrackingDictionary<string, string>(), originalPropertyString);
         }
     }
 }

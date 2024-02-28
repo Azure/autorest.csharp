@@ -72,7 +72,7 @@ namespace _Type.Property.AdditionalProperties.Models
                 return null;
             }
             int index = default;
-            Optional<float> age = default;
+            float? age = default;
             string name = default;
             IDictionary<string, BinaryData> additionalProperties = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -100,7 +100,7 @@ namespace _Type.Property.AdditionalProperties.Models
                 additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new IsUnknownAdditionalPropertiesDerived(name, additionalProperties, index, Optional.ToNullable(age));
+            return new IsUnknownAdditionalPropertiesDerived(name, additionalProperties, index, age);
         }
 
         BinaryData IPersistableModel<IsUnknownAdditionalPropertiesDerived>.Write(ModelReaderWriterOptions options)

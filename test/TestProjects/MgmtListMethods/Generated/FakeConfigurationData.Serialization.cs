@@ -44,13 +44,13 @@ namespace MgmtListMethods
             {
                 return null;
             }
-            Optional<string> configValue = default;
+            string configValue = default;
             IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
+            SystemData systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("configValue"u8))
@@ -106,10 +106,10 @@ namespace MgmtListMethods
                 id,
                 name,
                 type,
-                systemData.Value,
+                systemData,
                 tags ?? new ChangeTrackingDictionary<string, string>(),
                 location,
-                configValue.Value);
+                configValue);
         }
     }
 }

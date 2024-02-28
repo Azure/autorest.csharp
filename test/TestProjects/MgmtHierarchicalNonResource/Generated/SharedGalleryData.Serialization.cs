@@ -18,9 +18,9 @@ namespace MgmtHierarchicalNonResource
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> location = default;
-            Optional<string> uniqueId = default;
+            string name = default;
+            string location = default;
+            string uniqueId = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -51,7 +51,7 @@ namespace MgmtHierarchicalNonResource
                     continue;
                 }
             }
-            return new SharedGalleryData(name.Value, location.Value, uniqueId.Value);
+            return new SharedGalleryData(name, location, uniqueId);
         }
     }
 }

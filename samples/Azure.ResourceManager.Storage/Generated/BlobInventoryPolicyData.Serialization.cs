@@ -38,9 +38,9 @@ namespace Azure.ResourceManager.Storage
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
-            Optional<DateTimeOffset> lastModifiedTime = default;
-            Optional<BlobInventoryPolicySchema> policy = default;
+            SystemData systemData = default;
+            DateTimeOffset? lastModifiedTime = default;
+            BlobInventoryPolicySchema policy = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -102,9 +102,9 @@ namespace Azure.ResourceManager.Storage
                 id,
                 name,
                 type,
-                systemData.Value,
-                Optional.ToNullable(lastModifiedTime),
-                policy.Value);
+                systemData,
+                lastModifiedTime,
+                policy);
         }
     }
 }

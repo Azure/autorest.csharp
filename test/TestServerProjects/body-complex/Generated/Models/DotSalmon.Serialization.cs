@@ -81,10 +81,10 @@ namespace body_complex.Models
             {
                 return null;
             }
-            Optional<string> location = default;
-            Optional<bool> iswild = default;
+            string location = default;
+            bool? iswild = default;
             string fishType = default;
-            Optional<string> species = default;
+            string species = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -119,7 +119,7 @@ namespace body_complex.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DotSalmon(fishType, species.Value, serializedAdditionalRawData, location.Value, Optional.ToNullable(iswild));
+            return new DotSalmon(fishType, species, serializedAdditionalRawData, location, iswild);
         }
 
         BinaryData IPersistableModel<DotSalmon>.Write(ModelReaderWriterOptions options)

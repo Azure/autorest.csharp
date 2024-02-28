@@ -75,8 +75,8 @@ namespace body_complex.Models
             {
                 return null;
             }
-            Optional<DateTimeOffset> field = default;
-            Optional<DateTimeOffset> now = default;
+            DateTimeOffset? field = default;
+            DateTimeOffset? now = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -105,7 +105,7 @@ namespace body_complex.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Datetimerfc1123Wrapper(Optional.ToNullable(field), Optional.ToNullable(now), serializedAdditionalRawData);
+            return new Datetimerfc1123Wrapper(field, now, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<Datetimerfc1123Wrapper>.Write(ModelReaderWriterOptions options)

@@ -144,10 +144,10 @@ namespace FirstTestTypeSpec.Models
             ThingRequiredLiteralInt requiredLiteralInt = default;
             ThingRequiredLiteralFloat requiredLiteralFloat = default;
             bool requiredLiteralBool = default;
-            Optional<ThingOptionalLiteralString> optionalLiteralString = default;
-            Optional<ThingOptionalLiteralInt> optionalLiteralInt = default;
-            Optional<ThingOptionalLiteralFloat> optionalLiteralFloat = default;
-            Optional<bool> optionalLiteralBool = default;
+            ThingOptionalLiteralString? optionalLiteralString = default;
+            ThingOptionalLiteralInt? optionalLiteralInt = default;
+            ThingOptionalLiteralFloat? optionalLiteralFloat = default;
+            bool? optionalLiteralBool = default;
             string requiredBadDescription = default;
             IList<int> optionalNullableList = default;
             IList<int> requiredNullableList = default;
@@ -269,10 +269,10 @@ namespace FirstTestTypeSpec.Models
                 requiredLiteralInt,
                 requiredLiteralFloat,
                 requiredLiteralBool,
-                Optional.ToNullable(optionalLiteralString),
-                Optional.ToNullable(optionalLiteralInt),
-                Optional.ToNullable(optionalLiteralFloat),
-                Optional.ToNullable(optionalLiteralBool),
+                optionalLiteralString,
+                optionalLiteralInt,
+                optionalLiteralFloat,
+                optionalLiteralBool,
                 requiredBadDescription,
                 optionalNullableList ?? new ChangeTrackingList<int>(),
                 requiredNullableList,

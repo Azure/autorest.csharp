@@ -37,8 +37,8 @@ namespace Azure.ResourceManager.Storage.Models
                 return null;
             }
             string id = default;
-            Optional<Action> action = default;
-            Optional<State> state = default;
+            Action? action = default;
+            State? state = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -65,7 +65,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new VirtualNetworkRule(id, Optional.ToNullable(action), Optional.ToNullable(state));
+            return new VirtualNetworkRule(id, action, state);
         }
     }
 }

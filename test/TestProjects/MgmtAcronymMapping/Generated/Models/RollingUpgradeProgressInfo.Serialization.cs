@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -18,10 +17,10 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<int> successfulInstanceCount = default;
-            Optional<int> failedInstanceCount = default;
-            Optional<int> inProgressInstanceCount = default;
-            Optional<int> pendingInstanceCount = default;
+            int? successfulInstanceCount = default;
+            int? failedInstanceCount = default;
+            int? inProgressInstanceCount = default;
+            int? pendingInstanceCount = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("successfulInstanceCount"u8))
@@ -61,7 +60,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new RollingUpgradeProgressInfo(Optional.ToNullable(successfulInstanceCount), Optional.ToNullable(failedInstanceCount), Optional.ToNullable(inProgressInstanceCount), Optional.ToNullable(pendingInstanceCount));
+            return new RollingUpgradeProgressInfo(successfulInstanceCount, failedInstanceCount, inProgressInstanceCount, pendingInstanceCount);
         }
     }
 }

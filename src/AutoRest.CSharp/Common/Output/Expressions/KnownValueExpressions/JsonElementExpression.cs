@@ -27,6 +27,8 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
         public ValueExpression GetDecimal() => Invoke(nameof(JsonElement.GetDecimal));
         public ValueExpression GetDouble() => Invoke(nameof(JsonElement.GetDouble));
         public ValueExpression GetGuid() => Invoke(nameof(JsonElement.GetGuid));
+        public ValueExpression GetSByte() => Invoke(nameof(JsonElement.GetSByte));
+        public ValueExpression GetByte() => Invoke(nameof(JsonElement.GetByte));
         public ValueExpression GetInt16() => Invoke(nameof(JsonElement.GetInt16));
         public ValueExpression GetInt32() => Invoke(nameof(JsonElement.GetInt32));
         public ValueExpression GetInt64() => Invoke(nameof(JsonElement.GetInt64));

@@ -47,11 +47,11 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Optional<EncryptionServices> services = default;
+            EncryptionServices services = default;
             KeySource keySource = default;
-            Optional<bool> requireInfrastructureEncryption = default;
-            Optional<KeyVaultProperties> keyvaultproperties = default;
-            Optional<EncryptionIdentity> identity = default;
+            bool? requireInfrastructureEncryption = default;
+            KeyVaultProperties keyvaultproperties = default;
+            EncryptionIdentity identity = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("services"u8))
@@ -96,7 +96,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new Encryption(services.Value, keySource, Optional.ToNullable(requireInfrastructureEncryption), keyvaultproperties.Value, identity.Value);
+            return new Encryption(services, keySource, requireInfrastructureEncryption, keyvaultproperties, identity);
         }
     }
 }

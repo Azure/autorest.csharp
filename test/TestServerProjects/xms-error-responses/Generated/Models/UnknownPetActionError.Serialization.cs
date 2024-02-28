@@ -77,8 +77,8 @@ namespace xms_error_responses.Models
                 return null;
             }
             string errorType = "Unknown";
-            Optional<string> errorMessage = default;
-            Optional<string> actionResponse = default;
+            string errorMessage = default;
+            string actionResponse = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -104,7 +104,7 @@ namespace xms_error_responses.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new UnknownPetActionError(actionResponse.Value, serializedAdditionalRawData, errorType, errorMessage.Value);
+            return new UnknownPetActionError(actionResponse, serializedAdditionalRawData, errorType, errorMessage);
         }
 
         BinaryData IPersistableModel<PetActionError>.Write(ModelReaderWriterOptions options)

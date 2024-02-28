@@ -90,13 +90,6 @@ namespace AutoRest.CSharp.Common.Input
         public abstract Type IXmlSerializableType { get; }
         public string IUtf8JsonSerializableWriteName => nameof(IUtf8JsonWriteable.Write);
 
-        public abstract Type OptionalType { get; }
-        public abstract Type OptionalPropertyType { get; }
-
-        public string OptionalToDictionaryName => nameof(OptionalProperty.ToDictionary);
-        public string OptionalToListName => nameof(OptionalProperty.ToList);
-        public string OptionalToNullableName => nameof(OptionalProperty.ToNullable);
-
         public abstract Type RequestFailedExceptionType { get; }
 
         public string ResponseClassifierIsErrorResponseName => nameof(ResponseErrorClassifier.IsErrorResponse);

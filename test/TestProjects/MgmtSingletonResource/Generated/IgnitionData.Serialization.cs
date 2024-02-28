@@ -19,11 +19,11 @@ namespace MgmtSingletonResource
             {
                 return null;
             }
-            Optional<bool> pushButton = default;
+            bool? pushButton = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
+            SystemData systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("pushButton"u8))
@@ -60,7 +60,7 @@ namespace MgmtSingletonResource
                     continue;
                 }
             }
-            return new IgnitionData(id, name, type, systemData.Value, Optional.ToNullable(pushButton));
+            return new IgnitionData(id, name, type, systemData, pushButton);
         }
     }
 }

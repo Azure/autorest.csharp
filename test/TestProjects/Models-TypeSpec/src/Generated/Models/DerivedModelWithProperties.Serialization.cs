@@ -78,7 +78,7 @@ namespace ModelsTypeSpec.Models
                 return null;
             }
             IList<CollectionItem> requiredList = default;
-            Optional<string> optionalPropertyOnBase = default;
+            string optionalPropertyOnBase = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -104,7 +104,7 @@ namespace ModelsTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DerivedModelWithProperties(optionalPropertyOnBase.Value, serializedAdditionalRawData, requiredList);
+            return new DerivedModelWithProperties(optionalPropertyOnBase, serializedAdditionalRawData, requiredList);
         }
 
         BinaryData IPersistableModel<DerivedModelWithProperties>.Write(ModelReaderWriterOptions options)

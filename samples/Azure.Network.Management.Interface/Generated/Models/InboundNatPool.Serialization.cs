@@ -78,19 +78,19 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> etag = default;
-            Optional<string> type = default;
-            Optional<string> id = default;
-            Optional<SubResource> frontendIPConfiguration = default;
-            Optional<TransportProtocol> protocol = default;
-            Optional<int> frontendPortRangeStart = default;
-            Optional<int> frontendPortRangeEnd = default;
-            Optional<int> backendPort = default;
-            Optional<int> idleTimeoutInMinutes = default;
-            Optional<bool> enableFloatingIP = default;
-            Optional<bool> enableTcpReset = default;
-            Optional<ProvisioningState> provisioningState = default;
+            string name = default;
+            string etag = default;
+            string type = default;
+            string id = default;
+            SubResource frontendIPConfiguration = default;
+            TransportProtocol? protocol = default;
+            int? frontendPortRangeStart = default;
+            int? frontendPortRangeEnd = default;
+            int? backendPort = default;
+            int? idleTimeoutInMinutes = default;
+            bool? enableFloatingIP = default;
+            bool? enableTcpReset = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -208,19 +208,19 @@ namespace Azure.Network.Management.Interface.Models
                 }
             }
             return new InboundNatPool(
-                id.Value,
-                name.Value,
-                etag.Value,
-                type.Value,
-                frontendIPConfiguration.Value,
-                Optional.ToNullable(protocol),
-                Optional.ToNullable(frontendPortRangeStart),
-                Optional.ToNullable(frontendPortRangeEnd),
-                Optional.ToNullable(backendPort),
-                Optional.ToNullable(idleTimeoutInMinutes),
-                Optional.ToNullable(enableFloatingIP),
-                Optional.ToNullable(enableTcpReset),
-                Optional.ToNullable(provisioningState));
+                id,
+                name,
+                etag,
+                type,
+                frontendIPConfiguration,
+                protocol,
+                frontendPortRangeStart,
+                frontendPortRangeEnd,
+                backendPort,
+                idleTimeoutInMinutes,
+                enableFloatingIP,
+                enableTcpReset,
+                provisioningState);
         }
     }
 }

@@ -83,9 +83,9 @@ namespace TypeSchemaMapping.Models
             {
                 return null;
             }
-            Optional<int> stringProperty = default;
+            int stringProperty = default;
             IReadOnlyDictionary<string, string> dictionaryProperty = default;
-            Optional<CustomDaysOfWeek> daysOfWeek = default;
+            CustomDaysOfWeek? daysOfWeek = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -128,7 +128,7 @@ namespace TypeSchemaMapping.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new SecondModel(stringProperty, dictionaryProperty ?? new ChangeTrackingDictionary<string, string>(), Optional.ToNullable(daysOfWeek), serializedAdditionalRawData);
+            return new SecondModel(stringProperty, dictionaryProperty ?? new ChangeTrackingDictionary<string, string>(), daysOfWeek, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<SecondModel>.Write(ModelReaderWriterOptions options)

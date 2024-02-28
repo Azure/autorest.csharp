@@ -106,12 +106,12 @@ namespace MgmtMockAndSample.Models
             IList<string> sourceAddresses = default;
             IList<string> destinationAddresses = default;
             IList<string> destinationPorts = default;
-            Optional<string> translatedAddress = default;
-            Optional<string> translatedPort = default;
+            string translatedAddress = default;
+            string translatedPort = default;
             IList<string> sourceIpGroups = default;
-            Optional<string> translatedFqdn = default;
-            Optional<string> name = default;
-            Optional<string> description = default;
+            string translatedFqdn = default;
+            string name = default;
+            string description = default;
             FirewallPolicyRuleType ruleType = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -217,17 +217,17 @@ namespace MgmtMockAndSample.Models
                 }
             }
             return new NatRule(
-                name.Value,
-                description.Value,
+                name,
+                description,
                 ruleType,
                 ipProtocols ?? new ChangeTrackingList<FirewallPolicyRuleNetworkProtocol>(),
                 sourceAddresses ?? new ChangeTrackingList<string>(),
                 destinationAddresses ?? new ChangeTrackingList<string>(),
                 destinationPorts ?? new ChangeTrackingList<string>(),
-                translatedAddress.Value,
-                translatedPort.Value,
+                translatedAddress,
+                translatedPort,
                 sourceIpGroups ?? new ChangeTrackingList<string>(),
-                translatedFqdn.Value);
+                translatedFqdn);
         }
     }
 }

@@ -46,8 +46,8 @@ namespace Azure.ResourceManager.Fake.Models
             string name = default;
             string publisher = default;
             string product = default;
-            Optional<string> promotionCode = default;
-            Optional<string> version = default;
+            string promotionCode = default;
+            string version = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -76,7 +76,7 @@ namespace Azure.ResourceManager.Fake.Models
                     continue;
                 }
             }
-            return new MgmtReferenceTypesPlan(name, publisher, product, promotionCode.Value, version.Value);
+            return new MgmtReferenceTypesPlan(name, publisher, product, promotionCode, version);
         }
 
         internal partial class MgmtReferenceTypesPlanConverter : JsonConverter<MgmtReferenceTypesPlan>

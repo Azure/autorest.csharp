@@ -58,10 +58,10 @@ namespace MgmtExtensionResource.Models
             {
                 return null;
             }
-            Optional<string> displayName = default;
-            Optional<string> description = default;
-            Optional<string> strongType = default;
-            Optional<bool> assignPermissions = default;
+            string displayName = default;
+            string description = default;
+            string strongType = default;
+            bool? assignPermissions = default;
             IDictionary<string, BinaryData> additionalProperties = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -93,7 +93,7 @@ namespace MgmtExtensionResource.Models
                 additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new ParameterDefinitionsValueMetadata(displayName.Value, description.Value, strongType.Value, Optional.ToNullable(assignPermissions), additionalProperties);
+            return new ParameterDefinitionsValueMetadata(displayName, description, strongType, assignPermissions, additionalProperties);
         }
     }
 }

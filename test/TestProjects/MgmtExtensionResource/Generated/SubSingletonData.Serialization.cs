@@ -19,11 +19,11 @@ namespace MgmtExtensionResource
             {
                 return null;
             }
-            Optional<string> something = default;
+            string something = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
+            SystemData systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("something"u8))
@@ -56,7 +56,7 @@ namespace MgmtExtensionResource
                     continue;
                 }
             }
-            return new SubSingletonData(id, name, type, systemData.Value, something.Value);
+            return new SubSingletonData(id, name, type, systemData, something);
         }
     }
 }

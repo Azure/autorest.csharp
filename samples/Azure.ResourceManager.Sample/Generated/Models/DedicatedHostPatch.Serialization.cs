@@ -126,14 +126,14 @@ namespace Azure.ResourceManager.Sample.Models
                 return null;
             }
             IDictionary<string, string> tags = default;
-            Optional<int> platformFaultDomain = default;
-            Optional<bool> autoReplaceOnFailure = default;
-            Optional<string> hostId = default;
+            int? platformFaultDomain = default;
+            bool? autoReplaceOnFailure = default;
+            string hostId = default;
             IReadOnlyList<Resources.Models.SubResource> virtualMachines = default;
-            Optional<DedicatedHostLicenseType> licenseType = default;
-            Optional<DateTimeOffset> provisioningTime = default;
-            Optional<string> provisioningState = default;
-            Optional<DedicatedHostInstanceView> instanceView = default;
+            DedicatedHostLicenseType? licenseType = default;
+            DateTimeOffset? provisioningTime = default;
+            string provisioningState = default;
+            DedicatedHostInstanceView instanceView = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -242,14 +242,14 @@ namespace Azure.ResourceManager.Sample.Models
             return new DedicatedHostPatch(
                 tags ?? new ChangeTrackingDictionary<string, string>(),
                 serializedAdditionalRawData,
-                Optional.ToNullable(platformFaultDomain),
-                Optional.ToNullable(autoReplaceOnFailure),
-                hostId.Value,
+                platformFaultDomain,
+                autoReplaceOnFailure,
+                hostId,
                 virtualMachines ?? new ChangeTrackingList<Resources.Models.SubResource>(),
-                Optional.ToNullable(licenseType),
-                Optional.ToNullable(provisioningTime),
-                provisioningState.Value,
-                instanceView.Value);
+                licenseType,
+                provisioningTime,
+                provisioningState,
+                instanceView);
         }
 
         BinaryData IPersistableModel<DedicatedHostPatch>.Write(ModelReaderWriterOptions options)

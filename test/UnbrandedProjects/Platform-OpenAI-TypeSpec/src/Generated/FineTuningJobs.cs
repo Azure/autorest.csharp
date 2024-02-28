@@ -432,7 +432,7 @@ namespace OpenAI
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual async Task<Result<ListFineTuningJobEventsResponse>> GetEventsAsync(string fineTuningJobId, string after = null, int? limit = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Result<ListFineTuningJobEventsResponse>> GetEventsAsync(string fineTuningJobId, string after = null, long? limit = null, CancellationToken cancellationToken = default)
         {
             if (fineTuningJobId == null)
             {
@@ -455,7 +455,7 @@ namespace OpenAI
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual Result<ListFineTuningJobEventsResponse> GetEvents(string fineTuningJobId, string after = null, int? limit = null, CancellationToken cancellationToken = default)
+        public virtual Result<ListFineTuningJobEventsResponse> GetEvents(string fineTuningJobId, string after = null, long? limit = null, CancellationToken cancellationToken = default)
         {
             if (fineTuningJobId == null)
             {
@@ -481,7 +481,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetEventsAsync(string,string,int?,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetEventsAsync(string,string,long?,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -494,7 +494,7 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<Result> GetEventsAsync(string fineTuningJobId, string after, int? limit, RequestOptions context)
+        public virtual async Task<Result> GetEventsAsync(string fineTuningJobId, string after, long? limit, RequestOptions context)
         {
             if (fineTuningJobId == null)
             {
@@ -529,7 +529,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetEvents(string,string,int?,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetEvents(string,string,long?,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -542,7 +542,7 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual Result GetEvents(string fineTuningJobId, string after, int? limit, RequestOptions context)
+        public virtual Result GetEvents(string fineTuningJobId, string after, long? limit, RequestOptions context)
         {
             if (fineTuningJobId == null)
             {
@@ -751,7 +751,7 @@ namespace OpenAI
             return message;
         }
 
-        internal PipelineMessage CreateGetEventsRequest(string fineTuningJobId, string after, int? limit, RequestOptions context)
+        internal PipelineMessage CreateGetEventsRequest(string fineTuningJobId, string after, long? limit, RequestOptions context)
         {
             var message = _pipeline.CreateMessage(context, ResponseErrorClassifier200);
             var request = message.Request;

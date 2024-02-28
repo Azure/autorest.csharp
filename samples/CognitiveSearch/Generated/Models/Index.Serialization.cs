@@ -122,16 +122,16 @@ namespace CognitiveSearch.Models
             string name = default;
             IList<Field> fields = default;
             IList<ScoringProfile> scoringProfiles = default;
-            Optional<string> defaultScoringProfile = default;
-            Optional<CorsOptions> corsOptions = default;
+            string defaultScoringProfile = default;
+            CorsOptions corsOptions = default;
             IList<Suggester> suggesters = default;
             IList<Analyzer> analyzers = default;
             IList<Tokenizer> tokenizers = default;
             IList<TokenFilter> tokenFilters = default;
             IList<CharFilter> charFilters = default;
-            Optional<EncryptionKey> encryptionKey = default;
-            Optional<Similarity> similarity = default;
-            Optional<string> odataEtag = default;
+            EncryptionKey encryptionKey = default;
+            Similarity similarity = default;
+            string odataEtag = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -275,16 +275,16 @@ namespace CognitiveSearch.Models
                 name,
                 fields,
                 scoringProfiles ?? new ChangeTrackingList<ScoringProfile>(),
-                defaultScoringProfile.Value,
-                corsOptions.Value,
+                defaultScoringProfile,
+                corsOptions,
                 suggesters ?? new ChangeTrackingList<Suggester>(),
                 analyzers ?? new ChangeTrackingList<Analyzer>(),
                 tokenizers ?? new ChangeTrackingList<Tokenizer>(),
                 tokenFilters ?? new ChangeTrackingList<TokenFilter>(),
                 charFilters ?? new ChangeTrackingList<CharFilter>(),
-                encryptionKey.Value,
-                similarity.Value,
-                odataEtag.Value);
+                encryptionKey,
+                similarity,
+                odataEtag);
         }
     }
 }

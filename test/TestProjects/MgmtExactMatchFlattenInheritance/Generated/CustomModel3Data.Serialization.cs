@@ -44,10 +44,10 @@ namespace MgmtExactMatchFlattenInheritance
             {
                 return null;
             }
-            Optional<string> foo = default;
-            Optional<string> id = default;
-            Optional<string> name = default;
-            Optional<string> type = default;
+            string foo = default;
+            string id = default;
+            string name = default;
+            string type = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("foo"u8))
@@ -71,7 +71,7 @@ namespace MgmtExactMatchFlattenInheritance
                     continue;
                 }
             }
-            return new CustomModel3Data(id.Value, name.Value, type.Value, foo.Value);
+            return new CustomModel3Data(id, name, type, foo);
         }
     }
 }
