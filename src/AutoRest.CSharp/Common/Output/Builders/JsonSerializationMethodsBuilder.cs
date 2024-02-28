@@ -529,7 +529,14 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             value = value.NullableStructValue(valueSerialization.Type);
 
-            if (valueType == typeof(decimal) || valueType == typeof(double) || valueType == typeof(float) || valueType == typeof(long) || valueType == typeof(int) || valueType == typeof(short))
+            if (valueType == typeof(decimal) ||
+                valueType == typeof(double) ||
+                valueType == typeof(float) ||
+                valueType == typeof(long) ||
+                valueType == typeof(int) ||
+                valueType == typeof(short) ||
+                valueType == typeof(sbyte) ||
+                valueType == typeof(byte))
             {
                 return utf8JsonWriter.WriteNumberValue(value);
             }
@@ -1156,6 +1163,10 @@ namespace AutoRest.CSharp.Common.Output.Builders
             if (frameworkType == typeof(char))
                 return element.GetChar();
 
+            if (frameworkType == typeof(sbyte))
+                return element.GetSByte();
+            if (frameworkType == typeof(byte))
+                return element.GetByte();
             if (frameworkType == typeof(short))
                 return element.GetInt16();
             if (frameworkType == typeof(int))
