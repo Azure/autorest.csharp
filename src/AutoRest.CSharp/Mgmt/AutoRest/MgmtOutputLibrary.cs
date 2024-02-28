@@ -7,6 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -922,5 +923,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
             return operationsToOperationGroups;
         }
+
+        private IReadOnlyList<ExpressionTypeProvider>? _staticHelpers;
+        public IReadOnlyList<ExpressionTypeProvider> StaticHelpers => _staticHelpers ??= new ExpressionTypeProvider[]
+        {
+            ModelSerializationExtensionsProvider.Instance
+        };
     }
 }

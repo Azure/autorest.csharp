@@ -14,22 +14,22 @@ namespace AutoRest.CSharp.Common.Output.Expressions
         internal abstract class JsonElementSnippets
         {
             public virtual ValueExpression GetBytesFromBase64(JsonElementExpression element, string? format)
-                => InvokeExtension(ModelSerializationExtensionsTypeProvider.Instance.Type, element, ModelSerializationExtensionsTypeProvider.GetBytesFromBase64, Snippets.Literal(format));
+                => InvokeExtension(ModelSerializationExtensionsProvider.Instance.Type, element, ModelSerializationExtensionsProvider.GetBytesFromBase64, Snippets.Literal(format));
 
             public virtual ValueExpression GetChar(JsonElementExpression element)
-                => InvokeExtension(ModelSerializationExtensionsTypeProvider.Instance.Type, element, ModelSerializationExtensionsTypeProvider.GetChar);
+                => InvokeExtension(ModelSerializationExtensionsProvider.Instance.Type, element, ModelSerializationExtensionsProvider.GetChar);
 
             public virtual ValueExpression GetDateTimeOffset(JsonElementExpression element, string? format)
-                => InvokeExtension(ModelSerializationExtensionsTypeProvider.Instance.Type, element, ModelSerializationExtensionsTypeProvider.GetDateTimeOffset, Snippets.Literal(format));
+                => InvokeExtension(ModelSerializationExtensionsProvider.Instance.Type, element, ModelSerializationExtensionsProvider.GetDateTimeOffset, Snippets.Literal(format));
 
             public virtual ValueExpression GetObject(JsonElementExpression element)
-                => InvokeExtension(ModelSerializationExtensionsTypeProvider.Instance.Type, element, ModelSerializationExtensionsTypeProvider.GetObject);
+                => InvokeExtension(ModelSerializationExtensionsProvider.Instance.Type, element, ModelSerializationExtensionsProvider.GetObject);
 
             public virtual ValueExpression GetTimeSpan(JsonElementExpression element, string? format)
-                => InvokeExtension(ModelSerializationExtensionsTypeProvider.Instance.Type, element, ModelSerializationExtensionsTypeProvider.GetTimeSpan, Snippets.Literal(format));
+                => InvokeExtension(ModelSerializationExtensionsProvider.Instance.Type, element, ModelSerializationExtensionsProvider.GetTimeSpan, Snippets.Literal(format));
 
             public virtual MethodBodyStatement ThrowNonNullablePropertyIsNull(JsonPropertyExpression property)
-                => new InvokeStaticMethodStatement(ModelSerializationExtensionsTypeProvider.Instance.Type, ModelSerializationExtensionsTypeProvider.ThrowNonNullablePropertyIsNull, new[] { property }, CallAsExtension: true);
+                => new InvokeStaticMethodStatement(ModelSerializationExtensionsProvider.Instance.Type, ModelSerializationExtensionsProvider.ThrowNonNullablePropertyIsNull, new[] { property }, CallAsExtension: true);
         }
     }
 }

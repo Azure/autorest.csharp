@@ -85,10 +85,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"{operation.Type.Name}.cs", codeWriter.ToString());
             }
 
-            var serializationExtensionWriter = new CodeWriter();
-            var serializationExtension = ModelSerializationExtensionsTypeProvider.Instance;
-            new ExpressionTypeProviderWriter(serializationExtensionWriter, serializationExtension).Write();
-            project.AddHelperFile($"Internal/{serializationExtension.Type.Name}.cs", serializationExtensionWriter.ToString());
+            foreach (var helper in library.StaticHelpers)
+            {
+                var writer = new CodeWriter();
+                new ExpressionTypeProviderWriter(writer, helper).Write();
+                project.AddHelperFile($"Internal/{helper.Type.Name}.cs", writer.ToString());
+            }
         }
     }
 }

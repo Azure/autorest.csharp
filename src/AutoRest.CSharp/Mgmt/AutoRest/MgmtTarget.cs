@@ -227,10 +227,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 AddGeneratedFile(project, $"{modelFactoryProvider.Type.Name}.cs", modelFactoryWriter.ToString());
             }
 
-            var serializationExtensionWriter = new CodeWriter();
-            var serializationExtension = ModelSerializationExtensionsTypeProvider.Instance;
-            new ExpressionTypeProviderWriter(serializationExtensionWriter, serializationExtension).Write();
-            project.AddHelperFile($"Internal/{serializationExtension.Type.Name}.cs", serializationExtensionWriter.ToString());
+            foreach (var helper in MgmtContext.Library.StaticHelpers)
+            {
+                var writer = new CodeWriter();
+                new ExpressionTypeProviderWriter(writer, helper).Write();
+                project.AddHelperFile($"Internal/{helper.Type.Name}.cs", writer.ToString());
+            }
 
             if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))
                 throw new InvalidOperationException($"At least one file was overridden during the generation process. Filenames are: {string.Join(", ", overriddenFilenames)}");

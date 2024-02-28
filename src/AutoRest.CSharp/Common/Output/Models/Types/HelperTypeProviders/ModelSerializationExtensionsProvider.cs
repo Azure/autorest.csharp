@@ -20,13 +20,13 @@ using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Models.Types
 {
-    internal class ModelSerializationExtensionsTypeProvider : ExpressionTypeProvider
+    internal class ModelSerializationExtensionsProvider : ExpressionTypeProvider
     {
-        private static readonly Lazy<ModelSerializationExtensionsTypeProvider> _instance = new Lazy<ModelSerializationExtensionsTypeProvider>(() => new ModelSerializationExtensionsTypeProvider(Configuration.Namespace, null));
-        public static ModelSerializationExtensionsTypeProvider Instance => _instance.Value;
+        private static readonly Lazy<ModelSerializationExtensionsProvider> _instance = new Lazy<ModelSerializationExtensionsProvider>(() => new ModelSerializationExtensionsProvider(Configuration.Namespace, null));
+        public static ModelSerializationExtensionsProvider Instance => _instance.Value;
 
         private readonly MethodSignatureModifiers _methodModifiers = MethodSignatureModifiers.Public | MethodSignatureModifiers.Static | MethodSignatureModifiers.Extension;
-        public ModelSerializationExtensionsTypeProvider(string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
+        public ModelSerializationExtensionsProvider(string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
         {
             IsStatic = true;
         }

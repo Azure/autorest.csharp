@@ -40,10 +40,20 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 using (_writer.Scope())
                 {
+                    WriteFields();
+
                     WriteConstructors();
 
                     WriteMethods();
                 }
+            }
+        }
+
+        protected virtual void WriteFields()
+        {
+            foreach (var field in _provider.Fields)
+            {
+                _writer.WriteField(field);
             }
         }
 

@@ -35,18 +35,18 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
             => new InvokeInstanceMethodStatement(Untyped, nameof(Utf8JsonWriter.WriteRawValue), value);
 
         public MethodBodyStatement WriteNumberValue(ValueExpression value, string? format)
-            => new InvokeStaticMethodStatement(ModelSerializationExtensionsTypeProvider.Instance.Type, ModelSerializationExtensionsTypeProvider.WriteNumberValue, new[] { Untyped, value, Literal(format) }, null, true);
+            => new InvokeStaticMethodStatement(ModelSerializationExtensionsProvider.Instance.Type, ModelSerializationExtensionsProvider.WriteNumberValue, new[] { Untyped, value, Literal(format) }, null, true);
 
         public MethodBodyStatement WriteStringValue(ValueExpression value, string? format)
-            => new InvokeStaticMethodStatement(ModelSerializationExtensionsTypeProvider.Instance.Type, ModelSerializationExtensionsTypeProvider.WriteStringValue, new[] { Untyped, value, Literal(format) }, null, true);
+            => new InvokeStaticMethodStatement(ModelSerializationExtensionsProvider.Instance.Type, ModelSerializationExtensionsProvider.WriteStringValue, new[] { Untyped, value, Literal(format) }, null, true);
 
         public MethodBodyStatement WriteObjectValue(ValueExpression value)
-            => new InvokeStaticMethodStatement(ModelSerializationExtensionsTypeProvider.Instance.Type, ModelSerializationExtensionsTypeProvider.WriteObjectValue, new[] { Untyped, value }, null, true);
+            => new InvokeStaticMethodStatement(ModelSerializationExtensionsProvider.Instance.Type, ModelSerializationExtensionsProvider.WriteObjectValue, new[] { Untyped, value }, null, true);
 
         public MethodBodyStatement WriteBase64StringValue(ValueExpression value)
             => Invoke(nameof(Utf8JsonWriter.WriteBase64StringValue), value).ToStatement();
 
         public MethodBodyStatement WriteBase64StringValue(ValueExpression value, string? format)
-            => new InvokeStaticMethodStatement(ModelSerializationExtensionsTypeProvider.Instance.Type, ModelSerializationExtensionsTypeProvider.WriteBase64StringValue, new[] { Untyped, value, Literal(format) }, null, true);
+            => new InvokeStaticMethodStatement(ModelSerializationExtensionsProvider.Instance.Type, ModelSerializationExtensionsProvider.WriteBase64StringValue, new[] { Untyped, value, Literal(format) }, null, true);
     }
 }
