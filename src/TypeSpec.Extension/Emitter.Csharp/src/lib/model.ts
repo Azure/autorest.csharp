@@ -72,7 +72,7 @@ import {
     getWireName,
     isInternal
 } from "@azure-tools/typespec-client-generator-core";
-import { capitalize, getSerializeName, getTypeName } from "./utils.js";
+import { capitalize, getTypeName } from "./utils.js";
 import { InputTypeKind } from "../type/inputTypeKind.js";
 import { InputIntrinsicTypeKind } from "../type/inputIntrinsicTypeKind.js";
 /**
