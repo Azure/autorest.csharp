@@ -48,7 +48,6 @@ $files = @('AsyncLockWithValue.cs', 'CallerShouldAuditAttribute.cs', 'ClientDiag
     'NextLinkOperationImplementation.cs',
     'NoValueResponseOfT.cs',
     'OperationFinalStateVia.cs',
-    'Optional.cs',
     'Page.cs',
     'PageableHelpers.cs',
     'ProtocolOperation.cs',
