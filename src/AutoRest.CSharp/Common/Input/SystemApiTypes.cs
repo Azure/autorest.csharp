@@ -84,9 +84,6 @@ namespace AutoRest.CSharp.Common.Input
 
         public override Type Utf8JsonWriterExtensionsType => typeof(ModelSerializationExtensions);
 
-        public override Type OptionalType => typeof(OptionalProperty);
-        public override Type OptionalPropertyType => typeof(OptionalProperty<>);
-
         public override Type RequestFailedExceptionType => typeof(MessageFailedException);
 
         public override Type ResponseClassifierType => typeof(ResponseErrorClassifier);
