@@ -99,10 +99,10 @@ namespace body_complex.Models
                     case "sawshark": return Sawshark.DeserializeSawshark(element, options);
                 }
             }
-            Optional<int> age = default;
+            int? age = default;
             DateTimeOffset birthday = default;
             string fishtype = "shark";
-            Optional<string> species = default;
+            string species = default;
             float length = default;
             IList<Fish> siblings = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
@@ -160,11 +160,11 @@ namespace body_complex.Models
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new Shark(
                 fishtype,
-                species.Value,
+                species,
                 length,
                 siblings ?? new ChangeTrackingList<Fish>(),
                 serializedAdditionalRawData,
-                Optional.ToNullable(age),
+                age,
                 birthday);
         }
 

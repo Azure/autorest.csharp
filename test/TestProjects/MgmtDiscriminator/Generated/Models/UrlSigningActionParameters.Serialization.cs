@@ -84,7 +84,7 @@ namespace MgmtDiscriminator.Models
                 return null;
             }
             UrlSigningActionParametersTypeName typeName = default;
-            Optional<Algorithm> algorithm = default;
+            Algorithm? algorithm = default;
             IList<UrlSigningParamIdentifier> parameterNameOverride = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -124,7 +124,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new UrlSigningActionParameters(typeName, Optional.ToNullable(algorithm), parameterNameOverride ?? new ChangeTrackingList<UrlSigningParamIdentifier>(), serializedAdditionalRawData);
+            return new UrlSigningActionParameters(typeName, algorithm, parameterNameOverride ?? new ChangeTrackingList<UrlSigningParamIdentifier>(), serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

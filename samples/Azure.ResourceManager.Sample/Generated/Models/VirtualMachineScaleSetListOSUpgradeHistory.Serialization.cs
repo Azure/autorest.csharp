@@ -85,8 +85,8 @@ namespace Azure.ResourceManager.Sample.Models
                 return null;
             }
             IReadOnlyList<UpgradeOperationHistoricalStatusInfo> value = default;
-            Optional<ETag> etag = default;
-            Optional<string> nextLink = default;
+            ETag? etag = default;
+            string nextLink = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -121,7 +121,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineScaleSetListOSUpgradeHistory(value, Optional.ToNullable(etag), nextLink.Value, serializedAdditionalRawData);
+            return new VirtualMachineScaleSetListOSUpgradeHistory(value, etag, nextLink, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

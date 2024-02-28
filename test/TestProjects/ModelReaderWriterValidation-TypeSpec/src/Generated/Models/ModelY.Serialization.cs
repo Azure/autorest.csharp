@@ -79,7 +79,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             }
             string yProperty = default;
             string kind = default;
-            Optional<string> name = default;
+            string name = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -105,7 +105,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ModelY(kind, name.Value, serializedAdditionalRawData, yProperty);
+            return new ModelY(kind, name, serializedAdditionalRawData, yProperty);
         }
 
         BinaryData IPersistableModel<ModelY>.Write(ModelReaderWriterOptions options)

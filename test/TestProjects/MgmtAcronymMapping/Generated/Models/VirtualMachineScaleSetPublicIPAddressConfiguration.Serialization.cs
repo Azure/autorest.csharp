@@ -62,11 +62,11 @@ namespace MgmtAcronymMapping.Models
                 return null;
             }
             string name = default;
-            Optional<int> idleTimeoutInMinutes = default;
-            Optional<VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings> dnsSettings = default;
+            int? idleTimeoutInMinutes = default;
+            VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings dnsSettings = default;
             IList<VirtualMachineScaleSetIPTag> ipTags = default;
-            Optional<WritableSubResource> publicIPPrefix = default;
-            Optional<IPVersion> publicIPAddressVersion = default;
+            WritableSubResource publicIPPrefix = default;
+            IPVersion? publicIPAddressVersion = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -139,11 +139,11 @@ namespace MgmtAcronymMapping.Models
             }
             return new VirtualMachineScaleSetPublicIPAddressConfiguration(
                 name,
-                Optional.ToNullable(idleTimeoutInMinutes),
-                dnsSettings.Value,
+                idleTimeoutInMinutes,
+                dnsSettings,
                 ipTags ?? new ChangeTrackingList<VirtualMachineScaleSetIPTag>(),
                 publicIPPrefix,
-                Optional.ToNullable(publicIPAddressVersion));
+                publicIPAddressVersion);
         }
     }
 }

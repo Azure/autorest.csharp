@@ -72,7 +72,7 @@ namespace _Type.Property.Optionality.Models
             {
                 return null;
             }
-            Optional<string> optionalProperty = default;
+            string optionalProperty = default;
             int requiredProperty = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -94,7 +94,7 @@ namespace _Type.Property.Optionality.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new RequiredAndOptionalProperty(optionalProperty.Value, requiredProperty, serializedAdditionalRawData);
+            return new RequiredAndOptionalProperty(optionalProperty, requiredProperty, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<RequiredAndOptionalProperty>.Write(ModelReaderWriterOptions options)

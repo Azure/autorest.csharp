@@ -118,22 +118,22 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> etag = default;
-            Optional<string> id = default;
+            string name = default;
+            string etag = default;
+            string id = default;
             IList<VirtualNetworkTap> virtualNetworkTaps = default;
             IList<ApplicationGatewayBackendAddressPool> applicationGatewayBackendAddressPools = default;
             IList<BackendAddressPool> loadBalancerBackendAddressPools = default;
             IList<InboundNatRule> loadBalancerInboundNatRules = default;
-            Optional<string> privateIPAddress = default;
-            Optional<IPAllocationMethod> privateIPAllocationMethod = default;
-            Optional<IPVersion> privateIPAddressVersion = default;
-            Optional<Subnet> subnet = default;
-            Optional<bool> primary = default;
-            Optional<PublicIPAddress> publicIPAddress = default;
+            string privateIPAddress = default;
+            IPAllocationMethod? privateIPAllocationMethod = default;
+            IPVersion? privateIPAddressVersion = default;
+            Subnet subnet = default;
+            bool? primary = default;
+            PublicIPAddress publicIPAddress = default;
             IList<ApplicationSecurityGroup> applicationSecurityGroups = default;
-            Optional<ProvisioningState> provisioningState = default;
-            Optional<NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties> privateLinkConnectionProperties = default;
+            ProvisioningState? provisioningState = default;
+            NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties privateLinkConnectionProperties = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -303,22 +303,22 @@ namespace Azure.Network.Management.Interface.Models
                 }
             }
             return new NetworkInterfaceIPConfiguration(
-                id.Value,
-                name.Value,
-                etag.Value,
+                id,
+                name,
+                etag,
                 virtualNetworkTaps ?? new ChangeTrackingList<VirtualNetworkTap>(),
                 applicationGatewayBackendAddressPools ?? new ChangeTrackingList<ApplicationGatewayBackendAddressPool>(),
                 loadBalancerBackendAddressPools ?? new ChangeTrackingList<BackendAddressPool>(),
                 loadBalancerInboundNatRules ?? new ChangeTrackingList<InboundNatRule>(),
-                privateIPAddress.Value,
-                Optional.ToNullable(privateIPAllocationMethod),
-                Optional.ToNullable(privateIPAddressVersion),
-                subnet.Value,
-                Optional.ToNullable(primary),
-                publicIPAddress.Value,
+                privateIPAddress,
+                privateIPAllocationMethod,
+                privateIPAddressVersion,
+                subnet,
+                primary,
+                publicIPAddress,
                 applicationSecurityGroups ?? new ChangeTrackingList<ApplicationSecurityGroup>(),
-                Optional.ToNullable(provisioningState),
-                privateLinkConnectionProperties.Value);
+                provisioningState,
+                privateLinkConnectionProperties);
         }
     }
 }

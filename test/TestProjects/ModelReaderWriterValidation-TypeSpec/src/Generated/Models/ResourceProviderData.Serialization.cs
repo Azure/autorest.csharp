@@ -100,12 +100,12 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             {
                 return null;
             }
-            Optional<string> id = default;
-            Optional<string> @namespace = default;
-            Optional<string> registrationState = default;
-            Optional<string> registrationPolicy = default;
+            string id = default;
+            string @namespace = default;
+            string registrationState = default;
+            string registrationPolicy = default;
             IReadOnlyList<ProviderResourceType> resourceTypes = default;
-            Optional<ProviderAuthorizationConsentState> providerAuthorizationConsentState = default;
+            ProviderAuthorizationConsentState? providerAuthorizationConsentState = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -160,12 +160,12 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ResourceProviderData(
-                id.Value,
-                @namespace.Value,
-                registrationState.Value,
-                registrationPolicy.Value,
+                id,
+                @namespace,
+                registrationState,
+                registrationPolicy,
                 resourceTypes ?? new ChangeTrackingList<ProviderResourceType>(),
-                Optional.ToNullable(providerAuthorizationConsentState),
+                providerAuthorizationConsentState,
                 serializedAdditionalRawData);
         }
 

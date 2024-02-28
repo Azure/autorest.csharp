@@ -7,7 +7,6 @@
 
 using System;
 using System.Text.Json;
-using Azure.Core;
 
 namespace MgmtScopeResource.Models
 {
@@ -21,9 +20,9 @@ namespace MgmtScopeResource.Models
             }
             string resourceId = default;
             ChangeType changeType = default;
-            Optional<string> unsupportedReason = default;
-            Optional<BinaryData> before = default;
-            Optional<BinaryData> after = default;
+            string unsupportedReason = default;
+            BinaryData before = default;
+            BinaryData after = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("resourceId"u8))
@@ -60,7 +59,7 @@ namespace MgmtScopeResource.Models
                     continue;
                 }
             }
-            return new WhatIfChange(resourceId, changeType, unsupportedReason.Value, before.Value, after.Value);
+            return new WhatIfChange(resourceId, changeType, unsupportedReason, before, after);
         }
     }
 }

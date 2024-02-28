@@ -43,9 +43,9 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            Optional<string> pattern = default;
-            Optional<RegexFlags> flags = default;
-            Optional<int> group = default;
+            string pattern = default;
+            RegexFlags? flags = default;
+            int? group = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
@@ -84,7 +84,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new PatternTokenizer(odataType, name, pattern.Value, Optional.ToNullable(flags), Optional.ToNullable(group));
+            return new PatternTokenizer(odataType, name, pattern, flags, group);
         }
     }
 }

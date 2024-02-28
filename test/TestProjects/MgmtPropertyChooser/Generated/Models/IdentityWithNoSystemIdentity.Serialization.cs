@@ -42,7 +42,7 @@ namespace MgmtPropertyChooser.Models
             {
                 return null;
             }
-            Optional<ResourceIdentityType> type = default;
+            ResourceIdentityType? type = default;
             IDictionary<string, UserAssignedIdentity> userAssignedIdentities = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -70,7 +70,7 @@ namespace MgmtPropertyChooser.Models
                     continue;
                 }
             }
-            return new IdentityWithNoSystemIdentity(Optional.ToNullable(type), userAssignedIdentities ?? new ChangeTrackingDictionary<string, UserAssignedIdentity>());
+            return new IdentityWithNoSystemIdentity(type, userAssignedIdentities ?? new ChangeTrackingDictionary<string, UserAssignedIdentity>());
         }
     }
 }

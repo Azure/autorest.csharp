@@ -24,9 +24,9 @@ namespace MgmtCollectionParent
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
+            SystemData systemData = default;
             IReadOnlyList<string> orderItemIds = default;
-            Optional<StageDetails> currentStage = default;
+            StageDetails currentStage = default;
             IReadOnlyList<StageDetails> orderStageHistory = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -108,9 +108,9 @@ namespace MgmtCollectionParent
                 id,
                 name,
                 type,
-                systemData.Value,
+                systemData,
                 orderItemIds ?? new ChangeTrackingList<string>(),
-                currentStage.Value,
+                currentStage,
                 orderStageHistory ?? new ChangeTrackingList<StageDetails>());
         }
     }

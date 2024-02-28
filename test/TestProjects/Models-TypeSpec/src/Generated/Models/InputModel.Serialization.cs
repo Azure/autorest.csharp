@@ -295,8 +295,8 @@ namespace ModelsTypeSpec.Models
             int requiredInt = default;
             int? requiredNullableInt = default;
             string requiredNullableString = default;
-            Optional<int?> nonRequiredNullableInt = default;
-            Optional<string> nonRequiredNullableString = default;
+            int? nonRequiredNullableInt = default;
+            string nonRequiredNullableString = default;
             BaseModel requiredModel = default;
             BaseModel requiredModel2 = default;
             IList<int> requiredIntList = default;
@@ -592,8 +592,8 @@ namespace ModelsTypeSpec.Models
                 requiredInt,
                 requiredNullableInt,
                 requiredNullableString,
-                Optional.ToNullable(nonRequiredNullableInt),
-                nonRequiredNullableString.Value,
+                nonRequiredNullableInt,
+                nonRequiredNullableString,
                 requiredModel,
                 requiredModel2,
                 requiredIntList,

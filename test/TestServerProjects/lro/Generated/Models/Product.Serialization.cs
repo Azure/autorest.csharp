@@ -108,13 +108,13 @@ namespace lro.Models
             {
                 return null;
             }
-            Optional<string> id = default;
-            Optional<string> type = default;
+            string id = default;
+            string type = default;
             IDictionary<string, string> tags = default;
-            Optional<string> location = default;
-            Optional<string> name = default;
-            Optional<string> provisioningState = default;
-            Optional<ProductPropertiesProvisioningStateValues> provisioningStateValues = default;
+            string location = default;
+            string name = default;
+            string provisioningState = default;
+            ProductPropertiesProvisioningStateValues? provisioningStateValues = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -186,14 +186,14 @@ namespace lro.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new Product(
-                id.Value,
-                type.Value,
+                id,
+                type,
                 tags ?? new ChangeTrackingDictionary<string, string>(),
-                location.Value,
-                name.Value,
+                location,
+                name,
                 serializedAdditionalRawData,
-                provisioningState.Value,
-                Optional.ToNullable(provisioningStateValues));
+                provisioningState,
+                provisioningStateValues);
         }
 
         BinaryData IPersistableModel<Product>.Write(ModelReaderWriterOptions options)

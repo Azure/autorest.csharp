@@ -29,7 +29,7 @@ namespace MgmtExpandResourceTypes.Models
             {
                 return null;
             }
-            Optional<string> nsdname = default;
+            string nsdname = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("nsdname"u8))
@@ -38,7 +38,7 @@ namespace MgmtExpandResourceTypes.Models
                     continue;
                 }
             }
-            return new NsRecord(nsdname.Value);
+            return new NsRecord(nsdname);
         }
     }
 }

@@ -80,8 +80,8 @@ namespace additionalProperties.Models
                 return null;
             }
             int id = default;
-            Optional<string> name = default;
-            Optional<bool> status = default;
+            string name = default;
+            bool? status = default;
             string odataLocation = default;
             IDictionary<string, float> additionalProperties = default;
             IDictionary<string, string> moreAdditionalProperties = default;
@@ -131,8 +131,8 @@ namespace additionalProperties.Models
             moreAdditionalProperties = additionalPropertiesDictionary;
             return new PetAPInPropertiesWithAPString(
                 id,
-                name.Value,
-                Optional.ToNullable(status),
+                name,
+                status,
                 odataLocation,
                 additionalProperties ?? new ChangeTrackingDictionary<string, float>(),
                 moreAdditionalProperties);

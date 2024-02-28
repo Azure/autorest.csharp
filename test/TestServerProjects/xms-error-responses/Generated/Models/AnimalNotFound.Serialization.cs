@@ -81,10 +81,10 @@ namespace xms_error_responses.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> reason = default;
+            string name = default;
+            string reason = default;
             string whatNotFound = default;
-            Optional<string> someBaseProp = default;
+            string someBaseProp = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -115,7 +115,7 @@ namespace xms_error_responses.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new AnimalNotFound(someBaseProp.Value, serializedAdditionalRawData, reason.Value, whatNotFound, name.Value);
+            return new AnimalNotFound(someBaseProp, serializedAdditionalRawData, reason, whatNotFound, name);
         }
 
         BinaryData IPersistableModel<AnimalNotFound>.Write(ModelReaderWriterOptions options)

@@ -121,16 +121,16 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<string> patchId = default;
-            Optional<string> name = default;
-            Optional<string> version = default;
-            Optional<string> kbid = default;
+            string patchId = default;
+            string name = default;
+            string version = default;
+            string kbid = default;
             IReadOnlyList<string> classifications = default;
-            Optional<SoftwareUpdateRebootBehavior> rebootBehavior = default;
-            Optional<string> activityId = default;
-            Optional<DateTimeOffset> publishedDate = default;
-            Optional<DateTimeOffset> lastModifiedDateTime = default;
-            Optional<PatchAssessmentState> assessmentState = default;
+            SoftwareUpdateRebootBehavior? rebootBehavior = default;
+            string activityId = default;
+            DateTimeOffset? publishedDate = default;
+            DateTimeOffset? lastModifiedDateTime = default;
+            PatchAssessmentState? assessmentState = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -217,16 +217,16 @@ namespace Azure.ResourceManager.Sample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new VirtualMachineSoftwarePatchProperties(
-                patchId.Value,
-                name.Value,
-                version.Value,
-                kbid.Value,
+                patchId,
+                name,
+                version,
+                kbid,
                 classifications ?? new ChangeTrackingList<string>(),
-                Optional.ToNullable(rebootBehavior),
-                activityId.Value,
-                Optional.ToNullable(publishedDate),
-                Optional.ToNullable(lastModifiedDateTime),
-                Optional.ToNullable(assessmentState),
+                rebootBehavior,
+                activityId,
+                publishedDate,
+                lastModifiedDateTime,
+                assessmentState,
                 serializedAdditionalRawData);
         }
 

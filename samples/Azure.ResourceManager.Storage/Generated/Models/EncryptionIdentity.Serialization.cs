@@ -29,7 +29,7 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Optional<string> userAssignedIdentity = default;
+            string userAssignedIdentity = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("userAssignedIdentity"u8))
@@ -38,7 +38,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new EncryptionIdentity(userAssignedIdentity.Value);
+            return new EncryptionIdentity(userAssignedIdentity);
         }
     }
 }

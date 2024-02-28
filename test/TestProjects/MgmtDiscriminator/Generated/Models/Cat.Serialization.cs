@@ -77,9 +77,9 @@ namespace MgmtDiscriminator.Models
             {
                 return null;
             }
-            Optional<string> meow = default;
+            string meow = default;
             PetKind kind = default;
-            Optional<string> id = default;
+            string id = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -105,7 +105,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Cat(kind, id.Value, serializedAdditionalRawData, meow.Value);
+            return new Cat(kind, id, serializedAdditionalRawData, meow);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

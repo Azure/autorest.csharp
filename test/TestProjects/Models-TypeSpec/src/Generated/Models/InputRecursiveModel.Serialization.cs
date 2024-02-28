@@ -73,7 +73,7 @@ namespace ModelsTypeSpec.Models
                 return null;
             }
             string message = default;
-            Optional<InputRecursiveModel> inner = default;
+            InputRecursiveModel inner = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -98,7 +98,7 @@ namespace ModelsTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new InputRecursiveModel(message, inner.Value, serializedAdditionalRawData);
+            return new InputRecursiveModel(message, inner, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<InputRecursiveModel>.Write(ModelReaderWriterOptions options)

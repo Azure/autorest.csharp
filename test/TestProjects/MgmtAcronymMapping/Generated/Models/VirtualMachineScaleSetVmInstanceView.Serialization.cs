@@ -19,17 +19,17 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<int> platformUpdateDomain = default;
-            Optional<int> platformFaultDomain = default;
-            Optional<string> rdpThumbPrint = default;
-            Optional<VirtualMachineAgentInstanceView> vmAgent = default;
-            Optional<MaintenanceRedeployStatus> maintenanceRedeployStatus = default;
+            int? platformUpdateDomain = default;
+            int? platformFaultDomain = default;
+            string rdpThumbPrint = default;
+            VirtualMachineAgentInstanceView vmAgent = default;
+            MaintenanceRedeployStatus maintenanceRedeployStatus = default;
             IReadOnlyList<DiskInstanceView> disks = default;
-            Optional<VirtualMachineHealthStatus> vmHealth = default;
-            Optional<BootDiagnosticsInstanceView> bootDiagnostics = default;
+            VirtualMachineHealthStatus vmHealth = default;
+            BootDiagnosticsInstanceView bootDiagnostics = default;
             IReadOnlyList<InstanceViewStatus> statuses = default;
-            Optional<string> assignedHost = default;
-            Optional<ResourceIdentifier> placementGroupId = default;
+            string assignedHost = default;
+            ResourceIdentifier placementGroupId = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("platformUpdateDomain"u8))
@@ -135,17 +135,17 @@ namespace MgmtAcronymMapping.Models
                 }
             }
             return new VirtualMachineScaleSetVmInstanceView(
-                Optional.ToNullable(platformUpdateDomain),
-                Optional.ToNullable(platformFaultDomain),
-                rdpThumbPrint.Value,
-                vmAgent.Value,
-                maintenanceRedeployStatus.Value,
+                platformUpdateDomain,
+                platformFaultDomain,
+                rdpThumbPrint,
+                vmAgent,
+                maintenanceRedeployStatus,
                 disks ?? new ChangeTrackingList<DiskInstanceView>(),
-                vmHealth.Value,
-                bootDiagnostics.Value,
+                vmHealth,
+                bootDiagnostics,
                 statuses ?? new ChangeTrackingList<InstanceViewStatus>(),
-                assignedHost.Value,
-                placementGroupId.Value);
+                assignedHost,
+                placementGroupId);
         }
     }
 }

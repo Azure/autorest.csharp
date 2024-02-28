@@ -29,7 +29,7 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<VeryDeepSinglePropertyModel> super = default;
+            VeryDeepSinglePropertyModel super = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("super"u8))
@@ -42,7 +42,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new SuperDeepSinglePropertyModel(super.Value);
+            return new SuperDeepSinglePropertyModel(super);
         }
     }
 }

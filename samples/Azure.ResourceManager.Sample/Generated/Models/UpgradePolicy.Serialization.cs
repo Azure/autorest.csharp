@@ -80,9 +80,9 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<UpgradeMode> mode = default;
-            Optional<RollingUpgradePolicy> rollingUpgradePolicy = default;
-            Optional<AutomaticOSUpgradePolicy> automaticOSUpgradePolicy = default;
+            UpgradeMode? mode = default;
+            RollingUpgradePolicy rollingUpgradePolicy = default;
+            AutomaticOSUpgradePolicy automaticOSUpgradePolicy = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -120,7 +120,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new UpgradePolicy(Optional.ToNullable(mode), rollingUpgradePolicy.Value, automaticOSUpgradePolicy.Value, serializedAdditionalRawData);
+            return new UpgradePolicy(mode, rollingUpgradePolicy, automaticOSUpgradePolicy, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

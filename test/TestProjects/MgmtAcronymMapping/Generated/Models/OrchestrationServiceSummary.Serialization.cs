@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -18,8 +17,8 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<OrchestrationServiceName> serviceName = default;
-            Optional<OrchestrationServiceState> serviceState = default;
+            OrchestrationServiceName? serviceName = default;
+            OrchestrationServiceState? serviceState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("serviceName"u8))
@@ -41,7 +40,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new OrchestrationServiceSummary(Optional.ToNullable(serviceName), Optional.ToNullable(serviceState));
+            return new OrchestrationServiceSummary(serviceName, serviceState);
         }
     }
 }

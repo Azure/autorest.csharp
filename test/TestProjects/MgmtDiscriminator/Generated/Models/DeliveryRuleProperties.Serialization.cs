@@ -107,12 +107,12 @@ namespace MgmtDiscriminator.Models
             {
                 return null;
             }
-            Optional<int> order = default;
-            Optional<DeliveryRuleCondition> conditions = default;
+            int? order = default;
+            DeliveryRuleCondition conditions = default;
             IList<DeliveryRuleAction> actions = default;
             IDictionary<string, DeliveryRuleAction> extraMappingInfo = default;
-            Optional<Pet> pet = default;
-            Optional<string> foo = default;
+            Pet pet = default;
+            string foo = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -184,12 +184,12 @@ namespace MgmtDiscriminator.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new DeliveryRuleProperties(
-                Optional.ToNullable(order),
-                conditions.Value,
+                order,
+                conditions,
                 actions ?? new ChangeTrackingList<DeliveryRuleAction>(),
                 extraMappingInfo ?? new ChangeTrackingDictionary<string, DeliveryRuleAction>(),
-                pet.Value,
-                foo.Value,
+                pet,
+                foo,
                 serializedAdditionalRawData);
         }
 

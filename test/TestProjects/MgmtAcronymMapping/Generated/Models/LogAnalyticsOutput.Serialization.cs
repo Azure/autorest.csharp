@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -18,7 +17,7 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<string> output = default;
+            string output = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("output"u8))
@@ -27,7 +26,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new LogAnalyticsOutput(output.Value);
+            return new LogAnalyticsOutput(output);
         }
     }
 }

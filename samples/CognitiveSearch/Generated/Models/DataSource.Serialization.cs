@@ -53,13 +53,13 @@ namespace CognitiveSearch.Models
                 return null;
             }
             string name = default;
-            Optional<string> description = default;
+            string description = default;
             DataSourceType type = default;
             DataSourceCredentials credentials = default;
             DataContainer container = default;
-            Optional<DataChangeDetectionPolicy> dataChangeDetectionPolicy = default;
-            Optional<DataDeletionDetectionPolicy> dataDeletionDetectionPolicy = default;
-            Optional<string> odataEtag = default;
+            DataChangeDetectionPolicy dataChangeDetectionPolicy = default;
+            DataDeletionDetectionPolicy dataDeletionDetectionPolicy = default;
+            string odataEtag = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -113,13 +113,13 @@ namespace CognitiveSearch.Models
             }
             return new DataSource(
                 name,
-                description.Value,
+                description,
                 type,
                 credentials,
                 container,
-                dataChangeDetectionPolicy.Value,
-                dataDeletionDetectionPolicy.Value,
-                odataEtag.Value);
+                dataChangeDetectionPolicy,
+                dataDeletionDetectionPolicy,
+                odataEtag);
         }
     }
 }

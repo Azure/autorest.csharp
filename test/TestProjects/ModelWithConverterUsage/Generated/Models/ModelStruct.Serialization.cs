@@ -71,7 +71,7 @@ namespace ModelWithConverterUsage.Models
         {
             options ??= new ModelReaderWriterOptions("W");
 
-            Optional<string> modelProperty = default;
+            string modelProperty = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -87,7 +87,7 @@ namespace ModelWithConverterUsage.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ModelStruct(modelProperty.Value, serializedAdditionalRawData);
+            return new ModelStruct(modelProperty, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ModelStruct>.Write(ModelReaderWriterOptions options)

@@ -71,10 +71,10 @@ namespace additionalProperties.Models
             {
                 return null;
             }
-            Optional<bool> friendly = default;
+            bool? friendly = default;
             int id = default;
-            Optional<string> name = default;
-            Optional<bool> status = default;
+            string name = default;
+            bool? status = default;
             IDictionary<string, object> additionalProperties = default;
             Dictionary<string, object> additionalPropertiesDictionary = new Dictionary<string, object>();
             foreach (var property in element.EnumerateObject())
@@ -110,7 +110,7 @@ namespace additionalProperties.Models
                 additionalPropertiesDictionary.Add(property.Name, property.Value.GetObject());
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new CatAPTrue(id, name.Value, Optional.ToNullable(status), additionalProperties, Optional.ToNullable(friendly));
+            return new CatAPTrue(id, name, status, additionalProperties, friendly);
         }
 
         BinaryData IPersistableModel<CatAPTrue>.Write(ModelReaderWriterOptions options)

@@ -34,8 +34,8 @@ namespace MgmtLRO.Models
             {
                 return null;
             }
-            Optional<int> platformUpdateDomainCount = default;
-            Optional<int> platformFaultDomainCount = default;
+            int? platformUpdateDomainCount = default;
+            int? platformFaultDomainCount = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("platformUpdateDomainCount"u8))
@@ -57,7 +57,7 @@ namespace MgmtLRO.Models
                     continue;
                 }
             }
-            return new FakeProperties(Optional.ToNullable(platformUpdateDomainCount), Optional.ToNullable(platformFaultDomainCount));
+            return new FakeProperties(platformUpdateDomainCount, platformFaultDomainCount);
         }
     }
 }

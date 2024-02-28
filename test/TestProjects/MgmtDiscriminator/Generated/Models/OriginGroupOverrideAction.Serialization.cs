@@ -76,7 +76,7 @@ namespace MgmtDiscriminator.Models
             }
             OriginGroupOverrideActionParameters parameters = default;
             DeliveryRuleActionType name = default;
-            Optional<string> foo = default;
+            string foo = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -102,7 +102,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new OriginGroupOverrideAction(name, foo.Value, serializedAdditionalRawData, parameters);
+            return new OriginGroupOverrideAction(name, foo, serializedAdditionalRawData, parameters);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

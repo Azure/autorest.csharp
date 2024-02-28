@@ -113,13 +113,13 @@ namespace Azure.ResourceManager.Sample.Models
                 return null;
             }
             string name = default;
-            Optional<string> id = default;
-            Optional<bool> primary = default;
-            Optional<bool> enableAcceleratedNetworking = default;
-            Optional<WritableSubResource> networkSecurityGroup = default;
-            Optional<VirtualMachineScaleSetNetworkConfigurationDnsSettings> dnsSettings = default;
+            string id = default;
+            bool? primary = default;
+            bool? enableAcceleratedNetworking = default;
+            WritableSubResource networkSecurityGroup = default;
+            VirtualMachineScaleSetNetworkConfigurationDnsSettings dnsSettings = default;
             IList<VirtualMachineScaleSetIPConfiguration> ipConfigurations = default;
-            Optional<bool> enableIPForwarding = default;
+            bool? enableIPForwarding = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -212,15 +212,15 @@ namespace Azure.ResourceManager.Sample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new VirtualMachineScaleSetNetworkConfiguration(
-                id.Value,
+                id,
                 serializedAdditionalRawData,
                 name,
-                Optional.ToNullable(primary),
-                Optional.ToNullable(enableAcceleratedNetworking),
+                primary,
+                enableAcceleratedNetworking,
                 networkSecurityGroup,
-                dnsSettings.Value,
+                dnsSettings,
                 ipConfigurations ?? new ChangeTrackingList<VirtualMachineScaleSetIPConfiguration>(),
-                Optional.ToNullable(enableIPForwarding));
+                enableIPForwarding);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

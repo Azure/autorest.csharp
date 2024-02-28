@@ -20,7 +20,7 @@ namespace MgmtScopeResource.Models
                 return null;
             }
             IReadOnlyList<DeploymentOperation> value = default;
-            Optional<string> nextLink = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -43,7 +43,7 @@ namespace MgmtScopeResource.Models
                     continue;
                 }
             }
-            return new DeploymentOperationsListResult(value ?? new ChangeTrackingList<DeploymentOperation>(), nextLink.Value);
+            return new DeploymentOperationsListResult(value ?? new ChangeTrackingList<DeploymentOperation>(), nextLink);
         }
     }
 }

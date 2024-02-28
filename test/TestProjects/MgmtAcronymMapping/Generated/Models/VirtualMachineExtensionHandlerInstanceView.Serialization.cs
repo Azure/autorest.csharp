@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -18,9 +17,9 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<string> type = default;
-            Optional<string> typeHandlerVersion = default;
-            Optional<InstanceViewStatus> status = default;
+            string type = default;
+            string typeHandlerVersion = default;
+            InstanceViewStatus status = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("type"u8))
@@ -43,7 +42,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineExtensionHandlerInstanceView(type.Value, typeHandlerVersion.Value, status.Value);
+            return new VirtualMachineExtensionHandlerInstanceView(type, typeHandlerVersion, status);
         }
     }
 }

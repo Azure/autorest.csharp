@@ -63,15 +63,15 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> type = default;
-            Optional<string> etag = default;
-            Optional<string> id = default;
-            Optional<ProvisioningState> provisioningState = default;
-            Optional<string> privateLinkServiceId = default;
+            string name = default;
+            string type = default;
+            string etag = default;
+            string id = default;
+            ProvisioningState? provisioningState = default;
+            string privateLinkServiceId = default;
             IList<string> groupIds = default;
-            Optional<string> requestMessage = default;
-            Optional<PrivateLinkServiceConnectionState> privateLinkServiceConnectionState = default;
+            string requestMessage = default;
+            PrivateLinkServiceConnectionState privateLinkServiceConnectionState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -150,15 +150,15 @@ namespace Azure.Network.Management.Interface.Models
                 }
             }
             return new PrivateLinkServiceConnection(
-                id.Value,
-                name.Value,
-                type.Value,
-                etag.Value,
-                Optional.ToNullable(provisioningState),
-                privateLinkServiceId.Value,
+                id,
+                name,
+                type,
+                etag,
+                provisioningState,
+                privateLinkServiceId,
                 groupIds ?? new ChangeTrackingList<string>(),
-                requestMessage.Value,
-                privateLinkServiceConnectionState.Value);
+                requestMessage,
+                privateLinkServiceConnectionState);
         }
     }
 }

@@ -7,7 +7,6 @@
 
 using System;
 using System.Text.Json;
-using Azure.Core;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -19,9 +18,9 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<Uri> consoleScreenshotBlobUri = default;
-            Optional<Uri> serialConsoleLogBlobUri = default;
-            Optional<InstanceViewStatus> status = default;
+            Uri consoleScreenshotBlobUri = default;
+            Uri serialConsoleLogBlobUri = default;
+            InstanceViewStatus status = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("consoleScreenshotBlobUri"u8))
@@ -52,7 +51,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new BootDiagnosticsInstanceView(consoleScreenshotBlobUri.Value, serialConsoleLogBlobUri.Value, status.Value);
+            return new BootDiagnosticsInstanceView(consoleScreenshotBlobUri, serialConsoleLogBlobUri, status);
         }
     }
 }

@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
@@ -20,7 +19,7 @@ namespace CognitiveServices.TextAnalytics.Models
             }
             string text = default;
             string category = default;
-            Optional<string> subcategory = default;
+            string subcategory = default;
             int offset = default;
             int length = default;
             double confidenceScore = default;
@@ -60,7 +59,7 @@ namespace CognitiveServices.TextAnalytics.Models
             return new Entity(
                 text,
                 category,
-                subcategory.Value,
+                subcategory,
                 offset,
                 length,
                 confidenceScore);

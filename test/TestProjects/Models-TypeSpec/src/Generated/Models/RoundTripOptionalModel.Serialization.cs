@@ -183,20 +183,20 @@ namespace ModelsTypeSpec.Models
             {
                 return null;
             }
-            Optional<string> optionalString = default;
-            Optional<int> optionalInt = default;
+            string optionalString = default;
+            int? optionalInt = default;
             IList<string> optionalStringList = default;
             IList<int> optionalIntList = default;
             IList<CollectionItem> optionalModelList = default;
-            Optional<DerivedModel> optionalModel = default;
-            Optional<DerivedModelWithProperties> optionalModelWithPropertiesOnBase = default;
-            Optional<FixedStringEnum> optionalFixedStringEnum = default;
-            Optional<ExtensibleEnum> optionalExtensibleEnum = default;
+            DerivedModel optionalModel = default;
+            DerivedModelWithProperties optionalModelWithPropertiesOnBase = default;
+            FixedStringEnum? optionalFixedStringEnum = default;
+            ExtensibleEnum? optionalExtensibleEnum = default;
             IDictionary<string, int> optionalIntRecord = default;
             IDictionary<string, string> optionalStringRecord = default;
             IDictionary<string, RecordItem> optionalModelRecord = default;
-            Optional<DateTimeOffset> optionalPlainDate = default;
-            Optional<TimeSpan> optionalPlainTime = default;
+            DateTimeOffset? optionalPlainDate = default;
+            TimeSpan? optionalPlainTime = default;
             IList<int?> optionalCollectionWithNullableIntElement = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -382,20 +382,20 @@ namespace ModelsTypeSpec.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new RoundTripOptionalModel(
-                optionalString.Value,
-                Optional.ToNullable(optionalInt),
+                optionalString,
+                optionalInt,
                 optionalStringList ?? new ChangeTrackingList<string>(),
                 optionalIntList ?? new ChangeTrackingList<int>(),
                 optionalModelList ?? new ChangeTrackingList<CollectionItem>(),
-                optionalModel.Value,
-                optionalModelWithPropertiesOnBase.Value,
-                Optional.ToNullable(optionalFixedStringEnum),
-                Optional.ToNullable(optionalExtensibleEnum),
+                optionalModel,
+                optionalModelWithPropertiesOnBase,
+                optionalFixedStringEnum,
+                optionalExtensibleEnum,
                 optionalIntRecord ?? new ChangeTrackingDictionary<string, int>(),
                 optionalStringRecord ?? new ChangeTrackingDictionary<string, string>(),
                 optionalModelRecord ?? new ChangeTrackingDictionary<string, RecordItem>(),
-                Optional.ToNullable(optionalPlainDate),
-                Optional.ToNullable(optionalPlainTime),
+                optionalPlainDate,
+                optionalPlainTime,
                 optionalCollectionWithNullableIntElement ?? new ChangeTrackingList<int?>(),
                 serializedAdditionalRawData);
         }

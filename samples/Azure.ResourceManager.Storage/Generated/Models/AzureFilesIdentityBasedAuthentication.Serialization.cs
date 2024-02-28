@@ -37,8 +37,8 @@ namespace Azure.ResourceManager.Storage.Models
                 return null;
             }
             DirectoryServiceOption directoryServiceOptions = default;
-            Optional<ActiveDirectoryProperties> activeDirectoryProperties = default;
-            Optional<DefaultSharePermission> defaultSharePermission = default;
+            ActiveDirectoryProperties activeDirectoryProperties = default;
+            DefaultSharePermission? defaultSharePermission = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("directoryServiceOptions"u8))
@@ -65,7 +65,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new AzureFilesIdentityBasedAuthentication(directoryServiceOptions, activeDirectoryProperties.Value, Optional.ToNullable(defaultSharePermission));
+            return new AzureFilesIdentityBasedAuthentication(directoryServiceOptions, activeDirectoryProperties, defaultSharePermission);
         }
     }
 }

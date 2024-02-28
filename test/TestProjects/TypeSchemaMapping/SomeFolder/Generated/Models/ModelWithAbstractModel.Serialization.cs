@@ -69,7 +69,7 @@ namespace TypeSchemaMapping.Models
             {
                 return null;
             }
-            Optional<AbstractModel> abstractModelProperty = default;
+            AbstractModel abstractModelProperty = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -89,7 +89,7 @@ namespace TypeSchemaMapping.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ModelWithAbstractModel(abstractModelProperty.Value, serializedAdditionalRawData);
+            return new ModelWithAbstractModel(abstractModelProperty, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ModelWithAbstractModel>.Write(ModelReaderWriterOptions options)

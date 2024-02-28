@@ -21,7 +21,7 @@ namespace Azure.AI.FormRecognizer.Models
             }
             IReadOnlyList<TrainingDocumentInfo> trainingDocuments = default;
             IReadOnlyList<FormFieldsReport> fields = default;
-            Optional<float> averageModelAccuracy = default;
+            float? averageModelAccuracy = default;
             IReadOnlyList<ErrorInformation> errors = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -73,7 +73,7 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            return new TrainResult(trainingDocuments, fields ?? new ChangeTrackingList<FormFieldsReport>(), Optional.ToNullable(averageModelAccuracy), errors ?? new ChangeTrackingList<ErrorInformation>());
+            return new TrainResult(trainingDocuments, fields ?? new ChangeTrackingList<FormFieldsReport>(), averageModelAccuracy, errors ?? new ChangeTrackingList<ErrorInformation>());
         }
     }
 }

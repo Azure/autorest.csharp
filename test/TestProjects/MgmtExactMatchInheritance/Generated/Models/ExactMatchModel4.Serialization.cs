@@ -44,10 +44,10 @@ namespace MgmtExactMatchInheritance.Models
             {
                 return null;
             }
-            Optional<string> @new = default;
-            Optional<int> id = default;
-            Optional<string> name = default;
-            Optional<string> type = default;
+            string @new = default;
+            int? id = default;
+            string name = default;
+            string type = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("new"u8))
@@ -75,7 +75,7 @@ namespace MgmtExactMatchInheritance.Models
                     continue;
                 }
             }
-            return new ExactMatchModel4(Optional.ToNullable(id), name.Value, type.Value, @new.Value);
+            return new ExactMatchModel4(id, name, type, @new);
         }
     }
 }
