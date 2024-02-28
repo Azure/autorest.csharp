@@ -29,6 +29,9 @@ namespace AutoRest.CSharp.Output.Models.Types
         private IReadOnlyList<CSharpType>? _implements;
         public virtual IReadOnlyList<CSharpType> Implements => _implements ??= BuildImplements().ToArray();
 
+        private IReadOnlyList<FieldDeclaration>? _fields;
+        public IReadOnlyList<FieldDeclaration> Fields => _fields ??= BuildFields().ToArray();
+
         private IReadOnlyList<Method>? _methods;
         public IReadOnlyList<Method> Methods => _methods ??= BuildMethods().ToArray();
 
@@ -36,6 +39,11 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IReadOnlyList<Method> Constructors => _constructors ??= BuildConstructors().ToArray();
 
         protected virtual IEnumerable<CSharpType> BuildImplements()
+        {
+            yield break;
+        }
+
+        protected virtual IEnumerable<FieldDeclaration> BuildFields()
         {
             yield break;
         }

@@ -10,6 +10,7 @@ using AutoRest.CSharp.Common.Decorator;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
@@ -326,5 +327,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             var clientSuffix = ClientBuilder.GetClientSuffix();
             return clientPrefix + clientSuffix;
         }
+
+        private IReadOnlyList<ExpressionTypeProvider>? _staticHelpers;
+        public IReadOnlyList<ExpressionTypeProvider> StaticHelpers => _staticHelpers ??= new ExpressionTypeProvider[]
+        {
+        };
     }
 }

@@ -83,6 +83,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
                 project.AddGeneratedFile($"{operation.Type.Name}.cs", codeWriter.ToString());
             }
+
+            foreach (var helper in library.StaticHelpers)
+            {
+                var writer = new CodeWriter();
+                new ExpressionTypeProviderWriter(writer, helper).Write();
+                project.AddHelperFile($"Internal/{helper.Type.Name}.cs", writer.ToString());
+            }
         }
     }
 }

@@ -69,6 +69,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"{modelFactoryProvider.Type.Name}.cs", modelFactoryWriter.ToString());
             }
 
+            foreach (var helper in library.StaticHelpers)
+            {
+                var writer = new CodeWriter();
+                new ExpressionTypeProviderWriter(writer, helper).Write();
+                project.AddHelperFile($"Internal/{helper.Type.Name}.cs", writer.ToString());
+            }
+
             if (Configuration.GenerateTestProject)
             {
                 if (Configuration.IsBranded)
