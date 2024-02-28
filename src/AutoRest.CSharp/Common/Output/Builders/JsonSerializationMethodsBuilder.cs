@@ -922,11 +922,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             foreach (JsonPropertySerialization jsonProperty in jsonProperties)
             {
-                if (jsonProperty.ValueSerialization?.Type is { } variableType && jsonProperty.SerializedType is { } serializedType)
+                if (jsonProperty.ValueSerialization?.Type is { } variableType)
                 {
-                    var type = jsonProperty.SerializedType is not null && TypeFactory.IsCollectionType(jsonProperty.SerializedType)
-                        ? jsonProperty.SerializedType
-                        : valueSerialization.Type;
                     var propertyDeclaration = new CodeWriterDeclaration(jsonProperty.SerializedName.ToVariableName());
                     propertyVariables.Add(jsonProperty, new VariableReference(variableType, propertyDeclaration));
                 }
