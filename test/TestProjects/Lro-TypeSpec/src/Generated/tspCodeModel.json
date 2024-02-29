@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "lro",
+ "Name": "LroInTypeSpec",
  "Description": "This is a sample typespec lro project.",
  "ApiVersions": [],
  "Enums": [
@@ -36,7 +36,7 @@
      "Value": "canceled"
     }
    ],
-   "Namespace": "lro",
+   "Namespace": "LroInTypeSpec",
    "Description": "The status of the processing job.",
    "IsExtensible": true,
    "IsNullable": false,
@@ -92,7 +92,7 @@
      "Description": "https://api.example.com/oauth2/token"
     }
    ],
-   "Namespace": "lro",
+   "Namespace": "LroInTypeSpec",
    "Description": "The AuthFlow_tokenUrl",
    "IsExtensible": true,
    "IsNullable": false,
@@ -111,7 +111,7 @@
      "Description": "https://api.example.com/oauth2/refresh"
     }
    ],
-   "Namespace": "lro",
+   "Namespace": "LroInTypeSpec",
    "Description": "The AuthFlow_refreshUrl",
    "IsExtensible": true,
    "IsNullable": false,
@@ -123,7 +123,7 @@
    "$id": "17",
    "Kind": "Model",
    "Name": "RadiologyInsightsResult",
-   "Namespace": "lro",
+   "Namespace": "LroInTypeSpec",
    "Description": "The response for the Radiology Insights request.",
    "IsNullable": false,
    "Usage": "Output",
@@ -326,7 +326,7 @@
       "$id": "43",
       "Kind": "Model",
       "Name": "RadiologyInsightsInferenceResult",
-      "Namespace": "lro",
+      "Namespace": "LroInTypeSpec",
       "Description": "The inference results for the Radiology Insights request.",
       "IsNullable": false,
       "Usage": "Output",
@@ -365,7 +365,7 @@
    "$id": "46",
    "Kind": "Model",
    "Name": "RadiologyInsightsData",
-   "Namespace": "lro",
+   "Namespace": "LroInTypeSpec",
    "Description": "The body of the Radiology Insights request.",
    "IsNullable": false,
    "Usage": "Input",
@@ -410,7 +410,7 @@
    "$id": "52",
    "Kind": "Model",
    "Name": "HealthInsightsOperationStatusneverError",
-   "Namespace": "lro",
+   "Namespace": "LroInTypeSpec",
    "Description": "Provides status details for long running operations.",
    "IsNullable": false,
    "Usage": "Output",
@@ -499,7 +499,7 @@
    "$id": "63",
    "Kind": "Model",
    "Name": "AuthFlow",
-   "Namespace": "lro",
+   "Namespace": "LroInTypeSpec",
    "Description": "The auth flow model",
    "IsNullable": false,
    "Usage": "None",
@@ -571,7 +571,7 @@
    "$id": "71",
    "Kind": "Model",
    "Name": "HealthInsightsRetryAfterTrait",
-   "Namespace": "lro",
+   "Namespace": "LroInTypeSpec",
    "Description": "Health Insights retry after trait",
    "IsNullable": false,
    "Usage": "None",
@@ -585,7 +585,7 @@
       "$id": "73",
       "Kind": "Model",
       "Name": "HealthInsightsRetryAfterTraitRetryAfter",
-      "Namespace": "lro",
+      "Namespace": "LroInTypeSpec",
       "IsNullable": false,
       "Usage": "None",
       "Properties": [
@@ -624,7 +624,7 @@
  "Clients": [
   {
    "$id": "76",
-   "Name": "lroClient",
+   "Name": "LroInTypeSpecClient",
    "Description": "",
    "Operations": [],
    "Protocol": {
@@ -1031,7 +1031,7 @@
     "$id": "119"
    },
    "Creatable": false,
-   "Parent": "lroClient"
+   "Parent": "LroInTypeSpecClient"
   }
  ],
  "Auth": {

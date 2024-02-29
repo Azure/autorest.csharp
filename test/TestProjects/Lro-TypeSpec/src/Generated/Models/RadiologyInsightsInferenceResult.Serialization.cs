@@ -12,7 +12,7 @@ using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace lro.Models
+namespace LroInTypeSpec.Models
 {
     public partial class RadiologyInsightsInferenceResult : IUtf8JsonSerializable, IJsonModel<RadiologyInsightsInferenceResult>
     {

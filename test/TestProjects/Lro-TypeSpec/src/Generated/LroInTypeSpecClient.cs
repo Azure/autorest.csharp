@@ -11,11 +11,11 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace lro
+namespace LroInTypeSpec
 {
     // Data plane generated client.
-    /// <summary> The Lro service client. </summary>
-    public partial class LroClient
+    /// <summary> The LroInTypeSpec service client. </summary>
+    public partial class LroInTypeSpecClient
     {
         private const string AuthorizationHeader = "x-ms-api-key";
         private readonly AzureKeyCredential _keyCredential;
@@ -30,33 +30,33 @@ namespace lro
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of LroClient for mocking. </summary>
-        protected LroClient()
+        /// <summary> Initializes a new instance of LroInTypeSpecClient for mocking. </summary>
+        protected LroInTypeSpecClient()
         {
         }
 
-        /// <summary> Initializes a new instance of LroClient. </summary>
+        /// <summary> Initializes a new instance of LroInTypeSpecClient. </summary>
         /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public LroClient(Uri endpoint, AzureKeyCredential credential) : this(endpoint, credential, new LroClientOptions())
+        public LroInTypeSpecClient(Uri endpoint, AzureKeyCredential credential) : this(endpoint, credential, new LroInTypeSpecClientOptions())
         {
         }
 
-        /// <summary> Initializes a new instance of LroClient. </summary>
+        /// <summary> Initializes a new instance of LroInTypeSpecClient. </summary>
         /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public LroClient(Uri endpoint, TokenCredential credential) : this(endpoint, credential, new LroClientOptions())
+        public LroInTypeSpecClient(Uri endpoint, TokenCredential credential) : this(endpoint, credential, new LroInTypeSpecClientOptions())
         {
         }
 
-        /// <summary> Initializes a new instance of LroClient. </summary>
+        /// <summary> Initializes a new instance of LroInTypeSpecClient. </summary>
         /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public LroClient(Uri endpoint, AzureKeyCredential credential, LroClientOptions options)
+        public LroInTypeSpecClient(Uri endpoint, AzureKeyCredential credential, LroInTypeSpecClientOptions options)
         {
             if (endpoint == null)
             {
@@ -66,7 +66,7 @@ namespace lro
             {
                 throw new ArgumentNullException(nameof(credential));
             }
-            options ??= new LroClientOptions();
+            options ??= new LroInTypeSpecClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _keyCredential = credential;
@@ -74,12 +74,12 @@ namespace lro
             _endpoint = endpoint;
         }
 
-        /// <summary> Initializes a new instance of LroClient. </summary>
+        /// <summary> Initializes a new instance of LroInTypeSpecClient. </summary>
         /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public LroClient(Uri endpoint, TokenCredential credential, LroClientOptions options)
+        public LroInTypeSpecClient(Uri endpoint, TokenCredential credential, LroInTypeSpecClientOptions options)
         {
             if (endpoint == null)
             {
@@ -89,7 +89,7 @@ namespace lro
             {
                 throw new ArgumentNullException(nameof(credential));
             }
-            options ??= new LroClientOptions();
+            options ??= new LroInTypeSpecClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _tokenCredential = credential;

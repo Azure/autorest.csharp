@@ -8,10 +8,10 @@
 using System;
 using Azure;
 
-namespace lro.Models
+namespace LroInTypeSpec.Models
 {
     /// <summary> Model factory for models. </summary>
-    public static partial class LroModelFactory
+    public static partial class LroInTypeSpecModelFactory
     {
         /// <summary> Initializes a new instance of <see cref="Models.RadiologyInsightsInferenceResult"/>. </summary>
         /// <param name="id"></param>

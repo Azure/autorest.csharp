@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using lro.Models;
+using LroInTypeSpec.Models;
 
-namespace lro
+namespace LroInTypeSpec
 {
     // Data plane generated sub-client.
     /// <summary> The LegacyLro sub-client. </summary>

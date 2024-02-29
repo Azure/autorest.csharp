@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
-namespace lro
+namespace LroInTypeSpec
 {
     internal static partial class RequestContentHelper
     {

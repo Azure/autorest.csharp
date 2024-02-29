@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace lro.Models
+namespace LroInTypeSpec.Models
 {
     /// <summary> The body of the Radiology Insights request. </summary>
     public partial class RadiologyInsightsData

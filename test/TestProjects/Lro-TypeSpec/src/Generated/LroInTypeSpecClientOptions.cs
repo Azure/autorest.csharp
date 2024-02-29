@@ -7,10 +7,10 @@
 
 using Azure.Core;
 
-namespace lro
+namespace LroInTypeSpec
 {
-    /// <summary> Client options for LroClient. </summary>
-    public partial class LroClientOptions : ClientOptions
+    /// <summary> Client options for LroInTypeSpecClient. </summary>
+    public partial class LroInTypeSpecClientOptions : ClientOptions
     {
     }
 }
