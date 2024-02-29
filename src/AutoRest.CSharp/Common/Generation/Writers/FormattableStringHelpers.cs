@@ -9,6 +9,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
@@ -134,13 +135,13 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             if (TypeFactory.IsReadWriteDictionary(parameter.Type))
             {
-                FormattableString conversionString = $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromDictionary)}({parameter.Name})";
+                FormattableString conversionString = $"{RequestBodyHelperProvider.Instance.Type}.{RequestBodyHelperProvider.FromDictionary}({parameter.Name})";
                 return parameter.IsOptionalInSignature ? $"{parameter.Name} != null ? {conversionString} : null" : conversionString;
             }
 
             if (TypeFactory.IsList(parameter.Type))
             {
-                FormattableString conversionString = $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromEnumerable)}({parameter.Name})";
+                FormattableString conversionString = $"{RequestBodyHelperProvider.Instance.Type}.{RequestBodyHelperProvider.FromEnumerable}({parameter.Name})";
                 return parameter.IsOptionalInSignature ? $"{parameter.Name} != null ? {conversionString} : null" : conversionString;
             }
 
@@ -155,7 +156,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 return $"{parameter.Name:I}";
             }
 
-            return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromObject)}({parameter.Name})";
+            return $"{RequestBodyHelperProvider.Instance.Type}.{RequestBodyHelperProvider.FromObject}({parameter.Name})";
         }
 
         // TODO: This is a temporary solution. We will move this part to some common place.

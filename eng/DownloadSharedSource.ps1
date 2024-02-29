@@ -53,7 +53,6 @@ $files = @('AsyncLockWithValue.cs', 'CallerShouldAuditAttribute.cs', 'ClientDiag
     'ProtocolOperation.cs',
     'ProtocolOperationHelpers.cs',
     'RawRequestUriBuilder.cs',
-    'RequestContentHelper.cs',
     'RequestHeaderExtensions.cs',
     'RequestUriBuilderExtensions.cs',
     'ResponseHeadersExtensions.cs',
