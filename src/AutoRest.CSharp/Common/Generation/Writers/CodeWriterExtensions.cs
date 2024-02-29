@@ -240,9 +240,10 @@ namespace AutoRest.CSharp.Generation.Writers
             if (methodBase is MethodSignature { GenericParameterConstraints: { } constraints })
             {
                 writer.Line();
-                foreach (var (argument, constraint) in constraints)
+                foreach (var constraint in constraints)
                 {
-                    writer.Append($"where {argument:I}: {constraint}");
+                    writer.WriteValueExpression(constraint);
+                    writer.AppendRaw(" ");
                 }
             }
 

@@ -16,6 +16,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
         }
 
+        public bool IsStatic { get; protected init; }
+
         private IReadOnlyList<string>? _usings;
         public IReadOnlyList<string> Usings => _usings ??= BuildUsings().ToArray();
 
