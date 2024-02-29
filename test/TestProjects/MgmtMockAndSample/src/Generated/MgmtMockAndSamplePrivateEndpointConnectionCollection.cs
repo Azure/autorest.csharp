@@ -100,7 +100,9 @@ namespace MgmtMockAndSample
             try
             {
                 var response = await _mgmtMockAndSamplePrivateEndpointConnectionPrivateEndpointConnectionsRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, data, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtMockAndSampleArmOperation<MgmtMockAndSamplePrivateEndpointConnectionResource>(Response.FromValue(new MgmtMockAndSamplePrivateEndpointConnectionResource(Client, response), response.GetRawResponse()), RequestMethod.Put);
+                var uri = _mgmtMockAndSamplePrivateEndpointConnectionPrivateEndpointConnectionsRestClient.CreatePutRequestUri(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, data);
+                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
+                var operation = new MgmtMockAndSampleArmOperation<MgmtMockAndSamplePrivateEndpointConnectionResource>(Response.FromValue(new MgmtMockAndSamplePrivateEndpointConnectionResource(Client, response), response.GetRawResponse()), rehydrationToken);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -159,7 +161,9 @@ namespace MgmtMockAndSample
             try
             {
                 var response = _mgmtMockAndSamplePrivateEndpointConnectionPrivateEndpointConnectionsRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, data, cancellationToken);
-                var operation = new MgmtMockAndSampleArmOperation<MgmtMockAndSamplePrivateEndpointConnectionResource>(Response.FromValue(new MgmtMockAndSamplePrivateEndpointConnectionResource(Client, response), response.GetRawResponse()), RequestMethod.Put);
+                var uri = _mgmtMockAndSamplePrivateEndpointConnectionPrivateEndpointConnectionsRestClient.CreatePutRequestUri(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, data);
+                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
+                var operation = new MgmtMockAndSampleArmOperation<MgmtMockAndSamplePrivateEndpointConnectionResource>(Response.FromValue(new MgmtMockAndSamplePrivateEndpointConnectionResource(Client, response), response.GetRawResponse()), rehydrationToken);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

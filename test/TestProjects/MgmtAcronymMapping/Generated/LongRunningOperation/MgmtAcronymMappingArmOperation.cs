@@ -21,23 +21,31 @@ namespace MgmtAcronymMapping
     {
         private readonly OperationInternal _operation;
         private readonly RehydrationToken? _rehydrationToken;
+        private readonly NextLinkOperationImplementation _nextLinkOperation;
 
         /// <summary> Initializes a new instance of MgmtAcronymMappingArmOperation for mocking. </summary>
         protected MgmtAcronymMappingArmOperation()
         {
         }
 
-        internal MgmtAcronymMappingArmOperation(Response response, RequestMethod? requestMethod = null)
+        internal MgmtAcronymMappingArmOperation(Response response, RehydrationToken? rehydrationToken = null)
         {
-            _operation = OperationInternal.Succeeded(response, requestMethod);
-            _rehydrationToken = null;
+            _operation = OperationInternal.Succeeded(response);
+            _rehydrationToken = rehydrationToken;
         }
 
         internal MgmtAcronymMappingArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia, bool skipApiVersionOverride = false, string apiVersionOverrideValue = null)
         {
             var nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, request.Method, request.Uri.ToUri(), response, finalStateVia, skipApiVersionOverride, apiVersionOverrideValue);
+            if (nextLinkOperation is NextLinkOperationImplementation nextLinkOperationValue)
+            {
+                _nextLinkOperation = nextLinkOperationValue;
+            }
+            else
+            {
+                _rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(request.Method, request.Uri.ToUri(), response, finalStateVia, skipApiVersionOverride, apiVersionOverrideValue);
+            }
             _operation = new OperationInternal(nextLinkOperation, clientDiagnostics, response, "MgmtAcronymMappingArmOperation", fallbackStrategy: new SequentialDelayStrategy());
-            _rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(request.Method, request.Uri.ToUri(), response, finalStateVia, skipApiVersionOverride, apiVersionOverrideValue);
         }
 
         /// <inheritdoc />
@@ -47,7 +55,7 @@ namespace MgmtAcronymMapping
 #pragma warning restore CA1822
 
         /// <inheritdoc />
-        public override RehydrationToken? GetRehydrationToken() => _rehydrationToken;
+        public override RehydrationToken? GetRehydrationToken() => _nextLinkOperation?.GetRehydrationToken() ?? _rehydrationToken;
 
         /// <inheritdoc />
         public override bool HasCompleted => _operation.HasCompleted;

@@ -101,7 +101,9 @@ namespace MgmtSafeFlatten
             try
             {
                 var response = await _typeTwoCommonRestClient.CreateOrUpdateTypeTwoAsync(Id.SubscriptionId, Id.ResourceGroupName, typeTwoName, data, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtSafeFlattenArmOperation<TypeTwoResource>(Response.FromValue(new TypeTwoResource(Client, response), response.GetRawResponse()), RequestMethod.Put);
+                var uri = _typeTwoCommonRestClient.CreateCreateOrUpdateTypeTwoRequestUri(Id.SubscriptionId, Id.ResourceGroupName, typeTwoName, data);
+                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
+                var operation = new MgmtSafeFlattenArmOperation<TypeTwoResource>(Response.FromValue(new TypeTwoResource(Client, response), response.GetRawResponse()), rehydrationToken);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -160,7 +162,9 @@ namespace MgmtSafeFlatten
             try
             {
                 var response = _typeTwoCommonRestClient.CreateOrUpdateTypeTwo(Id.SubscriptionId, Id.ResourceGroupName, typeTwoName, data, cancellationToken);
-                var operation = new MgmtSafeFlattenArmOperation<TypeTwoResource>(Response.FromValue(new TypeTwoResource(Client, response), response.GetRawResponse()), RequestMethod.Put);
+                var uri = _typeTwoCommonRestClient.CreateCreateOrUpdateTypeTwoRequestUri(Id.SubscriptionId, Id.ResourceGroupName, typeTwoName, data);
+                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
+                var operation = new MgmtSafeFlattenArmOperation<TypeTwoResource>(Response.FromValue(new TypeTwoResource(Client, response), response.GetRawResponse()), rehydrationToken);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

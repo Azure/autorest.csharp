@@ -63,16 +63,14 @@ namespace Azure.Core
         /// </summary>
         /// <param name="rawResponse">The final value of <see cref="OperationInternalBase.RawResponse"/>.</param>
         /// <param name="value">The final result of the long-running operation.</param>
-        /// <param name="requestMethod">rehydration token</param>
-        public static OperationInternal<T> Succeeded(Response rawResponse, T value, RequestMethod? requestMethod = null) => new(OperationState<T>.Success(rawResponse, value), requestMethod);
+        public static OperationInternal<T> Succeeded(Response rawResponse, T value) => new(OperationState<T>.Success(rawResponse, value));
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OperationInternal"/> class in a final failed state.
         /// </summary>
         /// <param name="rawResponse">The final value of <see cref="OperationInternalBase.RawResponse"/>.</param>
         /// <param name="operationFailedException">The exception that will be thrown by <c>UpdateStatusAsync</c>.</param>
-        /// <param name="requestMethod">rehydration token</param>
-        public static OperationInternal<T> Failed(Response rawResponse, RequestFailedException operationFailedException, RequestMethod? requestMethod = null) => new(OperationState<T>.Failure(rawResponse, operationFailedException), requestMethod);
+        public static OperationInternal<T> Failed(Response rawResponse, RequestFailedException operationFailedException) => new(OperationState<T>.Failure(rawResponse, operationFailedException));
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OperationInternal{T}"/> class.
@@ -98,7 +96,7 @@ namespace Azure.Core
         /// <param name="scopeAttributes">The attributes to use during diagnostic scope creation.</param>
         /// <param name="fallbackStrategy">The delay strategy when Retry-After header is not present.  When it is present, the longer of the two delays will be used.
         ///     Default is <see cref="FixedDelayWithNoJitterStrategy"/>.</param>
-        /// <param name="requetMethod">The rehydration token.</param>
+        /// <param name="requetMethod">The Http request method.</param>
         public OperationInternal(IOperation<T> operation,
             ClientDiagnostics clientDiagnostics,
             Response? rawResponse,
@@ -113,8 +111,8 @@ namespace Azure.Core
             _stateLock = new AsyncLockWithValue<OperationState<T>>();
         }
 
-        private OperationInternal(OperationState<T> finalState, RequestMethod? requestMethod)
-            : base(finalState.RawResponse, requestMethod)
+        private OperationInternal(OperationState<T> finalState)
+            : base(finalState.RawResponse)
         {
             // FinalOperation represents operation that is in final state and can't be updated.
             // It implements IOperation<T> and throws exception when UpdateStateAsync is called.
@@ -314,26 +312,19 @@ namespace Azure.Core
 
             public override void Dispose()
             {
-                throw new System.NotImplementedException();
             }
 
             /// <inheritdoc />
 #if HAS_INTERNALS_VISIBLE_CORE
             internal
 #endif
-            protected override bool ContainsHeader(string name)
-            {
-                throw new System.NotImplementedException();
-            }
+            protected override bool ContainsHeader(string name) => false;
 
             /// <inheritdoc />
 #if HAS_INTERNALS_VISIBLE_CORE
             internal
 #endif
-            protected override IEnumerable<HttpHeader> EnumerateHeaders()
-            {
-                throw new System.NotImplementedException();
-            }
+            protected override IEnumerable<HttpHeader> EnumerateHeaders() => Array.Empty<HttpHeader>();
 
             /// <inheritdoc />
 #if HAS_INTERNALS_VISIBLE_CORE
@@ -341,7 +332,8 @@ namespace Azure.Core
 #endif
             protected override bool TryGetHeader(string name, out string value)
             {
-                throw new System.NotImplementedException();
+                value = string.Empty;
+                return false;
             }
 
             /// <inheritdoc />
@@ -350,7 +342,8 @@ namespace Azure.Core
 #endif
             protected override bool TryGetHeaderValues(string name, out IEnumerable<string> values)
             {
-                throw new System.NotImplementedException();
+                values = Array.Empty<string>();
+                return false;
             }
         }
 

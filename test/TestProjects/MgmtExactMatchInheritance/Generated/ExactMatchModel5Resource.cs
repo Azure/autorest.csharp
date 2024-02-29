@@ -205,7 +205,9 @@ namespace MgmtExactMatchInheritance
             try
             {
                 var response = await _exactMatchModel5RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtExactMatchInheritanceArmOperation<ExactMatchModel5Resource>(Response.FromValue(new ExactMatchModel5Resource(Client, response), response.GetRawResponse()), RequestMethod.Put);
+                var uri = _exactMatchModel5RestClient.CreatePutRequestUri(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data);
+                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
+                var operation = new MgmtExactMatchInheritanceArmOperation<ExactMatchModel5Resource>(Response.FromValue(new ExactMatchModel5Resource(Client, response), response.GetRawResponse()), rehydrationToken);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -253,7 +255,9 @@ namespace MgmtExactMatchInheritance
             try
             {
                 var response = _exactMatchModel5RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken);
-                var operation = new MgmtExactMatchInheritanceArmOperation<ExactMatchModel5Resource>(Response.FromValue(new ExactMatchModel5Resource(Client, response), response.GetRawResponse()), RequestMethod.Put);
+                var uri = _exactMatchModel5RestClient.CreatePutRequestUri(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data);
+                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
+                var operation = new MgmtExactMatchInheritanceArmOperation<ExactMatchModel5Resource>(Response.FromValue(new ExactMatchModel5Resource(Client, response), response.GetRawResponse()), rehydrationToken);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

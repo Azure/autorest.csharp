@@ -100,7 +100,9 @@ namespace MgmtSupersetInheritance
             try
             {
                 var response = await _supersetModel4RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, supersetModel4SName, data, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtSupersetInheritanceArmOperation<SupersetModel4Resource>(Response.FromValue(new SupersetModel4Resource(Client, response), response.GetRawResponse()), RequestMethod.Put);
+                var uri = _supersetModel4RestClient.CreatePutRequestUri(Id.SubscriptionId, Id.ResourceGroupName, supersetModel4SName, data);
+                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
+                var operation = new MgmtSupersetInheritanceArmOperation<SupersetModel4Resource>(Response.FromValue(new SupersetModel4Resource(Client, response), response.GetRawResponse()), rehydrationToken);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -158,7 +160,9 @@ namespace MgmtSupersetInheritance
             try
             {
                 var response = _supersetModel4RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, supersetModel4SName, data, cancellationToken);
-                var operation = new MgmtSupersetInheritanceArmOperation<SupersetModel4Resource>(Response.FromValue(new SupersetModel4Resource(Client, response), response.GetRawResponse()), RequestMethod.Put);
+                var uri = _supersetModel4RestClient.CreatePutRequestUri(Id.SubscriptionId, Id.ResourceGroupName, supersetModel4SName, data);
+                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
+                var operation = new MgmtSupersetInheritanceArmOperation<SupersetModel4Resource>(Response.FromValue(new SupersetModel4Resource(Client, response), response.GetRawResponse()), rehydrationToken);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

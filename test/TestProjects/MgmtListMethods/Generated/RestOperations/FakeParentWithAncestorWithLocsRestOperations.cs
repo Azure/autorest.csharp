@@ -37,6 +37,20 @@ namespace MgmtListMethods
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
+        internal RequestUriBuilder CreateCreateOrUpdateRequestUri(string subscriptionId, string fakeName, string fakeParentWithAncestorWithLocName, FakeParentWithAncestorWithLocData data)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/providers/Microsoft.Fake/fakes/", false);
+            uri.AppendPath(fakeName, true);
+            uri.AppendPath("/fakeParentWithAncestorWithLocs/", false);
+            uri.AppendPath(fakeParentWithAncestorWithLocName, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string fakeName, string fakeParentWithAncestorWithLocName, FakeParentWithAncestorWithLocData data)
         {
             var message = _pipeline.CreateMessage();
@@ -171,6 +185,20 @@ namespace MgmtListMethods
             }
         }
 
+        internal RequestUriBuilder CreateGetRequestUri(string subscriptionId, string fakeName, string fakeParentWithAncestorWithLocName)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/providers/Microsoft.Fake/fakes/", false);
+            uri.AppendPath(fakeName, true);
+            uri.AppendPath("/fakeParentWithAncestorWithLocs/", false);
+            uri.AppendPath(fakeParentWithAncestorWithLocName, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateGetRequest(string subscriptionId, string fakeName, string fakeParentWithAncestorWithLocName)
         {
             var message = _pipeline.CreateMessage();
@@ -295,6 +323,19 @@ namespace MgmtListMethods
             }
         }
 
+        internal RequestUriBuilder CreateListTestRequestUri(string subscriptionId, string fakeName)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/providers/Microsoft.Fake/fakes/", false);
+            uri.AppendPath(fakeName, true);
+            uri.AppendPath("/fakeParentWithAncestorWithLocs", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateListTestRequest(string subscriptionId, string fakeName)
         {
             var message = _pipeline.CreateMessage();
@@ -396,6 +437,17 @@ namespace MgmtListMethods
             }
         }
 
+        internal RequestUriBuilder CreateListBySubscriptionRequestUri(string subscriptionId)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/providers/Microsoft.Fake/fakeParentWithAncestorWithLocs", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateListBySubscriptionRequest(string subscriptionId)
         {
             var message = _pipeline.CreateMessage();
@@ -475,6 +527,19 @@ namespace MgmtListMethods
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateListTestByLocationsRequestUri(string subscriptionId, string location)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/providers/Microsoft.Fake/locations/", false);
+            uri.AppendPath(location, true);
+            uri.AppendPath("/fakeParentWithAncestorWithLocs", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
         }
 
         internal HttpMessage CreateListTestByLocationsRequest(string subscriptionId, string location)
@@ -576,6 +641,14 @@ namespace MgmtListMethods
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateListTestNextPageRequestUri(string nextLink, string subscriptionId, string fakeName)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
         }
 
         internal HttpMessage CreateListTestNextPageRequest(string nextLink, string subscriptionId, string fakeName)
@@ -684,6 +757,14 @@ namespace MgmtListMethods
             }
         }
 
+        internal RequestUriBuilder CreateListBySubscriptionNextPageRequestUri(string nextLink, string subscriptionId)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
+        }
+
         internal HttpMessage CreateListBySubscriptionNextPageRequest(string nextLink, string subscriptionId)
         {
             var message = _pipeline.CreateMessage();
@@ -770,6 +851,14 @@ namespace MgmtListMethods
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateListTestByLocationsNextPageRequestUri(string nextLink, string subscriptionId, string location)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
         }
 
         internal HttpMessage CreateListTestByLocationsNextPageRequest(string nextLink, string subscriptionId, string location)

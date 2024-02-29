@@ -71,6 +71,11 @@ namespace Azure.Core
             return new OperationToOperationOfT<T>(operationSource, operation);
         }
 
+        public static IOperation<T> Create<T>(
+            IOperationSource<T> operationSource,
+            IOperation operation)
+            => new OperationToOperationOfT<T>(operationSource, operation);
+
         public static IOperation Create(
             HttpPipeline pipeline,
             RehydrationToken? rehydrationToken,
@@ -78,32 +83,44 @@ namespace Azure.Core
         {
             Argument.AssertNotNull(rehydrationToken, nameof(rehydrationToken));
 
-            var lroDetails = ModelReaderWriter.Write(rehydrationToken!, new ModelReaderWriterOptions("J")).ToObjectFromJson<Dictionary<string, string>>();
+            var lroDetails = ModelReaderWriter.Write(rehydrationToken!, ModelReaderWriterOptions.Json).ToObjectFromJson<Dictionary<string, string>>();
             if (!Uri.TryCreate(lroDetails["initialUri"], UriKind.Absolute, out var startRequestUri))
             {
-                throw new InvalidOperationException("Invalid initial URI");
+                throw new InvalidOperationException("Invalid initial URI from rehydration token");
             }
 
             if (!lroDetails.TryGetValue("nextRequestUri", out var nextRequestUri))
             {
-                throw new InvalidOperationException("Invalid next request URI");
+                throw new InvalidOperationException("Invalid next request URI from rehydration token");
             }
 
             RequestMethod requestMethod = new RequestMethod(lroDetails["requestMethod"]);
             string lastKnownLocation = lroDetails["lastKnownLocation"];
-            OperationFinalStateVia finalStateVia = Enum.IsDefined(typeof(OperationFinalStateVia), lroDetails["finalStateVia"]) ? (OperationFinalStateVia)Enum.Parse(typeof(OperationFinalStateVia), lroDetails["finalStateVia"]) : OperationFinalStateVia.Location;
+
+            OperationFinalStateVia finalStateVia;
+            if (Enum.IsDefined(typeof(OperationFinalStateVia), lroDetails["finalStateVia"]))
+            {
+                finalStateVia = (OperationFinalStateVia)Enum.Parse(typeof(OperationFinalStateVia), lroDetails["finalStateVia"]);
+            }
+            else
+            {
+                finalStateVia = OperationFinalStateVia.Location;
+            }
+
+            HeaderSource headerSource;
+            if (Enum.IsDefined(typeof(HeaderSource), lroDetails["headerSource"]))
+            {
+                headerSource = (HeaderSource)Enum.Parse(typeof(HeaderSource), lroDetails["headerSource"]);
+            }
+            else
+            {
+                headerSource = HeaderSource.None;
+            }
+
             string? apiVersionStr = apiVersionOverride ?? (TryGetApiVersion(startRequestUri, out ReadOnlySpan<char> apiVersion) ? apiVersion.ToString() : null);
-            HeaderSource headerSource = Enum.IsDefined(typeof(HeaderSource), lroDetails["headerSource"]) ? (HeaderSource)Enum.Parse(typeof(HeaderSource), lroDetails["headerSource"]) : HeaderSource.None;
 
             return new NextLinkOperationImplementation(pipeline, requestMethod, startRequestUri, nextRequestUri, headerSource, lastKnownLocation, finalStateVia, apiVersionStr);
         }
-
-        public static IOperation<T> Create<T>(
-            IOperationSource<T> operationSource,
-            HttpPipeline pipeline,
-            RehydrationToken? rehydrationToken,
-            string? apiVersionOverride = null)
-            => new OperationToOperationOfT<T>(operationSource, Create(pipeline, rehydrationToken, apiVersionOverride));
 
         private NextLinkOperationImplementation(
             HttpPipeline pipeline,
@@ -116,6 +133,11 @@ namespace Azure.Core
             string? apiVersion)
         {
             Argument.AssertNotNull(pipeline, nameof(pipeline));
+            Argument.AssertNotNull(requestMethod, nameof(requestMethod));
+            Argument.AssertNotNull(startRequestUri, nameof(startRequestUri));
+            Argument.AssertNotNull(nextRequestUri, nameof(nextRequestUri));
+            Argument.AssertNotNull(headerSource, nameof(headerSource));
+            Argument.AssertNotNull(finalStateVia, nameof(finalStateVia));
 
             _requestMethod = requestMethod;
             _headerSource = headerSource;
@@ -126,6 +148,9 @@ namespace Azure.Core
             _pipeline = pipeline;
             _apiVersion = apiVersion;
         }
+
+        public RehydrationToken GetRehydrationToken()
+            => GetRehydrationToken(_requestMethod, _startRequestUri, _nextRequestUri, _headerSource.ToString(), _lastKnownLocation, _finalStateVia.ToString());
 
         public static RehydrationToken GetRehydrationToken(
             RequestMethod requestMethod,
@@ -157,8 +182,8 @@ namespace Azure.Core
             string? lastKnownLocation,
             string finalStateVia)
         {
-            var test = BinaryData.FromObjectAsJson(new { requestMethod = requestMethod.ToString(), initialUri = startRequestUri.AbsoluteUri, nextRequestUri, headerSource, lastKnownLocation, finalStateVia });
-            return ModelReaderWriter.Read<RehydrationToken>(test);
+            var data = BinaryData.FromObjectAsJson(new { requestMethod = requestMethod.ToString(), initialUri = startRequestUri.AbsoluteUri, nextRequestUri, headerSource, lastKnownLocation, finalStateVia });
+            return ModelReaderWriter.Read<RehydrationToken>(data);
         }
 
         public async ValueTask<OperationState> UpdateStateAsync(bool async, CancellationToken cancellationToken)

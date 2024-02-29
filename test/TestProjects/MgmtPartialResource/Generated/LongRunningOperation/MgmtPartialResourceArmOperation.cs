@@ -21,23 +21,31 @@ namespace MgmtPartialResource
     {
         private readonly OperationInternal _operation;
         private readonly RehydrationToken? _rehydrationToken;
+        private readonly NextLinkOperationImplementation _nextLinkOperation;
 
         /// <summary> Initializes a new instance of MgmtPartialResourceArmOperation for mocking. </summary>
         protected MgmtPartialResourceArmOperation()
         {
         }
 
-        internal MgmtPartialResourceArmOperation(Response response, RequestMethod? requestMethod = null)
+        internal MgmtPartialResourceArmOperation(Response response, RehydrationToken? rehydrationToken = null)
         {
-            _operation = OperationInternal.Succeeded(response, requestMethod);
-            _rehydrationToken = null;
+            _operation = OperationInternal.Succeeded(response);
+            _rehydrationToken = rehydrationToken;
         }
 
         internal MgmtPartialResourceArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia, bool skipApiVersionOverride = false, string apiVersionOverrideValue = null)
         {
             var nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, request.Method, request.Uri.ToUri(), response, finalStateVia, skipApiVersionOverride, apiVersionOverrideValue);
+            if (nextLinkOperation is NextLinkOperationImplementation nextLinkOperationValue)
+            {
+                _nextLinkOperation = nextLinkOperationValue;
+            }
+            else
+            {
+                _rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(request.Method, request.Uri.ToUri(), response, finalStateVia, skipApiVersionOverride, apiVersionOverrideValue);
+            }
             _operation = new OperationInternal(nextLinkOperation, clientDiagnostics, response, "MgmtPartialResourceArmOperation", fallbackStrategy: new SequentialDelayStrategy());
-            _rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(request.Method, request.Uri.ToUri(), response, finalStateVia, skipApiVersionOverride, apiVersionOverrideValue);
         }
 
         /// <inheritdoc />
@@ -47,7 +55,7 @@ namespace MgmtPartialResource
 #pragma warning restore CA1822
 
         /// <inheritdoc />
-        public override RehydrationToken? GetRehydrationToken() => _rehydrationToken;
+        public override RehydrationToken? GetRehydrationToken() => _nextLinkOperation?.GetRehydrationToken() ?? _rehydrationToken;
 
         /// <inheritdoc />
         public override bool HasCompleted => _operation.HasCompleted;

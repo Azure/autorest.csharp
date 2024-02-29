@@ -37,6 +37,18 @@ namespace MgmtListMethods
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
+        internal RequestUriBuilder CreateCreateOrUpdateRequestUri(string groupId, string mgmtGroupParentName, MgmtGroupParentData data)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/providers/Microsoft.Management/managementGroups/", false);
+            uri.AppendPath(groupId, true);
+            uri.AppendPath("/mgmtGroupParents/", false);
+            uri.AppendPath(mgmtGroupParentName, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateCreateOrUpdateRequest(string groupId, string mgmtGroupParentName, MgmtGroupParentData data)
         {
             var message = _pipeline.CreateMessage();
@@ -151,6 +163,18 @@ namespace MgmtListMethods
             }
         }
 
+        internal RequestUriBuilder CreateGetRequestUri(string groupId, string mgmtGroupParentName)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/providers/Microsoft.Management/managementGroups/", false);
+            uri.AppendPath(groupId, true);
+            uri.AppendPath("/mgmtGroupParents/", false);
+            uri.AppendPath(mgmtGroupParentName, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateGetRequest(string groupId, string mgmtGroupParentName)
         {
             var message = _pipeline.CreateMessage();
@@ -255,6 +279,17 @@ namespace MgmtListMethods
             }
         }
 
+        internal RequestUriBuilder CreateListRequestUri(string groupId)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/providers/Microsoft.Management/managementGroups/", false);
+            uri.AppendPath(groupId, true);
+            uri.AppendPath("/mgmtGroupParents", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateListRequest(string groupId)
         {
             var message = _pipeline.CreateMessage();
@@ -334,6 +369,14 @@ namespace MgmtListMethods
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateListNextPageRequestUri(string nextLink, string groupId)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
         }
 
         internal HttpMessage CreateListNextPageRequest(string nextLink, string groupId)

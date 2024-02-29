@@ -101,7 +101,9 @@ namespace MgmtExactMatchFlattenInheritance
             try
             {
                 var response = await _azureResourceFlattenModel1RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, data, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtExactMatchFlattenInheritanceArmOperation<AzureResourceFlattenModel1Resource>(Response.FromValue(new AzureResourceFlattenModel1Resource(Client, response), response.GetRawResponse()), RequestMethod.Put);
+                var uri = _azureResourceFlattenModel1RestClient.CreatePutRequestUri(Id.SubscriptionId, Id.ResourceGroupName, name, data);
+                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
+                var operation = new MgmtExactMatchFlattenInheritanceArmOperation<AzureResourceFlattenModel1Resource>(Response.FromValue(new AzureResourceFlattenModel1Resource(Client, response), response.GetRawResponse()), rehydrationToken);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -160,7 +162,9 @@ namespace MgmtExactMatchFlattenInheritance
             try
             {
                 var response = _azureResourceFlattenModel1RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, data, cancellationToken);
-                var operation = new MgmtExactMatchFlattenInheritanceArmOperation<AzureResourceFlattenModel1Resource>(Response.FromValue(new AzureResourceFlattenModel1Resource(Client, response), response.GetRawResponse()), RequestMethod.Put);
+                var uri = _azureResourceFlattenModel1RestClient.CreatePutRequestUri(Id.SubscriptionId, Id.ResourceGroupName, name, data);
+                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
+                var operation = new MgmtExactMatchFlattenInheritanceArmOperation<AzureResourceFlattenModel1Resource>(Response.FromValue(new AzureResourceFlattenModel1Resource(Client, response), response.GetRawResponse()), rehydrationToken);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

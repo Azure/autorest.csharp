@@ -58,6 +58,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     _writer.Line($"private readonly {_operationInternalType} _operation;");
                     _writer.Line($"private readonly {typeof(RehydrationToken?)} _rehydrationToken;");
+                    _writer.Line($"private readonly {typeof(NextLinkOperationImplementation)}? _nextLinkOperation;");
                     _writer.Line();
 
                     _writer.WriteXmlDocumentationSummary($"Initializes a new instance of {_name} for mocking.");
@@ -66,20 +67,37 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                     _writer.Line();
 
-                    using (_writer.Scope($"internal {_name}({_responseType} {Configuration.ApiTypes.ResponseParameterName}, {typeof(RequestMethod?)} requestMethod = null)"))
+                    using (_writer.Scope($"internal {_name}({_responseType} {Configuration.ApiTypes.ResponseParameterName}, {typeof(RehydrationToken?)} rehydrationToken = null)"))
                     {
-                        _writer.Line($"_operation = {_operationInternalType}.Succeeded({_responseString}, requestMethod);");
-                        _writer.Line($"_rehydrationToken = null;");
+                        _writer.Line($"_operation = {_operationInternalType}.Succeeded({_responseString});");
+                        _writer.Line($"_rehydrationToken = rehydrationToken;");
                     }
                     _writer.Line();
 
                     using (_writer.Scope($"internal {_name}({_operationSourceString}{Configuration.ApiTypes.ClientDiagnosticsType} clientDiagnostics, {Configuration.ApiTypes.HttpPipelineType} pipeline, {typeof(Request)} request, {Configuration.ApiTypes.ResponseType} {Configuration.ApiTypes.ResponseParameterName}, {typeof(OperationFinalStateVia)} finalStateVia, bool skipApiVersionOverride = false, string apiVersionOverrideValue = null)"))
                     {
                         var nextLinkOperation = new CodeWriterDeclaration("nextLinkOperation");
-                        _writer.Line($"var {nextLinkOperation:D} = {typeof(NextLinkOperationImplementation)}.{nameof(NextLinkOperationImplementation.Create)}({_sourceString}pipeline, request.Method, request.Uri.ToUri(), {Configuration.ApiTypes.ResponseParameterName}, finalStateVia, skipApiVersionOverride, apiVersionOverrideValue);");
-                        _writer.Line($"_operation = new {_operationInternalType}({nextLinkOperation}, clientDiagnostics, {Configuration.ApiTypes.ResponseParameterName}, {_name:L}, fallbackStrategy: new {typeof(SequentialDelayStrategy)}());");
-                        _writer.Line($"_rehydrationToken = {typeof(NextLinkOperationImplementation)}.{nameof(NextLinkOperationImplementation.GetRehydrationToken)}(request.Method, request.Uri.ToUri(), {Configuration.ApiTypes.ResponseParameterName}, finalStateVia, skipApiVersionOverride, apiVersionOverrideValue);");
-                    }
+                        _writer.Line($"var {nextLinkOperation:D} = {typeof(NextLinkOperationImplementation)}.{nameof(NextLinkOperationImplementation.Create)}(pipeline, request.Method, request.Uri.ToUri(), {Configuration.ApiTypes.ResponseParameterName}, finalStateVia, skipApiVersionOverride, apiVersionOverrideValue);");
+                        using (_writer.Scope($"if (nextLinkOperation is NextLinkOperationImplementation nextLinkOperationValue)"))
+                        {
+                            // If nextLinkOperatino is NextLinkOperationImplementation, this implies that the operation is not complete
+                            // we need to store the nextLinkOperation to get lateset rehydration token
+                            _writer.Line($"_nextLinkOperation = nextLinkOperationValue;");
+                        }
+                        using (_writer.Scope($"else"))
+                        {
+                            // This implies the operation is complete and we can cache the rehydration token since it won't change anymore
+                            _writer.Line($"_rehydrationToken = {typeof(NextLinkOperationImplementation)}.{nameof(NextLinkOperationImplementation.GetRehydrationToken)}(request.Method, request.Uri.ToUri(), {Configuration.ApiTypes.ResponseParameterName}, finalStateVia, skipApiVersionOverride, apiVersionOverrideValue);");
+                        }
+                        if (_isGeneric)
+                        {
+                            _writer.Line($"_operation = new {_operationInternalType}({typeof(NextLinkOperationImplementation)}.{nameof(NextLinkOperationImplementation.Create)}({_sourceString}nextLinkOperation), clientDiagnostics, {Configuration.ApiTypes.ResponseParameterName}, {_name:L}, fallbackStrategy: new {typeof(SequentialDelayStrategy)}());");
+                        }
+                        else
+                        {
+                            _writer.Line($"_operation = new {_operationInternalType}({nextLinkOperation}, clientDiagnostics, {Configuration.ApiTypes.ResponseParameterName}, {_name:L}, fallbackStrategy: new {typeof(SequentialDelayStrategy)}());");
+                        }
+                        }
                     _writer.Line();
 
                     _writer.WriteXmlDocumentationInheritDoc();
@@ -92,7 +110,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                     _writer.WriteXmlDocumentationInheritDoc();
                     _writer
-                        .LineRaw("public override RehydrationToken? GetRehydrationToken() => _rehydrationToken;")
+                        .LineRaw("public override RehydrationToken? GetRehydrationToken() => _nextLinkOperation?.GetRehydrationToken() ?? _rehydrationToken;")
                         .Line();
 
                     if (_isGeneric)

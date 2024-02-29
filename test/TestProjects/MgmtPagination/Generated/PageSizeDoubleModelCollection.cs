@@ -100,7 +100,9 @@ namespace MgmtPagination
             try
             {
                 var response = await _pageSizeDoubleModelRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, data, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtPaginationArmOperation<PageSizeDoubleModelResource>(Response.FromValue(new PageSizeDoubleModelResource(Client, response), response.GetRawResponse()), RequestMethod.Put);
+                var uri = _pageSizeDoubleModelRestClient.CreatePutRequestUri(Id.SubscriptionId, Id.ResourceGroupName, name, data);
+                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
+                var operation = new MgmtPaginationArmOperation<PageSizeDoubleModelResource>(Response.FromValue(new PageSizeDoubleModelResource(Client, response), response.GetRawResponse()), rehydrationToken);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -158,7 +160,9 @@ namespace MgmtPagination
             try
             {
                 var response = _pageSizeDoubleModelRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, data, cancellationToken);
-                var operation = new MgmtPaginationArmOperation<PageSizeDoubleModelResource>(Response.FromValue(new PageSizeDoubleModelResource(Client, response), response.GetRawResponse()), RequestMethod.Put);
+                var uri = _pageSizeDoubleModelRestClient.CreatePutRequestUri(Id.SubscriptionId, Id.ResourceGroupName, name, data);
+                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
+                var operation = new MgmtPaginationArmOperation<PageSizeDoubleModelResource>(Response.FromValue(new PageSizeDoubleModelResource(Client, response), response.GetRawResponse()), rehydrationToken);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
