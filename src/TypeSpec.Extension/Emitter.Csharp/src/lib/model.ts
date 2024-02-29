@@ -183,6 +183,7 @@ function getCSharpInputTypeKindByIntrinsicModelName(
         case "plainTime":
             return InputPrimitiveTypeKind.Time;
         case "datetime":
+        case "utcDateTime":
             switch (encode?.encoding) {
                 case undefined:
                     return InputPrimitiveTypeKind.DateTime;
