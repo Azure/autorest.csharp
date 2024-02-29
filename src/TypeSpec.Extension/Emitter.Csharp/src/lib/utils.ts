@@ -45,16 +45,16 @@ export function getTypeName(
     type: Model | Enum | EnumMember | ModelProperty | Scalar | Operation
 ): string {
     var name = getLibraryName(context, type);
-    if (name) return name;
-    if (type.kind === "Model") {
-        name = getNameForTemplate(type);
-        if (name === "") {
+    if (type.kind !== "Model") return name;
+    if (type.name === name) {
+        var templateName = getNameForTemplate(type);
+        if (templateName === "") {
             const sdkModel = getSdkModel(context, type as Model);
             return sdkModel[0].generatedName || sdkModel[0].name;
         }
-        return name;
+        return templateName;
     }
-    return type.name;
+    return name;
 }
 
 export function createContentTypeOrAcceptParameter(

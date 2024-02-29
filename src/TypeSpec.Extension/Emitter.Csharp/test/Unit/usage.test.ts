@@ -405,7 +405,7 @@ describe("Test getUsages", () => {
         const program = await typeSpecCompile(
             `
             @doc("This is a model.")
-            @projectedName("csharp", "FooRenamed")
+            @projectedName("azure", "FooRenamed")
             model Foo {
                 @doc("name of the Foo")
                 name: string;
@@ -425,7 +425,7 @@ describe("Test getUsages", () => {
         const program = await typeSpecCompile(
             `
             @doc("fixed string enum")
-            @projectedName("csharp", "SimpleEnumRenamed")
+            @projectedName("azure", "SimpleEnumRenamed")
             enum SimpleEnum {
                 @doc("Enum value one")
                 One: "1",
