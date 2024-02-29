@@ -75,13 +75,13 @@ namespace CadlRanchProjects.Tests
         public Task Type_Property_ValueTypes_Float_get() => Test(async (host) =>
         {
             var response = await new ValueTypesClient(host, null).GetFloatClient().GetFloatAsync();
-            Assert.AreEqual(42.42f, response.Value.Property);
+            Assert.AreEqual(43.125f, response.Value.Property);
         });
 
         [Test]
         public Task Type_Property_ValueTypes_Float_put() => Test(async (host) =>
         {
-            Response response = await new ValueTypesClient(host, null).GetFloatClient().PutAsync(new FloatProperty((float)42.42).ToRequestContent());
+            Response response = await new ValueTypesClient(host, null).GetFloatClient().PutAsync(new FloatProperty((float)43.125).ToRequestContent());
             Assert.AreEqual(204, response.Status);
         });
 

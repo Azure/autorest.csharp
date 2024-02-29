@@ -104,15 +104,15 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<string> name = default;
+            string name = default;
             int lun = default;
-            Optional<CachingType> caching = default;
-            Optional<bool> writeAcceleratorEnabled = default;
+            CachingType? caching = default;
+            bool? writeAcceleratorEnabled = default;
             DiskCreateOptionType createOption = default;
-            Optional<int> diskSizeGB = default;
-            Optional<VirtualMachineScaleSetManagedDiskParameters> managedDisk = default;
-            Optional<long> diskIOPSReadWrite = default;
-            Optional<long> diskMBpsReadWrite = default;
+            int? diskSizeGB = default;
+            VirtualMachineScaleSetManagedDiskParameters managedDisk = default;
+            long? diskIOPSReadWrite = default;
+            long? diskMBpsReadWrite = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -193,15 +193,15 @@ namespace Azure.ResourceManager.Sample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new VirtualMachineScaleSetDataDisk(
-                name.Value,
+                name,
                 lun,
-                Optional.ToNullable(caching),
-                Optional.ToNullable(writeAcceleratorEnabled),
+                caching,
+                writeAcceleratorEnabled,
                 createOption,
-                Optional.ToNullable(diskSizeGB),
-                managedDisk.Value,
-                Optional.ToNullable(diskIOPSReadWrite),
-                Optional.ToNullable(diskMBpsReadWrite),
+                diskSizeGB,
+                managedDisk,
+                diskIOPSReadWrite,
+                diskMBpsReadWrite,
                 serializedAdditionalRawData);
         }
 

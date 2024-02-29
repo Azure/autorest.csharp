@@ -73,7 +73,7 @@ namespace OpenAI.Models
             {
                 return null;
             }
-            OptionalProperty<BinaryData> nEpochs = default;
+            BinaryData nEpochs = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -93,7 +93,7 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new FineTuningJobHyperparameters(nEpochs.Value, serializedAdditionalRawData);
+            return new FineTuningJobHyperparameters(nEpochs, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<FineTuningJobHyperparameters>.Write(ModelReaderWriterOptions options)

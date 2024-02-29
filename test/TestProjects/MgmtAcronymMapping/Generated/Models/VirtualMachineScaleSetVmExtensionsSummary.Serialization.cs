@@ -19,7 +19,7 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<string> name = default;
+            string name = default;
             IReadOnlyList<VirtualMachineStatusCodeCount> statusesSummary = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -43,7 +43,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetVmExtensionsSummary(name.Value, statusesSummary ?? new ChangeTrackingList<VirtualMachineStatusCodeCount>());
+            return new VirtualMachineScaleSetVmExtensionsSummary(name, statusesSummary ?? new ChangeTrackingList<VirtualMachineStatusCodeCount>());
         }
     }
 }

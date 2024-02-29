@@ -37,8 +37,8 @@ namespace MgmtExactMatchInheritance.Models
             {
                 return null;
             }
-            Optional<string> stringProperty = default;
-            Optional<ExactMatchModel10> modelProperty = default;
+            string stringProperty = default;
+            ExactMatchModel10 modelProperty = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("StringProperty"u8))
@@ -56,7 +56,7 @@ namespace MgmtExactMatchInheritance.Models
                     continue;
                 }
             }
-            return new SeparateClass(stringProperty.Value, modelProperty.Value);
+            return new SeparateClass(stringProperty, modelProperty);
         }
 
         internal partial class SeparateClassConverter : JsonConverter<SeparateClass>

@@ -130,19 +130,19 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<PatchOperationStatus> status = default;
-            Optional<string> installationActivityId = default;
-            Optional<bool> maintenanceWindowExceeded = default;
-            Optional<RebootStatus> rebootStatus = default;
-            Optional<int> notSelectedPatchCount = default;
-            Optional<int> excludedPatchCount = default;
-            Optional<int> pendingPatchCount = default;
-            Optional<int> installedPatchCount = default;
-            Optional<int> failedPatchCount = default;
-            Optional<DateTimeOffset> startTime = default;
-            Optional<DateTimeOffset> lastModifiedTime = default;
-            Optional<string> startedBy = default;
-            Optional<ApiError> error = default;
+            PatchOperationStatus? status = default;
+            string installationActivityId = default;
+            bool? maintenanceWindowExceeded = default;
+            RebootStatus? rebootStatus = default;
+            int? notSelectedPatchCount = default;
+            int? excludedPatchCount = default;
+            int? pendingPatchCount = default;
+            int? installedPatchCount = default;
+            int? failedPatchCount = default;
+            DateTimeOffset? startTime = default;
+            DateTimeOffset? lastModifiedTime = default;
+            string startedBy = default;
+            ApiError error = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -263,19 +263,19 @@ namespace Azure.ResourceManager.Sample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new LastPatchInstallationSummary(
-                Optional.ToNullable(status),
-                installationActivityId.Value,
-                Optional.ToNullable(maintenanceWindowExceeded),
-                Optional.ToNullable(rebootStatus),
-                Optional.ToNullable(notSelectedPatchCount),
-                Optional.ToNullable(excludedPatchCount),
-                Optional.ToNullable(pendingPatchCount),
-                Optional.ToNullable(installedPatchCount),
-                Optional.ToNullable(failedPatchCount),
-                Optional.ToNullable(startTime),
-                Optional.ToNullable(lastModifiedTime),
-                startedBy.Value,
-                error.Value,
+                status,
+                installationActivityId,
+                maintenanceWindowExceeded,
+                rebootStatus,
+                notSelectedPatchCount,
+                excludedPatchCount,
+                pendingPatchCount,
+                installedPatchCount,
+                failedPatchCount,
+                startTime,
+                lastModifiedTime,
+                startedBy,
+                error,
                 serializedAdditionalRawData);
         }
 

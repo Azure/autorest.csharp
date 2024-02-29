@@ -79,7 +79,7 @@ namespace MgmtDiscriminator.Models
                 return null;
             }
             IList<string> requiredCollection = default;
-            Optional<string> optionalString = default;
+            string optionalString = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -105,7 +105,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DerivedModel(optionalString.Value, serializedAdditionalRawData, requiredCollection);
+            return new DerivedModel(optionalString, serializedAdditionalRawData, requiredCollection);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

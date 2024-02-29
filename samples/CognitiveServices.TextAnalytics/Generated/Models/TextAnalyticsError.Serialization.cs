@@ -21,8 +21,8 @@ namespace CognitiveServices.TextAnalytics.Models
             }
             ErrorCodeValue code = default;
             string message = default;
-            Optional<string> target = default;
-            Optional<InnerError> innererror = default;
+            string target = default;
+            InnerError innererror = default;
             IReadOnlyList<TextAnalyticsError> details = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -65,7 +65,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            return new TextAnalyticsError(code, message, target.Value, innererror.Value, details ?? new ChangeTrackingList<TextAnalyticsError>());
+            return new TextAnalyticsError(code, message, target, innererror, details ?? new ChangeTrackingList<TextAnalyticsError>());
         }
     }
 }

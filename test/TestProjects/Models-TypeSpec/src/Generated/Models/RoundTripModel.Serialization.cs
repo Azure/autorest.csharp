@@ -146,7 +146,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteNumberValue(item);
             }
             writer.WriteEndArray();
-            if (!(OptionalUint8Array is ChangeTrackingList<int> collection && collection.IsUndefined))
+            if (!(OptionalUint8Array is ChangeTrackingList<byte> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("optionalUint8Array"u8);
                 writer.WriteStartArray();
@@ -184,7 +184,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteNumberValue(item);
             }
             writer.WriteEndArray();
-            if (!(OptionalInt8Array is ChangeTrackingList<int> collection0 && collection0.IsUndefined))
+            if (!(OptionalInt8Array is ChangeTrackingList<sbyte> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("optionalInt8Array"u8);
                 writer.WriteStartArray();
@@ -296,14 +296,14 @@ namespace ModelsTypeSpec.Models
             }
             string requiredString = default;
             int requiredInt = default;
-            Optional<string> nonRequiredString = default;
-            Optional<int> nonRequiredInt = default;
+            string nonRequiredString = default;
+            int? nonRequiredInt = default;
             int? requiredNullableInt = default;
             string requiredNullableString = default;
-            Optional<int?> nonRequiredNullableInt = default;
-            Optional<string> nonRequiredNullableString = default;
+            int? nonRequiredNullableInt = default;
+            string nonRequiredNullableString = default;
             int requiredReadonlyInt = default;
-            Optional<int> nonRequiredReadonlyInt = default;
+            int? nonRequiredReadonlyInt = default;
             BaseModelWithDiscriminator requiredModel = default;
             FixedStringEnum requiredFixedStringEnum = default;
             FixedIntEnum requiredFixedIntEnum = default;
@@ -313,13 +313,13 @@ namespace ModelsTypeSpec.Models
             IDictionary<string, string> requiredStringRecord = default;
             IDictionary<string, RecordItem> requiredModelRecord = default;
             BinaryData requiredBytes = default;
-            Optional<BinaryData> optionalBytes = default;
-            IList<int> requiredUint8Array = default;
-            IList<int> optionalUint8Array = default;
+            BinaryData optionalBytes = default;
+            IList<byte> requiredUint8Array = default;
+            IList<byte> optionalUint8Array = default;
             BinaryData requiredUnknown = default;
-            Optional<BinaryData> optionalUnknown = default;
-            IList<int> requiredInt8Array = default;
-            IList<int> optionalInt8Array = default;
+            BinaryData optionalUnknown = default;
+            IList<sbyte> requiredInt8Array = default;
+            IList<sbyte> optionalInt8Array = default;
             IList<int> requiredNullableIntList = default;
             IList<string> requiredNullableStringList = default;
             IList<int> nonRequiredNullableIntList = default;
@@ -482,10 +482,10 @@ namespace ModelsTypeSpec.Models
                 }
                 if (property.NameEquals("requiredUint8Array"u8))
                 {
-                    List<int> array = new List<int>();
+                    List<byte> array = new List<byte>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(item.GetInt32());
+                        array.Add(item.GetByte());
                     }
                     requiredUint8Array = array;
                     continue;
@@ -496,10 +496,10 @@ namespace ModelsTypeSpec.Models
                     {
                         continue;
                     }
-                    List<int> array = new List<int>();
+                    List<byte> array = new List<byte>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(item.GetInt32());
+                        array.Add(item.GetByte());
                     }
                     optionalUint8Array = array;
                     continue;
@@ -520,10 +520,10 @@ namespace ModelsTypeSpec.Models
                 }
                 if (property.NameEquals("requiredInt8Array"u8))
                 {
-                    List<int> array = new List<int>();
+                    List<sbyte> array = new List<sbyte>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(item.GetInt32());
+                        array.Add(item.GetSByte());
                     }
                     requiredInt8Array = array;
                     continue;
@@ -534,10 +534,10 @@ namespace ModelsTypeSpec.Models
                     {
                         continue;
                     }
-                    List<int> array = new List<int>();
+                    List<sbyte> array = new List<sbyte>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(item.GetInt32());
+                        array.Add(item.GetSByte());
                     }
                     optionalInt8Array = array;
                     continue;
@@ -610,14 +610,14 @@ namespace ModelsTypeSpec.Models
                 serializedAdditionalRawData,
                 requiredString,
                 requiredInt,
-                nonRequiredString.Value,
-                Optional.ToNullable(nonRequiredInt),
+                nonRequiredString,
+                nonRequiredInt,
                 requiredNullableInt,
                 requiredNullableString,
-                Optional.ToNullable(nonRequiredNullableInt),
-                nonRequiredNullableString.Value,
+                nonRequiredNullableInt,
+                nonRequiredNullableString,
                 requiredReadonlyInt,
-                Optional.ToNullable(nonRequiredReadonlyInt),
+                nonRequiredReadonlyInt,
                 requiredModel,
                 requiredFixedStringEnum,
                 requiredFixedIntEnum,
@@ -627,13 +627,13 @@ namespace ModelsTypeSpec.Models
                 requiredStringRecord,
                 requiredModelRecord,
                 requiredBytes,
-                optionalBytes.Value,
+                optionalBytes,
                 requiredUint8Array,
-                optionalUint8Array ?? new ChangeTrackingList<int>(),
+                optionalUint8Array ?? new ChangeTrackingList<byte>(),
                 requiredUnknown,
-                optionalUnknown.Value,
+                optionalUnknown,
                 requiredInt8Array,
-                optionalInt8Array ?? new ChangeTrackingList<int>(),
+                optionalInt8Array ?? new ChangeTrackingList<sbyte>(),
                 requiredNullableIntList,
                 requiredNullableStringList,
                 nonRequiredNullableIntList ?? new ChangeTrackingList<int>(),

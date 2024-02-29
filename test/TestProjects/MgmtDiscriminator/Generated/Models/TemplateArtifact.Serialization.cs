@@ -130,9 +130,9 @@ namespace MgmtDiscriminator.Models
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
+            SystemData systemData = default;
             BinaryData template = default;
-            Optional<string> resourceGroup = default;
+            string resourceGroup = default;
             IDictionary<string, BinaryData> parameters = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -216,11 +216,11 @@ namespace MgmtDiscriminator.Models
                 id,
                 name,
                 type,
-                systemData.Value,
+                systemData,
                 kind,
                 serializedAdditionalRawData,
                 template,
-                resourceGroup.Value,
+                resourceGroup,
                 parameters);
         }
 

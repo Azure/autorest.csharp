@@ -111,7 +111,7 @@ namespace _Type.Property.ValueTypes.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                property = 42.42F,
+                property = 43.125F,
             });
             Response response = client.Put(content);
 
@@ -126,7 +126,7 @@ namespace _Type.Property.ValueTypes.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                property = 42.42F,
+                property = 43.125F,
             });
             Response response = await client.PutAsync(content);
 
@@ -161,7 +161,7 @@ namespace _Type.Property.ValueTypes.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                property = 42.42F,
+                property = 43.125F,
             });
             Response response = client.Put(content);
 
@@ -176,7 +176,7 @@ namespace _Type.Property.ValueTypes.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                property = 42.42F,
+                property = 43.125F,
             });
             Response response = await client.PutAsync(content);
 

@@ -42,9 +42,9 @@ namespace MgmtSupersetFlattenInheritance.Models
             {
                 return null;
             }
-            Optional<string> bar = default;
-            Optional<string> id = default;
-            Optional<string> foo = default;
+            string bar = default;
+            string id = default;
+            string foo = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("bar"u8))
@@ -75,7 +75,7 @@ namespace MgmtSupersetFlattenInheritance.Models
                     continue;
                 }
             }
-            return new NonResourceModel1(bar.Value, id.Value, foo.Value);
+            return new NonResourceModel1(bar, id, foo);
         }
     }
 }

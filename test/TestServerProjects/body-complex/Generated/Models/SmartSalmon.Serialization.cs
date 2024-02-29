@@ -88,11 +88,11 @@ namespace body_complex.Models
             {
                 return null;
             }
-            Optional<string> collegeDegree = default;
-            Optional<string> location = default;
-            Optional<bool> iswild = default;
+            string collegeDegree = default;
+            string location = default;
+            bool? iswild = default;
             string fishtype = default;
-            Optional<string> species = default;
+            string species = default;
             float length = default;
             IList<Fish> siblings = default;
             IDictionary<string, object> additionalProperties = default;
@@ -152,12 +152,12 @@ namespace body_complex.Models
             additionalProperties = additionalPropertiesDictionary;
             return new SmartSalmon(
                 fishtype,
-                species.Value,
+                species,
                 length,
                 siblings ?? new ChangeTrackingList<Fish>(),
-                location.Value,
-                Optional.ToNullable(iswild),
-                collegeDegree.Value,
+                location,
+                iswild,
+                collegeDegree,
                 additionalProperties);
         }
 

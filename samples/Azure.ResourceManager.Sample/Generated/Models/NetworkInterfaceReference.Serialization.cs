@@ -78,8 +78,8 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<string> id = default;
-            Optional<bool> primary = default;
+            string id = default;
+            bool? primary = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -116,7 +116,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new NetworkInterfaceReference(id.Value, serializedAdditionalRawData, Optional.ToNullable(primary));
+            return new NetworkInterfaceReference(id, serializedAdditionalRawData, primary);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

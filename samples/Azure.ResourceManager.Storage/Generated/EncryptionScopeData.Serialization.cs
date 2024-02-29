@@ -53,13 +53,13 @@ namespace Azure.ResourceManager.Storage
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
-            Optional<EncryptionScopeSource> source = default;
-            Optional<EncryptionScopeState> state = default;
-            Optional<DateTimeOffset> creationTime = default;
-            Optional<DateTimeOffset> lastModifiedTime = default;
-            Optional<EncryptionScopeKeyVaultProperties> keyVaultProperties = default;
-            Optional<bool> requireInfrastructureEncryption = default;
+            SystemData systemData = default;
+            EncryptionScopeSource? source = default;
+            EncryptionScopeState? state = default;
+            DateTimeOffset? creationTime = default;
+            DateTimeOffset? lastModifiedTime = default;
+            EncryptionScopeKeyVaultProperties keyVaultProperties = default;
+            bool? requireInfrastructureEncryption = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -157,13 +157,13 @@ namespace Azure.ResourceManager.Storage
                 id,
                 name,
                 type,
-                systemData.Value,
-                Optional.ToNullable(source),
-                Optional.ToNullable(state),
-                Optional.ToNullable(creationTime),
-                Optional.ToNullable(lastModifiedTime),
-                keyVaultProperties.Value,
-                Optional.ToNullable(requireInfrastructureEncryption));
+                systemData,
+                source,
+                state,
+                creationTime,
+                lastModifiedTime,
+                keyVaultProperties,
+                requireInfrastructureEncryption);
         }
     }
 }

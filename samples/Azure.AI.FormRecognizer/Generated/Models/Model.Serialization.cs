@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
 {
@@ -19,8 +18,8 @@ namespace Azure.AI.FormRecognizer.Models
                 return null;
             }
             ModelInfo modelInfo = default;
-            Optional<KeysResult> keys = default;
-            Optional<TrainResult> trainResult = default;
+            KeysResult keys = default;
+            TrainResult trainResult = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("modelInfo"u8))
@@ -47,7 +46,7 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            return new Model(modelInfo, keys.Value, trainResult.Value);
+            return new Model(modelInfo, keys, trainResult);
         }
     }
 }

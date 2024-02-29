@@ -65,12 +65,12 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<string> computerNamePrefix = default;
-            Optional<string> adminUsername = default;
-            Optional<string> adminPassword = default;
-            Optional<string> customData = default;
-            Optional<WindowsConfiguration> windowsConfiguration = default;
-            Optional<LinuxConfiguration> linuxConfiguration = default;
+            string computerNamePrefix = default;
+            string adminUsername = default;
+            string adminPassword = default;
+            string customData = default;
+            WindowsConfiguration windowsConfiguration = default;
+            LinuxConfiguration linuxConfiguration = default;
             IList<VaultSecretGroup> secrets = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -128,12 +128,12 @@ namespace MgmtAcronymMapping.Models
                 }
             }
             return new VirtualMachineScaleSetOSProfile(
-                computerNamePrefix.Value,
-                adminUsername.Value,
-                adminPassword.Value,
-                customData.Value,
-                windowsConfiguration.Value,
-                linuxConfiguration.Value,
+                computerNamePrefix,
+                adminUsername,
+                adminPassword,
+                customData,
+                windowsConfiguration,
+                linuxConfiguration,
                 secrets ?? new ChangeTrackingList<VaultSecretGroup>());
         }
     }

@@ -83,7 +83,7 @@ namespace MgmtDiscriminator.Models
             }
             CacheKeyQueryStringActionParametersTypeName typeName = default;
             QueryStringBehavior queryStringBehavior = default;
-            Optional<string> queryParameters = default;
+            string queryParameters = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -114,7 +114,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new CacheKeyQueryStringActionParameters(typeName, queryStringBehavior, queryParameters.Value, serializedAdditionalRawData);
+            return new CacheKeyQueryStringActionParameters(typeName, queryStringBehavior, queryParameters, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

@@ -101,9 +101,9 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             {
                 return null;
             }
-            Optional<string> name = default;
+            string name = default;
             IList<string> fields = default;
-            Optional<int> nullProperty = default;
+            int? nullProperty = default;
             IDictionary<string, string> keyValuePairs = default;
             int xProperty = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
@@ -164,9 +164,9 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ModelWithPersistableOnly(
-                name.Value,
+                name,
                 fields ?? new ChangeTrackingList<string>(),
-                Optional.ToNullable(nullProperty),
+                nullProperty,
                 keyValuePairs ?? new ChangeTrackingDictionary<string, string>(),
                 xProperty,
                 serializedAdditionalRawData);

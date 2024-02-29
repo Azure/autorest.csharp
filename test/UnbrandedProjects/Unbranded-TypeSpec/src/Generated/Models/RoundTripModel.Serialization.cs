@@ -281,17 +281,17 @@ namespace UnbrandedTypeSpec.Models
             IList<StringFixedEnum?> requiredCollection = default;
             IDictionary<string, StringExtensibleEnum?> requiredDictionary = default;
             Thing requiredModel = default;
-            OptionalProperty<IntExtensibleEnum> intExtensibleEnum = default;
+            IntExtensibleEnum? intExtensibleEnum = default;
             IList<IntExtensibleEnum> intExtensibleEnumCollection = default;
-            OptionalProperty<FloatExtensibleEnum> floatExtensibleEnum = default;
+            FloatExtensibleEnum? floatExtensibleEnum = default;
             IList<FloatExtensibleEnum> floatExtensibleEnumCollection = default;
-            OptionalProperty<FloatFixedEnum> floatFixedEnum = default;
+            FloatFixedEnum? floatFixedEnum = default;
             IList<FloatFixedEnum> floatFixedEnumCollection = default;
-            OptionalProperty<IntFixedEnum> intFixedEnum = default;
+            IntFixedEnum? intFixedEnum = default;
             IList<IntFixedEnum> intFixedEnumCollection = default;
-            OptionalProperty<StringFixedEnum?> stringFixedEnum = default;
+            StringFixedEnum? stringFixedEnum = default;
             BinaryData requiredUnknown = default;
-            OptionalProperty<BinaryData> optionalUnknown = default;
+            BinaryData optionalUnknown = default;
             IDictionary<string, BinaryData> requiredRecordUnknown = default;
             IDictionary<string, BinaryData> optionalRecordUnknown = default;
             IReadOnlyDictionary<string, BinaryData> readOnlyRequiredRecordUnknown = default;
@@ -559,17 +559,17 @@ namespace UnbrandedTypeSpec.Models
                 requiredCollection,
                 requiredDictionary,
                 requiredModel,
-                OptionalProperty.ToNullable(intExtensibleEnum),
+                intExtensibleEnum,
                 intExtensibleEnumCollection ?? new OptionalList<IntExtensibleEnum>(),
-                OptionalProperty.ToNullable(floatExtensibleEnum),
+                floatExtensibleEnum,
                 floatExtensibleEnumCollection ?? new OptionalList<FloatExtensibleEnum>(),
-                OptionalProperty.ToNullable(floatFixedEnum),
+                floatFixedEnum,
                 floatFixedEnumCollection ?? new OptionalList<FloatFixedEnum>(),
-                OptionalProperty.ToNullable(intFixedEnum),
+                intFixedEnum,
                 intFixedEnumCollection ?? new OptionalList<IntFixedEnum>(),
-                OptionalProperty.ToNullable(stringFixedEnum),
+                stringFixedEnum,
                 requiredUnknown,
-                optionalUnknown.Value,
+                optionalUnknown,
                 requiredRecordUnknown,
                 optionalRecordUnknown ?? new OptionalDictionary<string, BinaryData>(),
                 readOnlyRequiredRecordUnknown,

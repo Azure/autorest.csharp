@@ -55,8 +55,8 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<NetworkRuleBypassOption> bypass = default;
-            Optional<NetworkRuleAction> defaultAction = default;
+            NetworkRuleBypassOption? bypass = default;
+            NetworkRuleAction? defaultAction = default;
             IList<IPRule> ipRules = default;
             IList<VirtualNetworkRule> virtualNetworkRules = default;
             foreach (var property in element.EnumerateObject())
@@ -108,7 +108,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new NetworkRuleSet(Optional.ToNullable(bypass), Optional.ToNullable(defaultAction), ipRules ?? new ChangeTrackingList<IPRule>(), virtualNetworkRules ?? new ChangeTrackingList<VirtualNetworkRule>());
+            return new NetworkRuleSet(bypass, defaultAction, ipRules ?? new ChangeTrackingList<IPRule>(), virtualNetworkRules ?? new ChangeTrackingList<VirtualNetworkRule>());
         }
     }
 }

@@ -79,7 +79,7 @@ namespace ModelShapes.Models
             {
                 return null;
             }
-            Optional<ReadonlyModel> readonlyProperty = default;
+            ReadonlyModel readonlyProperty = default;
             IReadOnlyList<ReadonlyModel> readonlyListProperty = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -114,7 +114,7 @@ namespace ModelShapes.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new MixedModelWithReadonlyProperty(readonlyProperty.Value, readonlyListProperty ?? new ChangeTrackingList<ReadonlyModel>(), serializedAdditionalRawData);
+            return new MixedModelWithReadonlyProperty(readonlyProperty, readonlyListProperty ?? new ChangeTrackingList<ReadonlyModel>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<MixedModelWithReadonlyProperty>.Write(ModelReaderWriterOptions options)

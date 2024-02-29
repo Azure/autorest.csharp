@@ -40,7 +40,7 @@ namespace AutoRest.CSharp.Common.Output.Models
                 }
             }
 
-            public static ValueExpression FallBackToChangeTrackingCollection(TypedValueExpression collection)
+            public static ValueExpression FallBackToChangeTrackingCollection(TypedValueExpression collection, CSharpType? paramType)
             {
                 if (!TypeFactory.IsCollectionType(collection.Type) || TypeFactory.IsReadOnlyMemory(collection.Type))
                 {
@@ -51,8 +51,6 @@ namespace AutoRest.CSharp.Common.Output.Models
                 var changeTrackingType = new CSharpType(collectionType, collection.Type.Arguments);
                 return NullCoalescing(collection, New.Instance(changeTrackingType));
             }
-
-            public static ValueExpression ToNullable(ValueExpression optional) => new InvokeStaticMethodExpression(Configuration.ApiTypes.OptionalType, Configuration.ApiTypes.OptionalToNullableName, new[] { optional });
 
             public static MethodBodyStatement WrapInIsDefined(PropertySerialization serialization, MethodBodyStatement statement, bool isBicep = false)
             {

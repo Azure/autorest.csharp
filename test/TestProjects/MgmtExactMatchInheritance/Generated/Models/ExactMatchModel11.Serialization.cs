@@ -27,8 +27,8 @@ namespace MgmtExactMatchInheritance.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<ResourceType> type = default;
+            string name = default;
+            ResourceType? type = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -46,7 +46,7 @@ namespace MgmtExactMatchInheritance.Models
                     continue;
                 }
             }
-            return new ExactMatchModel11(name.Value, Optional.ToNullable(type));
+            return new ExactMatchModel11(name, type);
         }
 
         internal partial class ExactMatchModel11Converter : JsonConverter<ExactMatchModel11>

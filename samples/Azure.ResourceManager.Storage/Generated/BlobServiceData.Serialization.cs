@@ -74,20 +74,20 @@ namespace Azure.ResourceManager.Storage
             {
                 return null;
             }
-            Optional<StorageSku> sku = default;
+            StorageSku sku = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
-            Optional<CorsRules> cors = default;
-            Optional<string> defaultServiceVersion = default;
-            Optional<DeleteRetentionPolicy> deleteRetentionPolicy = default;
-            Optional<bool> isVersioningEnabled = default;
-            Optional<bool> automaticSnapshotPolicyEnabled = default;
-            Optional<ChangeFeed> changeFeed = default;
-            Optional<RestorePolicyProperties> restorePolicy = default;
-            Optional<DeleteRetentionPolicy> containerDeleteRetentionPolicy = default;
-            Optional<LastAccessTimeTrackingPolicy> lastAccessTimeTrackingPolicy = default;
+            SystemData systemData = default;
+            CorsRules cors = default;
+            string defaultServiceVersion = default;
+            DeleteRetentionPolicy deleteRetentionPolicy = default;
+            bool? isVersioningEnabled = default;
+            bool? automaticSnapshotPolicyEnabled = default;
+            ChangeFeed changeFeed = default;
+            RestorePolicyProperties restorePolicy = default;
+            DeleteRetentionPolicy containerDeleteRetentionPolicy = default;
+            LastAccessTimeTrackingPolicy lastAccessTimeTrackingPolicy = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sku"u8))
@@ -217,17 +217,17 @@ namespace Azure.ResourceManager.Storage
                 id,
                 name,
                 type,
-                systemData.Value,
-                sku.Value,
-                cors.Value,
-                defaultServiceVersion.Value,
-                deleteRetentionPolicy.Value,
-                Optional.ToNullable(isVersioningEnabled),
-                Optional.ToNullable(automaticSnapshotPolicyEnabled),
-                changeFeed.Value,
-                restorePolicy.Value,
-                containerDeleteRetentionPolicy.Value,
-                lastAccessTimeTrackingPolicy.Value);
+                systemData,
+                sku,
+                cors,
+                defaultServiceVersion,
+                deleteRetentionPolicy,
+                isVersioningEnabled,
+                automaticSnapshotPolicyEnabled,
+                changeFeed,
+                restorePolicy,
+                containerDeleteRetentionPolicy,
+                lastAccessTimeTrackingPolicy);
         }
     }
 }

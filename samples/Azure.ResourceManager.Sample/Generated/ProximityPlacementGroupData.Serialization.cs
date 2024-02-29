@@ -150,18 +150,18 @@ namespace Azure.ResourceManager.Sample
             {
                 return null;
             }
-            Optional<ExtendedLocation> extendedLocation = default;
+            ExtendedLocation extendedLocation = default;
             IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
-            Optional<ProximityPlacementGroupType> proximityPlacementGroupType = default;
+            SystemData systemData = default;
+            ProximityPlacementGroupType? proximityPlacementGroupType = default;
             IReadOnlyList<SubResourceWithColocationStatus> virtualMachines = default;
             IReadOnlyList<SubResourceWithColocationStatus> virtualMachineScaleSets = default;
             IReadOnlyList<SubResourceWithColocationStatus> availabilitySets = default;
-            Optional<InstanceViewStatus> colocationStatus = default;
+            InstanceViewStatus colocationStatus = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -300,15 +300,15 @@ namespace Azure.ResourceManager.Sample
                 id,
                 name,
                 type,
-                systemData.Value,
+                systemData,
                 tags ?? new ChangeTrackingDictionary<string, string>(),
                 location,
                 extendedLocation,
-                Optional.ToNullable(proximityPlacementGroupType),
+                proximityPlacementGroupType,
                 virtualMachines ?? new ChangeTrackingList<SubResourceWithColocationStatus>(),
                 virtualMachineScaleSets ?? new ChangeTrackingList<SubResourceWithColocationStatus>(),
                 availabilitySets ?? new ChangeTrackingList<SubResourceWithColocationStatus>(),
-                colocationStatus.Value,
+                colocationStatus,
                 serializedAdditionalRawData);
         }
 

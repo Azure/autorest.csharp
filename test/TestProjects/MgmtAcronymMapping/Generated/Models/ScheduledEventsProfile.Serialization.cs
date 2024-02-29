@@ -29,7 +29,7 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<TerminateNotificationProfile> terminateNotificationProfile = default;
+            TerminateNotificationProfile terminateNotificationProfile = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("terminateNotificationProfile"u8))
@@ -42,7 +42,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new ScheduledEventsProfile(terminateNotificationProfile.Value);
+            return new ScheduledEventsProfile(terminateNotificationProfile);
         }
     }
 }

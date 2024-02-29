@@ -69,7 +69,7 @@ namespace TypeSchemaMapping.Models
             {
                 return null;
             }
-            Optional<InternalModel> internalProperty = default;
+            InternalModel internalProperty = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -89,7 +89,7 @@ namespace TypeSchemaMapping.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ModelWithInternalModel(internalProperty.Value, serializedAdditionalRawData);
+            return new ModelWithInternalModel(internalProperty, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ModelWithInternalModel>.Write(ModelReaderWriterOptions options)

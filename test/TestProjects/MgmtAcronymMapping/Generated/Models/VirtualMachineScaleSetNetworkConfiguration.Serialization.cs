@@ -72,13 +72,13 @@ namespace MgmtAcronymMapping.Models
                 return null;
             }
             string name = default;
-            Optional<string> id = default;
-            Optional<bool> primary = default;
-            Optional<bool> enableAcceleratedNetworking = default;
-            Optional<WritableSubResource> networkSecurityGroup = default;
-            Optional<VirtualMachineScaleSetNetworkConfigurationDnsSettings> dnsSettings = default;
+            string id = default;
+            bool? primary = default;
+            bool? enableAcceleratedNetworking = default;
+            WritableSubResource networkSecurityGroup = default;
+            VirtualMachineScaleSetNetworkConfigurationDnsSettings dnsSettings = default;
             IList<VirtualMachineScaleSetIPConfiguration> ipConfigurations = default;
-            Optional<bool> enableIPForwarding = default;
+            bool? enableIPForwarding = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -164,14 +164,14 @@ namespace MgmtAcronymMapping.Models
                 }
             }
             return new VirtualMachineScaleSetNetworkConfiguration(
-                id.Value,
+                id,
                 name,
-                Optional.ToNullable(primary),
-                Optional.ToNullable(enableAcceleratedNetworking),
+                primary,
+                enableAcceleratedNetworking,
                 networkSecurityGroup,
-                dnsSettings.Value,
+                dnsSettings,
                 ipConfigurations ?? new ChangeTrackingList<VirtualMachineScaleSetIPConfiguration>(),
-                Optional.ToNullable(enableIPForwarding));
+                enableIPForwarding);
         }
     }
 }

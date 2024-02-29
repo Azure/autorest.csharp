@@ -20,7 +20,7 @@ namespace Azure.Network.Management.Interface.Models
                 return null;
             }
             IReadOnlyList<EffectiveRoute> value = default;
-            Optional<string> nextLink = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -43,7 +43,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new EffectiveRouteListResult(value ?? new ChangeTrackingList<EffectiveRoute>(), nextLink.Value);
+            return new EffectiveRouteListResult(value ?? new ChangeTrackingList<EffectiveRoute>(), nextLink);
         }
     }
 }

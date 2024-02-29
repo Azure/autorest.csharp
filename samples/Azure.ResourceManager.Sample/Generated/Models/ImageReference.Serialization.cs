@@ -95,12 +95,12 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<string> publisher = default;
-            Optional<string> offer = default;
-            Optional<string> sku = default;
-            Optional<string> version = default;
-            Optional<string> exactVersion = default;
-            Optional<string> id = default;
+            string publisher = default;
+            string offer = default;
+            string sku = default;
+            string version = default;
+            string exactVersion = default;
+            string id = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -142,13 +142,13 @@ namespace Azure.ResourceManager.Sample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ImageReference(
-                id.Value,
+                id,
                 serializedAdditionalRawData,
-                publisher.Value,
-                offer.Value,
-                sku.Value,
-                version.Value,
-                exactVersion.Value);
+                publisher,
+                offer,
+                sku,
+                version,
+                exactVersion);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

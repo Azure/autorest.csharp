@@ -34,8 +34,8 @@ namespace Azure.ResourceManager.Fake.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<ResourceType> type = default;
+            string name = default;
+            ResourceType type = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -53,7 +53,7 @@ namespace Azure.ResourceManager.Fake.Models
                     continue;
                 }
             }
-            return new CheckNameAvailabilityContent(name.Value, type);
+            return new CheckNameAvailabilityContent(name, type);
         }
 
         internal partial class CheckNameAvailabilityContentConverter : JsonConverter<CheckNameAvailabilityContent>

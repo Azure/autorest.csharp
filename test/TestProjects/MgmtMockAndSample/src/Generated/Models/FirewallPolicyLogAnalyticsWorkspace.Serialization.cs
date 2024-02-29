@@ -35,8 +35,8 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<string> region = default;
-            Optional<WritableSubResource> workspaceId = default;
+            string region = default;
+            WritableSubResource workspaceId = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("region"u8))
@@ -54,7 +54,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new FirewallPolicyLogAnalyticsWorkspace(region.Value, workspaceId);
+            return new FirewallPolicyLogAnalyticsWorkspace(region, workspaceId);
         }
     }
 }

@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace AppConfiguration.Models
 {
@@ -18,7 +17,7 @@ namespace AppConfiguration.Models
             {
                 return null;
             }
-            Optional<string> name = default;
+            string name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -27,7 +26,7 @@ namespace AppConfiguration.Models
                     continue;
                 }
             }
-            return new Label(name.Value);
+            return new Label(name);
         }
     }
 }

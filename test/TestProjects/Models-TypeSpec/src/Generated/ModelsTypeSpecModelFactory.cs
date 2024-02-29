@@ -133,16 +133,16 @@ namespace ModelsTypeSpec.Models
         /// <param name="nonRequiredNullableIntList"> Optional nullable model list. </param>
         /// <param name="nonRequiredNullableStringList"> Optional nullable string list. </param>
         /// <returns> A new <see cref="Models.RoundTripModel"/> instance for mocking. </returns>
-        public static RoundTripModel RoundTripModel(string requiredString = null, int requiredInt = default, string nonRequiredString = null, int? nonRequiredInt = null, int? requiredNullableInt = null, string requiredNullableString = null, int? nonRequiredNullableInt = null, string nonRequiredNullableString = null, int requiredReadonlyInt = default, int? nonRequiredReadonlyInt = null, BaseModelWithDiscriminator requiredModel = null, FixedStringEnum requiredFixedStringEnum = default, FixedIntEnum requiredFixedIntEnum = default, ExtensibleEnum requiredExtensibleEnum = default, IEnumerable<CollectionItem> requiredList = null, IDictionary<string, int> requiredIntRecord = null, IDictionary<string, string> requiredStringRecord = null, IDictionary<string, RecordItem> requiredModelRecord = null, BinaryData requiredBytes = null, BinaryData optionalBytes = null, IEnumerable<int> requiredUint8Array = null, IEnumerable<int> optionalUint8Array = null, BinaryData requiredUnknown = null, BinaryData optionalUnknown = null, IEnumerable<int> requiredInt8Array = null, IEnumerable<int> optionalInt8Array = null, IEnumerable<int> requiredNullableIntList = null, IEnumerable<string> requiredNullableStringList = null, IEnumerable<int> nonRequiredNullableIntList = null, IEnumerable<string> nonRequiredNullableStringList = null)
+        public static RoundTripModel RoundTripModel(string requiredString = null, int requiredInt = default, string nonRequiredString = null, int? nonRequiredInt = null, int? requiredNullableInt = null, string requiredNullableString = null, int? nonRequiredNullableInt = null, string nonRequiredNullableString = null, int requiredReadonlyInt = default, int? nonRequiredReadonlyInt = null, BaseModelWithDiscriminator requiredModel = null, FixedStringEnum requiredFixedStringEnum = default, FixedIntEnum requiredFixedIntEnum = default, ExtensibleEnum requiredExtensibleEnum = default, IEnumerable<CollectionItem> requiredList = null, IDictionary<string, int> requiredIntRecord = null, IDictionary<string, string> requiredStringRecord = null, IDictionary<string, RecordItem> requiredModelRecord = null, BinaryData requiredBytes = null, BinaryData optionalBytes = null, IEnumerable<byte> requiredUint8Array = null, IEnumerable<byte> optionalUint8Array = null, BinaryData requiredUnknown = null, BinaryData optionalUnknown = null, IEnumerable<sbyte> requiredInt8Array = null, IEnumerable<sbyte> optionalInt8Array = null, IEnumerable<int> requiredNullableIntList = null, IEnumerable<string> requiredNullableStringList = null, IEnumerable<int> nonRequiredNullableIntList = null, IEnumerable<string> nonRequiredNullableStringList = null)
         {
             requiredList ??= new List<CollectionItem>();
             requiredIntRecord ??= new Dictionary<string, int>();
             requiredStringRecord ??= new Dictionary<string, string>();
             requiredModelRecord ??= new Dictionary<string, RecordItem>();
-            requiredUint8Array ??= new List<int>();
-            optionalUint8Array ??= new List<int>();
-            requiredInt8Array ??= new List<int>();
-            optionalInt8Array ??= new List<int>();
+            requiredUint8Array ??= new List<byte>();
+            optionalUint8Array ??= new List<byte>();
+            requiredInt8Array ??= new List<sbyte>();
+            optionalInt8Array ??= new List<sbyte>();
             requiredNullableIntList ??= new List<int>();
             requiredNullableStringList ??= new List<string>();
             nonRequiredNullableIntList ??= new List<int>();

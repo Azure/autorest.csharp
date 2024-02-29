@@ -73,7 +73,7 @@ namespace MgmtDiscriminator.Models
                 return null;
             }
             MatchVariable name = "Unknown";
-            Optional<string> foo = default;
+            string foo = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -94,7 +94,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new UnknownDeliveryRuleCondition(name, foo.Value, serializedAdditionalRawData);
+            return new UnknownDeliveryRuleCondition(name, foo, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

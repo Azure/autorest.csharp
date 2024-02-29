@@ -266,17 +266,17 @@ namespace Azure.NewProject.TypeSpec.Models
             IList<StringFixedEnum> requiredCollection = default;
             IDictionary<string, StringExtensibleEnum> requiredDictionary = default;
             Thing requiredModel = default;
-            Optional<IntExtensibleEnum> intExtensibleEnum = default;
+            IntExtensibleEnum? intExtensibleEnum = default;
             IList<IntExtensibleEnum> intExtensibleEnumCollection = default;
-            Optional<FloatExtensibleEnum> floatExtensibleEnum = default;
+            FloatExtensibleEnum? floatExtensibleEnum = default;
             IList<FloatExtensibleEnum> floatExtensibleEnumCollection = default;
-            Optional<FloatFixedEnum> floatFixedEnum = default;
+            FloatFixedEnum? floatFixedEnum = default;
             IList<FloatFixedEnum> floatFixedEnumCollection = default;
-            Optional<IntFixedEnum> intFixedEnum = default;
+            IntFixedEnum? intFixedEnum = default;
             IList<IntFixedEnum> intFixedEnumCollection = default;
-            Optional<StringFixedEnum> stringFixedEnum = default;
+            StringFixedEnum? stringFixedEnum = default;
             BinaryData requiredUnknown = default;
-            Optional<BinaryData> optionalUnknown = default;
+            BinaryData optionalUnknown = default;
             IDictionary<string, BinaryData> requiredRecordUnknown = default;
             IDictionary<string, BinaryData> optionalRecordUnknown = default;
             IReadOnlyDictionary<string, BinaryData> readOnlyRequiredRecordUnknown = default;
@@ -523,17 +523,17 @@ namespace Azure.NewProject.TypeSpec.Models
                 requiredCollection,
                 requiredDictionary,
                 requiredModel,
-                Optional.ToNullable(intExtensibleEnum),
+                intExtensibleEnum,
                 intExtensibleEnumCollection ?? new ChangeTrackingList<IntExtensibleEnum>(),
-                Optional.ToNullable(floatExtensibleEnum),
+                floatExtensibleEnum,
                 floatExtensibleEnumCollection ?? new ChangeTrackingList<FloatExtensibleEnum>(),
-                Optional.ToNullable(floatFixedEnum),
+                floatFixedEnum,
                 floatFixedEnumCollection ?? new ChangeTrackingList<FloatFixedEnum>(),
-                Optional.ToNullable(intFixedEnum),
+                intFixedEnum,
                 intFixedEnumCollection ?? new ChangeTrackingList<IntFixedEnum>(),
-                Optional.ToNullable(stringFixedEnum),
+                stringFixedEnum,
                 requiredUnknown,
-                optionalUnknown.Value,
+                optionalUnknown,
                 requiredRecordUnknown,
                 optionalRecordUnknown ?? new ChangeTrackingDictionary<string, BinaryData>(),
                 readOnlyRequiredRecordUnknown,

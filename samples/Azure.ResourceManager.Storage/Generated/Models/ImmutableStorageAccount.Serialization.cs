@@ -34,8 +34,8 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Optional<bool> enabled = default;
-            Optional<AccountImmutabilityPolicyProperties> immutabilityPolicy = default;
+            bool? enabled = default;
+            AccountImmutabilityPolicyProperties immutabilityPolicy = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("enabled"u8))
@@ -57,7 +57,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new ImmutableStorageAccount(Optional.ToNullable(enabled), immutabilityPolicy.Value);
+            return new ImmutableStorageAccount(enabled, immutabilityPolicy);
         }
     }
 }

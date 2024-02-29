@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace MgmtListMethods.Models
 {
@@ -18,11 +17,11 @@ namespace MgmtListMethods.Models
             {
                 return null;
             }
-            Optional<string> id = default;
-            Optional<string> type = default;
-            Optional<long> limit = default;
-            Optional<QuotaUnit> unit = default;
-            Optional<Status> status = default;
+            string id = default;
+            string type = default;
+            long? limit = default;
+            QuotaUnit? unit = default;
+            Status? status = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -63,7 +62,7 @@ namespace MgmtListMethods.Models
                     continue;
                 }
             }
-            return new UpdateWorkspaceQuotas(id.Value, type.Value, Optional.ToNullable(limit), Optional.ToNullable(unit), Optional.ToNullable(status));
+            return new UpdateWorkspaceQuotas(id, type, limit, unit, status);
         }
     }
 }

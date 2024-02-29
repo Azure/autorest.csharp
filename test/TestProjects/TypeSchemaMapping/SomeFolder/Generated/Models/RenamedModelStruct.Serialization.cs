@@ -88,10 +88,10 @@ namespace CustomNamespace
         {
             options ??= new ModelReaderWriterOptions("W");
 
-            Optional<string> modelProperty = default;
-            Optional<string> propertyToField = default;
-            Optional<CustomFruitEnum> fruit = default;
-            Optional<CustomDaysOfWeek> daysOfWeek = default;
+            string modelProperty = default;
+            string propertyToField = default;
+            CustomFruitEnum? fruit = default;
+            CustomDaysOfWeek? daysOfWeek = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -142,7 +142,7 @@ namespace CustomNamespace
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new RenamedModelStruct(modelProperty.Value, propertyToField.Value, Optional.ToNullable(fruit), Optional.ToNullable(daysOfWeek), serializedAdditionalRawData);
+            return new RenamedModelStruct(modelProperty, propertyToField, fruit, daysOfWeek, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<RenamedModelStruct>.Write(ModelReaderWriterOptions options)
