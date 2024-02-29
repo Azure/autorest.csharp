@@ -4,7 +4,6 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Azure.Core;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -114,7 +113,10 @@ namespace AutoRest.CSharp.Common.Input
 
         public static InputPrimitiveType CreatePrimitiveType(string? inputTypeKindString, bool isNullable)
         {
-            Argument.AssertNotNull(inputTypeKindString, nameof(inputTypeKindString));
+            if (inputTypeKindString == null)
+            {
+                throw new ArgumentNullException(nameof(inputTypeKindString));
+            }
             return Enum.TryParse<InputTypeKind>(inputTypeKindString, ignoreCase: true, out var kind)
                 ? new InputPrimitiveType(kind, isNullable)
                 : throw new JsonException($"{inputTypeKindString} type is unknown.");
@@ -145,7 +147,10 @@ namespace AutoRest.CSharp.Common.Input
 
         private static InputIntrinsicType CreateIntrinsicType(string? inputTypeKindString)
         {
-            Argument.AssertNotNull(inputTypeKindString, nameof(inputTypeKindString));
+            if (inputTypeKindString == null)
+            {
+                throw new ArgumentNullException(nameof(inputTypeKindString));
+            }
             return Enum.TryParse<InputIntrinsicTypeKind>(inputTypeKindString, ignoreCase: true, out var kind)
                 ? new InputIntrinsicType(kind)
                 : throw new InvalidOperationException($"{inputTypeKindString} type is unknown for InputIntrinsicType.");
