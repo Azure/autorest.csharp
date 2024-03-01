@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (_writer.Namespace(_provider.Declaration.Namespace))
             {
-                _writer.WriteClassModifiers(_provider.Modifiers);
+                _writer.WriteClassModifiers(_provider.DeclarationModifiers);
                 _writer.Append($" class {_provider.Type:D}")
                     .AppendRawIf(" : ", _provider.Inherits != null || _provider.Implements.Any())
                     .AppendIf($"{_provider.Inherits},", _provider.Inherits != null);
@@ -63,7 +63,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             foreach (var field in _provider.Fields)
             {
-                _writer.WriteMethodBodyStatement(field);
+                _writer.WriteField(field, declareInCurrentScope: true);
             }
             _writer.Line();
         }

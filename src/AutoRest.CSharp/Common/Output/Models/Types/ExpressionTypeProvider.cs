@@ -4,7 +4,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
@@ -17,14 +16,13 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected ExpressionTypeProvider(string defaultNamespace, SourceInputModel? sourceInputModel)
             : base(defaultNamespace, sourceInputModel)
         {
-            DefaultAccessibility = "public";
-            Modifiers = ClassSignatureModifiers.Partial | ClassSignatureModifiers.Public;
+            DeclarationModifiers = ClassSignatureModifiers.Partial | ClassSignatureModifiers.Public;
         }
 
         private IReadOnlyList<string>? _usings;
         public IReadOnlyList<string> Usings => _usings ??= BuildUsings().ToArray();
 
-        public virtual ClassSignatureModifiers Modifiers { get; init; }
+        public ClassSignatureModifiers DeclarationModifiers { get; init; }
 
         protected virtual IEnumerable<string> BuildUsings()
         {
@@ -32,7 +30,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected override string DefaultAccessibility { get; }
+        protected override string DefaultAccessibility { get; } = "public";
 
         public virtual CSharpType? Inherits { get; protected init; }
 
@@ -48,15 +46,15 @@ namespace AutoRest.CSharp.Output.Models.Types
         private IReadOnlyList<Method>? _constructors;
         public IReadOnlyList<Method> Constructors => _constructors ??= BuildConstructors().ToArray();
 
-        private IReadOnlyList<MethodBodyStatement>? _fields;
-        public IReadOnlyList<MethodBodyStatement> Fields => _fields ??= BuildFields().ToArray();
+        private IReadOnlyList<FieldDeclaration>? _fields;
+        public IReadOnlyList<FieldDeclaration> Fields => _fields ??= BuildFields().ToArray();
 
         protected virtual IEnumerable<PropertyDeclaration> BuildProperties()
         {
             yield break;
         }
 
-        protected virtual IEnumerable<MethodBodyStatement> BuildFields()
+        protected virtual IEnumerable<FieldDeclaration> BuildFields()
         {
             yield break;
         }

@@ -253,34 +253,39 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteDeclaration(this CodeWriter writer, DeclarationStatement declaration)
         {
-            bool endWithSemicolon = true;
             switch (declaration)
             {
                 case AssignValueIfNullStatement setValue:
                     writer.WriteValueExpression(setValue.To);
                     writer.AppendRaw(" ??= ");
                     writer.WriteValueExpression(setValue.From);
+                    writer.LineRaw(";");
                     break;
                 case AssignValueStatement setValue:
                     writer.WriteValueExpression(setValue.To);
                     writer.AppendRaw(" = ");
                     writer.WriteValueExpression(setValue.From);
+                    writer.LineRaw(";");
                     break;
                 case DeclareVariableStatement { Type: { } type } declareVariable:
                     writer.Append($"{type} {declareVariable.Name:D} = ");
                     writer.WriteValueExpression(declareVariable.Value);
+                    writer.LineRaw(";");
                     break;
                 case DeclareVariableStatement declareVariable:
                     writer.Append($"var {declareVariable.Name:D} = ");
                     writer.WriteValueExpression(declareVariable.Value);
+                    writer.LineRaw(";");
                     break;
                 case UsingDeclareVariableStatement { Type: { } type } declareVariable:
                     writer.Append($"using {type} {declareVariable.Name:D} = ");
                     writer.WriteValueExpression(declareVariable.Value);
+                    writer.LineRaw(";");
                     break;
                 case UsingDeclareVariableStatement declareVariable:
                     writer.Append($"using var {declareVariable.Name:D} = ");
                     writer.WriteValueExpression(declareVariable.Value);
+                    writer.LineRaw(";");
                     break;
                 case DeclareLocalFunctionStatement localFunction:
                     writer.Append($"{localFunction.ReturnType} {localFunction.Name:D}(");
@@ -295,6 +300,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     {
                         writer.AppendRaw(" => ");
                         writer.WriteValueExpression(localFunction.BodyExpression);
+                        writer.LineRaw(";");
                     }
                     else
                     {
@@ -302,17 +308,12 @@ namespace AutoRest.CSharp.Generation.Writers
                         {
                             writer.WriteMethodBodyStatement(localFunction.BodyStatement!);
                         }
-                        endWithSemicolon = false;
                     }
                     break;
                 case UnaryOperatorStatement unaryOperatorStatement:
                     writer.WriteValueExpression(unaryOperatorStatement.Expression);
+                    writer.LineRaw(";");
                     break;
-            }
-
-            if (endWithSemicolon)
-            {
-                writer.LineRaw(";");
             }
         }
 

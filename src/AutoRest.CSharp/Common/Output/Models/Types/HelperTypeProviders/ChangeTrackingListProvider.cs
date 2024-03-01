@@ -23,11 +23,10 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         private readonly MethodSignature _ensureListSignature = new MethodSignature("EnsureList", null, null, MethodSignatureModifiers.Public, typeof(IList<>), null, Array.Empty<Parameter>());
         private readonly MethodSignature _getEnumeratorSignature = new MethodSignature("GetEnumerator", null, null, MethodSignatureModifiers.Public, typeof(IEnumerator<>), null, Array.Empty<Parameter>());
         private readonly TypeProvider _t;
+        private readonly FieldDeclaration _innerlListField;
         private readonly TypeProvider _tArray;
         private readonly Parameter _tParam;
         private readonly Parameter _indexParam = new Parameter("index", null, typeof(int), null, ValidationType.None, null);
-
-
         private VariableReference _innerList;
 
         public static ChangeTrackingListProvider Instance => _instance.Value;
@@ -35,11 +34,12 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         private ChangeTrackingListProvider(string defaultNamespace, SourceInputModel? sourceInputModel)
             : base(defaultNamespace, sourceInputModel)
         {
-            _innerList = new VariableReference(new CSharpType(typeof(IList<>)), "_innerList");
+            _innerlListField = new FieldDeclaration(FieldModifiers.Private, typeof(IList<>), "_innerList");
+            _innerList = new VariableReference(new CSharpType(typeof(IList<>)), _innerlListField.Declaration);
             _t = new GenericParameterTypeProvider("T", DefaultNamespace, null);
             _tArray = new GenericParameterTypeProvider("T[]", DefaultNamespace, null);
             _tParam = new Parameter("item", null, _t.Type, null, ValidationType.None, null);
-            Modifiers = ClassSignatureModifiers.Internal;
+            DeclarationModifiers = ClassSignatureModifiers.Internal;
         }
 
         protected override string DefaultName => "ChangeTrackingList";
@@ -84,9 +84,9 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
             yield return new CSharpType(typeof(IReadOnlyList<>));
         }
 
-        protected override IEnumerable<MethodBodyStatement> BuildFields()
+        protected override IEnumerable<FieldDeclaration> BuildFields()
         {
-            yield return new DeclareFieldStatement(_innerList);
+            yield return _innerlListField;
         }
 
         protected override IEnumerable<PropertyDeclaration> BuildProperties()
