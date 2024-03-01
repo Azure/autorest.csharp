@@ -12,7 +12,7 @@ using System.Linq;
 
 namespace Client.Structure.Service.Multiple.Client
 {
-    internal partial class ChangeTrackingList<T> : IList<T>, IReadOnlyList<T>
+    internal class ChangeTrackingList<T> : IList<T>, IReadOnlyList<T>
     {
         private IList<T> _innerList;
 

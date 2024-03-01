@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace UnbrandedTypeSpec
 {
-    internal partial class ChangeTrackingList<T> : IList<T>, IReadOnlyList<T>
+    internal class ChangeTrackingList<T> : IList<T>, IReadOnlyList<T>
     {
         private IList<T> _innerList;
 

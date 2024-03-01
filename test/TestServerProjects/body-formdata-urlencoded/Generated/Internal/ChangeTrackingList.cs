@@ -12,7 +12,7 @@ using System.Linq;
 
 namespace body_formdata_urlencoded
 {
-    internal partial class ChangeTrackingList<T> : IList<T>, IReadOnlyList<T>
+    internal class ChangeTrackingList<T> : IList<T>, IReadOnlyList<T>
     {
         private IList<T> _innerList;
 

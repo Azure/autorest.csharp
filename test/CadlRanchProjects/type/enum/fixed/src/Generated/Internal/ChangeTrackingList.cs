@@ -12,7 +12,7 @@ using System.Linq;
 
 namespace _Type._Enum.Fixed
 {
-    internal partial class ChangeTrackingList<T> : IList<T>, IReadOnlyList<T>
+    internal class ChangeTrackingList<T> : IList<T>, IReadOnlyList<T>
     {
         private IList<T> _innerList;
 

@@ -12,7 +12,7 @@ using System.Linq;
 
 namespace custom_baseUrl_more_options
 {
-    internal partial class ChangeTrackingList<T> : IList<T>, IReadOnlyList<T>
+    internal class ChangeTrackingList<T> : IList<T>, IReadOnlyList<T>
     {
         private IList<T> _innerList;
 
