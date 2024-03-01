@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Azure.Core;
 using MgmtPropertyChooser;
 
 namespace MgmtPropertyChooser.Models
@@ -21,7 +20,10 @@ namespace MgmtPropertyChooser.Models
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal VirtualMachineListResult(IEnumerable<VirtualMachineData> value)
         {
-            Argument.AssertNotNull(value, nameof(value));
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
 
             Value = value.ToList();
         }

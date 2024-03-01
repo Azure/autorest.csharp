@@ -18,29 +18,29 @@ namespace CognitiveSearch.Models
             writer.WriteStartObject();
             writer.WritePropertyName("defaultToLanguageCode"u8);
             writer.WriteStringValue(DefaultToLanguageCode.ToString());
-            if (Optional.IsDefined(DefaultFromLanguageCode))
+            if (DefaultFromLanguageCode.HasValue)
             {
                 writer.WritePropertyName("defaultFromLanguageCode"u8);
                 writer.WriteStringValue(DefaultFromLanguageCode.Value.ToString());
             }
-            if (Optional.IsDefined(SuggestedFrom))
+            if (SuggestedFrom.HasValue)
             {
                 writer.WritePropertyName("suggestedFrom"u8);
                 writer.WriteStringValue(SuggestedFrom.Value.ToString());
             }
             writer.WritePropertyName("@odata.type"u8);
             writer.WriteStringValue(OdataType);
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Description))
+            if (Description != null)
             {
                 writer.WritePropertyName("description"u8);
                 writer.WriteStringValue(Description);
             }
-            if (Optional.IsDefined(Context))
+            if (Context != null)
             {
                 writer.WritePropertyName("context"u8);
                 writer.WriteStringValue(Context);
@@ -69,12 +69,12 @@ namespace CognitiveSearch.Models
                 return null;
             }
             TextTranslationSkillLanguage defaultToLanguageCode = default;
-            Optional<TextTranslationSkillLanguage> defaultFromLanguageCode = default;
-            Optional<TextTranslationSkillLanguage> suggestedFrom = default;
+            TextTranslationSkillLanguage? defaultFromLanguageCode = default;
+            TextTranslationSkillLanguage? suggestedFrom = default;
             string odataType = default;
-            Optional<string> name = default;
-            Optional<string> description = default;
-            Optional<string> context = default;
+            string name = default;
+            string description = default;
+            string context = default;
             IList<InputFieldMappingEntry> inputs = default;
             IList<OutputFieldMappingEntry> outputs = default;
             foreach (var property in element.EnumerateObject())
@@ -143,7 +143,16 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new TextTranslationSkill(odataType, name.Value, description.Value, context.Value, inputs, outputs, defaultToLanguageCode, Optional.ToNullable(defaultFromLanguageCode), Optional.ToNullable(suggestedFrom));
+            return new TextTranslationSkill(
+                odataType,
+                name,
+                description,
+                context,
+                inputs,
+                outputs,
+                defaultToLanguageCode,
+                defaultFromLanguageCode,
+                suggestedFrom);
         }
     }
 }

@@ -72,6 +72,7 @@ import {
     getAccess,
     getClientType,
     getUsageOverride,
+    getWireName,
     isInternal
 } from "@azure-tools/typespec-client-generator-core";
 import {
@@ -146,12 +147,16 @@ export function getCSharpInputTypeKindByPrimitiveModelName(
             }
         case "int8":
             return InputPrimitiveTypeKind.SByte;
-        case "unit8":
+        case "uint8":
             return InputPrimitiveTypeKind.Byte;
         case "int32":
             return InputPrimitiveTypeKind.Int32;
         case "int64":
             return InputPrimitiveTypeKind.Int64;
+        case "integer":
+            return InputPrimitiveTypeKind.Int64;
+        case "safeint":
+            return InputPrimitiveTypeKind.SafeInt;
         case "float32":
             return InputPrimitiveTypeKind.Float32;
         case "float64":
@@ -186,6 +191,10 @@ export function getCSharpInputTypeKindByPrimitiveModelName(
             return InputPrimitiveTypeKind.Boolean;
         case "date":
             return InputPrimitiveTypeKind.Date;
+        case "plainDate":
+            return InputPrimitiveTypeKind.Date;
+        case "plainTime":
+            return InputPrimitiveTypeKind.Time;
         case "datetime":
             switch (encode?.encoding) {
                 case undefined:
@@ -636,7 +645,7 @@ export function getInputType(
                 }
                 if (isNeverType(value.type) || isVoidType(value.type)) return;
                 const name = getTypeName(context, value);
-                const serializedName = getSerializeName(context, value);
+                const serializedName = getWireName(context, value);
                 const literalTypeContext: LiteralTypeContext = {
                     ModelName: model.Name,
                     PropertyName: name,

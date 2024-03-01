@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using Azure.Core;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
@@ -19,8 +18,14 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="text"/> is null. </exception>
         public MultiLanguageInput(string id, string text)
         {
-            Argument.AssertNotNull(id, nameof(id));
-            Argument.AssertNotNull(text, nameof(text));
+            if (id == null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+            if (text == null)
+            {
+                throw new ArgumentNullException(nameof(text));
+            }
 
             Id = id;
             Text = text;

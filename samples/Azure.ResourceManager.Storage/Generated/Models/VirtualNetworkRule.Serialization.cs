@@ -17,12 +17,12 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteStartObject();
             writer.WritePropertyName("id"u8);
             writer.WriteStringValue(VirtualNetworkResourceId);
-            if (Optional.IsDefined(Action))
+            if (Action.HasValue)
             {
                 writer.WritePropertyName("action"u8);
                 writer.WriteStringValue(Action.Value.ToString());
             }
-            if (Optional.IsDefined(State))
+            if (State.HasValue)
             {
                 writer.WritePropertyName("state"u8);
                 writer.WriteStringValue(State.Value.ToString());
@@ -37,8 +37,8 @@ namespace Azure.ResourceManager.Storage.Models
                 return null;
             }
             string id = default;
-            Optional<Action> action = default;
-            Optional<State> state = default;
+            Action? action = default;
+            State? state = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -65,7 +65,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new VirtualNetworkRule(id, Optional.ToNullable(action), Optional.ToNullable(state));
+            return new VirtualNetworkRule(id, action, state);
         }
     }
 }

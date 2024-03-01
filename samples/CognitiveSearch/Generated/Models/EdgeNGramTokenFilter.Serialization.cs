@@ -15,17 +15,17 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(MinGram))
+            if (MinGram.HasValue)
             {
                 writer.WritePropertyName("minGram"u8);
                 writer.WriteNumberValue(MinGram.Value);
             }
-            if (Optional.IsDefined(MaxGram))
+            if (MaxGram.HasValue)
             {
                 writer.WritePropertyName("maxGram"u8);
                 writer.WriteNumberValue(MaxGram.Value);
             }
-            if (Optional.IsDefined(Side))
+            if (Side.HasValue)
             {
                 writer.WritePropertyName("side"u8);
                 writer.WriteStringValue(Side.Value.ToSerialString());
@@ -43,9 +43,9 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            Optional<int> minGram = default;
-            Optional<int> maxGram = default;
-            Optional<EdgeNGramTokenFilterSide> side = default;
+            int? minGram = default;
+            int? maxGram = default;
+            EdgeNGramTokenFilterSide? side = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
@@ -88,7 +88,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new EdgeNGramTokenFilter(odataType, name, Optional.ToNullable(minGram), Optional.ToNullable(maxGram), Optional.ToNullable(side));
+            return new EdgeNGramTokenFilter(odataType, name, minGram, maxGram, side);
         }
     }
 }

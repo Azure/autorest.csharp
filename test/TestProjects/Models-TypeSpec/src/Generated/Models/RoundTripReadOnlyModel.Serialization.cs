@@ -37,12 +37,12 @@ namespace ModelsTypeSpec.Models
                 writer.WritePropertyName("requiredReadonlyInt"u8);
                 writer.WriteNumberValue(RequiredReadonlyInt);
             }
-            if (options.Format != "W" && Optional.IsDefined(OptionalReadonlyString))
+            if (options.Format != "W" && OptionalReadonlyString != null)
             {
                 writer.WritePropertyName("optionalReadonlyString"u8);
                 writer.WriteStringValue(OptionalReadonlyString);
             }
-            if (options.Format != "W" && Optional.IsDefined(OptionalReadonlyInt))
+            if (options.Format != "W" && OptionalReadonlyInt.HasValue)
             {
                 writer.WritePropertyName("optionalReadonlyInt"u8);
                 writer.WriteNumberValue(OptionalReadonlyInt.Value);
@@ -52,7 +52,7 @@ namespace ModelsTypeSpec.Models
                 writer.WritePropertyName("requiredReadonlyModel"u8);
                 writer.WriteObjectValue(RequiredReadonlyModel);
             }
-            if (options.Format != "W" && Optional.IsDefined(OptionalReadonlyModel))
+            if (options.Format != "W" && OptionalReadonlyModel != null)
             {
                 writer.WritePropertyName("optionalReadonlyModel"u8);
                 writer.WriteObjectValue(OptionalReadonlyModel);
@@ -140,7 +140,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndObject();
             }
-            if (options.Format != "W" && Optional.IsCollectionDefined(OptionalReadonlyStringList))
+            if (options.Format != "W" && !(OptionalReadonlyStringList is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("optionalReadonlyStringList"u8);
                 writer.WriteStartArray();
@@ -150,7 +150,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W" && Optional.IsCollectionDefined(OptionalReadonlyIntList))
+            if (options.Format != "W" && !(OptionalReadonlyIntList is ChangeTrackingList<int> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("optionalReadonlyIntList"u8);
                 writer.WriteStartArray();
@@ -160,7 +160,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W" && Optional.IsCollectionDefined(OptionalReadOnlyModelList))
+            if (options.Format != "W" && !(OptionalReadOnlyModelList is ChangeTrackingList<CollectionItem> collection1 && collection1.IsUndefined))
             {
                 writer.WritePropertyName("optionalReadOnlyModelList"u8);
                 writer.WriteStartArray();
@@ -186,7 +186,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteStringValue(item.Value);
             }
             writer.WriteEndObject();
-            if (options.Format != "W" && Optional.IsCollectionDefined(OptionalModelRecord))
+            if (options.Format != "W" && !(OptionalModelRecord is ChangeTrackingDictionary<string, RecordItem> collection2 && collection2.IsUndefined))
             {
                 writer.WritePropertyName("optionalModelRecord"u8);
                 writer.WriteStartObject();
@@ -209,7 +209,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteNumberValue(item.Value);
             }
             writer.WriteEndArray();
-            if (Optional.IsCollectionDefined(OptionalCollectionWithNullableBooleanElement))
+            if (!(OptionalCollectionWithNullableBooleanElement is ChangeTrackingList<bool?> collection3 && collection3.IsUndefined))
             {
                 writer.WritePropertyName("optionalCollectionWithNullableBooleanElement"u8);
                 writer.WriteStartArray();
@@ -264,10 +264,10 @@ namespace ModelsTypeSpec.Models
             }
             string requiredReadonlyString = default;
             int requiredReadonlyInt = default;
-            Optional<string> optionalReadonlyString = default;
-            Optional<int> optionalReadonlyInt = default;
+            string optionalReadonlyString = default;
+            int? optionalReadonlyInt = default;
             DerivedModel requiredReadonlyModel = default;
-            Optional<DerivedModel> optionalReadonlyModel = default;
+            DerivedModel optionalReadonlyModel = default;
             FixedStringEnum requiredReadonlyFixedStringEnum = default;
             ExtensibleEnum requiredReadonlyExtensibleEnum = default;
             FixedStringEnum optionalReadonlyFixedStringEnum = default;
@@ -278,14 +278,14 @@ namespace ModelsTypeSpec.Models
             IReadOnlyDictionary<string, int> requiredReadOnlyIntRecord = default;
             IReadOnlyDictionary<string, string> requiredStringRecord = default;
             IReadOnlyDictionary<string, RecordItem> requiredReadOnlyModelRecord = default;
-            Optional<IReadOnlyList<string>> optionalReadonlyStringList = default;
-            Optional<IReadOnlyList<int>> optionalReadonlyIntList = default;
-            Optional<IReadOnlyList<CollectionItem>> optionalReadOnlyModelList = default;
+            IReadOnlyList<string> optionalReadonlyStringList = default;
+            IReadOnlyList<int> optionalReadonlyIntList = default;
+            IReadOnlyList<CollectionItem> optionalReadOnlyModelList = default;
             IReadOnlyDictionary<string, int> optionalReadOnlyIntRecord = default;
             IReadOnlyDictionary<string, string> optionalReadOnlyStringRecord = default;
-            Optional<IReadOnlyDictionary<string, RecordItem>> optionalModelRecord = default;
+            IReadOnlyDictionary<string, RecordItem> optionalModelRecord = default;
             IReadOnlyList<int?> requiredCollectionWithNullableIntElement = default;
-            Optional<IReadOnlyList<bool?>> optionalCollectionWithNullableBooleanElement = default;
+            IReadOnlyList<bool?> optionalCollectionWithNullableBooleanElement = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -316,7 +316,7 @@ namespace ModelsTypeSpec.Models
                 }
                 if (property.NameEquals("requiredReadonlyModel"u8))
                 {
-                    requiredReadonlyModel = DerivedModel.DeserializeDerivedModel(property.Value);
+                    requiredReadonlyModel = DerivedModel.DeserializeDerivedModel(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("optionalReadonlyModel"u8))
@@ -325,7 +325,7 @@ namespace ModelsTypeSpec.Models
                     {
                         continue;
                     }
-                    optionalReadonlyModel = DerivedModel.DeserializeDerivedModel(property.Value);
+                    optionalReadonlyModel = DerivedModel.DeserializeDerivedModel(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("requiredReadonlyFixedStringEnum"u8))
@@ -373,7 +373,7 @@ namespace ModelsTypeSpec.Models
                     List<CollectionItem> array = new List<CollectionItem>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CollectionItem.DeserializeCollectionItem(item));
+                        array.Add(CollectionItem.DeserializeCollectionItem(item, options));
                     }
                     requiredReadOnlyModelList = array;
                     continue;
@@ -403,7 +403,7 @@ namespace ModelsTypeSpec.Models
                     Dictionary<string, RecordItem> dictionary = new Dictionary<string, RecordItem>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value));
+                        dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value, options));
                     }
                     requiredReadOnlyModelRecord = dictionary;
                     continue;
@@ -445,7 +445,7 @@ namespace ModelsTypeSpec.Models
                     List<CollectionItem> array = new List<CollectionItem>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CollectionItem.DeserializeCollectionItem(item));
+                        array.Add(CollectionItem.DeserializeCollectionItem(item, options));
                     }
                     optionalReadOnlyModelList = array;
                     continue;
@@ -479,7 +479,7 @@ namespace ModelsTypeSpec.Models
                     Dictionary<string, RecordItem> dictionary = new Dictionary<string, RecordItem>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value));
+                        dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value, options));
                     }
                     optionalModelRecord = dictionary;
                     continue;
@@ -528,7 +528,32 @@ namespace ModelsTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new RoundTripReadOnlyModel(requiredReadonlyString, requiredReadonlyInt, optionalReadonlyString.Value, Optional.ToNullable(optionalReadonlyInt), requiredReadonlyModel, optionalReadonlyModel.Value, requiredReadonlyFixedStringEnum, requiredReadonlyExtensibleEnum, optionalReadonlyFixedStringEnum, optionalReadonlyExtensibleEnum, requiredReadonlyStringList, requiredReadonlyIntList, requiredReadOnlyModelList, requiredReadOnlyIntRecord, requiredStringRecord, requiredReadOnlyModelRecord, Optional.ToList(optionalReadonlyStringList), Optional.ToList(optionalReadonlyIntList), Optional.ToList(optionalReadOnlyModelList), optionalReadOnlyIntRecord, optionalReadOnlyStringRecord, Optional.ToDictionary(optionalModelRecord), requiredCollectionWithNullableIntElement, Optional.ToList(optionalCollectionWithNullableBooleanElement), serializedAdditionalRawData);
+            return new RoundTripReadOnlyModel(
+                requiredReadonlyString,
+                requiredReadonlyInt,
+                optionalReadonlyString,
+                optionalReadonlyInt,
+                requiredReadonlyModel,
+                optionalReadonlyModel,
+                requiredReadonlyFixedStringEnum,
+                requiredReadonlyExtensibleEnum,
+                optionalReadonlyFixedStringEnum,
+                optionalReadonlyExtensibleEnum,
+                requiredReadonlyStringList,
+                requiredReadonlyIntList,
+                requiredReadOnlyModelList,
+                requiredReadOnlyIntRecord,
+                requiredStringRecord,
+                requiredReadOnlyModelRecord,
+                optionalReadonlyStringList ?? new ChangeTrackingList<string>(),
+                optionalReadonlyIntList ?? new ChangeTrackingList<int>(),
+                optionalReadOnlyModelList ?? new ChangeTrackingList<CollectionItem>(),
+                optionalReadOnlyIntRecord,
+                optionalReadOnlyStringRecord,
+                optionalModelRecord ?? new ChangeTrackingDictionary<string, RecordItem>(),
+                requiredCollectionWithNullableIntElement,
+                optionalCollectionWithNullableBooleanElement ?? new ChangeTrackingList<bool?>(),
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<RoundTripReadOnlyModel>.Write(ModelReaderWriterOptions options)

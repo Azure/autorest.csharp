@@ -16,12 +16,12 @@ namespace MgmtOmitOperationGroups.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (Optional.IsCollectionDefined(Modelqs))
+            if (!(Modelqs is ChangeTrackingList<ModelQ> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("modelqs"u8);
                 writer.WriteStartArray();
@@ -40,9 +40,9 @@ namespace MgmtOmitOperationGroups.Models
             {
                 return null;
             }
-            Optional<string> id = default;
-            Optional<string> k = default;
-            Optional<IList<ModelQ>> modelqs = default;
+            string id = default;
+            string k = default;
+            IList<ModelQ> modelqs = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -70,7 +70,7 @@ namespace MgmtOmitOperationGroups.Models
                     continue;
                 }
             }
-            return new Model5(id.Value, k.Value, Optional.ToList(modelqs));
+            return new Model5(id, k, modelqs ?? new ChangeTrackingList<ModelQ>());
         }
     }
 }

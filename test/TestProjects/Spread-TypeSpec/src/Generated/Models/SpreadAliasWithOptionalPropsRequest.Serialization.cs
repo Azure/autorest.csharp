@@ -29,12 +29,12 @@ namespace SpreadTypeSpec.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (Optional.IsDefined(Color))
+            if (Color != null)
             {
                 writer.WritePropertyName("color"u8);
                 writer.WriteStringValue(Color);
             }
-            if (Optional.IsDefined(Age))
+            if (Age.HasValue)
             {
                 writer.WritePropertyName("age"u8);
                 writer.WriteNumberValue(Age.Value);
@@ -46,7 +46,7 @@ namespace SpreadTypeSpec.Models
                 writer.WriteNumberValue(item);
             }
             writer.WriteEndArray();
-            if (Optional.IsCollectionDefined(Elements))
+            if (!(Elements is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("elements"u8);
                 writer.WriteStartArray();
@@ -95,10 +95,10 @@ namespace SpreadTypeSpec.Models
                 return null;
             }
             string name = default;
-            Optional<string> color = default;
-            Optional<int> age = default;
+            string color = default;
+            int? age = default;
             IList<int> items = default;
-            Optional<IList<string>> elements = default;
+            IList<string> elements = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -152,7 +152,13 @@ namespace SpreadTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new SpreadAliasWithOptionalPropsRequest(name, color.Value, Optional.ToNullable(age), items, Optional.ToList(elements), serializedAdditionalRawData);
+            return new SpreadAliasWithOptionalPropsRequest(
+                name,
+                color,
+                age,
+                items,
+                elements ?? new ChangeTrackingList<string>(),
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<SpreadAliasWithOptionalPropsRequest>.Write(ModelReaderWriterOptions options)

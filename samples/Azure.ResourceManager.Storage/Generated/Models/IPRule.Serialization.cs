@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteStartObject();
             writer.WritePropertyName("value"u8);
             writer.WriteStringValue(IPAddressOrRange);
-            if (Optional.IsDefined(Action))
+            if (Action.HasValue)
             {
                 writer.WritePropertyName("action"u8);
                 writer.WriteStringValue(Action.Value.ToString());
@@ -32,7 +32,7 @@ namespace Azure.ResourceManager.Storage.Models
                 return null;
             }
             string value = default;
-            Optional<Action> action = default;
+            Action? action = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -50,7 +50,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new IPRule(value, Optional.ToNullable(action));
+            return new IPRule(value, action);
         }
     }
 }

@@ -18,17 +18,17 @@ namespace Azure.ResourceManager.Fake.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Status))
+            if (Status.HasValue)
             {
                 writer.WritePropertyName("status"u8);
                 writer.WriteStringValue(Status.Value.ToString());
             }
-            if (Optional.IsDefined(Description))
+            if (Description != null)
             {
                 writer.WritePropertyName("description"u8);
                 writer.WriteStringValue(Description);
             }
-            if (Optional.IsDefined(ActionsRequired))
+            if (ActionsRequired != null)
             {
                 writer.WritePropertyName("actionsRequired"u8);
                 writer.WriteStringValue(ActionsRequired);
@@ -42,9 +42,9 @@ namespace Azure.ResourceManager.Fake.Models
             {
                 return null;
             }
-            Optional<MgmtReferenceTypesPrivateEndpointServiceConnectionStatus> status = default;
-            Optional<string> description = default;
-            Optional<string> actionsRequired = default;
+            MgmtReferenceTypesPrivateEndpointServiceConnectionStatus? status = default;
+            string description = default;
+            string actionsRequired = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("status"u8))
@@ -67,7 +67,7 @@ namespace Azure.ResourceManager.Fake.Models
                     continue;
                 }
             }
-            return new MgmtReferenceTypesPrivateLinkServiceConnectionState(Optional.ToNullable(status), description.Value, actionsRequired.Value);
+            return new MgmtReferenceTypesPrivateLinkServiceConnectionState(status, description, actionsRequired);
         }
 
         internal partial class MgmtReferenceTypesPrivateLinkServiceConnectionStateConverter : JsonConverter<MgmtReferenceTypesPrivateLinkServiceConnectionState>

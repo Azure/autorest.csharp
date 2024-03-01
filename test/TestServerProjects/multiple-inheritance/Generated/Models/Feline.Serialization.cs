@@ -26,12 +26,12 @@ namespace multiple_inheritance.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Meows))
+            if (Meows.HasValue)
             {
                 writer.WritePropertyName("meows"u8);
                 writer.WriteBooleanValue(Meows.Value);
             }
-            if (Optional.IsDefined(Hisses))
+            if (Hisses.HasValue)
             {
                 writer.WritePropertyName("hisses"u8);
                 writer.WriteBooleanValue(Hisses.Value);
@@ -74,8 +74,8 @@ namespace multiple_inheritance.Models
             {
                 return null;
             }
-            Optional<bool> meows = default;
-            Optional<bool> hisses = default;
+            bool? meows = default;
+            bool? hisses = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -104,7 +104,7 @@ namespace multiple_inheritance.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Feline(Optional.ToNullable(meows), Optional.ToNullable(hisses), serializedAdditionalRawData);
+            return new Feline(meows, hisses, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<Feline>.Write(ModelReaderWriterOptions options)

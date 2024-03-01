@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
@@ -20,8 +19,14 @@ namespace CognitiveSearch.Models
         /// <exception cref="ArgumentNullException"> <paramref name="fieldName"/> or <paramref name="parameters"/> is null. </exception>
         public MagnitudeScoringFunction(string fieldName, double boost, MagnitudeScoringParameters parameters) : base(fieldName, boost)
         {
-            Argument.AssertNotNull(fieldName, nameof(fieldName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            if (fieldName == null)
+            {
+                throw new ArgumentNullException(nameof(fieldName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
 
             Parameters = parameters;
             Type = "magnitude";

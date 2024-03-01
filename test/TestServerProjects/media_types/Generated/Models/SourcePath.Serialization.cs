@@ -26,7 +26,7 @@ namespace media_types.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Source))
+            if (Source != null)
             {
                 writer.WritePropertyName("source"u8);
                 writer.WriteStringValue(Source);
@@ -69,7 +69,7 @@ namespace media_types.Models
             {
                 return null;
             }
-            Optional<string> source = default;
+            string source = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -85,7 +85,7 @@ namespace media_types.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new SourcePath(source.Value, serializedAdditionalRawData);
+            return new SourcePath(source, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<SourcePath>.Write(ModelReaderWriterOptions options)

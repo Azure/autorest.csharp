@@ -16,12 +16,12 @@ namespace MgmtMockAndSample.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Region))
+            if (Region != null)
             {
                 writer.WritePropertyName("region"u8);
                 writer.WriteStringValue(Region);
             }
-            if (Optional.IsDefined(WorkspaceId))
+            if (WorkspaceId != null)
             {
                 writer.WritePropertyName("workspaceId"u8);
                 JsonSerializer.Serialize(writer, WorkspaceId);
@@ -35,8 +35,8 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<string> region = default;
-            Optional<WritableSubResource> workspaceId = default;
+            string region = default;
+            WritableSubResource workspaceId = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("region"u8))
@@ -54,7 +54,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new FirewallPolicyLogAnalyticsWorkspace(region.Value, workspaceId);
+            return new FirewallPolicyLogAnalyticsWorkspace(region, workspaceId);
         }
     }
 }

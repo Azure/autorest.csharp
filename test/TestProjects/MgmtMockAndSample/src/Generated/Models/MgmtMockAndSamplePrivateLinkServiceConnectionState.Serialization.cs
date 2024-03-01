@@ -15,17 +15,17 @@ namespace MgmtMockAndSample.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Status))
+            if (Status.HasValue)
             {
                 writer.WritePropertyName("status"u8);
                 writer.WriteStringValue(Status.Value.ToString());
             }
-            if (Optional.IsDefined(Description))
+            if (Description != null)
             {
                 writer.WritePropertyName("description"u8);
                 writer.WriteStringValue(Description);
             }
-            if (Optional.IsDefined(ActionsRequired))
+            if (ActionsRequired.HasValue)
             {
                 writer.WritePropertyName("actionsRequired"u8);
                 writer.WriteStringValue(ActionsRequired.Value.ToString());
@@ -39,9 +39,9 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<MgmtMockAndSamplePrivateEndpointServiceConnectionStatus> status = default;
-            Optional<string> description = default;
-            Optional<ActionsRequired> actionsRequired = default;
+            MgmtMockAndSamplePrivateEndpointServiceConnectionStatus? status = default;
+            string description = default;
+            ActionsRequired? actionsRequired = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("status"u8))
@@ -68,7 +68,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new MgmtMockAndSamplePrivateLinkServiceConnectionState(Optional.ToNullable(status), description.Value, Optional.ToNullable(actionsRequired));
+            return new MgmtMockAndSamplePrivateLinkServiceConnectionState(status, description, actionsRequired);
         }
     }
 }

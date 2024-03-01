@@ -16,7 +16,7 @@ namespace MgmtScopeResource.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Value))
+            if (Value != null)
             {
                 writer.WritePropertyName("value"u8);
 #if NET6_0_OR_GREATER
@@ -37,7 +37,7 @@ namespace MgmtScopeResource.Models
             {
                 return null;
             }
-            Optional<BinaryData> value = default;
+            BinaryData value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -50,7 +50,7 @@ namespace MgmtScopeResource.Models
                     continue;
                 }
             }
-            return new ParameterValuesValue(value.Value);
+            return new ParameterValuesValue(value);
         }
     }
 }

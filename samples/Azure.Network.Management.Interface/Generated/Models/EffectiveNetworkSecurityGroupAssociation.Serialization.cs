@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace Azure.Network.Management.Interface.Models
 {
@@ -18,8 +17,8 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<SubResource> subnet = default;
-            Optional<SubResource> networkInterface = default;
+            SubResource subnet = default;
+            SubResource networkInterface = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("subnet"u8))
@@ -41,7 +40,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new EffectiveNetworkSecurityGroupAssociation(subnet.Value, networkInterface.Value);
+            return new EffectiveNetworkSecurityGroupAssociation(subnet, networkInterface);
         }
     }
 }

@@ -27,7 +27,7 @@ namespace _Type.Property.Optionality.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Property))
+            if (Property.HasValue)
             {
                 writer.WritePropertyName("property"u8);
                 writer.WriteNumberValue(Property.Value.ToSerialSingle());
@@ -70,7 +70,7 @@ namespace _Type.Property.Optionality.Models
             {
                 return null;
             }
-            Optional<FloatLiteralPropertyProperty> property = default;
+            FloatLiteralPropertyProperty? property = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property0 in element.EnumerateObject())
@@ -90,7 +90,7 @@ namespace _Type.Property.Optionality.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new FloatLiteralProperty(Optional.ToNullable(property), serializedAdditionalRawData);
+            return new FloatLiteralProperty(property, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<FloatLiteralProperty>.Write(ModelReaderWriterOptions options)

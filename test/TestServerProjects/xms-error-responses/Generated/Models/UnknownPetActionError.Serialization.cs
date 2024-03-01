@@ -28,12 +28,12 @@ namespace xms_error_responses.Models
             writer.WriteStartObject();
             writer.WritePropertyName("errorType"u8);
             writer.WriteStringValue(ErrorType);
-            if (Optional.IsDefined(ErrorMessage))
+            if (ErrorMessage != null)
             {
                 writer.WritePropertyName("errorMessage"u8);
                 writer.WriteStringValue(ErrorMessage);
             }
-            if (Optional.IsDefined(ActionResponse))
+            if (ActionResponse != null)
             {
                 writer.WritePropertyName("actionResponse"u8);
                 writer.WriteStringValue(ActionResponse);
@@ -65,7 +65,7 @@ namespace xms_error_responses.Models
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeUnknownPetActionError(document.RootElement, options);
+            return DeserializePetActionError(document.RootElement, options);
         }
 
         internal static UnknownPetActionError DeserializeUnknownPetActionError(JsonElement element, ModelReaderWriterOptions options = null)
@@ -77,8 +77,8 @@ namespace xms_error_responses.Models
                 return null;
             }
             string errorType = "Unknown";
-            Optional<string> errorMessage = default;
-            Optional<string> actionResponse = default;
+            string errorMessage = default;
+            string actionResponse = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -104,7 +104,7 @@ namespace xms_error_responses.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new UnknownPetActionError(actionResponse.Value, serializedAdditionalRawData, errorType, errorMessage.Value);
+            return new UnknownPetActionError(actionResponse, serializedAdditionalRawData, errorType, errorMessage);
         }
 
         BinaryData IPersistableModel<PetActionError>.Write(ModelReaderWriterOptions options)
@@ -129,7 +129,7 @@ namespace xms_error_responses.Models
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeUnknownPetActionError(document.RootElement, options);
+                        return DeserializePetActionError(document.RootElement, options);
                     }
                 default:
                     throw new FormatException($"The model {nameof(PetActionError)} does not support '{options.Format}' format.");

@@ -15,12 +15,12 @@ namespace MgmtAcronymMapping.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(ProtectFromScaleIn))
+            if (ProtectFromScaleIn.HasValue)
             {
                 writer.WritePropertyName("protectFromScaleIn"u8);
                 writer.WriteBooleanValue(ProtectFromScaleIn.Value);
             }
-            if (Optional.IsDefined(ProtectFromScaleSetActions))
+            if (ProtectFromScaleSetActions.HasValue)
             {
                 writer.WritePropertyName("protectFromScaleSetActions"u8);
                 writer.WriteBooleanValue(ProtectFromScaleSetActions.Value);
@@ -34,8 +34,8 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<bool> protectFromScaleIn = default;
-            Optional<bool> protectFromScaleSetActions = default;
+            bool? protectFromScaleIn = default;
+            bool? protectFromScaleSetActions = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("protectFromScaleIn"u8))
@@ -57,7 +57,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetVmProtectionPolicy(Optional.ToNullable(protectFromScaleIn), Optional.ToNullable(protectFromScaleSetActions));
+            return new VirtualMachineScaleSetVmProtectionPolicy(protectFromScaleIn, protectFromScaleSetActions);
         }
     }
 }

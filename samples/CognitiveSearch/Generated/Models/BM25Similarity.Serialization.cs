@@ -15,12 +15,12 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(K1))
+            if (K1.HasValue)
             {
                 writer.WritePropertyName("k1"u8);
                 writer.WriteNumberValue(K1.Value);
             }
-            if (Optional.IsDefined(B))
+            if (B.HasValue)
             {
                 writer.WritePropertyName("b"u8);
                 writer.WriteNumberValue(B.Value);
@@ -36,8 +36,8 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            Optional<double> k1 = default;
-            Optional<double> b = default;
+            double? k1 = default;
+            double? b = default;
             string odataType = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -65,7 +65,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new BM25Similarity(odataType, Optional.ToNullable(k1), Optional.ToNullable(b));
+            return new BM25Similarity(odataType, k1, b);
         }
     }
 }

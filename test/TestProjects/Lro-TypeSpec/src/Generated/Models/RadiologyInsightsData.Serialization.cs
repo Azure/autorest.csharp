@@ -34,7 +34,7 @@ namespace lro.Models
                 writer.WriteStringValue(item);
             }
             writer.WriteEndArray();
-            if (Optional.IsDefined(Configuration))
+            if (Configuration != null)
             {
                 writer.WritePropertyName("configuration"u8);
                 writer.WriteStringValue(Configuration);
@@ -78,7 +78,7 @@ namespace lro.Models
                 return null;
             }
             IList<string> patients = default;
-            Optional<string> configuration = default;
+            string configuration = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -104,7 +104,7 @@ namespace lro.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new RadiologyInsightsData(patients, configuration.Value, serializedAdditionalRawData);
+            return new RadiologyInsightsData(patients, configuration, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<RadiologyInsightsData>.Write(ModelReaderWriterOptions options)

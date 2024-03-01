@@ -28,6 +28,7 @@ export enum InputPrimitiveTypeKind {
     Guid = "Guid",
     Int32 = "Int32",
     Int64 = "Int64",
+    SafeInt = "SafeInt",
     IPAddress = "IPAddress",
     Object = "Object",
     RequestMethod = "RequestMethod",

@@ -26,7 +26,7 @@ namespace body_complex.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Id))
+            if (Id.HasValue)
             {
                 if (Id != null)
                 {
@@ -38,12 +38,12 @@ namespace body_complex.Models
                     writer.WriteNull("id");
                 }
             }
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Color))
+            if (Color.HasValue)
             {
                 writer.WritePropertyName("color"u8);
                 writer.WriteStringValue(Color.Value.ToString());
@@ -86,9 +86,9 @@ namespace body_complex.Models
             {
                 return null;
             }
-            Optional<int?> id = default;
-            Optional<string> name = default;
-            Optional<CMYKColors> color = default;
+            int? id = default;
+            string name = default;
+            CMYKColors? color = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -123,7 +123,7 @@ namespace body_complex.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Basic(Optional.ToNullable(id), name.Value, Optional.ToNullable(color), serializedAdditionalRawData);
+            return new Basic(id, name, color, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<Basic>.Write(ModelReaderWriterOptions options)

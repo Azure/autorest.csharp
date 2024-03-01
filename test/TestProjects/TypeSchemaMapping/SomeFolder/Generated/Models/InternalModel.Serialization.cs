@@ -26,7 +26,7 @@ namespace TypeSchemaMapping.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(StringProperty))
+            if (StringProperty != null)
             {
                 writer.WritePropertyName("StringProperty"u8);
                 writer.WriteStringValue(StringProperty);
@@ -69,7 +69,7 @@ namespace TypeSchemaMapping.Models
             {
                 return null;
             }
-            Optional<string> stringProperty = default;
+            string stringProperty = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -85,7 +85,7 @@ namespace TypeSchemaMapping.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new InternalModel(stringProperty.Value, serializedAdditionalRawData);
+            return new InternalModel(stringProperty, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<InternalModel>.Write(ModelReaderWriterOptions options)

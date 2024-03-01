@@ -170,7 +170,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 });
                 MgmtReport.Instance.ModelSection.Add(mi.FullName, mi);
 
-                WriteArmModel(project, model, serializeWriter, $"{name}.cs", $"Models/{name}.Serialization.cs");
+                WriteArmModel(project, model, serializeWriter, $"{name}.cs", $"{name}.Serialization.cs");
             }
 
             foreach (var resource in MgmtContext.Library.ArmResources)
@@ -183,6 +183,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
                 AddGeneratedFile(project, $"{resource.Type.Name}.cs", writer.ToString());
             }
+
+            var wirePathWriter = new WirePathWriter();
+            wirePathWriter.Write();
+            AddGeneratedFile(project, $"Internal/WirePathAttribute.cs", wirePathWriter.ToString());
 
             // write extension class
             WriteExtensions(project, isArmCore, MgmtContext.Library.ExtensionWrapper, MgmtContext.Library.Extensions, MgmtContext.Library.MockableExtensions);

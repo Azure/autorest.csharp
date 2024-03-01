@@ -15,7 +15,7 @@ namespace MgmtMockAndSample.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Extreme))
+            if (Extreme != null)
             {
                 writer.WritePropertyName("extreme"u8);
                 writer.WriteObjectValue(Extreme);
@@ -29,7 +29,7 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<SuperDeepSinglePropertyModel> extreme = default;
+            SuperDeepSinglePropertyModel extreme = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("extreme"u8))
@@ -42,7 +42,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new ExtremelyDeepSinglePropertyModel(extreme.Value);
+            return new ExtremelyDeepSinglePropertyModel(extreme);
         }
     }
 }

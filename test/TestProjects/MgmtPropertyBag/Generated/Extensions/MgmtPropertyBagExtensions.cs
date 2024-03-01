@@ -49,7 +49,10 @@ namespace MgmtPropertyBag
         /// <returns> Returns a <see cref="FooResource"/> object. </returns>
         public static FooResource GetFooResource(this ArmClient client, ResourceIdentifier id)
         {
-            Argument.AssertNotNull(client, nameof(client));
+            if (client == null)
+            {
+                throw new ArgumentNullException(nameof(client));
+            }
 
             return GetMockableMgmtPropertyBagArmClient(client).GetFooResource(id);
         }
@@ -68,7 +71,10 @@ namespace MgmtPropertyBag
         /// <returns> Returns a <see cref="BarResource"/> object. </returns>
         public static BarResource GetBarResource(this ArmClient client, ResourceIdentifier id)
         {
-            Argument.AssertNotNull(client, nameof(client));
+            if (client == null)
+            {
+                throw new ArgumentNullException(nameof(client));
+            }
 
             return GetMockableMgmtPropertyBagArmClient(client).GetBarResource(id);
         }
@@ -85,7 +91,10 @@ namespace MgmtPropertyBag
         /// <returns> An object representing collection of FooResources and their operations over a FooResource. </returns>
         public static FooCollection GetFoos(this ResourceGroupResource resourceGroupResource)
         {
-            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+            if (resourceGroupResource == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResource));
+            }
 
             return GetMockableMgmtPropertyBagResourceGroupResource(resourceGroupResource).GetFoos();
         }
@@ -122,7 +131,10 @@ namespace MgmtPropertyBag
         [ForwardsClientCalls]
         public static async Task<Response<FooResource>> GetFooAsync(this ResourceGroupResource resourceGroupResource, FooCollectionGetOptions options, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+            if (resourceGroupResource == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResource));
+            }
 
             return await GetMockableMgmtPropertyBagResourceGroupResource(resourceGroupResource).GetFooAsync(options, cancellationToken).ConfigureAwait(false);
         }
@@ -159,7 +171,10 @@ namespace MgmtPropertyBag
         [ForwardsClientCalls]
         public static Response<FooResource> GetFoo(this ResourceGroupResource resourceGroupResource, FooCollectionGetOptions options, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+            if (resourceGroupResource == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResource));
+            }
 
             return GetMockableMgmtPropertyBagResourceGroupResource(resourceGroupResource).GetFoo(options, cancellationToken);
         }
@@ -176,7 +191,10 @@ namespace MgmtPropertyBag
         /// <returns> An object representing collection of BarResources and their operations over a BarResource. </returns>
         public static BarCollection GetBars(this ResourceGroupResource resourceGroupResource)
         {
-            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+            if (resourceGroupResource == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResource));
+            }
 
             return GetMockableMgmtPropertyBagResourceGroupResource(resourceGroupResource).GetBars();
         }
@@ -213,7 +231,10 @@ namespace MgmtPropertyBag
         [ForwardsClientCalls]
         public static async Task<Response<BarResource>> GetBarAsync(this ResourceGroupResource resourceGroupResource, BarCollectionGetOptions options, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+            if (resourceGroupResource == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResource));
+            }
 
             return await GetMockableMgmtPropertyBagResourceGroupResource(resourceGroupResource).GetBarAsync(options, cancellationToken).ConfigureAwait(false);
         }
@@ -250,7 +271,10 @@ namespace MgmtPropertyBag
         [ForwardsClientCalls]
         public static Response<BarResource> GetBar(this ResourceGroupResource resourceGroupResource, BarCollectionGetOptions options, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+            if (resourceGroupResource == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResource));
+            }
 
             return GetMockableMgmtPropertyBagResourceGroupResource(resourceGroupResource).GetBar(options, cancellationToken);
         }
@@ -288,7 +312,10 @@ namespace MgmtPropertyBag
         /// <returns> An async collection of <see cref="FooResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<FooResource> GetFoosAsync(this SubscriptionResource subscriptionResource, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+            if (subscriptionResource == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionResource));
+            }
 
             return GetMockableMgmtPropertyBagSubscriptionResource(subscriptionResource).GetFoosAsync(filter, top, cancellationToken);
         }
@@ -326,7 +353,10 @@ namespace MgmtPropertyBag
         /// <returns> A collection of <see cref="FooResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<FooResource> GetFoos(this SubscriptionResource subscriptionResource, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+            if (subscriptionResource == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionResource));
+            }
 
             return GetMockableMgmtPropertyBagSubscriptionResource(subscriptionResource).GetFoos(filter, top, cancellationToken);
         }
@@ -364,7 +394,10 @@ namespace MgmtPropertyBag
         /// <returns> An async collection of <see cref="BarResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<BarResource> GetBarsAsync(this SubscriptionResource subscriptionResource, ETag? ifMatch = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+            if (subscriptionResource == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionResource));
+            }
 
             return GetMockableMgmtPropertyBagSubscriptionResource(subscriptionResource).GetBarsAsync(ifMatch, top, cancellationToken);
         }
@@ -402,7 +435,10 @@ namespace MgmtPropertyBag
         /// <returns> A collection of <see cref="BarResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<BarResource> GetBars(this SubscriptionResource subscriptionResource, ETag? ifMatch = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+            if (subscriptionResource == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionResource));
+            }
 
             return GetMockableMgmtPropertyBagSubscriptionResource(subscriptionResource).GetBars(ifMatch, top, cancellationToken);
         }

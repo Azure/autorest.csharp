@@ -231,7 +231,10 @@ namespace _Type.Property.Optionality
         /// <include file="Docs/UnionFloatLiteral.xml" path="doc/members/member[@name='PutAllAsync(UnionFloatLiteralProperty,CancellationToken)']/*" />
         public virtual async Task<Response> PutAllAsync(UnionFloatLiteralProperty body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -246,7 +249,10 @@ namespace _Type.Property.Optionality
         /// <include file="Docs/UnionFloatLiteral.xml" path="doc/members/member[@name='PutAll(UnionFloatLiteralProperty,CancellationToken)']/*" />
         public virtual Response PutAll(UnionFloatLiteralProperty body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -277,7 +283,10 @@ namespace _Type.Property.Optionality
         /// <include file="Docs/UnionFloatLiteral.xml" path="doc/members/member[@name='PutAllAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutAllAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("UnionFloatLiteral.PutAll");
             scope.Start();
@@ -316,7 +325,10 @@ namespace _Type.Property.Optionality
         /// <include file="Docs/UnionFloatLiteral.xml" path="doc/members/member[@name='PutAll(RequestContent,RequestContext)']/*" />
         public virtual Response PutAll(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("UnionFloatLiteral.PutAll");
             scope.Start();
@@ -339,7 +351,10 @@ namespace _Type.Property.Optionality
         /// <include file="Docs/UnionFloatLiteral.xml" path="doc/members/member[@name='PutDefaultAsync(UnionFloatLiteralProperty,CancellationToken)']/*" />
         public virtual async Task<Response> PutDefaultAsync(UnionFloatLiteralProperty body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -354,7 +369,10 @@ namespace _Type.Property.Optionality
         /// <include file="Docs/UnionFloatLiteral.xml" path="doc/members/member[@name='PutDefault(UnionFloatLiteralProperty,CancellationToken)']/*" />
         public virtual Response PutDefault(UnionFloatLiteralProperty body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -385,7 +403,10 @@ namespace _Type.Property.Optionality
         /// <include file="Docs/UnionFloatLiteral.xml" path="doc/members/member[@name='PutDefaultAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutDefaultAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("UnionFloatLiteral.PutDefault");
             scope.Start();
@@ -424,7 +445,10 @@ namespace _Type.Property.Optionality
         /// <include file="Docs/UnionFloatLiteral.xml" path="doc/members/member[@name='PutDefault(RequestContent,RequestContext)']/*" />
         public virtual Response PutDefault(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("UnionFloatLiteral.PutDefault");
             scope.Start();

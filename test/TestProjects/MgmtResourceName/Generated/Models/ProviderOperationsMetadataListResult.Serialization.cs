@@ -20,8 +20,8 @@ namespace MgmtResourceName.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<ProviderOperationData>> value = default;
-            Optional<string> nextLink = default;
+            IReadOnlyList<ProviderOperationData> value = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -44,7 +44,7 @@ namespace MgmtResourceName.Models
                     continue;
                 }
             }
-            return new ProviderOperationsMetadataListResult(Optional.ToList(value), nextLink.Value);
+            return new ProviderOperationsMetadataListResult(value ?? new ChangeTrackingList<ProviderOperationData>(), nextLink);
         }
     }
 }

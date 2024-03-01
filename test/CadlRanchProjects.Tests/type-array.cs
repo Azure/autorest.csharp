@@ -80,13 +80,13 @@ namespace CadlRanchProjects.Tests
         public Task Type_Array_Float32Value_get() => Test(async (host) =>
         {
             var response = await new ArrayClient(host, null).GetFloat32ValueClient().GetFloat32ValueAsync();
-            Assert.AreEqual(42.42f, response.Value.First());
+            Assert.AreEqual(43.125f, response.Value.First());
         });
 
         [Test]
         public Task Type_Array_Float32Value_put() => Test(async (host) =>
         {
-            var response = await new ArrayClient(host, null).GetFloat32ValueClient().PutAsync(new List<float> { 42.42f });
+            var response = await new ArrayClient(host, null).GetFloat32ValueClient().PutAsync(new List<float> { 43.125f });
             Assert.AreEqual(204, response.Status);
         });
 

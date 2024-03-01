@@ -15,12 +15,12 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Min))
+            if (Min.HasValue)
             {
                 writer.WritePropertyName("min"u8);
                 writer.WriteNumberValue(Min.Value);
             }
-            if (Optional.IsDefined(Max))
+            if (Max.HasValue)
             {
                 writer.WritePropertyName("max"u8);
                 writer.WriteNumberValue(Max.Value);
@@ -38,8 +38,8 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            Optional<int> min = default;
-            Optional<int> max = default;
+            int? min = default;
+            int? max = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
@@ -73,7 +73,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new LengthTokenFilter(odataType, name, Optional.ToNullable(min), Optional.ToNullable(max));
+            return new LengthTokenFilter(odataType, name, min, max);
         }
     }
 }

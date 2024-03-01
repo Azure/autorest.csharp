@@ -92,7 +92,7 @@ namespace CadlRanchProjects.Tests
         public Task Dictionary_Float32Value_get() => Test(async (host) =>
         {
             var response = await new DictionaryClient(host, null).GetFloat32ValueClient().GetFloat32ValueAsync();
-            Assert.AreEqual(42.42f, response.Value["k1"]);
+            Assert.AreEqual(43.125f, response.Value["k1"]);
         });
 
         [Test]
@@ -100,7 +100,7 @@ namespace CadlRanchProjects.Tests
         {
             var response = await new DictionaryClient(host, null).GetFloat32ValueClient().PutAsync(new Dictionary<string, float>()
             {
-                {"k1", 42.42f }
+                {"k1", 43.125f }
             });
             Assert.AreEqual(204, response.Status);
         });

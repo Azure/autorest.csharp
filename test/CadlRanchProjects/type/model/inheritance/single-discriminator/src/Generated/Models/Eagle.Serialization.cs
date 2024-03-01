@@ -27,7 +27,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Friends))
+            if (!(Friends is ChangeTrackingList<Bird> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("friends"u8);
                 writer.WriteStartArray();
@@ -37,7 +37,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(Hate))
+            if (!(Hate is ChangeTrackingDictionary<string, Bird> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("hate"u8);
                 writer.WriteStartObject();
@@ -48,7 +48,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
                 }
                 writer.WriteEndObject();
             }
-            if (Optional.IsDefined(Partner))
+            if (Partner != null)
             {
                 writer.WritePropertyName("partner"u8);
                 writer.WriteObjectValue(Partner);
@@ -95,9 +95,9 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             {
                 return null;
             }
-            Optional<IList<Bird>> friends = default;
-            Optional<IDictionary<string, Bird>> hate = default;
-            Optional<Bird> partner = default;
+            IList<Bird> friends = default;
+            IDictionary<string, Bird> hate = default;
+            Bird partner = default;
             string kind = default;
             int wingspan = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
@@ -113,7 +113,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
                     List<Bird> array = new List<Bird>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DeserializeBird(item));
+                        array.Add(DeserializeBird(item, options));
                     }
                     friends = array;
                     continue;
@@ -127,7 +127,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
                     Dictionary<string, Bird> dictionary = new Dictionary<string, Bird>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        dictionary.Add(property0.Name, DeserializeBird(property0.Value));
+                        dictionary.Add(property0.Name, DeserializeBird(property0.Value, options));
                     }
                     hate = dictionary;
                     continue;
@@ -138,7 +138,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
                     {
                         continue;
                     }
-                    partner = DeserializeBird(property.Value);
+                    partner = DeserializeBird(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("kind"u8))
@@ -157,7 +157,13 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Eagle(kind, wingspan, serializedAdditionalRawData, Optional.ToList(friends), Optional.ToDictionary(hate), partner.Value);
+            return new Eagle(
+                kind,
+                wingspan,
+                serializedAdditionalRawData,
+                friends ?? new ChangeTrackingList<Bird>(),
+                hate ?? new ChangeTrackingDictionary<string, Bird>(),
+                partner);
         }
 
         BinaryData IPersistableModel<Eagle>.Write(ModelReaderWriterOptions options)

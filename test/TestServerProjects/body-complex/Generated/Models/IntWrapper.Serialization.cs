@@ -26,12 +26,12 @@ namespace body_complex.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Field1))
+            if (Field1.HasValue)
             {
                 writer.WritePropertyName("field1"u8);
                 writer.WriteNumberValue(Field1.Value);
             }
-            if (Optional.IsDefined(Field2))
+            if (Field2.HasValue)
             {
                 writer.WritePropertyName("field2"u8);
                 writer.WriteNumberValue(Field2.Value);
@@ -74,8 +74,8 @@ namespace body_complex.Models
             {
                 return null;
             }
-            Optional<int> field1 = default;
-            Optional<int> field2 = default;
+            int? field1 = default;
+            int? field2 = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -104,7 +104,7 @@ namespace body_complex.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new IntWrapper(Optional.ToNullable(field1), Optional.ToNullable(field2), serializedAdditionalRawData);
+            return new IntWrapper(field1, field2, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<IntWrapper>.Write(ModelReaderWriterOptions options)

@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Azure.Core;
 
 namespace ModelsTypeSpec.Models
 {
@@ -29,8 +28,14 @@ namespace ModelsTypeSpec.Models
         /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/> or <paramref name="requiredCollectionWithNullableFloatElement"/> is null. </exception>
         internal RoundTripPrimitiveModel(string requiredString, int requiredInt, long requiredInt64, long requiredSafeInt, float requiredFloat, double requiredDouble, bool requiredBoolean, DateTimeOffset requiredDateTimeOffset, TimeSpan requiredTimeSpan, IEnumerable<float?> requiredCollectionWithNullableFloatElement)
         {
-            Argument.AssertNotNull(requiredString, nameof(requiredString));
-            Argument.AssertNotNull(requiredCollectionWithNullableFloatElement, nameof(requiredCollectionWithNullableFloatElement));
+            if (requiredString == null)
+            {
+                throw new ArgumentNullException(nameof(requiredString));
+            }
+            if (requiredCollectionWithNullableFloatElement == null)
+            {
+                throw new ArgumentNullException(nameof(requiredCollectionWithNullableFloatElement));
+            }
 
             RequiredString = requiredString;
             RequiredInt = requiredInt;

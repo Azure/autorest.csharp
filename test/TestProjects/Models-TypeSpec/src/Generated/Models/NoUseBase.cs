@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace ModelsTypeSpec.Models
 {
@@ -51,7 +50,10 @@ namespace ModelsTypeSpec.Models
         /// <exception cref="ArgumentNullException"> <paramref name="baseModelProp"/> is null. </exception>
         public NoUseBase(string baseModelProp)
         {
-            Argument.AssertNotNull(baseModelProp, nameof(baseModelProp));
+            if (baseModelProp == null)
+            {
+                throw new ArgumentNullException(nameof(baseModelProp));
+            }
 
             BaseModelProp = baseModelProp;
         }

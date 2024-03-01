@@ -43,7 +43,10 @@ namespace MgmtMultipleParentResource
         /// <returns> Returns a <see cref="AnotherParentResource"/> object. </returns>
         public static AnotherParentResource GetAnotherParentResource(this ArmClient client, ResourceIdentifier id)
         {
-            Argument.AssertNotNull(client, nameof(client));
+            if (client == null)
+            {
+                throw new ArgumentNullException(nameof(client));
+            }
 
             return GetMockableMgmtMultipleParentResourceArmClient(client).GetAnotherParentResource(id);
         }
@@ -62,7 +65,10 @@ namespace MgmtMultipleParentResource
         /// <returns> Returns a <see cref="AnotherParentChildResource"/> object. </returns>
         public static AnotherParentChildResource GetAnotherParentChildResource(this ArmClient client, ResourceIdentifier id)
         {
-            Argument.AssertNotNull(client, nameof(client));
+            if (client == null)
+            {
+                throw new ArgumentNullException(nameof(client));
+            }
 
             return GetMockableMgmtMultipleParentResourceArmClient(client).GetAnotherParentChildResource(id);
         }
@@ -81,7 +87,10 @@ namespace MgmtMultipleParentResource
         /// <returns> Returns a <see cref="TheParentSubParentChildResource"/> object. </returns>
         public static TheParentSubParentChildResource GetTheParentSubParentChildResource(this ArmClient client, ResourceIdentifier id)
         {
-            Argument.AssertNotNull(client, nameof(client));
+            if (client == null)
+            {
+                throw new ArgumentNullException(nameof(client));
+            }
 
             return GetMockableMgmtMultipleParentResourceArmClient(client).GetTheParentSubParentChildResource(id);
         }
@@ -100,7 +109,10 @@ namespace MgmtMultipleParentResource
         /// <returns> Returns a <see cref="TheParentResource"/> object. </returns>
         public static TheParentResource GetTheParentResource(this ArmClient client, ResourceIdentifier id)
         {
-            Argument.AssertNotNull(client, nameof(client));
+            if (client == null)
+            {
+                throw new ArgumentNullException(nameof(client));
+            }
 
             return GetMockableMgmtMultipleParentResourceArmClient(client).GetTheParentResource(id);
         }
@@ -119,7 +131,10 @@ namespace MgmtMultipleParentResource
         /// <returns> Returns a <see cref="SubParentResource"/> object. </returns>
         public static SubParentResource GetSubParentResource(this ArmClient client, ResourceIdentifier id)
         {
-            Argument.AssertNotNull(client, nameof(client));
+            if (client == null)
+            {
+                throw new ArgumentNullException(nameof(client));
+            }
 
             return GetMockableMgmtMultipleParentResourceArmClient(client).GetSubParentResource(id);
         }
@@ -136,7 +151,10 @@ namespace MgmtMultipleParentResource
         /// <returns> An object representing collection of AnotherParentResources and their operations over a AnotherParentResource. </returns>
         public static AnotherParentCollection GetAnotherParents(this ResourceGroupResource resourceGroupResource)
         {
-            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+            if (resourceGroupResource == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResource));
+            }
 
             return GetMockableMgmtMultipleParentResourceResourceGroupResource(resourceGroupResource).GetAnotherParents();
         }
@@ -175,7 +193,10 @@ namespace MgmtMultipleParentResource
         [ForwardsClientCalls]
         public static async Task<Response<AnotherParentResource>> GetAnotherParentAsync(this ResourceGroupResource resourceGroupResource, string anotherName, string expand = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+            if (resourceGroupResource == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResource));
+            }
 
             return await GetMockableMgmtMultipleParentResourceResourceGroupResource(resourceGroupResource).GetAnotherParentAsync(anotherName, expand, cancellationToken).ConfigureAwait(false);
         }
@@ -214,7 +235,10 @@ namespace MgmtMultipleParentResource
         [ForwardsClientCalls]
         public static Response<AnotherParentResource> GetAnotherParent(this ResourceGroupResource resourceGroupResource, string anotherName, string expand = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+            if (resourceGroupResource == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResource));
+            }
 
             return GetMockableMgmtMultipleParentResourceResourceGroupResource(resourceGroupResource).GetAnotherParent(anotherName, expand, cancellationToken);
         }
@@ -231,7 +255,10 @@ namespace MgmtMultipleParentResource
         /// <returns> An object representing collection of TheParentResources and their operations over a TheParentResource. </returns>
         public static TheParentCollection GetTheParents(this ResourceGroupResource resourceGroupResource)
         {
-            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+            if (resourceGroupResource == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResource));
+            }
 
             return GetMockableMgmtMultipleParentResourceResourceGroupResource(resourceGroupResource).GetTheParents();
         }
@@ -270,7 +297,10 @@ namespace MgmtMultipleParentResource
         [ForwardsClientCalls]
         public static async Task<Response<TheParentResource>> GetTheParentAsync(this ResourceGroupResource resourceGroupResource, string theParentName, string expand = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+            if (resourceGroupResource == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResource));
+            }
 
             return await GetMockableMgmtMultipleParentResourceResourceGroupResource(resourceGroupResource).GetTheParentAsync(theParentName, expand, cancellationToken).ConfigureAwait(false);
         }
@@ -309,7 +339,10 @@ namespace MgmtMultipleParentResource
         [ForwardsClientCalls]
         public static Response<TheParentResource> GetTheParent(this ResourceGroupResource resourceGroupResource, string theParentName, string expand = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+            if (resourceGroupResource == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResource));
+            }
 
             return GetMockableMgmtMultipleParentResourceResourceGroupResource(resourceGroupResource).GetTheParent(theParentName, expand, cancellationToken);
         }

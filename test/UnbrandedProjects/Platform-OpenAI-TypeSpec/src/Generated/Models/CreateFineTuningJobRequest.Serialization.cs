@@ -25,7 +25,7 @@ namespace OpenAI.Models
             writer.WriteStartObject();
             writer.WritePropertyName("training_file"u8);
             writer.WriteStringValue(TrainingFile);
-            if (OptionalProperty.IsDefined(ValidationFile))
+            if (ValidationFile != null)
             {
                 if (ValidationFile != null)
                 {
@@ -39,12 +39,12 @@ namespace OpenAI.Models
             }
             writer.WritePropertyName("model"u8);
             writer.WriteStringValue(Model.ToString());
-            if (OptionalProperty.IsDefined(Hyperparameters))
+            if (Hyperparameters != null)
             {
                 writer.WritePropertyName("hyperparameters"u8);
                 writer.WriteObjectValue(Hyperparameters);
             }
-            if (OptionalProperty.IsDefined(Suffix))
+            if (Suffix != null)
             {
                 if (Suffix != null)
                 {
@@ -95,10 +95,10 @@ namespace OpenAI.Models
                 return null;
             }
             string trainingFile = default;
-            OptionalProperty<string> validationFile = default;
+            string validationFile = default;
             CreateFineTuningJobRequestModel model = default;
-            OptionalProperty<CreateFineTuningJobRequestHyperparameters> hyperparameters = default;
-            OptionalProperty<string> suffix = default;
+            CreateFineTuningJobRequestHyperparameters hyperparameters = default;
+            string suffix = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -129,7 +129,7 @@ namespace OpenAI.Models
                     {
                         continue;
                     }
-                    hyperparameters = CreateFineTuningJobRequestHyperparameters.DeserializeCreateFineTuningJobRequestHyperparameters(property.Value);
+                    hyperparameters = CreateFineTuningJobRequestHyperparameters.DeserializeCreateFineTuningJobRequestHyperparameters(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("suffix"u8))
@@ -148,7 +148,13 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new CreateFineTuningJobRequest(trainingFile, validationFile.Value, model, hyperparameters.Value, suffix.Value, serializedAdditionalRawData);
+            return new CreateFineTuningJobRequest(
+                trainingFile,
+                validationFile,
+                model,
+                hyperparameters,
+                suffix,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<CreateFineTuningJobRequest>.Write(ModelReaderWriterOptions options)

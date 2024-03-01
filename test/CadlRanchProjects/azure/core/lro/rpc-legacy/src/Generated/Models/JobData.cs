@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace _Azure.Lro.RpcLegacy.Models
 {
@@ -51,7 +50,10 @@ namespace _Azure.Lro.RpcLegacy.Models
         /// <exception cref="ArgumentNullException"> <paramref name="comment"/> is null. </exception>
         public JobData(string comment)
         {
-            Argument.AssertNotNull(comment, nameof(comment));
+            if (comment == null)
+            {
+                throw new ArgumentNullException(nameof(comment));
+            }
 
             Comment = comment;
         }

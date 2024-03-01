@@ -15,17 +15,17 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Pattern))
+            if (Pattern != null)
             {
                 writer.WritePropertyName("pattern"u8);
                 writer.WriteStringValue(Pattern);
             }
-            if (Optional.IsDefined(Flags))
+            if (Flags.HasValue)
             {
                 writer.WritePropertyName("flags"u8);
                 writer.WriteStringValue(Flags.Value.ToString());
             }
-            if (Optional.IsDefined(Group))
+            if (Group.HasValue)
             {
                 writer.WritePropertyName("group"u8);
                 writer.WriteNumberValue(Group.Value);
@@ -43,9 +43,9 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            Optional<string> pattern = default;
-            Optional<RegexFlags> flags = default;
-            Optional<int> group = default;
+            string pattern = default;
+            RegexFlags? flags = default;
+            int? group = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
@@ -84,7 +84,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new PatternTokenizer(odataType, name, pattern.Value, Optional.ToNullable(flags), Optional.ToNullable(group));
+            return new PatternTokenizer(odataType, name, pattern, flags, group);
         }
     }
 }

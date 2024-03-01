@@ -27,9 +27,9 @@ namespace CustomizationsInTsp.Models
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("requiredInt"u8);
-            writer.WriteNumberValue(RequiredInt);
-            if (Optional.IsDefined(OptionalInt))
+            writer.WritePropertyName("requiredIntOnBase"u8);
+            writer.WriteNumberValue(RequiredIntOnBase);
+            if (OptionalInt.HasValue)
             {
                 writer.WritePropertyName("optionalInt"u8);
                 writer.WriteNumberValue(OptionalInt.Value);
@@ -72,15 +72,15 @@ namespace CustomizationsInTsp.Models
             {
                 return null;
             }
-            int requiredInt = default;
-            Optional<int> optionalInt = default;
+            int requiredIntOnBase = default;
+            int? optionalInt = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("requiredInt"u8))
+                if (property.NameEquals("requiredIntOnBase"u8))
                 {
-                    requiredInt = property.Value.GetInt32();
+                    requiredIntOnBase = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("optionalInt"u8))
@@ -98,7 +98,7 @@ namespace CustomizationsInTsp.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new RenamedModel(requiredInt, Optional.ToNullable(optionalInt), serializedAdditionalRawData);
+            return new RenamedModel(requiredIntOnBase, optionalInt, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<RenamedModel>.Write(ModelReaderWriterOptions options)

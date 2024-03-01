@@ -26,17 +26,17 @@ namespace body_complex.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Jawsize))
+            if (Jawsize.HasValue)
             {
                 writer.WritePropertyName("jawsize"u8);
                 writer.WriteNumberValue(Jawsize.Value);
             }
-            if (Optional.IsDefined(Color))
+            if (Color.HasValue)
             {
                 writer.WritePropertyName("color"u8);
                 writer.WriteStringValue(Color.Value.ToString());
             }
-            if (Optional.IsDefined(Age))
+            if (Age.HasValue)
             {
                 writer.WritePropertyName("age"u8);
                 writer.WriteNumberValue(Age.Value);
@@ -45,14 +45,14 @@ namespace body_complex.Models
             writer.WriteStringValue(Birthday, "O");
             writer.WritePropertyName("fishtype"u8);
             writer.WriteStringValue(Fishtype);
-            if (Optional.IsDefined(Species))
+            if (Species != null)
             {
                 writer.WritePropertyName("species"u8);
                 writer.WriteStringValue(Species);
             }
             writer.WritePropertyName("length"u8);
             writer.WriteNumberValue(Length);
-            if (Optional.IsCollectionDefined(Siblings))
+            if (!(Siblings is ChangeTrackingList<Fish> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("siblings"u8);
                 writer.WriteStartArray();
@@ -100,14 +100,14 @@ namespace body_complex.Models
             {
                 return null;
             }
-            Optional<int> jawsize = default;
-            Optional<GoblinSharkColor> color = default;
-            Optional<int> age = default;
+            int? jawsize = default;
+            GoblinSharkColor? color = default;
+            int? age = default;
             DateTimeOffset birthday = default;
             string fishtype = default;
-            Optional<string> species = default;
+            string species = default;
             float length = default;
-            Optional<IList<Fish>> siblings = default;
+            IList<Fish> siblings = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -168,7 +168,7 @@ namespace body_complex.Models
                     List<Fish> array = new List<Fish>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DeserializeFish(item));
+                        array.Add(DeserializeFish(item, options));
                     }
                     siblings = array;
                     continue;
@@ -179,7 +179,16 @@ namespace body_complex.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Goblinshark(fishtype, species.Value, length, Optional.ToList(siblings), serializedAdditionalRawData, Optional.ToNullable(age), birthday, Optional.ToNullable(jawsize), Optional.ToNullable(color));
+            return new Goblinshark(
+                fishtype,
+                species,
+                length,
+                siblings ?? new ChangeTrackingList<Fish>(),
+                serializedAdditionalRawData,
+                age,
+                birthday,
+                jawsize,
+                color);
         }
 
         BinaryData IPersistableModel<Goblinshark>.Write(ModelReaderWriterOptions options)

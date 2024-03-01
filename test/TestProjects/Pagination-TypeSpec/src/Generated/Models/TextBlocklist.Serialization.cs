@@ -27,9 +27,12 @@ namespace Pagination.Models
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("blocklistName"u8);
-            writer.WriteStringValue(BlocklistName);
-            if (Optional.IsDefined(Description))
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("blocklistName"u8);
+                writer.WriteStringValue(BlocklistName);
+            }
+            if (Description != null)
             {
                 writer.WritePropertyName("description"u8);
                 writer.WriteStringValue(Description);
@@ -73,7 +76,7 @@ namespace Pagination.Models
                 return null;
             }
             string blocklistName = default;
-            Optional<string> description = default;
+            string description = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -94,7 +97,7 @@ namespace Pagination.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new TextBlocklist(blocklistName, description.Value, serializedAdditionalRawData);
+            return new TextBlocklist(blocklistName, description, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<TextBlocklist>.Write(ModelReaderWriterOptions options)

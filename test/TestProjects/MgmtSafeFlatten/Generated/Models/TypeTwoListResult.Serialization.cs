@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 using MgmtSafeFlatten;
 
 namespace MgmtSafeFlatten.Models
@@ -21,7 +20,7 @@ namespace MgmtSafeFlatten.Models
                 return null;
             }
             IReadOnlyList<TypeTwoData> value = default;
-            Optional<string> nextLink = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -40,7 +39,7 @@ namespace MgmtSafeFlatten.Models
                     continue;
                 }
             }
-            return new TypeTwoListResult(value, nextLink.Value);
+            return new TypeTwoListResult(value, nextLink);
         }
     }
 }

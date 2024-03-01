@@ -19,16 +19,16 @@ namespace MgmtScopeResource.Models
             {
                 return null;
             }
-            Optional<ProvisioningOperation> provisioningOperation = default;
-            Optional<string> provisioningState = default;
-            Optional<DateTimeOffset> timestamp = default;
-            Optional<TimeSpan> duration = default;
-            Optional<TimeSpan> anotherDuration = default;
-            Optional<string> serviceRequestId = default;
-            Optional<string> statusCode = default;
-            Optional<StatusMessage> statusMessage = default;
-            Optional<HttpMessage> request = default;
-            Optional<HttpMessage> response = default;
+            ProvisioningOperation? provisioningOperation = default;
+            string provisioningState = default;
+            DateTimeOffset? timestamp = default;
+            TimeSpan? duration = default;
+            TimeSpan? anotherDuration = default;
+            string serviceRequestId = default;
+            string statusCode = default;
+            StatusMessage statusMessage = default;
+            HttpMessage request = default;
+            HttpMessage response = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("provisioningOperation"u8))
@@ -110,7 +110,17 @@ namespace MgmtScopeResource.Models
                     continue;
                 }
             }
-            return new DeploymentOperationProperties(Optional.ToNullable(provisioningOperation), provisioningState.Value, Optional.ToNullable(timestamp), Optional.ToNullable(duration), Optional.ToNullable(anotherDuration), serviceRequestId.Value, statusCode.Value, statusMessage.Value, request.Value, response.Value);
+            return new DeploymentOperationProperties(
+                provisioningOperation,
+                provisioningState,
+                timestamp,
+                duration,
+                anotherDuration,
+                serviceRequestId,
+                statusCode,
+                statusMessage,
+                request,
+                response);
         }
     }
 }

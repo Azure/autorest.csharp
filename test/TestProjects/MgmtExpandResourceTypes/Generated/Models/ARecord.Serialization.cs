@@ -15,7 +15,7 @@ namespace MgmtExpandResourceTypes.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Ipv4Address))
+            if (Ipv4Address != null)
             {
                 writer.WritePropertyName("ipv4Address"u8);
                 writer.WriteStringValue(Ipv4Address);
@@ -29,7 +29,7 @@ namespace MgmtExpandResourceTypes.Models
             {
                 return null;
             }
-            Optional<string> ipv4Address = default;
+            string ipv4Address = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("ipv4Address"u8))
@@ -38,7 +38,7 @@ namespace MgmtExpandResourceTypes.Models
                     continue;
                 }
             }
-            return new ARecord(ipv4Address.Value);
+            return new ARecord(ipv4Address);
         }
     }
 }

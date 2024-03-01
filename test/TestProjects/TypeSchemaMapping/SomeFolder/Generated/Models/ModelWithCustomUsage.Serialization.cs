@@ -21,7 +21,7 @@ namespace TypeSchemaMapping.Models
         private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "ModelWithCustomUsage");
-            if (Optional.IsDefined(ModelProperty))
+            if (ModelProperty != null)
             {
                 writer.WriteStartElement("ModelProperty");
                 writer.WriteValue(ModelProperty);
@@ -55,7 +55,7 @@ namespace TypeSchemaMapping.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(ModelProperty))
+            if (ModelProperty != null)
             {
                 writer.WritePropertyName("ModelProperty"u8);
                 writer.WriteStringValue(ModelProperty);
@@ -98,7 +98,7 @@ namespace TypeSchemaMapping.Models
             {
                 return null;
             }
-            Optional<string> modelProperty = default;
+            string modelProperty = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -114,7 +114,7 @@ namespace TypeSchemaMapping.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ModelWithCustomUsage(modelProperty.Value, serializedAdditionalRawData);
+            return new ModelWithCustomUsage(modelProperty, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ModelWithCustomUsage>.Write(ModelReaderWriterOptions options)

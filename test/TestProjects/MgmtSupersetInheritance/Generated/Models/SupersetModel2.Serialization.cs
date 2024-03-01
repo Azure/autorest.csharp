@@ -15,22 +15,22 @@ namespace MgmtSupersetInheritance.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(ID))
+            if (ID != null)
             {
                 writer.WritePropertyName("iD"u8);
                 writer.WriteStringValue(ID);
             }
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(SupersetModel2Type))
+            if (SupersetModel2Type != null)
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(SupersetModel2Type);
             }
-            if (Optional.IsDefined(New))
+            if (New != null)
             {
                 writer.WritePropertyName("new"u8);
                 writer.WriteStringValue(New);
@@ -44,10 +44,10 @@ namespace MgmtSupersetInheritance.Models
             {
                 return null;
             }
-            Optional<string> id = default;
-            Optional<string> name = default;
-            Optional<string> type = default;
-            Optional<string> @new = default;
+            string id = default;
+            string name = default;
+            string type = default;
+            string @new = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("iD"u8))
@@ -71,7 +71,7 @@ namespace MgmtSupersetInheritance.Models
                     continue;
                 }
             }
-            return new SupersetModel2(id.Value, name.Value, type.Value, @new.Value);
+            return new SupersetModel2(id, name, type, @new);
         }
     }
 }

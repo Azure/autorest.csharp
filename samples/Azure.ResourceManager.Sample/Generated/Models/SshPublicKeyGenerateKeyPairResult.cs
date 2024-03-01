@@ -6,7 +6,7 @@
 #nullable disable
 
 using System;
-using Azure.Core;
+using System.Collections.Generic;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -16,6 +16,38 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class SshPublicKeyGenerateKeyPairResult
     {
+        /// <summary>
+        /// Keeps track of any properties unknown to the library.
+        /// <para>
+        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of <see cref="SshPublicKeyGenerateKeyPairResult"/>. </summary>
         /// <param name="privateKey">
         /// Private key portion of the key pair used to authenticate to a virtual machine through ssh. The private key is returned in RFC3447 format and should be treated as a secret.
@@ -32,29 +64,68 @@ namespace Azure.ResourceManager.Sample.Models
         /// <exception cref="ArgumentNullException"> <paramref name="privateKey"/>, <paramref name="publicKey"/> or <paramref name="id"/> is null. </exception>
         internal SshPublicKeyGenerateKeyPairResult(string privateKey, string publicKey, string id)
         {
-            Argument.AssertNotNull(privateKey, nameof(privateKey));
-            Argument.AssertNotNull(publicKey, nameof(publicKey));
-            Argument.AssertNotNull(id, nameof(id));
+            if (privateKey == null)
+            {
+                throw new ArgumentNullException(nameof(privateKey));
+            }
+            if (publicKey == null)
+            {
+                throw new ArgumentNullException(nameof(publicKey));
+            }
+            if (id == null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
 
             PrivateKey = privateKey;
             PublicKey = publicKey;
             Id = id;
         }
 
+        /// <summary> Initializes a new instance of <see cref="SshPublicKeyGenerateKeyPairResult"/>. </summary>
+        /// <param name="privateKey">
+        /// Private key portion of the key pair used to authenticate to a virtual machine through ssh. The private key is returned in RFC3447 format and should be treated as a secret.
+        /// Serialized Name: SshPublicKeyGenerateKeyPairResult.privateKey
+        /// </param>
+        /// <param name="publicKey">
+        /// Public key portion of the key pair used to authenticate to a virtual machine through ssh. The public key is in ssh-rsa format.
+        /// Serialized Name: SshPublicKeyGenerateKeyPairResult.publicKey
+        /// </param>
+        /// <param name="id">
+        /// The ARM resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{SshPublicKeyName}
+        /// Serialized Name: SshPublicKeyGenerateKeyPairResult.id
+        /// </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SshPublicKeyGenerateKeyPairResult(string privateKey, string publicKey, string id, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            PrivateKey = privateKey;
+            PublicKey = publicKey;
+            Id = id;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="SshPublicKeyGenerateKeyPairResult"/> for deserialization. </summary>
+        internal SshPublicKeyGenerateKeyPairResult()
+        {
+        }
+
         /// <summary>
         /// Private key portion of the key pair used to authenticate to a virtual machine through ssh. The private key is returned in RFC3447 format and should be treated as a secret.
         /// Serialized Name: SshPublicKeyGenerateKeyPairResult.privateKey
         /// </summary>
+        [WirePath("privateKey")]
         public string PrivateKey { get; }
         /// <summary>
         /// Public key portion of the key pair used to authenticate to a virtual machine through ssh. The public key is in ssh-rsa format.
         /// Serialized Name: SshPublicKeyGenerateKeyPairResult.publicKey
         /// </summary>
+        [WirePath("publicKey")]
         public string PublicKey { get; }
         /// <summary>
         /// The ARM resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{SshPublicKeyName}
         /// Serialized Name: SshPublicKeyGenerateKeyPairResult.id
         /// </summary>
+        [WirePath("id")]
         public string Id { get; }
     }
 }

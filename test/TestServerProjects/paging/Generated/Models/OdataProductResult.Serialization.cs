@@ -26,7 +26,7 @@ namespace paging.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Values))
+            if (!(Values is ChangeTrackingList<Product> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("values"u8);
                 writer.WriteStartArray();
@@ -36,7 +36,7 @@ namespace paging.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(OdataNextLink))
+            if (OdataNextLink != null)
             {
                 writer.WritePropertyName("odata.nextLink"u8);
                 writer.WriteStringValue(OdataNextLink);
@@ -79,8 +79,8 @@ namespace paging.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<Product>> values = default;
-            Optional<string> odataNextLink = default;
+            IReadOnlyList<Product> values = default;
+            string odataNextLink = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -94,7 +94,7 @@ namespace paging.Models
                     List<Product> array = new List<Product>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Product.DeserializeProduct(item));
+                        array.Add(Product.DeserializeProduct(item, options));
                     }
                     values = array;
                     continue;
@@ -110,7 +110,7 @@ namespace paging.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new OdataProductResult(Optional.ToList(values), odataNextLink.Value, serializedAdditionalRawData);
+            return new OdataProductResult(values ?? new ChangeTrackingList<Product>(), odataNextLink, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<OdataProductResult>.Write(ModelReaderWriterOptions options)

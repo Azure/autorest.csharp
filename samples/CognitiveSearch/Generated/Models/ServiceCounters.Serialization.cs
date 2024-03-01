@@ -62,7 +62,14 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new ServiceCounters(documentCount, indexesCount, indexersCount, dataSourcesCount, storageSize, synonymMaps, skillsetCount);
+            return new ServiceCounters(
+                documentCount,
+                indexesCount,
+                indexersCount,
+                dataSourcesCount,
+                storageSize,
+                synonymMaps,
+                skillsetCount);
         }
     }
 }

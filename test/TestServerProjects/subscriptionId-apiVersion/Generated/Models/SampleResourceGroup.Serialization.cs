@@ -26,12 +26,12 @@ namespace subscriptionId_apiVersion.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Location))
+            if (Location != null)
             {
                 writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location);
@@ -74,8 +74,8 @@ namespace subscriptionId_apiVersion.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> location = default;
+            string name = default;
+            string location = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -96,7 +96,7 @@ namespace subscriptionId_apiVersion.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new SampleResourceGroup(name.Value, location.Value, serializedAdditionalRawData);
+            return new SampleResourceGroup(name, location, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<SampleResourceGroup>.Write(ModelReaderWriterOptions options)

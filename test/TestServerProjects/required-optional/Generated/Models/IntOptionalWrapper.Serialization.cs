@@ -26,7 +26,7 @@ namespace required_optional.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Value))
+            if (Value.HasValue)
             {
                 writer.WritePropertyName("value"u8);
                 writer.WriteNumberValue(Value.Value);
@@ -69,7 +69,7 @@ namespace required_optional.Models
             {
                 return null;
             }
-            Optional<int> value = default;
+            int? value = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -89,7 +89,7 @@ namespace required_optional.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new IntOptionalWrapper(Optional.ToNullable(value), serializedAdditionalRawData);
+            return new IntOptionalWrapper(value, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<IntOptionalWrapper>.Write(ModelReaderWriterOptions options)

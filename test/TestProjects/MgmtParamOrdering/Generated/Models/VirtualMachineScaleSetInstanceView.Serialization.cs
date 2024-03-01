@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace MgmtParamOrdering.Models
 {
@@ -18,7 +17,7 @@ namespace MgmtParamOrdering.Models
             {
                 return null;
             }
-            Optional<string> virtualMachine = default;
+            string virtualMachine = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("virtualMachine"u8))
@@ -27,7 +26,7 @@ namespace MgmtParamOrdering.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetInstanceView(virtualMachine.Value);
+            return new VirtualMachineScaleSetInstanceView(virtualMachine);
         }
     }
 }

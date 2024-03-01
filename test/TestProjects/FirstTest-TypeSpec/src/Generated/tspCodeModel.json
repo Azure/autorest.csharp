@@ -820,7 +820,7 @@
      "Type": {
       "$id": "106",
       "Kind": "Primitive",
-      "Name": "Int32",
+      "Name": "SByte",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -896,7 +896,7 @@
          "Type": {
           "$id": "115",
           "Kind": "Primitive",
-          "Name": "Int32",
+          "Name": "SByte",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -944,7 +944,7 @@
       "Type": {
        "$id": "119",
        "Kind": "Primitive",
-       "Name": "Int32",
+       "Name": "SByte",
        "IsNullable": false
       },
       "IsRequired": true,
@@ -3426,31 +3426,149 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "350",
+     "Name": "optionalDictionary",
+     "ResourceName": "FirstTestTypeSpec",
+     "Description": "test optional dictionary.",
+     "Parameters": [
+      {
+       "$ref": "178"
+      },
+      {
+       "$id": "351",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$id": "352",
+        "Kind": "Dictionary",
+        "Name": "Dictionary",
+        "KeyType": {
+         "$id": "353",
+         "Kind": "Primitive",
+         "Name": "String",
+         "IsNullable": false
+        },
+        "ValueType": {
+         "$id": "354",
+         "Kind": "Primitive",
+         "Name": "Int32",
+         "IsNullable": false
+        },
+        "IsNullable": false
+       },
+       "Location": "Body",
+       "IsRequired": false,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "355",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "356",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "357",
+        "Type": {
+         "$ref": "356"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "358",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "359",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "360",
+        "Type": {
+         "$ref": "359"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "361",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{firstTestTypeSpecUrl}",
+     "Path": "/optionalDictionary",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
-    "$id": "350"
+    "$id": "362"
    },
    "Creatable": true
   },
   {
-   "$id": "351",
+   "$id": "363",
    "Name": "Hello",
    "Description": "",
    "Operations": [],
    "Protocol": {
-    "$id": "352"
+    "$id": "364"
    },
    "Creatable": false,
    "Parent": "FirstTestTypeSpecClient"
   },
   {
-   "$id": "353",
+   "$id": "365",
    "Name": "HelloDemo",
    "Description": "Hello world service",
    "Operations": [
     {
-     "$id": "354",
+     "$id": "366",
      "Name": "sayHi",
      "ResourceName": "Demo",
      "Description": "Return hi",
@@ -3459,11 +3577,11 @@
        "$ref": "178"
       },
       {
-       "$id": "355",
+       "$id": "367",
        "Name": "headParameter",
        "NameInRequest": "head-parameter",
        "Type": {
-        "$id": "356",
+        "$id": "368",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3479,11 +3597,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "357",
+       "$id": "369",
        "Name": "queryParameter",
        "NameInRequest": "queryParameter",
        "Type": {
-        "$id": "358",
+        "$id": "370",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3499,11 +3617,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "359",
+       "$id": "371",
        "Name": "optionalQuery",
        "NameInRequest": "optionalQuery",
        "Type": {
-        "$id": "360",
+        "$id": "372",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3519,11 +3637,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "361",
+       "$id": "373",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "362",
+        "$id": "374",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3538,9 +3656,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "363",
+        "$id": "375",
         "Type": {
-         "$ref": "362"
+         "$ref": "374"
         },
         "Value": "application/json"
        }
@@ -3548,7 +3666,7 @@
      ],
      "Responses": [
       {
-       "$id": "364",
+       "$id": "376",
        "StatusCodes": [
         200
        ],
@@ -3573,18 +3691,18 @@
     }
    ],
    "Protocol": {
-    "$id": "365"
+    "$id": "377"
    },
    "Creatable": false,
    "Parent": "Hello"
   },
   {
-   "$id": "366",
+   "$id": "378",
    "Name": "HelloDemo2",
    "Description": "",
    "Operations": [
     {
-     "$id": "367",
+     "$id": "379",
      "Name": "helloAgain",
      "ResourceName": "Demo2",
      "Description": "Return hi again",
@@ -3593,11 +3711,11 @@
        "$ref": "178"
       },
       {
-       "$id": "368",
+       "$id": "380",
        "Name": "p1",
        "NameInRequest": "p1",
        "Type": {
-        "$id": "369",
+        "$id": "381",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3613,15 +3731,15 @@
        "Kind": "Method"
       },
       {
-       "$id": "370",
+       "$id": "382",
        "Name": "contentType",
        "NameInRequest": "content-type",
        "Type": {
-        "$id": "371",
+        "$id": "383",
         "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
-         "$id": "372",
+         "$id": "384",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -3631,9 +3749,9 @@
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "373",
+        "$id": "385",
         "Type": {
-         "$ref": "371"
+         "$ref": "383"
         },
         "Value": "text/plain"
        },
@@ -3647,11 +3765,11 @@
        "Kind": "Constant"
       },
       {
-       "$id": "374",
+       "$id": "386",
        "Name": "p2",
        "NameInRequest": "p2",
        "Type": {
-        "$id": "375",
+        "$id": "387",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3667,7 +3785,7 @@
        "Kind": "Method"
       },
       {
-       "$id": "376",
+       "$id": "388",
        "Name": "action",
        "NameInRequest": "action",
        "Type": {
@@ -3684,11 +3802,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "377",
+       "$id": "389",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "378",
+        "$id": "390",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3703,9 +3821,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "379",
+        "$id": "391",
         "Type": {
-         "$ref": "378"
+         "$ref": "390"
         },
         "Value": "application/json"
        }
@@ -3713,7 +3831,7 @@
      ],
      "Responses": [
       {
-       "$id": "380",
+       "$id": "392",
        "StatusCodes": [
         200
        ],
@@ -3740,7 +3858,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "381",
+     "$id": "393",
      "Name": "noContentType",
      "ResourceName": "Demo2",
      "Description": "Return hi again",
@@ -3749,11 +3867,11 @@
        "$ref": "178"
       },
       {
-       "$id": "382",
+       "$id": "394",
        "Name": "p1",
        "NameInRequest": "p1",
        "Type": {
-        "$id": "383",
+        "$id": "395",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3769,11 +3887,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "384",
+       "$id": "396",
        "Name": "p2",
        "NameInRequest": "p2",
        "Type": {
-        "$id": "385",
+        "$id": "397",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3789,7 +3907,7 @@
        "Kind": "Method"
       },
       {
-       "$id": "386",
+       "$id": "398",
        "Name": "action",
        "NameInRequest": "action",
        "Type": {
@@ -3806,11 +3924,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "387",
+       "$id": "399",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "388",
+        "$id": "400",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3825,19 +3943,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "389",
+        "$id": "401",
         "Type": {
-         "$ref": "388"
+         "$ref": "400"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "390",
+       "$id": "402",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "391",
+        "$id": "403",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3852,9 +3970,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "392",
+        "$id": "404",
         "Type": {
-         "$ref": "391"
+         "$ref": "403"
         },
         "Value": "application/json"
        }
@@ -3862,7 +3980,7 @@
      ],
      "Responses": [
       {
-       "$id": "393",
+       "$id": "405",
        "StatusCodes": [
         200
        ],
@@ -3889,7 +4007,7 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "394",
+     "$id": "406",
      "Name": "helloDemoAgain",
      "ResourceName": "Demo2",
      "Description": "Return hi in demo2",
@@ -3898,11 +4016,11 @@
        "$ref": "178"
       },
       {
-       "$id": "395",
+       "$id": "407",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "396",
+        "$id": "408",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3917,9 +4035,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "397",
+        "$id": "409",
         "Type": {
-         "$ref": "396"
+         "$ref": "408"
         },
         "Value": "application/json"
        }
@@ -3927,7 +4045,7 @@
      ],
      "Responses": [
       {
-       "$id": "398",
+       "$id": "410",
        "StatusCodes": [
         200
        ],
@@ -3951,7 +4069,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "399",
+     "$id": "411",
      "Name": "createLiteral",
      "ResourceName": "Demo2",
      "Description": "Create with literal value",
@@ -3960,7 +4078,7 @@
        "$ref": "178"
       },
       {
-       "$id": "400",
+       "$id": "412",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -3977,11 +4095,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "401",
+       "$id": "413",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "402",
+        "$id": "414",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3996,19 +4114,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "403",
+        "$id": "415",
         "Type": {
-         "$ref": "402"
+         "$ref": "414"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "404",
+       "$id": "416",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "405",
+        "$id": "417",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4023,9 +4141,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "406",
+        "$id": "418",
         "Type": {
-         "$ref": "405"
+         "$ref": "417"
         },
         "Value": "application/json"
        }
@@ -4033,7 +4151,7 @@
      ],
      "Responses": [
       {
-       "$id": "407",
+       "$id": "419",
        "StatusCodes": [
         200
        ],
@@ -4060,7 +4178,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "408",
+     "$id": "420",
      "Name": "helloLiteral",
      "ResourceName": "Demo2",
      "Description": "Send literal parameters",
@@ -4069,15 +4187,15 @@
        "$ref": "178"
       },
       {
-       "$id": "409",
+       "$id": "421",
        "Name": "p1",
        "NameInRequest": "p1",
        "Type": {
-        "$id": "410",
+        "$id": "422",
         "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
-         "$id": "411",
+         "$id": "423",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -4087,9 +4205,9 @@
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "412",
+        "$id": "424",
         "Type": {
-         "$ref": "410"
+         "$ref": "422"
         },
         "Value": "test"
        },
@@ -4103,15 +4221,15 @@
        "Kind": "Constant"
       },
       {
-       "$id": "413",
+       "$id": "425",
        "Name": "p2",
        "NameInRequest": "p2",
        "Type": {
-        "$id": "414",
+        "$id": "426",
         "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
-         "$id": "415",
+         "$id": "427",
          "Kind": "Primitive",
          "Name": "Int32",
          "IsNullable": false
@@ -4121,9 +4239,9 @@
        },
        "Location": "Path",
        "DefaultValue": {
-        "$id": "416",
+        "$id": "428",
         "Type": {
-         "$ref": "414"
+         "$ref": "426"
         },
         "Value": 123
        },
@@ -4137,15 +4255,15 @@
        "Kind": "Constant"
       },
       {
-       "$id": "417",
+       "$id": "429",
        "Name": "p3",
        "NameInRequest": "p3",
        "Type": {
-        "$id": "418",
+        "$id": "430",
         "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
-         "$id": "419",
+         "$id": "431",
          "Kind": "Primitive",
          "Name": "Boolean",
          "IsNullable": false
@@ -4155,9 +4273,9 @@
        },
        "Location": "Query",
        "DefaultValue": {
-        "$id": "420",
+        "$id": "432",
         "Type": {
-         "$ref": "418"
+         "$ref": "430"
         },
         "Value": true
        },
@@ -4171,11 +4289,11 @@
        "Kind": "Constant"
       },
       {
-       "$id": "421",
+       "$id": "433",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "422",
+        "$id": "434",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4190,9 +4308,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "423",
+        "$id": "435",
         "Type": {
-         "$ref": "422"
+         "$ref": "434"
         },
         "Value": "application/json"
        }
@@ -4200,7 +4318,7 @@
      ],
      "Responses": [
       {
-       "$id": "424",
+       "$id": "436",
        "StatusCodes": [
         200
        ],
@@ -4225,18 +4343,18 @@
     }
    ],
    "Protocol": {
-    "$id": "425"
+    "$id": "437"
    },
    "Creatable": false,
    "Parent": "Hello"
   },
   {
-   "$id": "426",
+   "$id": "438",
    "Name": "EnumTest",
    "Description": "",
    "Operations": [
     {
-     "$id": "427",
+     "$id": "439",
      "Name": "getUnknownValue",
      "ResourceName": "EnumTest",
      "Description": "get extensible enum",
@@ -4245,11 +4363,11 @@
        "$ref": "178"
       },
       {
-       "$id": "428",
+       "$id": "440",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "429",
+        "$id": "441",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4264,9 +4382,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "430",
+        "$id": "442",
         "Type": {
-         "$ref": "429"
+         "$ref": "441"
         },
         "Value": "application/json"
        }
@@ -4274,7 +4392,7 @@
      ],
      "Responses": [
       {
-       "$id": "431",
+       "$id": "443",
        "StatusCodes": [
         200
        ],
@@ -4299,18 +4417,18 @@
     }
    ],
    "Protocol": {
-    "$id": "432"
+    "$id": "444"
    },
    "Creatable": false,
    "Parent": "FirstTestTypeSpecClient"
   },
   {
-   "$id": "433",
+   "$id": "445",
    "Name": "ProtocolAndConvenient",
    "Description": "",
    "Operations": [
     {
-     "$id": "434",
+     "$id": "446",
      "Name": "internalProtocol",
      "ResourceName": "ProtocolAndConvenient",
      "Description": "When set protocol false and convenient true, then the protocol method should be internal",
@@ -4319,7 +4437,7 @@
        "$ref": "178"
       },
       {
-       "$id": "435",
+       "$id": "447",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -4336,11 +4454,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "436",
+       "$id": "448",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "437",
+        "$id": "449",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4355,19 +4473,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "438",
+        "$id": "450",
         "Type": {
-         "$ref": "437"
+         "$ref": "449"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "439",
+       "$id": "451",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "440",
+        "$id": "452",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4382,9 +4500,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "441",
+        "$id": "453",
         "Type": {
-         "$ref": "440"
+         "$ref": "452"
         },
         "Value": "application/json"
        }
@@ -4392,7 +4510,7 @@
      ],
      "Responses": [
       {
-       "$id": "442",
+       "$id": "454",
        "StatusCodes": [
         200
        ],
@@ -4419,7 +4537,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "443",
+     "$id": "455",
      "Name": "stillConvenient",
      "ResourceName": "ProtocolAndConvenient",
      "Description": "When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one",
@@ -4428,11 +4546,11 @@
        "$ref": "178"
       },
       {
-       "$id": "444",
+       "$id": "456",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "445",
+        "$id": "457",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4447,9 +4565,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "446",
+        "$id": "458",
         "Type": {
-         "$ref": "445"
+         "$ref": "457"
         },
         "Value": "application/json"
        }
@@ -4457,7 +4575,7 @@
      ],
      "Responses": [
       {
-       "$id": "447",
+       "$id": "459",
        "StatusCodes": [
         204
        ],
@@ -4476,18 +4594,18 @@
     }
    ],
    "Protocol": {
-    "$id": "448"
+    "$id": "460"
    },
    "Creatable": false,
    "Parent": "FirstTestTypeSpecClient"
   },
   {
-   "$id": "449",
+   "$id": "461",
    "Name": "Entity",
    "Description": "",
    "Operations": [
     {
-     "$id": "450",
+     "$id": "462",
      "Name": "doSomething",
      "ResourceName": "Entity",
      "Description": "doSomething for entity",
@@ -4496,11 +4614,11 @@
        "$ref": "178"
       },
       {
-       "$id": "451",
+       "$id": "463",
        "Name": "p2",
        "NameInRequest": "p2",
        "Type": {
-        "$id": "452",
+        "$id": "464",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4516,11 +4634,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "453",
+       "$id": "465",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "454",
+        "$id": "466",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4535,9 +4653,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "455",
+        "$id": "467",
         "Type": {
-         "$ref": "454"
+         "$ref": "466"
         },
         "Value": "application/json"
        }
@@ -4545,7 +4663,7 @@
      ],
      "Responses": [
       {
-       "$id": "456",
+       "$id": "468",
        "StatusCodes": [
         200
        ],
@@ -4570,18 +4688,18 @@
     }
    ],
    "Protocol": {
-    "$id": "457"
+    "$id": "469"
    },
    "Creatable": false,
    "Parent": "FirstTestTypeSpecClient"
   },
   {
-   "$id": "458",
+   "$id": "470",
    "Name": "Glossary",
    "Description": "",
    "Operations": [
     {
-     "$id": "459",
+     "$id": "471",
      "Name": "doSomething",
      "ResourceName": "Glossary",
      "Description": "doSomething for glossary",
@@ -4590,11 +4708,11 @@
        "$ref": "178"
       },
       {
-       "$id": "460",
+       "$id": "472",
        "Name": "id",
        "NameInRequest": "id",
        "Type": {
-        "$id": "461",
+        "$id": "473",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4610,11 +4728,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "462",
+       "$id": "474",
        "Name": "h1",
        "NameInRequest": "h1",
        "Type": {
-        "$id": "463",
+        "$id": "475",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4630,11 +4748,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "464",
+       "$id": "476",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "465",
+        "$id": "477",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4649,9 +4767,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "466",
+        "$id": "478",
         "Type": {
-         "$ref": "465"
+         "$ref": "477"
         },
         "Value": "application/json"
        }
@@ -4659,7 +4777,7 @@
      ],
      "Responses": [
       {
-       "$id": "467",
+       "$id": "479",
        "StatusCodes": [
         200
        ],
@@ -4684,20 +4802,20 @@
     }
    ],
    "Protocol": {
-    "$id": "468"
+    "$id": "480"
    },
    "Creatable": false,
    "Parent": "FirstTestTypeSpecClient"
   }
  ],
  "Auth": {
-  "$id": "469",
+  "$id": "481",
   "ApiKey": {
-   "$id": "470",
+   "$id": "482",
    "Name": "x-ms-api-key"
   },
   "OAuth2": {
-   "$id": "471",
+   "$id": "483",
    "Scopes": [
     "https://api.example.com/.default"
    ]

@@ -26,19 +26,19 @@ namespace additionalProperties.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Friendly))
+            if (Friendly.HasValue)
             {
                 writer.WritePropertyName("friendly"u8);
                 writer.WriteBooleanValue(Friendly.Value);
             }
             writer.WritePropertyName("id"u8);
             writer.WriteNumberValue(Id);
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format != "W" && Optional.IsDefined(Status))
+            if (options.Format != "W" && Status.HasValue)
             {
                 writer.WritePropertyName("status"u8);
                 writer.WriteBooleanValue(Status.Value);
@@ -71,10 +71,10 @@ namespace additionalProperties.Models
             {
                 return null;
             }
-            Optional<bool> friendly = default;
+            bool? friendly = default;
             int id = default;
-            Optional<string> name = default;
-            Optional<bool> status = default;
+            string name = default;
+            bool? status = default;
             IDictionary<string, object> additionalProperties = default;
             Dictionary<string, object> additionalPropertiesDictionary = new Dictionary<string, object>();
             foreach (var property in element.EnumerateObject())
@@ -110,7 +110,7 @@ namespace additionalProperties.Models
                 additionalPropertiesDictionary.Add(property.Name, property.Value.GetObject());
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new CatAPTrue(id, name.Value, Optional.ToNullable(status), additionalProperties, Optional.ToNullable(friendly));
+            return new CatAPTrue(id, name, status, additionalProperties, friendly);
         }
 
         BinaryData IPersistableModel<CatAPTrue>.Write(ModelReaderWriterOptions options)

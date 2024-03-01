@@ -47,8 +47,14 @@ namespace CollapseRequestCondition_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public RequestConditionCollapseClient(Uri endpoint, AzureKeyCredential credential, CollapseRequestConditionsClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
-            Argument.AssertNotNull(credential, nameof(credential));
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
+            if (credential == null)
+            {
+                throw new ArgumentNullException(nameof(credential));
+            }
             options ??= new CollapseRequestConditionsClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -200,7 +206,10 @@ namespace CollapseRequestCondition_LowLevel
         /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='MissIfNoneMatchGetAsync(RequestConditions,RequestContext)']/*" />
         public virtual async Task<Response> MissIfNoneMatchGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
         {
-            Argument.AssertNull(requestConditions?.IfNoneMatch, nameof(requestConditions), "Service does not support the If-None-Match header for this operation.");
+            if (requestConditions?.IfNoneMatch is not null)
+            {
+                throw new ArgumentNullException(nameof(requestConditions), "Service does not support the If-None-Match header for this operation.");
+            }
 
             using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfNoneMatchGet");
             scope.Start();
@@ -233,7 +242,10 @@ namespace CollapseRequestCondition_LowLevel
         /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='MissIfNoneMatchGet(RequestConditions,RequestContext)']/*" />
         public virtual Response MissIfNoneMatchGet(RequestConditions requestConditions = null, RequestContext context = null)
         {
-            Argument.AssertNull(requestConditions?.IfNoneMatch, nameof(requestConditions), "Service does not support the If-None-Match header for this operation.");
+            if (requestConditions?.IfNoneMatch is not null)
+            {
+                throw new ArgumentNullException(nameof(requestConditions), "Service does not support the If-None-Match header for this operation.");
+            }
 
             using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfNoneMatchGet");
             scope.Start();
@@ -266,7 +278,10 @@ namespace CollapseRequestCondition_LowLevel
         /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='MissIfMatchGetAsync(RequestConditions,RequestContext)']/*" />
         public virtual async Task<Response> MissIfMatchGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
         {
-            Argument.AssertNull(requestConditions?.IfMatch, nameof(requestConditions), "Service does not support the If-Match header for this operation.");
+            if (requestConditions?.IfMatch is not null)
+            {
+                throw new ArgumentNullException(nameof(requestConditions), "Service does not support the If-Match header for this operation.");
+            }
 
             using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfMatchGet");
             scope.Start();
@@ -299,7 +314,10 @@ namespace CollapseRequestCondition_LowLevel
         /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='MissIfMatchGet(RequestConditions,RequestContext)']/*" />
         public virtual Response MissIfMatchGet(RequestConditions requestConditions = null, RequestContext context = null)
         {
-            Argument.AssertNull(requestConditions?.IfMatch, nameof(requestConditions), "Service does not support the If-Match header for this operation.");
+            if (requestConditions?.IfMatch is not null)
+            {
+                throw new ArgumentNullException(nameof(requestConditions), "Service does not support the If-Match header for this operation.");
+            }
 
             using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfMatchGet");
             scope.Start();
@@ -332,7 +350,10 @@ namespace CollapseRequestCondition_LowLevel
         /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='MissIfModifiedSinceGetAsync(RequestConditions,RequestContext)']/*" />
         public virtual async Task<Response> MissIfModifiedSinceGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
         {
-            Argument.AssertNull(requestConditions?.IfModifiedSince, nameof(requestConditions), "Service does not support the If-Modified-Since header for this operation.");
+            if (requestConditions?.IfModifiedSince is not null)
+            {
+                throw new ArgumentNullException(nameof(requestConditions), "Service does not support the If-Modified-Since header for this operation.");
+            }
 
             using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfModifiedSinceGet");
             scope.Start();
@@ -365,7 +386,10 @@ namespace CollapseRequestCondition_LowLevel
         /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='MissIfModifiedSinceGet(RequestConditions,RequestContext)']/*" />
         public virtual Response MissIfModifiedSinceGet(RequestConditions requestConditions = null, RequestContext context = null)
         {
-            Argument.AssertNull(requestConditions?.IfModifiedSince, nameof(requestConditions), "Service does not support the If-Modified-Since header for this operation.");
+            if (requestConditions?.IfModifiedSince is not null)
+            {
+                throw new ArgumentNullException(nameof(requestConditions), "Service does not support the If-Modified-Since header for this operation.");
+            }
 
             using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfModifiedSinceGet");
             scope.Start();
@@ -398,7 +422,10 @@ namespace CollapseRequestCondition_LowLevel
         /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='MissIfUnmodifiedSinceGetAsync(RequestConditions,RequestContext)']/*" />
         public virtual async Task<Response> MissIfUnmodifiedSinceGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
         {
-            Argument.AssertNull(requestConditions?.IfUnmodifiedSince, nameof(requestConditions), "Service does not support the If-Unmodified-Since header for this operation.");
+            if (requestConditions?.IfUnmodifiedSince is not null)
+            {
+                throw new ArgumentNullException(nameof(requestConditions), "Service does not support the If-Unmodified-Since header for this operation.");
+            }
 
             using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfUnmodifiedSinceGet");
             scope.Start();
@@ -431,7 +458,10 @@ namespace CollapseRequestCondition_LowLevel
         /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='MissIfUnmodifiedSinceGet(RequestConditions,RequestContext)']/*" />
         public virtual Response MissIfUnmodifiedSinceGet(RequestConditions requestConditions = null, RequestContext context = null)
         {
-            Argument.AssertNull(requestConditions?.IfUnmodifiedSince, nameof(requestConditions), "Service does not support the If-Unmodified-Since header for this operation.");
+            if (requestConditions?.IfUnmodifiedSince is not null)
+            {
+                throw new ArgumentNullException(nameof(requestConditions), "Service does not support the If-Unmodified-Since header for this operation.");
+            }
 
             using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfUnmodifiedSinceGet");
             scope.Start();
@@ -464,8 +494,14 @@ namespace CollapseRequestCondition_LowLevel
         /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='MissIfMatchIfNoneMatchGetAsync(RequestConditions,RequestContext)']/*" />
         public virtual async Task<Response> MissIfMatchIfNoneMatchGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
         {
-            Argument.AssertNull(requestConditions?.IfMatch, nameof(requestConditions), "Service does not support the If-Match header for this operation.");
-            Argument.AssertNull(requestConditions?.IfNoneMatch, nameof(requestConditions), "Service does not support the If-None-Match header for this operation.");
+            if (requestConditions?.IfMatch is not null)
+            {
+                throw new ArgumentNullException(nameof(requestConditions), "Service does not support the If-Match header for this operation.");
+            }
+            if (requestConditions?.IfNoneMatch is not null)
+            {
+                throw new ArgumentNullException(nameof(requestConditions), "Service does not support the If-None-Match header for this operation.");
+            }
 
             using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfMatchIfNoneMatchGet");
             scope.Start();
@@ -498,8 +534,14 @@ namespace CollapseRequestCondition_LowLevel
         /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='MissIfMatchIfNoneMatchGet(RequestConditions,RequestContext)']/*" />
         public virtual Response MissIfMatchIfNoneMatchGet(RequestConditions requestConditions = null, RequestContext context = null)
         {
-            Argument.AssertNull(requestConditions?.IfMatch, nameof(requestConditions), "Service does not support the If-Match header for this operation.");
-            Argument.AssertNull(requestConditions?.IfNoneMatch, nameof(requestConditions), "Service does not support the If-None-Match header for this operation.");
+            if (requestConditions?.IfMatch is not null)
+            {
+                throw new ArgumentNullException(nameof(requestConditions), "Service does not support the If-Match header for this operation.");
+            }
+            if (requestConditions?.IfNoneMatch is not null)
+            {
+                throw new ArgumentNullException(nameof(requestConditions), "Service does not support the If-None-Match header for this operation.");
+            }
 
             using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfMatchIfNoneMatchGet");
             scope.Start();
@@ -532,9 +574,18 @@ namespace CollapseRequestCondition_LowLevel
         /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='IfModifiedSinceGetAsync(RequestConditions,RequestContext)']/*" />
         public virtual async Task<Response> IfModifiedSinceGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
         {
-            Argument.AssertNull(requestConditions?.IfMatch, nameof(requestConditions), "Service does not support the If-Match header for this operation.");
-            Argument.AssertNull(requestConditions?.IfNoneMatch, nameof(requestConditions), "Service does not support the If-None-Match header for this operation.");
-            Argument.AssertNull(requestConditions?.IfUnmodifiedSince, nameof(requestConditions), "Service does not support the If-Unmodified-Since header for this operation.");
+            if (requestConditions?.IfMatch is not null)
+            {
+                throw new ArgumentNullException(nameof(requestConditions), "Service does not support the If-Match header for this operation.");
+            }
+            if (requestConditions?.IfNoneMatch is not null)
+            {
+                throw new ArgumentNullException(nameof(requestConditions), "Service does not support the If-None-Match header for this operation.");
+            }
+            if (requestConditions?.IfUnmodifiedSince is not null)
+            {
+                throw new ArgumentNullException(nameof(requestConditions), "Service does not support the If-Unmodified-Since header for this operation.");
+            }
 
             using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.IfModifiedSinceGet");
             scope.Start();
@@ -567,9 +618,18 @@ namespace CollapseRequestCondition_LowLevel
         /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='IfModifiedSinceGet(RequestConditions,RequestContext)']/*" />
         public virtual Response IfModifiedSinceGet(RequestConditions requestConditions = null, RequestContext context = null)
         {
-            Argument.AssertNull(requestConditions?.IfMatch, nameof(requestConditions), "Service does not support the If-Match header for this operation.");
-            Argument.AssertNull(requestConditions?.IfNoneMatch, nameof(requestConditions), "Service does not support the If-None-Match header for this operation.");
-            Argument.AssertNull(requestConditions?.IfUnmodifiedSince, nameof(requestConditions), "Service does not support the If-Unmodified-Since header for this operation.");
+            if (requestConditions?.IfMatch is not null)
+            {
+                throw new ArgumentNullException(nameof(requestConditions), "Service does not support the If-Match header for this operation.");
+            }
+            if (requestConditions?.IfNoneMatch is not null)
+            {
+                throw new ArgumentNullException(nameof(requestConditions), "Service does not support the If-None-Match header for this operation.");
+            }
+            if (requestConditions?.IfUnmodifiedSince is not null)
+            {
+                throw new ArgumentNullException(nameof(requestConditions), "Service does not support the If-Unmodified-Since header for this operation.");
+            }
 
             using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.IfModifiedSinceGet");
             scope.Start();
@@ -602,9 +662,18 @@ namespace CollapseRequestCondition_LowLevel
         /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='IfUnmodifiedSinceGetAsync(RequestConditions,RequestContext)']/*" />
         public virtual async Task<Response> IfUnmodifiedSinceGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
         {
-            Argument.AssertNull(requestConditions?.IfMatch, nameof(requestConditions), "Service does not support the If-Match header for this operation.");
-            Argument.AssertNull(requestConditions?.IfNoneMatch, nameof(requestConditions), "Service does not support the If-None-Match header for this operation.");
-            Argument.AssertNull(requestConditions?.IfModifiedSince, nameof(requestConditions), "Service does not support the If-Modified-Since header for this operation.");
+            if (requestConditions?.IfMatch is not null)
+            {
+                throw new ArgumentNullException(nameof(requestConditions), "Service does not support the If-Match header for this operation.");
+            }
+            if (requestConditions?.IfNoneMatch is not null)
+            {
+                throw new ArgumentNullException(nameof(requestConditions), "Service does not support the If-None-Match header for this operation.");
+            }
+            if (requestConditions?.IfModifiedSince is not null)
+            {
+                throw new ArgumentNullException(nameof(requestConditions), "Service does not support the If-Modified-Since header for this operation.");
+            }
 
             using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.IfUnmodifiedSinceGet");
             scope.Start();
@@ -637,9 +706,18 @@ namespace CollapseRequestCondition_LowLevel
         /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='IfUnmodifiedSinceGet(RequestConditions,RequestContext)']/*" />
         public virtual Response IfUnmodifiedSinceGet(RequestConditions requestConditions = null, RequestContext context = null)
         {
-            Argument.AssertNull(requestConditions?.IfMatch, nameof(requestConditions), "Service does not support the If-Match header for this operation.");
-            Argument.AssertNull(requestConditions?.IfNoneMatch, nameof(requestConditions), "Service does not support the If-None-Match header for this operation.");
-            Argument.AssertNull(requestConditions?.IfModifiedSince, nameof(requestConditions), "Service does not support the If-Modified-Since header for this operation.");
+            if (requestConditions?.IfMatch is not null)
+            {
+                throw new ArgumentNullException(nameof(requestConditions), "Service does not support the If-Match header for this operation.");
+            }
+            if (requestConditions?.IfNoneMatch is not null)
+            {
+                throw new ArgumentNullException(nameof(requestConditions), "Service does not support the If-None-Match header for this operation.");
+            }
+            if (requestConditions?.IfModifiedSince is not null)
+            {
+                throw new ArgumentNullException(nameof(requestConditions), "Service does not support the If-Modified-Since header for this operation.");
+            }
 
             using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.IfUnmodifiedSinceGet");
             scope.Start();

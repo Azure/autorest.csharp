@@ -15,7 +15,7 @@ namespace FirstTestTypeSpec.Models
     {
         /// <summary> Initializes a new instance of <see cref="ThereLevelExtension"/>. </summary>
         /// <param name="level"></param>
-        public ThereLevelExtension(int level)
+        public ThereLevelExtension(sbyte level)
         {
             Level = level;
         }
@@ -24,7 +24,7 @@ namespace FirstTestTypeSpec.Models
         /// <param name="extension"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="level"></param>
-        internal ThereLevelExtension(IList<ThereLevelExtension> extension, IDictionary<string, BinaryData> serializedAdditionalRawData, int level) : base(extension, serializedAdditionalRawData)
+        internal ThereLevelExtension(IList<ThereLevelExtension> extension, IDictionary<string, BinaryData> serializedAdditionalRawData, sbyte level) : base(extension, serializedAdditionalRawData)
         {
             Level = level;
         }
@@ -35,6 +35,6 @@ namespace FirstTestTypeSpec.Models
         }
 
         /// <summary> Gets the level. </summary>
-        public int Level { get; }
+        public sbyte Level { get; }
     }
 }

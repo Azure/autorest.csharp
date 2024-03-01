@@ -27,17 +27,17 @@ namespace OpenAI.Models
             writer.WriteBase64StringValue(File.ToArray(), "D");
             writer.WritePropertyName("model"u8);
             writer.WriteStringValue(Model.ToString());
-            if (OptionalProperty.IsDefined(Prompt))
+            if (Prompt != null)
             {
                 writer.WritePropertyName("prompt"u8);
                 writer.WriteStringValue(Prompt);
             }
-            if (OptionalProperty.IsDefined(ResponseFormat))
+            if (ResponseFormat.HasValue)
             {
                 writer.WritePropertyName("response_format"u8);
                 writer.WriteStringValue(ResponseFormat.Value.ToString());
             }
-            if (OptionalProperty.IsDefined(Temperature))
+            if (Temperature.HasValue)
             {
                 writer.WritePropertyName("temperature"u8);
                 writer.WriteNumberValue(Temperature.Value);
@@ -82,9 +82,9 @@ namespace OpenAI.Models
             }
             BinaryData file = default;
             CreateTranslationRequestModel model = default;
-            OptionalProperty<string> prompt = default;
-            OptionalProperty<CreateTranslationRequestResponseFormat> responseFormat = default;
-            OptionalProperty<double> temperature = default;
+            string prompt = default;
+            CreateTranslationRequestResponseFormat? responseFormat = default;
+            double? temperature = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -128,7 +128,13 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new CreateTranslationRequest(file, model, prompt.Value, OptionalProperty.ToNullable(responseFormat), OptionalProperty.ToNullable(temperature), serializedAdditionalRawData);
+            return new CreateTranslationRequest(
+                file,
+                model,
+                prompt,
+                responseFormat,
+                temperature,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<CreateTranslationRequest>.Write(ModelReaderWriterOptions options)

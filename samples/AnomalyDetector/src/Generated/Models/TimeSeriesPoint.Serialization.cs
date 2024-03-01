@@ -27,7 +27,7 @@ namespace AnomalyDetector.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Timestamp))
+            if (Timestamp.HasValue)
             {
                 writer.WritePropertyName("timestamp"u8);
                 writer.WriteStringValue(Timestamp.Value, "O");
@@ -72,7 +72,7 @@ namespace AnomalyDetector.Models
             {
                 return null;
             }
-            Optional<DateTimeOffset> timestamp = default;
+            DateTimeOffset? timestamp = default;
             float value = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -98,7 +98,7 @@ namespace AnomalyDetector.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new TimeSeriesPoint(Optional.ToNullable(timestamp), value, serializedAdditionalRawData);
+            return new TimeSeriesPoint(timestamp, value, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<TimeSeriesPoint>.Write(ModelReaderWriterOptions options)

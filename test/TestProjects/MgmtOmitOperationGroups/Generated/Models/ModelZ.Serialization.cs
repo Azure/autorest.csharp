@@ -15,7 +15,7 @@ namespace MgmtOmitOperationGroups.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(H))
+            if (H != null)
             {
                 writer.WritePropertyName("h"u8);
                 writer.WriteStringValue(H);
@@ -29,8 +29,8 @@ namespace MgmtOmitOperationGroups.Models
             {
                 return null;
             }
-            Optional<string> h = default;
-            Optional<string> i = default;
+            string h = default;
+            string i = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("h"u8))
@@ -44,7 +44,7 @@ namespace MgmtOmitOperationGroups.Models
                     continue;
                 }
             }
-            return new ModelZ(h.Value, i.Value);
+            return new ModelZ(h, i);
         }
     }
 }

@@ -27,22 +27,22 @@ namespace OpenAI.Models
             writer.WriteBase64StringValue(File.ToArray(), "D");
             writer.WritePropertyName("model"u8);
             writer.WriteStringValue(Model.ToString());
-            if (OptionalProperty.IsDefined(Prompt))
+            if (Prompt != null)
             {
                 writer.WritePropertyName("prompt"u8);
                 writer.WriteStringValue(Prompt);
             }
-            if (OptionalProperty.IsDefined(ResponseFormat))
+            if (ResponseFormat.HasValue)
             {
                 writer.WritePropertyName("response_format"u8);
                 writer.WriteStringValue(ResponseFormat.Value.ToString());
             }
-            if (OptionalProperty.IsDefined(Temperature))
+            if (Temperature.HasValue)
             {
                 writer.WritePropertyName("temperature"u8);
                 writer.WriteNumberValue(Temperature.Value);
             }
-            if (OptionalProperty.IsDefined(Language))
+            if (Language != null)
             {
                 writer.WritePropertyName("language"u8);
                 writer.WriteStringValue(Language);
@@ -87,10 +87,10 @@ namespace OpenAI.Models
             }
             BinaryData file = default;
             CreateTranscriptionRequestModel model = default;
-            OptionalProperty<string> prompt = default;
-            OptionalProperty<CreateTranscriptionRequestResponseFormat> responseFormat = default;
-            OptionalProperty<double> temperature = default;
-            OptionalProperty<string> language = default;
+            string prompt = default;
+            CreateTranscriptionRequestResponseFormat? responseFormat = default;
+            double? temperature = default;
+            string language = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -139,7 +139,14 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new CreateTranscriptionRequest(file, model, prompt.Value, OptionalProperty.ToNullable(responseFormat), OptionalProperty.ToNullable(temperature), language.Value, serializedAdditionalRawData);
+            return new CreateTranscriptionRequest(
+                file,
+                model,
+                prompt,
+                responseFormat,
+                temperature,
+                language,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<CreateTranscriptionRequest>.Write(ModelReaderWriterOptions options)

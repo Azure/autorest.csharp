@@ -210,8 +210,8 @@
       "Properties": [
        {
         "$id": "28",
-        "Name": "requiredInt",
-        "SerializedName": "requiredInt",
+        "Name": "requiredIntOnBase",
+        "SerializedName": "requiredIntOnBase",
         "Description": "Required int",
         "Type": {
          "$id": "29",
@@ -744,6 +744,9 @@
       "Description": "Model to add additional serializable property",
       "IsNullable": false,
       "Usage": "RoundTrip",
+      "BaseModel": {
+       "$ref": "27"
+      },
       "Properties": [
        {
         "$id": "99",

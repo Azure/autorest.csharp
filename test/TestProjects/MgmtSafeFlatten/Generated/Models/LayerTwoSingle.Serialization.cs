@@ -15,7 +15,7 @@ namespace MgmtSafeFlatten.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(MyProp))
+            if (MyProp != null)
             {
                 writer.WritePropertyName("myProp"u8);
                 writer.WriteStringValue(MyProp);
@@ -29,7 +29,7 @@ namespace MgmtSafeFlatten.Models
             {
                 return null;
             }
-            Optional<string> myProp = default;
+            string myProp = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("myProp"u8))
@@ -38,7 +38,7 @@ namespace MgmtSafeFlatten.Models
                     continue;
                 }
             }
-            return new LayerTwoSingle(myProp.Value);
+            return new LayerTwoSingle(myProp);
         }
     }
 }

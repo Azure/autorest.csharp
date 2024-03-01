@@ -34,7 +34,7 @@ namespace OpenAI.Models
             {
                 writer.WriteNull("content");
             }
-            if (OptionalProperty.IsDefined(FunctionCall))
+            if (FunctionCall != null)
             {
                 writer.WritePropertyName("function_call"u8);
                 writer.WriteObjectValue(FunctionCall);
@@ -79,7 +79,7 @@ namespace OpenAI.Models
             }
             ChatCompletionResponseMessageRole role = default;
             string content = default;
-            OptionalProperty<ChatCompletionResponseMessageFunctionCall> functionCall = default;
+            ChatCompletionResponseMessageFunctionCall functionCall = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -105,7 +105,7 @@ namespace OpenAI.Models
                     {
                         continue;
                     }
-                    functionCall = ChatCompletionResponseMessageFunctionCall.DeserializeChatCompletionResponseMessageFunctionCall(property.Value);
+                    functionCall = ChatCompletionResponseMessageFunctionCall.DeserializeChatCompletionResponseMessageFunctionCall(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")
@@ -114,7 +114,7 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ChatCompletionResponseMessage(role, content, functionCall.Value, serializedAdditionalRawData);
+            return new ChatCompletionResponseMessage(role, content, functionCall, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ChatCompletionResponseMessage>.Write(ModelReaderWriterOptions options)

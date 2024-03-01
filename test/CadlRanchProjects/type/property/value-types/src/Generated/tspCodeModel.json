@@ -100,9 +100,9 @@
    "AllowedValues": [
     {
      "$id": "13",
-     "Name": "42.42",
-     "Value": 42.42,
-     "Description": "42.42"
+     "Name": "43.125",
+     "Value": 43.125,
+     "Description": "43.125"
     }
    ],
    "Namespace": "Type.Property.ValueTypes",
@@ -745,7 +745,7 @@
       "LiteralValueType": {
        "$ref": "12"
       },
-      "Value": 42.42,
+      "Value": 43.125,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -920,7 +920,7 @@
          "Name": "Float64",
          "IsNullable": false
         },
-        "Value": 42.42,
+        "Value": 43.125,
         "IsNullable": false
        },
        {
@@ -933,7 +933,7 @@
          "Name": "Float64",
          "IsNullable": false
         },
-        "Value": 43.43,
+        "Value": 46.875,
         "IsNullable": false
        }
       ],

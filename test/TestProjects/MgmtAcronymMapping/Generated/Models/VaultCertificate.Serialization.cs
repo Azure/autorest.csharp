@@ -16,12 +16,12 @@ namespace MgmtAcronymMapping.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(CertificateUri))
+            if (CertificateUri != null)
             {
                 writer.WritePropertyName("certificateUrl"u8);
                 writer.WriteStringValue(CertificateUri.AbsoluteUri);
             }
-            if (Optional.IsDefined(CertificateStore))
+            if (CertificateStore != null)
             {
                 writer.WritePropertyName("certificateStore"u8);
                 writer.WriteStringValue(CertificateStore);
@@ -35,8 +35,8 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<Uri> certificateUrl = default;
-            Optional<string> certificateStore = default;
+            Uri certificateUrl = default;
+            string certificateStore = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("certificateUrl"u8))
@@ -54,7 +54,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VaultCertificate(certificateUrl.Value, certificateStore.Value);
+            return new VaultCertificate(certificateUrl, certificateStore);
         }
     }
 }

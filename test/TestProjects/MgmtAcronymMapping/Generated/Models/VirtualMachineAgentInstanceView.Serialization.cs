@@ -19,9 +19,9 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<string> vmAgentVersion = default;
-            Optional<IReadOnlyList<VirtualMachineExtensionHandlerInstanceView>> extensionHandlers = default;
-            Optional<IReadOnlyList<InstanceViewStatus>> statuses = default;
+            string vmAgentVersion = default;
+            IReadOnlyList<VirtualMachineExtensionHandlerInstanceView> extensionHandlers = default;
+            IReadOnlyList<InstanceViewStatus> statuses = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("vmAgentVersion"u8))
@@ -58,7 +58,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineAgentInstanceView(vmAgentVersion.Value, Optional.ToList(extensionHandlers), Optional.ToList(statuses));
+            return new VirtualMachineAgentInstanceView(vmAgentVersion, extensionHandlers ?? new ChangeTrackingList<VirtualMachineExtensionHandlerInstanceView>(), statuses ?? new ChangeTrackingList<InstanceViewStatus>());
         }
     }
 }

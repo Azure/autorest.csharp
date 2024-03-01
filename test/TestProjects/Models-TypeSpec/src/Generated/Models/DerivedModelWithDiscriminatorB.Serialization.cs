@@ -31,7 +31,7 @@ namespace ModelsTypeSpec.Models
             writer.WriteNumberValue(RequiredInt);
             writer.WritePropertyName("discriminatorProperty"u8);
             writer.WriteStringValue(DiscriminatorProperty);
-            if (Optional.IsDefined(OptionalPropertyOnBase))
+            if (OptionalPropertyOnBase != null)
             {
                 writer.WritePropertyName("optionalPropertyOnBase"u8);
                 writer.WriteStringValue(OptionalPropertyOnBase);
@@ -78,7 +78,7 @@ namespace ModelsTypeSpec.Models
             }
             int requiredInt = default;
             string discriminatorProperty = default;
-            Optional<string> optionalPropertyOnBase = default;
+            string optionalPropertyOnBase = default;
             int requiredPropertyOnBase = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -110,7 +110,7 @@ namespace ModelsTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DerivedModelWithDiscriminatorB(discriminatorProperty, optionalPropertyOnBase.Value, requiredPropertyOnBase, serializedAdditionalRawData, requiredInt);
+            return new DerivedModelWithDiscriminatorB(discriminatorProperty, optionalPropertyOnBase, requiredPropertyOnBase, serializedAdditionalRawData, requiredInt);
         }
 
         BinaryData IPersistableModel<DerivedModelWithDiscriminatorB>.Write(ModelReaderWriterOptions options)

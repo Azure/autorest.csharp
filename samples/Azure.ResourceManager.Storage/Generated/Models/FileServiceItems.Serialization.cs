@@ -20,7 +20,7 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<FileServiceData>> value = default;
+            IReadOnlyList<FileServiceData> value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -38,7 +38,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new FileServiceItems(Optional.ToList(value));
+            return new FileServiceItems(value ?? new ChangeTrackingList<FileServiceData>());
         }
     }
 }

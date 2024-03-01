@@ -16,7 +16,7 @@ namespace ExtensionClientName.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(RenamedProperty))
+            if (!(RenamedProperty is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("originalProperty"u8);
                 writer.WriteStartObject();
@@ -27,7 +27,7 @@ namespace ExtensionClientName.Models
                 }
                 writer.WriteEndObject();
             }
-            if (Optional.IsDefined(RenamedPropertyString))
+            if (RenamedPropertyString != null)
             {
                 writer.WritePropertyName("originalPropertyString"u8);
                 writer.WriteStringValue(RenamedPropertyString);
@@ -41,8 +41,8 @@ namespace ExtensionClientName.Models
             {
                 return null;
             }
-            Optional<IDictionary<string, string>> originalProperty = default;
-            Optional<string> originalPropertyString = default;
+            IDictionary<string, string> originalProperty = default;
+            string originalPropertyString = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("originalProperty"u8))
@@ -65,7 +65,7 @@ namespace ExtensionClientName.Models
                     continue;
                 }
             }
-            return new RenamedSchema(Optional.ToDictionary(originalProperty), originalPropertyString.Value);
+            return new RenamedSchema(originalProperty ?? new ChangeTrackingDictionary<string, string>(), originalPropertyString);
         }
     }
 }

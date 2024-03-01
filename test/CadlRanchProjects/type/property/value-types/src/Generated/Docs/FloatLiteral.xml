@@ -115,7 +115,7 @@ FloatLiteral client = new ValueTypesClient().GetFloatLiteralClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    property = 42.42F,
+    property = 43.125F,
 });
 Response response = await client.PutAsync(content);
 
@@ -127,7 +127,7 @@ FloatLiteral client = new ValueTypesClient().GetFloatLiteralClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    property = 42.42F,
+    property = 43.125F,
 });
 Response response = await client.PutAsync(content);
 
@@ -142,7 +142,7 @@ FloatLiteral client = new ValueTypesClient().GetFloatLiteralClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    property = 42.42F,
+    property = 43.125F,
 });
 Response response = client.Put(content);
 
@@ -154,7 +154,7 @@ FloatLiteral client = new ValueTypesClient().GetFloatLiteralClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    property = 42.42F,
+    property = 43.125F,
 });
 Response response = client.Put(content);
 

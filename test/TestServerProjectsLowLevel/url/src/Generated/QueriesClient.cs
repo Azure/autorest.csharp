@@ -48,8 +48,14 @@ namespace url_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public QueriesClient(Uri endpoint, AzureKeyCredential credential, AutoRestUrlTestServiceClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
-            Argument.AssertNotNull(credential, nameof(credential));
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
+            if (credential == null)
+            {
+                throw new ArgumentNullException(nameof(credential));
+            }
             options ??= new AutoRestUrlTestServiceClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -2632,7 +2638,7 @@ namespace url_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/queries/array/csv/string/valid", false);
-            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
+            if (arrayQuery != null && !(arrayQuery is ChangeTrackingList<string> changeTrackingList && changeTrackingList.IsUndefined))
             {
                 uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
             }
@@ -2649,7 +2655,7 @@ namespace url_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/queries/array/csv/string/null", false);
-            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
+            if (arrayQuery != null && !(arrayQuery is ChangeTrackingList<string> changeTrackingList && changeTrackingList.IsUndefined))
             {
                 uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
             }
@@ -2666,7 +2672,7 @@ namespace url_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/queries/array/csv/string/empty", false);
-            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
+            if (arrayQuery != null && !(arrayQuery is ChangeTrackingList<string> changeTrackingList && changeTrackingList.IsUndefined))
             {
                 uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
             }
@@ -2683,7 +2689,7 @@ namespace url_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/queries/array/none/string/empty", false);
-            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
+            if (arrayQuery != null && !(arrayQuery is ChangeTrackingList<string> changeTrackingList && changeTrackingList.IsUndefined))
             {
                 uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
             }
@@ -2700,7 +2706,7 @@ namespace url_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/queries/array/ssv/string/valid", false);
-            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
+            if (arrayQuery != null && !(arrayQuery is ChangeTrackingList<string> changeTrackingList && changeTrackingList.IsUndefined))
             {
                 uri.AppendQueryDelimited("arrayQuery", arrayQuery, " ", true);
             }
@@ -2717,7 +2723,7 @@ namespace url_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/queries/array/tsv/string/valid", false);
-            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
+            if (arrayQuery != null && !(arrayQuery is ChangeTrackingList<string> changeTrackingList && changeTrackingList.IsUndefined))
             {
                 uri.AppendQueryDelimited("arrayQuery", arrayQuery, "\t", true);
             }
@@ -2734,7 +2740,7 @@ namespace url_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/queries/array/pipes/string/valid", false);
-            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
+            if (arrayQuery != null && !(arrayQuery is ChangeTrackingList<string> changeTrackingList && changeTrackingList.IsUndefined))
             {
                 uri.AppendQueryDelimited("arrayQuery", arrayQuery, "|", true);
             }

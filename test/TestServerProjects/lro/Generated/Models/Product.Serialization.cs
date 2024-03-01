@@ -26,17 +26,17 @@ namespace lro.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && Optional.IsDefined(Id))
+            if (options.Format != "W" && Id != null)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format != "W" && Optional.IsDefined(Type))
+            if (options.Format != "W" && Type != null)
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(Type);
             }
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -47,24 +47,24 @@ namespace lro.Models
                 }
                 writer.WriteEndObject();
             }
-            if (Optional.IsDefined(Location))
+            if (Location != null)
             {
                 writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location);
             }
-            if (options.Format != "W" && Optional.IsDefined(Name))
+            if (options.Format != "W" && Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(ProvisioningState))
+            if (ProvisioningState != null)
             {
                 writer.WritePropertyName("provisioningState"u8);
                 writer.WriteStringValue(ProvisioningState);
             }
-            if (options.Format != "W" && Optional.IsDefined(ProvisioningStateValues))
+            if (options.Format != "W" && ProvisioningStateValues.HasValue)
             {
                 writer.WritePropertyName("provisioningStateValues"u8);
                 writer.WriteStringValue(ProvisioningStateValues.Value.ToString());
@@ -108,13 +108,13 @@ namespace lro.Models
             {
                 return null;
             }
-            Optional<string> id = default;
-            Optional<string> type = default;
-            Optional<IDictionary<string, string>> tags = default;
-            Optional<string> location = default;
-            Optional<string> name = default;
-            Optional<string> provisioningState = default;
-            Optional<ProductPropertiesProvisioningStateValues> provisioningStateValues = default;
+            string id = default;
+            string type = default;
+            IDictionary<string, string> tags = default;
+            string location = default;
+            string name = default;
+            string provisioningState = default;
+            ProductPropertiesProvisioningStateValues? provisioningStateValues = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -185,7 +185,15 @@ namespace lro.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Product(id.Value, type.Value, Optional.ToDictionary(tags), location.Value, name.Value, serializedAdditionalRawData, provisioningState.Value, Optional.ToNullable(provisioningStateValues));
+            return new Product(
+                id,
+                type,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                name,
+                serializedAdditionalRawData,
+                provisioningState,
+                provisioningStateValues);
         }
 
         BinaryData IPersistableModel<Product>.Write(ModelReaderWriterOptions options)

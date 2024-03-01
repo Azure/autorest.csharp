@@ -20,8 +20,8 @@ namespace MgmtResourceName.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<DiskData>> value = default;
-            Optional<string> nextLink = default;
+            IReadOnlyList<DiskData> value = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -44,7 +44,7 @@ namespace MgmtResourceName.Models
                     continue;
                 }
             }
-            return new DiskListResult(Optional.ToList(value), nextLink.Value);
+            return new DiskListResult(value ?? new ChangeTrackingList<DiskData>(), nextLink);
         }
     }
 }

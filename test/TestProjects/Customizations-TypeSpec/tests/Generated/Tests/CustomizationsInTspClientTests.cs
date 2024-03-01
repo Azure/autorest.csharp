@@ -59,7 +59,7 @@ namespace CustomizationsInTsp.Tests
                 },
                 propertyModelToRename = new
                 {
-                    requiredInt = 1234,
+                    requiredIntOnBase = 1234,
                     optionalInt = 1234,
                 },
                 propertyModelToChangeNamespace = new
@@ -121,6 +121,8 @@ key = "<badListOfDictionaryName>",
                 propertyModelToAddAdditionalSerializableProperty = new
                 {
                     requiredInt = 1234,
+                    requiredIntOnBase = 1234,
+                    optionalInt = 1234,
                 },
                 propertyToMoveToCustomization = "a",
                 propertyModelStruct = new
@@ -147,19 +149,33 @@ key = "<badListOfDictionaryName>",
                     OptionalInt = 1234,
                 },
                 PropertyModelToChangeNamespace = new ModelToChangeNamespace(1234),
-                PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, XmlConvert.ToTimeSpan("<propertyToMakeDuration>"), "PT1H23M45S", default, "<propertyToField>", new string[] { "<badListName>" }, new Dictionary<string, string>
+                PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(
+                1234,
+                1234,
+                1234,
+                (int)123.45F,
+                XmlConvert.ToTimeSpan("<propertyToMakeDuration>"),
+                "PT1H23M45S",
+                default,
+                "<propertyToField>",
+                new string[] { "<badListName>" },
+                new Dictionary<string, string>
                 {
                     ["key"] = "<badDictionaryName>"
-                }, new IList<string>[]
+                },
+                new IList<string>[]
             {
 new string[]{"<badListOfListName>"}
-            }, new IDictionary<string, string>[]
+            },
+                new IDictionary<string, string>[]
             {
 new Dictionary<string, string>
 {
 ["key"] = "<badListOfDictionaryName>"
 }
-            }, new float[] { 123.45F }, new float[] { 123.45F })
+            },
+                new float[] { 123.45F },
+                new float[] { 123.45F })
                 {
                     VectorOptional = new float[] { 123.45F },
                     VectorOptionalNullable = new float[] { 123.45F },
@@ -167,7 +183,10 @@ new Dictionary<string, string>
                 PropertyEnumToRename = RenamedEnum.One,
                 PropertyEnumWithValueToRename = EnumWithValueToRename.One,
                 PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,
-                PropertyModelToAddAdditionalSerializableProperty = new ModelToAddAdditionalSerializableProperty(1234),
+                PropertyModelToAddAdditionalSerializableProperty = new ModelToAddAdditionalSerializableProperty(1234, 1234)
+                {
+                    OptionalInt = 1234,
+                },
                 PropertyToMoveToCustomization = NormalEnum.A,
                 PropertyModelStruct = new ModelStruct(1234, 1234, "<optionalString>"),
             };
@@ -182,7 +201,7 @@ new Dictionary<string, string>
 
             using RequestContent content = RequestContent.Create(new
             {
-                requiredInt = 1234,
+                requiredIntOnBase = 1234,
             });
             Response response = await client.FooAsync(content);
         }
@@ -205,7 +224,7 @@ new Dictionary<string, string>
 
             using RequestContent content = RequestContent.Create(new
             {
-                requiredInt = 1234,
+                requiredIntOnBase = 1234,
                 optionalInt = 1234,
             });
             Response response = await client.FooAsync(content);
@@ -232,7 +251,7 @@ new Dictionary<string, string>
 
             using RequestContent content = RequestContent.Create(new
             {
-                requiredInt = 1234,
+                requiredIntOnBase = 1234,
             });
             Response response = await client.BarAsync(content);
         }
@@ -255,7 +274,7 @@ new Dictionary<string, string>
 
             using RequestContent content = RequestContent.Create(new
             {
-                requiredInt = 1234,
+                requiredIntOnBase = 1234,
                 optionalInt = 1234,
             });
             Response response = await client.BarAsync(content);

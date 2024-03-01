@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(ActionType))
+            if (ActionType.HasValue)
             {
                 writer.WritePropertyName("@search.action"u8);
                 writer.WriteStringValue(ActionType.Value.ToSerialString());

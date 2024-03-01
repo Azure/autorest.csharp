@@ -20,8 +20,8 @@ namespace MgmtSubscriptionNameParameter.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<SBSubscriptionData>> value = default;
-            Optional<string> nextLink = default;
+            IReadOnlyList<SBSubscriptionData> value = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -44,7 +44,7 @@ namespace MgmtSubscriptionNameParameter.Models
                     continue;
                 }
             }
-            return new SBSubscriptionListResult(Optional.ToList(value), nextLink.Value);
+            return new SBSubscriptionListResult(value ?? new ChangeTrackingList<SBSubscriptionData>(), nextLink);
         }
     }
 }

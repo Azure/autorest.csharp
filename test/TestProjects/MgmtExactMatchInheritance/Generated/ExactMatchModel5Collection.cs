@@ -82,8 +82,18 @@ namespace MgmtExactMatchInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> or <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<ExactMatchModel5Resource>> CreateOrUpdateAsync(WaitUntil waitUntil, string exactMatchModel5SName, ExactMatchModel5Data data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(exactMatchModel5SName, nameof(exactMatchModel5SName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (exactMatchModel5SName == null)
+            {
+                throw new ArgumentNullException(nameof(exactMatchModel5SName));
+            }
+            if (exactMatchModel5SName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(exactMatchModel5SName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _exactMatchModel5ClientDiagnostics.CreateScope("ExactMatchModel5Collection.CreateOrUpdate");
             scope.Start();
@@ -130,8 +140,18 @@ namespace MgmtExactMatchInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> or <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<ExactMatchModel5Resource> CreateOrUpdate(WaitUntil waitUntil, string exactMatchModel5SName, ExactMatchModel5Data data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(exactMatchModel5SName, nameof(exactMatchModel5SName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (exactMatchModel5SName == null)
+            {
+                throw new ArgumentNullException(nameof(exactMatchModel5SName));
+            }
+            if (exactMatchModel5SName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(exactMatchModel5SName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _exactMatchModel5ClientDiagnostics.CreateScope("ExactMatchModel5Collection.CreateOrUpdate");
             scope.Start();
@@ -176,7 +196,14 @@ namespace MgmtExactMatchInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> is null. </exception>
         public virtual async Task<Response<ExactMatchModel5Resource>> GetAsync(string exactMatchModel5SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(exactMatchModel5SName, nameof(exactMatchModel5SName));
+            if (exactMatchModel5SName == null)
+            {
+                throw new ArgumentNullException(nameof(exactMatchModel5SName));
+            }
+            if (exactMatchModel5SName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(exactMatchModel5SName));
+            }
 
             using var scope = _exactMatchModel5ClientDiagnostics.CreateScope("ExactMatchModel5Collection.Get");
             scope.Start();
@@ -220,7 +247,14 @@ namespace MgmtExactMatchInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> is null. </exception>
         public virtual Response<ExactMatchModel5Resource> Get(string exactMatchModel5SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(exactMatchModel5SName, nameof(exactMatchModel5SName));
+            if (exactMatchModel5SName == null)
+            {
+                throw new ArgumentNullException(nameof(exactMatchModel5SName));
+            }
+            if (exactMatchModel5SName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(exactMatchModel5SName));
+            }
 
             using var scope = _exactMatchModel5ClientDiagnostics.CreateScope("ExactMatchModel5Collection.Get");
             scope.Start();
@@ -321,7 +355,14 @@ namespace MgmtExactMatchInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> is null. </exception>
         public virtual async Task<Response<bool>> ExistsAsync(string exactMatchModel5SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(exactMatchModel5SName, nameof(exactMatchModel5SName));
+            if (exactMatchModel5SName == null)
+            {
+                throw new ArgumentNullException(nameof(exactMatchModel5SName));
+            }
+            if (exactMatchModel5SName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(exactMatchModel5SName));
+            }
 
             using var scope = _exactMatchModel5ClientDiagnostics.CreateScope("ExactMatchModel5Collection.Exists");
             scope.Start();
@@ -364,7 +405,14 @@ namespace MgmtExactMatchInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> is null. </exception>
         public virtual Response<bool> Exists(string exactMatchModel5SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(exactMatchModel5SName, nameof(exactMatchModel5SName));
+            if (exactMatchModel5SName == null)
+            {
+                throw new ArgumentNullException(nameof(exactMatchModel5SName));
+            }
+            if (exactMatchModel5SName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(exactMatchModel5SName));
+            }
 
             using var scope = _exactMatchModel5ClientDiagnostics.CreateScope("ExactMatchModel5Collection.Exists");
             scope.Start();
@@ -407,7 +455,14 @@ namespace MgmtExactMatchInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> is null. </exception>
         public virtual async Task<NullableResponse<ExactMatchModel5Resource>> GetIfExistsAsync(string exactMatchModel5SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(exactMatchModel5SName, nameof(exactMatchModel5SName));
+            if (exactMatchModel5SName == null)
+            {
+                throw new ArgumentNullException(nameof(exactMatchModel5SName));
+            }
+            if (exactMatchModel5SName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(exactMatchModel5SName));
+            }
 
             using var scope = _exactMatchModel5ClientDiagnostics.CreateScope("ExactMatchModel5Collection.GetIfExists");
             scope.Start();
@@ -452,7 +507,14 @@ namespace MgmtExactMatchInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> is null. </exception>
         public virtual NullableResponse<ExactMatchModel5Resource> GetIfExists(string exactMatchModel5SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(exactMatchModel5SName, nameof(exactMatchModel5SName));
+            if (exactMatchModel5SName == null)
+            {
+                throw new ArgumentNullException(nameof(exactMatchModel5SName));
+            }
+            if (exactMatchModel5SName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(exactMatchModel5SName));
+            }
 
             using var scope = _exactMatchModel5ClientDiagnostics.CreateScope("ExactMatchModel5Collection.GetIfExists");
             scope.Start();

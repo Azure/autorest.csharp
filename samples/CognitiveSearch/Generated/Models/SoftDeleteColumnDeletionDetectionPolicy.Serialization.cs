@@ -15,12 +15,12 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(SoftDeleteColumnName))
+            if (SoftDeleteColumnName != null)
             {
                 writer.WritePropertyName("softDeleteColumnName"u8);
                 writer.WriteStringValue(SoftDeleteColumnName);
             }
-            if (Optional.IsDefined(SoftDeleteMarkerValue))
+            if (SoftDeleteMarkerValue != null)
             {
                 writer.WritePropertyName("softDeleteMarkerValue"u8);
                 writer.WriteStringValue(SoftDeleteMarkerValue);
@@ -36,8 +36,8 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            Optional<string> softDeleteColumnName = default;
-            Optional<string> softDeleteMarkerValue = default;
+            string softDeleteColumnName = default;
+            string softDeleteMarkerValue = default;
             string odataType = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -57,7 +57,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new SoftDeleteColumnDeletionDetectionPolicy(odataType, softDeleteColumnName.Value, softDeleteMarkerValue.Value);
+            return new SoftDeleteColumnDeletionDetectionPolicy(odataType, softDeleteColumnName, softDeleteMarkerValue);
         }
     }
 }

@@ -15,12 +15,12 @@ namespace MgmtMockAndSample.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Description))
+            if (Description != null)
             {
                 writer.WritePropertyName("description"u8);
                 writer.WriteStringValue(Description);
@@ -36,8 +36,8 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> description = default;
+            string name = default;
+            string description = default;
             FirewallPolicyRuleType ruleType = "Unknown";
             foreach (var property in element.EnumerateObject())
             {
@@ -57,7 +57,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new UnknownFirewallPolicyRule(name.Value, description.Value, ruleType);
+            return new UnknownFirewallPolicyRule(name, description, ruleType);
         }
     }
 }

@@ -15,22 +15,22 @@ namespace MgmtExactMatchInheritance.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(New))
+            if (New != null)
             {
                 writer.WritePropertyName("new"u8);
                 writer.WriteStringValue(New);
             }
-            if (Optional.IsDefined(ID))
+            if (ID != null)
             {
                 writer.WritePropertyName("iD"u8);
                 writer.WriteStringValue(ID);
             }
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(ExactMatchModel7Type))
+            if (ExactMatchModel7Type != null)
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ExactMatchModel7Type);
@@ -44,10 +44,10 @@ namespace MgmtExactMatchInheritance.Models
             {
                 return null;
             }
-            Optional<string> @new = default;
-            Optional<string> id = default;
-            Optional<string> name = default;
-            Optional<string> type = default;
+            string @new = default;
+            string id = default;
+            string name = default;
+            string type = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("new"u8))
@@ -71,7 +71,7 @@ namespace MgmtExactMatchInheritance.Models
                     continue;
                 }
             }
-            return new ExactMatchModel2(id.Value, name.Value, type.Value, @new.Value);
+            return new ExactMatchModel2(id, name, type, @new);
         }
     }
 }

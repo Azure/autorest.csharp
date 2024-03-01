@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
@@ -21,8 +20,14 @@ namespace CognitiveSearch.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="synonyms"/> is null. </exception>
         public SynonymTokenFilter(string name, IEnumerable<string> synonyms) : base(name)
         {
-            Argument.AssertNotNull(name, nameof(name));
-            Argument.AssertNotNull(synonyms, nameof(synonyms));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (synonyms == null)
+            {
+                throw new ArgumentNullException(nameof(synonyms));
+            }
 
             Synonyms = synonyms.ToList();
             OdataType = "#Microsoft.Azure.Search.SynonymTokenFilter";

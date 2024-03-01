@@ -28,7 +28,7 @@ namespace validation.Models
             writer.WriteStartObject();
             writer.WritePropertyName("constProperty"u8);
             writer.WriteStringValue(ConstProperty.ToString());
-            if (Optional.IsDefined(Count))
+            if (Count.HasValue)
             {
                 writer.WritePropertyName("count"u8);
                 writer.WriteNumberValue(Count.Value);
@@ -72,7 +72,7 @@ namespace validation.Models
                 return null;
             }
             ChildProductConstProperty constProperty = default;
-            Optional<int> count = default;
+            int? count = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -97,7 +97,7 @@ namespace validation.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ChildProduct(constProperty, Optional.ToNullable(count), serializedAdditionalRawData);
+            return new ChildProduct(constProperty, count, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ChildProduct>.Write(ModelReaderWriterOptions options)

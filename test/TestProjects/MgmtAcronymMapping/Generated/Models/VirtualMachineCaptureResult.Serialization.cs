@@ -17,7 +17,7 @@ namespace MgmtAcronymMapping.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
@@ -31,11 +31,11 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<string> schema = default;
-            Optional<string> contentVersion = default;
-            Optional<BinaryData> parameters = default;
-            Optional<IReadOnlyList<BinaryData>> resources = default;
-            Optional<string> id = default;
+            string schema = default;
+            string contentVersion = default;
+            BinaryData parameters = default;
+            IReadOnlyList<BinaryData> resources = default;
+            string id = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("$schema"u8))
@@ -84,7 +84,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineCaptureResult(id.Value, schema.Value, contentVersion.Value, parameters.Value, Optional.ToList(resources));
+            return new VirtualMachineCaptureResult(id, schema, contentVersion, parameters, resources ?? new ChangeTrackingList<BinaryData>());
         }
     }
 }

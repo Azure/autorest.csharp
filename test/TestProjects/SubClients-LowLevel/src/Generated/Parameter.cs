@@ -65,7 +65,14 @@ namespace SubClients_LowLevel
         /// <include file="Docs/Parameter.xml" path="doc/members/member[@name='GetSubParameterAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> GetSubParameterAsync(string subParameter, RequestContext context)
         {
-            Argument.AssertNotNullOrEmpty(subParameter, nameof(subParameter));
+            if (subParameter == null)
+            {
+                throw new ArgumentNullException(nameof(subParameter));
+            }
+            if (subParameter.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subParameter));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameter.GetSubParameter");
             scope.Start();
@@ -100,7 +107,14 @@ namespace SubClients_LowLevel
         /// <include file="Docs/Parameter.xml" path="doc/members/member[@name='GetSubParameter(string,RequestContext)']/*" />
         public virtual Response GetSubParameter(string subParameter, RequestContext context)
         {
-            Argument.AssertNotNullOrEmpty(subParameter, nameof(subParameter));
+            if (subParameter == null)
+            {
+                throw new ArgumentNullException(nameof(subParameter));
+            }
+            if (subParameter.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(subParameter));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameter.GetSubParameter");
             scope.Start();

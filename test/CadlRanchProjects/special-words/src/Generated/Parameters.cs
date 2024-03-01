@@ -61,7 +61,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithAndAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> WithAndAsync(string and, RequestContext context = null)
         {
-            Argument.AssertNotNull(and, nameof(and));
+            if (and == null)
+            {
+                throw new ArgumentNullException(nameof(and));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithAnd");
             scope.Start();
@@ -96,7 +99,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithAnd(string,RequestContext)']/*" />
         public virtual Response WithAnd(string and, RequestContext context = null)
         {
-            Argument.AssertNotNull(and, nameof(and));
+            if (and == null)
+            {
+                throw new ArgumentNullException(nameof(and));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithAnd");
             scope.Start();
@@ -131,7 +137,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithAsAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> WithAsAsync(string @as, RequestContext context = null)
         {
-            Argument.AssertNotNull(@as, nameof(@as));
+            if (@as == null)
+            {
+                throw new ArgumentNullException(nameof(@as));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithAs");
             scope.Start();
@@ -166,7 +175,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithAs(string,RequestContext)']/*" />
         public virtual Response WithAs(string @as, RequestContext context = null)
         {
-            Argument.AssertNotNull(@as, nameof(@as));
+            if (@as == null)
+            {
+                throw new ArgumentNullException(nameof(@as));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithAs");
             scope.Start();
@@ -201,7 +213,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithAssertAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> WithAssertAsync(string assert, RequestContext context = null)
         {
-            Argument.AssertNotNull(assert, nameof(assert));
+            if (assert == null)
+            {
+                throw new ArgumentNullException(nameof(assert));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithAssert");
             scope.Start();
@@ -236,7 +251,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithAssert(string,RequestContext)']/*" />
         public virtual Response WithAssert(string assert, RequestContext context = null)
         {
-            Argument.AssertNotNull(assert, nameof(assert));
+            if (assert == null)
+            {
+                throw new ArgumentNullException(nameof(assert));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithAssert");
             scope.Start();
@@ -271,7 +289,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithAsyncAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> WithAsyncAsync(string @async, RequestContext context = null)
         {
-            Argument.AssertNotNull(@async, nameof(@async));
+            if (@async == null)
+            {
+                throw new ArgumentNullException(nameof(@async));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithAsync");
             scope.Start();
@@ -306,7 +327,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithAsync(string,RequestContext)']/*" />
         public virtual Response WithAsync(string @async, RequestContext context = null)
         {
-            Argument.AssertNotNull(@async, nameof(@async));
+            if (@async == null)
+            {
+                throw new ArgumentNullException(nameof(@async));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithAsync");
             scope.Start();
@@ -341,7 +365,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithAwaitAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> WithAwaitAsync(string @await, RequestContext context = null)
         {
-            Argument.AssertNotNull(@await, nameof(@await));
+            if (@await == null)
+            {
+                throw new ArgumentNullException(nameof(@await));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithAwait");
             scope.Start();
@@ -376,7 +403,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithAwait(string,RequestContext)']/*" />
         public virtual Response WithAwait(string @await, RequestContext context = null)
         {
-            Argument.AssertNotNull(@await, nameof(@await));
+            if (@await == null)
+            {
+                throw new ArgumentNullException(nameof(@await));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithAwait");
             scope.Start();
@@ -411,7 +441,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithBreakAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> WithBreakAsync(string @break, RequestContext context = null)
         {
-            Argument.AssertNotNull(@break, nameof(@break));
+            if (@break == null)
+            {
+                throw new ArgumentNullException(nameof(@break));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithBreak");
             scope.Start();
@@ -446,7 +479,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithBreak(string,RequestContext)']/*" />
         public virtual Response WithBreak(string @break, RequestContext context = null)
         {
-            Argument.AssertNotNull(@break, nameof(@break));
+            if (@break == null)
+            {
+                throw new ArgumentNullException(nameof(@break));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithBreak");
             scope.Start();
@@ -481,7 +517,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithClassAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> WithClassAsync(string @class, RequestContext context = null)
         {
-            Argument.AssertNotNull(@class, nameof(@class));
+            if (@class == null)
+            {
+                throw new ArgumentNullException(nameof(@class));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithClass");
             scope.Start();
@@ -516,7 +555,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithClass(string,RequestContext)']/*" />
         public virtual Response WithClass(string @class, RequestContext context = null)
         {
-            Argument.AssertNotNull(@class, nameof(@class));
+            if (@class == null)
+            {
+                throw new ArgumentNullException(nameof(@class));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithClass");
             scope.Start();
@@ -551,7 +593,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithConstructorAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> WithConstructorAsync(string constructor, RequestContext context = null)
         {
-            Argument.AssertNotNull(constructor, nameof(constructor));
+            if (constructor == null)
+            {
+                throw new ArgumentNullException(nameof(constructor));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithConstructor");
             scope.Start();
@@ -586,7 +631,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithConstructor(string,RequestContext)']/*" />
         public virtual Response WithConstructor(string constructor, RequestContext context = null)
         {
-            Argument.AssertNotNull(constructor, nameof(constructor));
+            if (constructor == null)
+            {
+                throw new ArgumentNullException(nameof(constructor));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithConstructor");
             scope.Start();
@@ -621,7 +669,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithContinueAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> WithContinueAsync(string @continue, RequestContext context = null)
         {
-            Argument.AssertNotNull(@continue, nameof(@continue));
+            if (@continue == null)
+            {
+                throw new ArgumentNullException(nameof(@continue));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithContinue");
             scope.Start();
@@ -656,7 +707,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithContinue(string,RequestContext)']/*" />
         public virtual Response WithContinue(string @continue, RequestContext context = null)
         {
-            Argument.AssertNotNull(@continue, nameof(@continue));
+            if (@continue == null)
+            {
+                throw new ArgumentNullException(nameof(@continue));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithContinue");
             scope.Start();
@@ -691,7 +745,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithDefAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> WithDefAsync(string def, RequestContext context = null)
         {
-            Argument.AssertNotNull(def, nameof(def));
+            if (def == null)
+            {
+                throw new ArgumentNullException(nameof(def));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithDef");
             scope.Start();
@@ -726,7 +783,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithDef(string,RequestContext)']/*" />
         public virtual Response WithDef(string def, RequestContext context = null)
         {
-            Argument.AssertNotNull(def, nameof(def));
+            if (def == null)
+            {
+                throw new ArgumentNullException(nameof(def));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithDef");
             scope.Start();
@@ -761,7 +821,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithDelAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> WithDelAsync(string del, RequestContext context = null)
         {
-            Argument.AssertNotNull(del, nameof(del));
+            if (del == null)
+            {
+                throw new ArgumentNullException(nameof(del));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithDel");
             scope.Start();
@@ -796,7 +859,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithDel(string,RequestContext)']/*" />
         public virtual Response WithDel(string del, RequestContext context = null)
         {
-            Argument.AssertNotNull(del, nameof(del));
+            if (del == null)
+            {
+                throw new ArgumentNullException(nameof(del));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithDel");
             scope.Start();
@@ -831,7 +897,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithElifAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> WithElifAsync(string elif, RequestContext context = null)
         {
-            Argument.AssertNotNull(elif, nameof(elif));
+            if (elif == null)
+            {
+                throw new ArgumentNullException(nameof(elif));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithElif");
             scope.Start();
@@ -866,7 +935,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithElif(string,RequestContext)']/*" />
         public virtual Response WithElif(string elif, RequestContext context = null)
         {
-            Argument.AssertNotNull(elif, nameof(elif));
+            if (elif == null)
+            {
+                throw new ArgumentNullException(nameof(elif));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithElif");
             scope.Start();
@@ -901,7 +973,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithElseAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> WithElseAsync(string @else, RequestContext context = null)
         {
-            Argument.AssertNotNull(@else, nameof(@else));
+            if (@else == null)
+            {
+                throw new ArgumentNullException(nameof(@else));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithElse");
             scope.Start();
@@ -936,7 +1011,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithElse(string,RequestContext)']/*" />
         public virtual Response WithElse(string @else, RequestContext context = null)
         {
-            Argument.AssertNotNull(@else, nameof(@else));
+            if (@else == null)
+            {
+                throw new ArgumentNullException(nameof(@else));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithElse");
             scope.Start();
@@ -971,7 +1049,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithExceptAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> WithExceptAsync(string except, RequestContext context = null)
         {
-            Argument.AssertNotNull(except, nameof(except));
+            if (except == null)
+            {
+                throw new ArgumentNullException(nameof(except));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithExcept");
             scope.Start();
@@ -1006,7 +1087,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithExcept(string,RequestContext)']/*" />
         public virtual Response WithExcept(string except, RequestContext context = null)
         {
-            Argument.AssertNotNull(except, nameof(except));
+            if (except == null)
+            {
+                throw new ArgumentNullException(nameof(except));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithExcept");
             scope.Start();
@@ -1041,7 +1125,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithExecAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> WithExecAsync(string exec, RequestContext context = null)
         {
-            Argument.AssertNotNull(exec, nameof(exec));
+            if (exec == null)
+            {
+                throw new ArgumentNullException(nameof(exec));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithExec");
             scope.Start();
@@ -1076,7 +1163,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithExec(string,RequestContext)']/*" />
         public virtual Response WithExec(string exec, RequestContext context = null)
         {
-            Argument.AssertNotNull(exec, nameof(exec));
+            if (exec == null)
+            {
+                throw new ArgumentNullException(nameof(exec));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithExec");
             scope.Start();
@@ -1111,7 +1201,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithFinallyAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> WithFinallyAsync(string @finally, RequestContext context = null)
         {
-            Argument.AssertNotNull(@finally, nameof(@finally));
+            if (@finally == null)
+            {
+                throw new ArgumentNullException(nameof(@finally));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithFinally");
             scope.Start();
@@ -1146,7 +1239,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithFinally(string,RequestContext)']/*" />
         public virtual Response WithFinally(string @finally, RequestContext context = null)
         {
-            Argument.AssertNotNull(@finally, nameof(@finally));
+            if (@finally == null)
+            {
+                throw new ArgumentNullException(nameof(@finally));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithFinally");
             scope.Start();
@@ -1181,7 +1277,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithForAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> WithForAsync(string @for, RequestContext context = null)
         {
-            Argument.AssertNotNull(@for, nameof(@for));
+            if (@for == null)
+            {
+                throw new ArgumentNullException(nameof(@for));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithFor");
             scope.Start();
@@ -1216,7 +1315,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithFor(string,RequestContext)']/*" />
         public virtual Response WithFor(string @for, RequestContext context = null)
         {
-            Argument.AssertNotNull(@for, nameof(@for));
+            if (@for == null)
+            {
+                throw new ArgumentNullException(nameof(@for));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithFor");
             scope.Start();
@@ -1251,7 +1353,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithFromAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> WithFromAsync(string @from, RequestContext context = null)
         {
-            Argument.AssertNotNull(@from, nameof(@from));
+            if (@from == null)
+            {
+                throw new ArgumentNullException(nameof(@from));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithFrom");
             scope.Start();
@@ -1286,7 +1391,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithFrom(string,RequestContext)']/*" />
         public virtual Response WithFrom(string @from, RequestContext context = null)
         {
-            Argument.AssertNotNull(@from, nameof(@from));
+            if (@from == null)
+            {
+                throw new ArgumentNullException(nameof(@from));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithFrom");
             scope.Start();
@@ -1321,7 +1429,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithGlobalAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> WithGlobalAsync(string @global, RequestContext context = null)
         {
-            Argument.AssertNotNull(@global, nameof(@global));
+            if (@global == null)
+            {
+                throw new ArgumentNullException(nameof(@global));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithGlobal");
             scope.Start();
@@ -1356,7 +1467,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithGlobal(string,RequestContext)']/*" />
         public virtual Response WithGlobal(string @global, RequestContext context = null)
         {
-            Argument.AssertNotNull(@global, nameof(@global));
+            if (@global == null)
+            {
+                throw new ArgumentNullException(nameof(@global));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithGlobal");
             scope.Start();
@@ -1391,7 +1505,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithIfAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> WithIfAsync(string @if, RequestContext context = null)
         {
-            Argument.AssertNotNull(@if, nameof(@if));
+            if (@if == null)
+            {
+                throw new ArgumentNullException(nameof(@if));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithIf");
             scope.Start();
@@ -1426,7 +1543,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithIf(string,RequestContext)']/*" />
         public virtual Response WithIf(string @if, RequestContext context = null)
         {
-            Argument.AssertNotNull(@if, nameof(@if));
+            if (@if == null)
+            {
+                throw new ArgumentNullException(nameof(@if));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithIf");
             scope.Start();
@@ -1461,7 +1581,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithImportAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> WithImportAsync(string import, RequestContext context = null)
         {
-            Argument.AssertNotNull(import, nameof(import));
+            if (import == null)
+            {
+                throw new ArgumentNullException(nameof(import));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithImport");
             scope.Start();
@@ -1496,7 +1619,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithImport(string,RequestContext)']/*" />
         public virtual Response WithImport(string import, RequestContext context = null)
         {
-            Argument.AssertNotNull(import, nameof(import));
+            if (import == null)
+            {
+                throw new ArgumentNullException(nameof(import));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithImport");
             scope.Start();
@@ -1531,7 +1657,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithInAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> WithInAsync(string @in, RequestContext context = null)
         {
-            Argument.AssertNotNull(@in, nameof(@in));
+            if (@in == null)
+            {
+                throw new ArgumentNullException(nameof(@in));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithIn");
             scope.Start();
@@ -1566,7 +1695,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithIn(string,RequestContext)']/*" />
         public virtual Response WithIn(string @in, RequestContext context = null)
         {
-            Argument.AssertNotNull(@in, nameof(@in));
+            if (@in == null)
+            {
+                throw new ArgumentNullException(nameof(@in));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithIn");
             scope.Start();
@@ -1601,7 +1733,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithIsAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> WithIsAsync(string @is, RequestContext context = null)
         {
-            Argument.AssertNotNull(@is, nameof(@is));
+            if (@is == null)
+            {
+                throw new ArgumentNullException(nameof(@is));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithIs");
             scope.Start();
@@ -1636,7 +1771,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithIs(string,RequestContext)']/*" />
         public virtual Response WithIs(string @is, RequestContext context = null)
         {
-            Argument.AssertNotNull(@is, nameof(@is));
+            if (@is == null)
+            {
+                throw new ArgumentNullException(nameof(@is));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithIs");
             scope.Start();
@@ -1671,7 +1809,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithLambdaAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> WithLambdaAsync(string lambda, RequestContext context = null)
         {
-            Argument.AssertNotNull(lambda, nameof(lambda));
+            if (lambda == null)
+            {
+                throw new ArgumentNullException(nameof(lambda));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithLambda");
             scope.Start();
@@ -1706,7 +1847,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithLambda(string,RequestContext)']/*" />
         public virtual Response WithLambda(string lambda, RequestContext context = null)
         {
-            Argument.AssertNotNull(lambda, nameof(lambda));
+            if (lambda == null)
+            {
+                throw new ArgumentNullException(nameof(lambda));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithLambda");
             scope.Start();
@@ -1741,7 +1885,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithNotAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> WithNotAsync(string not, RequestContext context = null)
         {
-            Argument.AssertNotNull(not, nameof(not));
+            if (not == null)
+            {
+                throw new ArgumentNullException(nameof(not));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithNot");
             scope.Start();
@@ -1776,7 +1923,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithNot(string,RequestContext)']/*" />
         public virtual Response WithNot(string not, RequestContext context = null)
         {
-            Argument.AssertNotNull(not, nameof(not));
+            if (not == null)
+            {
+                throw new ArgumentNullException(nameof(not));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithNot");
             scope.Start();
@@ -1811,7 +1961,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithOrAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> WithOrAsync(string or, RequestContext context = null)
         {
-            Argument.AssertNotNull(or, nameof(or));
+            if (or == null)
+            {
+                throw new ArgumentNullException(nameof(or));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithOr");
             scope.Start();
@@ -1846,7 +1999,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithOr(string,RequestContext)']/*" />
         public virtual Response WithOr(string or, RequestContext context = null)
         {
-            Argument.AssertNotNull(or, nameof(or));
+            if (or == null)
+            {
+                throw new ArgumentNullException(nameof(or));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithOr");
             scope.Start();
@@ -1881,7 +2037,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithPassAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> WithPassAsync(string pass, RequestContext context = null)
         {
-            Argument.AssertNotNull(pass, nameof(pass));
+            if (pass == null)
+            {
+                throw new ArgumentNullException(nameof(pass));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithPass");
             scope.Start();
@@ -1916,7 +2075,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithPass(string,RequestContext)']/*" />
         public virtual Response WithPass(string pass, RequestContext context = null)
         {
-            Argument.AssertNotNull(pass, nameof(pass));
+            if (pass == null)
+            {
+                throw new ArgumentNullException(nameof(pass));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithPass");
             scope.Start();
@@ -1951,7 +2113,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithRaiseAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> WithRaiseAsync(string raise, RequestContext context = null)
         {
-            Argument.AssertNotNull(raise, nameof(raise));
+            if (raise == null)
+            {
+                throw new ArgumentNullException(nameof(raise));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithRaise");
             scope.Start();
@@ -1986,7 +2151,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithRaise(string,RequestContext)']/*" />
         public virtual Response WithRaise(string raise, RequestContext context = null)
         {
-            Argument.AssertNotNull(raise, nameof(raise));
+            if (raise == null)
+            {
+                throw new ArgumentNullException(nameof(raise));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithRaise");
             scope.Start();
@@ -2021,7 +2189,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithReturnAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> WithReturnAsync(string @return, RequestContext context = null)
         {
-            Argument.AssertNotNull(@return, nameof(@return));
+            if (@return == null)
+            {
+                throw new ArgumentNullException(nameof(@return));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithReturn");
             scope.Start();
@@ -2056,7 +2227,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithReturn(string,RequestContext)']/*" />
         public virtual Response WithReturn(string @return, RequestContext context = null)
         {
-            Argument.AssertNotNull(@return, nameof(@return));
+            if (@return == null)
+            {
+                throw new ArgumentNullException(nameof(@return));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithReturn");
             scope.Start();
@@ -2091,7 +2265,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithTryAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> WithTryAsync(string @try, RequestContext context = null)
         {
-            Argument.AssertNotNull(@try, nameof(@try));
+            if (@try == null)
+            {
+                throw new ArgumentNullException(nameof(@try));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithTry");
             scope.Start();
@@ -2126,7 +2303,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithTry(string,RequestContext)']/*" />
         public virtual Response WithTry(string @try, RequestContext context = null)
         {
-            Argument.AssertNotNull(@try, nameof(@try));
+            if (@try == null)
+            {
+                throw new ArgumentNullException(nameof(@try));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithTry");
             scope.Start();
@@ -2161,7 +2341,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithWhileAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> WithWhileAsync(string @while, RequestContext context = null)
         {
-            Argument.AssertNotNull(@while, nameof(@while));
+            if (@while == null)
+            {
+                throw new ArgumentNullException(nameof(@while));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithWhile");
             scope.Start();
@@ -2196,7 +2379,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithWhile(string,RequestContext)']/*" />
         public virtual Response WithWhile(string @while, RequestContext context = null)
         {
-            Argument.AssertNotNull(@while, nameof(@while));
+            if (@while == null)
+            {
+                throw new ArgumentNullException(nameof(@while));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithWhile");
             scope.Start();
@@ -2231,7 +2417,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithWithAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> WithWithAsync(string with, RequestContext context = null)
         {
-            Argument.AssertNotNull(with, nameof(with));
+            if (with == null)
+            {
+                throw new ArgumentNullException(nameof(with));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithWith");
             scope.Start();
@@ -2266,7 +2455,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithWith(string,RequestContext)']/*" />
         public virtual Response WithWith(string with, RequestContext context = null)
         {
-            Argument.AssertNotNull(with, nameof(with));
+            if (with == null)
+            {
+                throw new ArgumentNullException(nameof(with));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithWith");
             scope.Start();
@@ -2301,7 +2493,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithYieldAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> WithYieldAsync(string @yield, RequestContext context = null)
         {
-            Argument.AssertNotNull(@yield, nameof(@yield));
+            if (@yield == null)
+            {
+                throw new ArgumentNullException(nameof(@yield));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithYield");
             scope.Start();
@@ -2336,7 +2531,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithYield(string,RequestContext)']/*" />
         public virtual Response WithYield(string @yield, RequestContext context = null)
         {
-            Argument.AssertNotNull(@yield, nameof(@yield));
+            if (@yield == null)
+            {
+                throw new ArgumentNullException(nameof(@yield));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithYield");
             scope.Start();
@@ -2371,7 +2569,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithCancellationTokenAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> WithCancellationTokenAsync(string cancellationToken, RequestContext context = null)
         {
-            Argument.AssertNotNull(cancellationToken, nameof(cancellationToken));
+            if (cancellationToken == null)
+            {
+                throw new ArgumentNullException(nameof(cancellationToken));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithCancellationToken");
             scope.Start();
@@ -2406,7 +2607,10 @@ namespace SpecialWords
         /// <include file="Docs/Parameters.xml" path="doc/members/member[@name='WithCancellationToken(string,RequestContext)']/*" />
         public virtual Response WithCancellationToken(string cancellationToken, RequestContext context = null)
         {
-            Argument.AssertNotNull(cancellationToken, nameof(cancellationToken));
+            if (cancellationToken == null)
+            {
+                throw new ArgumentNullException(nameof(cancellationToken));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Parameters.WithCancellationToken");
             scope.Start();

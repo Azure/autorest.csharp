@@ -23,7 +23,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStringValue(item);
             }
             writer.WriteEndArray();
-            if (Optional.IsDefined(MaxAgeInSeconds))
+            if (MaxAgeInSeconds.HasValue)
             {
                 writer.WritePropertyName("maxAgeInSeconds"u8);
                 writer.WriteNumberValue(MaxAgeInSeconds.Value);
@@ -38,7 +38,7 @@ namespace CognitiveSearch.Models
                 return null;
             }
             IList<string> allowedOrigins = default;
-            Optional<long> maxAgeInSeconds = default;
+            long? maxAgeInSeconds = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("allowedOrigins"u8))
@@ -61,7 +61,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new CorsOptions(allowedOrigins, Optional.ToNullable(maxAgeInSeconds));
+            return new CorsOptions(allowedOrigins, maxAgeInSeconds);
         }
     }
 }

@@ -17,12 +17,12 @@ namespace MgmtMockAndSample.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Duration))
+            if (Duration.HasValue)
             {
                 writer.WritePropertyName("duration"u8);
                 writer.WriteStringValue(Duration.Value, "P");
             }
-            if (Optional.IsDefined(CreateOn))
+            if (CreateOn.HasValue)
             {
                 writer.WritePropertyName("createOn"u8);
                 writer.WriteStringValue(CreateOn.Value, "O");
@@ -31,7 +31,7 @@ namespace MgmtMockAndSample.Models
             writer.WriteStringValue(TenantId);
             writer.WritePropertyName("sku"u8);
             writer.WriteObjectValue(Sku);
-            if (Optional.IsCollectionDefined(AccessPolicies))
+            if (!(AccessPolicies is ChangeTrackingList<AccessPolicyEntry> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("accessPolicies"u8);
                 writer.WriteStartArray();
@@ -41,12 +41,12 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(VaultUri))
+            if (VaultUri != null)
             {
                 writer.WritePropertyName("vaultUri"u8);
                 writer.WriteStringValue(VaultUri.AbsoluteUri);
             }
-            if (Optional.IsCollectionDefined(Deployments))
+            if (!(Deployments is ChangeTrackingList<string> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("deployments"u8);
                 writer.WriteStartArray();
@@ -56,67 +56,67 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(EnabledForDiskEncryption))
+            if (EnabledForDiskEncryption.HasValue)
             {
                 writer.WritePropertyName("enabledForDiskEncryption"u8);
                 writer.WriteBooleanValue(EnabledForDiskEncryption.Value);
             }
-            if (Optional.IsDefined(EnabledForTemplateDeployment))
+            if (EnabledForTemplateDeployment.HasValue)
             {
                 writer.WritePropertyName("enabledForTemplateDeployment"u8);
                 writer.WriteBooleanValue(EnabledForTemplateDeployment.Value);
             }
-            if (Optional.IsDefined(EnableSoftDelete))
+            if (EnableSoftDelete.HasValue)
             {
                 writer.WritePropertyName("enableSoftDelete"u8);
                 writer.WriteBooleanValue(EnableSoftDelete.Value);
             }
-            if (Optional.IsDefined(SoftDeleteRetentionInDays))
+            if (SoftDeleteRetentionInDays.HasValue)
             {
                 writer.WritePropertyName("softDeleteRetentionInDays"u8);
                 writer.WriteNumberValue(SoftDeleteRetentionInDays.Value);
             }
-            if (Optional.IsDefined(EnableRbacAuthorization))
+            if (EnableRbacAuthorization.HasValue)
             {
                 writer.WritePropertyName("enableRbacAuthorization"u8);
                 writer.WriteBooleanValue(EnableRbacAuthorization.Value);
             }
-            if (Optional.IsDefined(CreateMode))
+            if (CreateMode.HasValue)
             {
                 writer.WritePropertyName("createMode"u8);
                 writer.WriteStringValue(CreateMode.Value.ToSerialString());
             }
-            if (Optional.IsDefined(EnablePurgeProtection))
+            if (EnablePurgeProtection.HasValue)
             {
                 writer.WritePropertyName("enablePurgeProtection"u8);
                 writer.WriteBooleanValue(EnablePurgeProtection.Value);
             }
-            if (Optional.IsDefined(NetworkAcls))
+            if (NetworkAcls != null)
             {
                 writer.WritePropertyName("networkAcls"u8);
                 writer.WriteObjectValue(NetworkAcls);
             }
-            if (Optional.IsDefined(ProvisioningState))
+            if (ProvisioningState.HasValue)
             {
                 writer.WritePropertyName("provisioningState"u8);
                 writer.WriteStringValue(ProvisioningState.Value.ToString());
             }
-            if (Optional.IsDefined(PublicNetworkAccess))
+            if (PublicNetworkAccess != null)
             {
                 writer.WritePropertyName("publicNetworkAccess"u8);
                 writer.WriteStringValue(PublicNetworkAccess);
             }
-            if (Optional.IsDefined(ReadWriteSingleStringProperty))
+            if (ReadWriteSingleStringProperty != null)
             {
                 writer.WritePropertyName("readWriteSingleStringProperty"u8);
                 writer.WriteObjectValue(ReadWriteSingleStringProperty);
             }
-            if (Optional.IsDefined(ReadOnlySingleStringProperty))
+            if (ReadOnlySingleStringProperty != null)
             {
                 writer.WritePropertyName("readOnlySingleStringProperty"u8);
                 writer.WriteObjectValue(ReadOnlySingleStringProperty);
             }
-            if (Optional.IsDefined(ExtremelyDeepStringProperty))
+            if (ExtremelyDeepStringProperty != null)
             {
                 writer.WritePropertyName("extremelyDeepStringProperty"u8);
                 writer.WriteObjectValue(ExtremelyDeepStringProperty);
@@ -130,28 +130,28 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<TimeSpan> duration = default;
-            Optional<DateTimeOffset> createOn = default;
+            TimeSpan? duration = default;
+            DateTimeOffset? createOn = default;
             Guid tenantId = default;
             MgmtMockAndSampleSku sku = default;
-            Optional<IList<AccessPolicyEntry>> accessPolicies = default;
-            Optional<Uri> vaultUri = default;
-            Optional<string> hsmPoolResourceId = default;
-            Optional<IList<string>> deployments = default;
-            Optional<bool> enabledForDiskEncryption = default;
-            Optional<bool> enabledForTemplateDeployment = default;
-            Optional<bool> enableSoftDelete = default;
-            Optional<int> softDeleteRetentionInDays = default;
-            Optional<bool> enableRbacAuthorization = default;
-            Optional<CreateMode> createMode = default;
-            Optional<bool> enablePurgeProtection = default;
-            Optional<NetworkRuleSet> networkAcls = default;
-            Optional<VaultProvisioningState> provisioningState = default;
-            Optional<IReadOnlyList<PrivateEndpointConnectionItem>> privateEndpointConnections = default;
-            Optional<string> publicNetworkAccess = default;
-            Optional<SinglePropertyModel> readWriteSingleStringProperty = default;
-            Optional<ReadOnlySinglePropertyModel> readOnlySingleStringProperty = default;
-            Optional<ExtremelyDeepSinglePropertyModel> extremelyDeepStringProperty = default;
+            IList<AccessPolicyEntry> accessPolicies = default;
+            Uri vaultUri = default;
+            string hsmPoolResourceId = default;
+            IList<string> deployments = default;
+            bool? enabledForDiskEncryption = default;
+            bool? enabledForTemplateDeployment = default;
+            bool? enableSoftDelete = default;
+            int? softDeleteRetentionInDays = default;
+            bool? enableRbacAuthorization = default;
+            CreateMode? createMode = default;
+            bool? enablePurgeProtection = default;
+            NetworkRuleSet networkAcls = default;
+            VaultProvisioningState? provisioningState = default;
+            IReadOnlyList<PrivateEndpointConnectionItem> privateEndpointConnections = default;
+            string publicNetworkAccess = default;
+            SinglePropertyModel readWriteSingleStringProperty = default;
+            ReadOnlySinglePropertyModel readOnlySingleStringProperty = default;
+            ExtremelyDeepSinglePropertyModel extremelyDeepStringProperty = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("duration"u8))
@@ -352,7 +352,29 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new VaultProperties(Optional.ToNullable(duration), Optional.ToNullable(createOn), tenantId, sku, Optional.ToList(accessPolicies), vaultUri.Value, hsmPoolResourceId.Value, Optional.ToList(deployments), Optional.ToNullable(enabledForDiskEncryption), Optional.ToNullable(enabledForTemplateDeployment), Optional.ToNullable(enableSoftDelete), Optional.ToNullable(softDeleteRetentionInDays), Optional.ToNullable(enableRbacAuthorization), Optional.ToNullable(createMode), Optional.ToNullable(enablePurgeProtection), networkAcls.Value, Optional.ToNullable(provisioningState), Optional.ToList(privateEndpointConnections), publicNetworkAccess.Value, readWriteSingleStringProperty.Value, readOnlySingleStringProperty.Value, extremelyDeepStringProperty.Value);
+            return new VaultProperties(
+                duration,
+                createOn,
+                tenantId,
+                sku,
+                accessPolicies ?? new ChangeTrackingList<AccessPolicyEntry>(),
+                vaultUri,
+                hsmPoolResourceId,
+                deployments ?? new ChangeTrackingList<string>(),
+                enabledForDiskEncryption,
+                enabledForTemplateDeployment,
+                enableSoftDelete,
+                softDeleteRetentionInDays,
+                enableRbacAuthorization,
+                createMode,
+                enablePurgeProtection,
+                networkAcls,
+                provisioningState,
+                privateEndpointConnections ?? new ChangeTrackingList<PrivateEndpointConnectionItem>(),
+                publicNetworkAccess,
+                readWriteSingleStringProperty,
+                readOnlySingleStringProperty,
+                extremelyDeepStringProperty);
         }
     }
 }

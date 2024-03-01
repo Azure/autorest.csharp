@@ -29,7 +29,7 @@ namespace _Type._Array.Models
             writer.WriteStartObject();
             writer.WritePropertyName("property"u8);
             writer.WriteStringValue(Property);
-            if (Optional.IsCollectionDefined(Children))
+            if (!(Children is ChangeTrackingList<InnerModel> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("children"u8);
                 writer.WriteStartArray();
@@ -78,7 +78,7 @@ namespace _Type._Array.Models
                 return null;
             }
             string property = default;
-            Optional<IList<InnerModel>> children = default;
+            IList<InnerModel> children = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property0 in element.EnumerateObject())
@@ -97,7 +97,7 @@ namespace _Type._Array.Models
                     List<InnerModel> array = new List<InnerModel>();
                     foreach (var item in property0.Value.EnumerateArray())
                     {
-                        array.Add(DeserializeInnerModel(item));
+                        array.Add(DeserializeInnerModel(item, options));
                     }
                     children = array;
                     continue;
@@ -108,7 +108,7 @@ namespace _Type._Array.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new InnerModel(property, Optional.ToList(children), serializedAdditionalRawData);
+            return new InnerModel(property, children ?? new ChangeTrackingList<InnerModel>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<InnerModel>.Write(ModelReaderWriterOptions options)

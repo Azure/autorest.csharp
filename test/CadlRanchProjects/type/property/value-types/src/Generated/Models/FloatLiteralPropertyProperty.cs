@@ -22,10 +22,10 @@ namespace _Type.Property.ValueTypes.Models
             _value = value;
         }
 
-        private const float _4242Value = 42.42F;
+        private const float _43125Value = 43.125F;
 
-        /// <summary> 42.42. </summary>
-        public static FloatLiteralPropertyProperty _4242 { get; } = new FloatLiteralPropertyProperty(_4242Value);
+        /// <summary> 43.125. </summary>
+        public static FloatLiteralPropertyProperty _43125 { get; } = new FloatLiteralPropertyProperty(_43125Value);
 
         internal float ToSerialSingle() => _value;
 

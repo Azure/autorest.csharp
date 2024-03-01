@@ -26,12 +26,12 @@ namespace TypeSchemaMapping.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(StringPropertyJson))
+            if (StringPropertyJson.ValueKind != JsonValueKind.Undefined)
             {
                 writer.WritePropertyName("InternalProperty"u8);
                 StringPropertyJson.WriteTo(writer);
             }
-            if (Optional.IsDefined(PublicProperty))
+            if (PublicProperty != null)
             {
                 writer.WritePropertyName("PublicProperty"u8);
                 writer.WriteStringValue(PublicProperty);
@@ -74,8 +74,8 @@ namespace TypeSchemaMapping.Models
             {
                 return null;
             }
-            Optional<JsonElement> internalProperty = default;
-            Optional<string> publicProperty = default;
+            JsonElement internalProperty = default;
+            string publicProperty = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -96,7 +96,7 @@ namespace TypeSchemaMapping.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new PublicModelWithInternalProperty(internalProperty, publicProperty.Value, serializedAdditionalRawData);
+            return new PublicModelWithInternalProperty(internalProperty, publicProperty, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<PublicModelWithInternalProperty>.Write(ModelReaderWriterOptions options)

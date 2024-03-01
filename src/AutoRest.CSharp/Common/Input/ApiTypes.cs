@@ -94,15 +94,6 @@ namespace AutoRest.CSharp.Common.Input
         public string Utf8JsonWriterExtensionsWriteStringValueName => nameof(ModelSerializationExtensions.WriteStringValue);
         public string Utf8JsonWriterExtensionsWriteBase64StringValueName => nameof(ModelSerializationExtensions.WriteBase64StringValue);
 
-        public abstract Type OptionalType { get; }
-        public abstract Type OptionalPropertyType { get; }
-
-        public string OptionalIsCollectionDefinedName => nameof(OptionalProperty.IsCollectionDefined);
-        public string OptionalIsDefinedName => nameof(OptionalProperty.IsDefined);
-        public string OptionalToDictionaryName => nameof(OptionalProperty.ToDictionary);
-        public string OptionalToListName => nameof(OptionalProperty.ToList);
-        public string OptionalToNullableName => nameof(OptionalProperty.ToNullable);
-
         public abstract Type RequestFailedExceptionType { get; }
 
         public string ResponseClassifierIsErrorResponseName => nameof(ResponseErrorClassifier.IsErrorResponse);

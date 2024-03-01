@@ -15,12 +15,12 @@ namespace MgmtMockAndSample.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(KeyVaultSecretId))
+            if (KeyVaultSecretId != null)
             {
                 writer.WritePropertyName("keyVaultSecretId"u8);
                 writer.WriteStringValue(KeyVaultSecretId);
             }
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
@@ -34,8 +34,8 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<string> keyVaultSecretId = default;
-            Optional<string> name = default;
+            string keyVaultSecretId = default;
+            string name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("keyVaultSecretId"u8))
@@ -49,7 +49,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new FirewallPolicyCertificateAuthority(keyVaultSecretId.Value, name.Value);
+            return new FirewallPolicyCertificateAuthority(keyVaultSecretId, name);
         }
     }
 }

@@ -26,12 +26,12 @@ namespace body_complex.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && Optional.IsDefined(Id))
+            if (options.Format != "W" && Id != null)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (Optional.IsDefined(Size))
+            if (Size.HasValue)
             {
                 writer.WritePropertyName("size"u8);
                 writer.WriteNumberValue(Size.Value);
@@ -74,8 +74,8 @@ namespace body_complex.Models
             {
                 return null;
             }
-            Optional<string> id = default;
-            Optional<int> size = default;
+            string id = default;
+            int? size = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -100,7 +100,7 @@ namespace body_complex.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ReadonlyObj(id.Value, Optional.ToNullable(size), serializedAdditionalRawData);
+            return new ReadonlyObj(id, size, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ReadonlyObj>.Write(ModelReaderWriterOptions options)

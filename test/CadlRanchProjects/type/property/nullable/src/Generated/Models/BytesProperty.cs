@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace _Type.Property.Nullable.Models
 {
@@ -52,7 +51,10 @@ namespace _Type.Property.Nullable.Models
         /// <exception cref="ArgumentNullException"> <paramref name="requiredProperty"/> is null. </exception>
         internal BytesProperty(string requiredProperty, BinaryData nullableProperty)
         {
-            Argument.AssertNotNull(requiredProperty, nameof(requiredProperty));
+            if (requiredProperty == null)
+            {
+                throw new ArgumentNullException(nameof(requiredProperty));
+            }
 
             RequiredProperty = requiredProperty;
             NullableProperty = nullableProperty;

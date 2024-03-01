@@ -27,17 +27,17 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Phrase))
+            if (Phrase != null)
             {
                 writer.WritePropertyName("phrase"u8);
                 writer.WriteStringValue(Phrase);
             }
-            if (Optional.IsDefined(Variable))
+            if (Variable != null)
             {
                 writer.WritePropertyName("variable"u8);
                 writer.WriteStringValue(Variable);
             }
-            if (Optional.IsDefined(PatternType))
+            if (PatternType.HasValue)
             {
                 writer.WritePropertyName("patternType"u8);
                 writer.WriteStringValue(PatternType.Value.ToSerialString());
@@ -80,9 +80,9 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             {
                 return null;
             }
-            Optional<string> phrase = default;
-            Optional<string> variable = default;
-            Optional<ResourceTypeAliasPatternType> patternType = default;
+            string phrase = default;
+            string variable = default;
+            ResourceTypeAliasPatternType? patternType = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -112,7 +112,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ResourceTypeAliasPattern(phrase.Value, variable.Value, Optional.ToNullable(patternType), serializedAdditionalRawData);
+            return new ResourceTypeAliasPattern(phrase, variable, patternType, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ResourceTypeAliasPattern>.Write(ModelReaderWriterOptions options)

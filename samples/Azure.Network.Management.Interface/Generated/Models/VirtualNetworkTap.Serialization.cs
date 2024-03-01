@@ -16,17 +16,17 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (Optional.IsDefined(Location))
+            if (Location != null)
             {
                 writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location);
             }
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -39,17 +39,17 @@ namespace Azure.Network.Management.Interface.Models
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(DestinationNetworkInterfaceIPConfiguration))
+            if (DestinationNetworkInterfaceIPConfiguration != null)
             {
                 writer.WritePropertyName("destinationNetworkInterfaceIPConfiguration"u8);
                 writer.WriteObjectValue(DestinationNetworkInterfaceIPConfiguration);
             }
-            if (Optional.IsDefined(DestinationLoadBalancerFrontEndIPConfiguration))
+            if (DestinationLoadBalancerFrontEndIPConfiguration != null)
             {
                 writer.WritePropertyName("destinationLoadBalancerFrontEndIPConfiguration"u8);
                 writer.WriteObjectValue(DestinationLoadBalancerFrontEndIPConfiguration);
             }
-            if (Optional.IsDefined(DestinationPort))
+            if (DestinationPort.HasValue)
             {
                 writer.WritePropertyName("destinationPort"u8);
                 writer.WriteNumberValue(DestinationPort.Value);
@@ -64,18 +64,18 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> etag = default;
-            Optional<string> id = default;
-            Optional<string> name = default;
-            Optional<string> type = default;
-            Optional<string> location = default;
-            Optional<IDictionary<string, string>> tags = default;
-            Optional<IReadOnlyList<NetworkInterfaceTapConfiguration>> networkInterfaceTapConfigurations = default;
-            Optional<string> resourceGuid = default;
-            Optional<ProvisioningState> provisioningState = default;
-            Optional<NetworkInterfaceIPConfiguration> destinationNetworkInterfaceIPConfiguration = default;
-            Optional<FrontendIPConfiguration> destinationLoadBalancerFrontEndIPConfiguration = default;
-            Optional<int> destinationPort = default;
+            string etag = default;
+            string id = default;
+            string name = default;
+            string type = default;
+            string location = default;
+            IDictionary<string, string> tags = default;
+            IReadOnlyList<NetworkInterfaceTapConfiguration> networkInterfaceTapConfigurations = default;
+            string resourceGuid = default;
+            ProvisioningState? provisioningState = default;
+            NetworkInterfaceIPConfiguration destinationNetworkInterfaceIPConfiguration = default;
+            FrontendIPConfiguration destinationLoadBalancerFrontEndIPConfiguration = default;
+            int? destinationPort = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"u8))
@@ -185,7 +185,19 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new VirtualNetworkTap(id.Value, name.Value, type.Value, location.Value, Optional.ToDictionary(tags), etag.Value, Optional.ToList(networkInterfaceTapConfigurations), resourceGuid.Value, Optional.ToNullable(provisioningState), destinationNetworkInterfaceIPConfiguration.Value, destinationLoadBalancerFrontEndIPConfiguration.Value, Optional.ToNullable(destinationPort));
+            return new VirtualNetworkTap(
+                id,
+                name,
+                type,
+                location,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                etag,
+                networkInterfaceTapConfigurations ?? new ChangeTrackingList<NetworkInterfaceTapConfiguration>(),
+                resourceGuid,
+                provisioningState,
+                destinationNetworkInterfaceIPConfiguration,
+                destinationLoadBalancerFrontEndIPConfiguration,
+                destinationPort);
         }
     }
 }

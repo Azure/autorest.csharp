@@ -29,12 +29,12 @@ namespace AnomalyDetector.Models
             writer.WriteStartObject();
             writer.WritePropertyName("timestamp"u8);
             writer.WriteStringValue(Timestamp, "O");
-            if (Optional.IsDefined(Value))
+            if (Value != null)
             {
                 writer.WritePropertyName("value"u8);
                 writer.WriteObjectValue(Value);
             }
-            if (Optional.IsCollectionDefined(Errors))
+            if (!(Errors is ChangeTrackingList<ErrorResponse> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("errors"u8);
                 writer.WriteStartArray();
@@ -83,8 +83,8 @@ namespace AnomalyDetector.Models
                 return null;
             }
             DateTimeOffset timestamp = default;
-            Optional<AnomalyValue> value = default;
-            Optional<IReadOnlyList<ErrorResponse>> errors = default;
+            AnomalyValue value = default;
+            IReadOnlyList<ErrorResponse> errors = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -100,7 +100,7 @@ namespace AnomalyDetector.Models
                     {
                         continue;
                     }
-                    value = AnomalyValue.DeserializeAnomalyValue(property.Value);
+                    value = AnomalyValue.DeserializeAnomalyValue(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("errors"u8))
@@ -112,7 +112,7 @@ namespace AnomalyDetector.Models
                     List<ErrorResponse> array = new List<ErrorResponse>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ErrorResponse.DeserializeErrorResponse(item));
+                        array.Add(ErrorResponse.DeserializeErrorResponse(item, options));
                     }
                     errors = array;
                     continue;
@@ -123,7 +123,7 @@ namespace AnomalyDetector.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new AnomalyState(timestamp, value.Value, Optional.ToList(errors), serializedAdditionalRawData);
+            return new AnomalyState(timestamp, value, errors ?? new ChangeTrackingList<ErrorResponse>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<AnomalyState>.Write(ModelReaderWriterOptions options)

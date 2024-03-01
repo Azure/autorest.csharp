@@ -26,14 +26,14 @@ namespace azure_special_properties.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Status))
+            if (Status.HasValue)
             {
                 writer.WritePropertyName("status"u8);
                 writer.WriteNumberValue(Status.Value);
             }
             writer.WritePropertyName("constantId"u8);
             writer.WriteNumberValue(ConstantId.ToSerialInt32());
-            if (Optional.IsDefined(Message))
+            if (Message != null)
             {
                 writer.WritePropertyName("message"u8);
                 writer.WriteStringValue(Message);
@@ -76,9 +76,9 @@ namespace azure_special_properties.Models
             {
                 return null;
             }
-            Optional<int> status = default;
+            int? status = default;
             ErrorConstantId constantId = default;
-            Optional<string> message = default;
+            string message = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -108,7 +108,7 @@ namespace azure_special_properties.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Error(Optional.ToNullable(status), constantId, message.Value, serializedAdditionalRawData);
+            return new Error(status, constantId, message, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<Error>.Write(ModelReaderWriterOptions options)

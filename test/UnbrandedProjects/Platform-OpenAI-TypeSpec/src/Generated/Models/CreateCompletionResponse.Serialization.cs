@@ -38,7 +38,7 @@ namespace OpenAI.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            if (OptionalProperty.IsDefined(Usage))
+            if (Usage != null)
             {
                 writer.WritePropertyName("usage"u8);
                 writer.WriteObjectValue(Usage);
@@ -86,7 +86,7 @@ namespace OpenAI.Models
             DateTimeOffset created = default;
             string model = default;
             IReadOnlyList<CreateCompletionResponseChoice> choices = default;
-            OptionalProperty<CompletionUsage> usage = default;
+            CompletionUsage usage = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -116,7 +116,7 @@ namespace OpenAI.Models
                     List<CreateCompletionResponseChoice> array = new List<CreateCompletionResponseChoice>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CreateCompletionResponseChoice.DeserializeCreateCompletionResponseChoice(item));
+                        array.Add(CreateCompletionResponseChoice.DeserializeCreateCompletionResponseChoice(item, options));
                     }
                     choices = array;
                     continue;
@@ -127,7 +127,7 @@ namespace OpenAI.Models
                     {
                         continue;
                     }
-                    usage = CompletionUsage.DeserializeCompletionUsage(property.Value);
+                    usage = CompletionUsage.DeserializeCompletionUsage(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")
@@ -136,7 +136,14 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new CreateCompletionResponse(id, @object, created, model, choices, usage.Value, serializedAdditionalRawData);
+            return new CreateCompletionResponse(
+                id,
+                @object,
+                created,
+                model,
+                choices,
+                usage,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<CreateCompletionResponse>.Write(ModelReaderWriterOptions options)

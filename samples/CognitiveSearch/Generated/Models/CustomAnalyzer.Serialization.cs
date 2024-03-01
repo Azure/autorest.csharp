@@ -18,7 +18,7 @@ namespace CognitiveSearch.Models
             writer.WriteStartObject();
             writer.WritePropertyName("tokenizer"u8);
             writer.WriteStringValue(Tokenizer.ToString());
-            if (Optional.IsCollectionDefined(TokenFilters))
+            if (!(TokenFilters is ChangeTrackingList<TokenFilterName> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("tokenFilters"u8);
                 writer.WriteStartArray();
@@ -28,7 +28,7 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(CharFilters))
+            if (!(CharFilters is ChangeTrackingList<CharFilterName> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("charFilters"u8);
                 writer.WriteStartArray();
@@ -52,8 +52,8 @@ namespace CognitiveSearch.Models
                 return null;
             }
             TokenizerName tokenizer = default;
-            Optional<IList<TokenFilterName>> tokenFilters = default;
-            Optional<IList<CharFilterName>> charFilters = default;
+            IList<TokenFilterName> tokenFilters = default;
+            IList<CharFilterName> charFilters = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
@@ -102,7 +102,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new CustomAnalyzer(odataType, name, tokenizer, Optional.ToList(tokenFilters), Optional.ToList(charFilters));
+            return new CustomAnalyzer(odataType, name, tokenizer, tokenFilters ?? new ChangeTrackingList<TokenFilterName>(), charFilters ?? new ChangeTrackingList<CharFilterName>());
         }
     }
 }

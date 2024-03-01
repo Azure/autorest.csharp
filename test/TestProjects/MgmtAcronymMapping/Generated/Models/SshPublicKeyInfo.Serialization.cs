@@ -15,12 +15,12 @@ namespace MgmtAcronymMapping.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Path))
+            if (Path != null)
             {
                 writer.WritePropertyName("path"u8);
                 writer.WriteStringValue(Path);
             }
-            if (Optional.IsDefined(KeyData))
+            if (KeyData != null)
             {
                 writer.WritePropertyName("keyData"u8);
                 writer.WriteStringValue(KeyData);
@@ -34,8 +34,8 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<string> path = default;
-            Optional<string> keyData = default;
+            string path = default;
+            string keyData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("path"u8))
@@ -49,7 +49,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new SshPublicKeyInfo(path.Value, keyData.Value);
+            return new SshPublicKeyInfo(path, keyData);
         }
     }
 }

@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
@@ -22,7 +21,7 @@ namespace CognitiveServices.TextAnalytics.Models
             string id = default;
             IReadOnlyList<Entity> entities = default;
             IReadOnlyList<TextAnalyticsWarning> warnings = default;
-            Optional<DocumentStatistics> statistics = default;
+            DocumentStatistics statistics = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -60,7 +59,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            return new DocumentEntities(id, entities, warnings, statistics.Value);
+            return new DocumentEntities(id, entities, warnings, statistics);
         }
     }
 }

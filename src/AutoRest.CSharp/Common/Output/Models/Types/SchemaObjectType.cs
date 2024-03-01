@@ -29,37 +29,33 @@ namespace AutoRest.CSharp.Output.Models.Types
     {
         private readonly SerializationBuilder _serializationBuilder;
         private readonly TypeFactory _typeFactory;
+        private readonly OutputLibrary? _library;
         private readonly SchemaTypeUsage _usage;
 
-        private readonly ModelTypeMapping? _sourceTypeMapping;
         private readonly IReadOnlyList<KnownMediaType> _supportedSerializationFormats;
 
         private ObjectTypeProperty? _additionalPropertiesProperty;
         private CSharpType? _implementsDictionaryType;
 
-        private BuildContext _context;
-
-        public SchemaObjectType(ObjectSchema objectSchema, BuildContext context)
-            : base(context)
+        public SchemaObjectType(ObjectSchema objectSchema, string defaultNamespace, TypeFactory typeFactory, SchemaUsageProvider schemaUsageProvider, OutputLibrary? library, SourceInputModel? sourceInputModel)
+            : base(defaultNamespace, sourceInputModel)
         {
-            _context = context;
             DefaultName = objectSchema.CSharpName();
-            DefaultNamespace = GetDefaultModelNamespace(objectSchema.Extensions?.Namespace, context.DefaultNamespace);
+            DefaultNamespace = GetDefaultModelNamespace(objectSchema.Extensions?.Namespace, defaultNamespace);
             ObjectSchema = objectSchema;
-            _typeFactory = context.TypeFactory;
+            _typeFactory = typeFactory;
+            _library = library;
             _serializationBuilder = new SerializationBuilder();
-            _usage = context.SchemaUsageProvider.GetUsage(ObjectSchema);
+            _usage = schemaUsageProvider.GetUsage(ObjectSchema);
 
             var hasUsage = _usage.HasFlag(SchemaTypeUsage.Model);
 
             DefaultAccessibility = objectSchema.Extensions?.Accessibility ?? (hasUsage ? "public" : "internal");
 
-            _sourceTypeMapping = context.SourceInputModel?.CreateForModel(ExistingType);
-
             // Update usage from code attribute
-            if (_sourceTypeMapping?.Usage != null)
+            if (ModelTypeMapping?.Usage != null)
             {
-                foreach (var usage in _sourceTypeMapping.Usage)
+                foreach (var usage in ModelTypeMapping.Usage)
                 {
                     _usage |= Enum.Parse<SchemaTypeUsage>(usage, true);
                 }
@@ -71,7 +67,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 _usage |= Enum.Parse<SchemaTypeUsage>(objectSchema.Extensions?.Usage!, true);
             }
 
-            _supportedSerializationFormats = GetSupportedSerializationFormats(objectSchema, _sourceTypeMapping);
+            _supportedSerializationFormats = GetSupportedSerializationFormats(objectSchema, ModelTypeMapping);
             IsUnknownDerivedType = objectSchema.IsUnknownDiscriminatorModel;
             // we skip the init ctor when there is an extension telling us to, or when this is an unknown derived type in a discriminated set
             SkipInitializerConstructor = ObjectSchema is { Extensions.SkipInitCtor: true } || IsUnknownDerivedType;
@@ -102,7 +98,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 // We use a $ prefix here as AdditionalProperties comes from a swagger concept
                 // and not a swagger model/operation name to disambiguate from a possible property with
                 // the same name.
-                var existingMember = _sourceTypeMapping?.GetMemberByOriginalName("$AdditionalProperties");
+                var existingMember = ModelTypeMapping?.GetMemberByOriginalName("$AdditionalProperties");
 
                 _additionalPropertiesProperty = new ObjectTypeProperty(
                     BuilderHelpers.CreateMemberDeclaration("AdditionalProperties", ImplementsDictionaryType, "public", existingMember, _typeFactory),
@@ -116,6 +112,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         private ObjectTypeProperty? _rawDataField;
+        protected internal override InputModelTypeUsage GetUsage() => (InputModelTypeUsage) _usage;
+
         public override ObjectTypeProperty? RawDataField
         {
             get
@@ -322,7 +320,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                         defaultParameterValue = Constant.Default(inputType);
                     }
 
-                    var validate = property.SchemaProperty?.Nullable != true && !inputType.IsValueType ? ValidationType.AssertNotNull : ValidationType.None;
+                    var validate = property.SchemaProperty?.Nullable != true && !inputType.IsValueType && property.SchemaProperty?.IsReadOnly != true ? ValidationType.AssertNotNull : ValidationType.None;
                     var defaultCtorParameter = new Parameter(
                         property.Declaration.Name.ToVariableName(),
                         property.ParameterDescription,
@@ -503,9 +501,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected ObjectTypeProperty CreateProperty(Property property)
         {
             var name = BuilderHelpers.DisambiguateName(Type, property.CSharpName());
-            var existingMember = _sourceTypeMapping?.GetMemberByOriginalName(name);
-
-            var serializationMapping = _sourceTypeMapping?.GetForMemberSerialization(existingMember);
+            var existingMember = ModelTypeMapping?.GetMemberByOriginalName(name);
 
             var accessibility = property.IsDiscriminator == true ? "internal" : "public";
 
@@ -574,8 +570,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 propertyShouldOmitSetter,
                 property,
                 valueType,
-                optionalViaNullability,
-                serializationMapping);
+                optionalViaNullability);
             return objectTypeProperty;
         }
 
@@ -739,14 +734,14 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return _defaultDerivedType;
 
             _hasCalculatedDefaultDerivedType = true;
-            if (_context.BaseLibrary is null)
+            if (_library is null)
                 return null;
 
             var defaultDerivedSchema = ObjectSchema.GetDefaultDerivedSchema();
             if (defaultDerivedSchema is null)
                 return null;
 
-            return _context.BaseLibrary.FindTypeProviderForSchema(defaultDerivedSchema) as SerializableObjectType;
+            return _library.FindTypeProviderForSchema(defaultDerivedSchema) as SerializableObjectType;
         }
     }
 }

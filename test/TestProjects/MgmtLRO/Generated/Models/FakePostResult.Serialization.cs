@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace MgmtLRO.Models
 {
@@ -18,7 +17,7 @@ namespace MgmtLRO.Models
             {
                 return null;
             }
-            Optional<FakePostResultProperties> properties = default;
+            FakePostResultProperties properties = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("properties"u8))
@@ -31,7 +30,7 @@ namespace MgmtLRO.Models
                     continue;
                 }
             }
-            return new FakePostResult(properties.Value);
+            return new FakePostResult(properties);
         }
     }
 }

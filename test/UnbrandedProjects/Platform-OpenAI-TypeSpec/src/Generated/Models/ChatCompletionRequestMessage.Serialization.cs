@@ -34,12 +34,12 @@ namespace OpenAI.Models
             {
                 writer.WriteNull("content");
             }
-            if (OptionalProperty.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (OptionalProperty.IsDefined(FunctionCall))
+            if (FunctionCall != null)
             {
                 writer.WritePropertyName("function_call"u8);
                 writer.WriteObjectValue(FunctionCall);
@@ -84,8 +84,8 @@ namespace OpenAI.Models
             }
             ChatCompletionRequestMessageRole role = default;
             string content = default;
-            OptionalProperty<string> name = default;
-            OptionalProperty<ChatCompletionRequestMessageFunctionCall> functionCall = default;
+            string name = default;
+            ChatCompletionRequestMessageFunctionCall functionCall = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -116,7 +116,7 @@ namespace OpenAI.Models
                     {
                         continue;
                     }
-                    functionCall = ChatCompletionRequestMessageFunctionCall.DeserializeChatCompletionRequestMessageFunctionCall(property.Value);
+                    functionCall = ChatCompletionRequestMessageFunctionCall.DeserializeChatCompletionRequestMessageFunctionCall(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")
@@ -125,7 +125,7 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ChatCompletionRequestMessage(role, content, name.Value, functionCall.Value, serializedAdditionalRawData);
+            return new ChatCompletionRequestMessage(role, content, name, functionCall, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ChatCompletionRequestMessage>.Write(ModelReaderWriterOptions options)

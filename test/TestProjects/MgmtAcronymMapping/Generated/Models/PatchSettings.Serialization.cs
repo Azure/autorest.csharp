@@ -15,7 +15,7 @@ namespace MgmtAcronymMapping.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(PatchMode))
+            if (PatchMode.HasValue)
             {
                 writer.WritePropertyName("patchMode"u8);
                 writer.WriteStringValue(PatchMode.Value.ToString());
@@ -29,7 +29,7 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<InGuestPatchMode> patchMode = default;
+            InGuestPatchMode? patchMode = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("patchMode"u8))
@@ -42,7 +42,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new PatchSettings(Optional.ToNullable(patchMode));
+            return new PatchSettings(patchMode);
         }
     }
 }

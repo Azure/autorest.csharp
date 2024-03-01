@@ -17,12 +17,12 @@ namespace MgmtAcronymMapping.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(SourceVault))
+            if (SourceVault != null)
             {
                 writer.WritePropertyName("sourceVault"u8);
                 JsonSerializer.Serialize(writer, SourceVault);
             }
-            if (Optional.IsCollectionDefined(VaultCertificates))
+            if (!(VaultCertificates is ChangeTrackingList<VaultCertificate> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("vaultCertificates"u8);
                 writer.WriteStartArray();
@@ -41,8 +41,8 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<WritableSubResource> sourceVault = default;
-            Optional<IList<VaultCertificate>> vaultCertificates = default;
+            WritableSubResource sourceVault = default;
+            IList<VaultCertificate> vaultCertificates = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sourceVault"u8))
@@ -69,7 +69,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VaultSecretGroup(sourceVault, Optional.ToList(vaultCertificates));
+            return new VaultSecretGroup(sourceVault, vaultCertificates ?? new ChangeTrackingList<VaultCertificate>());
         }
     }
 }

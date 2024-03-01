@@ -72,8 +72,18 @@ namespace MgmtDiscriminator
         /// <exception cref="ArgumentNullException"> <paramref name="artifactName"/> or <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<ArtifactResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string artifactName, ArtifactData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(artifactName, nameof(artifactName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (artifactName == null)
+            {
+                throw new ArgumentNullException(nameof(artifactName));
+            }
+            if (artifactName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(artifactName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _artifactClientDiagnostics.CreateScope("ArtifactCollection.CreateOrUpdate");
             scope.Start();
@@ -121,8 +131,18 @@ namespace MgmtDiscriminator
         /// <exception cref="ArgumentNullException"> <paramref name="artifactName"/> or <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<ArtifactResource> CreateOrUpdate(WaitUntil waitUntil, string artifactName, ArtifactData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(artifactName, nameof(artifactName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (artifactName == null)
+            {
+                throw new ArgumentNullException(nameof(artifactName));
+            }
+            if (artifactName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(artifactName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _artifactClientDiagnostics.CreateScope("ArtifactCollection.CreateOrUpdate");
             scope.Start();
@@ -168,7 +188,14 @@ namespace MgmtDiscriminator
         /// <exception cref="ArgumentNullException"> <paramref name="artifactName"/> is null. </exception>
         public virtual async Task<Response<ArtifactResource>> GetAsync(string artifactName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(artifactName, nameof(artifactName));
+            if (artifactName == null)
+            {
+                throw new ArgumentNullException(nameof(artifactName));
+            }
+            if (artifactName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(artifactName));
+            }
 
             using var scope = _artifactClientDiagnostics.CreateScope("ArtifactCollection.Get");
             scope.Start();
@@ -213,7 +240,14 @@ namespace MgmtDiscriminator
         /// <exception cref="ArgumentNullException"> <paramref name="artifactName"/> is null. </exception>
         public virtual Response<ArtifactResource> Get(string artifactName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(artifactName, nameof(artifactName));
+            if (artifactName == null)
+            {
+                throw new ArgumentNullException(nameof(artifactName));
+            }
+            if (artifactName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(artifactName));
+            }
 
             using var scope = _artifactClientDiagnostics.CreateScope("ArtifactCollection.Get");
             scope.Start();
@@ -318,7 +352,14 @@ namespace MgmtDiscriminator
         /// <exception cref="ArgumentNullException"> <paramref name="artifactName"/> is null. </exception>
         public virtual async Task<Response<bool>> ExistsAsync(string artifactName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(artifactName, nameof(artifactName));
+            if (artifactName == null)
+            {
+                throw new ArgumentNullException(nameof(artifactName));
+            }
+            if (artifactName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(artifactName));
+            }
 
             using var scope = _artifactClientDiagnostics.CreateScope("ArtifactCollection.Exists");
             scope.Start();
@@ -361,7 +402,14 @@ namespace MgmtDiscriminator
         /// <exception cref="ArgumentNullException"> <paramref name="artifactName"/> is null. </exception>
         public virtual Response<bool> Exists(string artifactName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(artifactName, nameof(artifactName));
+            if (artifactName == null)
+            {
+                throw new ArgumentNullException(nameof(artifactName));
+            }
+            if (artifactName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(artifactName));
+            }
 
             using var scope = _artifactClientDiagnostics.CreateScope("ArtifactCollection.Exists");
             scope.Start();
@@ -404,7 +452,14 @@ namespace MgmtDiscriminator
         /// <exception cref="ArgumentNullException"> <paramref name="artifactName"/> is null. </exception>
         public virtual async Task<NullableResponse<ArtifactResource>> GetIfExistsAsync(string artifactName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(artifactName, nameof(artifactName));
+            if (artifactName == null)
+            {
+                throw new ArgumentNullException(nameof(artifactName));
+            }
+            if (artifactName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(artifactName));
+            }
 
             using var scope = _artifactClientDiagnostics.CreateScope("ArtifactCollection.GetIfExists");
             scope.Start();
@@ -449,7 +504,14 @@ namespace MgmtDiscriminator
         /// <exception cref="ArgumentNullException"> <paramref name="artifactName"/> is null. </exception>
         public virtual NullableResponse<ArtifactResource> GetIfExists(string artifactName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(artifactName, nameof(artifactName));
+            if (artifactName == null)
+            {
+                throw new ArgumentNullException(nameof(artifactName));
+            }
+            if (artifactName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(artifactName));
+            }
 
             using var scope = _artifactClientDiagnostics.CreateScope("ArtifactCollection.GetIfExists");
             scope.Start();

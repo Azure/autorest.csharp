@@ -85,7 +85,7 @@ namespace AnomalyDetector.Models
                     List<VariableValues> array = new List<VariableValues>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(VariableValues.DeserializeVariableValues(item));
+                        array.Add(VariableValues.DeserializeVariableValues(item, options));
                     }
                     variables = array;
                     continue;

@@ -16,34 +16,34 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Id))
+            if (Id != null)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(LinkedResourceType))
+            if (LinkedResourceType != null)
             {
                 writer.WritePropertyName("linkedResourceType"u8);
                 writer.WriteStringValue(LinkedResourceType);
             }
-            if (Optional.IsDefined(Link))
+            if (Link != null)
             {
                 writer.WritePropertyName("link"u8);
                 writer.WriteStringValue(Link);
             }
-            if (Optional.IsDefined(AllowDelete))
+            if (AllowDelete.HasValue)
             {
                 writer.WritePropertyName("allowDelete"u8);
                 writer.WriteBooleanValue(AllowDelete.Value);
             }
-            if (Optional.IsCollectionDefined(Locations))
+            if (!(Locations is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("locations"u8);
                 writer.WriteStartArray();
@@ -63,15 +63,15 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> etag = default;
-            Optional<string> type = default;
-            Optional<string> id = default;
-            Optional<string> linkedResourceType = default;
-            Optional<string> link = default;
-            Optional<ProvisioningState> provisioningState = default;
-            Optional<bool> allowDelete = default;
-            Optional<IList<string>> locations = default;
+            string name = default;
+            string etag = default;
+            string type = default;
+            string id = default;
+            string linkedResourceType = default;
+            string link = default;
+            ProvisioningState? provisioningState = default;
+            bool? allowDelete = default;
+            IList<string> locations = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -149,7 +149,16 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new ServiceAssociationLink(id.Value, name.Value, etag.Value, type.Value, linkedResourceType.Value, link.Value, Optional.ToNullable(provisioningState), Optional.ToNullable(allowDelete), Optional.ToList(locations));
+            return new ServiceAssociationLink(
+                id,
+                name,
+                etag,
+                type,
+                linkedResourceType,
+                link,
+                provisioningState,
+                allowDelete,
+                locations ?? new ChangeTrackingList<string>());
         }
     }
 }

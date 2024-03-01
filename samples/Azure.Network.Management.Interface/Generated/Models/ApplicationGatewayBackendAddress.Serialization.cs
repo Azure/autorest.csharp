@@ -15,12 +15,12 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Fqdn))
+            if (Fqdn != null)
             {
                 writer.WritePropertyName("fqdn"u8);
                 writer.WriteStringValue(Fqdn);
             }
-            if (Optional.IsDefined(IpAddress))
+            if (IpAddress != null)
             {
                 writer.WritePropertyName("ipAddress"u8);
                 writer.WriteStringValue(IpAddress);
@@ -34,8 +34,8 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> fqdn = default;
-            Optional<string> ipAddress = default;
+            string fqdn = default;
+            string ipAddress = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("fqdn"u8))
@@ -49,7 +49,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new ApplicationGatewayBackendAddress(fqdn.Value, ipAddress.Value);
+            return new ApplicationGatewayBackendAddress(fqdn, ipAddress);
         }
     }
 }

@@ -15,12 +15,12 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(IpTagType))
+            if (IpTagType != null)
             {
                 writer.WritePropertyName("ipTagType"u8);
                 writer.WriteStringValue(IpTagType);
             }
-            if (Optional.IsDefined(Tag))
+            if (Tag != null)
             {
                 writer.WritePropertyName("tag"u8);
                 writer.WriteStringValue(Tag);
@@ -34,8 +34,8 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> ipTagType = default;
-            Optional<string> tag = default;
+            string ipTagType = default;
+            string tag = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("ipTagType"u8))
@@ -49,7 +49,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new IpTag(ipTagType.Value, tag.Value);
+            return new IpTag(ipTagType, tag);
         }
     }
 }

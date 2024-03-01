@@ -26,7 +26,7 @@ namespace xms_error_responses.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(ActionResponse))
+            if (ActionResponse != null)
             {
                 writer.WritePropertyName("actionResponse"u8);
                 writer.WriteStringValue(ActionResponse);
@@ -69,7 +69,7 @@ namespace xms_error_responses.Models
             {
                 return null;
             }
-            Optional<string> actionResponse = default;
+            string actionResponse = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -85,7 +85,7 @@ namespace xms_error_responses.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new PetAction(actionResponse.Value, serializedAdditionalRawData);
+            return new PetAction(actionResponse, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<PetAction>.Write(ModelReaderWriterOptions options)

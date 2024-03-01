@@ -26,7 +26,7 @@ namespace httpInfrastructure.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(StatusCode))
+            if (StatusCode != null)
             {
                 writer.WritePropertyName("statusCode"u8);
                 writer.WriteStringValue(StatusCode);
@@ -69,7 +69,7 @@ namespace httpInfrastructure.Models
             {
                 return null;
             }
-            Optional<string> statusCode = default;
+            string statusCode = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -85,7 +85,7 @@ namespace httpInfrastructure.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new MyException(statusCode.Value, serializedAdditionalRawData);
+            return new MyException(statusCode, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<MyException>.Write(ModelReaderWriterOptions options)

@@ -29,7 +29,7 @@ namespace ModelsTypeSpec.Models
             writer.WriteStartObject();
             writer.WritePropertyName("message"u8);
             writer.WriteStringValue(Message);
-            if (Optional.IsDefined(Inner))
+            if (Inner != null)
             {
                 writer.WritePropertyName("inner"u8);
                 writer.WriteObjectValue(Inner);
@@ -73,7 +73,7 @@ namespace ModelsTypeSpec.Models
                 return null;
             }
             string message = default;
-            Optional<RoundTripRecursiveModel> inner = default;
+            RoundTripRecursiveModel inner = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -89,7 +89,7 @@ namespace ModelsTypeSpec.Models
                     {
                         continue;
                     }
-                    inner = DeserializeRoundTripRecursiveModel(property.Value);
+                    inner = DeserializeRoundTripRecursiveModel(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")
@@ -98,7 +98,7 @@ namespace ModelsTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new RoundTripRecursiveModel(message, inner.Value, serializedAdditionalRawData);
+            return new RoundTripRecursiveModel(message, inner, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<RoundTripRecursiveModel>.Write(ModelReaderWriterOptions options)

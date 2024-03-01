@@ -27,7 +27,7 @@ namespace FirstTestTypeSpec.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Extension))
+            if (!(Extension is ChangeTrackingList<ThereLevelExtension> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("extension"u8);
                 writer.WriteStartArray();
@@ -75,7 +75,7 @@ namespace FirstTestTypeSpec.Models
             {
                 return null;
             }
-            Optional<IList<ThereLevelExtension>> extension = default;
+            IList<ThereLevelExtension> extension = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -89,7 +89,7 @@ namespace FirstTestTypeSpec.Models
                     List<ThereLevelExtension> array = new List<ThereLevelExtension>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ThereLevelExtension.DeserializeThereLevelExtension(item));
+                        array.Add(ThereLevelExtension.DeserializeThereLevelExtension(item, options));
                     }
                     extension = array;
                     continue;
@@ -100,7 +100,7 @@ namespace FirstTestTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ThereLevelElement(Optional.ToList(extension), serializedAdditionalRawData);
+            return new ThereLevelElement(extension ?? new ChangeTrackingList<ThereLevelExtension>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ThereLevelElement>.Write(ModelReaderWriterOptions options)

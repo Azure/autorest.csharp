@@ -27,12 +27,12 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(TokenType))
+            if (TokenType.HasValue)
             {
                 writer.WritePropertyName("tokenType"u8);
                 writer.WriteStringValue(TokenType.Value.ToString());
             }
-            if (Optional.IsDefined(Attributes))
+            if (Attributes.HasValue)
             {
                 writer.WritePropertyName("attributes"u8);
                 writer.WriteStringValue(Attributes.Value.ToString());
@@ -75,8 +75,8 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             {
                 return null;
             }
-            Optional<ResourceTypeAliasPathTokenType> tokenType = default;
-            Optional<ResourceTypeAliasPathAttributes> attributes = default;
+            ResourceTypeAliasPathTokenType? tokenType = default;
+            ResourceTypeAliasPathAttributes? attributes = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -105,7 +105,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ResourceTypeAliasPathMetadata(Optional.ToNullable(tokenType), Optional.ToNullable(attributes), serializedAdditionalRawData);
+            return new ResourceTypeAliasPathMetadata(tokenType, attributes, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ResourceTypeAliasPathMetadata>.Write(ModelReaderWriterOptions options)

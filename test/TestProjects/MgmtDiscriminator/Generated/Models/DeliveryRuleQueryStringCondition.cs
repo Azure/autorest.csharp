@@ -6,7 +6,7 @@
 #nullable disable
 
 using System;
-using Azure.Core;
+using System.Collections.Generic;
 
 namespace MgmtDiscriminator.Models
 {
@@ -18,7 +18,10 @@ namespace MgmtDiscriminator.Models
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public DeliveryRuleQueryStringCondition(QueryStringMatchConditionParameters parameters)
         {
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
 
             Parameters = parameters;
             Name = MatchVariable.QueryString;
@@ -27,14 +30,21 @@ namespace MgmtDiscriminator.Models
         /// <summary> Initializes a new instance of <see cref="DeliveryRuleQueryStringCondition"/>. </summary>
         /// <param name="name"> The name of the condition for the delivery rule. </param>
         /// <param name="foo"> For test. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="parameters"> Defines the parameters for the condition. </param>
-        internal DeliveryRuleQueryStringCondition(MatchVariable name, string foo, QueryStringMatchConditionParameters parameters) : base(name, foo)
+        internal DeliveryRuleQueryStringCondition(MatchVariable name, string foo, IDictionary<string, BinaryData> serializedAdditionalRawData, QueryStringMatchConditionParameters parameters) : base(name, foo, serializedAdditionalRawData)
         {
             Parameters = parameters;
             Name = name;
         }
 
+        /// <summary> Initializes a new instance of <see cref="DeliveryRuleQueryStringCondition"/> for deserialization. </summary>
+        internal DeliveryRuleQueryStringCondition()
+        {
+        }
+
         /// <summary> Defines the parameters for the condition. </summary>
+        [WirePath("parameters")]
         public QueryStringMatchConditionParameters Parameters { get; set; }
     }
 }

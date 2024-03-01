@@ -26,17 +26,17 @@ namespace model_flattening.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && Optional.IsDefined(Id))
+            if (options.Format != "W" && Id != null)
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format != "W" && Optional.IsDefined(Type))
+            if (options.Format != "W" && Type != null)
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(Type);
             }
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -47,34 +47,34 @@ namespace model_flattening.Models
                 }
                 writer.WriteEndObject();
             }
-            if (Optional.IsDefined(Location))
+            if (Location != null)
             {
                 writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location);
             }
-            if (options.Format != "W" && Optional.IsDefined(Name))
+            if (options.Format != "W" && Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(PName))
+            if (PName != null)
             {
                 writer.WritePropertyName("p.name"u8);
                 writer.WriteStringValue(PName);
             }
-            if (Optional.IsDefined(TypePropertiesType))
+            if (TypePropertiesType != null)
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(TypePropertiesType);
             }
-            if (options.Format != "W" && Optional.IsDefined(ProvisioningStateValues))
+            if (options.Format != "W" && ProvisioningStateValues.HasValue)
             {
                 writer.WritePropertyName("provisioningStateValues"u8);
                 writer.WriteStringValue(ProvisioningStateValues.Value.ToString());
             }
-            if (Optional.IsDefined(ProvisioningState))
+            if (ProvisioningState != null)
             {
                 writer.WritePropertyName("provisioningState"u8);
                 writer.WriteStringValue(ProvisioningState);
@@ -118,15 +118,15 @@ namespace model_flattening.Models
             {
                 return null;
             }
-            Optional<string> id = default;
-            Optional<string> type = default;
-            Optional<IDictionary<string, string>> tags = default;
-            Optional<string> location = default;
-            Optional<string> name = default;
-            Optional<string> pName = default;
-            Optional<string> type0 = default;
-            Optional<FlattenedProductPropertiesProvisioningStateValues> provisioningStateValues = default;
-            Optional<string> provisioningState = default;
+            string id = default;
+            string type = default;
+            IDictionary<string, string> tags = default;
+            string location = default;
+            string name = default;
+            string pName = default;
+            string type0 = default;
+            FlattenedProductPropertiesProvisioningStateValues? provisioningStateValues = default;
+            string provisioningState = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -207,7 +207,17 @@ namespace model_flattening.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new FlattenedProduct(id.Value, type.Value, Optional.ToDictionary(tags), location.Value, name.Value, serializedAdditionalRawData, pName.Value, type0.Value, Optional.ToNullable(provisioningStateValues), provisioningState.Value);
+            return new FlattenedProduct(
+                id,
+                type,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                name,
+                serializedAdditionalRawData,
+                pName,
+                type0,
+                provisioningStateValues,
+                provisioningState);
         }
 
         BinaryData IPersistableModel<FlattenedProduct>.Write(ModelReaderWriterOptions options)

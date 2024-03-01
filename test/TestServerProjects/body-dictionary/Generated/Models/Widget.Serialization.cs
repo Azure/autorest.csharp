@@ -26,12 +26,12 @@ namespace body_dictionary.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Integer))
+            if (Integer.HasValue)
             {
                 writer.WritePropertyName("integer"u8);
                 writer.WriteNumberValue(Integer.Value);
             }
-            if (Optional.IsDefined(String))
+            if (String != null)
             {
                 writer.WritePropertyName("string"u8);
                 writer.WriteStringValue(String);
@@ -74,8 +74,8 @@ namespace body_dictionary.Models
             {
                 return null;
             }
-            Optional<int> integer = default;
-            Optional<string> @string = default;
+            int? integer = default;
+            string @string = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -100,7 +100,7 @@ namespace body_dictionary.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Widget(Optional.ToNullable(integer), @string.Value, serializedAdditionalRawData);
+            return new Widget(integer, @string, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<Widget>.Write(ModelReaderWriterOptions options)

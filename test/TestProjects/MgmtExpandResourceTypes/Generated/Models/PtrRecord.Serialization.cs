@@ -15,7 +15,7 @@ namespace MgmtExpandResourceTypes.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Ptrdname))
+            if (Ptrdname != null)
             {
                 writer.WritePropertyName("ptrdname"u8);
                 writer.WriteStringValue(Ptrdname);
@@ -29,7 +29,7 @@ namespace MgmtExpandResourceTypes.Models
             {
                 return null;
             }
-            Optional<string> ptrdname = default;
+            string ptrdname = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("ptrdname"u8))
@@ -38,7 +38,7 @@ namespace MgmtExpandResourceTypes.Models
                     continue;
                 }
             }
-            return new PtrRecord(ptrdname.Value);
+            return new PtrRecord(ptrdname);
         }
     }
 }

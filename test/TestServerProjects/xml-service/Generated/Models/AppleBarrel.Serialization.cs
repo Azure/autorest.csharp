@@ -20,7 +20,7 @@ namespace xml_service.Models
         private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "AppleBarrel");
-            if (Optional.IsCollectionDefined(GoodApples))
+            if (!(GoodApples is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WriteStartElement("GoodApples");
                 foreach (var item in GoodApples)
@@ -31,7 +31,7 @@ namespace xml_service.Models
                 }
                 writer.WriteEndElement();
             }
-            if (Optional.IsCollectionDefined(BadApples))
+            if (!(BadApples is ChangeTrackingList<string> collection0 && collection0.IsUndefined))
             {
                 writer.WriteStartElement("BadApples");
                 foreach (var item in BadApples)

@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Storage.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Smb))
+            if (Smb != null)
             {
                 writer.WritePropertyName("smb"u8);
                 writer.WriteObjectValue(Smb);
@@ -29,7 +29,7 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Optional<SmbSetting> smb = default;
+            SmbSetting smb = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("smb"u8))
@@ -42,7 +42,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new ProtocolSettings(smb.Value);
+            return new ProtocolSettings(smb);
         }
     }
 }

@@ -28,14 +28,14 @@ namespace body_complex.Models
             writer.WriteStartObject();
             writer.WritePropertyName("fishtype"u8);
             writer.WriteStringValue(Fishtype);
-            if (Optional.IsDefined(Species))
+            if (Species != null)
             {
                 writer.WritePropertyName("species"u8);
                 writer.WriteStringValue(Species);
             }
             writer.WritePropertyName("length"u8);
             writer.WriteNumberValue(Length);
-            if (Optional.IsCollectionDefined(Siblings))
+            if (!(Siblings is ChangeTrackingList<Fish> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("siblings"u8);
                 writer.WriteStartArray();
@@ -87,15 +87,15 @@ namespace body_complex.Models
             {
                 switch (discriminator.GetString())
                 {
-                    case "cookiecuttershark": return Cookiecuttershark.DeserializeCookiecuttershark(element);
-                    case "goblin": return Goblinshark.DeserializeGoblinshark(element);
-                    case "salmon": return Salmon.DeserializeSalmon(element);
-                    case "sawshark": return Sawshark.DeserializeSawshark(element);
-                    case "shark": return Shark.DeserializeShark(element);
-                    case "smart_salmon": return SmartSalmon.DeserializeSmartSalmon(element);
+                    case "cookiecuttershark": return Cookiecuttershark.DeserializeCookiecuttershark(element, options);
+                    case "goblin": return Goblinshark.DeserializeGoblinshark(element, options);
+                    case "salmon": return Salmon.DeserializeSalmon(element, options);
+                    case "sawshark": return Sawshark.DeserializeSawshark(element, options);
+                    case "shark": return Shark.DeserializeShark(element, options);
+                    case "smart_salmon": return SmartSalmon.DeserializeSmartSalmon(element, options);
                 }
             }
-            return UnknownFish.DeserializeUnknownFish(element);
+            return UnknownFish.DeserializeUnknownFish(element, options);
         }
 
         BinaryData IPersistableModel<Fish>.Write(ModelReaderWriterOptions options)

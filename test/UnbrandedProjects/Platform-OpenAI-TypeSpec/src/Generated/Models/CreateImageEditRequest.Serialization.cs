@@ -27,12 +27,12 @@ namespace OpenAI.Models
             writer.WriteStringValue(Prompt);
             writer.WritePropertyName("image"u8);
             writer.WriteBase64StringValue(Image.ToArray(), "D");
-            if (OptionalProperty.IsDefined(Mask))
+            if (Mask != null)
             {
                 writer.WritePropertyName("mask"u8);
                 writer.WriteBase64StringValue(Mask.ToArray(), "D");
             }
-            if (OptionalProperty.IsDefined(N))
+            if (N.HasValue)
             {
                 if (N != null)
                 {
@@ -44,17 +44,17 @@ namespace OpenAI.Models
                     writer.WriteNull("n");
                 }
             }
-            if (OptionalProperty.IsDefined(Size))
+            if (Size.HasValue)
             {
                 writer.WritePropertyName("size"u8);
                 writer.WriteStringValue(Size.Value.ToString());
             }
-            if (OptionalProperty.IsDefined(ResponseFormat))
+            if (ResponseFormat.HasValue)
             {
                 writer.WritePropertyName("response_format"u8);
                 writer.WriteStringValue(ResponseFormat.Value.ToString());
             }
-            if (OptionalProperty.IsDefined(User))
+            if (User != null)
             {
                 writer.WritePropertyName("user"u8);
                 writer.WriteStringValue(User);
@@ -99,11 +99,11 @@ namespace OpenAI.Models
             }
             string prompt = default;
             BinaryData image = default;
-            OptionalProperty<BinaryData> mask = default;
-            OptionalProperty<long?> n = default;
-            OptionalProperty<CreateImageEditRequestSize> size = default;
-            OptionalProperty<CreateImageEditRequestResponseFormat> responseFormat = default;
-            OptionalProperty<string> user = default;
+            BinaryData mask = default;
+            long? n = default;
+            CreateImageEditRequestSize? size = default;
+            CreateImageEditRequestResponseFormat? responseFormat = default;
+            string user = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -166,7 +166,15 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new CreateImageEditRequest(prompt, image, mask.Value, OptionalProperty.ToNullable(n), OptionalProperty.ToNullable(size), OptionalProperty.ToNullable(responseFormat), user.Value, serializedAdditionalRawData);
+            return new CreateImageEditRequest(
+                prompt,
+                image,
+                mask,
+                n,
+                size,
+                responseFormat,
+                user,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<CreateImageEditRequest>.Write(ModelReaderWriterOptions options)

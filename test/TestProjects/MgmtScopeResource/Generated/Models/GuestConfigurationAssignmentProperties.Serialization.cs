@@ -16,7 +16,7 @@ namespace MgmtScopeResource.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Context))
+            if (Context != null)
             {
                 writer.WritePropertyName("context"u8);
                 writer.WriteStringValue(Context);
@@ -30,15 +30,15 @@ namespace MgmtScopeResource.Models
             {
                 return null;
             }
-            Optional<string> targetResourceId = default;
-            Optional<ComplianceStatus> complianceStatus = default;
-            Optional<DateTimeOffset?> lastComplianceStatusChecked = default;
-            Optional<string> latestReportId = default;
-            Optional<string> parameterHash = default;
-            Optional<string> context = default;
-            Optional<string> assignmentHash = default;
-            Optional<ProvisioningState?> provisioningState = default;
-            Optional<string> resourceType = default;
+            string targetResourceId = default;
+            ComplianceStatus? complianceStatus = default;
+            DateTimeOffset? lastComplianceStatusChecked = default;
+            string latestReportId = default;
+            string parameterHash = default;
+            string context = default;
+            string assignmentHash = default;
+            ProvisioningState? provisioningState = default;
+            string resourceType = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("targetResourceId"u8))
@@ -126,7 +126,16 @@ namespace MgmtScopeResource.Models
                     continue;
                 }
             }
-            return new GuestConfigurationAssignmentProperties(targetResourceId.Value, Optional.ToNullable(complianceStatus), Optional.ToNullable(lastComplianceStatusChecked), latestReportId.Value, parameterHash.Value, context.Value, assignmentHash.Value, Optional.ToNullable(provisioningState), resourceType.Value);
+            return new GuestConfigurationAssignmentProperties(
+                targetResourceId,
+                complianceStatus,
+                lastComplianceStatusChecked,
+                latestReportId,
+                parameterHash,
+                context,
+                assignmentHash,
+                provisioningState,
+                resourceType);
         }
     }
 }

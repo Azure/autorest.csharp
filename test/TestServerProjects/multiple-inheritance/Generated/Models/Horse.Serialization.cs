@@ -26,7 +26,7 @@ namespace multiple_inheritance.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(IsAShowHorse))
+            if (IsAShowHorse.HasValue)
             {
                 writer.WritePropertyName("isAShowHorse"u8);
                 writer.WriteBooleanValue(IsAShowHorse.Value);
@@ -71,7 +71,7 @@ namespace multiple_inheritance.Models
             {
                 return null;
             }
-            Optional<bool> isAShowHorse = default;
+            bool? isAShowHorse = default;
             string name = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -97,7 +97,7 @@ namespace multiple_inheritance.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Horse(name, serializedAdditionalRawData, Optional.ToNullable(isAShowHorse));
+            return new Horse(name, serializedAdditionalRawData, isAShowHorse);
         }
 
         BinaryData IPersistableModel<Horse>.Write(ModelReaderWriterOptions options)

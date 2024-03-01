@@ -34,7 +34,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            if (Optional.IsDefined(OptionalPropertyOnBase))
+            if (OptionalPropertyOnBase != null)
             {
                 writer.WritePropertyName("optionalPropertyOnBase"u8);
                 writer.WriteStringValue(OptionalPropertyOnBase);
@@ -78,7 +78,7 @@ namespace ModelsTypeSpec.Models
                 return null;
             }
             IList<CollectionItem> requiredList = default;
-            Optional<string> optionalPropertyOnBase = default;
+            string optionalPropertyOnBase = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -88,7 +88,7 @@ namespace ModelsTypeSpec.Models
                     List<CollectionItem> array = new List<CollectionItem>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CollectionItem.DeserializeCollectionItem(item));
+                        array.Add(CollectionItem.DeserializeCollectionItem(item, options));
                     }
                     requiredList = array;
                     continue;
@@ -104,7 +104,7 @@ namespace ModelsTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DerivedModelWithProperties(optionalPropertyOnBase.Value, serializedAdditionalRawData, requiredList);
+            return new DerivedModelWithProperties(optionalPropertyOnBase, serializedAdditionalRawData, requiredList);
         }
 
         BinaryData IPersistableModel<DerivedModelWithProperties>.Write(ModelReaderWriterOptions options)

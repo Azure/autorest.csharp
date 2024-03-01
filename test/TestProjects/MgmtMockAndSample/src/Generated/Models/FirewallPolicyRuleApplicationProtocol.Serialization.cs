@@ -15,12 +15,12 @@ namespace MgmtMockAndSample.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(ProtocolType))
+            if (ProtocolType.HasValue)
             {
                 writer.WritePropertyName("protocolType"u8);
                 writer.WriteStringValue(ProtocolType.Value.ToString());
             }
-            if (Optional.IsDefined(Port))
+            if (Port.HasValue)
             {
                 writer.WritePropertyName("port"u8);
                 writer.WriteNumberValue(Port.Value);
@@ -34,8 +34,8 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<FirewallPolicyRuleApplicationProtocolType> protocolType = default;
-            Optional<int> port = default;
+            FirewallPolicyRuleApplicationProtocolType? protocolType = default;
+            int? port = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("protocolType"u8))
@@ -57,7 +57,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new FirewallPolicyRuleApplicationProtocol(Optional.ToNullable(protocolType), Optional.ToNullable(port));
+            return new FirewallPolicyRuleApplicationProtocol(protocolType, port);
         }
     }
 }

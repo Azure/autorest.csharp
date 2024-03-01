@@ -15,12 +15,12 @@ namespace MgmtPartialResource.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(ConfigurationProfile))
+            if (ConfigurationProfile != null)
             {
                 writer.WritePropertyName("configurationProfile"u8);
                 writer.WriteStringValue(ConfigurationProfile);
             }
-            if (Optional.IsDefined(TargetId))
+            if (TargetId != null)
             {
                 writer.WritePropertyName("targetId"u8);
                 writer.WriteStringValue(TargetId);
@@ -34,9 +34,9 @@ namespace MgmtPartialResource.Models
             {
                 return null;
             }
-            Optional<string> configurationProfile = default;
-            Optional<string> targetId = default;
-            Optional<string> status = default;
+            string configurationProfile = default;
+            string targetId = default;
+            string status = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("configurationProfile"u8))
@@ -55,7 +55,7 @@ namespace MgmtPartialResource.Models
                     continue;
                 }
             }
-            return new ConfigurationProfileAssignmentProperties(configurationProfile.Value, targetId.Value, status.Value);
+            return new ConfigurationProfileAssignmentProperties(configurationProfile, targetId, status);
         }
     }
 }

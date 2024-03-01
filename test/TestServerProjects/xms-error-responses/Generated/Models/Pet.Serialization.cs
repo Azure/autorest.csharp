@@ -26,12 +26,12 @@ namespace xms_error_responses.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && Optional.IsDefined(Name))
+            if (options.Format != "W" && Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(AniType))
+            if (AniType != null)
             {
                 writer.WritePropertyName("aniType"u8);
                 writer.WriteStringValue(AniType);
@@ -74,8 +74,8 @@ namespace xms_error_responses.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> aniType = default;
+            string name = default;
+            string aniType = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -96,7 +96,7 @@ namespace xms_error_responses.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Pet(aniType.Value, serializedAdditionalRawData, name.Value);
+            return new Pet(aniType, serializedAdditionalRawData, name);
         }
 
         BinaryData IPersistableModel<Pet>.Write(ModelReaderWriterOptions options)

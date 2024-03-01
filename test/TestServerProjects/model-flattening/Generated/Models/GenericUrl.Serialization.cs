@@ -26,7 +26,7 @@ namespace model_flattening.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(GenericValue))
+            if (GenericValue != null)
             {
                 writer.WritePropertyName("generic_value"u8);
                 writer.WriteStringValue(GenericValue);
@@ -69,7 +69,7 @@ namespace model_flattening.Models
             {
                 return null;
             }
-            Optional<string> genericValue = default;
+            string genericValue = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -85,7 +85,7 @@ namespace model_flattening.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new GenericUrl(genericValue.Value, serializedAdditionalRawData);
+            return new GenericUrl(genericValue, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<GenericUrl>.Write(ModelReaderWriterOptions options)

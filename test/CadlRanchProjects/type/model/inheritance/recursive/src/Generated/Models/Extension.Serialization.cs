@@ -29,7 +29,7 @@ namespace _Type.Model.Inheritance.Recursive.Models
             writer.WriteStartObject();
             writer.WritePropertyName("level"u8);
             writer.WriteNumberValue(Level);
-            if (Optional.IsCollectionDefined(Extension))
+            if (!(Extension is ChangeTrackingList<Extension> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("extension"u8);
                 writer.WriteStartArray();
@@ -77,15 +77,15 @@ namespace _Type.Model.Inheritance.Recursive.Models
             {
                 return null;
             }
-            int level = default;
-            Optional<IReadOnlyList<Extension>> extension = default;
+            sbyte level = default;
+            IReadOnlyList<Extension> extension = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("level"u8))
                 {
-                    level = property.Value.GetInt32();
+                    level = property.Value.GetSByte();
                     continue;
                 }
                 if (property.NameEquals("extension"u8))
@@ -97,7 +97,7 @@ namespace _Type.Model.Inheritance.Recursive.Models
                     List<Extension> array = new List<Extension>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DeserializeExtension(item));
+                        array.Add(DeserializeExtension(item, options));
                     }
                     extension = array;
                     continue;
@@ -108,7 +108,7 @@ namespace _Type.Model.Inheritance.Recursive.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Extension(Optional.ToList(extension), serializedAdditionalRawData, level);
+            return new Extension(extension ?? new ChangeTrackingList<Extension>(), serializedAdditionalRawData, level);
         }
 
         BinaryData IPersistableModel<Extension>.Write(ModelReaderWriterOptions options)

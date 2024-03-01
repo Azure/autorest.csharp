@@ -6,32 +6,145 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class LastPatchInstallationSummary
+    public partial class LastPatchInstallationSummary : IUtf8JsonSerializable, IJsonModel<LastPatchInstallationSummary>
     {
-        internal static LastPatchInstallationSummary DeserializeLastPatchInstallationSummary(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LastPatchInstallationSummary>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<LastPatchInstallationSummary>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<LastPatchInstallationSummary>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(LastPatchInstallationSummary)} does not support '{format}' format.");
+            }
+
+            writer.WriteStartObject();
+            if (options.Format != "W" && Status.HasValue)
+            {
+                writer.WritePropertyName("status"u8);
+                writer.WriteStringValue(Status.Value.ToString());
+            }
+            if (options.Format != "W" && InstallationActivityId != null)
+            {
+                writer.WritePropertyName("installationActivityId"u8);
+                writer.WriteStringValue(InstallationActivityId);
+            }
+            if (options.Format != "W" && MaintenanceWindowExceeded.HasValue)
+            {
+                writer.WritePropertyName("maintenanceWindowExceeded"u8);
+                writer.WriteBooleanValue(MaintenanceWindowExceeded.Value);
+            }
+            if (options.Format != "W" && RebootStatus.HasValue)
+            {
+                writer.WritePropertyName("rebootStatus"u8);
+                writer.WriteStringValue(RebootStatus.Value.ToString());
+            }
+            if (options.Format != "W" && NotSelectedPatchCount.HasValue)
+            {
+                writer.WritePropertyName("notSelectedPatchCount"u8);
+                writer.WriteNumberValue(NotSelectedPatchCount.Value);
+            }
+            if (options.Format != "W" && ExcludedPatchCount.HasValue)
+            {
+                writer.WritePropertyName("excludedPatchCount"u8);
+                writer.WriteNumberValue(ExcludedPatchCount.Value);
+            }
+            if (options.Format != "W" && PendingPatchCount.HasValue)
+            {
+                writer.WritePropertyName("pendingPatchCount"u8);
+                writer.WriteNumberValue(PendingPatchCount.Value);
+            }
+            if (options.Format != "W" && InstalledPatchCount.HasValue)
+            {
+                writer.WritePropertyName("installedPatchCount"u8);
+                writer.WriteNumberValue(InstalledPatchCount.Value);
+            }
+            if (options.Format != "W" && FailedPatchCount.HasValue)
+            {
+                writer.WritePropertyName("failedPatchCount"u8);
+                writer.WriteNumberValue(FailedPatchCount.Value);
+            }
+            if (options.Format != "W" && StartOn.HasValue)
+            {
+                writer.WritePropertyName("startTime"u8);
+                writer.WriteStringValue(StartOn.Value, "O");
+            }
+            if (options.Format != "W" && LastModifiedOn.HasValue)
+            {
+                writer.WritePropertyName("lastModifiedTime"u8);
+                writer.WriteStringValue(LastModifiedOn.Value, "O");
+            }
+            if (options.Format != "W" && StartedBy != null)
+            {
+                writer.WritePropertyName("startedBy"u8);
+                writer.WriteStringValue(StartedBy);
+            }
+            if (options.Format != "W" && Error != null)
+            {
+                writer.WritePropertyName("error"u8);
+                writer.WriteObjectValue(Error);
+            }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        LastPatchInstallationSummary IJsonModel<LastPatchInstallationSummary>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<LastPatchInstallationSummary>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(LastPatchInstallationSummary)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeLastPatchInstallationSummary(document.RootElement, options);
+        }
+
+        internal static LastPatchInstallationSummary DeserializeLastPatchInstallationSummary(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
-            Optional<PatchOperationStatus> status = default;
-            Optional<string> installationActivityId = default;
-            Optional<bool> maintenanceWindowExceeded = default;
-            Optional<RebootStatus> rebootStatus = default;
-            Optional<int> notSelectedPatchCount = default;
-            Optional<int> excludedPatchCount = default;
-            Optional<int> pendingPatchCount = default;
-            Optional<int> installedPatchCount = default;
-            Optional<int> failedPatchCount = default;
-            Optional<DateTimeOffset> startTime = default;
-            Optional<DateTimeOffset> lastModifiedTime = default;
-            Optional<string> startedBy = default;
-            Optional<ApiError> error = default;
+            PatchOperationStatus? status = default;
+            string installationActivityId = default;
+            bool? maintenanceWindowExceeded = default;
+            RebootStatus? rebootStatus = default;
+            int? notSelectedPatchCount = default;
+            int? excludedPatchCount = default;
+            int? pendingPatchCount = default;
+            int? installedPatchCount = default;
+            int? failedPatchCount = default;
+            DateTimeOffset? startTime = default;
+            DateTimeOffset? lastModifiedTime = default;
+            string startedBy = default;
+            ApiError error = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("status"u8))
@@ -140,11 +253,206 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    error = ApiError.DeserializeApiError(property.Value);
+                    error = ApiError.DeserializeApiError(property.Value, options);
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new LastPatchInstallationSummary(Optional.ToNullable(status), installationActivityId.Value, Optional.ToNullable(maintenanceWindowExceeded), Optional.ToNullable(rebootStatus), Optional.ToNullable(notSelectedPatchCount), Optional.ToNullable(excludedPatchCount), Optional.ToNullable(pendingPatchCount), Optional.ToNullable(installedPatchCount), Optional.ToNullable(failedPatchCount), Optional.ToNullable(startTime), Optional.ToNullable(lastModifiedTime), startedBy.Value, error.Value);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new LastPatchInstallationSummary(
+                status,
+                installationActivityId,
+                maintenanceWindowExceeded,
+                rebootStatus,
+                notSelectedPatchCount,
+                excludedPatchCount,
+                pendingPatchCount,
+                installedPatchCount,
+                failedPatchCount,
+                startTime,
+                lastModifiedTime,
+                startedBy,
+                error,
+                serializedAdditionalRawData);
         }
+
+        private BinaryData SerializeBicep(ModelReaderWriterOptions options)
+        {
+            StringBuilder builder = new StringBuilder();
+            builder.AppendLine("{");
+
+            if (Status.HasValue)
+            {
+                builder.Append("  status:");
+                builder.AppendLine($" '{Status.Value.ToString()}'");
+            }
+
+            if (InstallationActivityId != null)
+            {
+                builder.Append("  installationActivityId:");
+                if (InstallationActivityId.Contains(Environment.NewLine))
+                {
+                    builder.AppendLine(" '''");
+                    builder.AppendLine($"{InstallationActivityId}'''");
+                }
+                else
+                {
+                    builder.AppendLine($" '{InstallationActivityId}'");
+                }
+            }
+
+            if (MaintenanceWindowExceeded.HasValue)
+            {
+                builder.Append("  maintenanceWindowExceeded:");
+                var boolValue = MaintenanceWindowExceeded.Value == true ? "true" : "false";
+                builder.AppendLine($" {boolValue}");
+            }
+
+            if (RebootStatus.HasValue)
+            {
+                builder.Append("  rebootStatus:");
+                builder.AppendLine($" '{RebootStatus.Value.ToString()}'");
+            }
+
+            if (NotSelectedPatchCount.HasValue)
+            {
+                builder.Append("  notSelectedPatchCount:");
+                builder.AppendLine($" {NotSelectedPatchCount.Value}");
+            }
+
+            if (ExcludedPatchCount.HasValue)
+            {
+                builder.Append("  excludedPatchCount:");
+                builder.AppendLine($" {ExcludedPatchCount.Value}");
+            }
+
+            if (PendingPatchCount.HasValue)
+            {
+                builder.Append("  pendingPatchCount:");
+                builder.AppendLine($" {PendingPatchCount.Value}");
+            }
+
+            if (InstalledPatchCount.HasValue)
+            {
+                builder.Append("  installedPatchCount:");
+                builder.AppendLine($" {InstalledPatchCount.Value}");
+            }
+
+            if (FailedPatchCount.HasValue)
+            {
+                builder.Append("  failedPatchCount:");
+                builder.AppendLine($" {FailedPatchCount.Value}");
+            }
+
+            if (StartOn.HasValue)
+            {
+                builder.Append("  startTime:");
+                var formattedDateTimeString = TypeFormatters.ToString(StartOn.Value, "o");
+                builder.AppendLine($" '{formattedDateTimeString}'");
+            }
+
+            if (LastModifiedOn.HasValue)
+            {
+                builder.Append("  lastModifiedTime:");
+                var formattedDateTimeString = TypeFormatters.ToString(LastModifiedOn.Value, "o");
+                builder.AppendLine($" '{formattedDateTimeString}'");
+            }
+
+            if (StartedBy != null)
+            {
+                builder.Append("  startedBy:");
+                if (StartedBy.Contains(Environment.NewLine))
+                {
+                    builder.AppendLine(" '''");
+                    builder.AppendLine($"{StartedBy}'''");
+                }
+                else
+                {
+                    builder.AppendLine($" '{StartedBy}'");
+                }
+            }
+
+            if (Error != null)
+            {
+                builder.Append("  error:");
+                AppendChildObject(builder, Error, options, 2, false);
+            }
+
+            builder.AppendLine("}");
+            return BinaryData.FromString(builder.ToString());
+        }
+
+        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine)
+        {
+            string indent = new string(' ', spaces);
+            BinaryData data = ModelReaderWriter.Write(childObject, options);
+            string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            bool inMultilineString = false;
+            for (int i = 0; i < lines.Length; i++)
+            {
+                string line = lines[i];
+                if (inMultilineString)
+                {
+                    if (line.Contains("'''"))
+                    {
+                        inMultilineString = false;
+                    }
+                    stringBuilder.AppendLine(line);
+                    continue;
+                }
+                if (line.Contains("'''"))
+                {
+                    inMultilineString = true;
+                    stringBuilder.AppendLine($"{indent}{line}");
+                    continue;
+                }
+                if (i == 0 && !indentFirstLine)
+                {
+                    stringBuilder.AppendLine($" {line}");
+                }
+                else
+                {
+                    stringBuilder.AppendLine($"{indent}{line}");
+                }
+            }
+        }
+
+        BinaryData IPersistableModel<LastPatchInstallationSummary>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<LastPatchInstallationSummary>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                case "bicep":
+                    return SerializeBicep(options);
+                default:
+                    throw new FormatException($"The model {nameof(LastPatchInstallationSummary)} does not support '{options.Format}' format.");
+            }
+        }
+
+        LastPatchInstallationSummary IPersistableModel<LastPatchInstallationSummary>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<LastPatchInstallationSummary>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeLastPatchInstallationSummary(document.RootElement, options);
+                    }
+                case "bicep":
+                    throw new InvalidOperationException("Bicep deserialization is not supported for this type.");
+                default:
+                    throw new FormatException($"The model {nameof(LastPatchInstallationSummary)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<LastPatchInstallationSummary>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

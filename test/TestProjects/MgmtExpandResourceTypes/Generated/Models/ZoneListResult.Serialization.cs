@@ -20,8 +20,8 @@ namespace MgmtExpandResourceTypes.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<ZoneData>> value = default;
-            Optional<string> nextLink = default;
+            IReadOnlyList<ZoneData> value = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -44,7 +44,7 @@ namespace MgmtExpandResourceTypes.Models
                     continue;
                 }
             }
-            return new ZoneListResult(Optional.ToList(value), nextLink.Value);
+            return new ZoneListResult(value ?? new ChangeTrackingList<ZoneData>(), nextLink);
         }
     }
 }

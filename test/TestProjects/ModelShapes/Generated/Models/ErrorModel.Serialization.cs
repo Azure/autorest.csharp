@@ -26,12 +26,12 @@ namespace ModelShapes.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Code))
+            if (Code != null)
             {
                 writer.WritePropertyName("Code"u8);
                 writer.WriteStringValue(Code);
             }
-            if (Optional.IsDefined(Status))
+            if (Status != null)
             {
                 writer.WritePropertyName("Status"u8);
                 writer.WriteStringValue(Status);
@@ -74,8 +74,8 @@ namespace ModelShapes.Models
             {
                 return null;
             }
-            Optional<string> code = default;
-            Optional<string> status = default;
+            string code = default;
+            string status = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -96,7 +96,7 @@ namespace ModelShapes.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ErrorModel(code.Value, status.Value, serializedAdditionalRawData);
+            return new ErrorModel(code, status, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ErrorModel>.Write(ModelReaderWriterOptions options)

@@ -15,7 +15,7 @@ namespace MgmtAcronymMapping.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(EncryptionAtHost))
+            if (EncryptionAtHost.HasValue)
             {
                 writer.WritePropertyName("encryptionAtHost"u8);
                 writer.WriteBooleanValue(EncryptionAtHost.Value);
@@ -29,7 +29,7 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<bool> encryptionAtHost = default;
+            bool? encryptionAtHost = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("encryptionAtHost"u8))
@@ -42,7 +42,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new SecurityProfile(Optional.ToNullable(encryptionAtHost));
+            return new SecurityProfile(encryptionAtHost);
         }
     }
 }

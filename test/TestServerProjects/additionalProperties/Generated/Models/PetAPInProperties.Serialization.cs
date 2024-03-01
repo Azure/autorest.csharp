@@ -28,17 +28,17 @@ namespace additionalProperties.Models
             writer.WriteStartObject();
             writer.WritePropertyName("id"u8);
             writer.WriteNumberValue(Id);
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format != "W" && Optional.IsDefined(Status))
+            if (options.Format != "W" && Status.HasValue)
             {
                 writer.WritePropertyName("status"u8);
                 writer.WriteBooleanValue(Status.Value);
             }
-            if (Optional.IsCollectionDefined(AdditionalProperties))
+            if (!(AdditionalProperties is ChangeTrackingDictionary<string, float> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("additionalProperties"u8);
                 writer.WriteStartObject();
@@ -88,9 +88,9 @@ namespace additionalProperties.Models
                 return null;
             }
             int id = default;
-            Optional<string> name = default;
-            Optional<bool> status = default;
-            Optional<IDictionary<string, float>> additionalProperties = default;
+            string name = default;
+            bool? status = default;
+            IDictionary<string, float> additionalProperties = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -134,7 +134,7 @@ namespace additionalProperties.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new PetAPInProperties(id, name.Value, Optional.ToNullable(status), Optional.ToDictionary(additionalProperties), serializedAdditionalRawData);
+            return new PetAPInProperties(id, name, status, additionalProperties ?? new ChangeTrackingDictionary<string, float>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<PetAPInProperties>.Write(ModelReaderWriterOptions options)

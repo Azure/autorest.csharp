@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Azure.Core;
 
 namespace lro.Models
 {
@@ -52,7 +51,10 @@ namespace lro.Models
         /// <exception cref="ArgumentNullException"> <paramref name="patients"/> is null. </exception>
         public RadiologyInsightsData(IEnumerable<string> patients)
         {
-            Argument.AssertNotNull(patients, nameof(patients));
+            if (patients == null)
+            {
+                throw new ArgumentNullException(nameof(patients));
+            }
 
             Patients = patients.ToList();
         }

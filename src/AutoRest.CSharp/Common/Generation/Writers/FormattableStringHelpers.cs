@@ -134,12 +134,14 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             if (TypeFactory.IsReadWriteDictionary(parameter.Type))
             {
-                return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromDictionary)}({parameter.Name})";
+                FormattableString conversionString = $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromDictionary)}({parameter.Name})";
+                return parameter.IsOptionalInSignature ? $"{parameter.Name} != null ? {conversionString} : null" : conversionString;
             }
 
             if (TypeFactory.IsList(parameter.Type))
             {
-                return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromEnumerable)}({parameter.Name})";
+                FormattableString conversionString = $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromEnumerable)}({parameter.Name})";
+                return parameter.IsOptionalInSignature ? $"{parameter.Name} != null ? {conversionString} : null" : conversionString;
             }
 
             BodyMediaType? mediaType = contentType == null ? null : ToMediaType(contentType);

@@ -26,12 +26,12 @@ namespace body_complex.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(FieldTrue))
+            if (FieldTrue.HasValue)
             {
                 writer.WritePropertyName("field_true"u8);
                 writer.WriteBooleanValue(FieldTrue.Value);
             }
-            if (Optional.IsDefined(FieldFalse))
+            if (FieldFalse.HasValue)
             {
                 writer.WritePropertyName("field_false"u8);
                 writer.WriteBooleanValue(FieldFalse.Value);
@@ -74,8 +74,8 @@ namespace body_complex.Models
             {
                 return null;
             }
-            Optional<bool> fieldTrue = default;
-            Optional<bool> fieldFalse = default;
+            bool? fieldTrue = default;
+            bool? fieldFalse = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -104,7 +104,7 @@ namespace body_complex.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new BooleanWrapper(Optional.ToNullable(fieldTrue), Optional.ToNullable(fieldFalse), serializedAdditionalRawData);
+            return new BooleanWrapper(fieldTrue, fieldFalse, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<BooleanWrapper>.Write(ModelReaderWriterOptions options)

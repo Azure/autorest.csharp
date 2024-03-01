@@ -401,6 +401,40 @@
                     "type": "string",
                     "readOnly": true
                 },
+                "boolProperty": {
+                    "description": "A bool property to verify bicep generation.",
+                    "type": "boolean"
+                },
+                "location": {
+                    "description": "A location property to verify bicep generation.",
+                    "type": "string",
+                    "x-ms-format": "azure-location"
+                },
+                "locationWithCustomSerialization": {
+                    "description": "A location property to verify bicep generation.",
+                    "type": "string",
+                    "x-ms-format": "azure-location"
+                },
+                "dateTimeProperty": {
+                    "description": "A datetime property to verify bicep generation.",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "duration": {
+                    "description": "A duration property to verify bicep generation.",
+                    "type": "string",
+                    "format": "duration"
+                },
+                "number": {
+                    "description": "A number property to verify bicep generation.",
+                    "type": "number",
+                    "format": "int32"
+                },
+                "uri": {
+                    "description": "A number property to verify bicep generation.",
+                    "type": "string",
+                    "format": "url"
+                },
                 "properties": {
                     "description": "The properties",
                     "type": "object",
@@ -503,6 +537,15 @@
                 "bark": {
                     "description": "A dog can bark",
                     "type": "string"
+                },
+                "dogKind": {
+                    "description": "The kind of the dog",
+                    "type": "string",
+                    "enum": ["german Shepherd", "golden Retriever"],
+                    "x-ms-enum": {
+                        "name": "DogKind",
+                        "modelAsString": false
+                    }
                 }
             }
         },

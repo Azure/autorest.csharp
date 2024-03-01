@@ -47,8 +47,14 @@ namespace security_key_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public AutorestSecurityKeyClient(Uri endpoint, AzureKeyCredential credential, AutorestSecurityKeyClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
-            Argument.AssertNotNull(credential, nameof(credential));
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
+            if (credential == null)
+            {
+                throw new ArgumentNullException(nameof(credential));
+            }
             options ??= new AutorestSecurityKeyClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

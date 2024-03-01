@@ -18,17 +18,17 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteStartObject();
             writer.WritePropertyName("enable"u8);
             writer.WriteBooleanValue(Enable);
-            if (Optional.IsDefined(Name))
+            if (Name.HasValue)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name.Value.ToString());
             }
-            if (Optional.IsDefined(TrackingGranularityInDays))
+            if (TrackingGranularityInDays.HasValue)
             {
                 writer.WritePropertyName("trackingGranularityInDays"u8);
                 writer.WriteNumberValue(TrackingGranularityInDays.Value);
             }
-            if (Optional.IsCollectionDefined(BlobType))
+            if (!(BlobType is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("blobType"u8);
                 writer.WriteStartArray();
@@ -48,9 +48,9 @@ namespace Azure.ResourceManager.Storage.Models
                 return null;
             }
             bool enable = default;
-            Optional<Name> name = default;
-            Optional<int> trackingGranularityInDays = default;
-            Optional<IList<string>> blobType = default;
+            Name? name = default;
+            int? trackingGranularityInDays = default;
+            IList<string> blobType = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("enable"u8))
@@ -91,7 +91,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new LastAccessTimeTrackingPolicy(enable, Optional.ToNullable(name), Optional.ToNullable(trackingGranularityInDays), Optional.ToList(blobType));
+            return new LastAccessTimeTrackingPolicy(enable, name, trackingGranularityInDays, blobType ?? new ChangeTrackingList<string>());
         }
     }
 }

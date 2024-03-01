@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -60,8 +61,14 @@ namespace FirstTestTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public FirstTestTypeSpecClient(Uri endpoint, AzureKeyCredential credential, FirstTestTypeSpecClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
-            Argument.AssertNotNull(credential, nameof(credential));
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
+            if (credential == null)
+            {
+                throw new ArgumentNullException(nameof(credential));
+            }
             options ??= new FirstTestTypeSpecClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -77,8 +84,14 @@ namespace FirstTestTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public FirstTestTypeSpecClient(Uri endpoint, TokenCredential credential, FirstTestTypeSpecClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
-            Argument.AssertNotNull(credential, nameof(credential));
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
+            if (credential == null)
+            {
+                throw new ArgumentNullException(nameof(credential));
+            }
             options ??= new FirstTestTypeSpecClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -259,7 +272,10 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='PatchActionAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PatchActionAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.PatchAction");
             scope.Start();
@@ -293,7 +309,10 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='PatchAction(RequestContent,RequestContext)']/*" />
         public virtual Response PatchAction(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.PatchAction");
             scope.Start();
@@ -316,7 +335,10 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBodyAsync(Thing,CancellationToken)']/*" />
         public virtual async Task<Response<Thing>> AnonymousBodyAsync(Thing thing, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(thing, nameof(thing));
+            if (thing == null)
+            {
+                throw new ArgumentNullException(nameof(thing));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = thing.ToRequestContent();
@@ -331,7 +353,10 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBody(Thing,CancellationToken)']/*" />
         public virtual Response<Thing> AnonymousBody(Thing thing, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(thing, nameof(thing));
+            if (thing == null)
+            {
+                throw new ArgumentNullException(nameof(thing));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = thing.ToRequestContent();
@@ -362,7 +387,10 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBodyAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> AnonymousBodyAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.AnonymousBody");
             scope.Start();
@@ -401,7 +429,10 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBody(RequestContent,RequestContext)']/*" />
         public virtual Response AnonymousBody(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.AnonymousBody");
             scope.Start();
@@ -424,7 +455,10 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModelAsync(Friend,CancellationToken)']/*" />
         public virtual async Task<Response<Friend>> FriendlyModelAsync(Friend friend, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(friend, nameof(friend));
+            if (friend == null)
+            {
+                throw new ArgumentNullException(nameof(friend));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = friend.ToRequestContent();
@@ -439,7 +473,10 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModel(Friend,CancellationToken)']/*" />
         public virtual Response<Friend> FriendlyModel(Friend friend, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(friend, nameof(friend));
+            if (friend == null)
+            {
+                throw new ArgumentNullException(nameof(friend));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = friend.ToRequestContent();
@@ -470,7 +507,10 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModelAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> FriendlyModelAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.FriendlyModel");
             scope.Start();
@@ -509,7 +549,10 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModel(RequestContent,RequestContext)']/*" />
         public virtual Response FriendlyModel(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.FriendlyModel");
             scope.Start();
@@ -593,7 +636,10 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StringFormatAsync(Guid,ModelWithFormat,CancellationToken)']/*" />
         public virtual async Task<Response> StringFormatAsync(Guid subscriptionId, ModelWithFormat body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -609,7 +655,10 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StringFormat(Guid,ModelWithFormat,CancellationToken)']/*" />
         public virtual Response StringFormat(Guid subscriptionId, ModelWithFormat body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -641,7 +690,10 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StringFormatAsync(Guid,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> StringFormatAsync(Guid subscriptionId, RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.StringFormat");
             scope.Start();
@@ -681,7 +733,10 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StringFormat(Guid,RequestContent,RequestContext)']/*" />
         public virtual Response StringFormat(Guid subscriptionId, RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.StringFormat");
             scope.Start();
@@ -704,7 +759,10 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ProjectedNameModelAsync(ProjectedModel,CancellationToken)']/*" />
         public virtual async Task<Response<ProjectedModel>> ProjectedNameModelAsync(ProjectedModel projectedModel, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(projectedModel, nameof(projectedModel));
+            if (projectedModel == null)
+            {
+                throw new ArgumentNullException(nameof(projectedModel));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = projectedModel.ToRequestContent();
@@ -719,7 +777,10 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ProjectedNameModel(ProjectedModel,CancellationToken)']/*" />
         public virtual Response<ProjectedModel> ProjectedNameModel(ProjectedModel projectedModel, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(projectedModel, nameof(projectedModel));
+            if (projectedModel == null)
+            {
+                throw new ArgumentNullException(nameof(projectedModel));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = projectedModel.ToRequestContent();
@@ -750,7 +811,10 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ProjectedNameModelAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> ProjectedNameModelAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.ProjectedNameModel");
             scope.Start();
@@ -789,7 +853,10 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ProjectedNameModel(RequestContent,RequestContext)']/*" />
         public virtual Response ProjectedNameModel(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.ProjectedNameModel");
             scope.Start();
@@ -915,7 +982,14 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='HeadAsBooleanAsync(string,RequestContext)']/*" />
         public virtual async Task<Response<bool>> HeadAsBooleanAsync(string id, RequestContext context = null)
         {
-            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            if (id == null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+            if (id.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(id));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.HeadAsBoolean");
             scope.Start();
@@ -951,7 +1025,14 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='HeadAsBoolean(string,RequestContext)']/*" />
         public virtual Response<bool> HeadAsBoolean(string id, RequestContext context = null)
         {
-            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            if (id == null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+            if (id.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(id));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.HeadAsBoolean");
             scope.Start();
@@ -975,7 +1056,14 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StringBodyAsync(string,CancellationToken)']/*" />
         public virtual async Task<Response> StringBodyAsync(string body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
+            if (body.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromObject(body);
@@ -991,7 +1079,14 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StringBody(string,CancellationToken)']/*" />
         public virtual Response StringBody(string body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
+            if (body.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromObject(body);
@@ -1022,7 +1117,10 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StringBodyAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> StringBodyAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.StringBody");
             scope.Start();
@@ -1061,7 +1159,10 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StringBody(RequestContent,RequestContext)']/*" />
         public virtual Response StringBody(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.StringBody");
             scope.Start();
@@ -1124,7 +1225,10 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='BoolBodyAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> BoolBodyAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.BoolBody");
             scope.Start();
@@ -1163,7 +1267,10 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='BoolBody(RequestContent,RequestContext)']/*" />
         public virtual Response BoolBody(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.BoolBody");
             scope.Start();
@@ -1226,7 +1333,10 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='DateTimeBodyAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> DateTimeBodyAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.DateTimeBody");
             scope.Start();
@@ -1265,7 +1375,10 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='DateTimeBody(RequestContent,RequestContext)']/*" />
         public virtual Response DateTimeBody(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.DateTimeBody");
             scope.Start();
@@ -1466,7 +1579,10 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='RecursiveExtensionAsync(Extension,CancellationToken)']/*" />
         public virtual async Task<Response> RecursiveExtensionAsync(Extension input, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(input, nameof(input));
+            if (input == null)
+            {
+                throw new ArgumentNullException(nameof(input));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -1481,7 +1597,10 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='RecursiveExtension(Extension,CancellationToken)']/*" />
         public virtual Response RecursiveExtension(Extension input, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(input, nameof(input));
+            if (input == null)
+            {
+                throw new ArgumentNullException(nameof(input));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -1512,7 +1631,10 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='RecursiveExtensionAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> RecursiveExtensionAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.RecursiveExtension");
             scope.Start();
@@ -1551,7 +1673,10 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='RecursiveExtension(RequestContent,RequestContext)']/*" />
         public virtual Response RecursiveExtension(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.RecursiveExtension");
             scope.Start();
@@ -1574,7 +1699,10 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ThreeLevelRecursiveAsync(Extendible,CancellationToken)']/*" />
         public virtual async Task<Response> ThreeLevelRecursiveAsync(Extendible input, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(input, nameof(input));
+            if (input == null)
+            {
+                throw new ArgumentNullException(nameof(input));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -1589,7 +1717,10 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ThreeLevelRecursive(Extendible,CancellationToken)']/*" />
         public virtual Response ThreeLevelRecursive(Extendible input, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(input, nameof(input));
+            if (input == null)
+            {
+                throw new ArgumentNullException(nameof(input));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -1620,7 +1751,10 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ThreeLevelRecursiveAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> ThreeLevelRecursiveAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.ThreeLevelRecursive");
             scope.Start();
@@ -1659,7 +1793,10 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ThreeLevelRecursive(RequestContent,RequestContext)']/*" />
         public virtual Response ThreeLevelRecursive(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.ThreeLevelRecursive");
             scope.Start();
@@ -1682,7 +1819,10 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='RecursiveModelsAsync(ChildModel,CancellationToken)']/*" />
         public virtual async Task<Response> RecursiveModelsAsync(ChildModel input, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(input, nameof(input));
+            if (input == null)
+            {
+                throw new ArgumentNullException(nameof(input));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -1697,7 +1837,10 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='RecursiveModels(ChildModel,CancellationToken)']/*" />
         public virtual Response RecursiveModels(ChildModel input, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(input, nameof(input));
+            if (input == null)
+            {
+                throw new ArgumentNullException(nameof(input));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -1728,7 +1871,10 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='RecursiveModelsAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> RecursiveModelsAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.RecursiveModels");
             scope.Start();
@@ -1767,7 +1913,10 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='RecursiveModels(RequestContent,RequestContext)']/*" />
         public virtual Response RecursiveModels(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.RecursiveModels");
             scope.Start();
@@ -1790,7 +1939,10 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ContainSelfModelsAsync(ContainSelf,CancellationToken)']/*" />
         public virtual async Task<Response> ContainSelfModelsAsync(ContainSelf input, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(input, nameof(input));
+            if (input == null)
+            {
+                throw new ArgumentNullException(nameof(input));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -1805,7 +1957,10 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ContainSelfModels(ContainSelf,CancellationToken)']/*" />
         public virtual Response ContainSelfModels(ContainSelf input, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(input, nameof(input));
+            if (input == null)
+            {
+                throw new ArgumentNullException(nameof(input));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -1836,7 +1991,10 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ContainSelfModelsAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> ContainSelfModelsAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.ContainSelfModels");
             scope.Start();
@@ -1875,7 +2033,10 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ContainSelfModels(RequestContent,RequestContext)']/*" />
         public virtual Response ContainSelfModels(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.ContainSelfModels");
             scope.Start();
@@ -1992,7 +2153,10 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='BodyIsModelWithProjectedEnumAsync(ModelWithProjectedEnum,CancellationToken)']/*" />
         public virtual async Task<Response> BodyIsModelWithProjectedEnumAsync(ModelWithProjectedEnum body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -2007,7 +2171,10 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='BodyIsModelWithProjectedEnum(ModelWithProjectedEnum,CancellationToken)']/*" />
         public virtual Response BodyIsModelWithProjectedEnum(ModelWithProjectedEnum body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -2038,7 +2205,10 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='BodyIsModelWithProjectedEnumAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> BodyIsModelWithProjectedEnumAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.BodyIsModelWithProjectedEnum");
             scope.Start();
@@ -2077,13 +2247,112 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='BodyIsModelWithProjectedEnum(RequestContent,RequestContext)']/*" />
         public virtual Response BodyIsModelWithProjectedEnum(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.BodyIsModelWithProjectedEnum");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateBodyIsModelWithProjectedEnumRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> test optional dictionary. </summary>
+        /// <param name="body"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="int"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='OptionalDictionaryAsync(IDictionary{string,int},CancellationToken)']/*" />
+        public virtual async Task<Response> OptionalDictionaryAsync(IDictionary<string, int> body = null, CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = body != null ? RequestContentHelper.FromDictionary(body) : null;
+            Response response = await OptionalDictionaryAsync(content, context).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary> test optional dictionary. </summary>
+        /// <param name="body"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="int"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='OptionalDictionary(IDictionary{string,int},CancellationToken)']/*" />
+        public virtual Response OptionalDictionary(IDictionary<string, int> body = null, CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = body != null ? RequestContentHelper.FromDictionary(body) : null;
+            Response response = OptionalDictionary(content, context);
+            return response;
+        }
+
+        /// <summary>
+        /// [Protocol Method] test optional dictionary.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="OptionalDictionaryAsync(IDictionary{string,int},CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='OptionalDictionaryAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> OptionalDictionaryAsync(RequestContent content, RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.OptionalDictionary");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateOptionalDictionaryRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] test optional dictionary.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="OptionalDictionary(IDictionary{string,int},CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='OptionalDictionary(RequestContent,RequestContext)']/*" />
+        public virtual Response OptionalDictionary(RequestContent content, RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.OptionalDictionary");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateOptionalDictionaryRequest(content, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -2426,6 +2695,21 @@ namespace FirstTestTypeSpec
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/bodyIsModelWithProjectedEnum", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateOptionalDictionaryRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/optionalDictionary", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");

@@ -19,14 +19,14 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Optional<ImmutabilityPolicyUpdateType> update = default;
-            Optional<int> immutabilityPeriodSinceCreationInDays = default;
-            Optional<DateTimeOffset> timestamp = default;
-            Optional<string> objectIdentifier = default;
-            Optional<Guid> tenantId = default;
-            Optional<string> upn = default;
-            Optional<bool> allowProtectedAppendWrites = default;
-            Optional<bool> allowProtectedAppendWritesAll = default;
+            ImmutabilityPolicyUpdateType? update = default;
+            int? immutabilityPeriodSinceCreationInDays = default;
+            DateTimeOffset? timestamp = default;
+            string objectIdentifier = default;
+            Guid? tenantId = default;
+            string upn = default;
+            bool? allowProtectedAppendWrites = default;
+            bool? allowProtectedAppendWritesAll = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("update"u8))
@@ -94,7 +94,15 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new UpdateHistoryProperty(Optional.ToNullable(update), Optional.ToNullable(immutabilityPeriodSinceCreationInDays), Optional.ToNullable(timestamp), objectIdentifier.Value, Optional.ToNullable(tenantId), upn.Value, Optional.ToNullable(allowProtectedAppendWrites), Optional.ToNullable(allowProtectedAppendWritesAll));
+            return new UpdateHistoryProperty(
+                update,
+                immutabilityPeriodSinceCreationInDays,
+                timestamp,
+                objectIdentifier,
+                tenantId,
+                upn,
+                allowProtectedAppendWrites,
+                allowProtectedAppendWritesAll);
         }
     }
 }

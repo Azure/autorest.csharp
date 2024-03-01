@@ -17,32 +17,32 @@ namespace AppConfiguration.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Key))
+            if (Key != null)
             {
                 writer.WritePropertyName("key"u8);
                 writer.WriteStringValue(Key);
             }
-            if (Optional.IsDefined(Label))
+            if (Label != null)
             {
                 writer.WritePropertyName("label"u8);
                 writer.WriteStringValue(Label);
             }
-            if (Optional.IsDefined(ContentType))
+            if (ContentType != null)
             {
                 writer.WritePropertyName("content_type"u8);
                 writer.WriteStringValue(ContentType);
             }
-            if (Optional.IsDefined(Value))
+            if (Value != null)
             {
                 writer.WritePropertyName("value"u8);
                 writer.WriteStringValue(Value);
             }
-            if (Optional.IsDefined(LastModified))
+            if (LastModified.HasValue)
             {
                 writer.WritePropertyName("last_modified"u8);
                 writer.WriteStringValue(LastModified.Value, "O");
             }
-            if (Optional.IsCollectionDefined(Tags))
+            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -53,12 +53,12 @@ namespace AppConfiguration.Models
                 }
                 writer.WriteEndObject();
             }
-            if (Optional.IsDefined(Locked))
+            if (Locked.HasValue)
             {
                 writer.WritePropertyName("locked"u8);
                 writer.WriteBooleanValue(Locked.Value);
             }
-            if (Optional.IsDefined(Etag))
+            if (Etag != null)
             {
                 writer.WritePropertyName("etag"u8);
                 writer.WriteStringValue(Etag);
@@ -72,14 +72,14 @@ namespace AppConfiguration.Models
             {
                 return null;
             }
-            Optional<string> key = default;
-            Optional<string> label = default;
-            Optional<string> contentType = default;
-            Optional<string> value = default;
-            Optional<DateTimeOffset> lastModified = default;
-            Optional<IDictionary<string, string>> tags = default;
-            Optional<bool> locked = default;
-            Optional<string> etag = default;
+            string key = default;
+            string label = default;
+            string contentType = default;
+            string value = default;
+            DateTimeOffset? lastModified = default;
+            IDictionary<string, string> tags = default;
+            bool? locked = default;
+            string etag = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("key"u8))
@@ -140,7 +140,15 @@ namespace AppConfiguration.Models
                     continue;
                 }
             }
-            return new KeyValue(key.Value, label.Value, contentType.Value, value.Value, Optional.ToNullable(lastModified), Optional.ToDictionary(tags), Optional.ToNullable(locked), etag.Value);
+            return new KeyValue(
+                key,
+                label,
+                contentType,
+                value,
+                lastModified,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                locked,
+                etag);
         }
     }
 }

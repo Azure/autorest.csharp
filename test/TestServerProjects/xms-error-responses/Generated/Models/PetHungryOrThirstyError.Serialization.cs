@@ -26,24 +26,24 @@ namespace xms_error_responses.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(HungryOrThirsty))
+            if (HungryOrThirsty != null)
             {
                 writer.WritePropertyName("hungryOrThirsty"u8);
                 writer.WriteStringValue(HungryOrThirsty);
             }
-            if (Optional.IsDefined(Reason))
+            if (Reason != null)
             {
                 writer.WritePropertyName("reason"u8);
                 writer.WriteStringValue(Reason);
             }
             writer.WritePropertyName("errorType"u8);
             writer.WriteStringValue(ErrorType);
-            if (Optional.IsDefined(ErrorMessage))
+            if (ErrorMessage != null)
             {
                 writer.WritePropertyName("errorMessage"u8);
                 writer.WriteStringValue(ErrorMessage);
             }
-            if (Optional.IsDefined(ActionResponse))
+            if (ActionResponse != null)
             {
                 writer.WritePropertyName("actionResponse"u8);
                 writer.WriteStringValue(ActionResponse);
@@ -86,11 +86,11 @@ namespace xms_error_responses.Models
             {
                 return null;
             }
-            Optional<string> hungryOrThirsty = default;
-            Optional<string> reason = default;
+            string hungryOrThirsty = default;
+            string reason = default;
             string errorType = default;
-            Optional<string> errorMessage = default;
-            Optional<string> actionResponse = default;
+            string errorMessage = default;
+            string actionResponse = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -126,7 +126,13 @@ namespace xms_error_responses.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new PetHungryOrThirstyError(actionResponse.Value, serializedAdditionalRawData, errorType, errorMessage.Value, reason.Value, hungryOrThirsty.Value);
+            return new PetHungryOrThirstyError(
+                actionResponse,
+                serializedAdditionalRawData,
+                errorType,
+                errorMessage,
+                reason,
+                hungryOrThirsty);
         }
 
         BinaryData IPersistableModel<PetHungryOrThirstyError>.Write(ModelReaderWriterOptions options)

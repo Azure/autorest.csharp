@@ -18,16 +18,13 @@ namespace Azure.ResourceManager.Fake.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Name))
+            if (Name != null)
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(ResourceType))
-            {
-                writer.WritePropertyName("type"u8);
-                writer.WriteStringValue(ResourceType);
-            }
+            writer.WritePropertyName("type"u8);
+            writer.WriteStringValue(ResourceType);
             writer.WriteEndObject();
         }
 
@@ -37,8 +34,8 @@ namespace Azure.ResourceManager.Fake.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<ResourceType> type = default;
+            string name = default;
+            ResourceType type = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -56,7 +53,7 @@ namespace Azure.ResourceManager.Fake.Models
                     continue;
                 }
             }
-            return new CheckNameAvailabilityContent(name.Value, type);
+            return new CheckNameAvailabilityContent(name, type);
         }
 
         internal partial class CheckNameAvailabilityContentConverter : JsonConverter<CheckNameAvailabilityContent>

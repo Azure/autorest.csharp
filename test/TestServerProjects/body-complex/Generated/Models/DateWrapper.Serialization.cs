@@ -26,12 +26,12 @@ namespace body_complex.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Field))
+            if (Field.HasValue)
             {
                 writer.WritePropertyName("field"u8);
                 writer.WriteStringValue(Field.Value, "D");
             }
-            if (Optional.IsDefined(Leap))
+            if (Leap.HasValue)
             {
                 writer.WritePropertyName("leap"u8);
                 writer.WriteStringValue(Leap.Value, "D");
@@ -74,8 +74,8 @@ namespace body_complex.Models
             {
                 return null;
             }
-            Optional<DateTimeOffset> field = default;
-            Optional<DateTimeOffset> leap = default;
+            DateTimeOffset? field = default;
+            DateTimeOffset? leap = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -104,7 +104,7 @@ namespace body_complex.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DateWrapper(Optional.ToNullable(field), Optional.ToNullable(leap), serializedAdditionalRawData);
+            return new DateWrapper(field, leap, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<DateWrapper>.Write(ModelReaderWriterOptions options)

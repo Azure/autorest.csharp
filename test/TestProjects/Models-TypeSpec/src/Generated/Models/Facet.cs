@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace ModelsTypeSpec.Models
 {
@@ -51,7 +50,10 @@ namespace ModelsTypeSpec.Models
         /// <exception cref="ArgumentNullException"> <paramref name="field"/> is null. </exception>
         public Facet(string field)
         {
-            Argument.AssertNotNull(field, nameof(field));
+            if (field == null)
+            {
+                throw new ArgumentNullException(nameof(field));
+            }
 
             Field = field;
         }

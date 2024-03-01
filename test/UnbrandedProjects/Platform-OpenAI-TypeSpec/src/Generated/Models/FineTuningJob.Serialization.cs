@@ -29,15 +29,8 @@ namespace OpenAI.Models
             writer.WriteStringValue(Object.ToString());
             writer.WritePropertyName("created_at"u8);
             writer.WriteNumberValue(CreatedAt, "U");
-            if (FinishedAt != null)
-            {
-                writer.WritePropertyName("finished_at"u8);
-                writer.WriteStringValue(FinishedAt.Value, "O");
-            }
-            else
-            {
-                writer.WriteNull("finished_at");
-            }
+            writer.WritePropertyName("finished_at"u8);
+            writer.WriteStringValue(FinishedAt, "O");
             writer.WritePropertyName("model"u8);
             writer.WriteStringValue(Model);
             if (FineTunedModel != null)
@@ -132,7 +125,7 @@ namespace OpenAI.Models
             string id = default;
             FineTuningJobObject @object = default;
             DateTimeOffset createdAt = default;
-            DateTimeOffset? finishedAt = default;
+            DateTimeOffset finishedAt = default;
             string model = default;
             string fineTunedModel = default;
             string organizationId = default;
@@ -164,11 +157,6 @@ namespace OpenAI.Models
                 }
                 if (property.NameEquals("finished_at"u8))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        finishedAt = null;
-                        continue;
-                    }
                     finishedAt = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
@@ -199,7 +187,7 @@ namespace OpenAI.Models
                 }
                 if (property.NameEquals("hyperparameters"u8))
                 {
-                    hyperparameters = FineTuningJobHyperparameters.DeserializeFineTuningJobHyperparameters(property.Value);
+                    hyperparameters = FineTuningJobHyperparameters.DeserializeFineTuningJobHyperparameters(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("training_file"u8))
@@ -244,7 +232,7 @@ namespace OpenAI.Models
                         error = null;
                         continue;
                     }
-                    error = FineTuningJobError.DeserializeFineTuningJobError(property.Value);
+                    error = FineTuningJobError.DeserializeFineTuningJobError(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")
@@ -253,7 +241,22 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new FineTuningJob(id, @object, createdAt, finishedAt, model, fineTunedModel, organizationId, status, hyperparameters, trainingFile, validationFile, resultFiles, trainedTokens, error, serializedAdditionalRawData);
+            return new FineTuningJob(
+                id,
+                @object,
+                createdAt,
+                finishedAt,
+                model,
+                fineTunedModel,
+                organizationId,
+                status,
+                hyperparameters,
+                trainingFile,
+                validationFile,
+                resultFiles,
+                trainedTokens,
+                error,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<FineTuningJob>.Write(ModelReaderWriterOptions options)

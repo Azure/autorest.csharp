@@ -19,7 +19,7 @@ namespace xml_service.Models
         private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "ComplexTypeNoMeta");
-            if (Optional.IsDefined(ID))
+            if (ID != null)
             {
                 writer.WriteStartElement("ID");
                 writer.WriteValue(ID);

@@ -15,7 +15,7 @@ namespace MgmtExpandResourceTypes.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Nsdname))
+            if (Nsdname != null)
             {
                 writer.WritePropertyName("nsdname"u8);
                 writer.WriteStringValue(Nsdname);
@@ -29,7 +29,7 @@ namespace MgmtExpandResourceTypes.Models
             {
                 return null;
             }
-            Optional<string> nsdname = default;
+            string nsdname = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("nsdname"u8))
@@ -38,7 +38,7 @@ namespace MgmtExpandResourceTypes.Models
                     continue;
                 }
             }
-            return new NsRecord(nsdname.Value);
+            return new NsRecord(nsdname);
         }
     }
 }

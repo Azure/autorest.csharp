@@ -16,7 +16,7 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(DnsServers))
+            if (!(DnsServers is ChangeTrackingList<string> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("dnsServers"u8);
                 writer.WriteStartArray();
@@ -26,7 +26,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(InternalDnsNameLabel))
+            if (InternalDnsNameLabel != null)
             {
                 writer.WritePropertyName("internalDnsNameLabel"u8);
                 writer.WriteStringValue(InternalDnsNameLabel);
@@ -40,11 +40,11 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<IList<string>> dnsServers = default;
-            Optional<IReadOnlyList<string>> appliedDnsServers = default;
-            Optional<string> internalDnsNameLabel = default;
-            Optional<string> internalFqdn = default;
-            Optional<string> internalDomainNameSuffix = default;
+            IList<string> dnsServers = default;
+            IReadOnlyList<string> appliedDnsServers = default;
+            string internalDnsNameLabel = default;
+            string internalFqdn = default;
+            string internalDomainNameSuffix = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("dnsServers"u8))
@@ -91,7 +91,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new NetworkInterfaceDnsSettings(Optional.ToList(dnsServers), Optional.ToList(appliedDnsServers), internalDnsNameLabel.Value, internalFqdn.Value, internalDomainNameSuffix.Value);
+            return new NetworkInterfaceDnsSettings(dnsServers ?? new ChangeTrackingList<string>(), appliedDnsServers ?? new ChangeTrackingList<string>(), internalDnsNameLabel, internalFqdn, internalDomainNameSuffix);
         }
     }
 }

@@ -15,17 +15,17 @@ namespace Azure.ResourceManager.Storage.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(RoutingChoice))
+            if (RoutingChoice.HasValue)
             {
                 writer.WritePropertyName("routingChoice"u8);
                 writer.WriteStringValue(RoutingChoice.Value.ToString());
             }
-            if (Optional.IsDefined(PublishMicrosoftEndpoints))
+            if (PublishMicrosoftEndpoints.HasValue)
             {
                 writer.WritePropertyName("publishMicrosoftEndpoints"u8);
                 writer.WriteBooleanValue(PublishMicrosoftEndpoints.Value);
             }
-            if (Optional.IsDefined(PublishInternetEndpoints))
+            if (PublishInternetEndpoints.HasValue)
             {
                 writer.WritePropertyName("publishInternetEndpoints"u8);
                 writer.WriteBooleanValue(PublishInternetEndpoints.Value);
@@ -39,9 +39,9 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Optional<RoutingChoice> routingChoice = default;
-            Optional<bool> publishMicrosoftEndpoints = default;
-            Optional<bool> publishInternetEndpoints = default;
+            RoutingChoice? routingChoice = default;
+            bool? publishMicrosoftEndpoints = default;
+            bool? publishInternetEndpoints = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("routingChoice"u8))
@@ -72,7 +72,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new RoutingPreference(Optional.ToNullable(routingChoice), Optional.ToNullable(publishMicrosoftEndpoints), Optional.ToNullable(publishInternetEndpoints));
+            return new RoutingPreference(routingChoice, publishMicrosoftEndpoints, publishInternetEndpoints);
         }
     }
 }

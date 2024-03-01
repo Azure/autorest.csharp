@@ -31,17 +31,17 @@ namespace OpenAI.Models
             writer.WriteNumberValue(PromptLossWeight);
             writer.WritePropertyName("learning_rate_multiplier"u8);
             writer.WriteNumberValue(LearningRateMultiplier);
-            if (OptionalProperty.IsDefined(ComputeClassificationMetrics))
+            if (ComputeClassificationMetrics.HasValue)
             {
                 writer.WritePropertyName("compute_classification_metrics"u8);
                 writer.WriteBooleanValue(ComputeClassificationMetrics.Value);
             }
-            if (OptionalProperty.IsDefined(ClassificationPositiveClass))
+            if (ClassificationPositiveClass != null)
             {
                 writer.WritePropertyName("classification_positive_class"u8);
                 writer.WriteStringValue(ClassificationPositiveClass);
             }
-            if (OptionalProperty.IsDefined(ClassificationNClasses))
+            if (ClassificationNClasses.HasValue)
             {
                 writer.WritePropertyName("classification_n_classes"u8);
                 writer.WriteNumberValue(ClassificationNClasses.Value);
@@ -88,9 +88,9 @@ namespace OpenAI.Models
             long batchSize = default;
             double promptLossWeight = default;
             double learningRateMultiplier = default;
-            OptionalProperty<bool> computeClassificationMetrics = default;
-            OptionalProperty<string> classificationPositiveClass = default;
-            OptionalProperty<long> classificationNClasses = default;
+            bool? computeClassificationMetrics = default;
+            string classificationPositiveClass = default;
+            long? classificationNClasses = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -144,7 +144,15 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new FineTuneHyperparams(nEpochs, batchSize, promptLossWeight, learningRateMultiplier, OptionalProperty.ToNullable(computeClassificationMetrics), classificationPositiveClass.Value, OptionalProperty.ToNullable(classificationNClasses), serializedAdditionalRawData);
+            return new FineTuneHyperparams(
+                nEpochs,
+                batchSize,
+                promptLossWeight,
+                learningRateMultiplier,
+                computeClassificationMetrics,
+                classificationPositiveClass,
+                classificationNClasses,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<FineTuneHyperparams>.Write(ModelReaderWriterOptions options)

@@ -15,12 +15,12 @@ namespace MgmtMockAndSample.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Mode))
+            if (Mode.HasValue)
             {
                 writer.WritePropertyName("mode"u8);
                 writer.WriteStringValue(Mode.Value.ToString());
             }
-            if (Optional.IsDefined(Configuration))
+            if (Configuration != null)
             {
                 writer.WritePropertyName("configuration"u8);
                 writer.WriteObjectValue(Configuration);
@@ -34,8 +34,8 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<FirewallPolicyIntrusionDetectionStateType> mode = default;
-            Optional<FirewallPolicyIntrusionDetectionConfiguration> configuration = default;
+            FirewallPolicyIntrusionDetectionStateType? mode = default;
+            FirewallPolicyIntrusionDetectionConfiguration configuration = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("mode"u8))
@@ -57,7 +57,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new FirewallPolicyIntrusionDetection(Optional.ToNullable(mode), configuration.Value);
+            return new FirewallPolicyIntrusionDetection(mode, configuration);
         }
     }
 }

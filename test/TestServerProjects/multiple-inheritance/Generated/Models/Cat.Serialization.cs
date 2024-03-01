@@ -26,17 +26,17 @@ namespace multiple_inheritance.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(LikesMilk))
+            if (LikesMilk.HasValue)
             {
                 writer.WritePropertyName("likesMilk"u8);
                 writer.WriteBooleanValue(LikesMilk.Value);
             }
-            if (Optional.IsDefined(Meows))
+            if (Meows.HasValue)
             {
                 writer.WritePropertyName("meows"u8);
                 writer.WriteBooleanValue(Meows.Value);
             }
-            if (Optional.IsDefined(Hisses))
+            if (Hisses.HasValue)
             {
                 writer.WritePropertyName("hisses"u8);
                 writer.WriteBooleanValue(Hisses.Value);
@@ -81,9 +81,9 @@ namespace multiple_inheritance.Models
             {
                 return null;
             }
-            Optional<bool> likesMilk = default;
-            Optional<bool> meows = default;
-            Optional<bool> hisses = default;
+            bool? likesMilk = default;
+            bool? meows = default;
+            bool? hisses = default;
             string name = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -127,7 +127,7 @@ namespace multiple_inheritance.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Cat(name, serializedAdditionalRawData, Optional.ToNullable(likesMilk), Optional.ToNullable(meows), Optional.ToNullable(hisses));
+            return new Cat(name, serializedAdditionalRawData, likesMilk, meows, hisses);
         }
 
         BinaryData IPersistableModel<Cat>.Write(ModelReaderWriterOptions options)

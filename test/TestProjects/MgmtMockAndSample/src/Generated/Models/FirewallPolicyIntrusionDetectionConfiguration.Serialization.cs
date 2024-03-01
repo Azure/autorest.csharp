@@ -16,7 +16,7 @@ namespace MgmtMockAndSample.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(SignatureOverrides))
+            if (!(SignatureOverrides is ChangeTrackingList<FirewallPolicyIntrusionDetectionSignatureSpecification> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("signatureOverrides"u8);
                 writer.WriteStartArray();
@@ -26,7 +26,7 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(BypassTrafficSettings))
+            if (!(BypassTrafficSettings is ChangeTrackingList<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("bypassTrafficSettings"u8);
                 writer.WriteStartArray();
@@ -45,8 +45,8 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<IList<FirewallPolicyIntrusionDetectionSignatureSpecification>> signatureOverrides = default;
-            Optional<IList<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>> bypassTrafficSettings = default;
+            IList<FirewallPolicyIntrusionDetectionSignatureSpecification> signatureOverrides = default;
+            IList<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications> bypassTrafficSettings = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("signatureOverrides"u8))
@@ -78,7 +78,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new FirewallPolicyIntrusionDetectionConfiguration(Optional.ToList(signatureOverrides), Optional.ToList(bypassTrafficSettings));
+            return new FirewallPolicyIntrusionDetectionConfiguration(signatureOverrides ?? new ChangeTrackingList<FirewallPolicyIntrusionDetectionSignatureSpecification>(), bypassTrafficSettings ?? new ChangeTrackingList<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>());
         }
     }
 }

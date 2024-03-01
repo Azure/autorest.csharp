@@ -18,72 +18,72 @@ namespace Inheritance.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(BaseClassProperty))
+            if (BaseClassProperty != null)
             {
                 writer.WritePropertyName("BaseClassProperty"u8);
                 writer.WriteStringValue(BaseClassProperty);
             }
-            if (Optional.IsDefined(DfeString))
+            if (DfeString != null)
             {
                 writer.WritePropertyName("DfeString"u8);
                 JsonSerializer.Serialize(writer, DfeString);
             }
-            if (Optional.IsDefined(DfeDouble))
+            if (DfeDouble != null)
             {
                 writer.WritePropertyName("DfeDouble"u8);
                 JsonSerializer.Serialize(writer, DfeDouble);
             }
-            if (Optional.IsDefined(DfeBool))
+            if (DfeBool != null)
             {
                 writer.WritePropertyName("DfeBool"u8);
                 JsonSerializer.Serialize(writer, DfeBool);
             }
-            if (Optional.IsDefined(DfeInt))
+            if (DfeInt != null)
             {
                 writer.WritePropertyName("DfeInt"u8);
                 JsonSerializer.Serialize(writer, DfeInt);
             }
-            if (Optional.IsDefined(DfeObject))
+            if (DfeObject != null)
             {
                 writer.WritePropertyName("DfeObject"u8);
                 JsonSerializer.Serialize(writer, DfeObject);
             }
-            if (Optional.IsDefined(DfeListOfT))
+            if (DfeListOfT != null)
             {
                 writer.WritePropertyName("DfeListOfT"u8);
                 JsonSerializer.Serialize(writer, DfeListOfT);
             }
-            if (Optional.IsDefined(DfeListOfString))
+            if (DfeListOfString != null)
             {
                 writer.WritePropertyName("DfeListOfString"u8);
                 JsonSerializer.Serialize(writer, DfeListOfString);
             }
-            if (Optional.IsDefined(DfeKeyValuePairs))
+            if (DfeKeyValuePairs != null)
             {
                 writer.WritePropertyName("DfeKeyValuePairs"u8);
                 JsonSerializer.Serialize(writer, DfeKeyValuePairs);
             }
-            if (Optional.IsDefined(DfeDateTime))
+            if (DfeDateTime != null)
             {
                 writer.WritePropertyName("DfeDateTime"u8);
                 JsonSerializer.Serialize(writer, DfeDateTime);
             }
-            if (Optional.IsDefined(DfeDuration))
+            if (DfeDuration != null)
             {
                 writer.WritePropertyName("DfeDuration"u8);
                 JsonSerializer.Serialize(writer, DfeDuration);
             }
-            if (Optional.IsDefined(DfeUri))
+            if (DfeUri != null)
             {
                 writer.WritePropertyName("DfeUri"u8);
                 JsonSerializer.Serialize(writer, DfeUri);
             }
-            if (Optional.IsDefined(SomeProperty))
+            if (SomeProperty != null)
             {
                 writer.WritePropertyName("SomeProperty"u8);
                 writer.WriteStringValue(SomeProperty);
             }
-            if (Optional.IsDefined(SomeOtherProperty))
+            if (SomeOtherProperty != null)
             {
                 writer.WritePropertyName("SomeOtherProperty"u8);
                 writer.WriteStringValue(SomeOtherProperty);
@@ -97,20 +97,20 @@ namespace Inheritance.Models
             {
                 return null;
             }
-            Optional<string> baseClassProperty = default;
-            Optional<DataFactoryElement<string>> dfeString = default;
-            Optional<DataFactoryElement<double>> dfeDouble = default;
-            Optional<DataFactoryElement<bool>> dfeBool = default;
-            Optional<DataFactoryElement<int>> dfeInt = default;
-            Optional<DataFactoryElement<BinaryData>> dfeObject = default;
-            Optional<DataFactoryElement<IList<SeparateClass>>> dfeListOfT = default;
-            Optional<DataFactoryElement<IList<string>>> dfeListOfString = default;
-            Optional<DataFactoryElement<IDictionary<string, string>>> dfeKeyValuePairs = default;
-            Optional<DataFactoryElement<DateTimeOffset>> dfeDateTime = default;
-            Optional<DataFactoryElement<TimeSpan>> dfeDuration = default;
-            Optional<DataFactoryElement<Uri>> dfeUri = default;
-            Optional<string> someProperty = default;
-            Optional<string> someOtherProperty = default;
+            string baseClassProperty = default;
+            DataFactoryElement<string> dfeString = default;
+            DataFactoryElement<double> dfeDouble = default;
+            DataFactoryElement<bool> dfeBool = default;
+            DataFactoryElement<int> dfeInt = default;
+            DataFactoryElement<BinaryData> dfeObject = default;
+            DataFactoryElement<IList<SeparateClass>> dfeListOfT = default;
+            DataFactoryElement<IList<string>> dfeListOfString = default;
+            DataFactoryElement<IDictionary<string, string>> dfeKeyValuePairs = default;
+            DataFactoryElement<DateTimeOffset> dfeDateTime = default;
+            DataFactoryElement<TimeSpan> dfeDuration = default;
+            DataFactoryElement<Uri> dfeUri = default;
+            string someProperty = default;
+            string someOtherProperty = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("BaseClassProperty"u8))
@@ -228,7 +228,21 @@ namespace Inheritance.Models
                     continue;
                 }
             }
-            return new ClassThatInheritsFromSomePropertiesAndBaseClass(someProperty.Value, someOtherProperty.Value, baseClassProperty.Value, dfeString.Value, dfeDouble.Value, dfeBool.Value, dfeInt.Value, dfeObject.Value, dfeListOfT.Value, dfeListOfString.Value, dfeKeyValuePairs.Value, dfeDateTime.Value, dfeDuration.Value, dfeUri.Value);
+            return new ClassThatInheritsFromSomePropertiesAndBaseClass(
+                someProperty,
+                someOtherProperty,
+                baseClassProperty,
+                dfeString,
+                dfeDouble,
+                dfeBool,
+                dfeInt,
+                dfeObject,
+                dfeListOfT,
+                dfeListOfString,
+                dfeKeyValuePairs,
+                dfeDateTime,
+                dfeDuration,
+                dfeUri);
         }
     }
 }

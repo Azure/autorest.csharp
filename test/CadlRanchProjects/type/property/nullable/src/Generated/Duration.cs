@@ -242,7 +242,10 @@ namespace _Type.Property.Nullable
         /// <include file="Docs/Duration.xml" path="doc/members/member[@name='PatchNonNullAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PatchNonNullAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Duration.PatchNonNull");
             scope.Start();
@@ -276,7 +279,10 @@ namespace _Type.Property.Nullable
         /// <include file="Docs/Duration.xml" path="doc/members/member[@name='PatchNonNull(RequestContent,RequestContext)']/*" />
         public virtual Response PatchNonNull(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Duration.PatchNonNull");
             scope.Start();
@@ -310,7 +316,10 @@ namespace _Type.Property.Nullable
         /// <include file="Docs/Duration.xml" path="doc/members/member[@name='PatchNullAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PatchNullAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Duration.PatchNull");
             scope.Start();
@@ -344,7 +353,10 @@ namespace _Type.Property.Nullable
         /// <include file="Docs/Duration.xml" path="doc/members/member[@name='PatchNull(RequestContent,RequestContext)']/*" />
         public virtual Response PatchNull(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Duration.PatchNull");
             scope.Start();

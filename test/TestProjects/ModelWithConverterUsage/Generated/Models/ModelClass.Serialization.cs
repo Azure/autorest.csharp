@@ -28,14 +28,14 @@ namespace ModelWithConverterUsage.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(StringProperty))
+            if (StringProperty != null)
             {
                 writer.WritePropertyName("String_Property"u8);
                 writer.WriteStringValue(StringProperty);
             }
             writer.WritePropertyName("Enum_Property"u8);
             writer.WriteStringValue(EnumProperty.ToSerialString());
-            if (Optional.IsDefined(ObjProperty))
+            if (ObjProperty != null)
             {
                 writer.WritePropertyName("Obj_Property"u8);
                 writer.WriteObjectValue(ObjProperty);
@@ -78,9 +78,9 @@ namespace ModelWithConverterUsage.Models
             {
                 return null;
             }
-            Optional<string> stringProperty = default;
+            string stringProperty = default;
             EnumProperty enumProperty = default;
-            Optional<Product> objProperty = default;
+            Product objProperty = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -101,7 +101,7 @@ namespace ModelWithConverterUsage.Models
                     {
                         continue;
                     }
-                    objProperty = Product.DeserializeProduct(property.Value);
+                    objProperty = Product.DeserializeProduct(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")
@@ -110,7 +110,7 @@ namespace ModelWithConverterUsage.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ModelClass(stringProperty.Value, enumProperty, objProperty.Value, serializedAdditionalRawData);
+            return new ModelClass(stringProperty, enumProperty, objProperty, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ModelClass>.Write(ModelReaderWriterOptions options)

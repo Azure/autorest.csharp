@@ -15,22 +15,22 @@ namespace MgmtAcronymMapping.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(PassName))
+            if (PassName.HasValue)
             {
                 writer.WritePropertyName("passName"u8);
                 writer.WriteStringValue(PassName.Value.ToString());
             }
-            if (Optional.IsDefined(ComponentName))
+            if (ComponentName.HasValue)
             {
                 writer.WritePropertyName("componentName"u8);
                 writer.WriteStringValue(ComponentName.Value.ToString());
             }
-            if (Optional.IsDefined(SettingName))
+            if (SettingName.HasValue)
             {
                 writer.WritePropertyName("settingName"u8);
                 writer.WriteStringValue(SettingName.Value.ToSerialString());
             }
-            if (Optional.IsDefined(BackupFrequency))
+            if (BackupFrequency.HasValue)
             {
                 writer.WritePropertyName("backupFrequency"u8);
                 writer.WriteNumberValue(BackupFrequency.Value);
@@ -44,10 +44,10 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<PassName> passName = default;
-            Optional<ComponentName> componentName = default;
-            Optional<SettingName> settingName = default;
-            Optional<int> backupFrequency = default;
+            PassName? passName = default;
+            ComponentName? componentName = default;
+            SettingName? settingName = default;
+            int? backupFrequency = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("passName"u8))
@@ -87,7 +87,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new AdditionalUnattendContent(Optional.ToNullable(passName), Optional.ToNullable(componentName), Optional.ToNullable(settingName), Optional.ToNullable(backupFrequency));
+            return new AdditionalUnattendContent(passName, componentName, settingName, backupFrequency);
         }
     }
 }

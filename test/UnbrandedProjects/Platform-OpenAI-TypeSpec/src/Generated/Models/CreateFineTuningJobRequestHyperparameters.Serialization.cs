@@ -23,7 +23,7 @@ namespace OpenAI.Models
             }
 
             writer.WriteStartObject();
-            if (OptionalProperty.IsDefined(NEpochs))
+            if (NEpochs != null)
             {
                 writer.WritePropertyName("n_epochs"u8);
 #if NET6_0_OR_GREATER
@@ -73,7 +73,7 @@ namespace OpenAI.Models
             {
                 return null;
             }
-            OptionalProperty<BinaryData> nEpochs = default;
+            BinaryData nEpochs = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -93,7 +93,7 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new CreateFineTuningJobRequestHyperparameters(nEpochs.Value, serializedAdditionalRawData);
+            return new CreateFineTuningJobRequestHyperparameters(nEpochs, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<CreateFineTuningJobRequestHyperparameters>.Write(ModelReaderWriterOptions options)

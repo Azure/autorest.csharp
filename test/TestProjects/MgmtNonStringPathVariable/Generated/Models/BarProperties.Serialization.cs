@@ -16,7 +16,7 @@ namespace MgmtNonStringPathVariable.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Buzz))
+            if (Buzz.HasValue)
             {
                 writer.WritePropertyName("buzz"u8);
                 writer.WriteStringValue(Buzz.Value);
@@ -30,7 +30,7 @@ namespace MgmtNonStringPathVariable.Models
             {
                 return null;
             }
-            Optional<Guid> buzz = default;
+            Guid? buzz = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("buzz"u8))
@@ -43,7 +43,7 @@ namespace MgmtNonStringPathVariable.Models
                     continue;
                 }
             }
-            return new BarProperties(Optional.ToNullable(buzz));
+            return new BarProperties(buzz);
         }
     }
 }

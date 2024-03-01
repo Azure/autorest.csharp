@@ -48,12 +48,12 @@ namespace FirstTestTypeSpec.Models
             writer.WriteEndObject();
             writer.WritePropertyName("requiredModel"u8);
             writer.WriteObjectValue(RequiredModel);
-            if (Optional.IsDefined(IntExtensibleEnum))
+            if (IntExtensibleEnum.HasValue)
             {
                 writer.WritePropertyName("intExtensibleEnum"u8);
                 writer.WriteNumberValue(IntExtensibleEnum.Value.ToSerialInt32());
             }
-            if (Optional.IsCollectionDefined(IntExtensibleEnumCollection))
+            if (!(IntExtensibleEnumCollection is ChangeTrackingList<IntExtensibleEnum> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("intExtensibleEnumCollection"u8);
                 writer.WriteStartArray();
@@ -63,12 +63,12 @@ namespace FirstTestTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(FloatExtensibleEnum))
+            if (FloatExtensibleEnum.HasValue)
             {
                 writer.WritePropertyName("floatExtensibleEnum"u8);
                 writer.WriteNumberValue(FloatExtensibleEnum.Value.ToSerialInt32());
             }
-            if (Optional.IsCollectionDefined(FloatExtensibleEnumCollection))
+            if (!(FloatExtensibleEnumCollection is ChangeTrackingList<FloatExtensibleEnum> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("floatExtensibleEnumCollection"u8);
                 writer.WriteStartArray();
@@ -78,12 +78,12 @@ namespace FirstTestTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(FloatFixedEnum))
+            if (FloatFixedEnum.HasValue)
             {
                 writer.WritePropertyName("floatFixedEnum"u8);
                 writer.WriteNumberValue(FloatFixedEnum.Value.ToSerialSingle());
             }
-            if (Optional.IsCollectionDefined(FloatFixedEnumCollection))
+            if (!(FloatFixedEnumCollection is ChangeTrackingList<FloatFixedEnum> collection1 && collection1.IsUndefined))
             {
                 writer.WritePropertyName("floatFixedEnumCollection"u8);
                 writer.WriteStartArray();
@@ -93,12 +93,12 @@ namespace FirstTestTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(IntFixedEnum))
+            if (IntFixedEnum.HasValue)
             {
                 writer.WritePropertyName("intFixedEnum"u8);
                 writer.WriteNumberValue((int)IntFixedEnum.Value);
             }
-            if (Optional.IsCollectionDefined(IntFixedEnumCollection))
+            if (!(IntFixedEnumCollection is ChangeTrackingList<IntFixedEnum> collection2 && collection2.IsUndefined))
             {
                 writer.WritePropertyName("intFixedEnumCollection"u8);
                 writer.WriteStartArray();
@@ -108,7 +108,7 @@ namespace FirstTestTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(StringFixedEnum))
+            if (StringFixedEnum.HasValue)
             {
                 writer.WritePropertyName("stringFixedEnum"u8);
                 writer.WriteStringValue(StringFixedEnum.Value.ToSerialString());
@@ -122,7 +122,7 @@ namespace FirstTestTypeSpec.Models
                 JsonSerializer.Serialize(writer, document.RootElement);
             }
 #endif
-            if (Optional.IsDefined(OptionalUnknown))
+            if (OptionalUnknown != null)
             {
                 writer.WritePropertyName("optionalUnknown"u8);
 #if NET6_0_OR_GREATER
@@ -154,7 +154,7 @@ namespace FirstTestTypeSpec.Models
 #endif
             }
             writer.WriteEndObject();
-            if (Optional.IsCollectionDefined(OptionalRecordUnknown))
+            if (!(OptionalRecordUnknown is ChangeTrackingDictionary<string, BinaryData> collection3 && collection3.IsUndefined))
             {
                 writer.WritePropertyName("optionalRecordUnknown"u8);
                 writer.WriteStartObject();
@@ -200,7 +200,7 @@ namespace FirstTestTypeSpec.Models
                 }
                 writer.WriteEndObject();
             }
-            if (options.Format != "W" && Optional.IsCollectionDefined(ReadOnlyOptionalRecordUnknown))
+            if (options.Format != "W" && !(ReadOnlyOptionalRecordUnknown is ChangeTrackingDictionary<string, BinaryData> collection4 && collection4.IsUndefined))
             {
                 writer.WritePropertyName("readOnlyOptionalRecordUnknown"u8);
                 writer.WriteStartObject();
@@ -268,21 +268,21 @@ namespace FirstTestTypeSpec.Models
             IList<StringFixedEnum> requiredCollection = default;
             IDictionary<string, StringExtensibleEnum> requiredDictionary = default;
             Thing requiredModel = default;
-            Optional<IntExtensibleEnum> intExtensibleEnum = default;
-            Optional<IList<IntExtensibleEnum>> intExtensibleEnumCollection = default;
-            Optional<FloatExtensibleEnum> floatExtensibleEnum = default;
-            Optional<IList<FloatExtensibleEnum>> floatExtensibleEnumCollection = default;
-            Optional<FloatFixedEnum> floatFixedEnum = default;
-            Optional<IList<FloatFixedEnum>> floatFixedEnumCollection = default;
-            Optional<IntFixedEnum> intFixedEnum = default;
-            Optional<IList<IntFixedEnum>> intFixedEnumCollection = default;
-            Optional<StringFixedEnum> stringFixedEnum = default;
+            IntExtensibleEnum? intExtensibleEnum = default;
+            IList<IntExtensibleEnum> intExtensibleEnumCollection = default;
+            FloatExtensibleEnum? floatExtensibleEnum = default;
+            IList<FloatExtensibleEnum> floatExtensibleEnumCollection = default;
+            FloatFixedEnum? floatFixedEnum = default;
+            IList<FloatFixedEnum> floatFixedEnumCollection = default;
+            IntFixedEnum? intFixedEnum = default;
+            IList<IntFixedEnum> intFixedEnumCollection = default;
+            StringFixedEnum? stringFixedEnum = default;
             BinaryData requiredUnknown = default;
-            Optional<BinaryData> optionalUnknown = default;
+            BinaryData optionalUnknown = default;
             IDictionary<string, BinaryData> requiredRecordUnknown = default;
-            Optional<IDictionary<string, BinaryData>> optionalRecordUnknown = default;
+            IDictionary<string, BinaryData> optionalRecordUnknown = default;
             IReadOnlyDictionary<string, BinaryData> readOnlyRequiredRecordUnknown = default;
-            Optional<IReadOnlyDictionary<string, BinaryData>> readOnlyOptionalRecordUnknown = default;
+            IReadOnlyDictionary<string, BinaryData> readOnlyOptionalRecordUnknown = default;
             ModelWithRequiredNullableProperties modelWithRequiredNullable = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -320,7 +320,7 @@ namespace FirstTestTypeSpec.Models
                 }
                 if (property.NameEquals("requiredModel"u8))
                 {
-                    requiredModel = Thing.DeserializeThing(property.Value);
+                    requiredModel = Thing.DeserializeThing(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("intExtensibleEnum"u8))
@@ -516,7 +516,7 @@ namespace FirstTestTypeSpec.Models
                 }
                 if (property.NameEquals("modelWithRequiredNullable"u8))
                 {
-                    modelWithRequiredNullable = ModelWithRequiredNullableProperties.DeserializeModelWithRequiredNullableProperties(property.Value);
+                    modelWithRequiredNullable = ModelWithRequiredNullableProperties.DeserializeModelWithRequiredNullableProperties(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")
@@ -525,7 +525,29 @@ namespace FirstTestTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new RoundTripModel(requiredString, requiredInt, requiredCollection, requiredDictionary, requiredModel, Optional.ToNullable(intExtensibleEnum), Optional.ToList(intExtensibleEnumCollection), Optional.ToNullable(floatExtensibleEnum), Optional.ToList(floatExtensibleEnumCollection), Optional.ToNullable(floatFixedEnum), Optional.ToList(floatFixedEnumCollection), Optional.ToNullable(intFixedEnum), Optional.ToList(intFixedEnumCollection), Optional.ToNullable(stringFixedEnum), requiredUnknown, optionalUnknown.Value, requiredRecordUnknown, Optional.ToDictionary(optionalRecordUnknown), readOnlyRequiredRecordUnknown, Optional.ToDictionary(readOnlyOptionalRecordUnknown), modelWithRequiredNullable, serializedAdditionalRawData);
+            return new RoundTripModel(
+                requiredString,
+                requiredInt,
+                requiredCollection,
+                requiredDictionary,
+                requiredModel,
+                intExtensibleEnum,
+                intExtensibleEnumCollection ?? new ChangeTrackingList<IntExtensibleEnum>(),
+                floatExtensibleEnum,
+                floatExtensibleEnumCollection ?? new ChangeTrackingList<FloatExtensibleEnum>(),
+                floatFixedEnum,
+                floatFixedEnumCollection ?? new ChangeTrackingList<FloatFixedEnum>(),
+                intFixedEnum,
+                intFixedEnumCollection ?? new ChangeTrackingList<IntFixedEnum>(),
+                stringFixedEnum,
+                requiredUnknown,
+                optionalUnknown,
+                requiredRecordUnknown,
+                optionalRecordUnknown ?? new ChangeTrackingDictionary<string, BinaryData>(),
+                readOnlyRequiredRecordUnknown,
+                readOnlyOptionalRecordUnknown ?? new ChangeTrackingDictionary<string, BinaryData>(),
+                modelWithRequiredNullable,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<RoundTripModel>.Write(ModelReaderWriterOptions options)
