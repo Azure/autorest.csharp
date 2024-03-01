@@ -100,7 +100,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             var writer = new CodeWriter();
             new ExpressionTypeProviderWriter(writer, ChangeTrackingListProvider.Instance).Write();
-            project.AddHelperFile($"Internal/{ChangeTrackingListProvider.Instance.Type.Name}.cs", writer.ToString());
+            project.AddGeneratedFile($"Internal/{ChangeTrackingListProvider.Instance.Type.Name}.cs", writer.ToString());
 
             await project.PostProcessAsync(new PostProcessor(
                 modelsToKeep: library.AccessOverriddenModels.ToImmutableHashSet(),

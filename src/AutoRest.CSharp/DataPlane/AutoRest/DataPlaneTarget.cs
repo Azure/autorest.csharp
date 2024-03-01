@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             var writer = new CodeWriter();
             new ExpressionTypeProviderWriter(writer, ChangeTrackingListProvider.Instance).Write();
-            project.AddHelperFile($"Internal/{ChangeTrackingListProvider.Instance.Type.Name}.cs", writer.ToString());
+            project.AddGeneratedFile($"Internal/{ChangeTrackingListProvider.Instance.Type.Name}.cs", writer.ToString());
 
             foreach (var model in library.Models)
             {
