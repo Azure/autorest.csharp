@@ -408,7 +408,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     {
                         if (val != RequestConditionHeaders.None && !requestConditionFlag.HasFlag(val))
                         {
-                            using (writer.Scope($"if ({parameter.Name:I}{nullableFlag}.{requestConditionFieldNames[val]} is null)"))
+                            using (writer.Scope($"if ({parameter.Name:I}{nullableFlag}.{requestConditionFieldNames[val]} is not null)"))
                             {
                                 writer.Line($"throw new {typeof(ArgumentNullException)}(nameof({parameter.Name:I}), \"Service does not support the {requestConditionHeaderNames[val]} header for this operation.\");");
                             }
