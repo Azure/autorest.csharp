@@ -24,6 +24,7 @@
     <PackageReference Include="NUnit3TestAdapter" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="Moq" Version="4.20.69" />
+    <PackageReference Update="System.ClientModel" Version="1.0.0-beta.3" NoWarn="NU1605" />
 
     <ProjectReference Include="../../src/AutoRest.CSharp/AutoRest.CSharp.csproj" />
   </ItemGroup>
