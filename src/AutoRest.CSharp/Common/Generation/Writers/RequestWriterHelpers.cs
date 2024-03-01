@@ -9,6 +9,7 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -470,7 +471,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 writer.Append($" != null && !(");
                 writer.WriteValueExpression(valueExpressoin);
-                writer.Append($" is {new CSharpType(Configuration.ApiTypes.ChangeTrackingListType, type.Arguments)} {changeTrackingList:D} && {changeTrackingList}.IsUndefined)");
+                writer.Append($" is {ChangeTrackingListProvider.Instance.Type.WithArguments(type.Arguments)} {changeTrackingList:D} && {changeTrackingList}.IsUndefined)");
 
                 return writer.LineRaw(")").Scope();
             }

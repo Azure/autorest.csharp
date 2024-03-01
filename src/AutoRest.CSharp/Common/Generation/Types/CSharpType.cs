@@ -56,14 +56,15 @@ namespace AutoRest.CSharp.Generation.Types
             IsValueType = type.IsValueType;
             IsEnum = type.IsEnum;
             IsPublic = type.IsPublic && arguments.All(t => t.IsPublic);
+            GenericArguments = Array.Empty<string>();
         }
 
-        public CSharpType(TypeProvider implementation, bool isValueType = false, bool isEnum = false, bool isNullable = false, CSharpType[]? arguments = default)
-            : this(implementation, implementation.Declaration.Namespace, implementation.Declaration.Name, isValueType, isEnum, isNullable, arguments)
+        public CSharpType(TypeProvider implementation, bool isValueType = false, bool isEnum = false, bool isNullable = false, CSharpType[]? arguments = default, string[]? genericArguments = default)
+            : this(implementation, implementation.Declaration.Namespace, implementation.Declaration.Name, isValueType, isEnum, isNullable, arguments, genericArguments)
         {
         }
 
-        public CSharpType(TypeProvider implementation, string ns, string name, bool isValueType = false, bool isEnum = false, bool isNullable = false, CSharpType[]? arguments = default)
+        public CSharpType(TypeProvider implementation, string ns, string name, bool isValueType = false, bool isEnum = false, bool isNullable = false, CSharpType[]? arguments = default, string[]? genericArguments = default)
         {
             _implementation = implementation;
             Name = name;
@@ -76,8 +77,10 @@ namespace AutoRest.CSharp.Generation.Types
             SerializeAs = _implementation?.SerializeAs;
             IsPublic = implementation.Declaration.Accessibility == "public"
                 && Arguments.All(t => t.IsPublic);
+            GenericArguments = genericArguments ?? Array.Empty<string>();
         }
 
+        public IReadOnlyList<string> GenericArguments { get; }
         public string Namespace { get; }
         public string Name { get; }
         public bool IsValueType { get; }
@@ -297,6 +300,18 @@ namespace AutoRest.CSharp.Generation.Types
             }
 
             return true;
+        }
+
+        internal CSharpType WithArguments(IReadOnlyList<CSharpType> arguments)
+        {
+            if (IsFrameworkType)
+            {
+                return new CSharpType(FrameworkType, IsNullable, arguments);
+            }
+            else
+            {
+                return new CSharpType(Implementation, Namespace, Name, IsValueType, IsEnum, IsNullable, arguments.ToArray());
+            }
         }
     }
 }

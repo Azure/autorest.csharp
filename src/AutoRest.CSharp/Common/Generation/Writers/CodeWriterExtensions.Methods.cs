@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
@@ -26,6 +25,9 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             switch (bodyStatement)
             {
+                case DeclareFieldStatement fieldDeclaration:
+                    writer.Line($"private {fieldDeclaration.Variable.Type} {fieldDeclaration.Variable.Declaration:D};");
+                    break;
                 case InvokeInstanceMethodStatement(var instance, var methodName, var arguments, var callAsAsync):
                     writer.WriteValueExpression(new InvokeInstanceMethodExpression(instance, methodName, arguments, null, callAsAsync));
                     writer.LineRaw(";");
@@ -251,6 +253,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteDeclaration(this CodeWriter writer, DeclarationStatement declaration)
         {
+            bool endWithSemicolon = true;
             switch (declaration)
             {
                 case AssignValueIfNullStatement setValue:
@@ -287,15 +290,30 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
 
                     writer.RemoveTrailingComma();
-                    writer.AppendRaw(") => ");
-                    writer.WriteValueExpression(localFunction.Body);
+                    writer.AppendRaw(")");
+                    if (localFunction.BodyExpression is not null)
+                    {
+                        writer.AppendRaw(" => ");
+                        writer.WriteValueExpression(localFunction.BodyExpression);
+                    }
+                    else
+                    {
+                        using (writer.Scope())
+                        {
+                            writer.WriteMethodBodyStatement(localFunction.BodyStatement!);
+                        }
+                        endWithSemicolon = false;
+                    }
                     break;
                 case UnaryOperatorStatement unaryOperatorStatement:
                     writer.WriteValueExpression(unaryOperatorStatement.Expression);
                     break;
             }
 
-            writer.LineRaw(";");
+            if (endWithSemicolon)
+            {
+                writer.LineRaw(";");
+            }
         }
 
         public static void WriteValueExpression(this CodeWriter writer, ValueExpression expression)

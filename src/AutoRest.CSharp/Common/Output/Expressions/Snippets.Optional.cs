@@ -7,6 +7,7 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models.Serialization;
@@ -20,7 +21,7 @@ namespace AutoRest.CSharp.Common.Output.Models
             public static BoolExpression IsCollectionDefined(TypedValueExpression collection)
             {
                 CodeWriterDeclaration collectionDeclaration = new("collection");
-                CSharpType collectionType = new(collection.Type.Arguments.Count == 1 ? Configuration.ApiTypes.ChangeTrackingListType : Configuration.ApiTypes.ChangeTrackingDictionaryType, collection.Type.Arguments);
+                CSharpType collectionType = collection.Type.Arguments.Count == 1 ? ChangeTrackingListProvider.Instance.Type.WithArguments(collection.Type.Arguments) : new(Configuration.ApiTypes.ChangeTrackingDictionaryType, collection.Type.Arguments);
                 VariableReference collectionReference = new VariableReference(collectionType, collectionDeclaration);
                 DeclarationExpression collectionDeclarationExpression = new(collectionReference, false);
                 return Not(BoolExpression.Is(collection, collectionDeclarationExpression)
@@ -47,8 +48,9 @@ namespace AutoRest.CSharp.Common.Output.Models
                     return collection;
                 }
 
-                var collectionType = collection.Type.Arguments.Count == 1 ? Configuration.ApiTypes.ChangeTrackingListType : Configuration.ApiTypes.ChangeTrackingDictionaryType;
-                var changeTrackingType = new CSharpType(collectionType, collection.Type.Arguments);
+                var changeTrackingType = collection.Type.Arguments.Count == 1
+                    ? ChangeTrackingListProvider.Instance.Type.WithArguments(collection.Type.Arguments)
+                    : new CSharpType(Configuration.ApiTypes.ChangeTrackingDictionaryType, collection.Type.Arguments);
                 return NullCoalescing(collection, New.Instance(changeTrackingType));
             }
 

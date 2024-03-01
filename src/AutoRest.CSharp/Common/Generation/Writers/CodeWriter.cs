@@ -10,6 +10,7 @@ using System.Text;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis.CSharp;
 
@@ -431,6 +432,12 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void AppendType(CSharpType type, bool isDeclaration, bool writeTypeNameOnly)
         {
+            if (!type.IsFrameworkType && type.Implementation is GenericParamTypeProvider)
+            {
+                AppendRaw(type.Name);
+                return;
+            }
+
             if (type.TryGetCSharpFriendlyName(out var keywordName))
             {
                 AppendRaw(keywordName);
@@ -459,6 +466,18 @@ namespace AutoRest.CSharp.Generation.Writers
                 foreach (var typeArgument in type.Arguments)
                 {
                     AppendType(typeArgument, false, writeTypeNameOnly);
+                    AppendRaw(_writingXmlDocumentation ? "," : ", ");
+                }
+                RemoveTrailingComma();
+                AppendRaw(_writingXmlDocumentation ? "}" : ">");
+            }
+
+            if (type.GenericArguments.Any())
+            {
+                AppendRaw(_writingXmlDocumentation ? "{" : "<");
+                foreach (var genericArgument in type.GenericArguments)
+                {
+                    AppendRaw(genericArgument);
                     AppendRaw(_writingXmlDocumentation ? "," : ", ");
                 }
                 RemoveTrailingComma();
