@@ -8,12 +8,12 @@
 using System;
 using Azure;
 using Azure.Core.Extensions;
-using lro;
+using lrotsp;
 
 namespace Microsoft.Extensions.Azure
 {
     /// <summary> Extension methods to add <see cref="LroClient"/> to client builder. </summary>
-    public static partial class LroClientBuilderExtensions
+    public static partial class LrotspClientBuilderExtensions
     {
         /// <summary> Registers a <see cref="LroClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
