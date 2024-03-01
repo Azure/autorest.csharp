@@ -7,7 +7,7 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
+using MgmtOmitOperationGroups;
 
 namespace MgmtOmitOperationGroups.Models
 {

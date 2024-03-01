@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtListMethods;
 
 namespace MgmtListMethods.Models
 {

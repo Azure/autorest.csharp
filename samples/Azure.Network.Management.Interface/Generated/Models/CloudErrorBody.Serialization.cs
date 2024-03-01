@@ -7,7 +7,7 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
+using Azure.Network.Management.Interface;
 
 namespace Azure.Network.Management.Interface.Models
 {

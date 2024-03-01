@@ -7,6 +7,7 @@ using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using NoTestTypeSpec;
 
 namespace NoTestTypeSpec.Models
 {
@@ -64,7 +65,7 @@ namespace NoTestTypeSpec.Models
             }
             writer.WritePropertyName("requiredBadDescription"u8);
             writer.WriteStringValue(RequiredBadDescription);
-            if (!(OptionalNullableList is OptionalList<int> collection && collection.IsUndefined))
+            if (!(OptionalNullableList is ChangeTrackingList<int> collection && collection.IsUndefined))
             {
                 if (OptionalNullableList != null)
                 {
@@ -81,7 +82,7 @@ namespace NoTestTypeSpec.Models
                     writer.WriteNull("optionalNullableList");
                 }
             }
-            if (RequiredNullableList != null && !(RequiredNullableList is OptionalList<int> collection0 && collection0.IsUndefined))
+            if (RequiredNullableList != null && !(RequiredNullableList is ChangeTrackingList<int> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("requiredNullableList"u8);
                 writer.WriteStartArray();
@@ -269,7 +270,7 @@ namespace NoTestTypeSpec.Models
                 optionalLiteralFloat,
                 optionalLiteralBool,
                 requiredBadDescription,
-                optionalNullableList ?? new OptionalList<int>(),
+                optionalNullableList ?? new ChangeTrackingList<int>(),
                 requiredNullableList,
                 serializedAdditionalRawData);
         }

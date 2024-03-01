@@ -7,6 +7,7 @@ using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using UnbrandedTypeSpec;
 
 namespace UnbrandedTypeSpec.Models
 {
@@ -59,7 +60,7 @@ namespace UnbrandedTypeSpec.Models
                 writer.WritePropertyName("intExtensibleEnum"u8);
                 writer.WriteNumberValue(IntExtensibleEnum.Value.ToSerialInt32());
             }
-            if (!(IntExtensibleEnumCollection is OptionalList<IntExtensibleEnum> collection && collection.IsUndefined))
+            if (!(IntExtensibleEnumCollection is ChangeTrackingList<IntExtensibleEnum> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("intExtensibleEnumCollection"u8);
                 writer.WriteStartArray();
@@ -74,7 +75,7 @@ namespace UnbrandedTypeSpec.Models
                 writer.WritePropertyName("floatExtensibleEnum"u8);
                 writer.WriteNumberValue(FloatExtensibleEnum.Value.ToSerialInt32());
             }
-            if (!(FloatExtensibleEnumCollection is OptionalList<FloatExtensibleEnum> collection0 && collection0.IsUndefined))
+            if (!(FloatExtensibleEnumCollection is ChangeTrackingList<FloatExtensibleEnum> collection0 && collection0.IsUndefined))
             {
                 writer.WritePropertyName("floatExtensibleEnumCollection"u8);
                 writer.WriteStartArray();
@@ -89,7 +90,7 @@ namespace UnbrandedTypeSpec.Models
                 writer.WritePropertyName("floatFixedEnum"u8);
                 writer.WriteNumberValue(FloatFixedEnum.Value.ToSerialSingle());
             }
-            if (!(FloatFixedEnumCollection is OptionalList<FloatFixedEnum> collection1 && collection1.IsUndefined))
+            if (!(FloatFixedEnumCollection is ChangeTrackingList<FloatFixedEnum> collection1 && collection1.IsUndefined))
             {
                 writer.WritePropertyName("floatFixedEnumCollection"u8);
                 writer.WriteStartArray();
@@ -104,7 +105,7 @@ namespace UnbrandedTypeSpec.Models
                 writer.WritePropertyName("intFixedEnum"u8);
                 writer.WriteNumberValue((int)IntFixedEnum.Value);
             }
-            if (!(IntFixedEnumCollection is OptionalList<IntFixedEnum> collection2 && collection2.IsUndefined))
+            if (!(IntFixedEnumCollection is ChangeTrackingList<IntFixedEnum> collection2 && collection2.IsUndefined))
             {
                 writer.WritePropertyName("intFixedEnumCollection"u8);
                 writer.WriteStartArray();
@@ -560,13 +561,13 @@ namespace UnbrandedTypeSpec.Models
                 requiredDictionary,
                 requiredModel,
                 intExtensibleEnum,
-                intExtensibleEnumCollection ?? new OptionalList<IntExtensibleEnum>(),
+                intExtensibleEnumCollection ?? new ChangeTrackingList<IntExtensibleEnum>(),
                 floatExtensibleEnum,
-                floatExtensibleEnumCollection ?? new OptionalList<FloatExtensibleEnum>(),
+                floatExtensibleEnumCollection ?? new ChangeTrackingList<FloatExtensibleEnum>(),
                 floatFixedEnum,
-                floatFixedEnumCollection ?? new OptionalList<FloatFixedEnum>(),
+                floatFixedEnumCollection ?? new ChangeTrackingList<FloatFixedEnum>(),
                 intFixedEnum,
-                intFixedEnumCollection ?? new OptionalList<IntFixedEnum>(),
+                intFixedEnumCollection ?? new ChangeTrackingList<IntFixedEnum>(),
                 stringFixedEnum,
                 requiredUnknown,
                 optionalUnknown,

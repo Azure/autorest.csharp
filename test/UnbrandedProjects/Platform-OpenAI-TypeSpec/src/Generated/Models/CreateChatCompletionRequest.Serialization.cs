@@ -7,6 +7,7 @@ using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -32,7 +33,7 @@ namespace OpenAI.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            if (!(Functions is OptionalList<ChatCompletionFunctions> collection && collection.IsUndefined))
+            if (!(Functions is ChangeTrackingList<ChatCompletionFunctions> collection && collection.IsUndefined))
             {
                 writer.WritePropertyName("functions"u8);
                 writer.WriteStartArray();
@@ -374,7 +375,7 @@ namespace OpenAI.Models
             return new CreateChatCompletionRequest(
                 model,
                 messages,
-                functions ?? new OptionalList<ChatCompletionFunctions>(),
+                functions ?? new ChangeTrackingList<ChatCompletionFunctions>(),
                 functionCall,
                 temperature,
                 topP,

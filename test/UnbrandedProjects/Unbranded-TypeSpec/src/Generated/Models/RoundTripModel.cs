@@ -6,6 +6,7 @@ using System;
 using System.ClientModel.Internal;
 using System.Collections.Generic;
 using System.Linq;
+using UnbrandedTypeSpec;
 
 namespace UnbrandedTypeSpec.Models
 {
@@ -90,10 +91,10 @@ namespace UnbrandedTypeSpec.Models
             RequiredCollection = requiredCollection.ToList();
             RequiredDictionary = requiredDictionary;
             RequiredModel = requiredModel;
-            IntExtensibleEnumCollection = new OptionalList<IntExtensibleEnum>();
-            FloatExtensibleEnumCollection = new OptionalList<FloatExtensibleEnum>();
-            FloatFixedEnumCollection = new OptionalList<FloatFixedEnum>();
-            IntFixedEnumCollection = new OptionalList<IntFixedEnum>();
+            IntExtensibleEnumCollection = new ChangeTrackingList<IntExtensibleEnum>();
+            FloatExtensibleEnumCollection = new ChangeTrackingList<FloatExtensibleEnum>();
+            FloatFixedEnumCollection = new ChangeTrackingList<FloatFixedEnum>();
+            IntFixedEnumCollection = new ChangeTrackingList<IntFixedEnum>();
             RequiredUnknown = requiredUnknown;
             RequiredRecordUnknown = requiredRecordUnknown;
             OptionalRecordUnknown = new OptionalDictionary<string, BinaryData>();

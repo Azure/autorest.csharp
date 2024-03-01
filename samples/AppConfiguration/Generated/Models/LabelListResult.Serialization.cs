@@ -7,7 +7,7 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
+using AppConfiguration;
 
 namespace AppConfiguration.Models
 {

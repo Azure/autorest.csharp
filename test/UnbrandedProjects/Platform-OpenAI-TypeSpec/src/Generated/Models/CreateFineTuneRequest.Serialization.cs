@@ -7,6 +7,7 @@ using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -126,7 +127,7 @@ namespace OpenAI.Models
                     writer.WriteNull("classification_positive_class");
                 }
             }
-            if (!(ClassificationBetas is OptionalList<double> collection && collection.IsUndefined))
+            if (!(ClassificationBetas is ChangeTrackingList<double> collection && collection.IsUndefined))
             {
                 if (ClassificationBetas != null)
                 {
@@ -344,7 +345,7 @@ namespace OpenAI.Models
                 computeClassificationMetrics,
                 classificationNClasses,
                 classificationPositiveClass,
-                classificationBetas ?? new OptionalList<double>(),
+                classificationBetas ?? new ChangeTrackingList<double>(),
                 suffix,
                 serializedAdditionalRawData);
         }
