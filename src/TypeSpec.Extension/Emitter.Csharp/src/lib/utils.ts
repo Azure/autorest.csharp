@@ -5,18 +5,12 @@ import {
     ModelProperty,
     Operation,
     Scalar,
-    Type,
-    getFriendlyName,
-    getProjectedName,
-    getProjectedNames
+    getProjectedName
 } from "@typespec/compiler";
-import {
-    projectedNameCSharpKey,
-    projectedNameClientKey,
-    projectedNameJsonKey
-} from "../constants.js";
+import { projectedNameJsonKey } from "../constants.js";
 import {
     SdkContext,
+    getLibraryName,
     getSdkModel
 } from "@azure-tools/typespec-client-generator-core";
 import { InputParameter } from "../type/inputParameter.js";
@@ -46,44 +40,21 @@ export function getNameForTemplate(model: Model): string {
     return model.name;
 }
 
-export function getProjectedNameForCsharp(
-    context: SdkContext,
-    type: Type
-): string | undefined {
-    const projectedNamesMap = getProjectedNames(context.program, type);
-    return (
-        projectedNamesMap?.get(projectedNameCSharpKey) ??
-        projectedNamesMap?.get(projectedNameClientKey)
-    );
-}
-
 export function getTypeName(
     context: SdkContext,
     type: Model | Enum | EnumMember | ModelProperty | Scalar | Operation
 ): string {
-    var name =
-        getProjectedNameForCsharp(context, type) ??
-        getFriendlyName(context.program, type);
-    if (name) return name;
-    if (type.kind === "Model") {
-        name = getNameForTemplate(type);
-        if (name === "") {
-            const sdkModel = getSdkModel(context, type as Model);
+    var name = getLibraryName(context, type);
+    if (type.kind !== "Model") return name;
+    if (type.name === name) {
+        var templateName = getNameForTemplate(type);
+        if (templateName === "") {
+            const [sdkModel] = getSdkModel(context, type as Model);
             return sdkModel.generatedName || sdkModel.name;
         }
-        return name;
+        return templateName;
     }
-    return type.name;
-}
-
-export function getSerializeName(
-    context: SdkContext,
-    type: ModelProperty
-): string {
-    return (
-        getProjectedName(context.program, type, projectedNameJsonKey) ??
-        type.name
-    );
+    return name;
 }
 
 export function createContentTypeOrAcceptParameter(
