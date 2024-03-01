@@ -33,8 +33,6 @@ namespace AutoRest.CSharp.LowLevel.Output
 
         protected override string DefaultName { get; }
 
-        protected override string DefaultAccessibility => "public";
-
         protected abstract CSharpAttribute[] GetMethodAttributes();
 
         protected abstract string GetMethodName(DpgOperationSample sample, bool isAsync);

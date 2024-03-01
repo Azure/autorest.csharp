@@ -5,9 +5,9 @@ using AutoRest.CSharp.Input.Source;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
-    internal class GenericParamTypeProvider : TypeProvider
+    internal class GenericParameterTypeProvider : TypeProvider
     {
-        public GenericParamTypeProvider(string name, string defaultNamespace, SourceInputModel? sourceInputModel)
+        public GenericParameterTypeProvider(string name, string defaultNamespace, SourceInputModel? sourceInputModel)
             : base(defaultNamespace, sourceInputModel)
         {
             DefaultName = name;

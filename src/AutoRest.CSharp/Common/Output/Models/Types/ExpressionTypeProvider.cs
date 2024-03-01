@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Models;
@@ -13,17 +14,25 @@ namespace AutoRest.CSharp.Output.Models.Types
     // TODO -- eventually we should combine everything in this class into TypeProvider
     internal abstract class ExpressionTypeProvider : TypeProvider
     {
-        protected ExpressionTypeProvider(string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
+        protected ExpressionTypeProvider(string defaultNamespace, SourceInputModel? sourceInputModel)
+            : base(defaultNamespace, sourceInputModel)
         {
+            DefaultAccessibility = "public";
+            Modifiers = ClassSignatureModifiers.Partial | ClassSignatureModifiers.Public;
         }
 
         private IReadOnlyList<string>? _usings;
         public IReadOnlyList<string> Usings => _usings ??= BuildUsings().ToArray();
 
+        public virtual ClassSignatureModifiers Modifiers { get; init; }
+
         protected virtual IEnumerable<string> BuildUsings()
         {
             yield break;
         }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        protected override string DefaultAccessibility { get; }
 
         public virtual CSharpType? Inherits { get; protected init; }
 

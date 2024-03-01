@@ -56,15 +56,14 @@ namespace AutoRest.CSharp.Generation.Types
             IsValueType = type.IsValueType;
             IsEnum = type.IsEnum;
             IsPublic = type.IsPublic && arguments.All(t => t.IsPublic);
-            GenericArguments = Array.Empty<string>();
         }
 
-        public CSharpType(TypeProvider implementation, bool isValueType = false, bool isEnum = false, bool isNullable = false, CSharpType[]? arguments = default, string[]? genericArguments = default)
-            : this(implementation, implementation.Declaration.Namespace, implementation.Declaration.Name, isValueType, isEnum, isNullable, arguments, genericArguments)
+        public CSharpType(TypeProvider implementation, bool isValueType = false, bool isEnum = false, bool isNullable = false, CSharpType[]? arguments = default)
+            : this(implementation, implementation.Declaration.Namespace, implementation.Declaration.Name, isValueType, isEnum, isNullable, arguments)
         {
         }
 
-        public CSharpType(TypeProvider implementation, string ns, string name, bool isValueType = false, bool isEnum = false, bool isNullable = false, CSharpType[]? arguments = default, string[]? genericArguments = default)
+        public CSharpType(TypeProvider implementation, string ns, string name, bool isValueType = false, bool isEnum = false, bool isNullable = false, CSharpType[]? arguments = default)
         {
             _implementation = implementation;
             Name = name;
@@ -77,10 +76,8 @@ namespace AutoRest.CSharp.Generation.Types
             SerializeAs = _implementation?.SerializeAs;
             IsPublic = implementation.Declaration.Accessibility == "public"
                 && Arguments.All(t => t.IsPublic);
-            GenericArguments = genericArguments ?? Array.Empty<string>();
         }
 
-        public IReadOnlyList<string> GenericArguments { get; }
         public string Namespace { get; }
         public string Name { get; }
         public bool IsValueType { get; }

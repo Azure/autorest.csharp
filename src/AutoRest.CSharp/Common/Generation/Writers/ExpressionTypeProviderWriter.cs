@@ -26,7 +26,8 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (_writer.Namespace(_provider.Declaration.Namespace))
             {
-                _writer.Append($"{_provider.Declaration.Accessibility} partial class {_provider.Type:D}")
+                _writer.WriteClassModifiers(_provider.Modifiers);
+                _writer.Append($" class {_provider.Type:D}")
                     .AppendRawIf(" : ", _provider.Inherits != null || _provider.Implements.Any())
                     .AppendIf($"{_provider.Inherits},", _provider.Inherits != null);
 

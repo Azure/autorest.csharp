@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
@@ -432,7 +433,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void AppendType(CSharpType type, bool isDeclaration, bool writeTypeNameOnly)
         {
-            if (!type.IsFrameworkType && type.Implementation is GenericParamTypeProvider)
+            if (!type.IsFrameworkType && type.Implementation is GenericParameterTypeProvider)
             {
                 AppendRaw(type.Name);
                 return;
@@ -466,18 +467,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 foreach (var typeArgument in type.Arguments)
                 {
                     AppendType(typeArgument, false, writeTypeNameOnly);
-                    AppendRaw(_writingXmlDocumentation ? "," : ", ");
-                }
-                RemoveTrailingComma();
-                AppendRaw(_writingXmlDocumentation ? "}" : ">");
-            }
-
-            if (type.GenericArguments.Any())
-            {
-                AppendRaw(_writingXmlDocumentation ? "{" : "<");
-                foreach (var genericArgument in type.GenericArguments)
-                {
-                    AppendRaw(genericArgument);
                     AppendRaw(_writingXmlDocumentation ? "," : ", ");
                 }
                 RemoveTrailingComma();
@@ -817,6 +806,16 @@ namespace AutoRest.CSharp.Generation.Writers
         public virtual void Append(CodeWriterDeclaration declaration)
         {
             Identifier(declaration.ActualName);
+        }
+
+        internal void WriteClassModifiers(ClassSignatureModifiers modifiers)
+        {
+            this.AppendRawIf("public ", modifiers.HasFlag(ClassSignatureModifiers.Public))
+                .AppendRawIf("internal ", modifiers.HasFlag(ClassSignatureModifiers.Internal))
+                .AppendRawIf("private ", modifiers.HasFlag(ClassSignatureModifiers.Private))
+                .AppendRawIf("partial ", modifiers.HasFlag(ClassSignatureModifiers.Partial))
+                .AppendRawIf("static ", modifiers.HasFlag(ClassSignatureModifiers.Static))
+                .AppendRawIf("sealed ", modifiers.HasFlag(ClassSignatureModifiers.Sealed));
         }
     }
 }

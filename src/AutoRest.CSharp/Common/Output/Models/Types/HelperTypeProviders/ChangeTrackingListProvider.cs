@@ -36,14 +36,13 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
             : base(defaultNamespace, sourceInputModel)
         {
             _innerList = new VariableReference(new CSharpType(typeof(IList<>)), "_innerList");
-            _t = new GenericParamTypeProvider("T", DefaultNamespace, null);
-            _tArray = new GenericParamTypeProvider("T[]", DefaultNamespace, null);
+            _t = new GenericParameterTypeProvider("T", DefaultNamespace, null);
+            _tArray = new GenericParameterTypeProvider("T[]", DefaultNamespace, null);
             _tParam = new Parameter("item", null, _t.Type, null, ValidationType.None, null);
+            Modifiers = ClassSignatureModifiers.Internal;
         }
 
         protected override string DefaultName => "ChangeTrackingList";
-
-        protected override string DefaultAccessibility => "internal";
 
         protected override IEnumerable<Method> BuildConstructors()
         {
@@ -74,9 +73,9 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
             yield return new Method(iReadOnlyListSignature, iReadOnlyListbody);
         }
 
-        protected override IEnumerable<string> BuildTypeArguments()
+        protected override IEnumerable<CSharpType> BuildTypeArguments()
         {
-            yield return "T";
+            yield return _t.Type;
         }
 
         protected override IEnumerable<CSharpType> BuildImplements()

@@ -38,8 +38,6 @@ namespace AutoRest.CSharp.LowLevel.Output.Tests
 
         protected override string DefaultName { get; }
 
-        protected override string DefaultAccessibility => "public";
-
         protected override IEnumerable<Method> BuildConstructors()
         {
             yield return new(new ConstructorSignature(
