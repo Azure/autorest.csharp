@@ -85,7 +85,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private bool HasDerivedTypes()
         {
-            if (_derivedModels is not null && _derivedModels.Any())
+            if (_derivedModels.Any())
                 return true;
 
             if (_inputModel.DiscriminatorPropertyName is not null)
@@ -97,14 +97,17 @@ namespace AutoRest.CSharp.Output.Models.Types
         public ModelTypeProvider(InputModelType inputModel, string defaultNamespace, SourceInputModel? sourceInputModel, TypeFactory typeFactory, SerializableObjectType? defaultDerivedType = null)
             : base(defaultNamespace, sourceInputModel)
         {
-            _typeFactory = typeFactory;
-            _inputModel = inputModel;
             DefaultName = inputModel.Name.ToCleanName();
             DefaultAccessibility = inputModel.Accessibility ?? "public";
             IsAccessibilityOverridden = inputModel.Accessibility != null;
+
+            _typeFactory = typeFactory;
+            _inputModel = inputModel;
             _deprecated = inputModel.Deprecated;
             _derivedModels = inputModel.DerivedModels;
-            _defaultDerivedType = defaultDerivedType ?? (inputModel.IsUnknownDiscriminatorModel ? this : null);
+            _defaultDerivedType = inputModel.DerivedModels.Any() && inputModel.BaseModel is not null
+                ? this //if I have children and parents then I am my own defaultDerivedType
+                : defaultDerivedType ?? (inputModel.IsUnknownDiscriminatorModel ? this : null);
 
             _inputModelUsage = UpdateInputModelUsage(inputModel, ModelTypeMapping);
             _inputModelSerialization = UpdateInputSerialization(inputModel, ModelTypeMapping);
@@ -248,7 +251,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private ModelTypeProviderFields EnsureFields()
         {
-            return new ModelTypeProviderFields(_inputModel, Type, _typeFactory, ModelTypeMapping, IsStruct);
+            return new ModelTypeProviderFields(_inputModelProperties, Declaration.Name, _inputModelUsage, _typeFactory, ModelTypeMapping, GetBaseObjectType(), _inputModel.InheritedDictionaryType, IsStruct, _inputModel.IsPropertyBag);
         }
 
         private ConstructorSignature EnsurePublicConstructorSignature()
@@ -351,7 +354,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 parameterList.AddRange(baseParameters);
                 baseInitializers = baseParameterInitializers;
             }
-            parameterList.AddRange(parameters);
+            parameterList.AddRange(parameters.Select(p => p with { Description = $"{p.Description}{BuilderHelpers.CreateDerivedTypesDescription(p.Type)}" }));
             fullParameterList = parameterList.DistinctBy(p => p.Name).ToArray(); // we filter out the parameters with the same name since we might have the same property both in myself and my base.
         }
 
@@ -641,30 +644,25 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override ObjectTypeDiscriminator? BuildDiscriminator()
         {
-            string? discriminatorPropertyName = _inputModel.DiscriminatorPropertyName;
-            ObjectTypeDiscriminatorImplementation[] implementations = Array.Empty<ObjectTypeDiscriminatorImplementation>();
+            var parentDiscriminator = GetBaseObjectType()?.Discriminator;
+            var property = Properties.FirstOrDefault(p => p.InputModelProperty is not null && p.InputModelProperty.IsDiscriminator)
+                           ?? parentDiscriminator?.Property;
+
+            var discriminatorPropertyName = _inputModel.DiscriminatorPropertyName ?? parentDiscriminator?.SerializedName;
+
+            //neither me nor my parent are discriminators so I can bail
+            if (property is null || discriminatorPropertyName is null)
+            {
+                return null;
+            }
+
             Constant? value = null;
-            ObjectTypeProperty property;
 
-            if (discriminatorPropertyName == null)
-            {
-                var parent = GetBaseObjectType();
-                if (parent is null || parent.Discriminator is null)
-                {
-                    //neither me nor my parent are discriminators so I can bail
-                    return null;
-                }
-
-                discriminatorPropertyName = parent.Discriminator.SerializedName;
-                property = parent.Discriminator.Property;
-            }
-            else
-            {
-                //only load implementations for the base type
-                implementations = _derivedModels.Select(child => new ObjectTypeDiscriminatorImplementation(child.DiscriminatorValue!, _typeFactory.CreateType(child))).ToArray();
-                // find the discriminator corresponding property in this type or its base type or more
-                property = GetPropertyForDiscriminator(discriminatorPropertyName);
-            }
+            //only load implementations for the base type
+            // [TODO]: OrderBy(i => i.Key) is needed only to preserve the order. Remove it in a separate PR.
+            var implementations = Configuration.Generation1ConvenienceClient
+                ? GetDerivedTypes(_derivedModels).OrderBy(i => i.Key).ToArray()
+                : GetDerivedTypes(_derivedModels).ToArray();
 
             if (_inputModel.DiscriminatorValue != null)
             {
@@ -680,16 +678,18 @@ namespace AutoRest.CSharp.Output.Models.Types
             );
         }
 
-        private ObjectTypeProperty GetPropertyForDiscriminator(string inputPropertyName)
+        private IEnumerable<ObjectTypeDiscriminatorImplementation> GetDerivedTypes(IReadOnlyList<InputModelType> derivedInputTypes)
         {
-            foreach (var obj in EnumerateHierarchy())
+            foreach (var derivedInputType in derivedInputTypes)
             {
-                var property = obj.Properties.FirstOrDefault(p => p.InputModelProperty?.Name == inputPropertyName);
-                if (property is not null)
-                    return property;
-            }
+                var derivedModel = (ModelTypeProvider)_typeFactory.CreateType(derivedInputType).Implementation;
+                foreach (var discriminatorImplementation in GetDerivedTypes(derivedModel._derivedModels))
+                {
+                    yield return discriminatorImplementation;
+                }
 
-            throw new InvalidOperationException($"Expecting discriminator property {inputPropertyName} on model {Declaration.Name}, but found none");
+                yield return new ObjectTypeDiscriminatorImplementation(derivedInputType.DiscriminatorValue!, derivedModel.Type);
+            }
         }
 
         internal ModelTypeProvider ReplaceProperty(InputModelProperty property, InputType inputType)
