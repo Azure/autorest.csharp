@@ -10,6 +10,7 @@ using System.ComponentModel;
 
 namespace _Type.Union.Models
 {
+    /// <summary> The LR. </summary>
     internal readonly partial struct LR : IEquatable<LR>
     {
         private readonly string _value;

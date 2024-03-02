@@ -72,9 +72,10 @@ import {
     getWireName,
     isInternal
 } from "@azure-tools/typespec-client-generator-core";
-import { capitalize, getTypeName } from "./utils.js";
+import { capitalize, getFullNamespaceString, getTypeName } from "./utils.js";
 import { InputTypeKind } from "../type/inputTypeKind.js";
 import { InputIntrinsicTypeKind } from "../type/inputIntrinsicTypeKind.js";
+import { fromSdkEnumType } from "../type/converter.js";
 /**
  * Map calType to csharp InputTypeKind
  */
@@ -630,6 +631,9 @@ export function getInputType(
                         discriminatorProperty.type.name
                 );
             }
+            if (discriminatorProperty?.type.kind === "UnionVariant" && discriminatorProperty?.type.type.kind === "String") {
+                return String(discriminatorProperty.type.type.value ?? discriminatorProperty.type.name);
+            }
         }
 
         return undefined;
@@ -765,20 +769,6 @@ export function getInputType(
         return {};
     }
 
-    function getFullNamespaceString(namespace: Namespace | undefined): string {
-        if (!namespace || !namespace.name) {
-            return "";
-        }
-
-        let namespaceString: string = namespace.name;
-        let current: Namespace | undefined = namespace.namespace;
-        while (current && current.name) {
-            namespaceString = `${current.name}.${namespaceString}`;
-            current = current.namespace;
-        }
-        return namespaceString;
-    }
-
     function getInputModelForIntrinsicType(
         type: IntrinsicType
     ): InputIntrinsicType {
@@ -801,6 +791,11 @@ export function getInputType(
     }
 
     function getInputTypeForUnion(union: Union): InputUnionType | InputType {
+        var clientType = getClientType(context, union);
+        if (clientType.kind === "enum") {
+            return fromSdkEnumType(clientType, context, enums);
+        }
+
         let itemTypes: InputType[] = [];
         const variants = Array.from(union.variants.values());
 
@@ -840,7 +835,7 @@ export function getInputType(
     }
 }
 
-function setUsage(
+export function setUsage(
     context: SdkContext,
     source: Model | Enum,
     target: InputModelType | InputEnumType

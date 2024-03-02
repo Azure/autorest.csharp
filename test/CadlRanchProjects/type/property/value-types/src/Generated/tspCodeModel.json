@@ -49,7 +49,7 @@
     }
    ],
    "Namespace": "Type.Property.ValueTypes",
-   "Description": "Enum that will be used as a property for model EnumProperty. Non-extensible.",
+   "Description": "Enum that will be used as a property for model EnumProperty. Extensible.",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "RoundTrip"

@@ -31,7 +31,7 @@ namespace _Type.Union.Models
         /// <summary> Initializes a new instance of <see cref="Models.GetResponse2"/>. </summary>
         /// <param name="prop"></param>
         /// <returns> A new <see cref="Models.GetResponse2"/> instance for mocking. </returns>
-        public static GetResponse2 GetResponse2(GetResponse2Prop prop = default)
+        public static GetResponse2 GetResponse2(StringExtensibleNamedUnion prop = default)
         {
             return new GetResponse2(prop, serializedAdditionalRawData: null);
         }
