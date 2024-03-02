@@ -291,9 +291,10 @@ export function getInputType(
     enums: Map<string, InputEnumType>,
     literalTypeContext?: LiteralTypeContext
 ): InputType {
-    const type = formattedType.type;
+    const type = formattedType.type.kind === "ModelProperty" ? formattedType.type.type : formattedType.type;
     logger.debug(`getInputType for kind: ${type.kind}`);
     const program = context.program;
+
     if (type.kind === "Model") {
         return getInputModelType(type);
     } else if (
