@@ -10,7 +10,6 @@ using System.Threading;
 using AutoRest.CSharp.Common.Generation.Writers;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
-using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
@@ -333,7 +332,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     _writer.WriteMethodBodyStatement(new[]
                     {
                         new DeclareVariableStatement(value.Type, value.Declaration, Default),
-                        JsonSerializationMethodsBuilder.BuildDeserializationForMethods(serialization, async, value, new ResponseExpression(response).ContentStream, false, null),
+                        JsonSerializationMethodsBuilder.BuildDeserializationForMethods(serialization, async, value, Extensible.RestOperations.GetContentStream(response), false, null),
                         Return(Extensible.RestOperations.GetTypedResponseFromValue(value, response))
                     });
                 }
