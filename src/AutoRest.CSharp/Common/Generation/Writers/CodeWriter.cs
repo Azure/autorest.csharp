@@ -808,14 +808,14 @@ namespace AutoRest.CSharp.Generation.Writers
             Identifier(declaration.ActualName);
         }
 
-        internal void WriteClassModifiers(ClassSignatureModifiers modifiers)
+        internal void WriteClassModifiers(TypeSignatureModifiers modifiers)
         {
-            this.AppendRawIf("public ", modifiers.HasFlag(ClassSignatureModifiers.Public))
-                .AppendRawIf("internal ", modifiers.HasFlag(ClassSignatureModifiers.Internal))
-                .AppendRawIf("private ", modifiers.HasFlag(ClassSignatureModifiers.Private))
-                .AppendRawIf("partial ", modifiers.HasFlag(ClassSignatureModifiers.Partial))
-                .AppendRawIf("static ", modifiers.HasFlag(ClassSignatureModifiers.Static))
-                .AppendRawIf("sealed ", modifiers.HasFlag(ClassSignatureModifiers.Sealed));
+            this.AppendRawIf("public ", modifiers.HasFlag(TypeSignatureModifiers.Public))
+                .AppendRawIf("internal ", modifiers.HasFlag(TypeSignatureModifiers.Internal))
+                .AppendRawIf("private ", modifiers.HasFlag(TypeSignatureModifiers.Private))
+                .AppendRawIf("partial ", modifiers.HasFlag(TypeSignatureModifiers.Partial))
+                .AppendRawIf("static ", modifiers.HasFlag(TypeSignatureModifiers.Static))
+                .AppendRawIf("sealed ", modifiers.HasFlag(TypeSignatureModifiers.Sealed));
         }
     }
 }

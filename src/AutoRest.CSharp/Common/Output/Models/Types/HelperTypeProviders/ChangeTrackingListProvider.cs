@@ -14,84 +14,96 @@ using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Models.Types
 {
     internal class ChangeTrackingListProvider : ExpressionTypeProvider
     {
         private static readonly Lazy<ChangeTrackingListProvider> _instance = new(() => new ChangeTrackingListProvider(Configuration.Namespace, null));
-        private readonly MethodSignature _ensureListSignature = new MethodSignature("EnsureList", null, null, MethodSignatureModifiers.Public, typeof(IList<>), null, Array.Empty<Parameter>());
-        private readonly MethodSignature _getEnumeratorSignature = new MethodSignature("GetEnumerator", null, null, MethodSignatureModifiers.Public, typeof(IEnumerator<>), null, Array.Empty<Parameter>());
-        private readonly TypeProvider _t;
-        private readonly FieldDeclaration _innerlListField;
-        private readonly TypeProvider _tArray;
+        private readonly MethodSignature _ensureListSignature;
+        private readonly MethodSignature _getEnumeratorSignature;
+        private readonly CSharpType _t;
+        private readonly FieldDeclaration _innerListField;
+        private readonly CSharpType _tArray;
         private readonly Parameter _tParam;
         private readonly Parameter _indexParam = new Parameter("index", null, typeof(int), null, ValidationType.None, null);
         private VariableReference _innerList;
+        private readonly CSharpType _iListOfT;
+        private readonly CSharpType _iReadOnlyListOfT;
+
+        private BoolExpression IsUndefined { get; } = new BoolExpression(new MemberExpression(This, "IsUndefined"));
+        private InvokeInstanceMethodExpression EnsureList { get; init; }
 
         public static ChangeTrackingListProvider Instance => _instance.Value;
 
         private ChangeTrackingListProvider(string defaultNamespace, SourceInputModel? sourceInputModel)
             : base(defaultNamespace, sourceInputModel)
         {
-            _innerlListField = new FieldDeclaration(FieldModifiers.Private, typeof(IList<>), "_innerList");
-            _innerList = new VariableReference(new CSharpType(typeof(IList<>)), _innerlListField.Declaration);
-            _t = new GenericParameterTypeProvider("T", DefaultNamespace, null);
-            _tArray = new GenericParameterTypeProvider("T[]", DefaultNamespace, null);
-            _tParam = new Parameter("item", null, _t.Type, null, ValidationType.None, null);
-            DeclarationModifiers = ClassSignatureModifiers.Internal;
+            _t = new GenericParameterTypeProvider("T").Type;
+            _iListOfT = new CSharpType(typeof(IList<>), _t);
+            _iReadOnlyListOfT = new CSharpType(typeof(IReadOnlyList<>), _t);
+
+            _ensureListSignature = new MethodSignature("EnsureList", null, null, MethodSignatureModifiers.Public, _iListOfT, null, Array.Empty<Parameter>());
+            _getEnumeratorSignature = new MethodSignature("GetEnumerator", null, null, MethodSignatureModifiers.Public, new CSharpType(typeof(IEnumerator<>), _t), null, Array.Empty<Parameter>());
+            _innerListField = new FieldDeclaration(FieldModifiers.Private, _iListOfT, "_innerList");
+            _innerList = new VariableReference(_iListOfT, _innerListField.Declaration);
+            _tArray = new GenericParameterTypeProvider($"{_t.Name}[]").Type;
+            _tParam = new Parameter("item", null, _t, null, ValidationType.None, null);
+            DeclarationModifiers = TypeSignatureModifiers.Internal;
+            EnsureList = This.Invoke(_ensureListSignature);
         }
 
         protected override string DefaultName => "ChangeTrackingList";
 
         protected override IEnumerable<Method> BuildConstructors()
         {
-            yield return new Method(new ConstructorSignature(Type, null, null, MethodSignatureModifiers.Public, Array.Empty<Parameter>()), Snippets.EmptyStatement);
-            var iListParam = new Parameter("innerList", null, typeof(IList<>), null, ValidationType.None, null);
+            yield return new Method(new ConstructorSignature(Type, null, null, MethodSignatureModifiers.Public, Array.Empty<Parameter>()), EmptyStatement);
+            var iListParam = new Parameter("innerList", null, _iListOfT, null, ValidationType.None, null);
             var iListSignature = new ConstructorSignature(Type, null, null, MethodSignatureModifiers.Public, new Parameter[] { iListParam });
             var iListVariable = new ParameterReference(iListParam);
-            var iListbody = new MethodBodyStatement[]
+            var iListBody = new MethodBodyStatement[]
             {
-                new IfStatement(Snippets.NotEqual(iListVariable, Snippets.Null))
+                new IfStatement(NotEqual(iListVariable, Null))
                 {
                     new AssignValueStatement(_innerList, iListVariable)
                 }
             };
 
-            yield return new Method(iListSignature, iListbody);
-            var iReadOnlyListParam = new Parameter("innerList", null, typeof(IReadOnlyList<>), null, ValidationType.None, null);
+            yield return new Method(iListSignature, iListBody);
+            var iReadOnlyListParam = new Parameter("innerList", null, _iReadOnlyListOfT, null, ValidationType.None, null);
             var iReadOnlyListSignature = new ConstructorSignature(Type, null, null, MethodSignatureModifiers.Public, new Parameter[] { iReadOnlyListParam });
             var iReadOnlyListVariable = new ParameterReference(iReadOnlyListParam);
-            var iReadOnlyListbody = new MethodBodyStatement[]
+            var iReadOnlyListBody = new MethodBodyStatement[]
             {
-                new IfStatement(Snippets.NotEqual(iReadOnlyListVariable, Snippets.Null))
+                new IfStatement(NotEqual(iReadOnlyListVariable, Null))
                 {
-                    new AssignValueStatement(_innerList, Snippets.Linq.ToList(iReadOnlyListVariable))
+                    new AssignValueStatement(_innerList, Linq.ToList(iReadOnlyListVariable))
                 }
             };
 
-            yield return new Method(iReadOnlyListSignature, iReadOnlyListbody);
+            yield return new Method(iReadOnlyListSignature, iReadOnlyListBody);
         }
 
         protected override IEnumerable<CSharpType> BuildTypeArguments()
         {
-            yield return _t.Type;
+            yield return _t;
         }
 
         protected override IEnumerable<CSharpType> BuildImplements()
         {
-            yield return new CSharpType(typeof(IList<>));
-            yield return new CSharpType(typeof(IReadOnlyList<>));
+            yield return _iListOfT;
+            yield return _iReadOnlyListOfT;
         }
 
         protected override IEnumerable<FieldDeclaration> BuildFields()
         {
-            yield return _innerlListField;
+            yield return _innerListField;
         }
 
         protected override IEnumerable<PropertyDeclaration> BuildProperties()
         {
-            yield return new PropertyDeclaration(null, MethodSignatureModifiers.Public, typeof(bool), "IsUndefined", new ExpressionPropertyBody(Snippets.Equal(_innerList, Snippets.Null)));
+            yield return new PropertyDeclaration(null, MethodSignatureModifiers.Public, typeof(bool), "IsUndefined", new ExpressionPropertyBody(Equal(_innerList, Null)));
             yield return BuildCount();
             yield return BuildIsReadOnly();
             yield return BuildIndexer();
@@ -101,39 +113,39 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         {
             return new PropertyDeclaration(null, MethodSignatureModifiers.Public, typeof(bool), "IsReadOnly",
                         new ExpressionPropertyBody(new TernaryConditionalOperator(
-                            new MemberExpression(Snippets.This, "IsUndefined"),
-                            Snippets.False,
-                            new MemberExpression(new InvokeInstanceMethodExpression(Snippets.This, _ensureListSignature), "IsReadOnly"))));
+                            IsUndefined,
+                            False,
+                            new MemberExpression(EnsureList, "IsReadOnly"))));
         }
 
         private PropertyDeclaration BuildCount()
         {
             return new PropertyDeclaration(null, MethodSignatureModifiers.Public, typeof(int), "Count",
                 new ExpressionPropertyBody(new TernaryConditionalOperator(
-                    new MemberExpression(Snippets.This, "IsUndefined"),
-                    Snippets.Literal(0),
-                    new MemberExpression(new InvokeInstanceMethodExpression(Snippets.This, _ensureListSignature), "Count"))));
+                    IsUndefined,
+                    Literal(0),
+                    new MemberExpression(EnsureList, "Count"))));
         }
 
         private PropertyDeclaration BuildIndexer()
         {
-            return new PropertyDeclaration(null, MethodSignatureModifiers.Public, _t.Type, "this", new MethodPropertyBody(
+            return new PropertyDeclaration(null, MethodSignatureModifiers.Public, _t, "this", new MethodPropertyBody(
                 new MethodBodyStatement[]
                 {
-                    new IfStatement(new BoolExpression(new MemberExpression(Snippets.This, "IsUndefined")))
+                    new IfStatement(IsUndefined)
                     {
-                        Snippets.Throw(Snippets.New.Instance(typeof(ArgumentOutOfRangeException), Snippets.Nameof(new ParameterReference(_indexParam))))
+                        Throw(New.Instance(typeof(ArgumentOutOfRangeException), Nameof(new ParameterReference(_indexParam))))
                     },
-                    Snippets.Return(new ArrayElementExpression(new InvokeInstanceMethodExpression(Snippets.This, _ensureListSignature), new ParameterReference(_indexParam))),
+                    Return(new ArrayElementExpression(EnsureList, new ParameterReference(_indexParam))),
                 },
                 new MethodBodyStatement[]
                 {
-                    new IfStatement(new BoolExpression(new MemberExpression(Snippets.This, "IsUndefined")))
+                    new IfStatement(IsUndefined)
                     {
-                        Snippets.Throw(Snippets.New.Instance(typeof(ArgumentOutOfRangeException), Snippets.Nameof(new ParameterReference(_indexParam))))
+                        Throw(New.Instance(typeof(ArgumentOutOfRangeException), Nameof(new ParameterReference(_indexParam))))
                     },
                     new AssignValueStatement(
-                            new ArrayElementExpression(new InvokeInstanceMethodExpression(Snippets.This, _ensureListSignature), new ParameterReference(_indexParam)),
+                            new ArrayElementExpression(EnsureList, new ParameterReference(_indexParam)),
                             new KeywordExpression("value", null))
                 }));
         }
@@ -159,11 +171,11 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
             var indexVariable = new ParameterReference(_indexParam);
             return new Method(new MethodSignature("RemoveAt", null, null, MethodSignatureModifiers.Public, null, null, new Parameter[] { _indexParam }), new MethodBodyStatement[]
             {
-                new IfStatement(new BoolExpression(new MemberExpression(Snippets.This, "IsUndefined")))
+                new IfStatement(IsUndefined)
                 {
-                    Snippets.Throw(Snippets.New.Instance(typeof(ArgumentOutOfRangeException), Snippets.Nameof(indexVariable)))
+                    Throw(New.Instance(typeof(ArgumentOutOfRangeException), Nameof(indexVariable)))
                 },
-                new InvokeInstanceMethodStatement(new InvokeInstanceMethodExpression(Snippets.This, _ensureListSignature), "RemoveAt", new ValueExpression[] { indexVariable }, false)
+                new InvokeInstanceMethodStatement(EnsureList, "RemoveAt", new ValueExpression[] { indexVariable }, false)
             });
         }
 
@@ -171,57 +183,60 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         {
             return new Method(new MethodSignature("Insert", null, null, MethodSignatureModifiers.Public, null, null, new Parameter[] { _indexParam, _tParam }), new MethodBodyStatement[]
             {
-                new InvokeInstanceMethodStatement(new InvokeInstanceMethodExpression(Snippets.This, _ensureListSignature), "Insert", new ValueExpression[] { new ParameterReference(_indexParam), new ParameterReference(_tParam) }, false)
+                new InvokeInstanceMethodStatement(EnsureList, "Insert", new ValueExpression[] { new ParameterReference(_indexParam), new ParameterReference(_tParam) }, false)
             });
         }
 
         private Method BuildIndexOf()
         {
-            return new Method(new MethodSignature("IndexOf", null, null, MethodSignatureModifiers.Public, typeof(int), null, new Parameter[] { _tParam }), new MethodBodyStatement[]
+            var signature = new MethodSignature("IndexOf", null, null, MethodSignatureModifiers.Public, typeof(int), null, new Parameter[] { _tParam });
+            return new Method(signature, new MethodBodyStatement[]
             {
-                new IfStatement(new BoolExpression(new MemberExpression(Snippets.This, "IsUndefined")))
+                new IfStatement(IsUndefined)
                 {
-                    Snippets.Return(Snippets.Literal(-1))
+                    Return(Literal(-1))
                 },
-                Snippets.Return(new InvokeInstanceMethodExpression(new InvokeInstanceMethodExpression(Snippets.This, _ensureListSignature), "IndexOf", new ValueExpression[] { new ParameterReference(_tParam) }, null, false))
+                Return(EnsureList.Invoke(signature))
             });
         }
 
         private Method BuildRemove()
         {
-            return new Method(new MethodSignature("Remove", null, null, MethodSignatureModifiers.Public, typeof(bool), null, new Parameter[] { _tParam }), new MethodBodyStatement[]
+            var signature = new MethodSignature("Remove", null, null, MethodSignatureModifiers.Public, typeof(bool), null, new Parameter[] { _tParam });
+            return new Method(signature, new MethodBodyStatement[]
             {
-                new IfStatement(new BoolExpression(new MemberExpression(Snippets.This, "IsUndefined")))
+                new IfStatement(IsUndefined)
                 {
-                    Snippets.Return(Snippets.False)
+                    Return(False)
                 },
-                Snippets.Return(new InvokeInstanceMethodExpression(new InvokeInstanceMethodExpression(Snippets.This, _ensureListSignature), "Remove", new ValueExpression[] { new ParameterReference(_tParam) }, null, false))
+                Return(EnsureList.Invoke(signature))
             });
         }
 
         private Method BuildCopyTo()
         {
-            var arrayParam = new Parameter("array", null, _tArray.Type, null, ValidationType.None, null);
+            var arrayParam = new Parameter("array", null, _tArray, null, ValidationType.None, null);
             var arrayIndexParam = new Parameter("arrayIndex", null, typeof(int), null, ValidationType.None, null);
             return new Method(new MethodSignature("CopyTo", null, null, MethodSignatureModifiers.Public, null, null, new Parameter[] { arrayParam, arrayIndexParam }), new MethodBodyStatement[]
             {
-                new IfStatement(new BoolExpression(new MemberExpression(Snippets.This, "IsUndefined")))
+                new IfStatement(IsUndefined)
                 {
-                    Snippets.Return()
+                    Return()
                 },
-                new InvokeInstanceMethodStatement(new InvokeInstanceMethodExpression(Snippets.This, _ensureListSignature), "CopyTo", new ValueExpression[] { new ParameterReference(arrayParam), new ParameterReference(arrayIndexParam) }, false)
+                new InvokeInstanceMethodStatement(EnsureList, "CopyTo", new ValueExpression[] { new ParameterReference(arrayParam), new ParameterReference(arrayIndexParam) }, false)
             });
         }
 
         private Method BuildContains()
         {
-            return new Method(new MethodSignature("Contains", null, null, MethodSignatureModifiers.Public, typeof(bool), null, new Parameter[] { _tParam }), new MethodBodyStatement[]
+            var signature = new MethodSignature("Contains", null, null, MethodSignatureModifiers.Public, typeof(bool), null, new Parameter[] { _tParam });
+            return new Method(signature, new MethodBodyStatement[]
             {
-                new IfStatement(new BoolExpression(new MemberExpression(Snippets.This, "IsUndefined")))
+                new IfStatement(IsUndefined)
                 {
-                    Snippets.Return(Snippets.False)
+                    Return(False)
                 },
-                Snippets.Return(new InvokeInstanceMethodExpression(new InvokeInstanceMethodExpression(Snippets.This, _ensureListSignature), "Contains", new ValueExpression[] { new ParameterReference(_tParam) }, null, false))
+                Return(EnsureList.Invoke(signature))
             });
         }
 
@@ -229,16 +244,16 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         {
             return new Method(new MethodSignature("Clear", null, null, MethodSignatureModifiers.Public, null, null, Array.Empty<Parameter>()), new MethodBodyStatement[]
             {
-                new InvokeInstanceMethodStatement(new InvokeInstanceMethodExpression(Snippets.This, _ensureListSignature), "Clear")
+                new InvokeInstanceMethodStatement(EnsureList, "Clear")
             });
         }
 
         private Method BuildAdd()
         {
-            var genericParameter = new Parameter("item", null, _t.Type, null, ValidationType.None, null);
+            var genericParameter = new Parameter("item", null, _t, null, ValidationType.None, null);
             return new Method(new MethodSignature("Add", null, null, MethodSignatureModifiers.Public, null, null, new Parameter[] { genericParameter }), new MethodBodyStatement[]
             {
-                new InvokeInstanceMethodStatement(new InvokeInstanceMethodExpression(Snippets.This, _ensureListSignature), "Add", new ParameterReference(genericParameter))
+                new InvokeInstanceMethodStatement(EnsureList, "Add", new ParameterReference(genericParameter))
             });
         }
 
@@ -246,7 +261,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         {
             return new Method(new MethodSignature("GetEnumerator", null, null, MethodSignatureModifiers.None, typeof(IEnumerator), null, Array.Empty<Parameter>(), ExplicitInterface: typeof(IEnumerable)), new MethodBodyStatement[]
             {
-                Snippets.Return(new InvokeInstanceMethodExpression(Snippets.This, _getEnumeratorSignature))
+                Return(This.Invoke(_getEnumeratorSignature))
             });
         }
 
@@ -254,12 +269,12 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         {
             return new Method(_getEnumeratorSignature, new MethodBodyStatement[]
             {
-                new IfStatement(new BoolExpression(new MemberExpression(Snippets.This, "IsUndefined")))
+                new IfStatement(IsUndefined)
                 {
-                    new DeclareLocalFunctionStatement(new CodeWriterDeclaration("enumerateEmpty"), Array.Empty<Parameter>(), typeof(IEnumerator<>), new KeywordStatement("yield", new KeywordExpression("break", null))),
-                    Snippets.Return(new InvokeStaticMethodExpression(null, "enumerateEmpty", Array.Empty<ValueExpression>()))
+                    new DeclareLocalFunctionStatement(new CodeWriterDeclaration("enumerateEmpty"), Array.Empty<Parameter>(), new CSharpType(typeof(IEnumerator<>), _t), new KeywordStatement("yield", new KeywordExpression("break", null))),
+                    Return(new InvokeStaticMethodExpression(null, "enumerateEmpty", Array.Empty<ValueExpression>()))
                 },
-                Snippets.Return(new InvokeInstanceMethodExpression(new InvokeInstanceMethodExpression(Snippets.This, _ensureListSignature), nameof(IList<object>.GetEnumerator), Array.Empty<ValueExpression>(), null, false))
+                Return(EnsureList.Invoke(_getEnumeratorSignature))
             });
         }
 
@@ -267,7 +282,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         {
             return new Method(new MethodSignature("Reset", null, null, MethodSignatureModifiers.Public, null, null, Array.Empty<Parameter>()), new MethodBodyStatement[]
             {
-                new AssignValueStatement(_innerList, Snippets.Null)
+                new AssignValueStatement(_innerList, Null)
             });
         }
 
@@ -275,7 +290,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         {
             return new Method(_ensureListSignature, new MethodBodyStatement[]
             {
-                Snippets.Return(new BinaryOperatorExpression("??=", _innerList, Snippets.New.Instance(typeof(List<>))))
+                Return(new BinaryOperatorExpression("??=", _innerList, New.Instance(new CSharpType(typeof(List<>), _t))))
             });
         }
     }

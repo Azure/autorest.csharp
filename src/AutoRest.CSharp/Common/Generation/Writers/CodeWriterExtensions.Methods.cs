@@ -25,9 +25,6 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             switch (bodyStatement)
             {
-                case DeclareFieldStatement fieldDeclaration:
-                    writer.Line($"private {fieldDeclaration.Variable.Type} {fieldDeclaration.Variable.Declaration:D};");
-                    break;
                 case InvokeInstanceMethodStatement(var instance, var methodName, var arguments, var callAsAsync):
                     writer.WriteValueExpression(new InvokeInstanceMethodExpression(instance, methodName, arguments, null, callAsAsync));
                     writer.LineRaw(";");

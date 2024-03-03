@@ -16,13 +16,13 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected ExpressionTypeProvider(string defaultNamespace, SourceInputModel? sourceInputModel)
             : base(defaultNamespace, sourceInputModel)
         {
-            DeclarationModifiers = ClassSignatureModifiers.Partial | ClassSignatureModifiers.Public;
+            DeclarationModifiers = TypeSignatureModifiers.Partial | TypeSignatureModifiers.Public;
         }
 
         private IReadOnlyList<string>? _usings;
         public IReadOnlyList<string> Usings => _usings ??= BuildUsings().ToArray();
 
-        public ClassSignatureModifiers DeclarationModifiers { get; init; }
+        public TypeSignatureModifiers DeclarationModifiers { get; protected init; }
 
         protected virtual IEnumerable<string> BuildUsings()
         {

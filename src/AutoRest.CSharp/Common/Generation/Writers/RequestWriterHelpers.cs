@@ -461,17 +461,17 @@ namespace AutoRest.CSharp.Generation.Writers
 
             var type = value.Type;
             string valueStr = GetValueExpression(writer, value);
-            ValueExpression valueExpressoin = new FormattableStringToExpression($"{valueStr}");
+            ValueExpression valueExpression = new FormattableStringToExpression($"{valueStr}");
             CodeWriterDeclaration changeTrackingList = new CodeWriterDeclaration("changeTrackingList");
             if (checkUndefinedCollection && TypeFactory.IsCollectionType(type))
             {
                 writer.Append($"if (");
 
-                writer.WriteValueExpression(valueExpressoin);
+                writer.WriteValueExpression(valueExpression);
 
                 writer.Append($" != null && !(");
-                writer.WriteValueExpression(valueExpressoin);
-                writer.Append($" is {ChangeTrackingListProvider.Instance.Type.WithArguments(type.Arguments)} {changeTrackingList:D} && {changeTrackingList}.IsUndefined)");
+                writer.WriteValueExpression(valueExpression);
+                writer.Append($" is {ChangeTrackingListProvider.Instance.Type.MakeGenericType(type.Arguments)} {changeTrackingList:D} && {changeTrackingList}.IsUndefined)");
 
                 return writer.LineRaw(")").Scope();
             }
@@ -479,7 +479,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 writer.Append($"if (");
 
-                writer.WriteValueExpression(valueExpressoin);
+                writer.WriteValueExpression(valueExpression);
 
                 return writer.Line($" != null)").Scope();
             }

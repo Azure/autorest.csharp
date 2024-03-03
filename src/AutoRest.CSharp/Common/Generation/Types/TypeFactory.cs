@@ -154,7 +154,7 @@ namespace AutoRest.CSharp.Generation.Types
 
                 if (IsList(type))
                 {
-                    return ChangeTrackingListProvider.Instance.Type.WithArguments(type.Arguments);
+                    return ChangeTrackingListProvider.Instance.Type.MakeGenericType(type.Arguments);
                 }
 
                 if (IsDictionary(type))

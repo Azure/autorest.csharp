@@ -21,7 +21,7 @@ namespace AutoRest.CSharp.Common.Output.Models
             public static BoolExpression IsCollectionDefined(TypedValueExpression collection)
             {
                 CodeWriterDeclaration collectionDeclaration = new("collection");
-                CSharpType collectionType = collection.Type.Arguments.Count == 1 ? ChangeTrackingListProvider.Instance.Type.WithArguments(collection.Type.Arguments) : new(Configuration.ApiTypes.ChangeTrackingDictionaryType, collection.Type.Arguments);
+                CSharpType collectionType = collection.Type.Arguments.Count == 1 ? ChangeTrackingListProvider.Instance.Type.MakeGenericType(collection.Type.Arguments) : new(Configuration.ApiTypes.ChangeTrackingDictionaryType, collection.Type.Arguments);
                 VariableReference collectionReference = new VariableReference(collectionType, collectionDeclaration);
                 DeclarationExpression collectionDeclarationExpression = new(collectionReference, false);
                 return Not(BoolExpression.Is(collection, collectionDeclarationExpression)
@@ -49,7 +49,7 @@ namespace AutoRest.CSharp.Common.Output.Models
                 }
 
                 var changeTrackingType = collection.Type.Arguments.Count == 1
-                    ? ChangeTrackingListProvider.Instance.Type.WithArguments(collection.Type.Arguments)
+                    ? ChangeTrackingListProvider.Instance.Type.MakeGenericType(collection.Type.Arguments)
                     : new CSharpType(Configuration.ApiTypes.ChangeTrackingDictionaryType, collection.Type.Arguments);
                 return NullCoalescing(collection, New.Instance(changeTrackingType));
             }

@@ -6,7 +6,7 @@ using System;
 namespace AutoRest.CSharp.Common.Output.Models
 {
     [Flags]
-    internal enum ClassSignatureModifiers
+    internal enum TypeSignatureModifiers
     {
         None = 0,
         Public = 1,

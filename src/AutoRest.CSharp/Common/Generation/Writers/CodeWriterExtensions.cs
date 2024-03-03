@@ -702,8 +702,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 .AppendRawIf("static ", modifiers.HasFlag(MethodSignatureModifiers.Static))
                 .AppendRawIf("virtual ", modifiers.HasFlag(MethodSignatureModifiers.Virtual)); // property does not support other modifiers, here we just ignore them if any
 
-
-
             writer.Append($"{property.PropertyType} ");
             if (property.Declaration.ActualName == "this")
             {

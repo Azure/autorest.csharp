@@ -299,7 +299,7 @@ namespace AutoRest.CSharp.Generation.Types
             return true;
         }
 
-        internal CSharpType WithArguments(IReadOnlyList<CSharpType> arguments)
+        public CSharpType MakeGenericType(IReadOnlyList<CSharpType> arguments)
         {
             if (IsFrameworkType)
             {
