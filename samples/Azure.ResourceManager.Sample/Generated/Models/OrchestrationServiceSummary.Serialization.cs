@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -27,12 +28,12 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && ServiceName.HasValue)
+            if (options.Format != "W" && Optional.IsDefined(ServiceName))
             {
                 writer.WritePropertyName("serviceName"u8);
                 writer.WriteStringValue(ServiceName.Value.ToString());
             }
-            if (options.Format != "W" && ServiceState.HasValue)
+            if (options.Format != "W" && Optional.IsDefined(ServiceState))
             {
                 writer.WritePropertyName("serviceState"u8);
                 writer.WriteStringValue(ServiceState.Value.ToString());
@@ -75,8 +76,8 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<OrchestrationServiceName> serviceName = default;
-            Optional<OrchestrationServiceState> serviceState = default;
+            OrchestrationServiceName? serviceName = default;
+            OrchestrationServiceState? serviceState = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -105,7 +106,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new OrchestrationServiceSummary(Optional.ToNullable(serviceName), Optional.ToNullable(serviceState), serializedAdditionalRawData);
+            return new OrchestrationServiceSummary(serviceName, serviceState, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -113,13 +114,13 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (ServiceName.HasValue)
+            if (Optional.IsDefined(ServiceName))
             {
                 builder.Append("  serviceName:");
                 builder.AppendLine($" '{ServiceName.Value.ToString()}'");
             }
 
-            if (ServiceState.HasValue)
+            if (Optional.IsDefined(ServiceState))
             {
                 builder.Append("  serviceState:");
                 builder.AppendLine($" '{ServiceState.Value.ToString()}'");

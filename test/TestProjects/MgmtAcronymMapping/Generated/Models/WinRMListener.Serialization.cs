@@ -8,6 +8,7 @@
 using System;
 using System.Text.Json;
 using Azure.Core;
+using MgmtAcronymMapping;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -16,12 +17,12 @@ namespace MgmtAcronymMapping.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Protocol.HasValue)
+            if (Optional.IsDefined(Protocol))
             {
                 writer.WritePropertyName("protocol"u8);
                 writer.WriteStringValue(Protocol.Value.ToSerialString());
             }
-            if (CertificateUri != null)
+            if (Optional.IsDefined(CertificateUri))
             {
                 writer.WritePropertyName("certificateUrl"u8);
                 writer.WriteStringValue(CertificateUri.AbsoluteUri);
@@ -35,8 +36,8 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<ProtocolType> protocol = default;
-            Optional<Uri> certificateUrl = default;
+            ProtocolType? protocol = default;
+            Uri certificateUrl = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("protocol"u8))
@@ -58,7 +59,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new WinRMListener(Optional.ToNullable(protocol), certificateUrl.Value);
+            return new WinRMListener(protocol, certificateUrl);
         }
     }
 }

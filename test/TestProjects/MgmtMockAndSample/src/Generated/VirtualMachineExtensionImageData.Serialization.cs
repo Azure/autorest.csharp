@@ -19,27 +19,27 @@ namespace MgmtMockAndSample
             writer.WriteStartObject();
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (OperatingSystem != null)
+            if (Optional.IsDefined(OperatingSystem))
             {
                 writer.WritePropertyName("operatingSystem"u8);
                 writer.WriteStringValue(OperatingSystem);
             }
-            if (ComputeRole != null)
+            if (Optional.IsDefined(ComputeRole))
             {
                 writer.WritePropertyName("computeRole"u8);
                 writer.WriteStringValue(ComputeRole);
             }
-            if (HandlerSchema != null)
+            if (Optional.IsDefined(HandlerSchema))
             {
                 writer.WritePropertyName("handlerSchema"u8);
                 writer.WriteStringValue(HandlerSchema);
             }
-            if (VmScaleSetEnabled.HasValue)
+            if (Optional.IsDefined(VmScaleSetEnabled))
             {
                 writer.WritePropertyName("vmScaleSetEnabled"u8);
                 writer.WriteBooleanValue(VmScaleSetEnabled.Value);
             }
-            if (SupportsMultipleExtensions.HasValue)
+            if (Optional.IsDefined(SupportsMultipleExtensions))
             {
                 writer.WritePropertyName("supportsMultipleExtensions"u8);
                 writer.WriteBooleanValue(SupportsMultipleExtensions.Value);
@@ -54,17 +54,17 @@ namespace MgmtMockAndSample
             {
                 return null;
             }
-            Optional<AzureLocation> location = default;
+            AzureLocation? location = default;
             IReadOnlyDictionary<string, string> tags = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
-            Optional<string> operatingSystem = default;
-            Optional<string> computeRole = default;
-            Optional<string> handlerSchema = default;
-            Optional<bool> vmScaleSetEnabled = default;
-            Optional<bool> supportsMultipleExtensions = default;
+            SystemData systemData = default;
+            string operatingSystem = default;
+            string computeRole = default;
+            string handlerSchema = default;
+            bool? vmScaleSetEnabled = default;
+            bool? supportsMultipleExtensions = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("location"u8))
@@ -164,13 +164,13 @@ namespace MgmtMockAndSample
                 id,
                 name,
                 type,
-                systemData.Value,
-                operatingSystem.Value,
-                computeRole.Value,
-                handlerSchema.Value,
-                Optional.ToNullable(vmScaleSetEnabled),
-                Optional.ToNullable(supportsMultipleExtensions),
-                Optional.ToNullable(location),
+                systemData,
+                operatingSystem,
+                computeRole,
+                handlerSchema,
+                vmScaleSetEnabled,
+                supportsMultipleExtensions,
+                location,
                 tags ?? new ChangeTrackingDictionary<string, string>());
         }
     }

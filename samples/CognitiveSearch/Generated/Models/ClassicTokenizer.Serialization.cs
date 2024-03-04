@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {
@@ -15,7 +16,7 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (MaxTokenLength.HasValue)
+            if (Optional.IsDefined(MaxTokenLength))
             {
                 writer.WritePropertyName("maxTokenLength"u8);
                 writer.WriteNumberValue(MaxTokenLength.Value);
@@ -33,7 +34,7 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            Optional<int> maxTokenLength = default;
+            int? maxTokenLength = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
@@ -58,7 +59,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new ClassicTokenizer(odataType, name, Optional.ToNullable(maxTokenLength));
+            return new ClassicTokenizer(odataType, name, maxTokenLength);
         }
     }
 }

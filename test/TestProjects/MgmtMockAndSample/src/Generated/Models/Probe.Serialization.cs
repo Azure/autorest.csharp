@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
@@ -17,27 +18,27 @@ namespace MgmtMockAndSample.Models
             writer.WriteStartObject();
             writer.WritePropertyName("disableProbe"u8);
             writer.WriteBooleanValue(DisableProbe);
-            if (InitialDelaySeconds.HasValue)
+            if (Optional.IsDefined(InitialDelaySeconds))
             {
                 writer.WritePropertyName("initialDelaySeconds"u8);
                 writer.WriteNumberValue(InitialDelaySeconds.Value);
             }
-            if (PeriodSeconds.HasValue)
+            if (Optional.IsDefined(PeriodSeconds))
             {
                 writer.WritePropertyName("periodSeconds"u8);
                 writer.WriteNumberValue(PeriodSeconds.Value);
             }
-            if (TimeoutSeconds.HasValue)
+            if (Optional.IsDefined(TimeoutSeconds))
             {
                 writer.WritePropertyName("timeoutSeconds"u8);
                 writer.WriteNumberValue(TimeoutSeconds.Value);
             }
-            if (FailureThreshold.HasValue)
+            if (Optional.IsDefined(FailureThreshold))
             {
                 writer.WritePropertyName("failureThreshold"u8);
                 writer.WriteNumberValue(FailureThreshold.Value);
             }
-            if (SuccessThreshold.HasValue)
+            if (Optional.IsDefined(SuccessThreshold))
             {
                 writer.WritePropertyName("successThreshold"u8);
                 writer.WriteNumberValue(SuccessThreshold.Value);
@@ -52,11 +53,11 @@ namespace MgmtMockAndSample.Models
                 return null;
             }
             bool disableProbe = default;
-            Optional<int> initialDelaySeconds = default;
-            Optional<int> periodSeconds = default;
-            Optional<int> timeoutSeconds = default;
-            Optional<int> failureThreshold = default;
-            Optional<int> successThreshold = default;
+            int? initialDelaySeconds = default;
+            int? periodSeconds = default;
+            int? timeoutSeconds = default;
+            int? failureThreshold = default;
+            int? successThreshold = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("disableProbe"u8))
@@ -112,11 +113,11 @@ namespace MgmtMockAndSample.Models
             }
             return new Probe(
                 disableProbe,
-                Optional.ToNullable(initialDelaySeconds),
-                Optional.ToNullable(periodSeconds),
-                Optional.ToNullable(timeoutSeconds),
-                Optional.ToNullable(failureThreshold),
-                Optional.ToNullable(successThreshold));
+                initialDelaySeconds,
+                periodSeconds,
+                timeoutSeconds,
+                failureThreshold,
+                successThreshold);
         }
     }
 }

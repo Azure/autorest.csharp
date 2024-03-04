@@ -9,6 +9,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using AnomalyDetector;
 using Azure;
 using Azure.Core;
 
@@ -27,17 +28,17 @@ namespace AnomalyDetector.Models
             }
 
             writer.WriteStartObject();
-            if (AlignMode.HasValue)
+            if (Optional.IsDefined(AlignMode))
             {
                 writer.WritePropertyName("alignMode"u8);
                 writer.WriteStringValue(AlignMode.Value.ToSerialString());
             }
-            if (FillNAMethod.HasValue)
+            if (Optional.IsDefined(FillNAMethod))
             {
                 writer.WritePropertyName("fillNAMethod"u8);
                 writer.WriteStringValue(FillNAMethod.Value.ToString());
             }
-            if (PaddingValue.HasValue)
+            if (Optional.IsDefined(PaddingValue))
             {
                 writer.WritePropertyName("paddingValue"u8);
                 writer.WriteNumberValue(PaddingValue.Value);
@@ -80,9 +81,9 @@ namespace AnomalyDetector.Models
             {
                 return null;
             }
-            Optional<AlignMode> alignMode = default;
-            Optional<FillNAMethod> fillNAMethod = default;
-            Optional<float> paddingValue = default;
+            AlignMode? alignMode = default;
+            FillNAMethod? fillNAMethod = default;
+            float? paddingValue = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -120,7 +121,7 @@ namespace AnomalyDetector.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new AlignPolicy(Optional.ToNullable(alignMode), Optional.ToNullable(fillNAMethod), Optional.ToNullable(paddingValue), serializedAdditionalRawData);
+            return new AlignPolicy(alignMode, fillNAMethod, paddingValue, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<AlignPolicy>.Write(ModelReaderWriterOptions options)

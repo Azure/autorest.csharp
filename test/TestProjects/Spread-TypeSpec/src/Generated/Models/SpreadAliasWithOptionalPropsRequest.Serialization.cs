@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using SpreadTypeSpec;
 
 namespace SpreadTypeSpec.Models
 {
@@ -29,12 +30,12 @@ namespace SpreadTypeSpec.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (Color != null)
+            if (Optional.IsDefined(Color))
             {
                 writer.WritePropertyName("color"u8);
                 writer.WriteStringValue(Color);
             }
-            if (Age.HasValue)
+            if (Optional.IsDefined(Age))
             {
                 writer.WritePropertyName("age"u8);
                 writer.WriteNumberValue(Age.Value);
@@ -46,7 +47,7 @@ namespace SpreadTypeSpec.Models
                 writer.WriteNumberValue(item);
             }
             writer.WriteEndArray();
-            if (!(Elements is ChangeTrackingList<string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Elements))
             {
                 writer.WritePropertyName("elements"u8);
                 writer.WriteStartArray();
@@ -95,8 +96,8 @@ namespace SpreadTypeSpec.Models
                 return null;
             }
             string name = default;
-            Optional<string> color = default;
-            Optional<int> age = default;
+            string color = default;
+            int? age = default;
             IList<int> items = default;
             IList<string> elements = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
@@ -154,8 +155,8 @@ namespace SpreadTypeSpec.Models
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new SpreadAliasWithOptionalPropsRequest(
                 name,
-                color.Value,
-                Optional.ToNullable(age),
+                color,
+                age,
                 items,
                 elements ?? new ChangeTrackingList<string>(),
                 serializedAdditionalRawData);

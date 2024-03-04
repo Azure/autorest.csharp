@@ -31,12 +31,12 @@ namespace Azure.ResourceManager.Storage
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
-            Optional<string> storageAccountResourceId = default;
-            Optional<AzureLocation> location = default;
-            Optional<string> restoreReference = default;
-            Optional<string> creationTime = default;
-            Optional<string> deletionTime = default;
+            SystemData systemData = default;
+            string storageAccountResourceId = default;
+            AzureLocation? location = default;
+            string restoreReference = default;
+            string creationTime = default;
+            string deletionTime = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -109,12 +109,12 @@ namespace Azure.ResourceManager.Storage
                 id,
                 name,
                 type,
-                systemData.Value,
-                storageAccountResourceId.Value,
-                Optional.ToNullable(location),
-                restoreReference.Value,
-                creationTime.Value,
-                deletionTime.Value);
+                systemData,
+                storageAccountResourceId,
+                location,
+                restoreReference,
+                creationTime,
+                deletionTime);
         }
     }
 }

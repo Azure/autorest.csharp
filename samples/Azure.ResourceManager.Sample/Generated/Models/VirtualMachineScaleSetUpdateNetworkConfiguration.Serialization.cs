@@ -13,6 +13,7 @@ using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -29,39 +30,39 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Primary.HasValue)
+            if (Optional.IsDefined(Primary))
             {
                 writer.WritePropertyName("primary"u8);
                 writer.WriteBooleanValue(Primary.Value);
             }
-            if (EnableAcceleratedNetworking.HasValue)
+            if (Optional.IsDefined(EnableAcceleratedNetworking))
             {
                 writer.WritePropertyName("enableAcceleratedNetworking"u8);
                 writer.WriteBooleanValue(EnableAcceleratedNetworking.Value);
             }
-            if (NetworkSecurityGroup != null)
+            if (Optional.IsDefined(NetworkSecurityGroup))
             {
                 writer.WritePropertyName("networkSecurityGroup"u8);
                 JsonSerializer.Serialize(writer, NetworkSecurityGroup);
             }
-            if (DnsSettings != null)
+            if (Optional.IsDefined(DnsSettings))
             {
                 writer.WritePropertyName("dnsSettings"u8);
                 writer.WriteObjectValue(DnsSettings);
             }
-            if (!(IPConfigurations is ChangeTrackingList<VirtualMachineScaleSetUpdateIPConfiguration> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(IPConfigurations))
             {
                 writer.WritePropertyName("ipConfigurations"u8);
                 writer.WriteStartArray();
@@ -71,7 +72,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (EnableIPForwarding.HasValue)
+            if (Optional.IsDefined(EnableIPForwarding))
             {
                 writer.WritePropertyName("enableIPForwarding"u8);
                 writer.WriteBooleanValue(EnableIPForwarding.Value);
@@ -115,14 +116,14 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> id = default;
-            Optional<bool> primary = default;
-            Optional<bool> enableAcceleratedNetworking = default;
-            Optional<WritableSubResource> networkSecurityGroup = default;
-            Optional<VirtualMachineScaleSetNetworkConfigurationDnsSettings> dnsSettings = default;
+            string name = default;
+            string id = default;
+            bool? primary = default;
+            bool? enableAcceleratedNetworking = default;
+            WritableSubResource networkSecurityGroup = default;
+            VirtualMachineScaleSetNetworkConfigurationDnsSettings dnsSettings = default;
             IList<VirtualMachineScaleSetUpdateIPConfiguration> ipConfigurations = default;
-            Optional<bool> enableIPForwarding = default;
+            bool? enableIPForwarding = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -215,15 +216,15 @@ namespace Azure.ResourceManager.Sample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new VirtualMachineScaleSetUpdateNetworkConfiguration(
-                id.Value,
+                id,
                 serializedAdditionalRawData,
-                name.Value,
-                Optional.ToNullable(primary),
-                Optional.ToNullable(enableAcceleratedNetworking),
+                name,
+                primary,
+                enableAcceleratedNetworking,
                 networkSecurityGroup,
-                dnsSettings.Value,
+                dnsSettings,
                 ipConfigurations ?? new ChangeTrackingList<VirtualMachineScaleSetUpdateIPConfiguration>(),
-                Optional.ToNullable(enableIPForwarding));
+                enableIPForwarding);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -231,7 +232,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 builder.Append("  name:");
                 if (Name.Contains(Environment.NewLine))
@@ -245,7 +246,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 builder.Append("  id:");
                 if (Id.Contains(Environment.NewLine))
@@ -261,33 +262,33 @@ namespace Azure.ResourceManager.Sample.Models
 
             builder.Append("  properties:");
             builder.AppendLine(" {");
-            if (Primary.HasValue)
+            if (Optional.IsDefined(Primary))
             {
                 builder.Append("    primary:");
                 var boolValue = Primary.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
             }
 
-            if (EnableAcceleratedNetworking.HasValue)
+            if (Optional.IsDefined(EnableAcceleratedNetworking))
             {
                 builder.Append("    enableAcceleratedNetworking:");
                 var boolValue = EnableAcceleratedNetworking.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
             }
 
-            if (NetworkSecurityGroup != null)
+            if (Optional.IsDefined(NetworkSecurityGroup))
             {
                 builder.Append("    networkSecurityGroup:");
                 AppendChildObject(builder, NetworkSecurityGroup, options, 4, false);
             }
 
-            if (DnsSettings != null)
+            if (Optional.IsDefined(DnsSettings))
             {
                 builder.Append("    dnsSettings:");
                 AppendChildObject(builder, DnsSettings, options, 4, false);
             }
 
-            if (!(IPConfigurations is ChangeTrackingList<VirtualMachineScaleSetUpdateIPConfiguration> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(IPConfigurations))
             {
                 if (IPConfigurations.Any())
                 {
@@ -301,7 +302,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (EnableIPForwarding.HasValue)
+            if (Optional.IsDefined(EnableIPForwarding))
             {
                 builder.Append("    enableIPForwarding:");
                 var boolValue = EnableIPForwarding.Value == true ? "true" : "false";

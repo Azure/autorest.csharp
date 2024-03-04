@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Network.Management.Interface;
 
 namespace Azure.Network.Management.Interface.Models
 {
@@ -15,69 +16,69 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (FrontendIPConfiguration != null)
+            if (Optional.IsDefined(FrontendIPConfiguration))
             {
                 writer.WritePropertyName("frontendIPConfiguration"u8);
                 writer.WriteObjectValue(FrontendIPConfiguration);
             }
-            if (BackendAddressPool != null)
+            if (Optional.IsDefined(BackendAddressPool))
             {
                 writer.WritePropertyName("backendAddressPool"u8);
                 writer.WriteObjectValue(BackendAddressPool);
             }
-            if (Probe != null)
+            if (Optional.IsDefined(Probe))
             {
                 writer.WritePropertyName("probe"u8);
                 writer.WriteObjectValue(Probe);
             }
-            if (Protocol.HasValue)
+            if (Optional.IsDefined(Protocol))
             {
                 writer.WritePropertyName("protocol"u8);
                 writer.WriteStringValue(Protocol.Value.ToString());
             }
-            if (LoadDistribution.HasValue)
+            if (Optional.IsDefined(LoadDistribution))
             {
                 writer.WritePropertyName("loadDistribution"u8);
                 writer.WriteStringValue(LoadDistribution.Value.ToString());
             }
-            if (FrontendPort.HasValue)
+            if (Optional.IsDefined(FrontendPort))
             {
                 writer.WritePropertyName("frontendPort"u8);
                 writer.WriteNumberValue(FrontendPort.Value);
             }
-            if (BackendPort.HasValue)
+            if (Optional.IsDefined(BackendPort))
             {
                 writer.WritePropertyName("backendPort"u8);
                 writer.WriteNumberValue(BackendPort.Value);
             }
-            if (IdleTimeoutInMinutes.HasValue)
+            if (Optional.IsDefined(IdleTimeoutInMinutes))
             {
                 writer.WritePropertyName("idleTimeoutInMinutes"u8);
                 writer.WriteNumberValue(IdleTimeoutInMinutes.Value);
             }
-            if (EnableFloatingIP.HasValue)
+            if (Optional.IsDefined(EnableFloatingIP))
             {
                 writer.WritePropertyName("enableFloatingIP"u8);
                 writer.WriteBooleanValue(EnableFloatingIP.Value);
             }
-            if (EnableTcpReset.HasValue)
+            if (Optional.IsDefined(EnableTcpReset))
             {
                 writer.WritePropertyName("enableTcpReset"u8);
                 writer.WriteBooleanValue(EnableTcpReset.Value);
             }
-            if (DisableOutboundSnat.HasValue)
+            if (Optional.IsDefined(DisableOutboundSnat))
             {
                 writer.WritePropertyName("disableOutboundSnat"u8);
                 writer.WriteBooleanValue(DisableOutboundSnat.Value);
@@ -92,22 +93,22 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> etag = default;
-            Optional<string> type = default;
-            Optional<string> id = default;
-            Optional<SubResource> frontendIPConfiguration = default;
-            Optional<SubResource> backendAddressPool = default;
-            Optional<SubResource> probe = default;
-            Optional<TransportProtocol> protocol = default;
-            Optional<LoadDistribution> loadDistribution = default;
-            Optional<int> frontendPort = default;
-            Optional<int> backendPort = default;
-            Optional<int> idleTimeoutInMinutes = default;
-            Optional<bool> enableFloatingIP = default;
-            Optional<bool> enableTcpReset = default;
-            Optional<bool> disableOutboundSnat = default;
-            Optional<ProvisioningState> provisioningState = default;
+            string name = default;
+            string etag = default;
+            string type = default;
+            string id = default;
+            SubResource frontendIPConfiguration = default;
+            SubResource backendAddressPool = default;
+            SubResource probe = default;
+            TransportProtocol? protocol = default;
+            LoadDistribution? loadDistribution = default;
+            int? frontendPort = default;
+            int? backendPort = default;
+            int? idleTimeoutInMinutes = default;
+            bool? enableFloatingIP = default;
+            bool? enableTcpReset = default;
+            bool? disableOutboundSnat = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -252,22 +253,22 @@ namespace Azure.Network.Management.Interface.Models
                 }
             }
             return new LoadBalancingRule(
-                id.Value,
-                name.Value,
-                etag.Value,
-                type.Value,
-                frontendIPConfiguration.Value,
-                backendAddressPool.Value,
-                probe.Value,
-                Optional.ToNullable(protocol),
-                Optional.ToNullable(loadDistribution),
-                Optional.ToNullable(frontendPort),
-                Optional.ToNullable(backendPort),
-                Optional.ToNullable(idleTimeoutInMinutes),
-                Optional.ToNullable(enableFloatingIP),
-                Optional.ToNullable(enableTcpReset),
-                Optional.ToNullable(disableOutboundSnat),
-                Optional.ToNullable(provisioningState));
+                id,
+                name,
+                etag,
+                type,
+                frontendIPConfiguration,
+                backendAddressPool,
+                probe,
+                protocol,
+                loadDistribution,
+                frontendPort,
+                backendPort,
+                idleTimeoutInMinutes,
+                enableFloatingIP,
+                enableTcpReset,
+                disableOutboundSnat,
+                provisioningState);
         }
     }
 }

@@ -19,12 +19,12 @@ namespace MgmtAcronymMapping
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Plan != null)
+            if (Optional.IsDefined(Plan))
             {
                 writer.WritePropertyName("plan"u8);
                 writer.WriteObjectValue(Plan);
             }
-            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -39,57 +39,57 @@ namespace MgmtAcronymMapping
             writer.WriteStringValue(Location);
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (HardwareProfile != null)
+            if (Optional.IsDefined(HardwareProfile))
             {
                 writer.WritePropertyName("hardwareProfile"u8);
                 writer.WriteObjectValue(HardwareProfile);
             }
-            if (StorageProfile != null)
+            if (Optional.IsDefined(StorageProfile))
             {
                 writer.WritePropertyName("storageProfile"u8);
                 writer.WriteObjectValue(StorageProfile);
             }
-            if (AdditionalCapabilities != null)
+            if (Optional.IsDefined(AdditionalCapabilities))
             {
                 writer.WritePropertyName("additionalCapabilities"u8);
                 writer.WriteObjectValue(AdditionalCapabilities);
             }
-            if (OSProfile != null)
+            if (Optional.IsDefined(OSProfile))
             {
                 writer.WritePropertyName("osProfile"u8);
                 writer.WriteObjectValue(OSProfile);
             }
-            if (SecurityProfile != null)
+            if (Optional.IsDefined(SecurityProfile))
             {
                 writer.WritePropertyName("securityProfile"u8);
                 writer.WriteObjectValue(SecurityProfile);
             }
-            if (NetworkProfile != null)
+            if (Optional.IsDefined(NetworkProfile))
             {
                 writer.WritePropertyName("networkProfile"u8);
                 writer.WriteObjectValue(NetworkProfile);
             }
-            if (NetworkProfileConfiguration != null)
+            if (Optional.IsDefined(NetworkProfileConfiguration))
             {
                 writer.WritePropertyName("networkProfileConfiguration"u8);
                 writer.WriteObjectValue(NetworkProfileConfiguration);
             }
-            if (DiagnosticsProfile != null)
+            if (Optional.IsDefined(DiagnosticsProfile))
             {
                 writer.WritePropertyName("diagnosticsProfile"u8);
                 writer.WriteObjectValue(DiagnosticsProfile);
             }
-            if (AvailabilitySet != null)
+            if (Optional.IsDefined(AvailabilitySet))
             {
                 writer.WritePropertyName("availabilitySet"u8);
                 JsonSerializer.Serialize(writer, AvailabilitySet);
             }
-            if (LicenseType != null)
+            if (Optional.IsDefined(LicenseType))
             {
                 writer.WritePropertyName("licenseType"u8);
                 writer.WriteStringValue(LicenseType);
             }
-            if (ProtectionPolicy != null)
+            if (Optional.IsDefined(ProtectionPolicy))
             {
                 writer.WritePropertyName("protectionPolicy"u8);
                 writer.WriteObjectValue(ProtectionPolicy);
@@ -104,32 +104,32 @@ namespace MgmtAcronymMapping
             {
                 return null;
             }
-            Optional<string> instanceId = default;
-            Optional<MgmtAcronymMappingSku> sku = default;
-            Optional<MgmtAcronymMappingPlan> plan = default;
+            string instanceId = default;
+            MgmtAcronymMappingSku sku = default;
+            MgmtAcronymMappingPlan plan = default;
             IReadOnlyList<string> zones = default;
             IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
-            Optional<bool> latestModelApplied = default;
-            Optional<string> vmId = default;
-            Optional<VirtualMachineScaleSetVmInstanceView> instanceView = default;
-            Optional<HardwareProfile> hardwareProfile = default;
-            Optional<StorageProfile> storageProfile = default;
-            Optional<AdditionalCapabilities> additionalCapabilities = default;
-            Optional<OSProfile> osProfile = default;
-            Optional<SecurityProfile> securityProfile = default;
-            Optional<NetworkProfile> networkProfile = default;
-            Optional<VirtualMachineScaleSetVmNetworkProfileConfiguration> networkProfileConfiguration = default;
-            Optional<DiagnosticsProfile> diagnosticsProfile = default;
-            Optional<WritableSubResource> availabilitySet = default;
-            Optional<string> provisioningState = default;
-            Optional<string> licenseType = default;
-            Optional<string> modelDefinitionApplied = default;
-            Optional<VirtualMachineScaleSetVmProtectionPolicy> protectionPolicy = default;
+            SystemData systemData = default;
+            bool? latestModelApplied = default;
+            string vmId = default;
+            VirtualMachineScaleSetVmInstanceView instanceView = default;
+            HardwareProfile hardwareProfile = default;
+            StorageProfile storageProfile = default;
+            AdditionalCapabilities additionalCapabilities = default;
+            OSProfile osProfile = default;
+            SecurityProfile securityProfile = default;
+            NetworkProfile networkProfile = default;
+            VirtualMachineScaleSetVmNetworkProfileConfiguration networkProfileConfiguration = default;
+            DiagnosticsProfile diagnosticsProfile = default;
+            WritableSubResource availabilitySet = default;
+            string provisioningState = default;
+            string licenseType = default;
+            string modelDefinitionApplied = default;
+            VirtualMachineScaleSetVmProtectionPolicy protectionPolicy = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("instanceId"u8))
@@ -357,29 +357,29 @@ namespace MgmtAcronymMapping
                 id,
                 name,
                 type,
-                systemData.Value,
+                systemData,
                 tags ?? new ChangeTrackingDictionary<string, string>(),
                 location,
-                instanceId.Value,
-                sku.Value,
-                plan.Value,
+                instanceId,
+                sku,
+                plan,
                 zones ?? new ChangeTrackingList<string>(),
-                Optional.ToNullable(latestModelApplied),
-                vmId.Value,
-                instanceView.Value,
-                hardwareProfile.Value,
-                storageProfile.Value,
-                additionalCapabilities.Value,
-                osProfile.Value,
-                securityProfile.Value,
-                networkProfile.Value,
-                networkProfileConfiguration.Value,
-                diagnosticsProfile.Value,
+                latestModelApplied,
+                vmId,
+                instanceView,
+                hardwareProfile,
+                storageProfile,
+                additionalCapabilities,
+                osProfile,
+                securityProfile,
+                networkProfile,
+                networkProfileConfiguration,
+                diagnosticsProfile,
                 availabilitySet,
-                provisioningState.Value,
-                licenseType.Value,
-                modelDefinitionApplied.Value,
-                protectionPolicy.Value);
+                provisioningState,
+                licenseType,
+                modelDefinitionApplied,
+                protectionPolicy);
         }
     }
 }

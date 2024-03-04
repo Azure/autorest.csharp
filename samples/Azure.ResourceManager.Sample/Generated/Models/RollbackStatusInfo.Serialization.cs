@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -27,17 +28,17 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && SuccessfullyRolledbackInstanceCount.HasValue)
+            if (options.Format != "W" && Optional.IsDefined(SuccessfullyRolledbackInstanceCount))
             {
                 writer.WritePropertyName("successfullyRolledbackInstanceCount"u8);
                 writer.WriteNumberValue(SuccessfullyRolledbackInstanceCount.Value);
             }
-            if (options.Format != "W" && FailedRolledbackInstanceCount.HasValue)
+            if (options.Format != "W" && Optional.IsDefined(FailedRolledbackInstanceCount))
             {
                 writer.WritePropertyName("failedRolledbackInstanceCount"u8);
                 writer.WriteNumberValue(FailedRolledbackInstanceCount.Value);
             }
-            if (options.Format != "W" && RollbackError != null)
+            if (options.Format != "W" && Optional.IsDefined(RollbackError))
             {
                 writer.WritePropertyName("rollbackError"u8);
                 writer.WriteObjectValue(RollbackError);
@@ -80,9 +81,9 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<int> successfullyRolledbackInstanceCount = default;
-            Optional<int> failedRolledbackInstanceCount = default;
-            Optional<ApiError> rollbackError = default;
+            int? successfullyRolledbackInstanceCount = default;
+            int? failedRolledbackInstanceCount = default;
+            ApiError rollbackError = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -120,7 +121,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new RollbackStatusInfo(Optional.ToNullable(successfullyRolledbackInstanceCount), Optional.ToNullable(failedRolledbackInstanceCount), rollbackError.Value, serializedAdditionalRawData);
+            return new RollbackStatusInfo(successfullyRolledbackInstanceCount, failedRolledbackInstanceCount, rollbackError, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -128,19 +129,19 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (SuccessfullyRolledbackInstanceCount.HasValue)
+            if (Optional.IsDefined(SuccessfullyRolledbackInstanceCount))
             {
                 builder.Append("  successfullyRolledbackInstanceCount:");
                 builder.AppendLine($" {SuccessfullyRolledbackInstanceCount.Value}");
             }
 
-            if (FailedRolledbackInstanceCount.HasValue)
+            if (Optional.IsDefined(FailedRolledbackInstanceCount))
             {
                 builder.Append("  failedRolledbackInstanceCount:");
                 builder.AppendLine($" {FailedRolledbackInstanceCount.Value}");
             }
 
-            if (RollbackError != null)
+            if (Optional.IsDefined(RollbackError))
             {
                 builder.Append("  rollbackError:");
                 AppendChildObject(builder, RollbackError, options, 2, false);

@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using body_complex;
 
 namespace body_complex.Models
 {
@@ -26,26 +27,26 @@ namespace body_complex.Models
             }
 
             writer.WriteStartObject();
-            if (Location != null)
+            if (Optional.IsDefined(Location))
             {
                 writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location);
             }
-            if (Iswild.HasValue)
+            if (Optional.IsDefined(Iswild))
             {
                 writer.WritePropertyName("iswild"u8);
                 writer.WriteBooleanValue(Iswild.Value);
             }
             writer.WritePropertyName("fishtype"u8);
             writer.WriteStringValue(Fishtype);
-            if (Species != null)
+            if (Optional.IsDefined(Species))
             {
                 writer.WritePropertyName("species"u8);
                 writer.WriteStringValue(Species);
             }
             writer.WritePropertyName("length"u8);
             writer.WriteNumberValue(Length);
-            if (!(Siblings is ChangeTrackingList<Fish> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Siblings))
             {
                 writer.WritePropertyName("siblings"u8);
                 writer.WriteStartArray();
@@ -100,10 +101,10 @@ namespace body_complex.Models
                     case "smart_salmon": return SmartSalmon.DeserializeSmartSalmon(element, options);
                 }
             }
-            Optional<string> location = default;
-            Optional<bool> iswild = default;
+            string location = default;
+            bool? iswild = default;
             string fishtype = "salmon";
-            Optional<string> species = default;
+            string species = default;
             float length = default;
             IList<Fish> siblings = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
@@ -161,12 +162,12 @@ namespace body_complex.Models
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new Salmon(
                 fishtype,
-                species.Value,
+                species,
                 length,
                 siblings ?? new ChangeTrackingList<Fish>(),
                 serializedAdditionalRawData,
-                location.Value,
-                Optional.ToNullable(iswild));
+                location,
+                iswild);
         }
 
         BinaryData IPersistableModel<Salmon>.Write(ModelReaderWriterOptions options)

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using SpreadTypeSpec;
 
 namespace SpreadTypeSpec.Models
 {
@@ -34,7 +35,7 @@ namespace SpreadTypeSpec.Models
                 writer.WriteStringValue(item);
             }
             writer.WriteEndArray();
-            if (!(OptionalStringList is ChangeTrackingList<string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(OptionalStringList))
             {
                 writer.WritePropertyName("optionalStringList"u8);
                 writer.WriteStartArray();

@@ -9,6 +9,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using AnomalyDetector;
 using Azure;
 using Azure.Core;
 
@@ -36,7 +37,7 @@ namespace AnomalyDetector.Models
             writer.WriteStringValue(CreatedTime, "O");
             writer.WritePropertyName("lastUpdatedTime"u8);
             writer.WriteStringValue(LastUpdatedTime, "O");
-            if (ModelInfo != null)
+            if (Optional.IsDefined(ModelInfo))
             {
                 writer.WritePropertyName("modelInfo"u8);
                 writer.WriteObjectValue(ModelInfo);
@@ -82,7 +83,7 @@ namespace AnomalyDetector.Models
             Guid modelId = default;
             DateTimeOffset createdTime = default;
             DateTimeOffset lastUpdatedTime = default;
-            Optional<ModelInfo> modelInfo = default;
+            ModelInfo modelInfo = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -117,7 +118,7 @@ namespace AnomalyDetector.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new AnomalyDetectionModel(modelId, createdTime, lastUpdatedTime, modelInfo.Value, serializedAdditionalRawData);
+            return new AnomalyDetectionModel(modelId, createdTime, lastUpdatedTime, modelInfo, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<AnomalyDetectionModel>.Write(ModelReaderWriterOptions options)

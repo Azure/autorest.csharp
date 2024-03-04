@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 using MgmtSingletonResource;
 
 namespace MgmtSingletonResource.Models
@@ -21,7 +20,7 @@ namespace MgmtSingletonResource.Models
                 return null;
             }
             IReadOnlyList<ParentResourceData> value = default;
-            Optional<string> nextLink = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -40,7 +39,7 @@ namespace MgmtSingletonResource.Models
                     continue;
                 }
             }
-            return new ParentResourceListResult(value, nextLink.Value);
+            return new ParentResourceListResult(value, nextLink);
         }
     }
 }

@@ -17,12 +17,12 @@ namespace MgmtExtensionCommonRestOperation
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (MyType != null)
+            if (Optional.IsDefined(MyType))
             {
                 writer.WritePropertyName("MyType"u8);
                 writer.WriteStringValue(MyType);
             }
-            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -44,13 +44,13 @@ namespace MgmtExtensionCommonRestOperation
             {
                 return null;
             }
-            Optional<string> myType = default;
+            string myType = default;
             IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
+            SystemData systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("MyType"u8))
@@ -106,10 +106,10 @@ namespace MgmtExtensionCommonRestOperation
                 id,
                 name,
                 type,
-                systemData.Value,
+                systemData,
                 tags ?? new ChangeTrackingDictionary<string, string>(),
                 location,
-                myType.Value);
+                myType);
         }
     }
 }

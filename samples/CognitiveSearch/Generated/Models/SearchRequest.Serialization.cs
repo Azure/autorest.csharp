@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {
@@ -16,12 +17,12 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (IncludeTotalResultCount.HasValue)
+            if (Optional.IsDefined(IncludeTotalResultCount))
             {
                 writer.WritePropertyName("count"u8);
                 writer.WriteBooleanValue(IncludeTotalResultCount.Value);
             }
-            if (!(Facets is ChangeTrackingList<string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Facets))
             {
                 writer.WritePropertyName("facets"u8);
                 writer.WriteStartArray();
@@ -31,42 +32,42 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Filter != null)
+            if (Optional.IsDefined(Filter))
             {
                 writer.WritePropertyName("filter"u8);
                 writer.WriteStringValue(Filter);
             }
-            if (HighlightFields != null)
+            if (Optional.IsDefined(HighlightFields))
             {
                 writer.WritePropertyName("highlight"u8);
                 writer.WriteStringValue(HighlightFields);
             }
-            if (HighlightPostTag != null)
+            if (Optional.IsDefined(HighlightPostTag))
             {
                 writer.WritePropertyName("highlightPostTag"u8);
                 writer.WriteStringValue(HighlightPostTag);
             }
-            if (HighlightPreTag != null)
+            if (Optional.IsDefined(HighlightPreTag))
             {
                 writer.WritePropertyName("highlightPreTag"u8);
                 writer.WriteStringValue(HighlightPreTag);
             }
-            if (MinimumCoverage.HasValue)
+            if (Optional.IsDefined(MinimumCoverage))
             {
                 writer.WritePropertyName("minimumCoverage"u8);
                 writer.WriteNumberValue(MinimumCoverage.Value);
             }
-            if (OrderBy != null)
+            if (Optional.IsDefined(OrderBy))
             {
                 writer.WritePropertyName("orderby"u8);
                 writer.WriteStringValue(OrderBy);
             }
-            if (QueryType.HasValue)
+            if (Optional.IsDefined(QueryType))
             {
                 writer.WritePropertyName("queryType"u8);
                 writer.WriteStringValue(QueryType.Value.ToSerialString());
             }
-            if (!(ScoringParameters is ChangeTrackingList<string> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(ScoringParameters))
             {
                 writer.WritePropertyName("scoringParameters"u8);
                 writer.WriteStartArray();
@@ -76,37 +77,37 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (ScoringProfile != null)
+            if (Optional.IsDefined(ScoringProfile))
             {
                 writer.WritePropertyName("scoringProfile"u8);
                 writer.WriteStringValue(ScoringProfile);
             }
-            if (SearchText != null)
+            if (Optional.IsDefined(SearchText))
             {
                 writer.WritePropertyName("search"u8);
                 writer.WriteStringValue(SearchText);
             }
-            if (SearchFields != null)
+            if (Optional.IsDefined(SearchFields))
             {
                 writer.WritePropertyName("searchFields"u8);
                 writer.WriteStringValue(SearchFields);
             }
-            if (SearchMode.HasValue)
+            if (Optional.IsDefined(SearchMode))
             {
                 writer.WritePropertyName("searchMode"u8);
                 writer.WriteStringValue(SearchMode.Value.ToSerialString());
             }
-            if (Select != null)
+            if (Optional.IsDefined(Select))
             {
                 writer.WritePropertyName("select"u8);
                 writer.WriteStringValue(Select);
             }
-            if (Skip.HasValue)
+            if (Optional.IsDefined(Skip))
             {
                 writer.WritePropertyName("skip"u8);
                 writer.WriteNumberValue(Skip.Value);
             }
-            if (Top.HasValue)
+            if (Optional.IsDefined(Top))
             {
                 writer.WritePropertyName("top"u8);
                 writer.WriteNumberValue(Top.Value);
@@ -120,23 +121,23 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            Optional<bool> count = default;
+            bool? count = default;
             IList<string> facets = default;
-            Optional<string> filter = default;
-            Optional<string> highlight = default;
-            Optional<string> highlightPostTag = default;
-            Optional<string> highlightPreTag = default;
-            Optional<double> minimumCoverage = default;
-            Optional<string> orderby = default;
-            Optional<QueryType> queryType = default;
+            string filter = default;
+            string highlight = default;
+            string highlightPostTag = default;
+            string highlightPreTag = default;
+            double? minimumCoverage = default;
+            string orderby = default;
+            QueryType? queryType = default;
             IList<string> scoringParameters = default;
-            Optional<string> scoringProfile = default;
-            Optional<string> search = default;
-            Optional<string> searchFields = default;
-            Optional<SearchMode> searchMode = default;
-            Optional<string> select = default;
-            Optional<int> skip = default;
-            Optional<int> top = default;
+            string scoringProfile = default;
+            string search = default;
+            string searchFields = default;
+            SearchMode? searchMode = default;
+            string select = default;
+            int? skip = default;
+            int? top = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("count"u8))
@@ -268,23 +269,23 @@ namespace CognitiveSearch.Models
                 }
             }
             return new SearchRequest(
-                Optional.ToNullable(count),
+                count,
                 facets ?? new ChangeTrackingList<string>(),
-                filter.Value,
-                highlight.Value,
-                highlightPostTag.Value,
-                highlightPreTag.Value,
-                Optional.ToNullable(minimumCoverage),
-                orderby.Value,
-                Optional.ToNullable(queryType),
+                filter,
+                highlight,
+                highlightPostTag,
+                highlightPreTag,
+                minimumCoverage,
+                orderby,
+                queryType,
                 scoringParameters ?? new ChangeTrackingList<string>(),
-                scoringProfile.Value,
-                search.Value,
-                searchFields.Value,
-                Optional.ToNullable(searchMode),
-                select.Value,
-                Optional.ToNullable(skip),
-                Optional.ToNullable(top));
+                scoringProfile,
+                search,
+                searchFields,
+                searchMode,
+                select,
+                skip,
+                top);
         }
     }
 }

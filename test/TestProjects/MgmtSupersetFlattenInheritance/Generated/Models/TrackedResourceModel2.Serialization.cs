@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
+using MgmtSupersetFlattenInheritance;
 
 namespace MgmtSupersetFlattenInheritance.Models
 {
@@ -17,17 +18,17 @@ namespace MgmtSupersetFlattenInheritance.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Foo != null)
+            if (Optional.IsDefined(Foo))
             {
                 writer.WritePropertyName("foo"u8);
                 writer.WriteStringValue(Foo);
             }
-            if (Bar != null)
+            if (Optional.IsDefined(Bar))
             {
                 writer.WritePropertyName("bar"u8);
                 writer.WriteStringValue(Bar);
             }
-            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -42,7 +43,7 @@ namespace MgmtSupersetFlattenInheritance.Models
             writer.WriteStringValue(Location);
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (FooPropertiesFoo != null)
+            if (Optional.IsDefined(FooPropertiesFoo))
             {
                 writer.WritePropertyName("foo"u8);
                 writer.WriteStringValue(FooPropertiesFoo);
@@ -57,15 +58,15 @@ namespace MgmtSupersetFlattenInheritance.Models
             {
                 return null;
             }
-            Optional<string> foo = default;
-            Optional<string> bar = default;
+            string foo = default;
+            string bar = default;
             IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
-            Optional<string> foo0 = default;
+            SystemData systemData = default;
+            string foo0 = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("foo"u8))
@@ -143,12 +144,12 @@ namespace MgmtSupersetFlattenInheritance.Models
                 id,
                 name,
                 type,
-                systemData.Value,
+                systemData,
                 tags ?? new ChangeTrackingDictionary<string, string>(),
                 location,
-                foo.Value,
-                bar.Value,
-                foo0.Value);
+                foo,
+                bar,
+                foo0);
         }
     }
 }

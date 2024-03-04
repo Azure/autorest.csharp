@@ -31,7 +31,7 @@ namespace Azure.ResourceManager.Sample
             }
 
             writer.WriteStartObject();
-            if (!(Zones is ChangeTrackingList<string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Zones))
             {
                 writer.WritePropertyName("zones"u8);
                 writer.WriteStartArray();
@@ -41,7 +41,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 writer.WriteEndArray();
             }
-            if (!(HostUris is ChangeTrackingList<Uri> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(HostUris))
             {
                 writer.WritePropertyName("hostUris"u8);
                 writer.WriteStartArray();
@@ -56,12 +56,12 @@ namespace Azure.ResourceManager.Sample
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W" && TenantId.HasValue)
+            if (options.Format != "W" && Optional.IsDefined(TenantId))
             {
                 writer.WritePropertyName("tenantId"u8);
                 writer.WriteStringValue(TenantId.Value);
             }
-            if (!(Tags is ChangeTrackingDictionary<string, string> collection1 && collection1.IsUndefined))
+            if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -89,19 +89,19 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format != "W" && SystemData != null)
+            if (options.Format != "W" && Optional.IsDefined(SystemData))
             {
                 writer.WritePropertyName("systemData"u8);
                 JsonSerializer.Serialize(writer, SystemData);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (PlatformFaultDomainCount.HasValue)
+            if (Optional.IsDefined(PlatformFaultDomainCount))
             {
                 writer.WritePropertyName("platformFaultDomainCount"u8);
                 writer.WriteNumberValue(PlatformFaultDomainCount.Value);
             }
-            if (options.Format != "W" && !(Hosts is ChangeTrackingList<Resources.Models.SubResource> collection2 && collection2.IsUndefined))
+            if (options.Format != "W" && Optional.IsCollectionDefined(Hosts))
             {
                 writer.WritePropertyName("hosts"u8);
                 writer.WriteStartArray();
@@ -111,12 +111,12 @@ namespace Azure.ResourceManager.Sample
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W" && InstanceView != null)
+            if (options.Format != "W" && Optional.IsDefined(InstanceView))
             {
                 writer.WritePropertyName("instanceView"u8);
                 writer.WriteObjectValue(InstanceView);
             }
-            if (SupportAutomaticPlacement.HasValue)
+            if (Optional.IsDefined(SupportAutomaticPlacement))
             {
                 writer.WritePropertyName("supportAutomaticPlacement"u8);
                 writer.WriteBooleanValue(SupportAutomaticPlacement.Value);
@@ -162,17 +162,17 @@ namespace Azure.ResourceManager.Sample
             }
             IList<string> zones = default;
             IList<Uri> hostUris = default;
-            Optional<Guid> tenantId = default;
+            Guid? tenantId = default;
             IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
-            Optional<int> platformFaultDomainCount = default;
+            SystemData systemData = default;
+            int? platformFaultDomainCount = default;
             IReadOnlyList<Resources.Models.SubResource> hosts = default;
-            Optional<DedicatedHostGroupInstanceView> instanceView = default;
-            Optional<bool> supportAutomaticPlacement = default;
+            DedicatedHostGroupInstanceView instanceView = default;
+            bool? supportAutomaticPlacement = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -327,16 +327,16 @@ namespace Azure.ResourceManager.Sample
                 id,
                 name,
                 type,
-                systemData.Value,
+                systemData,
                 tags ?? new ChangeTrackingDictionary<string, string>(),
                 location,
                 zones ?? new ChangeTrackingList<string>(),
                 hostUris ?? new ChangeTrackingList<Uri>(),
-                Optional.ToNullable(tenantId),
-                Optional.ToNullable(platformFaultDomainCount),
+                tenantId,
+                platformFaultDomainCount,
                 hosts ?? new ChangeTrackingList<Resources.Models.SubResource>(),
-                instanceView.Value,
-                Optional.ToNullable(supportAutomaticPlacement),
+                instanceView,
+                supportAutomaticPlacement,
                 serializedAdditionalRawData);
         }
 
@@ -345,7 +345,7 @@ namespace Azure.ResourceManager.Sample
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 builder.Append("  name:");
                 if (Name.Contains(Environment.NewLine))
@@ -362,7 +362,7 @@ namespace Azure.ResourceManager.Sample
             builder.Append("  location:");
             builder.AppendLine($" '{Location.ToString()}'");
 
-            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Tags))
             {
                 if (Tags.Any())
                 {
@@ -390,7 +390,7 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (!(Zones is ChangeTrackingList<string> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(Zones))
             {
                 if (Zones.Any())
                 {
@@ -417,7 +417,7 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (!(HostUris is ChangeTrackingList<Uri> collection1 && collection1.IsUndefined))
+            if (Optional.IsCollectionDefined(HostUris))
             {
                 if (HostUris.Any())
                 {
@@ -436,19 +436,19 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (TenantId.HasValue)
+            if (Optional.IsDefined(TenantId))
             {
                 builder.Append("  tenantId:");
                 builder.AppendLine($" '{TenantId.Value.ToString()}'");
             }
 
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 builder.Append("  id:");
                 builder.AppendLine($" '{Id.ToString()}'");
             }
 
-            if (SystemData != null)
+            if (Optional.IsDefined(SystemData))
             {
                 builder.Append("  systemData:");
                 builder.AppendLine($" '{SystemData.ToString()}'");
@@ -456,13 +456,13 @@ namespace Azure.ResourceManager.Sample
 
             builder.Append("  properties:");
             builder.AppendLine(" {");
-            if (PlatformFaultDomainCount.HasValue)
+            if (Optional.IsDefined(PlatformFaultDomainCount))
             {
                 builder.Append("    platformFaultDomainCount:");
                 builder.AppendLine($" {PlatformFaultDomainCount.Value}");
             }
 
-            if (!(Hosts is ChangeTrackingList<Resources.Models.SubResource> collection2 && collection2.IsUndefined))
+            if (Optional.IsCollectionDefined(Hosts))
             {
                 if (Hosts.Any())
                 {
@@ -476,13 +476,13 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (InstanceView != null)
+            if (Optional.IsDefined(InstanceView))
             {
                 builder.Append("    instanceView:");
                 AppendChildObject(builder, InstanceView, options, 4, false);
             }
 
-            if (SupportAutomaticPlacement.HasValue)
+            if (Optional.IsDefined(SupportAutomaticPlacement))
             {
                 builder.Append("    supportAutomaticPlacement:");
                 var boolValue = SupportAutomaticPlacement.Value == true ? "true" : "false";

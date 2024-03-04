@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using model_flattening;
 
 namespace model_flattening.Models
 {
@@ -28,7 +29,7 @@ namespace model_flattening.Models
             writer.WriteStartObject();
             writer.WritePropertyName("base_product_id"u8);
             writer.WriteStringValue(ProductId);
-            if (Description != null)
+            if (Optional.IsDefined(Description))
             {
                 writer.WritePropertyName("base_product_description"u8);
                 writer.WriteStringValue(Description);
@@ -72,7 +73,7 @@ namespace model_flattening.Models
                 return null;
             }
             string baseProductId = default;
-            Optional<string> baseProductDescription = default;
+            string baseProductDescription = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -93,7 +94,7 @@ namespace model_flattening.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new BaseProduct(baseProductId, baseProductDescription.Value, serializedAdditionalRawData);
+            return new BaseProduct(baseProductId, baseProductDescription, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<BaseProduct>.Write(ModelReaderWriterOptions options)

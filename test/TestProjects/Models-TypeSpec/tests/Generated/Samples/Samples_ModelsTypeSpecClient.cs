@@ -1742,12 +1742,12 @@ null
                 requiredBytes = new object(),
                 requiredUint8Array = new object[]
             {
-1234
+123
             },
                 requiredUnknown = new object(),
                 requiredInt8Array = new object[]
             {
-1234
+123
             },
                 requiredNullableIntList = new object[]
             {
@@ -1815,12 +1815,12 @@ null
                 requiredBytes = new object(),
                 requiredUint8Array = new object[]
             {
-1234
+123
             },
                 requiredUnknown = new object(),
                 requiredInt8Array = new object[]
             {
-1234
+123
             },
                 requiredNullableIntList = new object[]
             {
@@ -1877,9 +1877,9 @@ default
                     ["key"] = default
                 },
                 BinaryData.FromObjectAsJson(new object()),
-                new int[] { 1234 },
+                new byte[] { 123 },
                 BinaryData.FromObjectAsJson(new object()),
-                new int[] { 1234 },
+                new sbyte[] { 123 },
                 new int[] { 1234 },
                 new string[] { "<requiredNullableStringList>" });
             Response<OutputModel> response = client.RoundTripToOutput(input);
@@ -1924,9 +1924,9 @@ default
                     ["key"] = default
                 },
                 BinaryData.FromObjectAsJson(new object()),
-                new int[] { 1234 },
+                new byte[] { 123 },
                 BinaryData.FromObjectAsJson(new object()),
-                new int[] { 1234 },
+                new sbyte[] { 123 },
                 new int[] { 1234 },
                 new string[] { "<requiredNullableStringList>" });
             Response<OutputModel> response = await client.RoundTripToOutputAsync(input);
@@ -1988,21 +1988,21 @@ null
                 optionalBytes = new object(),
                 requiredUint8Array = new object[]
             {
-1234
+123
             },
                 optionalUint8Array = new object[]
             {
-1234
+123
             },
                 requiredUnknown = new object(),
                 optionalUnknown = new object(),
                 requiredInt8Array = new object[]
             {
-1234
+123
             },
                 optionalInt8Array = new object[]
             {
-1234
+123
             },
                 requiredNullableIntList = new object[]
             {
@@ -2084,21 +2084,21 @@ null
                 optionalBytes = new object(),
                 requiredUint8Array = new object[]
             {
-1234
+123
             },
                 optionalUint8Array = new object[]
             {
-1234
+123
             },
                 requiredUnknown = new object(),
                 optionalUnknown = new object(),
                 requiredInt8Array = new object[]
             {
-1234
+123
             },
                 optionalInt8Array = new object[]
             {
-1234
+123
             },
                 requiredNullableIntList = new object[]
             {
@@ -2166,9 +2166,9 @@ default
                     ["key"] = default
                 },
                 BinaryData.FromObjectAsJson(new object()),
-                new int[] { 1234 },
+                new byte[] { 123 },
                 BinaryData.FromObjectAsJson(new object()),
-                new int[] { 1234 },
+                new sbyte[] { 123 },
                 new int[] { 1234 },
                 new string[] { "<requiredNullableStringList>" })
             {
@@ -2177,9 +2177,9 @@ default
                 NonRequiredNullableInt = 1234,
                 NonRequiredNullableString = "<nonRequiredNullableString>",
                 OptionalBytes = BinaryData.FromObjectAsJson(new object()),
-                OptionalUint8Array = { 1234 },
+                OptionalUint8Array = { 123 },
                 OptionalUnknown = BinaryData.FromObjectAsJson(new object()),
-                OptionalInt8Array = { 1234 },
+                OptionalInt8Array = { 123 },
                 NonRequiredNullableIntList = { 1234 },
                 NonRequiredNullableStringList = { "<nonRequiredNullableStringList>" },
             };
@@ -2228,9 +2228,9 @@ default
                     ["key"] = default
                 },
                 BinaryData.FromObjectAsJson(new object()),
-                new int[] { 1234 },
+                new byte[] { 123 },
                 BinaryData.FromObjectAsJson(new object()),
-                new int[] { 1234 },
+                new sbyte[] { 123 },
                 new int[] { 1234 },
                 new string[] { "<requiredNullableStringList>" })
             {
@@ -2239,9 +2239,9 @@ default
                 NonRequiredNullableInt = 1234,
                 NonRequiredNullableString = "<nonRequiredNullableString>",
                 OptionalBytes = BinaryData.FromObjectAsJson(new object()),
-                OptionalUint8Array = { 1234 },
+                OptionalUint8Array = { 123 },
                 OptionalUnknown = BinaryData.FromObjectAsJson(new object()),
-                OptionalInt8Array = { 1234 },
+                OptionalInt8Array = { 123 },
                 NonRequiredNullableIntList = { 1234 },
                 NonRequiredNullableStringList = { "<nonRequiredNullableStringList>" },
             };

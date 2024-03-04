@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using ModelShapes;
 
 namespace ModelShapes.Models
 {
@@ -26,12 +27,12 @@ namespace ModelShapes.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && ReadonlyProperty != null)
+            if (options.Format != "W" && Optional.IsDefined(ReadonlyProperty))
             {
                 writer.WritePropertyName("ReadonlyProperty"u8);
                 writer.WriteObjectValue(ReadonlyProperty);
             }
-            if (options.Format != "W" && !(ReadonlyListProperty is ChangeTrackingList<ReadonlyModel> collection && collection.IsUndefined))
+            if (options.Format != "W" && Optional.IsCollectionDefined(ReadonlyListProperty))
             {
                 writer.WritePropertyName("ReadonlyListProperty"u8);
                 writer.WriteStartArray();
@@ -79,7 +80,7 @@ namespace ModelShapes.Models
             {
                 return null;
             }
-            Optional<ReadonlyModel> readonlyProperty = default;
+            ReadonlyModel readonlyProperty = default;
             IReadOnlyList<ReadonlyModel> readonlyListProperty = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -114,7 +115,7 @@ namespace ModelShapes.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new MixedModelWithReadonlyProperty(readonlyProperty.Value, readonlyListProperty ?? new ChangeTrackingList<ReadonlyModel>(), serializedAdditionalRawData);
+            return new MixedModelWithReadonlyProperty(readonlyProperty, readonlyListProperty ?? new ChangeTrackingList<ReadonlyModel>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<MixedModelWithReadonlyProperty>.Write(ModelReaderWriterOptions options)

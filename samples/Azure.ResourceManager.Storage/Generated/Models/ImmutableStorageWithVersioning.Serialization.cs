@@ -8,6 +8,7 @@
 using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Storage;
 
 namespace Azure.ResourceManager.Storage.Models
 {
@@ -16,7 +17,7 @@ namespace Azure.ResourceManager.Storage.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Enabled.HasValue)
+            if (Optional.IsDefined(Enabled))
             {
                 writer.WritePropertyName("enabled"u8);
                 writer.WriteBooleanValue(Enabled.Value);
@@ -30,9 +31,9 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Optional<bool> enabled = default;
-            Optional<DateTimeOffset> timeStamp = default;
-            Optional<MigrationState> migrationState = default;
+            bool? enabled = default;
+            DateTimeOffset? timeStamp = default;
+            MigrationState? migrationState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("enabled"u8))
@@ -63,7 +64,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new ImmutableStorageWithVersioning(Optional.ToNullable(enabled), Optional.ToNullable(timeStamp), Optional.ToNullable(migrationState));
+            return new ImmutableStorageWithVersioning(enabled, timeStamp, migrationState);
         }
     }
 }

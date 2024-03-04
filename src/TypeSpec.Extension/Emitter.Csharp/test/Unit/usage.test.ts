@@ -405,7 +405,7 @@ describe("Test getUsages", () => {
         const program = await typeSpecCompile(
             `
             @doc("This is a model.")
-            @projectedName("csharp", "FooRenamed")
+            @projectedName("azure", "FooRenamed")
             model Foo {
                 @doc("name of the Foo")
                 name: string;
@@ -425,7 +425,7 @@ describe("Test getUsages", () => {
         const program = await typeSpecCompile(
             `
             @doc("fixed string enum")
-            @projectedName("csharp", "SimpleEnumRenamed")
+            @projectedName("azure", "SimpleEnumRenamed")
             enum SimpleEnum {
                 @doc("Enum value one")
                 One: "1",
@@ -446,6 +446,28 @@ describe("Test getUsages", () => {
         const [services] = getAllHttpServices(program);
         const usages = getUsages(sdkContext, services[0].operations);
         assert(usages.inputs.includes("SimpleEnumRenamed"));
+    });
+
+    it("Test the usage of model which is renamed via @clientName.", async () => {
+        const program = await typeSpecCompile(
+            `
+            @doc("A model plan to rename")
+            @clientName("RenamedModel")
+            model ModelToRename {
+                value: string;
+            }
+
+            op test(@body body: ModelToRename): void;
+      `,
+            runner,
+            { IsNamespaceNeeded: true, IsTCGCNeeded: true }
+        );
+
+        const context = createEmitterContext(program);
+        const sdkContext = createNetSdkContext(context);
+        const [services] = getAllHttpServices(program);
+        const usages = getUsages(sdkContext, services[0].operations);
+        assert(usages.inputs.includes("RenamedModel"));
     });
 
     it("Test the usage of return type of a customized LRO operation.", async () => {

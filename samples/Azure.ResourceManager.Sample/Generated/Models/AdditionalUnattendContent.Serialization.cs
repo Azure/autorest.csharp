@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -27,22 +28,22 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (PassName.HasValue)
+            if (Optional.IsDefined(PassName))
             {
                 writer.WritePropertyName("passName"u8);
                 writer.WriteStringValue(PassName.Value.ToString());
             }
-            if (ComponentName.HasValue)
+            if (Optional.IsDefined(ComponentName))
             {
                 writer.WritePropertyName("componentName"u8);
                 writer.WriteStringValue(ComponentName.Value.ToString());
             }
-            if (SettingName.HasValue)
+            if (Optional.IsDefined(SettingName))
             {
                 writer.WritePropertyName("settingName"u8);
                 writer.WriteStringValue(SettingName.Value.ToSerialString());
             }
-            if (Content != null)
+            if (Optional.IsDefined(Content))
             {
                 writer.WritePropertyName("content"u8);
                 writer.WriteStringValue(Content);
@@ -85,10 +86,10 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<PassName> passName = default;
-            Optional<ComponentName> componentName = default;
-            Optional<SettingName> settingName = default;
-            Optional<string> content = default;
+            PassName? passName = default;
+            ComponentName? componentName = default;
+            SettingName? settingName = default;
+            string content = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -131,7 +132,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new AdditionalUnattendContent(Optional.ToNullable(passName), Optional.ToNullable(componentName), Optional.ToNullable(settingName), content.Value, serializedAdditionalRawData);
+            return new AdditionalUnattendContent(passName, componentName, settingName, content, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -139,25 +140,25 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (PassName.HasValue)
+            if (Optional.IsDefined(PassName))
             {
                 builder.Append("  passName:");
                 builder.AppendLine($" '{PassName.Value.ToString()}'");
             }
 
-            if (ComponentName.HasValue)
+            if (Optional.IsDefined(ComponentName))
             {
                 builder.Append("  componentName:");
                 builder.AppendLine($" '{ComponentName.Value.ToString()}'");
             }
 
-            if (SettingName.HasValue)
+            if (Optional.IsDefined(SettingName))
             {
                 builder.Append("  settingName:");
                 builder.AppendLine($" '{SettingName.Value.ToSerialString()}'");
             }
 
-            if (Content != null)
+            if (Optional.IsDefined(Content))
             {
                 builder.Append("  content:");
                 if (Content.Contains(Environment.NewLine))

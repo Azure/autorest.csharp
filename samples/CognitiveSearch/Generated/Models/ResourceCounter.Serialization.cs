@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
@@ -19,7 +18,7 @@ namespace CognitiveSearch.Models
                 return null;
             }
             long usage = default;
-            Optional<long?> quota = default;
+            long? quota = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("usage"u8))
@@ -38,7 +37,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new ResourceCounter(usage, Optional.ToNullable(quota));
+            return new ResourceCounter(usage, quota);
         }
     }
 }

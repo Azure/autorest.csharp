@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {
@@ -21,12 +22,12 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(Format.ToString());
             writer.WritePropertyName("synonyms"u8);
             writer.WriteStringValue(Synonyms);
-            if (EncryptionKey != null)
+            if (Optional.IsDefined(EncryptionKey))
             {
                 writer.WritePropertyName("encryptionKey"u8);
                 writer.WriteObjectValue(EncryptionKey);
             }
-            if (ETag != null)
+            if (Optional.IsDefined(ETag))
             {
                 writer.WritePropertyName("@odata.etag"u8);
                 writer.WriteStringValue(ETag);
@@ -43,8 +44,8 @@ namespace CognitiveSearch.Models
             string name = default;
             SynonymMapFormat format = default;
             string synonyms = default;
-            Optional<EncryptionKey> encryptionKey = default;
-            Optional<string> odataEtag = default;
+            EncryptionKey encryptionKey = default;
+            string odataEtag = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -77,7 +78,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new SynonymMap(name, format, synonyms, encryptionKey.Value, odataEtag.Value);
+            return new SynonymMap(name, format, synonyms, encryptionKey, odataEtag);
         }
     }
 }

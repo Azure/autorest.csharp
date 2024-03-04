@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using ModelReaderWriterValidationTypeSpec;
 
 namespace ModelReaderWriterValidationTypeSpec.Models
 {
@@ -27,27 +28,27 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             }
 
             writer.WriteStartObject();
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (Namespace != null)
+            if (Optional.IsDefined(Namespace))
             {
                 writer.WritePropertyName("namespace"u8);
                 writer.WriteStringValue(Namespace);
             }
-            if (RegistrationState != null)
+            if (Optional.IsDefined(RegistrationState))
             {
                 writer.WritePropertyName("registrationState"u8);
                 writer.WriteStringValue(RegistrationState);
             }
-            if (RegistrationPolicy != null)
+            if (Optional.IsDefined(RegistrationPolicy))
             {
                 writer.WritePropertyName("registrationPolicy"u8);
                 writer.WriteStringValue(RegistrationPolicy);
             }
-            if (!(ResourceTypes is ChangeTrackingList<ProviderResourceType> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(ResourceTypes))
             {
                 writer.WritePropertyName("resourceTypes"u8);
                 writer.WriteStartArray();
@@ -57,7 +58,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (ProviderAuthorizationConsentState.HasValue)
+            if (Optional.IsDefined(ProviderAuthorizationConsentState))
             {
                 writer.WritePropertyName("providerAuthorizationConsentState"u8);
                 writer.WriteStringValue(ProviderAuthorizationConsentState.Value.ToString());
@@ -100,12 +101,12 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             {
                 return null;
             }
-            Optional<string> id = default;
-            Optional<string> @namespace = default;
-            Optional<string> registrationState = default;
-            Optional<string> registrationPolicy = default;
+            string id = default;
+            string @namespace = default;
+            string registrationState = default;
+            string registrationPolicy = default;
             IReadOnlyList<ProviderResourceType> resourceTypes = default;
-            Optional<ProviderAuthorizationConsentState> providerAuthorizationConsentState = default;
+            ProviderAuthorizationConsentState? providerAuthorizationConsentState = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -160,12 +161,12 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ResourceProviderData(
-                id.Value,
-                @namespace.Value,
-                registrationState.Value,
-                registrationPolicy.Value,
+                id,
+                @namespace,
+                registrationState,
+                registrationPolicy,
                 resourceTypes ?? new ChangeTrackingList<ProviderResourceType>(),
-                Optional.ToNullable(providerAuthorizationConsentState),
+                providerAuthorizationConsentState,
                 serializedAdditionalRawData);
         }
 

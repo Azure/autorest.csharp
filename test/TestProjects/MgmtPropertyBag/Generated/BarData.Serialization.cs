@@ -16,7 +16,7 @@ namespace MgmtPropertyBag
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Details != null)
+            if (Optional.IsDefined(Details))
             {
                 writer.WritePropertyName("details"u8);
                 writer.WriteStringValue(Details);
@@ -30,11 +30,11 @@ namespace MgmtPropertyBag
             {
                 return null;
             }
-            Optional<string> details = default;
+            string details = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
+            SystemData systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("details"u8))
@@ -67,7 +67,7 @@ namespace MgmtPropertyBag
                     continue;
                 }
             }
-            return new BarData(id, name, type, systemData.Value, details.Value);
+            return new BarData(id, name, type, systemData, details);
         }
     }
 }

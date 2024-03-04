@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using ExtensionClientName;
 
 namespace ExtensionClientName.Models
 {
@@ -16,7 +17,7 @@ namespace ExtensionClientName.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (!(RenamedProperty is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(RenamedProperty))
             {
                 writer.WritePropertyName("originalProperty"u8);
                 writer.WriteStartObject();
@@ -27,7 +28,7 @@ namespace ExtensionClientName.Models
                 }
                 writer.WriteEndObject();
             }
-            if (RenamedPropertyString != null)
+            if (Optional.IsDefined(RenamedPropertyString))
             {
                 writer.WritePropertyName("originalPropertyString"u8);
                 writer.WriteStringValue(RenamedPropertyString);
@@ -42,7 +43,7 @@ namespace ExtensionClientName.Models
                 return null;
             }
             IDictionary<string, string> originalProperty = default;
-            Optional<string> originalPropertyString = default;
+            string originalPropertyString = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("originalProperty"u8))
@@ -65,7 +66,7 @@ namespace ExtensionClientName.Models
                     continue;
                 }
             }
-            return new RenamedSchema(originalProperty ?? new ChangeTrackingDictionary<string, string>(), originalPropertyString.Value);
+            return new RenamedSchema(originalProperty ?? new ChangeTrackingDictionary<string, string>(), originalPropertyString);
         }
     }
 }

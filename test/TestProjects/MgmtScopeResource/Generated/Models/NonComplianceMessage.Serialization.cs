@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtScopeResource;
 
 namespace MgmtScopeResource.Models
 {
@@ -17,7 +18,7 @@ namespace MgmtScopeResource.Models
             writer.WriteStartObject();
             writer.WritePropertyName("message"u8);
             writer.WriteStringValue(Message);
-            if (PolicyDefinitionReferenceId != null)
+            if (Optional.IsDefined(PolicyDefinitionReferenceId))
             {
                 writer.WritePropertyName("policyDefinitionReferenceId"u8);
                 writer.WriteStringValue(PolicyDefinitionReferenceId);
@@ -32,7 +33,7 @@ namespace MgmtScopeResource.Models
                 return null;
             }
             string message = default;
-            Optional<string> policyDefinitionReferenceId = default;
+            string policyDefinitionReferenceId = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("message"u8))
@@ -46,7 +47,7 @@ namespace MgmtScopeResource.Models
                     continue;
                 }
             }
-            return new NonComplianceMessage(message, policyDefinitionReferenceId.Value);
+            return new NonComplianceMessage(message, policyDefinitionReferenceId);
         }
     }
 }

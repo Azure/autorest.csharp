@@ -19,47 +19,47 @@ namespace Azure.ResourceManager.Storage
             writer.WriteStartObject();
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Cors != null)
+            if (Optional.IsDefined(Cors))
             {
                 writer.WritePropertyName("cors"u8);
                 writer.WriteObjectValue(Cors);
             }
-            if (DefaultServiceVersion != null)
+            if (Optional.IsDefined(DefaultServiceVersion))
             {
                 writer.WritePropertyName("defaultServiceVersion"u8);
                 writer.WriteStringValue(DefaultServiceVersion);
             }
-            if (DeleteRetentionPolicy != null)
+            if (Optional.IsDefined(DeleteRetentionPolicy))
             {
                 writer.WritePropertyName("deleteRetentionPolicy"u8);
                 writer.WriteObjectValue(DeleteRetentionPolicy);
             }
-            if (IsVersioningEnabled.HasValue)
+            if (Optional.IsDefined(IsVersioningEnabled))
             {
                 writer.WritePropertyName("isVersioningEnabled"u8);
                 writer.WriteBooleanValue(IsVersioningEnabled.Value);
             }
-            if (AutomaticSnapshotPolicyEnabled.HasValue)
+            if (Optional.IsDefined(AutomaticSnapshotPolicyEnabled))
             {
                 writer.WritePropertyName("automaticSnapshotPolicyEnabled"u8);
                 writer.WriteBooleanValue(AutomaticSnapshotPolicyEnabled.Value);
             }
-            if (ChangeFeed != null)
+            if (Optional.IsDefined(ChangeFeed))
             {
                 writer.WritePropertyName("changeFeed"u8);
                 writer.WriteObjectValue(ChangeFeed);
             }
-            if (RestorePolicy != null)
+            if (Optional.IsDefined(RestorePolicy))
             {
                 writer.WritePropertyName("restorePolicy"u8);
                 writer.WriteObjectValue(RestorePolicy);
             }
-            if (ContainerDeleteRetentionPolicy != null)
+            if (Optional.IsDefined(ContainerDeleteRetentionPolicy))
             {
                 writer.WritePropertyName("containerDeleteRetentionPolicy"u8);
                 writer.WriteObjectValue(ContainerDeleteRetentionPolicy);
             }
-            if (LastAccessTimeTrackingPolicy != null)
+            if (Optional.IsDefined(LastAccessTimeTrackingPolicy))
             {
                 writer.WritePropertyName("lastAccessTimeTrackingPolicy"u8);
                 writer.WriteObjectValue(LastAccessTimeTrackingPolicy);
@@ -74,20 +74,20 @@ namespace Azure.ResourceManager.Storage
             {
                 return null;
             }
-            Optional<StorageSku> sku = default;
+            StorageSku sku = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
-            Optional<CorsRules> cors = default;
-            Optional<string> defaultServiceVersion = default;
-            Optional<DeleteRetentionPolicy> deleteRetentionPolicy = default;
-            Optional<bool> isVersioningEnabled = default;
-            Optional<bool> automaticSnapshotPolicyEnabled = default;
-            Optional<ChangeFeed> changeFeed = default;
-            Optional<RestorePolicyProperties> restorePolicy = default;
-            Optional<DeleteRetentionPolicy> containerDeleteRetentionPolicy = default;
-            Optional<LastAccessTimeTrackingPolicy> lastAccessTimeTrackingPolicy = default;
+            SystemData systemData = default;
+            CorsRules cors = default;
+            string defaultServiceVersion = default;
+            DeleteRetentionPolicy deleteRetentionPolicy = default;
+            bool? isVersioningEnabled = default;
+            bool? automaticSnapshotPolicyEnabled = default;
+            ChangeFeed changeFeed = default;
+            RestorePolicyProperties restorePolicy = default;
+            DeleteRetentionPolicy containerDeleteRetentionPolicy = default;
+            LastAccessTimeTrackingPolicy lastAccessTimeTrackingPolicy = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sku"u8))
@@ -217,17 +217,17 @@ namespace Azure.ResourceManager.Storage
                 id,
                 name,
                 type,
-                systemData.Value,
-                sku.Value,
-                cors.Value,
-                defaultServiceVersion.Value,
-                deleteRetentionPolicy.Value,
-                Optional.ToNullable(isVersioningEnabled),
-                Optional.ToNullable(automaticSnapshotPolicyEnabled),
-                changeFeed.Value,
-                restorePolicy.Value,
-                containerDeleteRetentionPolicy.Value,
-                lastAccessTimeTrackingPolicy.Value);
+                systemData,
+                sku,
+                cors,
+                defaultServiceVersion,
+                deleteRetentionPolicy,
+                isVersioningEnabled,
+                automaticSnapshotPolicyEnabled,
+                changeFeed,
+                restorePolicy,
+                containerDeleteRetentionPolicy,
+                lastAccessTimeTrackingPolicy);
         }
     }
 }

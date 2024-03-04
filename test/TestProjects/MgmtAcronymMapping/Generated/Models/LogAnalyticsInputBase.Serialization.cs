@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtAcronymMapping;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -21,17 +22,17 @@ namespace MgmtAcronymMapping.Models
             writer.WriteStringValue(FromTime, "O");
             writer.WritePropertyName("toTime"u8);
             writer.WriteStringValue(ToTime, "O");
-            if (GroupByThrottlePolicy.HasValue)
+            if (Optional.IsDefined(GroupByThrottlePolicy))
             {
                 writer.WritePropertyName("groupByThrottlePolicy"u8);
                 writer.WriteBooleanValue(GroupByThrottlePolicy.Value);
             }
-            if (GroupByOperationName.HasValue)
+            if (Optional.IsDefined(GroupByOperationName))
             {
                 writer.WritePropertyName("groupByOperationName"u8);
                 writer.WriteBooleanValue(GroupByOperationName.Value);
             }
-            if (GroupByResourceName.HasValue)
+            if (Optional.IsDefined(GroupByResourceName))
             {
                 writer.WritePropertyName("groupByResourceName"u8);
                 writer.WriteBooleanValue(GroupByResourceName.Value);

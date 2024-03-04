@@ -7,6 +7,7 @@ using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using UnbrandedTypeSpec;
 
 namespace UnbrandedTypeSpec.Models
 {
@@ -42,29 +43,29 @@ namespace UnbrandedTypeSpec.Models
             writer.WriteNumberValue(RequiredLiteralFloat.ToSerialSingle());
             writer.WritePropertyName("requiredLiteralBool"u8);
             writer.WriteBooleanValue(RequiredLiteralBool);
-            if (OptionalLiteralString.HasValue)
+            if (Optional.IsDefined(OptionalLiteralString))
             {
                 writer.WritePropertyName("optionalLiteralString"u8);
                 writer.WriteStringValue(OptionalLiteralString.Value.ToString());
             }
-            if (OptionalLiteralInt.HasValue)
+            if (Optional.IsDefined(OptionalLiteralInt))
             {
                 writer.WritePropertyName("optionalLiteralInt"u8);
                 writer.WriteNumberValue(OptionalLiteralInt.Value.ToSerialInt32());
             }
-            if (OptionalLiteralFloat.HasValue)
+            if (Optional.IsDefined(OptionalLiteralFloat))
             {
                 writer.WritePropertyName("optionalLiteralFloat"u8);
                 writer.WriteNumberValue(OptionalLiteralFloat.Value.ToSerialSingle());
             }
-            if (OptionalLiteralBool.HasValue)
+            if (Optional.IsDefined(OptionalLiteralBool))
             {
                 writer.WritePropertyName("optionalLiteralBool"u8);
                 writer.WriteBooleanValue(OptionalLiteralBool.Value);
             }
             writer.WritePropertyName("requiredBadDescription"u8);
             writer.WriteStringValue(RequiredBadDescription);
-            if (!(OptionalNullableList is OptionalList<int> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(OptionalNullableList))
             {
                 if (OptionalNullableList != null)
                 {
@@ -81,7 +82,7 @@ namespace UnbrandedTypeSpec.Models
                     writer.WriteNull("optionalNullableList");
                 }
             }
-            if (RequiredNullableList != null && !(RequiredNullableList is OptionalList<int> collection0 && collection0.IsUndefined))
+            if (RequiredNullableList != null && Optional.IsCollectionDefined(RequiredNullableList))
             {
                 writer.WritePropertyName("requiredNullableList"u8);
                 writer.WriteStartArray();
@@ -139,10 +140,10 @@ namespace UnbrandedTypeSpec.Models
             ThingRequiredLiteralInt requiredLiteralInt = default;
             ThingRequiredLiteralFloat requiredLiteralFloat = default;
             bool requiredLiteralBool = default;
-            OptionalProperty<ThingOptionalLiteralString> optionalLiteralString = default;
-            OptionalProperty<ThingOptionalLiteralInt> optionalLiteralInt = default;
-            OptionalProperty<ThingOptionalLiteralFloat> optionalLiteralFloat = default;
-            OptionalProperty<bool> optionalLiteralBool = default;
+            ThingOptionalLiteralString? optionalLiteralString = default;
+            ThingOptionalLiteralInt? optionalLiteralInt = default;
+            ThingOptionalLiteralFloat? optionalLiteralFloat = default;
+            bool? optionalLiteralBool = default;
             string requiredBadDescription = default;
             IList<int> optionalNullableList = default;
             IList<int> requiredNullableList = default;
@@ -264,10 +265,10 @@ namespace UnbrandedTypeSpec.Models
                 requiredLiteralInt,
                 requiredLiteralFloat,
                 requiredLiteralBool,
-                OptionalProperty.ToNullable(optionalLiteralString),
-                OptionalProperty.ToNullable(optionalLiteralInt),
-                OptionalProperty.ToNullable(optionalLiteralFloat),
-                OptionalProperty.ToNullable(optionalLiteralBool),
+                optionalLiteralString,
+                optionalLiteralInt,
+                optionalLiteralFloat,
+                optionalLiteralBool,
                 requiredBadDescription,
                 optionalNullableList ?? new OptionalList<int>(),
                 requiredNullableList,

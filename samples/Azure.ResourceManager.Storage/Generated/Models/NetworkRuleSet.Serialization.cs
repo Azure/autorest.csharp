@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Storage;
 
 namespace Azure.ResourceManager.Storage.Models
 {
@@ -16,12 +17,12 @@ namespace Azure.ResourceManager.Storage.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Bypass.HasValue)
+            if (Optional.IsDefined(Bypass))
             {
                 writer.WritePropertyName("bypass"u8);
                 writer.WriteStringValue(Bypass.Value.ToString());
             }
-            if (!(ResourceAccessRules is ChangeTrackingList<ResourceAccessRule> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(ResourceAccessRules))
             {
                 writer.WritePropertyName("resourceAccessRules"u8);
                 writer.WriteStartArray();
@@ -31,7 +32,7 @@ namespace Azure.ResourceManager.Storage.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!(VirtualNetworkRules is ChangeTrackingList<VirtualNetworkRule> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(VirtualNetworkRules))
             {
                 writer.WritePropertyName("virtualNetworkRules"u8);
                 writer.WriteStartArray();
@@ -41,7 +42,7 @@ namespace Azure.ResourceManager.Storage.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!(IpRules is ChangeTrackingList<IPRule> collection1 && collection1.IsUndefined))
+            if (Optional.IsCollectionDefined(IpRules))
             {
                 writer.WritePropertyName("ipRules"u8);
                 writer.WriteStartArray();
@@ -62,7 +63,7 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Optional<Bypass> bypass = default;
+            Bypass? bypass = default;
             IList<ResourceAccessRule> resourceAccessRules = default;
             IList<VirtualNetworkRule> virtualNetworkRules = default;
             IList<IPRule> ipRules = default;
@@ -126,7 +127,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new NetworkRuleSet(Optional.ToNullable(bypass), resourceAccessRules ?? new ChangeTrackingList<ResourceAccessRule>(), virtualNetworkRules ?? new ChangeTrackingList<VirtualNetworkRule>(), ipRules ?? new ChangeTrackingList<IPRule>(), defaultAction);
+            return new NetworkRuleSet(bypass, resourceAccessRules ?? new ChangeTrackingList<ResourceAccessRule>(), virtualNetworkRules ?? new ChangeTrackingList<VirtualNetworkRule>(), ipRules ?? new ChangeTrackingList<IPRule>(), defaultAction);
         }
     }
 }

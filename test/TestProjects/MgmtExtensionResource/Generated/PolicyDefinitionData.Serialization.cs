@@ -21,27 +21,27 @@ namespace MgmtExtensionResource
             writer.WriteStartObject();
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (PolicyType.HasValue)
+            if (Optional.IsDefined(PolicyType))
             {
                 writer.WritePropertyName("policyType"u8);
                 writer.WriteStringValue(PolicyType.Value.ToString());
             }
-            if (Mode != null)
+            if (Optional.IsDefined(Mode))
             {
                 writer.WritePropertyName("mode"u8);
                 writer.WriteStringValue(Mode);
             }
-            if (DisplayName != null)
+            if (Optional.IsDefined(DisplayName))
             {
                 writer.WritePropertyName("displayName"u8);
                 writer.WriteStringValue(DisplayName);
             }
-            if (Description != null)
+            if (Optional.IsDefined(Description))
             {
                 writer.WritePropertyName("description"u8);
                 writer.WriteStringValue(Description);
             }
-            if (PolicyRule != null)
+            if (Optional.IsDefined(PolicyRule))
             {
                 writer.WritePropertyName("policyRule"u8);
 #if NET6_0_OR_GREATER
@@ -53,7 +53,7 @@ namespace MgmtExtensionResource
                 }
 #endif
             }
-            if (Metadata != null)
+            if (Optional.IsDefined(Metadata))
             {
                 writer.WritePropertyName("metadata"u8);
 #if NET6_0_OR_GREATER
@@ -65,7 +65,7 @@ namespace MgmtExtensionResource
                 }
 #endif
             }
-            if (!(Parameters is ChangeTrackingDictionary<string, ParameterDefinitionsValue> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Parameters))
             {
                 writer.WritePropertyName("parameters"u8);
                 writer.WriteStartObject();
@@ -89,13 +89,13 @@ namespace MgmtExtensionResource
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
-            Optional<PolicyType> policyType = default;
-            Optional<string> mode = default;
-            Optional<string> displayName = default;
-            Optional<string> description = default;
-            Optional<BinaryData> policyRule = default;
-            Optional<BinaryData> metadata = default;
+            SystemData systemData = default;
+            PolicyType? policyType = default;
+            string mode = default;
+            string displayName = default;
+            string description = default;
+            BinaryData policyRule = default;
+            BinaryData metadata = default;
             IDictionary<string, ParameterDefinitionsValue> parameters = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -196,13 +196,13 @@ namespace MgmtExtensionResource
                 id,
                 name,
                 type,
-                systemData.Value,
-                Optional.ToNullable(policyType),
-                mode.Value,
-                displayName.Value,
-                description.Value,
-                policyRule.Value,
-                metadata.Value,
+                systemData,
+                policyType,
+                mode,
+                displayName,
+                description,
+                policyRule,
+                metadata,
                 parameters ?? new ChangeTrackingDictionary<string, ParameterDefinitionsValue>());
         }
     }

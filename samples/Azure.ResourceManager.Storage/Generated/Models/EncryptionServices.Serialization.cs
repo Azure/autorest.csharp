@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Storage;
 
 namespace Azure.ResourceManager.Storage.Models
 {
@@ -15,22 +16,22 @@ namespace Azure.ResourceManager.Storage.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Blob != null)
+            if (Optional.IsDefined(Blob))
             {
                 writer.WritePropertyName("blob"u8);
                 writer.WriteObjectValue(Blob);
             }
-            if (File != null)
+            if (Optional.IsDefined(File))
             {
                 writer.WritePropertyName("file"u8);
                 writer.WriteObjectValue(File);
             }
-            if (Table != null)
+            if (Optional.IsDefined(Table))
             {
                 writer.WritePropertyName("table"u8);
                 writer.WriteObjectValue(Table);
             }
-            if (Queue != null)
+            if (Optional.IsDefined(Queue))
             {
                 writer.WritePropertyName("queue"u8);
                 writer.WriteObjectValue(Queue);
@@ -44,10 +45,10 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Optional<EncryptionService> blob = default;
-            Optional<EncryptionService> file = default;
-            Optional<EncryptionService> table = default;
-            Optional<EncryptionService> queue = default;
+            EncryptionService blob = default;
+            EncryptionService file = default;
+            EncryptionService table = default;
+            EncryptionService queue = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("blob"u8))
@@ -87,7 +88,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new EncryptionServices(blob.Value, file.Value, table.Value, queue.Value);
+            return new EncryptionServices(blob, file, table, queue);
         }
     }
 }

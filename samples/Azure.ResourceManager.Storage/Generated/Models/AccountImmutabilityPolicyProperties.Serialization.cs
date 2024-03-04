@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Storage;
 
 namespace Azure.ResourceManager.Storage.Models
 {
@@ -15,17 +16,17 @@ namespace Azure.ResourceManager.Storage.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (ImmutabilityPeriodSinceCreationInDays.HasValue)
+            if (Optional.IsDefined(ImmutabilityPeriodSinceCreationInDays))
             {
                 writer.WritePropertyName("immutabilityPeriodSinceCreationInDays"u8);
                 writer.WriteNumberValue(ImmutabilityPeriodSinceCreationInDays.Value);
             }
-            if (State.HasValue)
+            if (Optional.IsDefined(State))
             {
                 writer.WritePropertyName("state"u8);
                 writer.WriteStringValue(State.Value.ToString());
             }
-            if (AllowProtectedAppendWrites.HasValue)
+            if (Optional.IsDefined(AllowProtectedAppendWrites))
             {
                 writer.WritePropertyName("allowProtectedAppendWrites"u8);
                 writer.WriteBooleanValue(AllowProtectedAppendWrites.Value);
@@ -39,9 +40,9 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Optional<int> immutabilityPeriodSinceCreationInDays = default;
-            Optional<AccountImmutabilityPolicyState> state = default;
-            Optional<bool> allowProtectedAppendWrites = default;
+            int? immutabilityPeriodSinceCreationInDays = default;
+            AccountImmutabilityPolicyState? state = default;
+            bool? allowProtectedAppendWrites = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("immutabilityPeriodSinceCreationInDays"u8))
@@ -72,7 +73,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new AccountImmutabilityPolicyProperties(Optional.ToNullable(immutabilityPeriodSinceCreationInDays), Optional.ToNullable(state), Optional.ToNullable(allowProtectedAppendWrites));
+            return new AccountImmutabilityPolicyProperties(immutabilityPeriodSinceCreationInDays, state, allowProtectedAppendWrites);
         }
     }
 }

@@ -19,7 +19,7 @@ namespace MgmtMockAndSample
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Identity != null)
+            if (Optional.IsDefined(Identity))
             {
                 writer.WritePropertyName("identity"u8);
                 var serializeOptions = new JsonSerializerOptions { Converters = { new ManagedServiceIdentityTypeV3Converter() } };
@@ -27,27 +27,27 @@ namespace MgmtMockAndSample
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (EncryptionType.HasValue)
+            if (Optional.IsDefined(EncryptionType))
             {
                 writer.WritePropertyName("encryptionType"u8);
                 writer.WriteStringValue(EncryptionType.Value.ToString());
             }
-            if (ActiveKey != null)
+            if (Optional.IsDefined(ActiveKey))
             {
                 writer.WritePropertyName("activeKey"u8);
                 writer.WriteObjectValue(ActiveKey);
             }
-            if (RotationToLatestKeyVersionEnabled.HasValue)
+            if (Optional.IsDefined(RotationToLatestKeyVersionEnabled))
             {
                 writer.WritePropertyName("rotationToLatestKeyVersionEnabled"u8);
                 writer.WriteBooleanValue(RotationToLatestKeyVersionEnabled.Value);
             }
-            if (FederatedClientId != null)
+            if (Optional.IsDefined(FederatedClientId))
             {
                 writer.WritePropertyName("federatedClientId"u8);
                 writer.WriteStringValue(FederatedClientId);
             }
-            if (MinimumTlsVersion.HasValue)
+            if (Optional.IsDefined(MinimumTlsVersion))
             {
                 writer.WritePropertyName("minimumTlsVersion"u8);
                 writer.WriteStringValue(MinimumTlsVersion.Value.ToString());
@@ -62,21 +62,21 @@ namespace MgmtMockAndSample
             {
                 return null;
             }
-            Optional<ManagedServiceIdentity> identity = default;
-            Optional<AzureLocation> location = default;
+            ManagedServiceIdentity identity = default;
+            AzureLocation? location = default;
             IReadOnlyDictionary<string, string> tags = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
-            Optional<DiskEncryptionSetType> encryptionType = default;
-            Optional<KeyForDiskEncryptionSet> activeKey = default;
+            SystemData systemData = default;
+            DiskEncryptionSetType? encryptionType = default;
+            KeyForDiskEncryptionSet activeKey = default;
             IReadOnlyList<KeyForDiskEncryptionSet> previousKeys = default;
-            Optional<string> provisioningState = default;
-            Optional<bool> rotationToLatestKeyVersionEnabled = default;
-            Optional<DateTimeOffset> lastKeyRotationTimestamp = default;
-            Optional<string> federatedClientId = default;
-            Optional<MinimumTlsVersion> minimumTlsVersion = default;
+            string provisioningState = default;
+            bool? rotationToLatestKeyVersionEnabled = default;
+            DateTimeOffset? lastKeyRotationTimestamp = default;
+            string federatedClientId = default;
+            MinimumTlsVersion? minimumTlsVersion = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("identity"u8))
@@ -222,17 +222,17 @@ namespace MgmtMockAndSample
                 id,
                 name,
                 type,
-                systemData.Value,
+                systemData,
                 identity,
-                Optional.ToNullable(encryptionType),
-                activeKey.Value,
+                encryptionType,
+                activeKey,
                 previousKeys ?? new ChangeTrackingList<KeyForDiskEncryptionSet>(),
-                provisioningState.Value,
-                Optional.ToNullable(rotationToLatestKeyVersionEnabled),
-                Optional.ToNullable(lastKeyRotationTimestamp),
-                federatedClientId.Value,
-                Optional.ToNullable(minimumTlsVersion),
-                Optional.ToNullable(location),
+                provisioningState,
+                rotationToLatestKeyVersionEnabled,
+                lastKeyRotationTimestamp,
+                federatedClientId,
+                minimumTlsVersion,
+                location,
                 tags ?? new ChangeTrackingDictionary<string, string>());
         }
     }

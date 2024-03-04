@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Network.Management.Interface;
 
 namespace Azure.Network.Management.Interface.Models
 {
@@ -16,29 +17,29 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Description != null)
+            if (Optional.IsDefined(Description))
             {
                 writer.WritePropertyName("description"u8);
                 writer.WriteStringValue(Description);
             }
-            if (Service != null)
+            if (Optional.IsDefined(Service))
             {
                 writer.WritePropertyName("service"u8);
                 writer.WriteStringValue(Service);
             }
-            if (!(ServiceResources is ChangeTrackingList<string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(ServiceResources))
             {
                 writer.WritePropertyName("serviceResources"u8);
                 writer.WriteStartArray();
@@ -58,13 +59,13 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> etag = default;
-            Optional<string> id = default;
-            Optional<string> description = default;
-            Optional<string> service = default;
+            string name = default;
+            string etag = default;
+            string id = default;
+            string description = default;
+            string service = default;
             IList<string> serviceResources = default;
-            Optional<ProvisioningState> provisioningState = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -129,13 +130,13 @@ namespace Azure.Network.Management.Interface.Models
                 }
             }
             return new ServiceEndpointPolicyDefinition(
-                id.Value,
-                name.Value,
-                etag.Value,
-                description.Value,
-                service.Value,
+                id,
+                name,
+                etag,
+                description,
+                service,
                 serviceResources ?? new ChangeTrackingList<string>(),
-                Optional.ToNullable(provisioningState));
+                provisioningState);
         }
     }
 }

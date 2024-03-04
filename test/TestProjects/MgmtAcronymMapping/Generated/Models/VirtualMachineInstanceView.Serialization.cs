@@ -19,21 +19,21 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<int> platformUpdateDomain = default;
-            Optional<int> platformFaultDomain = default;
-            Optional<string> computerName = default;
-            Optional<string> osName = default;
-            Optional<string> osVersion = default;
-            Optional<HyperVGenerationType> hyperVGeneration = default;
-            Optional<string> rdpThumbPrint = default;
-            Optional<VirtualMachineAgentInstanceView> vmAgent = default;
-            Optional<MaintenanceRedeployStatus> maintenanceRedeployStatus = default;
+            int? platformUpdateDomain = default;
+            int? platformFaultDomain = default;
+            string computerName = default;
+            string osName = default;
+            string osVersion = default;
+            HyperVGenerationType? hyperVGeneration = default;
+            string rdpThumbPrint = default;
+            VirtualMachineAgentInstanceView vmAgent = default;
+            MaintenanceRedeployStatus maintenanceRedeployStatus = default;
             IReadOnlyList<DiskInstanceView> disks = default;
-            Optional<VirtualMachineHealthStatus> vmHealth = default;
-            Optional<BootDiagnosticsInstanceView> bootDiagnostics = default;
-            Optional<string> assignedHost = default;
+            VirtualMachineHealthStatus vmHealth = default;
+            BootDiagnosticsInstanceView bootDiagnostics = default;
+            string assignedHost = default;
             IReadOnlyList<InstanceViewStatus> statuses = default;
-            Optional<VirtualMachinePatchStatus> patchStatus = default;
+            VirtualMachinePatchStatus patchStatus = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("platformUpdateDomain"u8))
@@ -163,21 +163,21 @@ namespace MgmtAcronymMapping.Models
                 }
             }
             return new VirtualMachineInstanceView(
-                Optional.ToNullable(platformUpdateDomain),
-                Optional.ToNullable(platformFaultDomain),
-                computerName.Value,
-                osName.Value,
-                osVersion.Value,
-                Optional.ToNullable(hyperVGeneration),
-                rdpThumbPrint.Value,
-                vmAgent.Value,
-                maintenanceRedeployStatus.Value,
+                platformUpdateDomain,
+                platformFaultDomain,
+                computerName,
+                osName,
+                osVersion,
+                hyperVGeneration,
+                rdpThumbPrint,
+                vmAgent,
+                maintenanceRedeployStatus,
                 disks ?? new ChangeTrackingList<DiskInstanceView>(),
-                vmHealth.Value,
-                bootDiagnostics.Value,
-                assignedHost.Value,
+                vmHealth,
+                bootDiagnostics,
+                assignedHost,
                 statuses ?? new ChangeTrackingList<InstanceViewStatus>(),
-                patchStatus.Value);
+                patchStatus);
         }
     }
 }

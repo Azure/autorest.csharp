@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -102,7 +103,7 @@ namespace MgmtDiscriminator.Models
             builder.Append("  paramIndicator:");
             builder.AppendLine($" '{ParamIndicator.ToString()}'");
 
-            if (ParamName != null)
+            if (Optional.IsDefined(ParamName))
             {
                 builder.Append("  paramName:");
                 if (ParamName.Contains(Environment.NewLine))

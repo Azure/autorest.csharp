@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtExactMatchInheritance;
 
 namespace MgmtExactMatchInheritance.Models
 {
@@ -15,17 +16,17 @@ namespace MgmtExactMatchInheritance.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Bar != null)
+            if (Optional.IsDefined(Bar))
             {
                 writer.WritePropertyName("bar"u8);
                 writer.WriteStringValue(Bar);
@@ -39,9 +40,9 @@ namespace MgmtExactMatchInheritance.Models
             {
                 return null;
             }
-            Optional<ResourceIdentifier> id = default;
-            Optional<string> name = default;
-            Optional<string> bar = default;
+            ResourceIdentifier id = default;
+            string name = default;
+            string bar = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -64,7 +65,7 @@ namespace MgmtExactMatchInheritance.Models
                     continue;
                 }
             }
-            return new ExactMatchModel8(id.Value, name.Value, bar.Value);
+            return new ExactMatchModel8(id, name, bar);
         }
     }
 }

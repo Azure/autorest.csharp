@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtConstants;
 
 namespace MgmtConstants.Models
 {
@@ -15,7 +16,7 @@ namespace MgmtConstants.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -28,12 +29,12 @@ namespace MgmtConstants.Models
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Listener != null)
+            if (Optional.IsDefined(Listener))
             {
                 writer.WritePropertyName("listener"u8);
                 writer.WriteObjectValue(Listener);
             }
-            if (Content != null)
+            if (Optional.IsDefined(Content))
             {
                 writer.WritePropertyName("content"u8);
                 writer.WriteObjectValue(Content);

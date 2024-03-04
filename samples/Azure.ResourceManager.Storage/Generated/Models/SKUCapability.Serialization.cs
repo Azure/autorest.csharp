@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace Azure.ResourceManager.Storage.Models
 {
@@ -18,8 +17,8 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> value = default;
+            string name = default;
+            string value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -33,7 +32,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new SKUCapability(name.Value, value.Value);
+            return new SKUCapability(name, value);
         }
     }
 }

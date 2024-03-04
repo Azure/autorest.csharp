@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Storage;
 
 namespace Azure.ResourceManager.Storage.Models
 {
@@ -17,12 +18,12 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteStartObject();
             writer.WritePropertyName("directoryServiceOptions"u8);
             writer.WriteStringValue(DirectoryServiceOptions.ToString());
-            if (ActiveDirectoryProperties != null)
+            if (Optional.IsDefined(ActiveDirectoryProperties))
             {
                 writer.WritePropertyName("activeDirectoryProperties"u8);
                 writer.WriteObjectValue(ActiveDirectoryProperties);
             }
-            if (DefaultSharePermission.HasValue)
+            if (Optional.IsDefined(DefaultSharePermission))
             {
                 writer.WritePropertyName("defaultSharePermission"u8);
                 writer.WriteStringValue(DefaultSharePermission.Value.ToString());
@@ -37,8 +38,8 @@ namespace Azure.ResourceManager.Storage.Models
                 return null;
             }
             DirectoryServiceOption directoryServiceOptions = default;
-            Optional<ActiveDirectoryProperties> activeDirectoryProperties = default;
-            Optional<DefaultSharePermission> defaultSharePermission = default;
+            ActiveDirectoryProperties activeDirectoryProperties = default;
+            DefaultSharePermission? defaultSharePermission = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("directoryServiceOptions"u8))
@@ -65,7 +66,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new AzureFilesIdentityBasedAuthentication(directoryServiceOptions, activeDirectoryProperties.Value, Optional.ToNullable(defaultSharePermission));
+            return new AzureFilesIdentityBasedAuthentication(directoryServiceOptions, activeDirectoryProperties, defaultSharePermission);
         }
     }
 }

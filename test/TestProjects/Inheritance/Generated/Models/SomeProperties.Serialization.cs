@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Inheritance;
 
 namespace Inheritance.Models
 {
@@ -15,12 +16,12 @@ namespace Inheritance.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (SomeProperty != null)
+            if (Optional.IsDefined(SomeProperty))
             {
                 writer.WritePropertyName("SomeProperty"u8);
                 writer.WriteStringValue(SomeProperty);
             }
-            if (SomeOtherProperty != null)
+            if (Optional.IsDefined(SomeOtherProperty))
             {
                 writer.WritePropertyName("SomeOtherProperty"u8);
                 writer.WriteStringValue(SomeOtherProperty);
@@ -34,8 +35,8 @@ namespace Inheritance.Models
             {
                 return null;
             }
-            Optional<string> someProperty = default;
-            Optional<string> someOtherProperty = default;
+            string someProperty = default;
+            string someOtherProperty = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("SomeProperty"u8))
@@ -49,7 +50,7 @@ namespace Inheritance.Models
                     continue;
                 }
             }
-            return new SomeProperties(someProperty.Value, someOtherProperty.Value);
+            return new SomeProperties(someProperty, someOtherProperty);
         }
     }
 }

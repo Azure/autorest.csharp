@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using body_array;
 
 namespace body_array.Models
 {
@@ -26,12 +27,12 @@ namespace body_array.Models
             }
 
             writer.WriteStartObject();
-            if (Integer.HasValue)
+            if (Optional.IsDefined(Integer))
             {
                 writer.WritePropertyName("integer"u8);
                 writer.WriteNumberValue(Integer.Value);
             }
-            if (String != null)
+            if (Optional.IsDefined(String))
             {
                 writer.WritePropertyName("string"u8);
                 writer.WriteStringValue(String);
@@ -74,8 +75,8 @@ namespace body_array.Models
             {
                 return null;
             }
-            Optional<int> integer = default;
-            Optional<string> @string = default;
+            int? integer = default;
+            string @string = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -100,7 +101,7 @@ namespace body_array.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Product(Optional.ToNullable(integer), @string.Value, serializedAdditionalRawData);
+            return new Product(integer, @string, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<Product>.Write(ModelReaderWriterOptions options)

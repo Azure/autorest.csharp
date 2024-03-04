@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -27,22 +28,22 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && Code.HasValue)
+            if (options.Format != "W" && Optional.IsDefined(Code))
             {
                 writer.WritePropertyName("code"u8);
                 writer.WriteStringValue(Code.Value.ToSerialString());
             }
-            if (options.Format != "W" && StartOn.HasValue)
+            if (options.Format != "W" && Optional.IsDefined(StartOn))
             {
                 writer.WritePropertyName("startTime"u8);
                 writer.WriteStringValue(StartOn.Value, "O");
             }
-            if (options.Format != "W" && LastAction.HasValue)
+            if (options.Format != "W" && Optional.IsDefined(LastAction))
             {
                 writer.WritePropertyName("lastAction"u8);
                 writer.WriteStringValue(LastAction.Value.ToSerialString());
             }
-            if (options.Format != "W" && LastActionOn.HasValue)
+            if (options.Format != "W" && Optional.IsDefined(LastActionOn))
             {
                 writer.WritePropertyName("lastActionTime"u8);
                 writer.WriteStringValue(LastActionOn.Value, "O");
@@ -85,10 +86,10 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<RollingUpgradeStatusCode> code = default;
-            Optional<DateTimeOffset> startTime = default;
-            Optional<RollingUpgradeActionType> lastAction = default;
-            Optional<DateTimeOffset> lastActionTime = default;
+            RollingUpgradeStatusCode? code = default;
+            DateTimeOffset? startTime = default;
+            RollingUpgradeActionType? lastAction = default;
+            DateTimeOffset? lastActionTime = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -135,7 +136,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new RollingUpgradeRunningStatus(Optional.ToNullable(code), Optional.ToNullable(startTime), Optional.ToNullable(lastAction), Optional.ToNullable(lastActionTime), serializedAdditionalRawData);
+            return new RollingUpgradeRunningStatus(code, startTime, lastAction, lastActionTime, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -143,26 +144,26 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Code.HasValue)
+            if (Optional.IsDefined(Code))
             {
                 builder.Append("  code:");
                 builder.AppendLine($" '{Code.Value.ToSerialString()}'");
             }
 
-            if (StartOn.HasValue)
+            if (Optional.IsDefined(StartOn))
             {
                 builder.Append("  startTime:");
                 var formattedDateTimeString = TypeFormatters.ToString(StartOn.Value, "o");
                 builder.AppendLine($" '{formattedDateTimeString}'");
             }
 
-            if (LastAction.HasValue)
+            if (Optional.IsDefined(LastAction))
             {
                 builder.Append("  lastAction:");
                 builder.AppendLine($" '{LastAction.Value.ToSerialString()}'");
             }
 
-            if (LastActionOn.HasValue)
+            if (Optional.IsDefined(LastActionOn))
             {
                 builder.Append("  lastActionTime:");
                 var formattedDateTimeString = TypeFormatters.ToString(LastActionOn.Value, "o");

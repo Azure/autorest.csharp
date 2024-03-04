@@ -22,19 +22,19 @@ namespace MgmtXmlDeserialization.Models
         private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "XmlCollection");
-            if (Count.HasValue)
+            if (Optional.IsDefined(Count))
             {
                 writer.WriteStartElement("count");
                 writer.WriteValue(Count.Value);
                 writer.WriteEndElement();
             }
-            if (NextLink != null)
+            if (Optional.IsDefined(NextLink))
             {
                 writer.WriteStartElement("nextLink");
                 writer.WriteValue(NextLink);
                 writer.WriteEndElement();
             }
-            if (!(Value is ChangeTrackingList<XmlInstanceData> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Value))
             {
                 foreach (var item in Value)
                 {
@@ -81,7 +81,7 @@ namespace MgmtXmlDeserialization.Models
             }
 
             writer.WriteStartObject();
-            if (!(Value is ChangeTrackingList<XmlInstanceData> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Value))
             {
                 writer.WritePropertyName("value"u8);
                 writer.WriteStartArray();
@@ -91,12 +91,12 @@ namespace MgmtXmlDeserialization.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Count.HasValue)
+            if (Optional.IsDefined(Count))
             {
                 writer.WritePropertyName("count"u8);
                 writer.WriteNumberValue(Count.Value);
             }
-            if (NextLink != null)
+            if (Optional.IsDefined(NextLink))
             {
                 writer.WritePropertyName("nextLink"u8);
                 writer.WriteStringValue(NextLink);
@@ -140,8 +140,8 @@ namespace MgmtXmlDeserialization.Models
                 return null;
             }
             IReadOnlyList<XmlInstanceData> value = default;
-            Optional<long> count = default;
-            Optional<string> nextLink = default;
+            long? count = default;
+            string nextLink = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -180,7 +180,7 @@ namespace MgmtXmlDeserialization.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new XmlCollection(value ?? new ChangeTrackingList<XmlInstanceData>(), Optional.ToNullable(count), nextLink.Value, serializedAdditionalRawData);
+            return new XmlCollection(value ?? new ChangeTrackingList<XmlInstanceData>(), count, nextLink, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<XmlCollection>.Write(ModelReaderWriterOptions options)

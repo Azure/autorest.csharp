@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using ModelReaderWriterValidationTypeSpec;
 
 namespace ModelReaderWriterValidationTypeSpec.Models
 {
@@ -27,12 +28,12 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             }
 
             writer.WriteStartObject();
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (!(Paths is ChangeTrackingList<ResourceTypeAliasPath> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Paths))
             {
                 writer.WritePropertyName("paths"u8);
                 writer.WriteStartArray();
@@ -42,22 +43,22 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (AliasType.HasValue)
+            if (Optional.IsDefined(AliasType))
             {
                 writer.WritePropertyName("aliasType"u8);
                 writer.WriteStringValue(AliasType.Value.ToSerialString());
             }
-            if (DefaultPath != null)
+            if (Optional.IsDefined(DefaultPath))
             {
                 writer.WritePropertyName("defaultPath"u8);
                 writer.WriteStringValue(DefaultPath);
             }
-            if (DefaultPattern != null)
+            if (Optional.IsDefined(DefaultPattern))
             {
                 writer.WritePropertyName("defaultPattern"u8);
                 writer.WriteObjectValue(DefaultPattern);
             }
-            if (DefaultMetadata != null)
+            if (Optional.IsDefined(DefaultMetadata))
             {
                 writer.WritePropertyName("defaultMetadata"u8);
                 writer.WriteObjectValue(DefaultMetadata);
@@ -100,12 +101,12 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             {
                 return null;
             }
-            Optional<string> name = default;
+            string name = default;
             IReadOnlyList<ResourceTypeAliasPath> paths = default;
-            Optional<ResourceTypeAliasType> aliasType = default;
-            Optional<string> defaultPath = default;
-            Optional<ResourceTypeAliasPattern> defaultPattern = default;
-            Optional<ResourceTypeAliasPathMetadata> defaultMetadata = default;
+            ResourceTypeAliasType? aliasType = default;
+            string defaultPath = default;
+            ResourceTypeAliasPattern defaultPattern = default;
+            ResourceTypeAliasPathMetadata defaultMetadata = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -168,12 +169,12 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ResourceTypeAlias(
-                name.Value,
+                name,
                 paths ?? new ChangeTrackingList<ResourceTypeAliasPath>(),
-                Optional.ToNullable(aliasType),
-                defaultPath.Value,
-                defaultPattern.Value,
-                defaultMetadata.Value,
+                aliasType,
+                defaultPath,
+                defaultPattern,
+                defaultMetadata,
                 serializedAdditionalRawData);
         }
 

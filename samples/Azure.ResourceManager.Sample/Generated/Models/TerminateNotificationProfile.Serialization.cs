@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -27,12 +28,12 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (NotBeforeTimeout != null)
+            if (Optional.IsDefined(NotBeforeTimeout))
             {
                 writer.WritePropertyName("notBeforeTimeout"u8);
                 writer.WriteStringValue(NotBeforeTimeout);
             }
-            if (Enable.HasValue)
+            if (Optional.IsDefined(Enable))
             {
                 writer.WritePropertyName("enable"u8);
                 writer.WriteBooleanValue(Enable.Value);
@@ -75,8 +76,8 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<string> notBeforeTimeout = default;
-            Optional<bool> enable = default;
+            string notBeforeTimeout = default;
+            bool? enable = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -101,7 +102,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new TerminateNotificationProfile(notBeforeTimeout.Value, Optional.ToNullable(enable), serializedAdditionalRawData);
+            return new TerminateNotificationProfile(notBeforeTimeout, enable, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -109,7 +110,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (NotBeforeTimeout != null)
+            if (Optional.IsDefined(NotBeforeTimeout))
             {
                 builder.Append("  notBeforeTimeout:");
                 if (NotBeforeTimeout.Contains(Environment.NewLine))
@@ -123,7 +124,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Enable.HasValue)
+            if (Optional.IsDefined(Enable))
             {
                 builder.Append("  enable:");
                 var boolValue = Enable.Value == true ? "true" : "false";

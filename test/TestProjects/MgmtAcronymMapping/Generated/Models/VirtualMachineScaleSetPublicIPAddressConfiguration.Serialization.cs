@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
+using MgmtAcronymMapping;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -21,17 +22,17 @@ namespace MgmtAcronymMapping.Models
             writer.WriteStringValue(Name);
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (IdleTimeoutInMinutes.HasValue)
+            if (Optional.IsDefined(IdleTimeoutInMinutes))
             {
                 writer.WritePropertyName("idleTimeoutInMinutes"u8);
                 writer.WriteNumberValue(IdleTimeoutInMinutes.Value);
             }
-            if (DnsSettings != null)
+            if (Optional.IsDefined(DnsSettings))
             {
                 writer.WritePropertyName("dnsSettings"u8);
                 writer.WriteObjectValue(DnsSettings);
             }
-            if (!(IPTags is ChangeTrackingList<VirtualMachineScaleSetIPTag> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(IPTags))
             {
                 writer.WritePropertyName("ipTags"u8);
                 writer.WriteStartArray();
@@ -41,12 +42,12 @@ namespace MgmtAcronymMapping.Models
                 }
                 writer.WriteEndArray();
             }
-            if (PublicIPPrefix != null)
+            if (Optional.IsDefined(PublicIPPrefix))
             {
                 writer.WritePropertyName("publicIPPrefix"u8);
                 JsonSerializer.Serialize(writer, PublicIPPrefix);
             }
-            if (PublicIPAddressVersion.HasValue)
+            if (Optional.IsDefined(PublicIPAddressVersion))
             {
                 writer.WritePropertyName("publicIPAddressVersion"u8);
                 writer.WriteStringValue(PublicIPAddressVersion.Value.ToString());
@@ -62,11 +63,11 @@ namespace MgmtAcronymMapping.Models
                 return null;
             }
             string name = default;
-            Optional<int> idleTimeoutInMinutes = default;
-            Optional<VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings> dnsSettings = default;
+            int? idleTimeoutInMinutes = default;
+            VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings dnsSettings = default;
             IList<VirtualMachineScaleSetIPTag> ipTags = default;
-            Optional<WritableSubResource> publicIPPrefix = default;
-            Optional<IPVersion> publicIPAddressVersion = default;
+            WritableSubResource publicIPPrefix = default;
+            IPVersion? publicIPAddressVersion = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -139,11 +140,11 @@ namespace MgmtAcronymMapping.Models
             }
             return new VirtualMachineScaleSetPublicIPAddressConfiguration(
                 name,
-                Optional.ToNullable(idleTimeoutInMinutes),
-                dnsSettings.Value,
+                idleTimeoutInMinutes,
+                dnsSettings,
                 ipTags ?? new ChangeTrackingList<VirtualMachineScaleSetIPTag>(),
                 publicIPPrefix,
-                Optional.ToNullable(publicIPAddressVersion));
+                publicIPAddressVersion);
         }
     }
 }

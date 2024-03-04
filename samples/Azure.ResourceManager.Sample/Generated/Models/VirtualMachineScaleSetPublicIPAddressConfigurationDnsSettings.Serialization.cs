@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -91,7 +92,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (DomainNameLabel != null)
+            if (Optional.IsDefined(DomainNameLabel))
             {
                 builder.Append("  domainNameLabel:");
                 if (DomainNameLabel.Contains(Environment.NewLine))

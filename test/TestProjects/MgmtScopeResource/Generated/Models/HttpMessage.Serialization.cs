@@ -7,7 +7,6 @@
 
 using System;
 using System.Text.Json;
-using Azure.Core;
 
 namespace MgmtScopeResource.Models
 {
@@ -19,7 +18,7 @@ namespace MgmtScopeResource.Models
             {
                 return null;
             }
-            Optional<BinaryData> content = default;
+            BinaryData content = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("content"u8))
@@ -32,7 +31,7 @@ namespace MgmtScopeResource.Models
                     continue;
                 }
             }
-            return new HttpMessage(content.Value);
+            return new HttpMessage(content);
         }
     }
 }

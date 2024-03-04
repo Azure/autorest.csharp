@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using additionalProperties;
 
 namespace additionalProperties.Models
 {
@@ -28,12 +29,12 @@ namespace additionalProperties.Models
             writer.WriteStartObject();
             writer.WritePropertyName("id"u8);
             writer.WriteNumberValue(Id);
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format != "W" && Status.HasValue)
+            if (options.Format != "W" && Optional.IsDefined(Status))
             {
                 writer.WritePropertyName("status"u8);
                 writer.WriteBooleanValue(Status.Value);
@@ -67,8 +68,8 @@ namespace additionalProperties.Models
                 return null;
             }
             int id = default;
-            Optional<string> name = default;
-            Optional<bool> status = default;
+            string name = default;
+            bool? status = default;
             IDictionary<string, object> additionalProperties = default;
             Dictionary<string, object> additionalPropertiesDictionary = new Dictionary<string, object>();
             foreach (var property in element.EnumerateObject())
@@ -95,7 +96,7 @@ namespace additionalProperties.Models
                 additionalPropertiesDictionary.Add(property.Name, property.Value.GetObject());
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new PetAPTrue(id, name.Value, Optional.ToNullable(status), additionalProperties);
+            return new PetAPTrue(id, name, status, additionalProperties);
         }
 
         BinaryData IPersistableModel<PetAPTrue>.Write(ModelReaderWriterOptions options)

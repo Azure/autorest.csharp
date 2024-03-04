@@ -12,6 +12,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
+using xml_service;
 
 namespace xml_service.Models
 {
@@ -24,7 +25,7 @@ namespace xml_service.Models
             writer.WriteValue(Name);
             writer.WriteEndElement();
             writer.WriteObjectValue(Properties, "Properties");
-            if (!(Metadata is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Metadata))
             {
                 foreach (var pair in Metadata)
                 {

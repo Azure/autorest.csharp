@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using TypeSchemaMapping;
 
 namespace TypeSchemaMapping.Models
 {
@@ -26,7 +27,7 @@ namespace TypeSchemaMapping.Models
             }
 
             writer.WriteStartObject();
-            if (InternalProperty != null)
+            if (Optional.IsDefined(InternalProperty))
             {
                 writer.WritePropertyName("InternalProperty"u8);
                 writer.WriteObjectValue(InternalProperty);
@@ -69,7 +70,7 @@ namespace TypeSchemaMapping.Models
             {
                 return null;
             }
-            Optional<InternalModel> internalProperty = default;
+            InternalModel internalProperty = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -89,7 +90,7 @@ namespace TypeSchemaMapping.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ModelWithInternalModel(internalProperty.Value, serializedAdditionalRawData);
+            return new ModelWithInternalModel(internalProperty, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ModelWithInternalModel>.Write(ModelReaderWriterOptions options)

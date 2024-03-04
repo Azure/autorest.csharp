@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {
@@ -16,7 +17,7 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (!(IgnoreScripts is ChangeTrackingList<CjkBigramTokenFilterScripts> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(IgnoreScripts))
             {
                 writer.WritePropertyName("ignoreScripts"u8);
                 writer.WriteStartArray();
@@ -26,7 +27,7 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (OutputUnigrams.HasValue)
+            if (Optional.IsDefined(OutputUnigrams))
             {
                 writer.WritePropertyName("outputUnigrams"u8);
                 writer.WriteBooleanValue(OutputUnigrams.Value);
@@ -45,7 +46,7 @@ namespace CognitiveSearch.Models
                 return null;
             }
             IList<CjkBigramTokenFilterScripts> ignoreScripts = default;
-            Optional<bool> outputUnigrams = default;
+            bool? outputUnigrams = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
@@ -84,7 +85,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new CjkBigramTokenFilter(odataType, name, ignoreScripts ?? new ChangeTrackingList<CjkBigramTokenFilterScripts>(), Optional.ToNullable(outputUnigrams));
+            return new CjkBigramTokenFilter(odataType, name, ignoreScripts ?? new ChangeTrackingList<CjkBigramTokenFilterScripts>(), outputUnigrams);
         }
     }
 }

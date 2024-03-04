@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtOmitOperationGroups;
 
 namespace MgmtOmitOperationGroups.Models
 {
@@ -15,17 +16,17 @@ namespace MgmtOmitOperationGroups.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (C != null)
+            if (Optional.IsDefined(C))
             {
                 writer.WritePropertyName("c"u8);
                 writer.WriteStringValue(C);
             }
-            if (D != null)
+            if (Optional.IsDefined(D))
             {
                 writer.WritePropertyName("d"u8);
                 writer.WriteStringValue(D);
             }
-            if (E != null)
+            if (Optional.IsDefined(E))
             {
                 writer.WritePropertyName("e"u8);
                 writer.WriteStringValue(E);
@@ -39,9 +40,9 @@ namespace MgmtOmitOperationGroups.Models
             {
                 return null;
             }
-            Optional<string> c = default;
-            Optional<string> d = default;
-            Optional<string> e = default;
+            string c = default;
+            string d = default;
+            string e = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("c"u8))
@@ -60,7 +61,7 @@ namespace MgmtOmitOperationGroups.Models
                     continue;
                 }
             }
-            return new ModelX(e.Value, c.Value, d.Value);
+            return new ModelX(e, c, d);
         }
     }
 }

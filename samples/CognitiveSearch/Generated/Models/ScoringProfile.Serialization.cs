@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {
@@ -18,12 +19,12 @@ namespace CognitiveSearch.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (TextWeights != null)
+            if (Optional.IsDefined(TextWeights))
             {
                 writer.WritePropertyName("text"u8);
                 writer.WriteObjectValue(TextWeights);
             }
-            if (!(Functions is ChangeTrackingList<ScoringFunction> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Functions))
             {
                 writer.WritePropertyName("functions"u8);
                 writer.WriteStartArray();
@@ -33,7 +34,7 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (FunctionAggregation.HasValue)
+            if (Optional.IsDefined(FunctionAggregation))
             {
                 writer.WritePropertyName("functionAggregation"u8);
                 writer.WriteStringValue(FunctionAggregation.Value.ToSerialString());
@@ -48,9 +49,9 @@ namespace CognitiveSearch.Models
                 return null;
             }
             string name = default;
-            Optional<TextWeights> text = default;
+            TextWeights text = default;
             IList<ScoringFunction> functions = default;
-            Optional<ScoringFunctionAggregation> functionAggregation = default;
+            ScoringFunctionAggregation? functionAggregation = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -91,7 +92,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new ScoringProfile(name, text.Value, functions ?? new ChangeTrackingList<ScoringFunction>(), Optional.ToNullable(functionAggregation));
+            return new ScoringProfile(name, text, functions ?? new ChangeTrackingList<ScoringFunction>(), functionAggregation);
         }
     }
 }

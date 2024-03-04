@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using xms_error_responses;
 
 namespace xms_error_responses.Models
 {
@@ -28,12 +29,12 @@ namespace xms_error_responses.Models
             writer.WriteStartObject();
             writer.WritePropertyName("errorType"u8);
             writer.WriteStringValue(ErrorType);
-            if (ErrorMessage != null)
+            if (Optional.IsDefined(ErrorMessage))
             {
                 writer.WritePropertyName("errorMessage"u8);
                 writer.WriteStringValue(ErrorMessage);
             }
-            if (ActionResponse != null)
+            if (Optional.IsDefined(ActionResponse))
             {
                 writer.WritePropertyName("actionResponse"u8);
                 writer.WriteStringValue(ActionResponse);
@@ -77,8 +78,8 @@ namespace xms_error_responses.Models
                 return null;
             }
             string errorType = "Unknown";
-            Optional<string> errorMessage = default;
-            Optional<string> actionResponse = default;
+            string errorMessage = default;
+            string actionResponse = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -104,7 +105,7 @@ namespace xms_error_responses.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new UnknownPetActionError(actionResponse.Value, serializedAdditionalRawData, errorType, errorMessage.Value);
+            return new UnknownPetActionError(actionResponse, serializedAdditionalRawData, errorType, errorMessage);
         }
 
         BinaryData IPersistableModel<PetActionError>.Write(ModelReaderWriterOptions options)

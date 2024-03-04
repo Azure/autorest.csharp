@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtPartialResource;
 
 namespace MgmtPartialResource.Models
 {
@@ -15,12 +16,12 @@ namespace MgmtPartialResource.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Name.HasValue)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name.Value.ToString());
             }
-            if (Tier.HasValue)
+            if (Optional.IsDefined(Tier))
             {
                 writer.WritePropertyName("tier"u8);
                 writer.WriteStringValue(Tier.Value.ToString());
@@ -34,8 +35,8 @@ namespace MgmtPartialResource.Models
             {
                 return null;
             }
-            Optional<PublicIPAddressSkuName> name = default;
-            Optional<PublicIPAddressSkuTier> tier = default;
+            PublicIPAddressSkuName? name = default;
+            PublicIPAddressSkuTier? tier = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -57,7 +58,7 @@ namespace MgmtPartialResource.Models
                     continue;
                 }
             }
-            return new PublicIPAddressSku(Optional.ToNullable(name), Optional.ToNullable(tier));
+            return new PublicIPAddressSku(name, tier);
         }
     }
 }

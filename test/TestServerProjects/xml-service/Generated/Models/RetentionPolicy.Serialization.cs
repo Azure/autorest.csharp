@@ -11,6 +11,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
+using xml_service;
 
 namespace xml_service.Models
 {
@@ -22,7 +23,7 @@ namespace xml_service.Models
             writer.WriteStartElement("Enabled");
             writer.WriteValue(Enabled);
             writer.WriteEndElement();
-            if (Days.HasValue)
+            if (Optional.IsDefined(Days))
             {
                 writer.WriteStartElement("Days");
                 writer.WriteValue(Days.Value);

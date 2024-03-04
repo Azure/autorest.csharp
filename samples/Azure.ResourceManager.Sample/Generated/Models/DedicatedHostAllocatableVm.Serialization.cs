@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -27,12 +28,12 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (VmSize != null)
+            if (Optional.IsDefined(VmSize))
             {
                 writer.WritePropertyName("vmSize"u8);
                 writer.WriteStringValue(VmSize);
             }
-            if (Count.HasValue)
+            if (Optional.IsDefined(Count))
             {
                 writer.WritePropertyName("count"u8);
                 writer.WriteNumberValue(Count.Value);
@@ -75,8 +76,8 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<string> vmSize = default;
-            Optional<double> count = default;
+            string vmSize = default;
+            double? count = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -101,7 +102,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DedicatedHostAllocatableVm(vmSize.Value, Optional.ToNullable(count), serializedAdditionalRawData);
+            return new DedicatedHostAllocatableVm(vmSize, count, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -109,7 +110,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (VmSize != null)
+            if (Optional.IsDefined(VmSize))
             {
                 builder.Append("  vmSize:");
                 if (VmSize.Contains(Environment.NewLine))
@@ -123,7 +124,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Count.HasValue)
+            if (Optional.IsDefined(Count))
             {
                 builder.Append("  count:");
                 builder.AppendLine($" '{Count.Value.ToString()}'");

@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -35,7 +36,7 @@ namespace MgmtDiscriminator.Models
                 writer.WriteStringValue(item);
             }
             writer.WriteEndArray();
-            if (OptionalString != null)
+            if (Optional.IsDefined(OptionalString))
             {
                 writer.WritePropertyName("optionalString"u8);
                 writer.WriteStringValue(OptionalString);
@@ -79,7 +80,7 @@ namespace MgmtDiscriminator.Models
                 return null;
             }
             IList<string> requiredCollection = default;
-            Optional<string> optionalString = default;
+            string optionalString = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -105,7 +106,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DerivedModel(optionalString.Value, serializedAdditionalRawData, requiredCollection);
+            return new DerivedModel(optionalString, serializedAdditionalRawData, requiredCollection);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -113,7 +114,7 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (!(RequiredCollection is ChangeTrackingList<string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(RequiredCollection))
             {
                 if (RequiredCollection.Any())
                 {
@@ -140,7 +141,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            if (OptionalString != null)
+            if (Optional.IsDefined(OptionalString))
             {
                 builder.Append("  optionalString:");
                 if (OptionalString.Contains(Environment.NewLine))

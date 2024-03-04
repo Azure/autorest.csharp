@@ -17,12 +17,12 @@ namespace MgmtListMethods
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (ConfigValue != null)
+            if (Optional.IsDefined(ConfigValue))
             {
                 writer.WritePropertyName("configValue"u8);
                 writer.WriteStringValue(ConfigValue);
             }
-            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -44,13 +44,13 @@ namespace MgmtListMethods
             {
                 return null;
             }
-            Optional<string> configValue = default;
+            string configValue = default;
             IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
+            SystemData systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("configValue"u8))
@@ -106,10 +106,10 @@ namespace MgmtListMethods
                 id,
                 name,
                 type,
-                systemData.Value,
+                systemData,
                 tags ?? new ChangeTrackingDictionary<string, string>(),
                 location,
-                configValue.Value);
+                configValue);
         }
     }
 }

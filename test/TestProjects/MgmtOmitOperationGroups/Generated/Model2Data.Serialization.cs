@@ -17,12 +17,12 @@ namespace MgmtOmitOperationGroups
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (B != null)
+            if (Optional.IsDefined(B))
             {
                 writer.WritePropertyName("b"u8);
                 writer.WriteStringValue(B);
             }
-            if (Modelx != null)
+            if (Optional.IsDefined(Modelx))
             {
                 writer.WritePropertyName("modelx"u8);
                 writer.WriteObjectValue(Modelx);
@@ -36,14 +36,14 @@ namespace MgmtOmitOperationGroups
             {
                 return null;
             }
-            Optional<string> b = default;
-            Optional<ModelX> modelx = default;
-            Optional<string> f = default;
-            Optional<string> g = default;
+            string b = default;
+            ModelX modelx = default;
+            string f = default;
+            string g = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
+            SystemData systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("b"u8))
@@ -99,11 +99,11 @@ namespace MgmtOmitOperationGroups
                 id,
                 name,
                 type,
-                systemData.Value,
-                b.Value,
-                modelx.Value,
-                f.Value,
-                g.Value);
+                systemData,
+                b,
+                modelx,
+                f,
+                g);
         }
     }
 }

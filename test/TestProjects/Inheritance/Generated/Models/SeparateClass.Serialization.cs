@@ -9,6 +9,7 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
+using Inheritance;
 
 namespace Inheritance.Models
 {
@@ -18,12 +19,12 @@ namespace Inheritance.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (StringProperty != null)
+            if (Optional.IsDefined(StringProperty))
             {
                 writer.WritePropertyName("StringProperty"u8);
                 writer.WriteStringValue(StringProperty);
             }
-            if (ModelProperty != null)
+            if (Optional.IsDefined(ModelProperty))
             {
                 writer.WritePropertyName("ModelProperty"u8);
                 writer.WriteObjectValue(ModelProperty);
@@ -37,8 +38,8 @@ namespace Inheritance.Models
             {
                 return null;
             }
-            Optional<string> stringProperty = default;
-            Optional<BaseClassWithExtensibleEnumDiscriminator> modelProperty = default;
+            string stringProperty = default;
+            BaseClassWithExtensibleEnumDiscriminator modelProperty = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("StringProperty"u8))
@@ -56,7 +57,7 @@ namespace Inheritance.Models
                     continue;
                 }
             }
-            return new SeparateClass(stringProperty.Value, modelProperty.Value);
+            return new SeparateClass(stringProperty, modelProperty);
         }
 
         internal partial class SeparateClassConverter : JsonConverter<SeparateClass>

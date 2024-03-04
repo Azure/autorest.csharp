@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using lro;
 
 namespace lro.Models
 {
@@ -26,12 +27,12 @@ namespace lro.Models
             }
 
             writer.WriteStartObject();
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
@@ -74,8 +75,8 @@ namespace lro.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> id = default;
+            string name = default;
+            string id = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -96,7 +97,7 @@ namespace lro.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Sku(name.Value, id.Value, serializedAdditionalRawData);
+            return new Sku(name, id, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<Sku>.Write(ModelReaderWriterOptions options)

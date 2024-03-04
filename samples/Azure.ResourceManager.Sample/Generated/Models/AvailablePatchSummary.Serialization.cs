@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -27,42 +28,42 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && Status.HasValue)
+            if (options.Format != "W" && Optional.IsDefined(Status))
             {
                 writer.WritePropertyName("status"u8);
                 writer.WriteStringValue(Status.Value.ToString());
             }
-            if (options.Format != "W" && AssessmentActivityId != null)
+            if (options.Format != "W" && Optional.IsDefined(AssessmentActivityId))
             {
                 writer.WritePropertyName("assessmentActivityId"u8);
                 writer.WriteStringValue(AssessmentActivityId);
             }
-            if (options.Format != "W" && RebootPending.HasValue)
+            if (options.Format != "W" && Optional.IsDefined(RebootPending))
             {
                 writer.WritePropertyName("rebootPending"u8);
                 writer.WriteBooleanValue(RebootPending.Value);
             }
-            if (options.Format != "W" && CriticalAndSecurityPatchCount.HasValue)
+            if (options.Format != "W" && Optional.IsDefined(CriticalAndSecurityPatchCount))
             {
                 writer.WritePropertyName("criticalAndSecurityPatchCount"u8);
                 writer.WriteNumberValue(CriticalAndSecurityPatchCount.Value);
             }
-            if (options.Format != "W" && OtherPatchCount.HasValue)
+            if (options.Format != "W" && Optional.IsDefined(OtherPatchCount))
             {
                 writer.WritePropertyName("otherPatchCount"u8);
                 writer.WriteNumberValue(OtherPatchCount.Value);
             }
-            if (options.Format != "W" && StartOn.HasValue)
+            if (options.Format != "W" && Optional.IsDefined(StartOn))
             {
                 writer.WritePropertyName("startTime"u8);
                 writer.WriteStringValue(StartOn.Value, "O");
             }
-            if (options.Format != "W" && LastModifiedOn.HasValue)
+            if (options.Format != "W" && Optional.IsDefined(LastModifiedOn))
             {
                 writer.WritePropertyName("lastModifiedTime"u8);
                 writer.WriteStringValue(LastModifiedOn.Value, "O");
             }
-            if (options.Format != "W" && Error != null)
+            if (options.Format != "W" && Optional.IsDefined(Error))
             {
                 writer.WritePropertyName("error"u8);
                 writer.WriteObjectValue(Error);
@@ -105,14 +106,14 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<PatchOperationStatus> status = default;
-            Optional<string> assessmentActivityId = default;
-            Optional<bool> rebootPending = default;
-            Optional<int> criticalAndSecurityPatchCount = default;
-            Optional<int> otherPatchCount = default;
-            Optional<DateTimeOffset> startTime = default;
-            Optional<DateTimeOffset> lastModifiedTime = default;
-            Optional<ApiError> error = default;
+            PatchOperationStatus? status = default;
+            string assessmentActivityId = default;
+            bool? rebootPending = default;
+            int? criticalAndSecurityPatchCount = default;
+            int? otherPatchCount = default;
+            DateTimeOffset? startTime = default;
+            DateTimeOffset? lastModifiedTime = default;
+            ApiError error = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -192,14 +193,14 @@ namespace Azure.ResourceManager.Sample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new AvailablePatchSummary(
-                Optional.ToNullable(status),
-                assessmentActivityId.Value,
-                Optional.ToNullable(rebootPending),
-                Optional.ToNullable(criticalAndSecurityPatchCount),
-                Optional.ToNullable(otherPatchCount),
-                Optional.ToNullable(startTime),
-                Optional.ToNullable(lastModifiedTime),
-                error.Value,
+                status,
+                assessmentActivityId,
+                rebootPending,
+                criticalAndSecurityPatchCount,
+                otherPatchCount,
+                startTime,
+                lastModifiedTime,
+                error,
                 serializedAdditionalRawData);
         }
 
@@ -208,13 +209,13 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Status.HasValue)
+            if (Optional.IsDefined(Status))
             {
                 builder.Append("  status:");
                 builder.AppendLine($" '{Status.Value.ToString()}'");
             }
 
-            if (AssessmentActivityId != null)
+            if (Optional.IsDefined(AssessmentActivityId))
             {
                 builder.Append("  assessmentActivityId:");
                 if (AssessmentActivityId.Contains(Environment.NewLine))
@@ -228,40 +229,40 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (RebootPending.HasValue)
+            if (Optional.IsDefined(RebootPending))
             {
                 builder.Append("  rebootPending:");
                 var boolValue = RebootPending.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
             }
 
-            if (CriticalAndSecurityPatchCount.HasValue)
+            if (Optional.IsDefined(CriticalAndSecurityPatchCount))
             {
                 builder.Append("  criticalAndSecurityPatchCount:");
                 builder.AppendLine($" {CriticalAndSecurityPatchCount.Value}");
             }
 
-            if (OtherPatchCount.HasValue)
+            if (Optional.IsDefined(OtherPatchCount))
             {
                 builder.Append("  otherPatchCount:");
                 builder.AppendLine($" {OtherPatchCount.Value}");
             }
 
-            if (StartOn.HasValue)
+            if (Optional.IsDefined(StartOn))
             {
                 builder.Append("  startTime:");
                 var formattedDateTimeString = TypeFormatters.ToString(StartOn.Value, "o");
                 builder.AppendLine($" '{formattedDateTimeString}'");
             }
 
-            if (LastModifiedOn.HasValue)
+            if (Optional.IsDefined(LastModifiedOn))
             {
                 builder.Append("  lastModifiedTime:");
                 var formattedDateTimeString = TypeFormatters.ToString(LastModifiedOn.Value, "o");
                 builder.AppendLine($" '{formattedDateTimeString}'");
             }
 
-            if (Error != null)
+            if (Optional.IsDefined(Error))
             {
                 builder.Append("  error:");
                 AppendChildObject(builder, Error, options, 2, false);

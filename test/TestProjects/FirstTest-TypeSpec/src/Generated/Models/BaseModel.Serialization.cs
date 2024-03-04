@@ -67,14 +67,14 @@ namespace FirstTestTypeSpec.Models
             {
                 return null;
             }
-            int level = default;
+            sbyte level = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("level"u8))
                 {
-                    level = property.Value.GetInt32();
+                    level = property.Value.GetSByte();
                     continue;
                 }
                 if (options.Format != "W")

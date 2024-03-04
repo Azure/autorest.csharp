@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -30,12 +31,12 @@ namespace MgmtDiscriminator.Models
             writer.WriteStartObject();
             writer.WritePropertyName("typeName"u8);
             writer.WriteStringValue(TypeName.ToString());
-            if (Algorithm.HasValue)
+            if (Optional.IsDefined(Algorithm))
             {
                 writer.WritePropertyName("algorithm"u8);
                 writer.WriteStringValue(Algorithm.Value.ToString());
             }
-            if (!(ParameterNameOverride is ChangeTrackingList<UrlSigningParamIdentifier> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(ParameterNameOverride))
             {
                 writer.WritePropertyName("parameterNameOverride"u8);
                 writer.WriteStartArray();
@@ -84,7 +85,7 @@ namespace MgmtDiscriminator.Models
                 return null;
             }
             UrlSigningActionParametersTypeName typeName = default;
-            Optional<Algorithm> algorithm = default;
+            Algorithm? algorithm = default;
             IList<UrlSigningParamIdentifier> parameterNameOverride = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -124,7 +125,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new UrlSigningActionParameters(typeName, Optional.ToNullable(algorithm), parameterNameOverride ?? new ChangeTrackingList<UrlSigningParamIdentifier>(), serializedAdditionalRawData);
+            return new UrlSigningActionParameters(typeName, algorithm, parameterNameOverride ?? new ChangeTrackingList<UrlSigningParamIdentifier>(), serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -135,13 +136,13 @@ namespace MgmtDiscriminator.Models
             builder.Append("  typeName:");
             builder.AppendLine($" '{TypeName.ToString()}'");
 
-            if (Algorithm.HasValue)
+            if (Optional.IsDefined(Algorithm))
             {
                 builder.Append("  algorithm:");
                 builder.AppendLine($" '{Algorithm.Value.ToString()}'");
             }
 
-            if (!(ParameterNameOverride is ChangeTrackingList<UrlSigningParamIdentifier> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(ParameterNameOverride))
             {
                 if (ParameterNameOverride.Any())
                 {

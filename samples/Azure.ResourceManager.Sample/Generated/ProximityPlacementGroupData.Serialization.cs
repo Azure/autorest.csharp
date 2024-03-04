@@ -31,12 +31,12 @@ namespace Azure.ResourceManager.Sample
             }
 
             writer.WriteStartObject();
-            if (ExtendedLocation != null)
+            if (Optional.IsDefined(ExtendedLocation))
             {
                 writer.WritePropertyName("extendedLocation"u8);
                 JsonSerializer.Serialize(writer, ExtendedLocation);
             }
-            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -64,19 +64,19 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format != "W" && SystemData != null)
+            if (options.Format != "W" && Optional.IsDefined(SystemData))
             {
                 writer.WritePropertyName("systemData"u8);
                 JsonSerializer.Serialize(writer, SystemData);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (ProximityPlacementGroupType.HasValue)
+            if (Optional.IsDefined(ProximityPlacementGroupType))
             {
                 writer.WritePropertyName("proximityPlacementGroupType"u8);
                 writer.WriteStringValue(ProximityPlacementGroupType.Value.ToString());
             }
-            if (options.Format != "W" && !(VirtualMachines is ChangeTrackingList<SubResourceWithColocationStatus> collection0 && collection0.IsUndefined))
+            if (options.Format != "W" && Optional.IsCollectionDefined(VirtualMachines))
             {
                 writer.WritePropertyName("virtualMachines"u8);
                 writer.WriteStartArray();
@@ -86,7 +86,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W" && !(VirtualMachineScaleSets is ChangeTrackingList<SubResourceWithColocationStatus> collection1 && collection1.IsUndefined))
+            if (options.Format != "W" && Optional.IsCollectionDefined(VirtualMachineScaleSets))
             {
                 writer.WritePropertyName("virtualMachineScaleSets"u8);
                 writer.WriteStartArray();
@@ -96,7 +96,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W" && !(AvailabilitySets is ChangeTrackingList<SubResourceWithColocationStatus> collection2 && collection2.IsUndefined))
+            if (options.Format != "W" && Optional.IsCollectionDefined(AvailabilitySets))
             {
                 writer.WritePropertyName("availabilitySets"u8);
                 writer.WriteStartArray();
@@ -106,7 +106,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 writer.WriteEndArray();
             }
-            if (ColocationStatus != null)
+            if (Optional.IsDefined(ColocationStatus))
             {
                 writer.WritePropertyName("colocationStatus"u8);
                 writer.WriteObjectValue(ColocationStatus);
@@ -150,18 +150,18 @@ namespace Azure.ResourceManager.Sample
             {
                 return null;
             }
-            Optional<ExtendedLocation> extendedLocation = default;
+            ExtendedLocation extendedLocation = default;
             IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
-            Optional<ProximityPlacementGroupType> proximityPlacementGroupType = default;
+            SystemData systemData = default;
+            ProximityPlacementGroupType? proximityPlacementGroupType = default;
             IReadOnlyList<SubResourceWithColocationStatus> virtualMachines = default;
             IReadOnlyList<SubResourceWithColocationStatus> virtualMachineScaleSets = default;
             IReadOnlyList<SubResourceWithColocationStatus> availabilitySets = default;
-            Optional<InstanceViewStatus> colocationStatus = default;
+            InstanceViewStatus colocationStatus = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -300,15 +300,15 @@ namespace Azure.ResourceManager.Sample
                 id,
                 name,
                 type,
-                systemData.Value,
+                systemData,
                 tags ?? new ChangeTrackingDictionary<string, string>(),
                 location,
                 extendedLocation,
-                Optional.ToNullable(proximityPlacementGroupType),
+                proximityPlacementGroupType,
                 virtualMachines ?? new ChangeTrackingList<SubResourceWithColocationStatus>(),
                 virtualMachineScaleSets ?? new ChangeTrackingList<SubResourceWithColocationStatus>(),
                 availabilitySets ?? new ChangeTrackingList<SubResourceWithColocationStatus>(),
-                colocationStatus.Value,
+                colocationStatus,
                 serializedAdditionalRawData);
         }
 
@@ -317,7 +317,7 @@ namespace Azure.ResourceManager.Sample
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 builder.Append("  name:");
                 if (Name.Contains(Environment.NewLine))
@@ -334,7 +334,7 @@ namespace Azure.ResourceManager.Sample
             builder.Append("  location:");
             builder.AppendLine($" '{Location.ToString()}'");
 
-            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Tags))
             {
                 if (Tags.Any())
                 {
@@ -362,19 +362,19 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (ExtendedLocation != null)
+            if (Optional.IsDefined(ExtendedLocation))
             {
                 builder.Append("  extendedLocation:");
                 AppendChildObject(builder, ExtendedLocation, options, 2, false);
             }
 
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 builder.Append("  id:");
                 builder.AppendLine($" '{Id.ToString()}'");
             }
 
-            if (SystemData != null)
+            if (Optional.IsDefined(SystemData))
             {
                 builder.Append("  systemData:");
                 builder.AppendLine($" '{SystemData.ToString()}'");
@@ -382,13 +382,13 @@ namespace Azure.ResourceManager.Sample
 
             builder.Append("  properties:");
             builder.AppendLine(" {");
-            if (ProximityPlacementGroupType.HasValue)
+            if (Optional.IsDefined(ProximityPlacementGroupType))
             {
                 builder.Append("    proximityPlacementGroupType:");
                 builder.AppendLine($" '{ProximityPlacementGroupType.Value.ToString()}'");
             }
 
-            if (!(VirtualMachines is ChangeTrackingList<SubResourceWithColocationStatus> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(VirtualMachines))
             {
                 if (VirtualMachines.Any())
                 {
@@ -402,7 +402,7 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (!(VirtualMachineScaleSets is ChangeTrackingList<SubResourceWithColocationStatus> collection1 && collection1.IsUndefined))
+            if (Optional.IsCollectionDefined(VirtualMachineScaleSets))
             {
                 if (VirtualMachineScaleSets.Any())
                 {
@@ -416,7 +416,7 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (!(AvailabilitySets is ChangeTrackingList<SubResourceWithColocationStatus> collection2 && collection2.IsUndefined))
+            if (Optional.IsCollectionDefined(AvailabilitySets))
             {
                 if (AvailabilitySets.Any())
                 {
@@ -430,7 +430,7 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (ColocationStatus != null)
+            if (Optional.IsDefined(ColocationStatus))
             {
                 builder.Append("    colocationStatus:");
                 AppendChildObject(builder, ColocationStatus, options, 4, false);

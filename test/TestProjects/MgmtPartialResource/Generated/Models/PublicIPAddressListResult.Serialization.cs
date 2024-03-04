@@ -21,7 +21,7 @@ namespace MgmtPartialResource.Models
                 return null;
             }
             IReadOnlyList<PublicIPAddressData> value = default;
-            Optional<string> nextLink = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -44,7 +44,7 @@ namespace MgmtPartialResource.Models
                     continue;
                 }
             }
-            return new PublicIPAddressListResult(value ?? new ChangeTrackingList<PublicIPAddressData>(), nextLink.Value);
+            return new PublicIPAddressListResult(value ?? new ChangeTrackingList<PublicIPAddressData>(), nextLink);
         }
     }
 }

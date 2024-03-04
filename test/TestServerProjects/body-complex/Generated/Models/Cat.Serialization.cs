@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using body_complex;
 
 namespace body_complex.Models
 {
@@ -26,12 +27,12 @@ namespace body_complex.Models
             }
 
             writer.WriteStartObject();
-            if (Color != null)
+            if (Optional.IsDefined(Color))
             {
                 writer.WritePropertyName("color"u8);
                 writer.WriteStringValue(Color);
             }
-            if (!(Hates is ChangeTrackingList<Dog> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Hates))
             {
                 writer.WritePropertyName("hates"u8);
                 writer.WriteStartArray();
@@ -41,12 +42,12 @@ namespace body_complex.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Id.HasValue)
+            if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteNumberValue(Id.Value);
             }
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
@@ -89,10 +90,10 @@ namespace body_complex.Models
             {
                 return null;
             }
-            Optional<string> color = default;
+            string color = default;
             IList<Dog> hates = default;
-            Optional<int> id = default;
-            Optional<string> name = default;
+            int? id = default;
+            string name = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -136,7 +137,7 @@ namespace body_complex.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Cat(Optional.ToNullable(id), name.Value, serializedAdditionalRawData, color.Value, hates ?? new ChangeTrackingList<Dog>());
+            return new Cat(id, name, serializedAdditionalRawData, color, hates ?? new ChangeTrackingList<Dog>());
         }
 
         BinaryData IPersistableModel<Cat>.Write(ModelReaderWriterOptions options)

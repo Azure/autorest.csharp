@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -31,7 +32,7 @@ namespace MgmtDiscriminator.Models
             writer.WriteStringValue(TypeName.ToString());
             writer.WritePropertyName("queryStringBehavior"u8);
             writer.WriteStringValue(QueryStringBehavior.ToString());
-            if (QueryParameters != null)
+            if (Optional.IsDefined(QueryParameters))
             {
                 if (QueryParameters != null)
                 {
@@ -83,7 +84,7 @@ namespace MgmtDiscriminator.Models
             }
             CacheKeyQueryStringActionParametersTypeName typeName = default;
             QueryStringBehavior queryStringBehavior = default;
-            Optional<string> queryParameters = default;
+            string queryParameters = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -114,7 +115,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new CacheKeyQueryStringActionParameters(typeName, queryStringBehavior, queryParameters.Value, serializedAdditionalRawData);
+            return new CacheKeyQueryStringActionParameters(typeName, queryStringBehavior, queryParameters, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -128,7 +129,7 @@ namespace MgmtDiscriminator.Models
             builder.Append("  queryStringBehavior:");
             builder.AppendLine($" '{QueryStringBehavior.ToString()}'");
 
-            if (QueryParameters != null)
+            if (Optional.IsDefined(QueryParameters))
             {
                 builder.Append("  queryParameters:");
                 if (QueryParameters.Contains(Environment.NewLine))

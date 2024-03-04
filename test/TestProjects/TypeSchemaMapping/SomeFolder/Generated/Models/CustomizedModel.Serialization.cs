@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 using NamespaceForEnums;
+using TypeSchemaMapping;
 
 namespace CustomNamespace
 {
@@ -26,12 +27,12 @@ namespace CustomNamespace
             }
 
             writer.WriteStartObject();
-            if (PropertyRenamedAndTypeChanged.HasValue)
+            if (Optional.IsDefined(PropertyRenamedAndTypeChanged))
             {
                 writer.WritePropertyName("ModelProperty"u8);
                 writer.WriteNumberValue(PropertyRenamedAndTypeChanged.Value);
             }
-            if (_field != null)
+            if (Optional.IsDefined(_field))
             {
                 writer.WritePropertyName("PropertyToField"u8);
                 writer.WriteStringValue(_field);

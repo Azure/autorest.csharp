@@ -9,6 +9,7 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
+using MgmtReferenceTypes;
 
 namespace Azure.ResourceManager.Fake.Models
 {
@@ -18,12 +19,12 @@ namespace Azure.ResourceManager.Fake.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (KeyIdentifier != null)
+            if (Optional.IsDefined(KeyIdentifier))
             {
                 writer.WritePropertyName("keyIdentifier"u8);
                 writer.WriteStringValue(KeyIdentifier);
             }
-            if (Identity != null)
+            if (Optional.IsDefined(Identity))
             {
                 writer.WritePropertyName("identity"u8);
                 writer.WriteStringValue(Identity);
@@ -37,8 +38,8 @@ namespace Azure.ResourceManager.Fake.Models
             {
                 return null;
             }
-            Optional<string> keyIdentifier = default;
-            Optional<string> identity = default;
+            string keyIdentifier = default;
+            string identity = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("keyIdentifier"u8))
@@ -52,7 +53,7 @@ namespace Azure.ResourceManager.Fake.Models
                     continue;
                 }
             }
-            return new KeyVaultProperties(keyIdentifier.Value, identity.Value);
+            return new KeyVaultProperties(keyIdentifier, identity);
         }
 
         internal partial class KeyVaultPropertiesConverter : JsonConverter<KeyVaultProperties>

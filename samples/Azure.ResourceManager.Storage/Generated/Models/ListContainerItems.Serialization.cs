@@ -21,7 +21,7 @@ namespace Azure.ResourceManager.Storage.Models
                 return null;
             }
             IReadOnlyList<BlobContainerData> value = default;
-            Optional<string> nextLink = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -44,7 +44,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new ListContainerItems(value ?? new ChangeTrackingList<BlobContainerData>(), nextLink.Value);
+            return new ListContainerItems(value ?? new ChangeTrackingList<BlobContainerData>(), nextLink);
         }
     }
 }

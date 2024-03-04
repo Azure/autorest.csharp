@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
@@ -17,7 +18,7 @@ namespace MgmtMockAndSample.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Settings != null)
+            if (Optional.IsDefined(Settings))
             {
                 writer.WritePropertyName("settings"u8);
 #if NET6_0_OR_GREATER
@@ -29,7 +30,7 @@ namespace MgmtMockAndSample.Models
                 }
 #endif
             }
-            if (ProtectedSettings != null)
+            if (Optional.IsDefined(ProtectedSettings))
             {
                 writer.WritePropertyName("protectedSettings"u8);
 #if NET6_0_OR_GREATER
@@ -41,17 +42,17 @@ namespace MgmtMockAndSample.Models
                 }
 #endif
             }
-            if (RawMessage != null)
+            if (Optional.IsDefined(RawMessage))
             {
                 writer.WritePropertyName("rawMessage"u8);
                 writer.WriteBase64StringValue(RawMessage, "D");
             }
-            if (TenantId.HasValue)
+            if (Optional.IsDefined(TenantId))
             {
                 writer.WritePropertyName("tenantId"u8);
                 writer.WriteStringValue(TenantId.Value);
             }
-            if (!(InitialAdminObjectIds is ChangeTrackingList<string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(InitialAdminObjectIds))
             {
                 writer.WritePropertyName("initialAdminObjectIds"u8);
                 writer.WriteStartArray();
@@ -61,32 +62,32 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (EnableSoftDelete.HasValue)
+            if (Optional.IsDefined(EnableSoftDelete))
             {
                 writer.WritePropertyName("enableSoftDelete"u8);
                 writer.WriteBooleanValue(EnableSoftDelete.Value);
             }
-            if (SoftDeleteRetentionInDays.HasValue)
+            if (Optional.IsDefined(SoftDeleteRetentionInDays))
             {
                 writer.WritePropertyName("softDeleteRetentionInDays"u8);
                 writer.WriteNumberValue(SoftDeleteRetentionInDays.Value);
             }
-            if (EnablePurgeProtection.HasValue)
+            if (Optional.IsDefined(EnablePurgeProtection))
             {
                 writer.WritePropertyName("enablePurgeProtection"u8);
                 writer.WriteBooleanValue(EnablePurgeProtection.Value);
             }
-            if (CreateMode.HasValue)
+            if (Optional.IsDefined(CreateMode))
             {
                 writer.WritePropertyName("createMode"u8);
                 writer.WriteStringValue(CreateMode.Value.ToSerialString());
             }
-            if (NetworkAcls != null)
+            if (Optional.IsDefined(NetworkAcls))
             {
                 writer.WritePropertyName("networkAcls"u8);
                 writer.WriteObjectValue(NetworkAcls);
             }
-            if (PublicNetworkAccess.HasValue)
+            if (Optional.IsDefined(PublicNetworkAccess))
             {
                 writer.WritePropertyName("publicNetworkAccess"u8);
                 writer.WriteStringValue(PublicNetworkAccess.Value.ToString());
@@ -100,22 +101,22 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<BinaryData> settings = default;
-            Optional<BinaryData> protectedSettings = default;
-            Optional<byte[]> rawMessage = default;
-            Optional<Guid> tenantId = default;
+            BinaryData settings = default;
+            BinaryData protectedSettings = default;
+            byte[] rawMessage = default;
+            Guid? tenantId = default;
             IList<string> initialAdminObjectIds = default;
-            Optional<Uri> hsmUri = default;
-            Optional<bool> enableSoftDelete = default;
-            Optional<int> softDeleteRetentionInDays = default;
-            Optional<bool> enablePurgeProtection = default;
-            Optional<CreateMode> createMode = default;
-            Optional<string> statusMessage = default;
-            Optional<ProvisioningState> provisioningState = default;
-            Optional<MhsmNetworkRuleSet> networkAcls = default;
+            Uri hsmUri = default;
+            bool? enableSoftDelete = default;
+            int? softDeleteRetentionInDays = default;
+            bool? enablePurgeProtection = default;
+            CreateMode? createMode = default;
+            string statusMessage = default;
+            ProvisioningState? provisioningState = default;
+            MhsmNetworkRuleSet networkAcls = default;
             IReadOnlyList<MhsmPrivateEndpointConnectionItem> privateEndpointConnections = default;
-            Optional<PublicNetworkAccess> publicNetworkAccess = default;
-            Optional<DateTimeOffset> scheduledPurgeDate = default;
+            PublicNetworkAccess? publicNetworkAccess = default;
+            DateTimeOffset? scheduledPurgeDate = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("settings"u8))
@@ -270,22 +271,22 @@ namespace MgmtMockAndSample.Models
                 }
             }
             return new ManagedHsmProperties(
-                settings.Value,
-                protectedSettings.Value,
-                rawMessage.Value,
-                Optional.ToNullable(tenantId),
+                settings,
+                protectedSettings,
+                rawMessage,
+                tenantId,
                 initialAdminObjectIds ?? new ChangeTrackingList<string>(),
-                hsmUri.Value,
-                Optional.ToNullable(enableSoftDelete),
-                Optional.ToNullable(softDeleteRetentionInDays),
-                Optional.ToNullable(enablePurgeProtection),
-                Optional.ToNullable(createMode),
-                statusMessage.Value,
-                Optional.ToNullable(provisioningState),
-                networkAcls.Value,
+                hsmUri,
+                enableSoftDelete,
+                softDeleteRetentionInDays,
+                enablePurgeProtection,
+                createMode,
+                statusMessage,
+                provisioningState,
+                networkAcls,
                 privateEndpointConnections ?? new ChangeTrackingList<MhsmPrivateEndpointConnectionItem>(),
-                Optional.ToNullable(publicNetworkAccess),
-                Optional.ToNullable(scheduledPurgeDate));
+                publicNetworkAccess,
+                scheduledPurgeDate);
         }
     }
 }

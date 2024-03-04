@@ -8,6 +8,7 @@
 using System;
 using System.Text.Json;
 using Azure.Core;
+using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
@@ -20,7 +21,7 @@ namespace MgmtMockAndSample.Models
             writer.WriteStringValue(TenantId);
             writer.WritePropertyName("objectId"u8);
             writer.WriteStringValue(ObjectId);
-            if (ApplicationId.HasValue)
+            if (Optional.IsDefined(ApplicationId))
             {
                 writer.WritePropertyName("applicationId"u8);
                 writer.WriteStringValue(ApplicationId.Value);
@@ -38,7 +39,7 @@ namespace MgmtMockAndSample.Models
             }
             Guid tenantId = default;
             string objectId = default;
-            Optional<Guid> applicationId = default;
+            Guid? applicationId = default;
             Permissions permissions = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -67,7 +68,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new AccessPolicyEntry(tenantId, objectId, Optional.ToNullable(applicationId), permissions);
+            return new AccessPolicyEntry(tenantId, objectId, applicationId, permissions);
         }
     }
 }

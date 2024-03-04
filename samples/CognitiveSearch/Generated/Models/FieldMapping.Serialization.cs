@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {
@@ -17,12 +18,12 @@ namespace CognitiveSearch.Models
             writer.WriteStartObject();
             writer.WritePropertyName("sourceFieldName"u8);
             writer.WriteStringValue(SourceFieldName);
-            if (TargetFieldName != null)
+            if (Optional.IsDefined(TargetFieldName))
             {
                 writer.WritePropertyName("targetFieldName"u8);
                 writer.WriteStringValue(TargetFieldName);
             }
-            if (MappingFunction != null)
+            if (Optional.IsDefined(MappingFunction))
             {
                 writer.WritePropertyName("mappingFunction"u8);
                 writer.WriteObjectValue(MappingFunction);
@@ -37,8 +38,8 @@ namespace CognitiveSearch.Models
                 return null;
             }
             string sourceFieldName = default;
-            Optional<string> targetFieldName = default;
-            Optional<FieldMappingFunction> mappingFunction = default;
+            string targetFieldName = default;
+            FieldMappingFunction mappingFunction = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sourceFieldName"u8))
@@ -61,7 +62,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new FieldMapping(sourceFieldName, targetFieldName.Value, mappingFunction.Value);
+            return new FieldMapping(sourceFieldName, targetFieldName, mappingFunction);
         }
     }
 }

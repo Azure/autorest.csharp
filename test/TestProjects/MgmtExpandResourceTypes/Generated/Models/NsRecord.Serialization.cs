@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtExpandResourceTypes;
 
 namespace MgmtExpandResourceTypes.Models
 {
@@ -15,7 +16,7 @@ namespace MgmtExpandResourceTypes.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Nsdname != null)
+            if (Optional.IsDefined(Nsdname))
             {
                 writer.WritePropertyName("nsdname"u8);
                 writer.WriteStringValue(Nsdname);
@@ -29,7 +30,7 @@ namespace MgmtExpandResourceTypes.Models
             {
                 return null;
             }
-            Optional<string> nsdname = default;
+            string nsdname = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("nsdname"u8))
@@ -38,7 +39,7 @@ namespace MgmtExpandResourceTypes.Models
                     continue;
                 }
             }
-            return new NsRecord(nsdname.Value);
+            return new NsRecord(nsdname);
         }
     }
 }

@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -28,37 +29,37 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (ComputerName != null)
+            if (Optional.IsDefined(ComputerName))
             {
                 writer.WritePropertyName("computerName"u8);
                 writer.WriteStringValue(ComputerName);
             }
-            if (AdminUsername != null)
+            if (Optional.IsDefined(AdminUsername))
             {
                 writer.WritePropertyName("adminUsername"u8);
                 writer.WriteStringValue(AdminUsername);
             }
-            if (AdminPassword != null)
+            if (Optional.IsDefined(AdminPassword))
             {
                 writer.WritePropertyName("adminPassword"u8);
                 writer.WriteStringValue(AdminPassword);
             }
-            if (CustomData != null)
+            if (Optional.IsDefined(CustomData))
             {
                 writer.WritePropertyName("customData"u8);
                 writer.WriteStringValue(CustomData);
             }
-            if (WindowsConfiguration != null)
+            if (Optional.IsDefined(WindowsConfiguration))
             {
                 writer.WritePropertyName("windowsConfiguration"u8);
                 writer.WriteObjectValue(WindowsConfiguration);
             }
-            if (LinuxConfiguration != null)
+            if (Optional.IsDefined(LinuxConfiguration))
             {
                 writer.WritePropertyName("linuxConfiguration"u8);
                 writer.WriteObjectValue(LinuxConfiguration);
             }
-            if (!(Secrets is ChangeTrackingList<VaultSecretGroup> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Secrets))
             {
                 writer.WritePropertyName("secrets"u8);
                 writer.WriteStartArray();
@@ -68,12 +69,12 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (AllowExtensionOperations.HasValue)
+            if (Optional.IsDefined(AllowExtensionOperations))
             {
                 writer.WritePropertyName("allowExtensionOperations"u8);
                 writer.WriteBooleanValue(AllowExtensionOperations.Value);
             }
-            if (RequireGuestProvisionSignal.HasValue)
+            if (Optional.IsDefined(RequireGuestProvisionSignal))
             {
                 writer.WritePropertyName("requireGuestProvisionSignal"u8);
                 writer.WriteBooleanValue(RequireGuestProvisionSignal.Value);
@@ -116,15 +117,15 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<string> computerName = default;
-            Optional<string> adminUsername = default;
-            Optional<string> adminPassword = default;
-            Optional<string> customData = default;
-            Optional<WindowsConfiguration> windowsConfiguration = default;
-            Optional<LinuxConfiguration> linuxConfiguration = default;
+            string computerName = default;
+            string adminUsername = default;
+            string adminPassword = default;
+            string customData = default;
+            WindowsConfiguration windowsConfiguration = default;
+            LinuxConfiguration linuxConfiguration = default;
             IList<VaultSecretGroup> secrets = default;
-            Optional<bool> allowExtensionOperations = default;
-            Optional<bool> requireGuestProvisionSignal = default;
+            bool? allowExtensionOperations = default;
+            bool? requireGuestProvisionSignal = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -206,15 +207,15 @@ namespace Azure.ResourceManager.Sample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new OSProfile(
-                computerName.Value,
-                adminUsername.Value,
-                adminPassword.Value,
-                customData.Value,
-                windowsConfiguration.Value,
-                linuxConfiguration.Value,
+                computerName,
+                adminUsername,
+                adminPassword,
+                customData,
+                windowsConfiguration,
+                linuxConfiguration,
                 secrets ?? new ChangeTrackingList<VaultSecretGroup>(),
-                Optional.ToNullable(allowExtensionOperations),
-                Optional.ToNullable(requireGuestProvisionSignal),
+                allowExtensionOperations,
+                requireGuestProvisionSignal,
                 serializedAdditionalRawData);
         }
 
@@ -223,7 +224,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (ComputerName != null)
+            if (Optional.IsDefined(ComputerName))
             {
                 builder.Append("  computerName:");
                 if (ComputerName.Contains(Environment.NewLine))
@@ -237,7 +238,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (AdminUsername != null)
+            if (Optional.IsDefined(AdminUsername))
             {
                 builder.Append("  adminUsername:");
                 if (AdminUsername.Contains(Environment.NewLine))
@@ -251,7 +252,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (AdminPassword != null)
+            if (Optional.IsDefined(AdminPassword))
             {
                 builder.Append("  adminPassword:");
                 if (AdminPassword.Contains(Environment.NewLine))
@@ -265,7 +266,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (CustomData != null)
+            if (Optional.IsDefined(CustomData))
             {
                 builder.Append("  customData:");
                 if (CustomData.Contains(Environment.NewLine))
@@ -279,19 +280,19 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (WindowsConfiguration != null)
+            if (Optional.IsDefined(WindowsConfiguration))
             {
                 builder.Append("  windowsConfiguration:");
                 AppendChildObject(builder, WindowsConfiguration, options, 2, false);
             }
 
-            if (LinuxConfiguration != null)
+            if (Optional.IsDefined(LinuxConfiguration))
             {
                 builder.Append("  linuxConfiguration:");
                 AppendChildObject(builder, LinuxConfiguration, options, 2, false);
             }
 
-            if (!(Secrets is ChangeTrackingList<VaultSecretGroup> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Secrets))
             {
                 if (Secrets.Any())
                 {
@@ -305,14 +306,14 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (AllowExtensionOperations.HasValue)
+            if (Optional.IsDefined(AllowExtensionOperations))
             {
                 builder.Append("  allowExtensionOperations:");
                 var boolValue = AllowExtensionOperations.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
             }
 
-            if (RequireGuestProvisionSignal.HasValue)
+            if (Optional.IsDefined(RequireGuestProvisionSignal))
             {
                 builder.Append("  requireGuestProvisionSignal:");
                 var boolValue = RequireGuestProvisionSignal.Value == true ? "true" : "false";

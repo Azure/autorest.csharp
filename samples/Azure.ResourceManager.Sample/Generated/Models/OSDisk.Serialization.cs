@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -27,54 +28,54 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (OSType.HasValue)
+            if (Optional.IsDefined(OSType))
             {
                 writer.WritePropertyName("osType"u8);
                 writer.WriteStringValue(OSType.Value.ToSerialString());
             }
-            if (EncryptionSettings != null)
+            if (Optional.IsDefined(EncryptionSettings))
             {
                 writer.WritePropertyName("encryptionSettings"u8);
                 writer.WriteObjectValue(EncryptionSettings);
             }
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Vhd != null)
+            if (Optional.IsDefined(Vhd))
             {
                 writer.WritePropertyName("vhd"u8);
                 writer.WriteObjectValue(Vhd);
             }
-            if (Image != null)
+            if (Optional.IsDefined(Image))
             {
                 writer.WritePropertyName("image"u8);
                 writer.WriteObjectValue(Image);
             }
-            if (Caching.HasValue)
+            if (Optional.IsDefined(Caching))
             {
                 writer.WritePropertyName("caching"u8);
                 writer.WriteStringValue(Caching.Value.ToSerialString());
             }
-            if (WriteAcceleratorEnabled.HasValue)
+            if (Optional.IsDefined(WriteAcceleratorEnabled))
             {
                 writer.WritePropertyName("writeAcceleratorEnabled"u8);
                 writer.WriteBooleanValue(WriteAcceleratorEnabled.Value);
             }
-            if (DiffDiskSettings != null)
+            if (Optional.IsDefined(DiffDiskSettings))
             {
                 writer.WritePropertyName("diffDiskSettings"u8);
                 writer.WriteObjectValue(DiffDiskSettings);
             }
             writer.WritePropertyName("createOption"u8);
             writer.WriteStringValue(CreateOption.ToString());
-            if (DiskSizeGB.HasValue)
+            if (Optional.IsDefined(DiskSizeGB))
             {
                 writer.WritePropertyName("diskSizeGB"u8);
                 writer.WriteNumberValue(DiskSizeGB.Value);
             }
-            if (ManagedDisk != null)
+            if (Optional.IsDefined(ManagedDisk))
             {
                 writer.WritePropertyName("managedDisk"u8);
                 writer.WriteObjectValue(ManagedDisk);
@@ -117,17 +118,17 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<OperatingSystemType> osType = default;
-            Optional<DiskEncryptionSettings> encryptionSettings = default;
-            Optional<string> name = default;
-            Optional<VirtualHardDisk> vhd = default;
-            Optional<VirtualHardDisk> image = default;
-            Optional<CachingType> caching = default;
-            Optional<bool> writeAcceleratorEnabled = default;
-            Optional<DiffDiskSettings> diffDiskSettings = default;
+            OperatingSystemType? osType = default;
+            DiskEncryptionSettings encryptionSettings = default;
+            string name = default;
+            VirtualHardDisk vhd = default;
+            VirtualHardDisk image = default;
+            CachingType? caching = default;
+            bool? writeAcceleratorEnabled = default;
+            DiffDiskSettings diffDiskSettings = default;
             DiskCreateOptionType createOption = default;
-            Optional<int> diskSizeGB = default;
-            Optional<ManagedDiskParameters> managedDisk = default;
+            int? diskSizeGB = default;
+            ManagedDiskParameters managedDisk = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -230,17 +231,17 @@ namespace Azure.ResourceManager.Sample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new OSDisk(
-                Optional.ToNullable(osType),
-                encryptionSettings.Value,
-                name.Value,
-                vhd.Value,
-                image.Value,
-                Optional.ToNullable(caching),
-                Optional.ToNullable(writeAcceleratorEnabled),
-                diffDiskSettings.Value,
+                osType,
+                encryptionSettings,
+                name,
+                vhd,
+                image,
+                caching,
+                writeAcceleratorEnabled,
+                diffDiskSettings,
                 createOption,
-                Optional.ToNullable(diskSizeGB),
-                managedDisk.Value,
+                diskSizeGB,
+                managedDisk,
                 serializedAdditionalRawData);
         }
 
@@ -249,7 +250,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 builder.Append("  name:");
                 if (Name.Contains(Environment.NewLine))
@@ -263,44 +264,44 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (OSType.HasValue)
+            if (Optional.IsDefined(OSType))
             {
                 builder.Append("  osType:");
                 builder.AppendLine($" '{OSType.Value.ToSerialString()}'");
             }
 
-            if (EncryptionSettings != null)
+            if (Optional.IsDefined(EncryptionSettings))
             {
                 builder.Append("  encryptionSettings:");
                 AppendChildObject(builder, EncryptionSettings, options, 2, false);
             }
 
-            if (Vhd != null)
+            if (Optional.IsDefined(Vhd))
             {
                 builder.Append("  vhd:");
                 AppendChildObject(builder, Vhd, options, 2, false);
             }
 
-            if (Image != null)
+            if (Optional.IsDefined(Image))
             {
                 builder.Append("  image:");
                 AppendChildObject(builder, Image, options, 2, false);
             }
 
-            if (Caching.HasValue)
+            if (Optional.IsDefined(Caching))
             {
                 builder.Append("  caching:");
                 builder.AppendLine($" '{Caching.Value.ToSerialString()}'");
             }
 
-            if (WriteAcceleratorEnabled.HasValue)
+            if (Optional.IsDefined(WriteAcceleratorEnabled))
             {
                 builder.Append("  writeAcceleratorEnabled:");
                 var boolValue = WriteAcceleratorEnabled.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
             }
 
-            if (DiffDiskSettings != null)
+            if (Optional.IsDefined(DiffDiskSettings))
             {
                 builder.Append("  diffDiskSettings:");
                 AppendChildObject(builder, DiffDiskSettings, options, 2, false);
@@ -309,13 +310,13 @@ namespace Azure.ResourceManager.Sample.Models
             builder.Append("  createOption:");
             builder.AppendLine($" '{CreateOption.ToString()}'");
 
-            if (DiskSizeGB.HasValue)
+            if (Optional.IsDefined(DiskSizeGB))
             {
                 builder.Append("  diskSizeGB:");
                 builder.AppendLine($" {DiskSizeGB.Value}");
             }
 
-            if (ManagedDisk != null)
+            if (Optional.IsDefined(ManagedDisk))
             {
                 builder.Append("  managedDisk:");
                 AppendChildObject(builder, ManagedDisk, options, 2, false);

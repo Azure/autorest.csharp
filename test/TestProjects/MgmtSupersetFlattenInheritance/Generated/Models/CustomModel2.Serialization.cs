@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtSupersetFlattenInheritance;
 
 namespace MgmtSupersetFlattenInheritance.Models
 {
@@ -15,24 +16,24 @@ namespace MgmtSupersetFlattenInheritance.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (Bar != null)
+            if (Optional.IsDefined(Bar))
             {
                 writer.WritePropertyName("bar"u8);
                 writer.WriteStringValue(Bar);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (IdPropertiesId != null)
+            if (Optional.IsDefined(IdPropertiesId))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(IdPropertiesId);
             }
-            if (Foo != null)
+            if (Optional.IsDefined(Foo))
             {
                 writer.WritePropertyName("foo"u8);
                 writer.WriteStringValue(Foo);
@@ -47,10 +48,10 @@ namespace MgmtSupersetFlattenInheritance.Models
             {
                 return null;
             }
-            Optional<string> id = default;
-            Optional<string> bar = default;
-            Optional<string> id0 = default;
-            Optional<string> foo = default;
+            string id = default;
+            string bar = default;
+            string id0 = default;
+            string foo = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -86,7 +87,7 @@ namespace MgmtSupersetFlattenInheritance.Models
                     continue;
                 }
             }
-            return new CustomModel2(id.Value, bar.Value, id0.Value, foo.Value);
+            return new CustomModel2(id, bar, id0, foo);
         }
     }
 }

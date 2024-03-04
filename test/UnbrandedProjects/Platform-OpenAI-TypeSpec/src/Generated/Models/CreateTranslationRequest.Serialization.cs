@@ -7,6 +7,7 @@ using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -27,17 +28,17 @@ namespace OpenAI.Models
             writer.WriteBase64StringValue(File.ToArray(), "D");
             writer.WritePropertyName("model"u8);
             writer.WriteStringValue(Model.ToString());
-            if (Prompt != null)
+            if (Optional.IsDefined(Prompt))
             {
                 writer.WritePropertyName("prompt"u8);
                 writer.WriteStringValue(Prompt);
             }
-            if (ResponseFormat.HasValue)
+            if (Optional.IsDefined(ResponseFormat))
             {
                 writer.WritePropertyName("response_format"u8);
                 writer.WriteStringValue(ResponseFormat.Value.ToString());
             }
-            if (Temperature.HasValue)
+            if (Optional.IsDefined(Temperature))
             {
                 writer.WritePropertyName("temperature"u8);
                 writer.WriteNumberValue(Temperature.Value);
@@ -82,9 +83,9 @@ namespace OpenAI.Models
             }
             BinaryData file = default;
             CreateTranslationRequestModel model = default;
-            OptionalProperty<string> prompt = default;
-            OptionalProperty<CreateTranslationRequestResponseFormat> responseFormat = default;
-            OptionalProperty<double> temperature = default;
+            string prompt = default;
+            CreateTranslationRequestResponseFormat? responseFormat = default;
+            double? temperature = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -131,9 +132,9 @@ namespace OpenAI.Models
             return new CreateTranslationRequest(
                 file,
                 model,
-                prompt.Value,
-                OptionalProperty.ToNullable(responseFormat),
-                OptionalProperty.ToNullable(temperature),
+                prompt,
+                responseFormat,
+                temperature,
                 serializedAdditionalRawData);
         }
 

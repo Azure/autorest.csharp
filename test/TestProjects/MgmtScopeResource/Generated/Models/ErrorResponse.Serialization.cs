@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace MgmtScopeResource.Models
 {
@@ -18,7 +17,7 @@ namespace MgmtScopeResource.Models
             {
                 return null;
             }
-            Optional<string> error = default;
+            string error = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("error"u8))
@@ -27,7 +26,7 @@ namespace MgmtScopeResource.Models
                     continue;
                 }
             }
-            return new ErrorResponse(error.Value);
+            return new ErrorResponse(error);
         }
     }
 }

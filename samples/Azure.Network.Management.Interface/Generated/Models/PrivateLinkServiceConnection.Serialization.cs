@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Network.Management.Interface;
 
 namespace Azure.Network.Management.Interface.Models
 {
@@ -16,24 +17,24 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (PrivateLinkServiceId != null)
+            if (Optional.IsDefined(PrivateLinkServiceId))
             {
                 writer.WritePropertyName("privateLinkServiceId"u8);
                 writer.WriteStringValue(PrivateLinkServiceId);
             }
-            if (!(GroupIds is ChangeTrackingList<string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(GroupIds))
             {
                 writer.WritePropertyName("groupIds"u8);
                 writer.WriteStartArray();
@@ -43,12 +44,12 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (RequestMessage != null)
+            if (Optional.IsDefined(RequestMessage))
             {
                 writer.WritePropertyName("requestMessage"u8);
                 writer.WriteStringValue(RequestMessage);
             }
-            if (PrivateLinkServiceConnectionState != null)
+            if (Optional.IsDefined(PrivateLinkServiceConnectionState))
             {
                 writer.WritePropertyName("privateLinkServiceConnectionState"u8);
                 writer.WriteObjectValue(PrivateLinkServiceConnectionState);
@@ -63,15 +64,15 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> type = default;
-            Optional<string> etag = default;
-            Optional<string> id = default;
-            Optional<ProvisioningState> provisioningState = default;
-            Optional<string> privateLinkServiceId = default;
+            string name = default;
+            string type = default;
+            string etag = default;
+            string id = default;
+            ProvisioningState? provisioningState = default;
+            string privateLinkServiceId = default;
             IList<string> groupIds = default;
-            Optional<string> requestMessage = default;
-            Optional<PrivateLinkServiceConnectionState> privateLinkServiceConnectionState = default;
+            string requestMessage = default;
+            PrivateLinkServiceConnectionState privateLinkServiceConnectionState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -150,15 +151,15 @@ namespace Azure.Network.Management.Interface.Models
                 }
             }
             return new PrivateLinkServiceConnection(
-                id.Value,
-                name.Value,
-                type.Value,
-                etag.Value,
-                Optional.ToNullable(provisioningState),
-                privateLinkServiceId.Value,
+                id,
+                name,
+                type,
+                etag,
+                provisioningState,
+                privateLinkServiceId,
                 groupIds ?? new ChangeTrackingList<string>(),
-                requestMessage.Value,
-                privateLinkServiceConnectionState.Value);
+                requestMessage,
+                privateLinkServiceConnectionState);
         }
     }
 }

@@ -12,6 +12,7 @@ using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -45,7 +46,7 @@ namespace MgmtDiscriminator.Models
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format != "W" && SystemData != null)
+            if (options.Format != "W" && Optional.IsDefined(SystemData))
             {
                 writer.WritePropertyName("systemData"u8);
                 JsonSerializer.Serialize(writer, SystemData);
@@ -63,7 +64,7 @@ namespace MgmtDiscriminator.Models
                 JsonSerializer.Serialize(writer, document.RootElement);
             }
 #endif
-            if (ResourceGroup != null)
+            if (Optional.IsDefined(ResourceGroup))
             {
                 writer.WritePropertyName("resourceGroup"u8);
                 writer.WriteStringValue(ResourceGroup);
@@ -111,10 +112,10 @@ namespace MgmtDiscriminator.Models
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
+            SystemData systemData = default;
             string roleDefinitionId = default;
             BinaryData principalIds = default;
-            Optional<string> resourceGroup = default;
+            string resourceGroup = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -185,12 +186,12 @@ namespace MgmtDiscriminator.Models
                 id,
                 name,
                 type,
-                systemData.Value,
+                systemData,
                 kind,
                 serializedAdditionalRawData,
                 roleDefinitionId,
                 principalIds,
-                resourceGroup.Value);
+                resourceGroup);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -198,7 +199,7 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 builder.Append("  name:");
                 if (Name.Contains(Environment.NewLine))
@@ -215,13 +216,13 @@ namespace MgmtDiscriminator.Models
             builder.Append("  kind:");
             builder.AppendLine($" '{Kind.ToString()}'");
 
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 builder.Append("  id:");
                 builder.AppendLine($" '{Id.ToString()}'");
             }
 
-            if (SystemData != null)
+            if (Optional.IsDefined(SystemData))
             {
                 builder.Append("  systemData:");
                 builder.AppendLine($" '{SystemData.ToString()}'");
@@ -229,7 +230,7 @@ namespace MgmtDiscriminator.Models
 
             builder.Append("  properties:");
             builder.AppendLine(" {");
-            if (RoleDefinitionId != null)
+            if (Optional.IsDefined(RoleDefinitionId))
             {
                 builder.Append("    roleDefinitionId:");
                 if (RoleDefinitionId.Contains(Environment.NewLine))
@@ -243,13 +244,13 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            if (PrincipalIds != null)
+            if (Optional.IsDefined(PrincipalIds))
             {
                 builder.Append("    principalIds:");
                 builder.AppendLine($" '{PrincipalIds.ToString()}'");
             }
 
-            if (ResourceGroup != null)
+            if (Optional.IsDefined(ResourceGroup))
             {
                 builder.Append("    resourceGroup:");
                 if (ResourceGroup.Contains(Environment.NewLine))

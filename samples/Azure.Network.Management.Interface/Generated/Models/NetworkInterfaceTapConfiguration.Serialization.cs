@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Network.Management.Interface;
 
 namespace Azure.Network.Management.Interface.Models
 {
@@ -15,19 +16,19 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (VirtualNetworkTap != null)
+            if (Optional.IsDefined(VirtualNetworkTap))
             {
                 writer.WritePropertyName("virtualNetworkTap"u8);
                 writer.WriteObjectValue(VirtualNetworkTap);
@@ -42,12 +43,12 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> etag = default;
-            Optional<string> type = default;
-            Optional<string> id = default;
-            Optional<VirtualNetworkTap> virtualNetworkTap = default;
-            Optional<ProvisioningState> provisioningState = default;
+            string name = default;
+            string etag = default;
+            string type = default;
+            string id = default;
+            VirtualNetworkTap virtualNetworkTap = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -102,12 +103,12 @@ namespace Azure.Network.Management.Interface.Models
                 }
             }
             return new NetworkInterfaceTapConfiguration(
-                id.Value,
-                name.Value,
-                etag.Value,
-                type.Value,
-                virtualNetworkTap.Value,
-                Optional.ToNullable(provisioningState));
+                id,
+                name,
+                etag,
+                type,
+                virtualNetworkTap,
+                provisioningState);
         }
     }
 }

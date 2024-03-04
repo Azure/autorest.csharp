@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Storage;
 
 namespace Azure.ResourceManager.Storage.Models
 {
@@ -17,7 +18,7 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (UseSubDomainName.HasValue)
+            if (Optional.IsDefined(UseSubDomainName))
             {
                 writer.WritePropertyName("useSubDomainName"u8);
                 writer.WriteBooleanValue(UseSubDomainName.Value);
@@ -32,7 +33,7 @@ namespace Azure.ResourceManager.Storage.Models
                 return null;
             }
             string name = default;
-            Optional<bool> useSubDomainName = default;
+            bool? useSubDomainName = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -50,7 +51,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new CustomDomain(name, Optional.ToNullable(useSubDomainName));
+            return new CustomDomain(name, useSubDomainName);
         }
     }
 }

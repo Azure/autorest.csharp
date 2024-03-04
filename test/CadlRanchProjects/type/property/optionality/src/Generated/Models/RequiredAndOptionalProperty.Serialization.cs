@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using _Type.Property.Optionality;
 
 namespace _Type.Property.Optionality.Models
 {
@@ -27,7 +28,7 @@ namespace _Type.Property.Optionality.Models
             }
 
             writer.WriteStartObject();
-            if (OptionalProperty != null)
+            if (Optional.IsDefined(OptionalProperty))
             {
                 writer.WritePropertyName("optionalProperty"u8);
                 writer.WriteStringValue(OptionalProperty);
@@ -72,7 +73,7 @@ namespace _Type.Property.Optionality.Models
             {
                 return null;
             }
-            Optional<string> optionalProperty = default;
+            string optionalProperty = default;
             int requiredProperty = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -94,7 +95,7 @@ namespace _Type.Property.Optionality.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new RequiredAndOptionalProperty(optionalProperty.Value, requiredProperty, serializedAdditionalRawData);
+            return new RequiredAndOptionalProperty(optionalProperty, requiredProperty, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<RequiredAndOptionalProperty>.Write(ModelReaderWriterOptions options)

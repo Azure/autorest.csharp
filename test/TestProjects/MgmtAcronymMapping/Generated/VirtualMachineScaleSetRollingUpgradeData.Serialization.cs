@@ -18,7 +18,7 @@ namespace MgmtAcronymMapping
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -48,11 +48,11 @@ namespace MgmtAcronymMapping
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
-            Optional<RollingUpgradePolicy> policy = default;
-            Optional<RollingUpgradeRunningStatus> runningStatus = default;
-            Optional<RollingUpgradeProgressInfo> progress = default;
-            Optional<ApiError> error = default;
+            SystemData systemData = default;
+            RollingUpgradePolicy policy = default;
+            RollingUpgradeRunningStatus runningStatus = default;
+            RollingUpgradeProgressInfo progress = default;
+            ApiError error = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("tags"u8))
@@ -151,13 +151,13 @@ namespace MgmtAcronymMapping
                 id,
                 name,
                 type,
-                systemData.Value,
+                systemData,
                 tags ?? new ChangeTrackingDictionary<string, string>(),
                 location,
-                policy.Value,
-                runningStatus.Value,
-                progress.Value,
-                error.Value);
+                policy,
+                runningStatus,
+                progress,
+                error);
         }
     }
 }

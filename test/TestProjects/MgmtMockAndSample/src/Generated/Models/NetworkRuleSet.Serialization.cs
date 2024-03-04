@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
@@ -16,17 +17,17 @@ namespace MgmtMockAndSample.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Bypass.HasValue)
+            if (Optional.IsDefined(Bypass))
             {
                 writer.WritePropertyName("bypass"u8);
                 writer.WriteStringValue(Bypass.Value.ToString());
             }
-            if (DefaultAction.HasValue)
+            if (Optional.IsDefined(DefaultAction))
             {
                 writer.WritePropertyName("defaultAction"u8);
                 writer.WriteStringValue(DefaultAction.Value.ToString());
             }
-            if (!(IpRules is ChangeTrackingList<IPRule> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(IpRules))
             {
                 writer.WritePropertyName("ipRules"u8);
                 writer.WriteStartArray();
@@ -36,7 +37,7 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!(VirtualNetworkRules is ChangeTrackingList<VirtualNetworkRule> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(VirtualNetworkRules))
             {
                 writer.WritePropertyName("virtualNetworkRules"u8);
                 writer.WriteStartArray();
@@ -55,8 +56,8 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<NetworkRuleBypassOption> bypass = default;
-            Optional<NetworkRuleAction> defaultAction = default;
+            NetworkRuleBypassOption? bypass = default;
+            NetworkRuleAction? defaultAction = default;
             IList<IPRule> ipRules = default;
             IList<VirtualNetworkRule> virtualNetworkRules = default;
             foreach (var property in element.EnumerateObject())
@@ -108,7 +109,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new NetworkRuleSet(Optional.ToNullable(bypass), Optional.ToNullable(defaultAction), ipRules ?? new ChangeTrackingList<IPRule>(), virtualNetworkRules ?? new ChangeTrackingList<VirtualNetworkRule>());
+            return new NetworkRuleSet(bypass, defaultAction, ipRules ?? new ChangeTrackingList<IPRule>(), virtualNetworkRules ?? new ChangeTrackingList<VirtualNetworkRule>());
         }
     }
 }

@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using validation;
 
 namespace validation.Models
 {
@@ -26,7 +27,7 @@ namespace validation.Models
             }
 
             writer.WriteStartObject();
-            if (!(DisplayNames is ChangeTrackingList<string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(DisplayNames))
             {
                 writer.WritePropertyName("display_names"u8);
                 writer.WriteStartArray();
@@ -36,12 +37,12 @@ namespace validation.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Capacity.HasValue)
+            if (Optional.IsDefined(Capacity))
             {
                 writer.WritePropertyName("capacity"u8);
                 writer.WriteNumberValue(Capacity.Value);
             }
-            if (Image != null)
+            if (Optional.IsDefined(Image))
             {
                 writer.WritePropertyName("image"u8);
                 writer.WriteStringValue(Image);
@@ -54,7 +55,7 @@ namespace validation.Models
             writer.WriteNumberValue(ConstInt.ToSerialInt32());
             writer.WritePropertyName("constString"u8);
             writer.WriteStringValue(ConstString.ToString());
-            if (ConstStringAsEnum.HasValue)
+            if (Optional.IsDefined(ConstStringAsEnum))
             {
                 writer.WritePropertyName("constStringAsEnum"u8);
                 writer.WriteStringValue(ConstStringAsEnum.Value.ToString());
@@ -98,13 +99,13 @@ namespace validation.Models
                 return null;
             }
             IList<string> displayNames = default;
-            Optional<int> capacity = default;
-            Optional<string> image = default;
+            int? capacity = default;
+            string image = default;
             ChildProduct child = default;
             ConstantProduct constChild = default;
             ProductConstInt constInt = default;
             ProductConstString constString = default;
-            Optional<EnumConst> constStringAsEnum = default;
+            EnumConst? constStringAsEnum = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -174,13 +175,13 @@ namespace validation.Models
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new Product(
                 displayNames ?? new ChangeTrackingList<string>(),
-                Optional.ToNullable(capacity),
-                image.Value,
+                capacity,
+                image,
                 child,
                 constChild,
                 constInt,
                 constString,
-                Optional.ToNullable(constStringAsEnum),
+                constStringAsEnum,
                 serializedAdditionalRawData);
         }
 

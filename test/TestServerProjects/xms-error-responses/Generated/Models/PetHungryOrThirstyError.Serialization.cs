@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using xms_error_responses;
 
 namespace xms_error_responses.Models
 {
@@ -26,24 +27,24 @@ namespace xms_error_responses.Models
             }
 
             writer.WriteStartObject();
-            if (HungryOrThirsty != null)
+            if (Optional.IsDefined(HungryOrThirsty))
             {
                 writer.WritePropertyName("hungryOrThirsty"u8);
                 writer.WriteStringValue(HungryOrThirsty);
             }
-            if (Reason != null)
+            if (Optional.IsDefined(Reason))
             {
                 writer.WritePropertyName("reason"u8);
                 writer.WriteStringValue(Reason);
             }
             writer.WritePropertyName("errorType"u8);
             writer.WriteStringValue(ErrorType);
-            if (ErrorMessage != null)
+            if (Optional.IsDefined(ErrorMessage))
             {
                 writer.WritePropertyName("errorMessage"u8);
                 writer.WriteStringValue(ErrorMessage);
             }
-            if (ActionResponse != null)
+            if (Optional.IsDefined(ActionResponse))
             {
                 writer.WritePropertyName("actionResponse"u8);
                 writer.WriteStringValue(ActionResponse);
@@ -86,11 +87,11 @@ namespace xms_error_responses.Models
             {
                 return null;
             }
-            Optional<string> hungryOrThirsty = default;
-            Optional<string> reason = default;
+            string hungryOrThirsty = default;
+            string reason = default;
             string errorType = default;
-            Optional<string> errorMessage = default;
-            Optional<string> actionResponse = default;
+            string errorMessage = default;
+            string actionResponse = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -127,12 +128,12 @@ namespace xms_error_responses.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new PetHungryOrThirstyError(
-                actionResponse.Value,
+                actionResponse,
                 serializedAdditionalRawData,
                 errorType,
-                errorMessage.Value,
-                reason.Value,
-                hungryOrThirsty.Value);
+                errorMessage,
+                reason,
+                hungryOrThirsty);
         }
 
         BinaryData IPersistableModel<PetHungryOrThirstyError>.Write(ModelReaderWriterOptions options)

@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Storage;
 
 namespace Azure.ResourceManager.Storage.Models
 {
@@ -16,7 +17,7 @@ namespace Azure.ResourceManager.Storage.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (!(CorsRulesValue is ChangeTrackingList<CorsRule> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(CorsRulesValue))
             {
                 writer.WritePropertyName("corsRules"u8);
                 writer.WriteStartArray();

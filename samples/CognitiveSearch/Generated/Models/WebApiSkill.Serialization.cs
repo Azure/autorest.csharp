@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {
@@ -19,7 +20,7 @@ namespace CognitiveSearch.Models
             writer.WriteStartObject();
             writer.WritePropertyName("uri"u8);
             writer.WriteStringValue(Uri);
-            if (!(HttpHeaders is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(HttpHeaders))
             {
                 writer.WritePropertyName("httpHeaders"u8);
                 writer.WriteStartObject();
@@ -30,17 +31,17 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndObject();
             }
-            if (HttpMethod != null)
+            if (Optional.IsDefined(HttpMethod))
             {
                 writer.WritePropertyName("httpMethod"u8);
                 writer.WriteStringValue(HttpMethod);
             }
-            if (Timeout.HasValue)
+            if (Optional.IsDefined(Timeout))
             {
                 writer.WritePropertyName("timeout"u8);
                 writer.WriteStringValue(Timeout.Value, "P");
             }
-            if (BatchSize.HasValue)
+            if (Optional.IsDefined(BatchSize))
             {
                 if (BatchSize != null)
                 {
@@ -52,7 +53,7 @@ namespace CognitiveSearch.Models
                     writer.WriteNull("batchSize");
                 }
             }
-            if (DegreeOfParallelism.HasValue)
+            if (Optional.IsDefined(DegreeOfParallelism))
             {
                 if (DegreeOfParallelism != null)
                 {
@@ -66,17 +67,17 @@ namespace CognitiveSearch.Models
             }
             writer.WritePropertyName("@odata.type"u8);
             writer.WriteStringValue(OdataType);
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Description != null)
+            if (Optional.IsDefined(Description))
             {
                 writer.WritePropertyName("description"u8);
                 writer.WriteStringValue(Description);
             }
-            if (Context != null)
+            if (Optional.IsDefined(Context))
             {
                 writer.WritePropertyName("context"u8);
                 writer.WriteStringValue(Context);
@@ -106,14 +107,14 @@ namespace CognitiveSearch.Models
             }
             string uri = default;
             IDictionary<string, string> httpHeaders = default;
-            Optional<string> httpMethod = default;
-            Optional<TimeSpan> timeout = default;
-            Optional<int?> batchSize = default;
-            Optional<int?> degreeOfParallelism = default;
+            string httpMethod = default;
+            TimeSpan? timeout = default;
+            int? batchSize = default;
+            int? degreeOfParallelism = default;
             string odataType = default;
-            Optional<string> name = default;
-            Optional<string> description = default;
-            Optional<string> context = default;
+            string name = default;
+            string description = default;
+            string context = default;
             IList<InputFieldMappingEntry> inputs = default;
             IList<OutputFieldMappingEntry> outputs = default;
             foreach (var property in element.EnumerateObject())
@@ -214,17 +215,17 @@ namespace CognitiveSearch.Models
             }
             return new WebApiSkill(
                 odataType,
-                name.Value,
-                description.Value,
-                context.Value,
+                name,
+                description,
+                context,
                 inputs,
                 outputs,
                 uri,
                 httpHeaders ?? new ChangeTrackingDictionary<string, string>(),
-                httpMethod.Value,
-                Optional.ToNullable(timeout),
-                Optional.ToNullable(batchSize),
-                Optional.ToNullable(degreeOfParallelism));
+                httpMethod,
+                timeout,
+                batchSize,
+                degreeOfParallelism);
         }
     }
 }

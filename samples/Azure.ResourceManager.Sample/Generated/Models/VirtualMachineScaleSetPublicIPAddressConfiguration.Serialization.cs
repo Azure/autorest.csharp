@@ -13,6 +13,7 @@ using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -33,17 +34,17 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteStringValue(Name);
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (IdleTimeoutInMinutes.HasValue)
+            if (Optional.IsDefined(IdleTimeoutInMinutes))
             {
                 writer.WritePropertyName("idleTimeoutInMinutes"u8);
                 writer.WriteNumberValue(IdleTimeoutInMinutes.Value);
             }
-            if (DnsSettings != null)
+            if (Optional.IsDefined(DnsSettings))
             {
                 writer.WritePropertyName("dnsSettings"u8);
                 writer.WriteObjectValue(DnsSettings);
             }
-            if (!(IPTags is ChangeTrackingList<VirtualMachineScaleSetIPTag> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(IPTags))
             {
                 writer.WritePropertyName("ipTags"u8);
                 writer.WriteStartArray();
@@ -53,12 +54,12 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (PublicIPPrefix != null)
+            if (Optional.IsDefined(PublicIPPrefix))
             {
                 writer.WritePropertyName("publicIPPrefix"u8);
                 JsonSerializer.Serialize(writer, PublicIPPrefix);
             }
-            if (PublicIPAddressVersion.HasValue)
+            if (Optional.IsDefined(PublicIPAddressVersion))
             {
                 writer.WritePropertyName("publicIPAddressVersion"u8);
                 writer.WriteStringValue(PublicIPAddressVersion.Value.ToString());
@@ -103,11 +104,11 @@ namespace Azure.ResourceManager.Sample.Models
                 return null;
             }
             string name = default;
-            Optional<int> idleTimeoutInMinutes = default;
-            Optional<VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings> dnsSettings = default;
+            int? idleTimeoutInMinutes = default;
+            VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings dnsSettings = default;
             IList<VirtualMachineScaleSetIPTag> ipTags = default;
-            Optional<WritableSubResource> publicIPPrefix = default;
-            Optional<IPVersion> publicIPAddressVersion = default;
+            WritableSubResource publicIPPrefix = default;
+            IPVersion? publicIPAddressVersion = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -187,11 +188,11 @@ namespace Azure.ResourceManager.Sample.Models
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new VirtualMachineScaleSetPublicIPAddressConfiguration(
                 name,
-                Optional.ToNullable(idleTimeoutInMinutes),
-                dnsSettings.Value,
+                idleTimeoutInMinutes,
+                dnsSettings,
                 ipTags ?? new ChangeTrackingList<VirtualMachineScaleSetIPTag>(),
                 publicIPPrefix,
-                Optional.ToNullable(publicIPAddressVersion),
+                publicIPAddressVersion,
                 serializedAdditionalRawData);
         }
 
@@ -200,7 +201,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 builder.Append("  name:");
                 if (Name.Contains(Environment.NewLine))
@@ -216,19 +217,19 @@ namespace Azure.ResourceManager.Sample.Models
 
             builder.Append("  properties:");
             builder.AppendLine(" {");
-            if (IdleTimeoutInMinutes.HasValue)
+            if (Optional.IsDefined(IdleTimeoutInMinutes))
             {
                 builder.Append("    idleTimeoutInMinutes:");
                 builder.AppendLine($" {IdleTimeoutInMinutes.Value}");
             }
 
-            if (DnsSettings != null)
+            if (Optional.IsDefined(DnsSettings))
             {
                 builder.Append("    dnsSettings:");
                 AppendChildObject(builder, DnsSettings, options, 4, false);
             }
 
-            if (!(IPTags is ChangeTrackingList<VirtualMachineScaleSetIPTag> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(IPTags))
             {
                 if (IPTags.Any())
                 {
@@ -242,13 +243,13 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (PublicIPPrefix != null)
+            if (Optional.IsDefined(PublicIPPrefix))
             {
                 builder.Append("    publicIPPrefix:");
                 AppendChildObject(builder, PublicIPPrefix, options, 4, false);
             }
 
-            if (PublicIPAddressVersion.HasValue)
+            if (Optional.IsDefined(PublicIPAddressVersion))
             {
                 builder.Append("    publicIPAddressVersion:");
                 builder.AppendLine($" '{PublicIPAddressVersion.Value.ToString()}'");

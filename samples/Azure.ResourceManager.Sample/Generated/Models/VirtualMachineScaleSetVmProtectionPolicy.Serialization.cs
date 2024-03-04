@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -27,12 +28,12 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (ProtectFromScaleIn.HasValue)
+            if (Optional.IsDefined(ProtectFromScaleIn))
             {
                 writer.WritePropertyName("protectFromScaleIn"u8);
                 writer.WriteBooleanValue(ProtectFromScaleIn.Value);
             }
-            if (ProtectFromScaleSetActions.HasValue)
+            if (Optional.IsDefined(ProtectFromScaleSetActions))
             {
                 writer.WritePropertyName("protectFromScaleSetActions"u8);
                 writer.WriteBooleanValue(ProtectFromScaleSetActions.Value);
@@ -75,8 +76,8 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<bool> protectFromScaleIn = default;
-            Optional<bool> protectFromScaleSetActions = default;
+            bool? protectFromScaleIn = default;
+            bool? protectFromScaleSetActions = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -105,7 +106,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineScaleSetVmProtectionPolicy(Optional.ToNullable(protectFromScaleIn), Optional.ToNullable(protectFromScaleSetActions), serializedAdditionalRawData);
+            return new VirtualMachineScaleSetVmProtectionPolicy(protectFromScaleIn, protectFromScaleSetActions, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -113,14 +114,14 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (ProtectFromScaleIn.HasValue)
+            if (Optional.IsDefined(ProtectFromScaleIn))
             {
                 builder.Append("  protectFromScaleIn:");
                 var boolValue = ProtectFromScaleIn.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
             }
 
-            if (ProtectFromScaleSetActions.HasValue)
+            if (Optional.IsDefined(ProtectFromScaleSetActions))
             {
                 builder.Append("  protectFromScaleSetActions:");
                 var boolValue = ProtectFromScaleSetActions.Value == true ? "true" : "false";

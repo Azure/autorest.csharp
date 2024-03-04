@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using NamespaceForEnums;
+using TypeSchemaMapping;
 
 namespace CustomNamespace
 {
@@ -29,22 +30,22 @@ namespace CustomNamespace
             writer.WriteStartObject();
             writer.WritePropertyName("ModelProperty"u8);
             writer.WriteStartObject();
-            if (CustomizedFlattenedStringProperty != null)
+            if (Optional.IsDefined(CustomizedFlattenedStringProperty))
             {
                 writer.WritePropertyName("ModelProperty"u8);
                 writer.WriteStringValue(CustomizedFlattenedStringProperty);
             }
-            if (PropertyToField != null)
+            if (Optional.IsDefined(PropertyToField))
             {
                 writer.WritePropertyName("PropertyToField"u8);
                 writer.WriteStringValue(PropertyToField);
             }
-            if (Fruit.HasValue)
+            if (Optional.IsDefined(Fruit))
             {
                 writer.WritePropertyName("Fruit"u8);
                 writer.WriteStringValue(Fruit.Value.ToSerialString());
             }
-            if (DaysOfWeek.HasValue)
+            if (Optional.IsDefined(DaysOfWeek))
             {
                 writer.WritePropertyName("DaysOfWeek"u8);
                 writer.WriteStringValue(DaysOfWeek.Value.ToString());
@@ -88,10 +89,10 @@ namespace CustomNamespace
         {
             options ??= new ModelReaderWriterOptions("W");
 
-            Optional<string> modelProperty = default;
-            Optional<string> propertyToField = default;
-            Optional<CustomFruitEnum> fruit = default;
-            Optional<CustomDaysOfWeek> daysOfWeek = default;
+            string modelProperty = default;
+            string propertyToField = default;
+            CustomFruitEnum? fruit = default;
+            CustomDaysOfWeek? daysOfWeek = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -142,7 +143,7 @@ namespace CustomNamespace
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new RenamedModelStruct(modelProperty.Value, propertyToField.Value, Optional.ToNullable(fruit), Optional.ToNullable(daysOfWeek), serializedAdditionalRawData);
+            return new RenamedModelStruct(modelProperty, propertyToField, fruit, daysOfWeek, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<RenamedModelStruct>.Write(ModelReaderWriterOptions options)

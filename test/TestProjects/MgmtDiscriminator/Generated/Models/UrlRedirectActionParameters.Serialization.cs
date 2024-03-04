@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -31,27 +32,27 @@ namespace MgmtDiscriminator.Models
             writer.WriteStringValue(TypeName.ToString());
             writer.WritePropertyName("redirectType"u8);
             writer.WriteStringValue(RedirectType.ToString());
-            if (DestinationProtocol.HasValue)
+            if (Optional.IsDefined(DestinationProtocol))
             {
                 writer.WritePropertyName("destinationProtocol"u8);
                 writer.WriteStringValue(DestinationProtocol.Value.ToString());
             }
-            if (CustomPath != null)
+            if (Optional.IsDefined(CustomPath))
             {
                 writer.WritePropertyName("customPath"u8);
                 writer.WriteStringValue(CustomPath);
             }
-            if (CustomHostname != null)
+            if (Optional.IsDefined(CustomHostname))
             {
                 writer.WritePropertyName("customHostname"u8);
                 writer.WriteStringValue(CustomHostname);
             }
-            if (CustomQueryString != null)
+            if (Optional.IsDefined(CustomQueryString))
             {
                 writer.WritePropertyName("customQueryString"u8);
                 writer.WriteStringValue(CustomQueryString);
             }
-            if (CustomFragment != null)
+            if (Optional.IsDefined(CustomFragment))
             {
                 writer.WritePropertyName("customFragment"u8);
                 writer.WriteStringValue(CustomFragment);
@@ -96,11 +97,11 @@ namespace MgmtDiscriminator.Models
             }
             UrlRedirectActionParametersTypeName typeName = default;
             RedirectType redirectType = default;
-            Optional<DestinationProtocol> destinationProtocol = default;
-            Optional<string> customPath = default;
-            Optional<string> customHostname = default;
-            Optional<string> customQueryString = default;
-            Optional<string> customFragment = default;
+            DestinationProtocol? destinationProtocol = default;
+            string customPath = default;
+            string customHostname = default;
+            string customQueryString = default;
+            string customFragment = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -153,11 +154,11 @@ namespace MgmtDiscriminator.Models
             return new UrlRedirectActionParameters(
                 typeName,
                 redirectType,
-                Optional.ToNullable(destinationProtocol),
-                customPath.Value,
-                customHostname.Value,
-                customQueryString.Value,
-                customFragment.Value,
+                destinationProtocol,
+                customPath,
+                customHostname,
+                customQueryString,
+                customFragment,
                 serializedAdditionalRawData);
         }
 
@@ -172,13 +173,13 @@ namespace MgmtDiscriminator.Models
             builder.Append("  redirectType:");
             builder.AppendLine($" '{RedirectType.ToString()}'");
 
-            if (DestinationProtocol.HasValue)
+            if (Optional.IsDefined(DestinationProtocol))
             {
                 builder.Append("  destinationProtocol:");
                 builder.AppendLine($" '{DestinationProtocol.Value.ToString()}'");
             }
 
-            if (CustomPath != null)
+            if (Optional.IsDefined(CustomPath))
             {
                 builder.Append("  customPath:");
                 if (CustomPath.Contains(Environment.NewLine))
@@ -192,7 +193,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            if (CustomHostname != null)
+            if (Optional.IsDefined(CustomHostname))
             {
                 builder.Append("  customHostname:");
                 if (CustomHostname.Contains(Environment.NewLine))
@@ -206,7 +207,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            if (CustomQueryString != null)
+            if (Optional.IsDefined(CustomQueryString))
             {
                 builder.Append("  customQueryString:");
                 if (CustomQueryString.Contains(Environment.NewLine))
@@ -220,7 +221,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            if (CustomFragment != null)
+            if (Optional.IsDefined(CustomFragment))
             {
                 builder.Append("  customFragment:");
                 if (CustomFragment.Contains(Environment.NewLine))

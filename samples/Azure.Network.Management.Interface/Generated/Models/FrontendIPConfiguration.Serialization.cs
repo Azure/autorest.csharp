@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Network.Management.Interface;
 
 namespace Azure.Network.Management.Interface.Models
 {
@@ -16,12 +17,12 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (!(Zones is ChangeTrackingList<string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Zones))
             {
                 writer.WritePropertyName("zones"u8);
                 writer.WriteStartArray();
@@ -31,39 +32,39 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (PrivateIPAddress != null)
+            if (Optional.IsDefined(PrivateIPAddress))
             {
                 writer.WritePropertyName("privateIPAddress"u8);
                 writer.WriteStringValue(PrivateIPAddress);
             }
-            if (PrivateIPAllocationMethod.HasValue)
+            if (Optional.IsDefined(PrivateIPAllocationMethod))
             {
                 writer.WritePropertyName("privateIPAllocationMethod"u8);
                 writer.WriteStringValue(PrivateIPAllocationMethod.Value.ToString());
             }
-            if (PrivateIPAddressVersion.HasValue)
+            if (Optional.IsDefined(PrivateIPAddressVersion))
             {
                 writer.WritePropertyName("privateIPAddressVersion"u8);
                 writer.WriteStringValue(PrivateIPAddressVersion.Value.ToString());
             }
-            if (Subnet != null)
+            if (Optional.IsDefined(Subnet))
             {
                 writer.WritePropertyName("subnet"u8);
                 writer.WriteObjectValue(Subnet);
             }
-            if (PublicIPAddress != null)
+            if (Optional.IsDefined(PublicIPAddress))
             {
                 writer.WritePropertyName("publicIPAddress"u8);
                 writer.WriteObjectValue(PublicIPAddress);
             }
-            if (PublicIPPrefix != null)
+            if (Optional.IsDefined(PublicIPPrefix))
             {
                 writer.WritePropertyName("publicIPPrefix"u8);
                 writer.WriteObjectValue(PublicIPPrefix);
@@ -78,22 +79,22 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> etag = default;
-            Optional<string> type = default;
+            string name = default;
+            string etag = default;
+            string type = default;
             IList<string> zones = default;
-            Optional<string> id = default;
+            string id = default;
             IReadOnlyList<SubResource> inboundNatRules = default;
             IReadOnlyList<SubResource> inboundNatPools = default;
             IReadOnlyList<SubResource> outboundRules = default;
             IReadOnlyList<SubResource> loadBalancingRules = default;
-            Optional<string> privateIPAddress = default;
-            Optional<IPAllocationMethod> privateIPAllocationMethod = default;
-            Optional<IPVersion> privateIPAddressVersion = default;
-            Optional<Subnet> subnet = default;
-            Optional<PublicIPAddress> publicIPAddress = default;
-            Optional<SubResource> publicIPPrefix = default;
-            Optional<ProvisioningState> provisioningState = default;
+            string privateIPAddress = default;
+            IPAllocationMethod? privateIPAllocationMethod = default;
+            IPVersion? privateIPAddressVersion = default;
+            Subnet subnet = default;
+            PublicIPAddress publicIPAddress = default;
+            SubResource publicIPPrefix = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -259,22 +260,22 @@ namespace Azure.Network.Management.Interface.Models
                 }
             }
             return new FrontendIPConfiguration(
-                id.Value,
-                name.Value,
-                etag.Value,
-                type.Value,
+                id,
+                name,
+                etag,
+                type,
                 zones ?? new ChangeTrackingList<string>(),
                 inboundNatRules ?? new ChangeTrackingList<SubResource>(),
                 inboundNatPools ?? new ChangeTrackingList<SubResource>(),
                 outboundRules ?? new ChangeTrackingList<SubResource>(),
                 loadBalancingRules ?? new ChangeTrackingList<SubResource>(),
-                privateIPAddress.Value,
-                Optional.ToNullable(privateIPAllocationMethod),
-                Optional.ToNullable(privateIPAddressVersion),
-                subnet.Value,
-                publicIPAddress.Value,
-                publicIPPrefix.Value,
-                Optional.ToNullable(provisioningState));
+                privateIPAddress,
+                privateIPAllocationMethod,
+                privateIPAddressVersion,
+                subnet,
+                publicIPAddress,
+                publicIPPrefix,
+                provisioningState);
         }
     }
 }

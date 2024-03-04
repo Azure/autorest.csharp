@@ -19,14 +19,14 @@ namespace MgmtExpandResourceTypes
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Etag != null)
+            if (Optional.IsDefined(Etag))
             {
                 writer.WritePropertyName("etag"u8);
                 writer.WriteStringValue(Etag);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (!(Metadata is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Metadata))
             {
                 writer.WritePropertyName("metadata"u8);
                 writer.WriteStartObject();
@@ -37,17 +37,17 @@ namespace MgmtExpandResourceTypes
                 }
                 writer.WriteEndObject();
             }
-            if (TTL.HasValue)
+            if (Optional.IsDefined(TTL))
             {
                 writer.WritePropertyName("TTL"u8);
                 writer.WriteNumberValue(TTL.Value);
             }
-            if (TargetResource != null)
+            if (Optional.IsDefined(TargetResource))
             {
                 writer.WritePropertyName("targetResource"u8);
                 JsonSerializer.Serialize(writer, TargetResource);
             }
-            if (!(ARecords is ChangeTrackingList<ARecord> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(ARecords))
             {
                 writer.WritePropertyName("ARecords"u8);
                 writer.WriteStartArray();
@@ -57,7 +57,7 @@ namespace MgmtExpandResourceTypes
                 }
                 writer.WriteEndArray();
             }
-            if (!(AaaaRecords is ChangeTrackingList<AaaaRecord> collection1 && collection1.IsUndefined))
+            if (Optional.IsCollectionDefined(AaaaRecords))
             {
                 writer.WritePropertyName("AAAARecords"u8);
                 writer.WriteStartArray();
@@ -67,7 +67,7 @@ namespace MgmtExpandResourceTypes
                 }
                 writer.WriteEndArray();
             }
-            if (!(MxRecords is ChangeTrackingList<MxRecord> collection2 && collection2.IsUndefined))
+            if (Optional.IsCollectionDefined(MxRecords))
             {
                 writer.WritePropertyName("MXRecords"u8);
                 writer.WriteStartArray();
@@ -77,7 +77,7 @@ namespace MgmtExpandResourceTypes
                 }
                 writer.WriteEndArray();
             }
-            if (!(NsRecords is ChangeTrackingList<NsRecord> collection3 && collection3.IsUndefined))
+            if (Optional.IsCollectionDefined(NsRecords))
             {
                 writer.WritePropertyName("NSRecords"u8);
                 writer.WriteStartArray();
@@ -87,7 +87,7 @@ namespace MgmtExpandResourceTypes
                 }
                 writer.WriteEndArray();
             }
-            if (!(PtrRecords is ChangeTrackingList<PtrRecord> collection4 && collection4.IsUndefined))
+            if (Optional.IsCollectionDefined(PtrRecords))
             {
                 writer.WritePropertyName("PTRRecords"u8);
                 writer.WriteStartArray();
@@ -97,7 +97,7 @@ namespace MgmtExpandResourceTypes
                 }
                 writer.WriteEndArray();
             }
-            if (!(SrvRecords is ChangeTrackingList<SrvRecord> collection5 && collection5.IsUndefined))
+            if (Optional.IsCollectionDefined(SrvRecords))
             {
                 writer.WritePropertyName("SRVRecords"u8);
                 writer.WriteStartArray();
@@ -107,7 +107,7 @@ namespace MgmtExpandResourceTypes
                 }
                 writer.WriteEndArray();
             }
-            if (!(TxtRecords is ChangeTrackingList<TxtRecord> collection6 && collection6.IsUndefined))
+            if (Optional.IsCollectionDefined(TxtRecords))
             {
                 writer.WritePropertyName("TXTRecords"u8);
                 writer.WriteStartArray();
@@ -117,17 +117,17 @@ namespace MgmtExpandResourceTypes
                 }
                 writer.WriteEndArray();
             }
-            if (CnameRecord != null)
+            if (Optional.IsDefined(CnameRecord))
             {
                 writer.WritePropertyName("CNAMERecord"u8);
                 writer.WriteObjectValue(CnameRecord);
             }
-            if (SoaRecord != null)
+            if (Optional.IsDefined(SoaRecord))
             {
                 writer.WritePropertyName("SOARecord"u8);
                 writer.WriteObjectValue(SoaRecord);
             }
-            if (!(CaaRecords is ChangeTrackingList<CaaRecord> collection7 && collection7.IsUndefined))
+            if (Optional.IsCollectionDefined(CaaRecords))
             {
                 writer.WritePropertyName("caaRecords"u8);
                 writer.WriteStartArray();
@@ -147,16 +147,16 @@ namespace MgmtExpandResourceTypes
             {
                 return null;
             }
-            Optional<string> etag = default;
+            string etag = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
+            SystemData systemData = default;
             IDictionary<string, string> metadata = default;
-            Optional<long> ttl = default;
-            Optional<string> fqdn = default;
-            Optional<string> provisioningState = default;
-            Optional<WritableSubResource> targetResource = default;
+            long? ttl = default;
+            string fqdn = default;
+            string provisioningState = default;
+            WritableSubResource targetResource = default;
             IList<ARecord> aRecords = default;
             IList<AaaaRecord> aaaaRecords = default;
             IList<MxRecord> mxRecords = default;
@@ -164,8 +164,8 @@ namespace MgmtExpandResourceTypes
             IList<PtrRecord> ptrRecords = default;
             IList<SrvRecord> srvRecords = default;
             IList<TxtRecord> txtRecords = default;
-            Optional<CnameRecord> cnameRecord = default;
-            Optional<SoaRecord> soaRecord = default;
+            CnameRecord cnameRecord = default;
+            SoaRecord soaRecord = default;
             IList<CaaRecord> caaRecords = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -387,12 +387,12 @@ namespace MgmtExpandResourceTypes
                 id,
                 name,
                 type,
-                systemData.Value,
-                etag.Value,
+                systemData,
+                etag,
                 metadata ?? new ChangeTrackingDictionary<string, string>(),
-                Optional.ToNullable(ttl),
-                fqdn.Value,
-                provisioningState.Value,
+                ttl,
+                fqdn,
+                provisioningState,
                 targetResource,
                 aRecords ?? new ChangeTrackingList<ARecord>(),
                 aaaaRecords ?? new ChangeTrackingList<AaaaRecord>(),
@@ -401,8 +401,8 @@ namespace MgmtExpandResourceTypes
                 ptrRecords ?? new ChangeTrackingList<PtrRecord>(),
                 srvRecords ?? new ChangeTrackingList<SrvRecord>(),
                 txtRecords ?? new ChangeTrackingList<TxtRecord>(),
-                cnameRecord.Value,
-                soaRecord.Value,
+                cnameRecord,
+                soaRecord,
                 caaRecords ?? new ChangeTrackingList<CaaRecord>());
         }
     }

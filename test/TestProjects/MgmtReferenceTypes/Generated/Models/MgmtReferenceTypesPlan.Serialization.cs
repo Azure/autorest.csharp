@@ -9,6 +9,7 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
+using MgmtReferenceTypes;
 
 namespace Azure.ResourceManager.Fake.Models
 {
@@ -24,12 +25,12 @@ namespace Azure.ResourceManager.Fake.Models
             writer.WriteStringValue(Publisher);
             writer.WritePropertyName("product"u8);
             writer.WriteStringValue(Product);
-            if (PromotionCode != null)
+            if (Optional.IsDefined(PromotionCode))
             {
                 writer.WritePropertyName("promotionCode"u8);
                 writer.WriteStringValue(PromotionCode);
             }
-            if (Version != null)
+            if (Optional.IsDefined(Version))
             {
                 writer.WritePropertyName("version"u8);
                 writer.WriteStringValue(Version);
@@ -46,8 +47,8 @@ namespace Azure.ResourceManager.Fake.Models
             string name = default;
             string publisher = default;
             string product = default;
-            Optional<string> promotionCode = default;
-            Optional<string> version = default;
+            string promotionCode = default;
+            string version = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -76,7 +77,7 @@ namespace Azure.ResourceManager.Fake.Models
                     continue;
                 }
             }
-            return new MgmtReferenceTypesPlan(name, publisher, product, promotionCode.Value, version.Value);
+            return new MgmtReferenceTypesPlan(name, publisher, product, promotionCode, version);
         }
 
         internal partial class MgmtReferenceTypesPlanConverter : JsonConverter<MgmtReferenceTypesPlan>

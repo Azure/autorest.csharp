@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using model_flattening;
 
 namespace model_flattening.Models
 {
@@ -28,31 +29,31 @@ namespace model_flattening.Models
             writer.WriteStartObject();
             writer.WritePropertyName("base_product_id"u8);
             writer.WriteStringValue(ProductId);
-            if (Description != null)
+            if (Optional.IsDefined(Description))
             {
                 writer.WritePropertyName("base_product_description"u8);
                 writer.WriteStringValue(Description);
             }
             writer.WritePropertyName("details"u8);
             writer.WriteStartObject();
-            if (MaxProductDisplayName != null)
+            if (Optional.IsDefined(MaxProductDisplayName))
             {
                 writer.WritePropertyName("max_product_display_name"u8);
                 writer.WriteStringValue(MaxProductDisplayName);
             }
-            if (Capacity.HasValue)
+            if (Optional.IsDefined(Capacity))
             {
                 writer.WritePropertyName("max_product_capacity"u8);
                 writer.WriteStringValue(Capacity.Value.ToString());
             }
             writer.WritePropertyName("max_product_image"u8);
             writer.WriteStartObject();
-            if (GenericValue != null)
+            if (Optional.IsDefined(GenericValue))
             {
                 writer.WritePropertyName("generic_value"u8);
                 writer.WriteStringValue(GenericValue);
             }
-            if (OdataValue != null)
+            if (Optional.IsDefined(OdataValue))
             {
                 writer.WritePropertyName("@odata.value"u8);
                 writer.WriteStringValue(OdataValue);
@@ -98,11 +99,11 @@ namespace model_flattening.Models
                 return null;
             }
             string baseProductId = default;
-            Optional<string> baseProductDescription = default;
-            Optional<string> maxProductDisplayName = default;
-            Optional<SimpleProductPropertiesMaxProductCapacity> maxProductCapacity = default;
-            Optional<string> genericValue = default;
-            Optional<string> odataValue = default;
+            string baseProductDescription = default;
+            string maxProductDisplayName = default;
+            SimpleProductPropertiesMaxProductCapacity? maxProductCapacity = default;
+            string genericValue = default;
+            string odataValue = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -173,12 +174,12 @@ namespace model_flattening.Models
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new SimpleProduct(
                 baseProductId,
-                baseProductDescription.Value,
+                baseProductDescription,
                 serializedAdditionalRawData,
-                maxProductDisplayName.Value,
-                Optional.ToNullable(maxProductCapacity),
-                genericValue.Value,
-                odataValue.Value);
+                maxProductDisplayName,
+                maxProductCapacity,
+                genericValue,
+                odataValue);
         }
 
         BinaryData IPersistableModel<SimpleProduct>.Write(ModelReaderWriterOptions options)

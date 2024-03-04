@@ -9,6 +9,7 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
+using MgmtReferenceTypes;
 
 namespace Azure.ResourceManager.Fake.Models
 {
@@ -18,17 +19,17 @@ namespace Azure.ResourceManager.Fake.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (NameAvailable.HasValue)
+            if (Optional.IsDefined(NameAvailable))
             {
                 writer.WritePropertyName("nameAvailable"u8);
                 writer.WriteBooleanValue(NameAvailable.Value);
             }
-            if (Reason.HasValue)
+            if (Optional.IsDefined(Reason))
             {
                 writer.WritePropertyName("reason"u8);
                 writer.WriteStringValue(Reason.Value.ToString());
             }
-            if (Message != null)
+            if (Optional.IsDefined(Message))
             {
                 writer.WritePropertyName("message"u8);
                 writer.WriteStringValue(Message);
@@ -42,9 +43,9 @@ namespace Azure.ResourceManager.Fake.Models
             {
                 return null;
             }
-            Optional<bool> nameAvailable = default;
-            Optional<CheckNameAvailabilityReason> reason = default;
-            Optional<string> message = default;
+            bool? nameAvailable = default;
+            CheckNameAvailabilityReason? reason = default;
+            string message = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("nameAvailable"u8))
@@ -71,7 +72,7 @@ namespace Azure.ResourceManager.Fake.Models
                     continue;
                 }
             }
-            return new CheckNameAvailabilityResult(Optional.ToNullable(nameAvailable), Optional.ToNullable(reason), message.Value);
+            return new CheckNameAvailabilityResult(nameAvailable, reason, message);
         }
 
         internal partial class CheckNameAvailabilityResultConverter : JsonConverter<CheckNameAvailabilityResult>

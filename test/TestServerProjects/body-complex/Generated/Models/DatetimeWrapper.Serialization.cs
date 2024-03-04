@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using body_complex;
 
 namespace body_complex.Models
 {
@@ -26,12 +27,12 @@ namespace body_complex.Models
             }
 
             writer.WriteStartObject();
-            if (Field.HasValue)
+            if (Optional.IsDefined(Field))
             {
                 writer.WritePropertyName("field"u8);
                 writer.WriteStringValue(Field.Value, "O");
             }
-            if (Now.HasValue)
+            if (Optional.IsDefined(Now))
             {
                 writer.WritePropertyName("now"u8);
                 writer.WriteStringValue(Now.Value, "O");
@@ -74,8 +75,8 @@ namespace body_complex.Models
             {
                 return null;
             }
-            Optional<DateTimeOffset> field = default;
-            Optional<DateTimeOffset> now = default;
+            DateTimeOffset? field = default;
+            DateTimeOffset? now = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -104,7 +105,7 @@ namespace body_complex.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DatetimeWrapper(Optional.ToNullable(field), Optional.ToNullable(now), serializedAdditionalRawData);
+            return new DatetimeWrapper(field, now, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<DatetimeWrapper>.Write(ModelReaderWriterOptions options)

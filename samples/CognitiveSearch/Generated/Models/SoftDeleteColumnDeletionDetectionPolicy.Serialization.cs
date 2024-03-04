@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {
@@ -15,12 +16,12 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (SoftDeleteColumnName != null)
+            if (Optional.IsDefined(SoftDeleteColumnName))
             {
                 writer.WritePropertyName("softDeleteColumnName"u8);
                 writer.WriteStringValue(SoftDeleteColumnName);
             }
-            if (SoftDeleteMarkerValue != null)
+            if (Optional.IsDefined(SoftDeleteMarkerValue))
             {
                 writer.WritePropertyName("softDeleteMarkerValue"u8);
                 writer.WriteStringValue(SoftDeleteMarkerValue);
@@ -36,8 +37,8 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            Optional<string> softDeleteColumnName = default;
-            Optional<string> softDeleteMarkerValue = default;
+            string softDeleteColumnName = default;
+            string softDeleteMarkerValue = default;
             string odataType = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -57,7 +58,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new SoftDeleteColumnDeletionDetectionPolicy(odataType, softDeleteColumnName.Value, softDeleteMarkerValue.Value);
+            return new SoftDeleteColumnDeletionDetectionPolicy(odataType, softDeleteColumnName, softDeleteMarkerValue);
         }
     }
 }

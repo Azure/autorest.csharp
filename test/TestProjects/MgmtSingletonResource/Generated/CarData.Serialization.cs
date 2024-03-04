@@ -16,7 +16,7 @@ namespace MgmtSingletonResource
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Horsepower != null)
+            if (Optional.IsDefined(Horsepower))
             {
                 writer.WritePropertyName("horsepower"u8);
                 writer.WriteStringValue(Horsepower);
@@ -30,11 +30,11 @@ namespace MgmtSingletonResource
             {
                 return null;
             }
-            Optional<string> horsepower = default;
+            string horsepower = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
+            SystemData systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("horsepower"u8))
@@ -67,7 +67,7 @@ namespace MgmtSingletonResource
                     continue;
                 }
             }
-            return new CarData(id, name, type, systemData.Value, horsepower.Value);
+            return new CarData(id, name, type, systemData, horsepower);
         }
     }
 }

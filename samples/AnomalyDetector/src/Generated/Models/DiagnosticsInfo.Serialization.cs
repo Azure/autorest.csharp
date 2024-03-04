@@ -9,6 +9,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using AnomalyDetector;
 using Azure;
 using Azure.Core;
 
@@ -27,12 +28,12 @@ namespace AnomalyDetector.Models
             }
 
             writer.WriteStartObject();
-            if (ModelState != null)
+            if (Optional.IsDefined(ModelState))
             {
                 writer.WritePropertyName("modelState"u8);
                 writer.WriteObjectValue(ModelState);
             }
-            if (!(VariableStates is ChangeTrackingList<VariableState> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(VariableStates))
             {
                 writer.WritePropertyName("variableStates"u8);
                 writer.WriteStartArray();
@@ -80,7 +81,7 @@ namespace AnomalyDetector.Models
             {
                 return null;
             }
-            Optional<ModelState> modelState = default;
+            ModelState modelState = default;
             IList<VariableState> variableStates = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -115,7 +116,7 @@ namespace AnomalyDetector.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DiagnosticsInfo(modelState.Value, variableStates ?? new ChangeTrackingList<VariableState>(), serializedAdditionalRawData);
+            return new DiagnosticsInfo(modelState, variableStates ?? new ChangeTrackingList<VariableState>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<DiagnosticsInfo>.Write(ModelReaderWriterOptions options)

@@ -19,43 +19,43 @@ namespace MgmtPropertyChooser
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Plan != null)
+            if (Optional.IsDefined(Plan))
             {
                 writer.WritePropertyName("plan"u8);
                 JsonSerializer.Serialize(writer, Plan);
             }
-            if (Identity != null)
+            if (Optional.IsDefined(Identity))
             {
                 writer.WritePropertyName("identity"u8);
                 JsonSerializer.Serialize(writer, Identity);
             }
-            if (IdentityWithRenamedProperty != null)
+            if (Optional.IsDefined(IdentityWithRenamedProperty))
             {
                 writer.WritePropertyName("identityWithRenamedProperty"u8);
                 writer.WriteObjectValue(IdentityWithRenamedProperty);
             }
-            if (IdentityWithDifferentPropertyType != null)
+            if (Optional.IsDefined(IdentityWithDifferentPropertyType))
             {
                 writer.WritePropertyName("identityWithDifferentPropertyType"u8);
                 writer.WriteObjectValue(IdentityWithDifferentPropertyType);
             }
-            if (IdentityWithNoUserIdentity != null)
+            if (Optional.IsDefined(IdentityWithNoUserIdentity))
             {
                 writer.WritePropertyName("identityWithNoUserIdentity"u8);
                 JsonSerializer.Serialize(writer, IdentityWithNoUserIdentity);
             }
-            if (IdentityWithNoSystemIdentity != null)
+            if (Optional.IsDefined(IdentityWithNoSystemIdentity))
             {
                 writer.WritePropertyName("identityWithNoSystemIdentity"u8);
                 writer.WriteObjectValue(IdentityWithNoSystemIdentity);
             }
-            if (IdentityV3 != null)
+            if (Optional.IsDefined(IdentityV3))
             {
                 writer.WritePropertyName("identityV3"u8);
                 var serializeOptions = new JsonSerializerOptions { Converters = { new ManagedServiceIdentityTypeV3Converter() } };
                 JsonSerializer.Serialize(writer, IdentityV3, serializeOptions);
             }
-            if (!(Zones is ChangeTrackingList<string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Zones))
             {
                 writer.WritePropertyName("zones"u8);
                 writer.WriteStartArray();
@@ -65,17 +65,17 @@ namespace MgmtPropertyChooser
                 }
                 writer.WriteEndArray();
             }
-            if (FakeSubResource != null)
+            if (Optional.IsDefined(FakeSubResource))
             {
                 writer.WritePropertyName("fakeSubResource"u8);
                 JsonSerializer.Serialize(writer, FakeSubResource);
             }
-            if (FakeWritableSubResource != null)
+            if (Optional.IsDefined(FakeWritableSubResource))
             {
                 writer.WritePropertyName("fakeWritableSubResource"u8);
                 JsonSerializer.Serialize(writer, FakeWritableSubResource);
             }
-            if (!(Tags is ChangeTrackingDictionary<string, string> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -90,12 +90,12 @@ namespace MgmtPropertyChooser
             writer.WriteStringValue(Location);
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (LicenseType != null)
+            if (Optional.IsDefined(LicenseType))
             {
                 writer.WritePropertyName("licenseType"u8);
                 writer.WriteStringValue(LicenseType);
             }
-            if (ExtensionsTimeBudget != null)
+            if (Optional.IsDefined(ExtensionsTimeBudget))
             {
                 writer.WritePropertyName("extensionsTimeBudget"u8);
                 writer.WriteStringValue(ExtensionsTimeBudget);
@@ -110,28 +110,28 @@ namespace MgmtPropertyChooser
             {
                 return null;
             }
-            Optional<ArmPlan> plan = default;
+            ArmPlan plan = default;
             IReadOnlyList<VirtualMachineExtension> resources = default;
-            Optional<ManagedServiceIdentity> identity = default;
-            Optional<IdentityWithRenamedProperty> identityWithRenamedProperty = default;
-            Optional<IdentityWithDifferentPropertyType> identityWithDifferentPropertyType = default;
-            Optional<ManagedServiceIdentity> identityWithNoUserIdentity = default;
-            Optional<IdentityWithNoSystemIdentity> identityWithNoSystemIdentity = default;
-            Optional<ManagedServiceIdentity> identityV3 = default;
+            ManagedServiceIdentity identity = default;
+            IdentityWithRenamedProperty identityWithRenamedProperty = default;
+            IdentityWithDifferentPropertyType identityWithDifferentPropertyType = default;
+            ManagedServiceIdentity identityWithNoUserIdentity = default;
+            IdentityWithNoSystemIdentity identityWithNoSystemIdentity = default;
+            ManagedServiceIdentity identityV3 = default;
             IList<string> zones = default;
             IReadOnlyList<MgmtPropertyChooserResourceData> fakeResources = default;
-            Optional<SubResource> fakeSubResource = default;
-            Optional<WritableSubResource> fakeWritableSubResource = default;
+            SubResource fakeSubResource = default;
+            WritableSubResource fakeWritableSubResource = default;
             IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
-            Optional<string> provisioningState = default;
-            Optional<string> licenseType = default;
-            Optional<string> vmId = default;
-            Optional<string> extensionsTimeBudget = default;
+            SystemData systemData = default;
+            string provisioningState = default;
+            string licenseType = default;
+            string vmId = default;
+            string extensionsTimeBudget = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("plan"u8))
@@ -338,25 +338,25 @@ namespace MgmtPropertyChooser
                 id,
                 name,
                 type,
-                systemData.Value,
+                systemData,
                 tags ?? new ChangeTrackingDictionary<string, string>(),
                 location,
                 plan,
                 resources ?? new ChangeTrackingList<VirtualMachineExtension>(),
                 identity,
-                identityWithRenamedProperty.Value,
-                identityWithDifferentPropertyType.Value,
+                identityWithRenamedProperty,
+                identityWithDifferentPropertyType,
                 identityWithNoUserIdentity,
-                identityWithNoSystemIdentity.Value,
+                identityWithNoSystemIdentity,
                 identityV3,
                 zones ?? new ChangeTrackingList<string>(),
                 fakeResources ?? new ChangeTrackingList<MgmtPropertyChooserResourceData>(),
                 fakeSubResource,
                 fakeWritableSubResource,
-                provisioningState.Value,
-                licenseType.Value,
-                vmId.Value,
-                extensionsTimeBudget.Value);
+                provisioningState,
+                licenseType,
+                vmId,
+                extensionsTimeBudget);
         }
     }
 }

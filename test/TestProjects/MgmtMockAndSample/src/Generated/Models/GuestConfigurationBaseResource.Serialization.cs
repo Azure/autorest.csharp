@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
@@ -15,12 +16,12 @@ namespace MgmtMockAndSample.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Location.HasValue)
+            if (Optional.IsDefined(Location))
             {
                 writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location.Value);
@@ -34,10 +35,10 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<string> id = default;
-            Optional<string> name = default;
-            Optional<AzureLocation> location = default;
-            Optional<ResourceType> type = default;
+            string id = default;
+            string name = default;
+            AzureLocation? location = default;
+            ResourceType? type = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -69,7 +70,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new GuestConfigurationBaseResource(id.Value, name.Value, Optional.ToNullable(location), Optional.ToNullable(type));
+            return new GuestConfigurationBaseResource(id, name, location, type);
         }
     }
 }

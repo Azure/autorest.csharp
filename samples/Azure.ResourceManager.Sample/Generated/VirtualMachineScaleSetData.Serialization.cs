@@ -31,22 +31,22 @@ namespace Azure.ResourceManager.Sample
             }
 
             writer.WriteStartObject();
-            if (Sku != null)
+            if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
                 writer.WriteObjectValue(Sku);
             }
-            if (Plan != null)
+            if (Optional.IsDefined(Plan))
             {
                 writer.WritePropertyName("plan"u8);
                 writer.WriteObjectValue(Plan);
             }
-            if (Identity != null)
+            if (Optional.IsDefined(Identity))
             {
                 writer.WritePropertyName("identity"u8);
                 JsonSerializer.Serialize(writer, Identity);
             }
-            if (!(Zones is ChangeTrackingList<string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Zones))
             {
                 writer.WritePropertyName("zones"u8);
                 writer.WriteStartArray();
@@ -56,7 +56,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 writer.WriteEndArray();
             }
-            if (!(Tags is ChangeTrackingDictionary<string, string> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -84,79 +84,79 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format != "W" && SystemData != null)
+            if (options.Format != "W" && Optional.IsDefined(SystemData))
             {
                 writer.WritePropertyName("systemData"u8);
                 JsonSerializer.Serialize(writer, SystemData);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (UpgradePolicy != null)
+            if (Optional.IsDefined(UpgradePolicy))
             {
                 writer.WritePropertyName("upgradePolicy"u8);
                 writer.WriteObjectValue(UpgradePolicy);
             }
-            if (AutomaticRepairsPolicy != null)
+            if (Optional.IsDefined(AutomaticRepairsPolicy))
             {
                 writer.WritePropertyName("automaticRepairsPolicy"u8);
                 writer.WriteObjectValue(AutomaticRepairsPolicy);
             }
-            if (VirtualMachineProfile != null)
+            if (Optional.IsDefined(VirtualMachineProfile))
             {
                 writer.WritePropertyName("virtualMachineProfile"u8);
                 writer.WriteObjectValue(VirtualMachineProfile);
             }
-            if (options.Format != "W" && ProvisioningState != null)
+            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
             {
                 writer.WritePropertyName("provisioningState"u8);
                 writer.WriteStringValue(ProvisioningState);
             }
-            if (Overprovision.HasValue)
+            if (Optional.IsDefined(Overprovision))
             {
                 writer.WritePropertyName("overprovision"u8);
                 writer.WriteBooleanValue(Overprovision.Value);
             }
-            if (DoNotRunExtensionsOnOverprovisionedVms.HasValue)
+            if (Optional.IsDefined(DoNotRunExtensionsOnOverprovisionedVms))
             {
                 writer.WritePropertyName("doNotRunExtensionsOnOverprovisionedVMs"u8);
                 writer.WriteBooleanValue(DoNotRunExtensionsOnOverprovisionedVms.Value);
             }
-            if (options.Format != "W" && UniqueId != null)
+            if (options.Format != "W" && Optional.IsDefined(UniqueId))
             {
                 writer.WritePropertyName("uniqueId"u8);
                 writer.WriteStringValue(UniqueId);
             }
-            if (SinglePlacementGroup.HasValue)
+            if (Optional.IsDefined(SinglePlacementGroup))
             {
                 writer.WritePropertyName("singlePlacementGroup"u8);
                 writer.WriteBooleanValue(SinglePlacementGroup.Value);
             }
-            if (ZoneBalance.HasValue)
+            if (Optional.IsDefined(ZoneBalance))
             {
                 writer.WritePropertyName("zoneBalance"u8);
                 writer.WriteBooleanValue(ZoneBalance.Value);
             }
-            if (PlatformFaultDomainCount.HasValue)
+            if (Optional.IsDefined(PlatformFaultDomainCount))
             {
                 writer.WritePropertyName("platformFaultDomainCount"u8);
                 writer.WriteNumberValue(PlatformFaultDomainCount.Value);
             }
-            if (ProximityPlacementGroup != null)
+            if (Optional.IsDefined(ProximityPlacementGroup))
             {
                 writer.WritePropertyName("proximityPlacementGroup"u8);
                 JsonSerializer.Serialize(writer, ProximityPlacementGroup);
             }
-            if (HostGroup != null)
+            if (Optional.IsDefined(HostGroup))
             {
                 writer.WritePropertyName("hostGroup"u8);
                 JsonSerializer.Serialize(writer, HostGroup);
             }
-            if (AdditionalCapabilities != null)
+            if (Optional.IsDefined(AdditionalCapabilities))
             {
                 writer.WritePropertyName("additionalCapabilities"u8);
                 writer.WriteObjectValue(AdditionalCapabilities);
             }
-            if (ScaleInPolicy != null)
+            if (Optional.IsDefined(ScaleInPolicy))
             {
                 writer.WritePropertyName("scaleInPolicy"u8);
                 writer.WriteObjectValue(ScaleInPolicy);
@@ -200,30 +200,30 @@ namespace Azure.ResourceManager.Sample
             {
                 return null;
             }
-            Optional<SampleSku> sku = default;
-            Optional<SamplePlan> plan = default;
-            Optional<ManagedServiceIdentity> identity = default;
+            SampleSku sku = default;
+            SamplePlan plan = default;
+            ManagedServiceIdentity identity = default;
             IList<string> zones = default;
             IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
-            Optional<UpgradePolicy> upgradePolicy = default;
-            Optional<AutomaticRepairsPolicy> automaticRepairsPolicy = default;
-            Optional<VirtualMachineScaleSetVmProfile> virtualMachineProfile = default;
-            Optional<string> provisioningState = default;
-            Optional<bool> overprovision = default;
-            Optional<bool> doNotRunExtensionsOnOverprovisionedVms = default;
-            Optional<string> uniqueId = default;
-            Optional<bool> singlePlacementGroup = default;
-            Optional<bool> zoneBalance = default;
-            Optional<int> platformFaultDomainCount = default;
-            Optional<WritableSubResource> proximityPlacementGroup = default;
-            Optional<WritableSubResource> hostGroup = default;
-            Optional<AdditionalCapabilities> additionalCapabilities = default;
-            Optional<ScaleInPolicy> scaleInPolicy = default;
+            SystemData systemData = default;
+            UpgradePolicy upgradePolicy = default;
+            AutomaticRepairsPolicy automaticRepairsPolicy = default;
+            VirtualMachineScaleSetVmProfile virtualMachineProfile = default;
+            string provisioningState = default;
+            bool? overprovision = default;
+            bool? doNotRunExtensionsOnOverprovisionedVms = default;
+            string uniqueId = default;
+            bool? singlePlacementGroup = default;
+            bool? zoneBalance = default;
+            int? platformFaultDomainCount = default;
+            WritableSubResource proximityPlacementGroup = default;
+            WritableSubResource hostGroup = default;
+            AdditionalCapabilities additionalCapabilities = default;
+            ScaleInPolicy scaleInPolicy = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -452,27 +452,27 @@ namespace Azure.ResourceManager.Sample
                 id,
                 name,
                 type,
-                systemData.Value,
+                systemData,
                 tags ?? new ChangeTrackingDictionary<string, string>(),
                 location,
-                sku.Value,
-                plan.Value,
+                sku,
+                plan,
                 identity,
                 zones ?? new ChangeTrackingList<string>(),
-                upgradePolicy.Value,
-                automaticRepairsPolicy.Value,
-                virtualMachineProfile.Value,
-                provisioningState.Value,
-                Optional.ToNullable(overprovision),
-                Optional.ToNullable(doNotRunExtensionsOnOverprovisionedVms),
-                uniqueId.Value,
-                Optional.ToNullable(singlePlacementGroup),
-                Optional.ToNullable(zoneBalance),
-                Optional.ToNullable(platformFaultDomainCount),
+                upgradePolicy,
+                automaticRepairsPolicy,
+                virtualMachineProfile,
+                provisioningState,
+                overprovision,
+                doNotRunExtensionsOnOverprovisionedVms,
+                uniqueId,
+                singlePlacementGroup,
+                zoneBalance,
+                platformFaultDomainCount,
                 proximityPlacementGroup,
                 hostGroup,
-                additionalCapabilities.Value,
-                scaleInPolicy.Value,
+                additionalCapabilities,
+                scaleInPolicy,
                 serializedAdditionalRawData);
         }
 
@@ -481,7 +481,7 @@ namespace Azure.ResourceManager.Sample
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 builder.Append("  name:");
                 if (Name.Contains(Environment.NewLine))
@@ -498,7 +498,7 @@ namespace Azure.ResourceManager.Sample
             builder.Append("  location:");
             builder.AppendLine($" '{Location.ToString()}'");
 
-            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Tags))
             {
                 if (Tags.Any())
                 {
@@ -526,25 +526,25 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Sku != null)
+            if (Optional.IsDefined(Sku))
             {
                 builder.Append("  sku:");
                 AppendChildObject(builder, Sku, options, 2, false);
             }
 
-            if (Plan != null)
+            if (Optional.IsDefined(Plan))
             {
                 builder.Append("  plan:");
                 AppendChildObject(builder, Plan, options, 2, false);
             }
 
-            if (Identity != null)
+            if (Optional.IsDefined(Identity))
             {
                 builder.Append("  identity:");
                 AppendChildObject(builder, Identity, options, 2, false);
             }
 
-            if (!(Zones is ChangeTrackingList<string> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(Zones))
             {
                 if (Zones.Any())
                 {
@@ -571,13 +571,13 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 builder.Append("  id:");
                 builder.AppendLine($" '{Id.ToString()}'");
             }
 
-            if (SystemData != null)
+            if (Optional.IsDefined(SystemData))
             {
                 builder.Append("  systemData:");
                 builder.AppendLine($" '{SystemData.ToString()}'");
@@ -585,25 +585,25 @@ namespace Azure.ResourceManager.Sample
 
             builder.Append("  properties:");
             builder.AppendLine(" {");
-            if (UpgradePolicy != null)
+            if (Optional.IsDefined(UpgradePolicy))
             {
                 builder.Append("    upgradePolicy:");
                 AppendChildObject(builder, UpgradePolicy, options, 4, false);
             }
 
-            if (AutomaticRepairsPolicy != null)
+            if (Optional.IsDefined(AutomaticRepairsPolicy))
             {
                 builder.Append("    automaticRepairsPolicy:");
                 AppendChildObject(builder, AutomaticRepairsPolicy, options, 4, false);
             }
 
-            if (VirtualMachineProfile != null)
+            if (Optional.IsDefined(VirtualMachineProfile))
             {
                 builder.Append("    virtualMachineProfile:");
                 AppendChildObject(builder, VirtualMachineProfile, options, 4, false);
             }
 
-            if (ProvisioningState != null)
+            if (Optional.IsDefined(ProvisioningState))
             {
                 builder.Append("    provisioningState:");
                 if (ProvisioningState.Contains(Environment.NewLine))
@@ -617,21 +617,21 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Overprovision.HasValue)
+            if (Optional.IsDefined(Overprovision))
             {
                 builder.Append("    overprovision:");
                 var boolValue = Overprovision.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
             }
 
-            if (DoNotRunExtensionsOnOverprovisionedVms.HasValue)
+            if (Optional.IsDefined(DoNotRunExtensionsOnOverprovisionedVms))
             {
                 builder.Append("    doNotRunExtensionsOnOverprovisionedVMs:");
                 var boolValue = DoNotRunExtensionsOnOverprovisionedVms.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
             }
 
-            if (UniqueId != null)
+            if (Optional.IsDefined(UniqueId))
             {
                 builder.Append("    uniqueId:");
                 if (UniqueId.Contains(Environment.NewLine))
@@ -645,45 +645,45 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (SinglePlacementGroup.HasValue)
+            if (Optional.IsDefined(SinglePlacementGroup))
             {
                 builder.Append("    singlePlacementGroup:");
                 var boolValue = SinglePlacementGroup.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
             }
 
-            if (ZoneBalance.HasValue)
+            if (Optional.IsDefined(ZoneBalance))
             {
                 builder.Append("    zoneBalance:");
                 var boolValue = ZoneBalance.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
             }
 
-            if (PlatformFaultDomainCount.HasValue)
+            if (Optional.IsDefined(PlatformFaultDomainCount))
             {
                 builder.Append("    platformFaultDomainCount:");
                 builder.AppendLine($" {PlatformFaultDomainCount.Value}");
             }
 
-            if (ProximityPlacementGroup != null)
+            if (Optional.IsDefined(ProximityPlacementGroup))
             {
                 builder.Append("    proximityPlacementGroup:");
                 AppendChildObject(builder, ProximityPlacementGroup, options, 4, false);
             }
 
-            if (HostGroup != null)
+            if (Optional.IsDefined(HostGroup))
             {
                 builder.Append("    hostGroup:");
                 AppendChildObject(builder, HostGroup, options, 4, false);
             }
 
-            if (AdditionalCapabilities != null)
+            if (Optional.IsDefined(AdditionalCapabilities))
             {
                 builder.Append("    additionalCapabilities:");
                 AppendChildObject(builder, AdditionalCapabilities, options, 4, false);
             }
 
-            if (ScaleInPolicy != null)
+            if (Optional.IsDefined(ScaleInPolicy))
             {
                 builder.Append("    scaleInPolicy:");
                 AppendChildObject(builder, ScaleInPolicy, options, 4, false);

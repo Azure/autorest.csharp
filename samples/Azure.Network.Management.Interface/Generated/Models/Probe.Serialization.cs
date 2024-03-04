@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Network.Management.Interface;
 
 namespace Azure.Network.Management.Interface.Models
 {
@@ -16,39 +17,39 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Protocol.HasValue)
+            if (Optional.IsDefined(Protocol))
             {
                 writer.WritePropertyName("protocol"u8);
                 writer.WriteStringValue(Protocol.Value.ToString());
             }
-            if (Port.HasValue)
+            if (Optional.IsDefined(Port))
             {
                 writer.WritePropertyName("port"u8);
                 writer.WriteNumberValue(Port.Value);
             }
-            if (IntervalInSeconds.HasValue)
+            if (Optional.IsDefined(IntervalInSeconds))
             {
                 writer.WritePropertyName("intervalInSeconds"u8);
                 writer.WriteNumberValue(IntervalInSeconds.Value);
             }
-            if (NumberOfProbes.HasValue)
+            if (Optional.IsDefined(NumberOfProbes))
             {
                 writer.WritePropertyName("numberOfProbes"u8);
                 writer.WriteNumberValue(NumberOfProbes.Value);
             }
-            if (RequestPath != null)
+            if (Optional.IsDefined(RequestPath))
             {
                 writer.WritePropertyName("requestPath"u8);
                 writer.WriteStringValue(RequestPath);
@@ -63,17 +64,17 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> etag = default;
-            Optional<string> type = default;
-            Optional<string> id = default;
+            string name = default;
+            string etag = default;
+            string type = default;
+            string id = default;
             IReadOnlyList<SubResource> loadBalancingRules = default;
-            Optional<ProbeProtocol> protocol = default;
-            Optional<int> port = default;
-            Optional<int> intervalInSeconds = default;
-            Optional<int> numberOfProbes = default;
-            Optional<string> requestPath = default;
-            Optional<ProvisioningState> provisioningState = default;
+            ProbeProtocol? protocol = default;
+            int? port = default;
+            int? intervalInSeconds = default;
+            int? numberOfProbes = default;
+            string requestPath = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -174,17 +175,17 @@ namespace Azure.Network.Management.Interface.Models
                 }
             }
             return new Probe(
-                id.Value,
-                name.Value,
-                etag.Value,
-                type.Value,
+                id,
+                name,
+                etag,
+                type,
                 loadBalancingRules ?? new ChangeTrackingList<SubResource>(),
-                Optional.ToNullable(protocol),
-                Optional.ToNullable(port),
-                Optional.ToNullable(intervalInSeconds),
-                Optional.ToNullable(numberOfProbes),
-                requestPath.Value,
-                Optional.ToNullable(provisioningState));
+                protocol,
+                port,
+                intervalInSeconds,
+                numberOfProbes,
+                requestPath,
+                provisioningState);
         }
     }
 }

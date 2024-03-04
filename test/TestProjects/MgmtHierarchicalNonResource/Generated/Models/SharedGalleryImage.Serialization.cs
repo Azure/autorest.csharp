@@ -20,18 +20,18 @@ namespace MgmtHierarchicalNonResource.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> location = default;
-            Optional<OperatingSystemType> osType = default;
-            Optional<OperatingSystemStateType> osState = default;
-            Optional<DateTimeOffset> endOfLifeDate = default;
-            Optional<GalleryImageIdentifier> identifier = default;
-            Optional<RecommendedMachineConfiguration> recommended = default;
-            Optional<Disallowed> disallowed = default;
-            Optional<HyperVGeneration> hyperVGeneration = default;
+            string name = default;
+            string location = default;
+            OperatingSystemType? osType = default;
+            OperatingSystemStateType? osState = default;
+            DateTimeOffset? endOfLifeDate = default;
+            GalleryImageIdentifier identifier = default;
+            RecommendedMachineConfiguration recommended = default;
+            Disallowed disallowed = default;
+            HyperVGeneration? hyperVGeneration = default;
             IReadOnlyList<GalleryImageFeature> features = default;
-            Optional<ImagePurchasePlan> purchasePlan = default;
-            Optional<string> uniqueId = default;
+            ImagePurchasePlan purchasePlan = default;
+            string uniqueId = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -161,18 +161,18 @@ namespace MgmtHierarchicalNonResource.Models
                 }
             }
             return new SharedGalleryImage(
-                name.Value,
-                location.Value,
-                uniqueId.Value,
-                Optional.ToNullable(osType),
-                Optional.ToNullable(osState),
-                Optional.ToNullable(endOfLifeDate),
-                identifier.Value,
-                recommended.Value,
-                disallowed.Value,
-                Optional.ToNullable(hyperVGeneration),
+                name,
+                location,
+                uniqueId,
+                osType,
+                osState,
+                endOfLifeDate,
+                identifier,
+                recommended,
+                disallowed,
+                hyperVGeneration,
                 features ?? new ChangeTrackingList<GalleryImageFeature>(),
-                purchasePlan.Value);
+                purchasePlan);
         }
     }
 }

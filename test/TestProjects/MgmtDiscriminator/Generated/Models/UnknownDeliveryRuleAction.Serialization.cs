@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -29,7 +30,7 @@ namespace MgmtDiscriminator.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name.ToString());
-            if (options.Format != "W" && Foo != null)
+            if (options.Format != "W" && Optional.IsDefined(Foo))
             {
                 writer.WritePropertyName("foo"u8);
                 writer.WriteStringValue(Foo);
@@ -73,7 +74,7 @@ namespace MgmtDiscriminator.Models
                 return null;
             }
             DeliveryRuleActionType name = "Unknown";
-            Optional<string> foo = default;
+            string foo = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -94,7 +95,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new UnknownDeliveryRuleAction(name, foo.Value, serializedAdditionalRawData);
+            return new UnknownDeliveryRuleAction(name, foo, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -105,7 +106,7 @@ namespace MgmtDiscriminator.Models
             builder.Append("  name:");
             builder.AppendLine($" '{Name.ToString()}'");
 
-            if (Foo != null)
+            if (Optional.IsDefined(Foo))
             {
                 builder.Append("  foo:");
                 if (Foo.Contains(Environment.NewLine))

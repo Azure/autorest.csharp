@@ -7,6 +7,7 @@ using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -38,7 +39,7 @@ namespace OpenAI.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            if (Usage != null)
+            if (Optional.IsDefined(Usage))
             {
                 writer.WritePropertyName("usage"u8);
                 writer.WriteObjectValue(Usage);
@@ -86,7 +87,7 @@ namespace OpenAI.Models
             DateTimeOffset created = default;
             string model = default;
             IReadOnlyList<CreateCompletionResponseChoice> choices = default;
-            OptionalProperty<CompletionUsage> usage = default;
+            CompletionUsage usage = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -142,7 +143,7 @@ namespace OpenAI.Models
                 created,
                 model,
                 choices,
-                usage.Value,
+                usage,
                 serializedAdditionalRawData);
         }
 

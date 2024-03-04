@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -27,32 +28,32 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && RunningStatus != null)
+            if (options.Format != "W" && Optional.IsDefined(RunningStatus))
             {
                 writer.WritePropertyName("runningStatus"u8);
                 writer.WriteObjectValue(RunningStatus);
             }
-            if (options.Format != "W" && Progress != null)
+            if (options.Format != "W" && Optional.IsDefined(Progress))
             {
                 writer.WritePropertyName("progress"u8);
                 writer.WriteObjectValue(Progress);
             }
-            if (options.Format != "W" && Error != null)
+            if (options.Format != "W" && Optional.IsDefined(Error))
             {
                 writer.WritePropertyName("error"u8);
                 writer.WriteObjectValue(Error);
             }
-            if (options.Format != "W" && StartedBy.HasValue)
+            if (options.Format != "W" && Optional.IsDefined(StartedBy))
             {
                 writer.WritePropertyName("startedBy"u8);
                 writer.WriteStringValue(StartedBy.Value.ToSerialString());
             }
-            if (options.Format != "W" && TargetImageReference != null)
+            if (options.Format != "W" && Optional.IsDefined(TargetImageReference))
             {
                 writer.WritePropertyName("targetImageReference"u8);
                 writer.WriteObjectValue(TargetImageReference);
             }
-            if (options.Format != "W" && RollbackInfo != null)
+            if (options.Format != "W" && Optional.IsDefined(RollbackInfo))
             {
                 writer.WritePropertyName("rollbackInfo"u8);
                 writer.WriteObjectValue(RollbackInfo);
@@ -95,12 +96,12 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<UpgradeOperationHistoryStatus> runningStatus = default;
-            Optional<RollingUpgradeProgressInfo> progress = default;
-            Optional<ApiError> error = default;
-            Optional<UpgradeOperationInvoker> startedBy = default;
-            Optional<ImageReference> targetImageReference = default;
-            Optional<RollbackStatusInfo> rollbackInfo = default;
+            UpgradeOperationHistoryStatus runningStatus = default;
+            RollingUpgradeProgressInfo progress = default;
+            ApiError error = default;
+            UpgradeOperationInvoker? startedBy = default;
+            ImageReference targetImageReference = default;
+            RollbackStatusInfo rollbackInfo = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -166,12 +167,12 @@ namespace Azure.ResourceManager.Sample.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new UpgradeOperationHistoricalStatusInfoProperties(
-                runningStatus.Value,
-                progress.Value,
-                error.Value,
-                Optional.ToNullable(startedBy),
-                targetImageReference.Value,
-                rollbackInfo.Value,
+                runningStatus,
+                progress,
+                error,
+                startedBy,
+                targetImageReference,
+                rollbackInfo,
                 serializedAdditionalRawData);
         }
 
@@ -180,37 +181,37 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (RunningStatus != null)
+            if (Optional.IsDefined(RunningStatus))
             {
                 builder.Append("  runningStatus:");
                 AppendChildObject(builder, RunningStatus, options, 2, false);
             }
 
-            if (Progress != null)
+            if (Optional.IsDefined(Progress))
             {
                 builder.Append("  progress:");
                 AppendChildObject(builder, Progress, options, 2, false);
             }
 
-            if (Error != null)
+            if (Optional.IsDefined(Error))
             {
                 builder.Append("  error:");
                 AppendChildObject(builder, Error, options, 2, false);
             }
 
-            if (StartedBy.HasValue)
+            if (Optional.IsDefined(StartedBy))
             {
                 builder.Append("  startedBy:");
                 builder.AppendLine($" '{StartedBy.Value.ToSerialString()}'");
             }
 
-            if (TargetImageReference != null)
+            if (Optional.IsDefined(TargetImageReference))
             {
                 builder.Append("  targetImageReference:");
                 AppendChildObject(builder, TargetImageReference, options, 2, false);
             }
 
-            if (RollbackInfo != null)
+            if (Optional.IsDefined(RollbackInfo))
             {
                 builder.Append("  rollbackInfo:");
                 AppendChildObject(builder, RollbackInfo, options, 2, false);

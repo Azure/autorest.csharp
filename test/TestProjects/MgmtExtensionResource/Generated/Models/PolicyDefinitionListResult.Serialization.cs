@@ -21,7 +21,7 @@ namespace MgmtExtensionResource.Models
                 return null;
             }
             IReadOnlyList<PolicyDefinitionData> value = default;
-            Optional<string> nextLink = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -44,7 +44,7 @@ namespace MgmtExtensionResource.Models
                     continue;
                 }
             }
-            return new PolicyDefinitionListResult(value ?? new ChangeTrackingList<PolicyDefinitionData>(), nextLink.Value);
+            return new PolicyDefinitionListResult(value ?? new ChangeTrackingList<PolicyDefinitionData>(), nextLink);
         }
     }
 }

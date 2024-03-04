@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -33,7 +34,7 @@ namespace MgmtDiscriminator.Models
             writer.WriteStringValue(CacheBehavior.ToString());
             writer.WritePropertyName("cacheType"u8);
             writer.WriteStringValue(CacheType.ToString());
-            if (CacheDuration.HasValue)
+            if (Optional.IsDefined(CacheDuration))
             {
                 if (CacheDuration != null)
                 {
@@ -86,7 +87,7 @@ namespace MgmtDiscriminator.Models
             CacheExpirationActionParametersTypeName typeName = default;
             CacheBehavior cacheBehavior = default;
             CacheType cacheType = default;
-            Optional<TimeSpan?> cacheDuration = default;
+            TimeSpan? cacheDuration = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -122,7 +123,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new CacheExpirationActionParameters(typeName, cacheBehavior, cacheType, Optional.ToNullable(cacheDuration), serializedAdditionalRawData);
+            return new CacheExpirationActionParameters(typeName, cacheBehavior, cacheType, cacheDuration, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -139,7 +140,7 @@ namespace MgmtDiscriminator.Models
             builder.Append("  cacheType:");
             builder.AppendLine($" '{CacheType.ToString()}'");
 
-            if (CacheDuration.HasValue)
+            if (Optional.IsDefined(CacheDuration))
             {
                 builder.Append("  cacheDuration:");
                 var formattedTimeSpan = TypeFormatters.ToString(CacheDuration.Value, "P");

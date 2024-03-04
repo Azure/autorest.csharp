@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using FirstTestTypeSpec;
 
 namespace FirstTestTypeSpec.Models
 {
@@ -29,7 +30,7 @@ namespace FirstTestTypeSpec.Models
             writer.WriteStartObject();
             writer.WritePropertyName("level"u8);
             writer.WriteNumberValue(Level);
-            if (!(Extension is ChangeTrackingList<ThereLevelExtension> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Extension))
             {
                 writer.WritePropertyName("extension"u8);
                 writer.WriteStartArray();
@@ -77,7 +78,7 @@ namespace FirstTestTypeSpec.Models
             {
                 return null;
             }
-            int level = default;
+            sbyte level = default;
             IReadOnlyList<ThereLevelExtension> extension = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -85,7 +86,7 @@ namespace FirstTestTypeSpec.Models
             {
                 if (property.NameEquals("level"u8))
                 {
-                    level = property.Value.GetInt32();
+                    level = property.Value.GetSByte();
                     continue;
                 }
                 if (property.NameEquals("extension"u8))

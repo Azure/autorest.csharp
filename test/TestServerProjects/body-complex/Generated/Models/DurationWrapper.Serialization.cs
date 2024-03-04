@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using body_complex;
 
 namespace body_complex.Models
 {
@@ -26,7 +27,7 @@ namespace body_complex.Models
             }
 
             writer.WriteStartObject();
-            if (Field.HasValue)
+            if (Optional.IsDefined(Field))
             {
                 writer.WritePropertyName("field"u8);
                 writer.WriteStringValue(Field.Value, "P");
@@ -69,7 +70,7 @@ namespace body_complex.Models
             {
                 return null;
             }
-            Optional<TimeSpan> field = default;
+            TimeSpan? field = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -89,7 +90,7 @@ namespace body_complex.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DurationWrapper(Optional.ToNullable(field), serializedAdditionalRawData);
+            return new DurationWrapper(field, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<DurationWrapper>.Write(ModelReaderWriterOptions options)

@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
@@ -15,17 +16,17 @@ namespace MgmtMockAndSample.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (IsEnabled.HasValue)
+            if (Optional.IsDefined(IsEnabled))
             {
                 writer.WritePropertyName("isEnabled"u8);
                 writer.WriteBooleanValue(IsEnabled.Value);
             }
-            if (RetentionDays.HasValue)
+            if (Optional.IsDefined(RetentionDays))
             {
                 writer.WritePropertyName("retentionDays"u8);
                 writer.WriteNumberValue(RetentionDays.Value);
             }
-            if (LogAnalyticsResources != null)
+            if (Optional.IsDefined(LogAnalyticsResources))
             {
                 writer.WritePropertyName("logAnalyticsResources"u8);
                 writer.WriteObjectValue(LogAnalyticsResources);
@@ -39,9 +40,9 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<bool> isEnabled = default;
-            Optional<int> retentionDays = default;
-            Optional<FirewallPolicyLogAnalyticsResources> logAnalyticsResources = default;
+            bool? isEnabled = default;
+            int? retentionDays = default;
+            FirewallPolicyLogAnalyticsResources logAnalyticsResources = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("isEnabled"u8))
@@ -72,7 +73,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new FirewallPolicyInsights(Optional.ToNullable(isEnabled), Optional.ToNullable(retentionDays), logAnalyticsResources.Value);
+            return new FirewallPolicyInsights(isEnabled, retentionDays, logAnalyticsResources);
         }
     }
 }

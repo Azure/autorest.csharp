@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using ModelsTypeSpec;
 
 namespace ModelsTypeSpec.Models
 {
@@ -49,7 +50,7 @@ namespace ModelsTypeSpec.Models
             {
                 writer.WriteNull("requiredNullableString");
             }
-            if (NonRequiredNullableInt.HasValue)
+            if (Optional.IsDefined(NonRequiredNullableInt))
             {
                 if (NonRequiredNullableInt != null)
                 {
@@ -61,7 +62,7 @@ namespace ModelsTypeSpec.Models
                     writer.WriteNull("nonRequiredNullableInt");
                 }
             }
-            if (NonRequiredNullableString != null)
+            if (Optional.IsDefined(NonRequiredNullableString))
             {
                 if (NonRequiredNullableString != null)
                 {
@@ -130,7 +131,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteBooleanValue(item.Value);
             }
             writer.WriteEndArray();
-            if (RequiredNullableModelList != null && !(RequiredNullableModelList is ChangeTrackingList<CollectionItem> collection && collection.IsUndefined))
+            if (RequiredNullableModelList != null && Optional.IsCollectionDefined(RequiredNullableModelList))
             {
                 writer.WritePropertyName("requiredNullableModelList"u8);
                 writer.WriteStartArray();
@@ -144,7 +145,7 @@ namespace ModelsTypeSpec.Models
             {
                 writer.WriteNull("requiredNullableModelList");
             }
-            if (RequiredNullableStringList != null && !(RequiredNullableStringList is ChangeTrackingList<string> collection0 && collection0.IsUndefined))
+            if (RequiredNullableStringList != null && Optional.IsCollectionDefined(RequiredNullableStringList))
             {
                 writer.WritePropertyName("requiredNullableStringList"u8);
                 writer.WriteStartArray();
@@ -158,7 +159,7 @@ namespace ModelsTypeSpec.Models
             {
                 writer.WriteNull("requiredNullableStringList");
             }
-            if (RequiredNullableIntList != null && !(RequiredNullableIntList is ChangeTrackingList<int> collection1 && collection1.IsUndefined))
+            if (RequiredNullableIntList != null && Optional.IsCollectionDefined(RequiredNullableIntList))
             {
                 writer.WritePropertyName("requiredNullableIntList"u8);
                 writer.WriteStartArray();
@@ -172,7 +173,7 @@ namespace ModelsTypeSpec.Models
             {
                 writer.WriteNull("requiredNullableIntList");
             }
-            if (!(NonRequiredModelList is ChangeTrackingList<CollectionItem> collection2 && collection2.IsUndefined))
+            if (Optional.IsCollectionDefined(NonRequiredModelList))
             {
                 writer.WritePropertyName("nonRequiredModelList"u8);
                 writer.WriteStartArray();
@@ -182,7 +183,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!(NonRequiredStringList is ChangeTrackingList<string> collection3 && collection3.IsUndefined))
+            if (Optional.IsCollectionDefined(NonRequiredStringList))
             {
                 writer.WritePropertyName("nonRequiredStringList"u8);
                 writer.WriteStartArray();
@@ -192,7 +193,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!(NonRequiredIntList is ChangeTrackingList<int> collection4 && collection4.IsUndefined))
+            if (Optional.IsCollectionDefined(NonRequiredIntList))
             {
                 writer.WritePropertyName("nonRequiredIntList"u8);
                 writer.WriteStartArray();
@@ -202,7 +203,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!(NonRequiredNullableModelList is ChangeTrackingList<CollectionItem> collection5 && collection5.IsUndefined))
+            if (Optional.IsCollectionDefined(NonRequiredNullableModelList))
             {
                 if (NonRequiredNullableModelList != null)
                 {
@@ -219,7 +220,7 @@ namespace ModelsTypeSpec.Models
                     writer.WriteNull("nonRequiredNullableModelList");
                 }
             }
-            if (!(NonRequiredNullableStringList is ChangeTrackingList<string> collection6 && collection6.IsUndefined))
+            if (Optional.IsCollectionDefined(NonRequiredNullableStringList))
             {
                 if (NonRequiredNullableStringList != null)
                 {
@@ -236,7 +237,7 @@ namespace ModelsTypeSpec.Models
                     writer.WriteNull("nonRequiredNullableStringList");
                 }
             }
-            if (!(NonRequiredNullableIntList is ChangeTrackingList<int> collection7 && collection7.IsUndefined))
+            if (Optional.IsCollectionDefined(NonRequiredNullableIntList))
             {
                 if (NonRequiredNullableIntList != null)
                 {
@@ -295,8 +296,8 @@ namespace ModelsTypeSpec.Models
             int requiredInt = default;
             int? requiredNullableInt = default;
             string requiredNullableString = default;
-            Optional<int?> nonRequiredNullableInt = default;
-            Optional<string> nonRequiredNullableString = default;
+            int? nonRequiredNullableInt = default;
+            string nonRequiredNullableString = default;
             BaseModel requiredModel = default;
             BaseModel requiredModel2 = default;
             IList<int> requiredIntList = default;
@@ -592,8 +593,8 @@ namespace ModelsTypeSpec.Models
                 requiredInt,
                 requiredNullableInt,
                 requiredNullableString,
-                Optional.ToNullable(nonRequiredNullableInt),
-                nonRequiredNullableString.Value,
+                nonRequiredNullableInt,
+                nonRequiredNullableString,
                 requiredModel,
                 requiredModel2,
                 requiredIntList,

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using ModelReaderWriterValidationTypeSpec;
 
 namespace ModelReaderWriterValidationTypeSpec.Models
 {
@@ -27,7 +28,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             }
 
             writer.WriteStartObject();
-            if (!(Fields is ChangeTrackingList<string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Fields))
             {
                 writer.WritePropertyName("fields"u8);
                 writer.WriteStartArray();
@@ -37,12 +38,12 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (NullProperty.HasValue)
+            if (Optional.IsDefined(NullProperty))
             {
                 writer.WritePropertyName("nullProperty"u8);
                 writer.WriteNumberValue(NullProperty.Value);
             }
-            if (!(KeyValuePairs is ChangeTrackingDictionary<string, string> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(KeyValuePairs))
             {
                 writer.WritePropertyName("keyValuePairs"u8);
                 writer.WriteStartObject();
@@ -60,7 +61,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             }
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind);
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
@@ -104,11 +105,11 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 return null;
             }
             IList<string> fields = default;
-            Optional<int> nullProperty = default;
+            int? nullProperty = default;
             IDictionary<string, string> keyValuePairs = default;
             int xProperty = default;
             string kind = default;
-            Optional<string> name = default;
+            string name = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -173,10 +174,10 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new ModelX(
                 kind,
-                name.Value,
+                name,
                 serializedAdditionalRawData,
                 fields ?? new ChangeTrackingList<string>(),
-                Optional.ToNullable(nullProperty),
+                nullProperty,
                 keyValuePairs ?? new ChangeTrackingDictionary<string, string>(),
                 xProperty);
         }

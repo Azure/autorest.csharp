@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -33,7 +34,7 @@ namespace MgmtDiscriminator.Models
             writer.WriteStringValue(HeaderAction.ToString());
             writer.WritePropertyName("headerName"u8);
             writer.WriteStringValue(HeaderName);
-            if (Value != null)
+            if (Optional.IsDefined(Value))
             {
                 writer.WritePropertyName("value"u8);
                 writer.WriteStringValue(Value);
@@ -79,7 +80,7 @@ namespace MgmtDiscriminator.Models
             HeaderActionParametersTypeName typeName = default;
             HeaderAction headerAction = default;
             string headerName = default;
-            Optional<string> value = default;
+            string value = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -110,7 +111,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new HeaderActionParameters(typeName, headerAction, headerName, value.Value, serializedAdditionalRawData);
+            return new HeaderActionParameters(typeName, headerAction, headerName, value, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -124,7 +125,7 @@ namespace MgmtDiscriminator.Models
             builder.Append("  headerAction:");
             builder.AppendLine($" '{HeaderAction.ToString()}'");
 
-            if (HeaderName != null)
+            if (Optional.IsDefined(HeaderName))
             {
                 builder.Append("  headerName:");
                 if (HeaderName.Contains(Environment.NewLine))
@@ -138,7 +139,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            if (Value != null)
+            if (Optional.IsDefined(Value))
             {
                 builder.Append("  value:");
                 if (Value.Contains(Environment.NewLine))

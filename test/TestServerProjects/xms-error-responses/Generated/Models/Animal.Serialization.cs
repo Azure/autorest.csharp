@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using xms_error_responses;
 
 namespace xms_error_responses.Models
 {
@@ -26,7 +27,7 @@ namespace xms_error_responses.Models
             }
 
             writer.WriteStartObject();
-            if (AniType != null)
+            if (Optional.IsDefined(AniType))
             {
                 writer.WritePropertyName("aniType"u8);
                 writer.WriteStringValue(AniType);
@@ -69,7 +70,7 @@ namespace xms_error_responses.Models
             {
                 return null;
             }
-            Optional<string> aniType = default;
+            string aniType = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -85,7 +86,7 @@ namespace xms_error_responses.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Animal(aniType.Value, serializedAdditionalRawData);
+            return new Animal(aniType, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<Animal>.Write(ModelReaderWriterOptions options)

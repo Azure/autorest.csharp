@@ -7,6 +7,7 @@ using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -37,7 +38,7 @@ namespace OpenAI.Models
             writer.WriteStringValue(Purpose);
             writer.WritePropertyName("status"u8);
             writer.WriteStringValue(Status.ToString());
-            if (StatusDetails != null)
+            if (Optional.IsDefined(StatusDetails))
             {
                 if (StatusDetails != null)
                 {
@@ -94,7 +95,7 @@ namespace OpenAI.Models
             string filename = default;
             string purpose = default;
             OpenAIFileStatus status = default;
-            OptionalProperty<string> statusDetails = default;
+            string statusDetails = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -158,7 +159,7 @@ namespace OpenAI.Models
                 filename,
                 purpose,
                 status,
-                statusDetails.Value,
+                statusDetails,
                 serializedAdditionalRawData);
         }
 

@@ -7,6 +7,7 @@ using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -34,7 +35,7 @@ namespace OpenAI.Models
             {
                 writer.WriteNull("content");
             }
-            if (FunctionCall != null)
+            if (Optional.IsDefined(FunctionCall))
             {
                 writer.WritePropertyName("function_call"u8);
                 writer.WriteObjectValue(FunctionCall);
@@ -79,7 +80,7 @@ namespace OpenAI.Models
             }
             ChatCompletionResponseMessageRole role = default;
             string content = default;
-            OptionalProperty<ChatCompletionResponseMessageFunctionCall> functionCall = default;
+            ChatCompletionResponseMessageFunctionCall functionCall = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -114,7 +115,7 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ChatCompletionResponseMessage(role, content, functionCall.Value, serializedAdditionalRawData);
+            return new ChatCompletionResponseMessage(role, content, functionCall, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ChatCompletionResponseMessage>.Write(ModelReaderWriterOptions options)

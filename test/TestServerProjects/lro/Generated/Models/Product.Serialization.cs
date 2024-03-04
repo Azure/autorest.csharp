@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using lro;
 
 namespace lro.Models
 {
@@ -26,17 +27,17 @@ namespace lro.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && Id != null)
+            if (options.Format != "W" && Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format != "W" && Type != null)
+            if (options.Format != "W" && Optional.IsDefined(Type))
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(Type);
             }
-            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -47,24 +48,24 @@ namespace lro.Models
                 }
                 writer.WriteEndObject();
             }
-            if (Location != null)
+            if (Optional.IsDefined(Location))
             {
                 writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location);
             }
-            if (options.Format != "W" && Name != null)
+            if (options.Format != "W" && Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (ProvisioningState != null)
+            if (Optional.IsDefined(ProvisioningState))
             {
                 writer.WritePropertyName("provisioningState"u8);
                 writer.WriteStringValue(ProvisioningState);
             }
-            if (options.Format != "W" && ProvisioningStateValues.HasValue)
+            if (options.Format != "W" && Optional.IsDefined(ProvisioningStateValues))
             {
                 writer.WritePropertyName("provisioningStateValues"u8);
                 writer.WriteStringValue(ProvisioningStateValues.Value.ToString());
@@ -108,13 +109,13 @@ namespace lro.Models
             {
                 return null;
             }
-            Optional<string> id = default;
-            Optional<string> type = default;
+            string id = default;
+            string type = default;
             IDictionary<string, string> tags = default;
-            Optional<string> location = default;
-            Optional<string> name = default;
-            Optional<string> provisioningState = default;
-            Optional<ProductPropertiesProvisioningStateValues> provisioningStateValues = default;
+            string location = default;
+            string name = default;
+            string provisioningState = default;
+            ProductPropertiesProvisioningStateValues? provisioningStateValues = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -186,14 +187,14 @@ namespace lro.Models
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
             return new Product(
-                id.Value,
-                type.Value,
+                id,
+                type,
                 tags ?? new ChangeTrackingDictionary<string, string>(),
-                location.Value,
-                name.Value,
+                location,
+                name,
                 serializedAdditionalRawData,
-                provisioningState.Value,
-                Optional.ToNullable(provisioningStateValues));
+                provisioningState,
+                provisioningStateValues);
         }
 
         BinaryData IPersistableModel<Product>.Write(ModelReaderWriterOptions options)
