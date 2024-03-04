@@ -6,6 +6,7 @@ using System;
 using System.ClientModel.Internal;
 using System.Collections.Generic;
 using System.Linq;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -63,7 +64,7 @@ namespace OpenAI.Models
 
             Model = model;
             Messages = messages.ToList();
-            Functions = new OptionalList<ChatCompletionFunctions>();
+            Functions = new ChangeTrackingList<ChatCompletionFunctions>();
             LogitBias = new OptionalDictionary<string, long>();
         }
 

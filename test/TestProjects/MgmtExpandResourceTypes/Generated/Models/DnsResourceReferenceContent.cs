@@ -6,8 +6,8 @@
 #nullable disable
 
 using System.Collections.Generic;
-using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
+using MgmtExpandResourceTypes;
 
 namespace MgmtExpandResourceTypes.Models
 {

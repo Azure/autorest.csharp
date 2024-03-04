@@ -345,7 +345,7 @@ namespace OpenAI.Models
                 computeClassificationMetrics,
                 classificationNClasses,
                 classificationPositiveClass,
-                classificationBetas ?? new OptionalList<double>(),
+                classificationBetas ?? new ChangeTrackingList<double>(),
                 suffix,
                 serializedAdditionalRawData);
         }

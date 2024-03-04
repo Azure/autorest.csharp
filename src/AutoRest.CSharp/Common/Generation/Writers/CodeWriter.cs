@@ -9,9 +9,8 @@ using System.Linq;
 using System.Text;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
-using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis.CSharp;
 

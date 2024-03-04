@@ -702,13 +702,22 @@ namespace AutoRest.CSharp.Generation.Writers
                 .AppendRawIf("static ", modifiers.HasFlag(MethodSignatureModifiers.Static))
                 .AppendRawIf("virtual ", modifiers.HasFlag(MethodSignatureModifiers.Virtual)); // property does not support other modifiers, here we just ignore them if any
 
-            writer.Append($"{property.PropertyType} {property.Declaration:I}"); // the declaration order here is quite anonying - we might need to assign the values to those properties in other places before these are written
+            writer.Append($"{property.PropertyType} ");
+            if (property.Declaration.ActualName == "this")
+            {
+                writer.Append($"this[int index]");
+            }
+            else
+            {
+                writer.Append($"{property.Declaration:I}"); // the declaration order here is quite anonying - we might need to assign the values to those properties in other places before these are written
+            }
 
             switch (property.PropertyBody)
             {
                 case ExpressionPropertyBody(var expression):
                     writer.AppendRaw(" => ")
                         .WriteValueExpression(expression);
+                    writer.AppendRaw(";");
                     break;
                 case AutoPropertyBody(var hasSetter, var setterModifiers, var initialization):
                     writer.AppendRaw("{ get; ");

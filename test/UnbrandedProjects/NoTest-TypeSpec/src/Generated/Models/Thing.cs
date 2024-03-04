@@ -3,9 +3,9 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.Collections.Generic;
 using System.Linq;
+using NoTestTypeSpec;
 
 namespace NoTestTypeSpec.Models
 {
@@ -68,7 +68,7 @@ namespace NoTestTypeSpec.Models
             Name = name;
             RequiredUnion = requiredUnion;
             RequiredBadDescription = requiredBadDescription;
-            OptionalNullableList = new OptionalList<int>();
+            OptionalNullableList = new ChangeTrackingList<int>();
             RequiredNullableList = requiredNullableList?.ToList();
         }
 

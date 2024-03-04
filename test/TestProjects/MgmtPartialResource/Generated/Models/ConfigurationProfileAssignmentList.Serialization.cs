@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 using MgmtPartialResource;
 
 namespace MgmtPartialResource.Models
