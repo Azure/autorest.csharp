@@ -284,7 +284,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             return new Method(new MethodSignature("Reset", null, null, MethodSignatureModifiers.Public, null, null, Array.Empty<Parameter>()), new MethodBodyStatement[]
             {
-                new AssignValueStatement(_innerList, Null)
+                Assign(_innerList, Null)
             });
         }
 
