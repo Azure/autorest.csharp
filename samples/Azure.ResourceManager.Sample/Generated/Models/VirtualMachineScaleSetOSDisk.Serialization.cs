@@ -29,44 +29,44 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Caching.HasValue)
+            if (Optional.IsDefined(Caching))
             {
                 writer.WritePropertyName("caching"u8);
                 writer.WriteStringValue(Caching.Value.ToSerialString());
             }
-            if (WriteAcceleratorEnabled.HasValue)
+            if (Optional.IsDefined(WriteAcceleratorEnabled))
             {
                 writer.WritePropertyName("writeAcceleratorEnabled"u8);
                 writer.WriteBooleanValue(WriteAcceleratorEnabled.Value);
             }
             writer.WritePropertyName("createOption"u8);
             writer.WriteStringValue(CreateOption.ToString());
-            if (DiffDiskSettings != null)
+            if (Optional.IsDefined(DiffDiskSettings))
             {
                 writer.WritePropertyName("diffDiskSettings"u8);
                 writer.WriteObjectValue(DiffDiskSettings);
             }
-            if (DiskSizeGB.HasValue)
+            if (Optional.IsDefined(DiskSizeGB))
             {
                 writer.WritePropertyName("diskSizeGB"u8);
                 writer.WriteNumberValue(DiskSizeGB.Value);
             }
-            if (OSType.HasValue)
+            if (Optional.IsDefined(OSType))
             {
                 writer.WritePropertyName("osType"u8);
                 writer.WriteStringValue(OSType.Value.ToSerialString());
             }
-            if (Image != null)
+            if (Optional.IsDefined(Image))
             {
                 writer.WritePropertyName("image"u8);
                 writer.WriteObjectValue(Image);
             }
-            if (!(VhdContainers is ChangeTrackingList<string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(VhdContainers))
             {
                 writer.WritePropertyName("vhdContainers"u8);
                 writer.WriteStartArray();
@@ -76,7 +76,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (ManagedDisk != null)
+            if (Optional.IsDefined(ManagedDisk))
             {
                 writer.WritePropertyName("managedDisk"u8);
                 writer.WriteObjectValue(ManagedDisk);
@@ -245,7 +245,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 builder.Append("  name:");
                 if (Name.Contains(Environment.NewLine))
@@ -259,13 +259,13 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Caching.HasValue)
+            if (Optional.IsDefined(Caching))
             {
                 builder.Append("  caching:");
                 builder.AppendLine($" '{Caching.Value.ToSerialString()}'");
             }
 
-            if (WriteAcceleratorEnabled.HasValue)
+            if (Optional.IsDefined(WriteAcceleratorEnabled))
             {
                 builder.Append("  writeAcceleratorEnabled:");
                 var boolValue = WriteAcceleratorEnabled.Value == true ? "true" : "false";
@@ -275,31 +275,31 @@ namespace Azure.ResourceManager.Sample.Models
             builder.Append("  createOption:");
             builder.AppendLine($" '{CreateOption.ToString()}'");
 
-            if (DiffDiskSettings != null)
+            if (Optional.IsDefined(DiffDiskSettings))
             {
                 builder.Append("  diffDiskSettings:");
                 AppendChildObject(builder, DiffDiskSettings, options, 2, false);
             }
 
-            if (DiskSizeGB.HasValue)
+            if (Optional.IsDefined(DiskSizeGB))
             {
                 builder.Append("  diskSizeGB:");
                 builder.AppendLine($" {DiskSizeGB.Value}");
             }
 
-            if (OSType.HasValue)
+            if (Optional.IsDefined(OSType))
             {
                 builder.Append("  osType:");
                 builder.AppendLine($" '{OSType.Value.ToSerialString()}'");
             }
 
-            if (Image != null)
+            if (Optional.IsDefined(Image))
             {
                 builder.Append("  image:");
                 AppendChildObject(builder, Image, options, 2, false);
             }
 
-            if (!(VhdContainers is ChangeTrackingList<string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(VhdContainers))
             {
                 if (VhdContainers.Any())
                 {
@@ -326,7 +326,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (ManagedDisk != null)
+            if (Optional.IsDefined(ManagedDisk))
             {
                 builder.Append("  managedDisk:");
                 AppendChildObject(builder, ManagedDisk, options, 2, false);

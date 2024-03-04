@@ -29,7 +29,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (!(Hosts is ChangeTrackingList<DedicatedHostInstanceViewWithName> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Hosts))
             {
                 writer.WritePropertyName("hosts"u8);
                 writer.WriteStartArray();
@@ -110,7 +110,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (!(Hosts is ChangeTrackingList<DedicatedHostInstanceViewWithName> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Hosts))
             {
                 if (Hosts.Any())
                 {

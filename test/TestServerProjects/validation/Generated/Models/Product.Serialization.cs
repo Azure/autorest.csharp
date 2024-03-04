@@ -27,7 +27,7 @@ namespace validation.Models
             }
 
             writer.WriteStartObject();
-            if (!(DisplayNames is ChangeTrackingList<string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(DisplayNames))
             {
                 writer.WritePropertyName("display_names"u8);
                 writer.WriteStartArray();
@@ -37,12 +37,12 @@ namespace validation.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Capacity.HasValue)
+            if (Optional.IsDefined(Capacity))
             {
                 writer.WritePropertyName("capacity"u8);
                 writer.WriteNumberValue(Capacity.Value);
             }
-            if (Image != null)
+            if (Optional.IsDefined(Image))
             {
                 writer.WritePropertyName("image"u8);
                 writer.WriteStringValue(Image);
@@ -55,7 +55,7 @@ namespace validation.Models
             writer.WriteNumberValue(ConstInt.ToSerialInt32());
             writer.WritePropertyName("constString"u8);
             writer.WriteStringValue(ConstString.ToString());
-            if (ConstStringAsEnum.HasValue)
+            if (Optional.IsDefined(ConstStringAsEnum))
             {
                 writer.WritePropertyName("constStringAsEnum"u8);
                 writer.WriteStringValue(ConstStringAsEnum.Value.ToString());

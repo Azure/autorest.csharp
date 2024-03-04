@@ -18,12 +18,12 @@ namespace MgmtMockAndSample.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Duration.HasValue)
+            if (Optional.IsDefined(Duration))
             {
                 writer.WritePropertyName("duration"u8);
                 writer.WriteStringValue(Duration.Value, "P");
             }
-            if (CreateOn.HasValue)
+            if (Optional.IsDefined(CreateOn))
             {
                 writer.WritePropertyName("createOn"u8);
                 writer.WriteStringValue(CreateOn.Value, "O");
@@ -32,7 +32,7 @@ namespace MgmtMockAndSample.Models
             writer.WriteStringValue(TenantId);
             writer.WritePropertyName("sku"u8);
             writer.WriteObjectValue(Sku);
-            if (!(AccessPolicies is ChangeTrackingList<AccessPolicyEntry> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(AccessPolicies))
             {
                 writer.WritePropertyName("accessPolicies"u8);
                 writer.WriteStartArray();
@@ -42,12 +42,12 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (VaultUri != null)
+            if (Optional.IsDefined(VaultUri))
             {
                 writer.WritePropertyName("vaultUri"u8);
                 writer.WriteStringValue(VaultUri.AbsoluteUri);
             }
-            if (!(Deployments is ChangeTrackingList<string> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(Deployments))
             {
                 writer.WritePropertyName("deployments"u8);
                 writer.WriteStartArray();
@@ -57,67 +57,67 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (EnabledForDiskEncryption.HasValue)
+            if (Optional.IsDefined(EnabledForDiskEncryption))
             {
                 writer.WritePropertyName("enabledForDiskEncryption"u8);
                 writer.WriteBooleanValue(EnabledForDiskEncryption.Value);
             }
-            if (EnabledForTemplateDeployment.HasValue)
+            if (Optional.IsDefined(EnabledForTemplateDeployment))
             {
                 writer.WritePropertyName("enabledForTemplateDeployment"u8);
                 writer.WriteBooleanValue(EnabledForTemplateDeployment.Value);
             }
-            if (EnableSoftDelete.HasValue)
+            if (Optional.IsDefined(EnableSoftDelete))
             {
                 writer.WritePropertyName("enableSoftDelete"u8);
                 writer.WriteBooleanValue(EnableSoftDelete.Value);
             }
-            if (SoftDeleteRetentionInDays.HasValue)
+            if (Optional.IsDefined(SoftDeleteRetentionInDays))
             {
                 writer.WritePropertyName("softDeleteRetentionInDays"u8);
                 writer.WriteNumberValue(SoftDeleteRetentionInDays.Value);
             }
-            if (EnableRbacAuthorization.HasValue)
+            if (Optional.IsDefined(EnableRbacAuthorization))
             {
                 writer.WritePropertyName("enableRbacAuthorization"u8);
                 writer.WriteBooleanValue(EnableRbacAuthorization.Value);
             }
-            if (CreateMode.HasValue)
+            if (Optional.IsDefined(CreateMode))
             {
                 writer.WritePropertyName("createMode"u8);
                 writer.WriteStringValue(CreateMode.Value.ToSerialString());
             }
-            if (EnablePurgeProtection.HasValue)
+            if (Optional.IsDefined(EnablePurgeProtection))
             {
                 writer.WritePropertyName("enablePurgeProtection"u8);
                 writer.WriteBooleanValue(EnablePurgeProtection.Value);
             }
-            if (NetworkAcls != null)
+            if (Optional.IsDefined(NetworkAcls))
             {
                 writer.WritePropertyName("networkAcls"u8);
                 writer.WriteObjectValue(NetworkAcls);
             }
-            if (ProvisioningState.HasValue)
+            if (Optional.IsDefined(ProvisioningState))
             {
                 writer.WritePropertyName("provisioningState"u8);
                 writer.WriteStringValue(ProvisioningState.Value.ToString());
             }
-            if (PublicNetworkAccess != null)
+            if (Optional.IsDefined(PublicNetworkAccess))
             {
                 writer.WritePropertyName("publicNetworkAccess"u8);
                 writer.WriteStringValue(PublicNetworkAccess);
             }
-            if (ReadWriteSingleStringProperty != null)
+            if (Optional.IsDefined(ReadWriteSingleStringProperty))
             {
                 writer.WritePropertyName("readWriteSingleStringProperty"u8);
                 writer.WriteObjectValue(ReadWriteSingleStringProperty);
             }
-            if (ReadOnlySingleStringProperty != null)
+            if (Optional.IsDefined(ReadOnlySingleStringProperty))
             {
                 writer.WritePropertyName("readOnlySingleStringProperty"u8);
                 writer.WriteObjectValue(ReadOnlySingleStringProperty);
             }
-            if (ExtremelyDeepStringProperty != null)
+            if (Optional.IsDefined(ExtremelyDeepStringProperty))
             {
                 writer.WritePropertyName("extremelyDeepStringProperty"u8);
                 writer.WriteObjectValue(ExtremelyDeepStringProperty);

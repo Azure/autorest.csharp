@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {
@@ -15,12 +16,12 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (SoftDeleteColumnName != null)
+            if (Optional.IsDefined(SoftDeleteColumnName))
             {
                 writer.WritePropertyName("softDeleteColumnName"u8);
                 writer.WriteStringValue(SoftDeleteColumnName);
             }
-            if (SoftDeleteMarkerValue != null)
+            if (Optional.IsDefined(SoftDeleteMarkerValue))
             {
                 writer.WritePropertyName("softDeleteMarkerValue"u8);
                 writer.WriteStringValue(SoftDeleteMarkerValue);

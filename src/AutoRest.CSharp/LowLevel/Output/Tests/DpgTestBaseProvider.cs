@@ -30,6 +30,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Tests
             DefaultName = $"{ClientBuilder.GetRPName(defaultNamespace)}TestBase";
             _clients = clients;
             Inherits = new CSharpType(typeof(RecordedTestBase<>), TestEnvironment.Type);
+            DeclarationModifiers = TypeSignatureModifiers.Public | TypeSignatureModifiers.Partial;
         }
 
         public DpgTestEnvironmentProvider TestEnvironment { get; }

@@ -8,6 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
+using MgmtSupersetFlattenInheritance;
 
 namespace MgmtSupersetFlattenInheritance.Models
 {
@@ -18,7 +19,7 @@ namespace MgmtSupersetFlattenInheritance.Models
             writer.WriteStartObject();
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Foo != null)
+            if (Optional.IsDefined(Foo))
             {
                 writer.WritePropertyName("foo"u8);
                 writer.WriteStringValue(Foo);

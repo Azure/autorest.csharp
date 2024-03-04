@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using ModelWithConverterUsage;
 
 namespace ModelWithConverterUsage.Models
 {
@@ -26,7 +27,7 @@ namespace ModelWithConverterUsage.Models
             }
 
             writer.WriteStartObject();
-            if (ConstProperty != null)
+            if (Optional.IsDefined(ConstProperty))
             {
                 writer.WritePropertyName("Const_Property"u8);
                 writer.WriteStringValue(ConstProperty);

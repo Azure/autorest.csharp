@@ -31,7 +31,7 @@ namespace Azure.ResourceManager.Sample
             }
 
             writer.WriteStartObject();
-            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -59,29 +59,29 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format != "W" && SystemData != null)
+            if (options.Format != "W" && Optional.IsDefined(SystemData))
             {
                 writer.WritePropertyName("systemData"u8);
                 JsonSerializer.Serialize(writer, SystemData);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (SourceVirtualMachine != null)
+            if (Optional.IsDefined(SourceVirtualMachine))
             {
                 writer.WritePropertyName("sourceVirtualMachine"u8);
                 JsonSerializer.Serialize(writer, SourceVirtualMachine);
             }
-            if (StorageProfile != null)
+            if (Optional.IsDefined(StorageProfile))
             {
                 writer.WritePropertyName("storageProfile"u8);
                 writer.WriteObjectValue(StorageProfile);
             }
-            if (options.Format != "W" && ProvisioningState != null)
+            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
             {
                 writer.WritePropertyName("provisioningState"u8);
                 writer.WriteStringValue(ProvisioningState);
             }
-            if (HyperVGeneration.HasValue)
+            if (Optional.IsDefined(HyperVGeneration))
             {
                 writer.WritePropertyName("hyperVGeneration"u8);
                 writer.WriteStringValue(HyperVGeneration.Value.ToString());
@@ -251,7 +251,7 @@ namespace Azure.ResourceManager.Sample
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 builder.Append("  name:");
                 if (Name.Contains(Environment.NewLine))
@@ -268,7 +268,7 @@ namespace Azure.ResourceManager.Sample
             builder.Append("  location:");
             builder.AppendLine($" '{Location.ToString()}'");
 
-            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Tags))
             {
                 if (Tags.Any())
                 {
@@ -296,13 +296,13 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 builder.Append("  id:");
                 builder.AppendLine($" '{Id.ToString()}'");
             }
 
-            if (SystemData != null)
+            if (Optional.IsDefined(SystemData))
             {
                 builder.Append("  systemData:");
                 builder.AppendLine($" '{SystemData.ToString()}'");
@@ -310,19 +310,19 @@ namespace Azure.ResourceManager.Sample
 
             builder.Append("  properties:");
             builder.AppendLine(" {");
-            if (SourceVirtualMachine != null)
+            if (Optional.IsDefined(SourceVirtualMachine))
             {
                 builder.Append("    sourceVirtualMachine:");
                 AppendChildObject(builder, SourceVirtualMachine, options, 4, false);
             }
 
-            if (StorageProfile != null)
+            if (Optional.IsDefined(StorageProfile))
             {
                 builder.Append("    storageProfile:");
                 AppendChildObject(builder, StorageProfile, options, 4, false);
             }
 
-            if (ProvisioningState != null)
+            if (Optional.IsDefined(ProvisioningState))
             {
                 builder.Append("    provisioningState:");
                 if (ProvisioningState.Contains(Environment.NewLine))
@@ -336,7 +336,7 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (HyperVGeneration.HasValue)
+            if (Optional.IsDefined(HyperVGeneration))
             {
                 builder.Append("    hyperVGeneration:");
                 builder.AppendLine($" '{HyperVGeneration.Value.ToString()}'");

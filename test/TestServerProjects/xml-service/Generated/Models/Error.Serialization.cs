@@ -11,6 +11,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
+using xml_service;
 
 namespace xml_service.Models
 {
@@ -19,13 +20,13 @@ namespace xml_service.Models
         private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "Error");
-            if (Status.HasValue)
+            if (Optional.IsDefined(Status))
             {
                 writer.WriteStartElement("status");
                 writer.WriteValue(Status.Value);
                 writer.WriteEndElement();
             }
-            if (Message != null)
+            if (Optional.IsDefined(Message))
             {
                 writer.WriteStartElement("message");
                 writer.WriteValue(Message);

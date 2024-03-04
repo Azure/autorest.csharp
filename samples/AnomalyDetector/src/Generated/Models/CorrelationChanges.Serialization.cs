@@ -28,7 +28,7 @@ namespace AnomalyDetector.Models
             }
 
             writer.WriteStartObject();
-            if (!(ChangedVariables is ChangeTrackingList<string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(ChangedVariables))
             {
                 writer.WritePropertyName("changedVariables"u8);
                 writer.WriteStartArray();

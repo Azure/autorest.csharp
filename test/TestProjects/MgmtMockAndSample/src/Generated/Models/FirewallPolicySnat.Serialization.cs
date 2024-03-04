@@ -17,7 +17,7 @@ namespace MgmtMockAndSample.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (!(PrivateRanges is ChangeTrackingList<string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(PrivateRanges))
             {
                 writer.WritePropertyName("privateRanges"u8);
                 writer.WriteStartArray();

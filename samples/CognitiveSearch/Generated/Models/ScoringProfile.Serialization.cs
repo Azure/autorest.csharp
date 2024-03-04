@@ -19,12 +19,12 @@ namespace CognitiveSearch.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (TextWeights != null)
+            if (Optional.IsDefined(TextWeights))
             {
                 writer.WritePropertyName("text"u8);
                 writer.WriteObjectValue(TextWeights);
             }
-            if (!(Functions is ChangeTrackingList<ScoringFunction> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Functions))
             {
                 writer.WritePropertyName("functions"u8);
                 writer.WriteStartArray();
@@ -34,7 +34,7 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (FunctionAggregation.HasValue)
+            if (Optional.IsDefined(FunctionAggregation))
             {
                 writer.WritePropertyName("functionAggregation"u8);
                 writer.WriteStringValue(FunctionAggregation.Value.ToSerialString());

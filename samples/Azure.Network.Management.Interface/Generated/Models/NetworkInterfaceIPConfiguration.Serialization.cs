@@ -17,19 +17,19 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (!(VirtualNetworkTaps is ChangeTrackingList<VirtualNetworkTap> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(VirtualNetworkTaps))
             {
                 writer.WritePropertyName("virtualNetworkTaps"u8);
                 writer.WriteStartArray();
@@ -39,7 +39,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!(ApplicationGatewayBackendAddressPools is ChangeTrackingList<ApplicationGatewayBackendAddressPool> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(ApplicationGatewayBackendAddressPools))
             {
                 writer.WritePropertyName("applicationGatewayBackendAddressPools"u8);
                 writer.WriteStartArray();
@@ -49,7 +49,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!(LoadBalancerBackendAddressPools is ChangeTrackingList<BackendAddressPool> collection1 && collection1.IsUndefined))
+            if (Optional.IsCollectionDefined(LoadBalancerBackendAddressPools))
             {
                 writer.WritePropertyName("loadBalancerBackendAddressPools"u8);
                 writer.WriteStartArray();
@@ -59,7 +59,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!(LoadBalancerInboundNatRules is ChangeTrackingList<InboundNatRule> collection2 && collection2.IsUndefined))
+            if (Optional.IsCollectionDefined(LoadBalancerInboundNatRules))
             {
                 writer.WritePropertyName("loadBalancerInboundNatRules"u8);
                 writer.WriteStartArray();
@@ -69,37 +69,37 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (PrivateIPAddress != null)
+            if (Optional.IsDefined(PrivateIPAddress))
             {
                 writer.WritePropertyName("privateIPAddress"u8);
                 writer.WriteStringValue(PrivateIPAddress);
             }
-            if (PrivateIPAllocationMethod.HasValue)
+            if (Optional.IsDefined(PrivateIPAllocationMethod))
             {
                 writer.WritePropertyName("privateIPAllocationMethod"u8);
                 writer.WriteStringValue(PrivateIPAllocationMethod.Value.ToString());
             }
-            if (PrivateIPAddressVersion.HasValue)
+            if (Optional.IsDefined(PrivateIPAddressVersion))
             {
                 writer.WritePropertyName("privateIPAddressVersion"u8);
                 writer.WriteStringValue(PrivateIPAddressVersion.Value.ToString());
             }
-            if (Subnet != null)
+            if (Optional.IsDefined(Subnet))
             {
                 writer.WritePropertyName("subnet"u8);
                 writer.WriteObjectValue(Subnet);
             }
-            if (Primary.HasValue)
+            if (Optional.IsDefined(Primary))
             {
                 writer.WritePropertyName("primary"u8);
                 writer.WriteBooleanValue(Primary.Value);
             }
-            if (PublicIPAddress != null)
+            if (Optional.IsDefined(PublicIPAddress))
             {
                 writer.WritePropertyName("publicIPAddress"u8);
                 writer.WriteObjectValue(PublicIPAddress);
             }
-            if (!(ApplicationSecurityGroups is ChangeTrackingList<ApplicationSecurityGroup> collection3 && collection3.IsUndefined))
+            if (Optional.IsCollectionDefined(ApplicationSecurityGroups))
             {
                 writer.WritePropertyName("applicationSecurityGroups"u8);
                 writer.WriteStartArray();

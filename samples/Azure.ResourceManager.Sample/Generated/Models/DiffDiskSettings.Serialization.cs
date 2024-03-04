@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -27,12 +28,12 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Option.HasValue)
+            if (Optional.IsDefined(Option))
             {
                 writer.WritePropertyName("option"u8);
                 writer.WriteStringValue(Option.Value.ToString());
             }
-            if (Placement.HasValue)
+            if (Optional.IsDefined(Placement))
             {
                 writer.WritePropertyName("placement"u8);
                 writer.WriteStringValue(Placement.Value.ToString());
@@ -113,13 +114,13 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Option.HasValue)
+            if (Optional.IsDefined(Option))
             {
                 builder.Append("  option:");
                 builder.AppendLine($" '{Option.Value.ToString()}'");
             }
 
-            if (Placement.HasValue)
+            if (Optional.IsDefined(Placement))
             {
                 builder.Append("  placement:");
                 builder.AppendLine($" '{Placement.Value.ToString()}'");

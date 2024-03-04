@@ -29,37 +29,37 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (ComputerNamePrefix != null)
+            if (Optional.IsDefined(ComputerNamePrefix))
             {
                 writer.WritePropertyName("computerNamePrefix"u8);
                 writer.WriteStringValue(ComputerNamePrefix);
             }
-            if (AdminUsername != null)
+            if (Optional.IsDefined(AdminUsername))
             {
                 writer.WritePropertyName("adminUsername"u8);
                 writer.WriteStringValue(AdminUsername);
             }
-            if (AdminPassword != null)
+            if (Optional.IsDefined(AdminPassword))
             {
                 writer.WritePropertyName("adminPassword"u8);
                 writer.WriteStringValue(AdminPassword);
             }
-            if (CustomData != null)
+            if (Optional.IsDefined(CustomData))
             {
                 writer.WritePropertyName("customData"u8);
                 writer.WriteStringValue(CustomData);
             }
-            if (WindowsConfiguration != null)
+            if (Optional.IsDefined(WindowsConfiguration))
             {
                 writer.WritePropertyName("windowsConfiguration"u8);
                 writer.WriteObjectValue(WindowsConfiguration);
             }
-            if (LinuxConfiguration != null)
+            if (Optional.IsDefined(LinuxConfiguration))
             {
                 writer.WritePropertyName("linuxConfiguration"u8);
                 writer.WriteObjectValue(LinuxConfiguration);
             }
-            if (!(Secrets is ChangeTrackingList<VaultSecretGroup> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Secrets))
             {
                 writer.WritePropertyName("secrets"u8);
                 writer.WriteStartArray();
@@ -192,7 +192,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (ComputerNamePrefix != null)
+            if (Optional.IsDefined(ComputerNamePrefix))
             {
                 builder.Append("  computerNamePrefix:");
                 if (ComputerNamePrefix.Contains(Environment.NewLine))
@@ -206,7 +206,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (AdminUsername != null)
+            if (Optional.IsDefined(AdminUsername))
             {
                 builder.Append("  adminUsername:");
                 if (AdminUsername.Contains(Environment.NewLine))
@@ -220,7 +220,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (AdminPassword != null)
+            if (Optional.IsDefined(AdminPassword))
             {
                 builder.Append("  adminPassword:");
                 if (AdminPassword.Contains(Environment.NewLine))
@@ -234,7 +234,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (CustomData != null)
+            if (Optional.IsDefined(CustomData))
             {
                 builder.Append("  customData:");
                 if (CustomData.Contains(Environment.NewLine))
@@ -248,19 +248,19 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (WindowsConfiguration != null)
+            if (Optional.IsDefined(WindowsConfiguration))
             {
                 builder.Append("  windowsConfiguration:");
                 AppendChildObject(builder, WindowsConfiguration, options, 2, false);
             }
 
-            if (LinuxConfiguration != null)
+            if (Optional.IsDefined(LinuxConfiguration))
             {
                 builder.Append("  linuxConfiguration:");
                 AppendChildObject(builder, LinuxConfiguration, options, 2, false);
             }
 
-            if (!(Secrets is ChangeTrackingList<VaultSecretGroup> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Secrets))
             {
                 if (Secrets.Any())
                 {

@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using body_complex;
 
 namespace body_complex.Models
 {
@@ -26,19 +27,19 @@ namespace body_complex.Models
             }
 
             writer.WriteStartObject();
-            if (Location != null)
+            if (Optional.IsDefined(Location))
             {
                 writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location);
             }
-            if (Iswild.HasValue)
+            if (Optional.IsDefined(Iswild))
             {
                 writer.WritePropertyName("iswild"u8);
                 writer.WriteBooleanValue(Iswild.Value);
             }
             writer.WritePropertyName("fish.type"u8);
             writer.WriteStringValue(FishType);
-            if (Species != null)
+            if (Optional.IsDefined(Species))
             {
                 writer.WritePropertyName("species"u8);
                 writer.WriteStringValue(Species);

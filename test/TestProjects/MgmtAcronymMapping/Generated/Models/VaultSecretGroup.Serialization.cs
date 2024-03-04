@@ -18,12 +18,12 @@ namespace MgmtAcronymMapping.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (SourceVault != null)
+            if (Optional.IsDefined(SourceVault))
             {
                 writer.WritePropertyName("sourceVault"u8);
                 JsonSerializer.Serialize(writer, SourceVault);
             }
-            if (!(VaultCertificates is ChangeTrackingList<VaultCertificate> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(VaultCertificates))
             {
                 writer.WritePropertyName("vaultCertificates"u8);
                 writer.WriteStartArray();

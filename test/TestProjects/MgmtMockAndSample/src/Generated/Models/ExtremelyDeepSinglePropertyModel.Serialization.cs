@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
@@ -15,7 +16,7 @@ namespace MgmtMockAndSample.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Extreme != null)
+            if (Optional.IsDefined(Extreme))
             {
                 writer.WritePropertyName("extreme"u8);
                 writer.WriteObjectValue(Extreme);

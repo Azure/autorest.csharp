@@ -19,7 +19,7 @@ namespace CognitiveSearch.Models
             writer.WriteStartObject();
             writer.WritePropertyName("tokenizer"u8);
             writer.WriteStringValue(Tokenizer.ToString());
-            if (!(TokenFilters is ChangeTrackingList<TokenFilterName> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(TokenFilters))
             {
                 writer.WritePropertyName("tokenFilters"u8);
                 writer.WriteStartArray();
@@ -29,7 +29,7 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!(CharFilters is ChangeTrackingList<CharFilterName> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(CharFilters))
             {
                 writer.WritePropertyName("charFilters"u8);
                 writer.WriteStartArray();

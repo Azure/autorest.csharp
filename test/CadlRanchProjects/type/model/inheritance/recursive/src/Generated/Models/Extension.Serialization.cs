@@ -30,7 +30,7 @@ namespace _Type.Model.Inheritance.Recursive.Models
             writer.WriteStartObject();
             writer.WritePropertyName("level"u8);
             writer.WriteNumberValue(Level);
-            if (!(Extension is ChangeTrackingList<Extension> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Extension))
             {
                 writer.WritePropertyName("extension"u8);
                 writer.WriteStartArray();

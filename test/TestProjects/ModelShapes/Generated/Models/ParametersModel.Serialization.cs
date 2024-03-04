@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using ModelShapes;
 
 namespace ModelShapes.Models
 {
@@ -26,12 +27,12 @@ namespace ModelShapes.Models
             }
 
             writer.WriteStartObject();
-            if (Code != null)
+            if (Optional.IsDefined(Code))
             {
                 writer.WritePropertyName("Code"u8);
                 writer.WriteStringValue(Code);
             }
-            if (Status != null)
+            if (Optional.IsDefined(Status))
             {
                 writer.WritePropertyName("Status"u8);
                 writer.WriteStringValue(Status);

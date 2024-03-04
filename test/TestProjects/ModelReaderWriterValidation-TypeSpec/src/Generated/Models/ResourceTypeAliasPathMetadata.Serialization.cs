@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using ModelReaderWriterValidationTypeSpec;
 
 namespace ModelReaderWriterValidationTypeSpec.Models
 {
@@ -27,12 +28,12 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             }
 
             writer.WriteStartObject();
-            if (TokenType.HasValue)
+            if (Optional.IsDefined(TokenType))
             {
                 writer.WritePropertyName("tokenType"u8);
                 writer.WriteStringValue(TokenType.Value.ToString());
             }
-            if (Attributes.HasValue)
+            if (Optional.IsDefined(Attributes))
             {
                 writer.WritePropertyName("attributes"u8);
                 writer.WriteStringValue(Attributes.Value.ToString());

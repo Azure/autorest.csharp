@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using CustomizationsInTsp;
 
 namespace CustomizationsInTsp.Models
 {
@@ -100,7 +101,7 @@ namespace CustomizationsInTsp.Models
                 writer.WriteNumberValue(item);
             }
             writer.WriteEndArray();
-            if (VectorOptional.HasValue)
+            if (Optional.IsDefined(VectorOptional))
             {
                 if (VectorOptional != null)
                 {
@@ -131,7 +132,7 @@ namespace CustomizationsInTsp.Models
             {
                 writer.WriteNull("vectorNullable");
             }
-            if (VectorOptionalNullable.HasValue)
+            if (Optional.IsDefined(VectorOptionalNullable))
             {
                 if (VectorOptionalNullable != null)
                 {
@@ -158,7 +159,7 @@ namespace CustomizationsInTsp.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W" && VectorOptionalReadOnly.HasValue)
+            if (options.Format != "W" && Optional.IsDefined(VectorOptionalReadOnly))
             {
                 if (VectorOptionalReadOnly != null)
                 {
@@ -192,7 +193,7 @@ namespace CustomizationsInTsp.Models
                     writer.WriteNull("vectorNullableReadOnly");
                 }
             }
-            if (options.Format != "W" && VectorOptionalNullableReadOnly.HasValue)
+            if (options.Format != "W" && Optional.IsDefined(VectorOptionalNullableReadOnly))
             {
                 if (VectorOptionalNullableReadOnly != null)
                 {

@@ -21,14 +21,14 @@ namespace xml_service.Models
         private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "Blobs");
-            if (!(BlobPrefix is ChangeTrackingList<BlobPrefix> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(BlobPrefix))
             {
                 foreach (var item in BlobPrefix)
                 {
                     writer.WriteObjectValue(item, "BlobPrefix");
                 }
             }
-            if (!(Blob is ChangeTrackingList<Blob> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(Blob))
             {
                 foreach (var item in Blob)
                 {

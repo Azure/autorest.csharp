@@ -30,12 +30,12 @@ namespace SpreadTypeSpec.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (Color != null)
+            if (Optional.IsDefined(Color))
             {
                 writer.WritePropertyName("color"u8);
                 writer.WriteStringValue(Color);
             }
-            if (Age.HasValue)
+            if (Optional.IsDefined(Age))
             {
                 writer.WritePropertyName("age"u8);
                 writer.WriteNumberValue(Age.Value);
@@ -47,7 +47,7 @@ namespace SpreadTypeSpec.Models
                 writer.WriteNumberValue(item);
             }
             writer.WriteEndArray();
-            if (!(Elements is ChangeTrackingList<string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Elements))
             {
                 writer.WritePropertyName("elements"u8);
                 writer.WriteStartArray();

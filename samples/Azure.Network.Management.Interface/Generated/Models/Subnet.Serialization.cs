@@ -17,24 +17,24 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (AddressPrefix != null)
+            if (Optional.IsDefined(AddressPrefix))
             {
                 writer.WritePropertyName("addressPrefix"u8);
                 writer.WriteStringValue(AddressPrefix);
             }
-            if (!(AddressPrefixes is ChangeTrackingList<string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(AddressPrefixes))
             {
                 writer.WritePropertyName("addressPrefixes"u8);
                 writer.WriteStartArray();
@@ -44,22 +44,22 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (NetworkSecurityGroup != null)
+            if (Optional.IsDefined(NetworkSecurityGroup))
             {
                 writer.WritePropertyName("networkSecurityGroup"u8);
                 writer.WriteObjectValue(NetworkSecurityGroup);
             }
-            if (RouteTable != null)
+            if (Optional.IsDefined(RouteTable))
             {
                 writer.WritePropertyName("routeTable"u8);
                 writer.WriteObjectValue(RouteTable);
             }
-            if (NatGateway != null)
+            if (Optional.IsDefined(NatGateway))
             {
                 writer.WritePropertyName("natGateway"u8);
                 writer.WriteObjectValue(NatGateway);
             }
-            if (!(ServiceEndpoints is ChangeTrackingList<ServiceEndpointPropertiesFormat> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(ServiceEndpoints))
             {
                 writer.WritePropertyName("serviceEndpoints"u8);
                 writer.WriteStartArray();
@@ -69,7 +69,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!(ServiceEndpointPolicies is ChangeTrackingList<ServiceEndpointPolicy> collection1 && collection1.IsUndefined))
+            if (Optional.IsCollectionDefined(ServiceEndpointPolicies))
             {
                 writer.WritePropertyName("serviceEndpointPolicies"u8);
                 writer.WriteStartArray();
@@ -79,7 +79,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!(Delegations is ChangeTrackingList<Delegation> collection2 && collection2.IsUndefined))
+            if (Optional.IsCollectionDefined(Delegations))
             {
                 writer.WritePropertyName("delegations"u8);
                 writer.WriteStartArray();
@@ -89,12 +89,12 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (PrivateEndpointNetworkPolicies != null)
+            if (Optional.IsDefined(PrivateEndpointNetworkPolicies))
             {
                 writer.WritePropertyName("privateEndpointNetworkPolicies"u8);
                 writer.WriteStringValue(PrivateEndpointNetworkPolicies);
             }
-            if (PrivateLinkServiceNetworkPolicies != null)
+            if (Optional.IsDefined(PrivateLinkServiceNetworkPolicies))
             {
                 writer.WritePropertyName("privateLinkServiceNetworkPolicies"u8);
                 writer.WriteStringValue(PrivateLinkServiceNetworkPolicies);

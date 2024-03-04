@@ -27,17 +27,17 @@ namespace body_complex.Models
             }
 
             writer.WriteStartObject();
-            if (Breed != null)
+            if (Optional.IsDefined(Breed))
             {
                 writer.WritePropertyName("breed"u8);
                 writer.WriteStringValue(Breed);
             }
-            if (Color != null)
+            if (Optional.IsDefined(Color))
             {
                 writer.WritePropertyName("color"u8);
                 writer.WriteStringValue(Color);
             }
-            if (!(Hates is ChangeTrackingList<Dog> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Hates))
             {
                 writer.WritePropertyName("hates"u8);
                 writer.WriteStartArray();
@@ -47,12 +47,12 @@ namespace body_complex.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Id.HasValue)
+            if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteNumberValue(Id.Value);
             }
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);

@@ -27,7 +27,7 @@ namespace required_optional.Models
             }
 
             writer.WriteStartObject();
-            if (!(Value is ChangeTrackingList<string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Value))
             {
                 writer.WritePropertyName("value"u8);
                 writer.WriteStartArray();

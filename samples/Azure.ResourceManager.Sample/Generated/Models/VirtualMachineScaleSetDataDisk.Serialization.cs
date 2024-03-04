@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -27,41 +28,41 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
             writer.WritePropertyName("lun"u8);
             writer.WriteNumberValue(Lun);
-            if (Caching.HasValue)
+            if (Optional.IsDefined(Caching))
             {
                 writer.WritePropertyName("caching"u8);
                 writer.WriteStringValue(Caching.Value.ToSerialString());
             }
-            if (WriteAcceleratorEnabled.HasValue)
+            if (Optional.IsDefined(WriteAcceleratorEnabled))
             {
                 writer.WritePropertyName("writeAcceleratorEnabled"u8);
                 writer.WriteBooleanValue(WriteAcceleratorEnabled.Value);
             }
             writer.WritePropertyName("createOption"u8);
             writer.WriteStringValue(CreateOption.ToString());
-            if (DiskSizeGB.HasValue)
+            if (Optional.IsDefined(DiskSizeGB))
             {
                 writer.WritePropertyName("diskSizeGB"u8);
                 writer.WriteNumberValue(DiskSizeGB.Value);
             }
-            if (ManagedDisk != null)
+            if (Optional.IsDefined(ManagedDisk))
             {
                 writer.WritePropertyName("managedDisk"u8);
                 writer.WriteObjectValue(ManagedDisk);
             }
-            if (DiskIopsReadWrite.HasValue)
+            if (Optional.IsDefined(DiskIopsReadWrite))
             {
                 writer.WritePropertyName("diskIOPSReadWrite"u8);
                 writer.WriteNumberValue(DiskIopsReadWrite.Value);
             }
-            if (DiskMBpsReadWrite.HasValue)
+            if (Optional.IsDefined(DiskMBpsReadWrite))
             {
                 writer.WritePropertyName("diskMBpsReadWrite"u8);
                 writer.WriteNumberValue(DiskMBpsReadWrite.Value);
@@ -210,7 +211,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 builder.Append("  name:");
                 if (Name.Contains(Environment.NewLine))
@@ -227,13 +228,13 @@ namespace Azure.ResourceManager.Sample.Models
             builder.Append("  lun:");
             builder.AppendLine($" {Lun}");
 
-            if (Caching.HasValue)
+            if (Optional.IsDefined(Caching))
             {
                 builder.Append("  caching:");
                 builder.AppendLine($" '{Caching.Value.ToSerialString()}'");
             }
 
-            if (WriteAcceleratorEnabled.HasValue)
+            if (Optional.IsDefined(WriteAcceleratorEnabled))
             {
                 builder.Append("  writeAcceleratorEnabled:");
                 var boolValue = WriteAcceleratorEnabled.Value == true ? "true" : "false";
@@ -243,25 +244,25 @@ namespace Azure.ResourceManager.Sample.Models
             builder.Append("  createOption:");
             builder.AppendLine($" '{CreateOption.ToString()}'");
 
-            if (DiskSizeGB.HasValue)
+            if (Optional.IsDefined(DiskSizeGB))
             {
                 builder.Append("  diskSizeGB:");
                 builder.AppendLine($" {DiskSizeGB.Value}");
             }
 
-            if (ManagedDisk != null)
+            if (Optional.IsDefined(ManagedDisk))
             {
                 builder.Append("  managedDisk:");
                 AppendChildObject(builder, ManagedDisk, options, 2, false);
             }
 
-            if (DiskIopsReadWrite.HasValue)
+            if (Optional.IsDefined(DiskIopsReadWrite))
             {
                 builder.Append("  diskIOPSReadWrite:");
                 builder.AppendLine($" '{DiskIopsReadWrite.Value.ToString()}'");
             }
 
-            if (DiskMBpsReadWrite.HasValue)
+            if (Optional.IsDefined(DiskMBpsReadWrite))
             {
                 builder.Append("  diskMBpsReadWrite:");
                 builder.AppendLine($" '{DiskMBpsReadWrite.Value.ToString()}'");

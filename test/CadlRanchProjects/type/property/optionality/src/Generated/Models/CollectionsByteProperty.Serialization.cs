@@ -28,7 +28,7 @@ namespace _Type.Property.Optionality.Models
             }
 
             writer.WriteStartObject();
-            if (!(Property is ChangeTrackingList<BinaryData> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Property))
             {
                 writer.WritePropertyName("property"u8);
                 writer.WriteStartArray();

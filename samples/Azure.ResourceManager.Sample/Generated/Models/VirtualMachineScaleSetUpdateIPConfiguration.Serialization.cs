@@ -30,39 +30,39 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Subnet != null)
+            if (Optional.IsDefined(Subnet))
             {
                 writer.WritePropertyName("subnet"u8);
                 JsonSerializer.Serialize(writer, Subnet);
             }
-            if (Primary.HasValue)
+            if (Optional.IsDefined(Primary))
             {
                 writer.WritePropertyName("primary"u8);
                 writer.WriteBooleanValue(Primary.Value);
             }
-            if (PublicIPAddressConfiguration != null)
+            if (Optional.IsDefined(PublicIPAddressConfiguration))
             {
                 writer.WritePropertyName("publicIPAddressConfiguration"u8);
                 writer.WriteObjectValue(PublicIPAddressConfiguration);
             }
-            if (PrivateIPAddressVersion.HasValue)
+            if (Optional.IsDefined(PrivateIPAddressVersion))
             {
                 writer.WritePropertyName("privateIPAddressVersion"u8);
                 writer.WriteStringValue(PrivateIPAddressVersion.Value.ToString());
             }
-            if (!(ApplicationGatewayBackendAddressPools is ChangeTrackingList<WritableSubResource> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(ApplicationGatewayBackendAddressPools))
             {
                 writer.WritePropertyName("applicationGatewayBackendAddressPools"u8);
                 writer.WriteStartArray();
@@ -72,7 +72,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!(ApplicationSecurityGroups is ChangeTrackingList<WritableSubResource> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(ApplicationSecurityGroups))
             {
                 writer.WritePropertyName("applicationSecurityGroups"u8);
                 writer.WriteStartArray();
@@ -82,7 +82,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!(LoadBalancerBackendAddressPools is ChangeTrackingList<WritableSubResource> collection1 && collection1.IsUndefined))
+            if (Optional.IsCollectionDefined(LoadBalancerBackendAddressPools))
             {
                 writer.WritePropertyName("loadBalancerBackendAddressPools"u8);
                 writer.WriteStartArray();
@@ -92,7 +92,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!(LoadBalancerInboundNatPools is ChangeTrackingList<WritableSubResource> collection2 && collection2.IsUndefined))
+            if (Optional.IsCollectionDefined(LoadBalancerInboundNatPools))
             {
                 writer.WritePropertyName("loadBalancerInboundNatPools"u8);
                 writer.WriteStartArray();
@@ -294,7 +294,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 builder.Append("  name:");
                 if (Name.Contains(Environment.NewLine))
@@ -308,7 +308,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 builder.Append("  id:");
                 if (Id.Contains(Environment.NewLine))
@@ -324,32 +324,32 @@ namespace Azure.ResourceManager.Sample.Models
 
             builder.Append("  properties:");
             builder.AppendLine(" {");
-            if (Subnet != null)
+            if (Optional.IsDefined(Subnet))
             {
                 builder.Append("    subnet:");
                 AppendChildObject(builder, Subnet, options, 4, false);
             }
 
-            if (Primary.HasValue)
+            if (Optional.IsDefined(Primary))
             {
                 builder.Append("    primary:");
                 var boolValue = Primary.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
             }
 
-            if (PublicIPAddressConfiguration != null)
+            if (Optional.IsDefined(PublicIPAddressConfiguration))
             {
                 builder.Append("    publicIPAddressConfiguration:");
                 AppendChildObject(builder, PublicIPAddressConfiguration, options, 4, false);
             }
 
-            if (PrivateIPAddressVersion.HasValue)
+            if (Optional.IsDefined(PrivateIPAddressVersion))
             {
                 builder.Append("    privateIPAddressVersion:");
                 builder.AppendLine($" '{PrivateIPAddressVersion.Value.ToString()}'");
             }
 
-            if (!(ApplicationGatewayBackendAddressPools is ChangeTrackingList<WritableSubResource> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(ApplicationGatewayBackendAddressPools))
             {
                 if (ApplicationGatewayBackendAddressPools.Any())
                 {
@@ -363,7 +363,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (!(ApplicationSecurityGroups is ChangeTrackingList<WritableSubResource> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(ApplicationSecurityGroups))
             {
                 if (ApplicationSecurityGroups.Any())
                 {
@@ -377,7 +377,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (!(LoadBalancerBackendAddressPools is ChangeTrackingList<WritableSubResource> collection1 && collection1.IsUndefined))
+            if (Optional.IsCollectionDefined(LoadBalancerBackendAddressPools))
             {
                 if (LoadBalancerBackendAddressPools.Any())
                 {
@@ -391,7 +391,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (!(LoadBalancerInboundNatPools is ChangeTrackingList<WritableSubResource> collection2 && collection2.IsUndefined))
+            if (Optional.IsCollectionDefined(LoadBalancerInboundNatPools))
             {
                 if (LoadBalancerInboundNatPools.Any())
                 {

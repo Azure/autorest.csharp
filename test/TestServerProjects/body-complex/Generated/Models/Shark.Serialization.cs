@@ -27,7 +27,7 @@ namespace body_complex.Models
             }
 
             writer.WriteStartObject();
-            if (Age.HasValue)
+            if (Optional.IsDefined(Age))
             {
                 writer.WritePropertyName("age"u8);
                 writer.WriteNumberValue(Age.Value);
@@ -36,14 +36,14 @@ namespace body_complex.Models
             writer.WriteStringValue(Birthday, "O");
             writer.WritePropertyName("fishtype"u8);
             writer.WriteStringValue(Fishtype);
-            if (Species != null)
+            if (Optional.IsDefined(Species))
             {
                 writer.WritePropertyName("species"u8);
                 writer.WriteStringValue(Species);
             }
             writer.WritePropertyName("length"u8);
             writer.WriteNumberValue(Length);
-            if (!(Siblings is ChangeTrackingList<Fish> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Siblings))
             {
                 writer.WritePropertyName("siblings"u8);
                 writer.WriteStartArray();

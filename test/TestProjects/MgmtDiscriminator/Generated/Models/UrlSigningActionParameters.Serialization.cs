@@ -31,12 +31,12 @@ namespace MgmtDiscriminator.Models
             writer.WriteStartObject();
             writer.WritePropertyName("typeName"u8);
             writer.WriteStringValue(TypeName.ToString());
-            if (Algorithm.HasValue)
+            if (Optional.IsDefined(Algorithm))
             {
                 writer.WritePropertyName("algorithm"u8);
                 writer.WriteStringValue(Algorithm.Value.ToString());
             }
-            if (!(ParameterNameOverride is ChangeTrackingList<UrlSigningParamIdentifier> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(ParameterNameOverride))
             {
                 writer.WritePropertyName("parameterNameOverride"u8);
                 writer.WriteStartArray();
@@ -136,13 +136,13 @@ namespace MgmtDiscriminator.Models
             builder.Append("  typeName:");
             builder.AppendLine($" '{TypeName.ToString()}'");
 
-            if (Algorithm.HasValue)
+            if (Optional.IsDefined(Algorithm))
             {
                 builder.Append("  algorithm:");
                 builder.AppendLine($" '{Algorithm.Value.ToString()}'");
             }
 
-            if (!(ParameterNameOverride is ChangeTrackingList<UrlSigningParamIdentifier> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(ParameterNameOverride))
             {
                 if (ParameterNameOverride.Any())
                 {

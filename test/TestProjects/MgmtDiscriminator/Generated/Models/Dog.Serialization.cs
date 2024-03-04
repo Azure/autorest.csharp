@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -27,19 +28,19 @@ namespace MgmtDiscriminator.Models
             }
 
             writer.WriteStartObject();
-            if (Bark != null)
+            if (Optional.IsDefined(Bark))
             {
                 writer.WritePropertyName("bark"u8);
                 writer.WriteStringValue(Bark);
             }
-            if (DogKind.HasValue)
+            if (Optional.IsDefined(DogKind))
             {
                 writer.WritePropertyName("dogKind"u8);
                 writer.WriteStringValue(DogKind.Value.ToSerialString());
             }
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind.ToSerialString());
-            if (options.Format != "W" && Id != null)
+            if (options.Format != "W" && Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
@@ -128,7 +129,7 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Bark != null)
+            if (Optional.IsDefined(Bark))
             {
                 builder.Append("  bark:");
                 if (Bark.Contains(Environment.NewLine))
@@ -142,7 +143,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            if (DogKind.HasValue)
+            if (Optional.IsDefined(DogKind))
             {
                 builder.Append("  dogKind:");
                 builder.AppendLine($" '{DogKind.Value.ToSerialString()}'");
@@ -151,7 +152,7 @@ namespace MgmtDiscriminator.Models
             builder.Append("  kind:");
             builder.AppendLine($" '{Kind.ToSerialString()}'");
 
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 builder.Append("  id:");
                 if (Id.Contains(Environment.NewLine))

@@ -29,17 +29,17 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (ImageReference != null)
+            if (Optional.IsDefined(ImageReference))
             {
                 writer.WritePropertyName("imageReference"u8);
                 writer.WriteObjectValue(ImageReference);
             }
-            if (OSDisk != null)
+            if (Optional.IsDefined(OSDisk))
             {
                 writer.WritePropertyName("osDisk"u8);
                 writer.WriteObjectValue(OSDisk);
             }
-            if (!(DataDisks is ChangeTrackingList<DataDisk> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(DataDisks))
             {
                 writer.WritePropertyName("dataDisks"u8);
                 writer.WriteStartArray();
@@ -140,19 +140,19 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (ImageReference != null)
+            if (Optional.IsDefined(ImageReference))
             {
                 builder.Append("  imageReference:");
                 AppendChildObject(builder, ImageReference, options, 2, false);
             }
 
-            if (OSDisk != null)
+            if (Optional.IsDefined(OSDisk))
             {
                 builder.Append("  osDisk:");
                 AppendChildObject(builder, OSDisk, options, 2, false);
             }
 
-            if (!(DataDisks is ChangeTrackingList<DataDisk> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(DataDisks))
             {
                 if (DataDisks.Any())
                 {

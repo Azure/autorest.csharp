@@ -28,12 +28,12 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             }
 
             writer.WriteStartObject();
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (!(Paths is ChangeTrackingList<ResourceTypeAliasPath> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Paths))
             {
                 writer.WritePropertyName("paths"u8);
                 writer.WriteStartArray();
@@ -43,22 +43,22 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (AliasType.HasValue)
+            if (Optional.IsDefined(AliasType))
             {
                 writer.WritePropertyName("aliasType"u8);
                 writer.WriteStringValue(AliasType.Value.ToSerialString());
             }
-            if (DefaultPath != null)
+            if (Optional.IsDefined(DefaultPath))
             {
                 writer.WritePropertyName("defaultPath"u8);
                 writer.WriteStringValue(DefaultPath);
             }
-            if (DefaultPattern != null)
+            if (Optional.IsDefined(DefaultPattern))
             {
                 writer.WritePropertyName("defaultPattern"u8);
                 writer.WriteObjectValue(DefaultPattern);
             }
-            if (DefaultMetadata != null)
+            if (Optional.IsDefined(DefaultMetadata))
             {
                 writer.WritePropertyName("defaultMetadata"u8);
                 writer.WriteObjectValue(DefaultMetadata);

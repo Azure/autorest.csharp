@@ -22,22 +22,22 @@ namespace Azure.ResourceManager.Storage
             writer.WriteStartObject();
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (DefaultEncryptionScope != null)
+            if (Optional.IsDefined(DefaultEncryptionScope))
             {
                 writer.WritePropertyName("defaultEncryptionScope"u8);
                 writer.WriteStringValue(DefaultEncryptionScope);
             }
-            if (DenyEncryptionScopeOverride.HasValue)
+            if (Optional.IsDefined(DenyEncryptionScopeOverride))
             {
                 writer.WritePropertyName("denyEncryptionScopeOverride"u8);
                 writer.WriteBooleanValue(DenyEncryptionScopeOverride.Value);
             }
-            if (PublicAccess.HasValue)
+            if (Optional.IsDefined(PublicAccess))
             {
                 writer.WritePropertyName("publicAccess"u8);
                 writer.WriteStringValue(PublicAccess.Value.ToSerialString());
             }
-            if (!(Metadata is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Metadata))
             {
                 writer.WritePropertyName("metadata"u8);
                 writer.WriteStartObject();
@@ -48,17 +48,17 @@ namespace Azure.ResourceManager.Storage
                 }
                 writer.WriteEndObject();
             }
-            if (ImmutableStorageWithVersioning != null)
+            if (Optional.IsDefined(ImmutableStorageWithVersioning))
             {
                 writer.WritePropertyName("immutableStorageWithVersioning"u8);
                 writer.WriteObjectValue(ImmutableStorageWithVersioning);
             }
-            if (EnableNfsV3RootSquash.HasValue)
+            if (Optional.IsDefined(EnableNfsV3RootSquash))
             {
                 writer.WritePropertyName("enableNfsV3RootSquash"u8);
                 writer.WriteBooleanValue(EnableNfsV3RootSquash.Value);
             }
-            if (EnableNfsV3AllSquash.HasValue)
+            if (Optional.IsDefined(EnableNfsV3AllSquash))
             {
                 writer.WritePropertyName("enableNfsV3AllSquash"u8);
                 writer.WriteBooleanValue(EnableNfsV3AllSquash.Value);

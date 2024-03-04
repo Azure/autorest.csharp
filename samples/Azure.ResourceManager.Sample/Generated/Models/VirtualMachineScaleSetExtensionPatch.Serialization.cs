@@ -45,44 +45,44 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format != "W" && SystemData != null)
+            if (options.Format != "W" && Optional.IsDefined(SystemData))
             {
                 writer.WritePropertyName("systemData"u8);
                 JsonSerializer.Serialize(writer, SystemData);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (ForceUpdateTag != null)
+            if (Optional.IsDefined(ForceUpdateTag))
             {
                 writer.WritePropertyName("forceUpdateTag"u8);
                 writer.WriteStringValue(ForceUpdateTag);
             }
-            if (Publisher != null)
+            if (Optional.IsDefined(Publisher))
             {
                 writer.WritePropertyName("publisher"u8);
                 writer.WriteStringValue(Publisher);
             }
-            if (TypePropertiesType != null)
+            if (Optional.IsDefined(TypePropertiesType))
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(TypePropertiesType);
             }
-            if (TypeHandlerVersion != null)
+            if (Optional.IsDefined(TypeHandlerVersion))
             {
                 writer.WritePropertyName("typeHandlerVersion"u8);
                 writer.WriteStringValue(TypeHandlerVersion);
             }
-            if (AutoUpgradeMinorVersion.HasValue)
+            if (Optional.IsDefined(AutoUpgradeMinorVersion))
             {
                 writer.WritePropertyName("autoUpgradeMinorVersion"u8);
                 writer.WriteBooleanValue(AutoUpgradeMinorVersion.Value);
             }
-            if (EnableAutomaticUpgrade.HasValue)
+            if (Optional.IsDefined(EnableAutomaticUpgrade))
             {
                 writer.WritePropertyName("enableAutomaticUpgrade"u8);
                 writer.WriteBooleanValue(EnableAutomaticUpgrade.Value);
             }
-            if (Settings != null)
+            if (Optional.IsDefined(Settings))
             {
                 writer.WritePropertyName("settings"u8);
 #if NET6_0_OR_GREATER
@@ -94,7 +94,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
 #endif
             }
-            if (ProtectedSettings != null)
+            if (Optional.IsDefined(ProtectedSettings))
             {
                 writer.WritePropertyName("protectedSettings"u8);
 #if NET6_0_OR_GREATER
@@ -106,12 +106,12 @@ namespace Azure.ResourceManager.Sample.Models
                 }
 #endif
             }
-            if (options.Format != "W" && ProvisioningState != null)
+            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
             {
                 writer.WritePropertyName("provisioningState"u8);
                 writer.WriteStringValue(ProvisioningState);
             }
-            if (!(ProvisionAfterExtensions is ChangeTrackingList<string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(ProvisionAfterExtensions))
             {
                 writer.WritePropertyName("provisionAfterExtensions"u8);
                 writer.WriteStartArray();
@@ -318,7 +318,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 builder.Append("  name:");
                 if (Name.Contains(Environment.NewLine))
@@ -332,13 +332,13 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 builder.Append("  id:");
                 builder.AppendLine($" '{Id.ToString()}'");
             }
 
-            if (SystemData != null)
+            if (Optional.IsDefined(SystemData))
             {
                 builder.Append("  systemData:");
                 builder.AppendLine($" '{SystemData.ToString()}'");
@@ -346,7 +346,7 @@ namespace Azure.ResourceManager.Sample.Models
 
             builder.Append("  properties:");
             builder.AppendLine(" {");
-            if (ForceUpdateTag != null)
+            if (Optional.IsDefined(ForceUpdateTag))
             {
                 builder.Append("    forceUpdateTag:");
                 if (ForceUpdateTag.Contains(Environment.NewLine))
@@ -360,7 +360,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Publisher != null)
+            if (Optional.IsDefined(Publisher))
             {
                 builder.Append("    publisher:");
                 if (Publisher.Contains(Environment.NewLine))
@@ -374,7 +374,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (TypePropertiesType != null)
+            if (Optional.IsDefined(TypePropertiesType))
             {
                 builder.Append("    type:");
                 if (TypePropertiesType.Contains(Environment.NewLine))
@@ -388,7 +388,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (TypeHandlerVersion != null)
+            if (Optional.IsDefined(TypeHandlerVersion))
             {
                 builder.Append("    typeHandlerVersion:");
                 if (TypeHandlerVersion.Contains(Environment.NewLine))
@@ -402,33 +402,33 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (AutoUpgradeMinorVersion.HasValue)
+            if (Optional.IsDefined(AutoUpgradeMinorVersion))
             {
                 builder.Append("    autoUpgradeMinorVersion:");
                 var boolValue = AutoUpgradeMinorVersion.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
             }
 
-            if (EnableAutomaticUpgrade.HasValue)
+            if (Optional.IsDefined(EnableAutomaticUpgrade))
             {
                 builder.Append("    enableAutomaticUpgrade:");
                 var boolValue = EnableAutomaticUpgrade.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
             }
 
-            if (Settings != null)
+            if (Optional.IsDefined(Settings))
             {
                 builder.Append("    settings:");
                 builder.AppendLine($" '{Settings.ToString()}'");
             }
 
-            if (ProtectedSettings != null)
+            if (Optional.IsDefined(ProtectedSettings))
             {
                 builder.Append("    protectedSettings:");
                 builder.AppendLine($" '{ProtectedSettings.ToString()}'");
             }
 
-            if (ProvisioningState != null)
+            if (Optional.IsDefined(ProvisioningState))
             {
                 builder.Append("    provisioningState:");
                 if (ProvisioningState.Contains(Environment.NewLine))
@@ -442,7 +442,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (!(ProvisionAfterExtensions is ChangeTrackingList<string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(ProvisionAfterExtensions))
             {
                 if (ProvisionAfterExtensions.Any())
                 {

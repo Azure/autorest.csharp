@@ -36,7 +36,7 @@ namespace MgmtDiscriminator.Models
                 writer.WriteStringValue(item);
             }
             writer.WriteEndArray();
-            if (OptionalString != null)
+            if (Optional.IsDefined(OptionalString))
             {
                 writer.WritePropertyName("optionalString"u8);
                 writer.WriteStringValue(OptionalString);
@@ -114,7 +114,7 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (!(RequiredCollection is ChangeTrackingList<string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(RequiredCollection))
             {
                 if (RequiredCollection.Any())
                 {
@@ -141,7 +141,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            if (OptionalString != null)
+            if (Optional.IsDefined(OptionalString))
             {
                 builder.Append("  optionalString:");
                 if (OptionalString.Contains(Environment.NewLine))

@@ -17,22 +17,22 @@ namespace MgmtAcronymMapping.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (ProvisionVmAgent.HasValue)
+            if (Optional.IsDefined(ProvisionVmAgent))
             {
                 writer.WritePropertyName("provisionVMAgent"u8);
                 writer.WriteBooleanValue(ProvisionVmAgent.Value);
             }
-            if (EnableAutomaticUpdates.HasValue)
+            if (Optional.IsDefined(EnableAutomaticUpdates))
             {
                 writer.WritePropertyName("enableAutomaticUpdates"u8);
                 writer.WriteBooleanValue(EnableAutomaticUpdates.Value);
             }
-            if (TimeZone != null)
+            if (Optional.IsDefined(TimeZone))
             {
                 writer.WritePropertyName("timeZone"u8);
                 writer.WriteStringValue(TimeZone);
             }
-            if (!(AdditionalUnattendContent is ChangeTrackingList<AdditionalUnattendContent> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(AdditionalUnattendContent))
             {
                 writer.WritePropertyName("additionalUnattendContent"u8);
                 writer.WriteStartArray();
@@ -42,12 +42,12 @@ namespace MgmtAcronymMapping.Models
                 }
                 writer.WriteEndArray();
             }
-            if (PatchSettings != null)
+            if (Optional.IsDefined(PatchSettings))
             {
                 writer.WritePropertyName("patchSettings"u8);
                 writer.WriteObjectValue(PatchSettings);
             }
-            if (WinRM != null)
+            if (Optional.IsDefined(WinRM))
             {
                 writer.WritePropertyName("winRM"u8);
                 writer.WriteObjectValue(WinRM);

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using CustomizationsInTsp;
 
 namespace CustomizationsInTsp.Models
 {
@@ -31,7 +32,7 @@ namespace CustomizationsInTsp.Models
             WriteRequiredIntValue(writer);
             writer.WritePropertyName("additionalSerializableProperty"u8);
             writer.WriteNumberValue(AdditionalSerializableProperty);
-            if (AdditionalNullableSerializableProperty.HasValue)
+            if (Optional.IsDefined(AdditionalNullableSerializableProperty))
             {
                 if (AdditionalNullableSerializableProperty != null)
                 {
@@ -45,7 +46,7 @@ namespace CustomizationsInTsp.Models
             }
             writer.WritePropertyName("requiredIntOnBase"u8);
             WriteRequiredIntOnBaseValue(writer);
-            if (OptionalInt.HasValue)
+            if (Optional.IsDefined(OptionalInt))
             {
                 writer.WritePropertyName("optionalInt"u8);
                 writer.WriteNumberValue(OptionalInt.Value);

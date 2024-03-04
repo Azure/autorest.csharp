@@ -19,31 +19,31 @@ namespace CognitiveSearch.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (Description != null)
+            if (Optional.IsDefined(Description))
             {
                 writer.WritePropertyName("description"u8);
                 writer.WriteStringValue(Description);
             }
             writer.WritePropertyName("dataSourceName"u8);
             writer.WriteStringValue(DataSourceName);
-            if (SkillsetName != null)
+            if (Optional.IsDefined(SkillsetName))
             {
                 writer.WritePropertyName("skillsetName"u8);
                 writer.WriteStringValue(SkillsetName);
             }
             writer.WritePropertyName("targetIndexName"u8);
             writer.WriteStringValue(TargetIndexName);
-            if (Schedule != null)
+            if (Optional.IsDefined(Schedule))
             {
                 writer.WritePropertyName("schedule"u8);
                 writer.WriteObjectValue(Schedule);
             }
-            if (Parameters != null)
+            if (Optional.IsDefined(Parameters))
             {
                 writer.WritePropertyName("parameters"u8);
                 writer.WriteObjectValue(Parameters);
             }
-            if (!(FieldMappings is ChangeTrackingList<FieldMapping> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(FieldMappings))
             {
                 writer.WritePropertyName("fieldMappings"u8);
                 writer.WriteStartArray();
@@ -53,7 +53,7 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!(OutputFieldMappings is ChangeTrackingList<FieldMapping> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(OutputFieldMappings))
             {
                 writer.WritePropertyName("outputFieldMappings"u8);
                 writer.WriteStartArray();
@@ -63,12 +63,12 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (IsDisabled.HasValue)
+            if (Optional.IsDefined(IsDisabled))
             {
                 writer.WritePropertyName("disabled"u8);
                 writer.WriteBooleanValue(IsDisabled.Value);
             }
-            if (ETag != null)
+            if (Optional.IsDefined(ETag))
             {
                 writer.WritePropertyName("@odata.etag"u8);
                 writer.WriteStringValue(ETag);

@@ -27,7 +27,7 @@ namespace body_complex.Models
             }
 
             writer.WriteStartObject();
-            if (!(Array is ChangeTrackingList<string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Array))
             {
                 writer.WritePropertyName("array"u8);
                 writer.WriteStartArray();

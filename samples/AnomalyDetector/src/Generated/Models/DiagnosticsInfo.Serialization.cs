@@ -28,12 +28,12 @@ namespace AnomalyDetector.Models
             }
 
             writer.WriteStartObject();
-            if (ModelState != null)
+            if (Optional.IsDefined(ModelState))
             {
                 writer.WritePropertyName("modelState"u8);
                 writer.WriteObjectValue(ModelState);
             }
-            if (!(VariableStates is ChangeTrackingList<VariableState> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(VariableStates))
             {
                 writer.WritePropertyName("variableStates"u8);
                 writer.WriteStartArray();

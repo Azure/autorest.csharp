@@ -23,6 +23,7 @@ namespace AutoRest.CSharp.LowLevel.Output
     {
         public DpgClientTestProvider(string defaultNamespace, string defaultName, LowLevelClient client, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
         {
+            DeclarationModifiers = TypeSignatureModifiers.Public | TypeSignatureModifiers.Partial;
             DefaultName = defaultName;
             _client = client;
         }

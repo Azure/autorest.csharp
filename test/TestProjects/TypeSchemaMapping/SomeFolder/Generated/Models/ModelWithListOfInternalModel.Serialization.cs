@@ -27,12 +27,12 @@ namespace TypeSchemaMapping.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && StringProperty != null)
+            if (options.Format != "W" && Optional.IsDefined(StringProperty))
             {
                 writer.WritePropertyName("StringProperty"u8);
                 writer.WriteStringValue(StringProperty);
             }
-            if (options.Format != "W" && !(InternalListProperty is ChangeTrackingList<InternalModel> collection && collection.IsUndefined))
+            if (options.Format != "W" && Optional.IsCollectionDefined(InternalListProperty))
             {
                 writer.WritePropertyName("InternalListProperty"u8);
                 writer.WriteStartArray();

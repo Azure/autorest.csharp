@@ -28,7 +28,7 @@ namespace _Type.Model.Inheritance.Recursive.Models
             }
 
             writer.WriteStartObject();
-            if (!(Extension is ChangeTrackingList<Extension> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Extension))
             {
                 writer.WritePropertyName("extension"u8);
                 writer.WriteStartArray();

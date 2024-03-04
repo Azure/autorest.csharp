@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -27,17 +28,17 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (DisablePasswordAuthentication.HasValue)
+            if (Optional.IsDefined(DisablePasswordAuthentication))
             {
                 writer.WritePropertyName("disablePasswordAuthentication"u8);
                 writer.WriteBooleanValue(DisablePasswordAuthentication.Value);
             }
-            if (Ssh != null)
+            if (Optional.IsDefined(Ssh))
             {
                 writer.WritePropertyName("ssh"u8);
                 writer.WriteObjectValue(Ssh);
             }
-            if (ProvisionVmAgent.HasValue)
+            if (Optional.IsDefined(ProvisionVmAgent))
             {
                 writer.WritePropertyName("provisionVMAgent"u8);
                 writer.WriteBooleanValue(ProvisionVmAgent.Value);
@@ -128,20 +129,20 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (DisablePasswordAuthentication.HasValue)
+            if (Optional.IsDefined(DisablePasswordAuthentication))
             {
                 builder.Append("  disablePasswordAuthentication:");
                 var boolValue = DisablePasswordAuthentication.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
             }
 
-            if (Ssh != null)
+            if (Optional.IsDefined(Ssh))
             {
                 builder.Append("  ssh:");
                 AppendChildObject(builder, Ssh, options, 2, false);
             }
 
-            if (ProvisionVmAgent.HasValue)
+            if (Optional.IsDefined(ProvisionVmAgent))
             {
                 builder.Append("  provisionVMAgent:");
                 var boolValue = ProvisionVmAgent.Value == true ? "true" : "false";

@@ -29,37 +29,37 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && Status.HasValue)
+            if (options.Format != "W" && Optional.IsDefined(Status))
             {
                 writer.WritePropertyName("status"u8);
                 writer.WriteStringValue(Status.Value.ToString());
             }
-            if (options.Format != "W" && AssessmentActivityId != null)
+            if (options.Format != "W" && Optional.IsDefined(AssessmentActivityId))
             {
                 writer.WritePropertyName("assessmentActivityId"u8);
                 writer.WriteStringValue(AssessmentActivityId);
             }
-            if (options.Format != "W" && RebootPending.HasValue)
+            if (options.Format != "W" && Optional.IsDefined(RebootPending))
             {
                 writer.WritePropertyName("rebootPending"u8);
                 writer.WriteBooleanValue(RebootPending.Value);
             }
-            if (options.Format != "W" && CriticalAndSecurityPatchCount.HasValue)
+            if (options.Format != "W" && Optional.IsDefined(CriticalAndSecurityPatchCount))
             {
                 writer.WritePropertyName("criticalAndSecurityPatchCount"u8);
                 writer.WriteNumberValue(CriticalAndSecurityPatchCount.Value);
             }
-            if (options.Format != "W" && OtherPatchCount.HasValue)
+            if (options.Format != "W" && Optional.IsDefined(OtherPatchCount))
             {
                 writer.WritePropertyName("otherPatchCount"u8);
                 writer.WriteNumberValue(OtherPatchCount.Value);
             }
-            if (options.Format != "W" && StartOn.HasValue)
+            if (options.Format != "W" && Optional.IsDefined(StartOn))
             {
                 writer.WritePropertyName("startDateTime"u8);
                 writer.WriteStringValue(StartOn.Value, "O");
             }
-            if (options.Format != "W" && !(Patches is ChangeTrackingList<VirtualMachineSoftwarePatchProperties> collection && collection.IsUndefined))
+            if (options.Format != "W" && Optional.IsCollectionDefined(Patches))
             {
                 writer.WritePropertyName("patches"u8);
                 writer.WriteStartArray();
@@ -69,7 +69,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W" && Error != null)
+            if (options.Format != "W" && Optional.IsDefined(Error))
             {
                 writer.WritePropertyName("error"u8);
                 writer.WriteObjectValue(Error);
@@ -220,13 +220,13 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Status.HasValue)
+            if (Optional.IsDefined(Status))
             {
                 builder.Append("  status:");
                 builder.AppendLine($" '{Status.Value.ToString()}'");
             }
 
-            if (AssessmentActivityId != null)
+            if (Optional.IsDefined(AssessmentActivityId))
             {
                 builder.Append("  assessmentActivityId:");
                 if (AssessmentActivityId.Contains(Environment.NewLine))
@@ -240,33 +240,33 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (RebootPending.HasValue)
+            if (Optional.IsDefined(RebootPending))
             {
                 builder.Append("  rebootPending:");
                 var boolValue = RebootPending.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
             }
 
-            if (CriticalAndSecurityPatchCount.HasValue)
+            if (Optional.IsDefined(CriticalAndSecurityPatchCount))
             {
                 builder.Append("  criticalAndSecurityPatchCount:");
                 builder.AppendLine($" {CriticalAndSecurityPatchCount.Value}");
             }
 
-            if (OtherPatchCount.HasValue)
+            if (Optional.IsDefined(OtherPatchCount))
             {
                 builder.Append("  otherPatchCount:");
                 builder.AppendLine($" {OtherPatchCount.Value}");
             }
 
-            if (StartOn.HasValue)
+            if (Optional.IsDefined(StartOn))
             {
                 builder.Append("  startDateTime:");
                 var formattedDateTimeString = TypeFormatters.ToString(StartOn.Value, "o");
                 builder.AppendLine($" '{formattedDateTimeString}'");
             }
 
-            if (!(Patches is ChangeTrackingList<VirtualMachineSoftwarePatchProperties> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Patches))
             {
                 if (Patches.Any())
                 {
@@ -280,7 +280,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Error != null)
+            if (Optional.IsDefined(Error))
             {
                 builder.Append("  error:");
                 AppendChildObject(builder, Error, options, 2, false);

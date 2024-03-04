@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -33,7 +34,7 @@ namespace MgmtDiscriminator.Models
             writer.WriteStringValue(SourcePattern);
             writer.WritePropertyName("destination"u8);
             writer.WriteStringValue(Destination);
-            if (PreserveUnmatchedPath.HasValue)
+            if (Optional.IsDefined(PreserveUnmatchedPath))
             {
                 writer.WritePropertyName("preserveUnmatchedPath"u8);
                 writer.WriteBooleanValue(PreserveUnmatchedPath.Value);
@@ -125,7 +126,7 @@ namespace MgmtDiscriminator.Models
             builder.Append("  typeName:");
             builder.AppendLine($" '{TypeName.ToString()}'");
 
-            if (SourcePattern != null)
+            if (Optional.IsDefined(SourcePattern))
             {
                 builder.Append("  sourcePattern:");
                 if (SourcePattern.Contains(Environment.NewLine))
@@ -139,7 +140,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            if (Destination != null)
+            if (Optional.IsDefined(Destination))
             {
                 builder.Append("  destination:");
                 if (Destination.Contains(Environment.NewLine))
@@ -153,7 +154,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            if (PreserveUnmatchedPath.HasValue)
+            if (Optional.IsDefined(PreserveUnmatchedPath))
             {
                 builder.Append("  preserveUnmatchedPath:");
                 var boolValue = PreserveUnmatchedPath.Value == true ? "true" : "false";

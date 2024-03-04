@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -27,12 +28,12 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (ProtectFromScaleIn.HasValue)
+            if (Optional.IsDefined(ProtectFromScaleIn))
             {
                 writer.WritePropertyName("protectFromScaleIn"u8);
                 writer.WriteBooleanValue(ProtectFromScaleIn.Value);
             }
-            if (ProtectFromScaleSetActions.HasValue)
+            if (Optional.IsDefined(ProtectFromScaleSetActions))
             {
                 writer.WritePropertyName("protectFromScaleSetActions"u8);
                 writer.WriteBooleanValue(ProtectFromScaleSetActions.Value);
@@ -113,14 +114,14 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (ProtectFromScaleIn.HasValue)
+            if (Optional.IsDefined(ProtectFromScaleIn))
             {
                 builder.Append("  protectFromScaleIn:");
                 var boolValue = ProtectFromScaleIn.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
             }
 
-            if (ProtectFromScaleSetActions.HasValue)
+            if (Optional.IsDefined(ProtectFromScaleSetActions))
             {
                 builder.Append("  protectFromScaleSetActions:");
                 var boolValue = ProtectFromScaleSetActions.Value == true ? "true" : "false";

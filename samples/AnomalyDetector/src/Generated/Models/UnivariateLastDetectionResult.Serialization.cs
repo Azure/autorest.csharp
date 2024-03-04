@@ -9,6 +9,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using AnomalyDetector;
 using Azure;
 using Azure.Core;
 
@@ -43,7 +44,7 @@ namespace AnomalyDetector.Models
             writer.WriteBooleanValue(IsNegativeAnomaly);
             writer.WritePropertyName("isPositiveAnomaly"u8);
             writer.WriteBooleanValue(IsPositiveAnomaly);
-            if (Severity.HasValue)
+            if (Optional.IsDefined(Severity))
             {
                 writer.WritePropertyName("severity"u8);
                 writer.WriteNumberValue(Severity.Value);

@@ -9,6 +9,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using AnomalyDetector;
 using Azure;
 using Azure.Core;
 
@@ -27,27 +28,27 @@ namespace AnomalyDetector.Models
             }
 
             writer.WriteStartObject();
-            if (Variable != null)
+            if (Optional.IsDefined(Variable))
             {
                 writer.WritePropertyName("variable"u8);
                 writer.WriteStringValue(Variable);
             }
-            if (FilledNARatio.HasValue)
+            if (Optional.IsDefined(FilledNARatio))
             {
                 writer.WritePropertyName("filledNARatio"u8);
                 writer.WriteNumberValue(FilledNARatio.Value);
             }
-            if (EffectiveCount.HasValue)
+            if (Optional.IsDefined(EffectiveCount))
             {
                 writer.WritePropertyName("effectiveCount"u8);
                 writer.WriteNumberValue(EffectiveCount.Value);
             }
-            if (FirstTimestamp.HasValue)
+            if (Optional.IsDefined(FirstTimestamp))
             {
                 writer.WritePropertyName("firstTimestamp"u8);
                 writer.WriteStringValue(FirstTimestamp.Value, "O");
             }
-            if (LastTimestamp.HasValue)
+            if (Optional.IsDefined(LastTimestamp))
             {
                 writer.WritePropertyName("lastTimestamp"u8);
                 writer.WriteStringValue(LastTimestamp.Value, "O");

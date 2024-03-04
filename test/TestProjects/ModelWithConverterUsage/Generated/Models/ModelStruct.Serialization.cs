@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
+using ModelWithConverterUsage;
 
 namespace ModelWithConverterUsage.Models
 {
@@ -28,7 +29,7 @@ namespace ModelWithConverterUsage.Models
             }
 
             writer.WriteStartObject();
-            if (ModelProperty != null)
+            if (Optional.IsDefined(ModelProperty))
             {
                 writer.WritePropertyName("Model_Property"u8);
                 writer.WriteStringValue(ModelProperty);

@@ -36,7 +36,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            if (NextLink != null)
+            if (Optional.IsDefined(NextLink))
             {
                 writer.WritePropertyName("nextLink"u8);
                 writer.WriteStringValue(NextLink);
@@ -114,7 +114,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (!(Value is ChangeTrackingList<DedicatedHostData> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Value))
             {
                 if (Value.Any())
                 {
@@ -128,7 +128,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (NextLink != null)
+            if (Optional.IsDefined(NextLink))
             {
                 builder.Append("  nextLink:");
                 if (NextLink.Contains(Environment.NewLine))

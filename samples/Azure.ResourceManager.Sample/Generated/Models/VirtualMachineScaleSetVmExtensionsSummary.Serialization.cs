@@ -29,12 +29,12 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && Name != null)
+            if (options.Format != "W" && Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format != "W" && !(StatusesSummary is ChangeTrackingList<VirtualMachineStatusCodeCount> collection && collection.IsUndefined))
+            if (options.Format != "W" && Optional.IsCollectionDefined(StatusesSummary))
             {
                 writer.WritePropertyName("statusesSummary"u8);
                 writer.WriteStartArray();
@@ -121,7 +121,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 builder.Append("  name:");
                 if (Name.Contains(Environment.NewLine))
@@ -135,7 +135,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (!(StatusesSummary is ChangeTrackingList<VirtualMachineStatusCodeCount> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(StatusesSummary))
             {
                 if (StatusesSummary.Any())
                 {

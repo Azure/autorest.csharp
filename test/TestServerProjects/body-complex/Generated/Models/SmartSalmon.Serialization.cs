@@ -27,31 +27,31 @@ namespace body_complex.Models
             }
 
             writer.WriteStartObject();
-            if (CollegeDegree != null)
+            if (Optional.IsDefined(CollegeDegree))
             {
                 writer.WritePropertyName("college_degree"u8);
                 writer.WriteStringValue(CollegeDegree);
             }
-            if (Location != null)
+            if (Optional.IsDefined(Location))
             {
                 writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location);
             }
-            if (Iswild.HasValue)
+            if (Optional.IsDefined(Iswild))
             {
                 writer.WritePropertyName("iswild"u8);
                 writer.WriteBooleanValue(Iswild.Value);
             }
             writer.WritePropertyName("fishtype"u8);
             writer.WriteStringValue(Fishtype);
-            if (Species != null)
+            if (Optional.IsDefined(Species))
             {
                 writer.WritePropertyName("species"u8);
                 writer.WriteStringValue(Species);
             }
             writer.WritePropertyName("length"u8);
             writer.WriteNumberValue(Length);
-            if (!(Siblings is ChangeTrackingList<Fish> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Siblings))
             {
                 writer.WritePropertyName("siblings"u8);
                 writer.WriteStartArray();

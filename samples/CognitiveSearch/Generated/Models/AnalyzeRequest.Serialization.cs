@@ -18,17 +18,17 @@ namespace CognitiveSearch.Models
             writer.WriteStartObject();
             writer.WritePropertyName("text"u8);
             writer.WriteStringValue(Text);
-            if (Analyzer.HasValue)
+            if (Optional.IsDefined(Analyzer))
             {
                 writer.WritePropertyName("analyzer"u8);
                 writer.WriteStringValue(Analyzer.Value.ToString());
             }
-            if (Tokenizer.HasValue)
+            if (Optional.IsDefined(Tokenizer))
             {
                 writer.WritePropertyName("tokenizer"u8);
                 writer.WriteStringValue(Tokenizer.Value.ToString());
             }
-            if (!(TokenFilters is ChangeTrackingList<TokenFilterName> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(TokenFilters))
             {
                 writer.WritePropertyName("tokenFilters"u8);
                 writer.WriteStartArray();
@@ -38,7 +38,7 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!(CharFilters is ChangeTrackingList<CharFilterName> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(CharFilters))
             {
                 writer.WritePropertyName("charFilters"u8);
                 writer.WriteStartArray();

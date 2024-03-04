@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using lrotsp;
 
 namespace lrotsp.Models
 {
@@ -34,7 +35,7 @@ namespace lrotsp.Models
                 writer.WriteStringValue(item);
             }
             writer.WriteEndArray();
-            if (Configuration != null)
+            if (Optional.IsDefined(Configuration))
             {
                 writer.WritePropertyName("configuration"u8);
                 writer.WriteStringValue(Configuration);

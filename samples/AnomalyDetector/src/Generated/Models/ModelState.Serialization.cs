@@ -28,7 +28,7 @@ namespace AnomalyDetector.Models
             }
 
             writer.WriteStartObject();
-            if (!(EpochIds is ChangeTrackingList<int> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(EpochIds))
             {
                 writer.WritePropertyName("epochIds"u8);
                 writer.WriteStartArray();
@@ -38,7 +38,7 @@ namespace AnomalyDetector.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!(TrainLosses is ChangeTrackingList<float> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(TrainLosses))
             {
                 writer.WritePropertyName("trainLosses"u8);
                 writer.WriteStartArray();
@@ -48,7 +48,7 @@ namespace AnomalyDetector.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!(ValidationLosses is ChangeTrackingList<float> collection1 && collection1.IsUndefined))
+            if (Optional.IsCollectionDefined(ValidationLosses))
             {
                 writer.WritePropertyName("validationLosses"u8);
                 writer.WriteStartArray();
@@ -58,7 +58,7 @@ namespace AnomalyDetector.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!(LatenciesInSeconds is ChangeTrackingList<float> collection2 && collection2.IsUndefined))
+            if (Optional.IsCollectionDefined(LatenciesInSeconds))
             {
                 writer.WritePropertyName("latenciesInSeconds"u8);
                 writer.WriteStartArray();

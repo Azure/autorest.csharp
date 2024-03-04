@@ -16,7 +16,7 @@ namespace MgmtListMethods.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (!(Value is ChangeTrackingList<QuotaBaseProperties> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Value))
             {
                 writer.WritePropertyName("value"u8);
                 writer.WriteStartArray();
@@ -26,7 +26,7 @@ namespace MgmtListMethods.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Location != null)
+            if (Optional.IsDefined(Location))
             {
                 writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location);

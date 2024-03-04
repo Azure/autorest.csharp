@@ -29,12 +29,12 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (OSDisk != null)
+            if (Optional.IsDefined(OSDisk))
             {
                 writer.WritePropertyName("osDisk"u8);
                 writer.WriteObjectValue(OSDisk);
             }
-            if (!(DataDisks is ChangeTrackingList<ImageDataDisk> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(DataDisks))
             {
                 writer.WritePropertyName("dataDisks"u8);
                 writer.WriteStartArray();
@@ -44,7 +44,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (ZoneResilient.HasValue)
+            if (Optional.IsDefined(ZoneResilient))
             {
                 writer.WritePropertyName("zoneResilient"u8);
                 writer.WriteBooleanValue(ZoneResilient.Value);
@@ -140,13 +140,13 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (OSDisk != null)
+            if (Optional.IsDefined(OSDisk))
             {
                 builder.Append("  osDisk:");
                 AppendChildObject(builder, OSDisk, options, 2, false);
             }
 
-            if (!(DataDisks is ChangeTrackingList<ImageDataDisk> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(DataDisks))
             {
                 if (DataDisks.Any())
                 {
@@ -160,7 +160,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (ZoneResilient.HasValue)
+            if (Optional.IsDefined(ZoneResilient))
             {
                 builder.Append("  zoneResilient:");
                 var boolValue = ZoneResilient.Value == true ? "true" : "false";

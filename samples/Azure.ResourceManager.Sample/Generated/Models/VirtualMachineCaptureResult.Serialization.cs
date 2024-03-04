@@ -29,17 +29,17 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && Schema != null)
+            if (options.Format != "W" && Optional.IsDefined(Schema))
             {
                 writer.WritePropertyName("$schema"u8);
                 writer.WriteStringValue(Schema);
             }
-            if (options.Format != "W" && ContentVersion != null)
+            if (options.Format != "W" && Optional.IsDefined(ContentVersion))
             {
                 writer.WritePropertyName("contentVersion"u8);
                 writer.WriteStringValue(ContentVersion);
             }
-            if (options.Format != "W" && Parameters != null)
+            if (options.Format != "W" && Optional.IsDefined(Parameters))
             {
                 writer.WritePropertyName("parameters"u8);
 #if NET6_0_OR_GREATER
@@ -51,7 +51,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
 #endif
             }
-            if (options.Format != "W" && !(Resources is ChangeTrackingList<BinaryData> collection && collection.IsUndefined))
+            if (options.Format != "W" && Optional.IsCollectionDefined(Resources))
             {
                 writer.WritePropertyName("resources"u8);
                 writer.WriteStartArray();
@@ -73,7 +73,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
@@ -190,7 +190,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Schema != null)
+            if (Optional.IsDefined(Schema))
             {
                 builder.Append("  $schema:");
                 if (Schema.Contains(Environment.NewLine))
@@ -204,7 +204,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (ContentVersion != null)
+            if (Optional.IsDefined(ContentVersion))
             {
                 builder.Append("  contentVersion:");
                 if (ContentVersion.Contains(Environment.NewLine))
@@ -218,13 +218,13 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Parameters != null)
+            if (Optional.IsDefined(Parameters))
             {
                 builder.Append("  parameters:");
                 builder.AppendLine($" '{Parameters.ToString()}'");
             }
 
-            if (!(Resources is ChangeTrackingList<BinaryData> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Resources))
             {
                 if (Resources.Any())
                 {
@@ -243,7 +243,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 builder.Append("  id:");
                 if (Id.Contains(Environment.NewLine))

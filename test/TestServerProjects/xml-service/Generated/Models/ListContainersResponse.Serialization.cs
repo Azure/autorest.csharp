@@ -27,7 +27,7 @@ namespace xml_service.Models
             writer.WriteStartElement("Prefix");
             writer.WriteValue(Prefix);
             writer.WriteEndElement();
-            if (Marker != null)
+            if (Optional.IsDefined(Marker))
             {
                 writer.WriteStartElement("Marker");
                 writer.WriteValue(Marker);
@@ -39,7 +39,7 @@ namespace xml_service.Models
             writer.WriteStartElement("NextMarker");
             writer.WriteValue(NextMarker);
             writer.WriteEndElement();
-            if (!(Containers is ChangeTrackingList<Container> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Containers))
             {
                 writer.WriteStartElement("Containers");
                 foreach (var item in Containers)
