@@ -8,19 +8,21 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
-using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Output.Models.Types;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
-namespace AutoRest.CSharp.Common.Output.Models.Types
+namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class ChangeTrackingListProvider : ExpressionTypeProvider
     {
         private static readonly Lazy<ChangeTrackingListProvider> _instance = new(() => new ChangeTrackingListProvider(Configuration.Namespace, null));
+
+        private class ChangeTrackingListTemplate<T> { }
+
         private readonly MethodSignature _ensureListSignature;
         private readonly MethodSignature _getEnumeratorSignature;
         private readonly CSharpType _t;
@@ -40,7 +42,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         private ChangeTrackingListProvider(string defaultNamespace, SourceInputModel? sourceInputModel)
             : base(defaultNamespace, sourceInputModel)
         {
-            _t = new GenericParameterTypeProvider("T").Type;
+            _t = typeof(ChangeTrackingListTemplate<>).GetGenericArguments()[0];
             _iListOfT = new CSharpType(typeof(IList<>), _t);
             _iReadOnlyListOfT = new CSharpType(typeof(IReadOnlyList<>), _t);
 
@@ -48,7 +50,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
             _getEnumeratorSignature = new MethodSignature("GetEnumerator", null, null, MethodSignatureModifiers.Public, new CSharpType(typeof(IEnumerator<>), _t), null, Array.Empty<Parameter>());
             _innerListField = new FieldDeclaration(FieldModifiers.Private, _iListOfT, "_innerList");
             _innerList = new VariableReference(_iListOfT, _innerListField.Declaration);
-            _tArray = new GenericParameterTypeProvider($"{_t.Name}[]").Type;
+            _tArray = typeof(ChangeTrackingListTemplate<>).GetGenericArguments()[0].MakeArrayType();
             _tParam = new Parameter("item", null, _t, null, ValidationType.None, null);
             DeclarationModifiers = TypeSignatureModifiers.Internal;
             EnsureList = This.Invoke(_ensureListSignature);

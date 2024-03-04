@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             : base(defaultNamespace, sourceInputModel)
         {
             DeclarationModifiers = TypeSignatureModifiers.Internal | TypeSignatureModifiers.Static;
-            _genericChangeTrackingList = new CSharpType(Configuration.ApiTypes.ChangeTrackingListType, _t);
+            _genericChangeTrackingList = ChangeTrackingListProvider.Instance.Type;
             _genericChangeTrackingDictionary = new CSharpType(Configuration.ApiTypes.ChangeTrackingDictionaryType, _tKey, _tValue);
         }
 

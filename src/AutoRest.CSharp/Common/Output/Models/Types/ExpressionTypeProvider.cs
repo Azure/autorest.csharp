@@ -13,6 +13,12 @@ namespace AutoRest.CSharp.Output.Models.Types
     // TODO -- eventually we should combine everything in this class into TypeProvider
     internal abstract class ExpressionTypeProvider : TypeProvider
     {
+        internal static IEnumerable<ExpressionTypeProvider> GetHelperProviders()
+        {
+            yield return ChangeTrackingListProvider.Instance;
+            yield return OptionalTypeProvider.Instance;
+        }
+
         protected ExpressionTypeProvider(string defaultNamespace, SourceInputModel? sourceInputModel)
             : base(defaultNamespace, sourceInputModel)
         {

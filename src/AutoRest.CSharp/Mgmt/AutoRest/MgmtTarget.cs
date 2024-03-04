@@ -69,10 +69,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var serializeWriter = new SerializationWriter();
             var isArmCore = Configuration.MgmtConfiguration.IsArmCore;
 
-            var helperWriter = new CodeWriter();
-            new ExpressionTypeProviderWriter(helperWriter, OptionalTypeProvider.Instance).Write();
-            project.AddGeneratedFile($"Internal/{OptionalTypeProvider.Instance.Type.Name}.cs", helperWriter.ToString());
-
             if (!isArmCore)
             {
                 var utilCodeWriter = new CodeWriter();
@@ -81,9 +77,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 AddGeneratedFile(project, $"ProviderConstants.cs", utilCodeWriter.ToString());
             }
 
-            var helperWriter = new CodeWriter();
-            new ExpressionTypeProviderWriter(helperWriter, ChangeTrackingListProvider.Instance).Write();
-            project.AddGeneratedFile($"Internal/{ChangeTrackingListProvider.Instance.Type.Name}.cs", helperWriter.ToString());
+            foreach (var helper in ExpressionTypeProvider.GetHelperProviders())
+            {
+                var helperWriter = new CodeWriter();
+                new ExpressionTypeProviderWriter(helperWriter, helper).Write();
+                project.AddGeneratedFile($"Internal/{helper.Type.Name}.cs", helperWriter.ToString());
+            }
 
             foreach (var model in MgmtContext.Library.Models)
             {

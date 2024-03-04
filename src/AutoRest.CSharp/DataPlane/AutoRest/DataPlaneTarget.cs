@@ -22,11 +22,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var headerModelModelWriter = new DataPlaneResponseHeaderGroupWriter();
             var longRunningOperationWriter = new LongRunningOperationWriter();
 
-            var helperWriter = new CodeWriter();
-            new ExpressionTypeProviderWriter(writer, ChangeTrackingListProvider.Instance).Write();
-            project.AddGeneratedFile($"Internal/{ChangeTrackingListProvider.Instance.Type.Name}.cs", writer.ToString());
-            new ExpressionTypeProviderWriter(helperWriter, OptionalTypeProvider.Instance).Write();
-            project.AddGeneratedFile($"Internal/{OptionalTypeProvider.Instance.Type.Name}.cs", helperWriter.ToString());
+            foreach (var helper in ExpressionTypeProvider.GetHelperProviders())
+            {
+                var helperWriter = new CodeWriter();
+                new ExpressionTypeProviderWriter(helperWriter, helper).Write();
+                project.AddGeneratedFile($"Internal/{helper.Type.Name}.cs", helperWriter.ToString());
+            }
 
             foreach (var model in library.Models)
             {
