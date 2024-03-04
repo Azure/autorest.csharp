@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -27,17 +28,17 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Mode.HasValue)
+            if (Optional.IsDefined(Mode))
             {
                 writer.WritePropertyName("mode"u8);
                 writer.WriteStringValue(Mode.Value.ToSerialString());
             }
-            if (RollingUpgradePolicy != null)
+            if (Optional.IsDefined(RollingUpgradePolicy))
             {
                 writer.WritePropertyName("rollingUpgradePolicy"u8);
                 writer.WriteObjectValue(RollingUpgradePolicy);
             }
-            if (AutomaticOSUpgradePolicy != null)
+            if (Optional.IsDefined(AutomaticOSUpgradePolicy))
             {
                 writer.WritePropertyName("automaticOSUpgradePolicy"u8);
                 writer.WriteObjectValue(AutomaticOSUpgradePolicy);
@@ -128,19 +129,19 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Mode.HasValue)
+            if (Optional.IsDefined(Mode))
             {
                 builder.Append("  mode:");
                 builder.AppendLine($" '{Mode.Value.ToSerialString()}'");
             }
 
-            if (RollingUpgradePolicy != null)
+            if (Optional.IsDefined(RollingUpgradePolicy))
             {
                 builder.Append("  rollingUpgradePolicy:");
                 AppendChildObject(builder, RollingUpgradePolicy, options, 2, false);
             }
 
-            if (AutomaticOSUpgradePolicy != null)
+            if (Optional.IsDefined(AutomaticOSUpgradePolicy))
             {
                 builder.Append("  automaticOSUpgradePolicy:");
                 AppendChildObject(builder, AutomaticOSUpgradePolicy, options, 2, false);

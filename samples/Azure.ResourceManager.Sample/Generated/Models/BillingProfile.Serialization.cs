@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -27,7 +28,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (MaxPrice.HasValue)
+            if (Optional.IsDefined(MaxPrice))
             {
                 writer.WritePropertyName("maxPrice"u8);
                 writer.WriteNumberValue(MaxPrice.Value);
@@ -98,7 +99,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (MaxPrice.HasValue)
+            if (Optional.IsDefined(MaxPrice))
             {
                 builder.Append("  maxPrice:");
                 builder.AppendLine($" '{MaxPrice.Value.ToString()}'");

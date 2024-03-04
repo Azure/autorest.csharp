@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {
@@ -17,44 +18,44 @@ namespace CognitiveSearch.Models
             writer.WriteStartObject();
             writer.WritePropertyName("search"u8);
             writer.WriteStringValue(SearchText);
-            if (AutocompleteMode.HasValue)
+            if (Optional.IsDefined(AutocompleteMode))
             {
                 writer.WritePropertyName("autocompleteMode"u8);
                 writer.WriteStringValue(AutocompleteMode.Value.ToSerialString());
             }
-            if (Filter != null)
+            if (Optional.IsDefined(Filter))
             {
                 writer.WritePropertyName("filter"u8);
                 writer.WriteStringValue(Filter);
             }
-            if (UseFuzzyMatching.HasValue)
+            if (Optional.IsDefined(UseFuzzyMatching))
             {
                 writer.WritePropertyName("fuzzy"u8);
                 writer.WriteBooleanValue(UseFuzzyMatching.Value);
             }
-            if (HighlightPostTag != null)
+            if (Optional.IsDefined(HighlightPostTag))
             {
                 writer.WritePropertyName("highlightPostTag"u8);
                 writer.WriteStringValue(HighlightPostTag);
             }
-            if (HighlightPreTag != null)
+            if (Optional.IsDefined(HighlightPreTag))
             {
                 writer.WritePropertyName("highlightPreTag"u8);
                 writer.WriteStringValue(HighlightPreTag);
             }
-            if (MinimumCoverage.HasValue)
+            if (Optional.IsDefined(MinimumCoverage))
             {
                 writer.WritePropertyName("minimumCoverage"u8);
                 writer.WriteNumberValue(MinimumCoverage.Value);
             }
-            if (SearchFields != null)
+            if (Optional.IsDefined(SearchFields))
             {
                 writer.WritePropertyName("searchFields"u8);
                 writer.WriteStringValue(SearchFields);
             }
             writer.WritePropertyName("suggesterName"u8);
             writer.WriteStringValue(SuggesterName);
-            if (Top.HasValue)
+            if (Optional.IsDefined(Top))
             {
                 writer.WritePropertyName("top"u8);
                 writer.WriteNumberValue(Top.Value);

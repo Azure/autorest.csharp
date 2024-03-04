@@ -7,6 +7,7 @@ using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -32,7 +33,7 @@ namespace OpenAI.Models
                 JsonSerializer.Serialize(writer, document.RootElement);
             }
 #endif
-            if (Model.HasValue)
+            if (Optional.IsDefined(Model))
             {
                 writer.WritePropertyName("model"u8);
                 writer.WriteStringValue(Model.Value.ToString());

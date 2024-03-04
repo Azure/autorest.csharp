@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -107,7 +108,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 builder.Append("  name:");
                 if (Name.Contains(Environment.NewLine))
@@ -121,7 +122,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Publisher != null)
+            if (Optional.IsDefined(Publisher))
             {
                 builder.Append("  publisher:");
                 if (Publisher.Contains(Environment.NewLine))
@@ -135,7 +136,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Product != null)
+            if (Optional.IsDefined(Product))
             {
                 builder.Append("  product:");
                 if (Product.Contains(Environment.NewLine))

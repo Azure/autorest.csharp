@@ -11,6 +11,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
+using TypeSchemaMapping;
 
 namespace TypeSchemaMapping.Models
 {
@@ -19,7 +20,7 @@ namespace TypeSchemaMapping.Models
         private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "ModelWithGuidProperty");
-            if (options.Format != "W" && ModelProperty.HasValue)
+            if (options.Format != "W" && Optional.IsDefined(ModelProperty))
             {
                 writer.WriteStartElement("ModelProperty");
                 writer.WriteValue(ModelProperty.Value);

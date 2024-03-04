@@ -7,6 +7,7 @@ using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -69,7 +70,7 @@ namespace OpenAI.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            if (!(Events is OptionalList<FineTuneEvent> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Events))
             {
                 writer.WritePropertyName("events"u8);
                 writer.WriteStartArray();

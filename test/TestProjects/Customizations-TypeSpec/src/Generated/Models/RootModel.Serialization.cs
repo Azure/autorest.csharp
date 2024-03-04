@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using CustomizationsInTsp;
 
 namespace CustomizationsInTsp.Models
 {
@@ -27,57 +28,57 @@ namespace CustomizationsInTsp.Models
             }
 
             writer.WriteStartObject();
-            if (PropertyExtensibleEnum.HasValue)
+            if (Optional.IsDefined(PropertyExtensibleEnum))
             {
                 writer.WritePropertyName("propertyExtensibleEnum"u8);
                 writer.WriteStringValue(PropertyExtensibleEnum.Value.ToString());
             }
-            if (PropertyModelToMakeInternal != null)
+            if (Optional.IsDefined(PropertyModelToMakeInternal))
             {
                 writer.WritePropertyName("propertyModelToMakeInternal"u8);
                 writer.WriteObjectValue(PropertyModelToMakeInternal);
             }
-            if (PropertyModelToRename != null)
+            if (Optional.IsDefined(PropertyModelToRename))
             {
                 writer.WritePropertyName("propertyModelToRename"u8);
                 writer.WriteObjectValue(PropertyModelToRename);
             }
-            if (PropertyModelToChangeNamespace != null)
+            if (Optional.IsDefined(PropertyModelToChangeNamespace))
             {
                 writer.WritePropertyName("propertyModelToChangeNamespace"u8);
                 writer.WriteObjectValue(PropertyModelToChangeNamespace);
             }
-            if (PropertyModelWithCustomizedProperties != null)
+            if (Optional.IsDefined(PropertyModelWithCustomizedProperties))
             {
                 writer.WritePropertyName("propertyModelWithCustomizedProperties"u8);
                 writer.WriteObjectValue(PropertyModelWithCustomizedProperties);
             }
-            if (PropertyEnumToRename.HasValue)
+            if (Optional.IsDefined(PropertyEnumToRename))
             {
                 writer.WritePropertyName("propertyEnumToRename"u8);
                 writer.WriteStringValue(PropertyEnumToRename.Value.ToSerialString());
             }
-            if (PropertyEnumWithValueToRename.HasValue)
+            if (Optional.IsDefined(PropertyEnumWithValueToRename))
             {
                 writer.WritePropertyName("propertyEnumWithValueToRename"u8);
                 writer.WriteStringValue(PropertyEnumWithValueToRename.Value.ToSerialString());
             }
-            if (PropertyEnumToBeMadeExtensible.HasValue)
+            if (Optional.IsDefined(PropertyEnumToBeMadeExtensible))
             {
                 writer.WritePropertyName("propertyEnumToBeMadeExtensible"u8);
                 writer.WriteStringValue(PropertyEnumToBeMadeExtensible.Value.ToString());
             }
-            if (PropertyModelToAddAdditionalSerializableProperty != null)
+            if (Optional.IsDefined(PropertyModelToAddAdditionalSerializableProperty))
             {
                 writer.WritePropertyName("propertyModelToAddAdditionalSerializableProperty"u8);
                 writer.WriteObjectValue(PropertyModelToAddAdditionalSerializableProperty);
             }
-            if (PropertyToMoveToCustomization.HasValue)
+            if (Optional.IsDefined(PropertyToMoveToCustomization))
             {
                 writer.WritePropertyName("propertyToMoveToCustomization"u8);
                 writer.WriteStringValue(PropertyToMoveToCustomization.Value.ToString());
             }
-            if (PropertyModelStruct.HasValue)
+            if (Optional.IsDefined(PropertyModelStruct))
             {
                 writer.WritePropertyName("propertyModelStruct"u8);
                 writer.WriteObjectValue(PropertyModelStruct);

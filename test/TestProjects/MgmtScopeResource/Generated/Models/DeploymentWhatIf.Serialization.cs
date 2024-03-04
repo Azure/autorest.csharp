@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtScopeResource;
 
 namespace MgmtScopeResource.Models
 {
@@ -15,7 +16,7 @@ namespace MgmtScopeResource.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Location != null)
+            if (Optional.IsDefined(Location))
             {
                 writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location);

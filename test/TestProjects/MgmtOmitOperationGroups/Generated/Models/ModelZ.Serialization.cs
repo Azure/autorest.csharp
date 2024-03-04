@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtOmitOperationGroups;
 
 namespace MgmtOmitOperationGroups.Models
 {
@@ -15,7 +16,7 @@ namespace MgmtOmitOperationGroups.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (H != null)
+            if (Optional.IsDefined(H))
             {
                 writer.WritePropertyName("h"u8);
                 writer.WriteStringValue(H);

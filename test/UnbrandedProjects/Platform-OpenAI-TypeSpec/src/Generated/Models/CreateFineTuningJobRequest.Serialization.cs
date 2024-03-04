@@ -7,6 +7,7 @@ using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -25,7 +26,7 @@ namespace OpenAI.Models
             writer.WriteStartObject();
             writer.WritePropertyName("training_file"u8);
             writer.WriteStringValue(TrainingFile);
-            if (ValidationFile != null)
+            if (Optional.IsDefined(ValidationFile))
             {
                 if (ValidationFile != null)
                 {
@@ -39,12 +40,12 @@ namespace OpenAI.Models
             }
             writer.WritePropertyName("model"u8);
             writer.WriteStringValue(Model.ToString());
-            if (Hyperparameters != null)
+            if (Optional.IsDefined(Hyperparameters))
             {
                 writer.WritePropertyName("hyperparameters"u8);
                 writer.WriteObjectValue(Hyperparameters);
             }
-            if (Suffix != null)
+            if (Optional.IsDefined(Suffix))
             {
                 if (Suffix != null)
                 {

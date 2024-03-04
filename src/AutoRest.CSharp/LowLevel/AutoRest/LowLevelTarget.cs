@@ -9,6 +9,7 @@ using AutoRest.CSharp.Common.Output.PostProcessing;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
@@ -73,7 +74,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 var writer = new CodeWriter();
                 new ExpressionTypeProviderWriter(writer, helper).Write();
-                project.AddHelperFile($"Internal/{helper.Type.Name}.cs", writer.ToString());
+                project.AddGeneratedFile($"Internal/{helper.Type.Name}.cs", writer.ToString());
             }
 
             if (Configuration.GenerateTestProject)

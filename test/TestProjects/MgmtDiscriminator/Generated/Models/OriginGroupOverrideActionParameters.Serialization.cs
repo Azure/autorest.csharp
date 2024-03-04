@@ -12,6 +12,7 @@ using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -103,7 +104,7 @@ namespace MgmtDiscriminator.Models
             builder.Append("  typeName:");
             builder.AppendLine($" '{TypeName.ToString()}'");
 
-            if (OriginGroup != null)
+            if (Optional.IsDefined(OriginGroup))
             {
                 builder.Append("  originGroup:");
                 AppendChildObject(builder, OriginGroup, options, 2, false);

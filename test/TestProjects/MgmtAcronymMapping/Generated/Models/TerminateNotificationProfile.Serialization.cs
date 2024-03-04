@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtAcronymMapping;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -15,12 +16,12 @@ namespace MgmtAcronymMapping.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (NotBeforeTimeout != null)
+            if (Optional.IsDefined(NotBeforeTimeout))
             {
                 writer.WritePropertyName("notBeforeTimeout"u8);
                 writer.WriteStringValue(NotBeforeTimeout);
             }
-            if (Enable.HasValue)
+            if (Optional.IsDefined(Enable))
             {
                 writer.WritePropertyName("enable"u8);
                 writer.WriteBooleanValue(Enable.Value);

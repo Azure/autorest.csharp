@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using body_complex;
 
 namespace body_complex.Models
 {
@@ -26,7 +27,7 @@ namespace body_complex.Models
             }
 
             writer.WriteStartObject();
-            if (Id.HasValue)
+            if (Optional.IsDefined(Id))
             {
                 if (Id != null)
                 {
@@ -38,12 +39,12 @@ namespace body_complex.Models
                     writer.WriteNull("id");
                 }
             }
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Color.HasValue)
+            if (Optional.IsDefined(Color))
             {
                 writer.WritePropertyName("color"u8);
                 writer.WriteStringValue(Color.Value.ToString());

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using _Specs_.Azure.Core.Traits;
 
 namespace _Specs_.Azure.Core.Traits.Models
 {
@@ -32,7 +33,7 @@ namespace _Specs_.Azure.Core.Traits.Models
                 writer.WritePropertyName("id"u8);
                 writer.WriteNumberValue(Id);
             }
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);

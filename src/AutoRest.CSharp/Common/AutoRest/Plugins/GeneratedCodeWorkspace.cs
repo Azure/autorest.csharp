@@ -54,7 +54,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         }
 
         private static readonly string[] SharedFolders = { SharedFolder };
-        private static readonly string[] HelperFolders = { SharedFolder, GeneratedFolder };
         private static readonly string[] GeneratedFolders = { GeneratedFolder };
         private static readonly string[] GeneratedTestFolders = { GeneratedFolder, GeneratedTestFolder };
         private static Task<Project>? _cachedProject;
@@ -78,8 +77,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         {
             _cachedProject = Task.Run(CreateGeneratedCodeProject);
         }
-
-        public void AddHelperFile(string name, string text) => AddGeneratedFile(name, text, HelperFolders);
 
         public void AddGeneratedFile(string name, string text) => AddGeneratedFile(name, text, GeneratedFolders);
 

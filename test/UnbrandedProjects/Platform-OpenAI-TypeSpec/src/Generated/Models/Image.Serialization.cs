@@ -7,6 +7,7 @@ using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -23,12 +24,12 @@ namespace OpenAI.Models
             }
 
             writer.WriteStartObject();
-            if (Url != null)
+            if (Optional.IsDefined(Url))
             {
                 writer.WritePropertyName("url"u8);
                 writer.WriteStringValue(Url.AbsoluteUri);
             }
-            if (B64Json != null)
+            if (Optional.IsDefined(B64Json))
             {
                 writer.WritePropertyName("b64_json"u8);
                 writer.WriteBase64StringValue(B64Json.ToArray(), "D");

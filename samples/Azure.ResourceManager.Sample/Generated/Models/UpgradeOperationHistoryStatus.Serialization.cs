@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -27,17 +28,17 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && Code.HasValue)
+            if (options.Format != "W" && Optional.IsDefined(Code))
             {
                 writer.WritePropertyName("code"u8);
                 writer.WriteStringValue(Code.Value.ToSerialString());
             }
-            if (options.Format != "W" && StartOn.HasValue)
+            if (options.Format != "W" && Optional.IsDefined(StartOn))
             {
                 writer.WritePropertyName("startTime"u8);
                 writer.WriteStringValue(StartOn.Value, "O");
             }
-            if (options.Format != "W" && EndOn.HasValue)
+            if (options.Format != "W" && Optional.IsDefined(EndOn))
             {
                 writer.WritePropertyName("endTime"u8);
                 writer.WriteStringValue(EndOn.Value, "O");
@@ -128,20 +129,20 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Code.HasValue)
+            if (Optional.IsDefined(Code))
             {
                 builder.Append("  code:");
                 builder.AppendLine($" '{Code.Value.ToSerialString()}'");
             }
 
-            if (StartOn.HasValue)
+            if (Optional.IsDefined(StartOn))
             {
                 builder.Append("  startTime:");
                 var formattedDateTimeString = TypeFormatters.ToString(StartOn.Value, "o");
                 builder.AppendLine($" '{formattedDateTimeString}'");
             }
 
-            if (EndOn.HasValue)
+            if (Optional.IsDefined(EndOn))
             {
                 builder.Append("  endTime:");
                 var formattedDateTimeString = TypeFormatters.ToString(EndOn.Value, "o");

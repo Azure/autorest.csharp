@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtScopeResource;
 
 namespace MgmtScopeResource.Models
 {
@@ -15,12 +16,12 @@ namespace MgmtScopeResource.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (WhatIfSettings != null)
+            if (Optional.IsDefined(WhatIfSettings))
             {
                 writer.WritePropertyName("whatIfSettings"u8);
                 writer.WriteObjectValue(WhatIfSettings);
             }
-            if (Template != null)
+            if (Optional.IsDefined(Template))
             {
                 writer.WritePropertyName("template"u8);
 #if NET6_0_OR_GREATER
@@ -32,7 +33,7 @@ namespace MgmtScopeResource.Models
                 }
 #endif
             }
-            if (Parameters != null)
+            if (Optional.IsDefined(Parameters))
             {
                 writer.WritePropertyName("parameters"u8);
 #if NET6_0_OR_GREATER

@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Inheritance;
 
 namespace Inheritance.Models
 {
@@ -15,12 +16,12 @@ namespace Inheritance.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (SomeProperty != null)
+            if (Optional.IsDefined(SomeProperty))
             {
                 writer.WritePropertyName("SomeProperty"u8);
                 writer.WriteStringValue(SomeProperty);
             }
-            if (SomeOtherProperty != null)
+            if (Optional.IsDefined(SomeOtherProperty))
             {
                 writer.WritePropertyName("SomeOtherProperty"u8);
                 writer.WriteStringValue(SomeOtherProperty);

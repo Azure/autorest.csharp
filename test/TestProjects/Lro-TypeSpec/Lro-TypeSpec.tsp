@@ -27,7 +27,7 @@ using Azure.Core.Traits;
     OAuth2Auth<[AuthFlow]> | ApiKeyAuth<ApiKeyLocation.header, "x-ms-api-key">
 )
 @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-namespace LroInTypeSpec;
+namespace lro;
 
 @doc("The auth flow model")
 model AuthFlow {

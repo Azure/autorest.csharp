@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using xms_error_responses;
 
 namespace xms_error_responses.Models
 {
@@ -26,19 +27,19 @@ namespace xms_error_responses.Models
             }
 
             writer.WriteStartObject();
-            if (WhatSubAddress != null)
+            if (Optional.IsDefined(WhatSubAddress))
             {
                 writer.WritePropertyName("whatSubAddress"u8);
                 writer.WriteStringValue(WhatSubAddress);
             }
-            if (Reason != null)
+            if (Optional.IsDefined(Reason))
             {
                 writer.WritePropertyName("reason"u8);
                 writer.WriteStringValue(Reason);
             }
             writer.WritePropertyName("whatNotFound"u8);
             writer.WriteStringValue(WhatNotFound);
-            if (SomeBaseProp != null)
+            if (Optional.IsDefined(SomeBaseProp))
             {
                 writer.WritePropertyName("someBaseProp"u8);
                 writer.WriteStringValue(SomeBaseProp);

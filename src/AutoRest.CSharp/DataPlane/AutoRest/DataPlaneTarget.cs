@@ -1,13 +1,9 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System.Linq;
-using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
-using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Types;
 
@@ -88,7 +84,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 var writer = new CodeWriter();
                 new ExpressionTypeProviderWriter(writer, helper).Write();
-                project.AddHelperFile($"Internal/{helper.Type.Name}.cs", writer.ToString());
+                project.AddGeneratedFile($"Internal/{helper.Type.Name}.cs", writer.ToString());
             }
         }
     }

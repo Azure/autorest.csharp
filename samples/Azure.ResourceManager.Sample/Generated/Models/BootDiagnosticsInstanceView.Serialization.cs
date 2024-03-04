@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -27,17 +28,17 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && ConsoleScreenshotBlobUri != null)
+            if (options.Format != "W" && Optional.IsDefined(ConsoleScreenshotBlobUri))
             {
                 writer.WritePropertyName("consoleScreenshotBlobUri"u8);
                 writer.WriteStringValue(ConsoleScreenshotBlobUri.AbsoluteUri);
             }
-            if (options.Format != "W" && SerialConsoleLogBlobUri != null)
+            if (options.Format != "W" && Optional.IsDefined(SerialConsoleLogBlobUri))
             {
                 writer.WritePropertyName("serialConsoleLogBlobUri"u8);
                 writer.WriteStringValue(SerialConsoleLogBlobUri.AbsoluteUri);
             }
-            if (options.Format != "W" && Status != null)
+            if (options.Format != "W" && Optional.IsDefined(Status))
             {
                 writer.WritePropertyName("status"u8);
                 writer.WriteObjectValue(Status);
@@ -128,19 +129,19 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (ConsoleScreenshotBlobUri != null)
+            if (Optional.IsDefined(ConsoleScreenshotBlobUri))
             {
                 builder.Append("  consoleScreenshotBlobUri:");
                 builder.AppendLine($" '{ConsoleScreenshotBlobUri.AbsoluteUri}'");
             }
 
-            if (SerialConsoleLogBlobUri != null)
+            if (Optional.IsDefined(SerialConsoleLogBlobUri))
             {
                 builder.Append("  serialConsoleLogBlobUri:");
                 builder.AppendLine($" '{SerialConsoleLogBlobUri.AbsoluteUri}'");
             }
 
-            if (Status != null)
+            if (Optional.IsDefined(Status))
             {
                 builder.Append("  status:");
                 AppendChildObject(builder, Status, options, 2, false);

@@ -331,6 +331,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private IReadOnlyList<ExpressionTypeProvider>? _staticHelpers;
         public IReadOnlyList<ExpressionTypeProvider> StaticHelpers => _staticHelpers ??= new ExpressionTypeProvider[]
         {
+            OptionalTypeProvider.Instance,
             RequestBodyHelperProvider.Instance
         };
     }

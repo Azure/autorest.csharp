@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Storage;
 
 namespace Azure.ResourceManager.Storage.Models
 {
@@ -15,12 +16,12 @@ namespace Azure.ResourceManager.Storage.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (DaysAfterModificationGreaterThan.HasValue)
+            if (Optional.IsDefined(DaysAfterModificationGreaterThan))
             {
                 writer.WritePropertyName("daysAfterModificationGreaterThan"u8);
                 writer.WriteNumberValue(DaysAfterModificationGreaterThan.Value);
             }
-            if (DaysAfterLastAccessTimeGreaterThan.HasValue)
+            if (Optional.IsDefined(DaysAfterLastAccessTimeGreaterThan))
             {
                 writer.WritePropertyName("daysAfterLastAccessTimeGreaterThan"u8);
                 writer.WriteNumberValue(DaysAfterLastAccessTimeGreaterThan.Value);

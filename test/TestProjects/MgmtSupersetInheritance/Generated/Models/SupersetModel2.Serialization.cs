@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtSupersetInheritance;
 
 namespace MgmtSupersetInheritance.Models
 {
@@ -15,22 +16,22 @@ namespace MgmtSupersetInheritance.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (ID != null)
+            if (Optional.IsDefined(ID))
             {
                 writer.WritePropertyName("iD"u8);
                 writer.WriteStringValue(ID);
             }
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (SupersetModel2Type != null)
+            if (Optional.IsDefined(SupersetModel2Type))
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(SupersetModel2Type);
             }
-            if (New != null)
+            if (Optional.IsDefined(New))
             {
                 writer.WritePropertyName("new"u8);
                 writer.WriteStringValue(New);

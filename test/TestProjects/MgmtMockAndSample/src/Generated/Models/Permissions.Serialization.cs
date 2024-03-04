@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
@@ -16,7 +17,7 @@ namespace MgmtMockAndSample.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (!(Keys is ChangeTrackingList<KeyPermission> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Keys))
             {
                 writer.WritePropertyName("keys"u8);
                 writer.WriteStartArray();
@@ -26,7 +27,7 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!(Secrets is ChangeTrackingList<SecretPermission> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(Secrets))
             {
                 writer.WritePropertyName("secrets"u8);
                 writer.WriteStartArray();
@@ -36,7 +37,7 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!(Certificates is ChangeTrackingList<CertificatePermission> collection1 && collection1.IsUndefined))
+            if (Optional.IsCollectionDefined(Certificates))
             {
                 writer.WritePropertyName("certificates"u8);
                 writer.WriteStartArray();
@@ -46,7 +47,7 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!(Storage is ChangeTrackingList<StoragePermission> collection2 && collection2.IsUndefined))
+            if (Optional.IsCollectionDefined(Storage))
             {
                 writer.WritePropertyName("storage"u8);
                 writer.WriteStartArray();

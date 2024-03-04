@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MultipleInputFiles;
 
 namespace MultipleInputFiles.Models
 {
@@ -15,12 +16,12 @@ namespace MultipleInputFiles.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Code != null)
+            if (Optional.IsDefined(Code))
             {
                 writer.WritePropertyName("Code"u8);
                 writer.WriteStringValue(Code);
             }
-            if (Status != null)
+            if (Optional.IsDefined(Status))
             {
                 writer.WritePropertyName("Status"u8);
                 writer.WriteStringValue(Status);

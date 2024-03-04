@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -27,7 +28,7 @@ namespace MgmtDiscriminator.Models
             }
 
             writer.WriteStartObject();
-            if (OptionalString != null)
+            if (Optional.IsDefined(OptionalString))
             {
                 writer.WritePropertyName("optionalString"u8);
                 writer.WriteStringValue(OptionalString);
@@ -94,7 +95,7 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (OptionalString != null)
+            if (Optional.IsDefined(OptionalString))
             {
                 builder.Append("  optionalString:");
                 if (OptionalString.Contains(Environment.NewLine))

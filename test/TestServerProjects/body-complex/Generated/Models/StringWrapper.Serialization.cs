@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using body_complex;
 
 namespace body_complex.Models
 {
@@ -26,17 +27,17 @@ namespace body_complex.Models
             }
 
             writer.WriteStartObject();
-            if (Field != null)
+            if (Optional.IsDefined(Field))
             {
                 writer.WritePropertyName("field"u8);
                 writer.WriteStringValue(Field);
             }
-            if (Empty != null)
+            if (Optional.IsDefined(Empty))
             {
                 writer.WritePropertyName("empty"u8);
                 writer.WriteStringValue(Empty);
             }
-            if (NullProperty != null)
+            if (Optional.IsDefined(NullProperty))
             {
                 writer.WritePropertyName("null"u8);
                 writer.WriteStringValue(NullProperty);

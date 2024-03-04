@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using model_flattening;
 
 namespace model_flattening.Models
 {
@@ -26,7 +27,7 @@ namespace model_flattening.Models
             }
 
             writer.WriteStartObject();
-            if (GenericValue != null)
+            if (Optional.IsDefined(GenericValue))
             {
                 writer.WritePropertyName("generic_value"u8);
                 writer.WriteStringValue(GenericValue);

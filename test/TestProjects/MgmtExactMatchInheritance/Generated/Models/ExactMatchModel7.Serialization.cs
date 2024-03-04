@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtExactMatchInheritance;
 
 namespace MgmtExactMatchInheritance.Models
 {
@@ -15,17 +16,17 @@ namespace MgmtExactMatchInheritance.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (ID != null)
+            if (Optional.IsDefined(ID))
             {
                 writer.WritePropertyName("iD"u8);
                 writer.WriteStringValue(ID);
             }
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (ExactMatchModel7Type != null)
+            if (Optional.IsDefined(ExactMatchModel7Type))
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ExactMatchModel7Type);

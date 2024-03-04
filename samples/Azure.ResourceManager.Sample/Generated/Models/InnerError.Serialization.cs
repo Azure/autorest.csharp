@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -27,12 +28,12 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Exceptiontype != null)
+            if (Optional.IsDefined(Exceptiontype))
             {
                 writer.WritePropertyName("exceptiontype"u8);
                 writer.WriteStringValue(Exceptiontype);
             }
-            if (Errordetail != null)
+            if (Optional.IsDefined(Errordetail))
             {
                 writer.WritePropertyName("errordetail"u8);
                 writer.WriteStringValue(Errordetail);
@@ -105,7 +106,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Exceptiontype != null)
+            if (Optional.IsDefined(Exceptiontype))
             {
                 builder.Append("  exceptiontype:");
                 if (Exceptiontype.Contains(Environment.NewLine))
@@ -119,7 +120,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Errordetail != null)
+            if (Optional.IsDefined(Errordetail))
             {
                 builder.Append("  errordetail:");
                 if (Errordetail.Contains(Environment.NewLine))

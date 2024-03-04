@@ -19,7 +19,7 @@ namespace MgmtParamOrdering
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -34,27 +34,27 @@ namespace MgmtParamOrdering
             writer.WriteStringValue(Location);
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Description != null)
+            if (Optional.IsDefined(Description))
             {
                 writer.WritePropertyName("description"u8);
                 writer.WriteStringValue(Description);
             }
-            if (FriendlyName != null)
+            if (Optional.IsDefined(FriendlyName))
             {
                 writer.WritePropertyName("friendlyName"u8);
                 writer.WriteStringValue(FriendlyName);
             }
-            if (KeyVault != null)
+            if (Optional.IsDefined(KeyVault))
             {
                 writer.WritePropertyName("keyVault"u8);
                 writer.WriteStringValue(KeyVault);
             }
-            if (ApplicationInsights != null)
+            if (Optional.IsDefined(ApplicationInsights))
             {
                 writer.WritePropertyName("applicationInsights"u8);
                 writer.WriteStringValue(ApplicationInsights);
             }
-            if (ContainerRegistry != null)
+            if (Optional.IsDefined(ContainerRegistry))
             {
                 if (ContainerRegistry != null)
                 {
@@ -66,32 +66,32 @@ namespace MgmtParamOrdering
                     writer.WriteNull("containerRegistry");
                 }
             }
-            if (StorageAccount != null)
+            if (Optional.IsDefined(StorageAccount))
             {
                 writer.WritePropertyName("storageAccount"u8);
                 writer.WriteStringValue(StorageAccount);
             }
-            if (DiscoveryUri != null)
+            if (Optional.IsDefined(DiscoveryUri))
             {
                 writer.WritePropertyName("discoveryUrl"u8);
                 writer.WriteStringValue(DiscoveryUri.AbsoluteUri);
             }
-            if (HbiWorkspace.HasValue)
+            if (Optional.IsDefined(HbiWorkspace))
             {
                 writer.WritePropertyName("hbiWorkspace"u8);
                 writer.WriteBooleanValue(HbiWorkspace.Value);
             }
-            if (ImageBuildCompute != null)
+            if (Optional.IsDefined(ImageBuildCompute))
             {
                 writer.WritePropertyName("imageBuildCompute"u8);
                 writer.WriteStringValue(ImageBuildCompute);
             }
-            if (AllowPublicAccessWhenBehindVnet.HasValue)
+            if (Optional.IsDefined(AllowPublicAccessWhenBehindVnet))
             {
                 writer.WritePropertyName("allowPublicAccessWhenBehindVnet"u8);
                 writer.WriteBooleanValue(AllowPublicAccessWhenBehindVnet.Value);
             }
-            if (PrimaryUserAssignedIdentity != null)
+            if (Optional.IsDefined(PrimaryUserAssignedIdentity))
             {
                 writer.WritePropertyName("primaryUserAssignedIdentity"u8);
                 writer.WriteStringValue(PrimaryUserAssignedIdentity);

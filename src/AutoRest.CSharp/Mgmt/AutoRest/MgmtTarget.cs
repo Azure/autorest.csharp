@@ -230,7 +230,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 var writer = new CodeWriter();
                 new ExpressionTypeProviderWriter(writer, helper).Write();
-                project.AddHelperFile($"Internal/{helper.Type.Name}.cs", writer.ToString());
+                AddGeneratedFile(project, $"Internal/{helper.Type.Name}.cs", writer.ToString());
             }
 
             if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))

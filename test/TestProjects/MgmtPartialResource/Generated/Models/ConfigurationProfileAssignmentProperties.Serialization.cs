@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtPartialResource;
 
 namespace MgmtPartialResource.Models
 {
@@ -15,12 +16,12 @@ namespace MgmtPartialResource.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (ConfigurationProfile != null)
+            if (Optional.IsDefined(ConfigurationProfile))
             {
                 writer.WritePropertyName("configurationProfile"u8);
                 writer.WriteStringValue(ConfigurationProfile);
             }
-            if (TargetId != null)
+            if (Optional.IsDefined(TargetId))
             {
                 writer.WritePropertyName("targetId"u8);
                 writer.WriteStringValue(TargetId);

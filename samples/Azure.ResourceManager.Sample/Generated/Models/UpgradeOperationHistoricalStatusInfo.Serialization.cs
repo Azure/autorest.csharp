@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -27,17 +28,17 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && Properties != null)
+            if (options.Format != "W" && Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
                 writer.WriteObjectValue(Properties);
             }
-            if (options.Format != "W" && UpgradeOperationHistoricalStatusInfoType != null)
+            if (options.Format != "W" && Optional.IsDefined(UpgradeOperationHistoricalStatusInfoType))
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(UpgradeOperationHistoricalStatusInfoType);
             }
-            if (options.Format != "W" && Location.HasValue)
+            if (options.Format != "W" && Optional.IsDefined(Location))
             {
                 writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location.Value);
@@ -124,13 +125,13 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Location.HasValue)
+            if (Optional.IsDefined(Location))
             {
                 builder.Append("  location:");
                 builder.AppendLine($" '{Location.Value.ToString()}'");
             }
 
-            if (Properties != null)
+            if (Optional.IsDefined(Properties))
             {
                 builder.Append("  properties:");
                 AppendChildObject(builder, Properties, options, 2, false);

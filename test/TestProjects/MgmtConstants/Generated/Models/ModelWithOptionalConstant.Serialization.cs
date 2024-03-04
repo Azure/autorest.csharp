@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtConstants;
 
 namespace MgmtConstants.Models
 {
@@ -15,22 +16,22 @@ namespace MgmtConstants.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (OptionalStringConstant.HasValue)
+            if (Optional.IsDefined(OptionalStringConstant))
             {
                 writer.WritePropertyName("optionalStringConstant"u8);
                 writer.WriteStringValue(OptionalStringConstant.Value.ToString());
             }
-            if (OptionalIntConstant.HasValue)
+            if (Optional.IsDefined(OptionalIntConstant))
             {
                 writer.WritePropertyName("optionalIntConstant"u8);
                 writer.WriteNumberValue(OptionalIntConstant.Value.ToSerialInt32());
             }
-            if (OptionalBooleanConstant.HasValue)
+            if (Optional.IsDefined(OptionalBooleanConstant))
             {
                 writer.WritePropertyName("optionalBooleanConstant"u8);
                 writer.WriteBooleanValue(OptionalBooleanConstant.Value);
             }
-            if (OptionalFloatConstant.HasValue)
+            if (Optional.IsDefined(OptionalFloatConstant))
             {
                 writer.WritePropertyName("optionalFloatConstant"u8);
                 writer.WriteNumberValue(OptionalFloatConstant.Value.ToSerialSingle());

@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Network.Management.Interface;
 
 namespace Azure.Network.Management.Interface.Models
 {
@@ -15,12 +16,12 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (IpTagType != null)
+            if (Optional.IsDefined(IpTagType))
             {
                 writer.WritePropertyName("ipTagType"u8);
                 writer.WriteStringValue(IpTagType);
             }
-            if (Tag != null)
+            if (Optional.IsDefined(Tag))
             {
                 writer.WritePropertyName("tag"u8);
                 writer.WriteStringValue(Tag);

@@ -7,6 +7,7 @@ using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -23,7 +24,7 @@ namespace OpenAI.Models
             }
 
             writer.WriteStartObject();
-            if (NEpochs != null)
+            if (Optional.IsDefined(NEpochs))
             {
                 writer.WritePropertyName("n_epochs"u8);
 #if NET6_0_OR_GREATER

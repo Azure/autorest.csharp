@@ -17,12 +17,12 @@ namespace MgmtExtensionCommonRestOperation
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (MyType != null)
+            if (Optional.IsDefined(MyType))
             {
                 writer.WritePropertyName("MyType"u8);
                 writer.WriteStringValue(MyType);
             }
-            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
