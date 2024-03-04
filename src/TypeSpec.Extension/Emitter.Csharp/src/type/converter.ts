@@ -30,7 +30,7 @@ export function fromSdkEnumType(
             ),
             Accessibility: enumType.access,
             Deprecated: enumType.deprecation,
-            Description: enumType.description,            
+            Description: enumType.description,
             IsExtensible: enumType.isFixed ? false : true,
             IsNullable: enumType.nullable,
             Usage: "None"

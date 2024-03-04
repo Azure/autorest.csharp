@@ -631,8 +631,14 @@ export function getInputType(
                         discriminatorProperty.type.name
                 );
             }
-            if (discriminatorProperty?.type.kind === "UnionVariant" && discriminatorProperty?.type.type.kind === "String") {
-                return String(discriminatorProperty.type.type.value ?? discriminatorProperty.type.name);
+            if (
+                discriminatorProperty?.type.kind === "UnionVariant" &&
+                discriminatorProperty?.type.type.kind === "String"
+            ) {
+                return String(
+                    discriminatorProperty.type.type.value ??
+                        discriminatorProperty.type.name
+                );
             }
         }
 
