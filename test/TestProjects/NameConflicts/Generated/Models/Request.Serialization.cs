@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using NameConflicts;
 
 namespace NameConflicts.Models
 {
@@ -15,7 +16,7 @@ namespace NameConflicts.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Property != null)
+            if (Optional.IsDefined(Property))
             {
                 writer.WritePropertyName("property"u8);
                 writer.WriteStringValue(Property);

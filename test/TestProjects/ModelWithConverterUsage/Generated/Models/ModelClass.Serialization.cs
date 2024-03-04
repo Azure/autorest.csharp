@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
+using ModelWithConverterUsage;
 
 namespace ModelWithConverterUsage.Models
 {
@@ -28,14 +29,14 @@ namespace ModelWithConverterUsage.Models
             }
 
             writer.WriteStartObject();
-            if (StringProperty != null)
+            if (Optional.IsDefined(StringProperty))
             {
                 writer.WritePropertyName("String_Property"u8);
                 writer.WriteStringValue(StringProperty);
             }
             writer.WritePropertyName("Enum_Property"u8);
             writer.WriteStringValue(EnumProperty.ToSerialString());
-            if (ObjProperty != null)
+            if (Optional.IsDefined(ObjProperty))
             {
                 writer.WritePropertyName("Obj_Property"u8);
                 writer.WriteObjectValue(ObjProperty);

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -27,22 +28,22 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Publisher != null)
+            if (Optional.IsDefined(Publisher))
             {
                 writer.WritePropertyName("publisher"u8);
                 writer.WriteStringValue(Publisher);
             }
-            if (Product != null)
+            if (Optional.IsDefined(Product))
             {
                 writer.WritePropertyName("product"u8);
                 writer.WriteStringValue(Product);
             }
-            if (PromotionCode != null)
+            if (Optional.IsDefined(PromotionCode))
             {
                 writer.WritePropertyName("promotionCode"u8);
                 writer.WriteStringValue(PromotionCode);
@@ -127,7 +128,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 builder.Append("  name:");
                 if (Name.Contains(Environment.NewLine))
@@ -141,7 +142,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Publisher != null)
+            if (Optional.IsDefined(Publisher))
             {
                 builder.Append("  publisher:");
                 if (Publisher.Contains(Environment.NewLine))
@@ -155,7 +156,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Product != null)
+            if (Optional.IsDefined(Product))
             {
                 builder.Append("  product:");
                 if (Product.Contains(Environment.NewLine))
@@ -169,7 +170,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (PromotionCode != null)
+            if (Optional.IsDefined(PromotionCode))
             {
                 builder.Append("  promotionCode:");
                 if (PromotionCode.Contains(Environment.NewLine))

@@ -7,6 +7,7 @@ using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -25,7 +26,7 @@ namespace OpenAI.Models
             writer.WriteStartObject();
             writer.WritePropertyName("model"u8);
             writer.WriteStringValue(Model.ToString());
-            if (Input != null)
+            if (Optional.IsDefined(Input))
             {
                 if (Input != null)
                 {
@@ -39,7 +40,7 @@ namespace OpenAI.Models
             }
             writer.WritePropertyName("instruction"u8);
             writer.WriteStringValue(Instruction);
-            if (N.HasValue)
+            if (Optional.IsDefined(N))
             {
                 if (N != null)
                 {
@@ -51,7 +52,7 @@ namespace OpenAI.Models
                     writer.WriteNull("n");
                 }
             }
-            if (Temperature.HasValue)
+            if (Optional.IsDefined(Temperature))
             {
                 if (Temperature != null)
                 {
@@ -63,7 +64,7 @@ namespace OpenAI.Models
                     writer.WriteNull("temperature");
                 }
             }
-            if (TopP.HasValue)
+            if (Optional.IsDefined(TopP))
             {
                 if (TopP != null)
                 {

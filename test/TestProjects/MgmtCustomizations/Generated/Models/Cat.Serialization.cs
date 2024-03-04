@@ -8,6 +8,7 @@
 using System;
 using System.Text.Json;
 using Azure.Core;
+using MgmtCustomizations;
 
 namespace MgmtCustomizations.Models
 {
@@ -16,12 +17,12 @@ namespace MgmtCustomizations.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Sleep != null)
+            if (Optional.IsDefined(Sleep))
             {
                 writer.WritePropertyName("sleep"u8);
                 writer.WriteStringValue(Sleep);
             }
-            if (Jump != null)
+            if (Optional.IsDefined(Jump))
             {
                 writer.WritePropertyName("jump"u8);
                 writer.WriteStringValue(Jump);
@@ -30,7 +31,7 @@ namespace MgmtCustomizations.Models
             writer.WriteStringValue(Kind.ToSerialString());
             writer.WritePropertyName("size"u8);
             SerializeSizeProperty(writer);
-            if (DateOfBirth.HasValue)
+            if (Optional.IsDefined(DateOfBirth))
             {
                 writer.WritePropertyName("dateOfBirth"u8);
                 SerializeDateOfBirthProperty(writer);

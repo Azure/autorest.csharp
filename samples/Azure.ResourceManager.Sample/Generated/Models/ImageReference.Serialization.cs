@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -27,32 +28,32 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Publisher != null)
+            if (Optional.IsDefined(Publisher))
             {
                 writer.WritePropertyName("publisher"u8);
                 writer.WriteStringValue(Publisher);
             }
-            if (Offer != null)
+            if (Optional.IsDefined(Offer))
             {
                 writer.WritePropertyName("offer"u8);
                 writer.WriteStringValue(Offer);
             }
-            if (Sku != null)
+            if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
                 writer.WriteStringValue(Sku);
             }
-            if (Version != null)
+            if (Optional.IsDefined(Version))
             {
                 writer.WritePropertyName("version"u8);
                 writer.WriteStringValue(Version);
             }
-            if (options.Format != "W" && ExactVersion != null)
+            if (options.Format != "W" && Optional.IsDefined(ExactVersion))
             {
                 writer.WritePropertyName("exactVersion"u8);
                 writer.WriteStringValue(ExactVersion);
             }
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
@@ -156,7 +157,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Publisher != null)
+            if (Optional.IsDefined(Publisher))
             {
                 builder.Append("  publisher:");
                 if (Publisher.Contains(Environment.NewLine))
@@ -170,7 +171,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Offer != null)
+            if (Optional.IsDefined(Offer))
             {
                 builder.Append("  offer:");
                 if (Offer.Contains(Environment.NewLine))
@@ -184,7 +185,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Sku != null)
+            if (Optional.IsDefined(Sku))
             {
                 builder.Append("  sku:");
                 if (Sku.Contains(Environment.NewLine))
@@ -198,7 +199,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Version != null)
+            if (Optional.IsDefined(Version))
             {
                 builder.Append("  version:");
                 if (Version.Contains(Environment.NewLine))
@@ -212,7 +213,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (ExactVersion != null)
+            if (Optional.IsDefined(ExactVersion))
             {
                 builder.Append("  exactVersion:");
                 if (ExactVersion.Contains(Environment.NewLine))
@@ -226,7 +227,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 builder.Append("  id:");
                 if (Id.Contains(Environment.NewLine))

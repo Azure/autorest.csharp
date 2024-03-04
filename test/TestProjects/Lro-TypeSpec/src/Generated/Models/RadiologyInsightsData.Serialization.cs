@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using lro;
 
 namespace lro.Models
 {
@@ -34,7 +35,7 @@ namespace lro.Models
                 writer.WriteStringValue(item);
             }
             writer.WriteEndArray();
-            if (Configuration != null)
+            if (Optional.IsDefined(Configuration))
             {
                 writer.WritePropertyName("configuration"u8);
                 writer.WriteStringValue(Configuration);

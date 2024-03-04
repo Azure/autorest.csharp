@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using ModelShapes;
 
 namespace ModelShapes.Models
 {
@@ -26,12 +27,12 @@ namespace ModelShapes.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && ReadonlyProperty != null)
+            if (options.Format != "W" && Optional.IsDefined(ReadonlyProperty))
             {
                 writer.WritePropertyName("ReadonlyProperty"u8);
                 writer.WriteObjectValue(ReadonlyProperty);
             }
-            if (options.Format != "W" && !(ReadonlyListProperty is ChangeTrackingList<ReadonlyModel> collection && collection.IsUndefined))
+            if (options.Format != "W" && Optional.IsCollectionDefined(ReadonlyListProperty))
             {
                 writer.WritePropertyName("ReadonlyListProperty"u8);
                 writer.WriteStartArray();

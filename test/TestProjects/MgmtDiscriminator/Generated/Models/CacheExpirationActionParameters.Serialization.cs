@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -33,7 +34,7 @@ namespace MgmtDiscriminator.Models
             writer.WriteStringValue(CacheBehavior.ToString());
             writer.WritePropertyName("cacheType"u8);
             writer.WriteStringValue(CacheType.ToString());
-            if (CacheDuration.HasValue)
+            if (Optional.IsDefined(CacheDuration))
             {
                 if (CacheDuration != null)
                 {
@@ -139,7 +140,7 @@ namespace MgmtDiscriminator.Models
             builder.Append("  cacheType:");
             builder.AppendLine($" '{CacheType.ToString()}'");
 
-            if (CacheDuration.HasValue)
+            if (Optional.IsDefined(CacheDuration))
             {
                 builder.Append("  cacheDuration:");
                 var formattedTimeSpan = TypeFormatters.ToString(CacheDuration.Value, "P");

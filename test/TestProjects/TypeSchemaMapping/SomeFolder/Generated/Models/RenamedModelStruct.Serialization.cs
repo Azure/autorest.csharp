@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using NamespaceForEnums;
+using TypeSchemaMapping;
 
 namespace CustomNamespace
 {
@@ -29,22 +30,22 @@ namespace CustomNamespace
             writer.WriteStartObject();
             writer.WritePropertyName("ModelProperty"u8);
             writer.WriteStartObject();
-            if (CustomizedFlattenedStringProperty != null)
+            if (Optional.IsDefined(CustomizedFlattenedStringProperty))
             {
                 writer.WritePropertyName("ModelProperty"u8);
                 writer.WriteStringValue(CustomizedFlattenedStringProperty);
             }
-            if (PropertyToField != null)
+            if (Optional.IsDefined(PropertyToField))
             {
                 writer.WritePropertyName("PropertyToField"u8);
                 writer.WriteStringValue(PropertyToField);
             }
-            if (Fruit.HasValue)
+            if (Optional.IsDefined(Fruit))
             {
                 writer.WritePropertyName("Fruit"u8);
                 writer.WriteStringValue(Fruit.Value.ToSerialString());
             }
-            if (DaysOfWeek.HasValue)
+            if (Optional.IsDefined(DaysOfWeek))
             {
                 writer.WritePropertyName("DaysOfWeek"u8);
                 writer.WriteStringValue(DaysOfWeek.Value.ToString());

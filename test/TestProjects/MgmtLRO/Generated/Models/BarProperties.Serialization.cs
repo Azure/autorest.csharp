@@ -8,6 +8,7 @@
 using System;
 using System.Text.Json;
 using Azure.Core;
+using MgmtLRO;
 
 namespace MgmtLRO.Models
 {
@@ -16,7 +17,7 @@ namespace MgmtLRO.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Buzz.HasValue)
+            if (Optional.IsDefined(Buzz))
             {
                 writer.WritePropertyName("buzz"u8);
                 writer.WriteStringValue(Buzz.Value);

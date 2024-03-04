@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Storage;
 
 namespace Azure.ResourceManager.Storage.Models
 {
@@ -15,17 +16,17 @@ namespace Azure.ResourceManager.Storage.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (RoutingChoice.HasValue)
+            if (Optional.IsDefined(RoutingChoice))
             {
                 writer.WritePropertyName("routingChoice"u8);
                 writer.WriteStringValue(RoutingChoice.Value.ToString());
             }
-            if (PublishMicrosoftEndpoints.HasValue)
+            if (Optional.IsDefined(PublishMicrosoftEndpoints))
             {
                 writer.WritePropertyName("publishMicrosoftEndpoints"u8);
                 writer.WriteBooleanValue(PublishMicrosoftEndpoints.Value);
             }
-            if (PublishInternetEndpoints.HasValue)
+            if (Optional.IsDefined(PublishInternetEndpoints))
             {
                 writer.WritePropertyName("publishInternetEndpoints"u8);
                 writer.WriteBooleanValue(PublishInternetEndpoints.Value);

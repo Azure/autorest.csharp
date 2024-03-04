@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using ModelsTypeSpec;
 
 namespace ModelsTypeSpec.Models
 {
@@ -37,12 +38,12 @@ namespace ModelsTypeSpec.Models
                 writer.WritePropertyName("requiredReadonlyInt"u8);
                 writer.WriteNumberValue(RequiredReadonlyInt);
             }
-            if (options.Format != "W" && OptionalReadonlyString != null)
+            if (options.Format != "W" && Optional.IsDefined(OptionalReadonlyString))
             {
                 writer.WritePropertyName("optionalReadonlyString"u8);
                 writer.WriteStringValue(OptionalReadonlyString);
             }
-            if (options.Format != "W" && OptionalReadonlyInt.HasValue)
+            if (options.Format != "W" && Optional.IsDefined(OptionalReadonlyInt))
             {
                 writer.WritePropertyName("optionalReadonlyInt"u8);
                 writer.WriteNumberValue(OptionalReadonlyInt.Value);
@@ -52,7 +53,7 @@ namespace ModelsTypeSpec.Models
                 writer.WritePropertyName("requiredReadonlyModel"u8);
                 writer.WriteObjectValue(RequiredReadonlyModel);
             }
-            if (options.Format != "W" && OptionalReadonlyModel != null)
+            if (options.Format != "W" && Optional.IsDefined(OptionalReadonlyModel))
             {
                 writer.WritePropertyName("optionalReadonlyModel"u8);
                 writer.WriteObjectValue(OptionalReadonlyModel);
@@ -140,7 +141,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndObject();
             }
-            if (options.Format != "W" && !(OptionalReadonlyStringList is ChangeTrackingList<string> collection && collection.IsUndefined))
+            if (options.Format != "W" && Optional.IsCollectionDefined(OptionalReadonlyStringList))
             {
                 writer.WritePropertyName("optionalReadonlyStringList"u8);
                 writer.WriteStartArray();
@@ -150,7 +151,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W" && !(OptionalReadonlyIntList is ChangeTrackingList<int> collection0 && collection0.IsUndefined))
+            if (options.Format != "W" && Optional.IsCollectionDefined(OptionalReadonlyIntList))
             {
                 writer.WritePropertyName("optionalReadonlyIntList"u8);
                 writer.WriteStartArray();
@@ -160,7 +161,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W" && !(OptionalReadOnlyModelList is ChangeTrackingList<CollectionItem> collection1 && collection1.IsUndefined))
+            if (options.Format != "W" && Optional.IsCollectionDefined(OptionalReadOnlyModelList))
             {
                 writer.WritePropertyName("optionalReadOnlyModelList"u8);
                 writer.WriteStartArray();
@@ -186,7 +187,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteStringValue(item.Value);
             }
             writer.WriteEndObject();
-            if (options.Format != "W" && !(OptionalModelRecord is ChangeTrackingDictionary<string, RecordItem> collection2 && collection2.IsUndefined))
+            if (options.Format != "W" && Optional.IsCollectionDefined(OptionalModelRecord))
             {
                 writer.WritePropertyName("optionalModelRecord"u8);
                 writer.WriteStartObject();
@@ -209,7 +210,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteNumberValue(item.Value);
             }
             writer.WriteEndArray();
-            if (!(OptionalCollectionWithNullableBooleanElement is ChangeTrackingList<bool?> collection3 && collection3.IsUndefined))
+            if (Optional.IsCollectionDefined(OptionalCollectionWithNullableBooleanElement))
             {
                 writer.WritePropertyName("optionalCollectionWithNullableBooleanElement"u8);
                 writer.WriteStartArray();
