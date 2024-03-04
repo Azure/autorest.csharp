@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {
@@ -23,7 +24,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStringValue(item);
             }
             writer.WriteEndArray();
-            if (LowerCaseKeepWords.HasValue)
+            if (Optional.IsDefined(LowerCaseKeepWords))
             {
                 writer.WritePropertyName("keepWordsCase"u8);
                 writer.WriteBooleanValue(LowerCaseKeepWords.Value);

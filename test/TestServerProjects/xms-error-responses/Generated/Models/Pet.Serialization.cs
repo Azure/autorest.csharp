@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using xms_error_responses;
 
 namespace xms_error_responses.Models
 {
@@ -26,12 +27,12 @@ namespace xms_error_responses.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && Name != null)
+            if (options.Format != "W" && Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (AniType != null)
+            if (Optional.IsDefined(AniType))
             {
                 writer.WritePropertyName("aniType"u8);
                 writer.WriteStringValue(AniType);

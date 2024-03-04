@@ -39,6 +39,9 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
         public BoolExpression ValueKindEqualsNull()
             => new(new BinaryOperatorExpression("==", Property(nameof(JsonElement.ValueKind)), FrameworkEnumValue(JsonValueKind.Null)));
 
+        public BoolExpression ValueKindNotEqualsUndefined()
+            => new(new BinaryOperatorExpression("!=", Property(nameof(JsonElement.ValueKind)), FrameworkEnumValue(JsonValueKind.Undefined)));
+
         public BoolExpression ValueKindEqualsString()
             => new(new BinaryOperatorExpression("==", Property(nameof(JsonElement.ValueKind)), FrameworkEnumValue(JsonValueKind.String)));
 

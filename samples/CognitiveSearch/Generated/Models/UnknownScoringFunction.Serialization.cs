@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {
@@ -21,7 +22,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(FieldName);
             writer.WritePropertyName("boost"u8);
             writer.WriteNumberValue(Boost);
-            if (Interpolation.HasValue)
+            if (Optional.IsDefined(Interpolation))
             {
                 writer.WritePropertyName("interpolation"u8);
                 writer.WriteStringValue(Interpolation.Value.ToSerialString());

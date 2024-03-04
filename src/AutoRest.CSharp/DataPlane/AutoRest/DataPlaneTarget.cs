@@ -1,13 +1,9 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System.Linq;
-using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
-using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Types;
 
@@ -24,6 +20,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var serializeWriter = new SerializationWriter();
             var headerModelModelWriter = new DataPlaneResponseHeaderGroupWriter();
             var longRunningOperationWriter = new LongRunningOperationWriter();
+
+            var helperWriter = new CodeWriter();
+            new ExpressionTypeProviderWriter(helperWriter, OptionalTypeProvider.Instance).Write();
+            project.AddGeneratedFile($"Internal/{OptionalTypeProvider.Instance.Type.Name}.cs", helperWriter.ToString());
 
             foreach (var model in library.Models)
             {

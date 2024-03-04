@@ -7,6 +7,7 @@ using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -27,12 +28,12 @@ namespace OpenAI.Models
             writer.WriteStringValue(Prompt);
             writer.WritePropertyName("image"u8);
             writer.WriteBase64StringValue(Image.ToArray(), "D");
-            if (Mask != null)
+            if (Optional.IsDefined(Mask))
             {
                 writer.WritePropertyName("mask"u8);
                 writer.WriteBase64StringValue(Mask.ToArray(), "D");
             }
-            if (N.HasValue)
+            if (Optional.IsDefined(N))
             {
                 if (N != null)
                 {
@@ -44,17 +45,17 @@ namespace OpenAI.Models
                     writer.WriteNull("n");
                 }
             }
-            if (Size.HasValue)
+            if (Optional.IsDefined(Size))
             {
                 writer.WritePropertyName("size"u8);
                 writer.WriteStringValue(Size.Value.ToString());
             }
-            if (ResponseFormat.HasValue)
+            if (Optional.IsDefined(ResponseFormat))
             {
                 writer.WritePropertyName("response_format"u8);
                 writer.WriteStringValue(ResponseFormat.Value.ToString());
             }
-            if (User != null)
+            if (Optional.IsDefined(User))
             {
                 writer.WritePropertyName("user"u8);
                 writer.WriteStringValue(User);

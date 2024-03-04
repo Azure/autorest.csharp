@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using MgmtExtensionResource;
 
 namespace MgmtExtensionResource.Models
 {
@@ -17,12 +18,12 @@ namespace MgmtExtensionResource.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (ParameterType.HasValue)
+            if (Optional.IsDefined(ParameterType))
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ParameterType.Value.ToString());
             }
-            if (!(AllowedValues is ChangeTrackingList<BinaryData> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(AllowedValues))
             {
                 writer.WritePropertyName("allowedValues"u8);
                 writer.WriteStartArray();
@@ -44,7 +45,7 @@ namespace MgmtExtensionResource.Models
                 }
                 writer.WriteEndArray();
             }
-            if (DefaultValue != null)
+            if (Optional.IsDefined(DefaultValue))
             {
                 writer.WritePropertyName("defaultValue"u8);
 #if NET6_0_OR_GREATER
@@ -56,7 +57,7 @@ namespace MgmtExtensionResource.Models
                 }
 #endif
             }
-            if (Metadata != null)
+            if (Optional.IsDefined(Metadata))
             {
                 writer.WritePropertyName("metadata"u8);
                 writer.WriteObjectValue(Metadata);

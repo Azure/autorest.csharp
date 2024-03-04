@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
@@ -15,17 +16,17 @@ namespace MgmtMockAndSample.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (IsEnabled.HasValue)
+            if (Optional.IsDefined(IsEnabled))
             {
                 writer.WritePropertyName("isEnabled"u8);
                 writer.WriteBooleanValue(IsEnabled.Value);
             }
-            if (RetentionDays.HasValue)
+            if (Optional.IsDefined(RetentionDays))
             {
                 writer.WritePropertyName("retentionDays"u8);
                 writer.WriteNumberValue(RetentionDays.Value);
             }
-            if (LogAnalyticsResources != null)
+            if (Optional.IsDefined(LogAnalyticsResources))
             {
                 writer.WritePropertyName("logAnalyticsResources"u8);
                 writer.WriteObjectValue(LogAnalyticsResources);

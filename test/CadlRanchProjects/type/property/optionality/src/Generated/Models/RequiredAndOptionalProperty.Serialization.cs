@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using _Type.Property.Optionality;
 
 namespace _Type.Property.Optionality.Models
 {
@@ -27,7 +28,7 @@ namespace _Type.Property.Optionality.Models
             }
 
             writer.WriteStartObject();
-            if (OptionalProperty != null)
+            if (Optional.IsDefined(OptionalProperty))
             {
                 writer.WritePropertyName("optionalProperty"u8);
                 writer.WriteStringValue(OptionalProperty);

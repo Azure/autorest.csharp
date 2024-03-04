@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using ModelReaderWriterValidationTypeSpec;
 
 namespace ModelReaderWriterValidationTypeSpec.Models
 {
@@ -27,17 +28,17 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             }
 
             writer.WriteStartObject();
-            if (Location != null)
+            if (Optional.IsDefined(Location))
             {
                 writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location);
             }
-            if (ProviderExtendedLocationType != null)
+            if (Optional.IsDefined(ProviderExtendedLocationType))
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ProviderExtendedLocationType);
             }
-            if (!(ExtendedLocations is ChangeTrackingList<string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(ExtendedLocations))
             {
                 writer.WritePropertyName("extendedLocations"u8);
                 writer.WriteStartArray();

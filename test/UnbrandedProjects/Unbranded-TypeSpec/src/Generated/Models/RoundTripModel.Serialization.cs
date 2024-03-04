@@ -7,6 +7,7 @@ using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using UnbrandedTypeSpec;
 
 namespace UnbrandedTypeSpec.Models
 {
@@ -54,12 +55,12 @@ namespace UnbrandedTypeSpec.Models
             writer.WriteEndObject();
             writer.WritePropertyName("requiredModel"u8);
             writer.WriteObjectValue(RequiredModel);
-            if (IntExtensibleEnum.HasValue)
+            if (Optional.IsDefined(IntExtensibleEnum))
             {
                 writer.WritePropertyName("intExtensibleEnum"u8);
                 writer.WriteNumberValue(IntExtensibleEnum.Value.ToSerialInt32());
             }
-            if (!(IntExtensibleEnumCollection is OptionalList<IntExtensibleEnum> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(IntExtensibleEnumCollection))
             {
                 writer.WritePropertyName("intExtensibleEnumCollection"u8);
                 writer.WriteStartArray();
@@ -69,12 +70,12 @@ namespace UnbrandedTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (FloatExtensibleEnum.HasValue)
+            if (Optional.IsDefined(FloatExtensibleEnum))
             {
                 writer.WritePropertyName("floatExtensibleEnum"u8);
                 writer.WriteNumberValue(FloatExtensibleEnum.Value.ToSerialInt32());
             }
-            if (!(FloatExtensibleEnumCollection is OptionalList<FloatExtensibleEnum> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(FloatExtensibleEnumCollection))
             {
                 writer.WritePropertyName("floatExtensibleEnumCollection"u8);
                 writer.WriteStartArray();
@@ -84,12 +85,12 @@ namespace UnbrandedTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (FloatFixedEnum.HasValue)
+            if (Optional.IsDefined(FloatFixedEnum))
             {
                 writer.WritePropertyName("floatFixedEnum"u8);
                 writer.WriteNumberValue(FloatFixedEnum.Value.ToSerialSingle());
             }
-            if (!(FloatFixedEnumCollection is OptionalList<FloatFixedEnum> collection1 && collection1.IsUndefined))
+            if (Optional.IsCollectionDefined(FloatFixedEnumCollection))
             {
                 writer.WritePropertyName("floatFixedEnumCollection"u8);
                 writer.WriteStartArray();
@@ -99,12 +100,12 @@ namespace UnbrandedTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (IntFixedEnum.HasValue)
+            if (Optional.IsDefined(IntFixedEnum))
             {
                 writer.WritePropertyName("intFixedEnum"u8);
                 writer.WriteNumberValue((int)IntFixedEnum.Value);
             }
-            if (!(IntFixedEnumCollection is OptionalList<IntFixedEnum> collection2 && collection2.IsUndefined))
+            if (Optional.IsCollectionDefined(IntFixedEnumCollection))
             {
                 writer.WritePropertyName("intFixedEnumCollection"u8);
                 writer.WriteStartArray();
@@ -114,7 +115,7 @@ namespace UnbrandedTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (StringFixedEnum.HasValue)
+            if (Optional.IsDefined(StringFixedEnum))
             {
                 if (StringFixedEnum != null)
                 {
@@ -135,7 +136,7 @@ namespace UnbrandedTypeSpec.Models
                 JsonSerializer.Serialize(writer, document.RootElement);
             }
 #endif
-            if (OptionalUnknown != null)
+            if (Optional.IsDefined(OptionalUnknown))
             {
                 writer.WritePropertyName("optionalUnknown"u8);
 #if NET6_0_OR_GREATER
@@ -167,7 +168,7 @@ namespace UnbrandedTypeSpec.Models
 #endif
             }
             writer.WriteEndObject();
-            if (!(OptionalRecordUnknown is OptionalDictionary<string, BinaryData> collection3 && collection3.IsUndefined))
+            if (Optional.IsCollectionDefined(OptionalRecordUnknown))
             {
                 writer.WritePropertyName("optionalRecordUnknown"u8);
                 writer.WriteStartObject();
@@ -213,7 +214,7 @@ namespace UnbrandedTypeSpec.Models
                 }
                 writer.WriteEndObject();
             }
-            if (options.Format != "W" && !(ReadOnlyOptionalRecordUnknown is OptionalDictionary<string, BinaryData> collection4 && collection4.IsUndefined))
+            if (options.Format != "W" && Optional.IsCollectionDefined(ReadOnlyOptionalRecordUnknown))
             {
                 writer.WritePropertyName("readOnlyOptionalRecordUnknown"u8);
                 writer.WriteStartObject();

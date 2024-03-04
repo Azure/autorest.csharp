@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtExpandResourceTypes;
 
 namespace MgmtExpandResourceTypes.Models
 {
@@ -15,12 +16,12 @@ namespace MgmtExpandResourceTypes.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Preference.HasValue)
+            if (Optional.IsDefined(Preference))
             {
                 writer.WritePropertyName("preference"u8);
                 writer.WriteNumberValue(Preference.Value);
             }
-            if (Exchange != null)
+            if (Optional.IsDefined(Exchange))
             {
                 writer.WritePropertyName("exchange"u8);
                 writer.WriteStringValue(Exchange);

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -27,12 +28,12 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (VmSize != null)
+            if (Optional.IsDefined(VmSize))
             {
                 writer.WritePropertyName("vmSize"u8);
                 writer.WriteStringValue(VmSize);
             }
-            if (Count.HasValue)
+            if (Optional.IsDefined(Count))
             {
                 writer.WritePropertyName("count"u8);
                 writer.WriteNumberValue(Count.Value);
@@ -109,7 +110,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (VmSize != null)
+            if (Optional.IsDefined(VmSize))
             {
                 builder.Append("  vmSize:");
                 if (VmSize.Contains(Environment.NewLine))
@@ -123,7 +124,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Count.HasValue)
+            if (Optional.IsDefined(Count))
             {
                 builder.Append("  count:");
                 builder.AppendLine($" '{Count.Value.ToString()}'");

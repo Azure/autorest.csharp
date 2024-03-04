@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Network.Management.Interface;
 
 namespace Azure.Network.Management.Interface.Models
 {
@@ -16,22 +17,22 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Sku != null)
+            if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
                 writer.WriteObjectValue(Sku);
             }
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (Location != null)
+            if (Optional.IsDefined(Location))
             {
                 writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location);
             }
-            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -44,7 +45,7 @@ namespace Azure.Network.Management.Interface.Models
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (!(FrontendIPConfigurations is ChangeTrackingList<FrontendIPConfiguration> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(FrontendIPConfigurations))
             {
                 writer.WritePropertyName("frontendIPConfigurations"u8);
                 writer.WriteStartArray();
@@ -54,7 +55,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!(BackendAddressPools is ChangeTrackingList<BackendAddressPool> collection1 && collection1.IsUndefined))
+            if (Optional.IsCollectionDefined(BackendAddressPools))
             {
                 writer.WritePropertyName("backendAddressPools"u8);
                 writer.WriteStartArray();
@@ -64,7 +65,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!(LoadBalancingRules is ChangeTrackingList<LoadBalancingRule> collection2 && collection2.IsUndefined))
+            if (Optional.IsCollectionDefined(LoadBalancingRules))
             {
                 writer.WritePropertyName("loadBalancingRules"u8);
                 writer.WriteStartArray();
@@ -74,7 +75,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!(Probes is ChangeTrackingList<Probe> collection3 && collection3.IsUndefined))
+            if (Optional.IsCollectionDefined(Probes))
             {
                 writer.WritePropertyName("probes"u8);
                 writer.WriteStartArray();
@@ -84,7 +85,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!(InboundNatRules is ChangeTrackingList<InboundNatRule> collection4 && collection4.IsUndefined))
+            if (Optional.IsCollectionDefined(InboundNatRules))
             {
                 writer.WritePropertyName("inboundNatRules"u8);
                 writer.WriteStartArray();
@@ -94,7 +95,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!(InboundNatPools is ChangeTrackingList<InboundNatPool> collection5 && collection5.IsUndefined))
+            if (Optional.IsCollectionDefined(InboundNatPools))
             {
                 writer.WritePropertyName("inboundNatPools"u8);
                 writer.WriteStartArray();
@@ -104,7 +105,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!(OutboundRules is ChangeTrackingList<OutboundRule> collection6 && collection6.IsUndefined))
+            if (Optional.IsCollectionDefined(OutboundRules))
             {
                 writer.WritePropertyName("outboundRules"u8);
                 writer.WriteStartArray();

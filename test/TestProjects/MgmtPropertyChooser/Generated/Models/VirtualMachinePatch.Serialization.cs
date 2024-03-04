@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtPropertyChooser;
 
 namespace MgmtPropertyChooser.Models
 {
@@ -15,17 +16,17 @@ namespace MgmtPropertyChooser.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Plan != null)
+            if (Optional.IsDefined(Plan))
             {
                 writer.WritePropertyName("plan"u8);
                 JsonSerializer.Serialize(writer, Plan);
             }
-            if (Identity != null)
+            if (Optional.IsDefined(Identity))
             {
                 writer.WritePropertyName("identity"u8);
                 JsonSerializer.Serialize(writer, Identity);
             }
-            if (!(Zones is ChangeTrackingList<string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Zones))
             {
                 writer.WritePropertyName("zones"u8);
                 writer.WriteStartArray();
@@ -35,7 +36,7 @@ namespace MgmtPropertyChooser.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!(Tags is ChangeTrackingDictionary<string, string> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -48,12 +49,12 @@ namespace MgmtPropertyChooser.Models
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (LicenseType != null)
+            if (Optional.IsDefined(LicenseType))
             {
                 writer.WritePropertyName("licenseType"u8);
                 writer.WriteStringValue(LicenseType);
             }
-            if (ExtensionsTimeBudget != null)
+            if (Optional.IsDefined(ExtensionsTimeBudget))
             {
                 writer.WritePropertyName("extensionsTimeBudget"u8);
                 writer.WriteStringValue(ExtensionsTimeBudget);

@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Storage;
 
 namespace Azure.ResourceManager.Storage.Models
 {
@@ -17,7 +18,7 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (UseSubDomainName.HasValue)
+            if (Optional.IsDefined(UseSubDomainName))
             {
                 writer.WritePropertyName("useSubDomainName"u8);
                 writer.WriteBooleanValue(UseSubDomainName.Value);

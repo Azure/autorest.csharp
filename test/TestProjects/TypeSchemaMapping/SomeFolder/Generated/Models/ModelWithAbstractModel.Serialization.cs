@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using TypeSchemaMapping;
 
 namespace TypeSchemaMapping.Models
 {
@@ -26,7 +27,7 @@ namespace TypeSchemaMapping.Models
             }
 
             writer.WriteStartObject();
-            if (AbstractModelProperty != null)
+            if (Optional.IsDefined(AbstractModelProperty))
             {
                 writer.WritePropertyName("AbstractModelProperty"u8);
                 writer.WriteObjectValue(AbstractModelProperty);

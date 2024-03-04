@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using extensible_enums_swagger;
 
 namespace extensible_enums_swagger.Models
 {
@@ -26,12 +27,12 @@ namespace extensible_enums_swagger.Models
             }
 
             writer.WriteStartObject();
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (DaysOfWeek.HasValue)
+            if (Optional.IsDefined(DaysOfWeek))
             {
                 writer.WritePropertyName("DaysOfWeek"u8);
                 writer.WriteStringValue(DaysOfWeek.Value.ToString());

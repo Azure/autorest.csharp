@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -31,7 +32,7 @@ namespace MgmtDiscriminator.Models
             writer.WriteObjectValue(Parameters);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name.ToString());
-            if (options.Format != "W" && Foo != null)
+            if (options.Format != "W" && Optional.IsDefined(Foo))
             {
                 writer.WritePropertyName("foo"u8);
                 writer.WriteStringValue(Foo);
@@ -113,13 +114,13 @@ namespace MgmtDiscriminator.Models
             builder.Append("  name:");
             builder.AppendLine($" '{Name.ToString()}'");
 
-            if (Parameters != null)
+            if (Optional.IsDefined(Parameters))
             {
                 builder.Append("  parameters:");
                 AppendChildObject(builder, Parameters, options, 2, false);
             }
 
-            if (Foo != null)
+            if (Optional.IsDefined(Foo))
             {
                 builder.Append("  foo:");
                 if (Foo.Contains(Environment.NewLine))

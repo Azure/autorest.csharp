@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -27,12 +28,12 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (ColocationStatus != null)
+            if (Optional.IsDefined(ColocationStatus))
             {
                 writer.WritePropertyName("colocationStatus"u8);
                 writer.WriteObjectValue(ColocationStatus);
             }
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
@@ -109,13 +110,13 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (ColocationStatus != null)
+            if (Optional.IsDefined(ColocationStatus))
             {
                 builder.Append("  colocationStatus:");
                 AppendChildObject(builder, ColocationStatus, options, 2, false);
             }
 
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 builder.Append("  id:");
                 if (Id.Contains(Environment.NewLine))

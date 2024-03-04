@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Network.Management.Interface;
 
 namespace Azure.Network.Management.Interface.Models
 {
@@ -16,17 +17,17 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (Location != null)
+            if (Optional.IsDefined(Location))
             {
                 writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location);
             }
-            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -39,17 +40,17 @@ namespace Azure.Network.Management.Interface.Models
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (DestinationNetworkInterfaceIPConfiguration != null)
+            if (Optional.IsDefined(DestinationNetworkInterfaceIPConfiguration))
             {
                 writer.WritePropertyName("destinationNetworkInterfaceIPConfiguration"u8);
                 writer.WriteObjectValue(DestinationNetworkInterfaceIPConfiguration);
             }
-            if (DestinationLoadBalancerFrontEndIPConfiguration != null)
+            if (Optional.IsDefined(DestinationLoadBalancerFrontEndIPConfiguration))
             {
                 writer.WritePropertyName("destinationLoadBalancerFrontEndIPConfiguration"u8);
                 writer.WriteObjectValue(DestinationLoadBalancerFrontEndIPConfiguration);
             }
-            if (DestinationPort.HasValue)
+            if (Optional.IsDefined(DestinationPort))
             {
                 writer.WritePropertyName("destinationPort"u8);
                 writer.WriteNumberValue(DestinationPort.Value);

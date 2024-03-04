@@ -65,7 +65,6 @@ $files = @(
     'OperationInternal.cs',
     'OperationInternalOfT.cs',
     'OperationPoller.cs',
-    'Optional.cs',
     'Page.cs',
     'PageableHelpers.cs',
     'ProtocolOperation.cs',

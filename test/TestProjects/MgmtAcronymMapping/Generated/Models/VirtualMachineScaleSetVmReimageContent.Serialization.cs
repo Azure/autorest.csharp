@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtAcronymMapping;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -15,7 +16,7 @@ namespace MgmtAcronymMapping.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (TempDisk.HasValue)
+            if (Optional.IsDefined(TempDisk))
             {
                 writer.WritePropertyName("tempDisk"u8);
                 writer.WriteBooleanValue(TempDisk.Value);

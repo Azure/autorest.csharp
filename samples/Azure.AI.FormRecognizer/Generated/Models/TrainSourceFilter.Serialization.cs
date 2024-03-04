@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Text.Json;
+using Azure.AI.FormRecognizer;
 using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
@@ -15,12 +16,12 @@ namespace Azure.AI.FormRecognizer.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Prefix != null)
+            if (Optional.IsDefined(Prefix))
             {
                 writer.WritePropertyName("prefix"u8);
                 writer.WriteStringValue(Prefix);
             }
-            if (IncludeSubFolders.HasValue)
+            if (Optional.IsDefined(IncludeSubFolders))
             {
                 writer.WritePropertyName("includeSubFolders"u8);
                 writer.WriteBooleanValue(IncludeSubFolders.Value);

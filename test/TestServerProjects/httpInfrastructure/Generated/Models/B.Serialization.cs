@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using httpInfrastructure;
 
 namespace httpInfrastructure.Models
 {
@@ -26,12 +27,12 @@ namespace httpInfrastructure.Models
             }
 
             writer.WriteStartObject();
-            if (TextStatusCode != null)
+            if (Optional.IsDefined(TextStatusCode))
             {
                 writer.WritePropertyName("textStatusCode"u8);
                 writer.WriteStringValue(TextStatusCode);
             }
-            if (StatusCode != null)
+            if (Optional.IsDefined(StatusCode))
             {
                 writer.WritePropertyName("statusCode"u8);
                 writer.WriteStringValue(StatusCode);

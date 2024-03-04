@@ -9,6 +9,7 @@ using AutoRest.CSharp.Common.Output.PostProcessing;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
@@ -96,6 +97,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     }
                 }
             }
+
+            var writer = new CodeWriter();
+            new ExpressionTypeProviderWriter(writer, OptionalTypeProvider.Instance).Write();
+            project.AddGeneratedFile($"Internal/{OptionalTypeProvider.Instance.Type.Name}.cs", writer.ToString());
 
             await project.PostProcessAsync(new PostProcessor(
                 modelsToKeep: library.AccessOverriddenModels.ToImmutableHashSet(),

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -27,12 +28,12 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && WalkPerformed.HasValue)
+            if (options.Format != "W" && Optional.IsDefined(WalkPerformed))
             {
                 writer.WritePropertyName("walkPerformed"u8);
                 writer.WriteBooleanValue(WalkPerformed.Value);
             }
-            if (options.Format != "W" && NextPlatformUpdateDomain.HasValue)
+            if (options.Format != "W" && Optional.IsDefined(NextPlatformUpdateDomain))
             {
                 writer.WritePropertyName("nextPlatformUpdateDomain"u8);
                 writer.WriteNumberValue(NextPlatformUpdateDomain.Value);
@@ -113,14 +114,14 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (WalkPerformed.HasValue)
+            if (Optional.IsDefined(WalkPerformed))
             {
                 builder.Append("  walkPerformed:");
                 var boolValue = WalkPerformed.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
             }
 
-            if (NextPlatformUpdateDomain.HasValue)
+            if (Optional.IsDefined(NextPlatformUpdateDomain))
             {
                 builder.Append("  nextPlatformUpdateDomain:");
                 builder.AppendLine($" {NextPlatformUpdateDomain.Value}");

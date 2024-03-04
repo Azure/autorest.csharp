@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -27,12 +28,12 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (AvailablePatchSummary != null)
+            if (Optional.IsDefined(AvailablePatchSummary))
             {
                 writer.WritePropertyName("availablePatchSummary"u8);
                 writer.WriteObjectValue(AvailablePatchSummary);
             }
-            if (LastPatchInstallationSummary != null)
+            if (Optional.IsDefined(LastPatchInstallationSummary))
             {
                 writer.WritePropertyName("lastPatchInstallationSummary"u8);
                 writer.WriteObjectValue(LastPatchInstallationSummary);
@@ -113,13 +114,13 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (AvailablePatchSummary != null)
+            if (Optional.IsDefined(AvailablePatchSummary))
             {
                 builder.Append("  availablePatchSummary:");
                 AppendChildObject(builder, AvailablePatchSummary, options, 2, false);
             }
 
-            if (LastPatchInstallationSummary != null)
+            if (Optional.IsDefined(LastPatchInstallationSummary))
             {
                 builder.Append("  lastPatchInstallationSummary:");
                 AppendChildObject(builder, LastPatchInstallationSummary, options, 2, false);

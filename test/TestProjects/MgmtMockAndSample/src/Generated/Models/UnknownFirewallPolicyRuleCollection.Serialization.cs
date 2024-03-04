@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
@@ -17,12 +18,12 @@ namespace MgmtMockAndSample.Models
             writer.WriteStartObject();
             writer.WritePropertyName("ruleCollectionType"u8);
             writer.WriteStringValue(RuleCollectionType.ToString());
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Priority.HasValue)
+            if (Optional.IsDefined(Priority))
             {
                 writer.WritePropertyName("priority"u8);
                 writer.WriteNumberValue(Priority.Value);

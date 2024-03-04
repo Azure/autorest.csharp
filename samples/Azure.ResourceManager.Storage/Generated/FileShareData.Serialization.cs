@@ -22,7 +22,7 @@ namespace Azure.ResourceManager.Storage
             writer.WriteStartObject();
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (!(Metadata is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Metadata))
             {
                 writer.WritePropertyName("metadata"u8);
                 writer.WriteStartObject();
@@ -33,27 +33,27 @@ namespace Azure.ResourceManager.Storage
                 }
                 writer.WriteEndObject();
             }
-            if (ShareQuota.HasValue)
+            if (Optional.IsDefined(ShareQuota))
             {
                 writer.WritePropertyName("shareQuota"u8);
                 writer.WriteNumberValue(ShareQuota.Value);
             }
-            if (EnabledProtocols.HasValue)
+            if (Optional.IsDefined(EnabledProtocols))
             {
                 writer.WritePropertyName("enabledProtocols"u8);
                 writer.WriteStringValue(EnabledProtocols.Value.ToString());
             }
-            if (RootSquash.HasValue)
+            if (Optional.IsDefined(RootSquash))
             {
                 writer.WritePropertyName("rootSquash"u8);
                 writer.WriteStringValue(RootSquash.Value.ToString());
             }
-            if (AccessTier.HasValue)
+            if (Optional.IsDefined(AccessTier))
             {
                 writer.WritePropertyName("accessTier"u8);
                 writer.WriteStringValue(AccessTier.Value.ToString());
             }
-            if (!(SignedIdentifiers is ChangeTrackingList<SignedIdentifier> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(SignedIdentifiers))
             {
                 writer.WritePropertyName("signedIdentifiers"u8);
                 writer.WriteStartArray();

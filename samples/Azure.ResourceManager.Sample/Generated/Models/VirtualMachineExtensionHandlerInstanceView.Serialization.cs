@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -27,17 +28,17 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (VirtualMachineExtensionHandlerInstanceViewType != null)
+            if (Optional.IsDefined(VirtualMachineExtensionHandlerInstanceViewType))
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(VirtualMachineExtensionHandlerInstanceViewType);
             }
-            if (TypeHandlerVersion != null)
+            if (Optional.IsDefined(TypeHandlerVersion))
             {
                 writer.WritePropertyName("typeHandlerVersion"u8);
                 writer.WriteStringValue(TypeHandlerVersion);
             }
-            if (Status != null)
+            if (Optional.IsDefined(Status))
             {
                 writer.WritePropertyName("status"u8);
                 writer.WriteObjectValue(Status);
@@ -120,7 +121,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (TypeHandlerVersion != null)
+            if (Optional.IsDefined(TypeHandlerVersion))
             {
                 builder.Append("  typeHandlerVersion:");
                 if (TypeHandlerVersion.Contains(Environment.NewLine))
@@ -134,7 +135,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Status != null)
+            if (Optional.IsDefined(Status))
             {
                 builder.Append("  status:");
                 AppendChildObject(builder, Status, options, 2, false);

@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Network.Management.Interface;
 
 namespace Azure.Network.Management.Interface.Models
 {
@@ -15,24 +16,24 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (LinkedResourceType != null)
+            if (Optional.IsDefined(LinkedResourceType))
             {
                 writer.WritePropertyName("linkedResourceType"u8);
                 writer.WriteStringValue(LinkedResourceType);
             }
-            if (Link != null)
+            if (Optional.IsDefined(Link))
             {
                 writer.WritePropertyName("link"u8);
                 writer.WriteStringValue(Link);

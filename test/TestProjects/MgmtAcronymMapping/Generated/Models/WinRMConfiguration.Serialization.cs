@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using MgmtAcronymMapping;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -16,7 +17,7 @@ namespace MgmtAcronymMapping.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (!(Listeners is ChangeTrackingList<WinRMListener> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Listeners))
             {
                 writer.WritePropertyName("listeners"u8);
                 writer.WriteStartArray();

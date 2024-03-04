@@ -17,19 +17,19 @@ namespace MgmtMockAndSample
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Priority.HasValue)
+            if (Optional.IsDefined(Priority))
             {
                 writer.WritePropertyName("priority"u8);
                 writer.WriteNumberValue(Priority.Value);
             }
-            if (!(RuleCollections is ChangeTrackingList<FirewallPolicyRuleCollection> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(RuleCollections))
             {
                 writer.WritePropertyName("ruleCollections"u8);
                 writer.WriteStartArray();

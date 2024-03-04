@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using azure_special_properties;
 
 namespace azure_special_properties.Models
 {
@@ -26,14 +27,14 @@ namespace azure_special_properties.Models
             }
 
             writer.WriteStartObject();
-            if (Status.HasValue)
+            if (Optional.IsDefined(Status))
             {
                 writer.WritePropertyName("status"u8);
                 writer.WriteNumberValue(Status.Value);
             }
             writer.WritePropertyName("constantId"u8);
             writer.WriteNumberValue(ConstantId.ToSerialInt32());
-            if (Message != null)
+            if (Optional.IsDefined(Message))
             {
                 writer.WritePropertyName("message"u8);
                 writer.WriteStringValue(Message);

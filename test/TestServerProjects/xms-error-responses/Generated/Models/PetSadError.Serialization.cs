@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using xms_error_responses;
 
 namespace xms_error_responses.Models
 {
@@ -26,19 +27,19 @@ namespace xms_error_responses.Models
             }
 
             writer.WriteStartObject();
-            if (Reason != null)
+            if (Optional.IsDefined(Reason))
             {
                 writer.WritePropertyName("reason"u8);
                 writer.WriteStringValue(Reason);
             }
             writer.WritePropertyName("errorType"u8);
             writer.WriteStringValue(ErrorType);
-            if (ErrorMessage != null)
+            if (Optional.IsDefined(ErrorMessage))
             {
                 writer.WritePropertyName("errorMessage"u8);
                 writer.WriteStringValue(ErrorMessage);
             }
-            if (ActionResponse != null)
+            if (Optional.IsDefined(ActionResponse))
             {
                 writer.WritePropertyName("actionResponse"u8);
                 writer.WriteStringValue(ActionResponse);

@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {
@@ -16,22 +17,22 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (BatchSize.HasValue)
+            if (Optional.IsDefined(BatchSize))
             {
                 writer.WritePropertyName("batchSize"u8);
                 writer.WriteNumberValue(BatchSize.Value);
             }
-            if (MaxFailedItems.HasValue)
+            if (Optional.IsDefined(MaxFailedItems))
             {
                 writer.WritePropertyName("maxFailedItems"u8);
                 writer.WriteNumberValue(MaxFailedItems.Value);
             }
-            if (MaxFailedItemsPerBatch.HasValue)
+            if (Optional.IsDefined(MaxFailedItemsPerBatch))
             {
                 writer.WritePropertyName("maxFailedItemsPerBatch"u8);
                 writer.WriteNumberValue(MaxFailedItemsPerBatch.Value);
             }
-            if (!(Configuration is ChangeTrackingDictionary<string, object> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Configuration))
             {
                 writer.WritePropertyName("configuration"u8);
                 writer.WriteStartObject();
