@@ -58,9 +58,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
             }
 
-            _defaultDerivedType = inputModel.DerivedModels.Any() && inputModel.BaseModel is not null
-                ? this
-                : defaultDerivedType ?? (inputModel.IsUnknownDiscriminatorModel ? this : null);
+            _defaultDerivedType = defaultDerivedType ?? (inputModel.IsUnknownDiscriminatorModel ? this : null);
             IsUnknownDerivedType = inputModel.IsUnknownDiscriminatorModel;
             // we skip the init ctor when there is an extension telling us to, or when this is an unknown derived type in a discriminated set
             SkipInitializerConstructor = IsUnknownDerivedType;
@@ -76,7 +74,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultAccessibility { get; } = "public";
 
         private SerializableObjectType? _defaultDerivedType;
-        protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && InputModel.DiscriminatorPropertyName != null && InputModel.GetSelfAndBaseModels().Count() == 1;
+        protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && InputModel.DiscriminatorPropertyName != null;
 
         public override ObjectTypeProperty? AdditionalPropertiesProperty
         {
@@ -564,7 +562,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return baseType;
             }
 
-            var objectSchemas = InputModel.GetAllBaseModels().ToArray();
+            var objectSchemas = InputModel.GetImmediateBaseModels();
 
             InputModelType? selectedSchema = null;
 

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Utilities;
@@ -103,7 +104,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             RawRequestPathToResourceData = new CachedDictionary<string, ResourceData>(EnsureRequestPathToResourceData);
             RequestPathToResources = new CachedDictionary<RequestPath, ResourceObjectAssociation>(EnsureRequestPathToResourcesMap);
             PagingMethods = new CachedDictionary<RestClientMethod, PagingMethod>(EnsurePagingMethods);
-            RestClientMethods = new CachedDictionary<InputOperation, RestClientMethod>(EnsureRestClientMethods); // Why is it not working with CachedDictionary? And what is the purpose using it here?
+            RestClientMethods = new CachedDictionary<InputOperation, RestClientMethod>(EnsureRestClientMethods);
             ResourceSchemaMap = new CachedDictionary<InputType, TypeProvider>(EnsureResourceSchemaMap);
             SchemaMap = new CachedDictionary<InputType, TypeProvider>(EnsureSchemaMap);
             ChildOperations = new CachedDictionary<RequestPath, HashSet<InputOperation>>(EnsureResourceChildOperations);
@@ -393,7 +394,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private Dictionary<InputOperation, RestClientMethod> EnsureRestClientMethods()
         {
-            var restClientMethods = new Dictionary<InputOperation, RestClientMethod>();
+            var restClientMethods = new Dictionary<InputOperation, RestClientMethod>(new ObjectReferenceEqualityComparer<InputOperation>());
             foreach (var restClient in RestClients)
             {
                 foreach (var (operation, restClientMethod) in restClient.Methods)
@@ -850,7 +851,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     // skip this step if the configuration is set to keep this plural
                     if (!Configuration.MgmtConfiguration.KeepPluralResourceData.Contains(schemaName))
                     {
-                        resourceDataSchema.OriginalName ??= schemaName;
+                        //resourceDataSchema.OriginalName ??= schemaName;
                         schemaName = schemaName.LastWordToSingular(false);
                         resourceDataSchema.Name = schemaName;
                     }
@@ -919,6 +920,37 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 }
             }
             return operationsToRequestPath;
+        }
+
+        private class ObjectReferenceEqualityComparer<T> : EqualityComparer<T> where T : class
+        {
+            public override bool Equals(T? x, T? y)
+            {
+                if (x is null)
+                {
+                    if (y is not null)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+                else
+                {
+                    if (y is null)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return ReferenceEquals(x, y);
+                    }
+                }
+            }
+
+            public override int GetHashCode([DisallowNull] T obj) => RuntimeHelpers.GetHashCode(obj);
         }
     }
 }

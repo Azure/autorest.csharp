@@ -92,8 +92,8 @@ namespace MgmtDiscriminator
             {
                 switch (discriminator.GetString())
                 {
-                    case "roleAssignment": return RoleAssignmentArtifact.DeserializeRoleAssignmentArtifact(element, options);
                     case "template": return TemplateArtifact.DeserializeTemplateArtifact(element, options);
+                    case "roleAssignment": return RoleAssignmentArtifact.DeserializeRoleAssignmentArtifact(element, options);
                 }
             }
             return UnknownArtifact.DeserializeUnknownArtifact(element, options);

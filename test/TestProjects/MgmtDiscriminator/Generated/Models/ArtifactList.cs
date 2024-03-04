@@ -57,7 +57,7 @@ namespace MgmtDiscriminator.Models
         /// <param name="value">
         /// List of blueprint artifacts.
         /// Please note <see cref="ArtifactData"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
-        /// The available derived classes include <see cref="RoleAssignmentArtifact"/> and <see cref="TemplateArtifact"/>.
+        /// The available derived classes include <see cref="TemplateArtifact"/> and <see cref="RoleAssignmentArtifact"/>.
         /// </param>
         /// <param name="nextLink"> Link to the next page of results. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
@@ -71,7 +71,7 @@ namespace MgmtDiscriminator.Models
         /// <summary>
         /// List of blueprint artifacts.
         /// Please note <see cref="ArtifactData"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
-        /// The available derived classes include <see cref="RoleAssignmentArtifact"/> and <see cref="TemplateArtifact"/>.
+        /// The available derived classes include <see cref="TemplateArtifact"/> and <see cref="RoleAssignmentArtifact"/>.
         /// </summary>
         public IReadOnlyList<ArtifactData> Value { get; }
         /// <summary> Link to the next page of results. </summary>

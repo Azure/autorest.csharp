@@ -58,17 +58,17 @@ namespace MgmtDiscriminator.Models
         /// <param name="conditions">
         /// The condition that must be matched for the actions to be executed
         /// Please note <see cref="DeliveryRuleCondition"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
-        /// The available derived classes include <see cref="DeliveryRuleQueryStringCondition"/>, <see cref="DeliveryRuleRemoteAddressCondition"/> and <see cref="DeliveryRuleRequestMethodCondition"/>.
+        /// The available derived classes include <see cref="DeliveryRuleRemoteAddressCondition"/>, <see cref="DeliveryRuleRequestMethodCondition"/> and <see cref="DeliveryRuleQueryStringCondition"/>.
         /// </param>
         /// <param name="actions">
         /// A list of actions that are executed when all the conditions of a rule are satisfied.
         /// Please note <see cref="DeliveryRuleAction"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
-        /// The available derived classes include <see cref="DeliveryRuleCacheExpirationAction"/>, <see cref="DeliveryRuleCacheKeyQueryStringAction"/>, <see cref="DeliveryRuleRequestHeaderAction"/>, <see cref="DeliveryRuleResponseHeaderAction"/>, <see cref="OriginGroupOverrideAction"/>, <see cref="DeliveryRuleRouteConfigurationOverrideAction"/>, <see cref="UrlRedirectAction"/>, <see cref="UrlRewriteAction"/> and <see cref="UrlSigningAction"/>.
+        /// The available derived classes include <see cref="UrlRedirectAction"/>, <see cref="UrlSigningAction"/>, <see cref="OriginGroupOverrideAction"/>, <see cref="UrlRewriteAction"/>, <see cref="DeliveryRuleRequestHeaderAction"/>, <see cref="DeliveryRuleResponseHeaderAction"/>, <see cref="DeliveryRuleCacheExpirationAction"/>, <see cref="DeliveryRuleCacheKeyQueryStringAction"/> and <see cref="DeliveryRuleRouteConfigurationOverrideAction"/>.
         /// </param>
         /// <param name="extraMappingInfo">
         /// A dictionary of mapping details about the actions that are executed when all the conditions of a rule are satisfied.
         /// Please note <see cref="DeliveryRuleAction"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
-        /// The available derived classes include <see cref="DeliveryRuleCacheExpirationAction"/>, <see cref="DeliveryRuleCacheKeyQueryStringAction"/>, <see cref="DeliveryRuleRequestHeaderAction"/>, <see cref="DeliveryRuleResponseHeaderAction"/>, <see cref="OriginGroupOverrideAction"/>, <see cref="DeliveryRuleRouteConfigurationOverrideAction"/>, <see cref="UrlRedirectAction"/>, <see cref="UrlRewriteAction"/> and <see cref="UrlSigningAction"/>.
+        /// The available derived classes include <see cref="UrlRedirectAction"/>, <see cref="UrlSigningAction"/>, <see cref="OriginGroupOverrideAction"/>, <see cref="UrlRewriteAction"/>, <see cref="DeliveryRuleRequestHeaderAction"/>, <see cref="DeliveryRuleResponseHeaderAction"/>, <see cref="DeliveryRuleCacheExpirationAction"/>, <see cref="DeliveryRuleCacheKeyQueryStringAction"/> and <see cref="DeliveryRuleRouteConfigurationOverrideAction"/>.
         /// </param>
         /// <param name="pet">
         /// A pet
@@ -94,21 +94,21 @@ namespace MgmtDiscriminator.Models
         /// <summary>
         /// The condition that must be matched for the actions to be executed
         /// Please note <see cref="DeliveryRuleCondition"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
-        /// The available derived classes include <see cref="DeliveryRuleQueryStringCondition"/>, <see cref="DeliveryRuleRemoteAddressCondition"/> and <see cref="DeliveryRuleRequestMethodCondition"/>.
+        /// The available derived classes include <see cref="DeliveryRuleRemoteAddressCondition"/>, <see cref="DeliveryRuleRequestMethodCondition"/> and <see cref="DeliveryRuleQueryStringCondition"/>.
         /// </summary>
         [WirePath("conditions")]
         public DeliveryRuleCondition Conditions { get; set; }
         /// <summary>
         /// A list of actions that are executed when all the conditions of a rule are satisfied.
         /// Please note <see cref="DeliveryRuleAction"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
-        /// The available derived classes include <see cref="DeliveryRuleCacheExpirationAction"/>, <see cref="DeliveryRuleCacheKeyQueryStringAction"/>, <see cref="DeliveryRuleRequestHeaderAction"/>, <see cref="DeliveryRuleResponseHeaderAction"/>, <see cref="OriginGroupOverrideAction"/>, <see cref="DeliveryRuleRouteConfigurationOverrideAction"/>, <see cref="UrlRedirectAction"/>, <see cref="UrlRewriteAction"/> and <see cref="UrlSigningAction"/>.
+        /// The available derived classes include <see cref="UrlRedirectAction"/>, <see cref="UrlSigningAction"/>, <see cref="OriginGroupOverrideAction"/>, <see cref="UrlRewriteAction"/>, <see cref="DeliveryRuleRequestHeaderAction"/>, <see cref="DeliveryRuleResponseHeaderAction"/>, <see cref="DeliveryRuleCacheExpirationAction"/>, <see cref="DeliveryRuleCacheKeyQueryStringAction"/> and <see cref="DeliveryRuleRouteConfigurationOverrideAction"/>.
         /// </summary>
         [WirePath("actions")]
         public IList<DeliveryRuleAction> Actions { get; }
         /// <summary>
         /// A dictionary of mapping details about the actions that are executed when all the conditions of a rule are satisfied.
         /// Please note <see cref="DeliveryRuleAction"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
-        /// The available derived classes include <see cref="DeliveryRuleCacheExpirationAction"/>, <see cref="DeliveryRuleCacheKeyQueryStringAction"/>, <see cref="DeliveryRuleRequestHeaderAction"/>, <see cref="DeliveryRuleResponseHeaderAction"/>, <see cref="OriginGroupOverrideAction"/>, <see cref="DeliveryRuleRouteConfigurationOverrideAction"/>, <see cref="UrlRedirectAction"/>, <see cref="UrlRewriteAction"/> and <see cref="UrlSigningAction"/>.
+        /// The available derived classes include <see cref="UrlRedirectAction"/>, <see cref="UrlSigningAction"/>, <see cref="OriginGroupOverrideAction"/>, <see cref="UrlRewriteAction"/>, <see cref="DeliveryRuleRequestHeaderAction"/>, <see cref="DeliveryRuleResponseHeaderAction"/>, <see cref="DeliveryRuleCacheExpirationAction"/>, <see cref="DeliveryRuleCacheKeyQueryStringAction"/> and <see cref="DeliveryRuleRouteConfigurationOverrideAction"/>.
         /// </summary>
         [WirePath("extraMappingInfo")]
         public IDictionary<string, DeliveryRuleAction> ExtraMappingInfo { get; }

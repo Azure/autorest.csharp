@@ -77,7 +77,7 @@ internal record InputOperation(
             operation.Paging,
             operation.GenerateProtocolMethod,
             operation.GenerateConvenienceMethod,
-            OriginalName: null);
+            OriginalName: operation.OriginalName);
     }
 
     private string? _cleanName;
@@ -94,7 +94,7 @@ internal record InputOperation(
         }
     }
 
-    public bool KeepClientDefaultValue { get; set; } = Configuration.MethodsToKeepClientDefaultValue.Contains(Name);
+    public bool KeepClientDefaultValue { get; init; } = Configuration.MethodsToKeepClientDefaultValue.Contains(Name);
 
     private IReadOnlyDictionary<string, InputOperationExample>? _examples;
     public IReadOnlyDictionary<string, InputOperationExample> Examples => _examples ??= EnsureExamples();
