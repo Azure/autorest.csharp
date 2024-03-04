@@ -22,10 +22,12 @@ namespace AutoRest.CSharp.Output.Models.Types
         private static readonly Lazy<OptionalTypeProvider> _instance = new(() => new OptionalTypeProvider(Configuration.Namespace, null));
         public static OptionalTypeProvider Instance => _instance.Value;
 
+        private class ListTemplate<T> { }
+        private class DictionaryTemplate<TKey, TValue> { }
 
-        private readonly CSharpType _t = new GenericParameterTypeProvider("T").Type;
-        private readonly CSharpType _tKey = new GenericParameterTypeProvider("TKey").Type;
-        private readonly CSharpType _tValue = new GenericParameterTypeProvider("TValue").Type;
+        private readonly CSharpType _t = typeof(ListTemplate<>).GetGenericArguments()[0];
+        private readonly CSharpType _tKey = typeof(DictionaryTemplate<,>).GetGenericArguments()[0];
+        private readonly CSharpType _tValue = typeof(DictionaryTemplate<,>).GetGenericArguments()[1];
         private readonly CSharpType _genericChangeTrackingList;
         private readonly CSharpType _genericChangeTrackingDictionary;
 

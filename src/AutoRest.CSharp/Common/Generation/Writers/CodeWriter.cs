@@ -433,16 +433,13 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void AppendType(CSharpType type, bool isDeclaration, bool writeTypeNameOnly)
         {
-            if (!type.IsFrameworkType && type.Implementation is GenericParameterTypeProvider)
-            {
-                AppendRaw(type.Name);
-                this.AppendRawIf("?", type.IsNullable);
-                return;
-            }
-
             if (type.TryGetCSharpFriendlyName(out var keywordName))
             {
                 AppendRaw(keywordName);
+                if (type.FrameworkType.IsGenericParameter && type.IsNullable)
+                {
+                    AppendRaw("?");
+                }
             }
             else if (isDeclaration && !type.IsFrameworkType)
             {
