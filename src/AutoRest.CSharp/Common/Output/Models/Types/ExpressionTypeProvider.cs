@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
@@ -19,10 +20,15 @@ namespace AutoRest.CSharp.Output.Models.Types
         private IReadOnlyList<string>? _usings;
         public IReadOnlyList<string> Usings => _usings ??= BuildUsings().ToArray();
 
+        public TypeSignatureModifiers DeclarationModifiers { get; protected init; }
+
         protected virtual IEnumerable<string> BuildUsings()
         {
             yield break;
         }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        protected override string DefaultAccessibility { get; } = "public";
 
         public virtual CSharpType? Inherits { get; protected init; }
 
