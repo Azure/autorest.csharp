@@ -12,7 +12,7 @@ namespace OpenAI
     {
         public static bool IsCollectionDefined<T>(IEnumerable<T> collection)
         {
-            return !(collection is OptionalList<T> changeTrackingList && changeTrackingList.IsUndefined);
+            return !(collection is ChangeTrackingList<T> changeTrackingList && changeTrackingList.IsUndefined);
         }
 
         public static bool IsCollectionDefined<TKey, TValue>(IDictionary<TKey, TValue> collection)
