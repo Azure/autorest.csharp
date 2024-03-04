@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\lro.csproj" />
+    <ProjectReference Include="..\src\lrotsp.csproj" />
   </ItemGroup>
 
   <ItemGroup>

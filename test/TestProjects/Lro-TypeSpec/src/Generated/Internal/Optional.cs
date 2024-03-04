@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
-namespace lro
+namespace lrotsp
 {
     internal static class Optional
     {
