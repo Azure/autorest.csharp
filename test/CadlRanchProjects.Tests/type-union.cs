@@ -35,13 +35,13 @@ namespace CadlRanchProjects.Tests
         {
             var response = await new UnionClient(host, null).GetStringExtensibleClient().GetStringExtensibleAsync();
             Assert.AreEqual(200, response.GetRawResponse().Status);
-            Assert.AreEqual(new GetResponse1Prop("custom"), response.Value.Prop);
+            Assert.AreEqual(new GetResponseProp1("custom"), response.Value.Prop);
         });
 
         [Test]
         public Task SendStringExtensibleOnly() => Test(async (host) =>
         {
-            var response = await new UnionClient(host, null).GetStringExtensibleClient().SendAsync(new SendRequest1Prop("custom"));
+            var response = await new UnionClient(host, null).GetStringExtensibleClient().SendAsync(new GetResponseProp1("custom"));
             Assert.AreEqual(204, response.Status);
         });
 
