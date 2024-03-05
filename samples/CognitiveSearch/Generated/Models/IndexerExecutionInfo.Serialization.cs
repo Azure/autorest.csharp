@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
@@ -20,7 +19,7 @@ namespace CognitiveSearch.Models
                 return null;
             }
             IndexerStatus status = default;
-            Optional<IndexerExecutionResult> lastResult = default;
+            IndexerExecutionResult lastResult = default;
             IReadOnlyList<IndexerExecutionResult> executionHistory = default;
             IndexerLimits limits = default;
             foreach (var property in element.EnumerateObject())
@@ -55,7 +54,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new IndexerExecutionInfo(status, lastResult.Value, executionHistory, limits);
+            return new IndexerExecutionInfo(status, lastResult, executionHistory, limits);
         }
     }
 }

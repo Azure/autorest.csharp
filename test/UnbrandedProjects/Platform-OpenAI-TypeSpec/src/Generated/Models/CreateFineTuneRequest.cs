@@ -3,8 +3,8 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.Collections.Generic;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -59,10 +59,13 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="trainingFile"/> is null. </exception>
         public CreateFineTuneRequest(string trainingFile)
         {
-            ClientUtilities.AssertNotNull(trainingFile, nameof(trainingFile));
+            if (trainingFile == null)
+            {
+                throw new ArgumentNullException(nameof(trainingFile));
+            }
 
             TrainingFile = trainingFile;
-            ClassificationBetas = new OptionalList<double>();
+            ClassificationBetas = new ChangeTrackingList<double>();
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateFineTuneRequest"/>. </summary>

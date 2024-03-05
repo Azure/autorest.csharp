@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
@@ -45,8 +46,8 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<IList<FirewallPolicyIntrusionDetectionSignatureSpecification>> signatureOverrides = default;
-            Optional<IList<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>> bypassTrafficSettings = default;
+            IList<FirewallPolicyIntrusionDetectionSignatureSpecification> signatureOverrides = default;
+            IList<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications> bypassTrafficSettings = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("signatureOverrides"u8))
@@ -78,7 +79,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new FirewallPolicyIntrusionDetectionConfiguration(Optional.ToList(signatureOverrides), Optional.ToList(bypassTrafficSettings));
+            return new FirewallPolicyIntrusionDetectionConfiguration(signatureOverrides ?? new ChangeTrackingList<FirewallPolicyIntrusionDetectionSignatureSpecification>(), bypassTrafficSettings ?? new ChangeTrackingList<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>());
         }
     }
 }

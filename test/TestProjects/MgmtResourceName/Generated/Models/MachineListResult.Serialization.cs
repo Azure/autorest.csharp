@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 using MgmtResourceName;
 
 namespace MgmtResourceName.Models
@@ -20,8 +19,8 @@ namespace MgmtResourceName.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<MachineData>> value = default;
-            Optional<string> nextLink = default;
+            IReadOnlyList<MachineData> value = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -44,7 +43,7 @@ namespace MgmtResourceName.Models
                     continue;
                 }
             }
-            return new MachineListResult(Optional.ToList(value), nextLink.Value);
+            return new MachineListResult(value ?? new ChangeTrackingList<MachineData>(), nextLink);
         }
     }
 }

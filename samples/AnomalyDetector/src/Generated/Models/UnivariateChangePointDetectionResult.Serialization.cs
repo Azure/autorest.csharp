@@ -9,6 +9,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using AnomalyDetector;
 using Azure;
 using Azure.Core;
 
@@ -90,9 +91,9 @@ namespace AnomalyDetector.Models
             {
                 return null;
             }
-            Optional<int> period = default;
-            Optional<IReadOnlyList<bool>> isChangePoint = default;
-            Optional<IReadOnlyList<float>> confidenceScores = default;
+            int? period = default;
+            IReadOnlyList<bool> isChangePoint = default;
+            IReadOnlyList<float> confidenceScores = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -140,7 +141,7 @@ namespace AnomalyDetector.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new UnivariateChangePointDetectionResult(Optional.ToNullable(period), Optional.ToList(isChangePoint), Optional.ToList(confidenceScores), serializedAdditionalRawData);
+            return new UnivariateChangePointDetectionResult(period, isChangePoint ?? new ChangeTrackingList<bool>(), confidenceScores ?? new ChangeTrackingList<float>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<UnivariateChangePointDetectionResult>.Write(ModelReaderWriterOptions options)

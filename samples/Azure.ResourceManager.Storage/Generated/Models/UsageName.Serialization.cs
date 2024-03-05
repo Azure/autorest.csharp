@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace Azure.ResourceManager.Storage.Models
 {
@@ -18,8 +17,8 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Optional<string> value = default;
-            Optional<string> localizedValue = default;
+            string value = default;
+            string localizedValue = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -33,7 +32,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new UsageName(value.Value, localizedValue.Value);
+            return new UsageName(value, localizedValue);
         }
     }
 }

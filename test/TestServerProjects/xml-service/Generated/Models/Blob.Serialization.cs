@@ -12,6 +12,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
+using xml_service;
 
 namespace xml_service.Models
 {
@@ -78,7 +79,13 @@ namespace xml_service.Models
                 }
                 metadata = dictionary;
             }
-            return new Blob(name, deleted, snapshot, properties, metadata, serializedAdditionalRawData: null);
+            return new Blob(
+                name,
+                deleted,
+                snapshot,
+                properties,
+                metadata,
+                serializedAdditionalRawData: null);
         }
 
         BinaryData IPersistableModel<Blob>.Write(ModelReaderWriterOptions options)

@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {
@@ -32,7 +33,7 @@ namespace CognitiveSearch.Models
                 return null;
             }
             string name = default;
-            Optional<string> targetName = default;
+            string targetName = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -46,7 +47,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new OutputFieldMappingEntry(name, targetName.Value);
+            return new OutputFieldMappingEntry(name, targetName);
         }
     }
 }

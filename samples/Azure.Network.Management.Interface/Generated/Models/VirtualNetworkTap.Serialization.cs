@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Network.Management.Interface;
 
 namespace Azure.Network.Management.Interface.Models
 {
@@ -64,18 +65,18 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> etag = default;
-            Optional<string> id = default;
-            Optional<string> name = default;
-            Optional<string> type = default;
-            Optional<string> location = default;
-            Optional<IDictionary<string, string>> tags = default;
-            Optional<IReadOnlyList<NetworkInterfaceTapConfiguration>> networkInterfaceTapConfigurations = default;
-            Optional<string> resourceGuid = default;
-            Optional<ProvisioningState> provisioningState = default;
-            Optional<NetworkInterfaceIPConfiguration> destinationNetworkInterfaceIPConfiguration = default;
-            Optional<FrontendIPConfiguration> destinationLoadBalancerFrontEndIPConfiguration = default;
-            Optional<int> destinationPort = default;
+            string etag = default;
+            string id = default;
+            string name = default;
+            string type = default;
+            string location = default;
+            IDictionary<string, string> tags = default;
+            IReadOnlyList<NetworkInterfaceTapConfiguration> networkInterfaceTapConfigurations = default;
+            string resourceGuid = default;
+            ProvisioningState? provisioningState = default;
+            NetworkInterfaceIPConfiguration destinationNetworkInterfaceIPConfiguration = default;
+            FrontendIPConfiguration destinationLoadBalancerFrontEndIPConfiguration = default;
+            int? destinationPort = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"u8))
@@ -185,7 +186,19 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new VirtualNetworkTap(id.Value, name.Value, type.Value, location.Value, Optional.ToDictionary(tags), etag.Value, Optional.ToList(networkInterfaceTapConfigurations), resourceGuid.Value, Optional.ToNullable(provisioningState), destinationNetworkInterfaceIPConfiguration.Value, destinationLoadBalancerFrontEndIPConfiguration.Value, Optional.ToNullable(destinationPort));
+            return new VirtualNetworkTap(
+                id,
+                name,
+                type,
+                location,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                etag,
+                networkInterfaceTapConfigurations ?? new ChangeTrackingList<NetworkInterfaceTapConfiguration>(),
+                resourceGuid,
+                provisioningState,
+                destinationNetworkInterfaceIPConfiguration,
+                destinationLoadBalancerFrontEndIPConfiguration,
+                destinationPort);
         }
     }
 }

@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Network.Management.Interface;
 
 namespace Azure.Network.Management.Interface.Models
 {
@@ -48,13 +49,13 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> etag = default;
-            Optional<string> type = default;
-            Optional<string> id = default;
-            Optional<IReadOnlyList<NetworkInterfaceIPConfiguration>> backendIPConfigurations = default;
-            Optional<IList<ApplicationGatewayBackendAddress>> backendAddresses = default;
-            Optional<ProvisioningState> provisioningState = default;
+            string name = default;
+            string etag = default;
+            string type = default;
+            string id = default;
+            IReadOnlyList<NetworkInterfaceIPConfiguration> backendIPConfigurations = default;
+            IList<ApplicationGatewayBackendAddress> backendAddresses = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -127,7 +128,14 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new ApplicationGatewayBackendAddressPool(id.Value, name.Value, etag.Value, type.Value, Optional.ToList(backendIPConfigurations), Optional.ToList(backendAddresses), Optional.ToNullable(provisioningState));
+            return new ApplicationGatewayBackendAddressPool(
+                id,
+                name,
+                etag,
+                type,
+                backendIPConfigurations ?? new ChangeTrackingList<NetworkInterfaceIPConfiguration>(),
+                backendAddresses ?? new ChangeTrackingList<ApplicationGatewayBackendAddress>(),
+                provisioningState);
         }
     }
 }

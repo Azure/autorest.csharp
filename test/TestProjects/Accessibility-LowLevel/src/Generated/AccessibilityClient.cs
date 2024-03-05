@@ -47,8 +47,14 @@ namespace Accessibility_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public AccessibilityClient(Uri endpoint, AzureKeyCredential credential, AccessibilityClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
-            Argument.AssertNotNull(credential, nameof(credential));
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
+            if (credential == null)
+            {
+                throw new ArgumentNullException(nameof(credential));
+            }
             options ??= new AccessibilityClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

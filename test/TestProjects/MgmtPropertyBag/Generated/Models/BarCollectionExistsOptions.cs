@@ -7,7 +7,7 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
+using MgmtPropertyBag;
 
 namespace MgmtPropertyBag.Models
 {
@@ -19,7 +19,10 @@ namespace MgmtPropertyBag.Models
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
         public BarCollectionExistsOptions(string barName)
         {
-            Argument.AssertNotNull(barName, nameof(barName));
+            if (barName == null)
+            {
+                throw new ArgumentNullException(nameof(barName));
+            }
 
             BarName = barName;
             Items = new ChangeTrackingList<string>();

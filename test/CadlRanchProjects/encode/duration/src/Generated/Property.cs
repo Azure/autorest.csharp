@@ -50,7 +50,10 @@ namespace Encode.Duration
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='DefaultAsync(DefaultDurationProperty,CancellationToken)']/*" />
         public virtual async Task<Response<DefaultDurationProperty>> DefaultAsync(DefaultDurationProperty body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -64,7 +67,10 @@ namespace Encode.Duration
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Default(DefaultDurationProperty,CancellationToken)']/*" />
         public virtual Response<DefaultDurationProperty> Default(DefaultDurationProperty body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -95,7 +101,10 @@ namespace Encode.Duration
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='DefaultAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> DefaultAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Property.Default");
             scope.Start();
@@ -134,7 +143,10 @@ namespace Encode.Duration
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Default(RequestContent,RequestContext)']/*" />
         public virtual Response Default(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Property.Default");
             scope.Start();
@@ -156,7 +168,10 @@ namespace Encode.Duration
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Iso8601Async(ISO8601DurationProperty,CancellationToken)']/*" />
         public virtual async Task<Response<ISO8601DurationProperty>> Iso8601Async(ISO8601DurationProperty body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -170,7 +185,10 @@ namespace Encode.Duration
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Iso8601(ISO8601DurationProperty,CancellationToken)']/*" />
         public virtual Response<ISO8601DurationProperty> Iso8601(ISO8601DurationProperty body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -201,7 +219,10 @@ namespace Encode.Duration
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Iso8601Async(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> Iso8601Async(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Property.Iso8601");
             scope.Start();
@@ -240,7 +261,10 @@ namespace Encode.Duration
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Iso8601(RequestContent,RequestContext)']/*" />
         public virtual Response Iso8601(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Property.Iso8601");
             scope.Start();
@@ -262,7 +286,10 @@ namespace Encode.Duration
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Int32SecondsAsync(Int32SecondsDurationProperty,CancellationToken)']/*" />
         public virtual async Task<Response<Int32SecondsDurationProperty>> Int32SecondsAsync(Int32SecondsDurationProperty body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -276,7 +303,10 @@ namespace Encode.Duration
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Int32Seconds(Int32SecondsDurationProperty,CancellationToken)']/*" />
         public virtual Response<Int32SecondsDurationProperty> Int32Seconds(Int32SecondsDurationProperty body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -307,7 +337,10 @@ namespace Encode.Duration
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Int32SecondsAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> Int32SecondsAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Property.Int32Seconds");
             scope.Start();
@@ -346,7 +379,10 @@ namespace Encode.Duration
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Int32Seconds(RequestContent,RequestContext)']/*" />
         public virtual Response Int32Seconds(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Property.Int32Seconds");
             scope.Start();
@@ -368,7 +404,10 @@ namespace Encode.Duration
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='FloatSecondsAsync(FloatSecondsDurationProperty,CancellationToken)']/*" />
         public virtual async Task<Response<FloatSecondsDurationProperty>> FloatSecondsAsync(FloatSecondsDurationProperty body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -382,7 +421,10 @@ namespace Encode.Duration
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='FloatSeconds(FloatSecondsDurationProperty,CancellationToken)']/*" />
         public virtual Response<FloatSecondsDurationProperty> FloatSeconds(FloatSecondsDurationProperty body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -413,7 +455,10 @@ namespace Encode.Duration
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='FloatSecondsAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> FloatSecondsAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Property.FloatSeconds");
             scope.Start();
@@ -452,7 +497,10 @@ namespace Encode.Duration
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='FloatSeconds(RequestContent,RequestContext)']/*" />
         public virtual Response FloatSeconds(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Property.FloatSeconds");
             scope.Start();
@@ -474,7 +522,10 @@ namespace Encode.Duration
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='FloatSecondsArrayAsync(FloatSecondsDurationArrayProperty,CancellationToken)']/*" />
         public virtual async Task<Response<FloatSecondsDurationArrayProperty>> FloatSecondsArrayAsync(FloatSecondsDurationArrayProperty body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -488,7 +539,10 @@ namespace Encode.Duration
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='FloatSecondsArray(FloatSecondsDurationArrayProperty,CancellationToken)']/*" />
         public virtual Response<FloatSecondsDurationArrayProperty> FloatSecondsArray(FloatSecondsDurationArrayProperty body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(body, nameof(body));
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -519,7 +573,10 @@ namespace Encode.Duration
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='FloatSecondsArrayAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> FloatSecondsArrayAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Property.FloatSecondsArray");
             scope.Start();
@@ -558,7 +615,10 @@ namespace Encode.Duration
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='FloatSecondsArray(RequestContent,RequestContext)']/*" />
         public virtual Response FloatSecondsArray(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("Property.FloatSecondsArray");
             scope.Start();

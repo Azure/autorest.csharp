@@ -75,7 +75,13 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new ActiveDirectoryProperties(domainName, netBiosDomainName, forestName, domainGuid, domainSid, azureStorageSid);
+            return new ActiveDirectoryProperties(
+                domainName,
+                netBiosDomainName,
+                forestName,
+                domainGuid,
+                domainSid,
+                azureStorageSid);
         }
     }
 }

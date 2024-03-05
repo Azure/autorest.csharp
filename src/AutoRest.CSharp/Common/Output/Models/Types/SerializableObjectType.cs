@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models.Serialization.Bicep;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Types;
@@ -38,6 +40,10 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         private XmlObjectSerialization? _xmlSerialization;
         public XmlObjectSerialization? XmlSerialization => EnsureXmlSerialization();
 
+        private bool _bicepSerializationInitialized = false;
+        private BicepObjectSerialization? _bicepSerialization;
+        public BicepObjectSerialization? BicepSerialization => EnsureBicepSerialization();
+
         private JsonObjectSerialization? EnsureJsonSerialization()
         {
             if (_jsonSerializationInitialized)
@@ -58,11 +64,35 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
             return _xmlSerialization;
         }
 
+        private BicepObjectSerialization? EnsureBicepSerialization()
+        {
+            if (_bicepSerializationInitialized)
+                return _bicepSerialization;
+
+            _bicepSerializationInitialized = true;
+            _bicepSerialization = BuildBicepSerialization();
+            return _bicepSerialization;
+        }
+
+        protected BicepObjectSerialization? BuildBicepSerialization()
+        {
+            // if this.Usages does not contain Output bit, then return null
+            // alternate - is one of ancestors resource data or contained on a resource data
+            var usage = GetUsage();
+
+            return Configuration.AzureArm && Configuration.UseModelReaderWriter && Configuration.EnableBicepSerialization && usage.HasFlag(InputModelTypeUsage.Output) && JsonSerialization != null
+                ? _serializationBuilder.BuildBicepObjectSerialization(this, JsonSerialization)
+                : null;
+        }
+
         protected abstract JsonObjectSerialization? BuildJsonSerialization();
         protected abstract XmlObjectSerialization? BuildXmlSerialization();
 
+
         protected abstract bool EnsureIncludeSerializer();
         protected abstract bool EnsureIncludeDeserializer();
+
+        protected internal abstract InputModelTypeUsage GetUsage();
 
         // TODO -- despite this is actually a field if present, we have to make it a property to work properly with other functionalities in the generator, such as the `CodeWriter.WriteInitialization` method
         public virtual ObjectTypeProperty? RawDataField => null;

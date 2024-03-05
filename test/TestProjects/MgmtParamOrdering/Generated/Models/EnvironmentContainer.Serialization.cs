@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using MgmtParamOrdering;
 
 namespace MgmtParamOrdering.Models
 {
@@ -52,9 +53,9 @@ namespace MgmtParamOrdering.Models
             {
                 return null;
             }
-            Optional<string> description = default;
-            Optional<IDictionary<string, string>> properties = default;
-            Optional<IDictionary<string, string>> tags = default;
+            string description = default;
+            IDictionary<string, string> properties = default;
+            IDictionary<string, string> tags = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("description"u8))
@@ -91,7 +92,7 @@ namespace MgmtParamOrdering.Models
                     continue;
                 }
             }
-            return new EnvironmentContainer(description.Value, Optional.ToDictionary(properties), Optional.ToDictionary(tags));
+            return new EnvironmentContainer(description, properties ?? new ChangeTrackingDictionary<string, string>(), tags ?? new ChangeTrackingDictionary<string, string>());
         }
     }
 }

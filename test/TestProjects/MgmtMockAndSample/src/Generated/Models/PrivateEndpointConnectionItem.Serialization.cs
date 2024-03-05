@@ -19,11 +19,11 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<string> id = default;
-            Optional<string> etag = default;
-            Optional<Azure.ResourceManager.Resources.Models.SubResource> privateEndpoint = default;
-            Optional<MgmtMockAndSamplePrivateLinkServiceConnectionState> privateLinkServiceConnectionState = default;
-            Optional<MgmtMockAndSamplePrivateEndpointConnectionProvisioningState> provisioningState = default;
+            string id = default;
+            string etag = default;
+            Azure.ResourceManager.Resources.Models.SubResource privateEndpoint = default;
+            MgmtMockAndSamplePrivateLinkServiceConnectionState privateLinkServiceConnectionState = default;
+            MgmtMockAndSamplePrivateEndpointConnectionProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -76,7 +76,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new PrivateEndpointConnectionItem(id.Value, etag.Value, privateEndpoint, privateLinkServiceConnectionState.Value, Optional.ToNullable(provisioningState));
+            return new PrivateEndpointConnectionItem(id, etag, privateEndpoint, privateLinkServiceConnectionState, provisioningState);
         }
     }
 }

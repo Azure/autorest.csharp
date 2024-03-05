@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtAcronymMapping;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -39,9 +40,9 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<UpgradeMode> mode = default;
-            Optional<RollingUpgradePolicy> rollingUpgradePolicy = default;
-            Optional<AutomaticOSUpgradePolicy> automaticOSUpgradePolicy = default;
+            UpgradeMode? mode = default;
+            RollingUpgradePolicy rollingUpgradePolicy = default;
+            AutomaticOSUpgradePolicy automaticOSUpgradePolicy = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("mode"u8))
@@ -72,7 +73,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new UpgradePolicy(Optional.ToNullable(mode), rollingUpgradePolicy.Value, automaticOSUpgradePolicy.Value);
+            return new UpgradePolicy(mode, rollingUpgradePolicy, automaticOSUpgradePolicy);
         }
     }
 }

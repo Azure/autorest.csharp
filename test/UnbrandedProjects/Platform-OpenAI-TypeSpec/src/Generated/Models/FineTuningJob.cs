@@ -3,7 +3,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -88,12 +87,30 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="model"/>, <paramref name="organizationId"/>, <paramref name="hyperparameters"/>, <paramref name="trainingFile"/> or <paramref name="resultFiles"/> is null. </exception>
         internal FineTuningJob(string id, DateTimeOffset createdAt, DateTimeOffset? finishedAt, string model, string fineTunedModel, string organizationId, FineTuningJobStatus status, FineTuningJobHyperparameters hyperparameters, string trainingFile, string validationFile, IEnumerable<string> resultFiles, long? trainedTokens, FineTuningJobError error)
         {
-            ClientUtilities.AssertNotNull(id, nameof(id));
-            ClientUtilities.AssertNotNull(model, nameof(model));
-            ClientUtilities.AssertNotNull(organizationId, nameof(organizationId));
-            ClientUtilities.AssertNotNull(hyperparameters, nameof(hyperparameters));
-            ClientUtilities.AssertNotNull(trainingFile, nameof(trainingFile));
-            ClientUtilities.AssertNotNull(resultFiles, nameof(resultFiles));
+            if (id == null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+            if (model == null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+            if (organizationId == null)
+            {
+                throw new ArgumentNullException(nameof(organizationId));
+            }
+            if (hyperparameters == null)
+            {
+                throw new ArgumentNullException(nameof(hyperparameters));
+            }
+            if (trainingFile == null)
+            {
+                throw new ArgumentNullException(nameof(trainingFile));
+            }
+            if (resultFiles == null)
+            {
+                throw new ArgumentNullException(nameof(resultFiles));
+            }
 
             Id = id;
             CreatedAt = createdAt;

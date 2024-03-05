@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace _Azure.Lro.Standard.Models
 {
@@ -52,8 +51,14 @@ namespace _Azure.Lro.Standard.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="resourceUri"/> is null. </exception>
         internal ExportedUser(string name, string resourceUri)
         {
-            Argument.AssertNotNull(name, nameof(name));
-            Argument.AssertNotNull(resourceUri, nameof(resourceUri));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (resourceUri == null)
+            {
+                throw new ArgumentNullException(nameof(resourceUri));
+            }
 
             Name = name;
             ResourceUri = resourceUri;

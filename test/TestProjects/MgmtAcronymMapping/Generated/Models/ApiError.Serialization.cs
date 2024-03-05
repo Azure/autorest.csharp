@@ -7,7 +7,7 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
+using MgmtAcronymMapping;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -19,11 +19,11 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<ApiErrorBase>> details = default;
-            Optional<InnerError> innererror = default;
-            Optional<string> code = default;
-            Optional<string> target = default;
-            Optional<string> message = default;
+            IReadOnlyList<ApiErrorBase> details = default;
+            InnerError innererror = default;
+            string code = default;
+            string target = default;
+            string message = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("details"u8))
@@ -65,7 +65,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new ApiError(Optional.ToList(details), innererror.Value, code.Value, target.Value, message.Value);
+            return new ApiError(details ?? new ChangeTrackingList<ApiErrorBase>(), innererror, code, target, message);
         }
     }
 }

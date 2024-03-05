@@ -69,7 +69,7 @@ namespace ModelsTypeSpec.Models
             {
                 return null;
             }
-            return UnknownSingleBase.DeserializeUnknownSingleBase(element);
+            return UnknownSingleBase.DeserializeUnknownSingleBase(element, options);
         }
 
         BinaryData IPersistableModel<SingleBase>.Write(ModelReaderWriterOptions options)

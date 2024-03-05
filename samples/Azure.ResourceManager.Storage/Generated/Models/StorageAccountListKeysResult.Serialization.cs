@@ -7,7 +7,7 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
+using Azure.ResourceManager.Storage;
 
 namespace Azure.ResourceManager.Storage.Models
 {
@@ -19,7 +19,7 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<StorageAccountKey>> keys = default;
+            IReadOnlyList<StorageAccountKey> keys = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("keys"u8))
@@ -37,7 +37,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new StorageAccountListKeysResult(Optional.ToList(keys));
+            return new StorageAccountListKeysResult(keys ?? new ChangeTrackingList<StorageAccountKey>());
         }
     }
 }

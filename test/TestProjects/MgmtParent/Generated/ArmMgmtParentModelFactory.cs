@@ -28,7 +28,14 @@ namespace MgmtParent.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new AvailabilitySetData(id, name, resourceType, systemData, tags, location, bar);
+            return new AvailabilitySetData(
+                id,
+                name,
+                resourceType,
+                systemData,
+                tags,
+                location,
+                bar);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtParent.DedicatedHostGroupData"/>. </summary>
@@ -44,7 +51,14 @@ namespace MgmtParent.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new DedicatedHostGroupData(id, name, resourceType, systemData, tags, location, foo);
+            return new DedicatedHostGroupData(
+                id,
+                name,
+                resourceType,
+                systemData,
+                tags,
+                location,
+                foo);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtParent.DedicatedHostData"/>. </summary>
@@ -60,7 +74,14 @@ namespace MgmtParent.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new DedicatedHostData(id, name, resourceType, systemData, tags, location, foo);
+            return new DedicatedHostData(
+                id,
+                name,
+                resourceType,
+                systemData,
+                tags,
+                location,
+                foo);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtParent.VirtualMachineExtensionImageData"/>. </summary>
@@ -76,7 +97,14 @@ namespace MgmtParent.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new VirtualMachineExtensionImageData(id, name, resourceType, systemData, tags, location, bar);
+            return new VirtualMachineExtensionImageData(
+                id,
+                name,
+                resourceType,
+                systemData,
+                tags,
+                location,
+                bar);
         }
     }
 }

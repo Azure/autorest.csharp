@@ -8,7 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Azure.Core;
+using Azure.AI.FormRecognizer;
 
 namespace Azure.AI.FormRecognizer.Models
 {
@@ -20,7 +20,10 @@ namespace Azure.AI.FormRecognizer.Models
         /// <exception cref="ArgumentNullException"> <paramref name="trainingDocuments"/> is null. </exception>
         internal TrainResult(IEnumerable<TrainingDocumentInfo> trainingDocuments)
         {
-            Argument.AssertNotNull(trainingDocuments, nameof(trainingDocuments));
+            if (trainingDocuments == null)
+            {
+                throw new ArgumentNullException(nameof(trainingDocuments));
+            }
 
             TrainingDocuments = trainingDocuments.ToList();
             Fields = new ChangeTrackingList<FormFieldsReport>();

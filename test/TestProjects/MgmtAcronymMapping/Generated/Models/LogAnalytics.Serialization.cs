@@ -19,11 +19,11 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<LogAnalyticsOutput> properties = default;
-            Optional<ContentType> contentType = default;
-            Optional<BinaryData> content = default;
-            Optional<RequestMethod> method = default;
-            Optional<Uri> basePath = default;
+            LogAnalyticsOutput properties = default;
+            ContentType? contentType = default;
+            BinaryData content = default;
+            RequestMethod? method = default;
+            Uri basePath = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("properties"u8))
@@ -72,7 +72,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new LogAnalytics(properties.Value, Optional.ToNullable(contentType), content.Value, Optional.ToNullable(method), basePath.Value);
+            return new LogAnalytics(properties, contentType, content, method, basePath);
         }
     }
 }

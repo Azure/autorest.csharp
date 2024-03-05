@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using _Type.Model.Inheritance.SingleDiscriminator;
 
 namespace _Type.Model.Inheritance.SingleDiscriminator.Models
 {
@@ -95,9 +96,9 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             {
                 return null;
             }
-            Optional<IList<Bird>> friends = default;
-            Optional<IDictionary<string, Bird>> hate = default;
-            Optional<Bird> partner = default;
+            IList<Bird> friends = default;
+            IDictionary<string, Bird> hate = default;
+            Bird partner = default;
             string kind = default;
             int wingspan = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
@@ -113,7 +114,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
                     List<Bird> array = new List<Bird>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DeserializeBird(item));
+                        array.Add(DeserializeBird(item, options));
                     }
                     friends = array;
                     continue;
@@ -127,7 +128,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
                     Dictionary<string, Bird> dictionary = new Dictionary<string, Bird>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        dictionary.Add(property0.Name, DeserializeBird(property0.Value));
+                        dictionary.Add(property0.Name, DeserializeBird(property0.Value, options));
                     }
                     hate = dictionary;
                     continue;
@@ -138,7 +139,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
                     {
                         continue;
                     }
-                    partner = DeserializeBird(property.Value);
+                    partner = DeserializeBird(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("kind"u8))
@@ -157,7 +158,13 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Eagle(kind, wingspan, serializedAdditionalRawData, Optional.ToList(friends), Optional.ToDictionary(hate), partner.Value);
+            return new Eagle(
+                kind,
+                wingspan,
+                serializedAdditionalRawData,
+                friends ?? new ChangeTrackingList<Bird>(),
+                hate ?? new ChangeTrackingDictionary<string, Bird>(),
+                partner);
         }
 
         BinaryData IPersistableModel<Eagle>.Write(ModelReaderWriterOptions options)

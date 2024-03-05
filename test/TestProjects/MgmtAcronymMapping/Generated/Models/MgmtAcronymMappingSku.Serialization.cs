@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtAcronymMapping;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -39,9 +40,9 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> tier = default;
-            Optional<long> capacity = default;
+            string name = default;
+            string tier = default;
+            long? capacity = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -64,7 +65,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new MgmtAcronymMappingSku(name.Value, tier.Value, Optional.ToNullable(capacity));
+            return new MgmtAcronymMappingSku(name, tier, capacity);
         }
     }
 }

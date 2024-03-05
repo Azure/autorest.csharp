@@ -9,6 +9,7 @@ using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
+using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
@@ -33,7 +34,7 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<WritableSubResource> sourceVault = default;
+            WritableSubResource sourceVault = default;
             Uri keyUrl = default;
             foreach (var property in element.EnumerateObject())
             {

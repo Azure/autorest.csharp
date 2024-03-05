@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 using MgmtDiscriminator;
@@ -21,8 +22,14 @@ namespace MgmtDiscriminator.Models
         /// <exception cref="ArgumentNullException"> <paramref name="roleDefinitionId"/> or <paramref name="principalIds"/> is null. </exception>
         public RoleAssignmentArtifact(string roleDefinitionId, BinaryData principalIds)
         {
-            Argument.AssertNotNull(roleDefinitionId, nameof(roleDefinitionId));
-            Argument.AssertNotNull(principalIds, nameof(principalIds));
+            if (roleDefinitionId == null)
+            {
+                throw new ArgumentNullException(nameof(roleDefinitionId));
+            }
+            if (principalIds == null)
+            {
+                throw new ArgumentNullException(nameof(principalIds));
+            }
 
             RoleDefinitionId = roleDefinitionId;
             PrincipalIds = principalIds;
@@ -35,10 +42,11 @@ namespace MgmtDiscriminator.Models
         /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="kind"> Specifies the kind of blueprint artifact. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="roleDefinitionId"> Azure resource ID of the RoleDefinition. </param>
         /// <param name="principalIds"> Array of user or group identities in Azure Active Directory. The roleDefinition will apply to each identity. </param>
         /// <param name="resourceGroup"> RoleAssignment will be scope to this resourceGroup. If empty, it scopes to the subscription. </param>
-        internal RoleAssignmentArtifact(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, ArtifactKind kind, string roleDefinitionId, BinaryData principalIds, string resourceGroup) : base(id, name, resourceType, systemData, kind)
+        internal RoleAssignmentArtifact(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, ArtifactKind kind, IDictionary<string, BinaryData> serializedAdditionalRawData, string roleDefinitionId, BinaryData principalIds, string resourceGroup) : base(id, name, resourceType, systemData, kind, serializedAdditionalRawData)
         {
             RoleDefinitionId = roleDefinitionId;
             PrincipalIds = principalIds;
@@ -46,7 +54,13 @@ namespace MgmtDiscriminator.Models
             Kind = kind;
         }
 
+        /// <summary> Initializes a new instance of <see cref="RoleAssignmentArtifact"/> for deserialization. </summary>
+        internal RoleAssignmentArtifact()
+        {
+        }
+
         /// <summary> Azure resource ID of the RoleDefinition. </summary>
+        [WirePath("properties.roleDefinitionId")]
         public string RoleDefinitionId { get; set; }
         /// <summary>
         /// Array of user or group identities in Azure Active Directory. The roleDefinition will apply to each identity.
@@ -78,8 +92,10 @@ namespace MgmtDiscriminator.Models
         /// </list>
         /// </para>
         /// </summary>
+        [WirePath("properties.principalIds")]
         public BinaryData PrincipalIds { get; set; }
         /// <summary> RoleAssignment will be scope to this resourceGroup. If empty, it scopes to the subscription. </summary>
+        [WirePath("properties.resourceGroup")]
         public string ResourceGroup { get; set; }
     }
 }

@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using MgmtAcronymMapping;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -60,12 +61,12 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<bool> provisionVmAgent = default;
-            Optional<bool> enableAutomaticUpdates = default;
-            Optional<string> timeZone = default;
-            Optional<IList<AdditionalUnattendContent>> additionalUnattendContent = default;
-            Optional<PatchSettings> patchSettings = default;
-            Optional<WinRMConfiguration> winRM = default;
+            bool? provisionVmAgent = default;
+            bool? enableAutomaticUpdates = default;
+            string timeZone = default;
+            IList<AdditionalUnattendContent> additionalUnattendContent = default;
+            PatchSettings patchSettings = default;
+            WinRMConfiguration winRM = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("provisionVMAgent"u8))
@@ -124,7 +125,13 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new WindowsConfiguration(Optional.ToNullable(provisionVmAgent), Optional.ToNullable(enableAutomaticUpdates), timeZone.Value, Optional.ToList(additionalUnattendContent), patchSettings.Value, winRM.Value);
+            return new WindowsConfiguration(
+                provisionVmAgent,
+                enableAutomaticUpdates,
+                timeZone,
+                additionalUnattendContent ?? new ChangeTrackingList<AdditionalUnattendContent>(),
+                patchSettings,
+                winRM);
         }
     }
 }

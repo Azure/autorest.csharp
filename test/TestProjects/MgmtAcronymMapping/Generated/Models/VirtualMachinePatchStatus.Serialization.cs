@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -18,8 +17,8 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<AvailablePatchSummary> availablePatchSummary = default;
-            Optional<LastPatchInstallationSummary> lastPatchInstallationSummary = default;
+            AvailablePatchSummary availablePatchSummary = default;
+            LastPatchInstallationSummary lastPatchInstallationSummary = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("availablePatchSummary"u8))
@@ -41,7 +40,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachinePatchStatus(availablePatchSummary.Value, lastPatchInstallationSummary.Value);
+            return new VirtualMachinePatchStatus(availablePatchSummary, lastPatchInstallationSummary);
         }
     }
 }

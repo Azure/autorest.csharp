@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using body_dictionary;
 
 namespace body_dictionary.Models
 {
@@ -74,8 +75,8 @@ namespace body_dictionary.Models
             {
                 return null;
             }
-            Optional<int> integer = default;
-            Optional<string> @string = default;
+            int? integer = default;
+            string @string = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -100,7 +101,7 @@ namespace body_dictionary.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Widget(Optional.ToNullable(integer), @string.Value, serializedAdditionalRawData);
+            return new Widget(integer, @string, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<Widget>.Write(ModelReaderWriterOptions options)

@@ -42,7 +42,10 @@ namespace MixApiVersion
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public MixApiVersionClient(Uri endpoint, MixApiVersionClientOptions options)
         {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
             options ??= new MixApiVersionClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -55,7 +58,10 @@ namespace MixApiVersion
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Pets GetPetsClient(string apiVersion = "2022-11-30-preview")
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
 
             return new Pets(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
         }
@@ -65,7 +71,10 @@ namespace MixApiVersion
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual ListPetToysResponse GetListPetToysResponseClient(string apiVersion = "2022-11-30-preview")
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
 
             return new ListPetToysResponse(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
         }

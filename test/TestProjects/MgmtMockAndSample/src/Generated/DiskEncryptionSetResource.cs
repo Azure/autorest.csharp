@@ -282,7 +282,10 @@ namespace MgmtMockAndSample
         /// <exception cref="ArgumentNullException"> <paramref name="patch"/> is null. </exception>
         public virtual async Task<ArmOperation<DiskEncryptionSetResource>> UpdateAsync(WaitUntil waitUntil, DiskEncryptionSetPatch patch, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(patch, nameof(patch));
+            if (patch == null)
+            {
+                throw new ArgumentNullException(nameof(patch));
+            }
 
             using var scope = _diskEncryptionSetClientDiagnostics.CreateScope("DiskEncryptionSetResource.Update");
             scope.Start();
@@ -328,7 +331,10 @@ namespace MgmtMockAndSample
         /// <exception cref="ArgumentNullException"> <paramref name="patch"/> is null. </exception>
         public virtual ArmOperation<DiskEncryptionSetResource> Update(WaitUntil waitUntil, DiskEncryptionSetPatch patch, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(patch, nameof(patch));
+            if (patch == null)
+            {
+                throw new ArgumentNullException(nameof(patch));
+            }
 
             using var scope = _diskEncryptionSetClientDiagnostics.CreateScope("DiskEncryptionSetResource.Update");
             scope.Start();

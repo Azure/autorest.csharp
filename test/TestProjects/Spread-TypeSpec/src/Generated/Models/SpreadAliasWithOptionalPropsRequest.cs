@@ -8,7 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Azure.Core;
+using SpreadTypeSpec;
 
 namespace SpreadTypeSpec.Models
 {
@@ -53,8 +53,14 @@ namespace SpreadTypeSpec.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="items"/> is null. </exception>
         public SpreadAliasWithOptionalPropsRequest(string name, IEnumerable<int> items)
         {
-            Argument.AssertNotNull(name, nameof(name));
-            Argument.AssertNotNull(items, nameof(items));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (items == null)
+            {
+                throw new ArgumentNullException(nameof(items));
+            }
 
             Name = name;
             Items = items.ToList();

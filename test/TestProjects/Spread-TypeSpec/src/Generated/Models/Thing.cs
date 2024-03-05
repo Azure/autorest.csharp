@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace SpreadTypeSpec.Models
 {
@@ -52,7 +51,10 @@ namespace SpreadTypeSpec.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public Thing(string name, int age)
         {
-            Argument.AssertNotNull(name, nameof(name));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
 
             Name = name;
             Age = age;

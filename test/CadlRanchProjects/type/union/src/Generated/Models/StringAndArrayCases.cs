@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace _Type.Union.Models
 {
@@ -52,8 +51,14 @@ namespace _Type.Union.Models
         /// <exception cref="ArgumentNullException"> <paramref name="string"/> or <paramref name="array"/> is null. </exception>
         public StringAndArrayCases(BinaryData @string, BinaryData array)
         {
-            Argument.AssertNotNull(@string, nameof(@string));
-            Argument.AssertNotNull(array, nameof(array));
+            if (@string == null)
+            {
+                throw new ArgumentNullException(nameof(@string));
+            }
+            if (array == null)
+            {
+                throw new ArgumentNullException(nameof(array));
+            }
 
             String = @string;
             Array = array;

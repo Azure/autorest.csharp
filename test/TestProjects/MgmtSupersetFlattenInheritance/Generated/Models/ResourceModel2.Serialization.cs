@@ -8,6 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
+using MgmtSupersetFlattenInheritance;
 
 namespace MgmtSupersetFlattenInheritance.Models
 {
@@ -36,8 +37,8 @@ namespace MgmtSupersetFlattenInheritance.Models
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
-            Optional<string> foo = default;
+            SystemData systemData = default;
+            string foo = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -82,7 +83,7 @@ namespace MgmtSupersetFlattenInheritance.Models
                     continue;
                 }
             }
-            return new ResourceModel2(id, name, type, systemData.Value, foo.Value);
+            return new ResourceModel2(id, name, type, systemData, foo);
         }
     }
 }

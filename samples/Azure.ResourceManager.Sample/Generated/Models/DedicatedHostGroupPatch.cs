@@ -5,9 +5,10 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
-using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -29,6 +30,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// Resource tags
         /// Serialized Name: UpdateResource.tags
         /// </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="zones">
         /// Availability Zone to use for this host group. Only single zone is supported. The zone can be assigned only during creation. If not provided, the group supports all zones in the region. If provided, enforces each host in the group to be in the same zone.
         /// Serialized Name: DedicatedHostGroupUpdate.zones
@@ -49,7 +51,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies whether virtual machines or virtual machine scale sets can be placed automatically on the dedicated host group. Automatic placement means resources are allocated on dedicated hosts, that are chosen by Azure, under the dedicated host group. The value is defaulted to 'true' when not provided. &lt;br&gt;&lt;br&gt;Minimum api-version: 2020-06-01.
         /// Serialized Name: DedicatedHostGroupUpdate.properties.supportAutomaticPlacement
         /// </param>
-        internal DedicatedHostGroupPatch(IDictionary<string, string> tags, IList<string> zones, int? platformFaultDomainCount, IReadOnlyList<Resources.Models.SubResource> hosts, DedicatedHostGroupInstanceView instanceView, bool? supportAutomaticPlacement) : base(tags)
+        internal DedicatedHostGroupPatch(IDictionary<string, string> tags, IDictionary<string, BinaryData> serializedAdditionalRawData, IList<string> zones, int? platformFaultDomainCount, IReadOnlyList<Resources.Models.SubResource> hosts, DedicatedHostGroupInstanceView instanceView, bool? supportAutomaticPlacement) : base(tags, serializedAdditionalRawData)
         {
             Zones = zones;
             PlatformFaultDomainCount = platformFaultDomainCount;
@@ -62,16 +64,19 @@ namespace Azure.ResourceManager.Sample.Models
         /// Availability Zone to use for this host group. Only single zone is supported. The zone can be assigned only during creation. If not provided, the group supports all zones in the region. If provided, enforces each host in the group to be in the same zone.
         /// Serialized Name: DedicatedHostGroupUpdate.zones
         /// </summary>
+        [WirePath("zones")]
         public IList<string> Zones { get; }
         /// <summary>
         /// Number of fault domains that the host group can span.
         /// Serialized Name: DedicatedHostGroupUpdate.properties.platformFaultDomainCount
         /// </summary>
+        [WirePath("properties.platformFaultDomainCount")]
         public int? PlatformFaultDomainCount { get; set; }
         /// <summary>
         /// A list of references to all dedicated hosts in the dedicated host group.
         /// Serialized Name: DedicatedHostGroupUpdate.properties.hosts
         /// </summary>
+        [WirePath("properties.hosts")]
         public IReadOnlyList<Resources.Models.SubResource> Hosts { get; }
         /// <summary>
         /// The dedicated host group instance view, which has the list of instance view of the dedicated hosts under the dedicated host group.
@@ -82,6 +87,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// List of instance view of the dedicated hosts under the dedicated host group.
         /// Serialized Name: DedicatedHostGroupInstanceView.hosts
         /// </summary>
+        [WirePath("properties.instanceView.hosts")]
         public IReadOnlyList<DedicatedHostInstanceViewWithName> InstanceViewHosts
         {
             get => InstanceView?.Hosts;
@@ -91,6 +97,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies whether virtual machines or virtual machine scale sets can be placed automatically on the dedicated host group. Automatic placement means resources are allocated on dedicated hosts, that are chosen by Azure, under the dedicated host group. The value is defaulted to 'true' when not provided. &lt;br&gt;&lt;br&gt;Minimum api-version: 2020-06-01.
         /// Serialized Name: DedicatedHostGroupUpdate.properties.supportAutomaticPlacement
         /// </summary>
+        [WirePath("properties.supportAutomaticPlacement")]
         public bool? SupportAutomaticPlacement { get; set; }
     }
 }

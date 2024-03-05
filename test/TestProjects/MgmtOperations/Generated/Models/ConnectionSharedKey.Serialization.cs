@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
+using MgmtOperations;
 
 namespace MgmtOperations.Models
 {
@@ -42,12 +43,12 @@ namespace MgmtOperations.Models
                 return null;
             }
             string value = default;
-            Optional<IDictionary<string, string>> tags = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
+            SystemData systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -99,7 +100,14 @@ namespace MgmtOperations.Models
                     continue;
                 }
             }
-            return new ConnectionSharedKey(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, value);
+            return new ConnectionSharedKey(
+                id,
+                name,
+                type,
+                systemData,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                value);
         }
     }
 }

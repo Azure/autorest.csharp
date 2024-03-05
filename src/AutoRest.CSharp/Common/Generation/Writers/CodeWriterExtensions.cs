@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Builders;
@@ -364,7 +363,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 return writer.Line($"{parameter.Name:I} ??= {parameter.Initializer};");
             }
 
-            var validationStatement = Snippets.Extensible.Argument.ValidateParameter(parameter);
+            var validationStatement = Snippets.Argument.ValidateParameter(parameter);
 
             writer.WriteMethodBodyStatement(validationStatement);
 
@@ -409,7 +408,10 @@ namespace AutoRest.CSharp.Generation.Writers
                     {
                         if (val != RequestConditionHeaders.None && !requestConditionFlag.HasFlag(val))
                         {
-                            writer.Line($"Argument.AssertNull({parameter.Name:I}{nullableFlag}.{requestConditionFieldNames[val]}, nameof({parameter.Name:I}), \"Service does not support the {requestConditionHeaderNames[val]} header for this operation.\");");
+                            using (writer.Scope($"if ({parameter.Name:I}{nullableFlag}.{requestConditionFieldNames[val]} is not null)"))
+                            {
+                                writer.Line($"throw new {typeof(ArgumentNullException)}(nameof({parameter.Name:I}), \"Service does not support the {requestConditionHeaderNames[val]} header for this operation.\");");
+                            }
                         }
                     }
                 }
@@ -487,7 +489,7 @@ namespace AutoRest.CSharp.Generation.Writers
             switch (serialization)
             {
                 case JsonSerialization jsonSerialization:
-                    writer.WriteMethodBodyStatement(JsonSerializationMethodsBuilder.BuildDeserializationForMethods(jsonSerialization, async, variable, streamExpression, type is not null && type.Equals(typeof(BinaryData))));
+                    writer.WriteMethodBodyStatement(JsonSerializationMethodsBuilder.BuildDeserializationForMethods(jsonSerialization, async, variable, streamExpression, type is not null && type.Equals(typeof(BinaryData)), null));
                     break;
                 case XmlElementSerialization xmlSerialization:
                     writer.WriteMethodBodyStatement(XmlSerializationMethodsBuilder.BuildDeserializationForMethods(xmlSerialization, variable, streamExpression));
@@ -700,13 +702,22 @@ namespace AutoRest.CSharp.Generation.Writers
                 .AppendRawIf("static ", modifiers.HasFlag(MethodSignatureModifiers.Static))
                 .AppendRawIf("virtual ", modifiers.HasFlag(MethodSignatureModifiers.Virtual)); // property does not support other modifiers, here we just ignore them if any
 
-            writer.Append($"{property.PropertyType} {property.Declaration:I}"); // the declaration order here is quite anonying - we might need to assign the values to those properties in other places before these are written
+            writer.Append($"{property.PropertyType} ");
+            if (property.Declaration.ActualName == "this")
+            {
+                writer.Append($"this[int index]");
+            }
+            else
+            {
+                writer.Append($"{property.Declaration:I}"); // the declaration order here is quite anonying - we might need to assign the values to those properties in other places before these are written
+            }
 
             switch (property.PropertyBody)
             {
                 case ExpressionPropertyBody(var expression):
                     writer.AppendRaw(" => ")
                         .WriteValueExpression(expression);
+                    writer.AppendRaw(";");
                     break;
                 case AutoPropertyBody(var hasSetter, var setterModifiers, var initialization):
                     writer.AppendRaw("{ get; ");

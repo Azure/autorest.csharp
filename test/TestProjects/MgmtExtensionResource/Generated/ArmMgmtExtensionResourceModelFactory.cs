@@ -53,7 +53,18 @@ namespace MgmtExtensionResource.Models
         {
             parameters ??= new Dictionary<string, ParameterDefinitionsValue>();
 
-            return new PolicyDefinitionData(id, name, resourceType, systemData, policyType, mode, displayName, description, policyRule, metadata, parameters);
+            return new PolicyDefinitionData(
+                id,
+                name,
+                resourceType,
+                systemData,
+                policyType,
+                mode,
+                displayName,
+                description,
+                policyRule,
+                metadata,
+                parameters);
         }
     }
 }

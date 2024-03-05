@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Storage;
 
 namespace Azure.ResourceManager.Storage.Models
 {
@@ -48,9 +49,9 @@ namespace Azure.ResourceManager.Storage.Models
                 return null;
             }
             bool enable = default;
-            Optional<Name> name = default;
-            Optional<int> trackingGranularityInDays = default;
-            Optional<IList<string>> blobType = default;
+            Name? name = default;
+            int? trackingGranularityInDays = default;
+            IList<string> blobType = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("enable"u8))
@@ -91,7 +92,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new LastAccessTimeTrackingPolicy(enable, Optional.ToNullable(name), Optional.ToNullable(trackingGranularityInDays), Optional.ToList(blobType));
+            return new LastAccessTimeTrackingPolicy(enable, name, trackingGranularityInDays, blobType ?? new ChangeTrackingList<string>());
         }
     }
 }

@@ -172,7 +172,7 @@ namespace CadlRanchProjects.Tests
             Assert.AreEqual("foo", response.Value.RequiredProperty);
             // we will never construct a null collection therefore this property is actually undefined here.
             Assert.IsNotNull(response.Value.NullableProperty);
-            Assert.IsFalse(Optional.IsCollectionDefined(response.Value.NullableProperty));
+            Assert.IsFalse(!(response.Value.NullableProperty is ChangeTrackingList<BinaryData> changeTrackingList && changeTrackingList.IsUndefined));
         });
 
         [Test]
@@ -211,7 +211,7 @@ namespace CadlRanchProjects.Tests
             Assert.AreEqual("foo", response.Value.RequiredProperty);
             // we will never construct a null collection therefore this property is actually undefined here.
             Assert.IsNotNull(response.Value.NullableProperty);
-            Assert.IsFalse(Optional.IsCollectionDefined(response.Value.NullableProperty));
+            Assert.IsFalse(!(response.Value.NullableProperty is ChangeTrackingList<InnerModel> changeTrackingList && changeTrackingList.IsUndefined));
         });
 
         [Test]

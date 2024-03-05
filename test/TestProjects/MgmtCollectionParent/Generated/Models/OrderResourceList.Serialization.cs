@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 using MgmtCollectionParent;
 
 namespace MgmtCollectionParent.Models
@@ -20,8 +19,8 @@ namespace MgmtCollectionParent.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<OrderResourceData>> value = default;
-            Optional<string> nextLink = default;
+            IReadOnlyList<OrderResourceData> value = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -44,7 +43,7 @@ namespace MgmtCollectionParent.Models
                     continue;
                 }
             }
-            return new OrderResourceList(Optional.ToList(value), nextLink.Value);
+            return new OrderResourceList(value ?? new ChangeTrackingList<OrderResourceData>(), nextLink);
         }
     }
 }

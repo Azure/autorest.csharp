@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Network.Management.Interface;
 
 namespace Azure.Network.Management.Interface.Models
 {
@@ -78,22 +79,22 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> etag = default;
-            Optional<string> type = default;
-            Optional<IList<string>> zones = default;
-            Optional<string> id = default;
-            Optional<IReadOnlyList<SubResource>> inboundNatRules = default;
-            Optional<IReadOnlyList<SubResource>> inboundNatPools = default;
-            Optional<IReadOnlyList<SubResource>> outboundRules = default;
-            Optional<IReadOnlyList<SubResource>> loadBalancingRules = default;
-            Optional<string> privateIPAddress = default;
-            Optional<IPAllocationMethod> privateIPAllocationMethod = default;
-            Optional<IPVersion> privateIPAddressVersion = default;
-            Optional<Subnet> subnet = default;
-            Optional<PublicIPAddress> publicIPAddress = default;
-            Optional<SubResource> publicIPPrefix = default;
-            Optional<ProvisioningState> provisioningState = default;
+            string name = default;
+            string etag = default;
+            string type = default;
+            IList<string> zones = default;
+            string id = default;
+            IReadOnlyList<SubResource> inboundNatRules = default;
+            IReadOnlyList<SubResource> inboundNatPools = default;
+            IReadOnlyList<SubResource> outboundRules = default;
+            IReadOnlyList<SubResource> loadBalancingRules = default;
+            string privateIPAddress = default;
+            IPAllocationMethod? privateIPAllocationMethod = default;
+            IPVersion? privateIPAddressVersion = default;
+            Subnet subnet = default;
+            PublicIPAddress publicIPAddress = default;
+            SubResource publicIPPrefix = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -258,7 +259,23 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new FrontendIPConfiguration(id.Value, name.Value, etag.Value, type.Value, Optional.ToList(zones), Optional.ToList(inboundNatRules), Optional.ToList(inboundNatPools), Optional.ToList(outboundRules), Optional.ToList(loadBalancingRules), privateIPAddress.Value, Optional.ToNullable(privateIPAllocationMethod), Optional.ToNullable(privateIPAddressVersion), subnet.Value, publicIPAddress.Value, publicIPPrefix.Value, Optional.ToNullable(provisioningState));
+            return new FrontendIPConfiguration(
+                id,
+                name,
+                etag,
+                type,
+                zones ?? new ChangeTrackingList<string>(),
+                inboundNatRules ?? new ChangeTrackingList<SubResource>(),
+                inboundNatPools ?? new ChangeTrackingList<SubResource>(),
+                outboundRules ?? new ChangeTrackingList<SubResource>(),
+                loadBalancingRules ?? new ChangeTrackingList<SubResource>(),
+                privateIPAddress,
+                privateIPAllocationMethod,
+                privateIPAddressVersion,
+                subnet,
+                publicIPAddress,
+                publicIPPrefix,
+                provisioningState);
         }
     }
 }

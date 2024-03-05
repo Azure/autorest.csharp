@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {
@@ -33,7 +34,7 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            Optional<int> length = default;
+            int? length = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
@@ -58,7 +59,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new TruncateTokenFilter(odataType, name, Optional.ToNullable(length));
+            return new TruncateTokenFilter(odataType, name, length);
         }
     }
 }

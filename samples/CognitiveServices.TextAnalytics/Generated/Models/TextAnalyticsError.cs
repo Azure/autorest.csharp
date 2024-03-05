@@ -7,7 +7,7 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
+using CognitiveServices.TextAnalytics;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
@@ -20,7 +20,10 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
         internal TextAnalyticsError(ErrorCodeValue code, string message)
         {
-            Argument.AssertNotNull(message, nameof(message));
+            if (message == null)
+            {
+                throw new ArgumentNullException(nameof(message));
+            }
 
             Code = code;
             Message = message;

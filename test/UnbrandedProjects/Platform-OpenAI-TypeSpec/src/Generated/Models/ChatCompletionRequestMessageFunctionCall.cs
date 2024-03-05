@@ -3,7 +3,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.Collections.Generic;
 
 namespace OpenAI.Models
@@ -53,8 +52,14 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="arguments"/> is null. </exception>
         public ChatCompletionRequestMessageFunctionCall(string name, string arguments)
         {
-            ClientUtilities.AssertNotNull(name, nameof(name));
-            ClientUtilities.AssertNotNull(arguments, nameof(arguments));
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (arguments == null)
+            {
+                throw new ArgumentNullException(nameof(arguments));
+            }
 
             Name = name;
             Arguments = arguments;

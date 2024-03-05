@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using MgmtAcronymMapping;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -45,9 +46,9 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<ImageReference> imageReference = default;
-            Optional<OSDisk> osDisk = default;
-            Optional<IList<DataDisk>> dataDisks = default;
+            ImageReference imageReference = default;
+            OSDisk osDisk = default;
+            IList<DataDisk> dataDisks = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("imageReference"u8))
@@ -83,7 +84,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new StorageProfile(imageReference.Value, osDisk.Value, Optional.ToList(dataDisks));
+            return new StorageProfile(imageReference, osDisk, dataDisks ?? new ChangeTrackingList<DataDisk>());
         }
     }
 }

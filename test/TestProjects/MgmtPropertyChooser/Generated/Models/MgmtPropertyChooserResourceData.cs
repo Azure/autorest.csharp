@@ -20,7 +20,10 @@ namespace MgmtPropertyChooser.Models
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
         public MgmtPropertyChooserResourceData(string location)
         {
-            Argument.AssertNotNull(location, nameof(location));
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
 
             Location = location;
             Tags = new ChangeTrackingDictionary<string, string>();

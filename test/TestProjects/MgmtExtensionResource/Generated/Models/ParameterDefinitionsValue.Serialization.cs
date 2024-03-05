@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using MgmtExtensionResource;
 
 namespace MgmtExtensionResource.Models
 {
@@ -70,10 +71,10 @@ namespace MgmtExtensionResource.Models
             {
                 return null;
             }
-            Optional<ParameterType> type = default;
-            Optional<IList<BinaryData>> allowedValues = default;
-            Optional<BinaryData> defaultValue = default;
-            Optional<ParameterDefinitionsValueMetadata> metadata = default;
+            ParameterType? type = default;
+            IList<BinaryData> allowedValues = default;
+            BinaryData defaultValue = default;
+            ParameterDefinitionsValueMetadata metadata = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("type"u8))
@@ -125,7 +126,7 @@ namespace MgmtExtensionResource.Models
                     continue;
                 }
             }
-            return new ParameterDefinitionsValue(Optional.ToNullable(type), Optional.ToList(allowedValues), defaultValue.Value, metadata.Value);
+            return new ParameterDefinitionsValue(type, allowedValues ?? new ChangeTrackingList<BinaryData>(), defaultValue, metadata);
         }
     }
 }

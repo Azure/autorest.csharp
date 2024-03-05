@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Network.Management.Interface;
 
 namespace Azure.Network.Management.Interface.Models
 {
@@ -108,26 +109,26 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> etag = default;
-            Optional<string> id = default;
-            Optional<string> addressPrefix = default;
-            Optional<IList<string>> addressPrefixes = default;
-            Optional<NetworkSecurityGroup> networkSecurityGroup = default;
-            Optional<RouteTable> routeTable = default;
-            Optional<SubResource> natGateway = default;
-            Optional<IList<ServiceEndpointPropertiesFormat>> serviceEndpoints = default;
-            Optional<IList<ServiceEndpointPolicy>> serviceEndpointPolicies = default;
-            Optional<IReadOnlyList<PrivateEndpoint>> privateEndpoints = default;
-            Optional<IReadOnlyList<IPConfiguration>> ipConfigurations = default;
-            Optional<IReadOnlyList<IPConfigurationProfile>> ipConfigurationProfiles = default;
-            Optional<IReadOnlyList<ResourceNavigationLink>> resourceNavigationLinks = default;
-            Optional<IReadOnlyList<ServiceAssociationLink>> serviceAssociationLinks = default;
-            Optional<IList<Delegation>> delegations = default;
-            Optional<string> purpose = default;
-            Optional<ProvisioningState> provisioningState = default;
-            Optional<string> privateEndpointNetworkPolicies = default;
-            Optional<string> privateLinkServiceNetworkPolicies = default;
+            string name = default;
+            string etag = default;
+            string id = default;
+            string addressPrefix = default;
+            IList<string> addressPrefixes = default;
+            NetworkSecurityGroup networkSecurityGroup = default;
+            RouteTable routeTable = default;
+            SubResource natGateway = default;
+            IList<ServiceEndpointPropertiesFormat> serviceEndpoints = default;
+            IList<ServiceEndpointPolicy> serviceEndpointPolicies = default;
+            IReadOnlyList<PrivateEndpoint> privateEndpoints = default;
+            IReadOnlyList<IPConfiguration> ipConfigurations = default;
+            IReadOnlyList<IPConfigurationProfile> ipConfigurationProfiles = default;
+            IReadOnlyList<ResourceNavigationLink> resourceNavigationLinks = default;
+            IReadOnlyList<ServiceAssociationLink> serviceAssociationLinks = default;
+            IList<Delegation> delegations = default;
+            string purpose = default;
+            ProvisioningState? provisioningState = default;
+            string privateEndpointNetworkPolicies = default;
+            string privateLinkServiceNetworkPolicies = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -340,7 +341,27 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new Subnet(id.Value, name.Value, etag.Value, addressPrefix.Value, Optional.ToList(addressPrefixes), networkSecurityGroup.Value, routeTable.Value, natGateway.Value, Optional.ToList(serviceEndpoints), Optional.ToList(serviceEndpointPolicies), Optional.ToList(privateEndpoints), Optional.ToList(ipConfigurations), Optional.ToList(ipConfigurationProfiles), Optional.ToList(resourceNavigationLinks), Optional.ToList(serviceAssociationLinks), Optional.ToList(delegations), purpose.Value, Optional.ToNullable(provisioningState), privateEndpointNetworkPolicies.Value, privateLinkServiceNetworkPolicies.Value);
+            return new Subnet(
+                id,
+                name,
+                etag,
+                addressPrefix,
+                addressPrefixes ?? new ChangeTrackingList<string>(),
+                networkSecurityGroup,
+                routeTable,
+                natGateway,
+                serviceEndpoints ?? new ChangeTrackingList<ServiceEndpointPropertiesFormat>(),
+                serviceEndpointPolicies ?? new ChangeTrackingList<ServiceEndpointPolicy>(),
+                privateEndpoints ?? new ChangeTrackingList<PrivateEndpoint>(),
+                ipConfigurations ?? new ChangeTrackingList<IPConfiguration>(),
+                ipConfigurationProfiles ?? new ChangeTrackingList<IPConfigurationProfile>(),
+                resourceNavigationLinks ?? new ChangeTrackingList<ResourceNavigationLink>(),
+                serviceAssociationLinks ?? new ChangeTrackingList<ServiceAssociationLink>(),
+                delegations ?? new ChangeTrackingList<Delegation>(),
+                purpose,
+                provisioningState,
+                privateEndpointNetworkPolicies,
+                privateLinkServiceNetworkPolicies);
         }
     }
 }

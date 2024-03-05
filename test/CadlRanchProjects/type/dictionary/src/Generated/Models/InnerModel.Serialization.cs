@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using _Type._Dictionary;
 
 namespace _Type._Dictionary.Models
 {
@@ -79,7 +80,7 @@ namespace _Type._Dictionary.Models
                 return null;
             }
             string property = default;
-            Optional<IDictionary<string, InnerModel>> children = default;
+            IDictionary<string, InnerModel> children = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property0 in element.EnumerateObject())
@@ -98,7 +99,7 @@ namespace _Type._Dictionary.Models
                     Dictionary<string, InnerModel> dictionary = new Dictionary<string, InnerModel>();
                     foreach (var property1 in property0.Value.EnumerateObject())
                     {
-                        dictionary.Add(property1.Name, DeserializeInnerModel(property1.Value));
+                        dictionary.Add(property1.Name, DeserializeInnerModel(property1.Value, options));
                     }
                     children = dictionary;
                     continue;
@@ -109,7 +110,7 @@ namespace _Type._Dictionary.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new InnerModel(property, Optional.ToDictionary(children), serializedAdditionalRawData);
+            return new InnerModel(property, children ?? new ChangeTrackingDictionary<string, InnerModel>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<InnerModel>.Write(ModelReaderWriterOptions options)

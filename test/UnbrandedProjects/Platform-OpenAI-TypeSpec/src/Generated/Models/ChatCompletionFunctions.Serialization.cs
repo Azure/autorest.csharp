@@ -7,6 +7,7 @@ using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -25,7 +26,7 @@ namespace OpenAI.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (OptionalProperty.IsDefined(Description))
+            if (Optional.IsDefined(Description))
             {
                 writer.WritePropertyName("description"u8);
                 writer.WriteStringValue(Description);
@@ -71,7 +72,7 @@ namespace OpenAI.Models
                 return null;
             }
             string name = default;
-            OptionalProperty<string> description = default;
+            string description = default;
             ChatCompletionFunctionParameters parameters = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -89,7 +90,7 @@ namespace OpenAI.Models
                 }
                 if (property.NameEquals("parameters"u8))
                 {
-                    parameters = ChatCompletionFunctionParameters.DeserializeChatCompletionFunctionParameters(property.Value);
+                    parameters = ChatCompletionFunctionParameters.DeserializeChatCompletionFunctionParameters(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")
@@ -98,7 +99,7 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ChatCompletionFunctions(name, description.Value, parameters, serializedAdditionalRawData);
+            return new ChatCompletionFunctions(name, description, parameters, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ChatCompletionFunctions>.Write(ModelReaderWriterOptions options)

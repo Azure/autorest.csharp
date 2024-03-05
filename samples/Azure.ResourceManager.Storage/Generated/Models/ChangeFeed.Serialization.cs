@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Storage;
 
 namespace Azure.ResourceManager.Storage.Models
 {
@@ -34,8 +35,8 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Optional<bool> enabled = default;
-            Optional<int> retentionInDays = default;
+            bool? enabled = default;
+            int? retentionInDays = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("enabled"u8))
@@ -57,7 +58,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new ChangeFeed(Optional.ToNullable(enabled), Optional.ToNullable(retentionInDays));
+            return new ChangeFeed(enabled, retentionInDays);
         }
     }
 }

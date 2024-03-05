@@ -15,6 +15,8 @@ head-as-boolean: false
 modelerfour:
   lenient-model-deduplication: true
 keep-orphaned-models: AvailabilitySetSkuType
+use-model-reader-writer: true
+enable-bicep-serialization: true
 
 acronym-mapping:
   Os: OS

@@ -15,21 +15,21 @@ namespace CadlRanchProjects.Tests
         {
             var response = await new AdditionalPropertiesClient(host, null).GetExtendsFloatClient().GetExtendsFloatAsync();
             var value = response.Value;
-            Assert.AreEqual(42.42f, value.Id);
+            Assert.AreEqual(43.125f, value.Id);
             CollectionAssert.AreEquivalent(new Dictionary<string, float>
             {
-                ["prop"] = 42.42f,
+                ["prop"] = 43.125f,
             }, value.AdditionalProperties);
         });
 
         [Test]
         public Task Type_Property_AdditionalProperties_ExtendsFloat_put() => Test(async (host) =>
         {
-            var value = new ExtendsFloatAdditionalProperties(42.42f)
+            var value = new ExtendsFloatAdditionalProperties(43.125f)
             {
                 AdditionalProperties =
                 {
-                    ["prop"] = 42.42f
+                    ["prop"] = 43.125f
                 }
             };
             var response = await new AdditionalPropertiesClient(host, null).GetExtendsFloatClient().PutAsync(value);
@@ -41,21 +41,21 @@ namespace CadlRanchProjects.Tests
         {
             var response = await new AdditionalPropertiesClient(host, null).GetIsFloatClient().GetIsFloatAsync();
             var value = response.Value;
-            Assert.AreEqual(42.42f, value.Id);
+            Assert.AreEqual(43.125f, value.Id);
             CollectionAssert.AreEquivalent(new Dictionary<string, float>
             {
-                ["prop"] = 42.42f,
+                ["prop"] = 43.125f,
             }, value.AdditionalProperties);
         });
 
         [Test]
         public Task Type_Property_AdditionalProperties_IsFloat_put() => Test(async (host) =>
         {
-            var value = new IsFloatAdditionalProperties(42.42f)
+            var value = new IsFloatAdditionalProperties(43.125f)
             {
                 AdditionalProperties =
                 {
-                    ["prop"] = 42.42f
+                    ["prop"] = 43.125f
                 }
             };
             var response = await new AdditionalPropertiesClient(host, null).GetIsFloatClient().PutAsync(value);

@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {
@@ -39,7 +40,7 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            Optional<IList<string>> articles = default;
+            IList<string> articles = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
@@ -69,7 +70,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new ElisionTokenFilter(odataType, name, Optional.ToList(articles));
+            return new ElisionTokenFilter(odataType, name, articles ?? new ChangeTrackingList<string>());
         }
     }
 }

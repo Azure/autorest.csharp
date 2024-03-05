@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using _Type.Property.Optionality;
 
 namespace _Type.Property.Optionality.Models
 {
@@ -70,7 +71,7 @@ namespace _Type.Property.Optionality.Models
             {
                 return null;
             }
-            Optional<string> property = default;
+            string property = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property0 in element.EnumerateObject())
@@ -86,7 +87,7 @@ namespace _Type.Property.Optionality.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new StringProperty(property.Value, serializedAdditionalRawData);
+            return new StringProperty(property, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<StringProperty>.Write(ModelReaderWriterOptions options)

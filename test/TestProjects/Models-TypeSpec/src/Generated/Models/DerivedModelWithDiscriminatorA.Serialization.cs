@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using ModelsTypeSpec;
 
 namespace ModelsTypeSpec.Models
 {
@@ -78,7 +79,7 @@ namespace ModelsTypeSpec.Models
             }
             string requiredString = default;
             string discriminatorProperty = default;
-            Optional<string> optionalPropertyOnBase = default;
+            string optionalPropertyOnBase = default;
             int requiredPropertyOnBase = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -110,7 +111,7 @@ namespace ModelsTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DerivedModelWithDiscriminatorA(discriminatorProperty, optionalPropertyOnBase.Value, requiredPropertyOnBase, serializedAdditionalRawData, requiredString);
+            return new DerivedModelWithDiscriminatorA(discriminatorProperty, optionalPropertyOnBase, requiredPropertyOnBase, serializedAdditionalRawData, requiredString);
         }
 
         BinaryData IPersistableModel<DerivedModelWithDiscriminatorA>.Write(ModelReaderWriterOptions options)

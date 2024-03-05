@@ -7,7 +7,7 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
+using _Type._Array;
 
 namespace _Type._Array.Models
 {
@@ -51,7 +51,10 @@ namespace _Type._Array.Models
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
         public InnerModel(string property)
         {
-            Argument.AssertNotNull(property, nameof(property));
+            if (property == null)
+            {
+                throw new ArgumentNullException(nameof(property));
+            }
 
             Property = property;
             Children = new ChangeTrackingList<InnerModel>();

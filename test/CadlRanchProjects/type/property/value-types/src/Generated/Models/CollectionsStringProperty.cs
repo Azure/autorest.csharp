@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Azure.Core;
 
 namespace _Type.Property.ValueTypes.Models
 {
@@ -52,7 +51,10 @@ namespace _Type.Property.ValueTypes.Models
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
         public CollectionsStringProperty(IEnumerable<string> property)
         {
-            Argument.AssertNotNull(property, nameof(property));
+            if (property == null)
+            {
+                throw new ArgumentNullException(nameof(property));
+            }
 
             Property = property.ToList();
         }

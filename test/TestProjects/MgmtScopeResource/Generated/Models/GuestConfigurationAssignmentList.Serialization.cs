@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 using MgmtScopeResource;
 
 namespace MgmtScopeResource.Models
@@ -20,7 +19,7 @@ namespace MgmtScopeResource.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<GuestConfigurationAssignmentData>> value = default;
+            IReadOnlyList<GuestConfigurationAssignmentData> value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -38,7 +37,7 @@ namespace MgmtScopeResource.Models
                     continue;
                 }
             }
-            return new GuestConfigurationAssignmentList(Optional.ToList(value));
+            return new GuestConfigurationAssignmentList(value ?? new ChangeTrackingList<GuestConfigurationAssignmentData>());
         }
     }
 }

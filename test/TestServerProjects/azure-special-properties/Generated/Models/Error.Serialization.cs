@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using azure_special_properties;
 
 namespace azure_special_properties.Models
 {
@@ -76,9 +77,9 @@ namespace azure_special_properties.Models
             {
                 return null;
             }
-            Optional<int> status = default;
+            int? status = default;
             ErrorConstantId constantId = default;
-            Optional<string> message = default;
+            string message = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -108,7 +109,7 @@ namespace azure_special_properties.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Error(Optional.ToNullable(status), constantId, message.Value, serializedAdditionalRawData);
+            return new Error(status, constantId, message, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<Error>.Write(ModelReaderWriterOptions options)

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using _Specs_.Azure.Core.Basic;
 
 namespace _Specs_.Azure.Core.Basic.Models
 {
@@ -89,7 +90,7 @@ namespace _Specs_.Azure.Core.Basic.Models
             }
             int id = default;
             string name = default;
-            Optional<IList<UserOrder>> orders = default;
+            IList<UserOrder> orders = default;
             string etag = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -114,7 +115,7 @@ namespace _Specs_.Azure.Core.Basic.Models
                     List<UserOrder> array = new List<UserOrder>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(UserOrder.DeserializeUserOrder(item));
+                        array.Add(UserOrder.DeserializeUserOrder(item, options));
                     }
                     orders = array;
                     continue;
@@ -130,7 +131,7 @@ namespace _Specs_.Azure.Core.Basic.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new User(id, name, Optional.ToList(orders), etag, serializedAdditionalRawData);
+            return new User(id, name, orders ?? new ChangeTrackingList<UserOrder>(), etag, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<User>.Write(ModelReaderWriterOptions options)

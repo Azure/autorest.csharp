@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Network.Management.Interface;
 
 namespace Azure.Network.Management.Interface.Models
 {
@@ -29,7 +30,7 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> id = default;
+            string id = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -38,7 +39,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new SubResource(id.Value);
+            return new SubResource(id);
         }
     }
 }

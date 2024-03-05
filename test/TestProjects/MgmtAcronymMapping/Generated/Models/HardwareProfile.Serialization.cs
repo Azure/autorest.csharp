@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtAcronymMapping;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -29,7 +30,7 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<VirtualMachineSizeType> vmSize = default;
+            VirtualMachineSizeType? vmSize = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("vmSize"u8))
@@ -42,7 +43,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new HardwareProfile(Optional.ToNullable(vmSize));
+            return new HardwareProfile(vmSize);
         }
     }
 }

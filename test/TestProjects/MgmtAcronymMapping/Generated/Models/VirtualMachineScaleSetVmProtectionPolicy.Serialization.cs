@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtAcronymMapping;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -34,8 +35,8 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<bool> protectFromScaleIn = default;
-            Optional<bool> protectFromScaleSetActions = default;
+            bool? protectFromScaleIn = default;
+            bool? protectFromScaleSetActions = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("protectFromScaleIn"u8))
@@ -57,7 +58,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetVmProtectionPolicy(Optional.ToNullable(protectFromScaleIn), Optional.ToNullable(protectFromScaleSetActions));
+            return new VirtualMachineScaleSetVmProtectionPolicy(protectFromScaleIn, protectFromScaleSetActions);
         }
     }
 }

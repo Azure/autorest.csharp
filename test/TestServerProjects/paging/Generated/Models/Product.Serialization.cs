@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using paging;
 
 namespace paging.Models
 {
@@ -69,7 +70,7 @@ namespace paging.Models
             {
                 return null;
             }
-            Optional<ProductProperties> properties = default;
+            ProductProperties properties = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -80,7 +81,7 @@ namespace paging.Models
                     {
                         continue;
                     }
-                    properties = ProductProperties.DeserializeProductProperties(property.Value);
+                    properties = ProductProperties.DeserializeProductProperties(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")
@@ -89,7 +90,7 @@ namespace paging.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Product(properties.Value, serializedAdditionalRawData);
+            return new Product(properties, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<Product>.Write(ModelReaderWriterOptions options)

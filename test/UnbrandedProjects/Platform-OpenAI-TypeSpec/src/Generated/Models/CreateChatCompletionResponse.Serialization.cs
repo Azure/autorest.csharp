@@ -7,6 +7,7 @@ using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -38,7 +39,7 @@ namespace OpenAI.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            if (OptionalProperty.IsDefined(Usage))
+            if (Optional.IsDefined(Usage))
             {
                 writer.WritePropertyName("usage"u8);
                 writer.WriteObjectValue(Usage);
@@ -86,7 +87,7 @@ namespace OpenAI.Models
             DateTimeOffset created = default;
             string model = default;
             IReadOnlyList<CreateChatCompletionResponseChoice> choices = default;
-            OptionalProperty<CompletionUsage> usage = default;
+            CompletionUsage usage = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -116,7 +117,7 @@ namespace OpenAI.Models
                     List<CreateChatCompletionResponseChoice> array = new List<CreateChatCompletionResponseChoice>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CreateChatCompletionResponseChoice.DeserializeCreateChatCompletionResponseChoice(item));
+                        array.Add(CreateChatCompletionResponseChoice.DeserializeCreateChatCompletionResponseChoice(item, options));
                     }
                     choices = array;
                     continue;
@@ -127,7 +128,7 @@ namespace OpenAI.Models
                     {
                         continue;
                     }
-                    usage = CompletionUsage.DeserializeCompletionUsage(property.Value);
+                    usage = CompletionUsage.DeserializeCompletionUsage(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")
@@ -136,7 +137,14 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new CreateChatCompletionResponse(id, @object, created, model, choices, usage.Value, serializedAdditionalRawData);
+            return new CreateChatCompletionResponse(
+                id,
+                @object,
+                created,
+                model,
+                choices,
+                usage,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<CreateChatCompletionResponse>.Write(ModelReaderWriterOptions options)

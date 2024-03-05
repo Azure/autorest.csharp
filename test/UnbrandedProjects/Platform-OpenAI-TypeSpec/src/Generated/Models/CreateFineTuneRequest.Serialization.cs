@@ -7,6 +7,7 @@ using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -25,7 +26,7 @@ namespace OpenAI.Models
             writer.WriteStartObject();
             writer.WritePropertyName("training_file"u8);
             writer.WriteStringValue(TrainingFile);
-            if (OptionalProperty.IsDefined(ValidationFile))
+            if (Optional.IsDefined(ValidationFile))
             {
                 if (ValidationFile != null)
                 {
@@ -37,12 +38,12 @@ namespace OpenAI.Models
                     writer.WriteNull("validation_file");
                 }
             }
-            if (OptionalProperty.IsDefined(Model))
+            if (Optional.IsDefined(Model))
             {
                 writer.WritePropertyName("model"u8);
                 writer.WriteStringValue(Model.Value.ToString());
             }
-            if (OptionalProperty.IsDefined(NEpochs))
+            if (Optional.IsDefined(NEpochs))
             {
                 if (NEpochs != null)
                 {
@@ -54,7 +55,7 @@ namespace OpenAI.Models
                     writer.WriteNull("n_epochs");
                 }
             }
-            if (OptionalProperty.IsDefined(BatchSize))
+            if (Optional.IsDefined(BatchSize))
             {
                 if (BatchSize != null)
                 {
@@ -66,7 +67,7 @@ namespace OpenAI.Models
                     writer.WriteNull("batch_size");
                 }
             }
-            if (OptionalProperty.IsDefined(LearningRateMultiplier))
+            if (Optional.IsDefined(LearningRateMultiplier))
             {
                 if (LearningRateMultiplier != null)
                 {
@@ -78,7 +79,7 @@ namespace OpenAI.Models
                     writer.WriteNull("learning_rate_multiplier");
                 }
             }
-            if (OptionalProperty.IsDefined(PromptLossRate))
+            if (Optional.IsDefined(PromptLossRate))
             {
                 if (PromptLossRate != null)
                 {
@@ -90,7 +91,7 @@ namespace OpenAI.Models
                     writer.WriteNull("prompt_loss_rate");
                 }
             }
-            if (OptionalProperty.IsDefined(ComputeClassificationMetrics))
+            if (Optional.IsDefined(ComputeClassificationMetrics))
             {
                 if (ComputeClassificationMetrics != null)
                 {
@@ -102,7 +103,7 @@ namespace OpenAI.Models
                     writer.WriteNull("compute_classification_metrics");
                 }
             }
-            if (OptionalProperty.IsDefined(ClassificationNClasses))
+            if (Optional.IsDefined(ClassificationNClasses))
             {
                 if (ClassificationNClasses != null)
                 {
@@ -114,7 +115,7 @@ namespace OpenAI.Models
                     writer.WriteNull("classification_n_classes");
                 }
             }
-            if (OptionalProperty.IsDefined(ClassificationPositiveClass))
+            if (Optional.IsDefined(ClassificationPositiveClass))
             {
                 if (ClassificationPositiveClass != null)
                 {
@@ -126,7 +127,7 @@ namespace OpenAI.Models
                     writer.WriteNull("classification_positive_class");
                 }
             }
-            if (OptionalProperty.IsCollectionDefined(ClassificationBetas))
+            if (Optional.IsCollectionDefined(ClassificationBetas))
             {
                 if (ClassificationBetas != null)
                 {
@@ -143,7 +144,7 @@ namespace OpenAI.Models
                     writer.WriteNull("classification_betas");
                 }
             }
-            if (OptionalProperty.IsDefined(Suffix))
+            if (Optional.IsDefined(Suffix))
             {
                 if (Suffix != null)
                 {
@@ -194,17 +195,17 @@ namespace OpenAI.Models
                 return null;
             }
             string trainingFile = default;
-            OptionalProperty<string> validationFile = default;
-            OptionalProperty<CreateFineTuneRequestModel> model = default;
-            OptionalProperty<long?> nEpochs = default;
-            OptionalProperty<long?> batchSize = default;
-            OptionalProperty<double?> learningRateMultiplier = default;
-            OptionalProperty<double?> promptLossRate = default;
-            OptionalProperty<bool?> computeClassificationMetrics = default;
-            OptionalProperty<long?> classificationNClasses = default;
-            OptionalProperty<string> classificationPositiveClass = default;
-            OptionalProperty<IList<double>> classificationBetas = default;
-            OptionalProperty<string> suffix = default;
+            string validationFile = default;
+            CreateFineTuneRequestModel? model = default;
+            long? nEpochs = default;
+            long? batchSize = default;
+            double? learningRateMultiplier = default;
+            double? promptLossRate = default;
+            bool? computeClassificationMetrics = default;
+            long? classificationNClasses = default;
+            string classificationPositiveClass = default;
+            IList<double> classificationBetas = default;
+            string suffix = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -333,7 +334,20 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new CreateFineTuneRequest(trainingFile, validationFile.Value, OptionalProperty.ToNullable(model), OptionalProperty.ToNullable(nEpochs), OptionalProperty.ToNullable(batchSize), OptionalProperty.ToNullable(learningRateMultiplier), OptionalProperty.ToNullable(promptLossRate), OptionalProperty.ToNullable(computeClassificationMetrics), OptionalProperty.ToNullable(classificationNClasses), classificationPositiveClass.Value, OptionalProperty.ToList(classificationBetas), suffix.Value, serializedAdditionalRawData);
+            return new CreateFineTuneRequest(
+                trainingFile,
+                validationFile,
+                model,
+                nEpochs,
+                batchSize,
+                learningRateMultiplier,
+                promptLossRate,
+                computeClassificationMetrics,
+                classificationNClasses,
+                classificationPositiveClass,
+                classificationBetas ?? new ChangeTrackingList<double>(),
+                suffix,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<CreateFineTuneRequest>.Write(ModelReaderWriterOptions options)

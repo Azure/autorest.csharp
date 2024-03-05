@@ -86,7 +86,7 @@ namespace OpenAI.Models
                     List<Image> array = new List<Image>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Image.DeserializeImage(item));
+                        array.Add(Image.DeserializeImage(item, options));
                     }
                     data = array;
                     continue;

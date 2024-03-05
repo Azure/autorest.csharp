@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using model_flattening;
 
 namespace model_flattening.Models
 {
@@ -118,15 +119,15 @@ namespace model_flattening.Models
             {
                 return null;
             }
-            Optional<string> id = default;
-            Optional<string> type = default;
-            Optional<IDictionary<string, string>> tags = default;
-            Optional<string> location = default;
-            Optional<string> name = default;
-            Optional<string> pName = default;
-            Optional<string> type0 = default;
-            Optional<FlattenedProductPropertiesProvisioningStateValues> provisioningStateValues = default;
-            Optional<string> provisioningState = default;
+            string id = default;
+            string type = default;
+            IDictionary<string, string> tags = default;
+            string location = default;
+            string name = default;
+            string pName = default;
+            string type0 = default;
+            FlattenedProductPropertiesProvisioningStateValues? provisioningStateValues = default;
+            string provisioningState = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -207,7 +208,17 @@ namespace model_flattening.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new FlattenedProduct(id.Value, type.Value, Optional.ToDictionary(tags), location.Value, name.Value, serializedAdditionalRawData, pName.Value, type0.Value, Optional.ToNullable(provisioningStateValues), provisioningState.Value);
+            return new FlattenedProduct(
+                id,
+                type,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                name,
+                serializedAdditionalRawData,
+                pName,
+                type0,
+                provisioningStateValues,
+                provisioningState);
         }
 
         BinaryData IPersistableModel<FlattenedProduct>.Write(ModelReaderWriterOptions options)

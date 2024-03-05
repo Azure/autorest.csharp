@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtAcronymMapping;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -44,10 +45,10 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> publisher = default;
-            Optional<string> product = default;
-            Optional<string> promotionCode = default;
+            string name = default;
+            string publisher = default;
+            string product = default;
+            string promotionCode = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -71,7 +72,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new MgmtAcronymMappingPlan(name.Value, publisher.Value, product.Value, promotionCode.Value);
+            return new MgmtAcronymMappingPlan(name, publisher, product, promotionCode);
         }
     }
 }

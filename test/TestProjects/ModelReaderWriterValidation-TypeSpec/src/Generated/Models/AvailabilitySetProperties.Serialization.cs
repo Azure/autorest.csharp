@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using ModelReaderWriterValidationTypeSpec;
 
 namespace ModelReaderWriterValidationTypeSpec.Models
 {
@@ -85,9 +86,9 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             {
                 return null;
             }
-            Optional<IList<WritableSubResource>> virtualMachines = default;
-            Optional<int> platformFaultDomainCount = default;
-            Optional<int> platformUpdateDomainCount = default;
+            IList<WritableSubResource> virtualMachines = default;
+            int? platformFaultDomainCount = default;
+            int? platformUpdateDomainCount = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -101,7 +102,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                     List<WritableSubResource> array = new List<WritableSubResource>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(WritableSubResource.DeserializeWritableSubResource(item));
+                        array.Add(WritableSubResource.DeserializeWritableSubResource(item, options));
                     }
                     virtualMachines = array;
                     continue;
@@ -130,7 +131,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new AvailabilitySetProperties(Optional.ToList(virtualMachines), Optional.ToNullable(platformFaultDomainCount), Optional.ToNullable(platformUpdateDomainCount), serializedAdditionalRawData);
+            return new AvailabilitySetProperties(virtualMachines ?? new ChangeTrackingList<WritableSubResource>(), platformFaultDomainCount, platformUpdateDomainCount, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<AvailabilitySetProperties>.Write(ModelReaderWriterOptions options)

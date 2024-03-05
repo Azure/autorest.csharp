@@ -50,12 +50,13 @@ namespace AutoRest.CSharp.Input.Source
             return name != null;
         }
 
-        public bool TryGetCodeGenSerializationAttributeValue(AttributeData attributeData, [MaybeNullWhen(false)] out string propertyName, out IReadOnlyList<string>? serializationNames, out string? serializationHook, out string? deserializationHook)
+        public bool TryGetCodeGenSerializationAttributeValue(AttributeData attributeData, [MaybeNullWhen(false)] out string propertyName, out IReadOnlyList<string>? serializationNames, out string? serializationHook, out string? deserializationHook, out string? bicepSerializationHook)
         {
             propertyName = null;
             serializationNames = null;
             serializationHook = null;
             deserializationHook = null;
+            bicepSerializationHook = null;
             if (!CheckAttribute(attributeData, CodeGenSerializationAttribute))
             {
                 return false;
@@ -89,10 +90,13 @@ namespace AutoRest.CSharp.Input.Source
                     case nameof(Azure.Core.CodeGenSerializationAttribute.DeserializationValueHook):
                         deserializationHook = namedArgument.Value as string;
                         break;
+                    case nameof(Azure.Core.CodeGenSerializationAttribute.BicepSerializationValueHook):
+                        bicepSerializationHook = namedArgument.Value as string;
+                        break;
                 }
             }
 
-            return propertyName != null && (serializationNames != null || serializationHook != null || deserializationHook != null);
+            return propertyName != null && (serializationNames != null || serializationHook != null || deserializationHook != null || bicepSerializationHook != null);
         }
 
         public bool TryGetCodeGenModelAttributeValue(AttributeData attributeData, out string[]? usage, out string[]? formats)

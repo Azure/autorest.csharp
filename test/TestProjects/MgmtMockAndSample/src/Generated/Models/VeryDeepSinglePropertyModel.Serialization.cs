@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
@@ -29,7 +30,7 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<DeepSinglePropertyModel> very = default;
+            DeepSinglePropertyModel very = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("very"u8))
@@ -42,7 +43,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new VeryDeepSinglePropertyModel(very.Value);
+            return new VeryDeepSinglePropertyModel(very);
         }
     }
 }

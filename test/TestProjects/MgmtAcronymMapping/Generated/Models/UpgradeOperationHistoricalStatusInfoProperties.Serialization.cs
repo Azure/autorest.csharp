@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -18,12 +17,12 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<UpgradeOperationHistoryStatus> runningStatus = default;
-            Optional<RollingUpgradeProgressInfo> progress = default;
-            Optional<ApiError> error = default;
-            Optional<UpgradeOperationInvoker> startedBy = default;
-            Optional<ImageReference> targetImageReference = default;
-            Optional<RollbackStatusInfo> rollbackInfo = default;
+            UpgradeOperationHistoryStatus runningStatus = default;
+            RollingUpgradeProgressInfo progress = default;
+            ApiError error = default;
+            UpgradeOperationInvoker? startedBy = default;
+            ImageReference targetImageReference = default;
+            RollbackStatusInfo rollbackInfo = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("runningStatus"u8))
@@ -81,7 +80,13 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new UpgradeOperationHistoricalStatusInfoProperties(runningStatus.Value, progress.Value, error.Value, Optional.ToNullable(startedBy), targetImageReference.Value, rollbackInfo.Value);
+            return new UpgradeOperationHistoricalStatusInfoProperties(
+                runningStatus,
+                progress,
+                error,
+                startedBy,
+                targetImageReference,
+                rollbackInfo);
         }
     }
 }

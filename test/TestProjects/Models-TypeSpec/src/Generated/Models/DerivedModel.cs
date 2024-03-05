@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Azure.Core;
 
 namespace ModelsTypeSpec.Models
 {
@@ -20,7 +19,10 @@ namespace ModelsTypeSpec.Models
         /// <exception cref="ArgumentNullException"> <paramref name="requiredList"/> is null. </exception>
         public DerivedModel(IEnumerable<CollectionItem> requiredList)
         {
-            Argument.AssertNotNull(requiredList, nameof(requiredList));
+            if (requiredList == null)
+            {
+                throw new ArgumentNullException(nameof(requiredList));
+            }
 
             RequiredList = requiredList.ToList();
         }

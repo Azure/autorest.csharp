@@ -48,8 +48,14 @@ namespace custom_baseUrl_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="host"/> or <paramref name="credential"/> is null. </exception>
         public PathsClient(string host, AzureKeyCredential credential, PathsClientOptions options)
         {
-            Argument.AssertNotNull(host, nameof(host));
-            Argument.AssertNotNull(credential, nameof(credential));
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+            if (credential == null)
+            {
+                throw new ArgumentNullException(nameof(credential));
+            }
             options ??= new PathsClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -76,7 +82,10 @@ namespace custom_baseUrl_LowLevel
         /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='GetEmptyAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> GetEmptyAsync(string accountName, RequestContext context = null)
         {
-            Argument.AssertNotNull(accountName, nameof(accountName));
+            if (accountName == null)
+            {
+                throw new ArgumentNullException(nameof(accountName));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("PathsClient.GetEmpty");
             scope.Start();
@@ -110,7 +119,10 @@ namespace custom_baseUrl_LowLevel
         /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='GetEmpty(string,RequestContext)']/*" />
         public virtual Response GetEmpty(string accountName, RequestContext context = null)
         {
-            Argument.AssertNotNull(accountName, nameof(accountName));
+            if (accountName == null)
+            {
+                throw new ArgumentNullException(nameof(accountName));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("PathsClient.GetEmpty");
             scope.Start();

@@ -86,7 +86,7 @@ namespace OpenAI.Models
                     List<FineTune> array = new List<FineTune>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(FineTune.DeserializeFineTune(item));
+                        array.Add(FineTune.DeserializeFineTune(item, options));
                     }
                     data = array;
                     continue;

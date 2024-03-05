@@ -82,8 +82,18 @@ namespace MgmtResourceName
         /// <exception cref="ArgumentNullException"> <paramref name="networkResourceName"/> or <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<NetworkResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string networkResourceName, NetworkData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(networkResourceName, nameof(networkResourceName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (networkResourceName == null)
+            {
+                throw new ArgumentNullException(nameof(networkResourceName));
+            }
+            if (networkResourceName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(networkResourceName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _networkNetworkResourcesClientDiagnostics.CreateScope("NetworkCollection.CreateOrUpdate");
             scope.Start();
@@ -130,8 +140,18 @@ namespace MgmtResourceName
         /// <exception cref="ArgumentNullException"> <paramref name="networkResourceName"/> or <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<NetworkResource> CreateOrUpdate(WaitUntil waitUntil, string networkResourceName, NetworkData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(networkResourceName, nameof(networkResourceName));
-            Argument.AssertNotNull(data, nameof(data));
+            if (networkResourceName == null)
+            {
+                throw new ArgumentNullException(nameof(networkResourceName));
+            }
+            if (networkResourceName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(networkResourceName));
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
             using var scope = _networkNetworkResourcesClientDiagnostics.CreateScope("NetworkCollection.CreateOrUpdate");
             scope.Start();
@@ -176,7 +196,14 @@ namespace MgmtResourceName
         /// <exception cref="ArgumentNullException"> <paramref name="networkResourceName"/> is null. </exception>
         public virtual async Task<Response<NetworkResource>> GetAsync(string networkResourceName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(networkResourceName, nameof(networkResourceName));
+            if (networkResourceName == null)
+            {
+                throw new ArgumentNullException(nameof(networkResourceName));
+            }
+            if (networkResourceName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(networkResourceName));
+            }
 
             using var scope = _networkNetworkResourcesClientDiagnostics.CreateScope("NetworkCollection.Get");
             scope.Start();
@@ -220,7 +247,14 @@ namespace MgmtResourceName
         /// <exception cref="ArgumentNullException"> <paramref name="networkResourceName"/> is null. </exception>
         public virtual Response<NetworkResource> Get(string networkResourceName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(networkResourceName, nameof(networkResourceName));
+            if (networkResourceName == null)
+            {
+                throw new ArgumentNullException(nameof(networkResourceName));
+            }
+            if (networkResourceName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(networkResourceName));
+            }
 
             using var scope = _networkNetworkResourcesClientDiagnostics.CreateScope("NetworkCollection.Get");
             scope.Start();
@@ -321,7 +355,14 @@ namespace MgmtResourceName
         /// <exception cref="ArgumentNullException"> <paramref name="networkResourceName"/> is null. </exception>
         public virtual async Task<Response<bool>> ExistsAsync(string networkResourceName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(networkResourceName, nameof(networkResourceName));
+            if (networkResourceName == null)
+            {
+                throw new ArgumentNullException(nameof(networkResourceName));
+            }
+            if (networkResourceName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(networkResourceName));
+            }
 
             using var scope = _networkNetworkResourcesClientDiagnostics.CreateScope("NetworkCollection.Exists");
             scope.Start();
@@ -364,7 +405,14 @@ namespace MgmtResourceName
         /// <exception cref="ArgumentNullException"> <paramref name="networkResourceName"/> is null. </exception>
         public virtual Response<bool> Exists(string networkResourceName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(networkResourceName, nameof(networkResourceName));
+            if (networkResourceName == null)
+            {
+                throw new ArgumentNullException(nameof(networkResourceName));
+            }
+            if (networkResourceName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(networkResourceName));
+            }
 
             using var scope = _networkNetworkResourcesClientDiagnostics.CreateScope("NetworkCollection.Exists");
             scope.Start();
@@ -407,7 +455,14 @@ namespace MgmtResourceName
         /// <exception cref="ArgumentNullException"> <paramref name="networkResourceName"/> is null. </exception>
         public virtual async Task<NullableResponse<NetworkResource>> GetIfExistsAsync(string networkResourceName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(networkResourceName, nameof(networkResourceName));
+            if (networkResourceName == null)
+            {
+                throw new ArgumentNullException(nameof(networkResourceName));
+            }
+            if (networkResourceName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(networkResourceName));
+            }
 
             using var scope = _networkNetworkResourcesClientDiagnostics.CreateScope("NetworkCollection.GetIfExists");
             scope.Start();
@@ -452,7 +507,14 @@ namespace MgmtResourceName
         /// <exception cref="ArgumentNullException"> <paramref name="networkResourceName"/> is null. </exception>
         public virtual NullableResponse<NetworkResource> GetIfExists(string networkResourceName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(networkResourceName, nameof(networkResourceName));
+            if (networkResourceName == null)
+            {
+                throw new ArgumentNullException(nameof(networkResourceName));
+            }
+            if (networkResourceName.Length == 0)
+            {
+                throw new ArgumentException("Value cannot be an empty string.", nameof(networkResourceName));
+            }
 
             using var scope = _networkNetworkResourcesClientDiagnostics.CreateScope("NetworkCollection.GetIfExists");
             scope.Start();

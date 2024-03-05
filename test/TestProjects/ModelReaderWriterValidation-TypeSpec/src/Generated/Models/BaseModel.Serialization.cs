@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using ModelReaderWriterValidationTypeSpec;
 
 namespace ModelReaderWriterValidationTypeSpec.Models
 {
@@ -76,11 +77,11 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             {
                 switch (discriminator.GetString())
                 {
-                    case "X": return ModelX.DeserializeModelX(element);
-                    case "Y": return ModelY.DeserializeModelY(element);
+                    case "X": return ModelX.DeserializeModelX(element, options);
+                    case "Y": return ModelY.DeserializeModelY(element, options);
                 }
             }
-            return UnknownBaseModel.DeserializeUnknownBaseModel(element);
+            return UnknownBaseModel.DeserializeUnknownBaseModel(element, options);
         }
 
         BinaryData IPersistableModel<BaseModel>.Write(ModelReaderWriterOptions options)

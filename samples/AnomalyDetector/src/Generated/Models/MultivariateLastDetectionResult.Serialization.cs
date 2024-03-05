@@ -9,6 +9,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using AnomalyDetector;
 using Azure;
 using Azure.Core;
 
@@ -85,8 +86,8 @@ namespace AnomalyDetector.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<VariableState>> variableStates = default;
-            Optional<IReadOnlyList<AnomalyState>> results = default;
+            IReadOnlyList<VariableState> variableStates = default;
+            IReadOnlyList<AnomalyState> results = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -100,7 +101,7 @@ namespace AnomalyDetector.Models
                     List<VariableState> array = new List<VariableState>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(VariableState.DeserializeVariableState(item));
+                        array.Add(VariableState.DeserializeVariableState(item, options));
                     }
                     variableStates = array;
                     continue;
@@ -114,7 +115,7 @@ namespace AnomalyDetector.Models
                     List<AnomalyState> array = new List<AnomalyState>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(AnomalyState.DeserializeAnomalyState(item));
+                        array.Add(AnomalyState.DeserializeAnomalyState(item, options));
                     }
                     results = array;
                     continue;
@@ -125,7 +126,7 @@ namespace AnomalyDetector.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new MultivariateLastDetectionResult(Optional.ToList(variableStates), Optional.ToList(results), serializedAdditionalRawData);
+            return new MultivariateLastDetectionResult(variableStates ?? new ChangeTrackingList<VariableState>(), results ?? new ChangeTrackingList<AnomalyState>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<MultivariateLastDetectionResult>.Write(ModelReaderWriterOptions options)

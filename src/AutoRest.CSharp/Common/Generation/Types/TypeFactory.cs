@@ -12,6 +12,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
@@ -74,8 +75,11 @@ namespace AutoRest.CSharp.Generation.Types
                 InputTypeKind.Float64 => new CSharpType(typeof(double), inputType.IsNullable),
                 InputTypeKind.Float128 => new CSharpType(typeof(decimal), inputType.IsNullable),
                 InputTypeKind.Guid => new CSharpType(typeof(Guid), inputType.IsNullable),
+                InputTypeKind.SByte => new CSharpType(typeof(sbyte), inputType.IsNullable),
+                InputTypeKind.Byte => new CSharpType(typeof(byte), inputType.IsNullable),
                 InputTypeKind.Int32 => new CSharpType(typeof(int), inputType.IsNullable),
                 InputTypeKind.Int64 => new CSharpType(typeof(long), inputType.IsNullable),
+                InputTypeKind.SafeInt => new CSharpType(typeof(long), inputType.IsNullable),
                 InputTypeKind.IPAddress => new CSharpType(typeof(IPAddress), inputType.IsNullable),
                 InputTypeKind.RequestMethod => new CSharpType(typeof(RequestMethod), inputType.IsNullable),
                 InputTypeKind.ResourceIdentifier => new CSharpType(typeof(ResourceIdentifier), inputType.IsNullable),
@@ -150,7 +154,7 @@ namespace AutoRest.CSharp.Generation.Types
 
                 if (IsList(type))
                 {
-                    return new CSharpType(Configuration.ApiTypes.ChangeTrackingListType, type.Arguments);
+                    return ChangeTrackingListProvider.Instance.Type.MakeGenericType(type.Arguments);
                 }
 
                 if (IsDictionary(type))
@@ -326,6 +330,7 @@ namespace AutoRest.CSharp.Generation.Types
             XMsFormat.DataFactoryElementOfObject => typeof(DataFactoryElement<BinaryData>),
             XMsFormat.DataFactoryElementOfListOfString => typeof(DataFactoryElement<IList<string>>),
             XMsFormat.DataFactoryElementOfKeyValuePairs => typeof(DataFactoryElement<IDictionary<string, string>>),
+            XMsFormat.DataFactoryElementOfKeyObjectValuePairs => typeof(DataFactoryElement<IDictionary<string, BinaryData>>),
             _ => null
         };
 

@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {
@@ -121,17 +122,17 @@ namespace CognitiveSearch.Models
             }
             string name = default;
             IList<Field> fields = default;
-            Optional<IList<ScoringProfile>> scoringProfiles = default;
-            Optional<string> defaultScoringProfile = default;
-            Optional<CorsOptions> corsOptions = default;
-            Optional<IList<Suggester>> suggesters = default;
-            Optional<IList<Analyzer>> analyzers = default;
-            Optional<IList<Tokenizer>> tokenizers = default;
-            Optional<IList<TokenFilter>> tokenFilters = default;
-            Optional<IList<CharFilter>> charFilters = default;
-            Optional<EncryptionKey> encryptionKey = default;
-            Optional<Similarity> similarity = default;
-            Optional<string> odataEtag = default;
+            IList<ScoringProfile> scoringProfiles = default;
+            string defaultScoringProfile = default;
+            CorsOptions corsOptions = default;
+            IList<Suggester> suggesters = default;
+            IList<Analyzer> analyzers = default;
+            IList<Tokenizer> tokenizers = default;
+            IList<TokenFilter> tokenFilters = default;
+            IList<CharFilter> charFilters = default;
+            EncryptionKey encryptionKey = default;
+            Similarity similarity = default;
+            string odataEtag = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -271,7 +272,20 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new Index(name, fields, Optional.ToList(scoringProfiles), defaultScoringProfile.Value, corsOptions.Value, Optional.ToList(suggesters), Optional.ToList(analyzers), Optional.ToList(tokenizers), Optional.ToList(tokenFilters), Optional.ToList(charFilters), encryptionKey.Value, similarity.Value, odataEtag.Value);
+            return new Index(
+                name,
+                fields,
+                scoringProfiles ?? new ChangeTrackingList<ScoringProfile>(),
+                defaultScoringProfile,
+                corsOptions,
+                suggesters ?? new ChangeTrackingList<Suggester>(),
+                analyzers ?? new ChangeTrackingList<Analyzer>(),
+                tokenizers ?? new ChangeTrackingList<Tokenizer>(),
+                tokenFilters ?? new ChangeTrackingList<TokenFilter>(),
+                charFilters ?? new ChangeTrackingList<CharFilter>(),
+                encryptionKey,
+                similarity,
+                odataEtag);
         }
     }
 }

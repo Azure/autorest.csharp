@@ -25,7 +25,7 @@ namespace CadlRanchProjects.Tests
             Assert.AreEqual(2, response.Value.Extension[0].Extension[0].Level);
             Assert.AreEqual(1, response.Value.Extension[1].Level);
             Assert.AreEqual(0, response.Value.Extension[0].Extension[0].Extension.Count);
-            Assert.AreEqual(false, Optional.IsCollectionDefined(response.Value.Extension[1].Extension));
+            Assert.AreEqual(false, !(response.Value.Extension[1].Extension is ChangeTrackingList<Extension> changeTrackingList && changeTrackingList.IsUndefined));
         });
         [Test]
         public Task Type_Model_Inheritance_Recursive_put() => Test(async (host) =>

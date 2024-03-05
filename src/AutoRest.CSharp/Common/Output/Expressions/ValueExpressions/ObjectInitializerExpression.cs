@@ -5,5 +5,5 @@ using System.Collections.Generic;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
 {
-    internal record ObjectInitializerExpression(IReadOnlyDictionary<string, ValueExpression>? Properties = null, bool IsInline = true) : InitializerExpression;
+    internal record ObjectInitializerExpression(IReadOnlyDictionary<string, ValueExpression>? Parameters = null, bool UseSingleLine = true) : InitializerExpression;
 }

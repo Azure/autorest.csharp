@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
@@ -107,15 +108,15 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<IList<FirewallPolicyRuleNetworkProtocol>> ipProtocols = default;
-            Optional<IList<string>> sourceAddresses = default;
-            Optional<IList<string>> destinationAddresses = default;
-            Optional<IList<string>> destinationPorts = default;
-            Optional<IList<string>> sourceIpGroups = default;
-            Optional<IList<string>> destinationIpGroups = default;
-            Optional<IList<string>> destinationFqdns = default;
-            Optional<string> name = default;
-            Optional<string> description = default;
+            IList<FirewallPolicyRuleNetworkProtocol> ipProtocols = default;
+            IList<string> sourceAddresses = default;
+            IList<string> destinationAddresses = default;
+            IList<string> destinationPorts = default;
+            IList<string> sourceIpGroups = default;
+            IList<string> destinationIpGroups = default;
+            IList<string> destinationFqdns = default;
+            string name = default;
+            string description = default;
             FirewallPolicyRuleType ruleType = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -233,7 +234,17 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new NetworkRule(name.Value, description.Value, ruleType, Optional.ToList(ipProtocols), Optional.ToList(sourceAddresses), Optional.ToList(destinationAddresses), Optional.ToList(destinationPorts), Optional.ToList(sourceIpGroups), Optional.ToList(destinationIpGroups), Optional.ToList(destinationFqdns));
+            return new NetworkRule(
+                name,
+                description,
+                ruleType,
+                ipProtocols ?? new ChangeTrackingList<FirewallPolicyRuleNetworkProtocol>(),
+                sourceAddresses ?? new ChangeTrackingList<string>(),
+                destinationAddresses ?? new ChangeTrackingList<string>(),
+                destinationPorts ?? new ChangeTrackingList<string>(),
+                sourceIpGroups ?? new ChangeTrackingList<string>(),
+                destinationIpGroups ?? new ChangeTrackingList<string>(),
+                destinationFqdns ?? new ChangeTrackingList<string>());
         }
     }
 }

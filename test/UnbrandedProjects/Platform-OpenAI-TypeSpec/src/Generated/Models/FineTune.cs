@@ -3,9 +3,9 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.Collections.Generic;
 using System.Linq;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -66,13 +66,34 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="model"/>, <paramref name="organizationId"/>, <paramref name="hyperparams"/>, <paramref name="trainingFiles"/>, <paramref name="validationFiles"/> or <paramref name="resultFiles"/> is null. </exception>
         internal FineTune(string id, DateTimeOffset createdAt, DateTimeOffset updatedAt, string model, string fineTunedModel, string organizationId, FineTuneStatus status, FineTuneHyperparams hyperparams, IEnumerable<OpenAIFile> trainingFiles, IEnumerable<OpenAIFile> validationFiles, IEnumerable<OpenAIFile> resultFiles)
         {
-            ClientUtilities.AssertNotNull(id, nameof(id));
-            ClientUtilities.AssertNotNull(model, nameof(model));
-            ClientUtilities.AssertNotNull(organizationId, nameof(organizationId));
-            ClientUtilities.AssertNotNull(hyperparams, nameof(hyperparams));
-            ClientUtilities.AssertNotNull(trainingFiles, nameof(trainingFiles));
-            ClientUtilities.AssertNotNull(validationFiles, nameof(validationFiles));
-            ClientUtilities.AssertNotNull(resultFiles, nameof(resultFiles));
+            if (id == null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+            if (model == null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+            if (organizationId == null)
+            {
+                throw new ArgumentNullException(nameof(organizationId));
+            }
+            if (hyperparams == null)
+            {
+                throw new ArgumentNullException(nameof(hyperparams));
+            }
+            if (trainingFiles == null)
+            {
+                throw new ArgumentNullException(nameof(trainingFiles));
+            }
+            if (validationFiles == null)
+            {
+                throw new ArgumentNullException(nameof(validationFiles));
+            }
+            if (resultFiles == null)
+            {
+                throw new ArgumentNullException(nameof(resultFiles));
+            }
 
             Id = id;
             CreatedAt = createdAt;
@@ -85,7 +106,7 @@ namespace OpenAI.Models
             TrainingFiles = trainingFiles.ToList();
             ValidationFiles = validationFiles.ToList();
             ResultFiles = resultFiles.ToList();
-            Events = new OptionalList<FineTuneEvent>();
+            Events = new ChangeTrackingList<FineTuneEvent>();
         }
 
         /// <summary> Initializes a new instance of <see cref="FineTune"/>. </summary>

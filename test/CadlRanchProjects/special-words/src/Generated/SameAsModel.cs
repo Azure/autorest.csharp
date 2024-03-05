@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace SpecialWords
 {
@@ -51,7 +50,10 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="sameAsModelProperty"/> is null. </exception>
         public SameAsModel(string sameAsModelProperty)
         {
-            Argument.AssertNotNull(sameAsModelProperty, nameof(sameAsModelProperty));
+            if (sameAsModelProperty == null)
+            {
+                throw new ArgumentNullException(nameof(sameAsModelProperty));
+            }
 
             SameAsModelProperty = sameAsModelProperty;
         }

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -1614,7 +1615,7 @@ namespace FirstTestTypeSpec.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                level = 1234,
+                level = 123,
             });
             Response response = client.RecursiveExtension(content);
 
@@ -1630,7 +1631,7 @@ namespace FirstTestTypeSpec.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                level = 1234,
+                level = 123,
             });
             Response response = await client.RecursiveExtensionAsync(content);
 
@@ -1644,7 +1645,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Extension input = new Extension(1234);
+            Extension input = new Extension(123);
             Response response = client.RecursiveExtension(input);
         }
 
@@ -1655,7 +1656,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Extension input = new Extension(1234);
+            Extension input = new Extension(123);
             Response response = await client.RecursiveExtensionAsync(input);
         }
 
@@ -1668,7 +1669,7 @@ namespace FirstTestTypeSpec.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                level = 1234,
+                level = 123,
                 extension = new object[]
             {
 null
@@ -1688,7 +1689,7 @@ null
 
             using RequestContent content = RequestContent.Create(new
             {
-                level = 1234,
+                level = 123,
                 extension = new object[]
             {
 null
@@ -1706,7 +1707,7 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Extension input = new Extension(1234);
+            Extension input = new Extension(123);
             Response response = client.RecursiveExtension(input);
         }
 
@@ -1717,7 +1718,7 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Extension input = new Extension(1234);
+            Extension input = new Extension(123);
             Response response = await client.RecursiveExtensionAsync(input);
         }
 
@@ -1782,7 +1783,7 @@ null
             {
 new
 {
-level = 1234,
+level = 123,
 extension = new object[]
 {
 null
@@ -1808,7 +1809,7 @@ null
             {
 new
 {
-level = 1234,
+level = 123,
 extension = new object[]
 {
 null
@@ -1830,7 +1831,7 @@ null
 
             Extendible input = new Extendible
             {
-                Extension = { new ThereLevelExtension(1234) },
+                Extension = { new ThereLevelExtension(123) },
             };
             Response response = client.ThreeLevelRecursive(input);
         }
@@ -1844,7 +1845,7 @@ null
 
             Extendible input = new Extendible
             {
-                Extension = { new ThereLevelExtension(1234) },
+                Extension = { new ThereLevelExtension(123) },
             };
             Response response = await client.ThreeLevelRecursiveAsync(input);
         }
@@ -1862,10 +1863,10 @@ null
             {
 new
 {
-level = 1234,
+level = 123,
 }
             },
-                level = 1234,
+                level = 123,
             });
             Response response = client.RecursiveModels(content);
 
@@ -1885,10 +1886,10 @@ level = 1234,
             {
 new
 {
-level = 1234,
+level = 123,
 }
             },
-                level = 1234,
+                level = 123,
             });
             Response response = await client.RecursiveModelsAsync(content);
 
@@ -1902,9 +1903,9 @@ level = 1234,
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            ChildModel input = new ChildModel(1234, new BaseModel[]
+            ChildModel input = new ChildModel(123, new BaseModel[]
             {
-new BaseModel(1234)
+new BaseModel(123)
             });
             Response response = client.RecursiveModels(input);
         }
@@ -1916,9 +1917,9 @@ new BaseModel(1234)
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            ChildModel input = new ChildModel(1234, new BaseModel[]
+            ChildModel input = new ChildModel(123, new BaseModel[]
             {
-new BaseModel(1234)
+new BaseModel(123)
             });
             Response response = await client.RecursiveModelsAsync(input);
         }
@@ -1936,10 +1937,10 @@ new BaseModel(1234)
             {
 new
 {
-level = 1234,
+level = 123,
 }
             },
-                level = 1234,
+                level = 123,
             });
             Response response = client.RecursiveModels(content);
 
@@ -1959,10 +1960,10 @@ level = 1234,
             {
 new
 {
-level = 1234,
+level = 123,
 }
             },
-                level = 1234,
+                level = 123,
             });
             Response response = await client.RecursiveModelsAsync(content);
 
@@ -1976,9 +1977,9 @@ level = 1234,
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            ChildModel input = new ChildModel(1234, new BaseModel[]
+            ChildModel input = new ChildModel(123, new BaseModel[]
             {
-new BaseModel(1234)
+new BaseModel(123)
             });
             Response response = client.RecursiveModels(input);
         }
@@ -1990,9 +1991,9 @@ new BaseModel(1234)
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            ChildModel input = new ChildModel(1234, new BaseModel[]
+            ChildModel input = new ChildModel(123, new BaseModel[]
             {
-new BaseModel(1234)
+new BaseModel(123)
             });
             Response response = await client.RecursiveModelsAsync(input);
         }
@@ -2287,6 +2288,110 @@ new BaseModel(1234)
 
             ModelWithProjectedEnum body = new ModelWithProjectedEnum(CsProjectedEnumInModel.CsOne);
             Response response = await client.BodyIsModelWithProjectedEnumAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_OptionalDictionary_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = null;
+            Response response = client.OptionalDictionary(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_OptionalDictionary_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = null;
+            Response response = await client.OptionalDictionaryAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_OptionalDictionary_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = client.OptionalDictionary();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_OptionalDictionary_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = await client.OptionalDictionaryAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_OptionalDictionary_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                key = 1234,
+            });
+            Response response = client.OptionalDictionary(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_OptionalDictionary_AllParameters_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                key = 1234,
+            });
+            Response response = await client.OptionalDictionaryAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_OptionalDictionary_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = client.OptionalDictionary(body: new Dictionary<string, int>
+            {
+                ["key"] = 1234
+            });
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_OptionalDictionary_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = await client.OptionalDictionaryAsync(body: new Dictionary<string, int>
+            {
+                ["key"] = 1234
+            });
         }
     }
 }

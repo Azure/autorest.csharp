@@ -11,6 +11,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
+using xml_service;
 
 namespace xml_service.Models
 {
@@ -88,7 +89,14 @@ namespace xml_service.Models
             {
                 publicAccess = new PublicAccessType(publicAccessElement.Value);
             }
-            return new ContainerProperties(lastModified, etag, leaseStatus, leaseState, leaseDuration, publicAccess, serializedAdditionalRawData: null);
+            return new ContainerProperties(
+                lastModified,
+                etag,
+                leaseStatus,
+                leaseState,
+                leaseDuration,
+                publicAccess,
+                serializedAdditionalRawData: null);
         }
 
         BinaryData IPersistableModel<ContainerProperties>.Write(ModelReaderWriterOptions options)

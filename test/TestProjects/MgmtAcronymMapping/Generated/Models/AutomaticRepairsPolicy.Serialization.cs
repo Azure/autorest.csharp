@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtAcronymMapping;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -34,8 +35,8 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<bool> enabled = default;
-            Optional<string> gracePeriod = default;
+            bool? enabled = default;
+            string gracePeriod = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("enabled"u8))
@@ -53,7 +54,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new AutomaticRepairsPolicy(Optional.ToNullable(enabled), gracePeriod.Value);
+            return new AutomaticRepairsPolicy(enabled, gracePeriod);
         }
     }
 }

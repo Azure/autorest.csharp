@@ -7,7 +7,6 @@
 
 using System;
 using System.Text.Json;
-using Azure.Core;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -19,8 +18,8 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<Uri> consoleScreenshotBlobUri = default;
-            Optional<Uri> serialConsoleLogBlobUri = default;
+            Uri consoleScreenshotBlobUri = default;
+            Uri serialConsoleLogBlobUri = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("consoleScreenshotBlobUri"u8))
@@ -42,7 +41,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new RetrieveBootDiagnosticsDataResult(consoleScreenshotBlobUri.Value, serialConsoleLogBlobUri.Value);
+            return new RetrieveBootDiagnosticsDataResult(consoleScreenshotBlobUri, serialConsoleLogBlobUri);
         }
     }
 }
