@@ -62,6 +62,7 @@ namespace AutoRest.CSharp.Common.Input
             //description = description ?? throw new JsonException("Enum must have a description");
             if (description.IsNullOrEmpty())
             {
+                Console.Error.WriteLine($"[Warn]: Enum '{name}' must have a description");
                 description = $"The {name}.";
             }
 
