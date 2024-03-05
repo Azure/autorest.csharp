@@ -23,7 +23,7 @@ namespace _Type.Union.Models
         /// <summary> Initializes a new instance of <see cref="Models.GetResponse1"/>. </summary>
         /// <param name="prop"></param>
         /// <returns> A new <see cref="Models.GetResponse1"/> instance for mocking. </returns>
-        public static GetResponse1 GetResponse1(GetResponse1Prop prop = default)
+        public static GetResponse1 GetResponse1(GetResponseProp1 prop = default)
         {
             return new GetResponse1(prop, serializedAdditionalRawData: null);
         }

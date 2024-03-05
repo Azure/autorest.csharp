@@ -42,11 +42,11 @@ model AuthFlow {
 @lroStatus
 union JobStatus {
   string,
-  NotStarted: "notStarted",
-  Running: "running",
-  Succeeded: "succeeded",
-  Failed: "failed",
-  Canceled: "canceled",
+  NotStarted: "NotStarted",
+  Running: "Running",
+  Succeeded: "Succeeded",
+  Failed: "Failed",
+  Canceled: "Canceled",
 }
 
 @doc("Provides status details for long running operations.")

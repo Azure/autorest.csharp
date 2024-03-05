@@ -66,7 +66,7 @@ union IntExtensibleEnum {
 
 @doc("Float based extensible enum")
 union FloatExtensibleEnum {
-    float,
+    float32,
     One: 1.0,
     Two: 2.0,
     Four: 4.0,

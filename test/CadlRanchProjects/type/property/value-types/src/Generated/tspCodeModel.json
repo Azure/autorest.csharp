@@ -33,7 +33,7 @@
    "$id": "5",
    "Kind": "Enum",
    "Name": "InnerEnum",
-   "EnumValueType": "String",
+   "EnumValueType": "string",
    "AllowedValues": [
     {
      "$id": "6",

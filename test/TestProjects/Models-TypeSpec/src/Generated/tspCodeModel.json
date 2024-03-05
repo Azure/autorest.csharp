@@ -67,7 +67,7 @@
    "$id": "10",
    "Kind": "Enum",
    "Name": "ExtensibleEnum",
-   "EnumValueType": "String",
+   "EnumValueType": "string",
    "AllowedValues": [
     {
      "$id": "11",
@@ -125,7 +125,7 @@
    "$id": "18",
    "Kind": "Enum",
    "Name": "ExtensibleIntEnum",
-   "EnumValueType": "Float32",
+   "EnumValueType": "int32",
    "AllowedValues": [
     {
      "$id": "19",

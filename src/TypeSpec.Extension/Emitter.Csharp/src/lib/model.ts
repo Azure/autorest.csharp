@@ -802,7 +802,7 @@ export function getInputType(
 
     function getInputTypeForUnion(union: Union): InputUnionType | InputType {
         var clientType = getClientType(context, union);
-        if (clientType.kind === "enum") {
+        if (clientType.kind === "enum" && clientType.isFixed === false) {
             return fromSdkEnumType(clientType, context, enums);
         }
 
@@ -887,6 +887,12 @@ export function getUsages(
         }
         if (type.kind === "Model") {
             typeName = getTypeName(context, effectiveType as Model);
+        }
+        if (type.kind === "Union") {
+            let clientType = getClientType(context, type);
+            if (clientType.kind === "enum" && clientType.isFixed === false) {
+                typeName = clientType.generatedName || clientType.name;
+            }
         }
         const affectTypes: Set<string> = new Set<string>();
         if (typeName !== "") {
