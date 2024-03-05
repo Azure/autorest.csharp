@@ -74,9 +74,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 fullSerializedName, "UpdateParameterName", oriParameterName, parameter.Name);
 
             string oriSchemaName = parameter.Type.Name;
-            // TODO: This is causing reference equals failure in MgmtRestClient.SHouldReturnNullOn404
-            //parameter.Type.OriginalName ??= parameter.Type.Name;
             parameter.Type.Name = schemaName;
+            parameter.Type.OriginalName = oriSchemaName;
             fullSerializedName = parameter.Type.GetFullSerializedName();
             MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
                 new TransformItem(TransformTypeName.UpdateBodyParameter, fullSerializedName),

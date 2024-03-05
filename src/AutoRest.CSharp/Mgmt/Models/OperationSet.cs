@@ -101,7 +101,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             {
                 if (operation != null)
                 {
-                    return Models.RequestPath.FromOperation(operation, _inputClient);
+                    return Models.RequestPath.FromOperation(operation, _inputClient, MgmtContext.TypeFactory);
                 }
             }
 

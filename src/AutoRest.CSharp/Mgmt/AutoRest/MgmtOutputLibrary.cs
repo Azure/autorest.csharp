@@ -170,7 +170,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         continue;
 
                     // get the request path and operation set
-                    RequestPath requestPath = RequestPath.FromOperation(operation, client);
+                    RequestPath requestPath = RequestPath.FromOperation(operation, client, MgmtContext.TypeFactory);
                     var operationSet = RawRequestPathToOperationSets[requestPath];
                     if (operationSet.TryGetResourceDataSchema(out var resourceDataSchema))
                     {
@@ -790,7 +790,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             // TODO: model has been turned in to a new instance somewhere, need to fix it later
-            return FindTypeByName(model.Name) ?? throw new InvalidOperationException($"Cannot find model {model.Name}");
+            return FindTypeByName(model.OriginalName!) ?? throw new InvalidOperationException($"Cannot find model {model.Name}");
         }
 
         public override CSharpType? FindTypeByName(string originalName)
@@ -911,12 +911,12 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private Dictionary<InputOperation, RequestPath> PopulateOperationsToRequestPaths()
         {
-            var operationsToRequestPath = new Dictionary<InputOperation, RequestPath>();
+            var operationsToRequestPath = new Dictionary<InputOperation, RequestPath>(ReferenceEqualityComparer.Instance);
             foreach (var operationGroup in _input.Clients)
             {
                 foreach (var operation in operationGroup.Operations)
                 {
-                    operationsToRequestPath[operation] = RequestPath.FromOperation(operation, operationGroup);
+                    operationsToRequestPath[operation] = RequestPath.FromOperation(operation, operationGroup, MgmtContext.TypeFactory);
                 }
             }
             return operationsToRequestPath;
