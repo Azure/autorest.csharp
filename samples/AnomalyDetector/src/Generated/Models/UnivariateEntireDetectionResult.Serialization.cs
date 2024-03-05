@@ -9,6 +9,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using AnomalyDetector;
 using Azure;
 using Azure.Core;
 
@@ -71,7 +72,7 @@ namespace AnomalyDetector.Models
                 writer.WriteBooleanValue(item);
             }
             writer.WriteEndArray();
-            if (!(Severity is ChangeTrackingList<float> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Severity))
             {
                 writer.WritePropertyName("severity"u8);
                 writer.WriteStartArray();

@@ -19,12 +19,12 @@ namespace MgmtExpandResourceTypes
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Etag != null)
+            if (Optional.IsDefined(Etag))
             {
                 writer.WritePropertyName("etag"u8);
                 writer.WriteStringValue(Etag);
             }
-            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -39,27 +39,27 @@ namespace MgmtExpandResourceTypes
             writer.WriteStringValue(Location);
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (ZoneType.HasValue)
+            if (Optional.IsDefined(ZoneType))
             {
                 writer.WritePropertyName("zoneType"u8);
                 writer.WriteStringValue(ZoneType.Value.ToSerialString());
             }
-            if (MachineType.HasValue)
+            if (Optional.IsDefined(MachineType))
             {
                 writer.WritePropertyName("machineType"u8);
                 writer.WriteNumberValue((int)MachineType.Value);
             }
-            if (StorageType.HasValue)
+            if (Optional.IsDefined(StorageType))
             {
                 writer.WritePropertyName("storageType"u8);
                 writer.WriteNumberValue((int)StorageType.Value);
             }
-            if (MemoryType.HasValue)
+            if (Optional.IsDefined(MemoryType))
             {
                 writer.WritePropertyName("memoryType"u8);
                 writer.WriteNumberValue((long)MemoryType.Value);
             }
-            if (!(RegistrationVirtualNetworks is ChangeTrackingList<WritableSubResource> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(RegistrationVirtualNetworks))
             {
                 writer.WritePropertyName("registrationVirtualNetworks"u8);
                 writer.WriteStartArray();
@@ -69,7 +69,7 @@ namespace MgmtExpandResourceTypes
                 }
                 writer.WriteEndArray();
             }
-            if (!(ResolutionVirtualNetworks is ChangeTrackingList<WritableSubResource> collection1 && collection1.IsUndefined))
+            if (Optional.IsCollectionDefined(ResolutionVirtualNetworks))
             {
                 writer.WritePropertyName("resolutionVirtualNetworks"u8);
                 writer.WriteStartArray();

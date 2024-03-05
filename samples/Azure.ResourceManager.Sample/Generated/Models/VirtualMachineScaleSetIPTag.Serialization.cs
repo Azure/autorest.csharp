@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -27,12 +28,12 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (IPTagType != null)
+            if (Optional.IsDefined(IPTagType))
             {
                 writer.WritePropertyName("ipTagType"u8);
                 writer.WriteStringValue(IPTagType);
             }
-            if (Tag != null)
+            if (Optional.IsDefined(Tag))
             {
                 writer.WritePropertyName("tag"u8);
                 writer.WriteStringValue(Tag);
@@ -105,7 +106,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (IPTagType != null)
+            if (Optional.IsDefined(IPTagType))
             {
                 builder.Append("  ipTagType:");
                 if (IPTagType.Contains(Environment.NewLine))
@@ -119,7 +120,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Tag != null)
+            if (Optional.IsDefined(Tag))
             {
                 builder.Append("  tag:");
                 if (Tag.Contains(Environment.NewLine))

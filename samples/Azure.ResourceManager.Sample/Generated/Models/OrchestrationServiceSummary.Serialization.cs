@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -27,12 +28,12 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && ServiceName.HasValue)
+            if (options.Format != "W" && Optional.IsDefined(ServiceName))
             {
                 writer.WritePropertyName("serviceName"u8);
                 writer.WriteStringValue(ServiceName.Value.ToString());
             }
-            if (options.Format != "W" && ServiceState.HasValue)
+            if (options.Format != "W" && Optional.IsDefined(ServiceState))
             {
                 writer.WritePropertyName("serviceState"u8);
                 writer.WriteStringValue(ServiceState.Value.ToString());
@@ -113,13 +114,13 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (ServiceName.HasValue)
+            if (Optional.IsDefined(ServiceName))
             {
                 builder.Append("  serviceName:");
                 builder.AppendLine($" '{ServiceName.Value.ToString()}'");
             }
 
-            if (ServiceState.HasValue)
+            if (Optional.IsDefined(ServiceState))
             {
                 builder.Append("  serviceState:");
                 builder.AppendLine($" '{ServiceState.Value.ToString()}'");

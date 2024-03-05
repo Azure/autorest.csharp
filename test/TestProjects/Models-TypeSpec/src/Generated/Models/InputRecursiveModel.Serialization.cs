@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using ModelsTypeSpec;
 
 namespace ModelsTypeSpec.Models
 {
@@ -29,7 +30,7 @@ namespace ModelsTypeSpec.Models
             writer.WriteStartObject();
             writer.WritePropertyName("message"u8);
             writer.WriteStringValue(Message);
-            if (Inner != null)
+            if (Optional.IsDefined(Inner))
             {
                 writer.WritePropertyName("inner"u8);
                 writer.WriteObjectValue(Inner);

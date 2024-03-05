@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -32,12 +33,12 @@ namespace MgmtDiscriminator.Models
             writer.WriteStringValue(TypeName.ToString());
             writer.WritePropertyName("operator"u8);
             writer.WriteStringValue(Operator.ToString());
-            if (NegateCondition.HasValue)
+            if (Optional.IsDefined(NegateCondition))
             {
                 writer.WritePropertyName("negateCondition"u8);
                 writer.WriteBooleanValue(NegateCondition.Value);
             }
-            if (!(Transforms is ChangeTrackingList<Transform> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Transforms))
             {
                 writer.WritePropertyName("transforms"u8);
                 writer.WriteStartArray();
@@ -47,7 +48,7 @@ namespace MgmtDiscriminator.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!(MatchValues is ChangeTrackingList<RequestMethodMatchConditionParametersMatchValuesItem> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(MatchValues))
             {
                 writer.WritePropertyName("matchValues"u8);
                 writer.WriteStartArray();
@@ -177,14 +178,14 @@ namespace MgmtDiscriminator.Models
             builder.Append("  operator:");
             builder.AppendLine($" '{Operator.ToString()}'");
 
-            if (NegateCondition.HasValue)
+            if (Optional.IsDefined(NegateCondition))
             {
                 builder.Append("  negateCondition:");
                 var boolValue = NegateCondition.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
             }
 
-            if (!(Transforms is ChangeTrackingList<Transform> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Transforms))
             {
                 if (Transforms.Any())
                 {
@@ -198,7 +199,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            if (!(MatchValues is ChangeTrackingList<RequestMethodMatchConditionParametersMatchValuesItem> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(MatchValues))
             {
                 if (MatchValues.Any())
                 {

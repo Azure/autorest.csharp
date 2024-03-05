@@ -40,12 +40,10 @@ finally {
 
 $files = @(
     'AppContextSwitchHelper.cs',
-    'Argument.cs',
     'AsyncLockWithValue.cs',
     'AzureKeyCredentialPolicy.cs',
     'AzureResourceProviderNamespaceAttribute.cs',
     'ChangeTrackingDictionary.cs',
-    'ChangeTrackingList.cs',
     'ClientDiagnostics.cs',
     'DiagnosticScope.cs',
     'DiagnosticScopeFactory.cs',
@@ -65,7 +63,6 @@ $files = @(
     'OperationInternal.cs',
     'OperationInternalOfT.cs',
     'OperationPoller.cs',
-    'Optional.cs',
     'Page.cs',
     'PageableHelpers.cs',
     'ProtocolOperation.cs',

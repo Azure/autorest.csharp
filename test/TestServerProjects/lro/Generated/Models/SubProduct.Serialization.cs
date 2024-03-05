@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using lro;
 
 namespace lro.Models
 {
@@ -26,19 +27,19 @@ namespace lro.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && Id != null)
+            if (options.Format != "W" && Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (ProvisioningState != null)
+            if (Optional.IsDefined(ProvisioningState))
             {
                 writer.WritePropertyName("provisioningState"u8);
                 writer.WriteStringValue(ProvisioningState);
             }
-            if (options.Format != "W" && ProvisioningStateValues.HasValue)
+            if (options.Format != "W" && Optional.IsDefined(ProvisioningStateValues))
             {
                 writer.WritePropertyName("provisioningStateValues"u8);
                 writer.WriteStringValue(ProvisioningStateValues.Value.ToString());

@@ -11,8 +11,9 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using lrotsp;
 
-namespace lro.Models
+namespace lrotsp.Models
 {
     public partial class RadiologyInsightsData : IUtf8JsonSerializable, IJsonModel<RadiologyInsightsData>
     {
@@ -34,7 +35,7 @@ namespace lro.Models
                 writer.WriteStringValue(item);
             }
             writer.WriteEndArray();
-            if (Configuration != null)
+            if (Optional.IsDefined(Configuration))
             {
                 writer.WritePropertyName("configuration"u8);
                 writer.WriteStringValue(Configuration);

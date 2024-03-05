@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtCustomizations;
 
 namespace MgmtCustomizations.Models
 {
@@ -15,12 +16,12 @@ namespace MgmtCustomizations.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Order.HasValue)
+            if (Optional.IsDefined(Order))
             {
                 writer.WritePropertyName("order"u8);
                 writer.WriteNumberValue(Order.Value);
             }
-            if (Pet != null)
+            if (Optional.IsDefined(Pet))
             {
                 writer.WritePropertyName("pet"u8);
                 writer.WriteObjectValue(Pet);

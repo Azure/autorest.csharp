@@ -9,6 +9,7 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -460,17 +461,17 @@ namespace AutoRest.CSharp.Generation.Writers
 
             var type = value.Type;
             string valueStr = GetValueExpression(writer, value);
-            ValueExpression valueExpressoin = new FormattableStringToExpression($"{valueStr}");
+            ValueExpression valueExpression = new FormattableStringToExpression($"{valueStr}");
             CodeWriterDeclaration changeTrackingList = new CodeWriterDeclaration("changeTrackingList");
             if (checkUndefinedCollection && TypeFactory.IsCollectionType(type))
             {
                 writer.Append($"if (");
 
-                writer.WriteValueExpression(valueExpressoin);
+                writer.WriteValueExpression(valueExpression);
 
                 writer.Append($" != null && !(");
-                writer.WriteValueExpression(valueExpressoin);
-                writer.Append($" is {new CSharpType(Configuration.ApiTypes.ChangeTrackingListType, type.Arguments)} {changeTrackingList:D} && {changeTrackingList}.IsUndefined)");
+                writer.WriteValueExpression(valueExpression);
+                writer.Append($" is {ChangeTrackingListProvider.Instance.Type.MakeGenericType(type.Arguments)} {changeTrackingList:D} && {changeTrackingList}.IsUndefined)");
 
                 return writer.LineRaw(")").Scope();
             }
@@ -478,7 +479,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 writer.Append($"if (");
 
-                writer.WriteValueExpression(valueExpressoin);
+                writer.WriteValueExpression(valueExpression);
 
                 return writer.Line($" != null)").Scope();
             }

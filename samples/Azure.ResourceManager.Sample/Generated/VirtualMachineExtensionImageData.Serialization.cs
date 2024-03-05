@@ -29,7 +29,7 @@ namespace Azure.ResourceManager.Sample
             }
 
             writer.WriteStartObject();
-            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -57,34 +57,34 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format != "W" && SystemData != null)
+            if (options.Format != "W" && Optional.IsDefined(SystemData))
             {
                 writer.WritePropertyName("systemData"u8);
                 JsonSerializer.Serialize(writer, SystemData);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (OperatingSystem != null)
+            if (Optional.IsDefined(OperatingSystem))
             {
                 writer.WritePropertyName("operatingSystem"u8);
                 writer.WriteStringValue(OperatingSystem);
             }
-            if (ComputeRole != null)
+            if (Optional.IsDefined(ComputeRole))
             {
                 writer.WritePropertyName("computeRole"u8);
                 writer.WriteStringValue(ComputeRole);
             }
-            if (HandlerSchema != null)
+            if (Optional.IsDefined(HandlerSchema))
             {
                 writer.WritePropertyName("handlerSchema"u8);
                 writer.WriteStringValue(HandlerSchema);
             }
-            if (VmScaleSetEnabled.HasValue)
+            if (Optional.IsDefined(VmScaleSetEnabled))
             {
                 writer.WritePropertyName("vmScaleSetEnabled"u8);
                 writer.WriteBooleanValue(VmScaleSetEnabled.Value);
             }
-            if (SupportsMultipleExtensions.HasValue)
+            if (Optional.IsDefined(SupportsMultipleExtensions))
             {
                 writer.WritePropertyName("supportsMultipleExtensions"u8);
                 writer.WriteBooleanValue(SupportsMultipleExtensions.Value);
@@ -257,7 +257,7 @@ namespace Azure.ResourceManager.Sample
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 builder.Append("  name:");
                 if (Name.Contains(Environment.NewLine))
@@ -274,7 +274,7 @@ namespace Azure.ResourceManager.Sample
             builder.Append("  location:");
             builder.AppendLine($" '{Location.ToString()}'");
 
-            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Tags))
             {
                 if (Tags.Any())
                 {
@@ -302,13 +302,13 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 builder.Append("  id:");
                 builder.AppendLine($" '{Id.ToString()}'");
             }
 
-            if (SystemData != null)
+            if (Optional.IsDefined(SystemData))
             {
                 builder.Append("  systemData:");
                 builder.AppendLine($" '{SystemData.ToString()}'");
@@ -316,7 +316,7 @@ namespace Azure.ResourceManager.Sample
 
             builder.Append("  properties:");
             builder.AppendLine(" {");
-            if (OperatingSystem != null)
+            if (Optional.IsDefined(OperatingSystem))
             {
                 builder.Append("    operatingSystem:");
                 if (OperatingSystem.Contains(Environment.NewLine))
@@ -330,7 +330,7 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (ComputeRole != null)
+            if (Optional.IsDefined(ComputeRole))
             {
                 builder.Append("    computeRole:");
                 if (ComputeRole.Contains(Environment.NewLine))
@@ -344,7 +344,7 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (HandlerSchema != null)
+            if (Optional.IsDefined(HandlerSchema))
             {
                 builder.Append("    handlerSchema:");
                 if (HandlerSchema.Contains(Environment.NewLine))
@@ -358,14 +358,14 @@ namespace Azure.ResourceManager.Sample
                 }
             }
 
-            if (VmScaleSetEnabled.HasValue)
+            if (Optional.IsDefined(VmScaleSetEnabled))
             {
                 builder.Append("    vmScaleSetEnabled:");
                 var boolValue = VmScaleSetEnabled.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
             }
 
-            if (SupportsMultipleExtensions.HasValue)
+            if (Optional.IsDefined(SupportsMultipleExtensions))
             {
                 builder.Append("    supportsMultipleExtensions:");
                 var boolValue = SupportsMultipleExtensions.Value == true ? "true" : "false";

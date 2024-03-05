@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using multiple_inheritance;
 
 namespace multiple_inheritance.Models
 {
@@ -26,7 +27,7 @@ namespace multiple_inheritance.Models
             }
 
             writer.WriteStartObject();
-            if (IsAShowHorse.HasValue)
+            if (Optional.IsDefined(IsAShowHorse))
             {
                 writer.WritePropertyName("isAShowHorse"u8);
                 writer.WriteBooleanValue(IsAShowHorse.Value);

@@ -19,6 +19,7 @@ using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Mgmt.Report;
 using AutoRest.CSharp.Output.Models.Types;
 using Microsoft.CodeAnalysis;
+using AutoRest.CSharp.Common.Output.Models.Types;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
@@ -74,6 +75,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var staticUtilWriter = new StaticUtilWriter(utilCodeWriter);
                 staticUtilWriter.Write();
                 AddGeneratedFile(project, $"ProviderConstants.cs", utilCodeWriter.ToString());
+            }
+
+            foreach (var helper in ExpressionTypeProvider.GetHelperProviders())
+            {
+                var helperWriter = new CodeWriter();
+                new ExpressionTypeProviderWriter(helperWriter, helper).Write();
+                project.AddGeneratedFile($"Internal/{helper.Type.Name}.cs", helperWriter.ToString());
             }
 
             foreach (var model in MgmtContext.Library.Models)

@@ -7,6 +7,7 @@ using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -25,7 +26,7 @@ namespace OpenAI.Models
             writer.WriteStartObject();
             writer.WritePropertyName("training_file"u8);
             writer.WriteStringValue(TrainingFile);
-            if (ValidationFile != null)
+            if (Optional.IsDefined(ValidationFile))
             {
                 if (ValidationFile != null)
                 {
@@ -37,7 +38,7 @@ namespace OpenAI.Models
                     writer.WriteNull("validation_file");
                 }
             }
-            if (Model.HasValue)
+            if (Optional.IsDefined(Model))
             {
                 if (Model != null)
                 {
@@ -49,7 +50,7 @@ namespace OpenAI.Models
                     writer.WriteNull("model");
                 }
             }
-            if (NEpochs.HasValue)
+            if (Optional.IsDefined(NEpochs))
             {
                 if (NEpochs != null)
                 {
@@ -61,7 +62,7 @@ namespace OpenAI.Models
                     writer.WriteNull("n_epochs");
                 }
             }
-            if (BatchSize.HasValue)
+            if (Optional.IsDefined(BatchSize))
             {
                 if (BatchSize != null)
                 {
@@ -73,7 +74,7 @@ namespace OpenAI.Models
                     writer.WriteNull("batch_size");
                 }
             }
-            if (LearningRateMultiplier.HasValue)
+            if (Optional.IsDefined(LearningRateMultiplier))
             {
                 if (LearningRateMultiplier != null)
                 {
@@ -85,7 +86,7 @@ namespace OpenAI.Models
                     writer.WriteNull("learning_rate_multiplier");
                 }
             }
-            if (PromptLossRate.HasValue)
+            if (Optional.IsDefined(PromptLossRate))
             {
                 if (PromptLossRate != null)
                 {
@@ -97,7 +98,7 @@ namespace OpenAI.Models
                     writer.WriteNull("prompt_loss_rate");
                 }
             }
-            if (ComputeClassificationMetrics.HasValue)
+            if (Optional.IsDefined(ComputeClassificationMetrics))
             {
                 if (ComputeClassificationMetrics != null)
                 {
@@ -109,7 +110,7 @@ namespace OpenAI.Models
                     writer.WriteNull("compute_classification_metrics");
                 }
             }
-            if (ClassificationNClasses.HasValue)
+            if (Optional.IsDefined(ClassificationNClasses))
             {
                 if (ClassificationNClasses != null)
                 {
@@ -121,7 +122,7 @@ namespace OpenAI.Models
                     writer.WriteNull("classification_n_classes");
                 }
             }
-            if (ClassificationPositiveClass != null)
+            if (Optional.IsDefined(ClassificationPositiveClass))
             {
                 if (ClassificationPositiveClass != null)
                 {
@@ -133,7 +134,7 @@ namespace OpenAI.Models
                     writer.WriteNull("classification_positive_class");
                 }
             }
-            if (!(ClassificationBetas is OptionalList<double> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(ClassificationBetas))
             {
                 if (ClassificationBetas != null)
                 {
@@ -150,7 +151,7 @@ namespace OpenAI.Models
                     writer.WriteNull("classification_betas");
                 }
             }
-            if (Suffix != null)
+            if (Optional.IsDefined(Suffix))
             {
                 if (Suffix != null)
                 {
@@ -352,7 +353,7 @@ namespace OpenAI.Models
                 computeClassificationMetrics,
                 classificationNClasses,
                 classificationPositiveClass,
-                classificationBetas ?? new OptionalList<double>(),
+                classificationBetas ?? new ChangeTrackingList<double>(),
                 suffix,
                 serializedAdditionalRawData);
         }

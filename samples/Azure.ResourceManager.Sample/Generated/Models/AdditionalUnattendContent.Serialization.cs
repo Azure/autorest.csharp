@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -27,22 +28,22 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (PassName.HasValue)
+            if (Optional.IsDefined(PassName))
             {
                 writer.WritePropertyName("passName"u8);
                 writer.WriteStringValue(PassName.Value.ToString());
             }
-            if (ComponentName.HasValue)
+            if (Optional.IsDefined(ComponentName))
             {
                 writer.WritePropertyName("componentName"u8);
                 writer.WriteStringValue(ComponentName.Value.ToString());
             }
-            if (SettingName.HasValue)
+            if (Optional.IsDefined(SettingName))
             {
                 writer.WritePropertyName("settingName"u8);
                 writer.WriteStringValue(SettingName.Value.ToSerialString());
             }
-            if (Content != null)
+            if (Optional.IsDefined(Content))
             {
                 writer.WritePropertyName("content"u8);
                 writer.WriteStringValue(Content);
@@ -139,25 +140,25 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (PassName.HasValue)
+            if (Optional.IsDefined(PassName))
             {
                 builder.Append("  passName:");
                 builder.AppendLine($" '{PassName.Value.ToString()}'");
             }
 
-            if (ComponentName.HasValue)
+            if (Optional.IsDefined(ComponentName))
             {
                 builder.Append("  componentName:");
                 builder.AppendLine($" '{ComponentName.Value.ToString()}'");
             }
 
-            if (SettingName.HasValue)
+            if (Optional.IsDefined(SettingName))
             {
                 builder.Append("  settingName:");
                 builder.AppendLine($" '{SettingName.Value.ToSerialString()}'");
             }
 
-            if (Content != null)
+            if (Optional.IsDefined(Content))
             {
                 builder.Append("  content:");
                 if (Content.Contains(Environment.NewLine))

@@ -3,8 +3,8 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.Collections.Generic;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -65,7 +65,7 @@ namespace OpenAI.Models
             }
 
             TrainingFile = trainingFile;
-            ClassificationBetas = new OptionalList<double>();
+            ClassificationBetas = new ChangeTrackingList<double>();
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateFineTuneRequest"/>. </summary>
