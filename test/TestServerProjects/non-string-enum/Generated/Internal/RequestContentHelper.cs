@@ -12,7 +12,7 @@ using Azure.Core;
 
 namespace non_string_enum
 {
-    internal static partial class RequestContentHelper
+    internal static class RequestContentHelper
     {
         public static RequestContent FromEnumerable<T>(IEnumerable<T> enumerable)
         where T : notnull

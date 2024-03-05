@@ -12,7 +12,7 @@ using Azure.Core;
 
 namespace custom_baseUrl_more_options
 {
-    internal static partial class RequestContentHelper
+    internal static class RequestContentHelper
     {
         public static RequestContent FromEnumerable<T>(IEnumerable<T> enumerable)
         where T : notnull
