@@ -40,7 +40,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         public BuildContext(CodeModel codeModel, SourceInputModel? sourceInputModel)
             : base(codeModel, sourceInputModel)
         {
-            CodeModelTransformer.Transform(codeModel);
             _inputNamespace = new CodeModelConverter(codeModel).CreateNamespace();
         }
 

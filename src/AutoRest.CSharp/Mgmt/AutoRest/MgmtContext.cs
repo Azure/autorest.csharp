@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public static SchemaUsageProvider? SchemaUsageProvider => Context.SchemaUsageProvider;
 
-        public static string DefaultNamespace => Context.DefaultNamespace;
+        public static string DefaultNamespace => Configuration.Namespace;
 
         public static string RPName => ClientBuilder.GetRPName(DefaultNamespace);
 

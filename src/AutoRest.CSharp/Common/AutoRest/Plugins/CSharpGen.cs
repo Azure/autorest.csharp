@@ -13,6 +13,7 @@ using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Report;
 using AutoRest.CSharp.Utilities;
+using Humanizer.Inflections;
 using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
@@ -42,7 +43,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 }
                 else
                 {
+                    ApplyGlobalConfigurations();
                     CodeModelTransformer.Transform(codeModel);
+
                     await MgmtTarget.ExecuteAsync(project, codeModel, sourceInputModel);
                     if (Configuration.MgmtTestConfiguration is not null && !Configuration.MgmtConfiguration.MgmtDebug.ReportOnly)
                         await MgmtTestTarget.ExecuteAsync(project, codeModel, sourceInputModel);
@@ -54,6 +57,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 await LowLevelTarget.ExecuteAsync(project, new CodeModelConverter(codeModel).CreateNamespace(), sourceInputModel, false);
             }
             return project;
+        }
+
+        private static void ApplyGlobalConfigurations()
+        {
+            foreach ((var word, var plural) in Configuration.MgmtConfiguration.IrregularPluralWords)
+            {
+                Vocabularies.Default.AddIrregular(word, plural);
+            }
         }
 
         private void GenerateMgmtReport(GeneratedCodeWorkspace project)

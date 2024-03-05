@@ -12,18 +12,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class CodeModelTransformer
     {
-        private static void ApplyGlobalConfigurations()
-        {
-            foreach ((var word, var plural) in Configuration.MgmtConfiguration.IrregularPluralWords)
-            {
-                Vocabularies.Default.AddIrregular(word, plural);
-            }
-        }
-
         public static void Transform(CodeModel codeModel)
         {
-            ApplyGlobalConfigurations();
-
             // schema usage transformer must run first
             SchemaUsageTransformer.Transform(codeModel);
             OmitOperationGroups.RemoveOperationGroups(codeModel);

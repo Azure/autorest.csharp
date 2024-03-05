@@ -49,7 +49,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                 if (_schemasToChange.Contains(serializedName))
                 {
                     string oriName = schema.Language.Default.Name;
-                    string prefix = MgmtContext.Context.DefaultNamespace.Equals(typeof(ArmClient).Namespace) ? "Arm" : MgmtContext.RPName;
+                    string prefix = Configuration.Namespace.Equals(typeof(ArmClient).Namespace) ? "Arm" : MgmtContext.RPName;
                     string suffix = serializedName.Equals("Resource") ? "Data" : string.Empty;
                     schema.Language.Default.SerializedName ??= schema.Language.Default.Name;
                     schema.Language.Default.Name = prefix + serializedName + suffix;

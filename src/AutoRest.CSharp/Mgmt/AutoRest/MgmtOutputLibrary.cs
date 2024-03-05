@@ -924,31 +924,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private class ObjectReferenceEqualityComparer<T> : EqualityComparer<T> where T : class
         {
-            public override bool Equals(T? x, T? y)
-            {
-                if (x is null)
-                {
-                    if (y is not null)
-                    {
-                        return false;
-                    }
-                    else
-                    {
-                        return true;
-                    }
-                }
-                else
-                {
-                    if (y is null)
-                    {
-                        return false;
-                    }
-                    else
-                    {
-                        return ReferenceEquals(x, y);
-                    }
-                }
-            }
+            public override bool Equals(T? x, T? y) => ReferenceEquals(x, y);
 
             public override int GetHashCode([DisallowNull] T obj) => RuntimeHelpers.GetHashCode(obj);
         }
