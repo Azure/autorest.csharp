@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected ExpressionTypeProvider(string defaultNamespace, SourceInputModel? sourceInputModel)
             : base(defaultNamespace, sourceInputModel)
         {
-            DeclarationModifiers = TypeSignatureModifiers.Partial | TypeSignatureModifiers.Public | TypeSignatureModifiers.Static;
+            DeclarationModifiers = TypeSignatureModifiers.Partial | TypeSignatureModifiers.Public;
         }
 
         private IReadOnlyList<string>? _usings;
@@ -61,12 +61,12 @@ namespace AutoRest.CSharp.Output.Models.Types
             yield break;
         }
 
-        protected virtual IEnumerable<CSharpType> BuildImplements()
+        protected virtual IEnumerable<FieldDeclaration> BuildFields()
         {
             yield break;
         }
 
-        protected virtual IEnumerable<FieldDeclaration> BuildFields()
+        protected virtual IEnumerable<CSharpType> BuildImplements()
         {
             yield break;
         }

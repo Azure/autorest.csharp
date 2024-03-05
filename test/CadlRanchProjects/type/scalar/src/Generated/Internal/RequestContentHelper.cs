@@ -12,7 +12,7 @@ using Azure.Core;
 
 namespace _Type.Scalar
 {
-    internal static partial class RequestContentHelper
+    internal static class RequestContentHelper
     {
         public static RequestContent FromEnumerable<T>(IEnumerable<T> enumerable)
         where T : notnull

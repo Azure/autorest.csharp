@@ -32,15 +32,15 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected TypeProvider(BuildContext context) : this(context.DefaultNamespace, context.SourceInputModel) { }
 
-        public CSharpType Type => new(this, TypeKind is TypeKind.Struct or TypeKind.Enum, this is EnumType, arguments: TypeArguments);
+        public CSharpType Type => new(this, isValueType: TypeKind is TypeKind.Struct or TypeKind.Enum, isEnum: this is EnumType, arguments: TypeArguments);
         public TypeDeclarationOptions Declaration => _type ??= BuildType();
 
         protected abstract string DefaultName { get; }
         protected virtual string DefaultNamespace { get; }
         protected abstract string DefaultAccessibility { get; }
 
-        private CSharpType[]? _typeArguments;
-        public virtual CSharpType[] TypeArguments => _typeArguments ??= BuildTypeArguments().ToArray();
+        private IReadOnlyList<CSharpType>? _typeArguments;
+        protected IReadOnlyList<CSharpType> TypeArguments => _typeArguments ??= BuildTypeArguments().ToArray();
 
         public string? Deprecated => _deprecated;
         protected virtual TypeKind TypeKind { get; } = TypeKind.Class;

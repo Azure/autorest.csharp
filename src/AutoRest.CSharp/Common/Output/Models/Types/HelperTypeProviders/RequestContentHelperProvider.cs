@@ -25,6 +25,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly MethodSignatureModifiers _methodModifiers = MethodSignatureModifiers.Public | MethodSignatureModifiers.Static;
         private RequestContentHelperProvider(string defaultNamespace) : base(defaultNamespace, null)
         {
+            DeclarationModifiers = TypeSignatureModifiers.Internal | TypeSignatureModifiers.Static;
         }
 
         private readonly CSharpType _requestBodyType = Configuration.IsBranded ? typeof(RequestContent) : typeof(RequestBody);
