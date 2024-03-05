@@ -62,22 +62,9 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/HelloDemo2.xml" path="doc/members/member[@name='HelloAgainAsync(string,string,RoundTripModel,CancellationToken)']/*" />
         public virtual async Task<Response<RoundTripModel>> HelloAgainAsync(string p2, string p1, RoundTripModel action, CancellationToken cancellationToken = default)
         {
-            if (p2 == null)
-            {
-                throw new ArgumentNullException(nameof(p2));
-            }
-            if (p2.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(p2));
-            }
-            if (p1 == null)
-            {
-                throw new ArgumentNullException(nameof(p1));
-            }
-            if (action == null)
-            {
-                throw new ArgumentNullException(nameof(action));
-            }
+            Argument.AssertNotNullOrEmpty(p2, nameof(p2));
+            Argument.AssertNotNull(p1, nameof(p1));
+            Argument.AssertNotNull(action, nameof(action));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = action.ToRequestContent();
@@ -95,22 +82,9 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/HelloDemo2.xml" path="doc/members/member[@name='HelloAgain(string,string,RoundTripModel,CancellationToken)']/*" />
         public virtual Response<RoundTripModel> HelloAgain(string p2, string p1, RoundTripModel action, CancellationToken cancellationToken = default)
         {
-            if (p2 == null)
-            {
-                throw new ArgumentNullException(nameof(p2));
-            }
-            if (p2.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(p2));
-            }
-            if (p1 == null)
-            {
-                throw new ArgumentNullException(nameof(p1));
-            }
-            if (action == null)
-            {
-                throw new ArgumentNullException(nameof(action));
-            }
+            Argument.AssertNotNullOrEmpty(p2, nameof(p2));
+            Argument.AssertNotNull(p1, nameof(p1));
+            Argument.AssertNotNull(action, nameof(action));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = action.ToRequestContent();
@@ -144,22 +118,9 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/HelloDemo2.xml" path="doc/members/member[@name='HelloAgainAsync(string,string,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> HelloAgainAsync(string p2, string p1, RequestContent content, RequestContext context = null)
         {
-            if (p2 == null)
-            {
-                throw new ArgumentNullException(nameof(p2));
-            }
-            if (p2.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(p2));
-            }
-            if (p1 == null)
-            {
-                throw new ArgumentNullException(nameof(p1));
-            }
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNullOrEmpty(p2, nameof(p2));
+            Argument.AssertNotNull(p1, nameof(p1));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("HelloDemo2.HelloAgain");
             scope.Start();
@@ -201,22 +162,9 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/HelloDemo2.xml" path="doc/members/member[@name='HelloAgain(string,string,RequestContent,RequestContext)']/*" />
         public virtual Response HelloAgain(string p2, string p1, RequestContent content, RequestContext context = null)
         {
-            if (p2 == null)
-            {
-                throw new ArgumentNullException(nameof(p2));
-            }
-            if (p2.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(p2));
-            }
-            if (p1 == null)
-            {
-                throw new ArgumentNullException(nameof(p1));
-            }
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNullOrEmpty(p2, nameof(p2));
+            Argument.AssertNotNull(p1, nameof(p1));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("HelloDemo2.HelloAgain");
             scope.Start();
@@ -253,22 +201,9 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/HelloDemo2.xml" path="doc/members/member[@name='NoContentTypeAsync(string,string,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> NoContentTypeAsync(string p2, string p1, RequestContent content, RequestContext context = null)
         {
-            if (p2 == null)
-            {
-                throw new ArgumentNullException(nameof(p2));
-            }
-            if (p2.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(p2));
-            }
-            if (p1 == null)
-            {
-                throw new ArgumentNullException(nameof(p1));
-            }
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNullOrEmpty(p2, nameof(p2));
+            Argument.AssertNotNull(p1, nameof(p1));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("HelloDemo2.NoContentType");
             scope.Start();
@@ -305,22 +240,9 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/HelloDemo2.xml" path="doc/members/member[@name='NoContentType(string,string,RequestContent,RequestContext)']/*" />
         public virtual Response NoContentType(string p2, string p1, RequestContent content, RequestContext context = null)
         {
-            if (p2 == null)
-            {
-                throw new ArgumentNullException(nameof(p2));
-            }
-            if (p2.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(p2));
-            }
-            if (p1 == null)
-            {
-                throw new ArgumentNullException(nameof(p1));
-            }
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNullOrEmpty(p2, nameof(p2));
+            Argument.AssertNotNull(p1, nameof(p1));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("HelloDemo2.NoContentType");
             scope.Start();
@@ -433,10 +355,7 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/HelloDemo2.xml" path="doc/members/member[@name='CreateLiteralAsync(Thing,CancellationToken)']/*" />
         public virtual async Task<Response<Thing>> CreateLiteralAsync(Thing body, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
+            Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -451,10 +370,7 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/HelloDemo2.xml" path="doc/members/member[@name='CreateLiteral(Thing,CancellationToken)']/*" />
         public virtual Response<Thing> CreateLiteral(Thing body, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
+            Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -485,10 +401,7 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/HelloDemo2.xml" path="doc/members/member[@name='CreateLiteralAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> CreateLiteralAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("HelloDemo2.CreateLiteral");
             scope.Start();
@@ -527,10 +440,7 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/HelloDemo2.xml" path="doc/members/member[@name='CreateLiteral(RequestContent,RequestContext)']/*" />
         public virtual Response CreateLiteral(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("HelloDemo2.CreateLiteral");
             scope.Start();

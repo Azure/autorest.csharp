@@ -43,10 +43,7 @@ namespace MgmtXmlDeserialization
         /// <returns> Returns a <see cref="XmlInstanceResource"/> object. </returns>
         public static XmlInstanceResource GetXmlInstanceResource(this ArmClient client, ResourceIdentifier id)
         {
-            if (client == null)
-            {
-                throw new ArgumentNullException(nameof(client));
-            }
+            Argument.AssertNotNull(client, nameof(client));
 
             return GetMockableMgmtXmlDeserializationArmClient(client).GetXmlInstanceResource(id);
         }
@@ -63,10 +60,7 @@ namespace MgmtXmlDeserialization
         /// <returns> An object representing collection of XmlInstanceResources and their operations over a XmlInstanceResource. </returns>
         public static XmlInstanceCollection GetXmlInstances(this ResourceGroupResource resourceGroupResource)
         {
-            if (resourceGroupResource == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupResource));
-            }
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
 
             return GetMockableMgmtXmlDeserializationResourceGroupResource(resourceGroupResource).GetXmlInstances();
         }
@@ -104,10 +98,7 @@ namespace MgmtXmlDeserialization
         [ForwardsClientCalls]
         public static async Task<Response<XmlInstanceResource>> GetXmlInstanceAsync(this ResourceGroupResource resourceGroupResource, string xmlName, CancellationToken cancellationToken = default)
         {
-            if (resourceGroupResource == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupResource));
-            }
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
 
             return await GetMockableMgmtXmlDeserializationResourceGroupResource(resourceGroupResource).GetXmlInstanceAsync(xmlName, cancellationToken).ConfigureAwait(false);
         }
@@ -145,10 +136,7 @@ namespace MgmtXmlDeserialization
         [ForwardsClientCalls]
         public static Response<XmlInstanceResource> GetXmlInstance(this ResourceGroupResource resourceGroupResource, string xmlName, CancellationToken cancellationToken = default)
         {
-            if (resourceGroupResource == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupResource));
-            }
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
 
             return GetMockableMgmtXmlDeserializationResourceGroupResource(resourceGroupResource).GetXmlInstance(xmlName, cancellationToken);
         }

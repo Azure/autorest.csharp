@@ -69,10 +69,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <include file="Docs/Client4.xml" path="doc/members/member[@name='PatchAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> PatchAsync(string filter, RequestContext context)
         {
-            if (filter == null)
-            {
-                throw new ArgumentNullException(nameof(filter));
-            }
+            Argument.AssertNotNull(filter, nameof(filter));
 
             using var scope = ClientDiagnostics.CreateScope("Client4.Patch");
             scope.Start();
@@ -106,10 +103,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <include file="Docs/Client4.xml" path="doc/members/member[@name='Patch(string,RequestContext)']/*" />
         public virtual Response Patch(string filter, RequestContext context)
         {
-            if (filter == null)
-            {
-                throw new ArgumentNullException(nameof(filter));
-            }
+            Argument.AssertNotNull(filter, nameof(filter));
 
             using var scope = ClientDiagnostics.CreateScope("Client4.Patch");
             scope.Start();

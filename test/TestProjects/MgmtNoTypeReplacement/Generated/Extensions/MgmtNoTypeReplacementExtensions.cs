@@ -43,10 +43,7 @@ namespace MgmtNoTypeReplacement
         /// <returns> Returns a <see cref="NoTypeReplacementModel1Resource"/> object. </returns>
         public static NoTypeReplacementModel1Resource GetNoTypeReplacementModel1Resource(this ArmClient client, ResourceIdentifier id)
         {
-            if (client == null)
-            {
-                throw new ArgumentNullException(nameof(client));
-            }
+            Argument.AssertNotNull(client, nameof(client));
 
             return GetMockableMgmtNoTypeReplacementArmClient(client).GetNoTypeReplacementModel1Resource(id);
         }
@@ -65,10 +62,7 @@ namespace MgmtNoTypeReplacement
         /// <returns> Returns a <see cref="NoTypeReplacementModel2Resource"/> object. </returns>
         public static NoTypeReplacementModel2Resource GetNoTypeReplacementModel2Resource(this ArmClient client, ResourceIdentifier id)
         {
-            if (client == null)
-            {
-                throw new ArgumentNullException(nameof(client));
-            }
+            Argument.AssertNotNull(client, nameof(client));
 
             return GetMockableMgmtNoTypeReplacementArmClient(client).GetNoTypeReplacementModel2Resource(id);
         }
@@ -87,10 +81,7 @@ namespace MgmtNoTypeReplacement
         /// <returns> Returns a <see cref="NoTypeReplacementModel3Resource"/> object. </returns>
         public static NoTypeReplacementModel3Resource GetNoTypeReplacementModel3Resource(this ArmClient client, ResourceIdentifier id)
         {
-            if (client == null)
-            {
-                throw new ArgumentNullException(nameof(client));
-            }
+            Argument.AssertNotNull(client, nameof(client));
 
             return GetMockableMgmtNoTypeReplacementArmClient(client).GetNoTypeReplacementModel3Resource(id);
         }
@@ -107,10 +98,7 @@ namespace MgmtNoTypeReplacement
         /// <returns> An object representing collection of NoTypeReplacementModel1Resources and their operations over a NoTypeReplacementModel1Resource. </returns>
         public static NoTypeReplacementModel1Collection GetNoTypeReplacementModel1s(this ResourceGroupResource resourceGroupResource)
         {
-            if (resourceGroupResource == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupResource));
-            }
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
 
             return GetMockableMgmtNoTypeReplacementResourceGroupResource(resourceGroupResource).GetNoTypeReplacementModel1s();
         }
@@ -147,10 +135,7 @@ namespace MgmtNoTypeReplacement
         [ForwardsClientCalls]
         public static async Task<Response<NoTypeReplacementModel1Resource>> GetNoTypeReplacementModel1Async(this ResourceGroupResource resourceGroupResource, string noTypeReplacementModel1SName, CancellationToken cancellationToken = default)
         {
-            if (resourceGroupResource == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupResource));
-            }
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
 
             return await GetMockableMgmtNoTypeReplacementResourceGroupResource(resourceGroupResource).GetNoTypeReplacementModel1Async(noTypeReplacementModel1SName, cancellationToken).ConfigureAwait(false);
         }
@@ -187,10 +172,7 @@ namespace MgmtNoTypeReplacement
         [ForwardsClientCalls]
         public static Response<NoTypeReplacementModel1Resource> GetNoTypeReplacementModel1(this ResourceGroupResource resourceGroupResource, string noTypeReplacementModel1SName, CancellationToken cancellationToken = default)
         {
-            if (resourceGroupResource == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupResource));
-            }
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
 
             return GetMockableMgmtNoTypeReplacementResourceGroupResource(resourceGroupResource).GetNoTypeReplacementModel1(noTypeReplacementModel1SName, cancellationToken);
         }
@@ -207,10 +189,7 @@ namespace MgmtNoTypeReplacement
         /// <returns> An object representing collection of NoTypeReplacementModel2Resources and their operations over a NoTypeReplacementModel2Resource. </returns>
         public static NoTypeReplacementModel2Collection GetNoTypeReplacementModel2s(this ResourceGroupResource resourceGroupResource)
         {
-            if (resourceGroupResource == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupResource));
-            }
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
 
             return GetMockableMgmtNoTypeReplacementResourceGroupResource(resourceGroupResource).GetNoTypeReplacementModel2s();
         }
@@ -247,10 +226,7 @@ namespace MgmtNoTypeReplacement
         [ForwardsClientCalls]
         public static async Task<Response<NoTypeReplacementModel2Resource>> GetNoTypeReplacementModel2Async(this ResourceGroupResource resourceGroupResource, string noTypeReplacementModel2SName, CancellationToken cancellationToken = default)
         {
-            if (resourceGroupResource == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupResource));
-            }
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
 
             return await GetMockableMgmtNoTypeReplacementResourceGroupResource(resourceGroupResource).GetNoTypeReplacementModel2Async(noTypeReplacementModel2SName, cancellationToken).ConfigureAwait(false);
         }
@@ -287,10 +263,7 @@ namespace MgmtNoTypeReplacement
         [ForwardsClientCalls]
         public static Response<NoTypeReplacementModel2Resource> GetNoTypeReplacementModel2(this ResourceGroupResource resourceGroupResource, string noTypeReplacementModel2SName, CancellationToken cancellationToken = default)
         {
-            if (resourceGroupResource == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupResource));
-            }
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
 
             return GetMockableMgmtNoTypeReplacementResourceGroupResource(resourceGroupResource).GetNoTypeReplacementModel2(noTypeReplacementModel2SName, cancellationToken);
         }
@@ -307,10 +280,7 @@ namespace MgmtNoTypeReplacement
         /// <returns> An object representing collection of NoTypeReplacementModel3Resources and their operations over a NoTypeReplacementModel3Resource. </returns>
         public static NoTypeReplacementModel3Collection GetNoTypeReplacementModel3s(this ResourceGroupResource resourceGroupResource)
         {
-            if (resourceGroupResource == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupResource));
-            }
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
 
             return GetMockableMgmtNoTypeReplacementResourceGroupResource(resourceGroupResource).GetNoTypeReplacementModel3s();
         }
@@ -347,10 +317,7 @@ namespace MgmtNoTypeReplacement
         [ForwardsClientCalls]
         public static async Task<Response<NoTypeReplacementModel3Resource>> GetNoTypeReplacementModel3Async(this ResourceGroupResource resourceGroupResource, string noTypeReplacementModel3SName, CancellationToken cancellationToken = default)
         {
-            if (resourceGroupResource == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupResource));
-            }
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
 
             return await GetMockableMgmtNoTypeReplacementResourceGroupResource(resourceGroupResource).GetNoTypeReplacementModel3Async(noTypeReplacementModel3SName, cancellationToken).ConfigureAwait(false);
         }
@@ -387,10 +354,7 @@ namespace MgmtNoTypeReplacement
         [ForwardsClientCalls]
         public static Response<NoTypeReplacementModel3Resource> GetNoTypeReplacementModel3(this ResourceGroupResource resourceGroupResource, string noTypeReplacementModel3SName, CancellationToken cancellationToken = default)
         {
-            if (resourceGroupResource == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupResource));
-            }
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
 
             return GetMockableMgmtNoTypeReplacementResourceGroupResource(resourceGroupResource).GetNoTypeReplacementModel3(noTypeReplacementModel3SName, cancellationToken);
         }

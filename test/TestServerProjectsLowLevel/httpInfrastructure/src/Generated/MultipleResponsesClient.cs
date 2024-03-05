@@ -47,14 +47,8 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public MultipleResponsesClient(Uri endpoint, AzureKeyCredential credential, AutoRestHttpInfrastructureTestServiceClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(credential, nameof(credential));
             options ??= new AutoRestHttpInfrastructureTestServiceClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

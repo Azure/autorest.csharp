@@ -46,10 +46,7 @@ namespace MultipleMediaTypes
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public MultipleMediaTypesClient(Uri endpoint, MultipleMediaTypesClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new MultipleMediaTypesClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -64,10 +61,7 @@ namespace MultipleMediaTypes
         /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneBinaryBodyTwoContentTypesAsync(BinaryData,ContentType,CancellationToken)']/*" />
         public virtual async Task<Response> OneBinaryBodyTwoContentTypesAsync(BinaryData body, ContentType contentType, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
+            Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body;
@@ -82,10 +76,7 @@ namespace MultipleMediaTypes
         /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneBinaryBodyTwoContentTypes(BinaryData,ContentType,CancellationToken)']/*" />
         public virtual Response OneBinaryBodyTwoContentTypes(BinaryData body, ContentType contentType, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
+            Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body;
@@ -117,10 +108,7 @@ namespace MultipleMediaTypes
         /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneBinaryBodyTwoContentTypesAsync(RequestContent,ContentType,RequestContext)']/*" />
         public virtual async Task<Response> OneBinaryBodyTwoContentTypesAsync(RequestContent content, ContentType contentType, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("MultipleMediaTypesClient.OneBinaryBodyTwoContentTypes");
             scope.Start();
@@ -160,10 +148,7 @@ namespace MultipleMediaTypes
         /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneBinaryBodyTwoContentTypes(RequestContent,ContentType,RequestContext)']/*" />
         public virtual Response OneBinaryBodyTwoContentTypes(RequestContent content, ContentType contentType, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("MultipleMediaTypesClient.OneBinaryBodyTwoContentTypes");
             scope.Start();
@@ -187,14 +172,7 @@ namespace MultipleMediaTypes
         /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneStringBodyThreeContentTypesAsync(string,ContentType,CancellationToken)']/*" />
         public virtual async Task<Response> OneStringBodyThreeContentTypesAsync(string body, ContentType contentType, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
-            if (body.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(body));
-            }
+            Argument.AssertNotNullOrEmpty(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromObject(body);
@@ -210,14 +188,7 @@ namespace MultipleMediaTypes
         /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneStringBodyThreeContentTypes(string,ContentType,CancellationToken)']/*" />
         public virtual Response OneStringBodyThreeContentTypes(string body, ContentType contentType, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
-            if (body.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(body));
-            }
+            Argument.AssertNotNullOrEmpty(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromObject(body);
@@ -249,10 +220,7 @@ namespace MultipleMediaTypes
         /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneStringBodyThreeContentTypesAsync(RequestContent,ContentType,RequestContext)']/*" />
         public virtual async Task<Response> OneStringBodyThreeContentTypesAsync(RequestContent content, ContentType contentType, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("MultipleMediaTypesClient.OneStringBodyThreeContentTypes");
             scope.Start();
@@ -292,10 +260,7 @@ namespace MultipleMediaTypes
         /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneStringBodyThreeContentTypes(RequestContent,ContentType,RequestContext)']/*" />
         public virtual Response OneStringBodyThreeContentTypes(RequestContent content, ContentType contentType, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("MultipleMediaTypesClient.OneStringBodyThreeContentTypes");
             scope.Start();
@@ -317,10 +282,7 @@ namespace MultipleMediaTypes
         /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneModelBodyOneContentTypeAsync(Body,CancellationToken)']/*" />
         public virtual async Task<Response> OneModelBodyOneContentTypeAsync(Body body, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
+            Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -334,10 +296,7 @@ namespace MultipleMediaTypes
         /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneModelBodyOneContentType(Body,CancellationToken)']/*" />
         public virtual Response OneModelBodyOneContentType(Body body, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
+            Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -368,10 +327,7 @@ namespace MultipleMediaTypes
         /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneModelBodyOneContentTypeAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> OneModelBodyOneContentTypeAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("MultipleMediaTypesClient.OneModelBodyOneContentType");
             scope.Start();
@@ -410,10 +366,7 @@ namespace MultipleMediaTypes
         /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneModelBodyOneContentType(RequestContent,RequestContext)']/*" />
         public virtual Response OneModelBodyOneContentType(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("MultipleMediaTypesClient.OneModelBodyOneContentType");
             scope.Start();

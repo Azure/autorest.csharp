@@ -281,10 +281,7 @@ namespace MgmtSubscriptionNameParameter
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<SBSubscriptionResource>> UpdateAsync(WaitUntil waitUntil, SBSubscriptionData data, CancellationToken cancellationToken = default)
         {
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _sbSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscriptionResource.Update");
             scope.Start();
@@ -330,10 +327,7 @@ namespace MgmtSubscriptionNameParameter
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<SBSubscriptionResource> Update(WaitUntil waitUntil, SBSubscriptionData data, CancellationToken cancellationToken = default)
         {
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _sbSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscriptionResource.Update");
             scope.Start();

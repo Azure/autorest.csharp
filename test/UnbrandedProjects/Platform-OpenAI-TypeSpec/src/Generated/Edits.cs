@@ -53,10 +53,7 @@ namespace OpenAI
         [Obsolete("deprecated")]
         public virtual async Task<Result<CreateEditResponse>> CreateAsync(CreateEditRequest edit, CancellationToken cancellationToken = default)
         {
-            if (edit == null)
-            {
-                throw new ArgumentNullException(nameof(edit));
-            }
+            Argument.AssertNotNull(edit, nameof(edit));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             using RequestBody content = edit.ToRequestBody();
@@ -70,10 +67,7 @@ namespace OpenAI
         [Obsolete("deprecated")]
         public virtual Result<CreateEditResponse> Create(CreateEditRequest edit, CancellationToken cancellationToken = default)
         {
-            if (edit == null)
-            {
-                throw new ArgumentNullException(nameof(edit));
-            }
+            Argument.AssertNotNull(edit, nameof(edit));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             using RequestBody content = edit.ToRequestBody();
@@ -104,10 +98,7 @@ namespace OpenAI
         [Obsolete("deprecated")]
         public virtual async Task<Result> CreateAsync(RequestBody content, RequestOptions context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("Edits.Create");
             scope.Start();
@@ -146,10 +137,7 @@ namespace OpenAI
         [Obsolete("deprecated")]
         public virtual Result Create(RequestBody content, RequestOptions context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("Edits.Create");
             scope.Start();

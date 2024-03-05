@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using MultipleMediaTypes;
 
 namespace MultipleMediaTypes.Models
 {
@@ -50,10 +51,7 @@ namespace MultipleMediaTypes.Models
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> is null. </exception>
         public Body(string id)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
+            Argument.AssertNotNull(id, nameof(id));
 
             Id = id;
         }

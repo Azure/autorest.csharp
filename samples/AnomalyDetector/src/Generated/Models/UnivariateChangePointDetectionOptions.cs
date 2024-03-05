@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AnomalyDetector;
 
 namespace AnomalyDetector.Models
 {
@@ -58,10 +59,7 @@ namespace AnomalyDetector.Models
         /// <exception cref="ArgumentNullException"> <paramref name="series"/> is null. </exception>
         public UnivariateChangePointDetectionOptions(IEnumerable<TimeSeriesPoint> series, TimeGranularity granularity)
         {
-            if (series == null)
-            {
-                throw new ArgumentNullException(nameof(series));
-            }
+            Argument.AssertNotNull(series, nameof(series));
 
             Series = series.ToList();
             Granularity = granularity;

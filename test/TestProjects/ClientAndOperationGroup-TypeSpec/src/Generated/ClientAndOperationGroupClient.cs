@@ -45,10 +45,7 @@ namespace ClientAndOperationGroup
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public ClientAndOperationGroupClient(Uri endpoint, ClientAndOperationGroupClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new ClientAndOperationGroupClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

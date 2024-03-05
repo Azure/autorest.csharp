@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ArgumentProvider(string defaultNamespace, SourceInputModel? sourceInputModel)
             : base(defaultNamespace, sourceInputModel)
         {
-            DeclarationModifiers = TypeSignatureModifiers.Public | TypeSignatureModifiers.Static;
+            DeclarationModifiers = TypeSignatureModifiers.Internal | TypeSignatureModifiers.Static;
             _nameParamRef = new ParameterReference(_nameParam);
             _nullableT = _t.WithNullable(true);
         }

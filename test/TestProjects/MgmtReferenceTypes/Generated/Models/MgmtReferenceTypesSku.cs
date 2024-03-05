@@ -7,6 +7,7 @@
 
 using System;
 using Azure.Core;
+using MgmtReferenceTypes;
 
 namespace Azure.ResourceManager.Fake.Models
 {
@@ -20,10 +21,7 @@ namespace Azure.ResourceManager.Fake.Models
         [InitializationConstructor]
         public MgmtReferenceTypesSku(string name)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Argument.AssertNotNull(name, nameof(name));
 
             Name = name;
         }

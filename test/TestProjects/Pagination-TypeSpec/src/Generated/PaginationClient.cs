@@ -51,14 +51,8 @@ namespace Pagination
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public PaginationClient(Uri endpoint, TokenCredential credential, PaginationClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(credential, nameof(credential));
             options ??= new PaginationClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -76,10 +70,7 @@ namespace Pagination
         /// <include file="Docs/PaginationClient.xml" path="doc/members/member[@name='GetPaginationLedgerEntriesAsync(ListLedgerEntryInputBody,CancellationToken)']/*" />
         public virtual AsyncPageable<LedgerEntry> GetPaginationLedgerEntriesAsync(ListLedgerEntryInputBody bodyInput, CancellationToken cancellationToken = default)
         {
-            if (bodyInput == null)
-            {
-                throw new ArgumentNullException(nameof(bodyInput));
-            }
+            Argument.AssertNotNull(bodyInput, nameof(bodyInput));
 
             RequestContent content = bodyInput.ToRequestContent();
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
@@ -96,10 +87,7 @@ namespace Pagination
         /// <include file="Docs/PaginationClient.xml" path="doc/members/member[@name='GetPaginationLedgerEntries(ListLedgerEntryInputBody,CancellationToken)']/*" />
         public virtual Pageable<LedgerEntry> GetPaginationLedgerEntries(ListLedgerEntryInputBody bodyInput, CancellationToken cancellationToken = default)
         {
-            if (bodyInput == null)
-            {
-                throw new ArgumentNullException(nameof(bodyInput));
-            }
+            Argument.AssertNotNull(bodyInput, nameof(bodyInput));
 
             RequestContent content = bodyInput.ToRequestContent();
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
@@ -131,10 +119,7 @@ namespace Pagination
         /// <include file="Docs/PaginationClient.xml" path="doc/members/member[@name='GetPaginationLedgerEntriesAsync(RequestContent,RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetPaginationLedgerEntriesAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPaginationLedgerEntriesRequest(content, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPaginationLedgerEntriesNextPageRequest(nextLink, content, context);
@@ -164,10 +149,7 @@ namespace Pagination
         /// <include file="Docs/PaginationClient.xml" path="doc/members/member[@name='GetPaginationLedgerEntries(RequestContent,RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetPaginationLedgerEntries(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPaginationLedgerEntriesRequest(content, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPaginationLedgerEntriesNextPageRequest(nextLink, content, context);

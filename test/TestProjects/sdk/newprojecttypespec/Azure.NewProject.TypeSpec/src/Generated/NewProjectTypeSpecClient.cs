@@ -60,14 +60,8 @@ namespace Azure.NewProject.TypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public NewProjectTypeSpecClient(Uri endpoint, AzureKeyCredential credential, NewProjectTypeSpecClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(credential, nameof(credential));
             options ??= new NewProjectTypeSpecClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -83,14 +77,8 @@ namespace Azure.NewProject.TypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public NewProjectTypeSpecClient(Uri endpoint, TokenCredential credential, NewProjectTypeSpecClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(credential, nameof(credential));
             options ??= new NewProjectTypeSpecClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -271,10 +259,7 @@ namespace Azure.NewProject.TypeSpec
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='PatchActionAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PatchActionAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("NewProjectTypeSpecClient.PatchAction");
             scope.Start();
@@ -308,10 +293,7 @@ namespace Azure.NewProject.TypeSpec
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='PatchAction(RequestContent,RequestContext)']/*" />
         public virtual Response PatchAction(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("NewProjectTypeSpecClient.PatchAction");
             scope.Start();
@@ -334,10 +316,7 @@ namespace Azure.NewProject.TypeSpec
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBodyAsync(Thing,CancellationToken)']/*" />
         public virtual async Task<Response<Thing>> AnonymousBodyAsync(Thing thing, CancellationToken cancellationToken = default)
         {
-            if (thing == null)
-            {
-                throw new ArgumentNullException(nameof(thing));
-            }
+            Argument.AssertNotNull(thing, nameof(thing));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = thing.ToRequestContent();
@@ -352,10 +331,7 @@ namespace Azure.NewProject.TypeSpec
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBody(Thing,CancellationToken)']/*" />
         public virtual Response<Thing> AnonymousBody(Thing thing, CancellationToken cancellationToken = default)
         {
-            if (thing == null)
-            {
-                throw new ArgumentNullException(nameof(thing));
-            }
+            Argument.AssertNotNull(thing, nameof(thing));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = thing.ToRequestContent();
@@ -386,10 +362,7 @@ namespace Azure.NewProject.TypeSpec
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBodyAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> AnonymousBodyAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("NewProjectTypeSpecClient.AnonymousBody");
             scope.Start();
@@ -428,10 +401,7 @@ namespace Azure.NewProject.TypeSpec
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBody(RequestContent,RequestContext)']/*" />
         public virtual Response AnonymousBody(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("NewProjectTypeSpecClient.AnonymousBody");
             scope.Start();
@@ -454,10 +424,7 @@ namespace Azure.NewProject.TypeSpec
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModelAsync(Friend,CancellationToken)']/*" />
         public virtual async Task<Response<Friend>> FriendlyModelAsync(Friend friend, CancellationToken cancellationToken = default)
         {
-            if (friend == null)
-            {
-                throw new ArgumentNullException(nameof(friend));
-            }
+            Argument.AssertNotNull(friend, nameof(friend));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = friend.ToRequestContent();
@@ -472,10 +439,7 @@ namespace Azure.NewProject.TypeSpec
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModel(Friend,CancellationToken)']/*" />
         public virtual Response<Friend> FriendlyModel(Friend friend, CancellationToken cancellationToken = default)
         {
-            if (friend == null)
-            {
-                throw new ArgumentNullException(nameof(friend));
-            }
+            Argument.AssertNotNull(friend, nameof(friend));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = friend.ToRequestContent();
@@ -506,10 +470,7 @@ namespace Azure.NewProject.TypeSpec
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModelAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> FriendlyModelAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("NewProjectTypeSpecClient.FriendlyModel");
             scope.Start();
@@ -548,10 +509,7 @@ namespace Azure.NewProject.TypeSpec
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModel(RequestContent,RequestContext)']/*" />
         public virtual Response FriendlyModel(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("NewProjectTypeSpecClient.FriendlyModel");
             scope.Start();
@@ -635,10 +593,7 @@ namespace Azure.NewProject.TypeSpec
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='StringFormatAsync(Guid,ModelWithFormat,CancellationToken)']/*" />
         public virtual async Task<Response> StringFormatAsync(Guid subscriptionId, ModelWithFormat body, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
+            Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -654,10 +609,7 @@ namespace Azure.NewProject.TypeSpec
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='StringFormat(Guid,ModelWithFormat,CancellationToken)']/*" />
         public virtual Response StringFormat(Guid subscriptionId, ModelWithFormat body, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
+            Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -689,10 +641,7 @@ namespace Azure.NewProject.TypeSpec
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='StringFormatAsync(Guid,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> StringFormatAsync(Guid subscriptionId, RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("NewProjectTypeSpecClient.StringFormat");
             scope.Start();
@@ -732,10 +681,7 @@ namespace Azure.NewProject.TypeSpec
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='StringFormat(Guid,RequestContent,RequestContext)']/*" />
         public virtual Response StringFormat(Guid subscriptionId, RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("NewProjectTypeSpecClient.StringFormat");
             scope.Start();

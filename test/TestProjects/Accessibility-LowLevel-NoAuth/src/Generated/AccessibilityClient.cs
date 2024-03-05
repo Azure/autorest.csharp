@@ -37,10 +37,7 @@ namespace Accessibility_LowLevel_NoAuth
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public AccessibilityClient(Uri endpoint, AccessibilityClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new AccessibilityClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

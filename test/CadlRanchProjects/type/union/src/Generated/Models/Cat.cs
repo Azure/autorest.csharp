@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using _Type.Union;
 
 namespace _Type.Union.Models
 {
@@ -50,10 +51,7 @@ namespace _Type.Union.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public Cat(string name)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Argument.AssertNotNull(name, nameof(name));
 
             Name = name;
         }

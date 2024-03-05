@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using _Type.Union;
 
 namespace _Type.Union.Models
 {
@@ -53,22 +54,10 @@ namespace _Type.Union.Models
         /// <exception cref="ArgumentNullException"> <paramref name="stringLiteral"/>, <paramref name="intLiteral"/>, <paramref name="floatLiteral"/> or <paramref name="booleanLiteral"/> is null. </exception>
         public MixedLiteralsCases(BinaryData stringLiteral, BinaryData intLiteral, BinaryData floatLiteral, BinaryData booleanLiteral)
         {
-            if (stringLiteral == null)
-            {
-                throw new ArgumentNullException(nameof(stringLiteral));
-            }
-            if (intLiteral == null)
-            {
-                throw new ArgumentNullException(nameof(intLiteral));
-            }
-            if (floatLiteral == null)
-            {
-                throw new ArgumentNullException(nameof(floatLiteral));
-            }
-            if (booleanLiteral == null)
-            {
-                throw new ArgumentNullException(nameof(booleanLiteral));
-            }
+            Argument.AssertNotNull(stringLiteral, nameof(stringLiteral));
+            Argument.AssertNotNull(intLiteral, nameof(intLiteral));
+            Argument.AssertNotNull(floatLiteral, nameof(floatLiteral));
+            Argument.AssertNotNull(booleanLiteral, nameof(booleanLiteral));
 
             StringLiteral = stringLiteral;
             IntLiteral = intLiteral;

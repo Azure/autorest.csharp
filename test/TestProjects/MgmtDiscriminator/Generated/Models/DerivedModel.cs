@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -19,10 +20,7 @@ namespace MgmtDiscriminator.Models
         /// <exception cref="ArgumentNullException"> <paramref name="requiredCollection"/> is null. </exception>
         public DerivedModel(IEnumerable<string> requiredCollection)
         {
-            if (requiredCollection == null)
-            {
-                throw new ArgumentNullException(nameof(requiredCollection));
-            }
+            Argument.AssertNotNull(requiredCollection, nameof(requiredCollection));
 
             RequiredCollection = requiredCollection.ToList();
         }

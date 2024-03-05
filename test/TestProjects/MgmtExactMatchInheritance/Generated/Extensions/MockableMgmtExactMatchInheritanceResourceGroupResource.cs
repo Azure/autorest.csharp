@@ -210,18 +210,8 @@ namespace MgmtExactMatchInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel2SName"/> or <paramref name="exactMatchModel2"/> is null. </exception>
         public virtual async Task<Response<ExactMatchModel2>> PutExactMatchModel2Async(string exactMatchModel2SName, ExactMatchModel2 exactMatchModel2, CancellationToken cancellationToken = default)
         {
-            if (exactMatchModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(exactMatchModel2SName));
-            }
-            if (exactMatchModel2SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(exactMatchModel2SName));
-            }
-            if (exactMatchModel2 == null)
-            {
-                throw new ArgumentNullException(nameof(exactMatchModel2));
-            }
+            Argument.AssertNotNullOrEmpty(exactMatchModel2SName, nameof(exactMatchModel2SName));
+            Argument.AssertNotNull(exactMatchModel2, nameof(exactMatchModel2));
 
             using var scope = ExactMatchModel2sClientDiagnostics.CreateScope("MockableMgmtExactMatchInheritanceResourceGroupResource.PutExactMatchModel2");
             scope.Start();
@@ -260,18 +250,8 @@ namespace MgmtExactMatchInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel2SName"/> or <paramref name="exactMatchModel2"/> is null. </exception>
         public virtual Response<ExactMatchModel2> PutExactMatchModel2(string exactMatchModel2SName, ExactMatchModel2 exactMatchModel2, CancellationToken cancellationToken = default)
         {
-            if (exactMatchModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(exactMatchModel2SName));
-            }
-            if (exactMatchModel2SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(exactMatchModel2SName));
-            }
-            if (exactMatchModel2 == null)
-            {
-                throw new ArgumentNullException(nameof(exactMatchModel2));
-            }
+            Argument.AssertNotNullOrEmpty(exactMatchModel2SName, nameof(exactMatchModel2SName));
+            Argument.AssertNotNull(exactMatchModel2, nameof(exactMatchModel2));
 
             using var scope = ExactMatchModel2sClientDiagnostics.CreateScope("MockableMgmtExactMatchInheritanceResourceGroupResource.PutExactMatchModel2");
             scope.Start();
@@ -358,18 +338,8 @@ namespace MgmtExactMatchInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel3SName"/> or <paramref name="exactMatchModel3"/> is null. </exception>
         public virtual async Task<Response<ExactMatchModel3>> PutExactMatchModel3Async(string exactMatchModel3SName, ExactMatchModel3 exactMatchModel3, CancellationToken cancellationToken = default)
         {
-            if (exactMatchModel3SName == null)
-            {
-                throw new ArgumentNullException(nameof(exactMatchModel3SName));
-            }
-            if (exactMatchModel3SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(exactMatchModel3SName));
-            }
-            if (exactMatchModel3 == null)
-            {
-                throw new ArgumentNullException(nameof(exactMatchModel3));
-            }
+            Argument.AssertNotNullOrEmpty(exactMatchModel3SName, nameof(exactMatchModel3SName));
+            Argument.AssertNotNull(exactMatchModel3, nameof(exactMatchModel3));
 
             using var scope = ExactMatchModel3sClientDiagnostics.CreateScope("MockableMgmtExactMatchInheritanceResourceGroupResource.PutExactMatchModel3");
             scope.Start();
@@ -408,18 +378,8 @@ namespace MgmtExactMatchInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel3SName"/> or <paramref name="exactMatchModel3"/> is null. </exception>
         public virtual Response<ExactMatchModel3> PutExactMatchModel3(string exactMatchModel3SName, ExactMatchModel3 exactMatchModel3, CancellationToken cancellationToken = default)
         {
-            if (exactMatchModel3SName == null)
-            {
-                throw new ArgumentNullException(nameof(exactMatchModel3SName));
-            }
-            if (exactMatchModel3SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(exactMatchModel3SName));
-            }
-            if (exactMatchModel3 == null)
-            {
-                throw new ArgumentNullException(nameof(exactMatchModel3));
-            }
+            Argument.AssertNotNullOrEmpty(exactMatchModel3SName, nameof(exactMatchModel3SName));
+            Argument.AssertNotNull(exactMatchModel3, nameof(exactMatchModel3));
 
             using var scope = ExactMatchModel3sClientDiagnostics.CreateScope("MockableMgmtExactMatchInheritanceResourceGroupResource.PutExactMatchModel3");
             scope.Start();
@@ -457,14 +417,7 @@ namespace MgmtExactMatchInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel3SName"/> is null. </exception>
         public virtual async Task<Response<ExactMatchModel3>> GetExactMatchModel3Async(string exactMatchModel3SName, CancellationToken cancellationToken = default)
         {
-            if (exactMatchModel3SName == null)
-            {
-                throw new ArgumentNullException(nameof(exactMatchModel3SName));
-            }
-            if (exactMatchModel3SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(exactMatchModel3SName));
-            }
+            Argument.AssertNotNullOrEmpty(exactMatchModel3SName, nameof(exactMatchModel3SName));
 
             using var scope = ExactMatchModel3sClientDiagnostics.CreateScope("MockableMgmtExactMatchInheritanceResourceGroupResource.GetExactMatchModel3");
             scope.Start();
@@ -502,14 +455,7 @@ namespace MgmtExactMatchInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel3SName"/> is null. </exception>
         public virtual Response<ExactMatchModel3> GetExactMatchModel3(string exactMatchModel3SName, CancellationToken cancellationToken = default)
         {
-            if (exactMatchModel3SName == null)
-            {
-                throw new ArgumentNullException(nameof(exactMatchModel3SName));
-            }
-            if (exactMatchModel3SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(exactMatchModel3SName));
-            }
+            Argument.AssertNotNullOrEmpty(exactMatchModel3SName, nameof(exactMatchModel3SName));
 
             using var scope = ExactMatchModel3sClientDiagnostics.CreateScope("MockableMgmtExactMatchInheritanceResourceGroupResource.GetExactMatchModel3");
             scope.Start();
@@ -548,18 +494,8 @@ namespace MgmtExactMatchInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel4SName"/> or <paramref name="exactMatchModel4"/> is null. </exception>
         public virtual async Task<Response<ExactMatchModel4>> PutExactMatchModel4Async(string exactMatchModel4SName, ExactMatchModel4 exactMatchModel4, CancellationToken cancellationToken = default)
         {
-            if (exactMatchModel4SName == null)
-            {
-                throw new ArgumentNullException(nameof(exactMatchModel4SName));
-            }
-            if (exactMatchModel4SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(exactMatchModel4SName));
-            }
-            if (exactMatchModel4 == null)
-            {
-                throw new ArgumentNullException(nameof(exactMatchModel4));
-            }
+            Argument.AssertNotNullOrEmpty(exactMatchModel4SName, nameof(exactMatchModel4SName));
+            Argument.AssertNotNull(exactMatchModel4, nameof(exactMatchModel4));
 
             using var scope = ExactMatchModel4sClientDiagnostics.CreateScope("MockableMgmtExactMatchInheritanceResourceGroupResource.PutExactMatchModel4");
             scope.Start();
@@ -598,18 +534,8 @@ namespace MgmtExactMatchInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel4SName"/> or <paramref name="exactMatchModel4"/> is null. </exception>
         public virtual Response<ExactMatchModel4> PutExactMatchModel4(string exactMatchModel4SName, ExactMatchModel4 exactMatchModel4, CancellationToken cancellationToken = default)
         {
-            if (exactMatchModel4SName == null)
-            {
-                throw new ArgumentNullException(nameof(exactMatchModel4SName));
-            }
-            if (exactMatchModel4SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(exactMatchModel4SName));
-            }
-            if (exactMatchModel4 == null)
-            {
-                throw new ArgumentNullException(nameof(exactMatchModel4));
-            }
+            Argument.AssertNotNullOrEmpty(exactMatchModel4SName, nameof(exactMatchModel4SName));
+            Argument.AssertNotNull(exactMatchModel4, nameof(exactMatchModel4));
 
             using var scope = ExactMatchModel4sClientDiagnostics.CreateScope("MockableMgmtExactMatchInheritanceResourceGroupResource.PutExactMatchModel4");
             scope.Start();

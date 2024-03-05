@@ -199,10 +199,7 @@ namespace MgmtOmitOperationGroups
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<Model2Resource>> UpdateAsync(WaitUntil waitUntil, Model2Data data, CancellationToken cancellationToken = default)
         {
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _model2ClientDiagnostics.CreateScope("Model2Resource.Update");
             scope.Start();
@@ -247,10 +244,7 @@ namespace MgmtOmitOperationGroups
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<Model2Resource> Update(WaitUntil waitUntil, Model2Data data, CancellationToken cancellationToken = default)
         {
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _model2ClientDiagnostics.CreateScope("Model2Resource.Update");
             scope.Start();

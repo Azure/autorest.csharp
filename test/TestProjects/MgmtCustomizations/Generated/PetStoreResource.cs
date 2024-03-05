@@ -281,10 +281,7 @@ namespace MgmtCustomizations
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<PetStoreResource>> UpdateAsync(WaitUntil waitUntil, PetStoreData data, CancellationToken cancellationToken = default)
         {
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _petStoreClientDiagnostics.CreateScope("PetStoreResource.Update");
             scope.Start();
@@ -330,10 +327,7 @@ namespace MgmtCustomizations
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<PetStoreResource> Update(WaitUntil waitUntil, PetStoreData data, CancellationToken cancellationToken = default)
         {
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _petStoreClientDiagnostics.CreateScope("PetStoreResource.Update");
             scope.Start();

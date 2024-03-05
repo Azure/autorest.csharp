@@ -426,10 +426,7 @@ namespace MgmtMockAndSample.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public virtual async Task<Response<CheckNameAvailabilityResult>> CheckNameAvailabilityVaultAsync(VaultCheckNameAvailabilityContent content, CancellationToken cancellationToken = default)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = VaultClientDiagnostics.CreateScope("MockableMgmtMockAndSampleSubscriptionResource.CheckNameAvailabilityVault");
             scope.Start();
@@ -471,10 +468,7 @@ namespace MgmtMockAndSample.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public virtual Response<CheckNameAvailabilityResult> CheckNameAvailabilityVault(VaultCheckNameAvailabilityContent content, CancellationToken cancellationToken = default)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = VaultClientDiagnostics.CreateScope("MockableMgmtMockAndSampleSubscriptionResource.CheckNameAvailabilityVault");
             scope.Start();

@@ -42,10 +42,7 @@ namespace MgmtDiscriminator
         /// <returns> An object representing collection of ArtifactResources and their operations over a ArtifactResource. </returns>
         public static ArtifactCollection GetArtifacts(this ArmClient client, ResourceIdentifier scope)
         {
-            if (client == null)
-            {
-                throw new ArgumentNullException(nameof(client));
-            }
+            Argument.AssertNotNull(client, nameof(client));
 
             return GetMockableMgmtDiscriminatorArmClient(client).GetArtifacts(scope);
         }
@@ -84,10 +81,7 @@ namespace MgmtDiscriminator
         [ForwardsClientCalls]
         public static async Task<Response<ArtifactResource>> GetArtifactAsync(this ArmClient client, ResourceIdentifier scope, string artifactName, CancellationToken cancellationToken = default)
         {
-            if (client == null)
-            {
-                throw new ArgumentNullException(nameof(client));
-            }
+            Argument.AssertNotNull(client, nameof(client));
 
             return await GetMockableMgmtDiscriminatorArmClient(client).GetArtifactAsync(scope, artifactName, cancellationToken).ConfigureAwait(false);
         }
@@ -126,10 +120,7 @@ namespace MgmtDiscriminator
         [ForwardsClientCalls]
         public static Response<ArtifactResource> GetArtifact(this ArmClient client, ResourceIdentifier scope, string artifactName, CancellationToken cancellationToken = default)
         {
-            if (client == null)
-            {
-                throw new ArgumentNullException(nameof(client));
-            }
+            Argument.AssertNotNull(client, nameof(client));
 
             return GetMockableMgmtDiscriminatorArmClient(client).GetArtifact(scope, artifactName, cancellationToken);
         }
@@ -148,10 +139,7 @@ namespace MgmtDiscriminator
         /// <returns> Returns a <see cref="DeliveryRuleResource"/> object. </returns>
         public static DeliveryRuleResource GetDeliveryRuleResource(this ArmClient client, ResourceIdentifier id)
         {
-            if (client == null)
-            {
-                throw new ArgumentNullException(nameof(client));
-            }
+            Argument.AssertNotNull(client, nameof(client));
 
             return GetMockableMgmtDiscriminatorArmClient(client).GetDeliveryRuleResource(id);
         }
@@ -170,10 +158,7 @@ namespace MgmtDiscriminator
         /// <returns> Returns a <see cref="ArtifactResource"/> object. </returns>
         public static ArtifactResource GetArtifactResource(this ArmClient client, ResourceIdentifier id)
         {
-            if (client == null)
-            {
-                throw new ArgumentNullException(nameof(client));
-            }
+            Argument.AssertNotNull(client, nameof(client));
 
             return GetMockableMgmtDiscriminatorArmClient(client).GetArtifactResource(id);
         }
@@ -190,10 +175,7 @@ namespace MgmtDiscriminator
         /// <returns> An object representing collection of DeliveryRuleResources and their operations over a DeliveryRuleResource. </returns>
         public static DeliveryRuleCollection GetDeliveryRules(this ResourceGroupResource resourceGroupResource)
         {
-            if (resourceGroupResource == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupResource));
-            }
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
 
             return GetMockableMgmtDiscriminatorResourceGroupResource(resourceGroupResource).GetDeliveryRules();
         }
@@ -231,10 +213,7 @@ namespace MgmtDiscriminator
         [ForwardsClientCalls]
         public static async Task<Response<DeliveryRuleResource>> GetDeliveryRuleAsync(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            if (resourceGroupResource == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupResource));
-            }
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
 
             return await GetMockableMgmtDiscriminatorResourceGroupResource(resourceGroupResource).GetDeliveryRuleAsync(name, cancellationToken).ConfigureAwait(false);
         }
@@ -272,10 +251,7 @@ namespace MgmtDiscriminator
         [ForwardsClientCalls]
         public static Response<DeliveryRuleResource> GetDeliveryRule(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            if (resourceGroupResource == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupResource));
-            }
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
 
             return GetMockableMgmtDiscriminatorResourceGroupResource(resourceGroupResource).GetDeliveryRule(name, cancellationToken);
         }

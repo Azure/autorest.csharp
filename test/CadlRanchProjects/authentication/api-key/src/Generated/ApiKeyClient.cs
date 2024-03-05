@@ -47,14 +47,8 @@ namespace Authentication.ApiKey
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public ApiKeyClient(Uri endpoint, AzureKeyCredential credential, ApiKeyClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(credential, nameof(credential));
             options ??= new ApiKeyClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

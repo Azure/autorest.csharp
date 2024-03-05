@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using Azure.Core;
+using _Type.Property.AdditionalProperties;
 
 namespace _Type.Property.AdditionalProperties.Models
 {
@@ -23,10 +24,7 @@ namespace _Type.Property.AdditionalProperties.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         protected ExtendsUnknownAdditionalPropertiesDiscriminated(string name)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Argument.AssertNotNull(name, nameof(name));
 
             Name = name;
             AdditionalProperties = new ChangeTrackingDictionary<string, BinaryData>();

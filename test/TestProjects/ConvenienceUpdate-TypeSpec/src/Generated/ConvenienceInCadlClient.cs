@@ -140,10 +140,7 @@ namespace ConvenienceInCadl
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalBeforeRequiredAsync(Model,int?,CancellationToken)']/*" />
         public virtual async Task<Response> ConvenienceOptionalBeforeRequiredAsync(Model required, int? optional = null, CancellationToken cancellationToken = default)
         {
-            if (required == null)
-            {
-                throw new ArgumentNullException(nameof(required));
-            }
+            Argument.AssertNotNull(required, nameof(required));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = required.ToRequestContent();
@@ -159,10 +156,7 @@ namespace ConvenienceInCadl
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalBeforeRequired(Model,int?,CancellationToken)']/*" />
         public virtual Response ConvenienceOptionalBeforeRequired(Model required, int? optional = null, CancellationToken cancellationToken = default)
         {
-            if (required == null)
-            {
-                throw new ArgumentNullException(nameof(required));
-            }
+            Argument.AssertNotNull(required, nameof(required));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = required.ToRequestContent();
@@ -194,10 +188,7 @@ namespace ConvenienceInCadl
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalBeforeRequiredAsync(RequestContent,int?,RequestContext)']/*" />
         public virtual async Task<Response> ConvenienceOptionalBeforeRequiredAsync(RequestContent content, int? optional = null, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceOptionalBeforeRequired");
             scope.Start();
@@ -237,10 +228,7 @@ namespace ConvenienceInCadl
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalBeforeRequired(RequestContent,int?,RequestContext)']/*" />
         public virtual Response ConvenienceOptionalBeforeRequired(RequestContent content, int? optional = null, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceOptionalBeforeRequired");
             scope.Start();
@@ -334,10 +322,7 @@ namespace ConvenienceInCadl
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='NoConvenienceRequiredBodyAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> NoConvenienceRequiredBodyAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.NoConvenienceRequiredBody");
             scope.Start();
@@ -371,10 +356,7 @@ namespace ConvenienceInCadl
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='NoConvenienceRequiredBody(RequestContent,RequestContext)']/*" />
         public virtual Response NoConvenienceRequiredBody(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.NoConvenienceRequiredBody");
             scope.Start();
@@ -1217,10 +1199,7 @@ namespace ConvenienceInCadl
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolRequiredModelAsync(Model,CancellationToken)']/*" />
         public virtual async Task<Response> ProtocolRequiredModelAsync(Model required, CancellationToken cancellationToken = default)
         {
-            if (required == null)
-            {
-                throw new ArgumentNullException(nameof(required));
-            }
+            Argument.AssertNotNull(required, nameof(required));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = required.ToRequestContent();
@@ -1235,10 +1214,7 @@ namespace ConvenienceInCadl
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolRequiredModel(Model,CancellationToken)']/*" />
         public virtual Response ProtocolRequiredModel(Model required, CancellationToken cancellationToken = default)
         {
-            if (required == null)
-            {
-                throw new ArgumentNullException(nameof(required));
-            }
+            Argument.AssertNotNull(required, nameof(required));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = required.ToRequestContent();
@@ -1269,10 +1245,7 @@ namespace ConvenienceInCadl
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolRequiredModelAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> ProtocolRequiredModelAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ProtocolRequiredModel");
             scope.Start();
@@ -1311,10 +1284,7 @@ namespace ConvenienceInCadl
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolRequiredModel(RequestContent,RequestContext)']/*" />
         public virtual Response ProtocolRequiredModel(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ProtocolRequiredModel");
             scope.Start();
@@ -1849,10 +1819,7 @@ namespace ConvenienceInCadl
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceRequiredModelWithOptionalAsync(Model,CancellationToken)']/*" />
         public virtual async Task<Response> ConvenienceRequiredModelWithOptionalAsync(Model required, CancellationToken cancellationToken = default)
         {
-            if (required == null)
-            {
-                throw new ArgumentNullException(nameof(required));
-            }
+            Argument.AssertNotNull(required, nameof(required));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = required.ToRequestContent();
@@ -1867,10 +1834,7 @@ namespace ConvenienceInCadl
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceRequiredModelWithOptional(Model,CancellationToken)']/*" />
         public virtual Response ConvenienceRequiredModelWithOptional(Model required, CancellationToken cancellationToken = default)
         {
-            if (required == null)
-            {
-                throw new ArgumentNullException(nameof(required));
-            }
+            Argument.AssertNotNull(required, nameof(required));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = required.ToRequestContent();
@@ -1901,10 +1865,7 @@ namespace ConvenienceInCadl
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceRequiredModelWithOptionalAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> ConvenienceRequiredModelWithOptionalAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceRequiredModelWithOptional");
             scope.Start();
@@ -1943,10 +1904,7 @@ namespace ConvenienceInCadl
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceRequiredModelWithOptional(RequestContent,RequestContext)']/*" />
         public virtual Response ConvenienceRequiredModelWithOptional(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceRequiredModelWithOptional");
             scope.Start();
@@ -2066,10 +2024,7 @@ namespace ConvenienceInCadl
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalBeforeRequiredAsync(Model,int?,CancellationToken)']/*" />
         public virtual async Task<Response> ProtocolOptionalBeforeRequiredAsync(Model required, int? optional = null, CancellationToken cancellationToken = default)
         {
-            if (required == null)
-            {
-                throw new ArgumentNullException(nameof(required));
-            }
+            Argument.AssertNotNull(required, nameof(required));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = required.ToRequestContent();
@@ -2085,10 +2040,7 @@ namespace ConvenienceInCadl
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalBeforeRequired(Model,int?,CancellationToken)']/*" />
         public virtual Response ProtocolOptionalBeforeRequired(Model required, int? optional = null, CancellationToken cancellationToken = default)
         {
-            if (required == null)
-            {
-                throw new ArgumentNullException(nameof(required));
-            }
+            Argument.AssertNotNull(required, nameof(required));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = required.ToRequestContent();
@@ -2120,10 +2072,7 @@ namespace ConvenienceInCadl
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalBeforeRequiredAsync(RequestContent,int?,RequestContext)']/*" />
         public virtual async Task<Response> ProtocolOptionalBeforeRequiredAsync(RequestContent content, int? optional = null, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ProtocolOptionalBeforeRequired");
             scope.Start();
@@ -2163,10 +2112,7 @@ namespace ConvenienceInCadl
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalBeforeRequired(RequestContent,int?,RequestContext)']/*" />
         public virtual Response ProtocolOptionalBeforeRequired(RequestContent content, int? optional = null, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ProtocolOptionalBeforeRequired");
             scope.Start();

@@ -117,10 +117,7 @@ namespace paging
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual AsyncPageable<Product> GetSinglePagesWithBodyParamsAsync(BodyParam parameters, CancellationToken cancellationToken = default)
         {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetSinglePagesWithBodyParamsRequest(parameters);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateGetSinglePagesWithBodyParamsNextPageRequest(nextLink, parameters);
@@ -133,10 +130,7 @@ namespace paging
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual Pageable<Product> GetSinglePagesWithBodyParams(BodyParam parameters, CancellationToken cancellationToken = default)
         {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetSinglePagesWithBodyParamsRequest(parameters);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateGetSinglePagesWithBodyParamsNextPageRequest(nextLink, parameters);
@@ -283,10 +277,7 @@ namespace paging
         /// <exception cref="ArgumentNullException"> <paramref name="pagingGetMultiplePagesWithOffsetOptions"/> is null. </exception>
         public virtual AsyncPageable<Product> GetMultiplePagesWithOffsetAsync(PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, CancellationToken cancellationToken = default)
         {
-            if (pagingGetMultiplePagesWithOffsetOptions == null)
-            {
-                throw new ArgumentNullException(nameof(pagingGetMultiplePagesWithOffsetOptions));
-            }
+            Argument.AssertNotNull(pagingGetMultiplePagesWithOffsetOptions, nameof(pagingGetMultiplePagesWithOffsetOptions));
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetMultiplePagesWithOffsetRequest(pagingGetMultiplePagesWithOffsetOptions);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateGetMultiplePagesWithOffsetNextPageRequest(nextLink, pagingGetMultiplePagesWithOffsetOptions);
@@ -299,10 +290,7 @@ namespace paging
         /// <exception cref="ArgumentNullException"> <paramref name="pagingGetMultiplePagesWithOffsetOptions"/> is null. </exception>
         public virtual Pageable<Product> GetMultiplePagesWithOffset(PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, CancellationToken cancellationToken = default)
         {
-            if (pagingGetMultiplePagesWithOffsetOptions == null)
-            {
-                throw new ArgumentNullException(nameof(pagingGetMultiplePagesWithOffsetOptions));
-            }
+            Argument.AssertNotNull(pagingGetMultiplePagesWithOffsetOptions, nameof(pagingGetMultiplePagesWithOffsetOptions));
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetMultiplePagesWithOffsetRequest(pagingGetMultiplePagesWithOffsetOptions);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateGetMultiplePagesWithOffsetNextPageRequest(nextLink, pagingGetMultiplePagesWithOffsetOptions);
@@ -406,18 +394,8 @@ namespace paging
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> or <paramref name="tenant"/> is null. </exception>
         public virtual AsyncPageable<Product> GetMultiplePagesFragmentNextLinkAsync(string apiVersion, string tenant, CancellationToken cancellationToken = default)
         {
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
-            if (tenant == null)
-            {
-                throw new ArgumentNullException(nameof(tenant));
-            }
-            if (tenant.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(tenant));
-            }
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+            Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetMultiplePagesFragmentNextLinkRequest(apiVersion, tenant);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateNextFragmentRequest(apiVersion, tenant, nextLink);
@@ -431,18 +409,8 @@ namespace paging
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> or <paramref name="tenant"/> is null. </exception>
         public virtual Pageable<Product> GetMultiplePagesFragmentNextLink(string apiVersion, string tenant, CancellationToken cancellationToken = default)
         {
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
-            if (tenant == null)
-            {
-                throw new ArgumentNullException(nameof(tenant));
-            }
-            if (tenant.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(tenant));
-            }
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+            Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetMultiplePagesFragmentNextLinkRequest(apiVersion, tenant);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateNextFragmentRequest(apiVersion, tenant, nextLink);
@@ -455,10 +423,7 @@ namespace paging
         /// <exception cref="ArgumentNullException"> <paramref name="customParameterGroup"/> is null. </exception>
         public virtual AsyncPageable<Product> GetMultiplePagesFragmentWithGroupingNextLinkAsync(CustomParameterGroup customParameterGroup, CancellationToken cancellationToken = default)
         {
-            if (customParameterGroup == null)
-            {
-                throw new ArgumentNullException(nameof(customParameterGroup));
-            }
+            Argument.AssertNotNull(customParameterGroup, nameof(customParameterGroup));
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetMultiplePagesFragmentWithGroupingNextLinkRequest(customParameterGroup);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateNextFragmentWithGroupingRequest(nextLink, customParameterGroup);
@@ -471,10 +436,7 @@ namespace paging
         /// <exception cref="ArgumentNullException"> <paramref name="customParameterGroup"/> is null. </exception>
         public virtual Pageable<Product> GetMultiplePagesFragmentWithGroupingNextLink(CustomParameterGroup customParameterGroup, CancellationToken cancellationToken = default)
         {
-            if (customParameterGroup == null)
-            {
-                throw new ArgumentNullException(nameof(customParameterGroup));
-            }
+            Argument.AssertNotNull(customParameterGroup, nameof(customParameterGroup));
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetMultiplePagesFragmentWithGroupingNextLinkRequest(customParameterGroup);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateNextFragmentWithGroupingRequest(nextLink, customParameterGroup);
@@ -525,22 +487,9 @@ namespace paging
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/>, <paramref name="tenant"/> or <paramref name="nextLink"/> is null. </exception>
         public virtual AsyncPageable<Product> NextFragmentAsync(string apiVersion, string tenant, string nextLink, CancellationToken cancellationToken = default)
         {
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
-            if (tenant == null)
-            {
-                throw new ArgumentNullException(nameof(tenant));
-            }
-            if (tenant.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(tenant));
-            }
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+            Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
+            Argument.AssertNotNull(nextLink, nameof(nextLink));
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateNextFragmentRequest(apiVersion, tenant, nextLink);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateNextFragmentRequest(apiVersion, tenant, nextLink);
@@ -555,22 +504,9 @@ namespace paging
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/>, <paramref name="tenant"/> or <paramref name="nextLink"/> is null. </exception>
         public virtual Pageable<Product> NextFragment(string apiVersion, string tenant, string nextLink, CancellationToken cancellationToken = default)
         {
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
-            if (tenant == null)
-            {
-                throw new ArgumentNullException(nameof(tenant));
-            }
-            if (tenant.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(tenant));
-            }
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+            Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
+            Argument.AssertNotNull(nextLink, nameof(nextLink));
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateNextFragmentRequest(apiVersion, tenant, nextLink);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateNextFragmentRequest(apiVersion, tenant, nextLink);
@@ -584,14 +520,8 @@ namespace paging
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="customParameterGroup"/> is null. </exception>
         public virtual AsyncPageable<Product> NextFragmentWithGroupingAsync(string nextLink, CustomParameterGroup customParameterGroup, CancellationToken cancellationToken = default)
         {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-            if (customParameterGroup == null)
-            {
-                throw new ArgumentNullException(nameof(customParameterGroup));
-            }
+            Argument.AssertNotNull(nextLink, nameof(nextLink));
+            Argument.AssertNotNull(customParameterGroup, nameof(customParameterGroup));
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateNextFragmentWithGroupingRequest(nextLink, customParameterGroup);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateNextFragmentWithGroupingRequest(nextLink, customParameterGroup);
@@ -605,14 +535,8 @@ namespace paging
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="customParameterGroup"/> is null. </exception>
         public virtual Pageable<Product> NextFragmentWithGrouping(string nextLink, CustomParameterGroup customParameterGroup, CancellationToken cancellationToken = default)
         {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-            if (customParameterGroup == null)
-            {
-                throw new ArgumentNullException(nameof(customParameterGroup));
-            }
+            Argument.AssertNotNull(nextLink, nameof(nextLink));
+            Argument.AssertNotNull(customParameterGroup, nameof(customParameterGroup));
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateNextFragmentWithGroupingRequest(nextLink, customParameterGroup);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateNextFragmentWithGroupingRequest(nextLink, customParameterGroup);

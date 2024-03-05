@@ -82,18 +82,8 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="guestConfigurationAssignmentName"/> or <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<GuestConfigurationAssignmentResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string guestConfigurationAssignmentName, GuestConfigurationAssignmentData data, CancellationToken cancellationToken = default)
         {
-            if (guestConfigurationAssignmentName == null)
-            {
-                throw new ArgumentNullException(nameof(guestConfigurationAssignmentName));
-            }
-            if (guestConfigurationAssignmentName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(guestConfigurationAssignmentName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(guestConfigurationAssignmentName, nameof(guestConfigurationAssignmentName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _guestConfigurationAssignmentClientDiagnostics.CreateScope("GuestConfigurationAssignmentCollection.CreateOrUpdate");
             scope.Start();
@@ -141,18 +131,8 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="guestConfigurationAssignmentName"/> or <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<GuestConfigurationAssignmentResource> CreateOrUpdate(WaitUntil waitUntil, string guestConfigurationAssignmentName, GuestConfigurationAssignmentData data, CancellationToken cancellationToken = default)
         {
-            if (guestConfigurationAssignmentName == null)
-            {
-                throw new ArgumentNullException(nameof(guestConfigurationAssignmentName));
-            }
-            if (guestConfigurationAssignmentName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(guestConfigurationAssignmentName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(guestConfigurationAssignmentName, nameof(guestConfigurationAssignmentName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _guestConfigurationAssignmentClientDiagnostics.CreateScope("GuestConfigurationAssignmentCollection.CreateOrUpdate");
             scope.Start();
@@ -198,14 +178,7 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="guestConfigurationAssignmentName"/> is null. </exception>
         public virtual async Task<Response<GuestConfigurationAssignmentResource>> GetAsync(string guestConfigurationAssignmentName, CancellationToken cancellationToken = default)
         {
-            if (guestConfigurationAssignmentName == null)
-            {
-                throw new ArgumentNullException(nameof(guestConfigurationAssignmentName));
-            }
-            if (guestConfigurationAssignmentName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(guestConfigurationAssignmentName));
-            }
+            Argument.AssertNotNullOrEmpty(guestConfigurationAssignmentName, nameof(guestConfigurationAssignmentName));
 
             using var scope = _guestConfigurationAssignmentClientDiagnostics.CreateScope("GuestConfigurationAssignmentCollection.Get");
             scope.Start();
@@ -250,14 +223,7 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="guestConfigurationAssignmentName"/> is null. </exception>
         public virtual Response<GuestConfigurationAssignmentResource> Get(string guestConfigurationAssignmentName, CancellationToken cancellationToken = default)
         {
-            if (guestConfigurationAssignmentName == null)
-            {
-                throw new ArgumentNullException(nameof(guestConfigurationAssignmentName));
-            }
-            if (guestConfigurationAssignmentName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(guestConfigurationAssignmentName));
-            }
+            Argument.AssertNotNullOrEmpty(guestConfigurationAssignmentName, nameof(guestConfigurationAssignmentName));
 
             using var scope = _guestConfigurationAssignmentClientDiagnostics.CreateScope("GuestConfigurationAssignmentCollection.Get");
             scope.Start();
@@ -360,14 +326,7 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="guestConfigurationAssignmentName"/> is null. </exception>
         public virtual async Task<Response<bool>> ExistsAsync(string guestConfigurationAssignmentName, CancellationToken cancellationToken = default)
         {
-            if (guestConfigurationAssignmentName == null)
-            {
-                throw new ArgumentNullException(nameof(guestConfigurationAssignmentName));
-            }
-            if (guestConfigurationAssignmentName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(guestConfigurationAssignmentName));
-            }
+            Argument.AssertNotNullOrEmpty(guestConfigurationAssignmentName, nameof(guestConfigurationAssignmentName));
 
             using var scope = _guestConfigurationAssignmentClientDiagnostics.CreateScope("GuestConfigurationAssignmentCollection.Exists");
             scope.Start();
@@ -410,14 +369,7 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="guestConfigurationAssignmentName"/> is null. </exception>
         public virtual Response<bool> Exists(string guestConfigurationAssignmentName, CancellationToken cancellationToken = default)
         {
-            if (guestConfigurationAssignmentName == null)
-            {
-                throw new ArgumentNullException(nameof(guestConfigurationAssignmentName));
-            }
-            if (guestConfigurationAssignmentName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(guestConfigurationAssignmentName));
-            }
+            Argument.AssertNotNullOrEmpty(guestConfigurationAssignmentName, nameof(guestConfigurationAssignmentName));
 
             using var scope = _guestConfigurationAssignmentClientDiagnostics.CreateScope("GuestConfigurationAssignmentCollection.Exists");
             scope.Start();
@@ -460,14 +412,7 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="guestConfigurationAssignmentName"/> is null. </exception>
         public virtual async Task<NullableResponse<GuestConfigurationAssignmentResource>> GetIfExistsAsync(string guestConfigurationAssignmentName, CancellationToken cancellationToken = default)
         {
-            if (guestConfigurationAssignmentName == null)
-            {
-                throw new ArgumentNullException(nameof(guestConfigurationAssignmentName));
-            }
-            if (guestConfigurationAssignmentName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(guestConfigurationAssignmentName));
-            }
+            Argument.AssertNotNullOrEmpty(guestConfigurationAssignmentName, nameof(guestConfigurationAssignmentName));
 
             using var scope = _guestConfigurationAssignmentClientDiagnostics.CreateScope("GuestConfigurationAssignmentCollection.GetIfExists");
             scope.Start();
@@ -512,14 +457,7 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="guestConfigurationAssignmentName"/> is null. </exception>
         public virtual NullableResponse<GuestConfigurationAssignmentResource> GetIfExists(string guestConfigurationAssignmentName, CancellationToken cancellationToken = default)
         {
-            if (guestConfigurationAssignmentName == null)
-            {
-                throw new ArgumentNullException(nameof(guestConfigurationAssignmentName));
-            }
-            if (guestConfigurationAssignmentName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(guestConfigurationAssignmentName));
-            }
+            Argument.AssertNotNullOrEmpty(guestConfigurationAssignmentName, nameof(guestConfigurationAssignmentName));
 
             using var scope = _guestConfigurationAssignmentClientDiagnostics.CreateScope("GuestConfigurationAssignmentCollection.GetIfExists");
             scope.Start();

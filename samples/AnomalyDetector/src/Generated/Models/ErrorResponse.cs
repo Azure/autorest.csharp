@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using AnomalyDetector;
 
 namespace AnomalyDetector.Models
 {
@@ -51,14 +52,8 @@ namespace AnomalyDetector.Models
         /// <exception cref="ArgumentNullException"> <paramref name="code"/> or <paramref name="message"/> is null. </exception>
         public ErrorResponse(string code, string message)
         {
-            if (code == null)
-            {
-                throw new ArgumentNullException(nameof(code));
-            }
-            if (message == null)
-            {
-                throw new ArgumentNullException(nameof(message));
-            }
+            Argument.AssertNotNull(code, nameof(code));
+            Argument.AssertNotNull(message, nameof(message));
 
             Code = code;
             Message = message;

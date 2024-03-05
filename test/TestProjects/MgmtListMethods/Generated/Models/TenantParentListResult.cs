@@ -20,10 +20,7 @@ namespace MgmtListMethods.Models
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal TenantParentListResult(IEnumerable<TenantParentData> value)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(value, nameof(value));
 
             Value = value.ToList();
         }

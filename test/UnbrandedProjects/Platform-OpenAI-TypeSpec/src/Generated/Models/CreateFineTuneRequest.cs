@@ -59,10 +59,7 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="trainingFile"/> is null. </exception>
         public CreateFineTuneRequest(string trainingFile)
         {
-            if (trainingFile == null)
-            {
-                throw new ArgumentNullException(nameof(trainingFile));
-            }
+            Argument.AssertNotNull(trainingFile, nameof(trainingFile));
 
             TrainingFile = trainingFile;
             ClassificationBetas = new ChangeTrackingList<double>();

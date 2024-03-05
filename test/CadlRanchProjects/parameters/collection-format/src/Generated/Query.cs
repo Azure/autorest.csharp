@@ -62,10 +62,7 @@ namespace Parameters.CollectionFormat
         /// <include file="Docs/Query.xml" path="doc/members/member[@name='MultiAsync(IEnumerable{string},RequestContext)']/*" />
         public virtual async Task<Response> MultiAsync(IEnumerable<string> colors, RequestContext context = null)
         {
-            if (colors == null)
-            {
-                throw new ArgumentNullException(nameof(colors));
-            }
+            Argument.AssertNotNull(colors, nameof(colors));
 
             using var scope = ClientDiagnostics.CreateScope("Query.Multi");
             scope.Start();
@@ -100,10 +97,7 @@ namespace Parameters.CollectionFormat
         /// <include file="Docs/Query.xml" path="doc/members/member[@name='Multi(IEnumerable{string},RequestContext)']/*" />
         public virtual Response Multi(IEnumerable<string> colors, RequestContext context = null)
         {
-            if (colors == null)
-            {
-                throw new ArgumentNullException(nameof(colors));
-            }
+            Argument.AssertNotNull(colors, nameof(colors));
 
             using var scope = ClientDiagnostics.CreateScope("Query.Multi");
             scope.Start();
@@ -138,10 +132,7 @@ namespace Parameters.CollectionFormat
         /// <include file="Docs/Query.xml" path="doc/members/member[@name='SsvAsync(IEnumerable{string},RequestContext)']/*" />
         public virtual async Task<Response> SsvAsync(IEnumerable<string> colors, RequestContext context = null)
         {
-            if (colors == null)
-            {
-                throw new ArgumentNullException(nameof(colors));
-            }
+            Argument.AssertNotNull(colors, nameof(colors));
 
             using var scope = ClientDiagnostics.CreateScope("Query.Ssv");
             scope.Start();
@@ -176,10 +167,7 @@ namespace Parameters.CollectionFormat
         /// <include file="Docs/Query.xml" path="doc/members/member[@name='Ssv(IEnumerable{string},RequestContext)']/*" />
         public virtual Response Ssv(IEnumerable<string> colors, RequestContext context = null)
         {
-            if (colors == null)
-            {
-                throw new ArgumentNullException(nameof(colors));
-            }
+            Argument.AssertNotNull(colors, nameof(colors));
 
             using var scope = ClientDiagnostics.CreateScope("Query.Ssv");
             scope.Start();
@@ -214,10 +202,7 @@ namespace Parameters.CollectionFormat
         /// <include file="Docs/Query.xml" path="doc/members/member[@name='TsvAsync(IEnumerable{string},RequestContext)']/*" />
         public virtual async Task<Response> TsvAsync(IEnumerable<string> colors, RequestContext context = null)
         {
-            if (colors == null)
-            {
-                throw new ArgumentNullException(nameof(colors));
-            }
+            Argument.AssertNotNull(colors, nameof(colors));
 
             using var scope = ClientDiagnostics.CreateScope("Query.Tsv");
             scope.Start();
@@ -252,10 +237,7 @@ namespace Parameters.CollectionFormat
         /// <include file="Docs/Query.xml" path="doc/members/member[@name='Tsv(IEnumerable{string},RequestContext)']/*" />
         public virtual Response Tsv(IEnumerable<string> colors, RequestContext context = null)
         {
-            if (colors == null)
-            {
-                throw new ArgumentNullException(nameof(colors));
-            }
+            Argument.AssertNotNull(colors, nameof(colors));
 
             using var scope = ClientDiagnostics.CreateScope("Query.Tsv");
             scope.Start();
@@ -290,10 +272,7 @@ namespace Parameters.CollectionFormat
         /// <include file="Docs/Query.xml" path="doc/members/member[@name='PipesAsync(IEnumerable{string},RequestContext)']/*" />
         public virtual async Task<Response> PipesAsync(IEnumerable<string> colors, RequestContext context = null)
         {
-            if (colors == null)
-            {
-                throw new ArgumentNullException(nameof(colors));
-            }
+            Argument.AssertNotNull(colors, nameof(colors));
 
             using var scope = ClientDiagnostics.CreateScope("Query.Pipes");
             scope.Start();
@@ -328,10 +307,7 @@ namespace Parameters.CollectionFormat
         /// <include file="Docs/Query.xml" path="doc/members/member[@name='Pipes(IEnumerable{string},RequestContext)']/*" />
         public virtual Response Pipes(IEnumerable<string> colors, RequestContext context = null)
         {
-            if (colors == null)
-            {
-                throw new ArgumentNullException(nameof(colors));
-            }
+            Argument.AssertNotNull(colors, nameof(colors));
 
             using var scope = ClientDiagnostics.CreateScope("Query.Pipes");
             scope.Start();
@@ -366,10 +342,7 @@ namespace Parameters.CollectionFormat
         /// <include file="Docs/Query.xml" path="doc/members/member[@name='CsvAsync(IEnumerable{string},RequestContext)']/*" />
         public virtual async Task<Response> CsvAsync(IEnumerable<string> colors, RequestContext context = null)
         {
-            if (colors == null)
-            {
-                throw new ArgumentNullException(nameof(colors));
-            }
+            Argument.AssertNotNull(colors, nameof(colors));
 
             using var scope = ClientDiagnostics.CreateScope("Query.Csv");
             scope.Start();
@@ -404,10 +377,7 @@ namespace Parameters.CollectionFormat
         /// <include file="Docs/Query.xml" path="doc/members/member[@name='Csv(IEnumerable{string},RequestContext)']/*" />
         public virtual Response Csv(IEnumerable<string> colors, RequestContext context = null)
         {
-            if (colors == null)
-            {
-                throw new ArgumentNullException(nameof(colors));
-            }
+            Argument.AssertNotNull(colors, nameof(colors));
 
             using var scope = ClientDiagnostics.CreateScope("Query.Csv");
             scope.Start();

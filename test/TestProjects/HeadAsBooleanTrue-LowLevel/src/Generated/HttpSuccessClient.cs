@@ -47,14 +47,8 @@ namespace HeadAsBooleanTrue_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public HttpSuccessClient(Uri endpoint, AzureKeyCredential credential, HttpSuccessClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(credential, nameof(credential));
             options ??= new HttpSuccessClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

@@ -55,18 +55,9 @@ namespace ModelsTypeSpec.Models
         /// <exception cref="ArgumentNullException"> <paramref name="optionalReadOnlyIntRecord"/>, <paramref name="optionalReadOnlyStringRecord"/> or <paramref name="requiredCollectionWithNullableIntElement"/> is null. </exception>
         internal RoundTripReadOnlyModel(IReadOnlyDictionary<string, int> optionalReadOnlyIntRecord, IReadOnlyDictionary<string, string> optionalReadOnlyStringRecord, IEnumerable<int?> requiredCollectionWithNullableIntElement)
         {
-            if (optionalReadOnlyIntRecord == null)
-            {
-                throw new ArgumentNullException(nameof(optionalReadOnlyIntRecord));
-            }
-            if (optionalReadOnlyStringRecord == null)
-            {
-                throw new ArgumentNullException(nameof(optionalReadOnlyStringRecord));
-            }
-            if (requiredCollectionWithNullableIntElement == null)
-            {
-                throw new ArgumentNullException(nameof(requiredCollectionWithNullableIntElement));
-            }
+            Argument.AssertNotNull(optionalReadOnlyIntRecord, nameof(optionalReadOnlyIntRecord));
+            Argument.AssertNotNull(optionalReadOnlyStringRecord, nameof(optionalReadOnlyStringRecord));
+            Argument.AssertNotNull(requiredCollectionWithNullableIntElement, nameof(requiredCollectionWithNullableIntElement));
 
             RequiredReadonlyStringList = new ChangeTrackingList<string>();
             RequiredReadonlyIntList = new ChangeTrackingList<int>();

@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using _Type.Union;
 
 namespace _Type.Union.Models
 {
@@ -53,22 +54,10 @@ namespace _Type.Union.Models
         /// <exception cref="ArgumentNullException"> <paramref name="model"/>, <paramref name="literal"/>, <paramref name="int"/> or <paramref name="boolean"/> is null. </exception>
         public MixedTypesCases(BinaryData model, BinaryData literal, BinaryData @int, BinaryData boolean)
         {
-            if (model == null)
-            {
-                throw new ArgumentNullException(nameof(model));
-            }
-            if (literal == null)
-            {
-                throw new ArgumentNullException(nameof(literal));
-            }
-            if (@int == null)
-            {
-                throw new ArgumentNullException(nameof(@int));
-            }
-            if (boolean == null)
-            {
-                throw new ArgumentNullException(nameof(boolean));
-            }
+            Argument.AssertNotNull(model, nameof(model));
+            Argument.AssertNotNull(literal, nameof(literal));
+            Argument.AssertNotNull(@int, nameof(@int));
+            Argument.AssertNotNull(boolean, nameof(boolean));
 
             Model = model;
             Literal = literal;

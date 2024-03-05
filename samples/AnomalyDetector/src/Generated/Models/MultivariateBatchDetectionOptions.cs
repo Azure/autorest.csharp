@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using AnomalyDetector;
 
 namespace AnomalyDetector.Models
 {
@@ -71,10 +72,7 @@ namespace AnomalyDetector.Models
         /// <exception cref="ArgumentNullException"> <paramref name="dataSource"/> is null. </exception>
         public MultivariateBatchDetectionOptions(Uri dataSource, int topContributorCount, DateTimeOffset startTime, DateTimeOffset endTime)
         {
-            if (dataSource == null)
-            {
-                throw new ArgumentNullException(nameof(dataSource));
-            }
+            Argument.AssertNotNull(dataSource, nameof(dataSource));
 
             DataSource = dataSource;
             TopContributorCount = topContributorCount;

@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {
@@ -25,18 +26,9 @@ namespace CognitiveSearch.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="description"/> or <paramref name="skills"/> is null. </exception>
         public Skillset(string name, string description, IEnumerable<Skill> skills)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (description == null)
-            {
-                throw new ArgumentNullException(nameof(description));
-            }
-            if (skills == null)
-            {
-                throw new ArgumentNullException(nameof(skills));
-            }
+            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(description, nameof(description));
+            Argument.AssertNotNull(skills, nameof(skills));
 
             Name = name;
             Description = description;
