@@ -9,31 +9,28 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
-namespace AutoRest.CSharp.Common.Output.Models.Types
+namespace AutoRest.CSharp.Output.Models.Types
 {
-    internal class RequestBodyHelperProvider : ExpressionTypeProvider
+    internal class RequestContentHelperProvider : ExpressionTypeProvider
     {
-        private static readonly Lazy<RequestBodyHelperProvider> _instance = new Lazy<RequestBodyHelperProvider>(() => new RequestBodyHelperProvider(Configuration.Namespace));
-        public static RequestBodyHelperProvider Instance => _instance.Value;
+        private static readonly Lazy<RequestContentHelperProvider> _instance = new Lazy<RequestContentHelperProvider>(() => new RequestContentHelperProvider(Configuration.Namespace));
+        public static RequestContentHelperProvider Instance => _instance.Value;
 
         private readonly MethodSignatureModifiers _methodModifiers = MethodSignatureModifiers.Public | MethodSignatureModifiers.Static;
-        private RequestBodyHelperProvider(string defaultNamespace) : base(defaultNamespace, null)
+        private RequestContentHelperProvider(string defaultNamespace) : base(defaultNamespace, null)
         {
-            DefaultName = Configuration.IsBranded ? "RequestContentHelper" : "RequestBodyHelper";
-            IsStatic = true;
         }
 
         private readonly CSharpType _requestBodyType = Configuration.IsBranded ? typeof(RequestContent) : typeof(RequestBody);
         private readonly CSharpType _utf8JsonRequestBodyType = Configuration.IsBranded ? typeof(Utf8JsonRequestContent) : typeof(Utf8JsonRequestBody);
 
-        protected override string DefaultName { get; }
+        protected override string DefaultName => "RequestContentHelper";
 
         protected override string DefaultAccessibility { get; } = "internal";
 
@@ -51,13 +48,18 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
 
         private static readonly string JsonWriter = Configuration.IsBranded ? nameof(Utf8JsonRequestContent.JsonWriter) : nameof(Utf8JsonRequestBody.JsonWriter);
 
+        private const string _fromEnumerableName = "FromEnumerable";
+
+        public ValueExpression FromEnumerable(ValueExpression enumerable)
+            => new InvokeStaticMethodExpression(Type, _fromEnumerableName, new[] { enumerable });
+
         private Method BuildFromEnumerableTMethod()
         {
             var enumerableTType = typeof(IEnumerable<>);
             CSharpType tType = enumerableTType.GetGenericArguments()[0];
             var enumerableParameter = new Parameter("enumerable", null, enumerableTType, null, ValidationType.None, null);
             var signature = new MethodSignature(
-                Name: FromEnumerable,
+                Name: _fromEnumerableName,
                 Modifiers: _methodModifiers,
                 Parameters: new[] { enumerableParameter },
                 ReturnType: _requestBodyType,
@@ -93,7 +95,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         {
             var enumerableParameter = new Parameter("enumerable", null, typeof(IEnumerable<BinaryData>), null, ValidationType.None, null);
             var signature = new MethodSignature(
-                Name: FromEnumerable,
+                Name: _fromEnumerableName,
                 Modifiers: _methodModifiers,
                 Parameters: new[] { enumerableParameter },
                 ReturnType: _requestBodyType,
@@ -123,13 +125,18 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
             return new Method(signature, body);
         }
 
+        private const string _fromDictionaryName = "FromDictionary";
+
+        public ValueExpression FromDictionary(ValueExpression dictionary)
+            => new InvokeStaticMethodExpression(Type, _fromDictionaryName, new[] { dictionary });
+
         private Method BuildFromDictionaryTMethod()
         {
             var dictionaryTType = typeof(IDictionary<,>);
             CSharpType valueType = dictionaryTType.GetGenericArguments()[1];
             var dictionaryParameter = new Parameter("dictionary", null, new CSharpType(dictionaryTType, typeof(string), valueType), null, ValidationType.None, null);
             var signature = new MethodSignature(
-                Name: FromDictionary,
+                Name: _fromDictionaryName,
                 Modifiers: _methodModifiers,
                 Parameters: new[] { dictionaryParameter },
                 ReturnType: _requestBodyType,
@@ -166,7 +173,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         {
             var dictionaryParameter = new Parameter("dictionary", null, typeof(IDictionary<string, BinaryData>), null, ValidationType.None, null);
             var signature = new MethodSignature(
-                Name: FromDictionary,
+                Name: _fromDictionaryName,
                 Modifiers: _methodModifiers,
                 Parameters: new[] { dictionaryParameter },
                 ReturnType: _requestBodyType,
@@ -197,11 +204,16 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
             return new Method(signature, body);
         }
 
+        private const string _fromObjectName = "FromObject";
+
+        public ValueExpression FromObject(ValueExpression value)
+            => new InvokeStaticMethodExpression(Type, _fromObjectName, new[] { value });
+
         private Method BuildFromObjectMethod()
         {
             var valueParameter = new Parameter("value", null, typeof(object), null, ValidationType.None, null);
             var signature = new MethodSignature(
-                Name: FromObject,
+                Name: _fromObjectName,
                 Modifiers: _methodModifiers,
                 Parameters: new[] { valueParameter },
                 ReturnType: _requestBodyType,
@@ -226,7 +238,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         {
             var valueParameter = new Parameter("value", null, typeof(BinaryData), null, ValidationType.None, null);
             var signature = new MethodSignature(
-                Name: FromObject,
+                Name: _fromObjectName,
                 Modifiers: _methodModifiers,
                 Parameters: new[] { valueParameter },
                 ReturnType: _requestBodyType,
@@ -246,9 +258,5 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
 
             return new Method(signature, body);
         }
-
-        public const string FromEnumerable = "FromEnumerable";
-        public const string FromDictionary = "FromDictionary";
-        public const string FromObject = "FromObject";
     }
 }

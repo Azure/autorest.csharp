@@ -327,12 +327,5 @@ namespace AutoRest.CSharp.Output.Models.Types
             var clientSuffix = ClientBuilder.GetClientSuffix();
             return clientPrefix + clientSuffix;
         }
-
-        private IReadOnlyList<ExpressionTypeProvider>? _staticHelpers;
-        public IReadOnlyList<ExpressionTypeProvider> StaticHelpers => _staticHelpers ??= new ExpressionTypeProvider[]
-        {
-            OptionalTypeProvider.Instance,
-            RequestBodyHelperProvider.Instance
-        };
     }
 }

@@ -375,7 +375,7 @@ namespace OpenAI.Models
             return new CreateChatCompletionRequest(
                 model,
                 messages,
-                functions ?? new OptionalList<ChatCompletionFunctions>(),
+                functions ?? new ChangeTrackingList<ChatCompletionFunctions>(),
                 functionCall,
                 temperature,
                 topP,

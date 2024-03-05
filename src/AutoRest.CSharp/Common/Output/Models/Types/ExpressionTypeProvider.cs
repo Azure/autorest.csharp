@@ -13,11 +13,18 @@ namespace AutoRest.CSharp.Output.Models.Types
     // TODO -- eventually we should combine everything in this class into TypeProvider
     internal abstract class ExpressionTypeProvider : TypeProvider
     {
-        protected ExpressionTypeProvider(string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
+        internal static IEnumerable<ExpressionTypeProvider> GetHelperProviders()
         {
+            yield return ChangeTrackingListProvider.Instance;
+            yield return OptionalTypeProvider.Instance;
+            yield return RequestContentHelperProvider.Instance;
         }
 
-        public bool IsStatic { get; protected init; }
+        protected ExpressionTypeProvider(string defaultNamespace, SourceInputModel? sourceInputModel)
+            : base(defaultNamespace, sourceInputModel)
+        {
+            DeclarationModifiers = TypeSignatureModifiers.Partial | TypeSignatureModifiers.Public | TypeSignatureModifiers.Static;
+        }
 
         private IReadOnlyList<string>? _usings;
         public IReadOnlyList<string> Usings => _usings ??= BuildUsings().ToArray();
@@ -37,14 +44,22 @@ namespace AutoRest.CSharp.Output.Models.Types
         private IReadOnlyList<CSharpType>? _implements;
         public virtual IReadOnlyList<CSharpType> Implements => _implements ??= BuildImplements().ToArray();
 
-        private IReadOnlyList<FieldDeclaration>? _fields;
-        public IReadOnlyList<FieldDeclaration> Fields => _fields ??= BuildFields().ToArray();
+        private IReadOnlyList<PropertyDeclaration>? _properties;
+        public virtual IReadOnlyList<PropertyDeclaration> Properties => _properties ??= BuildProperties().ToArray();
 
         private IReadOnlyList<Method>? _methods;
         public IReadOnlyList<Method> Methods => _methods ??= BuildMethods().ToArray();
 
         private IReadOnlyList<Method>? _constructors;
         public IReadOnlyList<Method> Constructors => _constructors ??= BuildConstructors().ToArray();
+
+        private IReadOnlyList<FieldDeclaration>? _fields;
+        public IReadOnlyList<FieldDeclaration> Fields => _fields ??= BuildFields().ToArray();
+
+        protected virtual IEnumerable<PropertyDeclaration> BuildProperties()
+        {
+            yield break;
+        }
 
         protected virtual IEnumerable<CSharpType> BuildImplements()
         {

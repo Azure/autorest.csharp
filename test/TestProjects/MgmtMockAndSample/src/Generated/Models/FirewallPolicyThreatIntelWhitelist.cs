@@ -7,7 +7,7 @@
 
 using System.Collections.Generic;
 using System.Net;
-using Azure.Core;
+using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {

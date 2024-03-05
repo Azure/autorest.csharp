@@ -5,6 +5,7 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Generation.Writers;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Common.Output.PostProcessing;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
@@ -70,13 +71,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"{modelFactoryProvider.Type.Name}.cs", modelFactoryWriter.ToString());
             }
 
-            foreach (var helper in library.StaticHelpers)
-            {
-                var writer = new CodeWriter();
-                new ExpressionTypeProviderWriter(writer, helper).Write();
-                project.AddGeneratedFile($"Internal/{helper.Type.Name}.cs", writer.ToString());
-            }
-
             if (Configuration.GenerateTestProject)
             {
                 if (Configuration.IsBranded)
@@ -103,6 +97,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                         project.AddGeneratedTestFile(clientTestFilename, clientTestWriter.ToString());
                     }
                 }
+            }
+
+            foreach (var helper in ExpressionTypeProvider.GetHelperProviders())
+            {
+                var helperWriter = new CodeWriter();
+                new ExpressionTypeProviderWriter(helperWriter, helper).Write();
+                project.AddGeneratedFile($"Internal/{helper.Type.Name}.cs", helperWriter.ToString());
             }
 
             await project.PostProcessAsync(new PostProcessor(

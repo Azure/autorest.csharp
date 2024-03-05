@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
-using AutoRest.CSharp.Common.Output.Models.Types;
+using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure
@@ -10,9 +10,9 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure
     internal sealed record RequestContentExpression(ValueExpression Untyped) : TypedValueExpression<RequestContent>(Untyped)
     {
         public static RequestContentExpression Create(ValueExpression serializable) => new(InvokeStatic(nameof(RequestContent.Create), new[] { serializable }));
-        public static RequestContentExpression FromObject(ValueExpression value) => new(new InvokeStaticMethodExpression(RequestBodyHelperProvider.Instance.Type, RequestBodyHelperProvider.FromObject, new[] { value }));
-        public static RequestContentExpression FromEnumerable(ValueExpression enumerable) => new(new InvokeStaticMethodExpression(RequestBodyHelperProvider.Instance.Type, RequestBodyHelperProvider.FromEnumerable, new[] { enumerable }));
-        public static RequestContentExpression FromDictionary(ValueExpression dictionary) => new(new InvokeStaticMethodExpression(RequestBodyHelperProvider.Instance.Type, RequestBodyHelperProvider.FromDictionary, new[] { dictionary }));
+        public static RequestContentExpression FromObject(ValueExpression value) => new(RequestContentHelperProvider.Instance.FromObject(value));
+        public static RequestContentExpression FromEnumerable(ValueExpression enumerable) => new(RequestContentHelperProvider.Instance.FromEnumerable(enumerable));
+        public static RequestContentExpression FromDictionary(ValueExpression dictionary) => new(RequestContentHelperProvider.Instance.FromDictionary(dictionary));
 
         public static implicit operator RequestContentExpression(FormUrlEncodedContentExpression formUrlEncodedContent) => new(formUrlEncodedContent.Untyped);
         public static implicit operator RequestContentExpression(MultipartFormDataContentExpression multipartFormDataContent) => new(multipartFormDataContent.Untyped);

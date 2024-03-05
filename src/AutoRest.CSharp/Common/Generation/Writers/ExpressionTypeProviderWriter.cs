@@ -27,8 +27,7 @@ namespace AutoRest.CSharp.Generation.Writers
             using (_writer.Namespace(_provider.Declaration.Namespace))
             {
                 _writer.WriteClassModifiers(_provider.DeclarationModifiers);
-                _writer.AppendRawIf("static ", _provider.IsStatic)
-                    .Append($" class {_provider.Type:D}") // TODO -- support struct
+                _writer.Append($" class {_provider.Type:D}") // TODO -- support struct
                     .AppendRawIf(" : ", _provider.Inherits != null || _provider.Implements.Any())
                     .AppendIf($"{_provider.Inherits},", _provider.Inherits != null);
 
@@ -44,8 +43,19 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     WriteConstructors();
 
+                    WriteProperties();
+
                     WriteMethods();
                 }
+            }
+        }
+
+        protected virtual void WriteProperties()
+        {
+            foreach (var property in _provider.Properties)
+            {
+                _writer.WriteProperty(property);
+                _writer.Line();
             }
         }
 
@@ -53,8 +63,9 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             foreach (var field in _provider.Fields)
             {
-                _writer.WriteField(field);
+                _writer.WriteField(field, declareInCurrentScope: true);
             }
+            _writer.Line();
         }
 
         protected virtual void WriteConstructors()

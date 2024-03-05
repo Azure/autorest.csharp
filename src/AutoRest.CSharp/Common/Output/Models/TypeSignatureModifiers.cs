@@ -3,7 +3,7 @@
 
 using System;
 
-namespace AutoRest.CSharp.Common.Output.Models
+namespace AutoRest.CSharp.Output.Models
 {
     [Flags]
     internal enum TypeSignatureModifiers

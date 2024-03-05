@@ -923,12 +923,5 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
             return operationsToOperationGroups;
         }
-
-        private IReadOnlyList<ExpressionTypeProvider>? _staticHelpers;
-        public IReadOnlyList<ExpressionTypeProvider> StaticHelpers => _staticHelpers ??= new ExpressionTypeProvider[]
-        {
-            OptionalTypeProvider.Instance,
-            RequestBodyHelperProvider.Instance
-        };
     }
 }

@@ -248,7 +248,7 @@ namespace OpenAI.Models
                 trainingFiles,
                 validationFiles,
                 resultFiles,
-                events ?? new OptionalList<FineTuneEvent>(),
+                events ?? new ChangeTrackingList<FineTuneEvent>(),
                 serializedAdditionalRawData);
         }
 

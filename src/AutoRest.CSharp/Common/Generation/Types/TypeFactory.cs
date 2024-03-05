@@ -12,6 +12,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
@@ -153,7 +154,7 @@ namespace AutoRest.CSharp.Generation.Types
 
                 if (IsList(type))
                 {
-                    return new CSharpType(Configuration.ApiTypes.ChangeTrackingListType, type.Arguments);
+                    return ChangeTrackingListProvider.Instance.Type.MakeGenericType(type.Arguments);
                 }
 
                 if (IsDictionary(type))

@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
@@ -20,6 +21,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var serializeWriter = new SerializationWriter();
             var headerModelModelWriter = new DataPlaneResponseHeaderGroupWriter();
             var longRunningOperationWriter = new LongRunningOperationWriter();
+
+            foreach (var helper in ExpressionTypeProvider.GetHelperProviders())
+            {
+                var helperWriter = new CodeWriter();
+                new ExpressionTypeProviderWriter(helperWriter, helper).Write();
+                project.AddGeneratedFile($"Internal/{helper.Type.Name}.cs", helperWriter.ToString());
+            }
 
             foreach (var model in library.Models)
             {
@@ -78,13 +86,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 longRunningOperationWriter.Write(codeWriter, operation);
 
                 project.AddGeneratedFile($"{operation.Type.Name}.cs", codeWriter.ToString());
-            }
-
-            foreach (var helper in library.StaticHelpers)
-            {
-                var writer = new CodeWriter();
-                new ExpressionTypeProviderWriter(writer, helper).Write();
-                project.AddGeneratedFile($"Internal/{helper.Type.Name}.cs", writer.ToString());
             }
         }
     }
