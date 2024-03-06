@@ -20,7 +20,7 @@ namespace MgmtSingletonResource
 #pragma warning restore SA1649 // File name should match first type name
     {
         private readonly OperationInternal<T> _operation;
-        private readonly RehydrationToken? _rehydrationToken;
+        private readonly RehydrationToken? _completeRehydrationToken;
         private readonly NextLinkOperationImplementation _nextLinkOperation;
 
         /// <summary> Initializes a new instance of MgmtSingletonResourceArmOperation for mocking. </summary>
@@ -31,7 +31,7 @@ namespace MgmtSingletonResource
         internal MgmtSingletonResourceArmOperation(Response<T> response, RehydrationToken? rehydrationToken = null)
         {
             _operation = OperationInternal<T>.Succeeded(response.GetRawResponse(), response.Value);
-            _rehydrationToken = rehydrationToken;
+            _completeRehydrationToken = rehydrationToken;
         }
 
         internal MgmtSingletonResourceArmOperation(IOperationSource<T> source, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia, bool skipApiVersionOverride = false, string apiVersionOverrideValue = null)
@@ -43,7 +43,7 @@ namespace MgmtSingletonResource
             }
             else
             {
-                _rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(request.Method, request.Uri.ToUri(), response, finalStateVia, skipApiVersionOverride, apiVersionOverrideValue);
+                _completeRehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(request.Method, request.Uri.ToUri(), response, finalStateVia, skipApiVersionOverride, apiVersionOverrideValue);
             }
             _operation = new OperationInternal<T>(NextLinkOperationImplementation.Create(source, nextLinkOperation), clientDiagnostics, response, "MgmtSingletonResourceArmOperation", fallbackStrategy: new SequentialDelayStrategy());
         }
@@ -55,7 +55,7 @@ namespace MgmtSingletonResource
 #pragma warning restore CA1822
 
         /// <inheritdoc />
-        public override RehydrationToken? GetRehydrationToken() => _nextLinkOperation?.GetRehydrationToken() ?? _rehydrationToken;
+        public override RehydrationToken? GetRehydrationToken() => _nextLinkOperation?.GetRehydrationToken() ?? _completeRehydrationToken;
 
         /// <inheritdoc />
         public override T Value => _operation.Value;

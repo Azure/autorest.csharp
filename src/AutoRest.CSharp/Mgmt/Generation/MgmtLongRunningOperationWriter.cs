@@ -57,7 +57,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 using (_writer.Scope())
                 {
                     _writer.Line($"private readonly {_operationInternalType} _operation;");
-                    _writer.Line($"private readonly {typeof(RehydrationToken?)} _rehydrationToken;");
+                    _writer.Line($"private readonly {typeof(RehydrationToken?)} _completeRehydrationToken;");
                     _writer.Line($"private readonly {typeof(NextLinkOperationImplementation)}? _nextLinkOperation;");
                     _writer.Line();
 
@@ -70,7 +70,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     using (_writer.Scope($"internal {_name}({_responseType} {Configuration.ApiTypes.ResponseParameterName}, {typeof(RehydrationToken?)} rehydrationToken = null)"))
                     {
                         _writer.Line($"_operation = {_operationInternalType}.Succeeded({_responseString});");
-                        _writer.Line($"_rehydrationToken = rehydrationToken;");
+                        _writer.Line($"_completeRehydrationToken = rehydrationToken;");
                     }
                     _writer.Line();
 
@@ -87,7 +87,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         using (_writer.Scope($"else"))
                         {
                             // This implies the operation is complete and we can cache the rehydration token since it won't change anymore
-                            _writer.Line($"_rehydrationToken = {typeof(NextLinkOperationImplementation)}.{nameof(NextLinkOperationImplementation.GetRehydrationToken)}(request.Method, request.Uri.ToUri(), {Configuration.ApiTypes.ResponseParameterName}, finalStateVia, skipApiVersionOverride, apiVersionOverrideValue);");
+                            _writer.Line($"_completeRehydrationToken = {typeof(NextLinkOperationImplementation)}.{nameof(NextLinkOperationImplementation.GetRehydrationToken)}(request.Method, request.Uri.ToUri(), {Configuration.ApiTypes.ResponseParameterName}, finalStateVia, skipApiVersionOverride, apiVersionOverrideValue);");
                         }
                         if (_isGeneric)
                         {
@@ -110,7 +110,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                     _writer.WriteXmlDocumentationInheritDoc();
                     _writer
-                        .LineRaw("public override RehydrationToken? GetRehydrationToken() => _nextLinkOperation?.GetRehydrationToken() ?? _rehydrationToken;")
+                        .LineRaw("public override RehydrationToken? GetRehydrationToken() => _nextLinkOperation?.GetRehydrationToken() ?? _completeRehydrationToken;")
                         .Line();
 
                     if (_isGeneric)
