@@ -42,43 +42,43 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         /// <summary>
         /// This is a map from operation to its corresponding operation group
         /// </summary>
-        private Lazy<Dictionary<Operation, OperationGroup>> OperationsToOperationGroups { get; }
+        private Lazy<IReadOnlyDictionary<Operation, OperationGroup>> OperationsToOperationGroups { get; }
 
         /// <summary>
         /// This is a map from operation to its request path
         /// </summary>
-        private Lazy<Dictionary<Operation, RequestPath>> OperationsToRequestPaths { get; }
+        private Lazy<IReadOnlyDictionary<Operation, RequestPath>> OperationsToRequestPaths { get; }
 
         /// <summary>
         /// This is a map from raw request path to the corresponding <see cref="MgmtRestClient"/>
         /// The type of values is a HashSet of <see cref="MgmtRestClient"/>, because we might get the case that multiple operation groups might share the same request path
         /// </summary>
-        private Lazy<Dictionary<string, HashSet<MgmtRestClient>>> RawRequestPathToRestClient { get; }
+        private Lazy<IReadOnlyDictionary<string, HashSet<MgmtRestClient>>> RawRequestPathToRestClient { get; }
 
         /// <summary>
         /// This is a map from raw request path to the corresponding <see cref="ResourceData"/>
         /// This must be initialized before other maps
         /// </summary>
-        private Lazy<Dictionary<string, ResourceData>> RawRequestPathToResourceData { get; }
+        private Lazy<IReadOnlyDictionary<string, ResourceData>> RawRequestPathToResourceData { get; }
 
         /// <summary>
         /// This is a map from request path to the <see cref="ResourceObjectAssociation"/> which consists from <see cref="ResourceTypeSegment"/>, <see cref="Output.ResourceData"/>, <see cref="Resource"/> and <see cref="ResourceCollection"/>
         /// </summary>
-        private Lazy<Dictionary<RequestPath, ResourceObjectAssociation>> RequestPathToResources { get; }
+        private Lazy<IReadOnlyDictionary<RequestPath, ResourceObjectAssociation>> RequestPathToResources { get; }
 
-        public Lazy<Dictionary<RestClientMethod, PagingMethod>> PagingMethods { get; }
+        public Lazy<IReadOnlyDictionary<RestClientMethod, PagingMethod>> PagingMethods { get; }
 
-        private Lazy<Dictionary<Operation, RestClientMethod>> RestClientMethods { get; }
+        private Lazy<IReadOnlyDictionary<Operation, RestClientMethod>> RestClientMethods { get; }
 
-        private Lazy<Dictionary<Schema, TypeProvider>> AllSchemaMap { get; }
+        private Lazy<IReadOnlyDictionary<Schema, TypeProvider>> AllSchemaMap { get; }
 
-        public Lazy<Dictionary<Schema, TypeProvider>> ResourceSchemaMap { get; }
+        public Lazy<IReadOnlyDictionary<Schema, TypeProvider>> ResourceSchemaMap { get; }
 
-        internal Lazy<Dictionary<Schema, TypeProvider>> SchemaMap { get; }
+        internal Lazy<IReadOnlyDictionary<Schema, TypeProvider>> SchemaMap { get; }
 
-        private Lazy<Dictionary<InputEnumType, EnumType>> AllEnumMap { get; }
+        private Lazy<IReadOnlyDictionary<InputEnumType, EnumType>> AllEnumMap { get; }
 
-        private Lazy<Dictionary<RequestPath, HashSet<Operation>>> ChildOperations { get; }
+        private Lazy<IReadOnlyDictionary<RequestPath, HashSet<Operation>>> ChildOperations { get; }
 
         private Dictionary<string, string> _mergedOperations;
 
@@ -104,18 +104,18 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             ResourceDataSchemaNameToOperationSets = DecorateOperationSets();
 
             // others are populated later
-            OperationsToOperationGroups = new Lazy<Dictionary<Operation, OperationGroup>>(PopulateOperationsToOperationGroups);
-            OperationsToRequestPaths = new Lazy<Dictionary<Operation, RequestPath>>(PopulateOperationsToRequestPaths);
-            RawRequestPathToRestClient = new Lazy<Dictionary<string, HashSet<MgmtRestClient>>>(EnsureRestClients);
-            RawRequestPathToResourceData = new Lazy<Dictionary<string, ResourceData>>(EnsureRequestPathToResourceData);
-            RequestPathToResources = new Lazy<Dictionary<RequestPath, ResourceObjectAssociation>>(EnsureRequestPathToResourcesMap);
-            PagingMethods = new Lazy<Dictionary<RestClientMethod, PagingMethod>>(EnsurePagingMethods);
-            RestClientMethods = new Lazy<Dictionary<Operation, RestClientMethod>>(EnsureRestClientMethods);
-            AllSchemaMap = new Lazy<Dictionary<Schema, TypeProvider>>(InitializeModels);
-            ResourceSchemaMap = new Lazy<Dictionary<Schema, TypeProvider>>(EnsureResourceSchemaMap);
-            SchemaMap = new Lazy<Dictionary<Schema, TypeProvider>>(EnsureSchemaMap);
-            AllEnumMap = new Lazy<Dictionary<InputEnumType, EnumType>>(EnsureAllEnumMap);
-            ChildOperations = new Lazy<Dictionary<RequestPath, HashSet<Operation>>>(EnsureResourceChildOperations);
+            OperationsToOperationGroups = new Lazy<IReadOnlyDictionary<Operation, OperationGroup>>(PopulateOperationsToOperationGroups);
+            OperationsToRequestPaths = new Lazy<IReadOnlyDictionary<Operation, RequestPath>>(PopulateOperationsToRequestPaths);
+            RawRequestPathToRestClient = new Lazy<IReadOnlyDictionary<string, HashSet<MgmtRestClient>>>(EnsureRestClients);
+            RawRequestPathToResourceData = new Lazy<IReadOnlyDictionary<string, ResourceData>>(EnsureRequestPathToResourceData);
+            RequestPathToResources = new Lazy<IReadOnlyDictionary<RequestPath, ResourceObjectAssociation>>(EnsureRequestPathToResourcesMap);
+            PagingMethods = new Lazy<IReadOnlyDictionary<RestClientMethod, PagingMethod>>(EnsurePagingMethods);
+            RestClientMethods = new Lazy<IReadOnlyDictionary<Operation, RestClientMethod>>(EnsureRestClientMethods);
+            AllSchemaMap = new Lazy<IReadOnlyDictionary<Schema, TypeProvider>>(InitializeModels);
+            ResourceSchemaMap = new Lazy<IReadOnlyDictionary<Schema, TypeProvider>>(EnsureResourceSchemaMap);
+            SchemaMap = new Lazy<IReadOnlyDictionary<Schema, TypeProvider>>(EnsureSchemaMap);
+            AllEnumMap = new Lazy<IReadOnlyDictionary<InputEnumType, EnumType>>(EnsureAllEnumMap);
+            ChildOperations = new Lazy<IReadOnlyDictionary<RequestPath, HashSet<Operation>>>(EnsureResourceChildOperations);
 
             // initialize the property bag collection
             // TODO -- considering provide a customized comparer

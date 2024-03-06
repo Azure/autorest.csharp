@@ -9,12 +9,12 @@ namespace AutoRest.CSharp.Input
     internal class SchemaUsageProvider
     {
         private readonly CodeModel _codeModel;
-        private readonly Lazy<Dictionary<Schema, SchemaTypeUsage>> _usages;
+        private readonly Lazy<IReadOnlyDictionary<Schema, SchemaTypeUsage>> _usages;
 
         public SchemaUsageProvider(CodeModel codeModel)
         {
             _codeModel = codeModel;
-            _usages = new Lazy<Dictionary<Schema, SchemaTypeUsage>>(EnsureUsages);
+            _usages = new Lazy<IReadOnlyDictionary<Schema, SchemaTypeUsage>>(EnsureUsages);
         }
 
         private Dictionary<Schema, SchemaTypeUsage> EnsureUsages()

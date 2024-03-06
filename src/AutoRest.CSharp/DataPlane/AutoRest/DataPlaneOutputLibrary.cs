@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Net.Security;
 using AutoRest.CSharp.Common.Decorator;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
@@ -13,24 +12,21 @@ using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
-using AutoRest.CSharp.Mgmt.Decorator.Transformer;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
-using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis.CSharp;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class DataPlaneOutputLibrary : OutputLibrary
     {
-        private Lazy<Dictionary<InputClient, DataPlaneRestClient>> _restClients;
-        private Lazy<Dictionary<InputClient, DataPlaneClient>> _clients;
-        private Lazy<Dictionary<InputOperation, LongRunningOperation>> _operations;
-        private Lazy<Dictionary<InputOperation, DataPlaneResponseHeaderGroupType>> _headerModels;
-        private Lazy<Dictionary<InputEnumType, EnumType>> _enums;
-        private Lazy<Dictionary<Schema, TypeProvider>> _models;
-        private Lazy<Dictionary<string, List<string>>> _protocolMethodsDictionary;
+        private Lazy<IReadOnlyDictionary<InputClient, DataPlaneRestClient>> _restClients;
+        private Lazy<IReadOnlyDictionary<InputClient, DataPlaneClient>> _clients;
+        private Lazy<IReadOnlyDictionary<InputOperation, LongRunningOperation>> _operations;
+        private Lazy<IReadOnlyDictionary<InputOperation, DataPlaneResponseHeaderGroupType>> _headerModels;
+        private Lazy<IReadOnlyDictionary<InputEnumType, EnumType>> _enums;
+        private Lazy<IReadOnlyDictionary<Schema, TypeProvider>> _models;
+        private Lazy<IReadOnlyDictionary<string, List<string>>> _protocolMethodsDictionary;
 
         private readonly InputNamespace _input;
         private readonly SourceInputModel? _sourceInputModel;
@@ -58,14 +54,14 @@ namespace AutoRest.CSharp.Output.Models.Types
             _defaultNamespace = Configuration.Namespace;
             _libraryName = Configuration.LibraryName;
 
-            _restClients = new Lazy<Dictionary<InputClient, DataPlaneRestClient>>(EnsureRestClients);
-            _clients = new Lazy<Dictionary<InputClient, DataPlaneClient>>(EnsureClients);
-            _operations = new Lazy<Dictionary<InputOperation, LongRunningOperation>>(EnsureLongRunningOperations);
-            _headerModels = new Lazy<Dictionary<InputOperation, DataPlaneResponseHeaderGroupType>>(EnsureHeaderModels);
-            _enums = new Lazy<Dictionary<InputEnumType, EnumType>>(BuildEnums);
-            _models = new Lazy<Dictionary<Schema, TypeProvider>>(() => BuildModels(codeModel));
+            _restClients = new Lazy<IReadOnlyDictionary<InputClient, DataPlaneRestClient>>(EnsureRestClients);
+            _clients = new Lazy<IReadOnlyDictionary<InputClient, DataPlaneClient>>(EnsureClients);
+            _operations = new Lazy<IReadOnlyDictionary<InputOperation, LongRunningOperation>>(EnsureLongRunningOperations);
+            _headerModels = new Lazy<IReadOnlyDictionary<InputOperation, DataPlaneResponseHeaderGroupType>>(EnsureHeaderModels);
+            _enums = new Lazy<IReadOnlyDictionary<InputEnumType, EnumType>>(BuildEnums);
+            _models = new Lazy<IReadOnlyDictionary<Schema, TypeProvider>>(() => BuildModels(codeModel));
             _modelFactory = new Lazy<ModelFactoryTypeProvider?>(() => ModelFactoryTypeProvider.TryCreate(Models, _typeFactory, _sourceInputModel));
-            _protocolMethodsDictionary = new Lazy<Dictionary<string, List<string>>>(GetProtocolMethodsDictionary);
+            _protocolMethodsDictionary = new Lazy<IReadOnlyDictionary<string, List<string>>>(GetProtocolMethodsDictionary);
 
             ClientOptions = CreateClientOptions();
             Authentication = _input.Auth;
@@ -89,7 +85,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IEnumerable<LongRunningOperation> LongRunningOperations => _operations.Value.Values;
         public IEnumerable<DataPlaneResponseHeaderGroupType> HeaderModels => _headerModels.Value.Values;
         public IEnumerable<TypeProvider> Models => _models.Value.Values;
-        public IDictionary<string, List<string>> ProtocolMethodsDictionary => _protocolMethodsDictionary.Value;
+        public IReadOnlyDictionary<string, List<string>> ProtocolMethodsDictionary => _protocolMethodsDictionary.Value;
 
         public override CSharpType ResolveEnum(InputEnumType enumType) => _enums.Value[enumType].Type;
         public override CSharpType ResolveModel(InputModelType model) => throw new NotImplementedException($"{nameof(ResolveModel)} is not implemented for HLC yet.");

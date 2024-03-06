@@ -14,8 +14,8 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal abstract class RestClient : TypeProvider
     {
-        private readonly Lazy<Dictionary<InputOperation, RestClientMethod>> _requestMethods;
-        private readonly Lazy<Dictionary<InputOperation, RestClientMethod>> _nextPageRequestMethods;
+        private readonly Lazy<IReadOnlyDictionary<InputOperation, RestClientMethod>> _requestMethods;
+        private readonly Lazy<IReadOnlyDictionary<InputOperation, RestClientMethod>> _nextPageRequestMethods;
         private RestClientMethod[]? _allMethods;
         private ConstructorSignature? _constructor;
 
@@ -31,8 +31,8 @@ namespace AutoRest.CSharp.Output.Models
         {
             InputClient = inputClient;
 
-            _requestMethods = new Lazy<Dictionary<InputOperation, RestClientMethod>>(EnsureNormalMethods);
-            _nextPageRequestMethods = new Lazy<Dictionary<InputOperation, RestClientMethod>>(EnsureGetNextPageMethods);
+            _requestMethods = new Lazy<IReadOnlyDictionary<InputOperation, RestClientMethod>>(EnsureNormalMethods);
+            _nextPageRequestMethods = new Lazy<IReadOnlyDictionary<InputOperation, RestClientMethod>>(EnsureGetNextPageMethods);
 
             Parameters = parameters;
             DefaultName = restClientName;

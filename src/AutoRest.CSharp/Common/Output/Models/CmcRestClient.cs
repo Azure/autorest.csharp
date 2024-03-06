@@ -9,14 +9,13 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models
 {
     internal abstract class CmcRestClient : TypeProvider
     {
-        private readonly Lazy<Dictionary<ServiceRequest, RestClientMethod>> _requestMethods;
-        private readonly Lazy<Dictionary<ServiceRequest, RestClientMethod>> _nextPageRequestMethods;
+        private readonly Lazy<IReadOnlyDictionary<ServiceRequest, RestClientMethod>> _requestMethods;
+        private readonly Lazy<IReadOnlyDictionary<ServiceRequest, RestClientMethod>> _nextPageRequestMethods;
         private (Operation Operation, RestClientMethod Method)[]? _allMethods;
         private ConstructorSignature? _constructor;
 
@@ -33,8 +32,8 @@ namespace AutoRest.CSharp.Output.Models
         {
             OperationGroup = operationGroup;
 
-            _requestMethods = new Lazy<Dictionary<ServiceRequest, RestClientMethod>>(EnsureNormalMethods);
-            _nextPageRequestMethods = new Lazy<Dictionary<ServiceRequest, RestClientMethod>>(EnsureGetNextPageMethods);
+            _requestMethods = new Lazy<IReadOnlyDictionary<ServiceRequest, RestClientMethod>>(EnsureNormalMethods);
+            _nextPageRequestMethods = new Lazy<IReadOnlyDictionary<ServiceRequest, RestClientMethod>>(EnsureGetNextPageMethods);
 
             Parameters = parameters;
 
