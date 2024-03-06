@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -28,22 +29,22 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && Name != null)
+            if (options.Format != "W" && Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format != "W" && AssetId != null)
+            if (options.Format != "W" && Optional.IsDefined(AssetId))
             {
                 writer.WritePropertyName("assetId"u8);
                 writer.WriteStringValue(AssetId);
             }
-            if (AvailableCapacity != null)
+            if (Optional.IsDefined(AvailableCapacity))
             {
                 writer.WritePropertyName("availableCapacity"u8);
                 writer.WriteObjectValue(AvailableCapacity);
             }
-            if (!(Statuses is ChangeTrackingList<InstanceViewStatus> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Statuses))
             {
                 writer.WritePropertyName("statuses"u8);
                 writer.WriteStartArray();
@@ -146,7 +147,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 builder.Append("  name:");
                 if (Name.Contains(Environment.NewLine))
@@ -160,7 +161,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (AssetId != null)
+            if (Optional.IsDefined(AssetId))
             {
                 builder.Append("  assetId:");
                 if (AssetId.Contains(Environment.NewLine))
@@ -174,13 +175,13 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (AvailableCapacity != null)
+            if (Optional.IsDefined(AvailableCapacity))
             {
                 builder.Append("  availableCapacity:");
                 AppendChildObject(builder, AvailableCapacity, options, 2, false);
             }
 
-            if (!(Statuses is ChangeTrackingList<InstanceViewStatus> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Statuses))
             {
                 if (Statuses.Any())
                 {

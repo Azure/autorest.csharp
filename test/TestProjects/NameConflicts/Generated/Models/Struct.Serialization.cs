@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using NameConflicts;
 
 namespace NameConflicts.Models
 {
@@ -15,547 +16,547 @@ namespace NameConflicts.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (One != null)
+            if (Optional.IsDefined(One))
             {
                 writer.WritePropertyName("1"u8);
                 writer.WriteStringValue(One);
             }
-            if (Abstract != null)
+            if (Optional.IsDefined(Abstract))
             {
                 writer.WritePropertyName("abstract"u8);
                 writer.WriteStringValue(Abstract);
             }
-            if (Add != null)
+            if (Optional.IsDefined(Add))
             {
                 writer.WritePropertyName("add"u8);
                 writer.WriteStringValue(Add);
             }
-            if (Alias != null)
+            if (Optional.IsDefined(Alias))
             {
                 writer.WritePropertyName("alias"u8);
                 writer.WriteStringValue(Alias);
             }
-            if (As != null)
+            if (Optional.IsDefined(As))
             {
                 writer.WritePropertyName("as"u8);
                 writer.WriteStringValue(As);
             }
-            if (Ascending != null)
+            if (Optional.IsDefined(Ascending))
             {
                 writer.WritePropertyName("ascending"u8);
                 writer.WriteStringValue(Ascending);
             }
-            if (Async != null)
+            if (Optional.IsDefined(Async))
             {
                 writer.WritePropertyName("async"u8);
                 writer.WriteStringValue(Async);
             }
-            if (Await != null)
+            if (Optional.IsDefined(Await))
             {
                 writer.WritePropertyName("await"u8);
                 writer.WriteStringValue(Await);
             }
-            if (Base != null)
+            if (Optional.IsDefined(Base))
             {
                 writer.WritePropertyName("base"u8);
                 writer.WriteStringValue(Base);
             }
-            if (Bool != null)
+            if (Optional.IsDefined(Bool))
             {
                 writer.WritePropertyName("bool"u8);
                 writer.WriteStringValue(Bool);
             }
-            if (Break != null)
+            if (Optional.IsDefined(Break))
             {
                 writer.WritePropertyName("break"u8);
                 writer.WriteStringValue(Break);
             }
-            if (By != null)
+            if (Optional.IsDefined(By))
             {
                 writer.WritePropertyName("by"u8);
                 writer.WriteStringValue(By);
             }
-            if (Byte != null)
+            if (Optional.IsDefined(Byte))
             {
                 writer.WritePropertyName("byte"u8);
                 writer.WriteStringValue(Byte);
             }
-            if (Catch != null)
+            if (Optional.IsDefined(Catch))
             {
                 writer.WritePropertyName("catch"u8);
                 writer.WriteStringValue(Catch);
             }
-            if (Char != null)
+            if (Optional.IsDefined(Char))
             {
                 writer.WritePropertyName("char"u8);
                 writer.WriteStringValue(Char);
             }
-            if (Checked != null)
+            if (Optional.IsDefined(Checked))
             {
                 writer.WritePropertyName("checked"u8);
                 writer.WriteStringValue(Checked);
             }
-            if (Const != null)
+            if (Optional.IsDefined(Const))
             {
                 writer.WritePropertyName("const"u8);
                 writer.WriteStringValue(Const);
             }
-            if (Continue != null)
+            if (Optional.IsDefined(Continue))
             {
                 writer.WritePropertyName("continue"u8);
                 writer.WriteStringValue(Continue);
             }
-            if (ClassValue != null)
+            if (Optional.IsDefined(ClassValue))
             {
                 writer.WritePropertyName("class"u8);
                 writer.WriteStringValue(ClassValue);
             }
-            if (Decimal != null)
+            if (Optional.IsDefined(Decimal))
             {
                 writer.WritePropertyName("decimal"u8);
                 writer.WriteStringValue(Decimal);
             }
-            if (Default != null)
+            if (Optional.IsDefined(Default))
             {
                 writer.WritePropertyName("default"u8);
                 writer.WriteStringValue(Default);
             }
-            if (Delegate != null)
+            if (Optional.IsDefined(Delegate))
             {
                 writer.WritePropertyName("delegate"u8);
                 writer.WriteStringValue(Delegate);
             }
-            if (Descending != null)
+            if (Optional.IsDefined(Descending))
             {
                 writer.WritePropertyName("descending"u8);
                 writer.WriteStringValue(Descending);
             }
-            if (Do != null)
+            if (Optional.IsDefined(Do))
             {
                 writer.WritePropertyName("do"u8);
                 writer.WriteStringValue(Do);
             }
-            if (Double != null)
+            if (Optional.IsDefined(Double))
             {
                 writer.WritePropertyName("double"u8);
                 writer.WriteStringValue(Double);
             }
-            if (Dynamic != null)
+            if (Optional.IsDefined(Dynamic))
             {
                 writer.WritePropertyName("dynamic"u8);
                 writer.WriteStringValue(Dynamic);
             }
-            if (Else != null)
+            if (Optional.IsDefined(Else))
             {
                 writer.WritePropertyName("else"u8);
                 writer.WriteStringValue(Else);
             }
-            if (Enum != null)
+            if (Optional.IsDefined(Enum))
             {
                 writer.WritePropertyName("enum"u8);
                 writer.WriteStringValue(Enum);
             }
-            if (Event != null)
+            if (Optional.IsDefined(Event))
             {
                 writer.WritePropertyName("event"u8);
                 writer.WriteStringValue(Event);
             }
-            if (Explicit != null)
+            if (Optional.IsDefined(Explicit))
             {
                 writer.WritePropertyName("explicit"u8);
                 writer.WriteStringValue(Explicit);
             }
-            if (Extern != null)
+            if (Optional.IsDefined(Extern))
             {
                 writer.WritePropertyName("extern"u8);
                 writer.WriteStringValue(Extern);
             }
-            if (False != null)
+            if (Optional.IsDefined(False))
             {
                 writer.WritePropertyName("false"u8);
                 writer.WriteStringValue(False);
             }
-            if (Finally != null)
+            if (Optional.IsDefined(Finally))
             {
                 writer.WritePropertyName("finally"u8);
                 writer.WriteStringValue(Finally);
             }
-            if (Fixed != null)
+            if (Optional.IsDefined(Fixed))
             {
                 writer.WritePropertyName("fixed"u8);
                 writer.WriteStringValue(Fixed);
             }
-            if (Float != null)
+            if (Optional.IsDefined(Float))
             {
                 writer.WritePropertyName("float"u8);
                 writer.WriteStringValue(Float);
             }
-            if (For != null)
+            if (Optional.IsDefined(For))
             {
                 writer.WritePropertyName("for"u8);
                 writer.WriteStringValue(For);
             }
-            if (Foreach != null)
+            if (Optional.IsDefined(Foreach))
             {
                 writer.WritePropertyName("foreach"u8);
                 writer.WriteStringValue(Foreach);
             }
-            if (From != null)
+            if (Optional.IsDefined(From))
             {
                 writer.WritePropertyName("from"u8);
                 writer.WriteStringValue(From);
             }
-            if (Get != null)
+            if (Optional.IsDefined(Get))
             {
                 writer.WritePropertyName("get"u8);
                 writer.WriteStringValue(Get);
             }
-            if (Global != null)
+            if (Optional.IsDefined(Global))
             {
                 writer.WritePropertyName("global"u8);
                 writer.WriteStringValue(Global);
             }
-            if (Goto != null)
+            if (Optional.IsDefined(Goto))
             {
                 writer.WritePropertyName("goto"u8);
                 writer.WriteStringValue(Goto);
             }
-            if (Group != null)
+            if (Optional.IsDefined(Group))
             {
                 writer.WritePropertyName("group"u8);
                 writer.WriteStringValue(Group);
             }
-            if (If != null)
+            if (Optional.IsDefined(If))
             {
                 writer.WritePropertyName("if"u8);
                 writer.WriteStringValue(If);
             }
-            if (Implicit != null)
+            if (Optional.IsDefined(Implicit))
             {
                 writer.WritePropertyName("implicit"u8);
                 writer.WriteStringValue(Implicit);
             }
-            if (In != null)
+            if (Optional.IsDefined(In))
             {
                 writer.WritePropertyName("in"u8);
                 writer.WriteStringValue(In);
             }
-            if (Int != null)
+            if (Optional.IsDefined(Int))
             {
                 writer.WritePropertyName("int"u8);
                 writer.WriteStringValue(Int);
             }
-            if (Interface != null)
+            if (Optional.IsDefined(Interface))
             {
                 writer.WritePropertyName("interface"u8);
                 writer.WriteStringValue(Interface);
             }
-            if (Internal != null)
+            if (Optional.IsDefined(Internal))
             {
                 writer.WritePropertyName("internal"u8);
                 writer.WriteStringValue(Internal);
             }
-            if (Into != null)
+            if (Optional.IsDefined(Into))
             {
                 writer.WritePropertyName("into"u8);
                 writer.WriteStringValue(Into);
             }
-            if (Is != null)
+            if (Optional.IsDefined(Is))
             {
                 writer.WritePropertyName("is"u8);
                 writer.WriteStringValue(Is);
             }
-            if (Join != null)
+            if (Optional.IsDefined(Join))
             {
                 writer.WritePropertyName("join"u8);
                 writer.WriteStringValue(Join);
             }
-            if (Let != null)
+            if (Optional.IsDefined(Let))
             {
                 writer.WritePropertyName("let"u8);
                 writer.WriteStringValue(Let);
             }
-            if (Lock != null)
+            if (Optional.IsDefined(Lock))
             {
                 writer.WritePropertyName("lock"u8);
                 writer.WriteStringValue(Lock);
             }
-            if (Long != null)
+            if (Optional.IsDefined(Long))
             {
                 writer.WritePropertyName("long"u8);
                 writer.WriteStringValue(Long);
             }
-            if (Nameof != null)
+            if (Optional.IsDefined(Nameof))
             {
                 writer.WritePropertyName("nameof"u8);
                 writer.WriteStringValue(Nameof);
             }
-            if (Namespace != null)
+            if (Optional.IsDefined(Namespace))
             {
                 writer.WritePropertyName("namespace"u8);
                 writer.WriteStringValue(Namespace);
             }
-            if (New != null)
+            if (Optional.IsDefined(New))
             {
                 writer.WritePropertyName("new"u8);
                 writer.WriteStringValue(New);
             }
-            if (NullProperty != null)
+            if (Optional.IsDefined(NullProperty))
             {
                 writer.WritePropertyName("null"u8);
                 writer.WriteStringValue(NullProperty);
             }
-            if (Object != null)
+            if (Optional.IsDefined(Object))
             {
                 writer.WritePropertyName("object"u8);
                 writer.WriteStringValue(Object);
             }
-            if (On != null)
+            if (Optional.IsDefined(On))
             {
                 writer.WritePropertyName("on"u8);
                 writer.WriteStringValue(On);
             }
-            if (Operator != null)
+            if (Optional.IsDefined(Operator))
             {
                 writer.WritePropertyName("operator"u8);
                 writer.WriteStringValue(Operator);
             }
-            if (Orderby != null)
+            if (Optional.IsDefined(Orderby))
             {
                 writer.WritePropertyName("orderby"u8);
                 writer.WriteStringValue(Orderby);
             }
-            if (Out != null)
+            if (Optional.IsDefined(Out))
             {
                 writer.WritePropertyName("out"u8);
                 writer.WriteStringValue(Out);
             }
-            if (Override != null)
+            if (Optional.IsDefined(Override))
             {
                 writer.WritePropertyName("override"u8);
                 writer.WriteStringValue(Override);
             }
-            if (Params != null)
+            if (Optional.IsDefined(Params))
             {
                 writer.WritePropertyName("params"u8);
                 writer.WriteStringValue(Params);
             }
-            if (Partial != null)
+            if (Optional.IsDefined(Partial))
             {
                 writer.WritePropertyName("partial"u8);
                 writer.WriteStringValue(Partial);
             }
-            if (Private != null)
+            if (Optional.IsDefined(Private))
             {
                 writer.WritePropertyName("private"u8);
                 writer.WriteStringValue(Private);
             }
-            if (Protected != null)
+            if (Optional.IsDefined(Protected))
             {
                 writer.WritePropertyName("protected"u8);
                 writer.WriteStringValue(Protected);
             }
-            if (Public != null)
+            if (Optional.IsDefined(Public))
             {
                 writer.WritePropertyName("public"u8);
                 writer.WriteStringValue(Public);
             }
-            if (Readonly != null)
+            if (Optional.IsDefined(Readonly))
             {
                 writer.WritePropertyName("readonly"u8);
                 writer.WriteStringValue(Readonly);
             }
-            if (Ref != null)
+            if (Optional.IsDefined(Ref))
             {
                 writer.WritePropertyName("ref"u8);
                 writer.WriteStringValue(Ref);
             }
-            if (Remove != null)
+            if (Optional.IsDefined(Remove))
             {
                 writer.WritePropertyName("remove"u8);
                 writer.WriteStringValue(Remove);
             }
-            if (Return != null)
+            if (Optional.IsDefined(Return))
             {
                 writer.WritePropertyName("return"u8);
                 writer.WriteStringValue(Return);
             }
-            if (Sbyte != null)
+            if (Optional.IsDefined(Sbyte))
             {
                 writer.WritePropertyName("sbyte"u8);
                 writer.WriteStringValue(Sbyte);
             }
-            if (Sealed != null)
+            if (Optional.IsDefined(Sealed))
             {
                 writer.WritePropertyName("sealed"u8);
                 writer.WriteStringValue(Sealed);
             }
-            if (Select != null)
+            if (Optional.IsDefined(Select))
             {
                 writer.WritePropertyName("select"u8);
                 writer.WriteStringValue(Select);
             }
-            if (Set != null)
+            if (Optional.IsDefined(Set))
             {
                 writer.WritePropertyName("set"u8);
                 writer.WriteStringValue(Set);
             }
-            if (Short != null)
+            if (Optional.IsDefined(Short))
             {
                 writer.WritePropertyName("short"u8);
                 writer.WriteStringValue(Short);
             }
-            if (Sizeof != null)
+            if (Optional.IsDefined(Sizeof))
             {
                 writer.WritePropertyName("sizeof"u8);
                 writer.WriteStringValue(Sizeof);
             }
-            if (Stackalloc != null)
+            if (Optional.IsDefined(Stackalloc))
             {
                 writer.WritePropertyName("stackalloc"u8);
                 writer.WriteStringValue(Stackalloc);
             }
-            if (Static != null)
+            if (Optional.IsDefined(Static))
             {
                 writer.WritePropertyName("static"u8);
                 writer.WriteStringValue(Static);
             }
-            if (String != null)
+            if (Optional.IsDefined(String))
             {
                 writer.WritePropertyName("string"u8);
                 writer.WriteStringValue(String);
             }
-            if (Struct != null)
+            if (Optional.IsDefined(Struct))
             {
                 writer.WritePropertyName("struct"u8);
                 writer.WriteStringValue(Struct);
             }
-            if (Switch != null)
+            if (Optional.IsDefined(Switch))
             {
                 writer.WritePropertyName("switch"u8);
                 writer.WriteStringValue(Switch);
             }
-            if (This != null)
+            if (Optional.IsDefined(This))
             {
                 writer.WritePropertyName("this"u8);
                 writer.WriteStringValue(This);
             }
-            if (Throw != null)
+            if (Optional.IsDefined(Throw))
             {
                 writer.WritePropertyName("throw"u8);
                 writer.WriteStringValue(Throw);
             }
-            if (True != null)
+            if (Optional.IsDefined(True))
             {
                 writer.WritePropertyName("true"u8);
                 writer.WriteStringValue(True);
             }
-            if (Try != null)
+            if (Optional.IsDefined(Try))
             {
                 writer.WritePropertyName("try"u8);
                 writer.WriteStringValue(Try);
             }
-            if (Typeof != null)
+            if (Optional.IsDefined(Typeof))
             {
                 writer.WritePropertyName("typeof"u8);
                 writer.WriteStringValue(Typeof);
             }
-            if (Uint != null)
+            if (Optional.IsDefined(Uint))
             {
                 writer.WritePropertyName("uint"u8);
                 writer.WriteStringValue(Uint);
             }
-            if (Ulong != null)
+            if (Optional.IsDefined(Ulong))
             {
                 writer.WritePropertyName("ulong"u8);
                 writer.WriteStringValue(Ulong);
             }
-            if (Unchecked != null)
+            if (Optional.IsDefined(Unchecked))
             {
                 writer.WritePropertyName("unchecked"u8);
                 writer.WriteStringValue(Unchecked);
             }
-            if (Unmanaged != null)
+            if (Optional.IsDefined(Unmanaged))
             {
                 writer.WritePropertyName("unmanaged"u8);
                 writer.WriteStringValue(Unmanaged);
             }
-            if (Unsafe != null)
+            if (Optional.IsDefined(Unsafe))
             {
                 writer.WritePropertyName("unsafe"u8);
                 writer.WriteStringValue(Unsafe);
             }
-            if (Ushort != null)
+            if (Optional.IsDefined(Ushort))
             {
                 writer.WritePropertyName("ushort"u8);
                 writer.WriteStringValue(Ushort);
             }
-            if (Using != null)
+            if (Optional.IsDefined(Using))
             {
                 writer.WritePropertyName("using"u8);
                 writer.WriteStringValue(Using);
             }
-            if (Value != null)
+            if (Optional.IsDefined(Value))
             {
                 writer.WritePropertyName("value"u8);
                 writer.WriteStringValue(Value);
             }
-            if (Var != null)
+            if (Optional.IsDefined(Var))
             {
                 writer.WritePropertyName("var"u8);
                 writer.WriteStringValue(Var);
             }
-            if (Virtual != null)
+            if (Optional.IsDefined(Virtual))
             {
                 writer.WritePropertyName("virtual"u8);
                 writer.WriteStringValue(Virtual);
             }
-            if (Void != null)
+            if (Optional.IsDefined(Void))
             {
                 writer.WritePropertyName("void"u8);
                 writer.WriteStringValue(Void);
             }
-            if (Volatile != null)
+            if (Optional.IsDefined(Volatile))
             {
                 writer.WritePropertyName("volatile"u8);
                 writer.WriteStringValue(Volatile);
             }
-            if (When != null)
+            if (Optional.IsDefined(When))
             {
                 writer.WritePropertyName("when"u8);
                 writer.WriteStringValue(When);
             }
-            if (Where != null)
+            if (Optional.IsDefined(Where))
             {
                 writer.WritePropertyName("where"u8);
                 writer.WriteStringValue(Where);
             }
-            if (While != null)
+            if (Optional.IsDefined(While))
             {
                 writer.WritePropertyName("while"u8);
                 writer.WriteStringValue(While);
             }
-            if (Yield != null)
+            if (Optional.IsDefined(Yield))
             {
                 writer.WritePropertyName("yield"u8);
                 writer.WriteStringValue(Yield);
             }
-            if (System.HasValue)
+            if (Optional.IsDefined(System))
             {
                 writer.WritePropertyName("System"u8);
                 writer.WriteStringValue(System.Value.ToString());
             }
-            if (ToStringValue != null)
+            if (Optional.IsDefined(ToStringValue))
             {
                 writer.WritePropertyName("ToString"u8);
                 writer.WriteStringValue(ToStringValue);
             }
-            if (EqualsValue != null)
+            if (Optional.IsDefined(EqualsValue))
             {
                 writer.WritePropertyName("Equals"u8);
                 writer.WriteStringValue(EqualsValue);
             }
-            if (GetHashCodeValue != null)
+            if (Optional.IsDefined(GetHashCodeValue))
             {
                 writer.WritePropertyName("GetHashCode"u8);
                 writer.WriteStringValue(GetHashCodeValue);

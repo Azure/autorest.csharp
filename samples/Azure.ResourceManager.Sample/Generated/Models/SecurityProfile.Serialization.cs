@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -27,7 +28,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (EncryptionAtHost.HasValue)
+            if (Optional.IsDefined(EncryptionAtHost))
             {
                 writer.WritePropertyName("encryptionAtHost"u8);
                 writer.WriteBooleanValue(EncryptionAtHost.Value);
@@ -98,7 +99,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (EncryptionAtHost.HasValue)
+            if (Optional.IsDefined(EncryptionAtHost))
             {
                 builder.Append("  encryptionAtHost:");
                 var boolValue = EncryptionAtHost.Value == true ? "true" : "false";

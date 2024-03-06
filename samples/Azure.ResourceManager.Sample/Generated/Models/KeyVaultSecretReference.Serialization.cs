@@ -12,6 +12,7 @@ using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -100,13 +101,13 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (SecretUri != null)
+            if (Optional.IsDefined(SecretUri))
             {
                 builder.Append("  secretUrl:");
                 builder.AppendLine($" '{SecretUri.AbsoluteUri}'");
             }
 
-            if (SourceVault != null)
+            if (Optional.IsDefined(SourceVault))
             {
                 builder.Append("  sourceVault:");
                 AppendChildObject(builder, SourceVault, options, 2, false);

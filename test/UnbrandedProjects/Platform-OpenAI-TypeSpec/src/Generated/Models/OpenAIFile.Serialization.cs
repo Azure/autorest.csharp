@@ -7,6 +7,7 @@ using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -37,7 +38,7 @@ namespace OpenAI.Models
             writer.WriteStringValue(Purpose);
             writer.WritePropertyName("status"u8);
             writer.WriteStringValue(Status.ToString());
-            if (StatusDetails != null)
+            if (Optional.IsDefined(StatusDetails))
             {
                 if (StatusDetails != null)
                 {

@@ -12,6 +12,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
+using xml_service;
 
 namespace xml_service.Models
 {
@@ -20,19 +21,19 @@ namespace xml_service.Models
         private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "slide");
-            if (Type != null)
+            if (Optional.IsDefined(Type))
             {
                 writer.WriteStartAttribute("type");
                 writer.WriteValue(Type);
                 writer.WriteEndAttribute();
             }
-            if (Title != null)
+            if (Optional.IsDefined(Title))
             {
                 writer.WriteStartElement("title");
                 writer.WriteValue(Title);
                 writer.WriteEndElement();
             }
-            if (!(Items is ChangeTrackingList<string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Items))
             {
                 foreach (var item in Items)
                 {

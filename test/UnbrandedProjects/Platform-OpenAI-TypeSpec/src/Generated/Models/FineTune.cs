@@ -3,9 +3,9 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.Collections.Generic;
 using System.Linq;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -106,7 +106,7 @@ namespace OpenAI.Models
             TrainingFiles = trainingFiles.ToList();
             ValidationFiles = validationFiles.ToList();
             ResultFiles = resultFiles.ToList();
-            Events = new OptionalList<FineTuneEvent>();
+            Events = new ChangeTrackingList<FineTuneEvent>();
         }
 
         /// <summary> Initializes a new instance of <see cref="FineTune"/>. </summary>

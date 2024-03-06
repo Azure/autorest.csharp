@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtSafeFlatten;
 
 namespace MgmtSafeFlatten.Models
 {
@@ -15,7 +16,7 @@ namespace MgmtSafeFlatten.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (MyProp != null)
+            if (Optional.IsDefined(MyProp))
             {
                 writer.WritePropertyName("myProp"u8);
                 writer.WriteStringValue(MyProp);

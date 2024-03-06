@@ -9,6 +9,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using AnomalyDetector;
 using Azure;
 using Azure.Core;
 
@@ -27,12 +28,12 @@ namespace AnomalyDetector.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && Period.HasValue)
+            if (options.Format != "W" && Optional.IsDefined(Period))
             {
                 writer.WritePropertyName("period"u8);
                 writer.WriteNumberValue(Period.Value);
             }
-            if (!(IsChangePoint is ChangeTrackingList<bool> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(IsChangePoint))
             {
                 writer.WritePropertyName("isChangePoint"u8);
                 writer.WriteStartArray();
@@ -42,7 +43,7 @@ namespace AnomalyDetector.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!(ConfidenceScores is ChangeTrackingList<float> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(ConfidenceScores))
             {
                 writer.WritePropertyName("confidenceScores"u8);
                 writer.WriteStartArray();

@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
@@ -257,27 +256,33 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.WriteValueExpression(setValue.To);
                     writer.AppendRaw(" ??= ");
                     writer.WriteValueExpression(setValue.From);
+                    writer.LineRaw(";");
                     break;
                 case AssignValueStatement setValue:
                     writer.WriteValueExpression(setValue.To);
                     writer.AppendRaw(" = ");
                     writer.WriteValueExpression(setValue.From);
+                    writer.LineRaw(";");
                     break;
                 case DeclareVariableStatement { Type: { } type } declareVariable:
                     writer.Append($"{type} {declareVariable.Name:D} = ");
                     writer.WriteValueExpression(declareVariable.Value);
+                    writer.LineRaw(";");
                     break;
                 case DeclareVariableStatement declareVariable:
                     writer.Append($"var {declareVariable.Name:D} = ");
                     writer.WriteValueExpression(declareVariable.Value);
+                    writer.LineRaw(";");
                     break;
                 case UsingDeclareVariableStatement { Type: { } type } declareVariable:
                     writer.Append($"using {type} {declareVariable.Name:D} = ");
                     writer.WriteValueExpression(declareVariable.Value);
+                    writer.LineRaw(";");
                     break;
                 case UsingDeclareVariableStatement declareVariable:
                     writer.Append($"using var {declareVariable.Name:D} = ");
                     writer.WriteValueExpression(declareVariable.Value);
+                    writer.LineRaw(";");
                     break;
                 case DeclareLocalFunctionStatement localFunction:
                     writer.Append($"{localFunction.ReturnType} {localFunction.Name:D}(");
@@ -287,15 +292,26 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
 
                     writer.RemoveTrailingComma();
-                    writer.AppendRaw(") => ");
-                    writer.WriteValueExpression(localFunction.Body);
+                    writer.AppendRaw(")");
+                    if (localFunction.BodyExpression is not null)
+                    {
+                        writer.AppendRaw(" => ");
+                        writer.WriteValueExpression(localFunction.BodyExpression);
+                        writer.LineRaw(";");
+                    }
+                    else
+                    {
+                        using (writer.Scope())
+                        {
+                            writer.WriteMethodBodyStatement(localFunction.BodyStatement!);
+                        }
+                    }
                     break;
                 case UnaryOperatorStatement unaryOperatorStatement:
                     writer.WriteValueExpression(unaryOperatorStatement.Expression);
+                    writer.LineRaw(";");
                     break;
             }
-
-            writer.LineRaw(";");
         }
 
         public static void WriteValueExpression(this CodeWriter writer, ValueExpression expression)

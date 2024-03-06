@@ -30,6 +30,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Tests
             DefaultName = $"{ClientBuilder.GetRPName(defaultNamespace)}TestBase";
             _clients = clients;
             Inherits = new CSharpType(typeof(RecordedTestBase<>), TestEnvironment.Type);
+            DeclarationModifiers = TypeSignatureModifiers.Public | TypeSignatureModifiers.Partial;
         }
 
         public DpgTestEnvironmentProvider TestEnvironment { get; }
@@ -37,8 +38,6 @@ namespace AutoRest.CSharp.LowLevel.Output.Tests
         protected override string DefaultNamespace { get; }
 
         protected override string DefaultName { get; }
-
-        protected override string DefaultAccessibility => "public";
 
         protected override IEnumerable<Method> BuildConstructors()
         {

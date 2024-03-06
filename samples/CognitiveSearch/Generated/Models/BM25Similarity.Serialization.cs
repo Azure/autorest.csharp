@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {
@@ -15,12 +16,12 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (K1.HasValue)
+            if (Optional.IsDefined(K1))
             {
                 writer.WritePropertyName("k1"u8);
                 writer.WriteNumberValue(K1.Value);
             }
-            if (B.HasValue)
+            if (Optional.IsDefined(B))
             {
                 writer.WritePropertyName("b"u8);
                 writer.WriteNumberValue(B.Value);

@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using CognitiveServices.TextAnalytics;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
@@ -19,7 +20,7 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WriteStringValue(Id);
             writer.WritePropertyName("text"u8);
             writer.WriteStringValue(Text);
-            if (CountryHint != null)
+            if (Optional.IsDefined(CountryHint))
             {
                 writer.WritePropertyName("countryHint"u8);
                 writer.WriteStringValue(CountryHint);

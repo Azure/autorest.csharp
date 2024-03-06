@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {
@@ -21,7 +22,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(KeyVaultKeyVersion);
             writer.WritePropertyName("keyVaultUri"u8);
             writer.WriteStringValue(KeyVaultUri);
-            if (AccessCredentials != null)
+            if (Optional.IsDefined(AccessCredentials))
             {
                 writer.WritePropertyName("accessCredentials"u8);
                 writer.WriteObjectValue(AccessCredentials);

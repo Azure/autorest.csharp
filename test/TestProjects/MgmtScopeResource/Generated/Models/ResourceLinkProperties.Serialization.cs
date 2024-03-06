@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtScopeResource;
 
 namespace MgmtScopeResource.Models
 {
@@ -17,7 +18,7 @@ namespace MgmtScopeResource.Models
             writer.WriteStartObject();
             writer.WritePropertyName("targetId"u8);
             writer.WriteStringValue(TargetId);
-            if (Notes != null)
+            if (Optional.IsDefined(Notes))
             {
                 writer.WritePropertyName("notes"u8);
                 writer.WriteStringValue(Notes);

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using ModelsTypeSpec;
 
 namespace ModelsTypeSpec.Models
 {
@@ -27,7 +28,7 @@ namespace ModelsTypeSpec.Models
             }
 
             writer.WriteStartObject();
-            if (OptionalPropertyOnBase != null)
+            if (Optional.IsDefined(OptionalPropertyOnBase))
             {
                 writer.WritePropertyName("optionalPropertyOnBase"u8);
                 writer.WriteStringValue(OptionalPropertyOnBase);

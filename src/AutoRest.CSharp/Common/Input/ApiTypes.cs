@@ -56,7 +56,6 @@ namespace AutoRest.CSharp.Common.Input
         public abstract Type RequestContextType { get; }
         public string CancellationTokenName = nameof(RequestOptions.CancellationToken);
 
-        public abstract Type ChangeTrackingListType { get; }
         public abstract Type ChangeTrackingDictionaryType { get; }
 
         public abstract Type HttpPipelineBuilderType { get; }

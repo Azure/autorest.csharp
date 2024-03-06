@@ -29,7 +29,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (!(Value is ChangeTrackingList<VirtualMachineExtensionData> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Value))
             {
                 writer.WritePropertyName("value"u8);
                 writer.WriteStartArray();
@@ -110,7 +110,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (!(Value is ChangeTrackingList<VirtualMachineExtensionData> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Value))
             {
                 if (Value.Any())
                 {

@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -28,17 +29,17 @@ namespace MgmtDiscriminator.Models
             }
 
             writer.WriteStartObject();
-            if (Order.HasValue)
+            if (Optional.IsDefined(Order))
             {
                 writer.WritePropertyName("order"u8);
                 writer.WriteNumberValue(Order.Value);
             }
-            if (Conditions != null)
+            if (Optional.IsDefined(Conditions))
             {
                 writer.WritePropertyName("conditions"u8);
                 writer.WriteObjectValue(Conditions);
             }
-            if (!(Actions is ChangeTrackingList<DeliveryRuleAction> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Actions))
             {
                 writer.WritePropertyName("actions"u8);
                 writer.WriteStartArray();
@@ -48,7 +49,7 @@ namespace MgmtDiscriminator.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!(ExtraMappingInfo is ChangeTrackingDictionary<string, DeliveryRuleAction> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(ExtraMappingInfo))
             {
                 writer.WritePropertyName("extraMappingInfo"u8);
                 writer.WriteStartObject();
@@ -59,12 +60,12 @@ namespace MgmtDiscriminator.Models
                 }
                 writer.WriteEndObject();
             }
-            if (Pet != null)
+            if (Optional.IsDefined(Pet))
             {
                 writer.WritePropertyName("pet"u8);
                 writer.WriteObjectValue(Pet);
             }
-            if (options.Format != "W" && Foo != null)
+            if (options.Format != "W" && Optional.IsDefined(Foo))
             {
                 writer.WritePropertyName("foo"u8);
                 writer.WriteStringValue(Foo);
@@ -198,19 +199,19 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Order.HasValue)
+            if (Optional.IsDefined(Order))
             {
                 builder.Append("  order:");
                 builder.AppendLine($" {Order.Value}");
             }
 
-            if (Conditions != null)
+            if (Optional.IsDefined(Conditions))
             {
                 builder.Append("  conditions:");
                 AppendChildObject(builder, Conditions, options, 2, false);
             }
 
-            if (!(Actions is ChangeTrackingList<DeliveryRuleAction> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Actions))
             {
                 if (Actions.Any())
                 {
@@ -224,7 +225,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            if (!(ExtraMappingInfo is ChangeTrackingDictionary<string, DeliveryRuleAction> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(ExtraMappingInfo))
             {
                 if (ExtraMappingInfo.Any())
                 {
@@ -239,13 +240,13 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            if (Pet != null)
+            if (Optional.IsDefined(Pet))
             {
                 builder.Append("  pet:");
                 AppendChildObject(builder, Pet, options, 2, false);
             }
 
-            if (Foo != null)
+            if (Optional.IsDefined(Foo))
             {
                 builder.Append("  foo:");
                 if (Foo.Contains(Environment.NewLine))

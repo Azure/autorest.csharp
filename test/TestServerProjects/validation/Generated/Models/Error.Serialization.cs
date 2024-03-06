@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using validation;
 
 namespace validation.Models
 {
@@ -26,17 +27,17 @@ namespace validation.Models
             }
 
             writer.WriteStartObject();
-            if (Code.HasValue)
+            if (Optional.IsDefined(Code))
             {
                 writer.WritePropertyName("code"u8);
                 writer.WriteNumberValue(Code.Value);
             }
-            if (Message != null)
+            if (Optional.IsDefined(Message))
             {
                 writer.WritePropertyName("message"u8);
                 writer.WriteStringValue(Message);
             }
-            if (Fields != null)
+            if (Optional.IsDefined(Fields))
             {
                 writer.WritePropertyName("fields"u8);
                 writer.WriteStringValue(Fields);
