@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -29,7 +30,7 @@ namespace MgmtDiscriminator.Models
             writer.WriteStartObject();
             writer.WritePropertyName("typeName"u8);
             writer.WriteStringValue(TypeName.ToString());
-            if (OriginGroupOverride != null)
+            if (Optional.IsDefined(OriginGroupOverride))
             {
                 writer.WritePropertyName("originGroupOverride"u8);
                 writer.WriteObjectValue(OriginGroupOverride);
@@ -109,7 +110,7 @@ namespace MgmtDiscriminator.Models
             builder.Append("  typeName:");
             builder.AppendLine($" '{TypeName.ToString()}'");
 
-            if (OriginGroupOverride != null)
+            if (Optional.IsDefined(OriginGroupOverride))
             {
                 builder.Append("  originGroupOverride:");
                 AppendChildObject(builder, OriginGroupOverride, options, 2, false);

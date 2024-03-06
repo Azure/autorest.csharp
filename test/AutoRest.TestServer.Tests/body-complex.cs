@@ -415,7 +415,7 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(200, result.GetRawResponse().Status);
             // the DefaultProgram should be undefined here
             Assert.IsNotNull(result.Value.DefaultProgram);
-            Assert.IsFalse(Optional.IsCollectionDefined(result.Value.DefaultProgram));
+            Assert.IsFalse(!(result.Value.DefaultProgram is ChangeTrackingDictionary<string, string> changeTrackingDictionary && changeTrackingDictionary.IsUndefined));
         });
 
         [Test]

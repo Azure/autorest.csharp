@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using _Type._Dictionary;
 
 namespace _Type._Dictionary.Models
 {
@@ -29,7 +30,7 @@ namespace _Type._Dictionary.Models
             writer.WriteStartObject();
             writer.WritePropertyName("property"u8);
             writer.WriteStringValue(Property);
-            if (!(Children is ChangeTrackingDictionary<string, InnerModel> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Children))
             {
                 writer.WritePropertyName("children"u8);
                 writer.WriteStartObject();

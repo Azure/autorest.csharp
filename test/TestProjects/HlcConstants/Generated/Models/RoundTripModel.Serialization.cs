@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using HlcConstants;
 
 namespace HlcConstants.Models
 {
@@ -15,12 +16,12 @@ namespace HlcConstants.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (RequiredConstantModel != null)
+            if (Optional.IsDefined(RequiredConstantModel))
             {
                 writer.WritePropertyName("requiredConstantModel"u8);
                 writer.WriteObjectValue(RequiredConstantModel);
             }
-            if (OptionalConstantModel != null)
+            if (Optional.IsDefined(OptionalConstantModel))
             {
                 writer.WritePropertyName("optionalConstantModel"u8);
                 writer.WriteObjectValue(OptionalConstantModel);

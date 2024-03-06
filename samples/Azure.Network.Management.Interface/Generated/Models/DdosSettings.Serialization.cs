@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Network.Management.Interface;
 
 namespace Azure.Network.Management.Interface.Models
 {
@@ -15,17 +16,17 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (DdosCustomPolicy != null)
+            if (Optional.IsDefined(DdosCustomPolicy))
             {
                 writer.WritePropertyName("ddosCustomPolicy"u8);
                 writer.WriteObjectValue(DdosCustomPolicy);
             }
-            if (ProtectionCoverage.HasValue)
+            if (Optional.IsDefined(ProtectionCoverage))
             {
                 writer.WritePropertyName("protectionCoverage"u8);
                 writer.WriteStringValue(ProtectionCoverage.Value.ToString());
             }
-            if (ProtectedIP.HasValue)
+            if (Optional.IsDefined(ProtectedIP))
             {
                 writer.WritePropertyName("protectedIP"u8);
                 writer.WriteBooleanValue(ProtectedIP.Value);

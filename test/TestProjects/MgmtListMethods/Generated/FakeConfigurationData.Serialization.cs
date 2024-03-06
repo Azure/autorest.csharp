@@ -17,12 +17,12 @@ namespace MgmtListMethods
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (ConfigValue != null)
+            if (Optional.IsDefined(ConfigValue))
             {
                 writer.WritePropertyName("configValue"u8);
                 writer.WriteStringValue(ConfigValue);
             }
-            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();

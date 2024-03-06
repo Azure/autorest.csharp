@@ -7,6 +7,7 @@ using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -31,17 +32,17 @@ namespace OpenAI.Models
             writer.WriteNumberValue(PromptLossWeight);
             writer.WritePropertyName("learning_rate_multiplier"u8);
             writer.WriteNumberValue(LearningRateMultiplier);
-            if (ComputeClassificationMetrics.HasValue)
+            if (Optional.IsDefined(ComputeClassificationMetrics))
             {
                 writer.WritePropertyName("compute_classification_metrics"u8);
                 writer.WriteBooleanValue(ComputeClassificationMetrics.Value);
             }
-            if (ClassificationPositiveClass != null)
+            if (Optional.IsDefined(ClassificationPositiveClass))
             {
                 writer.WritePropertyName("classification_positive_class"u8);
                 writer.WriteStringValue(ClassificationPositiveClass);
             }
-            if (ClassificationNClasses.HasValue)
+            if (Optional.IsDefined(ClassificationNClasses))
             {
                 writer.WritePropertyName("classification_n_classes"u8);
                 writer.WriteNumberValue(ClassificationNClasses.Value);

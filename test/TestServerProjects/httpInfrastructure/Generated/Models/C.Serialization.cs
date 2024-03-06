@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using httpInfrastructure;
 
 namespace httpInfrastructure.Models
 {
@@ -26,7 +27,7 @@ namespace httpInfrastructure.Models
             }
 
             writer.WriteStartObject();
-            if (HttpCode != null)
+            if (Optional.IsDefined(HttpCode))
             {
                 writer.WritePropertyName("httpCode"u8);
                 writer.WriteStringValue(HttpCode);

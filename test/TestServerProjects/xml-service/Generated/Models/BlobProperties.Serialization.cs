@@ -11,6 +11,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
+using xml_service;
 
 namespace xml_service.Models
 {
@@ -25,157 +26,157 @@ namespace xml_service.Models
             writer.WriteStartElement("Etag");
             writer.WriteValue(Etag);
             writer.WriteEndElement();
-            if (ContentLength.HasValue)
+            if (Optional.IsDefined(ContentLength))
             {
                 writer.WriteStartElement("Content-Length");
                 writer.WriteValue(ContentLength.Value);
                 writer.WriteEndElement();
             }
-            if (ContentType != null)
+            if (Optional.IsDefined(ContentType))
             {
                 writer.WriteStartElement("Content-Type");
                 writer.WriteValue(ContentType);
                 writer.WriteEndElement();
             }
-            if (ContentEncoding != null)
+            if (Optional.IsDefined(ContentEncoding))
             {
                 writer.WriteStartElement("Content-Encoding");
                 writer.WriteValue(ContentEncoding);
                 writer.WriteEndElement();
             }
-            if (ContentLanguage != null)
+            if (Optional.IsDefined(ContentLanguage))
             {
                 writer.WriteStartElement("Content-Language");
                 writer.WriteValue(ContentLanguage);
                 writer.WriteEndElement();
             }
-            if (ContentMD5 != null)
+            if (Optional.IsDefined(ContentMD5))
             {
                 writer.WriteStartElement("Content-MD5");
                 writer.WriteValue(ContentMD5);
                 writer.WriteEndElement();
             }
-            if (ContentDisposition != null)
+            if (Optional.IsDefined(ContentDisposition))
             {
                 writer.WriteStartElement("Content-Disposition");
                 writer.WriteValue(ContentDisposition);
                 writer.WriteEndElement();
             }
-            if (CacheControl != null)
+            if (Optional.IsDefined(CacheControl))
             {
                 writer.WriteStartElement("Cache-Control");
                 writer.WriteValue(CacheControl);
                 writer.WriteEndElement();
             }
-            if (BlobSequenceNumber.HasValue)
+            if (Optional.IsDefined(BlobSequenceNumber))
             {
                 writer.WriteStartElement("x-ms-blob-sequence-number");
                 writer.WriteValue(BlobSequenceNumber.Value);
                 writer.WriteEndElement();
             }
-            if (BlobType.HasValue)
+            if (Optional.IsDefined(BlobType))
             {
                 writer.WriteStartElement("BlobType");
                 writer.WriteValue(BlobType.Value.ToSerialString());
                 writer.WriteEndElement();
             }
-            if (LeaseStatus.HasValue)
+            if (Optional.IsDefined(LeaseStatus))
             {
                 writer.WriteStartElement("LeaseStatus");
                 writer.WriteValue(LeaseStatus.Value.ToSerialString());
                 writer.WriteEndElement();
             }
-            if (LeaseState.HasValue)
+            if (Optional.IsDefined(LeaseState))
             {
                 writer.WriteStartElement("LeaseState");
                 writer.WriteValue(LeaseState.Value.ToSerialString());
                 writer.WriteEndElement();
             }
-            if (LeaseDuration.HasValue)
+            if (Optional.IsDefined(LeaseDuration))
             {
                 writer.WriteStartElement("LeaseDuration");
                 writer.WriteValue(LeaseDuration.Value.ToSerialString());
                 writer.WriteEndElement();
             }
-            if (CopyId != null)
+            if (Optional.IsDefined(CopyId))
             {
                 writer.WriteStartElement("CopyId");
                 writer.WriteValue(CopyId);
                 writer.WriteEndElement();
             }
-            if (CopyStatus.HasValue)
+            if (Optional.IsDefined(CopyStatus))
             {
                 writer.WriteStartElement("CopyStatus");
                 writer.WriteValue(CopyStatus.Value.ToSerialString());
                 writer.WriteEndElement();
             }
-            if (CopySource != null)
+            if (Optional.IsDefined(CopySource))
             {
                 writer.WriteStartElement("CopySource");
                 writer.WriteValue(CopySource);
                 writer.WriteEndElement();
             }
-            if (CopyProgress != null)
+            if (Optional.IsDefined(CopyProgress))
             {
                 writer.WriteStartElement("CopyProgress");
                 writer.WriteValue(CopyProgress);
                 writer.WriteEndElement();
             }
-            if (CopyCompletionTime.HasValue)
+            if (Optional.IsDefined(CopyCompletionTime))
             {
                 writer.WriteStartElement("CopyCompletionTime");
                 writer.WriteValue(CopyCompletionTime.Value, "R");
                 writer.WriteEndElement();
             }
-            if (CopyStatusDescription != null)
+            if (Optional.IsDefined(CopyStatusDescription))
             {
                 writer.WriteStartElement("CopyStatusDescription");
                 writer.WriteValue(CopyStatusDescription);
                 writer.WriteEndElement();
             }
-            if (ServerEncrypted.HasValue)
+            if (Optional.IsDefined(ServerEncrypted))
             {
                 writer.WriteStartElement("ServerEncrypted");
                 writer.WriteValue(ServerEncrypted.Value);
                 writer.WriteEndElement();
             }
-            if (IncrementalCopy.HasValue)
+            if (Optional.IsDefined(IncrementalCopy))
             {
                 writer.WriteStartElement("IncrementalCopy");
                 writer.WriteValue(IncrementalCopy.Value);
                 writer.WriteEndElement();
             }
-            if (DestinationSnapshot != null)
+            if (Optional.IsDefined(DestinationSnapshot))
             {
                 writer.WriteStartElement("DestinationSnapshot");
                 writer.WriteValue(DestinationSnapshot);
                 writer.WriteEndElement();
             }
-            if (DeletedTime.HasValue)
+            if (Optional.IsDefined(DeletedTime))
             {
                 writer.WriteStartElement("DeletedTime");
                 writer.WriteValue(DeletedTime.Value, "R");
                 writer.WriteEndElement();
             }
-            if (RemainingRetentionDays.HasValue)
+            if (Optional.IsDefined(RemainingRetentionDays))
             {
                 writer.WriteStartElement("RemainingRetentionDays");
                 writer.WriteValue(RemainingRetentionDays.Value);
                 writer.WriteEndElement();
             }
-            if (AccessTier.HasValue)
+            if (Optional.IsDefined(AccessTier))
             {
                 writer.WriteStartElement("AccessTier");
                 writer.WriteValue(AccessTier.Value.ToString());
                 writer.WriteEndElement();
             }
-            if (AccessTierInferred.HasValue)
+            if (Optional.IsDefined(AccessTierInferred))
             {
                 writer.WriteStartElement("AccessTierInferred");
                 writer.WriteValue(AccessTierInferred.Value);
                 writer.WriteEndElement();
             }
-            if (ArchiveStatus.HasValue)
+            if (Optional.IsDefined(ArchiveStatus))
             {
                 writer.WriteStartElement("ArchiveStatus");
                 writer.WriteValue(ArchiveStatus.Value.ToString());

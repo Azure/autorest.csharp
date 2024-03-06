@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -107,7 +108,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (PrivateKey != null)
+            if (Optional.IsDefined(PrivateKey))
             {
                 builder.Append("  privateKey:");
                 if (PrivateKey.Contains(Environment.NewLine))
@@ -121,7 +122,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (PublicKey != null)
+            if (Optional.IsDefined(PublicKey))
             {
                 builder.Append("  publicKey:");
                 if (PublicKey.Contains(Environment.NewLine))
@@ -135,7 +136,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 builder.Append("  id:");
                 if (Id.Contains(Environment.NewLine))

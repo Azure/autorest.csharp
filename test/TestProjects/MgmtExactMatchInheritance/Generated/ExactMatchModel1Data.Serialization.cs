@@ -21,12 +21,12 @@ namespace MgmtExactMatchInheritance
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (New != null)
+            if (Optional.IsDefined(New))
             {
                 writer.WritePropertyName("new"u8);
                 writer.WriteStringValue(New);
             }
-            if (!(SupportingUris is ChangeTrackingList<Uri> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(SupportingUris))
             {
                 writer.WritePropertyName("supportingUris"u8);
                 writer.WriteStartArray();
@@ -41,102 +41,102 @@ namespace MgmtExactMatchInheritance
                 }
                 writer.WriteEndArray();
             }
-            if (Type1.HasValue)
+            if (Optional.IsDefined(Type1))
             {
                 writer.WritePropertyName("type1"u8);
                 writer.WriteStringValue(Type1.Value.ToString());
             }
-            if (Type2.HasValue)
+            if (Optional.IsDefined(Type2))
             {
                 writer.WritePropertyName("type2"u8);
                 writer.WriteStringValue(Type2.Value.ToString());
             }
-            if (Type3 != null)
+            if (Optional.IsDefined(Type3))
             {
                 writer.WritePropertyName("type3"u8);
                 writer.WriteStringValue(Type3.ToString());
             }
-            if (Type4 != null)
+            if (Optional.IsDefined(Type4))
             {
                 writer.WritePropertyName("type4"u8);
                 writer.WriteObjectValue(Type4);
             }
-            if (Type5 != null)
+            if (Optional.IsDefined(Type5))
             {
                 writer.WritePropertyName("type5"u8);
                 JsonSerializer.Serialize(writer, Type5);
             }
-            if (Type6 != null)
+            if (Optional.IsDefined(Type6))
             {
                 writer.WritePropertyName("type6"u8);
                 JsonSerializer.Serialize(writer, Type6);
             }
-            if (Type7 != null)
+            if (Optional.IsDefined(Type7))
             {
                 writer.WritePropertyName("type7"u8);
                 JsonSerializer.Serialize(writer, Type7);
             }
-            if (Type8 != null)
+            if (Optional.IsDefined(Type8))
             {
                 writer.WritePropertyName("type8"u8);
                 JsonSerializer.Serialize(writer, Type8);
             }
-            if (Type9 != null)
+            if (Optional.IsDefined(Type9))
             {
                 writer.WritePropertyName("type9"u8);
                 JsonSerializer.Serialize(writer, Type9);
             }
-            if (Type10 != null)
+            if (Optional.IsDefined(Type10))
             {
                 writer.WritePropertyName("type10"u8);
                 JsonSerializer.Serialize(writer, Type10);
             }
-            if (Type11 != null)
+            if (Optional.IsDefined(Type11))
             {
                 writer.WritePropertyName("type11"u8);
                 JsonSerializer.Serialize(writer, Type11);
             }
-            if (Type12 != null)
+            if (Optional.IsDefined(Type12))
             {
                 writer.WritePropertyName("type12"u8);
                 JsonSerializer.Serialize(writer, Type12);
             }
-            if (Type13 != null)
+            if (Optional.IsDefined(Type13))
             {
                 writer.WritePropertyName("type13"u8);
                 JsonSerializer.Serialize(writer, Type13);
             }
-            if (Type14 != null)
+            if (Optional.IsDefined(Type14))
             {
                 writer.WritePropertyName("type14"u8);
                 JsonSerializer.Serialize(writer, Type14);
             }
-            if (Type15 != null)
+            if (Optional.IsDefined(Type15))
             {
                 writer.WritePropertyName("type15"u8);
                 JsonSerializer.Serialize(writer, Type15);
             }
-            if (Type16 != null)
+            if (Optional.IsDefined(Type16))
             {
                 writer.WritePropertyName("type16"u8);
                 JsonSerializer.Serialize(writer, Type16);
             }
-            if (Type17 != null)
+            if (Optional.IsDefined(Type17))
             {
                 writer.WritePropertyName("type17"u8);
                 JsonSerializer.Serialize(writer, Type17);
             }
-            if (Type18 != null)
+            if (Optional.IsDefined(Type18))
             {
                 writer.WritePropertyName("type18"u8);
                 JsonSerializer.Serialize(writer, Type18);
             }
-            if (Type19 != null)
+            if (Optional.IsDefined(Type19))
             {
                 writer.WritePropertyName("type19"u8);
                 JsonSerializer.Serialize(writer, Type19);
             }
-            if (Type20 != null)
+            if (Optional.IsDefined(Type20))
             {
                 writer.WritePropertyName("type20"u8);
                 JsonSerializer.Serialize(writer, Type20);

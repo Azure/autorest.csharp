@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -27,7 +28,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (UltraSSDEnabled.HasValue)
+            if (Optional.IsDefined(UltraSSDEnabled))
             {
                 writer.WritePropertyName("ultraSSDEnabled"u8);
                 writer.WriteBooleanValue(UltraSSDEnabled.Value);
@@ -98,7 +99,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (UltraSSDEnabled.HasValue)
+            if (Optional.IsDefined(UltraSSDEnabled))
             {
                 builder.Append("  ultraSSDEnabled:");
                 var boolValue = UltraSSDEnabled.Value == true ? "true" : "false";

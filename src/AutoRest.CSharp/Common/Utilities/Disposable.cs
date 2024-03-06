@@ -3,7 +3,6 @@
 
 using System;
 using System.Threading;
-using Azure.Core;
 
 namespace AutoRest.CSharp.Utilities
 {
@@ -20,7 +19,10 @@ namespace AutoRest.CSharp.Utilities
         /// <exception cref="T:System.ArgumentNullException"><paramref name="dispose" /> is null.</exception>
         public static IDisposable Create(Action dispose)
         {
-            Argument.AssertNotNull(dispose, nameof(dispose));
+            if (dispose == null)
+            {
+                throw new ArgumentNullException(nameof(dispose));
+            }
             return new AnonymousDisposable(dispose);
         }
 
@@ -32,7 +34,10 @@ namespace AutoRest.CSharp.Utilities
         /// <exception cref="T:System.ArgumentNullException"><paramref name="disposable" /> is null.</exception>
         public static IDisposable Create(IDisposable disposable)
         {
-            Argument.AssertNotNull(disposable, nameof(disposable));
+            if (disposable == null)
+            {
+                throw new ArgumentNullException(nameof(disposable));
+            }
             return new DisposableWrapper(disposable);
         }
 

@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using multiple_inheritance;
 
 namespace multiple_inheritance.Models
 {
@@ -26,17 +27,17 @@ namespace multiple_inheritance.Models
             }
 
             writer.WriteStartObject();
-            if (LikesMilk.HasValue)
+            if (Optional.IsDefined(LikesMilk))
             {
                 writer.WritePropertyName("likesMilk"u8);
                 writer.WriteBooleanValue(LikesMilk.Value);
             }
-            if (Meows.HasValue)
+            if (Optional.IsDefined(Meows))
             {
                 writer.WritePropertyName("meows"u8);
                 writer.WriteBooleanValue(Meows.Value);
             }
-            if (Hisses.HasValue)
+            if (Optional.IsDefined(Hisses))
             {
                 writer.WritePropertyName("hisses"u8);
                 writer.WriteBooleanValue(Hisses.Value);

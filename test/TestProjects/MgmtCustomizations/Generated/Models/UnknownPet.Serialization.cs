@@ -8,6 +8,7 @@
 using System;
 using System.Text.Json;
 using Azure.Core;
+using MgmtCustomizations;
 
 namespace MgmtCustomizations.Models
 {
@@ -20,7 +21,7 @@ namespace MgmtCustomizations.Models
             writer.WriteStringValue(Kind.ToSerialString());
             writer.WritePropertyName("size"u8);
             SerializeSizeProperty(writer);
-            if (DateOfBirth.HasValue)
+            if (Optional.IsDefined(DateOfBirth))
             {
                 writer.WritePropertyName("dateOfBirth"u8);
                 SerializeDateOfBirthProperty(writer);

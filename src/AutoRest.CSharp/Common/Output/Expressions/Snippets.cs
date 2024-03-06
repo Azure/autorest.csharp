@@ -75,6 +75,7 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static MethodBodyStatement EmptyLine => new EmptyLineStatement();
         public static KeywordStatement Continue => new("continue", null);
         public static KeywordStatement Return(ValueExpression expression) => new("return", expression);
+        public static KeywordStatement Return() => new("return", null);
         public static KeywordStatement Throw(ValueExpression expression) => new("throw", expression);
 
         public static EnumerableExpression InvokeArrayEmpty(CSharpType arrayItemType)
@@ -93,7 +94,7 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static MethodBodyStatement InvokeCustomBicepSerializationMethod(string methodName, StringBuilderExpression stringBuilder)
             => new InvokeInstanceMethodStatement(null, methodName, stringBuilder);
 
-        // Expected signature: MethodName(JsonProperty property, ref Optional<T> optional)
+        // Expected signature: MethodName(JsonProperty property, ref T optional)
         public static MethodBodyStatement InvokeCustomDeserializationMethod(string methodName, JsonPropertyExpression jsonProperty, CodeWriterDeclaration variable)
             => new InvokeStaticMethodStatement(null, methodName, new ValueExpression[]{jsonProperty, new FormattableStringToExpression($"ref {variable}")});
 

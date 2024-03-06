@@ -72,7 +72,7 @@ import {
     getWireName,
     isInternal
 } from "@azure-tools/typespec-client-generator-core";
-import { capitalize, getSerializeName, getTypeName } from "./utils.js";
+import { capitalize, getTypeName } from "./utils.js";
 import { InputTypeKind } from "../type/inputTypeKind.js";
 import { InputIntrinsicTypeKind } from "../type/inputIntrinsicTypeKind.js";
 /**
@@ -183,6 +183,7 @@ function getCSharpInputTypeKindByIntrinsicModelName(
         case "plainTime":
             return InputPrimitiveTypeKind.Time;
         case "datetime":
+        case "utcDateTime":
             switch (encode?.encoding) {
                 case undefined:
                     return InputPrimitiveTypeKind.DateTime;
@@ -290,9 +291,13 @@ export function getInputType(
     enums: Map<string, InputEnumType>,
     literalTypeContext?: LiteralTypeContext
 ): InputType {
-    const type = formattedType.type;
+    const type =
+        formattedType.type.kind === "ModelProperty"
+            ? formattedType.type.type
+            : formattedType.type;
     logger.debug(`getInputType for kind: ${type.kind}`);
     const program = context.program;
+
     if (type.kind === "Model") {
         return getInputModelType(type);
     } else if (

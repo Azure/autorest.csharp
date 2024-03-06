@@ -13,6 +13,7 @@ using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -46,7 +47,7 @@ namespace MgmtDiscriminator.Models
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format != "W" && SystemData != null)
+            if (options.Format != "W" && Optional.IsDefined(SystemData))
             {
                 writer.WritePropertyName("systemData"u8);
                 JsonSerializer.Serialize(writer, SystemData);
@@ -62,7 +63,7 @@ namespace MgmtDiscriminator.Models
                 JsonSerializer.Serialize(writer, document.RootElement);
             }
 #endif
-            if (ResourceGroup != null)
+            if (Optional.IsDefined(ResourceGroup))
             {
                 writer.WritePropertyName("resourceGroup"u8);
                 writer.WriteStringValue(ResourceGroup);
@@ -229,7 +230,7 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 builder.Append("  name:");
                 if (Name.Contains(Environment.NewLine))
@@ -246,13 +247,13 @@ namespace MgmtDiscriminator.Models
             builder.Append("  kind:");
             builder.AppendLine($" '{Kind.ToString()}'");
 
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 builder.Append("  id:");
                 builder.AppendLine($" '{Id.ToString()}'");
             }
 
-            if (SystemData != null)
+            if (Optional.IsDefined(SystemData))
             {
                 builder.Append("  systemData:");
                 builder.AppendLine($" '{SystemData.ToString()}'");
@@ -260,13 +261,13 @@ namespace MgmtDiscriminator.Models
 
             builder.Append("  properties:");
             builder.AppendLine(" {");
-            if (Template != null)
+            if (Optional.IsDefined(Template))
             {
                 builder.Append("    template:");
                 builder.AppendLine($" '{Template.ToString()}'");
             }
 
-            if (ResourceGroup != null)
+            if (Optional.IsDefined(ResourceGroup))
             {
                 builder.Append("    resourceGroup:");
                 if (ResourceGroup.Contains(Environment.NewLine))
@@ -280,7 +281,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            if (!(Parameters is ChangeTrackingDictionary<string, BinaryData> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Parameters))
             {
                 if (Parameters.Any())
                 {

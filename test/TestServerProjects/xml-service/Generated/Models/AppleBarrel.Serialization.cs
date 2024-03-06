@@ -12,6 +12,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
+using xml_service;
 
 namespace xml_service.Models
 {
@@ -20,7 +21,7 @@ namespace xml_service.Models
         private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "AppleBarrel");
-            if (!(GoodApples is ChangeTrackingList<string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(GoodApples))
             {
                 writer.WriteStartElement("GoodApples");
                 foreach (var item in GoodApples)
@@ -31,7 +32,7 @@ namespace xml_service.Models
                 }
                 writer.WriteEndElement();
             }
-            if (!(BadApples is ChangeTrackingList<string> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(BadApples))
             {
                 writer.WriteStartElement("BadApples");
                 foreach (var item in BadApples)

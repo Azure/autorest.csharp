@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using ModelsTypeSpec;
 
 namespace ModelsTypeSpec.Models
 {
@@ -31,12 +32,12 @@ namespace ModelsTypeSpec.Models
             writer.WriteStringValue(RequiredString);
             writer.WritePropertyName("requiredInt"u8);
             writer.WriteNumberValue(RequiredInt);
-            if (NonRequiredString != null)
+            if (Optional.IsDefined(NonRequiredString))
             {
                 writer.WritePropertyName("nonRequiredString"u8);
                 writer.WriteStringValue(NonRequiredString);
             }
-            if (NonRequiredInt.HasValue)
+            if (Optional.IsDefined(NonRequiredInt))
             {
                 writer.WritePropertyName("nonRequiredInt"u8);
                 writer.WriteNumberValue(NonRequiredInt.Value);
@@ -59,7 +60,7 @@ namespace ModelsTypeSpec.Models
             {
                 writer.WriteNull("requiredNullableString");
             }
-            if (NonRequiredNullableInt.HasValue)
+            if (Optional.IsDefined(NonRequiredNullableInt))
             {
                 if (NonRequiredNullableInt != null)
                 {
@@ -71,7 +72,7 @@ namespace ModelsTypeSpec.Models
                     writer.WriteNull("nonRequiredNullableInt");
                 }
             }
-            if (NonRequiredNullableString != null)
+            if (Optional.IsDefined(NonRequiredNullableString))
             {
                 if (NonRequiredNullableString != null)
                 {
@@ -88,7 +89,7 @@ namespace ModelsTypeSpec.Models
                 writer.WritePropertyName("requiredReadonlyInt"u8);
                 writer.WriteNumberValue(RequiredReadonlyInt);
             }
-            if (options.Format != "W" && NonRequiredReadonlyInt.HasValue)
+            if (options.Format != "W" && Optional.IsDefined(NonRequiredReadonlyInt))
             {
                 writer.WritePropertyName("nonRequiredReadonlyInt"u8);
                 writer.WriteNumberValue(NonRequiredReadonlyInt.Value);
@@ -134,7 +135,7 @@ namespace ModelsTypeSpec.Models
             writer.WriteEndObject();
             writer.WritePropertyName("requiredBytes"u8);
             writer.WriteBase64StringValue(RequiredBytes.ToArray(), "D");
-            if (OptionalBytes != null)
+            if (Optional.IsDefined(OptionalBytes))
             {
                 writer.WritePropertyName("optionalBytes"u8);
                 writer.WriteBase64StringValue(OptionalBytes.ToArray(), "D");
@@ -146,7 +147,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteNumberValue(item);
             }
             writer.WriteEndArray();
-            if (!(OptionalUint8Array is ChangeTrackingList<byte> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(OptionalUint8Array))
             {
                 writer.WritePropertyName("optionalUint8Array"u8);
                 writer.WriteStartArray();
@@ -165,7 +166,7 @@ namespace ModelsTypeSpec.Models
                 JsonSerializer.Serialize(writer, document.RootElement);
             }
 #endif
-            if (OptionalUnknown != null)
+            if (Optional.IsDefined(OptionalUnknown))
             {
                 writer.WritePropertyName("optionalUnknown"u8);
 #if NET6_0_OR_GREATER
@@ -184,7 +185,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteNumberValue(item);
             }
             writer.WriteEndArray();
-            if (!(OptionalInt8Array is ChangeTrackingList<sbyte> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(OptionalInt8Array))
             {
                 writer.WritePropertyName("optionalInt8Array"u8);
                 writer.WriteStartArray();
@@ -194,7 +195,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (RequiredNullableIntList != null && !(RequiredNullableIntList is ChangeTrackingList<int> collection1 && collection1.IsUndefined))
+            if (RequiredNullableIntList != null && Optional.IsCollectionDefined(RequiredNullableIntList))
             {
                 writer.WritePropertyName("requiredNullableIntList"u8);
                 writer.WriteStartArray();
@@ -208,7 +209,7 @@ namespace ModelsTypeSpec.Models
             {
                 writer.WriteNull("requiredNullableIntList");
             }
-            if (RequiredNullableStringList != null && !(RequiredNullableStringList is ChangeTrackingList<string> collection2 && collection2.IsUndefined))
+            if (RequiredNullableStringList != null && Optional.IsCollectionDefined(RequiredNullableStringList))
             {
                 writer.WritePropertyName("requiredNullableStringList"u8);
                 writer.WriteStartArray();
@@ -222,7 +223,7 @@ namespace ModelsTypeSpec.Models
             {
                 writer.WriteNull("requiredNullableStringList");
             }
-            if (!(NonRequiredNullableIntList is ChangeTrackingList<int> collection3 && collection3.IsUndefined))
+            if (Optional.IsCollectionDefined(NonRequiredNullableIntList))
             {
                 if (NonRequiredNullableIntList != null)
                 {
@@ -239,7 +240,7 @@ namespace ModelsTypeSpec.Models
                     writer.WriteNull("nonRequiredNullableIntList");
                 }
             }
-            if (!(NonRequiredNullableStringList is ChangeTrackingList<string> collection4 && collection4.IsUndefined))
+            if (Optional.IsCollectionDefined(NonRequiredNullableStringList))
             {
                 if (NonRequiredNullableStringList != null)
                 {

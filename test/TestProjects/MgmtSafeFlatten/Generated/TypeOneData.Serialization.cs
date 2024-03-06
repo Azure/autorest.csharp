@@ -19,27 +19,27 @@ namespace MgmtSafeFlatten
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (MyType != null)
+            if (Optional.IsDefined(MyType))
             {
                 writer.WritePropertyName("MyType"u8);
                 writer.WriteStringValue(MyType);
             }
-            if (LayerOne != null)
+            if (Optional.IsDefined(LayerOne))
             {
                 writer.WritePropertyName("layerOne"u8);
                 writer.WriteObjectValue(LayerOne);
             }
-            if (LayerOneType != null)
+            if (Optional.IsDefined(LayerOneType))
             {
                 writer.WritePropertyName("layerOneType"u8);
                 writer.WriteObjectValue(LayerOneType);
             }
-            if (LayerOneConflict != null)
+            if (Optional.IsDefined(LayerOneConflict))
             {
                 writer.WritePropertyName("layerOneConflict"u8);
                 JsonSerializer.Serialize(writer, LayerOneConflict);
             }
-            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();

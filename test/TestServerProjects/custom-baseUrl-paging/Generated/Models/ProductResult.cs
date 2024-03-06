@@ -7,7 +7,7 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
+using custom_baseUrl_paging;
 
 namespace custom_baseUrl_paging.Models
 {
