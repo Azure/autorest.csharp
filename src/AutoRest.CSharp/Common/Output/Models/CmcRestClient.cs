@@ -15,8 +15,8 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal abstract class CmcRestClient : TypeProvider
     {
-        private readonly CachedDictionary<ServiceRequest, RestClientMethod> _requestMethods;
-        private readonly CachedDictionary<ServiceRequest, RestClientMethod> _nextPageRequestMethods;
+        private readonly Lazy<Dictionary<ServiceRequest, RestClientMethod>> _requestMethods;
+        private readonly Lazy<Dictionary<ServiceRequest, RestClientMethod>> _nextPageRequestMethods;
         private (Operation Operation, RestClientMethod Method)[]? _allMethods;
         private ConstructorSignature? _constructor;
 
@@ -33,8 +33,8 @@ namespace AutoRest.CSharp.Output.Models
         {
             OperationGroup = operationGroup;
 
-            _requestMethods = new CachedDictionary<ServiceRequest, RestClientMethod>(EnsureNormalMethods);
-            _nextPageRequestMethods = new CachedDictionary<ServiceRequest, RestClientMethod>(EnsureGetNextPageMethods);
+            _requestMethods = new Lazy<Dictionary<ServiceRequest, RestClientMethod>>(EnsureNormalMethods);
+            _nextPageRequestMethods = new Lazy<Dictionary<ServiceRequest, RestClientMethod>>(EnsureGetNextPageMethods);
 
             Parameters = parameters;
 
@@ -105,13 +105,13 @@ namespace AutoRest.CSharp.Output.Models
 
         public RestClientMethod? GetNextOperationMethod(ServiceRequest request)
         {
-            _nextPageRequestMethods.TryGetValue(request, out RestClientMethod? value);
+            _nextPageRequestMethods.Value.TryGetValue(request, out RestClientMethod? value);
             return value;
         }
 
         public RestClientMethod GetOperationMethod(ServiceRequest request)
         {
-            return _requestMethods[request];
+            return _requestMethods.Value[request];
         }
     }
 }
