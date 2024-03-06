@@ -5,9 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Builders;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -83,9 +83,9 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
                     }
 
                     FormattableString summary = $"Registers a {client.Type:C} instance";
-                    var constrait = includeCredential
-                        ? (FormattableString)$"{typeof(IAzureClientFactoryBuilderWithCredential)}"
-                        : $"{typeof(IAzureClientFactoryBuilder)}";
+                    var constraint = includeCredential
+                        ? new WhereExpression(TBuilderType, typeof(IAzureClientFactoryBuilderWithCredential))
+                        : new WhereExpression(TBuilderType, typeof(IAzureClientFactoryBuilder));
                     var signature = new MethodSignature(
                         $"Add{client.Declaration.Name}",
                         summary,
@@ -95,10 +95,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
                         null,
                         signatureParameters,
                         GenericArguments: new[] { TBuilderType },
-                        GenericParameterConstraints: new Dictionary<CSharpType, FormattableString>()
-                        {
-                            [TBuilderType] = constrait
-                        });
+                        GenericParameterConstraints: new[] { constraint });
                     result.Add(signature, (parameterDeclarations, parameterValues));
                 }
             }
@@ -125,9 +122,9 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
                     null,
                     new[] { FactoryBuilderParameter, ConfigurationParameter },
                     GenericArguments: new[] { TBuilderType, TConfigurationType },
-                    GenericParameterConstraints: new Dictionary<CSharpType, FormattableString>()
+                    GenericParameterConstraints: new[]
                     {
-                        [TBuilderType] = $"{typeof(IAzureClientFactoryBuilderWithConfiguration<>)}"
+                        new WhereExpression(TBuilderType, new CSharpType(typeof(IAzureClientFactoryBuilderWithConfiguration<>), TConfigurationType))
                     });
             }
         }
