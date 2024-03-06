@@ -94,8 +94,6 @@ namespace AutoRest.CSharp.Generation.Types
         public TypeProvider Implementation => _implementation ?? throw new InvalidOperationException($"Not implemented type: '{Namespace}.{Name}'");
         public bool IsNullable { get; }
 
-        public WhereExpression IsType(CSharpType type) => new WhereExpression(this, type);
-
         public Type? SerializeAs { get; init; }
 
         public bool HasParent => IsFrameworkType ? false : Implementation is ObjectType objectType ? objectType.Inherits is not null : false;
