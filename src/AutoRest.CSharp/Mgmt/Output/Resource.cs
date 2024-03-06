@@ -330,7 +330,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected virtual bool ShouldIncludeOperation(InputOperation operation)
         {
-            if (Configuration.MgmtConfiguration.OperationPositions.TryGetValue(operation.Name, out var positions))
+            if (Configuration.MgmtConfiguration.OperationPositions.TryGetValue(operation.OperationId!, out var positions))
             {
                 return positions.Contains(Position);
             }

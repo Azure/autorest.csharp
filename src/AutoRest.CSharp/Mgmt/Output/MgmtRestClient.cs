@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override Dictionary<InputOperation, RestClientMethod> EnsureNormalMethods()
         {
-            var requestMethods = new Dictionary<InputOperation, RestClientMethod>();
+            var requestMethods = new Dictionary<InputOperation, RestClientMethod>(ReferenceEqualityComparer.Instance);
 
             foreach (var operation in InputClient.Operations)
             {

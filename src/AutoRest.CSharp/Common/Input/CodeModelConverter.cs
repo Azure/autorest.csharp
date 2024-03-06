@@ -113,6 +113,7 @@ namespace AutoRest.CSharp.Common.Input
                 Paging: CreateOperationPaging(operation),
                 GenerateProtocolMethod: true,
                 GenerateConvenienceMethod: false,
+                OperationId: operation.OperationId,
                 OriginalName: operation.Language.Default.SerializedName)
             {
                 KeepClientDefaultValue = Configuration.MethodsToKeepClientDefaultValue.Contains(operation.OperationId)
@@ -406,7 +407,14 @@ namespace AutoRest.CSharp.Common.Input
             => CreateType(schema, schema.Extensions?.Format, modelsCache, isNullable);
 
         private static InputType CreateType(Schema schema, string? format, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache, bool isNullable)
-            => CreateType(schema, format, modelsCache) with { IsNullable = isNullable };
+        {
+            var type = CreateType(schema, format, modelsCache);
+            if (isNullable)
+            {
+                return type with { IsNullable = isNullable };
+            }
+            return type;
+        }
 
         private static InputType CreateType(Schema schema, string? format, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache) => schema switch
         {

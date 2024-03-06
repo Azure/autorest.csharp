@@ -259,12 +259,13 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 var model = BuildModel(inputEnum);
                 _schemaOrNameToModels.Add(inputEnum, model);
             }
+
             //this is where we update
             var updatedModels = UpdateBodyParameters();
-            foreach (var schema in updatedModels)
-            {
-                _schemaOrNameToModels[schema] = BuildModel(schema);
-            }
+            //foreach (var schema in updatedModels)
+            //{
+            //    _schemaOrNameToModels[schema] = BuildModel(schema);
+            //}
 
             // second, collect any model which can be replaced as whole (not as a property or as a base class)
             var replacedTypes = new Dictionary<InputModelType, TypeProvider>();
@@ -371,7 +372,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             {
                 return restClientMethod;
             }
-            throw new Exception($"The {operation.Name} method does not exist.");
+            throw new Exception($"The {operation.OperationId} method does not exist.");
         }
 
         public RequestPath GetRequestPath(InputOperation operation) => OperationsToRequestPaths[operation];
@@ -403,7 +404,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         continue;
                     if (!restClientMethods.TryAdd(operation, restClientMethod))
                     {
-                        throw new Exception($"An rest method '{operation.Name}' has already been added");
+                        throw new Exception($"An rest method '{operation.OperationId}' has already been added");
                     }
                 }
             }
@@ -790,7 +791,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             // TODO: model has been turned in to a new instance somewhere, need to fix it later
-            return FindTypeByName(model.OriginalName!) ?? throw new InvalidOperationException($"Cannot find model {model.Name}");
+            return FindTypeByName(model.OriginalName ?? model.Name) ?? throw new InvalidOperationException($"Cannot find model {model.Name}");
         }
 
         public override CSharpType? FindTypeByName(string originalName)

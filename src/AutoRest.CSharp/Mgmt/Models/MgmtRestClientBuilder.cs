@@ -49,7 +49,7 @@ namespace AutoRest.CSharp.Mgmt.Models
                 {
                     if (!parameter.IsEndpoint && !parameter.IsApiVersion)
                     {
-                        throw new InvalidOperationException($"'{parameter.Name}' should be method parameter for operation '{operation.Name}'");
+                        throw new InvalidOperationException($"'{parameter.Name}' should be method parameter for operation '{operation.OperationId}'");
                     }
                     parameters.Add(parameter);
                 }

@@ -55,10 +55,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// <returns></returns>
         public static bool TryGetConfigOperationName(this InputOperation operation, [MaybeNullWhen(false)] out string name)
         {
-            if (Configuration.MgmtConfiguration.OverrideOperationName.TryGetValue(operation.Name, out name))
+            if (Configuration.MgmtConfiguration.OverrideOperationName.TryGetValue(operation.OperationId!, out name))
             {
                 MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
-                    new TransformItem(TransformTypeName.OverrideOperationName, operation.Name, name),
+                    new TransformItem(TransformTypeName.OverrideOperationName, operation.OperationId!, name),
                     operation.GetFullSerializedName(),
                     "OverrideOperationName", operation.Name, name);
                 return true;
