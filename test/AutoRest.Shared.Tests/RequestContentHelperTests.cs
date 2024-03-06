@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Xml;
-using System.Xml.Linq;
+using FirstTestTypeSpec;
 using NUnit.Framework;
 
 namespace Azure.Core.Tests

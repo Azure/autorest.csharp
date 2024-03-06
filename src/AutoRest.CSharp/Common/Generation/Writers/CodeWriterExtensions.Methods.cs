@@ -663,6 +663,16 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.AppendRaw(" ").WriteValueExpression(inner);
                     }
                     break;
+                case WhereExpression(var type, var constraints):
+                    writer.AppendRaw("where ")
+                        .Append($"{type} : ");
+                    foreach (var constraint in constraints)
+                    {
+                        writer.WriteValueExpression(constraint);
+                        writer.AppendRaw(",");
+                    }
+                    writer.RemoveTrailingComma();
+                    break;
                 case StringLiteralExpression(var literal, true):
                     writer.Literal(literal).AppendRaw("u8");
                     break;
