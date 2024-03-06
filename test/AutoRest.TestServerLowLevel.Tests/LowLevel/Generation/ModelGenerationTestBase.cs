@@ -69,7 +69,8 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 mgmtTestConfiguration: null,
                 branded: true,
                 generateSampleProject: true,
-                generateTestProject: true);
+                generateTestProject: true,
+                helperNamespace: "");
         }
 
 

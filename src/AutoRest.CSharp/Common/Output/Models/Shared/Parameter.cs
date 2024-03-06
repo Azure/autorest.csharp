@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
         public CSharpAttribute[] Attributes { get; init; } = Array.Empty<CSharpAttribute>();
         public bool IsOptionalInSignature => DefaultValue != null;
 
-        public Parameter WithRef(bool isRef = true) => this with { IsRef = isRef };
+        public Parameter WithRef(bool isRef = true) => IsRef == isRef ? this : this with { IsRef = isRef };
 
         public Parameter ToRequired()
         {

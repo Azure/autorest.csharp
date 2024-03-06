@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class OptionalTypeProvider : ExpressionTypeProvider
     {
-        private static readonly Lazy<OptionalTypeProvider> _instance = new(() => new OptionalTypeProvider(Configuration.Namespace, null));
+        private static readonly Lazy<OptionalTypeProvider> _instance = new(() => new OptionalTypeProvider(Configuration.HelperNamespace, null));
         public static OptionalTypeProvider Instance => _instance.Value;
 
         private class ListTemplate<T> { }

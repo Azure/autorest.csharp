@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class ArgumentProvider : ExpressionTypeProvider
     {
-        private static readonly Lazy<ArgumentProvider> _instance = new(() => new ArgumentProvider(Configuration.Namespace, null));
+        private static readonly Lazy<ArgumentProvider> _instance = new(() => new ArgumentProvider(Configuration.HelperNamespace, null));
 
         private class Template<T> { }
 
@@ -82,11 +82,13 @@ namespace AutoRest.CSharp.Output.Models.Types
             var valueParam = new Parameter("value", null, _t, null, ValidationType.None, null);
             var messageParam = new Parameter("message", null, typeof(string), Constant.Default(new CSharpType(typeof(string), true)), ValidationType.None, null);
             var signature = GetSignature("AssertNull", new[] { valueParam, _nameParam, messageParam }, new[] { _t });
+            var value = new ParameterReference(valueParam);
+            var message = new ParameterReference(messageParam);
             return new Method(signature, new MethodBodyStatement[]
             {
-                new IfStatement(NotEqual(new ParameterReference(valueParam), Null))
+                new IfStatement(NotEqual(value, Null))
                 {
-                    ThrowArgumentException(NullCoalescing(new ParameterReference(messageParam), Literal("Value must be null.")))
+                    ThrowArgumentException(NullCoalescing(message, Literal("Value must be null.")))
                 }
             });
         }
@@ -94,12 +96,12 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Method BuildCheckNotNullOrEmptyString()
         {
             var valueParam = new Parameter("value", null, typeof(string), null, ValidationType.None, null);
-            var signature = GetSignature("CheckNotNull", new[] { valueParam, _nameParam }, returnType: typeof(string));
-            var valueParamRef = new ParameterReference(valueParam);
+            var signature = GetSignature("CheckNotNullOrEmpty", new[] { valueParam, _nameParam }, returnType: typeof(string));
+            var value = new ParameterReference(valueParam);
             return new Method(signature, new MethodBodyStatement[]
             {
-                AssertNotNullOrEmpty(valueParamRef, _nameParam),
-                Return(valueParamRef)
+                AssertNotNullOrEmpty(value, _nameParamRef),
+                Return(value)
             });
         }
 
@@ -108,11 +110,11 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             var valueParam = new Parameter("value", null, _t, null, ValidationType.None, null);
             var signature = GetSignature("CheckNotNull", new[] { valueParam, _nameParam }, new[] { _t }, new Dictionary<CSharpType, FormattableString>() { { _t, $"class" } }, _t);
-            var valueParamRef = new ParameterReference(valueParam);
+            var value = new ParameterReference(valueParam);
             return new Method(signature, new MethodBodyStatement[]
             {
-                AssertNotNull(valueParamRef, _nameParam),
-                Return(valueParamRef)
+                AssertNotNull(value, _nameParamRef),
+                Return(value)
             });
         }
 
@@ -121,12 +123,13 @@ namespace AutoRest.CSharp.Output.Models.Types
             var valueParam = new Parameter("value", null, typeof(object), null, ValidationType.None, null);
             var enumTypeParam = new Parameter("enumType", null, typeof(Type), null, ValidationType.None, null);
             var signature = GetSignature("AssertEnumDefined", new[] { enumTypeParam, valueParam, _nameParam });
-            var enumTypeParamRef = new ParameterReference(enumTypeParam);
+            var enumType = new ParameterReference(enumTypeParam);
+            var value = new ParameterReference(valueParam);
             return new Method(signature, new MethodBodyStatement[]
             {
-                new IfStatement(Not(new BoolExpression(new InvokeStaticMethodExpression(typeof(Enum), "IsDefined", new[] { enumTypeParamRef, new ParameterReference(valueParam) }))))
+                new IfStatement(Not(new BoolExpression(new InvokeStaticMethodExpression(typeof(Enum), "IsDefined", new[] { enumType, value }))))
                 {
-                    ThrowArgumentException(new FormattableStringExpression("Value not defined for {0}.", new MemberExpression(enumTypeParamRef, "FullName")))
+                    ThrowArgumentException(new FormattableStringExpression("Value not defined for {0}.", new MemberExpression(enumType, "FullName")))
                 }
             });
         }
@@ -141,14 +144,14 @@ namespace AutoRest.CSharp.Output.Models.Types
                 { _t, $"notnull, {typeof(IComparable<>)}" }
             };
             var signature = GetSignature("AssertInRange", new[] { valueParam, minParam, maxParam, _nameParam }, new[] { _t }, argConstraints);
-            var valueParamRef = new ParameterReference(valueParam);
+            var value = new ParameterReference(valueParam);
             return new Method(signature, new MethodBodyStatement[]
             {
-                new IfStatement(GreaterThan(GetCompareToExpression(new ParameterReference(minParam), valueParamRef), Literal(0)))
+                new IfStatement(GreaterThan(GetCompareToExpression(new ParameterReference(minParam), value), Literal(0)))
                 {
                     Throw(New.ArgumentOutOfRangeException(_nameParamRef, "Value is less than the minimum allowed.", false))
                 },
-                new IfStatement(LessThan(GetCompareToExpression(new ParameterReference(maxParam), valueParamRef), Literal(0)))
+                new IfStatement(LessThan(GetCompareToExpression(new ParameterReference(maxParam), value), Literal(0)))
                 {
                     Throw(New.ArgumentOutOfRangeException(_nameParamRef, "Value is greater than the maximum allowed.", false))
                 }
@@ -168,9 +171,10 @@ namespace AutoRest.CSharp.Output.Models.Types
                 { _t, $"struct, {typeof(IEquatable<>)}" }
             };
             var signature = GetSignature("AssertNotDefault", new[] { valueParam.WithRef(), _nameParam }, new[] { _t }, argConstraints);
+            var value = new ParameterReference(valueParam);
             return new Method(signature, new MethodBodyStatement[]
             {
-                new IfStatement(new BoolExpression(new ParameterReference(valueParam).Invoke("Equals", Default)))
+                new IfStatement(new BoolExpression(value.Invoke("Equals", Default)))
                 {
                     ThrowArgumentException("Value cannot be empty.")
                 }
@@ -181,10 +185,11 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             var valueParam = new Parameter("value", null, typeof(string), null, ValidationType.None, null);
             var signature = GetSignature("AssertNotNullOrWhiteSpace", new[] { valueParam, _nameParam });
+            var value = new StringExpression(valueParam);
             return new Method(signature, new MethodBodyStatement[]
             {
                 AssertNotNullSnippet(valueParam),
-                new IfStatement(new BoolExpression(new InvokeStaticMethodExpression(typeof(string), "IsNullOrWhiteSpace", new[] { new ParameterReference(valueParam) })))
+                new IfStatement(StringExpression.IsNullOrWhiteSpace(value))
                 {
                     ThrowArgumentException("Value cannot be empty or contain only white-space characters.")
                 }
@@ -195,10 +200,11 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             var valueParam = new Parameter("value", null, typeof(string), null, ValidationType.None, null);
             var signature = GetSignature(AssertNotNullOrEmptyMethodName, new[] { valueParam, _nameParam });
+            var value = new StringExpression(valueParam);
             return new Method(signature, new MethodBodyStatement[]
             {
                 AssertNotNullSnippet(valueParam),
-                new IfStatement(Equal(new MemberExpression(new ParameterReference(valueParam), "Length"), Literal(0)))
+                new IfStatement(Equal(value.Length, Literal(0)))
                 {
                     ThrowArgumentException("Value cannot be an empty string.")
                 }
@@ -245,11 +251,12 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             var valueParam = new Parameter("value", null, _nullableT, null, ValidationType.None, null);
             var signature = GetSignature(AssertNotNullMethodName, new[] { valueParam, _nameParam }, new[] { _t }, new Dictionary<CSharpType, FormattableString>() { { _t, $"struct" } });
+            var value = new ParameterReference(valueParam);
             return new Method(signature, new MethodBodyStatement[]
             {
-                new IfStatement(Not(new BoolExpression(new MemberExpression(new ParameterReference(valueParam), "HasValue"))))
+                new IfStatement(Not(new BoolExpression(new MemberExpression(value, "HasValue"))))
                 {
-                Throw(New.ArgumentNullException(_nameParamRef, false))
+                    Throw(New.ArgumentNullException(_nameParamRef, false))
                 }
             });
         }
