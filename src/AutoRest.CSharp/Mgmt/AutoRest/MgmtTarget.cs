@@ -107,7 +107,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 }
                 else if (model is EnumType et)
                 {
-                    var schema = MgmtContext.Library.SchemaMap.First(map => map.Value == model).Key;
+                    var schema = MgmtContext.Library.SchemaMap.Value.First(map => map.Value == model).Key;
                     var choices = schema switch
                     {
                         ChoiceSchema sc => sc.Choices,
