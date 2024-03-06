@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.Generation.Writers
             using (_writer.Namespace(_provider.Declaration.Namespace))
             {
                 _writer.WriteClassModifiers(_provider.DeclarationModifiers);
-                _writer.Append($" class {_provider.Type:D}")
+                _writer.Append($" class {_provider.Type:D}") // TODO -- support struct
                     .AppendRawIf(" : ", _provider.Inherits != null || _provider.Implements.Any())
                     .AppendIf($"{_provider.Inherits},", _provider.Inherits != null);
 

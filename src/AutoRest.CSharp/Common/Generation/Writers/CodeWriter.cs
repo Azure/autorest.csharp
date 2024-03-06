@@ -810,9 +810,9 @@ namespace AutoRest.CSharp.Generation.Writers
             this.AppendRawIf("public ", modifiers.HasFlag(TypeSignatureModifiers.Public))
                 .AppendRawIf("internal ", modifiers.HasFlag(TypeSignatureModifiers.Internal))
                 .AppendRawIf("private ", modifiers.HasFlag(TypeSignatureModifiers.Private))
-                .AppendRawIf("partial ", modifiers.HasFlag(TypeSignatureModifiers.Partial))
                 .AppendRawIf("static ", modifiers.HasFlag(TypeSignatureModifiers.Static))
-                .AppendRawIf("sealed ", modifiers.HasFlag(TypeSignatureModifiers.Sealed));
+                .AppendRawIf("sealed ", modifiers.HasFlag(TypeSignatureModifiers.Sealed))
+                .AppendRawIf("partial ", modifiers.HasFlag(TypeSignatureModifiers.Partial)); // partial must be the last to write otherwise compiler will complain
         }
     }
 }
