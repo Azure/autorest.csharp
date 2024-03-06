@@ -5,32 +5,29 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Net.Security;
 using AutoRest.CSharp.Common.Decorator;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
-using AutoRest.CSharp.Mgmt.Decorator.Transformer;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
-using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis.CSharp;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class DataPlaneOutputLibrary : OutputLibrary
     {
-        private CachedDictionary<InputClient, DataPlaneRestClient> _restClients;
-        private CachedDictionary<InputClient, DataPlaneClient> _clients;
-        private CachedDictionary<InputOperation, LongRunningOperation> _operations;
-        private CachedDictionary<InputOperation, DataPlaneResponseHeaderGroupType> _headerModels;
-        private CachedDictionary<InputEnumType, EnumType> _enums;
-        private CachedDictionary<Schema, TypeProvider> _models;
-        private CachedDictionary<string, List<string>> _protocolMethodsDictionary;
+        private Lazy<IReadOnlyDictionary<InputClient, DataPlaneRestClient>> _restClients;
+        private Lazy<IReadOnlyDictionary<InputClient, DataPlaneClient>> _clients;
+        private Lazy<IReadOnlyDictionary<InputOperation, LongRunningOperation>> _operations;
+        private Lazy<IReadOnlyDictionary<InputOperation, DataPlaneResponseHeaderGroupType>> _headerModels;
+        private Lazy<IReadOnlyDictionary<InputEnumType, EnumType>> _enums;
+        private Lazy<IReadOnlyDictionary<Schema, TypeProvider>> _models;
+        private Lazy<IReadOnlyDictionary<string, List<string>>> _protocolMethodsDictionary;
 
         private readonly CodeModelConverter _converter;
         private readonly InputNamespace _input;
@@ -59,14 +56,14 @@ namespace AutoRest.CSharp.Output.Models.Types
             _defaultNamespace = Configuration.Namespace;
             _libraryName = Configuration.LibraryName;
 
-            _restClients = new CachedDictionary<InputClient, DataPlaneRestClient>(EnsureRestClients);
-            _clients = new CachedDictionary<InputClient, DataPlaneClient>(EnsureClients);
-            _operations = new CachedDictionary<InputOperation, LongRunningOperation>(EnsureLongRunningOperations);
-            _headerModels = new CachedDictionary<InputOperation, DataPlaneResponseHeaderGroupType>(EnsureHeaderModels);
-            _enums = new CachedDictionary<InputEnumType, EnumType>(BuildEnums);
-            _models = new CachedDictionary<Schema, TypeProvider>(() => BuildModels(codeModel));
+            _restClients = new Lazy<IReadOnlyDictionary<InputClient, DataPlaneRestClient>>(EnsureRestClients);
+            _clients = new Lazy<IReadOnlyDictionary<InputClient, DataPlaneClient>>(EnsureClients);
+            _operations = new Lazy<IReadOnlyDictionary<InputOperation, LongRunningOperation>>(EnsureLongRunningOperations);
+            _headerModels = new Lazy<IReadOnlyDictionary<InputOperation, DataPlaneResponseHeaderGroupType>>(EnsureHeaderModels);
+            _enums = new Lazy<IReadOnlyDictionary<InputEnumType, EnumType>>(BuildEnums);
+            _models = new Lazy<IReadOnlyDictionary<Schema, TypeProvider>>(() => BuildModels(codeModel));
             _modelFactory = new Lazy<ModelFactoryTypeProvider?>(() => ModelFactoryTypeProvider.TryCreate(Models, _typeFactory, _sourceInputModel));
-            _protocolMethodsDictionary = new CachedDictionary<string, List<string>>(GetProtocolMethodsDictionary);
+            _protocolMethodsDictionary = new Lazy<IReadOnlyDictionary<string, List<string>>>(GetProtocolMethodsDictionary);
 
             ClientOptions = CreateClientOptions();
             Authentication = _input.Auth;
@@ -86,13 +83,13 @@ namespace AutoRest.CSharp.Output.Models.Types
         public ModelFactoryTypeProvider? ModelFactory => _modelFactory.Value;
         public ClientOptionsTypeProvider? ClientOptions { get; }
         public InputAuth Authentication { get; }
-        public IEnumerable<DataPlaneClient> Clients => _clients.Values;
-        public IEnumerable<LongRunningOperation> LongRunningOperations => _operations.Values;
-        public IEnumerable<DataPlaneResponseHeaderGroupType> HeaderModels => _headerModels.Values;
-        public IEnumerable<TypeProvider> Models => _models.Values;
-        public IDictionary<string, List<string>> ProtocolMethodsDictionary => _protocolMethodsDictionary;
+        public IEnumerable<DataPlaneClient> Clients => _clients.Value.Values;
+        public IEnumerable<LongRunningOperation> LongRunningOperations => _operations.Value.Values;
+        public IEnumerable<DataPlaneResponseHeaderGroupType> HeaderModels => _headerModels.Value.Values;
+        public IEnumerable<TypeProvider> Models => _models.Value.Values;
+        public IReadOnlyDictionary<string, List<string>> ProtocolMethodsDictionary => _protocolMethodsDictionary.Value;
 
-        public override CSharpType ResolveEnum(InputEnumType enumType) => _enums[enumType].Type;
+        public override CSharpType ResolveEnum(InputEnumType enumType) => _enums.Value[enumType].Type;
         public override CSharpType ResolveModel(InputModelType model) => throw new NotImplementedException($"{nameof(ResolveModel)} is not implemented for HLC yet.");
 
         public override CSharpType? FindTypeByName(string originalName)
@@ -110,7 +107,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Dictionary<InputEnumType, EnumType> BuildEnums()
         {
             var dictionary = new Dictionary<InputEnumType, EnumType>(InputEnumType.IgnoreNullabilityComparer);
-            foreach (var (schema, typeProvider) in _models)
+            foreach (var (schema, typeProvider) in _models.Value)
             {
                 switch (schema)
                 {
@@ -150,18 +147,18 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             Debug.Assert(operation.LongRunning != null);
 
-            return _operations[operation];
+            return _operations.Value[operation];
         }
 
         public DataPlaneClient? FindClient(InputClient inputClient)
         {
-            _clients.TryGetValue(inputClient, out var client);
+            _clients.Value.TryGetValue(inputClient, out var client);
             return client;
         }
 
         public DataPlaneResponseHeaderGroupType? FindHeaderModel(InputOperation operation)
         {
-            _headerModels.TryGetValue(operation, out var model);
+            _headerModels.Value.TryGetValue(operation, out var model);
             return model;
         }
 
@@ -181,7 +178,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 nextOperationMethod);
         }
 
-        public IEnumerable<DataPlaneRestClient> RestClients => _restClients.Values;
+        public IEnumerable<DataPlaneRestClient> RestClients => _restClients.Value.Values;
 
         private Dictionary<InputOperation, DataPlaneResponseHeaderGroupType> EnsureHeaderModels()
         {
@@ -213,7 +210,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 foreach (var client in _input.Clients)
                 {
-                    var clientName = _clients[client].Declaration.Name;
+                    var clientName = _clients.Value[client].Declaration.Name;
                     var clientPrefix = ClientBuilder.GetClientPrefix(clientName, _input.Name);
 
                     foreach (var operation in client.Operations)
@@ -244,7 +241,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 foreach (var inputClient in _input.Clients)
                 {
-                    clients.Add(inputClient, new DataPlaneClient(inputClient, _restClients[inputClient], GetClientDefaultName(inputClient), this, _sourceInputModel));
+                    clients.Add(inputClient, new DataPlaneClient(inputClient, _restClients.Value[inputClient], GetClientDefaultName(inputClient), this, _sourceInputModel));
                 }
             }
 

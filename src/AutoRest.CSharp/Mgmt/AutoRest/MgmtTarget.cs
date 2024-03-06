@@ -105,7 +105,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 }
                 else if (model is EnumType et)
                 {
-                    var inputType = MgmtContext.Library.SchemaMap.First(map => map.Value == model).Key;
+                    var inputType = MgmtContext.Library.SchemaMap.Value.First(map => map.Value == model).Key;
                     var choices = inputType switch
                     {
                         InputEnumType sc => sc.AllowedValues,

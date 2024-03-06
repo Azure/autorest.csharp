@@ -580,7 +580,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         private PagingMethodWrapper? GetPagingMethodWrapper(RestClientMethod method)
         {
-            if (MgmtContext.Library.PagingMethods.TryGetValue(method, out var pagingMethod))
+            if (MgmtContext.Library.PagingMethods.Value.TryGetValue(method, out var pagingMethod))
                 return new PagingMethodWrapper(pagingMethod);
 
             if (method.IsListMethod(out var itemType, out var valuePropertyName))

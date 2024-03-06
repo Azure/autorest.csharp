@@ -10,14 +10,13 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models
 {
     internal abstract class CmcRestClient : TypeProvider
     {
-        private readonly CachedDictionary<InputOperation, RestClientMethod> _requestMethods;
-        private readonly CachedDictionary<InputOperation, RestClientMethod> _nextPageRequestMethods;
+        private readonly Lazy<IReadOnlyDictionary<InputOperation, RestClientMethod>> _requestMethods;
+        private readonly Lazy<IReadOnlyDictionary<InputOperation, RestClientMethod>> _nextPageRequestMethods;
         private (InputOperation Operation, RestClientMethod Method)[]? _allMethods;
         private ConstructorSignature? _constructor;
 
@@ -34,8 +33,8 @@ namespace AutoRest.CSharp.Output.Models
         {
             InputClient = inputClient;
 
-            _requestMethods = new CachedDictionary<InputOperation, RestClientMethod>(EnsureNormalMethods);
-            _nextPageRequestMethods = new CachedDictionary<InputOperation, RestClientMethod>(EnsureGetNextPageMethods);
+            _requestMethods = new Lazy<IReadOnlyDictionary<InputOperation, RestClientMethod>>(EnsureNormalMethods);
+            _nextPageRequestMethods = new Lazy<IReadOnlyDictionary<InputOperation, RestClientMethod>>(EnsureGetNextPageMethods);
 
             Parameters = parameters;
 
@@ -97,13 +96,13 @@ namespace AutoRest.CSharp.Output.Models
 
         public RestClientMethod? GetNextOperationMethod(InputOperation operation)
         {
-            _nextPageRequestMethods.TryGetValue(operation, out RestClientMethod? value);
+            _nextPageRequestMethods.Value.TryGetValue(operation, out RestClientMethod? value);
             return value;
         }
 
         public RestClientMethod GetOperationMethod(InputOperation operation)
         {
-            return _requestMethods[operation];
+            return _requestMethods.Value[operation];
         }
     }
 }
