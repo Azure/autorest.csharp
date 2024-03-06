@@ -126,7 +126,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         [Test]
         public void ValidateResourceDataCount()
         {
-            var count = MgmtContext.Library.ResourceSchemaMap.Count;
+            var count = MgmtContext.Library.ResourceSchemaMap.Value.Count;
 
             Assert.AreEqual(count, MgmtContext.Library.ResourceData.Count(), "Did not find the expected resourceData count");
         }
