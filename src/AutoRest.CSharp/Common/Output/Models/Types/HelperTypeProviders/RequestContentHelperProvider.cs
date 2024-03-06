@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class RequestContentHelperProvider : ExpressionTypeProvider
     {
-        private static readonly Lazy<RequestContentHelperProvider> _instance = new Lazy<RequestContentHelperProvider>(() => new RequestContentHelperProvider(Configuration.Namespace));
+        private static readonly Lazy<RequestContentHelperProvider> _instance = new Lazy<RequestContentHelperProvider>(() => new RequestContentHelperProvider(Configuration.HelperNamespace));
         public static RequestContentHelperProvider Instance => _instance.Value;
 
         private readonly MethodSignatureModifiers _methodModifiers = MethodSignatureModifiers.Public | MethodSignatureModifiers.Static;
