@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -92,6 +93,8 @@ namespace AutoRest.CSharp.Generation.Types
         public Type FrameworkType => _type ?? throw new InvalidOperationException("Not a framework type");
         public TypeProvider Implementation => _implementation ?? throw new InvalidOperationException($"Not implemented type: '{Namespace}.{Name}'");
         public bool IsNullable { get; }
+
+        public WhereExpression IsType(CSharpType type) => new WhereExpression(this, type);
 
         public Type? SerializeAs { get; init; }
 

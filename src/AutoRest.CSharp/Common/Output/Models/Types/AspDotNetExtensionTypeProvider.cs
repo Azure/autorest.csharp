@@ -84,8 +84,8 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
 
                     FormattableString summary = $"Registers a {client.Type:C} instance";
                     var constraint = includeCredential
-                        ? new WhereExpression(TBuilderType, typeof(IAzureClientFactoryBuilderWithCredential))
-                        : new WhereExpression(TBuilderType, typeof(IAzureClientFactoryBuilder));
+                        ? TBuilderType.IsType(typeof(IAzureClientFactoryBuilderWithCredential))
+                        : TBuilderType.IsType(typeof(IAzureClientFactoryBuilder));
                     var signature = new MethodSignature(
                         $"Add{client.Declaration.Name}",
                         summary,
@@ -124,7 +124,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
                     GenericArguments: new[] { TBuilderType, TConfigurationType },
                     GenericParameterConstraints: new[]
                     {
-                        new WhereExpression(TBuilderType, new CSharpType(typeof(IAzureClientFactoryBuilderWithConfiguration<>), TConfigurationType))
+                        TBuilderType.IsType(new CSharpType(typeof(IAzureClientFactoryBuilderWithConfiguration<>), TConfigurationType))
                     });
             }
         }

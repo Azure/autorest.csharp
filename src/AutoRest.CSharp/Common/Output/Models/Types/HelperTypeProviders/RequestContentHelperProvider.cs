@@ -67,7 +67,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 GenericArguments: new[] { tType },
                 GenericParameterConstraints: new[]
                 {
-                    new WhereExpression(tType, new KeywordExpression("notnull", null))
+                    Where.NotNull(tType)
                 },
                 Summary: null, Description: null, ReturnDescription: null);
 
@@ -144,7 +144,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 GenericArguments: new[] { valueType },
                 GenericParameterConstraints: new[]
                 {
-                    new WhereExpression(valueType, new KeywordExpression("notnull", null))
+                    Where.NotNull(valueType)
                 },
                 Summary: null, Description: null, ReturnDescription: null);
 

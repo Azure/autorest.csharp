@@ -106,7 +106,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Method IsStructDefined()
         {
             var valueParam = new Parameter("value", null, _t.WithNullable(true), null, ValidationType.None, null);
-            var signature = GetIsDefinedSignature(valueParam, new[] { _t }, new[] { new WhereExpression(_t, new KeywordExpression("struct", null)) });
+            var signature = GetIsDefinedSignature(valueParam, new[] { _t }, new[] { Where.Struct(_t) });
             return new Method(signature, new MethodBodyStatement[]
             {
                 Return(new MemberExpression(new ParameterReference(valueParam), "HasValue"))

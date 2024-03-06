@@ -47,7 +47,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             string name,
             IReadOnlyList<Parameter> parameters,
             IReadOnlyList<CSharpType>? genericArguments = null,
-            IReadOnlyDictionary<CSharpType, FormattableString>? genericArgumentConstraints = null,
+            IReadOnlyList<WhereExpression>? whereExpressions = null,
             CSharpType? returnType = null)
         {
             return new MethodSignature(
@@ -59,7 +59,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 null,
                 parameters,
                 GenericArguments: genericArguments,
-                GenericParameterConstraints: genericArgumentConstraints);
+                GenericParameterConstraints: whereExpressions);
         }
 
         protected override IEnumerable<Method> BuildMethods()
@@ -109,7 +109,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Method BuildCheckNotNull()
         {
             var valueParam = new Parameter("value", null, _t, null, ValidationType.None, null);
-            var signature = GetSignature("CheckNotNull", new[] { valueParam, _nameParam }, new[] { _t }, new Dictionary<CSharpType, FormattableString>() { { _t, $"class" } }, _t);
+            var signature = GetSignature("CheckNotNull", new[] { valueParam, _nameParam }, new[] { _t }, new[] { Where.Class(_t) }, _t);
             var value = new ParameterReference(valueParam);
             return new Method(signature, new MethodBodyStatement[]
             {
@@ -139,11 +139,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             var valueParam = new Parameter("value", null, _t, null, ValidationType.None, null);
             var minParam = new Parameter("minimum", null, _t, null, ValidationType.None, null);
             var maxParam = new Parameter("maximum", null, _t, null, ValidationType.None, null);
-            var argConstraints = new Dictionary<CSharpType, FormattableString>()
-            {
-                { _t, $"notnull, {typeof(IComparable<>)}" }
-            };
-            var signature = GetSignature("AssertInRange", new[] { valueParam, minParam, maxParam, _nameParam }, new[] { _t }, argConstraints);
+            var whereExpressions = new WhereExpression[] { Where.NotNull(_t).And(new CSharpType(typeof(IComparable<>), _t)) };
+            var signature = GetSignature("AssertInRange", new[] { valueParam, minParam, maxParam, _nameParam }, new[] { _t }, whereExpressions);
             var value = new ParameterReference(valueParam);
             return new Method(signature, new MethodBodyStatement[]
             {
@@ -166,11 +163,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Method BuildAssertNotDefault()
         {
             var valueParam = new Parameter("value", null, _t, null, ValidationType.None, null);
-            var argConstraints = new Dictionary<CSharpType, FormattableString>()
-            {
-                { _t, $"struct, {typeof(IEquatable<>)}" }
-            };
-            var signature = GetSignature("AssertNotDefault", new[] { valueParam.WithRef(), _nameParam }, new[] { _t }, argConstraints);
+            var whereExpressions = new WhereExpression[] { Where.Struct(_t).And(new CSharpType(typeof(IEquatable<>), _t)) };
+            var signature = GetSignature("AssertNotDefault", new[] { valueParam.WithRef(), _nameParam }, new[] { _t }, whereExpressions);
             var value = new ParameterReference(valueParam);
             return new Method(signature, new MethodBodyStatement[]
             {
@@ -250,7 +244,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Method BuildAssertNotNullStruct()
         {
             var valueParam = new Parameter("value", null, _nullableT, null, ValidationType.None, null);
-            var signature = GetSignature(AssertNotNullMethodName, new[] { valueParam, _nameParam }, new[] { _t }, new Dictionary<CSharpType, FormattableString>() { { _t, $"struct" } });
+            var signature = GetSignature(AssertNotNullMethodName, new[] { valueParam, _nameParam }, new[] { _t }, new[] { Where.Struct(_t) });
             var value = new ParameterReference(valueParam);
             return new Method(signature, new MethodBodyStatement[]
             {
