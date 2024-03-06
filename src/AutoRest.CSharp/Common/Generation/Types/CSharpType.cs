@@ -178,6 +178,8 @@ namespace AutoRest.CSharp.Generation.Types
             {
                 null => null,
                 var t when t.IsGenericParameter => t.Name,
+                //if we have an array type and the element is defined in the same assembly then its a generic param array.
+                var t when t.IsArray && t.Assembly.Equals(GetType().Assembly) => t.Name,
                 var t when t == typeof(bool) => "bool",
                 var t when t == typeof(byte) => "byte",
                 var t when t == typeof(sbyte) => "sbyte",
@@ -297,6 +299,18 @@ namespace AutoRest.CSharp.Generation.Types
             }
 
             return true;
+        }
+
+        public CSharpType MakeGenericType(IReadOnlyList<CSharpType> arguments)
+        {
+            if (IsFrameworkType)
+            {
+                return new CSharpType(FrameworkType, IsNullable, arguments);
+            }
+            else
+            {
+                return new CSharpType(Implementation, Namespace, Name, IsValueType, IsEnum, IsNullable, arguments.ToArray());
+            }
         }
     }
 }

@@ -270,7 +270,7 @@ namespace UnbrandedTypeSpec.Models
                 optionalLiteralFloat,
                 optionalLiteralBool,
                 requiredBadDescription,
-                optionalNullableList ?? new OptionalList<int>(),
+                optionalNullableList ?? new ChangeTrackingList<int>(),
                 requiredNullableList,
                 serializedAdditionalRawData);
         }

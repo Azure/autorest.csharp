@@ -7,6 +7,7 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Types;
@@ -29,8 +30,9 @@ namespace AutoRest.CSharp.Common.Output.Models
                     return collection;
                 }
 
-                var collectionType = collection.Type.Arguments.Count == 1 ? Configuration.ApiTypes.ChangeTrackingListType : Configuration.ApiTypes.ChangeTrackingDictionaryType;
-                var changeTrackingType = new CSharpType(collectionType, collection.Type.Arguments);
+                var changeTrackingType = collection.Type.Arguments.Count == 1
+                    ? ChangeTrackingListProvider.Instance.Type.MakeGenericType(collection.Type.Arguments)
+                    : new CSharpType(Configuration.ApiTypes.ChangeTrackingDictionaryType, collection.Type.Arguments);
                 return NullCoalescing(collection, New.Instance(changeTrackingType));
             }
 

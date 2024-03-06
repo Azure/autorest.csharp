@@ -8,7 +8,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text.Json;
 using AutoRest.TestServer.Tests.Infrastructure;
-using Azure.Core;
+using ModelsTypeSpec;
 using ModelsTypeSpec.Models;
 using NUnit.Framework;
 

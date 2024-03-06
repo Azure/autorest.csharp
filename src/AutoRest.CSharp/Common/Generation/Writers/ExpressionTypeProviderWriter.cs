@@ -39,11 +39,33 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 using (_writer.Scope())
                 {
+                    WriteFields();
+
                     WriteConstructors();
+
+                    WriteProperties();
 
                     WriteMethods();
                 }
             }
+        }
+
+        protected virtual void WriteProperties()
+        {
+            foreach (var property in _provider.Properties)
+            {
+                _writer.WriteProperty(property);
+                _writer.Line();
+            }
+        }
+
+        protected virtual void WriteFields()
+        {
+            foreach (var field in _provider.Fields)
+            {
+                _writer.WriteField(field, declareInCurrentScope: true);
+            }
+            _writer.Line();
         }
 
         protected virtual void WriteConstructors()
