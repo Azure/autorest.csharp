@@ -112,7 +112,7 @@ namespace custom_baseUrl_paging_LowLevel
             return value;
         }
 
-        public static string CheckNotNull(string value, string name)
+        public static string CheckNotNullOrEmpty(string value, string name)
         {
             AssertNotNullOrEmpty(value, name);
             return value;

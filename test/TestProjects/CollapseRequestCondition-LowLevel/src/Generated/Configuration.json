@@ -8,5 +8,6 @@
   ],
   "public-clients": true,
   "skip-csproj-packagereference": true,
-  "generate-test-project": true
+  "generate-test-project": true,
+  "helper-namespace": "CollapseRequestCondition_LowLevel"
 }

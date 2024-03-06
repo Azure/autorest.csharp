@@ -12,5 +12,6 @@
   "skip-csproj-packagereference": true,
   "OperationGroupsToOmit": [
     "Model1s"
-  ]
+  ],
+  "helper-namespace": "MgmtOmitOperationGroups"
 }

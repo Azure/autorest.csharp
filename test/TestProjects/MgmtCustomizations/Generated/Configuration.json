@@ -12,5 +12,6 @@
   "skip-csproj-packagereference": true,
   "RenameMapping": {
     "Pet.dateOfBirth": "-|date-time"
-  }
+  },
+  "helper-namespace": "MgmtCustomizations"
 }

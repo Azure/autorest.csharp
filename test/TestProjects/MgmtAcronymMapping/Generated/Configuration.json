@@ -55,5 +55,6 @@
   },
   "MgmtDebug": {
     "ShowSerializedNames": true
-  }
+  },
+  "helper-namespace": "MgmtAcronymMapping"
 }
