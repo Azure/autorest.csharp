@@ -262,7 +262,7 @@
    "$id": "34",
    "Kind": "Enum",
    "Name": "FloatExtensibleEnum",
-   "EnumValueType": "int32",
+   "EnumValueType": "float32",
    "AllowedValues": [
     {
      "$id": "35",
@@ -358,7 +358,7 @@
      "$id": "48",
      "Name": "implicit",
      "Value": "implicit",
-     "Description": "implcit flow"
+     "Description": "implicit flow"
     },
     {
      "$id": "49",
