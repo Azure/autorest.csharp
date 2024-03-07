@@ -66,7 +66,8 @@ model PetId {
 }
 
 @doc("Extensible enum Values for pet kind")
-enum PetKind {
+union PetKind {
+    string,
     Dog: "dog",
     Cat: "cat"
 }
