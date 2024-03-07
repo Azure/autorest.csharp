@@ -59,14 +59,6 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Azure
                 return Snippets.UsingDeclare(messageVar, new InvokeInstanceMethodExpression(null, createRequestMethodSignature.Name, createRequestMethodSignature.Parameters.Select(p => (ValueExpression)p).ToList(), null, false));
             }
 
-            public override MethodBodyStatement DeclareContentWithUtf8JsonWriter(out TypedValueExpression content, out Utf8JsonWriterExpression writer)
-            {
-                var contentVar = new VariableReference(typeof(Utf8JsonRequestContent), "content");
-                content = contentVar;
-                writer = new Utf8JsonRequestContentExpression(content).JsonWriter;
-                return Snippets.Var(contentVar, Snippets.New.Instance(typeof(Utf8JsonRequestContent)));
-            }
-
             public override MethodBodyStatement DeclareContentWithXmlWriter(out TypedValueExpression content, out XmlWriterExpression writer)
             {
                 var contentVar = new VariableReference(typeof(XmlWriterContent), "content");

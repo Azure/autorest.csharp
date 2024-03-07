@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input;
@@ -22,14 +21,16 @@ namespace AutoRest.CSharp.Output.Models.Types
         private static readonly Lazy<RequestContentHelperProvider> _instance = new Lazy<RequestContentHelperProvider>(() => new RequestContentHelperProvider(Configuration.HelperNamespace));
         public static RequestContentHelperProvider Instance => _instance.Value;
 
+        private readonly CSharpType _requestBodyType;
+        private readonly CSharpType _utf8JsonRequestBodyType;
+
         private readonly MethodSignatureModifiers _methodModifiers = MethodSignatureModifiers.Public | MethodSignatureModifiers.Static;
         private RequestContentHelperProvider(string defaultNamespace) : base(defaultNamespace, null)
         {
             DeclarationModifiers = TypeSignatureModifiers.Internal | TypeSignatureModifiers.Static;
+            _requestBodyType = Configuration.IsBranded ? typeof(RequestContent) : typeof(RequestBody);
+            _utf8JsonRequestBodyType = Utf8JsonRequestContentProvider.Instance.Type;
         }
-
-        private readonly CSharpType _requestBodyType = Configuration.IsBranded ? typeof(RequestContent) : typeof(RequestBody);
-        private readonly CSharpType _utf8JsonRequestBodyType = Configuration.IsBranded ? typeof(Utf8JsonRequestContent) : typeof(Utf8JsonRequestBody);
 
         protected override string DefaultName => "RequestContentHelper";
 
@@ -46,8 +47,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             yield return BuildFromObjectMethod();
             yield return BuildFromBinaryDataMethod();
         }
-
-        private static readonly string JsonWriter = Configuration.IsBranded ? nameof(Utf8JsonRequestContent.JsonWriter) : nameof(Utf8JsonRequestBody.JsonWriter);
 
         private const string _fromEnumerableName = "FromEnumerable";
 
@@ -76,7 +75,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 Declare(_utf8JsonRequestBodyType, "content", New.Instance(_utf8JsonRequestBodyType), out var content)
             };
-            var writer = new Utf8JsonWriterExpression(content.Property(JsonWriter));
+            var writer = Utf8JsonRequestContentProvider.Instance.JsonWriterProperty(content);
             body.Add(new MethodBodyStatement[]
             {
                 writer.WriteStartArray(),
@@ -107,7 +106,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 Declare(_utf8JsonRequestBodyType, "content", New.Instance(_utf8JsonRequestBodyType), out var content)
             };
-            var writer = new Utf8JsonWriterExpression(content.Property(JsonWriter));
+            var writer = Utf8JsonRequestContentProvider.Instance.JsonWriterProperty(content);
             body.Add(new MethodBodyStatement[]
             {
                 writer.WriteStartArray(),
@@ -153,7 +152,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 Declare(_utf8JsonRequestBodyType, "content", New.Instance(_utf8JsonRequestBodyType), out var content)
             };
-            var writer = new Utf8JsonWriterExpression(content.Property(JsonWriter));
+            var writer = Utf8JsonRequestContentProvider.Instance.JsonWriterProperty(content);
             body.Add(new MethodBodyStatement[]
             {
                 writer.WriteStartObject(),
@@ -185,7 +184,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 Declare(_utf8JsonRequestBodyType, "content", New.Instance(_utf8JsonRequestBodyType), out var content)
             };
-            var writer = new Utf8JsonWriterExpression(content.Property(JsonWriter));
+            var writer = Utf8JsonRequestContentProvider.Instance.JsonWriterProperty(content);
             body.Add(new MethodBodyStatement[]
             {
                 writer.WriteStartObject(),
@@ -224,7 +223,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 Declare(_utf8JsonRequestBodyType, "content", New.Instance(_utf8JsonRequestBodyType), out var content)
             };
-            var writer = new Utf8JsonWriterExpression(content.Property(JsonWriter));
+            var writer = Utf8JsonRequestContentProvider.Instance.JsonWriterProperty(content);
             var value = (ValueExpression)valueParameter;
             body.Add(new MethodBodyStatement[]
             {
@@ -249,7 +248,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 Declare(_utf8JsonRequestBodyType, "content", New.Instance(_utf8JsonRequestBodyType), out var content)
             };
-            var writer = new Utf8JsonWriterExpression(content.Property(JsonWriter));
+            var writer = Utf8JsonRequestContentProvider.Instance.JsonWriterProperty(content);
             var value = new BinaryDataExpression(valueParameter);
             body.Add(new MethodBodyStatement[]
             {
