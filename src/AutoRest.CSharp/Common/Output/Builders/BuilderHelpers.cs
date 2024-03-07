@@ -294,7 +294,7 @@ namespace AutoRest.CSharp.Output.Builders
         public static string CreateDescription(this Schema schema)
         {
             return string.IsNullOrWhiteSpace(schema.Language.Default.Description) ?
-                $"The {schema.Name}." :
+                string.Empty :
                 EscapeXmlDocDescription(schema.Language.Default.Description);
         }
 

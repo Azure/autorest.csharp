@@ -45,7 +45,8 @@ namespace AutoRest.CSharp.Generation.Writers
                     implementsTypes.Add(schema.Inherits);
                 }
 
-                writer.WriteXmlDocumentationSummary($"{schema.Description}");
+                var description = string.IsNullOrEmpty(schema.Description.ToString()) ? $"The {schema.Declaration.Name}." : schema.Description;
+                writer.WriteXmlDocumentationSummary($"{description}");
                 AddClassAttributes(writer, schema);
 
                 if (schema.IsStruct)
