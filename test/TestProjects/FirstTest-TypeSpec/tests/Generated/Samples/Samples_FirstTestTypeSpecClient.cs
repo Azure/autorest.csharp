@@ -2393,5 +2393,105 @@ new BaseModel(123)
                 ["key"] = 1234
             });
         }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_AzureLocationOp_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = null;
+            Response response = client.AzureLocationOp(default, content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_AzureLocationOp_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = null;
+            Response response = await client.AzureLocationOpAsync(default, content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_AzureLocationOp_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = client.AzureLocationOp(default);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_AzureLocationOp_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = await client.AzureLocationOpAsync(default);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_AzureLocationOp_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                location = new object(),
+            });
+            Response response = client.AzureLocationOp(default, content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_AzureLocationOp_AllParameters_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                location = new object(),
+            });
+            Response response = await client.AzureLocationOpAsync(default, content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_AzureLocationOp_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            AzureLocationModel body = new AzureLocationModel(default);
+            Response response = client.AzureLocationOp(default, body: body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_AzureLocationOp_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            AzureLocationModel body = new AzureLocationModel(default);
+            Response response = await client.AzureLocationOpAsync(default, body: body);
+        }
     }
 }
