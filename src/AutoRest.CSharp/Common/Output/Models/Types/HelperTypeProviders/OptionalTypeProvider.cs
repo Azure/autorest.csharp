@@ -23,11 +23,10 @@ namespace AutoRest.CSharp.Output.Models.Types
         public static OptionalTypeProvider Instance => _instance.Value;
 
         private class ListTemplate<T> { }
-        private class DictionaryTemplate<TKey, TValue> { }
 
         private readonly CSharpType _t = typeof(ListTemplate<>).GetGenericArguments()[0];
-        private readonly CSharpType _tKey = typeof(DictionaryTemplate<,>).GetGenericArguments()[0];
-        private readonly CSharpType _tValue = typeof(DictionaryTemplate<,>).GetGenericArguments()[1];
+        private readonly CSharpType _tKey = ChangeTrackingDictionaryProvider.Instance.Type.Arguments[0];
+        private readonly CSharpType _tValue = ChangeTrackingDictionaryProvider.Instance.Type.Arguments[1];
         private readonly CSharpType _genericChangeTrackingList;
         private readonly CSharpType _genericChangeTrackingDictionary;
 
@@ -36,7 +35,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             DeclarationModifiers = TypeSignatureModifiers.Internal | TypeSignatureModifiers.Static;
             _genericChangeTrackingList = ChangeTrackingListProvider.Instance.Type;
-            _genericChangeTrackingDictionary = new CSharpType(Configuration.ApiTypes.ChangeTrackingDictionaryType, _tKey, _tValue);
+            _genericChangeTrackingDictionary = ChangeTrackingDictionaryProvider.Instance.Type;
         }
 
         protected override string DefaultName => "Optional";
