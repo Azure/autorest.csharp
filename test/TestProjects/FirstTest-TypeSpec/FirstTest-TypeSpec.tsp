@@ -551,4 +551,4 @@ model AzureLocationModel
 @doc("test optional dictionary.")
 @put
 @convenientAPI(true)
-op azureLocationOp(@query location: azureLocation, @body body?: AzureLocationModel): void;
+op azureLocationOp(@query location: azureLocation, @header regenLocation: azureLocation, @body body?: AzureLocationModel): void;

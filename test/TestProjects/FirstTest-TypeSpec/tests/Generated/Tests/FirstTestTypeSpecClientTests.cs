@@ -1117,7 +1117,7 @@ new BaseModel(123)
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             using RequestContent content = null;
-            Response response = await client.AzureLocationOpAsync(default, content);
+            Response response = await client.AzureLocationOpAsync(default, default, content);
         }
 
         [Test]
@@ -1128,7 +1128,7 @@ new BaseModel(123)
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            Response response = await client.AzureLocationOpAsync(default);
+            Response response = await client.AzureLocationOpAsync(default, default);
         }
 
         [Test]
@@ -1143,7 +1143,7 @@ new BaseModel(123)
             {
                 location = new object(),
             });
-            Response response = await client.AzureLocationOpAsync(default, content);
+            Response response = await client.AzureLocationOpAsync(default, default, content);
         }
 
         [Test]
@@ -1155,7 +1155,7 @@ new BaseModel(123)
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             AzureLocationModel body = new AzureLocationModel(default);
-            Response response = await client.AzureLocationOpAsync(default, body: body);
+            Response response = await client.AzureLocationOpAsync(default, default, body: body);
         }
     }
 }

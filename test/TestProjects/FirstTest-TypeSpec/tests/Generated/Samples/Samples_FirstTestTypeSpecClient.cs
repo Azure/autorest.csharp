@@ -2402,7 +2402,7 @@ new BaseModel(123)
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             using RequestContent content = null;
-            Response response = client.AzureLocationOp(default, content);
+            Response response = client.AzureLocationOp(default, default, content);
 
             Console.WriteLine(response.Status);
         }
@@ -2415,7 +2415,7 @@ new BaseModel(123)
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             using RequestContent content = null;
-            Response response = await client.AzureLocationOpAsync(default, content);
+            Response response = await client.AzureLocationOpAsync(default, default, content);
 
             Console.WriteLine(response.Status);
         }
@@ -2427,7 +2427,7 @@ new BaseModel(123)
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = client.AzureLocationOp(default);
+            Response response = client.AzureLocationOp(default, default);
         }
 
         [Test]
@@ -2437,7 +2437,7 @@ new BaseModel(123)
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = await client.AzureLocationOpAsync(default);
+            Response response = await client.AzureLocationOpAsync(default, default);
         }
 
         [Test]
@@ -2451,7 +2451,7 @@ new BaseModel(123)
             {
                 location = new object(),
             });
-            Response response = client.AzureLocationOp(default, content);
+            Response response = client.AzureLocationOp(default, default, content);
 
             Console.WriteLine(response.Status);
         }
@@ -2467,7 +2467,7 @@ new BaseModel(123)
             {
                 location = new object(),
             });
-            Response response = await client.AzureLocationOpAsync(default, content);
+            Response response = await client.AzureLocationOpAsync(default, default, content);
 
             Console.WriteLine(response.Status);
         }
@@ -2480,7 +2480,7 @@ new BaseModel(123)
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             AzureLocationModel body = new AzureLocationModel(default);
-            Response response = client.AzureLocationOp(default, body: body);
+            Response response = client.AzureLocationOp(default, default, body: body);
         }
 
         [Test]
@@ -2491,7 +2491,7 @@ new BaseModel(123)
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             AzureLocationModel body = new AzureLocationModel(default);
-            Response response = await client.AzureLocationOpAsync(default, body: body);
+            Response response = await client.AzureLocationOpAsync(default, default, body: body);
         }
     }
 }
