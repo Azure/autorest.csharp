@@ -165,7 +165,7 @@ namespace MgmtExactMatchInheritance
             Optional<DataFactoryElement<Uri>> type16 = default;
             Optional<DataFactoryLinkedServiceReference> type17 = default;
             Optional<DataFactorySecretString> type18 = default;
-            Optional<DataFactoryKeyVaultSecretReference> type19 = default;
+            Optional<DataFactoryKeyVaultSecret> type19 = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
@@ -366,7 +366,7 @@ namespace MgmtExactMatchInheritance
                     {
                         continue;
                     }
-                    type19 = JsonSerializer.Deserialize<DataFactoryKeyVaultSecretReference>(property.Value.GetRawText());
+                    type19 = JsonSerializer.Deserialize<DataFactoryKeyVaultSecret>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("id"u8))
