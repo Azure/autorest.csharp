@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
+using MgmtPropertyChooser;
 
 namespace MgmtPropertyChooser.Models
 {
@@ -17,12 +18,12 @@ namespace MgmtPropertyChooser.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (ResourceIdentityType.HasValue)
+            if (Optional.IsDefined(ResourceIdentityType))
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceIdentityType.Value.ToSerialString());
             }
-            if (!(UserAssignedIdentities is ChangeTrackingDictionary<string, UserAssignedIdentity> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(UserAssignedIdentities))
             {
                 writer.WritePropertyName("userAssignedIdentities"u8);
                 writer.WriteStartObject();
@@ -42,9 +43,9 @@ namespace MgmtPropertyChooser.Models
             {
                 return null;
             }
-            Optional<string> testPrincipalId = default;
-            Optional<string> tenantId = default;
-            Optional<ResourceIdentityType> type = default;
+            string testPrincipalId = default;
+            string tenantId = default;
+            ResourceIdentityType? type = default;
             IDictionary<string, UserAssignedIdentity> userAssignedIdentities = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -82,7 +83,7 @@ namespace MgmtPropertyChooser.Models
                     continue;
                 }
             }
-            return new IdentityWithRenamedProperty(testPrincipalId.Value, tenantId.Value, Optional.ToNullable(type), userAssignedIdentities ?? new ChangeTrackingDictionary<string, UserAssignedIdentity>());
+            return new IdentityWithRenamedProperty(testPrincipalId, tenantId, type, userAssignedIdentities ?? new ChangeTrackingDictionary<string, UserAssignedIdentity>());
         }
     }
 }

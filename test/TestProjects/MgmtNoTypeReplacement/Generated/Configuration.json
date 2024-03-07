@@ -13,5 +13,6 @@
   "NoPropertyTypeReplacement": [
     "NoSubResourceModel",
     "NoSubResourceModel2"
-  ]
+  ],
+  "helper-namespace": "MgmtNoTypeReplacement"
 }

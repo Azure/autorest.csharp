@@ -7,6 +7,7 @@ using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -23,12 +24,12 @@ namespace OpenAI.Models
             }
 
             writer.WriteStartObject();
-            if (Url != null)
+            if (Optional.IsDefined(Url))
             {
                 writer.WritePropertyName("url"u8);
                 writer.WriteStringValue(Url.AbsoluteUri);
             }
-            if (B64Json != null)
+            if (Optional.IsDefined(B64Json))
             {
                 writer.WritePropertyName("b64_json"u8);
                 writer.WriteBase64StringValue(B64Json.ToArray(), "D");
@@ -71,8 +72,8 @@ namespace OpenAI.Models
             {
                 return null;
             }
-            OptionalProperty<Uri> url = default;
-            OptionalProperty<BinaryData> b64Json = default;
+            Uri url = default;
+            BinaryData b64Json = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -101,7 +102,7 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Image(url.Value, b64Json.Value, serializedAdditionalRawData);
+            return new Image(url, b64Json, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<Image>.Write(ModelReaderWriterOptions options)

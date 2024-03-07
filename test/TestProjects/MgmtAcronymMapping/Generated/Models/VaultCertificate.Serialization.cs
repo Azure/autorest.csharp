@@ -8,6 +8,7 @@
 using System;
 using System.Text.Json;
 using Azure.Core;
+using MgmtAcronymMapping;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -16,12 +17,12 @@ namespace MgmtAcronymMapping.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (CertificateUri != null)
+            if (Optional.IsDefined(CertificateUri))
             {
                 writer.WritePropertyName("certificateUrl"u8);
                 writer.WriteStringValue(CertificateUri.AbsoluteUri);
             }
-            if (CertificateStore != null)
+            if (Optional.IsDefined(CertificateStore))
             {
                 writer.WritePropertyName("certificateStore"u8);
                 writer.WriteStringValue(CertificateStore);
@@ -35,8 +36,8 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<Uri> certificateUrl = default;
-            Optional<string> certificateStore = default;
+            Uri certificateUrl = default;
+            string certificateStore = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("certificateUrl"u8))
@@ -54,7 +55,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VaultCertificate(certificateUrl.Value, certificateStore.Value);
+            return new VaultCertificate(certificateUrl, certificateStore);
         }
     }
 }

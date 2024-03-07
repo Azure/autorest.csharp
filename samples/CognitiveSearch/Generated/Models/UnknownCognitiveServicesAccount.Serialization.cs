@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {
@@ -17,7 +18,7 @@ namespace CognitiveSearch.Models
             writer.WriteStartObject();
             writer.WritePropertyName("@odata.type"u8);
             writer.WriteStringValue(OdataType);
-            if (Description != null)
+            if (Optional.IsDefined(Description))
             {
                 writer.WritePropertyName("description"u8);
                 writer.WriteStringValue(Description);
@@ -32,7 +33,7 @@ namespace CognitiveSearch.Models
                 return null;
             }
             string odataType = "Unknown";
-            Optional<string> description = default;
+            string description = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("@odata.type"u8))
@@ -46,7 +47,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new UnknownCognitiveServicesAccount(odataType, description.Value);
+            return new UnknownCognitiveServicesAccount(odataType, description);
         }
     }
 }

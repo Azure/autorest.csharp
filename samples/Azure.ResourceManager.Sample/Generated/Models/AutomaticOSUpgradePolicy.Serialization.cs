@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -27,12 +28,12 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (EnableAutomaticOSUpgrade.HasValue)
+            if (Optional.IsDefined(EnableAutomaticOSUpgrade))
             {
                 writer.WritePropertyName("enableAutomaticOSUpgrade"u8);
                 writer.WriteBooleanValue(EnableAutomaticOSUpgrade.Value);
             }
-            if (DisableAutomaticRollback.HasValue)
+            if (Optional.IsDefined(DisableAutomaticRollback))
             {
                 writer.WritePropertyName("disableAutomaticRollback"u8);
                 writer.WriteBooleanValue(DisableAutomaticRollback.Value);
@@ -75,8 +76,8 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<bool> enableAutomaticOSUpgrade = default;
-            Optional<bool> disableAutomaticRollback = default;
+            bool? enableAutomaticOSUpgrade = default;
+            bool? disableAutomaticRollback = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -105,7 +106,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new AutomaticOSUpgradePolicy(Optional.ToNullable(enableAutomaticOSUpgrade), Optional.ToNullable(disableAutomaticRollback), serializedAdditionalRawData);
+            return new AutomaticOSUpgradePolicy(enableAutomaticOSUpgrade, disableAutomaticRollback, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -113,14 +114,14 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (EnableAutomaticOSUpgrade.HasValue)
+            if (Optional.IsDefined(EnableAutomaticOSUpgrade))
             {
                 builder.Append("  enableAutomaticOSUpgrade:");
                 var boolValue = EnableAutomaticOSUpgrade.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
             }
 
-            if (DisableAutomaticRollback.HasValue)
+            if (Optional.IsDefined(DisableAutomaticRollback))
             {
                 builder.Append("  disableAutomaticRollback:");
                 var boolValue = DisableAutomaticRollback.Value == true ? "true" : "false";

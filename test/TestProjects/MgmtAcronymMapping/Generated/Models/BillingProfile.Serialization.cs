@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtAcronymMapping;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -15,7 +16,7 @@ namespace MgmtAcronymMapping.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (MaxPrice.HasValue)
+            if (Optional.IsDefined(MaxPrice))
             {
                 writer.WritePropertyName("maxPrice"u8);
                 writer.WriteNumberValue(MaxPrice.Value);
@@ -29,7 +30,7 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<double> maxPrice = default;
+            double? maxPrice = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("maxPrice"u8))
@@ -42,7 +43,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new BillingProfile(Optional.ToNullable(maxPrice));
+            return new BillingProfile(maxPrice);
         }
     }
 }

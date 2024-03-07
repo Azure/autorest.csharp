@@ -11,6 +11,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
+using xml_service;
 
 namespace xml_service.Models
 {
@@ -19,7 +20,7 @@ namespace xml_service.Models
         private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "ModelWithByteProperty");
-            if (Bytes != null)
+            if (Optional.IsDefined(Bytes))
             {
                 writer.WriteStartElement("Bytes");
                 writer.WriteValue(Bytes, "D");

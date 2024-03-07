@@ -8,6 +8,7 @@
 using System;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
+using MgmtAcronymMapping;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -29,14 +30,8 @@ namespace MgmtAcronymMapping.Models
         /// <exception cref="ArgumentNullException"> <paramref name="keyUri"/> or <paramref name="sourceVault"/> is null. </exception>
         public KeyVaultKeyReference(Uri keyUri, WritableSubResource sourceVault)
         {
-            if (keyUri == null)
-            {
-                throw new ArgumentNullException(nameof(keyUri));
-            }
-            if (sourceVault == null)
-            {
-                throw new ArgumentNullException(nameof(sourceVault));
-            }
+            Argument.AssertNotNull(keyUri, nameof(keyUri));
+            Argument.AssertNotNull(sourceVault, nameof(sourceVault));
 
             KeyUri = keyUri;
             SourceVault = sourceVault;

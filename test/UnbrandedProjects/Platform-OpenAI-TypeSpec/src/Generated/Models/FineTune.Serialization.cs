@@ -7,6 +7,7 @@ using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -69,7 +70,7 @@ namespace OpenAI.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            if (!(Events is OptionalList<FineTuneEvent> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Events))
             {
                 writer.WritePropertyName("events"u8);
                 writer.WriteStartArray();
@@ -234,7 +235,21 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new FineTune(id, @object, createdAt, updatedAt, model, fineTunedModel, organizationId, status, hyperparams, trainingFiles, validationFiles, resultFiles, events ?? new OptionalList<FineTuneEvent>(), serializedAdditionalRawData);
+            return new FineTune(
+                id,
+                @object,
+                createdAt,
+                updatedAt,
+                model,
+                fineTunedModel,
+                organizationId,
+                status,
+                hyperparams,
+                trainingFiles,
+                validationFiles,
+                resultFiles,
+                events ?? new ChangeTrackingList<FineTuneEvent>(),
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<FineTune>.Write(ModelReaderWriterOptions options)

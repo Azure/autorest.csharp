@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AnomalyDetector;
 
 namespace AnomalyDetector.Models
 {
@@ -59,10 +60,7 @@ namespace AnomalyDetector.Models
         /// <exception cref="ArgumentNullException"> <paramref name="variables"/> is null. </exception>
         public MultivariateLastDetectionOptions(IEnumerable<VariableValues> variables, int topContributorCount)
         {
-            if (variables == null)
-            {
-                throw new ArgumentNullException(nameof(variables));
-            }
+            Argument.AssertNotNull(variables, nameof(variables));
 
             Variables = variables.ToList();
             TopContributorCount = topContributorCount;

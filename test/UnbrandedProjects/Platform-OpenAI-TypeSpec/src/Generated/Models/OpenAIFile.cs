@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -55,18 +56,9 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="filename"/> or <paramref name="purpose"/> is null. </exception>
         internal OpenAIFile(string id, long bytes, DateTimeOffset createdAt, string filename, string purpose, OpenAIFileStatus status)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-            if (filename == null)
-            {
-                throw new ArgumentNullException(nameof(filename));
-            }
-            if (purpose == null)
-            {
-                throw new ArgumentNullException(nameof(purpose));
-            }
+            Argument.AssertNotNull(id, nameof(id));
+            Argument.AssertNotNull(filename, nameof(filename));
+            Argument.AssertNotNull(purpose, nameof(purpose));
 
             Id = id;
             Bytes = bytes;

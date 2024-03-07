@@ -1615,7 +1615,7 @@ namespace FirstTestTypeSpec.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                level = 1234,
+                level = 123,
             });
             Response response = client.RecursiveExtension(content);
 
@@ -1631,7 +1631,7 @@ namespace FirstTestTypeSpec.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                level = 1234,
+                level = 123,
             });
             Response response = await client.RecursiveExtensionAsync(content);
 
@@ -1645,7 +1645,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Extension input = new Extension(1234);
+            Extension input = new Extension(123);
             Response response = client.RecursiveExtension(input);
         }
 
@@ -1656,7 +1656,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Extension input = new Extension(1234);
+            Extension input = new Extension(123);
             Response response = await client.RecursiveExtensionAsync(input);
         }
 
@@ -1669,7 +1669,7 @@ namespace FirstTestTypeSpec.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                level = 1234,
+                level = 123,
                 extension = new object[]
             {
 null
@@ -1689,7 +1689,7 @@ null
 
             using RequestContent content = RequestContent.Create(new
             {
-                level = 1234,
+                level = 123,
                 extension = new object[]
             {
 null
@@ -1707,7 +1707,7 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Extension input = new Extension(1234);
+            Extension input = new Extension(123);
             Response response = client.RecursiveExtension(input);
         }
 
@@ -1718,7 +1718,7 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Extension input = new Extension(1234);
+            Extension input = new Extension(123);
             Response response = await client.RecursiveExtensionAsync(input);
         }
 
@@ -1783,7 +1783,7 @@ null
             {
 new
 {
-level = 1234,
+level = 123,
 extension = new object[]
 {
 null
@@ -1809,7 +1809,7 @@ null
             {
 new
 {
-level = 1234,
+level = 123,
 extension = new object[]
 {
 null
@@ -1831,7 +1831,7 @@ null
 
             Extendible input = new Extendible
             {
-                Extension = { new ThereLevelExtension(1234) },
+                Extension = { new ThereLevelExtension(123) },
             };
             Response response = client.ThreeLevelRecursive(input);
         }
@@ -1845,7 +1845,7 @@ null
 
             Extendible input = new Extendible
             {
-                Extension = { new ThereLevelExtension(1234) },
+                Extension = { new ThereLevelExtension(123) },
             };
             Response response = await client.ThreeLevelRecursiveAsync(input);
         }
@@ -1863,10 +1863,10 @@ null
             {
 new
 {
-level = 1234,
+level = 123,
 }
             },
-                level = 1234,
+                level = 123,
             });
             Response response = client.RecursiveModels(content);
 
@@ -1886,10 +1886,10 @@ level = 1234,
             {
 new
 {
-level = 1234,
+level = 123,
 }
             },
-                level = 1234,
+                level = 123,
             });
             Response response = await client.RecursiveModelsAsync(content);
 
@@ -1903,9 +1903,9 @@ level = 1234,
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            ChildModel input = new ChildModel(1234, new BaseModel[]
+            ChildModel input = new ChildModel(123, new BaseModel[]
             {
-new BaseModel(1234)
+new BaseModel(123)
             });
             Response response = client.RecursiveModels(input);
         }
@@ -1917,9 +1917,9 @@ new BaseModel(1234)
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            ChildModel input = new ChildModel(1234, new BaseModel[]
+            ChildModel input = new ChildModel(123, new BaseModel[]
             {
-new BaseModel(1234)
+new BaseModel(123)
             });
             Response response = await client.RecursiveModelsAsync(input);
         }
@@ -1937,10 +1937,10 @@ new BaseModel(1234)
             {
 new
 {
-level = 1234,
+level = 123,
 }
             },
-                level = 1234,
+                level = 123,
             });
             Response response = client.RecursiveModels(content);
 
@@ -1960,10 +1960,10 @@ level = 1234,
             {
 new
 {
-level = 1234,
+level = 123,
 }
             },
-                level = 1234,
+                level = 123,
             });
             Response response = await client.RecursiveModelsAsync(content);
 
@@ -1977,9 +1977,9 @@ level = 1234,
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            ChildModel input = new ChildModel(1234, new BaseModel[]
+            ChildModel input = new ChildModel(123, new BaseModel[]
             {
-new BaseModel(1234)
+new BaseModel(123)
             });
             Response response = client.RecursiveModels(input);
         }
@@ -1991,9 +1991,9 @@ new BaseModel(1234)
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            ChildModel input = new ChildModel(1234, new BaseModel[]
+            ChildModel input = new ChildModel(123, new BaseModel[]
             {
-new BaseModel(1234)
+new BaseModel(123)
             });
             Response response = await client.RecursiveModelsAsync(input);
         }

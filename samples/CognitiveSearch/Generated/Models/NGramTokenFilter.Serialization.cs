@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {
@@ -15,12 +16,12 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (MinGram.HasValue)
+            if (Optional.IsDefined(MinGram))
             {
                 writer.WritePropertyName("minGram"u8);
                 writer.WriteNumberValue(MinGram.Value);
             }
-            if (MaxGram.HasValue)
+            if (Optional.IsDefined(MaxGram))
             {
                 writer.WritePropertyName("maxGram"u8);
                 writer.WriteNumberValue(MaxGram.Value);
@@ -38,8 +39,8 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            Optional<int> minGram = default;
-            Optional<int> maxGram = default;
+            int? minGram = default;
+            int? maxGram = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
@@ -73,7 +74,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new NGramTokenFilter(odataType, name, Optional.ToNullable(minGram), Optional.ToNullable(maxGram));
+            return new NGramTokenFilter(odataType, name, minGram, maxGram);
         }
     }
 }

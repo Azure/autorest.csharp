@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 using MgmtPagination;
 
 namespace MgmtPagination.Models
@@ -21,7 +20,7 @@ namespace MgmtPagination.Models
                 return null;
             }
             IReadOnlyList<PageSizeDecimalModelData> value = default;
-            Optional<string> nextLink = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -44,7 +43,7 @@ namespace MgmtPagination.Models
                     continue;
                 }
             }
-            return new PageSizeDecimalModelListResult(value ?? new ChangeTrackingList<PageSizeDecimalModelData>(), nextLink.Value);
+            return new PageSizeDecimalModelListResult(value ?? new ChangeTrackingList<PageSizeDecimalModelData>(), nextLink);
         }
     }
 }

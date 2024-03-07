@@ -16,7 +16,7 @@ namespace MgmtSupersetInheritance
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (New != null)
+            if (Optional.IsDefined(New))
             {
                 writer.WritePropertyName("new"u8);
                 writer.WriteStringValue(New);
@@ -30,11 +30,11 @@ namespace MgmtSupersetInheritance
             {
                 return null;
             }
-            Optional<string> id = default;
-            Optional<string> name = default;
-            Optional<string> type = default;
-            Optional<string> @new = default;
-            Optional<SupersetModel7SystemData> systemData = default;
+            string id = default;
+            string name = default;
+            string type = default;
+            string @new = default;
+            SupersetModel7SystemData systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -67,7 +67,7 @@ namespace MgmtSupersetInheritance
                     continue;
                 }
             }
-            return new SupersetModel7Data(id.Value, name.Value, type.Value, @new.Value, systemData.Value);
+            return new SupersetModel7Data(id, name, type, @new, systemData);
         }
     }
 }

@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Network.Management.Interface;
 
 namespace Azure.Network.Management.Interface.Models
 {
@@ -15,17 +16,17 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (DomainNameLabel != null)
+            if (Optional.IsDefined(DomainNameLabel))
             {
                 writer.WritePropertyName("domainNameLabel"u8);
                 writer.WriteStringValue(DomainNameLabel);
             }
-            if (Fqdn != null)
+            if (Optional.IsDefined(Fqdn))
             {
                 writer.WritePropertyName("fqdn"u8);
                 writer.WriteStringValue(Fqdn);
             }
-            if (ReverseFqdn != null)
+            if (Optional.IsDefined(ReverseFqdn))
             {
                 writer.WritePropertyName("reverseFqdn"u8);
                 writer.WriteStringValue(ReverseFqdn);
@@ -39,9 +40,9 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> domainNameLabel = default;
-            Optional<string> fqdn = default;
-            Optional<string> reverseFqdn = default;
+            string domainNameLabel = default;
+            string fqdn = default;
+            string reverseFqdn = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("domainNameLabel"u8))
@@ -60,7 +61,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new PublicIPAddressDnsSettings(domainNameLabel.Value, fqdn.Value, reverseFqdn.Value);
+            return new PublicIPAddressDnsSettings(domainNameLabel, fqdn, reverseFqdn);
         }
     }
 }

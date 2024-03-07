@@ -9,6 +9,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using AnomalyDetector;
 using Azure;
 using Azure.Core;
 
@@ -33,7 +34,7 @@ namespace AnomalyDetector.Models
             writer.WriteNumberValue(Severity);
             writer.WritePropertyName("score"u8);
             writer.WriteNumberValue(Score);
-            if (!(Interpretation is ChangeTrackingList<AnomalyInterpretation> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Interpretation))
             {
                 writer.WritePropertyName("interpretation"u8);
                 writer.WriteStartArray();

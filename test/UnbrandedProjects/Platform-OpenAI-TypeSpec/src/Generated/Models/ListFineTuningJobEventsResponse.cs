@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -49,14 +50,8 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="object"/> or <paramref name="data"/> is null. </exception>
         internal ListFineTuningJobEventsResponse(string @object, IEnumerable<FineTuningJobEvent> data)
         {
-            if (@object == null)
-            {
-                throw new ArgumentNullException(nameof(@object));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(@object, nameof(@object));
+            Argument.AssertNotNull(data, nameof(data));
 
             Object = @object;
             Data = data.ToList();

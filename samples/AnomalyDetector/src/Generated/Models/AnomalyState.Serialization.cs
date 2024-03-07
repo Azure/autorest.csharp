@@ -9,6 +9,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using AnomalyDetector;
 using Azure;
 using Azure.Core;
 
@@ -29,12 +30,12 @@ namespace AnomalyDetector.Models
             writer.WriteStartObject();
             writer.WritePropertyName("timestamp"u8);
             writer.WriteStringValue(Timestamp, "O");
-            if (Value != null)
+            if (Optional.IsDefined(Value))
             {
                 writer.WritePropertyName("value"u8);
                 writer.WriteObjectValue(Value);
             }
-            if (!(Errors is ChangeTrackingList<ErrorResponse> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Errors))
             {
                 writer.WritePropertyName("errors"u8);
                 writer.WriteStartArray();
@@ -83,7 +84,7 @@ namespace AnomalyDetector.Models
                 return null;
             }
             DateTimeOffset timestamp = default;
-            Optional<AnomalyValue> value = default;
+            AnomalyValue value = default;
             IReadOnlyList<ErrorResponse> errors = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -123,7 +124,7 @@ namespace AnomalyDetector.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new AnomalyState(timestamp, value.Value, errors ?? new ChangeTrackingList<ErrorResponse>(), serializedAdditionalRawData);
+            return new AnomalyState(timestamp, value, errors ?? new ChangeTrackingList<ErrorResponse>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<AnomalyState>.Write(ModelReaderWriterOptions options)

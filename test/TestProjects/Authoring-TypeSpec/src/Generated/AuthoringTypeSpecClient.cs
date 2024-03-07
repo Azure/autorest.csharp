@@ -42,10 +42,7 @@ namespace AuthoringTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public AuthoringTypeSpecClient(Uri endpoint, AuthoringTypeSpecClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new AuthoringTypeSpecClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -58,10 +55,7 @@ namespace AuthoringTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Projects GetProjectsClient(string apiVersion = "2022-05-15-preview")
         {
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
             return new Projects(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
         }
@@ -71,10 +65,7 @@ namespace AuthoringTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Deployments GetDeploymentsClient(string apiVersion = "2022-05-15-preview")
         {
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
             return new Deployments(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
         }
@@ -84,10 +75,7 @@ namespace AuthoringTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Jobs GetJobsClient(string apiVersion = "2022-05-15-preview")
         {
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
             return new Jobs(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
         }
@@ -97,10 +85,7 @@ namespace AuthoringTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Global GetGlobalClient(string apiVersion = "2022-05-15-preview")
         {
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
             return new Global(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
         }

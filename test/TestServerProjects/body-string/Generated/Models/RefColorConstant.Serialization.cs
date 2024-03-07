@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using body_string;
 
 namespace body_string.Models
 {
@@ -28,7 +29,7 @@ namespace body_string.Models
             writer.WriteStartObject();
             writer.WritePropertyName("ColorConstant"u8);
             writer.WriteStringValue(ColorConstant.ToString());
-            if (Field1 != null)
+            if (Optional.IsDefined(Field1))
             {
                 writer.WritePropertyName("field1"u8);
                 writer.WriteStringValue(Field1);
@@ -72,7 +73,7 @@ namespace body_string.Models
                 return null;
             }
             ColorConstant colorConstant = default;
-            Optional<string> field1 = default;
+            string field1 = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -93,7 +94,7 @@ namespace body_string.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new RefColorConstant(colorConstant, field1.Value, serializedAdditionalRawData);
+            return new RefColorConstant(colorConstant, field1, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<RefColorConstant>.Write(ModelReaderWriterOptions options)

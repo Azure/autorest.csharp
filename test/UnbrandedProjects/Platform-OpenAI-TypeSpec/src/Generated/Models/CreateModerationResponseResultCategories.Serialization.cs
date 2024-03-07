@@ -159,7 +159,19 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new CreateModerationResponseResultCategories(hate, hateThreatening, harassment, harassmentThreatening, selfHarm, selfHarmIntent, selfHarmInstructive, sexual, sexualMinors, violence, violenceGraphic, serializedAdditionalRawData);
+            return new CreateModerationResponseResultCategories(
+                hate,
+                hateThreatening,
+                harassment,
+                harassmentThreatening,
+                selfHarm,
+                selfHarmIntent,
+                selfHarmInstructive,
+                sexual,
+                sexualMinors,
+                violence,
+                violenceGraphic,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<CreateModerationResponseResultCategories>.Write(ModelReaderWriterOptions options)

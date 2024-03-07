@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Storage;
 
 namespace Azure.ResourceManager.Storage.Models
 {
@@ -17,7 +18,7 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteStartObject();
             writer.WritePropertyName("actions"u8);
             writer.WriteObjectValue(Actions);
-            if (Filters != null)
+            if (Optional.IsDefined(Filters))
             {
                 writer.WritePropertyName("filters"u8);
                 writer.WriteObjectValue(Filters);
@@ -32,7 +33,7 @@ namespace Azure.ResourceManager.Storage.Models
                 return null;
             }
             ManagementPolicyAction actions = default;
-            Optional<ManagementPolicyFilter> filters = default;
+            ManagementPolicyFilter filters = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("actions"u8))
@@ -50,7 +51,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new ManagementPolicyDefinition(actions, filters.Value);
+            return new ManagementPolicyDefinition(actions, filters);
         }
     }
 }

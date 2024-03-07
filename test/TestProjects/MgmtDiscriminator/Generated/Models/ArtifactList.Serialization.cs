@@ -29,7 +29,7 @@ namespace MgmtDiscriminator.Models
             }
 
             writer.WriteStartObject();
-            if (!(Value is ChangeTrackingList<ArtifactData> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Value))
             {
                 writer.WritePropertyName("value"u8);
                 writer.WriteStartArray();
@@ -39,7 +39,7 @@ namespace MgmtDiscriminator.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W" && NextLink != null)
+            if (options.Format != "W" && Optional.IsDefined(NextLink))
             {
                 writer.WritePropertyName("nextLink"u8);
                 writer.WriteStringValue(NextLink);
@@ -83,7 +83,7 @@ namespace MgmtDiscriminator.Models
                 return null;
             }
             IReadOnlyList<ArtifactData> value = default;
-            Optional<string> nextLink = default;
+            string nextLink = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -113,7 +113,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ArtifactList(value ?? new ChangeTrackingList<ArtifactData>(), nextLink.Value, serializedAdditionalRawData);
+            return new ArtifactList(value ?? new ChangeTrackingList<ArtifactData>(), nextLink, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -121,7 +121,7 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (!(Value is ChangeTrackingList<ArtifactData> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Value))
             {
                 if (Value.Any())
                 {
@@ -135,7 +135,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            if (NextLink != null)
+            if (Optional.IsDefined(NextLink))
             {
                 builder.Append("  nextLink:");
                 if (NextLink.Contains(Environment.NewLine))

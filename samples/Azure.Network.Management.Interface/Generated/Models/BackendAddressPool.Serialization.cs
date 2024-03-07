@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Network.Management.Interface;
 
 namespace Azure.Network.Management.Interface.Models
 {
@@ -16,12 +17,12 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
@@ -38,15 +39,15 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> etag = default;
-            Optional<string> type = default;
-            Optional<string> id = default;
+            string name = default;
+            string etag = default;
+            string type = default;
+            string id = default;
             IReadOnlyList<NetworkInterfaceIPConfiguration> backendIPConfigurations = default;
             IReadOnlyList<SubResource> loadBalancingRules = default;
-            Optional<SubResource> outboundRule = default;
+            SubResource outboundRule = default;
             IReadOnlyList<SubResource> outboundRules = default;
-            Optional<ProvisioningState> provisioningState = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -142,7 +143,16 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new BackendAddressPool(id.Value, name.Value, etag.Value, type.Value, backendIPConfigurations ?? new ChangeTrackingList<NetworkInterfaceIPConfiguration>(), loadBalancingRules ?? new ChangeTrackingList<SubResource>(), outboundRule.Value, outboundRules ?? new ChangeTrackingList<SubResource>(), Optional.ToNullable(provisioningState));
+            return new BackendAddressPool(
+                id,
+                name,
+                etag,
+                type,
+                backendIPConfigurations ?? new ChangeTrackingList<NetworkInterfaceIPConfiguration>(),
+                loadBalancingRules ?? new ChangeTrackingList<SubResource>(),
+                outboundRule,
+                outboundRules ?? new ChangeTrackingList<SubResource>(),
+                provisioningState);
         }
     }
 }

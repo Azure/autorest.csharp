@@ -7,7 +7,7 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
+using Azure.Network.Management.Interface;
 
 namespace Azure.Network.Management.Interface.Models
 {
@@ -19,9 +19,9 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> code = default;
-            Optional<string> message = default;
-            Optional<string> target = default;
+            string code = default;
+            string message = default;
+            string target = default;
             IReadOnlyList<CloudErrorBody> details = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -55,7 +55,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new CloudErrorBody(code.Value, message.Value, target.Value, details ?? new ChangeTrackingList<CloudErrorBody>());
+            return new CloudErrorBody(code, message, target, details ?? new ChangeTrackingList<CloudErrorBody>());
         }
     }
 }

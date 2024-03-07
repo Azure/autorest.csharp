@@ -50,10 +50,7 @@ namespace Parameters.Spread
         /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAsRequestBodyAsync(string,CancellationToken)']/*" />
         public virtual async Task<Response> SpreadAsRequestBodyAsync(string name, CancellationToken cancellationToken = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Argument.AssertNotNull(name, nameof(name));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             SpreadAsRequestBodyRequest spreadAsRequestBodyRequest = new SpreadAsRequestBodyRequest(name);
@@ -67,10 +64,7 @@ namespace Parameters.Spread
         /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAsRequestBody(string,CancellationToken)']/*" />
         public virtual Response SpreadAsRequestBody(string name, CancellationToken cancellationToken = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Argument.AssertNotNull(name, nameof(name));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             SpreadAsRequestBodyRequest spreadAsRequestBodyRequest = new SpreadAsRequestBodyRequest(name);
@@ -101,10 +95,7 @@ namespace Parameters.Spread
         /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAsRequestBodyAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> SpreadAsRequestBodyAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("Alias.SpreadAsRequestBody");
             scope.Start();
@@ -143,10 +134,7 @@ namespace Parameters.Spread
         /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAsRequestBody(RequestContent,RequestContext)']/*" />
         public virtual Response SpreadAsRequestBody(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("Alias.SpreadAsRequestBody");
             scope.Start();
@@ -171,22 +159,9 @@ namespace Parameters.Spread
         /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAsRequestParameterAsync(string,string,string,CancellationToken)']/*" />
         public virtual async Task<Response> SpreadAsRequestParameterAsync(string id, string xMsTestHeader, string name, CancellationToken cancellationToken = default)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-            if (id.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(id));
-            }
-            if (xMsTestHeader == null)
-            {
-                throw new ArgumentNullException(nameof(xMsTestHeader));
-            }
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(xMsTestHeader, nameof(xMsTestHeader));
+            Argument.AssertNotNull(name, nameof(name));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             SpreadAsRequestParameterRequest spreadAsRequestParameterRequest = new SpreadAsRequestParameterRequest(name);
@@ -203,22 +178,9 @@ namespace Parameters.Spread
         /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAsRequestParameter(string,string,string,CancellationToken)']/*" />
         public virtual Response SpreadAsRequestParameter(string id, string xMsTestHeader, string name, CancellationToken cancellationToken = default)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-            if (id.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(id));
-            }
-            if (xMsTestHeader == null)
-            {
-                throw new ArgumentNullException(nameof(xMsTestHeader));
-            }
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(xMsTestHeader, nameof(xMsTestHeader));
+            Argument.AssertNotNull(name, nameof(name));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             SpreadAsRequestParameterRequest spreadAsRequestParameterRequest = new SpreadAsRequestParameterRequest(name);
@@ -252,22 +214,9 @@ namespace Parameters.Spread
         /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAsRequestParameterAsync(string,string,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> SpreadAsRequestParameterAsync(string id, string xMsTestHeader, RequestContent content, RequestContext context = null)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-            if (id.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(id));
-            }
-            if (xMsTestHeader == null)
-            {
-                throw new ArgumentNullException(nameof(xMsTestHeader));
-            }
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(xMsTestHeader, nameof(xMsTestHeader));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("Alias.SpreadAsRequestParameter");
             scope.Start();
@@ -309,22 +258,9 @@ namespace Parameters.Spread
         /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAsRequestParameter(string,string,RequestContent,RequestContext)']/*" />
         public virtual Response SpreadAsRequestParameter(string id, string xMsTestHeader, RequestContent content, RequestContext context = null)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-            if (id.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(id));
-            }
-            if (xMsTestHeader == null)
-            {
-                throw new ArgumentNullException(nameof(xMsTestHeader));
-            }
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(xMsTestHeader, nameof(xMsTestHeader));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("Alias.SpreadAsRequestParameter");
             scope.Start();
@@ -354,42 +290,14 @@ namespace Parameters.Spread
         /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadWithMultipleParametersAsync(string,string,string,string,string,string,string,string,CancellationToken)']/*" />
         public virtual async Task<Response> SpreadWithMultipleParametersAsync(string id, string xMsTestHeader, string prop1, string prop2, string prop3, string prop4, string prop5, string prop6, CancellationToken cancellationToken = default)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-            if (id.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(id));
-            }
-            if (xMsTestHeader == null)
-            {
-                throw new ArgumentNullException(nameof(xMsTestHeader));
-            }
-            if (prop1 == null)
-            {
-                throw new ArgumentNullException(nameof(prop1));
-            }
-            if (prop2 == null)
-            {
-                throw new ArgumentNullException(nameof(prop2));
-            }
-            if (prop3 == null)
-            {
-                throw new ArgumentNullException(nameof(prop3));
-            }
-            if (prop4 == null)
-            {
-                throw new ArgumentNullException(nameof(prop4));
-            }
-            if (prop5 == null)
-            {
-                throw new ArgumentNullException(nameof(prop5));
-            }
-            if (prop6 == null)
-            {
-                throw new ArgumentNullException(nameof(prop6));
-            }
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(xMsTestHeader, nameof(xMsTestHeader));
+            Argument.AssertNotNull(prop1, nameof(prop1));
+            Argument.AssertNotNull(prop2, nameof(prop2));
+            Argument.AssertNotNull(prop3, nameof(prop3));
+            Argument.AssertNotNull(prop4, nameof(prop4));
+            Argument.AssertNotNull(prop5, nameof(prop5));
+            Argument.AssertNotNull(prop6, nameof(prop6));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             SpreadWithMultipleParametersRequest spreadWithMultipleParametersRequest = new SpreadWithMultipleParametersRequest(prop1, prop2, prop3, prop4, prop5, prop6);
@@ -411,42 +319,14 @@ namespace Parameters.Spread
         /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadWithMultipleParameters(string,string,string,string,string,string,string,string,CancellationToken)']/*" />
         public virtual Response SpreadWithMultipleParameters(string id, string xMsTestHeader, string prop1, string prop2, string prop3, string prop4, string prop5, string prop6, CancellationToken cancellationToken = default)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-            if (id.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(id));
-            }
-            if (xMsTestHeader == null)
-            {
-                throw new ArgumentNullException(nameof(xMsTestHeader));
-            }
-            if (prop1 == null)
-            {
-                throw new ArgumentNullException(nameof(prop1));
-            }
-            if (prop2 == null)
-            {
-                throw new ArgumentNullException(nameof(prop2));
-            }
-            if (prop3 == null)
-            {
-                throw new ArgumentNullException(nameof(prop3));
-            }
-            if (prop4 == null)
-            {
-                throw new ArgumentNullException(nameof(prop4));
-            }
-            if (prop5 == null)
-            {
-                throw new ArgumentNullException(nameof(prop5));
-            }
-            if (prop6 == null)
-            {
-                throw new ArgumentNullException(nameof(prop6));
-            }
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(xMsTestHeader, nameof(xMsTestHeader));
+            Argument.AssertNotNull(prop1, nameof(prop1));
+            Argument.AssertNotNull(prop2, nameof(prop2));
+            Argument.AssertNotNull(prop3, nameof(prop3));
+            Argument.AssertNotNull(prop4, nameof(prop4));
+            Argument.AssertNotNull(prop5, nameof(prop5));
+            Argument.AssertNotNull(prop6, nameof(prop6));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             SpreadWithMultipleParametersRequest spreadWithMultipleParametersRequest = new SpreadWithMultipleParametersRequest(prop1, prop2, prop3, prop4, prop5, prop6);
@@ -480,22 +360,9 @@ namespace Parameters.Spread
         /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadWithMultipleParametersAsync(string,string,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> SpreadWithMultipleParametersAsync(string id, string xMsTestHeader, RequestContent content, RequestContext context = null)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-            if (id.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(id));
-            }
-            if (xMsTestHeader == null)
-            {
-                throw new ArgumentNullException(nameof(xMsTestHeader));
-            }
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(xMsTestHeader, nameof(xMsTestHeader));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("Alias.SpreadWithMultipleParameters");
             scope.Start();
@@ -537,22 +404,9 @@ namespace Parameters.Spread
         /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadWithMultipleParameters(string,string,RequestContent,RequestContext)']/*" />
         public virtual Response SpreadWithMultipleParameters(string id, string xMsTestHeader, RequestContent content, RequestContext context = null)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-            if (id.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(id));
-            }
-            if (xMsTestHeader == null)
-            {
-                throw new ArgumentNullException(nameof(xMsTestHeader));
-            }
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(xMsTestHeader, nameof(xMsTestHeader));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("Alias.SpreadWithMultipleParameters");
             scope.Start();

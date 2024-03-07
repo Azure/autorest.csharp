@@ -53,22 +53,9 @@ namespace url_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="globalStringPath"/> is an empty string, and was expected to be non-empty. </exception>
         public PathItemsClient(Uri endpoint, string globalStringPath, AzureKeyCredential credential, AutoRestUrlTestServiceClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
-            if (globalStringPath == null)
-            {
-                throw new ArgumentNullException(nameof(globalStringPath));
-            }
-            if (globalStringPath.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(globalStringPath));
-            }
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNullOrEmpty(globalStringPath, nameof(globalStringPath));
+            Argument.AssertNotNull(credential, nameof(credential));
             options ??= new AutoRestUrlTestServiceClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -101,22 +88,8 @@ namespace url_LowLevel
         /// <include file="Docs/PathItemsClient.xml" path="doc/members/member[@name='GetAllWithValuesAsync(string,string,string,string,RequestContext)']/*" />
         public virtual async Task<Response> GetAllWithValuesAsync(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
         {
-            if (pathItemStringPath == null)
-            {
-                throw new ArgumentNullException(nameof(pathItemStringPath));
-            }
-            if (pathItemStringPath.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(pathItemStringPath));
-            }
-            if (localStringPath == null)
-            {
-                throw new ArgumentNullException(nameof(localStringPath));
-            }
-            if (localStringPath.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(localStringPath));
-            }
+            Argument.AssertNotNullOrEmpty(pathItemStringPath, nameof(pathItemStringPath));
+            Argument.AssertNotNullOrEmpty(localStringPath, nameof(localStringPath));
 
             using var scope = ClientDiagnostics.CreateScope("PathItemsClient.GetAllWithValues");
             scope.Start();
@@ -154,22 +127,8 @@ namespace url_LowLevel
         /// <include file="Docs/PathItemsClient.xml" path="doc/members/member[@name='GetAllWithValues(string,string,string,string,RequestContext)']/*" />
         public virtual Response GetAllWithValues(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
         {
-            if (pathItemStringPath == null)
-            {
-                throw new ArgumentNullException(nameof(pathItemStringPath));
-            }
-            if (pathItemStringPath.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(pathItemStringPath));
-            }
-            if (localStringPath == null)
-            {
-                throw new ArgumentNullException(nameof(localStringPath));
-            }
-            if (localStringPath.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(localStringPath));
-            }
+            Argument.AssertNotNullOrEmpty(pathItemStringPath, nameof(pathItemStringPath));
+            Argument.AssertNotNullOrEmpty(localStringPath, nameof(localStringPath));
 
             using var scope = ClientDiagnostics.CreateScope("PathItemsClient.GetAllWithValues");
             scope.Start();
@@ -207,22 +166,8 @@ namespace url_LowLevel
         /// <include file="Docs/PathItemsClient.xml" path="doc/members/member[@name='GetGlobalQueryNullAsync(string,string,string,string,RequestContext)']/*" />
         public virtual async Task<Response> GetGlobalQueryNullAsync(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
         {
-            if (pathItemStringPath == null)
-            {
-                throw new ArgumentNullException(nameof(pathItemStringPath));
-            }
-            if (pathItemStringPath.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(pathItemStringPath));
-            }
-            if (localStringPath == null)
-            {
-                throw new ArgumentNullException(nameof(localStringPath));
-            }
-            if (localStringPath.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(localStringPath));
-            }
+            Argument.AssertNotNullOrEmpty(pathItemStringPath, nameof(pathItemStringPath));
+            Argument.AssertNotNullOrEmpty(localStringPath, nameof(localStringPath));
 
             using var scope = ClientDiagnostics.CreateScope("PathItemsClient.GetGlobalQueryNull");
             scope.Start();
@@ -260,22 +205,8 @@ namespace url_LowLevel
         /// <include file="Docs/PathItemsClient.xml" path="doc/members/member[@name='GetGlobalQueryNull(string,string,string,string,RequestContext)']/*" />
         public virtual Response GetGlobalQueryNull(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
         {
-            if (pathItemStringPath == null)
-            {
-                throw new ArgumentNullException(nameof(pathItemStringPath));
-            }
-            if (pathItemStringPath.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(pathItemStringPath));
-            }
-            if (localStringPath == null)
-            {
-                throw new ArgumentNullException(nameof(localStringPath));
-            }
-            if (localStringPath.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(localStringPath));
-            }
+            Argument.AssertNotNullOrEmpty(pathItemStringPath, nameof(pathItemStringPath));
+            Argument.AssertNotNullOrEmpty(localStringPath, nameof(localStringPath));
 
             using var scope = ClientDiagnostics.CreateScope("PathItemsClient.GetGlobalQueryNull");
             scope.Start();
@@ -313,22 +244,8 @@ namespace url_LowLevel
         /// <include file="Docs/PathItemsClient.xml" path="doc/members/member[@name='GetGlobalAndLocalQueryNullAsync(string,string,string,string,RequestContext)']/*" />
         public virtual async Task<Response> GetGlobalAndLocalQueryNullAsync(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
         {
-            if (pathItemStringPath == null)
-            {
-                throw new ArgumentNullException(nameof(pathItemStringPath));
-            }
-            if (pathItemStringPath.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(pathItemStringPath));
-            }
-            if (localStringPath == null)
-            {
-                throw new ArgumentNullException(nameof(localStringPath));
-            }
-            if (localStringPath.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(localStringPath));
-            }
+            Argument.AssertNotNullOrEmpty(pathItemStringPath, nameof(pathItemStringPath));
+            Argument.AssertNotNullOrEmpty(localStringPath, nameof(localStringPath));
 
             using var scope = ClientDiagnostics.CreateScope("PathItemsClient.GetGlobalAndLocalQueryNull");
             scope.Start();
@@ -366,22 +283,8 @@ namespace url_LowLevel
         /// <include file="Docs/PathItemsClient.xml" path="doc/members/member[@name='GetGlobalAndLocalQueryNull(string,string,string,string,RequestContext)']/*" />
         public virtual Response GetGlobalAndLocalQueryNull(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
         {
-            if (pathItemStringPath == null)
-            {
-                throw new ArgumentNullException(nameof(pathItemStringPath));
-            }
-            if (pathItemStringPath.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(pathItemStringPath));
-            }
-            if (localStringPath == null)
-            {
-                throw new ArgumentNullException(nameof(localStringPath));
-            }
-            if (localStringPath.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(localStringPath));
-            }
+            Argument.AssertNotNullOrEmpty(pathItemStringPath, nameof(pathItemStringPath));
+            Argument.AssertNotNullOrEmpty(localStringPath, nameof(localStringPath));
 
             using var scope = ClientDiagnostics.CreateScope("PathItemsClient.GetGlobalAndLocalQueryNull");
             scope.Start();
@@ -419,22 +322,8 @@ namespace url_LowLevel
         /// <include file="Docs/PathItemsClient.xml" path="doc/members/member[@name='GetLocalPathItemQueryNullAsync(string,string,string,string,RequestContext)']/*" />
         public virtual async Task<Response> GetLocalPathItemQueryNullAsync(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
         {
-            if (pathItemStringPath == null)
-            {
-                throw new ArgumentNullException(nameof(pathItemStringPath));
-            }
-            if (pathItemStringPath.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(pathItemStringPath));
-            }
-            if (localStringPath == null)
-            {
-                throw new ArgumentNullException(nameof(localStringPath));
-            }
-            if (localStringPath.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(localStringPath));
-            }
+            Argument.AssertNotNullOrEmpty(pathItemStringPath, nameof(pathItemStringPath));
+            Argument.AssertNotNullOrEmpty(localStringPath, nameof(localStringPath));
 
             using var scope = ClientDiagnostics.CreateScope("PathItemsClient.GetLocalPathItemQueryNull");
             scope.Start();
@@ -472,22 +361,8 @@ namespace url_LowLevel
         /// <include file="Docs/PathItemsClient.xml" path="doc/members/member[@name='GetLocalPathItemQueryNull(string,string,string,string,RequestContext)']/*" />
         public virtual Response GetLocalPathItemQueryNull(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
         {
-            if (pathItemStringPath == null)
-            {
-                throw new ArgumentNullException(nameof(pathItemStringPath));
-            }
-            if (pathItemStringPath.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(pathItemStringPath));
-            }
-            if (localStringPath == null)
-            {
-                throw new ArgumentNullException(nameof(localStringPath));
-            }
-            if (localStringPath.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(localStringPath));
-            }
+            Argument.AssertNotNullOrEmpty(pathItemStringPath, nameof(pathItemStringPath));
+            Argument.AssertNotNullOrEmpty(localStringPath, nameof(localStringPath));
 
             using var scope = ClientDiagnostics.CreateScope("PathItemsClient.GetLocalPathItemQueryNull");
             scope.Start();

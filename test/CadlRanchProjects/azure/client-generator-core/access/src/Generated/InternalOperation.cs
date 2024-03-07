@@ -49,10 +49,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal virtual async Task<Response<NoDecoratorModelInInternal>> NoDecoratorInInternalAsync(string name, CancellationToken cancellationToken = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Argument.AssertNotNull(name, nameof(name));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await NoDecoratorInInternalAsync(name, context).ConfigureAwait(false);
@@ -64,10 +61,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal virtual Response<NoDecoratorModelInInternal> NoDecoratorInInternal(string name, CancellationToken cancellationToken = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Argument.AssertNotNull(name, nameof(name));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = NoDecoratorInInternal(name, context);
@@ -96,10 +90,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <returns> The response returned from the service. </returns>
         internal virtual async Task<Response> NoDecoratorInInternalAsync(string name, RequestContext context)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Argument.AssertNotNull(name, nameof(name));
 
             using var scope = ClientDiagnostics.CreateScope("InternalOperation.NoDecoratorInInternal");
             scope.Start();
@@ -137,10 +128,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <returns> The response returned from the service. </returns>
         internal virtual Response NoDecoratorInInternal(string name, RequestContext context)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Argument.AssertNotNull(name, nameof(name));
 
             using var scope = ClientDiagnostics.CreateScope("InternalOperation.NoDecoratorInInternal");
             scope.Start();
@@ -161,10 +149,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal virtual async Task<Response<InternalDecoratorModelInInternal>> InternalDecoratorInInternalAsync(string name, CancellationToken cancellationToken = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Argument.AssertNotNull(name, nameof(name));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await InternalDecoratorInInternalAsync(name, context).ConfigureAwait(false);
@@ -176,10 +161,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal virtual Response<InternalDecoratorModelInInternal> InternalDecoratorInInternal(string name, CancellationToken cancellationToken = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Argument.AssertNotNull(name, nameof(name));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = InternalDecoratorInInternal(name, context);
@@ -208,10 +190,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <returns> The response returned from the service. </returns>
         internal virtual async Task<Response> InternalDecoratorInInternalAsync(string name, RequestContext context)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Argument.AssertNotNull(name, nameof(name));
 
             using var scope = ClientDiagnostics.CreateScope("InternalOperation.InternalDecoratorInInternal");
             scope.Start();
@@ -249,10 +228,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <returns> The response returned from the service. </returns>
         internal virtual Response InternalDecoratorInInternal(string name, RequestContext context)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Argument.AssertNotNull(name, nameof(name));
 
             using var scope = ClientDiagnostics.CreateScope("InternalOperation.InternalDecoratorInInternal");
             scope.Start();
@@ -273,10 +249,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal virtual async Task<Response<PublicDecoratorModelInInternal>> PublicDecoratorInInternalAsync(string name, CancellationToken cancellationToken = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Argument.AssertNotNull(name, nameof(name));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await PublicDecoratorInInternalAsync(name, context).ConfigureAwait(false);
@@ -288,10 +261,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal virtual Response<PublicDecoratorModelInInternal> PublicDecoratorInInternal(string name, CancellationToken cancellationToken = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Argument.AssertNotNull(name, nameof(name));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = PublicDecoratorInInternal(name, context);
@@ -320,10 +290,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <returns> The response returned from the service. </returns>
         internal virtual async Task<Response> PublicDecoratorInInternalAsync(string name, RequestContext context)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Argument.AssertNotNull(name, nameof(name));
 
             using var scope = ClientDiagnostics.CreateScope("InternalOperation.PublicDecoratorInInternal");
             scope.Start();
@@ -361,10 +328,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <returns> The response returned from the service. </returns>
         internal virtual Response PublicDecoratorInInternal(string name, RequestContext context)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Argument.AssertNotNull(name, nameof(name));
 
             using var scope = ClientDiagnostics.CreateScope("InternalOperation.PublicDecoratorInInternal");
             scope.Start();

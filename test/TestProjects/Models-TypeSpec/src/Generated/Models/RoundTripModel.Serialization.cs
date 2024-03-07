@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using ModelsTypeSpec;
 
 namespace ModelsTypeSpec.Models
 {
@@ -31,12 +32,12 @@ namespace ModelsTypeSpec.Models
             writer.WriteStringValue(RequiredString);
             writer.WritePropertyName("requiredInt"u8);
             writer.WriteNumberValue(RequiredInt);
-            if (NonRequiredString != null)
+            if (Optional.IsDefined(NonRequiredString))
             {
                 writer.WritePropertyName("nonRequiredString"u8);
                 writer.WriteStringValue(NonRequiredString);
             }
-            if (NonRequiredInt.HasValue)
+            if (Optional.IsDefined(NonRequiredInt))
             {
                 writer.WritePropertyName("nonRequiredInt"u8);
                 writer.WriteNumberValue(NonRequiredInt.Value);
@@ -59,7 +60,7 @@ namespace ModelsTypeSpec.Models
             {
                 writer.WriteNull("requiredNullableString");
             }
-            if (NonRequiredNullableInt.HasValue)
+            if (Optional.IsDefined(NonRequiredNullableInt))
             {
                 if (NonRequiredNullableInt != null)
                 {
@@ -71,7 +72,7 @@ namespace ModelsTypeSpec.Models
                     writer.WriteNull("nonRequiredNullableInt");
                 }
             }
-            if (NonRequiredNullableString != null)
+            if (Optional.IsDefined(NonRequiredNullableString))
             {
                 if (NonRequiredNullableString != null)
                 {
@@ -88,7 +89,7 @@ namespace ModelsTypeSpec.Models
                 writer.WritePropertyName("requiredReadonlyInt"u8);
                 writer.WriteNumberValue(RequiredReadonlyInt);
             }
-            if (options.Format != "W" && NonRequiredReadonlyInt.HasValue)
+            if (options.Format != "W" && Optional.IsDefined(NonRequiredReadonlyInt))
             {
                 writer.WritePropertyName("nonRequiredReadonlyInt"u8);
                 writer.WriteNumberValue(NonRequiredReadonlyInt.Value);
@@ -134,7 +135,7 @@ namespace ModelsTypeSpec.Models
             writer.WriteEndObject();
             writer.WritePropertyName("requiredBytes"u8);
             writer.WriteBase64StringValue(RequiredBytes.ToArray(), "D");
-            if (OptionalBytes != null)
+            if (Optional.IsDefined(OptionalBytes))
             {
                 writer.WritePropertyName("optionalBytes"u8);
                 writer.WriteBase64StringValue(OptionalBytes.ToArray(), "D");
@@ -146,7 +147,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteNumberValue(item);
             }
             writer.WriteEndArray();
-            if (!(OptionalUint8Array is ChangeTrackingList<int> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(OptionalUint8Array))
             {
                 writer.WritePropertyName("optionalUint8Array"u8);
                 writer.WriteStartArray();
@@ -165,7 +166,7 @@ namespace ModelsTypeSpec.Models
                 JsonSerializer.Serialize(writer, document.RootElement);
             }
 #endif
-            if (OptionalUnknown != null)
+            if (Optional.IsDefined(OptionalUnknown))
             {
                 writer.WritePropertyName("optionalUnknown"u8);
 #if NET6_0_OR_GREATER
@@ -184,7 +185,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteNumberValue(item);
             }
             writer.WriteEndArray();
-            if (!(OptionalInt8Array is ChangeTrackingList<int> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(OptionalInt8Array))
             {
                 writer.WritePropertyName("optionalInt8Array"u8);
                 writer.WriteStartArray();
@@ -194,7 +195,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (RequiredNullableIntList != null && !(RequiredNullableIntList is ChangeTrackingList<int> collection1 && collection1.IsUndefined))
+            if (RequiredNullableIntList != null && Optional.IsCollectionDefined(RequiredNullableIntList))
             {
                 writer.WritePropertyName("requiredNullableIntList"u8);
                 writer.WriteStartArray();
@@ -208,7 +209,7 @@ namespace ModelsTypeSpec.Models
             {
                 writer.WriteNull("requiredNullableIntList");
             }
-            if (RequiredNullableStringList != null && !(RequiredNullableStringList is ChangeTrackingList<string> collection2 && collection2.IsUndefined))
+            if (RequiredNullableStringList != null && Optional.IsCollectionDefined(RequiredNullableStringList))
             {
                 writer.WritePropertyName("requiredNullableStringList"u8);
                 writer.WriteStartArray();
@@ -222,7 +223,7 @@ namespace ModelsTypeSpec.Models
             {
                 writer.WriteNull("requiredNullableStringList");
             }
-            if (!(NonRequiredNullableIntList is ChangeTrackingList<int> collection3 && collection3.IsUndefined))
+            if (Optional.IsCollectionDefined(NonRequiredNullableIntList))
             {
                 if (NonRequiredNullableIntList != null)
                 {
@@ -239,7 +240,7 @@ namespace ModelsTypeSpec.Models
                     writer.WriteNull("nonRequiredNullableIntList");
                 }
             }
-            if (!(NonRequiredNullableStringList is ChangeTrackingList<string> collection4 && collection4.IsUndefined))
+            if (Optional.IsCollectionDefined(NonRequiredNullableStringList))
             {
                 if (NonRequiredNullableStringList != null)
                 {
@@ -296,14 +297,14 @@ namespace ModelsTypeSpec.Models
             }
             string requiredString = default;
             int requiredInt = default;
-            Optional<string> nonRequiredString = default;
-            Optional<int> nonRequiredInt = default;
+            string nonRequiredString = default;
+            int? nonRequiredInt = default;
             int? requiredNullableInt = default;
             string requiredNullableString = default;
-            Optional<int?> nonRequiredNullableInt = default;
-            Optional<string> nonRequiredNullableString = default;
+            int? nonRequiredNullableInt = default;
+            string nonRequiredNullableString = default;
             int requiredReadonlyInt = default;
-            Optional<int> nonRequiredReadonlyInt = default;
+            int? nonRequiredReadonlyInt = default;
             BaseModelWithDiscriminator requiredModel = default;
             FixedStringEnum requiredFixedStringEnum = default;
             FixedIntEnum requiredFixedIntEnum = default;
@@ -313,13 +314,13 @@ namespace ModelsTypeSpec.Models
             IDictionary<string, string> requiredStringRecord = default;
             IDictionary<string, RecordItem> requiredModelRecord = default;
             BinaryData requiredBytes = default;
-            Optional<BinaryData> optionalBytes = default;
-            IList<int> requiredUint8Array = default;
-            IList<int> optionalUint8Array = default;
+            BinaryData optionalBytes = default;
+            IList<byte> requiredUint8Array = default;
+            IList<byte> optionalUint8Array = default;
             BinaryData requiredUnknown = default;
-            Optional<BinaryData> optionalUnknown = default;
-            IList<int> requiredInt8Array = default;
-            IList<int> optionalInt8Array = default;
+            BinaryData optionalUnknown = default;
+            IList<sbyte> requiredInt8Array = default;
+            IList<sbyte> optionalInt8Array = default;
             IList<int> requiredNullableIntList = default;
             IList<string> requiredNullableStringList = default;
             IList<int> nonRequiredNullableIntList = default;
@@ -482,10 +483,10 @@ namespace ModelsTypeSpec.Models
                 }
                 if (property.NameEquals("requiredUint8Array"u8))
                 {
-                    List<int> array = new List<int>();
+                    List<byte> array = new List<byte>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(item.GetInt32());
+                        array.Add(item.GetByte());
                     }
                     requiredUint8Array = array;
                     continue;
@@ -496,10 +497,10 @@ namespace ModelsTypeSpec.Models
                     {
                         continue;
                     }
-                    List<int> array = new List<int>();
+                    List<byte> array = new List<byte>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(item.GetInt32());
+                        array.Add(item.GetByte());
                     }
                     optionalUint8Array = array;
                     continue;
@@ -520,10 +521,10 @@ namespace ModelsTypeSpec.Models
                 }
                 if (property.NameEquals("requiredInt8Array"u8))
                 {
-                    List<int> array = new List<int>();
+                    List<sbyte> array = new List<sbyte>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(item.GetInt32());
+                        array.Add(item.GetSByte());
                     }
                     requiredInt8Array = array;
                     continue;
@@ -534,10 +535,10 @@ namespace ModelsTypeSpec.Models
                     {
                         continue;
                     }
-                    List<int> array = new List<int>();
+                    List<sbyte> array = new List<sbyte>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(item.GetInt32());
+                        array.Add(item.GetSByte());
                     }
                     optionalInt8Array = array;
                     continue;
@@ -606,7 +607,38 @@ namespace ModelsTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new RoundTripModel(serializedAdditionalRawData, requiredString, requiredInt, nonRequiredString.Value, Optional.ToNullable(nonRequiredInt), requiredNullableInt, requiredNullableString, Optional.ToNullable(nonRequiredNullableInt), nonRequiredNullableString.Value, requiredReadonlyInt, Optional.ToNullable(nonRequiredReadonlyInt), requiredModel, requiredFixedStringEnum, requiredFixedIntEnum, requiredExtensibleEnum, requiredList, requiredIntRecord, requiredStringRecord, requiredModelRecord, requiredBytes, optionalBytes.Value, requiredUint8Array, optionalUint8Array ?? new ChangeTrackingList<int>(), requiredUnknown, optionalUnknown.Value, requiredInt8Array, optionalInt8Array ?? new ChangeTrackingList<int>(), requiredNullableIntList, requiredNullableStringList, nonRequiredNullableIntList ?? new ChangeTrackingList<int>(), nonRequiredNullableStringList ?? new ChangeTrackingList<string>());
+            return new RoundTripModel(
+                serializedAdditionalRawData,
+                requiredString,
+                requiredInt,
+                nonRequiredString,
+                nonRequiredInt,
+                requiredNullableInt,
+                requiredNullableString,
+                nonRequiredNullableInt,
+                nonRequiredNullableString,
+                requiredReadonlyInt,
+                nonRequiredReadonlyInt,
+                requiredModel,
+                requiredFixedStringEnum,
+                requiredFixedIntEnum,
+                requiredExtensibleEnum,
+                requiredList,
+                requiredIntRecord,
+                requiredStringRecord,
+                requiredModelRecord,
+                requiredBytes,
+                optionalBytes,
+                requiredUint8Array,
+                optionalUint8Array ?? new ChangeTrackingList<byte>(),
+                requiredUnknown,
+                optionalUnknown,
+                requiredInt8Array,
+                optionalInt8Array ?? new ChangeTrackingList<sbyte>(),
+                requiredNullableIntList,
+                requiredNullableStringList,
+                nonRequiredNullableIntList ?? new ChangeTrackingList<int>(),
+                nonRequiredNullableStringList ?? new ChangeTrackingList<string>());
         }
 
         BinaryData IPersistableModel<RoundTripModel>.Write(ModelReaderWriterOptions options)

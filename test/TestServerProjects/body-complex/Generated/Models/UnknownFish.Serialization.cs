@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using body_complex;
 
 namespace body_complex.Models
 {
@@ -28,14 +29,14 @@ namespace body_complex.Models
             writer.WriteStartObject();
             writer.WritePropertyName("fishtype"u8);
             writer.WriteStringValue(Fishtype);
-            if (Species != null)
+            if (Optional.IsDefined(Species))
             {
                 writer.WritePropertyName("species"u8);
                 writer.WriteStringValue(Species);
             }
             writer.WritePropertyName("length"u8);
             writer.WriteNumberValue(Length);
-            if (!(Siblings is ChangeTrackingList<Fish> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Siblings))
             {
                 writer.WritePropertyName("siblings"u8);
                 writer.WriteStartArray();
@@ -84,7 +85,7 @@ namespace body_complex.Models
                 return null;
             }
             string fishtype = "Unknown";
-            Optional<string> species = default;
+            string species = default;
             float length = default;
             IList<Fish> siblings = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
@@ -126,7 +127,7 @@ namespace body_complex.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new UnknownFish(fishtype, species.Value, length, siblings ?? new ChangeTrackingList<Fish>(), serializedAdditionalRawData);
+            return new UnknownFish(fishtype, species, length, siblings ?? new ChangeTrackingList<Fish>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<Fish>.Write(ModelReaderWriterOptions options)

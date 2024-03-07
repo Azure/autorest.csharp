@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -27,14 +28,14 @@ namespace MgmtDiscriminator.Models
             }
 
             writer.WriteStartObject();
-            if (Meow != null)
+            if (Optional.IsDefined(Meow))
             {
                 writer.WritePropertyName("meow"u8);
                 writer.WriteStringValue(Meow);
             }
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind.ToSerialString());
-            if (options.Format != "W" && Id != null)
+            if (options.Format != "W" && Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
@@ -77,9 +78,9 @@ namespace MgmtDiscriminator.Models
             {
                 return null;
             }
-            Optional<string> meow = default;
+            string meow = default;
             PetKind kind = default;
-            Optional<string> id = default;
+            string id = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -105,7 +106,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Cat(kind, id.Value, serializedAdditionalRawData, meow.Value);
+            return new Cat(kind, id, serializedAdditionalRawData, meow);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -113,7 +114,7 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Meow != null)
+            if (Optional.IsDefined(Meow))
             {
                 builder.Append("  meow:");
                 if (Meow.Contains(Environment.NewLine))
@@ -130,7 +131,7 @@ namespace MgmtDiscriminator.Models
             builder.Append("  kind:");
             builder.AppendLine($" '{Kind.ToSerialString()}'");
 
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 builder.Append("  id:");
                 if (Id.Contains(Environment.NewLine))

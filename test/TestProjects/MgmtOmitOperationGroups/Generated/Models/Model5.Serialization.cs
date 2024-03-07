@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using MgmtOmitOperationGroups;
 
 namespace MgmtOmitOperationGroups.Models
 {
@@ -16,12 +17,12 @@ namespace MgmtOmitOperationGroups.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (!(Modelqs is ChangeTrackingList<ModelQ> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Modelqs))
             {
                 writer.WritePropertyName("modelqs"u8);
                 writer.WriteStartArray();
@@ -40,8 +41,8 @@ namespace MgmtOmitOperationGroups.Models
             {
                 return null;
             }
-            Optional<string> id = default;
-            Optional<string> k = default;
+            string id = default;
+            string k = default;
             IList<ModelQ> modelqs = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -70,7 +71,7 @@ namespace MgmtOmitOperationGroups.Models
                     continue;
                 }
             }
-            return new Model5(id.Value, k.Value, modelqs ?? new ChangeTrackingList<ModelQ>());
+            return new Model5(id, k, modelqs ?? new ChangeTrackingList<ModelQ>());
         }
     }
 }

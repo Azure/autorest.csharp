@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using required_optional;
 
 namespace required_optional.Models
 {
@@ -26,7 +27,7 @@ namespace required_optional.Models
             }
 
             writer.WriteStartObject();
-            if (Value != null)
+            if (Optional.IsDefined(Value))
             {
                 writer.WritePropertyName("value"u8);
                 writer.WriteObjectValue(Value);
@@ -69,7 +70,7 @@ namespace required_optional.Models
             {
                 return null;
             }
-            Optional<Product> value = default;
+            Product value = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -89,7 +90,7 @@ namespace required_optional.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ClassOptionalWrapper(value.Value, serializedAdditionalRawData);
+            return new ClassOptionalWrapper(value, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ClassOptionalWrapper>.Write(ModelReaderWriterOptions options)

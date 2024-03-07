@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtAcronymMapping;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -15,17 +16,17 @@ namespace MgmtAcronymMapping.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (DiskEncryptionKey != null)
+            if (Optional.IsDefined(DiskEncryptionKey))
             {
                 writer.WritePropertyName("diskEncryptionKey"u8);
                 writer.WriteObjectValue(DiskEncryptionKey);
             }
-            if (KeyEncryptionKey != null)
+            if (Optional.IsDefined(KeyEncryptionKey))
             {
                 writer.WritePropertyName("keyEncryptionKey"u8);
                 writer.WriteObjectValue(KeyEncryptionKey);
             }
-            if (Enabled.HasValue)
+            if (Optional.IsDefined(Enabled))
             {
                 writer.WritePropertyName("enabled"u8);
                 writer.WriteBooleanValue(Enabled.Value);
@@ -39,9 +40,9 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<KeyVaultSecretReference> diskEncryptionKey = default;
-            Optional<KeyVaultKeyReference> keyEncryptionKey = default;
-            Optional<bool> enabled = default;
+            KeyVaultSecretReference diskEncryptionKey = default;
+            KeyVaultKeyReference keyEncryptionKey = default;
+            bool? enabled = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("diskEncryptionKey"u8))
@@ -72,7 +73,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new DiskEncryptionSettings(diskEncryptionKey.Value, keyEncryptionKey.Value, Optional.ToNullable(enabled));
+            return new DiskEncryptionSettings(diskEncryptionKey, keyEncryptionKey, enabled);
         }
     }
 }

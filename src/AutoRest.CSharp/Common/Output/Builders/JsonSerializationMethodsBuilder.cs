@@ -437,7 +437,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         public static MethodBodyStatement SerializeExpression(Utf8JsonWriterExpression utf8JsonWriter, JsonSerialization? serialization, ValueExpression expression)
             => serialization switch
             {
-                JsonArraySerialization array => SerializeArray(utf8JsonWriter, array, new EnumerableExpression(TypeFactory.GetElementType(array.ImplementationType), expression)),
+                JsonArraySerialization array => SerializeArray(utf8JsonWriter, array, new EnumerableExpression(TypeFactory.GetElementType(array.Type), expression)),
                 JsonDictionarySerialization dictionary => SerializeDictionary(utf8JsonWriter, dictionary, new DictionaryExpression(dictionary.Type.Arguments[0], dictionary.Type.Arguments[1], expression)),
                 JsonValueSerialization value => SerializeValue(utf8JsonWriter, value, expression),
                 _ => throw new NotSupportedException()
@@ -492,11 +492,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         return new[]
                         {
                             Var("serializeOptions", New.JsonSerializerOptions(), out var serializeOptions),
-                            InvokeJsonSerializerSerializeMethod(utf8JsonWriter, value, serializeOptions)
+                            JsonSerializerExpression.Serialize(utf8JsonWriter, value, serializeOptions).ToStatement()
                         };
                     }
 
-                    return InvokeJsonSerializerSerializeMethod(utf8JsonWriter, value);
+                    return JsonSerializerExpression.Serialize(utf8JsonWriter, value).ToStatement();
 
                 case ObjectType:
                     return utf8JsonWriter.WriteObjectValue(value);
@@ -529,7 +529,14 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             value = value.NullableStructValue(valueSerialization.Type);
 
-            if (valueType == typeof(decimal) || valueType == typeof(double) || valueType == typeof(float) || valueType == typeof(long) || valueType == typeof(int) || valueType == typeof(short))
+            if (valueType == typeof(decimal) ||
+                valueType == typeof(double) ||
+                valueType == typeof(float) ||
+                valueType == typeof(long) ||
+                valueType == typeof(int) ||
+                valueType == typeof(short) ||
+                valueType == typeof(sbyte) ||
+                valueType == typeof(byte))
             {
                 return utf8JsonWriter.WriteNumberValue(value);
             }
@@ -597,20 +604,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     return utf8JsonWriter.WriteBase64StringValue(new BinaryDataExpression(value).ToArray(), valueSerialization.Format.ToFormatSpecifier());
                 }
 
-                return new IfElsePreprocessorDirective
-                (
-                    "NET6_0_OR_GREATER",
-                    utf8JsonWriter.WriteRawValue(value),
-                    new UsingScopeStatement(typeof(JsonDocument), "document", JsonDocumentExpression.Parse(binaryDataValue), out var jsonDocumentVar)
-                    {
-                        InvokeJsonSerializerSerializeMethod(utf8JsonWriter, new JsonDocumentExpression(jsonDocumentVar).RootElement)
-                    }
-                );
+                return utf8JsonWriter.WriteBinaryData(binaryDataValue);
             }
 
             if (IsCustomJsonConverterAdded(valueType))
             {
-                return InvokeJsonSerializerSerializeMethod(utf8JsonWriter, value);
+                return JsonSerializerExpression.Serialize(utf8JsonWriter, value).ToStatement();
             }
 
             throw new NotSupportedException($"Framework type {valueType} serialization not supported, please add `CodeGenMemberSerializationHooks` to specify the serialization of this type with the customized property");
@@ -903,18 +902,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             foreach (JsonPropertySerialization jsonProperty in jsonProperties)
             {
-                if (jsonProperty.SerializedType is { } type)
+                if (jsonProperty.ValueSerialization is { } valueSerialization)
                 {
+                    var type = jsonProperty.SerializedType is not null && TypeFactory.IsCollectionType(jsonProperty.SerializedType)
+                        ? jsonProperty.SerializedType
+                        : valueSerialization.Type;
                     var propertyDeclaration = new CodeWriterDeclaration(jsonProperty.SerializedName.ToVariableName());
-                    if (!jsonProperty.IsRequired && !TypeFactory.IsCollectionType(type))
-                    {
-                        if (type.IsFrameworkType && type.FrameworkType == typeof(Nullable<>))
-                        {
-                            type = new CSharpType(type.Arguments[0].FrameworkType);
-                        }
-                        type = new CSharpType(Configuration.ApiTypes.OptionalPropertyType, type);
-                    }
-
                     propertyVariables.Add(jsonProperty, new VariableReference(type, propertyDeclaration));
                 }
                 else if (jsonProperty.PropertySerializations != null)
@@ -958,15 +951,15 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             switch (serialization)
             {
-                case JsonArraySerialization jsonReadOnlyMemory when TypeFactory.IsArray(jsonReadOnlyMemory.ImplementationType):
-                    var readOnlyMemory = new VariableReference(jsonReadOnlyMemory.ImplementationType, "array");
+                case JsonArraySerialization jsonReadOnlyMemory when TypeFactory.IsArray(jsonReadOnlyMemory.Type):
+                    var readOnlyMemory = new VariableReference(jsonReadOnlyMemory.Type, "array");
                     value = readOnlyMemory;
                     VariableReference index = new VariableReference(typeof(int), "index");
 
                     return new MethodBodyStatement[]
                     {
                         Declare(index, Int(0)),
-                        Declare(readOnlyMemory, New.Array(TypeFactory.GetElementType(jsonReadOnlyMemory.ImplementationType), element.GetArrayLength())),
+                        Declare(readOnlyMemory, New.Array(TypeFactory.GetElementType(jsonReadOnlyMemory.Type), element.GetArrayLength())),
                         new ForeachStatement("item", element.EnumerateArray(), out var readOnlyMemoryItem)
                         {
                             DeserializeArrayItem(jsonReadOnlyMemory, value, new JsonElementExpression(readOnlyMemoryItem), options, index),
@@ -975,12 +968,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     };
 
                 case JsonArraySerialization jsonArray:
-                    var array = new VariableReference(jsonArray.ImplementationType, "array");
+                    var array = new VariableReference(jsonArray.Type, "array");
                     value = array;
 
                     return new MethodBodyStatement[]
                     {
-                        Declare(array, New.Instance(jsonArray.ImplementationType)),
+                        Declare(array, New.Instance(jsonArray.Type)),
                         new ForeachStatement("item", element.EnumerateArray(), out var arrayItem)
                         {
                             DeserializeArrayItem(jsonArray, value, new JsonElementExpression(arrayItem), options),
@@ -1087,13 +1080,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
             switch (implementation)
             {
                 case SystemObjectType systemObjectType when IsCustomJsonConverterAdded(systemObjectType.SystemType):
-                    return InvokeJsonSerializerDeserializeMethod(element, implementation.Type, serializerOptions);
+                    return JsonSerializerExpression.Deserialize(element, implementation.Type, serializerOptions);
 
                 case Resource { ResourceData: SerializableObjectType resourceDataType } resource:
                     return New.Instance(resource.Type, new MemberExpression(null, "Client"), SerializableObjectTypeExpression.Deserialize(resourceDataType, element));
 
                 case MgmtObjectType mgmtObjectType when TypeReferenceTypeChooser.HasMatch(mgmtObjectType.ObjectSchema):
-                    return InvokeJsonSerializerDeserializeMethod(element, implementation.Type);
+                    return JsonSerializerExpression.Deserialize(element, implementation.Type);
 
                 case SerializableObjectType type:
                     return SerializableObjectTypeExpression.Deserialize(type, element, options);
@@ -1110,28 +1103,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private static ValueExpression GetOptional(PropertySerialization jsonPropertySerialization, TypedValueExpression variable)
         {
             var sourceType = variable.Type;
-            if (!sourceType.IsFrameworkType)
+            if (!sourceType.IsFrameworkType || jsonPropertySerialization.SerializationConstructorParameterName == "serializedAdditionalRawData")
             {
                 return variable;
             }
-
-            var targetType = jsonPropertySerialization.Value.Type;
-
-            if (sourceType.FrameworkType == Configuration.ApiTypes.OptionalPropertyType)
-            {
-                if (targetType is { IsValueType: true, IsNullable: true })
-                {
-                    return InvokeOptional.ToNullable(variable);
-                }
-
-                if (targetType.IsNullable)
-                {
-                    return new MemberExpression(variable, "Value");
-                }
-            }
             else if (!jsonPropertySerialization.IsRequired)
             {
-                return InvokeOptional.FallBackToChangeTrackingCollection(variable);
+                return InvokeOptional.FallBackToChangeTrackingCollection(variable, jsonPropertySerialization.SerializedType);
             }
 
             return variable;
@@ -1165,7 +1143,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             if (IsCustomJsonConverterAdded(frameworkType) && serializationType is not null)
             {
-                return InvokeJsonSerializerDeserializeMethod(element, serializationType);
+                return JsonSerializerExpression.Deserialize(element, serializationType);
             }
 
             if (frameworkType == typeof(JsonElement))
@@ -1177,6 +1155,10 @@ namespace AutoRest.CSharp.Common.Output.Builders
             if (frameworkType == typeof(char))
                 return element.GetChar();
 
+            if (frameworkType == typeof(sbyte))
+                return element.GetSByte();
+            if (frameworkType == typeof(byte))
+                return element.GetByte();
             if (frameworkType == typeof(short))
                 return element.GetInt16();
             if (frameworkType == typeof(int))
@@ -1228,20 +1210,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static MethodBodyStatement InvokeArrayElementAssignment(ValueExpression array, ValueExpression index, ValueExpression value)
             => Assign(new ArrayElementExpression(array, index), value);
-
-        private static ValueExpression InvokeJsonSerializerDeserializeMethod(JsonElementExpression element, CSharpType serializationType, ValueExpression? options = null)
-        {
-            var arguments = options is null
-                ? new[] { element.GetRawText() }
-                : new[] { element.GetRawText(), options };
-            return new InvokeStaticMethodExpression(typeof(JsonSerializer), nameof(JsonSerializer.Deserialize), arguments, new[] { serializationType });
-        }
-
-        private static MethodBodyStatement InvokeJsonSerializerSerializeMethod(ValueExpression writer, ValueExpression value)
-            => new InvokeStaticMethodStatement(typeof(JsonSerializer), nameof(JsonSerializer.Serialize), new[] { writer, value });
-
-        private static MethodBodyStatement InvokeJsonSerializerSerializeMethod(ValueExpression writer, ValueExpression value, ValueExpression options)
-            => new InvokeStaticMethodStatement(typeof(JsonSerializer), nameof(JsonSerializer.Serialize), new[] { writer, value, options });
 
         private static bool IsCustomJsonConverterAdded(Type type)
             => type.GetCustomAttributes().Any(a => a.GetType() == typeof(JsonConverterAttribute));

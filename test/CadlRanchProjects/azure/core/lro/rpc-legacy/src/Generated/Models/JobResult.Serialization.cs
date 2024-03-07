@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using _Azure.Lro.RpcLegacy;
 
 namespace _Azure.Lro.RpcLegacy.Models
 {
@@ -42,7 +43,7 @@ namespace _Azure.Lro.RpcLegacy.Models
                 writer.WritePropertyName("status"u8);
                 writer.WriteStringValue(Status.ToString());
             }
-            if (options.Format != "W" && !(Errors is ChangeTrackingList<ErrorResponse> collection && collection.IsUndefined))
+            if (options.Format != "W" && Optional.IsCollectionDefined(Errors))
             {
                 writer.WritePropertyName("errors"u8);
                 writer.WriteStartArray();
@@ -52,7 +53,7 @@ namespace _Azure.Lro.RpcLegacy.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W" && !(Results is ChangeTrackingList<string> collection0 && collection0.IsUndefined))
+            if (options.Format != "W" && Optional.IsCollectionDefined(Results))
             {
                 writer.WritePropertyName("results"u8);
                 writer.WriteStartArray();
@@ -158,7 +159,13 @@ namespace _Azure.Lro.RpcLegacy.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new JobResult(jobId, comment, status, errors ?? new ChangeTrackingList<ErrorResponse>(), results ?? new ChangeTrackingList<string>(), serializedAdditionalRawData);
+            return new JobResult(
+                jobId,
+                comment,
+                status,
+                errors ?? new ChangeTrackingList<ErrorResponse>(),
+                results ?? new ChangeTrackingList<string>(),
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<JobResult>.Write(ModelReaderWriterOptions options)

@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using ModelShapes;
 
 namespace ModelShapes.Models
 {
@@ -44,17 +45,17 @@ namespace ModelShapes.Models
                 writer.WriteNumberValue(item);
             }
             writer.WriteEndArray();
-            if (NonRequiredString != null)
+            if (Optional.IsDefined(NonRequiredString))
             {
                 writer.WritePropertyName("NonRequiredString"u8);
                 writer.WriteStringValue(NonRequiredString);
             }
-            if (NonRequiredInt.HasValue)
+            if (Optional.IsDefined(NonRequiredInt))
             {
                 writer.WritePropertyName("NonRequiredInt"u8);
                 writer.WriteNumberValue(NonRequiredInt.Value);
             }
-            if (!(NonRequiredStringList is ChangeTrackingList<string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(NonRequiredStringList))
             {
                 writer.WritePropertyName("NonRequiredStringList"u8);
                 writer.WriteStartArray();
@@ -64,7 +65,7 @@ namespace ModelShapes.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!(NonRequiredIntList is ChangeTrackingList<int> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(NonRequiredIntList))
             {
                 writer.WritePropertyName("NonRequiredIntList"u8);
                 writer.WriteStartArray();
@@ -92,7 +93,7 @@ namespace ModelShapes.Models
             {
                 writer.WriteNull("RequiredNullableInt");
             }
-            if (RequiredNullableStringList != null && !(RequiredNullableStringList is ChangeTrackingList<string> collection1 && collection1.IsUndefined))
+            if (RequiredNullableStringList != null && Optional.IsCollectionDefined(RequiredNullableStringList))
             {
                 writer.WritePropertyName("RequiredNullableStringList"u8);
                 writer.WriteStartArray();
@@ -106,7 +107,7 @@ namespace ModelShapes.Models
             {
                 writer.WriteNull("RequiredNullableStringList");
             }
-            if (RequiredNullableIntList != null && !(RequiredNullableIntList is ChangeTrackingList<int> collection2 && collection2.IsUndefined))
+            if (RequiredNullableIntList != null && Optional.IsCollectionDefined(RequiredNullableIntList))
             {
                 writer.WritePropertyName("RequiredNullableIntList"u8);
                 writer.WriteStartArray();
@@ -120,7 +121,7 @@ namespace ModelShapes.Models
             {
                 writer.WriteNull("RequiredNullableIntList");
             }
-            if (NonRequiredNullableString != null)
+            if (Optional.IsDefined(NonRequiredNullableString))
             {
                 if (NonRequiredNullableString != null)
                 {
@@ -132,7 +133,7 @@ namespace ModelShapes.Models
                     writer.WriteNull("NonRequiredNullableString");
                 }
             }
-            if (NonRequiredNullableInt.HasValue)
+            if (Optional.IsDefined(NonRequiredNullableInt))
             {
                 if (NonRequiredNullableInt != null)
                 {
@@ -144,7 +145,7 @@ namespace ModelShapes.Models
                     writer.WriteNull("NonRequiredNullableInt");
                 }
             }
-            if (!(NonRequiredNullableStringList is ChangeTrackingList<string> collection3 && collection3.IsUndefined))
+            if (Optional.IsCollectionDefined(NonRequiredNullableStringList))
             {
                 if (NonRequiredNullableStringList != null)
                 {
@@ -161,7 +162,7 @@ namespace ModelShapes.Models
                     writer.WriteNull("NonRequiredNullableStringList");
                 }
             }
-            if (!(NonRequiredNullableIntList is ChangeTrackingList<int> collection4 && collection4.IsUndefined))
+            if (Optional.IsCollectionDefined(NonRequiredNullableIntList))
             {
                 if (NonRequiredNullableIntList != null)
                 {
@@ -212,7 +213,7 @@ namespace ModelShapes.Models
                 writer.WriteNumberValue(item);
             }
             writer.WriteEndArray();
-            if (VectorNullable.HasValue)
+            if (Optional.IsDefined(VectorNullable))
             {
                 if (VectorNullable != null)
                 {
@@ -229,7 +230,7 @@ namespace ModelShapes.Models
                     writer.WriteNull("vectorNullable");
                 }
             }
-            if (options.Format != "W" && VectorReadOnlyNullable.HasValue)
+            if (options.Format != "W" && Optional.IsDefined(VectorReadOnlyNullable))
             {
                 if (VectorReadOnlyNullable != null)
                 {
@@ -319,16 +320,16 @@ namespace ModelShapes.Models
             int requiredInt = default;
             IList<string> requiredStringList = default;
             IList<int> requiredIntList = default;
-            Optional<string> nonRequiredString = default;
-            Optional<int> nonRequiredInt = default;
+            string nonRequiredString = default;
+            int? nonRequiredInt = default;
             IList<string> nonRequiredStringList = default;
             IList<int> nonRequiredIntList = default;
             string requiredNullableString = default;
             int? requiredNullableInt = default;
             IList<string> requiredNullableStringList = default;
             IList<int> requiredNullableIntList = default;
-            Optional<string> nonRequiredNullableString = default;
-            Optional<int?> nonRequiredNullableInt = default;
+            string nonRequiredNullableString = default;
+            int? nonRequiredNullableInt = default;
             IList<string> nonRequiredNullableStringList = default;
             IList<int> nonRequiredNullableIntList = default;
             ReadOnlyMemory<float> vector = default;
@@ -647,7 +648,32 @@ namespace ModelShapes.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new InputModel(requiredString, requiredInt, requiredStringList, requiredIntList, nonRequiredString.Value, Optional.ToNullable(nonRequiredInt), nonRequiredStringList ?? new ChangeTrackingList<string>(), nonRequiredIntList ?? new ChangeTrackingList<int>(), requiredNullableString, requiredNullableInt, requiredNullableStringList, requiredNullableIntList, nonRequiredNullableString.Value, Optional.ToNullable(nonRequiredNullableInt), nonRequiredNullableStringList ?? new ChangeTrackingList<string>(), nonRequiredNullableIntList ?? new ChangeTrackingList<int>(), vector, vectorReadOnly, vectorReadOnlyRequired, vectorRequired, vectorNullable, vectorReadOnlyNullable, vectorReadOnlyRequiredNullable, vectorRequiredNullable, serializedAdditionalRawData);
+            return new InputModel(
+                requiredString,
+                requiredInt,
+                requiredStringList,
+                requiredIntList,
+                nonRequiredString,
+                nonRequiredInt,
+                nonRequiredStringList ?? new ChangeTrackingList<string>(),
+                nonRequiredIntList ?? new ChangeTrackingList<int>(),
+                requiredNullableString,
+                requiredNullableInt,
+                requiredNullableStringList,
+                requiredNullableIntList,
+                nonRequiredNullableString,
+                nonRequiredNullableInt,
+                nonRequiredNullableStringList ?? new ChangeTrackingList<string>(),
+                nonRequiredNullableIntList ?? new ChangeTrackingList<int>(),
+                vector,
+                vectorReadOnly,
+                vectorReadOnlyRequired,
+                vectorRequired,
+                vectorNullable,
+                vectorReadOnlyNullable,
+                vectorReadOnlyRequiredNullable,
+                vectorRequiredNullable,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<InputModel>.Write(ModelReaderWriterOptions options)

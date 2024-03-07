@@ -22,22 +22,22 @@ namespace Azure.ResourceManager.Storage
             writer.WriteStartObject();
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (DefaultEncryptionScope != null)
+            if (Optional.IsDefined(DefaultEncryptionScope))
             {
                 writer.WritePropertyName("defaultEncryptionScope"u8);
                 writer.WriteStringValue(DefaultEncryptionScope);
             }
-            if (DenyEncryptionScopeOverride.HasValue)
+            if (Optional.IsDefined(DenyEncryptionScopeOverride))
             {
                 writer.WritePropertyName("denyEncryptionScopeOverride"u8);
                 writer.WriteBooleanValue(DenyEncryptionScopeOverride.Value);
             }
-            if (PublicAccess.HasValue)
+            if (Optional.IsDefined(PublicAccess))
             {
                 writer.WritePropertyName("publicAccess"u8);
                 writer.WriteStringValue(PublicAccess.Value.ToSerialString());
             }
-            if (!(Metadata is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Metadata))
             {
                 writer.WritePropertyName("metadata"u8);
                 writer.WriteStartObject();
@@ -48,17 +48,17 @@ namespace Azure.ResourceManager.Storage
                 }
                 writer.WriteEndObject();
             }
-            if (ImmutableStorageWithVersioning != null)
+            if (Optional.IsDefined(ImmutableStorageWithVersioning))
             {
                 writer.WritePropertyName("immutableStorageWithVersioning"u8);
                 writer.WriteObjectValue(ImmutableStorageWithVersioning);
             }
-            if (EnableNfsV3RootSquash.HasValue)
+            if (Optional.IsDefined(EnableNfsV3RootSquash))
             {
                 writer.WritePropertyName("enableNfsV3RootSquash"u8);
                 writer.WriteBooleanValue(EnableNfsV3RootSquash.Value);
             }
-            if (EnableNfsV3AllSquash.HasValue)
+            if (Optional.IsDefined(EnableNfsV3AllSquash))
             {
                 writer.WritePropertyName("enableNfsV3AllSquash"u8);
                 writer.WriteBooleanValue(EnableNfsV3AllSquash.Value);
@@ -73,30 +73,30 @@ namespace Azure.ResourceManager.Storage
             {
                 return null;
             }
-            Optional<ETag> etag = default;
+            ETag? etag = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
-            Optional<string> version = default;
-            Optional<bool> deleted = default;
-            Optional<DateTimeOffset> deletedTime = default;
-            Optional<int> remainingRetentionDays = default;
-            Optional<string> defaultEncryptionScope = default;
-            Optional<bool> denyEncryptionScopeOverride = default;
-            Optional<PublicAccess> publicAccess = default;
-            Optional<DateTimeOffset> lastModifiedTime = default;
-            Optional<LeaseStatus> leaseStatus = default;
-            Optional<LeaseState> leaseState = default;
-            Optional<LeaseDuration> leaseDuration = default;
+            SystemData systemData = default;
+            string version = default;
+            bool? deleted = default;
+            DateTimeOffset? deletedTime = default;
+            int? remainingRetentionDays = default;
+            string defaultEncryptionScope = default;
+            bool? denyEncryptionScopeOverride = default;
+            PublicAccess? publicAccess = default;
+            DateTimeOffset? lastModifiedTime = default;
+            LeaseStatus? leaseStatus = default;
+            LeaseState? leaseState = default;
+            LeaseDuration? leaseDuration = default;
             IDictionary<string, string> metadata = default;
-            Optional<ImmutabilityPolicyProperties> immutabilityPolicy = default;
-            Optional<LegalHoldProperties> legalHold = default;
-            Optional<bool> hasLegalHold = default;
-            Optional<bool> hasImmutabilityPolicy = default;
-            Optional<ImmutableStorageWithVersioning> immutableStorageWithVersioning = default;
-            Optional<bool> enableNfsV3RootSquash = default;
-            Optional<bool> enableNfsV3AllSquash = default;
+            ImmutabilityPolicyProperties immutabilityPolicy = default;
+            LegalHoldProperties legalHold = default;
+            bool? hasLegalHold = default;
+            bool? hasImmutabilityPolicy = default;
+            ImmutableStorageWithVersioning immutableStorageWithVersioning = default;
+            bool? enableNfsV3RootSquash = default;
+            bool? enableNfsV3AllSquash = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"u8))
@@ -313,7 +313,31 @@ namespace Azure.ResourceManager.Storage
                     continue;
                 }
             }
-            return new BlobContainerData(id, name, type, systemData.Value, version.Value, Optional.ToNullable(deleted), Optional.ToNullable(deletedTime), Optional.ToNullable(remainingRetentionDays), defaultEncryptionScope.Value, Optional.ToNullable(denyEncryptionScopeOverride), Optional.ToNullable(publicAccess), Optional.ToNullable(lastModifiedTime), Optional.ToNullable(leaseStatus), Optional.ToNullable(leaseState), Optional.ToNullable(leaseDuration), metadata ?? new ChangeTrackingDictionary<string, string>(), immutabilityPolicy.Value, legalHold.Value, Optional.ToNullable(hasLegalHold), Optional.ToNullable(hasImmutabilityPolicy), immutableStorageWithVersioning.Value, Optional.ToNullable(enableNfsV3RootSquash), Optional.ToNullable(enableNfsV3AllSquash), Optional.ToNullable(etag));
+            return new BlobContainerData(
+                id,
+                name,
+                type,
+                systemData,
+                version,
+                deleted,
+                deletedTime,
+                remainingRetentionDays,
+                defaultEncryptionScope,
+                denyEncryptionScopeOverride,
+                publicAccess,
+                lastModifiedTime,
+                leaseStatus,
+                leaseState,
+                leaseDuration,
+                metadata ?? new ChangeTrackingDictionary<string, string>(),
+                immutabilityPolicy,
+                legalHold,
+                hasLegalHold,
+                hasImmutabilityPolicy,
+                immutableStorageWithVersioning,
+                enableNfsV3RootSquash,
+                enableNfsV3AllSquash,
+                etag);
         }
     }
 }

@@ -57,5 +57,6 @@
     "Deployment": {
       "Properties": "new DeploymentProperties(current.Properties.Mode.HasValue ? current.Properties.Mode.Value : DeploymentMode.Incremental)"
     }
-  }
+  },
+  "helper-namespace": "MgmtScopeResource"
 }

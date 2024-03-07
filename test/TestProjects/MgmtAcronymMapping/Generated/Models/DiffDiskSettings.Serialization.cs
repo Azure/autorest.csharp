@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtAcronymMapping;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -15,12 +16,12 @@ namespace MgmtAcronymMapping.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Option.HasValue)
+            if (Optional.IsDefined(Option))
             {
                 writer.WritePropertyName("option"u8);
                 writer.WriteStringValue(Option.Value.ToString());
             }
-            if (Placement.HasValue)
+            if (Optional.IsDefined(Placement))
             {
                 writer.WritePropertyName("placement"u8);
                 writer.WriteStringValue(Placement.Value.ToString());
@@ -34,8 +35,8 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<DiffDiskOption> option = default;
-            Optional<DiffDiskPlacement> placement = default;
+            DiffDiskOption? option = default;
+            DiffDiskPlacement? placement = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("option"u8))
@@ -57,7 +58,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new DiffDiskSettings(Optional.ToNullable(option), Optional.ToNullable(placement));
+            return new DiffDiskSettings(option, placement);
         }
     }
 }

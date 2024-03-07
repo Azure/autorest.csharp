@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Storage;
 
 namespace Azure.ResourceManager.Storage.Models
 {
@@ -16,7 +17,7 @@ namespace Azure.ResourceManager.Storage.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (!(PrefixMatch is ChangeTrackingList<string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(PrefixMatch))
             {
                 writer.WritePropertyName("prefixMatch"u8);
                 writer.WriteStartArray();
@@ -26,7 +27,7 @@ namespace Azure.ResourceManager.Storage.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!(BlobTypes is ChangeTrackingList<string> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(BlobTypes))
             {
                 writer.WritePropertyName("blobTypes"u8);
                 writer.WriteStartArray();
@@ -36,12 +37,12 @@ namespace Azure.ResourceManager.Storage.Models
                 }
                 writer.WriteEndArray();
             }
-            if (IncludeBlobVersions.HasValue)
+            if (Optional.IsDefined(IncludeBlobVersions))
             {
                 writer.WritePropertyName("includeBlobVersions"u8);
                 writer.WriteBooleanValue(IncludeBlobVersions.Value);
             }
-            if (IncludeSnapshots.HasValue)
+            if (Optional.IsDefined(IncludeSnapshots))
             {
                 writer.WritePropertyName("includeSnapshots"u8);
                 writer.WriteBooleanValue(IncludeSnapshots.Value);
@@ -57,8 +58,8 @@ namespace Azure.ResourceManager.Storage.Models
             }
             IList<string> prefixMatch = default;
             IList<string> blobTypes = default;
-            Optional<bool> includeBlobVersions = default;
-            Optional<bool> includeSnapshots = default;
+            bool? includeBlobVersions = default;
+            bool? includeSnapshots = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("prefixMatch"u8))
@@ -108,7 +109,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new BlobInventoryPolicyFilter(prefixMatch ?? new ChangeTrackingList<string>(), blobTypes ?? new ChangeTrackingList<string>(), Optional.ToNullable(includeBlobVersions), Optional.ToNullable(includeSnapshots));
+            return new BlobInventoryPolicyFilter(prefixMatch ?? new ChangeTrackingList<string>(), blobTypes ?? new ChangeTrackingList<string>(), includeBlobVersions, includeSnapshots);
         }
     }
 }

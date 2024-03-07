@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -31,7 +32,7 @@ namespace MgmtDiscriminator.Models
             writer.WriteObjectValue(Parameters);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name.ToString());
-            if (options.Format != "W" && Foo != null)
+            if (options.Format != "W" && Optional.IsDefined(Foo))
             {
                 writer.WritePropertyName("foo"u8);
                 writer.WriteStringValue(Foo);
@@ -76,7 +77,7 @@ namespace MgmtDiscriminator.Models
             }
             OriginGroupOverrideActionParameters parameters = default;
             DeliveryRuleActionType name = default;
-            Optional<string> foo = default;
+            string foo = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -102,7 +103,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new OriginGroupOverrideAction(name, foo.Value, serializedAdditionalRawData, parameters);
+            return new OriginGroupOverrideAction(name, foo, serializedAdditionalRawData, parameters);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -113,13 +114,13 @@ namespace MgmtDiscriminator.Models
             builder.Append("  name:");
             builder.AppendLine($" '{Name.ToString()}'");
 
-            if (Parameters != null)
+            if (Optional.IsDefined(Parameters))
             {
                 builder.Append("  parameters:");
                 AppendChildObject(builder, Parameters, options, 2, false);
             }
 
-            if (Foo != null)
+            if (Optional.IsDefined(Foo))
             {
                 builder.Append("  foo:");
                 if (Foo.Contains(Environment.NewLine))

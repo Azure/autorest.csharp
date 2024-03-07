@@ -20,7 +20,7 @@ namespace Azure.ResourceManager.Storage
             writer.WriteStartObject();
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Policy != null)
+            if (Optional.IsDefined(Policy))
             {
                 writer.WritePropertyName("policy"u8);
                 writer.WriteObjectValue(Policy);
@@ -38,9 +38,9 @@ namespace Azure.ResourceManager.Storage
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
-            Optional<DateTimeOffset> lastModifiedTime = default;
-            Optional<ManagementPolicySchema> policy = default;
+            SystemData systemData = default;
+            DateTimeOffset? lastModifiedTime = default;
+            ManagementPolicySchema policy = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -98,7 +98,13 @@ namespace Azure.ResourceManager.Storage
                     continue;
                 }
             }
-            return new ManagementPolicyData(id, name, type, systemData.Value, Optional.ToNullable(lastModifiedTime), policy.Value);
+            return new ManagementPolicyData(
+                id,
+                name,
+                type,
+                systemData,
+                lastModifiedTime,
+                policy);
         }
     }
 }

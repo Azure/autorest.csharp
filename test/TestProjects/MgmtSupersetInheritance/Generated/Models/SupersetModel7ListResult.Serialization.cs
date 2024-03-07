@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 using MgmtSupersetInheritance;
 
 namespace MgmtSupersetInheritance.Models
@@ -21,7 +20,7 @@ namespace MgmtSupersetInheritance.Models
                 return null;
             }
             IReadOnlyList<SupersetModel7Data> value = default;
-            Optional<string> nextLink = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -44,7 +43,7 @@ namespace MgmtSupersetInheritance.Models
                     continue;
                 }
             }
-            return new SupersetModel7ListResult(value ?? new ChangeTrackingList<SupersetModel7Data>(), nextLink.Value);
+            return new SupersetModel7ListResult(value ?? new ChangeTrackingList<SupersetModel7Data>(), nextLink);
         }
     }
 }

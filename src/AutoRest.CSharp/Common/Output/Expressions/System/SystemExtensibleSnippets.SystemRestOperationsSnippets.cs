@@ -8,7 +8,6 @@ using System.ClientModel.Primitives;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
-using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
@@ -25,6 +24,9 @@ namespace AutoRest.CSharp.Common.Output.Expressions.System
     {
         private class SystemRestOperationsSnippets : RestOperationsSnippets
         {
+            public override StreamExpression GetContentStream(TypedValueExpression result)
+                => new ResultExpression(result).GetRawResponse().ContentStream;
+
             public override TypedValueExpression GetTypedResponseFromValue(TypedValueExpression value, TypedValueExpression result)
             {
                 return ResultExpression.FromValue(value, GetRawResponse(result));

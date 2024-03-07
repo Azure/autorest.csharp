@@ -70,14 +70,8 @@ namespace Azure.NewProject.TypeSpec
         /// <include file="Docs/HelloDemo.xml" path="doc/members/member[@name='SayHiAsync(string,string,string,RequestContext)']/*" />
         public virtual async Task<Response> SayHiAsync(string headParameter, string queryParameter, string optionalQuery, RequestContext context)
         {
-            if (headParameter == null)
-            {
-                throw new ArgumentNullException(nameof(headParameter));
-            }
-            if (queryParameter == null)
-            {
-                throw new ArgumentNullException(nameof(queryParameter));
-            }
+            Argument.AssertNotNull(headParameter, nameof(headParameter));
+            Argument.AssertNotNull(queryParameter, nameof(queryParameter));
 
             using var scope = ClientDiagnostics.CreateScope("HelloDemo.SayHi");
             scope.Start();
@@ -113,14 +107,8 @@ namespace Azure.NewProject.TypeSpec
         /// <include file="Docs/HelloDemo.xml" path="doc/members/member[@name='SayHi(string,string,string,RequestContext)']/*" />
         public virtual Response SayHi(string headParameter, string queryParameter, string optionalQuery, RequestContext context)
         {
-            if (headParameter == null)
-            {
-                throw new ArgumentNullException(nameof(headParameter));
-            }
-            if (queryParameter == null)
-            {
-                throw new ArgumentNullException(nameof(queryParameter));
-            }
+            Argument.AssertNotNull(headParameter, nameof(headParameter));
+            Argument.AssertNotNull(queryParameter, nameof(queryParameter));
 
             using var scope = ClientDiagnostics.CreateScope("HelloDemo.SayHi");
             scope.Start();

@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace Azure.ResourceManager.Storage.Models
 {
@@ -18,8 +17,8 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Optional<string> leaseId = default;
-            Optional<string> leaseTimeSeconds = default;
+            string leaseId = default;
+            string leaseTimeSeconds = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("leaseId"u8))
@@ -33,7 +32,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new LeaseContainerResponse(leaseId.Value, leaseTimeSeconds.Value);
+            return new LeaseContainerResponse(leaseId, leaseTimeSeconds);
         }
     }
 }

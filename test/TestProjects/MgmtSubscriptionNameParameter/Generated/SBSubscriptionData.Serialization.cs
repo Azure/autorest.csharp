@@ -20,67 +20,67 @@ namespace MgmtSubscriptionNameParameter
             writer.WriteStartObject();
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (LockDuration.HasValue)
+            if (Optional.IsDefined(LockDuration))
             {
                 writer.WritePropertyName("lockDuration"u8);
                 writer.WriteStringValue(LockDuration.Value, "P");
             }
-            if (RequiresSession.HasValue)
+            if (Optional.IsDefined(RequiresSession))
             {
                 writer.WritePropertyName("requiresSession"u8);
                 writer.WriteBooleanValue(RequiresSession.Value);
             }
-            if (DefaultMessageTimeToLive.HasValue)
+            if (Optional.IsDefined(DefaultMessageTimeToLive))
             {
                 writer.WritePropertyName("defaultMessageTimeToLive"u8);
                 writer.WriteStringValue(DefaultMessageTimeToLive.Value, "P");
             }
-            if (DeadLetteringOnFilterEvaluationExceptions.HasValue)
+            if (Optional.IsDefined(DeadLetteringOnFilterEvaluationExceptions))
             {
                 writer.WritePropertyName("deadLetteringOnFilterEvaluationExceptions"u8);
                 writer.WriteBooleanValue(DeadLetteringOnFilterEvaluationExceptions.Value);
             }
-            if (DeadLetteringOnMessageExpiration.HasValue)
+            if (Optional.IsDefined(DeadLetteringOnMessageExpiration))
             {
                 writer.WritePropertyName("deadLetteringOnMessageExpiration"u8);
                 writer.WriteBooleanValue(DeadLetteringOnMessageExpiration.Value);
             }
-            if (DuplicateDetectionHistoryTimeWindow.HasValue)
+            if (Optional.IsDefined(DuplicateDetectionHistoryTimeWindow))
             {
                 writer.WritePropertyName("duplicateDetectionHistoryTimeWindow"u8);
                 writer.WriteStringValue(DuplicateDetectionHistoryTimeWindow.Value, "P");
             }
-            if (MaxDeliveryCount.HasValue)
+            if (Optional.IsDefined(MaxDeliveryCount))
             {
                 writer.WritePropertyName("maxDeliveryCount"u8);
                 writer.WriteNumberValue(MaxDeliveryCount.Value);
             }
-            if (EnableBatchedOperations.HasValue)
+            if (Optional.IsDefined(EnableBatchedOperations))
             {
                 writer.WritePropertyName("enableBatchedOperations"u8);
                 writer.WriteBooleanValue(EnableBatchedOperations.Value);
             }
-            if (AutoDeleteOnIdle.HasValue)
+            if (Optional.IsDefined(AutoDeleteOnIdle))
             {
                 writer.WritePropertyName("autoDeleteOnIdle"u8);
                 writer.WriteStringValue(AutoDeleteOnIdle.Value, "P");
             }
-            if (ForwardTo != null)
+            if (Optional.IsDefined(ForwardTo))
             {
                 writer.WritePropertyName("forwardTo"u8);
                 writer.WriteStringValue(ForwardTo);
             }
-            if (ForwardDeadLetteredMessagesTo != null)
+            if (Optional.IsDefined(ForwardDeadLetteredMessagesTo))
             {
                 writer.WritePropertyName("forwardDeadLetteredMessagesTo"u8);
                 writer.WriteStringValue(ForwardDeadLetteredMessagesTo);
             }
-            if (IsClientAffine.HasValue)
+            if (Optional.IsDefined(IsClientAffine))
             {
                 writer.WritePropertyName("isClientAffine"u8);
                 writer.WriteBooleanValue(IsClientAffine.Value);
             }
-            if (ClientAffineProperties != null)
+            if (Optional.IsDefined(ClientAffineProperties))
             {
                 writer.WritePropertyName("clientAffineProperties"u8);
                 writer.WriteObjectValue(ClientAffineProperties);
@@ -98,24 +98,24 @@ namespace MgmtSubscriptionNameParameter
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
-            Optional<long> messageCount = default;
-            Optional<DateTimeOffset> createdAt = default;
-            Optional<DateTimeOffset> accessedAt = default;
-            Optional<DateTimeOffset> updatedAt = default;
-            Optional<TimeSpan> lockDuration = default;
-            Optional<bool> requiresSession = default;
-            Optional<TimeSpan> defaultMessageTimeToLive = default;
-            Optional<bool> deadLetteringOnFilterEvaluationExceptions = default;
-            Optional<bool> deadLetteringOnMessageExpiration = default;
-            Optional<TimeSpan> duplicateDetectionHistoryTimeWindow = default;
-            Optional<int> maxDeliveryCount = default;
-            Optional<bool> enableBatchedOperations = default;
-            Optional<TimeSpan> autoDeleteOnIdle = default;
-            Optional<string> forwardTo = default;
-            Optional<string> forwardDeadLetteredMessagesTo = default;
-            Optional<bool> isClientAffine = default;
-            Optional<SBClientAffineProperties> clientAffineProperties = default;
+            SystemData systemData = default;
+            long? messageCount = default;
+            DateTimeOffset? createdAt = default;
+            DateTimeOffset? accessedAt = default;
+            DateTimeOffset? updatedAt = default;
+            TimeSpan? lockDuration = default;
+            bool? requiresSession = default;
+            TimeSpan? defaultMessageTimeToLive = default;
+            bool? deadLetteringOnFilterEvaluationExceptions = default;
+            bool? deadLetteringOnMessageExpiration = default;
+            TimeSpan? duplicateDetectionHistoryTimeWindow = default;
+            int? maxDeliveryCount = default;
+            bool? enableBatchedOperations = default;
+            TimeSpan? autoDeleteOnIdle = default;
+            string forwardTo = default;
+            string forwardDeadLetteredMessagesTo = default;
+            bool? isClientAffine = default;
+            SBClientAffineProperties clientAffineProperties = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -300,7 +300,28 @@ namespace MgmtSubscriptionNameParameter
                     continue;
                 }
             }
-            return new SBSubscriptionData(id, name, type, systemData.Value, Optional.ToNullable(messageCount), Optional.ToNullable(createdAt), Optional.ToNullable(accessedAt), Optional.ToNullable(updatedAt), Optional.ToNullable(lockDuration), Optional.ToNullable(requiresSession), Optional.ToNullable(defaultMessageTimeToLive), Optional.ToNullable(deadLetteringOnFilterEvaluationExceptions), Optional.ToNullable(deadLetteringOnMessageExpiration), Optional.ToNullable(duplicateDetectionHistoryTimeWindow), Optional.ToNullable(maxDeliveryCount), Optional.ToNullable(enableBatchedOperations), Optional.ToNullable(autoDeleteOnIdle), forwardTo.Value, forwardDeadLetteredMessagesTo.Value, Optional.ToNullable(isClientAffine), clientAffineProperties.Value);
+            return new SBSubscriptionData(
+                id,
+                name,
+                type,
+                systemData,
+                messageCount,
+                createdAt,
+                accessedAt,
+                updatedAt,
+                lockDuration,
+                requiresSession,
+                defaultMessageTimeToLive,
+                deadLetteringOnFilterEvaluationExceptions,
+                deadLetteringOnMessageExpiration,
+                duplicateDetectionHistoryTimeWindow,
+                maxDeliveryCount,
+                enableBatchedOperations,
+                autoDeleteOnIdle,
+                forwardTo,
+                forwardDeadLetteredMessagesTo,
+                isClientAffine,
+                clientAffineProperties);
         }
     }
 }

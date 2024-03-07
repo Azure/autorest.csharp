@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -32,12 +33,12 @@ namespace MgmtDiscriminator.Models
             writer.WriteStringValue(TypeName.ToString());
             writer.WritePropertyName("operator"u8);
             writer.WriteStringValue(Operator.ToString());
-            if (NegateCondition.HasValue)
+            if (Optional.IsDefined(NegateCondition))
             {
                 writer.WritePropertyName("negateCondition"u8);
                 writer.WriteBooleanValue(NegateCondition.Value);
             }
-            if (!(MatchValues is ChangeTrackingList<string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(MatchValues))
             {
                 writer.WritePropertyName("matchValues"u8);
                 writer.WriteStartArray();
@@ -47,7 +48,7 @@ namespace MgmtDiscriminator.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!(Transforms is ChangeTrackingList<Transform> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(Transforms))
             {
                 writer.WritePropertyName("transforms"u8);
                 writer.WriteStartArray();
@@ -97,7 +98,7 @@ namespace MgmtDiscriminator.Models
             }
             RemoteAddressMatchConditionParametersTypeName typeName = default;
             RemoteAddressOperator @operator = default;
-            Optional<bool> negateCondition = default;
+            bool? negateCondition = default;
             IList<string> matchValues = default;
             IList<Transform> transforms = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
@@ -157,7 +158,13 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new RemoteAddressMatchConditionParameters(typeName, @operator, Optional.ToNullable(negateCondition), matchValues ?? new ChangeTrackingList<string>(), transforms ?? new ChangeTrackingList<Transform>(), serializedAdditionalRawData);
+            return new RemoteAddressMatchConditionParameters(
+                typeName,
+                @operator,
+                negateCondition,
+                matchValues ?? new ChangeTrackingList<string>(),
+                transforms ?? new ChangeTrackingList<Transform>(),
+                serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -171,14 +178,14 @@ namespace MgmtDiscriminator.Models
             builder.Append("  operator:");
             builder.AppendLine($" '{Operator.ToString()}'");
 
-            if (NegateCondition.HasValue)
+            if (Optional.IsDefined(NegateCondition))
             {
                 builder.Append("  negateCondition:");
                 var boolValue = NegateCondition.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
             }
 
-            if (!(MatchValues is ChangeTrackingList<string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(MatchValues))
             {
                 if (MatchValues.Any())
                 {
@@ -205,7 +212,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            if (!(Transforms is ChangeTrackingList<Transform> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(Transforms))
             {
                 if (Transforms.Any())
                 {

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -27,37 +28,37 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (IsCustomerInitiatedMaintenanceAllowed.HasValue)
+            if (Optional.IsDefined(IsCustomerInitiatedMaintenanceAllowed))
             {
                 writer.WritePropertyName("isCustomerInitiatedMaintenanceAllowed"u8);
                 writer.WriteBooleanValue(IsCustomerInitiatedMaintenanceAllowed.Value);
             }
-            if (PreMaintenanceWindowStartOn.HasValue)
+            if (Optional.IsDefined(PreMaintenanceWindowStartOn))
             {
                 writer.WritePropertyName("preMaintenanceWindowStartTime"u8);
                 writer.WriteStringValue(PreMaintenanceWindowStartOn.Value, "O");
             }
-            if (PreMaintenanceWindowEndOn.HasValue)
+            if (Optional.IsDefined(PreMaintenanceWindowEndOn))
             {
                 writer.WritePropertyName("preMaintenanceWindowEndTime"u8);
                 writer.WriteStringValue(PreMaintenanceWindowEndOn.Value, "O");
             }
-            if (MaintenanceWindowStartOn.HasValue)
+            if (Optional.IsDefined(MaintenanceWindowStartOn))
             {
                 writer.WritePropertyName("maintenanceWindowStartTime"u8);
                 writer.WriteStringValue(MaintenanceWindowStartOn.Value, "O");
             }
-            if (MaintenanceWindowEndOn.HasValue)
+            if (Optional.IsDefined(MaintenanceWindowEndOn))
             {
                 writer.WritePropertyName("maintenanceWindowEndTime"u8);
                 writer.WriteStringValue(MaintenanceWindowEndOn.Value, "O");
             }
-            if (LastOperationResultCode.HasValue)
+            if (Optional.IsDefined(LastOperationResultCode))
             {
                 writer.WritePropertyName("lastOperationResultCode"u8);
                 writer.WriteStringValue(LastOperationResultCode.Value.ToSerialString());
             }
-            if (LastOperationMessage != null)
+            if (Optional.IsDefined(LastOperationMessage))
             {
                 writer.WritePropertyName("lastOperationMessage"u8);
                 writer.WriteStringValue(LastOperationMessage);
@@ -100,13 +101,13 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<bool> isCustomerInitiatedMaintenanceAllowed = default;
-            Optional<DateTimeOffset> preMaintenanceWindowStartTime = default;
-            Optional<DateTimeOffset> preMaintenanceWindowEndTime = default;
-            Optional<DateTimeOffset> maintenanceWindowStartTime = default;
-            Optional<DateTimeOffset> maintenanceWindowEndTime = default;
-            Optional<MaintenanceOperationResultCodeType> lastOperationResultCode = default;
-            Optional<string> lastOperationMessage = default;
+            bool? isCustomerInitiatedMaintenanceAllowed = default;
+            DateTimeOffset? preMaintenanceWindowStartTime = default;
+            DateTimeOffset? preMaintenanceWindowEndTime = default;
+            DateTimeOffset? maintenanceWindowStartTime = default;
+            DateTimeOffset? maintenanceWindowEndTime = default;
+            MaintenanceOperationResultCodeType? lastOperationResultCode = default;
+            string lastOperationMessage = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -176,7 +177,15 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new MaintenanceRedeployStatus(Optional.ToNullable(isCustomerInitiatedMaintenanceAllowed), Optional.ToNullable(preMaintenanceWindowStartTime), Optional.ToNullable(preMaintenanceWindowEndTime), Optional.ToNullable(maintenanceWindowStartTime), Optional.ToNullable(maintenanceWindowEndTime), Optional.ToNullable(lastOperationResultCode), lastOperationMessage.Value, serializedAdditionalRawData);
+            return new MaintenanceRedeployStatus(
+                isCustomerInitiatedMaintenanceAllowed,
+                preMaintenanceWindowStartTime,
+                preMaintenanceWindowEndTime,
+                maintenanceWindowStartTime,
+                maintenanceWindowEndTime,
+                lastOperationResultCode,
+                lastOperationMessage,
+                serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -184,48 +193,48 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (IsCustomerInitiatedMaintenanceAllowed.HasValue)
+            if (Optional.IsDefined(IsCustomerInitiatedMaintenanceAllowed))
             {
                 builder.Append("  isCustomerInitiatedMaintenanceAllowed:");
                 var boolValue = IsCustomerInitiatedMaintenanceAllowed.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
             }
 
-            if (PreMaintenanceWindowStartOn.HasValue)
+            if (Optional.IsDefined(PreMaintenanceWindowStartOn))
             {
                 builder.Append("  preMaintenanceWindowStartTime:");
                 var formattedDateTimeString = TypeFormatters.ToString(PreMaintenanceWindowStartOn.Value, "o");
                 builder.AppendLine($" '{formattedDateTimeString}'");
             }
 
-            if (PreMaintenanceWindowEndOn.HasValue)
+            if (Optional.IsDefined(PreMaintenanceWindowEndOn))
             {
                 builder.Append("  preMaintenanceWindowEndTime:");
                 var formattedDateTimeString = TypeFormatters.ToString(PreMaintenanceWindowEndOn.Value, "o");
                 builder.AppendLine($" '{formattedDateTimeString}'");
             }
 
-            if (MaintenanceWindowStartOn.HasValue)
+            if (Optional.IsDefined(MaintenanceWindowStartOn))
             {
                 builder.Append("  maintenanceWindowStartTime:");
                 var formattedDateTimeString = TypeFormatters.ToString(MaintenanceWindowStartOn.Value, "o");
                 builder.AppendLine($" '{formattedDateTimeString}'");
             }
 
-            if (MaintenanceWindowEndOn.HasValue)
+            if (Optional.IsDefined(MaintenanceWindowEndOn))
             {
                 builder.Append("  maintenanceWindowEndTime:");
                 var formattedDateTimeString = TypeFormatters.ToString(MaintenanceWindowEndOn.Value, "o");
                 builder.AppendLine($" '{formattedDateTimeString}'");
             }
 
-            if (LastOperationResultCode.HasValue)
+            if (Optional.IsDefined(LastOperationResultCode))
             {
                 builder.Append("  lastOperationResultCode:");
                 builder.AppendLine($" '{LastOperationResultCode.Value.ToSerialString()}'");
             }
 
-            if (LastOperationMessage != null)
+            if (Optional.IsDefined(LastOperationMessage))
             {
                 builder.Append("  lastOperationMessage:");
                 if (LastOperationMessage.Contains(Environment.NewLine))

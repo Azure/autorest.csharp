@@ -8,7 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Azure.Core;
+using ModelsTypeSpec;
 
 namespace ModelsTypeSpec.Models
 {
@@ -66,42 +66,15 @@ namespace ModelsTypeSpec.Models
         /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredModel"/>, <paramref name="requiredModel2"/>, <paramref name="requiredIntList"/>, <paramref name="requiredStringList"/>, <paramref name="requiredModelList"/>, <paramref name="requiredModelRecord"/>, <paramref name="requiredCollectionWithNullableFloatElement"/> or <paramref name="requiredCollectionWithNullableBooleanElement"/> is null. </exception>
         public InputModel(string requiredString, int requiredInt, int? requiredNullableInt, string requiredNullableString, BaseModel requiredModel, BaseModel requiredModel2, IEnumerable<int> requiredIntList, IEnumerable<string> requiredStringList, IEnumerable<CollectionItem> requiredModelList, IDictionary<string, RecordItem> requiredModelRecord, IEnumerable<float?> requiredCollectionWithNullableFloatElement, IEnumerable<bool?> requiredCollectionWithNullableBooleanElement, IEnumerable<CollectionItem> requiredNullableModelList, IEnumerable<string> requiredNullableStringList, IEnumerable<int> requiredNullableIntList)
         {
-            if (requiredString == null)
-            {
-                throw new ArgumentNullException(nameof(requiredString));
-            }
-            if (requiredModel == null)
-            {
-                throw new ArgumentNullException(nameof(requiredModel));
-            }
-            if (requiredModel2 == null)
-            {
-                throw new ArgumentNullException(nameof(requiredModel2));
-            }
-            if (requiredIntList == null)
-            {
-                throw new ArgumentNullException(nameof(requiredIntList));
-            }
-            if (requiredStringList == null)
-            {
-                throw new ArgumentNullException(nameof(requiredStringList));
-            }
-            if (requiredModelList == null)
-            {
-                throw new ArgumentNullException(nameof(requiredModelList));
-            }
-            if (requiredModelRecord == null)
-            {
-                throw new ArgumentNullException(nameof(requiredModelRecord));
-            }
-            if (requiredCollectionWithNullableFloatElement == null)
-            {
-                throw new ArgumentNullException(nameof(requiredCollectionWithNullableFloatElement));
-            }
-            if (requiredCollectionWithNullableBooleanElement == null)
-            {
-                throw new ArgumentNullException(nameof(requiredCollectionWithNullableBooleanElement));
-            }
+            Argument.AssertNotNull(requiredString, nameof(requiredString));
+            Argument.AssertNotNull(requiredModel, nameof(requiredModel));
+            Argument.AssertNotNull(requiredModel2, nameof(requiredModel2));
+            Argument.AssertNotNull(requiredIntList, nameof(requiredIntList));
+            Argument.AssertNotNull(requiredStringList, nameof(requiredStringList));
+            Argument.AssertNotNull(requiredModelList, nameof(requiredModelList));
+            Argument.AssertNotNull(requiredModelRecord, nameof(requiredModelRecord));
+            Argument.AssertNotNull(requiredCollectionWithNullableFloatElement, nameof(requiredCollectionWithNullableFloatElement));
+            Argument.AssertNotNull(requiredCollectionWithNullableBooleanElement, nameof(requiredCollectionWithNullableBooleanElement));
 
             RequiredString = requiredString;
             RequiredInt = requiredInt;

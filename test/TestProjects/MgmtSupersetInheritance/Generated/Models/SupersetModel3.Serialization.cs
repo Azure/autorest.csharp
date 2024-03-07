@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtSupersetInheritance;
 
 namespace MgmtSupersetInheritance.Models
 {
@@ -15,22 +16,22 @@ namespace MgmtSupersetInheritance.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Id.HasValue)
+            if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteNumberValue(Id.Value);
             }
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (SupersetModel3Type != null)
+            if (Optional.IsDefined(SupersetModel3Type))
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(SupersetModel3Type);
             }
-            if (New != null)
+            if (Optional.IsDefined(New))
             {
                 writer.WritePropertyName("new"u8);
                 writer.WriteStringValue(New);
@@ -44,10 +45,10 @@ namespace MgmtSupersetInheritance.Models
             {
                 return null;
             }
-            Optional<int> id = default;
-            Optional<string> name = default;
-            Optional<string> type = default;
-            Optional<string> @new = default;
+            int? id = default;
+            string name = default;
+            string type = default;
+            string @new = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -75,7 +76,7 @@ namespace MgmtSupersetInheritance.Models
                     continue;
                 }
             }
-            return new SupersetModel3(Optional.ToNullable(id), name.Value, type.Value, @new.Value);
+            return new SupersetModel3(id, name, type, @new);
         }
     }
 }

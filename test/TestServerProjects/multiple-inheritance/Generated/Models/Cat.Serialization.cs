@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using multiple_inheritance;
 
 namespace multiple_inheritance.Models
 {
@@ -26,17 +27,17 @@ namespace multiple_inheritance.Models
             }
 
             writer.WriteStartObject();
-            if (LikesMilk.HasValue)
+            if (Optional.IsDefined(LikesMilk))
             {
                 writer.WritePropertyName("likesMilk"u8);
                 writer.WriteBooleanValue(LikesMilk.Value);
             }
-            if (Meows.HasValue)
+            if (Optional.IsDefined(Meows))
             {
                 writer.WritePropertyName("meows"u8);
                 writer.WriteBooleanValue(Meows.Value);
             }
-            if (Hisses.HasValue)
+            if (Optional.IsDefined(Hisses))
             {
                 writer.WritePropertyName("hisses"u8);
                 writer.WriteBooleanValue(Hisses.Value);
@@ -81,9 +82,9 @@ namespace multiple_inheritance.Models
             {
                 return null;
             }
-            Optional<bool> likesMilk = default;
-            Optional<bool> meows = default;
-            Optional<bool> hisses = default;
+            bool? likesMilk = default;
+            bool? meows = default;
+            bool? hisses = default;
             string name = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -127,7 +128,7 @@ namespace multiple_inheritance.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Cat(name, serializedAdditionalRawData, Optional.ToNullable(likesMilk), Optional.ToNullable(meows), Optional.ToNullable(hisses));
+            return new Cat(name, serializedAdditionalRawData, likesMilk, meows, hisses);
         }
 
         BinaryData IPersistableModel<Cat>.Write(ModelReaderWriterOptions options)

@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using paging;
 
 namespace paging.Models
 {
@@ -26,7 +27,7 @@ namespace paging.Models
             }
 
             writer.WriteStartObject();
-            if (!(Values is ChangeTrackingList<Product> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Values))
             {
                 writer.WritePropertyName("values"u8);
                 writer.WriteStartArray();
@@ -36,7 +37,7 @@ namespace paging.Models
                 }
                 writer.WriteEndArray();
             }
-            if (OdataNextLink != null)
+            if (Optional.IsDefined(OdataNextLink))
             {
                 writer.WritePropertyName("odata.nextLink"u8);
                 writer.WriteStringValue(OdataNextLink);
@@ -80,7 +81,7 @@ namespace paging.Models
                 return null;
             }
             IReadOnlyList<Product> values = default;
-            Optional<string> odataNextLink = default;
+            string odataNextLink = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -110,7 +111,7 @@ namespace paging.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new OdataProductResult(values ?? new ChangeTrackingList<Product>(), odataNextLink.Value, serializedAdditionalRawData);
+            return new OdataProductResult(values ?? new ChangeTrackingList<Product>(), odataNextLink, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<OdataProductResult>.Write(ModelReaderWriterOptions options)

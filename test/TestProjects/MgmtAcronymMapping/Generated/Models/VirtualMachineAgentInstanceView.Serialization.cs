@@ -7,7 +7,7 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
+using MgmtAcronymMapping;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -19,7 +19,7 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<string> vmAgentVersion = default;
+            string vmAgentVersion = default;
             IReadOnlyList<VirtualMachineExtensionHandlerInstanceView> extensionHandlers = default;
             IReadOnlyList<InstanceViewStatus> statuses = default;
             foreach (var property in element.EnumerateObject())
@@ -58,7 +58,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineAgentInstanceView(vmAgentVersion.Value, extensionHandlers ?? new ChangeTrackingList<VirtualMachineExtensionHandlerInstanceView>(), statuses ?? new ChangeTrackingList<InstanceViewStatus>());
+            return new VirtualMachineAgentInstanceView(vmAgentVersion, extensionHandlers ?? new ChangeTrackingList<VirtualMachineExtensionHandlerInstanceView>(), statuses ?? new ChangeTrackingList<InstanceViewStatus>());
         }
     }
 }

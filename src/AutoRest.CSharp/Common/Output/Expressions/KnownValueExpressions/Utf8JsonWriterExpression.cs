@@ -44,5 +44,16 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
 
         public MethodBodyStatement WriteBase64StringValue(ValueExpression value, string? format)
             => new InvokeStaticMethodStatement(Configuration.ApiTypes.Utf8JsonWriterExtensionsType, Configuration.ApiTypes.Utf8JsonWriterExtensionsWriteBase64StringValueName, new[] { Untyped, value, Literal(format) }, null, true);
+
+        public MethodBodyStatement WriteBinaryData(ValueExpression value)
+            => new IfElsePreprocessorDirective
+                (
+                    "NET6_0_OR_GREATER",
+                    WriteRawValue(value),
+                    new UsingScopeStatement(typeof(JsonDocument), "document", JsonDocumentExpression.Parse(value), out var jsonDocumentVar)
+                    {
+                        JsonSerializerExpression.Serialize(this, new JsonDocumentExpression(jsonDocumentVar).RootElement).ToStatement()
+                    }
+                );
     }
 }

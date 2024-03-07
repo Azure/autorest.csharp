@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {
@@ -16,34 +17,34 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (TextExtractionAlgorithm.HasValue)
+            if (Optional.IsDefined(TextExtractionAlgorithm))
             {
                 writer.WritePropertyName("textExtractionAlgorithm"u8);
                 writer.WriteStringValue(TextExtractionAlgorithm.Value.ToSerialString());
             }
-            if (DefaultLanguageCode.HasValue)
+            if (Optional.IsDefined(DefaultLanguageCode))
             {
                 writer.WritePropertyName("defaultLanguageCode"u8);
                 writer.WriteStringValue(DefaultLanguageCode.Value.ToString());
             }
-            if (ShouldDetectOrientation.HasValue)
+            if (Optional.IsDefined(ShouldDetectOrientation))
             {
                 writer.WritePropertyName("detectOrientation"u8);
                 writer.WriteBooleanValue(ShouldDetectOrientation.Value);
             }
             writer.WritePropertyName("@odata.type"u8);
             writer.WriteStringValue(OdataType);
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Description != null)
+            if (Optional.IsDefined(Description))
             {
                 writer.WritePropertyName("description"u8);
                 writer.WriteStringValue(Description);
             }
-            if (Context != null)
+            if (Optional.IsDefined(Context))
             {
                 writer.WritePropertyName("context"u8);
                 writer.WriteStringValue(Context);
@@ -71,13 +72,13 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            Optional<TextExtractionAlgorithm> textExtractionAlgorithm = default;
-            Optional<OcrSkillLanguage> defaultLanguageCode = default;
-            Optional<bool> detectOrientation = default;
+            TextExtractionAlgorithm? textExtractionAlgorithm = default;
+            OcrSkillLanguage? defaultLanguageCode = default;
+            bool? detectOrientation = default;
             string odataType = default;
-            Optional<string> name = default;
-            Optional<string> description = default;
-            Optional<string> context = default;
+            string name = default;
+            string description = default;
+            string context = default;
             IList<InputFieldMappingEntry> inputs = default;
             IList<OutputFieldMappingEntry> outputs = default;
             foreach (var property in element.EnumerateObject())
@@ -150,7 +151,16 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new OcrSkill(odataType, name.Value, description.Value, context.Value, inputs, outputs, Optional.ToNullable(textExtractionAlgorithm), Optional.ToNullable(defaultLanguageCode), Optional.ToNullable(detectOrientation));
+            return new OcrSkill(
+                odataType,
+                name,
+                description,
+                context,
+                inputs,
+                outputs,
+                textExtractionAlgorithm,
+                defaultLanguageCode,
+                detectOrientation);
         }
     }
 }

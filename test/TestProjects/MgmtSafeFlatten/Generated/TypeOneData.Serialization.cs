@@ -19,27 +19,27 @@ namespace MgmtSafeFlatten
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (MyType != null)
+            if (Optional.IsDefined(MyType))
             {
                 writer.WritePropertyName("MyType"u8);
                 writer.WriteStringValue(MyType);
             }
-            if (LayerOne != null)
+            if (Optional.IsDefined(LayerOne))
             {
                 writer.WritePropertyName("layerOne"u8);
                 writer.WriteObjectValue(LayerOne);
             }
-            if (LayerOneType != null)
+            if (Optional.IsDefined(LayerOneType))
             {
                 writer.WritePropertyName("layerOneType"u8);
                 writer.WriteObjectValue(LayerOneType);
             }
-            if (LayerOneConflict != null)
+            if (Optional.IsDefined(LayerOneConflict))
             {
                 writer.WritePropertyName("layerOneConflict"u8);
                 JsonSerializer.Serialize(writer, LayerOneConflict);
             }
-            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -61,16 +61,16 @@ namespace MgmtSafeFlatten
             {
                 return null;
             }
-            Optional<string> myType = default;
-            Optional<LayerOneSingle> layerOne = default;
-            Optional<LayerOneBaseType> layerOneType = default;
-            Optional<WritableSubResource> layerOneConflict = default;
+            string myType = default;
+            LayerOneSingle layerOne = default;
+            LayerOneBaseType layerOneType = default;
+            WritableSubResource layerOneConflict = default;
             IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
+            SystemData systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("MyType"u8))
@@ -149,7 +149,17 @@ namespace MgmtSafeFlatten
                     continue;
                 }
             }
-            return new TypeOneData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, myType.Value, layerOne.Value, layerOneType.Value, layerOneConflict);
+            return new TypeOneData(
+                id,
+                name,
+                type,
+                systemData,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                myType,
+                layerOne,
+                layerOneType,
+                layerOneConflict);
         }
     }
 }

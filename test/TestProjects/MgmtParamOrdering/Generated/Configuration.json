@@ -20,5 +20,6 @@
     "location": "azure-location",
     "*Uri": "Uri",
     "*Uris": "Uri"
-  }
+  },
+  "helper-namespace": "MgmtParamOrdering"
 }

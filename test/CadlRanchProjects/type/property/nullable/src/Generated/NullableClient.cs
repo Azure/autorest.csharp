@@ -36,10 +36,7 @@ namespace _Type.Property.Nullable
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public NullableClient(Uri endpoint, NullableClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new NullableClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

@@ -42,7 +42,14 @@ namespace MgmtSupersetInheritance.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new SupersetModel4Data(id, name, resourceType, systemData, tags, location, @new);
+            return new SupersetModel4Data(
+                id,
+                name,
+                resourceType,
+                systemData,
+                tags,
+                location,
+                @new);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtSupersetInheritance.SupersetModel6Data"/>. </summary>
@@ -93,7 +100,15 @@ namespace MgmtSupersetInheritance.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new SupersetModel5(id, name, resourceType, systemData, tags, location, foo, @new);
+            return new SupersetModel5(
+                id,
+                name,
+                resourceType,
+                systemData,
+                tags,
+                location,
+                foo,
+                @new);
         }
     }
 }

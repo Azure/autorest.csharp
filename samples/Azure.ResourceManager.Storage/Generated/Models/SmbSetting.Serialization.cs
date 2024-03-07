@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Storage;
 
 namespace Azure.ResourceManager.Storage.Models
 {
@@ -15,27 +16,27 @@ namespace Azure.ResourceManager.Storage.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Multichannel != null)
+            if (Optional.IsDefined(Multichannel))
             {
                 writer.WritePropertyName("multichannel"u8);
                 writer.WriteObjectValue(Multichannel);
             }
-            if (Versions != null)
+            if (Optional.IsDefined(Versions))
             {
                 writer.WritePropertyName("versions"u8);
                 writer.WriteStringValue(Versions);
             }
-            if (AuthenticationMethods != null)
+            if (Optional.IsDefined(AuthenticationMethods))
             {
                 writer.WritePropertyName("authenticationMethods"u8);
                 writer.WriteStringValue(AuthenticationMethods);
             }
-            if (KerberosTicketEncryption != null)
+            if (Optional.IsDefined(KerberosTicketEncryption))
             {
                 writer.WritePropertyName("kerberosTicketEncryption"u8);
                 writer.WriteStringValue(KerberosTicketEncryption);
             }
-            if (ChannelEncryption != null)
+            if (Optional.IsDefined(ChannelEncryption))
             {
                 writer.WritePropertyName("channelEncryption"u8);
                 writer.WriteStringValue(ChannelEncryption);
@@ -49,11 +50,11 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Optional<Multichannel> multichannel = default;
-            Optional<string> versions = default;
-            Optional<string> authenticationMethods = default;
-            Optional<string> kerberosTicketEncryption = default;
-            Optional<string> channelEncryption = default;
+            Multichannel multichannel = default;
+            string versions = default;
+            string authenticationMethods = default;
+            string kerberosTicketEncryption = default;
+            string channelEncryption = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("multichannel"u8))
@@ -86,7 +87,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new SmbSetting(multichannel.Value, versions.Value, authenticationMethods.Value, kerberosTicketEncryption.Value, channelEncryption.Value);
+            return new SmbSetting(multichannel, versions, authenticationMethods, kerberosTicketEncryption, channelEncryption);
         }
     }
 }

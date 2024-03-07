@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using _Type.Model.Inheritance.SingleDiscriminator;
 
 namespace _Type.Model.Inheritance.SingleDiscriminator.Models
 {
@@ -27,7 +28,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             }
 
             writer.WriteStartObject();
-            if (!(Friends is ChangeTrackingList<Bird> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Friends))
             {
                 writer.WritePropertyName("friends"u8);
                 writer.WriteStartArray();
@@ -37,7 +38,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!(Hate is ChangeTrackingDictionary<string, Bird> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(Hate))
             {
                 writer.WritePropertyName("hate"u8);
                 writer.WriteStartObject();
@@ -48,7 +49,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
                 }
                 writer.WriteEndObject();
             }
-            if (Partner != null)
+            if (Optional.IsDefined(Partner))
             {
                 writer.WritePropertyName("partner"u8);
                 writer.WriteObjectValue(Partner);
@@ -97,7 +98,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             }
             IList<Bird> friends = default;
             IDictionary<string, Bird> hate = default;
-            Optional<Bird> partner = default;
+            Bird partner = default;
             string kind = default;
             int wingspan = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
@@ -157,7 +158,13 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Eagle(kind, wingspan, serializedAdditionalRawData, friends ?? new ChangeTrackingList<Bird>(), hate ?? new ChangeTrackingDictionary<string, Bird>(), partner.Value);
+            return new Eagle(
+                kind,
+                wingspan,
+                serializedAdditionalRawData,
+                friends ?? new ChangeTrackingList<Bird>(),
+                hate ?? new ChangeTrackingDictionary<string, Bird>(),
+                partner);
         }
 
         BinaryData IPersistableModel<Eagle>.Write(ModelReaderWriterOptions options)

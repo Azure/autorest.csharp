@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 using MgmtSubscriptionNameParameter;
 
 namespace MgmtSubscriptionNameParameter.Models
@@ -21,7 +20,7 @@ namespace MgmtSubscriptionNameParameter.Models
                 return null;
             }
             IReadOnlyList<SBSubscriptionData> value = default;
-            Optional<string> nextLink = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -44,7 +43,7 @@ namespace MgmtSubscriptionNameParameter.Models
                     continue;
                 }
             }
-            return new SBSubscriptionListResult(value ?? new ChangeTrackingList<SBSubscriptionData>(), nextLink.Value);
+            return new SBSubscriptionListResult(value ?? new ChangeTrackingList<SBSubscriptionData>(), nextLink);
         }
     }
 }

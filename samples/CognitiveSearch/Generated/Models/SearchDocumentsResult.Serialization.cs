@@ -19,12 +19,12 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            Optional<long> odataCount = default;
-            Optional<double> searchCoverage = default;
+            long? odataCount = default;
+            double? searchCoverage = default;
             IReadOnlyDictionary<string, IList<FacetResult>> searchFacets = default;
-            Optional<SearchRequest> searchNextPageParameters = default;
+            SearchRequest searchNextPageParameters = default;
             IReadOnlyList<SearchResult> value = default;
-            Optional<string> odataNextLink = default;
+            string odataNextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("@odata.count"u8))
@@ -96,7 +96,13 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new SearchDocumentsResult(Optional.ToNullable(odataCount), Optional.ToNullable(searchCoverage), searchFacets ?? new ChangeTrackingDictionary<string, IList<FacetResult>>(), searchNextPageParameters.Value, value, odataNextLink.Value);
+            return new SearchDocumentsResult(
+                odataCount,
+                searchCoverage,
+                searchFacets ?? new ChangeTrackingDictionary<string, IList<FacetResult>>(),
+                searchNextPageParameters,
+                value,
+                odataNextLink);
         }
     }
 }

@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using ModelsTypeSpec;
 
 namespace ModelsTypeSpec.Models
 {
@@ -50,10 +51,7 @@ namespace ModelsTypeSpec.Models
         /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
         public RoundTripRecursiveModel(string message)
         {
-            if (message == null)
-            {
-                throw new ArgumentNullException(nameof(message));
-            }
+            Argument.AssertNotNull(message, nameof(message));
 
             Message = message;
         }

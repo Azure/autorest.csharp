@@ -282,18 +282,8 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="customModel1SName"/> or <paramref name="customModel1"/> is null. </exception>
         public virtual async Task<Response<CustomModel1>> PutCustomModel1Async(string customModel1SName, CustomModel1 customModel1, CancellationToken cancellationToken = default)
         {
-            if (customModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(customModel1SName));
-            }
-            if (customModel1SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(customModel1SName));
-            }
-            if (customModel1 == null)
-            {
-                throw new ArgumentNullException(nameof(customModel1));
-            }
+            Argument.AssertNotNullOrEmpty(customModel1SName, nameof(customModel1SName));
+            Argument.AssertNotNull(customModel1, nameof(customModel1));
 
             using var scope = CustomModel1sClientDiagnostics.CreateScope("MockableMgmtSupersetFlattenInheritanceResourceGroupResource.PutCustomModel1");
             scope.Start();
@@ -332,18 +322,8 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="customModel1SName"/> or <paramref name="customModel1"/> is null. </exception>
         public virtual Response<CustomModel1> PutCustomModel1(string customModel1SName, CustomModel1 customModel1, CancellationToken cancellationToken = default)
         {
-            if (customModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(customModel1SName));
-            }
-            if (customModel1SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(customModel1SName));
-            }
-            if (customModel1 == null)
-            {
-                throw new ArgumentNullException(nameof(customModel1));
-            }
+            Argument.AssertNotNullOrEmpty(customModel1SName, nameof(customModel1SName));
+            Argument.AssertNotNull(customModel1, nameof(customModel1));
 
             using var scope = CustomModel1sClientDiagnostics.CreateScope("MockableMgmtSupersetFlattenInheritanceResourceGroupResource.PutCustomModel1");
             scope.Start();
@@ -381,14 +361,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="customModel1SName"/> is null. </exception>
         public virtual async Task<Response<CustomModel1>> GetCustomModel1Async(string customModel1SName, CancellationToken cancellationToken = default)
         {
-            if (customModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(customModel1SName));
-            }
-            if (customModel1SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(customModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(customModel1SName, nameof(customModel1SName));
 
             using var scope = CustomModel1sClientDiagnostics.CreateScope("MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetCustomModel1");
             scope.Start();
@@ -426,14 +399,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="customModel1SName"/> is null. </exception>
         public virtual Response<CustomModel1> GetCustomModel1(string customModel1SName, CancellationToken cancellationToken = default)
         {
-            if (customModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(customModel1SName));
-            }
-            if (customModel1SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(customModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(customModel1SName, nameof(customModel1SName));
 
             using var scope = CustomModel1sClientDiagnostics.CreateScope("MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetCustomModel1");
             scope.Start();
@@ -520,18 +486,8 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="customModel2SName"/> or <paramref name="customModel2"/> is null. </exception>
         public virtual async Task<Response<CustomModel2>> PutCustomModel2Async(string customModel2SName, CustomModel2 customModel2, CancellationToken cancellationToken = default)
         {
-            if (customModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(customModel2SName));
-            }
-            if (customModel2SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(customModel2SName));
-            }
-            if (customModel2 == null)
-            {
-                throw new ArgumentNullException(nameof(customModel2));
-            }
+            Argument.AssertNotNullOrEmpty(customModel2SName, nameof(customModel2SName));
+            Argument.AssertNotNull(customModel2, nameof(customModel2));
 
             using var scope = CustomModel2sClientDiagnostics.CreateScope("MockableMgmtSupersetFlattenInheritanceResourceGroupResource.PutCustomModel2");
             scope.Start();
@@ -570,18 +526,8 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="customModel2SName"/> or <paramref name="customModel2"/> is null. </exception>
         public virtual Response<CustomModel2> PutCustomModel2(string customModel2SName, CustomModel2 customModel2, CancellationToken cancellationToken = default)
         {
-            if (customModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(customModel2SName));
-            }
-            if (customModel2SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(customModel2SName));
-            }
-            if (customModel2 == null)
-            {
-                throw new ArgumentNullException(nameof(customModel2));
-            }
+            Argument.AssertNotNullOrEmpty(customModel2SName, nameof(customModel2SName));
+            Argument.AssertNotNull(customModel2, nameof(customModel2));
 
             using var scope = CustomModel2sClientDiagnostics.CreateScope("MockableMgmtSupersetFlattenInheritanceResourceGroupResource.PutCustomModel2");
             scope.Start();
@@ -619,14 +565,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="customModel2SName"/> is null. </exception>
         public virtual async Task<Response<CustomModel2>> GetCustomModel2Async(string customModel2SName, CancellationToken cancellationToken = default)
         {
-            if (customModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(customModel2SName));
-            }
-            if (customModel2SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(customModel2SName));
-            }
+            Argument.AssertNotNullOrEmpty(customModel2SName, nameof(customModel2SName));
 
             using var scope = CustomModel2sClientDiagnostics.CreateScope("MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetCustomModel2");
             scope.Start();
@@ -664,14 +603,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="customModel2SName"/> is null. </exception>
         public virtual Response<CustomModel2> GetCustomModel2(string customModel2SName, CancellationToken cancellationToken = default)
         {
-            if (customModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(customModel2SName));
-            }
-            if (customModel2SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(customModel2SName));
-            }
+            Argument.AssertNotNullOrEmpty(customModel2SName, nameof(customModel2SName));
 
             using var scope = CustomModel2sClientDiagnostics.CreateScope("MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetCustomModel2");
             scope.Start();
@@ -758,18 +690,8 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel1SName"/> or <paramref name="subResourceModel1"/> is null. </exception>
         public virtual async Task<Response<SubResourceModel1>> PutSubResourceModel1Async(string subResourceModel1SName, SubResourceModel1 subResourceModel1, CancellationToken cancellationToken = default)
         {
-            if (subResourceModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(subResourceModel1SName));
-            }
-            if (subResourceModel1SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subResourceModel1SName));
-            }
-            if (subResourceModel1 == null)
-            {
-                throw new ArgumentNullException(nameof(subResourceModel1));
-            }
+            Argument.AssertNotNullOrEmpty(subResourceModel1SName, nameof(subResourceModel1SName));
+            Argument.AssertNotNull(subResourceModel1, nameof(subResourceModel1));
 
             using var scope = SubResourceModel1sClientDiagnostics.CreateScope("MockableMgmtSupersetFlattenInheritanceResourceGroupResource.PutSubResourceModel1");
             scope.Start();
@@ -808,18 +730,8 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel1SName"/> or <paramref name="subResourceModel1"/> is null. </exception>
         public virtual Response<SubResourceModel1> PutSubResourceModel1(string subResourceModel1SName, SubResourceModel1 subResourceModel1, CancellationToken cancellationToken = default)
         {
-            if (subResourceModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(subResourceModel1SName));
-            }
-            if (subResourceModel1SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subResourceModel1SName));
-            }
-            if (subResourceModel1 == null)
-            {
-                throw new ArgumentNullException(nameof(subResourceModel1));
-            }
+            Argument.AssertNotNullOrEmpty(subResourceModel1SName, nameof(subResourceModel1SName));
+            Argument.AssertNotNull(subResourceModel1, nameof(subResourceModel1));
 
             using var scope = SubResourceModel1sClientDiagnostics.CreateScope("MockableMgmtSupersetFlattenInheritanceResourceGroupResource.PutSubResourceModel1");
             scope.Start();
@@ -857,14 +769,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel1SName"/> is null. </exception>
         public virtual async Task<Response<SubResourceModel1>> GetSubResourceModel1Async(string subResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            if (subResourceModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(subResourceModel1SName));
-            }
-            if (subResourceModel1SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subResourceModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(subResourceModel1SName, nameof(subResourceModel1SName));
 
             using var scope = SubResourceModel1sClientDiagnostics.CreateScope("MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetSubResourceModel1");
             scope.Start();
@@ -902,14 +807,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel1SName"/> is null. </exception>
         public virtual Response<SubResourceModel1> GetSubResourceModel1(string subResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            if (subResourceModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(subResourceModel1SName));
-            }
-            if (subResourceModel1SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subResourceModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(subResourceModel1SName, nameof(subResourceModel1SName));
 
             using var scope = SubResourceModel1sClientDiagnostics.CreateScope("MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetSubResourceModel1");
             scope.Start();
@@ -996,18 +894,8 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel2SName"/> or <paramref name="subResourceModel2"/> is null. </exception>
         public virtual async Task<Response<SubResourceModel2>> PutSubResourceModel2Async(string subResourceModel2SName, SubResourceModel2 subResourceModel2, CancellationToken cancellationToken = default)
         {
-            if (subResourceModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(subResourceModel2SName));
-            }
-            if (subResourceModel2SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subResourceModel2SName));
-            }
-            if (subResourceModel2 == null)
-            {
-                throw new ArgumentNullException(nameof(subResourceModel2));
-            }
+            Argument.AssertNotNullOrEmpty(subResourceModel2SName, nameof(subResourceModel2SName));
+            Argument.AssertNotNull(subResourceModel2, nameof(subResourceModel2));
 
             using var scope = SubResourceModel2sClientDiagnostics.CreateScope("MockableMgmtSupersetFlattenInheritanceResourceGroupResource.PutSubResourceModel2");
             scope.Start();
@@ -1046,18 +934,8 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel2SName"/> or <paramref name="subResourceModel2"/> is null. </exception>
         public virtual Response<SubResourceModel2> PutSubResourceModel2(string subResourceModel2SName, SubResourceModel2 subResourceModel2, CancellationToken cancellationToken = default)
         {
-            if (subResourceModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(subResourceModel2SName));
-            }
-            if (subResourceModel2SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subResourceModel2SName));
-            }
-            if (subResourceModel2 == null)
-            {
-                throw new ArgumentNullException(nameof(subResourceModel2));
-            }
+            Argument.AssertNotNullOrEmpty(subResourceModel2SName, nameof(subResourceModel2SName));
+            Argument.AssertNotNull(subResourceModel2, nameof(subResourceModel2));
 
             using var scope = SubResourceModel2sClientDiagnostics.CreateScope("MockableMgmtSupersetFlattenInheritanceResourceGroupResource.PutSubResourceModel2");
             scope.Start();
@@ -1095,14 +973,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel2SName"/> is null. </exception>
         public virtual async Task<Response<SubResourceModel2>> GetSubResourceModel2Async(string subResourceModel2SName, CancellationToken cancellationToken = default)
         {
-            if (subResourceModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(subResourceModel2SName));
-            }
-            if (subResourceModel2SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subResourceModel2SName));
-            }
+            Argument.AssertNotNullOrEmpty(subResourceModel2SName, nameof(subResourceModel2SName));
 
             using var scope = SubResourceModel2sClientDiagnostics.CreateScope("MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetSubResourceModel2");
             scope.Start();
@@ -1140,14 +1011,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel2SName"/> is null. </exception>
         public virtual Response<SubResourceModel2> GetSubResourceModel2(string subResourceModel2SName, CancellationToken cancellationToken = default)
         {
-            if (subResourceModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(subResourceModel2SName));
-            }
-            if (subResourceModel2SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subResourceModel2SName));
-            }
+            Argument.AssertNotNullOrEmpty(subResourceModel2SName, nameof(subResourceModel2SName));
 
             using var scope = SubResourceModel2sClientDiagnostics.CreateScope("MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetSubResourceModel2");
             scope.Start();
@@ -1234,18 +1098,8 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel1SName"/> or <paramref name="writableSubResourceModel1"/> is null. </exception>
         public virtual async Task<Response<WritableSubResourceModel1>> PutWritableSubResourceModel1Async(string writableSubResourceModel1SName, WritableSubResourceModel1 writableSubResourceModel1, CancellationToken cancellationToken = default)
         {
-            if (writableSubResourceModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(writableSubResourceModel1SName));
-            }
-            if (writableSubResourceModel1SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(writableSubResourceModel1SName));
-            }
-            if (writableSubResourceModel1 == null)
-            {
-                throw new ArgumentNullException(nameof(writableSubResourceModel1));
-            }
+            Argument.AssertNotNullOrEmpty(writableSubResourceModel1SName, nameof(writableSubResourceModel1SName));
+            Argument.AssertNotNull(writableSubResourceModel1, nameof(writableSubResourceModel1));
 
             using var scope = WritableSubResourceModel1sClientDiagnostics.CreateScope("MockableMgmtSupersetFlattenInheritanceResourceGroupResource.PutWritableSubResourceModel1");
             scope.Start();
@@ -1284,18 +1138,8 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel1SName"/> or <paramref name="writableSubResourceModel1"/> is null. </exception>
         public virtual Response<WritableSubResourceModel1> PutWritableSubResourceModel1(string writableSubResourceModel1SName, WritableSubResourceModel1 writableSubResourceModel1, CancellationToken cancellationToken = default)
         {
-            if (writableSubResourceModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(writableSubResourceModel1SName));
-            }
-            if (writableSubResourceModel1SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(writableSubResourceModel1SName));
-            }
-            if (writableSubResourceModel1 == null)
-            {
-                throw new ArgumentNullException(nameof(writableSubResourceModel1));
-            }
+            Argument.AssertNotNullOrEmpty(writableSubResourceModel1SName, nameof(writableSubResourceModel1SName));
+            Argument.AssertNotNull(writableSubResourceModel1, nameof(writableSubResourceModel1));
 
             using var scope = WritableSubResourceModel1sClientDiagnostics.CreateScope("MockableMgmtSupersetFlattenInheritanceResourceGroupResource.PutWritableSubResourceModel1");
             scope.Start();
@@ -1333,14 +1177,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel1SName"/> is null. </exception>
         public virtual async Task<Response<WritableSubResourceModel1>> GetWritableSubResourceModel1Async(string writableSubResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            if (writableSubResourceModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(writableSubResourceModel1SName));
-            }
-            if (writableSubResourceModel1SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(writableSubResourceModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(writableSubResourceModel1SName, nameof(writableSubResourceModel1SName));
 
             using var scope = WritableSubResourceModel1sClientDiagnostics.CreateScope("MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetWritableSubResourceModel1");
             scope.Start();
@@ -1378,14 +1215,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel1SName"/> is null. </exception>
         public virtual Response<WritableSubResourceModel1> GetWritableSubResourceModel1(string writableSubResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            if (writableSubResourceModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(writableSubResourceModel1SName));
-            }
-            if (writableSubResourceModel1SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(writableSubResourceModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(writableSubResourceModel1SName, nameof(writableSubResourceModel1SName));
 
             using var scope = WritableSubResourceModel1sClientDiagnostics.CreateScope("MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetWritableSubResourceModel1");
             scope.Start();
@@ -1472,18 +1302,8 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel2SName"/> or <paramref name="writableSubResourceModel2"/> is null. </exception>
         public virtual async Task<Response<WritableSubResourceModel2>> PutWritableSubResourceModel2Async(string writableSubResourceModel2SName, WritableSubResourceModel2 writableSubResourceModel2, CancellationToken cancellationToken = default)
         {
-            if (writableSubResourceModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(writableSubResourceModel2SName));
-            }
-            if (writableSubResourceModel2SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(writableSubResourceModel2SName));
-            }
-            if (writableSubResourceModel2 == null)
-            {
-                throw new ArgumentNullException(nameof(writableSubResourceModel2));
-            }
+            Argument.AssertNotNullOrEmpty(writableSubResourceModel2SName, nameof(writableSubResourceModel2SName));
+            Argument.AssertNotNull(writableSubResourceModel2, nameof(writableSubResourceModel2));
 
             using var scope = WritableSubResourceModel2sClientDiagnostics.CreateScope("MockableMgmtSupersetFlattenInheritanceResourceGroupResource.PutWritableSubResourceModel2");
             scope.Start();
@@ -1522,18 +1342,8 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel2SName"/> or <paramref name="writableSubResourceModel2"/> is null. </exception>
         public virtual Response<WritableSubResourceModel2> PutWritableSubResourceModel2(string writableSubResourceModel2SName, WritableSubResourceModel2 writableSubResourceModel2, CancellationToken cancellationToken = default)
         {
-            if (writableSubResourceModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(writableSubResourceModel2SName));
-            }
-            if (writableSubResourceModel2SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(writableSubResourceModel2SName));
-            }
-            if (writableSubResourceModel2 == null)
-            {
-                throw new ArgumentNullException(nameof(writableSubResourceModel2));
-            }
+            Argument.AssertNotNullOrEmpty(writableSubResourceModel2SName, nameof(writableSubResourceModel2SName));
+            Argument.AssertNotNull(writableSubResourceModel2, nameof(writableSubResourceModel2));
 
             using var scope = WritableSubResourceModel2sClientDiagnostics.CreateScope("MockableMgmtSupersetFlattenInheritanceResourceGroupResource.PutWritableSubResourceModel2");
             scope.Start();
@@ -1571,14 +1381,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel2SName"/> is null. </exception>
         public virtual async Task<Response<WritableSubResourceModel2>> GetWritableSubResourceModel2Async(string writableSubResourceModel2SName, CancellationToken cancellationToken = default)
         {
-            if (writableSubResourceModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(writableSubResourceModel2SName));
-            }
-            if (writableSubResourceModel2SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(writableSubResourceModel2SName));
-            }
+            Argument.AssertNotNullOrEmpty(writableSubResourceModel2SName, nameof(writableSubResourceModel2SName));
 
             using var scope = WritableSubResourceModel2sClientDiagnostics.CreateScope("MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetWritableSubResourceModel2");
             scope.Start();
@@ -1616,14 +1419,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel2SName"/> is null. </exception>
         public virtual Response<WritableSubResourceModel2> GetWritableSubResourceModel2(string writableSubResourceModel2SName, CancellationToken cancellationToken = default)
         {
-            if (writableSubResourceModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(writableSubResourceModel2SName));
-            }
-            if (writableSubResourceModel2SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(writableSubResourceModel2SName));
-            }
+            Argument.AssertNotNullOrEmpty(writableSubResourceModel2SName, nameof(writableSubResourceModel2SName));
 
             using var scope = WritableSubResourceModel2sClientDiagnostics.CreateScope("MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetWritableSubResourceModel2");
             scope.Start();
@@ -1710,18 +1506,8 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="resourceModel2SName"/> or <paramref name="resourceModel2"/> is null. </exception>
         public virtual async Task<Response<ResourceModel2>> PutResourceModel2Async(string resourceModel2SName, ResourceModel2 resourceModel2, CancellationToken cancellationToken = default)
         {
-            if (resourceModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceModel2SName));
-            }
-            if (resourceModel2SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceModel2SName));
-            }
-            if (resourceModel2 == null)
-            {
-                throw new ArgumentNullException(nameof(resourceModel2));
-            }
+            Argument.AssertNotNullOrEmpty(resourceModel2SName, nameof(resourceModel2SName));
+            Argument.AssertNotNull(resourceModel2, nameof(resourceModel2));
 
             using var scope = ResourceModel2sClientDiagnostics.CreateScope("MockableMgmtSupersetFlattenInheritanceResourceGroupResource.PutResourceModel2");
             scope.Start();
@@ -1760,18 +1546,8 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="resourceModel2SName"/> or <paramref name="resourceModel2"/> is null. </exception>
         public virtual Response<ResourceModel2> PutResourceModel2(string resourceModel2SName, ResourceModel2 resourceModel2, CancellationToken cancellationToken = default)
         {
-            if (resourceModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceModel2SName));
-            }
-            if (resourceModel2SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceModel2SName));
-            }
-            if (resourceModel2 == null)
-            {
-                throw new ArgumentNullException(nameof(resourceModel2));
-            }
+            Argument.AssertNotNullOrEmpty(resourceModel2SName, nameof(resourceModel2SName));
+            Argument.AssertNotNull(resourceModel2, nameof(resourceModel2));
 
             using var scope = ResourceModel2sClientDiagnostics.CreateScope("MockableMgmtSupersetFlattenInheritanceResourceGroupResource.PutResourceModel2");
             scope.Start();
@@ -1809,14 +1585,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="resourceModel2SName"/> is null. </exception>
         public virtual async Task<Response<ResourceModel2>> GetResourceModel2Async(string resourceModel2SName, CancellationToken cancellationToken = default)
         {
-            if (resourceModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceModel2SName));
-            }
-            if (resourceModel2SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceModel2SName));
-            }
+            Argument.AssertNotNullOrEmpty(resourceModel2SName, nameof(resourceModel2SName));
 
             using var scope = ResourceModel2sClientDiagnostics.CreateScope("MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetResourceModel2");
             scope.Start();
@@ -1854,14 +1623,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="resourceModel2SName"/> is null. </exception>
         public virtual Response<ResourceModel2> GetResourceModel2(string resourceModel2SName, CancellationToken cancellationToken = default)
         {
-            if (resourceModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceModel2SName));
-            }
-            if (resourceModel2SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceModel2SName));
-            }
+            Argument.AssertNotNullOrEmpty(resourceModel2SName, nameof(resourceModel2SName));
 
             using var scope = ResourceModel2sClientDiagnostics.CreateScope("MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetResourceModel2");
             scope.Start();
@@ -1948,18 +1710,8 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel2SName"/> or <paramref name="trackedResourceModel2"/> is null. </exception>
         public virtual async Task<Response<TrackedResourceModel2>> PutTrackedResourceModel2Async(string trackedResourceModel2SName, TrackedResourceModel2 trackedResourceModel2, CancellationToken cancellationToken = default)
         {
-            if (trackedResourceModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(trackedResourceModel2SName));
-            }
-            if (trackedResourceModel2SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(trackedResourceModel2SName));
-            }
-            if (trackedResourceModel2 == null)
-            {
-                throw new ArgumentNullException(nameof(trackedResourceModel2));
-            }
+            Argument.AssertNotNullOrEmpty(trackedResourceModel2SName, nameof(trackedResourceModel2SName));
+            Argument.AssertNotNull(trackedResourceModel2, nameof(trackedResourceModel2));
 
             using var scope = TrackedResourceModel2sClientDiagnostics.CreateScope("MockableMgmtSupersetFlattenInheritanceResourceGroupResource.PutTrackedResourceModel2");
             scope.Start();
@@ -1998,18 +1750,8 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel2SName"/> or <paramref name="trackedResourceModel2"/> is null. </exception>
         public virtual Response<TrackedResourceModel2> PutTrackedResourceModel2(string trackedResourceModel2SName, TrackedResourceModel2 trackedResourceModel2, CancellationToken cancellationToken = default)
         {
-            if (trackedResourceModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(trackedResourceModel2SName));
-            }
-            if (trackedResourceModel2SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(trackedResourceModel2SName));
-            }
-            if (trackedResourceModel2 == null)
-            {
-                throw new ArgumentNullException(nameof(trackedResourceModel2));
-            }
+            Argument.AssertNotNullOrEmpty(trackedResourceModel2SName, nameof(trackedResourceModel2SName));
+            Argument.AssertNotNull(trackedResourceModel2, nameof(trackedResourceModel2));
 
             using var scope = TrackedResourceModel2sClientDiagnostics.CreateScope("MockableMgmtSupersetFlattenInheritanceResourceGroupResource.PutTrackedResourceModel2");
             scope.Start();
@@ -2047,14 +1789,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel2SName"/> is null. </exception>
         public virtual async Task<Response<TrackedResourceModel2>> GetTrackedResourceModel2Async(string trackedResourceModel2SName, CancellationToken cancellationToken = default)
         {
-            if (trackedResourceModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(trackedResourceModel2SName));
-            }
-            if (trackedResourceModel2SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(trackedResourceModel2SName));
-            }
+            Argument.AssertNotNullOrEmpty(trackedResourceModel2SName, nameof(trackedResourceModel2SName));
 
             using var scope = TrackedResourceModel2sClientDiagnostics.CreateScope("MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetTrackedResourceModel2");
             scope.Start();
@@ -2092,14 +1827,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel2SName"/> is null. </exception>
         public virtual Response<TrackedResourceModel2> GetTrackedResourceModel2(string trackedResourceModel2SName, CancellationToken cancellationToken = default)
         {
-            if (trackedResourceModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(trackedResourceModel2SName));
-            }
-            if (trackedResourceModel2SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(trackedResourceModel2SName));
-            }
+            Argument.AssertNotNullOrEmpty(trackedResourceModel2SName, nameof(trackedResourceModel2SName));
 
             using var scope = TrackedResourceModel2sClientDiagnostics.CreateScope("MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetTrackedResourceModel2");
             scope.Start();
@@ -2138,18 +1866,8 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> or <paramref name="nonResourceModel1"/> is null. </exception>
         public virtual async Task<Response<NonResourceModel1>> PutNonResourceModel1Async(string nonResourceModel1SName, NonResourceModel1 nonResourceModel1, CancellationToken cancellationToken = default)
         {
-            if (nonResourceModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(nonResourceModel1SName));
-            }
-            if (nonResourceModel1SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(nonResourceModel1SName));
-            }
-            if (nonResourceModel1 == null)
-            {
-                throw new ArgumentNullException(nameof(nonResourceModel1));
-            }
+            Argument.AssertNotNullOrEmpty(nonResourceModel1SName, nameof(nonResourceModel1SName));
+            Argument.AssertNotNull(nonResourceModel1, nameof(nonResourceModel1));
 
             using var scope = NonResourceModel1sClientDiagnostics.CreateScope("MockableMgmtSupersetFlattenInheritanceResourceGroupResource.PutNonResourceModel1");
             scope.Start();
@@ -2188,18 +1906,8 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> or <paramref name="nonResourceModel1"/> is null. </exception>
         public virtual Response<NonResourceModel1> PutNonResourceModel1(string nonResourceModel1SName, NonResourceModel1 nonResourceModel1, CancellationToken cancellationToken = default)
         {
-            if (nonResourceModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(nonResourceModel1SName));
-            }
-            if (nonResourceModel1SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(nonResourceModel1SName));
-            }
-            if (nonResourceModel1 == null)
-            {
-                throw new ArgumentNullException(nameof(nonResourceModel1));
-            }
+            Argument.AssertNotNullOrEmpty(nonResourceModel1SName, nameof(nonResourceModel1SName));
+            Argument.AssertNotNull(nonResourceModel1, nameof(nonResourceModel1));
 
             using var scope = NonResourceModel1sClientDiagnostics.CreateScope("MockableMgmtSupersetFlattenInheritanceResourceGroupResource.PutNonResourceModel1");
             scope.Start();
@@ -2237,14 +1945,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> is null. </exception>
         public virtual async Task<Response<NonResourceModel1>> GetNonResourceModel1Async(string nonResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            if (nonResourceModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(nonResourceModel1SName));
-            }
-            if (nonResourceModel1SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(nonResourceModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(nonResourceModel1SName, nameof(nonResourceModel1SName));
 
             using var scope = NonResourceModel1sClientDiagnostics.CreateScope("MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetNonResourceModel1");
             scope.Start();
@@ -2282,14 +1983,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> is null. </exception>
         public virtual Response<NonResourceModel1> GetNonResourceModel1(string nonResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            if (nonResourceModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(nonResourceModel1SName));
-            }
-            if (nonResourceModel1SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(nonResourceModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(nonResourceModel1SName, nameof(nonResourceModel1SName));
 
             using var scope = NonResourceModel1sClientDiagnostics.CreateScope("MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetNonResourceModel1");
             scope.Start();

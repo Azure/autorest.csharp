@@ -7,7 +7,7 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
+using Azure.ResourceManager.Storage;
 
 namespace Azure.ResourceManager.Storage.Models
 {
@@ -19,9 +19,9 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Optional<bool> hasLegalHold = default;
+            bool? hasLegalHold = default;
             IReadOnlyList<TagProperty> tags = default;
-            Optional<ProtectedAppendWritesHistory> protectedAppendWritesHistory = default;
+            ProtectedAppendWritesHistory protectedAppendWritesHistory = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("hasLegalHold"u8))
@@ -57,7 +57,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new LegalHoldProperties(Optional.ToNullable(hasLegalHold), tags ?? new ChangeTrackingList<TagProperty>(), protectedAppendWritesHistory.Value);
+            return new LegalHoldProperties(hasLegalHold, tags ?? new ChangeTrackingList<TagProperty>(), protectedAppendWritesHistory);
         }
     }
 }

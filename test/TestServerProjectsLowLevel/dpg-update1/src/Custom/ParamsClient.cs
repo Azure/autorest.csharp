@@ -66,7 +66,10 @@ namespace dpg_update1_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="parameter"/> is null. </exception>
         public virtual async Task<Response> GetRequiredAsync(string parameter, RequestContext context)
         {
-            Argument.AssertNotNull(parameter, nameof(parameter));
+            if (parameter is null)
+            {
+                throw new ArgumentNullException(nameof(parameter));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ParamsClient.GetRequired");
             scope.Start();
@@ -88,7 +91,10 @@ namespace dpg_update1_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="parameter"/> is null. </exception>
         public virtual Response GetRequired(string parameter, RequestContext context)
         {
-            Argument.AssertNotNull(parameter, nameof(parameter));
+            if (parameter is null)
+            {
+                throw new ArgumentNullException(nameof(parameter));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ParamsClient.GetRequired");
             scope.Start();
@@ -122,7 +128,10 @@ namespace dpg_update1_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
         public virtual Response PutRequiredOptional(string requiredParam, string optionalParam, RequestContext context)
         {
-            Argument.AssertNotNull(requiredParam, nameof(requiredParam));
+            if (requiredParam is null)
+            {
+                throw new ArgumentNullException(nameof(requiredParam));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ParamsClient.PutRequiredOptional");
             scope.Start();
@@ -197,7 +206,10 @@ namespace dpg_update1_LowLevel
         [EditorBrowsable(EditorBrowsableState.Never)]
         public virtual async Task<Response> PostParametersAsync(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content is null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ParamsClient.PostParameters");
             scope.Start();
@@ -228,7 +240,10 @@ namespace dpg_update1_LowLevel
         [EditorBrowsable(EditorBrowsableState.Never)]
         public virtual Response PostParameters(RequestContent content, RequestContext context = null)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            if (content is null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
 
             using var scope = ClientDiagnostics.CreateScope("ParamsClient.PostParameters");
             scope.Start();

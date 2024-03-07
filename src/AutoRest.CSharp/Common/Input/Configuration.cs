@@ -60,6 +60,7 @@ namespace AutoRest.CSharp.Common.Input
             // TODO - this configuration only exists here because we would like a rolling update for all libraries for this feature since it changes so many files.
             // It is only respected if UseModelReaderWriter is true.
             public const string EnableBicepSerialization = "enable-bicep-serialization";
+            public const string HelperNamespace = "helper-namespace";
         }
 
         public enum UnreferencedTypesHandlingOption
@@ -106,7 +107,8 @@ namespace AutoRest.CSharp.Common.Input
             MgmtTestConfiguration? mgmtTestConfiguration,
             bool branded,
             bool generateSampleProject,
-            bool generateTestProject)
+            bool generateTestProject,
+            string? helperNamespace)
         {
             _outputFolder = outputFolder;
             _namespace = ns;
@@ -120,6 +122,11 @@ namespace AutoRest.CSharp.Common.Input
             SkipCSProj = skipCSProj;
             SkipCSProjPackageReference = skipCSProjPackageReference;
             Generation1ConvenienceClient = generation1ConvenienceClient;
+
+            PublicRestClientsTemporaryFlag = generation1ConvenienceClient;
+            GenerateLongRunningOperationTypes = generation1ConvenienceClient;
+            GenerateResponseHeaderModels = generation1ConvenienceClient;
+
             SingleTopLevelClient = singleTopLevelClient;
             GenerateModelFactory = generateModelFactory;
             PublicDiscriminatorProperty = publicDiscriminatorProperty;
@@ -170,6 +177,7 @@ namespace AutoRest.CSharp.Common.Input
             _apiTypes = branded ? new AzureApiTypes() : new SystemApiTypes();
             GenerateSampleProject = generateSampleProject;
             GenerateTestProject = generateTestProject;
+            _helperNamespace = helperNamespace ?? Namespace;
         }
 
         internal static (string AbsoluteProjectFolder, string RelativeProjectFolder) ParseProjectFolders(string outputFolder, string projectFolder)
@@ -224,6 +232,9 @@ namespace AutoRest.CSharp.Common.Input
             return null;
         }
 
+        private static string? _helperNamespace;
+        public static string HelperNamespace => _helperNamespace ?? throw new InvalidOperationException("Configuration has not been initialized");
+
         public static bool GenerateSampleProject { get; private set; }
 
         public static bool GenerateTestProject { get; private set; }
@@ -263,6 +274,12 @@ namespace AutoRest.CSharp.Common.Input
         public static bool SingleTopLevelClient { get; private set; }
         public static bool SkipSerializationFormatXml { get; private set; }
         public static bool DisablePaginationTopRenaming { get; private set; }
+
+        // Temporary flag needed in the process of consolidation
+        // Will be eliminated at the final step
+        public static bool PublicRestClientsTemporaryFlag { get; private set; }
+        public static bool GenerateLongRunningOperationTypes { get; private set; }
+        public static bool GenerateResponseHeaderModels { get; private set; }
 
         /// <summary>
         /// Whether we will generate model factory for this library.
@@ -351,7 +368,8 @@ namespace AutoRest.CSharp.Common.Input
                 mgmtTestConfiguration: MgmtTestConfiguration.GetConfiguration(autoRest),
                 branded: GetOptionBoolValue(autoRest, Options.Branded),
                 generateSampleProject: GetOptionBoolValue(autoRest, Options.GenerateSampleProject),
-                generateTestProject: GetOptionBoolValue(autoRest, Options.GenerateTestProject)
+                generateTestProject: GetOptionBoolValue(autoRest, Options.GenerateTestProject),
+                helperNamespace: autoRest.GetValue<string?>(Options.HelperNamespace).GetAwaiter().GetResult()
             );
         }
 
@@ -519,7 +537,8 @@ namespace AutoRest.CSharp.Common.Input
                 MgmtTestConfiguration.LoadConfiguration(root),
                 ReadOption(root, Options.Branded),
                 ReadOption(root, Options.GenerateSampleProject),
-                ReadOption(root, Options.GenerateTestProject)
+                ReadOption(root, Options.GenerateTestProject),
+                ReadStringOption(root, Options.HelperNamespace)
             );
         }
 
@@ -584,6 +603,7 @@ namespace AutoRest.CSharp.Common.Input
             WriteIfNotDefault(writer, Options.Branded, ApiTypes is AzureApiTypes);
             WriteIfNotDefault(writer, Options.GenerateSampleProject, GenerateSampleProject);
             WriteIfNotDefault(writer, Options.GenerateTestProject, GenerateTestProject);
+            WriteIfNotDefault(writer, Options.HelperNamespace, HelperNamespace);
 
             writer.WriteEndObject();
         }

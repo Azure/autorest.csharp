@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
+using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
@@ -17,7 +18,7 @@ namespace MgmtMockAndSample.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (!(Workspaces is ChangeTrackingList<FirewallPolicyLogAnalyticsWorkspace> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Workspaces))
             {
                 writer.WritePropertyName("workspaces"u8);
                 writer.WriteStartArray();
@@ -27,7 +28,7 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (DefaultWorkspaceId != null)
+            if (Optional.IsDefined(DefaultWorkspaceId))
             {
                 writer.WritePropertyName("defaultWorkspaceId"u8);
                 JsonSerializer.Serialize(writer, DefaultWorkspaceId);
@@ -42,7 +43,7 @@ namespace MgmtMockAndSample.Models
                 return null;
             }
             IList<FirewallPolicyLogAnalyticsWorkspace> workspaces = default;
-            Optional<WritableSubResource> defaultWorkspaceId = default;
+            WritableSubResource defaultWorkspaceId = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("workspaces"u8))

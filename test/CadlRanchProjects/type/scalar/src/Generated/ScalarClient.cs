@@ -36,10 +36,7 @@ namespace _Type.Scalar
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public ScalarClient(Uri endpoint, ScalarClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new ScalarClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

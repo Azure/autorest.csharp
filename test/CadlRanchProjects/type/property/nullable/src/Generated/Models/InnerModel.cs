@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using _Type.Property.Nullable;
 
 namespace _Type.Property.Nullable.Models
 {
@@ -50,10 +51,7 @@ namespace _Type.Property.Nullable.Models
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
         internal InnerModel(string property)
         {
-            if (property == null)
-            {
-                throw new ArgumentNullException(nameof(property));
-            }
+            Argument.AssertNotNull(property, nameof(property));
 
             Property = property;
         }

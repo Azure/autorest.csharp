@@ -39,10 +39,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public EnumDiscriminatorClient(Uri endpoint, EnumDiscriminatorClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new EnumDiscriminatorClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -147,10 +144,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
         /// <include file="Docs/EnumDiscriminatorClient.xml" path="doc/members/member[@name='PutExtensibleModelAsync(Dog,CancellationToken)']/*" />
         public virtual async Task<Response> PutExtensibleModelAsync(Dog input, CancellationToken cancellationToken = default)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
+            Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -165,10 +159,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
         /// <include file="Docs/EnumDiscriminatorClient.xml" path="doc/members/member[@name='PutExtensibleModel(Dog,CancellationToken)']/*" />
         public virtual Response PutExtensibleModel(Dog input, CancellationToken cancellationToken = default)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
+            Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -199,10 +190,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
         /// <include file="Docs/EnumDiscriminatorClient.xml" path="doc/members/member[@name='PutExtensibleModelAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutExtensibleModelAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("EnumDiscriminatorClient.PutExtensibleModel");
             scope.Start();
@@ -241,10 +229,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
         /// <include file="Docs/EnumDiscriminatorClient.xml" path="doc/members/member[@name='PutExtensibleModel(RequestContent,RequestContext)']/*" />
         public virtual Response PutExtensibleModel(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("EnumDiscriminatorClient.PutExtensibleModel");
             scope.Start();
@@ -537,10 +522,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
         /// <include file="Docs/EnumDiscriminatorClient.xml" path="doc/members/member[@name='PutFixedModelAsync(Snake,CancellationToken)']/*" />
         public virtual async Task<Response> PutFixedModelAsync(Snake input, CancellationToken cancellationToken = default)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
+            Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -555,10 +537,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
         /// <include file="Docs/EnumDiscriminatorClient.xml" path="doc/members/member[@name='PutFixedModel(Snake,CancellationToken)']/*" />
         public virtual Response PutFixedModel(Snake input, CancellationToken cancellationToken = default)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
+            Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -589,10 +568,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
         /// <include file="Docs/EnumDiscriminatorClient.xml" path="doc/members/member[@name='PutFixedModelAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutFixedModelAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("EnumDiscriminatorClient.PutFixedModel");
             scope.Start();
@@ -631,10 +607,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
         /// <include file="Docs/EnumDiscriminatorClient.xml" path="doc/members/member[@name='PutFixedModel(RequestContent,RequestContext)']/*" />
         public virtual Response PutFixedModel(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("EnumDiscriminatorClient.PutFixedModel");
             scope.Start();

@@ -8,6 +8,7 @@
 using System;
 using System.Text.Json;
 using Azure.Core;
+using MgmtCustomizations;
 
 namespace MgmtCustomizations.Models
 {
@@ -16,12 +17,12 @@ namespace MgmtCustomizations.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Sleep != null)
+            if (Optional.IsDefined(Sleep))
             {
                 writer.WritePropertyName("sleep"u8);
                 writer.WriteStringValue(Sleep);
             }
-            if (Jump != null)
+            if (Optional.IsDefined(Jump))
             {
                 writer.WritePropertyName("jump"u8);
                 writer.WriteStringValue(Jump);
@@ -30,7 +31,7 @@ namespace MgmtCustomizations.Models
             writer.WriteStringValue(Kind.ToSerialString());
             writer.WritePropertyName("size"u8);
             SerializeSizeProperty(writer);
-            if (DateOfBirth.HasValue)
+            if (Optional.IsDefined(DateOfBirth))
             {
                 writer.WritePropertyName("dateOfBirth"u8);
                 SerializeDateOfBirthProperty(writer);
@@ -44,13 +45,13 @@ namespace MgmtCustomizations.Models
             {
                 return null;
             }
-            Optional<string> sleep = default;
-            Optional<string> jump = default;
-            Optional<string> meow = default;
+            string sleep = default;
+            string jump = default;
+            string meow = default;
             PetKind kind = default;
-            Optional<string> name = default;
-            Optional<int> size = default;
-            Optional<DateTimeOffset> dateOfBirth = default;
+            string name = default;
+            int size = default;
+            DateTimeOffset? dateOfBirth = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sleep"u8))
@@ -93,7 +94,14 @@ namespace MgmtCustomizations.Models
                     continue;
                 }
             }
-            return new Cat(kind, name.Value, size, Optional.ToNullable(dateOfBirth), sleep.Value, jump.Value, meow.Value);
+            return new Cat(
+                kind,
+                name,
+                size,
+                dateOfBirth,
+                sleep,
+                jump,
+                meow);
         }
     }
 }

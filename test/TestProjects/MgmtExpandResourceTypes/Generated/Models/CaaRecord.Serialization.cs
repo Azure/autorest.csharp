@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtExpandResourceTypes;
 
 namespace MgmtExpandResourceTypes.Models
 {
@@ -15,17 +16,17 @@ namespace MgmtExpandResourceTypes.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Flags.HasValue)
+            if (Optional.IsDefined(Flags))
             {
                 writer.WritePropertyName("flags"u8);
                 writer.WriteNumberValue(Flags.Value);
             }
-            if (Tag != null)
+            if (Optional.IsDefined(Tag))
             {
                 writer.WritePropertyName("tag"u8);
                 writer.WriteStringValue(Tag);
             }
-            if (Value != null)
+            if (Optional.IsDefined(Value))
             {
                 writer.WritePropertyName("value"u8);
                 writer.WriteStringValue(Value);
@@ -39,9 +40,9 @@ namespace MgmtExpandResourceTypes.Models
             {
                 return null;
             }
-            Optional<int> flags = default;
-            Optional<string> tag = default;
-            Optional<string> value = default;
+            int? flags = default;
+            string tag = default;
+            string value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("flags"u8))
@@ -64,7 +65,7 @@ namespace MgmtExpandResourceTypes.Models
                     continue;
                 }
             }
-            return new CaaRecord(Optional.ToNullable(flags), tag.Value, value.Value);
+            return new CaaRecord(flags, tag, value);
         }
     }
 }

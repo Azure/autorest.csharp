@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {
@@ -23,22 +24,22 @@ namespace CognitiveSearch.Models
                 writer.WriteStringValue(item);
             }
             writer.WriteEndArray();
-            if (MinWordSize.HasValue)
+            if (Optional.IsDefined(MinWordSize))
             {
                 writer.WritePropertyName("minWordSize"u8);
                 writer.WriteNumberValue(MinWordSize.Value);
             }
-            if (MinSubwordSize.HasValue)
+            if (Optional.IsDefined(MinSubwordSize))
             {
                 writer.WritePropertyName("minSubwordSize"u8);
                 writer.WriteNumberValue(MinSubwordSize.Value);
             }
-            if (MaxSubwordSize.HasValue)
+            if (Optional.IsDefined(MaxSubwordSize))
             {
                 writer.WritePropertyName("maxSubwordSize"u8);
                 writer.WriteNumberValue(MaxSubwordSize.Value);
             }
-            if (OnlyLongestMatch.HasValue)
+            if (Optional.IsDefined(OnlyLongestMatch))
             {
                 writer.WritePropertyName("onlyLongestMatch"u8);
                 writer.WriteBooleanValue(OnlyLongestMatch.Value);
@@ -57,10 +58,10 @@ namespace CognitiveSearch.Models
                 return null;
             }
             IList<string> wordList = default;
-            Optional<int> minWordSize = default;
-            Optional<int> minSubwordSize = default;
-            Optional<int> maxSubwordSize = default;
-            Optional<bool> onlyLongestMatch = default;
+            int? minWordSize = default;
+            int? minSubwordSize = default;
+            int? maxSubwordSize = default;
+            bool? onlyLongestMatch = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
@@ -122,7 +123,14 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new DictionaryDecompounderTokenFilter(odataType, name, wordList, Optional.ToNullable(minWordSize), Optional.ToNullable(minSubwordSize), Optional.ToNullable(maxSubwordSize), Optional.ToNullable(onlyLongestMatch));
+            return new DictionaryDecompounderTokenFilter(
+                odataType,
+                name,
+                wordList,
+                minWordSize,
+                minSubwordSize,
+                maxSubwordSize,
+                onlyLongestMatch);
         }
     }
 }

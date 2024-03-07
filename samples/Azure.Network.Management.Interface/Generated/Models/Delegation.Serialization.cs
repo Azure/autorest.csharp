@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Network.Management.Interface;
 
 namespace Azure.Network.Management.Interface.Models
 {
@@ -16,19 +17,19 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (ServiceName != null)
+            if (Optional.IsDefined(ServiceName))
             {
                 writer.WritePropertyName("serviceName"u8);
                 writer.WriteStringValue(ServiceName);
@@ -43,12 +44,12 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> etag = default;
-            Optional<string> id = default;
-            Optional<string> serviceName = default;
+            string name = default;
+            string etag = default;
+            string id = default;
+            string serviceName = default;
             IReadOnlyList<string> actions = default;
-            Optional<ProvisioningState> provisioningState = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -107,7 +108,13 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new Delegation(id.Value, name.Value, etag.Value, serviceName.Value, actions ?? new ChangeTrackingList<string>(), Optional.ToNullable(provisioningState));
+            return new Delegation(
+                id,
+                name,
+                etag,
+                serviceName,
+                actions ?? new ChangeTrackingList<string>(),
+                provisioningState);
         }
     }
 }

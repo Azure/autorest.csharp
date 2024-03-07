@@ -67,7 +67,7 @@
    "$id": "10",
    "Kind": "Enum",
    "Name": "ExtensibleEnum",
-   "EnumValueType": "String",
+   "EnumValueType": "string",
    "AllowedValues": [
     {
      "$id": "11",
@@ -125,7 +125,7 @@
    "$id": "18",
    "Kind": "Enum",
    "Name": "ExtensibleIntEnum",
-   "EnumValueType": "Float32",
+   "EnumValueType": "int32",
    "AllowedValues": [
     {
      "$id": "19",
@@ -1161,7 +1161,7 @@
       "ElementType": {
        "$id": "153",
        "Kind": "Primitive",
-       "Name": "Int32",
+       "Name": "Byte",
        "IsNullable": false
       },
       "IsNullable": false
@@ -1181,7 +1181,7 @@
       "ElementType": {
        "$id": "156",
        "Kind": "Primitive",
-       "Name": "Int32",
+       "Name": "Byte",
        "IsNullable": false
       },
       "IsNullable": false
@@ -1229,7 +1229,7 @@
       "ElementType": {
        "$id": "163",
        "Kind": "Primitive",
-       "Name": "Int32",
+       "Name": "SByte",
        "IsNullable": false
       },
       "IsNullable": false
@@ -1249,7 +1249,7 @@
       "ElementType": {
        "$id": "166",
        "Kind": "Primitive",
-       "Name": "Int32",
+       "Name": "SByte",
        "IsNullable": false
       },
       "IsNullable": false
@@ -1404,7 +1404,7 @@
      "Type": {
       "$id": "187",
       "Kind": "Primitive",
-      "Name": "Int64",
+      "Name": "SafeInt",
       "IsNullable": false
      },
      "IsRequired": true,

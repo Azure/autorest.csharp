@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using body_complex;
 
 namespace body_complex.Models
 {
@@ -26,12 +27,12 @@ namespace body_complex.Models
             }
 
             writer.WriteStartObject();
-            if (Picture != null)
+            if (Optional.IsDefined(Picture))
             {
                 writer.WritePropertyName("picture"u8);
                 writer.WriteBase64StringValue(Picture, "D");
             }
-            if (Age.HasValue)
+            if (Optional.IsDefined(Age))
             {
                 writer.WritePropertyName("age"u8);
                 writer.WriteNumberValue(Age.Value);
@@ -40,14 +41,14 @@ namespace body_complex.Models
             writer.WriteStringValue(Birthday, "O");
             writer.WritePropertyName("fishtype"u8);
             writer.WriteStringValue(Fishtype);
-            if (Species != null)
+            if (Optional.IsDefined(Species))
             {
                 writer.WritePropertyName("species"u8);
                 writer.WriteStringValue(Species);
             }
             writer.WritePropertyName("length"u8);
             writer.WriteNumberValue(Length);
-            if (!(Siblings is ChangeTrackingList<Fish> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Siblings))
             {
                 writer.WritePropertyName("siblings"u8);
                 writer.WriteStartArray();
@@ -95,11 +96,11 @@ namespace body_complex.Models
             {
                 return null;
             }
-            Optional<byte[]> picture = default;
-            Optional<int> age = default;
+            byte[] picture = default;
+            int? age = default;
             DateTimeOffset birthday = default;
             string fishtype = default;
-            Optional<string> species = default;
+            string species = default;
             float length = default;
             IList<Fish> siblings = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
@@ -164,7 +165,15 @@ namespace body_complex.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Sawshark(fishtype, species.Value, length, siblings ?? new ChangeTrackingList<Fish>(), serializedAdditionalRawData, Optional.ToNullable(age), birthday, picture.Value);
+            return new Sawshark(
+                fishtype,
+                species,
+                length,
+                siblings ?? new ChangeTrackingList<Fish>(),
+                serializedAdditionalRawData,
+                age,
+                birthday,
+                picture);
         }
 
         BinaryData IPersistableModel<Sawshark>.Write(ModelReaderWriterOptions options)

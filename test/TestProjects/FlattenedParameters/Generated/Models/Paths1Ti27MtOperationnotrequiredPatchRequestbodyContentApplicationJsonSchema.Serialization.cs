@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using FlattenedParameters;
 
 namespace FlattenedParameters.Models
 {
@@ -17,12 +18,12 @@ namespace FlattenedParameters.Models
             writer.WriteStartObject();
             writer.WritePropertyName("flattened"u8);
             writer.WriteStartObject();
-            if (Required != null)
+            if (Optional.IsDefined(Required))
             {
                 writer.WritePropertyName("required"u8);
                 writer.WriteStringValue(Required);
             }
-            if (NonRequired != null)
+            if (Optional.IsDefined(NonRequired))
             {
                 writer.WritePropertyName("non_required"u8);
                 writer.WriteStringValue(NonRequired);

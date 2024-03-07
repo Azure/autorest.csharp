@@ -36,10 +36,7 @@ namespace Encode.Bytes
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public BytesClient(Uri endpoint, BytesClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new BytesClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

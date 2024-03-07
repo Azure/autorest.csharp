@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -28,52 +29,52 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (PlatformUpdateDomain.HasValue)
+            if (Optional.IsDefined(PlatformUpdateDomain))
             {
                 writer.WritePropertyName("platformUpdateDomain"u8);
                 writer.WriteNumberValue(PlatformUpdateDomain.Value);
             }
-            if (PlatformFaultDomain.HasValue)
+            if (Optional.IsDefined(PlatformFaultDomain))
             {
                 writer.WritePropertyName("platformFaultDomain"u8);
                 writer.WriteNumberValue(PlatformFaultDomain.Value);
             }
-            if (ComputerName != null)
+            if (Optional.IsDefined(ComputerName))
             {
                 writer.WritePropertyName("computerName"u8);
                 writer.WriteStringValue(ComputerName);
             }
-            if (OSName != null)
+            if (Optional.IsDefined(OSName))
             {
                 writer.WritePropertyName("osName"u8);
                 writer.WriteStringValue(OSName);
             }
-            if (OSVersion != null)
+            if (Optional.IsDefined(OSVersion))
             {
                 writer.WritePropertyName("osVersion"u8);
                 writer.WriteStringValue(OSVersion);
             }
-            if (HyperVGeneration.HasValue)
+            if (Optional.IsDefined(HyperVGeneration))
             {
                 writer.WritePropertyName("hyperVGeneration"u8);
                 writer.WriteStringValue(HyperVGeneration.Value.ToString());
             }
-            if (RdpThumbPrint != null)
+            if (Optional.IsDefined(RdpThumbPrint))
             {
                 writer.WritePropertyName("rdpThumbPrint"u8);
                 writer.WriteStringValue(RdpThumbPrint);
             }
-            if (VmAgent != null)
+            if (Optional.IsDefined(VmAgent))
             {
                 writer.WritePropertyName("vmAgent"u8);
                 writer.WriteObjectValue(VmAgent);
             }
-            if (MaintenanceRedeployStatus != null)
+            if (Optional.IsDefined(MaintenanceRedeployStatus))
             {
                 writer.WritePropertyName("maintenanceRedeployStatus"u8);
                 writer.WriteObjectValue(MaintenanceRedeployStatus);
             }
-            if (!(Disks is ChangeTrackingList<DiskInstanceView> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Disks))
             {
                 writer.WritePropertyName("disks"u8);
                 writer.WriteStartArray();
@@ -83,7 +84,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!(Extensions is ChangeTrackingList<VirtualMachineExtensionInstanceView> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(Extensions))
             {
                 writer.WritePropertyName("extensions"u8);
                 writer.WriteStartArray();
@@ -93,22 +94,22 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W" && VmHealth != null)
+            if (options.Format != "W" && Optional.IsDefined(VmHealth))
             {
                 writer.WritePropertyName("vmHealth"u8);
                 writer.WriteObjectValue(VmHealth);
             }
-            if (BootDiagnostics != null)
+            if (Optional.IsDefined(BootDiagnostics))
             {
                 writer.WritePropertyName("bootDiagnostics"u8);
                 writer.WriteObjectValue(BootDiagnostics);
             }
-            if (options.Format != "W" && AssignedHost != null)
+            if (options.Format != "W" && Optional.IsDefined(AssignedHost))
             {
                 writer.WritePropertyName("assignedHost"u8);
                 writer.WriteStringValue(AssignedHost);
             }
-            if (!(Statuses is ChangeTrackingList<InstanceViewStatus> collection1 && collection1.IsUndefined))
+            if (Optional.IsCollectionDefined(Statuses))
             {
                 writer.WritePropertyName("statuses"u8);
                 writer.WriteStartArray();
@@ -118,7 +119,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (PatchStatus != null)
+            if (Optional.IsDefined(PatchStatus))
             {
                 writer.WritePropertyName("patchStatus"u8);
                 writer.WriteObjectValue(PatchStatus);
@@ -161,22 +162,22 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<int> platformUpdateDomain = default;
-            Optional<int> platformFaultDomain = default;
-            Optional<string> computerName = default;
-            Optional<string> osName = default;
-            Optional<string> osVersion = default;
-            Optional<HyperVGeneration> hyperVGeneration = default;
-            Optional<string> rdpThumbPrint = default;
-            Optional<VirtualMachineAgentInstanceView> vmAgent = default;
-            Optional<MaintenanceRedeployStatus> maintenanceRedeployStatus = default;
+            int? platformUpdateDomain = default;
+            int? platformFaultDomain = default;
+            string computerName = default;
+            string osName = default;
+            string osVersion = default;
+            HyperVGeneration? hyperVGeneration = default;
+            string rdpThumbPrint = default;
+            VirtualMachineAgentInstanceView vmAgent = default;
+            MaintenanceRedeployStatus maintenanceRedeployStatus = default;
             IReadOnlyList<DiskInstanceView> disks = default;
             IReadOnlyList<VirtualMachineExtensionInstanceView> extensions = default;
-            Optional<VirtualMachineHealthStatus> vmHealth = default;
-            Optional<BootDiagnosticsInstanceView> bootDiagnostics = default;
-            Optional<string> assignedHost = default;
+            VirtualMachineHealthStatus vmHealth = default;
+            BootDiagnosticsInstanceView bootDiagnostics = default;
+            string assignedHost = default;
             IReadOnlyList<InstanceViewStatus> statuses = default;
-            Optional<VirtualMachinePatchStatus> patchStatus = default;
+            VirtualMachinePatchStatus patchStatus = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -326,7 +327,24 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineInstanceView(Optional.ToNullable(platformUpdateDomain), Optional.ToNullable(platformFaultDomain), computerName.Value, osName.Value, osVersion.Value, Optional.ToNullable(hyperVGeneration), rdpThumbPrint.Value, vmAgent.Value, maintenanceRedeployStatus.Value, disks ?? new ChangeTrackingList<DiskInstanceView>(), extensions ?? new ChangeTrackingList<VirtualMachineExtensionInstanceView>(), vmHealth.Value, bootDiagnostics.Value, assignedHost.Value, statuses ?? new ChangeTrackingList<InstanceViewStatus>(), patchStatus.Value, serializedAdditionalRawData);
+            return new VirtualMachineInstanceView(
+                platformUpdateDomain,
+                platformFaultDomain,
+                computerName,
+                osName,
+                osVersion,
+                hyperVGeneration,
+                rdpThumbPrint,
+                vmAgent,
+                maintenanceRedeployStatus,
+                disks ?? new ChangeTrackingList<DiskInstanceView>(),
+                extensions ?? new ChangeTrackingList<VirtualMachineExtensionInstanceView>(),
+                vmHealth,
+                bootDiagnostics,
+                assignedHost,
+                statuses ?? new ChangeTrackingList<InstanceViewStatus>(),
+                patchStatus,
+                serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -334,19 +352,19 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (PlatformUpdateDomain.HasValue)
+            if (Optional.IsDefined(PlatformUpdateDomain))
             {
                 builder.Append("  platformUpdateDomain:");
                 builder.AppendLine($" {PlatformUpdateDomain.Value}");
             }
 
-            if (PlatformFaultDomain.HasValue)
+            if (Optional.IsDefined(PlatformFaultDomain))
             {
                 builder.Append("  platformFaultDomain:");
                 builder.AppendLine($" {PlatformFaultDomain.Value}");
             }
 
-            if (ComputerName != null)
+            if (Optional.IsDefined(ComputerName))
             {
                 builder.Append("  computerName:");
                 if (ComputerName.Contains(Environment.NewLine))
@@ -360,7 +378,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (OSName != null)
+            if (Optional.IsDefined(OSName))
             {
                 builder.Append("  osName:");
                 if (OSName.Contains(Environment.NewLine))
@@ -374,7 +392,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (OSVersion != null)
+            if (Optional.IsDefined(OSVersion))
             {
                 builder.Append("  osVersion:");
                 if (OSVersion.Contains(Environment.NewLine))
@@ -388,13 +406,13 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (HyperVGeneration.HasValue)
+            if (Optional.IsDefined(HyperVGeneration))
             {
                 builder.Append("  hyperVGeneration:");
                 builder.AppendLine($" '{HyperVGeneration.Value.ToString()}'");
             }
 
-            if (RdpThumbPrint != null)
+            if (Optional.IsDefined(RdpThumbPrint))
             {
                 builder.Append("  rdpThumbPrint:");
                 if (RdpThumbPrint.Contains(Environment.NewLine))
@@ -408,19 +426,19 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (VmAgent != null)
+            if (Optional.IsDefined(VmAgent))
             {
                 builder.Append("  vmAgent:");
                 AppendChildObject(builder, VmAgent, options, 2, false);
             }
 
-            if (MaintenanceRedeployStatus != null)
+            if (Optional.IsDefined(MaintenanceRedeployStatus))
             {
                 builder.Append("  maintenanceRedeployStatus:");
                 AppendChildObject(builder, MaintenanceRedeployStatus, options, 2, false);
             }
 
-            if (!(Disks is ChangeTrackingList<DiskInstanceView> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Disks))
             {
                 if (Disks.Any())
                 {
@@ -434,7 +452,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (!(Extensions is ChangeTrackingList<VirtualMachineExtensionInstanceView> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(Extensions))
             {
                 if (Extensions.Any())
                 {
@@ -448,19 +466,19 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (VmHealth != null)
+            if (Optional.IsDefined(VmHealth))
             {
                 builder.Append("  vmHealth:");
                 AppendChildObject(builder, VmHealth, options, 2, false);
             }
 
-            if (BootDiagnostics != null)
+            if (Optional.IsDefined(BootDiagnostics))
             {
                 builder.Append("  bootDiagnostics:");
                 AppendChildObject(builder, BootDiagnostics, options, 2, false);
             }
 
-            if (AssignedHost != null)
+            if (Optional.IsDefined(AssignedHost))
             {
                 builder.Append("  assignedHost:");
                 if (AssignedHost.Contains(Environment.NewLine))
@@ -474,7 +492,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (!(Statuses is ChangeTrackingList<InstanceViewStatus> collection1 && collection1.IsUndefined))
+            if (Optional.IsCollectionDefined(Statuses))
             {
                 if (Statuses.Any())
                 {
@@ -488,7 +506,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (PatchStatus != null)
+            if (Optional.IsDefined(PatchStatus))
             {
                 builder.Append("  patchStatus:");
                 AppendChildObject(builder, PatchStatus, options, 2, false);

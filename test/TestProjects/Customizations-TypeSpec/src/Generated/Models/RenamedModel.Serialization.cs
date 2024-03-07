@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using CustomizationsInTsp;
 
 namespace CustomizationsInTsp.Models
 {
@@ -29,7 +30,7 @@ namespace CustomizationsInTsp.Models
             writer.WriteStartObject();
             writer.WritePropertyName("requiredIntOnBase"u8);
             writer.WriteNumberValue(RequiredIntOnBase);
-            if (OptionalInt.HasValue)
+            if (Optional.IsDefined(OptionalInt))
             {
                 writer.WritePropertyName("optionalInt"u8);
                 writer.WriteNumberValue(OptionalInt.Value);
@@ -73,7 +74,7 @@ namespace CustomizationsInTsp.Models
                 return null;
             }
             int requiredIntOnBase = default;
-            Optional<int> optionalInt = default;
+            int? optionalInt = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -98,7 +99,7 @@ namespace CustomizationsInTsp.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new RenamedModel(requiredIntOnBase, Optional.ToNullable(optionalInt), serializedAdditionalRawData);
+            return new RenamedModel(requiredIntOnBase, optionalInt, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<RenamedModel>.Write(ModelReaderWriterOptions options)

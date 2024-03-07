@@ -19,7 +19,7 @@ namespace MgmtParamOrdering
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -34,27 +34,27 @@ namespace MgmtParamOrdering
             writer.WriteStringValue(Location);
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Description != null)
+            if (Optional.IsDefined(Description))
             {
                 writer.WritePropertyName("description"u8);
                 writer.WriteStringValue(Description);
             }
-            if (FriendlyName != null)
+            if (Optional.IsDefined(FriendlyName))
             {
                 writer.WritePropertyName("friendlyName"u8);
                 writer.WriteStringValue(FriendlyName);
             }
-            if (KeyVault != null)
+            if (Optional.IsDefined(KeyVault))
             {
                 writer.WritePropertyName("keyVault"u8);
                 writer.WriteStringValue(KeyVault);
             }
-            if (ApplicationInsights != null)
+            if (Optional.IsDefined(ApplicationInsights))
             {
                 writer.WritePropertyName("applicationInsights"u8);
                 writer.WriteStringValue(ApplicationInsights);
             }
-            if (ContainerRegistry != null)
+            if (Optional.IsDefined(ContainerRegistry))
             {
                 if (ContainerRegistry != null)
                 {
@@ -66,32 +66,32 @@ namespace MgmtParamOrdering
                     writer.WriteNull("containerRegistry");
                 }
             }
-            if (StorageAccount != null)
+            if (Optional.IsDefined(StorageAccount))
             {
                 writer.WritePropertyName("storageAccount"u8);
                 writer.WriteStringValue(StorageAccount);
             }
-            if (DiscoveryUri != null)
+            if (Optional.IsDefined(DiscoveryUri))
             {
                 writer.WritePropertyName("discoveryUrl"u8);
                 writer.WriteStringValue(DiscoveryUri.AbsoluteUri);
             }
-            if (HbiWorkspace.HasValue)
+            if (Optional.IsDefined(HbiWorkspace))
             {
                 writer.WritePropertyName("hbiWorkspace"u8);
                 writer.WriteBooleanValue(HbiWorkspace.Value);
             }
-            if (ImageBuildCompute != null)
+            if (Optional.IsDefined(ImageBuildCompute))
             {
                 writer.WritePropertyName("imageBuildCompute"u8);
                 writer.WriteStringValue(ImageBuildCompute);
             }
-            if (AllowPublicAccessWhenBehindVnet.HasValue)
+            if (Optional.IsDefined(AllowPublicAccessWhenBehindVnet))
             {
                 writer.WritePropertyName("allowPublicAccessWhenBehindVnet"u8);
                 writer.WriteBooleanValue(AllowPublicAccessWhenBehindVnet.Value);
             }
-            if (PrimaryUserAssignedIdentity != null)
+            if (Optional.IsDefined(PrimaryUserAssignedIdentity))
             {
                 writer.WritePropertyName("primaryUserAssignedIdentity"u8);
                 writer.WriteStringValue(PrimaryUserAssignedIdentity);
@@ -111,23 +111,23 @@ namespace MgmtParamOrdering
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
-            Optional<string> workspaceId = default;
-            Optional<string> description = default;
-            Optional<string> friendlyName = default;
-            Optional<string> keyVault = default;
-            Optional<string> applicationInsights = default;
-            Optional<string> containerRegistry = default;
-            Optional<string> storageAccount = default;
-            Optional<Uri> discoveryUrl = default;
-            Optional<ProvisioningState> provisioningState = default;
-            Optional<bool> hbiWorkspace = default;
-            Optional<string> serviceProvisionedResourceGroup = default;
-            Optional<int> privateLinkCount = default;
-            Optional<string> imageBuildCompute = default;
-            Optional<bool> allowPublicAccessWhenBehindVnet = default;
-            Optional<string> primaryUserAssignedIdentity = default;
-            Optional<Guid> tenantId = default;
+            SystemData systemData = default;
+            string workspaceId = default;
+            string description = default;
+            string friendlyName = default;
+            string keyVault = default;
+            string applicationInsights = default;
+            string containerRegistry = default;
+            string storageAccount = default;
+            Uri discoveryUrl = default;
+            ProvisioningState? provisioningState = default;
+            bool? hbiWorkspace = default;
+            string serviceProvisionedResourceGroup = default;
+            int? privateLinkCount = default;
+            string imageBuildCompute = default;
+            bool? allowPublicAccessWhenBehindVnet = default;
+            string primaryUserAssignedIdentity = default;
+            Guid? tenantId = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("tags"u8))
@@ -295,7 +295,29 @@ namespace MgmtParamOrdering
                     continue;
                 }
             }
-            return new WorkspaceData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, workspaceId.Value, description.Value, friendlyName.Value, keyVault.Value, applicationInsights.Value, containerRegistry.Value, storageAccount.Value, discoveryUrl.Value, Optional.ToNullable(provisioningState), Optional.ToNullable(hbiWorkspace), serviceProvisionedResourceGroup.Value, Optional.ToNullable(privateLinkCount), imageBuildCompute.Value, Optional.ToNullable(allowPublicAccessWhenBehindVnet), primaryUserAssignedIdentity.Value, Optional.ToNullable(tenantId));
+            return new WorkspaceData(
+                id,
+                name,
+                type,
+                systemData,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                workspaceId,
+                description,
+                friendlyName,
+                keyVault,
+                applicationInsights,
+                containerRegistry,
+                storageAccount,
+                discoveryUrl,
+                provisioningState,
+                hbiWorkspace,
+                serviceProvisionedResourceGroup,
+                privateLinkCount,
+                imageBuildCompute,
+                allowPublicAccessWhenBehindVnet,
+                primaryUserAssignedIdentity,
+                tenantId);
         }
     }
 }

@@ -83,18 +83,8 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithNonResChName"/> or <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<ResGrpParentWithNonResChResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string resGrpParentWithNonResChName, ResGrpParentWithNonResChData data, CancellationToken cancellationToken = default)
         {
-            if (resGrpParentWithNonResChName == null)
-            {
-                throw new ArgumentNullException(nameof(resGrpParentWithNonResChName));
-            }
-            if (resGrpParentWithNonResChName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resGrpParentWithNonResChName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(resGrpParentWithNonResChName, nameof(resGrpParentWithNonResChName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _resGrpParentWithNonResChClientDiagnostics.CreateScope("ResGrpParentWithNonResChCollection.CreateOrUpdate");
             scope.Start();
@@ -142,18 +132,8 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithNonResChName"/> or <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<ResGrpParentWithNonResChResource> CreateOrUpdate(WaitUntil waitUntil, string resGrpParentWithNonResChName, ResGrpParentWithNonResChData data, CancellationToken cancellationToken = default)
         {
-            if (resGrpParentWithNonResChName == null)
-            {
-                throw new ArgumentNullException(nameof(resGrpParentWithNonResChName));
-            }
-            if (resGrpParentWithNonResChName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resGrpParentWithNonResChName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(resGrpParentWithNonResChName, nameof(resGrpParentWithNonResChName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _resGrpParentWithNonResChClientDiagnostics.CreateScope("ResGrpParentWithNonResChCollection.CreateOrUpdate");
             scope.Start();
@@ -199,14 +179,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithNonResChName"/> is null. </exception>
         public virtual async Task<Response<ResGrpParentWithNonResChResource>> GetAsync(string resGrpParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            if (resGrpParentWithNonResChName == null)
-            {
-                throw new ArgumentNullException(nameof(resGrpParentWithNonResChName));
-            }
-            if (resGrpParentWithNonResChName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resGrpParentWithNonResChName));
-            }
+            Argument.AssertNotNullOrEmpty(resGrpParentWithNonResChName, nameof(resGrpParentWithNonResChName));
 
             using var scope = _resGrpParentWithNonResChClientDiagnostics.CreateScope("ResGrpParentWithNonResChCollection.Get");
             scope.Start();
@@ -251,14 +224,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithNonResChName"/> is null. </exception>
         public virtual Response<ResGrpParentWithNonResChResource> Get(string resGrpParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            if (resGrpParentWithNonResChName == null)
-            {
-                throw new ArgumentNullException(nameof(resGrpParentWithNonResChName));
-            }
-            if (resGrpParentWithNonResChName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resGrpParentWithNonResChName));
-            }
+            Argument.AssertNotNullOrEmpty(resGrpParentWithNonResChName, nameof(resGrpParentWithNonResChName));
 
             using var scope = _resGrpParentWithNonResChClientDiagnostics.CreateScope("ResGrpParentWithNonResChCollection.Get");
             scope.Start();
@@ -363,14 +329,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithNonResChName"/> is null. </exception>
         public virtual async Task<Response<bool>> ExistsAsync(string resGrpParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            if (resGrpParentWithNonResChName == null)
-            {
-                throw new ArgumentNullException(nameof(resGrpParentWithNonResChName));
-            }
-            if (resGrpParentWithNonResChName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resGrpParentWithNonResChName));
-            }
+            Argument.AssertNotNullOrEmpty(resGrpParentWithNonResChName, nameof(resGrpParentWithNonResChName));
 
             using var scope = _resGrpParentWithNonResChClientDiagnostics.CreateScope("ResGrpParentWithNonResChCollection.Exists");
             scope.Start();
@@ -413,14 +372,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithNonResChName"/> is null. </exception>
         public virtual Response<bool> Exists(string resGrpParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            if (resGrpParentWithNonResChName == null)
-            {
-                throw new ArgumentNullException(nameof(resGrpParentWithNonResChName));
-            }
-            if (resGrpParentWithNonResChName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resGrpParentWithNonResChName));
-            }
+            Argument.AssertNotNullOrEmpty(resGrpParentWithNonResChName, nameof(resGrpParentWithNonResChName));
 
             using var scope = _resGrpParentWithNonResChClientDiagnostics.CreateScope("ResGrpParentWithNonResChCollection.Exists");
             scope.Start();
@@ -463,14 +415,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithNonResChName"/> is null. </exception>
         public virtual async Task<NullableResponse<ResGrpParentWithNonResChResource>> GetIfExistsAsync(string resGrpParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            if (resGrpParentWithNonResChName == null)
-            {
-                throw new ArgumentNullException(nameof(resGrpParentWithNonResChName));
-            }
-            if (resGrpParentWithNonResChName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resGrpParentWithNonResChName));
-            }
+            Argument.AssertNotNullOrEmpty(resGrpParentWithNonResChName, nameof(resGrpParentWithNonResChName));
 
             using var scope = _resGrpParentWithNonResChClientDiagnostics.CreateScope("ResGrpParentWithNonResChCollection.GetIfExists");
             scope.Start();
@@ -515,14 +460,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithNonResChName"/> is null. </exception>
         public virtual NullableResponse<ResGrpParentWithNonResChResource> GetIfExists(string resGrpParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            if (resGrpParentWithNonResChName == null)
-            {
-                throw new ArgumentNullException(nameof(resGrpParentWithNonResChName));
-            }
-            if (resGrpParentWithNonResChName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resGrpParentWithNonResChName));
-            }
+            Argument.AssertNotNullOrEmpty(resGrpParentWithNonResChName, nameof(resGrpParentWithNonResChName));
 
             using var scope = _resGrpParentWithNonResChClientDiagnostics.CreateScope("ResGrpParentWithNonResChCollection.GetIfExists");
             scope.Start();

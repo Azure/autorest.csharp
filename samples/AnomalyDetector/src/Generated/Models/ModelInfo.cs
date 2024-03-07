@@ -7,7 +7,7 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
+using AnomalyDetector;
 
 namespace AnomalyDetector.Models
 {
@@ -66,10 +66,7 @@ namespace AnomalyDetector.Models
         /// <exception cref="ArgumentNullException"> <paramref name="dataSource"/> is null. </exception>
         public ModelInfo(string dataSource, DateTimeOffset startTime, DateTimeOffset endTime)
         {
-            if (dataSource == null)
-            {
-                throw new ArgumentNullException(nameof(dataSource));
-            }
+            Argument.AssertNotNull(dataSource, nameof(dataSource));
 
             DataSource = dataSource;
             StartTime = startTime;

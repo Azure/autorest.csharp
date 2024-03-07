@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 using MgmtResourceName;
 
 namespace MgmtResourceName.Models
@@ -21,7 +20,7 @@ namespace MgmtResourceName.Models
                 return null;
             }
             IReadOnlyList<ProviderOperationData> value = default;
-            Optional<string> nextLink = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -44,7 +43,7 @@ namespace MgmtResourceName.Models
                     continue;
                 }
             }
-            return new ProviderOperationsMetadataListResult(value ?? new ChangeTrackingList<ProviderOperationData>(), nextLink.Value);
+            return new ProviderOperationsMetadataListResult(value ?? new ChangeTrackingList<ProviderOperationData>(), nextLink);
         }
     }
 }

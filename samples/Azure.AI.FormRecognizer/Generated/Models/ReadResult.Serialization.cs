@@ -7,7 +7,7 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
+using Azure.AI.FormRecognizer;
 
 namespace Azure.AI.FormRecognizer.Models
 {
@@ -24,7 +24,7 @@ namespace Azure.AI.FormRecognizer.Models
             float width = default;
             float height = default;
             LengthUnit unit = default;
-            Optional<Language> language = default;
+            Language? language = default;
             IReadOnlyList<TextLine> lines = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -77,7 +77,14 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            return new ReadResult(page, angle, width, height, unit, Optional.ToNullable(language), lines ?? new ChangeTrackingList<TextLine>());
+            return new ReadResult(
+                page,
+                angle,
+                width,
+                height,
+                unit,
+                language,
+                lines ?? new ChangeTrackingList<TextLine>());
         }
     }
 }

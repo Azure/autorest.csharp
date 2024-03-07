@@ -17,19 +17,19 @@ namespace MgmtMockAndSample
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Priority.HasValue)
+            if (Optional.IsDefined(Priority))
             {
                 writer.WritePropertyName("priority"u8);
                 writer.WriteNumberValue(Priority.Value);
             }
-            if (!(RuleCollections is ChangeTrackingList<FirewallPolicyRuleCollection> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(RuleCollections))
             {
                 writer.WritePropertyName("ruleCollections"u8);
                 writer.WriteStartArray();
@@ -49,13 +49,13 @@ namespace MgmtMockAndSample
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> etag = default;
-            Optional<ResourceType> type = default;
-            Optional<string> id = default;
-            Optional<int> priority = default;
+            string name = default;
+            string etag = default;
+            ResourceType? type = default;
+            string id = default;
+            int? priority = default;
             IList<FirewallPolicyRuleCollection> ruleCollections = default;
-            Optional<ProvisioningState> provisioningState = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -127,7 +127,14 @@ namespace MgmtMockAndSample
                     continue;
                 }
             }
-            return new FirewallPolicyRuleCollectionGroupData(id.Value, name.Value, etag.Value, Optional.ToNullable(type), Optional.ToNullable(priority), ruleCollections ?? new ChangeTrackingList<FirewallPolicyRuleCollection>(), Optional.ToNullable(provisioningState));
+            return new FirewallPolicyRuleCollectionGroupData(
+                id,
+                name,
+                etag,
+                type,
+                priority,
+                ruleCollections ?? new ChangeTrackingList<FirewallPolicyRuleCollection>(),
+                provisioningState);
         }
     }
 }

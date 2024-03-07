@@ -160,7 +160,7 @@ FloatLiteral client = new OptionalClient().GetFloatLiteralClient();
 
 FloatLiteralProperty body = new FloatLiteralProperty
 {
-    Property = FloatLiteralPropertyProperty._12,
+    Property = FloatLiteralPropertyProperty._125,
 };
 Response response = await client.PutAllAsync(body);
 ]]></code></example>
@@ -180,7 +180,7 @@ FloatLiteral client = new OptionalClient().GetFloatLiteralClient();
 
 FloatLiteralProperty body = new FloatLiteralProperty
 {
-    Property = FloatLiteralPropertyProperty._12,
+    Property = FloatLiteralPropertyProperty._125,
 };
 Response response = client.PutAll(body);
 ]]></code></example>
@@ -202,7 +202,7 @@ FloatLiteral client = new OptionalClient().GetFloatLiteralClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    property = 1.2F,
+    property = 1.25F,
 });
 Response response = await client.PutAllAsync(content);
 
@@ -226,7 +226,7 @@ FloatLiteral client = new OptionalClient().GetFloatLiteralClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    property = 1.2F,
+    property = 1.25F,
 });
 Response response = client.PutAll(content);
 
@@ -248,7 +248,7 @@ FloatLiteral client = new OptionalClient().GetFloatLiteralClient();
 
 FloatLiteralProperty body = new FloatLiteralProperty
 {
-    Property = FloatLiteralPropertyProperty._12,
+    Property = FloatLiteralPropertyProperty._125,
 };
 Response response = await client.PutDefaultAsync(body);
 ]]></code></example>
@@ -268,7 +268,7 @@ FloatLiteral client = new OptionalClient().GetFloatLiteralClient();
 
 FloatLiteralProperty body = new FloatLiteralProperty
 {
-    Property = FloatLiteralPropertyProperty._12,
+    Property = FloatLiteralPropertyProperty._125,
 };
 Response response = client.PutDefault(body);
 ]]></code></example>
@@ -290,7 +290,7 @@ FloatLiteral client = new OptionalClient().GetFloatLiteralClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    property = 1.2F,
+    property = 1.25F,
 });
 Response response = await client.PutDefaultAsync(content);
 
@@ -314,7 +314,7 @@ FloatLiteral client = new OptionalClient().GetFloatLiteralClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    property = 1.2F,
+    property = 1.25F,
 });
 Response response = client.PutDefault(content);
 

@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Network.Management.Interface;
 
 namespace Azure.Network.Management.Interface.Models
 {
@@ -15,17 +16,17 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (DdosCustomPolicy != null)
+            if (Optional.IsDefined(DdosCustomPolicy))
             {
                 writer.WritePropertyName("ddosCustomPolicy"u8);
                 writer.WriteObjectValue(DdosCustomPolicy);
             }
-            if (ProtectionCoverage.HasValue)
+            if (Optional.IsDefined(ProtectionCoverage))
             {
                 writer.WritePropertyName("protectionCoverage"u8);
                 writer.WriteStringValue(ProtectionCoverage.Value.ToString());
             }
-            if (ProtectedIP.HasValue)
+            if (Optional.IsDefined(ProtectedIP))
             {
                 writer.WritePropertyName("protectedIP"u8);
                 writer.WriteBooleanValue(ProtectedIP.Value);
@@ -39,9 +40,9 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<SubResource> ddosCustomPolicy = default;
-            Optional<DdosSettingsProtectionCoverage> protectionCoverage = default;
-            Optional<bool> protectedIP = default;
+            SubResource ddosCustomPolicy = default;
+            DdosSettingsProtectionCoverage? protectionCoverage = default;
+            bool? protectedIP = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("ddosCustomPolicy"u8))
@@ -72,7 +73,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new DdosSettings(ddosCustomPolicy.Value, Optional.ToNullable(protectionCoverage), Optional.ToNullable(protectedIP));
+            return new DdosSettings(ddosCustomPolicy, protectionCoverage, protectedIP);
         }
     }
 }

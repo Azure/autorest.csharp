@@ -61,18 +61,8 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/Glossary.xml" path="doc/members/member[@name='DoSomethingAsync(string,string,CancellationToken)']/*" />
         public virtual async Task<Response<Thing>> DoSomethingAsync(string id, string h1, CancellationToken cancellationToken = default)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-            if (id.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(id));
-            }
-            if (h1 == null)
-            {
-                throw new ArgumentNullException(nameof(h1));
-            }
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(h1, nameof(h1));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await DoSomethingAsync(id, h1, context).ConfigureAwait(false);
@@ -88,18 +78,8 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/Glossary.xml" path="doc/members/member[@name='DoSomething(string,string,CancellationToken)']/*" />
         public virtual Response<Thing> DoSomething(string id, string h1, CancellationToken cancellationToken = default)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-            if (id.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(id));
-            }
-            if (h1 == null)
-            {
-                throw new ArgumentNullException(nameof(h1));
-            }
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(h1, nameof(h1));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = DoSomething(id, h1, context);
@@ -131,18 +111,8 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/Glossary.xml" path="doc/members/member[@name='DoSomethingAsync(string,string,RequestContext)']/*" />
         public virtual async Task<Response> DoSomethingAsync(string id, string h1, RequestContext context)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-            if (id.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(id));
-            }
-            if (h1 == null)
-            {
-                throw new ArgumentNullException(nameof(h1));
-            }
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(h1, nameof(h1));
 
             using var scope = ClientDiagnostics.CreateScope("Glossary.DoSomething");
             scope.Start();
@@ -183,18 +153,8 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/Glossary.xml" path="doc/members/member[@name='DoSomething(string,string,RequestContext)']/*" />
         public virtual Response DoSomething(string id, string h1, RequestContext context)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-            if (id.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(id));
-            }
-            if (h1 == null)
-            {
-                throw new ArgumentNullException(nameof(h1));
-            }
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(h1, nameof(h1));
 
             using var scope = ClientDiagnostics.CreateScope("Glossary.DoSomething");
             scope.Start();

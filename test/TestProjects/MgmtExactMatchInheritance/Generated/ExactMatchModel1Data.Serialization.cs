@@ -21,12 +21,12 @@ namespace MgmtExactMatchInheritance
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (New != null)
+            if (Optional.IsDefined(New))
             {
                 writer.WritePropertyName("new"u8);
                 writer.WriteStringValue(New);
             }
-            if (!(SupportingUris is ChangeTrackingList<Uri> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(SupportingUris))
             {
                 writer.WritePropertyName("supportingUris"u8);
                 writer.WriteStartArray();
@@ -41,100 +41,105 @@ namespace MgmtExactMatchInheritance
                 }
                 writer.WriteEndArray();
             }
-            if (Type1.HasValue)
+            if (Optional.IsDefined(Type1))
             {
                 writer.WritePropertyName("type1"u8);
                 writer.WriteStringValue(Type1.Value.ToString());
             }
-            if (Type2.HasValue)
+            if (Optional.IsDefined(Type2))
             {
                 writer.WritePropertyName("type2"u8);
                 writer.WriteStringValue(Type2.Value.ToString());
             }
-            if (Type3 != null)
+            if (Optional.IsDefined(Type3))
             {
                 writer.WritePropertyName("type3"u8);
                 writer.WriteStringValue(Type3.ToString());
             }
-            if (Type4 != null)
+            if (Optional.IsDefined(Type4))
             {
                 writer.WritePropertyName("type4"u8);
                 writer.WriteObjectValue(Type4);
             }
-            if (Type5 != null)
+            if (Optional.IsDefined(Type5))
             {
                 writer.WritePropertyName("type5"u8);
                 JsonSerializer.Serialize(writer, Type5);
             }
-            if (Type6 != null)
+            if (Optional.IsDefined(Type6))
             {
                 writer.WritePropertyName("type6"u8);
                 JsonSerializer.Serialize(writer, Type6);
             }
-            if (Type7 != null)
+            if (Optional.IsDefined(Type7))
             {
                 writer.WritePropertyName("type7"u8);
                 JsonSerializer.Serialize(writer, Type7);
             }
-            if (Type8 != null)
+            if (Optional.IsDefined(Type8))
             {
                 writer.WritePropertyName("type8"u8);
                 JsonSerializer.Serialize(writer, Type8);
             }
-            if (Type9 != null)
+            if (Optional.IsDefined(Type9))
             {
                 writer.WritePropertyName("type9"u8);
                 JsonSerializer.Serialize(writer, Type9);
             }
-            if (Type10 != null)
+            if (Optional.IsDefined(Type10))
             {
                 writer.WritePropertyName("type10"u8);
                 JsonSerializer.Serialize(writer, Type10);
             }
-            if (Type11 != null)
+            if (Optional.IsDefined(Type11))
             {
                 writer.WritePropertyName("type11"u8);
                 JsonSerializer.Serialize(writer, Type11);
             }
-            if (Type12 != null)
+            if (Optional.IsDefined(Type12))
             {
                 writer.WritePropertyName("type12"u8);
                 JsonSerializer.Serialize(writer, Type12);
             }
-            if (Type13 != null)
+            if (Optional.IsDefined(Type13))
             {
                 writer.WritePropertyName("type13"u8);
                 JsonSerializer.Serialize(writer, Type13);
             }
-            if (Type14 != null)
+            if (Optional.IsDefined(Type14))
             {
                 writer.WritePropertyName("type14"u8);
                 JsonSerializer.Serialize(writer, Type14);
             }
-            if (Type15 != null)
+            if (Optional.IsDefined(Type15))
             {
                 writer.WritePropertyName("type15"u8);
                 JsonSerializer.Serialize(writer, Type15);
             }
-            if (Type16 != null)
+            if (Optional.IsDefined(Type16))
             {
                 writer.WritePropertyName("type16"u8);
                 JsonSerializer.Serialize(writer, Type16);
             }
-            if (Type17 != null)
+            if (Optional.IsDefined(Type17))
             {
                 writer.WritePropertyName("type17"u8);
                 JsonSerializer.Serialize(writer, Type17);
             }
-            if (Type18 != null)
+            if (Optional.IsDefined(Type18))
             {
                 writer.WritePropertyName("type18"u8);
                 JsonSerializer.Serialize(writer, Type18);
             }
-            if (Type19 != null)
+            if (Optional.IsDefined(Type19))
             {
                 writer.WritePropertyName("type19"u8);
                 JsonSerializer.Serialize(writer, Type19);
+            }
+            if (Optional.IsDefined(Type20))
+            {
+                writer.WritePropertyName("type20"u8);
+                JsonSerializer.Serialize(writer, Type20);
             }
             writer.WriteEndObject();
         }
@@ -145,31 +150,32 @@ namespace MgmtExactMatchInheritance
             {
                 return null;
             }
-            Optional<string> @new = default;
+            string @new = default;
             IList<Uri> supportingUris = default;
-            Optional<Type1> type1 = default;
-            Optional<Type2> type2 = default;
-            Optional<IPAddress> type3 = default;
-            Optional<object> type4 = default;
-            Optional<DataFactoryElement<string>> type5 = default;
-            Optional<DataFactoryElement<double>> type6 = default;
-            Optional<DataFactoryElement<bool>> type7 = default;
-            Optional<DataFactoryElement<int>> type8 = default;
-            Optional<DataFactoryElement<BinaryData>> type9 = default;
-            Optional<DataFactoryElement<IList<SeparateClass>>> type10 = default;
-            Optional<DataFactoryElement<IList<string>>> type11 = default;
-            Optional<DataFactoryElement<IDictionary<string, string>>> type12 = default;
-            Optional<DataFactoryElement<IList<SeparateClass>>> type13 = default;
-            Optional<DataFactoryElement<DateTimeOffset>> type14 = default;
-            Optional<DataFactoryElement<TimeSpan>> type15 = default;
-            Optional<DataFactoryElement<Uri>> type16 = default;
-            Optional<DataFactoryLinkedServiceReference> type17 = default;
-            Optional<DataFactorySecretString> type18 = default;
-            Optional<DataFactoryKeyVaultSecret> type19 = default;
+            Type1? type1 = default;
+            Type2? type2 = default;
+            IPAddress type3 = default;
+            object type4 = default;
+            DataFactoryElement<string> type5 = default;
+            DataFactoryElement<double> type6 = default;
+            DataFactoryElement<bool> type7 = default;
+            DataFactoryElement<int> type8 = default;
+            DataFactoryElement<BinaryData> type9 = default;
+            DataFactoryElement<IList<SeparateClass>> type10 = default;
+            DataFactoryElement<IList<string>> type11 = default;
+            DataFactoryElement<IDictionary<string, string>> type12 = default;
+            DataFactoryElement<IList<SeparateClass>> type13 = default;
+            DataFactoryElement<DateTimeOffset> type14 = default;
+            DataFactoryElement<TimeSpan> type15 = default;
+            DataFactoryElement<Uri> type16 = default;
+            DataFactoryLinkedServiceReference type17 = default;
+            DataFactorySecretString type18 = default;
+            DataFactoryKeyVaultSecretReference type19 = default;
+            DataFactoryElement<IDictionary<string, BinaryData>> type20 = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
+            SystemData systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("new"u8))
@@ -366,7 +372,16 @@ namespace MgmtExactMatchInheritance
                     {
                         continue;
                     }
-                    type19 = JsonSerializer.Deserialize<DataFactoryKeyVaultSecret>(property.Value.GetRawText());
+                    type19 = JsonSerializer.Deserialize<DataFactoryKeyVaultSecretReference>(property.Value.GetRawText());
+                    continue;
+                }
+                if (property.NameEquals("type20"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    type20 = JsonSerializer.Deserialize<DataFactoryElement<IDictionary<string, BinaryData>>>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("id"u8))
@@ -394,7 +409,33 @@ namespace MgmtExactMatchInheritance
                     continue;
                 }
             }
-            return new ExactMatchModel1Data(id, name, type, systemData.Value, @new.Value, supportingUris ?? new ChangeTrackingList<Uri>(), Optional.ToNullable(type1), Optional.ToNullable(type2), type3.Value, type4.Value, type5.Value, type6.Value, type7.Value, type8.Value, type9.Value, type10.Value, type11.Value, type12.Value, type13.Value, type14.Value, type15.Value, type16.Value, type17, type18, type19);
+            return new ExactMatchModel1Data(
+                id,
+                name,
+                type,
+                systemData,
+                @new,
+                supportingUris ?? new ChangeTrackingList<Uri>(),
+                type1,
+                type2,
+                type3,
+                type4,
+                type5,
+                type6,
+                type7,
+                type8,
+                type9,
+                type10,
+                type11,
+                type12,
+                type13,
+                type14,
+                type15,
+                type16,
+                type17,
+                type18,
+                type19,
+                type20);
         }
     }
 }

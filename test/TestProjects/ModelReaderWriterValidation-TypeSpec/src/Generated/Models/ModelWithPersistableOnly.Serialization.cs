@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using ModelReaderWriterValidationTypeSpec;
 
 namespace ModelReaderWriterValidationTypeSpec.Models
 {
@@ -27,12 +28,12 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             }
 
             writer.WriteStartObject();
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (!(Fields is ChangeTrackingList<string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Fields))
             {
                 writer.WritePropertyName("fields"u8);
                 writer.WriteStartArray();
@@ -42,12 +43,12 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (NullProperty.HasValue)
+            if (Optional.IsDefined(NullProperty))
             {
                 writer.WritePropertyName("nullProperty"u8);
                 writer.WriteNumberValue(NullProperty.Value);
             }
-            if (!(KeyValuePairs is ChangeTrackingDictionary<string, string> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(KeyValuePairs))
             {
                 writer.WritePropertyName("keyValuePairs"u8);
                 writer.WriteStartObject();
@@ -101,9 +102,9 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             {
                 return null;
             }
-            Optional<string> name = default;
+            string name = default;
             IList<string> fields = default;
-            Optional<int> nullProperty = default;
+            int? nullProperty = default;
             IDictionary<string, string> keyValuePairs = default;
             int xProperty = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
@@ -163,7 +164,13 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ModelWithPersistableOnly(name.Value, fields ?? new ChangeTrackingList<string>(), Optional.ToNullable(nullProperty), keyValuePairs ?? new ChangeTrackingDictionary<string, string>(), xProperty, serializedAdditionalRawData);
+            return new ModelWithPersistableOnly(
+                name,
+                fields ?? new ChangeTrackingList<string>(),
+                nullProperty,
+                keyValuePairs ?? new ChangeTrackingDictionary<string, string>(),
+                xProperty,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ModelWithPersistableOnly>.Write(ModelReaderWriterOptions options)

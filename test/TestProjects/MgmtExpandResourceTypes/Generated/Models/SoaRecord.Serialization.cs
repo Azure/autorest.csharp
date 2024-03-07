@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtExpandResourceTypes;
 
 namespace MgmtExpandResourceTypes.Models
 {
@@ -15,37 +16,37 @@ namespace MgmtExpandResourceTypes.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Host != null)
+            if (Optional.IsDefined(Host))
             {
                 writer.WritePropertyName("host"u8);
                 writer.WriteStringValue(Host);
             }
-            if (Email != null)
+            if (Optional.IsDefined(Email))
             {
                 writer.WritePropertyName("email"u8);
                 writer.WriteStringValue(Email);
             }
-            if (SerialNumber.HasValue)
+            if (Optional.IsDefined(SerialNumber))
             {
                 writer.WritePropertyName("serialNumber"u8);
                 writer.WriteNumberValue(SerialNumber.Value);
             }
-            if (RefreshTime.HasValue)
+            if (Optional.IsDefined(RefreshTime))
             {
                 writer.WritePropertyName("refreshTime"u8);
                 writer.WriteNumberValue(RefreshTime.Value);
             }
-            if (RetryTime.HasValue)
+            if (Optional.IsDefined(RetryTime))
             {
                 writer.WritePropertyName("retryTime"u8);
                 writer.WriteNumberValue(RetryTime.Value);
             }
-            if (ExpireTime.HasValue)
+            if (Optional.IsDefined(ExpireTime))
             {
                 writer.WritePropertyName("expireTime"u8);
                 writer.WriteNumberValue(ExpireTime.Value);
             }
-            if (MinimumTtl.HasValue)
+            if (Optional.IsDefined(MinimumTtl))
             {
                 writer.WritePropertyName("minimumTTL"u8);
                 writer.WriteNumberValue(MinimumTtl.Value);
@@ -59,13 +60,13 @@ namespace MgmtExpandResourceTypes.Models
             {
                 return null;
             }
-            Optional<string> host = default;
-            Optional<string> email = default;
-            Optional<long> serialNumber = default;
-            Optional<long> refreshTime = default;
-            Optional<long> retryTime = default;
-            Optional<long> expireTime = default;
-            Optional<long> minimumTTL = default;
+            string host = default;
+            string email = default;
+            long? serialNumber = default;
+            long? refreshTime = default;
+            long? retryTime = default;
+            long? expireTime = default;
+            long? minimumTTL = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("host"u8))
@@ -124,7 +125,14 @@ namespace MgmtExpandResourceTypes.Models
                     continue;
                 }
             }
-            return new SoaRecord(host.Value, email.Value, Optional.ToNullable(serialNumber), Optional.ToNullable(refreshTime), Optional.ToNullable(retryTime), Optional.ToNullable(expireTime), Optional.ToNullable(minimumTTL));
+            return new SoaRecord(
+                host,
+                email,
+                serialNumber,
+                refreshTime,
+                retryTime,
+                expireTime,
+                minimumTTL);
         }
     }
 }

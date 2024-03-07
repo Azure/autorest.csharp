@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtAcronymMapping;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -15,7 +16,7 @@ namespace MgmtAcronymMapping.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (TerminateNotificationProfile != null)
+            if (Optional.IsDefined(TerminateNotificationProfile))
             {
                 writer.WritePropertyName("terminateNotificationProfile"u8);
                 writer.WriteObjectValue(TerminateNotificationProfile);
@@ -29,7 +30,7 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<TerminateNotificationProfile> terminateNotificationProfile = default;
+            TerminateNotificationProfile terminateNotificationProfile = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("terminateNotificationProfile"u8))
@@ -42,7 +43,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new ScheduledEventsProfile(terminateNotificationProfile.Value);
+            return new ScheduledEventsProfile(terminateNotificationProfile);
         }
     }
 }

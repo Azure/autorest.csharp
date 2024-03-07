@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using body_complex;
 
 namespace body_complex.Models
 {
@@ -26,7 +27,7 @@ namespace body_complex.Models
             }
 
             writer.WriteStartObject();
-            if (Field != null)
+            if (Optional.IsDefined(Field))
             {
                 writer.WritePropertyName("field"u8);
                 writer.WriteBase64StringValue(Field, "D");
@@ -69,7 +70,7 @@ namespace body_complex.Models
             {
                 return null;
             }
-            Optional<byte[]> field = default;
+            byte[] field = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -89,7 +90,7 @@ namespace body_complex.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ByteWrapper(field.Value, serializedAdditionalRawData);
+            return new ByteWrapper(field, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ByteWrapper>.Write(ModelReaderWriterOptions options)

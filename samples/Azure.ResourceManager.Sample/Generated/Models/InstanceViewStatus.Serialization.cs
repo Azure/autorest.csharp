@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -27,27 +28,27 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Code != null)
+            if (Optional.IsDefined(Code))
             {
                 writer.WritePropertyName("code"u8);
                 writer.WriteStringValue(Code);
             }
-            if (Level.HasValue)
+            if (Optional.IsDefined(Level))
             {
                 writer.WritePropertyName("level"u8);
                 writer.WriteStringValue(Level.Value.ToSerialString());
             }
-            if (DisplayStatus != null)
+            if (Optional.IsDefined(DisplayStatus))
             {
                 writer.WritePropertyName("displayStatus"u8);
                 writer.WriteStringValue(DisplayStatus);
             }
-            if (Message != null)
+            if (Optional.IsDefined(Message))
             {
                 writer.WritePropertyName("message"u8);
                 writer.WriteStringValue(Message);
             }
-            if (Time.HasValue)
+            if (Optional.IsDefined(Time))
             {
                 writer.WritePropertyName("time"u8);
                 writer.WriteStringValue(Time.Value, "O");
@@ -90,11 +91,11 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<string> code = default;
-            Optional<StatusLevelType> level = default;
-            Optional<string> displayStatus = default;
-            Optional<string> message = default;
-            Optional<DateTimeOffset> time = default;
+            string code = default;
+            StatusLevelType? level = default;
+            string displayStatus = default;
+            string message = default;
+            DateTimeOffset? time = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -138,7 +139,13 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new InstanceViewStatus(code.Value, Optional.ToNullable(level), displayStatus.Value, message.Value, Optional.ToNullable(time), serializedAdditionalRawData);
+            return new InstanceViewStatus(
+                code,
+                level,
+                displayStatus,
+                message,
+                time,
+                serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -146,7 +153,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Code != null)
+            if (Optional.IsDefined(Code))
             {
                 builder.Append("  code:");
                 if (Code.Contains(Environment.NewLine))
@@ -160,13 +167,13 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Level.HasValue)
+            if (Optional.IsDefined(Level))
             {
                 builder.Append("  level:");
                 builder.AppendLine($" '{Level.Value.ToSerialString()}'");
             }
 
-            if (DisplayStatus != null)
+            if (Optional.IsDefined(DisplayStatus))
             {
                 builder.Append("  displayStatus:");
                 if (DisplayStatus.Contains(Environment.NewLine))
@@ -180,7 +187,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Message != null)
+            if (Optional.IsDefined(Message))
             {
                 builder.Append("  message:");
                 if (Message.Contains(Environment.NewLine))
@@ -194,7 +201,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Time.HasValue)
+            if (Optional.IsDefined(Time))
             {
                 builder.Append("  time:");
                 var formattedDateTimeString = TypeFormatters.ToString(Time.Value, "o");

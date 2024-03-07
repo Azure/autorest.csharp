@@ -7,6 +7,7 @@ using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -32,7 +33,7 @@ namespace OpenAI.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            if (!(Functions is OptionalList<ChatCompletionFunctions> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Functions))
             {
                 writer.WritePropertyName("functions"u8);
                 writer.WriteStartArray();
@@ -42,7 +43,7 @@ namespace OpenAI.Models
                 }
                 writer.WriteEndArray();
             }
-            if (FunctionCall != null)
+            if (Optional.IsDefined(FunctionCall))
             {
                 writer.WritePropertyName("function_call"u8);
 #if NET6_0_OR_GREATER
@@ -54,7 +55,7 @@ namespace OpenAI.Models
                 }
 #endif
             }
-            if (Temperature.HasValue)
+            if (Optional.IsDefined(Temperature))
             {
                 if (Temperature != null)
                 {
@@ -66,7 +67,7 @@ namespace OpenAI.Models
                     writer.WriteNull("temperature");
                 }
             }
-            if (TopP.HasValue)
+            if (Optional.IsDefined(TopP))
             {
                 if (TopP != null)
                 {
@@ -78,7 +79,7 @@ namespace OpenAI.Models
                     writer.WriteNull("top_p");
                 }
             }
-            if (N.HasValue)
+            if (Optional.IsDefined(N))
             {
                 if (N != null)
                 {
@@ -90,7 +91,7 @@ namespace OpenAI.Models
                     writer.WriteNull("n");
                 }
             }
-            if (MaxTokens.HasValue)
+            if (Optional.IsDefined(MaxTokens))
             {
                 if (MaxTokens != null)
                 {
@@ -102,7 +103,7 @@ namespace OpenAI.Models
                     writer.WriteNull("max_tokens");
                 }
             }
-            if (Stop != null)
+            if (Optional.IsDefined(Stop))
             {
                 writer.WritePropertyName("stop"u8);
 #if NET6_0_OR_GREATER
@@ -114,7 +115,7 @@ namespace OpenAI.Models
                 }
 #endif
             }
-            if (PresencePenalty.HasValue)
+            if (Optional.IsDefined(PresencePenalty))
             {
                 if (PresencePenalty != null)
                 {
@@ -126,7 +127,7 @@ namespace OpenAI.Models
                     writer.WriteNull("presence_penalty");
                 }
             }
-            if (FrequencyPenalty.HasValue)
+            if (Optional.IsDefined(FrequencyPenalty))
             {
                 if (FrequencyPenalty != null)
                 {
@@ -138,7 +139,7 @@ namespace OpenAI.Models
                     writer.WriteNull("frequency_penalty");
                 }
             }
-            if (!(LogitBias is OptionalDictionary<string, long> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(LogitBias))
             {
                 if (LogitBias != null)
                 {
@@ -156,12 +157,12 @@ namespace OpenAI.Models
                     writer.WriteNull("logit_bias");
                 }
             }
-            if (User != null)
+            if (Optional.IsDefined(User))
             {
                 writer.WritePropertyName("user"u8);
                 writer.WriteStringValue(User);
             }
-            if (Stream.HasValue)
+            if (Optional.IsDefined(Stream))
             {
                 if (Stream != null)
                 {
@@ -214,17 +215,17 @@ namespace OpenAI.Models
             CreateChatCompletionRequestModel model = default;
             IList<ChatCompletionRequestMessage> messages = default;
             IList<ChatCompletionFunctions> functions = default;
-            OptionalProperty<BinaryData> functionCall = default;
-            OptionalProperty<double?> temperature = default;
-            OptionalProperty<double?> topP = default;
-            OptionalProperty<long?> n = default;
-            OptionalProperty<long?> maxTokens = default;
-            OptionalProperty<BinaryData> stop = default;
-            OptionalProperty<double?> presencePenalty = default;
-            OptionalProperty<double?> frequencyPenalty = default;
+            BinaryData functionCall = default;
+            double? temperature = default;
+            double? topP = default;
+            long? n = default;
+            long? maxTokens = default;
+            BinaryData stop = default;
+            double? presencePenalty = default;
+            double? frequencyPenalty = default;
             IDictionary<string, long> logitBias = default;
-            OptionalProperty<string> user = default;
-            OptionalProperty<bool?> stream = default;
+            string user = default;
+            bool? stream = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -371,7 +372,22 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new CreateChatCompletionRequest(model, messages, functions ?? new OptionalList<ChatCompletionFunctions>(), functionCall.Value, OptionalProperty.ToNullable(temperature), OptionalProperty.ToNullable(topP), OptionalProperty.ToNullable(n), OptionalProperty.ToNullable(maxTokens), stop.Value, OptionalProperty.ToNullable(presencePenalty), OptionalProperty.ToNullable(frequencyPenalty), logitBias ?? new OptionalDictionary<string, long>(), user.Value, OptionalProperty.ToNullable(stream), serializedAdditionalRawData);
+            return new CreateChatCompletionRequest(
+                model,
+                messages,
+                functions ?? new ChangeTrackingList<ChatCompletionFunctions>(),
+                functionCall,
+                temperature,
+                topP,
+                n,
+                maxTokens,
+                stop,
+                presencePenalty,
+                frequencyPenalty,
+                logitBias ?? new OptionalDictionary<string, long>(),
+                user,
+                stream,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<CreateChatCompletionRequest>.Write(ModelReaderWriterOptions options)

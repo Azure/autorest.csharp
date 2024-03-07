@@ -7,7 +7,7 @@ using System.ComponentModel;
 
 namespace OpenAI.Models
 {
-    /// <summary> Enum for model in CreateFineTuneRequest. </summary>
+    /// <summary> The CreateFineTuneRequestModel. </summary>
     public readonly partial struct CreateFineTuneRequestModel : IEquatable<CreateFineTuneRequestModel>
     {
         private readonly string _value;

@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using body_complex;
 
 namespace body_complex.Models
 {
@@ -26,17 +27,17 @@ namespace body_complex.Models
             }
 
             writer.WriteStartObject();
-            if (Field != null)
+            if (Optional.IsDefined(Field))
             {
                 writer.WritePropertyName("field"u8);
                 writer.WriteStringValue(Field);
             }
-            if (Empty != null)
+            if (Optional.IsDefined(Empty))
             {
                 writer.WritePropertyName("empty"u8);
                 writer.WriteStringValue(Empty);
             }
-            if (NullProperty != null)
+            if (Optional.IsDefined(NullProperty))
             {
                 writer.WritePropertyName("null"u8);
                 writer.WriteStringValue(NullProperty);
@@ -79,9 +80,9 @@ namespace body_complex.Models
             {
                 return null;
             }
-            Optional<string> field = default;
-            Optional<string> empty = default;
-            Optional<string> @null = default;
+            string field = default;
+            string empty = default;
+            string @null = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -107,7 +108,7 @@ namespace body_complex.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new StringWrapper(field.Value, empty.Value, @null.Value, serializedAdditionalRawData);
+            return new StringWrapper(field, empty, @null, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<StringWrapper>.Write(ModelReaderWriterOptions options)

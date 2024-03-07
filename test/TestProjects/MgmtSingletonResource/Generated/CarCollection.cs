@@ -82,18 +82,8 @@ namespace MgmtSingletonResource
         /// <exception cref="ArgumentNullException"> <paramref name="carName"/> or <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<CarResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string carName, CarData data, CancellationToken cancellationToken = default)
         {
-            if (carName == null)
-            {
-                throw new ArgumentNullException(nameof(carName));
-            }
-            if (carName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(carName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(carName, nameof(carName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _carClientDiagnostics.CreateScope("CarCollection.CreateOrUpdate");
             scope.Start();
@@ -140,18 +130,8 @@ namespace MgmtSingletonResource
         /// <exception cref="ArgumentNullException"> <paramref name="carName"/> or <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<CarResource> CreateOrUpdate(WaitUntil waitUntil, string carName, CarData data, CancellationToken cancellationToken = default)
         {
-            if (carName == null)
-            {
-                throw new ArgumentNullException(nameof(carName));
-            }
-            if (carName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(carName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(carName, nameof(carName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _carClientDiagnostics.CreateScope("CarCollection.CreateOrUpdate");
             scope.Start();
@@ -196,14 +176,7 @@ namespace MgmtSingletonResource
         /// <exception cref="ArgumentNullException"> <paramref name="carName"/> is null. </exception>
         public virtual async Task<Response<CarResource>> GetAsync(string carName, CancellationToken cancellationToken = default)
         {
-            if (carName == null)
-            {
-                throw new ArgumentNullException(nameof(carName));
-            }
-            if (carName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(carName));
-            }
+            Argument.AssertNotNullOrEmpty(carName, nameof(carName));
 
             using var scope = _carClientDiagnostics.CreateScope("CarCollection.Get");
             scope.Start();
@@ -247,14 +220,7 @@ namespace MgmtSingletonResource
         /// <exception cref="ArgumentNullException"> <paramref name="carName"/> is null. </exception>
         public virtual Response<CarResource> Get(string carName, CancellationToken cancellationToken = default)
         {
-            if (carName == null)
-            {
-                throw new ArgumentNullException(nameof(carName));
-            }
-            if (carName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(carName));
-            }
+            Argument.AssertNotNullOrEmpty(carName, nameof(carName));
 
             using var scope = _carClientDiagnostics.CreateScope("CarCollection.Get");
             scope.Start();
@@ -355,14 +321,7 @@ namespace MgmtSingletonResource
         /// <exception cref="ArgumentNullException"> <paramref name="carName"/> is null. </exception>
         public virtual async Task<Response<bool>> ExistsAsync(string carName, CancellationToken cancellationToken = default)
         {
-            if (carName == null)
-            {
-                throw new ArgumentNullException(nameof(carName));
-            }
-            if (carName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(carName));
-            }
+            Argument.AssertNotNullOrEmpty(carName, nameof(carName));
 
             using var scope = _carClientDiagnostics.CreateScope("CarCollection.Exists");
             scope.Start();
@@ -405,14 +364,7 @@ namespace MgmtSingletonResource
         /// <exception cref="ArgumentNullException"> <paramref name="carName"/> is null. </exception>
         public virtual Response<bool> Exists(string carName, CancellationToken cancellationToken = default)
         {
-            if (carName == null)
-            {
-                throw new ArgumentNullException(nameof(carName));
-            }
-            if (carName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(carName));
-            }
+            Argument.AssertNotNullOrEmpty(carName, nameof(carName));
 
             using var scope = _carClientDiagnostics.CreateScope("CarCollection.Exists");
             scope.Start();
@@ -455,14 +407,7 @@ namespace MgmtSingletonResource
         /// <exception cref="ArgumentNullException"> <paramref name="carName"/> is null. </exception>
         public virtual async Task<NullableResponse<CarResource>> GetIfExistsAsync(string carName, CancellationToken cancellationToken = default)
         {
-            if (carName == null)
-            {
-                throw new ArgumentNullException(nameof(carName));
-            }
-            if (carName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(carName));
-            }
+            Argument.AssertNotNullOrEmpty(carName, nameof(carName));
 
             using var scope = _carClientDiagnostics.CreateScope("CarCollection.GetIfExists");
             scope.Start();
@@ -507,14 +452,7 @@ namespace MgmtSingletonResource
         /// <exception cref="ArgumentNullException"> <paramref name="carName"/> is null. </exception>
         public virtual NullableResponse<CarResource> GetIfExists(string carName, CancellationToken cancellationToken = default)
         {
-            if (carName == null)
-            {
-                throw new ArgumentNullException(nameof(carName));
-            }
-            if (carName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(carName));
-            }
+            Argument.AssertNotNullOrEmpty(carName, nameof(carName));
 
             using var scope = _carClientDiagnostics.CreateScope("CarCollection.GetIfExists");
             scope.Start();

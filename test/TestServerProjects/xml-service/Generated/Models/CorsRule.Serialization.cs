@@ -68,7 +68,13 @@ namespace xml_service.Models
             {
                 maxAgeInSeconds = (int)maxAgeInSecondsElement;
             }
-            return new CorsRule(allowedOrigins, allowedMethods, allowedHeaders, exposedHeaders, maxAgeInSeconds, serializedAdditionalRawData: null);
+            return new CorsRule(
+                allowedOrigins,
+                allowedMethods,
+                allowedHeaders,
+                exposedHeaders,
+                maxAgeInSeconds,
+                serializedAdditionalRawData: null);
         }
 
         BinaryData IPersistableModel<CorsRule>.Write(ModelReaderWriterOptions options)

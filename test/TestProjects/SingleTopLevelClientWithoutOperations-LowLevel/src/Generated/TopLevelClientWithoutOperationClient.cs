@@ -47,14 +47,8 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public TopLevelClientWithoutOperationClient(Uri endpoint, AzureKeyCredential credential, TopLevelClientWithoutOperationClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(credential, nameof(credential));
             options ??= new TopLevelClientWithoutOperationClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

@@ -12,6 +12,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
+using xml_service;
 
 namespace xml_service.Models
 {
@@ -26,7 +27,7 @@ namespace xml_service.Models
             writer.WriteStartElement("Prefix");
             writer.WriteValue(Prefix);
             writer.WriteEndElement();
-            if (Marker != null)
+            if (Optional.IsDefined(Marker))
             {
                 writer.WriteStartElement("Marker");
                 writer.WriteValue(Marker);
@@ -38,7 +39,7 @@ namespace xml_service.Models
             writer.WriteStartElement("NextMarker");
             writer.WriteValue(NextMarker);
             writer.WriteEndElement();
-            if (!(Containers is ChangeTrackingList<Container> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Containers))
             {
                 writer.WriteStartElement("Containers");
                 foreach (var item in Containers)
@@ -91,7 +92,14 @@ namespace xml_service.Models
                 }
                 containers = array;
             }
-            return new ListContainersResponse(serviceEndpoint, prefix, marker, maxResults, containers, nextMarker, serializedAdditionalRawData: null);
+            return new ListContainersResponse(
+                serviceEndpoint,
+                prefix,
+                marker,
+                maxResults,
+                containers,
+                nextMarker,
+                serializedAdditionalRawData: null);
         }
 
         BinaryData IPersistableModel<ListContainersResponse>.Write(ModelReaderWriterOptions options)

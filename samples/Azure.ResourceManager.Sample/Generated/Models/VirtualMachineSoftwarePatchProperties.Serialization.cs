@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -28,27 +29,27 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W" && PatchId != null)
+            if (options.Format != "W" && Optional.IsDefined(PatchId))
             {
                 writer.WritePropertyName("patchId"u8);
                 writer.WriteStringValue(PatchId);
             }
-            if (options.Format != "W" && Name != null)
+            if (options.Format != "W" && Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format != "W" && Version != null)
+            if (options.Format != "W" && Optional.IsDefined(Version))
             {
                 writer.WritePropertyName("version"u8);
                 writer.WriteStringValue(Version);
             }
-            if (options.Format != "W" && Kbid != null)
+            if (options.Format != "W" && Optional.IsDefined(Kbid))
             {
                 writer.WritePropertyName("kbid"u8);
                 writer.WriteStringValue(Kbid);
             }
-            if (options.Format != "W" && !(Classifications is ChangeTrackingList<string> collection && collection.IsUndefined))
+            if (options.Format != "W" && Optional.IsCollectionDefined(Classifications))
             {
                 writer.WritePropertyName("classifications"u8);
                 writer.WriteStartArray();
@@ -58,27 +59,27 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W" && RebootBehavior.HasValue)
+            if (options.Format != "W" && Optional.IsDefined(RebootBehavior))
             {
                 writer.WritePropertyName("rebootBehavior"u8);
                 writer.WriteStringValue(RebootBehavior.Value.ToString());
             }
-            if (options.Format != "W" && ActivityId != null)
+            if (options.Format != "W" && Optional.IsDefined(ActivityId))
             {
                 writer.WritePropertyName("activityId"u8);
                 writer.WriteStringValue(ActivityId);
             }
-            if (options.Format != "W" && PublishedOn.HasValue)
+            if (options.Format != "W" && Optional.IsDefined(PublishedOn))
             {
                 writer.WritePropertyName("publishedDate"u8);
                 writer.WriteStringValue(PublishedOn.Value, "O");
             }
-            if (options.Format != "W" && LastModifiedOn.HasValue)
+            if (options.Format != "W" && Optional.IsDefined(LastModifiedOn))
             {
                 writer.WritePropertyName("lastModifiedDateTime"u8);
                 writer.WriteStringValue(LastModifiedOn.Value, "O");
             }
-            if (options.Format != "W" && AssessmentState.HasValue)
+            if (options.Format != "W" && Optional.IsDefined(AssessmentState))
             {
                 writer.WritePropertyName("assessmentState"u8);
                 writer.WriteStringValue(AssessmentState.Value.ToString());
@@ -121,16 +122,16 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<string> patchId = default;
-            Optional<string> name = default;
-            Optional<string> version = default;
-            Optional<string> kbid = default;
+            string patchId = default;
+            string name = default;
+            string version = default;
+            string kbid = default;
             IReadOnlyList<string> classifications = default;
-            Optional<SoftwareUpdateRebootBehavior> rebootBehavior = default;
-            Optional<string> activityId = default;
-            Optional<DateTimeOffset> publishedDate = default;
-            Optional<DateTimeOffset> lastModifiedDateTime = default;
-            Optional<PatchAssessmentState> assessmentState = default;
+            SoftwareUpdateRebootBehavior? rebootBehavior = default;
+            string activityId = default;
+            DateTimeOffset? publishedDate = default;
+            DateTimeOffset? lastModifiedDateTime = default;
+            PatchAssessmentState? assessmentState = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -216,7 +217,18 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineSoftwarePatchProperties(patchId.Value, name.Value, version.Value, kbid.Value, classifications ?? new ChangeTrackingList<string>(), Optional.ToNullable(rebootBehavior), activityId.Value, Optional.ToNullable(publishedDate), Optional.ToNullable(lastModifiedDateTime), Optional.ToNullable(assessmentState), serializedAdditionalRawData);
+            return new VirtualMachineSoftwarePatchProperties(
+                patchId,
+                name,
+                version,
+                kbid,
+                classifications ?? new ChangeTrackingList<string>(),
+                rebootBehavior,
+                activityId,
+                publishedDate,
+                lastModifiedDateTime,
+                assessmentState,
+                serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -224,7 +236,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 builder.Append("  name:");
                 if (Name.Contains(Environment.NewLine))
@@ -238,7 +250,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (PatchId != null)
+            if (Optional.IsDefined(PatchId))
             {
                 builder.Append("  patchId:");
                 if (PatchId.Contains(Environment.NewLine))
@@ -252,7 +264,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Version != null)
+            if (Optional.IsDefined(Version))
             {
                 builder.Append("  version:");
                 if (Version.Contains(Environment.NewLine))
@@ -266,7 +278,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Kbid != null)
+            if (Optional.IsDefined(Kbid))
             {
                 builder.Append("  kbid:");
                 if (Kbid.Contains(Environment.NewLine))
@@ -280,7 +292,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (!(Classifications is ChangeTrackingList<string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Classifications))
             {
                 if (Classifications.Any())
                 {
@@ -307,13 +319,13 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (RebootBehavior.HasValue)
+            if (Optional.IsDefined(RebootBehavior))
             {
                 builder.Append("  rebootBehavior:");
                 builder.AppendLine($" '{RebootBehavior.Value.ToString()}'");
             }
 
-            if (ActivityId != null)
+            if (Optional.IsDefined(ActivityId))
             {
                 builder.Append("  activityId:");
                 if (ActivityId.Contains(Environment.NewLine))
@@ -327,21 +339,21 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (PublishedOn.HasValue)
+            if (Optional.IsDefined(PublishedOn))
             {
                 builder.Append("  publishedDate:");
                 var formattedDateTimeString = TypeFormatters.ToString(PublishedOn.Value, "o");
                 builder.AppendLine($" '{formattedDateTimeString}'");
             }
 
-            if (LastModifiedOn.HasValue)
+            if (Optional.IsDefined(LastModifiedOn))
             {
                 builder.Append("  lastModifiedDateTime:");
                 var formattedDateTimeString = TypeFormatters.ToString(LastModifiedOn.Value, "o");
                 builder.AppendLine($" '{formattedDateTimeString}'");
             }
 
-            if (AssessmentState.HasValue)
+            if (Optional.IsDefined(AssessmentState))
             {
                 builder.Append("  assessmentState:");
                 builder.AppendLine($" '{AssessmentState.Value.ToString()}'");

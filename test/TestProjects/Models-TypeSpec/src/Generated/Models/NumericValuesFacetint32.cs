@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ModelsTypeSpec;
 
 namespace ModelsTypeSpec.Models
 {
@@ -21,14 +22,8 @@ namespace ModelsTypeSpec.Models
         /// <exception cref="ArgumentNullException"> <paramref name="field"/> or <paramref name="values"/> is null. </exception>
         internal NumericValuesFacetint32(string field, IEnumerable<int> values, int value) : base(field)
         {
-            if (field == null)
-            {
-                throw new ArgumentNullException(nameof(field));
-            }
-            if (values == null)
-            {
-                throw new ArgumentNullException(nameof(values));
-            }
+            Argument.AssertNotNull(field, nameof(field));
+            Argument.AssertNotNull(values, nameof(values));
 
             Values = values.ToList();
             Value = value;

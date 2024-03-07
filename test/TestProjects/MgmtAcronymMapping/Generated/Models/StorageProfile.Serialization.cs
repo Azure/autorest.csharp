@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using MgmtAcronymMapping;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -16,17 +17,17 @@ namespace MgmtAcronymMapping.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (ImageReference != null)
+            if (Optional.IsDefined(ImageReference))
             {
                 writer.WritePropertyName("imageReference"u8);
                 writer.WriteObjectValue(ImageReference);
             }
-            if (OSDisk != null)
+            if (Optional.IsDefined(OSDisk))
             {
                 writer.WritePropertyName("osDisk"u8);
                 writer.WriteObjectValue(OSDisk);
             }
-            if (!(DataDisks is ChangeTrackingList<DataDisk> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(DataDisks))
             {
                 writer.WritePropertyName("dataDisks"u8);
                 writer.WriteStartArray();
@@ -45,8 +46,8 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<ImageReference> imageReference = default;
-            Optional<OSDisk> osDisk = default;
+            ImageReference imageReference = default;
+            OSDisk osDisk = default;
             IList<DataDisk> dataDisks = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -83,7 +84,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new StorageProfile(imageReference.Value, osDisk.Value, dataDisks ?? new ChangeTrackingList<DataDisk>());
+            return new StorageProfile(imageReference, osDisk, dataDisks ?? new ChangeTrackingList<DataDisk>());
         }
     }
 }

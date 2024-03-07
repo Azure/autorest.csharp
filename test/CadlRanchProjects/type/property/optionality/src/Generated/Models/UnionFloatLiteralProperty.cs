@@ -72,10 +72,10 @@ namespace _Type.Property.Optionality.Models
         /// Supported types:
         /// <list type="bullet">
         /// <item>
-        /// <description>1.2</description>
+        /// <description>1.25</description>
         /// </item>
         /// <item>
-        /// <description>2.3</description>
+        /// <description>2.375</description>
         /// </item>
         /// </list>
         /// </remarks>

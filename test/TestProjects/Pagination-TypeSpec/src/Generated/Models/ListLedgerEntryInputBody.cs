@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using Pagination;
 
 namespace Pagination.Models
 {
@@ -51,10 +52,7 @@ namespace Pagination.Models
         /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/> is null. </exception>
         public ListLedgerEntryInputBody(string requiredString, int requiredInt)
         {
-            if (requiredString == null)
-            {
-                throw new ArgumentNullException(nameof(requiredString));
-            }
+            Argument.AssertNotNull(requiredString, nameof(requiredString));
 
             RequiredString = requiredString;
             RequiredInt = requiredInt;

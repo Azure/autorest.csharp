@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -27,12 +28,12 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Option.HasValue)
+            if (Optional.IsDefined(Option))
             {
                 writer.WritePropertyName("option"u8);
                 writer.WriteStringValue(Option.Value.ToString());
             }
-            if (Placement.HasValue)
+            if (Optional.IsDefined(Placement))
             {
                 writer.WritePropertyName("placement"u8);
                 writer.WriteStringValue(Placement.Value.ToString());
@@ -75,8 +76,8 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<DiffDiskOption> option = default;
-            Optional<DiffDiskPlacement> placement = default;
+            DiffDiskOption? option = default;
+            DiffDiskPlacement? placement = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -105,7 +106,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DiffDiskSettings(Optional.ToNullable(option), Optional.ToNullable(placement), serializedAdditionalRawData);
+            return new DiffDiskSettings(option, placement, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -113,13 +114,13 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Option.HasValue)
+            if (Optional.IsDefined(Option))
             {
                 builder.Append("  option:");
                 builder.AppendLine($" '{Option.Value.ToString()}'");
             }
 
-            if (Placement.HasValue)
+            if (Optional.IsDefined(Placement))
             {
                 builder.Append("  placement:");
                 builder.AppendLine($" '{Placement.Value.ToString()}'");

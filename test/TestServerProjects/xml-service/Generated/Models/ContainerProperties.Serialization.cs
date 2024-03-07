@@ -11,6 +11,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
+using xml_service;
 
 namespace xml_service.Models
 {
@@ -25,25 +26,25 @@ namespace xml_service.Models
             writer.WriteStartElement("Etag");
             writer.WriteValue(Etag);
             writer.WriteEndElement();
-            if (LeaseStatus.HasValue)
+            if (Optional.IsDefined(LeaseStatus))
             {
                 writer.WriteStartElement("LeaseStatus");
                 writer.WriteValue(LeaseStatus.Value.ToSerialString());
                 writer.WriteEndElement();
             }
-            if (LeaseState.HasValue)
+            if (Optional.IsDefined(LeaseState))
             {
                 writer.WriteStartElement("LeaseState");
                 writer.WriteValue(LeaseState.Value.ToSerialString());
                 writer.WriteEndElement();
             }
-            if (LeaseDuration.HasValue)
+            if (Optional.IsDefined(LeaseDuration))
             {
                 writer.WriteStartElement("LeaseDuration");
                 writer.WriteValue(LeaseDuration.Value.ToSerialString());
                 writer.WriteEndElement();
             }
-            if (PublicAccess.HasValue)
+            if (Optional.IsDefined(PublicAccess))
             {
                 writer.WriteStartElement("PublicAccess");
                 writer.WriteValue(PublicAccess.Value.ToString());
@@ -88,7 +89,14 @@ namespace xml_service.Models
             {
                 publicAccess = new PublicAccessType(publicAccessElement.Value);
             }
-            return new ContainerProperties(lastModified, etag, leaseStatus, leaseState, leaseDuration, publicAccess, serializedAdditionalRawData: null);
+            return new ContainerProperties(
+                lastModified,
+                etag,
+                leaseStatus,
+                leaseState,
+                leaseDuration,
+                publicAccess,
+                serializedAdditionalRawData: null);
         }
 
         BinaryData IPersistableModel<ContainerProperties>.Write(ModelReaderWriterOptions options)

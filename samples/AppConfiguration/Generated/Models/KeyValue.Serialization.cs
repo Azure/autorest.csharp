@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using AppConfiguration;
 using Azure.Core;
 
 namespace AppConfiguration.Models
@@ -17,32 +18,32 @@ namespace AppConfiguration.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Key != null)
+            if (Optional.IsDefined(Key))
             {
                 writer.WritePropertyName("key"u8);
                 writer.WriteStringValue(Key);
             }
-            if (Label != null)
+            if (Optional.IsDefined(Label))
             {
                 writer.WritePropertyName("label"u8);
                 writer.WriteStringValue(Label);
             }
-            if (ContentType != null)
+            if (Optional.IsDefined(ContentType))
             {
                 writer.WritePropertyName("content_type"u8);
                 writer.WriteStringValue(ContentType);
             }
-            if (Value != null)
+            if (Optional.IsDefined(Value))
             {
                 writer.WritePropertyName("value"u8);
                 writer.WriteStringValue(Value);
             }
-            if (LastModified.HasValue)
+            if (Optional.IsDefined(LastModified))
             {
                 writer.WritePropertyName("last_modified"u8);
                 writer.WriteStringValue(LastModified.Value, "O");
             }
-            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -53,12 +54,12 @@ namespace AppConfiguration.Models
                 }
                 writer.WriteEndObject();
             }
-            if (Locked.HasValue)
+            if (Optional.IsDefined(Locked))
             {
                 writer.WritePropertyName("locked"u8);
                 writer.WriteBooleanValue(Locked.Value);
             }
-            if (Etag != null)
+            if (Optional.IsDefined(Etag))
             {
                 writer.WritePropertyName("etag"u8);
                 writer.WriteStringValue(Etag);
@@ -72,14 +73,14 @@ namespace AppConfiguration.Models
             {
                 return null;
             }
-            Optional<string> key = default;
-            Optional<string> label = default;
-            Optional<string> contentType = default;
-            Optional<string> value = default;
-            Optional<DateTimeOffset> lastModified = default;
+            string key = default;
+            string label = default;
+            string contentType = default;
+            string value = default;
+            DateTimeOffset? lastModified = default;
             IDictionary<string, string> tags = default;
-            Optional<bool> locked = default;
-            Optional<string> etag = default;
+            bool? locked = default;
+            string etag = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("key"u8))
@@ -140,7 +141,15 @@ namespace AppConfiguration.Models
                     continue;
                 }
             }
-            return new KeyValue(key.Value, label.Value, contentType.Value, value.Value, Optional.ToNullable(lastModified), tags ?? new ChangeTrackingDictionary<string, string>(), Optional.ToNullable(locked), etag.Value);
+            return new KeyValue(
+                key,
+                label,
+                contentType,
+                value,
+                lastModified,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                locked,
+                etag);
         }
     }
 }

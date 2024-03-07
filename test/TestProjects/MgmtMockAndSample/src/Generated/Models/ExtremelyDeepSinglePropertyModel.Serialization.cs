@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
@@ -15,7 +16,7 @@ namespace MgmtMockAndSample.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Extreme != null)
+            if (Optional.IsDefined(Extreme))
             {
                 writer.WritePropertyName("extreme"u8);
                 writer.WriteObjectValue(Extreme);
@@ -29,7 +30,7 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<SuperDeepSinglePropertyModel> extreme = default;
+            SuperDeepSinglePropertyModel extreme = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("extreme"u8))
@@ -42,7 +43,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new ExtremelyDeepSinglePropertyModel(extreme.Value);
+            return new ExtremelyDeepSinglePropertyModel(extreme);
         }
     }
 }

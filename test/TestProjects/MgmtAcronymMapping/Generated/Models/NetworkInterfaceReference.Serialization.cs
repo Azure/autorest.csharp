@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtAcronymMapping;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -15,14 +16,14 @@ namespace MgmtAcronymMapping.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Primary.HasValue)
+            if (Optional.IsDefined(Primary))
             {
                 writer.WritePropertyName("primary"u8);
                 writer.WriteBooleanValue(Primary.Value);
@@ -37,8 +38,8 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<string> id = default;
-            Optional<bool> primary = default;
+            string id = default;
+            bool? primary = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -68,7 +69,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new NetworkInterfaceReference(id.Value, Optional.ToNullable(primary));
+            return new NetworkInterfaceReference(id, primary);
         }
     }
 }

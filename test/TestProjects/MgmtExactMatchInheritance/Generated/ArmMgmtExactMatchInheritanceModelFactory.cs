@@ -45,12 +45,39 @@ namespace MgmtExactMatchInheritance.Models
         /// <param name="type17"> Gets or sets the type 17. </param>
         /// <param name="type18"> Azure Data Factory secure string definition. The string value will be masked with asterisks '*' during Get or List API calls. </param>
         /// <param name="type19"> Azure Key Vault secret reference. </param>
+        /// <param name="type20"> Any object. </param>
         /// <returns> A new <see cref="MgmtExactMatchInheritance.ExactMatchModel1Data"/> instance for mocking. </returns>
-        public static ExactMatchModel1Data ExactMatchModel1Data(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string @new = null, IEnumerable<Uri> supportingUris = null, Type1? type1 = null, Type2? type2 = null, IPAddress type3 = null, object type4 = null, DataFactoryElement<string> type5 = null, DataFactoryElement<double> type6 = null, DataFactoryElement<bool> type7 = null, DataFactoryElement<int> type8 = null, DataFactoryElement<BinaryData> type9 = null, DataFactoryElement<IList<SeparateClass>> type10 = null, DataFactoryElement<IList<string>> type11 = null, DataFactoryElement<IDictionary<string, string>> type12 = null, DataFactoryElement<IList<SeparateClass>> type13 = null, DataFactoryElement<DateTimeOffset> type14 = null, DataFactoryElement<TimeSpan> type15 = null, DataFactoryElement<Uri> type16 = null, DataFactoryLinkedServiceReference type17 = null, DataFactorySecretString type18 = null, DataFactoryKeyVaultSecret type19 = null)
+        public static ExactMatchModel1Data ExactMatchModel1Data(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string @new = null, IEnumerable<Uri> supportingUris = null, Type1? type1 = null, Type2? type2 = null, IPAddress type3 = null, object type4 = null, DataFactoryElement<string> type5 = null, DataFactoryElement<double> type6 = null, DataFactoryElement<bool> type7 = null, DataFactoryElement<int> type8 = null, DataFactoryElement<BinaryData> type9 = null, DataFactoryElement<IList<SeparateClass>> type10 = null, DataFactoryElement<IList<string>> type11 = null, DataFactoryElement<IDictionary<string, string>> type12 = null, DataFactoryElement<IList<SeparateClass>> type13 = null, DataFactoryElement<DateTimeOffset> type14 = null, DataFactoryElement<TimeSpan> type15 = null, DataFactoryElement<Uri> type16 = null, DataFactoryLinkedServiceReference type17 = null, DataFactorySecretString type18 = null, DataFactoryKeyVaultSecretReference type19 = null, DataFactoryElement<IDictionary<string, BinaryData>> type20 = null)
         {
             supportingUris ??= new List<Uri>();
 
-            return new ExactMatchModel1Data(id, name, resourceType, systemData, @new, supportingUris?.ToList(), type1, type2, type3, type4, type5, type6, type7, type8, type9, type10, type11, type12, type13, type14, type15, type16, type17, type18, type19);
+            return new ExactMatchModel1Data(
+                id,
+                name,
+                resourceType,
+                systemData,
+                @new,
+                supportingUris?.ToList(),
+                type1,
+                type2,
+                type3,
+                type4,
+                type5,
+                type6,
+                type7,
+                type8,
+                type9,
+                type10,
+                type11,
+                type12,
+                type13,
+                type14,
+                type15,
+                type16,
+                type17,
+                type18,
+                type19,
+                type20);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtExactMatchInheritance.ExactMatchModel5Data"/>. </summary>
@@ -66,7 +93,14 @@ namespace MgmtExactMatchInheritance.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new ExactMatchModel5Data(id, name, resourceType, systemData, tags, location, @new);
+            return new ExactMatchModel5Data(
+                id,
+                name,
+                resourceType,
+                systemData,
+                tags,
+                location,
+                @new);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ExactMatchModel10"/>. </summary>
@@ -81,7 +115,13 @@ namespace MgmtExactMatchInheritance.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new ExactMatchModel10(id, name, resourceType, systemData, location, tags);
+            return new ExactMatchModel10(
+                id,
+                name,
+                resourceType,
+                systemData,
+                location,
+                tags);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ExactMatchModel11"/>. </summary>

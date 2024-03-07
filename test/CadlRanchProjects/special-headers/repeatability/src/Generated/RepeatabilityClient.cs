@@ -37,10 +37,7 @@ namespace SpecialHeaders.Repeatability
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public RepeatabilityClient(Uri endpoint, RepeatabilityClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new RepeatabilityClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

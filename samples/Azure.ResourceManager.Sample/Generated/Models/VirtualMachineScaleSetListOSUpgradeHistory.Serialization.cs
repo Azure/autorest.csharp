@@ -13,6 +13,7 @@ using System.Text;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -36,12 +37,12 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            if (Etag.HasValue)
+            if (Optional.IsDefined(Etag))
             {
                 writer.WritePropertyName("etag"u8);
                 writer.WriteStringValue(Etag.Value.ToString());
             }
-            if (NextLink != null)
+            if (Optional.IsDefined(NextLink))
             {
                 writer.WritePropertyName("nextLink"u8);
                 writer.WriteStringValue(NextLink);
@@ -85,8 +86,8 @@ namespace Azure.ResourceManager.Sample.Models
                 return null;
             }
             IReadOnlyList<UpgradeOperationHistoricalStatusInfo> value = default;
-            Optional<ETag> etag = default;
-            Optional<string> nextLink = default;
+            ETag? etag = default;
+            string nextLink = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -121,7 +122,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineScaleSetListOSUpgradeHistory(value, Optional.ToNullable(etag), nextLink.Value, serializedAdditionalRawData);
+            return new VirtualMachineScaleSetListOSUpgradeHistory(value, etag, nextLink, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -129,7 +130,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (!(Value is ChangeTrackingList<UpgradeOperationHistoricalStatusInfo> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Value))
             {
                 if (Value.Any())
                 {
@@ -143,13 +144,13 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Etag.HasValue)
+            if (Optional.IsDefined(Etag))
             {
                 builder.Append("  etag:");
                 builder.AppendLine($" '{Etag.Value.ToString()}'");
             }
 
-            if (NextLink != null)
+            if (Optional.IsDefined(NextLink))
             {
                 builder.Append("  nextLink:");
                 if (NextLink.Contains(Environment.NewLine))

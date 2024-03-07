@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {
@@ -20,18 +21,9 @@ namespace CognitiveSearch.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="credentials"/> or <paramref name="container"/> is null. </exception>
         public DataSource(string name, DataSourceType type, DataSourceCredentials credentials, DataContainer container)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (credentials == null)
-            {
-                throw new ArgumentNullException(nameof(credentials));
-            }
-            if (container == null)
-            {
-                throw new ArgumentNullException(nameof(container));
-            }
+            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(credentials, nameof(credentials));
+            Argument.AssertNotNull(container, nameof(container));
 
             Name = name;
             Type = type;

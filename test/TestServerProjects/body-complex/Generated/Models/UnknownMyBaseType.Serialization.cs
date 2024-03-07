@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using body_complex;
 
 namespace body_complex.Models
 {
@@ -28,14 +29,14 @@ namespace body_complex.Models
             writer.WriteStartObject();
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind.ToString());
-            if (PropB1 != null)
+            if (Optional.IsDefined(PropB1))
             {
                 writer.WritePropertyName("propB1"u8);
                 writer.WriteStringValue(PropB1);
             }
             writer.WritePropertyName("helper"u8);
             writer.WriteStartObject();
-            if (PropBH1 != null)
+            if (Optional.IsDefined(PropBH1))
             {
                 writer.WritePropertyName("propBH1"u8);
                 writer.WriteStringValue(PropBH1);
@@ -80,8 +81,8 @@ namespace body_complex.Models
                 return null;
             }
             MyKind kind = "Unknown";
-            Optional<string> propB1 = default;
-            Optional<string> propBH1 = default;
+            string propB1 = default;
+            string propBH1 = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -119,7 +120,7 @@ namespace body_complex.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new UnknownMyBaseType(kind, propB1.Value, propBH1.Value, serializedAdditionalRawData);
+            return new UnknownMyBaseType(kind, propB1, propBH1, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<MyBaseType>.Write(ModelReaderWriterOptions options)

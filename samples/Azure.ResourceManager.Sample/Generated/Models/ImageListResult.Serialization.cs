@@ -36,7 +36,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            if (NextLink != null)
+            if (Optional.IsDefined(NextLink))
             {
                 writer.WritePropertyName("nextLink"u8);
                 writer.WriteStringValue(NextLink);
@@ -80,7 +80,7 @@ namespace Azure.ResourceManager.Sample.Models
                 return null;
             }
             IReadOnlyList<ImageData> value = default;
-            Optional<string> nextLink = default;
+            string nextLink = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -106,7 +106,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ImageListResult(value, nextLink.Value, serializedAdditionalRawData);
+            return new ImageListResult(value, nextLink, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -114,7 +114,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (!(Images is ChangeTrackingList<ImageData> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Images))
             {
                 if (Images.Any())
                 {
@@ -128,7 +128,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (NextLink != null)
+            if (Optional.IsDefined(NextLink))
             {
                 builder.Append("  nextLink:");
                 if (NextLink.Contains(Environment.NewLine))

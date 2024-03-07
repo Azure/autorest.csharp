@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using Azure.NewProject.TypeSpec;
 
 namespace Azure.NewProject.TypeSpec.Models
 {
@@ -51,10 +52,7 @@ namespace Azure.NewProject.TypeSpec.Models
         /// <exception cref="ArgumentNullException"> <paramref name="sourceUrl"/> is null. </exception>
         public ModelWithFormat(Uri sourceUrl, Guid guid)
         {
-            if (sourceUrl == null)
-            {
-                throw new ArgumentNullException(nameof(sourceUrl));
-            }
+            Argument.AssertNotNull(sourceUrl, nameof(sourceUrl));
 
             SourceUrl = sourceUrl;
             Guid = guid;

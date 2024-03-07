@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using ModelsTypeSpec;
 
 namespace ModelsTypeSpec.Models
 {
@@ -50,10 +51,7 @@ namespace ModelsTypeSpec.Models
         /// <exception cref="ArgumentNullException"> <paramref name="requiredModelRecord"/> is null. </exception>
         public CollectionItem(IDictionary<string, RecordItem> requiredModelRecord)
         {
-            if (requiredModelRecord == null)
-            {
-                throw new ArgumentNullException(nameof(requiredModelRecord));
-            }
+            Argument.AssertNotNull(requiredModelRecord, nameof(requiredModelRecord));
 
             RequiredModelRecord = requiredModelRecord;
         }

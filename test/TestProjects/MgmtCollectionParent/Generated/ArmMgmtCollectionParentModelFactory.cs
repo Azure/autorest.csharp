@@ -31,7 +31,14 @@ namespace MgmtCollectionParent.Models
             orderItemIds ??= new List<string>();
             orderStageHistory ??= new List<StageDetails>();
 
-            return new OrderResourceData(id, name, resourceType, systemData, orderItemIds?.ToList(), currentStage, orderStageHistory?.ToList());
+            return new OrderResourceData(
+                id,
+                name,
+                resourceType,
+                systemData,
+                orderItemIds?.ToList(),
+                currentStage,
+                orderStageHistory?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.StageDetails"/>. </summary>

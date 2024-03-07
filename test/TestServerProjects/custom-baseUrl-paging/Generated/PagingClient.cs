@@ -45,10 +45,7 @@ namespace custom_baseUrl_paging
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         public virtual AsyncPageable<Product> GetPagesPartialUrlAsync(string accountName, CancellationToken cancellationToken = default)
         {
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
+            Argument.AssertNotNull(accountName, nameof(accountName));
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetPagesPartialUrlRequest(accountName);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateGetPagesPartialUrlNextPageRequest(nextLink, accountName);
@@ -61,10 +58,7 @@ namespace custom_baseUrl_paging
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         public virtual Pageable<Product> GetPagesPartialUrl(string accountName, CancellationToken cancellationToken = default)
         {
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
+            Argument.AssertNotNull(accountName, nameof(accountName));
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetPagesPartialUrlRequest(accountName);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateGetPagesPartialUrlNextPageRequest(nextLink, accountName);
@@ -77,10 +71,7 @@ namespace custom_baseUrl_paging
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         public virtual AsyncPageable<Product> GetPagesPartialUrlOperationAsync(string accountName, CancellationToken cancellationToken = default)
         {
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
+            Argument.AssertNotNull(accountName, nameof(accountName));
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetPagesPartialUrlOperationRequest(accountName);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink);
@@ -93,10 +84,7 @@ namespace custom_baseUrl_paging
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         public virtual Pageable<Product> GetPagesPartialUrlOperation(string accountName, CancellationToken cancellationToken = default)
         {
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
+            Argument.AssertNotNull(accountName, nameof(accountName));
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetPagesPartialUrlOperationRequest(accountName);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink);
@@ -110,14 +98,8 @@ namespace custom_baseUrl_paging
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> or <paramref name="nextLink"/> is null. </exception>
         public virtual AsyncPageable<Product> GetPagesPartialUrlOperationNextAsync(string accountName, string nextLink, CancellationToken cancellationToken = default)
         {
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
+            Argument.AssertNotNull(accountName, nameof(accountName));
+            Argument.AssertNotNull(nextLink, nameof(nextLink));
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink);
@@ -131,14 +113,8 @@ namespace custom_baseUrl_paging
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> or <paramref name="nextLink"/> is null. </exception>
         public virtual Pageable<Product> GetPagesPartialUrlOperationNext(string accountName, string nextLink, CancellationToken cancellationToken = default)
         {
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
+            Argument.AssertNotNull(accountName, nameof(accountName));
+            Argument.AssertNotNull(nextLink, nameof(nextLink));
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink);

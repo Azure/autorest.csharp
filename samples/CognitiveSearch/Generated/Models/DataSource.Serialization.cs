@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {
@@ -17,7 +18,7 @@ namespace CognitiveSearch.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (Description != null)
+            if (Optional.IsDefined(Description))
             {
                 writer.WritePropertyName("description"u8);
                 writer.WriteStringValue(Description);
@@ -28,17 +29,17 @@ namespace CognitiveSearch.Models
             writer.WriteObjectValue(Credentials);
             writer.WritePropertyName("container"u8);
             writer.WriteObjectValue(Container);
-            if (DataChangeDetectionPolicy != null)
+            if (Optional.IsDefined(DataChangeDetectionPolicy))
             {
                 writer.WritePropertyName("dataChangeDetectionPolicy"u8);
                 writer.WriteObjectValue(DataChangeDetectionPolicy);
             }
-            if (DataDeletionDetectionPolicy != null)
+            if (Optional.IsDefined(DataDeletionDetectionPolicy))
             {
                 writer.WritePropertyName("dataDeletionDetectionPolicy"u8);
                 writer.WriteObjectValue(DataDeletionDetectionPolicy);
             }
-            if (ETag != null)
+            if (Optional.IsDefined(ETag))
             {
                 writer.WritePropertyName("@odata.etag"u8);
                 writer.WriteStringValue(ETag);
@@ -53,13 +54,13 @@ namespace CognitiveSearch.Models
                 return null;
             }
             string name = default;
-            Optional<string> description = default;
+            string description = default;
             DataSourceType type = default;
             DataSourceCredentials credentials = default;
             DataContainer container = default;
-            Optional<DataChangeDetectionPolicy> dataChangeDetectionPolicy = default;
-            Optional<DataDeletionDetectionPolicy> dataDeletionDetectionPolicy = default;
-            Optional<string> odataEtag = default;
+            DataChangeDetectionPolicy dataChangeDetectionPolicy = default;
+            DataDeletionDetectionPolicy dataDeletionDetectionPolicy = default;
+            string odataEtag = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -111,7 +112,15 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new DataSource(name, description.Value, type, credentials, container, dataChangeDetectionPolicy.Value, dataDeletionDetectionPolicy.Value, odataEtag.Value);
+            return new DataSource(
+                name,
+                description,
+                type,
+                credentials,
+                container,
+                dataChangeDetectionPolicy,
+                dataDeletionDetectionPolicy,
+                odataEtag);
         }
     }
 }

@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -28,7 +29,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (!(Details is ChangeTrackingList<ApiErrorBase> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Details))
             {
                 writer.WritePropertyName("details"u8);
                 writer.WriteStartArray();
@@ -38,22 +39,22 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Innererror != null)
+            if (Optional.IsDefined(Innererror))
             {
                 writer.WritePropertyName("innererror"u8);
                 writer.WriteObjectValue(Innererror);
             }
-            if (Code != null)
+            if (Optional.IsDefined(Code))
             {
                 writer.WritePropertyName("code"u8);
                 writer.WriteStringValue(Code);
             }
-            if (Target != null)
+            if (Optional.IsDefined(Target))
             {
                 writer.WritePropertyName("target"u8);
                 writer.WriteStringValue(Target);
             }
-            if (Message != null)
+            if (Optional.IsDefined(Message))
             {
                 writer.WritePropertyName("message"u8);
                 writer.WriteStringValue(Message);
@@ -97,10 +98,10 @@ namespace Azure.ResourceManager.Sample.Models
                 return null;
             }
             IReadOnlyList<ApiErrorBase> details = default;
-            Optional<InnerError> innererror = default;
-            Optional<string> code = default;
-            Optional<string> target = default;
-            Optional<string> message = default;
+            InnerError innererror = default;
+            string code = default;
+            string target = default;
+            string message = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -149,7 +150,13 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ApiError(details ?? new ChangeTrackingList<ApiErrorBase>(), innererror.Value, code.Value, target.Value, message.Value, serializedAdditionalRawData);
+            return new ApiError(
+                details ?? new ChangeTrackingList<ApiErrorBase>(),
+                innererror,
+                code,
+                target,
+                message,
+                serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -157,7 +164,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (!(Details is ChangeTrackingList<ApiErrorBase> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Details))
             {
                 if (Details.Any())
                 {
@@ -171,13 +178,13 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Innererror != null)
+            if (Optional.IsDefined(Innererror))
             {
                 builder.Append("  innererror:");
                 AppendChildObject(builder, Innererror, options, 2, false);
             }
 
-            if (Code != null)
+            if (Optional.IsDefined(Code))
             {
                 builder.Append("  code:");
                 if (Code.Contains(Environment.NewLine))
@@ -191,7 +198,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Target != null)
+            if (Optional.IsDefined(Target))
             {
                 builder.Append("  target:");
                 if (Target.Contains(Environment.NewLine))
@@ -205,7 +212,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (Message != null)
+            if (Optional.IsDefined(Message))
             {
                 builder.Append("  message:");
                 if (Message.Contains(Environment.NewLine))

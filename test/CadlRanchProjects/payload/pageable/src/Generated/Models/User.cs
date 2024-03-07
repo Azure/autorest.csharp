@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using Payload.Pageable;
 
 namespace Payload.Pageable.Models
 {
@@ -50,10 +51,7 @@ namespace Payload.Pageable.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal User(string name)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Argument.AssertNotNull(name, nameof(name));
 
             Name = name;
         }

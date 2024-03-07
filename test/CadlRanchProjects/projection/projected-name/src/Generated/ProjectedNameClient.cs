@@ -38,10 +38,7 @@ namespace Projection.ProjectedName
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public ProjectedNameClient(Uri endpoint, ProjectedNameClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new ProjectedNameClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -130,10 +127,7 @@ namespace Projection.ProjectedName
         /// <include file="Docs/ProjectedNameClient.xml" path="doc/members/member[@name='ParameterAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> ParameterAsync(string clientName, RequestContext context = null)
         {
-            if (clientName == null)
-            {
-                throw new ArgumentNullException(nameof(clientName));
-            }
+            Argument.AssertNotNull(clientName, nameof(clientName));
 
             using var scope = ClientDiagnostics.CreateScope("ProjectedNameClient.Parameter");
             scope.Start();
@@ -168,10 +162,7 @@ namespace Projection.ProjectedName
         /// <include file="Docs/ProjectedNameClient.xml" path="doc/members/member[@name='Parameter(string,RequestContext)']/*" />
         public virtual Response Parameter(string clientName, RequestContext context = null)
         {
-            if (clientName == null)
-            {
-                throw new ArgumentNullException(nameof(clientName));
-            }
+            Argument.AssertNotNull(clientName, nameof(clientName));
 
             using var scope = ClientDiagnostics.CreateScope("ProjectedNameClient.Parameter");
             scope.Start();

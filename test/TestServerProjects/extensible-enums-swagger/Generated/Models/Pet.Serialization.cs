@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using extensible_enums_swagger;
 
 namespace extensible_enums_swagger.Models
 {
@@ -26,12 +27,12 @@ namespace extensible_enums_swagger.Models
             }
 
             writer.WriteStartObject();
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (DaysOfWeek.HasValue)
+            if (Optional.IsDefined(DaysOfWeek))
             {
                 writer.WritePropertyName("DaysOfWeek"u8);
                 writer.WriteStringValue(DaysOfWeek.Value.ToString());
@@ -76,8 +77,8 @@ namespace extensible_enums_swagger.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<DaysOfWeekExtensibleEnum> daysOfWeek = default;
+            string name = default;
+            DaysOfWeekExtensibleEnum? daysOfWeek = default;
             IntEnum intEnum = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -108,7 +109,7 @@ namespace extensible_enums_swagger.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Pet(name.Value, Optional.ToNullable(daysOfWeek), intEnum, serializedAdditionalRawData);
+            return new Pet(name, daysOfWeek, intEnum, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<Pet>.Write(ModelReaderWriterOptions options)

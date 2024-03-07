@@ -11,6 +11,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
+using xml_service;
 
 namespace xml_service.Models
 {
@@ -19,11 +20,11 @@ namespace xml_service.Models
         private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "RootWithRefAndMeta");
-            if (RefToModel != null)
+            if (Optional.IsDefined(RefToModel))
             {
                 writer.WriteObjectValue(RefToModel, "XMLComplexTypeWithMeta");
             }
-            if (Something != null)
+            if (Optional.IsDefined(Something))
             {
                 writer.WriteStartElement("Something");
                 writer.WriteValue(Something);

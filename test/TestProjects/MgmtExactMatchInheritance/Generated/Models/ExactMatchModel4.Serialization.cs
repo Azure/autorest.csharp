@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtExactMatchInheritance;
 
 namespace MgmtExactMatchInheritance.Models
 {
@@ -15,22 +16,22 @@ namespace MgmtExactMatchInheritance.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (New != null)
+            if (Optional.IsDefined(New))
             {
                 writer.WritePropertyName("new"u8);
                 writer.WriteStringValue(New);
             }
-            if (Id.HasValue)
+            if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteNumberValue(Id.Value);
             }
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (ExactMatchModel9Type != null)
+            if (Optional.IsDefined(ExactMatchModel9Type))
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ExactMatchModel9Type);
@@ -44,10 +45,10 @@ namespace MgmtExactMatchInheritance.Models
             {
                 return null;
             }
-            Optional<string> @new = default;
-            Optional<int> id = default;
-            Optional<string> name = default;
-            Optional<string> type = default;
+            string @new = default;
+            int? id = default;
+            string name = default;
+            string type = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("new"u8))
@@ -75,7 +76,7 @@ namespace MgmtExactMatchInheritance.Models
                     continue;
                 }
             }
-            return new ExactMatchModel4(Optional.ToNullable(id), name.Value, type.Value, @new.Value);
+            return new ExactMatchModel4(id, name, type, @new);
         }
     }
 }

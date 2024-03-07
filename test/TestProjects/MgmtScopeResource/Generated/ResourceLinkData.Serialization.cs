@@ -17,7 +17,7 @@ namespace MgmtScopeResource
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Properties != null)
+            if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
                 writer.WriteObjectValue(Properties);
@@ -31,11 +31,11 @@ namespace MgmtScopeResource
             {
                 return null;
             }
-            Optional<ResourceLinkProperties> properties = default;
+            ResourceLinkProperties properties = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
+            SystemData systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("properties"u8))
@@ -72,7 +72,7 @@ namespace MgmtScopeResource
                     continue;
                 }
             }
-            return new ResourceLinkData(id, name, type, systemData.Value, properties.Value);
+            return new ResourceLinkData(id, name, type, systemData, properties);
         }
     }
 }

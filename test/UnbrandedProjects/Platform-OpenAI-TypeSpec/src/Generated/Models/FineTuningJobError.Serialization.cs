@@ -7,6 +7,7 @@ using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -23,17 +24,17 @@ namespace OpenAI.Models
             }
 
             writer.WriteStartObject();
-            if (Message != null)
+            if (Optional.IsDefined(Message))
             {
                 writer.WritePropertyName("message"u8);
                 writer.WriteStringValue(Message);
             }
-            if (Code != null)
+            if (Optional.IsDefined(Code))
             {
                 writer.WritePropertyName("code"u8);
                 writer.WriteStringValue(Code);
             }
-            if (Param != null)
+            if (Optional.IsDefined(Param))
             {
                 if (Param != null)
                 {
@@ -83,9 +84,9 @@ namespace OpenAI.Models
             {
                 return null;
             }
-            OptionalProperty<string> message = default;
-            OptionalProperty<string> code = default;
-            OptionalProperty<string> param = default;
+            string message = default;
+            string code = default;
+            string param = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -116,7 +117,7 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new FineTuningJobError(message.Value, code.Value, param.Value, serializedAdditionalRawData);
+            return new FineTuningJobError(message, code, param, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<FineTuningJobError>.Write(ModelReaderWriterOptions options)

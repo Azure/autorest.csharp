@@ -7,8 +7,8 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
+using MgmtExpandResourceTypes;
 
 namespace MgmtExpandResourceTypes.Models
 {
@@ -21,7 +21,7 @@ namespace MgmtExpandResourceTypes.Models
                 return null;
             }
             IReadOnlyList<WritableSubResource> dnsResources = default;
-            Optional<WritableSubResource> targetResource = default;
+            WritableSubResource targetResource = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("dnsResources"u8))

@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -51,10 +52,7 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="instruction"/> is null. </exception>
         public CreateEditRequest(CreateEditRequestModel model, string instruction)
         {
-            if (instruction == null)
-            {
-                throw new ArgumentNullException(nameof(instruction));
-            }
+            Argument.AssertNotNull(instruction, nameof(instruction));
 
             Model = model;
             Instruction = instruction;

@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using model_flattening;
 
 namespace model_flattening.Models
 {
@@ -26,12 +27,12 @@ namespace model_flattening.Models
             }
 
             writer.WriteStartObject();
-            if (OdataValue != null)
+            if (Optional.IsDefined(OdataValue))
             {
                 writer.WritePropertyName("@odata.value"u8);
                 writer.WriteStringValue(OdataValue);
             }
-            if (GenericValue != null)
+            if (Optional.IsDefined(GenericValue))
             {
                 writer.WritePropertyName("generic_value"u8);
                 writer.WriteStringValue(GenericValue);
@@ -74,8 +75,8 @@ namespace model_flattening.Models
             {
                 return null;
             }
-            Optional<string> odataValue = default;
-            Optional<string> genericValue = default;
+            string odataValue = default;
+            string genericValue = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -96,7 +97,7 @@ namespace model_flattening.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ProductUrl(genericValue.Value, serializedAdditionalRawData, odataValue.Value);
+            return new ProductUrl(genericValue, serializedAdditionalRawData, odataValue);
         }
 
         BinaryData IPersistableModel<ProductUrl>.Write(ModelReaderWriterOptions options)

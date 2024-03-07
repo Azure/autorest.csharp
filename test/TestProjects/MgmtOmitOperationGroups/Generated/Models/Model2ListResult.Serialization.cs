@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 using MgmtOmitOperationGroups;
 
 namespace MgmtOmitOperationGroups.Models
@@ -21,7 +20,7 @@ namespace MgmtOmitOperationGroups.Models
                 return null;
             }
             IReadOnlyList<Model2Data> value = default;
-            Optional<string> nextLink = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -44,7 +43,7 @@ namespace MgmtOmitOperationGroups.Models
                     continue;
                 }
             }
-            return new Model2ListResult(value ?? new ChangeTrackingList<Model2Data>(), nextLink.Value);
+            return new Model2ListResult(value ?? new ChangeTrackingList<Model2Data>(), nextLink);
         }
     }
 }

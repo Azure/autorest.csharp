@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Storage;
 
 namespace Azure.ResourceManager.Storage.Models
 {
@@ -15,12 +16,12 @@ namespace Azure.ResourceManager.Storage.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (DaysAfterModificationGreaterThan.HasValue)
+            if (Optional.IsDefined(DaysAfterModificationGreaterThan))
             {
                 writer.WritePropertyName("daysAfterModificationGreaterThan"u8);
                 writer.WriteNumberValue(DaysAfterModificationGreaterThan.Value);
             }
-            if (DaysAfterLastAccessTimeGreaterThan.HasValue)
+            if (Optional.IsDefined(DaysAfterLastAccessTimeGreaterThan))
             {
                 writer.WritePropertyName("daysAfterLastAccessTimeGreaterThan"u8);
                 writer.WriteNumberValue(DaysAfterLastAccessTimeGreaterThan.Value);
@@ -34,8 +35,8 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Optional<float> daysAfterModificationGreaterThan = default;
-            Optional<float> daysAfterLastAccessTimeGreaterThan = default;
+            float? daysAfterModificationGreaterThan = default;
+            float? daysAfterLastAccessTimeGreaterThan = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("daysAfterModificationGreaterThan"u8))
@@ -57,7 +58,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new DateAfterModification(Optional.ToNullable(daysAfterModificationGreaterThan), Optional.ToNullable(daysAfterLastAccessTimeGreaterThan));
+            return new DateAfterModification(daysAfterModificationGreaterThan, daysAfterLastAccessTimeGreaterThan);
         }
     }
 }

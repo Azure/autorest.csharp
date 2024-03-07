@@ -20,18 +20,18 @@ namespace Azure.ResourceManager.Storage
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Identity != null)
+            if (Optional.IsDefined(Identity))
             {
                 writer.WritePropertyName("identity"u8);
                 var serializeOptions = new JsonSerializerOptions { Converters = { new ManagedServiceIdentityTypeV3Converter() } };
                 JsonSerializer.Serialize(writer, Identity, serializeOptions);
             }
-            if (ExtendedLocation != null)
+            if (Optional.IsDefined(ExtendedLocation))
             {
                 writer.WritePropertyName("extendedLocation"u8);
                 JsonSerializer.Serialize(writer, ExtendedLocation);
             }
-            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -46,67 +46,67 @@ namespace Azure.ResourceManager.Storage
             writer.WriteStringValue(Location);
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (AzureFilesIdentityBasedAuthentication != null)
+            if (Optional.IsDefined(AzureFilesIdentityBasedAuthentication))
             {
                 writer.WritePropertyName("azureFilesIdentityBasedAuthentication"u8);
                 writer.WriteObjectValue(AzureFilesIdentityBasedAuthentication);
             }
-            if (EnableHttpsTrafficOnly.HasValue)
+            if (Optional.IsDefined(EnableHttpsTrafficOnly))
             {
                 writer.WritePropertyName("supportsHttpsTrafficOnly"u8);
                 writer.WriteBooleanValue(EnableHttpsTrafficOnly.Value);
             }
-            if (IsHnsEnabled.HasValue)
+            if (Optional.IsDefined(IsHnsEnabled))
             {
                 writer.WritePropertyName("isHnsEnabled"u8);
                 writer.WriteBooleanValue(IsHnsEnabled.Value);
             }
-            if (LargeFileSharesState.HasValue)
+            if (Optional.IsDefined(LargeFileSharesState))
             {
                 writer.WritePropertyName("largeFileSharesState"u8);
                 writer.WriteStringValue(LargeFileSharesState.Value.ToString());
             }
-            if (RoutingPreference != null)
+            if (Optional.IsDefined(RoutingPreference))
             {
                 writer.WritePropertyName("routingPreference"u8);
                 writer.WriteObjectValue(RoutingPreference);
             }
-            if (AllowBlobPublicAccess.HasValue)
+            if (Optional.IsDefined(AllowBlobPublicAccess))
             {
                 writer.WritePropertyName("allowBlobPublicAccess"u8);
                 writer.WriteBooleanValue(AllowBlobPublicAccess.Value);
             }
-            if (MinimumTlsVersion.HasValue)
+            if (Optional.IsDefined(MinimumTlsVersion))
             {
                 writer.WritePropertyName("minimumTlsVersion"u8);
                 writer.WriteStringValue(MinimumTlsVersion.Value.ToString());
             }
-            if (AllowSharedKeyAccess.HasValue)
+            if (Optional.IsDefined(AllowSharedKeyAccess))
             {
                 writer.WritePropertyName("allowSharedKeyAccess"u8);
                 writer.WriteBooleanValue(AllowSharedKeyAccess.Value);
             }
-            if (EnableNfsV3.HasValue)
+            if (Optional.IsDefined(EnableNfsV3))
             {
                 writer.WritePropertyName("isNfsV3Enabled"u8);
                 writer.WriteBooleanValue(EnableNfsV3.Value);
             }
-            if (AllowCrossTenantReplication.HasValue)
+            if (Optional.IsDefined(AllowCrossTenantReplication))
             {
                 writer.WritePropertyName("allowCrossTenantReplication"u8);
                 writer.WriteBooleanValue(AllowCrossTenantReplication.Value);
             }
-            if (DefaultToOAuthAuthentication.HasValue)
+            if (Optional.IsDefined(DefaultToOAuthAuthentication))
             {
                 writer.WritePropertyName("defaultToOAuthAuthentication"u8);
                 writer.WriteBooleanValue(DefaultToOAuthAuthentication.Value);
             }
-            if (PublicNetworkAccess.HasValue)
+            if (Optional.IsDefined(PublicNetworkAccess))
             {
                 writer.WritePropertyName("publicNetworkAccess"u8);
                 writer.WriteStringValue(PublicNetworkAccess.Value.ToString());
             }
-            if (ImmutableStorageWithVersioning != null)
+            if (Optional.IsDefined(ImmutableStorageWithVersioning))
             {
                 writer.WritePropertyName("immutableStorageWithVersioning"u8);
                 writer.WriteObjectValue(ImmutableStorageWithVersioning);
@@ -121,49 +121,49 @@ namespace Azure.ResourceManager.Storage
             {
                 return null;
             }
-            Optional<StorageSku> sku = default;
-            Optional<StorageKind> kind = default;
-            Optional<ManagedServiceIdentity> identity = default;
-            Optional<ExtendedLocation> extendedLocation = default;
+            StorageSku sku = default;
+            StorageKind? kind = default;
+            ManagedServiceIdentity identity = default;
+            ExtendedLocation extendedLocation = default;
             IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
-            Optional<ProvisioningState> provisioningState = default;
-            Optional<Endpoints> primaryEndpoints = default;
-            Optional<string> primaryLocation = default;
-            Optional<AccountStatus> statusOfPrimary = default;
-            Optional<DateTimeOffset> lastGeoFailoverTime = default;
-            Optional<string> secondaryLocation = default;
-            Optional<AccountStatus> statusOfSecondary = default;
-            Optional<DateTimeOffset> creationTime = default;
-            Optional<CustomDomain> customDomain = default;
-            Optional<SasPolicy> sasPolicy = default;
-            Optional<KeyPolicy> keyPolicy = default;
-            Optional<KeyCreationTime> keyCreationTime = default;
-            Optional<Endpoints> secondaryEndpoints = default;
-            Optional<Encryption> encryption = default;
-            Optional<AccessTier> accessTier = default;
-            Optional<AzureFilesIdentityBasedAuthentication> azureFilesIdentityBasedAuthentication = default;
-            Optional<bool> supportsHttpsTrafficOnly = default;
-            Optional<NetworkRuleSet> networkAcls = default;
-            Optional<bool> isHnsEnabled = default;
-            Optional<GeoReplicationStats> geoReplicationStats = default;
-            Optional<bool> failoverInProgress = default;
-            Optional<LargeFileSharesState> largeFileSharesState = default;
+            SystemData systemData = default;
+            ProvisioningState? provisioningState = default;
+            Endpoints primaryEndpoints = default;
+            string primaryLocation = default;
+            AccountStatus? statusOfPrimary = default;
+            DateTimeOffset? lastGeoFailoverTime = default;
+            string secondaryLocation = default;
+            AccountStatus? statusOfSecondary = default;
+            DateTimeOffset? creationTime = default;
+            CustomDomain customDomain = default;
+            SasPolicy sasPolicy = default;
+            KeyPolicy keyPolicy = default;
+            KeyCreationTime keyCreationTime = default;
+            Endpoints secondaryEndpoints = default;
+            Encryption encryption = default;
+            AccessTier? accessTier = default;
+            AzureFilesIdentityBasedAuthentication azureFilesIdentityBasedAuthentication = default;
+            bool? supportsHttpsTrafficOnly = default;
+            NetworkRuleSet networkAcls = default;
+            bool? isHnsEnabled = default;
+            GeoReplicationStats geoReplicationStats = default;
+            bool? failoverInProgress = default;
+            LargeFileSharesState? largeFileSharesState = default;
             IReadOnlyList<StoragePrivateEndpointConnectionData> privateEndpointConnections = default;
-            Optional<RoutingPreference> routingPreference = default;
-            Optional<BlobRestoreStatus> blobRestoreStatus = default;
-            Optional<bool> allowBlobPublicAccess = default;
-            Optional<MinimumTlsVersion> minimumTlsVersion = default;
-            Optional<bool> allowSharedKeyAccess = default;
-            Optional<bool> isNfsV3Enabled = default;
-            Optional<bool> allowCrossTenantReplication = default;
-            Optional<bool> defaultToOAuthAuthentication = default;
-            Optional<PublicNetworkAccess> publicNetworkAccess = default;
-            Optional<ImmutableStorageAccount> immutableStorageWithVersioning = default;
+            RoutingPreference routingPreference = default;
+            BlobRestoreStatus blobRestoreStatus = default;
+            bool? allowBlobPublicAccess = default;
+            MinimumTlsVersion? minimumTlsVersion = default;
+            bool? allowSharedKeyAccess = default;
+            bool? isNfsV3Enabled = default;
+            bool? allowCrossTenantReplication = default;
+            bool? defaultToOAuthAuthentication = default;
+            PublicNetworkAccess? publicNetworkAccess = default;
+            ImmutableStorageAccount immutableStorageWithVersioning = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sku"u8))
@@ -553,7 +553,50 @@ namespace Azure.ResourceManager.Storage
                     continue;
                 }
             }
-            return new StorageAccountData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, sku.Value, Optional.ToNullable(kind), identity, extendedLocation, Optional.ToNullable(provisioningState), primaryEndpoints.Value, primaryLocation.Value, Optional.ToNullable(statusOfPrimary), Optional.ToNullable(lastGeoFailoverTime), secondaryLocation.Value, Optional.ToNullable(statusOfSecondary), Optional.ToNullable(creationTime), customDomain.Value, sasPolicy.Value, keyPolicy.Value, keyCreationTime.Value, secondaryEndpoints.Value, encryption.Value, Optional.ToNullable(accessTier), azureFilesIdentityBasedAuthentication.Value, Optional.ToNullable(supportsHttpsTrafficOnly), networkAcls.Value, Optional.ToNullable(isHnsEnabled), geoReplicationStats.Value, Optional.ToNullable(failoverInProgress), Optional.ToNullable(largeFileSharesState), privateEndpointConnections ?? new ChangeTrackingList<StoragePrivateEndpointConnectionData>(), routingPreference.Value, blobRestoreStatus.Value, Optional.ToNullable(allowBlobPublicAccess), Optional.ToNullable(minimumTlsVersion), Optional.ToNullable(allowSharedKeyAccess), Optional.ToNullable(isNfsV3Enabled), Optional.ToNullable(allowCrossTenantReplication), Optional.ToNullable(defaultToOAuthAuthentication), Optional.ToNullable(publicNetworkAccess), immutableStorageWithVersioning.Value);
+            return new StorageAccountData(
+                id,
+                name,
+                type,
+                systemData,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                sku,
+                kind,
+                identity,
+                extendedLocation,
+                provisioningState,
+                primaryEndpoints,
+                primaryLocation,
+                statusOfPrimary,
+                lastGeoFailoverTime,
+                secondaryLocation,
+                statusOfSecondary,
+                creationTime,
+                customDomain,
+                sasPolicy,
+                keyPolicy,
+                keyCreationTime,
+                secondaryEndpoints,
+                encryption,
+                accessTier,
+                azureFilesIdentityBasedAuthentication,
+                supportsHttpsTrafficOnly,
+                networkAcls,
+                isHnsEnabled,
+                geoReplicationStats,
+                failoverInProgress,
+                largeFileSharesState,
+                privateEndpointConnections ?? new ChangeTrackingList<StoragePrivateEndpointConnectionData>(),
+                routingPreference,
+                blobRestoreStatus,
+                allowBlobPublicAccess,
+                minimumTlsVersion,
+                allowSharedKeyAccess,
+                isNfsV3Enabled,
+                allowCrossTenantReplication,
+                defaultToOAuthAuthentication,
+                publicNetworkAccess,
+                immutableStorageWithVersioning);
         }
     }
 }

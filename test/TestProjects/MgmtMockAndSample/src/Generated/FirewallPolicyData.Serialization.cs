@@ -19,13 +19,13 @@ namespace MgmtMockAndSample
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Identity != null)
+            if (Optional.IsDefined(Identity))
             {
                 writer.WritePropertyName("identity"u8);
                 var serializeOptions = new JsonSerializerOptions { Converters = { new ManagedServiceIdentityTypeV3Converter() } };
                 JsonSerializer.Serialize(writer, Identity, serializeOptions);
             }
-            if (!(Tags is ChangeTrackingDictionary<string, string> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
@@ -40,57 +40,57 @@ namespace MgmtMockAndSample
             writer.WriteStringValue(Location);
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (StartupProbe != null)
+            if (Optional.IsDefined(StartupProbe))
             {
                 writer.WritePropertyName("startupProbe"u8);
                 writer.WriteObjectValue(StartupProbe);
             }
-            if (ReadinessProbe != null)
+            if (Optional.IsDefined(ReadinessProbe))
             {
                 writer.WritePropertyName("readinessProbe"u8);
                 writer.WriteObjectValue(ReadinessProbe);
             }
-            if (DesiredStatusCode.HasValue)
+            if (Optional.IsDefined(DesiredStatusCode))
             {
                 writer.WritePropertyName("desiredStatusCode"u8);
                 writer.WriteNumberValue(DesiredStatusCode.Value.ToSerialInt32());
             }
-            if (BasePolicy != null)
+            if (Optional.IsDefined(BasePolicy))
             {
                 writer.WritePropertyName("basePolicy"u8);
                 JsonSerializer.Serialize(writer, BasePolicy);
             }
-            if (ThreatIntelWhitelist != null)
+            if (Optional.IsDefined(ThreatIntelWhitelist))
             {
                 writer.WritePropertyName("threatIntelWhitelist"u8);
                 writer.WriteObjectValue(ThreatIntelWhitelist);
             }
-            if (Insights != null)
+            if (Optional.IsDefined(Insights))
             {
                 writer.WritePropertyName("insights"u8);
                 writer.WriteObjectValue(Insights);
             }
-            if (Snat != null)
+            if (Optional.IsDefined(Snat))
             {
                 writer.WritePropertyName("snat"u8);
                 writer.WriteObjectValue(Snat);
             }
-            if (DnsSettings != null)
+            if (Optional.IsDefined(DnsSettings))
             {
                 writer.WritePropertyName("dnsSettings"u8);
                 writer.WriteObjectValue(DnsSettings);
             }
-            if (IntrusionDetection != null)
+            if (Optional.IsDefined(IntrusionDetection))
             {
                 writer.WritePropertyName("intrusionDetection"u8);
                 writer.WriteObjectValue(IntrusionDetection);
             }
-            if (TransportSecurity != null)
+            if (Optional.IsDefined(TransportSecurity))
             {
                 writer.WritePropertyName("transportSecurity"u8);
                 writer.WriteObjectValue(TransportSecurity);
             }
-            if (Sku != null)
+            if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
                 writer.WriteObjectValue(Sku);
@@ -105,29 +105,29 @@ namespace MgmtMockAndSample
             {
                 return null;
             }
-            Optional<string> etag = default;
-            Optional<ManagedServiceIdentity> identity = default;
+            string etag = default;
+            ManagedServiceIdentity identity = default;
             IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
-            Optional<Probe> startupProbe = default;
-            Optional<Probe> readinessProbe = default;
-            Optional<DesiredStatusCode> desiredStatusCode = default;
+            SystemData systemData = default;
+            Probe startupProbe = default;
+            Probe readinessProbe = default;
+            DesiredStatusCode? desiredStatusCode = default;
             IReadOnlyList<WritableSubResource> ruleCollectionGroups = default;
-            Optional<ProvisioningState> provisioningState = default;
-            Optional<WritableSubResource> basePolicy = default;
+            ProvisioningState? provisioningState = default;
+            WritableSubResource basePolicy = default;
             IReadOnlyList<WritableSubResource> firewalls = default;
             IReadOnlyList<WritableSubResource> childPolicies = default;
-            Optional<FirewallPolicyThreatIntelWhitelist> threatIntelWhitelist = default;
-            Optional<FirewallPolicyInsights> insights = default;
-            Optional<FirewallPolicySnat> snat = default;
-            Optional<DnsSettings> dnsSettings = default;
-            Optional<FirewallPolicyIntrusionDetection> intrusionDetection = default;
-            Optional<FirewallPolicyTransportSecurity> transportSecurity = default;
-            Optional<FirewallPolicySku> sku = default;
+            FirewallPolicyThreatIntelWhitelist threatIntelWhitelist = default;
+            FirewallPolicyInsights insights = default;
+            FirewallPolicySnat snat = default;
+            DnsSettings dnsSettings = default;
+            FirewallPolicyIntrusionDetection intrusionDetection = default;
+            FirewallPolicyTransportSecurity transportSecurity = default;
+            FirewallPolicySku sku = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"u8))
@@ -351,7 +351,30 @@ namespace MgmtMockAndSample
                     continue;
                 }
             }
-            return new FirewallPolicyData(id, name, type, systemData.Value, tags ?? new ChangeTrackingDictionary<string, string>(), location, etag.Value, identity, startupProbe.Value, readinessProbe.Value, Optional.ToNullable(desiredStatusCode), ruleCollectionGroups ?? new ChangeTrackingList<WritableSubResource>(), Optional.ToNullable(provisioningState), basePolicy, firewalls ?? new ChangeTrackingList<WritableSubResource>(), childPolicies ?? new ChangeTrackingList<WritableSubResource>(), threatIntelWhitelist.Value, insights.Value, snat.Value, dnsSettings.Value, intrusionDetection.Value, transportSecurity.Value, sku.Value);
+            return new FirewallPolicyData(
+                id,
+                name,
+                type,
+                systemData,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                etag,
+                identity,
+                startupProbe,
+                readinessProbe,
+                desiredStatusCode,
+                ruleCollectionGroups ?? new ChangeTrackingList<WritableSubResource>(),
+                provisioningState,
+                basePolicy,
+                firewalls ?? new ChangeTrackingList<WritableSubResource>(),
+                childPolicies ?? new ChangeTrackingList<WritableSubResource>(),
+                threatIntelWhitelist,
+                insights,
+                snat,
+                dnsSettings,
+                intrusionDetection,
+                transportSecurity,
+                sku);
         }
     }
 }

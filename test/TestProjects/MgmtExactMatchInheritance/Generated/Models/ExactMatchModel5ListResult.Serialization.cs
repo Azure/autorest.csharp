@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 using MgmtExactMatchInheritance;
 
 namespace MgmtExactMatchInheritance.Models
@@ -21,7 +20,7 @@ namespace MgmtExactMatchInheritance.Models
                 return null;
             }
             IReadOnlyList<ExactMatchModel5Data> value = default;
-            Optional<string> nextLink = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -44,7 +43,7 @@ namespace MgmtExactMatchInheritance.Models
                     continue;
                 }
             }
-            return new ExactMatchModel5ListResult(value ?? new ChangeTrackingList<ExactMatchModel5Data>(), nextLink.Value);
+            return new ExactMatchModel5ListResult(value ?? new ChangeTrackingList<ExactMatchModel5Data>(), nextLink);
         }
     }
 }

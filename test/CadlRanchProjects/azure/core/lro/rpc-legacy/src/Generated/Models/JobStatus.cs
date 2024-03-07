@@ -24,8 +24,8 @@ namespace _Azure.Lro.RpcLegacy.Models
 
         private const string NotStartedValue = "notStarted";
         private const string RunningValue = "running";
-        private const string SucceededValue = "succeeded";
-        private const string FailedValue = "failed";
+        private const string SucceededValue = "Succeeded";
+        private const string FailedValue = "Failed";
         private const string CanceledValue = "canceled";
         private const string PartiallyCompletedValue = "partiallyCompleted";
 

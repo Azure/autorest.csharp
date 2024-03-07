@@ -63,7 +63,13 @@ namespace xms_error_responses.Models
         /// <returns> A new <see cref="Models.PetHungryOrThirstyError"/> instance for mocking. </returns>
         public static PetHungryOrThirstyError PetHungryOrThirstyError(string actionResponse = null, string errorMessage = null, string reason = null, string hungryOrThirsty = null)
         {
-            return new PetHungryOrThirstyError(actionResponse, serializedAdditionalRawData: null, "PetHungryOrThirstyError", errorMessage, reason, hungryOrThirsty);
+            return new PetHungryOrThirstyError(
+                actionResponse,
+                serializedAdditionalRawData: null,
+                "PetHungryOrThirstyError",
+                errorMessage,
+                reason,
+                hungryOrThirsty);
         }
     }
 }

@@ -7,7 +7,7 @@ using System.ComponentModel;
 
 namespace OpenAI.Models
 {
-    /// <summary> Enum for model in CreateCompletionRequest. </summary>
+    /// <summary> The CreateCompletionRequestModel. </summary>
     public readonly partial struct CreateCompletionRequestModel : IEquatable<CreateCompletionRequestModel>
     {
         private readonly string _value;

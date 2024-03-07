@@ -8,6 +8,7 @@
 using System;
 using System.Text.Json;
 using Azure.Core;
+using MgmtNonStringPathVariable;
 
 namespace MgmtNonStringPathVariable.Models
 {
@@ -16,7 +17,7 @@ namespace MgmtNonStringPathVariable.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Buzz.HasValue)
+            if (Optional.IsDefined(Buzz))
             {
                 writer.WritePropertyName("buzz"u8);
                 writer.WriteStringValue(Buzz.Value);
@@ -30,7 +31,7 @@ namespace MgmtNonStringPathVariable.Models
             {
                 return null;
             }
-            Optional<Guid> buzz = default;
+            Guid? buzz = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("buzz"u8))
@@ -43,7 +44,7 @@ namespace MgmtNonStringPathVariable.Models
                     continue;
                 }
             }
-            return new BarProperties(Optional.ToNullable(buzz));
+            return new BarProperties(buzz);
         }
     }
 }
