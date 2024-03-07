@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 using xml_service;
 
 namespace xml_service.Models

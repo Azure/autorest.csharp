@@ -3,7 +3,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.Collections.Generic;
 using System.Linq;
 using OpenAI;
@@ -62,7 +61,7 @@ namespace OpenAI.Models
             Model = model;
             Messages = messages.ToList();
             Functions = new ChangeTrackingList<ChatCompletionFunctions>();
-            LogitBias = new OptionalDictionary<string, long>();
+            LogitBias = new ChangeTrackingDictionary<string, long>();
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateChatCompletionRequest"/>. </summary>
