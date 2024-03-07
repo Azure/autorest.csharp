@@ -13,5 +13,6 @@
   "OverrideOperationName": {
     "FakeParentWithAncestorWithNonResChWithLocs_ListBySubscription": "GetFakeParentWithAncestorWithNonResourceChWithLoc"
   },
+  "flavor": "azure",
   "helper-namespace": "MgmtListMethods"
 }

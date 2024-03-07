@@ -157,11 +157,8 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                 "head-as-boolean": options["head-as-boolean"],
                 "deserialize-null-collection-as-null-value":
                     options["deserialize-null-collection-as-null-value"],
+                flavor: options["flavor"],
                 //only emit these if they are not the default values
-                branded:
-                    options["branded"] === true
-                        ? undefined
-                        : options["branded"],
                 "generate-sample-project":
                     options["generate-sample-project"] === true
                         ? undefined

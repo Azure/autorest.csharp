@@ -10,5 +10,6 @@
   "head-as-boolean": true,
   "skip-csproj-packagereference": true,
   "generation1-convenience-client": true,
+  "flavor": "azure",
   "helper-namespace": "HeadAsBooleanTrue"
 }

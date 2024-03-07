@@ -17,5 +17,6 @@
     "VCPU": "VCpu",
     "VCPUs": "VCpus"
   },
+  "flavor": "azure",
   "helper-namespace": "MgmtHierarchicalNonResource"
 }
