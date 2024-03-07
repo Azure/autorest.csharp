@@ -80,29 +80,14 @@ internal record InputOperation(
             operation.KeepClientDefaultValue);
     }
 
-    private string? _cleanName;
-    public string CleanName
+    public string CleanName { get; } = Name.IsNullOrEmpty() ? string.Empty : Name.ToCleanName();
+    private readonly Dictionary<string, InputOperationExample> _examples = new();
+    public IReadOnlyDictionary<string, InputOperationExample> Examples => _examples.Any() ? _examples : EnsureExamples(_examples);
+
+    private IReadOnlyDictionary<string, InputOperationExample> EnsureExamples(Dictionary<string, InputOperationExample> examples)
     {
-        get
-        {
-            if (_cleanName == null)
-            {
-                _cleanName = Name.IsNullOrEmpty() ? string.Empty : Name.ToCleanName();
-            }
-
-            return _cleanName;
-        }
-    }
-
-    private IReadOnlyDictionary<string, InputOperationExample>? _examples;
-    public IReadOnlyDictionary<string, InputOperationExample> Examples => _examples ??= EnsureExamples();
-
-    private IReadOnlyDictionary<string, InputOperationExample> EnsureExamples()
-    {
-        return new Dictionary<string, InputOperationExample>()
-        {
-            [ExampleMockValueBuilder.ShortVersionMockExampleKey] = ExampleMockValueBuilder.BuildOperationExample(this, false),
-            [ExampleMockValueBuilder.MockExampleAllParameterKey] = ExampleMockValueBuilder.BuildOperationExample(this, true)
-        };
+        examples[ExampleMockValueBuilder.ShortVersionMockExampleKey] = ExampleMockValueBuilder.BuildOperationExample(this, false);
+        examples[ExampleMockValueBuilder.MockExampleAllParameterKey] = ExampleMockValueBuilder.BuildOperationExample(this, true);
+        return examples;
     }
 }

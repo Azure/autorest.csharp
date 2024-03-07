@@ -78,16 +78,15 @@ namespace AutoRest.CSharp.Output.Models
                 return;
             }
 
-            var nextLinkOperation = paging.NextLinkOperation;
-            var nextLinkName = paging.NextLinkName;
+            RestClientMethod? nextPageMethod = paging switch
+            {
+                { SelfNextLink: true } => _restClientMethod,
+                { NextLinkOperation: { } nextLinkOperation } => builders[nextLinkOperation]._restClientMethod,
+                { NextLinkName: { } } => RestClientBuilder.BuildNextPageMethod(_restClientMethod),
+                _ => null
+            };
 
-            RestClientMethod? nextPageMethod = nextLinkOperation != null
-                ? builders[nextLinkOperation]._restClientMethod
-                : nextLinkName != null
-                    ? RestClientBuilder.BuildNextPageMethod(_restClientMethod)
-                    : null;
-
-            _protocolMethodPaging = new ProtocolMethodPaging(nextPageMethod, nextLinkName, paging.ItemName ?? "value");
+            _protocolMethodPaging = new ProtocolMethodPaging(nextPageMethod, paging.NextLinkName, paging.ItemName ?? "value");
         }
 
         public LowLevelClientMethod BuildOperationMethodChain()

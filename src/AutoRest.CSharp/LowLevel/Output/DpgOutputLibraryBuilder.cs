@@ -7,7 +7,9 @@ using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Common.Output.Builders;
+using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -199,33 +201,32 @@ namespace AutoRest.CSharp.Output.Models
         {
             var defaultName = _rootNamespace.Name.ReplaceLast("Client", "");
             // this map of old/new InputOperation is to update the lazy initialization of `Paging.NextLinkOperation`
-            var operationsMap = new Dictionary<InputOperation, InputOperation>();
+            var operationsMap = new Dictionary<InputOperation, Func<InputOperation>>();
             foreach (var client in _rootNamespace.Clients)
             {
                 var clientName = client.Name.IsNullOrEmpty() ? defaultName : client.Name;
-                yield return client with { Operations = client.Operations.Select(op => UpdateOperation(op, clientName, operationsMap)).ToList() };
+                foreach (var operation in client.Operations)
+                {
+                    operationsMap.CreateAndCacheResult(operation, () => UpdateOperation(operation, clientName, operationsMap));
+                }
+
+                yield return client with { Operations = client.Operations.Select(op => operationsMap[op]()).ToList() };
             }
         }
 
-        private static InputOperation UpdateOperation(InputOperation operation, string clientName, IDictionary<InputOperation, InputOperation> operationsMap)
+        private static InputOperation UpdateOperation(InputOperation operation, string clientName, IReadOnlyDictionary<InputOperation, Func<InputOperation>> operationsMap)
         {
-            InputOperation updatedOperation;
             if (operation.Paging != null && !Configuration.DisablePaginationTopRenaming && !operation.Parameters.Any(p => p.Name.Equals(MaxCountParameterName, StringComparison.OrdinalIgnoreCase)))
             {
-                updatedOperation = operation with
+                return operation with
                 {
                     Name = UpdateOperationName(operation, operation.ResourceName ?? clientName),
                     Parameters = UpdateOperationParameters(operation.Parameters),
+                    Paging = UpdateOperationPaging(operation.Paging, operationsMap),
                 };
             }
-            else
-            {
-                updatedOperation = operation with { Name = UpdateOperationName(operation, operation.ResourceName ?? clientName) };
-            }
-            operationsMap.Add(operation, updatedOperation);
 
-            return updatedOperation;
-
+            return operation with { Name = UpdateOperationName(operation, operation.ResourceName ?? clientName) };
         }
 
         private static string UpdateOperationName(InputOperation operation, string clientName)
@@ -247,6 +248,21 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             return parameters;
+        }
+
+        private static OperationPaging? UpdateOperationPaging(OperationPaging? sourcePaging, IReadOnlyDictionary<InputOperation, Func<InputOperation>> operationsMap)
+        {
+            if (sourcePaging == null)
+            {
+                return null;
+            }
+
+            if (sourcePaging.NextLinkOperation != null && operationsMap.TryGetValue(sourcePaging.NextLinkOperation, out var nextLinkOperationRef))
+            {
+                return sourcePaging with {NextLinkOperation = nextLinkOperationRef()};
+            }
+
+            return sourcePaging;
         }
 
         private ClientOptionsTypeProvider CreateClientOptions(IReadOnlyList<ClientInfo> topLevelClientInfos, List<Parameter> parametersInClientOptions)
