@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Network.Management.Interface;
 
 namespace Azure.Network.Management.Interface.Models
 {
@@ -63,15 +64,15 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> type = default;
-            Optional<string> etag = default;
-            Optional<string> id = default;
-            Optional<ProvisioningState> provisioningState = default;
-            Optional<string> privateLinkServiceId = default;
-            Optional<IList<string>> groupIds = default;
-            Optional<string> requestMessage = default;
-            Optional<PrivateLinkServiceConnectionState> privateLinkServiceConnectionState = default;
+            string name = default;
+            string type = default;
+            string etag = default;
+            string id = default;
+            ProvisioningState? provisioningState = default;
+            string privateLinkServiceId = default;
+            IList<string> groupIds = default;
+            string requestMessage = default;
+            PrivateLinkServiceConnectionState privateLinkServiceConnectionState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -149,7 +150,16 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new PrivateLinkServiceConnection(id.Value, name.Value, type.Value, etag.Value, Optional.ToNullable(provisioningState), privateLinkServiceId.Value, Optional.ToList(groupIds), requestMessage.Value, privateLinkServiceConnectionState.Value);
+            return new PrivateLinkServiceConnection(
+                id,
+                name,
+                type,
+                etag,
+                provisioningState,
+                privateLinkServiceId,
+                groupIds ?? new ChangeTrackingList<string>(),
+                requestMessage,
+                privateLinkServiceConnectionState);
         }
     }
 }

@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtPartialResource;
 
 namespace MgmtPartialResource.Models
 {
@@ -34,9 +35,9 @@ namespace MgmtPartialResource.Models
             {
                 return null;
             }
-            Optional<string> configurationProfile = default;
-            Optional<string> targetId = default;
-            Optional<string> status = default;
+            string configurationProfile = default;
+            string targetId = default;
+            string status = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("configurationProfile"u8))
@@ -55,7 +56,7 @@ namespace MgmtPartialResource.Models
                     continue;
                 }
             }
-            return new ConfigurationProfileAssignmentProperties(configurationProfile.Value, targetId.Value, status.Value);
+            return new ConfigurationProfileAssignmentProperties(configurationProfile, targetId, status);
         }
     }
 }

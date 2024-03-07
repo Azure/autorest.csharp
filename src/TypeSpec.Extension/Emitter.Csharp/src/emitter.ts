@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+import { createSdkContext } from "@azure-tools/typespec-client-generator-core";
 import {
     Program,
     resolvePath,
@@ -58,7 +59,11 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
 
     if (!program.compilerOptions.noEmit && !program.hasError()) {
         // Write out the dotnet model to the output path
-        const root = createModel(context);
+        const sdkContext = createSdkContext(
+            context,
+            "@azure-tools/typespec-csharp"
+        );
+        const root = createModel(sdkContext);
         if (
             context.program.diagnostics.length > 0 &&
             context.program.diagnostics.filter(
@@ -112,7 +117,7 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
             );
 
             //emit configuration.json
-            const configurations = {
+            const configurations: Configuration = {
                 "output-folder": ".",
                 namespace: options.namespace ?? tspNamespace,
                 "library-name":
@@ -157,12 +162,19 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                     options["branded"] === true
                         ? undefined
                         : options["branded"],
-                generateTestProject:
-                    options["generateTestProject"] === true
+                "generate-sample-project":
+                    options["generate-sample-project"] === true
                         ? undefined
-                        : options["generateTestProject"],
-                "use-model-reader-writer": options["use-model-reader-writer"]
-            } as Configuration;
+                        : options["generate-sample-project"],
+                "generate-test-project":
+                    options["generate-test-project"] === false
+                        ? undefined
+                        : options["generate-test-project"],
+                "use-model-reader-writer":
+                    options["use-model-reader-writer"] ?? true,
+                "azure-arm":
+                    sdkContext.arm === false ? undefined : sdkContext.arm
+            };
 
             await program.host.writeFile(
                 resolvePath(generatedFolder, configurationFileName),

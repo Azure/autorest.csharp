@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtExactMatchInheritance;
 
 namespace MgmtExactMatchInheritance.Models
 {
@@ -44,10 +45,10 @@ namespace MgmtExactMatchInheritance.Models
             {
                 return null;
             }
-            Optional<string> @new = default;
-            Optional<ResourceIdentifier> id = default;
-            Optional<string> name = default;
-            Optional<string> bar = default;
+            string @new = default;
+            ResourceIdentifier id = default;
+            string name = default;
+            string bar = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("new"u8))
@@ -75,7 +76,7 @@ namespace MgmtExactMatchInheritance.Models
                     continue;
                 }
             }
-            return new ExactMatchModel3(id.Value, name.Value, bar.Value, @new.Value);
+            return new ExactMatchModel3(id, name, bar, @new);
         }
     }
 }

@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace MgmtScopeResource.Models
 {
@@ -18,8 +17,8 @@ namespace MgmtScopeResource.Models
             {
                 return null;
             }
-            Optional<ErrorResponse> errorResponse = default;
-            Optional<DeploymentPropertiesExtended> properties = default;
+            ErrorResponse errorResponse = default;
+            DeploymentPropertiesExtended properties = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("errorResponse"u8))
@@ -41,7 +40,7 @@ namespace MgmtScopeResource.Models
                     continue;
                 }
             }
-            return new DeploymentValidateResult(errorResponse.Value, properties.Value);
+            return new DeploymentValidateResult(errorResponse, properties);
         }
     }
 }

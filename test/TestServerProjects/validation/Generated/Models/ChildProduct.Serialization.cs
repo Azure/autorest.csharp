@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using validation;
 
 namespace validation.Models
 {
@@ -72,7 +73,7 @@ namespace validation.Models
                 return null;
             }
             ChildProductConstProperty constProperty = default;
-            Optional<int> count = default;
+            int? count = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -97,7 +98,7 @@ namespace validation.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ChildProduct(constProperty, Optional.ToNullable(count), serializedAdditionalRawData);
+            return new ChildProduct(constProperty, count, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ChildProduct>.Write(ModelReaderWriterOptions options)

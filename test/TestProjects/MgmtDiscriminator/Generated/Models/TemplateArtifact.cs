@@ -36,15 +36,21 @@ namespace MgmtDiscriminator.Models
         /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="kind"> Specifies the kind of blueprint artifact. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="template"> The Resource Manager template blueprint artifact body. </param>
         /// <param name="resourceGroup"> If applicable, the name of the resource group placeholder to which the Resource Manager template blueprint artifact will be deployed. </param>
         /// <param name="parameters"> Resource Manager template blueprint artifact parameter values. </param>
-        internal TemplateArtifact(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, ArtifactKind kind, BinaryData template, string resourceGroup, IDictionary<string, BinaryData> parameters) : base(id, name, resourceType, systemData, kind)
+        internal TemplateArtifact(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, ArtifactKind kind, IDictionary<string, BinaryData> serializedAdditionalRawData, BinaryData template, string resourceGroup, IDictionary<string, BinaryData> parameters) : base(id, name, resourceType, systemData, kind, serializedAdditionalRawData)
         {
             Template = template;
             ResourceGroup = resourceGroup;
             Parameters = parameters;
             Kind = kind;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="TemplateArtifact"/> for deserialization. </summary>
+        internal TemplateArtifact()
+        {
         }
 
         /// <summary>
@@ -77,8 +83,10 @@ namespace MgmtDiscriminator.Models
         /// </list>
         /// </para>
         /// </summary>
+        [WirePath("properties.template")]
         public BinaryData Template { get; set; }
         /// <summary> If applicable, the name of the resource group placeholder to which the Resource Manager template blueprint artifact will be deployed. </summary>
+        [WirePath("properties.resourceGroup")]
         public string ResourceGroup { get; set; }
         /// <summary>
         /// Resource Manager template blueprint artifact parameter values.
@@ -110,6 +118,7 @@ namespace MgmtDiscriminator.Models
         /// </list>
         /// </para>
         /// </summary>
+        [WirePath("properties.parameters")]
         public IDictionary<string, BinaryData> Parameters { get; }
     }
 }

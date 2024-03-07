@@ -7,7 +7,7 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
+using MgmtScopeResource;
 
 namespace MgmtScopeResource.Models
 {
@@ -19,8 +19,8 @@ namespace MgmtScopeResource.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<DeploymentOperation>> value = default;
-            Optional<string> nextLink = default;
+            IReadOnlyList<DeploymentOperation> value = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -43,7 +43,7 @@ namespace MgmtScopeResource.Models
                     continue;
                 }
             }
-            return new DeploymentOperationsListResult(Optional.ToList(value), nextLink.Value);
+            return new DeploymentOperationsListResult(value ?? new ChangeTrackingList<DeploymentOperation>(), nextLink);
         }
     }
 }

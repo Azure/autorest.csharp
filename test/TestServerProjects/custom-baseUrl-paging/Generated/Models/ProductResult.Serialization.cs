@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using custom_baseUrl_paging;
 
 namespace custom_baseUrl_paging.Models
 {
@@ -79,8 +80,8 @@ namespace custom_baseUrl_paging.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<Product>> values = default;
-            Optional<string> nextLink = default;
+            IReadOnlyList<Product> values = default;
+            string nextLink = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -94,7 +95,7 @@ namespace custom_baseUrl_paging.Models
                     List<Product> array = new List<Product>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Product.DeserializeProduct(item));
+                        array.Add(Product.DeserializeProduct(item, options));
                     }
                     values = array;
                     continue;
@@ -110,7 +111,7 @@ namespace custom_baseUrl_paging.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ProductResult(Optional.ToList(values), nextLink.Value, serializedAdditionalRawData);
+            return new ProductResult(values ?? new ChangeTrackingList<Product>(), nextLink, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ProductResult>.Write(ModelReaderWriterOptions options)

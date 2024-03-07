@@ -18,5 +18,6 @@
   "RenameMapping": {
     "NetworkResource": "Network",
     "MemoryResource": "Memory"
-  }
+  },
+  "helper-namespace": "MgmtResourceName"
 }

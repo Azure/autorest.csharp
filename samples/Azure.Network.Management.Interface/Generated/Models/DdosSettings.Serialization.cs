@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Network.Management.Interface;
 
 namespace Azure.Network.Management.Interface.Models
 {
@@ -39,9 +40,9 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<SubResource> ddosCustomPolicy = default;
-            Optional<DdosSettingsProtectionCoverage> protectionCoverage = default;
-            Optional<bool> protectedIP = default;
+            SubResource ddosCustomPolicy = default;
+            DdosSettingsProtectionCoverage? protectionCoverage = default;
+            bool? protectedIP = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("ddosCustomPolicy"u8))
@@ -72,7 +73,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new DdosSettings(ddosCustomPolicy.Value, Optional.ToNullable(protectionCoverage), Optional.ToNullable(protectedIP));
+            return new DdosSettings(ddosCustomPolicy, protectionCoverage, protectedIP);
         }
     }
 }

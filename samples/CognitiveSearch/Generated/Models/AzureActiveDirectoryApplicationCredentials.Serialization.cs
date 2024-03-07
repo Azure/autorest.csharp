@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {
@@ -32,7 +33,7 @@ namespace CognitiveSearch.Models
                 return null;
             }
             string applicationId = default;
-            Optional<string> applicationSecret = default;
+            string applicationSecret = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("applicationId"u8))
@@ -46,7 +47,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new AzureActiveDirectoryApplicationCredentials(applicationId, applicationSecret.Value);
+            return new AzureActiveDirectoryApplicationCredentials(applicationId, applicationSecret);
         }
     }
 }

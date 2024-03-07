@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace MgmtScopeResource.Models
 {
@@ -18,9 +17,9 @@ namespace MgmtScopeResource.Models
             {
                 return null;
             }
-            Optional<string> id = default;
-            Optional<string> operationId = default;
-            Optional<DeploymentOperationProperties> properties = default;
+            string id = default;
+            string operationId = default;
+            DeploymentOperationProperties properties = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -43,7 +42,7 @@ namespace MgmtScopeResource.Models
                     continue;
                 }
             }
-            return new DeploymentOperation(id.Value, operationId.Value, properties.Value);
+            return new DeploymentOperation(id, operationId, properties);
         }
     }
 }

@@ -7,7 +7,7 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
+using Azure.Network.Management.Interface;
 
 namespace Azure.Network.Management.Interface.Models
 {
@@ -19,8 +19,8 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<NetworkInterface>> value = default;
-            Optional<string> nextLink = default;
+            IReadOnlyList<NetworkInterface> value = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -43,7 +43,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new NetworkInterfaceListResult(Optional.ToList(value), nextLink.Value);
+            return new NetworkInterfaceListResult(value ?? new ChangeTrackingList<NetworkInterface>(), nextLink);
         }
     }
 }

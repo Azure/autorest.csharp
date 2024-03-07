@@ -9,6 +9,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
+using body_complex;
 
 namespace body_complex.Models
 {
@@ -87,15 +88,15 @@ namespace body_complex.Models
             {
                 switch (discriminator.GetString())
                 {
-                    case "cookiecuttershark": return Cookiecuttershark.DeserializeCookiecuttershark(element);
-                    case "goblin": return Goblinshark.DeserializeGoblinshark(element);
-                    case "salmon": return Salmon.DeserializeSalmon(element);
-                    case "sawshark": return Sawshark.DeserializeSawshark(element);
-                    case "shark": return Shark.DeserializeShark(element);
-                    case "smart_salmon": return SmartSalmon.DeserializeSmartSalmon(element);
+                    case "cookiecuttershark": return Cookiecuttershark.DeserializeCookiecuttershark(element, options);
+                    case "goblin": return Goblinshark.DeserializeGoblinshark(element, options);
+                    case "salmon": return Salmon.DeserializeSalmon(element, options);
+                    case "sawshark": return Sawshark.DeserializeSawshark(element, options);
+                    case "shark": return Shark.DeserializeShark(element, options);
+                    case "smart_salmon": return SmartSalmon.DeserializeSmartSalmon(element, options);
                 }
             }
-            return UnknownFish.DeserializeUnknownFish(element);
+            return UnknownFish.DeserializeUnknownFish(element, options);
         }
 
         BinaryData IPersistableModel<Fish>.Write(ModelReaderWriterOptions options)

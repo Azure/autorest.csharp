@@ -95,6 +95,7 @@ namespace NamedTypeSymbolExtensionsTests
                 deserializeNullCollectionAsNullValue: false,
                 useCoreDataFactoryReplacements: true,
                 useModelReaderWriter: true,
+                enableBicepSerialization: true,
                 modelFactoryForHlc: Array.Empty<string>(),
                 unreferencedTypesHandling: Configuration.UnreferencedTypesHandlingOption.RemoveOrInternalize,
                 keepNonOverloadableProtocolSignature: false,
@@ -109,7 +110,9 @@ namespace NamedTypeSymbolExtensionsTests
                 mgmtConfiguration: null,
                 mgmtTestConfiguration: null,
                 branded: true,
-                generateTestProject: true);
+                generateSampleProject: true,
+                generateTestProject: true,
+                helperNamespace: "");
         }
 
         [Test]

@@ -27,16 +27,10 @@ namespace CustomNamespace
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(CustomizedETagProperty))
-            {
-                writer.WritePropertyName("ETag"u8);
-                writer.WriteStringValue(CustomizedETagProperty.ToString());
-            }
-            if (Optional.IsDefined(CustomizedCreatedAtProperty))
-            {
-                writer.WritePropertyName("CreatedAt"u8);
-                writer.WriteStringValue(CustomizedCreatedAtProperty);
-            }
+            writer.WritePropertyName("ETag"u8);
+            writer.WriteStringValue(CustomizedETagProperty.ToString());
+            writer.WritePropertyName("CreatedAt"u8);
+            writer.WriteStringValue(CustomizedCreatedAtProperty);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -75,8 +69,8 @@ namespace CustomNamespace
             {
                 return null;
             }
-            Optional<ETag> eTag = default;
-            Optional<DateTime> createdAt = default;
+            ETag eTag = default;
+            DateTime createdAt = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

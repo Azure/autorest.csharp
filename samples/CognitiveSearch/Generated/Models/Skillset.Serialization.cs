@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {
@@ -49,8 +50,8 @@ namespace CognitiveSearch.Models
             string name = default;
             string description = default;
             IList<Skill> skills = default;
-            Optional<CognitiveServicesAccount> cognitiveServices = default;
-            Optional<string> odataEtag = default;
+            CognitiveServicesAccount cognitiveServices = default;
+            string odataEtag = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -88,7 +89,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new Skillset(name, description, skills, cognitiveServices.Value, odataEtag.Value);
+            return new Skillset(name, description, skills, cognitiveServices, odataEtag);
         }
     }
 }

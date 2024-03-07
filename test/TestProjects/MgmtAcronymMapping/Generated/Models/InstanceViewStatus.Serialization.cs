@@ -8,6 +8,7 @@
 using System;
 using System.Text.Json;
 using Azure.Core;
+using MgmtAcronymMapping;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -50,11 +51,11 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<string> code = default;
-            Optional<StatusLevelType> level = default;
-            Optional<string> displayStatus = default;
-            Optional<string> message = default;
-            Optional<DateTimeOffset> time = default;
+            string code = default;
+            StatusLevelType? level = default;
+            string displayStatus = default;
+            string message = default;
+            DateTimeOffset? time = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("code"u8))
@@ -91,7 +92,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new InstanceViewStatus(code.Value, Optional.ToNullable(level), displayStatus.Value, message.Value, Optional.ToNullable(time));
+            return new InstanceViewStatus(code, level, displayStatus, message, time);
         }
     }
 }

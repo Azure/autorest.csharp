@@ -16,6 +16,7 @@ using AutoRest.CSharp.Output.Models.Shared;
 using Azure;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
@@ -102,7 +103,7 @@ namespace AutoRest.CSharp.Mgmt.Models
                                 new TransformItem(TransformTypeName.PrivilegedOperations, op.OperationId, arg),
                                 op.Operation.GetFullSerializedName(),
                                 $"Operation {op.OperationId} is marked as Privileged Operation");
-                            return new CSharpAttribute(typeof(Azure.Core.CallerShouldAuditAttribute), arg);
+                            return new CSharpAttribute(typeof(Azure.Core.CallerShouldAuditAttribute), Literal(arg));
                         })
                         .ToList();
 
@@ -134,14 +135,34 @@ namespace AutoRest.CSharp.Mgmt.Models
         private FormattableString BuildDescription()
         {
             var pathInformation = _operations.Select(operation =>
-                (FormattableString)$@"<item>
+            {
+                FormattableString resourceItem = $"";
+                if (operation.Resource != null)
+                {
+                    resourceItem = $@"
+<item>
+<term>Resource</term>
+<description>{operation.Resource.Type:C}</description>
+</item>";
+                }
+                FormattableString defaultApiVersion = $"";
+                if (operation.Operation.ApiVersions.Any())
+                {
+                    defaultApiVersion = $@"
+<item>
+<term>Default Api Version</term>
+<description>{string.Join(", ", operation.Operation.ApiVersions.Select(v => v.Version))}</description>
+</item>";
+                }
+                    return (FormattableString)$@"<item>
 <term>Request Path</term>
 <description>{operation.Operation.GetHttpPath()}</description>
 </item>
 <item>
 <term>Operation Id</term>
 <description>{operation.OperationId}</description>
-</item>").ToArray().Join(Environment.NewLine);
+</item>{defaultApiVersion}{resourceItem}";
+            }).ToArray().Join(Environment.NewLine);
             pathInformation = $@"<list type=""bullet"">
 {pathInformation}
 </list>";

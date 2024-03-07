@@ -36,7 +36,7 @@ namespace MgmtListMethods.Models
             {
                 return null;
             }
-            Optional<IList<FakeConfigurationData>> value = default;
+            IList<FakeConfigurationData> value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -54,7 +54,7 @@ namespace MgmtListMethods.Models
                     continue;
                 }
             }
-            return new FakeConfigurationListResult(Optional.ToList(value));
+            return new FakeConfigurationListResult(value ?? new ChangeTrackingList<FakeConfigurationData>());
         }
     }
 }

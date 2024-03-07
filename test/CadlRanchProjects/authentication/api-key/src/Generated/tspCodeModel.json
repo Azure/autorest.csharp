@@ -7,6 +7,7 @@
  "Models": [
   {
    "$id": "2",
+   "Kind": "Model",
    "Name": "InvalidAuth",
    "Namespace": "Authentication.ApiKey",
    "IsNullable": false,
@@ -20,8 +21,8 @@
      "Description": "",
      "Type": {
       "$id": "4",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -49,8 +50,8 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "8",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -66,8 +67,8 @@
         "$id": "9",
         "Type": {
          "$id": "10",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "http://localhost:3000"
@@ -79,8 +80,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "12",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -135,8 +136,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "17",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",

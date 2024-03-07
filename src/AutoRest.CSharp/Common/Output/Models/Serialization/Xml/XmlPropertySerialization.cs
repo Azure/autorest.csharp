@@ -7,7 +7,7 @@ using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models.Serialization.Xml
 {
-    internal abstract class XmlPropertySerialization : PropertySerialization
+    internal abstract record XmlPropertySerialization : PropertySerialization
     {
         public string PropertyName { get; }
 

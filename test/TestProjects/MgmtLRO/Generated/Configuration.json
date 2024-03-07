@@ -12,5 +12,6 @@
   "skip-csproj-packagereference": true,
   "OperationsToLroApiVersionOverride": {
     "Fakes_Update": "2021-06-01"
-  }
+  },
+  "helper-namespace": "MgmtLRO"
 }

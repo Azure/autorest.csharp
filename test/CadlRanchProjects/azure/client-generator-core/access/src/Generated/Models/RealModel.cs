@@ -6,7 +6,8 @@
 #nullable disable
 
 using System;
-using Azure.Core;
+using System.Collections.Generic;
+using _Specs_.Azure.ClientGenerator.Core.Access;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
 {
@@ -26,7 +27,13 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
         /// <summary> Initializes a new instance of <see cref="RealModel"/>. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="name"></param>
-        internal RealModel(string kind, string name) : base(kind, name)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal RealModel(string kind, string name, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(kind, name, serializedAdditionalRawData)
+        {
+        }
+
+        /// <summary> Initializes a new instance of <see cref="RealModel"/> for deserialization. </summary>
+        internal RealModel()
         {
         }
     }

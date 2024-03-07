@@ -8,6 +8,7 @@
 using System;
 using System.Text.Json;
 using Azure.Core;
+using MgmtCustomizations;
 
 namespace MgmtCustomizations.Models
 {
@@ -16,13 +17,20 @@ namespace MgmtCustomizations.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
+            if (Optional.IsDefined(Sleep))
+            {
+                writer.WritePropertyName("sleep"u8);
+                writer.WriteStringValue(Sleep);
+            }
+            if (Optional.IsDefined(Jump))
+            {
+                writer.WritePropertyName("jump"u8);
+                writer.WriteStringValue(Jump);
+            }
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind.ToSerialString());
-            if (Optional.IsDefined(Size))
-            {
-                writer.WritePropertyName("size"u8);
-                SerializeSizeProperty(writer);
-            }
+            writer.WritePropertyName("size"u8);
+            SerializeSizeProperty(writer);
             if (Optional.IsDefined(DateOfBirth))
             {
                 writer.WritePropertyName("dateOfBirth"u8);
@@ -37,13 +45,25 @@ namespace MgmtCustomizations.Models
             {
                 return null;
             }
-            Optional<string> meow = default;
+            string sleep = default;
+            string jump = default;
+            string meow = default;
             PetKind kind = default;
-            Optional<string> name = default;
-            Optional<int> size = default;
-            Optional<DateTimeOffset> dateOfBirth = default;
+            string name = default;
+            int size = default;
+            DateTimeOffset? dateOfBirth = default;
             foreach (var property in element.EnumerateObject())
             {
+                if (property.NameEquals("sleep"u8))
+                {
+                    sleep = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("jump"u8))
+                {
+                    jump = property.Value.GetString();
+                    continue;
+                }
                 if (property.NameEquals("meow"u8))
                 {
                     meow = property.Value.GetString();
@@ -74,7 +94,14 @@ namespace MgmtCustomizations.Models
                     continue;
                 }
             }
-            return new Cat(kind, name.Value, size, Optional.ToNullable(dateOfBirth), meow.Value);
+            return new Cat(
+                kind,
+                name,
+                size,
+                dateOfBirth,
+                sleep,
+                jump,
+                meow);
         }
     }
 }

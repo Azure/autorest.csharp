@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using body_complex;
 
 namespace body_complex.Models
 {
@@ -94,17 +95,17 @@ namespace body_complex.Models
             {
                 switch (discriminator.GetString())
                 {
-                    case "cookiecuttershark": return Cookiecuttershark.DeserializeCookiecuttershark(element);
-                    case "goblin": return Goblinshark.DeserializeGoblinshark(element);
-                    case "sawshark": return Sawshark.DeserializeSawshark(element);
+                    case "cookiecuttershark": return Cookiecuttershark.DeserializeCookiecuttershark(element, options);
+                    case "goblin": return Goblinshark.DeserializeGoblinshark(element, options);
+                    case "sawshark": return Sawshark.DeserializeSawshark(element, options);
                 }
             }
-            Optional<int> age = default;
+            int? age = default;
             DateTimeOffset birthday = default;
             string fishtype = "shark";
-            Optional<string> species = default;
+            string species = default;
             float length = default;
-            Optional<IList<Fish>> siblings = default;
+            IList<Fish> siblings = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -147,7 +148,7 @@ namespace body_complex.Models
                     List<Fish> array = new List<Fish>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DeserializeFish(item));
+                        array.Add(DeserializeFish(item, options));
                     }
                     siblings = array;
                     continue;
@@ -158,7 +159,14 @@ namespace body_complex.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Shark(fishtype, species.Value, length, Optional.ToList(siblings), serializedAdditionalRawData, Optional.ToNullable(age), birthday);
+            return new Shark(
+                fishtype,
+                species,
+                length,
+                siblings ?? new ChangeTrackingList<Fish>(),
+                serializedAdditionalRawData,
+                age,
+                birthday);
         }
 
         BinaryData IPersistableModel<Shark>.Write(ModelReaderWriterOptions options)

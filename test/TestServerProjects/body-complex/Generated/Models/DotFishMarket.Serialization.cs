@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using body_complex;
 
 namespace body_complex.Models
 {
@@ -94,10 +95,10 @@ namespace body_complex.Models
             {
                 return null;
             }
-            Optional<DotSalmon> sampleSalmon = default;
-            Optional<IReadOnlyList<DotSalmon>> salmons = default;
-            Optional<DotFish> sampleFish = default;
-            Optional<IReadOnlyList<DotFish>> fishes = default;
+            DotSalmon sampleSalmon = default;
+            IReadOnlyList<DotSalmon> salmons = default;
+            DotFish sampleFish = default;
+            IReadOnlyList<DotFish> fishes = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -108,7 +109,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    sampleSalmon = DotSalmon.DeserializeDotSalmon(property.Value);
+                    sampleSalmon = DotSalmon.DeserializeDotSalmon(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("salmons"u8))
@@ -120,7 +121,7 @@ namespace body_complex.Models
                     List<DotSalmon> array = new List<DotSalmon>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DotSalmon.DeserializeDotSalmon(item));
+                        array.Add(DotSalmon.DeserializeDotSalmon(item, options));
                     }
                     salmons = array;
                     continue;
@@ -131,7 +132,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    sampleFish = DotFish.DeserializeDotFish(property.Value);
+                    sampleFish = DotFish.DeserializeDotFish(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("fishes"u8))
@@ -143,7 +144,7 @@ namespace body_complex.Models
                     List<DotFish> array = new List<DotFish>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DotFish.DeserializeDotFish(item));
+                        array.Add(DotFish.DeserializeDotFish(item, options));
                     }
                     fishes = array;
                     continue;
@@ -154,7 +155,7 @@ namespace body_complex.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DotFishMarket(sampleSalmon.Value, Optional.ToList(salmons), sampleFish.Value, Optional.ToList(fishes), serializedAdditionalRawData);
+            return new DotFishMarket(sampleSalmon, salmons ?? new ChangeTrackingList<DotSalmon>(), sampleFish, fishes ?? new ChangeTrackingList<DotFish>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<DotFishMarket>.Write(ModelReaderWriterOptions options)

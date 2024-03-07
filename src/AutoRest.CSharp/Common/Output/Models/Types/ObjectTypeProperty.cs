@@ -31,18 +31,17 @@ namespace AutoRest.CSharp.Output.Models.Types
                   optionalViaNullability: field.OptionalViaNullability,
                   getterModifiers: field.GetterModifiers,
                   setterModifiers: field.SetterModifiers,
-                  serializationFormat: field.SerializationFormat,
-                  serializationMapping: field.SerializationMapping)
+                  serializationFormat: field.SerializationFormat)
         {
             InitializationValue = field.InitializationValue;
         }
 
-        public ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, CSharpType? valueType = null, bool optionalViaNullability = false, SourcePropertySerializationMapping? serializationMapping = null)
-            : this(declaration, parameterDescription, isReadOnly, schemaProperty, schemaProperty?.IsRequired ?? false, valueType: valueType, optionalViaNullability: optionalViaNullability, serializationMapping: serializationMapping)
+        public ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, CSharpType? valueType = null, bool optionalViaNullability = false)
+            : this(declaration, parameterDescription, isReadOnly, schemaProperty, schemaProperty?.IsRequired ?? false, valueType: valueType, optionalViaNullability: optionalViaNullability)
         {
         }
 
-        private ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, bool isRequired, CSharpType? valueType = null, bool optionalViaNullability = false, InputModelProperty? inputModelProperty = null, bool isFlattenedProperty = false, FieldModifiers? getterModifiers = null, FieldModifiers? setterModifiers = null, SerializationFormat serializationFormat = SerializationFormat.Default, SourcePropertySerializationMapping? serializationMapping = null)
+        private ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, bool isRequired, CSharpType? valueType = null, bool optionalViaNullability = false, InputModelProperty? inputModelProperty = null, bool isFlattenedProperty = false, FieldModifiers? getterModifiers = null, FieldModifiers? setterModifiers = null, SerializationFormat serializationFormat = SerializationFormat.Default)
         {
             IsReadOnly = isReadOnly;
             SchemaProperty = schemaProperty;
@@ -53,7 +52,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             InputModelProperty = inputModelProperty;
             _baseParameterDescription = parameterDescription;
             SerializationFormat = serializationFormat;
-            SerializationMapping = serializationMapping;
             FormattedDescription = CreatePropertyDescription(parameterDescription, isReadOnly);
             Description = FormattedDescription.ToString();
             IsFlattenedProperty = isFlattenedProperty;
@@ -80,6 +78,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         public SerializationFormat SerializationFormat { get; }
 
         public ValueExpression? InitializationValue { get; }
+
+        public virtual string SerializedName => SchemaProperty?.SerializedName ?? InputModelProperty?.SerializedName ?? Declaration.Name;
 
         private bool IsFlattenedProperty { get; }
 
@@ -166,8 +166,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public FieldModifiers? GetterModifiers { get; }
         public FieldModifiers? SetterModifiers { get; }
-
-        public SourcePropertySerializationMapping? SerializationMapping { get; }
 
         /// <summary>
         /// This method attempts to retrieve the description for each of the union type items. For items that are lists,

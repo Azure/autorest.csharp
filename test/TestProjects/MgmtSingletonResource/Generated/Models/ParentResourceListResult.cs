@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Azure.Core;
 using MgmtSingletonResource;
 
 namespace MgmtSingletonResource.Models

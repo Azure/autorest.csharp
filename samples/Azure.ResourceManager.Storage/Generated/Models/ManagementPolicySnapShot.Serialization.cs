@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Storage;
 
 namespace Azure.ResourceManager.Storage.Models
 {
@@ -39,9 +40,9 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Optional<DateAfterCreation> tierToCool = default;
-            Optional<DateAfterCreation> tierToArchive = default;
-            Optional<DateAfterCreation> delete = default;
+            DateAfterCreation tierToCool = default;
+            DateAfterCreation tierToArchive = default;
+            DateAfterCreation delete = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("tierToCool"u8))
@@ -72,7 +73,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new ManagementPolicySnapShot(tierToCool.Value, tierToArchive.Value, delete.Value);
+            return new ManagementPolicySnapShot(tierToCool, tierToArchive, delete);
         }
     }
 }

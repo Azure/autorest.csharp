@@ -8,6 +8,7 @@
  "Enums": [
   {
    "$id": "2",
+   "Kind": "Enum",
    "Name": "QueryApiVersion",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -27,6 +28,7 @@
  "Models": [
   {
    "$id": "4",
+   "Kind": "Model",
    "Name": "Thing",
    "Namespace": "SpreadTypeSpec",
    "IsNullable": false,
@@ -42,8 +44,8 @@
      "Description": "name of the Thing",
      "Type": {
       "$id": "6",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -56,8 +58,8 @@
      "Description": "age of the Thing",
      "Type": {
       "$id": "8",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -67,6 +69,7 @@
   },
   {
    "$id": "9",
+   "Kind": "Model",
    "Name": "SpreadAliasRequest",
    "Namespace": "SpreadTypeSpec",
    "IsNullable": false,
@@ -82,8 +85,8 @@
      "Description": "name of the Thing",
      "Type": {
       "$id": "11",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -96,8 +99,8 @@
      "Description": "age of the Thing",
      "Type": {
       "$id": "13",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -107,6 +110,7 @@
   },
   {
    "$id": "14",
+   "Kind": "Model",
    "Name": "SpreadMultiTargetAliasRequest",
    "Namespace": "",
    "IsNullable": false,
@@ -122,8 +126,8 @@
      "Description": "name of the Thing",
      "Type": {
       "$id": "16",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -136,8 +140,8 @@
      "Description": "age of the Thing",
      "Type": {
       "$id": "18",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -147,6 +151,7 @@
   },
   {
    "$id": "19",
+   "Kind": "Model",
    "Name": "SpreadAliasWithSpreadAliasRequest",
    "Namespace": "",
    "IsNullable": false,
@@ -162,8 +167,8 @@
      "Description": "name of the Thing",
      "Type": {
       "$id": "21",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -176,8 +181,8 @@
      "Description": "age of the Thing",
      "Type": {
       "$id": "23",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -187,6 +192,7 @@
   },
   {
    "$id": "24",
+   "Kind": "Model",
    "Name": "SpreadAliasWithOptionalPropsRequest",
    "Namespace": "",
    "IsNullable": false,
@@ -202,8 +208,8 @@
      "Description": "name of the Thing",
      "Type": {
       "$id": "26",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -216,8 +222,8 @@
      "Description": "optional property of the Thing",
      "Type": {
       "$id": "28",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -230,8 +236,8 @@
      "Description": "age of the Thing",
      "Type": {
       "$id": "30",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -244,11 +250,12 @@
      "Description": "required array",
      "Type": {
       "$id": "32",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "33",
-       "Name": "int32",
-       "Kind": "Int32",
+       "Kind": "Primitive",
+       "Name": "Int32",
        "IsNullable": false
       },
       "IsNullable": false
@@ -263,11 +270,12 @@
      "Description": "optional array",
      "Type": {
       "$id": "35",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "36",
-       "Name": "string",
-       "Kind": "String",
+       "Kind": "Primitive",
+       "Name": "String",
        "IsNullable": false
       },
       "IsNullable": false
@@ -279,6 +287,7 @@
   },
   {
    "$id": "37",
+   "Kind": "Model",
    "Name": "SpreadAliasWithCollectionsRequest",
    "Namespace": "SpreadTypeSpec",
    "IsNullable": false,
@@ -294,11 +303,12 @@
      "Description": "required list",
      "Type": {
       "$id": "39",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "40",
-       "Name": "string",
-       "Kind": "String",
+       "Kind": "Primitive",
+       "Name": "String",
        "IsNullable": false
       },
       "IsNullable": false
@@ -313,11 +323,12 @@
      "Description": "optional list",
      "Type": {
       "$id": "42",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "43",
-       "Name": "string",
-       "Kind": "String",
+       "Kind": "Primitive",
+       "Name": "String",
        "IsNullable": false
       },
       "IsNullable": false
@@ -346,8 +357,8 @@
        "NameInRequest": "spreadUrl",
        "Type": {
         "$id": "47",
+        "Kind": "Primitive",
         "Name": "Uri",
-        "Kind": "Uri",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -383,8 +394,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "50",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -410,8 +421,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "53",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -466,7 +477,7 @@
       {
        "$id": "57",
        "Name": "SpreadAliasRequest",
-       "NameInRequest": "SpreadAliasRequest",
+       "NameInRequest": "",
        "Type": {
         "$ref": "9"
        },
@@ -486,8 +497,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "59",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -513,8 +524,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "62",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -572,8 +583,8 @@
        "NameInRequest": "id",
        "Type": {
         "$id": "67",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -592,8 +603,8 @@
        "NameInRequest": "top",
        "Type": {
         "$id": "69",
-        "Name": "int32",
-        "Kind": "Int32",
+        "Kind": "Primitive",
+        "Name": "Int32",
         "IsNullable": false
        },
        "Location": "Header",
@@ -609,7 +620,7 @@
       {
        "$id": "70",
        "Name": "SpreadMultiTargetAliasRequest",
-       "NameInRequest": "SpreadMultiTargetAliasRequest",
+       "NameInRequest": "",
        "Type": {
         "$ref": "14"
        },
@@ -629,8 +640,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "72",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -656,8 +667,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "75",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -715,8 +726,8 @@
        "NameInRequest": "id",
        "Type": {
         "$id": "80",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -735,8 +746,8 @@
        "NameInRequest": "top",
        "Type": {
         "$id": "82",
-        "Name": "int32",
-        "Kind": "Int32",
+        "Kind": "Primitive",
+        "Name": "Int32",
         "IsNullable": false
        },
        "Location": "Header",
@@ -772,8 +783,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "85",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -799,8 +810,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "88",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -858,8 +869,8 @@
        "NameInRequest": "id",
        "Type": {
         "$id": "93",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -878,8 +889,8 @@
        "NameInRequest": "top",
        "Type": {
         "$id": "95",
-        "Name": "int32",
-        "Kind": "Int32",
+        "Kind": "Primitive",
+        "Name": "Int32",
         "IsNullable": false
        },
        "Location": "Header",
@@ -895,7 +906,7 @@
       {
        "$id": "96",
        "Name": "SpreadAliasWithSpreadAliasRequest",
-       "NameInRequest": "SpreadAliasWithSpreadAliasRequest",
+       "NameInRequest": "",
        "Type": {
         "$ref": "19"
        },
@@ -915,8 +926,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "98",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -942,8 +953,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "101",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1001,8 +1012,8 @@
        "NameInRequest": "id",
        "Type": {
         "$id": "106",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -1021,8 +1032,8 @@
        "NameInRequest": "top",
        "Type": {
         "$id": "108",
-        "Name": "int32",
-        "Kind": "Int32",
+        "Kind": "Primitive",
+        "Name": "Int32",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1038,7 +1049,7 @@
       {
        "$id": "109",
        "Name": "SpreadAliasWithOptionalPropsRequest",
-       "NameInRequest": "SpreadAliasWithOptionalPropsRequest",
+       "NameInRequest": "",
        "Type": {
         "$ref": "24"
        },
@@ -1058,8 +1069,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "111",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1085,8 +1096,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "114",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1141,7 +1152,7 @@
       {
        "$id": "118",
        "Name": "SpreadAliasWithCollectionsRequest",
-       "NameInRequest": "SpreadAliasWithCollectionsRequest",
+       "NameInRequest": "",
        "Type": {
         "$ref": "37"
        },
@@ -1161,8 +1172,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "120",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1188,8 +1199,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "123",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",

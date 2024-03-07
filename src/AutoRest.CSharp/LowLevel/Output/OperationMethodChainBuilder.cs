@@ -20,6 +20,7 @@ using Azure;
 using Azure.Core;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 using Configuration = AutoRest.CSharp.Common.Input.Configuration;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Output.Models
 {
@@ -92,7 +93,7 @@ namespace AutoRest.CSharp.Output.Models
         public LowLevelClientMethod BuildOperationMethodChain()
         {
             var protocolMethodAttributes = Operation.Deprecated is { } deprecated
-                ? new[] { new CSharpAttribute(typeof(ObsoleteAttribute), deprecated) }
+                ? new[] { new CSharpAttribute(typeof(ObsoleteAttribute), Literal(deprecated)) }
                 : Array.Empty<CSharpAttribute>();
 
             var shouldRequestContextOptional = ShouldRequestContextOptional();
@@ -191,27 +192,10 @@ namespace AutoRest.CSharp.Output.Models
                 };
             }
 
-            // check if there is anything not confident inside this operation
-            var confidentLevel = OperationConfidenceChecker.GetConfidenceLevel(Operation, _typeFactory);
-            return confidentLevel switch
+            return new()
             {
-                ConvenienceMethodConfidenceLevel.Confident => new()
-                {
-                    IsConvenienceMethodGenerated = true,
-                    IsConvenienceMethodInternal = false
-                },
-                ConvenienceMethodConfidenceLevel.Internal => new()
-                {
-                    Message = ConvenienceMethodOmittingMessage.NotConfident,
-                    IsConvenienceMethodGenerated = true,
-                    IsConvenienceMethodInternal = true
-                },
-                ConvenienceMethodConfidenceLevel.Removal => new()
-                {
-                    Message = ConvenienceMethodOmittingMessage.AnonymousModel,
-                    IsConvenienceMethodGenerated = false
-                },
-                _ => throw new InvalidOperationException($"unhandled case {confidentLevel} for operation {Operation}")
+                IsConvenienceMethodGenerated = true,
+                IsConvenienceMethodInternal = false
             };
         }
 
@@ -367,7 +351,7 @@ namespace AutoRest.CSharp.Output.Models
                 name = _restClientMethod.Name.IsLastWordSingular() ? $"{_restClientMethod.Name}Value" : $"{_restClientMethod.Name.LastWordToSingular()}Values";
             }
             var attributes = Operation.Deprecated is { } deprecated
-                ? new[] { new CSharpAttribute(typeof(ObsoleteAttribute), deprecated) }
+                ? new[] { new CSharpAttribute(typeof(ObsoleteAttribute), Literal(deprecated)) }
                 : null;
 
             var protocolToConvenience = new List<ProtocolToConvenienceParameterConverter>();

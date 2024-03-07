@@ -5,9 +5,11 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -31,6 +33,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// Resource Id
         /// Serialized Name: SubResource.id
         /// </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="name">
         /// The IP configuration name.
         /// Serialized Name: VirtualMachineScaleSetUpdateIPConfiguration.name
@@ -67,7 +70,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// The load balancer inbound nat pools.
         /// Serialized Name: VirtualMachineScaleSetUpdateIPConfiguration.properties.loadBalancerInboundNatPools
         /// </param>
-        internal VirtualMachineScaleSetUpdateIPConfiguration(string id, string name, WritableSubResource subnet, bool? primary, VirtualMachineScaleSetUpdatePublicIPAddressConfiguration publicIPAddressConfiguration, IPVersion? privateIPAddressVersion, IList<WritableSubResource> applicationGatewayBackendAddressPools, IList<WritableSubResource> applicationSecurityGroups, IList<WritableSubResource> loadBalancerBackendAddressPools, IList<WritableSubResource> loadBalancerInboundNatPools) : base(id)
+        internal VirtualMachineScaleSetUpdateIPConfiguration(string id, IDictionary<string, BinaryData> serializedAdditionalRawData, string name, WritableSubResource subnet, bool? primary, VirtualMachineScaleSetUpdatePublicIPAddressConfiguration publicIPAddressConfiguration, IPVersion? privateIPAddressVersion, IList<WritableSubResource> applicationGatewayBackendAddressPools, IList<WritableSubResource> applicationSecurityGroups, IList<WritableSubResource> loadBalancerBackendAddressPools, IList<WritableSubResource> loadBalancerInboundNatPools) : base(id, serializedAdditionalRawData)
         {
             Name = name;
             Subnet = subnet;
@@ -84,6 +87,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// The IP configuration name.
         /// Serialized Name: VirtualMachineScaleSetUpdateIPConfiguration.name
         /// </summary>
+        [WirePath("name")]
         public string Name { get; set; }
         /// <summary>
         /// The subnet.
@@ -91,6 +95,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// </summary>
         internal WritableSubResource Subnet { get; set; }
         /// <summary> Gets or sets Id. </summary>
+        [WirePath("properties.subnet.id")]
         public ResourceIdentifier SubnetId
         {
             get => Subnet is null ? default : Subnet.Id;
@@ -106,36 +111,43 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies the primary IP Configuration in case the network interface has more than one IP Configuration.
         /// Serialized Name: VirtualMachineScaleSetUpdateIPConfiguration.properties.primary
         /// </summary>
+        [WirePath("properties.primary")]
         public bool? Primary { get; set; }
         /// <summary>
         /// The publicIPAddressConfiguration.
         /// Serialized Name: VirtualMachineScaleSetUpdateIPConfiguration.properties.publicIPAddressConfiguration
         /// </summary>
+        [WirePath("properties.publicIPAddressConfiguration")]
         public VirtualMachineScaleSetUpdatePublicIPAddressConfiguration PublicIPAddressConfiguration { get; set; }
         /// <summary>
         /// Available from Api-Version 2017-03-30 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4.  Possible values are: 'IPv4' and 'IPv6'.
         /// Serialized Name: VirtualMachineScaleSetUpdateIPConfiguration.properties.privateIPAddressVersion
         /// </summary>
+        [WirePath("properties.privateIPAddressVersion")]
         public IPVersion? PrivateIPAddressVersion { get; set; }
         /// <summary>
         /// The application gateway backend address pools.
         /// Serialized Name: VirtualMachineScaleSetUpdateIPConfiguration.properties.applicationGatewayBackendAddressPools
         /// </summary>
+        [WirePath("properties.applicationGatewayBackendAddressPools")]
         public IList<WritableSubResource> ApplicationGatewayBackendAddressPools { get; }
         /// <summary>
         /// Specifies an array of references to application security group.
         /// Serialized Name: VirtualMachineScaleSetUpdateIPConfiguration.properties.applicationSecurityGroups
         /// </summary>
+        [WirePath("properties.applicationSecurityGroups")]
         public IList<WritableSubResource> ApplicationSecurityGroups { get; }
         /// <summary>
         /// The load balancer backend address pools.
         /// Serialized Name: VirtualMachineScaleSetUpdateIPConfiguration.properties.loadBalancerBackendAddressPools
         /// </summary>
+        [WirePath("properties.loadBalancerBackendAddressPools")]
         public IList<WritableSubResource> LoadBalancerBackendAddressPools { get; }
         /// <summary>
         /// The load balancer inbound nat pools.
         /// Serialized Name: VirtualMachineScaleSetUpdateIPConfiguration.properties.loadBalancerInboundNatPools
         /// </summary>
+        [WirePath("properties.loadBalancerInboundNatPools")]
         public IList<WritableSubResource> LoadBalancerInboundNatPools { get; }
     }
 }

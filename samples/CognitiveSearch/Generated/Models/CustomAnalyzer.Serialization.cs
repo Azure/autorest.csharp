@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {
@@ -52,8 +53,8 @@ namespace CognitiveSearch.Models
                 return null;
             }
             TokenizerName tokenizer = default;
-            Optional<IList<TokenFilterName>> tokenFilters = default;
-            Optional<IList<CharFilterName>> charFilters = default;
+            IList<TokenFilterName> tokenFilters = default;
+            IList<CharFilterName> charFilters = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
@@ -102,7 +103,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new CustomAnalyzer(odataType, name, tokenizer, Optional.ToList(tokenFilters), Optional.ToList(charFilters));
+            return new CustomAnalyzer(odataType, name, tokenizer, tokenFilters ?? new ChangeTrackingList<TokenFilterName>(), charFilters ?? new ChangeTrackingList<CharFilterName>());
         }
     }
 }

@@ -7,21 +7,12 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace _Type.Property.AdditionalProperties.Models
 {
     /// <summary> Unknown version of IsUnknownAdditionalPropertiesDiscriminated. </summary>
     internal partial class UnknownIsUnknownAdditionalPropertiesDiscriminated : IsUnknownAdditionalPropertiesDiscriminated
     {
-        /// <summary> Initializes a new instance of <see cref="UnknownIsUnknownAdditionalPropertiesDiscriminated"/>. </summary>
-        /// <param name="name"> The name property. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        internal UnknownIsUnknownAdditionalPropertiesDiscriminated(string name) : base(name)
-        {
-            Argument.AssertNotNull(name, nameof(name));
-        }
-
         /// <summary> Initializes a new instance of <see cref="UnknownIsUnknownAdditionalPropertiesDiscriminated"/>. </summary>
         /// <param name="name"> The name property. </param>
         /// <param name="kind"> The discriminator. </param>

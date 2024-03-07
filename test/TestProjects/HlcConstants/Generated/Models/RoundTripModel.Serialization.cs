@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using HlcConstants;
 
 namespace HlcConstants.Models
 {
@@ -34,8 +35,8 @@ namespace HlcConstants.Models
             {
                 return null;
             }
-            Optional<ModelWithRequiredConstant> requiredConstantModel = default;
-            Optional<ModelWithOptionalConstant> optionalConstantModel = default;
+            ModelWithRequiredConstant requiredConstantModel = default;
+            ModelWithOptionalConstant optionalConstantModel = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredConstantModel"u8))
@@ -57,7 +58,7 @@ namespace HlcConstants.Models
                     continue;
                 }
             }
-            return new RoundTripModel(requiredConstantModel.Value, optionalConstantModel.Value);
+            return new RoundTripModel(requiredConstantModel, optionalConstantModel);
         }
     }
 }

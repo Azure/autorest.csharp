@@ -8,6 +8,7 @@
 using System;
 using System.Text.Json;
 using Azure.Core;
+using MgmtAcronymMapping;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -30,7 +31,7 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<Uri> uri = default;
+            Uri uri = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("uri"u8))
@@ -43,7 +44,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualHardDisk(uri.Value);
+            return new VirtualHardDisk(uri);
         }
     }
 }

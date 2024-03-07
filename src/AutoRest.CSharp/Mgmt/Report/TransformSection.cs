@@ -18,7 +18,7 @@ namespace AutoRest.CSharp.Mgmt.Report
         {
         }
 
-        public IEnumerable<(TransformItem Transfom, TransformLog Log)> GetAppliedTransformLogs(string targetSerializedName, List<string>? transformTypes = null)
+        public IEnumerable<(TransformItem Transform, TransformLog Log)> GetAppliedTransformLogs(string targetSerializedName, HashSet<string>? transformTypes = null)
         {
             foreach (var (transform, logs) in _transformItemDict)
             {

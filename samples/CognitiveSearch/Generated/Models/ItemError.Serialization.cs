@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
@@ -18,12 +17,12 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            Optional<string> key = default;
+            string key = default;
             string errorMessage = default;
             int statusCode = default;
-            Optional<string> name = default;
-            Optional<string> details = default;
-            Optional<string> documentationLink = default;
+            string name = default;
+            string details = default;
+            string documentationLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("key"u8))
@@ -57,7 +56,13 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new ItemError(key.Value, errorMessage, statusCode, name.Value, details.Value, documentationLink.Value);
+            return new ItemError(
+                key,
+                errorMessage,
+                statusCode,
+                name,
+                details,
+                documentationLink);
         }
     }
 }

@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtSafeFlatten;
 
 namespace MgmtSafeFlatten.Models
 {
@@ -29,7 +30,7 @@ namespace MgmtSafeFlatten.Models
             {
                 return null;
             }
-            Optional<LayerTwoSingle> layerTwo = default;
+            LayerTwoSingle layerTwo = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("layerTwo"u8))
@@ -42,7 +43,7 @@ namespace MgmtSafeFlatten.Models
                     continue;
                 }
             }
-            return new LayerOneSingle(layerTwo.Value);
+            return new LayerOneSingle(layerTwo);
         }
     }
 }

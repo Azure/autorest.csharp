@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {
@@ -95,14 +96,14 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            Optional<IList<EntityCategory>> categories = default;
-            Optional<EntityRecognitionSkillLanguage> defaultLanguageCode = default;
-            Optional<bool?> includeTypelessEntities = default;
-            Optional<double?> minimumPrecision = default;
+            IList<EntityCategory> categories = default;
+            EntityRecognitionSkillLanguage? defaultLanguageCode = default;
+            bool? includeTypelessEntities = default;
+            double? minimumPrecision = default;
             string odataType = default;
-            Optional<string> name = default;
-            Optional<string> description = default;
-            Optional<string> context = default;
+            string name = default;
+            string description = default;
+            string context = default;
             IList<InputFieldMappingEntry> inputs = default;
             IList<OutputFieldMappingEntry> outputs = default;
             foreach (var property in element.EnumerateObject())
@@ -191,7 +192,17 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new EntityRecognitionSkill(odataType, name.Value, description.Value, context.Value, inputs, outputs, Optional.ToList(categories), Optional.ToNullable(defaultLanguageCode), Optional.ToNullable(includeTypelessEntities), Optional.ToNullable(minimumPrecision));
+            return new EntityRecognitionSkill(
+                odataType,
+                name,
+                description,
+                context,
+                inputs,
+                outputs,
+                categories ?? new ChangeTrackingList<EntityCategory>(),
+                defaultLanguageCode,
+                includeTypelessEntities,
+                minimumPrecision);
         }
     }
 }

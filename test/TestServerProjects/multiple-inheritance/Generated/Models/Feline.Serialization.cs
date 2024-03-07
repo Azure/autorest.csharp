@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using multiple_inheritance;
 
 namespace multiple_inheritance.Models
 {
@@ -74,8 +75,8 @@ namespace multiple_inheritance.Models
             {
                 return null;
             }
-            Optional<bool> meows = default;
-            Optional<bool> hisses = default;
+            bool? meows = default;
+            bool? hisses = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -104,7 +105,7 @@ namespace multiple_inheritance.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Feline(Optional.ToNullable(meows), Optional.ToNullable(hisses), serializedAdditionalRawData);
+            return new Feline(meows, hisses, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<Feline>.Write(ModelReaderWriterOptions options)

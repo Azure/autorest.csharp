@@ -60,14 +60,16 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static StringExpression LiteralU8(string value) => new(new StringLiteralExpression(value, true));
 
         public static BoolExpression GreaterThan(ValueExpression left, ValueExpression right) => new(new BinaryOperatorExpression(">", left, right));
+        public static BoolExpression LessThan(ValueExpression left, ValueExpression right) => new(new BinaryOperatorExpression("<", left, right));
         public static BoolExpression Equal(ValueExpression left, ValueExpression right) => new(new BinaryOperatorExpression("==", left, right));
         public static BoolExpression NotEqual(ValueExpression left, ValueExpression right) => new(new BinaryOperatorExpression("!=", left, right));
-        public static BoolExpression Is(ValueExpression value, CSharpType type) => new(new BinaryOperatorExpression("is", value, type));
 
         public static BoolExpression Is(XElementExpression value, string name, out XElementExpression xElement)
             => Is<XElementExpression>(value, name, d => new XElementExpression(d), out xElement);
         public static BoolExpression Is(XAttributeExpression value, string name, out XAttributeExpression xAttribute)
             => Is<XAttributeExpression>(value, name, d => new XAttributeExpression(d), out xAttribute);
+        public static BoolExpression Is(ValueExpression left, ValueExpression right)
+            => new(new BinaryOperatorExpression("is", left, right));
 
         public static BoolExpression Or(BoolExpression left, BoolExpression right) => new(new BinaryOperatorExpression("||", left.Untyped, right.Untyped));
         public static BoolExpression And(BoolExpression left, BoolExpression right) => new(new BinaryOperatorExpression("&&", left.Untyped, right.Untyped));
@@ -76,6 +78,7 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static MethodBodyStatement EmptyLine => new EmptyLineStatement();
         public static KeywordStatement Continue => new("continue", null);
         public static KeywordStatement Return(ValueExpression expression) => new("return", expression);
+        public static KeywordStatement Return() => new("return", null);
         public static KeywordStatement Throw(ValueExpression expression) => new("throw", expression);
 
         public static EnumerableExpression InvokeArrayEmpty(CSharpType arrayItemType)
@@ -90,7 +93,11 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static MethodBodyStatement InvokeCustomSerializationMethod(string methodName, Utf8JsonWriterExpression utf8JsonWriter)
             => new InvokeInstanceMethodStatement(null, methodName, utf8JsonWriter);
 
-        // Expected signature: MethodName(JsonProperty property, ref Optional<T> optional)
+        // Expected signature: MethodName(StringBuilder builder);
+        public static MethodBodyStatement InvokeCustomBicepSerializationMethod(string methodName, StringBuilderExpression stringBuilder)
+            => new InvokeInstanceMethodStatement(null, methodName, stringBuilder);
+
+        // Expected signature: MethodName(JsonProperty property, ref T optional)
         public static MethodBodyStatement InvokeCustomDeserializationMethod(string methodName, JsonPropertyExpression jsonProperty, CodeWriterDeclaration variable)
             => new InvokeStaticMethodStatement(null, methodName, new ValueExpression[]{jsonProperty, new FormattableStringToExpression($"ref {variable}")});
 

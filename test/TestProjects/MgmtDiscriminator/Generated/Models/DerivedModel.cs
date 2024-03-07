@@ -8,7 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Azure.Core;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -27,13 +27,20 @@ namespace MgmtDiscriminator.Models
 
         /// <summary> Initializes a new instance of <see cref="DerivedModel"/>. </summary>
         /// <param name="optionalString"></param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="requiredCollection"></param>
-        internal DerivedModel(string optionalString, IList<string> requiredCollection) : base(optionalString)
+        internal DerivedModel(string optionalString, IDictionary<string, BinaryData> serializedAdditionalRawData, IList<string> requiredCollection) : base(optionalString, serializedAdditionalRawData)
         {
             RequiredCollection = requiredCollection;
         }
 
+        /// <summary> Initializes a new instance of <see cref="DerivedModel"/> for deserialization. </summary>
+        internal DerivedModel()
+        {
+        }
+
         /// <summary> Gets the required collection. </summary>
+        [WirePath("requiredCollection")]
         public IList<string> RequiredCollection { get; }
     }
 }

@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Network.Management.Interface;
 
 namespace Azure.Network.Management.Interface.Models
 {
@@ -118,22 +119,22 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> etag = default;
-            Optional<string> id = default;
-            Optional<IList<VirtualNetworkTap>> virtualNetworkTaps = default;
-            Optional<IList<ApplicationGatewayBackendAddressPool>> applicationGatewayBackendAddressPools = default;
-            Optional<IList<BackendAddressPool>> loadBalancerBackendAddressPools = default;
-            Optional<IList<InboundNatRule>> loadBalancerInboundNatRules = default;
-            Optional<string> privateIPAddress = default;
-            Optional<IPAllocationMethod> privateIPAllocationMethod = default;
-            Optional<IPVersion> privateIPAddressVersion = default;
-            Optional<Subnet> subnet = default;
-            Optional<bool> primary = default;
-            Optional<PublicIPAddress> publicIPAddress = default;
-            Optional<IList<ApplicationSecurityGroup>> applicationSecurityGroups = default;
-            Optional<ProvisioningState> provisioningState = default;
-            Optional<NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties> privateLinkConnectionProperties = default;
+            string name = default;
+            string etag = default;
+            string id = default;
+            IList<VirtualNetworkTap> virtualNetworkTaps = default;
+            IList<ApplicationGatewayBackendAddressPool> applicationGatewayBackendAddressPools = default;
+            IList<BackendAddressPool> loadBalancerBackendAddressPools = default;
+            IList<InboundNatRule> loadBalancerInboundNatRules = default;
+            string privateIPAddress = default;
+            IPAllocationMethod? privateIPAllocationMethod = default;
+            IPVersion? privateIPAddressVersion = default;
+            Subnet subnet = default;
+            bool? primary = default;
+            PublicIPAddress publicIPAddress = default;
+            IList<ApplicationSecurityGroup> applicationSecurityGroups = default;
+            ProvisioningState? provisioningState = default;
+            NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties privateLinkConnectionProperties = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -302,7 +303,23 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new NetworkInterfaceIPConfiguration(id.Value, name.Value, etag.Value, Optional.ToList(virtualNetworkTaps), Optional.ToList(applicationGatewayBackendAddressPools), Optional.ToList(loadBalancerBackendAddressPools), Optional.ToList(loadBalancerInboundNatRules), privateIPAddress.Value, Optional.ToNullable(privateIPAllocationMethod), Optional.ToNullable(privateIPAddressVersion), subnet.Value, Optional.ToNullable(primary), publicIPAddress.Value, Optional.ToList(applicationSecurityGroups), Optional.ToNullable(provisioningState), privateLinkConnectionProperties.Value);
+            return new NetworkInterfaceIPConfiguration(
+                id,
+                name,
+                etag,
+                virtualNetworkTaps ?? new ChangeTrackingList<VirtualNetworkTap>(),
+                applicationGatewayBackendAddressPools ?? new ChangeTrackingList<ApplicationGatewayBackendAddressPool>(),
+                loadBalancerBackendAddressPools ?? new ChangeTrackingList<BackendAddressPool>(),
+                loadBalancerInboundNatRules ?? new ChangeTrackingList<InboundNatRule>(),
+                privateIPAddress,
+                privateIPAllocationMethod,
+                privateIPAddressVersion,
+                subnet,
+                primary,
+                publicIPAddress,
+                applicationSecurityGroups ?? new ChangeTrackingList<ApplicationSecurityGroup>(),
+                provisioningState,
+                privateLinkConnectionProperties);
         }
     }
 }

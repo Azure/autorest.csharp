@@ -7,7 +7,7 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
+using AppConfiguration;
 
 namespace AppConfiguration.Models
 {
@@ -19,8 +19,8 @@ namespace AppConfiguration.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<KeyValue>> items = default;
-            Optional<string> nextLink = default;
+            IReadOnlyList<KeyValue> items = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("items"u8))
@@ -43,7 +43,7 @@ namespace AppConfiguration.Models
                     continue;
                 }
             }
-            return new KeyValueListResult(Optional.ToList(items), nextLink.Value);
+            return new KeyValueListResult(items ?? new ChangeTrackingList<KeyValue>(), nextLink);
         }
     }
 }

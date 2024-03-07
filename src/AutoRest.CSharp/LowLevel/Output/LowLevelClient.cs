@@ -30,7 +30,6 @@ namespace AutoRest.CSharp.Output.Models
         private readonly IReadOnlyDictionary<string, InputClientExample> _clientParameterExamples;
         private readonly InputAuth _authorization;
         private readonly IEnumerable<InputOperation> _operations;
-        private readonly SourceInputModel? _sourceInputModel;
 
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility => "public";
@@ -77,7 +76,6 @@ namespace AutoRest.CSharp.Output.Models
             _clientParameterExamples = examples;
             _authorization = authorization;
             _operations = operations;
-            _sourceInputModel = sourceInputModel;
 
             SubClients = Array.Empty<LowLevelClient>();
         }
@@ -301,12 +299,13 @@ namespace AutoRest.CSharp.Output.Models
                 .Concat(RestClientBuilder.GetConstructorParameters(Parameters, null, includeAPIVersion: true).OrderBy(parameter => !parameter.Name.Equals("endpoint", StringComparison.OrdinalIgnoreCase)))
                 .Where(p => Fields.GetFieldByParameter(p) != null);
 
-        internal MethodSignatureBase? GetEffectiveCtor()
+        internal MethodSignatureBase? GetEffectiveCtor(bool includeClientOptions = false)
         {
             //TODO: This method is needed because we allow roslyn code gen attributes to be run AFTER the writers do their job but before
             //      the code is emitted. This is a hack to allow the writers to know what the effective ctor is after the roslyn code gen attributes
+            var constructors = includeClientOptions ? PrimaryConstructors : SecondaryConstructors;
 
-            List<ConstructorSignature> candidates = new List<ConstructorSignature>(SecondaryConstructors.Where(c => c.Modifiers == MethodSignatureModifiers.Public));
+            List<ConstructorSignature> candidates = new(constructors.Where(c => c.Modifiers.HasFlag(Public)));
 
             if (ExistingType is not null)
             {
@@ -328,7 +327,7 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     var parameters = existingCtor.Parameters;
                     var modifiers = GetModifiers(existingCtor);
-                    bool isPublic = modifiers.HasFlag(MethodSignatureModifiers.Public);
+                    bool isPublic = modifiers.HasFlag(Public);
                     //TODO: Currently skipping ctors which use models from the library due to constructing with all empty lists.
                     if (!isPublic || parameters.Length == 0 || parameters.Any(p => ((INamedTypeSymbol)p.Type).GetCSharpType(_typeFactory) == null))
                     {
@@ -353,7 +352,10 @@ namespace AutoRest.CSharp.Output.Models
                 }
             }
 
-            return candidates.OrderBy(c => c.Parameters.Count).FirstOrDefault();
+            var results = candidates.OrderBy(c => c.Parameters.Count);
+            return includeClientOptions
+                ? results.FirstOrDefault(c => c.Parameters.Last().Type.EqualsIgnoreNullable(ClientOptions.Type))
+                : results.FirstOrDefault();
         }
 
         private FormattableString? GetSummaryPortion(string? xmlComment)

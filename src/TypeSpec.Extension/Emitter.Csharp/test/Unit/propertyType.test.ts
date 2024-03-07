@@ -1,14 +1,16 @@
 import { TestHost } from "@typespec/compiler/testing";
 import assert, { deepStrictEqual } from "assert";
 import { createModel } from "../../src/lib/clientModelBuilder.js";
-import { CodeModel } from "../../src/type/codeModel.js";
 import {
     typeSpecCompile,
     createEmitterContext,
-    createEmitterTestHost
+    createEmitterTestHost,
+    createNetSdkContext
 } from "./utils/TestUtil.js";
-import { InputEnumType } from "../../src/type/inputType.js";
+import { InputEnumType, InputListType } from "../../src/type/inputType.js";
 import isEqual from "lodash.isequal";
+import { InputTypeKind } from "../../src/type/inputTypeKind.js";
+import { InputPrimitiveTypeKind } from "../../src/type/inputPrimitiveTypeKind.js";
 
 describe("Test GetInputType for array", () => {
     let runner: TestHost;
@@ -26,22 +28,24 @@ describe("Test GetInputType for array", () => {
         );
         runner.compileAndDiagnose;
         const context = createEmitterContext(program);
-        const root: CodeModel = createModel(context);
+        const sdkContext = createNetSdkContext(context);
+        const root = createModel(sdkContext);
         deepStrictEqual(
-            root.Clients[0].Operations[0].Parameters[0].Type.Name,
-            "Array"
+            root.Clients[0].Operations[0].Parameters[0].Type.Kind,
+            InputTypeKind.Array
         );
         assert(
             isEqual(
                 {
-                    Name: "Array",
+                    Kind: InputTypeKind.Array,
+                    Name: InputTypeKind.Array,
                     ElementType: {
-                        Name: "string",
-                        Kind: "String",
+                        Kind: InputTypeKind.Primitive,
+                        Name: InputPrimitiveTypeKind.String,
                         IsNullable: false
                     },
                     IsNullable: false
-                },
+                } as InputListType,
                 root.Clients[0].Operations[0].Parameters[0].Type
             )
         );
@@ -55,22 +59,24 @@ describe("Test GetInputType for array", () => {
             runner
         );
         const context = createEmitterContext(program);
-        const root: CodeModel = createModel(context);
+        const sdkContext = createNetSdkContext(context);
+        const root = createModel(sdkContext);
         deepStrictEqual(
-            root.Clients[0].Operations[0].Responses[0].BodyType?.Name,
-            "Array"
+            root.Clients[0].Operations[0].Responses[0].BodyType?.Kind,
+            InputTypeKind.Array
         );
         assert(
             isEqual(
                 {
-                    Name: "Array",
+                    Kind: InputTypeKind.Array,
+                    Name: InputTypeKind.Array,
                     ElementType: {
-                        Name: "string",
-                        Kind: "String",
+                        Kind: InputTypeKind.Primitive,
+                        Name: InputPrimitiveTypeKind.String,
                         IsNullable: false
                     },
                     IsNullable: false
-                },
+                } as InputListType,
                 root.Clients[0].Operations[0].Responses[0].BodyType
             )
         );
@@ -106,10 +112,12 @@ describe("Test GetInputType for enum", () => {
             { IsNamespaceNeeded: true, IsAzureCoreNeeded: true }
         );
         const context = createEmitterContext(program);
-        const root: CodeModel = createModel(context);
+        const sdkContext = createNetSdkContext(context);
+        const root = createModel(sdkContext);
         assert(
             isEqual(
                 {
+                    Kind: InputTypeKind.Enum,
                     Name: "SimpleEnum",
                     Namespace: "Azure.Csharp.Testing",
                     Accessibility: undefined,
@@ -136,7 +144,7 @@ describe("Test GetInputType for enum", () => {
                     IsExtensible: false,
                     IsNullable: false,
                     Usage: "Input"
-                },
+                } as InputEnumType,
                 root.Clients[0].Operations[0].Parameters[0].Type
             )
         );
@@ -168,10 +176,12 @@ describe("Test GetInputType for enum", () => {
             { IsNamespaceNeeded: true, IsAzureCoreNeeded: true }
         );
         const context = createEmitterContext(program);
-        const root: CodeModel = createModel(context);
+        const sdkContext = createNetSdkContext(context);
+        const root = createModel(sdkContext);
         assert(
             isEqual(
                 {
+                    Kind: InputTypeKind.Enum,
                     Name: "FixedIntEnum",
                     Namespace: "Azure.Csharp.Testing",
                     Accessibility: undefined,
@@ -198,7 +208,7 @@ describe("Test GetInputType for enum", () => {
                     IsExtensible: false,
                     IsNullable: false,
                     Usage: "Input"
-                },
+                } as InputEnumType,
                 root.Clients[0].Operations[0].Parameters[0].Type
             )
         );
@@ -223,10 +233,12 @@ describe("Test GetInputType for enum", () => {
             runner
         );
         const context = createEmitterContext(program);
-        const root: CodeModel = createModel(context);
+        const sdkContext = createNetSdkContext(context);
+        const root = createModel(sdkContext);
         assert(
             isEqual(
                 {
+                    Kind: InputTypeKind.Enum,
                     Name: "ExtensibleEnum",
                     Namespace: "Azure.Csharp.Testing",
                     Accessibility: undefined,
@@ -241,7 +253,7 @@ describe("Test GetInputType for enum", () => {
                     IsExtensible: true,
                     IsNullable: false,
                     Usage: "Input"
-                },
+                } as InputEnumType,
                 root.Clients[0].Operations[0].Parameters[0].Type
             )
         );

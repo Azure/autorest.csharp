@@ -24,6 +24,7 @@
   },
   {
    "$id": "4",
+   "Kind": "Enum",
    "Name": "TimeGranularity",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -81,8 +82,9 @@
   },
   {
    "$id": "14",
+   "Kind": "Enum",
    "Name": "ImputeMode",
-   "EnumValueType": "String",
+   "EnumValueType": "string",
    "AllowedValues": [
     {
      "$id": "15",
@@ -123,6 +125,7 @@
   },
   {
    "$id": "21",
+   "Kind": "Enum",
    "Name": "MultivariateBatchDetectionStatus",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -155,8 +158,9 @@
   },
   {
    "$id": "26",
+   "Kind": "Enum",
    "Name": "DataSchema",
-   "EnumValueType": "String",
+   "EnumValueType": "string",
    "AllowedValues": [
     {
      "$id": "27",
@@ -179,6 +183,7 @@
   },
   {
    "$id": "29",
+   "Kind": "Enum",
    "Name": "AlignMode",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -201,8 +206,9 @@
   },
   {
    "$id": "32",
+   "Kind": "Enum",
    "Name": "FillNAMethod",
-   "EnumValueType": "String",
+   "EnumValueType": "string",
    "AllowedValues": [
     {
      "$id": "33",
@@ -238,6 +244,7 @@
   },
   {
    "$id": "38",
+   "Kind": "Enum",
    "Name": "ModelStatus",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -270,6 +277,7 @@
   },
   {
    "$id": "43",
+   "Kind": "Enum",
    "Name": "AnomalyDetectorErrorCodes",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -337,6 +345,7 @@
   },
   {
    "$id": "55",
+   "Kind": "Enum",
    "Name": "Versions",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -356,6 +365,7 @@
  "Models": [
   {
    "$id": "57",
+   "Kind": "Model",
    "Name": "UnivariateDetectionOptions",
    "Namespace": "AnomalyDetector.Univariate",
    "Description": "The request of entire or last anomaly detection.",
@@ -372,9 +382,11 @@
      "Description": "Time series data points. Points should be sorted by timestamp in ascending\norder to match the anomaly detection result. If the data is not sorted\ncorrectly or there is duplicated timestamp, the API will not work. In such\ncase, an error message will be returned.",
      "Type": {
       "$id": "59",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "60",
+       "Kind": "Model",
        "Name": "TimeSeriesPoint",
        "Namespace": "AnomalyDetector.Univariate",
        "Description": "The definition of input timeseries points.",
@@ -389,8 +401,8 @@
          "Description": "Optional argument, timestamp of a data point (ISO8601 format).",
          "Type": {
           "$id": "62",
-          "Name": "utcDateTime",
-          "Kind": "DateTime",
+          "Kind": "Primitive",
+          "Name": "DateTime",
           "IsNullable": false
          },
          "IsRequired": false,
@@ -403,8 +415,8 @@
          "Description": "The measurement of that point, should be float.",
          "Type": {
           "$id": "64",
-          "Name": "float32",
-          "Kind": "Float32",
+          "Kind": "Primitive",
+          "Name": "Float32",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -435,8 +447,8 @@
      "Description": "Custom Interval is used to set non-standard time interval, for example, if the\nseries is 5 minutes, request can be set as {\"granularity\":\"minutely\",\n\"customInterval\":5}.",
      "Type": {
       "$id": "67",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -449,8 +461,8 @@
      "Description": "Optional argument, periodic value of a time series. If the value is null or\ndoes not present, the API will determine the period automatically.",
      "Type": {
       "$id": "69",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -463,8 +475,8 @@
      "Description": "Optional argument, advanced model parameter, max anomaly ratio in a time series.",
      "Type": {
       "$id": "71",
-      "Name": "float32",
-      "Kind": "Float32",
+      "Kind": "Primitive",
+      "Name": "Float32",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -477,8 +489,8 @@
      "Description": "Optional argument, advanced model parameter, between 0-99, the lower the value\nis, the larger the margin value will be which means less anomalies will be\naccepted.",
      "Type": {
       "$id": "73",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -502,8 +514,8 @@
      "Description": "Used to specify the value to fill, it's used when granularity is not \"none\"\nand imputeMode is \"fixed\".",
      "Type": {
       "$id": "76",
-      "Name": "float32",
-      "Kind": "Float32",
+      "Kind": "Primitive",
+      "Name": "Float32",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -516,6 +528,7 @@
   },
   {
    "$id": "77",
+   "Kind": "Model",
    "Name": "UnivariateEntireDetectionResult",
    "Namespace": "AnomalyDetector.Univariate",
    "Description": "The response of entire anomaly detection.",
@@ -530,8 +543,8 @@
      "Description": "Frequency extracted from the series, zero means no recurrent pattern has been\nfound.",
      "Type": {
       "$id": "79",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -544,11 +557,12 @@
      "Description": "ExpectedValues contain expected value for each input point. The index of the\narray is consistent with the input series.",
      "Type": {
       "$id": "81",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "82",
-       "Name": "float32",
-       "Kind": "Float32",
+       "Kind": "Primitive",
+       "Name": "Float32",
        "IsNullable": false
       },
       "IsNullable": false
@@ -563,11 +577,12 @@
      "Description": "UpperMargins contain upper margin of each input point. UpperMargin is used to\ncalculate upperBoundary, which equals to expectedValue + (100 -\nmarginScale)*upperMargin. Anomalies in response can be filtered by\nupperBoundary and lowerBoundary. By adjusting marginScale value, less\nsignificant anomalies can be filtered in client side. The index of the array is\nconsistent with the input series.",
      "Type": {
       "$id": "84",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "85",
-       "Name": "float32",
-       "Kind": "Float32",
+       "Kind": "Primitive",
+       "Name": "Float32",
        "IsNullable": false
       },
       "IsNullable": false
@@ -582,11 +597,12 @@
      "Description": "LowerMargins contain lower margin of each input point. LowerMargin is used to\ncalculate lowerBoundary, which equals to expectedValue - (100 -\nmarginScale)*lowerMargin. Points between the boundary can be marked as normal\nones in client side. The index of the array is consistent with the input\nseries.",
      "Type": {
       "$id": "87",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "88",
-       "Name": "float32",
-       "Kind": "Float32",
+       "Kind": "Primitive",
+       "Name": "Float32",
        "IsNullable": false
       },
       "IsNullable": false
@@ -601,11 +617,12 @@
      "Description": "IsAnomaly contains anomaly properties for each input point. True means an\nanomaly either negative or positive has been detected. The index of the array\nis consistent with the input series.",
      "Type": {
       "$id": "90",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "91",
-       "Name": "boolean",
-       "Kind": "Boolean",
+       "Kind": "Primitive",
+       "Name": "Boolean",
        "IsNullable": false
       },
       "IsNullable": false
@@ -620,11 +637,12 @@
      "Description": "IsNegativeAnomaly contains anomaly status in negative direction for each input\npoint. True means a negative anomaly has been detected. A negative anomaly\nmeans the point is detected as an anomaly and its real value is smaller than\nthe expected one. The index of the array is consistent with the input series.",
      "Type": {
       "$id": "93",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "94",
-       "Name": "boolean",
-       "Kind": "Boolean",
+       "Kind": "Primitive",
+       "Name": "Boolean",
        "IsNullable": false
       },
       "IsNullable": false
@@ -639,11 +657,12 @@
      "Description": "IsPositiveAnomaly contain anomaly status in positive direction for each input\npoint. True means a positive anomaly has been detected. A positive anomaly\nmeans the point is detected as an anomaly and its real value is larger than the\nexpected one. The index of the array is consistent with the input series.",
      "Type": {
       "$id": "96",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "97",
-       "Name": "boolean",
-       "Kind": "Boolean",
+       "Kind": "Primitive",
+       "Name": "Boolean",
        "IsNullable": false
       },
       "IsNullable": false
@@ -658,11 +677,12 @@
      "Description": "The severity score for each input point. The larger the value is, the more\nsever the anomaly is. For normal points, the \"severity\" is always 0.",
      "Type": {
       "$id": "99",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "100",
-       "Name": "float32",
-       "Kind": "Float32",
+       "Kind": "Primitive",
+       "Name": "Float32",
        "IsNullable": false
       },
       "IsNullable": false
@@ -674,6 +694,7 @@
   },
   {
    "$id": "101",
+   "Kind": "Model",
    "Name": "UnivariateLastDetectionResult",
    "Namespace": "AnomalyDetector.Univariate",
    "Description": "The response of last anomaly detection.",
@@ -688,8 +709,8 @@
      "Description": "Frequency extracted from the series, zero means no recurrent pattern has been\nfound.",
      "Type": {
       "$id": "103",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -702,8 +723,8 @@
      "Description": "Suggested input series points needed for detecting the latest point.",
      "Type": {
       "$id": "105",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -716,8 +737,8 @@
      "Description": "Expected value of the latest point.",
      "Type": {
       "$id": "107",
-      "Name": "float32",
-      "Kind": "Float32",
+      "Kind": "Primitive",
+      "Name": "Float32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -730,8 +751,8 @@
      "Description": "Upper margin of the latest point. UpperMargin is used to calculate\nupperBoundary, which equals to expectedValue + (100 - marginScale)*upperMargin.\nIf the value of latest point is between upperBoundary and lowerBoundary, it\nshould be treated as normal value. By adjusting marginScale value, anomaly\nstatus of latest point can be changed.",
      "Type": {
       "$id": "109",
-      "Name": "float32",
-      "Kind": "Float32",
+      "Kind": "Primitive",
+      "Name": "Float32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -744,8 +765,8 @@
      "Description": "Lower margin of the latest point. LowerMargin is used to calculate\nlowerBoundary, which equals to expectedValue - (100 - marginScale)*lowerMargin.\n",
      "Type": {
       "$id": "111",
-      "Name": "float32",
-      "Kind": "Float32",
+      "Kind": "Primitive",
+      "Name": "Float32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -758,8 +779,8 @@
      "Description": "Anomaly status of the latest point, true means the latest point is an anomaly\neither in negative direction or positive direction.",
      "Type": {
       "$id": "113",
-      "Name": "boolean",
-      "Kind": "Boolean",
+      "Kind": "Primitive",
+      "Name": "Boolean",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -772,8 +793,8 @@
      "Description": "Anomaly status in negative direction of the latest point. True means the latest\npoint is an anomaly and its real value is smaller than the expected one.",
      "Type": {
       "$id": "115",
-      "Name": "boolean",
-      "Kind": "Boolean",
+      "Kind": "Primitive",
+      "Name": "Boolean",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -786,8 +807,8 @@
      "Description": "Anomaly status in positive direction of the latest point. True means the latest\npoint is an anomaly and its real value is larger than the expected one.",
      "Type": {
       "$id": "117",
-      "Name": "boolean",
-      "Kind": "Boolean",
+      "Kind": "Primitive",
+      "Name": "Boolean",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -800,8 +821,8 @@
      "Description": "The severity score for the last input point. The larger the value is, the more\nsever the anomaly is. For normal points, the \"severity\" is always 0.",
      "Type": {
       "$id": "119",
-      "Name": "float32",
-      "Kind": "Float32",
+      "Kind": "Primitive",
+      "Name": "Float32",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -811,6 +832,7 @@
   },
   {
    "$id": "120",
+   "Kind": "Model",
    "Name": "UnivariateChangePointDetectionOptions",
    "Namespace": "AnomalyDetector.Univariate",
    "Description": "The request of change point detection.",
@@ -827,6 +849,7 @@
      "Description": "Time series data points. Points should be sorted by timestamp in ascending\norder to match the change point detection result.",
      "Type": {
       "$id": "122",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$ref": "60"
@@ -854,8 +877,8 @@
      "Description": "Custom Interval is used to set non-standard time interval, for example, if the\nseries is 5 minutes, request can be set as {\"granularity\":\"minutely\",\n\"customInterval\":5}.",
      "Type": {
       "$id": "125",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -868,8 +891,8 @@
      "Description": "Optional argument, periodic value of a time series. If the value is null or\ndoes not present, the API will determine the period automatically.",
      "Type": {
       "$id": "127",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -882,8 +905,8 @@
      "Description": "Optional argument, advanced model parameter, a default stableTrendWindow will\nbe used in detection.",
      "Type": {
       "$id": "129",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -896,8 +919,8 @@
      "Description": "Optional argument, advanced model parameter, between 0.0-1.0, the lower the\nvalue is, the larger the trend error will be which means less change point will\nbe accepted.",
      "Type": {
       "$id": "131",
-      "Name": "float32",
-      "Kind": "Float32",
+      "Kind": "Primitive",
+      "Name": "Float32",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -907,6 +930,7 @@
   },
   {
    "$id": "132",
+   "Kind": "Model",
    "Name": "UnivariateChangePointDetectionResult",
    "Namespace": "AnomalyDetector.Univariate",
    "Description": "The response of change point detection.",
@@ -921,8 +945,8 @@
      "Description": "Frequency extracted from the series, zero means no recurrent pattern has been\nfound.",
      "Type": {
       "$id": "134",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -935,11 +959,12 @@
      "Description": "isChangePoint contains change point properties for each input point. True means\nan anomaly either negative or positive has been detected. The index of the\narray is consistent with the input series.",
      "Type": {
       "$id": "136",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "137",
-       "Name": "boolean",
-       "Kind": "Boolean",
+       "Kind": "Primitive",
+       "Name": "Boolean",
        "IsNullable": false
       },
       "IsNullable": false
@@ -954,11 +979,12 @@
      "Description": "the change point confidence of each point",
      "Type": {
       "$id": "139",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "140",
-       "Name": "float32",
-       "Kind": "Float32",
+       "Kind": "Primitive",
+       "Name": "Float32",
        "IsNullable": false
       },
       "IsNullable": false
@@ -970,6 +996,7 @@
   },
   {
    "$id": "141",
+   "Kind": "Model",
    "Name": "MultivariateDetectionResult",
    "Namespace": "AnomalyDetector.Multivariate",
    "Description": "Detection results for the given resultId.",
@@ -984,8 +1011,8 @@
      "Description": "Result identifier, which is used to fetch the results of an inference call.",
      "Type": {
       "$id": "143",
-      "Name": "string",
-      "Kind": "Guid",
+      "Kind": "Primitive",
+      "Name": "Guid",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -998,6 +1025,7 @@
      "Description": "Multivariate anomaly detection status.",
      "Type": {
       "$id": "145",
+      "Kind": "Model",
       "Name": "MultivariateBatchDetectionResultSummary",
       "Namespace": "AnomalyDetector.Multivariate",
       "Description": "Multivariate anomaly detection status.",
@@ -1023,9 +1051,11 @@
         "Description": "Error message when detection is failed.",
         "Type": {
          "$id": "148",
+         "Kind": "Array",
          "Name": "Array",
          "ElementType": {
           "$id": "149",
+          "Kind": "Model",
           "Name": "ErrorResponse",
           "Namespace": "AnomalyDetector.Multivariate",
           "Description": "ErrorResponse contains code and message that shows the error information.",
@@ -1040,8 +1070,8 @@
             "Description": "The error code.",
             "Type": {
              "$id": "151",
-             "Name": "string",
-             "Kind": "String",
+             "Kind": "Primitive",
+             "Name": "String",
              "IsNullable": false
             },
             "IsRequired": true,
@@ -1054,8 +1084,8 @@
             "Description": "The message explaining the error reported by the service.",
             "Type": {
              "$id": "153",
-             "Name": "string",
-             "Kind": "String",
+             "Kind": "Primitive",
+             "Name": "String",
              "IsNullable": false
             },
             "IsRequired": true,
@@ -1075,9 +1105,11 @@
         "Description": "Variable Status.",
         "Type": {
          "$id": "155",
+         "Kind": "Array",
          "Name": "Array",
          "ElementType": {
           "$id": "156",
+          "Kind": "Model",
           "Name": "VariableState",
           "Namespace": "AnomalyDetector.Multivariate",
           "Description": "Variable Status.",
@@ -1092,8 +1124,8 @@
             "Description": "Variable name in variable states.",
             "Type": {
              "$id": "158",
-             "Name": "string",
-             "Kind": "String",
+             "Kind": "Primitive",
+             "Name": "String",
              "IsNullable": false
             },
             "IsRequired": false,
@@ -1106,8 +1138,8 @@
             "Description": "Proportion of missing values that need to be filled by fillNAMethod.",
             "Type": {
              "$id": "160",
-             "Name": "float32",
-             "Kind": "Float32",
+             "Kind": "Primitive",
+             "Name": "Float32",
              "IsNullable": false
             },
             "IsRequired": false,
@@ -1120,8 +1152,8 @@
             "Description": "Number of effective data points before applying fillNAMethod.",
             "Type": {
              "$id": "162",
-             "Name": "int32",
-             "Kind": "Int32",
+             "Kind": "Primitive",
+             "Name": "Int32",
              "IsNullable": false
             },
             "IsRequired": false,
@@ -1134,8 +1166,8 @@
             "Description": "First valid timestamp with value of input data.",
             "Type": {
              "$id": "164",
-             "Name": "utcDateTime",
-             "Kind": "DateTime",
+             "Kind": "Primitive",
+             "Name": "DateTime",
              "IsNullable": false
             },
             "IsRequired": false,
@@ -1148,8 +1180,8 @@
             "Description": "Last valid timestamp with value of input data.",
             "Type": {
              "$id": "166",
-             "Name": "utcDateTime",
-             "Kind": "DateTime",
+             "Kind": "Primitive",
+             "Name": "DateTime",
              "IsNullable": false
             },
             "IsRequired": false,
@@ -1169,6 +1201,7 @@
         "Description": "Detection request for batch inference. This is an asynchronous inference which\nwill need another API to get detection results.",
         "Type": {
          "$id": "168",
+         "Kind": "Model",
          "Name": "MultivariateBatchDetectionOptions",
          "Namespace": "AnomalyDetector.Multivariate",
          "Description": "Detection request for batch inference. This is an asynchronous inference which\nwill need another API to get detection results.",
@@ -1185,8 +1218,8 @@
            "Description": "Source link to the input data to indicate an accessible Azure storage Uri,\neither pointed to an Azure blob storage folder, or pointed to a CSV file in\nAzure blob storage based on you data schema selection. The data schema should\nbe exactly the same with those used in the training phase.",
            "Type": {
             "$id": "170",
-            "Name": "url",
-            "Kind": "Uri",
+            "Kind": "Primitive",
+            "Name": "Uri",
             "IsNullable": false
            },
            "IsRequired": true,
@@ -1199,8 +1232,8 @@
            "Description": "An optional field, which is used to specify the number of top contributed\nvariables for one anomalous timestamp in the response. The default number is\n10.",
            "Type": {
             "$id": "172",
-            "Name": "int32",
-            "Kind": "Int32",
+            "Kind": "Primitive",
+            "Name": "Int32",
             "IsNullable": false
            },
            "IsRequired": true,
@@ -1213,8 +1246,8 @@
            "Description": "A required field, indicating the start time of data for detection, which should\nbe date-time of ISO 8601 format.",
            "Type": {
             "$id": "174",
-            "Name": "utcDateTime",
-            "Kind": "DateTime",
+            "Kind": "Primitive",
+            "Name": "DateTime",
             "IsNullable": false
            },
            "IsRequired": true,
@@ -1227,8 +1260,8 @@
            "Description": "A required field, indicating the end time of data for detection, which should\nbe date-time of ISO 8601 format.",
            "Type": {
             "$id": "176",
-            "Name": "utcDateTime",
-            "Kind": "DateTime",
+            "Kind": "Primitive",
+            "Name": "DateTime",
             "IsNullable": false
            },
            "IsRequired": true,
@@ -1251,9 +1284,11 @@
      "Description": "Detection result for each timestamp.",
      "Type": {
       "$id": "178",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "179",
+       "Kind": "Model",
        "Name": "AnomalyState",
        "Namespace": "AnomalyDetector.Multivariate",
        "Description": "Anomaly status and information.",
@@ -1268,8 +1303,8 @@
          "Description": "The timestamp for this anomaly.",
          "Type": {
           "$id": "181",
-          "Name": "utcDateTime",
-          "Kind": "DateTime",
+          "Kind": "Primitive",
+          "Name": "DateTime",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -1282,6 +1317,7 @@
          "Description": "The detailed value of this anomalous timestamp.",
          "Type": {
           "$id": "183",
+          "Kind": "Model",
           "Name": "AnomalyValue",
           "Namespace": "AnomalyDetector.Multivariate",
           "Description": "Detailed information of the anomalous timestamp.",
@@ -1296,8 +1332,8 @@
             "Description": "True if an anomaly is detected at the current timestamp.",
             "Type": {
              "$id": "185",
-             "Name": "boolean",
-             "Kind": "Boolean",
+             "Kind": "Primitive",
+             "Name": "Boolean",
              "IsNullable": false
             },
             "IsRequired": true,
@@ -1310,8 +1346,8 @@
             "Description": "Indicates the significance of the anomaly. The higher the severity, the more\nsignificant the anomaly is.",
             "Type": {
              "$id": "187",
-             "Name": "float32",
-             "Kind": "Float32",
+             "Kind": "Primitive",
+             "Name": "Float32",
              "IsNullable": false
             },
             "IsRequired": true,
@@ -1324,8 +1360,8 @@
             "Description": "Raw anomaly score of severity, will help indicate the degree of abnormality as\nwell.",
             "Type": {
              "$id": "189",
-             "Name": "float32",
-             "Kind": "Float32",
+             "Kind": "Primitive",
+             "Name": "Float32",
              "IsNullable": false
             },
             "IsRequired": true,
@@ -1338,9 +1374,11 @@
             "Description": "Interpretation of this anomalous timestamp.",
             "Type": {
              "$id": "191",
+             "Kind": "Array",
              "Name": "Array",
              "ElementType": {
               "$id": "192",
+              "Kind": "Model",
               "Name": "AnomalyInterpretation",
               "Namespace": "AnomalyDetector.Multivariate",
               "Description": "Interpretation of the anomalous timestamp.",
@@ -1355,8 +1393,8 @@
                 "Description": "Variable.",
                 "Type": {
                  "$id": "194",
-                 "Name": "string",
-                 "Kind": "String",
+                 "Kind": "Primitive",
+                 "Name": "String",
                  "IsNullable": false
                 },
                 "IsRequired": false,
@@ -1369,8 +1407,8 @@
                 "Description": "This score shows the percentage contributing to the anomalous timestamp. A\nnumber between 0 and 1.",
                 "Type": {
                  "$id": "196",
-                 "Name": "float32",
-                 "Kind": "Float32",
+                 "Kind": "Primitive",
+                 "Name": "Float32",
                  "IsNullable": false
                 },
                 "IsRequired": false,
@@ -1383,6 +1421,7 @@
                 "Description": "Correlation changes among the anomalous variables",
                 "Type": {
                  "$id": "198",
+                 "Kind": "Model",
                  "Name": "CorrelationChanges",
                  "Namespace": "AnomalyDetector.Multivariate",
                  "Description": "Correlation changes among the anomalous variables",
@@ -1397,11 +1436,12 @@
                    "Description": "The correlated variables that have correlation changes under an anomaly.",
                    "Type": {
                     "$id": "200",
+                    "Kind": "Array",
                     "Name": "Array",
                     "ElementType": {
                      "$id": "201",
-                     "Name": "string",
-                     "Kind": "String",
+                     "Kind": "Primitive",
+                     "Name": "String",
                      "IsNullable": false
                     },
                     "IsNullable": false
@@ -1433,6 +1473,7 @@
          "Description": "Error message for the current timestamp.",
          "Type": {
           "$id": "203",
+          "Kind": "Array",
           "Name": "Array",
           "ElementType": {
            "$ref": "149"
@@ -1477,6 +1518,7 @@
   },
   {
    "$id": "204",
+   "Kind": "Model",
    "Name": "ModelInfo",
    "Namespace": "AnomalyDetector.Multivariate",
    "Description": "Training result of a model including its status, errors and diagnostics\ninformation.",
@@ -1493,8 +1535,8 @@
      "Description": "Source link to the input data to indicate an accessible Azure storage Uri,\neither pointed to an Azure blob storage folder, or pointed to a CSV file in\nAzure blob storage based on you data schema selection. ",
      "Type": {
       "$id": "206",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1518,8 +1560,8 @@
      "Description": "A required field, indicating the start time of training data, which should be\ndate-time of ISO 8601 format.",
      "Type": {
       "$id": "209",
-      "Name": "utcDateTime",
-      "Kind": "DateTime",
+      "Kind": "Primitive",
+      "Name": "DateTime",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1532,8 +1574,8 @@
      "Description": "A required field, indicating the end time of training data, which should be\ndate-time of ISO 8601 format.",
      "Type": {
       "$id": "211",
-      "Name": "utcDateTime",
-      "Kind": "DateTime",
+      "Kind": "Primitive",
+      "Name": "DateTime",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1546,8 +1588,8 @@
      "Description": "An optional field. The display name of the model whose maximum length is 24\ncharacters.",
      "Type": {
       "$id": "213",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -1560,8 +1602,8 @@
      "Description": "An optional field, indicating how many previous timestamps will be used to\ndetect whether the timestamp is anomaly or not. ",
      "Type": {
       "$id": "215",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -1574,6 +1616,7 @@
      "Description": "An optional field, indicating the manner to align multiple variables.",
      "Type": {
       "$id": "217",
+      "Kind": "Model",
       "Name": "AlignPolicy",
       "Namespace": "AnomalyDetector.Multivariate",
       "Description": "An optional field, indicating the manner to align multiple variables.",
@@ -1610,8 +1653,8 @@
         "Description": "An optional field. Required when fillNAMethod is Fixed.",
         "Type": {
          "$id": "221",
-         "Name": "float32",
-         "Kind": "Float32",
+         "Kind": "Primitive",
+         "Name": "Float32",
          "IsNullable": false
         },
         "IsRequired": false,
@@ -1640,6 +1683,7 @@
      "Description": "Error messages when failed to create a model.",
      "Type": {
       "$id": "224",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$ref": "149"
@@ -1656,6 +1700,7 @@
      "Description": "Diagnostics information to help inspect the states of model or variable.",
      "Type": {
       "$id": "226",
+      "Kind": "Model",
       "Name": "DiagnosticsInfo",
       "Namespace": "AnomalyDetector.Multivariate",
       "Description": "Diagnostics information to help inspect the states of model or variable.",
@@ -1670,6 +1715,7 @@
         "Description": "Model status.",
         "Type": {
          "$id": "228",
+         "Kind": "Model",
          "Name": "ModelState",
          "Namespace": "AnomalyDetector.Multivariate",
          "Description": "Model status.",
@@ -1684,11 +1730,12 @@
            "Description": "This indicates the number of passes of the entire training dataset the\nalgorithm has completed.",
            "Type": {
             "$id": "230",
+            "Kind": "Array",
             "Name": "Array",
             "ElementType": {
              "$id": "231",
-             "Name": "int32",
-             "Kind": "Int32",
+             "Kind": "Primitive",
+             "Name": "Int32",
              "IsNullable": false
             },
             "IsNullable": false
@@ -1703,11 +1750,12 @@
            "Description": "List of metrics used to assess how the model fits the training data for each\nepoch.",
            "Type": {
             "$id": "233",
+            "Kind": "Array",
             "Name": "Array",
             "ElementType": {
              "$id": "234",
-             "Name": "float32",
-             "Kind": "Float32",
+             "Kind": "Primitive",
+             "Name": "Float32",
              "IsNullable": false
             },
             "IsNullable": false
@@ -1722,11 +1770,12 @@
            "Description": "List of metrics used to assess how the model fits the validation set for each\nepoch.",
            "Type": {
             "$id": "236",
+            "Kind": "Array",
             "Name": "Array",
             "ElementType": {
              "$id": "237",
-             "Name": "float32",
-             "Kind": "Float32",
+             "Kind": "Primitive",
+             "Name": "Float32",
              "IsNullable": false
             },
             "IsNullable": false
@@ -1741,11 +1790,12 @@
            "Description": "Latency for each epoch. ",
            "Type": {
             "$id": "239",
+            "Kind": "Array",
             "Name": "Array",
             "ElementType": {
              "$id": "240",
-             "Name": "float32",
-             "Kind": "Float32",
+             "Kind": "Primitive",
+             "Name": "Float32",
              "IsNullable": false
             },
             "IsNullable": false
@@ -1765,6 +1815,7 @@
         "Description": "Variable Status.",
         "Type": {
          "$id": "242",
+         "Kind": "Array",
          "Name": "Array",
          "ElementType": {
           "$ref": "156"
@@ -1792,6 +1843,7 @@
   },
   {
    "$id": "243",
+   "Kind": "Model",
    "Name": "AnomalyDetectionModel",
    "Namespace": "AnomalyDetector.Multivariate",
    "Description": "Response of getting a model.",
@@ -1806,8 +1858,8 @@
      "Description": "Model identifier.",
      "Type": {
       "$id": "245",
-      "Name": "string",
-      "Kind": "Guid",
+      "Kind": "Primitive",
+      "Name": "Guid",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1820,8 +1872,8 @@
      "Description": "Date and time (UTC) when the model was created.",
      "Type": {
       "$id": "247",
-      "Name": "utcDateTime",
-      "Kind": "DateTime",
+      "Kind": "Primitive",
+      "Name": "DateTime",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1834,8 +1886,8 @@
      "Description": "Date and time (UTC) when the model was last updated.",
      "Type": {
       "$id": "249",
-      "Name": "utcDateTime",
-      "Kind": "DateTime",
+      "Kind": "Primitive",
+      "Name": "DateTime",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1856,6 +1908,7 @@
   },
   {
    "$id": "251",
+   "Kind": "Model",
    "Name": "ModelList",
    "Namespace": "AnomalyDetector.Multivariate",
    "Description": "Response of listing models.",
@@ -1870,6 +1923,7 @@
      "Description": "List of models.",
      "Type": {
       "$id": "253",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$ref": "243"
@@ -1886,8 +1940,8 @@
      "Description": "Number of trained multivariate models.",
      "Type": {
       "$id": "255",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1900,8 +1954,8 @@
      "Description": "Maximum number of models that can be trained for this Anomaly Detector resource.",
      "Type": {
       "$id": "257",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1914,8 +1968,8 @@
      "Description": "The link to fetch more models.",
      "Type": {
       "$id": "259",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -1925,6 +1979,7 @@
   },
   {
    "$id": "260",
+   "Kind": "Model",
    "Name": "MultivariateLastDetectionOptions",
    "Namespace": "AnomalyDetector.Multivariate",
    "Description": "Request of last detection.",
@@ -1941,9 +1996,11 @@
      "Description": "This contains the inference data, including the name, timestamps(ISO 8601) and\nvalues of variables.",
      "Type": {
       "$id": "262",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "263",
+       "Kind": "Model",
        "Name": "VariableValues",
        "Namespace": "AnomalyDetector.Multivariate",
        "Description": "Variable values.",
@@ -1958,8 +2015,8 @@
          "Description": "Variable name of last detection request.",
          "Type": {
           "$id": "265",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -1972,11 +2029,12 @@
          "Description": "Timestamps of last detection request",
          "Type": {
           "$id": "267",
+          "Kind": "Array",
           "Name": "Array",
           "ElementType": {
            "$id": "268",
-           "Name": "string",
-           "Kind": "String",
+           "Kind": "Primitive",
+           "Name": "String",
            "IsNullable": false
           },
           "IsNullable": false
@@ -1991,11 +2049,12 @@
          "Description": "Values of variables.",
          "Type": {
           "$id": "270",
+          "Kind": "Array",
           "Name": "Array",
           "ElementType": {
            "$id": "271",
-           "Name": "float32",
-           "Kind": "Float32",
+           "Kind": "Primitive",
+           "Name": "Float32",
            "IsNullable": false
           },
           "IsNullable": false
@@ -2017,8 +2076,8 @@
      "Description": "An optional field, which is used to specify the number of top contributed\nvariables for one anomalous timestamp in the response. The default number is\n10.",
      "Type": {
       "$id": "273",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -2031,6 +2090,7 @@
   },
   {
    "$id": "274",
+   "Kind": "Model",
    "Name": "MultivariateLastDetectionResult",
    "Namespace": "AnomalyDetector.Multivariate",
    "Description": "Results of last detection.",
@@ -2045,6 +2105,7 @@
      "Description": "Variable Status.",
      "Type": {
       "$id": "276",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$ref": "156"
@@ -2061,6 +2122,7 @@
      "Description": "Anomaly status and information.",
      "Type": {
       "$id": "278",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$ref": "179"
@@ -2074,6 +2136,7 @@
   },
   {
    "$id": "279",
+   "Kind": "Model",
    "Name": "AnomalyDetectorError",
    "Namespace": "AnomalyDetector.Univariate",
    "Description": "Error information returned by the API.",
@@ -2099,8 +2162,8 @@
      "Description": "A message explaining the error reported by the service.",
      "Type": {
       "$id": "282",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -2110,6 +2173,7 @@
   },
   {
    "$id": "283",
+   "Kind": "Model",
    "Name": "ResponseError",
    "Namespace": "AnomalyDetector.Multivariate",
    "Description": "Error response",
@@ -2124,8 +2188,8 @@
      "Description": "The error code.",
      "Type": {
       "$id": "285",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -2138,8 +2202,8 @@
      "Description": "The message explaining the error reported by the service.",
      "Type": {
       "$id": "287",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -2178,8 +2242,8 @@
        "Description": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://westus2.api.cognitive.microsoft.com).",
        "Type": {
         "$id": "293",
+        "Kind": "Primitive",
         "Name": "Uri",
-        "Kind": "Uri",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -2213,8 +2277,8 @@
         "$id": "295",
         "Type": {
          "$id": "296",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "v1.1"
@@ -2244,8 +2308,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "299",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2271,8 +2335,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "302",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2358,8 +2422,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "308",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2385,8 +2449,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "311",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2472,8 +2536,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "317",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2499,8 +2563,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "320",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2581,8 +2645,8 @@
        "Description": "ID of a batch detection result.",
        "Type": {
         "$id": "327",
-        "Name": "string",
-        "Kind": "Guid",
+        "Kind": "Primitive",
+        "Name": "Guid",
         "IsNullable": false
        },
        "Location": "Path",
@@ -2601,8 +2665,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "329",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2685,8 +2749,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "335",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2712,8 +2776,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "338",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2752,8 +2816,8 @@
          "Description": "Location and ID of the model.",
          "Type": {
           "$id": "342",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": false
          }
         }
@@ -2795,8 +2859,8 @@
        "Description": "Skip indicates how many models will be skipped.",
        "Type": {
         "$id": "345",
-        "Name": "int32",
-        "Kind": "Int32",
+        "Kind": "Primitive",
+        "Name": "Int32",
         "IsNullable": false
        },
        "Location": "Query",
@@ -2816,8 +2880,8 @@
        "Description": "Top indicates how many models will be fetched.",
        "Type": {
         "$id": "347",
-        "Name": "int32",
-        "Kind": "Int32",
+        "Kind": "Primitive",
+        "Name": "Int32",
         "IsNullable": false
        },
        "Location": "Query",
@@ -2836,8 +2900,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "349",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2908,8 +2972,8 @@
        "Description": "Model identifier.",
        "Type": {
         "$id": "355",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -2928,8 +2992,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "357",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2989,8 +3053,8 @@
        "Description": "Model identifier.",
        "Type": {
         "$id": "362",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -3009,8 +3073,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "364",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3076,8 +3140,8 @@
        "Description": "Model identifier.",
        "Type": {
         "$id": "369",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -3114,8 +3178,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "372",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3141,8 +3205,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "375",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3181,8 +3245,8 @@
          "Description": "Id of the detection result.",
          "Type": {
           "$id": "379",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": false
          }
         },
@@ -3193,8 +3257,8 @@
          "Description": "Location of the detection result.",
          "Type": {
           "$id": "381",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": false
          }
         }
@@ -3236,8 +3300,8 @@
        "Description": "Model identifier.",
        "Type": {
         "$id": "384",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -3274,8 +3338,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "387",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3301,8 +3365,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "390",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",

@@ -19,7 +19,6 @@ namespace AutoRest.CSharp.Common.Input
         /// </summary>
         public bool IsPropertyBag { get; init; } = false;
 
-        public bool IsAnonymousModel { get; init; } = false;
         public InputModelType? BaseModel { get; private set; } = BaseModel;
         /** In some case, its base model will have a propety whose type is the model, in tspCodeModel.json, the property type is a reference,
          * during descerializing, we need to create the model and add it to the referernce map before load base model, otherwise, the deserialization crash.
@@ -55,25 +54,6 @@ namespace AutoRest.CSharp.Common.Input
                 yield return model;
                 model = model.BaseModel;
             }
-        }
-
-        internal InputModelType Update(string newName, InputModelTypeUsage usage)
-        {
-            return new InputModelType(
-                newName,
-                Namespace,
-                Accessibility,
-                Deprecated,
-                Description,
-                usage,
-                Properties,
-                BaseModel,
-                DerivedModels,
-                DiscriminatorValue,
-                DiscriminatorPropertyName,
-                InheritedDictionaryType,
-                IsNullable,
-                MediaTypes);
         }
 
         internal InputModelType ReplaceProperty(InputModelProperty property, InputType inputType)

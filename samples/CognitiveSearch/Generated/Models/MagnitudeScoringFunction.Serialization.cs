@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {
@@ -41,7 +42,7 @@ namespace CognitiveSearch.Models
             string type = default;
             string fieldName = default;
             double boost = default;
-            Optional<ScoringFunctionInterpolation> interpolation = default;
+            ScoringFunctionInterpolation? interpolation = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("magnitude"u8))
@@ -74,7 +75,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new MagnitudeScoringFunction(type, fieldName, boost, Optional.ToNullable(interpolation), magnitude);
+            return new MagnitudeScoringFunction(type, fieldName, boost, interpolation, magnitude);
         }
     }
 }

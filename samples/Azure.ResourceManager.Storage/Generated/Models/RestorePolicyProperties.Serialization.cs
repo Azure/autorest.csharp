@@ -8,6 +8,7 @@
 using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Storage;
 
 namespace Azure.ResourceManager.Storage.Models
 {
@@ -33,9 +34,9 @@ namespace Azure.ResourceManager.Storage.Models
                 return null;
             }
             bool enabled = default;
-            Optional<int> days = default;
-            Optional<DateTimeOffset> lastEnabledTime = default;
-            Optional<DateTimeOffset> minRestoreTime = default;
+            int? days = default;
+            DateTimeOffset? lastEnabledTime = default;
+            DateTimeOffset? minRestoreTime = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("enabled"u8))
@@ -71,7 +72,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new RestorePolicyProperties(enabled, Optional.ToNullable(days), Optional.ToNullable(lastEnabledTime), Optional.ToNullable(minRestoreTime));
+            return new RestorePolicyProperties(enabled, days, lastEnabledTime, minRestoreTime);
         }
     }
 }

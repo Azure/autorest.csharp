@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using ModelsTypeSpec;
 
 namespace ModelsTypeSpec.Models
 {
@@ -147,10 +148,10 @@ namespace ModelsTypeSpec.Models
             DerivedModel requiredModel = default;
             IReadOnlyList<CollectionItem> requiredList = default;
             IReadOnlyDictionary<string, RecordItem> requiredModelRecord = default;
-            Optional<IReadOnlyList<CollectionItem>> optionalList = default;
-            Optional<IReadOnlyList<CollectionItem>> optionalNullableList = default;
-            Optional<IReadOnlyDictionary<string, RecordItem>> optionalRecord = default;
-            Optional<IReadOnlyDictionary<string, RecordItem>> optionalNullableRecord = default;
+            IReadOnlyList<CollectionItem> optionalList = default;
+            IReadOnlyList<CollectionItem> optionalNullableList = default;
+            IReadOnlyDictionary<string, RecordItem> optionalRecord = default;
+            IReadOnlyDictionary<string, RecordItem> optionalNullableRecord = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -167,7 +168,7 @@ namespace ModelsTypeSpec.Models
                 }
                 if (property.NameEquals("requiredModel"u8))
                 {
-                    requiredModel = DerivedModel.DeserializeDerivedModel(property.Value);
+                    requiredModel = DerivedModel.DeserializeDerivedModel(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("requiredList"u8))
@@ -175,7 +176,7 @@ namespace ModelsTypeSpec.Models
                     List<CollectionItem> array = new List<CollectionItem>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CollectionItem.DeserializeCollectionItem(item));
+                        array.Add(CollectionItem.DeserializeCollectionItem(item, options));
                     }
                     requiredList = array;
                     continue;
@@ -185,7 +186,7 @@ namespace ModelsTypeSpec.Models
                     Dictionary<string, RecordItem> dictionary = new Dictionary<string, RecordItem>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value));
+                        dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value, options));
                     }
                     requiredModelRecord = dictionary;
                     continue;
@@ -199,7 +200,7 @@ namespace ModelsTypeSpec.Models
                     List<CollectionItem> array = new List<CollectionItem>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CollectionItem.DeserializeCollectionItem(item));
+                        array.Add(CollectionItem.DeserializeCollectionItem(item, options));
                     }
                     optionalList = array;
                     continue;
@@ -213,7 +214,7 @@ namespace ModelsTypeSpec.Models
                     List<CollectionItem> array = new List<CollectionItem>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CollectionItem.DeserializeCollectionItem(item));
+                        array.Add(CollectionItem.DeserializeCollectionItem(item, options));
                     }
                     optionalNullableList = array;
                     continue;
@@ -227,7 +228,7 @@ namespace ModelsTypeSpec.Models
                     Dictionary<string, RecordItem> dictionary = new Dictionary<string, RecordItem>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value));
+                        dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value, options));
                     }
                     optionalRecord = dictionary;
                     continue;
@@ -241,7 +242,7 @@ namespace ModelsTypeSpec.Models
                     Dictionary<string, RecordItem> dictionary = new Dictionary<string, RecordItem>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value));
+                        dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value, options));
                     }
                     optionalNullableRecord = dictionary;
                     continue;
@@ -252,7 +253,17 @@ namespace ModelsTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new OutputModel(requiredString, requiredInt, requiredModel, requiredList, requiredModelRecord, Optional.ToList(optionalList), Optional.ToList(optionalNullableList), Optional.ToDictionary(optionalRecord), Optional.ToDictionary(optionalNullableRecord), serializedAdditionalRawData);
+            return new OutputModel(
+                requiredString,
+                requiredInt,
+                requiredModel,
+                requiredList,
+                requiredModelRecord,
+                optionalList ?? new ChangeTrackingList<CollectionItem>(),
+                optionalNullableList ?? new ChangeTrackingList<CollectionItem>(),
+                optionalRecord ?? new ChangeTrackingDictionary<string, RecordItem>(),
+                optionalNullableRecord ?? new ChangeTrackingDictionary<string, RecordItem>(),
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<OutputModel>.Write(ModelReaderWriterOptions options)

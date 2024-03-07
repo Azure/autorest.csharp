@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 using MgmtExpandResourceTypes;
 
 namespace MgmtExpandResourceTypes.Models
@@ -20,8 +19,8 @@ namespace MgmtExpandResourceTypes.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<RecordSetData>> value = default;
-            Optional<string> nextLink = default;
+            IReadOnlyList<RecordSetData> value = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -44,7 +43,7 @@ namespace MgmtExpandResourceTypes.Models
                     continue;
                 }
             }
-            return new RecordSetListResult(Optional.ToList(value), nextLink.Value);
+            return new RecordSetListResult(value ?? new ChangeTrackingList<RecordSetData>(), nextLink);
         }
     }
 }

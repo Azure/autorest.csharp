@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
@@ -29,7 +30,7 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<FirewallPolicyFilterRuleCollectionActionType> type = default;
+            FirewallPolicyFilterRuleCollectionActionType? type = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("type"u8))
@@ -42,7 +43,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new FirewallPolicyFilterRuleCollectionAction(Optional.ToNullable(type));
+            return new FirewallPolicyFilterRuleCollectionAction(type);
         }
     }
 }

@@ -8,5 +8,7 @@
   ],
   "public-clients": true,
   "skip-csproj-packagereference": true,
-  "single-top-level-client": true
+  "single-top-level-client": true,
+  "generate-test-project": true,
+  "helper-namespace": "SingleTopLevelClientWithoutOperations_LowLevel"
 }

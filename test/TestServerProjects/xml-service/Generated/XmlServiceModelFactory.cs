@@ -26,7 +26,14 @@ namespace xml_service.Models
         {
             containers ??= new List<Container>();
 
-            return new ListContainersResponse(serviceEndpoint, prefix, marker, maxResults, containers?.ToList(), nextMarker, serializedAdditionalRawData: null);
+            return new ListContainersResponse(
+                serviceEndpoint,
+                prefix,
+                marker,
+                maxResults,
+                containers?.ToList(),
+                nextMarker,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Container"/>. </summary>
@@ -51,7 +58,14 @@ namespace xml_service.Models
         /// <returns> A new <see cref="Models.ContainerProperties"/> instance for mocking. </returns>
         public static ContainerProperties ContainerProperties(DateTimeOffset lastModified = default, string etag = null, LeaseStatusType? leaseStatus = null, LeaseStateType? leaseState = null, LeaseDurationType? leaseDuration = null, PublicAccessType? publicAccess = null)
         {
-            return new ContainerProperties(lastModified, etag, leaseStatus, leaseState, leaseDuration, publicAccess, serializedAdditionalRawData: null);
+            return new ContainerProperties(
+                lastModified,
+                etag,
+                leaseStatus,
+                leaseState,
+                leaseDuration,
+                publicAccess,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ListBlobsResponse"/>. </summary>
@@ -66,7 +80,16 @@ namespace xml_service.Models
         /// <returns> A new <see cref="Models.ListBlobsResponse"/> instance for mocking. </returns>
         public static ListBlobsResponse ListBlobsResponse(string serviceEndpoint = null, string containerName = null, string prefix = null, string marker = null, int maxResults = default, string delimiter = null, Blobs blobs = null, string nextMarker = null)
         {
-            return new ListBlobsResponse(serviceEndpoint, containerName, prefix, marker, maxResults, delimiter, blobs, nextMarker, serializedAdditionalRawData: null);
+            return new ListBlobsResponse(
+                serviceEndpoint,
+                containerName,
+                prefix,
+                marker,
+                maxResults,
+                delimiter,
+                blobs,
+                nextMarker,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Blobs"/>. </summary>
@@ -100,7 +123,13 @@ namespace xml_service.Models
         {
             metadata ??= new Dictionary<string, string>();
 
-            return new Blob(name, deleted, snapshot, properties, metadata, serializedAdditionalRawData: null);
+            return new Blob(
+                name,
+                deleted,
+                snapshot,
+                properties,
+                metadata,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.BlobProperties"/>. </summary>
@@ -135,7 +164,36 @@ namespace xml_service.Models
         /// <returns> A new <see cref="Models.BlobProperties"/> instance for mocking. </returns>
         public static BlobProperties BlobProperties(DateTimeOffset lastModified = default, string etag = null, long? contentLength = null, string contentType = null, string contentEncoding = null, string contentLanguage = null, string contentMD5 = null, string contentDisposition = null, string cacheControl = null, int? blobSequenceNumber = null, BlobType? blobType = null, LeaseStatusType? leaseStatus = null, LeaseStateType? leaseState = null, LeaseDurationType? leaseDuration = null, string copyId = null, CopyStatusType? copyStatus = null, string copySource = null, string copyProgress = null, DateTimeOffset? copyCompletionTime = null, string copyStatusDescription = null, bool? serverEncrypted = null, bool? incrementalCopy = null, string destinationSnapshot = null, DateTimeOffset? deletedTime = null, int? remainingRetentionDays = null, AccessTier? accessTier = null, bool? accessTierInferred = null, ArchiveStatus? archiveStatus = null)
         {
-            return new BlobProperties(lastModified, etag, contentLength, contentType, contentEncoding, contentLanguage, contentMD5, contentDisposition, cacheControl, blobSequenceNumber, blobType, leaseStatus, leaseState, leaseDuration, copyId, copyStatus, copySource, copyProgress, copyCompletionTime, copyStatusDescription, serverEncrypted, incrementalCopy, destinationSnapshot, deletedTime, remainingRetentionDays, accessTier, accessTierInferred, archiveStatus, serializedAdditionalRawData: null);
+            return new BlobProperties(
+                lastModified,
+                etag,
+                contentLength,
+                contentType,
+                contentEncoding,
+                contentLanguage,
+                contentMD5,
+                contentDisposition,
+                cacheControl,
+                blobSequenceNumber,
+                blobType,
+                leaseStatus,
+                leaseState,
+                leaseDuration,
+                copyId,
+                copyStatus,
+                copySource,
+                copyProgress,
+                copyCompletionTime,
+                copyStatusDescription,
+                serverEncrypted,
+                incrementalCopy,
+                destinationSnapshot,
+                deletedTime,
+                remainingRetentionDays,
+                accessTier,
+                accessTierInferred,
+                archiveStatus,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.JsonOutput"/>. </summary>

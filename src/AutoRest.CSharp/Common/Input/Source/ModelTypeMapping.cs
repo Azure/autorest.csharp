@@ -10,7 +10,7 @@ namespace AutoRest.CSharp.Input.Source
     {
         private readonly Dictionary<string, ISymbol> _propertyMappings;
         private readonly Dictionary<string, ISymbol> _codeGenMemberMappings;
-        private readonly Dictionary<ISymbol, SourcePropertySerializationMapping> _serializationMappings;
+        private readonly Dictionary<string, SourcePropertySerializationMapping> _typeSerializationMappings;
 
         public string[]? Usage { get; }
         public string[]? Formats { get; }
@@ -19,19 +19,16 @@ namespace AutoRest.CSharp.Input.Source
         {
             _propertyMappings = new();
             _codeGenMemberMappings = new();
-            _serializationMappings = new(SymbolEqualityComparer.Default);
+            _typeSerializationMappings = new();
 
             foreach (ISymbol member in GetMembers(existingType))
             {
                 // If member is defined in both base and derived class, use derived one
-                if (member.Kind is SymbolKind.Property or SymbolKind.Field && !_propertyMappings.ContainsKey(member.Name))
+                if (ShouldIncludeMember(member) && !_propertyMappings.ContainsKey(member.Name))
                 {
                     _propertyMappings[member.Name] = member;
                 }
 
-                string[]? serializationPath = null;
-                string? serializationHook = null;
-                string? deserializationHook = null;
                 foreach (var attributeData in member.GetAttributes())
                 {
                     // handle CodeGenMember attribute
@@ -39,17 +36,6 @@ namespace AutoRest.CSharp.Input.Source
                     {
                         _codeGenMemberMappings[schemaMemberName] = member;
                     }
-                    // handle CodeGenMemberSerialization attribute
-                    if (codeGenAttributes.TryGetCodeGenMemberSerializationAttributeValue(attributeData, out var propertyNames))
-                    {
-                        serializationPath = propertyNames;
-                    }
-                    // handle CodeGenMemberSerializationHooks attribute
-                    codeGenAttributes.TryGetCodeGenMemberSerializationHooksAttributeValue(attributeData, out serializationHook, out deserializationHook);
-                }
-                if (serializationPath != null || serializationHook != null || deserializationHook != null)
-                {
-                    _serializationMappings.Add(member, new SourcePropertySerializationMapping(member, serializationPath, serializationHook, deserializationHook));
                 }
             }
 
@@ -61,7 +47,19 @@ namespace AutoRest.CSharp.Input.Source
                     Usage = usage;
                     Formats = formats;
                 }
+
+                // handle CodeGenSerialization attribute
+                if (codeGenAttributes.TryGetCodeGenSerializationAttributeValue(attributeData, out var propertyName, out var serializationNames, out var serializationHook, out var deserializationHook, out var bicepSerializationHook) && !_typeSerializationMappings.ContainsKey(propertyName))
+                {
+                    _typeSerializationMappings.Add(propertyName, new(propertyName, serializationNames, serializationHook, deserializationHook, bicepSerializationHook));
+                }
             }
+        }
+
+        private static bool ShouldIncludeMember(ISymbol member)
+        {
+            // here we exclude those "CompilerGenerated" members, such as the backing field of a property which is also a field.
+            return !member.IsImplicitlyDeclared && member is IPropertySymbol or IFieldSymbol;
         }
 
         public ISymbol? GetMemberByOriginalName(string name)
@@ -69,20 +67,17 @@ namespace AutoRest.CSharp.Input.Source
                 renamedSymbol :
                 _propertyMappings.TryGetValue(name, out var memberSymbol) ? memberSymbol : null;
 
-        public SourcePropertySerializationMapping? GetForMemberSerialization(ISymbol? symbol)
+        public SourcePropertySerializationMapping? GetForMemberSerialization(string name)
+            => _typeSerializationMappings.TryGetValue(name, out var serialization) ? serialization : null;
+
+        public IEnumerable<ISymbol> GetPropertiesWithSerialization()
         {
-            if (symbol == null)
-                return null;
-
-            if (_serializationMappings.TryGetValue(symbol, out var serialization))
-                return serialization;
-
-            return null;
-        }
-
-        public IEnumerable<SourcePropertySerializationMapping> GetSerializationMembers()
-        {
-            return _serializationMappings.Values;
+            // only the property with CodeGenSerialization attribute will be emitted into the serialization code.
+            foreach (var (propertyName, symbol) in _propertyMappings)
+            {
+                if (_typeSerializationMappings.ContainsKey(propertyName))
+                    yield return symbol;
+            }
         }
 
         private static IEnumerable<ISymbol> GetMembers(INamedTypeSymbol? typeSymbol)

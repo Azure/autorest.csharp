@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using body_complex;
 
 namespace body_complex.Models
 {
@@ -60,7 +61,7 @@ namespace body_complex.Models
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeUnknownDotFish(document.RootElement, options);
+            return DeserializeDotFish(document.RootElement, options);
         }
 
         internal static UnknownDotFish DeserializeUnknownDotFish(JsonElement element, ModelReaderWriterOptions options = null)
@@ -72,7 +73,7 @@ namespace body_complex.Models
                 return null;
             }
             string fishType = "Unknown";
-            Optional<string> species = default;
+            string species = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -93,7 +94,7 @@ namespace body_complex.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new UnknownDotFish(fishType, species.Value, serializedAdditionalRawData);
+            return new UnknownDotFish(fishType, species, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<DotFish>.Write(ModelReaderWriterOptions options)
@@ -118,7 +119,7 @@ namespace body_complex.Models
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeUnknownDotFish(document.RootElement, options);
+                        return DeserializeDotFish(document.RootElement, options);
                     }
                 default:
                     throw new FormatException($"The model {nameof(DotFish)} does not support '{options.Format}' format.");

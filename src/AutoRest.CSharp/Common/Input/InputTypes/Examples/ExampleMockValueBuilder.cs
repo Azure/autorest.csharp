@@ -142,8 +142,11 @@ namespace AutoRest.CSharp.Common.Input.Examples
             InputTypeKind.Float64 => InputExampleValue.Value(primitiveType, 123.45d),
             InputTypeKind.Float128 => InputExampleValue.Value(primitiveType, 123.45m),
             InputTypeKind.Guid => InputExampleValue.Value(primitiveType, "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"),
+            InputTypeKind.SByte => InputExampleValue.Value(primitiveType, (sbyte)123),
+            InputTypeKind.Byte => InputExampleValue.Value(primitiveType, (byte)123),
             InputTypeKind.Int32 => InputExampleValue.Value(primitiveType, 1234),
             InputTypeKind.Int64 => InputExampleValue.Value(primitiveType, 1234L),
+            InputTypeKind.SafeInt => InputExampleValue.Value(primitiveType, 1234L),
             InputTypeKind.String => string.IsNullOrWhiteSpace(hint) ? InputExampleValue.Value(primitiveType, "<String>") : InputExampleValue.Value(primitiveType, $"<{hint}>"),
             InputTypeKind.DurationISO8601 => InputExampleValue.Value(primitiveType, "PT1H23M45S"),
             InputTypeKind.DurationConstant => InputExampleValue.Value(primitiveType, "01:23:45"),
@@ -165,7 +168,15 @@ namespace AutoRest.CSharp.Common.Input.Examples
             // if this model has a discriminator, we should return a derived type
             if (model.DiscriminatorPropertyName != null)
             {
-                model = model.DerivedModels.First();
+                var derived = model.DerivedModels.FirstOrDefault();
+                if (derived is null)
+                {
+                    return InputExampleValue.Null(model);
+                }
+                else
+                {
+                    model = derived;
+                }
             }
             // then, we just iterate all the properties
             foreach (var modelOrBase in model.GetSelfAndBaseModels())
@@ -176,6 +187,11 @@ namespace AutoRest.CSharp.Common.Input.Examples
                         continue;
 
                     if (!useAllParameters && !property.IsRequired)
+                        continue;
+
+                    // this means a property is defined both on the base and derived type, we skip other occurrences only keep the first
+                    // which means we only keep the property defined in the lowest layer (derived types)
+                    if (dict.ContainsKey(property.SerializedName))
                         continue;
 
                     InputExampleValue exampleValue;

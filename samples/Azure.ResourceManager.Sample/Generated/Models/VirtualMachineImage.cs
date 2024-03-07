@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -39,6 +40,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// Resource Id
         /// Serialized Name: SubResource.id
         /// </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="name">
         /// The name of the resource.
         /// Serialized Name: VirtualMachineImageResource.name
@@ -72,7 +74,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies disallowed configuration for the VirtualMachine created from the image
         /// Serialized Name: VirtualMachineImage.properties.disallowed
         /// </param>
-        internal VirtualMachineImage(string id, string name, AzureLocation location, IDictionary<string, string> tags, PurchasePlan plan, OSDiskImage osDiskImage, IList<DataDiskImage> dataDiskImages, AutomaticOSUpgradeProperties automaticOSUpgradeProperties, HyperVGeneration? hyperVGeneration, DisallowedConfiguration disallowed) : base(id, name, location, tags)
+        internal VirtualMachineImage(string id, IDictionary<string, BinaryData> serializedAdditionalRawData, string name, AzureLocation location, IDictionary<string, string> tags, PurchasePlan plan, OSDiskImage osDiskImage, IList<DataDiskImage> dataDiskImages, AutomaticOSUpgradeProperties automaticOSUpgradeProperties, HyperVGeneration? hyperVGeneration, DisallowedConfiguration disallowed) : base(id, serializedAdditionalRawData, name, location, tags)
         {
             Plan = plan;
             OSDiskImage = osDiskImage;
@@ -82,10 +84,16 @@ namespace Azure.ResourceManager.Sample.Models
             Disallowed = disallowed;
         }
 
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineImage"/> for deserialization. </summary>
+        internal VirtualMachineImage()
+        {
+        }
+
         /// <summary>
         /// Used for establishing the purchase context of any 3rd Party artifact through MarketPlace.
         /// Serialized Name: VirtualMachineImage.properties.plan
         /// </summary>
+        [WirePath("properties.plan")]
         public PurchasePlan Plan { get; set; }
         /// <summary>
         /// Contains the os disk image information.
@@ -96,6 +104,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// The operating system of the osDiskImage.
         /// Serialized Name: OSDiskImage.operatingSystem
         /// </summary>
+        [WirePath("properties.osDiskImage.operatingSystem")]
         public OperatingSystemType? OSDiskImageOperatingSystem
         {
             get => OSDiskImage is null ? default(OperatingSystemType?) : OSDiskImage.OperatingSystem;
@@ -106,6 +115,7 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> Serialized Name: VirtualMachineImage.properties.dataDiskImages. </summary>
+        [WirePath("properties.dataDiskImages")]
         public IList<DataDiskImage> DataDiskImages { get; }
         /// <summary>
         /// Describes automatic OS upgrade properties on the image.
@@ -116,6 +126,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies whether automatic OS upgrade is supported on the image.
         /// Serialized Name: AutomaticOSUpgradeProperties.automaticOSUpgradeSupported
         /// </summary>
+        [WirePath("properties.automaticOSUpgradeProperties.automaticOSUpgradeSupported")]
         public bool? AutomaticOSUpgradeSupported
         {
             get => AutomaticOSUpgradeProperties is null ? default(bool?) : AutomaticOSUpgradeProperties.AutomaticOSUpgradeSupported;
@@ -129,6 +140,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies the HyperVGeneration Type
         /// Serialized Name: VirtualMachineImage.properties.hyperVGeneration
         /// </summary>
+        [WirePath("properties.hyperVGeneration")]
         public HyperVGeneration? HyperVGeneration { get; set; }
         /// <summary>
         /// Specifies disallowed configuration for the VirtualMachine created from the image
@@ -139,6 +151,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// VM disk types which are disallowed.
         /// Serialized Name: DisallowedConfiguration.vmDiskType
         /// </summary>
+        [WirePath("properties.disallowed.vmDiskType")]
         public VmDiskType? DisallowedVmDiskType
         {
             get => Disallowed is null ? default : Disallowed.VmDiskType;

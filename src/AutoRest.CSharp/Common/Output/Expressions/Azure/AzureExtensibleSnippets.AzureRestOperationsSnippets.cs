@@ -23,6 +23,8 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Azure
     {
         internal class AzureRestOperationsSnippets : RestOperationsSnippets
         {
+            public override StreamExpression GetContentStream(TypedValueExpression response) => new ResponseExpression(response).ContentStream;
+
             public override TypedValueExpression GetTypedResponseFromValue(TypedValueExpression value, TypedValueExpression response)
                 => ResponseExpression.FromValue(value, new ResponseExpression(response));
 

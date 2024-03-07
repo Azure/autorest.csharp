@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 using MgmtListMethods;
 
 namespace MgmtListMethods.Models
@@ -21,7 +20,7 @@ namespace MgmtListMethods.Models
                 return null;
             }
             IReadOnlyList<SubParentData> value = default;
-            Optional<string> nextLink = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -40,7 +39,7 @@ namespace MgmtListMethods.Models
                     continue;
                 }
             }
-            return new SubParentListResult(value, nextLink.Value);
+            return new SubParentListResult(value, nextLink);
         }
     }
 }

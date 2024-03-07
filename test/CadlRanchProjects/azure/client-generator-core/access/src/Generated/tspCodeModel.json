@@ -7,6 +7,7 @@
  "Models": [
   {
    "$id": "2",
+   "Kind": "Model",
    "Name": "NoDecoratorModelInPublic",
    "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.PublicOperation",
    "Accessibility": "public",
@@ -21,8 +22,8 @@
      "Description": "",
      "Type": {
       "$id": "4",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -32,6 +33,7 @@
   },
   {
    "$id": "5",
+   "Kind": "Model",
    "Name": "PublicDecoratorModelInPublic",
    "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.PublicOperation",
    "Accessibility": "public",
@@ -46,8 +48,8 @@
      "Description": "",
      "Type": {
       "$id": "7",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -57,6 +59,7 @@
   },
   {
    "$id": "8",
+   "Kind": "Model",
    "Name": "NoDecoratorModelInInternal",
    "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation",
    "Accessibility": "internal",
@@ -71,8 +74,8 @@
      "Description": "",
      "Type": {
       "$id": "10",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -82,6 +85,7 @@
   },
   {
    "$id": "11",
+   "Kind": "Model",
    "Name": "InternalDecoratorModelInInternal",
    "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation",
    "Accessibility": "internal",
@@ -96,8 +100,8 @@
      "Description": "",
      "Type": {
       "$id": "13",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -107,6 +111,7 @@
   },
   {
    "$id": "14",
+   "Kind": "Model",
    "Name": "PublicDecoratorModelInInternal",
    "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation",
    "Accessibility": "public",
@@ -121,8 +126,8 @@
      "Description": "",
      "Type": {
       "$id": "16",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -132,6 +137,7 @@
   },
   {
    "$id": "17",
+   "Kind": "Model",
    "Name": "SharedModel",
    "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.SharedModelInOperation",
    "Accessibility": "public",
@@ -146,8 +152,8 @@
      "Description": "",
      "Type": {
       "$id": "19",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -157,6 +163,7 @@
   },
   {
    "$id": "20",
+   "Kind": "Model",
    "Name": "BaseModel",
    "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
    "Accessibility": "internal",
@@ -171,8 +178,8 @@
      "Description": "",
      "Type": {
       "$id": "22",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -182,6 +189,7 @@
   },
   {
    "$id": "23",
+   "Kind": "Model",
    "Name": "OuterModel",
    "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
    "Accessibility": "internal",
@@ -199,6 +207,7 @@
      "Description": "",
      "Type": {
       "$id": "25",
+      "Kind": "Model",
       "Name": "InnerModel",
       "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
       "Accessibility": "internal",
@@ -213,8 +222,8 @@
         "Description": "",
         "Type": {
          "$id": "27",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "IsRequired": true,
@@ -232,6 +241,7 @@
   },
   {
    "$id": "28",
+   "Kind": "Model",
    "Name": "AbstractModel",
    "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
    "Accessibility": "internal",
@@ -249,8 +259,8 @@
      "IsReadOnly": false,
      "Type": {
       "$id": "30",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsDiscriminator": true
@@ -262,8 +272,8 @@
      "Description": "",
      "Type": {
       "$id": "32",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -273,6 +283,7 @@
   },
   {
    "$id": "33",
+   "Kind": "Model",
    "Name": "RealModel",
    "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
    "Accessibility": "internal",
@@ -315,8 +326,8 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "39",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -332,8 +343,8 @@
         "$id": "40",
         "Type": {
          "$id": "41",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "http://localhost:3000"
@@ -345,8 +356,8 @@
        "NameInRequest": "name",
        "Type": {
         "$id": "43",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -365,8 +376,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "45",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -427,8 +438,8 @@
        "NameInRequest": "name",
        "Type": {
         "$id": "50",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -447,8 +458,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "52",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -521,8 +532,8 @@
        "NameInRequest": "name",
        "Type": {
         "$id": "59",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -541,8 +552,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "61",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -603,8 +614,8 @@
        "NameInRequest": "name",
        "Type": {
         "$id": "66",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -623,8 +634,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "68",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -685,8 +696,8 @@
        "NameInRequest": "name",
        "Type": {
         "$id": "73",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -705,8 +716,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "75",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -779,8 +790,8 @@
        "NameInRequest": "name",
        "Type": {
         "$id": "82",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -799,8 +810,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "84",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -861,8 +872,8 @@
        "NameInRequest": "name",
        "Type": {
         "$id": "89",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -881,8 +892,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "91",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -956,8 +967,8 @@
        "NameInRequest": "name",
        "Type": {
         "$id": "98",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -976,8 +987,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "100",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1039,8 +1050,8 @@
        "NameInRequest": "kind",
        "Type": {
         "$id": "105",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -1059,8 +1070,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "107",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",

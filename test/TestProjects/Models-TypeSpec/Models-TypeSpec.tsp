@@ -31,6 +31,30 @@ enum Versions {
   "0.1.0"
 }
 
+@doc("A base model with a required property")
+model BaseModelWithARequiredProperty {
+    @doc("Required kind")
+    kind: string;
+}
+
+@doc("A base model in the discriminated set inheriting from a base with the predefined discriminator property")
+@discriminator("kind")
+model BaseModelWithDiscriminatorDefinedOnBase extends BaseModelWithARequiredProperty {
+    @doc("Optional string.")
+    optionalString?: string;
+}
+
+@doc("A derived class in the discriminated set inheriting from a base with the predefined discriminator property")
+model DerivedWithDiscriminatorDefinedOnBase extends BaseModelWithDiscriminatorDefinedOnBase {
+    kind: "A";
+
+    @doc("Required string.")
+    requiredString: string;
+
+    @doc("Optional int")
+    optionalInt?: int32;
+}
+
 @doc("Base model")
 model BaseModel {
 }
@@ -119,7 +143,8 @@ enum FixedFloatEnum {
 
 @doc("Extensible enum")
 @deprecated("deprecated for test")
-enum ExtensibleEnum {
+union ExtensibleEnum {
+    string,
     One: "1",
     Two: "2",
     Four: "4"
@@ -127,7 +152,8 @@ enum ExtensibleEnum {
 
 @doc("Extensible int enum")
 @deprecated("should be replaced by cadl-ranch")
-enum ExtensibleIntEnum {
+union ExtensibleIntEnum {
+    int32,
     One: 1,
     Two: 2,
     Four: 4
@@ -556,6 +582,11 @@ model SecondDerivedOutputModel extends OutputBaseModelWithDiscriminator {
   kind: "second";
   second: boolean;
 }
+
+@route("/roundTripToDiscriminatorDefinedOnBase")
+@put
+@convenientAPI(true)
+op putBaseModelWithDiscriminatorDefinedOnBase(@body body: BaseModelWithDiscriminatorDefinedOnBase): BaseModelWithDiscriminatorDefinedOnBase;
 
 @route("/pet")
 @get

@@ -7,7 +7,7 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
+using MgmtExactMatchFlattenInheritance;
 
 namespace MgmtExactMatchFlattenInheritance.Models
 {
@@ -19,8 +19,8 @@ namespace MgmtExactMatchFlattenInheritance.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<AzureResourceFlattenModel2>> value = default;
-            Optional<string> nextLink = default;
+            IReadOnlyList<AzureResourceFlattenModel2> value = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -43,7 +43,7 @@ namespace MgmtExactMatchFlattenInheritance.Models
                     continue;
                 }
             }
-            return new AzureResourceFlattenModel2ListResult(Optional.ToList(value), nextLink.Value);
+            return new AzureResourceFlattenModel2ListResult(value ?? new ChangeTrackingList<AzureResourceFlattenModel2>(), nextLink);
         }
     }
 }

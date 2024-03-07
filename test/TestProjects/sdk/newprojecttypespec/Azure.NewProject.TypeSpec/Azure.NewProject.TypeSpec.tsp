@@ -57,21 +57,24 @@ enum StringFixedEnum {
 }
 
 @doc("Int based extensible enum")
-enum IntExtensibleEnum {
+union IntExtensibleEnum {
+    int32,
     One: 1,
     Two: 2,
     Four: 4,
 }
 
 @doc("Float based extensible enum")
-enum FloatExtensibleEnum {
+union FloatExtensibleEnum {
+    float32,
     One: 1.0,
     Two: 2.0,
     Four: 4.0,
 }
 
 @doc("Extensible enum")
-enum StringExtensibleEnum {
+union StringExtensibleEnum {
+    string,
     One: "1",
     Two: "2",
     Four: "4",
@@ -185,14 +188,15 @@ model RoundTripModel {
     readOnlyOptionalRecordUnknown?: Record<unknown>;
 }
 
-enum DaysOfWeekExtensibleEnum {
-    Monday,
-    Tuesday,
-    Wednesday,
-    Thursday,
-    Friday,
-    Saturday,
-    Sunday,
+union DaysOfWeekExtensibleEnum {
+    string,
+    Monday: "Monday",
+    Tuesday: "Tuesday",
+    Wednesday: "Wednesday",
+    Thursday: "Thursday",
+    Friday: "Friday",
+    Saturday: "Saturday",
+    Sunday: "Sunday",
 }
 
 model ModelWithFormat {
@@ -238,12 +242,6 @@ namespace Hello.Demo2 {
         @body action: RoundTripModel,
         @path p2: string
     ): RoundTripModel;
-
-    @route("/demoHi")
-    @doc("Return hi in demo2")
-    @get
-    @convenientAPI(true)
-    op helloDemo2(): Thing;
 
     @route("/literal")
     @doc("Create with literal value")

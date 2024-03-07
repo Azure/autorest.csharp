@@ -30,7 +30,14 @@ namespace MgmtLRO.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new FakeData(id, name, resourceType, systemData, tags, location, properties);
+            return new FakeData(
+                id,
+                name,
+                resourceType,
+                systemData,
+                tags,
+                location,
+                properties);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.FakePostResult"/>. </summary>
@@ -54,7 +61,14 @@ namespace MgmtLRO.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new BarData(id, name, resourceType, systemData, tags, location, barBuzz != null ? new BarProperties(barBuzz) : null);
+            return new BarData(
+                id,
+                name,
+                resourceType,
+                systemData,
+                tags,
+                location,
+                barBuzz != null ? new BarProperties(barBuzz) : null);
         }
     }
 }

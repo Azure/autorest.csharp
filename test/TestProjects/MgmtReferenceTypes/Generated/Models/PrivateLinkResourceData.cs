@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
+using MgmtReferenceTypes;
 
 namespace Azure.ResourceManager.Fake.Models
 {

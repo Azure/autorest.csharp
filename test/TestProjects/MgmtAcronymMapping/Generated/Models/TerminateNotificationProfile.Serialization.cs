@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtAcronymMapping;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -34,8 +35,8 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<string> notBeforeTimeout = default;
-            Optional<bool> enable = default;
+            string notBeforeTimeout = default;
+            bool? enable = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("notBeforeTimeout"u8))
@@ -53,7 +54,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new TerminateNotificationProfile(notBeforeTimeout.Value, Optional.ToNullable(enable));
+            return new TerminateNotificationProfile(notBeforeTimeout, enable);
         }
     }
 }

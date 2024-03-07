@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using CustomizationsInTsp;
 
 namespace CustomizationsInTsp.Models
 {
@@ -260,13 +261,13 @@ namespace CustomizationsInTsp.Models
             IList<IList<string>> badListOfListName = default;
             IList<IDictionary<string, string>> badListOfDictionaryName = default;
             ReadOnlyMemory<float> vector = default;
-            Optional<ReadOnlyMemory<float>?> vectorOptional = default;
+            ReadOnlyMemory<float>? vectorOptional = default;
             ReadOnlyMemory<float>? vectorNullable = default;
-            Optional<ReadOnlyMemory<float>?> vectorOptionalNullable = default;
+            ReadOnlyMemory<float>? vectorOptionalNullable = default;
             ReadOnlyMemory<float> vectorReadOnly = default;
-            Optional<ReadOnlyMemory<float>?> vectorOptionalReadOnly = default;
+            ReadOnlyMemory<float>? vectorOptionalReadOnly = default;
             ReadOnlyMemory<float>? vectorNullableReadOnly = default;
-            Optional<ReadOnlyMemory<float>?> vectorOptionalNullableReadOnly = default;
+            ReadOnlyMemory<float>? vectorOptionalNullableReadOnly = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -509,7 +510,28 @@ namespace CustomizationsInTsp.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ModelWithCustomizedProperties(propertyToMakeInternal, propertyToRename, propertyToMakeFloat, propertyToMakeInt, propertyToMakeDuration, propertyToMakeString, propertyToMakeJsonElement, propertyToField, badListName, badDictionaryName, badListOfListName, badListOfDictionaryName, vector, Optional.ToNullable(vectorOptional), vectorNullable, Optional.ToNullable(vectorOptionalNullable), vectorReadOnly, Optional.ToNullable(vectorOptionalReadOnly), vectorNullableReadOnly, Optional.ToNullable(vectorOptionalNullableReadOnly), serializedAdditionalRawData);
+            return new ModelWithCustomizedProperties(
+                propertyToMakeInternal,
+                propertyToRename,
+                propertyToMakeFloat,
+                propertyToMakeInt,
+                propertyToMakeDuration,
+                propertyToMakeString,
+                propertyToMakeJsonElement,
+                propertyToField,
+                badListName,
+                badDictionaryName,
+                badListOfListName,
+                badListOfDictionaryName,
+                vector,
+                vectorOptional,
+                vectorNullable,
+                vectorOptionalNullable,
+                vectorReadOnly,
+                vectorOptionalReadOnly,
+                vectorNullableReadOnly,
+                vectorOptionalNullableReadOnly,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ModelWithCustomizedProperties>.Write(ModelReaderWriterOptions options)

@@ -16,16 +16,17 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 
 @doc("Extensible enum to customize operator")
-enum ExtensibleEnumWithOperator {
+union ExtensibleEnumWithOperator {
+    string,
     @doc("Monday.")
-    Monday,
+    Monday: "Monday",
 
     @doc("Tuesday.")
-    Tuesday,
+    Tuesday: "Tuesday",
 }
 
 @doc("Model to add additional serializable property")
-model ModelToAddAdditionalSerializableProperty {
+model ModelToAddAdditionalSerializableProperty extends ModelToRename {
     @doc("Required int")
     requiredInt: int32;
 }
@@ -39,7 +40,7 @@ model ModelToMakeInternal {
 @doc("Renamed model (original name: ModelToRename)")
 model ModelToRename {
     @doc("Required int")
-    requiredInt: int32;
+    requiredIntOnBase: int32;
 
     @doc("Optional int")
     optionalInt?: int32;
@@ -147,14 +148,16 @@ enum EnumWithValueToRename {
 }
 
 @doc("Extensible enum")
-enum EnumToBeMadeExtensible {
+union EnumToBeMadeExtensible {
+    string,
     ExOne: "1",
     ExTwo: "2",
     ExThree: "3",
 }
 
 @doc("A normal enum")
-enum NormalEnum {
+union NormalEnum {
+    string,
     A: "a",
     B: "b",
 }

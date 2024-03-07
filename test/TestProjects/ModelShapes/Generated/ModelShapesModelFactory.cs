@@ -51,7 +51,32 @@ namespace ModelShapes.Models
             nonRequiredNullableStringList ??= new List<string>();
             nonRequiredNullableIntList ??= new List<int>();
 
-            return new InputModel(requiredString, requiredInt, requiredStringList?.ToList(), requiredIntList?.ToList(), nonRequiredString, nonRequiredInt, nonRequiredStringList?.ToList(), nonRequiredIntList?.ToList(), requiredNullableString, requiredNullableInt, requiredNullableStringList?.ToList(), requiredNullableIntList?.ToList(), nonRequiredNullableString, nonRequiredNullableInt, nonRequiredNullableStringList?.ToList(), nonRequiredNullableIntList?.ToList(), vector, vectorReadOnly, vectorReadOnlyRequired, vectorRequired, vectorNullable, vectorReadOnlyNullable, vectorReadOnlyRequiredNullable, vectorRequiredNullable, serializedAdditionalRawData: null);
+            return new InputModel(
+                requiredString,
+                requiredInt,
+                requiredStringList?.ToList(),
+                requiredIntList?.ToList(),
+                nonRequiredString,
+                nonRequiredInt,
+                nonRequiredStringList?.ToList(),
+                nonRequiredIntList?.ToList(),
+                requiredNullableString,
+                requiredNullableInt,
+                requiredNullableStringList?.ToList(),
+                requiredNullableIntList?.ToList(),
+                nonRequiredNullableString,
+                nonRequiredNullableInt,
+                nonRequiredNullableStringList?.ToList(),
+                nonRequiredNullableIntList?.ToList(),
+                vector,
+                vectorReadOnly,
+                vectorReadOnlyRequired,
+                vectorRequired,
+                vectorNullable,
+                vectorReadOnlyNullable,
+                vectorReadOnlyRequiredNullable,
+                vectorRequiredNullable,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.MixedModel"/>. </summary>
@@ -93,7 +118,34 @@ namespace ModelShapes.Models
             nonRequiredNullableStringList ??= new List<string>();
             nonRequiredNullableIntList ??= new List<int>();
 
-            return new MixedModel(requiredString, requiredInt, requiredStringList?.ToList(), requiredIntList?.ToList(), nonRequiredString, nonRequiredInt, nonRequiredStringList?.ToList(), nonRequiredIntList?.ToList(), requiredNullableString, requiredNullableInt, requiredNullableStringList?.ToList(), requiredNullableIntList?.ToList(), nonRequiredNullableString, nonRequiredNullableInt, nonRequiredNullableStringList?.ToList(), nonRequiredNullableIntList?.ToList(), requiredReadonlyInt, nonRequiredReadonlyInt, vector, vectorReadOnly, vectorReadOnlyRequired, vectorRequired, vectorNullable, vectorReadOnlyNullable, vectorReadOnlyRequiredNullable, vectorRequiredNullable, serializedAdditionalRawData: null);
+            return new MixedModel(
+                requiredString,
+                requiredInt,
+                requiredStringList?.ToList(),
+                requiredIntList?.ToList(),
+                nonRequiredString,
+                nonRequiredInt,
+                nonRequiredStringList?.ToList(),
+                nonRequiredIntList?.ToList(),
+                requiredNullableString,
+                requiredNullableInt,
+                requiredNullableStringList?.ToList(),
+                requiredNullableIntList?.ToList(),
+                nonRequiredNullableString,
+                nonRequiredNullableInt,
+                nonRequiredNullableStringList?.ToList(),
+                nonRequiredNullableIntList?.ToList(),
+                requiredReadonlyInt,
+                nonRequiredReadonlyInt,
+                vector,
+                vectorReadOnly,
+                vectorReadOnlyRequired,
+                vectorRequired,
+                vectorNullable,
+                vectorReadOnlyNullable,
+                vectorReadOnlyRequiredNullable,
+                vectorRequiredNullable,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.OutputModel"/>. </summary>
@@ -135,7 +187,34 @@ namespace ModelShapes.Models
             nonRequiredNullableStringList ??= new List<string>();
             nonRequiredNullableIntList ??= new List<int>();
 
-            return new OutputModel(requiredString, requiredInt, requiredStringList?.ToList(), requiredIntList?.ToList(), nonRequiredString, nonRequiredInt, nonRequiredStringList?.ToList(), nonRequiredIntList?.ToList(), requiredNullableString, requiredNullableInt, requiredNullableStringList?.ToList(), requiredNullableIntList?.ToList(), nonRequiredNullableString, nonRequiredNullableInt, nonRequiredNullableStringList?.ToList(), nonRequiredNullableIntList?.ToList(), requiredReadonlyInt, nonRequiredReadonlyInt, vector, vectorReadOnly, vectorReadOnlyRequired, vectorRequired, vectorNullable, vectorReadOnlyNullable, vectorReadOnlyRequiredNullable, vectorRequiredNullable, serializedAdditionalRawData: null);
+            return new OutputModel(
+                requiredString,
+                requiredInt,
+                requiredStringList?.ToList(),
+                requiredIntList?.ToList(),
+                nonRequiredString,
+                nonRequiredInt,
+                nonRequiredStringList?.ToList(),
+                nonRequiredIntList?.ToList(),
+                requiredNullableString,
+                requiredNullableInt,
+                requiredNullableStringList?.ToList(),
+                requiredNullableIntList?.ToList(),
+                nonRequiredNullableString,
+                nonRequiredNullableInt,
+                nonRequiredNullableStringList?.ToList(),
+                nonRequiredNullableIntList?.ToList(),
+                requiredReadonlyInt,
+                nonRequiredReadonlyInt,
+                vector,
+                vectorReadOnly,
+                vectorReadOnlyRequired,
+                vectorRequired,
+                vectorNullable,
+                vectorReadOnlyNullable,
+                vectorReadOnlyRequiredNullable,
+                vectorRequiredNullable,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.MixedModelWithReadonlyProperty"/>. </summary>

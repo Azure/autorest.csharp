@@ -6,7 +6,8 @@
 #nullable disable
 
 using System;
-using Azure.Core;
+using System.Collections.Generic;
+using _Type.Model.Inheritance.NotDiscriminated;
 
 namespace _Type.Model.Inheritance.NotDiscriminated.Models
 {
@@ -23,6 +24,21 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Models
             Argument.AssertNotNull(name, nameof(name));
 
             Smart = smart;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Siamese"/>. </summary>
+        /// <param name="name"></param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        /// <param name="age"></param>
+        /// <param name="smart"></param>
+        internal Siamese(string name, IDictionary<string, BinaryData> serializedAdditionalRawData, int age, bool smart) : base(name, serializedAdditionalRawData, age)
+        {
+            Smart = smart;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Siamese"/> for deserialization. </summary>
+        internal Siamese()
+        {
         }
 
         /// <summary> Gets or sets the smart. </summary>

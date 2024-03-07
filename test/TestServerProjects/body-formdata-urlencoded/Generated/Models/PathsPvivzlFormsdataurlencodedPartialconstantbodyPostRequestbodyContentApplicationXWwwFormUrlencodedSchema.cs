@@ -7,7 +7,7 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
+using body_formdata_urlencoded;
 
 namespace body_formdata_urlencoded.Models
 {

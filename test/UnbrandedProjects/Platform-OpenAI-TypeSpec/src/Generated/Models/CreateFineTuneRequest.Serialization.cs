@@ -2,20 +2,31 @@
 
 #nullable disable
 
+using System;
 using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
+using OpenAI;
 
 namespace OpenAI.Models
 {
-    public partial class CreateFineTuneRequest : IUtf8JsonWriteable
+    public partial class CreateFineTuneRequest : IUtf8JsonWriteable, IJsonModel<CreateFineTuneRequest>
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<CreateFineTuneRequest>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<CreateFineTuneRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<CreateFineTuneRequest>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(CreateFineTuneRequest)} does not support '{format}' format.");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("training_file"u8);
             writer.WriteStringValue(TrainingFile);
-            if (OptionalProperty.IsDefined(ValidationFile))
+            if (Optional.IsDefined(ValidationFile))
             {
                 if (ValidationFile != null)
                 {
@@ -27,12 +38,19 @@ namespace OpenAI.Models
                     writer.WriteNull("validation_file");
                 }
             }
-            if (OptionalProperty.IsDefined(Model))
+            if (Optional.IsDefined(Model))
             {
-                writer.WritePropertyName("model"u8);
-                writer.WriteStringValue(Model.Value.ToString());
+                if (Model != null)
+                {
+                    writer.WritePropertyName("model"u8);
+                    writer.WriteStringValue(Model.Value.ToString());
+                }
+                else
+                {
+                    writer.WriteNull("model");
+                }
             }
-            if (OptionalProperty.IsDefined(NEpochs))
+            if (Optional.IsDefined(NEpochs))
             {
                 if (NEpochs != null)
                 {
@@ -44,7 +62,7 @@ namespace OpenAI.Models
                     writer.WriteNull("n_epochs");
                 }
             }
-            if (OptionalProperty.IsDefined(BatchSize))
+            if (Optional.IsDefined(BatchSize))
             {
                 if (BatchSize != null)
                 {
@@ -56,7 +74,7 @@ namespace OpenAI.Models
                     writer.WriteNull("batch_size");
                 }
             }
-            if (OptionalProperty.IsDefined(LearningRateMultiplier))
+            if (Optional.IsDefined(LearningRateMultiplier))
             {
                 if (LearningRateMultiplier != null)
                 {
@@ -68,7 +86,7 @@ namespace OpenAI.Models
                     writer.WriteNull("learning_rate_multiplier");
                 }
             }
-            if (OptionalProperty.IsDefined(PromptLossRate))
+            if (Optional.IsDefined(PromptLossRate))
             {
                 if (PromptLossRate != null)
                 {
@@ -80,7 +98,7 @@ namespace OpenAI.Models
                     writer.WriteNull("prompt_loss_rate");
                 }
             }
-            if (OptionalProperty.IsDefined(ComputeClassificationMetrics))
+            if (Optional.IsDefined(ComputeClassificationMetrics))
             {
                 if (ComputeClassificationMetrics != null)
                 {
@@ -92,7 +110,7 @@ namespace OpenAI.Models
                     writer.WriteNull("compute_classification_metrics");
                 }
             }
-            if (OptionalProperty.IsDefined(ClassificationNClasses))
+            if (Optional.IsDefined(ClassificationNClasses))
             {
                 if (ClassificationNClasses != null)
                 {
@@ -104,7 +122,7 @@ namespace OpenAI.Models
                     writer.WriteNull("classification_n_classes");
                 }
             }
-            if (OptionalProperty.IsDefined(ClassificationPositiveClass))
+            if (Optional.IsDefined(ClassificationPositiveClass))
             {
                 if (ClassificationPositiveClass != null)
                 {
@@ -116,7 +134,7 @@ namespace OpenAI.Models
                     writer.WriteNull("classification_positive_class");
                 }
             }
-            if (OptionalProperty.IsCollectionDefined(ClassificationBetas))
+            if (Optional.IsCollectionDefined(ClassificationBetas))
             {
                 if (ClassificationBetas != null)
                 {
@@ -133,7 +151,7 @@ namespace OpenAI.Models
                     writer.WriteNull("classification_betas");
                 }
             }
-            if (OptionalProperty.IsDefined(Suffix))
+            if (Optional.IsDefined(Suffix))
             {
                 if (Suffix != null)
                 {
@@ -145,7 +163,238 @@ namespace OpenAI.Models
                     writer.WriteNull("suffix");
                 }
             }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
+        }
+
+        CreateFineTuneRequest IJsonModel<CreateFineTuneRequest>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<CreateFineTuneRequest>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(CreateFineTuneRequest)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeCreateFineTuneRequest(document.RootElement, options);
+        }
+
+        internal static CreateFineTuneRequest DeserializeCreateFineTuneRequest(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            string trainingFile = default;
+            string validationFile = default;
+            CreateFineTuneRequestModel? model = default;
+            long? nEpochs = default;
+            long? batchSize = default;
+            double? learningRateMultiplier = default;
+            double? promptLossRate = default;
+            bool? computeClassificationMetrics = default;
+            long? classificationNClasses = default;
+            string classificationPositiveClass = default;
+            IList<double> classificationBetas = default;
+            string suffix = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("training_file"u8))
+                {
+                    trainingFile = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("validation_file"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        validationFile = null;
+                        continue;
+                    }
+                    validationFile = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("model"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        model = null;
+                        continue;
+                    }
+                    model = new CreateFineTuneRequestModel(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("n_epochs"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        nEpochs = null;
+                        continue;
+                    }
+                    nEpochs = property.Value.GetInt64();
+                    continue;
+                }
+                if (property.NameEquals("batch_size"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        batchSize = null;
+                        continue;
+                    }
+                    batchSize = property.Value.GetInt64();
+                    continue;
+                }
+                if (property.NameEquals("learning_rate_multiplier"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        learningRateMultiplier = null;
+                        continue;
+                    }
+                    learningRateMultiplier = property.Value.GetDouble();
+                    continue;
+                }
+                if (property.NameEquals("prompt_loss_rate"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        promptLossRate = null;
+                        continue;
+                    }
+                    promptLossRate = property.Value.GetDouble();
+                    continue;
+                }
+                if (property.NameEquals("compute_classification_metrics"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        computeClassificationMetrics = null;
+                        continue;
+                    }
+                    computeClassificationMetrics = property.Value.GetBoolean();
+                    continue;
+                }
+                if (property.NameEquals("classification_n_classes"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        classificationNClasses = null;
+                        continue;
+                    }
+                    classificationNClasses = property.Value.GetInt64();
+                    continue;
+                }
+                if (property.NameEquals("classification_positive_class"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        classificationPositiveClass = null;
+                        continue;
+                    }
+                    classificationPositiveClass = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("classification_betas"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<double> array = new List<double>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(item.GetDouble());
+                    }
+                    classificationBetas = array;
+                    continue;
+                }
+                if (property.NameEquals("suffix"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        suffix = null;
+                        continue;
+                    }
+                    suffix = property.Value.GetString();
+                    continue;
+                }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
+            }
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new CreateFineTuneRequest(
+                trainingFile,
+                validationFile,
+                model,
+                nEpochs,
+                batchSize,
+                learningRateMultiplier,
+                promptLossRate,
+                computeClassificationMetrics,
+                classificationNClasses,
+                classificationPositiveClass,
+                classificationBetas ?? new ChangeTrackingList<double>(),
+                suffix,
+                serializedAdditionalRawData);
+        }
+
+        BinaryData IPersistableModel<CreateFineTuneRequest>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<CreateFineTuneRequest>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new FormatException($"The model {nameof(CreateFineTuneRequest)} does not support '{options.Format}' format.");
+            }
+        }
+
+        CreateFineTuneRequest IPersistableModel<CreateFineTuneRequest>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<CreateFineTuneRequest>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeCreateFineTuneRequest(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(CreateFineTuneRequest)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<CreateFineTuneRequest>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The result to deserialize the model from. </param>
+        internal static CreateFineTuneRequest FromResponse(PipelineResponse response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeCreateFineTuneRequest(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

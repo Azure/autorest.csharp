@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using ModelsTypeSpec;
 
 namespace ModelsTypeSpec.Models
 {
@@ -76,7 +77,7 @@ namespace ModelsTypeSpec.Models
                 return null;
             }
             string message = default;
-            Optional<ErrorModel> innerError = default;
+            ErrorModel innerError = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -92,7 +93,7 @@ namespace ModelsTypeSpec.Models
                     {
                         continue;
                     }
-                    innerError = DeserializeErrorModel(property.Value);
+                    innerError = DeserializeErrorModel(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")
@@ -101,7 +102,7 @@ namespace ModelsTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ErrorModel(message, innerError.Value, serializedAdditionalRawData);
+            return new ErrorModel(message, innerError, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ErrorModel>.Write(ModelReaderWriterOptions options)

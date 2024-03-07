@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 using MgmtParent;
 
 namespace MgmtParent.Models
@@ -21,7 +20,7 @@ namespace MgmtParent.Models
                 return null;
             }
             IReadOnlyList<AvailabilitySetData> value = default;
-            Optional<string> nextLink = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -40,7 +39,7 @@ namespace MgmtParent.Models
                     continue;
                 }
             }
-            return new AvailabilitySetListResult(value, nextLink.Value);
+            return new AvailabilitySetListResult(value, nextLink);
         }
     }
 }

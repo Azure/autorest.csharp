@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -58,12 +59,12 @@ namespace AutoRest.CSharp.Generation.Types
             IsPublic = type.IsPublic && arguments.All(t => t.IsPublic);
         }
 
-        public CSharpType(TypeProvider implementation, bool isValueType = false, bool isEnum = false, bool isNullable = false, CSharpType[]? arguments = default)
+        public CSharpType(TypeProvider implementation, bool isValueType = false, bool isEnum = false, bool isNullable = false, IReadOnlyList<CSharpType>? arguments = default)
             : this(implementation, implementation.Declaration.Namespace, implementation.Declaration.Name, isValueType, isEnum, isNullable, arguments)
         {
         }
 
-        public CSharpType(TypeProvider implementation, string ns, string name, bool isValueType = false, bool isEnum = false, bool isNullable = false, CSharpType[]? arguments = default)
+        public CSharpType(TypeProvider implementation, string ns, string name, bool isValueType = false, bool isEnum = false, bool isNullable = false, IReadOnlyList<CSharpType>? arguments = default)
         {
             _implementation = implementation;
             Name = name;
@@ -178,6 +179,8 @@ namespace AutoRest.CSharp.Generation.Types
             {
                 null => null,
                 var t when t.IsGenericParameter => t.Name,
+                //if we have an array type and the element is defined in the same assembly then its a generic param array.
+                var t when t.IsArray && t.Assembly.Equals(GetType().Assembly) => t.Name,
                 var t when t == typeof(bool) => "bool",
                 var t when t == typeof(byte) => "byte",
                 var t when t == typeof(sbyte) => "sbyte",
@@ -261,5 +264,54 @@ namespace AutoRest.CSharp.Generation.Types
 
         internal static CSharpType FromSystemType(BuildContext context, Type type, IEnumerable<ObjectTypeProperty>? backingProperties = null)
             => FromSystemType(type, context.DefaultNamespace, context.SourceInputModel, backingProperties);
+
+        /// <summary>
+        /// Check whether two CSharpType instances equal or not
+        /// This is not the same as left.Equals(right) because this function only checks the names
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="other"></param>
+        /// <returns></returns>
+        public bool EqualsByName(CSharpType? other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (other is null)
+            {
+                return false;
+            }
+
+            if (Namespace != other.Namespace)
+                return false;
+
+            if (Name != other.Name)
+                return false;
+
+            if (Arguments.Count != other.Arguments.Count)
+                return false;
+
+            for (int i = 0; i < Arguments.Count; i++)
+            {
+                if (!Arguments[i].EqualsByName(other.Arguments[i]))
+                    return false;
+            }
+
+            return true;
+        }
+
+        public CSharpType MakeGenericType(IReadOnlyList<CSharpType> arguments)
+        {
+            if (IsFrameworkType)
+            {
+                return new CSharpType(FrameworkType, IsNullable, arguments);
+            }
+            else
+            {
+                return new CSharpType(Implementation, Namespace, Name, IsValueType, IsEnum, IsNullable, arguments.ToArray());
+            }
+        }
     }
 }

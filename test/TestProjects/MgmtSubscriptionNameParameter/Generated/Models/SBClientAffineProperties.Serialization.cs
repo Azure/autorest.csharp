@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtSubscriptionNameParameter;
 
 namespace MgmtSubscriptionNameParameter.Models
 {
@@ -39,9 +40,9 @@ namespace MgmtSubscriptionNameParameter.Models
             {
                 return null;
             }
-            Optional<string> clientId = default;
-            Optional<bool> isDurable = default;
-            Optional<bool> isShared = default;
+            string clientId = default;
+            bool? isDurable = default;
+            bool? isShared = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("clientId"u8))
@@ -68,7 +69,7 @@ namespace MgmtSubscriptionNameParameter.Models
                     continue;
                 }
             }
-            return new SBClientAffineProperties(clientId.Value, Optional.ToNullable(isDurable), Optional.ToNullable(isShared));
+            return new SBClientAffineProperties(clientId, isDurable, isShared);
         }
     }
 }

@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 using MgmtCustomizations;
 
 namespace MgmtCustomizations.Models
@@ -20,7 +19,7 @@ namespace MgmtCustomizations.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<PetStoreData>> value = default;
+            IReadOnlyList<PetStoreData> value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -38,7 +37,7 @@ namespace MgmtCustomizations.Models
                     continue;
                 }
             }
-            return new PetStoreListResult(Optional.ToList(value));
+            return new PetStoreListResult(value ?? new ChangeTrackingList<PetStoreData>());
         }
     }
 }

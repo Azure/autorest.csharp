@@ -20,6 +20,38 @@ namespace Azure.ResourceManager.Sample
     /// </summary>
     public partial class VirtualMachineExtensionData : TrackedResourceData
     {
+        /// <summary>
+        /// Keeps track of any properties unknown to the library.
+        /// <para>
+        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of <see cref="VirtualMachineExtensionData"/>. </summary>
         /// <param name="location"> The location. </param>
         public VirtualMachineExtensionData(AzureLocation location) : base(location)
@@ -73,7 +105,8 @@ namespace Azure.ResourceManager.Sample
         /// The virtual machine extension instance view.
         /// Serialized Name: VirtualMachineExtension.properties.instanceView
         /// </param>
-        internal VirtualMachineExtensionData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string forceUpdateTag, string publisher, string extensionType, string typeHandlerVersion, bool? autoUpgradeMinorVersion, bool? enableAutomaticUpgrade, BinaryData settings, BinaryData protectedSettings, string provisioningState, VirtualMachineExtensionInstanceView instanceView) : base(id, name, resourceType, systemData, tags, location)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineExtensionData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string forceUpdateTag, string publisher, string extensionType, string typeHandlerVersion, bool? autoUpgradeMinorVersion, bool? enableAutomaticUpgrade, BinaryData settings, BinaryData protectedSettings, string provisioningState, VirtualMachineExtensionInstanceView instanceView, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData, tags, location)
         {
             ForceUpdateTag = forceUpdateTag;
             Publisher = publisher;
@@ -85,37 +118,49 @@ namespace Azure.ResourceManager.Sample
             ProtectedSettings = protectedSettings;
             ProvisioningState = provisioningState;
             InstanceView = instanceView;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineExtensionData"/> for deserialization. </summary>
+        internal VirtualMachineExtensionData()
+        {
         }
 
         /// <summary>
         /// How the extension handler should be forced to update even if the extension configuration has not changed.
         /// Serialized Name: VirtualMachineExtension.properties.forceUpdateTag
         /// </summary>
+        [WirePath("properties.forceUpdateTag")]
         public string ForceUpdateTag { get; set; }
         /// <summary>
         /// The name of the extension handler publisher.
         /// Serialized Name: VirtualMachineExtension.properties.publisher
         /// </summary>
+        [WirePath("properties.publisher")]
         public string Publisher { get; set; }
         /// <summary>
         /// Specifies the type of the extension; an example is "CustomScriptExtension".
         /// Serialized Name: VirtualMachineExtension.properties.type
         /// </summary>
+        [WirePath("properties.type")]
         public string ExtensionType { get; set; }
         /// <summary>
         /// Specifies the version of the script handler.
         /// Serialized Name: VirtualMachineExtension.properties.typeHandlerVersion
         /// </summary>
+        [WirePath("properties.typeHandlerVersion")]
         public string TypeHandlerVersion { get; set; }
         /// <summary>
         /// Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true.
         /// Serialized Name: VirtualMachineExtension.properties.autoUpgradeMinorVersion
         /// </summary>
+        [WirePath("properties.autoUpgradeMinorVersion")]
         public bool? AutoUpgradeMinorVersion { get; set; }
         /// <summary>
         /// Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available.
         /// Serialized Name: VirtualMachineExtension.properties.enableAutomaticUpgrade
         /// </summary>
+        [WirePath("properties.enableAutomaticUpgrade")]
         public bool? EnableAutomaticUpgrade { get; set; }
         /// <summary>
         /// Json formatted public settings for the extension.
@@ -148,6 +193,7 @@ namespace Azure.ResourceManager.Sample
         /// </list>
         /// </para>
         /// </summary>
+        [WirePath("properties.settings")]
         public BinaryData Settings { get; set; }
         /// <summary>
         /// The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.
@@ -180,16 +226,19 @@ namespace Azure.ResourceManager.Sample
         /// </list>
         /// </para>
         /// </summary>
+        [WirePath("properties.protectedSettings")]
         public BinaryData ProtectedSettings { get; set; }
         /// <summary>
         /// The provisioning state, which only appears in the response.
         /// Serialized Name: VirtualMachineExtension.properties.provisioningState
         /// </summary>
+        [WirePath("properties.provisioningState")]
         public string ProvisioningState { get; }
         /// <summary>
         /// The virtual machine extension instance view.
         /// Serialized Name: VirtualMachineExtension.properties.instanceView
         /// </summary>
+        [WirePath("properties.instanceView")]
         public VirtualMachineExtensionInstanceView InstanceView { get; set; }
     }
 }

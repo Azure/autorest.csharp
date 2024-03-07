@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Storage;
 
 namespace Azure.ResourceManager.Storage.Models
 {
@@ -29,7 +30,7 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Optional<SmbSetting> smb = default;
+            SmbSetting smb = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("smb"u8))
@@ -42,7 +43,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new ProtocolSettings(smb.Value);
+            return new ProtocolSettings(smb);
         }
     }
 }

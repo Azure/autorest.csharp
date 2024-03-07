@@ -19,10 +19,10 @@ namespace MgmtCollectionParent.Models
             {
                 return null;
             }
-            Optional<StageStatus> stageStatus = default;
-            Optional<StageName> stageName = default;
-            Optional<string> displayName = default;
-            Optional<DateTimeOffset> startTime = default;
+            StageStatus? stageStatus = default;
+            StageName? stageName = default;
+            string displayName = default;
+            DateTimeOffset? startTime = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("stageStatus"u8))
@@ -58,7 +58,7 @@ namespace MgmtCollectionParent.Models
                     continue;
                 }
             }
-            return new StageDetails(Optional.ToNullable(stageStatus), Optional.ToNullable(stageName), displayName.Value, Optional.ToNullable(startTime));
+            return new StageDetails(stageStatus, stageName, displayName, startTime);
         }
     }
 }

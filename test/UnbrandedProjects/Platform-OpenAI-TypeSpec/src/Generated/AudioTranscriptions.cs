@@ -53,7 +53,7 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="audio"/> is null. </exception>
         public virtual async Task<Result<CreateTranscriptionResponse>> CreateAsync(CreateTranscriptionRequest audio, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNull(audio, nameof(audio));
+            Argument.AssertNotNull(audio, nameof(audio));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             using RequestBody content = audio.ToRequestBody();
@@ -67,7 +67,7 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="audio"/> is null. </exception>
         public virtual Result<CreateTranscriptionResponse> Create(CreateTranscriptionRequest audio, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNull(audio, nameof(audio));
+            Argument.AssertNotNull(audio, nameof(audio));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             using RequestBody content = audio.ToRequestBody();
@@ -97,7 +97,7 @@ namespace OpenAI
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> CreateAsync(RequestBody content, RequestOptions context = null)
         {
-            ClientUtilities.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("AudioTranscriptions.Create");
             scope.Start();
@@ -135,7 +135,7 @@ namespace OpenAI
         /// <returns> The response returned from the service. </returns>
         public virtual Result Create(RequestBody content, RequestOptions context = null)
         {
-            ClientUtilities.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("AudioTranscriptions.Create");
             scope.Start();

@@ -11,6 +11,7 @@ using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models.Serialization.Multipart;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Output.Models.Serialization.Bicep;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Types;
@@ -42,8 +43,9 @@ namespace AutoRest.CSharp.Generation.Writers
             var json = model.JsonSerialization;
             var xml = model.XmlSerialization;
             var multipart = model.MultipartSerialization;
+            var bicep = model.BicepSerialization;
 
-            if (json == null && xml == null)
+            if (json == null && xml == null && bicep == null)
             {
                 return;
             }
@@ -70,6 +72,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     if (Configuration.UseModelReaderWriter && json.IJsonModelObjectInterface is { } jsonModelObjectInterface)
                         writer.Append($"{jsonModelObjectInterface}, ");
                 }
+
                 if (xml != null && model.IncludeSerializer)
                 {
                     writer.Append($"{xml.IXmlInterface}, ")
@@ -91,7 +94,12 @@ namespace AutoRest.CSharp.Generation.Writers
                         WriteJsonSerialization(writer, model, json);
                     }
 
-                    WriteIModelImplementations(writer, model, json, xml, multipart);
+                    if (bicep != null)
+                    {
+                        WriteBicepSerialization(writer, bicep);
+                    }
+
+                    WriteIModelImplementations(writer, model, json, xml, bicep, multipart);
 
                     foreach (var method in model.Methods)
                     {
@@ -162,6 +170,19 @@ namespace AutoRest.CSharp.Generation.Writers
         }
 
         /// <summary>
+        /// This method writes the implementation of IXmlSerializable and the static deserialization method
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="bicep"></param>
+        private static void WriteBicepSerialization(CodeWriter writer, BicepObjectSerialization bicep)
+        {
+            foreach (var method in BicepSerializationMethodsBuilder.BuildBicepSerializationMethods(bicep))
+            {
+                writer.WriteMethod(method);
+            }
+        }
+
+        /// <summary>
         /// This method writes the implementation of IUtf8JsonSerializable, IJsonModel{T} and the static deserialization method
         /// If the model is defined as a struct, including the implementation of IJsonModel{object}
         /// NOTE: the inherited methods from IModel{T} and IModel{object} is excluded
@@ -174,7 +195,7 @@ namespace AutoRest.CSharp.Generation.Writers
             // the methods that implement the interface IJsonModel<T> (and IJsonModel<object> if eligible) (do not include the methods inherited from IModel<T> or IModel<object>)
             if (model.IncludeSerializer)
             {
-                foreach (var method in JsonSerializationMethodsBuilder.BuildJsonSerializationMethods(model, json))
+                foreach (var method in JsonSerializationMethodsBuilder.BuildJsonSerializationMethods(json))
                 {
                     writer.WriteMethod(method);
                 }
@@ -197,9 +218,10 @@ namespace AutoRest.CSharp.Generation.Writers
         /// <param name="model"></param>
         /// <param name="json"></param>
         /// <param name="xml"></param>
-        private static void WriteIModelImplementations(CodeWriter writer, SerializableObjectType model, JsonObjectSerialization? json, XmlObjectSerialization? xml, MultipartFormDataObjectSerialization? multipart)
+        /// <param name="bicep"></param>
+        private static void WriteIModelImplementations(CodeWriter writer, SerializableObjectType model, JsonObjectSerialization? json, XmlObjectSerialization? xml, BicepObjectSerialization? bicep, MultipartFormDataObjectSerialization? multipart)
         {
-            foreach (var method in JsonSerializationMethodsBuilder.BuildIModelMethods(model, json, xml, multipart))
+            foreach (var method in JsonSerializationMethodsBuilder.BuildIModelMethods(json, xml, bicep, multipart))
             {
                 writer.WriteMethod(method);
             }

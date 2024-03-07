@@ -70,10 +70,10 @@ namespace TypeSchemaMapping.Models
             {
                 switch (discriminator.GetString())
                 {
-                    case "DerivedFromAbstractModel": return DerivedFromAbstractModel.DeserializeDerivedFromAbstractModel(element);
+                    case "DerivedFromAbstractModel": return DerivedFromAbstractModel.DeserializeDerivedFromAbstractModel(element, options);
                 }
             }
-            return UnknownAbstractModel.DeserializeUnknownAbstractModel(element);
+            return UnknownAbstractModel.DeserializeUnknownAbstractModel(element, options);
         }
 
         BinaryData IPersistableModel<AbstractModel>.Write(ModelReaderWriterOptions options)

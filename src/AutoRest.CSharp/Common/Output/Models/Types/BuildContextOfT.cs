@@ -22,18 +22,15 @@ namespace AutoRest.CSharp.Output.Models.Types
         private T EnsureLibrary()
         {
             T library;
-            if (Configuration.Generation1ConvenienceClient)
-            {
-                library = (T)(object)new DataPlaneOutputLibrary(CodeModel, (BuildContext<DataPlaneOutputLibrary>)(object)this);
-            }
-            else if (Configuration.AzureArm)
+            if (Configuration.AzureArm)
             {
                 library = (T)(object)new MgmtOutputLibrary();
             }
             else
             {
-                throw new InvalidOperationException($"{nameof(BuildContext)} isn't supported in DPG");
+                throw new InvalidOperationException($"{nameof(BuildContext)} is supported only in MPG");
             }
+
             BaseLibrary = library;
             return library;
         }

@@ -30,37 +30,33 @@ namespace AutoRest.CSharp.Output.Models.Types
     {
         private readonly SerializationBuilder _serializationBuilder;
         private readonly TypeFactory _typeFactory;
+        private readonly OutputLibrary? _library;
         private readonly SchemaTypeUsage _usage;
 
-        private readonly ModelTypeMapping? _sourceTypeMapping;
         private readonly IReadOnlyList<KnownMediaType> _supportedSerializationFormats;
 
         private ObjectTypeProperty? _additionalPropertiesProperty;
         private CSharpType? _implementsDictionaryType;
 
-        private BuildContext _context;
-
-        public SchemaObjectType(ObjectSchema objectSchema, BuildContext context)
-            : base(context)
+        public SchemaObjectType(ObjectSchema objectSchema, string defaultNamespace, TypeFactory typeFactory, SchemaUsageProvider schemaUsageProvider, OutputLibrary? library, SourceInputModel? sourceInputModel)
+            : base(defaultNamespace, sourceInputModel)
         {
-            _context = context;
             DefaultName = objectSchema.CSharpName();
-            DefaultNamespace = GetDefaultModelNamespace(objectSchema.Extensions?.Namespace, context.DefaultNamespace);
+            DefaultNamespace = GetDefaultModelNamespace(objectSchema.Extensions?.Namespace, defaultNamespace);
             ObjectSchema = objectSchema;
-            _typeFactory = context.TypeFactory;
+            _typeFactory = typeFactory;
+            _library = library;
             _serializationBuilder = new SerializationBuilder();
-            _usage = context.SchemaUsageProvider.GetUsage(ObjectSchema);
+            _usage = schemaUsageProvider.GetUsage(ObjectSchema);
 
             var hasUsage = _usage.HasFlag(SchemaTypeUsage.Model);
 
             DefaultAccessibility = objectSchema.Extensions?.Accessibility ?? (hasUsage ? "public" : "internal");
 
-            _sourceTypeMapping = context.SourceInputModel?.CreateForModel(ExistingType);
-
             // Update usage from code attribute
-            if (_sourceTypeMapping?.Usage != null)
+            if (ModelTypeMapping?.Usage != null)
             {
-                foreach (var usage in _sourceTypeMapping.Usage)
+                foreach (var usage in ModelTypeMapping.Usage)
                 {
                     _usage |= Enum.Parse<SchemaTypeUsage>(usage, true);
                 }
@@ -72,8 +68,11 @@ namespace AutoRest.CSharp.Output.Models.Types
                 _usage |= Enum.Parse<SchemaTypeUsage>(objectSchema.Extensions?.Usage!, true);
             }
 
-            _supportedSerializationFormats = GetSupportedSerializationFormats(objectSchema, _sourceTypeMapping);
+            _supportedSerializationFormats = GetSupportedSerializationFormats(objectSchema, ModelTypeMapping);
             IsUnknownDerivedType = objectSchema.IsUnknownDiscriminatorModel;
+            // we skip the init ctor when there is an extension telling us to, or when this is an unknown derived type in a discriminated set
+            SkipInitializerConstructor = ObjectSchema is { Extensions.SkipInitCtor: true } || IsUnknownDerivedType;
+            IsInheritableCommonType = ObjectSchema is { Extensions: { } extensions } && (extensions.MgmtReferenceType || extensions.MgmtTypeReferenceType);
         }
 
         internal ObjectSchema ObjectSchema { get; }
@@ -88,10 +87,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && ObjectSchema.Discriminator?.All != null && ObjectSchema.DiscriminatorValue == null;
 
-        public bool IsInheritableCommonType => ObjectSchema is { Extensions: { } extensions } && (extensions.MgmtReferenceType || extensions.MgmtTypeReferenceType);
-
-        public IReadOnlyList<String> MediaTypes => ObjectSchema.Extensions != null ? ObjectSchema.Extensions.Formats : new List<string>();
-
         public override ObjectTypeProperty? AdditionalPropertiesProperty
         {
             get
@@ -104,7 +99,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 // We use a $ prefix here as AdditionalProperties comes from a swagger concept
                 // and not a swagger model/operation name to disambiguate from a possible property with
                 // the same name.
-                var existingMember = _sourceTypeMapping?.GetMemberByOriginalName("$AdditionalProperties");
+                var existingMember = ModelTypeMapping?.GetMemberByOriginalName("$AdditionalProperties");
 
                 _additionalPropertiesProperty = new ObjectTypeProperty(
                     BuilderHelpers.CreateMemberDeclaration("AdditionalProperties", ImplementsDictionaryType, "public", existingMember, _typeFactory),
@@ -118,6 +113,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         private ObjectTypeProperty? _rawDataField;
+        protected internal override InputModelTypeUsage GetUsage() => (InputModelTypeUsage) _usage;
+
         public override ObjectTypeProperty? RawDataField
         {
             get
@@ -324,7 +321,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                         defaultParameterValue = Constant.Default(inputType);
                     }
 
-                    var validate = property.SchemaProperty?.Nullable != true && !inputType.IsValueType ? ValidationType.AssertNotNull : ValidationType.None;
+                    var validate = property.SchemaProperty?.Nullable != true && !inputType.IsValueType && property.SchemaProperty?.IsReadOnly != true ? ValidationType.AssertNotNull : ValidationType.None;
                     var defaultCtorParameter = new Parameter(
                         property.Declaration.Name.ToVariableName(),
                         property.ParameterDescription,
@@ -381,9 +378,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public override bool IncludeConverter => _usage.HasFlag(SchemaTypeUsage.Converter);
 
-        protected bool SkipInitializerConstructor => ObjectSchema != null &&
-            ObjectSchema.Extensions != null &&
-            ObjectSchema.Extensions.SkipInitCtor;
         public CSharpType? ImplementsDictionaryType => _implementsDictionaryType ??= CreateInheritedDictionaryType();
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()
         {
@@ -395,13 +389,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             if (InitializationConstructor != SerializationConstructor)
                 yield return SerializationConstructor;
 
-            // add an extra empty ctor if we do not have a ctor with no parameters
-            var accessibility = IsStruct ? Public : Internal;
-            if (Configuration.UseModelReaderWriter && InitializationConstructor.Signature.Parameters.Count > 0 && SerializationConstructor.Signature.Parameters.Count > 0)
-                yield return new(
-                    new ConstructorSignature(Type, null, $"Initializes a new instance of {Type:C} for deserialization.", accessibility, Array.Empty<Parameter>()),
-                    Array.Empty<ObjectPropertyInitializer>(),
-                    null);
+            if (EmptyConstructor != null)
+                yield return EmptyConstructor;
         }
 
         protected override ObjectTypeDiscriminator? BuildDiscriminator()
@@ -477,6 +466,9 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private HashSet<string?> GetParentPropertySerializedNames()
         {
+            // TODO -- this is not really getting the serialized name of the properties as advertised in the method name
+            // this is just getting the name of the schema property.
+            // this is a guard of not having compilation errors because we cannot define the properties with the same name as properties defined in base types, therefore here we should get the set by the declaration name of the property
             return EnumerateHierarchy()
                 .Skip(1)
                 .SelectMany(type => type.Properties)
@@ -510,9 +502,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected ObjectTypeProperty CreateProperty(Property property)
         {
             var name = BuilderHelpers.DisambiguateName(Type, property.CSharpName());
-            var existingMember = _sourceTypeMapping?.GetMemberByOriginalName(name);
-
-            var serializationMapping = _sourceTypeMapping?.GetForMemberSerialization(existingMember);
+            var existingMember = ModelTypeMapping?.GetMemberByOriginalName(name);
 
             var accessibility = property.IsDiscriminator == true ? "internal" : "public";
 
@@ -581,8 +571,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 propertyShouldOmitSetter,
                 property,
                 valueType,
-                optionalViaNullability,
-                serializationMapping);
+                optionalViaNullability);
             return objectTypeProperty;
         }
 
@@ -750,14 +739,14 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return _defaultDerivedType;
 
             _hasCalculatedDefaultDerivedType = true;
-            if (_context.BaseLibrary is null)
+            if (_library is null)
                 return null;
 
             var defaultDerivedSchema = ObjectSchema.GetDefaultDerivedSchema();
             if (defaultDerivedSchema is null)
                 return null;
 
-            return _context.BaseLibrary.FindTypeProviderForSchema(defaultDerivedSchema) as SerializableObjectType;
+            return _library.FindTypeProviderForSchema(defaultDerivedSchema) as SerializableObjectType;
         }
     }
 }

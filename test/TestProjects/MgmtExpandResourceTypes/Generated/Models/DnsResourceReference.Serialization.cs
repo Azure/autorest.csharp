@@ -7,8 +7,8 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
+using MgmtExpandResourceTypes;
 
 namespace MgmtExpandResourceTypes.Models
 {
@@ -20,8 +20,8 @@ namespace MgmtExpandResourceTypes.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<WritableSubResource>> dnsResources = default;
-            Optional<WritableSubResource> targetResource = default;
+            IReadOnlyList<WritableSubResource> dnsResources = default;
+            WritableSubResource targetResource = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("dnsResources"u8))
@@ -48,7 +48,7 @@ namespace MgmtExpandResourceTypes.Models
                     continue;
                 }
             }
-            return new DnsResourceReference(Optional.ToList(dnsResources), targetResource);
+            return new DnsResourceReference(dnsResources ?? new ChangeTrackingList<WritableSubResource>(), targetResource);
         }
     }
 }

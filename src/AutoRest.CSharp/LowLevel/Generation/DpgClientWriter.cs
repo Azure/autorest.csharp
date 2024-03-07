@@ -10,7 +10,6 @@ using System.Threading;
 using AutoRest.CSharp.Common.Generation.Writers;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
-using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
@@ -25,6 +24,7 @@ using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 using Operation = Azure.Operation;
 using StatusCodes = AutoRest.CSharp.Output.Models.Responses.StatusCodes;
@@ -335,7 +335,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     _writer.WriteMethodBodyStatement(new[]
                     {
                         new DeclareVariableStatement(value.Type, value.Declaration, Default),
-                        JsonSerializationMethodsBuilder.BuildDeserializationForMethods(serialization, async, value, new ResponseExpression(response).ContentStream, false),
+                        JsonSerializationMethodsBuilder.BuildDeserializationForMethods(serialization, async, value, Extensible.RestOperations.GetContentStream(response), false, null),
                         Return(Extensible.RestOperations.GetTypedResponseFromValue(value, response))
                     });
                 }
@@ -605,9 +605,6 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteSampleRefsIfNecessary(MethodSignature methodSignature, bool isAsync)
         {
-            if (!Configuration.IsBranded)
-                return;
-
             var sampleProvider = _library.GetSampleForClient(_client);
             // do not write this part when there is no sample provider
             if (sampleProvider == null)

@@ -7,6 +7,8 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models.Serialization.Multipart;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models.Serialization.Bicep;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Types;
@@ -16,14 +18,21 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
 {
     internal abstract class SerializableObjectType : ObjectType
     {
+        protected readonly Lazy<ModelTypeMapping?> _modelTypeMapping;
         protected SerializableObjectType(BuildContext context) : base(context)
         {
+            _modelTypeMapping = new Lazy<ModelTypeMapping?>(() => _sourceInputModel?.CreateForModel(ExistingType));
         }
         protected SerializableObjectType(string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
         {
+            _modelTypeMapping = new Lazy<ModelTypeMapping?>(() => _sourceInputModel?.CreateForModel(ExistingType));
         }
 
         public INamedTypeSymbol? GetExistingType() => ExistingType;
+
+        private protected ModelTypeMapping? ModelTypeMapping => _modelTypeMapping.Value;
+
+        private SerializationBuilder _serializationBuilder = new SerializationBuilder();
 
         private bool? _includeSerializer;
         public bool IncludeSerializer => _includeSerializer ??= EnsureIncludeSerializer();
@@ -42,6 +51,9 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         private bool _multipartSerializationInitialized = false;
         private MultipartFormDataObjectSerialization? _multipartSerialization;
         public MultipartFormDataObjectSerialization? MultipartSerialization => EnsureMultipartFormDataSerialization();
+        private bool _bicepSerializationInitialized = false;
+        private BicepObjectSerialization? _bicepSerialization;
+        public BicepObjectSerialization? BicepSerialization => EnsureBicepSerialization();
 
         private JsonObjectSerialization? EnsureJsonSerialization()
         {
@@ -71,6 +83,27 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
             _multipartSerialization = BuildMultipartFormDataSerialization();
             return _multipartSerialization;
         }
+        private BicepObjectSerialization? EnsureBicepSerialization()
+        {
+            if (_bicepSerializationInitialized)
+                return _bicepSerialization;
+
+            _bicepSerializationInitialized = true;
+            _bicepSerialization = BuildBicepSerialization();
+            return _bicepSerialization;
+        }
+
+        protected BicepObjectSerialization? BuildBicepSerialization()
+        {
+            // if this.Usages does not contain Output bit, then return null
+            // alternate - is one of ancestors resource data or contained on a resource data
+            var usage = GetUsage();
+
+            return Configuration.AzureArm && Configuration.UseModelReaderWriter && Configuration.EnableBicepSerialization && usage.HasFlag(InputModelTypeUsage.Output) && JsonSerialization != null
+                ? _serializationBuilder.BuildBicepObjectSerialization(this, JsonSerialization)
+                : null;
+        }
+
         protected abstract JsonObjectSerialization? BuildJsonSerialization();
         protected abstract XmlObjectSerialization? BuildXmlSerialization();
         protected abstract MultipartFormDataObjectSerialization? BuildMultipartFormDataSerialization();
@@ -78,6 +111,8 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
 
         protected abstract bool EnsureIncludeSerializer();
         protected abstract bool EnsureIncludeDeserializer();
+
+        protected internal abstract InputModelTypeUsage GetUsage();
 
         // TODO -- despite this is actually a field if present, we have to make it a property to work properly with other functionalities in the generator, such as the `CodeWriter.WriteInitialization` method
         public virtual ObjectTypeProperty? RawDataField => null;
@@ -102,5 +137,20 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         protected const string PrivateAdditionalPropertiesPropertyDescription = "Keeps track of any properties unknown to the library.";
         protected const string PrivateAdditionalPropertiesPropertyName = "_serializedAdditionalRawData";
         protected static readonly CSharpType _privateAdditionalPropertiesPropertyType = typeof(IDictionary<string, BinaryData>);
+
+        protected internal SourcePropertySerializationMapping? GetForMemberSerialization(string propertyDeclaredName)
+        {
+            foreach (var obj in EnumerateHierarchy())
+            {
+                if (obj is not SerializableObjectType so)
+                    continue;
+
+                var serialization = so.ModelTypeMapping?.GetForMemberSerialization(propertyDeclaredName);
+                if (serialization is not null)
+                    return serialization;
+            }
+
+            return null;
+        }
     }
 }

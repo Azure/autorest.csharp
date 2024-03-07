@@ -3,25 +3,24 @@ import {
     EnumMember,
     Model,
     ModelProperty,
+    Namespace,
     Operation,
     Scalar,
-    Type,
-    getFriendlyName,
-    getProjectedName,
-    getProjectedNames
+    getProjectedName
 } from "@typespec/compiler";
+import { projectedNameJsonKey } from "../constants.js";
 import {
-    projectedNameCSharpKey,
-    projectedNameClientKey,
-    projectedNameJsonKey
-} from "../constants.js";
-import { SdkContext } from "@azure-tools/typespec-client-generator-core";
+    SdkContext,
+    getLibraryName,
+    getSdkModel
+} from "@azure-tools/typespec-client-generator-core";
 import { InputParameter } from "../type/inputParameter.js";
 import { InputPrimitiveType, InputType } from "../type/inputType.js";
-import { InputTypeKind } from "../type/inputTypeKind.js";
+import { InputPrimitiveTypeKind } from "../type/inputPrimitiveTypeKind.js";
 import { RequestLocation } from "../type/requestLocation.js";
 import { InputOperationParameterKind } from "../type/inputOperationParameterKind.js";
 import { InputConstant } from "../type/inputConstant.js";
+import { InputTypeKind } from "../type/inputTypeKind.js";
 
 export function capitalize(str: string): string {
     return str.charAt(0).toUpperCase() + str.slice(1);
@@ -42,57 +41,37 @@ export function getNameForTemplate(model: Model): string {
     return model.name;
 }
 
-const anonCounter = (function () {
-    let count = 0; // Private counter variable
-
-    return {
-        increment: function () {
-            return ++count;
-        },
-        getCount: function () {
-            return count;
-        }
-    };
-})();
-
-export function getProjectedNameForCsharp(
-    context: SdkContext,
-    type: Type
-): string | undefined {
-    const projectedNamesMap = getProjectedNames(context.program, type);
-    return (
-        projectedNamesMap?.get(projectedNameCSharpKey) ??
-        projectedNamesMap?.get(projectedNameClientKey)
-    );
-}
-
 export function getTypeName(
     context: SdkContext,
     type: Model | Enum | EnumMember | ModelProperty | Scalar | Operation
 ): string {
-    var name =
-        getProjectedNameForCsharp(context, type) ??
-        getFriendlyName(context.program, type);
-    if (name) return name;
-    if (type.kind === "Model") {
-        name = getNameForTemplate(type);
-        if (name === "") {
-            anonCounter.increment();
-            return `Anon_${anonCounter.getCount()}`;
+    var name = getLibraryName(context, type);
+    if (type.kind !== "Model") return name;
+    if (type.name === name) {
+        var templateName = getNameForTemplate(type);
+        if (templateName === "") {
+            const sdkModel = getSdkModel(context, type as Model);
+            return sdkModel.generatedName || sdkModel.name;
         }
-        return name;
+        return templateName;
     }
-    return type.name;
+    return name;
 }
 
-export function getSerializeName(
-    context: SdkContext,
-    type: ModelProperty
+export function getFullNamespaceString(
+    namespace: Namespace | undefined
 ): string {
-    return (
-        getProjectedName(context.program, type, projectedNameJsonKey) ??
-        type.name
-    );
+    if (!namespace || !namespace.name) {
+        return "";
+    }
+
+    let namespaceString: string = namespace.name;
+    let current: Namespace | undefined = namespace.namespace;
+    while (current && current.name) {
+        namespaceString = `${current.name}.${namespaceString}`;
+        current = current.namespace;
+    }
+    return namespaceString;
 }
 
 export function createContentTypeOrAcceptParameter(
@@ -103,8 +82,8 @@ export function createContentTypeOrAcceptParameter(
     const isContentType: boolean =
         nameInRequest.toLowerCase() === "content-type";
     const inputType: InputType = {
-        Name: "String",
-        Kind: InputTypeKind.String,
+        Kind: InputTypeKind.Primitive,
+        Name: InputPrimitiveTypeKind.String,
         IsNullable: false
     } as InputPrimitiveType;
     return {

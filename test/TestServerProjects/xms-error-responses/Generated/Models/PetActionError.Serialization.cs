@@ -9,6 +9,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
+using xms_error_responses;
 
 namespace xms_error_responses.Models
 {
@@ -80,11 +81,11 @@ namespace xms_error_responses.Models
             {
                 switch (discriminator.GetString())
                 {
-                    case "PetHungryOrThirstyError": return PetHungryOrThirstyError.DeserializePetHungryOrThirstyError(element);
-                    case "PetSadError": return PetSadError.DeserializePetSadError(element);
+                    case "PetHungryOrThirstyError": return PetHungryOrThirstyError.DeserializePetHungryOrThirstyError(element, options);
+                    case "PetSadError": return PetSadError.DeserializePetSadError(element, options);
                 }
             }
-            return UnknownPetActionError.DeserializeUnknownPetActionError(element);
+            return UnknownPetActionError.DeserializeUnknownPetActionError(element, options);
         }
 
         BinaryData IPersistableModel<PetActionError>.Write(ModelReaderWriterOptions options)

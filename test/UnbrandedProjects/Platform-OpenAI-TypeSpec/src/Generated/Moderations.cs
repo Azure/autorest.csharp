@@ -53,7 +53,7 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public virtual async Task<Result<CreateModerationResponse>> CreateAsync(CreateModerationRequest content, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             using RequestBody content0 = content.ToRequestBody();
@@ -67,7 +67,7 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public virtual Result<CreateModerationResponse> Create(CreateModerationRequest content, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             using RequestBody content0 = content.ToRequestBody();
@@ -97,7 +97,7 @@ namespace OpenAI
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> CreateAsync(RequestBody content, RequestOptions context = null)
         {
-            ClientUtilities.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("Moderations.Create");
             scope.Start();
@@ -135,7 +135,7 @@ namespace OpenAI
         /// <returns> The response returned from the service. </returns>
         public virtual Result Create(RequestBody content, RequestOptions context = null)
         {
-            ClientUtilities.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("Moderations.Create");
             scope.Start();

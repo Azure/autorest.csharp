@@ -6,8 +6,9 @@
  "Enums": [
   {
    "$id": "2",
+   "Kind": "Enum",
    "Name": "PetKind",
-   "EnumValueType": "String",
+   "EnumValueType": "string",
    "AllowedValues": [
     {
      "$id": "3",
@@ -30,6 +31,7 @@
  "Models": [
   {
    "$id": "5",
+   "Kind": "Model",
    "Name": "Pet",
    "Namespace": "PetStore",
    "IsNullable": false,
@@ -45,8 +47,8 @@
      "Description": "",
      "Type": {
       "$id": "7",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -59,8 +61,8 @@
      "Description": "",
      "Type": {
       "$id": "9",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -73,8 +75,8 @@
      "Description": "",
      "Type": {
       "$id": "11",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -84,6 +86,7 @@
   },
   {
    "$id": "12",
+   "Kind": "Model",
    "Name": "Fish",
    "Namespace": "PetStore",
    "Description": "Fish is the base model",
@@ -101,8 +104,8 @@
      "IsReadOnly": false,
      "Type": {
       "$id": "14",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsDiscriminator": true
@@ -114,8 +117,8 @@
      "Description": "The size of the fish",
      "Type": {
       "$id": "16",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -125,6 +128,7 @@
   },
   {
    "$id": "17",
+   "Kind": "Model",
    "Name": "Toy",
    "Namespace": "PetStore",
    "IsNullable": false,
@@ -138,8 +142,8 @@
      "Description": "",
      "Type": {
       "$id": "19",
-      "Name": "int64",
-      "Kind": "Int64",
+      "Kind": "Primitive",
+      "Name": "Int64",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -152,8 +156,8 @@
      "Description": "",
      "Type": {
       "$id": "21",
-      "Name": "int64",
-      "Kind": "Int64",
+      "Kind": "Primitive",
+      "Name": "Int64",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -166,8 +170,8 @@
      "Description": "",
      "Type": {
       "$id": "23",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -177,6 +181,7 @@
   },
   {
    "$id": "24",
+   "Kind": "Model",
    "Name": "Error",
    "Namespace": "PetStore",
    "Description": "Error",
@@ -191,8 +196,8 @@
      "Description": "",
      "Type": {
       "$id": "26",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -205,8 +210,8 @@
      "Description": "",
      "Type": {
       "$id": "28",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -216,6 +221,7 @@
   },
   {
    "$id": "29",
+   "Kind": "Model",
    "Name": "PetId",
    "Namespace": "PetStore",
    "IsNullable": false,
@@ -225,6 +231,7 @@
   },
   {
    "$id": "30",
+   "Kind": "Model",
    "Name": "Shark",
    "Namespace": "PetStore",
    "Description": "Shark is a fish",
@@ -243,8 +250,8 @@
      "Description": "The bite of the shark",
      "Type": {
       "$id": "32",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -254,6 +261,7 @@
   },
   {
    "$id": "33",
+   "Kind": "Model",
    "Name": "Tuna",
    "Namespace": "PetStore",
    "Description": "Tuna is a fish",
@@ -272,8 +280,8 @@
      "Description": "The amount of fat of the tuna",
      "Type": {
       "$id": "35",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -311,8 +319,8 @@
        "NameInRequest": "petStoreUrl",
        "Type": {
         "$id": "41",
+        "Kind": "Primitive",
         "Name": "Uri",
-        "Kind": "Uri",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -332,8 +340,8 @@
        "Description": "The id of pet.",
        "Type": {
         "$id": "43",
-        "Name": "int32",
-        "Kind": "Int32",
+        "Kind": "Primitive",
+        "Name": "Int32",
         "IsNullable": false
        },
        "Location": "Path",
@@ -352,8 +360,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "45",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -409,8 +417,8 @@
        "Description": "The id of pet.",
        "Type": {
         "$id": "50",
-        "Name": "int32",
-        "Kind": "Int32",
+        "Kind": "Primitive",
+        "Name": "Int32",
         "IsNullable": false
        },
        "Location": "Path",
@@ -429,8 +437,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "52",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -522,8 +530,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "59",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -549,8 +557,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "62",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -630,8 +638,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "68",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -691,8 +699,8 @@
        "NameInRequest": "start",
        "Type": {
         "$id": "73",
-        "Name": "int32",
-        "Kind": "Int32",
+        "Kind": "Primitive",
+        "Name": "Int32",
         "IsNullable": false
        },
        "Location": "Query",
@@ -711,8 +719,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "75",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -772,8 +780,8 @@
        "NameInRequest": "kind",
        "Type": {
         "$id": "80",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -792,8 +800,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "82",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -854,8 +862,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "87",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",

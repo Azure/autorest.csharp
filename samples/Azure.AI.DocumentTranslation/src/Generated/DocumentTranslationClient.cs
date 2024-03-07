@@ -727,11 +727,11 @@ namespace Azure.AI.DocumentTranslation
             {
                 uri.AppendQuery("$maxpagesize", maxpagesize.Value, true);
             }
-            if (ids != null && Optional.IsCollectionDefined(ids))
+            if (ids != null && !(ids is ChangeTrackingList<Guid> changeTrackingList && changeTrackingList.IsUndefined))
             {
                 uri.AppendQueryDelimited("ids", ids, ",", true);
             }
-            if (statuses != null && Optional.IsCollectionDefined(statuses))
+            if (statuses != null && !(statuses is ChangeTrackingList<string> changeTrackingList0 && changeTrackingList0.IsUndefined))
             {
                 uri.AppendQueryDelimited("statuses", statuses, ",", true);
             }
@@ -743,7 +743,7 @@ namespace Azure.AI.DocumentTranslation
             {
                 uri.AppendQuery("createdDateTimeUtcEnd", createdDateTimeUtcEnd.Value, "O", true);
             }
-            if (orderBy != null && Optional.IsCollectionDefined(orderBy))
+            if (orderBy != null && !(orderBy is ChangeTrackingList<string> changeTrackingList1 && changeTrackingList1.IsUndefined))
             {
                 uri.AppendQueryDelimited("$orderBy", orderBy, ",", true);
             }
@@ -822,11 +822,11 @@ namespace Azure.AI.DocumentTranslation
             {
                 uri.AppendQuery("$maxpagesize", maxpagesize.Value, true);
             }
-            if (ids != null && Optional.IsCollectionDefined(ids))
+            if (ids != null && !(ids is ChangeTrackingList<Guid> changeTrackingList && changeTrackingList.IsUndefined))
             {
                 uri.AppendQueryDelimited("ids", ids, ",", true);
             }
-            if (statuses != null && Optional.IsCollectionDefined(statuses))
+            if (statuses != null && !(statuses is ChangeTrackingList<string> changeTrackingList0 && changeTrackingList0.IsUndefined))
             {
                 uri.AppendQueryDelimited("statuses", statuses, ",", true);
             }
@@ -838,7 +838,7 @@ namespace Azure.AI.DocumentTranslation
             {
                 uri.AppendQuery("createdDateTimeUtcEnd", createdDateTimeUtcEnd.Value, "O", true);
             }
-            if (orderBy != null && Optional.IsCollectionDefined(orderBy))
+            if (orderBy != null && !(orderBy is ChangeTrackingList<string> changeTrackingList1 && changeTrackingList1.IsUndefined))
             {
                 uri.AppendQueryDelimited("$orderBy", orderBy, ",", true);
             }

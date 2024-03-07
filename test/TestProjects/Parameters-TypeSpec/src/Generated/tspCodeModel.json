@@ -7,6 +7,7 @@
  "Enums": [
   {
    "$id": "2",
+   "Kind": "Enum",
    "Name": "Versions",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -26,6 +27,7 @@
  "Models": [
   {
    "$id": "4",
+   "Kind": "Model",
    "Name": "Result",
    "Namespace": "ParametersCadl.ParameterOrders",
    "IsNullable": false,
@@ -39,8 +41,8 @@
      "Description": "",
      "Type": {
       "$id": "6",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -76,8 +78,8 @@
        "NameInRequest": "start",
        "Type": {
         "$id": "12",
-        "Name": "int32",
-        "Kind": "Int32",
+        "Kind": "Primitive",
+        "Name": "Int32",
         "IsNullable": false
        },
        "Location": "Query",
@@ -96,8 +98,8 @@
        "NameInRequest": "end",
        "Type": {
         "$id": "14",
-        "Name": "int32",
-        "Kind": "Int32",
+        "Kind": "Primitive",
+        "Name": "Int32",
         "IsNullable": false
        },
        "Location": "Query",
@@ -116,8 +118,8 @@
        "NameInRequest": "api-version",
        "Type": {
         "$id": "16",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -125,8 +127,8 @@
         "$id": "17",
         "Type": {
          "$id": "18",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "2022-05-15-preview"
@@ -146,8 +148,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "20",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -204,8 +206,8 @@
        "NameInRequest": "start",
        "Type": {
         "$id": "25",
-        "Name": "int32",
-        "Kind": "Int32",
+        "Kind": "Primitive",
+        "Name": "Int32",
         "IsNullable": false
        },
        "Location": "Query",
@@ -224,8 +226,8 @@
        "NameInRequest": "end",
        "Type": {
         "$id": "27",
-        "Name": "int32",
-        "Kind": "Int32",
+        "Kind": "Primitive",
+        "Name": "Int32",
         "IsNullable": false
        },
        "Location": "Query",
@@ -244,8 +246,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "29",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",

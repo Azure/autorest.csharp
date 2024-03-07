@@ -35,7 +35,20 @@ namespace MgmtMultipleParentResource.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new AnotherParentData(id, name, resourceType, systemData, tags, location, asyncExecution, runAsUser, runAsPassword, timeoutInSeconds, outputBlobUri, errorBlobUri, provisioningState);
+            return new AnotherParentData(
+                id,
+                name,
+                resourceType,
+                systemData,
+                tags,
+                location,
+                asyncExecution,
+                runAsUser,
+                runAsPassword,
+                timeoutInSeconds,
+                outputBlobUri,
+                errorBlobUri,
+                provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtMultipleParentResource.ChildBodyData"/>. </summary>
@@ -57,7 +70,20 @@ namespace MgmtMultipleParentResource.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new ChildBodyData(id, name, resourceType, systemData, tags, location, asyncExecution, runAsUser, runAsPassword, timeoutInSeconds, outputBlobUri, errorBlobUri, provisioningState);
+            return new ChildBodyData(
+                id,
+                name,
+                resourceType,
+                systemData,
+                tags,
+                location,
+                asyncExecution,
+                runAsUser,
+                runAsPassword,
+                timeoutInSeconds,
+                outputBlobUri,
+                errorBlobUri,
+                provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtMultipleParentResource.TheParentData"/>. </summary>
@@ -79,7 +105,20 @@ namespace MgmtMultipleParentResource.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new TheParentData(id, name, resourceType, systemData, tags, location, asyncExecution, runAsUser, runAsPassword, timeoutInSeconds, outputBlobUri, errorBlobUri, provisioningState);
+            return new TheParentData(
+                id,
+                name,
+                resourceType,
+                systemData,
+                tags,
+                location,
+                asyncExecution,
+                runAsUser,
+                runAsPassword,
+                timeoutInSeconds,
+                outputBlobUri,
+                errorBlobUri,
+                provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtMultipleParentResource.SubParentData"/>. </summary>
@@ -101,7 +140,20 @@ namespace MgmtMultipleParentResource.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new SubParentData(id, name, resourceType, systemData, tags, location, asyncExecution, runAsUser, runAsPassword, timeoutInSeconds, outputBlobUri, errorBlobUri, provisioningState);
+            return new SubParentData(
+                id,
+                name,
+                resourceType,
+                systemData,
+                tags,
+                location,
+                asyncExecution,
+                runAsUser,
+                runAsPassword,
+                timeoutInSeconds,
+                outputBlobUri,
+                errorBlobUri,
+                provisioningState);
         }
     }
 }

@@ -6,7 +6,7 @@ using AutoRest.CSharp.Generation.Types;
 
 namespace AutoRest.CSharp.Output.Models.Serialization.Json
 {
-    internal class JsonPropertySerialization : PropertySerialization
+    internal record JsonPropertySerialization : PropertySerialization
     {
         public JsonPropertySerialization(
             string parameterName,
@@ -16,14 +16,13 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Json
             JsonSerialization valueSerialization,
             bool isRequired,
             bool shouldExcludeInWireSerialization,
-            string? customSerializationMethodName = null,
-            string? customDeserializationMethodName = null,
+            CustomSerializationHooks? serializationHooks = null,
             TypedValueExpression? enumerableExpression = null)
-            : base(parameterName, value, serializedName, serializedType, isRequired, shouldExcludeInWireSerialization, enumerableExpression)
+            : base(parameterName, value, serializedName, serializedType, isRequired, shouldExcludeInWireSerialization, enumerableExpression, serializationHooks)
         {
             ValueSerialization = valueSerialization;
-            CustomSerializationMethodName = customSerializationMethodName;
-            CustomDeserializationMethodName = customDeserializationMethodName;
+            CustomSerializationMethodName = serializationHooks?.JsonSerializationMethodName;
+            CustomDeserializationMethodName = serializationHooks?.JsonDeserializationMethodName;
         }
 
         public JsonPropertySerialization(string serializedName, JsonPropertySerialization[] propertySerializations)

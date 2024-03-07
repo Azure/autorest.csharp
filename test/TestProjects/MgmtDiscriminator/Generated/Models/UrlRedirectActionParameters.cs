@@ -5,11 +5,46 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtDiscriminator.Models
 {
     /// <summary> Defines the parameters for the url redirect action. </summary>
     public partial class UrlRedirectActionParameters
     {
+        /// <summary>
+        /// Keeps track of any properties unknown to the library.
+        /// <para>
+        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of <see cref="UrlRedirectActionParameters"/>. </summary>
         /// <param name="typeName"></param>
         /// <param name="redirectType"> The redirect type the rule will use when redirecting traffic. </param>
@@ -27,7 +62,8 @@ namespace MgmtDiscriminator.Models
         /// <param name="customHostname"> Host to redirect. Leave empty to use the incoming host as the destination host. </param>
         /// <param name="customQueryString"> The set of query strings to be placed in the redirect URL. Setting this value would replace any existing query string; leave empty to preserve the incoming query string. Query string must be in &lt;key&gt;=&lt;value&gt; format. ? and &amp; will be added automatically so do not include them. </param>
         /// <param name="customFragment"> Fragment to add to the redirect URL. Fragment is the part of the URL that comes after #. Do not include the #. </param>
-        internal UrlRedirectActionParameters(UrlRedirectActionParametersTypeName typeName, RedirectType redirectType, DestinationProtocol? destinationProtocol, string customPath, string customHostname, string customQueryString, string customFragment)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UrlRedirectActionParameters(UrlRedirectActionParametersTypeName typeName, RedirectType redirectType, DestinationProtocol? destinationProtocol, string customPath, string customHostname, string customQueryString, string customFragment, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             TypeName = typeName;
             RedirectType = redirectType;
@@ -36,21 +72,34 @@ namespace MgmtDiscriminator.Models
             CustomHostname = customHostname;
             CustomQueryString = customQueryString;
             CustomFragment = customFragment;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="UrlRedirectActionParameters"/> for deserialization. </summary>
+        internal UrlRedirectActionParameters()
+        {
         }
 
         /// <summary> Gets or sets the type name. </summary>
+        [WirePath("typeName")]
         public UrlRedirectActionParametersTypeName TypeName { get; set; }
         /// <summary> The redirect type the rule will use when redirecting traffic. </summary>
+        [WirePath("redirectType")]
         public RedirectType RedirectType { get; set; }
         /// <summary> Protocol to use for the redirect. The default value is MatchRequest. </summary>
+        [WirePath("destinationProtocol")]
         public DestinationProtocol? DestinationProtocol { get; set; }
         /// <summary> The full path to redirect. Path cannot be empty and must start with /. Leave empty to use the incoming path as destination path. </summary>
+        [WirePath("customPath")]
         public string CustomPath { get; set; }
         /// <summary> Host to redirect. Leave empty to use the incoming host as the destination host. </summary>
+        [WirePath("customHostname")]
         public string CustomHostname { get; set; }
         /// <summary> The set of query strings to be placed in the redirect URL. Setting this value would replace any existing query string; leave empty to preserve the incoming query string. Query string must be in &lt;key&gt;=&lt;value&gt; format. ? and &amp; will be added automatically so do not include them. </summary>
+        [WirePath("customQueryString")]
         public string CustomQueryString { get; set; }
         /// <summary> Fragment to add to the redirect URL. Fragment is the part of the URL that comes after #. Do not include the #. </summary>
+        [WirePath("customFragment")]
         public string CustomFragment { get; set; }
     }
 }

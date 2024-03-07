@@ -7,5 +7,7 @@
     "..\\..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net7.0\\Azure.Core.Shared"
   ],
   "public-clients": true,
-  "skip-csproj-packagereference": true
+  "skip-csproj-packagereference": true,
+  "generate-test-project": true,
+  "helper-namespace": "Accessibility_LowLevel"
 }

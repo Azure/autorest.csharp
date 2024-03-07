@@ -6,6 +6,7 @@
     <IsTestProject Condition="$(MSBuildProjectName.EndsWith('.Tests'))">true</IsTestProject>
     <CentralPackagesFile>$(MSBuildThisFileDirectory)Packages.Data.props</CentralPackagesFile>
     <AzureCoreSharedSources>$(MSBuildThisFileDirectory)/src/assets/Azure.Core.Shared/</AzureCoreSharedSources>
+    <FakeAzureCoreTestFrameworkSources>$(MSBuildThisFileDirectory)/src/assets/TestFramework/</FakeAzureCoreTestFrameworkSources>
     <ShouldUseCentralVersions Condition="'$(ShouldUseCentralVersions)' == ''">true</ShouldUseCentralVersions>
     <NoWarn Condition="'$(IsTestGenerationTestProject)' == 'true'">$(NoWarn);CS1591</NoWarn>
     <NoWarn>$(NoWarn);NU5105</NoWarn>

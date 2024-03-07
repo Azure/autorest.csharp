@@ -6,7 +6,7 @@
 #nullable disable
 
 using System;
-using Azure.Core;
+using MgmtScopeResource;
 
 namespace MgmtScopeResource.Models
 {

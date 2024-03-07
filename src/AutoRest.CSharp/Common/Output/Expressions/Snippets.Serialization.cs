@@ -20,7 +20,8 @@ namespace AutoRest.CSharp.Common.Output.Models
             public static StringExpression WireFormat = Literal("W");
             public static StringExpression JsonFormat = Literal("J");
             public static StringExpression XmlFormat = Literal("X");
-            public static StringExpression MultipartFormDataFormat = Literal("MPFD");
+            public static StringExpression MultipartFormDataFormat = Literal("MFD");
+            public static StringExpression BicepFormat = Literal("bicep");
 
             // TODO -- make the options parameter non-nullable again when we remove the `UseModelReaderWriter` flag.
             public static MethodBodyStatement WrapInCheckNotWire(PropertySerialization serialization, ValueExpression? format, MethodBodyStatement statement)

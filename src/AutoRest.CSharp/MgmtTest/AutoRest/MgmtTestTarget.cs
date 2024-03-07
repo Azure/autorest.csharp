@@ -68,7 +68,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(codeModel, sourceInputModel));
 
             // force trigger the model initialization
-            foreach (var _ in MgmtContext.Library.ResourceSchemaMap)
+            foreach (var _ in MgmtContext.Library.ResourceSchemaMap.Value)
             {
             }
         }

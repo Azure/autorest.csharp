@@ -5,9 +5,11 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -29,6 +31,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// Resource tags
         /// Serialized Name: UpdateResource.tags
         /// </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="sku">
         /// Sku of the availability set
         /// Serialized Name: AvailabilitySetUpdate.sku
@@ -53,7 +56,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// The resource status information.
         /// Serialized Name: AvailabilitySetUpdate.properties.statuses
         /// </param>
-        internal AvailabilitySetPatch(IDictionary<string, string> tags, SampleSku sku, int? platformUpdateDomainCount, int? platformFaultDomainCount, IList<WritableSubResource> virtualMachines, WritableSubResource proximityPlacementGroup, IReadOnlyList<InstanceViewStatus> statuses) : base(tags)
+        internal AvailabilitySetPatch(IDictionary<string, string> tags, IDictionary<string, BinaryData> serializedAdditionalRawData, SampleSku sku, int? platformUpdateDomainCount, int? platformFaultDomainCount, IList<WritableSubResource> virtualMachines, WritableSubResource proximityPlacementGroup, IReadOnlyList<InstanceViewStatus> statuses) : base(tags, serializedAdditionalRawData)
         {
             Sku = sku;
             PlatformUpdateDomainCount = platformUpdateDomainCount;
@@ -67,21 +70,25 @@ namespace Azure.ResourceManager.Sample.Models
         /// Sku of the availability set
         /// Serialized Name: AvailabilitySetUpdate.sku
         /// </summary>
+        [WirePath("sku")]
         public SampleSku Sku { get; set; }
         /// <summary>
         /// Update Domain count.
         /// Serialized Name: AvailabilitySetUpdate.properties.platformUpdateDomainCount
         /// </summary>
+        [WirePath("properties.platformUpdateDomainCount")]
         public int? PlatformUpdateDomainCount { get; set; }
         /// <summary>
         /// Fault Domain count.
         /// Serialized Name: AvailabilitySetUpdate.properties.platformFaultDomainCount
         /// </summary>
+        [WirePath("properties.platformFaultDomainCount")]
         public int? PlatformFaultDomainCount { get; set; }
         /// <summary>
         /// A list of references to all virtual machines in the availability set.
         /// Serialized Name: AvailabilitySetUpdate.properties.virtualMachines
         /// </summary>
+        [WirePath("properties.virtualMachines")]
         public IList<WritableSubResource> VirtualMachines { get; }
         /// <summary>
         /// Specifies information about the proximity placement group that the availability set should be assigned to. &lt;br&gt;&lt;br&gt;Minimum api-version: 2018-04-01.
@@ -89,6 +96,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// </summary>
         internal WritableSubResource ProximityPlacementGroup { get; set; }
         /// <summary> Gets or sets Id. </summary>
+        [WirePath("properties.proximityPlacementGroup.id")]
         public ResourceIdentifier ProximityPlacementGroupId
         {
             get => ProximityPlacementGroup is null ? default : ProximityPlacementGroup.Id;
@@ -104,6 +112,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// The resource status information.
         /// Serialized Name: AvailabilitySetUpdate.properties.statuses
         /// </summary>
+        [WirePath("properties.statuses")]
         public IReadOnlyList<InstanceViewStatus> Statuses { get; }
     }
 }

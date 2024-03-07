@@ -3,13 +3,46 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
+using System.Collections.Generic;
+using OpenAI;
 
 namespace OpenAI.Models
 {
     /// <summary> The `File` object represents a document that has been uploaded to OpenAI. </summary>
     public partial class OpenAIFile
     {
+        /// <summary>
+        /// Keeps track of any properties unknown to the library.
+        /// <para>
+        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of <see cref="OpenAIFile"/>. </summary>
         /// <param name="id"> The file identifier, which can be referenced in the API endpoints. </param>
         /// <param name="bytes"> The size of the file in bytes. </param>
@@ -23,9 +56,9 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="filename"/> or <paramref name="purpose"/> is null. </exception>
         internal OpenAIFile(string id, long bytes, DateTimeOffset createdAt, string filename, string purpose, OpenAIFileStatus status)
         {
-            ClientUtilities.AssertNotNull(id, nameof(id));
-            ClientUtilities.AssertNotNull(filename, nameof(filename));
-            ClientUtilities.AssertNotNull(purpose, nameof(purpose));
+            Argument.AssertNotNull(id, nameof(id));
+            Argument.AssertNotNull(filename, nameof(filename));
+            Argument.AssertNotNull(purpose, nameof(purpose));
 
             Id = id;
             Bytes = bytes;
@@ -50,7 +83,8 @@ namespace OpenAI.Models
         /// Additional details about the status of the file. If the file is in the `error` state, this will
         /// include a message describing the error.
         /// </param>
-        internal OpenAIFile(string id, OpenAIFileObject @object, long bytes, DateTimeOffset createdAt, string filename, string purpose, OpenAIFileStatus status, string statusDetails)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal OpenAIFile(string id, OpenAIFileObject @object, long bytes, DateTimeOffset createdAt, string filename, string purpose, OpenAIFileStatus status, string statusDetails, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             Object = @object;
@@ -60,6 +94,12 @@ namespace OpenAI.Models
             Purpose = purpose;
             Status = status;
             StatusDetails = statusDetails;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="OpenAIFile"/> for deserialization. </summary>
+        internal OpenAIFile()
+        {
         }
 
         /// <summary> The file identifier, which can be referenced in the API endpoints. </summary>

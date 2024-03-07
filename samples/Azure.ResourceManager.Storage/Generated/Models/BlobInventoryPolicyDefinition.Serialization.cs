@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Storage;
 
 namespace Azure.ResourceManager.Storage.Models
 {
@@ -43,7 +44,7 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Optional<BlobInventoryPolicyFilter> filters = default;
+            BlobInventoryPolicyFilter filters = default;
             Format format = default;
             Schedule schedule = default;
             ObjectType objectType = default;
@@ -85,7 +86,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new BlobInventoryPolicyDefinition(filters.Value, format, schedule, objectType, schemaFields);
+            return new BlobInventoryPolicyDefinition(filters, format, schedule, objectType, schemaFields);
         }
     }
 }
