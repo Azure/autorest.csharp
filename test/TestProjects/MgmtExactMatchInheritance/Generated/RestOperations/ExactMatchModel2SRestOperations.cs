@@ -70,34 +70,10 @@ namespace MgmtExactMatchInheritance
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="exactMatchModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<ExactMatchModel2>> PutAsync(string subscriptionId, string resourceGroupName, string exactMatchModel2SName, ExactMatchModel2 exactMatchModel2, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (resourceGroupName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
-            }
-            if (exactMatchModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(exactMatchModel2SName));
-            }
-            if (exactMatchModel2SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(exactMatchModel2SName));
-            }
-            if (exactMatchModel2 == null)
-            {
-                throw new ArgumentNullException(nameof(exactMatchModel2));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(exactMatchModel2SName, nameof(exactMatchModel2SName));
+            Argument.AssertNotNull(exactMatchModel2, nameof(exactMatchModel2));
 
             using var message = CreatePutRequest(subscriptionId, resourceGroupName, exactMatchModel2SName, exactMatchModel2);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -124,34 +100,10 @@ namespace MgmtExactMatchInheritance
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="exactMatchModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<ExactMatchModel2> Put(string subscriptionId, string resourceGroupName, string exactMatchModel2SName, ExactMatchModel2 exactMatchModel2, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (resourceGroupName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
-            }
-            if (exactMatchModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(exactMatchModel2SName));
-            }
-            if (exactMatchModel2SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(exactMatchModel2SName));
-            }
-            if (exactMatchModel2 == null)
-            {
-                throw new ArgumentNullException(nameof(exactMatchModel2));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(exactMatchModel2SName, nameof(exactMatchModel2SName));
+            Argument.AssertNotNull(exactMatchModel2, nameof(exactMatchModel2));
 
             using var message = CreatePutRequest(subscriptionId, resourceGroupName, exactMatchModel2SName, exactMatchModel2);
             _pipeline.Send(message, cancellationToken);

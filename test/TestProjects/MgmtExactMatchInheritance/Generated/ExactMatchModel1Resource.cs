@@ -194,10 +194,7 @@ namespace MgmtExactMatchInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<ExactMatchModel1Resource>> UpdateAsync(WaitUntil waitUntil, ExactMatchModel1Data data, CancellationToken cancellationToken = default)
         {
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _exactMatchModel1ClientDiagnostics.CreateScope("ExactMatchModel1Resource.Update");
             scope.Start();
@@ -242,10 +239,7 @@ namespace MgmtExactMatchInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<ExactMatchModel1Resource> Update(WaitUntil waitUntil, ExactMatchModel1Data data, CancellationToken cancellationToken = default)
         {
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _exactMatchModel1ClientDiagnostics.CreateScope("ExactMatchModel1Resource.Update");
             scope.Start();

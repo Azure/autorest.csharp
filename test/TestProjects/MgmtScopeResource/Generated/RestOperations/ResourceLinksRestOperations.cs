@@ -58,10 +58,7 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="linkId"/> is null. </exception>
         public async Task<Response> DeleteAsync(string linkId, CancellationToken cancellationToken = default)
         {
-            if (linkId == null)
-            {
-                throw new ArgumentNullException(nameof(linkId));
-            }
+            Argument.AssertNotNull(linkId, nameof(linkId));
 
             using var message = CreateDeleteRequest(linkId);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -81,10 +78,7 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="linkId"/> is null. </exception>
         public Response Delete(string linkId, CancellationToken cancellationToken = default)
         {
-            if (linkId == null)
-            {
-                throw new ArgumentNullException(nameof(linkId));
-            }
+            Argument.AssertNotNull(linkId, nameof(linkId));
 
             using var message = CreateDeleteRequest(linkId);
             _pipeline.Send(message, cancellationToken);
@@ -125,14 +119,8 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="linkId"/> or <paramref name="data"/> is null. </exception>
         public async Task<Response<ResourceLinkData>> CreateOrUpdateAsync(string linkId, ResourceLinkData data, CancellationToken cancellationToken = default)
         {
-            if (linkId == null)
-            {
-                throw new ArgumentNullException(nameof(linkId));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(linkId, nameof(linkId));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var message = CreateCreateOrUpdateRequest(linkId, data);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -158,14 +146,8 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="linkId"/> or <paramref name="data"/> is null. </exception>
         public Response<ResourceLinkData> CreateOrUpdate(string linkId, ResourceLinkData data, CancellationToken cancellationToken = default)
         {
-            if (linkId == null)
-            {
-                throw new ArgumentNullException(nameof(linkId));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(linkId, nameof(linkId));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var message = CreateCreateOrUpdateRequest(linkId, data);
             _pipeline.Send(message, cancellationToken);
@@ -206,10 +188,7 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="linkId"/> is null. </exception>
         public async Task<Response<ResourceLinkData>> GetAsync(string linkId, CancellationToken cancellationToken = default)
         {
-            if (linkId == null)
-            {
-                throw new ArgumentNullException(nameof(linkId));
-            }
+            Argument.AssertNotNull(linkId, nameof(linkId));
 
             using var message = CreateGetRequest(linkId);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -235,10 +214,7 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="linkId"/> is null. </exception>
         public Response<ResourceLinkData> Get(string linkId, CancellationToken cancellationToken = default)
         {
-            if (linkId == null)
-            {
-                throw new ArgumentNullException(nameof(linkId));
-            }
+            Argument.AssertNotNull(linkId, nameof(linkId));
 
             using var message = CreateGetRequest(linkId);
             _pipeline.Send(message, cancellationToken);
@@ -287,14 +263,7 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<ResourceLinkResult>> ListAtSubscriptionAsync(string subscriptionId, string filter = null, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
 
             using var message = CreateListAtSubscriptionRequest(subscriptionId, filter);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -320,14 +289,7 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<ResourceLinkResult> ListAtSubscription(string subscriptionId, string filter = null, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
 
             using var message = CreateListAtSubscriptionRequest(subscriptionId, filter);
             _pipeline.Send(message, cancellationToken);
@@ -373,10 +335,7 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="scope"/> is null. </exception>
         public async Task<Response<ResourceLinkResult>> ListAtSourceScopeAsync(string scope, Filter? filter = null, CancellationToken cancellationToken = default)
         {
-            if (scope == null)
-            {
-                throw new ArgumentNullException(nameof(scope));
-            }
+            Argument.AssertNotNull(scope, nameof(scope));
 
             using var message = CreateListAtSourceScopeRequest(scope, filter);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -401,10 +360,7 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="scope"/> is null. </exception>
         public Response<ResourceLinkResult> ListAtSourceScope(string scope, Filter? filter = null, CancellationToken cancellationToken = default)
         {
-            if (scope == null)
-            {
-                throw new ArgumentNullException(nameof(scope));
-            }
+            Argument.AssertNotNull(scope, nameof(scope));
 
             using var message = CreateListAtSourceScopeRequest(scope, filter);
             _pipeline.Send(message, cancellationToken);
@@ -445,18 +401,8 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<ResourceLinkResult>> ListAtSubscriptionNextPageAsync(string nextLink, string subscriptionId, string filter = null, CancellationToken cancellationToken = default)
         {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
+            Argument.AssertNotNull(nextLink, nameof(nextLink));
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
 
             using var message = CreateListAtSubscriptionNextPageRequest(nextLink, subscriptionId, filter);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -483,18 +429,8 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<ResourceLinkResult> ListAtSubscriptionNextPage(string nextLink, string subscriptionId, string filter = null, CancellationToken cancellationToken = default)
         {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
+            Argument.AssertNotNull(nextLink, nameof(nextLink));
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
 
             using var message = CreateListAtSubscriptionNextPageRequest(nextLink, subscriptionId, filter);
             _pipeline.Send(message, cancellationToken);
@@ -534,14 +470,8 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="scope"/> is null. </exception>
         public async Task<Response<ResourceLinkResult>> ListAtSourceScopeNextPageAsync(string nextLink, string scope, Filter? filter = null, CancellationToken cancellationToken = default)
         {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-            if (scope == null)
-            {
-                throw new ArgumentNullException(nameof(scope));
-            }
+            Argument.AssertNotNull(nextLink, nameof(nextLink));
+            Argument.AssertNotNull(scope, nameof(scope));
 
             using var message = CreateListAtSourceScopeNextPageRequest(nextLink, scope, filter);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -567,14 +497,8 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="scope"/> is null. </exception>
         public Response<ResourceLinkResult> ListAtSourceScopeNextPage(string nextLink, string scope, Filter? filter = null, CancellationToken cancellationToken = default)
         {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-            if (scope == null)
-            {
-                throw new ArgumentNullException(nameof(scope));
-            }
+            Argument.AssertNotNull(nextLink, nameof(nextLink));
+            Argument.AssertNotNull(scope, nameof(scope));
 
             using var message = CreateListAtSourceScopeNextPageRequest(nextLink, scope, filter);
             _pipeline.Send(message, cancellationToken);

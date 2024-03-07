@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -49,14 +50,8 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="ownedBy"/> is null. </exception>
         internal Model(string id, DateTimeOffset created, string ownedBy)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-            if (ownedBy == null)
-            {
-                throw new ArgumentNullException(nameof(ownedBy));
-            }
+            Argument.AssertNotNull(id, nameof(id));
+            Argument.AssertNotNull(ownedBy, nameof(ownedBy));
 
             Id = id;
             Created = created;

@@ -53,5 +53,6 @@
     "Mock": true,
     "Sample": true
   },
-  "generate-test-project": true
+  "generate-test-project": true,
+  "helper-namespace": "MgmtMockAndSample"
 }

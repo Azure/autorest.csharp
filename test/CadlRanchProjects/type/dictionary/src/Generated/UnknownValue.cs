@@ -169,10 +169,7 @@ namespace _Type._Dictionary
         /// <include file="Docs/UnknownValue.xml" path="doc/members/member[@name='PutAsync(IDictionary{string,BinaryData},CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(IDictionary<string, BinaryData> body, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
+            Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromDictionary(body);
@@ -186,10 +183,7 @@ namespace _Type._Dictionary
         /// <include file="Docs/UnknownValue.xml" path="doc/members/member[@name='Put(IDictionary{string,BinaryData},CancellationToken)']/*" />
         public virtual Response Put(IDictionary<string, BinaryData> body, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
+            Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromDictionary(body);
@@ -220,10 +214,7 @@ namespace _Type._Dictionary
         /// <include file="Docs/UnknownValue.xml" path="doc/members/member[@name='PutAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("UnknownValue.Put");
             scope.Start();
@@ -262,10 +253,7 @@ namespace _Type._Dictionary
         /// <include file="Docs/UnknownValue.xml" path="doc/members/member[@name='Put(RequestContent,RequestContext)']/*" />
         public virtual Response Put(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("UnknownValue.Put");
             scope.Start();

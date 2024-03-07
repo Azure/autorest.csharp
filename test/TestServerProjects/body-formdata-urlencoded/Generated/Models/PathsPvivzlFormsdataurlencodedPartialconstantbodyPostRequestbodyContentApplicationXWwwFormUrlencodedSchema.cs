@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using body_formdata_urlencoded;
 
 namespace body_formdata_urlencoded.Models
 {
@@ -51,14 +52,8 @@ namespace body_formdata_urlencoded.Models
         /// <exception cref="ArgumentNullException"> <paramref name="service"/> or <paramref name="aadAccessToken"/> is null. </exception>
         internal PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema(string service, string aadAccessToken)
         {
-            if (service == null)
-            {
-                throw new ArgumentNullException(nameof(service));
-            }
-            if (aadAccessToken == null)
-            {
-                throw new ArgumentNullException(nameof(aadAccessToken));
-            }
+            Argument.AssertNotNull(service, nameof(service));
+            Argument.AssertNotNull(aadAccessToken, nameof(aadAccessToken));
 
             GrantType = PostContentSchemaGrantType.AccessToken;
             Service = service;

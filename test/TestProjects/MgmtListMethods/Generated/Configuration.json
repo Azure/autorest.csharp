@@ -12,5 +12,6 @@
   "skip-csproj-packagereference": true,
   "OverrideOperationName": {
     "FakeParentWithAncestorWithNonResChWithLocs_ListBySubscription": "GetFakeParentWithAncestorWithNonResourceChWithLoc"
-  }
+  },
+  "helper-namespace": "MgmtListMethods"
 }

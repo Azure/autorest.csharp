@@ -8,5 +8,6 @@
   ],
   "public-clients": true,
   "skip-csproj-packagereference": true,
-  "use-model-reader-writer": true
+  "use-model-reader-writer": true,
+  "helper-namespace": "custom_baseUrl_LowLevel"
 }

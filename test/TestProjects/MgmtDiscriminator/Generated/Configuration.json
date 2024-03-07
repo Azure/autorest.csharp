@@ -13,5 +13,6 @@
   "enable-bicep-serialization": true,
   "suppress-abstract-base-class": [
     "DeliveryRuleAction"
-  ]
+  ],
+  "helper-namespace": "MgmtDiscriminator"
 }

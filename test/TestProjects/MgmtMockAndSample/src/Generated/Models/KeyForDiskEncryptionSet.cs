@@ -8,6 +8,7 @@
 using System;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
+using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
@@ -19,10 +20,7 @@ namespace MgmtMockAndSample.Models
         /// <exception cref="ArgumentNullException"> <paramref name="keyUri"/> is null. </exception>
         public KeyForDiskEncryptionSet(Uri keyUri)
         {
-            if (keyUri == null)
-            {
-                throw new ArgumentNullException(nameof(keyUri));
-            }
+            Argument.AssertNotNull(keyUri, nameof(keyUri));
 
             KeyUri = keyUri;
         }

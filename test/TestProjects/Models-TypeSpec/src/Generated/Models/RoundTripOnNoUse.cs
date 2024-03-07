@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ModelsTypeSpec;
 
 namespace ModelsTypeSpec.Models
 {
@@ -20,14 +21,8 @@ namespace ModelsTypeSpec.Models
         /// <exception cref="ArgumentNullException"> <paramref name="baseModelProp"/> or <paramref name="requiredList"/> is null. </exception>
         public RoundTripOnNoUse(string baseModelProp, IEnumerable<CollectionItem> requiredList) : base(baseModelProp)
         {
-            if (baseModelProp == null)
-            {
-                throw new ArgumentNullException(nameof(baseModelProp));
-            }
-            if (requiredList == null)
-            {
-                throw new ArgumentNullException(nameof(requiredList));
-            }
+            Argument.AssertNotNull(baseModelProp, nameof(baseModelProp));
+            Argument.AssertNotNull(requiredList, nameof(requiredList));
 
             RequiredList = requiredList.ToList();
         }

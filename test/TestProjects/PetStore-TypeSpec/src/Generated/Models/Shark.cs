@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using PetStore;
 
 namespace PetStore.Models
 {
@@ -19,10 +20,7 @@ namespace PetStore.Models
         /// <exception cref="ArgumentNullException"> <paramref name="bite"/> is null. </exception>
         internal Shark(int size, string bite) : base(size)
         {
-            if (bite == null)
-            {
-                throw new ArgumentNullException(nameof(bite));
-            }
+            Argument.AssertNotNull(bite, nameof(bite));
 
             Kind = "shark";
             Bite = bite;

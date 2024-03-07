@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using _Type.Model.Inheritance.NotDiscriminated;
 
 namespace _Type.Model.Inheritance.NotDiscriminated.Models
 {
@@ -19,10 +20,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal Cat(string name, int age) : base(name)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Argument.AssertNotNull(name, nameof(name));
 
             Age = age;
         }

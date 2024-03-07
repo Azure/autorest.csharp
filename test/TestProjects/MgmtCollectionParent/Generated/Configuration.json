@@ -19,5 +19,6 @@
   },
   "OverrideOperationName": {
     "ListOrderAtResourceGroupLevel": "GetAll"
-  }
+  },
+  "helper-namespace": "MgmtCollectionParent"
 }

@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using _Type.Property.AdditionalProperties;
 
 namespace _Type.Property.AdditionalProperties.Models
 {
@@ -50,10 +51,7 @@ namespace _Type.Property.AdditionalProperties.Models
         /// <exception cref="ArgumentNullException"> <paramref name="state"/> is null. </exception>
         public ModelForRecord(string state)
         {
-            if (state == null)
-            {
-                throw new ArgumentNullException(nameof(state));
-            }
+            Argument.AssertNotNull(state, nameof(state));
 
             State = state;
         }

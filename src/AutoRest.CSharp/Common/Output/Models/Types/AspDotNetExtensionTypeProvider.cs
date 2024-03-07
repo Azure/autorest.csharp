@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Builders;
-using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
@@ -15,6 +14,7 @@ using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Azure.Core.Extensions;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Models.Types
 {
@@ -84,8 +84,8 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
 
                     FormattableString summary = $"Registers a {client.Type:C} instance";
                     var constraint = includeCredential
-                        ? new WhereExpression(TBuilderType, typeof(IAzureClientFactoryBuilderWithCredential))
-                        : new WhereExpression(TBuilderType, typeof(IAzureClientFactoryBuilder));
+                        ? Where.Implements(TBuilderType, typeof(IAzureClientFactoryBuilderWithCredential))
+                        : Where.Implements(TBuilderType, typeof(IAzureClientFactoryBuilder));
                     var signature = new MethodSignature(
                         $"Add{client.Declaration.Name}",
                         summary,
@@ -124,7 +124,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
                     GenericArguments: new[] { TBuilderType, TConfigurationType },
                     GenericParameterConstraints: new[]
                     {
-                        new WhereExpression(TBuilderType, new CSharpType(typeof(IAzureClientFactoryBuilderWithConfiguration<>), TConfigurationType))
+                        Where.Implements(TBuilderType, new CSharpType(typeof(IAzureClientFactoryBuilderWithConfiguration<>), TConfigurationType))
                     });
             }
         }

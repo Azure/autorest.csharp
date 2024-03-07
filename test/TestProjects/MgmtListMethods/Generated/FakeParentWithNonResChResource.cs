@@ -199,10 +199,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<FakeParentWithNonResChResource>> UpdateAsync(WaitUntil waitUntil, FakeParentWithNonResChData data, CancellationToken cancellationToken = default)
         {
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _fakeParentWithNonResChClientDiagnostics.CreateScope("FakeParentWithNonResChResource.Update");
             scope.Start();
@@ -248,10 +245,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<FakeParentWithNonResChResource> Update(WaitUntil waitUntil, FakeParentWithNonResChData data, CancellationToken cancellationToken = default)
         {
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _fakeParentWithNonResChClientDiagnostics.CreateScope("FakeParentWithNonResChResource.Update");
             scope.Start();
@@ -355,14 +349,8 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
         public virtual async Task<Response<FakeParentWithNonResChResource>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(key, nameof(key));
+            Argument.AssertNotNull(value, nameof(value));
 
             using var scope = _fakeParentWithNonResChClientDiagnostics.CreateScope("FakeParentWithNonResChResource.AddTag");
             scope.Start();
@@ -418,14 +406,8 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
         public virtual Response<FakeParentWithNonResChResource> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(key, nameof(key));
+            Argument.AssertNotNull(value, nameof(value));
 
             using var scope = _fakeParentWithNonResChClientDiagnostics.CreateScope("FakeParentWithNonResChResource.AddTag");
             scope.Start();
@@ -480,10 +462,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
         public virtual async Task<Response<FakeParentWithNonResChResource>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            if (tags == null)
-            {
-                throw new ArgumentNullException(nameof(tags));
-            }
+            Argument.AssertNotNull(tags, nameof(tags));
 
             using var scope = _fakeParentWithNonResChClientDiagnostics.CreateScope("FakeParentWithNonResChResource.SetTags");
             scope.Start();
@@ -539,10 +518,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
         public virtual Response<FakeParentWithNonResChResource> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            if (tags == null)
-            {
-                throw new ArgumentNullException(nameof(tags));
-            }
+            Argument.AssertNotNull(tags, nameof(tags));
 
             using var scope = _fakeParentWithNonResChClientDiagnostics.CreateScope("FakeParentWithNonResChResource.SetTags");
             scope.Start();
@@ -598,10 +574,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public virtual async Task<Response<FakeParentWithNonResChResource>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
+            Argument.AssertNotNull(key, nameof(key));
 
             using var scope = _fakeParentWithNonResChClientDiagnostics.CreateScope("FakeParentWithNonResChResource.RemoveTag");
             scope.Start();
@@ -656,10 +629,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public virtual Response<FakeParentWithNonResChResource> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
+            Argument.AssertNotNull(key, nameof(key));
 
             using var scope = _fakeParentWithNonResChClientDiagnostics.CreateScope("FakeParentWithNonResChResource.RemoveTag");
             scope.Start();

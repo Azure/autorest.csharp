@@ -47,14 +47,8 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public HeaderClient(Uri endpoint, AzureKeyCredential credential, HeaderClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(credential, nameof(credential));
             options ??= new HeaderClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -81,10 +75,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamExistingKeyAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> ParamExistingKeyAsync(string userAgent, RequestContext context = null)
         {
-            if (userAgent == null)
-            {
-                throw new ArgumentNullException(nameof(userAgent));
-            }
+            Argument.AssertNotNull(userAgent, nameof(userAgent));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamExistingKey");
             scope.Start();
@@ -118,10 +109,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamExistingKey(string,RequestContext)']/*" />
         public virtual Response ParamExistingKey(string userAgent, RequestContext context = null)
         {
-            if (userAgent == null)
-            {
-                throw new ArgumentNullException(nameof(userAgent));
-            }
+            Argument.AssertNotNull(userAgent, nameof(userAgent));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamExistingKey");
             scope.Start();
@@ -215,10 +203,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamProtectedKeyAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> ParamProtectedKeyAsync(string contentType, RequestContext context = null)
         {
-            if (contentType == null)
-            {
-                throw new ArgumentNullException(nameof(contentType));
-            }
+            Argument.AssertNotNull(contentType, nameof(contentType));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamProtectedKey");
             scope.Start();
@@ -252,10 +237,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamProtectedKey(string,RequestContext)']/*" />
         public virtual Response ParamProtectedKey(string contentType, RequestContext context = null)
         {
-            if (contentType == null)
-            {
-                throw new ArgumentNullException(nameof(contentType));
-            }
+            Argument.AssertNotNull(contentType, nameof(contentType));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamProtectedKey");
             scope.Start();
@@ -350,10 +332,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamIntegerAsync(string,int,RequestContext)']/*" />
         public virtual async Task<Response> ParamIntegerAsync(string scenario, int value, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamInteger");
             scope.Start();
@@ -388,10 +367,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamInteger(string,int,RequestContext)']/*" />
         public virtual Response ParamInteger(string scenario, int value, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamInteger");
             scope.Start();
@@ -425,10 +401,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseIntegerAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> ResponseIntegerAsync(string scenario, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseInteger");
             scope.Start();
@@ -462,10 +435,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseInteger(string,RequestContext)']/*" />
         public virtual Response ResponseInteger(string scenario, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseInteger");
             scope.Start();
@@ -500,10 +470,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamLongAsync(string,long,RequestContext)']/*" />
         public virtual async Task<Response> ParamLongAsync(string scenario, long value, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamLong");
             scope.Start();
@@ -538,10 +505,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamLong(string,long,RequestContext)']/*" />
         public virtual Response ParamLong(string scenario, long value, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamLong");
             scope.Start();
@@ -575,10 +539,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseLongAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> ResponseLongAsync(string scenario, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseLong");
             scope.Start();
@@ -612,10 +573,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseLong(string,RequestContext)']/*" />
         public virtual Response ResponseLong(string scenario, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseLong");
             scope.Start();
@@ -650,10 +608,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamFloatAsync(string,float,RequestContext)']/*" />
         public virtual async Task<Response> ParamFloatAsync(string scenario, float value, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamFloat");
             scope.Start();
@@ -688,10 +643,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamFloat(string,float,RequestContext)']/*" />
         public virtual Response ParamFloat(string scenario, float value, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamFloat");
             scope.Start();
@@ -725,10 +677,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseFloatAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> ResponseFloatAsync(string scenario, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseFloat");
             scope.Start();
@@ -762,10 +711,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseFloat(string,RequestContext)']/*" />
         public virtual Response ResponseFloat(string scenario, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseFloat");
             scope.Start();
@@ -800,10 +746,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamDoubleAsync(string,double,RequestContext)']/*" />
         public virtual async Task<Response> ParamDoubleAsync(string scenario, double value, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamDouble");
             scope.Start();
@@ -838,10 +781,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamDouble(string,double,RequestContext)']/*" />
         public virtual Response ParamDouble(string scenario, double value, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamDouble");
             scope.Start();
@@ -875,10 +815,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseDoubleAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> ResponseDoubleAsync(string scenario, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseDouble");
             scope.Start();
@@ -912,10 +849,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseDouble(string,RequestContext)']/*" />
         public virtual Response ResponseDouble(string scenario, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseDouble");
             scope.Start();
@@ -950,10 +884,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamBoolAsync(string,bool,RequestContext)']/*" />
         public virtual async Task<Response> ParamBoolAsync(string scenario, bool value, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamBool");
             scope.Start();
@@ -988,10 +919,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamBool(string,bool,RequestContext)']/*" />
         public virtual Response ParamBool(string scenario, bool value, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamBool");
             scope.Start();
@@ -1025,10 +953,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseBoolAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> ResponseBoolAsync(string scenario, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseBool");
             scope.Start();
@@ -1062,10 +987,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseBool(string,RequestContext)']/*" />
         public virtual Response ResponseBool(string scenario, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseBool");
             scope.Start();
@@ -1100,10 +1022,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamStringAsync(string,string,RequestContext)']/*" />
         public virtual async Task<Response> ParamStringAsync(string scenario, string value = null, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamString");
             scope.Start();
@@ -1138,10 +1057,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamString(string,string,RequestContext)']/*" />
         public virtual Response ParamString(string scenario, string value = null, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamString");
             scope.Start();
@@ -1175,10 +1091,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseStringAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> ResponseStringAsync(string scenario, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseString");
             scope.Start();
@@ -1212,10 +1125,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseString(string,RequestContext)']/*" />
         public virtual Response ResponseString(string scenario, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseString");
             scope.Start();
@@ -1250,10 +1160,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamDateAsync(string,DateTimeOffset,RequestContext)']/*" />
         public virtual async Task<Response> ParamDateAsync(string scenario, DateTimeOffset value, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamDate");
             scope.Start();
@@ -1288,10 +1195,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamDate(string,DateTimeOffset,RequestContext)']/*" />
         public virtual Response ParamDate(string scenario, DateTimeOffset value, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamDate");
             scope.Start();
@@ -1325,10 +1229,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseDateAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> ResponseDateAsync(string scenario, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseDate");
             scope.Start();
@@ -1362,10 +1263,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseDate(string,RequestContext)']/*" />
         public virtual Response ResponseDate(string scenario, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseDate");
             scope.Start();
@@ -1400,10 +1298,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamDatetimeAsync(string,DateTimeOffset,RequestContext)']/*" />
         public virtual async Task<Response> ParamDatetimeAsync(string scenario, DateTimeOffset value, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamDatetime");
             scope.Start();
@@ -1438,10 +1333,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamDatetime(string,DateTimeOffset,RequestContext)']/*" />
         public virtual Response ParamDatetime(string scenario, DateTimeOffset value, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamDatetime");
             scope.Start();
@@ -1475,10 +1367,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseDatetimeAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> ResponseDatetimeAsync(string scenario, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseDatetime");
             scope.Start();
@@ -1512,10 +1401,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseDatetime(string,RequestContext)']/*" />
         public virtual Response ResponseDatetime(string scenario, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseDatetime");
             scope.Start();
@@ -1550,10 +1436,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamDatetimeRfc1123Async(string,DateTimeOffset?,RequestContext)']/*" />
         public virtual async Task<Response> ParamDatetimeRfc1123Async(string scenario, DateTimeOffset? value = null, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamDatetimeRfc1123");
             scope.Start();
@@ -1588,10 +1471,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamDatetimeRfc1123(string,DateTimeOffset?,RequestContext)']/*" />
         public virtual Response ParamDatetimeRfc1123(string scenario, DateTimeOffset? value = null, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamDatetimeRfc1123");
             scope.Start();
@@ -1625,10 +1505,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseDatetimeRfc1123Async(string,RequestContext)']/*" />
         public virtual async Task<Response> ResponseDatetimeRfc1123Async(string scenario, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseDatetimeRfc1123");
             scope.Start();
@@ -1662,10 +1539,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseDatetimeRfc1123(string,RequestContext)']/*" />
         public virtual Response ResponseDatetimeRfc1123(string scenario, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseDatetimeRfc1123");
             scope.Start();
@@ -1700,10 +1574,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamDurationAsync(string,TimeSpan,RequestContext)']/*" />
         public virtual async Task<Response> ParamDurationAsync(string scenario, TimeSpan value, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamDuration");
             scope.Start();
@@ -1738,10 +1609,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamDuration(string,TimeSpan,RequestContext)']/*" />
         public virtual Response ParamDuration(string scenario, TimeSpan value, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamDuration");
             scope.Start();
@@ -1775,10 +1643,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseDurationAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> ResponseDurationAsync(string scenario, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseDuration");
             scope.Start();
@@ -1812,10 +1677,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseDuration(string,RequestContext)']/*" />
         public virtual Response ResponseDuration(string scenario, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseDuration");
             scope.Start();
@@ -1850,14 +1712,8 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamByteAsync(string,BinaryData,RequestContext)']/*" />
         public virtual async Task<Response> ParamByteAsync(string scenario, BinaryData value, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
+            Argument.AssertNotNull(value, nameof(value));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamByte");
             scope.Start();
@@ -1892,14 +1748,8 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamByte(string,BinaryData,RequestContext)']/*" />
         public virtual Response ParamByte(string scenario, BinaryData value, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
+            Argument.AssertNotNull(value, nameof(value));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamByte");
             scope.Start();
@@ -1933,10 +1783,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseByteAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> ResponseByteAsync(string scenario, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseByte");
             scope.Start();
@@ -1970,10 +1817,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseByte(string,RequestContext)']/*" />
         public virtual Response ResponseByte(string scenario, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseByte");
             scope.Start();
@@ -2008,10 +1852,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamEnumAsync(string,string,RequestContext)']/*" />
         public virtual async Task<Response> ParamEnumAsync(string scenario, string value = null, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamEnum");
             scope.Start();
@@ -2046,10 +1887,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamEnum(string,string,RequestContext)']/*" />
         public virtual Response ParamEnum(string scenario, string value = null, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamEnum");
             scope.Start();
@@ -2083,10 +1921,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseEnumAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> ResponseEnumAsync(string scenario, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseEnum");
             scope.Start();
@@ -2120,10 +1955,7 @@ namespace header_LowLevel
         /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseEnum(string,RequestContext)']/*" />
         public virtual Response ResponseEnum(string scenario, RequestContext context = null)
         {
-            if (scenario == null)
-            {
-                throw new ArgumentNullException(nameof(scenario));
-            }
+            Argument.AssertNotNull(scenario, nameof(scenario));
 
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseEnum");
             scope.Start();

@@ -51,10 +51,7 @@ namespace _Type._Array.Models
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
         public InnerModel(string property)
         {
-            if (property == null)
-            {
-                throw new ArgumentNullException(nameof(property));
-            }
+            Argument.AssertNotNull(property, nameof(property));
 
             Property = property;
             Children = new ChangeTrackingList<InnerModel>();

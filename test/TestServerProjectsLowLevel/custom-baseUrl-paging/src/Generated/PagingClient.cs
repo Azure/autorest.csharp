@@ -48,14 +48,8 @@ namespace custom_baseUrl_paging_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="host"/> or <paramref name="credential"/> is null. </exception>
         public PagingClient(string host, AzureKeyCredential credential, PagingClientOptions options)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(host, nameof(host));
+            Argument.AssertNotNull(credential, nameof(credential));
             options ??= new PagingClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -82,10 +76,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetPagesPartialUrlAsync(string,RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetPagesPartialUrlAsync(string accountName, RequestContext context)
         {
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
+            Argument.AssertNotNull(accountName, nameof(accountName));
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPagesPartialUrlRequest(accountName, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPagesPartialUrlNextPageRequest(nextLink, accountName, context);
@@ -110,10 +101,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetPagesPartialUrl(string,RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetPagesPartialUrl(string accountName, RequestContext context)
         {
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
+            Argument.AssertNotNull(accountName, nameof(accountName));
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPagesPartialUrlRequest(accountName, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPagesPartialUrlNextPageRequest(nextLink, accountName, context);
@@ -138,10 +126,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetPagesPartialUrlOperationAsync(string,RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetPagesPartialUrlOperationAsync(string accountName, RequestContext context)
         {
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
+            Argument.AssertNotNull(accountName, nameof(accountName));
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPagesPartialUrlOperationRequest(accountName, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink, context);
@@ -166,10 +151,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetPagesPartialUrlOperation(string,RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetPagesPartialUrlOperation(string accountName, RequestContext context)
         {
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
+            Argument.AssertNotNull(accountName, nameof(accountName));
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPagesPartialUrlOperationRequest(accountName, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink, context);
@@ -195,14 +177,8 @@ namespace custom_baseUrl_paging_LowLevel
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetPagesPartialUrlOperationNextAsync(string,string,RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetPagesPartialUrlOperationNextAsync(string accountName, string nextLink, RequestContext context)
         {
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
+            Argument.AssertNotNull(accountName, nameof(accountName));
+            Argument.AssertNotNull(nextLink, nameof(nextLink));
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink, context);
@@ -228,14 +204,8 @@ namespace custom_baseUrl_paging_LowLevel
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetPagesPartialUrlOperationNext(string,string,RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetPagesPartialUrlOperationNext(string accountName, string nextLink, RequestContext context)
         {
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
+            Argument.AssertNotNull(accountName, nameof(accountName));
+            Argument.AssertNotNull(nextLink, nameof(nextLink));
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink, context);

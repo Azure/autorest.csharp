@@ -11,5 +11,6 @@
   "skip-csproj-packagereference": true,
   "generation1-convenience-client": true,
   "project-folder": "../../",
-  "use-model-reader-writer": true
+  "use-model-reader-writer": true,
+  "helper-namespace": "TypeSchemaMapping"
 }

@@ -40,10 +40,7 @@ namespace _Specs_.Azure.Core.Traits
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public TraitsClient(Uri endpoint, TraitsClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new TraitsClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -61,10 +58,7 @@ namespace _Specs_.Azure.Core.Traits
         /// <include file="Docs/TraitsClient.xml" path="doc/members/member[@name='SmokeTestAsync(int,string,RequestConditions,CancellationToken)']/*" />
         public virtual async Task<Response<User>> SmokeTestAsync(int id, string foo, RequestConditions requestConditions = null, CancellationToken cancellationToken = default)
         {
-            if (foo == null)
-            {
-                throw new ArgumentNullException(nameof(foo));
-            }
+            Argument.AssertNotNull(foo, nameof(foo));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SmokeTestAsync(id, foo, requestConditions, context).ConfigureAwait(false);
@@ -80,10 +74,7 @@ namespace _Specs_.Azure.Core.Traits
         /// <include file="Docs/TraitsClient.xml" path="doc/members/member[@name='SmokeTest(int,string,RequestConditions,CancellationToken)']/*" />
         public virtual Response<User> SmokeTest(int id, string foo, RequestConditions requestConditions = null, CancellationToken cancellationToken = default)
         {
-            if (foo == null)
-            {
-                throw new ArgumentNullException(nameof(foo));
-            }
+            Argument.AssertNotNull(foo, nameof(foo));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = SmokeTest(id, foo, requestConditions, context);
@@ -115,10 +106,7 @@ namespace _Specs_.Azure.Core.Traits
         /// <include file="Docs/TraitsClient.xml" path="doc/members/member[@name='SmokeTestAsync(int,string,RequestConditions,RequestContext)']/*" />
         public virtual async Task<Response> SmokeTestAsync(int id, string foo, RequestConditions requestConditions, RequestContext context)
         {
-            if (foo == null)
-            {
-                throw new ArgumentNullException(nameof(foo));
-            }
+            Argument.AssertNotNull(foo, nameof(foo));
 
             using var scope = ClientDiagnostics.CreateScope("TraitsClient.SmokeTest");
             scope.Start();
@@ -159,10 +147,7 @@ namespace _Specs_.Azure.Core.Traits
         /// <include file="Docs/TraitsClient.xml" path="doc/members/member[@name='SmokeTest(int,string,RequestConditions,RequestContext)']/*" />
         public virtual Response SmokeTest(int id, string foo, RequestConditions requestConditions, RequestContext context)
         {
-            if (foo == null)
-            {
-                throw new ArgumentNullException(nameof(foo));
-            }
+            Argument.AssertNotNull(foo, nameof(foo));
 
             using var scope = ClientDiagnostics.CreateScope("TraitsClient.SmokeTest");
             scope.Start();
@@ -186,10 +171,7 @@ namespace _Specs_.Azure.Core.Traits
         /// <include file="Docs/TraitsClient.xml" path="doc/members/member[@name='RepeatableActionAsync(int,UserActionParam,CancellationToken)']/*" />
         public virtual async Task<Response<UserActionResponse>> RepeatableActionAsync(int id, UserActionParam userActionParam, CancellationToken cancellationToken = default)
         {
-            if (userActionParam == null)
-            {
-                throw new ArgumentNullException(nameof(userActionParam));
-            }
+            Argument.AssertNotNull(userActionParam, nameof(userActionParam));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = userActionParam.ToRequestContent();
@@ -205,10 +187,7 @@ namespace _Specs_.Azure.Core.Traits
         /// <include file="Docs/TraitsClient.xml" path="doc/members/member[@name='RepeatableAction(int,UserActionParam,CancellationToken)']/*" />
         public virtual Response<UserActionResponse> RepeatableAction(int id, UserActionParam userActionParam, CancellationToken cancellationToken = default)
         {
-            if (userActionParam == null)
-            {
-                throw new ArgumentNullException(nameof(userActionParam));
-            }
+            Argument.AssertNotNull(userActionParam, nameof(userActionParam));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = userActionParam.ToRequestContent();
@@ -240,10 +219,7 @@ namespace _Specs_.Azure.Core.Traits
         /// <include file="Docs/TraitsClient.xml" path="doc/members/member[@name='RepeatableActionAsync(int,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> RepeatableActionAsync(int id, RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("TraitsClient.RepeatableAction");
             scope.Start();
@@ -283,10 +259,7 @@ namespace _Specs_.Azure.Core.Traits
         /// <include file="Docs/TraitsClient.xml" path="doc/members/member[@name='RepeatableAction(int,RequestContent,RequestContext)']/*" />
         public virtual Response RepeatableAction(int id, RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("TraitsClient.RepeatableAction");
             scope.Start();

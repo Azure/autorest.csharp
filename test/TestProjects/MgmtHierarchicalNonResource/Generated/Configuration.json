@@ -16,5 +16,6 @@
   "RawAcronymMapping": {
     "VCPU": "VCpu",
     "VCPUs": "VCpus"
-  }
+  },
+  "helper-namespace": "MgmtHierarchicalNonResource"
 }

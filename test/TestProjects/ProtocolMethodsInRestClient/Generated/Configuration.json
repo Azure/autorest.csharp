@@ -15,5 +15,6 @@
     "firstTemplate_Create",
     "firstTemplate_Get",
     "secondTemplate_Get"
-  ]
+  ],
+  "helper-namespace": "ProtocolMethodsInRestClient"
 }

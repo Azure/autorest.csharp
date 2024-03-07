@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -52,10 +53,7 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="embeddingProperty"/> is null. </exception>
         internal Embedding(long index, IEnumerable<double> embeddingProperty)
         {
-            if (embeddingProperty == null)
-            {
-                throw new ArgumentNullException(nameof(embeddingProperty));
-            }
+            Argument.AssertNotNull(embeddingProperty, nameof(embeddingProperty));
 
             Index = index;
             EmbeddingProperty = embeddingProperty.ToList();

@@ -194,10 +194,7 @@ namespace MgmtPagination
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<PageSizeDecimalModelResource>> UpdateAsync(WaitUntil waitUntil, PageSizeDecimalModelData data, CancellationToken cancellationToken = default)
         {
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _pageSizeDecimalModelClientDiagnostics.CreateScope("PageSizeDecimalModelResource.Update");
             scope.Start();
@@ -242,10 +239,7 @@ namespace MgmtPagination
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<PageSizeDecimalModelResource> Update(WaitUntil waitUntil, PageSizeDecimalModelData data, CancellationToken cancellationToken = default)
         {
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _pageSizeDecimalModelClientDiagnostics.CreateScope("PageSizeDecimalModelResource.Update");
             scope.Start();

@@ -43,10 +43,7 @@ namespace MgmtSingletonResource
         /// <returns> Returns a <see cref="CarResource"/> object. </returns>
         public static CarResource GetCarResource(this ArmClient client, ResourceIdentifier id)
         {
-            if (client == null)
-            {
-                throw new ArgumentNullException(nameof(client));
-            }
+            Argument.AssertNotNull(client, nameof(client));
 
             return GetMockableMgmtSingletonResourceArmClient(client).GetCarResource(id);
         }
@@ -65,10 +62,7 @@ namespace MgmtSingletonResource
         /// <returns> Returns a <see cref="IgnitionResource"/> object. </returns>
         public static IgnitionResource GetIgnitionResource(this ArmClient client, ResourceIdentifier id)
         {
-            if (client == null)
-            {
-                throw new ArgumentNullException(nameof(client));
-            }
+            Argument.AssertNotNull(client, nameof(client));
 
             return GetMockableMgmtSingletonResourceArmClient(client).GetIgnitionResource(id);
         }
@@ -87,10 +81,7 @@ namespace MgmtSingletonResource
         /// <returns> Returns a <see cref="BrakeResource"/> object. </returns>
         public static BrakeResource GetBrakeResource(this ArmClient client, ResourceIdentifier id)
         {
-            if (client == null)
-            {
-                throw new ArgumentNullException(nameof(client));
-            }
+            Argument.AssertNotNull(client, nameof(client));
 
             return GetMockableMgmtSingletonResourceArmClient(client).GetBrakeResource(id);
         }
@@ -109,10 +100,7 @@ namespace MgmtSingletonResource
         /// <returns> Returns a <see cref="SingletonResource"/> object. </returns>
         public static SingletonResource GetSingletonResource(this ArmClient client, ResourceIdentifier id)
         {
-            if (client == null)
-            {
-                throw new ArgumentNullException(nameof(client));
-            }
+            Argument.AssertNotNull(client, nameof(client));
 
             return GetMockableMgmtSingletonResourceArmClient(client).GetSingletonResource(id);
         }
@@ -131,10 +119,7 @@ namespace MgmtSingletonResource
         /// <returns> Returns a <see cref="ParentResource"/> object. </returns>
         public static ParentResource GetParentResource(this ArmClient client, ResourceIdentifier id)
         {
-            if (client == null)
-            {
-                throw new ArgumentNullException(nameof(client));
-            }
+            Argument.AssertNotNull(client, nameof(client));
 
             return GetMockableMgmtSingletonResourceArmClient(client).GetParentResource(id);
         }
@@ -151,10 +136,7 @@ namespace MgmtSingletonResource
         /// <returns> An object representing collection of CarResources and their operations over a CarResource. </returns>
         public static CarCollection GetCars(this ResourceGroupResource resourceGroupResource)
         {
-            if (resourceGroupResource == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupResource));
-            }
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
 
             return GetMockableMgmtSingletonResourceResourceGroupResource(resourceGroupResource).GetCars();
         }
@@ -191,10 +173,7 @@ namespace MgmtSingletonResource
         [ForwardsClientCalls]
         public static async Task<Response<CarResource>> GetCarAsync(this ResourceGroupResource resourceGroupResource, string carName, CancellationToken cancellationToken = default)
         {
-            if (resourceGroupResource == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupResource));
-            }
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
 
             return await GetMockableMgmtSingletonResourceResourceGroupResource(resourceGroupResource).GetCarAsync(carName, cancellationToken).ConfigureAwait(false);
         }
@@ -231,10 +210,7 @@ namespace MgmtSingletonResource
         [ForwardsClientCalls]
         public static Response<CarResource> GetCar(this ResourceGroupResource resourceGroupResource, string carName, CancellationToken cancellationToken = default)
         {
-            if (resourceGroupResource == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupResource));
-            }
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
 
             return GetMockableMgmtSingletonResourceResourceGroupResource(resourceGroupResource).GetCar(carName, cancellationToken);
         }
@@ -251,10 +227,7 @@ namespace MgmtSingletonResource
         /// <returns> An object representing collection of ParentResources and their operations over a ParentResource. </returns>
         public static ParentResourceCollection GetParentResources(this ResourceGroupResource resourceGroupResource)
         {
-            if (resourceGroupResource == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupResource));
-            }
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
 
             return GetMockableMgmtSingletonResourceResourceGroupResource(resourceGroupResource).GetParentResources();
         }
@@ -292,10 +265,7 @@ namespace MgmtSingletonResource
         [ForwardsClientCalls]
         public static async Task<Response<ParentResource>> GetParentResourceAsync(this ResourceGroupResource resourceGroupResource, string parentName, CancellationToken cancellationToken = default)
         {
-            if (resourceGroupResource == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupResource));
-            }
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
 
             return await GetMockableMgmtSingletonResourceResourceGroupResource(resourceGroupResource).GetParentResourceAsync(parentName, cancellationToken).ConfigureAwait(false);
         }
@@ -333,10 +303,7 @@ namespace MgmtSingletonResource
         [ForwardsClientCalls]
         public static Response<ParentResource> GetParentResource(this ResourceGroupResource resourceGroupResource, string parentName, CancellationToken cancellationToken = default)
         {
-            if (resourceGroupResource == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupResource));
-            }
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
 
             return GetMockableMgmtSingletonResourceResourceGroupResource(resourceGroupResource).GetParentResource(parentName, cancellationToken);
         }

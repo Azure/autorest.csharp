@@ -49,10 +49,7 @@ namespace MgmtConstants
         /// <returns> Returns a <see cref="OptionalMachineResource"/> object. </returns>
         public static OptionalMachineResource GetOptionalMachineResource(this ArmClient client, ResourceIdentifier id)
         {
-            if (client == null)
-            {
-                throw new ArgumentNullException(nameof(client));
-            }
+            Argument.AssertNotNull(client, nameof(client));
 
             return GetMockableMgmtConstantsArmClient(client).GetOptionalMachineResource(id);
         }
@@ -69,10 +66,7 @@ namespace MgmtConstants
         /// <returns> An object representing collection of OptionalMachineResources and their operations over a OptionalMachineResource. </returns>
         public static OptionalMachineCollection GetOptionalMachines(this ResourceGroupResource resourceGroupResource)
         {
-            if (resourceGroupResource == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupResource));
-            }
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
 
             return GetMockableMgmtConstantsResourceGroupResource(resourceGroupResource).GetOptionalMachines();
         }
@@ -111,10 +105,7 @@ namespace MgmtConstants
         [ForwardsClientCalls]
         public static async Task<Response<OptionalMachineResource>> GetOptionalMachineAsync(this ResourceGroupResource resourceGroupResource, string name, OptionalMachineExpand? expand = null, CancellationToken cancellationToken = default)
         {
-            if (resourceGroupResource == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupResource));
-            }
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
 
             return await GetMockableMgmtConstantsResourceGroupResource(resourceGroupResource).GetOptionalMachineAsync(name, expand, cancellationToken).ConfigureAwait(false);
         }
@@ -153,10 +144,7 @@ namespace MgmtConstants
         [ForwardsClientCalls]
         public static Response<OptionalMachineResource> GetOptionalMachine(this ResourceGroupResource resourceGroupResource, string name, OptionalMachineExpand? expand = null, CancellationToken cancellationToken = default)
         {
-            if (resourceGroupResource == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupResource));
-            }
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
 
             return GetMockableMgmtConstantsResourceGroupResource(resourceGroupResource).GetOptionalMachine(name, expand, cancellationToken);
         }
@@ -193,10 +181,7 @@ namespace MgmtConstants
         /// <returns> An async collection of <see cref="OptionalMachineResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<OptionalMachineResource> GetOptionalMachinesAsync(this SubscriptionResource subscriptionResource, string statusOnly = null, CancellationToken cancellationToken = default)
         {
-            if (subscriptionResource == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionResource));
-            }
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
 
             return GetMockableMgmtConstantsSubscriptionResource(subscriptionResource).GetOptionalMachinesAsync(statusOnly, cancellationToken);
         }
@@ -233,10 +218,7 @@ namespace MgmtConstants
         /// <returns> A collection of <see cref="OptionalMachineResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<OptionalMachineResource> GetOptionalMachines(this SubscriptionResource subscriptionResource, string statusOnly = null, CancellationToken cancellationToken = default)
         {
-            if (subscriptionResource == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionResource));
-            }
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
 
             return GetMockableMgmtConstantsSubscriptionResource(subscriptionResource).GetOptionalMachines(statusOnly, cancellationToken);
         }

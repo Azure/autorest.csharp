@@ -47,14 +47,8 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public PrimitiveClient(Uri endpoint, AzureKeyCredential credential, AutoRestComplexTestServiceClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(credential, nameof(credential));
             options ??= new AutoRestComplexTestServiceClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -141,10 +135,7 @@ namespace body_complex_LowLevel
         /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutIntAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutIntAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.PutInt");
             scope.Start();
@@ -178,10 +169,7 @@ namespace body_complex_LowLevel
         /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutInt(RequestContent,RequestContext)']/*" />
         public virtual Response PutInt(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.PutInt");
             scope.Start();
@@ -275,10 +263,7 @@ namespace body_complex_LowLevel
         /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutLongAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutLongAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.PutLong");
             scope.Start();
@@ -312,10 +297,7 @@ namespace body_complex_LowLevel
         /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutLong(RequestContent,RequestContext)']/*" />
         public virtual Response PutLong(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.PutLong");
             scope.Start();
@@ -409,10 +391,7 @@ namespace body_complex_LowLevel
         /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutFloatAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutFloatAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.PutFloat");
             scope.Start();
@@ -446,10 +425,7 @@ namespace body_complex_LowLevel
         /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutFloat(RequestContent,RequestContext)']/*" />
         public virtual Response PutFloat(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.PutFloat");
             scope.Start();
@@ -543,10 +519,7 @@ namespace body_complex_LowLevel
         /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutDoubleAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutDoubleAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.PutDouble");
             scope.Start();
@@ -580,10 +553,7 @@ namespace body_complex_LowLevel
         /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutDouble(RequestContent,RequestContext)']/*" />
         public virtual Response PutDouble(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.PutDouble");
             scope.Start();
@@ -677,10 +647,7 @@ namespace body_complex_LowLevel
         /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutBoolAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutBoolAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.PutBool");
             scope.Start();
@@ -714,10 +681,7 @@ namespace body_complex_LowLevel
         /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutBool(RequestContent,RequestContext)']/*" />
         public virtual Response PutBool(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.PutBool");
             scope.Start();
@@ -811,10 +775,7 @@ namespace body_complex_LowLevel
         /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutStringAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutStringAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.PutString");
             scope.Start();
@@ -848,10 +809,7 @@ namespace body_complex_LowLevel
         /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutString(RequestContent,RequestContext)']/*" />
         public virtual Response PutString(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.PutString");
             scope.Start();
@@ -945,10 +903,7 @@ namespace body_complex_LowLevel
         /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutDateAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutDateAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.PutDate");
             scope.Start();
@@ -982,10 +937,7 @@ namespace body_complex_LowLevel
         /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutDate(RequestContent,RequestContext)']/*" />
         public virtual Response PutDate(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.PutDate");
             scope.Start();
@@ -1079,10 +1031,7 @@ namespace body_complex_LowLevel
         /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutDateTimeAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutDateTimeAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.PutDateTime");
             scope.Start();
@@ -1116,10 +1065,7 @@ namespace body_complex_LowLevel
         /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutDateTime(RequestContent,RequestContext)']/*" />
         public virtual Response PutDateTime(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.PutDateTime");
             scope.Start();
@@ -1213,10 +1159,7 @@ namespace body_complex_LowLevel
         /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutDateTimeRfc1123Async(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutDateTimeRfc1123Async(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.PutDateTimeRfc1123");
             scope.Start();
@@ -1250,10 +1193,7 @@ namespace body_complex_LowLevel
         /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutDateTimeRfc1123(RequestContent,RequestContext)']/*" />
         public virtual Response PutDateTimeRfc1123(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.PutDateTimeRfc1123");
             scope.Start();
@@ -1347,10 +1287,7 @@ namespace body_complex_LowLevel
         /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutDurationAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutDurationAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.PutDuration");
             scope.Start();
@@ -1384,10 +1321,7 @@ namespace body_complex_LowLevel
         /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutDuration(RequestContent,RequestContext)']/*" />
         public virtual Response PutDuration(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.PutDuration");
             scope.Start();
@@ -1481,10 +1415,7 @@ namespace body_complex_LowLevel
         /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutByteAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutByteAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.PutByte");
             scope.Start();
@@ -1518,10 +1449,7 @@ namespace body_complex_LowLevel
         /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutByte(RequestContent,RequestContext)']/*" />
         public virtual Response PutByte(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.PutByte");
             scope.Start();

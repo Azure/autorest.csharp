@@ -50,10 +50,7 @@ namespace Parameters.Spread
         /// <include file="Docs/Model.xml" path="doc/members/member[@name='SpreadAsRequestBodyAsync(BodyParameter,CancellationToken)']/*" />
         public virtual async Task<Response> SpreadAsRequestBodyAsync(BodyParameter bodyParameter, CancellationToken cancellationToken = default)
         {
-            if (bodyParameter == null)
-            {
-                throw new ArgumentNullException(nameof(bodyParameter));
-            }
+            Argument.AssertNotNull(bodyParameter, nameof(bodyParameter));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = bodyParameter.ToRequestContent();
@@ -67,10 +64,7 @@ namespace Parameters.Spread
         /// <include file="Docs/Model.xml" path="doc/members/member[@name='SpreadAsRequestBody(BodyParameter,CancellationToken)']/*" />
         public virtual Response SpreadAsRequestBody(BodyParameter bodyParameter, CancellationToken cancellationToken = default)
         {
-            if (bodyParameter == null)
-            {
-                throw new ArgumentNullException(nameof(bodyParameter));
-            }
+            Argument.AssertNotNull(bodyParameter, nameof(bodyParameter));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = bodyParameter.ToRequestContent();
@@ -101,10 +95,7 @@ namespace Parameters.Spread
         /// <include file="Docs/Model.xml" path="doc/members/member[@name='SpreadAsRequestBodyAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> SpreadAsRequestBodyAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("Model.SpreadAsRequestBody");
             scope.Start();
@@ -143,10 +134,7 @@ namespace Parameters.Spread
         /// <include file="Docs/Model.xml" path="doc/members/member[@name='SpreadAsRequestBody(RequestContent,RequestContext)']/*" />
         public virtual Response SpreadAsRequestBody(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("Model.SpreadAsRequestBody");
             scope.Start();
