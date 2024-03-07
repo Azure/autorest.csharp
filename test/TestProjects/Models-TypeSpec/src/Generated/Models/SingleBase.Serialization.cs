@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using ModelsTypeSpec;
 
 namespace ModelsTypeSpec.Models
 {
