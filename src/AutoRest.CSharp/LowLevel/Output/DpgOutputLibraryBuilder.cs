@@ -146,43 +146,50 @@ namespace AutoRest.CSharp.Output.Models
         private static ModelTypeProvider? GetDefaultDerivedType(IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory, InputModelType model, Dictionary<string, ModelTypeProvider> defaultDerivedTypes, SourceInputModel? sourceInputModel)
         {
             //only want to create one instance of the default derived per polymorphic set
-            ModelTypeProvider? defaultDerivedType = null;
             bool isBasePolyType = model.DiscriminatorPropertyName is not null;
             bool isChildPolyType = model.DiscriminatorValue is not null;
-            if (isBasePolyType || isChildPolyType)
+            if (!isBasePolyType && !isChildPolyType)
             {
-                InputModelType actualBase = isBasePolyType ? model : model.BaseModel!;
+                return null;
+            }
 
-                //Since the unknown type is used for deserialization only we don't need to create if its an input only model
-                // TODO -- remove this condition completely when remove the UseModelReaderWriter flag
-                if (!Configuration.UseModelReaderWriter && !actualBase.Usage.HasFlag(InputModelTypeUsage.Output))
-                    return null;
+            var actualBase = model;
+            while (actualBase.BaseModel?.DiscriminatorPropertyName is not null)
+            {
+                actualBase = actualBase.BaseModel;
+            }
 
-                string defaultDerivedName = $"Unknown{actualBase.Name}";
-                if (!defaultDerivedTypes.TryGetValue(defaultDerivedName, out defaultDerivedType))
+            //Since the unknown type is used for deserialization only we don't need to create if it is an input only model
+            // TODO -- remove this condition completely when remove the UseModelReaderWriter flag
+            if (!Configuration.UseModelReaderWriter && !actualBase.Usage.HasFlag(InputModelTypeUsage.Output))
+            {
+                return null;
+            }
+
+            string defaultDerivedName = $"Unknown{actualBase.Name}";
+            if (!defaultDerivedTypes.TryGetValue(defaultDerivedName, out ModelTypeProvider? defaultDerivedType))
+            {
+                //create the "Unknown" version
+                var unknownDerivedType = new InputModelType(
+                    defaultDerivedName,
+                    actualBase.Namespace,
+                    "internal",
+                    null,
+                    $"Unknown version of {actualBase.Name}",
+                    InputModelTypeUsage.Output,
+                    Array.Empty<InputModelProperty>(),
+                    actualBase,
+                    Array.Empty<InputModelType>(),
+                    "Unknown", //TODO: do we need to support extensible enum / int values?
+                    null,
+                    null,
+                    false)
                 {
-                    //create the "Unknown" version
-                    var unknownDerviedType = new InputModelType(
-                        defaultDerivedName,
-                        actualBase.Namespace,
-                        "internal",
-                        null,
-                        $"Unknown version of {actualBase.Name}",
-                        InputModelTypeUsage.Output,
-                        Array.Empty<InputModelProperty>(),
-                        actualBase,
-                        Array.Empty<InputModelType>(),
-                        "Unknown", //TODO: do we need to support extensible enum / int values?
-                        null,
-                        null,
-                        false)
-                    {
-                        IsUnknownDiscriminatorModel = true
-                    };
-                    defaultDerivedType = new ModelTypeProvider(unknownDerviedType, TypeProvider.GetDefaultModelNamespace(null, Configuration.Namespace), sourceInputModel, typeFactory, null);
-                    defaultDerivedTypes.Add(defaultDerivedName, defaultDerivedType);
-                    models.Add(unknownDerviedType, defaultDerivedType);
-                }
+                    IsUnknownDiscriminatorModel = true
+                };
+                defaultDerivedType = new ModelTypeProvider(unknownDerivedType, TypeProvider.GetDefaultModelNamespace(null, Configuration.Namespace), sourceInputModel, typeFactory, null);
+                defaultDerivedTypes.Add(defaultDerivedName, defaultDerivedType);
+                models.Add(unknownDerivedType, defaultDerivedType);
             }
 
             return defaultDerivedType;

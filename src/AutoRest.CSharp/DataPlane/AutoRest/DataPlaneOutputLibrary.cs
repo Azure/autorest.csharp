@@ -43,7 +43,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             // schema usage transformer must run first
             SchemaUsageTransformer.Transform(codeModel);
-            DefaultDerivedSchema.AddDefaultDerivedSchemas(codeModel);
             ConstantSchemaTransformer.Transform(codeModel);
             ModelPropertyClientDefaultValueTransformer.Transform(codeModel);
 

@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultAccessibility { get; }
         public bool IsAccessibilityOverridden { get; }
         public override bool IncludeConverter => _inputModelSerialization.IncludeConverter;
-        protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && _inputModel.DiscriminatorPropertyName is not null;
+        protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && _inputModel.DiscriminatorPropertyName is not null && _inputModel.BaseModel is null && _inputModel.InheritedDictionaryType is null;
 
         public ModelTypeProviderFields Fields => _fields ??= EnsureFields();
         private ConstructorSignature InitializationConstructorSignature => _publicConstructor ??= EnsurePublicConstructorSignature();
@@ -259,12 +259,11 @@ namespace AutoRest.CSharp.Output.Models.Types
             //get base public ctor params
             GetConstructorParameters(Fields.PublicConstructorParameters, out var fullParameterList, out var baseInitializers, true);
 
-            var accessibility = _inputModelUsage.HasFlag(InputModelTypeUsage.Input)
-                ? MethodSignatureModifiers.Public
-                : MethodSignatureModifiers.Internal;
-
-            if (_inputModel.DiscriminatorPropertyName is not null)
-                accessibility = MethodSignatureModifiers.Protected;
+            var accessibility = IsAbstract
+                ? MethodSignatureModifiers.Protected
+                : _inputModelUsage.HasFlag(InputModelTypeUsage.Input)
+                    ? MethodSignatureModifiers.Public
+                    : MethodSignatureModifiers.Internal;
 
             return new ConstructorSignature(
                 Type,
@@ -364,9 +363,11 @@ namespace AutoRest.CSharp.Output.Models.Types
         private bool EnsureIsDiscriminatorInheritedOnBase()
         {
             if (Discriminator is null)
+            {
                 return false;
+            }
 
-            if (Discriminator is { Value: { } })
+            if (Discriminator is { Value: not null })
             {
                 var parent = GetBaseObjectType() as ModelTypeProvider;
                 return parent?.IsDiscriminatorInheritedOnBase ?? false;
@@ -405,7 +406,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             // only initialization ctor initializes the discriminator
             // and we should not initialize the discriminator again when the discriminator is inherited (it should show up in the ctor)
-            if (isInitializer && !IsDiscriminatorInheritedOnBase && Discriminator is not null && Discriminator.Value is { } discriminatorValue && !IsUnknownDerivedType)
+            if (isInitializer && !IsDiscriminatorInheritedOnBase && Discriminator is {Value: {} discriminatorValue} && !IsUnknownDerivedType)
             {
                 defaultCtorInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, discriminatorValue));
             }
@@ -430,7 +431,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     // For structs all properties become required
                     Constant? defaultParameterValue = null;
-                    if (property.SchemaProperty?.ClientDefaultValue is object defaultValueObject)
+                    if (property.SchemaProperty?.ClientDefaultValue is { } defaultValueObject)
                     {
                         defaultParameterValue = BuilderHelpers.ParseConstant(defaultValueObject, propertyType);
                         defaultInitializationValue = defaultParameterValue;
@@ -474,6 +475,18 @@ namespace AutoRest.CSharp.Output.Models.Types
                 if (initializationValue != null)
                 {
                     defaultCtorInitializers.Add(new ObjectPropertyInitializer(property, initializationValue.Value, defaultInitializationValue));
+                }
+            }
+
+            if (Configuration.Generation1ConvenienceClient && !isInitializer && Discriminator is { } discriminator)
+            {
+                if (defaultCtorInitializers.All(i => i.Property != discriminator.Property) && parameterMap.TryGetValue(discriminator.Property.Declaration.Name.ToVariableName(), out var discriminatorParameter))
+                {
+                    defaultCtorInitializers.Add(new ObjectPropertyInitializer(discriminator.Property, discriminatorParameter, discriminator.Value));
+                }
+                else if (!_inputModel.IsUnknownDiscriminatorModel && discriminator.Value is { } value)
+                {
+                    defaultCtorInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, value));
                 }
             }
 
