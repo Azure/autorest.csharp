@@ -282,10 +282,7 @@ namespace MgmtDiscriminator
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<DeliveryRuleResource>> UpdateAsync(WaitUntil waitUntil, DeliveryRuleData data, CancellationToken cancellationToken = default)
         {
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _deliveryRuleClientDiagnostics.CreateScope("DeliveryRuleResource.Update");
             scope.Start();
@@ -331,10 +328,7 @@ namespace MgmtDiscriminator
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<DeliveryRuleResource> Update(WaitUntil waitUntil, DeliveryRuleData data, CancellationToken cancellationToken = default)
         {
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _deliveryRuleClientDiagnostics.CreateScope("DeliveryRuleResource.Update");
             scope.Start();

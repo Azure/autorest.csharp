@@ -36,10 +36,7 @@ namespace Serialization.EncodedName.Json
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public JsonClient(Uri endpoint, JsonClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new JsonClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

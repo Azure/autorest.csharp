@@ -213,10 +213,7 @@ namespace MgmtOperations.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetUpdate"/> is null. </exception>
         public virtual async Task<ArmOperation<TestAvailabilitySet>> TestLROMethodAvailabilitySetAsync(WaitUntil waitUntil, AvailabilitySetUpdate availabilitySetUpdate, CancellationToken cancellationToken = default)
         {
-            if (availabilitySetUpdate == null)
-            {
-                throw new ArgumentNullException(nameof(availabilitySetUpdate));
-            }
+            Argument.AssertNotNull(availabilitySetUpdate, nameof(availabilitySetUpdate));
 
             using var scope = AvailabilitySetClientDiagnostics.CreateScope("MockableMgmtOperationsResourceGroupResource.TestLROMethodAvailabilitySet");
             scope.Start();
@@ -262,10 +259,7 @@ namespace MgmtOperations.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetUpdate"/> is null. </exception>
         public virtual ArmOperation<TestAvailabilitySet> TestLROMethodAvailabilitySet(WaitUntil waitUntil, AvailabilitySetUpdate availabilitySetUpdate, CancellationToken cancellationToken = default)
         {
-            if (availabilitySetUpdate == null)
-            {
-                throw new ArgumentNullException(nameof(availabilitySetUpdate));
-            }
+            Argument.AssertNotNull(availabilitySetUpdate, nameof(availabilitySetUpdate));
 
             using var scope = AvailabilitySetClientDiagnostics.CreateScope("MockableMgmtOperationsResourceGroupResource.TestLROMethodAvailabilitySet");
             scope.Start();

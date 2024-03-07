@@ -83,18 +83,8 @@ namespace MgmtPartialResource
         /// <exception cref="ArgumentNullException"> <paramref name="publicIpAddressName"/> or <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<PublicIPAddressResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string publicIpAddressName, PublicIPAddressData data, CancellationToken cancellationToken = default)
         {
-            if (publicIpAddressName == null)
-            {
-                throw new ArgumentNullException(nameof(publicIpAddressName));
-            }
-            if (publicIpAddressName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(publicIpAddressName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(publicIpAddressName, nameof(publicIpAddressName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _publicIPAddressClientDiagnostics.CreateScope("PublicIPAddressCollection.CreateOrUpdate");
             scope.Start();
@@ -142,18 +132,8 @@ namespace MgmtPartialResource
         /// <exception cref="ArgumentNullException"> <paramref name="publicIpAddressName"/> or <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<PublicIPAddressResource> CreateOrUpdate(WaitUntil waitUntil, string publicIpAddressName, PublicIPAddressData data, CancellationToken cancellationToken = default)
         {
-            if (publicIpAddressName == null)
-            {
-                throw new ArgumentNullException(nameof(publicIpAddressName));
-            }
-            if (publicIpAddressName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(publicIpAddressName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(publicIpAddressName, nameof(publicIpAddressName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _publicIPAddressClientDiagnostics.CreateScope("PublicIPAddressCollection.CreateOrUpdate");
             scope.Start();
@@ -200,14 +180,7 @@ namespace MgmtPartialResource
         /// <exception cref="ArgumentNullException"> <paramref name="publicIpAddressName"/> is null. </exception>
         public virtual async Task<Response<PublicIPAddressResource>> GetAsync(string publicIpAddressName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (publicIpAddressName == null)
-            {
-                throw new ArgumentNullException(nameof(publicIpAddressName));
-            }
-            if (publicIpAddressName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(publicIpAddressName));
-            }
+            Argument.AssertNotNullOrEmpty(publicIpAddressName, nameof(publicIpAddressName));
 
             using var scope = _publicIPAddressClientDiagnostics.CreateScope("PublicIPAddressCollection.Get");
             scope.Start();
@@ -253,14 +226,7 @@ namespace MgmtPartialResource
         /// <exception cref="ArgumentNullException"> <paramref name="publicIpAddressName"/> is null. </exception>
         public virtual Response<PublicIPAddressResource> Get(string publicIpAddressName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (publicIpAddressName == null)
-            {
-                throw new ArgumentNullException(nameof(publicIpAddressName));
-            }
-            if (publicIpAddressName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(publicIpAddressName));
-            }
+            Argument.AssertNotNullOrEmpty(publicIpAddressName, nameof(publicIpAddressName));
 
             using var scope = _publicIPAddressClientDiagnostics.CreateScope("PublicIPAddressCollection.Get");
             scope.Start();
@@ -366,14 +332,7 @@ namespace MgmtPartialResource
         /// <exception cref="ArgumentNullException"> <paramref name="publicIpAddressName"/> is null. </exception>
         public virtual async Task<Response<bool>> ExistsAsync(string publicIpAddressName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (publicIpAddressName == null)
-            {
-                throw new ArgumentNullException(nameof(publicIpAddressName));
-            }
-            if (publicIpAddressName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(publicIpAddressName));
-            }
+            Argument.AssertNotNullOrEmpty(publicIpAddressName, nameof(publicIpAddressName));
 
             using var scope = _publicIPAddressClientDiagnostics.CreateScope("PublicIPAddressCollection.Exists");
             scope.Start();
@@ -417,14 +376,7 @@ namespace MgmtPartialResource
         /// <exception cref="ArgumentNullException"> <paramref name="publicIpAddressName"/> is null. </exception>
         public virtual Response<bool> Exists(string publicIpAddressName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (publicIpAddressName == null)
-            {
-                throw new ArgumentNullException(nameof(publicIpAddressName));
-            }
-            if (publicIpAddressName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(publicIpAddressName));
-            }
+            Argument.AssertNotNullOrEmpty(publicIpAddressName, nameof(publicIpAddressName));
 
             using var scope = _publicIPAddressClientDiagnostics.CreateScope("PublicIPAddressCollection.Exists");
             scope.Start();
@@ -468,14 +420,7 @@ namespace MgmtPartialResource
         /// <exception cref="ArgumentNullException"> <paramref name="publicIpAddressName"/> is null. </exception>
         public virtual async Task<NullableResponse<PublicIPAddressResource>> GetIfExistsAsync(string publicIpAddressName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (publicIpAddressName == null)
-            {
-                throw new ArgumentNullException(nameof(publicIpAddressName));
-            }
-            if (publicIpAddressName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(publicIpAddressName));
-            }
+            Argument.AssertNotNullOrEmpty(publicIpAddressName, nameof(publicIpAddressName));
 
             using var scope = _publicIPAddressClientDiagnostics.CreateScope("PublicIPAddressCollection.GetIfExists");
             scope.Start();
@@ -521,14 +466,7 @@ namespace MgmtPartialResource
         /// <exception cref="ArgumentNullException"> <paramref name="publicIpAddressName"/> is null. </exception>
         public virtual NullableResponse<PublicIPAddressResource> GetIfExists(string publicIpAddressName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (publicIpAddressName == null)
-            {
-                throw new ArgumentNullException(nameof(publicIpAddressName));
-            }
-            if (publicIpAddressName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(publicIpAddressName));
-            }
+            Argument.AssertNotNullOrEmpty(publicIpAddressName, nameof(publicIpAddressName));
 
             using var scope = _publicIPAddressClientDiagnostics.CreateScope("PublicIPAddressCollection.GetIfExists");
             scope.Start();

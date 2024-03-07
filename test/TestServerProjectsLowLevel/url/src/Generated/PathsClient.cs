@@ -48,14 +48,8 @@ namespace url_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public PathsClient(Uri endpoint, AzureKeyCredential credential, AutoRestUrlTestServiceClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(credential, nameof(credential));
             options ??= new AutoRestUrlTestServiceClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -923,14 +917,7 @@ namespace url_LowLevel
         /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='StringNullAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> StringNullAsync(string stringPath, RequestContext context = null)
         {
-            if (stringPath == null)
-            {
-                throw new ArgumentNullException(nameof(stringPath));
-            }
-            if (stringPath.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(stringPath));
-            }
+            Argument.AssertNotNullOrEmpty(stringPath, nameof(stringPath));
 
             using var scope = ClientDiagnostics.CreateScope("PathsClient.StringNull");
             scope.Start();
@@ -965,14 +952,7 @@ namespace url_LowLevel
         /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='StringNull(string,RequestContext)']/*" />
         public virtual Response StringNull(string stringPath, RequestContext context = null)
         {
-            if (stringPath == null)
-            {
-                throw new ArgumentNullException(nameof(stringPath));
-            }
-            if (stringPath.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(stringPath));
-            }
+            Argument.AssertNotNullOrEmpty(stringPath, nameof(stringPath));
 
             using var scope = ClientDiagnostics.CreateScope("PathsClient.StringNull");
             scope.Start();
@@ -1007,14 +987,7 @@ namespace url_LowLevel
         /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='EnumValidAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> EnumValidAsync(string enumPath, RequestContext context = null)
         {
-            if (enumPath == null)
-            {
-                throw new ArgumentNullException(nameof(enumPath));
-            }
-            if (enumPath.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(enumPath));
-            }
+            Argument.AssertNotNullOrEmpty(enumPath, nameof(enumPath));
 
             using var scope = ClientDiagnostics.CreateScope("PathsClient.EnumValid");
             scope.Start();
@@ -1049,14 +1022,7 @@ namespace url_LowLevel
         /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='EnumValid(string,RequestContext)']/*" />
         public virtual Response EnumValid(string enumPath, RequestContext context = null)
         {
-            if (enumPath == null)
-            {
-                throw new ArgumentNullException(nameof(enumPath));
-            }
-            if (enumPath.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(enumPath));
-            }
+            Argument.AssertNotNullOrEmpty(enumPath, nameof(enumPath));
 
             using var scope = ClientDiagnostics.CreateScope("PathsClient.EnumValid");
             scope.Start();
@@ -1091,14 +1057,7 @@ namespace url_LowLevel
         /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='EnumNullAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> EnumNullAsync(string enumPath, RequestContext context = null)
         {
-            if (enumPath == null)
-            {
-                throw new ArgumentNullException(nameof(enumPath));
-            }
-            if (enumPath.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(enumPath));
-            }
+            Argument.AssertNotNullOrEmpty(enumPath, nameof(enumPath));
 
             using var scope = ClientDiagnostics.CreateScope("PathsClient.EnumNull");
             scope.Start();
@@ -1133,14 +1092,7 @@ namespace url_LowLevel
         /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='EnumNull(string,RequestContext)']/*" />
         public virtual Response EnumNull(string enumPath, RequestContext context = null)
         {
-            if (enumPath == null)
-            {
-                throw new ArgumentNullException(nameof(enumPath));
-            }
-            if (enumPath.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(enumPath));
-            }
+            Argument.AssertNotNullOrEmpty(enumPath, nameof(enumPath));
 
             using var scope = ClientDiagnostics.CreateScope("PathsClient.EnumNull");
             scope.Start();
@@ -1174,10 +1126,7 @@ namespace url_LowLevel
         /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='ByteMultiByteAsync(BinaryData,RequestContext)']/*" />
         public virtual async Task<Response> ByteMultiByteAsync(BinaryData bytePath, RequestContext context = null)
         {
-            if (bytePath == null)
-            {
-                throw new ArgumentNullException(nameof(bytePath));
-            }
+            Argument.AssertNotNull(bytePath, nameof(bytePath));
 
             using var scope = ClientDiagnostics.CreateScope("PathsClient.ByteMultiByte");
             scope.Start();
@@ -1211,10 +1160,7 @@ namespace url_LowLevel
         /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='ByteMultiByte(BinaryData,RequestContext)']/*" />
         public virtual Response ByteMultiByte(BinaryData bytePath, RequestContext context = null)
         {
-            if (bytePath == null)
-            {
-                throw new ArgumentNullException(nameof(bytePath));
-            }
+            Argument.AssertNotNull(bytePath, nameof(bytePath));
 
             using var scope = ClientDiagnostics.CreateScope("PathsClient.ByteMultiByte");
             scope.Start();
@@ -1308,10 +1254,7 @@ namespace url_LowLevel
         /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='ByteNullAsync(BinaryData,RequestContext)']/*" />
         public virtual async Task<Response> ByteNullAsync(BinaryData bytePath, RequestContext context = null)
         {
-            if (bytePath == null)
-            {
-                throw new ArgumentNullException(nameof(bytePath));
-            }
+            Argument.AssertNotNull(bytePath, nameof(bytePath));
 
             using var scope = ClientDiagnostics.CreateScope("PathsClient.ByteNull");
             scope.Start();
@@ -1345,10 +1288,7 @@ namespace url_LowLevel
         /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='ByteNull(BinaryData,RequestContext)']/*" />
         public virtual Response ByteNull(BinaryData bytePath, RequestContext context = null)
         {
-            if (bytePath == null)
-            {
-                throw new ArgumentNullException(nameof(bytePath));
-            }
+            Argument.AssertNotNull(bytePath, nameof(bytePath));
 
             using var scope = ClientDiagnostics.CreateScope("PathsClient.ByteNull");
             scope.Start();
@@ -1626,10 +1566,7 @@ namespace url_LowLevel
         /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='Base64UrlAsync(BinaryData,RequestContext)']/*" />
         public virtual async Task<Response> Base64UrlAsync(BinaryData base64UrlPath, RequestContext context = null)
         {
-            if (base64UrlPath == null)
-            {
-                throw new ArgumentNullException(nameof(base64UrlPath));
-            }
+            Argument.AssertNotNull(base64UrlPath, nameof(base64UrlPath));
 
             using var scope = ClientDiagnostics.CreateScope("PathsClient.Base64Url");
             scope.Start();
@@ -1663,10 +1600,7 @@ namespace url_LowLevel
         /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='Base64Url(BinaryData,RequestContext)']/*" />
         public virtual Response Base64Url(BinaryData base64UrlPath, RequestContext context = null)
         {
-            if (base64UrlPath == null)
-            {
-                throw new ArgumentNullException(nameof(base64UrlPath));
-            }
+            Argument.AssertNotNull(base64UrlPath, nameof(base64UrlPath));
 
             using var scope = ClientDiagnostics.CreateScope("PathsClient.Base64Url");
             scope.Start();
@@ -1700,10 +1634,7 @@ namespace url_LowLevel
         /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='ArrayCsvInPathAsync(IEnumerable{string},RequestContext)']/*" />
         public virtual async Task<Response> ArrayCsvInPathAsync(IEnumerable<string> arrayPath, RequestContext context = null)
         {
-            if (arrayPath == null)
-            {
-                throw new ArgumentNullException(nameof(arrayPath));
-            }
+            Argument.AssertNotNull(arrayPath, nameof(arrayPath));
 
             using var scope = ClientDiagnostics.CreateScope("PathsClient.ArrayCsvInPath");
             scope.Start();
@@ -1737,10 +1668,7 @@ namespace url_LowLevel
         /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='ArrayCsvInPath(IEnumerable{string},RequestContext)']/*" />
         public virtual Response ArrayCsvInPath(IEnumerable<string> arrayPath, RequestContext context = null)
         {
-            if (arrayPath == null)
-            {
-                throw new ArgumentNullException(nameof(arrayPath));
-            }
+            Argument.AssertNotNull(arrayPath, nameof(arrayPath));
 
             using var scope = ClientDiagnostics.CreateScope("PathsClient.ArrayCsvInPath");
             scope.Start();

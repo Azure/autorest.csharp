@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using required_optional;
 
 namespace required_optional.Models
 {
@@ -50,10 +51,7 @@ namespace required_optional.Models
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public ClassWrapper(Product value)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(value, nameof(value));
 
             Value = value;
         }

@@ -197,10 +197,7 @@ namespace MgmtXmlDeserialization
         /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
         public virtual async Task<ArmOperation> DeleteAsync(WaitUntil waitUntil, string ifMatch, CancellationToken cancellationToken = default)
         {
-            if (ifMatch == null)
-            {
-                throw new ArgumentNullException(nameof(ifMatch));
-            }
+            Argument.AssertNotNull(ifMatch, nameof(ifMatch));
 
             using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstanceResource.Delete");
             scope.Start();
@@ -246,10 +243,7 @@ namespace MgmtXmlDeserialization
         /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
         public virtual ArmOperation Delete(WaitUntil waitUntil, string ifMatch, CancellationToken cancellationToken = default)
         {
-            if (ifMatch == null)
-            {
-                throw new ArgumentNullException(nameof(ifMatch));
-            }
+            Argument.AssertNotNull(ifMatch, nameof(ifMatch));
 
             using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstanceResource.Delete");
             scope.Start();
@@ -296,10 +290,7 @@ namespace MgmtXmlDeserialization
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<XmlInstanceResource>> UpdateAsync(WaitUntil waitUntil, XmlInstanceData data, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstanceResource.Update");
             scope.Start();
@@ -346,10 +337,7 @@ namespace MgmtXmlDeserialization
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<XmlInstanceResource> Update(WaitUntil waitUntil, XmlInstanceData data, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstanceResource.Update");
             scope.Start();

@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using FirstTestTypeSpec;
 
 namespace FirstTestTypeSpec.Models
 {
@@ -20,10 +21,7 @@ namespace FirstTestTypeSpec.Models
         /// <exception cref="ArgumentNullException"> <paramref name="parent"/> is null. </exception>
         public ChildModel(sbyte level, IEnumerable<BaseModel> parent) : base(level)
         {
-            if (parent == null)
-            {
-                throw new ArgumentNullException(nameof(parent));
-            }
+            Argument.AssertNotNull(parent, nameof(parent));
 
             Parent = parent.ToList();
         }

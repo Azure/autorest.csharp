@@ -68,26 +68,9 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> or <paramref name="tenantParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<TenantParentWithLocData>> CreateOrUpdateAsync(string tenantTestName, string tenantParentWithLocName, TenantParentWithLocData data, CancellationToken cancellationToken = default)
         {
-            if (tenantTestName == null)
-            {
-                throw new ArgumentNullException(nameof(tenantTestName));
-            }
-            if (tenantTestName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(tenantTestName));
-            }
-            if (tenantParentWithLocName == null)
-            {
-                throw new ArgumentNullException(nameof(tenantParentWithLocName));
-            }
-            if (tenantParentWithLocName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(tenantParentWithLocName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(tenantTestName, nameof(tenantTestName));
+            Argument.AssertNotNullOrEmpty(tenantParentWithLocName, nameof(tenantParentWithLocName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var message = CreateCreateOrUpdateRequest(tenantTestName, tenantParentWithLocName, data);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -114,26 +97,9 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> or <paramref name="tenantParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<TenantParentWithLocData> CreateOrUpdate(string tenantTestName, string tenantParentWithLocName, TenantParentWithLocData data, CancellationToken cancellationToken = default)
         {
-            if (tenantTestName == null)
-            {
-                throw new ArgumentNullException(nameof(tenantTestName));
-            }
-            if (tenantTestName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(tenantTestName));
-            }
-            if (tenantParentWithLocName == null)
-            {
-                throw new ArgumentNullException(nameof(tenantParentWithLocName));
-            }
-            if (tenantParentWithLocName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(tenantParentWithLocName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(tenantTestName, nameof(tenantTestName));
+            Argument.AssertNotNullOrEmpty(tenantParentWithLocName, nameof(tenantParentWithLocName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var message = CreateCreateOrUpdateRequest(tenantTestName, tenantParentWithLocName, data);
             _pipeline.Send(message, cancellationToken);
@@ -177,22 +143,8 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> or <paramref name="tenantParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<TenantParentWithLocData>> GetAsync(string tenantTestName, string tenantParentWithLocName, CancellationToken cancellationToken = default)
         {
-            if (tenantTestName == null)
-            {
-                throw new ArgumentNullException(nameof(tenantTestName));
-            }
-            if (tenantTestName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(tenantTestName));
-            }
-            if (tenantParentWithLocName == null)
-            {
-                throw new ArgumentNullException(nameof(tenantParentWithLocName));
-            }
-            if (tenantParentWithLocName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(tenantParentWithLocName));
-            }
+            Argument.AssertNotNullOrEmpty(tenantTestName, nameof(tenantTestName));
+            Argument.AssertNotNullOrEmpty(tenantParentWithLocName, nameof(tenantParentWithLocName));
 
             using var message = CreateGetRequest(tenantTestName, tenantParentWithLocName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -220,22 +172,8 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> or <paramref name="tenantParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<TenantParentWithLocData> Get(string tenantTestName, string tenantParentWithLocName, CancellationToken cancellationToken = default)
         {
-            if (tenantTestName == null)
-            {
-                throw new ArgumentNullException(nameof(tenantTestName));
-            }
-            if (tenantTestName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(tenantTestName));
-            }
-            if (tenantParentWithLocName == null)
-            {
-                throw new ArgumentNullException(nameof(tenantParentWithLocName));
-            }
-            if (tenantParentWithLocName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(tenantParentWithLocName));
-            }
+            Argument.AssertNotNullOrEmpty(tenantTestName, nameof(tenantTestName));
+            Argument.AssertNotNullOrEmpty(tenantParentWithLocName, nameof(tenantParentWithLocName));
 
             using var message = CreateGetRequest(tenantTestName, tenantParentWithLocName);
             _pipeline.Send(message, cancellationToken);
@@ -279,14 +217,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<TenantParentWithLocListResult>> ListAsync(string tenantTestName, CancellationToken cancellationToken = default)
         {
-            if (tenantTestName == null)
-            {
-                throw new ArgumentNullException(nameof(tenantTestName));
-            }
-            if (tenantTestName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(tenantTestName));
-            }
+            Argument.AssertNotNullOrEmpty(tenantTestName, nameof(tenantTestName));
 
             using var message = CreateListRequest(tenantTestName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -311,14 +242,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<TenantParentWithLocListResult> List(string tenantTestName, CancellationToken cancellationToken = default)
         {
-            if (tenantTestName == null)
-            {
-                throw new ArgumentNullException(nameof(tenantTestName));
-            }
-            if (tenantTestName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(tenantTestName));
-            }
+            Argument.AssertNotNullOrEmpty(tenantTestName, nameof(tenantTestName));
 
             using var message = CreateListRequest(tenantTestName);
             _pipeline.Send(message, cancellationToken);
@@ -358,18 +282,8 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<TenantParentWithLocListResult>> ListNextPageAsync(string nextLink, string tenantTestName, CancellationToken cancellationToken = default)
         {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-            if (tenantTestName == null)
-            {
-                throw new ArgumentNullException(nameof(tenantTestName));
-            }
-            if (tenantTestName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(tenantTestName));
-            }
+            Argument.AssertNotNull(nextLink, nameof(nextLink));
+            Argument.AssertNotNullOrEmpty(tenantTestName, nameof(tenantTestName));
 
             using var message = CreateListNextPageRequest(nextLink, tenantTestName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -395,18 +309,8 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<TenantParentWithLocListResult> ListNextPage(string nextLink, string tenantTestName, CancellationToken cancellationToken = default)
         {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-            if (tenantTestName == null)
-            {
-                throw new ArgumentNullException(nameof(tenantTestName));
-            }
-            if (tenantTestName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(tenantTestName));
-            }
+            Argument.AssertNotNull(nextLink, nameof(nextLink));
+            Argument.AssertNotNullOrEmpty(tenantTestName, nameof(tenantTestName));
 
             using var message = CreateListNextPageRequest(nextLink, tenantTestName);
             _pipeline.Send(message, cancellationToken);

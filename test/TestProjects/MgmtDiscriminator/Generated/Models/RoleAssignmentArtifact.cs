@@ -22,14 +22,8 @@ namespace MgmtDiscriminator.Models
         /// <exception cref="ArgumentNullException"> <paramref name="roleDefinitionId"/> or <paramref name="principalIds"/> is null. </exception>
         public RoleAssignmentArtifact(string roleDefinitionId, BinaryData principalIds)
         {
-            if (roleDefinitionId == null)
-            {
-                throw new ArgumentNullException(nameof(roleDefinitionId));
-            }
-            if (principalIds == null)
-            {
-                throw new ArgumentNullException(nameof(principalIds));
-            }
+            Argument.AssertNotNull(roleDefinitionId, nameof(roleDefinitionId));
+            Argument.AssertNotNull(principalIds, nameof(principalIds));
 
             RoleDefinitionId = roleDefinitionId;
             PrincipalIds = principalIds;

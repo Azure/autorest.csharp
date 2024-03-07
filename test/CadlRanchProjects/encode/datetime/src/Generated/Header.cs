@@ -318,10 +318,7 @@ namespace Encode.Datetime
         /// <include file="Docs/Header.xml" path="doc/members/member[@name='UnixTimestampArrayAsync(IEnumerable{DateTimeOffset},RequestContext)']/*" />
         public virtual async Task<Response> UnixTimestampArrayAsync(IEnumerable<DateTimeOffset> value, RequestContext context = null)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(value, nameof(value));
 
             using var scope = ClientDiagnostics.CreateScope("Header.UnixTimestampArray");
             scope.Start();
@@ -356,10 +353,7 @@ namespace Encode.Datetime
         /// <include file="Docs/Header.xml" path="doc/members/member[@name='UnixTimestampArray(IEnumerable{DateTimeOffset},RequestContext)']/*" />
         public virtual Response UnixTimestampArray(IEnumerable<DateTimeOffset> value, RequestContext context = null)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(value, nameof(value));
 
             using var scope = ClientDiagnostics.CreateScope("Header.UnixTimestampArray");
             scope.Start();

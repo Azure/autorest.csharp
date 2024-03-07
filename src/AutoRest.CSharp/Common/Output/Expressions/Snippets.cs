@@ -60,6 +60,7 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static StringExpression LiteralU8(string value) => new(new StringLiteralExpression(value, true));
 
         public static BoolExpression GreaterThan(ValueExpression left, ValueExpression right) => new(new BinaryOperatorExpression(">", left, right));
+        public static BoolExpression LessThan(ValueExpression left, ValueExpression right) => new(new BinaryOperatorExpression("<", left, right));
         public static BoolExpression Equal(ValueExpression left, ValueExpression right) => new(new BinaryOperatorExpression("==", left, right));
         public static BoolExpression NotEqual(ValueExpression left, ValueExpression right) => new(new BinaryOperatorExpression("!=", left, right));
 
@@ -67,6 +68,8 @@ namespace AutoRest.CSharp.Common.Output.Models
             => Is<XElementExpression>(value, name, d => new XElementExpression(d), out xElement);
         public static BoolExpression Is(XAttributeExpression value, string name, out XAttributeExpression xAttribute)
             => Is<XAttributeExpression>(value, name, d => new XAttributeExpression(d), out xAttribute);
+        public static BoolExpression Is(ValueExpression left, ValueExpression right)
+            => new(new BinaryOperatorExpression("is", left, right));
 
         public static BoolExpression Or(BoolExpression left, BoolExpression right) => new(new BinaryOperatorExpression("||", left.Untyped, right.Untyped));
         public static BoolExpression And(BoolExpression left, BoolExpression right) => new(new BinaryOperatorExpression("&&", left.Untyped, right.Untyped));

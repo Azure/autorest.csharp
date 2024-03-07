@@ -10,7 +10,7 @@
    "$id": "2",
    "Kind": "Enum",
    "Name": "JobStatus",
-   "EnumValueType": "String",
+   "EnumValueType": "string",
    "AllowedValues": [
     {
      "$id": "3",
@@ -27,13 +27,13 @@
     {
      "$id": "5",
      "Name": "Succeeded",
-     "Value": "succeeded",
+     "Value": "Succeeded",
      "Description": "The operation has completed successfully."
     },
     {
      "$id": "6",
      "Name": "Failed",
-     "Value": "failed",
+     "Value": "Failed",
      "Description": "The operation has failed."
     },
     {

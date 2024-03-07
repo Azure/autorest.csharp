@@ -39,10 +39,7 @@ namespace Parameters.BodyOptionality
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public BodyOptionalityClient(Uri endpoint, BodyOptionalityClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new BodyOptionalityClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -56,10 +53,7 @@ namespace Parameters.BodyOptionality
         /// <include file="Docs/BodyOptionalityClient.xml" path="doc/members/member[@name='RequiredExplicitAsync(BodyModel,CancellationToken)']/*" />
         public virtual async Task<Response> RequiredExplicitAsync(BodyModel body, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
+            Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -73,10 +67,7 @@ namespace Parameters.BodyOptionality
         /// <include file="Docs/BodyOptionalityClient.xml" path="doc/members/member[@name='RequiredExplicit(BodyModel,CancellationToken)']/*" />
         public virtual Response RequiredExplicit(BodyModel body, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
+            Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -107,10 +98,7 @@ namespace Parameters.BodyOptionality
         /// <include file="Docs/BodyOptionalityClient.xml" path="doc/members/member[@name='RequiredExplicitAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> RequiredExplicitAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("BodyOptionalityClient.RequiredExplicit");
             scope.Start();
@@ -149,10 +137,7 @@ namespace Parameters.BodyOptionality
         /// <include file="Docs/BodyOptionalityClient.xml" path="doc/members/member[@name='RequiredExplicit(RequestContent,RequestContext)']/*" />
         public virtual Response RequiredExplicit(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("BodyOptionalityClient.RequiredExplicit");
             scope.Start();
@@ -174,10 +159,7 @@ namespace Parameters.BodyOptionality
         /// <include file="Docs/BodyOptionalityClient.xml" path="doc/members/member[@name='RequiredImplicitAsync(BodyModel,CancellationToken)']/*" />
         public virtual async Task<Response> RequiredImplicitAsync(BodyModel bodyModel, CancellationToken cancellationToken = default)
         {
-            if (bodyModel == null)
-            {
-                throw new ArgumentNullException(nameof(bodyModel));
-            }
+            Argument.AssertNotNull(bodyModel, nameof(bodyModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = bodyModel.ToRequestContent();
@@ -191,10 +173,7 @@ namespace Parameters.BodyOptionality
         /// <include file="Docs/BodyOptionalityClient.xml" path="doc/members/member[@name='RequiredImplicit(BodyModel,CancellationToken)']/*" />
         public virtual Response RequiredImplicit(BodyModel bodyModel, CancellationToken cancellationToken = default)
         {
-            if (bodyModel == null)
-            {
-                throw new ArgumentNullException(nameof(bodyModel));
-            }
+            Argument.AssertNotNull(bodyModel, nameof(bodyModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = bodyModel.ToRequestContent();
@@ -225,10 +204,7 @@ namespace Parameters.BodyOptionality
         /// <include file="Docs/BodyOptionalityClient.xml" path="doc/members/member[@name='RequiredImplicitAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> RequiredImplicitAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("BodyOptionalityClient.RequiredImplicit");
             scope.Start();
@@ -267,10 +243,7 @@ namespace Parameters.BodyOptionality
         /// <include file="Docs/BodyOptionalityClient.xml" path="doc/members/member[@name='RequiredImplicit(RequestContent,RequestContext)']/*" />
         public virtual Response RequiredImplicit(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("BodyOptionalityClient.RequiredImplicit");
             scope.Start();

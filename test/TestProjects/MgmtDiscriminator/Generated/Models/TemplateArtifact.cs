@@ -22,14 +22,8 @@ namespace MgmtDiscriminator.Models
         /// <exception cref="ArgumentNullException"> <paramref name="template"/> or <paramref name="parameters"/> is null. </exception>
         public TemplateArtifact(BinaryData template, IDictionary<string, BinaryData> parameters)
         {
-            if (template == null)
-            {
-                throw new ArgumentNullException(nameof(template));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
+            Argument.AssertNotNull(template, nameof(template));
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
             Template = template;
             Parameters = parameters;

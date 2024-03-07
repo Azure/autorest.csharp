@@ -47,14 +47,8 @@ namespace lro_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public LrosaDsClient(Uri endpoint, AzureKeyCredential credential, AutoRestLongRunningOperationTestServiceClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(credential, nameof(credential));
             options ??= new AutoRestLongRunningOperationTestServiceClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

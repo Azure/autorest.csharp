@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using Payload.ContentNegotiation;
 
 namespace Payload.ContentNegotiation.Models
 {
@@ -50,10 +51,7 @@ namespace Payload.ContentNegotiation.Models
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         internal PngImageAsJson(BinaryData content)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             Content = content;
         }

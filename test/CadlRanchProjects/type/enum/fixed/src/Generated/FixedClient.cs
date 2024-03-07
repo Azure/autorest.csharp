@@ -36,10 +36,7 @@ namespace _Type._Enum.Fixed
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public FixedClient(Uri endpoint, FixedClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new FixedClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

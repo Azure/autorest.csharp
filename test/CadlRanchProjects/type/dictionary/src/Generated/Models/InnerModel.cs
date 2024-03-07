@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using Azure.Core;
+using _Type._Dictionary;
 
 namespace _Type._Dictionary.Models
 {
@@ -51,10 +52,7 @@ namespace _Type._Dictionary.Models
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
         public InnerModel(string property)
         {
-            if (property == null)
-            {
-                throw new ArgumentNullException(nameof(property));
-            }
+            Argument.AssertNotNull(property, nameof(property));
 
             Property = property;
             Children = new ChangeTrackingDictionary<string, InnerModel>();

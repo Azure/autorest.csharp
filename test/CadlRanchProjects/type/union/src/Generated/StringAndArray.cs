@@ -138,10 +138,7 @@ namespace _Type.Union
         /// <include file="Docs/StringAndArray.xml" path="doc/members/member[@name='SendAsync(StringAndArrayCases,CancellationToken)']/*" />
         public virtual async Task<Response> SendAsync(StringAndArrayCases prop, CancellationToken cancellationToken = default)
         {
-            if (prop == null)
-            {
-                throw new ArgumentNullException(nameof(prop));
-            }
+            Argument.AssertNotNull(prop, nameof(prop));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             SendRequest7 sendRequest7 = new SendRequest7(prop);
@@ -155,10 +152,7 @@ namespace _Type.Union
         /// <include file="Docs/StringAndArray.xml" path="doc/members/member[@name='Send(StringAndArrayCases,CancellationToken)']/*" />
         public virtual Response Send(StringAndArrayCases prop, CancellationToken cancellationToken = default)
         {
-            if (prop == null)
-            {
-                throw new ArgumentNullException(nameof(prop));
-            }
+            Argument.AssertNotNull(prop, nameof(prop));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             SendRequest7 sendRequest7 = new SendRequest7(prop);
@@ -189,10 +183,7 @@ namespace _Type.Union
         /// <include file="Docs/StringAndArray.xml" path="doc/members/member[@name='SendAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> SendAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("StringAndArray.Send");
             scope.Start();
@@ -231,10 +222,7 @@ namespace _Type.Union
         /// <include file="Docs/StringAndArray.xml" path="doc/members/member[@name='Send(RequestContent,RequestContext)']/*" />
         public virtual Response Send(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("StringAndArray.Send");
             scope.Start();

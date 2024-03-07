@@ -40,8 +40,15 @@ namespace OpenAI.Models
             }
             if (Optional.IsDefined(Model))
             {
-                writer.WritePropertyName("model"u8);
-                writer.WriteStringValue(Model.Value.ToString());
+                if (Model != null)
+                {
+                    writer.WritePropertyName("model"u8);
+                    writer.WriteStringValue(Model.Value.ToString());
+                }
+                else
+                {
+                    writer.WriteNull("model");
+                }
             }
             if (Optional.IsDefined(NEpochs))
             {
@@ -229,6 +236,7 @@ namespace OpenAI.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
+                        model = null;
                         continue;
                     }
                     model = new CreateFineTuneRequestModel(property.Value.GetString());
