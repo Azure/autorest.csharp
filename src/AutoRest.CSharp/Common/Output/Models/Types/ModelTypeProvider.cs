@@ -105,7 +105,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             _inputModel = inputModel;
             _deprecated = inputModel.Deprecated;
             _derivedModels = inputModel.DerivedModels;
-            _defaultDerivedType = inputModel.DerivedModels.Any() && inputModel.BaseModel is not null
+            _defaultDerivedType = inputModel.DerivedModels.Any() && inputModel.BaseModel is {DiscriminatorPropertyName: not null}
                 ? this //if I have children and parents then I am my own defaultDerivedType
                 : defaultDerivedType ?? (inputModel.IsUnknownDiscriminatorModel ? this : null);
 
@@ -495,10 +495,14 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override CSharpType? CreateInheritedType()
         {
-            if (_inputModel.BaseModel is not null)
-                return _typeFactory.CreateType(_inputModel.BaseModel);
+            if (GetSourceBaseType() is { } sourceBaseType && _typeFactory.TryCreateType(sourceBaseType, out CSharpType? baseType))
+            {
+                return baseType;
+            }
 
-            return null;
+            return _inputModel.BaseModel is { } baseModel
+                ? _typeFactory.CreateType(baseModel)
+                : null;
         }
 
         private HashSet<string> GetParentPropertyNames()
