@@ -86,13 +86,21 @@ namespace AutoRest.CSharp.Output.Builders
 
         private static XmlElementSerialization BuildXmlElementSerialization(InputType inputType, CSharpType type, string? name, bool isRoot)
         {
-            return inputType switch
+            string xmlName = inputType.Serialization.Xml?.Name ?? name ?? inputType.Name;
+            switch (inputType)
             {
-                InputListType listType => new XmlArraySerialization(TypeFactory.GetImplementationType(type), BuildXmlElementSerialization(listType.ElementType, TypeFactory.GetElementType(type), null, false), name ?? inputType.Name, isRoot),
-                InputDictionaryType dictionaryType => new XmlDictionarySerialization(TypeFactory.GetImplementationType(type), BuildXmlElementSerialization(dictionaryType.ValueType, TypeFactory.GetElementType(type), null, false), name ?? inputType.Name),
-                CodeModelType cmt => BuildXmlElementSerialization(cmt.Schema, type, name, isRoot),
-                _ => new XmlElementValueSerialization(name ?? inputType.Name, new XmlValueSerialization(type, GetSerializationFormat(inputType)))
-            };
+                case InputListType listType:
+                    var wrapped = isRoot || listType.Serialization.Xml?.IsWrapped == true;
+                    var arrayElement = BuildXmlElementSerialization(listType.ElementType, TypeFactory.GetElementType(type), null, false);
+                    return new XmlArraySerialization(TypeFactory.GetImplementationType(type), arrayElement, xmlName, wrapped);
+                case InputDictionaryType dictionaryType:
+                    var valueElement = BuildXmlElementSerialization(dictionaryType.ValueType, TypeFactory.GetElementType(type), null, false);
+                    return new XmlDictionarySerialization(TypeFactory.GetImplementationType(type), valueElement, xmlName);
+                case CodeModelType cmt:
+                    return BuildXmlElementSerialization(cmt.Schema, type, name, isRoot);
+                default:
+                    return new XmlElementValueSerialization(xmlName, new XmlValueSerialization(type, GetSerializationFormat(inputType)));
+            }
         }
 
         public ObjectSerialization Build(KnownMediaType? mediaType, Schema schema, CSharpType type) => mediaType switch

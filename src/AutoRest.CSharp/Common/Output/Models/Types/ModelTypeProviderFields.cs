@@ -85,7 +85,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                 // for classes, only required + not readonly + not constant + not discriminator could get into the public ctor
                 // for structs, all properties must be set in the public ctor
-                if (isStruct || inputModelProperty is { IsRequired: true, IsDiscriminator: false, IsReadOnly: false, Type: not InputLiteralType })
+                if (isStruct || inputModelProperty is { IsRequired: true, IsDiscriminator: false, IsReadOnly: false, ConstantValue: null })
                 {
                     publicParameters.Add(parameter with { Type = TypeFactory.GetInputType(parameter.Type) });
                 }
@@ -366,9 +366,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return null;
             }
 
-            var constant = literalType.Value != null ?
-                        BuilderHelpers.ParseConstant(literalType.Value, propertyType) :
-                        Constant.NewInstanceOf(propertyType);
+            var constant = inputModelProperty.ConstantValue is { } constantValue && !propertyType.IsNullable
+                ? BuilderHelpers.ParseConstant(constantValue.Value, propertyType)
+                : Constant.NewInstanceOf(propertyType);
 
             return new ConstantExpression(constant);
         }

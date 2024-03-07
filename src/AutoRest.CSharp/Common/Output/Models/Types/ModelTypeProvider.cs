@@ -455,19 +455,20 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                     initializationValue = defaultCtorParameter;
                 }
-                else
+                else if (initializationValue == null && TypeFactory.IsCollectionType(propertyType))
                 {
-                    if (initializationValue == null && TypeFactory.IsCollectionType(propertyType))
+                    if (TypeFactory.IsReadOnlyMemory(propertyType))
                     {
-                        if (TypeFactory.IsReadOnlyMemory(propertyType))
-                        {
-                            initializationValue = propertyType.IsNullable ? null : Constant.FromExpression($"{propertyType}.{nameof(ReadOnlyMemory<object>.Empty)}", propertyType);
-                        }
-                        else
-                        {
-                            initializationValue = Constant.NewInstanceOf(TypeFactory.GetPropertyImplementationType(propertyType));
-                        }
+                        initializationValue = propertyType.IsNullable ? null : Constant.FromExpression($"{propertyType}.{nameof(ReadOnlyMemory<object>.Empty)}", propertyType);
                     }
+                    else
+                    {
+                        initializationValue = Constant.NewInstanceOf(TypeFactory.GetPropertyImplementationType(propertyType));
+                    }
+                }
+                else if (property.InputModelProperty?.ConstantValue is { } constant && !propertyType.IsNullable)
+                {
+                    initializationValue = BuilderHelpers.ParseConstant(constant.Value, propertyType);
                 }
 
                 if (initializationValue != null)
