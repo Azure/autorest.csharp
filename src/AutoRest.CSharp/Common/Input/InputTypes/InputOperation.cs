@@ -80,7 +80,7 @@ internal record InputOperation(
             operation.KeepClientDefaultValue);
     }
 
-    public string CleanName { get; } = Name.IsNullOrEmpty() ? string.Empty : Name.ToCleanName();
+    public string CleanName { get; init; } = Name.IsNullOrEmpty() ? string.Empty : Name.ToCleanName();
     private readonly Dictionary<string, InputOperationExample> _examples = new();
     public IReadOnlyDictionary<string, InputOperationExample> Examples => _examples.Any() ? _examples : EnsureExamples(_examples);
 

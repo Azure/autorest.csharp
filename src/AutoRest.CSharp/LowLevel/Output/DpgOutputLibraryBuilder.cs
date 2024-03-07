@@ -216,17 +216,23 @@ namespace AutoRest.CSharp.Output.Models
 
         private static InputOperation UpdateOperation(InputOperation operation, string clientName, IReadOnlyDictionary<InputOperation, Func<InputOperation>> operationsMap)
         {
+            var name = UpdateOperationName(operation, operation.ResourceName ?? clientName);
             if (operation.Paging != null && !Configuration.DisablePaginationTopRenaming && !operation.Parameters.Any(p => p.Name.Equals(MaxCountParameterName, StringComparison.OrdinalIgnoreCase)))
             {
                 return operation with
                 {
-                    Name = UpdateOperationName(operation, operation.ResourceName ?? clientName),
+                    Name = name,
+                    CleanName = name,
                     Parameters = UpdateOperationParameters(operation.Parameters),
                     Paging = UpdateOperationPaging(operation.Paging, operationsMap),
                 };
             }
 
-            return operation with { Name = UpdateOperationName(operation, operation.ResourceName ?? clientName) };
+            return operation with
+            {
+                Name = name,
+                CleanName = name
+            };
         }
 
         private static string UpdateOperationName(InputOperation operation, string clientName)
