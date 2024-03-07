@@ -89,13 +89,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 yield return new
                 (
                     new MethodSignature(nameof(IJsonModel<object>.Create), null, null, MethodSignatureModifiers.None, typeOfT, null, new[] { KnownParameters.Serializations.Utf8JsonReader, KnownParameters.Serializations.Options }, ExplicitInterface: jsonModelInterface),
-                    new MethodBodyStatement[]
+                    new[]
                     {
-                    Serializations.ValidateJsonFormat(options, json.IPersistableModelTInterface),
-                    // using var document = JsonDocument.ParseValue(ref reader);
-                    UsingDeclare("document", JsonDocumentExpression.ParseValue(reader), out var docVariable),
-                    // return DeserializeXXX(doc.RootElement, options);
-                    Return(SerializableObjectTypeExpression.Deserialize(model, docVariable.RootElement, options))
+                        Serializations.ValidateJsonFormat(options, json.IPersistableModelTInterface),
+                        // using var document = JsonDocument.ParseValue(ref reader);
+                        UsingDeclare("document", JsonDocumentExpression.ParseValue(reader), out var docVariable),
+                        // return DeserializeXXX(doc.RootElement, options);
+                        Return(SerializableObjectTypeExpression.Deserialize(model, docVariable.RootElement, options))
                     }
                 );
 
