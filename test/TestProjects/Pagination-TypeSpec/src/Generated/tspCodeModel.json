@@ -64,7 +64,7 @@
      "$id": "10",
      "Name": "implicit",
      "Value": "implicit",
-     "Description": "implcit flow"
+     "Description": "implicit flow"
     },
     {
      "$id": "11",
@@ -341,7 +341,7 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": true
     }
    ]
   },
@@ -386,7 +386,7 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": true
     }
    ]
   },
@@ -464,7 +464,7 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": true
     }
    ]
   },
@@ -559,7 +559,7 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": true
     }
    ]
   },
