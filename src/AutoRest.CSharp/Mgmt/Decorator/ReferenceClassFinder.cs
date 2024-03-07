@@ -82,9 +82,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             },
             [typeof(DataFactoryLinkedServiceReference)] = new()
             {
-                ["ReferenceType"] = new PropertyMetadata("type", true),
-                ["ReferenceName"] = new PropertyMetadata("referenceName", true),
-                ["Parameters"] = new PropertyMetadata("parameters")
+                [$"{nameof(DataFactoryLinkedServiceReference.ReferenceKind)}"] = new PropertyMetadata("type", true),
+                [$"{nameof(DataFactoryLinkedServiceReference.ReferenceName)}"] = new PropertyMetadata("referenceName", true),
+                [$"{nameof(DataFactoryLinkedServiceReference.Parameters)}"] = new PropertyMetadata("parameters")
             }
         };
 
