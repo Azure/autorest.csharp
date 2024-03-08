@@ -39,10 +39,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                 modifiers: FieldModifiers.Private | FieldModifiers.ReadOnly,
                 type: Inherits,
                 name: "_content");
-            _disposedField = new FieldDeclaration(
-                modifiers: FieldModifiers.Private,
-                type: typeof(bool),
-                name: "_disposed");
             _writerProperty = new PropertyDeclaration(
                 description: null,
                 modifiers: MethodSignatureModifiers.Public,
@@ -55,7 +51,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private readonly FieldDeclaration _streamField;
         private readonly FieldDeclaration _contentField;
-        private readonly FieldDeclaration _disposedField;
         private readonly PropertyDeclaration _writerProperty;
 
         protected override string DefaultName { get; }
@@ -64,7 +59,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             yield return _streamField;
             yield return _contentField;
-            yield return _disposedField;
         }
 
         protected override IEnumerable<PropertyDeclaration> BuildProperties()
@@ -97,11 +91,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             yield return BuildWriteToAsyncMethod();
             yield return BuildWriteToMethod();
             yield return BuildTryComputeLengthMethod();
-
-            foreach (var method in BuildDisposeMethods())
-            {
-                yield return method;
-            }
+            yield return BuildDisposeMethod();
         }
 
         public Utf8JsonWriterExpression JsonWriterProperty(ValueExpression instance)
@@ -179,55 +169,30 @@ namespace AutoRest.CSharp.Output.Models.Types
             return new Method(signature, body);
         }
 
-        private IEnumerable<Method> BuildDisposeMethods()
+        private Method BuildDisposeMethod()
         {
-            var disposingParameter = new Parameter("disposing", null, typeof(bool), null, ValidationType.None, null);
             var signature = new MethodSignature(
-                Name: Dispose,
-                Modifiers: MethodSignatureModifiers.Protected | MethodSignatureModifiers.Virtual,
-                Parameters: new[] { disposingParameter },
-                ReturnType: null,
-                Summary: null, Description: null, ReturnDescription: null);
-
-            var disposing = new BoolExpression(disposingParameter);
-            var disposed = new BoolExpression(_disposedField);
-            var stream = new StreamExpression(_streamField);
-            TypedValueExpression content = Configuration.IsBranded
-                ? new RequestContentExpression(_contentField)
-                : new RequestBodyExpression(_contentField);
-            var writer = new Utf8JsonWriterExpression(_writerProperty);
-            MethodBodyStatement body = new IfStatement(disposing.And(Not(disposed)))
-            {
-                Var("stream", stream, out var streamVar),
-                InvokeDispose(streamVar),
-                EmptyLine,
-                Var("content", content, out var contentVar),
-                InvokeDispose(contentVar),
-                EmptyLine,
-                Var("writer", writer, out var writerVar),
-                InvokeDispose(writerVar),
-                EmptyLine,
-                Assign(disposed, True)
-            };
-            yield return new Method(signature, body);
-
-            signature = new MethodSignature(
                 Name: Dispose,
                 Modifiers: MethodSignatureModifiers.Public | MethodSignatureModifiers.Override,
                 Parameters: Array.Empty<Parameter>(),
                 ReturnType: null,
                 Summary: null, Description: null, ReturnDescription: null);
 
-            body = new MethodBodyStatement[]
+            var stream = new StreamExpression(_streamField);
+            TypedValueExpression content = Configuration.IsBranded
+                ? new RequestContentExpression(_contentField)
+                : new RequestBodyExpression(_contentField);
+            var writer = new Utf8JsonWriterExpression(_writerProperty);
+            var body = new MethodBodyStatement[]
             {
-                new InvokeInstanceMethodStatement(null, Dispose, True),
-                new InvokeStaticMethodStatement(typeof(GC), nameof(GC.SuppressFinalize), This)
+                InvokeDispose(writer),
+                InvokeDispose(content),
+                InvokeDispose(stream)
             };
-
-            yield return new Method(signature, body);
+            return new Method(signature, body);
 
             static MethodBodyStatement InvokeDispose(TypedValueExpression instance)
-                => new InvokeInstanceMethodStatement(instance.NullConditional(), Dispose);
+                => new InvokeInstanceMethodStatement(instance, Dispose);
         }
 
         private readonly Parameter _streamParameter = new Parameter("stream", null, typeof(Stream), null, ValidationType.None, null);
