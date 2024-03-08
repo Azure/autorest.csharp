@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -324,15 +325,26 @@ namespace AutoRest.CSharp.Output.Models
                         // This method has a flattened body
                         if (bodyRequestParameter.Kind == InputOperationParameterKind.Flattened && library != null)
                         {
-                            Debugger.Launch();
-                            var objectType = (SchemaObjectType)library.FindTypeForSchema(((CodeModelType)bodyRequestParameter.Type).Schema).Implementation;
+                            var objectType = bodyRequestParameter.Type switch
+                            {
+                                InputModelType inputModelType => library.ResolveModel(inputModelType).Implementation as SerializableObjectType,
+                                CodeModelType codeModelType => throw new InvalidOperationException("Expecting model"),
+                                _ => null
+                            };
 
+                            if (objectType == null)
+                            {
+                                throw new InvalidOperationException("Unexpected flattened type");
+                            }
+
+                            var properties = objectType.EnumerateHierarchy().SelectMany(o => o.Properties).ToList();
                             var initializationMap = new List<ObjectPropertyInitializer>();
                             foreach ((_, InputParameter? inputParameter, _, _) in allParameters)
                             {
                                 if (inputParameter is { FlattenedBodyProperty: { } flattenedProperty })
                                 {
-                                    //initializationMap.Add(new ObjectPropertyInitializer(objectType.Get(virtualParameter.TargetProperty, true), references[flattenedProperty.SerializedName].Reference));
+                                    var property = properties.First(p => p.InputModelProperty?.SerializedName == flattenedProperty.SerializedName);
+                                    initializationMap.Add(new ObjectPropertyInitializer(property, references[inputParameter.NameInRequest].Reference));
                                 }
                             }
 
