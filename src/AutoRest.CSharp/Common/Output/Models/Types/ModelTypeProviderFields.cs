@@ -46,10 +46,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             foreach (var inputModelProperty in properties)
             {
                 var originalFieldName = Configuration.Generation1ConvenienceClient
-                    ? inputModelProperty.Name == "null" ? "NullProperty" : inputModelProperty.Name.ToCleanName()
-                    : inputModelProperty.Name.ToCleanName();
+                    ? inputModelProperty.Name == "null" ? "NullProperty" : BuilderHelpers.DisambiguateName(modelName, inputModelProperty.Name.ToCleanName())
+                    : BuilderHelpers.DisambiguateName(modelName, inputModelProperty.Name.ToCleanName(), "Property");
 
-                originalFieldName = BuilderHelpers.DisambiguateName(modelName, originalFieldName, "Property");
                 var propertyType = GetPropertyDefaultType(inputModelUsage, inputModelProperty, typeFactory);
 
                 // We represent property being optional by making it nullable (when it is a value type)
