@@ -19,11 +19,11 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Optional<string> tag = default;
-            Optional<DateTimeOffset> timestamp = default;
-            Optional<string> objectIdentifier = default;
-            Optional<Guid> tenantId = default;
-            Optional<string> upn = default;
+            string tag = default;
+            DateTimeOffset? timestamp = default;
+            string objectIdentifier = default;
+            Guid? tenantId = default;
+            string upn = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("tag"u8))
@@ -60,7 +60,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new TagProperty(tag.Value, Optional.ToNullable(timestamp), objectIdentifier.Value, Optional.ToNullable(tenantId), upn.Value);
+            return new TagProperty(tag, timestamp, objectIdentifier, tenantId, upn);
         }
     }
 }

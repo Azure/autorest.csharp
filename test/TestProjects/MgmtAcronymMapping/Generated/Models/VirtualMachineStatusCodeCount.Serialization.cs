@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -18,8 +17,8 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<string> code = default;
-            Optional<int> count = default;
+            string code = default;
+            int? count = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("code"u8))
@@ -37,7 +36,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineStatusCodeCount(code.Value, Optional.ToNullable(count));
+            return new VirtualMachineStatusCodeCount(code, count);
         }
     }
 }

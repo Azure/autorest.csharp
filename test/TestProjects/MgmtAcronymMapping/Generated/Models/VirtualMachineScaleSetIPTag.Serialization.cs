@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtAcronymMapping;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -34,8 +35,8 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<string> ipTagType = default;
-            Optional<string> tag = default;
+            string ipTagType = default;
+            string tag = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("ipTagType"u8))
@@ -49,7 +50,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetIPTag(ipTagType.Value, tag.Value);
+            return new VirtualMachineScaleSetIPTag(ipTagType, tag);
         }
     }
 }

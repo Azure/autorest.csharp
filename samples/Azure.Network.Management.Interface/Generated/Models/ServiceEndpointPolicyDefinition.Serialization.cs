@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Network.Management.Interface;
 
 namespace Azure.Network.Management.Interface.Models
 {
@@ -58,13 +59,13 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> etag = default;
-            Optional<string> id = default;
-            Optional<string> description = default;
-            Optional<string> service = default;
-            Optional<IList<string>> serviceResources = default;
-            Optional<ProvisioningState> provisioningState = default;
+            string name = default;
+            string etag = default;
+            string id = default;
+            string description = default;
+            string service = default;
+            IList<string> serviceResources = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -128,7 +129,14 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new ServiceEndpointPolicyDefinition(id.Value, name.Value, etag.Value, description.Value, service.Value, Optional.ToList(serviceResources), Optional.ToNullable(provisioningState));
+            return new ServiceEndpointPolicyDefinition(
+                id,
+                name,
+                etag,
+                description,
+                service,
+                serviceResources ?? new ChangeTrackingList<string>(),
+                provisioningState);
         }
     }
 }

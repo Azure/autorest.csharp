@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using model_flattening;
 
 namespace model_flattening.Models
 {
@@ -69,7 +70,7 @@ namespace model_flattening.Models
             {
                 return null;
             }
-            Optional<string> genericValue = default;
+            string genericValue = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -85,7 +86,7 @@ namespace model_flattening.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new GenericUrl(genericValue.Value, serializedAdditionalRawData);
+            return new GenericUrl(genericValue, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<GenericUrl>.Write(ModelReaderWriterOptions options)

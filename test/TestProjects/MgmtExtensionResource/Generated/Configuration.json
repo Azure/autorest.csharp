@@ -12,5 +12,7 @@
   "skip-csproj-packagereference": true,
   "RequestPathToResourceName": {
     "/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}": "BuiltInPolicyDefinition"
-  }
+  },
+  "flavor": "azure",
+  "helper-namespace": "MgmtExtensionResource"
 }

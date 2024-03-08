@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -76,14 +77,14 @@ namespace MgmtDiscriminator.Models
             }
             RequestMethodMatchConditionParameters parameters = default;
             MatchVariable name = default;
-            Optional<string> foo = default;
+            string foo = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("parameters"u8))
                 {
-                    parameters = RequestMethodMatchConditionParameters.DeserializeRequestMethodMatchConditionParameters(property.Value);
+                    parameters = RequestMethodMatchConditionParameters.DeserializeRequestMethodMatchConditionParameters(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("name"u8))
@@ -102,7 +103,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DeliveryRuleRequestMethodCondition(name, foo.Value, serializedAdditionalRawData, parameters);
+            return new DeliveryRuleRequestMethodCondition(name, foo, serializedAdditionalRawData, parameters);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -110,11 +111,8 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Name))
-            {
-                builder.Append("  name:");
-                builder.AppendLine($" '{Name.ToString()}'");
-            }
+            builder.Append("  name:");
+            builder.AppendLine($" '{Name.ToString()}'");
 
             if (Optional.IsDefined(Parameters))
             {

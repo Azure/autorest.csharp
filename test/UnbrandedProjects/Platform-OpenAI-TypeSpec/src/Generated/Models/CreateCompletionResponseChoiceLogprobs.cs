@@ -3,9 +3,9 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.Collections.Generic;
 using System.Linq;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -52,10 +52,10 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="tokens"/>, <paramref name="tokenLogprobs"/>, <paramref name="topLogprobs"/> or <paramref name="textOffset"/> is null. </exception>
         internal CreateCompletionResponseChoiceLogprobs(IEnumerable<string> tokens, IEnumerable<double> tokenLogprobs, IEnumerable<IDictionary<string, long>> topLogprobs, IEnumerable<long> textOffset)
         {
-            ClientUtilities.AssertNotNull(tokens, nameof(tokens));
-            ClientUtilities.AssertNotNull(tokenLogprobs, nameof(tokenLogprobs));
-            ClientUtilities.AssertNotNull(topLogprobs, nameof(topLogprobs));
-            ClientUtilities.AssertNotNull(textOffset, nameof(textOffset));
+            Argument.AssertNotNull(tokens, nameof(tokens));
+            Argument.AssertNotNull(tokenLogprobs, nameof(tokenLogprobs));
+            Argument.AssertNotNull(topLogprobs, nameof(topLogprobs));
+            Argument.AssertNotNull(textOffset, nameof(textOffset));
 
             Tokens = tokens.ToList();
             TokenLogprobs = tokenLogprobs.ToList();

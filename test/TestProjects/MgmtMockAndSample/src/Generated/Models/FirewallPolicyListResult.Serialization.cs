@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
@@ -20,8 +19,8 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<FirewallPolicyData>> value = default;
-            Optional<string> nextLink = default;
+            IReadOnlyList<FirewallPolicyData> value = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -44,7 +43,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new FirewallPolicyListResult(Optional.ToList(value), nextLink.Value);
+            return new FirewallPolicyListResult(value ?? new ChangeTrackingList<FirewallPolicyData>(), nextLink);
         }
     }
 }

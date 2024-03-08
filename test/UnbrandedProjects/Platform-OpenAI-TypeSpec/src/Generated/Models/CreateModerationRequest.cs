@@ -3,8 +3,8 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.Collections.Generic;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -48,7 +48,7 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         public CreateModerationRequest(BinaryData input)
         {
-            ClientUtilities.AssertNotNull(input, nameof(input));
+            Argument.AssertNotNull(input, nameof(input));
 
             Input = input;
         }

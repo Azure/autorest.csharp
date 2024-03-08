@@ -13,6 +13,7 @@ using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -130,9 +131,9 @@ namespace MgmtDiscriminator.Models
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
+            SystemData systemData = default;
             BinaryData template = default;
-            Optional<string> resourceGroup = default;
+            string resourceGroup = default;
             IDictionary<string, BinaryData> parameters = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -212,7 +213,16 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new TemplateArtifact(id, name, type, systemData.Value, kind, serializedAdditionalRawData, template, resourceGroup.Value, parameters);
+            return new TemplateArtifact(
+                id,
+                name,
+                type,
+                systemData,
+                kind,
+                serializedAdditionalRawData,
+                template,
+                resourceGroup,
+                parameters);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -234,11 +244,8 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            if (Optional.IsDefined(Kind))
-            {
-                builder.Append("  kind:");
-                builder.AppendLine($" '{Kind.ToString()}'");
-            }
+            builder.Append("  kind:");
+            builder.AppendLine($" '{Kind.ToString()}'");
 
             if (Optional.IsDefined(Id))
             {

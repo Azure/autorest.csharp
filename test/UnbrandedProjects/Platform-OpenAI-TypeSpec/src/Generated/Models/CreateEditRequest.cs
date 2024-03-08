@@ -3,8 +3,8 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.Collections.Generic;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -52,7 +52,7 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="instruction"/> is null. </exception>
         public CreateEditRequest(CreateEditRequestModel model, string instruction)
         {
-            ClientUtilities.AssertNotNull(instruction, nameof(instruction));
+            Argument.AssertNotNull(instruction, nameof(instruction));
 
             Model = model;
             Instruction = instruction;

@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
@@ -90,14 +91,14 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> description = default;
-            Optional<FirewallPolicyIntrusionDetectionProtocol> protocol = default;
-            Optional<IList<string>> sourceAddresses = default;
-            Optional<IList<string>> destinationAddresses = default;
-            Optional<IList<string>> destinationPorts = default;
-            Optional<IList<string>> sourceIpGroups = default;
-            Optional<IList<string>> destinationIpGroups = default;
+            string name = default;
+            string description = default;
+            FirewallPolicyIntrusionDetectionProtocol? protocol = default;
+            IList<string> sourceAddresses = default;
+            IList<string> destinationAddresses = default;
+            IList<string> destinationPorts = default;
+            IList<string> sourceIpGroups = default;
+            IList<string> destinationIpGroups = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -190,7 +191,15 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new FirewallPolicyIntrusionDetectionBypassTrafficSpecifications(name.Value, description.Value, Optional.ToNullable(protocol), Optional.ToList(sourceAddresses), Optional.ToList(destinationAddresses), Optional.ToList(destinationPorts), Optional.ToList(sourceIpGroups), Optional.ToList(destinationIpGroups));
+            return new FirewallPolicyIntrusionDetectionBypassTrafficSpecifications(
+                name,
+                description,
+                protocol,
+                sourceAddresses ?? new ChangeTrackingList<string>(),
+                destinationAddresses ?? new ChangeTrackingList<string>(),
+                destinationPorts ?? new ChangeTrackingList<string>(),
+                sourceIpGroups ?? new ChangeTrackingList<string>(),
+                destinationIpGroups ?? new ChangeTrackingList<string>());
         }
     }
 }

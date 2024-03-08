@@ -3,8 +3,8 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.Collections.Generic;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -51,9 +51,9 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="object"/>, <paramref name="level"/> or <paramref name="message"/> is null. </exception>
         internal FineTuneEvent(string @object, DateTimeOffset createdAt, string level, string message)
         {
-            ClientUtilities.AssertNotNull(@object, nameof(@object));
-            ClientUtilities.AssertNotNull(level, nameof(level));
-            ClientUtilities.AssertNotNull(message, nameof(message));
+            Argument.AssertNotNull(@object, nameof(@object));
+            Argument.AssertNotNull(level, nameof(level));
+            Argument.AssertNotNull(message, nameof(message));
 
             Object = @object;
             CreatedAt = createdAt;

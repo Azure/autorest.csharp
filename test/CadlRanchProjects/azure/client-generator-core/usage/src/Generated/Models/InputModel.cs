@@ -7,7 +7,7 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
+using _Specs_.Azure.ClientGenerator.Core.Usage;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Usage.Models
 {

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
+using ModelWithConverterUsage;
 
 namespace ModelWithConverterUsage.Models
 {
@@ -78,9 +79,9 @@ namespace ModelWithConverterUsage.Models
             {
                 return null;
             }
-            Optional<string> stringProperty = default;
+            string stringProperty = default;
             EnumProperty enumProperty = default;
-            Optional<Product> objProperty = default;
+            Product objProperty = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -101,7 +102,7 @@ namespace ModelWithConverterUsage.Models
                     {
                         continue;
                     }
-                    objProperty = Product.DeserializeProduct(property.Value);
+                    objProperty = Product.DeserializeProduct(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")
@@ -110,7 +111,7 @@ namespace ModelWithConverterUsage.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ModelClass(stringProperty.Value, enumProperty, objProperty.Value, serializedAdditionalRawData);
+            return new ModelClass(stringProperty, enumProperty, objProperty, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ModelClass>.Write(ModelReaderWriterOptions options)

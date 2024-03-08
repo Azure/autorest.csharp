@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -107,12 +108,12 @@ namespace MgmtDiscriminator.Models
             {
                 return null;
             }
-            Optional<int> order = default;
-            Optional<DeliveryRuleCondition> conditions = default;
-            Optional<IList<DeliveryRuleAction>> actions = default;
-            Optional<IDictionary<string, DeliveryRuleAction>> extraMappingInfo = default;
-            Optional<Pet> pet = default;
-            Optional<string> foo = default;
+            int? order = default;
+            DeliveryRuleCondition conditions = default;
+            IList<DeliveryRuleAction> actions = default;
+            IDictionary<string, DeliveryRuleAction> extraMappingInfo = default;
+            Pet pet = default;
+            string foo = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -132,7 +133,7 @@ namespace MgmtDiscriminator.Models
                     {
                         continue;
                     }
-                    conditions = DeliveryRuleCondition.DeserializeDeliveryRuleCondition(property.Value);
+                    conditions = DeliveryRuleCondition.DeserializeDeliveryRuleCondition(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("actions"u8))
@@ -144,7 +145,7 @@ namespace MgmtDiscriminator.Models
                     List<DeliveryRuleAction> array = new List<DeliveryRuleAction>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DeliveryRuleAction.DeserializeDeliveryRuleAction(item));
+                        array.Add(DeliveryRuleAction.DeserializeDeliveryRuleAction(item, options));
                     }
                     actions = array;
                     continue;
@@ -158,7 +159,7 @@ namespace MgmtDiscriminator.Models
                     Dictionary<string, DeliveryRuleAction> dictionary = new Dictionary<string, DeliveryRuleAction>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        dictionary.Add(property0.Name, DeliveryRuleAction.DeserializeDeliveryRuleAction(property0.Value));
+                        dictionary.Add(property0.Name, DeliveryRuleAction.DeserializeDeliveryRuleAction(property0.Value, options));
                     }
                     extraMappingInfo = dictionary;
                     continue;
@@ -169,7 +170,7 @@ namespace MgmtDiscriminator.Models
                     {
                         continue;
                     }
-                    pet = Pet.DeserializePet(property.Value);
+                    pet = Pet.DeserializePet(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("foo"u8))
@@ -183,7 +184,14 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DeliveryRuleProperties(Optional.ToNullable(order), conditions.Value, Optional.ToList(actions), Optional.ToDictionary(extraMappingInfo), pet.Value, foo.Value, serializedAdditionalRawData);
+            return new DeliveryRuleProperties(
+                order,
+                conditions,
+                actions ?? new ChangeTrackingList<DeliveryRuleAction>(),
+                extraMappingInfo ?? new ChangeTrackingDictionary<string, DeliveryRuleAction>(),
+                pet,
+                foo,
+                serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

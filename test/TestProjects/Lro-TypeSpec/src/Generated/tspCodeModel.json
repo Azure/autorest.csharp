@@ -8,32 +8,32 @@
    "$id": "2",
    "Kind": "Enum",
    "Name": "JobStatus",
-   "EnumValueType": "String",
+   "EnumValueType": "string",
    "AllowedValues": [
     {
      "$id": "3",
      "Name": "NotStarted",
-     "Value": "notStarted"
+     "Value": "NotStarted"
     },
     {
      "$id": "4",
      "Name": "Running",
-     "Value": "running"
+     "Value": "Running"
     },
     {
      "$id": "5",
      "Name": "Succeeded",
-     "Value": "succeeded"
+     "Value": "Succeeded"
     },
     {
      "$id": "6",
      "Name": "Failed",
-     "Value": "failed"
+     "Value": "Failed"
     },
     {
      "$id": "7",
      "Name": "Canceled",
-     "Value": "canceled"
+     "Value": "Canceled"
     }
    ],
    "Namespace": "lro",
@@ -58,7 +58,7 @@
      "$id": "10",
      "Name": "implicit",
      "Value": "implicit",
-     "Description": "implcit flow"
+     "Description": "implicit flow"
     },
     {
      "$id": "11",

@@ -11,6 +11,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
+using xml_service;
 
 namespace xml_service.Models
 {
@@ -330,7 +331,36 @@ namespace xml_service.Models
             {
                 archiveStatus = new ArchiveStatus(archiveStatusElement.Value);
             }
-            return new BlobProperties(lastModified, etag, contentLength, contentType, contentEncoding, contentLanguage, contentMD5, contentDisposition, cacheControl, blobSequenceNumber, blobType, leaseStatus, leaseState, leaseDuration, copyId, copyStatus, copySource, copyProgress, copyCompletionTime, copyStatusDescription, serverEncrypted, incrementalCopy, destinationSnapshot, deletedTime, remainingRetentionDays, accessTier, accessTierInferred, archiveStatus, serializedAdditionalRawData: null);
+            return new BlobProperties(
+                lastModified,
+                etag,
+                contentLength,
+                contentType,
+                contentEncoding,
+                contentLanguage,
+                contentMD5,
+                contentDisposition,
+                cacheControl,
+                blobSequenceNumber,
+                blobType,
+                leaseStatus,
+                leaseState,
+                leaseDuration,
+                copyId,
+                copyStatus,
+                copySource,
+                copyProgress,
+                copyCompletionTime,
+                copyStatusDescription,
+                serverEncrypted,
+                incrementalCopy,
+                destinationSnapshot,
+                deletedTime,
+                remainingRetentionDays,
+                accessTier,
+                accessTierInferred,
+                archiveStatus,
+                serializedAdditionalRawData: null);
         }
 
         BinaryData IPersistableModel<BlobProperties>.Write(ModelReaderWriterOptions options)

@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
+using MgmtPropertyChooser;
 
 namespace MgmtPropertyChooser.Models
 {
@@ -42,10 +43,10 @@ namespace MgmtPropertyChooser.Models
             {
                 return null;
             }
-            Optional<string> testPrincipalId = default;
-            Optional<string> tenantId = default;
-            Optional<ResourceIdentityType> type = default;
-            Optional<IDictionary<string, UserAssignedIdentity>> userAssignedIdentities = default;
+            string testPrincipalId = default;
+            string tenantId = default;
+            ResourceIdentityType? type = default;
+            IDictionary<string, UserAssignedIdentity> userAssignedIdentities = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("testPrincipalId"u8))
@@ -82,7 +83,7 @@ namespace MgmtPropertyChooser.Models
                     continue;
                 }
             }
-            return new IdentityWithRenamedProperty(testPrincipalId.Value, tenantId.Value, Optional.ToNullable(type), Optional.ToDictionary(userAssignedIdentities));
+            return new IdentityWithRenamedProperty(testPrincipalId, tenantId, type, userAssignedIdentities ?? new ChangeTrackingDictionary<string, UserAssignedIdentity>());
         }
     }
 }

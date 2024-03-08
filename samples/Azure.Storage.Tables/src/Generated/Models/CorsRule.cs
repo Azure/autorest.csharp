@@ -6,7 +6,7 @@
 #nullable disable
 
 using System;
-using Azure.Core;
+using Azure.Storage.Tables;
 
 namespace Azure.Storage.Tables.Models
 {

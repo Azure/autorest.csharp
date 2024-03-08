@@ -3,8 +3,8 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.Collections.Generic;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -50,8 +50,8 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="categories"/> or <paramref name="categoryScores"/> is null. </exception>
         internal CreateModerationResponseResult(bool flagged, CreateModerationResponseResultCategories categories, CreateModerationResponseResultCategoryScores categoryScores)
         {
-            ClientUtilities.AssertNotNull(categories, nameof(categories));
-            ClientUtilities.AssertNotNull(categoryScores, nameof(categoryScores));
+            Argument.AssertNotNull(categories, nameof(categories));
+            Argument.AssertNotNull(categoryScores, nameof(categoryScores));
 
             Flagged = flagged;
             Categories = categories;

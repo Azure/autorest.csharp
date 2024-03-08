@@ -7,7 +7,6 @@
 
 using System;
 using System.Text.Json;
-using Azure.Core;
 
 namespace MgmtMockAndSample.Models
 {
@@ -19,8 +18,8 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<SenderAuthorization> authorization = default;
-            Optional<Guid> tenantId = default;
+            SenderAuthorization authorization = default;
+            Guid? tenantId = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("authorization"u8))
@@ -42,7 +41,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new EventData(authorization.Value, Optional.ToNullable(tenantId));
+            return new EventData(authorization, tenantId);
         }
     }
 }

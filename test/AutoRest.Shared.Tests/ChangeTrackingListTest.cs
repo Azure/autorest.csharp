@@ -3,9 +3,10 @@
 
 using System;
 using System.Linq;
+using FirstTestTypeSpec;
 using NUnit.Framework;
 
-namespace Azure.Core.Tests
+namespace Autorest.CSharp.Tests
 {
     public class ChangeTrackingListTest
     {

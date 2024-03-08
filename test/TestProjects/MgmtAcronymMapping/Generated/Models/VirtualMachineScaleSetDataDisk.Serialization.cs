@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtAcronymMapping;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -63,15 +64,15 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<string> name = default;
+            string name = default;
             int lun = default;
-            Optional<CachingType> caching = default;
-            Optional<bool> writeAcceleratorEnabled = default;
+            CachingType? caching = default;
+            bool? writeAcceleratorEnabled = default;
             DiskCreateOptionType createOption = default;
-            Optional<int> diskSizeGB = default;
-            Optional<VirtualMachineScaleSetManagedDiskParameters> managedDisk = default;
-            Optional<long> diskIOPSReadWrite = default;
-            Optional<long> diskMBpsReadWrite = default;
+            int? diskSizeGB = default;
+            VirtualMachineScaleSetManagedDiskParameters managedDisk = default;
+            long? diskIOPSReadWrite = default;
+            long? diskMBpsReadWrite = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -144,7 +145,16 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetDataDisk(name.Value, lun, Optional.ToNullable(caching), Optional.ToNullable(writeAcceleratorEnabled), createOption, Optional.ToNullable(diskSizeGB), managedDisk.Value, Optional.ToNullable(diskIOPSReadWrite), Optional.ToNullable(diskMBpsReadWrite));
+            return new VirtualMachineScaleSetDataDisk(
+                name,
+                lun,
+                caching,
+                writeAcceleratorEnabled,
+                createOption,
+                diskSizeGB,
+                managedDisk,
+                diskIOPSReadWrite,
+                diskMBpsReadWrite);
         }
     }
 }

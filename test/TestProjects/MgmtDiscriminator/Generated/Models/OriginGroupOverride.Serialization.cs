@@ -12,6 +12,7 @@ using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -76,8 +77,8 @@ namespace MgmtDiscriminator.Models
             {
                 return null;
             }
-            Optional<WritableSubResource> originGroup = default;
-            Optional<ForwardingProtocol> forwardingProtocol = default;
+            WritableSubResource originGroup = default;
+            ForwardingProtocol? forwardingProtocol = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -106,7 +107,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new OriginGroupOverride(originGroup, Optional.ToNullable(forwardingProtocol), serializedAdditionalRawData);
+            return new OriginGroupOverride(originGroup, forwardingProtocol, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

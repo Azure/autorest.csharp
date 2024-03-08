@@ -8,6 +8,7 @@
 using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Storage;
 
 namespace Azure.ResourceManager.Storage.Models
 {
@@ -35,9 +36,9 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Optional<bool> enabled = default;
-            Optional<DateTimeOffset> lastEnabledTime = default;
-            Optional<KeyType> keyType = default;
+            bool? enabled = default;
+            DateTimeOffset? lastEnabledTime = default;
+            KeyType? keyType = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("enabled"u8))
@@ -68,7 +69,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new EncryptionService(Optional.ToNullable(enabled), Optional.ToNullable(lastEnabledTime), Optional.ToNullable(keyType));
+            return new EncryptionService(enabled, lastEnabledTime, keyType);
         }
     }
 }

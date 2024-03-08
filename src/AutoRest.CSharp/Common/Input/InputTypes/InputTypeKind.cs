@@ -31,6 +31,7 @@ internal enum InputTypeKind
     Guid,
     Int32,
     Int64,
+    SafeInt,
     IPAddress,
     Object,
     RequestMethod,

@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using NameConflicts;
 
 namespace NameConflicts.Models
 {
@@ -29,7 +30,7 @@ namespace NameConflicts.Models
             {
                 return null;
             }
-            Optional<string> property = default;
+            string property = default;
             foreach (var property0 in element.EnumerateObject())
             {
                 if (property0.NameEquals("property"u8))
@@ -38,7 +39,7 @@ namespace NameConflicts.Models
                     continue;
                 }
             }
-            return new HttpMessage(property.Value);
+            return new HttpMessage(property);
         }
     }
 }

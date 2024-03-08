@@ -134,8 +134,8 @@ namespace _Type.Union
 
         /// <param name="prop"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/StringExtensibleNamed.xml" path="doc/members/member[@name='SendAsync(SendRequest2Prop,CancellationToken)']/*" />
-        public virtual async Task<Response> SendAsync(SendRequest2Prop prop, CancellationToken cancellationToken = default)
+        /// <include file="Docs/StringExtensibleNamed.xml" path="doc/members/member[@name='SendAsync(StringExtensibleNamedUnion,CancellationToken)']/*" />
+        public virtual async Task<Response> SendAsync(StringExtensibleNamedUnion prop, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             SendRequest2 sendRequest2 = new SendRequest2(prop);
@@ -145,8 +145,8 @@ namespace _Type.Union
 
         /// <param name="prop"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/StringExtensibleNamed.xml" path="doc/members/member[@name='Send(SendRequest2Prop,CancellationToken)']/*" />
-        public virtual Response Send(SendRequest2Prop prop, CancellationToken cancellationToken = default)
+        /// <include file="Docs/StringExtensibleNamed.xml" path="doc/members/member[@name='Send(StringExtensibleNamedUnion,CancellationToken)']/*" />
+        public virtual Response Send(StringExtensibleNamedUnion prop, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             SendRequest2 sendRequest2 = new SendRequest2(prop);
@@ -164,7 +164,7 @@ namespace _Type.Union
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SendAsync(SendRequest2Prop,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SendAsync(StringExtensibleNamedUnion,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -203,7 +203,7 @@ namespace _Type.Union
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Send(SendRequest2Prop,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Send(StringExtensibleNamedUnion,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

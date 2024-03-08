@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace Azure.Storage.Tables.Models
 {
@@ -18,10 +17,10 @@ namespace Azure.Storage.Tables.Models
             {
                 return null;
             }
-            Optional<string> tableName = default;
-            Optional<string> odataType = default;
-            Optional<string> odataId = default;
-            Optional<string> odataEditLink = default;
+            string tableName = default;
+            string odataType = default;
+            string odataId = default;
+            string odataEditLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("TableName"u8))
@@ -45,7 +44,7 @@ namespace Azure.Storage.Tables.Models
                     continue;
                 }
             }
-            return new TableResponseProperties(tableName.Value, odataType.Value, odataId.Value, odataEditLink.Value);
+            return new TableResponseProperties(tableName, odataType, odataId, odataEditLink);
         }
     }
 }

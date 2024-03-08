@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
@@ -20,7 +19,7 @@ namespace CognitiveServices.TextAnalytics.Models
             }
             WarningCodeValue code = default;
             string message = default;
-            Optional<string> targetRef = default;
+            string targetRef = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("code"u8))
@@ -39,7 +38,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            return new TextAnalyticsWarning(code, message, targetRef.Value);
+            return new TextAnalyticsWarning(code, message, targetRef);
         }
     }
 }

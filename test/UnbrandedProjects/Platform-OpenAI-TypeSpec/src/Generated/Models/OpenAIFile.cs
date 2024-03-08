@@ -3,8 +3,8 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.Collections.Generic;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -56,9 +56,9 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="filename"/> or <paramref name="purpose"/> is null. </exception>
         internal OpenAIFile(string id, long bytes, DateTimeOffset createdAt, string filename, string purpose, OpenAIFileStatus status)
         {
-            ClientUtilities.AssertNotNull(id, nameof(id));
-            ClientUtilities.AssertNotNull(filename, nameof(filename));
-            ClientUtilities.AssertNotNull(purpose, nameof(purpose));
+            Argument.AssertNotNull(id, nameof(id));
+            Argument.AssertNotNull(filename, nameof(filename));
+            Argument.AssertNotNull(purpose, nameof(purpose));
 
             Id = id;
             Bytes = bytes;

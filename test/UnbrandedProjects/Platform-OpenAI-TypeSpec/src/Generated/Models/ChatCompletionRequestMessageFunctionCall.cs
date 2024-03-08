@@ -3,8 +3,8 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.Collections.Generic;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -53,8 +53,8 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="arguments"/> is null. </exception>
         public ChatCompletionRequestMessageFunctionCall(string name, string arguments)
         {
-            ClientUtilities.AssertNotNull(name, nameof(name));
-            ClientUtilities.AssertNotNull(arguments, nameof(arguments));
+            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(arguments, nameof(arguments));
 
             Name = name;
             Arguments = arguments;

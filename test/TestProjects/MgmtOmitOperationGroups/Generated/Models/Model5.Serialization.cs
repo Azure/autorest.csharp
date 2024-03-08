@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using MgmtOmitOperationGroups;
 
 namespace MgmtOmitOperationGroups.Models
 {
@@ -40,9 +41,9 @@ namespace MgmtOmitOperationGroups.Models
             {
                 return null;
             }
-            Optional<string> id = default;
-            Optional<string> k = default;
-            Optional<IList<ModelQ>> modelqs = default;
+            string id = default;
+            string k = default;
+            IList<ModelQ> modelqs = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -70,7 +71,7 @@ namespace MgmtOmitOperationGroups.Models
                     continue;
                 }
             }
-            return new Model5(id.Value, k.Value, Optional.ToList(modelqs));
+            return new Model5(id, k, modelqs ?? new ChangeTrackingList<ModelQ>());
         }
     }
 }

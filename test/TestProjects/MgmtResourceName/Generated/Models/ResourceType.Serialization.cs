@@ -7,7 +7,7 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
+using MgmtResourceName;
 
 namespace MgmtResourceName.Models
 {
@@ -19,9 +19,9 @@ namespace MgmtResourceName.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> displayName = default;
-            Optional<IReadOnlyList<ResourceOperation>> operations = default;
+            string name = default;
+            string displayName = default;
+            IReadOnlyList<ResourceOperation> operations = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -49,7 +49,7 @@ namespace MgmtResourceName.Models
                     continue;
                 }
             }
-            return new ResourceType(name.Value, displayName.Value, Optional.ToList(operations));
+            return new ResourceType(name, displayName, operations ?? new ChangeTrackingList<ResourceOperation>());
         }
     }
 }

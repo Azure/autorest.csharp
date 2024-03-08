@@ -27,7 +27,16 @@ namespace validation.Models
         {
             displayNames ??= new List<string>();
 
-            return new Product(displayNames?.ToList(), capacity, image, child, constChild, constInt, constString, constStringAsEnum, serializedAdditionalRawData: null);
+            return new Product(
+                displayNames?.ToList(),
+                capacity,
+                image,
+                child,
+                constChild,
+                constInt,
+                constString,
+                constStringAsEnum,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ChildProduct"/>. </summary>

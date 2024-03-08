@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 using MgmtExtensionResource;
 
 namespace MgmtExtensionResource.Models
@@ -20,8 +19,8 @@ namespace MgmtExtensionResource.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<PolicyDefinitionData>> value = default;
-            Optional<string> nextLink = default;
+            IReadOnlyList<PolicyDefinitionData> value = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -44,7 +43,7 @@ namespace MgmtExtensionResource.Models
                     continue;
                 }
             }
-            return new PolicyDefinitionListResult(Optional.ToList(value), nextLink.Value);
+            return new PolicyDefinitionListResult(value ?? new ChangeTrackingList<PolicyDefinitionData>(), nextLink);
         }
     }
 }

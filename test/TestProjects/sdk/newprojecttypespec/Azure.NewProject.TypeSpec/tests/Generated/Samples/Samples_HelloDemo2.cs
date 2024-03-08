@@ -138,13 +138,20 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HelloDemo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
-            RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum[] { StringFixedEnum.One }, new Dictionary<string, StringExtensibleEnum>
-            {
-                ["key"] = StringExtensibleEnum.One
-            }, new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>"), BinaryData.FromObjectAsJson(new object()), new Dictionary<string, BinaryData>
-            {
-                ["key"] = BinaryData.FromObjectAsJson(new object())
-            });
+            RoundTripModel action = new RoundTripModel(
+                "<requiredString>",
+                1234,
+                new StringFixedEnum[] { StringFixedEnum.One },
+                new Dictionary<string, StringExtensibleEnum>
+                {
+                    ["key"] = StringExtensibleEnum.One
+                },
+                new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>"),
+                BinaryData.FromObjectAsJson(new object()),
+                new Dictionary<string, BinaryData>
+                {
+                    ["key"] = BinaryData.FromObjectAsJson(new object())
+                });
             Response<RoundTripModel> response = client.HelloAgain("<p2>", "<p1>", action);
         }
 
@@ -156,13 +163,20 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HelloDemo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
-            RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum[] { StringFixedEnum.One }, new Dictionary<string, StringExtensibleEnum>
-            {
-                ["key"] = StringExtensibleEnum.One
-            }, new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>"), BinaryData.FromObjectAsJson(new object()), new Dictionary<string, BinaryData>
-            {
-                ["key"] = BinaryData.FromObjectAsJson(new object())
-            });
+            RoundTripModel action = new RoundTripModel(
+                "<requiredString>",
+                1234,
+                new StringFixedEnum[] { StringFixedEnum.One },
+                new Dictionary<string, StringExtensibleEnum>
+                {
+                    ["key"] = StringExtensibleEnum.One
+                },
+                new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>"),
+                BinaryData.FromObjectAsJson(new object()),
+                new Dictionary<string, BinaryData>
+                {
+                    ["key"] = BinaryData.FromObjectAsJson(new object())
+                });
             Response<RoundTripModel> response = await client.HelloAgainAsync("<p2>", "<p1>", action);
         }
 
@@ -376,19 +390,26 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HelloDemo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
-            RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum[] { StringFixedEnum.One }, new Dictionary<string, StringExtensibleEnum>
-            {
-                ["key"] = StringExtensibleEnum.One
-            }, new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>")
-            {
-                OptionalLiteralString = ThingOptionalLiteralString.Reject,
-                OptionalLiteralInt = ThingOptionalLiteralInt._456,
-                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
-                OptionalLiteralBool = true,
-            }, BinaryData.FromObjectAsJson(new object()), new Dictionary<string, BinaryData>
-            {
-                ["key"] = BinaryData.FromObjectAsJson(new object())
-            })
+            RoundTripModel action = new RoundTripModel(
+                "<requiredString>",
+                1234,
+                new StringFixedEnum[] { StringFixedEnum.One },
+                new Dictionary<string, StringExtensibleEnum>
+                {
+                    ["key"] = StringExtensibleEnum.One
+                },
+                new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>")
+                {
+                    OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                    OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                    OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+                    OptionalLiteralBool = true,
+                },
+                BinaryData.FromObjectAsJson(new object()),
+                new Dictionary<string, BinaryData>
+                {
+                    ["key"] = BinaryData.FromObjectAsJson(new object())
+                })
             {
                 IntExtensibleEnum = IntExtensibleEnum.One,
                 IntExtensibleEnumCollection = { IntExtensibleEnum.One },
@@ -416,19 +437,26 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HelloDemo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
-            RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum[] { StringFixedEnum.One }, new Dictionary<string, StringExtensibleEnum>
-            {
-                ["key"] = StringExtensibleEnum.One
-            }, new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>")
-            {
-                OptionalLiteralString = ThingOptionalLiteralString.Reject,
-                OptionalLiteralInt = ThingOptionalLiteralInt._456,
-                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
-                OptionalLiteralBool = true,
-            }, BinaryData.FromObjectAsJson(new object()), new Dictionary<string, BinaryData>
-            {
-                ["key"] = BinaryData.FromObjectAsJson(new object())
-            })
+            RoundTripModel action = new RoundTripModel(
+                "<requiredString>",
+                1234,
+                new StringFixedEnum[] { StringFixedEnum.One },
+                new Dictionary<string, StringExtensibleEnum>
+                {
+                    ["key"] = StringExtensibleEnum.One
+                },
+                new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>")
+                {
+                    OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                    OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                    OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+                    OptionalLiteralBool = true,
+                },
+                BinaryData.FromObjectAsJson(new object()),
+                new Dictionary<string, BinaryData>
+                {
+                    ["key"] = BinaryData.FromObjectAsJson(new object())
+                })
             {
                 IntExtensibleEnum = IntExtensibleEnum.One,
                 IntExtensibleEnumCollection = { IntExtensibleEnum.One },

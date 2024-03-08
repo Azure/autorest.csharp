@@ -7,7 +7,7 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -80,14 +80,19 @@ namespace MgmtDiscriminator.Models
         }
 
         /// <summary> Gets or sets the type name. </summary>
+        [WirePath("typeName")]
         public RemoteAddressMatchConditionParametersTypeName TypeName { get; set; }
         /// <summary> Describes operator to be matched. </summary>
+        [WirePath("operator")]
         public RemoteAddressOperator Operator { get; set; }
         /// <summary> Describes if this is negate condition or not. </summary>
+        [WirePath("negateCondition")]
         public bool? NegateCondition { get; set; }
         /// <summary> Match values to match against. The operator will apply to each value in here with OR semantics. If any of them match the variable with the given operator this match condition is considered a match. </summary>
+        [WirePath("matchValues")]
         public IList<string> MatchValues { get; }
         /// <summary> List of transforms. </summary>
+        [WirePath("transforms")]
         public IList<Transform> Transforms { get; }
     }
 }

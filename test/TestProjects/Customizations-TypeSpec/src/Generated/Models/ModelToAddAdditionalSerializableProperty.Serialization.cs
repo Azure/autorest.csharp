@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using CustomizationsInTsp;
 
 namespace CustomizationsInTsp.Models
 {
@@ -29,11 +30,8 @@ namespace CustomizationsInTsp.Models
             writer.WriteStartObject();
             writer.WritePropertyName("requiredInt"u8);
             WriteRequiredIntValue(writer);
-            if (Optional.IsDefined(AdditionalSerializableProperty))
-            {
-                writer.WritePropertyName("additionalSerializableProperty"u8);
-                writer.WriteNumberValue(AdditionalSerializableProperty);
-            }
+            writer.WritePropertyName("additionalSerializableProperty"u8);
+            writer.WriteNumberValue(AdditionalSerializableProperty);
             if (Optional.IsDefined(AdditionalNullableSerializableProperty))
             {
                 if (AdditionalNullableSerializableProperty != null)
@@ -92,10 +90,10 @@ namespace CustomizationsInTsp.Models
                 return null;
             }
             int requiredInt = default;
-            Optional<int> additionalSerializableProperty = default;
-            Optional<int?> additionalNullableSerializableProperty = default;
+            int additionalSerializableProperty = default;
+            int? additionalNullableSerializableProperty = default;
             int requiredIntOnBase = default;
-            Optional<int> optionalInt = default;
+            int? optionalInt = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -144,7 +142,13 @@ namespace CustomizationsInTsp.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ModelToAddAdditionalSerializableProperty(requiredIntOnBase, Optional.ToNullable(optionalInt), serializedAdditionalRawData, requiredInt, additionalSerializableProperty, Optional.ToNullable(additionalNullableSerializableProperty));
+            return new ModelToAddAdditionalSerializableProperty(
+                requiredIntOnBase,
+                optionalInt,
+                serializedAdditionalRawData,
+                requiredInt,
+                additionalSerializableProperty,
+                additionalNullableSerializableProperty);
         }
 
         BinaryData IPersistableModel<ModelToAddAdditionalSerializableProperty>.Write(ModelReaderWriterOptions options)

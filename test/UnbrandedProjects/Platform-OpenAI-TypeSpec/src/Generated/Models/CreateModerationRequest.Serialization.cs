@@ -7,6 +7,7 @@ using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -32,7 +33,7 @@ namespace OpenAI.Models
                 JsonSerializer.Serialize(writer, document.RootElement);
             }
 #endif
-            if (OptionalProperty.IsDefined(Model))
+            if (Optional.IsDefined(Model))
             {
                 writer.WritePropertyName("model"u8);
                 writer.WriteStringValue(Model.Value.ToString());
@@ -76,7 +77,7 @@ namespace OpenAI.Models
                 return null;
             }
             BinaryData input = default;
-            OptionalProperty<CreateModerationRequestModel> model = default;
+            CreateModerationRequestModel? model = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -101,7 +102,7 @@ namespace OpenAI.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new CreateModerationRequest(input, OptionalProperty.ToNullable(model), serializedAdditionalRawData);
+            return new CreateModerationRequest(input, model, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<CreateModerationRequest>.Write(ModelReaderWriterOptions options)

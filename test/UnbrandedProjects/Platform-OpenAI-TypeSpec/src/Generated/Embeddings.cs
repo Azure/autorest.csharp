@@ -53,7 +53,7 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="embedding"/> is null. </exception>
         public virtual async Task<Result<CreateEmbeddingResponse>> CreateAsync(CreateEmbeddingRequest embedding, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNull(embedding, nameof(embedding));
+            Argument.AssertNotNull(embedding, nameof(embedding));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             using RequestBody content = embedding.ToRequestBody();
@@ -67,7 +67,7 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="embedding"/> is null. </exception>
         public virtual Result<CreateEmbeddingResponse> Create(CreateEmbeddingRequest embedding, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNull(embedding, nameof(embedding));
+            Argument.AssertNotNull(embedding, nameof(embedding));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             using RequestBody content = embedding.ToRequestBody();
@@ -97,7 +97,7 @@ namespace OpenAI
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> CreateAsync(RequestBody content, RequestOptions context = null)
         {
-            ClientUtilities.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("Embeddings.Create");
             scope.Start();
@@ -135,7 +135,7 @@ namespace OpenAI
         /// <returns> The response returned from the service. </returns>
         public virtual Result Create(RequestBody content, RequestOptions context = null)
         {
-            ClientUtilities.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("Embeddings.Create");
             scope.Start();

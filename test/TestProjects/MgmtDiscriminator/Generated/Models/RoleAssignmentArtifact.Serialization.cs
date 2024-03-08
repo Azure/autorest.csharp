@@ -12,6 +12,7 @@ using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -111,10 +112,10 @@ namespace MgmtDiscriminator.Models
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
+            SystemData systemData = default;
             string roleDefinitionId = default;
             BinaryData principalIds = default;
-            Optional<string> resourceGroup = default;
+            string resourceGroup = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -181,7 +182,16 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new RoleAssignmentArtifact(id, name, type, systemData.Value, kind, serializedAdditionalRawData, roleDefinitionId, principalIds, resourceGroup.Value);
+            return new RoleAssignmentArtifact(
+                id,
+                name,
+                type,
+                systemData,
+                kind,
+                serializedAdditionalRawData,
+                roleDefinitionId,
+                principalIds,
+                resourceGroup);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -203,11 +213,8 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            if (Optional.IsDefined(Kind))
-            {
-                builder.Append("  kind:");
-                builder.AppendLine($" '{Kind.ToString()}'");
-            }
+            builder.Append("  kind:");
+            builder.AppendLine($" '{Kind.ToString()}'");
 
             if (Optional.IsDefined(Id))
             {

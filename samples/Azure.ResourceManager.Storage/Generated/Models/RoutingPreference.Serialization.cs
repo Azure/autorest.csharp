@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Storage;
 
 namespace Azure.ResourceManager.Storage.Models
 {
@@ -39,9 +40,9 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Optional<RoutingChoice> routingChoice = default;
-            Optional<bool> publishMicrosoftEndpoints = default;
-            Optional<bool> publishInternetEndpoints = default;
+            RoutingChoice? routingChoice = default;
+            bool? publishMicrosoftEndpoints = default;
+            bool? publishInternetEndpoints = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("routingChoice"u8))
@@ -72,7 +73,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new RoutingPreference(Optional.ToNullable(routingChoice), Optional.ToNullable(publishMicrosoftEndpoints), Optional.ToNullable(publishInternetEndpoints));
+            return new RoutingPreference(routingChoice, publishMicrosoftEndpoints, publishInternetEndpoints);
         }
     }
 }

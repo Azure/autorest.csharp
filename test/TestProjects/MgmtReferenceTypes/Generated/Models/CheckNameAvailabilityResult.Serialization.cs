@@ -9,6 +9,7 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
+using MgmtReferenceTypes;
 
 namespace Azure.ResourceManager.Fake.Models
 {
@@ -42,9 +43,9 @@ namespace Azure.ResourceManager.Fake.Models
             {
                 return null;
             }
-            Optional<bool> nameAvailable = default;
-            Optional<CheckNameAvailabilityReason> reason = default;
-            Optional<string> message = default;
+            bool? nameAvailable = default;
+            CheckNameAvailabilityReason? reason = default;
+            string message = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("nameAvailable"u8))
@@ -71,7 +72,7 @@ namespace Azure.ResourceManager.Fake.Models
                     continue;
                 }
             }
-            return new CheckNameAvailabilityResult(Optional.ToNullable(nameAvailable), Optional.ToNullable(reason), message.Value);
+            return new CheckNameAvailabilityResult(nameAvailable, reason, message);
         }
 
         internal partial class CheckNameAvailabilityResultConverter : JsonConverter<CheckNameAvailabilityResult>

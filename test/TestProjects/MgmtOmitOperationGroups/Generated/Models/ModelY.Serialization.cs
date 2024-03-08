@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtOmitOperationGroups;
 
 namespace MgmtOmitOperationGroups.Models
 {
@@ -29,7 +30,7 @@ namespace MgmtOmitOperationGroups.Models
             {
                 return null;
             }
-            Optional<string> e = default;
+            string e = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("e"u8))
@@ -38,7 +39,7 @@ namespace MgmtOmitOperationGroups.Models
                     continue;
                 }
             }
-            return new ModelY(e.Value);
+            return new ModelY(e);
         }
     }
 }

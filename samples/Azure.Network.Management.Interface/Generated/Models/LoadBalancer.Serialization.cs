@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Network.Management.Interface;
 
 namespace Azure.Network.Management.Interface.Models
 {
@@ -124,22 +125,22 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<LoadBalancerSku> sku = default;
-            Optional<string> etag = default;
-            Optional<string> id = default;
-            Optional<string> name = default;
-            Optional<string> type = default;
-            Optional<string> location = default;
-            Optional<IDictionary<string, string>> tags = default;
-            Optional<IList<FrontendIPConfiguration>> frontendIPConfigurations = default;
-            Optional<IList<BackendAddressPool>> backendAddressPools = default;
-            Optional<IList<LoadBalancingRule>> loadBalancingRules = default;
-            Optional<IList<Probe>> probes = default;
-            Optional<IList<InboundNatRule>> inboundNatRules = default;
-            Optional<IList<InboundNatPool>> inboundNatPools = default;
-            Optional<IList<OutboundRule>> outboundRules = default;
-            Optional<string> resourceGuid = default;
-            Optional<ProvisioningState> provisioningState = default;
+            LoadBalancerSku sku = default;
+            string etag = default;
+            string id = default;
+            string name = default;
+            string type = default;
+            string location = default;
+            IDictionary<string, string> tags = default;
+            IList<FrontendIPConfiguration> frontendIPConfigurations = default;
+            IList<BackendAddressPool> backendAddressPools = default;
+            IList<LoadBalancingRule> loadBalancingRules = default;
+            IList<Probe> probes = default;
+            IList<InboundNatRule> inboundNatRules = default;
+            IList<InboundNatPool> inboundNatPools = default;
+            IList<OutboundRule> outboundRules = default;
+            string resourceGuid = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sku"u8))
@@ -315,7 +316,23 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new LoadBalancer(id.Value, name.Value, type.Value, location.Value, Optional.ToDictionary(tags), sku.Value, etag.Value, Optional.ToList(frontendIPConfigurations), Optional.ToList(backendAddressPools), Optional.ToList(loadBalancingRules), Optional.ToList(probes), Optional.ToList(inboundNatRules), Optional.ToList(inboundNatPools), Optional.ToList(outboundRules), resourceGuid.Value, Optional.ToNullable(provisioningState));
+            return new LoadBalancer(
+                id,
+                name,
+                type,
+                location,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                sku,
+                etag,
+                frontendIPConfigurations ?? new ChangeTrackingList<FrontendIPConfiguration>(),
+                backendAddressPools ?? new ChangeTrackingList<BackendAddressPool>(),
+                loadBalancingRules ?? new ChangeTrackingList<LoadBalancingRule>(),
+                probes ?? new ChangeTrackingList<Probe>(),
+                inboundNatRules ?? new ChangeTrackingList<InboundNatRule>(),
+                inboundNatPools ?? new ChangeTrackingList<InboundNatPool>(),
+                outboundRules ?? new ChangeTrackingList<OutboundRule>(),
+                resourceGuid,
+                provisioningState);
         }
     }
 }

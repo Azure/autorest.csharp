@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
@@ -34,8 +35,8 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<FirewallPolicyIntrusionDetectionStateType> mode = default;
-            Optional<FirewallPolicyIntrusionDetectionConfiguration> configuration = default;
+            FirewallPolicyIntrusionDetectionStateType? mode = default;
+            FirewallPolicyIntrusionDetectionConfiguration configuration = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("mode"u8))
@@ -57,7 +58,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new FirewallPolicyIntrusionDetection(Optional.ToNullable(mode), configuration.Value);
+            return new FirewallPolicyIntrusionDetection(mode, configuration);
         }
     }
 }

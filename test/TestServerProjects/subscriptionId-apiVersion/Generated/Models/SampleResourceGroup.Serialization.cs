@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using subscriptionId_apiVersion;
 
 namespace subscriptionId_apiVersion.Models
 {
@@ -74,8 +75,8 @@ namespace subscriptionId_apiVersion.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> location = default;
+            string name = default;
+            string location = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -96,7 +97,7 @@ namespace subscriptionId_apiVersion.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new SampleResourceGroup(name.Value, location.Value, serializedAdditionalRawData);
+            return new SampleResourceGroup(name, location, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<SampleResourceGroup>.Write(ModelReaderWriterOptions options)

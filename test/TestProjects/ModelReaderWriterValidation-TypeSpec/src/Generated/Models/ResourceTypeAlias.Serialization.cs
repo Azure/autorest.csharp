@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using ModelReaderWriterValidationTypeSpec;
 
 namespace ModelReaderWriterValidationTypeSpec.Models
 {
@@ -100,12 +101,12 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<IReadOnlyList<ResourceTypeAliasPath>> paths = default;
-            Optional<ResourceTypeAliasType> aliasType = default;
-            Optional<string> defaultPath = default;
-            Optional<ResourceTypeAliasPattern> defaultPattern = default;
-            Optional<ResourceTypeAliasPathMetadata> defaultMetadata = default;
+            string name = default;
+            IReadOnlyList<ResourceTypeAliasPath> paths = default;
+            ResourceTypeAliasType? aliasType = default;
+            string defaultPath = default;
+            ResourceTypeAliasPattern defaultPattern = default;
+            ResourceTypeAliasPathMetadata defaultMetadata = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -124,7 +125,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                     List<ResourceTypeAliasPath> array = new List<ResourceTypeAliasPath>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ResourceTypeAliasPath.DeserializeResourceTypeAliasPath(item));
+                        array.Add(ResourceTypeAliasPath.DeserializeResourceTypeAliasPath(item, options));
                     }
                     paths = array;
                     continue;
@@ -149,7 +150,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                     {
                         continue;
                     }
-                    defaultPattern = ResourceTypeAliasPattern.DeserializeResourceTypeAliasPattern(property.Value);
+                    defaultPattern = ResourceTypeAliasPattern.DeserializeResourceTypeAliasPattern(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("defaultMetadata"u8))
@@ -158,7 +159,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                     {
                         continue;
                     }
-                    defaultMetadata = ResourceTypeAliasPathMetadata.DeserializeResourceTypeAliasPathMetadata(property.Value);
+                    defaultMetadata = ResourceTypeAliasPathMetadata.DeserializeResourceTypeAliasPathMetadata(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")
@@ -167,7 +168,14 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ResourceTypeAlias(name.Value, Optional.ToList(paths), Optional.ToNullable(aliasType), defaultPath.Value, defaultPattern.Value, defaultMetadata.Value, serializedAdditionalRawData);
+            return new ResourceTypeAlias(
+                name,
+                paths ?? new ChangeTrackingList<ResourceTypeAliasPath>(),
+                aliasType,
+                defaultPath,
+                defaultPattern,
+                defaultMetadata,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ResourceTypeAlias>.Write(ModelReaderWriterOptions options)

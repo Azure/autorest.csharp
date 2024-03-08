@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -77,9 +78,9 @@ namespace MgmtDiscriminator.Models
             {
                 return null;
             }
-            Optional<string> meow = default;
+            string meow = default;
             PetKind kind = default;
-            Optional<string> id = default;
+            string id = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -105,7 +106,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Cat(kind, id.Value, serializedAdditionalRawData, meow.Value);
+            return new Cat(kind, id, serializedAdditionalRawData, meow);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -127,11 +128,8 @@ namespace MgmtDiscriminator.Models
                 }
             }
 
-            if (Optional.IsDefined(Kind))
-            {
-                builder.Append("  kind:");
-                builder.AppendLine($" '{Kind.ToSerialString()}'");
-            }
+            builder.Append("  kind:");
+            builder.AppendLine($" '{Kind.ToSerialString()}'");
 
             if (Optional.IsDefined(Id))
             {

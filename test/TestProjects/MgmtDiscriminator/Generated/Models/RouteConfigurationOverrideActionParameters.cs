@@ -69,8 +69,10 @@ namespace MgmtDiscriminator.Models
         }
 
         /// <summary> Gets or sets the type name. </summary>
+        [WirePath("typeName")]
         public RouteConfigurationOverrideActionParametersTypeName TypeName { get; set; }
         /// <summary> A reference to the origin group override configuration. Leave empty to use the default origin group on route. </summary>
+        [WirePath("originGroupOverride")]
         public OriginGroupOverride OriginGroupOverride { get; set; }
     }
 }

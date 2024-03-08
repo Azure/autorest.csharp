@@ -3,8 +3,8 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.Collections.Generic;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -51,7 +51,7 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
         public CreateImageVariationRequest(BinaryData image)
         {
-            ClientUtilities.AssertNotNull(image, nameof(image));
+            Argument.AssertNotNull(image, nameof(image));
 
             Image = image;
         }

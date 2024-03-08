@@ -5,16 +5,29 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class ImageStorageProfile : IUtf8JsonSerializable
+    public partial class ImageStorageProfile : IUtf8JsonSerializable, IJsonModel<ImageStorageProfile>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ImageStorageProfile>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<ImageStorageProfile>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<ImageStorageProfile>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(ImageStorageProfile)} does not support '{format}' format.");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(OSDisk))
             {
@@ -36,18 +49,49 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("zoneResilient"u8);
                 writer.WriteBooleanValue(ZoneResilient.Value);
             }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static ImageStorageProfile DeserializeImageStorageProfile(JsonElement element)
+        ImageStorageProfile IJsonModel<ImageStorageProfile>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<ImageStorageProfile>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(ImageStorageProfile)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeImageStorageProfile(document.RootElement, options);
+        }
+
+        internal static ImageStorageProfile DeserializeImageStorageProfile(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
-            Optional<ImageOSDisk> osDisk = default;
-            Optional<IList<ImageDataDisk>> dataDisks = default;
-            Optional<bool> zoneResilient = default;
+            ImageOSDisk osDisk = default;
+            IList<ImageDataDisk> dataDisks = default;
+            bool? zoneResilient = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("osDisk"u8))
@@ -56,7 +100,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    osDisk = ImageOSDisk.DeserializeImageOSDisk(property.Value);
+                    osDisk = ImageOSDisk.DeserializeImageOSDisk(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("dataDisks"u8))
@@ -68,7 +112,7 @@ namespace Azure.ResourceManager.Sample.Models
                     List<ImageDataDisk> array = new List<ImageDataDisk>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ImageDataDisk.DeserializeImageDataDisk(item));
+                        array.Add(ImageDataDisk.DeserializeImageDataDisk(item, options));
                     }
                     dataDisks = array;
                     continue;
@@ -82,8 +126,119 @@ namespace Azure.ResourceManager.Sample.Models
                     zoneResilient = property.Value.GetBoolean();
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new ImageStorageProfile(osDisk.Value, Optional.ToList(dataDisks), Optional.ToNullable(zoneResilient));
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new ImageStorageProfile(osDisk, dataDisks ?? new ChangeTrackingList<ImageDataDisk>(), zoneResilient, serializedAdditionalRawData);
         }
+
+        private BinaryData SerializeBicep(ModelReaderWriterOptions options)
+        {
+            StringBuilder builder = new StringBuilder();
+            builder.AppendLine("{");
+
+            if (Optional.IsDefined(OSDisk))
+            {
+                builder.Append("  osDisk:");
+                AppendChildObject(builder, OSDisk, options, 2, false);
+            }
+
+            if (Optional.IsCollectionDefined(DataDisks))
+            {
+                if (DataDisks.Any())
+                {
+                    builder.Append("  dataDisks:");
+                    builder.AppendLine(" [");
+                    foreach (var item in DataDisks)
+                    {
+                        AppendChildObject(builder, item, options, 4, true);
+                    }
+                    builder.AppendLine("  ]");
+                }
+            }
+
+            if (Optional.IsDefined(ZoneResilient))
+            {
+                builder.Append("  zoneResilient:");
+                var boolValue = ZoneResilient.Value == true ? "true" : "false";
+                builder.AppendLine($" {boolValue}");
+            }
+
+            builder.AppendLine("}");
+            return BinaryData.FromString(builder.ToString());
+        }
+
+        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine)
+        {
+            string indent = new string(' ', spaces);
+            BinaryData data = ModelReaderWriter.Write(childObject, options);
+            string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            bool inMultilineString = false;
+            for (int i = 0; i < lines.Length; i++)
+            {
+                string line = lines[i];
+                if (inMultilineString)
+                {
+                    if (line.Contains("'''"))
+                    {
+                        inMultilineString = false;
+                    }
+                    stringBuilder.AppendLine(line);
+                    continue;
+                }
+                if (line.Contains("'''"))
+                {
+                    inMultilineString = true;
+                    stringBuilder.AppendLine($"{indent}{line}");
+                    continue;
+                }
+                if (i == 0 && !indentFirstLine)
+                {
+                    stringBuilder.AppendLine($" {line}");
+                }
+                else
+                {
+                    stringBuilder.AppendLine($"{indent}{line}");
+                }
+            }
+        }
+
+        BinaryData IPersistableModel<ImageStorageProfile>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<ImageStorageProfile>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                case "bicep":
+                    return SerializeBicep(options);
+                default:
+                    throw new FormatException($"The model {nameof(ImageStorageProfile)} does not support '{options.Format}' format.");
+            }
+        }
+
+        ImageStorageProfile IPersistableModel<ImageStorageProfile>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<ImageStorageProfile>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeImageStorageProfile(document.RootElement, options);
+                    }
+                case "bicep":
+                    throw new InvalidOperationException("Bicep deserialization is not supported for this type.");
+                default:
+                    throw new FormatException($"The model {nameof(ImageStorageProfile)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<ImageStorageProfile>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

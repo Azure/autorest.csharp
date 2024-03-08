@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -18,9 +17,9 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<string> resourceType = default;
-            Optional<MgmtAcronymMappingSku> sku = default;
-            Optional<VirtualMachineScaleSetSkuCapacity> capacity = default;
+            string resourceType = default;
+            MgmtAcronymMappingSku sku = default;
+            VirtualMachineScaleSetSkuCapacity capacity = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("resourceType"u8))
@@ -47,7 +46,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetSku(resourceType.Value, sku.Value, capacity.Value);
+            return new VirtualMachineScaleSetSku(resourceType, sku, capacity);
         }
     }
 }

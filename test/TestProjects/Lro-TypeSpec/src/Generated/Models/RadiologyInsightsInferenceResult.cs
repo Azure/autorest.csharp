@@ -7,9 +7,9 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
+using lrotsp;
 
-namespace lro.Models
+namespace lrotsp.Models
 {
     /// <summary> The inference results for the Radiology Insights request. </summary>
     public partial class RadiologyInsightsInferenceResult

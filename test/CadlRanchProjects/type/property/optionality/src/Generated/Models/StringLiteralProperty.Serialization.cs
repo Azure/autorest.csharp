@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using _Type.Property.Optionality;
 
 namespace _Type.Property.Optionality.Models
 {
@@ -70,7 +71,7 @@ namespace _Type.Property.Optionality.Models
             {
                 return null;
             }
-            Optional<StringLiteralPropertyProperty> property = default;
+            StringLiteralPropertyProperty? property = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property0 in element.EnumerateObject())
@@ -90,7 +91,7 @@ namespace _Type.Property.Optionality.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new StringLiteralProperty(Optional.ToNullable(property), serializedAdditionalRawData);
+            return new StringLiteralProperty(property, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<StringLiteralProperty>.Write(ModelReaderWriterOptions options)

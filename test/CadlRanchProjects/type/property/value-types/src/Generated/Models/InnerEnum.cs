@@ -10,7 +10,7 @@ using System.ComponentModel;
 
 namespace _Type.Property.ValueTypes.Models
 {
-    /// <summary> Enum that will be used as a property for model EnumProperty. Non-extensible. </summary>
+    /// <summary> Enum that will be used as a property for model EnumProperty. Extensible. </summary>
     public readonly partial struct InnerEnum : IEquatable<InnerEnum>
     {
         private readonly string _value;

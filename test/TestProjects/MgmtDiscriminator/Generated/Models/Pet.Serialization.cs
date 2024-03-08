@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -76,11 +77,11 @@ namespace MgmtDiscriminator.Models
             {
                 switch (discriminator.GetString())
                 {
-                    case "Cat": return Cat.DeserializeCat(element);
-                    case "Dog": return Dog.DeserializeDog(element);
+                    case "Cat": return Cat.DeserializeCat(element, options);
+                    case "Dog": return Dog.DeserializeDog(element, options);
                 }
             }
-            return UnknownPet.DeserializeUnknownPet(element);
+            return UnknownPet.DeserializeUnknownPet(element, options);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -88,11 +89,8 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Kind))
-            {
-                builder.Append("  kind:");
-                builder.AppendLine($" '{Kind.ToSerialString()}'");
-            }
+            builder.Append("  kind:");
+            builder.AppendLine($" '{Kind.ToSerialString()}'");
 
             if (Optional.IsDefined(Id))
             {

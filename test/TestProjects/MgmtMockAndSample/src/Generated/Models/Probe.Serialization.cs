@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
@@ -52,11 +53,11 @@ namespace MgmtMockAndSample.Models
                 return null;
             }
             bool disableProbe = default;
-            Optional<int> initialDelaySeconds = default;
-            Optional<int> periodSeconds = default;
-            Optional<int> timeoutSeconds = default;
-            Optional<int> failureThreshold = default;
-            Optional<int> successThreshold = default;
+            int? initialDelaySeconds = default;
+            int? periodSeconds = default;
+            int? timeoutSeconds = default;
+            int? failureThreshold = default;
+            int? successThreshold = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("disableProbe"u8))
@@ -110,7 +111,13 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new Probe(disableProbe, Optional.ToNullable(initialDelaySeconds), Optional.ToNullable(periodSeconds), Optional.ToNullable(timeoutSeconds), Optional.ToNullable(failureThreshold), Optional.ToNullable(successThreshold));
+            return new Probe(
+                disableProbe,
+                initialDelaySeconds,
+                periodSeconds,
+                timeoutSeconds,
+                failureThreshold,
+                successThreshold);
         }
     }
 }

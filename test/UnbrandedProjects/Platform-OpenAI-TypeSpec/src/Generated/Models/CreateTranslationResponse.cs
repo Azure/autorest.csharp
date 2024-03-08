@@ -3,8 +3,8 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.Collections.Generic;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -48,7 +48,7 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="text"/> is null. </exception>
         internal CreateTranslationResponse(string text)
         {
-            ClientUtilities.AssertNotNull(text, nameof(text));
+            Argument.AssertNotNull(text, nameof(text));
 
             Text = text;
         }

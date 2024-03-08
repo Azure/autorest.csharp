@@ -21,15 +21,15 @@ namespace CognitiveSearch.Models
                 return null;
             }
             IndexerExecutionStatus status = default;
-            Optional<string> errorMessage = default;
-            Optional<DateTimeOffset> startTime = default;
-            Optional<DateTimeOffset> endTime = default;
+            string errorMessage = default;
+            DateTimeOffset? startTime = default;
+            DateTimeOffset? endTime = default;
             IReadOnlyList<ItemError> errors = default;
             IReadOnlyList<ItemWarning> warnings = default;
             int itemsProcessed = default;
             int itemsFailed = default;
-            Optional<string> initialTrackingState = default;
-            Optional<string> finalTrackingState = default;
+            string initialTrackingState = default;
+            string finalTrackingState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("status"u8))
@@ -101,7 +101,17 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new IndexerExecutionResult(status, errorMessage.Value, Optional.ToNullable(startTime), Optional.ToNullable(endTime), errors, warnings, itemsProcessed, itemsFailed, initialTrackingState.Value, finalTrackingState.Value);
+            return new IndexerExecutionResult(
+                status,
+                errorMessage,
+                startTime,
+                endTime,
+                errors,
+                warnings,
+                itemsProcessed,
+                itemsFailed,
+                initialTrackingState,
+                finalTrackingState);
         }
     }
 }

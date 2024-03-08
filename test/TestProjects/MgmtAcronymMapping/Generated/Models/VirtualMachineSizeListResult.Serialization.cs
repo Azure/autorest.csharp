@@ -7,7 +7,7 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
+using MgmtAcronymMapping;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -19,7 +19,7 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<VirtualMachineSize>> value = default;
+            IReadOnlyList<VirtualMachineSize> value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -37,7 +37,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineSizeListResult(Optional.ToList(value));
+            return new VirtualMachineSizeListResult(value ?? new ChangeTrackingList<VirtualMachineSize>());
         }
     }
 }

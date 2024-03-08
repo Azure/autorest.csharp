@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -96,11 +97,11 @@ namespace MgmtDiscriminator.Models
             }
             UrlRedirectActionParametersTypeName typeName = default;
             RedirectType redirectType = default;
-            Optional<DestinationProtocol> destinationProtocol = default;
-            Optional<string> customPath = default;
-            Optional<string> customHostname = default;
-            Optional<string> customQueryString = default;
-            Optional<string> customFragment = default;
+            DestinationProtocol? destinationProtocol = default;
+            string customPath = default;
+            string customHostname = default;
+            string customQueryString = default;
+            string customFragment = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -150,7 +151,15 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new UrlRedirectActionParameters(typeName, redirectType, Optional.ToNullable(destinationProtocol), customPath.Value, customHostname.Value, customQueryString.Value, customFragment.Value, serializedAdditionalRawData);
+            return new UrlRedirectActionParameters(
+                typeName,
+                redirectType,
+                destinationProtocol,
+                customPath,
+                customHostname,
+                customQueryString,
+                customFragment,
+                serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -158,17 +167,11 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(TypeName))
-            {
-                builder.Append("  typeName:");
-                builder.AppendLine($" '{TypeName.ToString()}'");
-            }
+            builder.Append("  typeName:");
+            builder.AppendLine($" '{TypeName.ToString()}'");
 
-            if (Optional.IsDefined(RedirectType))
-            {
-                builder.Append("  redirectType:");
-                builder.AppendLine($" '{RedirectType.ToString()}'");
-            }
+            builder.Append("  redirectType:");
+            builder.AppendLine($" '{RedirectType.ToString()}'");
 
             if (Optional.IsDefined(DestinationProtocol))
             {

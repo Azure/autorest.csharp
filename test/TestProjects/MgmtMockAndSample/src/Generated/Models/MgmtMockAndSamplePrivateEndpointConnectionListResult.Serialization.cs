@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
@@ -20,8 +19,8 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<MgmtMockAndSamplePrivateEndpointConnectionData>> value = default;
-            Optional<string> nextLink = default;
+            IReadOnlyList<MgmtMockAndSamplePrivateEndpointConnectionData> value = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -44,7 +43,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new MgmtMockAndSamplePrivateEndpointConnectionListResult(Optional.ToList(value), nextLink.Value);
+            return new MgmtMockAndSamplePrivateEndpointConnectionListResult(value ?? new ChangeTrackingList<MgmtMockAndSamplePrivateEndpointConnectionData>(), nextLink);
         }
     }
 }

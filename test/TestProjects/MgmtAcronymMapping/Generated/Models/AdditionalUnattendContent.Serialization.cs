@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtAcronymMapping;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -44,10 +45,10 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<PassName> passName = default;
-            Optional<ComponentName> componentName = default;
-            Optional<SettingName> settingName = default;
-            Optional<int> backupFrequency = default;
+            PassName? passName = default;
+            ComponentName? componentName = default;
+            SettingName? settingName = default;
+            int? backupFrequency = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("passName"u8))
@@ -87,7 +88,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new AdditionalUnattendContent(Optional.ToNullable(passName), Optional.ToNullable(componentName), Optional.ToNullable(settingName), Optional.ToNullable(backupFrequency));
+            return new AdditionalUnattendContent(passName, componentName, settingName, backupFrequency);
         }
     }
 }

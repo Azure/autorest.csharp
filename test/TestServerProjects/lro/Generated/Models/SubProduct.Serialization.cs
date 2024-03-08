@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using lro;
 
 namespace lro.Models
 {
@@ -82,9 +83,9 @@ namespace lro.Models
             {
                 return null;
             }
-            Optional<string> id = default;
-            Optional<string> provisioningState = default;
-            Optional<SubProductPropertiesProvisioningStateValues> provisioningStateValues = default;
+            string id = default;
+            string provisioningState = default;
+            SubProductPropertiesProvisioningStateValues? provisioningStateValues = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -126,7 +127,7 @@ namespace lro.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new SubProduct(id.Value, serializedAdditionalRawData, provisioningState.Value, Optional.ToNullable(provisioningStateValues));
+            return new SubProduct(id, serializedAdditionalRawData, provisioningState, provisioningStateValues);
         }
 
         BinaryData IPersistableModel<SubProduct>.Write(ModelReaderWriterOptions options)

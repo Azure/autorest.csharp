@@ -274,7 +274,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 property,
                 InvokeOptional.WrapInIsNotEmpty(
                     property,
-                new[]
+                    new[]
                     {
                         stringBuilder.Append($"{indent}{property.SerializedName}:"),
                         property.CustomSerializationMethodName is {} serializationMethodName

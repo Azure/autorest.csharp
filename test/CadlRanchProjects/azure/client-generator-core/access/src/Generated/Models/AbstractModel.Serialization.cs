@@ -73,10 +73,10 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             {
                 switch (discriminator.GetString())
                 {
-                    case "real": return RealModel.DeserializeRealModel(element);
+                    case "real": return RealModel.DeserializeRealModel(element, options);
                 }
             }
-            return UnknownAbstractModel.DeserializeUnknownAbstractModel(element);
+            return UnknownAbstractModel.DeserializeUnknownAbstractModel(element, options);
         }
 
         BinaryData IPersistableModel<AbstractModel>.Write(ModelReaderWriterOptions options)

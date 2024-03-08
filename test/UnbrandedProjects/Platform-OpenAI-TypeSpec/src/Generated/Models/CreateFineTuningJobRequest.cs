@@ -3,8 +3,8 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.Collections.Generic;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -61,7 +61,7 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="trainingFile"/> is null. </exception>
         public CreateFineTuningJobRequest(string trainingFile, CreateFineTuningJobRequestModel model)
         {
-            ClientUtilities.AssertNotNull(trainingFile, nameof(trainingFile));
+            Argument.AssertNotNull(trainingFile, nameof(trainingFile));
 
             TrainingFile = trainingFile;
             Model = model;

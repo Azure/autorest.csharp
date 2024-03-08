@@ -8,5 +8,7 @@
   ],
   "public-clients": true,
   "skip-csproj-packagereference": true,
-  "generate-test-project": true
+  "flavor": "azure",
+  "generate-test-project": true,
+  "helper-namespace": "ServiceVersionOverride_LowLevel"
 }

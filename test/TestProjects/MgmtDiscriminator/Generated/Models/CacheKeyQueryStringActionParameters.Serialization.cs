@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -83,7 +84,7 @@ namespace MgmtDiscriminator.Models
             }
             CacheKeyQueryStringActionParametersTypeName typeName = default;
             QueryStringBehavior queryStringBehavior = default;
-            Optional<string> queryParameters = default;
+            string queryParameters = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -114,7 +115,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new CacheKeyQueryStringActionParameters(typeName, queryStringBehavior, queryParameters.Value, serializedAdditionalRawData);
+            return new CacheKeyQueryStringActionParameters(typeName, queryStringBehavior, queryParameters, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -122,17 +123,11 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(TypeName))
-            {
-                builder.Append("  typeName:");
-                builder.AppendLine($" '{TypeName.ToString()}'");
-            }
+            builder.Append("  typeName:");
+            builder.AppendLine($" '{TypeName.ToString()}'");
 
-            if (Optional.IsDefined(QueryStringBehavior))
-            {
-                builder.Append("  queryStringBehavior:");
-                builder.AppendLine($" '{QueryStringBehavior.ToString()}'");
-            }
+            builder.Append("  queryStringBehavior:");
+            builder.AppendLine($" '{QueryStringBehavior.ToString()}'");
 
             if (Optional.IsDefined(QueryParameters))
             {

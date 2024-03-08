@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
@@ -22,7 +21,7 @@ namespace CognitiveServices.TextAnalytics.Models
             string name = default;
             IReadOnlyList<Match> matches = default;
             string language = default;
-            Optional<string> id = default;
+            string id = default;
             string url = default;
             string dataSource = default;
             foreach (var property in element.EnumerateObject())
@@ -63,7 +62,13 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            return new LinkedEntity(name, matches, language, id.Value, url, dataSource);
+            return new LinkedEntity(
+                name,
+                matches,
+                language,
+                id,
+                url,
+                dataSource);
         }
     }
 }

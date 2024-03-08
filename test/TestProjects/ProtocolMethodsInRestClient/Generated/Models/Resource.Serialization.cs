@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using ProtocolMethodsInRestClient;
 
 namespace ProtocolMethodsInRestClient.Models
 {
@@ -34,8 +35,8 @@ namespace ProtocolMethodsInRestClient.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> id = default;
+            string name = default;
+            string id = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -49,7 +50,7 @@ namespace ProtocolMethodsInRestClient.Models
                     continue;
                 }
             }
-            return new Resource(name.Value, id.Value);
+            return new Resource(name, id);
         }
     }
 }

@@ -8,7 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Azure.Core;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -40,6 +40,7 @@ namespace MgmtDiscriminator.Models
         }
 
         /// <summary> Gets the required collection. </summary>
+        [WirePath("requiredCollection")]
         public IList<string> RequiredCollection { get; }
     }
 }

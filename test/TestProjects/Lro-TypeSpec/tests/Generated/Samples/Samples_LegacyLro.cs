@@ -12,10 +12,10 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using lro;
-using lro.Models;
+using lrotsp;
+using lrotsp.Models;
 
-namespace lro.Samples
+namespace lrotsp.Samples
 {
     public partial class Samples_LegacyLro
     {

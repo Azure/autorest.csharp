@@ -109,9 +109,10 @@ namespace NamedTypeSymbolExtensionsTests
                 methodsToKeepClientDefaultValue: Array.Empty<string>(),
                 mgmtConfiguration: null,
                 mgmtTestConfiguration: null,
-                branded: true,
+                flavor: "azure",
                 generateSampleProject: true,
-                generateTestProject: true);
+                generateTestProject: true,
+                helperNamespace: "");
         }
 
         [Test]

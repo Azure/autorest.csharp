@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -20,6 +21,38 @@ namespace Azure.ResourceManager.Sample
     /// </summary>
     public partial class VirtualMachineData : TrackedResourceData
     {
+        /// <summary>
+        /// Keeps track of any properties unknown to the library.
+        /// <para>
+        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of <see cref="VirtualMachineData"/>. </summary>
         /// <param name="location"> The location. </param>
         public VirtualMachineData(AzureLocation location) : base(location)
@@ -131,7 +164,8 @@ namespace Azure.ResourceManager.Sample
         /// Specifies the time alloted for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. The default value is 90 minutes (PT1H30M). &lt;br&gt;&lt;br&gt; Minimum api-version: 2020-06-01
         /// Serialized Name: VirtualMachine.properties.extensionsTimeBudget
         /// </param>
-        internal VirtualMachineData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, SamplePlan plan, IReadOnlyList<VirtualMachineExtensionData> resources, ManagedServiceIdentity identity, IList<string> zones, HardwareProfile hardwareProfile, StorageProfile storageProfile, AdditionalCapabilities additionalCapabilities, OSProfile osProfile, NetworkProfile networkProfile, SecurityProfile securityProfile, DiagnosticsProfile diagnosticsProfile, WritableSubResource availabilitySet, WritableSubResource virtualMachineScaleSet, WritableSubResource proximityPlacementGroup, VirtualMachinePriorityType? priority, VirtualMachineEvictionPolicyType? evictionPolicy, BillingProfile billingProfile, WritableSubResource host, WritableSubResource hostGroup, string provisioningState, VirtualMachineInstanceView instanceView, string licenseType, string vmId, string extensionsTimeBudget) : base(id, name, resourceType, systemData, tags, location)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, SamplePlan plan, IReadOnlyList<VirtualMachineExtensionData> resources, ManagedServiceIdentity identity, IList<string> zones, HardwareProfile hardwareProfile, StorageProfile storageProfile, AdditionalCapabilities additionalCapabilities, OSProfile osProfile, NetworkProfile networkProfile, SecurityProfile securityProfile, DiagnosticsProfile diagnosticsProfile, WritableSubResource availabilitySet, WritableSubResource virtualMachineScaleSet, WritableSubResource proximityPlacementGroup, VirtualMachinePriorityType? priority, VirtualMachineEvictionPolicyType? evictionPolicy, BillingProfile billingProfile, WritableSubResource host, WritableSubResource hostGroup, string provisioningState, VirtualMachineInstanceView instanceView, string licenseType, string vmId, string extensionsTimeBudget, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData, tags, location)
         {
             Plan = plan;
             Resources = resources;
@@ -157,27 +191,37 @@ namespace Azure.ResourceManager.Sample
             LicenseType = licenseType;
             VmId = vmId;
             ExtensionsTimeBudget = extensionsTimeBudget;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineData"/> for deserialization. </summary>
+        internal VirtualMachineData()
+        {
         }
 
         /// <summary>
         /// Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started -&gt;**. Enter any required information and then click **Save**.
         /// Serialized Name: VirtualMachine.plan
         /// </summary>
+        [WirePath("plan")]
         public SamplePlan Plan { get; set; }
         /// <summary>
         /// The virtual machine child extension resources.
         /// Serialized Name: VirtualMachine.resources
         /// </summary>
+        [WirePath("resources")]
         public IReadOnlyList<VirtualMachineExtensionData> Resources { get; }
         /// <summary>
         /// The identity of the virtual machine, if configured.
         /// Serialized Name: VirtualMachine.identity
         /// </summary>
+        [WirePath("identity")]
         public ManagedServiceIdentity Identity { get; set; }
         /// <summary>
         /// The virtual machine zones.
         /// Serialized Name: VirtualMachine.zones
         /// </summary>
+        [WirePath("zones")]
         public IList<string> Zones { get; }
         /// <summary>
         /// Specifies the hardware settings for the virtual machine.
@@ -188,6 +232,7 @@ namespace Azure.ResourceManager.Sample
         /// Specifies the size of the virtual machine. For more information about virtual machine sizes, see [Sizes for virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-sizes?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). &lt;br&gt;&lt;br&gt; The available VM sizes depend on region and availability set. For a list of available sizes use these APIs:  &lt;br&gt;&lt;br&gt; [List all available virtual machine sizes in an availability set](https://docs.microsoft.com/rest/api/compute/availabilitysets/listavailablesizes) &lt;br&gt;&lt;br&gt; [List all available virtual machine sizes in a region](https://docs.microsoft.com/rest/api/compute/virtualmachinesizes/list) &lt;br&gt;&lt;br&gt; [List all available virtual machine sizes for resizing](https://docs.microsoft.com/rest/api/compute/virtualmachines/listavailablesizes)
         /// Serialized Name: HardwareProfile.vmSize
         /// </summary>
+        [WirePath("properties.hardwareProfile.vmSize")]
         public VirtualMachineSizeType? HardwareVmSize
         {
             get => HardwareProfile is null ? default : HardwareProfile.VmSize;
@@ -203,6 +248,7 @@ namespace Azure.ResourceManager.Sample
         /// Specifies the storage settings for the virtual machine disks.
         /// Serialized Name: VirtualMachine.properties.storageProfile
         /// </summary>
+        [WirePath("properties.storageProfile")]
         public StorageProfile StorageProfile { get; set; }
         /// <summary>
         /// Specifies additional capabilities enabled or disabled on the virtual machine.
@@ -213,6 +259,7 @@ namespace Azure.ResourceManager.Sample
         /// The flag that enables or disables a capability to have one or more managed data disks with UltraSSD_LRS storage account type on the VM or VMSS. Managed disks with storage account type UltraSSD_LRS can be added to a virtual machine or virtual machine scale set only if this property is enabled.
         /// Serialized Name: AdditionalCapabilities.ultraSSDEnabled
         /// </summary>
+        [WirePath("properties.additionalCapabilities.ultraSSDEnabled")]
         public bool? UltraSSDEnabled
         {
             get => AdditionalCapabilities is null ? default : AdditionalCapabilities.UltraSSDEnabled;
@@ -228,6 +275,7 @@ namespace Azure.ResourceManager.Sample
         /// Specifies the operating system settings used while creating the virtual machine. Some of the settings cannot be changed once VM is provisioned.
         /// Serialized Name: VirtualMachine.properties.osProfile
         /// </summary>
+        [WirePath("properties.osProfile")]
         public OSProfile OSProfile { get; set; }
         /// <summary>
         /// Specifies the network interfaces of the virtual machine.
@@ -238,6 +286,7 @@ namespace Azure.ResourceManager.Sample
         /// Specifies the list of resource Ids for the network interfaces associated with the virtual machine.
         /// Serialized Name: NetworkProfile.networkInterfaces
         /// </summary>
+        [WirePath("properties.networkProfile.networkInterfaces")]
         public IList<NetworkInterfaceReference> NetworkInterfaces
         {
             get
@@ -257,6 +306,7 @@ namespace Azure.ResourceManager.Sample
         /// This property can be used by user in the request to enable or disable the Host Encryption for the virtual machine or virtual machine scale set. This will enable the encryption for all the disks including Resource/Temp disk at host itself. &lt;br&gt;&lt;br&gt; Default: The Encryption at host will be disabled unless this property is set to true for the resource.
         /// Serialized Name: SecurityProfile.encryptionAtHost
         /// </summary>
+        [WirePath("properties.securityProfile.encryptionAtHost")]
         public bool? EncryptionAtHost
         {
             get => SecurityProfile is null ? default : SecurityProfile.EncryptionAtHost;
@@ -277,6 +327,7 @@ namespace Azure.ResourceManager.Sample
         /// Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. &lt;br&gt;&lt;br&gt; You can easily view the output of your console log. &lt;br&gt;&lt;br&gt; Azure also enables you to see a screenshot of the VM from the hypervisor.
         /// Serialized Name: DiagnosticsProfile.bootDiagnostics
         /// </summary>
+        [WirePath("properties.diagnosticsProfile.bootDiagnostics")]
         public BootDiagnostics BootDiagnostics
         {
             get => DiagnosticsProfile is null ? default : DiagnosticsProfile.BootDiagnostics;
@@ -294,6 +345,7 @@ namespace Azure.ResourceManager.Sample
         /// </summary>
         internal WritableSubResource AvailabilitySet { get; set; }
         /// <summary> Gets or sets Id. </summary>
+        [WirePath("properties.availabilitySet.id")]
         public ResourceIdentifier AvailabilitySetId
         {
             get => AvailabilitySet is null ? default : AvailabilitySet.Id;
@@ -311,6 +363,7 @@ namespace Azure.ResourceManager.Sample
         /// </summary>
         internal WritableSubResource VirtualMachineScaleSet { get; set; }
         /// <summary> Gets or sets Id. </summary>
+        [WirePath("properties.virtualMachineScaleSet.id")]
         public ResourceIdentifier VirtualMachineScaleSetId
         {
             get => VirtualMachineScaleSet is null ? default : VirtualMachineScaleSet.Id;
@@ -328,6 +381,7 @@ namespace Azure.ResourceManager.Sample
         /// </summary>
         internal WritableSubResource ProximityPlacementGroup { get; set; }
         /// <summary> Gets or sets Id. </summary>
+        [WirePath("properties.proximityPlacementGroup.id")]
         public ResourceIdentifier ProximityPlacementGroupId
         {
             get => ProximityPlacementGroup is null ? default : ProximityPlacementGroup.Id;
@@ -343,11 +397,13 @@ namespace Azure.ResourceManager.Sample
         /// Specifies the priority for the virtual machine. &lt;br&gt;&lt;br&gt;Minimum api-version: 2019-03-01
         /// Serialized Name: VirtualMachine.properties.priority
         /// </summary>
+        [WirePath("properties.priority")]
         public VirtualMachinePriorityType? Priority { get; set; }
         /// <summary>
         /// Specifies the eviction policy for the Azure Spot virtual machine and Azure Spot scale set. &lt;br&gt;&lt;br&gt;For Azure Spot virtual machines, both 'Deallocate' and 'Delete' are supported and the minimum api-version is 2019-03-01. &lt;br&gt;&lt;br&gt;For Azure Spot scale sets, both 'Deallocate' and 'Delete' are supported and the minimum api-version is 2017-10-30-preview.
         /// Serialized Name: VirtualMachine.properties.evictionPolicy
         /// </summary>
+        [WirePath("properties.evictionPolicy")]
         public VirtualMachineEvictionPolicyType? EvictionPolicy { get; set; }
         /// <summary>
         /// Specifies the billing related details of a Azure Spot virtual machine. &lt;br&gt;&lt;br&gt;Minimum api-version: 2019-03-01.
@@ -358,6 +414,7 @@ namespace Azure.ResourceManager.Sample
         /// Specifies the maximum price you are willing to pay for a Azure Spot VM/VMSS. This price is in US Dollars. &lt;br&gt;&lt;br&gt; This price will be compared with the current Azure Spot price for the VM size. Also, the prices are compared at the time of create/update of Azure Spot VM/VMSS and the operation will only succeed if  the maxPrice is greater than the current Azure Spot price. &lt;br&gt;&lt;br&gt; The maxPrice will also be used for evicting a Azure Spot VM/VMSS if the current Azure Spot price goes beyond the maxPrice after creation of VM/VMSS. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; - Any decimal value greater than zero. Example: 0.01538 &lt;br&gt;&lt;br&gt; -1 – indicates default price to be up-to on-demand. &lt;br&gt;&lt;br&gt; You can set the maxPrice to -1 to indicate that the Azure Spot VM/VMSS should not be evicted for price reasons. Also, the default max price is -1 if it is not provided by you. &lt;br&gt;&lt;br&gt;Minimum api-version: 2019-03-01.
         /// Serialized Name: BillingProfile.maxPrice
         /// </summary>
+        [WirePath("properties.billingProfile.maxPrice")]
         public double? BillingMaxPrice
         {
             get => BillingProfile is null ? default : BillingProfile.MaxPrice;
@@ -375,6 +432,7 @@ namespace Azure.ResourceManager.Sample
         /// </summary>
         internal WritableSubResource Host { get; set; }
         /// <summary> Gets or sets Id. </summary>
+        [WirePath("properties.host.id")]
         public ResourceIdentifier HostId
         {
             get => Host is null ? default : Host.Id;
@@ -392,6 +450,7 @@ namespace Azure.ResourceManager.Sample
         /// </summary>
         internal WritableSubResource HostGroup { get; set; }
         /// <summary> Gets or sets Id. </summary>
+        [WirePath("properties.hostGroup.id")]
         public ResourceIdentifier HostGroupId
         {
             get => HostGroup is null ? default : HostGroup.Id;
@@ -407,26 +466,31 @@ namespace Azure.ResourceManager.Sample
         /// The provisioning state, which only appears in the response.
         /// Serialized Name: VirtualMachine.properties.provisioningState
         /// </summary>
+        [WirePath("properties.provisioningState")]
         public string ProvisioningState { get; }
         /// <summary>
         /// The virtual machine instance view.
         /// Serialized Name: VirtualMachine.properties.instanceView
         /// </summary>
+        [WirePath("properties.instanceView")]
         public VirtualMachineInstanceView InstanceView { get; }
         /// <summary>
         /// Specifies that the image or disk that is being used was licensed on-premises. This element is only used for images that contain the Windows Server operating system. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; Windows_Client &lt;br&gt;&lt;br&gt; Windows_Server &lt;br&gt;&lt;br&gt; If this element is included in a request for an update, the value must match the initial value. This value cannot be updated. &lt;br&gt;&lt;br&gt; For more information, see [Azure Hybrid Use Benefit for Windows Server](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) &lt;br&gt;&lt;br&gt; Minimum api-version: 2015-06-15
         /// Serialized Name: VirtualMachine.properties.licenseType
         /// </summary>
+        [WirePath("properties.licenseType")]
         public string LicenseType { get; set; }
         /// <summary>
         /// Specifies the VM unique ID which is a 128-bits identifier that is encoded and stored in all Azure IaaS VMs SMBIOS and can be read using platform BIOS commands.
         /// Serialized Name: VirtualMachine.properties.vmId
         /// </summary>
+        [WirePath("properties.vmId")]
         public string VmId { get; }
         /// <summary>
         /// Specifies the time alloted for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. The default value is 90 minutes (PT1H30M). &lt;br&gt;&lt;br&gt; Minimum api-version: 2020-06-01
         /// Serialized Name: VirtualMachine.properties.extensionsTimeBudget
         /// </summary>
+        [WirePath("properties.extensionsTimeBudget")]
         public string ExtensionsTimeBudget { get; set; }
     }
 }

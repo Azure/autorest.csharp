@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 using MgmtPartialResource;
 
 namespace MgmtPartialResource.Models
@@ -20,8 +19,8 @@ namespace MgmtPartialResource.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<PublicIPAddressData>> value = default;
-            Optional<string> nextLink = default;
+            IReadOnlyList<PublicIPAddressData> value = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -44,7 +43,7 @@ namespace MgmtPartialResource.Models
                     continue;
                 }
             }
-            return new PublicIPAddressListResult(Optional.ToList(value), nextLink.Value);
+            return new PublicIPAddressListResult(value ?? new ChangeTrackingList<PublicIPAddressData>(), nextLink);
         }
     }
 }

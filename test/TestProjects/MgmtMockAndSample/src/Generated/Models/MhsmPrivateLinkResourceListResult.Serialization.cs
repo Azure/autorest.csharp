@@ -7,7 +7,7 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
+using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
@@ -19,7 +19,7 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<MhsmPrivateLinkResource>> value = default;
+            IReadOnlyList<MhsmPrivateLinkResource> value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -37,7 +37,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new MhsmPrivateLinkResourceListResult(Optional.ToList(value));
+            return new MhsmPrivateLinkResourceListResult(value ?? new ChangeTrackingList<MhsmPrivateLinkResource>());
         }
     }
 }

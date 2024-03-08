@@ -7,7 +7,7 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -82,12 +82,16 @@ namespace MgmtDiscriminator.Models
         }
 
         /// <summary> Gets or sets the type name. </summary>
+        [WirePath("typeName")]
         public UrlRewriteActionParametersTypeName TypeName { get; set; }
         /// <summary> define a request URI pattern that identifies the type of requests that may be rewritten. If value is blank, all strings are matched. </summary>
+        [WirePath("sourcePattern")]
         public string SourcePattern { get; set; }
         /// <summary> Define the relative URL to which the above requests will be rewritten by. </summary>
+        [WirePath("destination")]
         public string Destination { get; set; }
         /// <summary> Whether to preserve unmatched path. Default value is true. </summary>
+        [WirePath("preserveUnmatchedPath")]
         public bool? PreserveUnmatchedPath { get; set; }
     }
 }

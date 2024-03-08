@@ -9,5 +9,7 @@
   "public-clients": true,
   "model-namespace": false,
   "skip-csproj-packagereference": true,
-  "generation1-convenience-client": true
+  "generation1-convenience-client": true,
+  "flavor": "azure",
+  "helper-namespace": "ModelNamespace"
 }

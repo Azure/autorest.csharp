@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Network.Management.Interface;
 
 namespace Azure.Network.Management.Interface.Models
 {
@@ -143,25 +144,25 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> etag = default;
-            Optional<string> id = default;
-            Optional<string> description = default;
-            Optional<SecurityRuleProtocol> protocol = default;
-            Optional<string> sourcePortRange = default;
-            Optional<string> destinationPortRange = default;
-            Optional<string> sourceAddressPrefix = default;
-            Optional<IList<string>> sourceAddressPrefixes = default;
-            Optional<IList<ApplicationSecurityGroup>> sourceApplicationSecurityGroups = default;
-            Optional<string> destinationAddressPrefix = default;
-            Optional<IList<string>> destinationAddressPrefixes = default;
-            Optional<IList<ApplicationSecurityGroup>> destinationApplicationSecurityGroups = default;
-            Optional<IList<string>> sourcePortRanges = default;
-            Optional<IList<string>> destinationPortRanges = default;
-            Optional<SecurityRuleAccess> access = default;
-            Optional<int> priority = default;
-            Optional<SecurityRuleDirection> direction = default;
-            Optional<ProvisioningState> provisioningState = default;
+            string name = default;
+            string etag = default;
+            string id = default;
+            string description = default;
+            SecurityRuleProtocol? protocol = default;
+            string sourcePortRange = default;
+            string destinationPortRange = default;
+            string sourceAddressPrefix = default;
+            IList<string> sourceAddressPrefixes = default;
+            IList<ApplicationSecurityGroup> sourceApplicationSecurityGroups = default;
+            string destinationAddressPrefix = default;
+            IList<string> destinationAddressPrefixes = default;
+            IList<ApplicationSecurityGroup> destinationApplicationSecurityGroups = default;
+            IList<string> sourcePortRanges = default;
+            IList<string> destinationPortRanges = default;
+            SecurityRuleAccess? access = default;
+            int? priority = default;
+            SecurityRuleDirection? direction = default;
+            ProvisioningState? provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -346,7 +347,26 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new SecurityRule(id.Value, name.Value, etag.Value, description.Value, Optional.ToNullable(protocol), sourcePortRange.Value, destinationPortRange.Value, sourceAddressPrefix.Value, Optional.ToList(sourceAddressPrefixes), Optional.ToList(sourceApplicationSecurityGroups), destinationAddressPrefix.Value, Optional.ToList(destinationAddressPrefixes), Optional.ToList(destinationApplicationSecurityGroups), Optional.ToList(sourcePortRanges), Optional.ToList(destinationPortRanges), Optional.ToNullable(access), Optional.ToNullable(priority), Optional.ToNullable(direction), Optional.ToNullable(provisioningState));
+            return new SecurityRule(
+                id,
+                name,
+                etag,
+                description,
+                protocol,
+                sourcePortRange,
+                destinationPortRange,
+                sourceAddressPrefix,
+                sourceAddressPrefixes ?? new ChangeTrackingList<string>(),
+                sourceApplicationSecurityGroups ?? new ChangeTrackingList<ApplicationSecurityGroup>(),
+                destinationAddressPrefix,
+                destinationAddressPrefixes ?? new ChangeTrackingList<string>(),
+                destinationApplicationSecurityGroups ?? new ChangeTrackingList<ApplicationSecurityGroup>(),
+                sourcePortRanges ?? new ChangeTrackingList<string>(),
+                destinationPortRanges ?? new ChangeTrackingList<string>(),
+                access,
+                priority,
+                direction,
+                provisioningState);
         }
     }
 }

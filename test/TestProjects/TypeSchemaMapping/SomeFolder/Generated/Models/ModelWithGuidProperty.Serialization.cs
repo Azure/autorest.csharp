@@ -11,6 +11,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
+using TypeSchemaMapping;
 
 namespace TypeSchemaMapping.Models
 {

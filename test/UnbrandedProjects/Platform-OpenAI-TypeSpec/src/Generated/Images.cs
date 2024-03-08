@@ -53,7 +53,7 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
         public virtual async Task<Result<ImagesResponse>> CreateAsync(CreateImageRequest image, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNull(image, nameof(image));
+            Argument.AssertNotNull(image, nameof(image));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             using RequestBody content = image.ToRequestBody();
@@ -67,7 +67,7 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
         public virtual Result<ImagesResponse> Create(CreateImageRequest image, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNull(image, nameof(image));
+            Argument.AssertNotNull(image, nameof(image));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             using RequestBody content = image.ToRequestBody();
@@ -97,7 +97,7 @@ namespace OpenAI
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> CreateAsync(RequestBody content, RequestOptions context = null)
         {
-            ClientUtilities.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("Images.Create");
             scope.Start();
@@ -135,7 +135,7 @@ namespace OpenAI
         /// <returns> The response returned from the service. </returns>
         public virtual Result Create(RequestBody content, RequestOptions context = null)
         {
-            ClientUtilities.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("Images.Create");
             scope.Start();
@@ -157,7 +157,7 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
         public virtual async Task<Result<ImagesResponse>> CreateEditAsync(CreateImageEditRequest image, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNull(image, nameof(image));
+            Argument.AssertNotNull(image, nameof(image));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             using RequestBody content = image.ToRequestBody();
@@ -171,7 +171,7 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
         public virtual Result<ImagesResponse> CreateEdit(CreateImageEditRequest image, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNull(image, nameof(image));
+            Argument.AssertNotNull(image, nameof(image));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             using RequestBody content = image.ToRequestBody();
@@ -201,7 +201,7 @@ namespace OpenAI
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> CreateEditAsync(RequestBody content, RequestOptions context = null)
         {
-            ClientUtilities.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("Images.CreateEdit");
             scope.Start();
@@ -239,7 +239,7 @@ namespace OpenAI
         /// <returns> The response returned from the service. </returns>
         public virtual Result CreateEdit(RequestBody content, RequestOptions context = null)
         {
-            ClientUtilities.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("Images.CreateEdit");
             scope.Start();
@@ -261,7 +261,7 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
         public virtual async Task<Result<ImagesResponse>> CreateVariationAsync(CreateImageVariationRequest image, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNull(image, nameof(image));
+            Argument.AssertNotNull(image, nameof(image));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             using RequestBody content = image.ToRequestBody();
@@ -275,7 +275,7 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
         public virtual Result<ImagesResponse> CreateVariation(CreateImageVariationRequest image, CancellationToken cancellationToken = default)
         {
-            ClientUtilities.AssertNotNull(image, nameof(image));
+            Argument.AssertNotNull(image, nameof(image));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             using RequestBody content = image.ToRequestBody();
@@ -305,7 +305,7 @@ namespace OpenAI
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> CreateVariationAsync(RequestBody content, RequestOptions context = null)
         {
-            ClientUtilities.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("Images.CreateVariation");
             scope.Start();
@@ -343,7 +343,7 @@ namespace OpenAI
         /// <returns> The response returned from the service. </returns>
         public virtual Result CreateVariation(RequestBody content, RequestOptions context = null)
         {
-            ClientUtilities.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateSpan("Images.CreateVariation");
             scope.Start();

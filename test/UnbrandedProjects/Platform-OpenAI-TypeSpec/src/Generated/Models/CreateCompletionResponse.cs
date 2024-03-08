@@ -3,9 +3,9 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.Collections.Generic;
 using System.Linq;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -56,10 +56,10 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="object"/>, <paramref name="model"/> or <paramref name="choices"/> is null. </exception>
         internal CreateCompletionResponse(string id, string @object, DateTimeOffset created, string model, IEnumerable<CreateCompletionResponseChoice> choices)
         {
-            ClientUtilities.AssertNotNull(id, nameof(id));
-            ClientUtilities.AssertNotNull(@object, nameof(@object));
-            ClientUtilities.AssertNotNull(model, nameof(model));
-            ClientUtilities.AssertNotNull(choices, nameof(choices));
+            Argument.AssertNotNull(id, nameof(id));
+            Argument.AssertNotNull(@object, nameof(@object));
+            Argument.AssertNotNull(model, nameof(model));
+            Argument.AssertNotNull(choices, nameof(choices));
 
             Id = id;
             Object = @object;

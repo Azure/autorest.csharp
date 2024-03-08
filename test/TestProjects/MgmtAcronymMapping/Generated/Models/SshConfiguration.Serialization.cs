@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using MgmtAcronymMapping;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -35,7 +36,7 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<IList<SshPublicKeyInfo>> publicKeys = default;
+            IList<SshPublicKeyInfo> publicKeys = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("publicKeys"u8))
@@ -53,7 +54,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new SshConfiguration(Optional.ToList(publicKeys));
+            return new SshConfiguration(publicKeys ?? new ChangeTrackingList<SshPublicKeyInfo>());
         }
     }
 }

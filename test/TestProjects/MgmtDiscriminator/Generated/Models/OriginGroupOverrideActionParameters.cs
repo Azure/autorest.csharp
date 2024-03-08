@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -76,10 +77,12 @@ namespace MgmtDiscriminator.Models
         }
 
         /// <summary> Gets or sets the type name. </summary>
+        [WirePath("typeName")]
         public OriginGroupOverrideActionParametersTypeName TypeName { get; set; }
         /// <summary> defines the OriginGroup that would override the DefaultOriginGroup. </summary>
         internal WritableSubResource OriginGroup { get; set; }
         /// <summary> Gets or sets Id. </summary>
+        [WirePath("originGroup.id")]
         public ResourceIdentifier OriginGroupId
         {
             get => OriginGroup is null ? default : OriginGroup.Id;

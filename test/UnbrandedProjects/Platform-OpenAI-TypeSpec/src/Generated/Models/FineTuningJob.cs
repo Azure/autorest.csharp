@@ -3,9 +3,9 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.Collections.Generic;
 using System.Linq;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -88,12 +88,12 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="model"/>, <paramref name="organizationId"/>, <paramref name="hyperparameters"/>, <paramref name="trainingFile"/> or <paramref name="resultFiles"/> is null. </exception>
         internal FineTuningJob(string id, DateTimeOffset createdAt, DateTimeOffset? finishedAt, string model, string fineTunedModel, string organizationId, FineTuningJobStatus status, FineTuningJobHyperparameters hyperparameters, string trainingFile, string validationFile, IEnumerable<string> resultFiles, long? trainedTokens, FineTuningJobError error)
         {
-            ClientUtilities.AssertNotNull(id, nameof(id));
-            ClientUtilities.AssertNotNull(model, nameof(model));
-            ClientUtilities.AssertNotNull(organizationId, nameof(organizationId));
-            ClientUtilities.AssertNotNull(hyperparameters, nameof(hyperparameters));
-            ClientUtilities.AssertNotNull(trainingFile, nameof(trainingFile));
-            ClientUtilities.AssertNotNull(resultFiles, nameof(resultFiles));
+            Argument.AssertNotNull(id, nameof(id));
+            Argument.AssertNotNull(model, nameof(model));
+            Argument.AssertNotNull(organizationId, nameof(organizationId));
+            Argument.AssertNotNull(hyperparameters, nameof(hyperparameters));
+            Argument.AssertNotNull(trainingFile, nameof(trainingFile));
+            Argument.AssertNotNull(resultFiles, nameof(resultFiles));
 
             Id = id;
             CreatedAt = createdAt;

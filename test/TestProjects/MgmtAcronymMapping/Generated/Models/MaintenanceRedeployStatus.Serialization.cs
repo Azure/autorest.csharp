@@ -19,13 +19,13 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<bool> isCustomerInitiatedMaintenanceAllowed = default;
-            Optional<DateTimeOffset> preMaintenanceWindowStartTime = default;
-            Optional<DateTimeOffset> preMaintenanceWindowEndTime = default;
-            Optional<DateTimeOffset> maintenanceWindowStartTime = default;
-            Optional<DateTimeOffset> maintenanceWindowEndTime = default;
-            Optional<MaintenanceOperationResultCodeType> lastOperationResultCode = default;
-            Optional<string> lastOperationMessage = default;
+            bool? isCustomerInitiatedMaintenanceAllowed = default;
+            DateTimeOffset? preMaintenanceWindowStartTime = default;
+            DateTimeOffset? preMaintenanceWindowEndTime = default;
+            DateTimeOffset? maintenanceWindowStartTime = default;
+            DateTimeOffset? maintenanceWindowEndTime = default;
+            MaintenanceOperationResultCodeType? lastOperationResultCode = default;
+            string lastOperationMessage = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("isCustomerInitiatedMaintenanceAllowed"u8))
@@ -88,7 +88,14 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new MaintenanceRedeployStatus(Optional.ToNullable(isCustomerInitiatedMaintenanceAllowed), Optional.ToNullable(preMaintenanceWindowStartTime), Optional.ToNullable(preMaintenanceWindowEndTime), Optional.ToNullable(maintenanceWindowStartTime), Optional.ToNullable(maintenanceWindowEndTime), Optional.ToNullable(lastOperationResultCode), lastOperationMessage.Value);
+            return new MaintenanceRedeployStatus(
+                isCustomerInitiatedMaintenanceAllowed,
+                preMaintenanceWindowStartTime,
+                preMaintenanceWindowEndTime,
+                maintenanceWindowStartTime,
+                maintenanceWindowEndTime,
+                lastOperationResultCode,
+                lastOperationMessage);
         }
     }
 }

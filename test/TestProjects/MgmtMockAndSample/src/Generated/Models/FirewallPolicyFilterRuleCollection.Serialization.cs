@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
@@ -52,11 +53,11 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<FirewallPolicyFilterRuleCollectionAction> action = default;
-            Optional<IList<FirewallPolicyRule>> rules = default;
+            FirewallPolicyFilterRuleCollectionAction action = default;
+            IList<FirewallPolicyRule> rules = default;
             FirewallPolicyRuleCollectionType ruleCollectionType = default;
-            Optional<string> name = default;
-            Optional<int> priority = default;
+            string name = default;
+            int? priority = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("action"u8))
@@ -102,7 +103,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new FirewallPolicyFilterRuleCollection(ruleCollectionType, name.Value, Optional.ToNullable(priority), action.Value, Optional.ToList(rules));
+            return new FirewallPolicyFilterRuleCollection(ruleCollectionType, name, priority, action, rules ?? new ChangeTrackingList<FirewallPolicyRule>());
         }
     }
 }

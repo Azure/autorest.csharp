@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using Azure.Core;
+using additionalProperties;
 
 namespace additionalProperties.Models
 {

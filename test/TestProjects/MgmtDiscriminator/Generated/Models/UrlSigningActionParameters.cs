@@ -7,7 +7,7 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -73,10 +73,13 @@ namespace MgmtDiscriminator.Models
         }
 
         /// <summary> Gets or sets the type name. </summary>
+        [WirePath("typeName")]
         public UrlSigningActionParametersTypeName TypeName { get; set; }
         /// <summary> Algorithm to use for URL signing. </summary>
+        [WirePath("algorithm")]
         public Algorithm? Algorithm { get; set; }
         /// <summary> Defines which query string parameters in the url to be considered for expires, key id etc. </summary>
+        [WirePath("parameterNameOverride")]
         public IList<UrlSigningParamIdentifier> ParameterNameOverride { get; }
     }
 }

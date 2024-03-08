@@ -58,7 +58,7 @@ namespace ModelsTypeSpec.Models
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeUnknownSingleBase(document.RootElement, options);
+            return DeserializeSingleBase(document.RootElement, options);
         }
 
         internal static UnknownSingleBase DeserializeUnknownSingleBase(JsonElement element, ModelReaderWriterOptions options = null)
@@ -116,7 +116,7 @@ namespace ModelsTypeSpec.Models
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeUnknownSingleBase(document.RootElement, options);
+                        return DeserializeSingleBase(document.RootElement, options);
                     }
                 default:
                     throw new FormatException($"The model {nameof(SingleBase)} does not support '{options.Format}' format.");

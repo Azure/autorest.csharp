@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using additionalProperties;
 
 namespace additionalProperties.Models
 {
@@ -67,8 +68,8 @@ namespace additionalProperties.Models
                 return null;
             }
             int id = default;
-            Optional<string> name = default;
-            Optional<bool> status = default;
+            string name = default;
+            bool? status = default;
             IDictionary<string, string> additionalProperties = default;
             Dictionary<string, string> additionalPropertiesDictionary = new Dictionary<string, string>();
             foreach (var property in element.EnumerateObject())
@@ -95,7 +96,7 @@ namespace additionalProperties.Models
                 additionalPropertiesDictionary.Add(property.Name, property.Value.GetString());
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new PetAPString(id, name.Value, Optional.ToNullable(status), additionalProperties);
+            return new PetAPString(id, name, status, additionalProperties);
         }
 
         BinaryData IPersistableModel<PetAPString>.Write(ModelReaderWriterOptions options)

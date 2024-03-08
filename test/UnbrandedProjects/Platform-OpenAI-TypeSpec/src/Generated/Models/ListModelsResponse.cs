@@ -3,9 +3,9 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.Collections.Generic;
 using System.Linq;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -50,8 +50,8 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="object"/> or <paramref name="data"/> is null. </exception>
         internal ListModelsResponse(string @object, IEnumerable<Model> data)
         {
-            ClientUtilities.AssertNotNull(@object, nameof(@object));
-            ClientUtilities.AssertNotNull(data, nameof(data));
+            Argument.AssertNotNull(@object, nameof(@object));
+            Argument.AssertNotNull(data, nameof(data));
 
             Object = @object;
             Data = data.ToList();

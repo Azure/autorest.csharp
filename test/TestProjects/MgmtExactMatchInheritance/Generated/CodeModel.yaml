@@ -899,6 +899,16 @@ schemas: !Schemas
                       name: type19
                       description: Azure Key Vault secret reference.
                   protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_2
+                  serializedName: type20
+                  extensions:
+                    x-ms-format: dfe-key-object-value-pairs
+                  language: !Languages 
+                    default:
+                      name: type20
+                      description: Any object
+                  protocol: !Protocols {}
               serializationFormats:
                 - json
               usage:

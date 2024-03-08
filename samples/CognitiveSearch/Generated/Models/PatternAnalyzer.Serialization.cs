@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {
@@ -54,10 +55,10 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            Optional<bool> lowercase = default;
-            Optional<string> pattern = default;
-            Optional<RegexFlags> flags = default;
-            Optional<IList<string>> stopwords = default;
+            bool? lowercase = default;
+            string pattern = default;
+            RegexFlags? flags = default;
+            IList<string> stopwords = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
@@ -110,7 +111,13 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new PatternAnalyzer(odataType, name, Optional.ToNullable(lowercase), pattern.Value, Optional.ToNullable(flags), Optional.ToList(stopwords));
+            return new PatternAnalyzer(
+                odataType,
+                name,
+                lowercase,
+                pattern,
+                flags,
+                stopwords ?? new ChangeTrackingList<string>());
         }
     }
 }

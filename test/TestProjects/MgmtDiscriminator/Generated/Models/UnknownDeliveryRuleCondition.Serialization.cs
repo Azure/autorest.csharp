@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -61,7 +62,7 @@ namespace MgmtDiscriminator.Models
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeUnknownDeliveryRuleCondition(document.RootElement, options);
+            return DeserializeDeliveryRuleCondition(document.RootElement, options);
         }
 
         internal static UnknownDeliveryRuleCondition DeserializeUnknownDeliveryRuleCondition(JsonElement element, ModelReaderWriterOptions options = null)
@@ -73,7 +74,7 @@ namespace MgmtDiscriminator.Models
                 return null;
             }
             MatchVariable name = "Unknown";
-            Optional<string> foo = default;
+            string foo = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -94,7 +95,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new UnknownDeliveryRuleCondition(name, foo.Value, serializedAdditionalRawData);
+            return new UnknownDeliveryRuleCondition(name, foo, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -102,11 +103,8 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Name))
-            {
-                builder.Append("  name:");
-                builder.AppendLine($" '{Name.ToString()}'");
-            }
+            builder.Append("  name:");
+            builder.AppendLine($" '{Name.ToString()}'");
 
             if (Optional.IsDefined(Foo))
             {
@@ -185,7 +183,7 @@ namespace MgmtDiscriminator.Models
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeUnknownDeliveryRuleCondition(document.RootElement, options);
+                        return DeserializeDeliveryRuleCondition(document.RootElement, options);
                     }
                 case "bicep":
                     throw new InvalidOperationException("Bicep deserialization is not supported for this type.");

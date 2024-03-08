@@ -56,7 +56,14 @@ namespace MgmtCustomizations.Models
         /// <returns> A new <see cref="Models.Cat"/> instance for mocking. </returns>
         public static Cat Cat(string name = null, int size = default, DateTimeOffset? dateOfBirth = null, string sleep = null, string jump = null, string meow = null)
         {
-            return new Cat(PetKind.Cat, name, size, dateOfBirth, sleep, jump, meow);
+            return new Cat(
+                PetKind.Cat,
+                name,
+                size,
+                dateOfBirth,
+                sleep,
+                jump,
+                meow);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Dog"/>. </summary>
@@ -71,7 +78,13 @@ namespace MgmtCustomizations.Models
         /// <returns> A new <see cref="Models.Dog"/> instance for mocking. </returns>
         public static Dog Dog(string name = null, int size = default, DateTimeOffset? dateOfBirth = null, string bark = null, string jump = null)
         {
-            return new Dog(PetKind.Dog, name, size, dateOfBirth, bark, jump);
+            return new Dog(
+                PetKind.Dog,
+                name,
+                size,
+                dateOfBirth,
+                bark,
+                jump);
         }
 
         /// <summary> Initializes a new instance of <see cref="T:MgmtCustomizations.Models.Cat" />. </summary>

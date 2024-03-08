@@ -7,7 +7,7 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
+using Payload.Pageable;
 
 namespace Payload.Pageable.Models
 {

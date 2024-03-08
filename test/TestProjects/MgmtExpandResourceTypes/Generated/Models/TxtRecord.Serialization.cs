@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using MgmtExpandResourceTypes;
 
 namespace MgmtExpandResourceTypes.Models
 {
@@ -35,7 +36,7 @@ namespace MgmtExpandResourceTypes.Models
             {
                 return null;
             }
-            Optional<IList<string>> value = default;
+            IList<string> value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -53,7 +54,7 @@ namespace MgmtExpandResourceTypes.Models
                     continue;
                 }
             }
-            return new TxtRecord(Optional.ToList(value));
+            return new TxtRecord(value ?? new ChangeTrackingList<string>());
         }
     }
 }

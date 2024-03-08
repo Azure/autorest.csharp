@@ -41,8 +41,8 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<IList<VirtualMachineScaleSetExtensionData>> extensions = default;
-            Optional<string> extensionsTimeBudget = default;
+            IList<VirtualMachineScaleSetExtensionData> extensions = default;
+            string extensionsTimeBudget = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("extensions"u8))
@@ -65,7 +65,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetExtensionProfile(Optional.ToList(extensions), extensionsTimeBudget.Value);
+            return new VirtualMachineScaleSetExtensionProfile(extensions ?? new ChangeTrackingList<VirtualMachineScaleSetExtensionData>(), extensionsTimeBudget);
         }
     }
 }

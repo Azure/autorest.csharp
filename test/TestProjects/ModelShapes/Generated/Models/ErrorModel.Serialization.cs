@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using ModelShapes;
 
 namespace ModelShapes.Models
 {
@@ -74,8 +75,8 @@ namespace ModelShapes.Models
             {
                 return null;
             }
-            Optional<string> code = default;
-            Optional<string> status = default;
+            string code = default;
+            string status = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -96,7 +97,7 @@ namespace ModelShapes.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ErrorModel(code.Value, status.Value, serializedAdditionalRawData);
+            return new ErrorModel(code, status, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ErrorModel>.Write(ModelReaderWriterOptions options)

@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
@@ -32,7 +33,7 @@ namespace MgmtMockAndSample.Models
                 return null;
             }
             string id = default;
-            Optional<bool> ignoreMissingVnetServiceEndpoint = default;
+            bool? ignoreMissingVnetServiceEndpoint = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -50,7 +51,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new VirtualNetworkRule(id, Optional.ToNullable(ignoreMissingVnetServiceEndpoint));
+            return new VirtualNetworkRule(id, ignoreMissingVnetServiceEndpoint);
         }
     }
 }

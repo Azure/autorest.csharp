@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {
@@ -43,9 +44,9 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            Optional<int> maxTokenLength = default;
-            Optional<bool> isSearchTokenizer = default;
-            Optional<MicrosoftTokenizerLanguage> language = default;
+            int? maxTokenLength = default;
+            bool? isSearchTokenizer = default;
+            MicrosoftTokenizerLanguage? language = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
@@ -88,7 +89,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new MicrosoftLanguageTokenizer(odataType, name, Optional.ToNullable(maxTokenLength), Optional.ToNullable(isSearchTokenizer), Optional.ToNullable(language));
+            return new MicrosoftLanguageTokenizer(odataType, name, maxTokenLength, isSearchTokenizer, language);
         }
     }
 }

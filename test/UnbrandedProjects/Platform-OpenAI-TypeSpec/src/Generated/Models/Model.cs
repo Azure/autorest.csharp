@@ -3,8 +3,8 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.Collections.Generic;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -50,8 +50,8 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="ownedBy"/> is null. </exception>
         internal Model(string id, DateTimeOffset created, string ownedBy)
         {
-            ClientUtilities.AssertNotNull(id, nameof(id));
-            ClientUtilities.AssertNotNull(ownedBy, nameof(ownedBy));
+            Argument.AssertNotNull(id, nameof(id));
+            Argument.AssertNotNull(ownedBy, nameof(ownedBy));
 
             Id = id;
             Created = created;

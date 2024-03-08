@@ -7,7 +7,7 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -42,6 +42,7 @@ namespace MgmtDiscriminator.Models
         }
 
         /// <summary> Defines the parameters for the condition. </summary>
+        [WirePath("parameters")]
         public RemoteAddressMatchConditionParameters Parameters { get; set; }
     }
 }

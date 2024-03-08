@@ -47,7 +47,7 @@ namespace FirstTestTypeSpec.Models
 
         /// <summary> Initializes a new instance of <see cref="BaseModel"/>. </summary>
         /// <param name="level"></param>
-        public BaseModel(int level)
+        public BaseModel(sbyte level)
         {
             Level = level;
         }
@@ -55,7 +55,7 @@ namespace FirstTestTypeSpec.Models
         /// <summary> Initializes a new instance of <see cref="BaseModel"/>. </summary>
         /// <param name="level"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal BaseModel(int level, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal BaseModel(sbyte level, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Level = level;
             _serializedAdditionalRawData = serializedAdditionalRawData;
@@ -67,6 +67,6 @@ namespace FirstTestTypeSpec.Models
         }
 
         /// <summary> Gets the level. </summary>
-        public int Level { get; }
+        public sbyte Level { get; }
     }
 }

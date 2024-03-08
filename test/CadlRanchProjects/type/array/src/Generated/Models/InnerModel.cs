@@ -7,7 +7,7 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
+using _Type._Array;
 
 namespace _Type._Array.Models
 {

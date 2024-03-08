@@ -46,8 +46,8 @@ namespace Authentication.Http.Custom
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public CustomClient(Uri endpoint, KeyCredential credential, CustomClientOptions options)
         {
-            ClientUtilities.AssertNotNull(endpoint, nameof(endpoint));
-            ClientUtilities.AssertNotNull(credential, nameof(credential));
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(credential, nameof(credential));
             options ??= new CustomClientOptions();
 
             ClientDiagnostics = new TelemetrySource(options, true);

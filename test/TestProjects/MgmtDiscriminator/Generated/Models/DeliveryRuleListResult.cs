@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
@@ -63,6 +62,7 @@ namespace MgmtDiscriminator.Models
         }
 
         /// <summary> The values. </summary>
+        [WirePath("value")]
         public IReadOnlyList<DeliveryRuleData> Value { get; }
     }
 }

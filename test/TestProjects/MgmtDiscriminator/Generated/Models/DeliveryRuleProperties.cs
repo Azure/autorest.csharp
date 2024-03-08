@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using Azure.Core;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -89,32 +90,38 @@ namespace MgmtDiscriminator.Models
         }
 
         /// <summary> The order in which the rules are applied for the endpoint. Possible values {0,1,2,3,………}. A rule with a lesser order will be applied before a rule with a greater order. Rule with order 0 is a special rule. It does not require any condition and actions listed in it will always be applied. </summary>
+        [WirePath("order")]
         public int? Order { get; set; }
         /// <summary>
         /// The condition that must be matched for the actions to be executed
         /// Please note <see cref="DeliveryRuleCondition"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
         /// The available derived classes include <see cref="DeliveryRuleQueryStringCondition"/>, <see cref="DeliveryRuleRemoteAddressCondition"/> and <see cref="DeliveryRuleRequestMethodCondition"/>.
         /// </summary>
+        [WirePath("conditions")]
         public DeliveryRuleCondition Conditions { get; set; }
         /// <summary>
         /// A list of actions that are executed when all the conditions of a rule are satisfied.
         /// Please note <see cref="DeliveryRuleAction"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
         /// The available derived classes include <see cref="DeliveryRuleCacheExpirationAction"/>, <see cref="DeliveryRuleCacheKeyQueryStringAction"/>, <see cref="DeliveryRuleRequestHeaderAction"/>, <see cref="DeliveryRuleResponseHeaderAction"/>, <see cref="OriginGroupOverrideAction"/>, <see cref="DeliveryRuleRouteConfigurationOverrideAction"/>, <see cref="UrlRedirectAction"/>, <see cref="UrlRewriteAction"/> and <see cref="UrlSigningAction"/>.
         /// </summary>
+        [WirePath("actions")]
         public IList<DeliveryRuleAction> Actions { get; }
         /// <summary>
         /// A dictionary of mapping details about the actions that are executed when all the conditions of a rule are satisfied.
         /// Please note <see cref="DeliveryRuleAction"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
         /// The available derived classes include <see cref="DeliveryRuleCacheExpirationAction"/>, <see cref="DeliveryRuleCacheKeyQueryStringAction"/>, <see cref="DeliveryRuleRequestHeaderAction"/>, <see cref="DeliveryRuleResponseHeaderAction"/>, <see cref="OriginGroupOverrideAction"/>, <see cref="DeliveryRuleRouteConfigurationOverrideAction"/>, <see cref="UrlRedirectAction"/>, <see cref="UrlRewriteAction"/> and <see cref="UrlSigningAction"/>.
         /// </summary>
+        [WirePath("extraMappingInfo")]
         public IDictionary<string, DeliveryRuleAction> ExtraMappingInfo { get; }
         /// <summary>
         /// A pet
         /// Please note <see cref="Models.Pet"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
         /// The available derived classes include <see cref="Cat"/> and <see cref="Dog"/>.
         /// </summary>
+        [WirePath("pet")]
         public Pet Pet { get; set; }
         /// <summary> put a readonly property here so that this model will show up in the model factory. </summary>
+        [WirePath("foo")]
         public string Foo { get; }
     }
 }

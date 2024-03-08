@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace Azure.ResourceManager.Storage.Models
 {
@@ -18,10 +17,10 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Optional<BlobRestoreProgressStatus> status = default;
-            Optional<string> failureReason = default;
-            Optional<string> restoreId = default;
-            Optional<BlobRestoreContent> parameters = default;
+            BlobRestoreProgressStatus? status = default;
+            string failureReason = default;
+            string restoreId = default;
+            BlobRestoreContent parameters = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("status"u8))
@@ -53,7 +52,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new BlobRestoreStatus(Optional.ToNullable(status), failureReason.Value, restoreId.Value, parameters.Value);
+            return new BlobRestoreStatus(status, failureReason, restoreId, parameters);
         }
     }
 }

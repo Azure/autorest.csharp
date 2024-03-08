@@ -7,7 +7,7 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -81,12 +81,16 @@ namespace MgmtDiscriminator.Models
         }
 
         /// <summary> Gets or sets the type name. </summary>
+        [WirePath("typeName")]
         public HeaderActionParametersTypeName TypeName { get; set; }
         /// <summary> Action to perform. </summary>
+        [WirePath("headerAction")]
         public HeaderAction HeaderAction { get; set; }
         /// <summary> Name of the header to modify. </summary>
+        [WirePath("headerName")]
         public string HeaderName { get; set; }
         /// <summary> Value for the specified action. </summary>
+        [WirePath("value")]
         public string Value { get; set; }
     }
 }

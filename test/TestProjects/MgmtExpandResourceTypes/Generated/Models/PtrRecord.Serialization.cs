@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtExpandResourceTypes;
 
 namespace MgmtExpandResourceTypes.Models
 {
@@ -29,7 +30,7 @@ namespace MgmtExpandResourceTypes.Models
             {
                 return null;
             }
-            Optional<string> ptrdname = default;
+            string ptrdname = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("ptrdname"u8))
@@ -38,7 +39,7 @@ namespace MgmtExpandResourceTypes.Models
                     continue;
                 }
             }
-            return new PtrRecord(ptrdname.Value);
+            return new PtrRecord(ptrdname);
         }
     }
 }

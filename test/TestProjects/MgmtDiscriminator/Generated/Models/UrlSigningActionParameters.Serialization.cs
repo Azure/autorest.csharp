@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -84,8 +85,8 @@ namespace MgmtDiscriminator.Models
                 return null;
             }
             UrlSigningActionParametersTypeName typeName = default;
-            Optional<Algorithm> algorithm = default;
-            Optional<IList<UrlSigningParamIdentifier>> parameterNameOverride = default;
+            Algorithm? algorithm = default;
+            IList<UrlSigningParamIdentifier> parameterNameOverride = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -113,7 +114,7 @@ namespace MgmtDiscriminator.Models
                     List<UrlSigningParamIdentifier> array = new List<UrlSigningParamIdentifier>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(UrlSigningParamIdentifier.DeserializeUrlSigningParamIdentifier(item));
+                        array.Add(UrlSigningParamIdentifier.DeserializeUrlSigningParamIdentifier(item, options));
                     }
                     parameterNameOverride = array;
                     continue;
@@ -124,7 +125,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new UrlSigningActionParameters(typeName, Optional.ToNullable(algorithm), Optional.ToList(parameterNameOverride), serializedAdditionalRawData);
+            return new UrlSigningActionParameters(typeName, algorithm, parameterNameOverride ?? new ChangeTrackingList<UrlSigningParamIdentifier>(), serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -132,11 +133,8 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(TypeName))
-            {
-                builder.Append("  typeName:");
-                builder.AppendLine($" '{TypeName.ToString()}'");
-            }
+            builder.Append("  typeName:");
+            builder.AppendLine($" '{TypeName.ToString()}'");
 
             if (Optional.IsDefined(Algorithm))
             {

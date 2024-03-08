@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using NamespaceForEnums;
+using TypeSchemaMapping;
 
 namespace TypeSchemaMapping.Models
 {
@@ -27,11 +28,8 @@ namespace TypeSchemaMapping.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(IntProperty))
-            {
-                writer.WritePropertyName("StringProperty"u8);
-                writer.WriteNumberValue(IntProperty);
-            }
+            writer.WritePropertyName("StringProperty"u8);
+            writer.WriteNumberValue(IntProperty);
             if (Optional.IsCollectionDefined(DictionaryProperty))
             {
                 writer.WritePropertyName("DictionaryProperty"u8);
@@ -86,9 +84,9 @@ namespace TypeSchemaMapping.Models
             {
                 return null;
             }
-            Optional<int> stringProperty = default;
-            Optional<IReadOnlyDictionary<string, string>> dictionaryProperty = default;
-            Optional<CustomDaysOfWeek> daysOfWeek = default;
+            int stringProperty = default;
+            IReadOnlyDictionary<string, string> dictionaryProperty = default;
+            CustomDaysOfWeek? daysOfWeek = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -131,7 +129,7 @@ namespace TypeSchemaMapping.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new SecondModel(stringProperty, Optional.ToDictionary(dictionaryProperty), Optional.ToNullable(daysOfWeek), serializedAdditionalRawData);
+            return new SecondModel(stringProperty, dictionaryProperty ?? new ChangeTrackingDictionary<string, string>(), daysOfWeek, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<SecondModel>.Write(ModelReaderWriterOptions options)

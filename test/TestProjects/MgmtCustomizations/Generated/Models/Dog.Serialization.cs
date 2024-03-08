@@ -8,6 +8,7 @@
 using System;
 using System.Text.Json;
 using Azure.Core;
+using MgmtCustomizations;
 
 namespace MgmtCustomizations.Models
 {
@@ -23,11 +24,8 @@ namespace MgmtCustomizations.Models
             }
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind.ToSerialString());
-            if (Optional.IsDefined(Size))
-            {
-                writer.WritePropertyName("size"u8);
-                SerializeSizeProperty(writer);
-            }
+            writer.WritePropertyName("size"u8);
+            SerializeSizeProperty(writer);
             if (Optional.IsDefined(DateOfBirth))
             {
                 writer.WritePropertyName("dateOfBirth"u8);
@@ -53,12 +51,12 @@ namespace MgmtCustomizations.Models
             {
                 return null;
             }
-            Optional<string> jump = default;
+            string jump = default;
             PetKind kind = default;
-            Optional<string> name = default;
-            Optional<int> size = default;
-            Optional<DateTimeOffset> dateOfBirth = default;
-            Optional<string> bark = default;
+            string name = default;
+            int size = default;
+            DateTimeOffset? dateOfBirth = default;
+            string bark = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("jump"u8))
@@ -120,7 +118,13 @@ namespace MgmtCustomizations.Models
                     continue;
                 }
             }
-            return new Dog(kind, name.Value, size, Optional.ToNullable(dateOfBirth), bark.Value, jump.Value);
+            return new Dog(
+                kind,
+                name,
+                size,
+                dateOfBirth,
+                bark,
+                jump);
         }
     }
 }

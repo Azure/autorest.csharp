@@ -7,7 +7,7 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
+using _Type.Property.ValueTypes;
 
 namespace _Type.Property.ValueTypes.Models
 {

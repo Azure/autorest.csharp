@@ -7,7 +7,7 @@
    "$id": "2",
    "Kind": "Enum",
    "Name": "DaysOfWeekExtensibleEnum",
-   "EnumValueType": "String",
+   "EnumValueType": "string",
    "AllowedValues": [
     {
      "$id": "3",

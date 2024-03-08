@@ -69,11 +69,13 @@ import {
     getAccess,
     getClientType,
     getUsageOverride,
+    getWireName,
     isInternal
 } from "@azure-tools/typespec-client-generator-core";
-import { capitalize, getSerializeName, getTypeName } from "./utils.js";
+import { capitalize, getFullNamespaceString, getTypeName } from "./utils.js";
 import { InputTypeKind } from "../type/inputTypeKind.js";
 import { InputIntrinsicTypeKind } from "../type/inputIntrinsicTypeKind.js";
+import { fromSdkEnumType } from "../type/converter.js";
 /**
  * Map calType to csharp InputTypeKind
  */
@@ -133,12 +135,16 @@ function getCSharpInputTypeKindByIntrinsicModelName(
             }
         case "int8":
             return InputPrimitiveTypeKind.SByte;
-        case "unit8":
+        case "uint8":
             return InputPrimitiveTypeKind.Byte;
         case "int32":
             return InputPrimitiveTypeKind.Int32;
         case "int64":
             return InputPrimitiveTypeKind.Int64;
+        case "integer":
+            return InputPrimitiveTypeKind.Int64;
+        case "safeint":
+            return InputPrimitiveTypeKind.SafeInt;
         case "float32":
             return InputPrimitiveTypeKind.Float32;
         case "float64":
@@ -152,7 +158,7 @@ function getCSharpInputTypeKindByIntrinsicModelName(
             return InputPrimitiveTypeKind.Uri;
         case "uuid":
             return InputPrimitiveTypeKind.Guid;
-        case "etag":
+        case "eTag":
             return InputPrimitiveTypeKind.String;
         case "string":
             switch (format?.toLowerCase()) {
@@ -173,7 +179,12 @@ function getCSharpInputTypeKindByIntrinsicModelName(
             return InputPrimitiveTypeKind.Boolean;
         case "date":
             return InputPrimitiveTypeKind.Date;
+        case "plainDate":
+            return InputPrimitiveTypeKind.Date;
+        case "plainTime":
+            return InputPrimitiveTypeKind.Time;
         case "datetime":
+        case "utcDateTime":
             switch (encode?.encoding) {
                 case undefined:
                     return InputPrimitiveTypeKind.DateTime;
@@ -211,6 +222,8 @@ function getCSharpInputTypeKindByIntrinsicModelName(
                     );
                     return InputPrimitiveTypeKind.DurationISO8601;
             }
+        case "azureLocation":
+            return InputPrimitiveTypeKind.AzureLocation;
         default:
             return InputPrimitiveTypeKind.Object;
     }
@@ -281,9 +294,13 @@ export function getInputType(
     enums: Map<string, InputEnumType>,
     literalTypeContext?: LiteralTypeContext
 ): InputType {
-    const type = formattedType.type;
+    const type =
+        formattedType.type.kind === "ModelProperty"
+            ? formattedType.type.type
+            : formattedType.type;
     logger.debug(`getInputType for kind: ${type.kind}`);
     const program = context.program;
+
     if (type.kind === "Model") {
         return getInputModelType(type);
     } else if (
@@ -620,6 +637,15 @@ export function getInputType(
                         discriminatorProperty.type.name
                 );
             }
+            if (
+                discriminatorProperty?.type.kind === "UnionVariant" &&
+                discriminatorProperty?.type.type.kind === "String"
+            ) {
+                return String(
+                    discriminatorProperty.type.type.value ??
+                        discriminatorProperty.type.name
+                );
+            }
         }
 
         return undefined;
@@ -643,7 +669,7 @@ export function getInputType(
                 }
                 if (isNeverType(value.type) || isVoidType(value.type)) return;
                 const name = getTypeName(context, value);
-                const serializedName = getSerializeName(context, value);
+                const serializedName = getWireName(context, value);
                 const literalTypeContext: LiteralTypeContext = {
                     ModelName: model.Name,
                     PropertyName: name,
@@ -755,20 +781,6 @@ export function getInputType(
         return {};
     }
 
-    function getFullNamespaceString(namespace: Namespace | undefined): string {
-        if (!namespace || !namespace.name) {
-            return "";
-        }
-
-        let namespaceString: string = namespace.name;
-        let current: Namespace | undefined = namespace.namespace;
-        while (current && current.name) {
-            namespaceString = `${current.name}.${namespaceString}`;
-            current = current.namespace;
-        }
-        return namespaceString;
-    }
-
     function getInputModelForIntrinsicType(
         type: IntrinsicType
     ): InputIntrinsicType {
@@ -791,6 +803,11 @@ export function getInputType(
     }
 
     function getInputTypeForUnion(union: Union): InputUnionType | InputType {
+        var clientType = getClientType(context, union);
+        if (clientType.kind === "enum" && clientType.isFixed === false) {
+            return fromSdkEnumType(clientType, context, enums);
+        }
+
         let itemTypes: InputType[] = [];
         const variants = Array.from(union.variants.values());
 
@@ -830,7 +847,7 @@ export function getInputType(
     }
 }
 
-function setUsage(
+export function setUsage(
     context: SdkContext,
     source: Model | Enum,
     target: InputModelType | InputEnumType
@@ -872,6 +889,12 @@ export function getUsages(
         }
         if (type.kind === "Model") {
             typeName = getTypeName(context, effectiveType as Model);
+        }
+        if (type.kind === "Union") {
+            let clientType = getClientType(context, type);
+            if (clientType.kind === "enum" && clientType.isFixed === false) {
+                typeName = clientType.generatedName || clientType.name;
+            }
         }
         const affectTypes: Set<string> = new Set<string>();
         if (typeName !== "") {

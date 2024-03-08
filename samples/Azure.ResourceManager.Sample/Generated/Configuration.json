@@ -9,6 +9,8 @@
   "azure-arm": true,
   "public-clients": true,
   "skip-csproj-packagereference": true,
+  "use-model-reader-writer": true,
+  "enable-bicep-serialization": true,
   "KeepOrphanedModels": [
     "AvailabilitySetSkuType"
   ],
@@ -54,5 +56,7 @@
   },
   "UpdateRequiredCopy": {
     "VirtualMachineExtension": "Publisher"
-  }
+  },
+  "flavor": "azure",
+  "helper-namespace": "Azure.ResourceManager.Sample"
 }

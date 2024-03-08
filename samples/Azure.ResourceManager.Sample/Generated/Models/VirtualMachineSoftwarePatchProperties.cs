@@ -7,7 +7,7 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -17,6 +17,38 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineSoftwarePatchProperties
     {
+        /// <summary>
+        /// Keeps track of any properties unknown to the library.
+        /// <para>
+        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of <see cref="VirtualMachineSoftwarePatchProperties"/>. </summary>
         internal VirtualMachineSoftwarePatchProperties()
         {
@@ -64,7 +96,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// Describes the outcome of an install operation for a given patch.
         /// Serialized Name: VirtualMachineSoftwarePatchProperties.assessmentState
         /// </param>
-        internal VirtualMachineSoftwarePatchProperties(string patchId, string name, string version, string kbid, IReadOnlyList<string> classifications, SoftwareUpdateRebootBehavior? rebootBehavior, string activityId, DateTimeOffset? publishedOn, DateTimeOffset? lastModifiedOn, PatchAssessmentState? assessmentState)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineSoftwarePatchProperties(string patchId, string name, string version, string kbid, IReadOnlyList<string> classifications, SoftwareUpdateRebootBehavior? rebootBehavior, string activityId, DateTimeOffset? publishedOn, DateTimeOffset? lastModifiedOn, PatchAssessmentState? assessmentState, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             PatchId = patchId;
             Name = name;
@@ -76,57 +109,68 @@ namespace Azure.ResourceManager.Sample.Models
             PublishedOn = publishedOn;
             LastModifiedOn = lastModifiedOn;
             AssessmentState = assessmentState;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>
         /// A unique identifier for the patch.
         /// Serialized Name: VirtualMachineSoftwarePatchProperties.patchId
         /// </summary>
+        [WirePath("patchId")]
         public string PatchId { get; }
         /// <summary>
         /// The friendly name of the patch.
         /// Serialized Name: VirtualMachineSoftwarePatchProperties.name
         /// </summary>
+        [WirePath("name")]
         public string Name { get; }
         /// <summary>
         /// The version number of the patch. This property applies only to Linux patches.
         /// Serialized Name: VirtualMachineSoftwarePatchProperties.version
         /// </summary>
+        [WirePath("version")]
         public string Version { get; }
         /// <summary>
         /// The KBID of the patch. Only applies to Windows patches.
         /// Serialized Name: VirtualMachineSoftwarePatchProperties.kbid
         /// </summary>
+        [WirePath("kbid")]
         public string Kbid { get; }
         /// <summary>
         /// The classification(s) of the patch as provided by the patch publisher.
         /// Serialized Name: VirtualMachineSoftwarePatchProperties.classifications
         /// </summary>
+        [WirePath("classifications")]
         public IReadOnlyList<string> Classifications { get; }
         /// <summary>
         /// Describes the reboot requirements of the patch.
         /// Serialized Name: VirtualMachineSoftwarePatchProperties.rebootBehavior
         /// </summary>
+        [WirePath("rebootBehavior")]
         public SoftwareUpdateRebootBehavior? RebootBehavior { get; }
         /// <summary>
         /// The activity ID of the operation that produced this result. It is used to correlate across CRP and extension logs.
         /// Serialized Name: VirtualMachineSoftwarePatchProperties.activityId
         /// </summary>
+        [WirePath("activityId")]
         public string ActivityId { get; }
         /// <summary>
         /// The UTC timestamp when the repository published this patch.
         /// Serialized Name: VirtualMachineSoftwarePatchProperties.publishedDate
         /// </summary>
+        [WirePath("publishedDate")]
         public DateTimeOffset? PublishedOn { get; }
         /// <summary>
         /// The UTC timestamp of the last update to this patch record.
         /// Serialized Name: VirtualMachineSoftwarePatchProperties.lastModifiedDateTime
         /// </summary>
+        [WirePath("lastModifiedDateTime")]
         public DateTimeOffset? LastModifiedOn { get; }
         /// <summary>
         /// Describes the outcome of an install operation for a given patch.
         /// Serialized Name: VirtualMachineSoftwarePatchProperties.assessmentState
         /// </summary>
+        [WirePath("assessmentState")]
         public PatchAssessmentState? AssessmentState { get; }
     }
 }

@@ -77,12 +77,16 @@ namespace MgmtDiscriminator.Models
         }
 
         /// <summary> Gets or sets the type name. </summary>
+        [WirePath("typeName")]
         public CacheExpirationActionParametersTypeName TypeName { get; set; }
         /// <summary> Caching behavior for the requests. </summary>
+        [WirePath("cacheBehavior")]
         public CacheBehavior CacheBehavior { get; set; }
         /// <summary> The level at which the content needs to be cached. </summary>
+        [WirePath("cacheType")]
         public CacheType CacheType { get; set; }
         /// <summary> The duration for which the content needs to be cached. Allowed format is [d.]hh:mm:ss. </summary>
+        [WirePath("cacheDuration")]
         public TimeSpan? CacheDuration { get; set; }
     }
 }

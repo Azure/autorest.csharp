@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using ModelReaderWriterValidationTypeSpec;
 
 namespace ModelReaderWriterValidationTypeSpec.Models
 {
@@ -80,9 +81,9 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             {
                 return null;
             }
-            Optional<string> phrase = default;
-            Optional<string> variable = default;
-            Optional<ResourceTypeAliasPatternType> patternType = default;
+            string phrase = default;
+            string variable = default;
+            ResourceTypeAliasPatternType? patternType = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -112,7 +113,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ResourceTypeAliasPattern(phrase.Value, variable.Value, Optional.ToNullable(patternType), serializedAdditionalRawData);
+            return new ResourceTypeAliasPattern(phrase, variable, patternType, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ResourceTypeAliasPattern>.Write(ModelReaderWriterOptions options)

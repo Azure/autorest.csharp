@@ -3,8 +3,8 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.Collections.Generic;
+using UnbrandedTypeSpec;
 
 namespace UnbrandedTypeSpec.Models
 {
@@ -49,7 +49,7 @@ namespace UnbrandedTypeSpec.Models
         /// <exception cref="ArgumentNullException"> <paramref name="sourceUrl"/> is null. </exception>
         public ModelWithFormat(Uri sourceUrl, Guid guid)
         {
-            ClientUtilities.AssertNotNull(sourceUrl, nameof(sourceUrl));
+            Argument.AssertNotNull(sourceUrl, nameof(sourceUrl));
 
             SourceUrl = sourceUrl;
             Guid = guid;

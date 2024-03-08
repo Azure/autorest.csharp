@@ -174,8 +174,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return ValidationType.None;
             }
 
-            // or it is readonly in DPG (in Legacy Data Plane readonly property require validation)
-            if (inputModelProperty.IsReadOnly && !Configuration.Generation1ConvenienceClient)
+            // or it is readonly
+            if (inputModelProperty.IsReadOnly)
             {
                 return ValidationType.None;
             }
@@ -186,7 +186,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return ValidationType.None;
             }
 
-            // or it it nullable
+            // or it is nullable
             if (field.Type.IsNullable)
             {
                 return ValidationType.None;
