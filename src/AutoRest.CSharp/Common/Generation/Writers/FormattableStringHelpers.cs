@@ -157,6 +157,11 @@ namespace AutoRest.CSharp.Generation.Writers
                 return $"{expression}";
             }
 
+            if (parameter.Type.IsFrameworkType == true && parameter.Type.FrameworkType == typeof(AzureLocation))
+            {
+                return $"{RequestContentHelperProvider.Instance.FromObject(((ValueExpression)parameter).InvokeToString())}";
+            }
+
             BodyMediaType? mediaType = contentType == null ? null : ToMediaType(contentType);
             if (parameter.RequestLocation == RequestLocation.Body && mediaType == BodyMediaType.Binary)
             {
