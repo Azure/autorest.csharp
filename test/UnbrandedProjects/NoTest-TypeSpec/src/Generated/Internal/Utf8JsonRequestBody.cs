@@ -2,7 +2,6 @@
 
 #nullable disable
 
-using System;
 using System.ClientModel.Primitives;
 using System.IO;
 using System.Text.Json;
@@ -15,7 +14,6 @@ namespace NoTestTypeSpec
     {
         private readonly MemoryStream _stream;
         private readonly RequestBody _content;
-        private bool _disposed;
 
         public Utf8JsonRequestBody()
         {
@@ -44,27 +42,11 @@ namespace NoTestTypeSpec
             return true;
         }
 
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing && !_disposed)
-            {
-                var stream = _stream;
-                stream.Dispose();
-
-                var content = _content;
-                content.Dispose();
-
-                var writer = JsonWriter;
-                writer.Dispose();
-
-                _disposed = true;
-            }
-        }
-
         public override void Dispose()
         {
-            Dispose(true);
-            GC.SuppressFinalize(this);
+            JsonWriter.Dispose();
+            _content.Dispose();
+            _stream.Dispose();
         }
     }
 }

@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.IO;
 using System.Text.Json;
 using System.Threading;
@@ -18,7 +17,6 @@ namespace ModelWithConverterUsage
     {
         private readonly MemoryStream _stream;
         private readonly RequestContent _content;
-        private bool _disposed;
 
         public Utf8JsonRequestContent()
         {
@@ -47,27 +45,11 @@ namespace ModelWithConverterUsage
             return true;
         }
 
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing && !_disposed)
-            {
-                var stream = _stream;
-                stream.Dispose();
-
-                var content = _content;
-                content.Dispose();
-
-                var writer = JsonWriter;
-                writer.Dispose();
-
-                _disposed = true;
-            }
-        }
-
         public override void Dispose()
         {
-            Dispose(true);
-            GC.SuppressFinalize(this);
+            JsonWriter.Dispose();
+            _content.Dispose();
+            _stream.Dispose();
         }
     }
 }
