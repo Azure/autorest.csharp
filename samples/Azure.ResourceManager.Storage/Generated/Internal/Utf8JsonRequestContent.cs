@@ -11,7 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure.Core;
 
-namespace custom_baseUrl_paging
+namespace Azure.ResourceManager.Storage
 {
     internal class Utf8JsonRequestContent : RequestContent
     {
