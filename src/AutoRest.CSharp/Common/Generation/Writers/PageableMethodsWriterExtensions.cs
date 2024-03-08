@@ -243,7 +243,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 return $"e => {BinaryDataType}.{nameof(BinaryData.FromString)}(e.{nameof(JsonElement.GetRawText)}())";
             }
 
-            if (!pageItemType.IsFrameworkType && pageItemType.Implementation is SerializableObjectType { Serialization.Json: { } } type)
+            if (pageItemType is { IsFrameworkType: false, Implementation: SerializableObjectType { Serialization.Json: { } } type })
             {
                 // TODO -- we no longer need this once we remove the UseModelReaderWriter flag
                 if (Configuration.UseModelReaderWriter)

@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var declaration = model.Declaration;
             var serialization = model.Serialization;
 
-            if (serialization.Json == null && serialization.Xml == null)
+            if (!serialization.HasSerializations)
             {
                 return;
             }

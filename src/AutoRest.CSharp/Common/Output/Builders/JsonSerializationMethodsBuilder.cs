@@ -746,12 +746,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
             };
         }
 
-<<<<<<< HEAD
-        private static MethodBodyStatement DeserializeValue(JsonSerialization serialization, JsonElementExpression element, out ValueExpression value)
-=======
         // TODO -- make options parameter non-nullable again when we remove the `use-model-reader-writer` flag
         public static MethodBodyStatement DeserializeValue(JsonSerialization serialization, JsonElementExpression element, ModelReaderWriterOptionsExpression? options, out ValueExpression value)
->>>>>>> origin/feature/v3
         {
             switch (serialization)
             {

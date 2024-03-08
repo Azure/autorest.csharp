@@ -38,6 +38,8 @@ namespace AutoRest.CSharp.Output.Models.Serialization
 
         public BicepObjectSerialization? Bicep { get; }
 
+        public bool HasSerializations => Json != null || Xml != null || Bicep != null;
+
         public ValueExpression WireFormat { get; }
 
         public SerializationInterfaces Interfaces { get; }
