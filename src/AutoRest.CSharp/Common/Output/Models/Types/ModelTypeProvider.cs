@@ -43,7 +43,10 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultAccessibility { get; }
         public bool IsAccessibilityOverridden { get; }
         public override bool IncludeConverter => _inputModelSerialization.IncludeConverter;
-        protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && _inputModel.DiscriminatorPropertyName is not null && _inputModel.DiscriminatorValue is null && _inputModel.InheritedDictionaryType is null;
+        protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) &&
+                                              _inputModel.DiscriminatorPropertyName is not null &&
+                                              _inputModel.DiscriminatorValue is null &&
+                                              (_inputModel.InheritedDictionaryType is null || !Configuration.Generation1ConvenienceClient);
 
         public ModelTypeProviderFields Fields => _fields ??= EnsureFields();
         private ConstructorSignature InitializationConstructorSignature => _publicConstructor ??= EnsurePublicConstructorSignature();

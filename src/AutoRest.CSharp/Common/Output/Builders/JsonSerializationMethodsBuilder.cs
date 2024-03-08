@@ -794,18 +794,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
             // Reading a property value
             if (jsonPropertySerialization.ValueSerialization is not null)
             {
-                List<MethodBodyStatement> statements = new List<MethodBodyStatement>
+                return new[]
                 {
                     CreatePropertyNullCheckStatement(jsonPropertySerialization, jsonProperty, propertyVariables, shouldTreatEmptyStringAsNull),
-                    DeserializeValue(jsonPropertySerialization.ValueSerialization, jsonProperty.Value, options, out var value)
+                    DeserializeValue(jsonPropertySerialization.ValueSerialization, jsonProperty.Value, options, out var value),
+                    Assign(propertyVariables[jsonPropertySerialization], value),
+                    Continue
                 };
-
-                AssignValueStatement assignStatement = TypeFactory.IsReadOnlyMemory(jsonPropertySerialization.SerializedType!)
-                    ? Assign(propertyVariables[jsonPropertySerialization], New.Instance(jsonPropertySerialization.SerializedType!, value))
-                    : Assign(propertyVariables[jsonPropertySerialization], value);
-                statements.Add(assignStatement);
-                statements.Add(Continue);
-                return statements;
             }
 
             // Reading a nested object
