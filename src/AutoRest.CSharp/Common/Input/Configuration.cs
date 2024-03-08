@@ -164,11 +164,6 @@ namespace AutoRest.CSharp.Common.Input
                 }
             }
 
-            if (flavor is not null && !"azure".Equals(flavor, StringComparison.InvariantCultureIgnoreCase))
-            {
-                throw new Exception($"Invalid value of setting 'flavor': {flavor}");
-            }
-
             _protocolMethodList = protocolMethodList;
             SkipSerializationFormatXml = skipSerializationFormatXml;
             DisablePaginationTopRenaming = disablePaginationTopRenaming;
