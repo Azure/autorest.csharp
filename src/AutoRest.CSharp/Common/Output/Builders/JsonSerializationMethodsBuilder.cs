@@ -369,7 +369,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 }
                 else if (property.SerializedType is { IsNullable: true })
                 {
-                    var checkPropertyIsInitialized = TypeFactory.IsCollectionType(property.SerializedType) && !TypeFactory.IsReadOnlyMemory(property.SerializedType) && property.IsRequired
+                    var checkPropertyIsInitialized = TypeFactory.IsCollectionType(property.Value.Type) && !TypeFactory.IsReadOnlyMemory(property.Value.Type) && property.IsRequired
                         ? And(NotEqual(property.Value, Null), InvokeOptional.IsCollectionDefined(property.Value))
                         : NotEqual(property.Value, Null);
 
@@ -786,7 +786,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
             {
                 return new[]
                 {
-                    CreatePropertyNullCheckStatement(jsonPropertySerialization, jsonProperty, propertyVariables, shouldTreatEmptyStringAsNull),
                     InvokeCustomDeserializationMethod(deserializationMethodName, jsonProperty, propertyVariables[jsonPropertySerialization].Declaration),
                     Continue
                 };
@@ -828,32 +827,28 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static MethodBodyStatement CreatePropertyNullCheckStatement(JsonPropertySerialization jsonPropertySerialization, JsonPropertyExpression jsonProperty, IReadOnlyDictionary<JsonPropertySerialization, VariableReference> propertyVariables, bool shouldTreatEmptyStringAsNull)
         {
-            if (jsonPropertySerialization.CustomDeserializationMethodName is not null)
-            {
-                // if we have the deserialization hook here, we do not need to do any check, all these checks should be taken care of by the hook
-                return EmptyStatement;
-            }
-
             var checkEmptyProperty = GetCheckEmptyPropertyValueExpression(jsonProperty, jsonPropertySerialization, shouldTreatEmptyStringAsNull);
             var serializedType = jsonPropertySerialization.SerializedType;
             if (serializedType?.IsNullable == true)
             {
+                var propertyVariable = propertyVariables[jsonPropertySerialization];
+
                 // we only assign null when it is not a collection if we have DeserializeNullCollectionAsNullValue configuration is off
                 // specially when it is required, we assign ChangeTrackingList because for optional lists we are already doing that
                 if (!TypeFactory.IsCollectionType(serializedType) || Configuration.DeserializeNullCollectionAsNullValue)
                 {
                     return new IfStatement(checkEmptyProperty)
                     {
-                        Assign(propertyVariables[jsonPropertySerialization], Null),
+                        Assign(propertyVariable, Null),
                         Continue
                     };
                 }
 
-                if (jsonPropertySerialization.IsRequired && !TypeFactory.IsReadOnlyMemory(serializedType))
+                if (jsonPropertySerialization.IsRequired && !propertyVariable.Type.IsValueType)
                 {
                     return new IfStatement(checkEmptyProperty)
                     {
-                        Assign(propertyVariables[jsonPropertySerialization], New.Instance(TypeFactory.GetPropertyImplementationType(serializedType))),
+                        Assign(propertyVariable, New.Instance(TypeFactory.GetPropertyImplementationType(propertyVariable.Type))),
                         Continue
                     };
                 }
@@ -864,27 +859,32 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 };
             }
 
+            var propertyType = jsonPropertySerialization.ValueSerialization?.Type;
             // even if ReadOnlyMemory is required we leave the list empty if the payload doesn't have it
-            if ((!jsonPropertySerialization.IsRequired || (serializedType is not null && TypeFactory.IsReadOnlyMemory(serializedType))) &&
-                serializedType?.Equals(typeof(JsonElement)) != true && // JsonElement handles nulls internally
-                serializedType?.Equals(typeof(string)) != true) //https://github.com/Azure/autorest.csharp/issues/922
+            if (jsonPropertySerialization.IsRequired && (propertyType is null || !TypeFactory.IsReadOnlyMemory(propertyType)))
             {
-                if (jsonPropertySerialization.PropertySerializations is null)
-                {
-                    return new IfStatement(checkEmptyProperty)
-                    {
-                        Continue
-                    };
-                }
+                return EmptyStatement;
+            }
 
+            if (propertyType?.Equals(typeof(JsonElement)) == true || // JsonElement handles nulls internally
+                propertyType?.Equals(typeof(string)) == true) //https://github.com/Azure/autorest.csharp/issues/922
+            {
+                return EmptyStatement;
+            }
+
+            if (jsonPropertySerialization.PropertySerializations is null)
+            {
                 return new IfStatement(checkEmptyProperty)
                 {
-                    jsonProperty.ThrowNonNullablePropertyIsNull(),
                     Continue
                 };
             }
 
-            return EmptyStatement;
+            return new IfStatement(checkEmptyProperty)
+            {
+                jsonProperty.ThrowNonNullablePropertyIsNull(),
+                Continue
+            };
         }
 
         private static BoolExpression GetCheckEmptyPropertyValueExpression(JsonPropertyExpression jsonProperty, JsonPropertySerialization jsonPropertySerialization, bool shouldTreatEmptyStringAsNull)

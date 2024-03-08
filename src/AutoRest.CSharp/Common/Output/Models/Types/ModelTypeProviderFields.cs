@@ -12,6 +12,7 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis;
@@ -57,9 +58,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                                              !TypeFactory.IsCollectionType(propertyType);
 
                 var existingMember = modelTypeMapping?.GetMemberByOriginalName(originalFieldName);
-
+                var serializationFormat = SerializationBuilder.GetSerializationFormat(inputModelProperty.Type);
                 var field = existingMember is not null
-                    ? CreateFieldFromExisting(existingMember, propertyType, inputModelProperty, typeFactory, optionalViaNullability)
+                    ? CreateFieldFromExisting(existingMember, propertyType, GetPropertyInitializationValue(propertyType, inputModelProperty), serializationFormat, typeFactory, inputModelProperty.IsRequired, optionalViaNullability)
                     : CreateField(originalFieldName, propertyType, inputModelUsage, inputModelProperty, isStruct, isPropertyBag, optionalViaNullability);
 
                 if (existingMember is not null)
@@ -136,15 +137,14 @@ namespace AutoRest.CSharp.Output.Models.Types
                     }
                     var existingCSharpType = BuilderHelpers.GetTypeFromExisting(existingMember, typeof(object), typeFactory);
                     var isReadOnly = IsReadOnly(existingMember);
-                    var inputModelProperty = new InputModelProperty(existingMember.Name, existingMember.Name, "to be removed by post process", GetInputTypeFromExistingMemberType(existingCSharpType), null, false, isReadOnly, false);
-                    // we put the original type typeof(object) here as fallback. We do not really care about what type we get here, just to ensure there is a type generated
-                    // therefore the top type here is reasonable
+
+                    // since the property doesn't exist in the input type, we use type of existing member both as original and field type
                     // the serialization will be generated for this type and it might has issues if the type is not recognized properly.
                     // but customer could always use the `CodeGenMemberSerializationHooks` attribute to override those incorrect serialization/deserialization code.
-                    var field = CreateFieldFromExisting(existingMember, existingCSharpType, inputModelProperty, typeFactory, false);
+                    var field = CreateFieldFromExisting(existingMember, existingCSharpType, null, SerializationFormat.Default, typeFactory, isReadOnly, false);
                     var parameter = new Parameter(field.Name.ToVariableName(), $"to be removed by post process", field.Type, null, ValidationType.None, null);
+
                     fields.Add(field);
-                    fieldsToInputs[field] = inputModelProperty;
                     serializationParameters.Add(parameter);
                 }
             }
@@ -292,7 +292,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 SetterModifiers: setterModifiers);
         }
 
-        private static FieldDeclaration CreateFieldFromExisting(ISymbol existingMember, CSharpType originalType, InputModelProperty inputModelProperty, TypeFactory typeFactory, bool optionalViaNullability)
+        private static FieldDeclaration CreateFieldFromExisting(ISymbol existingMember, CSharpType originalType, ValueExpression? initializationValue, SerializationFormat serializationFormat, TypeFactory typeFactory, bool isRequired, bool optionalViaNullability)
         {
             if (optionalViaNullability)
             {
@@ -317,9 +317,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                 Type: fieldType,
                 ValueType: valueType,
                 Declaration: declaration,
-                InitializationValue: GetPropertyInitializationValue(originalType, inputModelProperty),
-                IsRequired: inputModelProperty.IsRequired,
-                SerializationBuilder.GetSerializationFormat(inputModelProperty.Type, valueType),
+                InitializationValue: initializationValue,
+                IsRequired: isRequired,
+                serializationFormat != SerializationFormat.Default ? serializationFormat : SerializationBuilder.GetDefaultSerializationFormat(valueType),
                 IsField: existingMember is IFieldSymbol,
                 WriteAsProperty: writeAsProperty,
                 OptionalViaNullability: optionalViaNullability);

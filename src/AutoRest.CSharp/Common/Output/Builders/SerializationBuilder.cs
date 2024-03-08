@@ -317,7 +317,7 @@ namespace AutoRest.CSharp.Output.Builders
             }
 
             var valueSerialization = BuildJsonSerialization(inputModelProperty.Type, propertyType, false);
-            var serializedName = inputModelProperty.SerializedName;
+            var serializedName = serializationMapping?.SerializationPath?[^1] ?? inputModelProperty.SerializedName;
             var serializedType = typeFactory.CreateType(inputModelProperty.Type);
             var memberValueExpression = new TypedMemberExpression(null, declaredName, propertyType);
 
