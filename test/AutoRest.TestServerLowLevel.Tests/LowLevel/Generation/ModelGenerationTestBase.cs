@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
 
         internal static readonly InputModelProperty RequiredIntListProperty = new InputModelProperty("requiredIntList", "requiredIntList", "Required collection of ints, illustrating a collection of value types.", new InputListType("requiredIntList", InputPrimitiveType.Int32, false, false), null, true, false, false);
 
-        internal static TypeFactory CadlTypeFactory => new TypeFactory(null);
+        internal static TypeFactory CadlTypeFactory => new TypeFactory(null, typeof(BinaryData));
 
         internal static readonly InputModelType ElementModelType = new InputModelType("SimpleModel", "Cadl.TestServer.ModelCollectionProperties.Models", null, "public",
             "Simple model that will appear in a collection.", InputModelTypeUsage.RoundTrip,

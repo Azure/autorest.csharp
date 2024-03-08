@@ -21,7 +21,7 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
         public void TestSetup()
         {
             library = new Mock<OutputLibrary>();
-            typeFactory = new TypeFactory(library.Object);
+            typeFactory = new TypeFactory(library.Object, typeof(BinaryData));
             typeProvider = new Mock<TypeProvider>("test", null);
         }
 
