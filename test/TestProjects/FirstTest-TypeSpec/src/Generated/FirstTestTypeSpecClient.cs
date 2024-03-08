@@ -2190,6 +2190,110 @@ namespace FirstTestTypeSpec
             }
         }
 
+        /// <summary> test optional dictionary. </summary>
+        /// <param name="location"> The <see cref="AzureLocation"/> to use. </param>
+        /// <param name="regenLocation"> The <see cref="AzureLocation"/> to use. </param>
+        /// <param name="body"> The <see cref="AzureLocationModel"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AzureLocationOpAsync(AzureLocation,AzureLocation,AzureLocationModel,CancellationToken)']/*" />
+        public virtual async Task<Response> AzureLocationOpAsync(AzureLocation location, AzureLocation regenLocation, AzureLocationModel body = null, CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = body?.ToRequestContent();
+            Response response = await AzureLocationOpAsync(location, regenLocation, content, context).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary> test optional dictionary. </summary>
+        /// <param name="location"> The <see cref="AzureLocation"/> to use. </param>
+        /// <param name="regenLocation"> The <see cref="AzureLocation"/> to use. </param>
+        /// <param name="body"> The <see cref="AzureLocationModel"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AzureLocationOp(AzureLocation,AzureLocation,AzureLocationModel,CancellationToken)']/*" />
+        public virtual Response AzureLocationOp(AzureLocation location, AzureLocation regenLocation, AzureLocationModel body = null, CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = body?.ToRequestContent();
+            Response response = AzureLocationOp(location, regenLocation, content, context);
+            return response;
+        }
+
+        /// <summary>
+        /// [Protocol Method] test optional dictionary.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="AzureLocationOpAsync(AzureLocation,AzureLocation,AzureLocationModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="location"> The <see cref="AzureLocation"/> to use. </param>
+        /// <param name="regenLocation"> The <see cref="AzureLocation"/> to use. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AzureLocationOpAsync(AzureLocation,AzureLocation,RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> AzureLocationOpAsync(AzureLocation location, AzureLocation regenLocation, RequestContent content, RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.AzureLocationOp");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateAzureLocationOpRequest(location, regenLocation, content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] test optional dictionary.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="AzureLocationOp(AzureLocation,AzureLocation,AzureLocationModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="location"> The <see cref="AzureLocation"/> to use. </param>
+        /// <param name="regenLocation"> The <see cref="AzureLocation"/> to use. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AzureLocationOp(AzureLocation,AzureLocation,RequestContent,RequestContext)']/*" />
+        public virtual Response AzureLocationOp(AzureLocation location, AzureLocation regenLocation, RequestContent content, RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.AzureLocationOp");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateAzureLocationOpRequest(location, regenLocation, content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         private Hello _cachedHello;
         private EnumTest _cachedEnumTest;
         private ProtocolAndConvenient _cachedProtocolAndConvenient;
@@ -2539,6 +2643,23 @@ namespace FirstTestTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/optionalDictionary", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateAzureLocationOpRequest(AzureLocation location, AzureLocation regenLocation, RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/azureLocation", false);
+            uri.AppendQuery("location", location, true);
+            request.Uri = uri;
+            request.Headers.Add("regen-location", regenLocation);
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;

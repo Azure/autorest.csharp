@@ -2,10 +2,17 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/versioning";
 
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
+using Azure.Core;
+using Azure.ClientGenerator.Core;
+
+@versioned(Versions)
 @service({
-    title: "hello world",
-    version: "0.1.0",
+    title: "hello world"
 })
 @doc("This is a sample typespec project.")
 @server(
@@ -28,9 +35,10 @@ model AuthFlow {
     scopes: ["https://api.example.com/.default"];
 }
 
-using TypeSpec.Http;
-using Azure.ClientGenerator.Core;
-using Azure.Core;
+enum Versions {
+    @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+    "2022-05-15-preview"
+  }
 
 @doc("float fixed enum")
 @fixed
@@ -534,3 +542,13 @@ op bodyIsModelWithProjectedEnum(@body body: ModelWithProjectedEnum ): void;
 @put
 @convenientAPI(true)
 op optionalDictionary(@body body?: Record<int32>): void;
+
+model AzureLocationModel
+{
+    location: azureLocation;
+}
+@route("/azureLocation")
+@doc("test optional dictionary.")
+@put
+@convenientAPI(true)
+op azureLocationOp(@query location: azureLocation, @header regenLocation: azureLocation, @body body?: AzureLocationModel): void;
