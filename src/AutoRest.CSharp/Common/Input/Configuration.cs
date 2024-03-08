@@ -180,6 +180,7 @@ namespace AutoRest.CSharp.Common.Input
             _intrinsicTypesToTreatEmptyStringAsNull.UnionWith(additionalIntrinsicTypesToTreatEmptyStringAsNull);
             _methodsToKeepClientDefaultValue = methodsToKeepClientDefaultValue ?? Array.Empty<string>();
             _apiTypes =  "azure".Equals(flavor, StringComparison.InvariantCultureIgnoreCase) ? new AzureApiTypes() : new SystemApiTypes();
+            Flavor = flavor;
             GenerateSampleProject = generateSampleProject;
             GenerateTestProject = generateTestProject;
             _helperNamespace = helperNamespace ?? Namespace;
@@ -247,6 +248,7 @@ namespace AutoRest.CSharp.Common.Input
         private static ApiTypes? _apiTypes;
         public static ApiTypes ApiTypes => _apiTypes ?? new AzureApiTypes();
         public static bool IsBranded => ApiTypes is AzureApiTypes;
+        public static string? Flavor { get; private set; }
 
         public static bool ShouldTreatBase64AsBinaryData { get; private set; }
 
@@ -602,6 +604,10 @@ namespace AutoRest.CSharp.Common.Input
             if (MgmtTestConfiguration != null)
             {
                 MgmtTestConfiguration.SaveConfiguration(writer);
+            }
+            if (Flavor != null)
+            {
+                writer.WriteString(Options.Flavor, Flavor);
             }
             WriteIfNotDefault(writer, Options.GenerateSampleProject, GenerateSampleProject);
             WriteIfNotDefault(writer, Options.GenerateTestProject, GenerateTestProject);

@@ -40,5 +40,6 @@
   "OverrideOperationName": {
     "DeletedAccounts_List": "GetAll"
   },
+  "flavor": "azure",
   "helper-namespace": "Azure.ResourceManager.Storage"
 }

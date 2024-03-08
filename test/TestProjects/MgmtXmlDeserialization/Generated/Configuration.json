@@ -11,5 +11,6 @@
   "head-as-boolean": true,
   "skip-csproj-packagereference": true,
   "use-model-reader-writer": true,
+  "flavor": "azure",
   "helper-namespace": "MgmtXmlDeserialization"
 }
