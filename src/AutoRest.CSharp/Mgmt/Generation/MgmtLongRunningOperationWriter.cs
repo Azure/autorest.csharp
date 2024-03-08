@@ -2,7 +2,8 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.ComponentModel;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -103,6 +104,24 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         }
                         }
                     _writer.Line();
+
+                    using (_writer.Scope($"private string GetOperationId(RehydrationToken? rehydrationToken)"))
+                    {
+                        using (_writer.Scope($"if (rehydrationToken is null)"))
+                        {
+                            _writer.Line($"return null;");
+                        }
+                        _writer.Line($"var lroDetails = {typeof(ModelReaderWriter)}.{nameof(ModelReaderWriter.Write)}(rehydrationToken, ModelReaderWriterOptions.Json).ToObjectFromJson<{typeof(Dictionary<string, string>)}>();");
+                        _writer.Line($"var nextRequestUri = lroDetails[\"nextRequestUri\"];");
+                        using (_writer.Scope($"if (Uri.TryCreate(nextRequestUri, UriKind.Absolute, out var uri))"))
+                        {
+                            _writer.Line($"return {typeof(Enumerable)}.{nameof(Enumerable.LastOrDefault)}(uri.Segments);");
+                        }
+                        using (_writer.Scope($"else"))
+                        {
+                            _writer.Line($"return null;");
+                        }
+                    }
 
                     _writer.WriteXmlDocumentationInheritDoc();
                     _writer

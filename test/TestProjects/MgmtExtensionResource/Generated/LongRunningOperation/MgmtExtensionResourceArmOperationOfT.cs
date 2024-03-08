@@ -6,6 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -22,6 +25,7 @@ namespace MgmtExtensionResource
         private readonly OperationInternal<T> _operation;
         private readonly RehydrationToken? _completeRehydrationToken;
         private readonly NextLinkOperationImplementation _nextLinkOperation;
+        private readonly string _operationId;
 
         /// <summary> Initializes a new instance of MgmtExtensionResourceArmOperation for mocking. </summary>
         protected MgmtExtensionResourceArmOperation()
@@ -32,6 +36,7 @@ namespace MgmtExtensionResource
         {
             _operation = OperationInternal<T>.Succeeded(response.GetRawResponse(), response.Value);
             _completeRehydrationToken = rehydrationToken;
+            _operationId = GetOperationId(rehydrationToken);
         }
 
         internal MgmtExtensionResourceArmOperation(IOperationSource<T> source, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia, bool skipApiVersionOverride = false, string apiVersionOverrideValue = null)
@@ -40,19 +45,35 @@ namespace MgmtExtensionResource
             if (nextLinkOperation is NextLinkOperationImplementation nextLinkOperationValue)
             {
                 _nextLinkOperation = nextLinkOperationValue;
+                _operationId = _nextLinkOperation.OperationId;
             }
             else
             {
                 _completeRehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(request.Method, request.Uri.ToUri(), response, finalStateVia, skipApiVersionOverride, apiVersionOverrideValue);
+                _operationId = GetOperationId(_completeRehydrationToken);
             }
             _operation = new OperationInternal<T>(NextLinkOperationImplementation.Create(source, nextLinkOperation), clientDiagnostics, response, "MgmtExtensionResourceArmOperation", fallbackStrategy: new SequentialDelayStrategy());
         }
 
+        private string GetOperationId(RehydrationToken? rehydrationToken)
+        {
+            if (rehydrationToken is null)
+            {
+                return null;
+            }
+            var lroDetails = ModelReaderWriter.Write(rehydrationToken, ModelReaderWriterOptions.Json).ToObjectFromJson<Dictionary<string, string>>();
+            var nextRequestUri = lroDetails["nextRequestUri"];
+            if (Uri.TryCreate(nextRequestUri, UriKind.Absolute, out var uri))
+            {
+                return uri.Segments.LastOrDefault();
+            }
+            else
+            {
+                return null;
+            }
+        }
         /// <inheritdoc />
-#pragma warning disable CA1822
-        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public override string Id => throw new NotImplementedException();
-#pragma warning restore CA1822
+        public override string Id => _operationId ?? null;
 
         /// <inheritdoc />
         public override RehydrationToken? GetRehydrationToken() => _nextLinkOperation?.GetRehydrationToken() ?? _completeRehydrationToken;
