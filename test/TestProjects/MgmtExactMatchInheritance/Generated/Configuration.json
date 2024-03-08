@@ -35,5 +35,6 @@
   },
   "RenameMapping": {
     "ExactMatchModel11.type": "ResourceType"
-  }
+  },
+  "helper-namespace": "MgmtExactMatchInheritance"
 }

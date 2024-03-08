@@ -9,5 +9,6 @@
   "public-clients": true,
   "skip-csproj-packagereference": true,
   "generation1-convenience-client": true,
-  "use-model-reader-writer": true
+  "use-model-reader-writer": true,
+  "helper-namespace": "url_multi_collectionFormat"
 }

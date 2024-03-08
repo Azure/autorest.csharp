@@ -12,5 +12,6 @@
   "skip-csproj-packagereference": true,
   "KeepOrphanedModels": [
     "SupersetModel5"
-  ]
+  ],
+  "helper-namespace": "MgmtSupersetInheritance"
 }

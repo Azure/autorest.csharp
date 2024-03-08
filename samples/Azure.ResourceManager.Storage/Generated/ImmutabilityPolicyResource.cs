@@ -199,10 +199,7 @@ namespace Azure.ResourceManager.Storage
         /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
         public virtual async Task<ArmOperation<ImmutabilityPolicyResource>> DeleteAsync(WaitUntil waitUntil, string ifMatch, CancellationToken cancellationToken = default)
         {
-            if (ifMatch == null)
-            {
-                throw new ArgumentNullException(nameof(ifMatch));
-            }
+            Argument.AssertNotNull(ifMatch, nameof(ifMatch));
 
             using var scope = _immutabilityPolicyBlobContainersClientDiagnostics.CreateScope("ImmutabilityPolicyResource.Delete");
             scope.Start();
@@ -250,10 +247,7 @@ namespace Azure.ResourceManager.Storage
         /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
         public virtual ArmOperation<ImmutabilityPolicyResource> Delete(WaitUntil waitUntil, string ifMatch, CancellationToken cancellationToken = default)
         {
-            if (ifMatch == null)
-            {
-                throw new ArgumentNullException(nameof(ifMatch));
-            }
+            Argument.AssertNotNull(ifMatch, nameof(ifMatch));
 
             using var scope = _immutabilityPolicyBlobContainersClientDiagnostics.CreateScope("ImmutabilityPolicyResource.Delete");
             scope.Start();
@@ -302,10 +296,7 @@ namespace Azure.ResourceManager.Storage
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<ImmutabilityPolicyResource>> CreateOrUpdateAsync(WaitUntil waitUntil, ImmutabilityPolicyData data, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _immutabilityPolicyBlobContainersClientDiagnostics.CreateScope("ImmutabilityPolicyResource.CreateOrUpdate");
             scope.Start();
@@ -354,10 +345,7 @@ namespace Azure.ResourceManager.Storage
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<ImmutabilityPolicyResource> CreateOrUpdate(WaitUntil waitUntil, ImmutabilityPolicyData data, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _immutabilityPolicyBlobContainersClientDiagnostics.CreateScope("ImmutabilityPolicyResource.CreateOrUpdate");
             scope.Start();
@@ -404,10 +392,7 @@ namespace Azure.ResourceManager.Storage
         /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
         public virtual async Task<Response<ImmutabilityPolicyResource>> LockImmutabilityPolicyAsync(string ifMatch, CancellationToken cancellationToken = default)
         {
-            if (ifMatch == null)
-            {
-                throw new ArgumentNullException(nameof(ifMatch));
-            }
+            Argument.AssertNotNull(ifMatch, nameof(ifMatch));
 
             using var scope = _immutabilityPolicyBlobContainersClientDiagnostics.CreateScope("ImmutabilityPolicyResource.LockImmutabilityPolicy");
             scope.Start();
@@ -449,10 +434,7 @@ namespace Azure.ResourceManager.Storage
         /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
         public virtual Response<ImmutabilityPolicyResource> LockImmutabilityPolicy(string ifMatch, CancellationToken cancellationToken = default)
         {
-            if (ifMatch == null)
-            {
-                throw new ArgumentNullException(nameof(ifMatch));
-            }
+            Argument.AssertNotNull(ifMatch, nameof(ifMatch));
 
             using var scope = _immutabilityPolicyBlobContainersClientDiagnostics.CreateScope("ImmutabilityPolicyResource.LockImmutabilityPolicy");
             scope.Start();
@@ -495,10 +477,7 @@ namespace Azure.ResourceManager.Storage
         /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
         public virtual async Task<Response<ImmutabilityPolicyResource>> ExtendImmutabilityPolicyAsync(string ifMatch, ImmutabilityPolicyData data = null, CancellationToken cancellationToken = default)
         {
-            if (ifMatch == null)
-            {
-                throw new ArgumentNullException(nameof(ifMatch));
-            }
+            Argument.AssertNotNull(ifMatch, nameof(ifMatch));
 
             using var scope = _immutabilityPolicyBlobContainersClientDiagnostics.CreateScope("ImmutabilityPolicyResource.ExtendImmutabilityPolicy");
             scope.Start();
@@ -541,10 +520,7 @@ namespace Azure.ResourceManager.Storage
         /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
         public virtual Response<ImmutabilityPolicyResource> ExtendImmutabilityPolicy(string ifMatch, ImmutabilityPolicyData data = null, CancellationToken cancellationToken = default)
         {
-            if (ifMatch == null)
-            {
-                throw new ArgumentNullException(nameof(ifMatch));
-            }
+            Argument.AssertNotNull(ifMatch, nameof(ifMatch));
 
             using var scope = _immutabilityPolicyBlobContainersClientDiagnostics.CreateScope("ImmutabilityPolicyResource.ExtendImmutabilityPolicy");
             scope.Start();

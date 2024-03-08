@@ -286,10 +286,7 @@ namespace Azure.ResourceManager.Storage
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<BlobInventoryPolicyResource>> UpdateAsync(WaitUntil waitUntil, BlobInventoryPolicyData data, CancellationToken cancellationToken = default)
         {
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _blobInventoryPolicyClientDiagnostics.CreateScope("BlobInventoryPolicyResource.Update");
             scope.Start();
@@ -337,10 +334,7 @@ namespace Azure.ResourceManager.Storage
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<BlobInventoryPolicyResource> Update(WaitUntil waitUntil, BlobInventoryPolicyData data, CancellationToken cancellationToken = default)
         {
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _blobInventoryPolicyClientDiagnostics.CreateScope("BlobInventoryPolicyResource.Update");
             scope.Start();

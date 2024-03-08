@@ -82,18 +82,8 @@ namespace MgmtOmitOperationGroups
         /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> or <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<Model2Resource>> CreateOrUpdateAsync(WaitUntil waitUntil, string model2SName, Model2Data data, CancellationToken cancellationToken = default)
         {
-            if (model2SName == null)
-            {
-                throw new ArgumentNullException(nameof(model2SName));
-            }
-            if (model2SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(model2SName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(model2SName, nameof(model2SName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _model2ClientDiagnostics.CreateScope("Model2Collection.CreateOrUpdate");
             scope.Start();
@@ -142,18 +132,8 @@ namespace MgmtOmitOperationGroups
         /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> or <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<Model2Resource> CreateOrUpdate(WaitUntil waitUntil, string model2SName, Model2Data data, CancellationToken cancellationToken = default)
         {
-            if (model2SName == null)
-            {
-                throw new ArgumentNullException(nameof(model2SName));
-            }
-            if (model2SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(model2SName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(model2SName, nameof(model2SName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _model2ClientDiagnostics.CreateScope("Model2Collection.CreateOrUpdate");
             scope.Start();
@@ -200,14 +180,7 @@ namespace MgmtOmitOperationGroups
         /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
         public virtual async Task<Response<Model2Resource>> GetAsync(string model2SName, CancellationToken cancellationToken = default)
         {
-            if (model2SName == null)
-            {
-                throw new ArgumentNullException(nameof(model2SName));
-            }
-            if (model2SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(model2SName));
-            }
+            Argument.AssertNotNullOrEmpty(model2SName, nameof(model2SName));
 
             using var scope = _model2ClientDiagnostics.CreateScope("Model2Collection.Get");
             scope.Start();
@@ -251,14 +224,7 @@ namespace MgmtOmitOperationGroups
         /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
         public virtual Response<Model2Resource> Get(string model2SName, CancellationToken cancellationToken = default)
         {
-            if (model2SName == null)
-            {
-                throw new ArgumentNullException(nameof(model2SName));
-            }
-            if (model2SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(model2SName));
-            }
+            Argument.AssertNotNullOrEmpty(model2SName, nameof(model2SName));
 
             using var scope = _model2ClientDiagnostics.CreateScope("Model2Collection.Get");
             scope.Start();
@@ -359,14 +325,7 @@ namespace MgmtOmitOperationGroups
         /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
         public virtual async Task<Response<bool>> ExistsAsync(string model2SName, CancellationToken cancellationToken = default)
         {
-            if (model2SName == null)
-            {
-                throw new ArgumentNullException(nameof(model2SName));
-            }
-            if (model2SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(model2SName));
-            }
+            Argument.AssertNotNullOrEmpty(model2SName, nameof(model2SName));
 
             using var scope = _model2ClientDiagnostics.CreateScope("Model2Collection.Exists");
             scope.Start();
@@ -409,14 +368,7 @@ namespace MgmtOmitOperationGroups
         /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
         public virtual Response<bool> Exists(string model2SName, CancellationToken cancellationToken = default)
         {
-            if (model2SName == null)
-            {
-                throw new ArgumentNullException(nameof(model2SName));
-            }
-            if (model2SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(model2SName));
-            }
+            Argument.AssertNotNullOrEmpty(model2SName, nameof(model2SName));
 
             using var scope = _model2ClientDiagnostics.CreateScope("Model2Collection.Exists");
             scope.Start();
@@ -459,14 +411,7 @@ namespace MgmtOmitOperationGroups
         /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
         public virtual async Task<NullableResponse<Model2Resource>> GetIfExistsAsync(string model2SName, CancellationToken cancellationToken = default)
         {
-            if (model2SName == null)
-            {
-                throw new ArgumentNullException(nameof(model2SName));
-            }
-            if (model2SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(model2SName));
-            }
+            Argument.AssertNotNullOrEmpty(model2SName, nameof(model2SName));
 
             using var scope = _model2ClientDiagnostics.CreateScope("Model2Collection.GetIfExists");
             scope.Start();
@@ -511,14 +456,7 @@ namespace MgmtOmitOperationGroups
         /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
         public virtual NullableResponse<Model2Resource> GetIfExists(string model2SName, CancellationToken cancellationToken = default)
         {
-            if (model2SName == null)
-            {
-                throw new ArgumentNullException(nameof(model2SName));
-            }
-            if (model2SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(model2SName));
-            }
+            Argument.AssertNotNullOrEmpty(model2SName, nameof(model2SName));
 
             using var scope = _model2ClientDiagnostics.CreateScope("Model2Collection.GetIfExists");
             scope.Start();

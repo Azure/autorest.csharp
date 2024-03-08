@@ -84,14 +84,8 @@ namespace MgmtExpandResourceTypes
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> or <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<RecordSetMxResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string relativeRecordSetName, RecordSetData data, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
-            if (relativeRecordSetName == null)
-            {
-                throw new ArgumentNullException(nameof(relativeRecordSetName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxCollection.CreateOrUpdate");
             scope.Start();
@@ -142,14 +136,8 @@ namespace MgmtExpandResourceTypes
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> or <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<RecordSetMxResource> CreateOrUpdate(WaitUntil waitUntil, string relativeRecordSetName, RecordSetData data, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
-            if (relativeRecordSetName == null)
-            {
-                throw new ArgumentNullException(nameof(relativeRecordSetName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxCollection.CreateOrUpdate");
             scope.Start();
@@ -196,10 +184,7 @@ namespace MgmtExpandResourceTypes
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
         public virtual async Task<Response<RecordSetMxResource>> GetAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
-            if (relativeRecordSetName == null)
-            {
-                throw new ArgumentNullException(nameof(relativeRecordSetName));
-            }
+            Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
 
             using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxCollection.Get");
             scope.Start();
@@ -243,10 +228,7 @@ namespace MgmtExpandResourceTypes
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
         public virtual Response<RecordSetMxResource> Get(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
-            if (relativeRecordSetName == null)
-            {
-                throw new ArgumentNullException(nameof(relativeRecordSetName));
-            }
+            Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
 
             using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxCollection.Get");
             scope.Start();
@@ -354,10 +336,7 @@ namespace MgmtExpandResourceTypes
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
         public virtual async Task<Response<bool>> ExistsAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
-            if (relativeRecordSetName == null)
-            {
-                throw new ArgumentNullException(nameof(relativeRecordSetName));
-            }
+            Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
 
             using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxCollection.Exists");
             scope.Start();
@@ -399,10 +378,7 @@ namespace MgmtExpandResourceTypes
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
         public virtual Response<bool> Exists(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
-            if (relativeRecordSetName == null)
-            {
-                throw new ArgumentNullException(nameof(relativeRecordSetName));
-            }
+            Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
 
             using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxCollection.Exists");
             scope.Start();
@@ -444,10 +420,7 @@ namespace MgmtExpandResourceTypes
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
         public virtual async Task<NullableResponse<RecordSetMxResource>> GetIfExistsAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
-            if (relativeRecordSetName == null)
-            {
-                throw new ArgumentNullException(nameof(relativeRecordSetName));
-            }
+            Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
 
             using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxCollection.GetIfExists");
             scope.Start();
@@ -491,10 +464,7 @@ namespace MgmtExpandResourceTypes
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
         public virtual NullableResponse<RecordSetMxResource> GetIfExists(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
-            if (relativeRecordSetName == null)
-            {
-                throw new ArgumentNullException(nameof(relativeRecordSetName));
-            }
+            Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
 
             using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxCollection.GetIfExists");
             scope.Start();

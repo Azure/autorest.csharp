@@ -141,10 +141,7 @@ namespace _Type.Property.ValueTypes
         /// <include file="Docs/Decimal128.xml" path="doc/members/member[@name='PutAsync(Decimal128Property,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(Decimal128Property body, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
+            Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -159,10 +156,7 @@ namespace _Type.Property.ValueTypes
         /// <include file="Docs/Decimal128.xml" path="doc/members/member[@name='Put(Decimal128Property,CancellationToken)']/*" />
         public virtual Response Put(Decimal128Property body, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
+            Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -193,10 +187,7 @@ namespace _Type.Property.ValueTypes
         /// <include file="Docs/Decimal128.xml" path="doc/members/member[@name='PutAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("Decimal128.Put");
             scope.Start();
@@ -235,10 +226,7 @@ namespace _Type.Property.ValueTypes
         /// <include file="Docs/Decimal128.xml" path="doc/members/member[@name='Put(RequestContent,RequestContext)']/*" />
         public virtual Response Put(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("Decimal128.Put");
             scope.Start();

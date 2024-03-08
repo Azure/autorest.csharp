@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using Pagination;
 
 namespace Pagination.Models
 {
@@ -51,14 +52,8 @@ namespace Pagination.Models
         /// <exception cref="ArgumentNullException"> <paramref name="blockItemId"/> or <paramref name="text"/> is null. </exception>
         internal TextBlockItem(string blockItemId, string text)
         {
-            if (blockItemId == null)
-            {
-                throw new ArgumentNullException(nameof(blockItemId));
-            }
-            if (text == null)
-            {
-                throw new ArgumentNullException(nameof(text));
-            }
+            Argument.AssertNotNull(blockItemId, nameof(blockItemId));
+            Argument.AssertNotNull(text, nameof(text));
 
             BlockItemId = blockItemId;
             Text = text;

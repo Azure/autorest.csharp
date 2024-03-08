@@ -199,10 +199,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<MgmtGrpParentWithNonResChWithLocResource>> UpdateAsync(WaitUntil waitUntil, MgmtGrpParentWithNonResChWithLocData data, CancellationToken cancellationToken = default)
         {
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _mgmtGrpParentWithNonResChWithLocClientDiagnostics.CreateScope("MgmtGrpParentWithNonResChWithLocResource.Update");
             scope.Start();
@@ -250,10 +247,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<MgmtGrpParentWithNonResChWithLocResource> Update(WaitUntil waitUntil, MgmtGrpParentWithNonResChWithLocData data, CancellationToken cancellationToken = default)
         {
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _mgmtGrpParentWithNonResChWithLocClientDiagnostics.CreateScope("MgmtGrpParentWithNonResChWithLocResource.Update");
             scope.Start();
@@ -359,14 +353,8 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
         public virtual async Task<Response<MgmtGrpParentWithNonResChWithLocResource>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(key, nameof(key));
+            Argument.AssertNotNull(value, nameof(value));
 
             using var scope = _mgmtGrpParentWithNonResChWithLocClientDiagnostics.CreateScope("MgmtGrpParentWithNonResChWithLocResource.AddTag");
             scope.Start();
@@ -422,14 +410,8 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
         public virtual Response<MgmtGrpParentWithNonResChWithLocResource> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(key, nameof(key));
+            Argument.AssertNotNull(value, nameof(value));
 
             using var scope = _mgmtGrpParentWithNonResChWithLocClientDiagnostics.CreateScope("MgmtGrpParentWithNonResChWithLocResource.AddTag");
             scope.Start();
@@ -484,10 +466,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
         public virtual async Task<Response<MgmtGrpParentWithNonResChWithLocResource>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            if (tags == null)
-            {
-                throw new ArgumentNullException(nameof(tags));
-            }
+            Argument.AssertNotNull(tags, nameof(tags));
 
             using var scope = _mgmtGrpParentWithNonResChWithLocClientDiagnostics.CreateScope("MgmtGrpParentWithNonResChWithLocResource.SetTags");
             scope.Start();
@@ -543,10 +522,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
         public virtual Response<MgmtGrpParentWithNonResChWithLocResource> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            if (tags == null)
-            {
-                throw new ArgumentNullException(nameof(tags));
-            }
+            Argument.AssertNotNull(tags, nameof(tags));
 
             using var scope = _mgmtGrpParentWithNonResChWithLocClientDiagnostics.CreateScope("MgmtGrpParentWithNonResChWithLocResource.SetTags");
             scope.Start();
@@ -602,10 +578,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public virtual async Task<Response<MgmtGrpParentWithNonResChWithLocResource>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
+            Argument.AssertNotNull(key, nameof(key));
 
             using var scope = _mgmtGrpParentWithNonResChWithLocClientDiagnostics.CreateScope("MgmtGrpParentWithNonResChWithLocResource.RemoveTag");
             scope.Start();
@@ -660,10 +633,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public virtual Response<MgmtGrpParentWithNonResChWithLocResource> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
+            Argument.AssertNotNull(key, nameof(key));
 
             using var scope = _mgmtGrpParentWithNonResChWithLocClientDiagnostics.CreateScope("MgmtGrpParentWithNonResChWithLocResource.RemoveTag");
             scope.Start();

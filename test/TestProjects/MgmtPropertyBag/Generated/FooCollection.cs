@@ -87,18 +87,8 @@ namespace MgmtPropertyBag
         /// <exception cref="ArgumentNullException"> <paramref name="fooName"/> or <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<FooResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string fooName, FooData data, string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
         {
-            if (fooName == null)
-            {
-                throw new ArgumentNullException(nameof(fooName));
-            }
-            if (fooName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(fooName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(fooName, nameof(fooName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _fooClientDiagnostics.CreateScope("FooCollection.CreateOrUpdate");
             scope.Start();
@@ -151,18 +141,8 @@ namespace MgmtPropertyBag
         /// <exception cref="ArgumentNullException"> <paramref name="fooName"/> or <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<FooResource> CreateOrUpdate(WaitUntil waitUntil, string fooName, FooData data, string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
         {
-            if (fooName == null)
-            {
-                throw new ArgumentNullException(nameof(fooName));
-            }
-            if (fooName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(fooName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(fooName, nameof(fooName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _fooClientDiagnostics.CreateScope("FooCollection.CreateOrUpdate");
             scope.Start();
@@ -209,10 +189,7 @@ namespace MgmtPropertyBag
         /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
         public virtual async Task<Response<FooResource>> GetAsync(FooCollectionGetOptions options, CancellationToken cancellationToken = default)
         {
-            if (options == null)
-            {
-                throw new ArgumentNullException(nameof(options));
-            }
+            Argument.AssertNotNull(options, nameof(options));
 
             using var scope = _fooClientDiagnostics.CreateScope("FooCollection.Get");
             scope.Start();
@@ -256,10 +233,7 @@ namespace MgmtPropertyBag
         /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
         public virtual Response<FooResource> Get(FooCollectionGetOptions options, CancellationToken cancellationToken = default)
         {
-            if (options == null)
-            {
-                throw new ArgumentNullException(nameof(options));
-            }
+            Argument.AssertNotNull(options, nameof(options));
 
             using var scope = _fooClientDiagnostics.CreateScope("FooCollection.Get");
             scope.Start();
@@ -367,10 +341,7 @@ namespace MgmtPropertyBag
         /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
         public virtual async Task<Response<bool>> ExistsAsync(FooCollectionExistsOptions options, CancellationToken cancellationToken = default)
         {
-            if (options == null)
-            {
-                throw new ArgumentNullException(nameof(options));
-            }
+            Argument.AssertNotNull(options, nameof(options));
 
             using var scope = _fooClientDiagnostics.CreateScope("FooCollection.Exists");
             scope.Start();
@@ -412,10 +383,7 @@ namespace MgmtPropertyBag
         /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
         public virtual Response<bool> Exists(FooCollectionExistsOptions options, CancellationToken cancellationToken = default)
         {
-            if (options == null)
-            {
-                throw new ArgumentNullException(nameof(options));
-            }
+            Argument.AssertNotNull(options, nameof(options));
 
             using var scope = _fooClientDiagnostics.CreateScope("FooCollection.Exists");
             scope.Start();
@@ -457,10 +425,7 @@ namespace MgmtPropertyBag
         /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
         public virtual async Task<NullableResponse<FooResource>> GetIfExistsAsync(FooCollectionGetIfExistsOptions options, CancellationToken cancellationToken = default)
         {
-            if (options == null)
-            {
-                throw new ArgumentNullException(nameof(options));
-            }
+            Argument.AssertNotNull(options, nameof(options));
 
             using var scope = _fooClientDiagnostics.CreateScope("FooCollection.GetIfExists");
             scope.Start();
@@ -504,10 +469,7 @@ namespace MgmtPropertyBag
         /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
         public virtual NullableResponse<FooResource> GetIfExists(FooCollectionGetIfExistsOptions options, CancellationToken cancellationToken = default)
         {
-            if (options == null)
-            {
-                throw new ArgumentNullException(nameof(options));
-            }
+            Argument.AssertNotNull(options, nameof(options));
 
             using var scope = _fooClientDiagnostics.CreateScope("FooCollection.GetIfExists");
             scope.Start();

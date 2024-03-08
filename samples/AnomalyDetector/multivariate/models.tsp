@@ -9,7 +9,8 @@ using Azure.Core;
 namespace AnomalyDetector.Multivariate;
 
 @doc("An optional field, indicating how missing values will be filled. One of Previous, Subsequent, Linear, Zero, Fixed.")
-enum FillNAMethod {
+union FillNAMethod {
+  string,
   "Previous",
   "Subsequent",
   "Linear",
@@ -27,7 +28,8 @@ enum MultivariateBatchDetectionStatus {
 }
 
 @doc("Data schema of input data source: OneTable or MultiTable. The default DataSchema is OneTable.")
-enum DataSchema {
+union DataSchema {
+  string,
   @doc("OneTable means that your input data are all in one CSV file, which contains one 'timestamp' column and several variable columns. The default DataSchema is OneTable.")
   "OneTable",
   @doc("MultiTable means that your input data are separated in multiple CSV files, in each file containing one 'timestamp' column and one 'variable' column, and the CSV file name should indicate the name of the variable. The default DataSchema is OneTable.")

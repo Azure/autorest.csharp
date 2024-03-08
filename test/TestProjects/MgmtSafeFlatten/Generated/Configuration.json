@@ -13,5 +13,6 @@
   "KeepOrphanedModels": [
     "LayerOneProperties",
     "TypeFour"
-  ]
+  ],
+  "helper-namespace": "MgmtSafeFlatten"
 }

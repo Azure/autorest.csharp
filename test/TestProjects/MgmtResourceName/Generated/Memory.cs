@@ -194,10 +194,7 @@ namespace MgmtResourceName
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<Memory>> UpdateAsync(WaitUntil waitUntil, MemoryData data, CancellationToken cancellationToken = default)
         {
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _memoryMemoryResourcesClientDiagnostics.CreateScope("Memory.Update");
             scope.Start();
@@ -244,10 +241,7 @@ namespace MgmtResourceName
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<Memory> Update(WaitUntil waitUntil, MemoryData data, CancellationToken cancellationToken = default)
         {
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _memoryMemoryResourcesClientDiagnostics.CreateScope("Memory.Update");
             scope.Start();

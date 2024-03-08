@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using ModelsTypeSpec;
 
 namespace ModelsTypeSpec.Models
 {
@@ -20,14 +21,8 @@ namespace ModelsTypeSpec.Models
         /// <exception cref="ArgumentNullException"> <paramref name="field"/> or <paramref name="values"/> is null. </exception>
         public Int32ValuesFacet(string field, IEnumerable<int> values, int value) : base(field, values, value)
         {
-            if (field == null)
-            {
-                throw new ArgumentNullException(nameof(field));
-            }
-            if (values == null)
-            {
-                throw new ArgumentNullException(nameof(values));
-            }
+            Argument.AssertNotNull(field, nameof(field));
+            Argument.AssertNotNull(values, nameof(values));
         }
 
         /// <summary> Initializes a new instance of <see cref="Int32ValuesFacet"/>. </summary>

@@ -47,14 +47,8 @@ namespace dpg_update1_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public ParamsClient(Uri endpoint, AzureKeyCredential credential, ParamsClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(credential, nameof(credential));
             options ??= new ParamsClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -145,10 +139,7 @@ namespace dpg_update1_LowLevel
         /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetRequiredAsync(string,string,RequestContext)']/*" />
         public virtual async Task<Response> GetRequiredAsync(string parameter, string newParameter, RequestContext context)
         {
-            if (parameter == null)
-            {
-                throw new ArgumentNullException(nameof(parameter));
-            }
+            Argument.AssertNotNull(parameter, nameof(parameter));
 
             using var scope = ClientDiagnostics.CreateScope("ParamsClient.GetRequired");
             scope.Start();
@@ -184,10 +175,7 @@ namespace dpg_update1_LowLevel
         /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetRequired(string,string,RequestContext)']/*" />
         public virtual Response GetRequired(string parameter, string newParameter, RequestContext context)
         {
-            if (parameter == null)
-            {
-                throw new ArgumentNullException(nameof(parameter));
-            }
+            Argument.AssertNotNull(parameter, nameof(parameter));
 
             using var scope = ClientDiagnostics.CreateScope("ParamsClient.GetRequired");
             scope.Start();
@@ -223,10 +211,7 @@ namespace dpg_update1_LowLevel
         /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='PutRequiredOptionalAsync(string,string,string,RequestContext)']/*" />
         public virtual async Task<Response> PutRequiredOptionalAsync(string requiredParam, string optionalParam, string newParameter, RequestContext context)
         {
-            if (requiredParam == null)
-            {
-                throw new ArgumentNullException(nameof(requiredParam));
-            }
+            Argument.AssertNotNull(requiredParam, nameof(requiredParam));
 
             using var scope = ClientDiagnostics.CreateScope("ParamsClient.PutRequiredOptional");
             scope.Start();
@@ -262,10 +247,7 @@ namespace dpg_update1_LowLevel
         /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='PutRequiredOptional(string,string,string,RequestContext)']/*" />
         public virtual Response PutRequiredOptional(string requiredParam, string optionalParam, string newParameter, RequestContext context)
         {
-            if (requiredParam == null)
-            {
-                throw new ArgumentNullException(nameof(requiredParam));
-            }
+            Argument.AssertNotNull(requiredParam, nameof(requiredParam));
 
             using var scope = ClientDiagnostics.CreateScope("ParamsClient.PutRequiredOptional");
             scope.Start();
@@ -300,10 +282,7 @@ namespace dpg_update1_LowLevel
         /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='PostParametersAsync(RequestContent,ContentType,RequestContext)']/*" />
         public virtual async Task<Response> PostParametersAsync(RequestContent content, ContentType contentType, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ParamsClient.PostParameters");
             scope.Start();
@@ -338,10 +317,7 @@ namespace dpg_update1_LowLevel
         /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='PostParameters(RequestContent,ContentType,RequestContext)']/*" />
         public virtual Response PostParameters(RequestContent content, ContentType contentType, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ParamsClient.PostParameters");
             scope.Start();

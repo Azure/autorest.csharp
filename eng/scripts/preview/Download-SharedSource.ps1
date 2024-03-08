@@ -68,7 +68,6 @@ $files = @(
     'ProtocolOperation.cs',
     'ProtocolOperationHelpers.cs',
     'RawRequestUriBuilder.cs',
-    'RequestContentHelper.cs',
     'RequestHeaderExtensions.cs',
     'RequestUriBuilderExtensions.cs',
     'ResponseHeadersExtensions.cs',

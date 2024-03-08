@@ -82,18 +82,8 @@ namespace MgmtNoTypeReplacement
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel3SName"/> or <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<NoTypeReplacementModel3Resource>> CreateOrUpdateAsync(WaitUntil waitUntil, string noTypeReplacementModel3SName, NoTypeReplacementModel3Data data, CancellationToken cancellationToken = default)
         {
-            if (noTypeReplacementModel3SName == null)
-            {
-                throw new ArgumentNullException(nameof(noTypeReplacementModel3SName));
-            }
-            if (noTypeReplacementModel3SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(noTypeReplacementModel3SName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(noTypeReplacementModel3SName, nameof(noTypeReplacementModel3SName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _noTypeReplacementModel3ClientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.CreateOrUpdate");
             scope.Start();
@@ -142,18 +132,8 @@ namespace MgmtNoTypeReplacement
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel3SName"/> or <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<NoTypeReplacementModel3Resource> CreateOrUpdate(WaitUntil waitUntil, string noTypeReplacementModel3SName, NoTypeReplacementModel3Data data, CancellationToken cancellationToken = default)
         {
-            if (noTypeReplacementModel3SName == null)
-            {
-                throw new ArgumentNullException(nameof(noTypeReplacementModel3SName));
-            }
-            if (noTypeReplacementModel3SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(noTypeReplacementModel3SName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(noTypeReplacementModel3SName, nameof(noTypeReplacementModel3SName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _noTypeReplacementModel3ClientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.CreateOrUpdate");
             scope.Start();
@@ -200,14 +180,7 @@ namespace MgmtNoTypeReplacement
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel3SName"/> is null. </exception>
         public virtual async Task<Response<NoTypeReplacementModel3Resource>> GetAsync(string noTypeReplacementModel3SName, CancellationToken cancellationToken = default)
         {
-            if (noTypeReplacementModel3SName == null)
-            {
-                throw new ArgumentNullException(nameof(noTypeReplacementModel3SName));
-            }
-            if (noTypeReplacementModel3SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(noTypeReplacementModel3SName));
-            }
+            Argument.AssertNotNullOrEmpty(noTypeReplacementModel3SName, nameof(noTypeReplacementModel3SName));
 
             using var scope = _noTypeReplacementModel3ClientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.Get");
             scope.Start();
@@ -251,14 +224,7 @@ namespace MgmtNoTypeReplacement
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel3SName"/> is null. </exception>
         public virtual Response<NoTypeReplacementModel3Resource> Get(string noTypeReplacementModel3SName, CancellationToken cancellationToken = default)
         {
-            if (noTypeReplacementModel3SName == null)
-            {
-                throw new ArgumentNullException(nameof(noTypeReplacementModel3SName));
-            }
-            if (noTypeReplacementModel3SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(noTypeReplacementModel3SName));
-            }
+            Argument.AssertNotNullOrEmpty(noTypeReplacementModel3SName, nameof(noTypeReplacementModel3SName));
 
             using var scope = _noTypeReplacementModel3ClientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.Get");
             scope.Start();
@@ -359,14 +325,7 @@ namespace MgmtNoTypeReplacement
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel3SName"/> is null. </exception>
         public virtual async Task<Response<bool>> ExistsAsync(string noTypeReplacementModel3SName, CancellationToken cancellationToken = default)
         {
-            if (noTypeReplacementModel3SName == null)
-            {
-                throw new ArgumentNullException(nameof(noTypeReplacementModel3SName));
-            }
-            if (noTypeReplacementModel3SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(noTypeReplacementModel3SName));
-            }
+            Argument.AssertNotNullOrEmpty(noTypeReplacementModel3SName, nameof(noTypeReplacementModel3SName));
 
             using var scope = _noTypeReplacementModel3ClientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.Exists");
             scope.Start();
@@ -409,14 +368,7 @@ namespace MgmtNoTypeReplacement
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel3SName"/> is null. </exception>
         public virtual Response<bool> Exists(string noTypeReplacementModel3SName, CancellationToken cancellationToken = default)
         {
-            if (noTypeReplacementModel3SName == null)
-            {
-                throw new ArgumentNullException(nameof(noTypeReplacementModel3SName));
-            }
-            if (noTypeReplacementModel3SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(noTypeReplacementModel3SName));
-            }
+            Argument.AssertNotNullOrEmpty(noTypeReplacementModel3SName, nameof(noTypeReplacementModel3SName));
 
             using var scope = _noTypeReplacementModel3ClientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.Exists");
             scope.Start();
@@ -459,14 +411,7 @@ namespace MgmtNoTypeReplacement
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel3SName"/> is null. </exception>
         public virtual async Task<NullableResponse<NoTypeReplacementModel3Resource>> GetIfExistsAsync(string noTypeReplacementModel3SName, CancellationToken cancellationToken = default)
         {
-            if (noTypeReplacementModel3SName == null)
-            {
-                throw new ArgumentNullException(nameof(noTypeReplacementModel3SName));
-            }
-            if (noTypeReplacementModel3SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(noTypeReplacementModel3SName));
-            }
+            Argument.AssertNotNullOrEmpty(noTypeReplacementModel3SName, nameof(noTypeReplacementModel3SName));
 
             using var scope = _noTypeReplacementModel3ClientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.GetIfExists");
             scope.Start();
@@ -511,14 +456,7 @@ namespace MgmtNoTypeReplacement
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel3SName"/> is null. </exception>
         public virtual NullableResponse<NoTypeReplacementModel3Resource> GetIfExists(string noTypeReplacementModel3SName, CancellationToken cancellationToken = default)
         {
-            if (noTypeReplacementModel3SName == null)
-            {
-                throw new ArgumentNullException(nameof(noTypeReplacementModel3SName));
-            }
-            if (noTypeReplacementModel3SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(noTypeReplacementModel3SName));
-            }
+            Argument.AssertNotNullOrEmpty(noTypeReplacementModel3SName, nameof(noTypeReplacementModel3SName));
 
             using var scope = _noTypeReplacementModel3ClientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.GetIfExists");
             scope.Start();

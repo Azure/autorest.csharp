@@ -72,9 +72,10 @@ import {
     getWireName,
     isInternal
 } from "@azure-tools/typespec-client-generator-core";
-import { capitalize, getTypeName } from "./utils.js";
+import { capitalize, getFullNamespaceString, getTypeName } from "./utils.js";
 import { InputTypeKind } from "../type/inputTypeKind.js";
 import { InputIntrinsicTypeKind } from "../type/inputIntrinsicTypeKind.js";
+import { fromSdkEnumType } from "../type/converter.js";
 /**
  * Map calType to csharp InputTypeKind
  */
@@ -157,7 +158,7 @@ function getCSharpInputTypeKindByIntrinsicModelName(
             return InputPrimitiveTypeKind.Uri;
         case "uuid":
             return InputPrimitiveTypeKind.Guid;
-        case "etag":
+        case "eTag":
             return InputPrimitiveTypeKind.String;
         case "string":
             switch (format?.toLowerCase()) {
@@ -634,6 +635,15 @@ export function getInputType(
                         discriminatorProperty.type.name
                 );
             }
+            if (
+                discriminatorProperty?.type.kind === "UnionVariant" &&
+                discriminatorProperty?.type.type.kind === "String"
+            ) {
+                return String(
+                    discriminatorProperty.type.type.value ??
+                        discriminatorProperty.type.name
+                );
+            }
         }
 
         return undefined;
@@ -769,20 +779,6 @@ export function getInputType(
         return {};
     }
 
-    function getFullNamespaceString(namespace: Namespace | undefined): string {
-        if (!namespace || !namespace.name) {
-            return "";
-        }
-
-        let namespaceString: string = namespace.name;
-        let current: Namespace | undefined = namespace.namespace;
-        while (current && current.name) {
-            namespaceString = `${current.name}.${namespaceString}`;
-            current = current.namespace;
-        }
-        return namespaceString;
-    }
-
     function getInputModelForIntrinsicType(
         type: IntrinsicType
     ): InputIntrinsicType {
@@ -805,6 +801,11 @@ export function getInputType(
     }
 
     function getInputTypeForUnion(union: Union): InputUnionType | InputType {
+        var clientType = getClientType(context, union);
+        if (clientType.kind === "enum" && clientType.isFixed === false) {
+            return fromSdkEnumType(clientType, context, enums);
+        }
+
         let itemTypes: InputType[] = [];
         const variants = Array.from(union.variants.values());
 
@@ -844,7 +845,7 @@ export function getInputType(
     }
 }
 
-function setUsage(
+export function setUsage(
     context: SdkContext,
     source: Model | Enum,
     target: InputModelType | InputEnumType
@@ -886,6 +887,12 @@ export function getUsages(
         }
         if (type.kind === "Model") {
             typeName = getTypeName(context, effectiveType as Model);
+        }
+        if (type.kind === "Union") {
+            let clientType = getClientType(context, type);
+            if (clientType.kind === "enum" && clientType.isFixed === false) {
+                typeName = clientType.generatedName || clientType.name;
+            }
         }
         const affectTypes: Set<string> = new Set<string>();
         if (typeName !== "") {

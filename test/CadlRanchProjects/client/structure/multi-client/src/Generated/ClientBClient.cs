@@ -49,18 +49,8 @@ namespace Client.Structure.Service.Multiple.Client
         /// <exception cref="ArgumentException"> <paramref name="client"/> is an empty string, and was expected to be non-empty. </exception>
         public ClientBClient(Uri endpoint, string client, ClientStructureServiceMultipleClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
-            if (client == null)
-            {
-                throw new ArgumentNullException(nameof(client));
-            }
-            if (client.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(client));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNullOrEmpty(client, nameof(client));
             options ??= new ClientStructureServiceMultipleClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

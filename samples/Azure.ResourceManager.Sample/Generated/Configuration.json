@@ -56,5 +56,6 @@
   },
   "UpdateRequiredCopy": {
     "VirtualMachineExtension": "Publisher"
-  }
+  },
+  "helper-namespace": "Azure.ResourceManager.Sample"
 }

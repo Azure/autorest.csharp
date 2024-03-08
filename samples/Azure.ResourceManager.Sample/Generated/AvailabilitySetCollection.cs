@@ -83,18 +83,8 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> or <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<AvailabilitySetResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string availabilitySetName, AvailabilitySetData data, CancellationToken cancellationToken = default)
         {
-            if (availabilitySetName == null)
-            {
-                throw new ArgumentNullException(nameof(availabilitySetName));
-            }
-            if (availabilitySetName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(availabilitySetName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(availabilitySetName, nameof(availabilitySetName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetCollection.CreateOrUpdate");
             scope.Start();
@@ -144,18 +134,8 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> or <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<AvailabilitySetResource> CreateOrUpdate(WaitUntil waitUntil, string availabilitySetName, AvailabilitySetData data, CancellationToken cancellationToken = default)
         {
-            if (availabilitySetName == null)
-            {
-                throw new ArgumentNullException(nameof(availabilitySetName));
-            }
-            if (availabilitySetName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(availabilitySetName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(availabilitySetName, nameof(availabilitySetName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetCollection.CreateOrUpdate");
             scope.Start();
@@ -203,14 +183,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> is null. </exception>
         public virtual async Task<Response<AvailabilitySetResource>> GetAsync(string availabilitySetName, CancellationToken cancellationToken = default)
         {
-            if (availabilitySetName == null)
-            {
-                throw new ArgumentNullException(nameof(availabilitySetName));
-            }
-            if (availabilitySetName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(availabilitySetName));
-            }
+            Argument.AssertNotNullOrEmpty(availabilitySetName, nameof(availabilitySetName));
 
             using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetCollection.Get");
             scope.Start();
@@ -255,14 +228,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> is null. </exception>
         public virtual Response<AvailabilitySetResource> Get(string availabilitySetName, CancellationToken cancellationToken = default)
         {
-            if (availabilitySetName == null)
-            {
-                throw new ArgumentNullException(nameof(availabilitySetName));
-            }
-            if (availabilitySetName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(availabilitySetName));
-            }
+            Argument.AssertNotNullOrEmpty(availabilitySetName, nameof(availabilitySetName));
 
             using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetCollection.Get");
             scope.Start();
@@ -367,14 +333,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> is null. </exception>
         public virtual async Task<Response<bool>> ExistsAsync(string availabilitySetName, CancellationToken cancellationToken = default)
         {
-            if (availabilitySetName == null)
-            {
-                throw new ArgumentNullException(nameof(availabilitySetName));
-            }
-            if (availabilitySetName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(availabilitySetName));
-            }
+            Argument.AssertNotNullOrEmpty(availabilitySetName, nameof(availabilitySetName));
 
             using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetCollection.Exists");
             scope.Start();
@@ -417,14 +376,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> is null. </exception>
         public virtual Response<bool> Exists(string availabilitySetName, CancellationToken cancellationToken = default)
         {
-            if (availabilitySetName == null)
-            {
-                throw new ArgumentNullException(nameof(availabilitySetName));
-            }
-            if (availabilitySetName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(availabilitySetName));
-            }
+            Argument.AssertNotNullOrEmpty(availabilitySetName, nameof(availabilitySetName));
 
             using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetCollection.Exists");
             scope.Start();
@@ -467,14 +419,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> is null. </exception>
         public virtual async Task<NullableResponse<AvailabilitySetResource>> GetIfExistsAsync(string availabilitySetName, CancellationToken cancellationToken = default)
         {
-            if (availabilitySetName == null)
-            {
-                throw new ArgumentNullException(nameof(availabilitySetName));
-            }
-            if (availabilitySetName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(availabilitySetName));
-            }
+            Argument.AssertNotNullOrEmpty(availabilitySetName, nameof(availabilitySetName));
 
             using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetCollection.GetIfExists");
             scope.Start();
@@ -519,14 +464,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> is null. </exception>
         public virtual NullableResponse<AvailabilitySetResource> GetIfExists(string availabilitySetName, CancellationToken cancellationToken = default)
         {
-            if (availabilitySetName == null)
-            {
-                throw new ArgumentNullException(nameof(availabilitySetName));
-            }
-            if (availabilitySetName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(availabilitySetName));
-            }
+            Argument.AssertNotNullOrEmpty(availabilitySetName, nameof(availabilitySetName));
 
             using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetCollection.GetIfExists");
             scope.Start();

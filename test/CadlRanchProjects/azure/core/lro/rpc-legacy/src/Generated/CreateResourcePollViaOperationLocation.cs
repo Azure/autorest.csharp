@@ -55,14 +55,7 @@ namespace _Azure.Lro.RpcLegacy
         /// <include file="Docs/CreateResourcePollViaOperationLocation.xml" path="doc/members/member[@name='GetJobAsync(string,CancellationToken)']/*" />
         public virtual async Task<Response<JobResult>> GetJobAsync(string jobId, CancellationToken cancellationToken = default)
         {
-            if (jobId == null)
-            {
-                throw new ArgumentNullException(nameof(jobId));
-            }
-            if (jobId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(jobId));
-            }
+            Argument.AssertNotNullOrEmpty(jobId, nameof(jobId));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetJobAsync(jobId, context).ConfigureAwait(false);
@@ -77,14 +70,7 @@ namespace _Azure.Lro.RpcLegacy
         /// <include file="Docs/CreateResourcePollViaOperationLocation.xml" path="doc/members/member[@name='GetJob(string,CancellationToken)']/*" />
         public virtual Response<JobResult> GetJob(string jobId, CancellationToken cancellationToken = default)
         {
-            if (jobId == null)
-            {
-                throw new ArgumentNullException(nameof(jobId));
-            }
-            if (jobId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(jobId));
-            }
+            Argument.AssertNotNullOrEmpty(jobId, nameof(jobId));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetJob(jobId, context);
@@ -115,14 +101,7 @@ namespace _Azure.Lro.RpcLegacy
         /// <include file="Docs/CreateResourcePollViaOperationLocation.xml" path="doc/members/member[@name='GetJobAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> GetJobAsync(string jobId, RequestContext context)
         {
-            if (jobId == null)
-            {
-                throw new ArgumentNullException(nameof(jobId));
-            }
-            if (jobId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(jobId));
-            }
+            Argument.AssertNotNullOrEmpty(jobId, nameof(jobId));
 
             using var scope = ClientDiagnostics.CreateScope("CreateResourcePollViaOperationLocation.GetJob");
             scope.Start();
@@ -162,14 +141,7 @@ namespace _Azure.Lro.RpcLegacy
         /// <include file="Docs/CreateResourcePollViaOperationLocation.xml" path="doc/members/member[@name='GetJob(string,RequestContext)']/*" />
         public virtual Response GetJob(string jobId, RequestContext context)
         {
-            if (jobId == null)
-            {
-                throw new ArgumentNullException(nameof(jobId));
-            }
-            if (jobId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(jobId));
-            }
+            Argument.AssertNotNullOrEmpty(jobId, nameof(jobId));
 
             using var scope = ClientDiagnostics.CreateScope("CreateResourcePollViaOperationLocation.GetJob");
             scope.Start();
@@ -193,10 +165,7 @@ namespace _Azure.Lro.RpcLegacy
         /// <include file="Docs/CreateResourcePollViaOperationLocation.xml" path="doc/members/member[@name='CreateJobAsync(WaitUntil,JobData,CancellationToken)']/*" />
         public virtual async Task<Operation> CreateJobAsync(WaitUntil waitUntil, JobData jobData, CancellationToken cancellationToken = default)
         {
-            if (jobData == null)
-            {
-                throw new ArgumentNullException(nameof(jobData));
-            }
+            Argument.AssertNotNull(jobData, nameof(jobData));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = jobData.ToRequestContent();
@@ -211,10 +180,7 @@ namespace _Azure.Lro.RpcLegacy
         /// <include file="Docs/CreateResourcePollViaOperationLocation.xml" path="doc/members/member[@name='CreateJob(WaitUntil,JobData,CancellationToken)']/*" />
         public virtual Operation CreateJob(WaitUntil waitUntil, JobData jobData, CancellationToken cancellationToken = default)
         {
-            if (jobData == null)
-            {
-                throw new ArgumentNullException(nameof(jobData));
-            }
+            Argument.AssertNotNull(jobData, nameof(jobData));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = jobData.ToRequestContent();
@@ -245,10 +211,7 @@ namespace _Azure.Lro.RpcLegacy
         /// <include file="Docs/CreateResourcePollViaOperationLocation.xml" path="doc/members/member[@name='CreateJobAsync(WaitUntil,RequestContent,RequestContext)']/*" />
         public virtual async Task<Operation> CreateJobAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("CreateResourcePollViaOperationLocation.CreateJob");
             scope.Start();
@@ -288,10 +251,7 @@ namespace _Azure.Lro.RpcLegacy
         /// <include file="Docs/CreateResourcePollViaOperationLocation.xml" path="doc/members/member[@name='CreateJob(WaitUntil,RequestContent,RequestContext)']/*" />
         public virtual Operation CreateJob(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("CreateResourcePollViaOperationLocation.CreateJob");
             scope.Start();

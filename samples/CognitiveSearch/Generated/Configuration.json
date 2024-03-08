@@ -20,5 +20,6 @@
     "Skill",
     "TokenFilter",
     "Tokenizer"
-  ]
+  ],
+  "helper-namespace": "CognitiveSearch"
 }

@@ -82,18 +82,8 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentNullException"> <paramref name="vmExtensionName"/> or <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<VirtualMachineScaleSetVirtualMachineExtensionResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string vmExtensionName, VirtualMachineExtensionData data, CancellationToken cancellationToken = default)
         {
-            if (vmExtensionName == null)
-            {
-                throw new ArgumentNullException(nameof(vmExtensionName));
-            }
-            if (vmExtensionName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(vmExtensionName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(vmExtensionName, nameof(vmExtensionName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _virtualMachineScaleSetVirtualMachineExtensionVirtualMachineScaleSetVmExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetVirtualMachineExtensionCollection.CreateOrUpdate");
             scope.Start();
@@ -141,18 +131,8 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentNullException"> <paramref name="vmExtensionName"/> or <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<VirtualMachineScaleSetVirtualMachineExtensionResource> CreateOrUpdate(WaitUntil waitUntil, string vmExtensionName, VirtualMachineExtensionData data, CancellationToken cancellationToken = default)
         {
-            if (vmExtensionName == null)
-            {
-                throw new ArgumentNullException(nameof(vmExtensionName));
-            }
-            if (vmExtensionName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(vmExtensionName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(vmExtensionName, nameof(vmExtensionName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _virtualMachineScaleSetVirtualMachineExtensionVirtualMachineScaleSetVmExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetVirtualMachineExtensionCollection.CreateOrUpdate");
             scope.Start();
@@ -199,14 +179,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentNullException"> <paramref name="vmExtensionName"/> is null. </exception>
         public virtual async Task<Response<VirtualMachineScaleSetVirtualMachineExtensionResource>> GetAsync(string vmExtensionName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (vmExtensionName == null)
-            {
-                throw new ArgumentNullException(nameof(vmExtensionName));
-            }
-            if (vmExtensionName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(vmExtensionName));
-            }
+            Argument.AssertNotNullOrEmpty(vmExtensionName, nameof(vmExtensionName));
 
             using var scope = _virtualMachineScaleSetVirtualMachineExtensionVirtualMachineScaleSetVmExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetVirtualMachineExtensionCollection.Get");
             scope.Start();
@@ -252,14 +225,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentNullException"> <paramref name="vmExtensionName"/> is null. </exception>
         public virtual Response<VirtualMachineScaleSetVirtualMachineExtensionResource> Get(string vmExtensionName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (vmExtensionName == null)
-            {
-                throw new ArgumentNullException(nameof(vmExtensionName));
-            }
-            if (vmExtensionName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(vmExtensionName));
-            }
+            Argument.AssertNotNullOrEmpty(vmExtensionName, nameof(vmExtensionName));
 
             using var scope = _virtualMachineScaleSetVirtualMachineExtensionVirtualMachineScaleSetVmExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetVirtualMachineExtensionCollection.Get");
             scope.Start();
@@ -365,14 +331,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentNullException"> <paramref name="vmExtensionName"/> is null. </exception>
         public virtual async Task<Response<bool>> ExistsAsync(string vmExtensionName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (vmExtensionName == null)
-            {
-                throw new ArgumentNullException(nameof(vmExtensionName));
-            }
-            if (vmExtensionName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(vmExtensionName));
-            }
+            Argument.AssertNotNullOrEmpty(vmExtensionName, nameof(vmExtensionName));
 
             using var scope = _virtualMachineScaleSetVirtualMachineExtensionVirtualMachineScaleSetVmExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetVirtualMachineExtensionCollection.Exists");
             scope.Start();
@@ -416,14 +375,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentNullException"> <paramref name="vmExtensionName"/> is null. </exception>
         public virtual Response<bool> Exists(string vmExtensionName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (vmExtensionName == null)
-            {
-                throw new ArgumentNullException(nameof(vmExtensionName));
-            }
-            if (vmExtensionName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(vmExtensionName));
-            }
+            Argument.AssertNotNullOrEmpty(vmExtensionName, nameof(vmExtensionName));
 
             using var scope = _virtualMachineScaleSetVirtualMachineExtensionVirtualMachineScaleSetVmExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetVirtualMachineExtensionCollection.Exists");
             scope.Start();
@@ -467,14 +419,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentNullException"> <paramref name="vmExtensionName"/> is null. </exception>
         public virtual async Task<NullableResponse<VirtualMachineScaleSetVirtualMachineExtensionResource>> GetIfExistsAsync(string vmExtensionName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (vmExtensionName == null)
-            {
-                throw new ArgumentNullException(nameof(vmExtensionName));
-            }
-            if (vmExtensionName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(vmExtensionName));
-            }
+            Argument.AssertNotNullOrEmpty(vmExtensionName, nameof(vmExtensionName));
 
             using var scope = _virtualMachineScaleSetVirtualMachineExtensionVirtualMachineScaleSetVmExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetVirtualMachineExtensionCollection.GetIfExists");
             scope.Start();
@@ -520,14 +465,7 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentNullException"> <paramref name="vmExtensionName"/> is null. </exception>
         public virtual NullableResponse<VirtualMachineScaleSetVirtualMachineExtensionResource> GetIfExists(string vmExtensionName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (vmExtensionName == null)
-            {
-                throw new ArgumentNullException(nameof(vmExtensionName));
-            }
-            if (vmExtensionName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(vmExtensionName));
-            }
+            Argument.AssertNotNullOrEmpty(vmExtensionName, nameof(vmExtensionName));
 
             using var scope = _virtualMachineScaleSetVirtualMachineExtensionVirtualMachineScaleSetVmExtensionsClientDiagnostics.CreateScope("VirtualMachineScaleSetVirtualMachineExtensionCollection.GetIfExists");
             scope.Start();

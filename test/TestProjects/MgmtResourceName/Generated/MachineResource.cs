@@ -194,10 +194,7 @@ namespace MgmtResourceName
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<MachineResource>> UpdateAsync(WaitUntil waitUntil, MachineData data, CancellationToken cancellationToken = default)
         {
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _machineClientDiagnostics.CreateScope("MachineResource.Update");
             scope.Start();
@@ -244,10 +241,7 @@ namespace MgmtResourceName
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<MachineResource> Update(WaitUntil waitUntil, MachineData data, CancellationToken cancellationToken = default)
         {
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _machineClientDiagnostics.CreateScope("MachineResource.Update");
             scope.Start();

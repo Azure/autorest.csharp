@@ -83,18 +83,8 @@ namespace MgmtAcronymMapping
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<ImageResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string name, ImageData data, CancellationToken cancellationToken = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (name.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _imageClientDiagnostics.CreateScope("ImageCollection.CreateOrUpdate");
             scope.Start();
@@ -142,18 +132,8 @@ namespace MgmtAcronymMapping
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<ImageResource> CreateOrUpdate(WaitUntil waitUntil, string name, ImageData data, CancellationToken cancellationToken = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (name.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _imageClientDiagnostics.CreateScope("ImageCollection.CreateOrUpdate");
             scope.Start();
@@ -200,14 +180,7 @@ namespace MgmtAcronymMapping
         /// <exception cref="ArgumentNullException"> <paramref name="imageName"/> is null. </exception>
         public virtual async Task<Response<ImageResource>> GetAsync(string imageName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (imageName == null)
-            {
-                throw new ArgumentNullException(nameof(imageName));
-            }
-            if (imageName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(imageName));
-            }
+            Argument.AssertNotNullOrEmpty(imageName, nameof(imageName));
 
             using var scope = _imageClientDiagnostics.CreateScope("ImageCollection.Get");
             scope.Start();
@@ -253,14 +226,7 @@ namespace MgmtAcronymMapping
         /// <exception cref="ArgumentNullException"> <paramref name="imageName"/> is null. </exception>
         public virtual Response<ImageResource> Get(string imageName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (imageName == null)
-            {
-                throw new ArgumentNullException(nameof(imageName));
-            }
-            if (imageName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(imageName));
-            }
+            Argument.AssertNotNullOrEmpty(imageName, nameof(imageName));
 
             using var scope = _imageClientDiagnostics.CreateScope("ImageCollection.Get");
             scope.Start();
@@ -366,14 +332,7 @@ namespace MgmtAcronymMapping
         /// <exception cref="ArgumentNullException"> <paramref name="imageName"/> is null. </exception>
         public virtual async Task<Response<bool>> ExistsAsync(string imageName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (imageName == null)
-            {
-                throw new ArgumentNullException(nameof(imageName));
-            }
-            if (imageName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(imageName));
-            }
+            Argument.AssertNotNullOrEmpty(imageName, nameof(imageName));
 
             using var scope = _imageClientDiagnostics.CreateScope("ImageCollection.Exists");
             scope.Start();
@@ -417,14 +376,7 @@ namespace MgmtAcronymMapping
         /// <exception cref="ArgumentNullException"> <paramref name="imageName"/> is null. </exception>
         public virtual Response<bool> Exists(string imageName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (imageName == null)
-            {
-                throw new ArgumentNullException(nameof(imageName));
-            }
-            if (imageName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(imageName));
-            }
+            Argument.AssertNotNullOrEmpty(imageName, nameof(imageName));
 
             using var scope = _imageClientDiagnostics.CreateScope("ImageCollection.Exists");
             scope.Start();
@@ -468,14 +420,7 @@ namespace MgmtAcronymMapping
         /// <exception cref="ArgumentNullException"> <paramref name="imageName"/> is null. </exception>
         public virtual async Task<NullableResponse<ImageResource>> GetIfExistsAsync(string imageName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (imageName == null)
-            {
-                throw new ArgumentNullException(nameof(imageName));
-            }
-            if (imageName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(imageName));
-            }
+            Argument.AssertNotNullOrEmpty(imageName, nameof(imageName));
 
             using var scope = _imageClientDiagnostics.CreateScope("ImageCollection.GetIfExists");
             scope.Start();
@@ -521,14 +466,7 @@ namespace MgmtAcronymMapping
         /// <exception cref="ArgumentNullException"> <paramref name="imageName"/> is null. </exception>
         public virtual NullableResponse<ImageResource> GetIfExists(string imageName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (imageName == null)
-            {
-                throw new ArgumentNullException(nameof(imageName));
-            }
-            if (imageName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(imageName));
-            }
+            Argument.AssertNotNullOrEmpty(imageName, nameof(imageName));
 
             using var scope = _imageClientDiagnostics.CreateScope("ImageCollection.GetIfExists");
             scope.Start();

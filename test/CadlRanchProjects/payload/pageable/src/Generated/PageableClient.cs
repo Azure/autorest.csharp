@@ -39,10 +39,7 @@ namespace Payload.Pageable
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public PageableClient(Uri endpoint, PageableClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new PageableClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

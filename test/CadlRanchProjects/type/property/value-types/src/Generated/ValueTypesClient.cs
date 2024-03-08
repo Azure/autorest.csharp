@@ -36,10 +36,7 @@ namespace _Type.Property.ValueTypes
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public ValueTypesClient(Uri endpoint, ValueTypesClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new ValueTypesClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

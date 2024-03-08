@@ -357,10 +357,7 @@ namespace MgmtOperations
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetUpdate"/> is null. </exception>
         public virtual async Task<Response<AvailabilitySetResource>> UpdateAsync(AvailabilitySetUpdate availabilitySetUpdate, CancellationToken cancellationToken = default)
         {
-            if (availabilitySetUpdate == null)
-            {
-                throw new ArgumentNullException(nameof(availabilitySetUpdate));
-            }
+            Argument.AssertNotNull(availabilitySetUpdate, nameof(availabilitySetUpdate));
 
             using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetResource.Update");
             scope.Start();
@@ -402,10 +399,7 @@ namespace MgmtOperations
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetUpdate"/> is null. </exception>
         public virtual Response<AvailabilitySetResource> Update(AvailabilitySetUpdate availabilitySetUpdate, CancellationToken cancellationToken = default)
         {
-            if (availabilitySetUpdate == null)
-            {
-                throw new ArgumentNullException(nameof(availabilitySetUpdate));
-            }
+            Argument.AssertNotNull(availabilitySetUpdate, nameof(availabilitySetUpdate));
 
             using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetResource.Update");
             scope.Start();
@@ -448,10 +442,7 @@ namespace MgmtOperations
         /// <exception cref="ArgumentNullException"> <paramref name="connectionSharedKey"/> is null. </exception>
         public virtual async Task<ArmOperation<ConnectionSharedKey>> TestSetSharedKeyAsync(WaitUntil waitUntil, ConnectionSharedKey connectionSharedKey, CancellationToken cancellationToken = default)
         {
-            if (connectionSharedKey == null)
-            {
-                throw new ArgumentNullException(nameof(connectionSharedKey));
-            }
+            Argument.AssertNotNull(connectionSharedKey, nameof(connectionSharedKey));
 
             using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetResource.TestSetSharedKey");
             scope.Start();
@@ -497,10 +488,7 @@ namespace MgmtOperations
         /// <exception cref="ArgumentNullException"> <paramref name="connectionSharedKey"/> is null. </exception>
         public virtual ArmOperation<ConnectionSharedKey> TestSetSharedKey(WaitUntil waitUntil, ConnectionSharedKey connectionSharedKey, CancellationToken cancellationToken = default)
         {
-            if (connectionSharedKey == null)
-            {
-                throw new ArgumentNullException(nameof(connectionSharedKey));
-            }
+            Argument.AssertNotNull(connectionSharedKey, nameof(connectionSharedKey));
 
             using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetResource.TestSetSharedKey");
             scope.Start();
@@ -546,14 +534,8 @@ namespace MgmtOperations
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
         public virtual async Task<Response<AvailabilitySetResource>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(key, nameof(key));
+            Argument.AssertNotNull(value, nameof(value));
 
             using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetResource.AddTag");
             scope.Start();
@@ -614,14 +596,8 @@ namespace MgmtOperations
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
         public virtual Response<AvailabilitySetResource> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(key, nameof(key));
+            Argument.AssertNotNull(value, nameof(value));
 
             using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetResource.AddTag");
             scope.Start();
@@ -681,10 +657,7 @@ namespace MgmtOperations
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
         public virtual async Task<Response<AvailabilitySetResource>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            if (tags == null)
-            {
-                throw new ArgumentNullException(nameof(tags));
-            }
+            Argument.AssertNotNull(tags, nameof(tags));
 
             using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetResource.SetTags");
             scope.Start();
@@ -741,10 +714,7 @@ namespace MgmtOperations
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
         public virtual Response<AvailabilitySetResource> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            if (tags == null)
-            {
-                throw new ArgumentNullException(nameof(tags));
-            }
+            Argument.AssertNotNull(tags, nameof(tags));
 
             using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetResource.SetTags");
             scope.Start();
@@ -801,10 +771,7 @@ namespace MgmtOperations
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public virtual async Task<Response<AvailabilitySetResource>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
+            Argument.AssertNotNull(key, nameof(key));
 
             using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetResource.RemoveTag");
             scope.Start();
@@ -864,10 +831,7 @@ namespace MgmtOperations
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public virtual Response<AvailabilitySetResource> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
+            Argument.AssertNotNull(key, nameof(key));
 
             using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetResource.RemoveTag");
             scope.Start();

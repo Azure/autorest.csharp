@@ -84,7 +84,7 @@
    "$id": "14",
    "Kind": "Enum",
    "Name": "ImputeMode",
-   "EnumValueType": "String",
+   "EnumValueType": "string",
    "AllowedValues": [
     {
      "$id": "15",
@@ -160,7 +160,7 @@
    "$id": "26",
    "Kind": "Enum",
    "Name": "DataSchema",
-   "EnumValueType": "String",
+   "EnumValueType": "string",
    "AllowedValues": [
     {
      "$id": "27",
@@ -208,7 +208,7 @@
    "$id": "32",
    "Kind": "Enum",
    "Name": "FillNAMethod",
-   "EnumValueType": "String",
+   "EnumValueType": "string",
    "AllowedValues": [
     {
      "$id": "33",

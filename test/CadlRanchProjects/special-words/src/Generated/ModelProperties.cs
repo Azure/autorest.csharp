@@ -49,10 +49,7 @@ namespace SpecialWords
         /// <include file="Docs/ModelProperties.xml" path="doc/members/member[@name='SameAsModelAsync(SameAsModel,CancellationToken)']/*" />
         public virtual async Task<Response> SameAsModelAsync(SameAsModel body, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
+            Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -66,10 +63,7 @@ namespace SpecialWords
         /// <include file="Docs/ModelProperties.xml" path="doc/members/member[@name='SameAsModel(SameAsModel,CancellationToken)']/*" />
         public virtual Response SameAsModel(SameAsModel body, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
+            Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -100,10 +94,7 @@ namespace SpecialWords
         /// <include file="Docs/ModelProperties.xml" path="doc/members/member[@name='SameAsModelAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> SameAsModelAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ModelProperties.SameAsModel");
             scope.Start();
@@ -142,10 +133,7 @@ namespace SpecialWords
         /// <include file="Docs/ModelProperties.xml" path="doc/members/member[@name='SameAsModel(RequestContent,RequestContext)']/*" />
         public virtual Response SameAsModel(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ModelProperties.SameAsModel");
             scope.Start();

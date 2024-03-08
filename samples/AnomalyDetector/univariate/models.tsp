@@ -9,7 +9,8 @@ using Azure.Core;
 namespace AnomalyDetector.Univariate;
 
 @doc("The impute mode.")
-enum ImputeMode {
+union ImputeMode {
+  string,
   Auto: "auto",
   Previous: "previous",
   Linear: "linear",

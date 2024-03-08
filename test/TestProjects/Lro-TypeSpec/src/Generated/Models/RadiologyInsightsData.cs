@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using lrotsp;
 
 namespace lrotsp.Models
 {
@@ -51,10 +52,7 @@ namespace lrotsp.Models
         /// <exception cref="ArgumentNullException"> <paramref name="patients"/> is null. </exception>
         public RadiologyInsightsData(IEnumerable<string> patients)
         {
-            if (patients == null)
-            {
-                throw new ArgumentNullException(nameof(patients));
-            }
+            Argument.AssertNotNull(patients, nameof(patients));
 
             Patients = patients.ToList();
         }

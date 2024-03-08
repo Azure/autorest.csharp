@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -52,22 +53,10 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="object"/>, <paramref name="model"/> or <paramref name="choices"/> is null. </exception>
         internal CreateChatCompletionResponse(string id, string @object, DateTimeOffset created, string model, IEnumerable<CreateChatCompletionResponseChoice> choices)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-            if (@object == null)
-            {
-                throw new ArgumentNullException(nameof(@object));
-            }
-            if (model == null)
-            {
-                throw new ArgumentNullException(nameof(model));
-            }
-            if (choices == null)
-            {
-                throw new ArgumentNullException(nameof(choices));
-            }
+            Argument.AssertNotNull(id, nameof(id));
+            Argument.AssertNotNull(@object, nameof(@object));
+            Argument.AssertNotNull(model, nameof(model));
+            Argument.AssertNotNull(choices, nameof(choices));
 
             Id = id;
             Object = @object;

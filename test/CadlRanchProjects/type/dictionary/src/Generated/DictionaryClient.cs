@@ -36,10 +36,7 @@ namespace _Type._Dictionary
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public DictionaryClient(Uri endpoint, DictionaryClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new DictionaryClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

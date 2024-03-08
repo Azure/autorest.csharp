@@ -586,10 +586,7 @@ namespace Azure.ResourceManager.Storage
         /// <exception cref="ArgumentNullException"> <paramref name="patch"/> is null. </exception>
         public virtual async Task<Response<StorageAccountResource>> UpdateAsync(StorageAccountPatch patch, CancellationToken cancellationToken = default)
         {
-            if (patch == null)
-            {
-                throw new ArgumentNullException(nameof(patch));
-            }
+            Argument.AssertNotNull(patch, nameof(patch));
 
             using var scope = _storageAccountClientDiagnostics.CreateScope("StorageAccountResource.Update");
             scope.Start();
@@ -631,10 +628,7 @@ namespace Azure.ResourceManager.Storage
         /// <exception cref="ArgumentNullException"> <paramref name="patch"/> is null. </exception>
         public virtual Response<StorageAccountResource> Update(StorageAccountPatch patch, CancellationToken cancellationToken = default)
         {
-            if (patch == null)
-            {
-                throw new ArgumentNullException(nameof(patch));
-            }
+            Argument.AssertNotNull(patch, nameof(patch));
 
             using var scope = _storageAccountClientDiagnostics.CreateScope("StorageAccountResource.Update");
             scope.Start();
@@ -754,10 +748,7 @@ namespace Azure.ResourceManager.Storage
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public virtual async Task<Response<StorageAccountListKeysResult>> RegenerateKeyAsync(StorageAccountRegenerateKeyContent content, CancellationToken cancellationToken = default)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _storageAccountClientDiagnostics.CreateScope("StorageAccountResource.RegenerateKey");
             scope.Start();
@@ -799,10 +790,7 @@ namespace Azure.ResourceManager.Storage
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public virtual Response<StorageAccountListKeysResult> RegenerateKey(StorageAccountRegenerateKeyContent content, CancellationToken cancellationToken = default)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _storageAccountClientDiagnostics.CreateScope("StorageAccountResource.RegenerateKey");
             scope.Start();
@@ -844,10 +832,7 @@ namespace Azure.ResourceManager.Storage
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public virtual async Task<Response<ListAccountSasResponse>> GetAccountSASAsync(AccountSasContent content, CancellationToken cancellationToken = default)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _storageAccountClientDiagnostics.CreateScope("StorageAccountResource.GetAccountSAS");
             scope.Start();
@@ -889,10 +874,7 @@ namespace Azure.ResourceManager.Storage
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public virtual Response<ListAccountSasResponse> GetAccountSAS(AccountSasContent content, CancellationToken cancellationToken = default)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _storageAccountClientDiagnostics.CreateScope("StorageAccountResource.GetAccountSAS");
             scope.Start();
@@ -934,10 +916,7 @@ namespace Azure.ResourceManager.Storage
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public virtual async Task<Response<ListServiceSasResponse>> GetServiceSASAsync(ServiceSasContent content, CancellationToken cancellationToken = default)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _storageAccountClientDiagnostics.CreateScope("StorageAccountResource.GetServiceSAS");
             scope.Start();
@@ -979,10 +958,7 @@ namespace Azure.ResourceManager.Storage
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public virtual Response<ListServiceSasResponse> GetServiceSAS(ServiceSasContent content, CancellationToken cancellationToken = default)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _storageAccountClientDiagnostics.CreateScope("StorageAccountResource.GetServiceSAS");
             scope.Start();
@@ -1109,10 +1085,7 @@ namespace Azure.ResourceManager.Storage
         /// <exception cref="ArgumentNullException"> <paramref name="requestType"/> is null. </exception>
         public virtual async Task<ArmOperation> HierarchicalNamespaceMigrationAsync(WaitUntil waitUntil, string requestType, CancellationToken cancellationToken = default)
         {
-            if (requestType == null)
-            {
-                throw new ArgumentNullException(nameof(requestType));
-            }
+            Argument.AssertNotNull(requestType, nameof(requestType));
 
             using var scope = _storageAccountClientDiagnostics.CreateScope("StorageAccountResource.HierarchicalNamespaceMigration");
             scope.Start();
@@ -1158,10 +1131,7 @@ namespace Azure.ResourceManager.Storage
         /// <exception cref="ArgumentNullException"> <paramref name="requestType"/> is null. </exception>
         public virtual ArmOperation HierarchicalNamespaceMigration(WaitUntil waitUntil, string requestType, CancellationToken cancellationToken = default)
         {
-            if (requestType == null)
-            {
-                throw new ArgumentNullException(nameof(requestType));
-            }
+            Argument.AssertNotNull(requestType, nameof(requestType));
 
             using var scope = _storageAccountClientDiagnostics.CreateScope("StorageAccountResource.HierarchicalNamespaceMigration");
             scope.Start();
@@ -1291,10 +1261,7 @@ namespace Azure.ResourceManager.Storage
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public virtual async Task<StorageAccountRestoreBlobRangesOperation> RestoreBlobRangesAsync(WaitUntil waitUntil, BlobRestoreContent content, CancellationToken cancellationToken = default)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _storageAccountClientDiagnostics.CreateScope("StorageAccountResource.RestoreBlobRanges");
             scope.Start();
@@ -1340,10 +1307,7 @@ namespace Azure.ResourceManager.Storage
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public virtual StorageAccountRestoreBlobRangesOperation RestoreBlobRanges(WaitUntil waitUntil, BlobRestoreContent content, CancellationToken cancellationToken = default)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _storageAccountClientDiagnostics.CreateScope("StorageAccountResource.RestoreBlobRanges");
             scope.Start();
@@ -1515,14 +1479,8 @@ namespace Azure.ResourceManager.Storage
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
         public virtual async Task<Response<StorageAccountResource>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(key, nameof(key));
+            Argument.AssertNotNull(value, nameof(value));
 
             using var scope = _storageAccountClientDiagnostics.CreateScope("StorageAccountResource.AddTag");
             scope.Start();
@@ -1583,14 +1541,8 @@ namespace Azure.ResourceManager.Storage
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
         public virtual Response<StorageAccountResource> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(key, nameof(key));
+            Argument.AssertNotNull(value, nameof(value));
 
             using var scope = _storageAccountClientDiagnostics.CreateScope("StorageAccountResource.AddTag");
             scope.Start();
@@ -1650,10 +1602,7 @@ namespace Azure.ResourceManager.Storage
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
         public virtual async Task<Response<StorageAccountResource>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            if (tags == null)
-            {
-                throw new ArgumentNullException(nameof(tags));
-            }
+            Argument.AssertNotNull(tags, nameof(tags));
 
             using var scope = _storageAccountClientDiagnostics.CreateScope("StorageAccountResource.SetTags");
             scope.Start();
@@ -1710,10 +1659,7 @@ namespace Azure.ResourceManager.Storage
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
         public virtual Response<StorageAccountResource> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            if (tags == null)
-            {
-                throw new ArgumentNullException(nameof(tags));
-            }
+            Argument.AssertNotNull(tags, nameof(tags));
 
             using var scope = _storageAccountClientDiagnostics.CreateScope("StorageAccountResource.SetTags");
             scope.Start();
@@ -1770,10 +1716,7 @@ namespace Azure.ResourceManager.Storage
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public virtual async Task<Response<StorageAccountResource>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
+            Argument.AssertNotNull(key, nameof(key));
 
             using var scope = _storageAccountClientDiagnostics.CreateScope("StorageAccountResource.RemoveTag");
             scope.Start();
@@ -1833,10 +1776,7 @@ namespace Azure.ResourceManager.Storage
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public virtual Response<StorageAccountResource> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
+            Argument.AssertNotNull(key, nameof(key));
 
             using var scope = _storageAccountClientDiagnostics.CreateScope("StorageAccountResource.RemoveTag");
             scope.Start();
