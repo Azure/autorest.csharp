@@ -59,6 +59,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     _writer.Line($"private readonly {_operationInternalType} _operation;");
                     _writer.Line($"private readonly {typeof(RehydrationToken?)} _completeRehydrationToken;");
                     _writer.Line($"private readonly {typeof(NextLinkOperationImplementation)}? _nextLinkOperation;");
+                    _writer.Line($"private readonly {typeof(string)} _operationId;");
                     _writer.Line();
 
                     _writer.WriteXmlDocumentationSummary($"Initializes a new instance of {_name} for mocking.");
@@ -71,6 +72,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     {
                         _writer.Line($"_operation = {_operationInternalType}.Succeeded({_responseString});");
                         _writer.Line($"_completeRehydrationToken = rehydrationToken;");
+                        _writer.Line($"_operationId = GetOperationId(rehydrationToken);");
                     }
                     _writer.Line();
 
@@ -80,14 +82,16 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         _writer.Line($"var {nextLinkOperation:D} = {typeof(NextLinkOperationImplementation)}.{nameof(NextLinkOperationImplementation.Create)}(pipeline, request.Method, request.Uri.ToUri(), {Configuration.ApiTypes.ResponseParameterName}, finalStateVia, skipApiVersionOverride, apiVersionOverrideValue);");
                         using (_writer.Scope($"if (nextLinkOperation is NextLinkOperationImplementation nextLinkOperationValue)"))
                         {
-                            // If nextLinkOperatino is NextLinkOperationImplementation, this implies that the operation is not complete
+                            // If nextLinkOperation is NextLinkOperationImplementation, this implies that the operation is not complete
                             // we need to store the nextLinkOperation to get lateset rehydration token
                             _writer.Line($"_nextLinkOperation = nextLinkOperationValue;");
+                            _writer.Line($"_operationId = _nextLinkOperation.OperationId;");
                         }
                         using (_writer.Scope($"else"))
                         {
                             // This implies the operation is complete and we can cache the rehydration token since it won't change anymore
                             _writer.Line($"_completeRehydrationToken = {typeof(NextLinkOperationImplementation)}.{nameof(NextLinkOperationImplementation.GetRehydrationToken)}(request.Method, request.Uri.ToUri(), {Configuration.ApiTypes.ResponseParameterName}, finalStateVia, skipApiVersionOverride, apiVersionOverrideValue);");
+                            _writer.Line($"_operationId = GetOperationId(_completeRehydrationToken);");
                         }
                         if (_isGeneric)
                         {
@@ -102,10 +106,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                     _writer.WriteXmlDocumentationInheritDoc();
                     _writer
-                        .LineRaw("#pragma warning disable CA1822")
-                        .LineRaw($"[{typeof(EditorBrowsableAttribute)}({typeof(EditorBrowsableState)}.{nameof(EditorBrowsableState.Never)})]")
-                        .LineRaw("public override string Id => throw new NotImplementedException();")
-                        .LineRaw("#pragma warning restore CA1822")
+                        .LineRaw("public override string Id => _operationId ?? null;")
                         .Line();
 
                     _writer.WriteXmlDocumentationInheritDoc();
