@@ -18,14 +18,14 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class RequestContentHelperProvider : ExpressionTypeProvider
     {
-        private static readonly Lazy<RequestContentHelperProvider> _instance = new Lazy<RequestContentHelperProvider>(() => new RequestContentHelperProvider(Configuration.HelperNamespace));
+        private static readonly Lazy<RequestContentHelperProvider> _instance = new Lazy<RequestContentHelperProvider>(() => new RequestContentHelperProvider());
         public static RequestContentHelperProvider Instance => _instance.Value;
 
         private readonly CSharpType _requestBodyType;
         private readonly CSharpType _utf8JsonRequestBodyType;
 
         private readonly MethodSignatureModifiers _methodModifiers = MethodSignatureModifiers.Public | MethodSignatureModifiers.Static;
-        private RequestContentHelperProvider(string defaultNamespace) : base(defaultNamespace, null)
+        private RequestContentHelperProvider() : base(Configuration.HelperNamespace, null)
         {
             DeclarationModifiers = TypeSignatureModifiers.Internal | TypeSignatureModifiers.Static;
             _requestBodyType = Configuration.IsBranded ? typeof(RequestContent) : typeof(RequestBody);

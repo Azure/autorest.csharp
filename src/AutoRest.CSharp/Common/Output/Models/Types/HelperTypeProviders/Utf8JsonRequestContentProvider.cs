@@ -22,10 +22,10 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class Utf8JsonRequestContentProvider : ExpressionTypeProvider
     {
-        private static readonly Lazy<Utf8JsonRequestContentProvider> _instance = new Lazy<Utf8JsonRequestContentProvider>(() => new Utf8JsonRequestContentProvider(Configuration.Namespace));
+        private static readonly Lazy<Utf8JsonRequestContentProvider> _instance = new Lazy<Utf8JsonRequestContentProvider>(() => new Utf8JsonRequestContentProvider());
         public static Utf8JsonRequestContentProvider Instance => _instance.Value;
 
-        private Utf8JsonRequestContentProvider(string defaultNamespace) : base(defaultNamespace, null)
+        private Utf8JsonRequestContentProvider() : base(Configuration.HelperNamespace, null)
         {
             DeclarationModifiers = TypeSignatureModifiers.Internal;
             DefaultName = Configuration.IsBranded ? "Utf8JsonRequestContent" : "Utf8JsonRequestBody";
