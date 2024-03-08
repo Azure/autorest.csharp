@@ -662,8 +662,9 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override ObjectTypeDiscriminator? BuildDiscriminator()
         {
-            var discriminatorPropertyName = _inputModel.DiscriminatorPropertyName;
-            var implementations = Array.Empty<ObjectTypeDiscriminatorImplementation>();
+            string? discriminatorPropertyName = _inputModel.DiscriminatorPropertyName;
+            ObjectTypeDiscriminatorImplementation[] implementations = Array.Empty<ObjectTypeDiscriminatorImplementation>();
+            Constant? value = null;
             ObjectTypeProperty property;
 
             if (discriminatorPropertyName == null)
@@ -671,7 +672,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 var parent = GetBaseObjectType();
                 if (parent is null || parent.Discriminator is null)
                 {
-                    //neither me nor my parent are discriminators, so I can bail
+                    //neither me nor my parent are discriminators so I can bail
                     return null;
                 }
 
@@ -681,21 +682,18 @@ namespace AutoRest.CSharp.Output.Models.Types
             else
             {
                 //only load implementations for the base type
-                // [TODO]: OrderBy(i => i.Key) is needed only to preserve the order. Remove it in a separate PR.
                 implementations = Configuration.Generation1ConvenienceClient
                     ? GetDerivedTypes(_derivedModels).OrderBy(i => i.Key).ToArray()
                     : GetDerivedTypes(_derivedModels).ToArray();
 
                 // find the discriminator corresponding property in this type or its base type or more
-                property = EnumerateHierarchy()
-                    .SelectMany(o => o.Properties)
-                    .FirstOrDefault(p => p.InputModelProperty is not null && (p.InputModelProperty.IsDiscriminator || p.InputModelProperty.Name == discriminatorPropertyName))
-                    ?? throw new InvalidOperationException($"Expecting discriminator property {discriminatorPropertyName} on model {Declaration.Name}, but found none");
+                property = GetPropertyForDiscriminator(discriminatorPropertyName);
             }
 
-            Constant? value = _inputModel.DiscriminatorValue != null
-                ? BuilderHelpers.ParseConstant(_inputModel.DiscriminatorValue, property.Declaration.Type)
-                : null;
+            if (_inputModel.DiscriminatorValue != null)
+            {
+                value = BuilderHelpers.ParseConstant(_inputModel.DiscriminatorValue, property.Declaration.Type);
+            }
 
             return new ObjectTypeDiscriminator(
                 property,
@@ -704,6 +702,18 @@ namespace AutoRest.CSharp.Output.Models.Types
                 value,
                 _defaultDerivedType!
             );
+        }
+
+        private ObjectTypeProperty GetPropertyForDiscriminator(string inputPropertyName)
+        {
+            foreach (var obj in EnumerateHierarchy())
+            {
+                var property = obj.Properties.FirstOrDefault(p => p.InputModelProperty is not null && (p.InputModelProperty.IsDiscriminator || p.InputModelProperty.Name == inputPropertyName));
+                if (property is not null)
+                    return property;
+            }
+
+            throw new InvalidOperationException($"Expecting discriminator property {inputPropertyName} on model {Declaration.Name}, but found none");
         }
 
         private IEnumerable<ObjectTypeDiscriminatorImplementation> GetDerivedTypes(IReadOnlyList<InputModelType> derivedInputTypes)
