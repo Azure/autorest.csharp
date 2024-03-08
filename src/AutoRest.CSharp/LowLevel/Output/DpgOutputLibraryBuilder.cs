@@ -69,7 +69,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             foreach (var inputEnum in inputEnums)
             {
-                enums.Add(inputEnum, new EnumType(inputEnum, TypeProvider.GetDefaultModelNamespace(null, Configuration.Namespace), "public", typeFactory, sourceInputModel));
+                enums.Add(inputEnum, new EnumType(inputEnum, TypeProvider.GetDefaultModelNamespace(inputEnum.Namespace, Configuration.Namespace), "public", typeFactory, sourceInputModel));
             }
 
             List<(InputModelType, InputModelProperty, InputEnumType)> enumsToReplace = new List<(InputModelType, InputModelProperty, InputEnumType)>();
@@ -95,7 +95,7 @@ namespace AutoRest.CSharp.Output.Models
                             true,
                             union.IsNullable);
                         enumsToReplace.Add((model, property, inputEnum));
-                        enums.Add(inputEnum, new EnumType(inputEnum, TypeProvider.GetDefaultModelNamespace(null, Configuration.Namespace), "public", typeFactory, sourceInputModel));
+                        enums.Add(inputEnum, new EnumType(inputEnum, TypeProvider.GetDefaultModelNamespace(inputEnum.Namespace, Configuration.Namespace), "public", typeFactory, sourceInputModel));
                     }
                 }
             }
@@ -112,7 +112,7 @@ namespace AutoRest.CSharp.Output.Models
             foreach (var model in inputModels)
             {
                 ModelTypeProvider? defaultDerivedType = GetDefaultDerivedType(models, typeFactory, model, defaultDerivedTypes, sourceInputModel);
-                var typeProvider = new ModelTypeProvider(model, TypeProvider.GetDefaultModelNamespace(null, Configuration.Namespace), sourceInputModel, typeFactory, defaultDerivedType);
+                var typeProvider = new ModelTypeProvider(model, TypeProvider.GetDefaultModelNamespace(model.Namespace, Configuration.Namespace), sourceInputModel, typeFactory, defaultDerivedType);
                 models.Add(model, typeProvider);
             }
         }
