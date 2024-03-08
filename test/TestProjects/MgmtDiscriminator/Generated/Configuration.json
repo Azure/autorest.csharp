@@ -14,6 +14,5 @@
   "suppress-abstract-base-class": [
     "DeliveryRuleAction"
   ],
-  "flavor": "azure",
   "helper-namespace": "MgmtDiscriminator"
 }

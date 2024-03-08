@@ -36,6 +36,5 @@
   "RenameMapping": {
     "ExactMatchModel11.type": "ResourceType"
   },
-  "flavor": "azure",
   "helper-namespace": "MgmtExactMatchInheritance"
 }

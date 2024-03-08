@@ -13,6 +13,5 @@
   "RequestPathToResourceName": {
     "/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}": "BuiltInPolicyDefinition"
   },
-  "flavor": "azure",
   "helper-namespace": "MgmtExtensionResource"
 }

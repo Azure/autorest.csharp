@@ -77,7 +77,7 @@ function Add-CadlRanch-TypeSpec([string]$testName, [string]$projectPrefix, [stri
         Add-TypeSpec "$projectPrefix$testName" $projectDirectory $mainTypeSpecFile "$configString--option @azure-tools/typespec-csharp.new-project=true" "-n"
     }
     else {
-        Add-TypeSpec "$projectPrefix$testName" $projectDirectory $mainTypeSpecFile "$configString--option @azure-tools/typespec-csharp.new-project=true --option @azure-tools/typespec-csharp.flavor=""azure""" "-n"
+        Add-TypeSpec "$projectPrefix$testName" $projectDirectory $mainTypeSpecFile "$configString--option @azure-tools/typespec-csharp.new-project=true --option @azure-tools/typespec-csharp.flavor=azure" "-n"
     }
 }
 

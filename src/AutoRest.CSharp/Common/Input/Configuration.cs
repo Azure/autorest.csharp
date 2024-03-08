@@ -603,10 +603,6 @@ namespace AutoRest.CSharp.Common.Input
             {
                 MgmtTestConfiguration.SaveConfiguration(writer);
             }
-            if (ApiTypes is AzureApiTypes)
-            {
-                writer.WriteString(Options.Flavor, "azure");
-            }
             WriteIfNotDefault(writer, Options.GenerateSampleProject, GenerateSampleProject);
             WriteIfNotDefault(writer, Options.GenerateTestProject, GenerateTestProject);
             WriteIfNotDefault(writer, Options.HelperNamespace, HelperNamespace);

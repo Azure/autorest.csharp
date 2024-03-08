@@ -8,7 +8,6 @@
   ],
   "public-clients": true,
   "skip-csproj-packagereference": true,
-  "flavor": "azure",
   "generate-test-project": true,
   "helper-namespace": "Accessibility_LowLevel_TokenAuth"
 }

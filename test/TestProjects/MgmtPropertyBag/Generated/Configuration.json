@@ -13,6 +13,5 @@
   "RenamePropertyBag": {
     "Foos_Reconnect": "FooReconnectTestOptions"
   },
-  "flavor": "azure",
   "helper-namespace": "MgmtPropertyBag"
 }

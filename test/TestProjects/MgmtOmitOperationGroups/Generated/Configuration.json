@@ -13,6 +13,5 @@
   "OperationGroupsToOmit": [
     "Model1s"
   ],
-  "flavor": "azure",
   "helper-namespace": "MgmtOmitOperationGroups"
 }

@@ -13,6 +13,5 @@
   "RenameMapping": {
     "Pet.dateOfBirth": "-|date-time"
   },
-  "flavor": "azure",
   "helper-namespace": "MgmtCustomizations"
 }

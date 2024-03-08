@@ -24,6 +24,5 @@
     "P2s": "P2S|p2s",
     "P2S": "P2S|p2s"
   },
-  "flavor": "azure",
   "helper-namespace": "MgmtPropertyChooser"
 }

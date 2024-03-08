@@ -53,7 +53,6 @@
     "Mock": true,
     "Sample": true
   },
-  "flavor": "azure",
   "generate-test-project": true,
   "helper-namespace": "MgmtMockAndSample"
 }

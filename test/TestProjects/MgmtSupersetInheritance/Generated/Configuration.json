@@ -13,6 +13,5 @@
   "KeepOrphanedModels": [
     "SupersetModel5"
   ],
-  "flavor": "azure",
   "helper-namespace": "MgmtSupersetInheritance"
 }

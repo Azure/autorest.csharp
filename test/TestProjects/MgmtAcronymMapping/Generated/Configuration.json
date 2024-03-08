@@ -56,6 +56,5 @@
   "MgmtDebug": {
     "ShowSerializedNames": true
   },
-  "flavor": "azure",
   "helper-namespace": "MgmtAcronymMapping"
 }

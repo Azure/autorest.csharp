@@ -21,6 +21,5 @@
     "*Uri": "Uri",
     "*Uris": "Uri"
   },
-  "flavor": "azure",
   "helper-namespace": "MgmtParamOrdering"
 }

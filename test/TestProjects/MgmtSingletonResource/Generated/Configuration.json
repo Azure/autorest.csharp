@@ -13,6 +13,5 @@
   "RequestPathToSingletonResource": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cars/{carName}/brakes/{default}": "brakes/default"
   },
-  "flavor": "azure",
   "helper-namespace": "MgmtSingletonResource"
 }

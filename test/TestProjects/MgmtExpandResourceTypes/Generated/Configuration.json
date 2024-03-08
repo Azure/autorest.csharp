@@ -29,6 +29,5 @@
     "RecordSets_ListByDnsZone": "GetRecordSets",
     "RecordSets_ListAllByDnsZone": "GetAllRecordSets"
   },
-  "flavor": "azure",
   "helper-namespace": "MgmtExpandResourceTypes"
 }

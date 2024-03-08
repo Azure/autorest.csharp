@@ -21,6 +21,5 @@
     "TokenFilter",
     "Tokenizer"
   ],
-  "flavor": "azure",
   "helper-namespace": "CognitiveSearch"
 }

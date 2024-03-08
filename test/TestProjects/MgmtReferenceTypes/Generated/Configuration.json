@@ -21,6 +21,5 @@
     "CheckNameAvailabilityRequest.type": "ResourceType"
   },
   "ArmCore": true,
-  "flavor": "azure",
   "helper-namespace": "MgmtReferenceTypes"
 }
