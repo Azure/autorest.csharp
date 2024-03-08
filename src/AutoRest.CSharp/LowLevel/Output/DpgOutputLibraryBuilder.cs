@@ -222,17 +222,12 @@ namespace AutoRest.CSharp.Output.Models
                 return operation with
                 {
                     Name = name,
-                    CleanName = name,
                     Parameters = UpdateOperationParameters(operation.Parameters),
                     Paging = UpdateOperationPaging(operation.Paging, operationsMap),
                 };
             }
 
-            return operation with
-            {
-                Name = name,
-                CleanName = name
-            };
+            return operation with { Name = name };
         }
 
         private static string UpdateOperationName(InputOperation operation, string clientName)
