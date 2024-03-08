@@ -19,5 +19,6 @@
     "NetworkResource": "Network",
     "MemoryResource": "Memory"
   },
+  "flavor": "azure",
   "helper-namespace": "MgmtResourceName"
 }

@@ -5,7 +5,7 @@ export interface Configuration {
     "output-folder": string;
     namespace: string;
     "library-name": string | null;
-    branded?: boolean;
+    flavor?: string;
     "azure-arm"?: boolean;
     "shared-source-folders": string[];
     "single-top-level-client"?: boolean;

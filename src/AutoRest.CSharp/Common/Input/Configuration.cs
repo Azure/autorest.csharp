@@ -52,7 +52,7 @@ namespace AutoRest.CSharp.Common.Input
             public const string MethodsToKeepClientDefaultValue = "methods-to-keep-client-default-value";
             public const string DeserializeNullCollectionAsNullValue = "deserialize-null-collection-as-null-value";
             public const string UseCoreDataFactoryReplacements = "use-core-datafactory-replacements";
-            public const string Branded = "branded";
+            public const string Flavor = "flavor";
             public const string GenerateSampleProject = "generate-sample-project";
             public const string GenerateTestProject = "generate-test-project";
             // TODO - this configuration only exists here because we would like a rolling update for all libraries for this feature since it changes so many files.
@@ -105,7 +105,7 @@ namespace AutoRest.CSharp.Common.Input
             IReadOnlyList<string> methodsToKeepClientDefaultValue,
             MgmtConfiguration mgmtConfiguration,
             MgmtTestConfiguration? mgmtTestConfiguration,
-            bool branded,
+            string? flavor,
             bool generateSampleProject,
             bool generateTestProject,
             string? helperNamespace)
@@ -174,7 +174,8 @@ namespace AutoRest.CSharp.Common.Input
             _modelsToTreatEmptyStringAsNull = new HashSet<string>(modelsToTreatEmptyStringAsNull);
             _intrinsicTypesToTreatEmptyStringAsNull.UnionWith(additionalIntrinsicTypesToTreatEmptyStringAsNull);
             _methodsToKeepClientDefaultValue = methodsToKeepClientDefaultValue ?? Array.Empty<string>();
-            _apiTypes = branded ? new AzureApiTypes() : new SystemApiTypes();
+            _apiTypes =  "azure".Equals(flavor, StringComparison.InvariantCultureIgnoreCase) ? new AzureApiTypes() : new SystemApiTypes();
+            Flavor = flavor;
             GenerateSampleProject = generateSampleProject;
             GenerateTestProject = generateTestProject;
             _helperNamespace = helperNamespace ?? Namespace;
@@ -242,6 +243,7 @@ namespace AutoRest.CSharp.Common.Input
         private static ApiTypes? _apiTypes;
         public static ApiTypes ApiTypes => _apiTypes ?? new AzureApiTypes();
         public static bool IsBranded => ApiTypes is AzureApiTypes;
+        public static string? Flavor { get; private set; }
 
         public static bool ShouldTreatBase64AsBinaryData { get; private set; }
 
@@ -366,7 +368,7 @@ namespace AutoRest.CSharp.Common.Input
                 methodsToKeepClientDefaultValue: autoRest.GetValue<string[]?>(Options.MethodsToKeepClientDefaultValue).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 mgmtConfiguration: MgmtConfiguration.GetConfiguration(autoRest),
                 mgmtTestConfiguration: MgmtTestConfiguration.GetConfiguration(autoRest),
-                branded: GetOptionBoolValue(autoRest, Options.Branded),
+                flavor: autoRest.GetValue<string?>(Options.Flavor).GetAwaiter().GetResult() ?? "azure", // for autorest input, always branded
                 generateSampleProject: GetOptionBoolValue(autoRest, Options.GenerateSampleProject),
                 generateTestProject: GetOptionBoolValue(autoRest, Options.GenerateTestProject),
                 helperNamespace: autoRest.GetValue<string?>(Options.HelperNamespace).GetAwaiter().GetResult()
@@ -437,8 +439,6 @@ namespace AutoRest.CSharp.Common.Input
                 case Options.DeserializeNullCollectionAsNullValue:
                     return false;
                 case Options.UseCoreDataFactoryReplacements:
-                    return true;
-                case Options.Branded:
                     return true;
                 case Options.GenerateSampleProject:
                     return true;
@@ -535,7 +535,7 @@ namespace AutoRest.CSharp.Common.Input
                 methodsToKeepClientDefaultValue,
                 MgmtConfiguration.LoadConfiguration(root),
                 MgmtTestConfiguration.LoadConfiguration(root),
-                ReadOption(root, Options.Branded),
+                ReadStringOption(root, Options.Flavor),
                 ReadOption(root, Options.GenerateSampleProject),
                 ReadOption(root, Options.GenerateTestProject),
                 ReadStringOption(root, Options.HelperNamespace)
@@ -600,7 +600,10 @@ namespace AutoRest.CSharp.Common.Input
             {
                 MgmtTestConfiguration.SaveConfiguration(writer);
             }
-            WriteIfNotDefault(writer, Options.Branded, ApiTypes is AzureApiTypes);
+            if (Flavor != null)
+            {
+                writer.WriteString(Options.Flavor, Flavor);
+            }
             WriteIfNotDefault(writer, Options.GenerateSampleProject, GenerateSampleProject);
             WriteIfNotDefault(writer, Options.GenerateTestProject, GenerateTestProject);
             WriteIfNotDefault(writer, Options.HelperNamespace, HelperNamespace);

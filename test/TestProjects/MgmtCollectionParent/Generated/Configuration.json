@@ -20,5 +20,6 @@
   "OverrideOperationName": {
     "ListOrderAtResourceGroupLevel": "GetAll"
   },
+  "flavor": "azure",
   "helper-namespace": "MgmtCollectionParent"
 }
