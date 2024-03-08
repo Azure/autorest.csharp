@@ -144,14 +144,6 @@ export function resolveOptions(context: EmitContext<NetEmitterOptions>) {
     const emitterOutputDir = context.emitterOutputDir;
     const resolvedOptions = { ...defaultOptions, ...emitterOptions };
 
-    if (
-        resolvedOptions.flavor === undefined &&
-        resolvedOptions["package-dir"] &&
-        resolvedOptions["package-dir"].startsWith("azure")
-    ) {
-        resolvedOptions.flavor = "azure";
-    }
-
     const outputFolder = resolveOutputFolder(context);
     return {
         ...resolvedOptions,
