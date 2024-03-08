@@ -310,14 +310,15 @@ namespace AutoRest.CSharp.Output.Models.Types
                 );
 
             var charValueParameter = new Parameter("value", null, typeof(char), null, ValidationType.None, null);
+            var value = new CharExpression(charValueParameter);
             yield return new Method(
                 new MethodSignature(
                     Name: _writeStringValueMethodName,
                     Modifiers: _methodModifiers,
                     ReturnType: null,
-                    Parameters: new[] { KnownParameters.Serializations.Utf8JsonWriter, charValueParameter, _formatParameter },
+                    Parameters: new[] { KnownParameters.Serializations.Utf8JsonWriter, charValueParameter },
                     Summary: null, Description: null, ReturnDescription: null),
-                writer.WriteStringValue(((ValueExpression)charValueParameter).Invoke(nameof(char.ToString), new MemberExpression(typeof(CultureInfo), nameof(CultureInfo.InvariantCulture))))
+                writer.WriteStringValue(value.InvokeToString(new MemberExpression(typeof(CultureInfo), nameof(CultureInfo.InvariantCulture))))
                 );
         }
 

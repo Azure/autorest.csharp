@@ -5,4 +5,7 @@ using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 
-internal sealed record CharExpression(ValueExpression Untyped) : TypedValueExpression<char>(Untyped);
+internal sealed record CharExpression(ValueExpression Untyped) : TypedValueExpression<char>(Untyped)
+{
+    public StringExpression InvokeToString(ValueExpression cultureInfo) => new(Invoke(nameof(char.ToString), cultureInfo));
+}
