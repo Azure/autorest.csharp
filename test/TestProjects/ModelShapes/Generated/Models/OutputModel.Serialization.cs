@@ -617,7 +617,7 @@ namespace ModelShapes.Models
                         array[index] = item.GetSingle();
                         index++;
                     }
-                    vectorNullable = new ReadOnlyMemory<float>?(array);
+                    vectorNullable = new ReadOnlyMemory<float>(array);
                     continue;
                 }
                 if (property.NameEquals("vectorReadOnlyNullable"u8))
@@ -633,7 +633,7 @@ namespace ModelShapes.Models
                         array[index] = item.GetSingle();
                         index++;
                     }
-                    vectorReadOnlyNullable = new ReadOnlyMemory<float>?(array);
+                    vectorReadOnlyNullable = new ReadOnlyMemory<float>(array);
                     continue;
                 }
                 if (property.NameEquals("vectorReadOnlyRequiredNullable"u8))
@@ -649,7 +649,7 @@ namespace ModelShapes.Models
                         array[index] = item.GetSingle();
                         index++;
                     }
-                    vectorReadOnlyRequiredNullable = new ReadOnlyMemory<float>?(array);
+                    vectorReadOnlyRequiredNullable = new ReadOnlyMemory<float>(array);
                     continue;
                 }
                 if (property.NameEquals("vectorRequiredNullable"u8))
@@ -665,7 +665,7 @@ namespace ModelShapes.Models
                         array[index] = item.GetSingle();
                         index++;
                     }
-                    vectorRequiredNullable = new ReadOnlyMemory<float>?(array);
+                    vectorRequiredNullable = new ReadOnlyMemory<float>(array);
                     continue;
                 }
                 if (options.Format != "W")

@@ -103,20 +103,13 @@ namespace CustomizationsInTsp.Models
             writer.WriteEndArray();
             if (Optional.IsDefined(VectorOptional))
             {
-                if (VectorOptional != null)
+                writer.WritePropertyName("vectorOptional"u8);
+                writer.WriteStartArray();
+                foreach (var item in VectorOptional.Value.Span)
                 {
-                    writer.WritePropertyName("vectorOptional"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in VectorOptional.Value.Span)
-                    {
-                        writer.WriteNumberValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteNumberValue(item);
                 }
-                else
-                {
-                    writer.WriteNull("vectorOptional");
-                }
+                writer.WriteEndArray();
             }
             if (VectorNullable != null)
             {
@@ -161,20 +154,13 @@ namespace CustomizationsInTsp.Models
             }
             if (options.Format != "W" && Optional.IsDefined(VectorOptionalReadOnly))
             {
-                if (VectorOptionalReadOnly != null)
+                writer.WritePropertyName("vectorOptionalReadOnly"u8);
+                writer.WriteStartArray();
+                foreach (var item in VectorOptionalReadOnly.Value.Span)
                 {
-                    writer.WritePropertyName("vectorOptionalReadOnly"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in VectorOptionalReadOnly.Value.Span)
-                    {
-                        writer.WriteNumberValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteNumberValue(item);
                 }
-                else
-                {
-                    writer.WriteNull("vectorOptionalReadOnly");
-                }
+                writer.WriteEndArray();
             }
             if (options.Format != "W")
             {
@@ -405,7 +391,7 @@ namespace CustomizationsInTsp.Models
                         array[index] = item.GetSingle();
                         index++;
                     }
-                    vectorOptional = new ReadOnlyMemory<float>?(array);
+                    vectorOptional = new ReadOnlyMemory<float>(array);
                     continue;
                 }
                 if (property.NameEquals("vectorNullable"u8))
@@ -421,7 +407,7 @@ namespace CustomizationsInTsp.Models
                         array[index] = item.GetSingle();
                         index++;
                     }
-                    vectorNullable = new ReadOnlyMemory<float>?(array);
+                    vectorNullable = new ReadOnlyMemory<float>(array);
                     continue;
                 }
                 if (property.NameEquals("vectorOptionalNullable"u8))
@@ -437,7 +423,7 @@ namespace CustomizationsInTsp.Models
                         array[index] = item.GetSingle();
                         index++;
                     }
-                    vectorOptionalNullable = new ReadOnlyMemory<float>?(array);
+                    vectorOptionalNullable = new ReadOnlyMemory<float>(array);
                     continue;
                 }
                 if (property.NameEquals("vectorReadOnly"u8))
@@ -469,7 +455,7 @@ namespace CustomizationsInTsp.Models
                         array[index] = item.GetSingle();
                         index++;
                     }
-                    vectorOptionalReadOnly = new ReadOnlyMemory<float>?(array);
+                    vectorOptionalReadOnly = new ReadOnlyMemory<float>(array);
                     continue;
                 }
                 if (property.NameEquals("vectorNullableReadOnly"u8))
@@ -485,7 +471,7 @@ namespace CustomizationsInTsp.Models
                         array[index] = item.GetSingle();
                         index++;
                     }
-                    vectorNullableReadOnly = new ReadOnlyMemory<float>?(array);
+                    vectorNullableReadOnly = new ReadOnlyMemory<float>(array);
                     continue;
                 }
                 if (property.NameEquals("vectorOptionalNullableReadOnly"u8))
@@ -501,7 +487,7 @@ namespace CustomizationsInTsp.Models
                         array[index] = item.GetSingle();
                         index++;
                     }
-                    vectorOptionalNullableReadOnly = new ReadOnlyMemory<float>?(array);
+                    vectorOptionalNullableReadOnly = new ReadOnlyMemory<float>(array);
                     continue;
                 }
                 if (options.Format != "W")
