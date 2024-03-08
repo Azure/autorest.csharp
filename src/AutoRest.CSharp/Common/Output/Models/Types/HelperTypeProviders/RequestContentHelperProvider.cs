@@ -45,7 +45,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             yield return BuildFromObjectMethod();
             yield return BuildFromBinaryDataMethod();
-            yield return BuildFromAzureLocationMethod();
         }
 
         private static readonly string JsonWriter = Configuration.IsBranded ? nameof(Utf8JsonRequestContent.JsonWriter) : nameof(Utf8JsonRequestBody.JsonWriter);
@@ -255,30 +254,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             body.Add(new MethodBodyStatement[]
             {
                 writer.WriteBinaryData(value),
-                Return(content)
-            });
-
-            return new Method(signature, body);
-        }
-        private Method BuildFromAzureLocationMethod()
-        {
-            var valueParameter = new Parameter("value", null, typeof(AzureLocation), null, ValidationType.None, null);
-            var signature = new MethodSignature(
-                Name: _fromObjectName,
-                Modifiers: _methodModifiers,
-                Parameters: new[] { valueParameter },
-                ReturnType: _requestBodyType,
-                Summary: null, Description: null, ReturnDescription: null);
-
-            var body = new List<MethodBodyStatement>
-            {
-                Declare(_utf8JsonRequestBodyType, "content", New.Instance(_utf8JsonRequestBodyType), out var content)
-            };
-            var writer = new Utf8JsonWriterExpression(content.Property(JsonWriter));
-            var value = new AzureLocationExpression(valueParameter);
-            body.Add(new MethodBodyStatement[]
-            {
-                writer.WriteStringValue(value),
                 Return(content)
             });
 

@@ -118,12 +118,5 @@ namespace azure_special_properties
 #endif
             return content;
         }
-
-        public static RequestContent FromObject(AzureLocation value)
-        {
-            Utf8JsonRequestContent content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStringValue(value);
-            return content;
-        }
     }
 }
