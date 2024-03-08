@@ -358,10 +358,12 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             // if the default value is set somewhere else, we just return it.
             if (inputModelProperty.DefaultValue != null)
+            {
                 return new FormattableStringToExpression(inputModelProperty.DefaultValue);
+            }
 
             // if it is not set, we check if this property is a literal type, and use the literal type as its default value.
-            if (inputModelProperty.Type is not InputLiteralType literalType || !inputModelProperty.IsRequired)
+            if (inputModelProperty.ConstantValue is null || !inputModelProperty.IsRequired || Configuration.Generation1ConvenienceClient)
             {
                 return null;
             }

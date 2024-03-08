@@ -467,7 +467,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                         initializationValue = Constant.NewInstanceOf(TypeFactory.GetPropertyImplementationType(propertyType));
                     }
                 }
-                else if (property.InputModelProperty?.ConstantValue is { } constant && !propertyType.IsNullable)
+                else if (property.InputModelProperty?.ConstantValue is { } constant && !propertyType.IsNullable && Configuration.Generation1ConvenienceClient)
                 {
                     initializationValue = BuilderHelpers.ParseConstant(constant.Value, propertyType);
                 }
