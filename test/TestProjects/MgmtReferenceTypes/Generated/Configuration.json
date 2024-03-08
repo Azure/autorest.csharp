@@ -20,5 +20,6 @@
     "PrivateLinkResourceListResult": "PrivateLinkResourceList",
     "CheckNameAvailabilityRequest.type": "ResourceType"
   },
-  "ArmCore": true
+  "ArmCore": true,
+  "helper-namespace": "MgmtReferenceTypes"
 }

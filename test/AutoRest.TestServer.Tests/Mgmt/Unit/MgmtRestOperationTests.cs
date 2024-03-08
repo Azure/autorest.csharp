@@ -87,7 +87,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
                 mgmtTestConfiguration: null,
                 branded: true,
                 generateSampleProject: true,
-                generateTestProject: true);
+                generateTestProject: true,
+                helperNamespace: "");
         }
 
         private void TestPair(ResourceMatchType expected, HttpMethod httpMethod, string resourcePathStr, string requestPathStr, bool isList)

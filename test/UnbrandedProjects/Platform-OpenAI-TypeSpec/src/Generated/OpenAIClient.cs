@@ -45,14 +45,8 @@ namespace OpenAI
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public OpenAIClient(Uri endpoint, KeyCredential credential, OpenAIClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(credential, nameof(credential));
             options ??= new OpenAIClientOptions();
 
             ClientDiagnostics = new TelemetrySource(options, true);

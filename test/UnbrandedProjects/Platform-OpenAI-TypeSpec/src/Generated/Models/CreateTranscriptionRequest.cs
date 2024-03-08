@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -51,10 +52,7 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="file"/> is null. </exception>
         public CreateTranscriptionRequest(BinaryData file, CreateTranscriptionRequestModel model)
         {
-            if (file == null)
-            {
-                throw new ArgumentNullException(nameof(file));
-            }
+            Argument.AssertNotNull(file, nameof(file));
 
             File = file;
             Model = model;

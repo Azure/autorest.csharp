@@ -82,18 +82,8 @@ namespace MgmtResourceName
         /// <exception cref="ArgumentNullException"> <paramref name="memoryResourceName"/> or <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<Memory>> CreateOrUpdateAsync(WaitUntil waitUntil, string memoryResourceName, MemoryData data, CancellationToken cancellationToken = default)
         {
-            if (memoryResourceName == null)
-            {
-                throw new ArgumentNullException(nameof(memoryResourceName));
-            }
-            if (memoryResourceName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(memoryResourceName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(memoryResourceName, nameof(memoryResourceName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _memoryMemoryResourcesClientDiagnostics.CreateScope("MemoryCollection.CreateOrUpdate");
             scope.Start();
@@ -142,18 +132,8 @@ namespace MgmtResourceName
         /// <exception cref="ArgumentNullException"> <paramref name="memoryResourceName"/> or <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<Memory> CreateOrUpdate(WaitUntil waitUntil, string memoryResourceName, MemoryData data, CancellationToken cancellationToken = default)
         {
-            if (memoryResourceName == null)
-            {
-                throw new ArgumentNullException(nameof(memoryResourceName));
-            }
-            if (memoryResourceName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(memoryResourceName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(memoryResourceName, nameof(memoryResourceName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _memoryMemoryResourcesClientDiagnostics.CreateScope("MemoryCollection.CreateOrUpdate");
             scope.Start();
@@ -200,14 +180,7 @@ namespace MgmtResourceName
         /// <exception cref="ArgumentNullException"> <paramref name="memoryResourceName"/> is null. </exception>
         public virtual async Task<Response<Memory>> GetAsync(string memoryResourceName, CancellationToken cancellationToken = default)
         {
-            if (memoryResourceName == null)
-            {
-                throw new ArgumentNullException(nameof(memoryResourceName));
-            }
-            if (memoryResourceName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(memoryResourceName));
-            }
+            Argument.AssertNotNullOrEmpty(memoryResourceName, nameof(memoryResourceName));
 
             using var scope = _memoryMemoryResourcesClientDiagnostics.CreateScope("MemoryCollection.Get");
             scope.Start();
@@ -251,14 +224,7 @@ namespace MgmtResourceName
         /// <exception cref="ArgumentNullException"> <paramref name="memoryResourceName"/> is null. </exception>
         public virtual Response<Memory> Get(string memoryResourceName, CancellationToken cancellationToken = default)
         {
-            if (memoryResourceName == null)
-            {
-                throw new ArgumentNullException(nameof(memoryResourceName));
-            }
-            if (memoryResourceName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(memoryResourceName));
-            }
+            Argument.AssertNotNullOrEmpty(memoryResourceName, nameof(memoryResourceName));
 
             using var scope = _memoryMemoryResourcesClientDiagnostics.CreateScope("MemoryCollection.Get");
             scope.Start();
@@ -359,14 +325,7 @@ namespace MgmtResourceName
         /// <exception cref="ArgumentNullException"> <paramref name="memoryResourceName"/> is null. </exception>
         public virtual async Task<Response<bool>> ExistsAsync(string memoryResourceName, CancellationToken cancellationToken = default)
         {
-            if (memoryResourceName == null)
-            {
-                throw new ArgumentNullException(nameof(memoryResourceName));
-            }
-            if (memoryResourceName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(memoryResourceName));
-            }
+            Argument.AssertNotNullOrEmpty(memoryResourceName, nameof(memoryResourceName));
 
             using var scope = _memoryMemoryResourcesClientDiagnostics.CreateScope("MemoryCollection.Exists");
             scope.Start();
@@ -409,14 +368,7 @@ namespace MgmtResourceName
         /// <exception cref="ArgumentNullException"> <paramref name="memoryResourceName"/> is null. </exception>
         public virtual Response<bool> Exists(string memoryResourceName, CancellationToken cancellationToken = default)
         {
-            if (memoryResourceName == null)
-            {
-                throw new ArgumentNullException(nameof(memoryResourceName));
-            }
-            if (memoryResourceName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(memoryResourceName));
-            }
+            Argument.AssertNotNullOrEmpty(memoryResourceName, nameof(memoryResourceName));
 
             using var scope = _memoryMemoryResourcesClientDiagnostics.CreateScope("MemoryCollection.Exists");
             scope.Start();
@@ -459,14 +411,7 @@ namespace MgmtResourceName
         /// <exception cref="ArgumentNullException"> <paramref name="memoryResourceName"/> is null. </exception>
         public virtual async Task<NullableResponse<Memory>> GetIfExistsAsync(string memoryResourceName, CancellationToken cancellationToken = default)
         {
-            if (memoryResourceName == null)
-            {
-                throw new ArgumentNullException(nameof(memoryResourceName));
-            }
-            if (memoryResourceName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(memoryResourceName));
-            }
+            Argument.AssertNotNullOrEmpty(memoryResourceName, nameof(memoryResourceName));
 
             using var scope = _memoryMemoryResourcesClientDiagnostics.CreateScope("MemoryCollection.GetIfExists");
             scope.Start();
@@ -511,14 +456,7 @@ namespace MgmtResourceName
         /// <exception cref="ArgumentNullException"> <paramref name="memoryResourceName"/> is null. </exception>
         public virtual NullableResponse<Memory> GetIfExists(string memoryResourceName, CancellationToken cancellationToken = default)
         {
-            if (memoryResourceName == null)
-            {
-                throw new ArgumentNullException(nameof(memoryResourceName));
-            }
-            if (memoryResourceName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(memoryResourceName));
-            }
+            Argument.AssertNotNullOrEmpty(memoryResourceName, nameof(memoryResourceName));
 
             using var scope = _memoryMemoryResourcesClientDiagnostics.CreateScope("MemoryCollection.GetIfExists");
             scope.Start();

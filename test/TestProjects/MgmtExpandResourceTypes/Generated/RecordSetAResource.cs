@@ -288,10 +288,7 @@ namespace MgmtExpandResourceTypes
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<Response<RecordSetAResource>> UpdateAsync(RecordSetData data, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _recordSetARecordSetsClientDiagnostics.CreateScope("RecordSetAResource.Update");
             scope.Start();
@@ -334,10 +331,7 @@ namespace MgmtExpandResourceTypes
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual Response<RecordSetAResource> Update(RecordSetData data, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _recordSetARecordSetsClientDiagnostics.CreateScope("RecordSetAResource.Update");
             scope.Start();

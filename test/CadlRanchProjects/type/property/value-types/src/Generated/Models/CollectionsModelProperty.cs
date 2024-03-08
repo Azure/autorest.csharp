@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using _Type.Property.ValueTypes;
 
 namespace _Type.Property.ValueTypes.Models
 {
@@ -51,10 +52,7 @@ namespace _Type.Property.ValueTypes.Models
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
         public CollectionsModelProperty(IEnumerable<InnerModel> property)
         {
-            if (property == null)
-            {
-                throw new ArgumentNullException(nameof(property));
-            }
+            Argument.AssertNotNull(property, nameof(property));
 
             Property = property.ToList();
         }

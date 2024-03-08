@@ -338,18 +338,8 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="azureResourceFlattenModel2"/> is null. </exception>
         public virtual async Task<Response<AzureResourceFlattenModel2>> PutAzureResourceFlattenModel2Async(string name, AzureResourceFlattenModel2 azureResourceFlattenModel2, CancellationToken cancellationToken = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (name.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
-            }
-            if (azureResourceFlattenModel2 == null)
-            {
-                throw new ArgumentNullException(nameof(azureResourceFlattenModel2));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            Argument.AssertNotNull(azureResourceFlattenModel2, nameof(azureResourceFlattenModel2));
 
             using var scope = AzureResourceFlattenModel2sClientDiagnostics.CreateScope("MockableMgmtExactMatchFlattenInheritanceResourceGroupResource.PutAzureResourceFlattenModel2");
             scope.Start();
@@ -389,18 +379,8 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="azureResourceFlattenModel2"/> is null. </exception>
         public virtual Response<AzureResourceFlattenModel2> PutAzureResourceFlattenModel2(string name, AzureResourceFlattenModel2 azureResourceFlattenModel2, CancellationToken cancellationToken = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (name.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
-            }
-            if (azureResourceFlattenModel2 == null)
-            {
-                throw new ArgumentNullException(nameof(azureResourceFlattenModel2));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            Argument.AssertNotNull(azureResourceFlattenModel2, nameof(azureResourceFlattenModel2));
 
             using var scope = AzureResourceFlattenModel2sClientDiagnostics.CreateScope("MockableMgmtExactMatchFlattenInheritanceResourceGroupResource.PutAzureResourceFlattenModel2");
             scope.Start();
@@ -439,14 +419,7 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual async Task<Response<AzureResourceFlattenModel2>> GetAzureResourceFlattenModel2Async(string name, CancellationToken cancellationToken = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (name.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
             using var scope = AzureResourceFlattenModel2sClientDiagnostics.CreateScope("MockableMgmtExactMatchFlattenInheritanceResourceGroupResource.GetAzureResourceFlattenModel2");
             scope.Start();
@@ -485,14 +458,7 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual Response<AzureResourceFlattenModel2> GetAzureResourceFlattenModel2(string name, CancellationToken cancellationToken = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (name.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
             using var scope = AzureResourceFlattenModel2sClientDiagnostics.CreateScope("MockableMgmtExactMatchFlattenInheritanceResourceGroupResource.GetAzureResourceFlattenModel2");
             scope.Start();
@@ -582,18 +548,8 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="azureResourceFlattenModel3"/> is null. </exception>
         public virtual async Task<Response<AzureResourceFlattenModel3>> PutAzureResourceFlattenModel3Async(string name, AzureResourceFlattenModel3 azureResourceFlattenModel3, CancellationToken cancellationToken = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (name.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
-            }
-            if (azureResourceFlattenModel3 == null)
-            {
-                throw new ArgumentNullException(nameof(azureResourceFlattenModel3));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            Argument.AssertNotNull(azureResourceFlattenModel3, nameof(azureResourceFlattenModel3));
 
             using var scope = AzureResourceFlattenModel3sClientDiagnostics.CreateScope("MockableMgmtExactMatchFlattenInheritanceResourceGroupResource.PutAzureResourceFlattenModel3");
             scope.Start();
@@ -633,18 +589,8 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="azureResourceFlattenModel3"/> is null. </exception>
         public virtual Response<AzureResourceFlattenModel3> PutAzureResourceFlattenModel3(string name, AzureResourceFlattenModel3 azureResourceFlattenModel3, CancellationToken cancellationToken = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (name.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
-            }
-            if (azureResourceFlattenModel3 == null)
-            {
-                throw new ArgumentNullException(nameof(azureResourceFlattenModel3));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            Argument.AssertNotNull(azureResourceFlattenModel3, nameof(azureResourceFlattenModel3));
 
             using var scope = AzureResourceFlattenModel3sClientDiagnostics.CreateScope("MockableMgmtExactMatchFlattenInheritanceResourceGroupResource.PutAzureResourceFlattenModel3");
             scope.Start();
@@ -683,14 +629,7 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual async Task<Response<AzureResourceFlattenModel3>> GetAzureResourceFlattenModel3Async(string name, CancellationToken cancellationToken = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (name.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
             using var scope = AzureResourceFlattenModel3sClientDiagnostics.CreateScope("MockableMgmtExactMatchFlattenInheritanceResourceGroupResource.GetAzureResourceFlattenModel3");
             scope.Start();
@@ -729,14 +668,7 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual Response<AzureResourceFlattenModel3> GetAzureResourceFlattenModel3(string name, CancellationToken cancellationToken = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (name.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
             using var scope = AzureResourceFlattenModel3sClientDiagnostics.CreateScope("MockableMgmtExactMatchFlattenInheritanceResourceGroupResource.GetAzureResourceFlattenModel3");
             scope.Start();
@@ -826,18 +758,8 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="azureResourceFlattenModel4"/> is null. </exception>
         public virtual async Task<Response<AzureResourceFlattenModel4>> PutAzureResourceFlattenModel4Async(string name, AzureResourceFlattenModel4 azureResourceFlattenModel4, CancellationToken cancellationToken = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (name.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
-            }
-            if (azureResourceFlattenModel4 == null)
-            {
-                throw new ArgumentNullException(nameof(azureResourceFlattenModel4));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            Argument.AssertNotNull(azureResourceFlattenModel4, nameof(azureResourceFlattenModel4));
 
             using var scope = AzureResourceFlattenModel4sClientDiagnostics.CreateScope("MockableMgmtExactMatchFlattenInheritanceResourceGroupResource.PutAzureResourceFlattenModel4");
             scope.Start();
@@ -877,18 +799,8 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="azureResourceFlattenModel4"/> is null. </exception>
         public virtual Response<AzureResourceFlattenModel4> PutAzureResourceFlattenModel4(string name, AzureResourceFlattenModel4 azureResourceFlattenModel4, CancellationToken cancellationToken = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (name.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
-            }
-            if (azureResourceFlattenModel4 == null)
-            {
-                throw new ArgumentNullException(nameof(azureResourceFlattenModel4));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            Argument.AssertNotNull(azureResourceFlattenModel4, nameof(azureResourceFlattenModel4));
 
             using var scope = AzureResourceFlattenModel4sClientDiagnostics.CreateScope("MockableMgmtExactMatchFlattenInheritanceResourceGroupResource.PutAzureResourceFlattenModel4");
             scope.Start();
@@ -927,14 +839,7 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual async Task<Response<AzureResourceFlattenModel4>> GetAzureResourceFlattenModel4Async(string name, CancellationToken cancellationToken = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (name.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
             using var scope = AzureResourceFlattenModel4sClientDiagnostics.CreateScope("MockableMgmtExactMatchFlattenInheritanceResourceGroupResource.GetAzureResourceFlattenModel4");
             scope.Start();
@@ -973,14 +878,7 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual Response<AzureResourceFlattenModel4> GetAzureResourceFlattenModel4(string name, CancellationToken cancellationToken = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (name.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
             using var scope = AzureResourceFlattenModel4sClientDiagnostics.CreateScope("MockableMgmtExactMatchFlattenInheritanceResourceGroupResource.GetAzureResourceFlattenModel4");
             scope.Start();
@@ -1070,14 +968,7 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual async Task<Response<AzureResourceFlattenModel5>> PutAzureResourceFlattenModel5Async(string name, int? foo = null, CancellationToken cancellationToken = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (name.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
             using var scope = AzureResourceFlattenModel5sClientDiagnostics.CreateScope("MockableMgmtExactMatchFlattenInheritanceResourceGroupResource.PutAzureResourceFlattenModel5");
             scope.Start();
@@ -1117,14 +1008,7 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual Response<AzureResourceFlattenModel5> PutAzureResourceFlattenModel5(string name, int? foo = null, CancellationToken cancellationToken = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (name.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
             using var scope = AzureResourceFlattenModel5sClientDiagnostics.CreateScope("MockableMgmtExactMatchFlattenInheritanceResourceGroupResource.PutAzureResourceFlattenModel5");
             scope.Start();
@@ -1163,14 +1047,7 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual async Task<Response<AzureResourceFlattenModel5>> GetAzureResourceFlattenModel5Async(string name, CancellationToken cancellationToken = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (name.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
             using var scope = AzureResourceFlattenModel5sClientDiagnostics.CreateScope("MockableMgmtExactMatchFlattenInheritanceResourceGroupResource.GetAzureResourceFlattenModel5");
             scope.Start();
@@ -1209,14 +1086,7 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual Response<AzureResourceFlattenModel5> GetAzureResourceFlattenModel5(string name, CancellationToken cancellationToken = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (name.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
             using var scope = AzureResourceFlattenModel5sClientDiagnostics.CreateScope("MockableMgmtExactMatchFlattenInheritanceResourceGroupResource.GetAzureResourceFlattenModel5");
             scope.Start();

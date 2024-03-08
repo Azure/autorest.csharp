@@ -76,22 +76,8 @@ namespace MgmtSupersetInheritance
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<SupersetModel6ListResult>> ListAsync(string subscriptionId, string resourceGroupName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (resourceGroupName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
 
             using var message = CreateListRequest(subscriptionId, resourceGroupName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -116,22 +102,8 @@ namespace MgmtSupersetInheritance
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<SupersetModel6ListResult> List(string subscriptionId, string resourceGroupName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (resourceGroupName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
 
             using var message = CreateListRequest(subscriptionId, resourceGroupName);
             _pipeline.Send(message, cancellationToken);
@@ -196,34 +168,10 @@ namespace MgmtSupersetInheritance
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="supersetModel6SName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<SupersetModel6Data>> PutAsync(string subscriptionId, string resourceGroupName, string supersetModel6SName, SupersetModel6Data data, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (resourceGroupName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
-            }
-            if (supersetModel6SName == null)
-            {
-                throw new ArgumentNullException(nameof(supersetModel6SName));
-            }
-            if (supersetModel6SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(supersetModel6SName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(supersetModel6SName, nameof(supersetModel6SName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var message = CreatePutRequest(subscriptionId, resourceGroupName, supersetModel6SName, data);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -250,34 +198,10 @@ namespace MgmtSupersetInheritance
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="supersetModel6SName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<SupersetModel6Data> Put(string subscriptionId, string resourceGroupName, string supersetModel6SName, SupersetModel6Data data, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (resourceGroupName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
-            }
-            if (supersetModel6SName == null)
-            {
-                throw new ArgumentNullException(nameof(supersetModel6SName));
-            }
-            if (supersetModel6SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(supersetModel6SName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(supersetModel6SName, nameof(supersetModel6SName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var message = CreatePutRequest(subscriptionId, resourceGroupName, supersetModel6SName, data);
             _pipeline.Send(message, cancellationToken);
@@ -337,30 +261,9 @@ namespace MgmtSupersetInheritance
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="supersetModel6SName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<SupersetModel6Data>> GetAsync(string subscriptionId, string resourceGroupName, string supersetModel6SName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (resourceGroupName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
-            }
-            if (supersetModel6SName == null)
-            {
-                throw new ArgumentNullException(nameof(supersetModel6SName));
-            }
-            if (supersetModel6SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(supersetModel6SName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(supersetModel6SName, nameof(supersetModel6SName));
 
             using var message = CreateGetRequest(subscriptionId, resourceGroupName, supersetModel6SName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -388,30 +291,9 @@ namespace MgmtSupersetInheritance
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="supersetModel6SName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<SupersetModel6Data> Get(string subscriptionId, string resourceGroupName, string supersetModel6SName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (resourceGroupName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
-            }
-            if (supersetModel6SName == null)
-            {
-                throw new ArgumentNullException(nameof(supersetModel6SName));
-            }
-            if (supersetModel6SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(supersetModel6SName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(supersetModel6SName, nameof(supersetModel6SName));
 
             using var message = CreateGetRequest(subscriptionId, resourceGroupName, supersetModel6SName);
             _pipeline.Send(message, cancellationToken);

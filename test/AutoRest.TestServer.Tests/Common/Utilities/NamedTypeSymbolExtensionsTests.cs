@@ -111,7 +111,8 @@ namespace NamedTypeSymbolExtensionsTests
                 mgmtTestConfiguration: null,
                 branded: true,
                 generateSampleProject: true,
-                generateTestProject: true);
+                generateTestProject: true,
+                helperNamespace: "");
         }
 
         [Test]

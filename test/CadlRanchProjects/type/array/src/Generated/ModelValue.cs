@@ -156,10 +156,7 @@ namespace _Type._Array
         /// <include file="Docs/ModelValue.xml" path="doc/members/member[@name='PutAsync(IEnumerable{InnerModel},CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(IEnumerable<InnerModel> body, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
+            Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromEnumerable(body);
@@ -173,10 +170,7 @@ namespace _Type._Array
         /// <include file="Docs/ModelValue.xml" path="doc/members/member[@name='Put(IEnumerable{InnerModel},CancellationToken)']/*" />
         public virtual Response Put(IEnumerable<InnerModel> body, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
+            Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromEnumerable(body);
@@ -207,10 +201,7 @@ namespace _Type._Array
         /// <include file="Docs/ModelValue.xml" path="doc/members/member[@name='PutAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ModelValue.Put");
             scope.Start();
@@ -249,10 +240,7 @@ namespace _Type._Array
         /// <include file="Docs/ModelValue.xml" path="doc/members/member[@name='Put(RequestContent,RequestContext)']/*" />
         public virtual Response Put(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ModelValue.Put");
             scope.Start();

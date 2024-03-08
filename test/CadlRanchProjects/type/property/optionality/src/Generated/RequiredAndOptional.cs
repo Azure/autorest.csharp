@@ -231,10 +231,7 @@ namespace _Type.Property.Optionality
         /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='PutAllAsync(RequiredAndOptionalProperty,CancellationToken)']/*" />
         public virtual async Task<Response> PutAllAsync(RequiredAndOptionalProperty body, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
+            Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -249,10 +246,7 @@ namespace _Type.Property.Optionality
         /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='PutAll(RequiredAndOptionalProperty,CancellationToken)']/*" />
         public virtual Response PutAll(RequiredAndOptionalProperty body, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
+            Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -283,10 +277,7 @@ namespace _Type.Property.Optionality
         /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='PutAllAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutAllAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("RequiredAndOptional.PutAll");
             scope.Start();
@@ -325,10 +316,7 @@ namespace _Type.Property.Optionality
         /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='PutAll(RequestContent,RequestContext)']/*" />
         public virtual Response PutAll(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("RequiredAndOptional.PutAll");
             scope.Start();
@@ -351,10 +339,7 @@ namespace _Type.Property.Optionality
         /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='PutRequiredOnlyAsync(RequiredAndOptionalProperty,CancellationToken)']/*" />
         public virtual async Task<Response> PutRequiredOnlyAsync(RequiredAndOptionalProperty body, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
+            Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -369,10 +354,7 @@ namespace _Type.Property.Optionality
         /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='PutRequiredOnly(RequiredAndOptionalProperty,CancellationToken)']/*" />
         public virtual Response PutRequiredOnly(RequiredAndOptionalProperty body, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
+            Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -403,10 +385,7 @@ namespace _Type.Property.Optionality
         /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='PutRequiredOnlyAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutRequiredOnlyAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("RequiredAndOptional.PutRequiredOnly");
             scope.Start();
@@ -445,10 +424,7 @@ namespace _Type.Property.Optionality
         /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='PutRequiredOnly(RequestContent,RequestContext)']/*" />
         public virtual Response PutRequiredOnly(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("RequiredAndOptional.PutRequiredOnly");
             scope.Start();

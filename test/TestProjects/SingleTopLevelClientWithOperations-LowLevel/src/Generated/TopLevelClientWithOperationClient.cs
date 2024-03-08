@@ -49,14 +49,8 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public TopLevelClientWithOperationClient(Uri endpoint, AzureKeyCredential credential, TopLevelClientWithOperationClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(credential, nameof(credential));
             options ??= new TopLevelClientWithOperationClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -143,10 +137,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <include file="Docs/TopLevelClientWithOperationClient.xml" path="doc/members/member[@name='GetAllAsync(string,RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetAllAsync(string filter, RequestContext context)
         {
-            if (filter == null)
-            {
-                throw new ArgumentNullException(nameof(filter));
-            }
+            Argument.AssertNotNull(filter, nameof(filter));
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetAllRequest(filter, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetAllNextPageRequest(nextLink, filter, context);
@@ -171,10 +162,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <include file="Docs/TopLevelClientWithOperationClient.xml" path="doc/members/member[@name='GetAll(string,RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetAll(string filter, RequestContext context)
         {
-            if (filter == null)
-            {
-                throw new ArgumentNullException(nameof(filter));
-            }
+            Argument.AssertNotNull(filter, nameof(filter));
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetAllRequest(filter, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetAllNextPageRequest(nextLink, filter, context);
@@ -201,10 +189,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="clientParameter"/> is null. </exception>
         public virtual Client4 GetClient4(string clientParameter)
         {
-            if (clientParameter == null)
-            {
-                throw new ArgumentNullException(nameof(clientParameter));
-            }
+            Argument.AssertNotNull(clientParameter, nameof(clientParameter));
 
             return new Client4(ClientDiagnostics, _pipeline, _keyCredential, _endpoint, clientParameter);
         }

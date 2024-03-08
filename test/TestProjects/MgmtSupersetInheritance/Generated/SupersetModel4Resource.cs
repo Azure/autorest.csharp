@@ -195,10 +195,7 @@ namespace MgmtSupersetInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<SupersetModel4Resource>> UpdateAsync(WaitUntil waitUntil, SupersetModel4Data data, CancellationToken cancellationToken = default)
         {
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _supersetModel4ClientDiagnostics.CreateScope("SupersetModel4Resource.Update");
             scope.Start();
@@ -245,10 +242,7 @@ namespace MgmtSupersetInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<SupersetModel4Resource> Update(WaitUntil waitUntil, SupersetModel4Data data, CancellationToken cancellationToken = default)
         {
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _supersetModel4ClientDiagnostics.CreateScope("SupersetModel4Resource.Update");
             scope.Start();
@@ -296,14 +290,8 @@ namespace MgmtSupersetInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
         public virtual async Task<Response<SupersetModel4Resource>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(key, nameof(key));
+            Argument.AssertNotNull(value, nameof(value));
 
             using var scope = _supersetModel4ClientDiagnostics.CreateScope("SupersetModel4Resource.AddTag");
             scope.Start();
@@ -359,14 +347,8 @@ namespace MgmtSupersetInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
         public virtual Response<SupersetModel4Resource> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(key, nameof(key));
+            Argument.AssertNotNull(value, nameof(value));
 
             using var scope = _supersetModel4ClientDiagnostics.CreateScope("SupersetModel4Resource.AddTag");
             scope.Start();
@@ -421,10 +403,7 @@ namespace MgmtSupersetInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
         public virtual async Task<Response<SupersetModel4Resource>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            if (tags == null)
-            {
-                throw new ArgumentNullException(nameof(tags));
-            }
+            Argument.AssertNotNull(tags, nameof(tags));
 
             using var scope = _supersetModel4ClientDiagnostics.CreateScope("SupersetModel4Resource.SetTags");
             scope.Start();
@@ -480,10 +459,7 @@ namespace MgmtSupersetInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
         public virtual Response<SupersetModel4Resource> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            if (tags == null)
-            {
-                throw new ArgumentNullException(nameof(tags));
-            }
+            Argument.AssertNotNull(tags, nameof(tags));
 
             using var scope = _supersetModel4ClientDiagnostics.CreateScope("SupersetModel4Resource.SetTags");
             scope.Start();
@@ -539,10 +515,7 @@ namespace MgmtSupersetInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public virtual async Task<Response<SupersetModel4Resource>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
+            Argument.AssertNotNull(key, nameof(key));
 
             using var scope = _supersetModel4ClientDiagnostics.CreateScope("SupersetModel4Resource.RemoveTag");
             scope.Start();
@@ -597,10 +570,7 @@ namespace MgmtSupersetInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public virtual Response<SupersetModel4Resource> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
+            Argument.AssertNotNull(key, nameof(key));
 
             using var scope = _supersetModel4ClientDiagnostics.CreateScope("SupersetModel4Resource.RemoveTag");
             scope.Start();

@@ -82,18 +82,8 @@ namespace MgmtPagination
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<PageSizeDoubleModelResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string name, PageSizeDoubleModelData data, CancellationToken cancellationToken = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (name.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _pageSizeDoubleModelClientDiagnostics.CreateScope("PageSizeDoubleModelCollection.CreateOrUpdate");
             scope.Start();
@@ -142,18 +132,8 @@ namespace MgmtPagination
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<PageSizeDoubleModelResource> CreateOrUpdate(WaitUntil waitUntil, string name, PageSizeDoubleModelData data, CancellationToken cancellationToken = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (name.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _pageSizeDoubleModelClientDiagnostics.CreateScope("PageSizeDoubleModelCollection.CreateOrUpdate");
             scope.Start();
@@ -200,14 +180,7 @@ namespace MgmtPagination
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual async Task<Response<PageSizeDoubleModelResource>> GetAsync(string name, CancellationToken cancellationToken = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (name.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
             using var scope = _pageSizeDoubleModelClientDiagnostics.CreateScope("PageSizeDoubleModelCollection.Get");
             scope.Start();
@@ -251,14 +224,7 @@ namespace MgmtPagination
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual Response<PageSizeDoubleModelResource> Get(string name, CancellationToken cancellationToken = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (name.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
             using var scope = _pageSizeDoubleModelClientDiagnostics.CreateScope("PageSizeDoubleModelCollection.Get");
             scope.Start();
@@ -363,14 +329,7 @@ namespace MgmtPagination
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual async Task<Response<bool>> ExistsAsync(string name, CancellationToken cancellationToken = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (name.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
             using var scope = _pageSizeDoubleModelClientDiagnostics.CreateScope("PageSizeDoubleModelCollection.Exists");
             scope.Start();
@@ -413,14 +372,7 @@ namespace MgmtPagination
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual Response<bool> Exists(string name, CancellationToken cancellationToken = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (name.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
             using var scope = _pageSizeDoubleModelClientDiagnostics.CreateScope("PageSizeDoubleModelCollection.Exists");
             scope.Start();
@@ -463,14 +415,7 @@ namespace MgmtPagination
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual async Task<NullableResponse<PageSizeDoubleModelResource>> GetIfExistsAsync(string name, CancellationToken cancellationToken = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (name.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
             using var scope = _pageSizeDoubleModelClientDiagnostics.CreateScope("PageSizeDoubleModelCollection.GetIfExists");
             scope.Start();
@@ -515,14 +460,7 @@ namespace MgmtPagination
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual NullableResponse<PageSizeDoubleModelResource> GetIfExists(string name, CancellationToken cancellationToken = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (name.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
             using var scope = _pageSizeDoubleModelClientDiagnostics.CreateScope("PageSizeDoubleModelCollection.GetIfExists");
             scope.Start();

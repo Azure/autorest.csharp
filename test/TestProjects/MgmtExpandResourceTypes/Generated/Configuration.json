@@ -28,5 +28,6 @@
   "OverrideOperationName": {
     "RecordSets_ListByDnsZone": "GetRecordSets",
     "RecordSets_ListAllByDnsZone": "GetAllRecordSets"
-  }
+  },
+  "helper-namespace": "MgmtExpandResourceTypes"
 }

@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using FirstTestTypeSpec;
 
 namespace FirstTestTypeSpec.Models
 {
@@ -50,10 +51,7 @@ namespace FirstTestTypeSpec.Models
         /// <exception cref="ArgumentNullException"> <paramref name="self"/> is null. </exception>
         public ContainSelf(ContainSelf self)
         {
-            if (self == null)
-            {
-                throw new ArgumentNullException(nameof(self));
-            }
+            Argument.AssertNotNull(self, nameof(self));
 
             Self = self;
         }

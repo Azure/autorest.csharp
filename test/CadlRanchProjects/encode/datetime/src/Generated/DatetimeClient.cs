@@ -36,10 +36,7 @@ namespace Encode.Datetime
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public DatetimeClient(Uri endpoint, DatetimeClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new DatetimeClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

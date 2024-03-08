@@ -285,10 +285,7 @@ namespace MgmtMockAndSample
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<GuestConfigurationAssignmentResource>> UpdateAsync(WaitUntil waitUntil, GuestConfigurationAssignmentData data, CancellationToken cancellationToken = default)
         {
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _guestConfigurationAssignmentClientDiagnostics.CreateScope("GuestConfigurationAssignmentResource.Update");
             scope.Start();
@@ -336,10 +333,7 @@ namespace MgmtMockAndSample
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<GuestConfigurationAssignmentResource> Update(WaitUntil waitUntil, GuestConfigurationAssignmentData data, CancellationToken cancellationToken = default)
         {
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _guestConfigurationAssignmentClientDiagnostics.CreateScope("GuestConfigurationAssignmentResource.Update");
             scope.Start();

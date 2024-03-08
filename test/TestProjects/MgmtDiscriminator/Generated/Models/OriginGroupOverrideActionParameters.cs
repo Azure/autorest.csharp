@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -53,10 +54,7 @@ namespace MgmtDiscriminator.Models
         /// <exception cref="ArgumentNullException"> <paramref name="originGroup"/> is null. </exception>
         public OriginGroupOverrideActionParameters(OriginGroupOverrideActionParametersTypeName typeName, WritableSubResource originGroup)
         {
-            if (originGroup == null)
-            {
-                throw new ArgumentNullException(nameof(originGroup));
-            }
+            Argument.AssertNotNull(originGroup, nameof(originGroup));
 
             TypeName = typeName;
             OriginGroup = originGroup;

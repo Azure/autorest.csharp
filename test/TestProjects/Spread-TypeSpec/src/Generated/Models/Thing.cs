@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using SpreadTypeSpec;
 
 namespace SpreadTypeSpec.Models
 {
@@ -51,10 +52,7 @@ namespace SpreadTypeSpec.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public Thing(string name, int age)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Argument.AssertNotNull(name, nameof(name));
 
             Name = name;
             Age = age;

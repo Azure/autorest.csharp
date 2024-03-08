@@ -160,7 +160,7 @@ UnionFloatLiteral client = new OptionalClient().GetUnionFloatLiteralClient();
 
 UnionFloatLiteralProperty body = new UnionFloatLiteralProperty
 {
-    Property = BinaryData.FromObjectAsJson(1.2),
+    Property = BinaryData.FromObjectAsJson(1.25),
 };
 Response response = await client.PutAllAsync(body);
 ]]></code></example>
@@ -180,7 +180,7 @@ UnionFloatLiteral client = new OptionalClient().GetUnionFloatLiteralClient();
 
 UnionFloatLiteralProperty body = new UnionFloatLiteralProperty
 {
-    Property = BinaryData.FromObjectAsJson(1.2),
+    Property = BinaryData.FromObjectAsJson(1.25),
 };
 Response response = client.PutAll(body);
 ]]></code></example>
@@ -202,7 +202,7 @@ UnionFloatLiteral client = new OptionalClient().GetUnionFloatLiteralClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    property = 1.2,
+    property = 1.25,
 });
 Response response = await client.PutAllAsync(content);
 
@@ -226,7 +226,7 @@ UnionFloatLiteral client = new OptionalClient().GetUnionFloatLiteralClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    property = 1.2,
+    property = 1.25,
 });
 Response response = client.PutAll(content);
 
@@ -248,7 +248,7 @@ UnionFloatLiteral client = new OptionalClient().GetUnionFloatLiteralClient();
 
 UnionFloatLiteralProperty body = new UnionFloatLiteralProperty
 {
-    Property = BinaryData.FromObjectAsJson(1.2),
+    Property = BinaryData.FromObjectAsJson(1.25),
 };
 Response response = await client.PutDefaultAsync(body);
 ]]></code></example>
@@ -268,7 +268,7 @@ UnionFloatLiteral client = new OptionalClient().GetUnionFloatLiteralClient();
 
 UnionFloatLiteralProperty body = new UnionFloatLiteralProperty
 {
-    Property = BinaryData.FromObjectAsJson(1.2),
+    Property = BinaryData.FromObjectAsJson(1.25),
 };
 Response response = client.PutDefault(body);
 ]]></code></example>
@@ -290,7 +290,7 @@ UnionFloatLiteral client = new OptionalClient().GetUnionFloatLiteralClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    property = 1.2,
+    property = 1.25,
 });
 Response response = await client.PutDefaultAsync(content);
 
@@ -314,7 +314,7 @@ UnionFloatLiteral client = new OptionalClient().GetUnionFloatLiteralClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    property = 1.2,
+    property = 1.25,
 });
 Response response = client.PutDefault(content);
 

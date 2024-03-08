@@ -39,10 +39,7 @@ namespace _Type.Model.Usage
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public UsageClient(Uri endpoint, UsageClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new UsageClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -56,10 +53,7 @@ namespace _Type.Model.Usage
         /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='InputAsync(InputRecord,CancellationToken)']/*" />
         public virtual async Task<Response> InputAsync(InputRecord input, CancellationToken cancellationToken = default)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
+            Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -73,10 +67,7 @@ namespace _Type.Model.Usage
         /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='Input(InputRecord,CancellationToken)']/*" />
         public virtual Response Input(InputRecord input, CancellationToken cancellationToken = default)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
+            Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -107,10 +98,7 @@ namespace _Type.Model.Usage
         /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='InputAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> InputAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("UsageClient.Input");
             scope.Start();
@@ -149,10 +137,7 @@ namespace _Type.Model.Usage
         /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='Input(RequestContent,RequestContext)']/*" />
         public virtual Response Input(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("UsageClient.Input");
             scope.Start();
@@ -262,10 +247,7 @@ namespace _Type.Model.Usage
         /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='InputAndOutputAsync(InputOutputRecord,CancellationToken)']/*" />
         public virtual async Task<Response<InputOutputRecord>> InputAndOutputAsync(InputOutputRecord body, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
+            Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -279,10 +261,7 @@ namespace _Type.Model.Usage
         /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='InputAndOutput(InputOutputRecord,CancellationToken)']/*" />
         public virtual Response<InputOutputRecord> InputAndOutput(InputOutputRecord body, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
+            Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -313,10 +292,7 @@ namespace _Type.Model.Usage
         /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='InputAndOutputAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> InputAndOutputAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("UsageClient.InputAndOutput");
             scope.Start();
@@ -355,10 +331,7 @@ namespace _Type.Model.Usage
         /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='InputAndOutput(RequestContent,RequestContext)']/*" />
         public virtual Response InputAndOutput(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("UsageClient.InputAndOutput");
             scope.Start();

@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -51,14 +52,8 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="choices"/> or <paramref name="usage"/> is null. </exception>
         internal CreateEditResponse(DateTimeOffset created, IEnumerable<CreateEditResponseChoice> choices, CompletionUsage usage)
         {
-            if (choices == null)
-            {
-                throw new ArgumentNullException(nameof(choices));
-            }
-            if (usage == null)
-            {
-                throw new ArgumentNullException(nameof(usage));
-            }
+            Argument.AssertNotNull(choices, nameof(choices));
+            Argument.AssertNotNull(usage, nameof(usage));
 
             Created = created;
             Choices = choices.ToList();

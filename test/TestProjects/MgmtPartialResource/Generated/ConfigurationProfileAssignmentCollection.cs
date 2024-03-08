@@ -82,18 +82,8 @@ namespace MgmtPartialResource
         /// <exception cref="ArgumentNullException"> <paramref name="configurationProfileAssignmentName"/> or <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<ConfigurationProfileAssignmentResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string configurationProfileAssignmentName, ConfigurationProfileAssignmentData data, CancellationToken cancellationToken = default)
         {
-            if (configurationProfileAssignmentName == null)
-            {
-                throw new ArgumentNullException(nameof(configurationProfileAssignmentName));
-            }
-            if (configurationProfileAssignmentName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(configurationProfileAssignmentName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(configurationProfileAssignmentName, nameof(configurationProfileAssignmentName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _configurationProfileAssignmentClientDiagnostics.CreateScope("ConfigurationProfileAssignmentCollection.CreateOrUpdate");
             scope.Start();
@@ -143,18 +133,8 @@ namespace MgmtPartialResource
         /// <exception cref="ArgumentNullException"> <paramref name="configurationProfileAssignmentName"/> or <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<ConfigurationProfileAssignmentResource> CreateOrUpdate(WaitUntil waitUntil, string configurationProfileAssignmentName, ConfigurationProfileAssignmentData data, CancellationToken cancellationToken = default)
         {
-            if (configurationProfileAssignmentName == null)
-            {
-                throw new ArgumentNullException(nameof(configurationProfileAssignmentName));
-            }
-            if (configurationProfileAssignmentName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(configurationProfileAssignmentName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(configurationProfileAssignmentName, nameof(configurationProfileAssignmentName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _configurationProfileAssignmentClientDiagnostics.CreateScope("ConfigurationProfileAssignmentCollection.CreateOrUpdate");
             scope.Start();
@@ -202,14 +182,7 @@ namespace MgmtPartialResource
         /// <exception cref="ArgumentNullException"> <paramref name="configurationProfileAssignmentName"/> is null. </exception>
         public virtual async Task<Response<ConfigurationProfileAssignmentResource>> GetAsync(string configurationProfileAssignmentName, CancellationToken cancellationToken = default)
         {
-            if (configurationProfileAssignmentName == null)
-            {
-                throw new ArgumentNullException(nameof(configurationProfileAssignmentName));
-            }
-            if (configurationProfileAssignmentName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(configurationProfileAssignmentName));
-            }
+            Argument.AssertNotNullOrEmpty(configurationProfileAssignmentName, nameof(configurationProfileAssignmentName));
 
             using var scope = _configurationProfileAssignmentClientDiagnostics.CreateScope("ConfigurationProfileAssignmentCollection.Get");
             scope.Start();
@@ -254,14 +227,7 @@ namespace MgmtPartialResource
         /// <exception cref="ArgumentNullException"> <paramref name="configurationProfileAssignmentName"/> is null. </exception>
         public virtual Response<ConfigurationProfileAssignmentResource> Get(string configurationProfileAssignmentName, CancellationToken cancellationToken = default)
         {
-            if (configurationProfileAssignmentName == null)
-            {
-                throw new ArgumentNullException(nameof(configurationProfileAssignmentName));
-            }
-            if (configurationProfileAssignmentName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(configurationProfileAssignmentName));
-            }
+            Argument.AssertNotNullOrEmpty(configurationProfileAssignmentName, nameof(configurationProfileAssignmentName));
 
             using var scope = _configurationProfileAssignmentClientDiagnostics.CreateScope("ConfigurationProfileAssignmentCollection.Get");
             scope.Start();
@@ -364,14 +330,7 @@ namespace MgmtPartialResource
         /// <exception cref="ArgumentNullException"> <paramref name="configurationProfileAssignmentName"/> is null. </exception>
         public virtual async Task<Response<bool>> ExistsAsync(string configurationProfileAssignmentName, CancellationToken cancellationToken = default)
         {
-            if (configurationProfileAssignmentName == null)
-            {
-                throw new ArgumentNullException(nameof(configurationProfileAssignmentName));
-            }
-            if (configurationProfileAssignmentName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(configurationProfileAssignmentName));
-            }
+            Argument.AssertNotNullOrEmpty(configurationProfileAssignmentName, nameof(configurationProfileAssignmentName));
 
             using var scope = _configurationProfileAssignmentClientDiagnostics.CreateScope("ConfigurationProfileAssignmentCollection.Exists");
             scope.Start();
@@ -414,14 +373,7 @@ namespace MgmtPartialResource
         /// <exception cref="ArgumentNullException"> <paramref name="configurationProfileAssignmentName"/> is null. </exception>
         public virtual Response<bool> Exists(string configurationProfileAssignmentName, CancellationToken cancellationToken = default)
         {
-            if (configurationProfileAssignmentName == null)
-            {
-                throw new ArgumentNullException(nameof(configurationProfileAssignmentName));
-            }
-            if (configurationProfileAssignmentName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(configurationProfileAssignmentName));
-            }
+            Argument.AssertNotNullOrEmpty(configurationProfileAssignmentName, nameof(configurationProfileAssignmentName));
 
             using var scope = _configurationProfileAssignmentClientDiagnostics.CreateScope("ConfigurationProfileAssignmentCollection.Exists");
             scope.Start();
@@ -464,14 +416,7 @@ namespace MgmtPartialResource
         /// <exception cref="ArgumentNullException"> <paramref name="configurationProfileAssignmentName"/> is null. </exception>
         public virtual async Task<NullableResponse<ConfigurationProfileAssignmentResource>> GetIfExistsAsync(string configurationProfileAssignmentName, CancellationToken cancellationToken = default)
         {
-            if (configurationProfileAssignmentName == null)
-            {
-                throw new ArgumentNullException(nameof(configurationProfileAssignmentName));
-            }
-            if (configurationProfileAssignmentName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(configurationProfileAssignmentName));
-            }
+            Argument.AssertNotNullOrEmpty(configurationProfileAssignmentName, nameof(configurationProfileAssignmentName));
 
             using var scope = _configurationProfileAssignmentClientDiagnostics.CreateScope("ConfigurationProfileAssignmentCollection.GetIfExists");
             scope.Start();
@@ -516,14 +461,7 @@ namespace MgmtPartialResource
         /// <exception cref="ArgumentNullException"> <paramref name="configurationProfileAssignmentName"/> is null. </exception>
         public virtual NullableResponse<ConfigurationProfileAssignmentResource> GetIfExists(string configurationProfileAssignmentName, CancellationToken cancellationToken = default)
         {
-            if (configurationProfileAssignmentName == null)
-            {
-                throw new ArgumentNullException(nameof(configurationProfileAssignmentName));
-            }
-            if (configurationProfileAssignmentName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(configurationProfileAssignmentName));
-            }
+            Argument.AssertNotNullOrEmpty(configurationProfileAssignmentName, nameof(configurationProfileAssignmentName));
 
             using var scope = _configurationProfileAssignmentClientDiagnostics.CreateScope("ConfigurationProfileAssignmentCollection.GetIfExists");
             scope.Start();

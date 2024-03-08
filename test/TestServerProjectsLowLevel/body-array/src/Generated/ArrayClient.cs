@@ -47,14 +47,8 @@ namespace body_array_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public ArrayClient(Uri endpoint, AzureKeyCredential credential, ArrayClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(credential, nameof(credential));
             options ??= new ArrayClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -261,10 +255,7 @@ namespace body_array_LowLevel
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutEmptyAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutEmptyAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutEmpty");
             scope.Start();
@@ -298,10 +289,7 @@ namespace body_array_LowLevel
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutEmpty(RequestContent,RequestContext)']/*" />
         public virtual Response PutEmpty(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutEmpty");
             scope.Start();
@@ -395,10 +383,7 @@ namespace body_array_LowLevel
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutBooleanTfftAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutBooleanTfftAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutBooleanTfft");
             scope.Start();
@@ -432,10 +417,7 @@ namespace body_array_LowLevel
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutBooleanTfft(RequestContent,RequestContext)']/*" />
         public virtual Response PutBooleanTfft(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutBooleanTfft");
             scope.Start();
@@ -649,10 +631,7 @@ namespace body_array_LowLevel
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutIntegerValidAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutIntegerValidAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutIntegerValid");
             scope.Start();
@@ -686,10 +665,7 @@ namespace body_array_LowLevel
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutIntegerValid(RequestContent,RequestContext)']/*" />
         public virtual Response PutIntegerValid(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutIntegerValid");
             scope.Start();
@@ -903,10 +879,7 @@ namespace body_array_LowLevel
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutLongValidAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutLongValidAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutLongValid");
             scope.Start();
@@ -940,10 +913,7 @@ namespace body_array_LowLevel
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutLongValid(RequestContent,RequestContext)']/*" />
         public virtual Response PutLongValid(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutLongValid");
             scope.Start();
@@ -1157,10 +1127,7 @@ namespace body_array_LowLevel
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutFloatValidAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutFloatValidAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutFloatValid");
             scope.Start();
@@ -1194,10 +1161,7 @@ namespace body_array_LowLevel
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutFloatValid(RequestContent,RequestContext)']/*" />
         public virtual Response PutFloatValid(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutFloatValid");
             scope.Start();
@@ -1411,10 +1375,7 @@ namespace body_array_LowLevel
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutDoubleValidAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutDoubleValidAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutDoubleValid");
             scope.Start();
@@ -1448,10 +1409,7 @@ namespace body_array_LowLevel
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutDoubleValid(RequestContent,RequestContext)']/*" />
         public virtual Response PutDoubleValid(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutDoubleValid");
             scope.Start();
@@ -1665,10 +1623,7 @@ namespace body_array_LowLevel
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutStringValidAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutStringValidAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutStringValid");
             scope.Start();
@@ -1702,10 +1657,7 @@ namespace body_array_LowLevel
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutStringValid(RequestContent,RequestContext)']/*" />
         public virtual Response PutStringValid(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutStringValid");
             scope.Start();
@@ -1799,10 +1751,7 @@ namespace body_array_LowLevel
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutEnumValidAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutEnumValidAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutEnumValid");
             scope.Start();
@@ -1836,10 +1785,7 @@ namespace body_array_LowLevel
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutEnumValid(RequestContent,RequestContext)']/*" />
         public virtual Response PutEnumValid(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutEnumValid");
             scope.Start();
@@ -1933,10 +1879,7 @@ namespace body_array_LowLevel
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutStringEnumValidAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutStringEnumValidAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutStringEnumValid");
             scope.Start();
@@ -1970,10 +1913,7 @@ namespace body_array_LowLevel
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutStringEnumValid(RequestContent,RequestContext)']/*" />
         public virtual Response PutStringEnumValid(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutStringEnumValid");
             scope.Start();
@@ -2187,10 +2127,7 @@ namespace body_array_LowLevel
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutUuidValidAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutUuidValidAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutUuidValid");
             scope.Start();
@@ -2224,10 +2161,7 @@ namespace body_array_LowLevel
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutUuidValid(RequestContent,RequestContext)']/*" />
         public virtual Response PutUuidValid(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutUuidValid");
             scope.Start();
@@ -2381,10 +2315,7 @@ namespace body_array_LowLevel
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutDateValidAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutDateValidAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutDateValid");
             scope.Start();
@@ -2418,10 +2349,7 @@ namespace body_array_LowLevel
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutDateValid(RequestContent,RequestContext)']/*" />
         public virtual Response PutDateValid(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutDateValid");
             scope.Start();
@@ -2635,10 +2563,7 @@ namespace body_array_LowLevel
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutDateTimeValidAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutDateTimeValidAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutDateTimeValid");
             scope.Start();
@@ -2672,10 +2597,7 @@ namespace body_array_LowLevel
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutDateTimeValid(RequestContent,RequestContext)']/*" />
         public virtual Response PutDateTimeValid(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutDateTimeValid");
             scope.Start();
@@ -2889,10 +2811,7 @@ namespace body_array_LowLevel
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutDateTimeRfc1123ValidAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutDateTimeRfc1123ValidAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutDateTimeRfc1123Valid");
             scope.Start();
@@ -2926,10 +2845,7 @@ namespace body_array_LowLevel
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutDateTimeRfc1123Valid(RequestContent,RequestContext)']/*" />
         public virtual Response PutDateTimeRfc1123Valid(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutDateTimeRfc1123Valid");
             scope.Start();
@@ -3023,10 +2939,7 @@ namespace body_array_LowLevel
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutDurationValidAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutDurationValidAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutDurationValid");
             scope.Start();
@@ -3060,10 +2973,7 @@ namespace body_array_LowLevel
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutDurationValid(RequestContent,RequestContext)']/*" />
         public virtual Response PutDurationValid(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutDurationValid");
             scope.Start();
@@ -3157,10 +3067,7 @@ namespace body_array_LowLevel
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutByteValidAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutByteValidAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutByteValid");
             scope.Start();
@@ -3194,10 +3101,7 @@ namespace body_array_LowLevel
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutByteValid(RequestContent,RequestContext)']/*" />
         public virtual Response PutByteValid(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutByteValid");
             scope.Start();
@@ -3651,10 +3555,7 @@ namespace body_array_LowLevel
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutComplexValidAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutComplexValidAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutComplexValid");
             scope.Start();
@@ -3688,10 +3589,7 @@ namespace body_array_LowLevel
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutComplexValid(RequestContent,RequestContext)']/*" />
         public virtual Response PutComplexValid(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutComplexValid");
             scope.Start();
@@ -4025,10 +3923,7 @@ namespace body_array_LowLevel
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutArrayValidAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutArrayValidAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutArrayValid");
             scope.Start();
@@ -4062,10 +3957,7 @@ namespace body_array_LowLevel
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutArrayValid(RequestContent,RequestContext)']/*" />
         public virtual Response PutArrayValid(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutArrayValid");
             scope.Start();
@@ -4399,10 +4291,7 @@ namespace body_array_LowLevel
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutDictionaryValidAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutDictionaryValidAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutDictionaryValid");
             scope.Start();
@@ -4436,10 +4325,7 @@ namespace body_array_LowLevel
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutDictionaryValid(RequestContent,RequestContext)']/*" />
         public virtual Response PutDictionaryValid(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutDictionaryValid");
             scope.Start();

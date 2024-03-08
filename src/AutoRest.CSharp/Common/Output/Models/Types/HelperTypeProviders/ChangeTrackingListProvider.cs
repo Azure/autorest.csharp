@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class ChangeTrackingListProvider : ExpressionTypeProvider
     {
-        private static readonly Lazy<ChangeTrackingListProvider> _instance = new(() => new ChangeTrackingListProvider(Configuration.Namespace, null));
+        private static readonly Lazy<ChangeTrackingListProvider> _instance = new(() => new ChangeTrackingListProvider(Configuration.HelperNamespace, null));
 
         private class ChangeTrackingListTemplate<T> { }
 

@@ -20,10 +20,7 @@ namespace MgmtParent.Models
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal DedicatedHostListResult(IEnumerable<DedicatedHostData> value)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(value, nameof(value));
 
             Value = value.ToList();
         }

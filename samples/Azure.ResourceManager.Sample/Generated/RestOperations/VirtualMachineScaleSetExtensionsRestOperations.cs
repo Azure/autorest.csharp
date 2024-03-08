@@ -90,42 +90,11 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="vmssExtensionName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, string vmssExtensionName, VirtualMachineScaleSetExtensionData data, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (resourceGroupName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
-            }
-            if (vmScaleSetName == null)
-            {
-                throw new ArgumentNullException(nameof(vmScaleSetName));
-            }
-            if (vmScaleSetName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(vmScaleSetName));
-            }
-            if (vmssExtensionName == null)
-            {
-                throw new ArgumentNullException(nameof(vmssExtensionName));
-            }
-            if (vmssExtensionName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(vmssExtensionName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(vmScaleSetName, nameof(vmScaleSetName));
+            Argument.AssertNotNullOrEmpty(vmssExtensionName, nameof(vmssExtensionName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmssExtensionName, data);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -150,42 +119,11 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="vmssExtensionName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response CreateOrUpdate(string subscriptionId, string resourceGroupName, string vmScaleSetName, string vmssExtensionName, VirtualMachineScaleSetExtensionData data, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (resourceGroupName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
-            }
-            if (vmScaleSetName == null)
-            {
-                throw new ArgumentNullException(nameof(vmScaleSetName));
-            }
-            if (vmScaleSetName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(vmScaleSetName));
-            }
-            if (vmssExtensionName == null)
-            {
-                throw new ArgumentNullException(nameof(vmssExtensionName));
-            }
-            if (vmssExtensionName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(vmssExtensionName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(vmScaleSetName, nameof(vmScaleSetName));
+            Argument.AssertNotNullOrEmpty(vmssExtensionName, nameof(vmssExtensionName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmssExtensionName, data);
             _pipeline.Send(message, cancellationToken);
@@ -252,42 +190,11 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="vmssExtensionName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response> UpdateAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, string vmssExtensionName, VirtualMachineScaleSetExtensionPatch patch, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (resourceGroupName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
-            }
-            if (vmScaleSetName == null)
-            {
-                throw new ArgumentNullException(nameof(vmScaleSetName));
-            }
-            if (vmScaleSetName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(vmScaleSetName));
-            }
-            if (vmssExtensionName == null)
-            {
-                throw new ArgumentNullException(nameof(vmssExtensionName));
-            }
-            if (vmssExtensionName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(vmssExtensionName));
-            }
-            if (patch == null)
-            {
-                throw new ArgumentNullException(nameof(patch));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(vmScaleSetName, nameof(vmScaleSetName));
+            Argument.AssertNotNullOrEmpty(vmssExtensionName, nameof(vmssExtensionName));
+            Argument.AssertNotNull(patch, nameof(patch));
 
             using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmssExtensionName, patch);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -312,42 +219,11 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="vmssExtensionName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response Update(string subscriptionId, string resourceGroupName, string vmScaleSetName, string vmssExtensionName, VirtualMachineScaleSetExtensionPatch patch, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (resourceGroupName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
-            }
-            if (vmScaleSetName == null)
-            {
-                throw new ArgumentNullException(nameof(vmScaleSetName));
-            }
-            if (vmScaleSetName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(vmScaleSetName));
-            }
-            if (vmssExtensionName == null)
-            {
-                throw new ArgumentNullException(nameof(vmssExtensionName));
-            }
-            if (vmssExtensionName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(vmssExtensionName));
-            }
-            if (patch == null)
-            {
-                throw new ArgumentNullException(nameof(patch));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(vmScaleSetName, nameof(vmScaleSetName));
+            Argument.AssertNotNullOrEmpty(vmssExtensionName, nameof(vmssExtensionName));
+            Argument.AssertNotNull(patch, nameof(patch));
 
             using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmssExtensionName, patch);
             _pipeline.Send(message, cancellationToken);
@@ -408,38 +284,10 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="vmssExtensionName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response> DeleteAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, string vmssExtensionName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (resourceGroupName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
-            }
-            if (vmScaleSetName == null)
-            {
-                throw new ArgumentNullException(nameof(vmScaleSetName));
-            }
-            if (vmScaleSetName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(vmScaleSetName));
-            }
-            if (vmssExtensionName == null)
-            {
-                throw new ArgumentNullException(nameof(vmssExtensionName));
-            }
-            if (vmssExtensionName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(vmssExtensionName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(vmScaleSetName, nameof(vmScaleSetName));
+            Argument.AssertNotNullOrEmpty(vmssExtensionName, nameof(vmssExtensionName));
 
             using var message = CreateDeleteRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmssExtensionName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -464,38 +312,10 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="vmssExtensionName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response Delete(string subscriptionId, string resourceGroupName, string vmScaleSetName, string vmssExtensionName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (resourceGroupName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
-            }
-            if (vmScaleSetName == null)
-            {
-                throw new ArgumentNullException(nameof(vmScaleSetName));
-            }
-            if (vmScaleSetName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(vmScaleSetName));
-            }
-            if (vmssExtensionName == null)
-            {
-                throw new ArgumentNullException(nameof(vmssExtensionName));
-            }
-            if (vmssExtensionName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(vmssExtensionName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(vmScaleSetName, nameof(vmScaleSetName));
+            Argument.AssertNotNullOrEmpty(vmssExtensionName, nameof(vmssExtensionName));
 
             using var message = CreateDeleteRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmssExtensionName);
             _pipeline.Send(message, cancellationToken);
@@ -567,38 +387,10 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="vmssExtensionName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<VirtualMachineScaleSetExtensionData>> GetAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, string vmssExtensionName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (resourceGroupName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
-            }
-            if (vmScaleSetName == null)
-            {
-                throw new ArgumentNullException(nameof(vmScaleSetName));
-            }
-            if (vmScaleSetName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(vmScaleSetName));
-            }
-            if (vmssExtensionName == null)
-            {
-                throw new ArgumentNullException(nameof(vmssExtensionName));
-            }
-            if (vmssExtensionName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(vmssExtensionName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(vmScaleSetName, nameof(vmScaleSetName));
+            Argument.AssertNotNullOrEmpty(vmssExtensionName, nameof(vmssExtensionName));
 
             using var message = CreateGetRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmssExtensionName, expand);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -629,38 +421,10 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="vmssExtensionName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<VirtualMachineScaleSetExtensionData> Get(string subscriptionId, string resourceGroupName, string vmScaleSetName, string vmssExtensionName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (resourceGroupName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
-            }
-            if (vmScaleSetName == null)
-            {
-                throw new ArgumentNullException(nameof(vmScaleSetName));
-            }
-            if (vmScaleSetName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(vmScaleSetName));
-            }
-            if (vmssExtensionName == null)
-            {
-                throw new ArgumentNullException(nameof(vmssExtensionName));
-            }
-            if (vmssExtensionName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(vmssExtensionName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(vmScaleSetName, nameof(vmScaleSetName));
+            Argument.AssertNotNullOrEmpty(vmssExtensionName, nameof(vmssExtensionName));
 
             using var message = CreateGetRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmssExtensionName, expand);
             _pipeline.Send(message, cancellationToken);
@@ -725,30 +489,9 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<VirtualMachineScaleSetExtensionListResult>> ListAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (resourceGroupName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
-            }
-            if (vmScaleSetName == null)
-            {
-                throw new ArgumentNullException(nameof(vmScaleSetName));
-            }
-            if (vmScaleSetName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(vmScaleSetName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(vmScaleSetName, nameof(vmScaleSetName));
 
             using var message = CreateListRequest(subscriptionId, resourceGroupName, vmScaleSetName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -775,30 +518,9 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<VirtualMachineScaleSetExtensionListResult> List(string subscriptionId, string resourceGroupName, string vmScaleSetName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (resourceGroupName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
-            }
-            if (vmScaleSetName == null)
-            {
-                throw new ArgumentNullException(nameof(vmScaleSetName));
-            }
-            if (vmScaleSetName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(vmScaleSetName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(vmScaleSetName, nameof(vmScaleSetName));
 
             using var message = CreateListRequest(subscriptionId, resourceGroupName, vmScaleSetName);
             _pipeline.Send(message, cancellationToken);
@@ -848,34 +570,10 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<VirtualMachineScaleSetExtensionListResult>> ListNextPageAsync(string nextLink, string subscriptionId, string resourceGroupName, string vmScaleSetName, CancellationToken cancellationToken = default)
         {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (resourceGroupName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
-            }
-            if (vmScaleSetName == null)
-            {
-                throw new ArgumentNullException(nameof(vmScaleSetName));
-            }
-            if (vmScaleSetName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(vmScaleSetName));
-            }
+            Argument.AssertNotNull(nextLink, nameof(nextLink));
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(vmScaleSetName, nameof(vmScaleSetName));
 
             using var message = CreateListNextPageRequest(nextLink, subscriptionId, resourceGroupName, vmScaleSetName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -903,34 +601,10 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<VirtualMachineScaleSetExtensionListResult> ListNextPage(string nextLink, string subscriptionId, string resourceGroupName, string vmScaleSetName, CancellationToken cancellationToken = default)
         {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (resourceGroupName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
-            }
-            if (vmScaleSetName == null)
-            {
-                throw new ArgumentNullException(nameof(vmScaleSetName));
-            }
-            if (vmScaleSetName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(vmScaleSetName));
-            }
+            Argument.AssertNotNull(nextLink, nameof(nextLink));
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(vmScaleSetName, nameof(vmScaleSetName));
 
             using var message = CreateListNextPageRequest(nextLink, subscriptionId, resourceGroupName, vmScaleSetName);
             _pipeline.Send(message, cancellationToken);

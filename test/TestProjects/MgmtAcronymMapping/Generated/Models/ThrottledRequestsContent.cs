@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using MgmtAcronymMapping;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -31,10 +32,7 @@ namespace MgmtAcronymMapping.Models
         /// <exception cref="ArgumentNullException"> <paramref name="blobContainerSasUri"/> is null. </exception>
         public ThrottledRequestsContent(Uri blobContainerSasUri, DateTimeOffset fromTime, DateTimeOffset toTime) : base(blobContainerSasUri, fromTime, toTime)
         {
-            if (blobContainerSasUri == null)
-            {
-                throw new ArgumentNullException(nameof(blobContainerSasUri));
-            }
+            Argument.AssertNotNull(blobContainerSasUri, nameof(blobContainerSasUri));
         }
 
         /// <summary> Initializes a new instance of <see cref="ThrottledRequestsContent"/>. </summary>

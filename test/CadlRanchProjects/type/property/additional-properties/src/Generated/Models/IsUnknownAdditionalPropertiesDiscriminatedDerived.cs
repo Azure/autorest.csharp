@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using _Type.Property.AdditionalProperties;
 
 namespace _Type.Property.AdditionalProperties.Models
 {
@@ -19,10 +20,7 @@ namespace _Type.Property.AdditionalProperties.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public IsUnknownAdditionalPropertiesDiscriminatedDerived(string name, int index) : base(name)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Argument.AssertNotNull(name, nameof(name));
 
             Kind = "derived";
             Index = index;

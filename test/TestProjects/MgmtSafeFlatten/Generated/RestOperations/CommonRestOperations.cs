@@ -72,14 +72,7 @@ namespace MgmtSafeFlatten
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<TypeOneListResult>> ListTypeOnesBySubscriptionAsync(string subscriptionId, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
 
             using var message = CreateListTypeOnesBySubscriptionRequest(subscriptionId);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -104,14 +97,7 @@ namespace MgmtSafeFlatten
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<TypeOneListResult> ListTypeOnesBySubscription(string subscriptionId, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
 
             using var message = CreateListTypeOnesBySubscriptionRequest(subscriptionId);
             _pipeline.Send(message, cancellationToken);
@@ -164,14 +150,7 @@ namespace MgmtSafeFlatten
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<TypeTwoListResult>> ListTypeTwosBySubscriptionAsync(string subscriptionId, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
 
             using var message = CreateListTypeTwosBySubscriptionRequest(subscriptionId);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -196,14 +175,7 @@ namespace MgmtSafeFlatten
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<TypeTwoListResult> ListTypeTwosBySubscription(string subscriptionId, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
 
             using var message = CreateListTypeTwosBySubscriptionRequest(subscriptionId);
             _pipeline.Send(message, cancellationToken);
@@ -261,22 +233,8 @@ namespace MgmtSafeFlatten
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<TypeOneListResult>> ListTypeOnesAsync(string subscriptionId, string resourceGroupName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (resourceGroupName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
 
             using var message = CreateListTypeOnesRequest(subscriptionId, resourceGroupName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -302,22 +260,8 @@ namespace MgmtSafeFlatten
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<TypeOneListResult> ListTypeOnes(string subscriptionId, string resourceGroupName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (resourceGroupName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
 
             using var message = CreateListTypeOnesRequest(subscriptionId, resourceGroupName);
             _pipeline.Send(message, cancellationToken);
@@ -375,22 +319,8 @@ namespace MgmtSafeFlatten
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<TypeTwoListResult>> ListTypeTwosAsync(string subscriptionId, string resourceGroupName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (resourceGroupName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
 
             using var message = CreateListTypeTwosRequest(subscriptionId, resourceGroupName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -416,22 +346,8 @@ namespace MgmtSafeFlatten
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<TypeTwoListResult> ListTypeTwos(string subscriptionId, string resourceGroupName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (resourceGroupName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
 
             using var message = CreateListTypeTwosRequest(subscriptionId, resourceGroupName);
             _pipeline.Send(message, cancellationToken);
@@ -492,30 +408,9 @@ namespace MgmtSafeFlatten
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<TypeOneData>> GetTypeOneAsync(string subscriptionId, string resourceGroupName, string typeOneName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (resourceGroupName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
-            }
-            if (typeOneName == null)
-            {
-                throw new ArgumentNullException(nameof(typeOneName));
-            }
-            if (typeOneName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(typeOneName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(typeOneName, nameof(typeOneName));
 
             using var message = CreateGetTypeOneRequest(subscriptionId, resourceGroupName, typeOneName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -544,30 +439,9 @@ namespace MgmtSafeFlatten
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<TypeOneData> GetTypeOne(string subscriptionId, string resourceGroupName, string typeOneName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (resourceGroupName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
-            }
-            if (typeOneName == null)
-            {
-                throw new ArgumentNullException(nameof(typeOneName));
-            }
-            if (typeOneName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(typeOneName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(typeOneName, nameof(typeOneName));
 
             using var message = CreateGetTypeOneRequest(subscriptionId, resourceGroupName, typeOneName);
             _pipeline.Send(message, cancellationToken);
@@ -635,34 +509,10 @@ namespace MgmtSafeFlatten
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<TypeOneData>> CreateOrUpdateTypeOneAsync(string subscriptionId, string resourceGroupName, string typeOneName, TypeOneData data, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (resourceGroupName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
-            }
-            if (typeOneName == null)
-            {
-                throw new ArgumentNullException(nameof(typeOneName));
-            }
-            if (typeOneName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(typeOneName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(typeOneName, nameof(typeOneName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var message = CreateCreateOrUpdateTypeOneRequest(subscriptionId, resourceGroupName, typeOneName, data);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -690,34 +540,10 @@ namespace MgmtSafeFlatten
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<TypeOneData> CreateOrUpdateTypeOne(string subscriptionId, string resourceGroupName, string typeOneName, TypeOneData data, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (resourceGroupName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
-            }
-            if (typeOneName == null)
-            {
-                throw new ArgumentNullException(nameof(typeOneName));
-            }
-            if (typeOneName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(typeOneName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(typeOneName, nameof(typeOneName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var message = CreateCreateOrUpdateTypeOneRequest(subscriptionId, resourceGroupName, typeOneName, data);
             _pipeline.Send(message, cancellationToken);
@@ -778,30 +604,9 @@ namespace MgmtSafeFlatten
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="typeTwoName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<TypeTwoData>> GetTypeTwoAsync(string subscriptionId, string resourceGroupName, string typeTwoName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (resourceGroupName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
-            }
-            if (typeTwoName == null)
-            {
-                throw new ArgumentNullException(nameof(typeTwoName));
-            }
-            if (typeTwoName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(typeTwoName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(typeTwoName, nameof(typeTwoName));
 
             using var message = CreateGetTypeTwoRequest(subscriptionId, resourceGroupName, typeTwoName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -830,30 +635,9 @@ namespace MgmtSafeFlatten
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="typeTwoName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<TypeTwoData> GetTypeTwo(string subscriptionId, string resourceGroupName, string typeTwoName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (resourceGroupName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
-            }
-            if (typeTwoName == null)
-            {
-                throw new ArgumentNullException(nameof(typeTwoName));
-            }
-            if (typeTwoName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(typeTwoName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(typeTwoName, nameof(typeTwoName));
 
             using var message = CreateGetTypeTwoRequest(subscriptionId, resourceGroupName, typeTwoName);
             _pipeline.Send(message, cancellationToken);
@@ -921,34 +705,10 @@ namespace MgmtSafeFlatten
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="typeTwoName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<TypeTwoData>> CreateOrUpdateTypeTwoAsync(string subscriptionId, string resourceGroupName, string typeTwoName, TypeTwoData data, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (resourceGroupName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
-            }
-            if (typeTwoName == null)
-            {
-                throw new ArgumentNullException(nameof(typeTwoName));
-            }
-            if (typeTwoName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(typeTwoName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(typeTwoName, nameof(typeTwoName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var message = CreateCreateOrUpdateTypeTwoRequest(subscriptionId, resourceGroupName, typeTwoName, data);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -976,34 +736,10 @@ namespace MgmtSafeFlatten
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="typeTwoName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<TypeTwoData> CreateOrUpdateTypeTwo(string subscriptionId, string resourceGroupName, string typeTwoName, TypeTwoData data, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (resourceGroupName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
-            }
-            if (typeTwoName == null)
-            {
-                throw new ArgumentNullException(nameof(typeTwoName));
-            }
-            if (typeTwoName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(typeTwoName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(typeTwoName, nameof(typeTwoName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var message = CreateCreateOrUpdateTypeTwoRequest(subscriptionId, resourceGroupName, typeTwoName, data);
             _pipeline.Send(message, cancellationToken);

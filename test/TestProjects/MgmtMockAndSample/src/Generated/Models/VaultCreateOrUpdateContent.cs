@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
+using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
@@ -21,10 +22,7 @@ namespace MgmtMockAndSample.Models
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
         public VaultCreateOrUpdateContent(AzureLocation location, VaultProperties properties)
         {
-            if (properties == null)
-            {
-                throw new ArgumentNullException(nameof(properties));
-            }
+            Argument.AssertNotNull(properties, nameof(properties));
 
             Location = location;
             Tags = new ChangeTrackingDictionary<string, string>();

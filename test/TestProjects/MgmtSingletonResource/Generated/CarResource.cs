@@ -208,10 +208,7 @@ namespace MgmtSingletonResource
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<CarResource>> UpdateAsync(WaitUntil waitUntil, CarData data, CancellationToken cancellationToken = default)
         {
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _carClientDiagnostics.CreateScope("CarResource.Update");
             scope.Start();
@@ -258,10 +255,7 @@ namespace MgmtSingletonResource
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<CarResource> Update(WaitUntil waitUntil, CarData data, CancellationToken cancellationToken = default)
         {
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _carClientDiagnostics.CreateScope("CarResource.Update");
             scope.Start();

@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using Parameters.BodyOptionality;
 
 namespace Parameters.BodyOptionality.Models
 {
@@ -50,10 +51,7 @@ namespace Parameters.BodyOptionality.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public BodyModel(string name)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Argument.AssertNotNull(name, nameof(name));
 
             Name = name;
         }

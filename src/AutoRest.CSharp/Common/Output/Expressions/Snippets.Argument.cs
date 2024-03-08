@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Common.Output.Models
 {
@@ -14,22 +15,12 @@ namespace AutoRest.CSharp.Common.Output.Models
         {
             public static MethodBodyStatement AssertNotNull(ValueExpression variable)
             {
-                return new IfStatement(Equal(variable, Null))
-                {
-                    new ThrowStatement(ThrowExpression(New.ArgumentNullException(variable)))
-                };
+                return ArgumentProvider.Instance.AssertNotNull(variable);
             }
 
             public static MethodBodyStatement AssertNotNullOrEmpty(ValueExpression variable)
             {
-                return new List<MethodBodyStatement>()
-                {
-                    AssertNotNull(variable),
-                    new IfStatement(Equal(new MemberExpression(variable, "Length"), Literal(0)))
-                    {
-                        new ThrowStatement(ThrowExpression(New.ArgumentException(variable)))
-                    }
-                };
+                return ArgumentProvider.Instance.AssertNotNullOrEmpty(variable);
             }
 
             public static MethodBodyStatement ValidateParameter(Parameter parameter)

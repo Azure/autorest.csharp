@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -50,18 +51,9 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="object"/>, <paramref name="level"/> or <paramref name="message"/> is null. </exception>
         internal FineTuneEvent(string @object, DateTimeOffset createdAt, string level, string message)
         {
-            if (@object == null)
-            {
-                throw new ArgumentNullException(nameof(@object));
-            }
-            if (level == null)
-            {
-                throw new ArgumentNullException(nameof(level));
-            }
-            if (message == null)
-            {
-                throw new ArgumentNullException(nameof(message));
-            }
+            Argument.AssertNotNull(@object, nameof(@object));
+            Argument.AssertNotNull(level, nameof(level));
+            Argument.AssertNotNull(message, nameof(message));
 
             Object = @object;
             CreatedAt = createdAt;

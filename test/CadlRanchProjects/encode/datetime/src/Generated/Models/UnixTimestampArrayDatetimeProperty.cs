@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Encode.Datetime;
 
 namespace Encode.Datetime.Models
 {
@@ -51,10 +52,7 @@ namespace Encode.Datetime.Models
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public UnixTimestampArrayDatetimeProperty(IEnumerable<DateTimeOffset> value)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(value, nameof(value));
 
             Value = value.ToList();
         }

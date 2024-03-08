@@ -151,14 +151,7 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="model"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual async Task<Result<Model>> RetrieveAsync(string model, CancellationToken cancellationToken = default)
         {
-            if (model == null)
-            {
-                throw new ArgumentNullException(nameof(model));
-            }
-            if (model.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(model));
-            }
+            Argument.AssertNotNullOrEmpty(model, nameof(model));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             Result result = await RetrieveAsync(model, context).ConfigureAwait(false);
@@ -175,14 +168,7 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="model"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual Result<Model> Retrieve(string model, CancellationToken cancellationToken = default)
         {
-            if (model == null)
-            {
-                throw new ArgumentNullException(nameof(model));
-            }
-            if (model.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(model));
-            }
+            Argument.AssertNotNullOrEmpty(model, nameof(model));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             Result result = Retrieve(model, context);
@@ -213,14 +199,7 @@ namespace OpenAI
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> RetrieveAsync(string model, RequestOptions context)
         {
-            if (model == null)
-            {
-                throw new ArgumentNullException(nameof(model));
-            }
-            if (model.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(model));
-            }
+            Argument.AssertNotNullOrEmpty(model, nameof(model));
 
             using var scope = ClientDiagnostics.CreateSpan("ModelsOps.Retrieve");
             scope.Start();
@@ -260,14 +239,7 @@ namespace OpenAI
         /// <returns> The response returned from the service. </returns>
         public virtual Result Retrieve(string model, RequestOptions context)
         {
-            if (model == null)
-            {
-                throw new ArgumentNullException(nameof(model));
-            }
-            if (model.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(model));
-            }
+            Argument.AssertNotNullOrEmpty(model, nameof(model));
 
             using var scope = ClientDiagnostics.CreateSpan("ModelsOps.Retrieve");
             scope.Start();
@@ -290,14 +262,7 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="model"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual async Task<Result<DeleteModelResponse>> DeleteAsync(string model, CancellationToken cancellationToken = default)
         {
-            if (model == null)
-            {
-                throw new ArgumentNullException(nameof(model));
-            }
-            if (model.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(model));
-            }
+            Argument.AssertNotNullOrEmpty(model, nameof(model));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             Result result = await DeleteAsync(model, context).ConfigureAwait(false);
@@ -311,14 +276,7 @@ namespace OpenAI
         /// <exception cref="ArgumentException"> <paramref name="model"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual Result<DeleteModelResponse> Delete(string model, CancellationToken cancellationToken = default)
         {
-            if (model == null)
-            {
-                throw new ArgumentNullException(nameof(model));
-            }
-            if (model.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(model));
-            }
+            Argument.AssertNotNullOrEmpty(model, nameof(model));
 
             RequestOptions context = FromCancellationToken(cancellationToken);
             Result result = Delete(model, context);
@@ -348,14 +306,7 @@ namespace OpenAI
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> DeleteAsync(string model, RequestOptions context)
         {
-            if (model == null)
-            {
-                throw new ArgumentNullException(nameof(model));
-            }
-            if (model.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(model));
-            }
+            Argument.AssertNotNullOrEmpty(model, nameof(model));
 
             using var scope = ClientDiagnostics.CreateSpan("ModelsOps.Delete");
             scope.Start();
@@ -394,14 +345,7 @@ namespace OpenAI
         /// <returns> The response returned from the service. </returns>
         public virtual Result Delete(string model, RequestOptions context)
         {
-            if (model == null)
-            {
-                throw new ArgumentNullException(nameof(model));
-            }
-            if (model.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(model));
-            }
+            Argument.AssertNotNullOrEmpty(model, nameof(model));
 
             using var scope = ClientDiagnostics.CreateSpan("ModelsOps.Delete");
             scope.Start();

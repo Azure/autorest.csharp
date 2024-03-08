@@ -82,18 +82,8 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> or <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<TrackedResourceModel1Resource>> CreateOrUpdateAsync(WaitUntil waitUntil, string trackedResourceModel1SName, TrackedResourceModel1Data data, CancellationToken cancellationToken = default)
         {
-            if (trackedResourceModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(trackedResourceModel1SName));
-            }
-            if (trackedResourceModel1SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(trackedResourceModel1SName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(trackedResourceModel1SName, nameof(trackedResourceModel1SName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _trackedResourceModel1ClientDiagnostics.CreateScope("TrackedResourceModel1Collection.CreateOrUpdate");
             scope.Start();
@@ -142,18 +132,8 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> or <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<TrackedResourceModel1Resource> CreateOrUpdate(WaitUntil waitUntil, string trackedResourceModel1SName, TrackedResourceModel1Data data, CancellationToken cancellationToken = default)
         {
-            if (trackedResourceModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(trackedResourceModel1SName));
-            }
-            if (trackedResourceModel1SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(trackedResourceModel1SName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(trackedResourceModel1SName, nameof(trackedResourceModel1SName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _trackedResourceModel1ClientDiagnostics.CreateScope("TrackedResourceModel1Collection.CreateOrUpdate");
             scope.Start();
@@ -200,14 +180,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> is null. </exception>
         public virtual async Task<Response<TrackedResourceModel1Resource>> GetAsync(string trackedResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            if (trackedResourceModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(trackedResourceModel1SName));
-            }
-            if (trackedResourceModel1SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(trackedResourceModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(trackedResourceModel1SName, nameof(trackedResourceModel1SName));
 
             using var scope = _trackedResourceModel1ClientDiagnostics.CreateScope("TrackedResourceModel1Collection.Get");
             scope.Start();
@@ -251,14 +224,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> is null. </exception>
         public virtual Response<TrackedResourceModel1Resource> Get(string trackedResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            if (trackedResourceModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(trackedResourceModel1SName));
-            }
-            if (trackedResourceModel1SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(trackedResourceModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(trackedResourceModel1SName, nameof(trackedResourceModel1SName));
 
             using var scope = _trackedResourceModel1ClientDiagnostics.CreateScope("TrackedResourceModel1Collection.Get");
             scope.Start();
@@ -359,14 +325,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> is null. </exception>
         public virtual async Task<Response<bool>> ExistsAsync(string trackedResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            if (trackedResourceModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(trackedResourceModel1SName));
-            }
-            if (trackedResourceModel1SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(trackedResourceModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(trackedResourceModel1SName, nameof(trackedResourceModel1SName));
 
             using var scope = _trackedResourceModel1ClientDiagnostics.CreateScope("TrackedResourceModel1Collection.Exists");
             scope.Start();
@@ -409,14 +368,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> is null. </exception>
         public virtual Response<bool> Exists(string trackedResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            if (trackedResourceModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(trackedResourceModel1SName));
-            }
-            if (trackedResourceModel1SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(trackedResourceModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(trackedResourceModel1SName, nameof(trackedResourceModel1SName));
 
             using var scope = _trackedResourceModel1ClientDiagnostics.CreateScope("TrackedResourceModel1Collection.Exists");
             scope.Start();
@@ -459,14 +411,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> is null. </exception>
         public virtual async Task<NullableResponse<TrackedResourceModel1Resource>> GetIfExistsAsync(string trackedResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            if (trackedResourceModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(trackedResourceModel1SName));
-            }
-            if (trackedResourceModel1SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(trackedResourceModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(trackedResourceModel1SName, nameof(trackedResourceModel1SName));
 
             using var scope = _trackedResourceModel1ClientDiagnostics.CreateScope("TrackedResourceModel1Collection.GetIfExists");
             scope.Start();
@@ -511,14 +456,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> is null. </exception>
         public virtual NullableResponse<TrackedResourceModel1Resource> GetIfExists(string trackedResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            if (trackedResourceModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(trackedResourceModel1SName));
-            }
-            if (trackedResourceModel1SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(trackedResourceModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(trackedResourceModel1SName, nameof(trackedResourceModel1SName));
 
             using var scope = _trackedResourceModel1ClientDiagnostics.CreateScope("TrackedResourceModel1Collection.GetIfExists");
             scope.Start();

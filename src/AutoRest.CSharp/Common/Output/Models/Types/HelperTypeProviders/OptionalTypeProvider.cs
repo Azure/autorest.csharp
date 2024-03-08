@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class OptionalTypeProvider : ExpressionTypeProvider
     {
-        private static readonly Lazy<OptionalTypeProvider> _instance = new(() => new OptionalTypeProvider(Configuration.Namespace, null));
+        private static readonly Lazy<OptionalTypeProvider> _instance = new(() => new OptionalTypeProvider(Configuration.HelperNamespace, null));
         public static OptionalTypeProvider Instance => _instance.Value;
 
         private class ListTemplate<T> { }
@@ -52,7 +52,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             yield return IsStringDefined();
         }
 
-        private MethodSignature GetIsDefinedSignature(Parameter valueParam, IReadOnlyList<CSharpType>? genericArguments = null, IReadOnlyDictionary<CSharpType, FormattableString>? genericParameterConstraints = null) => new(
+        private MethodSignature GetIsDefinedSignature(Parameter valueParam, IReadOnlyList<CSharpType>? genericArguments = null, IReadOnlyList<WhereExpression>? genericParameterConstraints = null) => new(
             "IsDefined",
             null,
             null,
@@ -106,7 +106,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Method IsStructDefined()
         {
             var valueParam = new Parameter("value", null, _t.WithNullable(true), null, ValidationType.None, null);
-            var signature = GetIsDefinedSignature(valueParam, new[] { _t }, new Dictionary<CSharpType, FormattableString> { { _t, $"struct" } });
+            var signature = GetIsDefinedSignature(valueParam, new[] { _t }, new[] { Where.Struct(_t) });
             return new Method(signature, new MethodBodyStatement[]
             {
                 Return(new MemberExpression(new ParameterReference(valueParam), "HasValue"))
