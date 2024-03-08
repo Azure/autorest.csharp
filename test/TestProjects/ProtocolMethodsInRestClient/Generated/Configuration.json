@@ -16,5 +16,6 @@
     "firstTemplate_Get",
     "secondTemplate_Get"
   ],
+  "flavor": "azure",
   "helper-namespace": "ProtocolMethodsInRestClient"
 }

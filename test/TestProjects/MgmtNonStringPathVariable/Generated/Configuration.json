@@ -13,5 +13,6 @@
   "ListException": [
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}"
   ],
+  "flavor": "azure",
   "helper-namespace": "MgmtNonStringPathVariable"
 }
