@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             var schemaUsageProvider = new SchemaUsageProvider(codeModel); // Create schema usage before transformation applied
 
-            _typeFactory = new TypeFactory(this);
+            _typeFactory = new TypeFactory(this, typeof(object));
             _sourceInputModel = sourceInputModel;
 
             // schema usage transformer must run first

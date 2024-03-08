@@ -86,9 +86,12 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                 // for classes, only required + not readonly + not constant + not discriminator could get into the public ctor
                 // for structs, all properties must be set in the public ctor
-                if (isStruct || inputModelProperty is { IsRequired: true, IsDiscriminator: false, IsReadOnly: false, ConstantValue: null })
+                if (isStruct || inputModelProperty is { IsRequired: true, IsDiscriminator: false, ConstantValue: null })
                 {
-                    publicParameters.Add(parameter with { Type = TypeFactory.GetInputType(parameter.Type) });
+                    if (Configuration.Generation1ConvenienceClient || !inputModelProperty.IsReadOnly)
+                    {
+                        publicParameters.Add(parameter with { Type = TypeFactory.GetInputType(parameter.Type) });
+                    }
                 }
             }
 

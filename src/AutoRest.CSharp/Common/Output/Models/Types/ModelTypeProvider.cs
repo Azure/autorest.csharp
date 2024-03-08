@@ -406,7 +406,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             // only initialization ctor initializes the discriminator
             // and we should not initialize the discriminator again when the discriminator is inherited (it should show up in the ctor)
-            if (isInitializer && !IsDiscriminatorInheritedOnBase && Discriminator is {Value: {} discriminatorValue} && !IsUnknownDerivedType)
+            if (!Configuration.Generation1ConvenienceClient && isInitializer && !IsDiscriminatorInheritedOnBase && Discriminator is {Value: {} discriminatorValue} && !IsUnknownDerivedType)
             {
                 defaultCtorInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, discriminatorValue));
             }
@@ -478,7 +478,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
             }
 
-            if (Configuration.Generation1ConvenienceClient && !isInitializer && Discriminator is { } discriminator)
+            if (Configuration.Generation1ConvenienceClient && Discriminator is { } discriminator)
             {
                 if (defaultCtorInitializers.All(i => i.Property != discriminator.Property) && parameterMap.TryGetValue(discriminator.Property.Declaration.Name.ToVariableName(), out var discriminatorParameter))
                 {

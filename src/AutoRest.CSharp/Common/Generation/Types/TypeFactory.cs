@@ -28,10 +28,10 @@ namespace AutoRest.CSharp.Generation.Types
         private readonly OutputLibrary _library;
         private readonly Type _unknownType;
 
-        public TypeFactory(OutputLibrary library)
+        public TypeFactory(OutputLibrary library, Type unknownType)
         {
             _library = library;
-            _unknownType = Configuration.Generation1ConvenienceClient ? typeof(object) : typeof(BinaryData);
+            _unknownType = unknownType;
         }
 
         private Type AzureResponseErrorType => typeof(ResponseError);
