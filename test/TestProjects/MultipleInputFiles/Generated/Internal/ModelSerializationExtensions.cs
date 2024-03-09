@@ -12,7 +12,7 @@ using System.Globalization;
 using System.Text.Json;
 using Azure.Core;
 
-namespace FirstTestTypeSpec
+namespace MultipleInputFiles
 {
     internal static class ModelSerializationExtensions
     {

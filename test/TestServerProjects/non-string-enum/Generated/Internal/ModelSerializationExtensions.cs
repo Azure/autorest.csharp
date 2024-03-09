@@ -12,7 +12,7 @@ using System.Globalization;
 using System.Text.Json;
 using Azure.Core;
 
-namespace FirstTestTypeSpec
+namespace non_string_enum
 {
     internal static class ModelSerializationExtensions
     {
