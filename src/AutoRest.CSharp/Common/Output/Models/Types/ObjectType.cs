@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ObjectTypeConstructor? _serializationConstructor;
         private ObjectTypeConstructor? _initializationConstructor;
         private FormattableString? _description;
-        private IEnumerable<Method>? _methods;
+        private IReadOnlyList<Method>? _methods;
         private ObjectTypeDiscriminator? _discriminator;
 
         protected ObjectType(BuildContext context)
@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public CSharpType? Inherits => _inheritsType ??= CreateInheritedType();
         public ObjectTypeConstructor SerializationConstructor => _serializationConstructor ??= BuildSerializationConstructor();
-        public IEnumerable<Method> Methods => _methods ??= BuildMethods();
+        public IReadOnlyList<Method> Methods => _methods ??= BuildMethods().ToArray();
         public ObjectTypeDiscriminator? Discriminator => _discriminator ??= BuildDiscriminator();
 
         public ObjectTypeConstructor InitializationConstructor => _initializationConstructor ??= BuildInitializationConstructor();
@@ -82,7 +82,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected abstract CSharpType? CreateInheritedType();
         protected abstract IEnumerable<ObjectTypeProperty> BuildProperties();
         protected abstract FormattableString CreateDescription();
-        public abstract bool IncludeConverter { get; }
 
         protected virtual IEnumerable<Method> BuildMethods()
         {
