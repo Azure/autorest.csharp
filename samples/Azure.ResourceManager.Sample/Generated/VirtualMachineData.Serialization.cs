@@ -12,7 +12,6 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
 using Azure.ResourceManager.Sample.Models;
@@ -236,36 +235,36 @@ namespace Azure.ResourceManager.Sample
             {
                 return null;
             }
-            Optional<SamplePlan> plan = default;
-            Optional<IReadOnlyList<VirtualMachineExtensionData>> resources = default;
-            Optional<ManagedServiceIdentity> identity = default;
-            Optional<IList<string>> zones = default;
-            Optional<IDictionary<string, string>> tags = default;
+            SamplePlan plan = default;
+            IReadOnlyList<VirtualMachineExtensionData> resources = default;
+            ManagedServiceIdentity identity = default;
+            IList<string> zones = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
-            Optional<HardwareProfile> hardwareProfile = default;
-            Optional<StorageProfile> storageProfile = default;
-            Optional<AdditionalCapabilities> additionalCapabilities = default;
-            Optional<OSProfile> osProfile = default;
-            Optional<NetworkProfile> networkProfile = default;
-            Optional<SecurityProfile> securityProfile = default;
-            Optional<DiagnosticsProfile> diagnosticsProfile = default;
-            Optional<WritableSubResource> availabilitySet = default;
-            Optional<WritableSubResource> virtualMachineScaleSet = default;
-            Optional<WritableSubResource> proximityPlacementGroup = default;
-            Optional<VirtualMachinePriorityType> priority = default;
-            Optional<VirtualMachineEvictionPolicyType> evictionPolicy = default;
-            Optional<BillingProfile> billingProfile = default;
-            Optional<WritableSubResource> host = default;
-            Optional<WritableSubResource> hostGroup = default;
-            Optional<string> provisioningState = default;
-            Optional<VirtualMachineInstanceView> instanceView = default;
-            Optional<string> licenseType = default;
-            Optional<string> vmId = default;
-            Optional<string> extensionsTimeBudget = default;
+            SystemData systemData = default;
+            HardwareProfile hardwareProfile = default;
+            StorageProfile storageProfile = default;
+            AdditionalCapabilities additionalCapabilities = default;
+            OSProfile osProfile = default;
+            NetworkProfile networkProfile = default;
+            SecurityProfile securityProfile = default;
+            DiagnosticsProfile diagnosticsProfile = default;
+            WritableSubResource availabilitySet = default;
+            WritableSubResource virtualMachineScaleSet = default;
+            WritableSubResource proximityPlacementGroup = default;
+            VirtualMachinePriorityType? priority = default;
+            VirtualMachineEvictionPolicyType? evictionPolicy = default;
+            BillingProfile billingProfile = default;
+            WritableSubResource host = default;
+            WritableSubResource hostGroup = default;
+            string provisioningState = default;
+            VirtualMachineInstanceView instanceView = default;
+            string licenseType = default;
+            string vmId = default;
+            string extensionsTimeBudget = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -541,516 +540,306 @@ namespace Azure.ResourceManager.Sample
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, plan.Value, Optional.ToList(resources), identity, Optional.ToList(zones), hardwareProfile.Value, storageProfile.Value, additionalCapabilities.Value, osProfile.Value, networkProfile.Value, securityProfile.Value, diagnosticsProfile.Value, availabilitySet, virtualMachineScaleSet, proximityPlacementGroup, Optional.ToNullable(priority), Optional.ToNullable(evictionPolicy), billingProfile.Value, host, hostGroup, provisioningState.Value, instanceView.Value, licenseType.Value, vmId.Value, extensionsTimeBudget.Value, serializedAdditionalRawData);
+            return new VirtualMachineData(
+                id,
+                name,
+                type,
+                systemData,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                plan,
+                resources ?? new ChangeTrackingList<VirtualMachineExtensionData>(),
+                identity,
+                zones ?? new ChangeTrackingList<string>(),
+                hardwareProfile,
+                storageProfile,
+                additionalCapabilities,
+                osProfile,
+                networkProfile,
+                securityProfile,
+                diagnosticsProfile,
+                availabilitySet,
+                virtualMachineScaleSet,
+                proximityPlacementGroup,
+                priority,
+                evictionPolicy,
+                billingProfile,
+                host,
+                hostGroup,
+                provisioningState,
+                instanceView,
+                licenseType,
+                vmId,
+                extensionsTimeBudget,
+                serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
-            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
-            IDictionary<string, string> propertyOverrides = null;
-            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
-            bool hasPropertyOverride = false;
-            string propertyOverride = null;
-
             builder.AppendLine("{");
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Name), out propertyOverride);
-            if (Optional.IsDefined(Name) || hasPropertyOverride)
+            if (Optional.IsDefined(Name))
             {
-                builder.Append("  name: ");
-                if (hasPropertyOverride)
+                builder.Append("  name:");
+                if (Name.Contains(Environment.NewLine))
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(" '''");
+                    builder.AppendLine($"{Name}'''");
                 }
                 else
                 {
-                    if (Name.Contains(Environment.NewLine))
-                    {
-                        builder.AppendLine("'''");
-                        builder.AppendLine($"{Name}'''");
-                    }
-                    else
-                    {
-                        builder.AppendLine($"'{Name}'");
-                    }
+                    builder.AppendLine($" '{Name}'");
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Location), out propertyOverride);
-            if (Optional.IsDefined(Location) || hasPropertyOverride)
-            {
-                builder.Append("  location: ");
-                if (hasPropertyOverride)
-                {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
-                    builder.AppendLine($"'{Location.ToString()}'");
-                }
-            }
+            builder.Append("  location:");
+            builder.AppendLine($" '{Location.ToString()}'");
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Tags), out propertyOverride);
-            if (Optional.IsCollectionDefined(Tags) || hasPropertyOverride)
+            if (Optional.IsCollectionDefined(Tags))
             {
-                if (Tags.Any() || hasPropertyOverride)
+                if (Tags.Any())
                 {
-                    builder.Append("  tags: ");
-                    if (hasPropertyOverride)
+                    builder.Append("  tags:");
+                    builder.AppendLine(" {");
+                    foreach (var item in Tags)
                     {
-                        builder.AppendLine($"{propertyOverride}");
-                    }
-                    else
-                    {
-                        builder.AppendLine("{");
-                        foreach (var item in Tags)
+                        builder.Append($"    {item.Key}:");
+                        if (item.Value == null)
                         {
-                            builder.Append($"    '{item.Key}': ");
-                            if (item.Value == null)
-                            {
-                                builder.Append("null");
-                                continue;
-                            }
-                            if (item.Value.Contains(Environment.NewLine))
-                            {
-                                builder.AppendLine("'''");
-                                builder.AppendLine($"{item.Value}'''");
-                            }
-                            else
-                            {
-                                builder.AppendLine($"'{item.Value}'");
-                            }
+                            builder.Append("null");
+                            continue;
                         }
-                        builder.AppendLine("  }");
-                    }
-                }
-            }
-
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Plan), out propertyOverride);
-            if (Optional.IsDefined(Plan) || hasPropertyOverride)
-            {
-                builder.Append("  plan: ");
-                if (hasPropertyOverride)
-                {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
-                    AppendChildObject(builder, Plan, options, 2, false, "  plan: ");
-                }
-            }
-
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Resources), out propertyOverride);
-            if (Optional.IsCollectionDefined(Resources) || hasPropertyOverride)
-            {
-                if (Resources.Any() || hasPropertyOverride)
-                {
-                    builder.Append("  resources: ");
-                    if (hasPropertyOverride)
-                    {
-                        builder.AppendLine($"{propertyOverride}");
-                    }
-                    else
-                    {
-                        builder.AppendLine("[");
-                        foreach (var item in Resources)
+                        if (item.Value.Contains(Environment.NewLine))
                         {
-                            AppendChildObject(builder, item, options, 4, true, "  resources: ");
+                            builder.AppendLine(" '''");
+                            builder.AppendLine($"{item.Value}'''");
                         }
-                        builder.AppendLine("  ]");
-                    }
-                }
-            }
-
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Identity), out propertyOverride);
-            if (Optional.IsDefined(Identity) || hasPropertyOverride)
-            {
-                builder.Append("  identity: ");
-                if (hasPropertyOverride)
-                {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
-                    AppendChildObject(builder, Identity, options, 2, false, "  identity: ");
-                }
-            }
-
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Zones), out propertyOverride);
-            if (Optional.IsCollectionDefined(Zones) || hasPropertyOverride)
-            {
-                if (Zones.Any() || hasPropertyOverride)
-                {
-                    builder.Append("  zones: ");
-                    if (hasPropertyOverride)
-                    {
-                        builder.AppendLine($"{propertyOverride}");
-                    }
-                    else
-                    {
-                        builder.AppendLine("[");
-                        foreach (var item in Zones)
+                        else
                         {
-                            if (item == null)
-                            {
-                                builder.Append("null");
-                                continue;
-                            }
-                            if (item.Contains(Environment.NewLine))
-                            {
-                                builder.AppendLine("    '''");
-                                builder.AppendLine($"{item}'''");
-                            }
-                            else
-                            {
-                                builder.AppendLine($"    '{item}'");
-                            }
+                            builder.AppendLine($" '{item.Value}'");
                         }
-                        builder.AppendLine("  ]");
                     }
+                    builder.AppendLine("  }");
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Id), out propertyOverride);
-            if (Optional.IsDefined(Id) || hasPropertyOverride)
+            if (Optional.IsDefined(Plan))
             {
-                builder.Append("  id: ");
-                if (hasPropertyOverride)
+                builder.Append("  plan:");
+                AppendChildObject(builder, Plan, options, 2, false);
+            }
+
+            if (Optional.IsCollectionDefined(Resources))
+            {
+                if (Resources.Any())
                 {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
-                    builder.AppendLine($"'{Id.ToString()}'");
+                    builder.Append("  resources:");
+                    builder.AppendLine(" [");
+                    foreach (var item in Resources)
+                    {
+                        AppendChildObject(builder, item, options, 4, true);
+                    }
+                    builder.AppendLine("  ]");
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(SystemData), out propertyOverride);
-            if (Optional.IsDefined(SystemData) || hasPropertyOverride)
+            if (Optional.IsDefined(Identity))
             {
-                builder.Append("  systemData: ");
-                if (hasPropertyOverride)
+                builder.Append("  identity:");
+                AppendChildObject(builder, Identity, options, 2, false);
+            }
+
+            if (Optional.IsCollectionDefined(Zones))
+            {
+                if (Zones.Any())
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.Append("  zones:");
+                    builder.AppendLine(" [");
+                    foreach (var item in Zones)
+                    {
+                        if (item == null)
+                        {
+                            builder.Append("null");
+                            continue;
+                        }
+                        if (item.Contains(Environment.NewLine))
+                        {
+                            builder.AppendLine("    '''");
+                            builder.AppendLine($"{item}'''");
+                        }
+                        else
+                        {
+                            builder.AppendLine($"    '{item}'");
+                        }
+                    }
+                    builder.AppendLine("  ]");
                 }
-                else
-                {
-                    builder.AppendLine($"'{SystemData.ToString()}'");
-                }
+            }
+
+            if (Optional.IsDefined(Id))
+            {
+                builder.Append("  id:");
+                builder.AppendLine($" '{Id.ToString()}'");
+            }
+
+            if (Optional.IsDefined(SystemData))
+            {
+                builder.Append("  systemData:");
+                builder.AppendLine($" '{SystemData.ToString()}'");
             }
 
             builder.Append("  properties:");
             builder.AppendLine(" {");
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(HardwareProfile), out propertyOverride);
-            if (Optional.IsDefined(HardwareProfile) || hasPropertyOverride)
+            if (Optional.IsDefined(HardwareProfile))
             {
-                builder.Append("    hardwareProfile: ");
-                if (hasPropertyOverride)
+                builder.Append("    hardwareProfile:");
+                AppendChildObject(builder, HardwareProfile, options, 4, false);
+            }
+
+            if (Optional.IsDefined(StorageProfile))
+            {
+                builder.Append("    storageProfile:");
+                AppendChildObject(builder, StorageProfile, options, 4, false);
+            }
+
+            if (Optional.IsDefined(AdditionalCapabilities))
+            {
+                builder.Append("    additionalCapabilities:");
+                AppendChildObject(builder, AdditionalCapabilities, options, 4, false);
+            }
+
+            if (Optional.IsDefined(OSProfile))
+            {
+                builder.Append("    osProfile:");
+                AppendChildObject(builder, OSProfile, options, 4, false);
+            }
+
+            if (Optional.IsDefined(NetworkProfile))
+            {
+                builder.Append("    networkProfile:");
+                AppendChildObject(builder, NetworkProfile, options, 4, false);
+            }
+
+            if (Optional.IsDefined(SecurityProfile))
+            {
+                builder.Append("    securityProfile:");
+                AppendChildObject(builder, SecurityProfile, options, 4, false);
+            }
+
+            if (Optional.IsDefined(DiagnosticsProfile))
+            {
+                builder.Append("    diagnosticsProfile:");
+                AppendChildObject(builder, DiagnosticsProfile, options, 4, false);
+            }
+
+            if (Optional.IsDefined(AvailabilitySet))
+            {
+                builder.Append("    availabilitySet:");
+                AppendChildObject(builder, AvailabilitySet, options, 4, false);
+            }
+
+            if (Optional.IsDefined(VirtualMachineScaleSet))
+            {
+                builder.Append("    virtualMachineScaleSet:");
+                AppendChildObject(builder, VirtualMachineScaleSet, options, 4, false);
+            }
+
+            if (Optional.IsDefined(ProximityPlacementGroup))
+            {
+                builder.Append("    proximityPlacementGroup:");
+                AppendChildObject(builder, ProximityPlacementGroup, options, 4, false);
+            }
+
+            if (Optional.IsDefined(Priority))
+            {
+                builder.Append("    priority:");
+                builder.AppendLine($" '{Priority.Value.ToString()}'");
+            }
+
+            if (Optional.IsDefined(EvictionPolicy))
+            {
+                builder.Append("    evictionPolicy:");
+                builder.AppendLine($" '{EvictionPolicy.Value.ToString()}'");
+            }
+
+            if (Optional.IsDefined(BillingProfile))
+            {
+                builder.Append("    billingProfile:");
+                AppendChildObject(builder, BillingProfile, options, 4, false);
+            }
+
+            if (Optional.IsDefined(Host))
+            {
+                builder.Append("    host:");
+                AppendChildObject(builder, Host, options, 4, false);
+            }
+
+            if (Optional.IsDefined(HostGroup))
+            {
+                builder.Append("    hostGroup:");
+                AppendChildObject(builder, HostGroup, options, 4, false);
+            }
+
+            if (Optional.IsDefined(ProvisioningState))
+            {
+                builder.Append("    provisioningState:");
+                if (ProvisioningState.Contains(Environment.NewLine))
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(" '''");
+                    builder.AppendLine($"{ProvisioningState}'''");
                 }
                 else
                 {
-                    AppendChildObject(builder, HardwareProfile, options, 4, false, "    hardwareProfile: ");
+                    builder.AppendLine($" '{ProvisioningState}'");
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(StorageProfile), out propertyOverride);
-            if (Optional.IsDefined(StorageProfile) || hasPropertyOverride)
+            if (Optional.IsDefined(InstanceView))
             {
-                builder.Append("    storageProfile: ");
-                if (hasPropertyOverride)
+                builder.Append("    instanceView:");
+                AppendChildObject(builder, InstanceView, options, 4, false);
+            }
+
+            if (Optional.IsDefined(LicenseType))
+            {
+                builder.Append("    licenseType:");
+                if (LicenseType.Contains(Environment.NewLine))
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(" '''");
+                    builder.AppendLine($"{LicenseType}'''");
                 }
                 else
                 {
-                    AppendChildObject(builder, StorageProfile, options, 4, false, "    storageProfile: ");
+                    builder.AppendLine($" '{LicenseType}'");
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(AdditionalCapabilities), out propertyOverride);
-            if (Optional.IsDefined(AdditionalCapabilities) || hasPropertyOverride)
+            if (Optional.IsDefined(VmId))
             {
-                builder.Append("    additionalCapabilities: ");
-                if (hasPropertyOverride)
+                builder.Append("    vmId:");
+                if (VmId.Contains(Environment.NewLine))
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(" '''");
+                    builder.AppendLine($"{VmId}'''");
                 }
                 else
                 {
-                    AppendChildObject(builder, AdditionalCapabilities, options, 4, false, "    additionalCapabilities: ");
+                    builder.AppendLine($" '{VmId}'");
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(OSProfile), out propertyOverride);
-            if (Optional.IsDefined(OSProfile) || hasPropertyOverride)
+            if (Optional.IsDefined(ExtensionsTimeBudget))
             {
-                builder.Append("    osProfile: ");
-                if (hasPropertyOverride)
+                builder.Append("    extensionsTimeBudget:");
+                if (ExtensionsTimeBudget.Contains(Environment.NewLine))
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(" '''");
+                    builder.AppendLine($"{ExtensionsTimeBudget}'''");
                 }
                 else
                 {
-                    AppendChildObject(builder, OSProfile, options, 4, false, "    osProfile: ");
-                }
-            }
-
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(NetworkProfile), out propertyOverride);
-            if (Optional.IsDefined(NetworkProfile) || hasPropertyOverride)
-            {
-                builder.Append("    networkProfile: ");
-                if (hasPropertyOverride)
-                {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
-                    AppendChildObject(builder, NetworkProfile, options, 4, false, "    networkProfile: ");
-                }
-            }
-
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(SecurityProfile), out propertyOverride);
-            if (Optional.IsDefined(SecurityProfile) || hasPropertyOverride)
-            {
-                builder.Append("    securityProfile: ");
-                if (hasPropertyOverride)
-                {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
-                    AppendChildObject(builder, SecurityProfile, options, 4, false, "    securityProfile: ");
-                }
-            }
-
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(DiagnosticsProfile), out propertyOverride);
-            if (Optional.IsDefined(DiagnosticsProfile) || hasPropertyOverride)
-            {
-                builder.Append("    diagnosticsProfile: ");
-                if (hasPropertyOverride)
-                {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
-                    AppendChildObject(builder, DiagnosticsProfile, options, 4, false, "    diagnosticsProfile: ");
-                }
-            }
-
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(AvailabilitySet), out propertyOverride);
-            if (Optional.IsDefined(AvailabilitySet) || hasPropertyOverride)
-            {
-                builder.Append("    availabilitySet: ");
-                if (hasPropertyOverride)
-                {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
-                    AppendChildObject(builder, AvailabilitySet, options, 4, false, "    availabilitySet: ");
-                }
-            }
-
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(VirtualMachineScaleSet), out propertyOverride);
-            if (Optional.IsDefined(VirtualMachineScaleSet) || hasPropertyOverride)
-            {
-                builder.Append("    virtualMachineScaleSet: ");
-                if (hasPropertyOverride)
-                {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
-                    AppendChildObject(builder, VirtualMachineScaleSet, options, 4, false, "    virtualMachineScaleSet: ");
-                }
-            }
-
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ProximityPlacementGroup), out propertyOverride);
-            if (Optional.IsDefined(ProximityPlacementGroup) || hasPropertyOverride)
-            {
-                builder.Append("    proximityPlacementGroup: ");
-                if (hasPropertyOverride)
-                {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
-                    AppendChildObject(builder, ProximityPlacementGroup, options, 4, false, "    proximityPlacementGroup: ");
-                }
-            }
-
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Priority), out propertyOverride);
-            if (Optional.IsDefined(Priority) || hasPropertyOverride)
-            {
-                builder.Append("    priority: ");
-                if (hasPropertyOverride)
-                {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
-                    builder.AppendLine($"'{Priority.Value.ToString()}'");
-                }
-            }
-
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(EvictionPolicy), out propertyOverride);
-            if (Optional.IsDefined(EvictionPolicy) || hasPropertyOverride)
-            {
-                builder.Append("    evictionPolicy: ");
-                if (hasPropertyOverride)
-                {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
-                    builder.AppendLine($"'{EvictionPolicy.Value.ToString()}'");
-                }
-            }
-
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(BillingProfile), out propertyOverride);
-            if (Optional.IsDefined(BillingProfile) || hasPropertyOverride)
-            {
-                builder.Append("    billingProfile: ");
-                if (hasPropertyOverride)
-                {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
-                    AppendChildObject(builder, BillingProfile, options, 4, false, "    billingProfile: ");
-                }
-            }
-
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Host), out propertyOverride);
-            if (Optional.IsDefined(Host) || hasPropertyOverride)
-            {
-                builder.Append("    host: ");
-                if (hasPropertyOverride)
-                {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
-                    AppendChildObject(builder, Host, options, 4, false, "    host: ");
-                }
-            }
-
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(HostGroup), out propertyOverride);
-            if (Optional.IsDefined(HostGroup) || hasPropertyOverride)
-            {
-                builder.Append("    hostGroup: ");
-                if (hasPropertyOverride)
-                {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
-                    AppendChildObject(builder, HostGroup, options, 4, false, "    hostGroup: ");
-                }
-            }
-
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ProvisioningState), out propertyOverride);
-            if (Optional.IsDefined(ProvisioningState) || hasPropertyOverride)
-            {
-                builder.Append("    provisioningState: ");
-                if (hasPropertyOverride)
-                {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
-                    if (ProvisioningState.Contains(Environment.NewLine))
-                    {
-                        builder.AppendLine("'''");
-                        builder.AppendLine($"{ProvisioningState}'''");
-                    }
-                    else
-                    {
-                        builder.AppendLine($"'{ProvisioningState}'");
-                    }
-                }
-            }
-
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(InstanceView), out propertyOverride);
-            if (Optional.IsDefined(InstanceView) || hasPropertyOverride)
-            {
-                builder.Append("    instanceView: ");
-                if (hasPropertyOverride)
-                {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
-                    AppendChildObject(builder, InstanceView, options, 4, false, "    instanceView: ");
-                }
-            }
-
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(LicenseType), out propertyOverride);
-            if (Optional.IsDefined(LicenseType) || hasPropertyOverride)
-            {
-                builder.Append("    licenseType: ");
-                if (hasPropertyOverride)
-                {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
-                    if (LicenseType.Contains(Environment.NewLine))
-                    {
-                        builder.AppendLine("'''");
-                        builder.AppendLine($"{LicenseType}'''");
-                    }
-                    else
-                    {
-                        builder.AppendLine($"'{LicenseType}'");
-                    }
-                }
-            }
-
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(VmId), out propertyOverride);
-            if (Optional.IsDefined(VmId) || hasPropertyOverride)
-            {
-                builder.Append("    vmId: ");
-                if (hasPropertyOverride)
-                {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
-                    if (VmId.Contains(Environment.NewLine))
-                    {
-                        builder.AppendLine("'''");
-                        builder.AppendLine($"{VmId}'''");
-                    }
-                    else
-                    {
-                        builder.AppendLine($"'{VmId}'");
-                    }
-                }
-            }
-
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ExtensionsTimeBudget), out propertyOverride);
-            if (Optional.IsDefined(ExtensionsTimeBudget) || hasPropertyOverride)
-            {
-                builder.Append("    extensionsTimeBudget: ");
-                if (hasPropertyOverride)
-                {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
-                    if (ExtensionsTimeBudget.Contains(Environment.NewLine))
-                    {
-                        builder.AppendLine("'''");
-                        builder.AppendLine($"{ExtensionsTimeBudget}'''");
-                    }
-                    else
-                    {
-                        builder.AppendLine($"'{ExtensionsTimeBudget}'");
-                    }
+                    builder.AppendLine($" '{ExtensionsTimeBudget}'");
                 }
             }
 
@@ -1059,15 +848,12 @@ namespace Azure.ResourceManager.Sample
             return BinaryData.FromString(builder.ToString());
         }
 
-        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine, string formattedPropertyName)
+        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine)
         {
             string indent = new string(' ', spaces);
-            int emptyObjectLength = 2 + spaces + Environment.NewLine.Length + Environment.NewLine.Length;
-            int length = stringBuilder.Length;
-            bool inMultilineString = false;
-
             BinaryData data = ModelReaderWriter.Write(childObject, options);
             string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            bool inMultilineString = false;
             for (int i = 0; i < lines.Length; i++)
             {
                 string line = lines[i];
@@ -1088,16 +874,12 @@ namespace Azure.ResourceManager.Sample
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($"{line}");
+                    stringBuilder.AppendLine($" {line}");
                 }
                 else
                 {
                     stringBuilder.AppendLine($"{indent}{line}");
                 }
-            }
-            if (stringBuilder.Length == length + emptyObjectLength)
-            {
-                stringBuilder.Length = stringBuilder.Length - emptyObjectLength - formattedPropertyName.Length;
             }
         }
 

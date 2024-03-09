@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {
@@ -29,7 +30,7 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            Optional<string> connectionString = default;
+            string connectionString = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("connectionString"u8))
@@ -38,7 +39,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new DataSourceCredentials(connectionString.Value);
+            return new DataSourceCredentials(connectionString);
         }
     }
 }

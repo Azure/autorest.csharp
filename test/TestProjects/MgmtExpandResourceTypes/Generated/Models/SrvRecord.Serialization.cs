@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtExpandResourceTypes;
 
 namespace MgmtExpandResourceTypes.Models
 {
@@ -44,10 +45,10 @@ namespace MgmtExpandResourceTypes.Models
             {
                 return null;
             }
-            Optional<int> priority = default;
-            Optional<int> weight = default;
-            Optional<int> port = default;
-            Optional<string> target = default;
+            int? priority = default;
+            int? weight = default;
+            int? port = default;
+            string target = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("priority"u8))
@@ -83,7 +84,7 @@ namespace MgmtExpandResourceTypes.Models
                     continue;
                 }
             }
-            return new SrvRecord(Optional.ToNullable(priority), Optional.ToNullable(weight), Optional.ToNullable(port), target.Value);
+            return new SrvRecord(priority, weight, port, target);
         }
     }
 }

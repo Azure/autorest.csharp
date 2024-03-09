@@ -12,7 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
-using Azure.ResourceManager;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -116,11 +116,11 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<string> schema = default;
-            Optional<string> contentVersion = default;
-            Optional<BinaryData> parameters = default;
-            Optional<IReadOnlyList<BinaryData>> resources = default;
-            Optional<string> id = default;
+            string schema = default;
+            string contentVersion = default;
+            BinaryData parameters = default;
+            IReadOnlyList<BinaryData> resources = default;
+            string id = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -176,124 +176,84 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new VirtualMachineCaptureResult(id.Value, serializedAdditionalRawData, schema.Value, contentVersion.Value, parameters.Value, Optional.ToList(resources));
+            return new VirtualMachineCaptureResult(
+                id,
+                serializedAdditionalRawData,
+                schema,
+                contentVersion,
+                parameters,
+                resources ?? new ChangeTrackingList<BinaryData>());
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
-            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
-            IDictionary<string, string> propertyOverrides = null;
-            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
-            bool hasPropertyOverride = false;
-            string propertyOverride = null;
-
             builder.AppendLine("{");
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Schema), out propertyOverride);
-            if (Optional.IsDefined(Schema) || hasPropertyOverride)
+            if (Optional.IsDefined(Schema))
             {
-                builder.Append("  $schema: ");
-                if (hasPropertyOverride)
+                builder.Append("  $schema:");
+                if (Schema.Contains(Environment.NewLine))
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(" '''");
+                    builder.AppendLine($"{Schema}'''");
                 }
                 else
                 {
-                    if (Schema.Contains(Environment.NewLine))
-                    {
-                        builder.AppendLine("'''");
-                        builder.AppendLine($"{Schema}'''");
-                    }
-                    else
-                    {
-                        builder.AppendLine($"'{Schema}'");
-                    }
+                    builder.AppendLine($" '{Schema}'");
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ContentVersion), out propertyOverride);
-            if (Optional.IsDefined(ContentVersion) || hasPropertyOverride)
+            if (Optional.IsDefined(ContentVersion))
             {
-                builder.Append("  contentVersion: ");
-                if (hasPropertyOverride)
+                builder.Append("  contentVersion:");
+                if (ContentVersion.Contains(Environment.NewLine))
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(" '''");
+                    builder.AppendLine($"{ContentVersion}'''");
                 }
                 else
                 {
-                    if (ContentVersion.Contains(Environment.NewLine))
-                    {
-                        builder.AppendLine("'''");
-                        builder.AppendLine($"{ContentVersion}'''");
-                    }
-                    else
-                    {
-                        builder.AppendLine($"'{ContentVersion}'");
-                    }
+                    builder.AppendLine($" '{ContentVersion}'");
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Parameters), out propertyOverride);
-            if (Optional.IsDefined(Parameters) || hasPropertyOverride)
+            if (Optional.IsDefined(Parameters))
             {
-                builder.Append("  parameters: ");
-                if (hasPropertyOverride)
-                {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
-                    builder.AppendLine($"'{Parameters.ToString()}'");
-                }
+                builder.Append("  parameters:");
+                builder.AppendLine($" '{Parameters.ToString()}'");
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Resources), out propertyOverride);
-            if (Optional.IsCollectionDefined(Resources) || hasPropertyOverride)
+            if (Optional.IsCollectionDefined(Resources))
             {
-                if (Resources.Any() || hasPropertyOverride)
+                if (Resources.Any())
                 {
-                    builder.Append("  resources: ");
-                    if (hasPropertyOverride)
+                    builder.Append("  resources:");
+                    builder.AppendLine(" [");
+                    foreach (var item in Resources)
                     {
-                        builder.AppendLine($"{propertyOverride}");
-                    }
-                    else
-                    {
-                        builder.AppendLine("[");
-                        foreach (var item in Resources)
+                        if (item == null)
                         {
-                            if (item == null)
-                            {
-                                builder.Append("null");
-                                continue;
-                            }
-                            builder.AppendLine($"    '{item.ToString()}'");
+                            builder.Append("null");
+                            continue;
                         }
-                        builder.AppendLine("  ]");
+                        builder.AppendLine($"    '{item.ToString()}'");
                     }
+                    builder.AppendLine("  ]");
                 }
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Id), out propertyOverride);
-            if (Optional.IsDefined(Id) || hasPropertyOverride)
+            if (Optional.IsDefined(Id))
             {
-                builder.Append("  id: ");
-                if (hasPropertyOverride)
+                builder.Append("  id:");
+                if (Id.Contains(Environment.NewLine))
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(" '''");
+                    builder.AppendLine($"{Id}'''");
                 }
                 else
                 {
-                    if (Id.Contains(Environment.NewLine))
-                    {
-                        builder.AppendLine("'''");
-                        builder.AppendLine($"{Id}'''");
-                    }
-                    else
-                    {
-                        builder.AppendLine($"'{Id}'");
-                    }
+                    builder.AppendLine($" '{Id}'");
                 }
             }
 
@@ -301,15 +261,12 @@ namespace Azure.ResourceManager.Sample.Models
             return BinaryData.FromString(builder.ToString());
         }
 
-        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine, string formattedPropertyName)
+        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine)
         {
             string indent = new string(' ', spaces);
-            int emptyObjectLength = 2 + spaces + Environment.NewLine.Length + Environment.NewLine.Length;
-            int length = stringBuilder.Length;
-            bool inMultilineString = false;
-
             BinaryData data = ModelReaderWriter.Write(childObject, options);
             string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            bool inMultilineString = false;
             for (int i = 0; i < lines.Length; i++)
             {
                 string line = lines[i];
@@ -330,16 +287,12 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($"{line}");
+                    stringBuilder.AppendLine($" {line}");
                 }
                 else
                 {
                     stringBuilder.AppendLine($"{indent}{line}");
                 }
-            }
-            if (stringBuilder.Length == length + emptyObjectLength)
-            {
-                stringBuilder.Length = stringBuilder.Length - emptyObjectLength - formattedPropertyName.Length;
             }
         }
 

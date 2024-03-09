@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace MgmtMockAndSample.Models
 {
@@ -18,8 +17,8 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<string> key = default;
-            Optional<string> content = default;
+            string key = default;
+            string content = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("key"u8))
@@ -33,7 +32,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new VaultKey(key.Value, content.Value);
+            return new VaultKey(key, content);
         }
     }
 }

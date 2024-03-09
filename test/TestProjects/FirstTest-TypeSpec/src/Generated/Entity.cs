@@ -60,14 +60,7 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/Entity.xml" path="doc/members/member[@name='DoSomethingAsync(string,CancellationToken)']/*" />
         public virtual async Task<Response<Thing>> DoSomethingAsync(string p2, CancellationToken cancellationToken = default)
         {
-            if (p2 == null)
-            {
-                throw new ArgumentNullException(nameof(p2));
-            }
-            if (p2.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(p2));
-            }
+            Argument.AssertNotNullOrEmpty(p2, nameof(p2));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await DoSomethingAsync(p2, context).ConfigureAwait(false);
@@ -82,14 +75,7 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/Entity.xml" path="doc/members/member[@name='DoSomething(string,CancellationToken)']/*" />
         public virtual Response<Thing> DoSomething(string p2, CancellationToken cancellationToken = default)
         {
-            if (p2 == null)
-            {
-                throw new ArgumentNullException(nameof(p2));
-            }
-            if (p2.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(p2));
-            }
+            Argument.AssertNotNullOrEmpty(p2, nameof(p2));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = DoSomething(p2, context);
@@ -120,14 +106,7 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/Entity.xml" path="doc/members/member[@name='DoSomethingAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> DoSomethingAsync(string p2, RequestContext context)
         {
-            if (p2 == null)
-            {
-                throw new ArgumentNullException(nameof(p2));
-            }
-            if (p2.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(p2));
-            }
+            Argument.AssertNotNullOrEmpty(p2, nameof(p2));
 
             using var scope = ClientDiagnostics.CreateScope("Entity.DoSomething");
             scope.Start();
@@ -167,14 +146,7 @@ namespace FirstTestTypeSpec
         /// <include file="Docs/Entity.xml" path="doc/members/member[@name='DoSomething(string,RequestContext)']/*" />
         public virtual Response DoSomething(string p2, RequestContext context)
         {
-            if (p2 == null)
-            {
-                throw new ArgumentNullException(nameof(p2));
-            }
-            if (p2.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(p2));
-            }
+            Argument.AssertNotNullOrEmpty(p2, nameof(p2));
 
             using var scope = ClientDiagnostics.CreateScope("Entity.DoSomething");
             scope.Start();

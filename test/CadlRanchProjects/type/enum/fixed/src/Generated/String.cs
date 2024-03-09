@@ -181,10 +181,7 @@ namespace _Type._Enum.Fixed
         /// <include file="Docs/String.xml" path="doc/members/member[@name='PutKnownValueAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutKnownValueAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("String.PutKnownValue");
             scope.Start();
@@ -223,10 +220,7 @@ namespace _Type._Enum.Fixed
         /// <include file="Docs/String.xml" path="doc/members/member[@name='PutKnownValue(RequestContent,RequestContext)']/*" />
         public virtual Response PutKnownValue(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("String.PutKnownValue");
             scope.Start();
@@ -289,10 +283,7 @@ namespace _Type._Enum.Fixed
         /// <include file="Docs/String.xml" path="doc/members/member[@name='PutUnknownValueAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutUnknownValueAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("String.PutUnknownValue");
             scope.Start();
@@ -331,10 +322,7 @@ namespace _Type._Enum.Fixed
         /// <include file="Docs/String.xml" path="doc/members/member[@name='PutUnknownValue(RequestContent,RequestContext)']/*" />
         public virtual Response PutUnknownValue(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("String.PutUnknownValue");
             scope.Start();

@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace Azure.ResourceManager.Storage.Models
 {
@@ -18,14 +17,14 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Optional<string> blob = default;
-            Optional<string> queue = default;
-            Optional<string> table = default;
-            Optional<string> file = default;
-            Optional<string> web = default;
-            Optional<string> dfs = default;
-            Optional<StorageAccountMicrosoftEndpoints> microsoftEndpoints = default;
-            Optional<StorageAccountInternetEndpoints> internetEndpoints = default;
+            string blob = default;
+            string queue = default;
+            string table = default;
+            string file = default;
+            string web = default;
+            string dfs = default;
+            StorageAccountMicrosoftEndpoints microsoftEndpoints = default;
+            StorageAccountInternetEndpoints internetEndpoints = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("blob"u8))
@@ -77,7 +76,15 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new Endpoints(blob.Value, queue.Value, table.Value, file.Value, web.Value, dfs.Value, microsoftEndpoints.Value, internetEndpoints.Value);
+            return new Endpoints(
+                blob,
+                queue,
+                table,
+                file,
+                web,
+                dfs,
+                microsoftEndpoints,
+                internetEndpoints);
         }
     }
 }

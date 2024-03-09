@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using ModelsTypeSpec;
 
 namespace ModelsTypeSpec.Models
 {
@@ -18,10 +19,7 @@ namespace ModelsTypeSpec.Models
         /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/> is null. </exception>
         public DerivedWithDiscriminatorDefinedOnBase(string requiredString) : base("A")
         {
-            if (requiredString == null)
-            {
-                throw new ArgumentNullException(nameof(requiredString));
-            }
+            Argument.AssertNotNull(requiredString, nameof(requiredString));
 
             RequiredString = requiredString;
         }

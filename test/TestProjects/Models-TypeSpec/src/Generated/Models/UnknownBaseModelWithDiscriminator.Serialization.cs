@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using ModelsTypeSpec;
 
 namespace ModelsTypeSpec.Models
 {
@@ -63,7 +64,7 @@ namespace ModelsTypeSpec.Models
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeUnknownBaseModelWithDiscriminator(document.RootElement, options);
+            return DeserializeBaseModelWithDiscriminator(document.RootElement, options);
         }
 
         internal static UnknownBaseModelWithDiscriminator DeserializeUnknownBaseModelWithDiscriminator(JsonElement element, ModelReaderWriterOptions options = null)
@@ -75,7 +76,7 @@ namespace ModelsTypeSpec.Models
                 return null;
             }
             string discriminatorProperty = "Unknown";
-            Optional<string> optionalPropertyOnBase = default;
+            string optionalPropertyOnBase = default;
             int requiredPropertyOnBase = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -102,7 +103,7 @@ namespace ModelsTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new UnknownBaseModelWithDiscriminator(discriminatorProperty, optionalPropertyOnBase.Value, requiredPropertyOnBase, serializedAdditionalRawData);
+            return new UnknownBaseModelWithDiscriminator(discriminatorProperty, optionalPropertyOnBase, requiredPropertyOnBase, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<BaseModelWithDiscriminator>.Write(ModelReaderWriterOptions options)
@@ -127,7 +128,7 @@ namespace ModelsTypeSpec.Models
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeUnknownBaseModelWithDiscriminator(document.RootElement, options);
+                        return DeserializeBaseModelWithDiscriminator(document.RootElement, options);
                     }
                 default:
                     throw new FormatException($"The model {nameof(BaseModelWithDiscriminator)} does not support '{options.Format}' format.");

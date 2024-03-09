@@ -58,10 +58,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// <exception cref="ArgumentNullException"> <paramref name="images"/> is null. </exception>
         internal ImageListResult(IEnumerable<ImageData> images)
         {
-            if (images == null)
-            {
-                throw new ArgumentNullException(nameof(images));
-            }
+            Argument.AssertNotNull(images, nameof(images));
 
             Images = images.ToList();
         }

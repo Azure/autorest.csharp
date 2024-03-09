@@ -12,6 +12,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
+using xml_service;
 
 namespace xml_service.Models
 {
@@ -95,7 +96,14 @@ namespace xml_service.Models
                 }
                 cors = array;
             }
-            return new StorageServiceProperties(logging, hourMetrics, minuteMetrics, cors, defaultServiceVersion, deleteRetentionPolicy, serializedAdditionalRawData: null);
+            return new StorageServiceProperties(
+                logging,
+                hourMetrics,
+                minuteMetrics,
+                cors,
+                defaultServiceVersion,
+                deleteRetentionPolicy,
+                serializedAdditionalRawData: null);
         }
 
         BinaryData IPersistableModel<StorageServiceProperties>.Write(ModelReaderWriterOptions options)

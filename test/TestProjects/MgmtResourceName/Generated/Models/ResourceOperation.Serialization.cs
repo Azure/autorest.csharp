@@ -7,7 +7,6 @@
 
 using System;
 using System.Text.Json;
-using Azure.Core;
 
 namespace MgmtResourceName.Models
 {
@@ -19,11 +18,11 @@ namespace MgmtResourceName.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> displayName = default;
-            Optional<string> description = default;
-            Optional<string> origin = default;
-            Optional<BinaryData> properties = default;
+            string name = default;
+            string displayName = default;
+            string description = default;
+            string origin = default;
+            BinaryData properties = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -56,7 +55,7 @@ namespace MgmtResourceName.Models
                     continue;
                 }
             }
-            return new ResourceOperation(name.Value, displayName.Value, description.Value, origin.Value, properties.Value);
+            return new ResourceOperation(name, displayName, description, origin, properties);
         }
     }
 }

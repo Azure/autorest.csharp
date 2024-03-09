@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
@@ -122,17 +123,17 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<IList<string>> sourceAddresses = default;
-            Optional<IList<string>> destinationAddresses = default;
-            Optional<IList<FirewallPolicyRuleApplicationProtocol>> protocols = default;
-            Optional<IList<string>> targetFqdns = default;
-            Optional<IList<string>> targetUrls = default;
-            Optional<IList<string>> fqdnTags = default;
-            Optional<IList<string>> sourceIpGroups = default;
-            Optional<bool> terminateTLS = default;
-            Optional<IList<string>> webCategories = default;
-            Optional<string> name = default;
-            Optional<string> description = default;
+            IList<string> sourceAddresses = default;
+            IList<string> destinationAddresses = default;
+            IList<FirewallPolicyRuleApplicationProtocol> protocols = default;
+            IList<string> targetFqdns = default;
+            IList<string> targetUrls = default;
+            IList<string> fqdnTags = default;
+            IList<string> sourceIpGroups = default;
+            bool? terminateTLS = default;
+            IList<string> webCategories = default;
+            string name = default;
+            string description = default;
             FirewallPolicyRuleType ruleType = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -273,7 +274,19 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new ApplicationRule(name.Value, description.Value, ruleType, Optional.ToList(sourceAddresses), Optional.ToList(destinationAddresses), Optional.ToList(protocols), Optional.ToList(targetFqdns), Optional.ToList(targetUrls), Optional.ToList(fqdnTags), Optional.ToList(sourceIpGroups), Optional.ToNullable(terminateTLS), Optional.ToList(webCategories));
+            return new ApplicationRule(
+                name,
+                description,
+                ruleType,
+                sourceAddresses ?? new ChangeTrackingList<string>(),
+                destinationAddresses ?? new ChangeTrackingList<string>(),
+                protocols ?? new ChangeTrackingList<FirewallPolicyRuleApplicationProtocol>(),
+                targetFqdns ?? new ChangeTrackingList<string>(),
+                targetUrls ?? new ChangeTrackingList<string>(),
+                fqdnTags ?? new ChangeTrackingList<string>(),
+                sourceIpGroups ?? new ChangeTrackingList<string>(),
+                terminateTLS,
+                webCategories ?? new ChangeTrackingList<string>());
         }
     }
 }

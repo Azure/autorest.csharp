@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace MgmtOmitOperationGroups.Models
 {
@@ -18,9 +17,9 @@ namespace MgmtOmitOperationGroups.Models
             {
                 return null;
             }
-            Optional<string> id = default;
-            Optional<string> j = default;
-            Optional<ModelZ> modelz = default;
+            string id = default;
+            string j = default;
+            ModelZ modelz = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -43,7 +42,7 @@ namespace MgmtOmitOperationGroups.Models
                     continue;
                 }
             }
-            return new Model4(id.Value, j.Value, modelz.Value);
+            return new Model4(id, j, modelz);
         }
     }
 }

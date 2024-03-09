@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 using MgmtSupersetFlattenInheritance;
 
 namespace MgmtSupersetFlattenInheritance.Models
@@ -20,8 +19,8 @@ namespace MgmtSupersetFlattenInheritance.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<ResourceModel1Data>> value = default;
-            Optional<string> nextLink = default;
+            IReadOnlyList<ResourceModel1Data> value = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -44,7 +43,7 @@ namespace MgmtSupersetFlattenInheritance.Models
                     continue;
                 }
             }
-            return new ResourceModel1ListResult(Optional.ToList(value), nextLink.Value);
+            return new ResourceModel1ListResult(value ?? new ChangeTrackingList<ResourceModel1Data>(), nextLink);
         }
     }
 }

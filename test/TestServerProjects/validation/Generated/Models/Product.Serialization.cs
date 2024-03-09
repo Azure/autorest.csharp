@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using validation;
 
 namespace validation.Models
 {
@@ -97,14 +98,14 @@ namespace validation.Models
             {
                 return null;
             }
-            Optional<IList<string>> displayNames = default;
-            Optional<int> capacity = default;
-            Optional<string> image = default;
+            IList<string> displayNames = default;
+            int? capacity = default;
+            string image = default;
             ChildProduct child = default;
             ConstantProduct constChild = default;
             ProductConstInt constInt = default;
             ProductConstString constString = default;
-            Optional<EnumConst> constStringAsEnum = default;
+            EnumConst? constStringAsEnum = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -172,7 +173,16 @@ namespace validation.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Product(Optional.ToList(displayNames), Optional.ToNullable(capacity), image.Value, child, constChild, constInt, constString, Optional.ToNullable(constStringAsEnum), serializedAdditionalRawData);
+            return new Product(
+                displayNames ?? new ChangeTrackingList<string>(),
+                capacity,
+                image,
+                child,
+                constChild,
+                constInt,
+                constString,
+                constStringAsEnum,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<Product>.Write(ModelReaderWriterOptions options)

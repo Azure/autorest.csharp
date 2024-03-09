@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 using Azure.ResourceManager.Storage;
 
 namespace Azure.ResourceManager.Storage.Models
@@ -20,7 +19,7 @@ namespace Azure.ResourceManager.Storage.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<StoragePrivateEndpointConnectionData>> value = default;
+            IReadOnlyList<StoragePrivateEndpointConnectionData> value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -38,7 +37,7 @@ namespace Azure.ResourceManager.Storage.Models
                     continue;
                 }
             }
-            return new StoragePrivateEndpointConnectionListResult(Optional.ToList(value));
+            return new StoragePrivateEndpointConnectionListResult(value ?? new ChangeTrackingList<StoragePrivateEndpointConnectionData>());
         }
     }
 }

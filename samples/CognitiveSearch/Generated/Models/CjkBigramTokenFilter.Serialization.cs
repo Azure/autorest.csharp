@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using CognitiveSearch;
 
 namespace CognitiveSearch.Models
 {
@@ -44,8 +45,8 @@ namespace CognitiveSearch.Models
             {
                 return null;
             }
-            Optional<IList<CjkBigramTokenFilterScripts>> ignoreScripts = default;
-            Optional<bool> outputUnigrams = default;
+            IList<CjkBigramTokenFilterScripts> ignoreScripts = default;
+            bool? outputUnigrams = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
@@ -84,7 +85,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new CjkBigramTokenFilter(odataType, name, Optional.ToList(ignoreScripts), Optional.ToNullable(outputUnigrams));
+            return new CjkBigramTokenFilter(odataType, name, ignoreScripts ?? new ChangeTrackingList<CjkBigramTokenFilterScripts>(), outputUnigrams);
         }
     }
 }

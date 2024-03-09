@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using multiple_inheritance;
 
 namespace multiple_inheritance.Models
 {
@@ -71,7 +72,7 @@ namespace multiple_inheritance.Models
             {
                 return null;
             }
-            Optional<bool> isAShowHorse = default;
+            bool? isAShowHorse = default;
             string name = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -97,7 +98,7 @@ namespace multiple_inheritance.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Horse(name, serializedAdditionalRawData, Optional.ToNullable(isAShowHorse));
+            return new Horse(name, serializedAdditionalRawData, isAShowHorse);
         }
 
         BinaryData IPersistableModel<Horse>.Write(ModelReaderWriterOptions options)

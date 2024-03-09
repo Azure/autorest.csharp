@@ -9,6 +9,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using AnomalyDetector;
 using Azure;
 using Azure.Core;
 
@@ -112,15 +113,15 @@ namespace AnomalyDetector.Models
                 return null;
             }
             string dataSource = default;
-            Optional<DataSchema> dataSchema = default;
+            DataSchema? dataSchema = default;
             DateTimeOffset startTime = default;
             DateTimeOffset endTime = default;
-            Optional<string> displayName = default;
-            Optional<int> slidingWindow = default;
-            Optional<AlignPolicy> alignPolicy = default;
-            Optional<ModelStatus> status = default;
-            Optional<IReadOnlyList<ErrorResponse>> errors = default;
-            Optional<DiagnosticsInfo> diagnosticsInfo = default;
+            string displayName = default;
+            int? slidingWindow = default;
+            AlignPolicy alignPolicy = default;
+            ModelStatus? status = default;
+            IReadOnlyList<ErrorResponse> errors = default;
+            DiagnosticsInfo diagnosticsInfo = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -210,7 +211,18 @@ namespace AnomalyDetector.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ModelInfo(dataSource, Optional.ToNullable(dataSchema), startTime, endTime, displayName.Value, Optional.ToNullable(slidingWindow), alignPolicy.Value, Optional.ToNullable(status), Optional.ToList(errors), diagnosticsInfo.Value, serializedAdditionalRawData);
+            return new ModelInfo(
+                dataSource,
+                dataSchema,
+                startTime,
+                endTime,
+                displayName,
+                slidingWindow,
+                alignPolicy,
+                status,
+                errors ?? new ChangeTrackingList<ErrorResponse>(),
+                diagnosticsInfo,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ModelInfo>.Write(ModelReaderWriterOptions options)

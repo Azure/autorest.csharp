@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
@@ -65,10 +66,10 @@ namespace MgmtMockAndSample.Models
             {
                 return null;
             }
-            Optional<IList<KeyPermission>> keys = default;
-            Optional<IList<SecretPermission>> secrets = default;
-            Optional<IList<CertificatePermission>> certificates = default;
-            Optional<IList<StoragePermission>> storage = default;
+            IList<KeyPermission> keys = default;
+            IList<SecretPermission> secrets = default;
+            IList<CertificatePermission> certificates = default;
+            IList<StoragePermission> storage = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("keys"u8))
@@ -128,7 +129,7 @@ namespace MgmtMockAndSample.Models
                     continue;
                 }
             }
-            return new Permissions(Optional.ToList(keys), Optional.ToList(secrets), Optional.ToList(certificates), Optional.ToList(storage));
+            return new Permissions(keys ?? new ChangeTrackingList<KeyPermission>(), secrets ?? new ChangeTrackingList<SecretPermission>(), certificates ?? new ChangeTrackingList<CertificatePermission>(), storage ?? new ChangeTrackingList<StoragePermission>());
         }
     }
 }

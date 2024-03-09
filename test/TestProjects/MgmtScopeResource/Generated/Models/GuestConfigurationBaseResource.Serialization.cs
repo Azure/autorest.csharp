@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtScopeResource;
 
 namespace MgmtScopeResource.Models
 {
@@ -34,10 +35,10 @@ namespace MgmtScopeResource.Models
             {
                 return null;
             }
-            Optional<string> id = default;
-            Optional<string> name = default;
-            Optional<string> location = default;
-            Optional<string> type = default;
+            string id = default;
+            string name = default;
+            string location = default;
+            string type = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -61,7 +62,7 @@ namespace MgmtScopeResource.Models
                     continue;
                 }
             }
-            return new GuestConfigurationBaseResource(id.Value, name.Value, location.Value, type.Value);
+            return new GuestConfigurationBaseResource(id, name, location, type);
         }
     }
 }

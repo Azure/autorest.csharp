@@ -9,7 +9,7 @@
    "$id": "2",
    "Kind": "Enum",
    "Name": "ProjectKind",
-   "EnumValueType": "String",
+   "EnumValueType": "string",
    "AllowedValues": [
     {
      "$id": "3",
@@ -83,41 +83,41 @@
    "$id": "12",
    "Kind": "Enum",
    "Name": "JobStatus",
-   "EnumValueType": "String",
+   "EnumValueType": "string",
    "AllowedValues": [
     {
      "$id": "13",
-     "Name": "notStarted",
+     "Name": "NotStarted",
      "Value": "notStarted"
     },
     {
      "$id": "14",
-     "Name": "running",
+     "Name": "Running",
      "Value": "running"
     },
     {
      "$id": "15",
-     "Name": "succeeded",
+     "Name": "Succeeded",
      "Value": "succeeded"
     },
     {
      "$id": "16",
-     "Name": "failed",
+     "Name": "Failed",
      "Value": "failed"
     },
     {
      "$id": "17",
-     "Name": "cancelled",
+     "Name": "Cancelled",
      "Value": "cancelled"
     },
     {
      "$id": "18",
-     "Name": "cancelling",
+     "Name": "Cancelling",
      "Value": "cancelling"
     },
     {
      "$id": "19",
-     "Name": "partiallyCompleted",
+     "Name": "PartiallyCompleted",
      "Value": "partiallyCompleted"
     }
    ],
@@ -535,7 +535,7 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": true
     }
    ]
   },
@@ -626,7 +626,7 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": true
     }
    ]
   },
@@ -1019,7 +1019,7 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": true
     }
    ]
   },
@@ -1100,7 +1100,7 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": true
     }
    ]
   },

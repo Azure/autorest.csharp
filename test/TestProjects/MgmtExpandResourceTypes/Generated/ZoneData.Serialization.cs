@@ -89,23 +89,23 @@ namespace MgmtExpandResourceTypes
             {
                 return null;
             }
-            Optional<string> etag = default;
-            Optional<IDictionary<string, string>> tags = default;
+            string etag = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
-            Optional<long> maxNumberOfRecordSets = default;
-            Optional<long> maxNumberOfRecordsPerRecordSet = default;
-            Optional<long> numberOfRecordSets = default;
-            Optional<IReadOnlyList<string>> nameServers = default;
-            Optional<ZoneType> zoneType = default;
-            Optional<MachineType> machineType = default;
-            Optional<StorageType> storageType = default;
-            Optional<MemoryType> memoryType = default;
-            Optional<IList<WritableSubResource>> registrationVirtualNetworks = default;
-            Optional<IList<WritableSubResource>> resolutionVirtualNetworks = default;
+            SystemData systemData = default;
+            long? maxNumberOfRecordSets = default;
+            long? maxNumberOfRecordsPerRecordSet = default;
+            long? numberOfRecordSets = default;
+            IReadOnlyList<string> nameServers = default;
+            ZoneType? zoneType = default;
+            MachineType? machineType = default;
+            StorageType? storageType = default;
+            MemoryType? memoryType = default;
+            IList<WritableSubResource> registrationVirtualNetworks = default;
+            IList<WritableSubResource> resolutionVirtualNetworks = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"u8))
@@ -274,7 +274,24 @@ namespace MgmtExpandResourceTypes
                     continue;
                 }
             }
-            return new ZoneData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, etag.Value, Optional.ToNullable(maxNumberOfRecordSets), Optional.ToNullable(maxNumberOfRecordsPerRecordSet), Optional.ToNullable(numberOfRecordSets), Optional.ToList(nameServers), Optional.ToNullable(zoneType), Optional.ToNullable(machineType), Optional.ToNullable(storageType), Optional.ToNullable(memoryType), Optional.ToList(registrationVirtualNetworks), Optional.ToList(resolutionVirtualNetworks));
+            return new ZoneData(
+                id,
+                name,
+                type,
+                systemData,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                etag,
+                maxNumberOfRecordSets,
+                maxNumberOfRecordsPerRecordSet,
+                numberOfRecordSets,
+                nameServers ?? new ChangeTrackingList<string>(),
+                zoneType,
+                machineType,
+                storageType,
+                memoryType,
+                registrationVirtualNetworks ?? new ChangeTrackingList<WritableSubResource>(),
+                resolutionVirtualNetworks ?? new ChangeTrackingList<WritableSubResource>());
         }
     }
 }

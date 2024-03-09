@@ -22,11 +22,11 @@ namespace MgmtMockAndSample
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
-            Optional<string> scope = default;
-            Optional<string> roleDefinitionId = default;
-            Optional<string> principalId = default;
-            Optional<bool> canDelegate = default;
+            SystemData systemData = default;
+            string scope = default;
+            string roleDefinitionId = default;
+            string principalId = default;
+            bool? canDelegate = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -90,7 +90,15 @@ namespace MgmtMockAndSample
                     continue;
                 }
             }
-            return new RoleAssignmentData(id, name, type, systemData.Value, scope.Value, roleDefinitionId.Value, principalId.Value, Optional.ToNullable(canDelegate));
+            return new RoleAssignmentData(
+                id,
+                name,
+                type,
+                systemData,
+                scope,
+                roleDefinitionId,
+                principalId,
+                canDelegate);
         }
     }
 }

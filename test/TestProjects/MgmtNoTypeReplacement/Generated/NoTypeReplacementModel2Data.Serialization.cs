@@ -31,11 +31,11 @@ namespace MgmtNoTypeReplacement
             {
                 return null;
             }
-            Optional<NoSubResourceModel> foo = default;
+            NoSubResourceModel foo = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
+            SystemData systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("foo"u8))
@@ -72,7 +72,7 @@ namespace MgmtNoTypeReplacement
                     continue;
                 }
             }
-            return new NoTypeReplacementModel2Data(id, name, type, systemData.Value, foo.Value);
+            return new NoTypeReplacementModel2Data(id, name, type, systemData, foo);
         }
     }
 }

@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 using MgmtResourceName;
 
 namespace MgmtResourceName.Models
@@ -20,8 +19,8 @@ namespace MgmtResourceName.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<DisplayResourceData>> value = default;
-            Optional<string> nextLink = default;
+            IReadOnlyList<DisplayResourceData> value = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -44,7 +43,7 @@ namespace MgmtResourceName.Models
                     continue;
                 }
             }
-            return new DisplayResourceListResult(Optional.ToList(value), nextLink.Value);
+            return new DisplayResourceListResult(value ?? new ChangeTrackingList<DisplayResourceData>(), nextLink);
         }
     }
 }

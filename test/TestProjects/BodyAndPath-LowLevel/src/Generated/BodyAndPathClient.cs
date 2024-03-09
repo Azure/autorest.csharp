@@ -48,14 +48,8 @@ namespace BodyAndPath_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public BodyAndPathClient(Uri endpoint, AzureKeyCredential credential, BodyAndPathClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(credential, nameof(credential));
             options ??= new BodyAndPathClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -84,18 +78,8 @@ namespace BodyAndPath_LowLevel
         /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='CreateAsync(string,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> CreateAsync(string itemName, RequestContent content, RequestContext context = null)
         {
-            if (itemName == null)
-            {
-                throw new ArgumentNullException(nameof(itemName));
-            }
-            if (itemName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(itemName));
-            }
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNullOrEmpty(itemName, nameof(itemName));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.Create");
             scope.Start();
@@ -131,18 +115,8 @@ namespace BodyAndPath_LowLevel
         /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='Create(string,RequestContent,RequestContext)']/*" />
         public virtual Response Create(string itemName, RequestContent content, RequestContext context = null)
         {
-            if (itemName == null)
-            {
-                throw new ArgumentNullException(nameof(itemName));
-            }
-            if (itemName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(itemName));
-            }
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNullOrEmpty(itemName, nameof(itemName));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.Create");
             scope.Start();
@@ -180,18 +154,8 @@ namespace BodyAndPath_LowLevel
         /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='CreateStreamAsync(string,RequestContent,ContentType,IEnumerable{string},RequestContext)']/*" />
         public virtual async Task<Response> CreateStreamAsync(string itemNameStream, RequestContent content, ContentType contentType, IEnumerable<string> excluded = null, RequestContext context = null)
         {
-            if (itemNameStream == null)
-            {
-                throw new ArgumentNullException(nameof(itemNameStream));
-            }
-            if (itemNameStream.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(itemNameStream));
-            }
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNullOrEmpty(itemNameStream, nameof(itemNameStream));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.CreateStream");
             scope.Start();
@@ -229,18 +193,8 @@ namespace BodyAndPath_LowLevel
         /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='CreateStream(string,RequestContent,ContentType,IEnumerable{string},RequestContext)']/*" />
         public virtual Response CreateStream(string itemNameStream, RequestContent content, ContentType contentType, IEnumerable<string> excluded = null, RequestContext context = null)
         {
-            if (itemNameStream == null)
-            {
-                throw new ArgumentNullException(nameof(itemNameStream));
-            }
-            if (itemNameStream.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(itemNameStream));
-            }
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNullOrEmpty(itemNameStream, nameof(itemNameStream));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.CreateStream");
             scope.Start();
@@ -277,26 +231,9 @@ namespace BodyAndPath_LowLevel
         /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='CreateEnumAsync(string,string,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> CreateEnumAsync(string enumName1, string enumName2, RequestContent content, RequestContext context = null)
         {
-            if (enumName1 == null)
-            {
-                throw new ArgumentNullException(nameof(enumName1));
-            }
-            if (enumName1.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(enumName1));
-            }
-            if (enumName2 == null)
-            {
-                throw new ArgumentNullException(nameof(enumName2));
-            }
-            if (enumName2.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(enumName2));
-            }
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNullOrEmpty(enumName1, nameof(enumName1));
+            Argument.AssertNotNullOrEmpty(enumName2, nameof(enumName2));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.CreateEnum");
             scope.Start();
@@ -333,26 +270,9 @@ namespace BodyAndPath_LowLevel
         /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='CreateEnum(string,string,RequestContent,RequestContext)']/*" />
         public virtual Response CreateEnum(string enumName1, string enumName2, RequestContent content, RequestContext context = null)
         {
-            if (enumName1 == null)
-            {
-                throw new ArgumentNullException(nameof(enumName1));
-            }
-            if (enumName1.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(enumName1));
-            }
-            if (enumName2 == null)
-            {
-                throw new ArgumentNullException(nameof(enumName2));
-            }
-            if (enumName2.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(enumName2));
-            }
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNullOrEmpty(enumName1, nameof(enumName1));
+            Argument.AssertNotNullOrEmpty(enumName2, nameof(enumName2));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.CreateEnum");
             scope.Start();
@@ -512,34 +432,11 @@ namespace BodyAndPath_LowLevel
         /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='UpdateAsync(string,string,string,string,RequestContent,string,RequestContext)']/*" />
         public virtual async Task<Response> UpdateAsync(string item3, string item2, string item1, string item4, RequestContent content, string item5 = null, RequestContext context = null)
         {
-            if (item3 == null)
-            {
-                throw new ArgumentNullException(nameof(item3));
-            }
-            if (item3.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(item3));
-            }
-            if (item2 == null)
-            {
-                throw new ArgumentNullException(nameof(item2));
-            }
-            if (item2.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(item2));
-            }
-            if (item1 == null)
-            {
-                throw new ArgumentNullException(nameof(item1));
-            }
-            if (item4 == null)
-            {
-                throw new ArgumentNullException(nameof(item4));
-            }
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNullOrEmpty(item3, nameof(item3));
+            Argument.AssertNotNullOrEmpty(item2, nameof(item2));
+            Argument.AssertNotNull(item1, nameof(item1));
+            Argument.AssertNotNull(item4, nameof(item4));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.Update");
             scope.Start();
@@ -579,34 +476,11 @@ namespace BodyAndPath_LowLevel
         /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='Update(string,string,string,string,RequestContent,string,RequestContext)']/*" />
         public virtual Response Update(string item3, string item2, string item1, string item4, RequestContent content, string item5 = null, RequestContext context = null)
         {
-            if (item3 == null)
-            {
-                throw new ArgumentNullException(nameof(item3));
-            }
-            if (item3.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(item3));
-            }
-            if (item2 == null)
-            {
-                throw new ArgumentNullException(nameof(item2));
-            }
-            if (item2.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(item2));
-            }
-            if (item1 == null)
-            {
-                throw new ArgumentNullException(nameof(item1));
-            }
-            if (item4 == null)
-            {
-                throw new ArgumentNullException(nameof(item4));
-            }
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNullOrEmpty(item3, nameof(item3));
+            Argument.AssertNotNullOrEmpty(item2, nameof(item2));
+            Argument.AssertNotNull(item1, nameof(item1));
+            Argument.AssertNotNull(item4, nameof(item4));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.Update");
             scope.Start();
@@ -646,7 +520,7 @@ namespace BodyAndPath_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/", false);
             uri.AppendPath(itemNameStream, true);
-            if (excluded != null && Optional.IsCollectionDefined(excluded))
+            if (excluded != null && !(excluded is ChangeTrackingList<string> changeTrackingList && changeTrackingList.IsUndefined))
             {
                 foreach (var param in excluded)
                 {

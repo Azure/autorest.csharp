@@ -44,10 +44,7 @@ namespace Server.Path.Single
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public SingleClient(Uri endpoint, SingleClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new SingleClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

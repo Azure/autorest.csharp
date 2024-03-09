@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using _Specs_.Azure.Core.Basic;
 
 namespace _Specs_.Azure.Core.Basic.Models
 {
@@ -51,10 +52,7 @@ namespace _Specs_.Azure.Core.Basic.Models
         /// <exception cref="ArgumentNullException"> <paramref name="detail"/> is null. </exception>
         public UserOrder(int userId, string detail)
         {
-            if (detail == null)
-            {
-                throw new ArgumentNullException(nameof(detail));
-            }
+            Argument.AssertNotNull(detail, nameof(detail));
 
             UserId = userId;
             Detail = detail;

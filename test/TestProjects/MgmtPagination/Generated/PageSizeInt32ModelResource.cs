@@ -194,10 +194,7 @@ namespace MgmtPagination
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<PageSizeInt32ModelResource>> UpdateAsync(WaitUntil waitUntil, PageSizeInt32ModelData data, CancellationToken cancellationToken = default)
         {
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _pageSizeInt32ModelClientDiagnostics.CreateScope("PageSizeInt32ModelResource.Update");
             scope.Start();
@@ -242,10 +239,7 @@ namespace MgmtPagination
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<PageSizeInt32ModelResource> Update(WaitUntil waitUntil, PageSizeInt32ModelData data, CancellationToken cancellationToken = default)
         {
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _pageSizeInt32ModelClientDiagnostics.CreateScope("PageSizeInt32ModelResource.Update");
             scope.Start();

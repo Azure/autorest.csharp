@@ -47,14 +47,8 @@ namespace Authentication.OAuth2
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public OAuth2Client(Uri endpoint, TokenCredential credential, OAuth2ClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(credential, nameof(credential));
             options ??= new OAuth2ClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using CustomizationsInTsp;
 
 namespace CustomizationsInTsp.Models
 {
@@ -120,17 +121,17 @@ namespace CustomizationsInTsp.Models
             {
                 return null;
             }
-            Optional<ExtensibleEnumWithOperator> propertyExtensibleEnum = default;
-            Optional<ModelToMakeInternal> propertyModelToMakeInternal = default;
-            Optional<RenamedModel> propertyModelToRename = default;
-            Optional<ModelToChangeNamespace> propertyModelToChangeNamespace = default;
-            Optional<ModelWithCustomizedProperties> propertyModelWithCustomizedProperties = default;
-            Optional<RenamedEnum> propertyEnumToRename = default;
-            Optional<EnumWithValueToRename> propertyEnumWithValueToRename = default;
-            Optional<EnumToBeMadeExtensible> propertyEnumToBeMadeExtensible = default;
-            Optional<ModelToAddAdditionalSerializableProperty> propertyModelToAddAdditionalSerializableProperty = default;
-            Optional<NormalEnum> propertyToMoveToCustomization = default;
-            Optional<ModelStruct> propertyModelStruct = default;
+            ExtensibleEnumWithOperator? propertyExtensibleEnum = default;
+            ModelToMakeInternal propertyModelToMakeInternal = default;
+            RenamedModel propertyModelToRename = default;
+            ModelToChangeNamespace propertyModelToChangeNamespace = default;
+            ModelWithCustomizedProperties propertyModelWithCustomizedProperties = default;
+            RenamedEnum? propertyEnumToRename = default;
+            EnumWithValueToRename? propertyEnumWithValueToRename = default;
+            EnumToBeMadeExtensible? propertyEnumToBeMadeExtensible = default;
+            ModelToAddAdditionalSerializableProperty propertyModelToAddAdditionalSerializableProperty = default;
+            NormalEnum? propertyToMoveToCustomization = default;
+            ModelStruct? propertyModelStruct = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -240,7 +241,19 @@ namespace CustomizationsInTsp.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new RootModel(Optional.ToNullable(propertyExtensibleEnum), propertyModelToMakeInternal.Value, propertyModelToRename.Value, propertyModelToChangeNamespace.Value, propertyModelWithCustomizedProperties.Value, Optional.ToNullable(propertyEnumToRename), Optional.ToNullable(propertyEnumWithValueToRename), Optional.ToNullable(propertyEnumToBeMadeExtensible), propertyModelToAddAdditionalSerializableProperty.Value, Optional.ToNullable(propertyToMoveToCustomization), Optional.ToNullable(propertyModelStruct), serializedAdditionalRawData);
+            return new RootModel(
+                propertyExtensibleEnum,
+                propertyModelToMakeInternal,
+                propertyModelToRename,
+                propertyModelToChangeNamespace,
+                propertyModelWithCustomizedProperties,
+                propertyEnumToRename,
+                propertyEnumWithValueToRename,
+                propertyEnumToBeMadeExtensible,
+                propertyModelToAddAdditionalSerializableProperty,
+                propertyToMoveToCustomization,
+                propertyModelStruct,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<RootModel>.Write(ModelReaderWriterOptions options)

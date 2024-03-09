@@ -9,7 +9,7 @@
    "$id": "2",
    "Kind": "Enum",
    "Name": "ProjectKind",
-   "EnumValueType": "String",
+   "EnumValueType": "string",
    "AllowedValues": [
     {
      "$id": "3",
@@ -280,7 +280,7 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": true
     }
    ]
   },
@@ -346,7 +346,7 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": true
     }
    ]
   },

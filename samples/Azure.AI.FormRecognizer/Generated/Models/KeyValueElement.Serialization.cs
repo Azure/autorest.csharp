@@ -7,7 +7,7 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
+using Azure.AI.FormRecognizer;
 
 namespace Azure.AI.FormRecognizer.Models
 {
@@ -20,8 +20,8 @@ namespace Azure.AI.FormRecognizer.Models
                 return null;
             }
             string text = default;
-            Optional<IReadOnlyList<float>> boundingBox = default;
-            Optional<IReadOnlyList<string>> elements = default;
+            IReadOnlyList<float> boundingBox = default;
+            IReadOnlyList<string> elements = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("text"u8))
@@ -58,7 +58,7 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            return new KeyValueElement(text, Optional.ToList(boundingBox), Optional.ToList(elements));
+            return new KeyValueElement(text, boundingBox ?? new ChangeTrackingList<float>(), elements ?? new ChangeTrackingList<string>());
         }
     }
 }

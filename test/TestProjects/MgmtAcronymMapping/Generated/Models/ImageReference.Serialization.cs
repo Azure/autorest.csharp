@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtAcronymMapping;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -49,12 +50,12 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<string> publisher = default;
-            Optional<string> offer = default;
-            Optional<string> sku = default;
-            Optional<string> version = default;
-            Optional<string> exactVersion = default;
-            Optional<string> id = default;
+            string publisher = default;
+            string offer = default;
+            string sku = default;
+            string version = default;
+            string exactVersion = default;
+            string id = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("publisher"u8))
@@ -88,7 +89,13 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new ImageReference(id.Value, publisher.Value, offer.Value, sku.Value, version.Value, exactVersion.Value);
+            return new ImageReference(
+                id,
+                publisher,
+                offer,
+                sku,
+                version,
+                exactVersion);
         }
     }
 }

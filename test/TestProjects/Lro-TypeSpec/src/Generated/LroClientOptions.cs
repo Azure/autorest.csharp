@@ -7,7 +7,7 @@
 
 using Azure.Core;
 
-namespace lro
+namespace lrotsp
 {
     /// <summary> Client options for LroClient. </summary>
     public partial class LroClientOptions : ClientOptions

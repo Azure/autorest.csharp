@@ -110,28 +110,28 @@ namespace MgmtPropertyChooser
             {
                 return null;
             }
-            Optional<ArmPlan> plan = default;
-            Optional<IReadOnlyList<VirtualMachineExtension>> resources = default;
-            Optional<ManagedServiceIdentity> identity = default;
-            Optional<IdentityWithRenamedProperty> identityWithRenamedProperty = default;
-            Optional<IdentityWithDifferentPropertyType> identityWithDifferentPropertyType = default;
-            Optional<ManagedServiceIdentity> identityWithNoUserIdentity = default;
-            Optional<IdentityWithNoSystemIdentity> identityWithNoSystemIdentity = default;
-            Optional<ManagedServiceIdentity> identityV3 = default;
-            Optional<IList<string>> zones = default;
-            Optional<IReadOnlyList<MgmtPropertyChooserResourceData>> fakeResources = default;
-            Optional<SubResource> fakeSubResource = default;
-            Optional<WritableSubResource> fakeWritableSubResource = default;
-            Optional<IDictionary<string, string>> tags = default;
+            ArmPlan plan = default;
+            IReadOnlyList<VirtualMachineExtension> resources = default;
+            ManagedServiceIdentity identity = default;
+            IdentityWithRenamedProperty identityWithRenamedProperty = default;
+            IdentityWithDifferentPropertyType identityWithDifferentPropertyType = default;
+            ManagedServiceIdentity identityWithNoUserIdentity = default;
+            IdentityWithNoSystemIdentity identityWithNoSystemIdentity = default;
+            ManagedServiceIdentity identityV3 = default;
+            IList<string> zones = default;
+            IReadOnlyList<MgmtPropertyChooserResourceData> fakeResources = default;
+            SubResource fakeSubResource = default;
+            WritableSubResource fakeWritableSubResource = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
-            Optional<string> provisioningState = default;
-            Optional<string> licenseType = default;
-            Optional<string> vmId = default;
-            Optional<string> extensionsTimeBudget = default;
+            SystemData systemData = default;
+            string provisioningState = default;
+            string licenseType = default;
+            string vmId = default;
+            string extensionsTimeBudget = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("plan"u8))
@@ -334,7 +334,29 @@ namespace MgmtPropertyChooser
                     continue;
                 }
             }
-            return new VirtualMachineData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, plan, Optional.ToList(resources), identity, identityWithRenamedProperty.Value, identityWithDifferentPropertyType.Value, identityWithNoUserIdentity, identityWithNoSystemIdentity.Value, identityV3, Optional.ToList(zones), Optional.ToList(fakeResources), fakeSubResource, fakeWritableSubResource, provisioningState.Value, licenseType.Value, vmId.Value, extensionsTimeBudget.Value);
+            return new VirtualMachineData(
+                id,
+                name,
+                type,
+                systemData,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                plan,
+                resources ?? new ChangeTrackingList<VirtualMachineExtension>(),
+                identity,
+                identityWithRenamedProperty,
+                identityWithDifferentPropertyType,
+                identityWithNoUserIdentity,
+                identityWithNoSystemIdentity,
+                identityV3,
+                zones ?? new ChangeTrackingList<string>(),
+                fakeResources ?? new ChangeTrackingList<MgmtPropertyChooserResourceData>(),
+                fakeSubResource,
+                fakeWritableSubResource,
+                provisioningState,
+                licenseType,
+                vmId,
+                extensionsTimeBudget);
         }
     }
 }

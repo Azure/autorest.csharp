@@ -85,22 +85,22 @@ namespace MgmtPartialResource
             {
                 return null;
             }
-            Optional<PublicIPAddressSku> sku = default;
-            Optional<string> etag = default;
-            Optional<IList<string>> zones = default;
+            PublicIPAddressSku sku = default;
+            string etag = default;
+            IList<string> zones = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
-            Optional<IPAllocationMethod> publicIPAllocationMethod = default;
-            Optional<IPVersion> publicIPAddressVersion = default;
-            Optional<string> ipAddress = default;
-            Optional<int> idleTimeoutInMinutes = default;
-            Optional<string> resourceGuid = default;
-            Optional<PublicIPAddressData> servicePublicIPAddress = default;
-            Optional<PublicIPAddressMigrationPhase> migrationPhase = default;
-            Optional<PublicIPAddressData> linkedPublicIPAddress = default;
-            Optional<DeleteOption> deleteOption = default;
+            SystemData systemData = default;
+            IPAllocationMethod? publicIPAllocationMethod = default;
+            IPVersion? publicIPAddressVersion = default;
+            string ipAddress = default;
+            int? idleTimeoutInMinutes = default;
+            string resourceGuid = default;
+            PublicIPAddressData servicePublicIPAddress = default;
+            PublicIPAddressMigrationPhase? migrationPhase = default;
+            PublicIPAddressData linkedPublicIPAddress = default;
+            DeleteOption? deleteOption = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sku"u8))
@@ -241,7 +241,23 @@ namespace MgmtPartialResource
                     continue;
                 }
             }
-            return new PublicIPAddressData(id, name, type, systemData.Value, sku.Value, etag.Value, Optional.ToList(zones), Optional.ToNullable(publicIPAllocationMethod), Optional.ToNullable(publicIPAddressVersion), ipAddress.Value, Optional.ToNullable(idleTimeoutInMinutes), resourceGuid.Value, servicePublicIPAddress.Value, Optional.ToNullable(migrationPhase), linkedPublicIPAddress.Value, Optional.ToNullable(deleteOption));
+            return new PublicIPAddressData(
+                id,
+                name,
+                type,
+                systemData,
+                sku,
+                etag,
+                zones ?? new ChangeTrackingList<string>(),
+                publicIPAllocationMethod,
+                publicIPAddressVersion,
+                ipAddress,
+                idleTimeoutInMinutes,
+                resourceGuid,
+                servicePublicIPAddress,
+                migrationPhase,
+                linkedPublicIPAddress,
+                deleteOption);
         }
     }
 }

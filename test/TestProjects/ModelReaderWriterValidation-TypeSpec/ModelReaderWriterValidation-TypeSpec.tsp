@@ -183,7 +183,8 @@ model ResourceProviderData {
 }
 
 @doc("The provider authorization consent state.")
-enum ProviderAuthorizationConsentState {
+union ProviderAuthorizationConsentState {
+    string,
     @doc("The provider authorization consent state is not specified.")
     NotSpecified: "NotSpecified",
 
@@ -340,7 +341,8 @@ enum ResourceTypeAliasPatternType {
 }
 
 @doc("The type of the token that the alias path is referring to.")
-enum ResourceTypeAliasPathTokenType {
+union ResourceTypeAliasPathTokenType {
+    string,
     @doc("The token type is not specified.")
     NotSpecified: "NotSpecified";
     @doc("The token type can be anything.")
@@ -360,7 +362,8 @@ enum ResourceTypeAliasPathTokenType {
 }
 
 @doc("The attributes of the token that the alias path is referring to.")
-enum ResourceTypeAliasPathAttributes {
+union ResourceTypeAliasPathAttributes {
+    string,
     @doc("The token that the alias path is referring to has no attributes.")
     None: "None";
     @doc("The token that the alias path is referring to is modifiable by policies with 'modify' effect.")

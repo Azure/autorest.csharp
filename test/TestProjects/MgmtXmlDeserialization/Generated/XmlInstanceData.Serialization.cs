@@ -150,7 +150,7 @@ namespace MgmtXmlDeserialization
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
+            SystemData systemData = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -185,7 +185,7 @@ namespace MgmtXmlDeserialization
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new XmlInstanceData(id, name, type, systemData.Value, serializedAdditionalRawData);
+            return new XmlInstanceData(id, name, type, systemData, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<XmlInstanceData>.Write(ModelReaderWriterOptions options)

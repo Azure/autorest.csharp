@@ -7,7 +7,7 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
+using MgmtHierarchicalNonResource;
 
 namespace MgmtHierarchicalNonResource.Models
 {
@@ -19,7 +19,7 @@ namespace MgmtHierarchicalNonResource.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<string>> diskTypes = default;
+            IReadOnlyList<string> diskTypes = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("diskTypes"u8))
@@ -37,7 +37,7 @@ namespace MgmtHierarchicalNonResource.Models
                     continue;
                 }
             }
-            return new Disallowed(Optional.ToList(diskTypes));
+            return new Disallowed(diskTypes ?? new ChangeTrackingList<string>());
         }
     }
 }

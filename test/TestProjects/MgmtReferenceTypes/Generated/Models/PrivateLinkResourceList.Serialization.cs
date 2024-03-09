@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
+using MgmtReferenceTypes;
 
 namespace Azure.ResourceManager.Fake.Models
 {
@@ -28,7 +29,7 @@ namespace Azure.ResourceManager.Fake.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<PrivateLinkResourceData>> value = default;
+            IReadOnlyList<PrivateLinkResourceData> value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -46,7 +47,7 @@ namespace Azure.ResourceManager.Fake.Models
                     continue;
                 }
             }
-            return new PrivateLinkResourceList(Optional.ToList(value));
+            return new PrivateLinkResourceList(value ?? new ChangeTrackingList<PrivateLinkResourceData>());
         }
 
         internal partial class PrivateLinkResourceListConverter : JsonConverter<PrivateLinkResourceList>

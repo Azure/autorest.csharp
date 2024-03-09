@@ -48,14 +48,8 @@ namespace url_multi_collectionFormat_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public QueriesClient(Uri endpoint, AzureKeyCredential credential, QueriesClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(credential, nameof(credential));
             options ??= new QueriesClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -258,7 +252,7 @@ namespace url_multi_collectionFormat_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/queries/array/multi/string/null", false);
-            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
+            if (arrayQuery != null && !(arrayQuery is ChangeTrackingList<string> changeTrackingList && changeTrackingList.IsUndefined))
             {
                 foreach (var param in arrayQuery)
                 {
@@ -278,7 +272,7 @@ namespace url_multi_collectionFormat_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/queries/array/multi/string/empty", false);
-            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
+            if (arrayQuery != null && !(arrayQuery is ChangeTrackingList<string> changeTrackingList && changeTrackingList.IsUndefined))
             {
                 foreach (var param in arrayQuery)
                 {
@@ -298,7 +292,7 @@ namespace url_multi_collectionFormat_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/queries/array/multi/string/valid", false);
-            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
+            if (arrayQuery != null && !(arrayQuery is ChangeTrackingList<string> changeTrackingList && changeTrackingList.IsUndefined))
             {
                 foreach (var param in arrayQuery)
                 {

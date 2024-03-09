@@ -318,10 +318,7 @@ namespace Encode.Duration
         /// <include file="Docs/Query.xml" path="doc/members/member[@name='Int32SecondsArrayAsync(IEnumerable{TimeSpan},RequestContext)']/*" />
         public virtual async Task<Response> Int32SecondsArrayAsync(IEnumerable<TimeSpan> input, RequestContext context = null)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
+            Argument.AssertNotNull(input, nameof(input));
 
             using var scope = ClientDiagnostics.CreateScope("Query.Int32SecondsArray");
             scope.Start();
@@ -356,10 +353,7 @@ namespace Encode.Duration
         /// <include file="Docs/Query.xml" path="doc/members/member[@name='Int32SecondsArray(IEnumerable{TimeSpan},RequestContext)']/*" />
         public virtual Response Int32SecondsArray(IEnumerable<TimeSpan> input, RequestContext context = null)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
+            Argument.AssertNotNull(input, nameof(input));
 
             using var scope = ClientDiagnostics.CreateScope("Query.Int32SecondsArray");
             scope.Start();
@@ -439,7 +433,7 @@ namespace Encode.Duration
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/encode/duration/query/int32-seconds-array", false);
-            if (input != null && Optional.IsCollectionDefined(input))
+            if (input != null && !(input is ChangeTrackingList<TimeSpan> changeTrackingList && changeTrackingList.IsUndefined))
             {
                 uri.AppendQueryDelimited("input", input, ",", "%s", true);
             }

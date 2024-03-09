@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using ModelShapes;
 
 namespace ModelShapes.Models
 {
@@ -79,8 +80,8 @@ namespace ModelShapes.Models
             {
                 return null;
             }
-            Optional<ReadonlyModel> readonlyProperty = default;
-            Optional<IReadOnlyList<ReadonlyModel>> readonlyListProperty = default;
+            ReadonlyModel readonlyProperty = default;
+            IReadOnlyList<ReadonlyModel> readonlyListProperty = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -114,7 +115,7 @@ namespace ModelShapes.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new MixedModelWithReadonlyProperty(readonlyProperty.Value, Optional.ToList(readonlyListProperty), serializedAdditionalRawData);
+            return new MixedModelWithReadonlyProperty(readonlyProperty, readonlyListProperty ?? new ChangeTrackingList<ReadonlyModel>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<MixedModelWithReadonlyProperty>.Write(ModelReaderWriterOptions options)

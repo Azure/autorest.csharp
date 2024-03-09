@@ -89,14 +89,14 @@ namespace MgmtExtensionResource
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
-            Optional<PolicyType> policyType = default;
-            Optional<string> mode = default;
-            Optional<string> displayName = default;
-            Optional<string> description = default;
-            Optional<BinaryData> policyRule = default;
-            Optional<BinaryData> metadata = default;
-            Optional<IDictionary<string, ParameterDefinitionsValue>> parameters = default;
+            SystemData systemData = default;
+            PolicyType? policyType = default;
+            string mode = default;
+            string displayName = default;
+            string description = default;
+            BinaryData policyRule = default;
+            BinaryData metadata = default;
+            IDictionary<string, ParameterDefinitionsValue> parameters = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -192,7 +192,18 @@ namespace MgmtExtensionResource
                     continue;
                 }
             }
-            return new PolicyDefinitionData(id, name, type, systemData.Value, Optional.ToNullable(policyType), mode.Value, displayName.Value, description.Value, policyRule.Value, metadata.Value, Optional.ToDictionary(parameters));
+            return new PolicyDefinitionData(
+                id,
+                name,
+                type,
+                systemData,
+                policyType,
+                mode,
+                displayName,
+                description,
+                policyRule,
+                metadata,
+                parameters ?? new ChangeTrackingDictionary<string, ParameterDefinitionsValue>());
         }
     }
 }

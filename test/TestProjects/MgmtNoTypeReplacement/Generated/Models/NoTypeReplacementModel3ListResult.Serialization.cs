@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 using MgmtNoTypeReplacement;
 
 namespace MgmtNoTypeReplacement.Models
@@ -20,8 +19,8 @@ namespace MgmtNoTypeReplacement.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<NoTypeReplacementModel3Data>> value = default;
-            Optional<string> nextLink = default;
+            IReadOnlyList<NoTypeReplacementModel3Data> value = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -44,7 +43,7 @@ namespace MgmtNoTypeReplacement.Models
                     continue;
                 }
             }
-            return new NoTypeReplacementModel3ListResult(Optional.ToList(value), nextLink.Value);
+            return new NoTypeReplacementModel3ListResult(value ?? new ChangeTrackingList<NoTypeReplacementModel3Data>(), nextLink);
         }
     }
 }

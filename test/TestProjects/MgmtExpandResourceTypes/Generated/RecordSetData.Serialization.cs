@@ -147,26 +147,26 @@ namespace MgmtExpandResourceTypes
             {
                 return null;
             }
-            Optional<string> etag = default;
+            string etag = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
-            Optional<IDictionary<string, string>> metadata = default;
-            Optional<long> ttl = default;
-            Optional<string> fqdn = default;
-            Optional<string> provisioningState = default;
-            Optional<WritableSubResource> targetResource = default;
-            Optional<IList<ARecord>> aRecords = default;
-            Optional<IList<AaaaRecord>> aaaaRecords = default;
-            Optional<IList<MxRecord>> mxRecords = default;
-            Optional<IList<NsRecord>> nsRecords = default;
-            Optional<IList<PtrRecord>> ptrRecords = default;
-            Optional<IList<SrvRecord>> srvRecords = default;
-            Optional<IList<TxtRecord>> txtRecords = default;
-            Optional<CnameRecord> cnameRecord = default;
-            Optional<SoaRecord> soaRecord = default;
-            Optional<IList<CaaRecord>> caaRecords = default;
+            SystemData systemData = default;
+            IDictionary<string, string> metadata = default;
+            long? ttl = default;
+            string fqdn = default;
+            string provisioningState = default;
+            WritableSubResource targetResource = default;
+            IList<ARecord> aRecords = default;
+            IList<AaaaRecord> aaaaRecords = default;
+            IList<MxRecord> mxRecords = default;
+            IList<NsRecord> nsRecords = default;
+            IList<PtrRecord> ptrRecords = default;
+            IList<SrvRecord> srvRecords = default;
+            IList<TxtRecord> txtRecords = default;
+            CnameRecord cnameRecord = default;
+            SoaRecord soaRecord = default;
+            IList<CaaRecord> caaRecords = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"u8))
@@ -383,7 +383,27 @@ namespace MgmtExpandResourceTypes
                     continue;
                 }
             }
-            return new RecordSetData(id, name, type, systemData.Value, etag.Value, Optional.ToDictionary(metadata), Optional.ToNullable(ttl), fqdn.Value, provisioningState.Value, targetResource, Optional.ToList(aRecords), Optional.ToList(aaaaRecords), Optional.ToList(mxRecords), Optional.ToList(nsRecords), Optional.ToList(ptrRecords), Optional.ToList(srvRecords), Optional.ToList(txtRecords), cnameRecord.Value, soaRecord.Value, Optional.ToList(caaRecords));
+            return new RecordSetData(
+                id,
+                name,
+                type,
+                systemData,
+                etag,
+                metadata ?? new ChangeTrackingDictionary<string, string>(),
+                ttl,
+                fqdn,
+                provisioningState,
+                targetResource,
+                aRecords ?? new ChangeTrackingList<ARecord>(),
+                aaaaRecords ?? new ChangeTrackingList<AaaaRecord>(),
+                mxRecords ?? new ChangeTrackingList<MxRecord>(),
+                nsRecords ?? new ChangeTrackingList<NsRecord>(),
+                ptrRecords ?? new ChangeTrackingList<PtrRecord>(),
+                srvRecords ?? new ChangeTrackingList<SrvRecord>(),
+                txtRecords ?? new ChangeTrackingList<TxtRecord>(),
+                cnameRecord,
+                soaRecord,
+                caaRecords ?? new ChangeTrackingList<CaaRecord>());
         }
     }
 }

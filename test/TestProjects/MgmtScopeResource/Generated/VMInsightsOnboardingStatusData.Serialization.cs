@@ -24,11 +24,11 @@ namespace MgmtScopeResource
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
-            Optional<string> resourceId = default;
-            Optional<OnboardingStatus> onboardingStatus = default;
-            Optional<DataStatus> dataStatus = default;
-            Optional<IReadOnlyList<DataContainer>> data = default;
+            SystemData systemData = default;
+            string resourceId = default;
+            OnboardingStatus? onboardingStatus = default;
+            DataStatus? dataStatus = default;
+            IReadOnlyList<DataContainer> data = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -105,7 +105,15 @@ namespace MgmtScopeResource
                     continue;
                 }
             }
-            return new VMInsightsOnboardingStatusData(id, name, type, systemData.Value, resourceId.Value, Optional.ToNullable(onboardingStatus), Optional.ToNullable(dataStatus), Optional.ToList(data));
+            return new VMInsightsOnboardingStatusData(
+                id,
+                name,
+                type,
+                systemData,
+                resourceId,
+                onboardingStatus,
+                dataStatus,
+                data ?? new ChangeTrackingList<DataContainer>());
         }
     }
 }

@@ -13,5 +13,7 @@
   "NoPropertyTypeReplacement": [
     "NoSubResourceModel",
     "NoSubResourceModel2"
-  ]
+  ],
+  "flavor": "azure",
+  "helper-namespace": "MgmtNoTypeReplacement"
 }

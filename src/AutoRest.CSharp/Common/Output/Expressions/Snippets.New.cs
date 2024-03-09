@@ -21,16 +21,21 @@ namespace AutoRest.CSharp.Common.Output.Models
         {
             public static ValueExpression ArgumentOutOfRangeException(EnumType enumType, Parameter valueParameter)
                 => Instance(typeof(ArgumentOutOfRangeException), Nameof(valueParameter), valueParameter, Literal($"Unknown {enumType.Declaration.Name} value."));
+            public static ValueExpression ArgumentOutOfRangeException(ValueExpression valueParameter, string message, bool wrapInNameOf = true)
+                => Instance(typeof(ArgumentOutOfRangeException), wrapInNameOf ? Nameof(valueParameter) : valueParameter, Literal(message));
             public static ValueExpression NotImplementedException(string name)
                 => Instance(typeof(NotImplementedException), Literal($"Method {name} is implemented in customized code."));
             public static ValueExpression InvalidOperationException(ValueExpression message)
                 => Instance(typeof(InvalidOperationException), message);
 
-            public static ValueExpression ArgumentNullException(ValueExpression parameter)
-                => Instance(typeof(ArgumentNullException), Nameof(parameter));
+            public static ValueExpression ArgumentNullException(ValueExpression parameter, bool wrapInNameOf = true)
+                => Instance(typeof(ArgumentNullException), wrapInNameOf ? Nameof(parameter) : parameter);
 
-            public static ValueExpression ArgumentException(ValueExpression parameter)
-                => Instance(typeof(ArgumentException), Literal("Value cannot be an empty string."), Nameof(parameter));
+            public static ValueExpression ArgumentException(ValueExpression parameter, string message, bool wrapInNameOf = true)
+                => ArgumentException(parameter, Literal(message), wrapInNameOf);
+
+            public static ValueExpression ArgumentException(ValueExpression parameter, ValueExpression message, bool wrapInNameOf = true)
+                => Instance(typeof(ArgumentException), message, wrapInNameOf ? Nameof(parameter) : parameter);
 
             public static EnumerableExpression Array(CSharpType? elementType) => new(elementType ?? typeof(object), new NewArrayExpression(elementType));
             public static EnumerableExpression Array(CSharpType? elementType, params ValueExpression[] items) => new(elementType ?? typeof(object), new NewArrayExpression(elementType, new ArrayInitializerExpression(items)));
@@ -52,7 +57,7 @@ namespace AutoRest.CSharp.Common.Output.Models
             public static TypedValueExpression Uri(string uri) => Instance(typeof(Uri), Literal(uri));
 
             public static ValueExpression Anonymous(string key, ValueExpression value) => Anonymous(new Dictionary<string, ValueExpression> { [key] = value });
-            public static ValueExpression Anonymous(IReadOnlyDictionary<string, ValueExpression>? properties) => new KeywordExpression("new", new ObjectInitializerExpression(properties, IsInline: false));
+            public static ValueExpression Anonymous(IReadOnlyDictionary<string, ValueExpression>? properties) => new KeywordExpression("new", new ObjectInitializerExpression(properties, UseSingleLine: false));
             public static ValueExpression Instance(ConstructorSignature ctorSignature, IReadOnlyList<ValueExpression> arguments, IReadOnlyDictionary<string, ValueExpression>? properties = null) => new NewInstanceExpression(ctorSignature.Type, arguments, properties != null ? new ObjectInitializerExpression(properties) : null);
             public static ValueExpression Instance(ConstructorSignature ctorSignature, IReadOnlyDictionary<string, ValueExpression>? properties = null) => Instance(ctorSignature, ctorSignature.Parameters.Select(p => (ValueExpression)p).ToArray(), properties);
             public static ValueExpression Instance(CSharpType type, IReadOnlyList<ValueExpression> arguments) => new NewInstanceExpression(type, arguments);

@@ -29,12 +29,24 @@ namespace MgmtDiscriminator.Models
         /// <param name="duration"> A duration property to verify bicep generation. </param>
         /// <param name="number"> A number property to verify bicep generation. </param>
         /// <param name="uri"> A number property to verify bicep generation. </param>
-        /// <param name="shellProperty"> A shell property to verify bicep generation for empty objects. </param>
         /// <param name="properties"> The properties. </param>
         /// <returns> A new <see cref="MgmtDiscriminator.DeliveryRuleData"/> instance for mocking. </returns>
-        public static DeliveryRuleData DeliveryRuleData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, bool? boolProperty = null, AzureLocation? location = null, AzureLocation? locationWithCustomSerialization = null, DateTimeOffset? dateTimeProperty = null, TimeSpan? duration = null, int? number = null, Uri uri = null, Shell shellProperty = null, DeliveryRuleProperties properties = null)
+        public static DeliveryRuleData DeliveryRuleData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, bool? boolProperty = null, AzureLocation? location = null, AzureLocation? locationWithCustomSerialization = null, DateTimeOffset? dateTimeProperty = null, TimeSpan? duration = null, int? number = null, Uri uri = null, DeliveryRuleProperties properties = null)
         {
-            return new DeliveryRuleData(id, name, resourceType, systemData, boolProperty, location, locationWithCustomSerialization, dateTimeProperty, duration, number, uri, shellProperty, properties, serializedAdditionalRawData: null);
+            return new DeliveryRuleData(
+                id,
+                name,
+                resourceType,
+                systemData,
+                boolProperty,
+                location,
+                locationWithCustomSerialization,
+                dateTimeProperty,
+                duration,
+                number,
+                uri,
+                properties,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DeliveryRuleProperties"/>. </summary>
@@ -66,7 +78,14 @@ namespace MgmtDiscriminator.Models
             actions ??= new List<DeliveryRuleAction>();
             extraMappingInfo ??= new Dictionary<string, DeliveryRuleAction>();
 
-            return new DeliveryRuleProperties(order, conditions, actions?.ToList(), extraMappingInfo, pet, foo, serializedAdditionalRawData: null);
+            return new DeliveryRuleProperties(
+                order,
+                conditions,
+                actions?.ToList(),
+                extraMappingInfo,
+                pet,
+                foo,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DeliveryRuleCondition"/>. </summary>
@@ -104,7 +123,13 @@ namespace MgmtDiscriminator.Models
         /// <returns> A new <see cref="MgmtDiscriminator.ArtifactData"/> instance for mocking. </returns>
         public static ArtifactData ArtifactData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string kind = "Unknown")
         {
-            return new UnknownArtifact(id, name, resourceType, systemData, kind, serializedAdditionalRawData: null);
+            return new UnknownArtifact(
+                id,
+                name,
+                resourceType,
+                systemData,
+                kind,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Cat"/>. </summary>
@@ -247,7 +272,16 @@ namespace MgmtDiscriminator.Models
         {
             parameters ??= new Dictionary<string, BinaryData>();
 
-            return new TemplateArtifact(id, name, resourceType, systemData, ArtifactKind.Template, serializedAdditionalRawData: null, template, resourceGroup, parameters);
+            return new TemplateArtifact(
+                id,
+                name,
+                resourceType,
+                systemData,
+                ArtifactKind.Template,
+                serializedAdditionalRawData: null,
+                template,
+                resourceGroup,
+                parameters);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.RoleAssignmentArtifact"/>. </summary>
@@ -261,7 +295,16 @@ namespace MgmtDiscriminator.Models
         /// <returns> A new <see cref="Models.RoleAssignmentArtifact"/> instance for mocking. </returns>
         public static RoleAssignmentArtifact RoleAssignmentArtifact(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string roleDefinitionId = null, BinaryData principalIds = null, string resourceGroup = null)
         {
-            return new RoleAssignmentArtifact(id, name, resourceType, systemData, ArtifactKind.RoleAssignment, serializedAdditionalRawData: null, roleDefinitionId, principalIds, resourceGroup);
+            return new RoleAssignmentArtifact(
+                id,
+                name,
+                resourceType,
+                systemData,
+                ArtifactKind.RoleAssignment,
+                serializedAdditionalRawData: null,
+                roleDefinitionId,
+                principalIds,
+                resourceGroup);
         }
     }
 }

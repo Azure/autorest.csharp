@@ -54,17 +54,17 @@ namespace MgmtMockAndSample
             {
                 return null;
             }
-            Optional<AzureLocation> location = default;
-            Optional<IReadOnlyDictionary<string, string>> tags = default;
+            AzureLocation? location = default;
+            IReadOnlyDictionary<string, string> tags = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
-            Optional<string> operatingSystem = default;
-            Optional<string> computeRole = default;
-            Optional<string> handlerSchema = default;
-            Optional<bool> vmScaleSetEnabled = default;
-            Optional<bool> supportsMultipleExtensions = default;
+            SystemData systemData = default;
+            string operatingSystem = default;
+            string computeRole = default;
+            string handlerSchema = default;
+            bool? vmScaleSetEnabled = default;
+            bool? supportsMultipleExtensions = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("location"u8))
@@ -160,7 +160,18 @@ namespace MgmtMockAndSample
                     continue;
                 }
             }
-            return new VirtualMachineExtensionImageData(id, name, type, systemData.Value, operatingSystem.Value, computeRole.Value, handlerSchema.Value, Optional.ToNullable(vmScaleSetEnabled), Optional.ToNullable(supportsMultipleExtensions), Optional.ToNullable(location), Optional.ToDictionary(tags));
+            return new VirtualMachineExtensionImageData(
+                id,
+                name,
+                type,
+                systemData,
+                operatingSystem,
+                computeRole,
+                handlerSchema,
+                vmScaleSetEnabled,
+                supportsMultipleExtensions,
+                location,
+                tags ?? new ChangeTrackingDictionary<string, string>());
         }
     }
 }

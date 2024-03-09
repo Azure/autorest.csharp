@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
-using Azure.ResourceManager;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -86,10 +86,10 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<int> maxBatchInstancePercent = default;
-            Optional<int> maxUnhealthyInstancePercent = default;
-            Optional<int> maxUnhealthyUpgradedInstancePercent = default;
-            Optional<string> pauseTimeBetweenBatches = default;
+            int? maxBatchInstancePercent = default;
+            int? maxUnhealthyInstancePercent = default;
+            int? maxUnhealthyUpgradedInstancePercent = default;
+            string pauseTimeBetweenBatches = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -132,81 +132,43 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new RollingUpgradePolicy(Optional.ToNullable(maxBatchInstancePercent), Optional.ToNullable(maxUnhealthyInstancePercent), Optional.ToNullable(maxUnhealthyUpgradedInstancePercent), pauseTimeBetweenBatches.Value, serializedAdditionalRawData);
+            return new RollingUpgradePolicy(maxBatchInstancePercent, maxUnhealthyInstancePercent, maxUnhealthyUpgradedInstancePercent, pauseTimeBetweenBatches, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
-            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
-            IDictionary<string, string> propertyOverrides = null;
-            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
-            bool hasPropertyOverride = false;
-            string propertyOverride = null;
-
             builder.AppendLine("{");
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(MaxBatchInstancePercent), out propertyOverride);
-            if (Optional.IsDefined(MaxBatchInstancePercent) || hasPropertyOverride)
+            if (Optional.IsDefined(MaxBatchInstancePercent))
             {
-                builder.Append("  maxBatchInstancePercent: ");
-                if (hasPropertyOverride)
-                {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
-                    builder.AppendLine($"{MaxBatchInstancePercent.Value}");
-                }
+                builder.Append("  maxBatchInstancePercent:");
+                builder.AppendLine($" {MaxBatchInstancePercent.Value}");
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(MaxUnhealthyInstancePercent), out propertyOverride);
-            if (Optional.IsDefined(MaxUnhealthyInstancePercent) || hasPropertyOverride)
+            if (Optional.IsDefined(MaxUnhealthyInstancePercent))
             {
-                builder.Append("  maxUnhealthyInstancePercent: ");
-                if (hasPropertyOverride)
-                {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
-                    builder.AppendLine($"{MaxUnhealthyInstancePercent.Value}");
-                }
+                builder.Append("  maxUnhealthyInstancePercent:");
+                builder.AppendLine($" {MaxUnhealthyInstancePercent.Value}");
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(MaxUnhealthyUpgradedInstancePercent), out propertyOverride);
-            if (Optional.IsDefined(MaxUnhealthyUpgradedInstancePercent) || hasPropertyOverride)
+            if (Optional.IsDefined(MaxUnhealthyUpgradedInstancePercent))
             {
-                builder.Append("  maxUnhealthyUpgradedInstancePercent: ");
-                if (hasPropertyOverride)
-                {
-                    builder.AppendLine($"{propertyOverride}");
-                }
-                else
-                {
-                    builder.AppendLine($"{MaxUnhealthyUpgradedInstancePercent.Value}");
-                }
+                builder.Append("  maxUnhealthyUpgradedInstancePercent:");
+                builder.AppendLine($" {MaxUnhealthyUpgradedInstancePercent.Value}");
             }
 
-            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(PauseTimeBetweenBatches), out propertyOverride);
-            if (Optional.IsDefined(PauseTimeBetweenBatches) || hasPropertyOverride)
+            if (Optional.IsDefined(PauseTimeBetweenBatches))
             {
-                builder.Append("  pauseTimeBetweenBatches: ");
-                if (hasPropertyOverride)
+                builder.Append("  pauseTimeBetweenBatches:");
+                if (PauseTimeBetweenBatches.Contains(Environment.NewLine))
                 {
-                    builder.AppendLine($"{propertyOverride}");
+                    builder.AppendLine(" '''");
+                    builder.AppendLine($"{PauseTimeBetweenBatches}'''");
                 }
                 else
                 {
-                    if (PauseTimeBetweenBatches.Contains(Environment.NewLine))
-                    {
-                        builder.AppendLine("'''");
-                        builder.AppendLine($"{PauseTimeBetweenBatches}'''");
-                    }
-                    else
-                    {
-                        builder.AppendLine($"'{PauseTimeBetweenBatches}'");
-                    }
+                    builder.AppendLine($" '{PauseTimeBetweenBatches}'");
                 }
             }
 
@@ -214,15 +176,12 @@ namespace Azure.ResourceManager.Sample.Models
             return BinaryData.FromString(builder.ToString());
         }
 
-        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine, string formattedPropertyName)
+        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine)
         {
             string indent = new string(' ', spaces);
-            int emptyObjectLength = 2 + spaces + Environment.NewLine.Length + Environment.NewLine.Length;
-            int length = stringBuilder.Length;
-            bool inMultilineString = false;
-
             BinaryData data = ModelReaderWriter.Write(childObject, options);
             string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            bool inMultilineString = false;
             for (int i = 0; i < lines.Length; i++)
             {
                 string line = lines[i];
@@ -243,16 +202,12 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($"{line}");
+                    stringBuilder.AppendLine($" {line}");
                 }
                 else
                 {
                     stringBuilder.AppendLine($"{indent}{line}");
                 }
-            }
-            if (stringBuilder.Length == length + emptyObjectLength)
-            {
-                stringBuilder.Length = stringBuilder.Length - emptyObjectLength - formattedPropertyName.Length;
             }
         }
 

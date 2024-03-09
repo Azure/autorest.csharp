@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtExpandResourceTypes;
 
 namespace MgmtExpandResourceTypes.Models
 {
@@ -34,8 +35,8 @@ namespace MgmtExpandResourceTypes.Models
             {
                 return null;
             }
-            Optional<int> preference = default;
-            Optional<string> exchange = default;
+            int? preference = default;
+            string exchange = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("preference"u8))
@@ -53,7 +54,7 @@ namespace MgmtExpandResourceTypes.Models
                     continue;
                 }
             }
-            return new MxRecord(Optional.ToNullable(preference), exchange.Value);
+            return new MxRecord(preference, exchange);
         }
     }
 }

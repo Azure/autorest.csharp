@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using body_complex;
 
 namespace body_complex.Models
 {
@@ -94,10 +95,10 @@ namespace body_complex.Models
             {
                 return null;
             }
-            Optional<DotSalmon> sampleSalmon = default;
-            Optional<IReadOnlyList<DotSalmon>> salmons = default;
-            Optional<DotFish> sampleFish = default;
-            Optional<IReadOnlyList<DotFish>> fishes = default;
+            DotSalmon sampleSalmon = default;
+            IReadOnlyList<DotSalmon> salmons = default;
+            DotFish sampleFish = default;
+            IReadOnlyList<DotFish> fishes = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -154,7 +155,7 @@ namespace body_complex.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DotFishMarket(sampleSalmon.Value, Optional.ToList(salmons), sampleFish.Value, Optional.ToList(fishes), serializedAdditionalRawData);
+            return new DotFishMarket(sampleSalmon, salmons ?? new ChangeTrackingList<DotSalmon>(), sampleFish, fishes ?? new ChangeTrackingList<DotFish>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<DotFishMarket>.Write(ModelReaderWriterOptions options)

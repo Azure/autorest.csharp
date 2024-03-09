@@ -83,18 +83,8 @@ namespace MgmtMultipleParentResource
         /// <exception cref="ArgumentNullException"> <paramref name="theParentName"/> or <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<TheParentResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string theParentName, TheParentData data, CancellationToken cancellationToken = default)
         {
-            if (theParentName == null)
-            {
-                throw new ArgumentNullException(nameof(theParentName));
-            }
-            if (theParentName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(theParentName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(theParentName, nameof(theParentName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _theParentClientDiagnostics.CreateScope("TheParentCollection.CreateOrUpdate");
             scope.Start();
@@ -142,18 +132,8 @@ namespace MgmtMultipleParentResource
         /// <exception cref="ArgumentNullException"> <paramref name="theParentName"/> or <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<TheParentResource> CreateOrUpdate(WaitUntil waitUntil, string theParentName, TheParentData data, CancellationToken cancellationToken = default)
         {
-            if (theParentName == null)
-            {
-                throw new ArgumentNullException(nameof(theParentName));
-            }
-            if (theParentName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(theParentName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(theParentName, nameof(theParentName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _theParentClientDiagnostics.CreateScope("TheParentCollection.CreateOrUpdate");
             scope.Start();
@@ -200,14 +180,7 @@ namespace MgmtMultipleParentResource
         /// <exception cref="ArgumentNullException"> <paramref name="theParentName"/> is null. </exception>
         public virtual async Task<Response<TheParentResource>> GetAsync(string theParentName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (theParentName == null)
-            {
-                throw new ArgumentNullException(nameof(theParentName));
-            }
-            if (theParentName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(theParentName));
-            }
+            Argument.AssertNotNullOrEmpty(theParentName, nameof(theParentName));
 
             using var scope = _theParentClientDiagnostics.CreateScope("TheParentCollection.Get");
             scope.Start();
@@ -253,14 +226,7 @@ namespace MgmtMultipleParentResource
         /// <exception cref="ArgumentNullException"> <paramref name="theParentName"/> is null. </exception>
         public virtual Response<TheParentResource> Get(string theParentName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (theParentName == null)
-            {
-                throw new ArgumentNullException(nameof(theParentName));
-            }
-            if (theParentName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(theParentName));
-            }
+            Argument.AssertNotNullOrEmpty(theParentName, nameof(theParentName));
 
             using var scope = _theParentClientDiagnostics.CreateScope("TheParentCollection.Get");
             scope.Start();
@@ -368,14 +334,7 @@ namespace MgmtMultipleParentResource
         /// <exception cref="ArgumentNullException"> <paramref name="theParentName"/> is null. </exception>
         public virtual async Task<Response<bool>> ExistsAsync(string theParentName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (theParentName == null)
-            {
-                throw new ArgumentNullException(nameof(theParentName));
-            }
-            if (theParentName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(theParentName));
-            }
+            Argument.AssertNotNullOrEmpty(theParentName, nameof(theParentName));
 
             using var scope = _theParentClientDiagnostics.CreateScope("TheParentCollection.Exists");
             scope.Start();
@@ -419,14 +378,7 @@ namespace MgmtMultipleParentResource
         /// <exception cref="ArgumentNullException"> <paramref name="theParentName"/> is null. </exception>
         public virtual Response<bool> Exists(string theParentName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (theParentName == null)
-            {
-                throw new ArgumentNullException(nameof(theParentName));
-            }
-            if (theParentName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(theParentName));
-            }
+            Argument.AssertNotNullOrEmpty(theParentName, nameof(theParentName));
 
             using var scope = _theParentClientDiagnostics.CreateScope("TheParentCollection.Exists");
             scope.Start();
@@ -470,14 +422,7 @@ namespace MgmtMultipleParentResource
         /// <exception cref="ArgumentNullException"> <paramref name="theParentName"/> is null. </exception>
         public virtual async Task<NullableResponse<TheParentResource>> GetIfExistsAsync(string theParentName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (theParentName == null)
-            {
-                throw new ArgumentNullException(nameof(theParentName));
-            }
-            if (theParentName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(theParentName));
-            }
+            Argument.AssertNotNullOrEmpty(theParentName, nameof(theParentName));
 
             using var scope = _theParentClientDiagnostics.CreateScope("TheParentCollection.GetIfExists");
             scope.Start();
@@ -523,14 +468,7 @@ namespace MgmtMultipleParentResource
         /// <exception cref="ArgumentNullException"> <paramref name="theParentName"/> is null. </exception>
         public virtual NullableResponse<TheParentResource> GetIfExists(string theParentName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (theParentName == null)
-            {
-                throw new ArgumentNullException(nameof(theParentName));
-            }
-            if (theParentName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(theParentName));
-            }
+            Argument.AssertNotNullOrEmpty(theParentName, nameof(theParentName));
 
             using var scope = _theParentClientDiagnostics.CreateScope("TheParentCollection.GetIfExists");
             scope.Start();

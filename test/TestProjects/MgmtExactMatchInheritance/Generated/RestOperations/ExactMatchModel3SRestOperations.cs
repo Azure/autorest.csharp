@@ -63,22 +63,8 @@ namespace MgmtExactMatchInheritance
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<ExactMatchModel3ListResult>> ListAsync(string subscriptionId, string resourceGroupName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (resourceGroupName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
 
             using var message = CreateListRequest(subscriptionId, resourceGroupName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -103,22 +89,8 @@ namespace MgmtExactMatchInheritance
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<ExactMatchModel3ListResult> List(string subscriptionId, string resourceGroupName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (resourceGroupName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
 
             using var message = CreateListRequest(subscriptionId, resourceGroupName);
             _pipeline.Send(message, cancellationToken);
@@ -169,34 +141,10 @@ namespace MgmtExactMatchInheritance
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="exactMatchModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<ExactMatchModel3>> PutAsync(string subscriptionId, string resourceGroupName, string exactMatchModel3SName, ExactMatchModel3 exactMatchModel3, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (resourceGroupName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
-            }
-            if (exactMatchModel3SName == null)
-            {
-                throw new ArgumentNullException(nameof(exactMatchModel3SName));
-            }
-            if (exactMatchModel3SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(exactMatchModel3SName));
-            }
-            if (exactMatchModel3 == null)
-            {
-                throw new ArgumentNullException(nameof(exactMatchModel3));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(exactMatchModel3SName, nameof(exactMatchModel3SName));
+            Argument.AssertNotNull(exactMatchModel3, nameof(exactMatchModel3));
 
             using var message = CreatePutRequest(subscriptionId, resourceGroupName, exactMatchModel3SName, exactMatchModel3);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -223,34 +171,10 @@ namespace MgmtExactMatchInheritance
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="exactMatchModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<ExactMatchModel3> Put(string subscriptionId, string resourceGroupName, string exactMatchModel3SName, ExactMatchModel3 exactMatchModel3, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (resourceGroupName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
-            }
-            if (exactMatchModel3SName == null)
-            {
-                throw new ArgumentNullException(nameof(exactMatchModel3SName));
-            }
-            if (exactMatchModel3SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(exactMatchModel3SName));
-            }
-            if (exactMatchModel3 == null)
-            {
-                throw new ArgumentNullException(nameof(exactMatchModel3));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(exactMatchModel3SName, nameof(exactMatchModel3SName));
+            Argument.AssertNotNull(exactMatchModel3, nameof(exactMatchModel3));
 
             using var message = CreatePutRequest(subscriptionId, resourceGroupName, exactMatchModel3SName, exactMatchModel3);
             _pipeline.Send(message, cancellationToken);
@@ -296,30 +220,9 @@ namespace MgmtExactMatchInheritance
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="exactMatchModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<ExactMatchModel3>> GetAsync(string subscriptionId, string resourceGroupName, string exactMatchModel3SName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (resourceGroupName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
-            }
-            if (exactMatchModel3SName == null)
-            {
-                throw new ArgumentNullException(nameof(exactMatchModel3SName));
-            }
-            if (exactMatchModel3SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(exactMatchModel3SName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(exactMatchModel3SName, nameof(exactMatchModel3SName));
 
             using var message = CreateGetRequest(subscriptionId, resourceGroupName, exactMatchModel3SName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -345,30 +248,9 @@ namespace MgmtExactMatchInheritance
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="exactMatchModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<ExactMatchModel3> Get(string subscriptionId, string resourceGroupName, string exactMatchModel3SName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (resourceGroupName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
-            }
-            if (exactMatchModel3SName == null)
-            {
-                throw new ArgumentNullException(nameof(exactMatchModel3SName));
-            }
-            if (exactMatchModel3SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(exactMatchModel3SName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(exactMatchModel3SName, nameof(exactMatchModel3SName));
 
             using var message = CreateGetRequest(subscriptionId, resourceGroupName, exactMatchModel3SName);
             _pipeline.Send(message, cancellationToken);

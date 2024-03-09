@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using paging;
 
 namespace paging.Models
 {
@@ -79,8 +80,8 @@ namespace paging.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<Product>> values = default;
-            Optional<string> nextLink = default;
+            IReadOnlyList<Product> values = default;
+            string nextLink = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -110,7 +111,7 @@ namespace paging.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ProductResultValueWithXMSClientName(Optional.ToList(values), nextLink.Value, serializedAdditionalRawData);
+            return new ProductResultValueWithXMSClientName(values ?? new ChangeTrackingList<Product>(), nextLink, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ProductResultValueWithXMSClientName>.Write(ModelReaderWriterOptions options)

@@ -44,14 +44,14 @@ namespace Azure.ResourceManager.Storage
             {
                 return null;
             }
-            Optional<StorageSku> sku = default;
+            StorageSku sku = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
-            Optional<CorsRules> cors = default;
-            Optional<DeleteRetentionPolicy> shareDeleteRetentionPolicy = default;
-            Optional<ProtocolSettings> protocolSettings = default;
+            SystemData systemData = default;
+            CorsRules cors = default;
+            DeleteRetentionPolicy shareDeleteRetentionPolicy = default;
+            ProtocolSettings protocolSettings = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sku"u8))
@@ -127,7 +127,15 @@ namespace Azure.ResourceManager.Storage
                     continue;
                 }
             }
-            return new FileServiceData(id, name, type, systemData.Value, sku.Value, cors.Value, shareDeleteRetentionPolicy.Value, protocolSettings.Value);
+            return new FileServiceData(
+                id,
+                name,
+                type,
+                systemData,
+                sku,
+                cors,
+                shareDeleteRetentionPolicy,
+                protocolSettings);
         }
     }
 }

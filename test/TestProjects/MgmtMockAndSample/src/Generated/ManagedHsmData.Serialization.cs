@@ -50,14 +50,14 @@ namespace MgmtMockAndSample
             {
                 return null;
             }
-            Optional<ManagedHsmProperties> properties = default;
-            Optional<ManagedHsmSku> sku = default;
-            Optional<IDictionary<string, string>> tags = default;
+            ManagedHsmProperties properties = default;
+            ManagedHsmSku sku = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
+            SystemData systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("properties"u8))
@@ -122,7 +122,15 @@ namespace MgmtMockAndSample
                     continue;
                 }
             }
-            return new ManagedHsmData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, properties.Value, sku.Value);
+            return new ManagedHsmData(
+                id,
+                name,
+                type,
+                systemData,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                properties,
+                sku);
         }
     }
 }

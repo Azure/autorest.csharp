@@ -7,8 +7,9 @@
 
 using System;
 using System.Collections.Generic;
+using lrotsp;
 
-namespace lro.Models
+namespace lrotsp.Models
 {
     /// <summary> The inference results for the Radiology Insights request. </summary>
     public partial class RadiologyInsightsInferenceResult
@@ -50,10 +51,7 @@ namespace lro.Models
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> is null. </exception>
         internal RadiologyInsightsInferenceResult(string id)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
+            Argument.AssertNotNull(id, nameof(id));
 
             Id = id;
         }

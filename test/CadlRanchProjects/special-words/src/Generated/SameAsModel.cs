@@ -50,10 +50,7 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="sameAsModelProperty"/> is null. </exception>
         public SameAsModel(string sameAsModelProperty)
         {
-            if (sameAsModelProperty == null)
-            {
-                throw new ArgumentNullException(nameof(sameAsModelProperty));
-            }
+            Argument.AssertNotNull(sameAsModelProperty, nameof(sameAsModelProperty));
 
             SameAsModelProperty = sameAsModelProperty;
         }

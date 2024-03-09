@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using model_flattening;
 
 namespace model_flattening.Models
 {
@@ -90,9 +91,9 @@ namespace model_flattening.Models
             {
                 return null;
             }
-            Optional<FlattenedProduct> productresource = default;
-            Optional<IList<FlattenedProduct>> arrayofresources = default;
-            Optional<IDictionary<string, FlattenedProduct>> dictionaryofresources = default;
+            FlattenedProduct productresource = default;
+            IList<FlattenedProduct> arrayofresources = default;
+            IDictionary<string, FlattenedProduct> dictionaryofresources = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -140,7 +141,7 @@ namespace model_flattening.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ResourceCollection(productresource.Value, Optional.ToList(arrayofresources), Optional.ToDictionary(dictionaryofresources), serializedAdditionalRawData);
+            return new ResourceCollection(productresource, arrayofresources ?? new ChangeTrackingList<FlattenedProduct>(), dictionaryofresources ?? new ChangeTrackingDictionary<string, FlattenedProduct>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ResourceCollection>.Write(ModelReaderWriterOptions options)

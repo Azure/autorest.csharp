@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using xms_error_responses;
 
 namespace xms_error_responses.Models
 {
@@ -86,11 +87,11 @@ namespace xms_error_responses.Models
             {
                 return null;
             }
-            Optional<string> hungryOrThirsty = default;
-            Optional<string> reason = default;
+            string hungryOrThirsty = default;
+            string reason = default;
             string errorType = default;
-            Optional<string> errorMessage = default;
-            Optional<string> actionResponse = default;
+            string errorMessage = default;
+            string actionResponse = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -126,7 +127,13 @@ namespace xms_error_responses.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new PetHungryOrThirstyError(actionResponse.Value, serializedAdditionalRawData, errorType, errorMessage.Value, reason.Value, hungryOrThirsty.Value);
+            return new PetHungryOrThirstyError(
+                actionResponse,
+                serializedAdditionalRawData,
+                errorType,
+                errorMessage,
+                reason,
+                hungryOrThirsty);
         }
 
         BinaryData IPersistableModel<PetHungryOrThirstyError>.Write(ModelReaderWriterOptions options)

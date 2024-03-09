@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using body_complex;
 
 namespace body_complex.Models
 {
@@ -100,14 +101,14 @@ namespace body_complex.Models
             {
                 return null;
             }
-            Optional<int> jawsize = default;
-            Optional<GoblinSharkColor> color = default;
-            Optional<int> age = default;
+            int? jawsize = default;
+            GoblinSharkColor? color = default;
+            int? age = default;
             DateTimeOffset birthday = default;
             string fishtype = default;
-            Optional<string> species = default;
+            string species = default;
             float length = default;
-            Optional<IList<Fish>> siblings = default;
+            IList<Fish> siblings = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -179,7 +180,16 @@ namespace body_complex.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Goblinshark(fishtype, species.Value, length, Optional.ToList(siblings), serializedAdditionalRawData, Optional.ToNullable(age), birthday, Optional.ToNullable(jawsize), Optional.ToNullable(color));
+            return new Goblinshark(
+                fishtype,
+                species,
+                length,
+                siblings ?? new ChangeTrackingList<Fish>(),
+                serializedAdditionalRawData,
+                age,
+                birthday,
+                jawsize,
+                color);
         }
 
         BinaryData IPersistableModel<Goblinshark>.Write(ModelReaderWriterOptions options)

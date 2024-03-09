@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using xms_error_responses;
 
 namespace xms_error_responses.Models
 {
@@ -81,10 +82,10 @@ namespace xms_error_responses.Models
             {
                 return null;
             }
-            Optional<string> whatSubAddress = default;
-            Optional<string> reason = default;
+            string whatSubAddress = default;
+            string reason = default;
             string whatNotFound = default;
-            Optional<string> someBaseProp = default;
+            string someBaseProp = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -115,7 +116,7 @@ namespace xms_error_responses.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new LinkNotFound(someBaseProp.Value, serializedAdditionalRawData, reason.Value, whatNotFound, whatSubAddress.Value);
+            return new LinkNotFound(someBaseProp, serializedAdditionalRawData, reason, whatNotFound, whatSubAddress);
         }
 
         BinaryData IPersistableModel<LinkNotFound>.Write(ModelReaderWriterOptions options)

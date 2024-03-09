@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
@@ -21,7 +20,7 @@ namespace CognitiveServices.TextAnalytics.Models
             }
             IReadOnlyList<DocumentLinkedEntities> documents = default;
             IReadOnlyList<DocumentError> errors = default;
-            Optional<RequestStatistics> statistics = default;
+            RequestStatistics statistics = default;
             string modelVersion = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -60,7 +59,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            return new EntityLinkingResult(documents, errors, statistics.Value, modelVersion);
+            return new EntityLinkingResult(documents, errors, statistics, modelVersion);
         }
     }
 }

@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using MgmtAcronymMapping;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -35,7 +36,7 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<IList<WinRMListener>> listeners = default;
+            IList<WinRMListener> listeners = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("listeners"u8))
@@ -53,7 +54,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new WinRMConfiguration(Optional.ToList(listeners));
+            return new WinRMConfiguration(listeners ?? new ChangeTrackingList<WinRMListener>());
         }
     }
 }

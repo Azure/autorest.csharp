@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using MgmtConstants;
 
 namespace MgmtConstants.Models
 {
@@ -44,10 +45,10 @@ namespace MgmtConstants.Models
             {
                 return null;
             }
-            Optional<StringConstant> optionalStringConstant = default;
-            Optional<IntConstant> optionalIntConstant = default;
-            Optional<bool> optionalBooleanConstant = default;
-            Optional<FloatConstant> optionalFloatConstant = default;
+            StringConstant? optionalStringConstant = default;
+            IntConstant? optionalIntConstant = default;
+            bool? optionalBooleanConstant = default;
+            FloatConstant? optionalFloatConstant = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("optionalStringConstant"u8))
@@ -87,7 +88,7 @@ namespace MgmtConstants.Models
                     continue;
                 }
             }
-            return new ModelWithOptionalConstant(Optional.ToNullable(optionalStringConstant), Optional.ToNullable(optionalIntConstant), Optional.ToNullable(optionalBooleanConstant), Optional.ToNullable(optionalFloatConstant));
+            return new ModelWithOptionalConstant(optionalStringConstant, optionalIntConstant, optionalBooleanConstant, optionalFloatConstant);
         }
     }
 }

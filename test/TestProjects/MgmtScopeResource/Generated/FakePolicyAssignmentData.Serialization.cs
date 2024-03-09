@@ -104,21 +104,21 @@ namespace MgmtScopeResource
             {
                 return null;
             }
-            Optional<string> location = default;
-            Optional<ManagedServiceIdentity> identity = default;
+            string location = default;
+            ManagedServiceIdentity identity = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
-            Optional<string> displayName = default;
-            Optional<string> policyDefinitionId = default;
-            Optional<string> scope = default;
-            Optional<IList<string>> notScopes = default;
-            Optional<IDictionary<string, ParameterValuesValue>> parameters = default;
-            Optional<string> description = default;
-            Optional<BinaryData> metadata = default;
-            Optional<EnforcementMode> enforcementMode = default;
-            Optional<IList<NonComplianceMessage>> nonComplianceMessages = default;
+            SystemData systemData = default;
+            string displayName = default;
+            string policyDefinitionId = default;
+            string scope = default;
+            IList<string> notScopes = default;
+            IDictionary<string, ParameterValuesValue> parameters = default;
+            string description = default;
+            BinaryData metadata = default;
+            EnforcementMode? enforcementMode = default;
+            IList<NonComplianceMessage> nonComplianceMessages = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("location"u8))
@@ -252,7 +252,22 @@ namespace MgmtScopeResource
                     continue;
                 }
             }
-            return new FakePolicyAssignmentData(id, name, type, systemData.Value, location.Value, identity, displayName.Value, policyDefinitionId.Value, scope.Value, Optional.ToList(notScopes), Optional.ToDictionary(parameters), description.Value, metadata.Value, Optional.ToNullable(enforcementMode), Optional.ToList(nonComplianceMessages));
+            return new FakePolicyAssignmentData(
+                id,
+                name,
+                type,
+                systemData,
+                location,
+                identity,
+                displayName,
+                policyDefinitionId,
+                scope,
+                notScopes ?? new ChangeTrackingList<string>(),
+                parameters ?? new ChangeTrackingDictionary<string, ParameterValuesValue>(),
+                description,
+                metadata,
+                enforcementMode,
+                nonComplianceMessages ?? new ChangeTrackingList<NonComplianceMessage>());
         }
     }
 }

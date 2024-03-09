@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using _Type.Model.Inheritance.SingleDiscriminator;
 
 namespace _Type.Model.Inheritance.SingleDiscriminator.Models
 {
@@ -95,9 +96,9 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             {
                 return null;
             }
-            Optional<IList<Bird>> friends = default;
-            Optional<IDictionary<string, Bird>> hate = default;
-            Optional<Bird> partner = default;
+            IList<Bird> friends = default;
+            IDictionary<string, Bird> hate = default;
+            Bird partner = default;
             string kind = default;
             int wingspan = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
@@ -157,7 +158,13 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Eagle(kind, wingspan, serializedAdditionalRawData, Optional.ToList(friends), Optional.ToDictionary(hate), partner.Value);
+            return new Eagle(
+                kind,
+                wingspan,
+                serializedAdditionalRawData,
+                friends ?? new ChangeTrackingList<Bird>(),
+                hate ?? new ChangeTrackingDictionary<string, Bird>(),
+                partner);
         }
 
         BinaryData IPersistableModel<Eagle>.Write(ModelReaderWriterOptions options)

@@ -48,10 +48,7 @@ namespace SpreadTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public SpreadTypeSpecClient(Uri endpoint, SpreadTypeSpecClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new SpreadTypeSpecClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -66,10 +63,7 @@ namespace SpreadTypeSpec
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadModelAsync(Thing,CancellationToken)']/*" />
         public virtual async Task<Response> SpreadModelAsync(Thing thing, CancellationToken cancellationToken = default)
         {
-            if (thing == null)
-            {
-                throw new ArgumentNullException(nameof(thing));
-            }
+            Argument.AssertNotNull(thing, nameof(thing));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = thing.ToRequestContent();
@@ -84,10 +78,7 @@ namespace SpreadTypeSpec
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadModel(Thing,CancellationToken)']/*" />
         public virtual Response SpreadModel(Thing thing, CancellationToken cancellationToken = default)
         {
-            if (thing == null)
-            {
-                throw new ArgumentNullException(nameof(thing));
-            }
+            Argument.AssertNotNull(thing, nameof(thing));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = thing.ToRequestContent();
@@ -118,10 +109,7 @@ namespace SpreadTypeSpec
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadModelAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> SpreadModelAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("SpreadTypeSpecClient.SpreadModel");
             scope.Start();
@@ -160,10 +148,7 @@ namespace SpreadTypeSpec
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadModel(RequestContent,RequestContext)']/*" />
         public virtual Response SpreadModel(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("SpreadTypeSpecClient.SpreadModel");
             scope.Start();
@@ -187,10 +172,7 @@ namespace SpreadTypeSpec
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasAsync(string,int,CancellationToken)']/*" />
         public virtual async Task<Response> SpreadAliasAsync(string name, int age, CancellationToken cancellationToken = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Argument.AssertNotNull(name, nameof(name));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             SpreadAliasRequest spreadAliasRequest = new SpreadAliasRequest(name, age);
@@ -206,10 +188,7 @@ namespace SpreadTypeSpec
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAlias(string,int,CancellationToken)']/*" />
         public virtual Response SpreadAlias(string name, int age, CancellationToken cancellationToken = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Argument.AssertNotNull(name, nameof(name));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             SpreadAliasRequest spreadAliasRequest = new SpreadAliasRequest(name, age);
@@ -240,10 +219,7 @@ namespace SpreadTypeSpec
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> SpreadAliasAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("SpreadTypeSpecClient.SpreadAlias");
             scope.Start();
@@ -282,10 +258,7 @@ namespace SpreadTypeSpec
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAlias(RequestContent,RequestContext)']/*" />
         public virtual Response SpreadAlias(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("SpreadTypeSpecClient.SpreadAlias");
             scope.Start();
@@ -312,18 +285,8 @@ namespace SpreadTypeSpec
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadMultiTargetAliasAsync(string,int,string,int,CancellationToken)']/*" />
         public virtual async Task<Response> SpreadMultiTargetAliasAsync(string id, int top, string name, int age, CancellationToken cancellationToken = default)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-            if (id.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(id));
-            }
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(name, nameof(name));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             SpreadMultiTargetAliasRequest spreadMultiTargetAliasRequest = new SpreadMultiTargetAliasRequest(name, age);
@@ -342,18 +305,8 @@ namespace SpreadTypeSpec
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadMultiTargetAlias(string,int,string,int,CancellationToken)']/*" />
         public virtual Response SpreadMultiTargetAlias(string id, int top, string name, int age, CancellationToken cancellationToken = default)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-            if (id.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(id));
-            }
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(name, nameof(name));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             SpreadMultiTargetAliasRequest spreadMultiTargetAliasRequest = new SpreadMultiTargetAliasRequest(name, age);
@@ -387,18 +340,8 @@ namespace SpreadTypeSpec
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadMultiTargetAliasAsync(string,int,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> SpreadMultiTargetAliasAsync(string id, int top, RequestContent content, RequestContext context = null)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-            if (id.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(id));
-            }
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("SpreadTypeSpecClient.SpreadMultiTargetAlias");
             scope.Start();
@@ -440,18 +383,8 @@ namespace SpreadTypeSpec
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadMultiTargetAlias(string,int,RequestContent,RequestContext)']/*" />
         public virtual Response SpreadMultiTargetAlias(string id, int top, RequestContent content, RequestContext context = null)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-            if (id.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(id));
-            }
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("SpreadTypeSpecClient.SpreadMultiTargetAlias");
             scope.Start();
@@ -477,18 +410,8 @@ namespace SpreadTypeSpec
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithModelAsync(string,int,Thing,CancellationToken)']/*" />
         public virtual async Task<Response> SpreadAliasWithModelAsync(string id, int top, Thing thing, CancellationToken cancellationToken = default)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-            if (id.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(id));
-            }
-            if (thing == null)
-            {
-                throw new ArgumentNullException(nameof(thing));
-            }
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(thing, nameof(thing));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = thing.ToRequestContent();
@@ -506,18 +429,8 @@ namespace SpreadTypeSpec
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithModel(string,int,Thing,CancellationToken)']/*" />
         public virtual Response SpreadAliasWithModel(string id, int top, Thing thing, CancellationToken cancellationToken = default)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-            if (id.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(id));
-            }
-            if (thing == null)
-            {
-                throw new ArgumentNullException(nameof(thing));
-            }
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(thing, nameof(thing));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = thing.ToRequestContent();
@@ -551,18 +464,8 @@ namespace SpreadTypeSpec
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithModelAsync(string,int,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> SpreadAliasWithModelAsync(string id, int top, RequestContent content, RequestContext context = null)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-            if (id.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(id));
-            }
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("SpreadTypeSpecClient.SpreadAliasWithModel");
             scope.Start();
@@ -604,18 +507,8 @@ namespace SpreadTypeSpec
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithModel(string,int,RequestContent,RequestContext)']/*" />
         public virtual Response SpreadAliasWithModel(string id, int top, RequestContent content, RequestContext context = null)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-            if (id.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(id));
-            }
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("SpreadTypeSpecClient.SpreadAliasWithModel");
             scope.Start();
@@ -642,18 +535,8 @@ namespace SpreadTypeSpec
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithSpreadAliasAsync(string,int,string,int,CancellationToken)']/*" />
         public virtual async Task<Response> SpreadAliasWithSpreadAliasAsync(string id, int top, string name, int age, CancellationToken cancellationToken = default)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-            if (id.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(id));
-            }
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(name, nameof(name));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             SpreadAliasWithSpreadAliasRequest spreadAliasWithSpreadAliasRequest = new SpreadAliasWithSpreadAliasRequest(name, age);
@@ -672,18 +555,8 @@ namespace SpreadTypeSpec
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithSpreadAlias(string,int,string,int,CancellationToken)']/*" />
         public virtual Response SpreadAliasWithSpreadAlias(string id, int top, string name, int age, CancellationToken cancellationToken = default)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-            if (id.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(id));
-            }
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(name, nameof(name));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             SpreadAliasWithSpreadAliasRequest spreadAliasWithSpreadAliasRequest = new SpreadAliasWithSpreadAliasRequest(name, age);
@@ -717,18 +590,8 @@ namespace SpreadTypeSpec
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithSpreadAliasAsync(string,int,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> SpreadAliasWithSpreadAliasAsync(string id, int top, RequestContent content, RequestContext context = null)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-            if (id.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(id));
-            }
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("SpreadTypeSpecClient.SpreadAliasWithSpreadAlias");
             scope.Start();
@@ -770,18 +633,8 @@ namespace SpreadTypeSpec
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithSpreadAlias(string,int,RequestContent,RequestContext)']/*" />
         public virtual Response SpreadAliasWithSpreadAlias(string id, int top, RequestContent content, RequestContext context = null)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-            if (id.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(id));
-            }
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("SpreadTypeSpecClient.SpreadAliasWithSpreadAlias");
             scope.Start();
@@ -811,22 +664,9 @@ namespace SpreadTypeSpec
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithOptionalPropsAsync(string,int,string,IEnumerable{int},string,int?,IEnumerable{string},CancellationToken)']/*" />
         public virtual async Task<Response> SpreadAliasWithOptionalPropsAsync(string id, int top, string name, IEnumerable<int> items, string color = null, int? age = null, IEnumerable<string> elements = null, CancellationToken cancellationToken = default)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-            if (id.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(id));
-            }
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (items == null)
-            {
-                throw new ArgumentNullException(nameof(items));
-            }
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(items, nameof(items));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             SpreadAliasWithOptionalPropsRequest spreadAliasWithOptionalPropsRequest = new SpreadAliasWithOptionalPropsRequest(name, items.ToList())
@@ -860,22 +700,9 @@ namespace SpreadTypeSpec
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithOptionalProps(string,int,string,IEnumerable{int},string,int?,IEnumerable{string},CancellationToken)']/*" />
         public virtual Response SpreadAliasWithOptionalProps(string id, int top, string name, IEnumerable<int> items, string color = null, int? age = null, IEnumerable<string> elements = null, CancellationToken cancellationToken = default)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-            if (id.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(id));
-            }
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (items == null)
-            {
-                throw new ArgumentNullException(nameof(items));
-            }
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(items, nameof(items));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             SpreadAliasWithOptionalPropsRequest spreadAliasWithOptionalPropsRequest = new SpreadAliasWithOptionalPropsRequest(name, items.ToList())
@@ -921,18 +748,8 @@ namespace SpreadTypeSpec
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithOptionalPropsAsync(string,int,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> SpreadAliasWithOptionalPropsAsync(string id, int top, RequestContent content, RequestContext context = null)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-            if (id.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(id));
-            }
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("SpreadTypeSpecClient.SpreadAliasWithOptionalProps");
             scope.Start();
@@ -974,18 +791,8 @@ namespace SpreadTypeSpec
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithOptionalProps(string,int,RequestContent,RequestContext)']/*" />
         public virtual Response SpreadAliasWithOptionalProps(string id, int top, RequestContent content, RequestContext context = null)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-            if (id.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(id));
-            }
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("SpreadTypeSpecClient.SpreadAliasWithOptionalProps");
             scope.Start();
@@ -1009,10 +816,7 @@ namespace SpreadTypeSpec
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithCollectionsAsync(IEnumerable{string},IEnumerable{string},CancellationToken)']/*" />
         public virtual async Task<Response> SpreadAliasWithCollectionsAsync(IEnumerable<string> requiredStringList, IEnumerable<string> optionalStringList = null, CancellationToken cancellationToken = default)
         {
-            if (requiredStringList == null)
-            {
-                throw new ArgumentNullException(nameof(requiredStringList));
-            }
+            Argument.AssertNotNull(requiredStringList, nameof(requiredStringList));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             SpreadAliasWithCollectionsRequest spreadAliasWithCollectionsRequest = new SpreadAliasWithCollectionsRequest(requiredStringList.ToList());
@@ -1036,10 +840,7 @@ namespace SpreadTypeSpec
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithCollections(IEnumerable{string},IEnumerable{string},CancellationToken)']/*" />
         public virtual Response SpreadAliasWithCollections(IEnumerable<string> requiredStringList, IEnumerable<string> optionalStringList = null, CancellationToken cancellationToken = default)
         {
-            if (requiredStringList == null)
-            {
-                throw new ArgumentNullException(nameof(requiredStringList));
-            }
+            Argument.AssertNotNull(requiredStringList, nameof(requiredStringList));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             SpreadAliasWithCollectionsRequest spreadAliasWithCollectionsRequest = new SpreadAliasWithCollectionsRequest(requiredStringList.ToList());
@@ -1078,10 +879,7 @@ namespace SpreadTypeSpec
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithCollectionsAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> SpreadAliasWithCollectionsAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("SpreadTypeSpecClient.SpreadAliasWithCollections");
             scope.Start();
@@ -1120,10 +918,7 @@ namespace SpreadTypeSpec
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithCollections(RequestContent,RequestContext)']/*" />
         public virtual Response SpreadAliasWithCollections(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("SpreadTypeSpecClient.SpreadAliasWithCollections");
             scope.Start();

@@ -43,7 +43,7 @@
          "Type": {
           "$id": "7",
           "Kind": "Primitive",
-          "Name": "Int32",
+          "Name": "SByte",
           "IsNullable": false
          },
          "IsRequired": true,

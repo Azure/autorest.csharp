@@ -22,12 +22,12 @@ namespace AutoRest.CSharp.Mgmt.Output
         private ObjectTypeProperty[]? _myProperties;
 
         public MgmtObjectType(ObjectSchema objectSchema)
-            : this(objectSchema, default, default)
+            : this(objectSchema, default)
         {
         }
 
         public MgmtObjectType(ObjectSchema objectSchema, string? name = default, string? nameSpace = default)
-            : base(objectSchema, MgmtContext.Context)
+            : base(objectSchema, MgmtContext.Context.DefaultNamespace, MgmtContext.Context.TypeFactory, MgmtContext.Context.SchemaUsageProvider, MgmtContext.Context.BaseLibrary, MgmtContext.Context.SourceInputModel)
         {
             _defaultName = name;
             _defaultNamespace = nameSpace;

@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
+using CustomizationsInTsp;
 
 namespace CustomizationsInTsp.Models
 {
@@ -65,30 +66,12 @@ namespace CustomizationsInTsp.Models
         /// <exception cref="ArgumentNullException"> <paramref name="propertyToMakeString"/>, <paramref name="propertyToField"/>, <paramref name="goodListName"/>, <paramref name="goodDictionaryName"/>, <paramref name="goodListOfListName"/> or <paramref name="goodListOfDictionaryName"/> is null. </exception>
         public ModelWithCustomizedProperties(int propertyToMakeInternal, int renamedProperty, float propertyToMakeFloat, int propertyToMakeInt, TimeSpan propertyToMakeDuration, string propertyToMakeString, JsonElement propertyToMakeJsonElement, string propertyToField, IEnumerable<string> goodListName, IDictionary<string, string> goodDictionaryName, IEnumerable<IList<string>> goodListOfListName, IEnumerable<IDictionary<string, string>> goodListOfDictionaryName, ReadOnlyMemory<float> vector, ReadOnlyMemory<float>? vectorNullable)
         {
-            if (propertyToMakeString == null)
-            {
-                throw new ArgumentNullException(nameof(propertyToMakeString));
-            }
-            if (propertyToField == null)
-            {
-                throw new ArgumentNullException(nameof(propertyToField));
-            }
-            if (goodListName == null)
-            {
-                throw new ArgumentNullException(nameof(goodListName));
-            }
-            if (goodDictionaryName == null)
-            {
-                throw new ArgumentNullException(nameof(goodDictionaryName));
-            }
-            if (goodListOfListName == null)
-            {
-                throw new ArgumentNullException(nameof(goodListOfListName));
-            }
-            if (goodListOfDictionaryName == null)
-            {
-                throw new ArgumentNullException(nameof(goodListOfDictionaryName));
-            }
+            Argument.AssertNotNull(propertyToMakeString, nameof(propertyToMakeString));
+            Argument.AssertNotNull(propertyToField, nameof(propertyToField));
+            Argument.AssertNotNull(goodListName, nameof(goodListName));
+            Argument.AssertNotNull(goodDictionaryName, nameof(goodDictionaryName));
+            Argument.AssertNotNull(goodListOfListName, nameof(goodListOfListName));
+            Argument.AssertNotNull(goodListOfDictionaryName, nameof(goodListOfDictionaryName));
 
             PropertyToMakeInternal = propertyToMakeInternal;
             RenamedProperty = renamedProperty;

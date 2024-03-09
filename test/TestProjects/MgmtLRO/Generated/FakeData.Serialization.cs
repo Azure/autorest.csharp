@@ -45,13 +45,13 @@ namespace MgmtLRO
             {
                 return null;
             }
-            Optional<FakeProperties> properties = default;
-            Optional<IDictionary<string, string>> tags = default;
+            FakeProperties properties = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
+            SystemData systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("properties"u8))
@@ -107,7 +107,14 @@ namespace MgmtLRO
                     continue;
                 }
             }
-            return new FakeData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, properties.Value);
+            return new FakeData(
+                id,
+                name,
+                type,
+                systemData,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                properties);
         }
     }
 }

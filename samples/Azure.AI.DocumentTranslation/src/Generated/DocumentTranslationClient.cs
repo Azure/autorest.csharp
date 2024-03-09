@@ -50,14 +50,8 @@ namespace Azure.AI.DocumentTranslation
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public DocumentTranslationClient(string endpoint, AzureKeyCredential credential, DocumentTranslationClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(credential, nameof(credential));
             options ??= new DocumentTranslationClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -644,10 +638,7 @@ namespace Azure.AI.DocumentTranslation
         /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='StartTranslationAsync(WaitUntil,RequestContent,ContentType,RequestContext)']/*" />
         public virtual async Task<Operation> StartTranslationAsync(WaitUntil waitUntil, RequestContent content, ContentType contentType, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("DocumentTranslationClient.StartTranslation");
             scope.Start();
@@ -683,10 +674,7 @@ namespace Azure.AI.DocumentTranslation
         /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='StartTranslation(WaitUntil,RequestContent,ContentType,RequestContext)']/*" />
         public virtual Operation StartTranslation(WaitUntil waitUntil, RequestContent content, ContentType contentType, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("DocumentTranslationClient.StartTranslation");
             scope.Start();
@@ -739,11 +727,11 @@ namespace Azure.AI.DocumentTranslation
             {
                 uri.AppendQuery("$maxpagesize", maxpagesize.Value, true);
             }
-            if (ids != null && Optional.IsCollectionDefined(ids))
+            if (ids != null && !(ids is ChangeTrackingList<Guid> changeTrackingList && changeTrackingList.IsUndefined))
             {
                 uri.AppendQueryDelimited("ids", ids, ",", true);
             }
-            if (statuses != null && Optional.IsCollectionDefined(statuses))
+            if (statuses != null && !(statuses is ChangeTrackingList<string> changeTrackingList0 && changeTrackingList0.IsUndefined))
             {
                 uri.AppendQueryDelimited("statuses", statuses, ",", true);
             }
@@ -755,7 +743,7 @@ namespace Azure.AI.DocumentTranslation
             {
                 uri.AppendQuery("createdDateTimeUtcEnd", createdDateTimeUtcEnd.Value, "O", true);
             }
-            if (orderBy != null && Optional.IsCollectionDefined(orderBy))
+            if (orderBy != null && !(orderBy is ChangeTrackingList<string> changeTrackingList1 && changeTrackingList1.IsUndefined))
             {
                 uri.AppendQueryDelimited("$orderBy", orderBy, ",", true);
             }
@@ -834,11 +822,11 @@ namespace Azure.AI.DocumentTranslation
             {
                 uri.AppendQuery("$maxpagesize", maxpagesize.Value, true);
             }
-            if (ids != null && Optional.IsCollectionDefined(ids))
+            if (ids != null && !(ids is ChangeTrackingList<Guid> changeTrackingList && changeTrackingList.IsUndefined))
             {
                 uri.AppendQueryDelimited("ids", ids, ",", true);
             }
-            if (statuses != null && Optional.IsCollectionDefined(statuses))
+            if (statuses != null && !(statuses is ChangeTrackingList<string> changeTrackingList0 && changeTrackingList0.IsUndefined))
             {
                 uri.AppendQueryDelimited("statuses", statuses, ",", true);
             }
@@ -850,7 +838,7 @@ namespace Azure.AI.DocumentTranslation
             {
                 uri.AppendQuery("createdDateTimeUtcEnd", createdDateTimeUtcEnd.Value, "O", true);
             }
-            if (orderBy != null && Optional.IsCollectionDefined(orderBy))
+            if (orderBy != null && !(orderBy is ChangeTrackingList<string> changeTrackingList1 && changeTrackingList1.IsUndefined))
             {
                 uri.AppendQueryDelimited("$orderBy", orderBy, ",", true);
             }

@@ -82,18 +82,8 @@ namespace MgmtOperations
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetGrandChildName"/> or <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<AvailabilitySetGrandChildResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string availabilitySetGrandChildName, AvailabilitySetGrandChildData data, CancellationToken cancellationToken = default)
         {
-            if (availabilitySetGrandChildName == null)
-            {
-                throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
-            }
-            if (availabilitySetGrandChildName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(availabilitySetGrandChildName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(availabilitySetGrandChildName, nameof(availabilitySetGrandChildName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _availabilitySetGrandChildavailabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.CreateOrUpdate");
             scope.Start();
@@ -141,18 +131,8 @@ namespace MgmtOperations
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetGrandChildName"/> or <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<AvailabilitySetGrandChildResource> CreateOrUpdate(WaitUntil waitUntil, string availabilitySetGrandChildName, AvailabilitySetGrandChildData data, CancellationToken cancellationToken = default)
         {
-            if (availabilitySetGrandChildName == null)
-            {
-                throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
-            }
-            if (availabilitySetGrandChildName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(availabilitySetGrandChildName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(availabilitySetGrandChildName, nameof(availabilitySetGrandChildName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _availabilitySetGrandChildavailabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.CreateOrUpdate");
             scope.Start();
@@ -198,14 +178,7 @@ namespace MgmtOperations
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetGrandChildName"/> is null. </exception>
         public virtual async Task<Response<AvailabilitySetGrandChildResource>> GetAsync(string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
         {
-            if (availabilitySetGrandChildName == null)
-            {
-                throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
-            }
-            if (availabilitySetGrandChildName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(availabilitySetGrandChildName));
-            }
+            Argument.AssertNotNullOrEmpty(availabilitySetGrandChildName, nameof(availabilitySetGrandChildName));
 
             using var scope = _availabilitySetGrandChildavailabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.Get");
             scope.Start();
@@ -250,14 +223,7 @@ namespace MgmtOperations
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetGrandChildName"/> is null. </exception>
         public virtual Response<AvailabilitySetGrandChildResource> Get(string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
         {
-            if (availabilitySetGrandChildName == null)
-            {
-                throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
-            }
-            if (availabilitySetGrandChildName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(availabilitySetGrandChildName));
-            }
+            Argument.AssertNotNullOrEmpty(availabilitySetGrandChildName, nameof(availabilitySetGrandChildName));
 
             using var scope = _availabilitySetGrandChildavailabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.Get");
             scope.Start();
@@ -360,14 +326,7 @@ namespace MgmtOperations
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetGrandChildName"/> is null. </exception>
         public virtual async Task<Response<bool>> ExistsAsync(string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
         {
-            if (availabilitySetGrandChildName == null)
-            {
-                throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
-            }
-            if (availabilitySetGrandChildName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(availabilitySetGrandChildName));
-            }
+            Argument.AssertNotNullOrEmpty(availabilitySetGrandChildName, nameof(availabilitySetGrandChildName));
 
             using var scope = _availabilitySetGrandChildavailabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.Exists");
             scope.Start();
@@ -410,14 +369,7 @@ namespace MgmtOperations
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetGrandChildName"/> is null. </exception>
         public virtual Response<bool> Exists(string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
         {
-            if (availabilitySetGrandChildName == null)
-            {
-                throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
-            }
-            if (availabilitySetGrandChildName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(availabilitySetGrandChildName));
-            }
+            Argument.AssertNotNullOrEmpty(availabilitySetGrandChildName, nameof(availabilitySetGrandChildName));
 
             using var scope = _availabilitySetGrandChildavailabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.Exists");
             scope.Start();
@@ -460,14 +412,7 @@ namespace MgmtOperations
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetGrandChildName"/> is null. </exception>
         public virtual async Task<NullableResponse<AvailabilitySetGrandChildResource>> GetIfExistsAsync(string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
         {
-            if (availabilitySetGrandChildName == null)
-            {
-                throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
-            }
-            if (availabilitySetGrandChildName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(availabilitySetGrandChildName));
-            }
+            Argument.AssertNotNullOrEmpty(availabilitySetGrandChildName, nameof(availabilitySetGrandChildName));
 
             using var scope = _availabilitySetGrandChildavailabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.GetIfExists");
             scope.Start();
@@ -512,14 +457,7 @@ namespace MgmtOperations
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetGrandChildName"/> is null. </exception>
         public virtual NullableResponse<AvailabilitySetGrandChildResource> GetIfExists(string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
         {
-            if (availabilitySetGrandChildName == null)
-            {
-                throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
-            }
-            if (availabilitySetGrandChildName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(availabilitySetGrandChildName));
-            }
+            Argument.AssertNotNullOrEmpty(availabilitySetGrandChildName, nameof(availabilitySetGrandChildName));
 
             using var scope = _availabilitySetGrandChildavailabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.GetIfExists");
             scope.Start();

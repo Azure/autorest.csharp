@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using body_complex;
 
 namespace body_complex.Models
 {
@@ -88,13 +89,13 @@ namespace body_complex.Models
             {
                 return null;
             }
-            Optional<string> collegeDegree = default;
-            Optional<string> location = default;
-            Optional<bool> iswild = default;
+            string collegeDegree = default;
+            string location = default;
+            bool? iswild = default;
             string fishtype = default;
-            Optional<string> species = default;
+            string species = default;
             float length = default;
-            Optional<IList<Fish>> siblings = default;
+            IList<Fish> siblings = default;
             IDictionary<string, object> additionalProperties = default;
             Dictionary<string, object> additionalPropertiesDictionary = new Dictionary<string, object>();
             foreach (var property in element.EnumerateObject())
@@ -150,7 +151,15 @@ namespace body_complex.Models
                 additionalPropertiesDictionary.Add(property.Name, property.Value.GetObject());
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new SmartSalmon(fishtype, species.Value, length, Optional.ToList(siblings), location.Value, Optional.ToNullable(iswild), collegeDegree.Value, additionalProperties);
+            return new SmartSalmon(
+                fishtype,
+                species,
+                length,
+                siblings ?? new ChangeTrackingList<Fish>(),
+                location,
+                iswild,
+                collegeDegree,
+                additionalProperties);
         }
 
         BinaryData IPersistableModel<SmartSalmon>.Write(ModelReaderWriterOptions options)

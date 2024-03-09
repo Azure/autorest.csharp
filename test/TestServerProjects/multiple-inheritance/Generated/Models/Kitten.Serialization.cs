@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using multiple_inheritance;
 
 namespace multiple_inheritance.Models
 {
@@ -86,10 +87,10 @@ namespace multiple_inheritance.Models
             {
                 return null;
             }
-            Optional<bool> eatsMiceYet = default;
-            Optional<bool> likesMilk = default;
-            Optional<bool> meows = default;
-            Optional<bool> hisses = default;
+            bool? eatsMiceYet = default;
+            bool? likesMilk = default;
+            bool? meows = default;
+            bool? hisses = default;
             string name = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -142,7 +143,13 @@ namespace multiple_inheritance.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Kitten(name, serializedAdditionalRawData, Optional.ToNullable(likesMilk), Optional.ToNullable(meows), Optional.ToNullable(hisses), Optional.ToNullable(eatsMiceYet));
+            return new Kitten(
+                name,
+                serializedAdditionalRawData,
+                likesMilk,
+                meows,
+                hisses,
+                eatsMiceYet);
         }
 
         BinaryData IPersistableModel<Kitten>.Write(ModelReaderWriterOptions options)

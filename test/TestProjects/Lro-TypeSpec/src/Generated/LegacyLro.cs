@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using lro.Models;
+using lrotsp.Models;
 
-namespace lro
+namespace lrotsp
 {
     // Data plane generated sub-client.
     /// <summary> The LegacyLro sub-client. </summary>
@@ -72,10 +72,7 @@ namespace lro
         /// <include file="Docs/LegacyLro.xml" path="doc/members/member[@name='GetJobAsync(Guid,string,RequestContext)']/*" />
         public virtual async Task<Response> GetJobAsync(Guid id, string apiVersion, RequestContext context)
         {
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
             using var scope = ClientDiagnostics.CreateScope("LegacyLro.GetJob");
             scope.Start();
@@ -110,10 +107,7 @@ namespace lro
         /// <include file="Docs/LegacyLro.xml" path="doc/members/member[@name='GetJob(Guid,string,RequestContext)']/*" />
         public virtual Response GetJob(Guid id, string apiVersion, RequestContext context)
         {
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
             using var scope = ClientDiagnostics.CreateScope("LegacyLro.GetJob");
             scope.Start();
@@ -139,14 +133,8 @@ namespace lro
         /// <include file="Docs/LegacyLro.xml" path="doc/members/member[@name='CreateJobAsync(WaitUntil,string,RadiologyInsightsData,CancellationToken)']/*" />
         public virtual async Task<Operation<RadiologyInsightsInferenceResult>> CreateJobAsync(WaitUntil waitUntil, string apiVersion, RadiologyInsightsData radiologyInsightsData, CancellationToken cancellationToken = default)
         {
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
-            if (radiologyInsightsData == null)
-            {
-                throw new ArgumentNullException(nameof(radiologyInsightsData));
-            }
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+            Argument.AssertNotNull(radiologyInsightsData, nameof(radiologyInsightsData));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = radiologyInsightsData.ToRequestContent();
@@ -164,14 +152,8 @@ namespace lro
         /// <include file="Docs/LegacyLro.xml" path="doc/members/member[@name='CreateJob(WaitUntil,string,RadiologyInsightsData,CancellationToken)']/*" />
         public virtual Operation<RadiologyInsightsInferenceResult> CreateJob(WaitUntil waitUntil, string apiVersion, RadiologyInsightsData radiologyInsightsData, CancellationToken cancellationToken = default)
         {
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
-            if (radiologyInsightsData == null)
-            {
-                throw new ArgumentNullException(nameof(radiologyInsightsData));
-            }
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+            Argument.AssertNotNull(radiologyInsightsData, nameof(radiologyInsightsData));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = radiologyInsightsData.ToRequestContent();
@@ -204,14 +186,8 @@ namespace lro
         /// <include file="Docs/LegacyLro.xml" path="doc/members/member[@name='CreateJobAsync(WaitUntil,string,RequestContent,RequestContext)']/*" />
         public virtual async Task<Operation<BinaryData>> CreateJobAsync(WaitUntil waitUntil, string apiVersion, RequestContent content, RequestContext context = null)
         {
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("LegacyLro.CreateJob");
             scope.Start();
@@ -252,14 +228,8 @@ namespace lro
         /// <include file="Docs/LegacyLro.xml" path="doc/members/member[@name='CreateJob(WaitUntil,string,RequestContent,RequestContext)']/*" />
         public virtual Operation<BinaryData> CreateJob(WaitUntil waitUntil, string apiVersion, RequestContent content, RequestContext context = null)
         {
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("LegacyLro.CreateJob");
             scope.Start();

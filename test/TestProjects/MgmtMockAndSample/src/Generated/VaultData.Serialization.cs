@@ -21,14 +21,14 @@ namespace MgmtMockAndSample
             {
                 return null;
             }
-            Optional<AzureLocation> location = default;
-            Optional<IReadOnlyDictionary<string, string>> tags = default;
+            AzureLocation? location = default;
+            IReadOnlyDictionary<string, string> tags = default;
             VaultProperties properties = default;
-            Optional<ManagedServiceIdentity> identity = default;
+            ManagedServiceIdentity identity = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
+            SystemData systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("location"u8))
@@ -94,7 +94,15 @@ namespace MgmtMockAndSample
                     continue;
                 }
             }
-            return new VaultData(id, name, type, systemData.Value, Optional.ToNullable(location), Optional.ToDictionary(tags), properties, identity);
+            return new VaultData(
+                id,
+                name,
+                type,
+                systemData,
+                location,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                properties,
+                identity);
         }
     }
 }

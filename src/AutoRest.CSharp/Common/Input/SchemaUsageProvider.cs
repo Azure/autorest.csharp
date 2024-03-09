@@ -3,19 +3,18 @@
 
 using System;
 using System.Collections.Generic;
-using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Input
 {
     internal class SchemaUsageProvider
     {
         private readonly CodeModel _codeModel;
-        private readonly CachedDictionary<Schema, SchemaTypeUsage> _usages;
+        private readonly Lazy<IReadOnlyDictionary<Schema, SchemaTypeUsage>> _usages;
 
         public SchemaUsageProvider(CodeModel codeModel)
         {
             _codeModel = codeModel;
-            _usages = new CachedDictionary<Schema, SchemaTypeUsage>(EnsureUsages);
+            _usages = new Lazy<IReadOnlyDictionary<Schema, SchemaTypeUsage>>(EnsureUsages);
         }
 
         private Dictionary<Schema, SchemaTypeUsage> EnsureUsages()
@@ -161,7 +160,7 @@ namespace AutoRest.CSharp.Input
 
         public SchemaTypeUsage GetUsage(Schema schema)
         {
-            _usages.TryGetValue(schema, out var usage);
+            _usages.Value.TryGetValue(schema, out var usage);
             return usage;
         }
     }

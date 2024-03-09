@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Pagination;
 
 namespace Pagination.Models
 {
@@ -80,9 +81,9 @@ namespace Pagination.Models
             {
                 return null;
             }
-            Optional<string> id = default;
-            Optional<string> displayName = default;
-            Optional<string> url = default;
+            string id = default;
+            string displayName = default;
+            string url = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -108,7 +109,7 @@ namespace Pagination.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new BatchPool(id.Value, displayName.Value, url.Value, serializedAdditionalRawData);
+            return new BatchPool(id, displayName, url, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<BatchPool>.Write(ModelReaderWriterOptions options)

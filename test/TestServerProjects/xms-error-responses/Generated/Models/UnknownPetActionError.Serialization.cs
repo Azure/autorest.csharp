@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using xms_error_responses;
 
 namespace xms_error_responses.Models
 {
@@ -65,7 +66,7 @@ namespace xms_error_responses.Models
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeUnknownPetActionError(document.RootElement, options);
+            return DeserializePetActionError(document.RootElement, options);
         }
 
         internal static UnknownPetActionError DeserializeUnknownPetActionError(JsonElement element, ModelReaderWriterOptions options = null)
@@ -77,8 +78,8 @@ namespace xms_error_responses.Models
                 return null;
             }
             string errorType = "Unknown";
-            Optional<string> errorMessage = default;
-            Optional<string> actionResponse = default;
+            string errorMessage = default;
+            string actionResponse = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -104,7 +105,7 @@ namespace xms_error_responses.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new UnknownPetActionError(actionResponse.Value, serializedAdditionalRawData, errorType, errorMessage.Value);
+            return new UnknownPetActionError(actionResponse, serializedAdditionalRawData, errorType, errorMessage);
         }
 
         BinaryData IPersistableModel<PetActionError>.Write(ModelReaderWriterOptions options)
@@ -129,7 +130,7 @@ namespace xms_error_responses.Models
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeUnknownPetActionError(document.RootElement, options);
+                        return DeserializePetActionError(document.RootElement, options);
                     }
                 default:
                     throw new FormatException($"The model {nameof(PetActionError)} does not support '{options.Format}' format.");

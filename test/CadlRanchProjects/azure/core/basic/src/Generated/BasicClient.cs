@@ -42,10 +42,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public BasicClient(Uri endpoint, BasicClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new BasicClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -73,10 +70,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='CreateOrUpdateAsync(int,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> CreateOrUpdateAsync(int id, RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("BasicClient.CreateOrUpdate");
             scope.Start();
@@ -111,10 +105,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='CreateOrUpdate(int,RequestContent,RequestContext)']/*" />
         public virtual Response CreateOrUpdate(int id, RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("BasicClient.CreateOrUpdate");
             scope.Start();
@@ -139,10 +130,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='CreateOrReplaceAsync(int,User,CancellationToken)']/*" />
         public virtual async Task<Response<User>> CreateOrReplaceAsync(int id, User resource, CancellationToken cancellationToken = default)
         {
-            if (resource == null)
-            {
-                throw new ArgumentNullException(nameof(resource));
-            }
+            Argument.AssertNotNull(resource, nameof(resource));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = resource.ToRequestContent();
@@ -159,10 +147,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='CreateOrReplace(int,User,CancellationToken)']/*" />
         public virtual Response<User> CreateOrReplace(int id, User resource, CancellationToken cancellationToken = default)
         {
-            if (resource == null)
-            {
-                throw new ArgumentNullException(nameof(resource));
-            }
+            Argument.AssertNotNull(resource, nameof(resource));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = resource.ToRequestContent();
@@ -194,10 +179,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='CreateOrReplaceAsync(int,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> CreateOrReplaceAsync(int id, RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("BasicClient.CreateOrReplace");
             scope.Start();
@@ -237,10 +219,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='CreateOrReplace(int,RequestContent,RequestContext)']/*" />
         public virtual Response CreateOrReplace(int id, RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("BasicClient.CreateOrReplace");
             scope.Start();
@@ -425,10 +404,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='ExportAsync(int,string,CancellationToken)']/*" />
         public virtual async Task<Response<User>> ExportAsync(int id, string format, CancellationToken cancellationToken = default)
         {
-            if (format == null)
-            {
-                throw new ArgumentNullException(nameof(format));
-            }
+            Argument.AssertNotNull(format, nameof(format));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await ExportAsync(id, format, context).ConfigureAwait(false);
@@ -444,10 +420,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='Export(int,string,CancellationToken)']/*" />
         public virtual Response<User> Export(int id, string format, CancellationToken cancellationToken = default)
         {
-            if (format == null)
-            {
-                throw new ArgumentNullException(nameof(format));
-            }
+            Argument.AssertNotNull(format, nameof(format));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Export(id, format, context);
@@ -478,10 +451,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='ExportAsync(int,string,RequestContext)']/*" />
         public virtual async Task<Response> ExportAsync(int id, string format, RequestContext context)
         {
-            if (format == null)
-            {
-                throw new ArgumentNullException(nameof(format));
-            }
+            Argument.AssertNotNull(format, nameof(format));
 
             using var scope = ClientDiagnostics.CreateScope("BasicClient.Export");
             scope.Start();
@@ -521,10 +491,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='Export(int,string,RequestContext)']/*" />
         public virtual Response Export(int id, string format, RequestContext context)
         {
-            if (format == null)
-            {
-                throw new ArgumentNullException(nameof(format));
-            }
+            Argument.AssertNotNull(format, nameof(format));
 
             using var scope = ClientDiagnostics.CreateScope("BasicClient.Export");
             scope.Start();
@@ -726,10 +693,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithParametersAsync(ListItemInputBody,ListItemInputExtensibleEnum?,CancellationToken)']/*" />
         public virtual AsyncPageable<User> GetWithParametersAsync(ListItemInputBody bodyInput, ListItemInputExtensibleEnum? another = null, CancellationToken cancellationToken = default)
         {
-            if (bodyInput == null)
-            {
-                throw new ArgumentNullException(nameof(bodyInput));
-            }
+            Argument.AssertNotNull(bodyInput, nameof(bodyInput));
 
             RequestContent content = bodyInput.ToRequestContent();
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
@@ -746,10 +710,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithParameters(ListItemInputBody,ListItemInputExtensibleEnum?,CancellationToken)']/*" />
         public virtual Pageable<User> GetWithParameters(ListItemInputBody bodyInput, ListItemInputExtensibleEnum? another = null, CancellationToken cancellationToken = default)
         {
-            if (bodyInput == null)
-            {
-                throw new ArgumentNullException(nameof(bodyInput));
-            }
+            Argument.AssertNotNull(bodyInput, nameof(bodyInput));
 
             RequestContent content = bodyInput.ToRequestContent();
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
@@ -782,10 +743,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithParametersAsync(RequestContent,string,RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetWithParametersAsync(RequestContent content, string another = null, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithParametersRequest(content, another, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetWithParametersNextPageRequest(nextLink, content, another, context);
@@ -816,10 +774,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithParameters(RequestContent,string,RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetWithParameters(RequestContent content, string another = null, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithParametersRequest(content, another, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetWithParametersNextPageRequest(nextLink, content, another, context);
@@ -978,7 +933,7 @@ namespace _Specs_.Azure.Core.Basic
             {
                 uri.AppendQuery("maxpagesize", maxpagesize.Value, true);
             }
-            if (orderby != null && Optional.IsCollectionDefined(orderby))
+            if (orderby != null && !(orderby is ChangeTrackingList<string> changeTrackingList && changeTrackingList.IsUndefined))
             {
                 foreach (var param in orderby)
                 {
@@ -989,14 +944,14 @@ namespace _Specs_.Azure.Core.Basic
             {
                 uri.AppendQuery("filter", filter, true);
             }
-            if (select != null && Optional.IsCollectionDefined(select))
+            if (select != null && !(select is ChangeTrackingList<string> changeTrackingList0 && changeTrackingList0.IsUndefined))
             {
                 foreach (var param in select)
                 {
                     uri.AppendQuery("select", param, true);
                 }
             }
-            if (expand != null && Optional.IsCollectionDefined(expand))
+            if (expand != null && !(expand is ChangeTrackingList<string> changeTrackingList1 && changeTrackingList1.IsUndefined))
             {
                 foreach (var param in expand)
                 {

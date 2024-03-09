@@ -61,16 +61,16 @@ namespace MgmtSafeFlatten
             {
                 return null;
             }
-            Optional<string> myType = default;
-            Optional<LayerOneSingle> layerOne = default;
-            Optional<LayerOneBaseType> layerOneType = default;
-            Optional<WritableSubResource> layerOneConflict = default;
-            Optional<IDictionary<string, string>> tags = default;
+            string myType = default;
+            LayerOneSingle layerOne = default;
+            LayerOneBaseType layerOneType = default;
+            WritableSubResource layerOneConflict = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
+            SystemData systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("MyType"u8))
@@ -149,7 +149,17 @@ namespace MgmtSafeFlatten
                     continue;
                 }
             }
-            return new TypeOneData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, myType.Value, layerOne.Value, layerOneType.Value, layerOneConflict);
+            return new TypeOneData(
+                id,
+                name,
+                type,
+                systemData,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                myType,
+                layerOne,
+                layerOneType,
+                layerOneConflict);
         }
     }
 }

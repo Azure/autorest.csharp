@@ -70,34 +70,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="nonResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<NonResourceModel1>> PutAsync(string subscriptionId, string resourceGroupName, string nonResourceModel1SName, NonResourceModel1 nonResourceModel1, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (resourceGroupName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
-            }
-            if (nonResourceModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(nonResourceModel1SName));
-            }
-            if (nonResourceModel1SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(nonResourceModel1SName));
-            }
-            if (nonResourceModel1 == null)
-            {
-                throw new ArgumentNullException(nameof(nonResourceModel1));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(nonResourceModel1SName, nameof(nonResourceModel1SName));
+            Argument.AssertNotNull(nonResourceModel1, nameof(nonResourceModel1));
 
             using var message = CreatePutRequest(subscriptionId, resourceGroupName, nonResourceModel1SName, nonResourceModel1);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -124,34 +100,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="nonResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<NonResourceModel1> Put(string subscriptionId, string resourceGroupName, string nonResourceModel1SName, NonResourceModel1 nonResourceModel1, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (resourceGroupName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
-            }
-            if (nonResourceModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(nonResourceModel1SName));
-            }
-            if (nonResourceModel1SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(nonResourceModel1SName));
-            }
-            if (nonResourceModel1 == null)
-            {
-                throw new ArgumentNullException(nameof(nonResourceModel1));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(nonResourceModel1SName, nameof(nonResourceModel1SName));
+            Argument.AssertNotNull(nonResourceModel1, nameof(nonResourceModel1));
 
             using var message = CreatePutRequest(subscriptionId, resourceGroupName, nonResourceModel1SName, nonResourceModel1);
             _pipeline.Send(message, cancellationToken);
@@ -197,30 +149,9 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="nonResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<NonResourceModel1>> GetAsync(string subscriptionId, string resourceGroupName, string nonResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (resourceGroupName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
-            }
-            if (nonResourceModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(nonResourceModel1SName));
-            }
-            if (nonResourceModel1SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(nonResourceModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(nonResourceModel1SName, nameof(nonResourceModel1SName));
 
             using var message = CreateGetRequest(subscriptionId, resourceGroupName, nonResourceModel1SName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -246,30 +177,9 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="nonResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<NonResourceModel1> Get(string subscriptionId, string resourceGroupName, string nonResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (resourceGroupName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceGroupName));
-            }
-            if (nonResourceModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(nonResourceModel1SName));
-            }
-            if (nonResourceModel1SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(nonResourceModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(nonResourceModel1SName, nameof(nonResourceModel1SName));
 
             using var message = CreateGetRequest(subscriptionId, resourceGroupName, nonResourceModel1SName);
             _pipeline.Send(message, cancellationToken);

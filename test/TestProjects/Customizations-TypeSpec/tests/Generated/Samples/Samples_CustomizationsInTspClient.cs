@@ -337,19 +337,33 @@ key = "<badListOfDictionaryName>",
                     OptionalInt = 1234,
                 },
                 PropertyModelToChangeNamespace = new ModelToChangeNamespace(1234),
-                PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, XmlConvert.ToTimeSpan("<propertyToMakeDuration>"), "PT1H23M45S", default, "<propertyToField>", new string[] { "<badListName>" }, new Dictionary<string, string>
+                PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(
+                1234,
+                1234,
+                1234,
+                (int)123.45F,
+                XmlConvert.ToTimeSpan("<propertyToMakeDuration>"),
+                "PT1H23M45S",
+                default,
+                "<propertyToField>",
+                new string[] { "<badListName>" },
+                new Dictionary<string, string>
                 {
                     ["key"] = "<badDictionaryName>"
-                }, new IList<string>[]
+                },
+                new IList<string>[]
             {
 new string[]{"<badListOfListName>"}
-            }, new IDictionary<string, string>[]
+            },
+                new IDictionary<string, string>[]
             {
 new Dictionary<string, string>
 {
 ["key"] = "<badListOfDictionaryName>"
 }
-            }, new float[] { 123.45F }, new float[] { 123.45F })
+            },
+                new float[] { 123.45F },
+                new float[] { 123.45F })
                 {
                     VectorOptional = new float[] { 123.45F },
                     VectorOptionalNullable = new float[] { 123.45F },
@@ -381,19 +395,33 @@ new Dictionary<string, string>
                     OptionalInt = 1234,
                 },
                 PropertyModelToChangeNamespace = new ModelToChangeNamespace(1234),
-                PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, XmlConvert.ToTimeSpan("<propertyToMakeDuration>"), "PT1H23M45S", default, "<propertyToField>", new string[] { "<badListName>" }, new Dictionary<string, string>
+                PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(
+                1234,
+                1234,
+                1234,
+                (int)123.45F,
+                XmlConvert.ToTimeSpan("<propertyToMakeDuration>"),
+                "PT1H23M45S",
+                default,
+                "<propertyToField>",
+                new string[] { "<badListName>" },
+                new Dictionary<string, string>
                 {
                     ["key"] = "<badDictionaryName>"
-                }, new IList<string>[]
+                },
+                new IList<string>[]
             {
 new string[]{"<badListOfListName>"}
-            }, new IDictionary<string, string>[]
+            },
+                new IDictionary<string, string>[]
             {
 new Dictionary<string, string>
 {
 ["key"] = "<badListOfDictionaryName>"
 }
-            }, new float[] { 123.45F }, new float[] { 123.45F })
+            },
+                new float[] { 123.45F },
+                new float[] { 123.45F })
                 {
                     VectorOptional = new float[] { 123.45F },
                     VectorOptionalNullable = new float[] { 123.45F },

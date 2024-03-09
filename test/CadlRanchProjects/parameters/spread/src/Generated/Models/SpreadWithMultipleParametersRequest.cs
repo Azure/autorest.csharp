@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using Parameters.Spread;
 
 namespace Parameters.Spread.Models
 {
@@ -55,30 +56,12 @@ namespace Parameters.Spread.Models
         /// <exception cref="ArgumentNullException"> <paramref name="prop1"/>, <paramref name="prop2"/>, <paramref name="prop3"/>, <paramref name="prop4"/>, <paramref name="prop5"/> or <paramref name="prop6"/> is null. </exception>
         public SpreadWithMultipleParametersRequest(string prop1, string prop2, string prop3, string prop4, string prop5, string prop6)
         {
-            if (prop1 == null)
-            {
-                throw new ArgumentNullException(nameof(prop1));
-            }
-            if (prop2 == null)
-            {
-                throw new ArgumentNullException(nameof(prop2));
-            }
-            if (prop3 == null)
-            {
-                throw new ArgumentNullException(nameof(prop3));
-            }
-            if (prop4 == null)
-            {
-                throw new ArgumentNullException(nameof(prop4));
-            }
-            if (prop5 == null)
-            {
-                throw new ArgumentNullException(nameof(prop5));
-            }
-            if (prop6 == null)
-            {
-                throw new ArgumentNullException(nameof(prop6));
-            }
+            Argument.AssertNotNull(prop1, nameof(prop1));
+            Argument.AssertNotNull(prop2, nameof(prop2));
+            Argument.AssertNotNull(prop3, nameof(prop3));
+            Argument.AssertNotNull(prop4, nameof(prop4));
+            Argument.AssertNotNull(prop5, nameof(prop5));
+            Argument.AssertNotNull(prop6, nameof(prop6));
 
             Prop1 = prop1;
             Prop2 = prop2;

@@ -30,11 +30,11 @@ namespace MgmtExactMatchFlattenInheritance
             {
                 return null;
             }
-            Optional<string> foo = default;
+            string foo = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
+            SystemData systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("foo"u8))
@@ -67,7 +67,7 @@ namespace MgmtExactMatchFlattenInheritance
                     continue;
                 }
             }
-            return new CustomModel2Data(id, name, type, systemData.Value, foo.Value);
+            return new CustomModel2Data(id, name, type, systemData, foo);
         }
     }
 }

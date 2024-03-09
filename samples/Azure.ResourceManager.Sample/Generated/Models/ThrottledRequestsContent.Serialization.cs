@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -88,9 +89,9 @@ namespace Azure.ResourceManager.Sample.Models
             Uri blobContainerSasUri = default;
             DateTimeOffset fromTime = default;
             DateTimeOffset toTime = default;
-            Optional<bool> groupByThrottlePolicy = default;
-            Optional<bool> groupByOperationName = default;
-            Optional<bool> groupByResourceName = default;
+            bool? groupByThrottlePolicy = default;
+            bool? groupByOperationName = default;
+            bool? groupByResourceName = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -143,7 +144,14 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ThrottledRequestsContent(blobContainerSasUri, fromTime, toTime, Optional.ToNullable(groupByThrottlePolicy), Optional.ToNullable(groupByOperationName), Optional.ToNullable(groupByResourceName), serializedAdditionalRawData);
+            return new ThrottledRequestsContent(
+                blobContainerSasUri,
+                fromTime,
+                toTime,
+                groupByThrottlePolicy,
+                groupByOperationName,
+                groupByResourceName,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ThrottledRequestsContent>.Write(ModelReaderWriterOptions options)

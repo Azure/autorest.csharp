@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.NewProject.TypeSpec;
 
 namespace Azure.NewProject.TypeSpec.Models
 {
@@ -266,21 +267,21 @@ namespace Azure.NewProject.TypeSpec.Models
             IList<StringFixedEnum> requiredCollection = default;
             IDictionary<string, StringExtensibleEnum> requiredDictionary = default;
             Thing requiredModel = default;
-            Optional<IntExtensibleEnum> intExtensibleEnum = default;
-            Optional<IList<IntExtensibleEnum>> intExtensibleEnumCollection = default;
-            Optional<FloatExtensibleEnum> floatExtensibleEnum = default;
-            Optional<IList<FloatExtensibleEnum>> floatExtensibleEnumCollection = default;
-            Optional<FloatFixedEnum> floatFixedEnum = default;
-            Optional<IList<FloatFixedEnum>> floatFixedEnumCollection = default;
-            Optional<IntFixedEnum> intFixedEnum = default;
-            Optional<IList<IntFixedEnum>> intFixedEnumCollection = default;
-            Optional<StringFixedEnum> stringFixedEnum = default;
+            IntExtensibleEnum? intExtensibleEnum = default;
+            IList<IntExtensibleEnum> intExtensibleEnumCollection = default;
+            FloatExtensibleEnum? floatExtensibleEnum = default;
+            IList<FloatExtensibleEnum> floatExtensibleEnumCollection = default;
+            FloatFixedEnum? floatFixedEnum = default;
+            IList<FloatFixedEnum> floatFixedEnumCollection = default;
+            IntFixedEnum? intFixedEnum = default;
+            IList<IntFixedEnum> intFixedEnumCollection = default;
+            StringFixedEnum? stringFixedEnum = default;
             BinaryData requiredUnknown = default;
-            Optional<BinaryData> optionalUnknown = default;
+            BinaryData optionalUnknown = default;
             IDictionary<string, BinaryData> requiredRecordUnknown = default;
-            Optional<IDictionary<string, BinaryData>> optionalRecordUnknown = default;
+            IDictionary<string, BinaryData> optionalRecordUnknown = default;
             IReadOnlyDictionary<string, BinaryData> readOnlyRequiredRecordUnknown = default;
-            Optional<IReadOnlyDictionary<string, BinaryData>> readOnlyOptionalRecordUnknown = default;
+            IReadOnlyDictionary<string, BinaryData> readOnlyOptionalRecordUnknown = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -517,7 +518,28 @@ namespace Azure.NewProject.TypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new RoundTripModel(requiredString, requiredInt, requiredCollection, requiredDictionary, requiredModel, Optional.ToNullable(intExtensibleEnum), Optional.ToList(intExtensibleEnumCollection), Optional.ToNullable(floatExtensibleEnum), Optional.ToList(floatExtensibleEnumCollection), Optional.ToNullable(floatFixedEnum), Optional.ToList(floatFixedEnumCollection), Optional.ToNullable(intFixedEnum), Optional.ToList(intFixedEnumCollection), Optional.ToNullable(stringFixedEnum), requiredUnknown, optionalUnknown.Value, requiredRecordUnknown, Optional.ToDictionary(optionalRecordUnknown), readOnlyRequiredRecordUnknown, Optional.ToDictionary(readOnlyOptionalRecordUnknown), serializedAdditionalRawData);
+            return new RoundTripModel(
+                requiredString,
+                requiredInt,
+                requiredCollection,
+                requiredDictionary,
+                requiredModel,
+                intExtensibleEnum,
+                intExtensibleEnumCollection ?? new ChangeTrackingList<IntExtensibleEnum>(),
+                floatExtensibleEnum,
+                floatExtensibleEnumCollection ?? new ChangeTrackingList<FloatExtensibleEnum>(),
+                floatFixedEnum,
+                floatFixedEnumCollection ?? new ChangeTrackingList<FloatFixedEnum>(),
+                intFixedEnum,
+                intFixedEnumCollection ?? new ChangeTrackingList<IntFixedEnum>(),
+                stringFixedEnum,
+                requiredUnknown,
+                optionalUnknown,
+                requiredRecordUnknown,
+                optionalRecordUnknown ?? new ChangeTrackingDictionary<string, BinaryData>(),
+                readOnlyRequiredRecordUnknown,
+                readOnlyOptionalRecordUnknown ?? new ChangeTrackingDictionary<string, BinaryData>(),
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<RoundTripModel>.Write(ModelReaderWriterOptions options)

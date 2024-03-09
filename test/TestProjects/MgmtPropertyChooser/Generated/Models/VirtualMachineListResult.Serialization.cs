@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 using MgmtPropertyChooser;
 
 namespace MgmtPropertyChooser.Models
@@ -21,7 +20,7 @@ namespace MgmtPropertyChooser.Models
                 return null;
             }
             IReadOnlyList<VirtualMachineData> value = default;
-            Optional<string> nextLink = default;
+            string nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -40,7 +39,7 @@ namespace MgmtPropertyChooser.Models
                     continue;
                 }
             }
-            return new VirtualMachineListResult(value, nextLink.Value);
+            return new VirtualMachineListResult(value, nextLink);
         }
     }
 }

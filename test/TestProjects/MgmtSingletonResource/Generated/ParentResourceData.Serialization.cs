@@ -44,13 +44,13 @@ namespace MgmtSingletonResource
             {
                 return null;
             }
-            Optional<string> @new = default;
-            Optional<IDictionary<string, string>> tags = default;
+            string @new = default;
+            IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
+            SystemData systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("new"u8))
@@ -102,7 +102,14 @@ namespace MgmtSingletonResource
                     continue;
                 }
             }
-            return new ParentResourceData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, @new.Value);
+            return new ParentResourceData(
+                id,
+                name,
+                type,
+                systemData,
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                location,
+                @new);
         }
     }
 }

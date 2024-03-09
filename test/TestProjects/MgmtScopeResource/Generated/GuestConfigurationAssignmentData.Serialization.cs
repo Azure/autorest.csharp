@@ -40,11 +40,11 @@ namespace MgmtScopeResource
             {
                 return null;
             }
-            Optional<GuestConfigurationAssignmentProperties> properties = default;
-            Optional<string> id = default;
-            Optional<string> name = default;
-            Optional<string> location = default;
-            Optional<string> type = default;
+            GuestConfigurationAssignmentProperties properties = default;
+            string id = default;
+            string name = default;
+            string location = default;
+            string type = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("properties"u8))
@@ -77,7 +77,7 @@ namespace MgmtScopeResource
                     continue;
                 }
             }
-            return new GuestConfigurationAssignmentData(id.Value, name.Value, location.Value, type.Value, properties.Value);
+            return new GuestConfigurationAssignmentData(id, name, location, type, properties);
         }
     }
 }

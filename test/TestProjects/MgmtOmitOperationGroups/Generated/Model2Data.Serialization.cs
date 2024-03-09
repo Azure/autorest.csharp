@@ -36,14 +36,14 @@ namespace MgmtOmitOperationGroups
             {
                 return null;
             }
-            Optional<string> b = default;
-            Optional<ModelX> modelx = default;
-            Optional<string> f = default;
-            Optional<string> g = default;
+            string b = default;
+            ModelX modelx = default;
+            string f = default;
+            string g = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SystemData> systemData = default;
+            SystemData systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("b"u8))
@@ -95,7 +95,15 @@ namespace MgmtOmitOperationGroups
                     continue;
                 }
             }
-            return new Model2Data(id, name, type, systemData.Value, b.Value, modelx.Value, f.Value, g.Value);
+            return new Model2Data(
+                id,
+                name,
+                type,
+                systemData,
+                b,
+                modelx,
+                f,
+                g);
         }
     }
 }

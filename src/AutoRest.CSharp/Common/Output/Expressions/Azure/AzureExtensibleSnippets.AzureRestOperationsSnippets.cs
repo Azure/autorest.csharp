@@ -15,6 +15,7 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.Azure
 {
@@ -22,6 +23,8 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Azure
     {
         internal class AzureRestOperationsSnippets : RestOperationsSnippets
         {
+            public override StreamExpression GetContentStream(TypedValueExpression response) => new ResponseExpression(response).ContentStream;
+
             public override TypedValueExpression GetTypedResponseFromValue(TypedValueExpression value, TypedValueExpression response)
                 => ResponseExpression.FromValue(value, new ResponseExpression(response));
 
@@ -47,6 +50,8 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Azure
                 }
                 return responseType == typeof(BinaryData)
                     ? ResponseExpression.FromValue(rawResponse.Content, rawResponse)
+                    : responseType == typeof(AzureLocation) ?
+                    ResponseExpression.FromValue(New.Instance(typeof(AzureLocation), new[] { rawResponse.Content.ToObjectFromJson(typeof(string)) }), rawResponse)
                     : ResponseExpression.FromValue(rawResponse.Content.ToObjectFromJson(responseType), rawResponse);
             }
 

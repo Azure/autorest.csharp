@@ -10,6 +10,7 @@ using System.ComponentModel;
 
 namespace _Type.Union.Models
 {
+    /// <summary> The UD. </summary>
     internal readonly partial struct UD : IEquatable<UD>
     {
         private readonly string _value;

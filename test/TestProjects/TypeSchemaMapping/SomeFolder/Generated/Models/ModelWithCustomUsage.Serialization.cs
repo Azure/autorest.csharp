@@ -13,6 +13,7 @@ using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
+using TypeSchemaMapping;
 
 namespace TypeSchemaMapping.Models
 {
@@ -98,7 +99,7 @@ namespace TypeSchemaMapping.Models
             {
                 return null;
             }
-            Optional<string> modelProperty = default;
+            string modelProperty = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -114,7 +115,7 @@ namespace TypeSchemaMapping.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ModelWithCustomUsage(modelProperty.Value, serializedAdditionalRawData);
+            return new ModelWithCustomUsage(modelProperty, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ModelWithCustomUsage>.Write(ModelReaderWriterOptions options)

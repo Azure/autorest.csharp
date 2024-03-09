@@ -46,10 +46,7 @@ namespace ModelReaderWriterValidationTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public ModelReaderWriterValidationTypeSpecClient(Uri endpoint, ModelReaderWriterValidationTypeSpecClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new ModelReaderWriterValidationTypeSpecClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -102,10 +99,7 @@ namespace ModelReaderWriterValidationTypeSpec
         /// <include file="Docs/ModelReaderWriterValidationTypeSpecClient.xml" path="doc/members/member[@name='Op1Async(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> Op1Async(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ModelReaderWriterValidationTypeSpecClient.Op1");
             scope.Start();
@@ -144,10 +138,7 @@ namespace ModelReaderWriterValidationTypeSpec
         /// <include file="Docs/ModelReaderWriterValidationTypeSpecClient.xml" path="doc/members/member[@name='Op1(RequestContent,RequestContext)']/*" />
         public virtual Response Op1(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ModelReaderWriterValidationTypeSpecClient.Op1");
             scope.Start();
@@ -169,10 +160,7 @@ namespace ModelReaderWriterValidationTypeSpec
         /// <include file="Docs/ModelReaderWriterValidationTypeSpecClient.xml" path="doc/members/member[@name='Op2Async(ModelWithPersistableOnly,CancellationToken)']/*" />
         public virtual async Task<Response<ModelWithPersistableOnly>> Op2Async(ModelWithPersistableOnly body, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
+            Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -186,10 +174,7 @@ namespace ModelReaderWriterValidationTypeSpec
         /// <include file="Docs/ModelReaderWriterValidationTypeSpecClient.xml" path="doc/members/member[@name='Op2(ModelWithPersistableOnly,CancellationToken)']/*" />
         public virtual Response<ModelWithPersistableOnly> Op2(ModelWithPersistableOnly body, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
+            Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -220,10 +205,7 @@ namespace ModelReaderWriterValidationTypeSpec
         /// <include file="Docs/ModelReaderWriterValidationTypeSpecClient.xml" path="doc/members/member[@name='Op2Async(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> Op2Async(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ModelReaderWriterValidationTypeSpecClient.Op2");
             scope.Start();
@@ -262,10 +244,7 @@ namespace ModelReaderWriterValidationTypeSpec
         /// <include file="Docs/ModelReaderWriterValidationTypeSpecClient.xml" path="doc/members/member[@name='Op2(RequestContent,RequestContext)']/*" />
         public virtual Response Op2(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ModelReaderWriterValidationTypeSpecClient.Op2");
             scope.Start();
@@ -287,10 +266,7 @@ namespace ModelReaderWriterValidationTypeSpec
         /// <include file="Docs/ModelReaderWriterValidationTypeSpecClient.xml" path="doc/members/member[@name='Op3Async(BaseModel,CancellationToken)']/*" />
         public virtual async Task<Response<BaseModel>> Op3Async(BaseModel body, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
+            Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -304,10 +280,7 @@ namespace ModelReaderWriterValidationTypeSpec
         /// <include file="Docs/ModelReaderWriterValidationTypeSpecClient.xml" path="doc/members/member[@name='Op3(BaseModel,CancellationToken)']/*" />
         public virtual Response<BaseModel> Op3(BaseModel body, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
+            Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -338,10 +311,7 @@ namespace ModelReaderWriterValidationTypeSpec
         /// <include file="Docs/ModelReaderWriterValidationTypeSpecClient.xml" path="doc/members/member[@name='Op3Async(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> Op3Async(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ModelReaderWriterValidationTypeSpecClient.Op3");
             scope.Start();
@@ -380,10 +350,7 @@ namespace ModelReaderWriterValidationTypeSpec
         /// <include file="Docs/ModelReaderWriterValidationTypeSpecClient.xml" path="doc/members/member[@name='Op3(RequestContent,RequestContext)']/*" />
         public virtual Response Op3(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ModelReaderWriterValidationTypeSpecClient.Op3");
             scope.Start();
@@ -405,10 +372,7 @@ namespace ModelReaderWriterValidationTypeSpec
         /// <include file="Docs/ModelReaderWriterValidationTypeSpecClient.xml" path="doc/members/member[@name='Op4Async(AvailabilitySetData,CancellationToken)']/*" />
         public virtual async Task<Response<AvailabilitySetData>> Op4Async(AvailabilitySetData body, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
+            Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -422,10 +386,7 @@ namespace ModelReaderWriterValidationTypeSpec
         /// <include file="Docs/ModelReaderWriterValidationTypeSpecClient.xml" path="doc/members/member[@name='Op4(AvailabilitySetData,CancellationToken)']/*" />
         public virtual Response<AvailabilitySetData> Op4(AvailabilitySetData body, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
+            Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -456,10 +417,7 @@ namespace ModelReaderWriterValidationTypeSpec
         /// <include file="Docs/ModelReaderWriterValidationTypeSpecClient.xml" path="doc/members/member[@name='Op4Async(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> Op4Async(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ModelReaderWriterValidationTypeSpecClient.Op4");
             scope.Start();
@@ -498,10 +456,7 @@ namespace ModelReaderWriterValidationTypeSpec
         /// <include file="Docs/ModelReaderWriterValidationTypeSpecClient.xml" path="doc/members/member[@name='Op4(RequestContent,RequestContext)']/*" />
         public virtual Response Op4(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ModelReaderWriterValidationTypeSpecClient.Op4");
             scope.Start();

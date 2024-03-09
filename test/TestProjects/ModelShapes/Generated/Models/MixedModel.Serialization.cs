@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using ModelShapes;
 
 namespace ModelShapes.Models
 {
@@ -188,17 +189,14 @@ namespace ModelShapes.Models
                 writer.WritePropertyName("NonRequiredReadonlyInt"u8);
                 writer.WriteNumberValue(NonRequiredReadonlyInt.Value);
             }
-            if (Optional.IsDefined(Vector))
+            writer.WritePropertyName("vector"u8);
+            writer.WriteStartArray();
+            foreach (var item in Vector.Span)
             {
-                writer.WritePropertyName("vector"u8);
-                writer.WriteStartArray();
-                foreach (var item in Vector.Span)
-                {
-                    writer.WriteNumberValue(item);
-                }
-                writer.WriteEndArray();
+                writer.WriteNumberValue(item);
             }
-            if (options.Format != "W" && Optional.IsDefined(VectorReadOnly))
+            writer.WriteEndArray();
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("vectorReadOnly"u8);
                 writer.WriteStartArray();
@@ -332,26 +330,26 @@ namespace ModelShapes.Models
             int requiredInt = default;
             IList<string> requiredStringList = default;
             IList<int> requiredIntList = default;
-            Optional<string> nonRequiredString = default;
-            Optional<int> nonRequiredInt = default;
-            Optional<IList<string>> nonRequiredStringList = default;
-            Optional<IList<int>> nonRequiredIntList = default;
+            string nonRequiredString = default;
+            int? nonRequiredInt = default;
+            IList<string> nonRequiredStringList = default;
+            IList<int> nonRequiredIntList = default;
             string requiredNullableString = default;
             int? requiredNullableInt = default;
             IList<string> requiredNullableStringList = default;
             IList<int> requiredNullableIntList = default;
-            Optional<string> nonRequiredNullableString = default;
-            Optional<int?> nonRequiredNullableInt = default;
-            Optional<IList<string>> nonRequiredNullableStringList = default;
-            Optional<IList<int>> nonRequiredNullableIntList = default;
+            string nonRequiredNullableString = default;
+            int? nonRequiredNullableInt = default;
+            IList<string> nonRequiredNullableStringList = default;
+            IList<int> nonRequiredNullableIntList = default;
             int requiredReadonlyInt = default;
-            Optional<int> nonRequiredReadonlyInt = default;
-            Optional<ReadOnlyMemory<float>> vector = default;
-            Optional<ReadOnlyMemory<float>> vectorReadOnly = default;
+            int? nonRequiredReadonlyInt = default;
+            ReadOnlyMemory<float> vector = default;
+            ReadOnlyMemory<float> vectorReadOnly = default;
             ReadOnlyMemory<float> vectorReadOnlyRequired = default;
             ReadOnlyMemory<float> vectorRequired = default;
-            Optional<ReadOnlyMemory<float>?> vectorNullable = default;
-            Optional<ReadOnlyMemory<float>?> vectorReadOnlyNullable = default;
+            ReadOnlyMemory<float>? vectorNullable = default;
+            ReadOnlyMemory<float>? vectorReadOnlyNullable = default;
             ReadOnlyMemory<float>? vectorReadOnlyRequiredNullable = default;
             ReadOnlyMemory<float>? vectorRequiredNullable = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
@@ -676,7 +674,34 @@ namespace ModelShapes.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new MixedModel(requiredString, requiredInt, requiredStringList, requiredIntList, nonRequiredString.Value, Optional.ToNullable(nonRequiredInt), Optional.ToList(nonRequiredStringList), Optional.ToList(nonRequiredIntList), requiredNullableString, requiredNullableInt, requiredNullableStringList, requiredNullableIntList, nonRequiredNullableString.Value, Optional.ToNullable(nonRequiredNullableInt), Optional.ToList(nonRequiredNullableStringList), Optional.ToList(nonRequiredNullableIntList), requiredReadonlyInt, Optional.ToNullable(nonRequiredReadonlyInt), vector, vectorReadOnly, vectorReadOnlyRequired, vectorRequired, Optional.ToNullable(vectorNullable), Optional.ToNullable(vectorReadOnlyNullable), vectorReadOnlyRequiredNullable, vectorRequiredNullable, serializedAdditionalRawData);
+            return new MixedModel(
+                requiredString,
+                requiredInt,
+                requiredStringList,
+                requiredIntList,
+                nonRequiredString,
+                nonRequiredInt,
+                nonRequiredStringList ?? new ChangeTrackingList<string>(),
+                nonRequiredIntList ?? new ChangeTrackingList<int>(),
+                requiredNullableString,
+                requiredNullableInt,
+                requiredNullableStringList,
+                requiredNullableIntList,
+                nonRequiredNullableString,
+                nonRequiredNullableInt,
+                nonRequiredNullableStringList ?? new ChangeTrackingList<string>(),
+                nonRequiredNullableIntList ?? new ChangeTrackingList<int>(),
+                requiredReadonlyInt,
+                nonRequiredReadonlyInt,
+                vector,
+                vectorReadOnly,
+                vectorReadOnlyRequired,
+                vectorRequired,
+                vectorNullable,
+                vectorReadOnlyNullable,
+                vectorReadOnlyRequiredNullable,
+                vectorRequiredNullable,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<MixedModel>.Write(ModelReaderWriterOptions options)

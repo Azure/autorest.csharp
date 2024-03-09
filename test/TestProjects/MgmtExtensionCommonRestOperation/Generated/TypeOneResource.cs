@@ -198,10 +198,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<TypeOneResource>> UpdateAsync(WaitUntil waitUntil, TypeOneData data, CancellationToken cancellationToken = default)
         {
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneResource.Update");
             scope.Start();
@@ -247,10 +244,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<TypeOneResource> Update(WaitUntil waitUntil, TypeOneData data, CancellationToken cancellationToken = default)
         {
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneResource.Update");
             scope.Start();
@@ -296,14 +290,8 @@ namespace MgmtExtensionCommonRestOperation
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
         public virtual async Task<Response<TypeOneResource>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(key, nameof(key));
+            Argument.AssertNotNull(value, nameof(value));
 
             using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneResource.AddTag");
             scope.Start();
@@ -359,14 +347,8 @@ namespace MgmtExtensionCommonRestOperation
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
         public virtual Response<TypeOneResource> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(key, nameof(key));
+            Argument.AssertNotNull(value, nameof(value));
 
             using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneResource.AddTag");
             scope.Start();
@@ -421,10 +403,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
         public virtual async Task<Response<TypeOneResource>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            if (tags == null)
-            {
-                throw new ArgumentNullException(nameof(tags));
-            }
+            Argument.AssertNotNull(tags, nameof(tags));
 
             using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneResource.SetTags");
             scope.Start();
@@ -480,10 +459,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
         public virtual Response<TypeOneResource> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            if (tags == null)
-            {
-                throw new ArgumentNullException(nameof(tags));
-            }
+            Argument.AssertNotNull(tags, nameof(tags));
 
             using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneResource.SetTags");
             scope.Start();
@@ -539,10 +515,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public virtual async Task<Response<TypeOneResource>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
+            Argument.AssertNotNull(key, nameof(key));
 
             using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneResource.RemoveTag");
             scope.Start();
@@ -597,10 +570,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public virtual Response<TypeOneResource> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
+            Argument.AssertNotNull(key, nameof(key));
 
             using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneResource.RemoveTag");
             scope.Start();

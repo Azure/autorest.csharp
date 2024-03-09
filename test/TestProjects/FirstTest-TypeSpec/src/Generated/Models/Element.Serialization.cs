@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using FirstTestTypeSpec;
 
 namespace FirstTestTypeSpec.Models
 {
@@ -75,7 +76,7 @@ namespace FirstTestTypeSpec.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<Extension>> extension = default;
+            IReadOnlyList<Extension> extension = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -100,7 +101,7 @@ namespace FirstTestTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Element(Optional.ToList(extension), serializedAdditionalRawData);
+            return new Element(extension ?? new ChangeTrackingList<Extension>(), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<Element>.Write(ModelReaderWriterOptions options)

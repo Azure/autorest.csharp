@@ -24,7 +24,7 @@ namespace MgmtNoTypeReplacement.Models
             {
                 return null;
             }
-            Optional<string> id = default;
+            string id = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -33,7 +33,7 @@ namespace MgmtNoTypeReplacement.Models
                     continue;
                 }
             }
-            return new NoSubResourceModel2(id.Value);
+            return new NoSubResourceModel2(id);
         }
     }
 }

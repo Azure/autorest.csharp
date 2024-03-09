@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Network.Management.Interface;
 
 namespace Azure.Network.Management.Interface.Models
 {
@@ -34,8 +35,8 @@ namespace Azure.Network.Management.Interface.Models
             {
                 return null;
             }
-            Optional<string> ipTagType = default;
-            Optional<string> tag = default;
+            string ipTagType = default;
+            string tag = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("ipTagType"u8))
@@ -49,7 +50,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new IpTag(ipTagType.Value, tag.Value);
+            return new IpTag(ipTagType, tag);
         }
     }
 }
