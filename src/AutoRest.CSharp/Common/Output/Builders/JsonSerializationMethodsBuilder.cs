@@ -5,6 +5,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -24,7 +25,6 @@ using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization;
-using AutoRest.CSharp.Output.Models.Serialization.Bicep;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 {
     internal static class JsonSerializationMethodsBuilder
     {
-        public static IEnumerable<Method> BuildJsonSerializationMethods(SerializableObjectType model, JsonObjectSerialization json, SerializationInterfaces interfaces)
+        public static IEnumerable<Method> BuildJsonSerializationMethods(JsonObjectSerialization json, SerializationInterfaces interfaces)
         {
             var useModelReaderWriter = Configuration.UseModelReaderWriter;
 
@@ -75,6 +75,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
             if (iJsonModelInterface is not null && iPersistableModelTInterface is not null)
             {
                 var typeOfT = iJsonModelInterface.Arguments[0];
+                var model = typeOfT.Implementation as SerializableObjectType;
+                Debug.Assert(model != null, $"{typeOfT} should be a SerializableObjectType");
+
                 // void IJsonModel<T>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
                 var options = new ModelReaderWriterOptionsExpression(KnownParameters.Serializations.Options);
                 yield return new

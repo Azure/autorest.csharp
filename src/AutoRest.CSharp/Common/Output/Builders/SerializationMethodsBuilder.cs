@@ -4,6 +4,7 @@
 using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
@@ -44,7 +45,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             {
                 if (model.IncludeSerializer)
                 {
-                    foreach (var method in JsonSerializationMethodsBuilder.BuildJsonSerializationMethods(model, json, serialization.Interfaces))
+                    foreach (var method in JsonSerializationMethodsBuilder.BuildJsonSerializationMethods(json, serialization.Interfaces))
                     {
                         yield return method;
                     }
@@ -68,15 +69,14 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 }
             }
 
-            foreach (var method in BuildIModelMethods(model))
+            foreach (var method in BuildIModelMethods(model.Serialization))
             {
                 yield return method;
             }
         }
 
-        private static IEnumerable<Method> BuildIModelMethods(SerializableObjectType model)
+        private static IEnumerable<Method> BuildIModelMethods(ObjectTypeSerialization serialization)
         {
-            var serialization = model.Serialization;
             var interfaces = serialization.Interfaces;
 
             var iModelTInterface = interfaces.IPersistableModelTInterface;
@@ -85,6 +85,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
             if (iModelTInterface is not null)
             {
                 var typeOfT = iModelTInterface.Arguments[0];
+                var model = typeOfT.Implementation as SerializableObjectType;
+                Debug.Assert(model != null, $"{typeOfT} should be a SerializableObjectType");
+
                 var options = new ModelReaderWriterOptionsExpression(KnownParameters.Serializations.Options);
                 // BinaryData IPersistableModel<T>.Write(ModelReaderWriterOptions options)
                 yield return new
