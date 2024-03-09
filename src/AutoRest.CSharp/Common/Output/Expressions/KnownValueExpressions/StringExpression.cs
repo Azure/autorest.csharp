@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
@@ -11,6 +10,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
 {
     internal sealed record StringExpression(ValueExpression Untyped) : TypedValueExpression<string>(Untyped)
     {
+        public CharExpression Index(int index) => new(new IndexerExpression(this, Literal(index)));
         public ValueExpression Length => Property(nameof(string.Length));
 
         public static BoolExpression Equals(StringExpression left, StringExpression right, StringComparison comparisonType)

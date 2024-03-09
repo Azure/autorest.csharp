@@ -580,18 +580,18 @@ namespace AutoRest.CSharp.Common.Input
             WriteIfNotDefault(writer, Options.Generation1ConvenienceClient, Generation1ConvenienceClient);
             WriteIfNotDefault(writer, Options.SingleTopLevelClient, SingleTopLevelClient);
             WriteIfNotDefault(writer, Options.GenerateModelFactory, GenerateModelFactory);
-            writer.WriteNonEmptyArray(Options.ModelFactoryForHlc, ModelFactoryForHlc);
+            WriteNonEmptyArray(writer, Options.ModelFactoryForHlc, ModelFactoryForHlc);
             WriteIfNotDefault(writer, Options.UnreferencedTypesHandling, UnreferencedTypesHandling);
             WriteIfNotDefault(writer, Options.ProjectFolder, RelativeProjectFolder);
             WriteIfNotDefault(writer, Options.UseCoreDataFactoryReplacements, UseCoreDataFactoryReplacements);
             WriteIfNotDefault(writer, Options.UseModelReaderWriter, UseModelReaderWriter);
             WriteIfNotDefault(writer, Options.EnableBicepSerialization, EnableBicepSerialization);
-            writer.WriteNonEmptyArray(Options.ProtocolMethodList, ProtocolMethodList);
-            writer.WriteNonEmptyArray(Options.SuppressAbstractBaseClasses, SuppressAbstractBaseClasses);
-            writer.WriteNonEmptyArray(Options.ModelsToTreatEmptyStringAsNull, ModelsToTreatEmptyStringAsNull.ToList());
+            WriteNonEmptyArray(writer, Options.ProtocolMethodList, ProtocolMethodList);
+            WriteNonEmptyArray(writer, Options.SuppressAbstractBaseClasses, SuppressAbstractBaseClasses);
+            WriteNonEmptyArray(writer, Options.ModelsToTreatEmptyStringAsNull, ModelsToTreatEmptyStringAsNull.ToList());
             if (ModelsToTreatEmptyStringAsNull.Any())
             {
-                writer.WriteNonEmptyArray(Options.IntrinsicTypesToTreatEmptyStringAsNull, IntrinsicTypesToTreatEmptyStringAsNull.ToList());
+                WriteNonEmptyArray(writer, Options.IntrinsicTypesToTreatEmptyStringAsNull, IntrinsicTypesToTreatEmptyStringAsNull.ToList());
             }
 
             MgmtConfiguration.SaveConfiguration(writer);
@@ -650,6 +650,20 @@ namespace AutoRest.CSharp.Common.Input
                 default:
                     writer.WriteString(option, value);
                     break;
+            }
+        }
+
+        private static void WriteNonEmptyArray(Utf8JsonWriter writer, string name, IReadOnlyList<string> values)
+        {
+            if (values.Any())
+            {
+                writer.WriteStartArray(name);
+                foreach (var s in values)
+                {
+                    writer.WriteStringValue(s);
+                }
+
+                writer.WriteEndArray();
             }
         }
 

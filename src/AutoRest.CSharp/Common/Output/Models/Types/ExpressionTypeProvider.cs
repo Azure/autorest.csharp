@@ -20,6 +20,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             yield return RequestContentHelperProvider.Instance;
             yield return Utf8JsonRequestContentProvider.Instance;
             yield return ArgumentProvider.Instance;
+            yield return ModelSerializationExtensionsProvider.Instance;
         }
 
         protected ExpressionTypeProvider(string defaultNamespace, SourceInputModel? sourceInputModel)
