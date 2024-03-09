@@ -10,6 +10,7 @@ using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization.Bicep;
@@ -65,11 +66,43 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     null,
                     new Parameter[]
                     {
-                        new Parameter("stringBuilder", null, typeof(StringBuilder), null, ValidationType.None,
-                            null),
+                        StringBuilderParameter,
                         ChildObject, KnownParameters.Serializations.Options, Spaces, IndentFirstLine
                     }),
                 WriteAppendChildObject().ToArray());
+        }
+
+        public static SwitchCase BuildBicepWriteSwitchCase(BicepObjectSerialization bicep, ModelReaderWriterOptionsExpression options)
+        {
+            return new SwitchCase(
+                Serializations.BicepFormat,
+                Return(
+                    new InvokeInstanceMethodExpression(
+                        null,
+                        new MethodSignature(
+                            $"SerializeBicep",
+                            null,
+                            null,
+                            MethodSignatureModifiers.Private,
+                            typeof(BinaryData),
+                            null,
+                            new[]
+                            {
+                                KnownParameters.Serializations.Options
+                            }),
+                        new ValueExpression[]
+                        {
+                            options
+                        })));
+        }
+
+        public static SwitchCase BuildBicepReadSwitchCase(SerializableObjectType model, BinaryDataExpression data, ModelReaderWriterOptionsExpression options)
+        {
+            return new SwitchCase(
+                Serializations.BicepFormat,
+                Throw(
+                    New.Instance(typeof(InvalidOperationException),
+                    Literal("Bicep deserialization is not supported for this type."))));
         }
 
         private static IEnumerable<MethodBodyStatement> WriteSerializeBicep(BicepObjectSerialization objectSerialization)
