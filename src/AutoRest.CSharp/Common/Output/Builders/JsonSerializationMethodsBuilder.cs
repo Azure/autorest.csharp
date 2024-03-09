@@ -968,7 +968,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                             Increment(index)
                         }
                     };
-                    value = New.Instance(jsonReadOnlyMemory.Type.WithNullable(false), array);
+                    value = New.Instance(jsonReadOnlyMemory.Type, array);
                     return deserializeReadOnlyMemory;
 
                 case JsonArraySerialization arraySerialization:
