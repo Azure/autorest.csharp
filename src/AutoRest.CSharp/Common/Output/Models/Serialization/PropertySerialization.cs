@@ -3,7 +3,6 @@
 
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input.Source;
 
 namespace AutoRest.CSharp.Output.Models.Serialization
 {
