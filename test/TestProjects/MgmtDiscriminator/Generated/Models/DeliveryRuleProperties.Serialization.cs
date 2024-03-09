@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
@@ -197,66 +198,120 @@ namespace MgmtDiscriminator.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Order))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Order), out propertyOverride);
+            if (Optional.IsDefined(Order) || hasPropertyOverride)
             {
-                builder.Append("  order:");
-                builder.AppendLine($" {Order.Value}");
-            }
-
-            if (Optional.IsDefined(Conditions))
-            {
-                builder.Append("  conditions:");
-                AppendChildObject(builder, Conditions, options, 2, false);
-            }
-
-            if (Optional.IsCollectionDefined(Actions))
-            {
-                if (Actions.Any())
+                builder.Append("  order: ");
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  actions:");
-                    builder.AppendLine(" [");
-                    foreach (var item in Actions)
-                    {
-                        AppendChildObject(builder, item, options, 4, true);
-                    }
-                    builder.AppendLine("  ]");
-                }
-            }
-
-            if (Optional.IsCollectionDefined(ExtraMappingInfo))
-            {
-                if (ExtraMappingInfo.Any())
-                {
-                    builder.Append("  extraMappingInfo:");
-                    builder.AppendLine(" {");
-                    foreach (var item in ExtraMappingInfo)
-                    {
-                        builder.Append($"    {item.Key}:");
-                        AppendChildObject(builder, item.Value, options, 4, false);
-                    }
-                    builder.AppendLine("  }");
-                }
-            }
-
-            if (Optional.IsDefined(Pet))
-            {
-                builder.Append("  pet:");
-                AppendChildObject(builder, Pet, options, 2, false);
-            }
-
-            if (Optional.IsDefined(Foo))
-            {
-                builder.Append("  foo:");
-                if (Foo.Contains(Environment.NewLine))
-                {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{Foo}'''");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{Foo}'");
+                    builder.AppendLine($"{Order.Value}");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Conditions), out propertyOverride);
+            if (Optional.IsDefined(Conditions) || hasPropertyOverride)
+            {
+                builder.Append("  conditions: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    AppendChildObject(builder, Conditions, options, 2, false, "  conditions: ");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Actions), out propertyOverride);
+            if (Optional.IsCollectionDefined(Actions) || hasPropertyOverride)
+            {
+                if (Actions.Any() || hasPropertyOverride)
+                {
+                    builder.Append("  actions: ");
+                    if (hasPropertyOverride)
+                    {
+                        builder.AppendLine($"{propertyOverride}");
+                    }
+                    else
+                    {
+                        builder.AppendLine("[");
+                        foreach (var item in Actions)
+                        {
+                            AppendChildObject(builder, item, options, 4, true, "  actions: ");
+                        }
+                        builder.AppendLine("  ]");
+                    }
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ExtraMappingInfo), out propertyOverride);
+            if (Optional.IsCollectionDefined(ExtraMappingInfo) || hasPropertyOverride)
+            {
+                if (ExtraMappingInfo.Any() || hasPropertyOverride)
+                {
+                    builder.Append("  extraMappingInfo: ");
+                    if (hasPropertyOverride)
+                    {
+                        builder.AppendLine($"{propertyOverride}");
+                    }
+                    else
+                    {
+                        builder.AppendLine("{");
+                        foreach (var item in ExtraMappingInfo)
+                        {
+                            builder.Append($"    '{item.Key}': ");
+                            AppendChildObject(builder, item.Value, options, 4, false, "  extraMappingInfo: ");
+                        }
+                        builder.AppendLine("  }");
+                    }
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Pet), out propertyOverride);
+            if (Optional.IsDefined(Pet) || hasPropertyOverride)
+            {
+                builder.Append("  pet: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    AppendChildObject(builder, Pet, options, 2, false, "  pet: ");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Foo), out propertyOverride);
+            if (Optional.IsDefined(Foo) || hasPropertyOverride)
+            {
+                builder.Append("  foo: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    if (Foo.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{Foo}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{Foo}'");
+                    }
                 }
             }
 
@@ -264,12 +319,15 @@ namespace MgmtDiscriminator.Models
             return BinaryData.FromString(builder.ToString());
         }
 
-        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine)
+        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine, string formattedPropertyName)
         {
             string indent = new string(' ', spaces);
+            int emptyObjectLength = 2 + spaces + Environment.NewLine.Length + Environment.NewLine.Length;
+            int length = stringBuilder.Length;
+            bool inMultilineString = false;
+
             BinaryData data = ModelReaderWriter.Write(childObject, options);
             string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            bool inMultilineString = false;
             for (int i = 0; i < lines.Length; i++)
             {
                 string line = lines[i];
@@ -290,12 +348,16 @@ namespace MgmtDiscriminator.Models
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($" {line}");
+                    stringBuilder.AppendLine($"{line}");
                 }
                 else
                 {
                     stringBuilder.AppendLine($"{indent}{line}");
                 }
+            }
+            if (stringBuilder.Length == length + emptyObjectLength)
+            {
+                stringBuilder.Length = stringBuilder.Length - emptyObjectLength - formattedPropertyName.Length;
             }
         }
 

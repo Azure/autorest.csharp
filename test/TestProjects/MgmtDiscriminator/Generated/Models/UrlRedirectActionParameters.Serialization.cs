@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
@@ -165,73 +166,135 @@ namespace MgmtDiscriminator.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            builder.Append("  typeName:");
-            builder.AppendLine($" '{TypeName.ToString()}'");
-
-            builder.Append("  redirectType:");
-            builder.AppendLine($" '{RedirectType.ToString()}'");
-
-            if (Optional.IsDefined(DestinationProtocol))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride);
+            builder.Append("  typeName: ");
+            if (hasPropertyOverride)
             {
-                builder.Append("  destinationProtocol:");
-                builder.AppendLine($" '{DestinationProtocol.Value.ToString()}'");
+                builder.AppendLine($"{propertyOverride}");
+            }
+            else
+            {
+                builder.AppendLine($"'{TypeName.ToString()}'");
             }
 
-            if (Optional.IsDefined(CustomPath))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(RedirectType), out propertyOverride);
+            builder.Append("  redirectType: ");
+            if (hasPropertyOverride)
             {
-                builder.Append("  customPath:");
-                if (CustomPath.Contains(Environment.NewLine))
+                builder.AppendLine($"{propertyOverride}");
+            }
+            else
+            {
+                builder.AppendLine($"'{RedirectType.ToString()}'");
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(DestinationProtocol), out propertyOverride);
+            if (Optional.IsDefined(DestinationProtocol) || hasPropertyOverride)
+            {
+                builder.Append("  destinationProtocol: ");
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{CustomPath}'''");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{CustomPath}'");
+                    builder.AppendLine($"'{DestinationProtocol.Value.ToString()}'");
                 }
             }
 
-            if (Optional.IsDefined(CustomHostname))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(CustomPath), out propertyOverride);
+            if (Optional.IsDefined(CustomPath) || hasPropertyOverride)
             {
-                builder.Append("  customHostname:");
-                if (CustomHostname.Contains(Environment.NewLine))
+                builder.Append("  customPath: ");
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{CustomHostname}'''");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{CustomHostname}'");
+                    if (CustomPath.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{CustomPath}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{CustomPath}'");
+                    }
                 }
             }
 
-            if (Optional.IsDefined(CustomQueryString))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(CustomHostname), out propertyOverride);
+            if (Optional.IsDefined(CustomHostname) || hasPropertyOverride)
             {
-                builder.Append("  customQueryString:");
-                if (CustomQueryString.Contains(Environment.NewLine))
+                builder.Append("  customHostname: ");
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{CustomQueryString}'''");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{CustomQueryString}'");
+                    if (CustomHostname.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{CustomHostname}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{CustomHostname}'");
+                    }
                 }
             }
 
-            if (Optional.IsDefined(CustomFragment))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(CustomQueryString), out propertyOverride);
+            if (Optional.IsDefined(CustomQueryString) || hasPropertyOverride)
             {
-                builder.Append("  customFragment:");
-                if (CustomFragment.Contains(Environment.NewLine))
+                builder.Append("  customQueryString: ");
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{CustomFragment}'''");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{CustomFragment}'");
+                    if (CustomQueryString.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{CustomQueryString}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{CustomQueryString}'");
+                    }
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(CustomFragment), out propertyOverride);
+            if (Optional.IsDefined(CustomFragment) || hasPropertyOverride)
+            {
+                builder.Append("  customFragment: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    if (CustomFragment.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{CustomFragment}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{CustomFragment}'");
+                    }
                 }
             }
 
@@ -239,12 +302,15 @@ namespace MgmtDiscriminator.Models
             return BinaryData.FromString(builder.ToString());
         }
 
-        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine)
+        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine, string formattedPropertyName)
         {
             string indent = new string(' ', spaces);
+            int emptyObjectLength = 2 + spaces + Environment.NewLine.Length + Environment.NewLine.Length;
+            int length = stringBuilder.Length;
+            bool inMultilineString = false;
+
             BinaryData data = ModelReaderWriter.Write(childObject, options);
             string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            bool inMultilineString = false;
             for (int i = 0; i < lines.Length; i++)
             {
                 string line = lines[i];
@@ -265,12 +331,16 @@ namespace MgmtDiscriminator.Models
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($" {line}");
+                    stringBuilder.AppendLine($"{line}");
                 }
                 else
                 {
                     stringBuilder.AppendLine($"{indent}{line}");
                 }
+            }
+            if (stringBuilder.Length == length + emptyObjectLength)
+            {
+                stringBuilder.Length = stringBuilder.Length - emptyObjectLength - formattedPropertyName.Length;
             }
         }
 

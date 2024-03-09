@@ -12,6 +12,7 @@ using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -76,8 +77,8 @@ namespace MgmtDiscriminator.Models
             {
                 return null;
             }
-            Optional<string> name = default;
-            Optional<string> type = default;
+            string name = default;
+            string type = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -98,7 +99,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Shell(name.Value, type.Value, serializedAdditionalRawData);
+            return new Shell(name, type, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)

@@ -590,9 +590,14 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         public static MethodBodyStatement WrapInIsDefinedOrPropertyOverride(BicepPropertySerialization serialization, ValueExpression propertyOverride, MethodBodyStatement statement)
         {
+            if (serialization.Value.Type is { IsNullable: false, IsValueType: true })
+            {
+                    return statement;
+            }
+
             return TypeFactory.IsCollectionType(serialization.Value.Type) && !TypeFactory.IsReadOnlyMemory(serialization.Value.Type)
                 ? new IfStatement(Or(InvokeOptional.IsCollectionDefined(serialization.Value), new BoolExpression(propertyOverride))) { statement }
-                : new IfStatement(Or(InvokeOptional.IsDefined(serialization.Value), new BoolExpression(propertyOverride))) { statement };
+                : new IfStatement(Or(OptionalTypeProvider.Instance.IsDefined(serialization.Value), new BoolExpression(propertyOverride))) { statement };
         }
 
         public static MethodBodyStatement WrapInIsNotEmptyOrPropertyOverride(BicepPropertySerialization serialization, ValueExpression propertyOverride, MethodBodyStatement statement)

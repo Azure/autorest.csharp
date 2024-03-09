@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
@@ -121,56 +122,97 @@ namespace MgmtDiscriminator.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            builder.Append("  typeName:");
-            builder.AppendLine($" '{TypeName.ToString()}'");
-
-            if (Optional.IsDefined(SourcePattern))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride);
+            builder.Append("  typeName: ");
+            if (hasPropertyOverride)
             {
-                builder.Append("  sourcePattern:");
-                if (SourcePattern.Contains(Environment.NewLine))
+                builder.AppendLine($"{propertyOverride}");
+            }
+            else
+            {
+                builder.AppendLine($"'{TypeName.ToString()}'");
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(SourcePattern), out propertyOverride);
+            if (Optional.IsDefined(SourcePattern) || hasPropertyOverride)
+            {
+                builder.Append("  sourcePattern: ");
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{SourcePattern}'''");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{SourcePattern}'");
+                    if (SourcePattern.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{SourcePattern}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{SourcePattern}'");
+                    }
                 }
             }
 
-            if (Optional.IsDefined(Destination))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Destination), out propertyOverride);
+            if (Optional.IsDefined(Destination) || hasPropertyOverride)
             {
-                builder.Append("  destination:");
-                if (Destination.Contains(Environment.NewLine))
+                builder.Append("  destination: ");
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{Destination}'''");
+                    builder.AppendLine($"{propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{Destination}'");
+                    if (Destination.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{Destination}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{Destination}'");
+                    }
                 }
             }
 
-            if (Optional.IsDefined(PreserveUnmatchedPath))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(PreserveUnmatchedPath), out propertyOverride);
+            if (Optional.IsDefined(PreserveUnmatchedPath) || hasPropertyOverride)
             {
-                builder.Append("  preserveUnmatchedPath:");
-                var boolValue = PreserveUnmatchedPath.Value == true ? "true" : "false";
-                builder.AppendLine($" {boolValue}");
+                builder.Append("  preserveUnmatchedPath: ");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($"{propertyOverride}");
+                }
+                else
+                {
+                    var boolValue = PreserveUnmatchedPath.Value == true ? "true" : "false";
+                    builder.AppendLine($"{boolValue}");
+                }
             }
 
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
         }
 
-        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine)
+        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine, string formattedPropertyName)
         {
             string indent = new string(' ', spaces);
+            int emptyObjectLength = 2 + spaces + Environment.NewLine.Length + Environment.NewLine.Length;
+            int length = stringBuilder.Length;
+            bool inMultilineString = false;
+
             BinaryData data = ModelReaderWriter.Write(childObject, options);
             string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            bool inMultilineString = false;
             for (int i = 0; i < lines.Length; i++)
             {
                 string line = lines[i];
@@ -191,12 +233,16 @@ namespace MgmtDiscriminator.Models
                 }
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($" {line}");
+                    stringBuilder.AppendLine($"{line}");
                 }
                 else
                 {
                     stringBuilder.AppendLine($"{indent}{line}");
                 }
+            }
+            if (stringBuilder.Length == length + emptyObjectLength)
+            {
+                stringBuilder.Length = stringBuilder.Length - emptyObjectLength - formattedPropertyName.Length;
             }
         }
 
