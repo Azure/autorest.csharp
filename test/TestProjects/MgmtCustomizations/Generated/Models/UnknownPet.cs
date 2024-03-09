@@ -9,7 +9,7 @@ using System;
 
 namespace MgmtCustomizations.Models
 {
-    /// <summary> The UnknownPet. </summary>
+    /// <summary> Unknown version of Pet. </summary>
     internal partial class UnknownPet : Pet
     {
         /// <summary> Initializes a new instance of <see cref="UnknownPet"/>. </summary>

@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace body_complex.Models
 {
-    /// <summary> The UnknownMyBaseType. </summary>
+    /// <summary> Unknown version of MyBaseType. </summary>
     internal partial class UnknownMyBaseType : MyBaseType
     {
         /// <summary> Initializes a new instance of <see cref="UnknownMyBaseType"/>. </summary>
