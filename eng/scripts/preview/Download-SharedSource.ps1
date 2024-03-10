@@ -79,7 +79,6 @@ $files = @(
     'TaskExtensions.cs',
     'TrimmingAttribute.cs',
     'TypeFormatters.cs',
-    'Utf8JsonRequestContent.cs',
     'Utf8JsonWriterExtensions.cs',
     'VoidValue.cs',
     'XElementExtensions.cs',

@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class ArgumentProvider : ExpressionTypeProvider
     {
-        private static readonly Lazy<ArgumentProvider> _instance = new(() => new ArgumentProvider(Configuration.HelperNamespace, null));
+        private static readonly Lazy<ArgumentProvider> _instance = new(() => new ArgumentProvider());
 
         private class Template<T> { }
 
@@ -33,8 +33,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public static ArgumentProvider Instance => _instance.Value;
 
-        private ArgumentProvider(string defaultNamespace, SourceInputModel? sourceInputModel)
-            : base(defaultNamespace, sourceInputModel)
+        private ArgumentProvider() : base(Configuration.HelperNamespace, null)
         {
             DeclarationModifiers = TypeSignatureModifiers.Internal | TypeSignatureModifiers.Static;
             _nameParamRef = new ParameterReference(_nameParam);
