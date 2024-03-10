@@ -30,8 +30,8 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static BoolExpression False { get; } = new(new KeywordExpression("false", null));
 
         public static BoolExpression Bool(bool value) => value ? True : False;
-        public static ValueExpression Int(int value) => new FormattableStringToExpression($"{value}");
-        public static ValueExpression Long(long value) => new FormattableStringToExpression($"{value}L");
+        public static IntExpression Int(int value) => new IntExpression(Literal(value));
+        public static LongExpression Long(long value) => new LongExpression(Literal(value));
         public static ValueExpression Float(float value) => new FormattableStringToExpression($"{value}f");
         public static ValueExpression Double(double value) => new FormattableStringToExpression($"{value}d");
 
