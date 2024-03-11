@@ -17,7 +17,7 @@ using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Output.Models.Shared
 {
-    internal record Parameter(string Name, FormattableString? Description, CSharpType Type, Constant? DefaultValue, ValidationType Validation, FormattableString? Initializer, bool IsApiVersionParameter = false, bool IsEndpoint = false, bool IsResourceIdentifier = false, bool SkipUrlEncoding = false, RequestLocation RequestLocation = RequestLocation.None, SerializationFormat SerializationFormat = SerializationFormat.Default, bool IsPropertyBag = false, bool IsRef = false)
+    internal record Parameter(string Name, FormattableString? Description, CSharpType Type, Constant? DefaultValue, ValidationType Validation, FormattableString? Initializer, bool IsApiVersionParameter = false, bool IsEndpoint = false, bool IsResourceIdentifier = false, bool SkipUrlEncoding = false, RequestLocation RequestLocation = RequestLocation.None, SerializationFormat SerializationFormat = SerializationFormat.Default, bool IsPropertyBag = false, bool IsRef = false, bool IsOut = false)
     {
         public bool IsRawData { get; init; }
 
