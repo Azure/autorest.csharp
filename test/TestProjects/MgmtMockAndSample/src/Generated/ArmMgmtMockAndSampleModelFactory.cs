@@ -572,7 +572,7 @@ namespace MgmtMockAndSample.Models
         /// <param name="priority"> Priority of the Firewall Policy Rule Collection Group resource. </param>
         /// <param name="ruleCollections">
         /// Group of Firewall Policy rule collections.
-        /// Please note <see cref="FirewallPolicyRuleCollection"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+        /// Please note <see cref="Models.FirewallPolicyRuleCollection"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
         /// The available derived classes include <see cref="FirewallPolicyFilterRuleCollection"/> and <see cref="FirewallPolicyNatRuleCollection"/>.
         /// </param>
         /// <param name="provisioningState"> The provisioning state of the firewall policy rule collection group resource. </param>
@@ -589,6 +589,16 @@ namespace MgmtMockAndSample.Models
                 priority,
                 ruleCollections?.ToList(),
                 provisioningState);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.FirewallPolicyRuleCollection"/>. </summary>
+        /// <param name="ruleCollectionType"> The type of the rule collection. </param>
+        /// <param name="name"> The name of the rule collection. </param>
+        /// <param name="priority"> Priority of the Firewall Policy Rule Collection resource. </param>
+        /// <returns> A new <see cref="Models.FirewallPolicyRuleCollection"/> instance for mocking. </returns>
+        public static FirewallPolicyRuleCollection FirewallPolicyRuleCollection(string ruleCollectionType = "Unknown", string name = null, int? priority = null)
+        {
+            return new UnknownFirewallPolicyRuleCollection(ruleCollectionType, name, priority);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtMockAndSample.RoleAssignmentData"/>. </summary>
@@ -688,6 +698,16 @@ namespace MgmtMockAndSample.Models
         public static GuestConfigurationBaseResource GuestConfigurationBaseResource(string id = null, string name = null, AzureLocation? location = null, ResourceType? resourceType = null)
         {
             return new GuestConfigurationBaseResource(id, name, location, resourceType);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.FirewallPolicyRule"/>. </summary>
+        /// <param name="name"> Name of the rule. </param>
+        /// <param name="description"> Description of the rule. </param>
+        /// <param name="ruleType"> Rule Type. </param>
+        /// <returns> A new <see cref="Models.FirewallPolicyRule"/> instance for mocking. </returns>
+        public static FirewallPolicyRule FirewallPolicyRule(string name = null, string description = null, string ruleType = "Unknown")
+        {
+            return new UnknownFirewallPolicyRule(name, description, ruleType);
         }
     }
 }

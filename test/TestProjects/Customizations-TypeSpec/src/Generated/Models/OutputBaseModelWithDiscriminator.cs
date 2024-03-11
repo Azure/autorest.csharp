@@ -10,8 +10,12 @@ using System.Collections.Generic;
 
 namespace CustomizationsInTsp.Models
 {
-    /// <summary> Model moved into custom namespace. </summary>
-    public partial class ModelToChangeNamespace
+    /// <summary>
+    /// Base model with discriminator property that will be changed to readonly.
+    /// Please note <see cref="OutputBaseModelWithDiscriminator"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+    /// The available derived classes include <see cref="FirstDerivedOutputModel"/> and <see cref="SecondDerivedOutputModel"/>.
+    /// </summary>
+    public abstract partial class OutputBaseModelWithDiscriminator
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -43,32 +47,20 @@ namespace CustomizationsInTsp.Models
         /// </list>
         /// </para>
         /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+        private protected IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="ModelToChangeNamespace"/>. </summary>
-        /// <param name="requiredInt"> Required int. </param>
-        public ModelToChangeNamespace(int requiredInt)
+        /// <summary> Initializes a new instance of <see cref="OutputBaseModelWithDiscriminator"/>. </summary>
+        protected OutputBaseModelWithDiscriminator()
         {
-            RequiredInt = requiredInt;
         }
 
-        /// <summary> Initializes a new instance of <see cref="ModelToChangeNamespace"/>. </summary>
-        /// <param name="requiredInt"> Required int. </param>
-        /// <param name="propertyReadWriteToReadOnly"> Read-write property that will be changed to readonly. </param>
+        /// <summary> Initializes a new instance of <see cref="OutputBaseModelWithDiscriminator"/>. </summary>
+        /// <param name="kind"> Discriminator. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal ModelToChangeNamespace(int requiredInt, bool? propertyReadWriteToReadOnly, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal OutputBaseModelWithDiscriminator(string kind, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
-            RequiredInt = requiredInt;
-            PropertyReadWriteToReadOnly = propertyReadWriteToReadOnly;
+            Kind = kind;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
-
-        /// <summary> Initializes a new instance of <see cref="ModelToChangeNamespace"/> for deserialization. </summary>
-        internal ModelToChangeNamespace()
-        {
-        }
-
-        /// <summary> Required int. </summary>
-        public int RequiredInt { get; set; }
     }
 }

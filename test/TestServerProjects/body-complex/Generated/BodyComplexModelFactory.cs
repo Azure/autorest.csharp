@@ -13,6 +13,22 @@ namespace body_complex.Models
     /// <summary> Model factory for models. </summary>
     public static partial class BodyComplexModelFactory
     {
+        /// <summary> Initializes a new instance of <see cref="Models.Fish"/>. </summary>
+        /// <param name="fishtype"></param>
+        /// <param name="species"></param>
+        /// <param name="length"></param>
+        /// <param name="siblings">
+        /// Please note <see cref="Models.Fish"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+        /// The available derived classes include <see cref="Cookiecuttershark"/>, <see cref="Goblinshark"/>, <see cref="Salmon"/>, <see cref="Sawshark"/>, <see cref="Shark"/> and <see cref="SmartSalmon"/>.
+        /// </param>
+        /// <returns> A new <see cref="Models.Fish"/> instance for mocking. </returns>
+        public static Fish Fish(string fishtype = null, string species = null, float length = default, IEnumerable<Fish> siblings = null)
+        {
+            siblings ??= new List<Fish>();
+
+            return new UnknownFish(fishtype, species, length, siblings?.ToList(), serializedAdditionalRawData: null);
+        }
+
         /// <summary> Initializes a new instance of <see cref="Models.DotFish"/>. </summary>
         /// <param name="fishType"></param>
         /// <param name="species"></param>

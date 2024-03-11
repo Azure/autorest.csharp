@@ -30,6 +30,11 @@ namespace CustomizationsInTsp.Models
             writer.WriteStartObject();
             writer.WritePropertyName("requiredInt"u8);
             writer.WriteNumberValue(RequiredInt);
+            if (Optional.IsDefined(PropertyReadWriteToReadOnly))
+            {
+                writer.WritePropertyName("propertyReadWriteToReadOnly"u8);
+                writer.WriteBooleanValue(PropertyReadWriteToReadOnly.Value);
+            }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -69,6 +74,7 @@ namespace CustomizationsInTsp.Models
                 return null;
             }
             int requiredInt = default;
+            bool? propertyReadWriteToReadOnly = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -78,13 +84,22 @@ namespace CustomizationsInTsp.Models
                     requiredInt = property.Value.GetInt32();
                     continue;
                 }
+                if (property.NameEquals("propertyReadWriteToReadOnly"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    propertyReadWriteToReadOnly = property.Value.GetBoolean();
+                    continue;
+                }
                 if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ModelToChangeNamespace(requiredInt, serializedAdditionalRawData);
+            return new ModelToChangeNamespace(requiredInt, propertyReadWriteToReadOnly, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ModelToChangeNamespace>.Write(ModelReaderWriterOptions options)

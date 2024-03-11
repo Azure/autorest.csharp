@@ -65,6 +65,7 @@ namespace CustomizationsInTsp.Tests
                 propertyModelToChangeNamespace = new
                 {
                     requiredInt = 1234,
+                    propertyReadWriteToReadOnly = true,
                 },
                 propertyModelWithCustomizedProperties = new
                 {
@@ -241,6 +242,42 @@ new Dictionary<string, string>
                 OptionalInt = 1234,
             };
             Response<RenamedModel> response = await client.FooAsync(input);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task CustomizationsInTsp_GetOutputDiscriminatorModel_ShortVersion()
+        {
+            CustomizationsInTspClient client = CreateCustomizationsInTspClient();
+
+            Response response = await client.GetOutputDiscriminatorModelAsync(null);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task CustomizationsInTsp_GetOutputDiscriminatorModel_ShortVersion_Convenience()
+        {
+            CustomizationsInTspClient client = CreateCustomizationsInTspClient();
+
+            Response<OutputBaseModelWithDiscriminator> response = await client.GetOutputDiscriminatorModelAsync();
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task CustomizationsInTsp_GetOutputDiscriminatorModel_AllParameters()
+        {
+            CustomizationsInTspClient client = CreateCustomizationsInTspClient();
+
+            Response response = await client.GetOutputDiscriminatorModelAsync(null);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task CustomizationsInTsp_GetOutputDiscriminatorModel_AllParameters_Convenience()
+        {
+            CustomizationsInTspClient client = CreateCustomizationsInTspClient();
+
+            Response<OutputBaseModelWithDiscriminator> response = await client.GetOutputDiscriminatorModelAsync();
         }
 
         [Test]

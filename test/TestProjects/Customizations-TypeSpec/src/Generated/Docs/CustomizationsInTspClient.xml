@@ -162,6 +162,7 @@ using RequestContent content = RequestContent.Create(new
     propertyModelToChangeNamespace = new
     {
         requiredInt = 1234,
+        propertyReadWriteToReadOnly = true,
     },
     propertyModelWithCustomizedProperties = new
     {
@@ -237,6 +238,7 @@ Console.WriteLine(result.GetProperty("propertyModelToMakeInternal").GetProperty(
 Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("requiredIntOnBase").ToString());
 Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("optionalInt").ToString());
 Console.WriteLine(result.GetProperty("propertyModelToChangeNamespace").GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("propertyModelToChangeNamespace").GetProperty("propertyReadWriteToReadOnly").ToString());
 Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeInternal").ToString());
 Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToRename").ToString());
 Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeFloat").ToString());
@@ -300,6 +302,7 @@ using RequestContent content = RequestContent.Create(new
     propertyModelToChangeNamespace = new
     {
         requiredInt = 1234,
+        propertyReadWriteToReadOnly = true,
     },
     propertyModelWithCustomizedProperties = new
     {
@@ -375,6 +378,7 @@ Console.WriteLine(result.GetProperty("propertyModelToMakeInternal").GetProperty(
 Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("requiredIntOnBase").ToString());
 Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("optionalInt").ToString());
 Console.WriteLine(result.GetProperty("propertyModelToChangeNamespace").GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("propertyModelToChangeNamespace").GetProperty("propertyReadWriteToReadOnly").ToString());
 Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeInternal").ToString());
 Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToRename").ToString());
 Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeFloat").ToString());
@@ -507,6 +511,78 @@ Response response = client.Foo(content);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredIntOnBase").ToString());
 Console.WriteLine(result.GetProperty("optionalInt").ToString());
+]]></code></example>
+    </member>
+    <member name="GetOutputDiscriminatorModelAsync(CancellationToken)">
+      <example>
+This sample shows how to call GetOutputDiscriminatorModelAsync.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+Response<OutputBaseModelWithDiscriminator> response = await client.GetOutputDiscriminatorModelAsync();
+]]></code>
+This sample shows how to call GetOutputDiscriminatorModelAsync with all parameters.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+Response<OutputBaseModelWithDiscriminator> response = await client.GetOutputDiscriminatorModelAsync();
+]]></code></example>
+    </member>
+    <member name="GetOutputDiscriminatorModel(CancellationToken)">
+      <example>
+This sample shows how to call GetOutputDiscriminatorModel.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+Response<OutputBaseModelWithDiscriminator> response = client.GetOutputDiscriminatorModel();
+]]></code>
+This sample shows how to call GetOutputDiscriminatorModel with all parameters.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+Response<OutputBaseModelWithDiscriminator> response = client.GetOutputDiscriminatorModel();
+]]></code></example>
+    </member>
+    <member name="GetOutputDiscriminatorModelAsync(RequestContext)">
+      <example>
+This sample shows how to call GetOutputDiscriminatorModelAsync and parse the result.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+Response response = await client.GetOutputDiscriminatorModelAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+]]></code>
+This sample shows how to call GetOutputDiscriminatorModelAsync with all parameters and parse the result.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+Response response = await client.GetOutputDiscriminatorModelAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+]]></code></example>
+    </member>
+    <member name="GetOutputDiscriminatorModel(RequestContext)">
+      <example>
+This sample shows how to call GetOutputDiscriminatorModel and parse the result.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+Response response = client.GetOutputDiscriminatorModel(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+]]></code>
+This sample shows how to call GetOutputDiscriminatorModel with all parameters and parse the result.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+Response response = client.GetOutputDiscriminatorModel(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
 ]]></code></example>
     </member>
     <member name="BarAsync(RenamedModel,CancellationToken)">

@@ -88,6 +88,7 @@ namespace CustomizationsInTsp.Samples
                 propertyModelToChangeNamespace = new
                 {
                     requiredInt = 1234,
+                    propertyReadWriteToReadOnly = true,
                 },
                 propertyModelWithCustomizedProperties = new
                 {
@@ -163,6 +164,7 @@ key = "<badListOfDictionaryName>",
             Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("requiredIntOnBase").ToString());
             Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("optionalInt").ToString());
             Console.WriteLine(result.GetProperty("propertyModelToChangeNamespace").GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("propertyModelToChangeNamespace").GetProperty("propertyReadWriteToReadOnly").ToString());
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeInternal").ToString());
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToRename").ToString());
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeFloat").ToString());
@@ -216,6 +218,7 @@ key = "<badListOfDictionaryName>",
                 propertyModelToChangeNamespace = new
                 {
                     requiredInt = 1234,
+                    propertyReadWriteToReadOnly = true,
                 },
                 propertyModelWithCustomizedProperties = new
                 {
@@ -291,6 +294,7 @@ key = "<badListOfDictionaryName>",
             Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("requiredIntOnBase").ToString());
             Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("optionalInt").ToString());
             Console.WriteLine(result.GetProperty("propertyModelToChangeNamespace").GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("propertyModelToChangeNamespace").GetProperty("propertyReadWriteToReadOnly").ToString());
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeInternal").ToString());
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToRename").ToString());
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeFloat").ToString());
@@ -551,6 +555,90 @@ new Dictionary<string, string>
                 OptionalInt = 1234,
             };
             Response<RenamedModel> response = await client.FooAsync(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CustomizationsInTsp_GetOutputDiscriminatorModel_ShortVersion()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            Response response = client.GetOutputDiscriminatorModel(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CustomizationsInTsp_GetOutputDiscriminatorModel_ShortVersion_Async()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            Response response = await client.GetOutputDiscriminatorModelAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CustomizationsInTsp_GetOutputDiscriminatorModel_ShortVersion_Convenience()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            Response<OutputBaseModelWithDiscriminator> response = client.GetOutputDiscriminatorModel();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CustomizationsInTsp_GetOutputDiscriminatorModel_ShortVersion_Convenience_Async()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            Response<OutputBaseModelWithDiscriminator> response = await client.GetOutputDiscriminatorModelAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CustomizationsInTsp_GetOutputDiscriminatorModel_AllParameters()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            Response response = client.GetOutputDiscriminatorModel(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CustomizationsInTsp_GetOutputDiscriminatorModel_AllParameters_Async()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            Response response = await client.GetOutputDiscriminatorModelAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CustomizationsInTsp_GetOutputDiscriminatorModel_AllParameters_Convenience()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            Response<OutputBaseModelWithDiscriminator> response = client.GetOutputDiscriminatorModel();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CustomizationsInTsp_GetOutputDiscriminatorModel_AllParameters_Convenience_Async()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            Response<OutputBaseModelWithDiscriminator> response = await client.GetOutputDiscriminatorModelAsync();
         }
 
         [Test]

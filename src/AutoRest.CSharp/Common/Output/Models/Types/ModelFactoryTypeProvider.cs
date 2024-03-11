@@ -321,7 +321,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             var properties = model.EnumerateHierarchy().SelectMany(obj => obj.Properties.Where(p => p != (obj as SerializableObjectType)?.RawDataField)).ToArray();
-            // we skip models with internal properties when the internal property is neither a discriminator or safe flattened
+
+            // we skip models with internal properties when the internal property is neither a discriminator nor safe flattened
             if (properties.Any(p => p.Declaration.Accessibility != "public" && model.Discriminator?.Property != p && p.FlattenedProperty == null))
             {
                 return false;
@@ -329,7 +330,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             // We skip models that don't have read-only properties other than discriminator or collections
             // While discriminator property is generated as read-write, it can be made read-only via customization
-            if (!properties.Any(p => p.IsReadOnly && model.Discriminator?.Property != p && !TypeFactory.IsReadWriteDictionary(p.ValueType) && !TypeFactory.IsReadWriteList(p.ValueType)))
+            if (!model.Declaration.IsAbstract && !properties.Any(p => p.IsReadOnly && model.Discriminator?.Property != p && !TypeFactory.IsReadWriteDictionary(p.ValueType) && !TypeFactory.IsReadWriteList(p.ValueType)))
             {
                 return false;
             }
