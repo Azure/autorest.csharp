@@ -329,7 +329,6 @@ namespace AutoRest.CSharp.Generation.Writers
 
             writer.AppendRawIf("out ", clientParameter.IsOut);
             writer.AppendRawIf("ref ", clientParameter.IsRef);
-            writer.AppendRawIf("out ", clientParameter.IsOut);
 
             writer.Append($"{clientParameter.Type} {clientParameter.Name:D}");
             if (clientParameter.DefaultValue != null)
