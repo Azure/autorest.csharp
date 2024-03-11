@@ -17,7 +17,7 @@ using MgmtXmlDeserialization;
 
 namespace MgmtXmlDeserialization.Models
 {
-    internal partial class XmlCollection : IUtf8JsonSerializable, IJsonModel<XmlCollection>, IXmlSerializable, IPersistableModel<XmlCollection>
+    internal partial class XmlCollection : IUtf8JsonSerializable, IJsonModel<XmlCollection>, IXmlSerializable
     {
         private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
