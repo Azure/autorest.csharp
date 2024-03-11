@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         }
 
         public static string GetClientPrefix(string name, BuildContext context)
-            => GetClientPrefix(name, context.CodeModel?.Language.Default.Name ?? context.InputNamespace?.Name!);
+            => GetClientPrefix(name, context.InputNamespace.Name);
 
         public static string GetClientPrefix(string? name, string namespaceName)
         {

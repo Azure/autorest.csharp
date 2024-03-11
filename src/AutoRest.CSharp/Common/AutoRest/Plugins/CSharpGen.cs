@@ -29,6 +29,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var project = await GeneratedCodeWorkspace.Create(Configuration.AbsoluteProjectFolder, Configuration.OutputFolder, Configuration.SharedSourceFolders);
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
 
+            ApplyGlobalConfigurations();
+            CodeModelTransformer.Transform(codeModel);
+            var inputNamespace = new CodeModelConverter(codeModel).CreateNamespace();
             if (Configuration.Generation1ConvenienceClient)
             {
                 DataPlaneTarget.Execute(project, codeModel, sourceInputModel);
@@ -39,22 +42,19 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 {
                     await AutoRestLogger.Warning("skip generating sdk code because 'mgmt-debug.skip-codegen' is true.");
                     if (Configuration.MgmtTestConfiguration is not null)
-                        await MgmtTestTarget.ExecuteAsync(project, codeModel, null);
+                        await MgmtTestTarget.ExecuteAsync(project, inputNamespace, null);
                 }
                 else
                 {
-                    ApplyGlobalConfigurations();
-                    CodeModelTransformer.Transform(codeModel);
-
-                    await MgmtTarget.ExecuteAsync(project, codeModel, sourceInputModel);
+                    await MgmtTarget.ExecuteAsync(project, inputNamespace, sourceInputModel);
                     if (Configuration.MgmtTestConfiguration is not null && !Configuration.MgmtConfiguration.MgmtDebug.ReportOnly)
-                        await MgmtTestTarget.ExecuteAsync(project, codeModel, sourceInputModel);
+                        await MgmtTestTarget.ExecuteAsync(project, inputNamespace, sourceInputModel);
                 }
                 GenerateMgmtReport(project);
             }
             else
             {
-                await LowLevelTarget.ExecuteAsync(project, new CodeModelConverter(codeModel).CreateNamespace(), sourceInputModel, false);
+                await LowLevelTarget.ExecuteAsync(project, inputNamespace, sourceInputModel, false);
             }
             return project;
         }

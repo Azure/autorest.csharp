@@ -102,6 +102,8 @@ internal record InputOperation(
     private IReadOnlyDictionary<string, InputOperationExample>? _examples;
     public IReadOnlyDictionary<string, InputOperationExample> Examples => _examples ??= EnsureExamples();
 
+    public IReadOnlyList<InputOperationExample> CodeModelExamples { get; internal set; } = new List<InputOperationExample>();
+
     private IReadOnlyDictionary<string, InputOperationExample> EnsureExamples()
     {
         return new Dictionary<string, InputOperationExample>()

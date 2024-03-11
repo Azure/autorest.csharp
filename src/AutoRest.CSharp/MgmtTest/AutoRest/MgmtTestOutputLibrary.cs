@@ -17,11 +17,11 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
 {
     internal class MgmtTestOutputLibrary
     {
-        private readonly IReadOnlyList<InputClient> _mockTestModel;
+        private readonly InputNamespace _inputNamespace;
         private readonly MgmtTestConfiguration _mgmtTestConfiguration;
         public MgmtTestOutputLibrary(InputNamespace inputNamespace)
         {
-            _mockTestModel = inputNamespace.Clients;
+            _inputNamespace = inputNamespace;
             _mgmtTestConfiguration = Configuration.MgmtTestConfiguration!;
         }
 
@@ -42,27 +42,29 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
         private Dictionary<MgmtTypeProvider, List<MockTestCase>> EnsureMockTestCases()
         {
             var result = new Dictionary<MgmtTypeProvider, List<MockTestCase>>();
-            foreach (var exampleGroup in _mockTestModel)
+            foreach (var client in _inputNamespace.Clients)
             {
-                var withSuffix = exampleGroup.Examples.Count > 1;
-                foreach (var example in exampleGroup.Examples)
+                foreach (var operation in client.Operations)
                 {
-                    // we need to find which resource or resource collection this test case belongs
-                    var operationName = exampleGroup.Name;
-
-                    // skip this operation if we find it in the `skipped-operations` configuration
-                    if (_mgmtTestConfiguration.SkippedOperations.Contains(operationName))
-                        continue;
-
-                    var providerAndOperations = FindCarriersFromOperationId(operationName);
-                    foreach (var providerForExample in providerAndOperations)
+                    foreach (var example in operation.CodeModelExamples)
                     {
-                        // the operations on ArmClientExtensions are the same as the tenant extension, therefore we skip it here
-                        // the source code generator will never write them if it is not in arm core
-                        if (providerForExample.Carrier is ArmClientExtension)
+                        // we need to find which resource or resource collection this test case belongs
+                        var operationId = example.Operation.OperationId!;
+
+                        // skip this operation if we find it in the `skipped-operations` configuration
+                        if (_mgmtTestConfiguration.SkippedOperations.Contains(operationId))
                             continue;
-                        var mockTestCase = new MockTestCase(operationName, providerForExample.Carrier, providerForExample.Operation, example.Value);
-                        result.AddInList(mockTestCase.Owner, mockTestCase);
+
+                        var providerAndOperations = FindCarriersFromOperationId(operationId);
+                        foreach (var providerForExample in providerAndOperations)
+                        {
+                            // the operations on ArmClientExtensions are the same as the tenant extension, therefore we skip it here
+                            // the source code generator will never write them if it is not in arm core
+                            if (providerForExample.Carrier is ArmClientExtension)
+                                continue;
+                            var mockTestCase = new MockTestCase(operationId, providerForExample.Carrier, providerForExample.Operation, example);
+                            result.AddInList(mockTestCase.Owner, mockTestCase);
+                        }
                     }
                 }
             }
@@ -98,7 +100,7 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
                         continue;
                     foreach (var restOperation in clientOperation)
                     {
-                        _operationNameToProviders.AddInList(restOperation.Name, new MgmtTypeProviderAndOperation(provider, clientOperation));
+                        _operationNameToProviders.AddInList(restOperation.OperationId, new MgmtTypeProviderAndOperation(provider, clientOperation));
                     }
                 }
             }

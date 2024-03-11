@@ -7,7 +7,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.MgmtTest.AutoRest;
@@ -24,18 +23,17 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         private const string MOCK_TEST_DEFAULT_OUTPUT_PATH = "/tests/Generated";
         private const string SAMPLE_DEFAULT_OUTPUT_PATH = "/samples/Generated";
 
-        public static async Task ExecuteAsync(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel)
+        public static async Task ExecuteAsync(GeneratedCodeWorkspace project, InputNamespace inputNamespace, SourceInputModel? sourceInputModel)
         {
-            Debug.Assert(codeModel.TestModel is not null);
+            Debug.Assert(inputNamespace.Clients is not null);
             Debug.Assert(Configuration.MgmtTestConfiguration is not null);
-            var inputNamespace = new CodeModelConverter(codeModel).CreateNamespace();
             MgmtTestOutputLibrary library;
             if (sourceInputModel == null)
             {
                 var sourceFolder = GetSourceFolder();
                 var sourceCodeProject = new SourceCodeProject(sourceFolder, Configuration.SharedSourceFolders);
                 sourceInputModel = new SourceInputModel(await sourceCodeProject.GetCompilationAsync());
-                InitializeMgmtContext(codeModel, sourceInputModel);
+                InitializeMgmtContext(inputNamespace, sourceInputModel);
                 library = new MgmtTestOutputLibrary(inputNamespace);
                 project.AddDirectory(sourceFolder);
             }
@@ -63,9 +61,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
         }
 
-        private static void InitializeMgmtContext(CodeModel codeModel, SourceInputModel sourceInputModel)
+        private static void InitializeMgmtContext(InputNamespace inputNamespace, SourceInputModel sourceInputModel)
         {
-            MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(codeModel, sourceInputModel));
+            MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(inputNamespace, sourceInputModel));
 
             // force trigger the model initialization
             foreach (var _ in MgmtContext.Library.ResourceSchemaMap.Value)

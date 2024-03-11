@@ -10,13 +10,11 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class BuildContext
     {
-        public BuildContext(CodeModel? codeModel, SourceInputModel? sourceInputModel, InputNamespace? inputNamespace = null) : this(codeModel, sourceInputModel,Configuration.LibraryName, Configuration.Namespace, inputNamespace)
+        public BuildContext(InputNamespace inputNamespace, SourceInputModel? sourceInputModel) : this(inputNamespace, sourceInputModel,Configuration.LibraryName, Configuration.Namespace)
         { }
 
-        public BuildContext(CodeModel? codeModel, SourceInputModel? sourceInputModel, string defaultLibraryName, string defaultNamespace, InputNamespace? inputNamespace = null)
+        public BuildContext(InputNamespace inputNamespace, SourceInputModel ? sourceInputModel, string defaultLibraryName, string defaultNamespace)
         {
-            CodeModel = codeModel;
-            SchemaUsageProvider = codeModel is null ? null : new SchemaUsageProvider(codeModel);
             SourceInputModel = sourceInputModel;
             DefaultLibraryName = defaultLibraryName;
             DefaultNamespace = defaultNamespace;
@@ -25,9 +23,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public OutputLibrary? BaseLibrary { get; protected set; }
 
-        public InputNamespace? InputNamespace { get; } = null;
-        public CodeModel? CodeModel { get; }
-        public SchemaUsageProvider? SchemaUsageProvider { get; }
+        public InputNamespace InputNamespace { get; }
         public string DefaultNamespace { get; }
         public string DefaultLibraryName { get; }
         public SourceInputModel? SourceInputModel { get; }

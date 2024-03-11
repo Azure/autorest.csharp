@@ -118,8 +118,49 @@ namespace AutoRest.CSharp.Common.Input
             {
                 KeepClientDefaultValue = Configuration.MethodsToKeepClientDefaultValue.Contains(operation.OperationId)
             };
+            inputOperation.CodeModelExamples = CreateOperationExamples(inputOperation);
+
             _inputOperationToOperationMap[inputOperation] = operation;
             return inputOperation;
+        }
+
+        private IReadOnlyList<InputOperationExample> CreateOperationExamples(InputOperation operation)
+        {
+            var result = new List<InputOperationExample>();
+            var exampleOperation = _exampleGroups?.FirstOrDefault(g => g.OperationId == operation.OperationId);
+            if (exampleOperation is null)
+            {
+                return result;
+            }
+            foreach (var example in exampleOperation.Examples)
+            {
+                var parameters = example.AllParameters
+                    .Select(p => new InputParameterExample(CreateOperationParameter(p.Parameter), CreateExampleValue(p.ExampleValue)))
+                    .ToList();
+                result.Add(new InputOperationExample(operation, parameters, example.Name, example.OriginalFile));
+            }
+            return result;
+        }
+
+        private InputExampleValue CreateExampleValue(ExampleValue exampleValue)
+        {
+            var inputType = CreateType(exampleValue.Schema, exampleValue.Schema.Extensions?.Format, _modelsCache, false);
+            if (exampleValue.RawValue != null)
+            {
+                return new InputExampleRawValue(inputType, exampleValue.RawValue);
+            }
+            if (exampleValue.Elements != null && exampleValue.Elements.Any())
+            {
+                return new InputExampleListValue(inputType, exampleValue.Elements.Select(CreateExampleValue).ToList());
+            }
+            if (exampleValue.Properties is null)
+            {
+                return InputExampleValue.Null(inputType);
+            }
+            else
+            {
+                return new InputExampleObjectValue(inputType, exampleValue.Properties.ToDictionary(p => p.Key, p => CreateExampleValue(p.Value)));
+            }
         }
 
         private List<InputParameter> CreateOperationParameters(IReadOnlyCollection<RequestParameter> requestParameters)

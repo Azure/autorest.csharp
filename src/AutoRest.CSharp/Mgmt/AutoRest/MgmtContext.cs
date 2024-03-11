@@ -21,10 +21,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public static InputNamespace? InputNamespace => Context.InputNamespace;
 
-        public static CodeModel? CodeModel => Context.CodeModel;
-
-        public static SchemaUsageProvider? SchemaUsageProvider => Context.SchemaUsageProvider;
-
         public static string DefaultNamespace => Configuration.Namespace;
 
         public static string RPName => ClientBuilder.GetRPName(DefaultNamespace);

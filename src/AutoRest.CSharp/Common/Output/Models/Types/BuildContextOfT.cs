@@ -37,10 +37,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             return library;
         }
 
-        public BuildContext(CodeModel codeModel, SourceInputModel? sourceInputModel)
-            : base(codeModel, sourceInputModel)
+        public BuildContext(InputNamespace inputNamespace, SourceInputModel? sourceInputModel)
+            : base(inputNamespace, sourceInputModel)
         {
-            _inputNamespace = new CodeModelConverter(codeModel).CreateNamespace();
+            _inputNamespace = inputNamespace;
         }
 
         public override TypeFactory TypeFactory => _typeFactory ??= new TypeFactory(Library);

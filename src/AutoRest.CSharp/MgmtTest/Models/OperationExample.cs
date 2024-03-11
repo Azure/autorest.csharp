@@ -17,9 +17,11 @@ namespace AutoRest.CSharp.MgmtTest.Models
 {
     internal class OperationExample
     {
-        internal protected InputClientExample _example;
-        public string OperationName { get; }
-        public string Name => _example.Client.Key;
+        private readonly Lazy<IReadOnlyDictionary<string, string>> _parameterNameToSerializedNameMapping;
+
+        internal protected InputOperationExample _example;
+        public string OperationId { get; }
+        public string Name => _example.Name!;
 
         public MgmtTypeProvider Carrier { get; }
 
@@ -38,27 +40,28 @@ namespace AutoRest.CSharp.MgmtTest.Models
         /// All the parameters defined in this test case
         /// We do not need to distiguish between ClientParameters and MethodParameters because we usually change that in code model transformation
         /// </summary>
-        public IEnumerable<InputParameterExample> AllParameters => _example.ClientParameters;
+        public IEnumerable<InputParameterExample> AllParameters => _example.Parameters;
         private IEnumerable<InputParameterExample>? _pathParameters;
         public IEnumerable<InputParameterExample> PathParameters => _pathParameters ??= AllParameters.Where(p => p.Parameter.Location == RequestLocation.Path);
 
-        protected OperationExample(string operationName, MgmtTypeProvider carrier, MgmtClientOperation operation, InputClientExample example)
+        protected OperationExample(string operationId, MgmtTypeProvider carrier, MgmtClientOperation operation, InputOperationExample example)
         {
-            OperationName = operationName;
+            OperationId = operationId;
             _example = example;
             Carrier = carrier;
             Operation = operation;
+            _parameterNameToSerializedNameMapping = new Lazy<IReadOnlyDictionary<string, string>>(EnsureParameterSerializedNames);
         }
 
         private MgmtRestOperation GetRestOperationFromOperationId()
         {
             foreach (var operation in Operation)
             {
-                if (operation.Name == OperationName)
+                if (operation.OperationId == OperationId)
                     return operation;
             }
 
-            throw new InvalidOperationException($"Cannot find operationName {OperationName} in example {_example.Client.Key}");
+            throw new InvalidOperationException($"Cannot find operationId {OperationId} in example {_example.Operation.Name}");
         }
 
         /// <summary>
@@ -133,22 +136,17 @@ namespace AutoRest.CSharp.MgmtTest.Models
 
         private Dictionary<string, string> EnsureParameterSerializedNames()
         {
-            if (_parameterNameToSerializedNameMapping != null)
-                return _parameterNameToSerializedNameMapping;
+            var result = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
-            _parameterNameToSerializedNameMapping = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-
-            foreach (var requestParameter in _example.ClientParameters)
+            foreach (var requestParameter in _example.Operation.Parameters)
             {
-                _parameterNameToSerializedNameMapping.Add(requestParameter.Parameter.Name, requestParameter.Parameter.NameInRequest);
+                result.Add(requestParameter.Name, requestParameter.NameInRequest ?? requestParameter.Name);
             }
 
-            return _parameterNameToSerializedNameMapping;
+            return result;
         }
 
-        private Dictionary<string, string>? _parameterNameToSerializedNameMapping;
-
-        protected string GetParameterSerializedName(string name) => EnsureParameterSerializedNames()[name];
+        protected string GetParameterSerializedName(string name) => _parameterNameToSerializedNameMapping.Value[name];
 
         private InputParameterExample FindPathExampleParameterBySerializedName(string serializedName)
         {
@@ -156,7 +154,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
 
             // we throw exceptions here because path parameter cannot be optional, therefore if we do not find a parameter in the example, there must be an issue in the example
             if (parameter == null)
-                throw new InvalidOperationException($"Cannot find a parameter in test case {_example.Client.Key} with the name of {serializedName}");
+                throw new InvalidOperationException($"Cannot find a parameter in test case {_example.Operation.Name} with the name of {serializedName}");
 
             return parameter;
         }

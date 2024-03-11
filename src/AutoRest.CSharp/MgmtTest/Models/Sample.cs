@@ -8,7 +8,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
 {
     internal class Sample : MockTestCase
     {
-        public Sample(MockTestCase testCase) : base(testCase.OperationName, testCase.Carrier, testCase.Operation, testCase._example)
+        public Sample(MockTestCase testCase) : base(testCase.OperationId, testCase.Carrier, testCase.Operation, testCase._example)
         {
         }
 
