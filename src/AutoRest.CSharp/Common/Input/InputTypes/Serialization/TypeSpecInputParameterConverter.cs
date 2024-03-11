@@ -124,7 +124,8 @@ namespace AutoRest.CSharp.Common.Input
                 InputLiteralType literalType => literalType.LiteralValueType,
                 InputListType listType => listType with { ElementType = FixInputParameterType(listType.ElementType, requestLocation) },
                 InputDictionaryType dictionaryType => dictionaryType with { ValueType = FixInputParameterType(dictionaryType.ValueType, requestLocation) },
-                InputPrimitiveType { Kind: InputTypeKind.DateTime } when requestLocation == RequestLocation.Header => InputPrimitiveType.DateTimeRFC1123,
+                // See https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#http-parameter-serialization
+                InputPrimitiveType { Kind: InputTypeKind.DateTime } when requestLocation == RequestLocation.Header => InputPrimitiveType.DateTimeRFC7231,
                 InputPrimitiveType { Kind: InputTypeKind.DateTime } when requestLocation == RequestLocation.Body => InputPrimitiveType.DateTimeRFC3339,
                 _ => parameterType
             };
