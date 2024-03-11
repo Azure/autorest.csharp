@@ -41,7 +41,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         [EditorBrowsable(EditorBrowsableState.Never)]
         protected override string DefaultAccessibility { get; } = "public";
 
-        public virtual CSharpType? Inherits { get; protected init; }
+        public CSharpType? Inherits { get; protected init; }
 
         private IReadOnlyList<CSharpType>? _implements;
         public virtual IReadOnlyList<CSharpType> Implements => _implements ??= BuildImplements().ToArray();

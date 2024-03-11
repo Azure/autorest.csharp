@@ -44,7 +44,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
         public bool IsAccessibilityOverridden { get; }
-        public override bool IncludeConverter => _inputModelSerialization.IncludeConverter;
+
         protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) &&
                                               _inputModel.DiscriminatorPropertyName is not null &&
                                               _inputModel.DiscriminatorValue is null &&
@@ -121,6 +121,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             IsPropertyBag = inputModel.IsPropertyBag;
             IsUnknownDerivedType = inputModel.IsUnknownDiscriminatorModel;
             SkipInitializerConstructor = IsUnknownDerivedType;
+
+            JsonConverter = _inputModelSerialization.IncludeConverter ? new JsonConverterProvider(this, _sourceInputModel) : null;
         }
 
         private static InputModelTypeUsage UpdateInputModelUsage(InputModelType inputModel, ModelTypeMapping? modelTypeMapping)
@@ -571,7 +573,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             // For that, FieldDeclaration instances must be written in the main partial class before JsonObjectSerialization is created for the serialization partial class
             var properties = SerializationBuilder.GetPropertySerializations(this, _typeFactory);
             var additionalProperties = CreateAdditionalPropertiesSerialization();
-            return new(this, SerializationConstructor.Signature.Parameters, properties, additionalProperties, Discriminator, null);
+            return new(this, SerializationConstructor.Signature.Parameters, properties, additionalProperties, Discriminator, JsonConverter);
         }
 
         protected override BicepObjectSerialization? BuildBicepSerialization(JsonObjectSerialization? json) => null;
