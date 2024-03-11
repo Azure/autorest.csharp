@@ -1091,6 +1091,9 @@ export function getFormattedType(program: Program, type: Type): FormattedType {
     const format = getFormat(program, type);
     if (type.kind === "ModelProperty") {
         targetType = type.type;
+        if (targetType.kind === "UnionVariant") {
+            targetType = targetType.type;
+        }
     }
     const encodeData =
         type.kind === "Scalar" || type.kind === "ModelProperty"
