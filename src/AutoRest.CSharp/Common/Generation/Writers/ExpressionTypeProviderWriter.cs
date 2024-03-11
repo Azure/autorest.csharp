@@ -87,6 +87,8 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 _writer.WriteMethod(method);
             }
+
+            _writer.Line();
         }
     }
 }

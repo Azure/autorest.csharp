@@ -222,6 +222,8 @@ function getCSharpInputTypeKindByIntrinsicModelName(
                     );
                     return InputPrimitiveTypeKind.DurationISO8601;
             }
+        case "azureLocation":
+            return InputPrimitiveTypeKind.AzureLocation;
         default:
             return InputPrimitiveTypeKind.Object;
     }

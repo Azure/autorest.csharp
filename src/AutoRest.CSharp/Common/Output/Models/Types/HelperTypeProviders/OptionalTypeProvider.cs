@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class OptionalTypeProvider : ExpressionTypeProvider
     {
-        private static readonly Lazy<OptionalTypeProvider> _instance = new(() => new OptionalTypeProvider(Configuration.HelperNamespace, null));
+        private static readonly Lazy<OptionalTypeProvider> _instance = new(() => new OptionalTypeProvider());
         public static OptionalTypeProvider Instance => _instance.Value;
 
         private class ListTemplate<T> { }
@@ -30,8 +30,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly CSharpType _genericChangeTrackingList;
         private readonly CSharpType _genericChangeTrackingDictionary;
 
-        private OptionalTypeProvider(string defaultNamespace, SourceInputModel? sourceInputModel)
-            : base(defaultNamespace, sourceInputModel)
+        private OptionalTypeProvider() : base(Configuration.HelperNamespace, null)
         {
             DeclarationModifiers = TypeSignatureModifiers.Internal | TypeSignatureModifiers.Static;
             _genericChangeTrackingList = ChangeTrackingListProvider.Instance.Type;

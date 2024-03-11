@@ -8,5 +8,6 @@
   ],
   "public-clients": true,
   "skip-csproj-packagereference": true,
+  "flavor": "azure",
   "helper-namespace": "Azure.AI.DocumentTranslation"
 }

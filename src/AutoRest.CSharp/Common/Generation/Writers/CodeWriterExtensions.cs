@@ -327,6 +327,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.AppendRaw("]");
             }
 
+            writer.AppendRawIf("out ", clientParameter.IsOut);
             writer.AppendRawIf("ref ", clientParameter.IsRef);
             writer.AppendRawIf("out ", clientParameter.IsOut);
 
@@ -659,7 +660,8 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer;
         }
 
-        public static void WriteMethod(this CodeWriter writer, Method method)
+        // TODO -- remove the writeEmptyLine optional flag here
+        public static void WriteMethod(this CodeWriter writer, Method method, bool writeEmptyLine = true)
         {
             if (method.Body is { } body)
             {
@@ -678,7 +680,9 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
             }
 
-            writer.Line();
+            // TODO -- temporary to minimize the code changes, will remove after the consolidation
+            if (writeEmptyLine)
+                writer.Line();
         }
 
         public static void WriteProperty(this CodeWriter writer, PropertyDeclaration property)

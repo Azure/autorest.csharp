@@ -19,6 +19,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             yield return ChangeTrackingListProvider.Instance;
             yield return OptionalTypeProvider.Instance;
             yield return RequestContentHelperProvider.Instance;
+            yield return Utf8JsonRequestContentProvider.Instance;
             yield return ArgumentProvider.Instance;
             yield return ChangeTrackingDictionaryProvider.Instance;
         }

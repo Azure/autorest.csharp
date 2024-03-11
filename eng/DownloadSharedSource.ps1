@@ -75,7 +75,6 @@ $files = @(
     'ResponseWithHeadersOfTOfTHeaders.cs',
     'StringRequestContent.cs',
     'TypeFormatters.cs',
-    'Utf8JsonRequestContent.cs',
     'Utf8JsonWriterExtensions.cs',
     'XElementExtensions.cs',
     'XmlWriterContent.cs',

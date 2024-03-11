@@ -7,7 +7,7 @@
 
 namespace MgmtSafeFlatten.Models
 {
-    /// <summary> The UnknownLayerOneBaseType. </summary>
+    /// <summary> Unknown version of LayerOneBaseType. </summary>
     internal partial class UnknownLayerOneBaseType : LayerOneBaseType
     {
         /// <summary> Initializes a new instance of <see cref="UnknownLayerOneBaseType"/>. </summary>
