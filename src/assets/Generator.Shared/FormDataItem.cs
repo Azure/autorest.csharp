@@ -10,7 +10,7 @@ namespace System.ClientModel.Primitives
     /// </summary>
     internal class FormDataItem
     {
-        public FormDataItem(string name, BinaryData content)
+        public FormDataItem(string name, BinaryContent content)
         {
             Name = name;
             Content = content;
@@ -18,6 +18,6 @@ namespace System.ClientModel.Primitives
         public string Name { get; set; }
         public string? FileName { get; set; }
         public string? ContentType { get; set; }
-        public BinaryData Content { get; set; }
+        public BinaryContent Content { get; set; }
     }
 }

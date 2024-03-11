@@ -2,13 +2,13 @@
 // Licensed under the MIT License.
 
 using System.ClientModel.Internal;
-using System.ClientModel.Primitives.Pipeline;
 using System.Collections.Generic;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System
 {
+    /*
     internal sealed record MessagePipelineExpression(ValueExpression Untyped) : TypedValueExpression<MessagePipeline>(Untyped)
     {
         public PipelineMessageExpression CreateMessage(RequestOptionsExpression requestContext, ValueExpression responseClassifier) => new(Invoke(nameof(MessagePipeline.CreateMessage), requestContext, responseClassifier));
@@ -42,4 +42,5 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System
             return new(InvokeExtension(typeof(PipelineProtocolExtensions), methodName, arguments, async));
         }
     }
+    */
 }

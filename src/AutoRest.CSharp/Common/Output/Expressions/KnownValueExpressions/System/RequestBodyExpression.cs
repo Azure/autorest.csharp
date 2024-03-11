@@ -6,5 +6,5 @@ using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System
 {
-    internal sealed record RequestBodyExpression(ValueExpression Untyped) : TypedValueExpression<RequestBody>(Untyped);
+    //internal sealed record RequestBodyExpression(ValueExpression Untyped) : TypedValueExpression<RequestBody>(Untyped);
 }

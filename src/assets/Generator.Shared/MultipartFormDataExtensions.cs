@@ -35,11 +35,5 @@ namespace System.ClientModel.Primitives
             }
             return results;
         }
-
-        public static RequestContent ToRequestContent(this MultipartFormData multipart)
-        {
-            //return RequestContent.Create(ModelReaderWriter.Write(multipart, new ModelReaderWriterOptions("MPFD")));
-            return RequestContent.Create(multipart as IPersistableStreamModel<MultipartFormData>, new ModelReaderWriterOptions("MPFD"));
-        }
     }
 }

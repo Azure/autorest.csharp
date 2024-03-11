@@ -12,7 +12,7 @@ using AutoRest.CSharp.Output.Models.Serialization;
 
 namespace AutoRest.CSharp.Common.Output.Models.Serialization.Multipart
 {
-    internal class MultipartPropertySerialization: PropertySerialization
+    internal record MultipartPropertySerialization: PropertySerialization
     {
         /*
         public MultipartPropertySerialization(
@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Serialization.Multipart
             TypedValueExpression value,
             string serializedName,
             CSharpType? serializedType,
-            ObjectSerialization valueSerialization,
+            MultipartSerialization valueSerialization,
             bool isRequired,
             bool shouldExcludeInWireSerialization,
             TypedValueExpression? enumerableExpression = null)
@@ -53,6 +53,6 @@ namespace AutoRest.CSharp.Common.Output.Models.Serialization.Multipart
         }
 
         public string ContentType { get; set; } = "application/octet-stream";
-        public ObjectSerialization ValueSerialization { get; }
+        public MultipartSerialization ValueSerialization { get; }
     }
 }

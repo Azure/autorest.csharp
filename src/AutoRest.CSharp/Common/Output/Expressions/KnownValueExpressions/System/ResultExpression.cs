@@ -8,6 +8,7 @@ using AutoRest.CSharp.Generation.Types;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System
 {
+    /*
     internal sealed record ResultExpression(ValueExpression Untyped) : TypedValueExpression<Result>(Untyped)
     {
         public ValueExpression Value => Property(nameof(Result<object>.Value));
@@ -31,4 +32,5 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System
 
         public PipelineResponseExpression GetRawResponse() => new(Invoke(nameof(Result<object>.GetRawResponse)));
     }
+    */
 }

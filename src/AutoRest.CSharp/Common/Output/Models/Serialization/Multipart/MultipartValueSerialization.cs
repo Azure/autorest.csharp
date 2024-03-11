@@ -10,12 +10,10 @@ namespace AutoRest.CSharp.Common.Output.Models.Serialization.Multipart
 {
     internal class MultipartValueSerialization: MultipartSerialization
     {
-        public MultipartValueSerialization(CSharpType type, SerializationFormat format, bool isNullable) : base(isNullable)
+        public MultipartValueSerialization(CSharpType type, SerializationFormat format, bool isNullable) : base(isNullable, type)
         {
-            Type = type;
             Format = format;
         }
-        public CSharpType Type { get; }
         public SerializationFormat Format { get; }
     }
 }

@@ -10,6 +10,7 @@ using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System
 {
+    /*
     internal sealed record RequestUriExpression(ValueExpression Untyped) : TypedValueExpression<RequestUri>(Untyped)
     {
         public TypedValueExpression ToUri() => new FrameworkTypeExpression(typeof(Uri), Invoke(nameof(RequestUri.ToUri)));
@@ -46,4 +47,5 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System
                 ? AppendQueryDelimited(name, value, delimiter, formatSpecifier, escape)
                 : AppendQueryDelimited(name, value, delimiter, escape);
     }
+    */
 }

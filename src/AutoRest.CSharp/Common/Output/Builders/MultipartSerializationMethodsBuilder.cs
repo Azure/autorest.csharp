@@ -21,6 +21,7 @@ using AutoRest.CSharp.Common.Output.Models.Serialization.Multipart;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models.Serialization;
+using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Utilities;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using static AutoRest.CSharp.Common.Input.Configuration;
@@ -120,8 +121,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
             _ when valueType.IsFrameworkType && valueType.FrameworkType == typeof(string) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromString), new[] { valueExpression }),
             _ when valueType.IsFrameworkType && valueType.FrameworkType == typeof(byte[]) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromBytes), new[] { valueExpression }),
             _ when valueType.IsFrameworkType && valueType.FrameworkType == typeof(Stream) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromStream), new[] { valueExpression }),
-            _ when valueType.IsFrameworkType && valueType.FrameworkType == typeof(BinaryData) => new InvokeInstanceMethodExpression(valueExpression, nameof(BinaryData.WithMediaType), new[] { Literal("application/octet-stream") }, null, false),
-            _ when valueType.IsFrameworkType => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromObjectAsJson), new[] { valueExpression }, new[] { valueType }),
+            //_ when valueType.IsFrameworkType && valueType.FrameworkType == typeof(BinaryData) => new InvokeInstanceMethodExpression(valueExpression, nameof(BinaryData.WithMediaType), new[] { Literal("application/octet-stream") }, null, false),
+            _ when valueType.IsFrameworkType && valueType.FrameworkType == typeof(BinaryData) => valueExpression,
             _ => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromObjectAsJson), new[] { valueExpression }, new[] { valueType })
         };
 
@@ -141,18 +142,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             foreach (MultipartPropertySerialization mpProperty in multipart.Properties)
             {
-                if (mpProperty.SerializedType is { } type)
+                if (mpProperty.ValueSerialization is { } valueSerialization)
                 {
+                    var type = mpProperty.SerializedType is not null && TypeFactory.IsCollectionType(mpProperty.SerializedType)
+                        ? mpProperty.SerializedType
+                        : valueSerialization.Type;
                     var propertyDeclaration = new CodeWriterDeclaration(mpProperty.SerializedName.ToVariableName());
-                    if (!mpProperty.IsRequired)
-                    {
-                        if (type.IsFrameworkType && type.FrameworkType == typeof(Nullable<>))
-                        {
-                            type = new CSharpType(type.Arguments[0].FrameworkType);
-                        }
-                        type = new CSharpType(Configuration.ApiTypes.OptionalPropertyType, type);
-                    }
-
                     propertyVariables.Add(mpProperty, new VariableReference(type, propertyDeclaration));
                 }
                 /*
@@ -339,32 +334,14 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private static ValueExpression GetOptional(PropertySerialization propertySerialization, TypedValueExpression variable)
         {
             var sourceType = variable.Type;
-            if (!sourceType.IsFrameworkType || sourceType.FrameworkType != Configuration.ApiTypes.OptionalPropertyType)
+            if (!sourceType.IsFrameworkType || propertySerialization.SerializationConstructorParameterName == "serializedAdditionalRawData")
             {
                 return variable;
             }
-
-            var targetType = propertySerialization.Value.Type;
-            if (TypeFactory.IsList(targetType) && !TypeFactory.IsReadOnlyMemory(targetType))
+            else if (!propertySerialization.IsRequired)
             {
-                return InvokeOptional.ToList(variable);
+                return InvokeOptional.FallBackToChangeTrackingCollection(variable, propertySerialization.SerializedType);
             }
-
-            if (TypeFactory.IsDictionary(targetType))
-            {
-                return InvokeOptional.ToDictionary(variable);
-            }
-
-            if (targetType is { IsValueType: true, IsNullable: true })
-            {
-                return InvokeOptional.ToNullable(variable);
-            }
-
-            if (targetType.IsNullable)
-            {
-                return new MemberExpression(variable, "Value");
-            }
-
             return variable;
         }
     }
