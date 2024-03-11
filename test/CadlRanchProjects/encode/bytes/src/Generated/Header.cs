@@ -62,10 +62,7 @@ namespace Encode.Bytes
         /// <include file="Docs/Header.xml" path="doc/members/member[@name='DefaultAsync(BinaryData,RequestContext)']/*" />
         public virtual async Task<Response> DefaultAsync(BinaryData value, RequestContext context = null)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(value, nameof(value));
 
             using var scope = ClientDiagnostics.CreateScope("Header.Default");
             scope.Start();
@@ -100,10 +97,7 @@ namespace Encode.Bytes
         /// <include file="Docs/Header.xml" path="doc/members/member[@name='Default(BinaryData,RequestContext)']/*" />
         public virtual Response Default(BinaryData value, RequestContext context = null)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(value, nameof(value));
 
             using var scope = ClientDiagnostics.CreateScope("Header.Default");
             scope.Start();
@@ -138,10 +132,7 @@ namespace Encode.Bytes
         /// <include file="Docs/Header.xml" path="doc/members/member[@name='Base64Async(BinaryData,RequestContext)']/*" />
         public virtual async Task<Response> Base64Async(BinaryData value, RequestContext context = null)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(value, nameof(value));
 
             using var scope = ClientDiagnostics.CreateScope("Header.Base64");
             scope.Start();
@@ -176,10 +167,7 @@ namespace Encode.Bytes
         /// <include file="Docs/Header.xml" path="doc/members/member[@name='Base64(BinaryData,RequestContext)']/*" />
         public virtual Response Base64(BinaryData value, RequestContext context = null)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(value, nameof(value));
 
             using var scope = ClientDiagnostics.CreateScope("Header.Base64");
             scope.Start();
@@ -214,10 +202,7 @@ namespace Encode.Bytes
         /// <include file="Docs/Header.xml" path="doc/members/member[@name='Base64urlAsync(BinaryData,RequestContext)']/*" />
         public virtual async Task<Response> Base64urlAsync(BinaryData value, RequestContext context = null)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(value, nameof(value));
 
             using var scope = ClientDiagnostics.CreateScope("Header.Base64url");
             scope.Start();
@@ -252,10 +237,7 @@ namespace Encode.Bytes
         /// <include file="Docs/Header.xml" path="doc/members/member[@name='Base64url(BinaryData,RequestContext)']/*" />
         public virtual Response Base64url(BinaryData value, RequestContext context = null)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(value, nameof(value));
 
             using var scope = ClientDiagnostics.CreateScope("Header.Base64url");
             scope.Start();
@@ -290,10 +272,7 @@ namespace Encode.Bytes
         /// <include file="Docs/Header.xml" path="doc/members/member[@name='Base64urlArrayAsync(IEnumerable{BinaryData},RequestContext)']/*" />
         public virtual async Task<Response> Base64urlArrayAsync(IEnumerable<BinaryData> value, RequestContext context = null)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(value, nameof(value));
 
             using var scope = ClientDiagnostics.CreateScope("Header.Base64urlArray");
             scope.Start();
@@ -328,10 +307,7 @@ namespace Encode.Bytes
         /// <include file="Docs/Header.xml" path="doc/members/member[@name='Base64urlArray(IEnumerable{BinaryData},RequestContext)']/*" />
         public virtual Response Base64urlArray(IEnumerable<BinaryData> value, RequestContext context = null)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(value, nameof(value));
 
             using var scope = ClientDiagnostics.CreateScope("Header.Base64urlArray");
             scope.Start();

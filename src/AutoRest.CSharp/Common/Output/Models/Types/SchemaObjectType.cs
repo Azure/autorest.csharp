@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
@@ -16,6 +17,8 @@ using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Output.Models.Serialization;
+using AutoRest.CSharp.Output.Models.Serialization.Bicep;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -364,7 +367,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                 baseCtor);
         }
 
-        public override bool IncludeConverter => _usage.HasFlag(InputModelTypeUsage.Converter);
+        private JsonConverterProvider? _jsonConverter;
+        public override JsonConverterProvider? JsonConverter
+            => _jsonConverter ??= _usage.HasFlag(InputModelTypeUsage.Converter) ? new JsonConverterProvider(this, _sourceInputModel) : null;
 
         public CSharpType? ImplementsDictionaryType => _implementsDictionaryType ??= CreateInheritedDictionaryType();
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()
@@ -660,8 +665,29 @@ namespace AutoRest.CSharp.Output.Models.Types
             return _serializationBuilder.BuildJsonObjectSerialization(InputModel, this);
         }
 
-        // TODO: do we need xml serialization for MPG? it's always null for DPG
+        protected override BicepObjectSerialization? BuildBicepSerialization(JsonObjectSerialization? json)
+        {
+            if (json == null)
+                return null;
+            // if this.Usages does not contain Output bit, then return null
+            // alternate - is one of ancestors resource data or contained on a resource data
+            var usage = GetUsage();
+
+            return Configuration.AzureArm && Configuration.UseModelReaderWriter && Configuration.EnableBicepSerialization &&
+                   usage.HasFlag(InputModelTypeUsage.Output)
+                ? _serializationBuilder.BuildBicepObjectSerialization(this, json) : null;
+        }
+
+        // TODO: implement this if needed
         protected override XmlObjectSerialization? BuildXmlSerialization() => null;
+
+        protected override IEnumerable<Method> BuildMethods()
+        {
+            foreach (var method in SerializationMethodsBuilder.BuildSerializationMethods(this))
+            {
+                yield return method;
+            }
+        }
 
         private IEnumerable<ObjectTypeDiscriminatorImplementation> GetDerivedTypes(IReadOnlyList<InputModelType> derivedInputTypes)
         {

@@ -49,10 +49,7 @@ namespace Encode.Bytes
         /// <include file="Docs/RequestBody.xml" path="doc/members/member[@name='DefaultAsync(BinaryData,CancellationToken)']/*" />
         public virtual async Task<Response> DefaultAsync(BinaryData value, CancellationToken cancellationToken = default)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(value, nameof(value));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromObject(value);
@@ -66,10 +63,7 @@ namespace Encode.Bytes
         /// <include file="Docs/RequestBody.xml" path="doc/members/member[@name='Default(BinaryData,CancellationToken)']/*" />
         public virtual Response Default(BinaryData value, CancellationToken cancellationToken = default)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(value, nameof(value));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromObject(value);
@@ -100,10 +94,7 @@ namespace Encode.Bytes
         /// <include file="Docs/RequestBody.xml" path="doc/members/member[@name='DefaultAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> DefaultAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("RequestBody.Default");
             scope.Start();
@@ -142,10 +133,7 @@ namespace Encode.Bytes
         /// <include file="Docs/RequestBody.xml" path="doc/members/member[@name='Default(RequestContent,RequestContext)']/*" />
         public virtual Response Default(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("RequestBody.Default");
             scope.Start();
@@ -167,10 +155,7 @@ namespace Encode.Bytes
         /// <include file="Docs/RequestBody.xml" path="doc/members/member[@name='OctetStreamAsync(BinaryData,CancellationToken)']/*" />
         public virtual async Task<Response> OctetStreamAsync(BinaryData value, CancellationToken cancellationToken = default)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(value, nameof(value));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = value;
@@ -184,10 +169,7 @@ namespace Encode.Bytes
         /// <include file="Docs/RequestBody.xml" path="doc/members/member[@name='OctetStream(BinaryData,CancellationToken)']/*" />
         public virtual Response OctetStream(BinaryData value, CancellationToken cancellationToken = default)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(value, nameof(value));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = value;
@@ -218,10 +200,7 @@ namespace Encode.Bytes
         /// <include file="Docs/RequestBody.xml" path="doc/members/member[@name='OctetStreamAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> OctetStreamAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("RequestBody.OctetStream");
             scope.Start();
@@ -260,10 +239,7 @@ namespace Encode.Bytes
         /// <include file="Docs/RequestBody.xml" path="doc/members/member[@name='OctetStream(RequestContent,RequestContext)']/*" />
         public virtual Response OctetStream(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("RequestBody.OctetStream");
             scope.Start();
@@ -285,10 +261,7 @@ namespace Encode.Bytes
         /// <include file="Docs/RequestBody.xml" path="doc/members/member[@name='CustomContentTypeAsync(BinaryData,CancellationToken)']/*" />
         public virtual async Task<Response> CustomContentTypeAsync(BinaryData value, CancellationToken cancellationToken = default)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(value, nameof(value));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = value;
@@ -302,10 +275,7 @@ namespace Encode.Bytes
         /// <include file="Docs/RequestBody.xml" path="doc/members/member[@name='CustomContentType(BinaryData,CancellationToken)']/*" />
         public virtual Response CustomContentType(BinaryData value, CancellationToken cancellationToken = default)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(value, nameof(value));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = value;
@@ -336,10 +306,7 @@ namespace Encode.Bytes
         /// <include file="Docs/RequestBody.xml" path="doc/members/member[@name='CustomContentTypeAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> CustomContentTypeAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("RequestBody.CustomContentType");
             scope.Start();
@@ -378,10 +345,7 @@ namespace Encode.Bytes
         /// <include file="Docs/RequestBody.xml" path="doc/members/member[@name='CustomContentType(RequestContent,RequestContext)']/*" />
         public virtual Response CustomContentType(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("RequestBody.CustomContentType");
             scope.Start();
@@ -403,10 +367,7 @@ namespace Encode.Bytes
         /// <include file="Docs/RequestBody.xml" path="doc/members/member[@name='Base64Async(BinaryData,CancellationToken)']/*" />
         public virtual async Task<Response> Base64Async(BinaryData value, CancellationToken cancellationToken = default)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(value, nameof(value));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromObject(value);
@@ -420,10 +381,7 @@ namespace Encode.Bytes
         /// <include file="Docs/RequestBody.xml" path="doc/members/member[@name='Base64(BinaryData,CancellationToken)']/*" />
         public virtual Response Base64(BinaryData value, CancellationToken cancellationToken = default)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(value, nameof(value));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromObject(value);
@@ -454,10 +412,7 @@ namespace Encode.Bytes
         /// <include file="Docs/RequestBody.xml" path="doc/members/member[@name='Base64Async(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> Base64Async(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("RequestBody.Base64");
             scope.Start();
@@ -496,10 +451,7 @@ namespace Encode.Bytes
         /// <include file="Docs/RequestBody.xml" path="doc/members/member[@name='Base64(RequestContent,RequestContext)']/*" />
         public virtual Response Base64(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("RequestBody.Base64");
             scope.Start();
@@ -521,10 +473,7 @@ namespace Encode.Bytes
         /// <include file="Docs/RequestBody.xml" path="doc/members/member[@name='Base64urlAsync(BinaryData,CancellationToken)']/*" />
         public virtual async Task<Response> Base64urlAsync(BinaryData value, CancellationToken cancellationToken = default)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(value, nameof(value));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromObject(value);
@@ -538,10 +487,7 @@ namespace Encode.Bytes
         /// <include file="Docs/RequestBody.xml" path="doc/members/member[@name='Base64url(BinaryData,CancellationToken)']/*" />
         public virtual Response Base64url(BinaryData value, CancellationToken cancellationToken = default)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(value, nameof(value));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromObject(value);
@@ -572,10 +518,7 @@ namespace Encode.Bytes
         /// <include file="Docs/RequestBody.xml" path="doc/members/member[@name='Base64urlAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> Base64urlAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("RequestBody.Base64url");
             scope.Start();
@@ -614,10 +557,7 @@ namespace Encode.Bytes
         /// <include file="Docs/RequestBody.xml" path="doc/members/member[@name='Base64url(RequestContent,RequestContext)']/*" />
         public virtual Response Base64url(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("RequestBody.Base64url");
             scope.Start();

@@ -57,5 +57,7 @@
     "Deployment": {
       "Properties": "new DeploymentProperties(current.Properties.Mode.HasValue ? current.Properties.Mode.Value : DeploymentMode.Incremental)"
     }
-  }
+  },
+  "flavor": "azure",
+  "helper-namespace": "MgmtScopeResource"
 }

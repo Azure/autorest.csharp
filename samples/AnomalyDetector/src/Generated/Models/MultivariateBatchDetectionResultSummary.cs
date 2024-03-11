@@ -55,10 +55,7 @@ namespace AnomalyDetector.Models
         /// <exception cref="ArgumentNullException"> <paramref name="setupInfo"/> is null. </exception>
         internal MultivariateBatchDetectionResultSummary(MultivariateBatchDetectionStatus status, MultivariateBatchDetectionOptions setupInfo)
         {
-            if (setupInfo == null)
-            {
-                throw new ArgumentNullException(nameof(setupInfo));
-            }
+            Argument.AssertNotNull(setupInfo, nameof(setupInfo));
 
             Status = status;
             Errors = new ChangeTrackingList<ErrorResponse>();

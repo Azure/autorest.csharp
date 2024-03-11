@@ -13,7 +13,7 @@ using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
-    /// <summary> The UnknownArtifact. </summary>
+    /// <summary> Unknown version of Artifact. </summary>
     internal partial class UnknownArtifact : ArtifactData
     {
         /// <summary> Initializes a new instance of <see cref="UnknownArtifact"/>. </summary>

@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using Encode.Bytes;
 
 namespace Encode.Bytes.Models
 {
@@ -50,10 +51,7 @@ namespace Encode.Bytes.Models
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public Base64urlBytesProperty(BinaryData value)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(value, nameof(value));
 
             Value = value;
         }

@@ -231,10 +231,7 @@ namespace _Type.Property.Optionality
         /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='PutAllAsync(DatetimeProperty,CancellationToken)']/*" />
         public virtual async Task<Response> PutAllAsync(DatetimeProperty body, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
+            Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -249,10 +246,7 @@ namespace _Type.Property.Optionality
         /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='PutAll(DatetimeProperty,CancellationToken)']/*" />
         public virtual Response PutAll(DatetimeProperty body, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
+            Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -283,10 +277,7 @@ namespace _Type.Property.Optionality
         /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='PutAllAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutAllAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("Datetime.PutAll");
             scope.Start();
@@ -325,10 +316,7 @@ namespace _Type.Property.Optionality
         /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='PutAll(RequestContent,RequestContext)']/*" />
         public virtual Response PutAll(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("Datetime.PutAll");
             scope.Start();
@@ -351,10 +339,7 @@ namespace _Type.Property.Optionality
         /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='PutDefaultAsync(DatetimeProperty,CancellationToken)']/*" />
         public virtual async Task<Response> PutDefaultAsync(DatetimeProperty body, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
+            Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -369,10 +354,7 @@ namespace _Type.Property.Optionality
         /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='PutDefault(DatetimeProperty,CancellationToken)']/*" />
         public virtual Response PutDefault(DatetimeProperty body, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
+            Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -403,10 +385,7 @@ namespace _Type.Property.Optionality
         /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='PutDefaultAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutDefaultAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("Datetime.PutDefault");
             scope.Start();
@@ -445,10 +424,7 @@ namespace _Type.Property.Optionality
         /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='PutDefault(RequestContent,RequestContext)']/*" />
         public virtual Response PutDefault(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("Datetime.PutDefault");
             scope.Start();

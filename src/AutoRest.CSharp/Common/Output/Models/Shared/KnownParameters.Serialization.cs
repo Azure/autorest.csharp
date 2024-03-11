@@ -23,6 +23,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
             public static readonly Parameter Utf8JsonWriter = new Parameter("writer", null, typeof(Utf8JsonWriter), null, ValidationType.None, null);
             public static readonly Parameter Utf8JsonReader = new Parameter("reader", null, typeof(Utf8JsonReader), null, ValidationType.None, null, IsRef: true);
+            public static readonly Parameter JsonOptions = new Parameter("options", null, typeof(JsonSerializerOptions), null, ValidationType.None, null);
             public static readonly Parameter Options = new Parameter("options", null, modelReaderWriterOptionsType, null, ValidationType.None, null);
             public static readonly Parameter OptionalOptions = new Parameter("options", null, nullableModelReaderWriterOptionsType, Constant.Default(nullableModelReaderWriterOptionsType), ValidationType.None, null);
             public static readonly Parameter JsonElement = new Parameter("element", null, typeof(JsonElement), null, ValidationType.None, null);

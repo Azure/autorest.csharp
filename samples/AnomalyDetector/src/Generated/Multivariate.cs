@@ -173,10 +173,7 @@ namespace AnomalyDetector
         /// <include file="Docs/Multivariate.xml" path="doc/members/member[@name='TrainMultivariateModelAsync(ModelInfo,CancellationToken)']/*" />
         public virtual async Task<Response<AnomalyDetectionModel>> TrainMultivariateModelAsync(ModelInfo modelInfo, CancellationToken cancellationToken = default)
         {
-            if (modelInfo == null)
-            {
-                throw new ArgumentNullException(nameof(modelInfo));
-            }
+            Argument.AssertNotNull(modelInfo, nameof(modelInfo));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = modelInfo.ToRequestContent();
@@ -200,10 +197,7 @@ namespace AnomalyDetector
         /// <include file="Docs/Multivariate.xml" path="doc/members/member[@name='TrainMultivariateModel(ModelInfo,CancellationToken)']/*" />
         public virtual Response<AnomalyDetectionModel> TrainMultivariateModel(ModelInfo modelInfo, CancellationToken cancellationToken = default)
         {
-            if (modelInfo == null)
-            {
-                throw new ArgumentNullException(nameof(modelInfo));
-            }
+            Argument.AssertNotNull(modelInfo, nameof(modelInfo));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = modelInfo.ToRequestContent();
@@ -234,10 +228,7 @@ namespace AnomalyDetector
         /// <include file="Docs/Multivariate.xml" path="doc/members/member[@name='TrainMultivariateModelAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> TrainMultivariateModelAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("Multivariate.TrainMultivariateModel");
             scope.Start();
@@ -276,10 +267,7 @@ namespace AnomalyDetector
         /// <include file="Docs/Multivariate.xml" path="doc/members/member[@name='TrainMultivariateModel(RequestContent,RequestContext)']/*" />
         public virtual Response TrainMultivariateModel(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("Multivariate.TrainMultivariateModel");
             scope.Start();
@@ -315,14 +303,7 @@ namespace AnomalyDetector
         /// <include file="Docs/Multivariate.xml" path="doc/members/member[@name='DeleteMultivariateModelAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> DeleteMultivariateModelAsync(string modelId, RequestContext context = null)
         {
-            if (modelId == null)
-            {
-                throw new ArgumentNullException(nameof(modelId));
-            }
-            if (modelId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(modelId));
-            }
+            Argument.AssertNotNullOrEmpty(modelId, nameof(modelId));
 
             using var scope = ClientDiagnostics.CreateScope("Multivariate.DeleteMultivariateModel");
             scope.Start();
@@ -358,14 +339,7 @@ namespace AnomalyDetector
         /// <include file="Docs/Multivariate.xml" path="doc/members/member[@name='DeleteMultivariateModel(string,RequestContext)']/*" />
         public virtual Response DeleteMultivariateModel(string modelId, RequestContext context = null)
         {
-            if (modelId == null)
-            {
-                throw new ArgumentNullException(nameof(modelId));
-            }
-            if (modelId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(modelId));
-            }
+            Argument.AssertNotNullOrEmpty(modelId, nameof(modelId));
 
             using var scope = ClientDiagnostics.CreateScope("Multivariate.DeleteMultivariateModel");
             scope.Start();
@@ -393,14 +367,7 @@ namespace AnomalyDetector
         /// <include file="Docs/Multivariate.xml" path="doc/members/member[@name='GetMultivariateModelAsync(string,CancellationToken)']/*" />
         public virtual async Task<Response<AnomalyDetectionModel>> GetMultivariateModelAsync(string modelId, CancellationToken cancellationToken = default)
         {
-            if (modelId == null)
-            {
-                throw new ArgumentNullException(nameof(modelId));
-            }
-            if (modelId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(modelId));
-            }
+            Argument.AssertNotNullOrEmpty(modelId, nameof(modelId));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetMultivariateModelAsync(modelId, context).ConfigureAwait(false);
@@ -419,14 +386,7 @@ namespace AnomalyDetector
         /// <include file="Docs/Multivariate.xml" path="doc/members/member[@name='GetMultivariateModel(string,CancellationToken)']/*" />
         public virtual Response<AnomalyDetectionModel> GetMultivariateModel(string modelId, CancellationToken cancellationToken = default)
         {
-            if (modelId == null)
-            {
-                throw new ArgumentNullException(nameof(modelId));
-            }
-            if (modelId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(modelId));
-            }
+            Argument.AssertNotNullOrEmpty(modelId, nameof(modelId));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetMultivariateModel(modelId, context);
@@ -457,14 +417,7 @@ namespace AnomalyDetector
         /// <include file="Docs/Multivariate.xml" path="doc/members/member[@name='GetMultivariateModelAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> GetMultivariateModelAsync(string modelId, RequestContext context)
         {
-            if (modelId == null)
-            {
-                throw new ArgumentNullException(nameof(modelId));
-            }
-            if (modelId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(modelId));
-            }
+            Argument.AssertNotNullOrEmpty(modelId, nameof(modelId));
 
             using var scope = ClientDiagnostics.CreateScope("Multivariate.GetMultivariateModel");
             scope.Start();
@@ -504,14 +457,7 @@ namespace AnomalyDetector
         /// <include file="Docs/Multivariate.xml" path="doc/members/member[@name='GetMultivariateModel(string,RequestContext)']/*" />
         public virtual Response GetMultivariateModel(string modelId, RequestContext context)
         {
-            if (modelId == null)
-            {
-                throw new ArgumentNullException(nameof(modelId));
-            }
-            if (modelId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(modelId));
-            }
+            Argument.AssertNotNullOrEmpty(modelId, nameof(modelId));
 
             using var scope = ClientDiagnostics.CreateScope("Multivariate.GetMultivariateModel");
             scope.Start();
@@ -544,18 +490,8 @@ namespace AnomalyDetector
         /// <include file="Docs/Multivariate.xml" path="doc/members/member[@name='DetectMultivariateBatchAnomalyAsync(string,MultivariateBatchDetectionOptions,CancellationToken)']/*" />
         public virtual async Task<Response<MultivariateDetectionResult>> DetectMultivariateBatchAnomalyAsync(string modelId, MultivariateBatchDetectionOptions options, CancellationToken cancellationToken = default)
         {
-            if (modelId == null)
-            {
-                throw new ArgumentNullException(nameof(modelId));
-            }
-            if (modelId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(modelId));
-            }
-            if (options == null)
-            {
-                throw new ArgumentNullException(nameof(options));
-            }
+            Argument.AssertNotNullOrEmpty(modelId, nameof(modelId));
+            Argument.AssertNotNull(options, nameof(options));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = options.ToRequestContent();
@@ -580,18 +516,8 @@ namespace AnomalyDetector
         /// <include file="Docs/Multivariate.xml" path="doc/members/member[@name='DetectMultivariateBatchAnomaly(string,MultivariateBatchDetectionOptions,CancellationToken)']/*" />
         public virtual Response<MultivariateDetectionResult> DetectMultivariateBatchAnomaly(string modelId, MultivariateBatchDetectionOptions options, CancellationToken cancellationToken = default)
         {
-            if (modelId == null)
-            {
-                throw new ArgumentNullException(nameof(modelId));
-            }
-            if (modelId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(modelId));
-            }
-            if (options == null)
-            {
-                throw new ArgumentNullException(nameof(options));
-            }
+            Argument.AssertNotNullOrEmpty(modelId, nameof(modelId));
+            Argument.AssertNotNull(options, nameof(options));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = options.ToRequestContent();
@@ -624,18 +550,8 @@ namespace AnomalyDetector
         /// <include file="Docs/Multivariate.xml" path="doc/members/member[@name='DetectMultivariateBatchAnomalyAsync(string,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> DetectMultivariateBatchAnomalyAsync(string modelId, RequestContent content, RequestContext context = null)
         {
-            if (modelId == null)
-            {
-                throw new ArgumentNullException(nameof(modelId));
-            }
-            if (modelId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(modelId));
-            }
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNullOrEmpty(modelId, nameof(modelId));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("Multivariate.DetectMultivariateBatchAnomaly");
             scope.Start();
@@ -676,18 +592,8 @@ namespace AnomalyDetector
         /// <include file="Docs/Multivariate.xml" path="doc/members/member[@name='DetectMultivariateBatchAnomaly(string,RequestContent,RequestContext)']/*" />
         public virtual Response DetectMultivariateBatchAnomaly(string modelId, RequestContent content, RequestContext context = null)
         {
-            if (modelId == null)
-            {
-                throw new ArgumentNullException(nameof(modelId));
-            }
-            if (modelId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(modelId));
-            }
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNullOrEmpty(modelId, nameof(modelId));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("Multivariate.DetectMultivariateBatchAnomaly");
             scope.Start();
@@ -718,18 +624,8 @@ namespace AnomalyDetector
         /// <include file="Docs/Multivariate.xml" path="doc/members/member[@name='DetectMultivariateLastAnomalyAsync(string,MultivariateLastDetectionOptions,CancellationToken)']/*" />
         public virtual async Task<Response<MultivariateLastDetectionResult>> DetectMultivariateLastAnomalyAsync(string modelId, MultivariateLastDetectionOptions options, CancellationToken cancellationToken = default)
         {
-            if (modelId == null)
-            {
-                throw new ArgumentNullException(nameof(modelId));
-            }
-            if (modelId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(modelId));
-            }
-            if (options == null)
-            {
-                throw new ArgumentNullException(nameof(options));
-            }
+            Argument.AssertNotNullOrEmpty(modelId, nameof(modelId));
+            Argument.AssertNotNull(options, nameof(options));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = options.ToRequestContent();
@@ -752,18 +648,8 @@ namespace AnomalyDetector
         /// <include file="Docs/Multivariate.xml" path="doc/members/member[@name='DetectMultivariateLastAnomaly(string,MultivariateLastDetectionOptions,CancellationToken)']/*" />
         public virtual Response<MultivariateLastDetectionResult> DetectMultivariateLastAnomaly(string modelId, MultivariateLastDetectionOptions options, CancellationToken cancellationToken = default)
         {
-            if (modelId == null)
-            {
-                throw new ArgumentNullException(nameof(modelId));
-            }
-            if (modelId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(modelId));
-            }
-            if (options == null)
-            {
-                throw new ArgumentNullException(nameof(options));
-            }
+            Argument.AssertNotNullOrEmpty(modelId, nameof(modelId));
+            Argument.AssertNotNull(options, nameof(options));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = options.ToRequestContent();
@@ -796,18 +682,8 @@ namespace AnomalyDetector
         /// <include file="Docs/Multivariate.xml" path="doc/members/member[@name='DetectMultivariateLastAnomalyAsync(string,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> DetectMultivariateLastAnomalyAsync(string modelId, RequestContent content, RequestContext context = null)
         {
-            if (modelId == null)
-            {
-                throw new ArgumentNullException(nameof(modelId));
-            }
-            if (modelId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(modelId));
-            }
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNullOrEmpty(modelId, nameof(modelId));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("Multivariate.DetectMultivariateLastAnomaly");
             scope.Start();
@@ -848,18 +724,8 @@ namespace AnomalyDetector
         /// <include file="Docs/Multivariate.xml" path="doc/members/member[@name='DetectMultivariateLastAnomaly(string,RequestContent,RequestContext)']/*" />
         public virtual Response DetectMultivariateLastAnomaly(string modelId, RequestContent content, RequestContext context = null)
         {
-            if (modelId == null)
-            {
-                throw new ArgumentNullException(nameof(modelId));
-            }
-            if (modelId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(modelId));
-            }
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNullOrEmpty(modelId, nameof(modelId));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("Multivariate.DetectMultivariateLastAnomaly");
             scope.Start();

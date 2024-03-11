@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using _Type.Model.Usage;
 
 namespace _Type.Model.Usage.Models
 {
@@ -50,10 +51,7 @@ namespace _Type.Model.Usage.Models
         /// <exception cref="ArgumentNullException"> <paramref name="requiredProp"/> is null. </exception>
         internal OutputRecord(string requiredProp)
         {
-            if (requiredProp == null)
-            {
-                throw new ArgumentNullException(nameof(requiredProp));
-            }
+            Argument.AssertNotNull(requiredProp, nameof(requiredProp));
 
             RequiredProp = requiredProp;
         }

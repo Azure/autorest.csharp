@@ -207,10 +207,7 @@ namespace MgmtPropertyBag
         /// <exception cref="ArgumentNullException"> <paramref name="patch"/> is null. </exception>
         public virtual async Task<Response<FooResource>> UpdateAsync(FooPatch patch, CancellationToken cancellationToken = default)
         {
-            if (patch == null)
-            {
-                throw new ArgumentNullException(nameof(patch));
-            }
+            Argument.AssertNotNull(patch, nameof(patch));
 
             using var scope = _fooClientDiagnostics.CreateScope("FooResource.Update");
             scope.Start();
@@ -252,10 +249,7 @@ namespace MgmtPropertyBag
         /// <exception cref="ArgumentNullException"> <paramref name="patch"/> is null. </exception>
         public virtual Response<FooResource> Update(FooPatch patch, CancellationToken cancellationToken = default)
         {
-            if (patch == null)
-            {
-                throw new ArgumentNullException(nameof(patch));
-            }
+            Argument.AssertNotNull(patch, nameof(patch));
 
             using var scope = _fooClientDiagnostics.CreateScope("FooResource.Update");
             scope.Start();

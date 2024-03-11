@@ -141,14 +141,7 @@ namespace _Type.Scalar
         /// <include file="Docs/String.xml" path="doc/members/member[@name='PutAsync(string,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(string body, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
-            if (body.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(body));
-            }
+            Argument.AssertNotNullOrEmpty(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromObject(body);
@@ -164,14 +157,7 @@ namespace _Type.Scalar
         /// <include file="Docs/String.xml" path="doc/members/member[@name='Put(string,CancellationToken)']/*" />
         public virtual Response Put(string body, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
-            if (body.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(body));
-            }
+            Argument.AssertNotNullOrEmpty(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = RequestContentHelper.FromObject(body);
@@ -202,10 +188,7 @@ namespace _Type.Scalar
         /// <include file="Docs/String.xml" path="doc/members/member[@name='PutAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("String.Put");
             scope.Start();
@@ -244,10 +227,7 @@ namespace _Type.Scalar
         /// <include file="Docs/String.xml" path="doc/members/member[@name='Put(RequestContent,RequestContext)']/*" />
         public virtual Response Put(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("String.Put");
             scope.Start();

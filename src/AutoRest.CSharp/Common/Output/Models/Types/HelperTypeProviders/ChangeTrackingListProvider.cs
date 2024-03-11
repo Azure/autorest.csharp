@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class ChangeTrackingListProvider : ExpressionTypeProvider
     {
-        private static readonly Lazy<ChangeTrackingListProvider> _instance = new(() => new ChangeTrackingListProvider(Configuration.Namespace, null));
+        private static readonly Lazy<ChangeTrackingListProvider> _instance = new(() => new ChangeTrackingListProvider());
 
         private class ChangeTrackingListTemplate<T> { }
 
@@ -39,8 +39,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public static ChangeTrackingListProvider Instance => _instance.Value;
 
-        private ChangeTrackingListProvider(string defaultNamespace, SourceInputModel? sourceInputModel)
-            : base(defaultNamespace, sourceInputModel)
+        private ChangeTrackingListProvider() : base(Configuration.HelperNamespace, null)
         {
             _t = typeof(ChangeTrackingListTemplate<>).GetGenericArguments()[0];
             _iListOfT = new CSharpType(typeof(IList<>), _t);

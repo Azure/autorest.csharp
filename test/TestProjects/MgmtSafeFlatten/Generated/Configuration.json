@@ -13,5 +13,7 @@
   "KeepOrphanedModels": [
     "LayerOneProperties",
     "TypeFour"
-  ]
+  ],
+  "flavor": "azure",
+  "helper-namespace": "MgmtSafeFlatten"
 }

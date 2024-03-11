@@ -12,5 +12,7 @@
   "skip-csproj-packagereference": true,
   "RenamePropertyBag": {
     "Foos_Reconnect": "FooReconnectTestOptions"
-  }
+  },
+  "flavor": "azure",
+  "helper-namespace": "MgmtPropertyBag"
 }

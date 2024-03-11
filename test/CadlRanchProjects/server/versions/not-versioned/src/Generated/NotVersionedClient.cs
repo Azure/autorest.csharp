@@ -44,10 +44,7 @@ namespace Server.Versions.NotVersioned
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public NotVersionedClient(Uri endpoint, NotVersionedClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new NotVersionedClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -136,10 +133,7 @@ namespace Server.Versions.NotVersioned
         /// <include file="Docs/NotVersionedClient.xml" path="doc/members/member[@name='WithQueryApiVersionAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> WithQueryApiVersionAsync(string apiVersion, RequestContext context = null)
         {
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
             using var scope = ClientDiagnostics.CreateScope("NotVersionedClient.WithQueryApiVersion");
             scope.Start();
@@ -174,10 +168,7 @@ namespace Server.Versions.NotVersioned
         /// <include file="Docs/NotVersionedClient.xml" path="doc/members/member[@name='WithQueryApiVersion(string,RequestContext)']/*" />
         public virtual Response WithQueryApiVersion(string apiVersion, RequestContext context = null)
         {
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
             using var scope = ClientDiagnostics.CreateScope("NotVersionedClient.WithQueryApiVersion");
             scope.Start();
@@ -213,14 +204,7 @@ namespace Server.Versions.NotVersioned
         /// <include file="Docs/NotVersionedClient.xml" path="doc/members/member[@name='WithPathApiVersionAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> WithPathApiVersionAsync(string apiVersion, RequestContext context = null)
         {
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
-            if (apiVersion.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(apiVersion));
-            }
+            Argument.AssertNotNullOrEmpty(apiVersion, nameof(apiVersion));
 
             using var scope = ClientDiagnostics.CreateScope("NotVersionedClient.WithPathApiVersion");
             scope.Start();
@@ -256,14 +240,7 @@ namespace Server.Versions.NotVersioned
         /// <include file="Docs/NotVersionedClient.xml" path="doc/members/member[@name='WithPathApiVersion(string,RequestContext)']/*" />
         public virtual Response WithPathApiVersion(string apiVersion, RequestContext context = null)
         {
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
-            if (apiVersion.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(apiVersion));
-            }
+            Argument.AssertNotNullOrEmpty(apiVersion, nameof(apiVersion));
 
             using var scope = ClientDiagnostics.CreateScope("NotVersionedClient.WithPathApiVersion");
             scope.Start();

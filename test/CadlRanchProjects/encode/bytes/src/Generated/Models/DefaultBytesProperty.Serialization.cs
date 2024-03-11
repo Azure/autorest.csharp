@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Encode.Bytes;
 
 namespace Encode.Bytes.Models
 {

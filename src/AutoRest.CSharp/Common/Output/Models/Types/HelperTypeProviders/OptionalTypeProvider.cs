@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class OptionalTypeProvider : ExpressionTypeProvider
     {
-        private static readonly Lazy<OptionalTypeProvider> _instance = new(() => new OptionalTypeProvider(Configuration.Namespace, null));
+        private static readonly Lazy<OptionalTypeProvider> _instance = new(() => new OptionalTypeProvider());
         public static OptionalTypeProvider Instance => _instance.Value;
 
         private class ListTemplate<T> { }
@@ -31,8 +31,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly CSharpType _genericChangeTrackingList;
         private readonly CSharpType _genericChangeTrackingDictionary;
 
-        private OptionalTypeProvider(string defaultNamespace, SourceInputModel? sourceInputModel)
-            : base(defaultNamespace, sourceInputModel)
+        private OptionalTypeProvider() : base(Configuration.HelperNamespace, null)
         {
             DeclarationModifiers = TypeSignatureModifiers.Internal | TypeSignatureModifiers.Static;
             _genericChangeTrackingList = ChangeTrackingListProvider.Instance.Type;
@@ -106,7 +105,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Method IsStructDefined()
         {
             var valueParam = new Parameter("value", null, _t.WithNullable(true), null, ValidationType.None, null);
-            var signature = GetIsDefinedSignature(valueParam, new[] { _t }, new[] { new WhereExpression(_t, new KeywordExpression("struct", null)) });
+            var signature = GetIsDefinedSignature(valueParam, new[] { _t }, new[] { Where.Struct(_t) });
             return new Method(signature, new MethodBodyStatement[]
             {
                 Return(new MemberExpression(new ParameterReference(valueParam), "HasValue"))

@@ -65,14 +65,7 @@ namespace MgmtResourceName
         /// <exception cref="ArgumentException"> <paramref name="resourceProviderNamespace"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<ProviderOperationData>> GetAsync(string resourceProviderNamespace, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (resourceProviderNamespace == null)
-            {
-                throw new ArgumentNullException(nameof(resourceProviderNamespace));
-            }
-            if (resourceProviderNamespace.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceProviderNamespace));
-            }
+            Argument.AssertNotNullOrEmpty(resourceProviderNamespace, nameof(resourceProviderNamespace));
 
             using var message = CreateGetRequest(resourceProviderNamespace, expand);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -100,14 +93,7 @@ namespace MgmtResourceName
         /// <exception cref="ArgumentException"> <paramref name="resourceProviderNamespace"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<ProviderOperationData> Get(string resourceProviderNamespace, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (resourceProviderNamespace == null)
-            {
-                throw new ArgumentNullException(nameof(resourceProviderNamespace));
-            }
-            if (resourceProviderNamespace.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(resourceProviderNamespace));
-            }
+            Argument.AssertNotNullOrEmpty(resourceProviderNamespace, nameof(resourceProviderNamespace));
 
             using var message = CreateGetRequest(resourceProviderNamespace, expand);
             _pipeline.Send(message, cancellationToken);
@@ -209,10 +195,7 @@ namespace MgmtResourceName
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
         public async Task<Response<ProviderOperationsMetadataListResult>> ListNextPageAsync(string nextLink, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
+            Argument.AssertNotNull(nextLink, nameof(nextLink));
 
             using var message = CreateListNextPageRequest(nextLink, expand);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -237,10 +220,7 @@ namespace MgmtResourceName
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
         public Response<ProviderOperationsMetadataListResult> ListNextPage(string nextLink, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
+            Argument.AssertNotNull(nextLink, nameof(nextLink));
 
             using var message = CreateListNextPageRequest(nextLink, expand);
             _pipeline.Send(message, cancellationToken);

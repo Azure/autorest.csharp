@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace body_complex.Models
 {
-    /// <summary> The UnknownFish. </summary>
+    /// <summary> Unknown version of Fish. </summary>
     internal partial class UnknownFish : Fish
     {
         /// <summary> Initializes a new instance of <see cref="UnknownFish"/>. </summary>

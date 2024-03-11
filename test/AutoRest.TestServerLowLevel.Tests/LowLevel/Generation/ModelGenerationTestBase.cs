@@ -67,9 +67,10 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 methodsToKeepClientDefaultValue: Array.Empty<string>(),
                 mgmtConfiguration: null,
                 mgmtTestConfiguration: null,
-                branded: true,
+                flavor: "azure",
                 generateSampleProject: true,
-                generateTestProject: true);
+                generateTestProject: true,
+                helperNamespace: "");
         }
 
 

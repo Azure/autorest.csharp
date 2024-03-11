@@ -11,5 +11,7 @@
   "skip-csproj-packagereference": true,
   "ListException": [
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}"
-  ]
+  ],
+  "flavor": "azure",
+  "helper-namespace": "MgmtParent"
 }

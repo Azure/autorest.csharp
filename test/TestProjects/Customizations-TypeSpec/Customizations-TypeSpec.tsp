@@ -16,12 +16,13 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 
 @doc("Extensible enum to customize operator")
-enum ExtensibleEnumWithOperator {
+union ExtensibleEnumWithOperator {
+    string,
     @doc("Monday.")
-    Monday,
+    Monday: "Monday",
 
     @doc("Tuesday.")
-    Tuesday,
+    Tuesday: "Tuesday",
 }
 
 @doc("Model to add additional serializable property")
@@ -147,14 +148,16 @@ enum EnumWithValueToRename {
 }
 
 @doc("Extensible enum")
-enum EnumToBeMadeExtensible {
+union EnumToBeMadeExtensible {
+    string,
     ExOne: "1",
     ExTwo: "2",
     ExThree: "3",
 }
 
 @doc("A normal enum")
-enum NormalEnum {
+union NormalEnum {
+    string,
     A: "a",
     B: "b",
 }

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
-using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Bicep;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
@@ -28,74 +28,31 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
 
         private protected ModelTypeMapping? ModelTypeMapping => _modelTypeMapping.Value;
 
-        private SerializationBuilder _serializationBuilder = new SerializationBuilder();
-
         private bool? _includeSerializer;
         public bool IncludeSerializer => _includeSerializer ??= EnsureIncludeSerializer();
 
         private bool? _includeDeserializer;
         public bool IncludeDeserializer => _includeDeserializer ??= EnsureIncludeDeserializer();
 
-        private bool _jsonSerializationInitialized = false;
-        private JsonObjectSerialization? _jsonSerialization;
-        public JsonObjectSerialization? JsonSerialization => EnsureJsonSerialization();
+        private ObjectTypeSerialization? _modelSerialization;
+        public ObjectTypeSerialization Serialization => _modelSerialization ??= BuildSerialization();
 
-        private bool _xmlSerializationInitialized = false;
-        private XmlObjectSerialization? _xmlSerialization;
-        public XmlObjectSerialization? XmlSerialization => EnsureXmlSerialization();
-
-        private bool _bicepSerializationInitialized = false;
-        private BicepObjectSerialization? _bicepSerialization;
-        public BicepObjectSerialization? BicepSerialization => EnsureBicepSerialization();
-
-        private JsonObjectSerialization? EnsureJsonSerialization()
+        private ObjectTypeSerialization BuildSerialization()
         {
-            if (_jsonSerializationInitialized)
-                return _jsonSerialization;
-
-            _jsonSerializationInitialized = true;
-            _jsonSerialization = BuildJsonSerialization();
-            return _jsonSerialization;
-        }
-
-        private XmlObjectSerialization? EnsureXmlSerialization()
-        {
-            if (_xmlSerializationInitialized)
-                return _xmlSerialization;
-
-            _xmlSerializationInitialized = true;
-            _xmlSerialization = BuildXmlSerialization();
-            return _xmlSerialization;
-        }
-
-        private BicepObjectSerialization? EnsureBicepSerialization()
-        {
-            if (_bicepSerializationInitialized)
-                return _bicepSerialization;
-
-            _bicepSerializationInitialized = true;
-            _bicepSerialization = BuildBicepSerialization();
-            return _bicepSerialization;
-        }
-
-        protected BicepObjectSerialization? BuildBicepSerialization()
-        {
-            // if this.Usages does not contain Output bit, then return null
-            // alternate - is one of ancestors resource data or contained on a resource data
-            var usage = GetUsage();
-
-            return Configuration.AzureArm && Configuration.UseModelReaderWriter && Configuration.EnableBicepSerialization && usage.HasFlag(InputModelTypeUsage.Output) && JsonSerialization != null
-                ? _serializationBuilder.BuildBicepObjectSerialization(this, JsonSerialization)
-                : null;
+            var json = BuildJsonSerialization();
+            var xml = BuildXmlSerialization();
+            var bicep = BuildBicepSerialization(json);
+            return new ObjectTypeSerialization(this, json, xml, bicep);
         }
 
         protected abstract JsonObjectSerialization? BuildJsonSerialization();
         protected abstract XmlObjectSerialization? BuildXmlSerialization();
-
+        protected abstract BicepObjectSerialization? BuildBicepSerialization(JsonObjectSerialization? json);
 
         protected abstract bool EnsureIncludeSerializer();
         protected abstract bool EnsureIncludeDeserializer();
 
+        public virtual JsonConverterProvider? JsonConverter { get; }
         protected internal abstract InputModelTypeUsage GetUsage();
 
         // TODO -- despite this is actually a field if present, we have to make it a property to work properly with other functionalities in the generator, such as the `CodeWriter.WriteInitialization` method

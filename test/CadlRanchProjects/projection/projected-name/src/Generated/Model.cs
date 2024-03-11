@@ -50,10 +50,7 @@ namespace Projection.ProjectedName
         /// <include file="Docs/Model.xml" path="doc/members/member[@name='ClientAsync(ClientModel,CancellationToken)']/*" />
         public virtual async Task<Response> ClientAsync(ClientModel clientModel, CancellationToken cancellationToken = default)
         {
-            if (clientModel == null)
-            {
-                throw new ArgumentNullException(nameof(clientModel));
-            }
+            Argument.AssertNotNull(clientModel, nameof(clientModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = clientModel.ToRequestContent();
@@ -67,10 +64,7 @@ namespace Projection.ProjectedName
         /// <include file="Docs/Model.xml" path="doc/members/member[@name='Client(ClientModel,CancellationToken)']/*" />
         public virtual Response Client(ClientModel clientModel, CancellationToken cancellationToken = default)
         {
-            if (clientModel == null)
-            {
-                throw new ArgumentNullException(nameof(clientModel));
-            }
+            Argument.AssertNotNull(clientModel, nameof(clientModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = clientModel.ToRequestContent();
@@ -101,10 +95,7 @@ namespace Projection.ProjectedName
         /// <include file="Docs/Model.xml" path="doc/members/member[@name='ClientAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> ClientAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("Model.Client");
             scope.Start();
@@ -143,10 +134,7 @@ namespace Projection.ProjectedName
         /// <include file="Docs/Model.xml" path="doc/members/member[@name='Client(RequestContent,RequestContext)']/*" />
         public virtual Response Client(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("Model.Client");
             scope.Start();
@@ -168,10 +156,7 @@ namespace Projection.ProjectedName
         /// <include file="Docs/Model.xml" path="doc/members/member[@name='LanguageAsync(CSModel,CancellationToken)']/*" />
         public virtual async Task<Response> LanguageAsync(CSModel csModel, CancellationToken cancellationToken = default)
         {
-            if (csModel == null)
-            {
-                throw new ArgumentNullException(nameof(csModel));
-            }
+            Argument.AssertNotNull(csModel, nameof(csModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = csModel.ToRequestContent();
@@ -185,10 +170,7 @@ namespace Projection.ProjectedName
         /// <include file="Docs/Model.xml" path="doc/members/member[@name='Language(CSModel,CancellationToken)']/*" />
         public virtual Response Language(CSModel csModel, CancellationToken cancellationToken = default)
         {
-            if (csModel == null)
-            {
-                throw new ArgumentNullException(nameof(csModel));
-            }
+            Argument.AssertNotNull(csModel, nameof(csModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = csModel.ToRequestContent();
@@ -219,10 +201,7 @@ namespace Projection.ProjectedName
         /// <include file="Docs/Model.xml" path="doc/members/member[@name='LanguageAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> LanguageAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("Model.Language");
             scope.Start();
@@ -261,10 +240,7 @@ namespace Projection.ProjectedName
         /// <include file="Docs/Model.xml" path="doc/members/member[@name='Language(RequestContent,RequestContext)']/*" />
         public virtual Response Language(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("Model.Language");
             scope.Start();

@@ -20,10 +20,7 @@ namespace MgmtMockAndSample.Models
         /// <exception cref="ArgumentNullException"> <paramref name="sku"/> is null. </exception>
         public VaultProperties(Guid tenantId, MgmtMockAndSampleSku sku)
         {
-            if (sku == null)
-            {
-                throw new ArgumentNullException(nameof(sku));
-            }
+            Argument.AssertNotNull(sku, nameof(sku));
 
             TenantId = tenantId;
             Sku = sku;

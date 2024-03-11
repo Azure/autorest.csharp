@@ -339,18 +339,8 @@ namespace MgmtSupersetInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel2SName"/> or <paramref name="supersetModel2"/> is null. </exception>
         public virtual async Task<Response<SupersetModel2>> PutSupersetModel2Async(string supersetModel2SName, SupersetModel2 supersetModel2, CancellationToken cancellationToken = default)
         {
-            if (supersetModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(supersetModel2SName));
-            }
-            if (supersetModel2SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(supersetModel2SName));
-            }
-            if (supersetModel2 == null)
-            {
-                throw new ArgumentNullException(nameof(supersetModel2));
-            }
+            Argument.AssertNotNullOrEmpty(supersetModel2SName, nameof(supersetModel2SName));
+            Argument.AssertNotNull(supersetModel2, nameof(supersetModel2));
 
             using var scope = SupersetModel2sClientDiagnostics.CreateScope("MockableMgmtSupersetInheritanceResourceGroupResource.PutSupersetModel2");
             scope.Start();
@@ -389,18 +379,8 @@ namespace MgmtSupersetInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel2SName"/> or <paramref name="supersetModel2"/> is null. </exception>
         public virtual Response<SupersetModel2> PutSupersetModel2(string supersetModel2SName, SupersetModel2 supersetModel2, CancellationToken cancellationToken = default)
         {
-            if (supersetModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(supersetModel2SName));
-            }
-            if (supersetModel2SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(supersetModel2SName));
-            }
-            if (supersetModel2 == null)
-            {
-                throw new ArgumentNullException(nameof(supersetModel2));
-            }
+            Argument.AssertNotNullOrEmpty(supersetModel2SName, nameof(supersetModel2SName));
+            Argument.AssertNotNull(supersetModel2, nameof(supersetModel2));
 
             using var scope = SupersetModel2sClientDiagnostics.CreateScope("MockableMgmtSupersetInheritanceResourceGroupResource.PutSupersetModel2");
             scope.Start();
@@ -438,14 +418,7 @@ namespace MgmtSupersetInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel2SName"/> is null. </exception>
         public virtual async Task<Response<SupersetModel2>> GetSupersetModel2Async(string supersetModel2SName, CancellationToken cancellationToken = default)
         {
-            if (supersetModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(supersetModel2SName));
-            }
-            if (supersetModel2SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(supersetModel2SName));
-            }
+            Argument.AssertNotNullOrEmpty(supersetModel2SName, nameof(supersetModel2SName));
 
             using var scope = SupersetModel2sClientDiagnostics.CreateScope("MockableMgmtSupersetInheritanceResourceGroupResource.GetSupersetModel2");
             scope.Start();
@@ -483,14 +456,7 @@ namespace MgmtSupersetInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel2SName"/> is null. </exception>
         public virtual Response<SupersetModel2> GetSupersetModel2(string supersetModel2SName, CancellationToken cancellationToken = default)
         {
-            if (supersetModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(supersetModel2SName));
-            }
-            if (supersetModel2SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(supersetModel2SName));
-            }
+            Argument.AssertNotNullOrEmpty(supersetModel2SName, nameof(supersetModel2SName));
 
             using var scope = SupersetModel2sClientDiagnostics.CreateScope("MockableMgmtSupersetInheritanceResourceGroupResource.GetSupersetModel2");
             scope.Start();
@@ -529,18 +495,8 @@ namespace MgmtSupersetInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel3SName"/> or <paramref name="supersetModel3"/> is null. </exception>
         public virtual async Task<Response<SupersetModel3>> PutSupersetModel3Async(string supersetModel3SName, SupersetModel3 supersetModel3, CancellationToken cancellationToken = default)
         {
-            if (supersetModel3SName == null)
-            {
-                throw new ArgumentNullException(nameof(supersetModel3SName));
-            }
-            if (supersetModel3SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(supersetModel3SName));
-            }
-            if (supersetModel3 == null)
-            {
-                throw new ArgumentNullException(nameof(supersetModel3));
-            }
+            Argument.AssertNotNullOrEmpty(supersetModel3SName, nameof(supersetModel3SName));
+            Argument.AssertNotNull(supersetModel3, nameof(supersetModel3));
 
             using var scope = SupersetModel3sClientDiagnostics.CreateScope("MockableMgmtSupersetInheritanceResourceGroupResource.PutSupersetModel3");
             scope.Start();
@@ -579,18 +535,8 @@ namespace MgmtSupersetInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel3SName"/> or <paramref name="supersetModel3"/> is null. </exception>
         public virtual Response<SupersetModel3> PutSupersetModel3(string supersetModel3SName, SupersetModel3 supersetModel3, CancellationToken cancellationToken = default)
         {
-            if (supersetModel3SName == null)
-            {
-                throw new ArgumentNullException(nameof(supersetModel3SName));
-            }
-            if (supersetModel3SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(supersetModel3SName));
-            }
-            if (supersetModel3 == null)
-            {
-                throw new ArgumentNullException(nameof(supersetModel3));
-            }
+            Argument.AssertNotNullOrEmpty(supersetModel3SName, nameof(supersetModel3SName));
+            Argument.AssertNotNull(supersetModel3, nameof(supersetModel3));
 
             using var scope = SupersetModel3sClientDiagnostics.CreateScope("MockableMgmtSupersetInheritanceResourceGroupResource.PutSupersetModel3");
             scope.Start();
@@ -628,14 +574,7 @@ namespace MgmtSupersetInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel3SName"/> is null. </exception>
         public virtual async Task<Response<SupersetModel3>> GetSupersetModel3Async(string supersetModel3SName, CancellationToken cancellationToken = default)
         {
-            if (supersetModel3SName == null)
-            {
-                throw new ArgumentNullException(nameof(supersetModel3SName));
-            }
-            if (supersetModel3SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(supersetModel3SName));
-            }
+            Argument.AssertNotNullOrEmpty(supersetModel3SName, nameof(supersetModel3SName));
 
             using var scope = SupersetModel3sClientDiagnostics.CreateScope("MockableMgmtSupersetInheritanceResourceGroupResource.GetSupersetModel3");
             scope.Start();
@@ -673,14 +612,7 @@ namespace MgmtSupersetInheritance.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel3SName"/> is null. </exception>
         public virtual Response<SupersetModel3> GetSupersetModel3(string supersetModel3SName, CancellationToken cancellationToken = default)
         {
-            if (supersetModel3SName == null)
-            {
-                throw new ArgumentNullException(nameof(supersetModel3SName));
-            }
-            if (supersetModel3SName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(supersetModel3SName));
-            }
+            Argument.AssertNotNullOrEmpty(supersetModel3SName, nameof(supersetModel3SName));
 
             using var scope = SupersetModel3sClientDiagnostics.CreateScope("MockableMgmtSupersetInheritanceResourceGroupResource.GetSupersetModel3");
             scope.Start();

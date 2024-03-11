@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -60,10 +61,7 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="trainingFile"/> is null. </exception>
         public CreateFineTuningJobRequest(string trainingFile, CreateFineTuningJobRequestModel model)
         {
-            if (trainingFile == null)
-            {
-                throw new ArgumentNullException(nameof(trainingFile));
-            }
+            Argument.AssertNotNull(trainingFile, nameof(trainingFile));
 
             TrainingFile = trainingFile;
             Model = model;
