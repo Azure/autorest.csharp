@@ -13,7 +13,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
     {
         public IDictionary<string, ResourceModel>? Resources { get; set; }
 
-        public IDictionary<string, string>? RenameMapping { get; set; }
+        public IReadOnlyDictionary<string, string>? RenameMapping { get; set; }
         public IReadOnlyDictionary<string, string>? OverrideOperationName {  get; set; }
     }
 }

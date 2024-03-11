@@ -205,7 +205,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
                 metadata.Resources.Add(resourceModel.Name, resourceModel);
 
-                metadata.RenameMapping = new Dictionary<string, string>(Configuration.MgmtConfiguration.RenameMapping);
+                metadata.RenameMapping = Configuration.MgmtConfiguration.RenameMapping;
                 metadata.OverrideOperationName = Configuration.MgmtConfiguration.OverrideOperationName;
             }
             AddGeneratedFile(project, "metadata.json", JsonSerializer.Serialize(metadata));
