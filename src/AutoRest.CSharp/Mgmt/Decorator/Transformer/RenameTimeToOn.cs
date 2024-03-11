@@ -32,7 +32,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 
                 foreach (var property in objSchema.Properties)
                 {
-                    if (property.Schema.Type is not (AllSchemaTypes.Date or AllSchemaTypes.DateTime or AllSchemaTypes.Unixtime))
+                    if (property.Schema.Type is AllSchemaTypes.String or AllSchemaTypes.AnyObject)
+                    {
+                        if (TypeFactory.ToXMsFormatType(property.Schema.Extensions?.Format) != typeof(DateTimeOffset))
+                        {
+                            continue;
+                        }
+                    }
+                    else if (property.Schema.Type is not (AllSchemaTypes.Date or AllSchemaTypes.DateTime or AllSchemaTypes.Unixtime))
                     {
                         continue;
                     }

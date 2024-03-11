@@ -136,12 +136,11 @@ namespace AutoRest.CSharp.Output.Models.Types
                         continue;
                     }
                     var existingCSharpType = BuilderHelpers.GetTypeFromExisting(existingMember, typeof(object), typeFactory);
-                    var isReadOnly = IsReadOnly(existingMember);
 
                     // since the property doesn't exist in the input type, we use type of existing member both as original and field type
                     // the serialization will be generated for this type and it might has issues if the type is not recognized properly.
                     // but customer could always use the `CodeGenMemberSerializationHooks` attribute to override those incorrect serialization/deserialization code.
-                    var field = CreateFieldFromExisting(existingMember, existingCSharpType, null, SerializationFormat.Default, typeFactory, isReadOnly, false);
+                    var field = CreateFieldFromExisting(existingMember, existingCSharpType, null, SerializationFormat.Default, typeFactory, false, false);
                     var parameter = new Parameter(field.Name.ToVariableName(), $"to be removed by post process", field.Type, null, ValidationType.None, null);
 
                     fields.Add(field);
@@ -306,6 +305,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             var fieldModifiers = GetAccessModifiers(existingMember);
+            if (IsReadOnly(existingMember))
+            {
+                fieldModifiers |= ReadOnly;
+            }
 
             var writeAsProperty = existingMember is IPropertySymbol;
             CodeWriterDeclaration declaration = new CodeWriterDeclaration(existingMember.Name);
