@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -27,12 +28,12 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Value != null)
+            if (Optional.IsDefined(Value))
             {
                 writer.WritePropertyName("value"u8);
                 writer.WriteStringValue(Value);
             }
-            if (LocalizedValue != null)
+            if (Optional.IsDefined(LocalizedValue))
             {
                 writer.WritePropertyName("localizedValue"u8);
                 writer.WriteStringValue(LocalizedValue);
@@ -105,7 +106,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Value != null)
+            if (Optional.IsDefined(Value))
             {
                 builder.Append("  value:");
                 if (Value.Contains(Environment.NewLine))
@@ -119,7 +120,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (LocalizedValue != null)
+            if (Optional.IsDefined(LocalizedValue))
             {
                 builder.Append("  localizedValue:");
                 if (LocalizedValue.Contains(Environment.NewLine))

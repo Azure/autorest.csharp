@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -50,10 +51,7 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
         public CreateImageVariationRequest(BinaryData image)
         {
-            if (image == null)
-            {
-                throw new ArgumentNullException(nameof(image));
-            }
+            Argument.AssertNotNull(image, nameof(image));
 
             Image = image;
         }
@@ -68,7 +66,7 @@ namespace OpenAI.Models
         /// <param name="responseFormat"> The format in which the generated images are returned. Must be one of `url` or `b64_json`. </param>
         /// <param name="user"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal CreateImageVariationRequest(BinaryData image, long? n, CreateImageVariationRequestSize? size, CreateImageVariationRequestResponseFormat? responseFormat, string user, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal CreateImageVariationRequest(BinaryData image, long? n, CreateImageRequestSize? size, CreateImageRequestResponseFormat? responseFormat, string user, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Image = image;
             N = n;
@@ -104,9 +102,9 @@ namespace OpenAI.Models
         /// <summary> The number of images to generate. Must be between 1 and 10. </summary>
         public long? N { get; set; }
         /// <summary> The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`. </summary>
-        public CreateImageVariationRequestSize? Size { get; set; }
+        public CreateImageRequestSize? Size { get; set; }
         /// <summary> The format in which the generated images are returned. Must be one of `url` or `b64_json`. </summary>
-        public CreateImageVariationRequestResponseFormat? ResponseFormat { get; set; }
+        public CreateImageRequestResponseFormat? ResponseFormat { get; set; }
         /// <summary> Gets or sets the user. </summary>
         public string User { get; set; }
     }

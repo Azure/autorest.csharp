@@ -9,9 +9,7 @@
    "$id": "2",
    "Kind": "Enum",
    "Name": "ProjectKind",
-   "Namespace": "RenameGetList",
-   "Description": "Represents the project kind.",
-   "EnumValueType": "String",
+   "EnumValueType": "string",
    "AllowedValues": [
     {
      "$id": "3",
@@ -32,6 +30,8 @@
      "Description": "For building an extraction model to identify your domain categories using your own data."
     }
    ],
+   "Namespace": "RenameGetList",
+   "Description": "Represents the project kind.",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "None"
@@ -238,7 +238,7 @@
   {
    "$id": "30",
    "Kind": "Model",
-   "Name": "PagedProject",
+   "Name": "PagedProjectProject",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of Project items",
    "IsNullable": false,
@@ -274,7 +274,7 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false,
+     "IsReadOnly": true,
      "IsDiscriminator": false
     }
    ]
@@ -307,7 +307,7 @@
   {
    "$id": "38",
    "Kind": "Model",
-   "Name": "PagedDeployment",
+   "Name": "PagedDeploymentDeployment",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of Deployment items",
    "IsNullable": false,
@@ -343,40 +343,49 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false,
+     "IsReadOnly": true,
      "IsDiscriminator": false
     }
    ]
+  },
+  {
+   "$id": "43",
+   "Kind": "Model",
+   "Name": "ListQueryParams",
+   "Namespace": "RenameGetList",
+   "IsNullable": false,
+   "Usage": "None",
+   "Properties": []
   }
  ],
  "Clients": [
   {
-   "$id": "43",
+   "$id": "44",
    "Name": "RenameGetListClient",
    "Description": "",
    "Operations": [],
    "Protocol": {
-    "$id": "44"
+    "$id": "45"
    },
    "Creatable": true
   },
   {
-   "$id": "45",
+   "$id": "46",
    "Name": "Projects",
    "Description": "",
    "Operations": [
     {
-     "$id": "46",
+     "$id": "47",
      "Name": "get",
      "ResourceName": "Project",
      "Description": "Gets the details of a project.",
      "Parameters": [
       {
-       "$id": "47",
+       "$id": "48",
        "Name": "Endpoint",
        "NameInRequest": "Endpoint",
        "Type": {
-        "$id": "48",
+        "$id": "49",
         "Kind": "Primitive",
         "Name": "Uri",
         "IsNullable": false
@@ -392,21 +401,21 @@
        "Kind": "Client"
       },
       {
-       "$id": "49",
+       "$id": "50",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "50",
+        "$id": "51",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
        "DefaultValue": {
-        "$id": "51",
+        "$id": "52",
         "Type": {
-         "$id": "52",
+         "$id": "53",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -423,11 +432,11 @@
        "Kind": "Client"
       },
       {
-       "$id": "53",
+       "$id": "54",
        "Name": "projectName",
        "NameInRequest": "projectName",
        "Type": {
-        "$id": "54",
+        "$id": "55",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -443,11 +452,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "55",
+       "$id": "56",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "56",
+        "$id": "57",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -462,9 +471,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "57",
+        "$id": "58",
         "Type": {
-         "$ref": "56"
+         "$ref": "57"
         },
         "Value": "application/json"
        }
@@ -472,7 +481,7 @@
      ],
      "Responses": [
       {
-       "$id": "58",
+       "$id": "59",
        "StatusCodes": [
         200
        ],
@@ -496,28 +505,28 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "59",
+     "$id": "60",
      "Name": "list",
      "ResourceName": "Project",
      "Description": "Lists the existing projects.",
      "Parameters": [
       {
-       "$ref": "47"
+       "$ref": "48"
       },
       {
-       "$id": "60",
+       "$id": "61",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "61",
+        "$id": "62",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
        "DefaultValue": {
-        "$ref": "51"
+        "$ref": "52"
        },
        "IsRequired": true,
        "IsApiVersion": true,
@@ -529,11 +538,11 @@
        "Kind": "Client"
       },
       {
-       "$id": "62",
+       "$id": "63",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "63",
+        "$id": "64",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -548,9 +557,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "64",
+        "$id": "65",
         "Type": {
-         "$ref": "63"
+         "$ref": "64"
         },
         "Value": "application/json"
        }
@@ -558,7 +567,7 @@
      ],
      "Responses": [
       {
-       "$id": "65",
+       "$id": "66",
        "StatusCodes": [
         200
        ],
@@ -579,7 +588,7 @@
      "Path": "/authoring/analyze-text/projects",
      "BufferResponse": true,
      "Paging": {
-      "$id": "66",
+      "$id": "67",
       "NextLinkName": "nextLink",
       "ItemName": "value"
      },
@@ -588,39 +597,39 @@
     }
    ],
    "Protocol": {
-    "$id": "67"
+    "$id": "68"
    },
    "Creatable": false,
    "Parent": "RenameGetListClient"
   },
   {
-   "$id": "68",
+   "$id": "69",
    "Name": "Deployments",
    "Description": "",
    "Operations": [
     {
-     "$id": "69",
+     "$id": "70",
      "Name": "get",
      "ResourceName": "Deployment",
      "Description": "Gets the details of a deployment.",
      "Parameters": [
       {
-       "$ref": "47"
+       "$ref": "48"
       },
       {
-       "$id": "70",
+       "$id": "71",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "71",
+        "$id": "72",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
        "DefaultValue": {
-        "$ref": "51"
+        "$ref": "52"
        },
        "IsRequired": true,
        "IsApiVersion": true,
@@ -632,11 +641,11 @@
        "Kind": "Client"
       },
       {
-       "$id": "72",
+       "$id": "73",
        "Name": "projectName",
        "NameInRequest": "projectName",
        "Type": {
-        "$id": "73",
+        "$id": "74",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -652,11 +661,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "74",
+       "$id": "75",
        "Name": "deploymentName",
        "NameInRequest": "deploymentName",
        "Type": {
-        "$id": "75",
+        "$id": "76",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -672,11 +681,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "76",
+       "$id": "77",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "77",
+        "$id": "78",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -691,9 +700,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "78",
+        "$id": "79",
         "Type": {
-         "$ref": "77"
+         "$ref": "78"
         },
         "Value": "application/json"
        }
@@ -701,7 +710,7 @@
      ],
      "Responses": [
       {
-       "$id": "79",
+       "$id": "80",
        "StatusCodes": [
         200
        ],
@@ -725,28 +734,28 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "80",
+     "$id": "81",
      "Name": "list",
      "ResourceName": "Deployment",
      "Description": "Lists the existing deployments.",
      "Parameters": [
       {
-       "$ref": "47"
+       "$ref": "48"
       },
       {
-       "$id": "81",
+       "$id": "82",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "82",
+        "$id": "83",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
        "DefaultValue": {
-        "$ref": "51"
+        "$ref": "52"
        },
        "IsRequired": true,
        "IsApiVersion": true,
@@ -758,11 +767,11 @@
        "Kind": "Client"
       },
       {
-       "$id": "83",
+       "$id": "84",
        "Name": "projectName",
        "NameInRequest": "projectName",
        "Type": {
-        "$id": "84",
+        "$id": "85",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -778,11 +787,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "85",
+       "$id": "86",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "86",
+        "$id": "87",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -797,9 +806,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "87",
+        "$id": "88",
         "Type": {
-         "$ref": "86"
+         "$ref": "87"
         },
         "Value": "application/json"
        }
@@ -807,7 +816,7 @@
      ],
      "Responses": [
       {
-       "$id": "88",
+       "$id": "89",
        "StatusCodes": [
         200
        ],
@@ -828,7 +837,7 @@
      "Path": "/authoring/analyze-text/projects/{projectName}/deployments",
      "BufferResponse": true,
      "Paging": {
-      "$id": "89",
+      "$id": "90",
       "NextLinkName": "nextLink",
       "ItemName": "value"
      },
@@ -837,7 +846,7 @@
     }
    ],
    "Protocol": {
-    "$id": "90"
+    "$id": "91"
    },
    "Creatable": false,
    "Parent": "RenameGetListClient"

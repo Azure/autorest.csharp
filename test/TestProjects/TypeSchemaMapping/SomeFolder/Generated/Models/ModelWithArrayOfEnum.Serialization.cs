@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using TypeSchemaMapping;
 
 namespace TypeSchemaMapping.Models
 {
@@ -26,7 +27,7 @@ namespace TypeSchemaMapping.Models
             }
 
             writer.WriteStartObject();
-            if (!(ArrayOfEnum is ChangeTrackingList<EnumForModelWithArrayOfEnum> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(ArrayOfEnum))
             {
                 writer.WritePropertyName("ArrayOfEnum"u8);
                 writer.WriteStartArray();
@@ -36,7 +37,7 @@ namespace TypeSchemaMapping.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!(ArrayOfEnumCustomizedToNullable is ChangeTrackingList<EnumForModelWithArrayOfEnum?> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(ArrayOfEnumCustomizedToNullable))
             {
                 writer.WritePropertyName("ArrayOfEnumCustomizedToNullable"u8);
                 writer.WriteStartArray();

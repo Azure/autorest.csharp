@@ -15,6 +15,7 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.Azure
 {
@@ -22,6 +23,8 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Azure
     {
         internal class AzureRestOperationsSnippets : RestOperationsSnippets
         {
+            public override StreamExpression GetContentStream(TypedValueExpression response) => new ResponseExpression(response).ContentStream;
+
             public override TypedValueExpression GetTypedResponseFromValue(TypedValueExpression value, TypedValueExpression response)
                 => ResponseExpression.FromValue(value, new ResponseExpression(response));
 
@@ -47,6 +50,8 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Azure
                 }
                 return responseType == typeof(BinaryData)
                     ? ResponseExpression.FromValue(rawResponse.Content, rawResponse)
+                    : responseType == typeof(AzureLocation) ?
+                    ResponseExpression.FromValue(New.Instance(typeof(AzureLocation), new[] { rawResponse.Content.ToObjectFromJson(typeof(string)) }), rawResponse)
                     : ResponseExpression.FromValue(rawResponse.Content.ToObjectFromJson(responseType), rawResponse);
             }
 
@@ -55,14 +60,6 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Azure
                 var messageVar = new VariableReference(typeof(HttpMessage), "message");
                 message = messageVar;
                 return Snippets.UsingDeclare(messageVar, new InvokeInstanceMethodExpression(null, createRequestMethodSignature.Name, createRequestMethodSignature.Parameters.Select(p => (ValueExpression)p).ToList(), null, false));
-            }
-
-            public override MethodBodyStatement DeclareContentWithUtf8JsonWriter(out TypedValueExpression content, out Utf8JsonWriterExpression writer)
-            {
-                var contentVar = new VariableReference(typeof(Utf8JsonRequestContent), "content");
-                content = contentVar;
-                writer = new Utf8JsonRequestContentExpression(content).JsonWriter;
-                return Snippets.Var(contentVar, Snippets.New.Instance(typeof(Utf8JsonRequestContent)));
             }
 
             public override MethodBodyStatement DeclareContentWithXmlWriter(out TypedValueExpression content, out XmlWriterExpression writer)

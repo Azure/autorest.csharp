@@ -240,9 +240,10 @@ namespace AutoRest.CSharp.Generation.Writers
             if (methodBase is MethodSignature { GenericParameterConstraints: { } constraints })
             {
                 writer.Line();
-                foreach (var (argument, constraint) in constraints)
+                foreach (var constraint in constraints)
                 {
-                    writer.Append($"where {argument:I}: {constraint}");
+                    writer.WriteValueExpression(constraint);
+                    writer.AppendRaw(" ");
                 }
             }
 
@@ -326,6 +327,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.AppendRaw("]");
             }
 
+            writer.AppendRawIf("out ", clientParameter.IsOut);
             writer.AppendRawIf("ref ", clientParameter.IsRef);
 
             writer.Append($"{clientParameter.Type} {clientParameter.Name:D}");
@@ -657,7 +659,8 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer;
         }
 
-        public static void WriteMethod(this CodeWriter writer, Method method)
+        // TODO -- remove the writeEmptyLine optional flag here
+        public static void WriteMethod(this CodeWriter writer, Method method, bool writeEmptyLine = true)
         {
             if (method.Body is { } body)
             {
@@ -676,7 +679,9 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
             }
 
-            writer.Line();
+            // TODO -- temporary to minimize the code changes, will remove after the consolidation
+            if (writeEmptyLine)
+                writer.Line();
         }
 
         public static void WriteProperty(this CodeWriter writer, PropertyDeclaration property)
@@ -702,13 +707,22 @@ namespace AutoRest.CSharp.Generation.Writers
                 .AppendRawIf("static ", modifiers.HasFlag(MethodSignatureModifiers.Static))
                 .AppendRawIf("virtual ", modifiers.HasFlag(MethodSignatureModifiers.Virtual)); // property does not support other modifiers, here we just ignore them if any
 
-            writer.Append($"{property.PropertyType} {property.Declaration:I}"); // the declaration order here is quite anonying - we might need to assign the values to those properties in other places before these are written
+            writer.Append($"{property.PropertyType} ");
+            if (property.Declaration.ActualName == "this")
+            {
+                writer.Append($"this[int index]");
+            }
+            else
+            {
+                writer.Append($"{property.Declaration:I}"); // the declaration order here is quite anonying - we might need to assign the values to those properties in other places before these are written
+            }
 
             switch (property.PropertyBody)
             {
                 case ExpressionPropertyBody(var expression):
                     writer.AppendRaw(" => ")
                         .WriteValueExpression(expression);
+                    writer.AppendRaw(";");
                     break;
                 case AutoPropertyBody(var hasSetter, var setterModifiers, var initialization):
                     writer.AppendRaw("{ get; ");

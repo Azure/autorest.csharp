@@ -7,6 +7,7 @@ using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -28,7 +29,7 @@ namespace OpenAI.Models
             writer.WritePropertyName("message"u8);
             writer.WriteObjectValue(Message);
             writer.WritePropertyName("finish_reason"u8);
-            writer.WriteStringValue(FinishReason.ToString());
+            writer.WriteStringValue(FinishReason.ToSerialString());
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -86,7 +87,7 @@ namespace OpenAI.Models
                 }
                 if (property.NameEquals("finish_reason"u8))
                 {
-                    finishReason = new CreateChatCompletionResponseChoiceFinishReason(property.Value.GetString());
+                    finishReason = property.Value.GetString().ToCreateChatCompletionResponseChoiceFinishReason();
                     continue;
                 }
                 if (options.Format != "W")

@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using Azure.NewProject.TypeSpec;
 
 namespace Azure.NewProject.TypeSpec.Models
 {
@@ -49,12 +50,9 @@ namespace Azure.NewProject.TypeSpec.Models
         /// <param name="sourceUrl"> url format. </param>
         /// <param name="guid"> uuid format. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="sourceUrl"/> is null. </exception>
-        public ModelWithFormat(Uri sourceUrl, Guid guid)
+        public ModelWithFormat(string sourceUrl, Guid guid)
         {
-            if (sourceUrl == null)
-            {
-                throw new ArgumentNullException(nameof(sourceUrl));
-            }
+            Argument.AssertNotNull(sourceUrl, nameof(sourceUrl));
 
             SourceUrl = sourceUrl;
             Guid = guid;
@@ -64,7 +62,7 @@ namespace Azure.NewProject.TypeSpec.Models
         /// <param name="sourceUrl"> url format. </param>
         /// <param name="guid"> uuid format. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal ModelWithFormat(Uri sourceUrl, Guid guid, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal ModelWithFormat(string sourceUrl, Guid guid, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             SourceUrl = sourceUrl;
             Guid = guid;
@@ -77,7 +75,7 @@ namespace Azure.NewProject.TypeSpec.Models
         }
 
         /// <summary> url format. </summary>
-        public Uri SourceUrl { get; }
+        public string SourceUrl { get; }
         /// <summary> uuid format. </summary>
         public Guid Guid { get; }
     }

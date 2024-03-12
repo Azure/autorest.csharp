@@ -41,7 +41,6 @@ namespace AutoRest.CSharp.Common.Input
 
         public override Type RequestContextType => typeof(RequestOptions);
 
-        public override Type ChangeTrackingListType => typeof(OptionalList<>);
         public override Type ChangeTrackingDictionaryType => typeof(OptionalDictionary<,>);
 
         public override Type BearerAuthenticationPolicyType => typeof(BearerTokenAuthenticationPolicy);

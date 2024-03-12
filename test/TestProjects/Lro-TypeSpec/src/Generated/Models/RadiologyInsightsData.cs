@@ -8,8 +8,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using lrotsp;
 
-namespace lro.Models
+namespace lrotsp.Models
 {
     /// <summary> The body of the Radiology Insights request. </summary>
     public partial class RadiologyInsightsData
@@ -51,10 +52,7 @@ namespace lro.Models
         /// <exception cref="ArgumentNullException"> <paramref name="patients"/> is null. </exception>
         public RadiologyInsightsData(IEnumerable<string> patients)
         {
-            if (patients == null)
-            {
-                throw new ArgumentNullException(nameof(patients));
-            }
+            Argument.AssertNotNull(patients, nameof(patients));
 
             Patients = patients.ToList();
         }

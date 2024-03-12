@@ -8,7 +8,6 @@ using System.ClientModel.Primitives;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
-using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
@@ -25,6 +24,9 @@ namespace AutoRest.CSharp.Common.Output.Expressions.System
     {
         private class SystemRestOperationsSnippets : RestOperationsSnippets
         {
+            public override StreamExpression GetContentStream(TypedValueExpression result)
+                => new ResultExpression(result).GetRawResponse().ContentStream;
+
             public override TypedValueExpression GetTypedResponseFromValue(TypedValueExpression value, TypedValueExpression result)
             {
                 return ResultExpression.FromValue(value, GetRawResponse(result));
@@ -60,14 +62,6 @@ namespace AutoRest.CSharp.Common.Output.Expressions.System
                 var messageVar = new VariableReference(typeof(PipelineMessage), "message");
                 message = messageVar;
                 return Snippets.UsingDeclare(messageVar, new InvokeInstanceMethodExpression(null, createRequestMethodSignature.Name, createRequestMethodSignature.Parameters.Select(p => (ValueExpression)p).ToList(), null, false));
-            }
-
-            public override MethodBodyStatement DeclareContentWithUtf8JsonWriter(out TypedValueExpression content, out Utf8JsonWriterExpression writer)
-            {
-                var contentVar = new VariableReference(typeof(Utf8JsonRequestBody), "content");
-                content = contentVar;
-                writer = new Utf8JsonRequestBodyExpression(content).JsonWriter;
-                return Snippets.Var(contentVar, Snippets.New.Instance(typeof(Utf8JsonRequestBody)));
             }
 
             public override MethodBodyStatement DeclareContentWithXmlWriter(out TypedValueExpression content, out XmlWriterExpression writer)

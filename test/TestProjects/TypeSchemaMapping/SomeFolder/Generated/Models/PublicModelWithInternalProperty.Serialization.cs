@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using TypeSchemaMapping;
 
 namespace TypeSchemaMapping.Models
 {
@@ -26,12 +27,12 @@ namespace TypeSchemaMapping.Models
             }
 
             writer.WriteStartObject();
-            if (StringPropertyJson.ValueKind != JsonValueKind.Undefined)
+            if (Optional.IsDefined(StringPropertyJson))
             {
                 writer.WritePropertyName("InternalProperty"u8);
                 StringPropertyJson.WriteTo(writer);
             }
-            if (PublicProperty != null)
+            if (Optional.IsDefined(PublicProperty))
             {
                 writer.WritePropertyName("PublicProperty"u8);
                 writer.WriteStringValue(PublicProperty);

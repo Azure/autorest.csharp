@@ -78,7 +78,6 @@ import {
 import {
     capitalize,
     getFullNamespaceString,
-    getSerializeName,
     getTypeName
 } from "./utils.js";
 import { InputTypeKind } from "../type/inputTypeKind.js";
@@ -170,7 +169,7 @@ export function getCSharpInputTypeKindByPrimitiveModelName(
             return InputPrimitiveTypeKind.Uri;
         case "uuid":
             return InputPrimitiveTypeKind.Guid;
-        case "etag":
+        case "eTag":
             return InputPrimitiveTypeKind.String;
         case "string":
             switch (format?.toLowerCase()) {
@@ -196,6 +195,7 @@ export function getCSharpInputTypeKindByPrimitiveModelName(
         case "plainTime":
             return InputPrimitiveTypeKind.Time;
         case "datetime":
+        case "utcDateTime":
             switch (encode?.encoding) {
                 case undefined:
                     return InputPrimitiveTypeKind.DateTime;
@@ -233,6 +233,8 @@ export function getCSharpInputTypeKindByPrimitiveModelName(
                     );
                     return InputPrimitiveTypeKind.DurationISO8601;
             }
+        case "azureLocation":
+            return InputPrimitiveTypeKind.AzureLocation;
         default:
             return InputPrimitiveTypeKind.Object;
     }
@@ -303,9 +305,13 @@ export function getInputType(
     enums: Map<string, InputEnumType>,
     literalTypeContext?: LiteralTypeContext
 ): InputType | undefined {
-    const type = formattedType.type;
+    const type =
+        formattedType.type.kind === "ModelProperty"
+            ? formattedType.type.type
+            : formattedType.type;
     logger.debug(`getInputType for kind: ${type.kind}`);
     const program = context.program;
+
     if (type.kind === "Model") {
         return getInputModelType(type);
     } else if (
@@ -493,7 +499,7 @@ export function getInputType(
             if (context.modelsMap?.has(e)) {
                 return fromSdkEnumType(
                     context.modelsMap!.get(e) as SdkEnumType,
-                    context.program,
+                    context,
                     enums,
                     addToCollection
                 );
@@ -592,10 +598,15 @@ export function getInputType(
         if (context.modelsMap!.has(m)) {
             return fromSdkModelType(
                 context.modelsMap!.get(m) as SdkModelType,
-                context.program,
+                context,
                 models,
                 enums
             );
+        }
+        var createdSdkModelType = getClientType(context, m) as SdkModelType;
+        if (createdSdkModelType){
+            context.modelsMap!.set(m, createdSdkModelType);
+            return fromSdkModelType(createdSdkModelType, context, models, enums);
         }
         return undefined;
     }
@@ -619,6 +630,15 @@ export function getInputType(
             ) {
                 return String(
                     discriminatorProperty.type.value ??
+                        discriminatorProperty.type.name
+                );
+            }
+            if (
+                discriminatorProperty?.type.kind === "UnionVariant" &&
+                discriminatorProperty?.type.type.kind === "String"
+            ) {
+                return String(
+                    discriminatorProperty.type.type.value ??
                         discriminatorProperty.type.name
                 );
             }
@@ -786,6 +806,11 @@ export function getInputType(
     }
 
     function getInputTypeForUnion(union: Union): InputUnionType | InputType {
+        var clientType = getClientType(context, union);
+        if (clientType.kind === "enum" && clientType.isFixed === false) {
+            return fromSdkEnumType(clientType, context, enums);
+        }
+
         let itemTypes: InputType[] = [];
         const variants = Array.from(union.variants.values());
 
@@ -857,7 +882,7 @@ export function ensureInputType(
     return type!;
 }
 
-function setUsage(
+export function setUsage(
     context: SdkContext,
     source: Model | Enum,
     target: InputModelType | InputEnumType
@@ -899,6 +924,12 @@ export function getUsages(
         }
         if (type.kind === "Model") {
             typeName = getTypeName(context, effectiveType as Model);
+        }
+        if (type.kind === "Union") {
+            let clientType = getClientType(context, type);
+            if (clientType.kind === "enum" && clientType.isFixed === false) {
+                typeName = clientType.generatedName || clientType.name;
+            }
         }
         const affectTypes: Set<string> = new Set<string>();
         if (typeName !== "") {

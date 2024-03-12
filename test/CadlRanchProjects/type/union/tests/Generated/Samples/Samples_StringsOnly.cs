@@ -49,7 +49,7 @@ namespace _Type.Union.Samples
         {
             StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
-            Response<GetResponse> response = client.GetStringsOnly();
+            Response<GetResponse9> response = client.GetStringsOnly();
         }
 
         [Test]
@@ -58,7 +58,7 @@ namespace _Type.Union.Samples
         {
             StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
-            Response<GetResponse> response = await client.GetStringsOnlyAsync();
+            Response<GetResponse9> response = await client.GetStringsOnlyAsync();
         }
 
         [Test]
@@ -91,7 +91,7 @@ namespace _Type.Union.Samples
         {
             StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
-            Response<GetResponse> response = client.GetStringsOnly();
+            Response<GetResponse9> response = client.GetStringsOnly();
         }
 
         [Test]
@@ -100,7 +100,7 @@ namespace _Type.Union.Samples
         {
             StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
-            Response<GetResponse> response = await client.GetStringsOnlyAsync();
+            Response<GetResponse9> response = await client.GetStringsOnlyAsync();
         }
 
         [Test]
@@ -139,7 +139,7 @@ namespace _Type.Union.Samples
         {
             StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
-            Response response = client.Send(SendRequestProp.A);
+            Response response = client.Send(GetResponseProp5.A);
         }
 
         [Test]
@@ -148,7 +148,7 @@ namespace _Type.Union.Samples
         {
             StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
-            Response response = await client.SendAsync(SendRequestProp.A);
+            Response response = await client.SendAsync(GetResponseProp5.A);
         }
 
         [Test]
@@ -187,7 +187,7 @@ namespace _Type.Union.Samples
         {
             StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
-            Response response = client.Send(SendRequestProp.A);
+            Response response = client.Send(GetResponseProp5.A);
         }
 
         [Test]
@@ -196,7 +196,7 @@ namespace _Type.Union.Samples
         {
             StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
-            Response response = await client.SendAsync(SendRequestProp.A);
+            Response response = await client.SendAsync(GetResponseProp5.A);
         }
     }
 }

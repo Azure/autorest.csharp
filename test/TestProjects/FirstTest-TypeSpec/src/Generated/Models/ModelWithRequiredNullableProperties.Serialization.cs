@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using FirstTestTypeSpec;
 
 namespace FirstTestTypeSpec.Models
 {
@@ -36,10 +37,24 @@ namespace FirstTestTypeSpec.Models
             {
                 writer.WriteNull("requiredNullablePrimitive");
             }
-            writer.WritePropertyName("requiredExtensibleEnum"u8);
-            writer.WriteStringValue(RequiredExtensibleEnum.ToString());
-            writer.WritePropertyName("requiredFixedEnum"u8);
-            writer.WriteStringValue(RequiredFixedEnum.ToSerialString());
+            if (RequiredExtensibleEnum != null)
+            {
+                writer.WritePropertyName("requiredExtensibleEnum"u8);
+                writer.WriteStringValue(RequiredExtensibleEnum.Value.ToString());
+            }
+            else
+            {
+                writer.WriteNull("requiredExtensibleEnum");
+            }
+            if (RequiredFixedEnum != null)
+            {
+                writer.WritePropertyName("requiredFixedEnum"u8);
+                writer.WriteStringValue(RequiredFixedEnum.Value.ToSerialString());
+            }
+            else
+            {
+                writer.WriteNull("requiredFixedEnum");
+            }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -79,8 +94,8 @@ namespace FirstTestTypeSpec.Models
                 return null;
             }
             int? requiredNullablePrimitive = default;
-            StringExtensibleEnum requiredExtensibleEnum = default;
-            StringFixedEnum requiredFixedEnum = default;
+            StringExtensibleEnum? requiredExtensibleEnum = default;
+            StringFixedEnum? requiredFixedEnum = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -97,11 +112,21 @@ namespace FirstTestTypeSpec.Models
                 }
                 if (property.NameEquals("requiredExtensibleEnum"u8))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        requiredExtensibleEnum = null;
+                        continue;
+                    }
                     requiredExtensibleEnum = new StringExtensibleEnum(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("requiredFixedEnum"u8))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        requiredFixedEnum = null;
+                        continue;
+                    }
                     requiredFixedEnum = property.Value.GetString().ToStringFixedEnum();
                     continue;
                 }

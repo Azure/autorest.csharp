@@ -48,10 +48,7 @@ namespace MgmtCollectionParent
         /// <returns> Returns a <see cref="OrderResource"/> object. </returns>
         public static OrderResource GetOrderResource(this ArmClient client, ResourceIdentifier id)
         {
-            if (client == null)
-            {
-                throw new ArgumentNullException(nameof(client));
-            }
+            Argument.AssertNotNull(client, nameof(client));
 
             return GetMockableMgmtCollectionParentArmClient(client).GetOrderResource(id);
         }
@@ -68,10 +65,7 @@ namespace MgmtCollectionParent
         /// <returns> An object representing collection of OrderResources and their operations over a OrderResource. </returns>
         public static OrderResourceCollection GetOrderResources(this ResourceGroupResource resourceGroupResource)
         {
-            if (resourceGroupResource == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupResource));
-            }
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
 
             return GetMockableMgmtCollectionParentResourceGroupResource(resourceGroupResource).GetOrderResources();
         }
@@ -110,10 +104,7 @@ namespace MgmtCollectionParent
         [ForwardsClientCalls]
         public static async Task<Response<OrderResource>> GetOrderResourceAsync(this ResourceGroupResource resourceGroupResource, string location, string orderName, CancellationToken cancellationToken = default)
         {
-            if (resourceGroupResource == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupResource));
-            }
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
 
             return await GetMockableMgmtCollectionParentResourceGroupResource(resourceGroupResource).GetOrderResourceAsync(location, orderName, cancellationToken).ConfigureAwait(false);
         }
@@ -152,10 +143,7 @@ namespace MgmtCollectionParent
         [ForwardsClientCalls]
         public static Response<OrderResource> GetOrderResource(this ResourceGroupResource resourceGroupResource, string location, string orderName, CancellationToken cancellationToken = default)
         {
-            if (resourceGroupResource == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupResource));
-            }
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
 
             return GetMockableMgmtCollectionParentResourceGroupResource(resourceGroupResource).GetOrderResource(location, orderName, cancellationToken);
         }
@@ -192,10 +180,7 @@ namespace MgmtCollectionParent
         /// <returns> An async collection of <see cref="OrderResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<OrderResource> GetOrderResourcesAsync(this SubscriptionResource subscriptionResource, string skipToken = null, CancellationToken cancellationToken = default)
         {
-            if (subscriptionResource == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionResource));
-            }
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
 
             return GetMockableMgmtCollectionParentSubscriptionResource(subscriptionResource).GetOrderResourcesAsync(skipToken, cancellationToken);
         }
@@ -232,10 +217,7 @@ namespace MgmtCollectionParent
         /// <returns> A collection of <see cref="OrderResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<OrderResource> GetOrderResources(this SubscriptionResource subscriptionResource, string skipToken = null, CancellationToken cancellationToken = default)
         {
-            if (subscriptionResource == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionResource));
-            }
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
 
             return GetMockableMgmtCollectionParentSubscriptionResource(subscriptionResource).GetOrderResources(skipToken, cancellationToken);
         }

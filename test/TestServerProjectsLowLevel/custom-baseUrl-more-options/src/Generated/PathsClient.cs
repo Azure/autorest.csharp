@@ -53,22 +53,9 @@ namespace custom_baseUrl_more_options_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
         public PathsClient(string dnsSuffix, string subscriptionId, AzureKeyCredential credential, PathsClientOptions options)
         {
-            if (dnsSuffix == null)
-            {
-                throw new ArgumentNullException(nameof(dnsSuffix));
-            }
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (subscriptionId.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subscriptionId));
-            }
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(dnsSuffix, nameof(dnsSuffix));
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNull(credential, nameof(credential));
             options ??= new PathsClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -100,22 +87,9 @@ namespace custom_baseUrl_more_options_LowLevel
         /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='GetEmptyAsync(string,string,string,string,RequestContext)']/*" />
         public virtual async Task<Response> GetEmptyAsync(string vault, string secret, string keyName, string keyVersion = null, RequestContext context = null)
         {
-            if (vault == null)
-            {
-                throw new ArgumentNullException(nameof(vault));
-            }
-            if (secret == null)
-            {
-                throw new ArgumentNullException(nameof(secret));
-            }
-            if (keyName == null)
-            {
-                throw new ArgumentNullException(nameof(keyName));
-            }
-            if (keyName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(keyName));
-            }
+            Argument.AssertNotNull(vault, nameof(vault));
+            Argument.AssertNotNull(secret, nameof(secret));
+            Argument.AssertNotNullOrEmpty(keyName, nameof(keyName));
 
             using var scope = ClientDiagnostics.CreateScope("PathsClient.GetEmpty");
             scope.Start();
@@ -153,22 +127,9 @@ namespace custom_baseUrl_more_options_LowLevel
         /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='GetEmpty(string,string,string,string,RequestContext)']/*" />
         public virtual Response GetEmpty(string vault, string secret, string keyName, string keyVersion = null, RequestContext context = null)
         {
-            if (vault == null)
-            {
-                throw new ArgumentNullException(nameof(vault));
-            }
-            if (secret == null)
-            {
-                throw new ArgumentNullException(nameof(secret));
-            }
-            if (keyName == null)
-            {
-                throw new ArgumentNullException(nameof(keyName));
-            }
-            if (keyName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(keyName));
-            }
+            Argument.AssertNotNull(vault, nameof(vault));
+            Argument.AssertNotNull(secret, nameof(secret));
+            Argument.AssertNotNullOrEmpty(keyName, nameof(keyName));
 
             using var scope = ClientDiagnostics.CreateScope("PathsClient.GetEmpty");
             scope.Start();

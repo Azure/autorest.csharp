@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using body_complex;
 
 namespace body_complex.Models
 {
@@ -26,12 +27,12 @@ namespace body_complex.Models
             }
 
             writer.WriteStartObject();
-            if (FieldTrue.HasValue)
+            if (Optional.IsDefined(FieldTrue))
             {
                 writer.WritePropertyName("field_true"u8);
                 writer.WriteBooleanValue(FieldTrue.Value);
             }
-            if (FieldFalse.HasValue)
+            if (Optional.IsDefined(FieldFalse))
             {
                 writer.WritePropertyName("field_false"u8);
                 writer.WriteBooleanValue(FieldFalse.Value);

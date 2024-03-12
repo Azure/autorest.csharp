@@ -194,10 +194,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<ResourceModel1Resource>> UpdateAsync(WaitUntil waitUntil, ResourceModel1Data data, CancellationToken cancellationToken = default)
         {
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _resourceModel1ClientDiagnostics.CreateScope("ResourceModel1Resource.Update");
             scope.Start();
@@ -242,10 +239,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<ResourceModel1Resource> Update(WaitUntil waitUntil, ResourceModel1Data data, CancellationToken cancellationToken = default)
         {
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _resourceModel1ClientDiagnostics.CreateScope("ResourceModel1Resource.Update");
             scope.Start();

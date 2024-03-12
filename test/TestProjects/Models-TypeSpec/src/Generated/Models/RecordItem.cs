@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using ModelsTypeSpec;
 
 namespace ModelsTypeSpec.Models
 {
@@ -18,10 +19,7 @@ namespace ModelsTypeSpec.Models
         /// <exception cref="ArgumentNullException"> <paramref name="requiredList"/> is null. </exception>
         public RecordItem(IEnumerable<CollectionItem> requiredList) : base(requiredList)
         {
-            if (requiredList == null)
-            {
-                throw new ArgumentNullException(nameof(requiredList));
-            }
+            Argument.AssertNotNull(requiredList, nameof(requiredList));
         }
 
         /// <summary> Initializes a new instance of <see cref="RecordItem"/>. </summary>

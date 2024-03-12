@@ -46,20 +46,20 @@ namespace _Type.Union
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/StringExtensibleNamed.xml" path="doc/members/member[@name='GetStringExtensibleNamedAsync(CancellationToken)']/*" />
-        public virtual async Task<Response<GetResponse2>> GetStringExtensibleNamedAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<GetResponse7>> GetStringExtensibleNamedAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetStringExtensibleNamedAsync(context).ConfigureAwait(false);
-            return Response.FromValue(GetResponse2.FromResponse(response), response);
+            return Response.FromValue(GetResponse7.FromResponse(response), response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/StringExtensibleNamed.xml" path="doc/members/member[@name='GetStringExtensibleNamed(CancellationToken)']/*" />
-        public virtual Response<GetResponse2> GetStringExtensibleNamed(CancellationToken cancellationToken = default)
+        public virtual Response<GetResponse7> GetStringExtensibleNamed(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetStringExtensibleNamed(context);
-            return Response.FromValue(GetResponse2.FromResponse(response), response);
+            return Response.FromValue(GetResponse7.FromResponse(response), response);
         }
 
         /// <summary>
@@ -134,23 +134,23 @@ namespace _Type.Union
 
         /// <param name="prop"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/StringExtensibleNamed.xml" path="doc/members/member[@name='SendAsync(SendRequest2Prop,CancellationToken)']/*" />
-        public virtual async Task<Response> SendAsync(SendRequest2Prop prop, CancellationToken cancellationToken = default)
+        /// <include file="Docs/StringExtensibleNamed.xml" path="doc/members/member[@name='SendAsync(StringExtensibleNamedUnion,CancellationToken)']/*" />
+        public virtual async Task<Response> SendAsync(StringExtensibleNamedUnion prop, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            SendRequest2 sendRequest2 = new SendRequest2(prop);
-            Response response = await SendAsync(sendRequest2.ToRequestContent(), context).ConfigureAwait(false);
+            SendRequest7 sendRequest7 = new SendRequest7(prop);
+            Response response = await SendAsync(sendRequest7.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
         /// <param name="prop"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/StringExtensibleNamed.xml" path="doc/members/member[@name='Send(SendRequest2Prop,CancellationToken)']/*" />
-        public virtual Response Send(SendRequest2Prop prop, CancellationToken cancellationToken = default)
+        /// <include file="Docs/StringExtensibleNamed.xml" path="doc/members/member[@name='Send(StringExtensibleNamedUnion,CancellationToken)']/*" />
+        public virtual Response Send(StringExtensibleNamedUnion prop, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            SendRequest2 sendRequest2 = new SendRequest2(prop);
-            Response response = Send(sendRequest2.ToRequestContent(), context);
+            SendRequest7 sendRequest7 = new SendRequest7(prop);
+            Response response = Send(sendRequest7.ToRequestContent(), context);
             return response;
         }
 
@@ -164,7 +164,7 @@ namespace _Type.Union
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SendAsync(SendRequest2Prop,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SendAsync(StringExtensibleNamedUnion,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -177,10 +177,7 @@ namespace _Type.Union
         /// <include file="Docs/StringExtensibleNamed.xml" path="doc/members/member[@name='SendAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> SendAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("StringExtensibleNamed.Send");
             scope.Start();
@@ -206,7 +203,7 @@ namespace _Type.Union
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Send(SendRequest2Prop,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Send(StringExtensibleNamedUnion,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -219,10 +216,7 @@ namespace _Type.Union
         /// <include file="Docs/StringExtensibleNamed.xml" path="doc/members/member[@name='Send(RequestContent,RequestContext)']/*" />
         public virtual Response Send(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("StringExtensibleNamed.Send");
             scope.Start();

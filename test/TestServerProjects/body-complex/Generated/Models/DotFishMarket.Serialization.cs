@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using body_complex;
 
 namespace body_complex.Models
 {
@@ -26,12 +27,12 @@ namespace body_complex.Models
             }
 
             writer.WriteStartObject();
-            if (SampleSalmon != null)
+            if (Optional.IsDefined(SampleSalmon))
             {
                 writer.WritePropertyName("sampleSalmon"u8);
                 writer.WriteObjectValue(SampleSalmon);
             }
-            if (!(Salmons is ChangeTrackingList<DotSalmon> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Salmons))
             {
                 writer.WritePropertyName("salmons"u8);
                 writer.WriteStartArray();
@@ -41,12 +42,12 @@ namespace body_complex.Models
                 }
                 writer.WriteEndArray();
             }
-            if (SampleFish != null)
+            if (Optional.IsDefined(SampleFish))
             {
                 writer.WritePropertyName("sampleFish"u8);
                 writer.WriteObjectValue(SampleFish);
             }
-            if (!(Fishes is ChangeTrackingList<DotFish> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(Fishes))
             {
                 writer.WritePropertyName("fishes"u8);
                 writer.WriteStartArray();

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using FirstTestTypeSpec;
 
 namespace FirstTestTypeSpec.Models
 {
@@ -27,7 +28,7 @@ namespace FirstTestTypeSpec.Models
             }
 
             writer.WriteStartObject();
-            if (!(Extension is ChangeTrackingList<ThereLevelExtension> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Extension))
             {
                 writer.WritePropertyName("extension"u8);
                 writer.WriteStartArray();

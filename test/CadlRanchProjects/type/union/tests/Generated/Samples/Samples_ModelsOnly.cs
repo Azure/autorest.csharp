@@ -49,7 +49,7 @@ namespace _Type.Union.Samples
         {
             ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 
-            Response<GetResponse5> response = client.GetModelsOnly();
+            Response<GetResponse4> response = client.GetModelsOnly();
         }
 
         [Test]
@@ -58,7 +58,7 @@ namespace _Type.Union.Samples
         {
             ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 
-            Response<GetResponse5> response = await client.GetModelsOnlyAsync();
+            Response<GetResponse4> response = await client.GetModelsOnlyAsync();
         }
 
         [Test]
@@ -91,7 +91,7 @@ namespace _Type.Union.Samples
         {
             ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 
-            Response<GetResponse5> response = client.GetModelsOnly();
+            Response<GetResponse4> response = client.GetModelsOnly();
         }
 
         [Test]
@@ -100,7 +100,7 @@ namespace _Type.Union.Samples
         {
             ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 
-            Response<GetResponse5> response = await client.GetModelsOnlyAsync();
+            Response<GetResponse4> response = await client.GetModelsOnlyAsync();
         }
 
         [Test]

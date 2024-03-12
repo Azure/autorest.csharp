@@ -8,9 +8,7 @@
    "$id": "2",
    "Kind": "Enum",
    "Name": "ResourceTypeAliasPatternType",
-   "Namespace": "ModelReaderWriterValidationTypeSpec",
-   "Description": "The type of alias pattern.",
-   "EnumValueType": "String",
+   "EnumValueType": "string",
    "AllowedValues": [
     {
      "$id": "3",
@@ -25,6 +23,8 @@
      "Description": "Extract is the only allowed value."
     }
    ],
+   "Namespace": "ModelReaderWriterValidationTypeSpec",
+   "Description": "The type of alias pattern.",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "Output"
@@ -33,9 +33,7 @@
    "$id": "5",
    "Kind": "Enum",
    "Name": "ResourceTypeAliasPathTokenType",
-   "Namespace": "ModelReaderWriterValidationTypeSpec",
-   "Description": "The type of the token that the alias path is referring to.",
-   "EnumValueType": "String",
+   "EnumValueType": "string",
    "AllowedValues": [
     {
      "$id": "6",
@@ -86,6 +84,8 @@
      "Description": "The token type is boolean."
     }
    ],
+   "Namespace": "ModelReaderWriterValidationTypeSpec",
+   "Description": "The type of the token that the alias path is referring to.",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "Output"
@@ -94,9 +94,7 @@
    "$id": "14",
    "Kind": "Enum",
    "Name": "ResourceTypeAliasPathAttributes",
-   "Namespace": "ModelReaderWriterValidationTypeSpec",
-   "Description": "The attributes of the token that the alias path is referring to.",
-   "EnumValueType": "String",
+   "EnumValueType": "string",
    "AllowedValues": [
     {
      "$id": "15",
@@ -111,6 +109,8 @@
      "Description": "The token that the alias path is referring to is modifiable by policies with 'modify' effect."
     }
    ],
+   "Namespace": "ModelReaderWriterValidationTypeSpec",
+   "Description": "The attributes of the token that the alias path is referring to.",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "Output"
@@ -119,9 +119,7 @@
    "$id": "17",
    "Kind": "Enum",
    "Name": "ResourceTypeAliasType",
-   "Namespace": "ModelReaderWriterValidationTypeSpec",
-   "Description": "The type of the alias.",
-   "EnumValueType": "String",
+   "EnumValueType": "string",
    "AllowedValues": [
     {
      "$id": "18",
@@ -142,6 +140,8 @@
      "Description": "Alias value is secret."
     }
    ],
+   "Namespace": "ModelReaderWriterValidationTypeSpec",
+   "Description": "The type of the alias.",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "Output"
@@ -150,9 +150,7 @@
    "$id": "21",
    "Kind": "Enum",
    "Name": "ProviderAuthorizationConsentState",
-   "Namespace": "ModelReaderWriterValidationTypeSpec",
-   "Description": "The provider authorization consent state.",
-   "EnumValueType": "String",
+   "EnumValueType": "string",
    "AllowedValues": [
     {
      "$id": "22",
@@ -179,6 +177,8 @@
      "Description": "The provider authorization consent state is consented."
     }
    ],
+   "Namespace": "ModelReaderWriterValidationTypeSpec",
+   "Description": "The provider authorization consent state.",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "Output"

@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using Azure.Core;
+using ModelReaderWriterValidationTypeSpec;
 
 namespace ModelReaderWriterValidationTypeSpec.Models
 {
@@ -51,10 +52,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
         public TrackedResourceData(string location)
         {
-            if (location == null)
-            {
-                throw new ArgumentNullException(nameof(location));
-            }
+            Argument.AssertNotNull(location, nameof(location));
 
             Location = location;
             Tags = new ChangeTrackingDictionary<string, string>();

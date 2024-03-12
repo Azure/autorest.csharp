@@ -3,12 +3,13 @@
 
 import {
     SdkClient,
-    SdkContext,
-    SdkOperationGroup,
     getAllModels,
     listClients,
     listOperationGroups,
-    listOperationsInOperationGroup
+    listOperationsInOperationGroup,
+    SdkOperationGroup,
+    SdkContext,
+    getLibraryName
 } from "@azure-tools/typespec-client-generator-core";
 import {
     EmitContext,
@@ -213,11 +214,12 @@ export function createModelForService(
         }
 
         var pathParts = client.groupPath.split(".");
-        return pathParts?.length >= 3
-            ? pathParts.slice(pathParts.length - 2).join("")
-            : client.type.name === "Models"
-            ? "ModelsOps"
-            : client.type.name;
+        if (pathParts?.length >= 3) {
+            return pathParts.slice(pathParts.length - 2).join("");
+        }
+
+        var clientName = getLibraryName(sdkContext, client.type);
+        return clientName === "Models" ? "ModelsOps" : clientName;
     }
 
     function emitClient(

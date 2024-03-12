@@ -7,7 +7,7 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
+using _Specs_.Azure.Core.Basic;
 
 namespace _Specs_.Azure.Core.Basic.Models
 {
@@ -51,10 +51,7 @@ namespace _Specs_.Azure.Core.Basic.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public User(string name)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Argument.AssertNotNull(name, nameof(name));
 
             Name = name;
             Orders = new ChangeTrackingList<UserOrder>();

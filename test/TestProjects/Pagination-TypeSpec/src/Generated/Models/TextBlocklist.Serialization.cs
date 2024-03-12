@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Pagination;
 
 namespace Pagination.Models
 {
@@ -32,7 +33,7 @@ namespace Pagination.Models
                 writer.WritePropertyName("blocklistName"u8);
                 writer.WriteStringValue(BlocklistName);
             }
-            if (Description != null)
+            if (Optional.IsDefined(Description))
             {
                 writer.WritePropertyName("description"u8);
                 writer.WriteStringValue(Description);

@@ -56,7 +56,7 @@ namespace _Type.Union.Samples
         {
             MixedTypes client = new UnionClient().GetMixedTypesClient();
 
-            Response<GetResponse9> response = client.GetMixedType();
+            Response<GetResponse> response = client.GetMixedType();
         }
 
         [Test]
@@ -65,7 +65,7 @@ namespace _Type.Union.Samples
         {
             MixedTypes client = new UnionClient().GetMixedTypesClient();
 
-            Response<GetResponse9> response = await client.GetMixedTypeAsync();
+            Response<GetResponse> response = await client.GetMixedTypeAsync();
         }
 
         [Test]
@@ -104,7 +104,7 @@ namespace _Type.Union.Samples
         {
             MixedTypes client = new UnionClient().GetMixedTypesClient();
 
-            Response<GetResponse9> response = client.GetMixedType();
+            Response<GetResponse> response = client.GetMixedType();
         }
 
         [Test]
@@ -113,7 +113,7 @@ namespace _Type.Union.Samples
         {
             MixedTypes client = new UnionClient().GetMixedTypesClient();
 
-            Response<GetResponse9> response = await client.GetMixedTypeAsync();
+            Response<GetResponse> response = await client.GetMixedTypeAsync();
         }
 
         [Test]

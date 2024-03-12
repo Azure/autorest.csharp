@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -27,32 +28,32 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (NumberOfCores.HasValue)
+            if (Optional.IsDefined(NumberOfCores))
             {
                 writer.WritePropertyName("numberOfCores"u8);
                 writer.WriteNumberValue(NumberOfCores.Value);
             }
-            if (OSDiskSizeInMB.HasValue)
+            if (Optional.IsDefined(OSDiskSizeInMB))
             {
                 writer.WritePropertyName("osDiskSizeInMB"u8);
                 writer.WriteNumberValue(OSDiskSizeInMB.Value);
             }
-            if (ResourceDiskSizeInMB.HasValue)
+            if (Optional.IsDefined(ResourceDiskSizeInMB))
             {
                 writer.WritePropertyName("resourceDiskSizeInMB"u8);
                 writer.WriteNumberValue(ResourceDiskSizeInMB.Value);
             }
-            if (MemoryInMB.HasValue)
+            if (Optional.IsDefined(MemoryInMB))
             {
                 writer.WritePropertyName("memoryInMB"u8);
                 writer.WriteNumberValue(MemoryInMB.Value);
             }
-            if (MaxDataDiskCount.HasValue)
+            if (Optional.IsDefined(MaxDataDiskCount))
             {
                 writer.WritePropertyName("maxDataDiskCount"u8);
                 writer.WriteNumberValue(MaxDataDiskCount.Value);
@@ -176,7 +177,7 @@ namespace Azure.ResourceManager.Sample.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 builder.Append("  name:");
                 if (Name.Contains(Environment.NewLine))
@@ -190,31 +191,31 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
 
-            if (NumberOfCores.HasValue)
+            if (Optional.IsDefined(NumberOfCores))
             {
                 builder.Append("  numberOfCores:");
                 builder.AppendLine($" {NumberOfCores.Value}");
             }
 
-            if (OSDiskSizeInMB.HasValue)
+            if (Optional.IsDefined(OSDiskSizeInMB))
             {
                 builder.Append("  osDiskSizeInMB:");
                 builder.AppendLine($" {OSDiskSizeInMB.Value}");
             }
 
-            if (ResourceDiskSizeInMB.HasValue)
+            if (Optional.IsDefined(ResourceDiskSizeInMB))
             {
                 builder.Append("  resourceDiskSizeInMB:");
                 builder.AppendLine($" {ResourceDiskSizeInMB.Value}");
             }
 
-            if (MemoryInMB.HasValue)
+            if (Optional.IsDefined(MemoryInMB))
             {
                 builder.Append("  memoryInMB:");
                 builder.AppendLine($" {MemoryInMB.Value}");
             }
 
-            if (MaxDataDiskCount.HasValue)
+            if (Optional.IsDefined(MaxDataDiskCount))
             {
                 builder.Append("  maxDataDiskCount:");
                 builder.AppendLine($" {MaxDataDiskCount.Value}");

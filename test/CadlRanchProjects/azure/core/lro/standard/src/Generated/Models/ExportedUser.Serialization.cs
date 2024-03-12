@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using _Azure.Lro.Standard;
 
 namespace _Azure.Lro.Standard.Models
 {

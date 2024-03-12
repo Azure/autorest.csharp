@@ -46,20 +46,20 @@ namespace _Type.Union
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/MixedLiterals.xml" path="doc/members/member[@name='GetMixedLiteralAsync(CancellationToken)']/*" />
-        public virtual async Task<Response<GetResponse8>> GetMixedLiteralAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<GetResponse1>> GetMixedLiteralAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetMixedLiteralAsync(context).ConfigureAwait(false);
-            return Response.FromValue(GetResponse8.FromResponse(response), response);
+            return Response.FromValue(GetResponse1.FromResponse(response), response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/MixedLiterals.xml" path="doc/members/member[@name='GetMixedLiteral(CancellationToken)']/*" />
-        public virtual Response<GetResponse8> GetMixedLiteral(CancellationToken cancellationToken = default)
+        public virtual Response<GetResponse1> GetMixedLiteral(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetMixedLiteral(context);
-            return Response.FromValue(GetResponse8.FromResponse(response), response);
+            return Response.FromValue(GetResponse1.FromResponse(response), response);
         }
 
         /// <summary>
@@ -138,14 +138,11 @@ namespace _Type.Union
         /// <include file="Docs/MixedLiterals.xml" path="doc/members/member[@name='SendAsync(MixedLiteralsCases,CancellationToken)']/*" />
         public virtual async Task<Response> SendAsync(MixedLiteralsCases prop, CancellationToken cancellationToken = default)
         {
-            if (prop == null)
-            {
-                throw new ArgumentNullException(nameof(prop));
-            }
+            Argument.AssertNotNull(prop, nameof(prop));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            SendRequest8 sendRequest8 = new SendRequest8(prop);
-            Response response = await SendAsync(sendRequest8.ToRequestContent(), context).ConfigureAwait(false);
+            SendRequest1 sendRequest1 = new SendRequest1(prop);
+            Response response = await SendAsync(sendRequest1.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
@@ -155,14 +152,11 @@ namespace _Type.Union
         /// <include file="Docs/MixedLiterals.xml" path="doc/members/member[@name='Send(MixedLiteralsCases,CancellationToken)']/*" />
         public virtual Response Send(MixedLiteralsCases prop, CancellationToken cancellationToken = default)
         {
-            if (prop == null)
-            {
-                throw new ArgumentNullException(nameof(prop));
-            }
+            Argument.AssertNotNull(prop, nameof(prop));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            SendRequest8 sendRequest8 = new SendRequest8(prop);
-            Response response = Send(sendRequest8.ToRequestContent(), context);
+            SendRequest1 sendRequest1 = new SendRequest1(prop);
+            Response response = Send(sendRequest1.ToRequestContent(), context);
             return response;
         }
 
@@ -189,10 +183,7 @@ namespace _Type.Union
         /// <include file="Docs/MixedLiterals.xml" path="doc/members/member[@name='SendAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> SendAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("MixedLiterals.Send");
             scope.Start();
@@ -231,10 +222,7 @@ namespace _Type.Union
         /// <include file="Docs/MixedLiterals.xml" path="doc/members/member[@name='Send(RequestContent,RequestContext)']/*" />
         public virtual Response Send(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("MixedLiterals.Send");
             scope.Start();

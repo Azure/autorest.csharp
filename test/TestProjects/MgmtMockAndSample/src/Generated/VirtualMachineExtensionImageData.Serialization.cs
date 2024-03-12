@@ -19,27 +19,27 @@ namespace MgmtMockAndSample
             writer.WriteStartObject();
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (OperatingSystem != null)
+            if (Optional.IsDefined(OperatingSystem))
             {
                 writer.WritePropertyName("operatingSystem"u8);
                 writer.WriteStringValue(OperatingSystem);
             }
-            if (ComputeRole != null)
+            if (Optional.IsDefined(ComputeRole))
             {
                 writer.WritePropertyName("computeRole"u8);
                 writer.WriteStringValue(ComputeRole);
             }
-            if (HandlerSchema != null)
+            if (Optional.IsDefined(HandlerSchema))
             {
                 writer.WritePropertyName("handlerSchema"u8);
                 writer.WriteStringValue(HandlerSchema);
             }
-            if (VmScaleSetEnabled.HasValue)
+            if (Optional.IsDefined(VmScaleSetEnabled))
             {
                 writer.WritePropertyName("vmScaleSetEnabled"u8);
                 writer.WriteBooleanValue(VmScaleSetEnabled.Value);
             }
-            if (SupportsMultipleExtensions.HasValue)
+            if (Optional.IsDefined(SupportsMultipleExtensions))
             {
                 writer.WritePropertyName("supportsMultipleExtensions"u8);
                 writer.WriteBooleanValue(SupportsMultipleExtensions.Value);

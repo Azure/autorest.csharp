@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -49,10 +50,7 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         internal ImagesResponse(DateTimeOffset created, IEnumerable<Image> data)
         {
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNull(data, nameof(data));
 
             Created = created;
             Data = data.ToList();

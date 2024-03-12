@@ -49,7 +49,7 @@ namespace _Type.Union.Samples
         {
             IntsOnly client = new UnionClient().GetIntsOnlyClient();
 
-            Response<GetResponse3> response = client.GetIntsOnly();
+            Response<GetResponse6> response = client.GetIntsOnly();
         }
 
         [Test]
@@ -58,7 +58,7 @@ namespace _Type.Union.Samples
         {
             IntsOnly client = new UnionClient().GetIntsOnlyClient();
 
-            Response<GetResponse3> response = await client.GetIntsOnlyAsync();
+            Response<GetResponse6> response = await client.GetIntsOnlyAsync();
         }
 
         [Test]
@@ -91,7 +91,7 @@ namespace _Type.Union.Samples
         {
             IntsOnly client = new UnionClient().GetIntsOnlyClient();
 
-            Response<GetResponse3> response = client.GetIntsOnly();
+            Response<GetResponse6> response = client.GetIntsOnly();
         }
 
         [Test]
@@ -100,7 +100,7 @@ namespace _Type.Union.Samples
         {
             IntsOnly client = new UnionClient().GetIntsOnlyClient();
 
-            Response<GetResponse3> response = await client.GetIntsOnlyAsync();
+            Response<GetResponse6> response = await client.GetIntsOnlyAsync();
         }
 
         [Test]
@@ -139,7 +139,7 @@ namespace _Type.Union.Samples
         {
             IntsOnly client = new UnionClient().GetIntsOnlyClient();
 
-            Response response = client.Send(BinaryData.FromObjectAsJson(1));
+            Response response = client.Send(GetResponseProp3._1);
         }
 
         [Test]
@@ -148,7 +148,7 @@ namespace _Type.Union.Samples
         {
             IntsOnly client = new UnionClient().GetIntsOnlyClient();
 
-            Response response = await client.SendAsync(BinaryData.FromObjectAsJson(1));
+            Response response = await client.SendAsync(GetResponseProp3._1);
         }
 
         [Test]
@@ -187,7 +187,7 @@ namespace _Type.Union.Samples
         {
             IntsOnly client = new UnionClient().GetIntsOnlyClient();
 
-            Response response = client.Send(BinaryData.FromObjectAsJson(1));
+            Response response = client.Send(GetResponseProp3._1);
         }
 
         [Test]
@@ -196,7 +196,7 @@ namespace _Type.Union.Samples
         {
             IntsOnly client = new UnionClient().GetIntsOnlyClient();
 
-            Response response = await client.SendAsync(BinaryData.FromObjectAsJson(1));
+            Response response = await client.SendAsync(GetResponseProp3._1);
         }
     }
 }

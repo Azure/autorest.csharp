@@ -10,6 +10,7 @@ using System.Text;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis.CSharp;
 
@@ -434,6 +435,10 @@ namespace AutoRest.CSharp.Generation.Writers
             if (type.TryGetCSharpFriendlyName(out var keywordName))
             {
                 AppendRaw(keywordName);
+                if (type.FrameworkType.IsGenericParameter && type.IsNullable)
+                {
+                    AppendRaw("?");
+                }
             }
             else if (isDeclaration && !type.IsFrameworkType)
             {
@@ -798,6 +803,16 @@ namespace AutoRest.CSharp.Generation.Writers
         public virtual void Append(CodeWriterDeclaration declaration)
         {
             Identifier(declaration.ActualName);
+        }
+
+        internal void WriteClassModifiers(TypeSignatureModifiers modifiers)
+        {
+            this.AppendRawIf("public ", modifiers.HasFlag(TypeSignatureModifiers.Public))
+                .AppendRawIf("internal ", modifiers.HasFlag(TypeSignatureModifiers.Internal))
+                .AppendRawIf("private ", modifiers.HasFlag(TypeSignatureModifiers.Private))
+                .AppendRawIf("static ", modifiers.HasFlag(TypeSignatureModifiers.Static))
+                .AppendRawIf("sealed ", modifiers.HasFlag(TypeSignatureModifiers.Sealed))
+                .AppendRawIf("partial ", modifiers.HasFlag(TypeSignatureModifiers.Partial)); // partial must be the last to write otherwise compiler will complain
         }
     }
 }

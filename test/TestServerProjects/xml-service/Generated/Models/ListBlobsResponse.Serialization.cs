@@ -11,6 +11,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
+using xml_service;
 
 namespace xml_service.Models
 {
@@ -19,7 +20,7 @@ namespace xml_service.Models
         private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "EnumerationResults");
-            if (ServiceEndpoint != null)
+            if (Optional.IsDefined(ServiceEndpoint))
             {
                 writer.WriteStartAttribute("ServiceEndpoint");
                 writer.WriteValue(ServiceEndpoint);

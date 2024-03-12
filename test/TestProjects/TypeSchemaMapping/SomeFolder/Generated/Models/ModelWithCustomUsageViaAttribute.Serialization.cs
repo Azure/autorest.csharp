@@ -13,15 +13,16 @@ using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
+using TypeSchemaMapping;
 
 namespace TypeSchemaMapping.Models
 {
-    public partial class ModelWithCustomUsageViaAttribute : IUtf8JsonSerializable, IJsonModel<ModelWithCustomUsageViaAttribute>, IXmlSerializable, IPersistableModel<ModelWithCustomUsageViaAttribute>
+    public partial class ModelWithCustomUsageViaAttribute : IUtf8JsonSerializable, IJsonModel<ModelWithCustomUsageViaAttribute>, IXmlSerializable
     {
         private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "ModelWithCustomUsageViaAttribute");
-            if (ModelProperty != null)
+            if (Optional.IsDefined(ModelProperty))
             {
                 writer.WriteStartElement("ModelProperty");
                 writer.WriteValue(ModelProperty);
@@ -55,7 +56,7 @@ namespace TypeSchemaMapping.Models
             }
 
             writer.WriteStartObject();
-            if (ModelProperty != null)
+            if (Optional.IsDefined(ModelProperty))
             {
                 writer.WritePropertyName("ModelProperty"u8);
                 writer.WriteStringValue(ModelProperty);

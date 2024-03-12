@@ -49,7 +49,7 @@ namespace _Type.Union.Samples
         {
             StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient();
 
-            Response<GetResponse2> response = client.GetStringExtensibleNamed();
+            Response<GetResponse7> response = client.GetStringExtensibleNamed();
         }
 
         [Test]
@@ -58,7 +58,7 @@ namespace _Type.Union.Samples
         {
             StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient();
 
-            Response<GetResponse2> response = await client.GetStringExtensibleNamedAsync();
+            Response<GetResponse7> response = await client.GetStringExtensibleNamedAsync();
         }
 
         [Test]
@@ -91,7 +91,7 @@ namespace _Type.Union.Samples
         {
             StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient();
 
-            Response<GetResponse2> response = client.GetStringExtensibleNamed();
+            Response<GetResponse7> response = client.GetStringExtensibleNamed();
         }
 
         [Test]
@@ -100,7 +100,7 @@ namespace _Type.Union.Samples
         {
             StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient();
 
-            Response<GetResponse2> response = await client.GetStringExtensibleNamedAsync();
+            Response<GetResponse7> response = await client.GetStringExtensibleNamedAsync();
         }
 
         [Test]
@@ -111,7 +111,7 @@ namespace _Type.Union.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = "<prop>",
+                prop = "b",
             });
             Response response = client.Send(content);
 
@@ -126,7 +126,7 @@ namespace _Type.Union.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = "<prop>",
+                prop = "b",
             });
             Response response = await client.SendAsync(content);
 
@@ -139,7 +139,7 @@ namespace _Type.Union.Samples
         {
             StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient();
 
-            Response response = client.Send(new SendRequest2Prop("<prop>"));
+            Response response = client.Send(StringExtensibleNamedUnion.OptionB);
         }
 
         [Test]
@@ -148,7 +148,7 @@ namespace _Type.Union.Samples
         {
             StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient();
 
-            Response response = await client.SendAsync(new SendRequest2Prop("<prop>"));
+            Response response = await client.SendAsync(StringExtensibleNamedUnion.OptionB);
         }
 
         [Test]
@@ -159,7 +159,7 @@ namespace _Type.Union.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = "<prop>",
+                prop = "b",
             });
             Response response = client.Send(content);
 
@@ -174,7 +174,7 @@ namespace _Type.Union.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = "<prop>",
+                prop = "b",
             });
             Response response = await client.SendAsync(content);
 
@@ -187,7 +187,7 @@ namespace _Type.Union.Samples
         {
             StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient();
 
-            Response response = client.Send(new SendRequest2Prop("<prop>"));
+            Response response = client.Send(StringExtensibleNamedUnion.OptionB);
         }
 
         [Test]
@@ -196,7 +196,7 @@ namespace _Type.Union.Samples
         {
             StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient();
 
-            Response response = await client.SendAsync(new SendRequest2Prop("<prop>"));
+            Response response = await client.SendAsync(StringExtensibleNamedUnion.OptionB);
         }
     }
 }

@@ -130,13 +130,11 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
             );
 
             //emit configuration.json
+            const namespace = options.namespace ?? tspNamespace;
             const configurations: Configuration = {
                 "output-folder": ".",
-                namespace: options.namespace ?? tspNamespace,
-                "library-name":
-                    options["library-name"] ??
-                    options.namespace ??
-                    tspNamespace,
+                namespace: namespace,
+                "library-name": options["library-name"] ?? namespace,
                 "shared-source-folders": resolvedSharedFolders ?? [],
                 "single-top-level-client": options["single-top-level-client"],
                 "unreferenced-types-handling":
@@ -170,11 +168,12 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                 "head-as-boolean": options["head-as-boolean"],
                 "deserialize-null-collection-as-null-value":
                     options["deserialize-null-collection-as-null-value"],
+                flavor:
+                    options["flavor"] ??
+                    (namespace.toLowerCase().startsWith("azure.")
+                        ? "azure"
+                        : undefined),
                 //only emit these if they are not the default values
-                branded:
-                    options["branded"] === true
-                        ? undefined
-                        : options["branded"],
                 "generate-sample-project":
                     options["generate-sample-project"] === true
                         ? undefined

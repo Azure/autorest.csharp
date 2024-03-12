@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
@@ -31,7 +32,7 @@ namespace MgmtDiscriminator.Models
             writer.WriteStringValue(TypeName.ToString());
             writer.WritePropertyName("queryStringBehavior"u8);
             writer.WriteStringValue(QueryStringBehavior.ToString());
-            if (QueryParameters != null)
+            if (Optional.IsDefined(QueryParameters))
             {
                 if (QueryParameters != null)
                 {
@@ -128,7 +129,7 @@ namespace MgmtDiscriminator.Models
             builder.Append("  queryStringBehavior:");
             builder.AppendLine($" '{QueryStringBehavior.ToString()}'");
 
-            if (QueryParameters != null)
+            if (Optional.IsDefined(QueryParameters))
             {
                 builder.Append("  queryParameters:");
                 if (QueryParameters.Contains(Environment.NewLine))

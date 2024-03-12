@@ -10,7 +10,7 @@
    "$id": "2",
    "Kind": "Enum",
    "Name": "JobStatus",
-   "EnumValueType": "String",
+   "EnumValueType": "string",
    "AllowedValues": [
     {
      "$id": "3",
@@ -27,13 +27,13 @@
     {
      "$id": "5",
      "Name": "Succeeded",
-     "Value": "succeeded",
+     "Value": "Succeeded",
      "Description": "The operation has completed successfully."
     },
     {
      "$id": "6",
      "Name": "Failed",
-     "Value": "failed",
+     "Value": "Failed",
      "Description": "The operation has failed."
     },
     {
@@ -97,7 +97,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "IsDiscriminator": false
     },
     {
      "$id": "14",
@@ -111,7 +112,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "IsDiscriminator": false
     },
     {
      "$id": "16",
@@ -122,7 +124,8 @@
       "$ref": "2"
      },
      "IsRequired": true,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "IsDiscriminator": false
     },
     {
      "$id": "17",
@@ -168,7 +171,8 @@
              "IsNullable": false
             },
             "IsRequired": true,
-            "IsReadOnly": false
+            "IsReadOnly": false,
+            "IsDiscriminator": false
            },
            {
             "$id": "24",
@@ -182,7 +186,8 @@
              "IsNullable": false
             },
             "IsRequired": true,
-            "IsReadOnly": false
+            "IsReadOnly": false,
+            "IsDiscriminator": false
            },
            {
             "$id": "26",
@@ -196,7 +201,8 @@
              "IsNullable": false
             },
             "IsRequired": false,
-            "IsReadOnly": false
+            "IsReadOnly": false,
+            "IsDiscriminator": false
            },
            {
             "$id": "28",
@@ -213,7 +219,8 @@
              "IsNullable": false
             },
             "IsRequired": false,
-            "IsReadOnly": false
+            "IsReadOnly": false,
+            "IsDiscriminator": false
            },
            {
             "$id": "30",
@@ -241,7 +248,8 @@
                 "IsNullable": false
                },
                "IsRequired": false,
-               "IsReadOnly": false
+               "IsReadOnly": false,
+               "IsDiscriminator": false
               },
               {
                "$id": "34",
@@ -252,24 +260,28 @@
                 "$ref": "31"
                },
                "IsRequired": false,
-               "IsReadOnly": false
+               "IsReadOnly": false,
+               "IsDiscriminator": false
               }
              ]
             },
             "IsRequired": false,
-            "IsReadOnly": false
+            "IsReadOnly": false,
+            "IsDiscriminator": false
            }
           ]
          },
          "IsRequired": true,
-         "IsReadOnly": false
+         "IsReadOnly": false,
+         "IsDiscriminator": false
         }
        ]
       },
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "IsDiscriminator": false
     },
     {
      "$id": "35",
@@ -289,7 +301,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -323,7 +336,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   }

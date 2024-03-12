@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using FirstTestTypeSpec;
 
 namespace FirstTestTypeSpec.Models
 {
@@ -28,7 +29,7 @@ namespace FirstTestTypeSpec.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("sourceUrl"u8);
-            writer.WriteStringValue(SourceUrl.AbsoluteUri);
+            writer.WriteStringValue(SourceUrl);
             writer.WritePropertyName("guid"u8);
             writer.WriteStringValue(Guid);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -69,7 +70,7 @@ namespace FirstTestTypeSpec.Models
             {
                 return null;
             }
-            Uri sourceUrl = default;
+            string sourceUrl = default;
             Guid guid = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -77,7 +78,7 @@ namespace FirstTestTypeSpec.Models
             {
                 if (property.NameEquals("sourceUrl"u8))
                 {
-                    sourceUrl = new Uri(property.Value.GetString());
+                    sourceUrl = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("guid"u8))

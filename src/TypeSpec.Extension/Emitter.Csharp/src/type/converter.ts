@@ -23,7 +23,9 @@ import {
     SdkArrayType,
     SdkDatetimeType,
     SdkUnionType,
-    SdkBuiltInKinds
+    SdkBuiltInKinds,
+    SdkContext,
+    SdkTupleType
 } from "@azure-tools/typespec-client-generator-core";
 import {
     InputDictionaryType,
@@ -41,7 +43,8 @@ import { Visibility } from "@typespec/http";
 import { InputEnumTypeValue } from "./inputEnumTypeValue.js";
 import {
     getCSharpInputTypeKindByPrimitiveModelName,
-    mapTypeSpecTypeToCSharpInputTypeKind
+    mapTypeSpecTypeToCSharpInputTypeKind,
+    setUsage
 } from "../lib/model.js";
 import { InputTypeKind } from "./inputTypeKind.js";
 import { getFullNamespaceString } from "../lib/utils.js";
@@ -49,26 +52,30 @@ import { InputPrimitiveTypeKind } from "./inputPrimitiveTypeKind.js";
 import { LiteralTypeContext } from "./literalTypeContext.js";
 import { InputIntrinsicTypeKind } from "./inputIntrinsicTypeKind.js";
 
-export function fromSdkType(
+function fromSdkType(
     sdkType: SdkType,
-    program: Program,
+    context: SdkContext,
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>,
     literalTypeContext?: LiteralTypeContext
 ): InputType {
     if (sdkType.kind === "model")
-        return fromSdkModelType(sdkType, program, models, enums);
+        return fromSdkModelType(sdkType, context, models, enums);
     if (sdkType.kind === "enum")
-        return fromSdkEnumType(sdkType, program, enums);
+        return fromSdkEnumType(sdkType, context, enums);
+    if (sdkType.kind === "enumvalue")
+        return fromSdkEnumType(sdkType.enumType, context, enums);
     if (sdkType.kind === "dict")
-        return fromSdkDictionaryType(sdkType, program, models, enums);
+        return fromSdkDictionaryType(sdkType, context, models, enums);
     if (sdkType.kind === "array")
-        return fromSdkArrayType(sdkType, program, models, enums);
+        return fromSdkArrayType(sdkType, context, models, enums);
     if (sdkType.kind === "constant")
         return fromSdkConstantType(sdkType, enums, literalTypeContext);
     if (sdkType.kind === "union")
-        return fromUnionType(sdkType, program, models, enums);
-    if (sdkType.kind === "datetime") return fromSdkDatetimeType(sdkType);
+        return fromUnionType(sdkType, context, models, enums);
+    if (sdkType.kind === "utcDateTime") return fromSdkDatetimeType(sdkType);
+    // TODO: offsetDateTime
+    if (sdkType.kind === "tuple") return fromTupleType(sdkType);
     if (sdkType.__raw?.kind === "Scalar") return fromScalarType(sdkType);
 // this happens for discriminator type, normally all other primitive types should be handled in scalar above
 // TODO: can we improve the type in TCGC around discriminator
@@ -80,11 +87,11 @@ export function fromSdkType(
 
 export function fromSdkModelType(
     modelType: SdkModelType,
-    program: Program,
+    context: SdkContext,
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
 ): InputModelType {
-    const modelTypeName = modelType.generatedName || modelType.name;
+    var modelTypeName = getModelName(modelType);
     let inputModelType = models.get(modelTypeName);
     if (!inputModelType) {
         inputModelType = {
@@ -94,11 +101,11 @@ export function fromSdkModelType(
                 (modelType.__raw as Model).namespace
             ),
             Accessibility: modelType.access,
-            Deprecated: getDeprecated(program, modelType.__raw!), // TO-DO: SdkModelType lacks of deprecated
+            Deprecated: modelType.deprecation,
             Description: modelType.description,
             IsNullable: modelType.nullable,
             DiscriminatorPropertyName: getDiscriminator(
-                program,
+                context.program,
                 modelType.__raw!
             )?.propertyName, // TO-DO: SdkModelType lacks of DiscriminatorPropertyName
             DiscriminatorValue: modelType.discriminatorValue,
@@ -107,7 +114,7 @@ export function fromSdkModelType(
 
         models.set(modelTypeName, inputModelType);
 
-        inputModelType.BaseModel = modelType.baseModel ? fromSdkModelType(modelType.baseModel, program, models, enums) : undefined;
+        inputModelType.BaseModel = modelType.baseModel ? fromSdkModelType(modelType.baseModel, context, models, enums) : undefined;
 
         // TODO: can we fix the resolving reference issue in csharp?
         // https://github.com/Azure/autorest.csharp/issues/4136
@@ -124,7 +131,7 @@ export function fromSdkModelType(
                     !hasDiscriminator(modelType.baseModel)
             )
             .map((p) =>
-                fromSdkModelPropertyType(p, program, models, enums, {
+                fromSdkModelPropertyType(p, context, models, enums, {
                     ModelName: inputModelType?.Name,
                     Namespace: inputModelType?.Namespace
                 } as LiteralTypeContext)
@@ -141,6 +148,24 @@ export function fromSdkModelType(
     return inputModelType;
 }
 
+// TODO: remove this after TCGC provide utility to generate templated model
+function getModelName(model: SdkModelType) : string {
+    var name = model.generatedName || model.name;
+    var rawModel = model.__raw! as Model;
+    if (
+        name !== "" &&
+        rawModel.templateMapper &&
+        rawModel.templateMapper.args
+    ) {
+        return (
+            name +
+            rawModel.templateMapper.args.map((it) => (it as Model).name).join("")
+        );
+    }
+
+    return name;
+}
+
 function hasDiscriminator(model? : SdkModelType) : boolean {
     if (model == null)
         return false;
@@ -154,36 +179,37 @@ function hasDiscriminator(model? : SdkModelType) : boolean {
 
 export function fromSdkEnumType(
     enumType: SdkEnumType,
-    program: Program,
+    context: SdkContext,
     enums: Map<string, InputEnumType>,
     addToCollection: boolean = true
 ): InputEnumType {
-    let inputEnumType = enums.get(enumType.name);
+    let enumName = enumType.generatedName || enumType.name;
+    let inputEnumType = enums.get(enumName);
     if (inputEnumType === undefined) {
-        const enumValueType =
-            enumType.valueType.kind === "float32" ? "Float32" : "String";
         const newInputEnumType: InputEnumType = {
             Kind: InputTypeKind.Enum,
-            Name: enumType.name,
+            Name: enumName,
+            EnumValueType: enumType.valueType.kind,
+            AllowedValues: enumType.values.map((v) => fromSdkEnumValueType(v)),
             Namespace: getFullNamespaceString(
                 (enumType.__raw! as Enum).namespace
             ),
             Accessibility: enumType.access,
-            Deprecated: getDeprecated(program, enumType.__raw!), // TO-DO: SdkEnumType lacks of deprecated
+            Deprecated: enumType.deprecation,
             Description: enumType.description,
-            EnumValueType: enumValueType,
-            AllowedValues: enumType.values.map((v) => fromSdkEnumValueType(v)),
             IsExtensible: enumType.isFixed ? false : true,
-            IsNullable: false,
-            Usage: fromUsageFlags(enumType.usage) ?? Usage.None
+            IsNullable: enumType.nullable,
+            Usage: fromUsageFlags(enumType.usage)
         };
-        if (addToCollection) enums.set(enumType.name, newInputEnumType);
+        setUsage(context, enumType.__raw! as Enum, newInputEnumType);
+        if (addToCollection) enums.set(enumName, newInputEnumType);
         inputEnumType = newInputEnumType;
     }
+    inputEnumType.IsNullable = enumType.nullable; // TO-DO: https://github.com/Azure/autorest.csharp/issues/4314
     return inputEnumType;
 }
 
-export function fromSdkDatetimeType(
+function fromSdkDatetimeType(
     datetimeType: SdkDatetimeType
 ): InputPrimitiveType {
     function fromDateTimeKnownEncoding(
@@ -203,6 +229,14 @@ export function fromSdkDatetimeType(
         Name: fromDateTimeKnownEncoding(datetimeType.encode),
         IsNullable: false
     } as InputPrimitiveType;
+}
+
+function fromTupleType(tupleType: SdkTupleType): InputIntrinsicType {
+    return {
+        Kind: InputTypeKind.Intrinsic,
+        Name: InputIntrinsicTypeKind.Unknown,
+        IsNullable: tupleType.nullable,
+    } as InputIntrinsicType;
 }
 
 export function fromSdkBuiltInType(builtInType: SdkBuiltInType): InputType {
@@ -242,13 +276,13 @@ function fromIntrinsicType(scalarType: SdkType): InputIntrinsicType {
 
 export function fromUnionType(
     union: SdkUnionType,
-    program: Program,
+    context: SdkContext,
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
 ): InputUnionType | InputType {
     let itemTypes: InputType[] = [];
     for (const value of union.values) {
-        const inputType = fromSdkType(value, program, models, enums);
+        const inputType = fromSdkType(value, context, models, enums);
         itemTypes.push(inputType);
     }
 
@@ -262,7 +296,7 @@ export function fromUnionType(
         : itemTypes[0];
 }
 
-export function fromSdkConstantType(
+function fromSdkConstantType(
     constantType: SdkConstantType,
     enums: Map<string, InputEnumType>,
     literalTypeContext?: LiteralTypeContext
@@ -324,7 +358,7 @@ export function fromSdkConstantType(
     }
 }
 
-export function fromSdkEnumValueType(
+function fromSdkEnumValueType(
     enumValueType: SdkEnumValueType
 ): InputEnumTypeValue {
     return {
@@ -334,19 +368,19 @@ export function fromSdkEnumValueType(
     };
 }
 
-export function fromSdkDictionaryType(
+function fromSdkDictionaryType(
     dictionaryType: SdkDictionaryType,
-    program: Program,
+    context: SdkContext,
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
 ): InputDictionaryType {
     return {
         Kind: InputTypeKind.Dictionary,
         Name: InputTypeKind.Dictionary,
-        KeyType: fromSdkType(dictionaryType.keyType, program, models, enums),
+        KeyType: fromSdkType(dictionaryType.keyType, context, models, enums),
         ValueType: fromSdkType(
             dictionaryType.valueType,
-            program,
+            context,
             models,
             enums
         ),
@@ -356,29 +390,29 @@ export function fromSdkDictionaryType(
 
 export function fromSdkArrayType(
     arrayType: SdkArrayType,
-    program: Program,
+    context: SdkContext,
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
 ): InputListType {
     return {
         Kind: InputTypeKind.Array,
         Name: InputTypeKind.Array,
-        ElementType: fromSdkType(arrayType.valueType, program, models, enums),
+        ElementType: fromSdkType(arrayType.valueType, context, models, enums),
         IsNullable: arrayType.nullable
     };
 }
 
-export function fromUsageFlags(usage: UsageFlags): Usage | undefined {
+export function fromUsageFlags(usage: UsageFlags): Usage {
     if (usage === UsageFlags.Input) return Usage.Input;
     else if (usage === UsageFlags.Output) return Usage.Output;
     else if (usage === (UsageFlags.Input | UsageFlags.Output))
         return Usage.RoundTrip;
-    return undefined;
+    else return Usage.None;
 }
 
-export function fromSdkModelPropertyType(
+function fromSdkModelPropertyType(
     propertyType: SdkModelPropertyType,
-    program: Program,
+    context: SdkContext,
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>,
     literalTypeContext: LiteralTypeContext
@@ -408,7 +442,7 @@ export function fromSdkModelPropertyType(
         Description: propertyType.description ?? (isDiscriminator ? "Discriminator" : ""),
         Type: fromSdkType(
             propertyType.type,
-            program,
+            context,
             models,
             enums,
             literalTypeContext
@@ -463,4 +497,3 @@ function getCSharpInputTypeKindByIntrinsic(type: IntrinsicType): InputIntrinsicT
             throw new Error(`Unsupported intrinsic type name '${type.name}'`);
     }
 }
-

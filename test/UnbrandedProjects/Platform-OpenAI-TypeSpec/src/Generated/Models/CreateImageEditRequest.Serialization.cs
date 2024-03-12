@@ -7,6 +7,7 @@ using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -27,12 +28,12 @@ namespace OpenAI.Models
             writer.WriteStringValue(Prompt);
             writer.WritePropertyName("image"u8);
             writer.WriteBase64StringValue(Image.ToArray(), "D");
-            if (Mask != null)
+            if (Optional.IsDefined(Mask))
             {
                 writer.WritePropertyName("mask"u8);
                 writer.WriteBase64StringValue(Mask.ToArray(), "D");
             }
-            if (N.HasValue)
+            if (Optional.IsDefined(N))
             {
                 if (N != null)
                 {
@@ -44,17 +45,31 @@ namespace OpenAI.Models
                     writer.WriteNull("n");
                 }
             }
-            if (Size.HasValue)
+            if (Optional.IsDefined(Size))
             {
-                writer.WritePropertyName("size"u8);
-                writer.WriteStringValue(Size.Value.ToString());
+                if (Size != null)
+                {
+                    writer.WritePropertyName("size"u8);
+                    writer.WriteStringValue(Size.Value.ToSerialString());
+                }
+                else
+                {
+                    writer.WriteNull("size");
+                }
             }
-            if (ResponseFormat.HasValue)
+            if (Optional.IsDefined(ResponseFormat))
             {
-                writer.WritePropertyName("response_format"u8);
-                writer.WriteStringValue(ResponseFormat.Value.ToString());
+                if (ResponseFormat != null)
+                {
+                    writer.WritePropertyName("response_format"u8);
+                    writer.WriteStringValue(ResponseFormat.Value.ToSerialString());
+                }
+                else
+                {
+                    writer.WriteNull("response_format");
+                }
             }
-            if (User != null)
+            if (Optional.IsDefined(User))
             {
                 writer.WritePropertyName("user"u8);
                 writer.WriteStringValue(User);
@@ -101,8 +116,8 @@ namespace OpenAI.Models
             BinaryData image = default;
             BinaryData mask = default;
             long? n = default;
-            CreateImageEditRequestSize? size = default;
-            CreateImageEditRequestResponseFormat? responseFormat = default;
+            CreateImageRequestSize? size = default;
+            CreateImageRequestResponseFormat? responseFormat = default;
             string user = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -141,18 +156,20 @@ namespace OpenAI.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
+                        size = null;
                         continue;
                     }
-                    size = new CreateImageEditRequestSize(property.Value.GetString());
+                    size = property.Value.GetString().ToCreateImageRequestSize();
                     continue;
                 }
                 if (property.NameEquals("response_format"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
+                        responseFormat = null;
                         continue;
                     }
-                    responseFormat = new CreateImageEditRequestResponseFormat(property.Value.GetString());
+                    responseFormat = property.Value.GetString().ToCreateImageRequestResponseFormat();
                     continue;
                 }
                 if (property.NameEquals("user"u8))

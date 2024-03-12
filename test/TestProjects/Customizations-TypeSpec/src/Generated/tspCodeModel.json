@@ -8,9 +8,7 @@
    "$id": "2",
    "Kind": "Enum",
    "Name": "ExtensibleEnumWithOperator",
-   "Namespace": "CustomizationsInTsp",
-   "Description": "Extensible enum to customize operator",
-   "EnumValueType": "String",
+   "EnumValueType": "string",
    "AllowedValues": [
     {
      "$id": "3",
@@ -25,6 +23,8 @@
      "Description": "Tuesday."
     }
    ],
+   "Namespace": "CustomizationsInTsp",
+   "Description": "Extensible enum to customize operator",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -33,9 +33,7 @@
    "$id": "5",
    "Kind": "Enum",
    "Name": "EnumToRename",
-   "Namespace": "CustomizationsInTsp",
-   "Description": "Renamed enum (original name: EnumToRename)",
-   "EnumValueType": "String",
+   "EnumValueType": "string",
    "AllowedValues": [
     {
      "$id": "6",
@@ -53,6 +51,8 @@
      "Value": "3"
     }
    ],
+   "Namespace": "CustomizationsInTsp",
+   "Description": "Renamed enum (original name: EnumToRename)",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -61,9 +61,7 @@
    "$id": "9",
    "Kind": "Enum",
    "Name": "EnumWithValueToRename",
-   "Namespace": "CustomizationsInTsp",
-   "Description": "Enum with renamed value (original name: ValueToRename)",
-   "EnumValueType": "String",
+   "EnumValueType": "string",
    "AllowedValues": [
     {
      "$id": "10",
@@ -81,6 +79,8 @@
      "Value": "3"
     }
    ],
+   "Namespace": "CustomizationsInTsp",
+   "Description": "Enum with renamed value (original name: ValueToRename)",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -89,9 +89,7 @@
    "$id": "13",
    "Kind": "Enum",
    "Name": "EnumToBeMadeExtensible",
-   "Namespace": "CustomizationsInTsp",
-   "Description": "Extensible enum",
-   "EnumValueType": "String",
+   "EnumValueType": "string",
    "AllowedValues": [
     {
      "$id": "14",
@@ -109,6 +107,8 @@
      "Value": "3"
     }
    ],
+   "Namespace": "CustomizationsInTsp",
+   "Description": "Extensible enum",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -117,9 +117,7 @@
    "$id": "17",
    "Kind": "Enum",
    "Name": "NormalEnum",
-   "Namespace": "CustomizationsInTsp",
-   "Description": "A normal enum",
-   "EnumValueType": "String",
+   "EnumValueType": "string",
    "AllowedValues": [
     {
      "$id": "18",
@@ -132,6 +130,8 @@
      "Value": "b"
     }
    ],
+   "Namespace": "CustomizationsInTsp",
+   "Description": "A normal enum",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "RoundTrip"

@@ -83,18 +83,8 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="subParentName"/> or <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<SubParentResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string subParentName, SubParentData data, CancellationToken cancellationToken = default)
         {
-            if (subParentName == null)
-            {
-                throw new ArgumentNullException(nameof(subParentName));
-            }
-            if (subParentName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subParentName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(subParentName, nameof(subParentName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _subParentClientDiagnostics.CreateScope("SubParentCollection.CreateOrUpdate");
             scope.Start();
@@ -142,18 +132,8 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="subParentName"/> or <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<SubParentResource> CreateOrUpdate(WaitUntil waitUntil, string subParentName, SubParentData data, CancellationToken cancellationToken = default)
         {
-            if (subParentName == null)
-            {
-                throw new ArgumentNullException(nameof(subParentName));
-            }
-            if (subParentName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subParentName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(subParentName, nameof(subParentName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _subParentClientDiagnostics.CreateScope("SubParentCollection.CreateOrUpdate");
             scope.Start();
@@ -199,14 +179,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="subParentName"/> is null. </exception>
         public virtual async Task<Response<SubParentResource>> GetAsync(string subParentName, CancellationToken cancellationToken = default)
         {
-            if (subParentName == null)
-            {
-                throw new ArgumentNullException(nameof(subParentName));
-            }
-            if (subParentName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subParentName));
-            }
+            Argument.AssertNotNullOrEmpty(subParentName, nameof(subParentName));
 
             using var scope = _subParentClientDiagnostics.CreateScope("SubParentCollection.Get");
             scope.Start();
@@ -251,14 +224,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="subParentName"/> is null. </exception>
         public virtual Response<SubParentResource> Get(string subParentName, CancellationToken cancellationToken = default)
         {
-            if (subParentName == null)
-            {
-                throw new ArgumentNullException(nameof(subParentName));
-            }
-            if (subParentName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subParentName));
-            }
+            Argument.AssertNotNullOrEmpty(subParentName, nameof(subParentName));
 
             using var scope = _subParentClientDiagnostics.CreateScope("SubParentCollection.Get");
             scope.Start();
@@ -363,14 +329,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="subParentName"/> is null. </exception>
         public virtual async Task<Response<bool>> ExistsAsync(string subParentName, CancellationToken cancellationToken = default)
         {
-            if (subParentName == null)
-            {
-                throw new ArgumentNullException(nameof(subParentName));
-            }
-            if (subParentName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subParentName));
-            }
+            Argument.AssertNotNullOrEmpty(subParentName, nameof(subParentName));
 
             using var scope = _subParentClientDiagnostics.CreateScope("SubParentCollection.Exists");
             scope.Start();
@@ -413,14 +372,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="subParentName"/> is null. </exception>
         public virtual Response<bool> Exists(string subParentName, CancellationToken cancellationToken = default)
         {
-            if (subParentName == null)
-            {
-                throw new ArgumentNullException(nameof(subParentName));
-            }
-            if (subParentName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subParentName));
-            }
+            Argument.AssertNotNullOrEmpty(subParentName, nameof(subParentName));
 
             using var scope = _subParentClientDiagnostics.CreateScope("SubParentCollection.Exists");
             scope.Start();
@@ -463,14 +415,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="subParentName"/> is null. </exception>
         public virtual async Task<NullableResponse<SubParentResource>> GetIfExistsAsync(string subParentName, CancellationToken cancellationToken = default)
         {
-            if (subParentName == null)
-            {
-                throw new ArgumentNullException(nameof(subParentName));
-            }
-            if (subParentName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subParentName));
-            }
+            Argument.AssertNotNullOrEmpty(subParentName, nameof(subParentName));
 
             using var scope = _subParentClientDiagnostics.CreateScope("SubParentCollection.GetIfExists");
             scope.Start();
@@ -515,14 +460,7 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="subParentName"/> is null. </exception>
         public virtual NullableResponse<SubParentResource> GetIfExists(string subParentName, CancellationToken cancellationToken = default)
         {
-            if (subParentName == null)
-            {
-                throw new ArgumentNullException(nameof(subParentName));
-            }
-            if (subParentName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(subParentName));
-            }
+            Argument.AssertNotNullOrEmpty(subParentName, nameof(subParentName));
 
             using var scope = _subParentClientDiagnostics.CreateScope("SubParentCollection.GetIfExists");
             scope.Start();

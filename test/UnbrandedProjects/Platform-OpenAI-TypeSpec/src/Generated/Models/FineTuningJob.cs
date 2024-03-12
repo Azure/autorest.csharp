@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -87,30 +88,12 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="model"/>, <paramref name="organizationId"/>, <paramref name="hyperparameters"/>, <paramref name="trainingFile"/> or <paramref name="resultFiles"/> is null. </exception>
         internal FineTuningJob(string id, DateTimeOffset createdAt, DateTimeOffset finishedAt, string model, string fineTunedModel, string organizationId, FineTuningJobStatus status, FineTuningJobHyperparameters hyperparameters, string trainingFile, string validationFile, IEnumerable<string> resultFiles, long? trainedTokens, FineTuningJobError error)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-            if (model == null)
-            {
-                throw new ArgumentNullException(nameof(model));
-            }
-            if (organizationId == null)
-            {
-                throw new ArgumentNullException(nameof(organizationId));
-            }
-            if (hyperparameters == null)
-            {
-                throw new ArgumentNullException(nameof(hyperparameters));
-            }
-            if (trainingFile == null)
-            {
-                throw new ArgumentNullException(nameof(trainingFile));
-            }
-            if (resultFiles == null)
-            {
-                throw new ArgumentNullException(nameof(resultFiles));
-            }
+            Argument.AssertNotNull(id, nameof(id));
+            Argument.AssertNotNull(model, nameof(model));
+            Argument.AssertNotNull(organizationId, nameof(organizationId));
+            Argument.AssertNotNull(hyperparameters, nameof(hyperparameters));
+            Argument.AssertNotNull(trainingFile, nameof(trainingFile));
+            Argument.AssertNotNull(resultFiles, nameof(resultFiles));
 
             Id = id;
             CreatedAt = createdAt;

@@ -52,7 +52,7 @@ namespace _Type.Union.Samples
         {
             StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
-            Response<GetResponse7> response = client.GetStringAndArray();
+            Response<GetResponse2> response = client.GetStringAndArray();
         }
 
         [Test]
@@ -61,7 +61,7 @@ namespace _Type.Union.Samples
         {
             StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
-            Response<GetResponse7> response = await client.GetStringAndArrayAsync();
+            Response<GetResponse2> response = await client.GetStringAndArrayAsync();
         }
 
         [Test]
@@ -96,7 +96,7 @@ namespace _Type.Union.Samples
         {
             StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
-            Response<GetResponse7> response = client.GetStringAndArray();
+            Response<GetResponse2> response = client.GetStringAndArray();
         }
 
         [Test]
@@ -105,7 +105,7 @@ namespace _Type.Union.Samples
         {
             StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
-            Response<GetResponse7> response = await client.GetStringAndArrayAsync();
+            Response<GetResponse2> response = await client.GetStringAndArrayAsync();
         }
 
         [Test]

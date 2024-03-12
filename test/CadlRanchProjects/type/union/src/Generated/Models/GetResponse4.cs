@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using _Type.Union;
 
 namespace _Type.Union.Models
 {
@@ -50,10 +51,7 @@ namespace _Type.Union.Models
         /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
         internal GetResponse4(BinaryData prop)
         {
-            if (prop == null)
-            {
-                throw new ArgumentNullException(nameof(prop));
-            }
+            Argument.AssertNotNull(prop, nameof(prop));
 
             Prop = prop;
         }
@@ -85,13 +83,10 @@ namespace _Type.Union.Models
         /// Supported types:
         /// <list type="bullet">
         /// <item>
-        /// <description>1.1</description>
+        /// <description><see cref="Cat"/></description>
         /// </item>
         /// <item>
-        /// <description>2.2</description>
-        /// </item>
-        /// <item>
-        /// <description>3.3</description>
+        /// <description><see cref="Dog"/></description>
         /// </item>
         /// </list>
         /// </remarks>

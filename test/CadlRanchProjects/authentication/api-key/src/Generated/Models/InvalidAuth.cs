@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using Authentication.ApiKey;
 
 namespace Authentication.ApiKey.Models
 {
@@ -50,10 +51,7 @@ namespace Authentication.ApiKey.Models
         /// <exception cref="ArgumentNullException"> <paramref name="error"/> is null. </exception>
         internal InvalidAuth(string error)
         {
-            if (error == null)
-            {
-                throw new ArgumentNullException(nameof(error));
-            }
+            Argument.AssertNotNull(error, nameof(error));
 
             Error = error;
         }

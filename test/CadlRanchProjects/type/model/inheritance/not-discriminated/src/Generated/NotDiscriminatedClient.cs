@@ -39,10 +39,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public NotDiscriminatedClient(Uri endpoint, NotDiscriminatedClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new NotDiscriminatedClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -56,10 +53,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated
         /// <include file="Docs/NotDiscriminatedClient.xml" path="doc/members/member[@name='PostValidAsync(Siamese,CancellationToken)']/*" />
         public virtual async Task<Response> PostValidAsync(Siamese input, CancellationToken cancellationToken = default)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
+            Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -73,10 +67,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated
         /// <include file="Docs/NotDiscriminatedClient.xml" path="doc/members/member[@name='PostValid(Siamese,CancellationToken)']/*" />
         public virtual Response PostValid(Siamese input, CancellationToken cancellationToken = default)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
+            Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -107,10 +98,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated
         /// <include file="Docs/NotDiscriminatedClient.xml" path="doc/members/member[@name='PostValidAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PostValidAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("NotDiscriminatedClient.PostValid");
             scope.Start();
@@ -149,10 +137,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated
         /// <include file="Docs/NotDiscriminatedClient.xml" path="doc/members/member[@name='PostValid(RequestContent,RequestContext)']/*" />
         public virtual Response PostValid(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("NotDiscriminatedClient.PostValid");
             scope.Start();
@@ -262,10 +247,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated
         /// <include file="Docs/NotDiscriminatedClient.xml" path="doc/members/member[@name='PutValidAsync(Siamese,CancellationToken)']/*" />
         public virtual async Task<Response<Siamese>> PutValidAsync(Siamese input, CancellationToken cancellationToken = default)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
+            Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -279,10 +261,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated
         /// <include file="Docs/NotDiscriminatedClient.xml" path="doc/members/member[@name='PutValid(Siamese,CancellationToken)']/*" />
         public virtual Response<Siamese> PutValid(Siamese input, CancellationToken cancellationToken = default)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
+            Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -313,10 +292,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated
         /// <include file="Docs/NotDiscriminatedClient.xml" path="doc/members/member[@name='PutValidAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutValidAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("NotDiscriminatedClient.PutValid");
             scope.Start();
@@ -355,10 +331,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated
         /// <include file="Docs/NotDiscriminatedClient.xml" path="doc/members/member[@name='PutValid(RequestContent,RequestContext)']/*" />
         public virtual Response PutValid(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("NotDiscriminatedClient.PutValid");
             scope.Start();

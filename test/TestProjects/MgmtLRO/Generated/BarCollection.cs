@@ -83,18 +83,8 @@ namespace MgmtLRO
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<BarResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string barName, BarData data, CancellationToken cancellationToken = default)
         {
-            if (barName == null)
-            {
-                throw new ArgumentNullException(nameof(barName));
-            }
-            if (barName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(barName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(barName, nameof(barName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _barClientDiagnostics.CreateScope("BarCollection.CreateOrUpdate");
             scope.Start();
@@ -142,18 +132,8 @@ namespace MgmtLRO
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<BarResource> CreateOrUpdate(WaitUntil waitUntil, string barName, BarData data, CancellationToken cancellationToken = default)
         {
-            if (barName == null)
-            {
-                throw new ArgumentNullException(nameof(barName));
-            }
-            if (barName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(barName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(barName, nameof(barName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _barClientDiagnostics.CreateScope("BarCollection.CreateOrUpdate");
             scope.Start();
@@ -199,14 +179,7 @@ namespace MgmtLRO
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
         public virtual async Task<Response<BarResource>> GetAsync(string barName, CancellationToken cancellationToken = default)
         {
-            if (barName == null)
-            {
-                throw new ArgumentNullException(nameof(barName));
-            }
-            if (barName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(barName));
-            }
+            Argument.AssertNotNullOrEmpty(barName, nameof(barName));
 
             using var scope = _barClientDiagnostics.CreateScope("BarCollection.Get");
             scope.Start();
@@ -251,14 +224,7 @@ namespace MgmtLRO
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
         public virtual Response<BarResource> Get(string barName, CancellationToken cancellationToken = default)
         {
-            if (barName == null)
-            {
-                throw new ArgumentNullException(nameof(barName));
-            }
-            if (barName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(barName));
-            }
+            Argument.AssertNotNullOrEmpty(barName, nameof(barName));
 
             using var scope = _barClientDiagnostics.CreateScope("BarCollection.Get");
             scope.Start();
@@ -361,14 +327,7 @@ namespace MgmtLRO
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
         public virtual async Task<Response<bool>> ExistsAsync(string barName, CancellationToken cancellationToken = default)
         {
-            if (barName == null)
-            {
-                throw new ArgumentNullException(nameof(barName));
-            }
-            if (barName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(barName));
-            }
+            Argument.AssertNotNullOrEmpty(barName, nameof(barName));
 
             using var scope = _barClientDiagnostics.CreateScope("BarCollection.Exists");
             scope.Start();
@@ -411,14 +370,7 @@ namespace MgmtLRO
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
         public virtual Response<bool> Exists(string barName, CancellationToken cancellationToken = default)
         {
-            if (barName == null)
-            {
-                throw new ArgumentNullException(nameof(barName));
-            }
-            if (barName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(barName));
-            }
+            Argument.AssertNotNullOrEmpty(barName, nameof(barName));
 
             using var scope = _barClientDiagnostics.CreateScope("BarCollection.Exists");
             scope.Start();
@@ -461,14 +413,7 @@ namespace MgmtLRO
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
         public virtual async Task<NullableResponse<BarResource>> GetIfExistsAsync(string barName, CancellationToken cancellationToken = default)
         {
-            if (barName == null)
-            {
-                throw new ArgumentNullException(nameof(barName));
-            }
-            if (barName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(barName));
-            }
+            Argument.AssertNotNullOrEmpty(barName, nameof(barName));
 
             using var scope = _barClientDiagnostics.CreateScope("BarCollection.GetIfExists");
             scope.Start();
@@ -513,14 +458,7 @@ namespace MgmtLRO
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
         public virtual NullableResponse<BarResource> GetIfExists(string barName, CancellationToken cancellationToken = default)
         {
-            if (barName == null)
-            {
-                throw new ArgumentNullException(nameof(barName));
-            }
-            if (barName.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(barName));
-            }
+            Argument.AssertNotNullOrEmpty(barName, nameof(barName));
 
             using var scope = _barClientDiagnostics.CreateScope("BarCollection.GetIfExists");
             scope.Start();

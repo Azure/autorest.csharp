@@ -46,20 +46,20 @@ namespace _Type.Union
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/EnumsOnly.xml" path="doc/members/member[@name='GetEnumsOnlyAsync(CancellationToken)']/*" />
-        public virtual async Task<Response<GetResponse6>> GetEnumsOnlyAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<GetResponse3>> GetEnumsOnlyAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetEnumsOnlyAsync(context).ConfigureAwait(false);
-            return Response.FromValue(GetResponse6.FromResponse(response), response);
+            return Response.FromValue(GetResponse3.FromResponse(response), response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/EnumsOnly.xml" path="doc/members/member[@name='GetEnumsOnly(CancellationToken)']/*" />
-        public virtual Response<GetResponse6> GetEnumsOnly(CancellationToken cancellationToken = default)
+        public virtual Response<GetResponse3> GetEnumsOnly(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetEnumsOnly(context);
-            return Response.FromValue(GetResponse6.FromResponse(response), response);
+            return Response.FromValue(GetResponse3.FromResponse(response), response);
         }
 
         /// <summary>
@@ -138,14 +138,11 @@ namespace _Type.Union
         /// <include file="Docs/EnumsOnly.xml" path="doc/members/member[@name='SendAsync(EnumsOnlyCases,CancellationToken)']/*" />
         public virtual async Task<Response> SendAsync(EnumsOnlyCases prop, CancellationToken cancellationToken = default)
         {
-            if (prop == null)
-            {
-                throw new ArgumentNullException(nameof(prop));
-            }
+            Argument.AssertNotNull(prop, nameof(prop));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            SendRequest6 sendRequest6 = new SendRequest6(prop);
-            Response response = await SendAsync(sendRequest6.ToRequestContent(), context).ConfigureAwait(false);
+            SendRequest3 sendRequest3 = new SendRequest3(prop);
+            Response response = await SendAsync(sendRequest3.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
@@ -155,14 +152,11 @@ namespace _Type.Union
         /// <include file="Docs/EnumsOnly.xml" path="doc/members/member[@name='Send(EnumsOnlyCases,CancellationToken)']/*" />
         public virtual Response Send(EnumsOnlyCases prop, CancellationToken cancellationToken = default)
         {
-            if (prop == null)
-            {
-                throw new ArgumentNullException(nameof(prop));
-            }
+            Argument.AssertNotNull(prop, nameof(prop));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            SendRequest6 sendRequest6 = new SendRequest6(prop);
-            Response response = Send(sendRequest6.ToRequestContent(), context);
+            SendRequest3 sendRequest3 = new SendRequest3(prop);
+            Response response = Send(sendRequest3.ToRequestContent(), context);
             return response;
         }
 
@@ -189,10 +183,7 @@ namespace _Type.Union
         /// <include file="Docs/EnumsOnly.xml" path="doc/members/member[@name='SendAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> SendAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("EnumsOnly.Send");
             scope.Start();
@@ -231,10 +222,7 @@ namespace _Type.Union
         /// <include file="Docs/EnumsOnly.xml" path="doc/members/member[@name='Send(RequestContent,RequestContext)']/*" />
         public virtual Response Send(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("EnumsOnly.Send");
             scope.Start();

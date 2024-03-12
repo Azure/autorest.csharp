@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -54,10 +55,7 @@ namespace OpenAI.Models
         /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
         internal CreateChatCompletionResponseChoice(long index, ChatCompletionResponseMessage message, CreateChatCompletionResponseChoiceFinishReason finishReason)
         {
-            if (message == null)
-            {
-                throw new ArgumentNullException(nameof(message));
-            }
+            Argument.AssertNotNull(message, nameof(message));
 
             Index = index;
             Message = message;

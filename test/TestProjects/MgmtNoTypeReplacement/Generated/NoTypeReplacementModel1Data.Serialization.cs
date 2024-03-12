@@ -17,7 +17,7 @@ namespace MgmtNoTypeReplacement
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Foo != null)
+            if (Optional.IsDefined(Foo))
             {
                 writer.WritePropertyName("foo"u8);
                 JsonSerializer.Serialize(writer, Foo);

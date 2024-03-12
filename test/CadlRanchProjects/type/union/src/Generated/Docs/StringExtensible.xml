@@ -7,13 +7,13 @@ This sample shows how to call GetStringExtensibleAsync.
 <code><![CDATA[
 StringExtensible client = new UnionClient().GetStringExtensibleClient();
 
-Response<GetResponse1> response = await client.GetStringExtensibleAsync();
+Response<GetResponse8> response = await client.GetStringExtensibleAsync();
 ]]></code>
 This sample shows how to call GetStringExtensibleAsync with all parameters.
 <code><![CDATA[
 StringExtensible client = new UnionClient().GetStringExtensibleClient();
 
-Response<GetResponse1> response = await client.GetStringExtensibleAsync();
+Response<GetResponse8> response = await client.GetStringExtensibleAsync();
 ]]></code></example>
     </member>
     <member name="GetStringExtensible(CancellationToken)">
@@ -22,13 +22,13 @@ This sample shows how to call GetStringExtensible.
 <code><![CDATA[
 StringExtensible client = new UnionClient().GetStringExtensibleClient();
 
-Response<GetResponse1> response = client.GetStringExtensible();
+Response<GetResponse8> response = client.GetStringExtensible();
 ]]></code>
 This sample shows how to call GetStringExtensible with all parameters.
 <code><![CDATA[
 StringExtensible client = new UnionClient().GetStringExtensibleClient();
 
-Response<GetResponse1> response = client.GetStringExtensible();
+Response<GetResponse8> response = client.GetStringExtensible();
 ]]></code></example>
     </member>
     <member name="GetStringExtensibleAsync(RequestContext)">
@@ -73,34 +73,34 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("prop").ToString());
 ]]></code></example>
     </member>
-    <member name="SendAsync(SendRequest1Prop,CancellationToken)">
+    <member name="SendAsync(GetResponseProp4,CancellationToken)">
       <example>
 This sample shows how to call SendAsync.
 <code><![CDATA[
 StringExtensible client = new UnionClient().GetStringExtensibleClient();
 
-Response response = await client.SendAsync(new SendRequest1Prop("<prop>"));
+Response response = await client.SendAsync(GetResponseProp4.B);
 ]]></code>
 This sample shows how to call SendAsync with all parameters.
 <code><![CDATA[
 StringExtensible client = new UnionClient().GetStringExtensibleClient();
 
-Response response = await client.SendAsync(new SendRequest1Prop("<prop>"));
+Response response = await client.SendAsync(GetResponseProp4.B);
 ]]></code></example>
     </member>
-    <member name="Send(SendRequest1Prop,CancellationToken)">
+    <member name="Send(GetResponseProp4,CancellationToken)">
       <example>
 This sample shows how to call Send.
 <code><![CDATA[
 StringExtensible client = new UnionClient().GetStringExtensibleClient();
 
-Response response = client.Send(new SendRequest1Prop("<prop>"));
+Response response = client.Send(GetResponseProp4.B);
 ]]></code>
 This sample shows how to call Send with all parameters.
 <code><![CDATA[
 StringExtensible client = new UnionClient().GetStringExtensibleClient();
 
-Response response = client.Send(new SendRequest1Prop("<prop>"));
+Response response = client.Send(GetResponseProp4.B);
 ]]></code></example>
     </member>
     <member name="SendAsync(RequestContent,RequestContext)">
@@ -111,7 +111,7 @@ StringExtensible client = new UnionClient().GetStringExtensibleClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    prop = "<prop>",
+    prop = "b",
 });
 Response response = await client.SendAsync(content);
 
@@ -123,7 +123,7 @@ StringExtensible client = new UnionClient().GetStringExtensibleClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    prop = "<prop>",
+    prop = "b",
 });
 Response response = await client.SendAsync(content);
 
@@ -138,7 +138,7 @@ StringExtensible client = new UnionClient().GetStringExtensibleClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    prop = "<prop>",
+    prop = "b",
 });
 Response response = client.Send(content);
 
@@ -150,7 +150,7 @@ StringExtensible client = new UnionClient().GetStringExtensibleClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    prop = "<prop>",
+    prop = "b",
 });
 Response response = client.Send(content);
 

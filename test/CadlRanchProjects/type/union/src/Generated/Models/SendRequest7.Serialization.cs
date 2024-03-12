@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using _Type.Union;
 
 namespace _Type.Union.Models
 {
@@ -28,7 +29,7 @@ namespace _Type.Union.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("prop"u8);
-            writer.WriteObjectValue(Prop);
+            writer.WriteStringValue(Prop.ToString());
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -67,14 +68,14 @@ namespace _Type.Union.Models
             {
                 return null;
             }
-            StringAndArrayCases prop = default;
+            StringExtensibleNamedUnion prop = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("prop"u8))
                 {
-                    prop = StringAndArrayCases.DeserializeStringAndArrayCases(property.Value, options);
+                    prop = new StringExtensibleNamedUnion(property.Value.GetString());
                     continue;
                 }
                 if (options.Format != "W")

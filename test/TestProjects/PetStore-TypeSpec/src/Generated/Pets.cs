@@ -208,10 +208,7 @@ namespace PetStore
         /// <include file="Docs/Pets.xml" path="doc/members/member[@name='CreateAsync(Pet,CancellationToken)']/*" />
         public virtual async Task<Response<Pet>> CreateAsync(Pet pet, CancellationToken cancellationToken = default)
         {
-            if (pet == null)
-            {
-                throw new ArgumentNullException(nameof(pet));
-            }
+            Argument.AssertNotNull(pet, nameof(pet));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = pet.ToRequestContent();
@@ -225,10 +222,7 @@ namespace PetStore
         /// <include file="Docs/Pets.xml" path="doc/members/member[@name='Create(Pet,CancellationToken)']/*" />
         public virtual Response<Pet> Create(Pet pet, CancellationToken cancellationToken = default)
         {
-            if (pet == null)
-            {
-                throw new ArgumentNullException(nameof(pet));
-            }
+            Argument.AssertNotNull(pet, nameof(pet));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = pet.ToRequestContent();
@@ -259,10 +253,7 @@ namespace PetStore
         /// <include file="Docs/Pets.xml" path="doc/members/member[@name='CreateAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> CreateAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("Pets.Create");
             scope.Start();
@@ -301,10 +292,7 @@ namespace PetStore
         /// <include file="Docs/Pets.xml" path="doc/members/member[@name='Create(RequestContent,RequestContext)']/*" />
         public virtual Response Create(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("Pets.Create");
             scope.Start();
@@ -364,14 +352,7 @@ namespace PetStore
         /// <include file="Docs/Pets.xml" path="doc/members/member[@name='GetPetByKindAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> GetPetByKindAsync(string kind, RequestContext context = null)
         {
-            if (kind == null)
-            {
-                throw new ArgumentNullException(nameof(kind));
-            }
-            if (kind.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(kind));
-            }
+            Argument.AssertNotNullOrEmpty(kind, nameof(kind));
 
             using var scope = ClientDiagnostics.CreateScope("Pets.GetPetByKind");
             scope.Start();
@@ -411,14 +392,7 @@ namespace PetStore
         /// <include file="Docs/Pets.xml" path="doc/members/member[@name='GetPetByKind(string,RequestContext)']/*" />
         public virtual Response GetPetByKind(string kind, RequestContext context = null)
         {
-            if (kind == null)
-            {
-                throw new ArgumentNullException(nameof(kind));
-            }
-            if (kind.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be an empty string.", nameof(kind));
-            }
+            Argument.AssertNotNullOrEmpty(kind, nameof(kind));
 
             using var scope = ClientDiagnostics.CreateScope("Pets.GetPetByKind");
             scope.Start();

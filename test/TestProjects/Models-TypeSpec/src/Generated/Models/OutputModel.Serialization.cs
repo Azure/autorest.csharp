@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using ModelsTypeSpec;
 
 namespace ModelsTypeSpec.Models
 {
@@ -48,7 +49,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteObjectValue(item.Value);
             }
             writer.WriteEndObject();
-            if (!(OptionalList is ChangeTrackingList<CollectionItem> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(OptionalList))
             {
                 writer.WritePropertyName("optionalList"u8);
                 writer.WriteStartArray();
@@ -58,7 +59,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (!(OptionalNullableList is ChangeTrackingList<CollectionItem> collection0 && collection0.IsUndefined))
+            if (Optional.IsCollectionDefined(OptionalNullableList))
             {
                 if (OptionalNullableList != null)
                 {
@@ -75,7 +76,7 @@ namespace ModelsTypeSpec.Models
                     writer.WriteNull("optionalNullableList");
                 }
             }
-            if (!(OptionalRecord is ChangeTrackingDictionary<string, RecordItem> collection1 && collection1.IsUndefined))
+            if (Optional.IsCollectionDefined(OptionalRecord))
             {
                 writer.WritePropertyName("optionalRecord"u8);
                 writer.WriteStartObject();
@@ -86,7 +87,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndObject();
             }
-            if (!(OptionalNullableRecord is ChangeTrackingDictionary<string, RecordItem> collection2 && collection2.IsUndefined))
+            if (Optional.IsCollectionDefined(OptionalNullableRecord))
             {
                 if (OptionalNullableRecord != null)
                 {

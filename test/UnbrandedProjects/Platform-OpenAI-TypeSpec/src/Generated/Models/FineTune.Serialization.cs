@@ -7,6 +7,7 @@ using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -45,7 +46,7 @@ namespace OpenAI.Models
             writer.WritePropertyName("organization_id"u8);
             writer.WriteStringValue(OrganizationId);
             writer.WritePropertyName("status"u8);
-            writer.WriteStringValue(Status.ToString());
+            writer.WriteStringValue(Status.ToSerialString());
             writer.WritePropertyName("hyperparams"u8);
             writer.WriteObjectValue(Hyperparams);
             writer.WritePropertyName("training_files"u8);
@@ -69,7 +70,7 @@ namespace OpenAI.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            if (!(Events is OptionalList<FineTuneEvent> collection && collection.IsUndefined))
+            if (Optional.IsCollectionDefined(Events))
             {
                 writer.WritePropertyName("events"u8);
                 writer.WriteStartArray();
@@ -176,7 +177,7 @@ namespace OpenAI.Models
                 }
                 if (property.NameEquals("status"u8))
                 {
-                    status = new FineTuneStatus(property.Value.GetString());
+                    status = property.Value.GetString().ToFineTuneStatus();
                     continue;
                 }
                 if (property.NameEquals("hyperparams"u8))
@@ -247,7 +248,7 @@ namespace OpenAI.Models
                 trainingFiles,
                 validationFiles,
                 resultFiles,
-                events ?? new OptionalList<FineTuneEvent>(),
+                events ?? new ChangeTrackingList<FineTuneEvent>(),
                 serializedAdditionalRawData);
         }
 

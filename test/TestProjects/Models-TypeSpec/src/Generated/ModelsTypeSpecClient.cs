@@ -47,10 +47,7 @@ namespace ModelsTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public ModelsTypeSpecClient(Uri endpoint, ModelsTypeSpecClientOptions options)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new ModelsTypeSpecClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -65,10 +62,7 @@ namespace ModelsTypeSpec
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='PutBaseModelWithDiscriminatorDefinedOnBaseAsync(BaseModelWithDiscriminatorDefinedOnBase,CancellationToken)']/*" />
         public virtual async Task<Response<BaseModelWithDiscriminatorDefinedOnBase>> PutBaseModelWithDiscriminatorDefinedOnBaseAsync(BaseModelWithDiscriminatorDefinedOnBase body, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
+            Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -82,10 +76,7 @@ namespace ModelsTypeSpec
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='PutBaseModelWithDiscriminatorDefinedOnBase(BaseModelWithDiscriminatorDefinedOnBase,CancellationToken)']/*" />
         public virtual Response<BaseModelWithDiscriminatorDefinedOnBase> PutBaseModelWithDiscriminatorDefinedOnBase(BaseModelWithDiscriminatorDefinedOnBase body, CancellationToken cancellationToken = default)
         {
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
+            Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = body.ToRequestContent();
@@ -116,10 +107,7 @@ namespace ModelsTypeSpec
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='PutBaseModelWithDiscriminatorDefinedOnBaseAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutBaseModelWithDiscriminatorDefinedOnBaseAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ModelsTypeSpecClient.PutBaseModelWithDiscriminatorDefinedOnBase");
             scope.Start();
@@ -158,10 +146,7 @@ namespace ModelsTypeSpec
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='PutBaseModelWithDiscriminatorDefinedOnBase(RequestContent,RequestContext)']/*" />
         public virtual Response PutBaseModelWithDiscriminatorDefinedOnBase(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ModelsTypeSpecClient.PutBaseModelWithDiscriminatorDefinedOnBase");
             scope.Start();
@@ -272,10 +257,7 @@ namespace ModelsTypeSpec
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='InputToRoundTripAsync(InputModel,CancellationToken)']/*" />
         public virtual async Task<Response<RoundTripModel>> InputToRoundTripAsync(InputModel input, CancellationToken cancellationToken = default)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
+            Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -290,10 +272,7 @@ namespace ModelsTypeSpec
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='InputToRoundTrip(InputModel,CancellationToken)']/*" />
         public virtual Response<RoundTripModel> InputToRoundTrip(InputModel input, CancellationToken cancellationToken = default)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
+            Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -324,10 +303,7 @@ namespace ModelsTypeSpec
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='InputToRoundTripAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> InputToRoundTripAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ModelsTypeSpecClient.InputToRoundTrip");
             scope.Start();
@@ -366,10 +342,7 @@ namespace ModelsTypeSpec
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='InputToRoundTrip(RequestContent,RequestContext)']/*" />
         public virtual Response InputToRoundTrip(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ModelsTypeSpecClient.InputToRoundTrip");
             scope.Start();
@@ -392,10 +365,7 @@ namespace ModelsTypeSpec
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='InputToRoundTripPrimitiveAsync(InputModel,CancellationToken)']/*" />
         public virtual async Task<Response<RoundTripPrimitiveModel>> InputToRoundTripPrimitiveAsync(InputModel input, CancellationToken cancellationToken = default)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
+            Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -410,10 +380,7 @@ namespace ModelsTypeSpec
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='InputToRoundTripPrimitive(InputModel,CancellationToken)']/*" />
         public virtual Response<RoundTripPrimitiveModel> InputToRoundTripPrimitive(InputModel input, CancellationToken cancellationToken = default)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
+            Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -444,10 +411,7 @@ namespace ModelsTypeSpec
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='InputToRoundTripPrimitiveAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> InputToRoundTripPrimitiveAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ModelsTypeSpecClient.InputToRoundTripPrimitive");
             scope.Start();
@@ -486,10 +450,7 @@ namespace ModelsTypeSpec
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='InputToRoundTripPrimitive(RequestContent,RequestContext)']/*" />
         public virtual Response InputToRoundTripPrimitive(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ModelsTypeSpecClient.InputToRoundTripPrimitive");
             scope.Start();
@@ -512,10 +473,7 @@ namespace ModelsTypeSpec
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='InputToRoundTripOptionalAsync(RoundTripOptionalModel,CancellationToken)']/*" />
         public virtual async Task<Response<RoundTripOptionalModel>> InputToRoundTripOptionalAsync(RoundTripOptionalModel input, CancellationToken cancellationToken = default)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
+            Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -530,10 +488,7 @@ namespace ModelsTypeSpec
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='InputToRoundTripOptional(RoundTripOptionalModel,CancellationToken)']/*" />
         public virtual Response<RoundTripOptionalModel> InputToRoundTripOptional(RoundTripOptionalModel input, CancellationToken cancellationToken = default)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
+            Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -564,10 +519,7 @@ namespace ModelsTypeSpec
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='InputToRoundTripOptionalAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> InputToRoundTripOptionalAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ModelsTypeSpecClient.InputToRoundTripOptional");
             scope.Start();
@@ -606,10 +558,7 @@ namespace ModelsTypeSpec
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='InputToRoundTripOptional(RequestContent,RequestContext)']/*" />
         public virtual Response InputToRoundTripOptional(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ModelsTypeSpecClient.InputToRoundTripOptional");
             scope.Start();
@@ -632,10 +581,7 @@ namespace ModelsTypeSpec
         [Obsolete("deprecated for test")]
         public virtual async Task<Response<RoundTripReadOnlyModel>> InputToRoundTripReadOnlyAsync(InputModel input, CancellationToken cancellationToken = default)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
+            Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -650,10 +596,7 @@ namespace ModelsTypeSpec
         [Obsolete("deprecated for test")]
         public virtual Response<RoundTripReadOnlyModel> InputToRoundTripReadOnly(InputModel input, CancellationToken cancellationToken = default)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
+            Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -684,10 +627,7 @@ namespace ModelsTypeSpec
         [Obsolete("deprecated for test")]
         public virtual async Task<Response> InputToRoundTripReadOnlyAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ModelsTypeSpecClient.InputToRoundTripReadOnly");
             scope.Start();
@@ -726,10 +666,7 @@ namespace ModelsTypeSpec
         [Obsolete("deprecated for test")]
         public virtual Response InputToRoundTripReadOnly(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ModelsTypeSpecClient.InputToRoundTripReadOnly");
             scope.Start();
@@ -752,10 +689,7 @@ namespace ModelsTypeSpec
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='RoundTripToOutputAsync(RoundTripModel,CancellationToken)']/*" />
         public virtual async Task<Response<OutputModel>> RoundTripToOutputAsync(RoundTripModel input, CancellationToken cancellationToken = default)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
+            Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -770,10 +704,7 @@ namespace ModelsTypeSpec
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='RoundTripToOutput(RoundTripModel,CancellationToken)']/*" />
         public virtual Response<OutputModel> RoundTripToOutput(RoundTripModel input, CancellationToken cancellationToken = default)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
+            Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -804,10 +735,7 @@ namespace ModelsTypeSpec
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='RoundTripToOutputAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> RoundTripToOutputAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ModelsTypeSpecClient.RoundTripToOutput");
             scope.Start();
@@ -846,10 +774,7 @@ namespace ModelsTypeSpec
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='RoundTripToOutput(RequestContent,RequestContext)']/*" />
         public virtual Response RoundTripToOutput(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ModelsTypeSpecClient.RoundTripToOutput");
             scope.Start();
@@ -872,10 +797,7 @@ namespace ModelsTypeSpec
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='InputRecursiveAsync(InputRecursiveModel,CancellationToken)']/*" />
         public virtual async Task<Response> InputRecursiveAsync(InputRecursiveModel input, CancellationToken cancellationToken = default)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
+            Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -890,10 +812,7 @@ namespace ModelsTypeSpec
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='InputRecursive(InputRecursiveModel,CancellationToken)']/*" />
         public virtual Response InputRecursive(InputRecursiveModel input, CancellationToken cancellationToken = default)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
+            Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -924,10 +843,7 @@ namespace ModelsTypeSpec
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='InputRecursiveAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> InputRecursiveAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ModelsTypeSpecClient.InputRecursive");
             scope.Start();
@@ -966,10 +882,7 @@ namespace ModelsTypeSpec
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='InputRecursive(RequestContent,RequestContext)']/*" />
         public virtual Response InputRecursive(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ModelsTypeSpecClient.InputRecursive");
             scope.Start();
@@ -992,10 +905,7 @@ namespace ModelsTypeSpec
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='RoundTripRecursiveAsync(RoundTripRecursiveModel,CancellationToken)']/*" />
         public virtual async Task<Response<RoundTripRecursiveModel>> RoundTripRecursiveAsync(RoundTripRecursiveModel input, CancellationToken cancellationToken = default)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
+            Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -1010,10 +920,7 @@ namespace ModelsTypeSpec
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='RoundTripRecursive(RoundTripRecursiveModel,CancellationToken)']/*" />
         public virtual Response<RoundTripRecursiveModel> RoundTripRecursive(RoundTripRecursiveModel input, CancellationToken cancellationToken = default)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
+            Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -1044,10 +951,7 @@ namespace ModelsTypeSpec
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='RoundTripRecursiveAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> RoundTripRecursiveAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ModelsTypeSpecClient.RoundTripRecursive");
             scope.Start();
@@ -1086,10 +990,7 @@ namespace ModelsTypeSpec
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='RoundTripRecursive(RequestContent,RequestContext)']/*" />
         public virtual Response RoundTripRecursive(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ModelsTypeSpecClient.RoundTripRecursive");
             scope.Start();
@@ -1390,10 +1291,7 @@ namespace ModelsTypeSpec
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='RoundTripToOutputWithNoUseBaseAsync(RoundTripOnNoUse,CancellationToken)']/*" />
         public virtual async Task<Response<RoundTripOnNoUse>> RoundTripToOutputWithNoUseBaseAsync(RoundTripOnNoUse input, CancellationToken cancellationToken = default)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
+            Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -1408,10 +1306,7 @@ namespace ModelsTypeSpec
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='RoundTripToOutputWithNoUseBase(RoundTripOnNoUse,CancellationToken)']/*" />
         public virtual Response<RoundTripOnNoUse> RoundTripToOutputWithNoUseBase(RoundTripOnNoUse input, CancellationToken cancellationToken = default)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
+            Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -1442,10 +1337,7 @@ namespace ModelsTypeSpec
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='RoundTripToOutputWithNoUseBaseAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> RoundTripToOutputWithNoUseBaseAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ModelsTypeSpecClient.RoundTripToOutputWithNoUseBase");
             scope.Start();
@@ -1484,10 +1376,7 @@ namespace ModelsTypeSpec
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='RoundTripToOutputWithNoUseBase(RequestContent,RequestContext)']/*" />
         public virtual Response RoundTripToOutputWithNoUseBase(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ModelsTypeSpecClient.RoundTripToOutputWithNoUseBase");
             scope.Start();
@@ -1687,10 +1576,7 @@ namespace ModelsTypeSpec
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='GenericTypeAsync(Int32ValuesFacet,CancellationToken)']/*" />
         public virtual async Task<Response> GenericTypeAsync(Int32ValuesFacet input, CancellationToken cancellationToken = default)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
+            Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -1704,10 +1590,7 @@ namespace ModelsTypeSpec
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='GenericType(Int32ValuesFacet,CancellationToken)']/*" />
         public virtual Response GenericType(Int32ValuesFacet input, CancellationToken cancellationToken = default)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
+            Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
@@ -1738,10 +1621,7 @@ namespace ModelsTypeSpec
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='GenericTypeAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> GenericTypeAsync(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ModelsTypeSpecClient.GenericType");
             scope.Start();
@@ -1780,10 +1660,7 @@ namespace ModelsTypeSpec
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='GenericType(RequestContent,RequestContext)']/*" />
         public virtual Response GenericType(RequestContent content, RequestContext context = null)
         {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("ModelsTypeSpecClient.GenericType");
             scope.Start();

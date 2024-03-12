@@ -26,9 +26,7 @@
    "$id": "4",
    "Kind": "Enum",
    "Name": "TimeGranularity",
-   "Namespace": "AnomalyDetector.Univariate",
-   "Description": "the time granularity of the data points.",
-   "EnumValueType": "String",
+   "EnumValueType": "string",
    "AllowedValues": [
     {
      "$id": "5",
@@ -76,6 +74,8 @@
      "Value": "none"
     }
    ],
+   "Namespace": "AnomalyDetector.Univariate",
+   "Description": "the time granularity of the data points.",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "Input"
@@ -84,9 +84,7 @@
    "$id": "14",
    "Kind": "Enum",
    "Name": "ImputeMode",
-   "Namespace": "AnomalyDetector.Univariate",
-   "Description": "The impute mode.",
-   "EnumValueType": "String",
+   "EnumValueType": "string",
    "AllowedValues": [
     {
      "$id": "15",
@@ -119,6 +117,8 @@
      "Value": "notFill"
     }
    ],
+   "Namespace": "AnomalyDetector.Univariate",
+   "Description": "The impute mode.",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "Input"
@@ -127,9 +127,7 @@
    "$id": "21",
    "Kind": "Enum",
    "Name": "MultivariateBatchDetectionStatus",
-   "Namespace": "AnomalyDetector.Multivariate",
-   "Description": "The batch detection status.",
-   "EnumValueType": "String",
+   "EnumValueType": "string",
    "AllowedValues": [
     {
      "$id": "22",
@@ -152,6 +150,8 @@
      "Value": "FAILED"
     }
    ],
+   "Namespace": "AnomalyDetector.Multivariate",
+   "Description": "The batch detection status.",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "Output"
@@ -160,9 +160,7 @@
    "$id": "26",
    "Kind": "Enum",
    "Name": "DataSchema",
-   "Namespace": "AnomalyDetector.Multivariate",
-   "Description": "Data schema of input data source: OneTable or MultiTable. The default DataSchema is OneTable.",
-   "EnumValueType": "String",
+   "EnumValueType": "string",
    "AllowedValues": [
     {
      "$id": "27",
@@ -177,6 +175,8 @@
      "Description": "MultiTable means that your input data are separated in multiple CSV files, in each file containing one 'timestamp' column and one 'variable' column, and the CSV file name should indicate the name of the variable. The default DataSchema is OneTable."
     }
    ],
+   "Namespace": "AnomalyDetector.Multivariate",
+   "Description": "Data schema of input data source: OneTable or MultiTable. The default DataSchema is OneTable.",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -185,9 +185,7 @@
    "$id": "29",
    "Kind": "Enum",
    "Name": "AlignMode",
-   "Namespace": "AnomalyDetector.Multivariate",
-   "Description": "The alignment mode.",
-   "EnumValueType": "String",
+   "EnumValueType": "string",
    "AllowedValues": [
     {
      "$id": "30",
@@ -200,6 +198,8 @@
      "Value": "Outer"
     }
    ],
+   "Namespace": "AnomalyDetector.Multivariate",
+   "Description": "The alignment mode.",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -208,9 +208,7 @@
    "$id": "32",
    "Kind": "Enum",
    "Name": "FillNAMethod",
-   "Namespace": "AnomalyDetector.Multivariate",
-   "Description": "An optional field, indicating how missing values will be filled. One of Previous, Subsequent, Linear, Zero, Fixed.",
-   "EnumValueType": "String",
+   "EnumValueType": "string",
    "AllowedValues": [
     {
      "$id": "33",
@@ -238,6 +236,8 @@
      "Value": "Fixed"
     }
    ],
+   "Namespace": "AnomalyDetector.Multivariate",
+   "Description": "An optional field, indicating how missing values will be filled. One of Previous, Subsequent, Linear, Zero, Fixed.",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -246,9 +246,7 @@
    "$id": "38",
    "Kind": "Enum",
    "Name": "ModelStatus",
-   "Namespace": "AnomalyDetector.Multivariate",
-   "Description": "the model status.",
-   "EnumValueType": "String",
+   "EnumValueType": "string",
    "AllowedValues": [
     {
      "$id": "39",
@@ -271,6 +269,8 @@
      "Value": "FAILED"
     }
    ],
+   "Namespace": "AnomalyDetector.Multivariate",
+   "Description": "the model status.",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -279,8 +279,7 @@
    "$id": "43",
    "Kind": "Enum",
    "Name": "AnomalyDetectorErrorCodes",
-   "Namespace": "AnomalyDetector.Univariate",
-   "EnumValueType": "String",
+   "EnumValueType": "string",
    "AllowedValues": [
     {
      "$id": "44",
@@ -338,6 +337,7 @@
      "Value": "InvalidImputeFixedValue"
     }
    ],
+   "Namespace": "AnomalyDetector.Univariate",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "Output"
@@ -346,7 +346,7 @@
    "$id": "55",
    "Kind": "Enum",
    "Name": "Versions",
-   "EnumValueType": "String",
+   "EnumValueType": "string",
    "AllowedValues": [
     {
      "$id": "56",
@@ -355,7 +355,6 @@
     }
    ],
    "Namespace": "AnomalyDetector",
-   "Description": "",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "None"

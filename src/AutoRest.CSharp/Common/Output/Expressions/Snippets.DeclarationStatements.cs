@@ -81,9 +81,6 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static DeclarationStatement Declare(string name, StreamReaderExpression value, out StreamReaderExpression variable)
             => Declare(name, value, d => new StreamReaderExpression(d), out variable);
 
-        public static DeclarationStatement Declare(string name, Utf8JsonRequestContentExpression value, out Utf8JsonRequestContentExpression variable)
-            => Declare(name, value, d => new Utf8JsonRequestContentExpression(d), out variable);
-
         public static DeclarationStatement Declare(string name, XmlWriterContentExpression value, out XmlWriterContentExpression variable)
             => Declare(name, value, d => new XmlWriterContentExpression(d), out variable);
 
@@ -132,9 +129,6 @@ namespace AutoRest.CSharp.Common.Output.Models
 
         public static DeclarationStatement Var(string name, StringExpression value, out StringExpression variable)
             => Var(name, value, d => new StringExpression(d), out variable);
-
-        public static DeclarationStatement Var(string name, Utf8JsonRequestContentExpression value, out Utf8JsonRequestContentExpression variable)
-            => Var(name, value, d => new Utf8JsonRequestContentExpression(d), out variable);
 
         public static DeclarationStatement Var(string name, Utf8JsonWriterExpression value, out Utf8JsonWriterExpression variable)
             => Var(name, value, d => new Utf8JsonWriterExpression(d), out variable);
