@@ -10,9 +10,11 @@ using AutoRest.CSharp.Common.Output.Expressions;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.System;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Output.Models.Types.System;
 using Azure.Core.Pipeline; //needed because BearerTokenAuthenticationPolicy doesn't exist in System.ServiceModel.Rest yet
 using RequestBody = System.ClientModel.Primitives.RequestBody;
 
@@ -28,7 +30,7 @@ namespace AutoRest.CSharp.Common.Input
         public override string GetRawResponseName => nameof(Result<object>.GetRawResponse);
 
         public override Type HttpPipelineType => typeof(MessagePipeline);
-        public override Type PipelineExtensionsType => typeof(PipelineProtocolExtensions);
+        public override CSharpType PipelineExtensionsType => ClientPipelineExtensionsProvider.Instance.Type;
         public override string HttpPipelineCreateMessageName => nameof(MessagePipeline.CreateMessage);
 
         public override Type HttpMessageType => typeof(PipelineMessage);
