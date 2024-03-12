@@ -708,12 +708,16 @@ namespace AutoRest.CSharp.Generation.Writers
                 .AppendRawIf("virtual ", modifiers.HasFlag(MethodSignatureModifiers.Virtual)); // property does not support other modifiers, here we just ignore them if any
 
             writer.Append($"{property.PropertyType} ");
-            if (property.Declaration.ActualName == "this")
+            if (property is IndexerDeclaration indexer)
             {
-                writer.Append($"this[int index]");
+                writer.Append($"this[{indexer.IndexerParameter.Type} {indexer.IndexerParameter.Name}]");
             }
             else
             {
+                if (property.ExplicitInterface is not null)
+                {
+                    writer.Append($"{property.ExplicitInterface}.");
+                }
                 writer.Append($"{property.Declaration:I}"); // the declaration order here is quite anonying - we might need to assign the values to those properties in other places before these are written
             }
 

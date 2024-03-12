@@ -3,7 +3,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.Collections.Generic;
 using OpenAI;
 
@@ -64,7 +63,7 @@ namespace OpenAI.Models
 
             Model = model;
             Prompt = prompt;
-            LogitBias = new OptionalDictionary<string, long>();
+            LogitBias = new ChangeTrackingDictionary<string, long>();
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateCompletionRequest"/>. </summary>

@@ -2,7 +2,6 @@
 
 #nullable disable
 
-using System.ClientModel.Internal;
 using System.Collections.Generic;
 using System.Text.Json;
 
@@ -17,12 +16,12 @@ namespace OpenAI
 
         public static bool IsCollectionDefined<TKey, TValue>(IDictionary<TKey, TValue> collection)
         {
-            return !(collection is OptionalDictionary<TKey, TValue> changeTrackingDictionary && changeTrackingDictionary.IsUndefined);
+            return !(collection is ChangeTrackingDictionary<TKey, TValue> changeTrackingDictionary && changeTrackingDictionary.IsUndefined);
         }
 
         public static bool IsCollectionDefined<TKey, TValue>(IReadOnlyDictionary<TKey, TValue> collection)
         {
-            return !(collection is OptionalDictionary<TKey, TValue> changeTrackingDictionary && changeTrackingDictionary.IsUndefined);
+            return !(collection is ChangeTrackingDictionary<TKey, TValue> changeTrackingDictionary && changeTrackingDictionary.IsUndefined);
         }
 
         public static bool IsDefined<T>(T? value)
