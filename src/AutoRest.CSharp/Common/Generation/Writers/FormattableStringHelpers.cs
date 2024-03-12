@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
@@ -115,6 +116,16 @@ namespace AutoRest.CSharp.Generation.Writers
                         else
                         {
                             return $"{typeof(BinaryData)}.{nameof(BinaryData.FromObjectAsJson)}({(enumType.IsIntValueType ? $"({enumType.ValueType}){parameter.Name}" : $"{parameter.Name}.{enumType.SerializationMethodName}()")})";
+                        }
+                    case { IsFrameworkType: false, Implementation: ModelTypeProvider }:
+                        {
+                            BodyMediaType? mediaType = contentType == null ? null : ToMediaType(contentType);
+                            /* Remove this if check when Azure.Core upgrade to 1.0.2 */
+                            if (mediaType == BodyMediaType.Multipart)
+                            {
+                                return $"{Configuration.ApiTypes.RequestContentType}.{Configuration.ApiTypes.RequestContentCreateFromModelName}({parameter.Name:I}, {GetModelReadWriteOptions(mediaType)})";
+                            }
+                            break;
                         }
                 }
             }
@@ -236,7 +247,12 @@ namespace AutoRest.CSharp.Generation.Writers
 
             throw new NotSupportedException($"Content type {contentType} is not supported.");
         }
-
+        public static FormattableString GetModelReadWriteOptions(BodyMediaType? type) => type switch
+        {
+            BodyMediaType.Xml => $"{typeof(ModelReaderWriterOptions)}.{nameof(ModelReaderWriterOptions.Xml)}",
+            BodyMediaType.Multipart => $"{typeof(ModelReaderWriterOptions)}.{nameof(ModelReaderWriterOptions.MultipartFormData)}",
+            _ => $"{typeof(ModelReaderWriterOptions)}.{nameof(ModelReaderWriterOptions.Json)}",
+        };
         public static string? GetConversionMethod(CSharpType fromType, CSharpType toType)
             => fromType switch
             {

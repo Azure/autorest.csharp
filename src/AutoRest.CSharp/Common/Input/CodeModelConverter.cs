@@ -250,6 +250,7 @@ namespace AutoRest.CSharp.Common.Input
                 DerivedModels: derived,
                 DiscriminatorValue: schema.DiscriminatorValue,
                 DiscriminatorPropertyName: schema.Discriminator?.Property.SerializedName,
+                MediaTypes: schema.Extensions != null ? schema.Extensions.Formats : Array.Empty<string>(),
                 // TODO -- to support this, it requires more consolidation work in HLC.
                 // Currently there are only two places using this converted code mode: HLC and swagger-DPG.
                 // HLC only converts schemas into input types for operations to use, when generating models, HLC is using its original schemas, therefore whatever we put here does not change the result.

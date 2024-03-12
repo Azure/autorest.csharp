@@ -9,6 +9,7 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
@@ -43,6 +44,17 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line($")");
             using (writer.Scope())
             {
+                /* write parameter validation */
+                var contentTypeHeader = clientMethod.Request.Headers.FirstOrDefault(p => p.IsContentHeader);
+                if (contentTypeHeader != null && !contentTypeHeader.Value.IsConstant)
+                {
+                    var contentParameter = parameters.FirstOrDefault(p => p.Name == "content");
+                    if (contentParameter != null)
+                    {
+                        var validationStatement = Snippets.Extensible.Argument.AssertNotNullOrEmpty(((ValueExpression)contentParameter).Property(nameof(RequestContent.ContentType)));
+                        writer.WriteMethodBodyStatement(validationStatement);
+                    }
+                }
                 var message = new CodeWriterDeclaration("message");
                 var request = new CodeWriterDeclaration("request");
                 var uri = new CodeWriterDeclaration("uri");

@@ -11,6 +11,7 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
+using AutoRest.CSharp.Common.Output.Models.Serialization.Multipart;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -746,6 +747,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             return _supportedSerializationFormats.Contains(KnownMediaType.Xml) ? _serializationBuilder.BuildXmlObjectSerialization(ObjectSchema, this) : null;
         }
 
+        protected override MultipartFormDataObjectSerialization? BuildMultipartFormDataSerialization()
+        {
+            return _supportedSerializationFormats.Contains(KnownMediaType.Multipart) ? _serializationBuilder.BuildMultipartFormDataObjectSerialization(this) : null;
+        }
         protected override IEnumerable<Method> BuildMethods()
         {
             foreach (var method in SerializationMethodsBuilder.BuildSerializationMethods(this))

@@ -69,6 +69,14 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 }
             }
 
+            if (serialization.Multipart is { } multipart)
+            {
+                foreach (var method in MultipartSerializationMethodsBuilder.BuildMultipartSerializationMethods(multipart))
+                {
+                    yield return method;
+                }
+            }
+
             foreach (var method in BuildIModelMethods(model.Serialization))
             {
                 yield return method;
@@ -163,6 +171,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
             if (serialization.Bicep is { } bicep)
             {
                 switchStatement.Add(BicepSerializationMethodsBuilder.BuildBicepWriteSwitchCase(bicep, options));
+            }
+
+            if (serialization.Multipart is { } multipart)
+            {
+                switchStatement.Add(MultipartSerializationMethodsBuilder.BuildMultipartWriteSwitchCase(multipart, options));
             }
 
             // default case
