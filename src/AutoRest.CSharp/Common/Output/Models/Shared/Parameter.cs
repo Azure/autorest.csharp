@@ -77,7 +77,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 IsResourceIdentifier: operationParameter.IsResourceParameter,
                 SkipUrlEncoding: skipUrlEncoding,
                 RequestLocation: requestLocation,
-                SerializationFormat: operationParameter.SerializationFormat);
+                SerializationFormat: SerializationBuilder.GetSerializationFormat(operationParameter.Type));
         }
 
         private static Constant? GetDefaultValue(InputParameter operationParameter, TypeFactory typeFactory) => operationParameter switch
