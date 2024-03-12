@@ -10,15 +10,6 @@ namespace CustomizationsInTsp.Models
     /// <summary> Model factory for models. </summary>
     public static partial class CustomizationsInTspModelFactory
     {
-        /// <summary> Initializes a new instance of <see cref="Models.ModelToChangeNamespace"/>. </summary>
-        /// <param name="requiredInt"> Required int. </param>
-        /// <param name="propertyReadWriteToReadOnly"> Read-write property that will be changed to readonly. </param>
-        /// <returns> A new <see cref="Models.ModelToChangeNamespace"/> instance for mocking. </returns>
-        public static ModelToChangeNamespace ModelToChangeNamespace(int requiredInt = default, bool? propertyReadWriteToReadOnly = null)
-        {
-            return new ModelToChangeNamespace(requiredInt, propertyReadWriteToReadOnly, serializedAdditionalRawData: null);
-        }
-
         /// <summary> Initializes a new instance of <see cref="Models.OutputBaseModelWithDiscriminator"/>. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <returns> A new <see cref="Models.OutputBaseModelWithDiscriminator"/> instance for mocking. </returns>

@@ -10,8 +10,8 @@ using System.Collections.Generic;
 
 namespace CustomizationsInTsp.Models
 {
-    /// <summary> Model moved into custom namespace. </summary>
-    public partial class ModelToChangeNamespace
+    /// <summary> Model with read-write property that will be changed to readonly. </summary>
+    public partial class OutputModelWithReadWriteProperty
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -45,28 +45,18 @@ namespace CustomizationsInTsp.Models
         /// </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="ModelToChangeNamespace"/>. </summary>
-        /// <param name="requiredInt"> Required int. </param>
-        public ModelToChangeNamespace(int requiredInt)
+        /// <summary> Initializes a new instance of <see cref="OutputModelWithReadWriteProperty"/>. </summary>
+        internal OutputModelWithReadWriteProperty()
         {
-            RequiredInt = requiredInt;
         }
 
-        /// <summary> Initializes a new instance of <see cref="ModelToChangeNamespace"/>. </summary>
-        /// <param name="requiredInt"> Required int. </param>
+        /// <summary> Initializes a new instance of <see cref="OutputModelWithReadWriteProperty"/>. </summary>
+        /// <param name="propertyReadWriteToReadOnly"> Read-write property that will be changed to readonly. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal ModelToChangeNamespace(int requiredInt, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal OutputModelWithReadWriteProperty(string propertyReadWriteToReadOnly, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
-            RequiredInt = requiredInt;
+            PropertyReadWriteToReadOnly = propertyReadWriteToReadOnly;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
-
-        /// <summary> Initializes a new instance of <see cref="ModelToChangeNamespace"/> for deserialization. </summary>
-        internal ModelToChangeNamespace()
-        {
-        }
-
-        /// <summary> Required int. </summary>
-        public int RequiredInt { get; set; }
     }
 }

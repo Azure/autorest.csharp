@@ -65,7 +65,6 @@ namespace CustomizationsInTsp.Tests
                 propertyModelToChangeNamespace = new
                 {
                     requiredInt = 1234,
-                    propertyReadWriteToReadOnly = true,
                 },
                 propertyModelWithCustomizedProperties = new
                 {
@@ -278,6 +277,42 @@ new Dictionary<string, string>
             CustomizationsInTspClient client = CreateCustomizationsInTspClient();
 
             Response<OutputBaseModelWithDiscriminator> response = await client.GetOutputDiscriminatorModelAsync();
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task CustomizationsInTsp_GetOutputModelWithReadWriteProperty_ShortVersion()
+        {
+            CustomizationsInTspClient client = CreateCustomizationsInTspClient();
+
+            Response response = await client.GetOutputModelWithReadWritePropertyAsync(null);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task CustomizationsInTsp_GetOutputModelWithReadWriteProperty_ShortVersion_Convenience()
+        {
+            CustomizationsInTspClient client = CreateCustomizationsInTspClient();
+
+            Response<OutputModelWithReadWriteProperty> response = await client.GetOutputModelWithReadWritePropertyAsync();
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task CustomizationsInTsp_GetOutputModelWithReadWriteProperty_AllParameters()
+        {
+            CustomizationsInTspClient client = CreateCustomizationsInTspClient();
+
+            Response response = await client.GetOutputModelWithReadWritePropertyAsync(null);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task CustomizationsInTsp_GetOutputModelWithReadWriteProperty_AllParameters_Convenience()
+        {
+            CustomizationsInTspClient client = CreateCustomizationsInTspClient();
+
+            Response<OutputModelWithReadWriteProperty> response = await client.GetOutputModelWithReadWritePropertyAsync();
         }
 
         [Test]

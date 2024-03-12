@@ -62,10 +62,6 @@ model ModelStruct {
 model ModelToChangeNamespace {
     @doc("Required int")
     requiredInt: int32;
-
-    @doc("Read-write property that will be changed to readonly.")
-    @visibility("read","create")
-    propertyReadWriteToReadOnly?: boolean;
 }
 
 @doc("Model with customized properties")
@@ -202,6 +198,13 @@ model RootModel {
     propertyModelStruct?: ModelStruct;
 }
 
+@doc("Model with read-write property that will be changed to readonly.")
+model OutputModelWithReadWriteProperty {
+    @doc("Read-write property that will be changed to readonly.")
+    @visibility("read","create")
+    propertyReadWriteToReadOnly?: string;
+}
+
 @doc("Base model with discriminator property that will be changed to readonly.")
 @discriminator("kind")
 model OutputBaseModelWithDiscriminator {
@@ -235,6 +238,11 @@ op foo(@body input: ModelToRename): ModelToRename;
 @get
 @convenientAPI(true)
 op getOutputDiscriminatorModel(): OutputBaseModelWithDiscriminator;
+
+@route("/outputWithReadWriteProperty")
+@get
+@convenientAPI(true)
+op getOutputModelWithReadWriteProperty(): OutputModelWithReadWriteProperty;
 
 @route("/bar")
 @doc("Sample operation with request body using a model parameter with a spread operator.")

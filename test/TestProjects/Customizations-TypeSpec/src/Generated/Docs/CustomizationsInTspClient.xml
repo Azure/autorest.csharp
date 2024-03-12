@@ -162,7 +162,6 @@ using RequestContent content = RequestContent.Create(new
     propertyModelToChangeNamespace = new
     {
         requiredInt = 1234,
-        propertyReadWriteToReadOnly = true,
     },
     propertyModelWithCustomizedProperties = new
     {
@@ -238,7 +237,6 @@ Console.WriteLine(result.GetProperty("propertyModelToMakeInternal").GetProperty(
 Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("requiredIntOnBase").ToString());
 Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("optionalInt").ToString());
 Console.WriteLine(result.GetProperty("propertyModelToChangeNamespace").GetProperty("requiredInt").ToString());
-Console.WriteLine(result.GetProperty("propertyModelToChangeNamespace").GetProperty("propertyReadWriteToReadOnly").ToString());
 Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeInternal").ToString());
 Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToRename").ToString());
 Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeFloat").ToString());
@@ -302,7 +300,6 @@ using RequestContent content = RequestContent.Create(new
     propertyModelToChangeNamespace = new
     {
         requiredInt = 1234,
-        propertyReadWriteToReadOnly = true,
     },
     propertyModelWithCustomizedProperties = new
     {
@@ -378,7 +375,6 @@ Console.WriteLine(result.GetProperty("propertyModelToMakeInternal").GetProperty(
 Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("requiredIntOnBase").ToString());
 Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("optionalInt").ToString());
 Console.WriteLine(result.GetProperty("propertyModelToChangeNamespace").GetProperty("requiredInt").ToString());
-Console.WriteLine(result.GetProperty("propertyModelToChangeNamespace").GetProperty("propertyReadWriteToReadOnly").ToString());
 Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeInternal").ToString());
 Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToRename").ToString());
 Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeFloat").ToString());
@@ -583,6 +579,78 @@ Response response = client.GetOutputDiscriminatorModel(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
+]]></code></example>
+    </member>
+    <member name="GetOutputModelWithReadWritePropertyAsync(CancellationToken)">
+      <example>
+This sample shows how to call GetOutputModelWithReadWritePropertyAsync.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+Response<OutputModelWithReadWriteProperty> response = await client.GetOutputModelWithReadWritePropertyAsync();
+]]></code>
+This sample shows how to call GetOutputModelWithReadWritePropertyAsync with all parameters.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+Response<OutputModelWithReadWriteProperty> response = await client.GetOutputModelWithReadWritePropertyAsync();
+]]></code></example>
+    </member>
+    <member name="GetOutputModelWithReadWriteProperty(CancellationToken)">
+      <example>
+This sample shows how to call GetOutputModelWithReadWriteProperty.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+Response<OutputModelWithReadWriteProperty> response = client.GetOutputModelWithReadWriteProperty();
+]]></code>
+This sample shows how to call GetOutputModelWithReadWriteProperty with all parameters.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+Response<OutputModelWithReadWriteProperty> response = client.GetOutputModelWithReadWriteProperty();
+]]></code></example>
+    </member>
+    <member name="GetOutputModelWithReadWritePropertyAsync(RequestContext)">
+      <example>
+This sample shows how to call GetOutputModelWithReadWritePropertyAsync and parse the result.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+Response response = await client.GetOutputModelWithReadWritePropertyAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call GetOutputModelWithReadWritePropertyAsync with all parameters and parse the result.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+Response response = await client.GetOutputModelWithReadWritePropertyAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("propertyReadWriteToReadOnly").ToString());
+]]></code></example>
+    </member>
+    <member name="GetOutputModelWithReadWriteProperty(RequestContext)">
+      <example>
+This sample shows how to call GetOutputModelWithReadWriteProperty and parse the result.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+Response response = client.GetOutputModelWithReadWriteProperty(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call GetOutputModelWithReadWriteProperty with all parameters and parse the result.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+Response response = client.GetOutputModelWithReadWriteProperty(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("propertyReadWriteToReadOnly").ToString());
 ]]></code></example>
     </member>
     <member name="BarAsync(RenamedModel,CancellationToken)">
