@@ -12,5 +12,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
     public class ResourceMetadata
     {
         public IDictionary<string, ResourceModel>? Resources { get; set; }
+
+        public IReadOnlyDictionary<string, string>? RenameMapping { get; set; }
+        public IReadOnlyDictionary<string, string>? OverrideOperationName {  get; set; }
     }
 }

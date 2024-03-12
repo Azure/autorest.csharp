@@ -204,6 +204,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 resourceModel.IsSingletonResource = resource.IsSingleton;
 
                 metadata.Resources.Add(resourceModel.Name, resourceModel);
+
+                metadata.RenameMapping = Configuration.MgmtConfiguration.RenameMapping;
+                metadata.OverrideOperationName = Configuration.MgmtConfiguration.OverrideOperationName;
             }
             AddGeneratedFile(project, "metadata.json", JsonSerializer.Serialize(metadata));
 
