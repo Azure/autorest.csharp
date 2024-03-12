@@ -50,6 +50,11 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             _writer.RemoveTrailingComma();
 
+            if (_provider.WhereClause is not null)
+            {
+                _writer.WriteValueExpression(_provider.WhereClause);
+            }
+
             using (_writer.Scope())
             {
                 WriteFields();

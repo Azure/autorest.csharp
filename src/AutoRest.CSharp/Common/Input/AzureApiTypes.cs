@@ -38,8 +38,6 @@ namespace AutoRest.CSharp.Common.Input
 
         public override Type RequestContextType => typeof(RequestContext);
 
-        public override Type ChangeTrackingDictionaryType => typeof(ChangeTrackingDictionary<,>);
-
         public override Type BearerAuthenticationPolicyType => typeof(BearerTokenAuthenticationPolicy);
         public override Type KeyCredentialType => typeof(AzureKeyCredential);
         public override Type HttpPipelineBuilderType => typeof(HttpPipelineBuilder);

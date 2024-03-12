@@ -43,7 +43,6 @@ $files = @(
     'AsyncLockWithValue.cs',
     'AzureKeyCredentialPolicy.cs',
     'AzureResourceProviderNamespaceAttribute.cs',
-    'ChangeTrackingDictionary.cs',
     'ClientDiagnostics.cs',
     'DiagnosticScope.cs',
     'DiagnosticScopeFactory.cs',
