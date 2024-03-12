@@ -328,11 +328,15 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return false;
             }
 
-            // We skip models that don't have read-only properties other than discriminator or collections
-            // While discriminator property is generated as read-write, it can be made read-only via customization
-            if (!model.Declaration.IsAbstract && !properties.Any(p => p.IsReadOnly && model.Discriminator?.Property != p && !TypeFactory.IsReadWriteDictionary(p.ValueType) && !TypeFactory.IsReadWriteList(p.ValueType)))
+            // If model is abstract, it has discriminator (per check above) and hence requires a model factory
+            if (!model.Declaration.IsAbstract)
             {
-                return false;
+                // We skip models that don't have read-only properties other than discriminator or collections
+                // Discriminator property is generated as read-write, but it can be made read-only via customization
+                if (!properties.Any(p => p.IsReadOnly && model.Discriminator?.Property != p && !TypeFactory.IsReadWriteDictionary(p.ValueType) && !TypeFactory.IsReadWriteList(p.ValueType)))
+                {
+                    return false;
+                }
             }
 
             if (model.SerializationConstructor.Signature.Parameters.Any(p => !p.Type.IsPublic))
