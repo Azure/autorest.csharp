@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿back// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
 using System;
@@ -184,14 +184,14 @@ namespace AutoRest.CSharp.Output.Models.Types.System
             });
         }
 
-        internal PipelineResponseExpression ProcessMessage(List<ValueExpression> arguments, bool isAsync)
+        internal PipelineResponseExpression ProcessMessage(IReadOnlyList<ValueExpression> arguments, bool isAsync)
         {
             return new(new InvokeStaticMethodExpression(Type, isAsync ? _processMessageAsync : _processMessage, arguments, CallAsExtension: true, CallAsAsync: isAsync));
         }
 
-        internal ResultExpression ProcessHeadAsBoolMessage(List<ValueExpression> arguments, bool async)
+        internal ResultExpression ProcessHeadAsBoolMessage(IReadOnlyList<ValueExpression> arguments, bool isAsync)
         {
-            return new(new InvokeStaticMethodExpression(Type, async ? _processHeadAsBoolMessageAsync : _processHeadAsBoolMessage, arguments, CallAsExtension: true, CallAsAsync: async));
+            return new(new InvokeStaticMethodExpression(Type, isAsync ? _processHeadAsBoolMessageAsync : _processHeadAsBoolMessage, arguments, CallAsExtension: true, CallAsAsync: isAsync));
         }
     }
 }
