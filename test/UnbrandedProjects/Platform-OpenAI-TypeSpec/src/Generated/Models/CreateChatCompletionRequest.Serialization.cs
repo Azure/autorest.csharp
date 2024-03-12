@@ -384,7 +384,7 @@ namespace OpenAI.Models
                 stop,
                 presencePenalty,
                 frequencyPenalty,
-                logitBias ?? new OptionalDictionary<string, long>(),
+                logitBias ?? new ChangeTrackingDictionary<string, long>(),
                 user,
                 stream,
                 serializedAdditionalRawData);
