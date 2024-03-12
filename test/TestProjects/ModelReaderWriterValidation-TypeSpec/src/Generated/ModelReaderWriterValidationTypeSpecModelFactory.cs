@@ -34,6 +34,15 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 serializedAdditionalRawData: null);
         }
 
+        /// <summary> Initializes a new instance of <see cref="Models.BaseModel"/>. </summary>
+        /// <param name="kind"> The kind. </param>
+        /// <param name="name"> The name property. </param>
+        /// <returns> A new <see cref="Models.BaseModel"/> instance for mocking. </returns>
+        public static BaseModel BaseModel(string kind = null, string name = null)
+        {
+            return new UnknownBaseModel(kind, name, serializedAdditionalRawData: null);
+        }
+
         /// <summary> Initializes a new instance of <see cref="Models.TrackedResourceData"/>. </summary>
         /// <param name="id"> The id property. </param>
         /// <param name="name"> The name property. </param>

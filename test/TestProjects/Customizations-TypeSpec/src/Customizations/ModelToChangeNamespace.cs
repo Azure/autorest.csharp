@@ -6,5 +6,7 @@ using Azure.Core;
 namespace CustomizationsInTsp.Models
 {
     [CodeGenModel("ModelToChangeNamespace")]
-    public partial class ModelToChangeNamespace { }
+    public partial class ModelToChangeNamespace
+    {
+    }
 }

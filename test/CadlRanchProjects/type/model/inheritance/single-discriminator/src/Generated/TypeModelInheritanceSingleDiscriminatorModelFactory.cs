@@ -10,6 +10,15 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
     /// <summary> Model factory for models. </summary>
     public static partial class TypeModelInheritanceSingleDiscriminatorModelFactory
     {
+        /// <summary> Initializes a new instance of <see cref="Models.Bird"/>. </summary>
+        /// <param name="kind"></param>
+        /// <param name="wingspan"></param>
+        /// <returns> A new <see cref="Models.Bird"/> instance for mocking. </returns>
+        public static Bird Bird(string kind = null, int wingspan = default)
+        {
+            return new UnknownBird(kind, wingspan, serializedAdditionalRawData: null);
+        }
+
         /// <summary> Initializes a new instance of <see cref="Models.Dinosaur"/>. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="size"></param>

@@ -12,6 +12,14 @@ namespace TypeSchemaMapping.Models
     /// <summary> Model factory for models. </summary>
     internal static partial class MainModelFactory
     {
+        /// <summary> Initializes a new instance of <see cref="Models.AbstractModel"/>. </summary>
+        /// <param name="discriminatorProperty"></param>
+        /// <returns> A new <see cref="Models.AbstractModel"/> instance for mocking. </returns>
+        public static AbstractModel AbstractModel(string discriminatorProperty = null)
+        {
+            return new UnknownAbstractModel(discriminatorProperty, serializedAdditionalRawData: null);
+        }
+
         /// <summary> Initializes a new instance of <see cref="Models.ModelWithGuidProperty"/>. </summary>
         /// <param name="modelProperty"> . </param>
         /// <returns> A new <see cref="Models.ModelWithGuidProperty"/> instance for mocking. </returns>

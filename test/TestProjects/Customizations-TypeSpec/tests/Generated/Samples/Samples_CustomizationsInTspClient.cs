@@ -555,6 +555,174 @@ new Dictionary<string, string>
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_CustomizationsInTsp_GetOutputDiscriminatorModel_ShortVersion()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            Response response = client.GetOutputDiscriminatorModel(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CustomizationsInTsp_GetOutputDiscriminatorModel_ShortVersion_Async()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            Response response = await client.GetOutputDiscriminatorModelAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CustomizationsInTsp_GetOutputDiscriminatorModel_ShortVersion_Convenience()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            Response<OutputBaseModelWithDiscriminator> response = client.GetOutputDiscriminatorModel();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CustomizationsInTsp_GetOutputDiscriminatorModel_ShortVersion_Convenience_Async()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            Response<OutputBaseModelWithDiscriminator> response = await client.GetOutputDiscriminatorModelAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CustomizationsInTsp_GetOutputDiscriminatorModel_AllParameters()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            Response response = client.GetOutputDiscriminatorModel(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CustomizationsInTsp_GetOutputDiscriminatorModel_AllParameters_Async()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            Response response = await client.GetOutputDiscriminatorModelAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CustomizationsInTsp_GetOutputDiscriminatorModel_AllParameters_Convenience()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            Response<OutputBaseModelWithDiscriminator> response = client.GetOutputDiscriminatorModel();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CustomizationsInTsp_GetOutputDiscriminatorModel_AllParameters_Convenience_Async()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            Response<OutputBaseModelWithDiscriminator> response = await client.GetOutputDiscriminatorModelAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CustomizationsInTsp_GetOutputModelWithReadWriteProperty_ShortVersion()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            Response response = client.GetOutputModelWithReadWriteProperty(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CustomizationsInTsp_GetOutputModelWithReadWriteProperty_ShortVersion_Async()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            Response response = await client.GetOutputModelWithReadWritePropertyAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CustomizationsInTsp_GetOutputModelWithReadWriteProperty_ShortVersion_Convenience()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            Response<OutputModelWithReadWriteProperty> response = client.GetOutputModelWithReadWriteProperty();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CustomizationsInTsp_GetOutputModelWithReadWriteProperty_ShortVersion_Convenience_Async()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            Response<OutputModelWithReadWriteProperty> response = await client.GetOutputModelWithReadWritePropertyAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CustomizationsInTsp_GetOutputModelWithReadWriteProperty_AllParameters()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            Response response = client.GetOutputModelWithReadWriteProperty(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("propertyReadWriteToReadOnly").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CustomizationsInTsp_GetOutputModelWithReadWriteProperty_AllParameters_Async()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            Response response = await client.GetOutputModelWithReadWritePropertyAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("propertyReadWriteToReadOnly").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CustomizationsInTsp_GetOutputModelWithReadWriteProperty_AllParameters_Convenience()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            Response<OutputModelWithReadWriteProperty> response = client.GetOutputModelWithReadWriteProperty();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CustomizationsInTsp_GetOutputModelWithReadWriteProperty_AllParameters_Convenience_Async()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            Response<OutputModelWithReadWriteProperty> response = await client.GetOutputModelWithReadWritePropertyAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_CustomizationsInTsp_Bar_ShortVersion()
         {
             CustomizationsInTspClient client = new CustomizationsInTspClient();

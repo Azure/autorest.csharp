@@ -198,6 +198,30 @@ model RootModel {
     propertyModelStruct?: ModelStruct;
 }
 
+@doc("Model with read-write property that will be changed to readonly.")
+model OutputModelWithReadWriteProperty {
+    @doc("Read-write property that will be changed to readonly.")
+    @visibility("read","create")
+    propertyReadWriteToReadOnly?: string;
+}
+
+@doc("Base model with discriminator property that will be changed to readonly.")
+@discriminator("kind")
+model OutputBaseModelWithDiscriminator {
+}
+
+@doc("First derived model as an output")
+model FirstDerivedOutputModel extends OutputBaseModelWithDiscriminator {
+  kind: "first";
+  first: boolean;
+}
+
+@doc("Second derived model as an output")
+model SecondDerivedOutputModel extends OutputBaseModelWithDiscriminator {
+  kind: "second";
+  second: boolean;
+}
+
 @route("/inputToRoundTrip")
 @doc("RoundTrip operation to make RootModel round-trip")
 @get
@@ -209,6 +233,16 @@ op roundTrip(@body input: RootModel): RootModel;
 @get
 @convenientAPI(true)
 op foo(@body input: ModelToRename): ModelToRename;
+
+@route("/outputWithDiscriminator")
+@get
+@convenientAPI(true)
+op getOutputDiscriminatorModel(): OutputBaseModelWithDiscriminator;
+
+@route("/outputWithReadWriteProperty")
+@get
+@convenientAPI(true)
+op getOutputModelWithReadWriteProperty(): OutputModelWithReadWriteProperty;
 
 @route("/bar")
 @doc("Sample operation with request body using a model parameter with a spread operator.")

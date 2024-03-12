@@ -27,7 +27,7 @@ namespace MgmtSafeFlatten.Models
         /// <param name="layerTwoMyProp"> The single value prop. </param>
         /// <param name="layerOneType">
         /// The single value prop with discriminator.
-        /// Please note <see cref="LayerOneBaseType"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+        /// Please note <see cref="Models.LayerOneBaseType"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
         /// The available derived classes include <see cref="LayerOneBarType"/> and <see cref="LayerOneFooType"/>.
         /// </param>
         /// <param name="layerOneConflictId"> The single value prop with conflict. </param>
@@ -47,6 +47,14 @@ namespace MgmtSafeFlatten.Models
                 layerTwoMyProp != null ? new LayerOneSingle(new LayerTwoSingle(layerTwoMyProp)) : null,
                 layerOneType,
                 layerOneConflictId != null ? ResourceManagerModelFactory.WritableSubResource(layerOneConflictId) : null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.LayerOneBaseType"/>. </summary>
+        /// <param name="name"></param>
+        /// <returns> A new <see cref="Models.LayerOneBaseType"/> instance for mocking. </returns>
+        public static LayerOneBaseType LayerOneBaseType(string name = "Unknown")
+        {
+            return new UnknownLayerOneBaseType(name);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtSafeFlatten.TypeTwoData"/>. </summary>
