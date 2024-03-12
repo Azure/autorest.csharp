@@ -107,7 +107,7 @@ namespace AutoRest.CSharp.Output.Models
             var allParameters = GetOperationAllParameters(operation);
             var methodParameters = BuildMethodParameters(allParameters);
             var requestParts = allParameters
-                .Select(kvp => new RequestPartSource(kvp.Key.NameInRequest, (InputParameter?)kvp.Key, CreateReference(kvp.Key, kvp.Value), kvp.Key.SerializationFormat))
+                .Select(kvp => new RequestPartSource(kvp.Key.NameInRequest, (InputParameter?)kvp.Key, CreateReference(kvp.Key, kvp.Value), SerializationBuilder.GetSerializationFormat(kvp.Key.Type)))
                 .ToList();
 
             var request = BuildRequest(operation, requestParts, null, _library);

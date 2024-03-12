@@ -51,7 +51,7 @@ namespace MgmtExactMatchInheritance
         /// <param name="type18"> Azure Data Factory secure string definition. The string value will be masked with asterisks '*' during Get or List API calls. </param>
         /// <param name="type19"> Azure Key Vault secret reference. </param>
         /// <param name="type20"> Any object. </param>
-        internal ExactMatchModel1Data(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string @new, IList<Uri> supportingUris, Type1? type1, Type2? type2, IPAddress type3, object type4, DataFactoryElement<string> type5, DataFactoryElement<double> type6, DataFactoryElement<bool> type7, DataFactoryElement<int> type8, DataFactoryElement<BinaryData> type9, DataFactoryElement<IList<SeparateClass>> type10, DataFactoryElement<IList<string>> type11, DataFactoryElement<IDictionary<string, string>> type12, DataFactoryElement<IList<SeparateClass>> type13, DataFactoryElement<DateTimeOffset> type14, DataFactoryElement<TimeSpan> type15, DataFactoryElement<Uri> type16, DataFactoryLinkedServiceReference type17, DataFactorySecretString type18, DataFactoryKeyVaultSecretReference type19, DataFactoryElement<IDictionary<string, BinaryData>> type20) : base(id, name, resourceType, systemData)
+        internal ExactMatchModel1Data(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string @new, IList<Uri> supportingUris, Type1? type1, Type2? type2, IPAddress type3, object type4, DataFactoryElement<string> type5, DataFactoryElement<double> type6, DataFactoryElement<bool> type7, DataFactoryElement<int> type8, DataFactoryElement<BinaryData> type9, DataFactoryElement<IList<SeparateClass>> type10, DataFactoryElement<IList<string>> type11, DataFactoryElement<IDictionary<string, string>> type12, DataFactoryElement<IList<SeparateClass>> type13, DataFactoryElement<DateTimeOffset> type14, DataFactoryElement<TimeSpan> type15, DataFactoryElement<Uri> type16, DataFactoryLinkedServiceReference type17, DataFactorySecretString type18, DataFactoryKeyVaultSecret type19, DataFactoryElement<IDictionary<string, BinaryData>> type20) : base(id, name, resourceType, systemData)
         {
             New = @new;
             SupportingUris = supportingUris;
@@ -118,7 +118,7 @@ namespace MgmtExactMatchInheritance
         /// <summary> Azure Data Factory secure string definition. The string value will be masked with asterisks '*' during Get or List API calls. </summary>
         public DataFactorySecretString Type18 { get; set; }
         /// <summary> Azure Key Vault secret reference. </summary>
-        public DataFactoryKeyVaultSecretReference Type19 { get; set; }
+        public DataFactoryKeyVaultSecret Type19 { get; set; }
         /// <summary> Any object. </summary>
         public DataFactoryElement<IDictionary<string, BinaryData>> Type20 { get; set; }
     }

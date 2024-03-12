@@ -72,7 +72,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             DefaultName = $"{defaultClientName}ModelFactory".ToCleanName();
             DefaultAccessibility = "public";
             ExistingModelFactoryMethods = typeof(ResourceManagerModelFactory).GetMethods(BindingFlags.Static | BindingFlags.Public).ToHashSet();
-            ExistingModelFactoryMethods.UnionWith(typeof(DataFactoryModelFactory).GetMethods(BindingFlags.Static | BindingFlags.Public).ToHashSet());
         }
 
         public static ModelFactoryTypeProvider? TryCreate(IEnumerable<TypeProvider> models, TypeFactory typeFactory, SourceInputModel? sourceInputModel)

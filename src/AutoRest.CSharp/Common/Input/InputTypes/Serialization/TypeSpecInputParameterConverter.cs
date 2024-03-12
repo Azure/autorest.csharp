@@ -5,8 +5,6 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Output.Builders;
-using AutoRest.CSharp.Output.Models.Serialization;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -124,6 +122,7 @@ namespace AutoRest.CSharp.Common.Input
                 InputLiteralType literalType => literalType.LiteralValueType,
                 InputListType listType => listType with { ElementType = FixInputParameterType(listType.ElementType, requestLocation) },
                 InputDictionaryType dictionaryType => dictionaryType with { ValueType = FixInputParameterType(dictionaryType.ValueType, requestLocation) },
+                // See https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#http-parameter-serialization
                 InputPrimitiveType { Kind: InputTypeKind.DateTime } when requestLocation == RequestLocation.Header => InputPrimitiveType.DateTimeRFC7231,
                 InputPrimitiveType { Kind: InputTypeKind.DateTime } when requestLocation == RequestLocation.Body => InputPrimitiveType.DateTimeRFC3339,
                 _ => parameterType

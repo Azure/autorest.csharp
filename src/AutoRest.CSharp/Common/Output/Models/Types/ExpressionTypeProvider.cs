@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
@@ -20,6 +21,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             yield return RequestContentHelperProvider.Instance;
             yield return Utf8JsonRequestContentProvider.Instance;
             yield return ArgumentProvider.Instance;
+            yield return ChangeTrackingDictionaryProvider.Instance;
         }
 
         protected ExpressionTypeProvider(string defaultNamespace, SourceInputModel? sourceInputModel)
@@ -43,11 +45,13 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public CSharpType? Inherits { get; protected init; }
 
+        public virtual WhereExpression? WhereClause { get; protected init; }
+
         private IReadOnlyList<CSharpType>? _implements;
-        public virtual IReadOnlyList<CSharpType> Implements => _implements ??= BuildImplements().ToArray();
+        public IReadOnlyList<CSharpType> Implements => _implements ??= BuildImplements().ToArray();
 
         private IReadOnlyList<PropertyDeclaration>? _properties;
-        public virtual IReadOnlyList<PropertyDeclaration> Properties => _properties ??= BuildProperties().ToArray();
+        public IReadOnlyList<PropertyDeclaration> Properties => _properties ??= BuildProperties().ToArray();
 
         private IReadOnlyList<Method>? _methods;
         public IReadOnlyList<Method> Methods => _methods ??= BuildMethods().ToArray();
