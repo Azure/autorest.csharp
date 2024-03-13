@@ -5,6 +5,7 @@ using System;
 using AutoRest.CSharp.Common.Output.Expressions;
 using AutoRest.CSharp.Common.Output.Expressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -25,7 +26,7 @@ namespace AutoRest.CSharp.Common.Input
         public override string GetRawResponseName => nameof(Response<object>.GetRawResponse);
 
         public override Type HttpPipelineType => typeof(HttpPipeline);
-        public override Type PipelineExtensionsType => typeof(HttpPipelineExtensions);
+        public override CSharpType PipelineExtensionsType => typeof(HttpPipelineExtensions);
         public override string HttpPipelineCreateMessageName => nameof(HttpPipeline.CreateMessage);
 
         public override Type HttpMessageType => typeof(HttpMessage);
