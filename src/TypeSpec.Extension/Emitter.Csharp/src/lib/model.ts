@@ -596,6 +596,7 @@ export function getInputType(
                 DiscriminatorPropertyName: discriminator?.propertyName,
                 DiscriminatorValue: getDiscriminatorValue(m, baseModel),
                 Usage: Usage.None,
+                MediaTypes: [],
                 InheritedDictionaryType: inheritedDictionaryType, // InheritedDictionaryType represent the type of additional properties property
                 BaseModel: baseModel, // BaseModel should be the last but one assigned to model
                 Properties: properties // Properties should be the last assigned to model

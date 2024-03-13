@@ -578,7 +578,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                             _ when property.Declaration.Type.FrameworkType == typeof(string) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromString), new[] { memberValueExpression.NullableStructValue() }),
                             _ when property.Declaration.Type.FrameworkType == typeof(byte[]) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromBytes), new[] { memberValueExpression.NullableStructValue() }),
                             _ when property.Declaration.Type.FrameworkType == typeof(Stream) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromStream), new[] { memberValueExpression.NullableStructValue() }),
-                            _ when property.Declaration.Type.FrameworkType == typeof(BinaryData) => new InvokeInstanceMethodExpression(memberValueExpression, nameof(BinaryData.WithMediaType), new[] { Literal("application/octet-stream") }, null, false),
+                            //_ when property.Declaration.Type.FrameworkType == typeof(BinaryData) => new InvokeInstanceMethodExpression(memberValueExpression, nameof(BinaryData.WithMediaType), new[] { Literal("application/octet-stream") }, null, false),
+                            _ when property.Declaration.Type.FrameworkType == typeof(BinaryData) => memberValueExpression.NullableStructValue(),
                             _ when property.Declaration.Type.IsFrameworkType => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromObjectAsJson), new[] { memberValueExpression.NullableStructValue() }, new[] { property.Declaration.Type }),
                             /*
                             _ when property.Declaration.Type.FrameworkType == typeof(Int32) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromObjectAsJson), new[] { memberValueExpression.NullableStructValue() }),

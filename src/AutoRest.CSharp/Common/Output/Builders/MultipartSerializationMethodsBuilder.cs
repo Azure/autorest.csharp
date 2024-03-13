@@ -59,7 +59,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         public static SwitchCase BuildMultipartWriteSwitchCase(MultipartFormDataObjectSerialization multipart, ModelReaderWriterOptionsExpression options)
         {
             return new SwitchCase(
-                Serializations.BicepFormat,
+                Serializations.MultipartFormat,
                 Return(
                     new InvokeInstanceMethodExpression(
                         null,
@@ -84,8 +84,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return new MethodBodyStatement[]
                         {
                             Declare(typeof(string), "boundary", new InvokeInstanceMethodExpression(new InvokeStaticMethodExpression(typeof(Guid), nameof(Guid.NewGuid), Array.Empty<ValueExpression>()), nameof(Guid.ToString), Array.Empty<ValueExpression>(), null, false), out var boundary),
-                            UsingDeclare("content", typeof(MultipartFormData), New.Instance(typeof(MultipartFormData), new[]{boundary}), out var content),
-                            WriteMultiParts(new MultipartFormDataExpression(content), multipart!.Properties, options).ToArray(),
+                            UsingDeclare("content", typeof(MultipartFormDataBinaryContent), New.Instance(typeof(MultipartFormDataBinaryContent), new[]{boundary}), out var content),
+                            WriteMultiParts(new MultipartFormDataExpression(content), multipart!.Properties/*, options*/).ToArray(),
                             //Declare(typeof(BinaryData), "binaryData", new InvokeInstanceMethodExpression(content, nameof(MultipartFormData.ToContent), Array.Empty<ValueExpression>(),
                             Declare(typeof(BinaryData), "binaryData", new InvokeStaticMethodExpression(typeof(ModelReaderWriter), nameof(ModelReaderWriter.Write), new List<ValueExpression>(){ content, ModelReaderWriterOptionsExpression.MultipartFormData},null, false), out var binaryData),
                             Snippets.Return(binaryData)
@@ -95,12 +95,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             return new MethodBodyStatement[]
                         {
-                            UsingDeclare("content", typeof(MultipartFormData), MultipartFormDataExpression.Create(data), out var content),
+                            UsingDeclare("content", typeof(MultipartFormDataBinaryContent), MultipartFormDataExpression.Create(data), out var content),
                             InitialObject(multipart, new MultipartFormDataExpression(content)).ToArray()
                         };
         }
         /*TODO: handle additionalProperties. */
-        private static IEnumerable<MethodBodyStatement> WriteMultiParts(MultipartFormDataExpression multipartContent, IEnumerable<MultipartPropertySerialization> properties, ModelReaderWriterOptionsExpression? options)
+        private static IEnumerable<MethodBodyStatement> WriteMultiParts(MultipartFormDataExpression multipartContent, IEnumerable<MultipartPropertySerialization> properties/*, ModelReaderWriterOptionsExpression? options*/)
         {
             foreach (MultipartPropertySerialization property in properties)
             {
@@ -112,7 +112,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
                     yield return Serializations.WrapInCheckNotWire(
                         property,
-                        options?.Format,
+                        /*options?.Format*/Literal("MFD"),
                         InvokeOptional.WrapInIsDefined(
                             property,
                     new IfElseStatement(checkPropertyIsInitialized,
@@ -123,7 +123,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 {
                     yield return Serializations.WrapInCheckNotWire(
                         property,
-                    options?.Format,
+                    /*options?.Format*/Literal("MFD"),
                         InvokeOptional.WrapInIsDefined(property, WritePropertySerialization(multipartContent, property)));
                 }
                 /*
@@ -151,7 +151,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return new[]
             {
                 //new EnumerableExpression(TypeFactory.GetElementType(array.ImplementationType)
-                new ForeachStatement(TypeFactory.GetElementType(serialization.ImplementationType), "item", value, false, out var item)
+                new ForeachStatement(TypeFactory.GetElementType(serialization.Type), "item", value, false, out var item)
                 {
                     SerializationExression(mulitpartContent, serialization.ValueSerialization, item, serializedName)
                 }

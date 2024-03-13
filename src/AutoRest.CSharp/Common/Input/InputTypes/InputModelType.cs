@@ -71,7 +71,8 @@ namespace AutoRest.CSharp.Common.Input
                 DiscriminatorValue,
                 DiscriminatorPropertyName,
                 InheritedDictionaryType,
-                IsNullable);
+                IsNullable,
+                MediaTypes);
         }
 
         private IReadOnlyList<InputModelProperty> GetNewProperties(InputModelProperty property, InputType inputType)

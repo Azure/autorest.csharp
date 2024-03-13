@@ -298,7 +298,8 @@ namespace AutoRest.CSharp.Output.Builders
                         _ when property.Declaration.Type.FrameworkType == typeof(Stream) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromStream), new[] { memberValueExpression.NullableStructValue() }),
                         _ when property.Declaration.Type.FrameworkType == typeof(Int32) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromObjectAsJson), new[] { memberValueExpression.NullableStructValue() }),
                         _ when property.Declaration.Type.FrameworkType == typeof(float) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromObjectAsJson), new[] { memberValueExpression.NullableStructValue() }),
-                        _ when property.Declaration.Type.FrameworkType == typeof(BinaryData) => new InvokeInstanceMethodExpression(memberValueExpression, nameof(BinaryData.WithMediaType), new[] { Literal("application/octet-stream") }, null, false),
+                        //_ when property.Declaration.Type.FrameworkType == typeof(BinaryData) => new InvokeInstanceMethodExpression(memberValueExpression, nameof(BinaryData.WithMediaType), new[] { Literal("application/octet-stream") }, null, false),
+                        _ when property.Declaration.Type.FrameworkType == typeof(BinaryData) => memberValueExpression,
                         _ => throw new InvalidOperationException($"Unsupported type {property.Declaration.Type} for serialization")
                     };
                 }
@@ -333,7 +334,7 @@ namespace AutoRest.CSharp.Output.Builders
                         ? new TypedMemberExpression(null, $"{property.Declaration.Name}.{nameof(Nullable<ReadOnlyMemory<object>>.Value)}.{nameof(ReadOnlyMemory<object>.Span)}", typeof(ReadOnlySpan<>).MakeGenericType(property.Declaration.Type.Arguments[0].FrameworkType))
                         : new TypedMemberExpression(null, $"{property.Declaration.Name}.{nameof(ReadOnlyMemory<object>.Span)}", typeof(ReadOnlySpan<>).MakeGenericType(property.Declaration.Type.Arguments[0].FrameworkType));
                 }
-                ObjectSerialization valueSerialization = new MultipartValueSerialization(property.ValueType, SerializationFormat.Default, property.IsRequired);
+                MultipartValueSerialization valueSerialization = new MultipartValueSerialization(property.ValueType, SerializationFormat.Default, property.IsRequired);
                 var propertySerialization = new MultipartPropertySerialization(
                     parameter.Name,
                     memberValueExpression,
