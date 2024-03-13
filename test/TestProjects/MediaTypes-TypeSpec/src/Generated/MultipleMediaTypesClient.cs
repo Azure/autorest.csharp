@@ -34,14 +34,14 @@ namespace MultipleMediaTypes
         }
 
         /// <summary> Initializes a new instance of MultipleMediaTypesClient. </summary>
-        /// <param name="endpoint"> Service endpoint. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public MultipleMediaTypesClient(Uri endpoint) : this(endpoint, new MultipleMediaTypesClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of MultipleMediaTypesClient. </summary>
-        /// <param name="endpoint"> Service endpoint. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public MultipleMediaTypesClient(Uri endpoint, MultipleMediaTypesClientOptions options)
@@ -388,6 +388,7 @@ namespace MultipleMediaTypes
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/oneBinaryBodyTwoContentTypes", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -402,6 +403,7 @@ namespace MultipleMediaTypes
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/oneStringBodyThreeContentTypes", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -416,6 +418,7 @@ namespace MultipleMediaTypes
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/oneModelBodyOneContentType", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

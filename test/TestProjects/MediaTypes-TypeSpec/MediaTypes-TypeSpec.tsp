@@ -6,11 +6,18 @@ using Azure.ClientGenerator.Core;
 
 @service(
     {
-        title: "This service does not define an endpoint. We should add it in the generator.",
+        title: "Media Types Service",
         version: "2021-03-25"
     }
 )
 @doc("Play with produces/consumes and media-types in general.")
+@server(
+    "{endpoint}",
+    "Endpoint Service",
+    {
+        endpoint: string,
+    }
+)
 namespace MultipleMediaTypes;
 
 model Body {
