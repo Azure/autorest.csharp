@@ -23,7 +23,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_UpdateConvenience_ShortVersion()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = client.UpdateConvenience(null);
 
@@ -35,7 +36,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_UpdateConvenience_ShortVersion_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = await client.UpdateConvenienceAsync(null);
 
@@ -47,7 +49,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_UpdateConvenience_ShortVersion_Convenience()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response<Model> response = client.UpdateConvenience();
         }
@@ -56,7 +59,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_UpdateConvenience_ShortVersion_Convenience_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response<Model> response = await client.UpdateConvenienceAsync();
         }
@@ -65,7 +69,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_UpdateConvenience_AllParameters()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = client.UpdateConvenience(null);
 
@@ -77,7 +82,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_UpdateConvenience_AllParameters_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = await client.UpdateConvenienceAsync(null);
 
@@ -89,7 +95,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_UpdateConvenience_AllParameters_Convenience()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response<Model> response = client.UpdateConvenience();
         }
@@ -98,7 +105,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_UpdateConvenience_AllParameters_Convenience_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response<Model> response = await client.UpdateConvenienceAsync();
         }
@@ -107,7 +115,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ConvenienceOptionalBeforeRequired_ShortVersion()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -122,7 +131,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ConvenienceOptionalBeforeRequired_ShortVersion_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -137,7 +147,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ConvenienceOptionalBeforeRequired_ShortVersion_Convenience()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Model required = new Model("<id>");
             Response response = client.ConvenienceOptionalBeforeRequired(required);
@@ -147,7 +158,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ConvenienceOptionalBeforeRequired_ShortVersion_Convenience_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Model required = new Model("<id>");
             Response response = await client.ConvenienceOptionalBeforeRequiredAsync(required);
@@ -157,7 +169,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ConvenienceOptionalBeforeRequired_AllParameters()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -172,7 +185,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ConvenienceOptionalBeforeRequired_AllParameters_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -187,7 +201,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ConvenienceOptionalBeforeRequired_AllParameters_Convenience()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Model required = new Model("<id>");
             Response response = client.ConvenienceOptionalBeforeRequired(required, optional: 1234);
@@ -197,7 +212,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ConvenienceOptionalBeforeRequired_AllParameters_Convenience_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Model required = new Model("<id>");
             Response response = await client.ConvenienceOptionalBeforeRequiredAsync(required, optional: 1234);
@@ -207,7 +223,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_NoConvenience_ShortVersion()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = client.NoConvenience(null);
 
@@ -219,7 +236,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_NoConvenience_ShortVersion_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = await client.NoConvenienceAsync(null);
 
@@ -231,7 +249,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_NoConvenience_AllParameters()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = client.NoConvenience(null);
 
@@ -243,7 +262,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_NoConvenience_AllParameters_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = await client.NoConvenienceAsync(null);
 
@@ -255,7 +275,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_NoConvenienceRequiredBody_ShortVersion()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -270,7 +291,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_NoConvenienceRequiredBody_ShortVersion_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -285,7 +307,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_NoConvenienceRequiredBody_AllParameters()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -300,7 +323,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_NoConvenienceRequiredBody_AllParameters_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -315,7 +339,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_NoConvenienceOptionalBody_ShortVersion()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             using RequestContent content = null;
             Response response = client.NoConvenienceOptionalBody(content);
@@ -327,7 +352,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_NoConvenienceOptionalBody_ShortVersion_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             using RequestContent content = null;
             Response response = await client.NoConvenienceOptionalBodyAsync(content);
@@ -339,7 +365,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_NoConvenienceOptionalBody_AllParameters()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -354,7 +381,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_NoConvenienceOptionalBody_AllParameters_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -369,7 +397,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_Protocol_ShortVersion()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = client.Protocol();
 
@@ -381,7 +410,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_Protocol_ShortVersion_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = await client.ProtocolAsync();
 
@@ -393,7 +423,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_Protocol_ShortVersion_Convenience()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response<Model> response = client.ProtocolValue();
         }
@@ -402,7 +433,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_Protocol_ShortVersion_Convenience_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response<Model> response = await client.ProtocolValueAsync();
         }
@@ -411,7 +443,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_Protocol_AllParameters()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = client.Protocol();
 
@@ -423,7 +456,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_Protocol_AllParameters_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = await client.ProtocolAsync();
 
@@ -435,7 +469,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_Protocol_AllParameters_Convenience()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response<Model> response = client.ProtocolValue();
         }
@@ -444,7 +479,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_Protocol_AllParameters_Convenience_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response<Model> response = await client.ProtocolValueAsync();
         }
@@ -453,7 +489,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ConvenienceWithOptional_ShortVersion()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = client.ConvenienceWithOptional();
 
@@ -465,7 +502,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ConvenienceWithOptional_ShortVersion_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = await client.ConvenienceWithOptionalAsync();
 
@@ -477,7 +515,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ConvenienceWithOptional_ShortVersion_Convenience()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response<Model> response = client.ConvenienceWithOptionalValue();
         }
@@ -486,7 +525,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ConvenienceWithOptional_ShortVersion_Convenience_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response<Model> response = await client.ConvenienceWithOptionalValueAsync();
         }
@@ -495,7 +535,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ConvenienceWithOptional_AllParameters()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = client.ConvenienceWithOptional();
 
@@ -507,7 +548,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ConvenienceWithOptional_AllParameters_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = await client.ConvenienceWithOptionalAsync();
 
@@ -519,7 +561,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ConvenienceWithOptional_AllParameters_Convenience()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response<Model> response = client.ConvenienceWithOptionalValue();
         }
@@ -528,7 +571,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ConvenienceWithOptional_AllParameters_Convenience_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response<Model> response = await client.ConvenienceWithOptionalValueAsync();
         }
@@ -537,7 +581,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ConvenienceWithRequired_ShortVersion()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = client.ConvenienceWithRequired(null);
 
@@ -549,7 +594,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ConvenienceWithRequired_ShortVersion_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = await client.ConvenienceWithRequiredAsync(null);
 
@@ -561,7 +607,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ConvenienceWithRequired_ShortVersion_Convenience()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response<Model> response = client.ConvenienceWithRequired();
         }
@@ -570,7 +617,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ConvenienceWithRequired_ShortVersion_Convenience_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response<Model> response = await client.ConvenienceWithRequiredAsync();
         }
@@ -579,7 +627,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ConvenienceWithRequired_AllParameters()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = client.ConvenienceWithRequired(null);
 
@@ -591,7 +640,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ConvenienceWithRequired_AllParameters_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = await client.ConvenienceWithRequiredAsync(null);
 
@@ -603,7 +653,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ConvenienceWithRequired_AllParameters_Convenience()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response<Model> response = client.ConvenienceWithRequired();
         }
@@ -612,7 +663,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ConvenienceWithRequired_AllParameters_Convenience_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response<Model> response = await client.ConvenienceWithRequiredAsync();
         }
@@ -621,7 +673,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ConvenienceShouldNotGenerate_ShortVersion()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = client.ConvenienceShouldNotGenerate();
 
@@ -632,7 +685,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ConvenienceShouldNotGenerate_ShortVersion_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = await client.ConvenienceShouldNotGenerateAsync();
 
@@ -643,7 +697,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ConvenienceShouldNotGenerate_AllParameters()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = client.ConvenienceShouldNotGenerate();
 
@@ -654,7 +709,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ConvenienceShouldNotGenerate_AllParameters_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = await client.ConvenienceShouldNotGenerateAsync();
 
@@ -665,7 +721,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ProtocolShouldNotGenerateConvenience_ShortVersion()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = client.ProtocolShouldNotGenerateConvenience();
 
@@ -676,7 +733,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ProtocolShouldNotGenerateConvenience_ShortVersion_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = await client.ProtocolShouldNotGenerateConvenienceAsync();
 
@@ -687,7 +745,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ProtocolShouldNotGenerateConvenience_AllParameters()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = client.ProtocolShouldNotGenerateConvenience();
 
@@ -698,7 +757,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ProtocolShouldNotGenerateConvenience_AllParameters_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = await client.ProtocolShouldNotGenerateConvenienceAsync();
 
@@ -709,7 +769,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ProtocolOptionalQuery_ShortVersion()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = client.ProtocolOptionalQuery();
 
@@ -721,7 +782,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ProtocolOptionalQuery_ShortVersion_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = await client.ProtocolOptionalQueryAsync();
 
@@ -733,7 +795,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ProtocolOptionalQuery_ShortVersion_Convenience()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response<Model> response = client.ProtocolOptionalQueryValue();
         }
@@ -742,7 +805,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ProtocolOptionalQuery_ShortVersion_Convenience_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response<Model> response = await client.ProtocolOptionalQueryValueAsync();
         }
@@ -751,7 +815,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ProtocolOptionalQuery_AllParameters()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = client.ProtocolOptionalQuery(optional: 1234);
 
@@ -763,7 +828,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ProtocolOptionalQuery_AllParameters_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = await client.ProtocolOptionalQueryAsync(optional: 1234);
 
@@ -775,7 +841,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ProtocolOptionalQuery_AllParameters_Convenience()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response<Model> response = client.ProtocolOptionalQueryValue(optional: 1234);
         }
@@ -784,7 +851,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ProtocolOptionalQuery_AllParameters_Convenience_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response<Model> response = await client.ProtocolOptionalQueryValueAsync(optional: 1234);
         }
@@ -793,7 +861,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ProtocolRequiredQuery_ShortVersion()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = client.ProtocolRequiredQuery(1234);
 
@@ -805,7 +874,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ProtocolRequiredQuery_ShortVersion_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = await client.ProtocolRequiredQueryAsync(1234);
 
@@ -817,7 +887,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ProtocolRequiredQuery_ShortVersion_Convenience()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response<Model> response = client.ProtocolRequiredQueryValue(1234);
         }
@@ -826,7 +897,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ProtocolRequiredQuery_ShortVersion_Convenience_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response<Model> response = await client.ProtocolRequiredQueryValueAsync(1234);
         }
@@ -835,7 +907,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ProtocolRequiredQuery_AllParameters()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = client.ProtocolRequiredQuery(1234);
 
@@ -847,7 +920,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ProtocolRequiredQuery_AllParameters_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = await client.ProtocolRequiredQueryAsync(1234);
 
@@ -859,7 +933,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ProtocolRequiredQuery_AllParameters_Convenience()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response<Model> response = client.ProtocolRequiredQueryValue(1234);
         }
@@ -868,7 +943,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ProtocolRequiredQuery_AllParameters_Convenience_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response<Model> response = await client.ProtocolRequiredQueryValueAsync(1234);
         }
@@ -877,7 +953,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ProtocolOptionalModel_ShortVersion()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             using RequestContent content = null;
             Response response = client.ProtocolOptionalModel(content);
@@ -889,7 +966,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ProtocolOptionalModel_ShortVersion_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             using RequestContent content = null;
             Response response = await client.ProtocolOptionalModelAsync(content);
@@ -901,7 +979,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ProtocolOptionalModel_ShortVersion_Convenience()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = client.ProtocolOptionalModel();
         }
@@ -910,7 +989,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ProtocolOptionalModel_ShortVersion_Convenience_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = await client.ProtocolOptionalModelAsync();
         }
@@ -919,7 +999,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ProtocolOptionalModel_AllParameters()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -934,7 +1015,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ProtocolOptionalModel_AllParameters_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -949,7 +1031,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ProtocolOptionalModel_AllParameters_Convenience()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Model optional = new Model("<id>");
             Response response = client.ProtocolOptionalModel(optional: optional);
@@ -959,7 +1042,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ProtocolOptionalModel_AllParameters_Convenience_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Model optional = new Model("<id>");
             Response response = await client.ProtocolOptionalModelAsync(optional: optional);
@@ -969,7 +1053,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ProtocolRequiredModel_ShortVersion()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -984,7 +1069,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ProtocolRequiredModel_ShortVersion_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -999,7 +1085,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ProtocolRequiredModel_ShortVersion_Convenience()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Model required = new Model("<id>");
             Response response = client.ProtocolRequiredModel(required);
@@ -1009,7 +1096,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ProtocolRequiredModel_ShortVersion_Convenience_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Model required = new Model("<id>");
             Response response = await client.ProtocolRequiredModelAsync(required);
@@ -1019,7 +1107,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ProtocolRequiredModel_AllParameters()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1034,7 +1123,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ProtocolRequiredModel_AllParameters_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1049,7 +1139,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ProtocolRequiredModel_AllParameters_Convenience()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Model required = new Model("<id>");
             Response response = client.ProtocolRequiredModel(required);
@@ -1059,7 +1150,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ProtocolRequiredModel_AllParameters_Convenience_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Model required = new Model("<id>");
             Response response = await client.ProtocolRequiredModelAsync(required);
@@ -1069,7 +1161,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ConvenienceOptionalQueryWithOptional_ShortVersion()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = client.ConvenienceOptionalQueryWithOptional();
 
@@ -1081,7 +1174,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ConvenienceOptionalQueryWithOptional_ShortVersion_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = await client.ConvenienceOptionalQueryWithOptionalAsync();
 
@@ -1093,7 +1187,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ConvenienceOptionalQueryWithOptional_ShortVersion_Convenience()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response<Model> response = client.ConvenienceOptionalQueryWithOptionalValue();
         }
@@ -1102,7 +1197,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ConvenienceOptionalQueryWithOptional_ShortVersion_Convenience_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response<Model> response = await client.ConvenienceOptionalQueryWithOptionalValueAsync();
         }
@@ -1111,7 +1207,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ConvenienceOptionalQueryWithOptional_AllParameters()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = client.ConvenienceOptionalQueryWithOptional(optional: 1234);
 
@@ -1123,7 +1220,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ConvenienceOptionalQueryWithOptional_AllParameters_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = await client.ConvenienceOptionalQueryWithOptionalAsync(optional: 1234);
 
@@ -1135,7 +1233,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ConvenienceOptionalQueryWithOptional_AllParameters_Convenience()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response<Model> response = client.ConvenienceOptionalQueryWithOptionalValue(optional: 1234);
         }
@@ -1144,7 +1243,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ConvenienceOptionalQueryWithOptional_AllParameters_Convenience_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response<Model> response = await client.ConvenienceOptionalQueryWithOptionalValueAsync(optional: 1234);
         }
@@ -1153,7 +1253,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ConvenienceRequiredQueryWithOptional_ShortVersion()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = client.ConvenienceRequiredQueryWithOptional(1234);
 
@@ -1165,7 +1266,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ConvenienceRequiredQueryWithOptional_ShortVersion_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = await client.ConvenienceRequiredQueryWithOptionalAsync(1234);
 
@@ -1177,7 +1279,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ConvenienceRequiredQueryWithOptional_ShortVersion_Convenience()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response<Model> response = client.ConvenienceRequiredQueryWithOptionalValue(1234);
         }
@@ -1186,7 +1289,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ConvenienceRequiredQueryWithOptional_ShortVersion_Convenience_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response<Model> response = await client.ConvenienceRequiredQueryWithOptionalValueAsync(1234);
         }
@@ -1195,7 +1299,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ConvenienceRequiredQueryWithOptional_AllParameters()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = client.ConvenienceRequiredQueryWithOptional(1234);
 
@@ -1207,7 +1312,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ConvenienceRequiredQueryWithOptional_AllParameters_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = await client.ConvenienceRequiredQueryWithOptionalAsync(1234);
 
@@ -1219,7 +1325,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ConvenienceRequiredQueryWithOptional_AllParameters_Convenience()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response<Model> response = client.ConvenienceRequiredQueryWithOptionalValue(1234);
         }
@@ -1228,7 +1335,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ConvenienceRequiredQueryWithOptional_AllParameters_Convenience_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response<Model> response = await client.ConvenienceRequiredQueryWithOptionalValueAsync(1234);
         }
@@ -1237,7 +1345,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ConvenienceOptionalQueryWithRequired_ShortVersion()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = client.ConvenienceOptionalQueryWithRequired(null, null);
 
@@ -1249,7 +1358,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ConvenienceOptionalQueryWithRequired_ShortVersion_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = await client.ConvenienceOptionalQueryWithRequiredAsync(null, null);
 
@@ -1261,7 +1371,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ConvenienceOptionalQueryWithRequired_ShortVersion_Convenience()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response<Model> response = client.ConvenienceOptionalQueryWithRequired();
         }
@@ -1270,7 +1381,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ConvenienceOptionalQueryWithRequired_ShortVersion_Convenience_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response<Model> response = await client.ConvenienceOptionalQueryWithRequiredAsync();
         }
@@ -1279,7 +1391,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ConvenienceOptionalQueryWithRequired_AllParameters()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = client.ConvenienceOptionalQueryWithRequired(1234, null);
 
@@ -1291,7 +1404,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ConvenienceOptionalQueryWithRequired_AllParameters_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = await client.ConvenienceOptionalQueryWithRequiredAsync(1234, null);
 
@@ -1303,7 +1417,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ConvenienceOptionalQueryWithRequired_AllParameters_Convenience()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response<Model> response = client.ConvenienceOptionalQueryWithRequired(optional: 1234);
         }
@@ -1312,7 +1427,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ConvenienceOptionalQueryWithRequired_AllParameters_Convenience_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response<Model> response = await client.ConvenienceOptionalQueryWithRequiredAsync(optional: 1234);
         }
@@ -1321,7 +1437,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ConvenienceRequiredQueryWithRequired_ShortVersion()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = client.ConvenienceRequiredQueryWithRequired(1234, null);
 
@@ -1333,7 +1450,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ConvenienceRequiredQueryWithRequired_ShortVersion_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = await client.ConvenienceRequiredQueryWithRequiredAsync(1234, null);
 
@@ -1345,7 +1463,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ConvenienceRequiredQueryWithRequired_ShortVersion_Convenience()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response<Model> response = client.ConvenienceRequiredQueryWithRequired(1234);
         }
@@ -1354,7 +1473,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ConvenienceRequiredQueryWithRequired_ShortVersion_Convenience_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response<Model> response = await client.ConvenienceRequiredQueryWithRequiredAsync(1234);
         }
@@ -1363,7 +1483,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ConvenienceRequiredQueryWithRequired_AllParameters()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = client.ConvenienceRequiredQueryWithRequired(1234, null);
 
@@ -1375,7 +1496,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ConvenienceRequiredQueryWithRequired_AllParameters_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = await client.ConvenienceRequiredQueryWithRequiredAsync(1234, null);
 
@@ -1387,7 +1509,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ConvenienceRequiredQueryWithRequired_AllParameters_Convenience()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response<Model> response = client.ConvenienceRequiredQueryWithRequired(1234);
         }
@@ -1396,7 +1519,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ConvenienceRequiredQueryWithRequired_AllParameters_Convenience_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response<Model> response = await client.ConvenienceRequiredQueryWithRequiredAsync(1234);
         }
@@ -1405,7 +1529,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ConvenienceOptionalModelWithOptional_ShortVersion()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             using RequestContent content = null;
             Response response = client.ConvenienceOptionalModelWithOptional(content);
@@ -1417,7 +1542,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ConvenienceOptionalModelWithOptional_ShortVersion_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             using RequestContent content = null;
             Response response = await client.ConvenienceOptionalModelWithOptionalAsync(content);
@@ -1429,7 +1555,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ConvenienceOptionalModelWithOptional_ShortVersion_Convenience()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = client.ConvenienceOptionalModelWithOptional();
         }
@@ -1438,7 +1565,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ConvenienceOptionalModelWithOptional_ShortVersion_Convenience_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = await client.ConvenienceOptionalModelWithOptionalAsync();
         }
@@ -1447,7 +1575,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ConvenienceOptionalModelWithOptional_AllParameters()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1462,7 +1591,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ConvenienceOptionalModelWithOptional_AllParameters_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1477,7 +1607,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ConvenienceOptionalModelWithOptional_AllParameters_Convenience()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Model optional = new Model("<id>");
             Response response = client.ConvenienceOptionalModelWithOptional(optional: optional);
@@ -1487,7 +1618,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ConvenienceOptionalModelWithOptional_AllParameters_Convenience_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Model optional = new Model("<id>");
             Response response = await client.ConvenienceOptionalModelWithOptionalAsync(optional: optional);
@@ -1497,7 +1629,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ConvenienceRequiredModelWithOptional_ShortVersion()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1512,7 +1645,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ConvenienceRequiredModelWithOptional_ShortVersion_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1527,7 +1661,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ConvenienceRequiredModelWithOptional_ShortVersion_Convenience()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Model required = new Model("<id>");
             Response response = client.ConvenienceRequiredModelWithOptional(required);
@@ -1537,7 +1672,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ConvenienceRequiredModelWithOptional_ShortVersion_Convenience_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Model required = new Model("<id>");
             Response response = await client.ConvenienceRequiredModelWithOptionalAsync(required);
@@ -1547,7 +1683,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ConvenienceRequiredModelWithOptional_AllParameters()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1562,7 +1699,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ConvenienceRequiredModelWithOptional_AllParameters_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1577,7 +1715,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ConvenienceRequiredModelWithOptional_AllParameters_Convenience()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Model required = new Model("<id>");
             Response response = client.ConvenienceRequiredModelWithOptional(required);
@@ -1587,7 +1726,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ConvenienceRequiredModelWithOptional_AllParameters_Convenience_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Model required = new Model("<id>");
             Response response = await client.ConvenienceRequiredModelWithOptionalAsync(required);
@@ -1597,7 +1737,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ConvenienceOptionalModelWithRequired_ShortVersion()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             using RequestContent content = null;
             Response response = client.ConvenienceOptionalModelWithRequired(content);
@@ -1609,7 +1750,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ConvenienceOptionalModelWithRequired_ShortVersion_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             using RequestContent content = null;
             Response response = await client.ConvenienceOptionalModelWithRequiredAsync(content);
@@ -1621,7 +1763,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ConvenienceOptionalModelWithRequired_ShortVersion_Convenience()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = client.ConvenienceOptionalModelWithRequired();
         }
@@ -1630,7 +1773,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ConvenienceOptionalModelWithRequired_ShortVersion_Convenience_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Response response = await client.ConvenienceOptionalModelWithRequiredAsync();
         }
@@ -1639,7 +1783,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ConvenienceOptionalModelWithRequired_AllParameters()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1654,7 +1799,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ConvenienceOptionalModelWithRequired_AllParameters_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1669,7 +1815,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ConvenienceOptionalModelWithRequired_AllParameters_Convenience()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Model optional = new Model("<id>");
             Response response = client.ConvenienceOptionalModelWithRequired(optional: optional);
@@ -1679,7 +1826,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ConvenienceOptionalModelWithRequired_AllParameters_Convenience_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Model optional = new Model("<id>");
             Response response = await client.ConvenienceOptionalModelWithRequiredAsync(optional: optional);
@@ -1689,7 +1837,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ProtocolOptionalBeforeRequired_ShortVersion()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1704,7 +1853,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ProtocolOptionalBeforeRequired_ShortVersion_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1719,7 +1869,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ProtocolOptionalBeforeRequired_ShortVersion_Convenience()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Model required = new Model("<id>");
             Response response = client.ProtocolOptionalBeforeRequired(required);
@@ -1729,7 +1880,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ProtocolOptionalBeforeRequired_ShortVersion_Convenience_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Model required = new Model("<id>");
             Response response = await client.ProtocolOptionalBeforeRequiredAsync(required);
@@ -1739,7 +1891,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ProtocolOptionalBeforeRequired_AllParameters()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1754,7 +1907,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ProtocolOptionalBeforeRequired_AllParameters_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1769,7 +1923,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ConvenienceInCadl_ProtocolOptionalBeforeRequired_AllParameters_Convenience()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Model required = new Model("<id>");
             Response response = client.ProtocolOptionalBeforeRequired(required, optional: 1234);
@@ -1779,7 +1934,8 @@ namespace ConvenienceInCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ConvenienceInCadl_ProtocolOptionalBeforeRequired_AllParameters_Convenience_Async()
         {
-            ConvenienceInCadlClient client = new ConvenienceInCadlClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
             Model required = new Model("<id>");
             Response response = await client.ProtocolOptionalBeforeRequiredAsync(required, optional: 1234);
