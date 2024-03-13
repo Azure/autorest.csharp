@@ -120,7 +120,7 @@
       "$id": "16",
       "Kind": "Primitive",
       "Name": "DateTimeRFC3339",
-      "IsNullable": false
+      "IsNullable": true
      },
      "IsRequired": true,
      "IsReadOnly": false,

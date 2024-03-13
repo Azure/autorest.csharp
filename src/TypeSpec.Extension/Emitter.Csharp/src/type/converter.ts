@@ -227,7 +227,7 @@ export function fromSdkEnumType(
 }
 
 function fromSdkDatetimeType(
-    datetimeType: SdkDatetimeType
+    dateTimeType: SdkDatetimeType
 ): InputPrimitiveType {
     function fromDateTimeKnownEncoding(
         encoding: DateTimeKnownEncoding
@@ -243,8 +243,8 @@ function fromSdkDatetimeType(
     }
     return {
         Kind: InputTypeKind.Primitive,
-        Name: fromDateTimeKnownEncoding(datetimeType.encode),
-        IsNullable: false
+        Name: fromDateTimeKnownEncoding(dateTimeType.encode),
+        IsNullable: dateTimeType.nullable
     } as InputPrimitiveType;
 }
 
@@ -273,7 +273,7 @@ function fromSdkDurationType(
     return {
         Kind: InputTypeKind.Primitive,
         Name: fromDurationKnownEncoding(durationType.encode, durationType.wireType),
-        IsNullable: false
+        IsNullable: durationType.nullable
     } as InputPrimitiveType;
 }
 
