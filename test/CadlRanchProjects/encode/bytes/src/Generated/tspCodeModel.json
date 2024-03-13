@@ -25,7 +25,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -49,7 +50,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -69,11 +71,12 @@
      "Type": {
       "$id": "10",
       "Kind": "Primitive",
-      "Name": "BytesBase64Url",
+      "Name": "Bytes",
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -97,13 +100,14 @@
       "ElementType": {
        "$id": "14",
        "Kind": "Primitive",
-       "Name": "BytesBase64Url",
+       "Name": "Bytes",
        "IsNullable": false
       },
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   }

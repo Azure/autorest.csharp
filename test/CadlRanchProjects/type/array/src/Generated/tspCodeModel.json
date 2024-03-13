@@ -26,7 +26,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "5",
@@ -43,7 +44,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   }

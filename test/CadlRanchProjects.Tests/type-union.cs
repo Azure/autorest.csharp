@@ -20,13 +20,13 @@ namespace CadlRanchProjects.Tests
         {
             var response = await new UnionClient(host, null).GetStringsOnlyClient().GetStringsOnlyAsync();
             Assert.AreEqual(200, response.GetRawResponse().Status);
-            Assert.AreEqual(GetResponseProp.B, response.Value.Prop);
+            Assert.AreEqual(GetResponseProp5.B, response.Value.Prop);
         });
 
         [Test]
         public Task SendStringsOnly() => Test(async (host) =>
         {
-            var response = await new UnionClient(host, null).GetStringsOnlyClient().SendAsync(SendRequestProp.B);
+            var response = await new UnionClient(host, null).GetStringsOnlyClient().SendAsync(GetResponseProp5.B);
             Assert.AreEqual(204, response.Status);
         });
 
@@ -35,13 +35,13 @@ namespace CadlRanchProjects.Tests
         {
             var response = await new UnionClient(host, null).GetStringExtensibleClient().GetStringExtensibleAsync();
             Assert.AreEqual(200, response.GetRawResponse().Status);
-            Assert.AreEqual(new GetResponseProp1("custom"), response.Value.Prop);
+            Assert.AreEqual(new GetResponseProp4("custom"), response.Value.Prop);
         });
 
         [Test]
         public Task SendStringExtensibleOnly() => Test(async (host) =>
         {
-            var response = await new UnionClient(host, null).GetStringExtensibleClient().SendAsync(new GetResponseProp1("custom"));
+            var response = await new UnionClient(host, null).GetStringExtensibleClient().SendAsync(new GetResponseProp4("custom"));
             Assert.AreEqual(204, response.Status);
         });
 
@@ -65,7 +65,7 @@ namespace CadlRanchProjects.Tests
         {
             var response = await new UnionClient(host, null).GetIntsOnlyClient().GetIntsOnlyAsync();
             Assert.AreEqual(200, response.GetRawResponse().Status);
-            AssertEqual(BinaryData.FromObjectAsJson(2), response.Value.Prop);
+            Assert.AreEqual(GetResponseProp3._2, response.Value.Prop);
         });
 
         [Test]
@@ -80,7 +80,7 @@ namespace CadlRanchProjects.Tests
         {
             var response = await new UnionClient(host, null).GetFloatsOnlyClient().GetFloatsOnlyAsync();
             Assert.AreEqual(200, response.GetRawResponse().Status);
-            AssertEqual(BinaryData.FromObjectAsJson(2.2), response.Value.Prop);
+            Assert.AreEqual(GetResponseProp2._22, response.Value.Prop);
         });
 
         [Test]
@@ -111,15 +111,14 @@ namespace CadlRanchProjects.Tests
         {
             var response = await new UnionClient(host, null).GetEnumsOnlyClient().GetEnumsOnlyAsync();
             Assert.AreEqual(200, response.GetRawResponse().Status);
-            AssertEqual(BinaryData.FromObjectAsJson(LR.Right.ToString()), response.Value.Prop.Lr);
-            AssertEqual(BinaryData.FromObjectAsJson(UD.Up.ToString()), response.Value.Prop.Ud);
+            Assert.AreEqual(EnumsOnlyCasesLr.Right, response.Value.Prop.Lr);
+            Assert.AreEqual(EnumsOnlyCasesUd.Up, response.Value.Prop.Ud);
         });
 
         [Test]
         public Task SendEnumsOnly() => Test(async (host) =>
         {
-            var response = await new UnionClient(host, null).GetEnumsOnlyClient().SendAsync(new EnumsOnlyCases(BinaryData.FromObjectAsJson(LR.Right.ToString()),
-                BinaryData.FromObjectAsJson(UD.Up.ToString())));
+            var response = await new UnionClient(host, null).GetEnumsOnlyClient().SendAsync(new EnumsOnlyCases(EnumsOnlyCasesLr.Right, EnumsOnlyCasesUd.Up));
             Assert.AreEqual(204, response.Status);
         });
 

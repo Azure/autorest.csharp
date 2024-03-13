@@ -9,7 +9,7 @@
    "$id": "2",
    "Kind": "Enum",
    "Name": "Versions",
-   "EnumValueType": "String",
+   "EnumValueType": "string",
    "AllowedValues": [
     {
      "$id": "3",
@@ -22,7 +22,7 @@
    "Description": "Service versions",
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "None"
+   "Usage": "Input"
   }
  ],
  "Models": [],

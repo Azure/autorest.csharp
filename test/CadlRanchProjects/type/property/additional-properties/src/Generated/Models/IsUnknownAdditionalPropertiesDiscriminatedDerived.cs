@@ -27,12 +27,12 @@ namespace _Type.Property.AdditionalProperties.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="IsUnknownAdditionalPropertiesDiscriminatedDerived"/>. </summary>
-        /// <param name="name"> The name property. </param>
         /// <param name="kind"> The discriminator. </param>
-        /// <param name="additionalProperties"> Additional Properties. </param>
+        /// <param name="name"> The name property. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="index"> The index property. </param>
         /// <param name="age"> The age property. </param>
-        internal IsUnknownAdditionalPropertiesDiscriminatedDerived(string name, string kind, IDictionary<string, BinaryData> additionalProperties, int index, float? age) : base(name, kind, additionalProperties)
+        internal IsUnknownAdditionalPropertiesDiscriminatedDerived(string kind, string name, IDictionary<string, BinaryData> serializedAdditionalRawData, int index, float? age) : base(kind, name, serializedAdditionalRawData)
         {
             Index = index;
             Age = age;

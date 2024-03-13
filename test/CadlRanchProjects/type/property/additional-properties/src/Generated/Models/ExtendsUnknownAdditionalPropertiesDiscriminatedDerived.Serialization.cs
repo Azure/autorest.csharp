@@ -35,21 +35,24 @@ namespace _Type.Property.AdditionalProperties.Models
                 writer.WritePropertyName("age"u8);
                 writer.WriteNumberValue(Age.Value);
             }
-            writer.WritePropertyName("name"u8);
-            writer.WriteStringValue(Name);
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind);
-            foreach (var item in AdditionalProperties)
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(Name);
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
-                writer.WritePropertyName(item.Key);
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                using (JsonDocument document = JsonDocument.Parse(item.Value))
-                {
-                    JsonSerializer.Serialize(writer, document.RootElement);
-                }
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
+                }
             }
             writer.WriteEndObject();
         }
@@ -76,9 +79,9 @@ namespace _Type.Property.AdditionalProperties.Models
             }
             int index = default;
             float? age = default;
-            string name = default;
             string kind = default;
-            IDictionary<string, BinaryData> additionalProperties = default;
+            string name = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
@@ -96,20 +99,23 @@ namespace _Type.Property.AdditionalProperties.Models
                     age = property.Value.GetSingle();
                     continue;
                 }
-                if (property.NameEquals("name"u8))
-                {
-                    name = property.Value.GetString();
-                    continue;
-                }
                 if (property.NameEquals("kind"u8))
                 {
                     kind = property.Value.GetString();
                     continue;
                 }
-                additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                if (property.NameEquals("name"u8))
+                {
+                    name = property.Value.GetString();
+                    continue;
+                }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            additionalProperties = additionalPropertiesDictionary;
-            return new ExtendsUnknownAdditionalPropertiesDiscriminatedDerived(name, kind, additionalProperties, index, age);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new ExtendsUnknownAdditionalPropertiesDiscriminatedDerived(kind, name, serializedAdditionalRawData, index, age);
         }
 
         BinaryData IPersistableModel<ExtendsUnknownAdditionalPropertiesDiscriminatedDerived>.Write(ModelReaderWriterOptions options)

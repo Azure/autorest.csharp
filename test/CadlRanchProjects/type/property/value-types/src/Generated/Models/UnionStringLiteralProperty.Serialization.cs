@@ -29,7 +29,7 @@ namespace _Type.Property.ValueTypes.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("property"u8);
-            writer.WriteStringValue(Property.ToString());
+            writer.WriteStringValue(Property.ToSerialString());
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -75,7 +75,7 @@ namespace _Type.Property.ValueTypes.Models
             {
                 if (property0.NameEquals("property"u8))
                 {
-                    property = new UnionStringLiteralPropertyProperty(property0.Value.GetString());
+                    property = property0.Value.GetString().ToUnionStringLiteralPropertyProperty();
                     continue;
                 }
                 if (options.Format != "W")

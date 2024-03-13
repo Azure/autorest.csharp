@@ -269,7 +269,7 @@ namespace _Type.Property.Optionality.Samples
 
             UnionIntLiteralProperty body = new UnionIntLiteralProperty
             {
-                Property = BinaryData.FromObjectAsJson(1),
+                Property = UnionIntLiteralPropertyProperty._1,
             };
             Response response = client.PutAll(body);
         }
@@ -282,7 +282,7 @@ namespace _Type.Property.Optionality.Samples
 
             UnionIntLiteralProperty body = new UnionIntLiteralProperty
             {
-                Property = BinaryData.FromObjectAsJson(1),
+                Property = UnionIntLiteralPropertyProperty._1,
             };
             Response response = await client.PutAllAsync(body);
         }
@@ -369,7 +369,7 @@ namespace _Type.Property.Optionality.Samples
 
             UnionIntLiteralProperty body = new UnionIntLiteralProperty
             {
-                Property = BinaryData.FromObjectAsJson(1),
+                Property = UnionIntLiteralPropertyProperty._1,
             };
             Response response = client.PutDefault(body);
         }
@@ -382,7 +382,7 @@ namespace _Type.Property.Optionality.Samples
 
             UnionIntLiteralProperty body = new UnionIntLiteralProperty
             {
-                Property = BinaryData.FromObjectAsJson(1),
+                Property = UnionIntLiteralPropertyProperty._1,
             };
             Response response = await client.PutDefaultAsync(body);
         }

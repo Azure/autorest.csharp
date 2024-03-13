@@ -28,21 +28,24 @@ namespace _Type.Property.AdditionalProperties.Models
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("name"u8);
-            writer.WriteStringValue(Name);
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind);
-            foreach (var item in AdditionalProperties)
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(Name);
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
-                writer.WritePropertyName(item.Key);
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                using (JsonDocument document = JsonDocument.Parse(item.Value))
-                {
-                    JsonSerializer.Serialize(writer, document.RootElement);
-                }
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
+                }
             }
             writer.WriteEndObject();
         }
@@ -67,26 +70,29 @@ namespace _Type.Property.AdditionalProperties.Models
             {
                 return null;
             }
-            string name = default;
             string kind = "Unknown";
-            IDictionary<string, BinaryData> additionalProperties = default;
+            string name = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("name"u8))
-                {
-                    name = property.Value.GetString();
-                    continue;
-                }
                 if (property.NameEquals("kind"u8))
                 {
                     kind = property.Value.GetString();
                     continue;
                 }
-                additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                if (property.NameEquals("name"u8))
+                {
+                    name = property.Value.GetString();
+                    continue;
+                }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            additionalProperties = additionalPropertiesDictionary;
-            return new UnknownIsUnknownAdditionalPropertiesDiscriminated(name, kind, additionalProperties);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new UnknownIsUnknownAdditionalPropertiesDiscriminated(kind, name, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<IsUnknownAdditionalPropertiesDiscriminated>.Write(ModelReaderWriterOptions options)

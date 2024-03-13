@@ -79,7 +79,7 @@ namespace _Type.Model.Inheritance.Recursive.Models
                 return null;
             }
             sbyte level = default;
-            IReadOnlyList<Extension> extension = default;
+            IList<Extension> extension = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

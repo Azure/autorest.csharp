@@ -30,15 +30,8 @@ namespace _Type.Property.Nullable.Models
             writer.WriteStartObject();
             writer.WritePropertyName("requiredProperty"u8);
             writer.WriteStringValue(RequiredProperty);
-            if (NullableProperty != null)
-            {
-                writer.WritePropertyName("nullableProperty"u8);
-                writer.WriteStringValue(NullableProperty.Value, "O");
-            }
-            else
-            {
-                writer.WriteNull("nullableProperty");
-            }
+            writer.WritePropertyName("nullableProperty"u8);
+            writer.WriteStringValue(NullableProperty, "O");
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -78,7 +71,7 @@ namespace _Type.Property.Nullable.Models
                 return null;
             }
             string requiredProperty = default;
-            DateTimeOffset? nullableProperty = default;
+            DateTimeOffset nullableProperty = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -90,11 +83,6 @@ namespace _Type.Property.Nullable.Models
                 }
                 if (property.NameEquals("nullableProperty"u8))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        nullableProperty = null;
-                        continue;
-                    }
                     nullableProperty = property.Value.GetDateTimeOffset("O");
                     continue;
                 }

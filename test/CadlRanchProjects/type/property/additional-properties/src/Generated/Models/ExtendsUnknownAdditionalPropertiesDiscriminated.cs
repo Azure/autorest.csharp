@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 using _Type.Property.AdditionalProperties;
 
 namespace _Type.Property.AdditionalProperties.Models
@@ -19,39 +18,8 @@ namespace _Type.Property.AdditionalProperties.Models
     /// </summary>
     public abstract partial class ExtendsUnknownAdditionalPropertiesDiscriminated
     {
-        /// <summary> Initializes a new instance of <see cref="ExtendsUnknownAdditionalPropertiesDiscriminated"/>. </summary>
-        /// <param name="name"> The name property. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        protected ExtendsUnknownAdditionalPropertiesDiscriminated(string name)
-        {
-            Argument.AssertNotNull(name, nameof(name));
-
-            Name = name;
-            AdditionalProperties = new ChangeTrackingDictionary<string, BinaryData>();
-        }
-
-        /// <summary> Initializes a new instance of <see cref="ExtendsUnknownAdditionalPropertiesDiscriminated"/>. </summary>
-        /// <param name="name"> The name property. </param>
-        /// <param name="kind"> The discriminator. </param>
-        /// <param name="additionalProperties"> Additional Properties. </param>
-        internal ExtendsUnknownAdditionalPropertiesDiscriminated(string name, string kind, IDictionary<string, BinaryData> additionalProperties)
-        {
-            Name = name;
-            Kind = kind;
-            AdditionalProperties = additionalProperties;
-        }
-
-        /// <summary> Initializes a new instance of <see cref="ExtendsUnknownAdditionalPropertiesDiscriminated"/> for deserialization. </summary>
-        internal ExtendsUnknownAdditionalPropertiesDiscriminated()
-        {
-        }
-
-        /// <summary> The name property. </summary>
-        public string Name { get; set; }
-        /// <summary> The discriminator. </summary>
-        internal string Kind { get; set; }
         /// <summary>
-        /// Additional Properties
+        /// Keeps track of any properties unknown to the library.
         /// <para>
         /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
@@ -80,6 +48,37 @@ namespace _Type.Property.AdditionalProperties.Models
         /// </list>
         /// </para>
         /// </summary>
-        public IDictionary<string, BinaryData> AdditionalProperties { get; }
+        private protected IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="ExtendsUnknownAdditionalPropertiesDiscriminated"/>. </summary>
+        /// <param name="name"> The name property. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        protected ExtendsUnknownAdditionalPropertiesDiscriminated(string name)
+        {
+            Argument.AssertNotNull(name, nameof(name));
+
+            Name = name;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ExtendsUnknownAdditionalPropertiesDiscriminated"/>. </summary>
+        /// <param name="kind"> The discriminator. </param>
+        /// <param name="name"> The name property. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ExtendsUnknownAdditionalPropertiesDiscriminated(string kind, string name, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            Kind = kind;
+            Name = name;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ExtendsUnknownAdditionalPropertiesDiscriminated"/> for deserialization. </summary>
+        internal ExtendsUnknownAdditionalPropertiesDiscriminated()
+        {
+        }
+
+        /// <summary> The discriminator. </summary>
+        internal string Kind { get; set; }
+        /// <summary> The name property. </summary>
+        public string Name { get; set; }
     }
 }

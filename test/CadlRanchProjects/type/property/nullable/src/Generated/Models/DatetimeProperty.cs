@@ -50,7 +50,7 @@ namespace _Type.Property.Nullable.Models
         /// <param name="requiredProperty"> Required property. </param>
         /// <param name="nullableProperty"> Property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredProperty"/> is null. </exception>
-        internal DatetimeProperty(string requiredProperty, DateTimeOffset? nullableProperty)
+        public DatetimeProperty(string requiredProperty, DateTimeOffset nullableProperty)
         {
             Argument.AssertNotNull(requiredProperty, nameof(requiredProperty));
 
@@ -62,7 +62,7 @@ namespace _Type.Property.Nullable.Models
         /// <param name="requiredProperty"> Required property. </param>
         /// <param name="nullableProperty"> Property. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal DatetimeProperty(string requiredProperty, DateTimeOffset? nullableProperty, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal DatetimeProperty(string requiredProperty, DateTimeOffset nullableProperty, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             RequiredProperty = requiredProperty;
             NullableProperty = nullableProperty;
@@ -75,8 +75,8 @@ namespace _Type.Property.Nullable.Models
         }
 
         /// <summary> Required property. </summary>
-        public string RequiredProperty { get; }
+        public string RequiredProperty { get; set; }
         /// <summary> Property. </summary>
-        public DateTimeOffset? NullableProperty { get; }
+        public DateTimeOffset NullableProperty { get; set; }
     }
 }

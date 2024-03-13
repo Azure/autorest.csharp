@@ -8,7 +8,7 @@
   {
    "$id": "2",
    "Kind": "Model",
-   "Name": "PagedUser",
+   "Name": "PagedUserUser",
    "Namespace": "Azure.Core",
    "Description": "Paged collection of User items",
    "IsNullable": false,
@@ -44,14 +44,16 @@
           "IsNullable": false
          },
          "IsRequired": true,
-         "IsReadOnly": false
+         "IsReadOnly": false,
+         "IsDiscriminator": false
         }
        ]
       },
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "8",
@@ -65,7 +67,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "IsDiscriminator": false
     }
    ]
   },

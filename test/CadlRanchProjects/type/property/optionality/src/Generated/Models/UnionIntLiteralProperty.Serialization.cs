@@ -31,14 +31,7 @@ namespace _Type.Property.Optionality.Models
             if (Optional.IsDefined(Property))
             {
                 writer.WritePropertyName("property"u8);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(Property);
-#else
-                using (JsonDocument document = JsonDocument.Parse(Property))
-                {
-                    JsonSerializer.Serialize(writer, document.RootElement);
-                }
-#endif
+                writer.WriteNumberValue((int)Property.Value);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -78,7 +71,7 @@ namespace _Type.Property.Optionality.Models
             {
                 return null;
             }
-            BinaryData property = default;
+            UnionIntLiteralPropertyProperty? property = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property0 in element.EnumerateObject())
@@ -89,7 +82,7 @@ namespace _Type.Property.Optionality.Models
                     {
                         continue;
                     }
-                    property = BinaryData.FromString(property0.Value.GetRawText());
+                    property = property0.Value.GetInt32().ToUnionIntLiteralPropertyProperty();
                     continue;
                 }
                 if (options.Format != "W")

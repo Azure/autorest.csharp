@@ -27,7 +27,7 @@ namespace Encode.Datetime.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                value = "2022-05-10T14:57:31.2311892-04:00",
+                value = "2022-05-10T18:57:31.2311892Z",
             });
             Response response = client.Default(content);
 
@@ -43,7 +43,7 @@ namespace Encode.Datetime.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                value = "2022-05-10T14:57:31.2311892-04:00",
+                value = "2022-05-10T18:57:31.2311892Z",
             });
             Response response = await client.DefaultAsync(content);
 
@@ -57,7 +57,7 @@ namespace Encode.Datetime.Samples
         {
             Property client = new DatetimeClient().GetPropertyClient();
 
-            DefaultDatetimeProperty body = new DefaultDatetimeProperty(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+            DefaultDatetimeProperty body = new DefaultDatetimeProperty(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
             Response<DefaultDatetimeProperty> response = client.Default(body);
         }
 
@@ -67,7 +67,7 @@ namespace Encode.Datetime.Samples
         {
             Property client = new DatetimeClient().GetPropertyClient();
 
-            DefaultDatetimeProperty body = new DefaultDatetimeProperty(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+            DefaultDatetimeProperty body = new DefaultDatetimeProperty(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
             Response<DefaultDatetimeProperty> response = await client.DefaultAsync(body);
         }
 
@@ -79,7 +79,7 @@ namespace Encode.Datetime.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                value = "2022-05-10T14:57:31.2311892-04:00",
+                value = "2022-05-10T18:57:31.2311892Z",
             });
             Response response = client.Default(content);
 
@@ -95,7 +95,7 @@ namespace Encode.Datetime.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                value = "2022-05-10T14:57:31.2311892-04:00",
+                value = "2022-05-10T18:57:31.2311892Z",
             });
             Response response = await client.DefaultAsync(content);
 
@@ -109,7 +109,7 @@ namespace Encode.Datetime.Samples
         {
             Property client = new DatetimeClient().GetPropertyClient();
 
-            DefaultDatetimeProperty body = new DefaultDatetimeProperty(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+            DefaultDatetimeProperty body = new DefaultDatetimeProperty(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
             Response<DefaultDatetimeProperty> response = client.Default(body);
         }
 
@@ -119,7 +119,7 @@ namespace Encode.Datetime.Samples
         {
             Property client = new DatetimeClient().GetPropertyClient();
 
-            DefaultDatetimeProperty body = new DefaultDatetimeProperty(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+            DefaultDatetimeProperty body = new DefaultDatetimeProperty(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
             Response<DefaultDatetimeProperty> response = await client.DefaultAsync(body);
         }
 

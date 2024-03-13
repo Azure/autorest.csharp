@@ -20,7 +20,7 @@ namespace Azure.Storage.Tables
     {
         private readonly HttpPipeline _pipeline;
         private readonly string _url;
-        private readonly Enum0 _version;
+        private readonly string _version;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -29,14 +29,14 @@ namespace Azure.Storage.Tables
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="url"> The URL of the service account or table that is the targe of the desired operation. </param>
-        /// <param name="version"> Specifies the version of the operation to use for this request. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/> or <paramref name="url"/> is null. </exception>
-        public ServiceRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string url, Enum0 version)
+        /// <param name="version"> Specifies the version of the operation to use for this request. Allowed values: "2018-10-10". </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/>, <paramref name="url"/> or <paramref name="version"/> is null. </exception>
+        public ServiceRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string url, string version)
         {
             ClientDiagnostics = clientDiagnostics ?? throw new ArgumentNullException(nameof(clientDiagnostics));
             _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
             _url = url ?? throw new ArgumentNullException(nameof(url));
-            _version = version;
+            _version = version ?? throw new ArgumentNullException(nameof(version));
         }
 
         internal HttpMessage CreateSetPropertiesRequest(Enum4 restype, Enum5 comp, StorageServiceProperties storageServiceProperties, int? timeout)
@@ -54,7 +54,7 @@ namespace Azure.Storage.Tables
                 uri.AppendQuery("timeout", timeout.Value, true);
             }
             request.Uri = uri;
-            request.Headers.Add("x-ms-version", _version.ToString());
+            request.Headers.Add("x-ms-version", _version);
             request.Headers.Add("Accept", "application/xml");
             request.Headers.Add("Content-Type", "application/xml");
             var content = new XmlWriterContent();
@@ -130,7 +130,7 @@ namespace Azure.Storage.Tables
                 uri.AppendQuery("timeout", timeout.Value, true);
             }
             request.Uri = uri;
-            request.Headers.Add("x-ms-version", _version.ToString());
+            request.Headers.Add("x-ms-version", _version);
             request.Headers.Add("Accept", "application/xml");
             return message;
         }
@@ -204,7 +204,7 @@ namespace Azure.Storage.Tables
                 uri.AppendQuery("timeout", timeout.Value, true);
             }
             request.Uri = uri;
-            request.Headers.Add("x-ms-version", _version.ToString());
+            request.Headers.Add("x-ms-version", _version);
             request.Headers.Add("Accept", "application/xml");
             return message;
         }

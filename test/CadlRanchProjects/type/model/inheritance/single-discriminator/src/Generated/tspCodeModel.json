@@ -19,7 +19,7 @@
      "$id": "3",
      "Name": "kind",
      "SerializedName": "kind",
-     "Description": "",
+     "Description": "Discriminator",
      "Type": {
       "$id": "4",
       "Kind": "Primitive",
@@ -42,7 +42,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -61,14 +62,14 @@
      "Name": "kind",
      "SerializedName": "kind",
      "Description": "Discriminator",
-     "IsRequired": true,
-     "IsReadOnly": false,
      "Type": {
       "$id": "9",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
      },
+     "IsRequired": true,
+     "IsReadOnly": false,
      "IsDiscriminator": true
     },
     {
@@ -83,7 +84,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -157,7 +159,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "18",
@@ -180,7 +183,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "21",
@@ -191,7 +195,8 @@
       "$ref": "2"
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },

@@ -18,7 +18,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Models
         /// <param name="name"></param>
         /// <param name="age"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        internal Cat(string name, int age) : base(name)
+        public Cat(string name, int age) : base(name)
         {
             Argument.AssertNotNull(name, nameof(name));
 
@@ -39,7 +39,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Models
         {
         }
 
-        /// <summary> Gets the age. </summary>
-        public int Age { get; }
+        /// <summary> Gets or sets the age. </summary>
+        public int Age { get; set; }
     }
 }

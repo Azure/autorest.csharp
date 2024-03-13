@@ -8,58 +8,60 @@
   {
    "$id": "2",
    "Kind": "Model",
-   "Name": "Element",
+   "Name": "Extension",
    "Namespace": "Type.Model.Inheritance.Recursive",
-   "Description": "element",
+   "Description": "extension",
    "IsNullable": false,
-   "Usage": "None",
-   "Properties": [
-    {
-     "$id": "3",
-     "Name": "extension",
-     "SerializedName": "extension",
-     "Description": "",
-     "Type": {
+   "Usage": "RoundTrip",
+   "BaseModel": {
+    "$id": "3",
+    "Kind": "Model",
+    "Name": "Element",
+    "Namespace": "Type.Model.Inheritance.Recursive",
+    "Description": "element",
+    "IsNullable": false,
+    "Usage": "RoundTrip",
+    "Properties": [
+     {
       "$id": "4",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
+      "Name": "extension",
+      "SerializedName": "extension",
+      "Description": "",
+      "Type": {
        "$id": "5",
-       "Kind": "Model",
-       "Name": "Extension",
-       "Namespace": "Type.Model.Inheritance.Recursive",
-       "Description": "extension",
-       "IsNullable": false,
-       "Usage": "RoundTrip",
-       "BaseModel": {
+       "Kind": "Array",
+       "Name": "Array",
+       "ElementType": {
         "$ref": "2"
        },
-       "Properties": [
-        {
-         "$id": "6",
-         "Name": "level",
-         "SerializedName": "level",
-         "Description": "",
-         "Type": {
-          "$id": "7",
-          "Kind": "Primitive",
-          "Name": "SByte",
-          "IsNullable": false
-         },
-         "IsRequired": true,
-         "IsReadOnly": false
-        }
-       ]
+       "IsNullable": false
       },
+      "IsRequired": false,
+      "IsReadOnly": false,
+      "IsDiscriminator": false
+     }
+    ]
+   },
+   "Properties": [
+    {
+     "$id": "6",
+     "Name": "level",
+     "SerializedName": "level",
+     "Description": "",
+     "Type": {
+      "$id": "7",
+      "Kind": "Primitive",
+      "Name": "SByte",
       "IsNullable": false
      },
-     "IsRequired": false,
-     "IsReadOnly": false
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
   {
-   "$ref": "5"
+   "$ref": "3"
   }
  ],
  "Clients": [
@@ -109,7 +111,7 @@
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "5"
+        "$ref": "2"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -241,7 +243,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "5"
+        "$ref": "2"
        },
        "BodyMediaType": "Json",
        "Headers": [],

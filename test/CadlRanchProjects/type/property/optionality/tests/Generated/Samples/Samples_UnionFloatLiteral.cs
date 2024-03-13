@@ -239,7 +239,7 @@ namespace _Type.Property.Optionality.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                property = 1.25,
+                property = 1.25F,
             });
             Response response = client.PutAll(content);
 
@@ -254,7 +254,7 @@ namespace _Type.Property.Optionality.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                property = 1.25,
+                property = 1.25F,
             });
             Response response = await client.PutAllAsync(content);
 
@@ -269,7 +269,7 @@ namespace _Type.Property.Optionality.Samples
 
             UnionFloatLiteralProperty body = new UnionFloatLiteralProperty
             {
-                Property = BinaryData.FromObjectAsJson(1.25),
+                Property = UnionFloatLiteralPropertyProperty._125,
             };
             Response response = client.PutAll(body);
         }
@@ -282,7 +282,7 @@ namespace _Type.Property.Optionality.Samples
 
             UnionFloatLiteralProperty body = new UnionFloatLiteralProperty
             {
-                Property = BinaryData.FromObjectAsJson(1.25),
+                Property = UnionFloatLiteralPropertyProperty._125,
             };
             Response response = await client.PutAllAsync(body);
         }
@@ -339,7 +339,7 @@ namespace _Type.Property.Optionality.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                property = 1.25,
+                property = 1.25F,
             });
             Response response = client.PutDefault(content);
 
@@ -354,7 +354,7 @@ namespace _Type.Property.Optionality.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                property = 1.25,
+                property = 1.25F,
             });
             Response response = await client.PutDefaultAsync(content);
 
@@ -369,7 +369,7 @@ namespace _Type.Property.Optionality.Samples
 
             UnionFloatLiteralProperty body = new UnionFloatLiteralProperty
             {
-                Property = BinaryData.FromObjectAsJson(1.25),
+                Property = UnionFloatLiteralPropertyProperty._125,
             };
             Response response = client.PutDefault(body);
         }
@@ -382,7 +382,7 @@ namespace _Type.Property.Optionality.Samples
 
             UnionFloatLiteralProperty body = new UnionFloatLiteralProperty
             {
-                Property = BinaryData.FromObjectAsJson(1.25),
+                Property = UnionFloatLiteralPropertyProperty._125,
             };
             Response response = await client.PutDefaultAsync(body);
         }

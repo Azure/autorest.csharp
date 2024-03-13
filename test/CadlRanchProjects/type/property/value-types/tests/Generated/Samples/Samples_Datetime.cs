@@ -111,7 +111,7 @@ namespace _Type.Property.ValueTypes.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                property = "2022-05-10T14:57:31.2311892-04:00",
+                property = "2022-05-10T18:57:31.2311892Z",
             });
             Response response = client.Put(content);
 
@@ -126,7 +126,7 @@ namespace _Type.Property.ValueTypes.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                property = "2022-05-10T14:57:31.2311892-04:00",
+                property = "2022-05-10T18:57:31.2311892Z",
             });
             Response response = await client.PutAsync(content);
 
@@ -139,7 +139,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             Datetime client = new ValueTypesClient().GetDatetimeClient();
 
-            DatetimeProperty body = new DatetimeProperty(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+            DatetimeProperty body = new DatetimeProperty(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
             Response response = client.Put(body);
         }
 
@@ -149,7 +149,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             Datetime client = new ValueTypesClient().GetDatetimeClient();
 
-            DatetimeProperty body = new DatetimeProperty(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+            DatetimeProperty body = new DatetimeProperty(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
             Response response = await client.PutAsync(body);
         }
 
@@ -161,7 +161,7 @@ namespace _Type.Property.ValueTypes.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                property = "2022-05-10T14:57:31.2311892-04:00",
+                property = "2022-05-10T18:57:31.2311892Z",
             });
             Response response = client.Put(content);
 
@@ -176,7 +176,7 @@ namespace _Type.Property.ValueTypes.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                property = "2022-05-10T14:57:31.2311892-04:00",
+                property = "2022-05-10T18:57:31.2311892Z",
             });
             Response response = await client.PutAsync(content);
 
@@ -189,7 +189,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             Datetime client = new ValueTypesClient().GetDatetimeClient();
 
-            DatetimeProperty body = new DatetimeProperty(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+            DatetimeProperty body = new DatetimeProperty(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
             Response response = client.Put(body);
         }
 
@@ -199,7 +199,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             Datetime client = new ValueTypesClient().GetDatetimeClient();
 
-            DatetimeProperty body = new DatetimeProperty(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+            DatetimeProperty body = new DatetimeProperty(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
             Response response = await client.PutAsync(body);
         }
     }

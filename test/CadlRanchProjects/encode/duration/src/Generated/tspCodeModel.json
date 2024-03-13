@@ -25,7 +25,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -49,7 +50,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -69,11 +71,12 @@
      "Type": {
       "$id": "10",
       "Kind": "Primitive",
-      "Name": "DurationSeconds",
+      "Name": "DurationISO8601",
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -93,11 +96,12 @@
      "Type": {
       "$id": "13",
       "Kind": "Primitive",
-      "Name": "DurationSecondsFloat",
+      "Name": "DurationISO8601",
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -121,13 +125,14 @@
       "ElementType": {
        "$id": "17",
        "Kind": "Primitive",
-       "Name": "DurationSecondsFloat",
+       "Name": "DurationISO8601",
        "IsNullable": false
       },
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   }

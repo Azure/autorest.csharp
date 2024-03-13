@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 using _Type.Property.AdditionalProperties;
 
 namespace _Type.Property.AdditionalProperties.Models
@@ -15,35 +14,8 @@ namespace _Type.Property.AdditionalProperties.Models
     /// <summary> The model is from Record&lt;unknown&gt; type. </summary>
     public partial class IsUnknownAdditionalProperties
     {
-        /// <summary> Initializes a new instance of <see cref="IsUnknownAdditionalProperties"/>. </summary>
-        /// <param name="name"> The name property. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public IsUnknownAdditionalProperties(string name)
-        {
-            Argument.AssertNotNull(name, nameof(name));
-
-            Name = name;
-            AdditionalProperties = new ChangeTrackingDictionary<string, BinaryData>();
-        }
-
-        /// <summary> Initializes a new instance of <see cref="IsUnknownAdditionalProperties"/>. </summary>
-        /// <param name="name"> The name property. </param>
-        /// <param name="additionalProperties"> Additional Properties. </param>
-        internal IsUnknownAdditionalProperties(string name, IDictionary<string, BinaryData> additionalProperties)
-        {
-            Name = name;
-            AdditionalProperties = additionalProperties;
-        }
-
-        /// <summary> Initializes a new instance of <see cref="IsUnknownAdditionalProperties"/> for deserialization. </summary>
-        internal IsUnknownAdditionalProperties()
-        {
-        }
-
-        /// <summary> The name property. </summary>
-        public string Name { get; set; }
         /// <summary>
-        /// Additional Properties
+        /// Keeps track of any properties unknown to the library.
         /// <para>
         /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
@@ -72,6 +44,33 @@ namespace _Type.Property.AdditionalProperties.Models
         /// </list>
         /// </para>
         /// </summary>
-        public IDictionary<string, BinaryData> AdditionalProperties { get; }
+        private protected IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
+        /// <summary> Initializes a new instance of <see cref="IsUnknownAdditionalProperties"/>. </summary>
+        /// <param name="name"> The name property. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public IsUnknownAdditionalProperties(string name)
+        {
+            Argument.AssertNotNull(name, nameof(name));
+
+            Name = name;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="IsUnknownAdditionalProperties"/>. </summary>
+        /// <param name="name"> The name property. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal IsUnknownAdditionalProperties(string name, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            Name = name;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="IsUnknownAdditionalProperties"/> for deserialization. </summary>
+        internal IsUnknownAdditionalProperties()
+        {
+        }
+
+        /// <summary> The name property. </summary>
+        public string Name { get; set; }
     }
 }

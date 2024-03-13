@@ -27,7 +27,7 @@
    "$id": "4",
    "Kind": "Enum",
    "Name": "SnakeKind",
-   "EnumValueType": "String",
+   "EnumValueType": "string",
    "AllowedValues": [
     {
      "$id": "5",
@@ -78,7 +78,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -116,7 +117,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },

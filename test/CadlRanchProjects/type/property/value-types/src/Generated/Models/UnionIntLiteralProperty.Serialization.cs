@@ -29,14 +29,7 @@ namespace _Type.Property.ValueTypes.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("property"u8);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(Property);
-#else
-            using (JsonDocument document = JsonDocument.Parse(Property))
-            {
-                JsonSerializer.Serialize(writer, document.RootElement);
-            }
-#endif
+            writer.WriteNumberValue((int)Property);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -75,14 +68,14 @@ namespace _Type.Property.ValueTypes.Models
             {
                 return null;
             }
-            BinaryData property = default;
+            UnionIntLiteralPropertyProperty property = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property0 in element.EnumerateObject())
             {
                 if (property0.NameEquals("property"u8))
                 {
-                    property = BinaryData.FromString(property0.Value.GetRawText());
+                    property = property0.Value.GetInt32().ToUnionIntLiteralPropertyProperty();
                     continue;
                 }
                 if (options.Format != "W")

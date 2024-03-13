@@ -239,7 +239,7 @@ namespace _Type.Property.Optionality.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                property = "2022-05-10T14:57:31.2311892-04:00",
+                property = "2022-05-10T18:57:31.2311892Z",
             });
             Response response = client.PutAll(content);
 
@@ -254,7 +254,7 @@ namespace _Type.Property.Optionality.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                property = "2022-05-10T14:57:31.2311892-04:00",
+                property = "2022-05-10T18:57:31.2311892Z",
             });
             Response response = await client.PutAllAsync(content);
 
@@ -269,7 +269,7 @@ namespace _Type.Property.Optionality.Samples
 
             DatetimeProperty body = new DatetimeProperty
             {
-                Property = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+                Property = DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"),
             };
             Response response = client.PutAll(body);
         }
@@ -282,7 +282,7 @@ namespace _Type.Property.Optionality.Samples
 
             DatetimeProperty body = new DatetimeProperty
             {
-                Property = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+                Property = DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"),
             };
             Response response = await client.PutAllAsync(body);
         }
@@ -339,7 +339,7 @@ namespace _Type.Property.Optionality.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                property = "2022-05-10T14:57:31.2311892-04:00",
+                property = "2022-05-10T18:57:31.2311892Z",
             });
             Response response = client.PutDefault(content);
 
@@ -354,7 +354,7 @@ namespace _Type.Property.Optionality.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                property = "2022-05-10T14:57:31.2311892-04:00",
+                property = "2022-05-10T18:57:31.2311892Z",
             });
             Response response = await client.PutDefaultAsync(content);
 
@@ -369,7 +369,7 @@ namespace _Type.Property.Optionality.Samples
 
             DatetimeProperty body = new DatetimeProperty
             {
-                Property = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+                Property = DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"),
             };
             Response response = client.PutDefault(body);
         }
@@ -382,7 +382,7 @@ namespace _Type.Property.Optionality.Samples
 
             DatetimeProperty body = new DatetimeProperty
             {
-                Property = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+                Property = DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"),
             };
             Response response = await client.PutDefaultAsync(body);
         }
