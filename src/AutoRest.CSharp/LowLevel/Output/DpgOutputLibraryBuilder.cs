@@ -209,7 +209,7 @@ namespace AutoRest.CSharp.Output.Models
             }
             operationsMap.Add(operation, updatedOperation);
 
-            if (!updatedOperation.Parameters.Any(p => p.Name == KnownParameters.Endpoint.Name))
+            if (!updatedOperation.Parameters.Any(p => p.IsEndpoint))
             {
                 updatedOperation = updatedOperation with
                 {
