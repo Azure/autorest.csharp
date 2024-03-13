@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="PatchAsync(PatchModel,CancellationToken)">
+      <example>
+This sample shows how to call PatchAsync.
+<code><![CDATA[
+JsonMergePatchClient client = new JsonMergePatchClient();
+
+PatchModel body = new PatchModel("<requiredValue>");
+Response<PatchModel> response = await client.PatchAsync(body);
+]]></code>
+This sample shows how to call PatchAsync with all parameters.
+<code><![CDATA[
+JsonMergePatchClient client = new JsonMergePatchClient();
+
+PatchModel body = new PatchModel("<requiredValue>")
+{
+    OptionalValue = "<optionalValue>",
+};
+Response<PatchModel> response = await client.PatchAsync(body);
+]]></code></example>
+    </member>
+    <member name="Patch(PatchModel,CancellationToken)">
+      <example>
+This sample shows how to call Patch.
+<code><![CDATA[
+JsonMergePatchClient client = new JsonMergePatchClient();
+
+PatchModel body = new PatchModel("<requiredValue>");
+Response<PatchModel> response = client.Patch(body);
+]]></code>
+This sample shows how to call Patch with all parameters.
+<code><![CDATA[
+JsonMergePatchClient client = new JsonMergePatchClient();
+
+PatchModel body = new PatchModel("<requiredValue>")
+{
+    OptionalValue = "<optionalValue>",
+};
+Response<PatchModel> response = client.Patch(body);
+]]></code></example>
+    </member>
+    <member name="PatchAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call PatchAsync and parse the result.
+<code><![CDATA[
+JsonMergePatchClient client = new JsonMergePatchClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    requiredValue = "<requiredValue>",
+});
+Response response = await client.PatchAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredValue").ToString());
+]]></code>
+This sample shows how to call PatchAsync with all request content and parse the result.
+<code><![CDATA[
+JsonMergePatchClient client = new JsonMergePatchClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    requiredValue = "<requiredValue>",
+    optionalValue = "<optionalValue>",
+});
+Response response = await client.PatchAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredValue").ToString());
+Console.WriteLine(result.GetProperty("optionalValue").ToString());
+]]></code></example>
+    </member>
+    <member name="Patch(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call Patch and parse the result.
+<code><![CDATA[
+JsonMergePatchClient client = new JsonMergePatchClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    requiredValue = "<requiredValue>",
+});
+Response response = client.Patch(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredValue").ToString());
+]]></code>
+This sample shows how to call Patch with all request content and parse the result.
+<code><![CDATA[
+JsonMergePatchClient client = new JsonMergePatchClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    requiredValue = "<requiredValue>",
+    optionalValue = "<optionalValue>",
+});
+Response response = client.Patch(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredValue").ToString());
+Console.WriteLine(result.GetProperty("optionalValue").ToString());
+]]></code></example>
+    </member>
+  </members>
+</doc>
