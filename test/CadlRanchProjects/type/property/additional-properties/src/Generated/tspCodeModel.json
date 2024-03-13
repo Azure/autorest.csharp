@@ -13,14 +13,32 @@
    "Description": "The model extends from Record<unknown> type.",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "InheritedDictionaryType": {
+    "$id": "3",
+    "Kind": "Dictionary",
+    "Name": "Dictionary",
+    "KeyType": {
+     "$id": "4",
+     "Kind": "Primitive",
+     "Name": "String",
+     "IsNullable": false
+    },
+    "ValueType": {
+     "$id": "5",
+     "Kind": "Intrinsic",
+     "Name": "unknown",
+     "IsNullable": false
+    },
+    "IsNullable": false
+   },
    "Properties": [
     {
-     "$id": "3",
+     "$id": "6",
      "Name": "name",
      "SerializedName": "name",
      "Description": "The name property",
      "Type": {
-      "$id": "4",
+      "$id": "7",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -32,7 +50,7 @@
    ]
   },
   {
-   "$id": "5",
+   "$id": "8",
    "Kind": "Model",
    "Name": "ExtendsUnknownAdditionalPropertiesDerived",
    "Namespace": "Type.Property.AdditionalProperties",
@@ -44,12 +62,12 @@
    },
    "Properties": [
     {
-     "$id": "6",
+     "$id": "9",
      "Name": "index",
      "SerializedName": "index",
      "Description": "The index property",
      "Type": {
-      "$id": "7",
+      "$id": "10",
       "Kind": "Primitive",
       "Name": "Int32",
       "IsNullable": false
@@ -59,12 +77,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "8",
+     "$id": "11",
      "Name": "age",
      "SerializedName": "age",
      "Description": "The age property",
      "Type": {
-      "$id": "9",
+      "$id": "12",
       "Kind": "Primitive",
       "Name": "Float32",
       "IsNullable": false
@@ -76,7 +94,7 @@
    ]
   },
   {
-   "$id": "10",
+   "$id": "13",
    "Kind": "Model",
    "Name": "ExtendsUnknownAdditionalPropertiesDiscriminated",
    "Namespace": "Type.Property.AdditionalProperties",
@@ -84,14 +102,32 @@
    "IsNullable": false,
    "DiscriminatorPropertyName": "kind",
    "Usage": "RoundTrip",
+   "InheritedDictionaryType": {
+    "$id": "14",
+    "Kind": "Dictionary",
+    "Name": "Dictionary",
+    "KeyType": {
+     "$id": "15",
+     "Kind": "Primitive",
+     "Name": "String",
+     "IsNullable": false
+    },
+    "ValueType": {
+     "$id": "16",
+     "Kind": "Intrinsic",
+     "Name": "unknown",
+     "IsNullable": false
+    },
+    "IsNullable": false
+   },
    "Properties": [
     {
-     "$id": "11",
+     "$id": "17",
      "Name": "kind",
      "SerializedName": "kind",
      "Description": "The discriminator",
      "Type": {
-      "$id": "12",
+      "$id": "18",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -101,12 +137,12 @@
      "IsDiscriminator": true
     },
     {
-     "$id": "13",
+     "$id": "19",
      "Name": "name",
      "SerializedName": "name",
      "Description": "The name property",
      "Type": {
-      "$id": "14",
+      "$id": "20",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -118,21 +154,39 @@
    ]
   },
   {
-   "$id": "15",
+   "$id": "21",
    "Kind": "Model",
    "Name": "IsUnknownAdditionalProperties",
    "Namespace": "Type.Property.AdditionalProperties",
    "Description": "The model is from Record<unknown> type.",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "InheritedDictionaryType": {
+    "$id": "22",
+    "Kind": "Dictionary",
+    "Name": "Dictionary",
+    "KeyType": {
+     "$id": "23",
+     "Kind": "Primitive",
+     "Name": "String",
+     "IsNullable": false
+    },
+    "ValueType": {
+     "$id": "24",
+     "Kind": "Intrinsic",
+     "Name": "unknown",
+     "IsNullable": false
+    },
+    "IsNullable": false
+   },
    "Properties": [
     {
-     "$id": "16",
+     "$id": "25",
      "Name": "name",
      "SerializedName": "name",
      "Description": "The name property",
      "Type": {
-      "$id": "17",
+      "$id": "26",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -144,7 +198,7 @@
    ]
   },
   {
-   "$id": "18",
+   "$id": "27",
    "Kind": "Model",
    "Name": "IsUnknownAdditionalPropertiesDerived",
    "Namespace": "Type.Property.AdditionalProperties",
@@ -152,16 +206,16 @@
    "IsNullable": false,
    "Usage": "RoundTrip",
    "BaseModel": {
-    "$ref": "15"
+    "$ref": "21"
    },
    "Properties": [
     {
-     "$id": "19",
+     "$id": "28",
      "Name": "index",
      "SerializedName": "index",
      "Description": "The index property",
      "Type": {
-      "$id": "20",
+      "$id": "29",
       "Kind": "Primitive",
       "Name": "Int32",
       "IsNullable": false
@@ -171,12 +225,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "21",
+     "$id": "30",
      "Name": "age",
      "SerializedName": "age",
      "Description": "The age property",
      "Type": {
-      "$id": "22",
+      "$id": "31",
       "Kind": "Primitive",
       "Name": "Float32",
       "IsNullable": false
@@ -188,7 +242,7 @@
    ]
   },
   {
-   "$id": "23",
+   "$id": "32",
    "Kind": "Model",
    "Name": "IsUnknownAdditionalPropertiesDiscriminated",
    "Namespace": "Type.Property.AdditionalProperties",
@@ -196,14 +250,32 @@
    "IsNullable": false,
    "DiscriminatorPropertyName": "kind",
    "Usage": "RoundTrip",
+   "InheritedDictionaryType": {
+    "$id": "33",
+    "Kind": "Dictionary",
+    "Name": "Dictionary",
+    "KeyType": {
+     "$id": "34",
+     "Kind": "Primitive",
+     "Name": "String",
+     "IsNullable": false
+    },
+    "ValueType": {
+     "$id": "35",
+     "Kind": "Intrinsic",
+     "Name": "unknown",
+     "IsNullable": false
+    },
+    "IsNullable": false
+   },
    "Properties": [
     {
-     "$id": "24",
+     "$id": "36",
      "Name": "kind",
      "SerializedName": "kind",
      "Description": "The discriminator",
      "Type": {
-      "$id": "25",
+      "$id": "37",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -213,118 +285,14 @@
      "IsDiscriminator": true
     },
     {
-     "$id": "26",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "The name property",
-     "Type": {
-      "$id": "27",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
-    }
-   ]
-  },
-  {
-   "$id": "28",
-   "Kind": "Model",
-   "Name": "ExtendsStringAdditionalProperties",
-   "Namespace": "Type.Property.AdditionalProperties",
-   "Description": "The model extends from Record<string> type.",
-   "IsNullable": false,
-   "Usage": "RoundTrip",
-   "Properties": [
-    {
-     "$id": "29",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "The name property",
-     "Type": {
-      "$id": "30",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
-    }
-   ]
-  },
-  {
-   "$id": "31",
-   "Kind": "Model",
-   "Name": "IsStringAdditionalProperties",
-   "Namespace": "Type.Property.AdditionalProperties",
-   "Description": "The model is from Record<string> type.",
-   "IsNullable": false,
-   "Usage": "RoundTrip",
-   "Properties": [
-    {
-     "$id": "32",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "The name property",
-     "Type": {
-      "$id": "33",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
-    }
-   ]
-  },
-  {
-   "$id": "34",
-   "Kind": "Model",
-   "Name": "ExtendsFloatAdditionalProperties",
-   "Namespace": "Type.Property.AdditionalProperties",
-   "Description": "The model extends from Record<float32> type.",
-   "IsNullable": false,
-   "Usage": "RoundTrip",
-   "Properties": [
-    {
-     "$id": "35",
-     "Name": "id",
-     "SerializedName": "id",
-     "Description": "The id property",
-     "Type": {
-      "$id": "36",
-      "Kind": "Primitive",
-      "Name": "Float32",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
-    }
-   ]
-  },
-  {
-   "$id": "37",
-   "Kind": "Model",
-   "Name": "IsFloatAdditionalProperties",
-   "Namespace": "Type.Property.AdditionalProperties",
-   "Description": "The model is from Record<float32> type.",
-   "IsNullable": false,
-   "Usage": "RoundTrip",
-   "Properties": [
-    {
      "$id": "38",
-     "Name": "id",
-     "SerializedName": "id",
-     "Description": "The id property",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "The name property",
      "Type": {
       "$id": "39",
       "Kind": "Primitive",
-      "Name": "Float32",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -336,149 +304,37 @@
   {
    "$id": "40",
    "Kind": "Model",
-   "Name": "ExtendsModelAdditionalProperties",
+   "Name": "ExtendsStringAdditionalProperties",
    "Namespace": "Type.Property.AdditionalProperties",
-   "Description": "The model extends from Record<ModelForRecord> type.",
+   "Description": "The model extends from Record<string> type.",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "Properties": []
-  },
-  {
-   "$id": "41",
-   "Kind": "Model",
-   "Name": "IsModelAdditionalProperties",
-   "Namespace": "Type.Property.AdditionalProperties",
-   "Description": "The model is from Record<ModelForRecord> type.",
-   "IsNullable": false,
-   "Usage": "RoundTrip",
-   "Properties": []
-  },
-  {
-   "$id": "42",
-   "Kind": "Model",
-   "Name": "ExtendsModelArrayAdditionalProperties",
-   "Namespace": "Type.Property.AdditionalProperties",
-   "Description": "The model extends from Record<ModelForRecord[]> type.",
-   "IsNullable": false,
-   "Usage": "RoundTrip",
-   "Properties": []
-  },
-  {
-   "$id": "43",
-   "Kind": "Model",
-   "Name": "IsModelArrayAdditionalProperties",
-   "Namespace": "Type.Property.AdditionalProperties",
-   "Description": "The model is from Record<ModelForRecord[]> type.",
-   "IsNullable": false,
-   "Usage": "RoundTrip",
-   "Properties": []
-  },
-  {
-   "$id": "44",
-   "Kind": "Model",
-   "Name": "ExtendsUnknownAdditionalPropertiesDiscriminatedDerived",
-   "Namespace": "Type.Property.AdditionalProperties",
-   "Description": "The derived discriminated type",
-   "IsNullable": false,
-   "DiscriminatorValue": "derived",
-   "Usage": "RoundTrip",
-   "BaseModel": {
-    "$ref": "10"
+   "InheritedDictionaryType": {
+    "$id": "41",
+    "Kind": "Dictionary",
+    "Name": "Dictionary",
+    "KeyType": {
+     "$id": "42",
+     "Kind": "Primitive",
+     "Name": "String",
+     "IsNullable": false
+    },
+    "ValueType": {
+     "$id": "43",
+     "Kind": "Primitive",
+     "Name": "String",
+     "IsNullable": false
+    },
+    "IsNullable": false
    },
    "Properties": [
     {
-     "$id": "45",
-     "Name": "index",
-     "SerializedName": "index",
-     "Description": "The index property",
+     "$id": "44",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "The name property",
      "Type": {
-      "$id": "46",
-      "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
-    },
-    {
-     "$id": "47",
-     "Name": "age",
-     "SerializedName": "age",
-     "Description": "The age property",
-     "Type": {
-      "$id": "48",
-      "Kind": "Primitive",
-      "Name": "Float32",
-      "IsNullable": false
-     },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
-    }
-   ]
-  },
-  {
-   "$id": "49",
-   "Kind": "Model",
-   "Name": "IsUnknownAdditionalPropertiesDiscriminatedDerived",
-   "Namespace": "Type.Property.AdditionalProperties",
-   "Description": "The derived discriminated type",
-   "IsNullable": false,
-   "DiscriminatorValue": "derived",
-   "Usage": "RoundTrip",
-   "BaseModel": {
-    "$ref": "23"
-   },
-   "Properties": [
-    {
-     "$id": "50",
-     "Name": "index",
-     "SerializedName": "index",
-     "Description": "The index property",
-     "Type": {
-      "$id": "51",
-      "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
-    },
-    {
-     "$id": "52",
-     "Name": "age",
-     "SerializedName": "age",
-     "Description": "The age property",
-     "Type": {
-      "$id": "53",
-      "Kind": "Primitive",
-      "Name": "Float32",
-      "IsNullable": false
-     },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
-    }
-   ]
-  },
-  {
-   "$id": "54",
-   "Kind": "Model",
-   "Name": "ModelForRecord",
-   "Namespace": "Type.Property.AdditionalProperties",
-   "Description": "model for record",
-   "IsNullable": false,
-   "Usage": "RoundTrip",
-   "Properties": [
-    {
-     "$id": "55",
-     "Name": "state",
-     "SerializedName": "state",
-     "Description": "The state property",
-     "Type": {
-      "$id": "56",
+      "$id": "45",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -488,37 +344,397 @@
      "IsDiscriminator": false
     }
    ]
+  },
+  {
+   "$id": "46",
+   "Kind": "Model",
+   "Name": "IsStringAdditionalProperties",
+   "Namespace": "Type.Property.AdditionalProperties",
+   "Description": "The model is from Record<string> type.",
+   "IsNullable": false,
+   "Usage": "RoundTrip",
+   "InheritedDictionaryType": {
+    "$id": "47",
+    "Kind": "Dictionary",
+    "Name": "Dictionary",
+    "KeyType": {
+     "$id": "48",
+     "Kind": "Primitive",
+     "Name": "String",
+     "IsNullable": false
+    },
+    "ValueType": {
+     "$id": "49",
+     "Kind": "Primitive",
+     "Name": "String",
+     "IsNullable": false
+    },
+    "IsNullable": false
+   },
+   "Properties": [
+    {
+     "$id": "50",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "The name property",
+     "Type": {
+      "$id": "51",
+      "Kind": "Primitive",
+      "Name": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  },
+  {
+   "$id": "52",
+   "Kind": "Model",
+   "Name": "ExtendsFloatAdditionalProperties",
+   "Namespace": "Type.Property.AdditionalProperties",
+   "Description": "The model extends from Record<float32> type.",
+   "IsNullable": false,
+   "Usage": "RoundTrip",
+   "InheritedDictionaryType": {
+    "$id": "53",
+    "Kind": "Dictionary",
+    "Name": "Dictionary",
+    "KeyType": {
+     "$id": "54",
+     "Kind": "Primitive",
+     "Name": "String",
+     "IsNullable": false
+    },
+    "ValueType": {
+     "$id": "55",
+     "Kind": "Primitive",
+     "Name": "Float32",
+     "IsNullable": false
+    },
+    "IsNullable": false
+   },
+   "Properties": [
+    {
+     "$id": "56",
+     "Name": "id",
+     "SerializedName": "id",
+     "Description": "The id property",
+     "Type": {
+      "$id": "57",
+      "Kind": "Primitive",
+      "Name": "Float32",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  },
+  {
+   "$id": "58",
+   "Kind": "Model",
+   "Name": "IsFloatAdditionalProperties",
+   "Namespace": "Type.Property.AdditionalProperties",
+   "Description": "The model is from Record<float32> type.",
+   "IsNullable": false,
+   "Usage": "RoundTrip",
+   "InheritedDictionaryType": {
+    "$id": "59",
+    "Kind": "Dictionary",
+    "Name": "Dictionary",
+    "KeyType": {
+     "$id": "60",
+     "Kind": "Primitive",
+     "Name": "String",
+     "IsNullable": false
+    },
+    "ValueType": {
+     "$id": "61",
+     "Kind": "Primitive",
+     "Name": "Float32",
+     "IsNullable": false
+    },
+    "IsNullable": false
+   },
+   "Properties": [
+    {
+     "$id": "62",
+     "Name": "id",
+     "SerializedName": "id",
+     "Description": "The id property",
+     "Type": {
+      "$id": "63",
+      "Kind": "Primitive",
+      "Name": "Float32",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  },
+  {
+   "$id": "64",
+   "Kind": "Model",
+   "Name": "ExtendsModelAdditionalProperties",
+   "Namespace": "Type.Property.AdditionalProperties",
+   "Description": "The model extends from Record<ModelForRecord> type.",
+   "IsNullable": false,
+   "Usage": "RoundTrip",
+   "InheritedDictionaryType": {
+    "$id": "65",
+    "Kind": "Dictionary",
+    "Name": "Dictionary",
+    "KeyType": {
+     "$id": "66",
+     "Kind": "Primitive",
+     "Name": "String",
+     "IsNullable": false
+    },
+    "ValueType": {
+     "$id": "67",
+     "Kind": "Model",
+     "Name": "ModelForRecord",
+     "Namespace": "Type.Property.AdditionalProperties",
+     "Description": "model for record",
+     "IsNullable": false,
+     "Usage": "RoundTrip",
+     "Properties": [
+      {
+       "$id": "68",
+       "Name": "state",
+       "SerializedName": "state",
+       "Description": "The state property",
+       "Type": {
+        "$id": "69",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "IsRequired": true,
+       "IsReadOnly": false,
+       "IsDiscriminator": false
+      }
+     ]
+    },
+    "IsNullable": false
+   },
+   "Properties": []
+  },
+  {
+   "$ref": "67"
+  },
+  {
+   "$id": "70",
+   "Kind": "Model",
+   "Name": "IsModelAdditionalProperties",
+   "Namespace": "Type.Property.AdditionalProperties",
+   "Description": "The model is from Record<ModelForRecord> type.",
+   "IsNullable": false,
+   "Usage": "RoundTrip",
+   "InheritedDictionaryType": {
+    "$id": "71",
+    "Kind": "Dictionary",
+    "Name": "Dictionary",
+    "KeyType": {
+     "$id": "72",
+     "Kind": "Primitive",
+     "Name": "String",
+     "IsNullable": false
+    },
+    "ValueType": {
+     "$ref": "67"
+    },
+    "IsNullable": false
+   },
+   "Properties": []
+  },
+  {
+   "$id": "73",
+   "Kind": "Model",
+   "Name": "ExtendsModelArrayAdditionalProperties",
+   "Namespace": "Type.Property.AdditionalProperties",
+   "Description": "The model extends from Record<ModelForRecord[]> type.",
+   "IsNullable": false,
+   "Usage": "RoundTrip",
+   "InheritedDictionaryType": {
+    "$id": "74",
+    "Kind": "Dictionary",
+    "Name": "Dictionary",
+    "KeyType": {
+     "$id": "75",
+     "Kind": "Primitive",
+     "Name": "String",
+     "IsNullable": false
+    },
+    "ValueType": {
+     "$id": "76",
+     "Kind": "Array",
+     "Name": "Array",
+     "ElementType": {
+      "$ref": "67"
+     },
+     "IsNullable": false
+    },
+    "IsNullable": false
+   },
+   "Properties": []
+  },
+  {
+   "$id": "77",
+   "Kind": "Model",
+   "Name": "IsModelArrayAdditionalProperties",
+   "Namespace": "Type.Property.AdditionalProperties",
+   "Description": "The model is from Record<ModelForRecord[]> type.",
+   "IsNullable": false,
+   "Usage": "RoundTrip",
+   "InheritedDictionaryType": {
+    "$id": "78",
+    "Kind": "Dictionary",
+    "Name": "Dictionary",
+    "KeyType": {
+     "$id": "79",
+     "Kind": "Primitive",
+     "Name": "String",
+     "IsNullable": false
+    },
+    "ValueType": {
+     "$id": "80",
+     "Kind": "Array",
+     "Name": "Array",
+     "ElementType": {
+      "$ref": "67"
+     },
+     "IsNullable": false
+    },
+    "IsNullable": false
+   },
+   "Properties": []
+  },
+  {
+   "$id": "81",
+   "Kind": "Model",
+   "Name": "ExtendsUnknownAdditionalPropertiesDiscriminatedDerived",
+   "Namespace": "Type.Property.AdditionalProperties",
+   "Description": "The derived discriminated type",
+   "IsNullable": false,
+   "DiscriminatorValue": "derived",
+   "Usage": "RoundTrip",
+   "BaseModel": {
+    "$ref": "13"
+   },
+   "Properties": [
+    {
+     "$id": "82",
+     "Name": "index",
+     "SerializedName": "index",
+     "Description": "The index property",
+     "Type": {
+      "$id": "83",
+      "Kind": "Primitive",
+      "Name": "Int32",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "84",
+     "Name": "age",
+     "SerializedName": "age",
+     "Description": "The age property",
+     "Type": {
+      "$id": "85",
+      "Kind": "Primitive",
+      "Name": "Float32",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  },
+  {
+   "$id": "86",
+   "Kind": "Model",
+   "Name": "IsUnknownAdditionalPropertiesDiscriminatedDerived",
+   "Namespace": "Type.Property.AdditionalProperties",
+   "Description": "The derived discriminated type",
+   "IsNullable": false,
+   "DiscriminatorValue": "derived",
+   "Usage": "RoundTrip",
+   "BaseModel": {
+    "$ref": "32"
+   },
+   "Properties": [
+    {
+     "$id": "87",
+     "Name": "index",
+     "SerializedName": "index",
+     "Description": "The index property",
+     "Type": {
+      "$id": "88",
+      "Kind": "Primitive",
+      "Name": "Int32",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "89",
+     "Name": "age",
+     "SerializedName": "age",
+     "Description": "The age property",
+     "Type": {
+      "$id": "90",
+      "Kind": "Primitive",
+      "Name": "Float32",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
   }
  ],
  "Clients": [
   {
-   "$id": "57",
+   "$id": "91",
    "Name": "AdditionalPropertiesClient",
    "Description": "",
    "Operations": [],
    "Protocol": {
-    "$id": "58"
+    "$id": "92"
    },
    "Creatable": true
   },
   {
-   "$id": "59",
+   "$id": "93",
    "Name": "ExtendsUnknown",
    "Description": "",
    "Operations": [
     {
-     "$id": "60",
+     "$id": "94",
      "Name": "get",
      "ResourceName": "ExtendsUnknown",
      "Description": "Get call",
      "Parameters": [
       {
-       "$id": "61",
+       "$id": "95",
        "Name": "host",
        "NameInRequest": "host",
        "Description": "TestServer endpoint",
        "Type": {
-        "$id": "62",
+        "$id": "96",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -533,9 +749,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "63",
+        "$id": "97",
         "Type": {
-         "$id": "64",
+         "$id": "98",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -544,11 +760,11 @@
        }
       },
       {
-       "$id": "65",
+       "$id": "99",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "66",
+        "$id": "100",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -563,9 +779,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "67",
+        "$id": "101",
         "Type": {
-         "$ref": "66"
+         "$ref": "100"
         },
         "Value": "application/json"
        }
@@ -573,7 +789,7 @@
      ],
      "Responses": [
       {
-       "$id": "68",
+       "$id": "102",
        "StatusCodes": [
         200
        ],
@@ -597,16 +813,16 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "69",
+     "$id": "103",
      "Name": "put",
      "ResourceName": "ExtendsUnknown",
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "61"
+       "$ref": "95"
       },
       {
-       "$id": "70",
+       "$id": "104",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "body",
@@ -624,11 +840,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "71",
+       "$id": "105",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "72",
+        "$id": "106",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -643,19 +859,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "73",
+        "$id": "107",
         "Type": {
-         "$ref": "72"
+         "$ref": "106"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "74",
+       "$id": "108",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "75",
+        "$id": "109",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -670,9 +886,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "76",
+        "$id": "110",
         "Type": {
-         "$ref": "75"
+         "$ref": "109"
         },
         "Value": "application/json"
        }
@@ -680,7 +896,7 @@
      ],
      "Responses": [
       {
-       "$id": "77",
+       "$id": "111",
        "StatusCodes": [
         204
        ],
@@ -702,31 +918,31 @@
     }
    ],
    "Protocol": {
-    "$id": "78"
+    "$id": "112"
    },
    "Creatable": false,
    "Parent": "AdditionalPropertiesClient"
   },
   {
-   "$id": "79",
+   "$id": "113",
    "Name": "ExtendsUnknownDerived",
    "Description": "",
    "Operations": [
     {
-     "$id": "80",
+     "$id": "114",
      "Name": "get",
      "ResourceName": "ExtendsUnknownDerived",
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "61"
+       "$ref": "95"
       },
       {
-       "$id": "81",
+       "$id": "115",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "82",
+        "$id": "116",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -741,9 +957,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "83",
+        "$id": "117",
         "Type": {
-         "$ref": "82"
+         "$ref": "116"
         },
         "Value": "application/json"
        }
@@ -751,12 +967,12 @@
      ],
      "Responses": [
       {
-       "$id": "84",
+       "$id": "118",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "5"
+        "$ref": "8"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -775,21 +991,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "85",
+     "$id": "119",
      "Name": "put",
      "ResourceName": "ExtendsUnknownDerived",
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "61"
+       "$ref": "95"
       },
       {
-       "$id": "86",
+       "$id": "120",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "body",
        "Type": {
-        "$ref": "5"
+        "$ref": "8"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -802,11 +1018,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "87",
+       "$id": "121",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "88",
+        "$id": "122",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -821,19 +1037,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "89",
+        "$id": "123",
         "Type": {
-         "$ref": "88"
+         "$ref": "122"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "90",
+       "$id": "124",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "91",
+        "$id": "125",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -848,9 +1064,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "92",
+        "$id": "126",
         "Type": {
-         "$ref": "91"
+         "$ref": "125"
         },
         "Value": "application/json"
        }
@@ -858,7 +1074,7 @@
      ],
      "Responses": [
       {
-       "$id": "93",
+       "$id": "127",
        "StatusCodes": [
         204
        ],
@@ -880,31 +1096,31 @@
     }
    ],
    "Protocol": {
-    "$id": "94"
+    "$id": "128"
    },
    "Creatable": false,
    "Parent": "AdditionalPropertiesClient"
   },
   {
-   "$id": "95",
+   "$id": "129",
    "Name": "ExtendsUnknownDiscriminated",
    "Description": "",
    "Operations": [
     {
-     "$id": "96",
+     "$id": "130",
      "Name": "get",
      "ResourceName": "ExtendsUnknownDiscriminated",
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "61"
+       "$ref": "95"
       },
       {
-       "$id": "97",
+       "$id": "131",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "98",
+        "$id": "132",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -919,9 +1135,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "99",
+        "$id": "133",
         "Type": {
-         "$ref": "98"
+         "$ref": "132"
         },
         "Value": "application/json"
        }
@@ -929,12 +1145,12 @@
      ],
      "Responses": [
       {
-       "$id": "100",
+       "$id": "134",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "10"
+        "$ref": "13"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -953,21 +1169,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "101",
+     "$id": "135",
      "Name": "put",
      "ResourceName": "ExtendsUnknownDiscriminated",
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "61"
+       "$ref": "95"
       },
       {
-       "$id": "102",
+       "$id": "136",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "body",
        "Type": {
-        "$ref": "10"
+        "$ref": "13"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -980,11 +1196,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "103",
+       "$id": "137",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "104",
+        "$id": "138",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -999,19 +1215,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "105",
+        "$id": "139",
         "Type": {
-         "$ref": "104"
+         "$ref": "138"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "106",
+       "$id": "140",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "107",
+        "$id": "141",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1026,9 +1242,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "108",
+        "$id": "142",
         "Type": {
-         "$ref": "107"
+         "$ref": "141"
         },
         "Value": "application/json"
        }
@@ -1036,7 +1252,7 @@
      ],
      "Responses": [
       {
-       "$id": "109",
+       "$id": "143",
        "StatusCodes": [
         204
        ],
@@ -1058,31 +1274,31 @@
     }
    ],
    "Protocol": {
-    "$id": "110"
+    "$id": "144"
    },
    "Creatable": false,
    "Parent": "AdditionalPropertiesClient"
   },
   {
-   "$id": "111",
+   "$id": "145",
    "Name": "IsUnknown",
    "Description": "",
    "Operations": [
     {
-     "$id": "112",
+     "$id": "146",
      "Name": "get",
      "ResourceName": "IsUnknown",
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "61"
+       "$ref": "95"
       },
       {
-       "$id": "113",
+       "$id": "147",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "114",
+        "$id": "148",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1097,9 +1313,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "115",
+        "$id": "149",
         "Type": {
-         "$ref": "114"
+         "$ref": "148"
         },
         "Value": "application/json"
        }
@@ -1107,12 +1323,12 @@
      ],
      "Responses": [
       {
-       "$id": "116",
+       "$id": "150",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "15"
+        "$ref": "21"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1131,21 +1347,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "117",
+     "$id": "151",
      "Name": "put",
      "ResourceName": "IsUnknown",
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "61"
+       "$ref": "95"
       },
       {
-       "$id": "118",
+       "$id": "152",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "body",
        "Type": {
-        "$ref": "15"
+        "$ref": "21"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1158,11 +1374,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "119",
+       "$id": "153",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "120",
+        "$id": "154",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1177,19 +1393,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "121",
+        "$id": "155",
         "Type": {
-         "$ref": "120"
+         "$ref": "154"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "122",
+       "$id": "156",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "123",
+        "$id": "157",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1204,9 +1420,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "124",
+        "$id": "158",
         "Type": {
-         "$ref": "123"
+         "$ref": "157"
         },
         "Value": "application/json"
        }
@@ -1214,7 +1430,7 @@
      ],
      "Responses": [
       {
-       "$id": "125",
+       "$id": "159",
        "StatusCodes": [
         204
        ],
@@ -1236,31 +1452,31 @@
     }
    ],
    "Protocol": {
-    "$id": "126"
+    "$id": "160"
    },
    "Creatable": false,
    "Parent": "AdditionalPropertiesClient"
   },
   {
-   "$id": "127",
+   "$id": "161",
    "Name": "IsUnknownDerived",
    "Description": "",
    "Operations": [
     {
-     "$id": "128",
+     "$id": "162",
      "Name": "get",
      "ResourceName": "IsUnknownDerived",
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "61"
+       "$ref": "95"
       },
       {
-       "$id": "129",
+       "$id": "163",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "130",
+        "$id": "164",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1275,9 +1491,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "131",
+        "$id": "165",
         "Type": {
-         "$ref": "130"
+         "$ref": "164"
         },
         "Value": "application/json"
        }
@@ -1285,12 +1501,12 @@
      ],
      "Responses": [
       {
-       "$id": "132",
+       "$id": "166",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "18"
+        "$ref": "27"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1309,21 +1525,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "133",
+     "$id": "167",
      "Name": "put",
      "ResourceName": "IsUnknownDerived",
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "61"
+       "$ref": "95"
       },
       {
-       "$id": "134",
+       "$id": "168",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "body",
        "Type": {
-        "$ref": "18"
+        "$ref": "27"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1336,11 +1552,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "135",
+       "$id": "169",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "136",
+        "$id": "170",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1355,19 +1571,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "137",
+        "$id": "171",
         "Type": {
-         "$ref": "136"
+         "$ref": "170"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "138",
+       "$id": "172",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "139",
+        "$id": "173",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1382,9 +1598,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "140",
+        "$id": "174",
         "Type": {
-         "$ref": "139"
+         "$ref": "173"
         },
         "Value": "application/json"
        }
@@ -1392,7 +1608,7 @@
      ],
      "Responses": [
       {
-       "$id": "141",
+       "$id": "175",
        "StatusCodes": [
         204
        ],
@@ -1414,31 +1630,31 @@
     }
    ],
    "Protocol": {
-    "$id": "142"
+    "$id": "176"
    },
    "Creatable": false,
    "Parent": "AdditionalPropertiesClient"
   },
   {
-   "$id": "143",
+   "$id": "177",
    "Name": "IsUnknownDiscriminated",
    "Description": "",
    "Operations": [
     {
-     "$id": "144",
+     "$id": "178",
      "Name": "get",
      "ResourceName": "IsUnknownDiscriminated",
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "61"
+       "$ref": "95"
       },
       {
-       "$id": "145",
+       "$id": "179",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "146",
+        "$id": "180",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1453,9 +1669,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "147",
+        "$id": "181",
         "Type": {
-         "$ref": "146"
+         "$ref": "180"
         },
         "Value": "application/json"
        }
@@ -1463,12 +1679,12 @@
      ],
      "Responses": [
       {
-       "$id": "148",
+       "$id": "182",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "23"
+        "$ref": "32"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1487,21 +1703,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "149",
+     "$id": "183",
      "Name": "put",
      "ResourceName": "IsUnknownDiscriminated",
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "61"
+       "$ref": "95"
       },
       {
-       "$id": "150",
+       "$id": "184",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "body",
        "Type": {
-        "$ref": "23"
+        "$ref": "32"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1514,11 +1730,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "151",
+       "$id": "185",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "152",
+        "$id": "186",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1533,19 +1749,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "153",
+        "$id": "187",
         "Type": {
-         "$ref": "152"
+         "$ref": "186"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "154",
+       "$id": "188",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "155",
+        "$id": "189",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1560,9 +1776,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "156",
+        "$id": "190",
         "Type": {
-         "$ref": "155"
+         "$ref": "189"
         },
         "Value": "application/json"
        }
@@ -1570,7 +1786,7 @@
      ],
      "Responses": [
       {
-       "$id": "157",
+       "$id": "191",
        "StatusCodes": [
         204
        ],
@@ -1592,31 +1808,31 @@
     }
    ],
    "Protocol": {
-    "$id": "158"
+    "$id": "192"
    },
    "Creatable": false,
    "Parent": "AdditionalPropertiesClient"
   },
   {
-   "$id": "159",
+   "$id": "193",
    "Name": "ExtendsString",
    "Description": "",
    "Operations": [
     {
-     "$id": "160",
+     "$id": "194",
      "Name": "get",
      "ResourceName": "ExtendsString",
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "61"
+       "$ref": "95"
       },
       {
-       "$id": "161",
+       "$id": "195",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "162",
+        "$id": "196",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1631,9 +1847,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "163",
+        "$id": "197",
         "Type": {
-         "$ref": "162"
+         "$ref": "196"
         },
         "Value": "application/json"
        }
@@ -1641,12 +1857,12 @@
      ],
      "Responses": [
       {
-       "$id": "164",
+       "$id": "198",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "28"
+        "$ref": "40"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1665,21 +1881,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "165",
+     "$id": "199",
      "Name": "put",
      "ResourceName": "ExtendsString",
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "61"
+       "$ref": "95"
       },
       {
-       "$id": "166",
+       "$id": "200",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "body",
        "Type": {
-        "$ref": "28"
+        "$ref": "40"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1692,11 +1908,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "167",
+       "$id": "201",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "168",
+        "$id": "202",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1711,19 +1927,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "169",
+        "$id": "203",
         "Type": {
-         "$ref": "168"
+         "$ref": "202"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "170",
+       "$id": "204",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "171",
+        "$id": "205",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1738,9 +1954,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "172",
+        "$id": "206",
         "Type": {
-         "$ref": "171"
+         "$ref": "205"
         },
         "Value": "application/json"
        }
@@ -1748,7 +1964,7 @@
      ],
      "Responses": [
       {
-       "$id": "173",
+       "$id": "207",
        "StatusCodes": [
         204
        ],
@@ -1770,31 +1986,31 @@
     }
    ],
    "Protocol": {
-    "$id": "174"
+    "$id": "208"
    },
    "Creatable": false,
    "Parent": "AdditionalPropertiesClient"
   },
   {
-   "$id": "175",
+   "$id": "209",
    "Name": "IsString",
    "Description": "",
    "Operations": [
     {
-     "$id": "176",
+     "$id": "210",
      "Name": "get",
      "ResourceName": "IsString",
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "61"
+       "$ref": "95"
       },
       {
-       "$id": "177",
+       "$id": "211",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "178",
+        "$id": "212",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1809,9 +2025,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "179",
+        "$id": "213",
         "Type": {
-         "$ref": "178"
+         "$ref": "212"
         },
         "Value": "application/json"
        }
@@ -1819,12 +2035,12 @@
      ],
      "Responses": [
       {
-       "$id": "180",
+       "$id": "214",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "31"
+        "$ref": "46"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1843,21 +2059,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "181",
+     "$id": "215",
      "Name": "put",
      "ResourceName": "IsString",
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "61"
+       "$ref": "95"
       },
       {
-       "$id": "182",
+       "$id": "216",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "body",
        "Type": {
-        "$ref": "31"
+        "$ref": "46"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1870,11 +2086,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "183",
+       "$id": "217",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "184",
+        "$id": "218",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1889,19 +2105,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "185",
+        "$id": "219",
         "Type": {
-         "$ref": "184"
+         "$ref": "218"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "186",
+       "$id": "220",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "187",
+        "$id": "221",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1916,9 +2132,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "188",
+        "$id": "222",
         "Type": {
-         "$ref": "187"
+         "$ref": "221"
         },
         "Value": "application/json"
        }
@@ -1926,7 +2142,7 @@
      ],
      "Responses": [
       {
-       "$id": "189",
+       "$id": "223",
        "StatusCodes": [
         204
        ],
@@ -1948,31 +2164,31 @@
     }
    ],
    "Protocol": {
-    "$id": "190"
+    "$id": "224"
    },
    "Creatable": false,
    "Parent": "AdditionalPropertiesClient"
   },
   {
-   "$id": "191",
+   "$id": "225",
    "Name": "ExtendsFloat",
    "Description": "",
    "Operations": [
     {
-     "$id": "192",
+     "$id": "226",
      "Name": "get",
      "ResourceName": "ExtendsFloat",
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "61"
+       "$ref": "95"
       },
       {
-       "$id": "193",
+       "$id": "227",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "194",
+        "$id": "228",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -1987,9 +2203,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "195",
+        "$id": "229",
         "Type": {
-         "$ref": "194"
+         "$ref": "228"
         },
         "Value": "application/json"
        }
@@ -1997,12 +2213,12 @@
      ],
      "Responses": [
       {
-       "$id": "196",
+       "$id": "230",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "34"
+        "$ref": "52"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2021,21 +2237,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "197",
+     "$id": "231",
      "Name": "put",
      "ResourceName": "ExtendsFloat",
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "61"
+       "$ref": "95"
       },
       {
-       "$id": "198",
+       "$id": "232",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "body",
        "Type": {
-        "$ref": "34"
+        "$ref": "52"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2048,11 +2264,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "199",
+       "$id": "233",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "200",
+        "$id": "234",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2067,19 +2283,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "201",
+        "$id": "235",
         "Type": {
-         "$ref": "200"
+         "$ref": "234"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "202",
+       "$id": "236",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "203",
+        "$id": "237",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2094,9 +2310,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "204",
+        "$id": "238",
         "Type": {
-         "$ref": "203"
+         "$ref": "237"
         },
         "Value": "application/json"
        }
@@ -2104,7 +2320,7 @@
      ],
      "Responses": [
       {
-       "$id": "205",
+       "$id": "239",
        "StatusCodes": [
         204
        ],
@@ -2126,31 +2342,31 @@
     }
    ],
    "Protocol": {
-    "$id": "206"
+    "$id": "240"
    },
    "Creatable": false,
    "Parent": "AdditionalPropertiesClient"
   },
   {
-   "$id": "207",
+   "$id": "241",
    "Name": "IsFloat",
    "Description": "",
    "Operations": [
     {
-     "$id": "208",
+     "$id": "242",
      "Name": "get",
      "ResourceName": "IsFloat",
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "61"
+       "$ref": "95"
       },
       {
-       "$id": "209",
+       "$id": "243",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "210",
+        "$id": "244",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2165,9 +2381,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "211",
+        "$id": "245",
         "Type": {
-         "$ref": "210"
+         "$ref": "244"
         },
         "Value": "application/json"
        }
@@ -2175,12 +2391,12 @@
      ],
      "Responses": [
       {
-       "$id": "212",
+       "$id": "246",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "37"
+        "$ref": "58"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2199,21 +2415,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "213",
+     "$id": "247",
      "Name": "put",
      "ResourceName": "IsFloat",
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "61"
+       "$ref": "95"
       },
       {
-       "$id": "214",
+       "$id": "248",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "body",
        "Type": {
-        "$ref": "37"
+        "$ref": "58"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2226,11 +2442,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "215",
+       "$id": "249",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "216",
+        "$id": "250",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2245,19 +2461,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "217",
+        "$id": "251",
         "Type": {
-         "$ref": "216"
+         "$ref": "250"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "218",
+       "$id": "252",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "219",
+        "$id": "253",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2272,9 +2488,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "220",
+        "$id": "254",
         "Type": {
-         "$ref": "219"
+         "$ref": "253"
         },
         "Value": "application/json"
        }
@@ -2282,7 +2498,7 @@
      ],
      "Responses": [
       {
-       "$id": "221",
+       "$id": "255",
        "StatusCodes": [
         204
        ],
@@ -2304,31 +2520,31 @@
     }
    ],
    "Protocol": {
-    "$id": "222"
+    "$id": "256"
    },
    "Creatable": false,
    "Parent": "AdditionalPropertiesClient"
   },
   {
-   "$id": "223",
+   "$id": "257",
    "Name": "ExtendsModel",
    "Description": "",
    "Operations": [
     {
-     "$id": "224",
+     "$id": "258",
      "Name": "get",
      "ResourceName": "ExtendsModel",
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "61"
+       "$ref": "95"
       },
       {
-       "$id": "225",
+       "$id": "259",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "226",
+        "$id": "260",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2343,9 +2559,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "227",
+        "$id": "261",
         "Type": {
-         "$ref": "226"
+         "$ref": "260"
         },
         "Value": "application/json"
        }
@@ -2353,12 +2569,12 @@
      ],
      "Responses": [
       {
-       "$id": "228",
+       "$id": "262",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "40"
+        "$ref": "64"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2377,21 +2593,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "229",
+     "$id": "263",
      "Name": "put",
      "ResourceName": "ExtendsModel",
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "61"
+       "$ref": "95"
       },
       {
-       "$id": "230",
+       "$id": "264",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "body",
        "Type": {
-        "$ref": "40"
+        "$ref": "64"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2404,11 +2620,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "231",
+       "$id": "265",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "232",
+        "$id": "266",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2423,19 +2639,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "233",
+        "$id": "267",
         "Type": {
-         "$ref": "232"
+         "$ref": "266"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "234",
+       "$id": "268",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "235",
+        "$id": "269",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2450,9 +2666,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "236",
+        "$id": "270",
         "Type": {
-         "$ref": "235"
+         "$ref": "269"
         },
         "Value": "application/json"
        }
@@ -2460,7 +2676,7 @@
      ],
      "Responses": [
       {
-       "$id": "237",
+       "$id": "271",
        "StatusCodes": [
         204
        ],
@@ -2482,31 +2698,31 @@
     }
    ],
    "Protocol": {
-    "$id": "238"
+    "$id": "272"
    },
    "Creatable": false,
    "Parent": "AdditionalPropertiesClient"
   },
   {
-   "$id": "239",
+   "$id": "273",
    "Name": "IsModel",
    "Description": "",
    "Operations": [
     {
-     "$id": "240",
+     "$id": "274",
      "Name": "get",
      "ResourceName": "IsModel",
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "61"
+       "$ref": "95"
       },
       {
-       "$id": "241",
+       "$id": "275",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "242",
+        "$id": "276",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2521,9 +2737,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "243",
+        "$id": "277",
         "Type": {
-         "$ref": "242"
+         "$ref": "276"
         },
         "Value": "application/json"
        }
@@ -2531,12 +2747,12 @@
      ],
      "Responses": [
       {
-       "$id": "244",
+       "$id": "278",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "41"
+        "$ref": "70"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2555,21 +2771,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "245",
+     "$id": "279",
      "Name": "put",
      "ResourceName": "IsModel",
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "61"
+       "$ref": "95"
       },
       {
-       "$id": "246",
+       "$id": "280",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "body",
        "Type": {
-        "$ref": "41"
+        "$ref": "70"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2582,11 +2798,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "247",
+       "$id": "281",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "248",
+        "$id": "282",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2601,19 +2817,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "249",
+        "$id": "283",
         "Type": {
-         "$ref": "248"
+         "$ref": "282"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "250",
+       "$id": "284",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "251",
+        "$id": "285",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2628,9 +2844,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "252",
+        "$id": "286",
         "Type": {
-         "$ref": "251"
+         "$ref": "285"
         },
         "Value": "application/json"
        }
@@ -2638,7 +2854,7 @@
      ],
      "Responses": [
       {
-       "$id": "253",
+       "$id": "287",
        "StatusCodes": [
         204
        ],
@@ -2660,31 +2876,31 @@
     }
    ],
    "Protocol": {
-    "$id": "254"
+    "$id": "288"
    },
    "Creatable": false,
    "Parent": "AdditionalPropertiesClient"
   },
   {
-   "$id": "255",
+   "$id": "289",
    "Name": "ExtendsModelArray",
    "Description": "",
    "Operations": [
     {
-     "$id": "256",
+     "$id": "290",
      "Name": "get",
      "ResourceName": "ExtendsModelArray",
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "61"
+       "$ref": "95"
       },
       {
-       "$id": "257",
+       "$id": "291",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "258",
+        "$id": "292",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2699,9 +2915,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "259",
+        "$id": "293",
         "Type": {
-         "$ref": "258"
+         "$ref": "292"
         },
         "Value": "application/json"
        }
@@ -2709,12 +2925,12 @@
      ],
      "Responses": [
       {
-       "$id": "260",
+       "$id": "294",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "42"
+        "$ref": "73"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2733,21 +2949,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "261",
+     "$id": "295",
      "Name": "put",
      "ResourceName": "ExtendsModelArray",
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "61"
+       "$ref": "95"
       },
       {
-       "$id": "262",
+       "$id": "296",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "body",
        "Type": {
-        "$ref": "42"
+        "$ref": "73"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2760,11 +2976,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "263",
+       "$id": "297",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "264",
+        "$id": "298",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2779,19 +2995,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "265",
+        "$id": "299",
         "Type": {
-         "$ref": "264"
+         "$ref": "298"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "266",
+       "$id": "300",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "267",
+        "$id": "301",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2806,9 +3022,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "268",
+        "$id": "302",
         "Type": {
-         "$ref": "267"
+         "$ref": "301"
         },
         "Value": "application/json"
        }
@@ -2816,7 +3032,7 @@
      ],
      "Responses": [
       {
-       "$id": "269",
+       "$id": "303",
        "StatusCodes": [
         204
        ],
@@ -2838,31 +3054,31 @@
     }
    ],
    "Protocol": {
-    "$id": "270"
+    "$id": "304"
    },
    "Creatable": false,
    "Parent": "AdditionalPropertiesClient"
   },
   {
-   "$id": "271",
+   "$id": "305",
    "Name": "IsModelArray",
    "Description": "",
    "Operations": [
     {
-     "$id": "272",
+     "$id": "306",
      "Name": "get",
      "ResourceName": "IsModelArray",
      "Description": "Get call",
      "Parameters": [
       {
-       "$ref": "61"
+       "$ref": "95"
       },
       {
-       "$id": "273",
+       "$id": "307",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "274",
+        "$id": "308",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2877,9 +3093,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "275",
+        "$id": "309",
         "Type": {
-         "$ref": "274"
+         "$ref": "308"
         },
         "Value": "application/json"
        }
@@ -2887,12 +3103,12 @@
      ],
      "Responses": [
       {
-       "$id": "276",
+       "$id": "310",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "43"
+        "$ref": "77"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2911,21 +3127,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "277",
+     "$id": "311",
      "Name": "put",
      "ResourceName": "IsModelArray",
      "Description": "Put operation",
      "Parameters": [
       {
-       "$ref": "61"
+       "$ref": "95"
       },
       {
-       "$id": "278",
+       "$id": "312",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "body",
        "Type": {
-        "$ref": "43"
+        "$ref": "77"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2938,11 +3154,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "279",
+       "$id": "313",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "280",
+        "$id": "314",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2957,19 +3173,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "281",
+        "$id": "315",
         "Type": {
-         "$ref": "280"
+         "$ref": "314"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "282",
+       "$id": "316",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "283",
+        "$id": "317",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -2984,9 +3200,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "284",
+        "$id": "318",
         "Type": {
-         "$ref": "283"
+         "$ref": "317"
         },
         "Value": "application/json"
        }
@@ -2994,7 +3210,7 @@
      ],
      "Responses": [
       {
-       "$id": "285",
+       "$id": "319",
        "StatusCodes": [
         204
        ],
@@ -3016,7 +3232,7 @@
     }
    ],
    "Protocol": {
-    "$id": "286"
+    "$id": "320"
    },
    "Creatable": false,
    "Parent": "AdditionalPropertiesClient"

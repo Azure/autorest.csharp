@@ -16,8 +16,8 @@ namespace _Type.Property.AdditionalProperties.Models
         /// <summary> Initializes a new instance of <see cref="UnknownExtendsUnknownAdditionalPropertiesDiscriminated"/>. </summary>
         /// <param name="kind"> The discriminator. </param>
         /// <param name="name"> The name property. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal UnknownExtendsUnknownAdditionalPropertiesDiscriminated(string kind, string name, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(kind, name, serializedAdditionalRawData)
+        /// <param name="additionalProperties"> Additional Properties. </param>
+        internal UnknownExtendsUnknownAdditionalPropertiesDiscriminated(string kind, string name, IDictionary<string, BinaryData> additionalProperties) : base(kind, name, additionalProperties)
         {
         }
 

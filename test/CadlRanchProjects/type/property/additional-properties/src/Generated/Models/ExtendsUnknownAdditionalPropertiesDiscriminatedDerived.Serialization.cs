@@ -39,20 +39,17 @@ namespace _Type.Property.AdditionalProperties.Models
             writer.WriteStringValue(Kind);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            foreach (var item in AdditionalProperties)
             {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
+                writer.WritePropertyName(item.Key);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
+                using (JsonDocument document = JsonDocument.Parse(item.Value))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
                 }
+#endif
             }
             writer.WriteEndObject();
         }
@@ -81,7 +78,7 @@ namespace _Type.Property.AdditionalProperties.Models
             float? age = default;
             string kind = default;
             string name = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            IDictionary<string, BinaryData> additionalProperties = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
@@ -109,13 +106,10 @@ namespace _Type.Property.AdditionalProperties.Models
                     name = property.Value.GetString();
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
+                additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ExtendsUnknownAdditionalPropertiesDiscriminatedDerived(kind, name, serializedAdditionalRawData, index, age);
+            additionalProperties = additionalPropertiesDictionary;
+            return new ExtendsUnknownAdditionalPropertiesDiscriminatedDerived(kind, name, additionalProperties, index, age);
         }
 
         BinaryData IPersistableModel<ExtendsUnknownAdditionalPropertiesDiscriminatedDerived>.Write(ModelReaderWriterOptions options)

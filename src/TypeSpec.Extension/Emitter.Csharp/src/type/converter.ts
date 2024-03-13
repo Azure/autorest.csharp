@@ -124,6 +124,17 @@ export function fromSdkModelType(
         //     ).map((m) => fromSdkModelType(m, program, models, enums));
         // }
 
+        inputModelType.InheritedDictionaryType = modelType.additionalProperties ? {
+                Kind: InputTypeKind.Dictionary,
+                Name: InputTypeKind.Dictionary,
+                KeyType: {
+                    Kind: InputTypeKind.Primitive,
+                    Name: InputPrimitiveTypeKind.String,
+                    IsNullable: false,
+                } as InputPrimitiveType,
+                ValueType: fromSdkType(modelType.additionalProperties, context, models, enums),
+                IsNullable: false,
+            } as InputDictionaryType : undefined;
         inputModelType.Properties = modelType.properties
             .filter(
                 (p) =>
@@ -136,6 +147,7 @@ export function fromSdkModelType(
                     Namespace: inputModelType?.Namespace
                 } as LiteralTypeContext)
             );
+
         const index = inputModelType.Properties.findIndex(
             (p) => p.IsDiscriminator
         );
