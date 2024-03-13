@@ -205,7 +205,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             var body = new List<MethodBodyStatement>
             {
-                Declare("paddingCharsToAdd", new IntExpression(new SwitchExpression(value.Length, new SwitchCaseExpression[]
+                Declare("paddingCharsToAdd", new IntExpression(new SwitchExpression(new BinaryOperatorExpression("%", value.Length, Literal(4)), new SwitchCaseExpression[]
                 {
                     new SwitchCaseExpression(Int(0), Int(0)),
                     new SwitchCaseExpression(Int(2), Int(2)),
