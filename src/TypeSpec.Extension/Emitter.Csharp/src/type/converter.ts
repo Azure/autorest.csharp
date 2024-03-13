@@ -77,13 +77,15 @@ function fromSdkType(
     if (sdkType.kind === "union")
         return fromUnionType(sdkType, context, models, enums);
     if (sdkType.kind === "utcDateTime") return fromSdkDatetimeType(sdkType);
-    if (sdkType.kind === "duration") return fromSdkDurationType(sdkType as SdkDurationType);
-    if (sdkType.kind === "bytes") return fromBytesType(sdkType as SdkBuiltInType);
+    if (sdkType.kind === "duration")
+        return fromSdkDurationType(sdkType as SdkDurationType);
+    if (sdkType.kind === "bytes")
+        return fromBytesType(sdkType as SdkBuiltInType);
     // TODO: offsetDateTime
     if (sdkType.kind === "tuple") return fromTupleType(sdkType);
     if (sdkType.__raw?.kind === "Scalar") return fromScalarType(sdkType);
-// this happens for discriminator type, normally all other primitive types should be handled in scalar above
-// TODO: can we improve the type in TCGC around discriminator
+    // this happens for discriminator type, normally all other primitive types should be handled in scalar above
+    // TODO: can we improve the type in TCGC around discriminator
     if (sdkType.__raw?.kind === "Intrinsic") return fromIntrinsicType(sdkType);
     if (isSdkBuiltInType(sdkType.kind))
         return fromSdkBuiltInType(sdkType as SdkBuiltInType);
@@ -114,12 +116,14 @@ export function fromSdkModelType(
                 modelType.__raw!
             )?.propertyName, // TO-DO: SdkModelType lacks of DiscriminatorPropertyName
             DiscriminatorValue: modelType.discriminatorValue,
-            Usage: fromUsageFlags(modelType.usage),
+            Usage: fromUsageFlags(modelType.usage)
         } as InputModelType;
 
         models.set(modelTypeName, inputModelType);
 
-        inputModelType.BaseModel = modelType.baseModel ? fromSdkModelType(modelType.baseModel, context, models, enums) : undefined;
+        inputModelType.BaseModel = modelType.baseModel
+            ? fromSdkModelType(modelType.baseModel, context, models, enums)
+            : undefined;
 
         // TODO: can we fix the resolving reference issue in csharp?
         // https://github.com/Azure/autorest.csharp/issues/4136
@@ -129,17 +133,24 @@ export function fromSdkModelType(
         //     ).map((m) => fromSdkModelType(m, program, models, enums));
         // }
 
-        inputModelType.InheritedDictionaryType = modelType.additionalProperties ? {
-                Kind: InputTypeKind.Dictionary,
-                Name: InputTypeKind.Dictionary,
-                KeyType: {
-                    Kind: InputTypeKind.Primitive,
-                    Name: InputPrimitiveTypeKind.String,
-                    IsNullable: false,
-                } as InputPrimitiveType,
-                ValueType: fromSdkType(modelType.additionalProperties, context, models, enums),
-                IsNullable: false,
-            } as InputDictionaryType : undefined;
+        inputModelType.InheritedDictionaryType = modelType.additionalProperties
+            ? ({
+                  Kind: InputTypeKind.Dictionary,
+                  Name: InputTypeKind.Dictionary,
+                  KeyType: {
+                      Kind: InputTypeKind.Primitive,
+                      Name: InputPrimitiveTypeKind.String,
+                      IsNullable: false
+                  } as InputPrimitiveType,
+                  ValueType: fromSdkType(
+                      modelType.additionalProperties,
+                      context,
+                      models,
+                      enums
+                  ),
+                  IsNullable: false
+              } as InputDictionaryType)
+            : undefined;
         inputModelType.Properties = modelType.properties
             .filter(
                 (p) =>
@@ -166,7 +177,7 @@ export function fromSdkModelType(
 }
 
 // TODO: remove this after TCGC provide utility to generate templated model
-function getModelName(model: SdkModelType) : string {
+function getModelName(model: SdkModelType): string {
     var name = model.generatedName || model.name;
     var rawModel = model.__raw! as Model;
     if (
@@ -176,20 +187,23 @@ function getModelName(model: SdkModelType) : string {
     ) {
         return (
             name +
-            rawModel.templateMapper.args.map((it) => (it as Model).name).join("")
+            rawModel.templateMapper.args
+                .map((it) => (it as Model).name)
+                .join("")
         );
     }
 
     return name;
 }
 
-function hasDiscriminator(model? : SdkModelType) : boolean {
-    if (model == null)
-        return false;
+function hasDiscriminator(model?: SdkModelType): boolean {
+    if (model == null) return false;
 
-    if (model!.properties.some(p => {
-        return (p as SdkBodyModelPropertyType).discriminator;
-    }))
+    if (
+        model!.properties.some((p) => {
+            return (p as SdkBodyModelPropertyType).discriminator;
+        })
+    )
         return true;
     return hasDiscriminator(model!.baseModel);
 }
@@ -272,7 +286,10 @@ function fromSdkDurationType(
     }
     return {
         Kind: InputTypeKind.Primitive,
-        Name: fromDurationKnownEncoding(durationType.encode, durationType.wireType),
+        Name: fromDurationKnownEncoding(
+            durationType.encode,
+            durationType.wireType
+        ),
         IsNullable: durationType.nullable
     } as InputPrimitiveType;
 }
@@ -281,24 +298,22 @@ function fromTupleType(tupleType: SdkTupleType): InputIntrinsicType {
     return {
         Kind: InputTypeKind.Intrinsic,
         Name: InputIntrinsicTypeKind.Unknown,
-        IsNullable: tupleType.nullable,
+        IsNullable: tupleType.nullable
     } as InputIntrinsicType;
 }
 
 function fromBytesType(bytesType: SdkBuiltInType): InputPrimitiveType {
-    function fromBytesEncoding(encode: string) : InputPrimitiveTypeKind {
-            switch (encode) {
-                case undefined:
-                case "base64":
-                    return InputPrimitiveTypeKind.Bytes;
-                case "base64url":
-                    return InputPrimitiveTypeKind.BytesBase64Url;
-                default:
-                    logger.warn(
-                        `invalid encode ${encode} for bytes.`
-                    );
-                    return InputPrimitiveTypeKind.Bytes;
-            }
+    function fromBytesEncoding(encode: string): InputPrimitiveTypeKind {
+        switch (encode) {
+            case undefined:
+            case "base64":
+                return InputPrimitiveTypeKind.Bytes;
+            case "base64url":
+                return InputPrimitiveTypeKind.BytesBase64Url;
+            default:
+                logger.warn(`invalid encode ${encode} for bytes.`);
+                return InputPrimitiveTypeKind.Bytes;
+        }
     }
 
     return {
@@ -309,17 +324,17 @@ function fromBytesType(bytesType: SdkBuiltInType): InputPrimitiveType {
 }
 
 export function fromSdkBuiltInType(builtInType: SdkBuiltInType): InputType {
-        const builtInKind: InputPrimitiveTypeKind =
-            mapTypeSpecTypeToCSharpInputTypeKind(
-                builtInType.__raw!,
-                builtInType.kind,
-                undefined // To-Do: type incompatable
-            );
-        return {
-            Kind: InputTypeKind.Primitive,
-            Name: builtInKind,
-            IsNullable: false
-        } as InputPrimitiveType;
+    const builtInKind: InputPrimitiveTypeKind =
+        mapTypeSpecTypeToCSharpInputTypeKind(
+            builtInType.__raw!,
+            builtInType.kind,
+            undefined // To-Do: type incompatable
+        );
+    return {
+        Kind: InputTypeKind.Primitive,
+        Name: builtInKind,
+        IsNullable: false
+    } as InputPrimitiveType;
 }
 
 function fromScalarType(scalarType: SdkType): InputPrimitiveType {
@@ -338,7 +353,9 @@ function fromIntrinsicType(scalarType: SdkType): InputIntrinsicType {
     const name = (scalarType.__raw! as IntrinsicType).name;
     return {
         Kind: InputTypeKind.Intrinsic,
-        Name: getCSharpInputTypeKindByIntrinsic(scalarType.__raw! as IntrinsicType),
+        Name: getCSharpInputTypeKindByIntrinsic(
+            scalarType.__raw! as IntrinsicType
+        ),
         IsNullable: false
     };
 }
@@ -508,7 +525,9 @@ function fromSdkModelPropertyType(
     const modelProperty: InputModelProperty = {
         Name: propertyType.nameInClient,
         SerializedName: serializedName,
-        Description: propertyType.description ?? (isDiscriminator ? "Discriminator" : ""),
+        Description:
+            propertyType.description ??
+            (isDiscriminator ? "Discriminator" : ""),
         Type: fromSdkType(
             propertyType.type,
             context,
@@ -549,9 +568,10 @@ function isSdkBuiltInType(kind: string): boolean {
     ].includes(kind);
 }
 
-function getCSharpInputTypeKindByIntrinsic(type: IntrinsicType): InputIntrinsicTypeKind {
-    switch (type.name)
-    {
+function getCSharpInputTypeKindByIntrinsic(
+    type: IntrinsicType
+): InputIntrinsicTypeKind {
+    switch (type.name) {
         case "ErrorType":
             return InputIntrinsicTypeKind.Error;
         case "void":

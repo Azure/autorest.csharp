@@ -75,11 +75,7 @@ import {
     getWireName,
     isInternal
 } from "@azure-tools/typespec-client-generator-core";
-import {
-    capitalize,
-    getFullNamespaceString,
-    getTypeName
-} from "./utils.js";
+import { capitalize, getFullNamespaceString, getTypeName } from "./utils.js";
 import { InputTypeKind } from "../type/inputTypeKind.js";
 import { InputIntrinsicTypeKind } from "../type/inputIntrinsicTypeKind.js";
 import { fromSdkEnumType, fromSdkModelType } from "../type/converter.js";
@@ -604,9 +600,14 @@ export function getInputType(
             );
         }
         var createdSdkModelType = getClientType(context, m) as SdkModelType;
-        if (createdSdkModelType){
+        if (createdSdkModelType) {
             context.modelsMap!.set(m, createdSdkModelType);
-            return fromSdkModelType(createdSdkModelType, context, models, enums);
+            return fromSdkModelType(
+                createdSdkModelType,
+                context,
+                models,
+                enums
+            );
         }
         return undefined;
     }
