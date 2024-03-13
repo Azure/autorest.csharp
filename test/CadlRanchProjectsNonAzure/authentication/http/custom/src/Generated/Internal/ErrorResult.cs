@@ -5,7 +5,7 @@
 using System.ClientModel;
 using System.ClientModel.Primitives;
 
-namespace Authentication.Http.Custom
+namespace Scm.Authentication.Http.Custom
 {
     internal class ErrorResult<T> : Result<T>
     {

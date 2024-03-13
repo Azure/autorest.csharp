@@ -9,7 +9,7 @@ using System.ClientModel.Primitives.Pipeline;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Authentication.Http.Custom
+namespace Scm.Authentication.Http.Custom
 {
     internal static class ClientPipelineExtensions
     {
