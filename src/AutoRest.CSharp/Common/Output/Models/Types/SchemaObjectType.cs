@@ -544,29 +544,40 @@ namespace AutoRest.CSharp.Output.Models.Types
                               !_usage.HasFlag(SchemaTypeUsage.Input) ||
                               property.IsReadOnly;
 
-
-            if (isCollection)
+            if (existingMember is not null)
             {
-                propertyShouldOmitSetter |= !property.IsNullable;
+                propertyShouldOmitSetter = existingMember switch
+                {
+                    IPropertySymbol propertySymbol => propertySymbol.SetMethod == null,
+                    IFieldSymbol fieldSymbol => fieldSymbol.IsReadOnly,
+                    _ => throw new NotSupportedException($"'{existingMember.ContainingType.Name}.{existingMember.Name}' must be either field or property.")
+                };
             }
             else
             {
-                // In mixed models required properties are not readonly
-                propertyShouldOmitSetter |= property.IsRequired &&
-                              _usage.HasFlag(SchemaTypeUsage.Input) &&
-                              !_usage.HasFlag(SchemaTypeUsage.Output);
-            }
+                if (isCollection)
+                {
+                    propertyShouldOmitSetter |= !property.IsNullable;
+                }
+                else
+                {
+                    // In mixed models required properties are not readonly
+                    propertyShouldOmitSetter |= property.IsRequired &&
+                                                _usage.HasFlag(SchemaTypeUsage.Input) &&
+                                                !_usage.HasFlag(SchemaTypeUsage.Output);
+                }
 
-            // we should remove the setter of required constant
-            if (property.Schema is ConstantSchema && property.IsRequired)
-            {
-                propertyShouldOmitSetter = true;
-            }
+                // we should remove the setter of required constant
+                if (property.Schema is ConstantSchema && property.IsRequired)
+                {
+                    propertyShouldOmitSetter = true;
+                }
 
-            if (property.IsDiscriminator == true)
-            {
-                // Discriminator properties should be writeable
-                propertyShouldOmitSetter = false;
+                if (property.IsDiscriminator == true)
+                {
+                    // Discriminator properties should be writeable
+                    propertyShouldOmitSetter = false;
+                }
             }
 
             var objectTypeProperty = new ObjectTypeProperty(
