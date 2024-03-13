@@ -1,6 +1,6 @@
 ﻿using System.ClientModel;
 using System.Threading.Tasks;
-using Authentication.Http.Custom;
+using Scm.Authentication.Http.Custom;
 using AutoRest.TestServer.Tests.Infrastructure;
 using NUnit.Framework;
 
