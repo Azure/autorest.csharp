@@ -4,10 +4,12 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Output.Models.Types.System;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -22,6 +24,11 @@ namespace AutoRest.CSharp.Output.Models.Types
             yield return Utf8JsonRequestContentProvider.Instance;
             yield return ArgumentProvider.Instance;
             yield return ChangeTrackingDictionaryProvider.Instance;
+            if (!Configuration.IsBranded)
+            {
+                yield return ErrorResultProvider.Instance;
+                yield return ClientPipelineExtensionsProvider.Instance;
+            }
         }
 
         protected ExpressionTypeProvider(string defaultNamespace, SourceInputModel? sourceInputModel)

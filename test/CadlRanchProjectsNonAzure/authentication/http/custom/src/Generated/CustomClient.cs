@@ -9,7 +9,7 @@ using System.ClientModel.Primitives;
 using System.ClientModel.Primitives.Pipeline;
 using System.Threading.Tasks;
 
-namespace Authentication.Http.Custom
+namespace Scm.Authentication.Http.Custom
 {
     // Data plane generated client.
     /// <summary> Illustrates clients generated with generic HTTP auth. </summary>
