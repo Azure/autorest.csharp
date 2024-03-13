@@ -18,6 +18,7 @@ using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Serialization.Multipart;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models;
@@ -25,6 +26,7 @@ using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
+using Azure.Core;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using static AutoRest.CSharp.Common.Input.Configuration;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
@@ -33,8 +35,10 @@ namespace AutoRest.CSharp.Common.Output.Builders
 {
     internal class MultipartSerializationMethodsBuilder
     {
-        public static IEnumerable<Method> BuildMultipartSerializationMethods(MultipartFormDataObjectSerialization? multipart)
+        public static IEnumerable<Method> BuildMultipartSerializationMethods(MultipartFormDataObjectSerialization multipart)
         {
+            var data = new BinaryDataExpression(KnownParameters.Serializations.Data);
+            var options = new ModelReaderWriterOptionsExpression(KnownParameters.Serializations.Options);
             yield return new Method(
                 new MethodSignature(
                     "SerializeMultipart",
@@ -47,14 +51,34 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 BuildMultipartSerializationMethodBody(multipart).ToArray());
             yield return new Method(
                 new MethodSignature(
-                    "ToMultipartFormDataRequestContent",
+                    Configuration.ApiTypes.ToMultipartRequestContentName,
                     null,
                     null,
                     MethodSignatureModifiers.Public,
-                    multipart!.Type,
+                    typeof(RequestContent),
                     null,
                     new Parameter[] {KnownParameters.Serializations.Options }),
                 BuildMultipartSerializationMethodBody(multipart).ToArray());
+            yield return new Method(
+                new MethodSignature(
+                    "DeserializeMultipart",
+                    null,
+                    null,
+                    MethodSignatureModifiers.Private,
+                    multipart.Type,
+                    null,
+                    new Parameter[] { KnownParameters.Serializations.Options }),
+                BuildMultipartDeSerializationMethodBody(multipart!, data, options).ToArray());
+            yield return new Method(
+                new MethodSignature(
+                    "FromResponse",
+                    null,
+                    null,
+                    MethodSignatureModifiers.Public,
+                    multipart.Type,
+                    null,
+                    new Parameter[] { KnownParameters.Serializations.Options }),
+                BuildMultipartDeSerializationMethodBody(multipart, data, options).ToArray());
         }
         public static SwitchCase BuildMultipartWriteSwitchCase(MultipartFormDataObjectSerialization multipart, ModelReaderWriterOptionsExpression options)
         {
@@ -65,6 +89,30 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         null,
                         new MethodSignature(
                             $"SerializeMultipart",
+                            null,
+                            null,
+                            MethodSignatureModifiers.Private,
+                            typeof(BinaryData),
+                            null,
+                            new[]
+                            {
+                                KnownParameters.Serializations.Options
+                            }),
+                        new ValueExpression[]
+                        {
+                            options
+                        })));
+        }
+
+        public static SwitchCase BuildMultipartReadSwitchCase(SerializableObjectType model, BinaryDataExpression data, ModelReaderWriterOptionsExpression options)
+        {
+            return new SwitchCase(
+                Serializations.MultipartFormat,
+                Return(
+                    new InvokeInstanceMethodExpression(
+                        null,
+                        new MethodSignature(
+                            $"DeserializeMultipart",
                             null,
                             null,
                             MethodSignatureModifiers.Private,

@@ -215,6 +215,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 switchStatement.Add(BicepSerializationMethodsBuilder.BuildBicepReadSwitchCase(model, data, options));
             }
 
+            if (serialization.Multipart is not null)
+            {
+                switchStatement.Add(MultipartSerializationMethodsBuilder.BuildMultipartReadSwitchCase(model, data, options));
+            }
+
             // default case
             /*
              * throw new InvalidOperationException($"The model {nameof(T)} does not support '{options.Format}' format.");
