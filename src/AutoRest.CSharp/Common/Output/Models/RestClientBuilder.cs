@@ -355,7 +355,7 @@ namespace AutoRest.CSharp.Output.Models
                 return (ReferenceOrConstant)_parameters[operationParameter.Name];
             }
 
-            if (operationParameter is { Kind:InputOperationParameterKind.Constant } && parameter.DefaultValue is not null)
+            if (operationParameter is { Kind: InputOperationParameterKind.Constant } && parameter.DefaultValue is not null)
             {
                 return (ReferenceOrConstant)parameter.DefaultValue;
             }
@@ -366,7 +366,7 @@ namespace AutoRest.CSharp.Output.Models
                 return parameter;
             }
 
-            var groupModel = (SchemaObjectType)_typeFactory.CreateType(groupedByParameter.Type with {IsNullable = false}).Implementation;
+            var groupModel = (SchemaObjectType)_typeFactory.CreateType(groupedByParameter.Type with { IsNullable = false }).Implementation;
             var property = groupModel.GetPropertyForGroupedParameter(operationParameter.Name);
 
             return new Reference($"{groupedByParameter.Name.ToVariableName()}.{property.Declaration.Name}", property.Declaration.Type);
@@ -460,7 +460,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public virtual Parameter BuildConstructorParameter(InputParameter operationParameter)
         {
-            var parameter = BuildParameter(operationParameter);
+            var parameter = BuildParameter(operationParameter, operationParameter is { Kind: InputOperationParameterKind.Client, Type: InputEnumType enumType } ? _typeFactory.CreateType(enumType.EnumValueType).FrameworkType : null);
             if (!operationParameter.IsEndpoint)
             {
                 return parameter;
@@ -471,7 +471,7 @@ namespace AutoRest.CSharp.Output.Models
             var location = parameter.RequestLocation;
 
             return defaultValue != null
-                ? KnownParameters.Endpoint with { Description = description, RequestLocation = location, DefaultValue = Constant.Default(new CSharpType(typeof(Uri), true)), Initializer = $"new {typeof(Uri)}({defaultValue.Value.GetConstantFormattable()})"}
+                ? KnownParameters.Endpoint with { Description = description, RequestLocation = location, DefaultValue = Constant.Default(new CSharpType(typeof(Uri), true)), Initializer = $"new {typeof(Uri)}({defaultValue.Value.GetConstantFormattable()})" }
                 : KnownParameters.Endpoint with { Description = description, RequestLocation = location, Validation = parameter.Validation };
         }
 
