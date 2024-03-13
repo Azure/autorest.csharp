@@ -71,7 +71,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task SendIntsOnly() => Test(async (host) =>
         {
-            var response = await new UnionClient(host, null).GetIntsOnlyClient().SendAsync(BinaryData.FromString("2"));
+            var response = await new UnionClient(host, null).GetIntsOnlyClient().SendAsync(GetResponseProp3._2);
             Assert.AreEqual(204, response.Status);
         });
 
@@ -86,7 +86,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task SendFloatsOnly() => Test(async (host) =>
         {
-            var response = await new UnionClient(host, null).GetFloatsOnlyClient().SendAsync(BinaryData.FromString("2.2"));
+            var response = await new UnionClient(host, null).GetFloatsOnlyClient().SendAsync(GetResponseProp2._22);
             Assert.AreEqual(204, response.Status);
         });
 
