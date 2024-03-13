@@ -20,6 +20,7 @@ namespace ParametersCadl
     public partial class ParameterOrders
     {
         private readonly HttpPipeline _pipeline;
+        private readonly Uri _endpoint;
         private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
@@ -36,11 +37,13 @@ namespace ParametersCadl
         /// <summary> Initializes a new instance of ParameterOrders. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
+        /// <param name="endpoint"> Service endpoint. </param>
         /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        internal ParameterOrders(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string apiVersion)
+        internal ParameterOrders(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
         {
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            _endpoint = endpoint;
             _apiVersion = apiVersion;
         }
 

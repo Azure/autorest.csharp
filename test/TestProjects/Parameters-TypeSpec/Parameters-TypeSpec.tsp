@@ -12,7 +12,7 @@ using TypeSpec.Versioning;
 @versioned(Versions)
 @service(
     {
-        title: "Text authoring"
+        title: "This service does not define an endpoint. The generated code will add one."
     }
 )
 namespace ParametersCadl;

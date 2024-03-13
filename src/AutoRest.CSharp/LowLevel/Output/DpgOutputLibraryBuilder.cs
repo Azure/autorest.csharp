@@ -209,8 +209,24 @@ namespace AutoRest.CSharp.Output.Models
             }
             operationsMap.Add(operation, updatedOperation);
 
+            if (!updatedOperation.Parameters.Any(p => p.IsEndpoint || (p.Location == RequestLocation.Uri && p.Kind == InputOperationParameterKind.Client)))
+            {
+                updatedOperation = updatedOperation with
+                {
+                    Parameters = AddEndpointParameter(updatedOperation.Parameters)
+                };
+            }
+
             return updatedOperation;
 
+        }
+
+        private static IReadOnlyList<InputParameter> AddEndpointParameter(IReadOnlyList<InputParameter> operationParameters)
+        {
+            return new List<InputParameter>(operationParameters)
+            {
+                new InputParameter(KnownParameters.Endpoint.Name, "endpoint", $"{KnownParameters.Endpoint.Description}", new InputPrimitiveType(InputTypeKind.Uri, false), RequestLocation.Uri, null, null, null, InputOperationParameterKind.Client, true, false, false, false, true, false, false, null, null)
+            };
         }
 
         private static string UpdateOperationName(InputOperation operation, string clientName)
