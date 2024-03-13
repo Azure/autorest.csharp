@@ -318,7 +318,7 @@ namespace _Type.Model.Usage
 
             public static byte[] FromBase64UrlString(string value)
             {
-                int paddingCharsToAdd = value.Length switch
+                int paddingCharsToAdd = (value.Length % 4) switch
                 {
                     0 => 0,
                     2 => 2,
