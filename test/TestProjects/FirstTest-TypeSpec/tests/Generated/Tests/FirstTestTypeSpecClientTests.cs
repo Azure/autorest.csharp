@@ -588,7 +588,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            using RequestContent content = RequestContent.Create("2022-05-10T14:57:31.2311892-04:00");
+            using RequestContent content = RequestContent.Create("2022-05-10T18:57:31.2311892Z");
             Response response = await client.DateTimeBodyAsync(content);
         }
 
@@ -600,7 +600,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            Response response = await client.DateTimeBodyAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+            Response response = await client.DateTimeBodyAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
         }
 
         [Test]
@@ -611,7 +611,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            using RequestContent content = RequestContent.Create("2022-05-10T14:57:31.2311892-04:00");
+            using RequestContent content = RequestContent.Create("2022-05-10T18:57:31.2311892Z");
             Response response = await client.DateTimeBodyAsync(content);
         }
 
@@ -623,7 +623,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            Response response = await client.DateTimeBodyAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+            Response response = await client.DateTimeBodyAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
         }
 
         [Test]

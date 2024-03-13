@@ -75,7 +75,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.System
                 var result = new ResultExpression(resultVar);
                 return new MethodBodyStatement[]
                 {
-                    Snippets.Var(resultVar, new MessagePipelineExpression(pipeline).ProcessHeadAsBoolMessage(message, clientDiagnostics, new RequestOptionsExpression(KnownParameters.RequestContext), async)),
+                    Snippets.Var(resultVar, new MessagePipelineExpression(pipeline).ProcessHeadAsBoolMessage(message, new RequestOptionsExpression(KnownParameters.RequestContext), async)),
                     Snippets.Return(ResultExpression.FromValue(result.Value, result.GetRawResponse()))
                 };
             }

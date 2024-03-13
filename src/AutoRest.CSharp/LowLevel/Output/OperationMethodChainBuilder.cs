@@ -10,6 +10,7 @@ using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -464,7 +465,7 @@ namespace AutoRest.CSharp.Output.Models
                         requestConditionHeaders |= header;
                         requestConditionRequestParameter ??= operationParameter;
                         requestConditionSerializationFormat = requestConditionSerializationFormat == SerializationFormat.Default
-                            ? operationParameter.SerializationFormat
+                            ? SerializationBuilder.GetSerializationFormat(operationParameter.Type)
                             : requestConditionSerializationFormat;
 
                         break;
@@ -611,7 +612,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             var protocolMethodParameter = BuildParameter(inputParameter, frameworkParameterType ?? ChangeTypeForProtocolMethod(inputParameter.Type));
 
-            AddReference(name, inputParameter, protocolMethodParameter, inputParameter.SerializationFormat);
+            AddReference(name, inputParameter, protocolMethodParameter, SerializationBuilder.GetSerializationFormat(inputParameter.Type));
             if (inputParameter.Kind is InputOperationParameterKind.Client or InputOperationParameterKind.Constant)
             {
                 return;

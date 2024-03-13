@@ -1337,7 +1337,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            using RequestContent content = RequestContent.Create("2022-05-10T14:57:31.2311892-04:00");
+            using RequestContent content = RequestContent.Create("2022-05-10T18:57:31.2311892Z");
             Response response = client.DateTimeBody(content);
 
             Console.WriteLine(response.Status);
@@ -1350,7 +1350,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            using RequestContent content = RequestContent.Create("2022-05-10T14:57:31.2311892-04:00");
+            using RequestContent content = RequestContent.Create("2022-05-10T18:57:31.2311892Z");
             Response response = await client.DateTimeBodyAsync(content);
 
             Console.WriteLine(response.Status);
@@ -1363,7 +1363,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = client.DateTimeBody(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+            Response response = client.DateTimeBody(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
         }
 
         [Test]
@@ -1373,7 +1373,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = await client.DateTimeBodyAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+            Response response = await client.DateTimeBodyAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
         }
 
         [Test]
@@ -1383,7 +1383,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            using RequestContent content = RequestContent.Create("2022-05-10T14:57:31.2311892-04:00");
+            using RequestContent content = RequestContent.Create("2022-05-10T18:57:31.2311892Z");
             Response response = client.DateTimeBody(content);
 
             Console.WriteLine(response.Status);
@@ -1396,7 +1396,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            using RequestContent content = RequestContent.Create("2022-05-10T14:57:31.2311892-04:00");
+            using RequestContent content = RequestContent.Create("2022-05-10T18:57:31.2311892Z");
             Response response = await client.DateTimeBodyAsync(content);
 
             Console.WriteLine(response.Status);
@@ -1409,7 +1409,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = client.DateTimeBody(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+            Response response = client.DateTimeBody(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
         }
 
         [Test]
@@ -1419,7 +1419,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = await client.DateTimeBodyAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+            Response response = await client.DateTimeBodyAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
         }
 
         [Test]

@@ -16,6 +16,7 @@ namespace ParametersCadl
     public partial class ParametersCadlClient
     {
         private readonly HttpPipeline _pipeline;
+        private readonly Uri _endpoint;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -23,19 +24,30 @@ namespace ParametersCadl
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of ParametersCadlClient. </summary>
-        public ParametersCadlClient() : this(new ParametersCadlClientOptions())
+        /// <summary> Initializes a new instance of ParametersCadlClient for mocking. </summary>
+        protected ParametersCadlClient()
         {
         }
 
         /// <summary> Initializes a new instance of ParametersCadlClient. </summary>
-        /// <param name="options"> The options for configuring the client. </param>
-        public ParametersCadlClient(ParametersCadlClientOptions options)
+        /// <param name="endpoint"> Service endpoint. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public ParametersCadlClient(Uri endpoint) : this(endpoint, new ParametersCadlClientOptions())
         {
+        }
+
+        /// <summary> Initializes a new instance of ParametersCadlClient. </summary>
+        /// <param name="endpoint"> Service endpoint. </param>
+        /// <param name="options"> The options for configuring the client. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public ParametersCadlClient(Uri endpoint, ParametersCadlClientOptions options)
+        {
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new ParametersCadlClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
+            _endpoint = endpoint;
         }
 
         /// <summary> Initializes a new instance of ParameterOrders. </summary>
@@ -45,7 +57,7 @@ namespace ParametersCadl
         {
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return new ParameterOrders(ClientDiagnostics, _pipeline, apiVersion);
+            return new ParameterOrders(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
         }
     }
 }

@@ -11,7 +11,6 @@ using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Shared;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
