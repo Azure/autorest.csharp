@@ -1273,6 +1273,24 @@
           "Namespace": "OpenAI",
           "IsNullable": false,
           "Usage": "Input",
+          "InheritedDictionaryType": {
+           "$id": "178",
+           "Kind": "Dictionary",
+           "Name": "Dictionary",
+           "KeyType": {
+            "$id": "179",
+            "Kind": "Primitive",
+            "Name": "String",
+            "IsNullable": false
+           },
+           "ValueType": {
+            "$id": "180",
+            "Kind": "Intrinsic",
+            "Name": "unknown",
+            "IsNullable": false
+           },
+           "IsNullable": false
+          },
           "Properties": []
          },
          "IsRequired": true,
@@ -1288,21 +1306,21 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "178",
+     "$id": "181",
      "Name": "function_call",
      "SerializedName": "function_call",
      "Description": "Controls how the model responds to function calls. `none` means the model does not call a\nfunction, and responds to the end-user. `auto` means the model can pick between an end-user or\ncalling a function.  Specifying a particular function via `{\\\"name\":\\ \\\"my_function\\\"}` forces the\nmodel to call that function. `none` is the default when no functions are present. `auto` is the\ndefault if functions are present.",
      "Type": {
-      "$id": "179",
+      "$id": "182",
       "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
-        "$id": "180",
+        "$id": "183",
         "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
-         "$id": "181",
+         "$id": "184",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -1311,11 +1329,11 @@
         "IsNullable": false
        },
        {
-        "$id": "182",
+        "$id": "185",
         "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
-         "$id": "183",
+         "$id": "186",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -1324,7 +1342,7 @@
         "IsNullable": false
        },
        {
-        "$id": "184",
+        "$id": "187",
         "Kind": "Model",
         "Name": "ChatCompletionFunctionCallOption",
         "Namespace": "OpenAI",
@@ -1332,12 +1350,12 @@
         "Usage": "Input",
         "Properties": [
          {
-          "$id": "185",
+          "$id": "188",
           "Name": "name",
           "SerializedName": "name",
           "Description": "The name of the function to call.",
           "Type": {
-           "$id": "186",
+           "$id": "189",
            "Kind": "Primitive",
            "Name": "String",
            "IsNullable": false
@@ -1356,12 +1374,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "187",
+     "$id": "190",
      "Name": "temperature",
      "SerializedName": "temperature",
      "Description": "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output\nmore random, while lower values like 0.2 will make it more focused and deterministic.\n\nWe generally recommend altering this or `top_p` but not both.",
      "Type": {
-      "$id": "188",
+      "$id": "191",
       "Kind": "Primitive",
       "Name": "Float64",
       "IsNullable": true
@@ -1371,12 +1389,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "189",
+     "$id": "192",
      "Name": "top_p",
      "SerializedName": "top_p",
      "Description": "An alternative to sampling with temperature, called nucleus sampling, where the model considers\nthe results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising\nthe top 10% probability mass are considered.\n\nWe generally recommend altering this or `temperature` but not both.",
      "Type": {
-      "$id": "190",
+      "$id": "193",
       "Kind": "Primitive",
       "Name": "Float64",
       "IsNullable": true
@@ -1386,12 +1404,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "191",
+     "$id": "194",
      "Name": "n",
      "SerializedName": "n",
      "Description": "How many completions to generate for each prompt.\n**Note:** Because this parameter generates many completions, it can quickly consume your token\nquota. Use carefully and ensure that you have reasonable settings for `max_tokens` and `stop`.",
      "Type": {
-      "$id": "192",
+      "$id": "195",
       "Kind": "Primitive",
       "Name": "SafeInt",
       "IsNullable": true
@@ -1401,12 +1419,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "193",
+     "$id": "196",
      "Name": "max_tokens",
      "SerializedName": "max_tokens",
      "Description": "The maximum number of [tokens](/tokenizer) to generate in the completion.\n\nThe token count of your prompt plus `max_tokens` cannot exceed the model's context length.\n[Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb)\nfor counting tokens.",
      "Type": {
-      "$id": "194",
+      "$id": "197",
       "Kind": "Primitive",
       "Name": "SafeInt",
       "IsNullable": true
@@ -1416,27 +1434,27 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "195",
+     "$id": "198",
      "Name": "stop",
      "SerializedName": "stop",
      "Description": "Up to 4 sequences where the API will stop generating further tokens.",
      "Type": {
-      "$id": "196",
+      "$id": "199",
       "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
-        "$id": "197",
+        "$id": "200",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
        },
        {
-        "$id": "198",
+        "$id": "201",
         "Kind": "Array",
         "Name": "Array",
         "ElementType": {
-         "$id": "199",
+         "$id": "202",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -1451,12 +1469,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "200",
+     "$id": "203",
      "Name": "presence_penalty",
      "SerializedName": "presence_penalty",
      "Description": "Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear\nin the text so far, increasing the model's likelihood to talk about new topics.\n\n[See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)",
      "Type": {
-      "$id": "201",
+      "$id": "204",
       "Kind": "Primitive",
       "Name": "Float64",
       "IsNullable": true
@@ -1466,12 +1484,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "202",
+     "$id": "205",
      "Name": "frequency_penalty",
      "SerializedName": "frequency_penalty",
      "Description": "Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing\nfrequency in the text so far, decreasing the model's likelihood to repeat the same line\nverbatim.\n\n[See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)",
      "Type": {
-      "$id": "203",
+      "$id": "206",
       "Kind": "Primitive",
       "Name": "Float64",
       "IsNullable": true
@@ -1481,22 +1499,22 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "204",
+     "$id": "207",
      "Name": "logit_bias",
      "SerializedName": "logit_bias",
      "Description": "Modify the likelihood of specified tokens appearing in the completion.\nAccepts a json object that maps tokens (specified by their token ID in the tokenizer) to an\nassociated bias value from -100 to 100. Mathematically, the bias is added to the logits\ngenerated by the model prior to sampling. The exact effect will vary per model, but values\nbetween -1 and 1 should decrease or increase likelihood of selection; values like -100 or 100\nshould result in a ban or exclusive selection of the relevant token.",
      "Type": {
-      "$id": "205",
+      "$id": "208",
       "Kind": "Dictionary",
       "Name": "Dictionary",
       "KeyType": {
-       "$id": "206",
+       "$id": "209",
        "Kind": "Primitive",
        "Name": "String",
        "IsNullable": false
       },
       "ValueType": {
-       "$id": "207",
+       "$id": "210",
        "Kind": "Primitive",
        "Name": "SafeInt",
        "IsNullable": false
@@ -1508,12 +1526,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "208",
+     "$id": "211",
      "Name": "user",
      "SerializedName": "user",
      "Description": "A unique identifier representing your end-user, which can help OpenAI to monitor and detect\nabuse. [Learn more](/docs/guides/safety-best-practices/end-user-ids).",
      "Type": {
-      "$id": "209",
+      "$id": "212",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -1523,12 +1541,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "210",
+     "$id": "213",
      "Name": "stream",
      "SerializedName": "stream",
      "Description": "If set, partial message deltas will be sent, like in ChatGPT. Tokens will be sent as data-only\n[server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)\nas they become available, with the stream terminated by a `data: [DONE]` message.\n[Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_stream_completions.ipynb).",
      "Type": {
-      "$id": "211",
+      "$id": "214",
       "Kind": "Primitive",
       "Name": "Boolean",
       "IsNullable": true
@@ -1552,10 +1570,10 @@
    "$ref": "177"
   },
   {
-   "$ref": "184"
+   "$ref": "187"
   },
   {
-   "$id": "212",
+   "$id": "215",
    "Kind": "Model",
    "Name": "CreateChatCompletionResponse",
    "Namespace": "OpenAI",
@@ -1564,12 +1582,12 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "213",
+     "$id": "216",
      "Name": "id",
      "SerializedName": "id",
      "Description": "A unique identifier for the chat completion.",
      "Type": {
-      "$id": "214",
+      "$id": "217",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -1579,12 +1597,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "215",
+     "$id": "218",
      "Name": "object",
      "SerializedName": "object",
      "Description": "The object type, which is always `chat.completion`.",
      "Type": {
-      "$id": "216",
+      "$id": "219",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -1594,12 +1612,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "217",
+     "$id": "220",
      "Name": "created",
      "SerializedName": "created",
      "Description": "The Unix timestamp (in seconds) of when the chat completion was created.",
      "Type": {
-      "$id": "218",
+      "$id": "221",
       "Kind": "Primitive",
       "Name": "DateTimeUnix",
       "IsNullable": false
@@ -1609,12 +1627,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "219",
+     "$id": "222",
      "Name": "model",
      "SerializedName": "model",
      "Description": "The model used for the chat completion.",
      "Type": {
-      "$id": "220",
+      "$id": "223",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -1624,16 +1642,16 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "221",
+     "$id": "224",
      "Name": "choices",
      "SerializedName": "choices",
      "Description": "A list of chat completion choices. Can be more than one if `n` is greater than 1.",
      "Type": {
-      "$id": "222",
+      "$id": "225",
       "Kind": "Array",
       "Name": "Array",
       "ElementType": {
-       "$id": "223",
+       "$id": "226",
        "Kind": "Model",
        "Name": "CreateChatCompletionResponseChoice",
        "Namespace": "OpenAI",
@@ -1641,12 +1659,12 @@
        "Usage": "Output",
        "Properties": [
         {
-         "$id": "224",
+         "$id": "227",
          "Name": "index",
          "SerializedName": "index",
          "Description": "The index of the choice in the list of choices.",
          "Type": {
-          "$id": "225",
+          "$id": "228",
           "Kind": "Primitive",
           "Name": "SafeInt",
           "IsNullable": false
@@ -1656,12 +1674,12 @@
          "IsDiscriminator": false
         },
         {
-         "$id": "226",
+         "$id": "229",
          "Name": "message",
          "SerializedName": "message",
          "Description": "",
          "Type": {
-          "$id": "227",
+          "$id": "230",
           "Kind": "Model",
           "Name": "ChatCompletionResponseMessage",
           "Namespace": "OpenAI",
@@ -1669,7 +1687,7 @@
           "Usage": "Output",
           "Properties": [
            {
-            "$id": "228",
+            "$id": "231",
             "Name": "role",
             "SerializedName": "role",
             "Description": "The role of the author of this message.",
@@ -1681,12 +1699,12 @@
             "IsDiscriminator": false
            },
            {
-            "$id": "229",
+            "$id": "232",
             "Name": "content",
             "SerializedName": "content",
             "Description": "The contents of the message.",
             "Type": {
-             "$id": "230",
+             "$id": "233",
              "Kind": "Primitive",
              "Name": "String",
              "IsNullable": true
@@ -1696,12 +1714,12 @@
             "IsDiscriminator": false
            },
            {
-            "$id": "231",
+            "$id": "234",
             "Name": "function_call",
             "SerializedName": "function_call",
             "Description": "The name and arguments of a function that should be called, as generated by the model.",
             "Type": {
-             "$id": "232",
+             "$id": "235",
              "Kind": "Model",
              "Name": "ChatCompletionResponseMessageFunctionCall",
              "Namespace": "OpenAI",
@@ -1709,12 +1727,12 @@
              "Usage": "Output",
              "Properties": [
               {
-               "$id": "233",
+               "$id": "236",
                "Name": "name",
                "SerializedName": "name",
                "Description": "The name of the function to call.",
                "Type": {
-                "$id": "234",
+                "$id": "237",
                 "Kind": "Primitive",
                 "Name": "String",
                 "IsNullable": false
@@ -1724,12 +1742,12 @@
                "IsDiscriminator": false
               },
               {
-               "$id": "235",
+               "$id": "238",
                "Name": "arguments",
                "SerializedName": "arguments",
                "Description": "The arguments to call the function with, as generated by the model in JSON format. Note that\nthe model does not always generate valid JSON, and may hallucinate parameters not defined by\nyour function schema. Validate the arguments in your code before calling your function.",
                "Type": {
-                "$id": "236",
+                "$id": "239",
                 "Kind": "Primitive",
                 "Name": "String",
                 "IsNullable": false
@@ -1751,7 +1769,7 @@
          "IsDiscriminator": false
         },
         {
-         "$id": "237",
+         "$id": "240",
          "Name": "finish_reason",
          "SerializedName": "finish_reason",
          "Description": "The reason the model stopped generating tokens. This will be `stop` if the model hit a\nnatural stop point or a provided stop sequence, `length` if the maximum number of tokens\nspecified in the request was reached, `content_filter` if the content was omitted due to\na flag from our content filters, or `function_call` if the model called a function.",
@@ -1771,12 +1789,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "238",
+     "$id": "241",
      "Name": "usage",
      "SerializedName": "usage",
      "Description": "",
      "Type": {
-      "$id": "239",
+      "$id": "242",
       "Kind": "Model",
       "Name": "CompletionUsage",
       "Namespace": "OpenAI",
@@ -1785,12 +1803,12 @@
       "Usage": "Output",
       "Properties": [
        {
-        "$id": "240",
+        "$id": "243",
         "Name": "prompt_tokens",
         "SerializedName": "prompt_tokens",
         "Description": "Number of tokens in the prompt.",
         "Type": {
-         "$id": "241",
+         "$id": "244",
          "Kind": "Primitive",
          "Name": "SafeInt",
          "IsNullable": false
@@ -1800,12 +1818,12 @@
         "IsDiscriminator": false
        },
        {
-        "$id": "242",
+        "$id": "245",
         "Name": "completion_tokens",
         "SerializedName": "completion_tokens",
         "Description": "Number of tokens in the generated completion",
         "Type": {
-         "$id": "243",
+         "$id": "246",
          "Kind": "Primitive",
          "Name": "SafeInt",
          "IsNullable": false
@@ -1815,12 +1833,12 @@
         "IsDiscriminator": false
        },
        {
-        "$id": "244",
+        "$id": "247",
         "Name": "total_tokens",
         "SerializedName": "total_tokens",
         "Description": "Total number of tokens used in the request (prompt + completion).",
         "Type": {
-         "$id": "245",
+         "$id": "248",
          "Kind": "Primitive",
          "Name": "SafeInt",
          "IsNullable": false
@@ -1838,19 +1856,19 @@
    ]
   },
   {
-   "$ref": "223"
+   "$ref": "226"
   },
   {
-   "$ref": "227"
+   "$ref": "230"
   },
   {
-   "$ref": "232"
+   "$ref": "235"
   },
   {
-   "$ref": "239"
+   "$ref": "242"
   },
   {
-   "$id": "246",
+   "$id": "249",
    "Kind": "Model",
    "Name": "CreateFineTuningJobRequest",
    "Namespace": "OpenAI",
@@ -1858,12 +1876,12 @@
    "Usage": "Input",
    "Properties": [
     {
-     "$id": "247",
+     "$id": "250",
      "Name": "training_file",
      "SerializedName": "training_file",
      "Description": "The ID of an uploaded file that contains training data.\n\nSee [upload file](/docs/api-reference/files/upload) for how to upload a file.\n\nYour dataset must be formatted as a JSONL file. Additionally, you must upload your file with\nthe purpose `fine-tune`.\n\nSee the [fine-tuning guide](/docs/guides/fine-tuning) for more details.",
      "Type": {
-      "$id": "248",
+      "$id": "251",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -1873,12 +1891,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "249",
+     "$id": "252",
      "Name": "validation_file",
      "SerializedName": "validation_file",
      "Description": "The ID of an uploaded file that contains validation data.\n\nIf you provide this file, the data is used to generate validation metrics periodically during\nfine-tuning. These metrics can be viewed in the fine-tuning results file. The same data should\nnot be present in both train and validation files.\n\nYour dataset must be formatted as a JSONL file. You must upload your file with the purpose\n`fine-tune`.\n\nSee the [fine-tuning guide](/docs/guides/fine-tuning) for more details.",
      "Type": {
-      "$id": "250",
+      "$id": "253",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": true
@@ -1888,7 +1906,7 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "251",
+     "$id": "254",
      "Name": "model",
      "SerializedName": "model",
      "Description": "The name of the model to fine-tune. You can select one of the\n[supported models](/docs/guides/fine-tuning/what-models-can-be-fine-tuned).",
@@ -1900,12 +1918,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "252",
+     "$id": "255",
      "Name": "hyperparameters",
      "SerializedName": "hyperparameters",
      "Description": "The hyperparameters used for the fine-tuning job.",
      "Type": {
-      "$id": "253",
+      "$id": "256",
       "Kind": "Model",
       "Name": "CreateFineTuningJobRequestHyperparameters",
       "Namespace": "OpenAI",
@@ -1913,21 +1931,21 @@
       "Usage": "Input",
       "Properties": [
        {
-        "$id": "254",
+        "$id": "257",
         "Name": "n_epochs",
         "SerializedName": "n_epochs",
         "Description": "The number of epochs to train the model for. An epoch refers to one full cycle through the\ntraining dataset.",
         "Type": {
-         "$id": "255",
+         "$id": "258",
          "Kind": "Union",
          "Name": "Union",
          "UnionItemTypes": [
           {
-           "$id": "256",
+           "$id": "259",
            "Kind": "Literal",
            "Name": "Literal",
            "LiteralValueType": {
-            "$id": "257",
+            "$id": "260",
             "Kind": "Primitive",
             "Name": "String",
             "IsNullable": false
@@ -1936,7 +1954,7 @@
            "IsNullable": false
           },
           {
-           "$id": "258",
+           "$id": "261",
            "Kind": "Primitive",
            "Name": "SafeInt",
            "IsNullable": false
@@ -1955,12 +1973,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "259",
+     "$id": "262",
      "Name": "suffix",
      "SerializedName": "suffix",
      "Description": "A string of up to 18 characters that will be added to your fine-tuned model name.\n\nFor example, a `suffix` of \"custom-model-name\" would produce a model name like\n`ft:gpt-3.5-turbo:openai:custom-model-name:7p4lURel`.",
      "Type": {
-      "$id": "260",
+      "$id": "263",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": true
@@ -1972,10 +1990,10 @@
    ]
   },
   {
-   "$ref": "253"
+   "$ref": "256"
   },
   {
-   "$id": "261",
+   "$id": "264",
    "Kind": "Model",
    "Name": "FineTuningJob",
    "Namespace": "OpenAI",
@@ -1983,12 +2001,12 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "262",
+     "$id": "265",
      "Name": "id",
      "SerializedName": "id",
      "Description": "The object identifier, which can be referenced in the API endpoints.",
      "Type": {
-      "$id": "263",
+      "$id": "266",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -1998,12 +2016,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "264",
+     "$id": "267",
      "Name": "object",
      "SerializedName": "object",
      "Description": "The object type, which is always \"fine_tuning.job\".",
      "Type": {
-      "$id": "265",
+      "$id": "268",
       "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
@@ -2017,12 +2035,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "266",
+     "$id": "269",
      "Name": "created_at",
      "SerializedName": "created_at",
      "Description": "The Unix timestamp (in seconds) for when the fine-tuning job was created.",
      "Type": {
-      "$id": "267",
+      "$id": "270",
       "Kind": "Primitive",
       "Name": "DateTimeUnix",
       "IsNullable": false
@@ -2032,27 +2050,27 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "268",
+     "$id": "271",
      "Name": "finished_at",
      "SerializedName": "finished_at",
      "Description": "The Unix timestamp (in seconds) for when the fine-tuning job was finished. The value will be\nnull if the fine-tuning job is still running.",
      "Type": {
-      "$id": "269",
+      "$id": "272",
       "Kind": "Primitive",
       "Name": "DateTimeRFC3339",
-      "IsNullable": false
+      "IsNullable": true
      },
      "IsRequired": true,
      "IsReadOnly": false,
      "IsDiscriminator": false
     },
     {
-     "$id": "270",
+     "$id": "273",
      "Name": "model",
      "SerializedName": "model",
      "Description": "The base model that is being fine-tuned.",
      "Type": {
-      "$id": "271",
+      "$id": "274",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -2062,12 +2080,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "272",
+     "$id": "275",
      "Name": "fine_tuned_model",
      "SerializedName": "fine_tuned_model",
      "Description": "The name of the fine-tuned model that is being created. The value will be null if the\nfine-tuning job is still running.",
      "Type": {
-      "$id": "273",
+      "$id": "276",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": true
@@ -2077,12 +2095,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "274",
+     "$id": "277",
      "Name": "organization_id",
      "SerializedName": "organization_id",
      "Description": "The organization that owns the fine-tuning job.",
      "Type": {
-      "$id": "275",
+      "$id": "278",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -2092,7 +2110,7 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "276",
+     "$id": "279",
      "Name": "status",
      "SerializedName": "status",
      "Description": "The current status of the fine-tuning job, which can be either `created`, `pending`, `running`,\n`succeeded`, `failed`, or `cancelled`.",
@@ -2104,12 +2122,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "277",
+     "$id": "280",
      "Name": "hyperparameters",
      "SerializedName": "hyperparameters",
      "Description": "The hyperparameters used for the fine-tuning job. See the\n[fine-tuning guide](/docs/guides/fine-tuning) for more details.",
      "Type": {
-      "$id": "278",
+      "$id": "281",
       "Kind": "Model",
       "Name": "FineTuningJobHyperparameters",
       "Namespace": "OpenAI",
@@ -2117,21 +2135,21 @@
       "Usage": "Output",
       "Properties": [
        {
-        "$id": "279",
+        "$id": "282",
         "Name": "n_epochs",
         "SerializedName": "n_epochs",
         "Description": "The number of epochs to train the model for. An epoch refers to one full cycle through the\ntraining dataset.\n\n\"Auto\" decides the optimal number of epochs based on the size of the dataset. If setting the\nnumber manually, we support any number between 1 and 50 epochs.",
         "Type": {
-         "$id": "280",
+         "$id": "283",
          "Kind": "Union",
          "Name": "Union",
          "UnionItemTypes": [
           {
-           "$id": "281",
+           "$id": "284",
            "Kind": "Literal",
            "Name": "Literal",
            "LiteralValueType": {
-            "$id": "282",
+            "$id": "285",
             "Kind": "Primitive",
             "Name": "String",
             "IsNullable": false
@@ -2140,7 +2158,7 @@
            "IsNullable": false
           },
           {
-           "$id": "283",
+           "$id": "286",
            "Kind": "Primitive",
            "Name": "SafeInt",
            "IsNullable": false
@@ -2159,12 +2177,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "284",
+     "$id": "287",
      "Name": "training_file",
      "SerializedName": "training_file",
      "Description": "The file ID used for training. You can retrieve the training data with the\n[Files API](/docs/api-reference/files/retrieve-contents).",
      "Type": {
-      "$id": "285",
+      "$id": "288",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -2174,12 +2192,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "286",
+     "$id": "289",
      "Name": "validation_file",
      "SerializedName": "validation_file",
      "Description": "The file ID used for validation. You can retrieve the validation results with the\n[Files API](/docs/api-reference/files/retrieve-contents).",
      "Type": {
-      "$id": "287",
+      "$id": "290",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": true
@@ -2189,16 +2207,16 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "288",
+     "$id": "291",
      "Name": "result_files",
      "SerializedName": "result_files",
      "Description": "The compiled results file ID(s) for the fine-tuning job. You can retrieve the results with the\n[Files API](/docs/api-reference/files/retrieve-contents).",
      "Type": {
-      "$id": "289",
+      "$id": "292",
       "Kind": "Array",
       "Name": "Array",
       "ElementType": {
-       "$id": "290",
+       "$id": "293",
        "Kind": "Primitive",
        "Name": "String",
        "IsNullable": false
@@ -2210,12 +2228,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "291",
+     "$id": "294",
      "Name": "trained_tokens",
      "SerializedName": "trained_tokens",
      "Description": "The total number of billable tokens processed by this fine tuning job. The value will be null\nif the fine-tuning job is still running.",
      "Type": {
-      "$id": "292",
+      "$id": "295",
       "Kind": "Primitive",
       "Name": "SafeInt",
       "IsNullable": true
@@ -2225,12 +2243,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "293",
+     "$id": "296",
      "Name": "error",
      "SerializedName": "error",
      "Description": "For fine-tuning jobs that have `failed`, this will contain more information on the cause of the\nfailure.",
      "Type": {
-      "$id": "294",
+      "$id": "297",
       "Kind": "Model",
       "Name": "FineTuningJobError",
       "Namespace": "OpenAI",
@@ -2238,12 +2256,12 @@
       "Usage": "Output",
       "Properties": [
        {
-        "$id": "295",
+        "$id": "298",
         "Name": "message",
         "SerializedName": "message",
         "Description": "A human-readable error message.",
         "Type": {
-         "$id": "296",
+         "$id": "299",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -2253,12 +2271,12 @@
         "IsDiscriminator": false
        },
        {
-        "$id": "297",
+        "$id": "300",
         "Name": "code",
         "SerializedName": "code",
         "Description": "A machine-readable error code.",
         "Type": {
-         "$id": "298",
+         "$id": "301",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -2268,12 +2286,12 @@
         "IsDiscriminator": false
        },
        {
-        "$id": "299",
+        "$id": "302",
         "Name": "param",
         "SerializedName": "param",
         "Description": "The parameter that was invalid, usually `training_file` or `validation_file`. This field\nwill be null if the failure was not parameter-specific.",
         "Type": {
-         "$id": "300",
+         "$id": "303",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": true
@@ -2291,13 +2309,13 @@
    ]
   },
   {
-   "$ref": "278"
+   "$ref": "281"
   },
   {
-   "$ref": "294"
+   "$ref": "297"
   },
   {
-   "$id": "301",
+   "$id": "304",
    "Kind": "Model",
    "Name": "ListPaginatedFineTuningJobsResponse",
    "Namespace": "OpenAI",
@@ -2305,12 +2323,12 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "302",
+     "$id": "305",
      "Name": "object",
      "SerializedName": "object",
      "Description": "",
      "Type": {
-      "$id": "303",
+      "$id": "306",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -2320,16 +2338,16 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "304",
+     "$id": "307",
      "Name": "data",
      "SerializedName": "data",
      "Description": "",
      "Type": {
-      "$id": "305",
+      "$id": "308",
       "Kind": "Array",
       "Name": "Array",
       "ElementType": {
-       "$ref": "261"
+       "$ref": "264"
       },
       "IsNullable": false
      },
@@ -2338,12 +2356,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "306",
+     "$id": "309",
      "Name": "has_more",
      "SerializedName": "has_more",
      "Description": "",
      "Type": {
-      "$id": "307",
+      "$id": "310",
       "Kind": "Primitive",
       "Name": "Boolean",
       "IsNullable": false
@@ -2355,7 +2373,7 @@
    ]
   },
   {
-   "$id": "308",
+   "$id": "311",
    "Kind": "Model",
    "Name": "ListFineTuningJobEventsResponse",
    "Namespace": "OpenAI",
@@ -2363,12 +2381,12 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "309",
+     "$id": "312",
      "Name": "object",
      "SerializedName": "object",
      "Description": "",
      "Type": {
-      "$id": "310",
+      "$id": "313",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -2378,16 +2396,16 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "311",
+     "$id": "314",
      "Name": "data",
      "SerializedName": "data",
      "Description": "",
      "Type": {
-      "$id": "312",
+      "$id": "315",
       "Kind": "Array",
       "Name": "Array",
       "ElementType": {
-       "$id": "313",
+       "$id": "316",
        "Kind": "Model",
        "Name": "FineTuningJobEvent",
        "Namespace": "OpenAI",
@@ -2395,12 +2413,12 @@
        "Usage": "Output",
        "Properties": [
         {
-         "$id": "314",
+         "$id": "317",
          "Name": "id",
          "SerializedName": "id",
          "Description": "",
          "Type": {
-          "$id": "315",
+          "$id": "318",
           "Kind": "Primitive",
           "Name": "String",
           "IsNullable": false
@@ -2410,12 +2428,12 @@
          "IsDiscriminator": false
         },
         {
-         "$id": "316",
+         "$id": "319",
          "Name": "object",
          "SerializedName": "object",
          "Description": "",
          "Type": {
-          "$id": "317",
+          "$id": "320",
           "Kind": "Primitive",
           "Name": "String",
           "IsNullable": false
@@ -2425,12 +2443,12 @@
          "IsDiscriminator": false
         },
         {
-         "$id": "318",
+         "$id": "321",
          "Name": "created_at",
          "SerializedName": "created_at",
          "Description": "",
          "Type": {
-          "$id": "319",
+          "$id": "322",
           "Kind": "Primitive",
           "Name": "DateTimeUnix",
           "IsNullable": false
@@ -2440,7 +2458,7 @@
          "IsDiscriminator": false
         },
         {
-         "$id": "320",
+         "$id": "323",
          "Name": "level",
          "SerializedName": "level",
          "Description": "",
@@ -2452,12 +2470,12 @@
          "IsDiscriminator": false
         },
         {
-         "$id": "321",
+         "$id": "324",
          "Name": "message",
          "SerializedName": "message",
          "Description": "",
          "Type": {
-          "$id": "322",
+          "$id": "325",
           "Kind": "Primitive",
           "Name": "String",
           "IsNullable": false
@@ -2477,10 +2495,10 @@
    ]
   },
   {
-   "$ref": "313"
+   "$ref": "316"
   },
   {
-   "$id": "323",
+   "$id": "326",
    "Kind": "Model",
    "Name": "CreateCompletionRequest",
    "Namespace": "OpenAI",
@@ -2488,7 +2506,7 @@
    "Usage": "Input",
    "Properties": [
     {
-     "$id": "324",
+     "$id": "327",
      "Name": "model",
      "SerializedName": "model",
      "Description": "ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to\nsee all of your available models, or see our [Model overview](/docs/models/overview) for\ndescriptions of them.",
@@ -2500,27 +2518,27 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "325",
+     "$id": "328",
      "Name": "prompt",
      "SerializedName": "prompt",
      "Description": "The prompt(s) to generate completions for, encoded as a string, array of strings, array of\ntokens, or array of token arrays.\n\nNote that <|endoftext|> is the document separator that the model sees during training, so if a\nprompt is not specified the model will generate as if from the beginning of a new document.",
      "Type": {
-      "$id": "326",
+      "$id": "329",
       "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
-        "$id": "327",
+        "$id": "330",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
        },
        {
-        "$id": "328",
+        "$id": "331",
         "Kind": "Array",
         "Name": "Array",
         "ElementType": {
-         "$id": "329",
+         "$id": "332",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -2528,11 +2546,11 @@
         "IsNullable": false
        },
        {
-        "$id": "330",
+        "$id": "333",
         "Kind": "Array",
         "Name": "Array",
         "ElementType": {
-         "$id": "331",
+         "$id": "334",
          "Kind": "Primitive",
          "Name": "SafeInt",
          "IsNullable": false
@@ -2540,15 +2558,15 @@
         "IsNullable": false
        },
        {
-        "$id": "332",
+        "$id": "335",
         "Kind": "Array",
         "Name": "Array",
         "ElementType": {
-         "$id": "333",
+         "$id": "336",
          "Kind": "Array",
          "Name": "Array",
          "ElementType": {
-          "$id": "334",
+          "$id": "337",
           "Kind": "Primitive",
           "Name": "SafeInt",
           "IsNullable": false
@@ -2565,12 +2583,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "335",
+     "$id": "338",
      "Name": "suffix",
      "SerializedName": "suffix",
      "Description": "The suffix that comes after a completion of inserted text.",
      "Type": {
-      "$id": "336",
+      "$id": "339",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": true
@@ -2580,12 +2598,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "337",
+     "$id": "340",
      "Name": "temperature",
      "SerializedName": "temperature",
      "Description": "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output\nmore random, while lower values like 0.2 will make it more focused and deterministic.\n\nWe generally recommend altering this or `top_p` but not both.",
      "Type": {
-      "$id": "338",
+      "$id": "341",
       "Kind": "Primitive",
       "Name": "Float64",
       "IsNullable": true
@@ -2595,12 +2613,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "339",
+     "$id": "342",
      "Name": "top_p",
      "SerializedName": "top_p",
      "Description": "An alternative to sampling with temperature, called nucleus sampling, where the model considers\nthe results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising\nthe top 10% probability mass are considered.\n\nWe generally recommend altering this or `temperature` but not both.",
      "Type": {
-      "$id": "340",
+      "$id": "343",
       "Kind": "Primitive",
       "Name": "Float64",
       "IsNullable": true
@@ -2610,12 +2628,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "341",
+     "$id": "344",
      "Name": "n",
      "SerializedName": "n",
      "Description": "How many completions to generate for each prompt.\n**Note:** Because this parameter generates many completions, it can quickly consume your token\nquota. Use carefully and ensure that you have reasonable settings for `max_tokens` and `stop`.",
      "Type": {
-      "$id": "342",
+      "$id": "345",
       "Kind": "Primitive",
       "Name": "SafeInt",
       "IsNullable": true
@@ -2625,12 +2643,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "343",
+     "$id": "346",
      "Name": "max_tokens",
      "SerializedName": "max_tokens",
      "Description": "The maximum number of [tokens](/tokenizer) to generate in the completion.\n\nThe token count of your prompt plus `max_tokens` cannot exceed the model's context length.\n[Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb)\nfor counting tokens.",
      "Type": {
-      "$id": "344",
+      "$id": "347",
       "Kind": "Primitive",
       "Name": "SafeInt",
       "IsNullable": true
@@ -2640,27 +2658,27 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "345",
+     "$id": "348",
      "Name": "stop",
      "SerializedName": "stop",
      "Description": "Up to 4 sequences where the API will stop generating further tokens.",
      "Type": {
-      "$id": "346",
+      "$id": "349",
       "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
-        "$id": "347",
+        "$id": "350",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
        },
        {
-        "$id": "348",
+        "$id": "351",
         "Kind": "Array",
         "Name": "Array",
         "ElementType": {
-         "$id": "349",
+         "$id": "352",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -2675,12 +2693,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "350",
+     "$id": "353",
      "Name": "presence_penalty",
      "SerializedName": "presence_penalty",
      "Description": "Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear\nin the text so far, increasing the model's likelihood to talk about new topics.\n\n[See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)",
      "Type": {
-      "$id": "351",
+      "$id": "354",
       "Kind": "Primitive",
       "Name": "Float64",
       "IsNullable": true
@@ -2690,12 +2708,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "352",
+     "$id": "355",
      "Name": "frequency_penalty",
      "SerializedName": "frequency_penalty",
      "Description": "Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing\nfrequency in the text so far, decreasing the model's likelihood to repeat the same line\nverbatim.\n\n[See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)",
      "Type": {
-      "$id": "353",
+      "$id": "356",
       "Kind": "Primitive",
       "Name": "Float64",
       "IsNullable": true
@@ -2705,22 +2723,22 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "354",
+     "$id": "357",
      "Name": "logit_bias",
      "SerializedName": "logit_bias",
      "Description": "Modify the likelihood of specified tokens appearing in the completion.\nAccepts a json object that maps tokens (specified by their token ID in the tokenizer) to an\nassociated bias value from -100 to 100. Mathematically, the bias is added to the logits\ngenerated by the model prior to sampling. The exact effect will vary per model, but values\nbetween -1 and 1 should decrease or increase likelihood of selection; values like -100 or 100\nshould result in a ban or exclusive selection of the relevant token.",
      "Type": {
-      "$id": "355",
+      "$id": "358",
       "Kind": "Dictionary",
       "Name": "Dictionary",
       "KeyType": {
-       "$id": "356",
+       "$id": "359",
        "Kind": "Primitive",
        "Name": "String",
        "IsNullable": false
       },
       "ValueType": {
-       "$id": "357",
+       "$id": "360",
        "Kind": "Primitive",
        "Name": "SafeInt",
        "IsNullable": false
@@ -2732,12 +2750,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "358",
+     "$id": "361",
      "Name": "user",
      "SerializedName": "user",
      "Description": "A unique identifier representing your end-user, which can help OpenAI to monitor and detect\nabuse. [Learn more](/docs/guides/safety-best-practices/end-user-ids).",
      "Type": {
-      "$id": "359",
+      "$id": "362",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -2747,12 +2765,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "360",
+     "$id": "363",
      "Name": "stream",
      "SerializedName": "stream",
      "Description": "If set, partial message deltas will be sent, like in ChatGPT. Tokens will be sent as data-only\n[server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)\nas they become available, with the stream terminated by a `data: [DONE]` message.\n[Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_stream_completions.ipynb).",
      "Type": {
-      "$id": "361",
+      "$id": "364",
       "Kind": "Primitive",
       "Name": "Boolean",
       "IsNullable": true
@@ -2762,12 +2780,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "362",
+     "$id": "365",
      "Name": "logprobs",
      "SerializedName": "logprobs",
      "Description": "Include the log probabilities on the `logprobs` most likely tokens, as well the chosen tokens.\nFor example, if `logprobs` is 5, the API will return a list of the 5 most likely tokens. The\nAPI will always return the `logprob` of the sampled token, so there may be up to `logprobs+1`\nelements in the response.\n\nThe maximum value for `logprobs` is 5.",
      "Type": {
-      "$id": "363",
+      "$id": "366",
       "Kind": "Primitive",
       "Name": "SafeInt",
       "IsNullable": true
@@ -2777,12 +2795,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "364",
+     "$id": "367",
      "Name": "echo",
      "SerializedName": "echo",
      "Description": "Echo back the prompt in addition to the completion",
      "Type": {
-      "$id": "365",
+      "$id": "368",
       "Kind": "Primitive",
       "Name": "Boolean",
       "IsNullable": true
@@ -2792,12 +2810,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "366",
+     "$id": "369",
      "Name": "best_of",
      "SerializedName": "best_of",
      "Description": "Generates `best_of` completions server-side and returns the \"best\" (the one with the highest\nlog probability per token). Results cannot be streamed.\n\nWhen used with `n`, `best_of` controls the number of candidate completions and `n` specifies\nhow many to return – `best_of` must be greater than `n`.\n\n**Note:** Because this parameter generates many completions, it can quickly consume your token\nquota. Use carefully and ensure that you have reasonable settings for `max_tokens` and `stop`.",
      "Type": {
-      "$id": "367",
+      "$id": "370",
       "Kind": "Primitive",
       "Name": "SafeInt",
       "IsNullable": true
@@ -2809,7 +2827,7 @@
    ]
   },
   {
-   "$id": "368",
+   "$id": "371",
    "Kind": "Model",
    "Name": "CreateCompletionResponse",
    "Namespace": "OpenAI",
@@ -2818,12 +2836,12 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "369",
+     "$id": "372",
      "Name": "id",
      "SerializedName": "id",
      "Description": "A unique identifier for the completion.",
      "Type": {
-      "$id": "370",
+      "$id": "373",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -2833,12 +2851,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "371",
+     "$id": "374",
      "Name": "object",
      "SerializedName": "object",
      "Description": "The object type, which is always `text_completion`.",
      "Type": {
-      "$id": "372",
+      "$id": "375",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -2848,12 +2866,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "373",
+     "$id": "376",
      "Name": "created",
      "SerializedName": "created",
      "Description": "The Unix timestamp (in seconds) of when the completion was created.",
      "Type": {
-      "$id": "374",
+      "$id": "377",
       "Kind": "Primitive",
       "Name": "DateTimeUnix",
       "IsNullable": false
@@ -2863,12 +2881,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "375",
+     "$id": "378",
      "Name": "model",
      "SerializedName": "model",
      "Description": "The model used for the completion.",
      "Type": {
-      "$id": "376",
+      "$id": "379",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -2878,16 +2896,16 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "377",
+     "$id": "380",
      "Name": "choices",
      "SerializedName": "choices",
      "Description": "The list of completion choices the model generated for the input.",
      "Type": {
-      "$id": "378",
+      "$id": "381",
       "Kind": "Array",
       "Name": "Array",
       "ElementType": {
-       "$id": "379",
+       "$id": "382",
        "Kind": "Model",
        "Name": "CreateCompletionResponseChoice",
        "Namespace": "OpenAI",
@@ -2895,12 +2913,12 @@
        "Usage": "Output",
        "Properties": [
         {
-         "$id": "380",
+         "$id": "383",
          "Name": "index",
          "SerializedName": "index",
          "Description": "",
          "Type": {
-          "$id": "381",
+          "$id": "384",
           "Kind": "Primitive",
           "Name": "SafeInt",
           "IsNullable": false
@@ -2910,12 +2928,12 @@
          "IsDiscriminator": false
         },
         {
-         "$id": "382",
+         "$id": "385",
          "Name": "text",
          "SerializedName": "text",
          "Description": "",
          "Type": {
-          "$id": "383",
+          "$id": "386",
           "Kind": "Primitive",
           "Name": "String",
           "IsNullable": false
@@ -2925,12 +2943,12 @@
          "IsDiscriminator": false
         },
         {
-         "$id": "384",
+         "$id": "387",
          "Name": "logprobs",
          "SerializedName": "logprobs",
          "Description": "",
          "Type": {
-          "$id": "385",
+          "$id": "388",
           "Kind": "Model",
           "Name": "CreateCompletionResponseChoiceLogprobs",
           "Namespace": "OpenAI",
@@ -2938,16 +2956,16 @@
           "Usage": "Output",
           "Properties": [
            {
-            "$id": "386",
+            "$id": "389",
             "Name": "tokens",
             "SerializedName": "tokens",
             "Description": "",
             "Type": {
-             "$id": "387",
+             "$id": "390",
              "Kind": "Array",
              "Name": "Array",
              "ElementType": {
-              "$id": "388",
+              "$id": "391",
               "Kind": "Primitive",
               "Name": "String",
               "IsNullable": false
@@ -2959,16 +2977,16 @@
             "IsDiscriminator": false
            },
            {
-            "$id": "389",
+            "$id": "392",
             "Name": "token_logprobs",
             "SerializedName": "token_logprobs",
             "Description": "",
             "Type": {
-             "$id": "390",
+             "$id": "393",
              "Kind": "Array",
              "Name": "Array",
              "ElementType": {
-              "$id": "391",
+              "$id": "394",
               "Kind": "Primitive",
               "Name": "Float64",
               "IsNullable": false
@@ -2980,26 +2998,26 @@
             "IsDiscriminator": false
            },
            {
-            "$id": "392",
+            "$id": "395",
             "Name": "top_logprobs",
             "SerializedName": "top_logprobs",
             "Description": "",
             "Type": {
-             "$id": "393",
+             "$id": "396",
              "Kind": "Array",
              "Name": "Array",
              "ElementType": {
-              "$id": "394",
+              "$id": "397",
               "Kind": "Dictionary",
               "Name": "Dictionary",
               "KeyType": {
-               "$id": "395",
+               "$id": "398",
                "Kind": "Primitive",
                "Name": "String",
                "IsNullable": false
               },
               "ValueType": {
-               "$id": "396",
+               "$id": "399",
                "Kind": "Primitive",
                "Name": "SafeInt",
                "IsNullable": false
@@ -3013,16 +3031,16 @@
             "IsDiscriminator": false
            },
            {
-            "$id": "397",
+            "$id": "400",
             "Name": "text_offset",
             "SerializedName": "text_offset",
             "Description": "",
             "Type": {
-             "$id": "398",
+             "$id": "401",
              "Kind": "Array",
              "Name": "Array",
              "ElementType": {
-              "$id": "399",
+              "$id": "402",
               "Kind": "Primitive",
               "Name": "SafeInt",
               "IsNullable": false
@@ -3040,7 +3058,7 @@
          "IsDiscriminator": false
         },
         {
-         "$id": "400",
+         "$id": "403",
          "Name": "finish_reason",
          "SerializedName": "finish_reason",
          "Description": "The reason the model stopped generating tokens. This will be `stop` if the model hit a\nnatural stop point or a provided stop sequence, or `content_filter` if content was omitted\ndue to a flag from our content filters, `length` if the maximum number of tokens specified\nin the request was reached, or `content_filter` if content was omitted due to a flag from our\ncontent filters.",
@@ -3060,12 +3078,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "401",
+     "$id": "404",
      "Name": "usage",
      "SerializedName": "usage",
      "Description": "",
      "Type": {
-      "$ref": "239"
+      "$ref": "242"
      },
      "IsRequired": false,
      "IsReadOnly": false,
@@ -3074,13 +3092,13 @@
    ]
   },
   {
-   "$ref": "379"
+   "$ref": "382"
   },
   {
-   "$ref": "385"
+   "$ref": "388"
   },
   {
-   "$id": "402",
+   "$id": "405",
    "Kind": "Model",
    "Name": "CreateEditRequest",
    "Namespace": "OpenAI",
@@ -3088,7 +3106,7 @@
    "Usage": "Input",
    "Properties": [
     {
-     "$id": "403",
+     "$id": "406",
      "Name": "model",
      "SerializedName": "model",
      "Description": "ID of the model to use. You can use the `text-davinci-edit-001` or `code-davinci-edit-001`\nmodel with this endpoint.",
@@ -3100,12 +3118,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "404",
+     "$id": "407",
      "Name": "input",
      "SerializedName": "input",
      "Description": "The input text to use as a starting point for the edit.",
      "Type": {
-      "$id": "405",
+      "$id": "408",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": true
@@ -3115,12 +3133,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "406",
+     "$id": "409",
      "Name": "instruction",
      "SerializedName": "instruction",
      "Description": "The instruction that tells the model how to edit the prompt.",
      "Type": {
-      "$id": "407",
+      "$id": "410",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -3130,12 +3148,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "408",
+     "$id": "411",
      "Name": "n",
      "SerializedName": "n",
      "Description": "How many edits to generate for the input and instruction.",
      "Type": {
-      "$id": "409",
+      "$id": "412",
       "Kind": "Primitive",
       "Name": "SafeInt",
       "IsNullable": true
@@ -3145,12 +3163,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "410",
+     "$id": "413",
      "Name": "temperature",
      "SerializedName": "temperature",
      "Description": "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output\nmore random, while lower values like 0.2 will make it more focused and deterministic.\n\nWe generally recommend altering this or `top_p` but not both.",
      "Type": {
-      "$id": "411",
+      "$id": "414",
       "Kind": "Primitive",
       "Name": "Float64",
       "IsNullable": true
@@ -3160,12 +3178,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "412",
+     "$id": "415",
      "Name": "top_p",
      "SerializedName": "top_p",
      "Description": "An alternative to sampling with temperature, called nucleus sampling, where the model considers\nthe results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising\nthe top 10% probability mass are considered.\n\nWe generally recommend altering this or `temperature` but not both.",
      "Type": {
-      "$id": "413",
+      "$id": "416",
       "Kind": "Primitive",
       "Name": "Float64",
       "IsNullable": true
@@ -3177,7 +3195,7 @@
    ]
   },
   {
-   "$id": "414",
+   "$id": "417",
    "Kind": "Model",
    "Name": "CreateEditResponse",
    "Namespace": "OpenAI",
@@ -3186,12 +3204,12 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "415",
+     "$id": "418",
      "Name": "object",
      "SerializedName": "object",
      "Description": "The object type, which is always `edit`.",
      "Type": {
-      "$id": "416",
+      "$id": "419",
       "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
@@ -3205,12 +3223,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "417",
+     "$id": "420",
      "Name": "created",
      "SerializedName": "created",
      "Description": "The Unix timestamp (in seconds) of when the edit was created.",
      "Type": {
-      "$id": "418",
+      "$id": "421",
       "Kind": "Primitive",
       "Name": "DateTimeUnix",
       "IsNullable": false
@@ -3220,16 +3238,16 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "419",
+     "$id": "422",
      "Name": "choices",
      "SerializedName": "choices",
      "Description": "description: A list of edit choices. Can be more than one if `n` is greater than 1.",
      "Type": {
-      "$id": "420",
+      "$id": "423",
       "Kind": "Array",
       "Name": "Array",
       "ElementType": {
-       "$id": "421",
+       "$id": "424",
        "Kind": "Model",
        "Name": "CreateEditResponseChoice",
        "Namespace": "OpenAI",
@@ -3237,12 +3255,12 @@
        "Usage": "Output",
        "Properties": [
         {
-         "$id": "422",
+         "$id": "425",
          "Name": "text",
          "SerializedName": "text",
          "Description": "The edited result.",
          "Type": {
-          "$id": "423",
+          "$id": "426",
           "Kind": "Primitive",
           "Name": "String",
           "IsNullable": false
@@ -3252,12 +3270,12 @@
          "IsDiscriminator": false
         },
         {
-         "$id": "424",
+         "$id": "427",
          "Name": "index",
          "SerializedName": "index",
          "Description": "The index of the choice in the list of choices.",
          "Type": {
-          "$id": "425",
+          "$id": "428",
           "Kind": "Primitive",
           "Name": "SafeInt",
           "IsNullable": false
@@ -3267,7 +3285,7 @@
          "IsDiscriminator": false
         },
         {
-         "$id": "426",
+         "$id": "429",
          "Name": "finish_reason",
          "SerializedName": "finish_reason",
          "Description": "The reason the model stopped generating tokens. This will be `stop` if the model hit a\nnatural stop point or a provided stop sequence, or `length` if the maximum number of tokens\nspecified in the request was reached.",
@@ -3287,12 +3305,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "427",
+     "$id": "430",
      "Name": "usage",
      "SerializedName": "usage",
      "Description": "",
      "Type": {
-      "$ref": "239"
+      "$ref": "242"
      },
      "IsRequired": true,
      "IsReadOnly": false,
@@ -3301,10 +3319,10 @@
    ]
   },
   {
-   "$ref": "421"
+   "$ref": "424"
   },
   {
-   "$id": "428",
+   "$id": "431",
    "Kind": "Model",
    "Name": "CreateEmbeddingRequest",
    "Namespace": "OpenAI",
@@ -3312,7 +3330,7 @@
    "Usage": "Input",
    "Properties": [
     {
-     "$id": "429",
+     "$id": "432",
      "Name": "model",
      "SerializedName": "model",
      "Description": "ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to see all of your available models, or see our [Model overview](/docs/models/overview) for descriptions of them.",
@@ -3324,27 +3342,27 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "430",
+     "$id": "433",
      "Name": "input",
      "SerializedName": "input",
      "Description": "Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a\nsingle request, pass an array of strings or array of token arrays. Each input must not exceed\nthe max input tokens for the model (8191 tokens for `text-embedding-ada-002`) and cannot be an empty string.\n[Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb)\nfor counting tokens.",
      "Type": {
-      "$id": "431",
+      "$id": "434",
       "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
-        "$id": "432",
+        "$id": "435",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
        },
        {
-        "$id": "433",
+        "$id": "436",
         "Kind": "Array",
         "Name": "Array",
         "ElementType": {
-         "$id": "434",
+         "$id": "437",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -3352,11 +3370,11 @@
         "IsNullable": false
        },
        {
-        "$id": "435",
+        "$id": "438",
         "Kind": "Array",
         "Name": "Array",
         "ElementType": {
-         "$id": "436",
+         "$id": "439",
          "Kind": "Primitive",
          "Name": "SafeInt",
          "IsNullable": false
@@ -3364,15 +3382,15 @@
         "IsNullable": false
        },
        {
-        "$id": "437",
+        "$id": "440",
         "Kind": "Array",
         "Name": "Array",
         "ElementType": {
-         "$id": "438",
+         "$id": "441",
          "Kind": "Array",
          "Name": "Array",
          "ElementType": {
-          "$id": "439",
+          "$id": "442",
           "Kind": "Primitive",
           "Name": "SafeInt",
           "IsNullable": false
@@ -3389,12 +3407,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "440",
+     "$id": "443",
      "Name": "user",
      "SerializedName": "user",
      "Description": "",
      "Type": {
-      "$id": "441",
+      "$id": "444",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -3406,7 +3424,7 @@
    ]
   },
   {
-   "$id": "442",
+   "$id": "445",
    "Kind": "Model",
    "Name": "CreateEmbeddingResponse",
    "Namespace": "OpenAI",
@@ -3414,12 +3432,12 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "443",
+     "$id": "446",
      "Name": "object",
      "SerializedName": "object",
      "Description": "The object type, which is always \"embedding\".",
      "Type": {
-      "$id": "444",
+      "$id": "447",
       "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
@@ -3433,12 +3451,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "445",
+     "$id": "448",
      "Name": "model",
      "SerializedName": "model",
      "Description": "The name of the model used to generate the embedding.",
      "Type": {
-      "$id": "446",
+      "$id": "449",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -3448,16 +3466,16 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "447",
+     "$id": "450",
      "Name": "data",
      "SerializedName": "data",
      "Description": "The list of embeddings generated by the model.",
      "Type": {
-      "$id": "448",
+      "$id": "451",
       "Kind": "Array",
       "Name": "Array",
       "ElementType": {
-       "$id": "449",
+       "$id": "452",
        "Kind": "Model",
        "Name": "Embedding",
        "Namespace": "OpenAI",
@@ -3466,12 +3484,12 @@
        "Usage": "Output",
        "Properties": [
         {
-         "$id": "450",
+         "$id": "453",
          "Name": "index",
          "SerializedName": "index",
          "Description": "The index of the embedding in the list of embeddings.",
          "Type": {
-          "$id": "451",
+          "$id": "454",
           "Kind": "Primitive",
           "Name": "SafeInt",
           "IsNullable": false
@@ -3481,12 +3499,12 @@
          "IsDiscriminator": false
         },
         {
-         "$id": "452",
+         "$id": "455",
          "Name": "object",
          "SerializedName": "object",
          "Description": "The object type, which is always \"embedding\".",
          "Type": {
-          "$id": "453",
+          "$id": "456",
           "Kind": "Literal",
           "Name": "Literal",
           "LiteralValueType": {
@@ -3500,16 +3518,16 @@
          "IsDiscriminator": false
         },
         {
-         "$id": "454",
+         "$id": "457",
          "Name": "embedding",
          "SerializedName": "embedding",
          "Description": "The embedding vector, which is a list of floats. The length of vector depends on the model as\\\nlisted in the [embedding guide](/docs/guides/embeddings).",
          "Type": {
-          "$id": "455",
+          "$id": "458",
           "Kind": "Array",
           "Name": "Array",
           "ElementType": {
-           "$id": "456",
+           "$id": "459",
            "Kind": "Primitive",
            "Name": "Float64",
            "IsNullable": false
@@ -3529,12 +3547,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "457",
+     "$id": "460",
      "Name": "usage",
      "SerializedName": "usage",
      "Description": "The usage information for the request.",
      "Type": {
-      "$id": "458",
+      "$id": "461",
       "Kind": "Model",
       "Name": "CreateEmbeddingResponseUsage",
       "Namespace": "OpenAI",
@@ -3542,12 +3560,12 @@
       "Usage": "Output",
       "Properties": [
        {
-        "$id": "459",
+        "$id": "462",
         "Name": "prompt_tokens",
         "SerializedName": "prompt_tokens",
         "Description": "The number of tokens used by the prompt.",
         "Type": {
-         "$id": "460",
+         "$id": "463",
          "Kind": "Primitive",
          "Name": "SafeInt",
          "IsNullable": false
@@ -3557,12 +3575,12 @@
         "IsDiscriminator": false
        },
        {
-        "$id": "461",
+        "$id": "464",
         "Name": "total_tokens",
         "SerializedName": "total_tokens",
         "Description": "The total number of tokens used by the request.",
         "Type": {
-         "$id": "462",
+         "$id": "465",
          "Kind": "Primitive",
          "Name": "SafeInt",
          "IsNullable": false
@@ -3580,13 +3598,13 @@
    ]
   },
   {
-   "$ref": "449"
+   "$ref": "452"
   },
   {
-   "$ref": "458"
+   "$ref": "461"
   },
   {
-   "$id": "463",
+   "$id": "466",
    "Kind": "Model",
    "Name": "ListFilesResponse",
    "Namespace": "OpenAI",
@@ -3594,12 +3612,12 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "464",
+     "$id": "467",
      "Name": "object",
      "SerializedName": "object",
      "Description": "",
      "Type": {
-      "$id": "465",
+      "$id": "468",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -3609,16 +3627,16 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "466",
+     "$id": "469",
      "Name": "data",
      "SerializedName": "data",
      "Description": "",
      "Type": {
-      "$id": "467",
+      "$id": "470",
       "Kind": "Array",
       "Name": "Array",
       "ElementType": {
-       "$id": "468",
+       "$id": "471",
        "Kind": "Model",
        "Name": "OpenAIFile",
        "Namespace": "OpenAI",
@@ -3627,12 +3645,12 @@
        "Usage": "Output",
        "Properties": [
         {
-         "$id": "469",
+         "$id": "472",
          "Name": "id",
          "SerializedName": "id",
          "Description": "The file identifier, which can be referenced in the API endpoints.",
          "Type": {
-          "$id": "470",
+          "$id": "473",
           "Kind": "Primitive",
           "Name": "String",
           "IsNullable": false
@@ -3642,12 +3660,12 @@
          "IsDiscriminator": false
         },
         {
-         "$id": "471",
+         "$id": "474",
          "Name": "object",
          "SerializedName": "object",
          "Description": "The object type, which is always \"file\".",
          "Type": {
-          "$id": "472",
+          "$id": "475",
           "Kind": "Literal",
           "Name": "Literal",
           "LiteralValueType": {
@@ -3661,12 +3679,12 @@
          "IsDiscriminator": false
         },
         {
-         "$id": "473",
+         "$id": "476",
          "Name": "bytes",
          "SerializedName": "bytes",
          "Description": "The size of the file in bytes.",
          "Type": {
-          "$id": "474",
+          "$id": "477",
           "Kind": "Primitive",
           "Name": "SafeInt",
           "IsNullable": false
@@ -3676,12 +3694,12 @@
          "IsDiscriminator": false
         },
         {
-         "$id": "475",
+         "$id": "478",
          "Name": "createdAt",
          "SerializedName": "createdAt",
          "Description": "The Unix timestamp (in seconds) for when the file was created.",
          "Type": {
-          "$id": "476",
+          "$id": "479",
           "Kind": "Primitive",
           "Name": "DateTimeUnix",
           "IsNullable": false
@@ -3691,12 +3709,12 @@
          "IsDiscriminator": false
         },
         {
-         "$id": "477",
+         "$id": "480",
          "Name": "filename",
          "SerializedName": "filename",
          "Description": "The name of the file.",
          "Type": {
-          "$id": "478",
+          "$id": "481",
           "Kind": "Primitive",
           "Name": "String",
           "IsNullable": false
@@ -3706,12 +3724,12 @@
          "IsDiscriminator": false
         },
         {
-         "$id": "479",
+         "$id": "482",
          "Name": "purpose",
          "SerializedName": "purpose",
          "Description": "The intended purpose of the file. Currently, only \"fine-tune\" is supported.",
          "Type": {
-          "$id": "480",
+          "$id": "483",
           "Kind": "Primitive",
           "Name": "String",
           "IsNullable": false
@@ -3721,7 +3739,7 @@
          "IsDiscriminator": false
         },
         {
-         "$id": "481",
+         "$id": "484",
          "Name": "status",
          "SerializedName": "status",
          "Description": "The current status of the file, which can be either `uploaded`, `processed`, `pending`,\n`error`, `deleting` or `deleted`.",
@@ -3733,12 +3751,12 @@
          "IsDiscriminator": false
         },
         {
-         "$id": "482",
+         "$id": "485",
          "Name": "status_details",
          "SerializedName": "status_details",
          "Description": "Additional details about the status of the file. If the file is in the `error` state, this will\ninclude a message describing the error.",
          "Type": {
-          "$id": "483",
+          "$id": "486",
           "Kind": "Primitive",
           "Name": "String",
           "IsNullable": true
@@ -3758,10 +3776,10 @@
    ]
   },
   {
-   "$ref": "468"
+   "$ref": "471"
   },
   {
-   "$id": "484",
+   "$id": "487",
    "Kind": "Model",
    "Name": "CreateFileRequest",
    "Namespace": "OpenAI",
@@ -3769,12 +3787,12 @@
    "Usage": "Input",
    "Properties": [
     {
-     "$id": "485",
+     "$id": "488",
      "Name": "file",
      "SerializedName": "file",
      "Description": "Name of the [JSON Lines](https://jsonlines.readthedocs.io/en/latest/) file to be uploaded.\n\nIf the `purpose` is set to \"fine-tune\", the file will be used for fine-tuning.",
      "Type": {
-      "$id": "486",
+      "$id": "489",
       "Kind": "Primitive",
       "Name": "Bytes",
       "IsNullable": false
@@ -3784,12 +3802,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "487",
+     "$id": "490",
      "Name": "purpose",
      "SerializedName": "purpose",
      "Description": "The intended purpose of the uploaded documents. Use \"fine-tune\" for\n[fine-tuning](/docs/api-reference/fine-tuning). This allows us to validate the format of the\nuploaded file.",
      "Type": {
-      "$id": "488",
+      "$id": "491",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -3801,7 +3819,7 @@
    ]
   },
   {
-   "$id": "489",
+   "$id": "492",
    "Kind": "Model",
    "Name": "DeleteFileResponse",
    "Namespace": "OpenAI",
@@ -3809,12 +3827,12 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "490",
+     "$id": "493",
      "Name": "id",
      "SerializedName": "id",
      "Description": "",
      "Type": {
-      "$id": "491",
+      "$id": "494",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -3824,12 +3842,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "492",
+     "$id": "495",
      "Name": "object",
      "SerializedName": "object",
      "Description": "",
      "Type": {
-      "$id": "493",
+      "$id": "496",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -3839,12 +3857,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "494",
+     "$id": "497",
      "Name": "deleted",
      "SerializedName": "deleted",
      "Description": "",
      "Type": {
-      "$id": "495",
+      "$id": "498",
       "Kind": "Primitive",
       "Name": "Boolean",
       "IsNullable": false
@@ -3856,7 +3874,7 @@
    ]
   },
   {
-   "$id": "496",
+   "$id": "499",
    "Kind": "Model",
    "Name": "CreateFineTuneRequest",
    "Namespace": "OpenAI",
@@ -3864,12 +3882,12 @@
    "Usage": "Input",
    "Properties": [
     {
-     "$id": "497",
+     "$id": "500",
      "Name": "training_file",
      "SerializedName": "training_file",
      "Description": "The ID of an uploaded file that contains training data.\n\nSee [upload file](/docs/api-reference/files/upload) for how to upload a file.\n\nYour dataset must be formatted as a JSONL file, where each training example is a JSON object\nwith the keys \"prompt\" and \"completion\". Additionally, you must upload your file with the\npurpose `fine-tune`.\n\nSee the [fine-tuning guide](/docs/guides/legacy-fine-tuning/creating-training-data) for more\ndetails.",
      "Type": {
-      "$id": "498",
+      "$id": "501",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -3879,12 +3897,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "499",
+     "$id": "502",
      "Name": "validation_file",
      "SerializedName": "validation_file",
      "Description": "The ID of an uploaded file that contains validation data.\n\nIf you provide this file, the data is used to generate validation metrics periodically during\nfine-tuning. These metrics can be viewed in the\n[fine-tuning results file](/docs/guides/legacy-fine-tuning/analyzing-your-fine-tuned-model).\nYour train and validation data should be mutually exclusive.\n\nYour dataset must be formatted as a JSONL file, where each validation example is a JSON object\nwith the keys \"prompt\" and \"completion\". Additionally, you must upload your file with the\npurpose `fine-tune`.\n\nSee the [fine-tuning guide](/docs/guides/legacy-fine-tuning/creating-training-data) for more\ndetails.",
      "Type": {
-      "$id": "500",
+      "$id": "503",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": true
@@ -3894,7 +3912,7 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "501",
+     "$id": "504",
      "Name": "model",
      "SerializedName": "model",
      "Description": "The name of the base model to fine-tune. You can select one of \"ada\", \"babbage\", \"curie\",\n\"davinci\", or a fine-tuned model created after 2022-04-21 and before 2023-08-22. To learn more\nabout these models, see the [Models](/docs/models) documentation.",
@@ -3906,12 +3924,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "502",
+     "$id": "505",
      "Name": "n_epochs",
      "SerializedName": "n_epochs",
      "Description": "The number of epochs to train the model for. An epoch refers to one full cycle through the\ntraining dataset.",
      "Type": {
-      "$id": "503",
+      "$id": "506",
       "Kind": "Primitive",
       "Name": "SafeInt",
       "IsNullable": true
@@ -3921,12 +3939,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "504",
+     "$id": "507",
      "Name": "batch_size",
      "SerializedName": "batch_size",
      "Description": "The batch size to use for training. The batch size is the number of training examples used to\ntrain a single forward and backward pass.\n\nBy default, the batch size will be dynamically configured to be ~0.2% of the number of examples\nin the training set, capped at 256 - in general, we've found that larger batch sizes tend to\nwork better for larger datasets.",
      "Type": {
-      "$id": "505",
+      "$id": "508",
       "Kind": "Primitive",
       "Name": "SafeInt",
       "IsNullable": true
@@ -3936,12 +3954,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "506",
+     "$id": "509",
      "Name": "learning_rate_multiplier",
      "SerializedName": "learning_rate_multiplier",
      "Description": "The learning rate multiplier to use for training. The fine-tuning learning rate is the original\nlearning rate used for pretraining multiplied by this value.\n\nBy default, the learning rate multiplier is the 0.05, 0.1, or 0.2 depending on final\n`batch_size` (larger learning rates tend to perform better with larger batch sizes). We\nrecommend experimenting with values in the range 0.02 to 0.2 to see what produces the best\nresults.",
      "Type": {
-      "$id": "507",
+      "$id": "510",
       "Kind": "Primitive",
       "Name": "Float64",
       "IsNullable": true
@@ -3951,12 +3969,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "508",
+     "$id": "511",
      "Name": "prompt_loss_rate",
      "SerializedName": "prompt_loss_rate",
      "Description": "The weight to use for loss on the prompt tokens. This controls how much the model tries to\nlearn to generate the prompt (as compared to the completion which always has a weight of 1.0),\nand can add a stabilizing effect to training when completions are short.\n\nIf prompts are extremely long (relative to completions), it may make sense to reduce this\nweight so as to avoid over-prioritizing learning the prompt.",
      "Type": {
-      "$id": "509",
+      "$id": "512",
       "Kind": "Primitive",
       "Name": "Float64",
       "IsNullable": true
@@ -3966,12 +3984,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "510",
+     "$id": "513",
      "Name": "compute_classification_metrics",
      "SerializedName": "compute_classification_metrics",
      "Description": "If set, we calculate classification-specific metrics such as accuracy and F-1 score using the\nvalidation set at the end of every epoch. These metrics can be viewed in the\n[results file](/docs/guides/legacy-fine-tuning/analyzing-your-fine-tuned-model).\n\nIn order to compute classification metrics, you must provide a `validation_file`. Additionally,\nyou must specify `classification_n_classes` for multiclass classification or\n`classification_positive_class` for binary classification.",
      "Type": {
-      "$id": "511",
+      "$id": "514",
       "Kind": "Primitive",
       "Name": "Boolean",
       "IsNullable": true
@@ -3981,12 +3999,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "512",
+     "$id": "515",
      "Name": "classification_n_classes",
      "SerializedName": "classification_n_classes",
      "Description": "The number of classes in a classification task.\n\nThis parameter is required for multiclass classification.",
      "Type": {
-      "$id": "513",
+      "$id": "516",
       "Kind": "Primitive",
       "Name": "SafeInt",
       "IsNullable": true
@@ -3996,12 +4014,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "514",
+     "$id": "517",
      "Name": "classification_positive_class",
      "SerializedName": "classification_positive_class",
      "Description": "The positive class in binary classification.\n\nThis parameter is needed to generate precision, recall, and F1 metrics when doing binary\nclassification.",
      "Type": {
-      "$id": "515",
+      "$id": "518",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": true
@@ -4011,16 +4029,16 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "516",
+     "$id": "519",
      "Name": "classification_betas",
      "SerializedName": "classification_betas",
      "Description": "If this is provided, we calculate F-beta scores at the specified beta values. The F-beta score\nis a generalization of F-1 score. This is only used for binary classification.\n\nWith a beta of 1 (i.e. the F-1 score), precision and recall are given the same weight. A larger\nbeta score puts more weight on recall and less on precision. A smaller beta score puts more\nweight on precision and less on recall.",
      "Type": {
-      "$id": "517",
+      "$id": "520",
       "Kind": "Array",
       "Name": "Array",
       "ElementType": {
-       "$id": "518",
+       "$id": "521",
        "Kind": "Primitive",
        "Name": "Float64",
        "IsNullable": false
@@ -4032,12 +4050,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "519",
+     "$id": "522",
      "Name": "suffix",
      "SerializedName": "suffix",
      "Description": "A string of up to 18 characters that will be added to your fine-tuned model name.\n\nFor example, a `suffix` of \"custom-model-name\" would produce a model name like\n`ada:ft-your-org:custom-model-name-2022-02-15-04-21-04`.",
      "Type": {
-      "$id": "520",
+      "$id": "523",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": true
@@ -4049,7 +4067,7 @@
    ]
   },
   {
-   "$id": "521",
+   "$id": "524",
    "Kind": "Model",
    "Name": "FineTune",
    "Namespace": "OpenAI",
@@ -4059,12 +4077,12 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "522",
+     "$id": "525",
      "Name": "id",
      "SerializedName": "id",
      "Description": "The object identifier, which can be referenced in the API endpoints.",
      "Type": {
-      "$id": "523",
+      "$id": "526",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -4074,12 +4092,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "524",
+     "$id": "527",
      "Name": "object",
      "SerializedName": "object",
      "Description": "The object type, which is always \"fine-tune\".",
      "Type": {
-      "$id": "525",
+      "$id": "528",
       "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
@@ -4093,12 +4111,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "526",
+     "$id": "529",
      "Name": "created_at",
      "SerializedName": "created_at",
      "Description": "The Unix timestamp (in seconds) for when the fine-tuning job was created.",
      "Type": {
-      "$id": "527",
+      "$id": "530",
       "Kind": "Primitive",
       "Name": "DateTimeUnix",
       "IsNullable": false
@@ -4108,12 +4126,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "528",
+     "$id": "531",
      "Name": "updated_at",
      "SerializedName": "updated_at",
      "Description": "The Unix timestamp (in seconds) for when the fine-tuning job was last updated.",
      "Type": {
-      "$id": "529",
+      "$id": "532",
       "Kind": "Primitive",
       "Name": "DateTimeUnix",
       "IsNullable": false
@@ -4123,12 +4141,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "530",
+     "$id": "533",
      "Name": "model",
      "SerializedName": "model",
      "Description": "The base model that is being fine-tuned.",
      "Type": {
-      "$id": "531",
+      "$id": "534",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -4138,12 +4156,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "532",
+     "$id": "535",
      "Name": "fine_tuned_model",
      "SerializedName": "fine_tuned_model",
      "Description": "The name of the fine-tuned model that is being created.",
      "Type": {
-      "$id": "533",
+      "$id": "536",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": true
@@ -4153,12 +4171,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "534",
+     "$id": "537",
      "Name": "organization_id",
      "SerializedName": "organization_id",
      "Description": "The organization that owns the fine-tuning job.",
      "Type": {
-      "$id": "535",
+      "$id": "538",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -4168,7 +4186,7 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "536",
+     "$id": "539",
      "Name": "status",
      "SerializedName": "status",
      "Description": "The current status of the fine-tuning job, which can be either `created`, `running`,\n`succeeded`, `failed`, or `cancelled`.",
@@ -4180,12 +4198,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "537",
+     "$id": "540",
      "Name": "hyperparams",
      "SerializedName": "hyperparams",
      "Description": "The hyperparameters used for the fine-tuning job. See the\n[fine-tuning guide](/docs/guides/legacy-fine-tuning/hyperparameters) for more details.",
      "Type": {
-      "$id": "538",
+      "$id": "541",
       "Kind": "Model",
       "Name": "FineTuneHyperparams",
       "Namespace": "OpenAI",
@@ -4193,12 +4211,12 @@
       "Usage": "Output",
       "Properties": [
        {
-        "$id": "539",
+        "$id": "542",
         "Name": "n_epochs",
         "SerializedName": "n_epochs",
         "Description": "The number of epochs to train the model for. An epoch refers to one full cycle through the\ntraining dataset.",
         "Type": {
-         "$id": "540",
+         "$id": "543",
          "Kind": "Primitive",
          "Name": "SafeInt",
          "IsNullable": false
@@ -4208,12 +4226,12 @@
         "IsDiscriminator": false
        },
        {
-        "$id": "541",
+        "$id": "544",
         "Name": "batch_size",
         "SerializedName": "batch_size",
         "Description": "The batch size to use for training. The batch size is the number of training examples used to\ntrain a single forward and backward pass.",
         "Type": {
-         "$id": "542",
+         "$id": "545",
          "Kind": "Primitive",
          "Name": "SafeInt",
          "IsNullable": false
@@ -4223,12 +4241,12 @@
         "IsDiscriminator": false
        },
        {
-        "$id": "543",
+        "$id": "546",
         "Name": "prompt_loss_weight",
         "SerializedName": "prompt_loss_weight",
         "Description": "The weight to use for loss on the prompt tokens.",
         "Type": {
-         "$id": "544",
+         "$id": "547",
          "Kind": "Primitive",
          "Name": "Float64",
          "IsNullable": false
@@ -4238,12 +4256,12 @@
         "IsDiscriminator": false
        },
        {
-        "$id": "545",
+        "$id": "548",
         "Name": "learning_rate_multiplier",
         "SerializedName": "learning_rate_multiplier",
         "Description": "The learning rate multiplier to use for training.",
         "Type": {
-         "$id": "546",
+         "$id": "549",
          "Kind": "Primitive",
          "Name": "Float64",
          "IsNullable": false
@@ -4253,12 +4271,12 @@
         "IsDiscriminator": false
        },
        {
-        "$id": "547",
+        "$id": "550",
         "Name": "compute_classification_metrics",
         "SerializedName": "compute_classification_metrics",
         "Description": "The classification metrics to compute using the validation dataset at the end of every epoch.",
         "Type": {
-         "$id": "548",
+         "$id": "551",
          "Kind": "Primitive",
          "Name": "Boolean",
          "IsNullable": false
@@ -4268,12 +4286,12 @@
         "IsDiscriminator": false
        },
        {
-        "$id": "549",
+        "$id": "552",
         "Name": "classification_positive_class",
         "SerializedName": "classification_positive_class",
         "Description": "The positive class to use for computing classification metrics.",
         "Type": {
-         "$id": "550",
+         "$id": "553",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -4283,12 +4301,12 @@
         "IsDiscriminator": false
        },
        {
-        "$id": "551",
+        "$id": "554",
         "Name": "classification_n_classes",
         "SerializedName": "classification_n_classes",
         "Description": "The number of classes to use for computing classification metrics.",
         "Type": {
-         "$id": "552",
+         "$id": "555",
          "Kind": "Primitive",
          "Name": "SafeInt",
          "IsNullable": false
@@ -4304,16 +4322,16 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "553",
+     "$id": "556",
      "Name": "training_files",
      "SerializedName": "training_files",
      "Description": "The list of files used for training.",
      "Type": {
-      "$id": "554",
+      "$id": "557",
       "Kind": "Array",
       "Name": "Array",
       "ElementType": {
-       "$ref": "468"
+       "$ref": "471"
       },
       "IsNullable": false
      },
@@ -4322,16 +4340,16 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "555",
+     "$id": "558",
      "Name": "validation_files",
      "SerializedName": "validation_files",
      "Description": "The list of files used for validation.",
      "Type": {
-      "$id": "556",
+      "$id": "559",
       "Kind": "Array",
       "Name": "Array",
       "ElementType": {
-       "$ref": "468"
+       "$ref": "471"
       },
       "IsNullable": false
      },
@@ -4340,16 +4358,16 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "557",
+     "$id": "560",
      "Name": "result_files",
      "SerializedName": "result_files",
      "Description": "The compiled results files for the fine-tuning job.",
      "Type": {
-      "$id": "558",
+      "$id": "561",
       "Kind": "Array",
       "Name": "Array",
       "ElementType": {
-       "$ref": "468"
+       "$ref": "471"
       },
       "IsNullable": false
      },
@@ -4358,16 +4376,16 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "559",
+     "$id": "562",
      "Name": "events",
      "SerializedName": "events",
      "Description": "The list of events that have been observed in the lifecycle of the FineTune job.",
      "Type": {
-      "$id": "560",
+      "$id": "563",
       "Kind": "Array",
       "Name": "Array",
       "ElementType": {
-       "$id": "561",
+       "$id": "564",
        "Kind": "Model",
        "Name": "FineTuneEvent",
        "Namespace": "OpenAI",
@@ -4375,12 +4393,12 @@
        "Usage": "Output",
        "Properties": [
         {
-         "$id": "562",
+         "$id": "565",
          "Name": "object",
          "SerializedName": "object",
          "Description": "",
          "Type": {
-          "$id": "563",
+          "$id": "566",
           "Kind": "Primitive",
           "Name": "String",
           "IsNullable": false
@@ -4390,12 +4408,12 @@
          "IsDiscriminator": false
         },
         {
-         "$id": "564",
+         "$id": "567",
          "Name": "created_at",
          "SerializedName": "created_at",
          "Description": "",
          "Type": {
-          "$id": "565",
+          "$id": "568",
           "Kind": "Primitive",
           "Name": "DateTimeUnix",
           "IsNullable": false
@@ -4405,12 +4423,12 @@
          "IsDiscriminator": false
         },
         {
-         "$id": "566",
+         "$id": "569",
          "Name": "level",
          "SerializedName": "level",
          "Description": "",
          "Type": {
-          "$id": "567",
+          "$id": "570",
           "Kind": "Primitive",
           "Name": "String",
           "IsNullable": false
@@ -4420,12 +4438,12 @@
          "IsDiscriminator": false
         },
         {
-         "$id": "568",
+         "$id": "571",
          "Name": "message",
          "SerializedName": "message",
          "Description": "",
          "Type": {
-          "$id": "569",
+          "$id": "572",
           "Kind": "Primitive",
           "Name": "String",
           "IsNullable": false
@@ -4445,13 +4463,13 @@
    ]
   },
   {
-   "$ref": "538"
+   "$ref": "541"
   },
   {
-   "$ref": "561"
+   "$ref": "564"
   },
   {
-   "$id": "570",
+   "$id": "573",
    "Kind": "Model",
    "Name": "ListFineTunesResponse",
    "Namespace": "OpenAI",
@@ -4459,12 +4477,12 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "571",
+     "$id": "574",
      "Name": "object",
      "SerializedName": "object",
      "Description": "",
      "Type": {
-      "$id": "572",
+      "$id": "575",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -4474,16 +4492,16 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "573",
+     "$id": "576",
      "Name": "data",
      "SerializedName": "data",
      "Description": "",
      "Type": {
-      "$id": "574",
+      "$id": "577",
       "Kind": "Array",
       "Name": "Array",
       "ElementType": {
-       "$ref": "521"
+       "$ref": "524"
       },
       "IsNullable": false
      },
@@ -4494,7 +4512,7 @@
    ]
   },
   {
-   "$id": "575",
+   "$id": "578",
    "Kind": "Model",
    "Name": "ListFineTuneEventsResponse",
    "Namespace": "OpenAI",
@@ -4502,12 +4520,12 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "576",
+     "$id": "579",
      "Name": "object",
      "SerializedName": "object",
      "Description": "",
      "Type": {
-      "$id": "577",
+      "$id": "580",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -4517,16 +4535,16 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "578",
+     "$id": "581",
      "Name": "data",
      "SerializedName": "data",
      "Description": "",
      "Type": {
-      "$id": "579",
+      "$id": "582",
       "Kind": "Array",
       "Name": "Array",
       "ElementType": {
-       "$ref": "561"
+       "$ref": "564"
       },
       "IsNullable": false
      },
@@ -4537,7 +4555,7 @@
    ]
   },
   {
-   "$id": "580",
+   "$id": "583",
    "Kind": "Model",
    "Name": "ListModelsResponse",
    "Namespace": "OpenAI",
@@ -4545,12 +4563,12 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "581",
+     "$id": "584",
      "Name": "object",
      "SerializedName": "object",
      "Description": "",
      "Type": {
-      "$id": "582",
+      "$id": "585",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -4560,16 +4578,16 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "583",
+     "$id": "586",
      "Name": "data",
      "SerializedName": "data",
      "Description": "",
      "Type": {
-      "$id": "584",
+      "$id": "587",
       "Kind": "Array",
       "Name": "Array",
       "ElementType": {
-       "$id": "585",
+       "$id": "588",
        "Kind": "Model",
        "Name": "Model",
        "Namespace": "OpenAI",
@@ -4578,12 +4596,12 @@
        "Usage": "Output",
        "Properties": [
         {
-         "$id": "586",
+         "$id": "589",
          "Name": "id",
          "SerializedName": "id",
          "Description": "The model identifier, which can be referenced in the API endpoints.",
          "Type": {
-          "$id": "587",
+          "$id": "590",
           "Kind": "Primitive",
           "Name": "String",
           "IsNullable": false
@@ -4593,12 +4611,12 @@
          "IsDiscriminator": false
         },
         {
-         "$id": "588",
+         "$id": "591",
          "Name": "object",
          "SerializedName": "object",
          "Description": "The object type, which is always \"model\".",
          "Type": {
-          "$id": "589",
+          "$id": "592",
           "Kind": "Literal",
           "Name": "Literal",
           "LiteralValueType": {
@@ -4612,12 +4630,12 @@
          "IsDiscriminator": false
         },
         {
-         "$id": "590",
+         "$id": "593",
          "Name": "created",
          "SerializedName": "created",
          "Description": "The Unix timestamp (in seconds) when the model was created.",
          "Type": {
-          "$id": "591",
+          "$id": "594",
           "Kind": "Primitive",
           "Name": "DateTimeUnix",
           "IsNullable": false
@@ -4627,12 +4645,12 @@
          "IsDiscriminator": false
         },
         {
-         "$id": "592",
+         "$id": "595",
          "Name": "owned_by",
          "SerializedName": "owned_by",
          "Description": "The organization that owns the model.",
          "Type": {
-          "$id": "593",
+          "$id": "596",
           "Kind": "Primitive",
           "Name": "String",
           "IsNullable": false
@@ -4652,10 +4670,10 @@
    ]
   },
   {
-   "$ref": "585"
+   "$ref": "588"
   },
   {
-   "$id": "594",
+   "$id": "597",
    "Kind": "Model",
    "Name": "DeleteModelResponse",
    "Namespace": "OpenAI",
@@ -4663,12 +4681,12 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "595",
+     "$id": "598",
      "Name": "id",
      "SerializedName": "id",
      "Description": "",
      "Type": {
-      "$id": "596",
+      "$id": "599",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -4678,12 +4696,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "597",
+     "$id": "600",
      "Name": "object",
      "SerializedName": "object",
      "Description": "",
      "Type": {
-      "$id": "598",
+      "$id": "601",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -4693,12 +4711,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "599",
+     "$id": "602",
      "Name": "deleted",
      "SerializedName": "deleted",
      "Description": "",
      "Type": {
-      "$id": "600",
+      "$id": "603",
       "Kind": "Primitive",
       "Name": "Boolean",
       "IsNullable": false
@@ -4710,7 +4728,7 @@
    ]
   },
   {
-   "$id": "601",
+   "$id": "604",
    "Kind": "Model",
    "Name": "CreateImageRequest",
    "Namespace": "OpenAI",
@@ -4718,12 +4736,12 @@
    "Usage": "Input",
    "Properties": [
     {
-     "$id": "602",
+     "$id": "605",
      "Name": "prompt",
      "SerializedName": "prompt",
      "Description": "A text description of the desired image(s). The maximum length is 1000 characters.",
      "Type": {
-      "$id": "603",
+      "$id": "606",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -4733,12 +4751,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "604",
+     "$id": "607",
      "Name": "n",
      "SerializedName": "n",
      "Description": "The number of images to generate. Must be between 1 and 10.",
      "Type": {
-      "$id": "605",
+      "$id": "608",
       "Kind": "Primitive",
       "Name": "SafeInt",
       "IsNullable": true
@@ -4748,7 +4766,7 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "606",
+     "$id": "609",
      "Name": "size",
      "SerializedName": "size",
      "Description": "The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`.",
@@ -4760,7 +4778,7 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "607",
+     "$id": "610",
      "Name": "response_format",
      "SerializedName": "response_format",
      "Description": "The format in which the generated images are returned. Must be one of `url` or `b64_json`.",
@@ -4772,12 +4790,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "608",
+     "$id": "611",
      "Name": "user",
      "SerializedName": "user",
      "Description": "",
      "Type": {
-      "$id": "609",
+      "$id": "612",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -4789,7 +4807,7 @@
    ]
   },
   {
-   "$id": "610",
+   "$id": "613",
    "Kind": "Model",
    "Name": "ImagesResponse",
    "Namespace": "OpenAI",
@@ -4797,12 +4815,12 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "611",
+     "$id": "614",
      "Name": "created",
      "SerializedName": "created",
      "Description": "",
      "Type": {
-      "$id": "612",
+      "$id": "615",
       "Kind": "Primitive",
       "Name": "DateTimeUnix",
       "IsNullable": false
@@ -4812,16 +4830,16 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "613",
+     "$id": "616",
      "Name": "data",
      "SerializedName": "data",
      "Description": "",
      "Type": {
-      "$id": "614",
+      "$id": "617",
       "Kind": "Array",
       "Name": "Array",
       "ElementType": {
-       "$id": "615",
+       "$id": "618",
        "Kind": "Model",
        "Name": "Image",
        "Namespace": "OpenAI",
@@ -4830,12 +4848,12 @@
        "Usage": "Output",
        "Properties": [
         {
-         "$id": "616",
+         "$id": "619",
          "Name": "url",
          "SerializedName": "url",
          "Description": "The URL of the generated image, if `response_format` is `url` (default).",
          "Type": {
-          "$id": "617",
+          "$id": "620",
           "Kind": "Primitive",
           "Name": "Uri",
           "IsNullable": false
@@ -4845,12 +4863,12 @@
          "IsDiscriminator": false
         },
         {
-         "$id": "618",
+         "$id": "621",
          "Name": "b64_json",
          "SerializedName": "b64_json",
          "Description": "The base64-encoded JSON of the generated image, if `response_format` is `b64_json`.",
          "Type": {
-          "$id": "619",
+          "$id": "622",
           "Kind": "Primitive",
           "Name": "Bytes",
           "IsNullable": false
@@ -4870,10 +4888,10 @@
    ]
   },
   {
-   "$ref": "615"
+   "$ref": "618"
   },
   {
-   "$id": "620",
+   "$id": "623",
    "Kind": "Model",
    "Name": "CreateImageEditRequest",
    "Namespace": "OpenAI",
@@ -4881,12 +4899,12 @@
    "Usage": "Input",
    "Properties": [
     {
-     "$id": "621",
+     "$id": "624",
      "Name": "prompt",
      "SerializedName": "prompt",
      "Description": "A text description of the desired image(s). The maximum length is 1000 characters.",
      "Type": {
-      "$id": "622",
+      "$id": "625",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -4896,12 +4914,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "623",
+     "$id": "626",
      "Name": "image",
      "SerializedName": "image",
      "Description": "The image to edit. Must be a valid PNG file, less than 4MB, and square. If mask is not\nprovided, image must have transparency, which will be used as the mask.",
      "Type": {
-      "$id": "624",
+      "$id": "627",
       "Kind": "Primitive",
       "Name": "Bytes",
       "IsNullable": false
@@ -4911,42 +4929,15 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "625",
+     "$id": "628",
      "Name": "mask",
      "SerializedName": "mask",
      "Description": "An additional image whose fully transparent areas (e.g. where alpha is zero) indicate where\n`image` should be edited. Must be a valid PNG file, less than 4MB, and have the same dimensions\nas `image`.",
      "Type": {
-      "$id": "626",
+      "$id": "629",
       "Kind": "Primitive",
       "Name": "Bytes",
       "IsNullable": false
-     },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
-    },
-    {
-     "$id": "627",
-     "Name": "n",
-     "SerializedName": "n",
-     "Description": "The number of images to generate. Must be between 1 and 10.",
-     "Type": {
-      "$id": "628",
-      "Kind": "Primitive",
-      "Name": "SafeInt",
-      "IsNullable": true
-     },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
-    },
-    {
-     "$id": "629",
-     "Name": "size",
-     "SerializedName": "size",
-     "Description": "The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`.",
-     "Type": {
-      "$ref": "114"
      },
      "IsRequired": false,
      "IsReadOnly": false,
@@ -4954,63 +4945,11 @@
     },
     {
      "$id": "630",
-     "Name": "response_format",
-     "SerializedName": "response_format",
-     "Description": "The format in which the generated images are returned. Must be one of `url` or `b64_json`.",
-     "Type": {
-      "$ref": "118"
-     },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
-    },
-    {
-     "$id": "631",
-     "Name": "user",
-     "SerializedName": "user",
-     "Description": "",
-     "Type": {
-      "$id": "632",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
-     },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
-    }
-   ]
-  },
-  {
-   "$id": "633",
-   "Kind": "Model",
-   "Name": "CreateImageVariationRequest",
-   "Namespace": "OpenAI",
-   "IsNullable": false,
-   "Usage": "Input",
-   "Properties": [
-    {
-     "$id": "634",
-     "Name": "image",
-     "SerializedName": "image",
-     "Description": "The image to use as the basis for the variation(s). Must be a valid PNG file, less than 4MB,\nand square.",
-     "Type": {
-      "$id": "635",
-      "Kind": "Primitive",
-      "Name": "Bytes",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
-    },
-    {
-     "$id": "636",
      "Name": "n",
      "SerializedName": "n",
      "Description": "The number of images to generate. Must be between 1 and 10.",
      "Type": {
-      "$id": "637",
+      "$id": "631",
       "Kind": "Primitive",
       "Name": "SafeInt",
       "IsNullable": true
@@ -5020,7 +4959,7 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "638",
+     "$id": "632",
      "Name": "size",
      "SerializedName": "size",
      "Description": "The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`.",
@@ -5032,7 +4971,7 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "639",
+     "$id": "633",
      "Name": "response_format",
      "SerializedName": "response_format",
      "Description": "The format in which the generated images are returned. Must be one of `url` or `b64_json`.",
@@ -5044,12 +4983,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "640",
+     "$id": "634",
      "Name": "user",
      "SerializedName": "user",
      "Description": "",
      "Type": {
-      "$id": "641",
+      "$id": "635",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -5061,7 +5000,86 @@
    ]
   },
   {
-   "$id": "642",
+   "$id": "636",
+   "Kind": "Model",
+   "Name": "CreateImageVariationRequest",
+   "Namespace": "OpenAI",
+   "IsNullable": false,
+   "Usage": "Input",
+   "Properties": [
+    {
+     "$id": "637",
+     "Name": "image",
+     "SerializedName": "image",
+     "Description": "The image to use as the basis for the variation(s). Must be a valid PNG file, less than 4MB,\nand square.",
+     "Type": {
+      "$id": "638",
+      "Kind": "Primitive",
+      "Name": "Bytes",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "639",
+     "Name": "n",
+     "SerializedName": "n",
+     "Description": "The number of images to generate. Must be between 1 and 10.",
+     "Type": {
+      "$id": "640",
+      "Kind": "Primitive",
+      "Name": "SafeInt",
+      "IsNullable": true
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "641",
+     "Name": "size",
+     "SerializedName": "size",
+     "Description": "The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`.",
+     "Type": {
+      "$ref": "114"
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "642",
+     "Name": "response_format",
+     "SerializedName": "response_format",
+     "Description": "The format in which the generated images are returned. Must be one of `url` or `b64_json`.",
+     "Type": {
+      "$ref": "118"
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "643",
+     "Name": "user",
+     "SerializedName": "user",
+     "Description": "",
+     "Type": {
+      "$id": "644",
+      "Kind": "Primitive",
+      "Name": "String",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  },
+  {
+   "$id": "645",
    "Kind": "Model",
    "Name": "CreateModerationRequest",
    "Namespace": "OpenAI",
@@ -5069,27 +5087,27 @@
    "Usage": "Input",
    "Properties": [
     {
-     "$id": "643",
+     "$id": "646",
      "Name": "input",
      "SerializedName": "input",
      "Description": "The input text to classify",
      "Type": {
-      "$id": "644",
+      "$id": "647",
       "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
-        "$id": "645",
+        "$id": "648",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
        },
        {
-        "$id": "646",
+        "$id": "649",
         "Kind": "Array",
         "Name": "Array",
         "ElementType": {
-         "$id": "647",
+         "$id": "650",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -5104,7 +5122,7 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "648",
+     "$id": "651",
      "Name": "model",
      "SerializedName": "model",
      "Description": "Two content moderations models are available: `text-moderation-stable` and\n`text-moderation-latest`. The default is `text-moderation-latest` which will be automatically\nupgraded over time. This ensures you are always using our most accurate model. If you use\n`text-moderation-stable`, we will provide advanced notice before updating the model. Accuracy\nof `text-moderation-stable` may be slightly lower than for `text-moderation-latest`.",
@@ -5118,7 +5136,7 @@
    ]
   },
   {
-   "$id": "649",
+   "$id": "652",
    "Kind": "Model",
    "Name": "CreateModerationResponse",
    "Namespace": "OpenAI",
@@ -5126,12 +5144,12 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "650",
+     "$id": "653",
      "Name": "id",
      "SerializedName": "id",
      "Description": "The unique identifier for the moderation request.",
      "Type": {
-      "$id": "651",
+      "$id": "654",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -5141,12 +5159,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "652",
+     "$id": "655",
      "Name": "model",
      "SerializedName": "model",
      "Description": "The model used to generate the moderation results.",
      "Type": {
-      "$id": "653",
+      "$id": "656",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -5156,16 +5174,16 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "654",
+     "$id": "657",
      "Name": "results",
      "SerializedName": "results",
      "Description": "A list of moderation objects.",
      "Type": {
-      "$id": "655",
+      "$id": "658",
       "Kind": "Array",
       "Name": "Array",
       "ElementType": {
-       "$id": "656",
+       "$id": "659",
        "Kind": "Model",
        "Name": "CreateModerationResponseResult",
        "Namespace": "OpenAI",
@@ -5173,12 +5191,12 @@
        "Usage": "Output",
        "Properties": [
         {
-         "$id": "657",
+         "$id": "660",
          "Name": "flagged",
          "SerializedName": "flagged",
          "Description": "Whether the content violates [OpenAI's usage policies](/policies/usage-policies).",
          "Type": {
-          "$id": "658",
+          "$id": "661",
           "Kind": "Primitive",
           "Name": "Boolean",
           "IsNullable": false
@@ -5188,12 +5206,12 @@
          "IsDiscriminator": false
         },
         {
-         "$id": "659",
+         "$id": "662",
          "Name": "categories",
          "SerializedName": "categories",
          "Description": "A list of the categories, and whether they are flagged or not.",
          "Type": {
-          "$id": "660",
+          "$id": "663",
           "Kind": "Model",
           "Name": "CreateModerationResponseResultCategories",
           "Namespace": "OpenAI",
@@ -5201,12 +5219,12 @@
           "Usage": "Output",
           "Properties": [
            {
-            "$id": "661",
+            "$id": "664",
             "Name": "hate",
             "SerializedName": "hate",
             "Description": "Content that expresses, incites, or promotes hate based on race, gender, ethnicity,\nreligion, nationality, sexual orientation, disability status, or caste. Hateful content\naimed at non-protected groups (e.g., chess players) is harrassment.",
             "Type": {
-             "$id": "662",
+             "$id": "665",
              "Kind": "Primitive",
              "Name": "Boolean",
              "IsNullable": false
@@ -5216,12 +5234,12 @@
             "IsDiscriminator": false
            },
            {
-            "$id": "663",
+            "$id": "666",
             "Name": "hate/threatening",
             "SerializedName": "hate/threatening",
             "Description": "Hateful content that also includes violence or serious harm towards the targeted group\nbased on race, gender, ethnicity, religion, nationality, sexual orientation, disability\nstatus, or caste.",
             "Type": {
-             "$id": "664",
+             "$id": "667",
              "Kind": "Primitive",
              "Name": "Boolean",
              "IsNullable": false
@@ -5231,12 +5249,12 @@
             "IsDiscriminator": false
            },
            {
-            "$id": "665",
+            "$id": "668",
             "Name": "harassment",
             "SerializedName": "harassment",
             "Description": "Content that expresses, incites, or promotes harassing language towards any target.",
             "Type": {
-             "$id": "666",
+             "$id": "669",
              "Kind": "Primitive",
              "Name": "Boolean",
              "IsNullable": false
@@ -5246,12 +5264,12 @@
             "IsDiscriminator": false
            },
            {
-            "$id": "667",
+            "$id": "670",
             "Name": "harassment/threatening",
             "SerializedName": "harassment/threatening",
             "Description": "Harassment content that also includes violence or serious harm towards any target.",
             "Type": {
-             "$id": "668",
+             "$id": "671",
              "Kind": "Primitive",
              "Name": "Boolean",
              "IsNullable": false
@@ -5261,12 +5279,12 @@
             "IsDiscriminator": false
            },
            {
-            "$id": "669",
+            "$id": "672",
             "Name": "self-harm",
             "SerializedName": "self-harm",
             "Description": "Content that promotes, encourages, or depicts acts of self-harm, such as suicide, cutting,\nand eating disorders.",
             "Type": {
-             "$id": "670",
+             "$id": "673",
              "Kind": "Primitive",
              "Name": "Boolean",
              "IsNullable": false
@@ -5276,12 +5294,12 @@
             "IsDiscriminator": false
            },
            {
-            "$id": "671",
+            "$id": "674",
             "Name": "self-harm/intent",
             "SerializedName": "self-harm/intent",
             "Description": "Content where the speaker expresses that they are engaging or intend to engage in acts of\nself-harm, such as suicide, cutting, and eating disorders.",
             "Type": {
-             "$id": "672",
+             "$id": "675",
              "Kind": "Primitive",
              "Name": "Boolean",
              "IsNullable": false
@@ -5291,12 +5309,12 @@
             "IsDiscriminator": false
            },
            {
-            "$id": "673",
+            "$id": "676",
             "Name": "self-harm/instructive",
             "SerializedName": "self-harm/instructive",
             "Description": "Content that encourages performing acts of self-harm, such as suicide, cutting, and eating\ndisorders, or that gives instructions or advice on how to commit such acts.",
             "Type": {
-             "$id": "674",
+             "$id": "677",
              "Kind": "Primitive",
              "Name": "Boolean",
              "IsNullable": false
@@ -5306,12 +5324,12 @@
             "IsDiscriminator": false
            },
            {
-            "$id": "675",
+            "$id": "678",
             "Name": "sexual",
             "SerializedName": "sexual",
             "Description": "Content meant to arouse sexual excitement, such as the description of sexual activity, or\nthat promotes sexual services (excluding sex education and wellness).",
             "Type": {
-             "$id": "676",
+             "$id": "679",
              "Kind": "Primitive",
              "Name": "Boolean",
              "IsNullable": false
@@ -5321,12 +5339,12 @@
             "IsDiscriminator": false
            },
            {
-            "$id": "677",
+            "$id": "680",
             "Name": "sexual/minors",
             "SerializedName": "sexual/minors",
             "Description": "Sexual content that includes an individual who is under 18 years old.",
             "Type": {
-             "$id": "678",
+             "$id": "681",
              "Kind": "Primitive",
              "Name": "Boolean",
              "IsNullable": false
@@ -5336,12 +5354,12 @@
             "IsDiscriminator": false
            },
            {
-            "$id": "679",
+            "$id": "682",
             "Name": "violence",
             "SerializedName": "violence",
             "Description": "Content that depicts death, violence, or physical injury.",
             "Type": {
-             "$id": "680",
+             "$id": "683",
              "Kind": "Primitive",
              "Name": "Boolean",
              "IsNullable": false
@@ -5351,12 +5369,12 @@
             "IsDiscriminator": false
            },
            {
-            "$id": "681",
+            "$id": "684",
             "Name": "violence/graphic",
             "SerializedName": "violence/graphic",
             "Description": "Content that depicts death, violence, or physical injury in graphic detail.",
             "Type": {
-             "$id": "682",
+             "$id": "685",
              "Kind": "Primitive",
              "Name": "Boolean",
              "IsNullable": false
@@ -5372,12 +5390,12 @@
          "IsDiscriminator": false
         },
         {
-         "$id": "683",
+         "$id": "686",
          "Name": "category_scores",
          "SerializedName": "category_scores",
          "Description": "A list of the categories along with their scores as predicted by model.",
          "Type": {
-          "$id": "684",
+          "$id": "687",
           "Kind": "Model",
           "Name": "CreateModerationResponseResultCategoryScores",
           "Namespace": "OpenAI",
@@ -5385,12 +5403,12 @@
           "Usage": "Output",
           "Properties": [
            {
-            "$id": "685",
+            "$id": "688",
             "Name": "hate",
             "SerializedName": "hate",
             "Description": "The score for the category 'hate'.",
             "Type": {
-             "$id": "686",
+             "$id": "689",
              "Kind": "Primitive",
              "Name": "Float64",
              "IsNullable": false
@@ -5400,12 +5418,12 @@
             "IsDiscriminator": false
            },
            {
-            "$id": "687",
+            "$id": "690",
             "Name": "hate/threatening",
             "SerializedName": "hate/threatening",
             "Description": "The score for the category 'hate/threatening'.",
             "Type": {
-             "$id": "688",
+             "$id": "691",
              "Kind": "Primitive",
              "Name": "Float64",
              "IsNullable": false
@@ -5415,12 +5433,12 @@
             "IsDiscriminator": false
            },
            {
-            "$id": "689",
+            "$id": "692",
             "Name": "harassment",
             "SerializedName": "harassment",
             "Description": "The score for the category 'harassment'.",
             "Type": {
-             "$id": "690",
+             "$id": "693",
              "Kind": "Primitive",
              "Name": "Float64",
              "IsNullable": false
@@ -5430,12 +5448,12 @@
             "IsDiscriminator": false
            },
            {
-            "$id": "691",
+            "$id": "694",
             "Name": "harassment/threatening",
             "SerializedName": "harassment/threatening",
             "Description": "The score for the category 'harassment/threatening'.",
             "Type": {
-             "$id": "692",
+             "$id": "695",
              "Kind": "Primitive",
              "Name": "Float64",
              "IsNullable": false
@@ -5445,12 +5463,12 @@
             "IsDiscriminator": false
            },
            {
-            "$id": "693",
+            "$id": "696",
             "Name": "self-harm",
             "SerializedName": "self-harm",
             "Description": "The score for the category 'self-harm'.",
             "Type": {
-             "$id": "694",
+             "$id": "697",
              "Kind": "Primitive",
              "Name": "Float64",
              "IsNullable": false
@@ -5460,12 +5478,12 @@
             "IsDiscriminator": false
            },
            {
-            "$id": "695",
+            "$id": "698",
             "Name": "self-harm/intent",
             "SerializedName": "self-harm/intent",
             "Description": "The score for the category 'self-harm/intent'.",
             "Type": {
-             "$id": "696",
+             "$id": "699",
              "Kind": "Primitive",
              "Name": "Float64",
              "IsNullable": false
@@ -5475,12 +5493,12 @@
             "IsDiscriminator": false
            },
            {
-            "$id": "697",
+            "$id": "700",
             "Name": "self-harm/instructive",
             "SerializedName": "self-harm/instructive",
             "Description": "The score for the category 'self-harm/instructive'.",
             "Type": {
-             "$id": "698",
+             "$id": "701",
              "Kind": "Primitive",
              "Name": "Float64",
              "IsNullable": false
@@ -5490,12 +5508,12 @@
             "IsDiscriminator": false
            },
            {
-            "$id": "699",
+            "$id": "702",
             "Name": "sexual",
             "SerializedName": "sexual",
             "Description": "The score for the category 'sexual'.",
             "Type": {
-             "$id": "700",
+             "$id": "703",
              "Kind": "Primitive",
              "Name": "Float64",
              "IsNullable": false
@@ -5505,12 +5523,12 @@
             "IsDiscriminator": false
            },
            {
-            "$id": "701",
+            "$id": "704",
             "Name": "sexual/minors",
             "SerializedName": "sexual/minors",
             "Description": "The score for the category 'sexual/minors'.",
             "Type": {
-             "$id": "702",
+             "$id": "705",
              "Kind": "Primitive",
              "Name": "Float64",
              "IsNullable": false
@@ -5520,12 +5538,12 @@
             "IsDiscriminator": false
            },
            {
-            "$id": "703",
+            "$id": "706",
             "Name": "violence",
             "SerializedName": "violence",
             "Description": "The score for the category 'violence'.",
             "Type": {
-             "$id": "704",
+             "$id": "707",
              "Kind": "Primitive",
              "Name": "Float64",
              "IsNullable": false
@@ -5535,12 +5553,12 @@
             "IsDiscriminator": false
            },
            {
-            "$id": "705",
+            "$id": "708",
             "Name": "violence/graphic",
             "SerializedName": "violence/graphic",
             "Description": "The score for the category 'violence/graphic'.",
             "Type": {
-             "$id": "706",
+             "$id": "709",
              "Kind": "Primitive",
              "Name": "Float64",
              "IsNullable": false
@@ -5566,16 +5584,16 @@
    ]
   },
   {
-   "$ref": "656"
+   "$ref": "659"
   },
   {
-   "$ref": "660"
+   "$ref": "663"
   },
   {
-   "$ref": "684"
+   "$ref": "687"
   },
   {
-   "$id": "707",
+   "$id": "710",
    "Kind": "Model",
    "Name": "ErrorResponse",
    "Namespace": "OpenAI",
@@ -5583,12 +5601,12 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "708",
+     "$id": "711",
      "Name": "error",
      "SerializedName": "error",
      "Description": "",
      "Type": {
-      "$id": "709",
+      "$id": "712",
       "Kind": "Model",
       "Name": "Error",
       "Namespace": "OpenAI",
@@ -5596,12 +5614,12 @@
       "Usage": "Output",
       "Properties": [
        {
-        "$id": "710",
+        "$id": "713",
         "Name": "type",
         "SerializedName": "type",
         "Description": "",
         "Type": {
-         "$id": "711",
+         "$id": "714",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -5611,12 +5629,12 @@
         "IsDiscriminator": false
        },
        {
-        "$id": "712",
+        "$id": "715",
         "Name": "message",
         "SerializedName": "message",
         "Description": "",
         "Type": {
-         "$id": "713",
+         "$id": "716",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -5626,12 +5644,12 @@
         "IsDiscriminator": false
        },
        {
-        "$id": "714",
+        "$id": "717",
         "Name": "param",
         "SerializedName": "param",
         "Description": "",
         "Type": {
-         "$id": "715",
+         "$id": "718",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": true
@@ -5641,12 +5659,12 @@
         "IsDiscriminator": false
        },
        {
-        "$id": "716",
+        "$id": "719",
         "Name": "code",
         "SerializedName": "code",
         "Description": "",
         "Type": {
-         "$id": "717",
+         "$id": "720",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": true
@@ -5664,10 +5682,10 @@
    ]
   },
   {
-   "$ref": "709"
+   "$ref": "712"
   },
   {
-   "$id": "718",
+   "$id": "721",
    "Kind": "Model",
    "Name": "FineTuningEvent",
    "Namespace": "OpenAI",
@@ -5675,12 +5693,12 @@
    "Usage": "None",
    "Properties": [
     {
-     "$id": "719",
+     "$id": "722",
      "Name": "object",
      "SerializedName": "object",
      "Description": "",
      "Type": {
-      "$id": "720",
+      "$id": "723",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -5690,12 +5708,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "721",
+     "$id": "724",
      "Name": "created_at",
      "SerializedName": "created_at",
      "Description": "",
      "Type": {
-      "$id": "722",
+      "$id": "725",
       "Kind": "Primitive",
       "Name": "DateTimeUnix",
       "IsNullable": false
@@ -5705,12 +5723,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "723",
+     "$id": "726",
      "Name": "level",
      "SerializedName": "level",
      "Description": "",
      "Type": {
-      "$id": "724",
+      "$id": "727",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -5720,12 +5738,12 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "725",
+     "$id": "728",
      "Name": "message",
      "SerializedName": "message",
      "Description": "",
      "Type": {
-      "$id": "726",
+      "$id": "729",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
@@ -5735,22 +5753,22 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "727",
+     "$id": "730",
      "Name": "data",
      "SerializedName": "data",
      "Description": "",
      "Type": {
-      "$id": "728",
+      "$id": "731",
       "Kind": "Dictionary",
       "Name": "Dictionary",
       "KeyType": {
-       "$id": "729",
+       "$id": "732",
        "Kind": "Primitive",
        "Name": "String",
        "IsNullable": false
       },
       "ValueType": {
-       "$id": "730",
+       "$id": "733",
        "Kind": "Intrinsic",
        "Name": "unknown",
        "IsNullable": false
@@ -5762,7 +5780,7 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "731",
+     "$id": "734",
      "Name": "type",
      "SerializedName": "type",
      "Description": "",
@@ -5778,44 +5796,44 @@
  ],
  "Clients": [
   {
-   "$id": "732",
+   "$id": "735",
    "Name": "OpenAIClient",
    "Description": "",
    "Operations": [],
    "Protocol": {
-    "$id": "733"
+    "$id": "736"
    },
    "Creatable": true
   },
   {
-   "$id": "734",
+   "$id": "737",
    "Name": "Audio",
    "Description": "",
    "Operations": [],
    "Protocol": {
-    "$id": "735"
+    "$id": "738"
    },
    "Creatable": false,
    "Parent": "OpenAIClient"
   },
   {
-   "$id": "736",
+   "$id": "739",
    "Name": "AudioTranscriptions",
    "Description": "",
    "Operations": [
     {
-     "$id": "737",
+     "$id": "740",
      "Name": "create",
      "ResourceName": "Transcriptions",
      "Summary": "Transcribes audio into the input language.",
      "Parameters": [
       {
-       "$id": "738",
+       "$id": "741",
        "Name": "host",
        "NameInRequest": "host",
        "Description": "OpenAI Endpoint",
        "Type": {
-        "$id": "739",
+        "$id": "742",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -5830,9 +5848,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "740",
+        "$id": "743",
         "Type": {
-         "$id": "741",
+         "$id": "744",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -5841,15 +5859,15 @@
        }
       },
       {
-       "$id": "742",
+       "$id": "745",
        "Name": "contentType",
        "NameInRequest": "content-type",
        "Type": {
-        "$id": "743",
+        "$id": "746",
         "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
-         "$id": "744",
+         "$id": "747",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -5859,9 +5877,9 @@
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "745",
+        "$id": "748",
         "Type": {
-         "$ref": "743"
+         "$ref": "746"
         },
         "Value": "multipart/form-data"
        },
@@ -5875,7 +5893,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "746",
+       "$id": "749",
        "Name": "audio",
        "NameInRequest": "audio",
        "Type": {
@@ -5892,11 +5910,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "747",
+       "$id": "750",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "748",
+        "$id": "751",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -5911,9 +5929,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "749",
+        "$id": "752",
         "Type": {
-         "$ref": "748"
+         "$ref": "751"
         },
         "Value": "application/json"
        }
@@ -5921,7 +5939,7 @@
      ],
      "Responses": [
       {
-       "$id": "750",
+       "$id": "753",
        "StatusCodes": [
         200
        ],
@@ -5949,35 +5967,35 @@
     }
    ],
    "Protocol": {
-    "$id": "751"
+    "$id": "754"
    },
    "Creatable": false,
    "Parent": "Audio"
   },
   {
-   "$id": "752",
+   "$id": "755",
    "Name": "AudioTranslations",
    "Description": "",
    "Operations": [
     {
-     "$id": "753",
+     "$id": "756",
      "Name": "create",
      "ResourceName": "Translations",
      "Summary": "Transcribes audio into the input language.",
      "Parameters": [
       {
-       "$ref": "738"
+       "$ref": "741"
       },
       {
-       "$id": "754",
+       "$id": "757",
        "Name": "contentType",
        "NameInRequest": "content-type",
        "Type": {
-        "$id": "755",
+        "$id": "758",
         "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
-         "$id": "756",
+         "$id": "759",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -5987,9 +6005,9 @@
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "757",
+        "$id": "760",
         "Type": {
-         "$ref": "755"
+         "$ref": "758"
         },
         "Value": "multipart/form-data"
        },
@@ -6003,7 +6021,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "758",
+       "$id": "761",
        "Name": "audio",
        "NameInRequest": "audio",
        "Type": {
@@ -6020,11 +6038,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "759",
+       "$id": "762",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "760",
+        "$id": "763",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -6039,9 +6057,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "761",
+        "$id": "764",
         "Type": {
-         "$ref": "760"
+         "$ref": "763"
         },
         "Value": "application/json"
        }
@@ -6049,7 +6067,7 @@
      ],
      "Responses": [
       {
-       "$id": "762",
+       "$id": "765",
        "StatusCodes": [
         200
        ],
@@ -6077,37 +6095,37 @@
     }
    ],
    "Protocol": {
-    "$id": "763"
+    "$id": "766"
    },
    "Creatable": false,
    "Parent": "Audio"
   },
   {
-   "$id": "764",
+   "$id": "767",
    "Name": "Chat",
    "Description": "",
    "Operations": [],
    "Protocol": {
-    "$id": "765"
+    "$id": "768"
    },
    "Creatable": false,
    "Parent": "OpenAIClient"
   },
   {
-   "$id": "766",
+   "$id": "769",
    "Name": "ChatCompletions",
    "Description": "",
    "Operations": [
     {
-     "$id": "767",
+     "$id": "770",
      "Name": "create",
      "ResourceName": "Completions",
      "Parameters": [
       {
-       "$ref": "738"
+       "$ref": "741"
       },
       {
-       "$id": "768",
+       "$id": "771",
        "Name": "CreateChatCompletionRequest",
        "NameInRequest": "CreateChatCompletionRequest",
        "Type": {
@@ -6124,11 +6142,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "769",
+       "$id": "772",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "770",
+        "$id": "773",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -6143,19 +6161,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "771",
+        "$id": "774",
         "Type": {
-         "$ref": "770"
+         "$ref": "773"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "772",
+       "$id": "775",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "773",
+        "$id": "776",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -6170,9 +6188,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "774",
+        "$id": "777",
         "Type": {
-         "$ref": "773"
+         "$ref": "776"
         },
         "Value": "application/json"
        }
@@ -6180,12 +6198,12 @@
      ],
      "Responses": [
       {
-       "$id": "775",
+       "$id": "778",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "212"
+        "$ref": "215"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -6208,42 +6226,42 @@
     }
    ],
    "Protocol": {
-    "$id": "776"
+    "$id": "779"
    },
    "Creatable": false,
    "Parent": "Chat"
   },
   {
-   "$id": "777",
+   "$id": "780",
    "Name": "FineTuning",
    "Description": "",
    "Operations": [],
    "Protocol": {
-    "$id": "778"
+    "$id": "781"
    },
    "Creatable": false,
    "Parent": "OpenAIClient"
   },
   {
-   "$id": "779",
+   "$id": "782",
    "Name": "FineTuningJobs",
    "Description": "",
    "Operations": [
     {
-     "$id": "780",
+     "$id": "783",
      "Name": "create",
      "ResourceName": "Jobs",
      "Description": "Creates a job that fine-tunes a specified model from a given dataset.\n\nResponse includes details of the enqueued job including job status and the name of the\nfine-tuned models once complete.\n\n[Learn more about fine-tuning](/docs/guides/fine-tuning)",
      "Parameters": [
       {
-       "$ref": "738"
+       "$ref": "741"
       },
       {
-       "$id": "781",
+       "$id": "784",
        "Name": "job",
        "NameInRequest": "job",
        "Type": {
-        "$ref": "246"
+        "$ref": "249"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -6256,11 +6274,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "782",
+       "$id": "785",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "783",
+        "$id": "786",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -6275,19 +6293,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "784",
+        "$id": "787",
         "Type": {
-         "$ref": "783"
+         "$ref": "786"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "785",
+       "$id": "788",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "786",
+        "$id": "789",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -6302,9 +6320,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "787",
+        "$id": "790",
         "Type": {
-         "$ref": "786"
+         "$ref": "789"
         },
         "Value": "application/json"
        }
@@ -6312,12 +6330,12 @@
      ],
      "Responses": [
       {
-       "$id": "788",
+       "$id": "791",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "261"
+        "$ref": "264"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -6339,20 +6357,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "789",
+     "$id": "792",
      "Name": "listPaginated",
      "ResourceName": "Jobs",
      "Parameters": [
       {
-       "$ref": "738"
+       "$ref": "741"
       },
       {
-       "$id": "790",
+       "$id": "793",
        "Name": "after",
        "NameInRequest": "after",
        "Description": "Identifier for the last job from the previous pagination request.",
        "Type": {
-        "$id": "791",
+        "$id": "794",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -6368,12 +6386,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "792",
+       "$id": "795",
        "Name": "limit",
        "NameInRequest": "limit",
        "Description": "Number of fine-tuning jobs to retrieve.",
        "Type": {
-        "$id": "793",
+        "$id": "796",
         "Kind": "Primitive",
         "Name": "SafeInt",
         "IsNullable": false
@@ -6389,11 +6407,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "794",
+       "$id": "797",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "795",
+        "$id": "798",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -6408,9 +6426,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "796",
+        "$id": "799",
         "Type": {
-         "$ref": "795"
+         "$ref": "798"
         },
         "Value": "application/json"
        }
@@ -6418,12 +6436,12 @@
      ],
      "Responses": [
       {
-       "$id": "797",
+       "$id": "800",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "301"
+        "$ref": "304"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -6442,20 +6460,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "798",
+     "$id": "801",
      "Name": "retrieve",
      "ResourceName": "Jobs",
      "Summary": "Get info about a fine-tuning job.\n\n[Learn more about fine-tuning](/docs/guides/fine-tuning)",
      "Parameters": [
       {
-       "$ref": "738"
+       "$ref": "741"
       },
       {
-       "$id": "799",
+       "$id": "802",
        "Name": "fine_tuning_job_id",
        "NameInRequest": "fine_tuning_job_id",
        "Type": {
-        "$id": "800",
+        "$id": "803",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -6471,11 +6489,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "801",
+       "$id": "804",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "802",
+        "$id": "805",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -6490,9 +6508,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "803",
+        "$id": "806",
         "Type": {
-         "$ref": "802"
+         "$ref": "805"
         },
         "Value": "application/json"
        }
@@ -6500,12 +6518,12 @@
      ],
      "Responses": [
       {
-       "$id": "804",
+       "$id": "807",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "261"
+        "$ref": "264"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -6524,21 +6542,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "805",
+     "$id": "808",
      "Name": "listEvents",
      "ResourceName": "Jobs",
      "Summary": "Get status updates for a fine-tuning job.",
      "Parameters": [
       {
-       "$ref": "738"
+       "$ref": "741"
       },
       {
-       "$id": "806",
+       "$id": "809",
        "Name": "fine_tuning_job_id",
        "NameInRequest": "fine_tuning_job_id",
        "Description": "The ID of the fine-tuning job to get events for.",
        "Type": {
-        "$id": "807",
+        "$id": "810",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -6554,12 +6572,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "808",
+       "$id": "811",
        "Name": "after",
        "NameInRequest": "after",
        "Description": "Identifier for the last event from the previous pagination request.",
        "Type": {
-        "$id": "809",
+        "$id": "812",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -6575,12 +6593,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "810",
+       "$id": "813",
        "Name": "limit",
        "NameInRequest": "limit",
        "Description": "Number of events to retrieve.",
        "Type": {
-        "$id": "811",
+        "$id": "814",
         "Kind": "Primitive",
         "Name": "Int64",
         "IsNullable": false
@@ -6596,11 +6614,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "812",
+       "$id": "815",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "813",
+        "$id": "816",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -6615,9 +6633,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "814",
+        "$id": "817",
         "Type": {
-         "$ref": "813"
+         "$ref": "816"
         },
         "Value": "application/json"
        }
@@ -6625,12 +6643,12 @@
      ],
      "Responses": [
       {
-       "$id": "815",
+       "$id": "818",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "308"
+        "$ref": "311"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -6649,21 +6667,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "816",
+     "$id": "819",
      "Name": "cancel",
      "ResourceName": "Jobs",
      "Summary": "Immediately cancel a fine-tune job.",
      "Parameters": [
       {
-       "$ref": "738"
+       "$ref": "741"
       },
       {
-       "$id": "817",
+       "$id": "820",
        "Name": "fine_tuning_job_id",
        "NameInRequest": "fine_tuning_job_id",
        "Description": "The ID of the fine-tuning job to cancel.",
        "Type": {
-        "$id": "818",
+        "$id": "821",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -6679,11 +6697,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "819",
+       "$id": "822",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "820",
+        "$id": "823",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -6698,9 +6716,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "821",
+        "$id": "824",
         "Type": {
-         "$ref": "820"
+         "$ref": "823"
         },
         "Value": "application/json"
        }
@@ -6708,12 +6726,12 @@
      ],
      "Responses": [
       {
-       "$id": "822",
+       "$id": "825",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "261"
+        "$ref": "264"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -6733,30 +6751,30 @@
     }
    ],
    "Protocol": {
-    "$id": "823"
+    "$id": "826"
    },
    "Creatable": false,
    "Parent": "FineTuning"
   },
   {
-   "$id": "824",
+   "$id": "827",
    "Name": "Completions",
    "Description": "",
    "Operations": [
     {
-     "$id": "825",
+     "$id": "828",
      "Name": "create",
      "ResourceName": "Completions",
      "Parameters": [
       {
-       "$ref": "738"
+       "$ref": "741"
       },
       {
-       "$id": "826",
+       "$id": "829",
        "Name": "CreateCompletionRequest",
        "NameInRequest": "CreateCompletionRequest",
        "Type": {
-        "$ref": "323"
+        "$ref": "326"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -6769,11 +6787,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "827",
+       "$id": "830",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "828",
+        "$id": "831",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -6788,19 +6806,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "829",
+        "$id": "832",
         "Type": {
-         "$ref": "828"
+         "$ref": "831"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "830",
+       "$id": "833",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "831",
+        "$id": "834",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -6815,9 +6833,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "832",
+        "$id": "835",
         "Type": {
-         "$ref": "831"
+         "$ref": "834"
         },
         "Value": "application/json"
        }
@@ -6825,12 +6843,12 @@
      ],
      "Responses": [
       {
-       "$id": "833",
+       "$id": "836",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "368"
+        "$ref": "371"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -6853,31 +6871,31 @@
     }
    ],
    "Protocol": {
-    "$id": "834"
+    "$id": "837"
    },
    "Creatable": false,
    "Parent": "OpenAIClient"
   },
   {
-   "$id": "835",
+   "$id": "838",
    "Name": "Edits",
    "Description": "",
    "Operations": [
     {
-     "$id": "836",
+     "$id": "839",
      "Name": "create",
      "ResourceName": "Edits",
      "Deprecated": "deprecated",
      "Parameters": [
       {
-       "$ref": "738"
+       "$ref": "741"
       },
       {
-       "$id": "837",
+       "$id": "840",
        "Name": "edit",
        "NameInRequest": "edit",
        "Type": {
-        "$ref": "402"
+        "$ref": "405"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -6890,11 +6908,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "838",
+       "$id": "841",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "839",
+        "$id": "842",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -6909,19 +6927,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "840",
+        "$id": "843",
         "Type": {
-         "$ref": "839"
+         "$ref": "842"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "841",
+       "$id": "844",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "842",
+        "$id": "845",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -6936,9 +6954,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "843",
+        "$id": "846",
         "Type": {
-         "$ref": "842"
+         "$ref": "845"
         },
         "Value": "application/json"
        }
@@ -6946,12 +6964,12 @@
      ],
      "Responses": [
       {
-       "$id": "844",
+       "$id": "847",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "414"
+        "$ref": "417"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -6974,31 +6992,31 @@
     }
    ],
    "Protocol": {
-    "$id": "845"
+    "$id": "848"
    },
    "Creatable": false,
    "Parent": "OpenAIClient"
   },
   {
-   "$id": "846",
+   "$id": "849",
    "Name": "Embeddings",
    "Description": "",
    "Operations": [
     {
-     "$id": "847",
+     "$id": "850",
      "Name": "create",
      "ResourceName": "Embeddings",
      "Summary": "Creates an embedding vector representing the input text.",
      "Parameters": [
       {
-       "$ref": "738"
+       "$ref": "741"
       },
       {
-       "$id": "848",
+       "$id": "851",
        "Name": "embedding",
        "NameInRequest": "embedding",
        "Type": {
-        "$ref": "428"
+        "$ref": "431"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -7011,11 +7029,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "849",
+       "$id": "852",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "850",
+        "$id": "853",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -7030,19 +7048,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "851",
+        "$id": "854",
         "Type": {
-         "$ref": "850"
+         "$ref": "853"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "852",
+       "$id": "855",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "853",
+        "$id": "856",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -7057,9 +7075,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "854",
+        "$id": "857",
         "Type": {
-         "$ref": "853"
+         "$ref": "856"
         },
         "Value": "application/json"
        }
@@ -7067,12 +7085,12 @@
      ],
      "Responses": [
       {
-       "$id": "855",
+       "$id": "858",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "442"
+        "$ref": "445"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -7095,31 +7113,31 @@
     }
    ],
    "Protocol": {
-    "$id": "856"
+    "$id": "859"
    },
    "Creatable": false,
    "Parent": "OpenAIClient"
   },
   {
-   "$id": "857",
+   "$id": "860",
    "Name": "Files",
    "Description": "",
    "Operations": [
     {
-     "$id": "858",
+     "$id": "861",
      "Name": "list",
      "ResourceName": "Files",
      "Summary": "Returns a list of files that belong to the user's organization.",
      "Parameters": [
       {
-       "$ref": "738"
+       "$ref": "741"
       },
       {
-       "$id": "859",
+       "$id": "862",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "860",
+        "$id": "863",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -7134,9 +7152,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "861",
+        "$id": "864",
         "Type": {
-         "$ref": "860"
+         "$ref": "863"
         },
         "Value": "application/json"
        }
@@ -7144,12 +7162,12 @@
      ],
      "Responses": [
       {
-       "$id": "862",
+       "$id": "865",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "463"
+        "$ref": "466"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -7168,24 +7186,24 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "863",
+     "$id": "866",
      "Name": "create",
      "ResourceName": "Files",
      "Summary": "Returns a list of files that belong to the user's organization.",
      "Parameters": [
       {
-       "$ref": "738"
+       "$ref": "741"
       },
       {
-       "$id": "864",
+       "$id": "867",
        "Name": "contentType",
        "NameInRequest": "content-type",
        "Type": {
-        "$id": "865",
+        "$id": "868",
         "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
-         "$id": "866",
+         "$id": "869",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -7195,9 +7213,9 @@
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "867",
+        "$id": "870",
         "Type": {
-         "$ref": "865"
+         "$ref": "868"
         },
         "Value": "multipart/form-data"
        },
@@ -7211,11 +7229,11 @@
        "Kind": "Constant"
       },
       {
-       "$id": "868",
+       "$id": "871",
        "Name": "file",
        "NameInRequest": "file",
        "Type": {
-        "$ref": "484"
+        "$ref": "487"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -7228,11 +7246,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "869",
+       "$id": "872",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "870",
+        "$id": "873",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -7247,9 +7265,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "871",
+        "$id": "874",
         "Type": {
-         "$ref": "870"
+         "$ref": "873"
         },
         "Value": "application/json"
        }
@@ -7257,12 +7275,12 @@
      ],
      "Responses": [
       {
-       "$id": "872",
+       "$id": "875",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "468"
+        "$ref": "471"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -7284,21 +7302,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "873",
+     "$id": "876",
      "Name": "retrieve",
      "ResourceName": "Files",
      "Summary": "Returns information about a specific file.",
      "Parameters": [
       {
-       "$ref": "738"
+       "$ref": "741"
       },
       {
-       "$id": "874",
+       "$id": "877",
        "Name": "file_id",
        "NameInRequest": "file_id",
        "Description": "The ID of the file to use for this request.",
        "Type": {
-        "$id": "875",
+        "$id": "878",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -7314,11 +7332,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "876",
+       "$id": "879",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "877",
+        "$id": "880",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -7333,9 +7351,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "878",
+        "$id": "881",
         "Type": {
-         "$ref": "877"
+         "$ref": "880"
         },
         "Value": "application/json"
        }
@@ -7343,12 +7361,12 @@
      ],
      "Responses": [
       {
-       "$id": "879",
+       "$id": "882",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "468"
+        "$ref": "471"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -7367,21 +7385,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "880",
+     "$id": "883",
      "Name": "delete",
      "ResourceName": "Files",
      "Summary": "Delete a file",
      "Parameters": [
       {
-       "$ref": "738"
+       "$ref": "741"
       },
       {
-       "$id": "881",
+       "$id": "884",
        "Name": "file_id",
        "NameInRequest": "file_id",
        "Description": "The ID of the file to use for this request.",
        "Type": {
-        "$id": "882",
+        "$id": "885",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -7397,11 +7415,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "883",
+       "$id": "886",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "884",
+        "$id": "887",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -7416,9 +7434,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "885",
+        "$id": "888",
         "Type": {
-         "$ref": "884"
+         "$ref": "887"
         },
         "Value": "application/json"
        }
@@ -7426,12 +7444,12 @@
      ],
      "Responses": [
       {
-       "$id": "886",
+       "$id": "889",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "489"
+        "$ref": "492"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -7450,21 +7468,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "887",
+     "$id": "890",
      "Name": "download",
      "ResourceName": "Files",
      "Summary": "Returns the contents of the specified file.",
      "Parameters": [
       {
-       "$ref": "738"
+       "$ref": "741"
       },
       {
-       "$id": "888",
+       "$id": "891",
        "Name": "file_id",
        "NameInRequest": "file_id",
        "Description": "The ID of the file to use for this request.",
        "Type": {
-        "$id": "889",
+        "$id": "892",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -7480,11 +7498,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "890",
+       "$id": "893",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "891",
+        "$id": "894",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -7499,9 +7517,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "892",
+        "$id": "895",
         "Type": {
-         "$ref": "891"
+         "$ref": "894"
         },
         "Value": "application/json"
        }
@@ -7509,12 +7527,12 @@
      ],
      "Responses": [
       {
-       "$id": "893",
+       "$id": "896",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "894",
+        "$id": "897",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -7537,32 +7555,32 @@
     }
    ],
    "Protocol": {
-    "$id": "895"
+    "$id": "898"
    },
    "Creatable": false,
    "Parent": "OpenAIClient"
   },
   {
-   "$id": "896",
+   "$id": "899",
    "Name": "FineTunes",
    "Description": "",
    "Operations": [
     {
-     "$id": "897",
+     "$id": "900",
      "Name": "create",
      "ResourceName": "FineTunes",
      "Summary": "Creates a job that fine-tunes a specified model from a given dataset.\n\nResponse includes details of the enqueued job including job status and the name of the fine-tuned models once complete.\n\n[Learn more about fine-tuning](/docs/guides/legacy-fine-tuning)",
      "Deprecated": "deprecated",
      "Parameters": [
       {
-       "$ref": "738"
+       "$ref": "741"
       },
       {
-       "$id": "898",
+       "$id": "901",
        "Name": "fine_tune",
        "NameInRequest": "fine_tune",
        "Type": {
-        "$ref": "496"
+        "$ref": "499"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -7575,11 +7593,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "899",
+       "$id": "902",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "900",
+        "$id": "903",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -7594,19 +7612,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "901",
+        "$id": "904",
         "Type": {
-         "$ref": "900"
+         "$ref": "903"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "902",
+       "$id": "905",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "903",
+        "$id": "906",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -7621,9 +7639,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "904",
+        "$id": "907",
         "Type": {
-         "$ref": "903"
+         "$ref": "906"
         },
         "Value": "application/json"
        }
@@ -7631,12 +7649,12 @@
      ],
      "Responses": [
       {
-       "$id": "905",
+       "$id": "908",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "521"
+        "$ref": "524"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -7658,21 +7676,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "906",
+     "$id": "909",
      "Name": "list",
      "ResourceName": "FineTunes",
      "Summary": "List your organization's fine-tuning jobs",
      "Deprecated": "deprecated",
      "Parameters": [
       {
-       "$ref": "738"
+       "$ref": "741"
       },
       {
-       "$id": "907",
+       "$id": "910",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "908",
+        "$id": "911",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -7687,9 +7705,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "909",
+        "$id": "912",
         "Type": {
-         "$ref": "908"
+         "$ref": "911"
         },
         "Value": "application/json"
        }
@@ -7697,12 +7715,12 @@
      ],
      "Responses": [
       {
-       "$id": "910",
+       "$id": "913",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "570"
+        "$ref": "573"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -7721,22 +7739,22 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "911",
+     "$id": "914",
      "Name": "retrieve",
      "ResourceName": "FineTunes",
      "Summary": "Gets info about the fine-tune job.\n\n[Learn more about fine-tuning](/docs/guides/legacy-fine-tuning)",
      "Deprecated": "deprecated",
      "Parameters": [
       {
-       "$ref": "738"
+       "$ref": "741"
       },
       {
-       "$id": "912",
+       "$id": "915",
        "Name": "fine_tune_id",
        "NameInRequest": "fine_tune_id",
        "Description": "The ID of the fine-tune job",
        "Type": {
-        "$id": "913",
+        "$id": "916",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -7752,11 +7770,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "914",
+       "$id": "917",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "915",
+        "$id": "918",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -7771,9 +7789,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "916",
+        "$id": "919",
         "Type": {
-         "$ref": "915"
+         "$ref": "918"
         },
         "Value": "application/json"
        }
@@ -7781,12 +7799,12 @@
      ],
      "Responses": [
       {
-       "$id": "917",
+       "$id": "920",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "521"
+        "$ref": "524"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -7805,22 +7823,22 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "918",
+     "$id": "921",
      "Name": "listEvents",
      "ResourceName": "FineTunes",
      "Summary": "Get fine-grained status updates for a fine-tune job.",
      "Deprecated": "deprecated",
      "Parameters": [
       {
-       "$ref": "738"
+       "$ref": "741"
       },
       {
-       "$id": "919",
+       "$id": "922",
        "Name": "fine_tune_id",
        "NameInRequest": "fine_tune_id",
        "Description": "The ID of the fine-tune job to get events for.",
        "Type": {
-        "$id": "920",
+        "$id": "923",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -7836,12 +7854,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "921",
+       "$id": "924",
        "Name": "stream",
        "NameInRequest": "stream",
        "Description": "Whether to stream events for the fine-tune job. If set to true, events will be sent as\ndata-only\n[server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)\nas they become available. The stream will terminate with a `data: [DONE]` message when the\njob is finished (succeeded, cancelled, or failed).\n\nIf set to false, only events generated so far will be returned.",
        "Type": {
-        "$id": "922",
+        "$id": "925",
         "Kind": "Primitive",
         "Name": "Boolean",
         "IsNullable": false
@@ -7857,11 +7875,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "923",
+       "$id": "926",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "924",
+        "$id": "927",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -7876,9 +7894,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "925",
+        "$id": "928",
         "Type": {
-         "$ref": "924"
+         "$ref": "927"
         },
         "Value": "application/json"
        }
@@ -7886,12 +7904,12 @@
      ],
      "Responses": [
       {
-       "$id": "926",
+       "$id": "929",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "575"
+        "$ref": "578"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -7910,22 +7928,22 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "927",
+     "$id": "930",
      "Name": "cancel",
      "ResourceName": "FineTunes",
      "Summary": "Immediately cancel a fine-tune job.",
      "Deprecated": "deprecated",
      "Parameters": [
       {
-       "$ref": "738"
+       "$ref": "741"
       },
       {
-       "$id": "928",
+       "$id": "931",
        "Name": "fine_tune_id",
        "NameInRequest": "fine_tune_id",
        "Description": "The ID of the fine-tune job to cancel",
        "Type": {
-        "$id": "929",
+        "$id": "932",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -7941,11 +7959,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "930",
+       "$id": "933",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "931",
+        "$id": "934",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -7960,9 +7978,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "932",
+        "$id": "935",
         "Type": {
-         "$ref": "931"
+         "$ref": "934"
         },
         "Value": "application/json"
        }
@@ -7970,12 +7988,12 @@
      ],
      "Responses": [
       {
-       "$id": "933",
+       "$id": "936",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "521"
+        "$ref": "524"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -7995,31 +8013,31 @@
     }
    ],
    "Protocol": {
-    "$id": "934"
+    "$id": "937"
    },
    "Creatable": false,
    "Parent": "OpenAIClient"
   },
   {
-   "$id": "935",
+   "$id": "938",
    "Name": "ModelsOps",
    "Description": "",
    "Operations": [
     {
-     "$id": "936",
+     "$id": "939",
      "Name": "list",
      "ResourceName": "Models",
      "Summary": "Lists the currently available models, and provides basic information about each one such as the\nowner and availability.",
      "Parameters": [
       {
-       "$ref": "738"
+       "$ref": "741"
       },
       {
-       "$id": "937",
+       "$id": "940",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "938",
+        "$id": "941",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -8034,9 +8052,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "939",
+        "$id": "942",
         "Type": {
-         "$ref": "938"
+         "$ref": "941"
         },
         "Value": "application/json"
        }
@@ -8044,12 +8062,12 @@
      ],
      "Responses": [
       {
-       "$id": "940",
+       "$id": "943",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "580"
+        "$ref": "583"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -8068,21 +8086,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "941",
+     "$id": "944",
      "Name": "retrieve",
      "ResourceName": "Models",
      "Summary": "Retrieves a model instance, providing basic information about the model such as the owner and\npermissioning.",
      "Parameters": [
       {
-       "$ref": "738"
+       "$ref": "741"
       },
       {
-       "$id": "942",
+       "$id": "945",
        "Name": "model",
        "NameInRequest": "model",
        "Description": "The ID of the model to use for this request.",
        "Type": {
-        "$id": "943",
+        "$id": "946",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -8098,11 +8116,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "944",
+       "$id": "947",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "945",
+        "$id": "948",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -8117,9 +8135,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "946",
+        "$id": "949",
         "Type": {
-         "$ref": "945"
+         "$ref": "948"
         },
         "Value": "application/json"
        }
@@ -8127,12 +8145,12 @@
      ],
      "Responses": [
       {
-       "$id": "947",
+       "$id": "950",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "585"
+        "$ref": "588"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -8151,21 +8169,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "948",
+     "$id": "951",
      "Name": "delete",
      "ResourceName": "Models",
      "Summary": "Delete a fine-tuned model. You must have the Owner role in your organization to delete a model.",
      "Parameters": [
       {
-       "$ref": "738"
+       "$ref": "741"
       },
       {
-       "$id": "949",
+       "$id": "952",
        "Name": "model",
        "NameInRequest": "model",
        "Description": "The model to delete",
        "Type": {
-        "$id": "950",
+        "$id": "953",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -8181,11 +8199,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "951",
+       "$id": "954",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "952",
+        "$id": "955",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -8200,9 +8218,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "953",
+        "$id": "956",
         "Type": {
-         "$ref": "952"
+         "$ref": "955"
         },
         "Value": "application/json"
        }
@@ -8210,12 +8228,12 @@
      ],
      "Responses": [
       {
-       "$id": "954",
+       "$id": "957",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "594"
+        "$ref": "597"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -8235,31 +8253,31 @@
     }
    ],
    "Protocol": {
-    "$id": "955"
+    "$id": "958"
    },
    "Creatable": false,
    "Parent": "OpenAIClient"
   },
   {
-   "$id": "956",
+   "$id": "959",
    "Name": "Images",
    "Description": "",
    "Operations": [
     {
-     "$id": "957",
+     "$id": "960",
      "Name": "create",
      "ResourceName": "Images",
      "Summary": "Creates an image given a prompt",
      "Parameters": [
       {
-       "$ref": "738"
+       "$ref": "741"
       },
       {
-       "$id": "958",
+       "$id": "961",
        "Name": "image",
        "NameInRequest": "image",
        "Type": {
-        "$ref": "601"
+        "$ref": "604"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -8272,11 +8290,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "959",
+       "$id": "962",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "960",
+        "$id": "963",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -8291,19 +8309,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "961",
+        "$id": "964",
         "Type": {
-         "$ref": "960"
+         "$ref": "963"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "962",
+       "$id": "965",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "963",
+        "$id": "966",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -8318,9 +8336,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "964",
+        "$id": "967",
         "Type": {
-         "$ref": "963"
+         "$ref": "966"
         },
         "Value": "application/json"
        }
@@ -8328,12 +8346,12 @@
      ],
      "Responses": [
       {
-       "$id": "965",
+       "$id": "968",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "610"
+        "$ref": "613"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -8355,24 +8373,24 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "966",
+     "$id": "969",
      "Name": "createEdit",
      "ResourceName": "Images",
      "Summary": "Creates an edited or extended image given an original image and a prompt.",
      "Parameters": [
       {
-       "$ref": "738"
+       "$ref": "741"
       },
       {
-       "$id": "967",
+       "$id": "970",
        "Name": "contentType",
        "NameInRequest": "content-type",
        "Type": {
-        "$id": "968",
+        "$id": "971",
         "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
-         "$id": "969",
+         "$id": "972",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -8382,9 +8400,9 @@
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "970",
+        "$id": "973",
         "Type": {
-         "$ref": "968"
+         "$ref": "971"
         },
         "Value": "multipart/form-data"
        },
@@ -8398,11 +8416,11 @@
        "Kind": "Constant"
       },
       {
-       "$id": "971",
+       "$id": "974",
        "Name": "image",
        "NameInRequest": "image",
        "Type": {
-        "$ref": "620"
+        "$ref": "623"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -8415,11 +8433,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "972",
+       "$id": "975",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "973",
+        "$id": "976",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -8434,9 +8452,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "974",
+        "$id": "977",
         "Type": {
-         "$ref": "973"
+         "$ref": "976"
         },
         "Value": "application/json"
        }
@@ -8444,12 +8462,12 @@
      ],
      "Responses": [
       {
-       "$id": "975",
+       "$id": "978",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "610"
+        "$ref": "613"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -8471,24 +8489,24 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "976",
+     "$id": "979",
      "Name": "createVariation",
      "ResourceName": "Images",
      "Summary": "Creates an edited or extended image given an original image and a prompt.",
      "Parameters": [
       {
-       "$ref": "738"
+       "$ref": "741"
       },
       {
-       "$id": "977",
+       "$id": "980",
        "Name": "contentType",
        "NameInRequest": "content-type",
        "Type": {
-        "$id": "978",
+        "$id": "981",
         "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
-         "$id": "979",
+         "$id": "982",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -8498,9 +8516,9 @@
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "980",
+        "$id": "983",
         "Type": {
-         "$ref": "978"
+         "$ref": "981"
         },
         "Value": "multipart/form-data"
        },
@@ -8514,11 +8532,11 @@
        "Kind": "Constant"
       },
       {
-       "$id": "981",
+       "$id": "984",
        "Name": "image",
        "NameInRequest": "image",
        "Type": {
-        "$ref": "633"
+        "$ref": "636"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -8531,11 +8549,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "982",
+       "$id": "985",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "983",
+        "$id": "986",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -8550,9 +8568,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "984",
+        "$id": "987",
         "Type": {
-         "$ref": "983"
+         "$ref": "986"
         },
         "Value": "application/json"
        }
@@ -8560,12 +8578,12 @@
      ],
      "Responses": [
       {
-       "$id": "985",
+       "$id": "988",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "610"
+        "$ref": "613"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -8588,31 +8606,31 @@
     }
    ],
    "Protocol": {
-    "$id": "986"
+    "$id": "989"
    },
    "Creatable": false,
    "Parent": "OpenAIClient"
   },
   {
-   "$id": "987",
+   "$id": "990",
    "Name": "Moderations",
    "Description": "",
    "Operations": [
     {
-     "$id": "988",
+     "$id": "991",
      "Name": "create",
      "ResourceName": "Moderations",
      "Summary": "Classifies if text violates OpenAI's Content Policy",
      "Parameters": [
       {
-       "$ref": "738"
+       "$ref": "741"
       },
       {
-       "$id": "989",
+       "$id": "992",
        "Name": "content",
        "NameInRequest": "content",
        "Type": {
-        "$ref": "642"
+        "$ref": "645"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -8625,11 +8643,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "990",
+       "$id": "993",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "991",
+        "$id": "994",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -8644,19 +8662,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "992",
+        "$id": "995",
         "Type": {
-         "$ref": "991"
+         "$ref": "994"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "993",
+       "$id": "996",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "994",
+        "$id": "997",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -8671,9 +8689,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "995",
+        "$id": "998",
         "Type": {
-         "$ref": "994"
+         "$ref": "997"
         },
         "Value": "application/json"
        }
@@ -8681,12 +8699,12 @@
      ],
      "Responses": [
       {
-       "$id": "996",
+       "$id": "999",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "649"
+        "$ref": "652"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -8709,16 +8727,16 @@
     }
    ],
    "Protocol": {
-    "$id": "997"
+    "$id": "1000"
    },
    "Creatable": false,
    "Parent": "OpenAIClient"
   }
  ],
  "Auth": {
-  "$id": "998",
+  "$id": "1001",
   "ApiKey": {
-   "$id": "999",
+   "$id": "1002",
    "Name": "Authorization",
    "Prefix": "Bearer"
   }

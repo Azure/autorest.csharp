@@ -3,6 +3,7 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Internal;
 using System.Collections.Generic;
 
 namespace OpenAI.Models
@@ -10,8 +11,21 @@ namespace OpenAI.Models
     /// <summary> The ChatCompletionFunctionParameters. </summary>
     public partial class ChatCompletionFunctionParameters
     {
+        /// <summary> Initializes a new instance of <see cref="ChatCompletionFunctionParameters"/>. </summary>
+        public ChatCompletionFunctionParameters()
+        {
+            AdditionalProperties = new OptionalDictionary<string, BinaryData>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ChatCompletionFunctionParameters"/>. </summary>
+        /// <param name="additionalProperties"> Additional Properties. </param>
+        internal ChatCompletionFunctionParameters(IDictionary<string, BinaryData> additionalProperties)
+        {
+            AdditionalProperties = additionalProperties;
+        }
+
         /// <summary>
-        /// Keeps track of any properties unknown to the library.
+        /// Additional Properties
         /// <para>
         /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
@@ -40,18 +54,6 @@ namespace OpenAI.Models
         /// </list>
         /// </para>
         /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
-
-        /// <summary> Initializes a new instance of <see cref="ChatCompletionFunctionParameters"/>. </summary>
-        public ChatCompletionFunctionParameters()
-        {
-        }
-
-        /// <summary> Initializes a new instance of <see cref="ChatCompletionFunctionParameters"/>. </summary>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal ChatCompletionFunctionParameters(IDictionary<string, BinaryData> serializedAdditionalRawData)
-        {
-            _serializedAdditionalRawData = serializedAdditionalRawData;
-        }
+        public IDictionary<string, BinaryData> AdditionalProperties { get; }
     }
 }

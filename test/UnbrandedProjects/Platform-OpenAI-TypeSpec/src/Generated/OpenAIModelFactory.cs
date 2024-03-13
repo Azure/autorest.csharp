@@ -395,7 +395,7 @@ namespace OpenAI.Models
         /// failure.
         /// </param>
         /// <returns> A new <see cref="Models.FineTuningJob"/> instance for mocking. </returns>
-        public static FineTuningJob FineTuningJob(string id = null, FineTuningJobObject @object = default, DateTimeOffset createdAt = default, DateTimeOffset finishedAt = default, string model = null, string fineTunedModel = null, string organizationId = null, FineTuningJobStatus status = default, FineTuningJobHyperparameters hyperparameters = null, string trainingFile = null, string validationFile = null, IEnumerable<string> resultFiles = null, long? trainedTokens = null, FineTuningJobError error = null)
+        public static FineTuningJob FineTuningJob(string id = null, FineTuningJobObject @object = default, DateTimeOffset createdAt = default, DateTimeOffset? finishedAt = null, string model = null, string fineTunedModel = null, string organizationId = null, FineTuningJobStatus status = default, FineTuningJobHyperparameters hyperparameters = null, string trainingFile = null, string validationFile = null, IEnumerable<string> resultFiles = null, long? trainedTokens = null, FineTuningJobError error = null)
         {
             resultFiles ??= new List<string>();
 

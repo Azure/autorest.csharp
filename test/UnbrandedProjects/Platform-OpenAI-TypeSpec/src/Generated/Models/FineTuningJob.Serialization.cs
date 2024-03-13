@@ -30,8 +30,15 @@ namespace OpenAI.Models
             writer.WriteStringValue(Object.ToString());
             writer.WritePropertyName("created_at"u8);
             writer.WriteNumberValue(CreatedAt, "U");
-            writer.WritePropertyName("finished_at"u8);
-            writer.WriteStringValue(FinishedAt, "O");
+            if (FinishedAt != null)
+            {
+                writer.WritePropertyName("finished_at"u8);
+                writer.WriteStringValue(FinishedAt.Value, "O");
+            }
+            else
+            {
+                writer.WriteNull("finished_at");
+            }
             writer.WritePropertyName("model"u8);
             writer.WriteStringValue(Model);
             if (FineTunedModel != null)
@@ -126,7 +133,7 @@ namespace OpenAI.Models
             string id = default;
             FineTuningJobObject @object = default;
             DateTimeOffset createdAt = default;
-            DateTimeOffset finishedAt = default;
+            DateTimeOffset? finishedAt = default;
             string model = default;
             string fineTunedModel = default;
             string organizationId = default;
@@ -158,6 +165,11 @@ namespace OpenAI.Models
                 }
                 if (property.NameEquals("finished_at"u8))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        finishedAt = null;
+                        continue;
+                    }
                     finishedAt = property.Value.GetDateTimeOffset("O");
                     continue;
                 }

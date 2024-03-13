@@ -86,7 +86,7 @@ namespace OpenAI.Models
         /// failure.
         /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="model"/>, <paramref name="organizationId"/>, <paramref name="hyperparameters"/>, <paramref name="trainingFile"/> or <paramref name="resultFiles"/> is null. </exception>
-        internal FineTuningJob(string id, DateTimeOffset createdAt, DateTimeOffset finishedAt, string model, string fineTunedModel, string organizationId, FineTuningJobStatus status, FineTuningJobHyperparameters hyperparameters, string trainingFile, string validationFile, IEnumerable<string> resultFiles, long? trainedTokens, FineTuningJobError error)
+        internal FineTuningJob(string id, DateTimeOffset createdAt, DateTimeOffset? finishedAt, string model, string fineTunedModel, string organizationId, FineTuningJobStatus status, FineTuningJobHyperparameters hyperparameters, string trainingFile, string validationFile, IEnumerable<string> resultFiles, long? trainedTokens, FineTuningJobError error)
         {
             Argument.AssertNotNull(id, nameof(id));
             Argument.AssertNotNull(model, nameof(model));
@@ -153,7 +153,7 @@ namespace OpenAI.Models
         /// failure.
         /// </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal FineTuningJob(string id, FineTuningJobObject @object, DateTimeOffset createdAt, DateTimeOffset finishedAt, string model, string fineTunedModel, string organizationId, FineTuningJobStatus status, FineTuningJobHyperparameters hyperparameters, string trainingFile, string validationFile, IReadOnlyList<string> resultFiles, long? trainedTokens, FineTuningJobError error, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal FineTuningJob(string id, FineTuningJobObject @object, DateTimeOffset createdAt, DateTimeOffset? finishedAt, string model, string fineTunedModel, string organizationId, FineTuningJobStatus status, FineTuningJobHyperparameters hyperparameters, string trainingFile, string validationFile, IReadOnlyList<string> resultFiles, long? trainedTokens, FineTuningJobError error, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             Object = @object;
@@ -188,7 +188,7 @@ namespace OpenAI.Models
         /// The Unix timestamp (in seconds) for when the fine-tuning job was finished. The value will be
         /// null if the fine-tuning job is still running.
         /// </summary>
-        public DateTimeOffset FinishedAt { get; }
+        public DateTimeOffset? FinishedAt { get; }
         /// <summary> The base model that is being fine-tuned. </summary>
         public string Model { get; }
         /// <summary>
