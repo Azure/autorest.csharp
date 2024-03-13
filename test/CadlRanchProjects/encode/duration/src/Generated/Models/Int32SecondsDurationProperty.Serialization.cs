@@ -29,7 +29,7 @@ namespace Encode.Duration.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("value"u8);
-            writer.WriteStringValue(Value, "P");
+            writer.WriteNumberValue(Convert.ToInt32(Value.ToString("%s")));
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -75,7 +75,7 @@ namespace Encode.Duration.Models
             {
                 if (property.NameEquals("value"u8))
                 {
-                    value = property.Value.GetTimeSpan("P");
+                    value = TimeSpan.FromSeconds(property.Value.GetInt32());
                     continue;
                 }
                 if (options.Format != "W")

@@ -7,7 +7,8 @@ import {
     Type,
     DateTimeKnownEncoding,
     Model,
-    Enum
+    Enum,
+    DurationKnownEncoding
 } from "@typespec/compiler";
 import { Usage } from "./usage.js";
 import {
@@ -25,7 +26,8 @@ import {
     SdkUnionType,
     SdkBuiltInKinds,
     SdkContext,
-    SdkTupleType
+    SdkTupleType,
+    SdkDurationType
 } from "@azure-tools/typespec-client-generator-core";
 import {
     InputDictionaryType,
@@ -51,6 +53,7 @@ import { getFullNamespaceString } from "../lib/utils.js";
 import { InputPrimitiveTypeKind } from "./inputPrimitiveTypeKind.js";
 import { LiteralTypeContext } from "./literalTypeContext.js";
 import { InputIntrinsicTypeKind } from "./inputIntrinsicTypeKind.js";
+import { logger } from "../lib/logger.js";
 
 function fromSdkType(
     sdkType: SdkType,
@@ -74,6 +77,8 @@ function fromSdkType(
     if (sdkType.kind === "union")
         return fromUnionType(sdkType, context, models, enums);
     if (sdkType.kind === "utcDateTime") return fromSdkDatetimeType(sdkType);
+    if (sdkType.kind === "duration") return fromSdkDurationType(sdkType as SdkDurationType);
+    if (sdkType.kind === "bytes") return fromBytesType(sdkType as SdkBuiltInType);
     // TODO: offsetDateTime
     if (sdkType.kind === "tuple") return fromTupleType(sdkType);
     if (sdkType.__raw?.kind === "Scalar") return fromScalarType(sdkType);
@@ -243,12 +248,64 @@ function fromSdkDatetimeType(
     } as InputPrimitiveType;
 }
 
+function fromSdkDurationType(
+    durationType: SdkDurationType
+): InputPrimitiveType {
+    function fromDurationKnownEncoding(
+        encode: DurationKnownEncoding,
+        wireType: SdkBuiltInType
+    ): InputPrimitiveTypeKind {
+        switch (encode) {
+            case "ISO8601":
+                return InputPrimitiveTypeKind.DurationISO8601;
+            case "seconds":
+                if (wireType.kind === "float" || wireType.kind === "float32") {
+                    return InputPrimitiveTypeKind.DurationSecondsFloat;
+                }
+                return InputPrimitiveTypeKind.DurationSeconds;
+            default:
+                logger.warn(
+                    `invalid encode '${encode}' and wireType '${wireType.kind}' for duration.`
+                );
+                return InputPrimitiveTypeKind.DurationISO8601;
+        }
+    }
+    return {
+        Kind: InputTypeKind.Primitive,
+        Name: fromDurationKnownEncoding(durationType.encode, durationType.wireType),
+        IsNullable: false
+    } as InputPrimitiveType;
+}
+
 function fromTupleType(tupleType: SdkTupleType): InputIntrinsicType {
     return {
         Kind: InputTypeKind.Intrinsic,
         Name: InputIntrinsicTypeKind.Unknown,
         IsNullable: tupleType.nullable,
     } as InputIntrinsicType;
+}
+
+function fromBytesType(bytesType: SdkBuiltInType): InputPrimitiveType {
+    function fromBytesEncoding(encode: string) : InputPrimitiveTypeKind {
+            switch (encode) {
+                case undefined:
+                case "base64":
+                    return InputPrimitiveTypeKind.Bytes;
+                case "base64url":
+                    return InputPrimitiveTypeKind.BytesBase64Url;
+                default:
+                    logger.warn(
+                        `invalid encode ${encode} for bytes.`
+                    );
+                    return InputPrimitiveTypeKind.Bytes;
+            }
+    }
+
+    return {
+        Kind: InputTypeKind.Primitive,
+        Name: fromBytesEncoding(bytesType.encode),
+        IsNullable: bytesType.nullable
+    };
 }
 
 export function fromSdkBuiltInType(builtInType: SdkBuiltInType): InputType {
@@ -265,7 +322,7 @@ export function fromSdkBuiltInType(builtInType: SdkBuiltInType): InputType {
         } as InputPrimitiveType;
 }
 
-export function fromScalarType(scalarType: SdkType): InputPrimitiveType {
+function fromScalarType(scalarType: SdkType): InputPrimitiveType {
     return {
         Kind: InputTypeKind.Primitive,
         Name: getCSharpInputTypeKindByPrimitiveModelName(

@@ -37,7 +37,7 @@ namespace Encode.Bytes.Models
                     writer.WriteNullValue();
                     continue;
                 }
-                writer.WriteBase64StringValue(item.ToArray(), "D");
+                writer.WriteBase64StringValue(item.ToArray(), "U");
             }
             writer.WriteEndArray();
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -94,7 +94,7 @@ namespace Encode.Bytes.Models
                         }
                         else
                         {
-                            array.Add(BinaryData.FromBytes(item.GetBytesFromBase64("D")));
+                            array.Add(BinaryData.FromBytes(item.GetBytesFromBase64("U")));
                         }
                     }
                     value = array;

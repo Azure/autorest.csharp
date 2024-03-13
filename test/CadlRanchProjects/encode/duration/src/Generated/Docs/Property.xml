@@ -191,14 +191,14 @@ This sample shows how to call Int32SecondsAsync.
 <code><![CDATA[
 Property client = new DurationClient().GetPropertyClient();
 
-Int32SecondsDurationProperty body = new Int32SecondsDurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
+Int32SecondsDurationProperty body = new Int32SecondsDurationProperty(TimeSpan.FromSeconds(10));
 Response<Int32SecondsDurationProperty> response = await client.Int32SecondsAsync(body);
 ]]></code>
 This sample shows how to call Int32SecondsAsync with all parameters.
 <code><![CDATA[
 Property client = new DurationClient().GetPropertyClient();
 
-Int32SecondsDurationProperty body = new Int32SecondsDurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
+Int32SecondsDurationProperty body = new Int32SecondsDurationProperty(TimeSpan.FromSeconds(10));
 Response<Int32SecondsDurationProperty> response = await client.Int32SecondsAsync(body);
 ]]></code></example>
     </member>
@@ -208,14 +208,14 @@ This sample shows how to call Int32Seconds.
 <code><![CDATA[
 Property client = new DurationClient().GetPropertyClient();
 
-Int32SecondsDurationProperty body = new Int32SecondsDurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
+Int32SecondsDurationProperty body = new Int32SecondsDurationProperty(TimeSpan.FromSeconds(10));
 Response<Int32SecondsDurationProperty> response = client.Int32Seconds(body);
 ]]></code>
 This sample shows how to call Int32Seconds with all parameters.
 <code><![CDATA[
 Property client = new DurationClient().GetPropertyClient();
 
-Int32SecondsDurationProperty body = new Int32SecondsDurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
+Int32SecondsDurationProperty body = new Int32SecondsDurationProperty(TimeSpan.FromSeconds(10));
 Response<Int32SecondsDurationProperty> response = client.Int32Seconds(body);
 ]]></code></example>
     </member>
@@ -227,7 +227,7 @@ Property client = new DurationClient().GetPropertyClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    value = "PT1H23M45S",
+    value = 10,
 });
 Response response = await client.Int32SecondsAsync(content);
 
@@ -240,7 +240,7 @@ Property client = new DurationClient().GetPropertyClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    value = "PT1H23M45S",
+    value = 10,
 });
 Response response = await client.Int32SecondsAsync(content);
 
@@ -256,7 +256,7 @@ Property client = new DurationClient().GetPropertyClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    value = "PT1H23M45S",
+    value = 10,
 });
 Response response = client.Int32Seconds(content);
 
@@ -269,7 +269,7 @@ Property client = new DurationClient().GetPropertyClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    value = "PT1H23M45S",
+    value = 10,
 });
 Response response = client.Int32Seconds(content);
 
@@ -283,14 +283,14 @@ This sample shows how to call FloatSecondsAsync.
 <code><![CDATA[
 Property client = new DurationClient().GetPropertyClient();
 
-FloatSecondsDurationProperty body = new FloatSecondsDurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
+FloatSecondsDurationProperty body = new FloatSecondsDurationProperty(TimeSpan.FromSeconds(10F));
 Response<FloatSecondsDurationProperty> response = await client.FloatSecondsAsync(body);
 ]]></code>
 This sample shows how to call FloatSecondsAsync with all parameters.
 <code><![CDATA[
 Property client = new DurationClient().GetPropertyClient();
 
-FloatSecondsDurationProperty body = new FloatSecondsDurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
+FloatSecondsDurationProperty body = new FloatSecondsDurationProperty(TimeSpan.FromSeconds(10F));
 Response<FloatSecondsDurationProperty> response = await client.FloatSecondsAsync(body);
 ]]></code></example>
     </member>
@@ -300,14 +300,14 @@ This sample shows how to call FloatSeconds.
 <code><![CDATA[
 Property client = new DurationClient().GetPropertyClient();
 
-FloatSecondsDurationProperty body = new FloatSecondsDurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
+FloatSecondsDurationProperty body = new FloatSecondsDurationProperty(TimeSpan.FromSeconds(10F));
 Response<FloatSecondsDurationProperty> response = client.FloatSeconds(body);
 ]]></code>
 This sample shows how to call FloatSeconds with all parameters.
 <code><![CDATA[
 Property client = new DurationClient().GetPropertyClient();
 
-FloatSecondsDurationProperty body = new FloatSecondsDurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
+FloatSecondsDurationProperty body = new FloatSecondsDurationProperty(TimeSpan.FromSeconds(10F));
 Response<FloatSecondsDurationProperty> response = client.FloatSeconds(body);
 ]]></code></example>
     </member>
@@ -319,7 +319,7 @@ Property client = new DurationClient().GetPropertyClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    value = "PT1H23M45S",
+    value = 10F,
 });
 Response response = await client.FloatSecondsAsync(content);
 
@@ -332,7 +332,7 @@ Property client = new DurationClient().GetPropertyClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    value = "PT1H23M45S",
+    value = 10F,
 });
 Response response = await client.FloatSecondsAsync(content);
 
@@ -348,7 +348,7 @@ Property client = new DurationClient().GetPropertyClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    value = "PT1H23M45S",
+    value = 10F,
 });
 Response response = client.FloatSeconds(content);
 
@@ -361,7 +361,7 @@ Property client = new DurationClient().GetPropertyClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    value = "PT1H23M45S",
+    value = 10F,
 });
 Response response = client.FloatSeconds(content);
 
@@ -375,14 +375,14 @@ This sample shows how to call FloatSecondsArrayAsync.
 <code><![CDATA[
 Property client = new DurationClient().GetPropertyClient();
 
-FloatSecondsDurationArrayProperty body = new FloatSecondsDurationArrayProperty(new TimeSpan[] { XmlConvert.ToTimeSpan("PT1H23M45S") });
+FloatSecondsDurationArrayProperty body = new FloatSecondsDurationArrayProperty(new TimeSpan[] { TimeSpan.FromSeconds(10F) });
 Response<FloatSecondsDurationArrayProperty> response = await client.FloatSecondsArrayAsync(body);
 ]]></code>
 This sample shows how to call FloatSecondsArrayAsync with all parameters.
 <code><![CDATA[
 Property client = new DurationClient().GetPropertyClient();
 
-FloatSecondsDurationArrayProperty body = new FloatSecondsDurationArrayProperty(new TimeSpan[] { XmlConvert.ToTimeSpan("PT1H23M45S") });
+FloatSecondsDurationArrayProperty body = new FloatSecondsDurationArrayProperty(new TimeSpan[] { TimeSpan.FromSeconds(10F) });
 Response<FloatSecondsDurationArrayProperty> response = await client.FloatSecondsArrayAsync(body);
 ]]></code></example>
     </member>
@@ -392,14 +392,14 @@ This sample shows how to call FloatSecondsArray.
 <code><![CDATA[
 Property client = new DurationClient().GetPropertyClient();
 
-FloatSecondsDurationArrayProperty body = new FloatSecondsDurationArrayProperty(new TimeSpan[] { XmlConvert.ToTimeSpan("PT1H23M45S") });
+FloatSecondsDurationArrayProperty body = new FloatSecondsDurationArrayProperty(new TimeSpan[] { TimeSpan.FromSeconds(10F) });
 Response<FloatSecondsDurationArrayProperty> response = client.FloatSecondsArray(body);
 ]]></code>
 This sample shows how to call FloatSecondsArray with all parameters.
 <code><![CDATA[
 Property client = new DurationClient().GetPropertyClient();
 
-FloatSecondsDurationArrayProperty body = new FloatSecondsDurationArrayProperty(new TimeSpan[] { XmlConvert.ToTimeSpan("PT1H23M45S") });
+FloatSecondsDurationArrayProperty body = new FloatSecondsDurationArrayProperty(new TimeSpan[] { TimeSpan.FromSeconds(10F) });
 Response<FloatSecondsDurationArrayProperty> response = client.FloatSecondsArray(body);
 ]]></code></example>
     </member>
@@ -413,7 +413,7 @@ using RequestContent content = RequestContent.Create(new
 {
     value = new object[]
     {
-        "PT1H23M45S"
+        10F
     },
 });
 Response response = await client.FloatSecondsArrayAsync(content);
@@ -429,7 +429,7 @@ using RequestContent content = RequestContent.Create(new
 {
     value = new object[]
     {
-        "PT1H23M45S"
+        10F
     },
 });
 Response response = await client.FloatSecondsArrayAsync(content);
@@ -448,7 +448,7 @@ using RequestContent content = RequestContent.Create(new
 {
     value = new object[]
     {
-        "PT1H23M45S"
+        10F
     },
 });
 Response response = client.FloatSecondsArray(content);
@@ -464,7 +464,7 @@ using RequestContent content = RequestContent.Create(new
 {
     value = new object[]
     {
-        "PT1H23M45S"
+        10F
     },
 });
 Response response = client.FloatSecondsArray(content);

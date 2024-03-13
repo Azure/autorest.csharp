@@ -32,7 +32,7 @@ namespace Encode.Duration.Models
             writer.WriteStartArray();
             foreach (var item in Value)
             {
-                writer.WriteStringValue(item, "P");
+                writer.WriteNumberValue(Convert.ToDouble(item.ToString("s\\.fff")));
             }
             writer.WriteEndArray();
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -83,7 +83,7 @@ namespace Encode.Duration.Models
                     List<TimeSpan> array = new List<TimeSpan>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(item.GetTimeSpan("P"));
+                        array.Add(TimeSpan.FromSeconds(item.GetDouble()));
                     }
                     value = array;
                     continue;

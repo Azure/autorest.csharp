@@ -29,7 +29,7 @@ namespace Encode.Bytes.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("value"u8);
-            writer.WriteBase64StringValue(Value.ToArray(), "D");
+            writer.WriteBase64StringValue(Value.ToArray(), "U");
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -75,7 +75,7 @@ namespace Encode.Bytes.Models
             {
                 if (property.NameEquals("value"u8))
                 {
-                    value = BinaryData.FromBytes(property.Value.GetBytesFromBase64("D"));
+                    value = BinaryData.FromBytes(property.Value.GetBytesFromBase64("U"));
                     continue;
                 }
                 if (options.Format != "W")

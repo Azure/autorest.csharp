@@ -71,7 +71,7 @@
      "Type": {
       "$id": "10",
       "Kind": "Primitive",
-      "Name": "DurationISO8601",
+      "Name": "DurationSeconds",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -96,7 +96,7 @@
      "Type": {
       "$id": "13",
       "Kind": "Primitive",
-      "Name": "DurationISO8601",
+      "Name": "DurationSecondsFloat",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -125,7 +125,7 @@
       "ElementType": {
        "$id": "17",
        "Kind": "Primitive",
-       "Name": "DurationISO8601",
+       "Name": "DurationSecondsFloat",
        "IsNullable": false
       },
       "IsNullable": false

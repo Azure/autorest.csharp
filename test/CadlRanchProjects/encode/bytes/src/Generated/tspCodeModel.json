@@ -71,7 +71,7 @@
      "Type": {
       "$id": "10",
       "Kind": "Primitive",
-      "Name": "Bytes",
+      "Name": "BytesBase64Url",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -100,7 +100,7 @@
       "ElementType": {
        "$id": "14",
        "Kind": "Primitive",
-       "Name": "Bytes",
+       "Name": "BytesBase64Url",
        "IsNullable": false
       },
       "IsNullable": false
