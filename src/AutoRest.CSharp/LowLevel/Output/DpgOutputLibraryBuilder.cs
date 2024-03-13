@@ -224,26 +224,22 @@ namespace AutoRest.CSharp.Output.Models
                 return operation with
                 {
                     Name = name,
-                    Parameters = UpdateOperationParameters(operation.Parameters),
+                    Parameters = UpdatePageableOperationParameters(operation.Parameters),
                     Paging = UpdateOperationPaging(operation.Paging, operationsMap),
                 };
             }
 
-            return operation with { Name = name };
-        }
-
-        private static IReadOnlyList<InputParameter> AddEndpointParameter(IReadOnlyList<InputParameter> operationParameters)
-        {
-            return new List<InputParameter>(operationParameters)
+            return operation with
             {
-                new InputParameter(KnownParameters.Endpoint.Name, "endpoint", $"{KnownParameters.Endpoint.Description}", new InputPrimitiveType(InputTypeKind.Uri, false), RequestLocation.Uri, null, null, null, InputOperationParameterKind.Client, true, false, false, false, true, false, false, null, null)
+                Name = name,
+                Parameters = EnsureEndpoint(operation.Parameters)
             };
         }
 
         private static string UpdateOperationName(InputOperation operation, string clientName)
             => operation.CleanName.RenameGetMethod(clientName).RenameListToGet(clientName);
 
-        private static IReadOnlyList<InputParameter> UpdateOperationParameters(IReadOnlyList<InputParameter> operationParameters)
+        private static IReadOnlyList<InputParameter> UpdatePageableOperationParameters(IReadOnlyList<InputParameter> operationParameters)
         {
             var parameters = new List<InputParameter>(operationParameters.Count);
             foreach (var parameter in operationParameters)
@@ -258,7 +254,19 @@ namespace AutoRest.CSharp.Output.Models
                 }
             }
 
-            return parameters;
+            return EnsureEndpoint(parameters);
+        }
+
+        private static IReadOnlyList<InputParameter> EnsureEndpoint(IReadOnlyList<InputParameter> parameters)
+        {
+            if (parameters.Any(p => p.IsEndpoint || p is { Location: RequestLocation.Uri, Kind: InputOperationParameterKind.Client }))
+            {
+                return parameters;
+            }
+
+            return parameters
+                .Append(new InputParameter(KnownParameters.Endpoint.Name, "endpoint", $"{KnownParameters.Endpoint.Description}", new InputPrimitiveType(InputTypeKind.Uri, false), RequestLocation.Uri, null, null, null, InputOperationParameterKind.Client, true, false, false, false, true, false, false, null, null))
+                .ToList();
         }
 
         private static OperationPaging? UpdateOperationPaging(OperationPaging? sourcePaging, IReadOnlyDictionary<InputOperation, Func<InputOperation>> operationsMap)
