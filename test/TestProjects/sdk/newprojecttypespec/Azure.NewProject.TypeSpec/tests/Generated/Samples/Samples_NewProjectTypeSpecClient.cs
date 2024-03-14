@@ -753,7 +753,7 @@ namespace Azure.NewProject.TypeSpec.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                sourceUrl = "<sourceUrl>",
+                sourceUrl = "http://localhost:3000",
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
             });
             Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
@@ -771,7 +771,7 @@ namespace Azure.NewProject.TypeSpec.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                sourceUrl = "<sourceUrl>",
+                sourceUrl = "http://localhost:3000",
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
             });
             Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
@@ -787,7 +787,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            ModelWithFormat body = new ModelWithFormat("<sourceUrl>", Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+            ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
             Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
         }
 
@@ -799,7 +799,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            ModelWithFormat body = new ModelWithFormat("<sourceUrl>", Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+            ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
             Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
         }
 
@@ -813,7 +813,7 @@ namespace Azure.NewProject.TypeSpec.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                sourceUrl = "<sourceUrl>",
+                sourceUrl = "http://localhost:3000",
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
             });
             Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
@@ -831,7 +831,7 @@ namespace Azure.NewProject.TypeSpec.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                sourceUrl = "<sourceUrl>",
+                sourceUrl = "http://localhost:3000",
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
             });
             Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
@@ -847,7 +847,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            ModelWithFormat body = new ModelWithFormat("<sourceUrl>", Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+            ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
             Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
         }
 
@@ -859,7 +859,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            ModelWithFormat body = new ModelWithFormat("<sourceUrl>", Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+            ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
             Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
         }
     }

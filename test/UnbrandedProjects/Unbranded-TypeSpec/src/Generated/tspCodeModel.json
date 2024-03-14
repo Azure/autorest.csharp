@@ -1039,7 +1039,7 @@
      "Type": {
       "$id": "128",
       "Kind": "Primitive",
-      "Name": "String",
+      "Name": "Uri",
       "IsNullable": false
      },
      "IsRequired": true,
