@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class BicepSerializationTypeProvider : ExpressionTypeProvider
     {
-        private static readonly Lazy<BicepSerializationTypeProvider> _instance = new(() => new BicepSerializationTypeProvider(Configuration.HelperNamespace, null));
+        private static readonly Lazy<BicepSerializationTypeProvider> _instance = new(() => new BicepSerializationTypeProvider(Configuration.Namespace, null));
         public static BicepSerializationTypeProvider Instance => _instance.Value;
         private const string AppendChildObjectMethodName = "AppendChildObject";
 
