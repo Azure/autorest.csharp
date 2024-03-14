@@ -8,7 +8,7 @@
    "$id": "2",
    "Kind": "Enum",
    "Name": "CreateTranscriptionRequestModel",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "3",
@@ -25,7 +25,7 @@
    "$id": "4",
    "Kind": "Enum",
    "Name": "CreateTranscriptionRequestResponseFormat",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "5",
@@ -62,7 +62,7 @@
    "$id": "10",
    "Kind": "Enum",
    "Name": "CreateTranslationRequestModel",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "11",
@@ -79,7 +79,7 @@
    "$id": "12",
    "Kind": "Enum",
    "Name": "CreateTranslationRequestResponseFormat",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "13",
@@ -116,7 +116,7 @@
    "$id": "18",
    "Kind": "Enum",
    "Name": "CreateChatCompletionRequestModel",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "19",
@@ -183,7 +183,7 @@
    "$id": "30",
    "Kind": "Enum",
    "Name": "ChatCompletionRequestMessageRole",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "31",
@@ -215,7 +215,7 @@
    "$id": "35",
    "Kind": "Enum",
    "Name": "ChatCompletionResponseMessageRole",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "36",
@@ -247,7 +247,7 @@
    "$id": "40",
    "Kind": "Enum",
    "Name": "CreateChatCompletionResponseChoiceFinishReason",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "41",
@@ -279,7 +279,7 @@
    "$id": "45",
    "Kind": "Enum",
    "Name": "CreateFineTuningJobRequestModel",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "46",
@@ -325,7 +325,7 @@
    "$id": "51",
    "Kind": "Enum",
    "Name": "FineTuningJobStatus",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "52",
@@ -367,7 +367,7 @@
    "$id": "58",
    "Kind": "Enum",
    "Name": "FineTuningJobEventLevel",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "59",
@@ -394,7 +394,7 @@
    "$id": "62",
    "Kind": "Enum",
    "Name": "CreateCompletionRequestModel",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "63",
@@ -451,7 +451,7 @@
    "$id": "72",
    "Kind": "Enum",
    "Name": "CreateCompletionResponseChoiceFinishReason",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "73",
@@ -478,7 +478,7 @@
    "$id": "76",
    "Kind": "Enum",
    "Name": "CreateEditRequestModel",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "77",
@@ -519,7 +519,7 @@
    "$id": "81",
    "Kind": "Enum",
    "Name": "CreateEditResponseChoiceFinishReason",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "82",
@@ -541,7 +541,7 @@
    "$id": "84",
    "Kind": "Enum",
    "Name": "CreateEmbeddingRequestModel",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "85",
@@ -615,7 +615,7 @@
    "$id": "92",
    "Kind": "Enum",
    "Name": "OpenAIFileStatus",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "93",
@@ -657,7 +657,7 @@
    "$id": "99",
    "Kind": "Enum",
    "Name": "CreateFineTuneRequestModel",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "100",
@@ -708,7 +708,7 @@
    "$id": "106",
    "Kind": "Enum",
    "Name": "FineTuneStatus",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "107",
@@ -764,7 +764,7 @@
    "$id": "114",
    "Kind": "Enum",
    "Name": "CreateImageRequestSize",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "115",
@@ -791,7 +791,7 @@
    "$id": "118",
    "Kind": "Enum",
    "Name": "CreateImageRequestResponseFormat",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "119",
@@ -813,7 +813,7 @@
    "$id": "121",
    "Kind": "Enum",
    "Name": "CreateModerationRequestModel",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "122",
@@ -835,7 +835,7 @@
    "$id": "124",
    "Kind": "Enum",
    "Name": "FineTuningEventType",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "125",

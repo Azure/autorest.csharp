@@ -26,7 +26,7 @@
    "$id": "4",
    "Kind": "Enum",
    "Name": "TimeGranularity",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "5",
@@ -84,7 +84,7 @@
    "$id": "14",
    "Kind": "Enum",
    "Name": "ImputeMode",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "15",
@@ -127,7 +127,7 @@
    "$id": "21",
    "Kind": "Enum",
    "Name": "MultivariateBatchDetectionStatus",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "22",
@@ -160,7 +160,7 @@
    "$id": "26",
    "Kind": "Enum",
    "Name": "DataSchema",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "27",
@@ -185,7 +185,7 @@
    "$id": "29",
    "Kind": "Enum",
    "Name": "AlignMode",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "30",
@@ -208,7 +208,7 @@
    "$id": "32",
    "Kind": "Enum",
    "Name": "FillNAMethod",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "33",
@@ -246,7 +246,7 @@
    "$id": "38",
    "Kind": "Enum",
    "Name": "ModelStatus",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "39",
@@ -279,7 +279,7 @@
    "$id": "43",
    "Kind": "Enum",
    "Name": "AnomalyDetectorErrorCodes",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "44",
@@ -346,7 +346,7 @@
    "$id": "55",
    "Kind": "Enum",
    "Name": "Versions",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "56",

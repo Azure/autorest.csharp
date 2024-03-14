@@ -65,7 +65,7 @@
    "$id": "8",
    "Kind": "Enum",
    "Name": "UnionStringLiteralPropertyProperty",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "9",
@@ -87,7 +87,7 @@
    "$id": "11",
    "Kind": "Enum",
    "Name": "UnionIntLiteralPropertyProperty",
-   "EnumValueType": "int32",
+   "EnumValueType": "Int32",
    "AllowedValues": [
     {
      "$id": "12",
@@ -109,7 +109,7 @@
    "$id": "14",
    "Kind": "Enum",
    "Name": "UnionFloatLiteralPropertyProperty",
-   "EnumValueType": "float32",
+   "EnumValueType": "Float32",
    "AllowedValues": [
     {
      "$id": "15",

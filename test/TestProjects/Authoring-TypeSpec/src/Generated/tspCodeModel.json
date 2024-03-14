@@ -9,7 +9,7 @@
    "$id": "2",
    "Kind": "Enum",
    "Name": "ProjectKind",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "3",
@@ -40,7 +40,7 @@
    "$id": "6",
    "Kind": "Enum",
    "Name": "OperationState",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "7",
@@ -83,7 +83,7 @@
    "$id": "12",
    "Kind": "Enum",
    "Name": "JobStatus",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "13",

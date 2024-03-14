@@ -223,7 +223,7 @@ export function fromSdkEnumType(
         const newInputEnumType: InputEnumType = {
             Kind: InputTypeKind.Enum,
             Name: enumName,
-            EnumValueType: enumType.valueType.kind,
+            EnumValueType: fromScalarType(enumType.valueType).Name,
             AllowedValues: enumType.values.map((v) => fromSdkEnumValueType(v)),
             Namespace: getFullNamespaceString(
                 (enumType.__raw! as Enum).namespace

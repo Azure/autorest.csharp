@@ -9,7 +9,7 @@
    "$id": "2",
    "Kind": "Enum",
    "Name": "Interval",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "3",
@@ -52,7 +52,7 @@
    "$id": "8",
    "Kind": "Enum",
    "Name": "OAuth2FlowType",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "9",

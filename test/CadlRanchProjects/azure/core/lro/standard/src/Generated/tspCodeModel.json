@@ -10,7 +10,7 @@
    "$id": "2",
    "Kind": "Enum",
    "Name": "OperationState",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "3",

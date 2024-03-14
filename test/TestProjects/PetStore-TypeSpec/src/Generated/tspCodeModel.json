@@ -8,7 +8,7 @@
    "$id": "2",
    "Kind": "Enum",
    "Name": "PetKind",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "3",

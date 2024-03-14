@@ -8,7 +8,7 @@
    "$id": "2",
    "Kind": "Enum",
    "Name": "GetResponseProp5",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "3",
@@ -35,7 +35,7 @@
    "$id": "6",
    "Kind": "Enum",
    "Name": "GetResponseProp4",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "7",
@@ -57,7 +57,7 @@
    "$id": "9",
    "Kind": "Enum",
    "Name": "StringExtensibleNamedUnion",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "10",
@@ -79,7 +79,7 @@
    "$id": "12",
    "Kind": "Enum",
    "Name": "GetResponseProp3",
-   "EnumValueType": "int32",
+   "EnumValueType": "Int32",
    "AllowedValues": [
     {
      "$id": "13",
@@ -106,7 +106,7 @@
    "$id": "16",
    "Kind": "Enum",
    "Name": "GetResponseProp2",
-   "EnumValueType": "float32",
+   "EnumValueType": "Float32",
    "AllowedValues": [
     {
      "$id": "17",
@@ -133,7 +133,7 @@
    "$id": "20",
    "Kind": "Enum",
    "Name": "EnumsOnlyCasesLr",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "21",
@@ -165,7 +165,7 @@
    "$id": "25",
    "Kind": "Enum",
    "Name": "EnumsOnlyCasesUd",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "26",

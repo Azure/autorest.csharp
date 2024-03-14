@@ -10,7 +10,7 @@
    "$id": "2",
    "Kind": "Enum",
    "Name": "FixedStringEnum",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "3",
@@ -38,7 +38,7 @@
    "$id": "6",
    "Kind": "Enum",
    "Name": "FixedIntEnum",
-   "EnumValueType": "int32",
+   "EnumValueType": "Int32",
    "AllowedValues": [
     {
      "$id": "7",
@@ -67,7 +67,7 @@
    "$id": "10",
    "Kind": "Enum",
    "Name": "ExtensibleEnum",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "11",
@@ -96,7 +96,7 @@
    "$id": "14",
    "Kind": "Enum",
    "Name": "FixedFloatEnum",
-   "EnumValueType": "float32",
+   "EnumValueType": "Float32",
    "AllowedValues": [
     {
      "$id": "15",
@@ -125,7 +125,7 @@
    "$id": "18",
    "Kind": "Enum",
    "Name": "ExtensibleIntEnum",
-   "EnumValueType": "int32",
+   "EnumValueType": "Int32",
    "AllowedValues": [
     {
      "$id": "19",

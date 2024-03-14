@@ -124,7 +124,7 @@
    "$id": "14",
    "Kind": "Enum",
    "Name": "CsProjectedEnum",
-   "EnumValueType": "float32",
+   "EnumValueType": "Float32",
    "AllowedValues": [
     {
      "$id": "15",
@@ -152,7 +152,7 @@
    "$id": "18",
    "Kind": "Enum",
    "Name": "CsProjectedEnumInModel",
-   "EnumValueType": "float32",
+   "EnumValueType": "Float32",
    "AllowedValues": [
     {
      "$id": "19",
@@ -180,7 +180,7 @@
    "$id": "22",
    "Kind": "Enum",
    "Name": "StringFixedEnum",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "23",
@@ -208,7 +208,7 @@
    "$id": "26",
    "Kind": "Enum",
    "Name": "StringExtensibleEnum",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "27",
@@ -236,7 +236,7 @@
    "$id": "30",
    "Kind": "Enum",
    "Name": "IntExtensibleEnum",
-   "EnumValueType": "int32",
+   "EnumValueType": "Int32",
    "AllowedValues": [
     {
      "$id": "31",
@@ -264,7 +264,7 @@
    "$id": "34",
    "Kind": "Enum",
    "Name": "FloatExtensibleEnum",
-   "EnumValueType": "float32",
+   "EnumValueType": "Float32",
    "AllowedValues": [
     {
      "$id": "35",
@@ -292,7 +292,7 @@
    "$id": "38",
    "Kind": "Enum",
    "Name": "FloatFixedEnum",
-   "EnumValueType": "float32",
+   "EnumValueType": "Float32",
    "AllowedValues": [
     {
      "$id": "39",
@@ -320,7 +320,7 @@
    "$id": "42",
    "Kind": "Enum",
    "Name": "IntFixedEnum",
-   "EnumValueType": "int32",
+   "EnumValueType": "Int32",
    "AllowedValues": [
     {
      "$id": "43",
@@ -348,7 +348,7 @@
    "$id": "46",
    "Kind": "Enum",
    "Name": "OAuth2FlowType",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "47",

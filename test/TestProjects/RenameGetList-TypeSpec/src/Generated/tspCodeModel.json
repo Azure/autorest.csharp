@@ -9,7 +9,7 @@
    "$id": "2",
    "Kind": "Enum",
    "Name": "ProjectKind",
-   "EnumValueType": "string",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "3",
