@@ -221,18 +221,27 @@ namespace AutoRest.CSharp.Output.Models
             var name = UpdateOperationName(operation, operation.ResourceName ?? clientName);
             if (operation.Paging != null && !Configuration.DisablePaginationTopRenaming && !operation.Parameters.Any(p => p.Name.Equals(MaxCountParameterName, StringComparison.OrdinalIgnoreCase)))
             {
-                return operation with
+                operation = operation with
                 {
-                    Name = name,
                     Parameters = UpdatePageableOperationParameters(operation.Parameters),
                     Paging = UpdateOperationPaging(operation.Paging, operationsMap),
+                };
+            }
+
+            if (!operation.Parameters.Any(p => p.IsEndpoint || p is { Location: RequestLocation.Uri, Kind: InputOperationParameterKind.Client }))
+            {
+                operation = operation with
+                {
+                    Uri = $"{{{KnownParameters.Endpoint.Name}}}",
+                    Parameters = operation.Parameters
+                        .Append(new InputParameter(KnownParameters.Endpoint.Name, KnownParameters.Endpoint.Name, $"{KnownParameters.Endpoint.Description}", new InputPrimitiveType(InputTypeKind.Uri, false), RequestLocation.Uri, null, null, null, InputOperationParameterKind.Client, true, false, false, false, true, false, false, null, null))
+                        .ToList()
                 };
             }
 
             return operation with
             {
                 Name = name,
-                Parameters = EnsureEndpoint(operation.Parameters)
             };
         }
 
@@ -254,19 +263,7 @@ namespace AutoRest.CSharp.Output.Models
                 }
             }
 
-            return EnsureEndpoint(parameters);
-        }
-
-        private static IReadOnlyList<InputParameter> EnsureEndpoint(IReadOnlyList<InputParameter> parameters)
-        {
-            if (parameters.Any(p => p.IsEndpoint || p is { Location: RequestLocation.Uri, Kind: InputOperationParameterKind.Client }))
-            {
-                return parameters;
-            }
-
-            return parameters
-                .Append(new InputParameter(KnownParameters.Endpoint.Name, "endpoint", $"{KnownParameters.Endpoint.Description}", new InputPrimitiveType(InputTypeKind.Uri, false), RequestLocation.Uri, null, null, null, InputOperationParameterKind.Client, true, false, false, false, true, false, false, null, null))
-                .ToList();
+            return parameters;
         }
 
         private static OperationPaging? UpdateOperationPaging(OperationPaging? sourcePaging, IReadOnlyDictionary<InputOperation, Func<InputOperation>> operationsMap)

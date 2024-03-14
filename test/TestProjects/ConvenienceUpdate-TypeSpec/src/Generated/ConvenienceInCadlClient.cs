@@ -2146,6 +2146,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/updateConvenience", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2158,6 +2159,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/convenienceOptionalBeforeRequired", false);
             if (optional != null)
             {
@@ -2176,6 +2178,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/noConvenience", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2188,6 +2191,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/noConvenienceRequiredBody", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2202,6 +2206,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/noConvenienceOptionalBody", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2216,6 +2221,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/protocol", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2228,6 +2234,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/convenienceWithOptional", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2240,6 +2247,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/convenienceWithRequired", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2252,6 +2260,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/convenienceShouldNotGenerate", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2264,6 +2273,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/protocolShouldNotGenerateConvenience", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2276,6 +2286,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/protocolOptionalQuery", false);
             if (optional != null)
             {
@@ -2292,6 +2303,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/protocolRequiredQuery", false);
             uri.AppendQuery("required", required, true);
             request.Uri = uri;
@@ -2305,6 +2317,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/protocolOptionalModel", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2319,6 +2332,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/protocolRequiredModel", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2333,6 +2347,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/convenienceOptionalQueryWithOptional", false);
             if (optional != null)
             {
@@ -2349,6 +2364,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/convenienceRequiredQueryWithOptional", false);
             uri.AppendQuery("required", required, true);
             request.Uri = uri;
@@ -2362,6 +2378,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/convenienceOptionalQueryWithRequired", false);
             if (optional != null)
             {
@@ -2378,6 +2395,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/convenienceRequiredQueryWithRequired", false);
             uri.AppendQuery("required", required, true);
             request.Uri = uri;
@@ -2391,6 +2409,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/convenienceOptionalModelWithOptional", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2405,6 +2424,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/convenienceRequiredModelWithOptional", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2419,6 +2439,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/convenienceOptionalModelWithRequired", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2433,6 +2454,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/protocolOptionalBeforeRequired", false);
             if (optional != null)
             {
