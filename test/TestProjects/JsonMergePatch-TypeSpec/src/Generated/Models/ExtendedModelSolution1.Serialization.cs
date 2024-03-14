@@ -95,7 +95,7 @@ namespace Payload.JsonMergePatch.Models
                     writer.WriteNullValue();
                 }
             }
-            if (base.IsChanged("baseValue"))
+            if (base.IsChanged(nameof(BaseValue)))
             {
                 writer.WritePropertyName("baseValue"u8);
                 if (BaseValue != null)
@@ -111,12 +111,12 @@ namespace Payload.JsonMergePatch.Models
             // 1. _baseDictChanged
             // 2. _baseDict.IsChanged()
             // 3. _baseDict.Values.Any(item => item.IsChanged())
-            if (base.IsChanged("baseDict"))
+            if (base.IsChanged(nameof(BaseDict)))
             {
                 writer.WritePropertyName("baseDict"u8);
                 if (BaseDict != null && !((ChangeTrackingDictionary<string, DummyModel>)BaseDict).IsRemoved())
                 {
-                    foreach (var item in BaseDict)
+                    foreach (var item in BaseDict) // Consider the loop twice here, use boolean to track
                     {
                         // Case 1: _baseDict["a"] = null;
                         // Case 2: _baseDict["a"] = <dummyModel>;

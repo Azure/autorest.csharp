@@ -72,9 +72,9 @@ namespace Azure.Core
         {
             return !ContainsKey(key) && IsChanged(key);
         }
-        public bool IsRemoved()
+        public bool IsRemoved()// WasCleared()
         {
-            return _isRemoved && !IsChanged(); // Consider this case: call `Clear()` first and then call `Add()`
+            return _isRemoved && this.Count == 0; // Consider this case: call `Clear()` first and then call `Add()`
         }
 
         public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()

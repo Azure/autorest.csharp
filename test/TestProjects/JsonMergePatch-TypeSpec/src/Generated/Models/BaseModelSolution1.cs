@@ -16,6 +16,9 @@ namespace Payload.JsonMergePatch.Models
     /// {
     ///     extendedValue?: string;
     /// }
+    /// model ThreeLevel : ExtendedModelSolution1
+    /// {
+    /// }
     /// model BaseModelSolution1
     /// {
     ///     baseValue?: string;
@@ -119,25 +122,27 @@ namespace Payload.JsonMergePatch.Models
         }
 
         private bool _isChanged = false;
-        public bool IsChanged(string name = null) // If base model and extended model are in the same library, we could still consider keep the method but change it to internal
+        protected bool IsChanged(string name = null) // If base model and extended model are in the same library, we could still consider keep the method but change it to private protected
         {
             if (name == null)
             {
-                return _isChanged;
+                return _isChanged; // Three level: add evnever
             }
 
             switch (name)
             {
-                case "baseValue":
+                case "BaseValue": // string comparison perf improve
                     return _baseValueChanged;
-                case "baseDict": // This is a dirty read, but it is a tradeoff we need to consider.
+                case "BaseDict": // This is a dirty read, but it is a tradeoff we need to consider.
                     // Consider this case:
                     // _baseDict get value from service {"a": {some model}}
                     // var model = _baseDict["a"];
+                    // var ref a = _baseArray[0];
+                    // a = new DummyModel(); // consider struct
                     // model = new DummyModel();
                     // The dictionary will not be considered as touched
                     return _baseDictChanged || _baseDict.IsChanged() || _baseDict.Values.Any(item => item != null && item.IsChanged());
-                case "baseIntDict":
+                case "BaseIntDict":
                     return _baseIntDictChanged || _baseIntDict.IsChanged();
                 default:
                     return false;
