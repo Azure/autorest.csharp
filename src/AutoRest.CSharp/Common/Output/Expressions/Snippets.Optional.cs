@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.Common.Output.Models
 
                 var changeTrackingType = collection.Type.Arguments.Count == 1
                     ? ChangeTrackingListProvider.Instance.Type.MakeGenericType(collection.Type.Arguments)
-                    : new CSharpType(Configuration.ApiTypes.ChangeTrackingDictionaryType, collection.Type.Arguments);
+                    : ChangeTrackingDictionaryProvider.Instance.Type.MakeGenericType(collection.Type.Arguments);
                 return NullCoalescing(collection, New.Instance(changeTrackingType));
             }
 

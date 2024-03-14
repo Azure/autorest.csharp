@@ -572,9 +572,9 @@ namespace UnbrandedTypeSpec.Models
                 requiredUnknown,
                 optionalUnknown,
                 requiredRecordUnknown,
-                optionalRecordUnknown ?? new OptionalDictionary<string, BinaryData>(),
+                optionalRecordUnknown ?? new ChangeTrackingDictionary<string, BinaryData>(),
                 readOnlyRequiredRecordUnknown,
-                readOnlyOptionalRecordUnknown ?? new OptionalDictionary<string, BinaryData>(),
+                readOnlyOptionalRecordUnknown ?? new ChangeTrackingDictionary<string, BinaryData>(),
                 modelWithRequiredNullable,
                 serializedAdditionalRawData);
         }
