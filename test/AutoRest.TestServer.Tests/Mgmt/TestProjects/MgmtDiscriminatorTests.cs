@@ -286,7 +286,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                              properties: {
                                order: 3
                                conditions: {
-                                 name: 'QueryString'
                                  parameters: {
                                    typeName: 'DeliveryRuleQueryStringConditionParameters'
                                    operator: 'Any'
@@ -297,6 +296,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                                      'val2'
                                    ]
                                  }
+                                 name: 'QueryString'
                                  foo: 'query'
                                }
                                actions: [
