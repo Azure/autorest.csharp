@@ -221,7 +221,7 @@ union DaysOfWeekExtensibleEnum {
 
 model ModelWithFormat {
     @doc("url format")
-    @format("Uri")
+    @format("uri")
     sourceUrl: string;
 
     @doc("uuid format")

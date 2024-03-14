@@ -189,7 +189,7 @@ op test(@body input: Pet): Pet;
                         Description: "The pet kind",
                         Accessibility: undefined,
                         Deprecated: undefined,
-                        EnumValueType: "String",
+                        EnumValueType: "string",
                         AllowedValues: [
                             {
                                 Name: "Cat",
@@ -204,7 +204,7 @@ op test(@body input: Pet): Pet;
                         ],
                         IsExtensible: true,
                         IsNullable: false,
-                        Usage: "None"
+                        Usage: "RoundTrip"
                     },
                     IsRequired: true,
                     IsReadOnly: false,
@@ -323,7 +323,7 @@ op test(@body input: Pet): Pet;
                         Accessibility: undefined,
                         Deprecated: undefined,
                         Description: "The pet kind",
-                        EnumValueType: "String",
+                        EnumValueType: "string",
                         AllowedValues: [
                             {
                                 Name: "Cat",
@@ -338,7 +338,7 @@ op test(@body input: Pet): Pet;
                         ],
                         IsExtensible: true,
                         IsNullable: false,
-                        Usage: "None"
+                        Usage: "RoundTrip"
                     },
                     IsRequired: true,
                     IsReadOnly: false,

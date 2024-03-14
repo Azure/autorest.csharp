@@ -17,6 +17,7 @@ import {
 } from "../../src/type/inputType.js";
 import { InputPrimitiveTypeKind } from "../../src/type/inputPrimitiveTypeKind.js";
 import { InputTypeKind } from "../../src/type/inputTypeKind.js";
+import { stringify } from "querystring";
 
 describe("Test string format", () => {
     let runner: TestHost;
@@ -92,7 +93,7 @@ describe("Test string format", () => {
     it("format uri on operation parameter", async () => {
         const program = await typeSpecCompile(
             `
-            op test(@path @format("Uri")sourceUrl: string): void;
+            op test(@path @format("uri")sourceUrl: string): void;
       `,
             runner
         );
@@ -128,7 +129,7 @@ describe("Test string format", () => {
             @doc("This is a model.")
             model Foo {
                 @doc("The source url.")
-                @format("Uri")
+                @format("uri")
                 source: string
             }
       `,
@@ -150,7 +151,8 @@ describe("Test string format", () => {
                     IsNullable: false
                 },
                 foo.Properties[0].Type
-            )
+            ),
+            `string property format is not correct. Got ${JSON.stringify(foo.Properties[0].Type)} `
         );
     });
 

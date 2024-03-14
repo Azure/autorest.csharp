@@ -8,7 +8,8 @@ import {
     DateTimeKnownEncoding,
     Model,
     Enum,
-    DurationKnownEncoding
+    DurationKnownEncoding,
+    getFormat
 } from "@typespec/compiler";
 import { Usage } from "./usage.js";
 import {
@@ -81,6 +82,8 @@ function fromSdkType(
         return fromSdkDurationType(sdkType as SdkDurationType);
     if (sdkType.kind === "bytes")
         return fromBytesType(sdkType as SdkBuiltInType);
+    if (sdkType.kind === "string")
+        return fromStringType(context.program, sdkType);
     // TODO: offsetDateTime
     if (sdkType.kind === "tuple") return fromTupleType(sdkType);
     if (sdkType.__raw?.kind === "Scalar") return fromScalarType(sdkType);
@@ -320,6 +323,36 @@ function fromBytesType(bytesType: SdkBuiltInType): InputPrimitiveType {
         Kind: InputTypeKind.Primitive,
         Name: fromBytesEncoding(bytesType.encode),
         IsNullable: bytesType.nullable
+    };
+}
+
+function fromStringType(program: Program, stringType: SdkType): InputPrimitiveType {
+    function fromStringFormat(rawStringType?: Type): InputPrimitiveTypeKind {
+        if (!rawStringType)
+            return InputPrimitiveTypeKind.String;
+
+        const format = getFormat(program, rawStringType);
+        switch (format) {
+            case "date":
+                // TODO: remove
+                return InputPrimitiveTypeKind.DateTime;
+            case "uri":
+            case "url":
+                return InputPrimitiveTypeKind.Uri;
+            case "uuid":
+                return InputPrimitiveTypeKind.Guid;
+            default:
+                if (format) {
+                    logger.warn(`Invalid string format '${format}'`);
+                }
+                return InputPrimitiveTypeKind.String;
+        }
+    }
+
+    return {
+        Kind: InputTypeKind.Primitive,
+        Name: fromStringFormat(stringType.__raw),
+        IsNullable: stringType.nullable
     };
 }
 
