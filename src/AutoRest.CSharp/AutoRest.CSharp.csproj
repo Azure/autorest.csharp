@@ -49,7 +49,6 @@
 
     <Content Include="build\CodeGeneration.targets" PackagePath="build\Microsoft.Azure.AutoRest.CSharp.targets" />
     <Content Include="build\CodeGeneration.targets" PackagePath="buildMultiTargeting\Microsoft.Azure.AutoRest.CSharp.targets" />
-    <Compile Remove="Common\Generation\Writers\BicepSerializationWriter.cs" />
   </ItemGroup>
 
   <ItemGroup>
