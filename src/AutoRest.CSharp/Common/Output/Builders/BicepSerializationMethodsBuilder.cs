@@ -80,7 +80,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
 
             yield return stringBuilderExpression.AppendLine("}");
-            yield return Return(BinaryDataExpression.FromString(stringBuilder.Invoke(nameof(BicepSerializationTypeProvider.StringBuilderParameter))));
+            yield return Return(BinaryDataExpression.FromString(stringBuilder.Invoke(nameof(StringBuilder.ToString))));
         }
 
         private static IEnumerable<MethodBodyStatement> WriteProperties(

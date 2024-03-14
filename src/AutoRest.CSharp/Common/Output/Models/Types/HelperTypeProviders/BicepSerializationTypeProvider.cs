@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public static BicepSerializationTypeProvider Instance => _instance.Value;
         private const string AppendChildObjectMethodName = "AppendChildObject";
 
-        internal Parameter StringBuilderParameter { get; } =
+        private readonly Parameter StringBuilderParameter =
             new Parameter("stringBuilder", null, typeof(StringBuilder), null, ValidationType.None, null);
 
         private readonly Parameter IndentFirstLine =
