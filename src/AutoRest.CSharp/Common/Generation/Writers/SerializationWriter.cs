@@ -174,7 +174,7 @@ namespace AutoRest.CSharp.Generation.Writers
         /// <param name="bicep"></param>
         private static void WriteBicepSerialization(CodeWriter writer, BicepObjectSerialization bicep)
         {
-            foreach (var method in BicepSerializationMethodsBuilder.BuildBicepSerializationMethods(bicep))
+            foreach (var method in BicepSerializationMethodsBuilder.BuildPerTypeBicepSerializationMethods(bicep))
             {
                 writer.WriteMethod(method);
             }

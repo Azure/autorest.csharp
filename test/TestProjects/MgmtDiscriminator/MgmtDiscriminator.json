@@ -512,6 +512,10 @@
                     "description": "The Id of the pet",
                     "type": "string",
                     "readOnly": true
+                },
+                "type": {
+                    "description": "Verify that type is included for non-ResourceData models",
+                    "type": "string"
                 }
             }
         },

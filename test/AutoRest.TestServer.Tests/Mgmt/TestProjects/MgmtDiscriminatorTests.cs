@@ -58,7 +58,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 Properties = new DeliveryRuleProperties(3, condition, actions,
                     new Dictionary<string, DeliveryRuleAction>()
                         {{ "dictionaryKey", new DeliveryRuleAction(DeliveryRuleActionType.CacheExpiration, "foo1", null) }},
-                    new Dog { DogKind = DogKind.GermanShepherd }, foo: $"Foo{Environment.NewLine}bar", new Dictionary<string, BinaryData>()
+                    new Dog { DogKind = DogKind.GermanShepherd, PetType = "dog" }, foo: $"Foo{Environment.NewLine}bar", new Dictionary<string, BinaryData>()
                 {
                     {$"foo{Environment.NewLine}bar", new BinaryData("bar") }
                 }),
@@ -86,7 +86,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                              properties: {
                                order: 3
                                conditions: {
-                                 name: 'QueryString'
                                  parameters: {
                                    typeName: 'DeliveryRuleQueryStringConditionParameters'
                                    operator: 'Any'
@@ -97,6 +96,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                                      'val2'
                                    ]
                                  }
+                                 name: 'QueryString'
                                  foo: 'query'
                                }
                                actions: [
@@ -118,6 +118,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                                pet: {
                                  dogKind: 'german Shepherd'
                                  kind: 'Dog'
+                                 type: 'dog'
                                }
                                foo: '''
                            Foo
@@ -198,7 +199,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                              properties: {
                                order: 3
                                conditions: {
-                                 name: 'QueryString'
                                  parameters: {
                                    typeName: 'DeliveryRuleQueryStringConditionParameters'
                                    operator: 'Any'
@@ -209,6 +209,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                                      'val2'
                                    ]
                                  }
+                                 name: 'QueryString'
                                  foo: 'query'
                                }
                                actions: [

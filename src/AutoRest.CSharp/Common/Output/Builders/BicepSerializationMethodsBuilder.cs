@@ -47,7 +47,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static readonly ValueExpression FormatExpression = new ModelReaderWriterOptionsExpression(KnownParameters.Serializations.Options).Format;
 
-        public static IEnumerable<Method> BuildBicepSerializationMethods(BicepObjectSerialization objectSerialization)
+        public static IEnumerable<Method> BuildPerTypeBicepSerializationMethods(BicepObjectSerialization objectSerialization)
         {
             yield return new Method(
                 new MethodSignature(
@@ -59,13 +59,16 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     null,
                     new Parameter[] { KnownParameters.Serializations.Options }),
                 WriteSerializeBicep(objectSerialization).ToArray());
+        }
 
+        public static IEnumerable<Method> BuildPerAssemblyBicepSerializationMethods()
+        {
             yield return new Method(
                 new MethodSignature(
                     AppendChildObjectMethodName,
                     null,
                     null,
-                    MethodSignatureModifiers.Private,
+                    MethodSignatureModifiers.Public | MethodSignatureModifiers.Static,
                     null,
                     null,
                     new Parameter[]
@@ -470,18 +473,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             return new MethodBodyStatement[]
             {
-                new InvokeStaticMethodStatement(
-                    null,
-                    AppendChildObjectMethodName,
-                    new[]
-                    {
-                        stringBuilder,
-                        expression,
-                        KnownParameters.Serializations.Options,
-                        new ConstantExpression(new Constant(isArrayElement ? spaces + 2 : spaces, typeof(int))),
+                InvokeBicep.AppendChildObject(
+                    stringBuilder,
+                    expression,
+                    new ConstantExpression(new Constant(isArrayElement ? spaces + 2 : spaces, typeof(int))),
                         isArrayElement ? BoolExpression.True : BoolExpression.False,
-                        Literal(formattedPropertyName)
-                    })
+                        Literal(formattedPropertyName))
             };
         }
 

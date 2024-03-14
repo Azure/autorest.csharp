@@ -19,6 +19,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             yield return OptionalTypeProvider.Instance;
             yield return RequestContentHelperProvider.Instance;
             yield return ArgumentProvider.Instance;
+            if (Common.Input.Configuration.EnableBicepSerialization)
+            {
+                yield return BicepSerializationTypeProvider.Instance;
+            }
         }
 
         protected ExpressionTypeProvider(string defaultNamespace, SourceInputModel? sourceInputModel)
