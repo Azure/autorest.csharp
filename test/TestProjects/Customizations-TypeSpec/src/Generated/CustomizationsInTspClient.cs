@@ -384,6 +384,7 @@ namespace CustomizationsInTsp
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/inputToRoundTrip", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -398,6 +399,7 @@ namespace CustomizationsInTsp
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/foo", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -412,6 +414,7 @@ namespace CustomizationsInTsp
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/bar", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
