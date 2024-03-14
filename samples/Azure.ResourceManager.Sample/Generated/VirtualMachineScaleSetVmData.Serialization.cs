@@ -635,7 +635,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 else
                 {
-                    AppendChildObject(builder, Sku, options, 2, false, "  sku: ");
+                    BicepSerializationHelpers.AppendChildObject(builder, Sku, options, 2, false, "  sku: ");
                 }
             }
 
@@ -649,7 +649,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 else
                 {
-                    AppendChildObject(builder, Plan, options, 2, false, "  plan: ");
+                    BicepSerializationHelpers.AppendChildObject(builder, Plan, options, 2, false, "  plan: ");
                 }
             }
 
@@ -668,7 +668,7 @@ namespace Azure.ResourceManager.Sample
                         builder.AppendLine("[");
                         foreach (var item in Resources)
                         {
-                            AppendChildObject(builder, item, options, 4, true, "  resources: ");
+                            BicepSerializationHelpers.AppendChildObject(builder, item, options, 4, true, "  resources: ");
                         }
                         builder.AppendLine("  ]");
                     }
@@ -787,7 +787,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 else
                 {
-                    AppendChildObject(builder, InstanceView, options, 4, false, "    instanceView: ");
+                    BicepSerializationHelpers.AppendChildObject(builder, InstanceView, options, 4, false, "    instanceView: ");
                 }
             }
 
@@ -801,7 +801,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 else
                 {
-                    AppendChildObject(builder, HardwareProfile, options, 4, false, "    hardwareProfile: ");
+                    BicepSerializationHelpers.AppendChildObject(builder, HardwareProfile, options, 4, false, "    hardwareProfile: ");
                 }
             }
 
@@ -815,7 +815,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 else
                 {
-                    AppendChildObject(builder, StorageProfile, options, 4, false, "    storageProfile: ");
+                    BicepSerializationHelpers.AppendChildObject(builder, StorageProfile, options, 4, false, "    storageProfile: ");
                 }
             }
 
@@ -829,7 +829,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 else
                 {
-                    AppendChildObject(builder, AdditionalCapabilities, options, 4, false, "    additionalCapabilities: ");
+                    BicepSerializationHelpers.AppendChildObject(builder, AdditionalCapabilities, options, 4, false, "    additionalCapabilities: ");
                 }
             }
 
@@ -843,7 +843,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 else
                 {
-                    AppendChildObject(builder, OSProfile, options, 4, false, "    osProfile: ");
+                    BicepSerializationHelpers.AppendChildObject(builder, OSProfile, options, 4, false, "    osProfile: ");
                 }
             }
 
@@ -857,7 +857,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 else
                 {
-                    AppendChildObject(builder, SecurityProfile, options, 4, false, "    securityProfile: ");
+                    BicepSerializationHelpers.AppendChildObject(builder, SecurityProfile, options, 4, false, "    securityProfile: ");
                 }
             }
 
@@ -871,7 +871,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 else
                 {
-                    AppendChildObject(builder, NetworkProfile, options, 4, false, "    networkProfile: ");
+                    BicepSerializationHelpers.AppendChildObject(builder, NetworkProfile, options, 4, false, "    networkProfile: ");
                 }
             }
 
@@ -885,7 +885,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 else
                 {
-                    AppendChildObject(builder, NetworkProfileConfiguration, options, 4, false, "    networkProfileConfiguration: ");
+                    BicepSerializationHelpers.AppendChildObject(builder, NetworkProfileConfiguration, options, 4, false, "    networkProfileConfiguration: ");
                 }
             }
 
@@ -899,7 +899,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 else
                 {
-                    AppendChildObject(builder, DiagnosticsProfile, options, 4, false, "    diagnosticsProfile: ");
+                    BicepSerializationHelpers.AppendChildObject(builder, DiagnosticsProfile, options, 4, false, "    diagnosticsProfile: ");
                 }
             }
 
@@ -913,7 +913,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 else
                 {
-                    AppendChildObject(builder, AvailabilitySet, options, 4, false, "    availabilitySet: ");
+                    BicepSerializationHelpers.AppendChildObject(builder, AvailabilitySet, options, 4, false, "    availabilitySet: ");
                 }
             }
 
@@ -993,55 +993,13 @@ namespace Azure.ResourceManager.Sample
                 }
                 else
                 {
-                    AppendChildObject(builder, ProtectionPolicy, options, 4, false, "    protectionPolicy: ");
+                    BicepSerializationHelpers.AppendChildObject(builder, ProtectionPolicy, options, 4, false, "    protectionPolicy: ");
                 }
             }
 
             builder.AppendLine("  }");
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
-        }
-
-        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine, string formattedPropertyName)
-        {
-            string indent = new string(' ', spaces);
-            int emptyObjectLength = 2 + spaces + Environment.NewLine.Length + Environment.NewLine.Length;
-            int length = stringBuilder.Length;
-            bool inMultilineString = false;
-
-            BinaryData data = ModelReaderWriter.Write(childObject, options);
-            string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            for (int i = 0; i < lines.Length; i++)
-            {
-                string line = lines[i];
-                if (inMultilineString)
-                {
-                    if (line.Contains("'''"))
-                    {
-                        inMultilineString = false;
-                    }
-                    stringBuilder.AppendLine(line);
-                    continue;
-                }
-                if (line.Contains("'''"))
-                {
-                    inMultilineString = true;
-                    stringBuilder.AppendLine($"{indent}{line}");
-                    continue;
-                }
-                if (i == 0 && !indentFirstLine)
-                {
-                    stringBuilder.AppendLine($"{line}");
-                }
-                else
-                {
-                    stringBuilder.AppendLine($"{indent}{line}");
-                }
-            }
-            if (stringBuilder.Length == length + emptyObjectLength)
-            {
-                stringBuilder.Length = stringBuilder.Length - emptyObjectLength - formattedPropertyName.Length;
-            }
         }
 
         BinaryData IPersistableModel<VirtualMachineScaleSetVmData>.Write(ModelReaderWriterOptions options)

@@ -230,7 +230,7 @@ namespace MgmtDiscriminator.Models
                 }
                 else
                 {
-                    AppendChildObject(builder, Conditions, options, 2, false, "  conditions: ");
+                    BicepSerializationHelpers.AppendChildObject(builder, Conditions, options, 2, false, "  conditions: ");
                 }
             }
 
@@ -249,7 +249,7 @@ namespace MgmtDiscriminator.Models
                         builder.AppendLine("[");
                         foreach (var item in Actions)
                         {
-                            AppendChildObject(builder, item, options, 4, true, "  actions: ");
+                            BicepSerializationHelpers.AppendChildObject(builder, item, options, 4, true, "  actions: ");
                         }
                         builder.AppendLine("  ]");
                     }
@@ -272,7 +272,7 @@ namespace MgmtDiscriminator.Models
                         foreach (var item in ExtraMappingInfo)
                         {
                             builder.Append($"    '{item.Key}': ");
-                            AppendChildObject(builder, item.Value, options, 4, false, "  extraMappingInfo: ");
+                            BicepSerializationHelpers.AppendChildObject(builder, item.Value, options, 4, false, "  extraMappingInfo: ");
                         }
                         builder.AppendLine("  }");
                     }
@@ -289,7 +289,7 @@ namespace MgmtDiscriminator.Models
                 }
                 else
                 {
-                    AppendChildObject(builder, Pet, options, 2, false, "  pet: ");
+                    BicepSerializationHelpers.AppendChildObject(builder, Pet, options, 2, false, "  pet: ");
                 }
             }
 
@@ -317,48 +317,6 @@ namespace MgmtDiscriminator.Models
 
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
-        }
-
-        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine, string formattedPropertyName)
-        {
-            string indent = new string(' ', spaces);
-            int emptyObjectLength = 2 + spaces + Environment.NewLine.Length + Environment.NewLine.Length;
-            int length = stringBuilder.Length;
-            bool inMultilineString = false;
-
-            BinaryData data = ModelReaderWriter.Write(childObject, options);
-            string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            for (int i = 0; i < lines.Length; i++)
-            {
-                string line = lines[i];
-                if (inMultilineString)
-                {
-                    if (line.Contains("'''"))
-                    {
-                        inMultilineString = false;
-                    }
-                    stringBuilder.AppendLine(line);
-                    continue;
-                }
-                if (line.Contains("'''"))
-                {
-                    inMultilineString = true;
-                    stringBuilder.AppendLine($"{indent}{line}");
-                    continue;
-                }
-                if (i == 0 && !indentFirstLine)
-                {
-                    stringBuilder.AppendLine($"{line}");
-                }
-                else
-                {
-                    stringBuilder.AppendLine($"{indent}{line}");
-                }
-            }
-            if (stringBuilder.Length == length + emptyObjectLength)
-            {
-                stringBuilder.Length = stringBuilder.Length - emptyObjectLength - formattedPropertyName.Length;
-            }
         }
 
         BinaryData IPersistableModel<DeliveryRuleProperties>.Write(ModelReaderWriterOptions options)

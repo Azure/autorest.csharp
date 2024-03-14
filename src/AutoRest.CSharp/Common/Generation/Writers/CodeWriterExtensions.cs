@@ -327,6 +327,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.AppendRaw("]");
             }
 
+            writer.AppendRawIf("out ", clientParameter.IsOut);
             writer.AppendRawIf("ref ", clientParameter.IsRef);
 
             writer.Append($"{clientParameter.Type} {clientParameter.Name:D}");
@@ -658,7 +659,8 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer;
         }
 
-        public static void WriteMethod(this CodeWriter writer, Method method)
+        // TODO -- remove the writeEmptyLine optional flag here
+        public static void WriteMethod(this CodeWriter writer, Method method, bool writeEmptyLine = true)
         {
             if (method.Body is { } body)
             {
@@ -677,7 +679,9 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
             }
 
-            writer.Line();
+            // TODO -- temporary to minimize the code changes, will remove after the consolidation
+            if (writeEmptyLine)
+                writer.Line();
         }
 
         public static void WriteProperty(this CodeWriter writer, PropertyDeclaration property)
@@ -700,16 +704,21 @@ namespace AutoRest.CSharp.Generation.Writers
                 .AppendRawIf("protected ", modifiers.HasFlag(MethodSignatureModifiers.Protected))
                 .AppendRawIf("internal ", modifiers.HasFlag(MethodSignatureModifiers.Internal))
                 .AppendRawIf("private ", modifiers.HasFlag(MethodSignatureModifiers.Private))
+                .AppendRawIf("override ", modifiers.HasFlag(MethodSignatureModifiers.Override))
                 .AppendRawIf("static ", modifiers.HasFlag(MethodSignatureModifiers.Static))
                 .AppendRawIf("virtual ", modifiers.HasFlag(MethodSignatureModifiers.Virtual)); // property does not support other modifiers, here we just ignore them if any
 
             writer.Append($"{property.PropertyType} ");
-            if (property.Declaration.ActualName == "this")
+            if (property is IndexerDeclaration indexer)
             {
-                writer.Append($"this[int index]");
+                writer.Append($"this[{indexer.IndexerParameter.Type} {indexer.IndexerParameter.Name}]");
             }
             else
             {
+                if (property.ExplicitInterface is not null)
+                {
+                    writer.Append($"{property.ExplicitInterface}.");
+                }
                 writer.Append($"{property.Declaration:I}"); // the declaration order here is quite anonying - we might need to assign the values to those properties in other places before these are written
             }
 

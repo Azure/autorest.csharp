@@ -12,5 +12,8 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
     {
         public MethodBodyStatement Add(ValueExpression key, ValueExpression value)
             => new InvokeInstanceMethodStatement(Untyped, nameof(Dictionary<object, object>.Add), key, value);
+
+        public MethodBodyStatement Add(KeyValuePairExpression pair)
+            => new InvokeInstanceMethodStatement(Untyped, nameof(Dictionary<object, object>.Add), pair);
     }
 }

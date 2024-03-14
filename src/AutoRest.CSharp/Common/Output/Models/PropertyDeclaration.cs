@@ -11,9 +11,9 @@ using AutoRest.CSharp.Output.Models;
 namespace AutoRest.CSharp.Common.Output.Models
 {
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
-    internal record PropertyDeclaration(FormattableString? Description, MethodSignatureModifiers Modifiers, CSharpType PropertyType, CodeWriterDeclaration Declaration, PropertyBody PropertyBody, IReadOnlyDictionary<CSharpType, FormattableString>? Exceptions = null)
+    internal record PropertyDeclaration(FormattableString? Description, MethodSignatureModifiers Modifiers, CSharpType PropertyType, CodeWriterDeclaration Declaration, PropertyBody PropertyBody, IReadOnlyDictionary<CSharpType, FormattableString>? Exceptions = null, CSharpType? ExplicitInterface = null)
     {
-        public PropertyDeclaration(FormattableString? description, MethodSignatureModifiers modifiers, CSharpType propertyType, string name, PropertyBody propertyBody, IReadOnlyDictionary<CSharpType, FormattableString>? exceptions = null) : this(description, modifiers, propertyType, new CodeWriterDeclaration(name), propertyBody, exceptions)
+        public PropertyDeclaration(FormattableString? description, MethodSignatureModifiers modifiers, CSharpType propertyType, string name, PropertyBody propertyBody, IReadOnlyDictionary<CSharpType, FormattableString>? exceptions = null, CSharpType? explicitInterface = null) : this(description, modifiers, propertyType, new CodeWriterDeclaration(name), propertyBody, exceptions, explicitInterface)
         {
             Declaration.SetActualName(name);
         }
