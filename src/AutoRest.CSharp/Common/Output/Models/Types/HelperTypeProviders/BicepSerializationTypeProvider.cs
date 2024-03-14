@@ -38,7 +38,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly Parameter ChildObject = new Parameter("childObject", null, typeof(object),
             null, ValidationType.None, null);
 
-
         private BicepSerializationTypeProvider(string defaultNamespace, SourceInputModel? sourceInputModel)
             : base(defaultNamespace, sourceInputModel)
         {
