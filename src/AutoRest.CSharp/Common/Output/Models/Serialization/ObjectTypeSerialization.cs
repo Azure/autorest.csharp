@@ -15,7 +15,7 @@ namespace AutoRest.CSharp.Output.Models.Serialization
 {
     internal record ObjectTypeSerialization
     {
-        public ObjectTypeSerialization(SerializableObjectType model, JsonObjectSerialization? json, XmlObjectSerialization? xml, BicepObjectSerialization? bicep, MultipartFormDataObjectSerialization? multipart)
+        public ObjectTypeSerialization(SerializableObjectType model, JsonObjectSerialization? json, XmlObjectSerialization? xml, BicepObjectSerialization? bicep, MultipartObjectSerialization? multipart)
         {
             Json = json;
             Xml = xml;
@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.Output.Models.Serialization
         public XmlObjectSerialization? Xml { get; }
 
         public BicepObjectSerialization? Bicep { get; }
-        public MultipartFormDataObjectSerialization? Multipart { get; }
+        public MultipartObjectSerialization? Multipart { get; }
 
         public bool HasSerializations => Json != null || Xml != null || Bicep != null;
 

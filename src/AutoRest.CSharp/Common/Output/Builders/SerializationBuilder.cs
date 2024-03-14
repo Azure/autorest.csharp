@@ -264,7 +264,7 @@ namespace AutoRest.CSharp.Output.Builders
 
         public BicepObjectSerialization? BuildBicepObjectSerialization(SerializableObjectType objectType, JsonObjectSerialization jsonObjectSerialization)
             => new BicepObjectSerialization(objectType, jsonObjectSerialization);
-        public MultipartFormDataObjectSerialization BuildMultipartFormDataObjectSerialization(SchemaObjectType objectType)
+        public MultipartObjectSerialization BuildMultipartFormDataObjectSerialization(SchemaObjectType objectType)
         {
             /*TODO: This is a temporary implementation. We need to revisit this and make it more robust.
              *             * The current implementation assumes that the object is a flat object and does not have any nested objects.
@@ -347,7 +347,7 @@ namespace AutoRest.CSharp.Output.Builders
             }
             //var additionalProperties = CreateAdditionalProperties(objectType);
             MultipartAdditionalPropertiesSerialization? additionalProperties = null;
-            return new MultipartFormDataObjectSerialization(objectType,
+            return new MultipartObjectSerialization(objectType,
                 objectType.SerializationConstructor.Signature.Parameters,
                 properties,
                 additionalProperties,

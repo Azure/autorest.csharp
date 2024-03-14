@@ -46,14 +46,14 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
             var json = BuildJsonSerialization();
             var xml = BuildXmlSerialization();
             var bicep = BuildBicepSerialization(json);
-            var multipart = BuildMultipartFormDataSerialization();
+            var multipart = BuildMultipartSerialization();
             return new ObjectTypeSerialization(this, json, xml, bicep, multipart);
         }
 
         protected abstract JsonObjectSerialization? BuildJsonSerialization();
         protected abstract XmlObjectSerialization? BuildXmlSerialization();
         protected abstract BicepObjectSerialization? BuildBicepSerialization(JsonObjectSerialization? json);
-        protected abstract MultipartFormDataObjectSerialization? BuildMultipartFormDataSerialization();
+        protected abstract MultipartObjectSerialization? BuildMultipartSerialization();
 
         protected abstract bool EnsureIncludeSerializer();
         protected abstract bool EnsureIncludeDeserializer();

@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 {
     internal class MultipartSerializationMethodsBuilder
     {
-        public static IEnumerable<Method> BuildMultipartSerializationMethods(MultipartFormDataObjectSerialization multipart)
+        public static IEnumerable<Method> BuildMultipartSerializationMethods(MultipartObjectSerialization multipart)
         {
             var data = new BinaryDataExpression(KnownParameters.Serializations.Data);
             var options = new ModelReaderWriterOptionsExpression(KnownParameters.Serializations.Options);
@@ -80,7 +80,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     new Parameter[] { KnownParameters.Serializations.Options }),
                 BuildMultipartDeSerializationMethodBody(multipart, data, options).ToArray());
         }
-        public static SwitchCase BuildMultipartWriteSwitchCase(MultipartFormDataObjectSerialization multipart, ModelReaderWriterOptionsExpression options)
+        public static SwitchCase BuildMultipartWriteSwitchCase(MultipartObjectSerialization multipart, ModelReaderWriterOptionsExpression options)
         {
             return new SwitchCase(
                 Serializations.MultipartFormat,
@@ -127,7 +127,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                             options
                         })));
         }
-        public static IEnumerable<MethodBodyStatement> BuildMultipartSerializationMethodBody(MultipartFormDataObjectSerialization? multipart)
+        public static IEnumerable<MethodBodyStatement> BuildMultipartSerializationMethodBody(MultipartObjectSerialization? multipart)
         {
             return new MethodBodyStatement[]
                         {
@@ -139,7 +139,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                             Snippets.Return(binaryData)
                         };
         }
-        public static IEnumerable<MethodBodyStatement> BuildMultipartDeSerializationMethodBody(MultipartFormDataObjectSerialization multipart, BinaryDataExpression data, ModelReaderWriterOptionsExpression options)
+        public static IEnumerable<MethodBodyStatement> BuildMultipartDeSerializationMethodBody(MultipartObjectSerialization multipart, BinaryDataExpression data, ModelReaderWriterOptionsExpression options)
         {
             return new MethodBodyStatement[]
                         {
@@ -234,7 +234,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         /*TODO: handle additionalProperties and polymorphism.*/
         /// Collects a list of properties being read from all level of object hierarchy
-        private static void CollectPropertiesForDeserialization(IDictionary<MultipartPropertySerialization, VariableReference> propertyVariables, MultipartFormDataObjectSerialization multipart)
+        private static void CollectPropertiesForDeserialization(IDictionary<MultipartPropertySerialization, VariableReference> propertyVariables, MultipartObjectSerialization multipart)
         {
             foreach (MultipartPropertySerialization mpProperty in multipart.Properties)
             {
@@ -358,7 +358,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 }
             }
         }
-        private static IEnumerable<MethodBodyStatement> InitialObject(MultipartFormDataObjectSerialization multipart, MultipartFormDataExpression multipartContent)
+        private static IEnumerable<MethodBodyStatement> InitialObject(MultipartObjectSerialization multipart, MultipartFormDataExpression multipartContent)
         {
             /* collect properties. */
             var propertyVariables = new Dictionary<MultipartPropertySerialization, VariableReference>();

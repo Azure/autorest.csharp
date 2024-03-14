@@ -495,12 +495,12 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override BicepObjectSerialization? BuildBicepSerialization(JsonObjectSerialization? json) => null;
 
-        protected override MultipartFormDataObjectSerialization? BuildMultipartFormDataSerialization()
+        protected override MultipartObjectSerialization? BuildMultipartSerialization()
         {
             if (EnsureIncludeSerializer() && _inputModel.MediaTypes.Contains("multipart/form-data"))
             {
                 var additionalProperties = CreateMultipartAdditionalPropertiesSerialization();
-                return new MultipartFormDataObjectSerialization(this, SerializationConstructorSignature.Parameters, CreateMultipartPropertySerializations().ToArray(), additionalProperties, Discriminator, false);
+                return new MultipartObjectSerialization(this, SerializationConstructorSignature.Parameters, CreateMultipartPropertySerializations().ToArray(), additionalProperties, Discriminator, false);
             }
             return null;
         }
