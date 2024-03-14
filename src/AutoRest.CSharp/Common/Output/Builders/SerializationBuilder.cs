@@ -338,11 +338,6 @@ namespace AutoRest.CSharp.Output.Builders
 
         private static bool ShouldExcludeInWireSerialization(ObjectTypeProperty property, InputModelProperty inputProperty)
         {
-            if (Configuration.Generation1ConvenienceClient)
-            {
-                return inputProperty.IsReadOnly;
-            }
-
             if (inputProperty.IsDiscriminator)
             {
                 return false;
