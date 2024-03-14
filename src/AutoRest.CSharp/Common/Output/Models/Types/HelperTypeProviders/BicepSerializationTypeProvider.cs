@@ -23,19 +23,19 @@ namespace AutoRest.CSharp.Output.Models.Types
         public static BicepSerializationTypeProvider Instance => _instance.Value;
         private const string AppendChildObjectMethodName = "AppendChildObject";
 
-        internal static readonly Parameter StringBuilderParameter =
+        internal Parameter StringBuilderParameter { get; } =
             new Parameter("stringBuilder", null, typeof(StringBuilder), null, ValidationType.None, null);
 
-        private static readonly Parameter IndentFirstLine =
+        private readonly Parameter IndentFirstLine =
             new Parameter("indentFirstLine", null, typeof(bool), null, ValidationType.None, null);
 
-        private static readonly Parameter FormattedPropertyName =
+        private readonly Parameter FormattedPropertyName =
             new Parameter("formattedPropertyName", null, typeof(string), null, ValidationType.None, null);
 
-        private static readonly Parameter Spaces =
+        private readonly Parameter Spaces =
             new Parameter("spaces", null, typeof(int), null, ValidationType.None, null);
 
-        private static readonly Parameter ChildObject = new Parameter("childObject", null, typeof(object),
+        private readonly Parameter ChildObject = new Parameter("childObject", null, typeof(object),
             null, ValidationType.None, null);
 
 
@@ -70,7 +70,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 WriteAppendChildObject().ToArray());
         }
 
-        private static IEnumerable<MethodBodyStatement> WriteAppendChildObject()
+        private IEnumerable<MethodBodyStatement> WriteAppendChildObject()
         {
             VariableReference indent = new VariableReference(typeof(string), "indent");
             yield return Declare(indent, New.Instance(typeof(string), Literal(' '), Spaces));
