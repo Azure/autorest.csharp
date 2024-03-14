@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 
 using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,31 +20,12 @@ using static AutoRest.CSharp.Common.Output.Models.Snippets;
 using Constant = AutoRest.CSharp.Output.Models.Shared.Constant;
 using ConstantExpression = AutoRest.CSharp.Common.Output.Expressions.ValueExpressions.ConstantExpression;
 using Parameter = AutoRest.CSharp.Output.Models.Shared.Parameter;
-using ValidationType = AutoRest.CSharp.Output.Models.Shared.ValidationType;
 
 namespace AutoRest.CSharp.Common.Output.Builders
 {
     internal static class BicepSerializationMethodsBuilder
     {
         private const string SerializeBicepMethodName = "SerializeBicep";
-        private const string AppendChildObjectMethodName = "AppendChildObject";
-
-        private static readonly Parameter Spaces =
-            new Parameter("spaces", null, typeof(int), null, ValidationType.None, null);
-
-        private static readonly Parameter ChildObject = new Parameter("childObject", null, typeof(object),
-            null, ValidationType.None, null);
-
-        private static readonly Parameter StringBuilderParameter =
-            new Parameter("stringBuilder", null, typeof(StringBuilder), null, ValidationType.None, null);
-
-        private static readonly Parameter IndentFirstLine =
-            new Parameter("indentFirstLine", null, typeof(bool), null, ValidationType.None, null);
-
-        private static readonly Parameter FormattedPropertyName =
-            new Parameter("formattedPropertyName", null, typeof(string), null, ValidationType.None, null);
-
-        private static readonly ValueExpression FormatExpression = new ModelReaderWriterOptionsExpression(KnownParameters.Serializations.Options).Format;
 
         public static IEnumerable<Method> BuildPerTypeBicepSerializationMethods(BicepObjectSerialization objectSerialization)
         {
@@ -59,29 +39,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     null,
                     new Parameter[] { KnownParameters.Serializations.Options }),
                 WriteSerializeBicep(objectSerialization).ToArray());
-        }
-
-        public static IEnumerable<Method> BuildPerAssemblyBicepSerializationMethods()
-        {
-            yield return new Method(
-                new MethodSignature(
-                    AppendChildObjectMethodName,
-                    null,
-                    null,
-                    MethodSignatureModifiers.Public | MethodSignatureModifiers.Static,
-                    null,
-                    null,
-                    new Parameter[]
-                    {
-                        new Parameter("stringBuilder", null, typeof(StringBuilder), null, ValidationType.None,
-                            null),
-                        ChildObject,
-                        KnownParameters.Serializations.Options,
-                        Spaces,
-                        IndentFirstLine,
-                        FormattedPropertyName
-                    }),
-                WriteAppendChildObject().ToArray());
         }
 
         private static IEnumerable<MethodBodyStatement> WriteSerializeBicep(BicepObjectSerialization objectSerialization)
@@ -123,7 +80,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
 
             yield return stringBuilderExpression.AppendLine("}");
-            yield return Return(BinaryDataExpression.FromString(stringBuilder.Invoke(nameof(StringBuilderParameter.ToString))));
+            yield return Return(BinaryDataExpression.FromString(stringBuilder.Invoke(nameof(BicepSerializationTypeProvider.StringBuilderParameter))));
         }
 
         private static IEnumerable<MethodBodyStatement> WriteProperties(
@@ -212,109 +169,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     yield return statement;
                 }
             }
-        }
-
-        private static IEnumerable<MethodBodyStatement> WriteAppendChildObject()
-        {
-            VariableReference indent = new VariableReference(typeof(string), "indent");
-            yield return Declare(indent, New.Instance(typeof(string), Literal(' '), Spaces));
-
-            VariableReference data = new VariableReference(typeof(BinaryData), "data");
-
-            var emptyObjectLength = new VariableReference(typeof(int), "emptyObjectLength");
-            var length = new VariableReference(typeof(int), "length");
-            var stringBuilder = new StringBuilderExpression(new ParameterReference(StringBuilderParameter));
-
-            yield return Declare(
-                emptyObjectLength,
-                new BinaryOperatorExpression("+",
-                    new BinaryOperatorExpression("+",
-                        new BinaryOperatorExpression("+",
-                            // 2 chars for open and close brace
-                            new ConstantExpression(new Constant(2, typeof(int))),
-                            Spaces),
-                        // 2 new lines
-                        new TypeReference(typeof(Environment)).Property(nameof(Environment.NewLine))
-                            .Property(nameof(string.Length))),
-                    new TypeReference(typeof(Environment)).Property(nameof(Environment.NewLine))
-                        .Property(nameof(string.Length))));
-
-            yield return Declare(length, stringBuilder.Property(nameof(StringBuilder.Length)));
-
-            var inMultilineString = new VariableReference(typeof(bool), "inMultilineString");
-            yield return Declare(inMultilineString, BoolExpression.False);
-            yield return EmptyLine;
-
-            yield return Declare(
-                data,
-                new InvokeStaticMethodExpression(typeof(ModelReaderWriter), nameof(ModelReaderWriter.Write),
-                    new[]
-                    {
-                        new ParameterReference(ChildObject),
-                        new ParameterReference(KnownParameters.Serializations.Options)
-                    }));
-            VariableReference lines = new VariableReference(typeof(string[]), "lines");
-            yield return Declare(
-                lines,
-                new InvokeInstanceMethodExpression(
-                    new InvokeInstanceMethodExpression(data, nameof(ToString), Array.Empty<ValueExpression>(), null,
-                        false),
-                    nameof(string.Split),
-                    new ValueExpression[]
-                    {
-                        new InvokeInstanceMethodExpression(
-                            new TypeReference(typeof(Environment)).Property(nameof(Environment.NewLine)), nameof(string.ToCharArray),
-                            Array.Empty<ValueExpression>(), null, false),
-                        new TypeReference(typeof(StringSplitOptions)).Property(nameof(StringSplitOptions.RemoveEmptyEntries))
-                    },
-                    null,
-                    false)
-            );
-            var line = new VariableReference(typeof(string), "line");
-
-            yield return new ForStatement("i", new ListExpression(typeof(string), lines), out var indexer)
-            {
-                Declare(line, new IndexerExpression(lines, indexer)),
-                // if this is a multiline string, we do not apply the indentation, except for the first line containing only the ''' which is handled
-                // in the subsequent if statement
-                new IfStatement(new BoolExpression(inMultilineString))
-                    {
-                        new IfStatement(new BoolExpression(line.Invoke(nameof(string.Contains), Literal("'''"))))
-                        {
-                            Assign(new BoolExpression(inMultilineString), BoolExpression.False)
-                        },
-                        stringBuilder.AppendLine(line),
-                        Continue
-                    },
-                new IfStatement(new BoolExpression(line.Invoke(nameof(string.Contains), Literal("'''"))))
-                {
-                    Assign(new BoolExpression(inMultilineString), BoolExpression.True),
-                    stringBuilder.AppendLine(new FormattableStringExpression("{0}{1}",indent, line)),
-                    Continue
-                },
-                new IfElseStatement(
-                    And(Equal(indexer, new ConstantExpression(new Constant(0, typeof(int)))),
-                        Not(new BoolExpression(IndentFirstLine))),
-                    stringBuilder.AppendLine(new FormattableStringExpression("{0}", line)),
-                    stringBuilder.AppendLine(new FormattableStringExpression("{0}{1}", indent, line)))
-            };
-
-            yield return new IfStatement(
-                new BoolExpression(
-                    Equal(
-                        stringBuilder.Property(nameof(StringBuilder.Length)),
-                        new BinaryOperatorExpression("+", length, emptyObjectLength))))
-            {
-                Assign(
-                    stringBuilder.Property(nameof(StringBuilder.Length)),
-                    new BinaryOperatorExpression(
-                        "-",
-                        new BinaryOperatorExpression(
-                            "-",
-                            stringBuilder.Property(nameof(StringBuilder.Length)),
-                            emptyObjectLength),
-                        Literal(new StringExpression(FormattedPropertyName)).Property(nameof(string.Length))))
-            };
         }
 
         private static IEnumerable<MethodBodyStatement> SerializeProperty(
@@ -473,7 +327,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             return new MethodBodyStatement[]
             {
-                InvokeBicep.AppendChildObject(
+                BicepSerializationTypeProvider.Instance.AppendChildObject(
                     stringBuilder,
                     expression,
                     new ConstantExpression(new Constant(isArrayElement ? spaces + 2 : spaces, typeof(int))),
