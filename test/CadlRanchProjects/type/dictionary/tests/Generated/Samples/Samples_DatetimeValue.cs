@@ -111,7 +111,7 @@ namespace _Type._Dictionary.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                key = "2022-05-10T14:57:31.2311892-04:00",
+                key = "2022-05-10T18:57:31.2311892Z",
             });
             Response response = client.Put(content);
 
@@ -126,7 +126,7 @@ namespace _Type._Dictionary.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                key = "2022-05-10T14:57:31.2311892-04:00",
+                key = "2022-05-10T18:57:31.2311892Z",
             });
             Response response = await client.PutAsync(content);
 
@@ -141,7 +141,7 @@ namespace _Type._Dictionary.Samples
 
             Response response = client.Put(new Dictionary<string, DateTimeOffset>
             {
-                ["key"] = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00")
+                ["key"] = DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z")
             });
         }
 
@@ -153,7 +153,7 @@ namespace _Type._Dictionary.Samples
 
             Response response = await client.PutAsync(new Dictionary<string, DateTimeOffset>
             {
-                ["key"] = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00")
+                ["key"] = DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z")
             });
         }
 
@@ -165,7 +165,7 @@ namespace _Type._Dictionary.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                key = "2022-05-10T14:57:31.2311892-04:00",
+                key = "2022-05-10T18:57:31.2311892Z",
             });
             Response response = client.Put(content);
 
@@ -180,7 +180,7 @@ namespace _Type._Dictionary.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                key = "2022-05-10T14:57:31.2311892-04:00",
+                key = "2022-05-10T18:57:31.2311892Z",
             });
             Response response = await client.PutAsync(content);
 
@@ -195,7 +195,7 @@ namespace _Type._Dictionary.Samples
 
             Response response = client.Put(new Dictionary<string, DateTimeOffset>
             {
-                ["key"] = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00")
+                ["key"] = DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z")
             });
         }
 
@@ -207,7 +207,7 @@ namespace _Type._Dictionary.Samples
 
             Response response = await client.PutAsync(new Dictionary<string, DateTimeOffset>
             {
-                ["key"] = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00")
+                ["key"] = DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z")
             });
         }
     }

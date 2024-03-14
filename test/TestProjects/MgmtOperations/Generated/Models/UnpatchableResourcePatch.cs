@@ -6,7 +6,7 @@
 #nullable disable
 
 using System.Collections.Generic;
-using Azure.Core;
+using MgmtOperations;
 
 namespace MgmtOperations.Models
 {

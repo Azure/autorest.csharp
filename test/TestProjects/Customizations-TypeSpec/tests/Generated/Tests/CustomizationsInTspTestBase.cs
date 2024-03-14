@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.TestFramework;
 using CustomizationsInTsp;
 
@@ -16,10 +17,10 @@ namespace CustomizationsInTsp.Tests
         {
         }
 
-        protected CustomizationsInTspClient CreateCustomizationsInTspClient()
+        protected CustomizationsInTspClient CreateCustomizationsInTspClient(Uri endpoint)
         {
             CustomizationsInTspClientOptions options = InstrumentClientOptions(new CustomizationsInTspClientOptions());
-            CustomizationsInTspClient client = new CustomizationsInTspClient(options);
+            CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint, options);
             return InstrumentClient(client);
         }
     }
