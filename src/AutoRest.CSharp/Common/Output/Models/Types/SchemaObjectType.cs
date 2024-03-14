@@ -465,7 +465,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return schemaDiscriminator.All.Select(implementation => new ObjectTypeDiscriminatorImplementation(
                 implementation.Key,
                 _typeFactory.CreateType(implementation.Value, false)
-            )).ToArray();
+            )).OrderBy(i => i.Key).ToArray();
         }
 
         private HashSet<string?> GetParentPropertySerializedNames()
