@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 using CognitiveServices.TextAnalytics;
 
 namespace CognitiveServices.TextAnalytics.Models

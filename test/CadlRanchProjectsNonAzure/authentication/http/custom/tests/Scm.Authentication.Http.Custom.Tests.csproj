@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Authentication.Http.Custom.csproj" />
+    <ProjectReference Include="..\src\Scm.Authentication.Http.Custom.csproj" />
   </ItemGroup>
 
   <ItemGroup>

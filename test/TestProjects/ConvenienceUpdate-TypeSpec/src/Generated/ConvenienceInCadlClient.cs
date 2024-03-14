@@ -20,6 +20,7 @@ namespace ConvenienceInCadl
     public partial class ConvenienceInCadlClient
     {
         private readonly HttpPipeline _pipeline;
+        private readonly Uri _endpoint;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -27,19 +28,30 @@ namespace ConvenienceInCadl
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of ConvenienceInCadlClient. </summary>
-        public ConvenienceInCadlClient() : this(new ConvenienceInCadlClientOptions())
+        /// <summary> Initializes a new instance of ConvenienceInCadlClient for mocking. </summary>
+        protected ConvenienceInCadlClient()
         {
         }
 
         /// <summary> Initializes a new instance of ConvenienceInCadlClient. </summary>
-        /// <param name="options"> The options for configuring the client. </param>
-        public ConvenienceInCadlClient(ConvenienceInCadlClientOptions options)
+        /// <param name="endpoint"> Service endpoint. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public ConvenienceInCadlClient(Uri endpoint) : this(endpoint, new ConvenienceInCadlClientOptions())
         {
+        }
+
+        /// <summary> Initializes a new instance of ConvenienceInCadlClient. </summary>
+        /// <param name="endpoint"> Service endpoint. </param>
+        /// <param name="options"> The options for configuring the client. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public ConvenienceInCadlClient(Uri endpoint, ConvenienceInCadlClientOptions options)
+        {
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new ConvenienceInCadlClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
+            _endpoint = endpoint;
         }
 
         /// <summary> No initial operation methods. In the updated version, we add the protocol method and convenience method. </summary>
