@@ -7,8 +7,8 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 using NamespaceForEnums;
+using TypeSchemaMapping;
 
 namespace TypeSchemaMapping.Models
 {

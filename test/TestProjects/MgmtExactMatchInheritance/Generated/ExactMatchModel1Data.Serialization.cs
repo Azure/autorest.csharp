@@ -170,7 +170,7 @@ namespace MgmtExactMatchInheritance
             DataFactoryElement<Uri> type16 = default;
             DataFactoryLinkedServiceReference type17 = default;
             DataFactorySecretString type18 = default;
-            DataFactoryKeyVaultSecretReference type19 = default;
+            DataFactoryKeyVaultSecret type19 = default;
             DataFactoryElement<IDictionary<string, BinaryData>> type20 = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -372,7 +372,7 @@ namespace MgmtExactMatchInheritance
                     {
                         continue;
                     }
-                    type19 = JsonSerializer.Deserialize<DataFactoryKeyVaultSecretReference>(property.Value.GetRawText());
+                    type19 = JsonSerializer.Deserialize<DataFactoryKeyVaultSecret>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("type20"u8))

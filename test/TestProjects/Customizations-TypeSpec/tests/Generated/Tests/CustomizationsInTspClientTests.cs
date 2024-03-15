@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -28,7 +29,8 @@ namespace CustomizationsInTsp.Tests
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task CustomizationsInTsp_RoundTrip_ShortVersion()
         {
-            CustomizationsInTspClient client = CreateCustomizationsInTspClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            CustomizationsInTspClient client = CreateCustomizationsInTspClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = await client.RoundTripAsync(content);
@@ -38,7 +40,8 @@ namespace CustomizationsInTsp.Tests
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task CustomizationsInTsp_RoundTrip_ShortVersion_Convenience()
         {
-            CustomizationsInTspClient client = CreateCustomizationsInTspClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            CustomizationsInTspClient client = CreateCustomizationsInTspClient(endpoint);
 
             RootModel input = new RootModel();
             Response<RootModel> response = await client.RoundTripAsync(input);
@@ -48,7 +51,8 @@ namespace CustomizationsInTsp.Tests
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task CustomizationsInTsp_RoundTrip_AllParameters()
         {
-            CustomizationsInTspClient client = CreateCustomizationsInTspClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            CustomizationsInTspClient client = CreateCustomizationsInTspClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -139,7 +143,8 @@ key = "<badListOfDictionaryName>",
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task CustomizationsInTsp_RoundTrip_AllParameters_Convenience()
         {
-            CustomizationsInTspClient client = CreateCustomizationsInTspClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            CustomizationsInTspClient client = CreateCustomizationsInTspClient(endpoint);
 
             RootModel input = new RootModel
             {
@@ -197,7 +202,8 @@ new Dictionary<string, string>
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task CustomizationsInTsp_Foo_ShortVersion()
         {
-            CustomizationsInTspClient client = CreateCustomizationsInTspClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            CustomizationsInTspClient client = CreateCustomizationsInTspClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -210,7 +216,8 @@ new Dictionary<string, string>
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task CustomizationsInTsp_Foo_ShortVersion_Convenience()
         {
-            CustomizationsInTspClient client = CreateCustomizationsInTspClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            CustomizationsInTspClient client = CreateCustomizationsInTspClient(endpoint);
 
             RenamedModel input = new RenamedModel(1234);
             Response<RenamedModel> response = await client.FooAsync(input);
@@ -220,7 +227,8 @@ new Dictionary<string, string>
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task CustomizationsInTsp_Foo_AllParameters()
         {
-            CustomizationsInTspClient client = CreateCustomizationsInTspClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            CustomizationsInTspClient client = CreateCustomizationsInTspClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -234,7 +242,8 @@ new Dictionary<string, string>
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task CustomizationsInTsp_Foo_AllParameters_Convenience()
         {
-            CustomizationsInTspClient client = CreateCustomizationsInTspClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            CustomizationsInTspClient client = CreateCustomizationsInTspClient(endpoint);
 
             RenamedModel input = new RenamedModel(1234)
             {
@@ -247,7 +256,8 @@ new Dictionary<string, string>
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task CustomizationsInTsp_Bar_ShortVersion()
         {
-            CustomizationsInTspClient client = CreateCustomizationsInTspClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            CustomizationsInTspClient client = CreateCustomizationsInTspClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -260,7 +270,8 @@ new Dictionary<string, string>
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task CustomizationsInTsp_Bar_ShortVersion_Convenience()
         {
-            CustomizationsInTspClient client = CreateCustomizationsInTspClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            CustomizationsInTspClient client = CreateCustomizationsInTspClient(endpoint);
 
             RenamedModel renamedModel = new RenamedModel(1234);
             Response<RenamedModel> response = await client.BarAsync(renamedModel);
@@ -270,7 +281,8 @@ new Dictionary<string, string>
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task CustomizationsInTsp_Bar_AllParameters()
         {
-            CustomizationsInTspClient client = CreateCustomizationsInTspClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            CustomizationsInTspClient client = CreateCustomizationsInTspClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -284,7 +296,8 @@ new Dictionary<string, string>
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task CustomizationsInTsp_Bar_AllParameters_Convenience()
         {
-            CustomizationsInTspClient client = CreateCustomizationsInTspClient();
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            CustomizationsInTspClient client = CreateCustomizationsInTspClient(endpoint);
 
             RenamedModel renamedModel = new RenamedModel(1234)
             {

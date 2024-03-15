@@ -4,7 +4,7 @@
 
 using System.ClientModel;
 
-namespace Authentication.Http.Custom
+namespace Scm.Authentication.Http.Custom
 {
     /// <summary> Client options for CustomClient. </summary>
     public partial class CustomClientOptions : RequestOptions

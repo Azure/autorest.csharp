@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System.Collections.Generic;
+using FirstTestTypeSpec;
 using NUnit.Framework;
 
 namespace Azure.Core.Tests
