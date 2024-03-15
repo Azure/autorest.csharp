@@ -52,7 +52,8 @@ namespace AutoRest.CSharp.Common.Output.Models.Serialization.Multipart
             ValueSerialization = valueSerialization;
         }
 
-        public string ContentType { get; set; } = "application/octet-stream";
+        public string? ContentType { get; set; } = "application/octet-stream";
+        public string? FileName { get; set; }
         public MultipartSerialization ValueSerialization { get; }
     }
 }
