@@ -15,8 +15,8 @@ Import-Module "$PSScriptRoot\Generation.psm1" -DisableNameChecking -Force;
 Write-Host "Generating Azure SDK Codes..."
 
 if($ProjectListOverrideFile) {
-    Write-Host "Installing autorest from root package-lock.json"
-    Invoke "npm ci --prefix $RepoRoot"
+    Write-Host "Installing autorest from $SdkRepoRoot/package-lock.json"
+    Invoke "npm ci --prefix $SdkRepoRoot"
 
     $tempFolder = New-TemporaryFile
     $tempFolder | Remove-Item -Force
