@@ -86,7 +86,8 @@ namespace AutoRest.CSharp.Common.Decorator
                         {
                             Default = new Language
                             {
-                                Name = defaultDerivedSchemaName
+                                Name = defaultDerivedSchemaName,
+                                Description = $"Unknown version of {actualBaseSchema.Name}"
                             }
                         },
                         Parents = new Relations

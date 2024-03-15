@@ -3,8 +3,8 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Internal;
 using System.Collections.Generic;
+using OpenAI;
 
 namespace OpenAI.Models
 {
@@ -14,7 +14,7 @@ namespace OpenAI.Models
         /// <summary> Initializes a new instance of <see cref="ChatCompletionFunctionParameters"/>. </summary>
         public ChatCompletionFunctionParameters()
         {
-            AdditionalProperties = new OptionalDictionary<string, BinaryData>();
+            AdditionalProperties = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="ChatCompletionFunctionParameters"/>. </summary>

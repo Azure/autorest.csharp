@@ -1658,7 +1658,7 @@ namespace UnbrandedTypeSpec
             try
             {
                 using PipelineMessage message = CreateHeadAsBooleanRequest(id, context);
-                var result = await _pipeline.ProcessHeadAsBoolMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
+                var result = await _pipeline.ProcessHeadAsBoolMessageAsync(message, context).ConfigureAwait(false);
                 return Result.FromValue(result.Value, result.GetRawResponse());
             }
             catch (Exception e)
@@ -1694,7 +1694,7 @@ namespace UnbrandedTypeSpec
             try
             {
                 using PipelineMessage message = CreateHeadAsBooleanRequest(id, context);
-                var result = _pipeline.ProcessHeadAsBoolMessage(message, ClientDiagnostics, context);
+                var result = _pipeline.ProcessHeadAsBoolMessage(message, context);
                 return Result.FromValue(result.Value, result.GetRawResponse());
             }
             catch (Exception e)

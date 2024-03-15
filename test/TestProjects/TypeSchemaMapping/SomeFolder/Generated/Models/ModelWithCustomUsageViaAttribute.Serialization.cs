@@ -17,7 +17,7 @@ using TypeSchemaMapping;
 
 namespace TypeSchemaMapping.Models
 {
-    public partial class ModelWithCustomUsageViaAttribute : IUtf8JsonSerializable, IJsonModel<ModelWithCustomUsageViaAttribute>, IXmlSerializable, IPersistableModel<ModelWithCustomUsageViaAttribute>
+    public partial class ModelWithCustomUsageViaAttribute : IUtf8JsonSerializable, IJsonModel<ModelWithCustomUsageViaAttribute>, IXmlSerializable
     {
         private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {

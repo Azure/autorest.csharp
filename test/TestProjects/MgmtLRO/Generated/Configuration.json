@@ -13,5 +13,6 @@
   "OperationsToLroApiVersionOverride": {
     "Fakes_Update": "2021-06-01"
   },
+  "flavor": "azure",
   "helper-namespace": "MgmtLRO"
 }

@@ -12,7 +12,6 @@ using System.Net;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Xml;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
@@ -26,9 +25,7 @@ using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization;
-using AutoRest.CSharp.Output.Models.Serialization.Bicep;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
-using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
@@ -87,53 +84,58 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 new MemberExpression(This, "Data").CastTo(iModelTInterface).Invoke(nameof(IPersistableModel<object>.GetFormatFromOptions), options));
         }
 
-        public static IEnumerable<Method> BuildJsonSerializationMethods(JsonObjectSerialization json)
+        public static IEnumerable<Method> BuildJsonSerializationMethods(JsonObjectSerialization json, SerializationInterfaces interfaces)
         {
-            var jsonModelInterface = json.IJsonModelInterface;
-            var typeOfT = jsonModelInterface.Arguments[0];
-
-            var model = typeOfT.Implementation as SerializableObjectType;
-            Debug.Assert(model is not null);
-
             var useModelReaderWriter = Configuration.UseModelReaderWriter;
 
-            // void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+            var iJsonInterface = interfaces.IJsonInterface;
+            var iJsonModelInterface = interfaces.IJsonModelTInterface;
+            var iPersistableModelTInterface = interfaces.IPersistableModelTInterface;
+            var iJsonModelObjectInterface = interfaces.IJsonModelObjectInterface;
             var writer = new Utf8JsonWriterExpression(KnownParameters.Serializations.Utf8JsonWriter);
-            if (useModelReaderWriter)
+            if (iJsonInterface is not null)
             {
-                yield return new
-                (
-                    new MethodSignature(Configuration.ApiTypes.IUtf8JsonSerializableWriteName, null, null, MethodSignatureModifiers.None, null, null, new[] { KnownParameters.Serializations.Utf8JsonWriter }, ExplicitInterface: Configuration.ApiTypes.IUtf8JsonSerializableType),
-                    This.CastTo(jsonModelInterface).Invoke(nameof(IJsonModel<object>.Write), writer, ModelReaderWriterOptionsExpression.Wire)
-                );
-            }
-            else
-            {
-                yield return new
-                (
-                    new MethodSignature(Configuration.ApiTypes.IUtf8JsonSerializableWriteName, null, null, MethodSignatureModifiers.None, null, null, new[] { KnownParameters.Serializations.Utf8JsonWriter }, ExplicitInterface: Configuration.ApiTypes.IUtf8JsonSerializableType),
-                    WriteObject(json, writer, null)
-                );
+                // void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+                if (iJsonModelInterface is not null)
+                {
+                    yield return new
+                    (
+                        new MethodSignature(Configuration.ApiTypes.IUtf8JsonSerializableWriteName, null, null, MethodSignatureModifiers.None, null, null, new[] { KnownParameters.Serializations.Utf8JsonWriter }, ExplicitInterface: iJsonInterface),
+                        This.CastTo(iJsonModelInterface).Invoke(nameof(IJsonModel<object>.Write), writer, ModelReaderWriterOptionsExpression.Wire)
+                    );
+                }
+                else
+                {
+                    yield return new
+                    (
+                        new MethodSignature(Configuration.ApiTypes.IUtf8JsonSerializableWriteName, null, null, MethodSignatureModifiers.None, null, null, new[] { KnownParameters.Serializations.Utf8JsonWriter }, ExplicitInterface: iJsonInterface),
+                        WriteObject(json, writer, null, null)
+                    );
+                }
             }
 
-            if (useModelReaderWriter)
+            if (iJsonModelInterface is not null && iPersistableModelTInterface is not null)
             {
+                var typeOfT = iJsonModelInterface.Arguments[0];
+                var model = typeOfT.Implementation as SerializableObjectType;
+                Debug.Assert(model != null, $"{typeOfT} should be a SerializableObjectType");
+
                 // void IJsonModel<T>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
                 var options = new ModelReaderWriterOptionsExpression(KnownParameters.Serializations.Options);
                 yield return new
                 (
-                    new MethodSignature(nameof(IJsonModel<object>.Write), null, null, MethodSignatureModifiers.None, null, null, new[] { KnownParameters.Serializations.Utf8JsonWriter, KnownParameters.Serializations.Options }, ExplicitInterface: jsonModelInterface),
-                    WriteObject(json, writer, options)
+                    new MethodSignature(nameof(IJsonModel<object>.Write), null, null, MethodSignatureModifiers.None, null, null, new[] { KnownParameters.Serializations.Utf8JsonWriter, KnownParameters.Serializations.Options }, ExplicitInterface: iJsonModelInterface),
+                    WriteObject(json, writer, options, iPersistableModelTInterface)
                 );
 
                 // T IJsonModel<T>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
                 var reader = KnownParameters.Serializations.Utf8JsonReader;
                 yield return new
                 (
-                    new MethodSignature(nameof(IJsonModel<object>.Create), null, null, MethodSignatureModifiers.None, typeOfT, null, new[] { KnownParameters.Serializations.Utf8JsonReader, KnownParameters.Serializations.Options }, ExplicitInterface: jsonModelInterface),
+                    new MethodSignature(nameof(IJsonModel<object>.Create), null, null, MethodSignatureModifiers.None, typeOfT, null, new[] { KnownParameters.Serializations.Utf8JsonReader, KnownParameters.Serializations.Options }, ExplicitInterface: iJsonModelInterface),
                     new MethodBodyStatement[]
                     {
-                    Serializations.ValidateJsonFormat(options, json.IPersistableModelTInterface),
+                    Serializations.ValidateJsonFormat(options, iPersistableModelTInterface),
                     // using var document = JsonDocument.ParseValue(ref reader);
                     UsingDeclare("document", JsonDocumentExpression.ParseValue(reader), out var docVariable),
                     // return DeserializeXXX(doc.RootElement, options);
@@ -142,248 +144,49 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 );
 
                 // if the model is a struct, it needs to implement IJsonModel<object> as well which leads to another 2 methods
-                if (json.IJsonModelObjectInterface is { } jsonModelObjectInterface)
+                if (iJsonModelObjectInterface is not null)
                 {
                     // void IJsonModel<object>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
                     yield return new
                     (
-                        new MethodSignature(nameof(IJsonModel<object>.Write), null, null, MethodSignatureModifiers.None, null, null, new[] { KnownParameters.Serializations.Utf8JsonWriter, KnownParameters.Serializations.Options }, ExplicitInterface: jsonModelObjectInterface),
-                        This.CastTo(jsonModelInterface).Invoke(nameof(IJsonModel<object>.Write), writer, options)
+                        new MethodSignature(nameof(IJsonModel<object>.Write), null, null, MethodSignatureModifiers.None, null, null, new[] { KnownParameters.Serializations.Utf8JsonWriter, KnownParameters.Serializations.Options }, ExplicitInterface: iJsonModelObjectInterface),
+                        This.CastTo(iJsonModelInterface).Invoke(nameof(IJsonModel<object>.Write), writer, options)
                     );
 
                     // object IJsonModel<object>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
                     yield return new
                     (
-                        new MethodSignature(nameof(IJsonModel<object>.Create), null, null, MethodSignatureModifiers.None, typeof(object), null, new[] { KnownParameters.Serializations.Utf8JsonReader, KnownParameters.Serializations.Options }, ExplicitInterface: jsonModelObjectInterface),
-                        This.CastTo(jsonModelInterface).Invoke(nameof(IJsonModel<object>.Create), reader, options)
+                        new MethodSignature(nameof(IJsonModel<object>.Create), null, null, MethodSignatureModifiers.None, typeof(object), null, new[] { KnownParameters.Serializations.Utf8JsonReader, KnownParameters.Serializations.Options }, ExplicitInterface: iJsonModelObjectInterface),
+                        This.CastTo(iJsonModelInterface).Invoke(nameof(IJsonModel<object>.Create), reader, options)
                     );
                 }
             }
         }
 
-        public static IEnumerable<Method> BuildIModelMethods(JsonObjectSerialization? json, XmlObjectSerialization? xml, BicepObjectSerialization? bicep)
+        public static SwitchCase BuildJsonWriteSwitchCase(JsonObjectSerialization json, ModelReaderWriterOptionsExpression options)
         {
-            // we do not need this if model reader writer feature is not enabled
-            if (!Configuration.UseModelReaderWriter)
-                yield break;
-
-            var iModelTInterface = json?.IPersistableModelTInterface ?? xml?.IPersistableModelTInterface;
-            var iModelObjectInterface = json?.IPersistableModelObjectInterface ?? xml?.IPersistableModelObjectInterface;
-            // if we have json serialization, we must have this interface.
-            // if we have xml serialization, we must have this interface.
-            // therefore this type should never be null - because we cannot get here when json and xml both are null
-            Debug.Assert(iModelTInterface != null, "iModelTInterface should not be null");
-
-            var typeOfT = iModelTInterface.Arguments[0];
-            var model = typeOfT.Implementation as SerializableObjectType;
-            Debug.Assert(model is not null);
-
-            var options = new ModelReaderWriterOptionsExpression(KnownParameters.Serializations.Options);
-            // BinaryData IPersistableModel<T>.Write(ModelReaderWriterOptions options)
-            yield return new
-            (
-                new MethodSignature(nameof(IPersistableModel<object>.Write), null, null, MethodSignatureModifiers.None, typeof(BinaryData), null, new[] { KnownParameters.Serializations.Options }, ExplicitInterface: iModelTInterface),
-                BuildModelWriteMethodBody(json, xml, bicep, options, iModelTInterface).ToArray()
-            );
-
-            // T IPersistableModel<T>.Create(BinaryData data, ModelReaderWriterOptions options)
-            var data = new BinaryDataExpression(KnownParameters.Serializations.Data);
-            yield return new
-            (
-                new MethodSignature(nameof(IPersistableModel<object>.Create), null, null, MethodSignatureModifiers.None, typeOfT, null, new[] { KnownParameters.Serializations.Data, KnownParameters.Serializations.Options }, ExplicitInterface: iModelTInterface),
-                BuildModelCreateMethodBody(model, json != null, xml != null, bicep != null, data, options, iModelTInterface).ToArray()
-            );
-
-            // ModelReaderWriterFormat IPersistableModel<T>.GetFormatFromOptions(ModelReaderWriterOptions options)
-            yield return new
-            (
-                new MethodSignature(nameof(IPersistableModel<object>.GetFormatFromOptions), null, null, MethodSignatureModifiers.None, typeof(string), null, new[] { KnownParameters.Serializations.Options }, ExplicitInterface: iModelTInterface),
-                xml != null ? Serializations.XmlFormat : Serializations.JsonFormat
-            );
-
-            // if the model is a struct, it needs to implement IPersistableModel<object> as well which leads to another 2 methods
-            if (iModelObjectInterface is not null)
-            {
-                // BinaryData IPersistableModel<object>.Write(ModelReaderWriterOptions options)
-                yield return new
-                (
-                    new MethodSignature(nameof(IPersistableModel<object>.Write), null, null, MethodSignatureModifiers.None, typeof(BinaryData), null, new[] { KnownParameters.Serializations.Options }, ExplicitInterface: iModelObjectInterface),
-                    // => (IPersistableModel<T>this).Write(options);
-                    This.CastTo(iModelTInterface).Invoke(nameof(IPersistableModel<object>.Write), options)
-                );
-
-                // object IPersistableModel<object>.Create(BinaryData data, ModelReaderWriterOptions options)
-                yield return new
-                (
-                    new MethodSignature(nameof(IPersistableModel<object>.Create), null, null, MethodSignatureModifiers.None, typeof(object), null, new[] { KnownParameters.Serializations.Data, KnownParameters.Serializations.Options }, ExplicitInterface: iModelObjectInterface),
-                    // => (IPersistableModel<T>this).Read(options);
-                    This.CastTo(iModelTInterface).Invoke(nameof(IPersistableModel<object>.Create), data, options)
-                );
-
-                // ModelReaderWriterFormat IPersistableModel<object>.GetFormatFromOptions(ModelReaderWriterOptions options)
-                yield return new
-                (
-                    new MethodSignature(nameof(IPersistableModel<object>.GetFormatFromOptions), null, null, MethodSignatureModifiers.None, typeof(string), null, new[] { KnownParameters.Serializations.Options }, ExplicitInterface: iModelObjectInterface),
-                    // => (IPersistableModel<T>this).GetFormatFromOptions(options);
-                    This.CastTo(iModelTInterface).Invoke(nameof(IPersistableModel<object>.GetFormatFromOptions), options)
-                );
-            }
-
-            // TODO should this be moved into SerializationBuilder or a more generic MethodBuilder now that it supports xml (and bicep)
-            static IEnumerable<MethodBodyStatement> BuildModelWriteMethodBody(JsonObjectSerialization? json,
-                XmlObjectSerialization? xml, BicepObjectSerialization? bicep,
-                ModelReaderWriterOptionsExpression options, CSharpType iModelTInterface)
-            {
-                // var format = options.Format == "W" ? GetFormatFromOptions(options) : options.Format;
-                yield return Serializations.GetConcreteFormat(options, iModelTInterface, out var format);
-
-                yield return EmptyLine;
-
-                var switchStatement = new SwitchStatement(format);
-
-                if (json != null)
-                {
-                    var jsonCase = new SwitchCase(Serializations.JsonFormat,
-                        Return(new InvokeStaticMethodExpression(typeof(ModelReaderWriter),
-                            nameof(ModelReaderWriter.Write), new[] { This, options }))
-                    );
-                    switchStatement.Add(jsonCase);
-                }
-
-                if (bicep != null)
-                {
-                    var bicepCase = new SwitchCase(
-                        Serializations.BicepFormat,
-                        Return(
-                            new InvokeInstanceMethodExpression(
-                                null,
-                                new MethodSignature(
-                                    $"SerializeBicep",
-                                    null,
-                                    null,
-                                    MethodSignatureModifiers.Private,
-                                    typeof(BinaryData),
-                                    null,
-                                    new[]
-                                    {
-                                        KnownParameters.Serializations.Options
-                                    }),
-                                new ValueExpression[]
-                                {
-                                    options
-                                })));
-                    switchStatement.Add(bicepCase);
-                }
-
-                if (xml != null)
-                {
-                    /*  using MemoryStream stream = new MemoryStream();
-                        using XmlWriter writer = XmlWriter.Create(stream);
-                        ((IXmlSerializable)this).Write(writer, null);
-                        writer.Flush();
-                        // in the implementation of MemoryStream, `stream.Position` could never exceed `int.MaxValue`, therefore this if is redundant, we just need to keep the else branch
-                        //if (stream.Position > int.MaxValue)
-                        //{
-                        //    return BinaryData.FromStream(stream);
-                        //}
-                        //else
-                        //{
-                            return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
-                        //}
-                    */
-                    var xmlCase = new SwitchCase(Serializations.XmlFormat,
-                        new MethodBodyStatement[]
-                        {
-                            UsingDeclare("stream", typeof(MemoryStream), New.Instance(typeof(MemoryStream)), out var stream),
-                            UsingDeclare("writer", typeof(XmlWriter), new InvokeStaticMethodExpression(typeof(XmlWriter), nameof(XmlWriter.Create), new[] { stream }), out var xmlWriter),
-                            new InvokeInstanceMethodStatement(null, xml.WriteXmlMethodName, new[] { xmlWriter, Null, options }, false),
-                            xmlWriter.Invoke(nameof(XmlWriter.Flush)).ToStatement(),
-                            // return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
-                            Return(New.Instance(typeof(BinaryData),
-                                InvokeStaticMethodExpression.Extension(
-                                    typeof(MemoryExtensions),
-                                    nameof(MemoryExtensions.AsMemory),
-                                    stream.Invoke(nameof(MemoryStream.GetBuffer)),
-                                    new[] { Int(0), stream.Property(nameof(Stream.Position)).CastTo(typeof(int)) }
-                                    )))
-                        }, addScope: true); // using statement must have a scope, if we do not have the addScope parameter here, the generated code will not compile
-                    switchStatement.Add(xmlCase);
-                }
-
-                // default case
-                /*
-                 * throw new FormatException($"The model {nameof(T)} does not support '{options.Format}' format.");
-                 */
-                var typeOfT = iModelTInterface.Arguments[0];
-                var defaultCase = SwitchCase.Default(
-                    Serializations.ThrowValidationFailException(options.Format, typeOfT)
-                );
-                switchStatement.Add(defaultCase);
-
-                yield return switchStatement;
-            }
-
-            static IEnumerable<MethodBodyStatement> BuildModelCreateMethodBody(SerializableObjectType model, bool hasJson, bool hasXml, bool hasBicep, BinaryDataExpression data, ModelReaderWriterOptionsExpression options, CSharpType iModelTInterface)
-            {
-                // var format = options.Format == "W" ? GetFormatFromOptions(options) : options.Format;
-                yield return Serializations.GetConcreteFormat(options, iModelTInterface, out var format);
-
-                yield return EmptyLine;
-
-                var switchStatement = new SwitchStatement(format);
-
-                if (hasJson)
-                {
-                    /* using var document = JsonDocument.ParseValue(ref reader);
-                     * return DeserializeXXX(doc.RootElement, options);
-                     */
-                    var jsonCase = new SwitchCase(Serializations.JsonFormat,
-                        new MethodBodyStatement[]
-                        {
-                            UsingDeclare("document", JsonDocumentExpression.Parse(data), out var docVariable),
-                            Return(SerializableObjectTypeExpression.Deserialize(model, docVariable.RootElement, options))
-                        }, addScope: true); // using statement must have a scope, if we do not have the addScope parameter here, the generated code will not compile
-                    switchStatement.Add(jsonCase);
-                }
-
-                if (hasXml)
-                {
-                    // return DeserializeXmlCollection(XElement.Load(data.ToStream()), options);
-                    var xmlCase = new SwitchCase(Serializations.XmlFormat,
-                        Return(SerializableObjectTypeExpression.Deserialize(model, XElementExpression.Load(data.ToStream()), options)));
-                    switchStatement.Add(xmlCase);
-                }
-
-                if (hasBicep)
-                {
-                    // throw new InvalidOperationException("Bicep deserialization is not supported for this type.");
-                    var bicepCase = new SwitchCase(
-                        Serializations.BicepFormat,
-                        Throw(
-                            New.Instance(typeof(InvalidOperationException),
-                            Literal("Bicep deserialization is not supported for this type."))));
-                    switchStatement.Add(bicepCase);
-                }
-
-                // default case
-                /*
-                 * throw new InvalidOperationException($"The model {nameof(T)} does not support '{options.Format}' format.");
-                 */
-                var typeOfT = iModelTInterface.Arguments[0];
-                var defaultCase = SwitchCase.Default(
-                    Serializations.ThrowValidationFailException(options.Format, typeOfT)
-                );
-                switchStatement.Add(defaultCase);
-
-                yield return switchStatement;
-            }
+            return new SwitchCase(Serializations.JsonFormat,
+                    Return(new InvokeStaticMethodExpression(typeof(ModelReaderWriter), nameof(ModelReaderWriter.Write), new[] { This, options })));
         }
 
-        // TODO -- make the options parameter non-nullable again when we remove the `UseModelReaderWriter` flag.
-        private static MethodBodyStatement[] WriteObject(JsonObjectSerialization serialization, Utf8JsonWriterExpression utf8JsonWriter, ModelReaderWriterOptionsExpression? options)
+        public static SwitchCase BuildJsonCreateSwitchCase(SerializableObjectType model, BinaryDataExpression data, ModelReaderWriterOptionsExpression options)
+        {
+            /* using var document = JsonDocument.ParseValue(ref reader);
+             * return DeserializeXXX(doc.RootElement, options);
+             */
+            return new SwitchCase(Serializations.JsonFormat,
+                    new MethodBodyStatement[]
+                    {
+                        UsingDeclare("document", JsonDocumentExpression.Parse(data), out var docVariable),
+                            Return(SerializableObjectTypeExpression.Deserialize(model, docVariable.RootElement, options))
+                    }, addScope: true); // using statement must have a scope, if we do not have the addScope parameter here, the generated code will not compile
+        }
+
+        // TODO -- make the options and iPersistableModelTInterface parameter non-nullable again when we remove the `UseModelReaderWriter` flag.
+        private static MethodBodyStatement[] WriteObject(JsonObjectSerialization serialization, Utf8JsonWriterExpression utf8JsonWriter, ModelReaderWriterOptionsExpression? options, CSharpType? iPersistableModelTInterface)
             => new[]
             {
-                Serializations.ValidateJsonFormat(options, serialization.IPersistableModelTInterface),
+                Serializations.ValidateJsonFormat(options, iPersistableModelTInterface),
                 utf8JsonWriter.WriteStartObject(),
                 WriteProperties(utf8JsonWriter, serialization.Properties, options).ToArray(),
                 SerializeAdditionalProperties(utf8JsonWriter, options, serialization.AdditionalProperties),

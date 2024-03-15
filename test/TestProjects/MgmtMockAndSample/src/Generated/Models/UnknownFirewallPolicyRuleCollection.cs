@@ -7,7 +7,7 @@
 
 namespace MgmtMockAndSample.Models
 {
-    /// <summary> The UnknownFirewallPolicyRuleCollection. </summary>
+    /// <summary> Unknown version of FirewallPolicyRuleCollection. </summary>
     internal partial class UnknownFirewallPolicyRuleCollection : FirewallPolicyRuleCollection
     {
         /// <summary> Initializes a new instance of <see cref="UnknownFirewallPolicyRuleCollection"/>. </summary>
