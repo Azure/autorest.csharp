@@ -15,12 +15,8 @@ Import-Module "$PSScriptRoot\Generation.psm1" -DisableNameChecking -Force;
 Write-Host "Generating Azure SDK Codes..."
 
 if($ProjectListOverrideFile) {
-    Write-Host "Initializing npm and npx cache"
-
-    $templatePath = "$SdkRepoRoot/sdk/template/Azure.Template"
-    Invoke "dotnet build /t:GenerateCode" -ExecutePath $templatePath
-    Invoke "git restore ." -ExecutePath $templatePath
-    Invoke "git clean . --force" -ExecutePath $templatePath
+    Write-Host "Installing autorest from root package-lock.json"
+    Invoke "npm ci --prefix $RepoRoot"
 
     $tempFolder = New-TemporaryFile
     $tempFolder | Remove-Item -Force
