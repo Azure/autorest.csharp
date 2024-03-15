@@ -702,9 +702,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             else
             {
                 //only load implementations for the base type
-                implementations = Configuration.Generation1ConvenienceClient
-                    ? GetDerivedTypes(_derivedModels).OrderBy(i => i.Key).ToArray()
-                    : GetDerivedTypes(_derivedModels).ToArray();
+                implementations = GetDerivedTypes(_derivedModels).OrderBy(i => i.Key).ToArray();
 
                 // find the discriminator corresponding property in this type or its base type or more
                 property = GetPropertyForDiscriminator(discriminatorPropertyName);
