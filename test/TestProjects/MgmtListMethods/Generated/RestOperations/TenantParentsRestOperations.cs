@@ -37,6 +37,18 @@ namespace MgmtListMethods
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
+        internal RequestUriBuilder CreateCreateOrUpdateRequestUri(string tenantTestName, string tenantParentName, TenantParentData data)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/providers/Microsoft.Tenant/tenantTests/", false);
+            uri.AppendPath(tenantTestName, true);
+            uri.AppendPath("/tenantParents/", false);
+            uri.AppendPath(tenantParentName, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateCreateOrUpdateRequest(string tenantTestName, string tenantParentName, TenantParentData data)
         {
             var message = _pipeline.CreateMessage();
@@ -117,6 +129,18 @@ namespace MgmtListMethods
             }
         }
 
+        internal RequestUriBuilder CreateGetRequestUri(string tenantTestName, string tenantParentName)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/providers/Microsoft.Tenant/tenantTests/", false);
+            uri.AppendPath(tenantTestName, true);
+            uri.AppendPath("/tenantParents/", false);
+            uri.AppendPath(tenantParentName, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateGetRequest(string tenantTestName, string tenantParentName)
         {
             var message = _pipeline.CreateMessage();
@@ -193,6 +217,17 @@ namespace MgmtListMethods
             }
         }
 
+        internal RequestUriBuilder CreateListRequestUri(string tenantTestName)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/providers/Microsoft.Tenant/tenantTests/", false);
+            uri.AppendPath(tenantTestName, true);
+            uri.AppendPath("/tenantParents", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateListRequest(string tenantTestName)
         {
             var message = _pipeline.CreateMessage();
@@ -258,6 +293,14 @@ namespace MgmtListMethods
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateListNextPageRequestUri(string nextLink, string tenantTestName)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
         }
 
         internal HttpMessage CreateListNextPageRequest(string nextLink, string tenantTestName)

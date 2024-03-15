@@ -91,7 +91,9 @@ namespace MgmtListMethods
             try
             {
                 var response = await _resGrpParentWithAncestorWithNonResChWithLocRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorWithNonResChWithLocName, data, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtListMethodsArmOperation<ResGrpParentWithAncestorWithNonResChWithLocResource>(Response.FromValue(new ResGrpParentWithAncestorWithNonResChWithLocResource(Client, response), response.GetRawResponse()));
+                var uri = _resGrpParentWithAncestorWithNonResChWithLocRestClient.CreateCreateOrUpdateRequestUri(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorWithNonResChWithLocName, data);
+                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
+                var operation = new MgmtListMethodsArmOperation<ResGrpParentWithAncestorWithNonResChWithLocResource>(Response.FromValue(new ResGrpParentWithAncestorWithNonResChWithLocResource(Client, response), response.GetRawResponse()), rehydrationToken);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -140,7 +142,9 @@ namespace MgmtListMethods
             try
             {
                 var response = _resGrpParentWithAncestorWithNonResChWithLocRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorWithNonResChWithLocName, data, cancellationToken);
-                var operation = new MgmtListMethodsArmOperation<ResGrpParentWithAncestorWithNonResChWithLocResource>(Response.FromValue(new ResGrpParentWithAncestorWithNonResChWithLocResource(Client, response), response.GetRawResponse()));
+                var uri = _resGrpParentWithAncestorWithNonResChWithLocRestClient.CreateCreateOrUpdateRequestUri(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorWithNonResChWithLocName, data);
+                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), "None", null, OperationFinalStateVia.OriginalUri.ToString());
+                var operation = new MgmtListMethodsArmOperation<ResGrpParentWithAncestorWithNonResChWithLocResource>(Response.FromValue(new ResGrpParentWithAncestorWithNonResChWithLocResource(Client, response), response.GetRawResponse()), rehydrationToken);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

@@ -37,6 +37,15 @@ namespace MgmtMockAndSample
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
+        internal RequestUriBuilder CreateCalculateTemplateHashRequestUri(BinaryData template)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/providers/Microsoft.Resources/calculateTemplateHash", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateCalculateTemplateHashRequest(BinaryData template)
         {
             var message = _pipeline.CreateMessage();

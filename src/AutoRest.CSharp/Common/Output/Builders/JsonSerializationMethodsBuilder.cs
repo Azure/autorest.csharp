@@ -42,6 +42,48 @@ namespace AutoRest.CSharp.Common.Output.Builders
 {
     internal static class JsonSerializationMethodsBuilder
     {
+        public static IEnumerable<Method> BuildResourceJsonSerializationMethods(Resource resource)
+        {
+            var resourceDataType = resource.ResourceData.Type;
+            var jsonModelInterface = new CSharpType(typeof(IJsonModel<>), resourceDataType);
+            var options = new ModelReaderWriterOptionsExpression(KnownParameters.Serializations.Options);
+            var modelReaderWriter = new CSharpType(typeof(ModelReaderWriter));
+            var iModelTInterface = new CSharpType(typeof(IPersistableModel<>), resourceDataType);
+            var data = new BinaryDataExpression(KnownParameters.Serializations.Data);
+
+            // void IJsonModel<T>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+            var writer = new Utf8JsonWriterExpression(KnownParameters.Serializations.Utf8JsonWriter);
+            yield return new Method(
+                new MethodSignature(nameof(IJsonModel<object>.Write), null, null, MethodSignatureModifiers.None, null, null, new[] { KnownParameters.Serializations.Utf8JsonWriter, KnownParameters.Serializations.Options }, ExplicitInterface: jsonModelInterface),
+                // => ((IJsonModel<T>)Data).Write(writer, options);
+                new MemberExpression(This, "Data").CastTo(jsonModelInterface).Invoke(nameof(IJsonModel<object>.Write), writer, options));
+
+            // T IJsonModel<T>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+            var reader = KnownParameters.Serializations.Utf8JsonReader;
+            yield return new Method(
+                new MethodSignature(nameof(IJsonModel<object>.Create), null, null, MethodSignatureModifiers.None, resourceDataType, null, new[] { reader, KnownParameters.Serializations.Options }, ExplicitInterface: jsonModelInterface),
+                // => ((IJsonModel<T>)Data).Create(reader, options);
+                new MemberExpression(This, "Data").CastTo(jsonModelInterface).Invoke(nameof(IJsonModel<object>.Create), reader, options));
+
+            // BinaryData IPersistableModel<T>.Write(ModelReaderWriterOptions options)
+            yield return new Method(
+                new MethodSignature(nameof(IPersistableModel<object>.Write), null, null, MethodSignatureModifiers.None, typeof(BinaryData), null, new[] { KnownParameters.Serializations.Options }, ExplicitInterface: iModelTInterface),
+                // => ModelReaderWriter.Write<ResourceData>(Data, options);
+                new InvokeStaticMethodExpression(modelReaderWriter, "Write", new List<ValueExpression> { new MemberExpression(This, "Data"), options }, new List<CSharpType> { resourceDataType }));
+
+            // T IPersistableModel<T>.Create(BinaryData data, ModelReaderWriterOptions options)
+            yield return new Method(
+                new MethodSignature(nameof(IPersistableModel<object>.Create), null, null, MethodSignatureModifiers.None, resourceDataType, null, new[] { KnownParameters.Serializations.Data, KnownParameters.Serializations.Options }, ExplicitInterface: iModelTInterface),
+                // => ModelReaderWriter.Read<ResourceData>(new BinaryData(reader.ValueSequence));
+                new InvokeStaticMethodExpression(modelReaderWriter, "Read", new List<ValueExpression> { data, options }, new List<CSharpType> { resourceDataType }));
+
+            // ModelReaderWriterFormat IPersistableModel<T>.GetFormatFromOptions(ModelReaderWriterOptions options)
+            yield return new Method(
+                new MethodSignature(nameof(IPersistableModel<object>.GetFormatFromOptions), null, null, MethodSignatureModifiers.None, typeof(string), null, new[] { KnownParameters.Serializations.Options }, ExplicitInterface: iModelTInterface),
+                // => Data.GetFormatFromOptions(options);
+                new MemberExpression(This, "Data").CastTo(iModelTInterface).Invoke(nameof(IPersistableModel<object>.GetFormatFromOptions), options));
+        }
+
         public static IEnumerable<Method> BuildJsonSerializationMethods(JsonObjectSerialization json, SerializationInterfaces interfaces)
         {
             var useModelReaderWriter = Configuration.UseModelReaderWriter;
@@ -87,7 +129,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 );
 
                 // T IJsonModel<T>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-                var reader = (ValueExpression)KnownParameters.Serializations.Utf8JsonReader;
+                var reader = KnownParameters.Serializations.Utf8JsonReader;
                 yield return new
                 (
                     new MethodSignature(nameof(IJsonModel<object>.Create), null, null, MethodSignatureModifiers.None, typeOfT, null, new[] { KnownParameters.Serializations.Utf8JsonReader, KnownParameters.Serializations.Options }, ExplicitInterface: iJsonModelInterface),
