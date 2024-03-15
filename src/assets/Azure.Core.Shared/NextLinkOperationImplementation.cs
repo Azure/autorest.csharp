@@ -16,6 +16,7 @@ namespace Azure.Core
 {
     internal class NextLinkOperationImplementation : IOperation
     {
+        internal const string RehydartionTokenVersion = "1.0.0";
         private const string ApiVersionParam = "api-version";
         private static readonly string[] FailureStates = { "failed", "canceled" };
         private static readonly string[] SuccessStates = { "succeeded" };
@@ -23,13 +24,11 @@ namespace Azure.Core
         private readonly HeaderSource _headerSource;
         private readonly Uri _startRequestUri;
         private readonly OperationFinalStateVia _finalStateVia;
-        private readonly RequestMethod _requestMethod;
         private readonly HttpPipeline _pipeline;
         private readonly string? _apiVersion;
 
         private string? _lastKnownLocation;
         private string _nextRequestUri;
-        private string? _operationId;
 
         public static IOperation Create(
             HttpPipeline pipeline,
@@ -77,7 +76,8 @@ namespace Azure.Core
             IOperation operation)
             => new OperationToOperationOfT<T>(operationSource, operation);
 
-        public string? OperationId => _operationId;
+        public string? OperationId { get; }
+        public RequestMethod RequestMethod { get; }
 
         public static IOperation Create(
             HttpPipeline pipeline,
@@ -89,12 +89,12 @@ namespace Azure.Core
             var lroDetails = ModelReaderWriter.Write(rehydrationToken!, ModelReaderWriterOptions.Json).ToObjectFromJson<Dictionary<string, string>>();
             if (!Uri.TryCreate(lroDetails["initialUri"], UriKind.Absolute, out var startRequestUri))
             {
-                throw new InvalidOperationException("Invalid initial URI from rehydration token");
+                throw new ArgumentException("Invalid initial URI from rehydration token");
             }
 
             if (!lroDetails.TryGetValue("nextRequestUri", out var nextRequestUri))
             {
-                throw new InvalidOperationException("Invalid next request URI from rehydration token");
+                throw new ArgumentException("Invalid next request URI from rehydration token");
             }
 
             RequestMethod requestMethod = new RequestMethod(lroDetails["requestMethod"]);
@@ -142,7 +142,7 @@ namespace Azure.Core
             AssertNotNull(headerSource, nameof(headerSource));
             AssertNotNull(finalStateVia, nameof(finalStateVia));
 
-            _requestMethod = requestMethod;
+            RequestMethod = requestMethod;
             _headerSource = headerSource;
             _startRequestUri = startRequestUri;
             _nextRequestUri = nextRequestUri;
@@ -150,7 +150,7 @@ namespace Azure.Core
             _finalStateVia = finalStateVia;
             _pipeline = pipeline;
             _apiVersion = apiVersion;
-            _operationId = ParseOperationId(nextRequestUri);
+            OperationId = ParseOperationId(nextRequestUri);
         }
 
         private static string? ParseOperationId(string nextRequestUri)
@@ -163,7 +163,7 @@ namespace Azure.Core
         }
 
         public RehydrationToken GetRehydrationToken()
-            => GetRehydrationToken(_requestMethod, _startRequestUri, _nextRequestUri, _headerSource.ToString(), _lastKnownLocation, _finalStateVia.ToString());
+            => GetRehydrationToken(RequestMethod, _startRequestUri, _nextRequestUri, _headerSource.ToString(), _lastKnownLocation, _finalStateVia.ToString(), OperationId);
 
         public static RehydrationToken GetRehydrationToken(
             RequestMethod requestMethod,
@@ -184,7 +184,8 @@ namespace Azure.Core
             }
             var headerSource = GetHeaderSource(requestMethod, startRequestUri, response, apiVersionStr, out var nextRequestUri);
             response.Headers.TryGetValue("Location", out var lastKnownLocation);
-            return GetRehydrationToken(requestMethod, startRequestUri, nextRequestUri, headerSource.ToString(), lastKnownLocation, finalStateVia.ToString());
+            var operationId = ParseOperationId(nextRequestUri);
+            return GetRehydrationToken(requestMethod, startRequestUri, nextRequestUri, headerSource.ToString(), lastKnownLocation, finalStateVia.ToString(), operationId);
         }
 
         public static RehydrationToken GetRehydrationToken(
@@ -193,9 +194,10 @@ namespace Azure.Core
             string nextRequestUri,
             string headerSource,
             string? lastKnownLocation,
-            string finalStateVia)
+            string finalStateVia,
+            string? operationId = null)
         {
-            var data = BinaryData.FromObjectAsJson(new { requestMethod = requestMethod.ToString(), initialUri = startRequestUri.AbsoluteUri, nextRequestUri, headerSource, lastKnownLocation, finalStateVia });
+            var data = new BinaryData(new { version = RehydartionTokenVersion, id = operationId, requestMethod = requestMethod.ToString(), initialUri = startRequestUri.AbsoluteUri, nextRequestUri, headerSource, lastKnownLocation, finalStateVia });
             return ModelReaderWriter.Read<RehydrationToken>(data);
         }
 
@@ -216,7 +218,7 @@ namespace Azure.Core
                     ? await GetResponseAsync(async, finalUri, cancellationToken).ConfigureAwait(false)
                     : response;
 
-                return GetOperationStateFromFinalResponse(_requestMethod, finalResponse);
+                return GetOperationStateFromFinalResponse(RequestMethod, finalResponse);
             }
 
             UpdateNextRequestUri(response.Headers);
@@ -335,7 +337,7 @@ namespace Azure.Core
             }
 
             // Set final uri as null if initial request is a delete method.
-            if (_requestMethod == RequestMethod.Delete)
+            if (RequestMethod == RequestMethod.Delete)
             {
                 return null;
             }
@@ -345,7 +347,7 @@ namespace Azure.Core
             {
                 case OperationFinalStateVia.LocationOverride when !string.IsNullOrEmpty(_lastKnownLocation):
                     return _lastKnownLocation;
-                case OperationFinalStateVia.OperationLocation or OperationFinalStateVia.AzureAsyncOperation when _requestMethod == RequestMethod.Post:
+                case OperationFinalStateVia.OperationLocation or OperationFinalStateVia.AzureAsyncOperation when RequestMethod == RequestMethod.Post:
                     return null;
                 case OperationFinalStateVia.OriginalUri:
                     return _startRequestUri.AbsoluteUri;
@@ -358,7 +360,7 @@ namespace Azure.Core
             }
 
             // If initial request is PUT or PATCH, return initial request Uri
-            if (_requestMethod == RequestMethod.Put || _requestMethod == RequestMethod.Patch)
+            if (RequestMethod == RequestMethod.Put || RequestMethod == RequestMethod.Patch)
             {
                 return _startRequestUri.AbsoluteUri;
             }

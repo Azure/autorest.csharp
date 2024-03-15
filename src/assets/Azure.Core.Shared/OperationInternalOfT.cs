@@ -121,7 +121,7 @@ namespace Azure.Core
             _stateLock = new AsyncLockWithValue<OperationState<T>>(finalState);
         }
 
-        public override Response RawResponse => (_stateLock.TryGetValue(out var state) ? state.RawResponse : _rawResponse) ?? throw new InvalidOperationException("The operation does not have a response yet. Please call UpdateStatus or WaitForCompletion first.");
+        public override Response RawResponse => _stateLock.TryGetValue(out var state) ? state.RawResponse : _rawResponse ?? throw new InvalidOperationException("The operation has not completed yet.");
 
         public override bool HasCompleted => _stateLock.HasValue;
 
@@ -286,7 +286,7 @@ namespace Azure.Core
                 return state.RawResponse;
             }
 
-            // if this is a fake delete lro with 404, just return empty response with 204
+            // if this is a fake delete LRO with 404, just return empty response with 204
             if (RequestMethod.Delete == requestmethod && state.RawResponse.Status == 404)
             {
                 return new EmptyResponse(HttpStatusCode.NoContent);
@@ -295,7 +295,10 @@ namespace Azure.Core
             throw state.OperationFailedException!;
         }
 
-        private class EmptyResponse : Response
+        /// <summary>
+        /// This is only used for fake delete LRO, we just want to return an empty response with 204 to the user for this case.
+        /// </summary>
+        private sealed class EmptyResponse : Response
         {
             public EmptyResponse(HttpStatusCode status)
             {
