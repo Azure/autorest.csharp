@@ -325,5 +325,19 @@ namespace CadlRanchProjects.Tests
             Response response = await new ValueTypesClient(host, null).GetDecimal128Client().PutAsync(new Decimal128Property(0.33333m));
             Assert.AreEqual(204, response.Status);
         });
+
+        [Test]
+        public Task Type_Property_ValueTypes_UnionEnumValue_get() => Test(async (host) =>
+        {
+            var response = await new ValueTypesClient(host, null).GetUnionEnumValueClient().GetUnionEnumValueAsync();
+            Assert.AreEqual(UnionEnumValuePropertyProperty.Value2, response.Value.Property);
+        });
+
+        [Test]
+        public Task Type_Property_ValueTypes_UnionEnumValue_put() => Test(async (host) =>
+        {
+            var response = await new ValueTypesClient(host, null).GetUnionEnumValueClient().PutAsync(new UnionEnumValueProperty());
+            Assert.AreEqual(204, response.Status);
+        });
     }
 }
