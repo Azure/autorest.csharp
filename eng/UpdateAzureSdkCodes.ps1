@@ -10,32 +10,12 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
-Import-Module "$PSScriptRoot\Generation.psm1" -DisableNameChecking -Force;
 
 Write-Host "Generating Azure SDK Codes..."
 
 if($ProjectListOverrideFile) {
     Write-Host "Installing autorest from $SdkRepoRoot/package-lock.json"
-    Invoke "npm ci --prefix $SdkRepoRoot"
-
-    $tempFolder = New-TemporaryFile
-    $tempFolder | Remove-Item -Force
-    New-Item $tempFolder -ItemType Directory -Force | Out-Null
-
-    Push-Location $tempFolder
-    try {
-        Copy-Item "$SdkRepoRoot/eng/emitter-package.json" "package.json"
-        if(Test-Path "$SdkRepoRoot/eng/emitter-package-lock.json") {
-            Copy-Item "$SdkRepoRoot/eng/emitter-package-lock.json" "package-lock.json"
-            Invoke "npm ci" -ExecutePath $PWD
-        } else {
-            Invoke "npm install" -ExecutePath $PWD
-        }
-    }
-    finally {
-        Pop-Location
-        $tempFolder | Remove-Item -Force -Recurse
-    }
+    npm ci --prefix $SdkRepoRoot
 
     Write-Host 'Generating projects in override file ' -ForegroundColor Green -NoNewline
     Write-Host "$ProjectListOverrideFile" -ForegroundColor Yellow
