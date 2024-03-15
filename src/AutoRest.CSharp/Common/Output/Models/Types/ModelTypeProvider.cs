@@ -617,7 +617,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             else
             {
                 //only load implementations for the base type
-                implementations = _derivedModels.Select(child => new ObjectTypeDiscriminatorImplementation(child.DiscriminatorValue!, _typeFactory.CreateType(child))).ToArray();
+                implementations = _derivedModels
+                    .Select(child => new ObjectTypeDiscriminatorImplementation(child.DiscriminatorValue!, _typeFactory.CreateType(child)))
+                    .OrderBy(i => i.Key)
+                    .ToArray();
                 // find the discriminator corresponding property in this type or its base type or more
                 property = GetPropertyForDiscriminator(discriminatorPropertyName);
             }

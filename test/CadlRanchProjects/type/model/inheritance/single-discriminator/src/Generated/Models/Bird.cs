@@ -13,7 +13,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
     /// <summary>
     /// This is base model for polymorphic single level inheritance with a discriminator.
     /// Please note <see cref="Bird"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
-    /// The available derived classes include <see cref="SeaGull"/>, <see cref="Sparrow"/>, <see cref="Goose"/> and <see cref="Eagle"/>.
+    /// The available derived classes include <see cref="Eagle"/>, <see cref="Goose"/>, <see cref="SeaGull"/> and <see cref="Sparrow"/>.
     /// </summary>
     public abstract partial class Bird
     {
