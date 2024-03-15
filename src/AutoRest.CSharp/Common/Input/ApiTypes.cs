@@ -8,6 +8,7 @@ using System.ClientModel.Primitives;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Output.Expressions;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -34,7 +35,7 @@ namespace AutoRest.CSharp.Common.Input
             valueType is null ? typeof(ValueTask<>).MakeGenericType(ResponseType) : typeof(ValueTask<>).MakeGenericType(ResponseOfTType.MakeGenericType(valueType));
 
         public abstract Type HttpPipelineType { get; }
-        public abstract Type PipelineExtensionsType { get; }
+        public abstract CSharpType PipelineExtensionsType { get; }
         public abstract string HttpPipelineCreateMessageName { get; }
         public FormattableString GetHttpPipelineCreateMessageFormat(bool withContext)
         {
