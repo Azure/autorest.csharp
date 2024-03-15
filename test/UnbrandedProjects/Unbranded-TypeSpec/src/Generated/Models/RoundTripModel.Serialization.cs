@@ -25,7 +25,7 @@ namespace UnbrandedTypeSpec.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("requiredString"u8);
-            writer.WriteStringValue(RequiredString);
+            writer.WriteStringValue(RequiredSuperString);
             writer.WritePropertyName("requiredInt"u8);
             writer.WriteNumberValue(RequiredInt);
             writer.WritePropertyName("requiredCollection"u8);

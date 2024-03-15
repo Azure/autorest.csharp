@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.Input.Source
         public CodeGenAttributes(Compilation compilation)
         {
             CodeGenSuppressAttribute = GetSymbol(compilation, typeof(CodeGenSuppressAttribute));
-            CodeGenMemberAttribute = GetSymbol(compilation, typeof(CodeGenMemberAttribute));
+            CodeGenMemberAttribute = "CodeGenMemberAttribute";
             CodeGenTypeAttribute = GetSymbol(compilation, typeof(CodeGenTypeAttribute));
             CodeGenModelAttribute = GetSymbol(compilation, typeof(CodeGenModelAttribute));
             CodeGenClientAttribute = GetSymbol(compilation, typeof(CodeGenClientAttribute));
@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.Input.Source
 
         public INamedTypeSymbol CodeGenSuppressAttribute { get; }
 
-        public INamedTypeSymbol CodeGenMemberAttribute { get; }
+        public string CodeGenMemberAttribute { get; }
 
         public INamedTypeSymbol CodeGenTypeAttribute { get; }
 
@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.Input.Source
         public bool TryGetCodeGenMemberAttributeValue(AttributeData attributeData, [MaybeNullWhen(false)] out string name)
         {
             name = null;
-            if (!CheckAttribute(attributeData, CodeGenMemberAttribute))
+            if (attributeData.AttributeClass?.Name != CodeGenMemberAttribute)
                 return false;
 
             name = attributeData.ConstructorArguments.FirstOrDefault().Value as string;

@@ -45,7 +45,7 @@ namespace UnbrandedTypeSpec.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="RoundTripModel"/>. </summary>
-        /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
+        /// <param name="requiredSuperString"> Required string, illustrating a reference type property. </param>
         /// <param name="requiredInt"> Required int, illustrating a value type property. </param>
         /// <param name="requiredCollection"> Required collection of enums. </param>
         /// <param name="requiredDictionary"> Required dictionary of enums. </param>
@@ -53,10 +53,10 @@ namespace UnbrandedTypeSpec.Models
         /// <param name="requiredUnknown"> required unknown. </param>
         /// <param name="requiredRecordUnknown"> required record of unknown. </param>
         /// <param name="modelWithRequiredNullable"> this is a model with required nullable properties. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredCollection"/>, <paramref name="requiredDictionary"/>, <paramref name="requiredModel"/>, <paramref name="requiredUnknown"/>, <paramref name="requiredRecordUnknown"/> or <paramref name="modelWithRequiredNullable"/> is null. </exception>
-        public RoundTripModel(string requiredString, int requiredInt, IEnumerable<StringFixedEnum?> requiredCollection, IDictionary<string, StringExtensibleEnum?> requiredDictionary, Thing requiredModel, BinaryData requiredUnknown, IDictionary<string, BinaryData> requiredRecordUnknown, ModelWithRequiredNullableProperties modelWithRequiredNullable)
+        /// <exception cref="ArgumentNullException"> <paramref name="requiredSuperString"/>, <paramref name="requiredCollection"/>, <paramref name="requiredDictionary"/>, <paramref name="requiredModel"/>, <paramref name="requiredUnknown"/>, <paramref name="requiredRecordUnknown"/> or <paramref name="modelWithRequiredNullable"/> is null. </exception>
+        public RoundTripModel(string requiredSuperString, int requiredInt, IEnumerable<StringFixedEnum?> requiredCollection, IDictionary<string, StringExtensibleEnum?> requiredDictionary, Thing requiredModel, BinaryData requiredUnknown, IDictionary<string, BinaryData> requiredRecordUnknown, ModelWithRequiredNullableProperties modelWithRequiredNullable)
         {
-            Argument.AssertNotNull(requiredString, nameof(requiredString));
+            Argument.AssertNotNull(requiredSuperString, nameof(requiredSuperString));
             Argument.AssertNotNull(requiredCollection, nameof(requiredCollection));
             Argument.AssertNotNull(requiredDictionary, nameof(requiredDictionary));
             Argument.AssertNotNull(requiredModel, nameof(requiredModel));
@@ -64,7 +64,7 @@ namespace UnbrandedTypeSpec.Models
             Argument.AssertNotNull(requiredRecordUnknown, nameof(requiredRecordUnknown));
             Argument.AssertNotNull(modelWithRequiredNullable, nameof(modelWithRequiredNullable));
 
-            RequiredString = requiredString;
+            RequiredSuperString = requiredSuperString;
             RequiredInt = requiredInt;
             RequiredCollection = requiredCollection.ToList();
             RequiredDictionary = requiredDictionary;
@@ -82,7 +82,7 @@ namespace UnbrandedTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="RoundTripModel"/>. </summary>
-        /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
+        /// <param name="requiredSuperString"> Required string, illustrating a reference type property. </param>
         /// <param name="requiredInt"> Required int, illustrating a value type property. </param>
         /// <param name="requiredCollection"> Required collection of enums. </param>
         /// <param name="requiredDictionary"> Required dictionary of enums. </param>
@@ -104,9 +104,9 @@ namespace UnbrandedTypeSpec.Models
         /// <param name="readOnlyOptionalRecordUnknown"> optional readonly record of unknown. </param>
         /// <param name="modelWithRequiredNullable"> this is a model with required nullable properties. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal RoundTripModel(string requiredString, int requiredInt, IList<StringFixedEnum?> requiredCollection, IDictionary<string, StringExtensibleEnum?> requiredDictionary, Thing requiredModel, IntExtensibleEnum? intExtensibleEnum, IList<IntExtensibleEnum> intExtensibleEnumCollection, FloatExtensibleEnum? floatExtensibleEnum, IList<FloatExtensibleEnum> floatExtensibleEnumCollection, FloatFixedEnum? floatFixedEnum, IList<FloatFixedEnum> floatFixedEnumCollection, IntFixedEnum? intFixedEnum, IList<IntFixedEnum> intFixedEnumCollection, StringFixedEnum? stringFixedEnum, BinaryData requiredUnknown, BinaryData optionalUnknown, IDictionary<string, BinaryData> requiredRecordUnknown, IDictionary<string, BinaryData> optionalRecordUnknown, IReadOnlyDictionary<string, BinaryData> readOnlyRequiredRecordUnknown, IReadOnlyDictionary<string, BinaryData> readOnlyOptionalRecordUnknown, ModelWithRequiredNullableProperties modelWithRequiredNullable, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal RoundTripModel(string requiredSuperString, int requiredInt, IList<StringFixedEnum?> requiredCollection, IDictionary<string, StringExtensibleEnum?> requiredDictionary, Thing requiredModel, IntExtensibleEnum? intExtensibleEnum, IList<IntExtensibleEnum> intExtensibleEnumCollection, FloatExtensibleEnum? floatExtensibleEnum, IList<FloatExtensibleEnum> floatExtensibleEnumCollection, FloatFixedEnum? floatFixedEnum, IList<FloatFixedEnum> floatFixedEnumCollection, IntFixedEnum? intFixedEnum, IList<IntFixedEnum> intFixedEnumCollection, StringFixedEnum? stringFixedEnum, BinaryData requiredUnknown, BinaryData optionalUnknown, IDictionary<string, BinaryData> requiredRecordUnknown, IDictionary<string, BinaryData> optionalRecordUnknown, IReadOnlyDictionary<string, BinaryData> readOnlyRequiredRecordUnknown, IReadOnlyDictionary<string, BinaryData> readOnlyOptionalRecordUnknown, ModelWithRequiredNullableProperties modelWithRequiredNullable, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
-            RequiredString = requiredString;
+            RequiredSuperString = requiredSuperString;
             RequiredInt = requiredInt;
             RequiredCollection = requiredCollection;
             RequiredDictionary = requiredDictionary;
@@ -134,9 +134,6 @@ namespace UnbrandedTypeSpec.Models
         internal RoundTripModel()
         {
         }
-
-        /// <summary> Required string, illustrating a reference type property. </summary>
-        public string RequiredString { get; set; }
         /// <summary> Required int, illustrating a value type property. </summary>
         public int RequiredInt { get; set; }
         /// <summary> Required collection of enums. </summary>
