@@ -716,6 +716,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\serialization\\encoded-name\\json\\src\\Generated -n"
     },
+    "typespec-server/endpoint/not-defined": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\server\\endpoint\\not-defined\\src\\Generated -n"
+    },
     "typespec-server/path/multiple": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\server\\path\\multiple\\src\\Generated -n"
