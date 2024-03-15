@@ -1,9 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <Nullable>annotations</Nullable>
+    <IncludeSharedSourceInLocalBuild>false</IncludeSharedSourceInLocalBuild>
     <NoWarn>SA1649;SA1633;CS0618</NoWarn>
   </PropertyGroup>
 
@@ -30,8 +31,16 @@
 
   <ItemGroup>
     <Compile Include="../CadlRanchProjectsNonAzure/**/*.cs" LinkBase="CadlRanchProjectsNonAzure" />
-    <Compile Include="../AutoRest.TestServer.Tests/Infrastructure/*.cs" />
-    <Compile Include="../AutoRest.TestServer.Tests/TestConstants.cs" />
+    <Compile Include="../AutoRest.TestServer.Tests/Infrastructure/*.cs" Exclude="../AutoRest.TestServer.Tests/Infrastructure/JsonAsserts.cs" LinkBase="Shared/Test" />
+    <Compile Include="../AutoRest.TestServer.Tests/TestConstants.cs" LinkBase="Shared/Test" />
+    <!--We cannot use the same infrastructure for testing for both branded and unbranded-->
+    <!--We will need to undo this-->
+    <Remove Include="../AutoRest.TestServer.Tests/Infrastructure/JsonAsserts.cs" />
+    <Compile Include="../../src/assets/Azure.Core.Shared/ClientDiagnostics.cs" LinkBase="Shared/Core" />
+    <Compile Include="../../src/assets/Azure.Core.Shared/DiagnosticScopeFactory.cs" LinkBase="Shared/Core" />
+    <Compile Include="../../src/assets/Azure.Core.Shared/DiagnosticScope.cs" LinkBase="Shared/Core" />
+    <Compile Include="../../src/assets/Azure.Core.Shared/HttpMessageSanitizer.cs" LinkBase="Shared/Core" />
+    <Compile Include="../../src/assets/Azure.Core.Shared/AppContextSwitchHelper.cs" LinkBase="Shared/Core" />
   </ItemGroup>
 
 </Project>

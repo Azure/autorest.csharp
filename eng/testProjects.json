@@ -34,6 +34,7 @@
         "payload/media-type",
         "payload/pageable",
         "serialization/encoded-name/json",
+        "server/endpoint/not-defined",
         "server/path/multiple",
         "server/path/single",
         "server/versions/not-versioned",
