@@ -53,7 +53,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 {
                     bool needAzureKeyAuth = rootNamespace.Auth?.ApiKey != null;
                     // TODO - add support for DataFactoryElement lookup
-                    await new NewProjectScaffolding(needAzureKeyAuth).Execute();
+                    await new NewProjectScaffolding(needAzureKeyAuth, false).Execute();
                 }
             }
             else if (File.Exists(codeModelInputPath))
@@ -65,8 +65,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 {
                     bool needAzureKeyAuth = codeModel.Security.Schemes.Any(scheme => scheme is KeySecurityScheme);
                     bool includeDfe = yaml.Contains("x-ms-format: dfe-", StringComparison.Ordinal);
-                    //await new NewProjectScaffolding(needAzureKeyAuth).Execute();
-                    new CSharpProj(needAzureKeyAuth, includeDfe).Execute();
+                    await new NewProjectScaffolding(needAzureKeyAuth, includeDfe).Execute();
                 }
             }
             else
