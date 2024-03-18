@@ -111,10 +111,10 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing
 
             // static class can have direct references, like ClassName.Method, but the extension methods might not have direct reference to the class itself
             // therefore here we find the references of all its members and add them to the reference map
-            ProcessExtensionSymbol(symbol, referenceMap, documentCache);
+            await ProcessExtensionSymbol(symbol, referenceMap, documentCache);
         }
 
-        private void ProcessExtensionSymbol(INamedTypeSymbol extensionClassSymbol, ReferenceMap referenceMap, IReadOnlyDictionary<Document, ImmutableHashSet<INamedTypeSymbol>> documentCache)
+        private async Task ProcessExtensionSymbol(INamedTypeSymbol extensionClassSymbol, ReferenceMap referenceMap, IReadOnlyDictionary<Document, ImmutableHashSet<INamedTypeSymbol>> documentCache)
         {
             if (!extensionClassSymbol.IsStatic)
                 return;
@@ -126,6 +126,11 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing
 
                 if (!methodSymbol.IsExtensionMethod)
                     continue;
+
+                foreach (var reference in await SymbolFinder.FindReferencesAsync(member, _project.Solution))
+                {
+                    await AddReferenceToReferenceMapAsync(extensionClassSymbol, reference, referenceMap, documentCache);
+                }
 
                 // this is to hook the extension class like this:
                 // internal static class FooExtensions

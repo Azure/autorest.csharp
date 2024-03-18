@@ -6,7 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Authentication.Http.Custom
+namespace Scm.Authentication.Http.Custom
 {
     internal static class Argument
     {

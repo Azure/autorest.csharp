@@ -20,6 +20,7 @@ namespace ConvenienceInCadl
     public partial class ConvenienceInCadlClient
     {
         private readonly HttpPipeline _pipeline;
+        private readonly Uri _endpoint;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -27,19 +28,30 @@ namespace ConvenienceInCadl
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of ConvenienceInCadlClient. </summary>
-        public ConvenienceInCadlClient() : this(new ConvenienceInCadlClientOptions())
+        /// <summary> Initializes a new instance of ConvenienceInCadlClient for mocking. </summary>
+        protected ConvenienceInCadlClient()
         {
         }
 
         /// <summary> Initializes a new instance of ConvenienceInCadlClient. </summary>
-        /// <param name="options"> The options for configuring the client. </param>
-        public ConvenienceInCadlClient(ConvenienceInCadlClientOptions options)
+        /// <param name="endpoint"> Service endpoint. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public ConvenienceInCadlClient(Uri endpoint) : this(endpoint, new ConvenienceInCadlClientOptions())
         {
+        }
+
+        /// <summary> Initializes a new instance of ConvenienceInCadlClient. </summary>
+        /// <param name="endpoint"> Service endpoint. </param>
+        /// <param name="options"> The options for configuring the client. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public ConvenienceInCadlClient(Uri endpoint, ConvenienceInCadlClientOptions options)
+        {
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new ConvenienceInCadlClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
+            _endpoint = endpoint;
         }
 
         /// <summary> No initial operation methods. In the updated version, we add the protocol method and convenience method. </summary>
@@ -2134,6 +2146,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/updateConvenience", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2146,6 +2159,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/convenienceOptionalBeforeRequired", false);
             if (optional != null)
             {
@@ -2164,6 +2178,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/noConvenience", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2176,6 +2191,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/noConvenienceRequiredBody", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2190,6 +2206,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/noConvenienceOptionalBody", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2204,6 +2221,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/protocol", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2216,6 +2234,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/convenienceWithOptional", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2228,6 +2247,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/convenienceWithRequired", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2240,6 +2260,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/convenienceShouldNotGenerate", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2252,6 +2273,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/protocolShouldNotGenerateConvenience", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2264,6 +2286,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/protocolOptionalQuery", false);
             if (optional != null)
             {
@@ -2280,6 +2303,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/protocolRequiredQuery", false);
             uri.AppendQuery("required", required, true);
             request.Uri = uri;
@@ -2293,6 +2317,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/protocolOptionalModel", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2307,6 +2332,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/protocolRequiredModel", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2321,6 +2347,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/convenienceOptionalQueryWithOptional", false);
             if (optional != null)
             {
@@ -2337,6 +2364,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/convenienceRequiredQueryWithOptional", false);
             uri.AppendQuery("required", required, true);
             request.Uri = uri;
@@ -2350,6 +2378,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/convenienceOptionalQueryWithRequired", false);
             if (optional != null)
             {
@@ -2366,6 +2395,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/convenienceRequiredQueryWithRequired", false);
             uri.AppendQuery("required", required, true);
             request.Uri = uri;
@@ -2379,6 +2409,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/convenienceOptionalModelWithOptional", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2393,6 +2424,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/convenienceRequiredModelWithOptional", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2407,6 +2439,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/convenienceOptionalModelWithRequired", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2421,6 +2454,7 @@ namespace ConvenienceInCadl
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/protocolOptionalBeforeRequired", false);
             if (optional != null)
             {

@@ -50,17 +50,33 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             _writer.RemoveTrailingComma();
 
+            if (_provider.WhereClause is not null)
+            {
+                _writer.WriteValueExpression(_provider.WhereClause);
+            }
+
             using (_writer.Scope())
             {
                 WriteFields();
 
-                WriteConstructors();
+                foreach (var implement in _provider.Implements)
+                {
+                    _writer.Append($"{implement:D},");
+                }
+                _writer.RemoveTrailingComma();
 
-                WriteProperties();
+                using (_writer.Scope())
+                {
+                    WriteFields();
 
-                WriteMethods();
+                    WriteConstructors();
 
-                WriteNestedTypes();
+                    WriteProperties();
+
+                    WriteMethods();
+
+                    WriteNestedTypes();
+                }
             }
         }
 

@@ -29,6 +29,8 @@ pool:
   name: azsdk-pool-mms-win-2022-general
   vmImage: windows-2022
 
+name: $(Date:yyyyMMdd).$(Rev:r).x
+
 extends:
   template: eng/pipelines/templates/stages/archetype-autorest-preview.yml@azure-sdk-tools
   parameters:
