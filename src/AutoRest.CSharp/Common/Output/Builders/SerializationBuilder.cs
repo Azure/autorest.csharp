@@ -282,7 +282,7 @@ namespace AutoRest.CSharp.Output.Builders
 
                 var serializedName = serializationMapping?.SerializationPath?[^1] ?? schemaProperty.SerializedName;
                 var isRequired = schemaProperty.IsRequired;
-                var shouldExcludeInWireSerialization = schemaProperty.IsDiscriminator && property.InitializationValue is null && schemaProperty.IsReadOnly;
+                var shouldExcludeInWireSerialization = !schemaProperty.IsDiscriminator && property.InitializationValue is null && schemaProperty.IsReadOnly;
                 var serialization = BuildJsonSerialization(schemaProperty.Type, property.Declaration.Type, false, GetSerializationFormat(schemaProperty.Type, property.Declaration.Type));
 
                 var memberValueExpression = new TypedMemberExpression(null, property.Declaration.Name, property.Declaration.Type);
