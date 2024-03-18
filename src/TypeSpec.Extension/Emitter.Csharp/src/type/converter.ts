@@ -326,10 +326,12 @@ function fromBytesType(bytesType: SdkBuiltInType): InputPrimitiveType {
     };
 }
 
-function fromStringType(program: Program, stringType: SdkType): InputPrimitiveType {
+function fromStringType(
+    program: Program,
+    stringType: SdkType
+): InputPrimitiveType {
     function fromStringFormat(rawStringType?: Type): InputPrimitiveTypeKind {
-        if (!rawStringType)
-            return InputPrimitiveTypeKind.String;
+        if (!rawStringType) return InputPrimitiveTypeKind.String;
 
         const format = getFormat(program, rawStringType);
         switch (format) {

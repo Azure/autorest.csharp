@@ -152,7 +152,9 @@ describe("Test string format", () => {
                 },
                 foo.Properties[0].Type
             ),
-            `string property format is not correct. Got ${JSON.stringify(foo.Properties[0].Type)} `
+            `string property format is not correct. Got ${JSON.stringify(
+                foo.Properties[0].Type
+            )} `
         );
     });
 
